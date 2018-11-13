@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 13 Nov 2018 09:35:38 +0000
-.. comment: Generation hash : be47f1699a3af68d1f2aa6f369f39e44e606d5cb
+.. comment: Generation date : Tue, 13 Nov 2018 11:37:40 +0000
+.. comment: Generation hash : f8c1b969fb920a47fef5442b876eea21dd85ba63
 
 
 .. _$http\_raw\_post\_data:
@@ -199,7 +199,7 @@ While executing a static method, ``$this`` is actually set to ``NULL``.
    
        // Static methods should use static properties
        static public function 'count() {
-           return self\:\:$staticProperty++;
+           return self::$staticProperty++;
        }
        
        // Static methods can't use $this
@@ -277,20 +277,33 @@ It is introduced in PHP 5.5.
 .. code-block:: php
 
    <?php
+   
+   use A\B\C as UsedName;
+   
    class foo {
        public function bar( ) {
-           echo ClassName\:\:class; 
+           echo ClassName::class; 
+           echo UsedName::class; 
        }
    }
    
    $f = new Foo( );
    $f->bar( );
-   // return Namespace\ClassName
+   // displays ClassName 
+   // displays A\B\C 
    
    ?>
 
 
+Be aware that ``\:\:class`` is a replacement for ``__CLASS__`` magic constant. 
+
 See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use \:\:class whenever possible. That exclude any dynamic call.
 
 +-------------+------------------------------------------------------+
 | Short name  | Php/StaticclassUsage                                 |
@@ -1035,7 +1048,7 @@ Try to keep the methods simple and unique. Consider renaming the methods and pro
    
    $c->mixedStaticMethod();
    // or 
-   $c\:\:mixedStaticMethod();
+   $c::mixedStaticMethod();
    
    ?>
 
@@ -1078,7 +1091,7 @@ It is recommended to handle the same properties in the same way across classes, 
        private $address;
    }
    
-   $someone = Human\:\:load(123);
+   $someone = Human::load(123);
    echo 'Hello, '.$someone->name;
    
    ?>
@@ -1236,7 +1249,7 @@ Properties may be assigned default values at declaration time. Such values may b
            $this->propertyWithoutDefault = 1;
    
            // Static expressions are available to set up simple computation at definition time.
-           $this->propertyWithoutDefault = OtherClass\:\:CONSTANT + 1;
+           $this->propertyWithoutDefault = OtherClass::CONSTANT + 1;
    
            // Arrays, just like scalars, may be set at definition time
            $this->propertyWithoutDefault = [1,2,3];
@@ -1486,7 +1499,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
    class x {
        const ARRAY = array(1,2,3,4,5,6,7,8,9,10,11);
        function foo() {
-           $array = self\:\:ARRAY;
+           $array = self::ARRAY;
            //more code
        }
    }
@@ -3094,7 +3107,7 @@ Inheriting abstract methods was made available in PHP 7.2. In previous versions,
    abstract class A           { abstract function bar(stdClass $x);  }
    abstract class B extends A { abstract function bar($x): stdClass; }
    
-   //   Fatal error: Can't inherit abstract function A\:\:bar()
+   //   Fatal error: Can't inherit abstract function A::bar()
    ?>
 
 
@@ -3129,7 +3142,7 @@ PHP reports an error similar to this one : 'Call to private Y\:\:`'__construct()
    <?php
    
    //This is the way to go
-   $x = X\:\:factory();
+   $x = X::factory();
    
    //This is not possible
    $x = new X();
@@ -3781,7 +3794,7 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
    $filtered = array_map(function ($x) { return $x->'strtoupper() ;}, $array);
    
    // Static methodcall example 
-   $filtered = array_map(function ($x) { return $x\:\:'strtoupper() ;}, $array);
+   $filtered = array_map(function ($x) { return $x::'strtoupper() ;}, $array);
    
    ?>
 
@@ -4188,7 +4201,7 @@ The array must be filled with other constants. It may also be build using the '+
    class X {
        const TWENTY_THREE = 23;
        const MORE_PRIMES = PRIMES + [11, 13, 17, 19];
-       const EVEN_MORE_PRIMES = self\:\:MORE_PRIMES + [self\:\:TWENTY_THREE];
+       const EVEN_MORE_PRIMES = self::MORE_PRIMES + [self::TWENTY_THREE];
    }
    
    ?>
@@ -4225,9 +4238,9 @@ A class or an interface only made up of constants. Constants usually have to be 
    
    class ConstantClass {
        const KBIT = 1000;
-       const MBIT = self\:\:KBIT * 1000;
-       const GBIT = self\:\:MBIT * 1000;
-       const PBIT = self\:\:GBIT * 1000;
+       const MBIT = self::KBIT * 1000;
+       const GBIT = self::MBIT * 1000;
+       const PBIT = self::GBIT * 1000;
    }
    
    ?>
@@ -4630,12 +4643,12 @@ As a general rule, it is recommended to make constant ``private`` by default, an
        
        function bar() {
            // PRIVATE CONSTANT may only be used in its class
-           echo self\:\:PRIVATE_CONSTANT;
+           echo self::PRIVATE_CONSTANT;
        }
    }
    
    // Other constants may be used anywhere
-   function x($a = foo\:\:PUBLIC_CONSTANT) {
+   function x($a = foo::PUBLIC_CONSTANT) {
        echo $a.' '.foo:PRE_71_CONSTANT;
    }
    
@@ -4690,19 +4703,19 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    class foo2 extends foo {
        function bar() {
            // PROTECTED_CONSTANT may only be used in its class or its children
-           echo self\:\:PROTECTED_CONSTANT;
+           echo self::PROTECTED_CONSTANT;
        }
    }
    
    class foo3 extends foo {
        function bar() {
            // PROTECTED_CONSTANT may only be used in its class or any of its children
-           echo self\:\:PROTECTED_CONSTANT;
+           echo self::PROTECTED_CONSTANT;
        }
    }
    
    // Other constants may be used anywhere
-   function x($a = foo\:\:PUBLIC_CONSTANT) {
+   function x($a = foo::PUBLIC_CONSTANT) {
        echo $a.' '.foo:PRE_71_CONSTANT;
    }
    
@@ -5407,8 +5420,8 @@ It is also routinely used in traits : there, ``self`` represents the class in wh
        const FOO = 1;
        
        public function bar() {
-           return self\:\:FOO;
-   // same as return x\:\:FOO;
+           return self::FOO;
+   // same as return x::FOO;
        }
    }
    
@@ -5632,7 +5645,7 @@ Since the availability of ``__autoload``, there is no need for that kind of code
    
    class X {
        function init() {
-           // myFunction is defined when and only if X\:\:init() is called.
+           // myFunction is defined when and only if X::init() is called.
            if (!function_exists('myFunction'){
                function myFunction($a) {
                    return $a + 1;
@@ -5957,10 +5970,10 @@ get_called_class() may be replaced by ``static\:\:class``.
    class X {
        function foo() {
            echo '__CLASS__.\n;          // X
-           echo self\:\:class.\n;        // X
+           echo self::class.\n;        // X
            
            echo get_called_class().\n;  // Y
-           echo static\:\:class.\n;       // Y
+           echo static::class.\n;       // Y
        }
    }
    
@@ -7731,20 +7744,20 @@ final may be applied to classes and methods.
    <?php
    class BaseClass {
       public function test() {
-          echo 'BaseClass\:\:test() called'.PHP_EOL;
+          echo 'BaseClass::test() called'.PHP_EOL;
       }
       
       final public function moreTesting() {
-          echo 'BaseClass\:\:moreTesting() called'.PHP_EOL;
+          echo 'BaseClass::moreTesting() called'.PHP_EOL;
       }
    }
    
    class ChildClass extends BaseClass {
       public function moreTesting() {
-          echo 'ChildClass\:\:moreTesting() called'.PHP_EOL;
+          echo 'ChildClass::moreTesting() called'.PHP_EOL;
       }
    }
-   // Results in Fatal error: Cannot override final method BaseClass\:\:moreTesting()
+   // Results in Fatal error: Cannot override final method BaseClass::moreTesting()
    ?>
 
 
@@ -7773,20 +7786,20 @@ final may be applied to classes and methods.
    <?php
    class BaseClass {
       public function test() {
-          echo 'BaseClass\:\:test() called'.PHP_EOL;
+          echo 'BaseClass::test() called'.PHP_EOL;
       }
       
       final public function moreTesting() {
-          echo 'BaseClass\:\:moreTesting() called'.PHP_EOL;
+          echo 'BaseClass::moreTesting() called'.PHP_EOL;
       }
    }
    
    class ChildClass extends BaseClass {
       public function moreTesting() {
-          echo 'ChildClass\:\:moreTesting() called'.PHP_EOL;
+          echo 'ChildClass::moreTesting() called'.PHP_EOL;
       }
    }
-   // Results in Fatal error: Cannot override final method BaseClass\:\:moreTesting()
+   // Results in Fatal error: Cannot override final method BaseClass::moreTesting()
    ?>
 
 
@@ -11247,7 +11260,7 @@ Those collisions should be solved with a ``use`` expression. When they are not, 
    
    class D {
        use  A, B{
-           B\:\:M 'insteadof A;
+           B::M 'insteadof A;
        };
    }
    
@@ -12509,7 +12522,7 @@ The error is only emitted if the class is instantiated, and a parent class is ca
    
    class mySplFileObject extends \SplFileObject {
        public function '__construct()    { 
-           // Forgottent call to parent\:\:'__construct()
+           // Forgottent call to parent::'__construct()
        }
    }
    
@@ -14274,10 +14287,10 @@ According to the PHP 7.3 changelog : ``In PHP, static properties are shared betw
            }
            class Test2 extends Test { }
    
-           Test2\:\:$x = &$x;
+           Test2::$x = &$x;
            $x = 1;
    
-           var_dump(Test\:\:$x, Test2\:\:$x);
+           var_dump(Test::$x, Test2::$x);
            // Previously: int(0), int(1)
            // Now: int(1), int(1)
    
@@ -14553,8 +14566,8 @@ The PHP error reads : ``Cannot declare self-referencing constant 'self\:\:C2'``.
    <?php
        class a { 
            const C1 = 1;         // fully defined constant
-           const C2 = self\:\:C2;  // self referencing constant
-           const C3 = a\:\:C3 + 2; // self referencing constant
+           const C2 = self::C2;  // self referencing constant
+           const C3 = a::C3 + 2; // self referencing constant
        }
    ?>
 
@@ -14566,7 +14579,7 @@ The code may access an already declared constant with self or with its class nam
    <?php
        class a { 
            const C1 = 1; 
-           const C2 = a\:\:C1; 
+           const C2 = a::C1; 
        }
    ?>
 
@@ -14930,7 +14943,7 @@ PHP 5 and older doesn't check that a method is static or not : at any point, the
            public public sm( ) { echo '__METHOD__.\n; }
        } 
        
-       x\:\:sm( ); // echo x\:\:sm 
+       x::sm( ); // echo x::sm 
    ?>
 
 
@@ -14949,7 +14962,7 @@ in-family method.
 
    <?php
        class x {
-           public function foo( ) { self\:\:bar() }
+           public function foo( ) { self::bar() }
            public function bar( ) { echo '__METHOD__.\n; }
        } 
    ?>
@@ -16530,7 +16543,7 @@ When calling parent constructor, always put it first in the ``__construct`` meth
    class goodSon {
        function '__construct() {
            // parent is build immediately, 
-           parent\:\:'__construct();
+           parent::'__construct();
            echo my name is.$this->name;
        }
    }
@@ -16541,7 +16554,7 @@ When calling parent constructor, always put it first in the ``__construct`` meth
            echo my name is.$this->name;
    
            // parent is build later, 
-           parent\:\:'__construct();
+           parent::'__construct();
        }
    }
    
@@ -16589,13 +16602,13 @@ PHP 7.0 and later detect their usage at compile time, and emits a fatal error.
        
        function foo() {
            // self is \x
-           echo self\:\:Y;
+           echo self::Y;
        }
    }
    
    const Z = 1;
    // This doesn't compile anymore
-   echo self\:\:Z;
+   echo self::Z;
    
    ?>
 
@@ -17452,7 +17465,7 @@ Properties that read and written may be converted into a variable, static to the
        function bar() {
            // $this->once is never used anywhere else. 
            someFunction($this->once);
-           someFunction(self\:\:ONCE);   // Make clear that it is a 
+           someFunction(self::ONCE);   // Make clear that it is a 
        }
    
        function bar2() {
@@ -17792,7 +17805,7 @@ Class constants may be redefined, though it is prone to errors when using them, 
    
    class c extends c { }
    
-   echo a\:\:A, ' ', b\:\:A, ' ', c\:\:A;
+   echo a::A, ' ', b::A, ' ', c::A;
    // 1 2 2
    
    ?>
@@ -19244,8 +19257,8 @@ PHP 7 introduced the ``??`` operator, that replaces longer structures to set def
    // equivalent to: $username = 'isset($_GET['user']) ? $_GET['user'] : 'nobody';
     
    // Calls a hypothetical model-getting function, and uses the provided default if it fails
-   $model = Model\:\:get($id) ?? $default_model;
-   // equivalent to: if (($model = Model\:\:get($id)) === NULL) { $model = $default_model; }
+   $model = Model::get($id) ?? $default_model;
+   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default_model; }
    
    ?>
 
@@ -19421,8 +19434,8 @@ Methods which are overwritten by a child class are omitted : the parent class ac
        private $a = 1;
        
        public function '__construct() {
-           // Calling parent\:\: is sufficient
-           parent\:\:'__construct();
+           // Calling parent:: is sufficient
+           parent::'__construct();
        }
    
        public function barbar() {
@@ -19575,7 +19588,7 @@ Building queries with concatenations is not recommended, though not always avoid
    $sql = 'SELECT name, colour, calories
        FROM fruit
        WHERE calories < :calories AND colour = :colour';
-   $sth = $conn->prepare($sql, array(PDO\:\:ATTR_CURSOR => PDO\:\:CURSOR_FWDONLY));
+   $sth = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
    $sth->execute(array(':calories' => 150, ':colour' => 'red'));
    $red = $sth->fetchAll();
    ?>
@@ -20747,7 +20760,7 @@ To maintain code readability, it is recommended to call static method in a stati
        $z = new x( );
        
        $z->y( ); // Readability : no one knows it is a static call
-       x\:\:y( );  // Readability : here we know
+       x::y( );  // Readability : here we know
    ?>
 
 +-------------+---------------------------------------+
@@ -20778,7 +20791,7 @@ Static methods are also called ``class methods`` : they may be called even if th
        // Static method may access other static methods, or property, or none. 
        static function staticBar() {
            // This is not possible in a static method
-           return self\:\:otherStaticBar() . static\:\:$staticProperty;
+           return self::otherStaticBar() . static::$staticProperty;
        }
    
        static function bar() {
@@ -22460,7 +22473,7 @@ Mistaking one of the other has two different reactions from PHP : ``Access to un
        static public $a = 1;
        
        function foo() {
-           echo self\:\:$a; // right
+           echo self::$a; // right
            echo $this->a; // WRONG
        }
    }
@@ -22470,7 +22483,7 @@ Mistaking one of the other has two different reactions from PHP : ``Access to un
    
        function foo() {
            echo $this->$b;  // right
-           echo b\:\:$b;      // WRONG
+           echo b::$b;      // WRONG
        }
    }
    
@@ -22515,10 +22528,10 @@ Undefined \:\:class
    class foo() {}
    
    // prints foo
-   echo foo\:\:class; 
+   echo foo::class; 
    
    // prints bar though bar doesn't exist.
-   echo bar\:\:class;
+   echo bar::class;
    
    ?>
 
@@ -22803,7 +22816,7 @@ Class constants that are used, but never defined. This should yield a fatal erro
    }
    
    // here, C is not defined in the code and is reported
-   echo foo\:\:A.foo\:\:B.foo\:\:C;
+   echo foo::A.foo::B.foo::C;
    
    ?>
 
@@ -22963,8 +22976,8 @@ Undefined Insteadof
    
    class Talker {
        use A, B {
-           B\:\:C 'insteadof A;
-           B\:\:D 'insteadof A;
+           B::C 'insteadof A;
+           B::D 'insteadof A;
        }
    }
    
@@ -23049,7 +23062,7 @@ This may compile but, eventually yield a fatal error during execution.
    class theChild extends theParent {
        function foo() {
            // bar is defined in theChild, but not theParent
-           parent\:\:bar();
+           parent::bar();
        }
        
        function bar() {
@@ -23310,11 +23323,11 @@ List of all undefined static and self properties and methods.
        private definedStatic = 1;
        
        public function method() {
-           self\:\:definedStatic();
-           self\:\:undefinedStatic();
+           self::definedStatic();
+           self::undefinedStatic();
    
-           static\:\:definedStatic;
-           static\:\:undefinedStatic;
+           static::definedStatic;
+           static::undefinedStatic;
        }
    }
    
@@ -23787,7 +23800,7 @@ Check for namespaces and aliases and make sure they are correctly configured.
    class Foo extends Bar {
        private function foobar() {
            // here, parent is not resolved, as Bar is not defined in the code.
-           return parent\:\:$prop;
+           return parent::$prop;
        }
    }
    
@@ -24420,7 +24433,7 @@ Private methods are reserved for the defining class. Thus, they must be used wit
        private static function staticUnusedMethod() {}
        
        public function bar() {
-           self\:\:staticMethod();
+           self::staticMethod();
            $this->method();
        }
    }
@@ -24935,7 +24948,7 @@ It is also capable to handle aliases, making the code easier to maintain.
    
    $className = '\foo\bar\X';
    
-   $className = foo\bar\X\:\:class;
+   $className = foo\bar\X::class;
    
    $className = B\X;
    
@@ -25230,10 +25243,10 @@ parent, static and self are traditionally written in lowercase only. Mixed case 
        
        function method() {
            // Wrong case, error with PHP 5.4.* and older
-           echo SELF\:\:aConstante;
+           echo SELF::aConstante;
            
            // Always right. 
-           echo self\:\:aConstante;
+           echo self::aConstante;
        }
    }
    
@@ -26119,7 +26132,7 @@ Setting properties with default values is a good way to avoid littering the code
        }
    
        // Upgraded version of bar, with default values
-       function bar2($table, $cols = self\:\:DEFAULT_COLUMNS) {
+       function bar2($table, $cols = self::DEFAULT_COLUMNS) {
            $res = $this->query('SELECT '.$cols.' FROM '.$table);
            // .....
        }
@@ -27902,8 +27915,8 @@ Any kind of structure may be @deprecated : classes, traits, interfaces, methods,
    $b->setLibOption();
    
    // deprecated constant in 2.5
-   Zend\Db\Sql\:\:JOIN_OUTER_LEFT;
-   Zend\Db\Sql\:\:JOIN_LEFT;
+   Zend\Db\Sql::JOIN_OUTER_LEFT;
+   Zend\Db\Sql::JOIN_LEFT;
    
    // deprecated trait
    class foo {
@@ -29217,13 +29230,13 @@ self, parent and static may be used in a trait : their actual value will be only
    // In the examples, self, parent and static may be used interchangeably
    
    // This raises a Fatal error
-   //Fatal error: Uncaught Error: Cannot access static\:\: when no class scope is active
+   //Fatal error: Uncaught Error: Cannot access static:: when no class scope is active
    new static();
    
    // static calls
-   echo self\:\:CONSTANTE;
-   echo self\:\:$property;
-   echo self\:\:method();
+   echo self::CONSTANTE;
+   echo self::$property;
+   echo self::method();
    
    // as a type hint
    function foo(static $x) {
