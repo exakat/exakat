@@ -1,4 +1,4 @@
-Version 1.5.3 (Ananda, coming up)
+Version 1.5.4 (Mahakasyapa, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 1.5.3 (Ananda, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.3 (Ananda, 2018-11-12)
++ Architecture
+    + Extended results to methods, traits
+    + Added support for PHP 7.2.12
+    + 'master' is not used anymore as default branch
+    + Fixed creation of initial config/exakat.ini
+    + Fixed handling badly written exakat.ini or PHP binary paths
++ Report
+    + Ambassador : report classes that could be final or abstract
++ Analyzer
+    + New analyzer : Property Used Once : now includes redefined functions
+    + New analyzer : iterator_to_array() should use yield with keys or array_merge()
+    + New analyzer : Don't loop on yield : use yield from
+    + Upgraded analyzer : Dependant trait now include parent-traits
+    + Checked unit tests : 3080 / 3093 test pass (99% pass)
++ Tokenizer
+    + Changed handling of variable that are both global AND local
+    + Disambiguated variables and properties
+    + Extended OVERWRITE to constants and methods
 
 Version 1.5.2 (Master Puti, 2018-11-05)
 + Report
