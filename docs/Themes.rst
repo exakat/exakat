@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 05 Nov 2018 17:00:54 +0000
-.. comment: Generation hash : 42b2b725331db1bc95f70cce37aac1dc49dab1e4
+.. comment: Generation date : Tue, 13 Nov 2018 09:35:38 +0000
+.. comment: Generation hash : be47f1699a3af68d1f2aa6f369f39e44e606d5cb
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 360 analysis
+Total : 361 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -249,7 +249,6 @@ Total : 360 analysis
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
-* :ref:`No Isset With Empty <no-isset-with-empty>`
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Need For Else <no-need-for-else>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
@@ -262,6 +261,7 @@ Total : 360 analysis
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
+* :ref:`No isset() With empty() <no-isset()-with-empty()>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
@@ -319,6 +319,7 @@ Total : 360 analysis
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use SetCookie() <should-use-setcookie()>`
+* :ref:`Should Yield With Key <should-yield-with-key>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
@@ -547,7 +548,6 @@ Total : 74 analysis
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 7.1- <hash-algorithms-incompatible-with-php-7.1->`
 * :ref:`Integer As Property <integer-as-property>`
-* :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`List With Reference <list-with-reference>`
@@ -594,6 +594,7 @@ Total : 74 analysis
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
 * :ref:`ext/ming`
+* :ref:`isset() With Constant <isset()-with-constant>`
 * Classes/NonStaticMethodsCalledStatic
 * Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
@@ -1129,7 +1130,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 65 analysis
+Total : 66 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1143,6 +1144,7 @@ Total : 65 analysis
 * :ref:`Could Use Try <could-use-try>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
+* :ref:`Don't Loop On Yield <don't-loop-on-yield>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`

@@ -301,51 +301,51 @@ Applications
 
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
-* `Thelia <https://thelia.net/>`_
-* `OpenEMR <https://www.open-emr.org/>`_
-* `SugarCrm <https://www.sugarcrm.com/>`_
-* `Piwigo <https://www.piwigo.org/>`_
-* `shopware <https://www.shopware.com/>`_
-* `Vanilla <https://open.vanillaforums.com/>`_
-* `WordPress <https://www.wordpress.org/>`_
-* `Magento <https://magento.com/>`_
-* `MediaWiki <https://www.mediawiki.org/>`_
-* `xataface <http://xataface.com/>`_
-* `Dolibarr <https://www.dolibarr.org/>`_
-* `OpenConf <https://www.openconf.com/>`_
-* `FuelCMS <https://www.getfuelcms.com/>`_
-* `Tikiwiki <https://tiki.org/>`_
-* `NextCloud <https://nextcloud.com/>`_
-* `Tine20 <https://www.tine20.com/>`_
-* `ExpressionEngine <https://expressionengine.com/>`_
-* `Zencart <https://www.zen-cart.com/>`_
-* `Traq <https://traq.io/>`_
-* `SPIP <https://www.spip.net/>`_
-* `LiveZilla <https://www.livezilla.net/home/en/>`_
-* `Mautic <https://www.mautic.org/>`_
-* `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
-* `Typo3 <https://typo3.org/>`_
-* `ThinkPHP <http://www.thinkphp.cn/>`_
-* `Zurmo <http://zurmo.org/>`_
+* `ChurchCRM <http://churchcrm.io/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
+* `Contao <https://contao.org/en/>`_
+* `Dolibarr <https://www.dolibarr.org/>`_
 * `Dolphin <https://www.boonex.com/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
+* `ExpressionEngine <https://expressionengine.com/>`_
+* `FuelCMS <https://www.getfuelcms.com/>`_
 * `HuMo-Gen <http://humogen.com/>`_
-* `XOOPS <https://xoops.org/>`_
-* `Woocommerce <https://woocommerce.com/>`_
-* `Phpdocumentor <https://www.phpdoc.org/>`_
-* `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `Contao <https://contao.org/en/>`_
-* `ChurchCRM <http://churchcrm.io/>`_
-* `TeamPass <https://teampass.net/>`_
+* `LiveZilla <https://www.livezilla.net/home/en/>`_
+* `Magento <https://magento.com/>`_
+* `Mautic <https://www.mautic.org/>`_
+* `MediaWiki <https://www.mediawiki.org/>`_
+* `NextCloud <https://nextcloud.com/>`_
+* `OpenConf <https://www.openconf.com/>`_
+* `OpenEMR <https://www.open-emr.org/>`_
 * `Phinx <https://phinx.org/>`_
-* `opencfp <https://github.com/opencfp/opencfp>`_
-* `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
+* `Phpdocumentor <https://www.phpdoc.org/>`_
+* `Piwigo <https://www.piwigo.org/>`_
+* `PrestaShop <https://prestashop.com/>`_
+* `SPIP <https://www.spip.net/>`_
+* Shopware
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
-* Shopware
+* `TeamPass <https://teampass.net/>`_
+* `Thelia <https://thelia.net/>`_
+* `ThinkPHP <http://www.thinkphp.cn/>`_
+* `Tikiwiki <https://tiki.org/>`_
+* `Tine20 <https://www.tine20.com/>`_
+* `Traq <https://traq.io/>`_
+* `Typo3 <https://typo3.org/>`_
+* `Vanilla <https://open.vanillaforums.com/>`_
+* `Woocommerce <https://woocommerce.com/>`_
+* `WordPress <https://www.wordpress.org/>`_
+* `XOOPS <https://xoops.org/>`_
+* `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
+* `Zurmo <http://zurmo.org/>`_
+* `opencfp <https://github.com/opencfp/opencfp>`_
+* `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
+* `shopware <https://www.shopware.com/>`_
+* `xataface <http://xataface.com/>`_
 
 
 Recognized Libraries
@@ -398,9 +398,15 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.3
+
+  * Don't Loop On Yield (Structures/DontLoopOnYield)
+  * Variable May Be Non-Global (Structures/VariableMayBeNonGlobal ; Unassigned)
+
 * 1.5.2
 
   * PHP Exception (Exceptions/IsPhpException)
+  * Should Yield With Key (Functions/ShouldYieldWithKey ; Analyze)
   * ext/decimal (Extensions/Extdecimal ; Appinfo)
   * ext/psr (Extensions/Extpsr ; Appinfo)
 
@@ -1330,7 +1336,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.8.7
 
   * Don't Echo Error (Security/DontEchoError ; Analyze, Security, Codacy, Simple, Level 1)
-  * No Isset With Empty (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
+  * No isset() With empty() (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * Use Class Operator (Classes/UseClassOperator)
   * Useless Casting (Structures/UselessCasting ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * ext/rar (Extensions/Extrar ; Appinfo)
@@ -1587,7 +1593,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Is Not Class Family (Classes/IsNotFamily ; Internal)
   * Is PHP Constant (Constants/IsPhpConstant ; Internal)
   * Is Upper Family (Classes/IsUpperFamily ; Internal)
-  * Isset With Constant (Structures/IssetWithConstant ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Join file() (Performances/JoinFile ; Performances)
   * Labels (Php/Labelnames ; Appinfo)
   * Linux Only Files (Portability/LinuxOnlyFiles ; Portability)
@@ -2048,6 +2053,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/zlib (Extensions/Extzlib ; Appinfo)
   * func_get_arg() Modified (Functions/funcGetArgModified ; Analyze, CompatibilityPHP70, Codacy, Simple)
   * include_once() Usage (Structures/OnceUsage ; Analyze, Appinfo, Codacy)
+  * isset() With Constant (Structures/IssetWithConstant ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * list() May Omit Variables (Structures/ListOmissions ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * mcrypt_create_iv() With Default Values (Structures/McryptcreateivWithoutOption ; CompatibilityPHP70, Codacy)
   * parse_str() Warning (Security/parseUrlWithoutParameters ; Security)
@@ -2085,7 +2091,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
 * :ref:`Cannot pass parameter 1 by reference <only-variable-for-reference>`
-* :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset-with-constant>`
+* :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset()-with-constant>`
 * :ref:`Cannot use object of type Foo as array <$this-is-not-an-array>`
 * :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Class 'x' not found <undefined-\:\:class>`
@@ -2387,8 +2393,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2396,6 +2402,7 @@ List of external links mentionned in this documentation.
 * `Functions <http://php.net/manual/en/language.functions.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
+* `Generator delegation via yield from <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.from>`_
 * `Generator Syntax <http://php.net/manual/en/language.generators.syntax.php>`_
 * `Generators overview <http://php.net/manual/en/language.generators.overview.php>`_
 * `GeoIP <http://php.net/manual/en/book.geoip.php>`_
@@ -2415,6 +2422,7 @@ List of external links mentionned in this documentation.
 * `hash_algos <http://php.net/hash_algos>`_
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
+* `Holger Woltersdorf <https://twitter.com/hollodotme>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
@@ -2474,8 +2482,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2593,6 +2601,7 @@ List of external links mentionned in this documentation.
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
 * `resources <http://php.net/manual/en/language.types.resource.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
+* `Returning values <http://php.net/manual/en/functions.returning-values.php>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
 * `RFC 822 (MIME) <http://www.faqs.org/rfcs/rfc822.html>`_
@@ -2624,8 +2633,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2655,8 +2664,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2668,6 +2677,7 @@ List of external links mentionned in this documentation.
 * `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * `Using single characters for variable names in loops/exceptions <https://softwareengineering.stackexchange.com/questions/71710/using-single-characters-for-variable-names-in-loops-exceptions?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa/>`_
+* `Using static variables <http://php.net/manual/en/language.variables.scope.php#language.variables.scope.static>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
@@ -2930,6 +2940,7 @@ Analyze
 |   analyzer[] = "Functions/RedeclaredPhpFunction";
 |   analyzer[] = "Functions/RelayFunction";
 |   analyzer[] = "Functions/ShouldUseConstants";
+|   analyzer[] = "Functions/ShouldYieldWithKey";
 |   analyzer[] = "Functions/TooManyLocalVariables";
 |   analyzer[] = "Functions/TypehintedReferences";
 |   analyzer[] = "Functions/UndefinedFunctions";
@@ -3974,6 +3985,7 @@ Suggestions
 |   analyzer[] = "Structures/CouldUseArrayUnique";
 |   analyzer[] = "Structures/CouldUseCompact";
 |   analyzer[] = "Structures/CouldUseDir";
+|   analyzer[] = "Structures/DontLoopOnYield";
 |   analyzer[] = "Structures/DropElseAfterReturn";
 |   analyzer[] = "Structures/EchoWithConcat";
 |   analyzer[] = "Structures/EmptyWithExpression";

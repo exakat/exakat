@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 05 Nov 2018 17:00:54 +0000
-.. comment: Generation hash : 42b2b725331db1bc95f70cce37aac1dc49dab1e4
+.. comment: Generation date : Tue, 13 Nov 2018 09:35:38 +0000
+.. comment: Generation hash : be47f1699a3af68d1f2aa6f369f39e44e606d5cb
 
 
 .. _$http\_raw\_post\_data:
@@ -554,7 +554,7 @@ Add Default Value
 #################
 
 
-Parameter in methods definition may receive a default value. This allows the called method to set a value when the parameter is omited. 
+Parameter in methods definition may receive a default value. This allows the called method to set a value when the parameter is omitted. 
 
 .. code-block:: php
 
@@ -2032,7 +2032,7 @@ Using `'opendir() <http://www.php.net/opendir>`_ and a while loop may be even fa
 
 This analysis skips `'scandir() <http://www.php.net/scandir>`_ and `'glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
 
-Glob() accepts wildchar, such as ``*``, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
+`'glob() <http://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
@@ -5001,7 +5001,7 @@ Could Return Void
 #################
 
 
-The following functions may bear the Void return typeHint. 
+The following functions may bear the void return typehint. 
 
 .. code-block:: php
 
@@ -5020,6 +5020,10 @@ The following functions may bear the Void return typeHint.
    }
    
    ?>
+
+
+See also `Returning values <http://php.net/manual/en/functions.returning-values.php>`_ and 
+         `Void Return Type <https://wiki.php.net/rfc/void_return_type>`_.
 
 +-------------+---------------------------+
 | Short name  | Functions/CouldReturnVoid |
@@ -6190,6 +6194,62 @@ See also `Error reporting <https://php.earth/docs/security/intro#error-reporting
 +-------------+--------------------------------------------------------------------------------------+
 | Examples    | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
 +-------------+--------------------------------------------------------------------------------------+
+
+
+
+.. _don't-loop-on-yield:
+
+Don't Loop On Yield
+###################
+
+
+Use ``yield from``, instead of looping on a generator with ``yield``.
+
+``yield from`` delegate the yielding to another generator, and keep calling that generator until it is finished. It also works with implicit generator datastructure, like arrays.
+
+.. code-block:: php
+
+   <?php
+   
+   function generator() {
+       for($i = 0; $i < 10; ++$i) {
+           yield $i;
+       }
+   }
+   
+   function delegatingGenerator() {
+       yield from generator();
+   }
+   
+   // Too much code here
+   function generator2() {
+       foreach(generator() as $g) {
+           yield $g;
+       }
+   }
+   
+   ?>
+
+
+There is a performance gain when delegating, over looping manually on the generator.
+
+See also `Generator delegation via yield from <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.from>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use `yield from` instead of the whole foreach() loop
+
++-------------+----------------------------+
+| Short name  | Structures/DontLoopOnYield |
++-------------+----------------------------+
+| Themes      | :ref:`Suggestions`         |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
 
 
 
@@ -10329,39 +10389,6 @@ See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
 
 
 
-.. _isset-with-constant:
-
-Isset With Constant
-###################
-
-
-Until PHP 7, it was possible to use arrays as constants, but it was not possible to test them with `'isset <http://www.php.net/isset>`_.
-
-.. code-block:: php
-
-   <?php
-   const X = [1,2,3];
-   
-   if ('isset(X[4])) {}
-   ?>
-
-
-This would yield an error : ``Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead)``. This is a backward incompatibility.
-
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/IssetWithConstant                                                                               |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Php Version | With PHP 7.0 and more recent                                                                               |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
-+-------------+------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _join-file():
 
 Join file()
@@ -12492,6 +12519,14 @@ The error is only emitted if the class is instantiated, and a parent class is ca
 
 See also `Why, php? WHY??? <https://gist.github.com/everzet/4215537>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a call to the parent's constructor
+* Remove the extension of the parent class
+
 +-------------+-------------------------------+
 | Short name  | Php/MustCallParentConstructor |
 +-------------+-------------------------------+
@@ -13848,59 +13883,6 @@ When connecting to a remove server, port is an important information. It is reco
 
 
 
-.. _no-isset-with-empty:
-
-No Isset With Empty
-###################
-
-
-Empty() actually does the job of Isset() too. 
-
-From the manual : ``No warning is generated if the variable does not exist. That means `'empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`'isset( <http://www.php.net/isset>`_$var) || $var == false.`` The main difference is that `'isset() <http://www.php.net/isset>`_ only works with variables, while `'empty() <http://www.php.net/empty>`_ works with other structures, such as constants.
-
-.. code-block:: php
-
-   <?php
-   
-   
-   // Enough validation
-   if (!empty($a)) {
-       doSomething();
-   }
-   
-   // Too many tests
-   if ('isset($a) && !empty($a)) {
-       doSomething();
-   }
-   
-   ?>
-
-
-See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_ and 
-         `empty <http://www.php.net/empty>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Only use isset(), just drop the empty()
-* Only use empty(), just drop the empty()
-* Use a null value, so the variable is always set
-
-+-------------+------------------------------------------+
-| Short name  | Structures/NoIssetWithEmpty              |
-+-------------+------------------------------------------+
-| Themes      | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Minor                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Instant (5 mins)                         |
-+-------------+------------------------------------------+
-| Examples    | :ref:`xoops-structures-noissetwithempty` |
-+-------------+------------------------------------------+
-
-
-
 .. _no-list-with-string:
 
 No List With String
@@ -14829,6 +14811,59 @@ It is not possible to pass explicitly null to get_class() to get the current's c
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                                                                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _no-isset()-with-empty():
+
+No isset() With empty()
+#######################
+
+
+`'empty() <http://www.php.net/empty>`_ actually does the job of `'isset() <http://www.php.net/isset>`_ too. 
+
+From the manual : ``No warning is generated if the variable does not exist. That means `'empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`'isset( <http://www.php.net/isset>`_$var) || $var == false.`` The main difference is that `'isset() <http://www.php.net/isset>`_ only works with variables, while `'empty() <http://www.php.net/empty>`_ works with other structures, such as constants.
+
+.. code-block:: php
+
+   <?php
+   
+   
+   // Enough validation
+   if (!empty($a)) {
+       doSomething();
+   }
+   
+   // Too many tests
+   if ('isset($a) && !empty($a)) {
+       doSomething();
+   }
+   
+   ?>
+
+
+See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_ and 
+         `empty <http://www.php.net/empty>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Only use isset(), just drop the empty()
+* Only use empty(), just drop the empty()
+* Use a null value, so the variable is always set
+
++-------------+------------------------------------------+
+| Short name  | Structures/NoIssetWithEmpty              |
++-------------+------------------------------------------+
+| Themes      | :ref:`Analyze`                           |
++-------------+------------------------------------------+
+| Severity    | Minor                                    |
++-------------+------------------------------------------+
+| Time To Fix | Instant (5 mins)                         |
++-------------+------------------------------------------+
+| Examples    | :ref:`xoops-structures-noissetwithempty` |
++-------------+------------------------------------------+
 
 
 
@@ -19198,7 +19233,7 @@ Should Use Coalesce
 ###################
 
 
-PHP 7 introduced the ?? operator, that replaces longer structures to set default values when a variable is not set.
+PHP 7 introduced the ``??`` operator, that replaces longer structures to set default values when a variable is not set.
 
 .. code-block:: php
 
@@ -19742,6 +19777,97 @@ See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Se
 +-------------+---------------------------------------+
 | Time To Fix | Slow (1 hour)                         |
 +-------------+---------------------------------------+
+
+
+
+.. _should-yield-with-key:
+
+Should Yield With Key
+#####################
+
+
+iterator_to_array() will overwrite generated values with the same key. 
+
+PHP generators are based on the ``yield`` keyword. They also delegate some generating to other methods, with ``yield from``. 
+
+When delegating, ``yield from`` uses the keys that are generated with ``yield``, and otherwise, it uses auto-generated index, starting with 0. 
+
+The trap is that each ``yield from `` reset the index generation and start again with 0. Coupled with iterator_to_array(), this means that the final generated array may lack some values, while a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop would yield all of them.
+
+.. code-block:: php
+
+   <?php 
+   
+   function g1() : Generator {
+   	for ( $i = 0; $i < 4; $i++ ) { yield $i; }
+   }
+   
+   function g2() : Generator {
+   	for ( $i = 5; $i < 10; $i++ ) { yield $i; }
+   }
+   
+   function aggregator() : Generator {
+   	yield from g1();
+   	yield from g2();
+   }
+   
+   print_r(iterator_to_array());
+   
+   /*
+   Array
+   (
+       [0] => 6
+       [1] => 7
+       [2] => 8
+       [3] => 9
+       [4] => 4  // Note that 4 and 5 still appears
+       [5] => 5  // They are not overwritten by the second yield
+   )
+   */
+   
+   
+   foreach ( aggregator() as $i ) {
+   	print $i.PHP_EOL;
+   }
+   
+   /*
+   0  // Foreach has no overlap and yield it all.
+   1
+   2
+   3
+   4
+   5
+   6
+   7
+   8
+   9
+   */
+   
+   ?>
+
+
+Thanks to `Holger Woltersdorf <https://twitter.com/hollodotme>`_ for `pointing this <https://twitter.com/hollodotme/status/1057909890566537217>`_.
+
+See also `Generator syntax <http://php.net/manual/en/language.generators.syntax.php>`_ and 
+         `Yielding values with keys <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.associative>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use iterator_to_array() on each generator separatly, and use array_merge() to merge all the arrays.
+* Always yield with distinct keys
+* Avoid iterator_to_array() and use foreach()
+
++-------------+------------------------------+
+| Short name  | Functions/ShouldYieldWithKey |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
 
 
 
@@ -26001,6 +26127,14 @@ Setting properties with default values is a good way to avoid littering the code
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the property, as it is probably not unused
+* Add another usage of the property where it is useful
+
 +-------------+--------------------------+
 | Short name  | Classes/UsedOnceProperty |
 +-------------+--------------------------+
@@ -26642,6 +26776,15 @@ This is probably a development artefact that was forgotten. It is better to remo
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the useless & from the argument
+* Make an actual use of the argument before the end of the method
 
 +-------------+----------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UselessReferenceArgument                                                                       |
@@ -28773,6 +28916,39 @@ Try using autoload for loading classes, or use include() or require() and make i
 
 
 
+.. _isset()-with-constant:
+
+isset() With Constant
+#####################
+
+
+Until PHP 7, it was possible to use arrays as constants, but it was not possible to test them with `'isset <http://www.php.net/isset>`_.
+
+.. code-block:: php
+
+   <?php
+   const X = [1,2,3];
+   
+   if ('isset(X[4])) {}
+   ?>
+
+
+This would yield an error : ``Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead)``. This is a backward incompatibility.
+
++-------------+------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/IssetWithConstant                                                                               |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Php Version | With PHP 7.0 and more recent                                                                               |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                           |
++-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _list()-may-omit-variables:
 
 list() May Omit Variables
@@ -29003,6 +29179,14 @@ preg_replace With Option e
                                                  '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace call to preg_replace() and /e with preg_replace_callback() or preg_replace_callback_array()
+
 +-------------+------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/pregOptionE                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------------+
@@ -29011,6 +29195,8 @@ preg_replace With Option e
 | Severity    | Major                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`edusoho-structures-pregoptione`                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------+
 
 

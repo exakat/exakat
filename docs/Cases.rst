@@ -1561,6 +1561,22 @@ This is another exact example.
 
     intval($_POST['pid']);
 
+preg_replace With Option e
+==========================
+
+.. _edusoho-structures-pregoptione:
+
+Edusoho
+^^^^^^^
+
+:ref:`preg\_replace-with-option-e`, in vendor_user/uc_client/lib/uccode.class.php:32. 
+
+This call extract text between [code] tags, then process it with $this->codedisp() and nest it again in the original string. preg_replace_callback() is a drop-in replacement for this piece of code. 
+
+.. code-block:: php
+
+    $message = preg_replace("/\s*\[code\](.+?)\[\/code\]\s*/ies", "$this->codedisp('\1')", $message);
+
 Relay Function
 ==============
 
@@ -2217,17 +2233,17 @@ Default development behavior : display the caught exception. Production behavior
                 return;
             }
 
-No Isset With Empty
-===================
+No isset() With empty()
+=======================
 
 .. _xoops-structures-noissetwithempty:
 
 XOOPS
 ^^^^^
 
-:ref:`no-isset-with-empty`, in /htdocs/class/tree.php:297. 
+:ref:`no-isset()-with-empty()`, in /htdocs/class/tree.php:297. 
 
-Too many testing
+Too much vlaidation
 
 .. code-block:: php
 
@@ -3472,7 +3488,7 @@ Phinx
 
 :ref:`avoid-glob()-usage`, in src/Phinx/Migration/Manager.php:362. 
 
-Glob() searches for a list of files in the migration folder. Those files are not known, but they have a format, as checked later with the regex : a combinaison of FilesystemIterator and RegexIterator would do the trick too.
+glob() searches for a list of files in the migration folder. Those files are not known, but they have a format, as checked later with the regex : a combinaison of FilesystemIterator and RegexIterator would do the trick too.
 
 .. code-block:: php
 

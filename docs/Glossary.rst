@@ -317,7 +317,6 @@ Glossary
 
       + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
       + :ref:`No Count With 0 <no-count-with-0>`
-      + :ref:`No Isset With Empty <no-isset-with-empty>`
 
     + `each()`
 
@@ -329,7 +328,7 @@ Glossary
       + :ref:`Empty With Expression <empty-with-expression>`
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
-      + :ref:`No Isset With Empty <no-isset-with-empty>`
+      + :ref:`No isset() With empty() <no-isset()-with-empty()>`
 
     + `eval()`
 
@@ -416,6 +415,7 @@ Glossary
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
+      + :ref:`Should Yield With Key <should-yield-with-key>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
@@ -436,10 +436,6 @@ Glossary
 
 
 + `G`
-    + `Glob()`
-
-      + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
-
     + `glob()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
@@ -464,10 +460,6 @@ Glossary
 
 
 + `I`
-    + `Isset`
-
-      + :ref:`No Isset With Empty <no-isset-with-empty>`
-
     + `implode()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
@@ -563,14 +555,14 @@ Glossary
 
       + :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
       + :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
-      + :ref:`Isset With Constant <isset-with-constant>`
       + :ref:`Must Return Methods <must-return-methods>`
-      + :ref:`No Isset With Empty <no-isset-with-empty>`
+      + :ref:`No isset() With empty() <no-isset()-with-empty()>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`isset() With Constant <isset()-with-constant>`
 
 
 + `M`
