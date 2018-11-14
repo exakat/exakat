@@ -10,9 +10,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class OnlyVariableForReference extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testFunctions_OnlyVariableForReference01()  { $this->generic_test('Functions/OnlyVariableForReference.01'); }
     public function testFunctions_OnlyVariableForReference02()  { $this->generic_test('Functions/OnlyVariableForReference.02'); }
+    public function testFunctions_OnlyVariableForReference03()  { $this->generic_test('Functions/OnlyVariableForReference.03'); }
 }
 ?>
