@@ -121,6 +121,7 @@ GREMLIN;
         $result = $this->gremlin->query($query);
 
         display($result->toInt().' fixed Fullnspath for Functions');
+        $this->log->log(__METHOD__);
     }
     
     private function fixFullnspathConstants() {
@@ -149,6 +150,7 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         
         display("Fixed Fullnspath for Constants");
+        $this->log->log(__METHOD__);
     }
 
     private function spotPHPNativeConstants() {
@@ -185,8 +187,10 @@ g.V().hasLabel("Identifier")
 
 GREMLIN;
 
-            $this->runQuery($query, $title, array('arg1' => $constants));
+            $this->runQuery($query, $title, array('arg1' => $constants), __METHOD__);
         }
+
+        $this->log->log(__METHOD__);
     }
     
     private function spotPHPNativeFunctions() {
@@ -223,7 +227,7 @@ g.V().hasLabel("Functioncall")
      }.count();
 
 GREMLIN;
-            $this->runQuery($query, $title, array('arg1' => $diff));
+            $this->runQuery($query, $title, array('arg1' => $diff), __METHOD__);
         }
 
         $query = <<<GREMLIN
@@ -237,9 +241,11 @@ GREMLIN;
         if (!empty($fixed)) {
             $this->datastore->addRow('functioncalls', $fixed);
         }
+
+        $this->log->log(__METHOD__);
     }
 
-    private function runQuery($query, $title, $args = array()) {
+    private function runQuery($query, $title, $args = array(), $method = __METHOD__) {
         display($title);
 
         $this->logTime($title);
@@ -252,6 +258,7 @@ GREMLIN;
 
         display('   /'.$title);
         $this->logTime('end '.$title);
+        $this->log->log($method);
     }
 
     private function overwrittenMethods() {
@@ -274,6 +281,7 @@ GREMLIN;
 
         $this->logTime($result->toInt().' overwrittenMethods end');
         display($result->toInt().' overwrittenMethods');
+        $this->log->log(__METHOD__);
     }
 
     private function overwrittenProperties() {
@@ -294,6 +302,7 @@ GREMLIN;
 
         $this->logTime($result->toInt().' overwrittenProperties end');
         display($result->toInt().' overwrittenProperties');
+        $this->log->log(__METHOD__);
     }
 
     private function overwrittenConstants() {
@@ -318,7 +327,8 @@ GREMLIN;
 
         $this->logTime($result->toInt().' overwrittenConstant end');
         display($result->toInt().' overwrittenConstants');
-    }        
+        $this->log->log(__METHOD__);
+    }
     
     private function setArrayClassDefinition() {
         $this->logTime('setArrayClassDefinition');
@@ -346,6 +356,7 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $this->logTime('setArrayClassDefinition end');
+        $this->log->log(__METHOD__);
     }
 
     private function spotFallbackConstants() {
@@ -453,6 +464,7 @@ GREMLIN;
         // TODO : handle case-insensitive
         $this->logTime('Constant definitions');
         display('Link constant definitions');
+        $this->log->log(__METHOD__);
     }
 
     private function setClassPropertyRemoteDefinition() {
@@ -502,6 +514,7 @@ GREMLIN;
         $count += $result->toInt();
 
         display("Set $count property remote definitions");
+        $this->log->log(__METHOD__);
     }
 
     private function setClassMethodRemoteDefinition() {
@@ -531,6 +544,7 @@ GREMLIN;
         $count = $result->toInt();
 
         display("Set $count method remote definitions");
+        $this->log->log(__METHOD__);
     }
 
     private function setParentDefinition() {
@@ -548,6 +562,7 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $count = $res->toInt();
         display("Set $count parent definitions");
+        $this->log->log(__METHOD__);
     }
     
     private function setConstantDefinition() {
@@ -576,6 +591,7 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $count = $res->toInt();
         display("Set $count constant definitions");
+        $this->log->log(__METHOD__);
     }
 
     private function makeClassConstantDefinition() {
@@ -606,6 +622,7 @@ GREMLIN;
 
         display('Create '.($result->toInt()).' link between Class constant and definition');
         $this->logTime('Class::constant definition');
+        $this->log->log(__METHOD__);
     }
 
     private function makeClassMethodDefinition() {
@@ -676,6 +693,7 @@ GREMLIN;
 
         display('Create '.($result->toInt()).' link between new class and definition');
         $this->logTime('Class::method() definition');
+        $this->log->log(__METHOD__);
     }
 
     private function defaultIdentifiers() {
@@ -711,6 +729,7 @@ GREMLIN;
 
         $res = $this->gremlin->query($query)->toInt();
         display("defaulting $res Nsname");
+        $this->log->log(__METHOD__);
     }
 
     private function propagateConstants($level = 0) {
@@ -1068,6 +1087,7 @@ GREMLIN;
         if ($total > 0 && $level < 5) {
             $this->propagateConstants();
         }
+        $this->log->log(__METHOD__);
     }
 
     private function init() {
