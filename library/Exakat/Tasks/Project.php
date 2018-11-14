@@ -331,7 +331,7 @@ class Project extends Tasks {
             unset($dumpConfig);
         } catch (\Exception $e) {
             echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
-            file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
+            file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/log/analyze.final.log", $e->getMessage());
         }
     }
 
