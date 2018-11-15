@@ -261,8 +261,8 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = (int) $row['counts'];
         }
-        $this->log->log( 'count analyzed : '.count($counts)."\n");
-        $this->log->log( 'counts '.implode(', ', $counts)."\n");
+        $this->log->log('count analyzed : '.count($counts)."\n");
+        $this->log->log('counts '.implode(', ', $counts)."\n");
         $datastore->close();
         unset($datastore);
 

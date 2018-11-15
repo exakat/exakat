@@ -258,8 +258,9 @@ class Project extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
+            $log = fopen("{$this->project_dir}/log/project.timing.csv", 'w+');
         }
+
         $end = microtime(true);
         if ($begin === null) {
             $begin = $end;
@@ -381,7 +382,7 @@ class Project extends Tasks {
                 $analyze->run();
                 unset($analyze);
                 unset($analyzeConfig);
-                $this->logTime('Analyze : '.$theme);
+                $this->logTime("Analyze : $theme");
 
                 $args = array ( 1 => 'dump',
                                 2 => '-p',
@@ -420,6 +421,7 @@ class Project extends Tasks {
                 $dump->finalMark($finalMark);
                 unset($dump);
                 unset($dumpConfig);
+                $this->logTime("Dumped : $theme");
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
                 file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/log/analyze.$themeForFile.final.log", $e->getMessage());
