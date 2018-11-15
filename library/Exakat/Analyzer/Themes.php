@@ -28,299 +28,107 @@ use Exakat\Analyzer\Analyzer;
 use AutoloadExt;
 
 class Themes {
-    private static $sqlite = null;
-    private $phar_tmp      = null;
-    private $ext           = null;
+    private $main   = null;
+    private $ext    = null;
+    private $extra  = array();
 
     static private $instanciated = array();
-    
-    public function __construct($path, AutoloadExt $ext) {
-        if (substr($path, 0, 4) == 'phar') {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs').'.sqlite';
-            copy($path, $this->phar_tmp);
-            $docPath = $this->phar_tmp;
-        } else {
-            $docPath = $path;
-        }
-        self::$sqlite = new \SQLite3($docPath, \SQLITE3_OPEN_READONLY);
-        
-        $this->ext = $ext;
+
+    public function __construct($path, AutoloadExt $ext, array $extra_themes = array()) {
+        $this->main  = new ThemesMain($path);
+        $this->ext   = new ThemesExt($ext);
+        $this->extra = new ThemesExtra($extra_themes);
     }
 
     public function __destruct() {
-        if ($this->phar_tmp !== null) {
-            unlink($this->phar_tmp);
-        }
+        unset($this->main);
+        unset($this->ext);
+        unset($this->extra);
     }
     
     public function getThemeAnalyzers($theme = null) {
-        $all = $this->listAllThemes();
-
-        // Main installation
-        if ($theme === null) {
-            // Default is ALL of them
-            $where = 'WHERE a.folder != "Common" ';
-        } elseif (is_array($theme)) {
-            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE a.folder != "Common" AND c.name in ('.makeList($theme).')';
-        } elseif ($theme === 'Random') {
-            $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
-            shuffle($shorList);
-            $theme = $shorList[0];
-            display( "Random theme is : $theme\n");
-
-            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
-        } elseif (in_array($theme, $all)) {
-            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
-        } else {
-            return array();
-        }
-
-        $query = <<<SQL
-SELECT DISTINCT a.folder, a.name FROM analyzers AS a
-    JOIN analyzers_categories AS ac
-        ON ac.id_analyzer = a.id
-    JOIN categories AS c
-        ON c.id = ac.id_categories
-    $where
-SQL;
-        $res = self::$sqlite->query($query);
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = "$row[folder]/$row[name]";
-        }
-
-        // Extension installation
-        if (is_array($theme)) {
-            $list = array();
-            foreach($theme as $t) {
-                $list[] = $this->ext->getAnalyzers($t);
-            }
-            $return = array_merge($return, ...array_values(array_merge(...$list)));
-        } elseif (is_string($theme)) {
-            $list = $this->ext->getAnalyzers($theme);
-            $return = array_merge($return, ...array_values($list));
-        }
+        $main  = $this->main ->getThemeAnalyzers($theme);
+        $extra = $this->extra->getThemeAnalyzers($theme);
+        $ext   = $this->ext  ->getThemeAnalyzers($theme);
         
-        return $return;
+        return array_merge($main, $extra, $ext);
     }
 
     public function getThemeForAnalyzer($analyzer) {
-        list($vendor, $class) = explode('/', $analyzer);
+        $main = $this->main->getThemeForAnalyzer($analyzer);
         
-        $query = <<<SQL
-SELECT c.name FROM categories AS c
-    JOIN analyzers_categories AS ac
-        ON ac.id_categories = c.id
-    JOIN analyzers AS a
-        ON a.id = ac.id_analyzer
-    WHERE
-        a.folder = '$vendor' AND
-        a.name   = '$class'
-SQL;
-        $res = self::$sqlite->query($query);
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row['name'];
-        }
-        
-        return $return;
+        return array_merge($main);
     }
 
     public function getThemesForAnalyzer($list = null) {
-        if ($list === null) {
-            $where = '';
-        } elseif (is_string($list)) {
-            $where = " WHERE c.name = \"$list\" ";
-        } elseif (is_array($list)) {
-            $where = ' WHERE c.name IN ('.makeList($list).') ';
-        } else {
-            assert(false, "Wrong type for list : ".gettype($list)." in ".__METHOD__."\n");
-        }
-
-        $query = <<<SQL
-SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
-    JOIN analyzers_categories AS ac
-        ON ac.id_categories = c.id
-    JOIN analyzers AS a
-        ON a.id = ac.id_analyzer
-    $where
-	GROUP BY analyzer
-SQL;
-        $res = self::$sqlite->query($query);
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = explode(',', $row['categories']);
-        }
+        $main = $this->main->getThemesForAnalyzer($list);
         
-        return $return;
+        return array_merge($main);
     }
 
     public function getSeverities() {
-        $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
-
-        $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['severity']);
-        }
-
-        return $return;
+        $main = $this->main->getSeverities();
+        
+        return array_merge($main);
     }
 
     public function getTimesToFix() {
-        $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
-
-        $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['timetofix']);
-        }
-
-        return $return;
+        $main = $this->main->getTimesToFix();
+        
+        return array_merge($main);
     }
 
     public function getFrequences() {
-        $query = "SELECT analyzers.folder||'/'||analyzers.name AS analyzer, frequence / 100 AS frequence 
-            FROM  analyzers
-            LEFT JOIN analyzers_popularity 
-                ON analyzers_popularity.id = analyzers.id";
-
-        $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['frequence']) ? 0 : $row['frequence'];
-        }
-
-        return $return;
+        $main = $this->main->getFrequences();
+        
+        return array_merge($main);
     }
     
     public function guessAnalyzer($name) {
-        $query = <<<'SQL'
-SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;
-
-SQL;
-        $stmt = self::$sqlite->prepare($query);
-
-        $stmt->bindValue(':name', $name, \SQLITE3_TEXT);
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
+        $main = $this->main->guessAnalyzer($name);
         
-        return $return;
+        return array_merge($main);
     }
 
     public function listAllAnalyzer($folder = null) {
-        $query = <<<'SQL'
-SELECT folder || '\\' || name AS name FROM analyzers
-
-SQL;
-        if ($folder === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE folder=:folder';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
-        }
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
+        $main = $this->main->listAllAnalyzer($folder);
         
-        return $return;
+        return array_merge($main);
     }
 
     public function listAllThemes($theme = null) {
-        $query = <<<'SQL'
-SELECT name AS name FROM categories
-
-SQL;
-        if ($theme === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE name=:name';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
-        }
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row['name'];
-        }
+        $main = $this->main->listAllThemes($theme);
         
-        return $return;
+        return array_merge($main);
     }
 
     public function getClass($name) {
-        // accepted names :
-        // PHP full name : Analyzer\\Type\\Class
-        // PHP short name : Type\\Class
-        // Human short name : Type/Class
-        // Human shortcut : Class (must be unique among the classes)
-
-        if (strpos($name, '\\') !== false) {
-            if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
-                $class = $name;
-            } else {
-                $class = "Exakat\\Analyzer\\$name";
-            }
-        } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
-        } elseif (strpos($name, '/') === false) {
-            $found = $this->guessAnalyzer($name);
-
-            if (empty($found)) {
-                return false; // no class found
-            }
-            
-            if (count($found) > 1) {
-                return false;
-            }
-            
-            $class = $found[0];
-        } else {
-            $class = $name;
-        }
-
-        if (!class_exists($class)) {
-            return false;
-        }
-
-        $actualClassName = new \ReflectionClass($class);
-        if ($class === $actualClassName->getName()) {
+        if ($class = $this->main->getClass($name)) {
             return $class;
-        } else {
-            // problems with the case
-            return false;
         }
+
+        if ($class = $this->extra->getClass($name)) {
+            return $class;
+        }
+
+        if ($class = $this->ext->getClass($name)) {
+            return $class;
+        }
+        print "finally $name\n";
+        
+        return false;
     }
 
     public function getSuggestionThema($thema) {
-        $list = $this->listAllThemes();
-
-        return array_filter($list, function($c) {
-            $l = levenshtein($c, $thema);
-            return $l < 8;
-        });
+        $main = $this->main->getSuggestionThema($thema);
+        
+        return array_merge($main);
     }
     
     public function getSuggestionClass($name) {
-        return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
-            $l = levenshtein($c, $name);
-
-            return $l < 8;
-        });
+        $main = $this->main->getSuggestionClass($name);
+        
+        return array_merge($main);
     }
 
     public static function resetCache() {

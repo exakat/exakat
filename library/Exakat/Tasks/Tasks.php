@@ -97,21 +97,22 @@ abstract class Tasks {
         }
 
         if ($this->config->project !== 'default' &&
-            file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+            file_exists("{$this->config->projects_root}/projects/{$this->config->project}")) {
             $this->datastore = new Datastore($this->config);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/')) {
-            mkdir($this->config->projects_root.'/projects/', 0700);
+        if (!file_exists("{$this->config->projects_root}/projects/")) {
+            mkdir("{$this->config->projects_root}/projects/", 0700);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/.exakat/')) {
-            mkdir($this->config->projects_root.'/projects/.exakat/', 0700);
+        if (!file_exists("{$this->config->projects_root}/projects/.exakat/")) {
+            mkdir("{$this->config->projects_root}/projects/.exakat/", 0700);
         }
 
-        $this->exakatDir = $this->config->projects_root.'/projects/.exakat/';
+        $this->exakatDir = "{$this->config->projects_root}/projects/.exakat/";
         $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
-                                   $this->config->ext);
+                                   $this->config->ext,
+                                   $this->config->themas);
     }
 
     public function __destruct() {

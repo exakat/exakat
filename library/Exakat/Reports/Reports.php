@@ -72,7 +72,8 @@ abstract class Reports {
 
             $this->datastore = new Dump($this->config);
             $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
-                                          $this->config->ext);
+                                          $this->config->ext,
+                                          $this->config->themas);
 
             // Default analyzers
             $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),

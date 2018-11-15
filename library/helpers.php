@@ -616,4 +616,20 @@ function flattenDimensions($array, $split='/') {
     return $return;
 }
 
+function array_flip_arrays($array) {
+    $return = array();
+
+    foreach($array as $key => $value) {
+        foreach($value as $v) {
+            if (isset($return[$v])) {
+                $return[$v][] = $key;
+            } else {
+                $return[$v] = array($key);
+            }
+        }
+    }
+    
+    return $return;
+}
+
 ?>

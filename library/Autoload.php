@@ -71,8 +71,7 @@ class AutoloadExt {
     }
 
     public function autoload($name) {
-        $fileName = preg_replace('/^([^_]+?)_(.*)$/', '$1'.DIRECTORY_SEPARATOR.'$2', $name);
-        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
+        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $name);
         $file = "{$fileName}.php";
 
         foreach($this->pharList as $phar) {
@@ -103,6 +102,7 @@ class AutoloadExt {
                 continue; 
             }
             $ini = parse_ini_file($fullPath);
+            unset($ini['All']); // And other pre-defined themes ? 
             
             $return[$name] = array_keys($ini);
         }
@@ -124,6 +124,25 @@ class AutoloadExt {
             
             $return[$name] = $ini[$theme] ?? array();
         }
+
+        return $return;
+    }
+
+    public function getAllAnalyzers() {
+        $return = array();
+
+        foreach($this->pharList as $name => $phar) {
+            $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
+            
+            if (!file_exists($fullPath)) {
+                $return[] = array();
+                continue; 
+            }
+            $ini = parse_ini_file($fullPath);
+            
+            $return[$name] = $ini;
+        }
+
         return $return;
     }
     

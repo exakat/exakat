@@ -230,23 +230,23 @@ class Doctor extends Tasks {
     }
     
     private function checkGremlinServer() {
-        if (!file_exists($this->config->projects_root.'/tinkergraph/db')) {
-            mkdir($this->config->projects_root.'/tinkergraph/db', 0755);
+        if (!file_exists("{$this->config->projects_root}/tinkergraph/db")) {
+            mkdir("{$this->config->projects_root}/tinkergraph/db", 0755);
         }
     
-        $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+        $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
         //gremlin-core-3.2.5.jar
         $gremlinVersion = substr($gremlinVersion, 13, -4);
         $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
     
-        if (!copy($this->config->dir_root.'/server/gsneo4j/gsneo4j'.$version.'.yaml',
-             $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml')) {
-            display('Error while copying gsneo4j'.$version.'.yaml config file to tinkergraph.');
+        if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
+             "{$this->config->projects_root}/tinkergraph/conf/gsneo4j.yaml")) {
+            display("Error while copying gsneo4j{$version}.yaml config file to tinkergraph.");
         }
-        if (!copy($this->config->dir_root.'/server/tinkergraph/conf/tinkergraph'.$version.'.yaml',
-             $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml')) {
-            display('Error while copying tinkergraph'.$version.'.yaml config file to tinkergraph.');
+        if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
+             "{$this->config->projects_root}/tinkergraph/tinkergraph.yaml")) {
+            display("Error while copying tinkergraph{$version}.yaml config file to tinkergraph.");
         }
     }
 
