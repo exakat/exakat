@@ -211,13 +211,13 @@ class Tinkergraph extends Graph {
     }
 
     public function stop() {
-        if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
+        if (file_exists("{$this->config->tinkergraph_folder}/db/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/gremlin-server-bitsy.yaml');
+            putenv('GREMLIN_YAML=conf/tinkergraph.3.3.yaml');
             putenv('PID_DIR=db');
             shell_exec("cd {$this->config->tinkergraph_folder}; ./bin/gremlin-server.sh stop");
-            if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
-                unlink("{$this->config->tinkergraph_folder}/run/gremlin.pid");
+            if (file_exists("{$this->config->tinkergraph_folder}/db/gremlin.pid")) {
+                unlink("{$this->config->tinkergraph_folder}/db/gremlin.pid");
             }
         }
         
