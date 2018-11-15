@@ -34,6 +34,8 @@ class Tinkergraph extends Graph {
     const UNAVAILABLE = 1;
     
     private $status     = self::UNCHECKED;
+
+    private $gremlinVersion = '3.3';
     
     public function __construct($config) {
         parent::__construct($config);
@@ -43,6 +45,18 @@ class Tinkergraph extends Graph {
             $this->status = self::UNAVAIALBLE;
             return;
         }
+
+        if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
+            // No local production, just skip init.
+            $this->status = self::UNAVAILABLE;
+            return;
+        }
+        
+        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->gsneo4j_folder}/lib/"));
+        $gremlinVersion = basename(array_pop($gremlinJar));
+        // 3.3 or 3.2
+        $this->gremlinVersion = substr($gremlinVersion, 13, -6);
+        assert(in_array($this->gremlinVersion, array('3.2', '3.3')), "Unknown Gremlin version : $this->gremlinVersion\n");
 
         $this->db = new Connection(array(
                                      'host'     => $this->config->tinkergraph_host,
@@ -74,12 +88,13 @@ class Tinkergraph extends Graph {
             $this->checkConfiguration();
         }
 
-        assert(is_array($params), 'Params must be an array, '.gettype($params).' provided.'.PHP_EOL.$query);
+        $b = microtime(true);
+        $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
-        
+
         if (empty($result)) {
             return new GraphResults();
         } elseif($result[0] === null) {
@@ -97,20 +112,22 @@ class Tinkergraph extends Graph {
             return new GraphResults($result);
         } elseif (is_array($result)) {
             return new GraphResults($result);
-        } elseif ($result instanceof \stdclass) {
+        } elseif ($result instanceof stdClass) {
             return new GraphResults($result);
+        } else {
+            print "Processing unknown type ".gettype($result).PHP_EOL;
+            var_dump($result);
+            die();
         }
-        
-        assert(false, "Processing unknown type ".gettype($result).PHP_EOL.var_dump($result, false));
     }
-    
+
     public function queryOne($query, $params = array(), $load = array()) {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 
         $res = $this->query($query, $params, $load);
-        if (!($res instanceof \Stdclass) || !isset($res->results)) {
+        if (!($res instanceof stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
         
@@ -149,21 +166,23 @@ class Tinkergraph extends Graph {
     }
     
     public function start() {
-        if (!file_exists($this->config->tinkergraph_folder.'/conf/tinkergraph.yaml')) {
-            copy( $this->config->dir_root.'/server/tinkergraph/conf/tinkergraph.yaml',
-                  $this->config->tinkergraph_folder.'/conf/tinkergraph.yaml');
+        if (!file_exists("{$this->config->gsneo4j_folder}/conf")) {
+            throw new GremlinException('No graphdb found.');
+        }
+        
+        if (!file_exists("{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml")) {
+            copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph.{$this->gremlinVersion}.yaml",
+                 "{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml");
         }
 
-        $gremlinJar = glob($this->config->tinkergraph_folder.'/lib/gremlin-core-*.jar');
-        $gremlinVersion = basename(array_pop($gremlinJar));
-        //gremlin-core-3.2.5.jar
-        $gremlinVersion = substr($gremlinVersion, 13, -4);
-        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
-
-        if ($version === '.3.3') {
-            exec('cd '.$this->config->tinkergraph_port_folder.'; rm -rf db/neo4j; ./bin/gremlin-server.exakat.sh start conf/tinkergraph.yaml  &');
-        } elseif ($version === '.3.2') {
-            exec('cd '.$this->config->tinkergraph_port_folder.'; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.pid ');
+        if ($this->gremlinVersion === '3.3') {
+            putenv('GREMLIN_YAML=conf/tinkergraph.3.3.yaml');
+            putenv('PID_DIR=db');
+            exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.exakat.sh start &");
+        } elseif ($this->gremlinVersion === '3.2') {
+            exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
+        } else {
+            throw new GremlinException("Wrong version for tinkergraph : $this->GremlinVersion");
         }
         $this->resetConnection();
         sleep(1);
@@ -179,10 +198,10 @@ class Tinkergraph extends Graph {
         
         display("Restarted in $round rounds\n");
 
-        if (file_exists($this->config->tinkergraph_folder.'/run/gremlin.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/run/gremlin.pid'));
-        } elseif ( file_exists($this->config->tinkergraph_folder.'/db/tinkergraph.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/db/tinkergraph.pid'));
+        if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
+            $pid = trim(file_get_contents("{$this->config->tinkergraph_folder}/run/gremlin.pid"));
+        } elseif (file_exists("{$this->config->tinkergraph_folder}/db/tinkergraph.pid")) {
+            $pid = trim(file_get_contents("{$this->config->tinkergraph_folder}/db/tinkergraph.pid"));
         } else {
             $pid = 'Not yet';
         }
@@ -192,15 +211,19 @@ class Tinkergraph extends Graph {
     }
 
     public function stop() {
-        if (file_exists($this->config->tinkergraph_folder.'/run/gremlin.pid')) {
+        if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
-            shell_exec('cd '.$this->config->tinkergraph_folder.'; ./bin/gremlin-server.sh stop');
-            unlink($this->config->tinkergraph_folder.'/run/gremlin.pid');
+            putenv('GREMLIN_YAML=conf/gremlin-server-bitsy.yaml');
+            putenv('PID_DIR=db');
+            shell_exec("cd {$this->config->tinkergraph_folder}; ./bin/gremlin-server.sh stop");
+            if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
+                unlink("{$this->config->tinkergraph_folder}/run/gremlin.pid");
+            }
         }
         
-        if (file_exists($this->config->tinkergraph_folder.'/db/tinkergraph.pid')) {
+        if (file_exists("{$this->config->tinkergraph_folder}/db/tinkergraph.pid")) {
             display('stop gremlin server 3.2.x');
-            shell_exec('kill -9 $(cat '.$this->config->tinkergraph_folder.'/db/tinkergraph.pid) 2>> gremlin.log; rm -f '.$this->config->tinkergraph_folder.'/db/tinkergraph.pid');
+            shell_exec("kill -9 $(cat {$this->config->tinkergraph_folder}/db/tinkergraph.pid) 2>> gremlin.log; rm -f {$this->config->tinkergraph_folder}/db/tinkergraph.pid");
         }
     }
 
