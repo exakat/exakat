@@ -5,6 +5,21 @@ try {
         die("Exakat requires PHP 7.0 or more recent to run. \nConfigure PHP ".PHP_VERSION." in the projects/*/config.ini file to audit with that version.\nAborting\n");
     }
     
+    register_shutdown_function(function(){
+        $error = error_get_last();
+        if(null !== $error)
+        {
+            if (substr($error['message'], 0, 14) === 'Allowed memory') {
+                print $error['message'];
+                if (ini_get('memory_limit') !== -1) {
+                    print "\nConsider raising your memory_limit in php.ini, even set it to -1.\n";
+                }
+            } elseif (substr($error['message'], 0, 22) === 'Maximum execution time') {
+                print $error['message'];
+            } 
+        }
+    });
+    
     $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){
