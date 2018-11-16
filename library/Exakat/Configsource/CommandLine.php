@@ -58,6 +58,7 @@ class CommandLine extends Config {
                                  '-tbz'       => 'tbz',
                                  '-zip'       => 'zip',
                                  '-rar'       => 'rar',
+                                 '-7z'        => 'sevenz',
                                  '-git'       => 'git',
                                  );
 
@@ -103,7 +104,6 @@ class CommandLine extends Config {
                               'queue'         => 1,
                               'load'          => 1,
                               'project'       => 1,
-                              'melis'         => 1,
                               'codacy'        => 1,
                               'report'        => 1,
                               'results'       => 1,
@@ -129,7 +129,7 @@ class CommandLine extends Config {
             return false;
         }
 
-        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar',);
+        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', );
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {

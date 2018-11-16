@@ -278,6 +278,7 @@ class Doctor extends Tasks {
                            'Rar'       => 'rar',
                            'Tarbz'     => 'tbz',
                            'Targz'     => 'tgz',
+                           '7z'        => '7z',
                           );
 
         foreach($optionals as $class => $section) {
