@@ -29,6 +29,7 @@ use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Helpers\Php;
 use Exakat\Exceptions\NoPhpBinary;
+use Exakat\Exceptions\HelperException;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -282,9 +283,13 @@ class Doctor extends Tasks {
                           );
 
         foreach($optionals as $class => $section) {
-            $fullClass = "\Exakat\Vcs\\$class";
-            $vcs = new $fullClass($this->config->project, $this->config->projects_root);
-            $stats[$section] = $vcs->getInstallationInfo();
+            try {
+                $fullClass = "\Exakat\Vcs\\$class";
+                $vcs = new $fullClass($this->config->project, $this->config->projects_root);
+                $stats[$section] = $vcs->getInstallationInfo();
+            } catch (HelperException $e) {
+                $stats[$section] = array('installed' => 'No');
+            }
         }
 
         return $stats;
