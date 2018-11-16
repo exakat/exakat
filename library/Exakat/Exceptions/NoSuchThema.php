@@ -24,9 +24,14 @@
 namespace Exakat\Exceptions;
 
 class NoSuchThema extends \RuntimeException {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+    public function __construct(string $message = '',array $themes = array()) {
+        $exception = "No such analysis thema as '$message'. \n";
+        
+        if (!empty($themes)) {
+            $exception .= 'You can try : '.implode(', ', $themes).PHP_EOL;
+        }
 
-        parent::__construct("No such analysis thema as '$message'.\n", $code, $previous);
+        parent::__construct($exception);
     }
 }
 

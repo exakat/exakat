@@ -38,19 +38,16 @@ use Exakat\Phpexec;
 use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
 use Exception;
+use Exakat\Log;
 
 class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     private $progressBar = null;
     private $Php = null;
     private $analyzed = array();
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        if (!empty($config->thema)) {
-            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', $config->thema));
-        }
-
         parent::__construct($gremlin, $config, $subtask);
     }
 
@@ -91,10 +88,14 @@ class Analyze extends Tasks {
             $thema = $this->config->thema;
 
             if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
-                throw new NoSuchAnalyzer($thema, $this->themes);
+                throw new NoSuchThema($thema, $this->themes->getSuggestionThema($thema));
             }
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
+
+            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', $this->config->thema));
+            $this->log = new Log('analyze.'.strtolower(str_replace(' ', '_', $this->config->thema)),
+                                 "{$this->config->projects_root}/projects/{$this->config->project}");
         } else {
             throw new NeedsAnalyzerThema();
         }

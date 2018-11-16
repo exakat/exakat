@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Exceptions\NoSuchThema;
 use Exakat\Analyzer\Analyzer;
 use AutoloadExt;
 
@@ -224,19 +223,12 @@ SQL;
         return $return;
     }
 
-    public function listAllThemes($theme = null) {
+    public function listAllThemes() {
         $query = <<<'SQL'
 SELECT name AS name FROM categories
 
 SQL;
-        if ($theme === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE name=:name';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
-        }
+        $stmt = self::$sqlite->prepare($query);
         $res = $stmt->execute();
 
         $return = array();
@@ -294,7 +286,7 @@ SQL;
     public function getSuggestionThema($thema) {
         $list = $this->listAllThemes();
 
-        return array_filter($list, function($c) {
+        return array_filter($list, function($c) use ($thema) {
             $l = levenshtein($c, $thema);
             return $l < 8;
         });

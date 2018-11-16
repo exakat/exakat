@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Exceptions\NoSuchThema;
 use Exakat\Analyzer\Analyzer;
 use AutoloadExt;
 
@@ -107,69 +106,14 @@ class ThemesExtra {
     public function getFrequences() {
         die(__METHOD__);
     }
-    
-    public function guessAnalyzer($name) {
-        $query = <<<'SQL'
-SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;
-
-SQL;
-        $stmt = self::$sqlite->prepare($query);
-
-        $stmt->bindValue(':name', $name, \SQLITE3_TEXT);
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
-        
-        return $return;
-    }
 
     public function listAllAnalyzer($folder = null) {
-        $query = <<<'SQL'
-SELECT folder || '\\' || name AS name FROM analyzers
-
-SQL;
-        if ($folder === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE folder=:folder';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
-        }
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
-        
-        return $return;
+        // This is not providing any new analysers. 
+        return array();
     }
 
-    public function listAllThemes($theme = null) {
-        $query = <<<'SQL'
-SELECT name AS name FROM categories
-
-SQL;
-        if ($theme === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE name=:name';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
-        }
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row['name'];
-        }
-        
-        return $return;
+    public function listAllThemes() {
+        return array_keys($this->extra_themes);
     }
 
     public function getClass($name) {
@@ -187,18 +131,6 @@ SQL;
             }
         } elseif (strpos($name, '/') !== false) {
             $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
-        } elseif (strpos($name, '/') === false) {
-            $found = $this->guessAnalyzer($name);
-
-            if (empty($found)) {
-                return false; // no class found
-            }
-            
-            if (count($found) > 1) {
-                return false;
-            }
-            
-            $class = $found[0];
         } else {
             $class = $name;
         }
@@ -219,7 +151,7 @@ SQL;
     public function getSuggestionThema($thema) {
         $list = $this->listAllThemes();
 
-        return array_filter($list, function($c) {
+        return array_filter($list, function($c) use ($thema) {
             $l = levenshtein($c, $thema);
             return $l < 8;
         });

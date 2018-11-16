@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Exceptions\NoSuchThema;
 use Exakat\Analyzer\Analyzer;
 use AutoloadExt;
 
@@ -114,21 +113,24 @@ class Themes {
         if ($class = $this->ext->getClass($name)) {
             return $class;
         }
-        print "finally $name\n";
         
         return false;
     }
 
     public function getSuggestionThema($thema) {
-        $main = $this->main->getSuggestionThema($thema);
+        $main  = $this->main->getSuggestionThema($thema);
+        $extra = $this->extra->getSuggestionThema($thema);
+        $ext   = $this->ext->getSuggestionThema($thema);
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
     
     public function getSuggestionClass($name) {
-        $main = $this->main->getSuggestionClass($name);
+        $main  = $this->main->getSuggestionClass($name);
+        $extra = $this->extra->getSuggestionClass($name);
+        $ext   = $this->ext->getSuggestionClass($name);
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public static function resetCache() {

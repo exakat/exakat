@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Exceptions\NoSuchThema;
 use Exakat\Analyzer\Analyzer;
 use AutoloadExt;
 
@@ -169,32 +168,17 @@ SQL;
     }
 
     public function listAllAnalyzer($folder = null) {
-        die(__METHOD__);
-        $query = <<<'SQL'
-SELECT folder || '\\' || name AS name FROM analyzers
-
-SQL;
-        if ($folder === null) {
-            $stmt = self::$sqlite->prepare($query);
-        } else {
-            $query .= ' WHERE folder=:folder';
-            $stmt = self::$sqlite->prepare($query);
-            
-            $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
-        }
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
-        
-        return $return;
+        return array();
     }
 
-    public function listAllThemes($theme = null) {
-        die(__METHOD__);
-        return array();
+    public function listAllThemes() {
+        $return = array();
+        
+        foreach($this->themes as $theme) {
+            $return[] = $theme->listAllThemes();
+        }
+
+        return array_merge(...$return);
     }
 
     public function getClass($name) {
@@ -231,8 +215,6 @@ SQL;
         if (!class_exists($class)) {
             return false;
         }
-        print "$name $class\n";
-        die(__METHOD__);
 
         $actualClassName = new \ReflectionClass($class);
         if ($class === $actualClassName->getName()) {
@@ -243,18 +225,18 @@ SQL;
         }
     }
 
-    public function getSuggestionThema($thema) {
-        die(__METHOD__);
+    public function getSuggestionThema(string $thema) {
         $list = $this->listAllThemes();
 
-        return array_filter($list, function($c) {
+        return array_filter($list, function($c) use ($thema) {
             $l = levenshtein($c, $thema);
             return $l < 8;
         });
     }
     
     public function getSuggestionClass($name) {
-        die(__METHOD__);
+        $list = array_merge(...array_values($this->all));
+        
         return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
             $l = levenshtein($c, $name);
 
