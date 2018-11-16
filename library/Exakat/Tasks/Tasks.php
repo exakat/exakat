@@ -93,7 +93,7 @@ abstract class Tasks {
 
         if ($this->logname !== self::LOG_NONE) {
             $this->log = new Log($this->logname,
-                                 $this->config->projects_root.'/projects/'.$this->config->project);
+                                 "{$this->config->projects_root}/projects/{$this->config->project}");
         }
 
         if ($this->config->project !== 'default' &&

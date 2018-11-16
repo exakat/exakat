@@ -43,7 +43,6 @@ class SevenZ extends Vcs {
         $archiveFile = tempnam(sys_get_temp_dir(), 'archive7Z').'.7z';
         file_put_contents($archiveFile, $binary);
 
-        print "7z x $archiveFile -oc:{$this->destinationFull}/code/";
         shell_exec("7z x $archiveFile -oc:{$this->destinationFull}/code/");
 
         unlink($archiveFile);
