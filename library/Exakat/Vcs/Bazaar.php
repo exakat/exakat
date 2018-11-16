@@ -28,7 +28,7 @@ class Bazaar extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
         
-        $res = shell_exec('bzr --version');
+        $res = shell_exec('bzr --version 2>&1');
         if (strpos($res, 'Bazaar') === false) {
             throw new HelperException('Bazar');
         }

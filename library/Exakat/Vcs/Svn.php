@@ -30,7 +30,7 @@ class Svn extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
         
-        $res = shell_exec('svn --version');
+        $res = shell_exec('svn --version 2>&1');
         if (strpos($res, 'svn') === false) {
             throw new HelperException('SVN');
         }

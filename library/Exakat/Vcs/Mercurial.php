@@ -28,7 +28,7 @@ class Mercurial extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
 
-        $res = shell_exec('hg --version');
+        $res = shell_exec('hg --version 2>&1');
         if (strpos($res, 'Mercurial') === false) {
             throw new HelperException('Mercurial');
         }

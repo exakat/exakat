@@ -28,7 +28,7 @@ class Composer extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
         
-        $res = shell_exec('composer --version');
+        $res = shell_exec('composer --version 2>&1');
         if (strpos($res, 'Composer') === false) {
             throw new HelperException('Composer');
         }

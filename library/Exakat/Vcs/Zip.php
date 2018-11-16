@@ -28,7 +28,7 @@ class Zip extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
 
-        $res = shell_exec('zip --version');
+        $res = shell_exec('zip --version  2>&1');
         if (strpos($res, 'Zip') === false) {
             throw new HelperException('zip');
         }

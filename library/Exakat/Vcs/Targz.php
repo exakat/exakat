@@ -28,7 +28,7 @@ class Targz extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
 
-        $res = shell_exec('tar --version');
+        $res = shell_exec('tar --version 2>&1');
         if (!preg_match('#\d+\.\d+\.\d+#s', $res)) {
             throw new HelperException('Tar');
         }
