@@ -23,15 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-class Filter extends DSL {
+class Side extends DSL {
     public function run() : Command {
-        list($filter, $arguments) = func_get_args();
-        
-        if ($filter instanceof Command) {
-            return $filter;
-        } else {
-            return new Command("filter{ $filter }", $arguments );
-        }
+        return new Command("count()");
     }
 }
 ?>

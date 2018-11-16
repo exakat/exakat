@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyCouldBeLocal extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // normal property
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('propertyname', 'member')
@@ -35,19 +33,26 @@ class PropertyCouldBeLocal extends Analyzer {
              ->isNot('static', true)
              ->is('visibility', 'private')
              ->inIs('PPP')
-             ->raw(<<<GREMLIN
-where(
-    __.out("METHOD")
-      .not( where( __.has('static', true) ) )
-      .where( __.out("BLOCK")
-          .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Member")
-                .where(out("OBJECT").hasLabel("This"))
-                .out("MEMBER").filter{ it.get().value("code") == member}
-        )
-        .count().is(eq(1))
-)
-GREMLIN
-)
+             ->filter(
+                  $this->side()
+                       ->outIs('METHOD')
+                       ->not( $this->side()
+                                   ->is('static', true)
+                            )
+                       ->filter(
+                            $this->side()
+                                 ->outIs('BLOCK')
+                                 ->atomInsideNoDefinition('Member')
+                                 ->filter( $this->side()
+                                                ->outIs('OBJECT')
+                                                ->atomIs('This')
+                                         )
+                                 ->outIs('MEMBER')
+                                 ->samePropertyAs('code', 'member')
+                       )
+                       ->count()
+                       ->isEqual(1)
+            )
             ->back('first');
         $this->prepareQuery();
 
@@ -59,18 +64,22 @@ GREMLIN
              ->is('visibility', 'private')
              ->inIs('PPP')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->raw(<<<GREMLIN
-where(
-    __.out("METHOD")
-      .where( __.out("BLOCK")
-                .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Staticproperty")
-                    .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
-                    .out("MEMBER").filter{ it.get().value("code") == member}
-       )
-      .count().is(eq(1))
-)
-GREMLIN
-)
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->filter(
+                        $this->side()
+                             ->atomInsideNoDefinition('Staticproperty')
+                             ->outIs('CLASS')
+                             ->has('fullnspath')
+                             ->samePropertyAs('fullnspath', 'fnp')
+                             ->inIs('CLASS')
+                             ->outIs('MEMBER')
+                             ->samePropertyAs('code', 'member')
+                     )
+                     ->count()
+                     ->isEqual(1)
+             )
             ->back('first');
         $this->prepareQuery();
     }

@@ -381,7 +381,6 @@ GREMLIN;
         return self::$calledDirectives;
     }
 
-
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
         if ($this->phpVersion === self::PHP_VERSION_ANY) {
@@ -450,6 +449,16 @@ GREMLIN;
             $return[$row['key']] = $row['value'];
         }
         return $return;
+    }
+
+    public function side() {
+        $this->query->side();
+        
+        return $this;
+    }
+
+    public function prepareSide() {
+        return $this->query->prepareSide();
     }
 
     public function _as($name) {
@@ -807,6 +816,18 @@ GREMLIN;
         return $this;
     }
 
+    public function isEqual($value = 0) {
+        $this->query->isEqual((int) $value);
+
+        return $this;
+    }
+
+    public function count() {
+        $this->query->count();
+
+        return $this;
+    }
+
     public function outWithRank($link = 'ARGUMENT', $rank = 0) {
         $this->query->outWithRank($link, $rank);
 
@@ -976,10 +997,28 @@ GREMLIN;
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
+    public function not($filter, $arguments = array()) {
+        // use func_get_args here
+        if ($filter instanceof self) {
+            $filterClean = $filter->prepareSide();
+        } else {
+            assert(false, "Wrong type for not : ".get_type($filter));
+        }
+        $this->query->not($filterClean, array());
+
+        return $this;
+    }
+
     public function filter($filter, $arguments = array()) {
         // use func_get_args here
-        $filter = $this->cleanAnalyzerName($filter);
-        $this->query->filter($filter, $arguments = array());
+        if (is_string($filter)) {
+            $filterClean = $this->cleanAnalyzerName($filter);
+        } elseif ($filter instanceof self) {
+            $filterClean = $filter->prepareSide();
+        } else {
+            assert(false, "Wrong type for filter : ".get_type($filter));
+        }
+        $this->query->filter($filterClean, array());
 
         return $this;
     }

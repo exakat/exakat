@@ -23,15 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
-class Filter extends DSL {
-    public function run() : Command {
-        list($filter, $arguments) = func_get_args();
-        
-        if ($filter instanceof Command) {
-            return $filter;
-        } else {
-            return new Command("filter{ $filter }", $arguments );
-        }
+use Exakat\Query\Query;
+
+class IsEqual extends DSL {
+    public function run() {
+        list($value) = func_get_args();
+
+        return new Command("is(eq($value))");
     }
 }
 ?>

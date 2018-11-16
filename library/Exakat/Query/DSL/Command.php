@@ -28,7 +28,7 @@ class Command {
     public $gremlin = '';
     public $arguments = array();
     
-    function __construct($command, $args = array()) {
+    function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
         
         assert(is_array($args), "Args is not an array : ($command).".print_r($args, true));

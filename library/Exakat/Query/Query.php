@@ -41,6 +41,7 @@ class Query {
     private $arguments        = array();
     private $query            = null;
     private $queryFactory     = null;
+    private $sides            = array();
     
     public function __construct($id, $project, $analyzer, $php, $datastore) {
         $this->id       = $id;
@@ -56,20 +57,46 @@ class Query {
             $command = $this->queryFactory->factory($name);
             $this->commands[] = $command->run(...$args);
         } catch (UnknownDsl $e) {
-            die(ici);
+            die('This is an unknown DSL');
         }
         
         return $this;
     }
+    
+    public function side() {
+        $this->sides[] = $this->commands;
+        $this->commands = array();
+    }
+
+    public function prepareSide() {
+        $commands = array_column($this->commands, 'gremlin');
+        
+        assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
+        assert(!empty($commands), 'No command in side query');
+
+        $query = '__.'.implode(".\n", $commands);
+        $args = array_column($this->commands, 'arguments');
+        $args = array_merge(...$args);
+
+        $query = str_replace(array_keys($args), '***', $query);
+        
+
+        $return = new Command("where( $query )", array_values($args));
+
+        $this->commands = array_pop($this->sides);
+        return $return;
+    }
 
     public function prepareQuery($analyzerId) {
         assert($this->query === null, 'query is already ready');
+        assert(empty($this->sides), 'sides are not empty : left '.count($this->sides).' element');
 
         // @doc This is when the object is a placeholder for others.
         if (empty($this->commands)) {
+            print ici;
             return true;
         }
-
+        
         $this->analyzerId = $analyzerId;
         
         $commands = array_column($this->commands, 'gremlin');
@@ -112,9 +139,9 @@ class Query {
 // php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v
 
 GREMLIN;
-        assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
+//        assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
         
-//        print_r($this);
+        return true;
     }
     
     public function prepareRawQuery() {
@@ -159,33 +186,9 @@ GREMLIN;
 
     public function printQuery() {
         $this->prepareQuery($this->analyzerId);
-        print_r($this);
-            echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
-
-            krsort($this->queriesArguments[$id]);
-            
-            foreach($this->queriesArguments[$id] as $name => $value) {
-                if (is_array($value)) {
-                    if (is_array($value[key($value)])) {
-                        foreach($value as $k => &$v) {
-                            $v = "'''".$k."''':['''".implode("''', '''", $v)."''']";
-                            $v = str_replace('\\', '\\\\', $v);
-                        }
-                        unset($v);
-                        $query = str_replace($name, "[".implode(", ", $value)."]", $query);
-                    } else {
-                        $query = str_replace($name, "['".implode("', '", $value)."']", $query);
-                    }
-                } elseif (is_string($value)) {
-                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
-                } elseif (is_int($value)) {
-                    $query = str_replace($name, (string) $value, $query);
-                } else {
-                    assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
-                }
-            }
-            
-            echo $query, PHP_EOL, PHP_EOL;
+        
+        var_dump($this->query);
+        print_r($this->arguments);
         die();
     }
 

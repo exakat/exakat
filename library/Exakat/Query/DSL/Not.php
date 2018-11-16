@@ -23,14 +23,15 @@
 
 namespace Exakat\Query\DSL;
 
-class Filter extends DSL {
+class Not extends DSL {
     public function run() : Command {
-        list($filter, $arguments) = func_get_args();
+        list($filter) = func_get_args();
         
         if ($filter instanceof Command) {
+            $filter->gremlin = "not($filter->gremlin)";
             return $filter;
         } else {
-            return new Command("filter{ $filter }", $arguments );
+            assert(false, 'Not requires a command object');
         }
     }
 }

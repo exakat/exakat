@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -23,15 +23,17 @@
 
 namespace Exakat\Query\DSL;
 
-class Filter extends DSL {
-    public function run() : Command {
-        list($filter, $arguments) = func_get_args();
-        
-        if ($filter instanceof Command) {
-            return $filter;
-        } else {
-            return new Command("filter{ $filter }", $arguments );
-        }
+use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
+
+class Property extends DSL {
+    public function run() {
+        list($property, $value) = func_get_args();
+
+        assert($this->assertProperty($property));
+
+        // Currently, a gremlin variable
+        return new Command('filter{ it.get().property("'.$property.'", '.$value.')', array());
     }
 }
 ?>
