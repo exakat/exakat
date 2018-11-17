@@ -36,6 +36,7 @@ class MultipleAliasDefinitionPerFile extends Analyzer {
              ->inIs('USE')
              ->inIs('EXPRESSION')
              ->outIs('EXPRESSION')
+             ->atomIs('Usenamespace')
              ->outIs('USE')
              ->samePropertyAs('fullnspath', 'origin')
              ->notSamePropertyAs('fullcode', 'fullcode')
