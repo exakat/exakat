@@ -37,7 +37,7 @@ not(
     where( 
         __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
           .hasLabel("Functioncall")
-          .has("token", within("T_STRING", "T_NS_SEPARATOR"))
+          .has("fullnspath")
           .filter{ it.get().value("fullnspath") in ***} 
           ) 
     )

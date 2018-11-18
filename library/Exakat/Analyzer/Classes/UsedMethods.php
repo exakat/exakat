@@ -65,7 +65,7 @@ GREMLIN
         $callablesStrings = $this->query(<<<GREMLIN
 g.V().hasLabel("String")
      .where(__.in("DEFINITION"))
-     .not(where(__.in("CONCAT")))
+     .has('noDelimiter')
      .filter{ (it.get().value('noDelimiter') =~ "::." ).getCount() != 0 }
 .map{
     // Strings
