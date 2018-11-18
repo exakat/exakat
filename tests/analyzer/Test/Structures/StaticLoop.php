@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class StaticLoop extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testStructures_StaticLoop01()  { $this->generic_test('Structures_StaticLoop.01'); }
     public function testStructures_StaticLoop02()  { $this->generic_test('Structures_StaticLoop.02'); }
@@ -19,5 +19,6 @@ class StaticLoop extends Analyzer {
     public function testStructures_StaticLoop05()  { $this->generic_test('Structures/StaticLoop.05'); }
     public function testStructures_StaticLoop06()  { $this->generic_test('Structures/StaticLoop.06'); }
     public function testStructures_StaticLoop07()  { $this->generic_test('Structures/StaticLoop.07'); }
+    public function testStructures_StaticLoop08()  { $this->generic_test('Structures/StaticLoop.08'); }
 }
 ?>
