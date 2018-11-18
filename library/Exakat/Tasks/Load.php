@@ -877,7 +877,12 @@ class Load extends Tasks {
                 } elseif ($atom === 'Variablearray') {
                     ++$this->id; // Skip $a
                     ++$this->id; // Skip [
-                    $index = $this->processSingle('String');
+                    
+                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+                        $index = $this->processVariable();
+                    } else {
+                        $index = $this->processSingle('String');
+                    }
                     ++$this->id; // Skip ]
 
                     $array = $this->addAtom('Array');
