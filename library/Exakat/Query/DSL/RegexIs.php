@@ -42,7 +42,8 @@ class RegexIs extends DSL {
         } 
         
         return new Command(<<<GREMLIN
-filter{ (it.get().value('$property') =~ "$regex" ).getCount() != 0 }
+has("$property")
+.filter{ (it.get().value("$property") =~ "$regex" ).getCount() != 0 }
 GREMLIN
                           );
     }
