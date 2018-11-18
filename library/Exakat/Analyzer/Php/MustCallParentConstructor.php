@@ -31,8 +31,6 @@ class MustCallParentConstructor extends Analyzer {
     }
         
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         $fullnspath = array('\spltempfileobject',
                             '\splfileobject',
                             );
@@ -49,16 +47,18 @@ class MustCallParentConstructor extends Analyzer {
              ->outIs('MAGICMETHOD')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
-             ->raw(<<<GREMLIN
-not(
-    where( __.repeat( __.out({$this->linksDown}) ).emit().times($MAX_LOOPING)
-             .hasLabel("Staticmethodcall")
-             .where( __.out("CLASS").hasLabel("Parent"))
-             .where( __.out("METHOD").has("lccode", within(***)))
-    )
-)
-GREMLIN
-,$lccode)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->atomInsideNoDefinition('Staticmethodcall')
+                             ->outIs('CLASS')
+                             ->atomIs('Parent')
+                             ->inIs('CLASS')
+                             ->outIs('METHOD')
+                             ->codeIs($lccode, self::NO_TRANSLATE, self::CASE_INSENSITIVE)
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }

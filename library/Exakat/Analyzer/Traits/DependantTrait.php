@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class DependantTrait extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // Case for $this->method()
         $this->atomIs('Trait')
              ->outIs(array('METHOD', 'MAGICMETHOD'))

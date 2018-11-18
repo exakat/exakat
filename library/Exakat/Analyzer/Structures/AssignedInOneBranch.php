@@ -44,19 +44,19 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw(<<<GREMLIN
-not( 
-    __.where( 
-        __.out("ELSE").not(has("token", "T_ELSEIF"))
-          .emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING).hasLabel("Assignation")
-          .has("token", "T_EQUAL")
-          .out("LEFT")
-          .hasLabel("Variable", "Staticproperty", "Member", "Array")
-          .filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}
-        ) 
-)
-GREMLIN
-)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('ELSE')
+                             ->tokenIsNot('T_ELSEIF')
+                             ->atomInsideNoDefinition('Assignation')
+                             ->codeIs('=')
+                             ->outIs('LEFT')
+                             ->atomIs(array('Variable', 'Staticproperty', 'Member', 'Array'))
+                             ->samePropertyAs('fullcode', 'variable', self::CASE_INSENSITIVE)
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
@@ -73,19 +73,19 @@ GREMLIN
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw(<<<GREMLIN
-not( 
-    __.where( 
-        __.out("THEN").not(has("token", "T_ELSEIF"))
-          .emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
-          .hasLabel("Assignation").has("token", "T_EQUAL")
-          .out("LEFT")
-          .hasLabel("Variable", "Staticproperty", "Member", "Array")
-          .filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}
-        ) 
-)
-GREMLIN
-)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('THEN')
+                             ->tokenIsNot('T_ELSEIF')
+                             ->atomInsideNoDefinition('Assignation')
+                             ->codeIs('=')
+                             ->outIs('LEFT')
+                             ->atomIs(array('Variable', 'Staticproperty', 'Member', 'Array'))
+                             ->samePropertyAs('fullcode', 'variable', self::CASE_INSENSITIVE)
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }
