@@ -24,30 +24,14 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class CollectVariables extends DSL {
-    public function run() : Command {
-        list($variable, $type) = func_get_args();
-        
-        assert(in_array($type, array('fullcode', 'code')), 'collectVariable type should be code or fullcode');
-        $this->assertVariable($variable, self::VARIABLE_WRITE);
-        
-        $CONTAINERS = makeList(array('Variable', 'Variableobject', 'Variablearray', 'Phpvariable', 'Member', 'Staticproperty', 'Array', 'This', ));
-        $LINKS_DOWN = self::$linksDown;
+class InitVariable extends DSL {
+    public function run() {
+        list($name, $value) = func_get_args();
 
-        return new Command(<<<GREMLIN
-sideEffect{ $variable = []; }.where(
-    __.repeat( __.out($LINKS_DOWN)).emit()
-      .hasLabel($CONTAINERS)
-      .sideEffect{ 
-          $variable.add(it.get().value("$type")); 
-      }
-      .fold()
-)
-
-GREMLIN
-);
+        // Value should not be a direct groovy code!!!
+        $this->assertVariable($name, self::VARIABLE_WRITE);
+        return new Command('sideEffect{ '.$name.' = '.$value.' }');
     }
 }
 ?>

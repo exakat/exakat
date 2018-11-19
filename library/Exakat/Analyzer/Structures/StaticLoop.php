@@ -27,54 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticLoop extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
-        $nonDeterminist = self::$methods->getNonDeterministFunctions();
-        $nonDeterminist = makeFullnspath($nonDeterminist);
-
-        $whereNonDeterminist = <<<GREMLIN
-not( 
-    where( 
-        __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
-          .hasLabel("Functioncall")
-          .has("fullnspath")
-          .filter{ it.get().value("fullnspath") in ***} 
-          ) 
-    )
-GREMLIN;
-        
-        $checkBlindVariable = <<<GREMLIN
-not( 
-    where( 
-        __.repeat( __.out({$this->linksDown}) )
-          .emit( ).times($MAX_LOOPING)
-          .hasLabel("Variable", "Variableobject", "Variablearray")
-          .filter{ it.get().value("code") in blind} 
-        ) 
-    )
-GREMLIN;
-        
-        $collectVariables = <<<GREMLIN
-where( 
-    __.sideEffect{ blind = []}
-      .out("CONDITION", "INCREMENT", "INIT", "VALUE")
-      .emit( ).repeat( out({$this->linksDown}) ).times($MAX_LOOPING)
-      .hasLabel("Variable", "Variableobject", "Variablearray")
-      .sideEffect{ blind.push(it.get().value("code")); }
-      .fold() 
-)
-GREMLIN;
-        
         // foreach with only one value
         $this->atomIs('Foreach')
-             ->raw($collectVariables)
+             ->collectVariable()
              ->outIs('BLOCK')
 
              // Check that blind variable are not mentionned
-             ->raw($checkBlindVariable)
+             ->checkBlindVariable()
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist, $nonDeterminist)
+             ->whereNonDeterminist()
              ->back('first');
         $this->prepareQuery();
 
@@ -86,15 +48,14 @@ GREMLIN;
         $this->prepareQuery();
 
         $this->atomIs('For')
-             // collect all variables in INCREMENT and INIT (ignore FINAL)
-             ->raw($collectVariables)
+             ->collectVariable()
              
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw($checkBlindVariable)
+             ->checkBlindVariable()
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist, $nonDeterminist)
+             ->whereNonDeterminist()
 
              ->back('first');
         $this->prepareQuery();
@@ -104,14 +65,14 @@ GREMLIN;
         // do...while
         $this->atomIs('Dowhile')
              // collect all variables
-             ->raw($collectVariables)
+             ->collectVariable()
 
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw($checkBlindVariable)
+             ->checkBlindVariable()
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist, $nonDeterminist)
+             ->whereNonDeterminist()
 
              ->back('first');
         $this->prepareQuery();
@@ -122,14 +83,15 @@ GREMLIN;
         $this->atomIs('While')
 
              // collect all variables
-             ->raw($collectVariables)
+             ->collectVariable()
+             //->raw($collectVariables)
 
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw($checkBlindVariable)
+             ->checkBlindVariable()
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist, $nonDeterminist)
+             ->whereNonDeterminist()
              ->back('first');
         $this->prepareQuery();
 
@@ -138,6 +100,45 @@ GREMLIN;
         // TODO : handle the case of compact
         // TODO : handle the case of localproperties used in the conditions : with a method call, they may be also updated
         // TODO : same for references
+    }
+    
+    private function whereNonDeterminist() {
+        $nonDeterminist = self::$methods->getNonDeterministFunctions();
+        $nonDeterminist = makeFullnspath($nonDeterminist);
+
+        $this->not(
+            $this->side()
+                 ->filter(
+                    $this->side()
+                         ->atomInsideNoDefinition('Functioncall')
+                         ->has('fullnspath')
+                         ->fullnspathIs($nonDeterminist)
+                 )
+        );
+        
+        return $this;
+    }
+
+    private function checkBlindVariable() {
+        $this->not(
+            $this->side()
+                 ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
+                 ->samePropertyAsArray('code', 'blind', self::CASE_SENSITIVE)
+        );
+        
+        return $this;
+    }
+    
+    private function collectVariable() {
+        $this->filter(
+            $this->side()
+                 ->initVariable('blind', '[]')
+                 ->outIs(array('CONDITION', 'INCREMENT', 'INIT', 'VALUE'))
+                 ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
+                 ->raw('sideEffect{ blind.push(it.get().value("code")) }.fold()')
+        );
+
+        return $this;
     }
 }
 

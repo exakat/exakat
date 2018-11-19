@@ -906,6 +906,12 @@ GREMLIN;
         return $this;
     }
 
+    public function samePropertyAsArray($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
+        $this->query->samePropertyAsArray($property, $name, $caseSensitive);
+
+        return $this;
+    }
+
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->notSamePropertyAs($property, $name, $caseSensitive);
 
@@ -932,6 +938,12 @@ GREMLIN;
 
     public function savePropertyAs($property, $name) {
         $this->query->savePropertyAs($property, $name);
+
+        return $this;
+    }
+    
+    public function InitVariable($name, $value = '[]') {
+        $this->query->initVariable($name, $value);
 
         return $this;
     }

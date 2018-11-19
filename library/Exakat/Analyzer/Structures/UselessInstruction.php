@@ -32,8 +32,6 @@ class UselessInstruction extends Analyzer {
     }
 
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')

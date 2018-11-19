@@ -54,7 +54,7 @@ class ThemesExtra {
             return $this->extra_themes[$theme] ?? array();
         } else {
             return $this->extra_themes[$theme] ?? array();
-        } 
+        }
     }
 
     public function getThemeForAnalyzer($analyzer) {
@@ -108,7 +108,7 @@ class ThemesExtra {
     }
 
     public function listAllAnalyzer($folder = null) {
-        // This is not providing any new analysers. 
+        // This is not providing any new analysers.
         return array();
     }
 
