@@ -306,12 +306,12 @@ SQL;
 
         $analyzers = $this->themes->getThemeAnalyzers($theme);
         
-        $specials = array('Php/Incompilable', 
+        $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
                           'Composer/UseComposerLock',
                           'Composer/Autoload',
                           );
-        $diff = array_intersect($specials, $classes); 
+        $diff = array_intersect($specials, $classes);
         if (!empty($diff)) {
             foreach($diff as $d) {
                 $this->processResults($d, $counts[$d]);

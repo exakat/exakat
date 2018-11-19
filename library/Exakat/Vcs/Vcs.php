@@ -61,7 +61,7 @@ abstract class Vcs {
             return Rar::class;
         } elseif ($config->sevenz === true) {
             return SevenZ::class;
-        } elseif ($config->git === true) { 
+        } elseif ($config->git === true) {
             return Git::class;
         } else {
             return EmptyCode::class;
