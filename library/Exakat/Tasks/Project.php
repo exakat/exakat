@@ -140,6 +140,7 @@ class Project extends Tasks {
             
             $themesToRun[] = $report->dependsOnAnalysis();
             unset($report);
+            gc_collect_cycles();
         }
 
         $themesToRun = array_merge(...$themesToRun);
@@ -421,6 +422,7 @@ class Project extends Tasks {
                 $dump->finalMark($finalMark);
                 unset($dump);
                 unset($dumpConfig);
+                gc_collect_cycles();
                 $this->logTime("Dumped : $theme");
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
