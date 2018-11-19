@@ -1545,27 +1545,28 @@ JAVASCRIPT;
         $list = makeList($list);
 
         $query = <<<SQL
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY severity
-                    ORDER BY number DESC
+SELECT severity AS label, count(*) AS value
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY severity
+    ORDER BY value DESC
 SQL;
         $result = $this->sqlite->query($query);
 
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $row['severity'],
-                            'value' => $row['number']);
+            $data[] = $row;
         }
 
         $html = array();
         $dataScript = array();
         foreach ($data as $key => $value) {
-            $html []= '<div class="clearfix">
-                   <div class="block-cell">'.$value['label'].'</div>
-                   <div class="block-cell text-center">'.$value['value'].'</div>
-                 </div>';
+            $html []= <<<HTML
+<div class="clearfix">
+    <div class="block-cell">$value[label]</div>
+    <div class="block-cell text-center">$value[value]</div>
+</div>
+HTML;
             $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
         $html = implode('', $html);
