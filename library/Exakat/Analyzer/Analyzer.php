@@ -536,6 +536,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function isNotEmptyArray() {
+        $this->query->isNotEmptyArray();
+        
+        return $this;
+    }
     
     public function atomIs($atom) {
         $this->query->atomIs($atom);
