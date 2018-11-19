@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.5.3';
-    const BUILD = 830;
+    const VERSION = '1.5.4';
+    const BUILD = 831;
 
     private $gremlin = null;
     private $config = null;
@@ -81,7 +81,7 @@ class Exakat {
                     return;
                 }
                 
-                $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
+                $size = file_put_contents("{$config->projects_root}/projects/{$config->project}/dump.zip", $res);
                 if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
                     unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
                 }
@@ -161,11 +161,6 @@ class Exakat {
 
             case 'project' :
                 $task = new Tasks\Project($this->gremlin, $this->config);
-                $task->run();
-                break;
-
-            case 'melis' :
-                $task = new Tasks\Melis($this->gremlin, $this->config);
                 $task->run();
                 break;
 

@@ -1,4 +1,4 @@
-Version 1.5.4 (Mahakasyapa, coming up)
+Version 1.5.5 (Ratnadhvaja, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,28 @@ Version 1.5.4 (Mahakasyapa, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.4 (Mahakasyapa, 2018-11-19)
++ Architecture
+    + Added error message for memory limit 
+    + Added GC to Project action
+    + Migrated Melis to extension
+    + Dumping data is now done en masse
+    + Analysis now handle side-queries
+    + Clear message in case of memory limit
+    + Doctor doesn't stop at missing helpers
+    + VCS leak less errors
+    + Added support for 7z
+    + Extended validation for themas
+    + Restored Tinkergraph driver 
+    + Upgrade logs with extra reports
++ Analyzer
+    + New analyzer : Report problems with class constant visibilities
+    + New analyzer : Avoid self, parent and static in interfaces
+    + Upgraded analyzer : Variable reuse now skips empty arrays
+    + Checked unit tests : 3077 / 3090 test pass (99% pass)
++ Tokenizer
+    + Fixed bug where variable was mistaken for a string inside strings
 
 Version 1.5.3 (Ananda, 2018-11-12)
 + Architecture
