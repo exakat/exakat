@@ -266,15 +266,7 @@ SQL;
         $datastore->close();
         unset($datastore);
 
-        foreach($themes as $id => $thema) {
-            if (isset($counts[$thema])) {
-                display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
-                $this->processResults($thema, $counts[$thema]);
-                unset($themes[$id]);
-            } else {
-                display( $thema.' : No'.PHP_EOL);
-            }
-        }
+        $this->processResultsTheme($thema, $counts);
         $this->expandThemes();
         
         $this->collectHashAnalyzer();
@@ -297,6 +289,137 @@ SQL;
         }
 
         $sqlite->query('REPLACE INTO hash VALUES '.implode(', ', $values));
+    }
+
+    private function processResultsTheme($theme, array $counts = array()) {
+        $classes = $this->themes->getThemeAnalyzers($theme);
+        $classesList = makeList($classes);
+
+        $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
+        
+        $query = array();
+        foreach($classes as $class) {
+            $query[] = "(NULL, '$class', $counts[$class])";
+        }
+
+        $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
+
+        $analyzers = $this->themes->getThemeAnalyzers($theme);
+        
+        $specials = array('Php/Incompilable', 
+                          'Composer/UseComposer',
+                          'Composer/UseComposerLock',
+                          'Composer/Autoload',
+                          );
+        $diff = array_intersect($specials, $classes); 
+        if (!empty($diff)) {
+            foreach($diff as $d) {
+                $this->processResults($d, $counts[$d]);
+            }
+            $classes = array_diff($classes, $diff);
+        }
+
+        $analyzersList = makeList($analyzers);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", within([$analyzersList]))
+.sideEffect{ analyzer = it.get().value("analyzer"); }
+.out("ANALYZED")
+.sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = ""; 
+             theClass=""; 
+             theNamespace=""; 
+             }
+.where( __.until( hasLabel("Project") ).repeat( 
+    __.in($this->linksDown)
+      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Magicmethod", "Method"]) { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
+       )
+)
+.map{ ["fullcode":fullcode, 
+       "file":file, 
+       "line":line, 
+       "namespace":theNamespace, 
+       "class":theClass, 
+       "function":theFunction,
+       "analyzer":analyzer];}
+
+GREMLIN;
+        $res = $this->gremlin->query($query)
+                             ->toArray();
+
+        $saved = 0;
+        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $severities = array();
+        $readCounts = array_fill_keys($classes, 0);
+
+        $query = array();
+        foreach($res as $id => $result) {
+            if (empty($result)) {
+                continue;
+            }
+            
+            if (isset($severities[$result['analyzer']])) {
+                $severity = $severities[$result['analyzer']];
+            } else {
+                $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
+                $severities[$result['analyzer']] = $severity;
+            }
+            
+            ++$readCounts[$result['analyzer']];
+            
+            $query[] = <<<SQL
+(null, 
+ '{$this->sqlite->escapeString($result['fullcode'])}', 
+ '{$this->sqlite->escapeString($result['file'])}', 
+  {$this->sqlite->escapeString($result['line'])}, 
+ '{$this->sqlite->escapeString($result['namespace'])}', 
+ '{$this->sqlite->escapeString($result['class'])}', 
+ '{$this->sqlite->escapeString($result['function'])}',
+ '{$this->sqlite->escapeString($result['analyzer'])}',
+ '$severity'
+)
+SQL;
+            ++$saved;
+
+            // chunk split the save.
+            if ($saved % 100 === 0) {
+                $values = implode(', ', $query);
+                $query = <<<SQL
+REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+             VALUES $values
+SQL;
+                $this->sqlite->query($query);
+                $query = array();
+            }
+        }
+        
+        if (!empty($query)) {
+            $values = implode(', ', $query);
+            $query = <<<SQL
+REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+             VALUES $values
+SQL;
+            $this->sqlite->query($query);
+        }
+
+        $this->log->log("$theme : dumped $saved");
+
+        foreach($classes as $class) {
+            if ($counts[$class] < 0) {
+                continue;
+            }
+
+            if ($counts[$class] === $readCounts[$class]) {
+                display("All $counts[$class] results saved for $class\n");
+            } else {
+                assert($counts[$class] === $readCounts[$class], "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
+                display("$readCounts[$class] results saved, $counts[$class] expected for $class\n");
+            }
+        }
     }
 
     private function processResults($class, $count) {
@@ -323,19 +446,22 @@ SQL;
                 continue;
             }
             
-            $query[] = "(null, 
-                         '".$this->sqlite->escapeString($result['fullcode'])."', 
-                         '".$this->sqlite->escapeString($result['file'])."', 
-                         ". $this->sqlite->escapeString($result['line']).", 
-                         '".$this->sqlite->escapeString($result['namespace'])."', 
-                         '".$this->sqlite->escapeString($result['class'])."', 
-                         '".$this->sqlite->escapeString($result['function'])."',
-                         '".$this->sqlite->escapeString($class)."',
-                         '".$this->sqlite->escapeString($severity)."')";
+            $query[] = <<<SQL
+(null, 
+ '{$this->sqlite->escapeString($result['fullcode'])}', 
+ '{$this->sqlite->escapeString($result['file'])}', 
+  {$this->sqlite->escapeString($result['line'])}, 
+ '{$this->sqlite->escapeString($result['namespace'])}', 
+ '{$this->sqlite->escapeString($result['class'])}', 
+ '{$this->sqlite->escapeString($result['function'])}',
+ '{$this->sqlite->escapeString($class)}',
+ '{$this->sqlite->escapeString($severity)}'
+)
+SQL;
             ++$saved;
 
             // chunk split the save.
-            if ($saved % 100 === 0) {
+            if ($saved % 500 === 0) {
                 $values = implode(', ', $query);
                 $query = <<<SQL
 REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
@@ -363,6 +489,7 @@ SQL;
             assert($count === $saved, "'results were not correctly dumped in $class : $saved/$count");
             display("$saved results saved, $count expected for $class\n");
         }
+
     }
 
     private function getAtomCounts() {
