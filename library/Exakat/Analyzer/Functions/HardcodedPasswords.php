@@ -49,7 +49,7 @@ class HardcodedPasswords extends Analyzer {
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->has('noDelimiter')
-             ->noDelimiterIs($passwordsKeys)
+             ->noDelimiterIs($passwordsKeys, self::CASE_SENSITIVE)
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')
