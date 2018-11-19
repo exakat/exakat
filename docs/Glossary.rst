@@ -11,7 +11,6 @@ Glossary
       + :ref:`Mismatch Type And Default <mismatch-type-and-default>`
       + :ref:`Negative Power <negative-power>`
       + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
-      + :ref:`Unused Traits <unused-traits>`
 
 
 + `A`
@@ -949,6 +948,7 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Should Have Destructor <should-have-destructor>`
 
     + `__call`
 
@@ -983,6 +983,7 @@ Glossary
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Chain Exception <should-chain-exception>`
+      + :ref:`Should Have Destructor <should-have-destructor>`
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
@@ -999,6 +1000,7 @@ Glossary
 
     + `__destruct`
 
+      + :ref:`Should Have Destructor <should-have-destructor>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
 
     + `__get`

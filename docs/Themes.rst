@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 13 Nov 2018 09:35:38 +0000
-.. comment: Generation hash : be47f1699a3af68d1f2aa6f369f39e44e606d5cb
+.. comment: Generation date : Mon, 19 Nov 2018 18:52:14 +0000
+.. comment: Generation hash : 845bf7cf4400c3fdd90b759b77798493c3e51f06
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 361 analysis
+Total : 350 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -200,7 +200,6 @@ Total : 361 analysis
 * :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
 * :ref:`Local Globals <local-globals>`
-* :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Logical To in_array <logical-to-in\_array>`
@@ -374,19 +373,9 @@ Total : 361 analysis
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
-* :ref:`Unused Classes <unused-classes>`
-* :ref:`Unused Constants <unused-constants>`
-* :ref:`Unused Functions <unused-functions>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
-* :ref:`Unused Interfaces <unused-interfaces>`
-* :ref:`Unused Label <unused-label>`
-* :ref:`Unused Methods <unused-methods>`
-* :ref:`Unused Private Methods <unused-private-methods>`
-* :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Returned Value <unused-returned-value>`
-* :ref:`Unused Traits <unused-traits>`
-* :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
@@ -469,8 +458,10 @@ Total : 17 analysis
 ClassReview
 +++++++++++
 
-Total : 16 analysis
+Total : 18 analysis
 
+* :ref:`Avoid Self In Interface <avoid-self-in-interface>`
+* :ref:`Classes/UnreachableConstant`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
 * :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
@@ -956,29 +947,29 @@ Dead code
 Total : 24 analysis
 
 * :ref:`Exception Order <exception-order>`
+* :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Rethrown Exceptions <rethrown-exceptions>`
 * :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
 * :ref:`Unresolved Catch <unresolved-catch>`
+* :ref:`Unused Classes <unused-classes>`
+* :ref:`Unused Constants <unused-constants>`
+* :ref:`Unused Functions <unused-functions>`
+* :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Unused Label <unused-label>`
+* :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Private Methods <unused-private-methods>`
+* :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Protected Methods <unused-protected-methods>`
+* :ref:`Unused Use <unused-use>`
 * Classes/CantExtendFinal
-* Classes/LocallyUnusedProperty
 * Classes/UnresolvedInstanceof
-* Classes/UnusedClass
-* Classes/UnusedMethods
-* Classes/UnusedPrivateMethod
-* Classes/UnusedPrivateProperty
-* Constants/UnusedConstants
 * Exceptions/Unthrown
-* Functions/UnusedFunctions
 * Functions/UnusedInheritedVariable
 * Functions/UnusedReturnedValue
-* Interfaces/UnusedInterfaces
 * Namespaces/EmptyNamespace
-* Namespaces/UnusedUse
 * Structures/EmptyLines
 * Structures/UnreachableCode
 * Structures/UnsetInForeach
-* Structures/UnusedLabel
 
 .. _lintbutwontexec:
 
@@ -1130,7 +1121,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 66 analysis
+Total : 67 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1154,6 +1145,7 @@ Total : 66 analysis
 * :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Reuse Variable <reuse-variable>`
+* :ref:`Should Have Destructor <should-have-destructor>`
 * :ref:`Should Preprocess Chr <should-preprocess-chr>`
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`

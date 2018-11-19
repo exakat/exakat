@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 13 Nov 2018 11:37:40 +0000
-.. comment: Generation hash : f8c1b969fb920a47fef5442b876eea21dd85ba63
+.. comment: Generation date : Mon, 19 Nov 2018 18:52:14 +0000
+.. comment: Generation hash : 845bf7cf4400c3fdd90b759b77798493c3e51f06
 
 
 .. _$http\_raw\_post\_data:
@@ -1776,6 +1776,59 @@ Suggestions
 +-------------+--------------------+
 | Time To Fix | Quick (30 mins)    |
 +-------------+--------------------+
+
+
+
+.. _avoid-self-in-interface:
+
+Avoid Self In Interface
+#######################
+
+
+Self and Parent are tricky when used in an interface. 
+
+``self`` refers to the current interface or its extended parents : as long as the constant is defined in the interface family, this is valid.  On the other hand, when ``self`` refers to the current class, the resolution of names will happen at execution time, leading to confusing results. 
+
+``parent`` has the same behavior than ``self``, except that it doesn't accept to be used inside an interface, as it will yield an error. This is one of those error that lint but won't execute in certain conditions.
+
+``Static`` can't be used in an interface, as it needs to be resolved at call time anyway.
+
+.. code-block:: php
+
+   <?php
+   
+   interface i extends ii {
+       // This 'self' is valid : it refers to the interface i
+       public const I = self::I2 + 2;
+   
+       // This 'self' is also valid, as it refers to interface ii, which is a part of interface i
+       public const I2 = self::IP + 4; 
+   
+       // This makes interface i dependant on the host class
+       public const I3 = parent::A;
+   }
+   
+   ?>
+
+
+See also `Scope Resolution Operator (\:\:) ¶ <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a fully qualified namespace instead of self
+* Use a locally defined constant, so self is a valid reference
+
++-------------+---------------------------------+
+| Short name  | Interfaces/AvoidSelfInInterface |
++-------------+---------------------------------+
+| Themes      | :ref:`ClassReview`              |
++-------------+---------------------------------+
+| Severity    | Critical                        |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
 
 
 
@@ -3741,6 +3794,29 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 +-------------+----------------------------------------+
 | Time To Fix | Quick (30 mins)                        |
 +-------------+----------------------------------------+
+
+
+
+.. _classes/unreachableconstant:
+
+Classes/UnreachableConstant
+###########################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------------------+
+| Short name  | Classes/UnreachableConstant |
++-------------+-----------------------------+
+| Themes      | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -10696,15 +10772,15 @@ While this is syntactically correct, it is unusual that defined resources are us
    
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/LocallyUnusedProperty                |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Slow (1 hour)                                |
-+-------------+----------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Classes/LocallyUnusedProperty |
++-------------+-------------------------------+
+| Themes      | :ref:`Dead code <dead-code>`  |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Slow (1 hour)                 |
++-------------+-------------------------------+
 
 
 
@@ -19018,6 +19094,79 @@ See also `Exception\:\:`'__construct <http://php.net/manual/en/language.oop5.dec
 
 
 
+.. _should-have-destructor:
+
+Should Have Destructor
+######################
+
+
+PHP destructors are called when the object has to be destroyed. By default, PHP calls recursively the destructor on internal objects, until everything is unset.
+
+Unsetting objects and resources explicitely in the destructor is a good practice to reduce the amount of memory in use. It helps PHP resource counter to keep the numbers low, and easier to clean. This is a major advantage for long running scripts.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function '__construct() {
+           $this->p = new y();
+       }
+   
+       function '__destruct() {
+           print '__METHOD__.PHP_EOL;
+           unset($this->p);
+       }
+   }
+   
+   class y {
+       function '__construct() {
+           print '__METHOD__.PHP_EOL;
+           $this->p = new y();
+       }
+   
+       function '__destruct() {
+           print '__METHOD__.PHP_EOL;
+           unset($this->p);
+       }
+   }
+   
+   $a = (new x);
+   sleep(1);
+   
+   // This increment the resource counter by one for the property.
+   $p = $a->p;
+   unset($a);
+   sleep(3);
+   
+   print 'end'.PHP_EOL;
+   // Y destructor is only called here, as the object still exists in $p.
+   
+   ?>
+
+
+See also `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_, and 
+         `Php Destructors <https://stackoverflow.com/questions/3566155/php-destructors>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a destruct method to the class to help clean at destruction time.
+
++-------------+------------------------------+
+| Short name  | Classes/ShouldHaveDestructor |
++-------------+------------------------------+
+| Themes      | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
+
+
+
 .. _should-make-alias:
 
 Should Make Alias
@@ -24123,15 +24272,15 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
    
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/UnusedClass                          |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Major                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Classes/UnusedClass          |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -24159,15 +24308,15 @@ Those constants are defined in the code but never used. Defining unused constant
 
 It is recommended to comment them out, and only define them when it is necessary.
 
-+-------------+----------------------------------------------+
-| Short name  | Constants/UnusedConstants                    |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Instant (5 mins)                             |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Constants/UnusedConstants    |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
 
 
 
@@ -24194,15 +24343,15 @@ Recursive functions, level 1, are detected : they are only reported when a call 
    
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Functions/UnusedFunctions                    |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Functions/UnusedFunctions    |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -24308,15 +24457,15 @@ They should be removed, as they are probably dead code.
    
    ?>
 
-+-------------+------------------------------------------------------------------+
-| Short name  | Interfaces/UnusedInterfaces                                      |
-+-------------+------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
-+-------------+------------------------------------------------------------------+
-| Severity    | Minor                                                            |
-+-------------+------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                 |
-+-------------+------------------------------------------------------------------+
++-------------+--------------------------------------------------+
+| Short name  | Interfaces/UnusedInterfaces                      |
++-------------+--------------------------------------------------+
+| Themes      | :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
++-------------+--------------------------------------------------+
+| Severity    | Minor                                            |
++-------------+--------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                 |
++-------------+--------------------------------------------------+
 
 
 
@@ -24350,15 +24499,15 @@ There is no analysis for undefined goto call, as PHP checks that goto has a dest
 
 See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 
-+-------------+----------------------------------------------+
-| Short name  | Structures/UnusedLabel                       |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/UnusedLabel       |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -24397,15 +24546,15 @@ They are probably dead code, unless they are called dynamically.
    
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/UnusedMethods                        |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Slow (1 hour)                                |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Classes/UnusedMethods        |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
 
 
 
@@ -24440,15 +24589,15 @@ Private methods are reserved for the defining class. Thus, they must be used wit
    
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/UnusedPrivateMethod                  |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Classes/UnusedPrivateMethod  |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -24498,7 +24647,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnusedPrivateProperty                                                                |
 +-------------+----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                 |
+| Themes      | :ref:`Dead code <dead-code>`                                                                 |
 +-------------+----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                        |
 +-------------+----------------------------------------------------------------------------------------------+
@@ -24621,46 +24770,6 @@ Note that this analysis ignores functions that return void (same meaning that PH
 
 
 
-.. _unused-traits:
-
-Unused Traits
-#############
-
-
-Those traits are not used in a class or another trait. They may be dead code.
-
-.. code-block:: php
-
-   <?php
-   
-   // unused trait
-   trait unusedTrait { /'**/ }
-   
-   // used trait
-   trait tUsedInTrait { /'**/ }
-   
-   trait tUsedInClass { 
-       use tUsedInTrait;
-       /'**/ 
-       }
-   
-   class foo {
-       use tUsedInClass;
-   }
-   ?>
-
-+-------------+--------------------+
-| Short name  | Traits/UnusedTrait |
-+-------------+--------------------+
-| Themes      | :ref:`Analyze`     |
-+-------------+--------------------+
-| Severity    | Minor              |
-+-------------+--------------------+
-| Time To Fix | Slow (1 hour)      |
-+-------------+--------------------+
-
-
-
 .. _unused-use:
 
 Unused Use
@@ -24683,7 +24792,7 @@ Unused use statements. They may be removed, as they clutter the code and slows P
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/UnusedUse                                                                        |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
+| Themes      | :ref:`Dead code <dead-code>`                                                                |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+

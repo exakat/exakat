@@ -96,7 +96,6 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * CodeSniffer
   * Slim
   * RadwellCode
-  * Melis
   * Grade
   * Weekly
   * Codacy
@@ -397,6 +396,12 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.5.4
+
+  * Avoid Self In Interface (Interfaces/AvoidSelfInInterface ; ClassReview)
+  * Classes/UnreachableConstant (Classes/UnreachableConstant ; ClassReview)
+  * Should Have Destructor (Classes/ShouldHaveDestructor)
 
 * 1.5.3
 
@@ -1599,7 +1604,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * List Short Syntax (Php/ListShortSyntax ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Internal, CompatibilityPHP53, CompatibilityPHP70)
   * List With Appends (Php/ListWithAppends ; CompatibilityPHP70)
   * List With Keys (Php/ListWithKeys ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Appcontent, CompatibilityPHP53, CompatibilityPHP70)
-  * Locally Unused Property (Classes/LocallyUnusedProperty ; Analyze, Dead code, Codacy, Simple)
+  * Locally Unused Property (Classes/LocallyUnusedProperty ; Dead code, Codacy, Simple)
   * Locally Used Property (Classes/LocallyUsedProperty ; Internal)
   * Logical Mistakes (Structures/LogicalMistakes ; Analyze, Codacy, Simple, Level 1)
   * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 2)
@@ -1839,18 +1844,18 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unset In Foreach (Structures/UnsetInForeach ; Analyze, Dead code, OneFile, Codacy, Simple)
   * Unthrown Exception (Exceptions/Unthrown ; Analyze, Dead code, ClearPHP, Codacy, Simple)
   * Unused Arguments (Functions/UnusedArguments ; Analyze, Codacy, Simple)
-  * Unused Classes (Classes/UnusedClass ; Analyze, Dead code, Codacy, Simple)
-  * Unused Constants (Constants/UnusedConstants ; Analyze, Dead code, Codacy, Simple)
-  * Unused Functions (Functions/UnusedFunctions ; Analyze, Dead code, Codacy, Simple)
+  * Unused Classes (Classes/UnusedClass ; Dead code, Codacy, Simple)
+  * Unused Constants (Constants/UnusedConstants ; Dead code, Codacy, Simple)
+  * Unused Functions (Functions/UnusedFunctions ; Dead code, Codacy, Simple)
   * Unused Global (Structures/UnusedGlobal ; Analyze, Codacy, Simple)
-  * Unused Interfaces (Interfaces/UnusedInterfaces ; Analyze, Dead code, Codacy, Simple, Suggestions, Level 2)
-  * Unused Label (Structures/UnusedLabel ; Analyze, Dead code, Codacy, Simple)
-  * Unused Methods (Classes/UnusedMethods ; Analyze, Dead code, Codacy, Simple)
-  * Unused Private Methods (Classes/UnusedPrivateMethod ; Analyze, Dead code, OneFile, Codacy, Simple)
-  * Unused Private Properties (Classes/UnusedPrivateProperty ; Analyze, Dead code, OneFile, Codacy, Simple)
+  * Unused Interfaces (Interfaces/UnusedInterfaces ; Dead code, Codacy, Simple, Suggestions, Level 2)
+  * Unused Label (Structures/UnusedLabel ; Dead code, Codacy, Simple)
+  * Unused Methods (Classes/UnusedMethods ; Dead code, Codacy, Simple)
+  * Unused Private Methods (Classes/UnusedPrivateMethod ; Dead code, OneFile, Codacy, Simple)
+  * Unused Private Properties (Classes/UnusedPrivateProperty ; Dead code, OneFile, Codacy, Simple)
   * Unused Protected Methods (Classes/UnusedProtectedMethods ; Dead code)
-  * Unused Traits (Traits/UnusedTrait ; Analyze, Codacy, Simple)
-  * Unused Use (Namespaces/UnusedUse ; Analyze, Dead code, ClearPHP, Codacy, Simple)
+  * Unused Traits (Traits/UnusedTrait ; Codacy, Simple)
+  * Unused Use (Namespaces/UnusedUse ; Dead code, ClearPHP, Codacy, Simple)
   * Unusual Case For PHP Functions (Php/UpperCaseFunction ; Coding Conventions)
   * Unverified Nonce (Wordpress/UnverifiedNonce ; Wordpress)
   * Usage Of class_alias() (Classes/ClassAliasUsage ; Appinfo)
@@ -2074,7 +2079,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-45 PHP error message detailled : 
+47 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2087,6 +2092,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Call to undefined function <throw-functioncall>`
 * :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
 * :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
+* :ref:`Cannot access parent\:\: when current class scope has no parent <avoid-self-in-interface>`
 * :ref:`Cannot access static\:\: when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
@@ -2115,6 +2121,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Trait 'T' not found <undefined-trait>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
+* :ref:`Undefined class constant <avoid-self-in-interface>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
 * :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
@@ -2318,6 +2325,7 @@ List of external links mentionned in this documentation.
 * `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
+* `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
 * `Directly calling __clone is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_
@@ -2393,8 +2401,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2482,8 +2490,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2611,6 +2619,7 @@ List of external links mentionned in this documentation.
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
+* `Scope Resolution Operator (::) ¶ <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `Session <http://php.net/manual/en/book.session.php>`_
@@ -2683,8 +2692,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2843,7 +2852,6 @@ Analyze
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
 |   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/InstantiatingAbstractClass";
-|   analyzer[] = "Classes/LocallyUnusedProperty";
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
@@ -2887,10 +2895,6 @@ Analyze
 |   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Classes/UnresolvedClasses";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
-|   analyzer[] = "Classes/UnusedClass";
-|   analyzer[] = "Classes/UnusedMethods";
-|   analyzer[] = "Classes/UnusedPrivateMethod";
-|   analyzer[] = "Classes/UnusedPrivateProperty";
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Classes/UseInstanceof";
 |   analyzer[] = "Classes/UsedOnceProperty";
@@ -2909,7 +2913,6 @@ Analyze
 |   analyzer[] = "Constants/MultipleConstantDefinition";
 |   analyzer[] = "Constants/StrangeName";
 |   analyzer[] = "Constants/UndefinedConstants";
-|   analyzer[] = "Constants/UnusedConstants";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Exceptions/ForgottenThrown";
 |   analyzer[] = "Exceptions/OverwriteException";
@@ -2945,7 +2948,6 @@ Analyze
 |   analyzer[] = "Functions/TypehintedReferences";
 |   analyzer[] = "Functions/UndefinedFunctions";
 |   analyzer[] = "Functions/UnusedArguments";
-|   analyzer[] = "Functions/UnusedFunctions";
 |   analyzer[] = "Functions/UnusedInheritedVariable";
 |   analyzer[] = "Functions/UnusedReturnedValue";
 |   analyzer[] = "Functions/UseConstantAsArguments";
@@ -2961,7 +2963,6 @@ Analyze
 |   analyzer[] = "Interfaces/EmptyInterface";
 |   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Interfaces/UndefinedInterfaces";
-|   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Interfaces/UselessInterfaces";
 |   analyzer[] = "Namespaces/ConstantFullyQualified";
 |   analyzer[] = "Namespaces/CouldUseAlias";
@@ -2971,7 +2972,6 @@ Analyze
 |   analyzer[] = "Namespaces/MultipleAliasDefinitions";
 |   analyzer[] = "Namespaces/ShouldMakeAlias";
 |   analyzer[] = "Namespaces/UnresolvedUse";
-|   analyzer[] = "Namespaces/UnusedUse";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/LogicalToInArray";
@@ -3137,7 +3137,6 @@ Analyze
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UnsetInForeach";
 |   analyzer[] = "Structures/UnusedGlobal";
-|   analyzer[] = "Structures/UnusedLabel";
 |   analyzer[] = "Structures/UseInstanceof";
 |   analyzer[] = "Structures/UsePositiveCondition";
 |   analyzer[] = "Structures/UseSystemTmp";
@@ -3159,7 +3158,6 @@ Analyze
 |   analyzer[] = "Traits/MethodCollisionTraits";
 |   analyzer[] = "Traits/UndefinedInsteadof";
 |   analyzer[] = "Traits/UndefinedTrait";
-|   analyzer[] = "Traits/UnusedTrait";
 |   analyzer[] = "Type/NoRealComparison";
 |   analyzer[] = "Type/OneVariableStrings";
 |   analyzer[] = "Type/ShouldTypecast";
@@ -3233,6 +3231,8 @@ ClassReview
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/RedefinedProperty";
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
+|   analyzer[] = "Classes/UnreachableConstant";
+|   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Structures/CouldBeStatic";| 
 
 
@@ -3947,6 +3947,7 @@ Suggestions
 |   analyzer[] = "Arrays/ShouldPreprocess";
 |   analyzer[] = "Arrays/SliceFirst";
 |   analyzer[] = "Classes/ParentFirst";
+|   analyzer[] = "Classes/ShouldHaveDestructor";
 |   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/TooManyChildren";
 |   analyzer[] = "Classes/UnitializedProperties";

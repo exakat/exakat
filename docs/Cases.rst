@@ -785,53 +785,6 @@ Removing a file : if the file is not 'deleted' by the method call, but raises an
             }
         }
 
-Unused Private Properties
-=========================
-
-.. _openemr-classes-unusedprivateproperty:
-
-OpenEMR
-^^^^^^^
-
-:ref:`unused-private-properties`, in entities/User.php:46. 
-
-This class has a long list of private properties. It also has an equally long (minus one) list of accessors, and a __toString() method which exposes all of them. $oNotes is the only one never mentionned anywhere. 
-
-.. code-block:: php
-
-    class User
-    {
-        /**
-         * @Column(name=id, type=integer)
-         * @GeneratedValue(strategy=AUTO)
-         */
-        private $id;
-    
-        /**
-         * @OneToMany(targetEntity=ONote, mappedBy=user)
-         */
-        private $oNotes;
-
-
---------
-
-
-.. _phpadsnew-classes-unusedprivateproperty:
-
-phpadsnew
-^^^^^^^^^
-
-:ref:`unused-private-properties`, in lib/OA/Admin/UI/component/Form.php:23. 
-
-$dispatcher is never used anywhere. 
-
-.. code-block:: php
-
-    class OA_Admin_UI_Component_Form
-        extends HTML_QuickForm
-    {
-        private $dispatcher;
-
 Dangling Array References
 =========================
 
@@ -3217,6 +3170,53 @@ Since PHP 7.0, dirname( , 2); does the job.
     		$IP = dirname( dirname( __DIR__ ) );
     		$this->setVar( 'IP', $IP );
     	}
+
+Unused Private Properties
+=========================
+
+.. _openemr-classes-unusedprivateproperty:
+
+OpenEMR
+^^^^^^^
+
+:ref:`unused-private-properties`, in entities/User.php:46. 
+
+This class has a long list of private properties. It also has an equally long (minus one) list of accessors, and a __toString() method which exposes all of them. $oNotes is the only one never mentionned anywhere. 
+
+.. code-block:: php
+
+    class User
+    {
+        /**
+         * @Column(name=id, type=integer)
+         * @GeneratedValue(strategy=AUTO)
+         */
+        private $id;
+    
+        /**
+         * @OneToMany(targetEntity=ONote, mappedBy=user)
+         */
+        private $oNotes;
+
+
+--------
+
+
+.. _phpadsnew-classes-unusedprivateproperty:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`unused-private-properties`, in lib/OA/Admin/UI/component/Form.php:23. 
+
+$dispatcher is never used anywhere. 
+
+.. code-block:: php
+
+    class OA_Admin_UI_Component_Form
+        extends HTML_QuickForm
+    {
+        private $dispatcher;
 
 Exception Order
 ===============
