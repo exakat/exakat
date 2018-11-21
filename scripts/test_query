@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /*
- * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -21,16 +21,18 @@
  *
 */
 
+use Exakat\Graph\Helpers\GraphResults;
+use Exakat\Config;
+
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$config = new \Exakat\Config(array());
-
-use \Exakat\Graph\GraphResults;
+$config = new Config(array());
 
 $begin = microtime(true);
-//$graphDB = new \Exakat\Graph\Tinkergraph($config);
-$graphDB = new \Exakat\Graph\Gsneo4j($config);
+$graphDB = new \Exakat\Graph\Tinkergraph($config);
+//$graphDB = new \Exakat\Graph\Gsneo4j($config);
+//$graphDB = new \Exakat\Graph\Bitsy($config);
 
 $end = microtime(true);
 print "Connect : ".number_format(($end - $begin) * 1000, 2)." ms\n";
@@ -49,8 +51,75 @@ g.V().hasLabel('Class').where( __.out('EXTENDS')).as('fille')
     .select('fille').out('EXTENDS').in('DEFINITION').out('METHOD').as('methodparent').out('NAME').filter{ it.get().value('code') == name}
     .select('fille', 'method', 'methodparent').by('fullcode')
 
-// Search for static expression hierarchy with constants
-g.V().hasLabel('Constant').where(__.out("VALUE").not(hasLabel("Integer", "String"))).values('fullcode')
+
+//g.V().not(has('ctype1')).label();
+//g.E().groupCount('m').by(label).cap('m')
+//g.V().hasLabel('Analysis').group('m').by('analyzer').by(out('ANALYZED').count()).cap('m')
+//g.V().values('ctype1')
+
+//g.V().hasLabel('Functioncall').has('fullnspath', within('\\\\fopen')).values('fullcode')
+
+// Nsname => Name pour les classes
+
+/*
+g.V().groupCount('m').by(label).cap('m').next().sort{-it.value}
+g.V().has('ctype1').not(where(hasLabel('Sequence').has('count', 1)))
+                   .has('ctype1_size', gt(20))
+                   .groupCount('m').by('ctype1').cap('m').next().findAll{ a, b -> b > 10}
+g.V().has('ctype1', '\$v=newn;\$vo->n=s;\$vo->n=s;\$vo->n=newn;\$vo->n->n=s;\$vo->n->n=s;\$vo->n->n=newn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;return\$v').in().in().in().values('fullcode')
+*/
+
+g.V().hasLabel("Parameter").out("DEFAULT").groupCount('m').by("fullcode").cap('m').next().sort{-it.value}
+g.V().hasLabel("Member").count();
+g.V().hasLabel("Member").where(__.in("DEFINITION")).count();
+
+g.V().hasLabel("Staticconstant").count();
+g.V().hasLabel("Staticconstant").where(__.in("DEFINITION")).count();
+
+g.V().hasLabel("Methodcall").count();
+g.V().hasLabel("Methodcall").where(__.in("DEFINITION")).count();
+
+//g.V().hasLabel("Staticmethodcall").count();
+//g.V().hasLabel("Staticmethodcall").where(__.in("DEFINITION")).count();
+
+g.V().hasLabel('Parametername').groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
+g.V().hasLabel('Variable').not(where( __.in("DEFINITION").in("NAME"))).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
+
+g.V().hasLabel('Foreach').out("VALUE").coalesce( __.out("VALUE", "INDEX"), __.filter{true;}).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
+g.V().hasLabel('Functioncall').has('fullnspath', '\\\\preg_match_all').out('ARGUMENT').has('rank', 2).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
+g.V().hasLabel('For').out('INIT').groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
+
+g.V().hasLabel("Analysis").has("analyzer", within("Interfaces/IsExtInterface")).out("ANALYZED").label().unique();
+
+g.V().hasLabel("Magicmethod").where( __.out("NAME").has("fullcode", "__construct"))
+.out('BLOCK').out('EXPRESSION')
+.coalesce(
+__.hasLabel('Staticmethodcall').where(__.out('CLASS').not(hasLabel('Parent'))),
+__.not(hasLabel("Assignation", "Void", "Return", "Staticmethodcall"))
+)
+//.count();
+//.label();
+.values('fullcode')
+
+// Collect properties and their usage 
+//g.V().hasLabel("Ppp").out("PPP").where( __.sideEffect{ x = [];}.out('DEFINITION').in().dedup().has('fullcode').sideEffect{ x.add(it.get().value('fullcode'))}.fold())
+//.map{ ['ppp':it.get().value('fullcode'), 'usage':x];}
+ 
+g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
+.groupCount("m").by( __.emit( ).repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).times(15).hasLabel("Functioncall")
+      .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
+      .count()
+      .is(gte(5))
+)
+
+
+g.V().hasLabel("Methodcall").count();
+g.V().hasLabel("Methodcall").where(__.in("DEFINITION")).count();
+
+g.V().hasLabel(within(['Variable', 'Class'])).count()
+
+
+
 
 QUERY;
 //
@@ -65,8 +134,29 @@ $list = array();
 
 if ($res->isType(GraphResults::ARRAY)) {
     foreach($res as $k => $v) {
-//        fputcsv($fp, $v);
         if (is_array($v)) {
+            /*
+            list('b' => $b, 'a' => $a) = $v;
+            if (isset($list[$b][$a])) {
+                ++$list[$b][$a];
+            } else {
+                $list[$b][$a] = 1;
+            }
+            continue;
+            */
+            /*
+            $label = $v['label'];
+            unset($v['id']);
+            if (isset($list[$label]) && $list[$label] != array_keys($v)) {
+                print "Difference for $label\n";
+                print_r(array_keys($v));
+                print_r($list[$label]);
+                die();
+            }
+            $list[$label] = array_keys($v);
+            continue;
+            print_r($list);die();
+            */
             print "$k)\n";
             foreach($v as $a => $b) {
                 print "  $a  =>  ".var_export($b, true)."\n";
@@ -81,4 +171,5 @@ if ($res->isType(GraphResults::ARRAY)) {
 } else {
     print "res => ".$res->toString().PHP_EOL;
 }
+print var_export($list);
 ?>

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -311,6 +311,7 @@ SQL
                 print "No exakatSince in {$file}\n";
                 continue;
             }
+//            * :ref:`No Hardcoded Path <no-hardcoded-path>`
             if (isset($versions[$ini['exakatSince']])) {
                 $versions[$ini['exakatSince']][] = $ini['name'].' ('.$name.' ; '.$row['categories'].')';
             } else {
@@ -321,7 +322,7 @@ SQL
         
         $list = "\n";
         foreach($versions as $version => $analyzers) {
-            $list .= '* '.$version."\n\n";
+            $list .= "* $version\n\n";
             sort($analyzers);
             $list .= '  * '.implode("\n  * ", $analyzers)."\n\n";
         }
@@ -812,7 +813,7 @@ SPHINX;
         $date = date('r');
         $hash = shell_exec('git rev-parse HEAD');
         $rst = preg_replace('/.. comment: Recipes details(.*)$/is',".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->text",$rst);
-        print file_put_contents('docs/Themes.rst',$rst)." octets written for Recipes\n";
+        print file_put_contents('docs/Themes.rst', $rst)." octets written for Recipes\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
         $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);
