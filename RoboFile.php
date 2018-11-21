@@ -1,4 +1,24 @@
 <?php
+/*
+ * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
 
 use Symfony\Component\Finder\Finder;
 use Exakat\Exakat;
@@ -27,7 +47,18 @@ class RoboFile extends \Robo\Tasks {
              ->to("BUILD = $build")
              ->run();
     }
-
+    
+    /**
+     * check that licence is in the PHP source files
+     */
+    public function checkEOL()
+    {
+        $res = shell_exec('find library/ | grep \'\\.php\' | xargs file {} | grep -v \'UTF-8 Unicode text\' | grep -v cannot');
+        if (!empty($res)) {
+            print "Some files has non-linux EOL : $res\n;";
+        }
+    }
+        
     /**
      * check that licence is in the PHP source files
      */
@@ -36,7 +67,8 @@ class RoboFile extends \Robo\Tasks {
         $files = Finder::create()->files()
                                  ->name('*.php')
                                  ->in('library')
-                                 ->in('scripts');
+                                 ->in('scripts')
+                                 ;
         
         $licence2015 = <<<'LICENCE'
 /*
@@ -112,9 +144,33 @@ LICENCE;
 LICENCE;
         $licenceCRC2017 = crc32(trim($licence2017));
 
-        $licence = <<<'LICENCE'
+        $licence2018 = <<<'LICENCE'
 /*
  * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+LICENCE;
+        $licenceCRC2018a = crc32(trim($licence2018));
+
+        $licence = <<<'LICENCE'
+/*
+ * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -157,7 +213,8 @@ LICENCE;
                     fclose($fp);
                 } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015 || 
                           crc32($tokens[$tokenId + 1][1]) === $licenceCRC2016 || 
-                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2017
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2017 || 
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2018a
                           ) {
                     print "Updating licence date in file '". $file. "'\n";
                     $tokens[$tokenId + 1][1] = $licence;
@@ -272,6 +329,9 @@ PHP
 
         print "Check format\n";
         $this->checkFormat();
+
+        print "Check EOL\n";
+        $this->checkEOL();
 
         print "Check analyzers database\n";
         $this->checkAnalyzers();

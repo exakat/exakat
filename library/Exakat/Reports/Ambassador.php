@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -1506,7 +1506,7 @@ JAVASCRIPT;
             $data[] = array('label' => $key, 'value' => (int) $total);
         }
 
-        // ordonnŽ DESC par valeur
+        // ordonnÃ© DESC par valeur
         uasort($data, function ($a, $b) {
             if ($a['value'] > $b['value']) {
                 return -1;
