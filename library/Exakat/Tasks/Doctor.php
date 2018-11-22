@@ -37,7 +37,8 @@ class Doctor extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        $this->config = $config;
+        $this->config  = $config;
+        $this->gremlin = $gremlin;
         // Ignoring everything
     }
 
@@ -193,9 +194,22 @@ class Doctor extends Tasks {
             }
         }
 
-        $stats['folders']['projects/test']    = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
-        $stats['folders']['projects/default'] = file_exists($this->config->projects_root.'/projects/default/') ? 'Yes' : 'No';
-        $stats['folders']['projects/onepage'] = file_exists($this->config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
+        // projects
+        if (!file_exists("{$this->config->projects_root}/projects/test")) {
+            $args = array ( 1 => 'init',
+                            2 => '-p',
+                            3 => 'test2',
+                        );
+            $initConfig = new Config($args);
+
+            $init = new InitProject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
+            $init->run();
+            $a = rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
+        }
+
+        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/") ? 'Yes' : 'No';
+        $stats['folders']['projects/default'] = file_exists("{$this->config->projects_root}/projects/default/") ? 'Yes' : 'No';
+        $stats['folders']['projects/onepage'] = file_exists("{$this->config->projects_root}/projects/onepage/") ? 'Yes' : 'No';
 
         return $stats;
     }
