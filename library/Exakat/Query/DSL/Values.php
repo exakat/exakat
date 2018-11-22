@@ -26,6 +26,8 @@ namespace Exakat\Query\DSL;
 class Values extends DSL {
     public function run() : Command {
         list($property) = func_get_args();
+        
+        assert($this->assertProperty($property));
 
         return new Command("values(\"$property\")");
     }
