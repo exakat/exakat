@@ -40,7 +40,7 @@ class PropertyIs extends DSL {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
+            $caseSensitive = '.toString().toLowerCase()';
         }
 
         if (is_array($code)) {
