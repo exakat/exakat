@@ -2,9 +2,7 @@
 
 use PHPUnit\Framework\TestSuite;
 
-include_once(dirname(__DIR__, 2).'/library/Autoload.php');
-spl_autoload_register('Autoload::autoload_test');
-spl_autoload_register('Autoload::autoload_phpunit');
+include_once './Test/Analyzer.php';
 
 class Framework_Randomtest extends TestSuite {
 
@@ -17,7 +15,7 @@ class Framework_Randomtest extends TestSuite {
         }
         
         shuffle($tests);
-        $tests = array_slice($tests, 0, 20);
+        $tests = array_slice($tests, 0, 10);
         
         print "Testing with ".count($tests)." tests\n";
         $total = 0;

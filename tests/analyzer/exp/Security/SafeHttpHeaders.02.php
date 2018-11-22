@@ -8,7 +8,7 @@ $expected     = array('\'Access-Control-Allow-Origin\' => \'*\'',
                       'HEADER(\'ACCESS-CONTROL-ALLOW-ORIGIN\', \'*\')', 
                       '\'Access-Control-Allow-Origin: *\'', 
                       '\'access-control-allow-origin: *\'', 
-                      '\'access-control-allow-origin: *\'',
+                      '\'ACCESS-CONTROL-ALLOW-ORIGIN: *\'',
                      );
 
 $expected_not = array('header(\'X-Xss-: *\')',

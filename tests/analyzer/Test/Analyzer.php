@@ -7,17 +7,45 @@ use Exakat\Analyzer\Themes;
 use PHPUnit\Framework\TestCase;
 use AutoloadExt;
 
-include_once(dirname(__DIR__, 3).'/library/Autoload.php');
+if (file_exists(__DIR__.'/../config.php')) {
+    include __DIR__.'/../config.php';
+
+    if (!isset($EXAKAT_PATH)) {
+        die('Please, create a config.php file with a $EXAKAT_PATH variable to locate Exakat installation. '.PHP_EOL);
+    }
+    
+    if (!file_exists($EXAKAT_PATH)) {
+        die('Please, create a config.php file with a $EXAKAT_PATH variable to locate an existing Exakat installation. '.PHP_EOL);
+    }
+    
+    if (!file_exists("$EXAKAT_PATH/exakat")) {
+        die('Please, create a config.php file with a $EXAKAT_PATH variable to locate a valid Exakat installation. '.PHP_EOL);
+    }
+    
+    $EXAKAT_PATH = realpath($EXAKAT_PATH);
+} elseif (file_exists(__DIR__.'/../../../library/Exakat/Exakat.php')) {
+    $EXAKAT_PATH = realpath(__DIR__.'/../../../');
+} else {
+    die("Run the tests from tests/analyzer/ or create a config.php file, with $EXAKAT_PATH leading to the root of a valid exakat installation.\n");
+}
+
+include_once "$EXAKAT_PATH/library/Autoload.php";
+spl_autoload_register('Autoload::autoload_test');
+spl_autoload_register('Autoload::autoload_phpunit');
+spl_autoload_register('Autoload::autoload_library');
+
 
 class Analyzer extends TestCase {
     public function generic_test($file) {
+        global $EXAKAT_PATH;
+        
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
         }
         list($analyzer, $number) = explode('.', $file);
                 
         // Test are run with test project.
-        $ini = parse_ini_file('../../projects/test/config.ini');
+        $ini = parse_ini_file("$EXAKAT_PATH/projects/test/config.ini");
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', substr(get_class($this), 5));
         $test_config = str_replace('\\', '/', $test_config);
@@ -28,7 +56,7 @@ class Analyzer extends TestCase {
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
 
-        $themes = new Themes(dirname(__DIR__, 3).'/data/analyzers.sqlite', 
+        $themes = new Themes("$EXAKAT_PATH/data/analyzers.sqlite", 
                              new AutoloadExt('')
                             );
 
@@ -66,9 +94,9 @@ class Analyzer extends TestCase {
         $source = "source/$file.php";
 
         if (is_dir($source)) {
-            $shell = "cd ../..; php exakat test -r -d ./tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d ".dirname(__DIR__, 3)."/tests/analyzer/$source -P $analyzer -p test -q -o -json";
         } else {
-            $shell = "cd ../..; php exakat test    -f ./tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test    -f ".dirname(__DIR__, 3)."/tests/analyzer/$source -P $analyzer -p test -q -o -json";
         }
 
         $shell_res = shell_exec($shell);
@@ -121,6 +149,21 @@ phpunit --filter=$number Test/$analyzer.php
         
         // the remainings
         $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', $list)."");
+    }
+}
+
+
+class AutoloadRemoteTest {
+    public static function autoload($name) {
+        $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
+
+        if (file_exists($file)) {
+            include $file;
+        }
+    }
+
+    public function registerAutoload() {
+        spl_autoload_register(array($this, 'autoload'));
     }
 }
 

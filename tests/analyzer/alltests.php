@@ -2,9 +2,7 @@
 
 use PHPUnit\Framework\TestSuite;
 
-include_once(dirname(__DIR__, 2).'/library/Autoload.php');
-spl_autoload_register('Autoload::autoload_test');
-spl_autoload_register('Autoload::autoload_phpunit');
+include_once './Test/Analyzer.php';
 
 class Framework_AllTests extends TestSuite {
 
