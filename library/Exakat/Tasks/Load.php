@@ -413,7 +413,18 @@ class Load extends Tasks {
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
         );
 
-        $this->calls = new Calls($this->config->projects_root);
+//        $this->callsDatabase = new \Sqlite3("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
+        $this->callsDatabase = new \Sqlite3(':memory:');
+        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+    }
+    
+    function __destruct() {
+        unset($this->callsDatabase);
+        unset($this->loader);
+
+        if (file_exists("{$this->config->projects_root}/projects/.exakat/calls.sqlite")) {
+            unlink("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
+        }
     }
 
     public function runPlugins($atom, $linked = array()) {
@@ -445,9 +456,10 @@ class Load extends Tasks {
         if (!in_array($clientClass, $this->loaderList)) {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
-        display('Loading with '.$clientClass.PHP_EOL);
+
+        display("Loading with $clientClass\n");
         $clientClass = "\\Exakat\\Loader\\$clientClass";
-        $this->loader = new $clientClass($this->gremlin, $this->config, $this->plugins);
+        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
 
         // Cleaning the databases
         $this->datastore->cleanTable('tokenCounts');

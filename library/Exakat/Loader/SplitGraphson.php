@@ -46,26 +46,31 @@ class SplitGraphson {
     private $projectId = null;
     private $id        = 1;
 
-    private $gsneo4j        = null;
+    private $graphdb        = null;
     private $path           = null;
-    private $pathDefinition = null;
     
     private $dictCode = null;
     
     private $datastore = null;
+    private $sqlite3   = null;
    
-    public function __construct($gremlin, $config) {
+    public function __construct($gremlin, $config, \Sqlite3 $sqlite3) {
         self::$count = -1;
         
         $this->config = $config;
         
-        $this->gsneo4j        = $gremlin;
-        $this->path           = "{$this->config->projects_root}/projects/.exakat/gsneo4j.graphson";
-        $this->pathDefinition = "{$this->config->projects_root}/projects/.exakat/gsneo4j.definition.graphson";
+        $this->graphdb        = $gremlin;
+        $this->sqlite3        = $sqlite3;
+        $this->path           = "{$this->config->projects_root}/projects/.exakat/graphdb.graphson";
+        $this->pathDef        = "{$this->config->projects_root}/projects/.exakat/graphdb.def";
         
         $this->dictCode  = new Collector();
         $this->datastore = new Datastore($this->config);
         
+        $this->cleanCsv();
+    }
+    
+    public function __desctruct() {
         $this->cleanCsv();
     }
 
@@ -77,14 +82,12 @@ class SplitGraphson {
 g.V().hasLabel('File').addE('PROJECT').from(g.V($this->projectId));
 
 GREMLIN;
-        $res = $this->gsneo4j->query($query);
+        $res = $this->graphdb->query($query);
         
-        $sqlite3 = new \Sqlite3("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
-
         $outE = array();
-        $res = $sqlite3->query($this->gsneo4j->getDefinitionSQL());
+        $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
        
-        $fp = fopen("{$this->path}.def", 'w+');
+        $fp = fopen($this->pathDef, 'w+');
         $total = 0;
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             ++$total;
@@ -101,13 +104,13 @@ getIt = { id ->
   p.next();
 }
 
-new File('$this->path.def').eachLine {
+new File('$this->pathDef').eachLine {
     (fromVertex, toVertex) = it.split(',').collect(getIt)
     fromVertex.addEdge('DEFINITION', toVertex)
 }
 
 GREMLIN;
-            $res = $this->gsneo4j->query($query);
+            $res = $this->graphdb->query($query);
             display('loaded definitions');
         }
         $end = microtime(true);
@@ -126,12 +129,9 @@ GREMLIN;
         if (file_exists($this->path)) {
             unlink($this->path);
         }
-        if (file_exists($this->path.'.project')) {
-            unlink($this->path.'.project');
-            unlink($this->path.'.def');
-        }
-        if (file_exists($this->pathDefinition)) {
-            unlink($this->pathDefinition);
+
+        if (file_exists($this->pathDef)) {
+            unlink($this->pathDef);
         }
     }
 
@@ -159,7 +159,7 @@ GREMLIN;
                     fwrite($fp, $jsonText);
                     fclose($fp);
                     
-                    $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
+                    $res = $this->graphdb->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
                     $this->projectId = $res[0]['id'];
                     $this->project = $atom;
                 }
@@ -241,7 +241,7 @@ GREMLIN;
             }
         }
         fclose($fp);
-        $this->gsneo4j->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
+        $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 

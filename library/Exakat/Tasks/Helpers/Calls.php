@@ -32,14 +32,10 @@ class Calls {
     private $definitions = array();
     private $calls       = array();
     
-    public function __construct($projects_root) {
+    public function __construct($projects_root, \Sqlite3 $sqlite) {
         $this->projects_root = $projects_root;
 
-        $sqlitePath = "{$this->projects_root}/projects/.exakat/calls.sqlite";
-        if (file_exists($sqlitePath)) {
-            unlink($sqlitePath);
-        }
-        $this->callsSqlite = new \Sqlite3($sqlitePath);
+        $this->callsSqlite = $sqlite;
 
         $calls = <<<SQL
 CREATE TABLE calls (
