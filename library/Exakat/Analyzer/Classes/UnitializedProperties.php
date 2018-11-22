@@ -47,21 +47,22 @@ class UnitializedProperties extends Analyzer {
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))
              ->analyzerIs('Classes/Constructor')
-             ->raw(<<<GREMLIN
-not(
-    where(
-    __.out("BLOCK").repeat( out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
-      .hasLabel("Member")
-      .where( __.out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == property} )
-      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-      )
-)
-GREMLIN
-)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('BLOCK')
+                             ->atomInsideNoDefinition('Member')
+                             ->analyzerIs('Classes/IsModified')
+                             ->outIs('MEMBER')
+                             ->tokenIs('T_STRING')
+                             ->samePropertyAs('code', 'property')
+                     )
+             )
              ->back('results');
         $this->prepareQuery();
 
-        // without constructor
+        // Normal Properties (without constructor)
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->atomIs('Ppp')
@@ -71,7 +72,12 @@ GREMLIN
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
-             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
+             ->not(
+                $this->side()
+                     ->outIs(array('MAGICMETHOD', 'METHOD'))
+                     ->atomIs('Magicmethod')
+                     ->analyzerIs('Classes/Constructor')
+             )
              ->back('results');
         $this->prepareQuery();
 
@@ -89,16 +95,24 @@ GREMLIN
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
-             ->raw('where(
-    __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
-      .hasLabel("Staticproperty")
-      .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == classe} )
-      .where( __.out("MEMBER").filter{ it.get().value("code") == property}  )
-      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") ).count().is(eq(0))
-)')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('BLOCK')
+                             ->atomInsideNoDefinition('Staticproperty')
+                             ->analyzerIs('Classes/IsModified')
+                             ->outIs('CLASS')
+                             ->samePropertyAs('fullnspath', 'classe')
+                             ->inIs('CLASS')
+                             ->outIs('MEMBER')
+                             ->samePropertyAs('code', 'property')
+                     )
+             )
              ->back('results');
         $this->prepareQuery();
 
+        // Static Properties (without constructor)
         $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs('PPP')
@@ -109,7 +123,12 @@ GREMLIN
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
-             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
+             ->not(
+                $this->side()
+                     ->outIs(array('MAGICMETHOD', 'METHOD'))
+                     ->atomIs('Magicmethod')
+                     ->analyzerIs('Classes/Constructor')
+             )
              ->back('results');
         $this->prepareQuery();
     }

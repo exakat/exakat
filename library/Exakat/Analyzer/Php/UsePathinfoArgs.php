@@ -34,14 +34,16 @@ class UsePathinfoArgs extends Analyzer {
              ->noChildWithRank('ARGUMENT', 1)
              ->goToFunction()
              // 2 indices are used at least
-             ->raw(<<<GREMLIN
-where( __.out("BLOCK").emit().repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
-                             .hasLabel("Array").out("INDEX").hasLabel("String")
-                             .has("noDelimiter", within("dirname", "basename", "extension", "filename"))
-                             .dedup().by("noDelimiter").count().is(lt(3))
-      )
-GREMLIN
-)
+             ->filter(
+                $this->side()
+                     ->outIs('BLOCK')
+                     ->atomInsideNoDefinition('Array')
+                     ->outIs('INDEX')
+                     ->atomIs('String')
+                     ->noDelimiterIs(array('dirname', 'basename', 'extension', 'filename'))
+                     ->dedup('noDelimiter')
+                     ->raw('count().is(lt(3))')
+             )
              ->back('first');
         $this->prepareQuery();
 

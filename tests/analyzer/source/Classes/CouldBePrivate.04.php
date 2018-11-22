@@ -23,9 +23,18 @@ class C extends B {
 }
 
 class D {
+    // properties are defined in a parent class
     
     function de() {
         static::$dThis = static::$dNonThis;
+    }
+}
+
+class E {
+    // propertie are not defined
+    
+    function ee() {
+        static::$eThis = static::$eNonThis;
     }
 }
 

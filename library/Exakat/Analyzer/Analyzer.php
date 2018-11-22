@@ -948,6 +948,12 @@ GREMLIN;
         return $this;
     }
 
+    public function dedup($by = '') {
+        $this->query->dedup($by);
+
+        return $this;
+    }
+
     public function saveMethodNameAs($name) {
         $this->query->saveMethodNameAs($name);
         

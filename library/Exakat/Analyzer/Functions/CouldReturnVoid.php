@@ -37,7 +37,16 @@ class CouldReturnVoid extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->hasAtomInside('Return')
-             ->raw('not( where( __.emit( hasLabel("Return")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Return").out("RETURN").not(hasLabel("Void")) ) )')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->atomInsideNoDefinition('Return')
+                             ->outIs('RETURN')
+                             ->atomIsNot('Void')
+                     )
+             )
+//             ->raw('not( where( __.emit( hasLabel("Return")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Return").out("RETURN").not(hasLabel("Void")) ) )')
              ->back('first');
         $this->prepareQuery();
     }

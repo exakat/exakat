@@ -20,28 +20,21 @@
  *
 */
 
-namespace Exakat\Analyzer\Classes;
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Query\DSL;
 
-class UsedOnceProperty extends Analyzer {
-    public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
+use Exakat\Query\Query;
 
-        // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs('Class')
-             ->outIs('PPP')
-             ->isNot('visibility', 'public')
-             ->outIs('PPP')
-             ->_as('results')
-             ->raw(<<<GREMLIN
-where( 
-    __.emit().repeat( __.both("OVERWRITE").not(has("visibility", "private"))).times($MAX_LOOPING).out("DEFINITION").count().is(eq(1))
-)
-GREMLIN
-);
-        $this->prepareQuery();
+class Dedup extends DSL {
+    public function run() {
+        list($by) = func_get_args();
+
+        if (empty($by)) {
+            return new Command("dedup()");
+        }
+
+        assert($this->assertProperty($by));
+        return new Command("dedup().by('$by')");
     }
 }
-
 ?>

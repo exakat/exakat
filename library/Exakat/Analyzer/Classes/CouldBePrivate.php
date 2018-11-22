@@ -33,19 +33,23 @@ class CouldBePrivate extends Analyzer {
     
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
-        $MAX_LOOPING = self::MAX_LOOPING;
 
         // Non-static properties
         // Case of object->property (that's another public access)
-$query = <<<GREMLIN
-g.V().hasLabel("Member")
-     .not( where( __.out("OBJECT").hasLabel("This")) )
-     .out("MEMBER")
-     .hasLabel("Name")
-     .values("code")
-     .unique()
-GREMLIN;
-        $publicProperties = $this->query($query)
+        $this->atomIs('Member')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('OBJECT')
+                             ->atomIs('This')
+                     )
+             )
+             ->outIs('MEMBER')
+             ->atomIs('Name')
+             ->values('code')
+             ->unique();
+        $publicProperties = $this->rawQuery()
                                  ->toArray();
 
         if (!empty($publicProperties)) {
@@ -54,59 +58,71 @@ GREMLIN;
                  ->isNot('static', true)
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
-                 ->isNot('propertyname', $publicProperties)
-                 ;
+                 ->isNot('propertyname', $publicProperties);
             $this->prepareQuery();
         }
 
         // Static properties
         // Case of property::property (that's another public access)
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticproperty")
-     .out("CLASS")
-     .as("classe")
-     .has("fullnspath")
-     .sideEffect{ fns = it.get().value("fullnspath"); }
-     .in("CLASS")
-     .out("MEMBER")
-     .hasLabel("Staticpropertyname")
-     .sideEffect{ name = it.get().value("code"); }
-     .as("property")
-     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Classanonymous", "File") )
-     .or( hasLabel("File"), 
-        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($MAX_LOOPING)
-          .where( __.out("PPP").out("PPP").filter{ it.get().value("code") == name; } )
-          .filter{it.get().value("fullnspath") != fns; }
-        )
-     .select("classe", "property").by("fullnspath").by("code")
-     .unique()
-GREMLIN;
-        $publicStaticProperties = $this->query($query)->toArray();
+        $this->atomIs('Staticproperty')
+             ->hasNoClass()
+             ->outIs('CLASS')
+             ->_as('classe')
+             ->has('fullnspath')
+             ->back('first')
+             ->outIs('MEMBER')
+             ->_as('property')
+             ->raw('select("classe", "property").by("fullnspath").by("code").unique()');
+        $nakedPublicStaticProperties = $this->rawQuery()
+                                            ->toArray();
 
-        if (!empty($publicStaticProperties)) {
-            $calls = array();
-            foreach($publicStaticProperties as $value) {
-                if (isset($calls[$value['property']])) {
-                    $calls[$value['property']][] = $value['classe'];
-                } else {
-                    $calls[$value['property']] = array($value['classe']);
-                }
+        $this->atomIs('Staticproperty')
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
+             ->inIs('PPP')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->outIs('MEMBER')
+             ->_as('property')
+             ->goToClass()
+             ->_as('classe')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->goToAllParentsTraits(self::INCLUDE_SELF)
+                             ->samePropertyAs('fullnspath', 'fnp')
+                     )
+             )
+             ->raw('select("classe", "property").by("fullnspath").by("code").unique()');
+        $insidePublicStaticProperties = $this->rawQuery()
+                                             ->toArray();
+        $publicStaticProperties = array_merge($insidePublicStaticProperties, $nakedPublicStaticProperties);
+
+        // Empty $publicStaticProperties also matters
+        $calls = array();
+        foreach($publicStaticProperties as $value) {
+            if (isset($calls[$value['property']])) {
+                $calls[$value['property']][] = $value['classe'];
+            } else {
+                $calls[$value['property']] = array($value['classe']);
             }
-            
-            // Property that is not used outside this class or its children
-            $this->atomIs('Ppp')
-                 ->isNot('visibility', 'private')
-                 ->is('static', true)
-                 ->outIs('PPP')
-                 ->analyzerIsNot('Classes/PropertyUsedBelow')
-                 ->_as('results')
-                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
-                 ->savePropertyAs('code', 'variable')
-                 ->goToClass()
-                 ->isNotHash('fullnspath', $calls, 'variable')
-                 ->back('results');
-            $this->prepareQuery();
         }
+        
+        // Property that is not used outside this class or its children
+        $this->atomIs('Ppp')
+             ->isNot('visibility', 'private')
+             ->is('static', true)
+             ->outIs('PPP')
+             ->analyzerIsNot('Classes/PropertyUsedBelow')
+             ->_as('results')
+             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
+             ->savePropertyAs('code', 'variable')
+             ->goToClass()
+             ->isNotHash('fullnspath', $calls, 'variable')
+             ->back('results');
+        $this->prepareQuery();
+
     }
 }
 
