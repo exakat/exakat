@@ -38,7 +38,7 @@ class Upgrade extends Tasks {
         );
 
         $context = stream_context_create($options);
-        $html = file_get_contents('http://dist.exakat.io/versions/index.php', true, $context);
+        $html = file_get_contents('https://www.exakat.io/versions/index.php', true, $context);
 
         if (empty($html)) {
             print 'Unable to reach server to fetch the last version. Try again later.' . PHP_EOL;
@@ -64,7 +64,8 @@ class Upgrade extends Tasks {
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
                 $sha256 = strip_tags($r[1]);
                 
-                $phar = (string) @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
+                // Read what we can
+                $phar = (string) @file_get_contents('https://www.exakat.io/versions/index.php?file=latest');
 
                 if (hash('sha256', $phar) !== $sha256) {
                     print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again'.PHP_EOL;
