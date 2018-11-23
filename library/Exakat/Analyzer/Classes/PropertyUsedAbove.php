@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedAbove extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         //////////////////////////////////////////////////////////////////
         // property + $this->property
         //////////////////////////////////////////////////////////////////
@@ -37,16 +35,22 @@ class PropertyUsedAbove extends Analyzer {
              ->_as('ppp')
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
-             ->raw(<<<GREMLIN
-where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-         .where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
-                   .repeat( __.out($this->linksDown)).emit(hasLabel("Member")).times($MAX_LOOPING)
-                   .out("OBJECT").hasLabel("This").in("OBJECT")
-                   .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == propertyname}
-         )
-)
-GREMLIN
-)
+             ->filter(
+                $this->side()
+                     ->goToAllParents(self::EXCLUDE_SELF)
+                     ->filter(
+                       $this->side()
+                            ->outIs(array('METHOD', 'MAGICMETHOD'))
+                            ->outIs('BLOCK')
+                            ->atomInsideNoDefinition('Member')
+                            ->outIs('OBJECT')
+                            ->atomIs('This')
+                            ->inIs('OBJECT')
+                            ->outIs('MEMBER')
+                            ->tokenIs('T_STRING')
+                            ->samePropertyAs('code', 'propertyname', self::CASE_SENSITIVE)
+                      )
+             )
              ->back('ppp');
         $this->prepareQuery();
 
@@ -59,15 +63,19 @@ GREMLIN
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->raw(<<<GREMLIN
-where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-         .where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
-                   .repeat( __.out({$this->linksDown})).emit(hasLabel("Staticproperty")).times($MAX_LOOPING)
-                   .out("MEMBER").has("token", "T_VARIABLE").filter{ it.get().value("code") == property}
-         )
-)
-GREMLIN
-)
+             ->filter(
+                $this->side()
+                     ->goToAllParents(self::EXCLUDE_SELF)
+                     ->filter(
+                       $this->side()
+                            ->outIs(array('METHOD', 'MAGICMETHOD'))
+                            ->outIs('BLOCK')
+                            ->atomInsideNoDefinition('Staticproperty')
+                            ->outIs('MEMBER')
+                            ->tokenIs('T_VARIABLE')
+                            ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
+                      )
+             )
              ->back('ppp');
         $this->prepareQuery();
         
