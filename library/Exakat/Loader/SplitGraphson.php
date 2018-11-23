@@ -87,13 +87,17 @@ GREMLIN;
         $outE = array();
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
        
-        $fp = fopen($this->pathDef, 'w+');
         $total = 0;
+        // Fast dump, with a write to memory first
+        $f = fopen('php://memory', 'r+');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            ++$total;
-            fputcsv($fp, $row);
+            fputcsv($f, $row);
         }
+        rewind($f);
+        $fp = fopen($this->pathDef, 'w+');
+        fputs($fp, stream_get_contents($f));
         fclose($fp);
+        fclose($f);
         
         if (empty($total)) {
             display('no definitions');
@@ -111,7 +115,7 @@ new File('$this->pathDef').eachLine {
 
 GREMLIN;
             $res = $this->graphdb->query($query);
-            display('loaded definitions');
+            display("loaded $total definitions");
         }
         $end = microtime(true);
 
@@ -246,10 +250,6 @@ GREMLIN;
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 
         unlink($this->path);
-    }
-
-    public function saveDefinitions($exakatDir, $calls) {
-        //unused
     }
 
     public function json_encode($object) {

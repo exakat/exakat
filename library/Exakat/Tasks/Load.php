@@ -5369,12 +5369,7 @@ class Load extends Tasks {
 
     private function saveFiles() {
         $this->loader->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
-        $this->saveDefinitions();
         $this->reset();
-    }
-
-    private function saveDefinitions() {
-        $this->loader->saveDefinitions($this->exakatDir, array());
     }
 
     private function startSequence() {
