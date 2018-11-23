@@ -3,6 +3,7 @@
 $expected     = array('[\'password\' => "secret"]',
                       '[\'passwd\' => "secret"]',
                       '[\'user\' => 1, \'pass\' => "secret"]',
+                      '[\'user\' => 1, PASSWORD => "secret"]',
                      );
 
 $expected_not = array('[\'user\' => 1, PASSWORD => "secret"]',
