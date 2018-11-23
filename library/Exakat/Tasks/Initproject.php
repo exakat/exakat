@@ -40,7 +40,7 @@ class Initproject extends Tasks {
         $project = new Project($this->config->project);
 
         if ($project == 'default') {
-            throw new ProjectNeeded($project->getError());
+            throw new ProjectNeeded();
         }
         
         if ($project == 'test') {

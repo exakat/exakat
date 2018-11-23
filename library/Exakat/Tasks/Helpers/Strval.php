@@ -59,7 +59,6 @@ class Strval extends Plugin {
 
             case 'Real' :
             case 'String' :
-            case 'Heredoc' :
                 $atom->noDelimiter = (string) trimOnce($atom->code);
                 break;
 

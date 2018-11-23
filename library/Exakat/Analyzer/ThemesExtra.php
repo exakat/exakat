@@ -77,22 +77,6 @@ class ThemesExtra {
         }
         
         return $return;
-
-
-        if ($list === null) {
-            return array_flip_arrays($this->extra_themes);
-        } elseif (is_string($list)) {
-            return $this->getThemeForAnalyzer($list);
-        } elseif (is_array($list)) {
-            $flipped = array_flip_arrays($this->extra_themes);
-            $return = array();
-            foreach($list as $l) {
-                $return[$l] = $flipped ?? array();
-            }
-            return $return;
-        } else {
-            return array();
-        }
     }
 
     public function getSeverities() {

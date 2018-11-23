@@ -1986,7 +1986,7 @@ SQL;
     }
     
     protected function generateIssuesEngine($filename, $issues) {
-        $baseHTML = $this->getBasedPage($filename, $issues);
+        $baseHTML = $this->getBasedPage($filename);
 
         $total = count($issues);
         $issues = implode(', '.PHP_EOL, $issues);
@@ -2876,11 +2876,7 @@ SQL
             foreach($list as &$l) {
                 sort($l);
             }
-    
-            
-            if (empty($list)) {
-                $list = array(array());
-            }
+
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
             
@@ -2939,9 +2935,6 @@ SQL
                 sort($l);
             }
             
-            if (empty($list)) {
-                $list = array(array());
-            }
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
             
@@ -2996,9 +2989,6 @@ SQL
                 sort($l);
             }
             
-            if (empty($list)) {
-                $list = array(array());
-            }
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
             

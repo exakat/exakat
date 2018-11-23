@@ -59,7 +59,7 @@ class Analyze extends Tasks {
         }
 
         if ($project == 'default') {
-            throw new ProjectNeeded($project);
+            throw new ProjectNeeded();
         }
 
         if (!file_exists("{$this->config->projects_root}/projects/$project")) {

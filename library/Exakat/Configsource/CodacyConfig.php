@@ -24,7 +24,7 @@ namespace Exakat\Configsource;
 
 class CodacyConfig extends Config {
     public function __construct($projects_root) {
-        $this->projects_root = $projects_root.'/projects/';
+        $this->projects_root = "{$projects_root}/projects/";
     }
 
     public function loadConfig($project) {

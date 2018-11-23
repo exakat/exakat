@@ -101,7 +101,7 @@ class Config {
         $this->commandLineConfig = new CommandLine();
         $this->commandLineConfig->loadConfig($argv);
 
-        $this->envConfig = new EnvConfig($this->projects_root);
+        $this->envConfig = new EnvConfig();
         if ($file = $this->envConfig->loadConfig(null)) {
             $this->configFiles[] = $file;
         }

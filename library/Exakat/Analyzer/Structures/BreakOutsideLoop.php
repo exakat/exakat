@@ -29,13 +29,13 @@ class BreakOutsideLoop extends Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        $loops = array('Dowhile', 'For', 'Foreach', 'While', 'Switch');
+        $breakable = array('Dowhile', 'For', 'Foreach', 'While', 'Switch');
 
         // break (null)
         $this->atomIs('Break')
              ->outIs('BREAK')
              ->atomIs('Void')
-             ->hasNoInstruction($loops)
+             ->hasNoInstruction($breakable)
              ->back('first');
         $this->prepareQuery();
 
@@ -44,7 +44,7 @@ class BreakOutsideLoop extends Analyzer {
              ->outIs('BREAK')
              ->atomIs('Integer')
              ->savePropertyAs('intval', 'counter')
-             ->hasNoCountedInstruction($loops, 'counter') // really count temps
+             ->hasNoCountedInstruction($breakable, 'counter') // really count temps
              ->back('first');
         $this->prepareQuery();
 
@@ -52,7 +52,7 @@ class BreakOutsideLoop extends Analyzer {
         $this->atomIs('Continue')
              ->outIs('CONTINUE')
              ->atomIs('Void')
-             ->hasNoInstruction($loops)
+             ->hasNoInstruction($breakable)
              ->back('first');
         $this->prepareQuery();
 
@@ -61,7 +61,7 @@ class BreakOutsideLoop extends Analyzer {
              ->outIs('CONTINUE')
              ->atomIs('Integer')
              ->savePropertyAs('intval', 'counter')
-             ->hasNoCountedInstruction($loops, 'counter') // really count temps
+             ->hasNoCountedInstruction($breakable, 'counter') // really count temps
              ->back('first');
         $this->prepareQuery();
     }
