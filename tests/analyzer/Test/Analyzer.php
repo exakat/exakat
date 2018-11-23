@@ -38,6 +38,7 @@ spl_autoload_register('Autoload::autoload_library');
 class Analyzer extends TestCase {
     public function generic_test($file) {
         global $EXAKAT_PATH;
+        $TEST_PATH = '.';
         
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
@@ -52,7 +53,7 @@ class Analyzer extends TestCase {
 
         // initialize Config (needed by phpexec)
         $pwd = getcwd();
-        chdir('../../');
+        chdir($EXAKAT_PATH);
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
 
@@ -71,7 +72,7 @@ class Analyzer extends TestCase {
         require("exp/$file.php");
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
-        $res = shell_exec("{$config->$versionPHP} -l ./source/$file.php 2>/dev/null");
+        $res = shell_exec("{$config->$versionPHP} -l $TEST_PATH/source/$file.php 2>/dev/null");
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
@@ -94,9 +95,9 @@ class Analyzer extends TestCase {
         $source = "source/$file.php";
 
         if (is_dir($source)) {
-            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d ".dirname(__DIR__, 3)."/tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d $TEST_PATH/tests/analyzer/$source -P $analyzer -p test -q -o -json";
         } else {
-            $shell = "cd $EXAKAT_PATH/; php exakat test    -f ".dirname(__DIR__, 3)."/tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test    -f $TEST_PATH/tests/analyzer/$source -P $analyzer -p test -q -o -json";
         }
 
         $shell_res = shell_exec($shell);
