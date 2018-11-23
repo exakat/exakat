@@ -36,7 +36,15 @@ class DontEchoError extends Analyzer {
         $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
              ->atomIs('Functioncall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('NAME')
+                             ->atomIs(array('Array', 'Variable', 'Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
+                     )
+             )
+//             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
