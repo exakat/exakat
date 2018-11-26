@@ -43,8 +43,9 @@ not(
           ) 
     )
 GREMLIN
-, array(makeArray($atom), $name);
-        return new Command($gremlin);
+;
+
+        return new Command($gremlin, array(makeArray($atom), $name));
     }
 }
 ?>
