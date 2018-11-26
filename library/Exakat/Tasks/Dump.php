@@ -224,34 +224,6 @@ SQL;
             $this->log->log( 'Collected Definitions stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
         }
 
-        $themes = array();
-        if (!empty($this->config->thema)) {
-            $thema = $this->config->thema;
-            $themes = $this->themes->getThemeAnalyzers($thema);
-            if (empty($themes)) {
-                $r = $this->themes->getSuggestionThema($thema);
-                if (!empty($r)) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
-                throw new NoSuchThema($thema);
-            }
-            display("Processing thema : $thema");
-        } elseif (!empty($this->config->program)) {
-            $analyzer = $this->config->program;
-            if(is_array($analyzer)) {
-                $themes = $analyzer;
-            } else {
-                $themes = array($analyzer);
-            }
-
-            foreach($themes as $theme) {
-                if (!$this->themes->getClass($theme)) {
-                    throw new NoSuchAnalyzer($theme, $this->themes);
-                }
-            }
-            display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
-        }
-
         $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
 
         $counts = array();
@@ -266,18 +238,55 @@ SQL;
         $datastore->close();
         unset($datastore);
 
-        $this->processResultsTheme($thema, $counts);
-        $this->expandThemes();
-        
-        $this->collectHashAnalyzer();
+        if (!empty($this->config->thema)) {
+            $thema = $this->config->thema;
+            $themes = $this->themes->getThemeAnalyzers($thema);
+            if (empty($themes)) {
+                $r = $this->themes->getSuggestionThema($thema);
+                if (!empty($r)) {
+                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
+                }
+                throw new NoSuchThema($thema);
+            }
+            display("Processing thema : $thema");
+            $this->processResultsTheme($thema, $counts);
+            $this->expandThemes();
+            $this->collectHashAnalyzer();
+
+        } elseif (!empty($this->config->program)) {
+            $analyzer = $this->config->program;
+            if(is_array($analyzer)) {
+                $themes = $analyzer;
+            } else {
+                $themes = array($analyzer);
+            }
+
+            foreach($themes as $theme) {
+                if (!$this->themes->getClass($theme)) {
+                    throw new NoSuchAnalyzer($theme, $this->themes);
+                }
+            }
+            display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
+
+            if (isset($counts[$analyzer])) {
+                $this->processResults($analyzer, $counts[$analyzer]);
+                $this->collectHashAnalyzer();
+            } else {
+                display("$analyzer is not run yet.");
+            }
+        }
 
         $this->log->log('Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
+
         if (empty($themes) && !empty($this->config->thema)) {
             $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
         }
 
+        $b = microtime(true);
         $this->finish();
+        $e = microtime(true);
+        print number_format(1000 * ($e - $b), 2)."ms for finish\n";
     }
     
     public function finalMark($finalMark) {
@@ -513,12 +522,13 @@ SQL;
         $this->sqlite->query($query);
         
         display(count($atomsCount)." atoms\n");
-
     }
 
     private function finish() {
         $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', 1)');
 
+        /*
+        // This is way too slow and costly, just for stats.
         // Redo each time so we update the final counts
         $totalNodes = $this->gremlin->query('g.V().count()')->toString();
         $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$totalNodes.')');
@@ -528,7 +538,7 @@ SQL;
 
         $totalProperties = $this->gremlin->query('g.V().properties().count()')->toString();
         $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$totalProperties.')');
-
+        */
         rename($this->sqliteFile, $this->sqliteFileFinal);
 
         $this->removeSnitch();
@@ -578,7 +588,7 @@ SQL;
     }
 
     private function collectTablesData($tables) {
-        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
+        $datastorePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
         $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
@@ -949,7 +959,7 @@ SQL
 
         
         $query = <<<GREMLIN
-g.V().hasLabel("Method").as('method')
+g.V().hasLabel("Method", "Magicmethod").as('method')
      .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value('fullnspath'); }
      .select('method')
 .where( __.sideEffect{ lines = [];}
@@ -1008,32 +1018,36 @@ GREMLIN;
 
         // Properties
         $this->sqlite->query('DROP TABLE IF EXISTS properties');
-        $this->sqlite->query('CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                property INTEGER,
-                                                citId INTEGER,
-                                                visibility STRING,
-                                                static INTEGER,
-                                                value TEXT
-                                                 )');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           property INTEGER,
+                           citId INTEGER,
+                           visibility STRING,
+                           static INTEGER,
+                           value TEXT
+                           )
+SQL
+);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Interface", "Trait")
-     .sideEffect{classe = it.get().value('fullnspath'); }
-     .out('PPP') // Out of the CIT
+g.V().hasLabel("Propertydefinition").as("property")
+     .in("PPP")
 .sideEffect{ 
     x_static = it.get().properties("static").any();
-    x_public = it.get().value("visibility") == 'public';
-    x_protected = it.get().value("visibility") == 'protected';
-    x_private = it.get().value("visibility") == 'private';
-    x_var = it.get().value("token") == 'T_VAR';
+    x_public = it.get().value("visibility") == "public";
+    x_protected = it.get().value("visibility") == "protected";
+    x_private = it.get().value("visibility") == "private";
+    x_var = it.get().value("token") == "T_VAR";
 }
-.out('PPP') // out to the details
+     .in("PPP").hasLabel("Class", "Interface", "Trait")
+     .sideEffect{classe = it.get().value("fullnspath"); }
+     .select("property")
 .map{ 
-    name = it.get().value("code");
+    name = it.get().value("fullcode");
     if (it.get().vertices(OUT, "DEFAULT").any()) { 
         v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 
-        v = ''; 
+        v = ""; 
     }
 
     x = ["class":classe,
@@ -1068,6 +1082,7 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
+
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
                         ", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."', ".(int) $row['static'].")";
 
