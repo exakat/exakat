@@ -59,11 +59,6 @@ class Files extends Tasks {
 
         display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
-        $tokens = $this->countTokens($path, $files, $ignoredFiles);
-
-        if (empty($files)) {
-            throw new NoFileToProcess($this->config->project);
-        }
         display("Found the files.\n");
 
         $tmpFileName = "{$this->config->projects_root}/projects/.exakat/files".getmypid().'.txt';
@@ -90,14 +85,14 @@ class Files extends Tasks {
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
         unset($versions[$id]);
-        $versions[] = $analyzingVersion;
 
+        $toRemoveFromFiles = array();
         foreach($versions as $version) {
             if (empty($this->config->{"php$version"})) {
                 // This version is not defined
                 continue;
             }
-            $toRemoveFromFiles = array();
+
             display("Check compilation for $version");
             $stats['notCompilable'.$version] = -1;
             
