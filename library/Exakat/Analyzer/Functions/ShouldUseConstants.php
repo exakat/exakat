@@ -44,9 +44,14 @@ class ShouldUseConstants extends Analyzer {
                                  'Void',
                                  );
 
-        $positions = array(0, 1, 2, 3, /*4, 5,*/ 6);
+        $positions = range(0, 6);
         foreach($positions as $position) {
+            if(empty($functions["functions{$position}"])) { 
+                continue;
+            }
+
             $fullnspath = makeFullNsPath($functions["functions{$position}"]);
+            
             $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)

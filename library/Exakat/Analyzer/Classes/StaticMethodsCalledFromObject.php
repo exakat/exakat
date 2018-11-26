@@ -27,33 +27,32 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticMethodsCalledFromObject extends Analyzer {
     public function analyze() {
-        $query = <<<GREMLIN
-g.V().hasLabel("Method", "Magicmethod")
-     .where( __.in("METHOD", "MAGICMETHOD").hasLabel("Class", "Trait") )
-     .has("static", true )
-     .not(has("abstract", true ))
-     .out("NAME")
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $staticMethods = $this->query($query)->toArray();
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->hasClassTrait()
+             ->is('static', true)
+             ->isNot('abstract', true)
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $staticMethods = $this->rawQuery()
+                              ->toArray();
+        
         if (empty($staticMethods)) {
             return;
         }
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Method", "Magicmethod")
-     .where( __.in("METHOD", "MAGICMETHOD").hasLabel("Class", "Trait") )
-     .not(has("static", true ))
-     .not(has("abstract", true ))
-     .out("NAME")
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $normalMethods = $this->query($query)->toArray();
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->hasClassTrait()
+             ->isNot('static', true)
+             ->isNot('abstract', true)
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $normalMethods = $this->rawQuery()
+                              ->toArray();
         
         $methods = array_diff($staticMethods, $normalMethods);
-        if (empty($staticMethods)) {
+        if (empty($methods)) {
             return;
         }
 
