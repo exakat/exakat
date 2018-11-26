@@ -91,6 +91,7 @@ GREMLIN;
         // Fast dump, with a write to memory first
         $f = fopen('php://memory', 'r+');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            ++$total;
             fputcsv($f, $row);
         }
         rewind($f);
