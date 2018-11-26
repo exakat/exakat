@@ -283,10 +283,7 @@ SQL;
             $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
         }
 
-        $b = microtime(true);
         $this->finish();
-        $e = microtime(true);
-        print number_format(1000 * ($e - $b), 2)."ms for finish\n";
     }
     
     public function finalMark($finalMark) {
