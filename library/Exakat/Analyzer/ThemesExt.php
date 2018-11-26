@@ -148,27 +148,8 @@ SQL;
         return $return;
     }
     
-    public function guessAnalyzer($name) {
-        die(__METHOD__);
-        $query = <<<'SQL'
-SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;
-
-SQL;
-        $stmt = self::$sqlite->prepare($query);
-
-        $stmt->bindValue(':name', $name, \SQLITE3_TEXT);
-        $res = $stmt->execute();
-
-        $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = str_replace('\\\\', '\\', $row['name']);
-        }
-        
-        return $return;
-    }
-
     public function listAllAnalyzer($folder = null) {
-        return array();
+        return array_merge(...array_values($this->all));
     }
 
     public function listAllThemes() {
@@ -197,7 +178,7 @@ SQL;
         } elseif (strpos($name, '/') !== false) {
             $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
-            $found = $this->guessAnalyzer($name);
+            $found = $this->getSuggestionClass($name);
 
             if (empty($found)) {
                 return false; // no class found
