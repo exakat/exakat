@@ -26,7 +26,7 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.5.4';
+    const VERSION = '1.5.5';
     const BUILD = 831;
 
     private $gremlin = null;
@@ -251,6 +251,11 @@ class Exakat {
 
             case 'proxy' :
                 $task = new Tasks\Proxy($this->gremlin, $this->config);
+                $task->run();
+                break;
+
+            case 'extension' :
+                $task = new Tasks\Extension($this->gremlin, $this->config);
                 $task->run();
                 break;
 

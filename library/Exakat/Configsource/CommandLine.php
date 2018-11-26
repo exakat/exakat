@@ -118,17 +118,15 @@ class CommandLine extends Config {
                               'fetch'         => 1,
                               'proxy'         => 1,
                               'config'        => 1,
+                              'extension'     => 1,
                               );
-
-    public function __construct() {
-        
-    }
 
     public function loadConfig($args = array()) {
         if (empty($args)) {
             return false;
         }
 
+        // TODO : move this to VCS 
         $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', );
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
@@ -200,6 +198,18 @@ class CommandLine extends Config {
         $command = array_shift($args);
         if (isset($command, $this->commands[$command])) {
             $this->config['command'] = $command;
+        }
+        
+        if ($this->config['command'] === 'extension') {
+            $subcommand = array_shift($args);
+            if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local'))) {
+                $subcommand = 'local';
+            }
+            $this->config['subcommand'] = $subcommand;
+            
+            if (in_array($subcommand, array('install', 'uninstall'))) {
+                $this->config['extension'] = array_shift($args);
+            }
         }
 
         if (!empty($args)) {

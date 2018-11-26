@@ -60,6 +60,10 @@ class AutoloadExt {
     private $pharList = array();
     
     public function __construct($path) {
+        if (!extension_loaded('phar')) {
+            // Ignoring it all
+            return;
+        }
         $list = glob("$path/*.phar");
         
         foreach($list as $phar) {
