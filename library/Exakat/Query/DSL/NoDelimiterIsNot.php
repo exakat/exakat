@@ -31,7 +31,7 @@ class NoDelimiterIsNot extends DSL {
 
         $return = new Command('has("noDelimiter")');
         $propertyIsNot = $this->dslfactory->factory('propertyIsNot');
-        
+
         return $return->add($propertyIsNot->run('noDelimiter', $code, $caseSensitive));
     }
 }
