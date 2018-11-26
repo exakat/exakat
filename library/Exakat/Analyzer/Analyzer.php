@@ -871,14 +871,14 @@ GREMLIN;
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() === 2, 'Wrong number of arguments for '.__METHOD__);
+        assert(func_num_args() <= 2, 'Wrong number of arguments for '.__METHOD__);
         $this->query->noDelimiterIs($code, $caseSensitive);
         
         return $this;
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() === 2, 'Wrong number of arguments for '.__METHOD__);
+        assert(func_num_args() <= 2, 'Wrong number of arguments for '.__METHOD__);
         $this->query->noDelimiterIsNot($code, $caseSensitive);
         
         return $this;
