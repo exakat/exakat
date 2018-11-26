@@ -46,7 +46,7 @@ class ShouldUseConstants extends Analyzer {
 
         $positions = range(0, 6);
         foreach($positions as $position) {
-            if(empty($functions["functions{$position}"])) { 
+            if(empty($functions["functions{$position}"])) {
                 continue;
             }
 

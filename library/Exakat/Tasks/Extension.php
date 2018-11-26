@@ -31,7 +31,7 @@ class Extension extends Tasks {
     //install, list, local, uninstall, upgrade
     public function run() {
         switch($this->config->subcommand) {
-            case 'install' : 
+            case 'install' :
                 if (file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
                     print "This extension already exists in the ext folder. Remove it manually, or with 'uninstall' command.\n";
                     return;
@@ -79,7 +79,7 @@ class Extension extends Tasks {
                 print "{$this->config->extension} installed with success!\n";
                 break 1;
 
-            case 'uninstall' : 
+            case 'uninstall' :
                 if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
                     print "No such extension to remove.\n";
                     return;
@@ -92,7 +92,7 @@ class Extension extends Tasks {
 
                 break 1;
 
-            case 'list' : 
+            case 'list' :
                 $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
                 if (empty($json)) {
                     print "Coudln't reach the remote server.\n";
@@ -109,8 +109,8 @@ class Extension extends Tasks {
                 print '+ '.implode(PHP_EOL, $names).PHP_EOL;
                 break 1;
 
-            case 'local' : 
-            default : 
+            case 'local' :
+            default :
                 $list = $this->config->ext->getJarList();
                 sort($list);
 

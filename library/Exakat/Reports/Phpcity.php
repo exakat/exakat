@@ -60,21 +60,21 @@ SQL;
         $res = $this->sqlite->query($query);
         /*
 {
-	"file": "\/Users\/famille\/Desktop\/analyzeG3\/projects\/phpmyadmin\/code\/test\/classes\/DatabaseInterfaceTest.php",
-	"namespace": "PhpMyAdmin\\Tests",
-	"name": "DatabaseInterfaceTest",
-	"extends": "PmaTestCase",
-	"implements": null,
-	"no_lines": 498,
-	"no_attrs": 1,
-	"no_methods": 17,
-	"abstract": false,
-	"final": false,
-	"trait": false,
-	"type": "class",
-	"anonymous": false
+    "file": "\/Users\/famille\/Desktop\/analyzeG3\/projects\/phpmyadmin\/code\/test\/classes\/DatabaseInterfaceTest.php",
+    "namespace": "PhpMyAdmin\\Tests",
+    "name": "DatabaseInterfaceTest",
+    "extends": "PmaTestCase",
+    "implements": null,
+    "no_lines": 498,
+    "no_attrs": 1,
+    "no_methods": 17,
+    "abstract": false,
+    "final": false,
+    "trait": false,
+    "type": "class",
+    "anonymous": false
 }
-*/        
+*/
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['implements'] = null;
