@@ -470,9 +470,7 @@ class Load extends Tasks {
             if (!is_file($filename)) {
                 throw new MustBeAFile($filename);
             }
-            if ($this->processFile($filename, '')) {
-                $this->saveFiles();
-            }
+            $this->processFile($filename, '');
             $files = 1;
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -513,12 +511,10 @@ class Load extends Tasks {
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($file, $path)) {
-                    $nbTokens += $r;
-                    $this->saveFiles();
-                }
+                $r = $this->processFile($file, $path);
+                $nbTokens += $r;
             } catch (NoFileToProcess $e) {
-                // ignoring empty files
+                $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
 
@@ -616,7 +612,6 @@ class Load extends Tasks {
         $tokens = $this->php->getTokenFromFile($fullpath);
         $log['token_initial'] = count($tokens);
 
-        print "$filename ".count($tokens)."\n";
         if (count($tokens) < 3) {
             throw new NoFileToProcess($filename, 'Only '.count($tokens).' tokens');
         }
