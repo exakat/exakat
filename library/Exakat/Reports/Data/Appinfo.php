@@ -58,6 +58,7 @@ class Appinfo extends Data {
                             'Environnement Variables'       => 'Php/UsesEnv',
 
                             'Non Breakable Spaces In Names' => 'Structures/NonBreakableSpaceInNames',
+                            'Relaxed keyword as names'      => 'Php/Php7RelaxedKeyword',
                             'strict_types'                  => 'Php/DeclareStrictType',
                             'encoding'                      => 'Php/DeclareEncoding',
                             'ticks'                         => 'Php/DeclareTicks',
