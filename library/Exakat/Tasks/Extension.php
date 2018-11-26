@@ -110,6 +110,7 @@ class Extension extends Tasks {
                 break 1;
 
             case 'local' : 
+            default : 
                 $list = $this->config->ext->getJarList();
                 sort($list);
 
@@ -121,9 +122,6 @@ class Extension extends Tasks {
                 
                 print 'Total : '.count($list).' extensions'.PHP_EOL;
                 break 1;
-            
-            default : 
-                return;
         }
     }
 }
