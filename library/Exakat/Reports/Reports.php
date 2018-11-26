@@ -45,7 +45,7 @@ abstract class Reports {
                                           'ZendFramework',  'CodeSniffer', 'Slim',
                                           'RadwellCode', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
-                                          'Codeflower', 'Dependencywheel',
+                                          'Codeflower', 'Dependencywheel', 'Phpcity',
                                           //'DailyTodo',
                                           );
 
