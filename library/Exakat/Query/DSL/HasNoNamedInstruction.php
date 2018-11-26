@@ -34,10 +34,17 @@ class HasNoNamedInstruction extends DSL {
             return $this->hasNoInstruction($atom);
         }
 
-        assert($this->assertLink($token));
-        return new Command('not( where( 
-__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel(within(***)).has("code", ***)
-  ) )', array(makeArray($atom), $name));
+        $gremlin = <<<GREMLIN
+not( 
+    where( 
+        __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File"))
+          .hasLabel(within(***))
+          .has("code", ***)
+          ) 
+    )
+GREMLIN
+, array(makeArray($atom), $name);
+        return new Command($gremlin);
     }
 }
 ?>
