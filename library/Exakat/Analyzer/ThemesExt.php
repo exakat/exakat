@@ -149,7 +149,11 @@ SQL;
     }
     
     public function listAllAnalyzer($folder = null) {
-        return array_merge(...array_values($this->all));
+        $return = array_merge(...array_values($this->all));
+        if ($folder === null) {
+            return $return;
+        }
+        return preg_grep("#$folder/#", $return);
     }
 
     public function listAllThemes() {
