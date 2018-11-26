@@ -71,7 +71,7 @@ class PropertyUsedAbove extends Analyzer {
                             ->outIs(array('METHOD', 'MAGICMETHOD'))
                             ->outIs('BLOCK')
                             ->atomInsideNoDefinition('Staticproperty')
-                            ->outIs('MEMBER')
+                            ->outIs('MEMBER') // Can't test on fnp, it is family, not exact match
                             ->tokenIs('T_VARIABLE')
                             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
                       )

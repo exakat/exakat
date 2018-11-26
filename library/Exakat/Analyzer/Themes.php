@@ -83,16 +83,12 @@ class Themes {
         return array_merge($main);
     }
     
-    public function guessAnalyzer($name) {
-        $main = $this->main->guessAnalyzer($name);
-        
-        return array_merge($main);
-    }
-
     public function listAllAnalyzer($folder = null) {
         $main = $this->main->listAllAnalyzer($folder);
+        $extra = $this->extra->listAllAnalyzer($folder);
+        $ext = $this->ext->listAllAnalyzer($folder);
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public function listAllThemes($theme = null) {

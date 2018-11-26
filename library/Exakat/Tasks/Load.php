@@ -470,9 +470,7 @@ class Load extends Tasks {
             if (!is_file($filename)) {
                 throw new MustBeAFile($filename);
             }
-            if ($this->processFile($filename, '')) {
-                $this->saveFiles();
-            }
+            $this->processFile($filename, '');
             $files = 1;
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -513,12 +511,10 @@ class Load extends Tasks {
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($file, $path)) {
-                    $nbTokens += $r;
-                    $this->saveFiles();
-                }
+                $r = $this->processFile($file, $path);
+                $nbTokens += $r;
             } catch (NoFileToProcess $e) {
-                // ignoring empty files
+                $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
 
@@ -544,12 +540,10 @@ class Load extends Tasks {
         $nbTokens = 0;
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($file, $dir)) {
-                    $nbTokens += $r;
-                    $this->saveFiles();
-                }
+                $r = $this->processFile($file, $dir);
+                $nbTokens += $r;
             } catch (NoFileToProcess $e) {
-                // Ignoring
+                $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
 
@@ -593,7 +587,6 @@ class Load extends Tasks {
         $begin = microtime(true);
         $fullpath = $path.$filename;
         
-        $this->log->log($fullpath);
         $this->filename = $filename;
 
         ++$this->stats['files'];
@@ -605,7 +598,7 @@ class Load extends Tasks {
             return true;
         }
         if (!file_exists($fullpath)) {
-            throw new NoSuchFile($filename);
+            throw new NoFileToProcess($filename, 'unreachable file');
         }
 
         if (filesize($fullpath) === 0) {
@@ -619,8 +612,8 @@ class Load extends Tasks {
         $tokens = $this->php->getTokenFromFile($fullpath);
         $log['token_initial'] = count($tokens);
 
-        if (count($tokens) === 0) {
-            throw new NoFileToProcess($filename, 'empty');
+        if (count($tokens) < 3) {
+            throw new NoFileToProcess($filename, 'Only '.count($tokens).' tokens');
         }
 
         $line = 0;
@@ -708,9 +701,18 @@ class Load extends Tasks {
         }
 
         $end = microtime(true);
-        $this->log->log("processFile\t".(($end - $begin) * 1000)."\t".$log['token_initial'].PHP_EOL);
+        $load = (($end - $begin) * 1000);
         
-        return true;
+        $atoms = count($this->atoms);
+        $links = count($this->links);
+        $begin = microtime(true);
+        $this->saveFiles();
+        $end = microtime(true);
+        $save = (($end - $begin) * 1000);
+        
+        $this->log->log("$filename\t$load\t$save\t$log[token_initial]\t$atoms\t$links");
+        
+        return $log['token_initial'];
     }
 
     private function processNext() {

@@ -33,8 +33,6 @@ class CouldBeClassConstant extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         $this->atomIs('Ppp')
              ->hasClass()
 
@@ -58,30 +56,46 @@ class CouldBeClassConstant extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
 
                 // usage as property with $this
-             ->raw(<<<GREMLIN
-not( __.out("METHOD")
-       .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Member")
-                            .where( __.out("OBJECT").hasLabel("This") )
-                            .where( __.out("MEMBER").filter{ it.get().value("code") == name } )
-                            .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-         )
-)
-GREMLIN
-)
+              ->not(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->filter(
+                        $this->side()
+                             ->atomInsideNoDefinition('Member')
+                             ->filter(
+                                $this->side()
+                                     ->outIs('OBJECT')
+                                     ->atomIs('This')
+                             )
+                             ->filter(
+                                $this->side()
+                                     ->outIs('MEMBER')
+                                     ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+                             )
+                             ->analyzerIs('Classes/IsModified')
+                     )
+              )
 
                 // usage as static property with (namespace, self or static)
-             ->raw(<<<GREMLIN
-not( 
-    __.out("METHOD")
-      .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Staticproperty")
-                .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == fnp } )
-                .where( __.out("MEMBER").filter{ it.get().value("code") == staticName } )
-                .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-        ) 
-    )
-GREMLIN
-)
-
+                ->not(
+                    $this->side()
+                         ->outIs('METHOD')
+                         ->filter(
+                            $this->side()
+                                 ->atomInsideNoDefinition('Staticproperty')
+                                 ->filter(
+                                    $this->side()
+                                         ->outIs('CLASS')
+                                         ->fullnspathIs('fnp')
+                                 )
+                                 ->filter(
+                                    $this->side()
+                                         ->outIs('MEMBER')
+                                         ->samePropertyAs('code', 'staticName', self::CASE_SENSITIVE)
+                                 )
+                                 ->analyzerIs('Classes/IsModified')
+                         )
+                )
              ->back('first');
              
              // Exclude situations where property is used as an object or a resource (can't be class constant)

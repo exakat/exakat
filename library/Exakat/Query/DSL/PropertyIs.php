@@ -43,7 +43,10 @@ class PropertyIs extends DSL {
             $caseSensitive = '.toString().toLowerCase()';
         }
 
-        if (is_array($code)) {
+        // code is a variable. We don't know if it is an array
+        if (!empty(array_intersect($code, $this->availableVariables))) {
+            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == '.$code[0].'}', array());
+        } elseif (is_array($code)) {
             return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', array(makeArray($code)));
         } else {
             return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', array(makeArray($code)));

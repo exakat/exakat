@@ -34,13 +34,13 @@ class NoSuchAnalyzer extends \RuntimeException {
         } else {
             $r = $themes->getSuggestionClass($analyzer);
             if (empty($r)) {
+                $die .= "Couldn't find a suggestion. Check the documentation http://exakat.readthedocs.io/\n";
+            } else {
                 $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
                 if (count($r) > 5) {
-                    $die .= " (More available)";
+                    $die .= " (".(count($r) - 5)." more possible)";
                 }
                 $die .= "\n";
-            } else {
-                $die .= "Couldn't find a suggestion. Check the documentation http://exakat.readthedocs.io/\n";
             }
         }
 

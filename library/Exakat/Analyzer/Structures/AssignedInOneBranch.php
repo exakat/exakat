@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class AssignedInOneBranch extends Analyzer {
     public function analyze() {
         $equal = $this->dictCode->translate(array('='));
-        
-        $MAX_LOOPING = self::MAX_LOOPING;
 
         // if() {$b = 1; } else { }
         $this->atomIs('Ifthen')

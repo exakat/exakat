@@ -470,6 +470,13 @@ SQLITE;
         $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
+    
+    public function ignoreFile($file, $reason = 'unknown') {
+        print "Ignoring file : $file\n";
+        
+        $this->sqliteWrite->query('DELETE FROM files WHERE file = "'.$this->sqliteWrite->escapeString($file).'"');
+        $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, "'.$this->sqliteWrite->escapeString($file).'", "'.$reason.'")');
+    }
 }
 
 ?>

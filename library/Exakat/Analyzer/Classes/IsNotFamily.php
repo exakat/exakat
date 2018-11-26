@@ -39,15 +39,15 @@ class IsNotFamily extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
              ->atomIs('Class')
-             ->notSamePropertyAs('fullnspath', 'fnp')
-             ->raw(<<<GREMLIN
-not( 
-    where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times($MAX_LOOPING)
-                             .filter{ it.get().value("fullnspath") == fnp }
-                        ) 
-)
-GREMLIN
-)
+
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->goToAllParents(self::INCLUDE_SELF)
+                             ->fullnspathIs('fnp')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
