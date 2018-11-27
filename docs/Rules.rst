@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 19 Nov 2018 18:52:14 +0000
-.. comment: Generation hash : 845bf7cf4400c3fdd90b759b77798493c3e51f06
+.. comment: Generation date : Tue, 27 Nov 2018 11:08:27 +0000
+.. comment: Generation hash : 22aba7b919dba3965413b6025e6b11e7856b0d7f
 
 
 .. _$http\_raw\_post\_data:
@@ -3797,29 +3797,6 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 
 
 
-.. _classes/unreachableconstant:
-
-Classes/UnreachableConstant
-###########################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+-----------------------------+
-| Short name  | Classes/UnreachableConstant |
-+-------------+-----------------------------+
-| Themes      | :ref:`ClassReview`          |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
-
-
-
 .. _close-tags:
 
 Close Tags
@@ -6155,6 +6132,61 @@ Suggestions
 +-------------+--------------------------+
 | Time To Fix | Quick (30 mins)          |
 +-------------+--------------------------+
+
+
+
+.. _directly-use-file:
+
+Directly Use File
+#################
+
+
+Some PHP functions have a close cousin that work directly on files : use them. This is faster and less code to write.
+
+* `'md5() <http://www.php.net/md5>`_ => `'md5_file() <http://www.php.net/md5_file>`_
+* `'highlight_string() <http://www.php.net/highlight_string>`_ => `'highlight_file() <http://www.php.net/highlight_file>`_, `'show_source() <http://www.php.net/show_source>`_
+* parsekit_compile_string() => parsekit_compile_file()
+* `'parse_ini_string() <http://www.php.net/parse_ini_string>`_ => `'parse_ini_file() <http://www.php.net/parse_ini_file>`_
+* `'sha1() <http://www.php.net/sha1>`_ => `'sha1_file() <http://www.php.net/sha1_file>`_
+* simplexml_load_string() => simplexml_load_file()
+* yaml_parse() => yaml_parse_file()
+* hash() => hash_file()
+* hash_hmac() => hash_mac_file()
+* hash_update() => hash_update_file()
+* recode() => recode_file()
+* recode_string() => recode_file()
+
+
+.. code-block:: php
+
+   <?php
+   
+   // Good way
+   $file_hash = hash_file('sha512', 'example.txt');
+   
+   // Slow way
+   $file_hash = hash('sha512', file_get_contents('example.txt'));
+   
+   ?>
+
+
+See also `hash_file <http://php.net/manual/en/function.hash-file.php>`_. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the _file() version of those functions
+
++-------------+----------------------------+
+| Short name  | Structures/DirectlyUseFile |
++-------------+----------------------------+
+| Themes      | :ref:`Suggestions`         |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Instant (5 mins)           |
++-------------+----------------------------+
 
 
 
@@ -9038,7 +9070,7 @@ Hash Will Use Objects
 #####################
 
 
-The `ext/hash <http://www.php.net/manual/en/book.hash.php>`_ extension used resources, and is being upgraded to use resources. 
+The `ext/hash extension <http://www.php.net/manual/en/book.hash.php>`_ used resources, and is being upgraded to use resources. 
 
 .. code-block:: php
 
@@ -10241,10 +10273,10 @@ All other situations is not a valid, and produces a warning : ``pack(): Type t: 
 .. code-block:: php
 
    <?php
-   $binarydata = pack(nvc*, 0x1234, 0x5678, 65, 66);
-   
-   // the first unsigned short is stored as 'first'. The next matches are names with numbers.
-   $res = unpack('nfirst/vc*', $binarydata);
+       $binarydata = pack(nvc*, 0x1234, 0x5678, 65, 66);
+       
+       // the first unsigned short is stored as 'first'. The next matches are names with numbers.
+       $res = unpack('nfirst/vc*', $binarydata);
    ?>
 
 
@@ -10252,6 +10284,12 @@ Check `'pack() <http://www.php.net/pack>`_ documentation for format specifiers t
 
 See also `pack <http://php.net/pack>`_ and 
          `unpack <http://php.net/pack>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the packing format with correct values
 
 +-------------+------------------------------+
 | Short name  | Structures/InvalidPackFormat |
@@ -15250,12 +15288,25 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
 .. code-block:: php
 
    <?php
+       // Explicit code
+       $b = (boolean) $x; 
+       $b = (bool) $x; 
+   
        // Wrong type casting
        $b = !!$x; 
    
-       // Explicit code
-       $b = (boolean) $x; 
    ?>
+
+
+See also `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_ and 
+         `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use (bool) casting operator for that
+* Don't typecast, and let PHP handle it. This works in situations where the boolean is immediately used.
 
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/NotNot                                                                             |
@@ -15267,6 +15318,8 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
 | Time To Fix | Instant (5 mins)                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`cleverstyle-structures-notnot`, :ref:`tine20-structures-notnot`                         |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -18524,6 +18577,45 @@ See also `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <h
 +-------------+----------------------+
 | Time To Fix | Quick (30 mins)      |
 +-------------+----------------------+
+
+
+
+.. _safe-http-headers:
+
+Safe HTTP Headers
+#################
+
+
+Avoid configuring HTTP headers with lax restriction from within PHP. 
+
+There are a lot of HTTP headers those days, targeting various vulnerabilities. To ensure backward compatibility, those headers have a default mode that is lax and permissive. It is recommended to avoid using those from within the code.
+
+.. code-block:: php
+
+   <?php
+   
+   //Good configuration, limiting access to origin
+   header('Access-Control-Allow-Origin: https://www.exakat.io');
+   
+   //Configuration is present, but doesn't restrict anything : any external site is a potential source
+   header('Access-Control-Allow-Origin: *');
+   
+   ?>
+
+
+See also `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http-security-headers>`_,
+        `How To Secure Your Web App With HTTP Headers <https://www.smashingmagazine.com/2017/04/secure-web-app-http-headers/>`_ and 
+         `SecurityHeaders <https://securityheaders.com/>`_.
+
++-------------+--------------------------+
+| Short name  | Security/SafeHttpHeaders |
++-------------+--------------------------+
+| Themes      | :ref:`Security`          |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -22160,15 +22252,32 @@ When a class is constructed with more than four dependencies, it should be split
 
 See also `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_.
 
-+-------------+---------------------------+
-| Short name  | Classes/TooManyInjections |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
-+-------------+---------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Split the class into smaller classes. Try to do less in that class.
+
++-----------------+---------+---------+-----------------------------------------------------------+
+| Name            | Default | Type    | Description                                               |
++-----------------+---------+---------+-----------------------------------------------------------+
+| injectionsCount | 5       | integer | Threshold for too many injected parameters for one class. |
++-----------------+---------+---------+-----------------------------------------------------------+
+
+
+
++-------------+-------------------------------------------------------------------------------------+
+| Short name  | Classes/TooManyInjections                                                           |
++-------------+-------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                      |
++-------------+-------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                       |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`nextcloud-classes-toomanyinjections`, :ref:`thelia-classes-toomanyinjections` |
++-------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -23825,6 +23934,57 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Examples    | :ref:`zurmo-structures-unpreprocessed`, :ref:`piwigo-structures-unpreprocessed`                   |
 +-------------+---------------------------------------------------------------------------------------------------+
+
+
+
+.. _unreachable-class-constant:
+
+Unreachable Class Constant
+##########################
+
+
+Class constants may be unreachable due to visibility configuration. 
+
+Since PHP 7.1, class constants support visibility. Their usage may be restricted to the current class, or ``private``, to classes that extends or are extended by the current class, or ``protected``. They may also be ``public``, just like it was before. 
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo{
+       private const PRIVATE = 1;
+               const PUBLIC = 3;
+   }
+   
+   // PHP 7.1- and older
+   echo Foo::PUBLIC;
+   
+   // This is not accessible
+   echo Foo::PRIVATE;
+   
+   ?>
+
+
+See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_ and 
+         `PHP RFC: Support Class Constant Visibility <https://wiki.php.net/rfc/class_const_visibility>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the class constant protected, when the call to the constant is inside a related class.
+* Create another constant, that may be accessible
+* Make the class constant public
+
++-------------+-----------------------------+
+| Short name  | Classes/UnreachableConstant |
++-------------+-----------------------------+
+| Themes      | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Severity    | Major                       |
++-------------+-----------------------------+
+| Time To Fix | Slow (1 hour)               |
++-------------+-----------------------------+
 
 
 
@@ -27783,6 +27943,51 @@ It is recommended to check the signature of the methods, and fix the arguments.
 
 
 
+.. _wrong-number-of-arguments-in-methods:
+
+Wrong Number Of Arguments In Methods
+####################################
+
+
+Those methods are called with a wrong number of arguments : too many or too few. Check the signature.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       private function Bar($a, $b) {
+           return $a + $b;
+       }
+   }
+   
+   $foo = new Foo();
+   // Too Few
+   $foo->Bar(1);
+   
+   // Good amount
+   $foo->Bar(1, 2);
+   
+   // Too Many
+   $foo->Bar(1, 2, 3);
+   
+   ?>
+
+
+Methods with a variable number of argument, either using ellipsis or `'func_get_args() <http://www.php.net/func_get_args>`_ are ignored.
+
++-------------+-----------------------------------------+
+| Short name  | Functions/WrongNumberOfArgumentsMethods |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Major                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+
+
+
 .. _wrong-optional-parameter:
 
 Wrong Optional Parameter
@@ -28936,6 +29141,64 @@ See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
 +-------------+----------------------------+
 | Time To Fix | Slow (1 hour)              |
 +-------------+----------------------------+
+
+
+
+.. _fputcsv()-in-loops:
+
+fputcsv() In Loops
+##################
+
+
+`'fputcsv() <http://www.php.net/fputcsv>`_ is slow when called on each row. It actually flushes the data to the disk each time, and that results in a inefficient dump to the disk, each call.
+
+To speed up this process, it is recommended to dump the csv to memory first, then dump the memory to the disk, in larger chunks. Since `'fputcsv() <http://www.php.net/fputcsv>`_ works only on stream, it is necessary to use a memory stream.
+
+.. code-block:: php
+
+   <?php
+   
+   // Speedy yet memory intensive version
+   $f = fopen('php://memory', 'w+');
+   foreach($data_source as $row) {
+       // You may configure fputcsv as usual
+       fputcsv($f, $row);
+   }
+   rewind($f); // Important
+   $fp = fopen('final.csv', 'w+');
+   fputs($fp, stream_get_contents($f));
+   fclose($fp);
+   fclose($f);
+   
+   // Slower version
+   $fp = fopen('final.csv', 'w+');
+   foreach($data_source as $row) {
+       // You may configure fputcsv as usual
+       fputcsv($fp, $row);
+   }
+   fclose($fp);
+   ?>
+
+
+The speed improvement is significant on small rows, while it may be less significant on largers rows : with more data in the rows, the file buffer may fill up more efficiently. On small rows, the speed gain is up to 7 times. 
+
+See also ` `
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-------------------------+
+| Short name  | Performances/CsvInLoops |
++-------------+-------------------------+
+| Themes      | :ref:`Performances`     |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
 
 
 

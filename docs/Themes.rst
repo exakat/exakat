@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 19 Nov 2018 18:52:14 +0000
-.. comment: Generation hash : 845bf7cf4400c3fdd90b759b77798493c3e51f06
+.. comment: Generation date : Tue, 27 Nov 2018 11:08:27 +0000
+.. comment: Generation hash : 22aba7b919dba3965413b6025e6b11e7856b0d7f
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 350 analysis
+Total : 351 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -413,6 +413,7 @@ Total : 350 analysis
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
+* :ref:`Wrong Number Of Arguments In Methods <wrong-number-of-arguments-in-methods>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`Wrong Range Check <wrong-range-check>`
@@ -461,7 +462,6 @@ ClassReview
 Total : 18 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
-* :ref:`Classes/UnreachableConstant`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
 * :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
@@ -473,6 +473,7 @@ Total : 18 analysis
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Redefined Property <redefined-property>`
+* :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * Classes/CouldBeAbstractClass
 * Classes/CouldBeFinal
 * Classes/PropertyCouldBeLocal
@@ -998,7 +999,7 @@ Total : 14 analysis
 Performances
 ++++++++++++
 
-Total : 36 analysis
+Total : 37 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -1027,6 +1028,7 @@ Total : 36 analysis
 * :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
 * :ref:`Use The Blind Var <use-the-blind-var>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
+* :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
 * :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 * Classes/UseClassOperator
 * Performances/ArrayMergeInLoops
@@ -1042,7 +1044,7 @@ Total : 36 analysis
 Security
 ++++++++
 
-Total : 38 analysis
+Total : 39 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1060,6 +1062,7 @@ Total : 38 analysis
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe Curl Options <safe-curl-options>`
+* :ref:`Safe HTTP Headers <safe-http-headers>`
 * :ref:`Session Lazy Write <session-lazy-write>`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
@@ -1121,7 +1124,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 67 analysis
+Total : 68 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1135,6 +1138,7 @@ Total : 67 analysis
 * :ref:`Could Use Try <could-use-try>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
+* :ref:`Directly Use File <directly-use-file>`
 * :ref:`Don't Loop On Yield <don't-loop-on-yield>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`

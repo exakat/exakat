@@ -107,6 +107,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Simpletable
   * Codeflower
   * Dependencywheel
+  * Phpcity
 
 
 Supported PHP Extensions
@@ -322,7 +323,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
-* Shopware
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
@@ -397,16 +397,22 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.5
+
+  * Directly Use File (Structures/DirectlyUseFile ; Suggestions)
+  * Safe HTTP Headers (Security/SafeHttpHeaders ; Security)
+  * fputcsv() In Loops (Performances/CsvInLoops)
+
 * 1.5.4
 
   * Avoid Self In Interface (Interfaces/AvoidSelfInInterface ; ClassReview)
-  * Classes/UnreachableConstant (Classes/UnreachableConstant ; ClassReview)
   * Should Have Destructor (Classes/ShouldHaveDestructor)
+  * Unreachable Class Constant (Classes/UnreachableConstant ; ClassReview)
 
 * 1.5.3
 
   * Don't Loop On Yield (Structures/DontLoopOnYield)
-  * Variable May Be Non-Global (Structures/VariableMayBeNonGlobal ; Unassigned)
+  * Variable May Be Non-Global (Structures/VariableMayBeNonGlobal ; Internal)
 
 * 1.5.2
 
@@ -1916,7 +1922,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Codacy, Simple)
   * Wrong Class Location (ZendF/NotInThatPath ; ZendFramework)
   * Wrong Number Of Arguments (Functions/WrongNumberOfArguments ; Analyze, OneFile, Codacy, Simple)
-  * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; OneFile)
+  * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; Analyze, OneFile, Simple)
   * Wrong Optional Parameter (Functions/WrongOptionalParameter ; Analyze, Codacy, Simple, Level 1)
   * Wrong Parameter Type (Php/InternalParameterType ; Analyze, OneFile, Codacy, Simple)
   * Wrong fopen() Mode (Php/FopenMode ; Analyze, Codacy)
@@ -1927,7 +1933,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * __debugInfo() Usage (Php/debugInfoUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * __halt_compiler (Php/Haltcompiler ; Appinfo)
   * __toString() Throws Exception (Structures/toStringThrowsException ; Analyze, OneFile, Codacy, Simple)
-  * charger_fonction() (Spip/chargerFonction ; )
   * crypt() Without Salt (Structures/CryptWithoutSalt ; CompatibilityPHP54, Codacy)
   * error_reporting() With Integers (Structures/ErrorReportingWithInteger ; Analyze, Codacy, Simple)
   * eval() Without Try (Structures/EvalWithoutTry ; Analyze, Security, Codacy, Simple, Level 3)
@@ -2079,7 +2084,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-47 PHP error message detailled : 
+48 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2093,6 +2098,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
 * :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
 * :ref:`Cannot access parent\:\: when current class scope has no parent <avoid-self-in-interface>`
+* :ref:`Cannot access private const  <unreachable-class-constant>`
 * :ref:`Cannot access static\:\: when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
@@ -2365,22 +2371,22 @@ List of external links mentionned in this documentation.
 * `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
-* `ext/gender <http://php.net/manual/en/book.gender.php>`_
-* `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
-* `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
-* `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
-* `ext/leveldb <https://github.com/reeze/php-leveldb>`_
-* `ext/lua <http://php.net/manual/en/book.lua.php>`_
-* `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
+* `ext/gender manual <http://php.net/manual/en/book.gender.php>`_
+* `ext/hash extension <http://www.php.net/manual/en/book.hash.php>`_
+* `ext/hrtime manual <http://php.net/manual/en/intro.hrtime.php>`_
+* `ext/inotify manual <http://php.net/manual/en/book.inotify.php>`_
+* `ext/leveldb on Github <https://github.com/reeze/php-leveldb>`_
+* `ext/lua manual <http://php.net/manual/en/book.lua.php>`_
+* `ext/memcached manual <http://php.net/manual/en/book.memcached.php>`_
+* `ext/mongo <ext/mongo>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
-* `ext/SeasLog <https://github.com/SeasX/SeasLog>`_
+* `ext/SeasLog on Github <https://github.com/SeasX/SeasLog>`_
 * `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
 * `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
-* `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `ext/zookeeper <http://php.net/zookeeper>`_
 * `Extension Apache <http://php.net/manual/en/book.apache.php>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
@@ -2394,8 +2400,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2425,9 +2431,11 @@ List of external links mentionned in this documentation.
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `GRPC <http://www.grpc.io/>`_
 * `Handling file uploads <http://php.net/manual/en/features.file-upload.php>`_
+* `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http-security-headers>`_
 * `hash <http://www.php.net/hash>`_
 * `HASH Message Digest Framework <http://www.php.net/manual/en/book.hash.php>`_
 * `hash_algos <http://php.net/hash_algos>`_
+* `hash_file <http://php.net/manual/en/function.hash-file.php>`_
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `Holger Woltersdorf <https://twitter.com/hollodotme>`_
@@ -2490,8 +2498,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2506,7 +2514,6 @@ List of external links mentionned in this documentation.
 * `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
 * `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
 * `Ming (flash) <http://www.libming.org/>`_
-* `mongodb Driver <ext/mongo>`_
 * `move_uploaded_file <http://php.net/move_uploaded_file>`_
 * `msgpack for PHP <https://github.com/msgpack/msgpack-php>`_
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
@@ -2552,6 +2559,7 @@ List of external links mentionned in this documentation.
 * `PCRE <http://php.net/pcre>`_
 * `PEAR <http://pear.php.net/>`_
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
+* `PECL ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `Phalcon <https://phalconphp.com/>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
@@ -2642,8 +2650,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2692,8 +2700,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2955,6 +2963,7 @@ Analyze
 |   analyzer[] = "Functions/UselessReturn";
 |   analyzer[] = "Functions/UsesDefaultArguments";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
+|   analyzer[] = "Functions/WrongNumberOfArgumentsMethods";
 |   analyzer[] = "Functions/WrongOptionalParameter";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
@@ -3815,6 +3824,7 @@ Performances
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/AvoidArrayPush";
 |   analyzer[] = "Performances/CacheVariableOutsideLoop";
+|   analyzer[] = "Performances/CsvInLoops";
 |   analyzer[] = "Performances/DoInBase";
 |   analyzer[] = "Performances/DoubleArrayFlip";
 |   analyzer[] = "Performances/FetchOneRowFormat";
@@ -3875,6 +3885,7 @@ Security
 |   analyzer[] = "Security/NoNetForXmlLoad";
 |   analyzer[] = "Security/NoSleep";
 |   analyzer[] = "Security/RegisterGlobals";
+|   analyzer[] = "Security/SafeHttpHeaders";
 |   analyzer[] = "Security/SessionLazyWrite";
 |   analyzer[] = "Security/SetCookieArgs";
 |   analyzer[] = "Security/ShouldUsePreparedStatement";
@@ -3986,6 +3997,7 @@ Suggestions
 |   analyzer[] = "Structures/CouldUseArrayUnique";
 |   analyzer[] = "Structures/CouldUseCompact";
 |   analyzer[] = "Structures/CouldUseDir";
+|   analyzer[] = "Structures/DirectlyUseFile";
 |   analyzer[] = "Structures/DontLoopOnYield";
 |   analyzer[] = "Structures/DropElseAfterReturn";
 |   analyzer[] = "Structures/EchoWithConcat";

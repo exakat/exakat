@@ -64,6 +64,56 @@ This only displays E_ERROR, the highest level of error reporting. It should be c
 
     ini_set('error_reporting', 1);
 
+Not Not
+=======
+
+.. _cleverstyle-structures-notnot:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`not-not`, in modules/OAuth2/OAuth2.php:190. 
+
+This double-call returns $results as a boolean, preventing a spill of data to the calling method. (bool) would be clearer here.
+
+.. code-block:: php
+
+    $result = $this->db_prime()->q(
+    			[
+    				DELETE FROM `[prefix]oauth2_clients`
+    				WHERE `id` = '%s',
+    				DELETE FROM `[prefix]oauth2_clients_grant_access`
+    				WHERE `id`	= '%s',
+    				DELETE FROM `[prefix]oauth2_clients_sessions`
+    				WHERE `id`	= '%s'
+    			],
+    			$id
+    		);
+    		unset($this->cache->{'/'});
+    		return !!$result;
+
+
+--------
+
+
+.. _tine20-structures-notnot:
+
+Tine20
+^^^^^^
+
+:ref:`not-not`, in /tine20/Calendar/Controller/MSEventFacade.php:392. 
+
+It seems that !! is almost superfluous, as a property called 'is_deleted' should already be a boolean.
+
+.. code-block:: php
+
+    foreach ($exceptions as $exception) {
+                    $exception->assertAttendee($this->getCalendarUser());
+                    $this->_prepareException($savedEvent, $exception);
+                    $this->_preserveMetaData($savedEvent, $exception, true);
+                    $this->_eventController->createRecurException($exception, !!$exception->is_deleted);
+                }
+
 Strpos()-like Comparison
 ========================
 
@@ -2496,6 +2546,105 @@ Calling a method from a property of an object is possible inside a string, thoug
 
     "{$this->container->getParameter('topxia.upload.public_url_path')}/" . $parsed['path']
 
+Too Many Injections
+===================
+
+.. _nextcloud-classes-toomanyinjections:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`too-many-injections`, in lib/private/Share20/Manager.php:130. 
+
+Well documented Manager class. Quite a lot of injections though, it must take a long time to prepare it.
+
+.. code-block:: php
+
+    /**
+    	 * Manager constructor.
+    	 *
+    	 * @param ILogger $logger
+    	 * @param IConfig $config
+    	 * @param ISecureRandom $secureRandom
+    	 * @param IHasher $hasher
+    	 * @param IMountManager $mountManager
+    	 * @param IGroupManager $groupManager
+    	 * @param IL10N $l
+    	 * @param IFactory $l10nFactory
+    	 * @param IProviderFactory $factory
+    	 * @param IUserManager $userManager
+    	 * @param IRootFolder $rootFolder
+    	 * @param EventDispatcher $eventDispatcher
+    	 * @param IMailer $mailer
+    	 * @param IURLGenerator $urlGenerator
+    	 * @param \OC_Defaults $defaults
+    	 */
+    	public function __construct(
+    			ILogger $logger,
+    			IConfig $config,
+    			ISecureRandom $secureRandom,
+    			IHasher $hasher,
+    			IMountManager $mountManager,
+    			IGroupManager $groupManager,
+    			IL10N $l,
+    			IFactory $l10nFactory,
+    			IProviderFactory $factory,
+    			IUserManager $userManager,
+    			IRootFolder $rootFolder,
+    			EventDispatcher $eventDispatcher,
+    			IMailer $mailer,
+    			IURLGenerator $urlGenerator,
+    			\OC_Defaults $defaults
+    	) {
+    		$this->logger = $logger;
+    		$this->config = $config;
+    		$this->secureRandom = $secureRandom;
+    		$this->hasher = $hasher;
+    		$this->mountManager = $mountManager;
+    		$this->groupManager = $groupManager;
+    		$this->l = $l;
+    		$this->l10nFactory = $l10nFactory;
+    		$this->factory = $factory;
+    		$this->userManager = $userManager;
+    		$this->rootFolder = $rootFolder;
+    		$this->eventDispatcher = $eventDispatcher;
+    		$this->sharingDisabledForUsersCache = new CappedMemoryCache();
+    		$this->legacyHooks = new LegacyHooks($this->eventDispatcher);
+    		$this->mailer = $mailer;
+    		$this->urlGenerator = $urlGenerator;
+    		$this->defaults = $defaults;
+    	}
+
+
+--------
+
+
+.. _thelia-classes-toomanyinjections:
+
+Thelia
+^^^^^^
+
+:ref:`too-many-injections`, in lib/private/Share20/Manager.php:130. 
+
+Classic address class, with every details. May be even shorter than expected.
+
+.. code-block:: php
+
+    //class DeliveryPostageEvent extends ActionEvent
+        public function __construct(
+            DeliveryModuleInterface $module,
+            Cart $cart,
+            Address $address = null,
+            Country $country = null,
+            State $state = null
+        ) {
+            $this->module = $module;
+            $this->cart = $cart;
+            $this->address = $address;
+            $this->country = $country;
+            $this->state = $state;
+        }
+
 Assign With And
 ===============
 
@@ -3078,7 +3227,7 @@ BaseStrategy is extended by NormalStrategy, DefaultStrategy (Not shown here), bu
 
 .. _shopware-classes-couldbeabstractclass:
 
-Shopware
+shopware
 ^^^^^^^^
 
 :ref:`could-be-abstract-class`, in engine/Shopware/Plugins/Default/Core/PaymentMethods/Components/GenericPaymentMethod.php:31. 

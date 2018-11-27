@@ -418,6 +418,10 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
+    + `fputcsv()`
+
+      + :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
+
     + `fread()`
 
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
@@ -431,6 +435,7 @@ Glossary
       + :ref:`Ellipsis Usage <ellipsis-usage>`
       + :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
+      + :ref:`Wrong Number Of Arguments In Methods <wrong-number-of-arguments-in-methods>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 
 
@@ -447,6 +452,14 @@ Glossary
 
       + :ref:`Should Use SetCookie() <should-use-setcookie()>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
+    + `highlight_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `highlight_string()`
+
+      + :ref:`Directly Use File <directly-use-file>`
 
     + `htmlentities()`
 
@@ -577,6 +590,14 @@ Glossary
 
       + :ref:`No Substr() One <no-substr()-one>`
 
+    + `md5()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `md5_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
     + `microtime()`
 
       + :ref:`Use random_int() <use-random\_int()>`
@@ -625,6 +646,14 @@ Glossary
     + `pack()`
 
       + :ref:`Invalid Pack Format <invalid-pack-format>`
+
+    + `parse_ini_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `parse_ini_string()`
+
+      + :ref:`Directly Use File <directly-use-file>`
 
     + `parse_str()`
 
@@ -764,6 +793,18 @@ Glossary
     + `settype()`
 
       + :ref:`Should Typecast <should-typecast>`
+
+    + `sha1()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `sha1_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `show_source()`
+
+      + :ref:`Directly Use File <directly-use-file>`
 
     + `sleep()`
 
