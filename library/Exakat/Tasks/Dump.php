@@ -305,7 +305,9 @@ SQL;
         
         $query = array();
         foreach($classes as $class) {
-            $query[] = "(NULL, '$class', $counts[$class])";
+            if (isset($counts[$class])) {
+                $query[] = "(NULL, '$class', $counts[$class])";
+            }
         }
 
         $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
@@ -415,7 +417,7 @@ SQL;
         $this->log->log("$theme : dumped $saved");
 
         foreach($classes as $class) {
-            if ($counts[$class] < 0) {
+            if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
             }
 
