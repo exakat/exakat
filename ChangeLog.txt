@@ -1,4 +1,4 @@
-Version 1.5.5 (Ratnadhvaja, coming up)
+Version 1.5.6 (Jingang, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.5.5 (Ratnadhvaja, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.5 (Ratnadhvaja, 2018-11-25)
++ Architecture
+    + Initial version of Exakat extensions
+    + Moved processing of 2-tokens files to Load
+    + Speed up CSV creations
+    + Upgrades are read from https, no http
+    + Moved loading's sqlite to memory for speed gain
+    + Doctor now auto-create test folder
++ Report
+    + New report : Php city. See your PHP code as a city
+    + Ambassador : Appinfo() now reports keywords used as method or property
+    + Fixed reported names of properties
++ Analyzer
+    + New analyzer : checks some HTTP headers for security
+    + New analyzer : Use _file() functions, not file_get_contents()
+    + New analyzer : Optimize looks for fgetcsv()
+    + Upgraded analyzers : Several refactored analysis
+    + Checked unit tests : 3083 / 3096 test pass (99% pass)
++ Tokenizer
+    + Fixed encoding error in loading, for clone types.
 
 Version 1.5.4 (Mahakasyapa, 2018-11-19)
 + Architecture
