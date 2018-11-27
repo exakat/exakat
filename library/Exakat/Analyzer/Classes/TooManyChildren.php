@@ -32,7 +32,12 @@ class TooManyChildren extends Analyzer {
         // class a with extends
         // default value : childrenCount = 15
         $this->atomIs('Class')
-             ->raw('where( __.out("DEFINITION").count().is(gte('.$this->childrenClassCount.')) )');
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->count()
+                     ->raw('is(gte('.$this->childrenClassCount.'))')
+            );
         $this->prepareQuery();
     }
 }

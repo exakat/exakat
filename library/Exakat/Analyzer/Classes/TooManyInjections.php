@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class TooManyInjections extends Analyzer {
+    protected $injectionsCount = 5;
+
     public function dependsOn() {
         return array('Patterns/DependencyInjection',
                     );
@@ -32,10 +34,16 @@ class TooManyInjections extends Analyzer {
     
     public function analyze() {
         $this->atomIs(array('Method', 'Magicmethod'))
-             ->raw('where( __.out("ARGUMENT")
-                             .where(__.in("ANALYZED").has("analyzer", "Patterns/DependencyInjection") )
-                             .count().is(gt(4)) 
-                          )');
+             ->filter(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->filter(
+                        $this->side()
+                             ->analyzerIs('Patterns/DependencyInjection')
+                             ->count()
+                             ->raw('is(gte('.$this->injectionsCount.'))')
+                     )
+             );
         $this->prepareQuery();
     }
 }
