@@ -82,8 +82,8 @@ SQL;
             $row['abstract'] = (bool) $row['abstract'];
             $row['final'] = (bool) $row['final'];
             $row['trait'] = (bool) $row['trait'];
-            $row['no_attrs'] = rand(0, 45);
-            $row['no_methods'] = rand(0, 25);
+//            $row['no_attrs'] = rand(0, 45);
+//            $row['no_methods'] = rand(0, 25);
             
             $this->count();
             $results[] = $row;
