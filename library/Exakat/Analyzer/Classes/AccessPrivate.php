@@ -49,7 +49,7 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
              ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
+             ->has('fullnspath')
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->isNotLocalClass()
              ->classDefinition()
@@ -85,6 +85,7 @@ class AccessPrivate extends Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->atomIs(array('Self', 'Static'))
+             ->has('fullnspath')
              ->goToClass()
              // no local method
              ->raw($notHasPrivateMethodDefinition)
