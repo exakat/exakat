@@ -632,4 +632,34 @@ function array_flip_arrays($array) {
     return $return;
 }
 
+function sort_dependencies($array, $level = 0) {
+    $return = array();
+    $next = array();
+    
+    foreach($array as $a => $b) { 
+        if (empty($b)) {
+            $return[] = $a;
+        } else {
+            $next[$a] = $b;
+        }
+    }
+    
+    if (!empty($next)) {
+        $keys = array_keys($next);
+        foreach($next as $a => &$b) {
+            $b = array_diff($b, $return);
+            
+            if (empty(array_intersect($b, $keys))) {
+                $return = array_merge($return, $b);
+                $b = array();
+            }
+        }
+        
+        if ($level >= 10) {die(Level);}
+        $return = array_merge($return, sort_dependencies($next, ++$level));
+    }
+    
+    return $return;
+}
+
 ?>

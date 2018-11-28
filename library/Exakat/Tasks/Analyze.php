@@ -106,16 +106,23 @@ class Analyze extends Tasks {
         $total_results = 0;
         $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
-        if (!$this->config->verbose && !$this->config->quiet) {
-           $this->progressBar = new Progressbar(0, count($analyzersClass) + 1, exec('tput cols'));
-        }
-
+        $analyzers = array();
+        $dependencies = array();
         foreach($analyzersClass as $analyzer_class) {
+            $this->fetchAnalyzers($analyzer_class, $analyzers, $dependencies);
+        }
+        
+        $analyzerList = sort_dependencies($dependencies);
+        if (!$this->config->verbose && !$this->config->quiet) {
+           $this->progressBar = new Progressbar(0, count($analyzerList) + 1, exec('tput cols'));
+        }
+        
+        foreach($analyzerList as $analyzer_class) {
             if (!$this->config->verbose && !$this->config->quiet) {
                 echo $this->progressBar->advance();
             }
 
-            $this->analyze($analyzer_class);
+            $this->analyze($analyzers[$analyzer_class], $analyzer_class);
         }
 
         if (!$this->config->verbose && !$this->config->quiet) {
@@ -124,15 +131,39 @@ class Analyze extends Tasks {
         
         display( "Done\n");
     }
-
-    private function analyze($analyzer_class) {
-        $begin = microtime(true);
-
-        $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
-        if ($analyzer === null) {
-            display("No such analyzer as $analyzer_class\n");
-            return false;
+    
+    private function fetchAnalyzers($analyzer_class, array &$analyzers, array &$dependencies) {
+        if (isset($analyzers[$analyzer_class])) { 
+            return;
         }
+
+        $analyzers[$analyzer_class] = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+        if ($analyzers[$analyzer_class] === null) {
+            display("No such analyzer as $analyzer_class\n");
+            return;
+        }
+     
+        if (isset($this->analyzed[$analyzer_class]) &&
+             $this->config->noRefresh === true) {
+            display( "$analyzer_class is already processed\n");
+            return $this->analyzed[$analyzer_class];
+        }
+
+        if ($this->config->noDependencies === true) {
+            $dependencies[$analyzer_class] = array();
+        } else {
+            $dependencies[$analyzer_class] = $analyzers[$analyzer_class]->dependsOn();
+            $diff = array_diff($dependencies[$analyzer_class], array_keys($analyzers));
+            foreach($diff as $d) {
+                if (!isset($analyzers[$d])) {
+                    $this->fetchAnalyzers($d, $analyzers, $dependencies);
+                }
+            }
+        }
+    }
+
+    private function analyze(Analyzer $analyzer, string $analyzer_class) {
+        $begin = microtime(true);
 
         $lock = new Lock("{$this->config->projects_root}/projects/.exakat/", $analyzer_class);
         if (!$lock->check()) {
@@ -140,31 +171,16 @@ class Analyze extends Tasks {
             return false;
         }
         
-        if (!(!isset($this->analyzed[$analyzer_class]) ||
-              $this->config->noRefresh !== true)
-            ) {
+        if (isset($this->analyzed[$analyzer_class]) &&
+             $this->config->noRefresh === true) {
             display( "$analyzer_class is already processed\n");
-            
             return $this->analyzed[$analyzer_class];
         }
         $analyzer->init();
-        
-        if ($this->config->noDependencies !== true) {
-            foreach($analyzer->dependsOn() as $dependency) {
-                if (!isset($this->analyzed[$dependency]) ||
-                     ($this->config->noRefresh  !== true)   ) {
-                    $count = $this->analyze($dependency);
-                    assert($count !== null, "count is null");
-                    $this->analyzed[$dependency] = $count;
-                    $this->checkAnalyzed();
-                }
-            }
-        }
 
         if (!(!isset($this->analyzed[$analyzer_class]) ||
-              $this->config->noRefresh !== true)
-            ) {
-            display( "$analyzer_class is already processed 2\n");
+              $this->config->noRefresh !== true)         ) {
+            display( "$analyzer_class is already processed\n");
             
             return $this->analyzed[$analyzer_class];
         }
