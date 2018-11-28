@@ -27,12 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleClassesInFile extends Analyzer {
     public function analyze() {
+        // fichier.php : <?php class a {} class b {}
         $this->atomIs('File')
              ->outIs('FILE')
-             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
-                             .emit( hasLabel("Class", "Interface", "Trait") )
-                             .hasLabel("Class", "Interface", "Trait")
-                             .count().is(gt(1)) )')
+             ->filter(
+                $this->side()
+                     ->atomInsideNoAnonymous(array('Class', 'Interface', 'Trait'))
+                     ->count()
+                     ->raw('is(gt(1))')
+             )
              ->back('first');
         $this->prepareQuery();
     }

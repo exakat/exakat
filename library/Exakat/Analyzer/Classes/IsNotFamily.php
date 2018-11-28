@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class IsNotFamily extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // Staticmethodcall
         // Inside the class
         $this->atomIs('Staticmethodcall')

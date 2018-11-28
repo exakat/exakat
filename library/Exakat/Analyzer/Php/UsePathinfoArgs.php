@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class UsePathinfoArgs extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // Only tested inside function, for smaller scope
         // This may be upgraded with array name (currently ignored)
         $this->atomFunctionIs('\\pathinfo')

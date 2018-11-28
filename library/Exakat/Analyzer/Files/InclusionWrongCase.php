@@ -30,10 +30,7 @@ class InclusionWrongCase extends Analyzer {
              ->values('fullcode');
         $files = $this->rawQuery()
                       ->toArray();
-
-        if (empty($files)) {
-            return;
-        }
+        // There are always files
 
         // Include with noDelimiter
         $this->atomIs('Include')

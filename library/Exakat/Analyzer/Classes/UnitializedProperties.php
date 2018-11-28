@@ -32,8 +32,6 @@ class UnitializedProperties extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // Normal Properties (with constructor)
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')

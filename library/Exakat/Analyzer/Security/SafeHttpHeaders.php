@@ -31,26 +31,26 @@ class SafeHttpHeaders extends Analyzer {
         //header('X-Xss-Protection: 0');
         $this->atomIs('String')
              ->has('noDelimiter')
-             ->noDelimiterIs(array('x-xss-Protection: 0', 'access-control-allow-origin: *'), self::CASE_INSENSITIVE)
+             ->noDelimiterIs(array('x-xss-protection: 0', 'access-control-allow-origin: *'), self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
-        //header('X-Xss-Protectio', '0');
+        //header('X-Xss-Protection', '0');
         $this->atomIs(self::$FUNCTIONS_CALLS)
              ->outIs('ARGUMENT')
              ->has('noDelimiter')
-             ->noDelimiterIs(array('x-xss-Protection', 'access-control-allow-origin'), self::CASE_INSENSITIVE)
+             ->noDelimiterIs(array('x-xss-protection', 'access-control-allow-origin'), self::CASE_INSENSITIVE)
              ->nextSibling('ARGUMENT')
              ->has('noDelimiter')
              ->noDelimiterIs(array('*', '0'), self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
-        //header(['X-Xss-Protectio' => '0']);
+        //header(['X-Xss-Protectino' => '0']);
         $this->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->has('noDelimiter')
-             ->noDelimiterIs(array('x-xss-Protection', 'access-control-allow-origin'), self::CASE_INSENSITIVE)
+             ->noDelimiterIs(array('x-xss-protection', 'access-control-allow-origin'), self::CASE_INSENSITIVE)
              ->back('first')
              ->outIs('VALUE')
              ->has('noDelimiter')

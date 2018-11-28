@@ -46,7 +46,6 @@ class CouldReturnVoid extends Analyzer {
                              ->atomIsNot('Void')
                      )
              )
-//             ->raw('not( where( __.emit( hasLabel("Return")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Return").out("RETURN").not(hasLabel("Void")) ) )')
              ->back('first');
         $this->prepareQuery();
     }

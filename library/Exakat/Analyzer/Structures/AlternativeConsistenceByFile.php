@@ -27,26 +27,18 @@ use Exakat\Analyzer\Analyzer;
 class AlternativeConsistenceByFile extends Analyzer {
     public function analyze() {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
-        $atomsList = "'".implode("', '", $atoms)."'";
-        
-        $MAX_LOOPING = self::MAX_LOOPING;
 
         // $this->linksDown is important here.
         $this->atomIs('File')
-             ->raw('sideEffect{
-            normal = 0;
-            alternative = 0;
-            }')
-            ->raw(<<<GREMLIN
-where( 
-    __
-    .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel($atomsList)
-    .or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
-         __.sideEffect{ normal = normal + 1; })
-    .fold()
-    )
-GREMLIN
-)
+             ->initVariable('normal', 0)
+             ->initVariable('alternative', 0)
+             ->filter(
+                $this->side()
+                     ->atomInsideNoDefinition($atoms)
+                     ->raw('or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
+         __.sideEffect{ normal = normal + 1; })')
+                     ->raw('fold()')
+             )
             ->filter('normal > 0 && alternative > 0')
             ->back('first');
         $this->prepareQuery();
