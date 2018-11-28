@@ -45,6 +45,7 @@ use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
 use Exakat\Tasks\Helpers\CloneType1;
 use Exakat\Tasks\Helpers\Php;
+use ProgressBar\Manager as ProgressBar;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -508,14 +509,24 @@ class Load extends Tasks {
         }
 
         $nbTokens = 0;
-        $path = $this->config->projects_root.'/projects/'.$project.'/code';
+        $path = "{$this->config->projects_root}/projects/{$project}/code";
+        if ($this->config->verbose && !$this->config->quiet) {
+           $progressBar = new Progressbar(0, count($files) + 1, exec('tput cols'));
+        }
         foreach($files as $file) {
             try {
                 $r = $this->processFile($file, $path);
                 $nbTokens += $r;
+                if ($this->config->verbose && !$this->config->quiet) {
+                    echo $progressBar->advance();
+                }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($file, $e->getMessage());
             }
+        }
+
+        if ($this->config->verbose && !$this->config->quiet) {
+            echo $progressBar->advance();
         }
 
         return array('files'  => count($files),
