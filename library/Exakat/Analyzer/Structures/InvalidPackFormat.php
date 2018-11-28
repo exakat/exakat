@@ -30,15 +30,17 @@ class InvalidPackFormat extends Analyzer {
         $this->atomFunctionIs('\\unpack')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
+             ->hasNoOut('CONCAT')
              // This regex include names in the format string, for unpacking
-             ->regexIsNot('noDelimiter', '^([aAhHcCsSnviIlLNVqQJPfgGdeExXZ](@|\\\\*|\\\\d+)?(\\\\w+\\\\/?)?)+\$')
+             ->regexIsNot('noDelimiter', '^([@0-9aAhHcCsSnviIlLNVqQJPfgGdeExXZ](\\\\*|\\\\d+)?(\\\\w+\\\\/?)?)+\$')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\pack')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regexIsNot('noDelimiter', '^([aAhHcCsSnviIlLNVqQJPfgGdeExXZ](@|\\\\*|\\\\d+)?)+\$')
+             ->hasNoOut('CONCAT')
+             ->regexIsNot('noDelimiter', '^([@0-9aAhHcCsSnviIlLNVqQJPfgGdeExXZ](\\\\*|\\\\d+)?)+\$')
              ->back('first');
         $this->prepareQuery();
     }
