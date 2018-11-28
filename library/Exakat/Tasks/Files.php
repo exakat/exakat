@@ -445,12 +445,8 @@ class Files extends Tasks {
                 continue;
             }
 
-            if ($ignore[0] == '/') {
-                $d = "$config->projects_root/projects/$dir/code$ignore";
-                if (!file_exists($d)) {
-                    continue;
-                }
-                $ignoreDirs[] = $ignore;
+            if ($ignore[0] === '/') {
+                $ignoreDirs[] = "$ignore.*";
             } else {
                 $ignoreDirs[] = ".*$ignore.*";
             }
@@ -467,17 +463,13 @@ class Files extends Tasks {
             if (empty($include)) {
                 continue;
             }
+
             if ($include === '/') {
-                $includeDirs[] = $include.'.*';
-            }
-            if ($include[0] === '/') {
-                $d = "$config->projects_root/projects/$dir/code{$include}";
-                if (!file_exists($d)) {
-                    continue;
-                }
-                $includeDirs[] = $include.'.*';
+                $includeDirs[] = "/.*";
+            } elseif ($include[0] === '/') {
+                $includeDirs[] = "$include.*";
             } else {
-                $includeDirs[] = '.*'.$include.'.*';
+                $includeDirs[] = ".*$include.*'";
             }
         }
         if (empty($includeDirs)) {
