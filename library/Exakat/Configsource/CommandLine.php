@@ -198,17 +198,17 @@ class CommandLine extends Config {
         $command = array_shift($args);
         if (isset($command, $this->commands[$command])) {
             $this->config['command'] = $command;
-        }
         
-        if ($this->config['command'] === 'extension') {
-            $subcommand = array_shift($args);
-            if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local'))) {
-                $subcommand = 'local';
-            }
-            $this->config['subcommand'] = $subcommand;
-            
-            if (in_array($subcommand, array('install', 'uninstall'))) {
-                $this->config['extension'] = array_shift($args);
+            if ($this->config['command'] === 'extension') {
+                $subcommand = array_shift($args);
+                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local'))) {
+                    $subcommand = 'local';
+                }
+                $this->config['subcommand'] = $subcommand;
+                
+                if (in_array($subcommand, array('install', 'uninstall'))) {
+                    $this->config['extension'] = array_shift($args);
+                }
             }
         }
 
