@@ -903,10 +903,17 @@ class Load extends Tasks {
                     ++$this->id; // Skip $a
                     ++$this->id; // Skip [
                     
-                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-                        $index = $this->processVariable();
-                    } else {
+                    if ($this->tokens[$this->id][0] === $this->phptokens::T_NUM_STRING) {
+                        $index = $this->processSingle('Integer');
+                    } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_MINUS) {
+                        ++$this->id;
+                        $index            = $this->processSingle('Integer');
+                        $index->code     *= -1;
+                        $index->fullcode *= -1;
+                    } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
                         $index = $this->processSingle('String');
+                    } else {
+                        assert(false, 'Couldn\'t read that token inside quotes : '.$this->tokens[$this->id + 1][0]);
                     }
                     ++$this->id; // Skip ]
 
