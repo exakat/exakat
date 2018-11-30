@@ -4349,7 +4349,12 @@ class Load extends Tasks {
     }
 
     private function processYield() {
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS, $this->phptokens::T_SEMICOLON, $this->phptokens::T_CLOSE_TAG))) {
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS, 
+                                                            $this->phptokens::T_CLOSE_BRACKET, 
+                                                            $this->phptokens::T_COMMA, 
+                                                            $this->phptokens::T_SEMICOLON, 
+                                                            $this->phptokens::T_CLOSE_TAG,
+                                   ))) {
             $current = $this->id;
 
             // Case of return ;
