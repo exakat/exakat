@@ -1092,7 +1092,7 @@ class Load extends Tasks {
             $finally = $this->addAtom('Finally');
 
             ++$this->id;
-            $finallyBlock = $this->processFollowingBlock(false);
+            $finallyBlock = $this->processFollowingBlock();
             $this->popExpression();
             $this->addLink($try, $finally, 'FINALLY');
             $this->addLink($finally, $finallyBlock, 'BLOCK');
@@ -2950,7 +2950,7 @@ class Load extends Tasks {
         return $foreach;
     }
 
-    private function processFollowingBlock($finals) {
+    private function processFollowingBlock(array $finals = array()) {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             ++$this->id;
             $block = $this->processBlock(self::RELATED_BLOCK);
@@ -3730,6 +3730,7 @@ class Load extends Tasks {
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
             // Process block
+            
             ++$this->id; // Skip ; to start actual sequence
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_END) {
                 $void = $this->addAtomVoid();
@@ -3749,7 +3750,7 @@ class Load extends Tasks {
             $block = ';';
         } else {
             // Process block
-            $this->processFollowingBlock(false);
+            $this->processFollowingBlock();
             $block = $this->popExpression();
             $this->addLink($namespace, $block, 'BLOCK');
 
@@ -3772,7 +3773,12 @@ class Load extends Tasks {
         $current = $this->id;
         $as = $this->addAtom('As');
 
-        $left = $this->popExpression();
+        // special case for use t, t2 { as as yes; }
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
+            $left = $this->processNextAsIdentifier();
+        } else {
+            $left = $this->popExpression();
+        }
         list($fullnspath, $aliased) = $this->getFullnspath($left, 'staticmethod');
     
         $left->fullnspath = $fullnspath;
@@ -3786,14 +3792,16 @@ class Load extends Tasks {
                                                             $this->phptokens::T_PUBLIC,
                                                             $this->phptokens::T_PROTECTED,
                                                             ))) {
-            $fullcode[] = array($this->tokens[$this->id + 1][1]);
+            $fullcode[] = $this->tokens[$this->id + 1][1];
             $as->visibility = strtolower($this->tokens[$this->id + 1][1]);
             ++$this->id;
         }
 
-        $alias = $this->processNextAsIdentifier();
-        $this->addLink($as, $alias, 'AS');
-        $fullcode[] = $alias->fullcode;
+        if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON) {
+            $alias = $this->processNextAsIdentifier();
+            $this->addLink($as, $alias, 'AS');
+            $fullcode[] = $alias->fullcode;
+        }
 
         $as->code     = $this->tokens[$current][1];
         $as->fullcode = join(' ', $fullcode);
@@ -3816,12 +3824,16 @@ class Load extends Tasks {
         return $insteadof;
     }
 
-    private function processUse() {
+    private function processUse() { 
         if (empty($this->currentClassTrait)) {
-            $use = $this->addAtom('Usenamespace');
+            return $this->processUseNamespace();
         } else {
-            $use = $this->addAtom('Usetrait');
+            return $this->processUseTrait();
         }
+    }
+
+    private function processUseNamespace() {
+        $use = $this->addAtom('Usenamespace');
         $current = $this->id;
         $useType = 'class';
 
@@ -3887,18 +3899,6 @@ class Load extends Tasks {
                 }
 
                 $namespace = $as;
-            } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
-                //use A\B{} // Group
-                $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-
-                $this->popExpression();
-                $this->addLink($use, $block, 'BLOCK');
-                $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
-
-                // Several namespaces ? This has to be recalculated inside the block!!
-                $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
-
-                $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait
                 $this->addLink($use, $namespace, 'GROUPUSE');
@@ -4017,6 +4017,50 @@ class Load extends Tasks {
         $use->line     = $this->tokens[$current][2];
         $use->token    = $this->getToken($this->tokens[$current][0]);
 
+        $this->pushExpression($use);
+
+        return $use;
+    }
+
+    private function processUseTrait() {
+        $use = $this->addAtom('Usetrait');
+        $current = $this->id;
+        $useType = 'class';
+
+        $fullcode = array();
+
+        --$this->id;
+        do {
+            $prefix = '';
+            ++$this->id;
+            $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+
+            list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
+    
+            $namespace->fullnspath = $fullnspath;
+            $namespace->aliased    = $aliased;
+
+            $this->calls->addCall('class', $namespace->fullnspath, $namespace);
+
+            $this->addLink($use, $namespace, 'USE');
+        } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
+            //use A\B{} // Group
+            $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
+
+            $this->popExpression();
+            $this->addLink($use, $block, 'BLOCK');
+            $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
+
+            // Several namespaces ? This has to be recalculated inside the block!!
+            $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
+         }
+
+        $use->code     = $this->tokens[$current][1];
+        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(", ", $fullcode);
+        $use->line     = $this->tokens[$current][2];
+        $use->token    = $this->getToken($this->tokens[$current][0]);
         $this->pushExpression($use);
 
         return $use;

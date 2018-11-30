@@ -363,7 +363,7 @@ GREMLIN;
 
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
-        display("spotFallbackConstants \n ");
+        display("spotFallbackConstants\n");
         
         // Define-style constant definitions
         $query = <<<GREMLIN
@@ -395,7 +395,6 @@ GREMLIN;
             display('Link constant definitions : skipping.');
             return;
         }
-
         if (!empty($defineConstants)) {
             // This only works with define() and case sensitivity
             $query = <<<GREMLIN
