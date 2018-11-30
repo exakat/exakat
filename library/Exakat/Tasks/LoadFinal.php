@@ -77,6 +77,8 @@ class LoadFinal extends Tasks {
         $this->overwrittenProperties();
         $this->overwrittenConstants();
 
+        $this->solveTraitMethods();
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -694,6 +696,31 @@ GREMLIN;
         display('Create '.($result->toInt()).' link between new class and definition');
         $this->logTime('Class::method() definition');
         $this->log->log(__METHOD__);
+    }
+
+    private function solveTraitMethods() {
+        $query = new Query(0, $this->config->project, 'solveTraitMethods', null, $this->datastore);
+        $query->atomIs('Usetrait')
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs('As')
+              ->outIs('NAME')
+              ->atomIs('Staticmethod')
+              ->_as('results')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('lccode', 'methode')
+              ->back('first')
+              ->outIs('USE')
+              ->inIs('DEFINITION')
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'results')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        display('Created '.($result->toInt()).' links for use in traits');
     }
 
     private function defaultIdentifiers() {

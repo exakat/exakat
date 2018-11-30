@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -149,6 +149,9 @@ class Load extends Tasks {
     
     const WITHOUT_TYPEHINT_SUPPORT = false;
     const WITH_TYPEHINT_SUPPORT    = true;
+    
+    const STANDALONE_BLOCK         = true;
+    const RELATED_BLOCK            = false;
 
     const CONTEXT_CLASS        = 1;
     const CONTEXT_INTERFACE    = 2;
@@ -2429,6 +2432,10 @@ class Load extends Tasks {
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_AS,
+                                                                  $this->phptokens::T_INSTEADOF,
+                                                                  ))) {
+            $string = $this->addAtom('Staticmethod'); // This is for USE with traits
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
             $string = $this->addAtom('Self');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
@@ -2469,8 +2476,8 @@ class Load extends Tasks {
                 $this->calls->addCall('class', $fullnspath, $string);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
-            $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
-            $this->tokens[$this->id - 1][0] === $this->phptokens::T_NEW
+                  $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
+                  $this->tokens[$this->id - 1][0] === $this->phptokens::T_NEW
             ) {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
             $string->fullnspath = $fullnspath;
@@ -2756,7 +2763,7 @@ class Load extends Tasks {
         return $bracket;
     }
 
-    private function processBlock($standalone = true) {
+    private function processBlock($standalone = self::STANDALONE_BLOCK) {
         $this->startSequence();
 
         // Case for {}
@@ -2789,7 +2796,7 @@ class Load extends Tasks {
         ++$this->id; // skip }
 
         $this->pushExpression($block);
-        if ($standalone === true) {
+        if ($standalone === self::STANDALONE_BLOCK) {
             $this->processSemicolon();
         }
 
@@ -2946,7 +2953,7 @@ class Load extends Tasks {
     private function processFollowingBlock($finals) {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             ++$this->id;
-            $block = $this->processBlock(false);
+            $block = $this->processBlock(self::RELATED_BLOCK);
             $block->bracket = self::BRACKET;
 
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
@@ -3762,38 +3769,40 @@ class Load extends Tasks {
     }
 
     private function processAs() {
+        $current = $this->id;
+        $as = $this->addAtom('As');
+
+        $left = $this->popExpression();
+        list($fullnspath, $aliased) = $this->getFullnspath($left, 'staticmethod');
+    
+        $left->fullnspath = $fullnspath;
+        $left->aliased    = $aliased;
+        $this->calls->addCall('staticmethod', $left->fullnspath, $left);
+
+        $this->addLink($as, $left, 'NAME');
+        $fullcode = array($left->fullcode, $this->tokens[$current][1]);
+
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE,
                                                             $this->phptokens::T_PUBLIC,
                                                             $this->phptokens::T_PROTECTED,
                                                             ))) {
-            $current = $this->id;
-            $as = $this->addAtom('As');
-
-            $left = $this->popExpression();
-            $this->addLink($as, $left, 'NAME');
-
-            $fullcode = array($left->fullcode, $this->tokens[$current][1], $this->tokens[$this->id + 1][1]);
-
+            $fullcode[] = array($this->tokens[$this->id + 1][1]);
             $as->visibility = strtolower($this->tokens[$this->id + 1][1]);
             ++$this->id;
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
-                $alias = $this->processNextAsIdentifier();
-                $this->addLink($as, $alias, 'AS');
-                $fullcode[] = $alias->fullcode;
-            }
-
-            $as->code     = $this->tokens[$current][1];
-            $as->fullcode = join(' ', $fullcode);
-            $as->line     = $this->tokens[$current][2];
-            $as->token    = $this->getToken($this->tokens[$current][0]);
-
-            $this->pushExpression($as);
-
-            return $as;
-        } else {
-            return $this->processOperator('As', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'AS'));
         }
+
+        $alias = $this->processNextAsIdentifier();
+        $this->addLink($as, $alias, 'AS');
+        $fullcode[] = $alias->fullcode;
+
+        $as->code     = $this->tokens[$current][1];
+        $as->fullcode = join(' ', $fullcode);
+        $as->line     = $this->tokens[$current][2];
+        $as->token    = $this->getToken($this->tokens[$current][0]);
+
+        $this->pushExpression($as);
+
+        return $as;
     }
 
     private function processInsteadof() {
@@ -3856,7 +3865,7 @@ class Load extends Tasks {
             }
 
             $this->calls->addCall('class', $fullnspath, $namespace);
-
+            
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
                 ++$this->id;
@@ -3881,6 +3890,7 @@ class Load extends Tasks {
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
                 //use A\B{} // Group
                 $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
+
                 $this->popExpression();
                 $this->addLink($use, $block, 'BLOCK');
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
@@ -4785,9 +4795,16 @@ class Load extends Tasks {
         } elseif ($right->atom === 'Name') {
             if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_INSTEADOF,
                                                                 $this->phptokens::T_AS))) {
+
+                list($fullnspath, $aliased) = $this->getFullnspath($left);
+                $this->calls->addCall('class', $fullnspath, $left);
+                $left->fullnspath = $fullnspath;
+                $left->aliased    = $aliased;
+
                 $static = $this->addAtom('Staticmethod');
                 $this->addLink($static, $right, 'METHOD');
                 $fullcode = "{$left->fullcode}::{$right->fullcode}";
+
                 // No need for runplugin
             } else {
                 $static = $this->addAtom('Staticconstant');
