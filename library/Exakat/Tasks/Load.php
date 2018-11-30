@@ -912,8 +912,11 @@ class Load extends Tasks {
                         $index->fullcode *= -1;
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
                         $index = $this->processSingle('String');
+                    } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
+                        $index = $this->processVariable();
+                        $this->popExpression();
                     } else {
-                        assert(false, 'Couldn\'t read that token inside quotes : '.$this->tokens[$this->id + 1][0]);
+                        assert(false, 'Couldn\'t read that token inside quotes : '.$this->tokens[$this->id][0]);
                     }
                     ++$this->id; // Skip ]
 
