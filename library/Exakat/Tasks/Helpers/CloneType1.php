@@ -372,6 +372,10 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = 'insteadof';
                 break;
 
+            case 'Staticmethod' :
+                $atom->ctype1 = 'method';
+                break;
+
             case 'As' :
                 $atom->ctype1 = $extras['NAME']->ctype1.' as '.$extras['AS']->ctype1;
                 break;
