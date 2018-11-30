@@ -712,14 +712,14 @@ class Load extends Tasks {
         }
 
         $end = microtime(true);
-        $load = (($end - $begin) * 1000);
+        $load = ($end - $begin) * 1000;
         
         $atoms = count($this->atoms);
         $links = count($this->links);
         $begin = microtime(true);
         $this->saveFiles();
         $end = microtime(true);
-        $save = (($end - $begin) * 1000);
+        $save = ($end - $begin) * 1000;
         
         $this->log->log("$filename\t$load\t$save\t$log[token_initial]\t$atoms\t$links");
         
@@ -2346,7 +2346,7 @@ class Load extends Tasks {
         $arguments               = $functioncall;
 
         $functioncall->code      = $name->code;
-        $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
+        $functioncall->fullcode  = "{$name->fullcode}({$argumentsFullcode})";
         $functioncall->line      = $this->tokens[$current][2];
         $functioncall->token     = $name->token;
         
@@ -2365,7 +2365,8 @@ class Load extends Tasks {
             // literally, nothing
         } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'))) {
             if ($argumentsList[0]->constant === true &&
-                !empty($argumentsList[0]->noDelimiter)) {
+                !empty($argumentsList[0]->noDelimiter   )) {
+
                 $fullnspath = makeFullNsPath($argumentsList[0]->noDelimiter, true);
                 if ($argumentsList[0]->noDelimiter[0] === '\\') {
                     $fullnspath = "\\$fullnspath";
@@ -2376,6 +2377,7 @@ class Load extends Tasks {
 
             $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
             $functioncall->aliased    = self::NOT_ALIASED;
+
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) { // A functioncall
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
@@ -2395,8 +2397,8 @@ class Load extends Tasks {
         if ( $functioncall->atom === 'Methodcallname') {
             // Nothing, really. in case of A::b()()
         } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
-             $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG &&
-             $getFullnspath === self::WITH_FULLNSPATH ) {
+                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG &&
+                   $getFullnspath === self::WITH_FULLNSPATH ) {
              $this->processSemicolon();
         } else {
             $this->runPlugins($functioncall, $argumentsList);
@@ -5365,13 +5367,15 @@ class Load extends Tasks {
         }
 
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
-            return; // Can't be a class anyway.
+            return; // Can't be a constant anyway.
         }
         
         $fullnspath = makeFullNsPath($this->argumentsId[0]->noDelimiter, true);
         if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
+            // Added a second \\ when the string already has one. Actual PHP behavior
             $fullnspath = "\\$fullnspath";
         }
+
         $this->calls->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
 

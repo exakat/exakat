@@ -406,7 +406,7 @@ function makeFullNsPath($functions, $constant = false) {
             return $r;
         };
     } else {
-        // case for constants
+        // case for function
         $cb = function ($r) {
             $r2 = str_replace('\\\\', '\\', $r);
 
@@ -420,7 +420,7 @@ function makeFullNsPath($functions, $constant = false) {
         };
     }
     
-    if (is_string($functions)) {
+    if (is_string($functions) || is_int($functions)) {
         return $cb($functions);
     } elseif (is_array($functions)) {
         $r = array_map($cb, $functions);
@@ -655,7 +655,7 @@ function sort_dependencies($array, $level = 0) {
             }
         }
         
-        if ($level >= 10) {die(Level);}
+        assert($level < 10, "Too many levels in dependencies. Aborting");
         $return = array_merge($return, sort_dependencies($next, ++$level));
     }
     
