@@ -45,7 +45,7 @@ class ThemesExt {
             if (!empty($list)) {
                 $this->themes[$name] = new ThemesExtra($list);
             }
-        };
+        }
     }
     
     public function getThemeAnalyzers($theme = null) {
