@@ -71,5 +71,3 @@ Label : PROJECT
             5
           Label : RETURNED
             14
-          Label : RETURNED
-            14
