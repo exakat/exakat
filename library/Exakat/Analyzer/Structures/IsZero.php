@@ -31,49 +31,67 @@ class IsZero extends Analyzer {
         // $a = $c + $d -$e - $c;
         // $a = $d + $c -$e - $c;
         $minus = $this->dictCode->translate('-');
+
+        if (empty($minus)) {
+            return;
+        }
         
         $MAX_LOOPING = self::MAX_LOOPING;
-        $follow = 'coalesce( __.hasLabel("Parenthesis").out("CODE"), __.hasLabel("Assignation").out("RIGHT"), __.filter{ true; })';
-        $follow .= ".$follow";
+        $labels = array('Variable', 
+                        'Integer', 
+                        'Member', 
+                        'Real', 
+                        'Staticproperty', 
+                        'Array',
+                        'Functioncall',
+                        'Staticmethodcall',
+                        'Methodcall',
+                        );
+        $labelsList = makeList($labels);
+        
+        $skip = 'coalesce( __.in("CODE"), __.in("RIGHT").hasLabel("Assignation"), __.filter{true})';
+        $skip .= ".$skip";
+        
+        $this->atomIs('Addition')
+             ->hasNoParent('Addition', array('LEFT'))
+             ->hasNoParent('Addition', array('RIGHT'))
+             ->raw(<<<GREMLIN
+sideEffect{x = [:]; id2 = it.get().id();}
+.where(
+   __.repeat(
+       __.out('LEFT', 'RIGHT', 'SIGN', 'CODE')
+   )
+    .emit().times($MAX_LOOPING)
+    .hasLabel($labelsList)
+    .where(
+       __
+        .sideEffect{ v = it.get().value('fullcode'); inc = 1; }
+        .where( __.in('SIGN').hasLabel('Sign').has('code', $minus[0]).sideEffect{ inc = -1; }.fold())
+        .where( __.$skip.in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
+        .where( __.$skip.in('LEFT').hasLabel('Addition').$skip.in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
 
-        if (!empty($minus)) {
-            $this->atomIs('Addition')
-                 ->raw('not( where( __.in("RIGHT").hasLabel("Addition").has("token", "T_MINUS")) )')
-                 ->outIs('LEFT')
-                 ->atomIsNot('Sign')
-                 ->savePropertyAs('fullcode', 'operand')
-                 ->back('first')
-    
-                 ->raw(<<<GREMLIN
-emit().repeat( __.out("RIGHT").$follow.hasLabel("Addition") ).times($MAX_LOOPING)
-      .coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
-                 __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
-GREMLIN
-, $minus, $minus)
-                 ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+        .repeat(__.in('LEFT', 'RIGHT', 'SIGN', 'CODE')
+                  .where( __.in('SIGN').hasLabel('Sign').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
+                  .where( __.in('LEFT').hasLabel('Addition').in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
+        ).until(__.filter{ it.get().id() == id2;})
 
-        $plus = $this->dictCode->translate('+');
-        if (!empty($plus)) {
-            $this->atomIs('Addition')
-                 ->outIs('LEFT')
-                 ->atomIs('Sign')
-                 ->outIs('SIGN')
-                 ->savePropertyAs('fullcode', 'operand')
-                 ->back('first')
-    
-                 ->raw(<<<GREMLIN
-emit().repeat( __.out("RIGHT").$follow.hasLabel("Addition") ).times($MAX_LOOPING)
-      .coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
-                 __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
+        .fold()
+       )
+    .sideEffect{ 
+    if (x[v] == null) {
+       x[v] = 0;
+    }
+
+    x[v] += inc; 
+
+    }
+    .fold()
+)
+.filter{ x.findAll{a,b -> b == 0} != [:]; }
+
 GREMLIN
-, $plus, $plus)
-                 ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+);
+        $this->prepareQuery();
     }
 }
 

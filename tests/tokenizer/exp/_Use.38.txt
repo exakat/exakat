@@ -17,10 +17,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
-          Label : DEFINITION
-            6
           Label : METHOD
             8
             Label : ARGUMENT
@@ -65,10 +61,6 @@ Label : PROJECT
             20
           Label : DEFINITION
             21
-          Label : DEFINITION
-            18
-          Label : DEFINITION
-            18
           Label : DEFINITION
             18
           Label : DEFINITION

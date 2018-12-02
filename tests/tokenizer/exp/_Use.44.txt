@@ -13,8 +13,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
           Label : METHOD
             8
             Label : ARGUMENT
@@ -23,24 +21,12 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
-            Label : DEFINITION
-              43
-              Label : METHOD
-                8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
-              Label : OBJECT
-                41
             Label : NAME
               8
           Label : NAME
             6
         Label : EXPRESSION
           5
-          Label : DEFINITION
-            12
           Label : DEFINITION
             12
           Label : DEFINITION
@@ -59,16 +45,6 @@ Label : PROJECT
                 12
               Label : METHOD
                 8
-            Label : DEFINITION
-              43
-              Label : METHOD
-                8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
-              Label : OBJECT
-                41
             Label : NAME
               8
           Label : NAME
@@ -125,6 +101,22 @@ Label : PROJECT
                     12
                   Label : METHOD
                     22
+              Label : EXPRESSION
+                23
+                Label : NAME
+                  18
+                  Label : CLASS
+                    6
+                  Label : METHOD
+                    25
+              Label : EXPRESSION
+                23
+                Label : NAME
+                  18
+                  Label : CLASS
+                    6
+                  Label : METHOD
+                    26
             Label : USE
               12
             Label : USE
@@ -142,15 +134,7 @@ Label : PROJECT
                     Label : AS
                       30
                     Label : NAME
-                      23
-                      Label : AS
-                        3
-                      Label : NAME
-                        18
-                        Label : CLASS
-                          6
-                        Label : METHOD
-                          26
+                      9
               Label : EXPRESSION
                 31
                 Label : ARGUMENT
@@ -158,15 +142,7 @@ Label : PROJECT
                   Label : AS
                     32
                   Label : NAME
-                    23
-                    Label : AS
-                      3
-                    Label : NAME
-                      18
-                      Label : CLASS
-                        6
-                      Label : METHOD
-                        25
+                    9
               Label : EXPRESSION
                 23
                 Label : AS

@@ -12,44 +12,32 @@ Label : PROJECT
           Label : METHOD
             8
             Label : ARGUMENT
-              10
+              9
             Label : BLOCK
-              12
+              11
               Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  14
+                9
             Label : NAME
               8
           Label : NAME
             6
         Label : EXPRESSION
-          16
+          12
           Label : NAME
-            17
+            13
           Label : USE
-            19
+            15
             Label : BLOCK
-              12
+              11
               Label : EXPRESSION
-                20
-                Label : NAME
-                  8
-            Label : USE
-              6
-        Label : EXPRESSION
-          16
-          Label : NAME
-            21
-          Label : USE
-            19
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                20
+                16
                 Label : AS
-                  23
+                  17
                 Label : NAME
                   8
+              Label : EXPRESSION
+                16
+                Label : NAME
+                  17
             Label : USE
               6

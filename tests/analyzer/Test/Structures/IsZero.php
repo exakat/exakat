@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class IsZero extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testStructures_IsZero01()  { $this->generic_test('Structures/IsZero.01'); }
     public function testStructures_IsZero02()  { $this->generic_test('Structures/IsZero.02'); }
@@ -16,5 +16,6 @@ class IsZero extends Analyzer {
     public function testStructures_IsZero05()  { $this->generic_test('Structures/IsZero.05'); }
     public function testStructures_IsZero06()  { $this->generic_test('Structures/IsZero.06'); }
     public function testStructures_IsZero07()  { $this->generic_test('Structures/IsZero.07'); }
+    public function testStructures_IsZero08()  { $this->generic_test('Structures/IsZero.08'); }
 }
 ?>
