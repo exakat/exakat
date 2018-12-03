@@ -198,3 +198,16 @@ setters
 setter
 EXIF
 serializer
+Drupal
+POSIX
+precalculate
+precalculating
+precalculated
+preprocessing
+preprocess
+preprocesses
+preprocessed
+subpattern
+subpatterns
+datastructure
+datastructures
