@@ -90,6 +90,7 @@ abstract class DSL {
         } else {
             assert(in_array($name, $this->availableVariables), "Variable '$name' is not defined");
         }
+        return true;
     }
 
     protected function assertLink($link) {

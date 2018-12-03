@@ -33,6 +33,7 @@ class IsLess extends DSL {
         if (is_int($value)) {
             return new Command("filter{ it.get().value(\"{$property}\").toLong() < {$value} }");
         } elseif (is_string($value)) {
+            assert($this->assertVariable($value));
             // this is a variable name, so it can't use ***
             return new Command("filter{ it.get().value(\"{$property}\").toLong() < {$value};}");
         } else {

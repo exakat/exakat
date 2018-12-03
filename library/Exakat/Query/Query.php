@@ -93,7 +93,6 @@ class Query {
 
         // @doc This is when the object is a placeholder for others.
         if (empty($this->commands)) {
-            print ici;
             return true;
         }
         
