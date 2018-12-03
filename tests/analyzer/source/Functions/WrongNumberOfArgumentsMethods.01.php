@@ -1,15 +1,33 @@
 <?php
 
-swift::ini_set();
-other::ini_set();
-swift::ini_set_ok();
-enough::ini_set(1,2);
-tooMany::ini_set(1,2,3,4,5);
+XMLWriter::startDTD();
+other::startDTD();
+XMLWriter::startDTD_unknown();
+XMLWriter::startDTD(1); // 1 to 3 ar OK
+XMLWriter::startDTD(1, 2);
+XMLWriter::startDTD(1, 2, 3);
+XMLWriter::startDTD(1, 2, 3, 4);
+XMLWriter::startDTD(1, 2, 3, 4, 5);
 
-$swift->ini_set();
-$other->ini_set();
-$tooMany->ini_set(1,2,3,4,5);
-$enough->ini_set(1,2);
-$swift->ini_set_ok();
+other::startDTD(1); 
+other::startDTD(1, 2);
+other::startDTD(1, 2, 3);
+other::startDTD(1, 2, 3, 4);
+other::startDTD(1, 2, 3, 4, 5);
+
+
+$XMLWriter->startDTD();
+$other->startDTD();
+$XMLWriter->startDTD_unknown();
+$XMLWriter->startDTD(1);
+$XMLWriter->startDTD(1, 2);
+$XMLWriter->startDTD(1, 2, 3);
+$XMLWriter->startDTD(1, 2, 3, 4);
+$XMLWriter->startDTD(1, 2, 3, 4, 5);
+
+// Functioncall : ignored
+startdtd();
+startdtd(1, 2);
+startdtd(1, 2, 3, 4, 5);
 
 ?>

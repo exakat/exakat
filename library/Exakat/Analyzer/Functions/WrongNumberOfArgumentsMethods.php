@@ -26,25 +26,50 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongNumberOfArgumentsMethods extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/VariableArguments',
+                    );
+    }
     
     public function analyze() {
         $methods = self::$methods->getMethodsArgsInterval();
-        $argsMins = array();
-        $argsMaxs = array();
+        $argsMins = array_fill(1, 10, array());
+        $argsMaxs = array_fill(1, 10, array());
+        $argsMinsFNP = array_fill(0, 10, array());
+        $argsMaxsFNP = array_fill(0, 10, array());
         
         // Needs to finish the list of methods and their arguments.
+        // Needs to checks on constructors tooà
+        // Refactor this analysis to link closely fullnspath and method name. Currently, it is done by batch
 
-        // Currently, classes are not checked.
+        // Checking PHP functions
         foreach($methods as $method) {
             if ($method['args_min'] > 0) {
-                $argsMins[$method['args_min']][] = $method['name'];
+                $argsMins[$method['args_min']][]    = mb_strtolower($method['name']);
+                $argsMinsFNP[$method['args_min']][makeFullNSpath($method['class'])] = 1;
             }
-            $argsMaxs[$method['args_max']][] = $method['name'];
+            if ($method['args_max'] < 100) {
+                $argsMaxs[$method['args_max']][] =  mb_strtolower($method['name']);
+                $argsMaxsFNP[$method['args_max']][makeFullNSpath($method['class'])] = 1;
+            }
         }
-        
+
         // case for methods
         foreach($argsMins as $nb => $f) {
-            $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+            if (empty($f)) { continue; }
+
+            $this->atomIs('Staticmethodcall')
+                 ->outIs('CLASS')
+                 ->fullnspathIs(array_keys($argsMinsFNP[$nb]))
+                 ->inIs('CLASS')
+                 ->outIs('METHOD')
+                 ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)
+                 ->isLess('count', $nb)
+                 ->back('first');
+            $this->prepareQuery();
+
+            // Check for type when possible
+            $this->atomIs('Methodcall')
                  ->outIs('METHOD')
                  ->codeIs($f)
                  ->isLess('count', $nb)
@@ -53,13 +78,47 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
         }
 
         foreach($argsMaxs as $nb => $f) {
-            $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+            if (empty($f)) { continue; }
+            
+            $this->atomIs('Staticmethodcall')
+                 ->outIs('CLASS')
+                 ->fullnspathIs(array_keys($argsMaxsFNP[$nb]))
+                 ->inIs('CLASS')
+                 ->outIs('METHOD')
+                 ->codeIs($f)
+                 ->isMore('count', $nb)
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomIs('Methodcall')
                  ->outIs('METHOD')
                  ->codeIs($f)
                  ->isMore('count', $nb)
                  ->back('first');
             $this->prepareQuery();
         }
+
+        //Custom methods, when we can find the definition
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->outIs('METHOD')
+             ->savePropertyAs('count', 'call')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->IsLess('args_min', 'call')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->outIs('METHOD')
+             ->savePropertyAs('count', 'call')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isMore('args_max', 'call')
+             ->back('first');
+        $this->prepareQuery();
+
     }
 }
 
