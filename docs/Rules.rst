@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 27 Nov 2018 11:08:27 +0000
-.. comment: Generation hash : 22aba7b919dba3965413b6025e6b11e7856b0d7f
+.. comment: Generation date : Mon, 03 Dec 2018 18:05:47 +0000
+.. comment: Generation hash : be73f48adf83c4d24255f58f1b8d30845c855bd6
 
 
 .. _$http\_raw\_post\_data:
@@ -391,15 +391,24 @@ While PHP lints this code, it won't execute it and stop with a Fatal Error : ``C
 
 See also `Class Abstraction <http://php.net/abstract>`_.
 
-+-------------+----------------------------------------+
-| Short name  | Classes/AbstractOrImplements           |
-+-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Implements all the abstract methods of the class
+* Make the class abstract
+
++-------------+-------------------------------------------+
+| Short name  | Classes/AbstractOrImplements              |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`    |
++-------------+-------------------------------------------+
+| Severity    | Major                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`zurmo-classes-abstractorimplements` |
++-------------+-------------------------------------------+
 
 
 
@@ -509,55 +518,6 @@ List of calls to private properties/methods that will compile but yield some fat
 +-------------+-----------------------+
 | Time To Fix | Quick (30 mins)       |
 +-------------+-----------------------+
-
-
-
-.. _action-should-be-in-controller:
-
-Action Should Be In Controller
-##############################
-
-
-Action methods should be in a controller and public.
-
-.. code-block:: php
-
-   <?php
-   
-   use Zend\Mvc\Controller\AbstractActionController;
-   
-   class SomeController extends AbstractActionController
-   {
-       // Good method
-       public function indexAction()
-       {
-           doSomething();
-       }
-   
-       // Bad method : protected
-       // turn protected into public, or drop the Action suffix
-       protected function protectedIndexAction()
-       {
-           doSomething();
-       }
-   
-       // Bad method : private
-       // turn private into public, or drop the Action suffix
-       protected function privateIndexAction()
-       {
-           doSomething();
-       }
-   
-   }
-   
-   
-   ?>
-
-+------------+--------------------------+
-| Short name | ZendF/ActionInController |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
 
 
 
@@ -1145,7 +1105,7 @@ Argument Should Be Typehinted
 #############################
 
 
-When a method expects objects as argument, those arguments should be typehinted, so as to provide early warning that a wrong object is being sent to the method.
+When a method expects objects as argument, those arguments should be typehinted. This way, it provides early warning that a wrong object is being sent to the method.
 
 The analyzer will detect situations where a class, or the keywords 'array' or 'callable'. 
 
@@ -1162,6 +1122,8 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 
 
 `'Closure <http://php.net/manual/fr/class.closure.php>`_ arguments are omitted.
+
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/ShouldBeTypehinted                                                                  |
@@ -1421,57 +1383,6 @@ Suggestions
 
 
 
-.. _avoid-double-prepare:
-
-Avoid Double Prepare
-####################
-
-
-Double prepare shoud be avoided, for security reasons. 
-
-When preparing in two phases, any placeholder from the first part may be escaped by the second prepare, leading to their neutralization. This way, injecting ' %s ', leads to creating %s outside quotes : ' ' %s ' ' (external quotes are from the first prepare, while the internal set of quotes are from the second).
-
-It is recommended to build the query and to prepare it in one call, to avoid such pitfall.
-
-.. code-block:: php
-
-   <?php
-   
-   // Only one prepare
-       $args = [$u, $t];
-       $res = $wpdb->prepare(' select * from table user = %s and type = %s', $args);
-   
-   // also only one prepare
-       $args = [$u];
-       $query = 'select * from table user = %s and type = %s';
-       if ( $condition) {
-           $query .= ' and type = %s';
-           $args[] = $t;
-       }
-       $res = $wpdb->prepare($query, $args);
-   
-   // double prepare
-       $where = $wpdb->prepare('where user = %s', $s); 
-       $res = $wpdb->prepare(' select * from table $where AND other = %d', );
-   
-   ?>
-
-
-See also `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_ and 
-`Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
-
-+-------------+-------------------------+
-| Short name  | Wordpress/DoublePrepare |
-+-------------+-------------------------+
-| Themes      | :ref:`Wordpress`        |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
-
-
-
 .. _avoid-large-array-assignation:
 
 Avoid Large Array Assignation
@@ -1555,46 +1466,6 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 
 
 
-.. _avoid-non-wordpress-globals:
-
-Avoid Non Wordpress Globals
-###########################
-
-
-Refrain using any global variable that is not ``Wordpress``'s own. 
-
-Global variables are available to write and read across the whole application, making their data both easily accessible, and difficult to track when an unexpected change happens. 
-It is recommended to rely on a mix of arguments passing and class structures to reduce the code of any variable to a smaller part of the code.
-
-.. code-block:: php
-
-   <?php
-   
-   my_hook() {
-       // This is a Wordpress global
-       $GLOBALS['is_safari'] = true;
-       
-       // is_iphone7 is not a Wordpress variable
-       global $is_iphone7;
-   }
-   
-   ?>
-
-
-See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
-
-+-------------+-----------------------------+
-| Short name  | Wordpress/AvoidOtherGlobals |
-+-------------+-----------------------------+
-| Themes      | :ref:`Wordpress`            |
-+-------------+-----------------------------+
-| Severity    | Critical                    |
-+-------------+-----------------------------+
-| Time To Fix | Slow (1 hour)               |
-+-------------+-----------------------------+
-
-
-
 .. _avoid-optional-properties:
 
 Avoid Optional Properties
@@ -1644,50 +1515,6 @@ See also `Avoid optional services as much as possible <http://bestpractices.thec
 +-------------+---------------------------------+
 | Time To Fix | Slow (1 hour)                   |
 +-------------+---------------------------------+
-
-
-
-.. _avoid-php-superglobals:
-
-Avoid PHP Superglobals
-######################
-
-
-Avoid using PHP superglobal when using Zend Framework. Zend Framework provides other ways to reach the incoming values : they should be used.
-
-.. code-block:: php
-
-   <?php
-   
-   // Normal PHP code
-   $parameter = $_GET['parameter'];
-   
-   // The Zend Framework way.
-   // 
-   <?php
-   namespace <module name>\Controller;
-   
-   use Zend\Mvc\Controller\AbstractActionController;
-   use Zend\View\Model\ViewModel;
-   
-   class HelloController extends AbstractActionController
-   {
-       public function worldAction()
-       {
-           $message = $this->params()->fromQuery('message', 'foo');
-           return new ViewModel(['message' => $message]);
-       }
-   }
-   ?>
-
-
-See also `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_ of the Zend-mvc component.
-
-+------------+----------------------+
-| Short name | ZendF/DontUseGPC     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
 
 
 
@@ -2628,286 +2455,6 @@ Depending on the load of the called method, this may increase the speed of the l
 
 
 
-.. _cakephp-2.5.0-undefined-classes:
-
-CakePHP 2.5.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 2.5.0.
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp25 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-2.6.0-undefined-classes:
-
-CakePHP 2.6.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 2.6.0.
-5 new classes
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp26 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-2.7.0-undefined-classes:
-
-CakePHP 2.7.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 2.7.0.
-12 new classes 
- 
-2 removed classes
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp27 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-2.8.0-undefined-classes:
-
-CakePHP 2.8.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 2.8.0.
-8 new classes
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp28 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-2.9.0-undefined-classes:
-
-CakePHP 2.9.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 2.9.0.
-16 new classes 
- 
-2 removed classes
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp29 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-3.0-deprecated-class:
-
-CakePHP 3.0 Deprecated Class
-############################
-
-
-According to the `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_, the following class is deprecated and should be removed.
-
-* Set (Cake\Utility\Set) : replace it with Hash (Cake\Utility\Hash)
-
-+-------------+-------------------------------+
-| Short name  | Cakephp/Cake30DeprecatedClass |
-+-------------+-------------------------------+
-| Themes      | :ref:`Cakephp`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
-+-------------+-------------------------------+
-
-
-
-.. _cakephp-3.0.0-undefined-classes:
-
-CakePHP 3.0.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 3.0.0.
-754 new classes 
-13 new interfaces 
-34 new traits 
- 
-1062 removed classes 
-7 removed interfaces
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp30 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-3.1.0-undefined-classes:
-
-CakePHP 3.1.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 3.1.0.
-64 new classes 
-5 new interfaces 
-5 new traits 
- 
-16 removed classes
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp31 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-3.2.0-undefined-classes:
-
-CakePHP 3.2.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 3.2.0.
-27 new classes 
-4 new interfaces 
-4 new traits 
- 
-1 removed class
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp32 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-3.3-deprecated-class:
-
-CakePHP 3.3 Deprecated Class
-############################
-
-
-According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following class is deprecated and should be removed.
-
-* Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with ``Cake\Utility\Crypto\Openssl`` or ``ext/openssl``.
-
-+-------------+-------------------------------+
-| Short name  | Cakephp/Cake33DeprecatedClass |
-+-------------+-------------------------------+
-| Themes      | :ref:`Cakephp`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
-+-------------+-------------------------------+
-
-
-
-.. _cakephp-3.3.0-undefined-classes:
-
-CakePHP 3.3.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 3.3.0.
-93 new classes 
-5 new interfaces 
-1 new trait 
- 
-19 removed classes 
-1 removed interface
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp33 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-3.4.0-undefined-classes:
-
-CakePHP 3.4.0 Undefined Classes
-###############################
-
-
-CakePHP classes, interfaces and traits that are not defined in version 3.4.0.
-41 new classes 
-1 new interface 
-1 new trait 
- 
-16 removed classes 
-2 removed traits
-
-+------------+-------------------+
-| Short name | Cakephp/Cakephp34 |
-+------------+-------------------+
-| Themes     | :ref:`Cakephp`    |
-+------------+-------------------+
-
-
-
-.. _cakephp-used:
-
-CakePHP Used
-############
-
-
-CakePHP classes, interfaces and traits being used in the code.
-
-.. code-block:: php
-
-   <?php
-   
-   namespace App\Controller;
-   
-   use Cake\Controller\Controller;
-   
-   class AppController extends Controller
-   {
-   
-       public function initialize()
-       {
-           // Always enable the CSRF component.
-           $this->loadComponent('Csrf');
-       }
-   
-   }
-   
-   ?>
-
-
-See also `CakePHP <https://www.cakephp.org/>`_.
-
-+------------+---------------------+
-| Short name | Cakephp/CakePHPUsed |
-+------------+---------------------+
-| Themes     | :ref:`Cakephp`      |
-+------------+---------------------+
-
-
-
 .. _callback-needs-return:
 
 Callback Needs Return
@@ -3372,7 +2919,7 @@ Catch Overwrite Variable
 ########################
 
 
-The try/catch structure uses some variables that also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
+The try/catch structure uses some variables that are also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
 
 .. code-block:: php
 
@@ -3399,6 +2946,12 @@ The try/catch structure uses some variables that also in use in this scope. In c
 
 It is recommended to use another name for these catch variables.
 
+Suggestions
+^^^^^^^^^^^
+
+* Use a standard : only use $e (or else) to catch exceptions. Avoid using them for anything else, parameter, property or local variable.
+* Change the variable, and keep the caught exception
+
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CatchShadowsVariable                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -3409,6 +2962,8 @@ It is recommended to use another name for these catch variables.
 | Time To Fix | Instant (5 mins)                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpipam-structures-catchshadowsvariable`, :ref:`suitecrm-structures-catchshadowsvariable`     |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -3873,7 +3428,9 @@ Closure May Use $this
 #####################
 
 
-When closure were introduced in PHP, they couldn't use the $this variable, making is cumbersome to access local properties when the closure was created within an object. 
+$this is automatically accessible to closures.
+
+When closures were introduced in PHP, they couldn't use the $this variable, making is cumbersome to access local properties when the closure was created within an object. 
 
 .. code-block:: php
 
@@ -3899,7 +3456,7 @@ When closure were introduced in PHP, they couldn't use the $this variable, makin
 
 This is not the case anymore since PHP 5.4.
 
-See also `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_.
+See also `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/ClosureThisSupport    |
@@ -5439,7 +4996,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Turn the foreach() and its condition into a call to array_unique()
-* Extract the condition from the foreach() and add a separat call to array_unique()
+* Extract the condition from the foreach() and add a separate call to array_unique()
 
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseArrayUnique                                                                |
@@ -5761,32 +5318,6 @@ PHP 7.0 has the ability to define an array as a constant, using the `'define() <
 
 
 
-.. _defined-view-property:
-
-Defined View Property
-#####################
-
-
-View variables are set by calling the methods setVariable or setVariables on the View object. 
-
-.. code-block:: php
-
-   <?php
-   
-   $model    = new ViewModel();
-   // foo is set to bar
-   $model->setVariable('foo', 'bar');
-   
-   ?>
-
-+------------+---------------------------+
-| Short name | ZendF/DefinedViewProperty |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
 .. _dependant-trait:
 
 Dependant Trait
@@ -5871,100 +5402,6 @@ Note that these functions may be still usable : they generate warning that help 
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------+
-
-
-
-.. _deprecated-methodcalls-in-cake-3.2:
-
-Deprecated Methodcalls in Cake 3.2
-##################################
-
-
-According to the Cake Migration Guide, the following are deprecated and should be changed.
-
-* Shell\:\:error()
-* Cake\Database\Expression\QueryExpression\:\:type()
-* Cake\ORM\ResultSet\:\:_calculateTypeMap()                 
-* Cake\ORM\ResultSet\:\:_castValues()                       
-
-See also `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_.
-
-+-------------+---------------------------------+
-| Short name  | Cakephp/Cake32DeprecatedMethods |
-+-------------+---------------------------------+
-| Themes      | :ref:`Cakephp`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-
-
-
-.. _deprecated-methodcalls-in-cake-3.3:
-
-Deprecated Methodcalls in Cake 3.3
-##################################
-
-
-According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following are deprecated and should be changed.
-
-* Shell\:\:error()
-
-+-------------+---------------------------------+
-| Short name  | Cakephp/Cake33DeprecatedMethods |
-+-------------+---------------------------------+
-| Themes      | :ref:`Cakephp`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-
-
-
-.. _deprecated-static-calls-in-cake-3.3:
-
-Deprecated Static calls in Cake 3.3
-###################################
-
-
-According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following are deprecated and should be changed.
-
-* Router\:\:mapResources() is deprecated. Use routing scopes and $routes->resources() instead.
-* Router\:\:redirect() is deprecated. Use routing scopes and $routes->redirect() instead.
-
-+-------------+------------------------------------------+
-| Short name  | Cakephp/Cake33DeprecatedStaticmethodcall |
-+-------------+------------------------------------------+
-| Themes      | :ref:`Cakephp`                           |
-+-------------+------------------------------------------+
-| Severity    | Major                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Quick (30 mins)                          |
-+-------------+------------------------------------------+
-
-
-
-.. _deprecated-trait-in-cake-3.3:
-
-Deprecated Trait in Cake 3.3
-############################
-
-
-According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following are deprecated and should be changed.
-
-* Cake\Routing\RequestActionTrait
-
-+-------------+--------------------------------+
-| Short name  | Cakephp/Cake33DeprecatedTraits |
-+-------------+--------------------------------+
-| Themes      | :ref:`Cakephp`                 |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
 
 
 
@@ -7562,38 +6999,6 @@ This analysis also detect unicode codepoint with superfluous leading zeros.
 
 
 
-.. _error-messages:
-
-Error Messages
-##############
-
-
-Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
-
-It is a good exercise to read the messages out of context, and try to understand what is about.
-
-.. code-block:: php
-
-   <?php
-   
-   // Not so helpful messages
-   'die('Here be monsters');
-   'exit('An error happened');
-   throw new Exception('Exception thrown at runtime');
-   
-   ?>
-
-
-Error messages are spotted via `'die <http://www.php.net/die>`_, `'exit <http://www.php.net/exit>`_ or throw.
-
-+------------+--------------------------+
-| Short name | Structures/ErrorMessages |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
 .. _eval()-usage:
 
 Eval() Usage
@@ -7629,7 +7034,7 @@ See also `eval <http://www.php.net/eval>`_.
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/EvalUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`, :ref:`Wordpress`        |
+| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -7707,7 +7112,7 @@ Try exiting the function/class with return, or throw exception that may be caugh
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/ExitUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ZendFramework`                                          |
+| Themes      | :ref:`Analyze`                                                                |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -8623,14 +8028,14 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+ php_logo_guid
-+ php_egg_logo_guid
-+ php_real_logo_guid
-+ zend_logo_guid
-+ mcrypt_cbc
-+ mcrypt_cfb
-+ mcrypt_ecb
-+ mcrypt_ofb
++ `'php_logo_guid() <http://www.php.net/php_logo_guid>`_
++ `'php_egg_logo_guid() <http://www.php.net/php_egg_logo_guid>`_
++ `'php_real_logo_guid() <http://www.php.net/php_real_logo_guid>`_
++ `'zend_logo_guid() <http://www.php.net/zend_logo_guid>`_
++ mcrypt_cbc()
++ mcrypt_cfb()
++ mcrypt_ecb()
++ mcrypt_ofb()
 
 .. code-block:: php
 
@@ -10178,6 +9583,8 @@ Invalid Constant Name
 #####################
 
 
+There is a naming convention for PHP constants names. 
+
 According to PHP's manual, constant names, ' A valid constant name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.'.
 
 Constant, must follow this regex : ``/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/``.
@@ -10394,87 +9801,6 @@ Suggestions
 
 
 
-.. _is-zend-framework-1-controller:
-
-Is Zend Framework 1 Controller
-##############################
-
-
-Mark a class as being a Zend Framework Controller.
-
-.. code-block:: php
-
-   <?php
-   
-   class AController extends Zend_Controller_Action {
-       // Controller code
-   }
-   
-   ?>
-
-+------------+----------------------+
-| Short name | ZendF/IsController   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _is-zend-framework-1-helper:
-
-Is Zend Framework 1 Helper
-##########################
-
-
-Mark a class as being a Zend Framework Helper.
-
-.. code-block:: php
-
-   <?php
-   
-   class AnHelper extends Zend_View_Helper_Abstract {
-       // Controller code
-   }
-   
-   ?>
-
-+------------+----------------------+
-| Short name | ZendF/IsHelper       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _is-zend-view-file:
-
-Is Zend View File
-#################
-
-
-Mark files as View when then have the .phtml extension.
-
-Zend Views are build with call to $this, without any class or trait. Indeed, the file will be included just in time, and its properties and methods will then be provided.
-
-.. code-block:: php
-
-   <?php
-   
-   echo $this->title;
-   
-   ?>
-
-
-See also `Zend View <https://github.com/zendframework/zend-view>`_.
-
-+------------+----------------------+
-| Short name | ZendF/IsView         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
 .. _isset-multiple-arguments:
 
 Isset Multiple Arguments
@@ -10516,11 +9842,63 @@ See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
 
 
 
-.. _join-file():
+.. _isset()-on-the-whole-array:
 
-Join file()
-###########
+Isset() On The Whole Array
+##########################
 
+
+Isset() works quietly on a whole array. There is no need to test all previous index before testing for the target index.
+
+.. code-block:: php
+
+   <?php
+   
+   // Straight to the point
+   if ('isset($a[1]['source'])) {
+       // Do something with $a[1]['source']
+   }
+   
+   // Doing too much work
+   if ('isset($a) && 'isset($a[1]) && 'isset($a[1]['source'])) {
+       // Do something with $a[1]['source']
+   }
+   
+   ?>
+
+
+There is a gain in readability, by avoiding long and hard to read logical expression, and reducing them in one simple `'isset <http://www.php.net/isset>`_ call.
+
+There is a gain in performances by using one call to `'isset <http://www.php.net/isset>`_, instead of several, but it is a micro-optimization. 
+
+See also `Isset <http://php.net/manual/en/function.`'isset <http://www.php.net/isset>`_.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove all unnecessary calls to isset()
+
++-------------+-----------------------------------------+
+| Short name  | Performances/IssetWholeArray            |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Performances` |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Instant (5 mins)                        |
++-------------+-----------------------------------------+
+
+
+
+.. _joining-file():
+
+Joining file()
+##############
+
+
+Use `'file() <http://www.php.net/file>`_ to read lines separately. 
 
 Applying join('', ) or implode('', ) to the result of `'file() <http://www.php.net/file>`_ provides the same results than using `'file_get_contents() <http://www.php.net/file_get_contents>`_, but at a higher cost of memory and processing.
 
@@ -10851,7 +10229,7 @@ Sometimes, the logic is not what it seems. It is important to check the actual i
    ?>
 
 
-Based on article from Andrey Karpov  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
+Based on article from ``Andrey Karpov``  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 
 +-------------+----------------------------+
 | Short name  | Structures/LogicalMistakes |
@@ -11455,7 +10833,7 @@ Method Signature Must Be Compatible
 ###################################
 
 
-Make sure methods signature are compatible 
+Make sure methods signature are compatible.
 
 PHP generates the infamous Fatal error at execution : ``Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar()``
 
@@ -11475,6 +10853,14 @@ PHP generates the infamous Fatal error at execution : ``Declaration of FooParent
 
 
 Currently, the analysis doesn't check for ellipsis nor references.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the child class method() signature.
+* Fix the parent class method() signature, after checking that it won't affect the other children.
 
 +-------------+-----------------------------------------+
 | Short name  | Classes/MethodSignatureMustBeCompatible |
@@ -13031,26 +12417,26 @@ New Constants In PHP 7.2
 
 The following constants are now native in PHP 7.2. It is advised to avoid using such names for constant before moving to this new version.
 
-* PHP_OS_FAMILY
-* PHP_FLOAT_DIG
-* PHP_FLOAT_EPSILON
-* PHP_FLOAT_MAX
-* PHP_FLOAT_MIN
-* SQLITE3_DETERMINISTIC
-* CURLSSLOPT_NO_REVOKE
-* CURLOPT_DEFAULT_PROTOCOL
-* CURLOPT_STREAM_WEIGHT
-* CURLMOPT_PUSHFUNCTION
-* CURL_PUSH_OK
-* CURL_PUSH_DENY
-* CURL_HTTP_VERSION_2TLS
-* CURLOPT_TFTP_NO_OPTIONS
-* CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE
-* CURLOPT_CONNECT_TO
-* CURLOPT_TCP_FASTOPEN
-* DNS_CAA
+* ``PHP_OS_FAMILY``
+* ``PHP_FLOAT_DIG``
+* ``PHP_FLOAT_EPSILON``
+* ``PHP_FLOAT_MAX``
+* ``PHP_FLOAT_MIN``
+* ``SQLITE3_DETERMINISTIC``
+* ``CURLSSLOPT_NO_REVOKE``
+* ``CURLOPT_DEFAULT_PROTOCOL``
+* ``CURLOPT_STREAM_WEIGHT``
+* ``CURLMOPT_PUSHFUNCTION``
+* ``CURL_PUSH_OK``
+* ``CURL_PUSH_DENY``
+* ``CURL_HTTP_VERSION_2TLS``
+* ``CURLOPT_TFTP_NO_OPTIONS``
+* ``CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE``
+* ``CURLOPT_CONNECT_TO``
+* ``CURLOPT_TCP_FASTOPEN``
+* ``DNS_CAA``
 
-Note : PHP 7.2 is not out yet (2017-04-10). This list is currently temporary and may undergo changes until the final version is out.
+See also `New global constants in 7.2 <http://php.net/manual/en/migration72.constants.php>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/Php72NewConstants     |
@@ -13610,42 +12996,6 @@ See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and
 
 
 
-.. _no-direct-input-to-wpdb:
-
-No Direct Input To Wpdb
-#######################
-
-
-Avoid using incoming variables when building SQL queries with $wpdb->prepare().
-
-(This is quoted directly from Anthony Ferrera blog, link below).
-In general however, go through and remove all user input from the $query side of ->prepare(). NEVER pass user input to the query side. Meaning, never do this (in any form):
-
-.. code-block:: php
-
-   <?php
-     $where = $wpdb->prepare(' WHERE foo = %s', $_GET['data']);
-     $query = $wpdb->prepare('SELECT * FROM something $where LIMIT %d, %d', 1, 2);
-   ?>
-
-
-This is known as 'double-preparing' and is not a good design.
-(End of quote).
-
-See also `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
-
-+-------------+-------------------------------+
-| Short name  | Wordpress/NoDirectInputToWpdb |
-+-------------+-------------------------------+
-| Themes      | :ref:`Wordpress`              |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
-+-------------+-------------------------------+
-
-
-
 .. _no-direct-usage:
 
 No Direct Usage
@@ -13678,102 +13028,6 @@ For example, `'glob() <http://www.php.net/glob>`_ returns an array, unless some 
 +-------------+--------------------------+
 | Time To Fix | Slow (1 hour)            |
 +-------------+--------------------------+
-
-
-
-.. _no-echo-in-route-callable:
-
-No Echo In Route Callable
-#########################
-
-
-Avoid using echo(), `'print() <http://www.php.net/print>`_ or any printable PHP within the route callable method. 
-
-echo() works, it is prevents the code from setting any status code. This leads to confusion when the code return the content, but fail to set the right HTTP codes.
-
-Slim 4.0 will require to only use the return method : the route callable is required to return a response. 
-
-.. code-block:: php
-
-   <?php
-   $app = new Slim\App();
-   
-   // This works as expected, with or without status
-   $app->get('/', function ($request, $response, $args) {
-       return new MyResponseInterface ('content');
-   });
-   
-   // This works, but only on surface
-   $app->get('/', function ($request, $response, $args) {
-       echo 'content';
-   });
-   
-   ?>
-
-
-See `PSR7 <http://www.php-fig.org/psr/psr-7/>`_ and `PSR 7 and Value Objects <https://www.slimframework.com/docs/concepts/value-objects.html>`_.
-
-+------------+----------------------------+
-| Short name | Slim/NoEchoInRouteCallable |
-+------------+----------------------------+
-| Themes     | :ref:`Slim`                |
-+------------+----------------------------+
-
-
-
-.. _no-echo-outside-view:
-
-No Echo Outside View
-####################
-
-
-Views are the place where data is displayed to the browser. There should not be any other display of information from anywhere else in the code.
-
-In a view.phtml file : 
-.. code-block:: php
-
-   <?php
-   
-   echo $this->view;
-   
-   ?>
-
-
-In a controller.php file : 
-
-.. code-block:: php
-
-   <?php
-   
-   use Zend\Mvc\Controller\AbstractActionController;
-   
-   class myController extends AbstractActionController
-   {
-   
-       public function indexAction() {
-           if ($wrong) {
-               echo $errorMessage;
-           }
-           
-           $view = new ViewModel(array(
-               'message' => 'Hello world',
-           ));
-           $view->setTemplate('view.phtml');
-           return $view;    
-       }
-   }
-   
-   ?>
-
-+-------------+-------------------------+
-| Short name  | ZendF/NoEchoOutsideView |
-+-------------+-------------------------+
-| Themes      | :ref:`ZendFramework`    |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
 
 
 
@@ -13822,38 +13076,6 @@ Suggestions
 +-------------+-----------------------------------------+
 | Examples    | :ref:`tikiwiki-structures-noemptyregex` |
 +-------------+-----------------------------------------+
-
-
-
-.. _no-global-modification:
-
-No Global Modification
-######################
-
-
-Avoid modifying directly Wordpress global variables.
-
-It is recommended to use the function API instead.
-
-.. code-block:: php
-
-   <?php
-   
-   my_hook() {
-       // Avoid changing those variables, as Wordpress handles them
-       $GLOBALS['is_safari'] = true;
-   }
-   
-   ?>
-
-
-See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
-
-+------------+--------------------------------+
-| Short name | Wordpress/NoGlobalModification |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
 
 
 
@@ -14186,7 +13408,7 @@ Simplexml and ext/DOM load all external entities from the web, by default. This 
    
 
 
-Here, PHP tries to load the XML file, finds the entity, then solves the entity by encoding a file called ``index.php``. The source code of the file is not used as data in the xml file. 
+Here, PHP tries to load the XML file, finds the entity, then solves the entity by encoding a file called ``index.php``. The source code of the file is not used as data in the XML file. 
 
 See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_, 
          `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
@@ -15204,36 +14426,6 @@ Suggestions
 
 
 
-.. _nonce-creation:
-
-Nonce Creation
-##############
-
-
-Mark the creation of nonce by Wordpress. Nonce may be created with the Wordpress functions wp_nonce_field(), wp_nonce_url() and wp_nonce_create().
-
-.. code-block:: php
-
-   <?php
-   
-   // Create an nonce for a link.
-   $nonce = wp_create_nonce( 'my-nonce' );
-   
-   echo '<a href="myplugin.php?do_something=some_action&_wpnonce='.$nonce.'">Do some action</a>';
-   
-   ?>
-
-
-See also `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_.
-
-+------------+-------------------------+
-| Short name | Wordpress/NonceCreation |
-+------------+-------------------------+
-| Themes     | :ref:`Wordpress`        |
-+------------+-------------------------+
-
-
-
 .. _not-a-scalar-type:
 
 Not A Scalar Type
@@ -15283,7 +14475,7 @@ Not Not
 
 Double not makes a boolean, not a true.
 
-This is a wrongly done casting to boolean. PHP supports (boolean) to do the same, faster and cleaner.
+This is a wrongly done casting to boolean. PHP supports ``(boolean)`` to do the same, faster and cleaner.
 
 .. code-block:: php
 
@@ -16002,7 +15194,17 @@ PHP 7.0 New Classes
 
 Those classes are now declared natively in PHP 7.0 and should not be declared in custom code. 
 
-There are 8 new classes : Error, `'ParseError <http://php.net/manual/fr/class.parseerror.php>`_, TypeError, ArithmeticError, DivisionByZeroError, ClosedGeneratorException, ReflectionGenerator, ReflectionType, AssertionError.
+There are 8 new classes : 
+
+* ``Error``
+* ``ParseError``
+* ``TypeError``
+* ``ArithmeticError``
+* ``DivisionByZeroError``
+* ``ClosedGeneratorException``
+* ``ReflectionGenerator``
+* ``ReflectionType``
+* ``AssertionError``
 
 .. code-block:: php
 
@@ -16023,6 +15225,9 @@ There are 8 new classes : Error, `'ParseError <http://php.net/manual/fr/class.pa
    }
    
    ?>
+
+
+See also `New Classes and Interfaces <http://php.net/manual/en/migration70.classes.php>`_.
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewClasses                                                                                        |
@@ -16132,7 +15337,7 @@ PHP 7.1 Microseconds
 ####################
 
 
-PHP supports microseconds in DateTime class and date_create() function. This was introduced in PHP 7.1.
+PHP supports microseconds in ``DateTime`` class and date_create() function. This was introduced in PHP 7.1.
 
 In previous PHP versions, those dates only used seconds, leading to lazy comparisons : 
 
@@ -16326,8 +15531,10 @@ PHP 7.2 Removed Functions
 
 The following PHP native functions were removed in PHP 7.2.
 
-* png2wbmp
-* jpeg2wbmp
+* png2wbmp()
+* jpeg2wbmp()
+
+See also `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/Php72RemovedFunctions |
@@ -16415,7 +15622,8 @@ The last empty line is easier on the VCS, allowing clearer text diffs.
    ?>
 
 
-See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_.
+See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_ and 
+         `Trailing commas <https://www.puppetcookbook.com/posts/trailing-commas.html>`_.
 
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/PHP73LastEmptyArgument                                                                                                                                                                  |
@@ -17166,47 +16374,6 @@ This is a micro-optimisation. However, its usage is so widespread, including wit
 
 
 
-.. _prepare-placeholder:
-
-Prepare Placeholder
-###################
-
-
-$wpdb->prepare() only allows %d, %s and %F as placeholder. All others are not available. They are even enforced since Wordpress 4.8.3. 
-
-In particular, absolute references are not allowed anymore, due to an injection vulnerability.
-
-.. code-block:: php
-
-   <?php
-   
-   // valid place holders
-     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %s and col2 = %1$s and col3 = %F', 'string', 1, 1.2);
-   
-   // valid place holders : invalid Wordpress placeholder
-   // This may be a valid vsprintf placeholder.
-     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %b', $integerDisplayedAsBinary);
-   
-   // valid place holders : absolute reference. $var is used twice
-     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %s and %1$s', $var);
-   
-   ?>
-
-
-See also `'vprintf() <http://www.php.net/vprintf>`_ and `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
-
-+-------------+------------------------------+
-| Short name  | Wordpress/PreparePlaceholder |
-+-------------+------------------------------+
-| Themes      | :ref:`Wordpress`             |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
-
-
-
 .. _preprocess-arrays:
 
 Preprocess Arrays
@@ -17405,34 +16572,6 @@ See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>
 +-------------+----------------------------+
 | Time To Fix | Instant (5 mins)           |
 +-------------+----------------------------+
-
-
-
-.. _private-function-usage:
-
-Private Function Usage
-######################
-
-
-Wordpress has a list of 'private' function, that is reserves for itself. It is forbidden to use them.
-
-.. code-block:: php
-
-   <?php
-   
-   ///wp-includes/class-wp-theme.php, line 1139
-   $types = explode( ',', _cleanup_header_comment( $type[1] ) );
-   
-   ?>
-
-
-See also `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_.
-
-+------------+--------------------------------+
-| Short name | Wordpress/PrivateFunctionUsage |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
 
 
 
@@ -19067,45 +18206,6 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 
 
 
-.. _should-always-prepare:
-
-Should Always Prepare
-#####################
-
-
-Avoid using variables in string when preparing queries. Always try use the prepare statement by naming variables.
-
-This is particularly sensitive when using where() and having() methods. 
-
-Other methods, like limit() or offset() are immune against injections. 
-
-.. code-block:: php
-
-   <?php
-       // OK : all is hardcoded, no chance of injection
-       $select->from('foo')->where('x = 5');
-   
-       // This is the recommended way to use a variable
-       $select->from('foo')->where(['x' => $v]);
-   
-       // Concatenation is unsafe
-       $select->from('foo')->where('x = '.$v);
-       $select->from('foo')->where("x = $v");
-   ?>
-
-
-This analysis reports a false-postive, even when the included variable is an internal variable : it has been defined in the application, and not acquired from external users. In such case, injection and legit usage of concatenation are undistinguishable. 
-
-See also `zend-db documentation <https://github.com/zendframework/zend-db/blob/master/docs/book/index.md>`_.
-
-+------------+--------------------------+
-| Short name | ZendF/Zf3DbAlwaysPrepare |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
 .. _should-be-single-quote:
 
 Should Be Single Quote
@@ -19294,15 +18394,15 @@ Finally, short names makes the rest of the code readable.
    
    ?>
 
-+-------------+--------------------------------------+
-| Short name  | Namespaces/ShouldMakeAlias           |
-+-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ZendFramework` |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
++-------------+----------------------------+
+| Short name  | Namespaces/ShouldMakeAlias |
++-------------+----------------------------+
+| Themes      | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
 
 
 
@@ -19390,43 +18490,6 @@ See also `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php
 +------------+----------------------+
 | Themes     | none                 |
 +------------+----------------------+
-
-
-
-.. _should-regenerate-session-id:
-
-Should Regenerate Session Id
-############################
-
-
-No mention of Zend\Session\:\:regenerateId() method found. 
-
-When using Zend\Session, or PHP session, a session ID is assigned to the user. It is a random number, used to connect the user and its data on the server. Actually, anyone with the session ID may have access to the data. This is why those session ID are so long and complex.
-
-A good approach to protect the session ID is to reduce its lifespan : the shorter the time of use, the better. While changing the session ID at every hit on the page may no be possible, a more reasonable approach is to change the session id when an important action is about to take place. What important means is left to the application to decide.
-
-Based on this philopsophy, a code source that uses Zend\Session but never uses Zend\Session\:\:regenerateId() has to be updated.
-
-.. code-block:: php
-
-   <?php
-   
-       //Getting the session manager from the application
-      $session = $e->getApplication()
-                   ->getServiceManager()
-                   ->get('Zend\Session\SessionManager');
-   
-   ?>
-
-
-See `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_, 
-`\Zend\Session\SessionManager <https://framework.zend.com/apidoc/2.4/classes/Zend.Session.SessionManager.html#method_regenerateId>`_
-
-+------------+---------------------------------+
-| Short name | ZendF/ShouldRegenerateSessionId |
-+------------+---------------------------------+
-| Themes     | :ref:`ZendFramework`            |
-+------------+---------------------------------+
 
 
 
@@ -20342,475 +19405,6 @@ The gain produced here is greater with longer arrays, or greater reductions. The
 
 
 
-.. _slimphp-1.0.0-undefined-classes:
-
-SlimPHP 1.0.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.0.0 of SlimPHP.
-
-SlimPHP 1.0.0 has 22 classes, no traits and no interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp10 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-1.1.0-undefined-classes:
-
-SlimPHP 1.1.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.1.0 of SlimPHP.
-
-SlimPHP 1.1.0 has 33 classes, no traits and no interfaces;
-
-11 new classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp11 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-1.2.0-undefined-classes:
-
-SlimPHP 1.2.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.2.0 of SlimPHP.
-
-SlimPHP 1.2.0 has 35 classes, no traits and no interfaces;
-
-14 new classes. 12 removed classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp12 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-1.3.0-undefined-classes:
-
-SlimPHP 1.3.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.3.0 of SlimPHP.
-
-SlimPHP 1.3.0 has 33 classes, no traits and no interfaces;
-
-4 new classes. 6 removed classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp13 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-1.5.0-undefined-classes:
-
-SlimPHP 1.5.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.5.0 of SlimPHP.
-
-SlimPHP 1.5.0 has 33 classes, no traits and no interfaces;
-
-1 new class. 1 removed class.
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp15 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-1.6.0-undefined-classes:
-
-SlimPHP 1.6.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 1.6.0 of SlimPHP.
-
-SlimPHP 1.6.0 has 45 classes, no traits and no interfaces;
-
-25 new classes. 13 removed classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp16 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.0.0-undefined-classes:
-
-SlimPHP 2.0.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.0.0 of SlimPHP.
-
-SlimPHP 2.0.0 has 44 classes, no traits and no interfaces;
-
-21 new classes. 22 removed classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp20 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.1.0-undefined-classes:
-
-SlimPHP 2.1.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.1.0 of SlimPHP.
-
-SlimPHP 2.1.0 has 44 classes, no traits and no interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp21 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.2.0-undefined-classes:
-
-SlimPHP 2.2.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.2.0 of SlimPHP.
-
-SlimPHP 2.2.0 has 45 classes, no traits and no interfaces;
-
-2 new classes. 1 removed class. 
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp22 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.3.0-undefined-classes:
-
-SlimPHP 2.3.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.3.0 of SlimPHP.
-
-SlimPHP 2.3.0 has 48 classes, no traits and no interfaces;
-
-5 new classes. 2 removed classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp23 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.4.0-undefined-classes:
-
-SlimPHP 2.4.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.4.0 of SlimPHP.
-
-SlimPHP 2.4.0 has 48 classes, no traits and no interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp24 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.5.0-undefined-classes:
-
-SlimPHP 2.5.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.5.0 of SlimPHP.
-
-SlimPHP 2.5.0 has 50 classes, no traits and no interfaces;
-
-2 new classes.  
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp25 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-2.6.0-undefined-classes:
-
-SlimPHP 2.6.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 2.6.0 of SlimPHP.
-
-SlimPHP 2.6.0 has 50 classes, no traits and no interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp26 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.0.0-undefined-classes:
-
-SlimPHP 3.0.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.0.0 of SlimPHP.
-
-SlimPHP 3.0.0 has 55 classes, 2 traits and 9 interfaces;
-
-49 new classes, 9 new interfaces, 2 new traits. 44 removed classes.
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp30 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.1.0-undefined-classes:
-
-SlimPHP 3.1.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.1.0 of SlimPHP.
-
-SlimPHP 3.1.0 has 55 classes, 2 traits and 9 interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp31 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.2.0-undefined-classes:
-
-SlimPHP 3.2.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.2.0 of SlimPHP.
-
-SlimPHP 3.2.0 has 59 classes, 2 traits and 9 interfaces;
-
-4 new classes.  
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp32 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.3.0-undefined-classes:
-
-SlimPHP 3.3.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.3.0 of SlimPHP.
-
-SlimPHP 3.3.0 has 60 classes, 2 traits and 9 interfaces;
-
-1 new classe.
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp33 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.4.0-undefined-classes:
-
-SlimPHP 3.4.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.4.0 of SlimPHP.
-
-SlimPHP 3.4.0 has 64 classes, 2 traits and 9 interfaces;
-
-4 new classes.
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp34 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.5.0-undefined-classes:
-
-SlimPHP 3.5.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.5.0 of SlimPHP.
-
-SlimPHP 3.5.0 has 67 classes, 2 traits and 9 interfaces;
-
-3 new classes. 
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp35 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.6.0-undefined-classes:
-
-SlimPHP 3.6.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.6.0 of SlimPHP.
-
-SlimPHP 3.6.0 has 67 classes, 2 traits and 9 interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp36 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.7.0-undefined-classes:
-
-SlimPHP 3.7.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.7.0 of SlimPHP.
-
-SlimPHP 3.7.0 has 67 classes, 2 traits and 9 interfaces;
-
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp37 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
-.. _slimphp-3.8.0-undefined-classes:
-
-SlimPHP 3.8.0 Undefined Classes
-###############################
-
-
-SlimPHP classes, interfaces and traits that are not defined in version 3.8.0 of SlimPHP.
-
-SlimPHP 3.8.0 has 68 classes, 2 traits and 9 interfaces;
-
-1 new classe.
- 
-See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
-
-+------------+----------------+
-| Short name | Slim/Slimphp38 |
-+------------+----------------+
-| Themes     | :ref:`Slim`    |
-+------------+----------------+
-
-
-
 .. _slow-functions:
 
 Slow Functions
@@ -20952,9 +19546,9 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator\:\:`'next() <http://www.php.net/next>`_. 
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or ``SimpleXMLIterator\:\:`'next() <http://www.php.net/next>`_``. 
 
-It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
+It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the ``function $n * ($n + 1) / 2``, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
 This analysis doesn't detect usage of variables with ``compact``.
 
@@ -21083,15 +19677,15 @@ Those constants looks like a typo from other names.
    
    ?>
 
-+-------------+-----------------------+
-| Short name  | Constants/StrangeName |
-+-------------+-----------------------+
-| Themes      | none                  |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
-+-------------+-----------------------+
++-------------+--------------------------------+
+| Short name  | Constants/StrangeName          |
++-------------+--------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Analyze` |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Slow (1 hour)                  |
++-------------+--------------------------------+
 
 
 
@@ -21140,59 +19734,6 @@ See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/9492383917
 +-------------+-----------------------+
 | Time To Fix | Slow (1 hour)         |
 +-------------+-----------------------+
-
-
-
-.. _strange-names-for-methods:
-
-Strange Names For Methods
-#########################
-
-
-Those methods should have another name.
-
-Ever wondered why the ``__constructor`` is never called? Or the ``__consturct`` ? 
-
-Those errors most often originate from typos, or quick fixes that where not fully tested. Other times, they were badly chosen, or ran into PHP's own reserved keywords. 
-
-.. code-block:: php
-
-   <?php
-   
-   class foo {
-       // The real constructor
-       function '__construct() {}
-   
-       // The fake constructor
-       function __constructor() {}
-       
-       // The 'typo'ed' constructor
-       function __consturct() {}
-       
-       // This doesn't clone
-       function clone() {}
-   }
-   
-   ?>
-
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Use the proper name
-* Remove the method, when it is not used and tests still pass.
-
-+-------------+--------------------------------------------------+
-| Short name  | Classes/StrangeName                              |
-+-------------+--------------------------------------------------+
-| Themes      | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
-+-------------+--------------------------------------------------+
-| Severity    | Major                                            |
-+-------------+--------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                    |
-+-------------+--------------------------------------------------+
 
 
 
@@ -21993,35 +20534,6 @@ See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.d
 +-------------+-------------------------+
 | Time To Fix | Quick (30 mins)         |
 +-------------+-------------------------+
-
-
-
-.. _thrown-exceptions:
-
-Thrown Exceptions
-#################
-
-
-All Zend Framework thrown exceptions. 
-
-.. code-block:: php
-
-   <?php
-   
-   //All directly thrown exceptions are reported
-   throw new \RuntimeException('Error while processing');
-   
-   // Zend exceptions are also reported, thrown or not
-   $w = new \Zend\Filter\Exception\ExtensionNotLoadedException();
-   throw $w;
-   
-   ?>
-
-+------------+------------------------+
-| Short name | ZendF/ThrownExceptions |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
 
 
 
@@ -22848,214 +21360,6 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
 
 
 
-.. _undefined-class-2.0:
-
-Undefined Class 2.0
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.0.
-
-.. code-block:: php
-
-   <?php
-   
-   // 2.0 only class
-   $a = new Zend\Authentication\Adapter\Digest();
-   
-   // Not a 2.0 class (2.1+)
-   $b = $d 'instanceof Zend\Authentication\Adapter\Callback;
-   
-   ?>
-
-
-See `Zend Framework 2.0 <https://framework.zend.com/manual/2.0/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass20 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-2.1:
-
-Undefined Class 2.1
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.0.
-
-.. code-block:: php
-
-   <?php
-   
-   // 2.0 only class
-   $a = new Zend\Authentication\Adapter\Digest();
-   
-   // Not a 2.0 class (2.1+)
-   $b = $d 'instanceof Zend\Authentication\Adapter\Callback;
-   
-   ?>
-
-
-See `Zend Framework 2.1 <https://framework.zend.com/manual/2.1/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass21 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-2.2:
-
-Undefined Class 2.2
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.2.
-
-.. code-block:: php
-
-   <?php
-   
-   // 2.2 class (may be other versions)
-   $a = new Zend\Authentication\Adapter\DbTable\AbstractAdapter();
-   
-   // Not a 2.2 class (2.2+)
-   $b = $d 'instanceof Zend\Authentication\Adapter\Callback;
-   
-   ?>
-
-
-See `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass22 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-2.3:
-
-Undefined Class 2.3
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.3.
-
-.. code-block:: php
-
-   <?php
-   
-   // 2.3 class
-   $a = new Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter();
-   
-   // Not a 2.3 class
-   $b = $d 'instanceof Zend\Cache\Module;
-   
-   ?>
-
-
-See `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass23 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-2.4:
-
-Undefined Class 2.4
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.4.
-
-.. code-block:: php
-
-   <?php
-   // 2.4 class
-   $a = new Zend\Authentication\Adapter\DbTable\AbstractAdapter();
-   
-   // Not a 2.4 class
-   $b = $d 'instanceof Zend\Cache\Service\StorageAdapterPluginManagerFactory;
-   
-   ?>
-
-
-See `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass24 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-2.5:
-
-Undefined Class 2.5
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.5.
-
-.. code-block:: php
-
-   <?php
-   // 2.5 class
-   $a = new Zend\Authentication\Adapter\DbTable\AbstractAdapter();
-   
-   // Not a 2.5 class
-   $b = $d 'instanceof Zend\Cache\Service\PatternPluginManagerFactory;
-   
-   ?>
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass25 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-class-3.0:
-
-Undefined Class 3.0
-###################
-
-
-Mark classes, interfaces and traits when they are not available in Zend Framework 2.5.
-
-.. code-block:: php
-
-   <?php
-   // 3.0 class
-   $a = new Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter();
-   
-   // Not a 3.0 class
-   $b = $d 'instanceof Zend\EventManager\GlobalEventManager;
-   
-   ?>
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass30 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
 .. _undefined-class-constants:
 
 Undefined Class Constants
@@ -23474,103 +21778,13 @@ See also `Variable basics <http://php.net/manual/en/language.variables.basics.ph
 
 
 
-.. _undefined-zend-1.10:
-
-Undefined Zend 1.10
-###################
-
-
-List of undefined classes or interfaces in Zend 1.10.
-
-See `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/UndefinedClass110 |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _undefined-zend-1.11:
-
-Undefined Zend 1.11
-###################
-
-
-List of undefined classes or interfaces in Zend 1.11
-
-See `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/UndefinedClass111 |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _undefined-zend-1.12:
-
-Undefined Zend 1.12
-###################
-
-
-List of undefined classes or interfaces in Zend 1.12.
-
-See `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/UndefinedClass112 |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _undefined-zend-1.8:
-
-Undefined Zend 1.8
-##################
-
-
-List of undefined classes or interfaces in Zend 1.8.
-
-See `Zend Framework 1.8 <https://framework.zend.com/manual/1.8/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass18 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _undefined-zend-1.9:
-
-Undefined Zend 1.9
-##################
-
-
-List of undefined classes or interfaces in Zend 1.9.
-
-See `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_.
-
-+------------+------------------------+
-| Short name | ZendF/UndefinedClass19 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
 .. _undefined-static\:\:-or-self\:\::
 
 Undefined static\:\: Or self\:\:
 ################################
 
 
-List of all undefined static and self properties and methods.
+self and static refer to the current class, or one of its parent. The property or the method may be undefined.
 
 .. code-block:: php
 
@@ -23591,46 +21805,29 @@ List of all undefined static and self properties and methods.
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Classes/UndefinedStaticMP |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+See also `Late Static Bindings <http://php.net/manual/en/language.oop5.late-static-bindings.php>`_.
 
 
 
-.. _unescaped-variables-in-templates:
+Suggestions
+^^^^^^^^^^^
 
-Unescaped Variables In Templates
-################################
+* Define the missing method or property
+* Remove usage of that undefined method or property
+* Fix name to call an actual local structure
 
-
-Whenever variables are emitted, they are reported as long as they are not escaped. 
-
-While this is quite a strict rule, it is good to know when variables are not protected at echo time. 
-
-.. code-block:: php
-
-   <?php
-       echo $unescapedVariable;
-       
-       echo esc_html($escapedVariable);
-   
-   ?>
-
-+-------------+------------------------------+
-| Short name  | Wordpress/UnescapedVariables |
-+-------------+------------------------------+
-| Themes      | :ref:`Wordpress`             |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
-+-------------+------------------------------+
++-------------+--------------------------------------------------------------------------------------+
+| Short name  | Classes/UndefinedStaticMP                                                            |
++-------------+--------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                       |
++-------------+--------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                |
++-------------+--------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                      |
++-------------+--------------------------------------------------------------------------------------+
+| Examples    | :ref:`xataface-classes-undefinedstaticmp`, :ref:`sugarcrm-classes-undefinedstaticmp` |
++-------------+--------------------------------------------------------------------------------------+
 
 
 
@@ -23699,7 +21896,7 @@ Usage of the Unicode Escape syntax, with the ``\u{xxxxx}`` format, available sin
 
 See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_,
          `Code point <https://en.wikipedia.org/wiki/Code_point>`_ and 
-         `Unicode <https://en.wikipedia.org/wiki/Unicode>_`.
+         `Unicode <https://en.wikipedia.org/wiki/Unicode>`_.
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UnicodeEscapeSyntax                                                                                    |
@@ -24992,38 +23189,6 @@ Usually, PHP functions are written all in lower case.
 
 
 
-.. _unverified-nonce:
-
-Unverified Nonce
-################
-
-
-Those nonces are never checked.
-
-Nonces were created in the code with  wp_nonce_field(), wp_nonce_url() and wp_nonce_create() functions, but they are not verified with wp_verify_nonce() nor check_ajax_referer()
-
-.. code-block:: php
-
-   <?php
-   
-   $nonce = wp_create_nonce( 'my-nonce' );
-   
-   if ( ! wp_verify_nonce( $nonce, 'my-other-nonce' ) ) { } else { }
-   
-   ?>
-
-+-------------+---------------------------+
-| Short name  | Wordpress/UnverifiedNonce |
-+-------------+---------------------------+
-| Themes      | :ref:`Wordpress`          |
-+-------------+---------------------------+
-| Severity    | Critical                  |
-+-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
-+-------------+---------------------------+
-
-
-
 .. _upload-filename-injection:
 
 Upload Filename Injection
@@ -25080,42 +23245,6 @@ See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_,
 +-------------+----------------------------------+
 | Time To Fix | Instant (5 mins)                 |
 +-------------+----------------------------------+
-
-
-
-.. _use-$wpdb-api:
-
-Use $wpdb Api
-#############
-
-
-It is recommended to use the Wordpress Database API, instead of using query. 
-This is especially true for UPDATE, REPLACE, INSERT and DELETE queries.
-
-.. code-block:: php
-
-   <?php
-   
-   // Generic query
-   $wpdb->query('DELETE FROM ' . $table . ' WHERE id=' . $id . ' LIMIT 1');
-   
-   // Wordpress query
-   $wpdb->delete( $table, array( 'id' => $id ), array('id' => '%d')); 
-   
-   ?>
-
-
-See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
-
-+-------------+----------------------+
-| Short name  | Wordpress/UseWpdbApi |
-+-------------+----------------------+
-| Themes      | :ref:`Wordpress`     |
-+-------------+----------------------+
-| Severity    | Critical             |
-+-------------+----------------------+
-| Time To Fix | Slow (1 hour)        |
-+-------------+----------------------+
 
 
 
@@ -25833,37 +23962,6 @@ Negative conditions are not reported when else is not present.
 
 
 
-.. _use-slim:
-
-Use Slim
-########
-
-
-This code uses the slim framework.
-
-Some classes, traits or interfaces where detected in the code. 
-
-.. code-block:: php
-
-   <?php
-   // Slim routing style
-      $app = new \Slim\App();
-      $app->get('/books/{id}', function ($request, $response, $args) {
-          // Show book identified by $args['id']
-      });
-   ?>
-
-
-See also `Slim <https://www.slimframework.com/>`_.
-
-+------------+--------------+
-| Short name | Slim/UseSlim |
-+------------+--------------+
-| Themes     | :ref:`Slim`  |
-+------------+--------------+
-
-
-
 .. _use-system-tmp:
 
 Use System Tmp
@@ -25974,55 +24072,6 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 +-------------+----------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                  |
 +-------------+----------------------------------------------------------------+
-
-
-
-.. _use-wordpress-functions:
-
-Use Wordpress Functions
-#######################
-
-
-Always use Wordpress functions instead of native PHP ones.
-
-Wordpress provides a lot of functions, that replace PHP natives one. It is recommended to used them.
-
-Here is a table of conversion : 
-
-.. Table is ugly, because PHP function will turn into a link. 
-
-+----------------------------------------------+---------------------+
-| PHP                                          |  Wordpress          | 
-+----------------------------------------------+---------------------+
-| `'mail() <http://www.php.net/mail>`_         |  wp_mail()          | 
-| `'header() <http://www.php.net/header>`_     |  wp_redirect()      | 
-| `'header() <http://www.php.net/header>`_     |  wp_safe_redirect() | 
-| `'exit() <http://www.php.net/exit>`_         |  wp_die()           | 
-| `'die() <http://www.php.net/die>`_           |  wp_die()           | 
-| `'rand() <http://www.php.net/rand>`_         |  wp_rand()          | 
-| `'mt_rand() <http://www.php.net/mt_rand>`_   |  wp_rand()          | 
-+----------------------------------------------+---------------------+
-
-.. code-block:: php
-
-   <?php
-   
-   // use Wordpress Mail
-   wp_mail('to@exakat.io', 'Mail subject', 'Mail message');
-   
-   // do not use PHP mail
-   mail('to@exakat.io', 'Mail subject', 'Mail message');
-   
-   ?>
-
-
-See `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_.
-
-+------------+--------------------------+
-| Short name | Wordpress/UseWpFunctions |
-+------------+--------------------------+
-| Themes     | :ref:`Wordpress`         |
-+------------+--------------------------+
 
 
 
@@ -26513,37 +24562,6 @@ This is the list of used once variables, scope by scope. Those variables are use
 
 
 
-.. _used-routes:
-
-Used Routes
-###########
-
-
-List of all routes used in the application. 
-
-.. code-block:: php
-
-   <?php
-   
-   // '/admin/' is a route. 
-   $app->get('/admin/', function ($x) { /* do something(); */ });
-   
-   // '/contact/'.$email is a dynamic route. 
-   $app->post('/contact/'.$email.'/{id}, function ($x) { /* do something(); */ });
-   
-   ?>
-
-
-See also `Routing <https://www.slimframework.com/docs/objects/router.html>`_.
-
-+------------+-----------------+
-| Short name | Slim/UsedRoutes |
-+------------+-----------------+
-| Themes     | :ref:`Slim`     |
-+------------+-----------------+
-
-
-
 .. _useless-abstract-class:
 
 Useless Abstract Class
@@ -26584,6 +24602,64 @@ Abstract classes that have only static methods are omitted here : one usage of s
 +-------------+-------------------------+
 | Time To Fix | Slow (1 hour)           |
 +-------------+-------------------------+
+
+
+
+.. _useless-alias:
+
+Useless Alias
+#############
+
+
+It is not possible to declare an alias of a method with the same name. 
+
+PHP reports that `Trait method f has not been applied, because there are collisions with other trait methods on x`, which is a way to say that the alias will be in conflict with the method name. 
+
+When the method is the only one bearing a name, and being imported, there is no need to alias it. When the method is imported in several traits, the keyword `insteadof` is available to solve the conflict.
+
+.. code-block:: php
+
+   <?php
+   
+   trait t {
+       function h() {}
+   }
+   
+   class x {
+       use t { 
+           // This is possible
+           t::f as g; 
+   
+           // This is not possible, as the alias is in conflict with itself
+           // alias are case insensitive
+           t::f as f; 
+       }
+   }
+   
+   ?>
+
+
+
+This code lint but doesn't execute.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the alias
+* Fix the alias or the origin method name
+* Switch to insteadof, and avoid as keyword
+
++-------------+----------------------------------------+
+| Short name  | Traits/UselessAlias                    |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Instant (5 mins)                       |
++-------------+----------------------------------------+
 
 
 
@@ -27321,32 +25397,6 @@ See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and
 
 
 
-.. _using-short-tags:
-
-Using Short Tags
-################
-
-
-The code makes use of short tags. Short tags are the following : ``<?`` . A full scripts looks like that : ``<? /* php code */ ?>`` .
-
-It is recommended to not use short tags, and use standard PHP tags. This makes PHP code compatible with XML standards. Short tags used to be popular, but have lost it.
-
-See also `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_.
-
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Structures/ShortTags                                                                      |
-+-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Wordpress`                                                                          |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                          |
-+-------------+-------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-short-tags <https://github.com/dseguy/clearPHP/tree/master/rules/no-short-tags.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------+
-
-
-
 .. _usort-sorting-in-php-7.0:
 
 Usort Sorting In PHP 7.0
@@ -27572,270 +25622,6 @@ See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/d
 
 
 
-.. _wordpress-4.0-undefined-classes:
-
-Wordpress 4.0 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.0.
-
-Wordpress 4.0 has 223 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress40Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.1-undefined-classes:
-
-Wordpress 4.1 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.1.
-
-Wordpress 4.1 has 224 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress41Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.2-undefined-classes:
-
-Wordpress 4.2 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.2.
-
-Wordpress 4.2 has 243 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress42Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.3-undefined-classes:
-
-Wordpress 4.3 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.3.
-
-Wordpress 4.3 has 243 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress43Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.4-undefined-classes:
-
-Wordpress 4.4 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.4.
-
-Wordpress 4.4 has 251 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress44Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.5-undefined-classes:
-
-Wordpress 4.5 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.5.
-
-Wordpress 4.5 has 255 classes, 0 traits and 1 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress45Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.6-undefined-classes:
-
-Wordpress 4.6 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.6.
-
-Wordpress 4.6 has 315 classes, 0 traits and 5 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress46Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.7-undefined-classes:
-
-Wordpress 4.7 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.7.
-
-Wordpress 4.7 has 338 classes, 0 traits and 5 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress47Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.8-undefined-classes:
-
-Wordpress 4.8 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.8.
-
-Wordpress 4.8 has 344 classes, 0 traits and 5 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress48Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-4.9-undefined-classes:
-
-Wordpress 4.9 Undefined Classes
-###############################
-
-
-Classes, trait and interfaces that are undefined for Wordpress 4.9.
-
-Wordpress 4.9 has 349 classes, 0 traits and 5 interfaces.
-
-+------------+--------------------------------+
-| Short name | Wordpress/Wordpress49Undefined |
-+------------+--------------------------------+
-| Themes     | :ref:`Wordpress`               |
-+------------+--------------------------------+
-
-
-
-.. _wordpress-usage:
-
-Wordpress Usage
-###############
-
-
-Usage of Wordpress.
-
-+------------+--------------------------+
-| Short name | Wordpress/WordpressUsage |
-+------------+--------------------------+
-| Themes     | :ref:`Wordpress`         |
-+------------+--------------------------+
-
-
-
-.. _wpdb-best-usage:
-
-Wpdb Best Usage
-###############
-
-
-Use the adapted API with $wpdb.
-
-Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
-
-It is recommended to use them, instead of writing queries with concatenations.
-
-.. code-block:: php
-
-   <?php
-   // Example from Wordpress Manual
-   $user_count = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->users" );
-   echo <p>User count is {$user_count}</p>;
-   ?>
-
-
-See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
-
-+-------------+-------------------------+
-| Short name  | Wordpress/WpdbBestUsage |
-+-------------+-------------------------+
-| Themes      | :ref:`Wordpress`        |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
-
-
-
-.. _wpdb-prepare-or-not:
-
-Wpdb Prepare Or Not
-###################
-
-
-Always use $wpdb->prepare() when variables are used in the SQL query.
-
-When using $wpdb, it is recommended to use directly the query() method when the SQL is not using variables.
-
-.. code-block:: php
-
-   <?php
-   
-   // No need to prepare this query : it is all known at coding time.
-   $wpdb->prepare('INSERT INTO table VALUES (1,2,3)');
-   
-   // No need to prepare this query : $wpdb->prefix is safe
-   $wpdb->prepare('INSERT INTO {$wpdb->prefix}table values (1,2,3)');
-   
-   // Don't use query when variable are involved : always use prepare
-   $wpdb->query('INSERT INTO TABLE values (1,2,'.$var.')');
-   
-   ?>
-
-+------------+----------------------------+
-| Short name | Wordpress/WpdbPrepareOrNot |
-+------------+----------------------------+
-| Themes     | :ref:`Wordpress`           |
-+------------+----------------------------+
-
-
-
 .. _written-only-variables:
 
 Written Only Variables
@@ -27869,28 +25655,6 @@ Those variables are being written, but never read. This way, they are useless an
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-
-
-
-.. _wrong-class-location:
-
-Wrong Class Location
-####################
-
-
-Classes may not be used or extended in any places inside the Zend Framework file hierarchy. 
-For example, Zend_Controller_Action must be inside a /controllers/ folder for the routing system to find it. 
-
-Here are the validation that are currently performed : 
-* Zend_Auth shouldn't be in templates files (.phtml)
-* Zend_Controller_Action must be in /controllers/ folder
-* Zend_View_Helper_Abstract must be in /helpers/ folder
-
-+------------+----------------------+
-| Short name | ZendF/NotInThatPath  |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
 
 
 
@@ -27959,22 +25723,32 @@ Those methods are called with a wrong number of arguments : too many or too few.
        private function Bar($a, $b) {
            return $a + $b;
        }
+       
+       public function foobar() {
+           $this->Bar(1);
+           
+           // Good amount
+           $this->Bar(1, 2);
+           
+           // Too Many
+           $this->Bar(1, 2, 3);
+       }
    }
-   
-   $foo = new Foo();
-   // Too Few
-   $foo->Bar(1);
-   
-   // Good amount
-   $foo->Bar(1, 2);
-   
-   // Too Many
-   $foo->Bar(1, 2, 3);
    
    ?>
 
 
-Methods with a variable number of argument, either using ellipsis or `'func_get_args() <http://www.php.net/func_get_args>`_ are ignored.
+Methods with a variable number of argument, either using ellipsis or `'func_get_args() <http://www.php.net/func_get_args>`_ are ignored. 
+
+PHP emits an error at runtime, when arguments are not enough : ''. PHP doesn't emit an error when too many arguments are provided.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Adapt the call to use one of the right number of arguments : this means dropping the extra ones, or adding the missing ones
+* Adapt the signature of the method, and use a default value
 
 +-------------+-----------------------------------------+
 | Short name  | Functions/WrongNumberOfArgumentsMethods |
@@ -28205,232 +25979,6 @@ See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_,
 +-------------+------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                  |
 +-------------+------------------------------------------------+
-
-
-
-.. _zf3-usage-of-deprecated:
-
-ZF3 Usage Of Deprecated
-#######################
-
-
-Structures are marked with @deprecated in Zend Framework 3, before being removed. That gives an initial warning that the code will `'break <http://php.net/manual/en/control-structures.break.php>`_ if it continues using this structure.
-
-Any kind of structure may be @deprecated : classes, traits, interfaces, methods, constants, properties and parameters. 
-
-.. code-block:: php
-
-   <?php
-   
-   // Deprecated class 
-   $a = new Zend\Authentication\Adapter\DbTable();
-   
-   // deprecated method : 
-   $b->setLibOption();
-   
-   // deprecated constant in 2.5
-   Zend\Db\Sql::JOIN_OUTER_LEFT;
-   Zend\Db\Sql::JOIN_LEFT;
-   
-   // deprecated trait
-   class foo {
-       // Deprecated during most 2.0 series. 
-       // use Zend\EventManager\EventManagerAwareTrait instead
-       use Zend\EventManager\ProvidesEvents;
-   }
-   
-   // deprecated interface
-   class foo2 implements Zend\EventManager\SharedEventAggregateAwareInterface {}
-   
-   // deprecated property
-   $a->allowEmpty = 2;
-   
-   
-   ?>
-
-
-Currently, parameters are omitted in the analysis.
-
-+-------------+--------------------------+
-| Short name  | ZendF/Zf3DeprecatedUsage |
-+-------------+--------------------------+
-| Themes      | :ref:`ZendFramework`     |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
-
-
-
-.. _zend-classes:
-
-Zend Classes
-############
-
-
-Zend Classes are used in the code.
-
-Classes are detected by checking the full namespaced name with the prefix ``zend_`` (Zend Framework 1) or ``\zend\`` (Zend Framework 2).
-
-.. code-block:: php
-
-   <?php
-   
-   namespace {
-       // Zend View class (This is for the example, not actual code)
-       class Zend_View {}
-   }
-   
-   namespace Zend\Feed { 
-       // Zend Feed Uri class (This is for the example, not actual code)
-       class Uri {  }
-   }
-   
-   ?>
-
-+------------+----------------------+
-| Short name | ZendF/ZendClasses    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-interface:
-
-Zend Interface
-##############
-
-
-Identify Zend Framework interface, based on fully qualified name.
-
-.. code-block:: php
-
-   <?php
-                      // This is a zend interface
-   class X implements Zend\Authentication\Adapter\Http\Exception\ExceptionInterface, 
-                      // This is Not a zend interface
-                      Not\Zend\Authentication\Adapter\Http\Exception\ExceptionInterface {
-   }
-   
-                          // This is a zend interface
-   interface Y implements Zend\Authentication\Adapter\Http\ResolverInterface, 
-                          // This is Not a zend interface
-                          Not\Zend\Authentication\Adapter\Http\ResolverInterface {
-   
-   }
-   
-   ?>
-
-+------------+----------------------+
-| Short name | ZendF/ZendInterfaces |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-trait:
-
-Zend Trait
-##########
-
-
-Identify Zend Framework traits, based on fully qualified name.
-
-.. code-block:: php
-
-   <?php
-   
-   class X {
-       // This is a zend trait
-       use Zend\Db\Adapter\AdapterAwareTrait;
-   
-       // This is NOT a zend trait
-       use Not\Zend\Db\Adapter\AdapterAwareTrait;
-   }
-   
-   ?>
-
-+------------+----------------------+
-| Short name | ZendF/ZendTrait      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-typehinting:
-
-Zend Typehinting
-################
-
-
-Zend classes or interfaces used in `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ or typehint situations.
-
-.. code-block:: php
-
-   <?php
-   
-   // In a typehint 
-   function a(Zend\View $class) {
-       //...
-   }
-   
-   // In a 'instanceof 
-   if ($a 'instanceof Zend_Acl_Exception) {
-   
-   }
-   
-   ?>
-
-+------------+-----------------------+
-| Short name | ZendF/ZendTypehinting |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend\config:
-
-Zend\Config
-###########
-
-
-The Zend Framework 3 component Zend-Config is used.
-
-.. code-block:: php
-
-   <?php
-   // Example from the Zend Framework 3 dos
-   
-   // Create the config object
-   $config = new Zend\Config\Config([], true);
-   $config->production = [];
-   
-   $config->production->webhost = 'www.example.com';
-   $config->production->database = [];
-   $config->production->database->params = [];
-   $config->production->database->params->host = 'localhost';
-   $config->production->database->params->username = 'production';
-   $config->production->database->params->password = 'secret';
-   $config->production->database->params->dbname = 'dbproduction';
-   
-   $writer = new Zend\Config\Writer\Ini();
-   echo $writer->toString($config);
-   
-   ?>
-
-
-See also `Zend-config <https://docs.zendframework.com/zend-config/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Config      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
 
 
 
@@ -29761,3822 +27309,6 @@ They may be tolerated during development time, but must be removed so as not to 
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------+
-
-
-
-.. _zend-authentication-2.5.0-undefined-classes:
-
-zend-authentication 2.5.0 Undefined Classes
-###########################################
-
-
-zend-authentication classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-authentication 2.5.0 has 27 classes, no traits and 9 interfaces;
-
-  See also : `zend-authentication <https://github.com/zendframework/zend-authentication>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Authentication25 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-authentication-usage:
-
-zend-authentication Usage
-#########################
-
-
-zend-authentication usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-authentication has 27 classes, no traits and 9 interfaces;
-
-See also : `zend-authentication <https://github.com/zendframework/zend-authentication>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/Zf3Authentication |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _zend-barcode-2.5.0-undefined-classes:
-
-zend-barcode 2.5.0 Undefined Classes
-####################################
-
-
-zend-barcode classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-barcode 2.5.0 has 40 classes, no traits and 5 interfaces;
-
-  See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Barcode25   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-barcode-2.6.0-undefined-classes:
-
-zend-barcode 2.6.0 Undefined Classes
-####################################
-
-
-zend-barcode classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-barcode 2.6.0 has 40 classes, no traits and 5 interfaces;
-
-  See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Barcode26   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-barcode-usage:
-
-zend-barcode Usage
-##################
-
-
-zend-barcode usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-barcode has 40 classes, no traits and 5 interfaces;
-
-See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Barcode     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-cache-2.5.0-undefined-classes:
-
-zend-cache 2.5.0 Undefined Classes
-##################################
-
-
-zend-cache classes, interfaces and traits that are not defined in version 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Cache25     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-cache-2.6.0-undefined-classes:
-
-zend-cache 2.6.0 Undefined Classes
-##################################
-
-
-zend-cache classes, interfaces and traits that are not defined in version 2.6.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Cache26     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-cache-2.7.0-undefined-classes:
-
-zend-cache 2.7.0 Undefined Classes
-##################################
-
-
-zend-cache classes, interfaces and traits that are not defined in version 2.7.0.
-8 new classes 
-1 new trait
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Cache27     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-cache-usage:
-
-zend-cache Usage
-################
-
-
-zend-cache usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Cache                             |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-captcha-2.5.0-undefined-classes:
-
-zend-captcha 2.5.0 Undefined Classes
-####################################
-
-
-zend-captcha classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-captcha 2.5.0 has 13 classes, no traits and 2 interfaces;
-
-  See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Captcha25   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-captcha-2.6.0-undefined-classes:
-
-zend-captcha 2.6.0 Undefined Classes
-####################################
-
-
-zend-captcha classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-captcha 2.6.0 has 13 classes, no traits and 2 interfaces;
-
-  See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Captcha26   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-captcha-2.7.0-undefined-classes:
-
-zend-captcha 2.7.0 Undefined Classes
-####################################
-
-
-zend-captcha classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-captcha 2.7.0 has 13 classes, no traits and 2 interfaces;
-
-  See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Captcha27   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-captcha-usage:
-
-zend-captcha Usage
-##################
-
-
-zend-captcha usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-captcha has 13 classes, no traits and 2 interfaces;
-
-See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Captcha     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-code-2.5.0-undefined-classes:
-
-zend-code 2.5.0 Undefined Classes
-#################################
-
-
-zend-code classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-code 2.5.0 has 71 classes, no traits and 14 interfaces;
-
-  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Code25                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-code-2.6.0-undefined-classes:
-
-zend-code 2.6.0 Undefined Classes
-#################################
-
-
-zend-code classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-code 2.6.0 has 72 classes, no traits and 14 interfaces;
-
-1 new classe 
-.  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Code26                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-code-3.0.0-undefined-classes:
-
-zend-code 3.0.0 Undefined Classes
-#################################
-
-
-zend-code classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-code 3.0.0 has 73 classes, no traits and 14 interfaces;
-
-1 new classe 
-.  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Code30                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-code-3.1.0-undefined-classes:
-
-zend-code 3.1.0 Undefined Classes
-#################################
-
-
-zend-code classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-code 3.1.0 has 73 classes, no traits and 14 interfaces;
-
-  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Code31                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-code-3.2.0-undefined-classes:
-
-zend-code 3.2.0 Undefined Classes
-#################################
-
-
-zend-code classes, interfaces and traits that are not defined in version 3.2.0.
-
-zend-code 3.2.0 has 75 classes, no traits and 14 interfaces;
-
-2 new classes.  
-See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Code32                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-code-usage:
-
-zend-code Usage
-###############
-
-
-zend-code usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 3.1.0..
-
-zend-code has 73 classes, no traits and 14 interfaces;
-
-See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Code        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-config-2.5.x:
-
-zend-config 2.5.x
-#################
-
-
-zend-config, all versions 2.5.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Config25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-config-2.6.x:
-
-zend-config 2.6.x
-#################
-
-
-zend-config, all versions 2.6.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Config26    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-config-3.0.x:
-
-zend-config 3.0.x
-#################
-
-
-zend-config, all versions beyond 3.0.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Config30    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-config-3.1.x:
-
-zend-config 3.1.x
-#################
-
-
-zend-config, all versions beyond 3.1.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Config31    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-console-2.5.0-undefined-classes:
-
-zend-console 2.5.0 Undefined Classes
-####################################
-
-
-zend-console classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-console 2.5.0 has 27 classes, no traits and 6 interfaces;
-
-  See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Console25   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-console-2.6.0-undefined-classes:
-
-zend-console 2.6.0 Undefined Classes
-####################################
-
-
-zend-console classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-console 2.6.0 has 27 classes, no traits and 6 interfaces;
-
-  See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Console26   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-console-usage:
-
-zend-console Usage
-##################
-
-
-zend-console usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-console has 27 classes, no traits and 6 interfaces;
-
-See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Console     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-2.5.0-undefined-classes:
-
-zend-crypt 2.5.0 Undefined Classes
-##################################
-
-
-zend-crypt classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-crypt 2.5.0 has 32 classes, no traits and 8 interfaces;
-
-  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt25     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-2.6.0-undefined-classes:
-
-zend-crypt 2.6.0 Undefined Classes
-##################################
-
-
-zend-crypt classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-crypt 2.6.0 has 32 classes, no traits and 8 interfaces;
-
-  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt26     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-3.0.0-undefined-classes:
-
-zend-crypt 3.0.0 Undefined Classes
-##################################
-
-
-zend-crypt classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-crypt 3.0.0 has 35 classes, no traits and 8 interfaces;
-
-3 new classes 
-.  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt30     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-3.1.0-undefined-classes:
-
-zend-crypt 3.1.0 Undefined Classes
-##################################
-
-
-zend-crypt classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-crypt 3.1.0 has 36 classes, no traits and 8 interfaces;
-
-1 new classe 
-.  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt31     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-3.2.0-undefined-classes:
-
-zend-crypt 3.2.0 Undefined Classes
-##################################
-
-
-zend-crypt classes, interfaces and traits that are not defined in version 3.2.0.
-
-zend-crypt 3.2.0 has 36 classes, no traits and 8 interfaces;
-
-  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt32     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-crypt-usage:
-
-zend-crypt Usage
-################
-
-
-zend-crypt usage, based on classes, interfaces and traits. This covers all five versions, from 2.5.0 to 3.2.0..
-
-zend-crypt has 36 classes, no traits and 8 interfaces;
-
-See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Crypt       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-db-2.5.0-undefined-classes:
-
-zend-db 2.5.0 Undefined Classes
-###############################
-
-
-zend-db classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-db 2.5.0 has 162 classes, 1 traits and 30 interfaces;
-
-  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Db25        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-db-2.6.0-undefined-classes:
-
-zend-db 2.6.0 Undefined Classes
-###############################
-
-
-zend-db classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-db 2.6.0 has 165 classes, 1 traits and 31 interfaces;
-
-3 new classes 
-.  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Db26        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-db-2.7.0-undefined-classes:
-
-zend-db 2.7.0 Undefined Classes
-###############################
-
-
-zend-db classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-db 2.7.0 has 165 classes, 1 traits and 31 interfaces;
-
-  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Db27        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-db-2.8.0-undefined-classes:
-
-zend-db 2.8.0 Undefined Classes
-###############################
-
-
-zend-db classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-db 2.8.0 has 168 classes, 1 traits and 31 interfaces;
-
-3 new classes 
-.  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Db28        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-db-usage:
-
-zend-db Usage
-#############
-
-
-zend-db usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 2.8.0..
-
-zend-db has 168 classes, 1 traits and 31 interfaces;
-
-See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Db          |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-debug-2.5.0-undefined-classes:
-
-zend-debug 2.5.0 Undefined Classes
-##################################
-
-
-zend-debug classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-debug 2.5.0 has 1 classes, no traits and no interfaces;
-
-  See also : `zend-debug <https://github.com/zendframework/zend-debug>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Debug25     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-debug-usage:
-
-zend-debug Usage
-################
-
-
-zend-debug usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-debug has 1 classes, no traits and no interfaces;
-
-See also : `zend-debug <https://github.com/zendframework/zend-debug>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Debug       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-di-2.5.0-undefined-classes:
-
-zend-di 2.5.0 Undefined Classes
-###############################
-
-
-zend-di classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-di 2.5.0 has 28 classes, no traits and 6 interfaces;
-
-  See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Di25        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-di-2.6.0-undefined-classes:
-
-zend-di 2.6.0 Undefined Classes
-###############################
-
-
-zend-di classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-di 2.6.0 has 28 classes, no traits and 6 interfaces;
-
-  See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Di26        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-di-usage:
-
-zend-di Usage
-#############
-
-
-zend-di usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-di has 28 classes, no traits and 6 interfaces;
-
-See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Di          |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-dom-2.5.0-undefined-classes:
-
-zend-dom 2.5.0 Undefined Classes
-################################
-
-
-zend-dom classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-dom 2.5.0 has 9 classes, no traits and 1 interfaces;
-
-  See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Dom25       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-dom-2.6.0-undefined-classes:
-
-zend-dom 2.6.0 Undefined Classes
-################################
-
-
-zend-dom classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-dom 2.6.0 has 9 classes, no traits and 1 interfaces;
-
-  See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Dom26       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-dom-usage:
-
-zend-dom Usage
-##############
-
-
-zend-dom usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-dom has 9 classes, no traits and 1 interfaces;
-
-See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Dom         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-escaper-2.5.0-undefined-classes:
-
-zend-escaper 2.5.0 Undefined Classes
-####################################
-
-
-zend-escaper classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-escaper 2.5.0 has 3 classes, no traits and 1 interfaces;
-
-  See also : `zend-escaper <https://github.com/zendframework/zend-escaper>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Escaper25   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-escaper-usage:
-
-zend-escaper Usage
-##################
-
-
-zend-escaper usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-escaper has 3 classes, no traits and 1 interfaces;
-
-See also : `zend-escaper <https://github.com/zendframework/zend-escaper>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Escaper     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-eventmanager-2.5.0-undefined-classes:
-
-zend-eventmanager 2.5.0 Undefined Classes
-#########################################
-
-
-zend-eventmanager classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-eventmanager 2.5.0 has 12 classes, 3 traits and 11 interfaces;
-
-  See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Eventmanager25                    |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-eventmanager-2.6.0-undefined-classes:
-
-zend-eventmanager 2.6.0 Undefined Classes
-#########################################
-
-
-zend-eventmanager classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-eventmanager 2.6.0 has 12 classes, 3 traits and 12 interfaces;
-
-  See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Eventmanager26                    |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-eventmanager-3.0.0-undefined-classes:
-
-zend-eventmanager 3.0.0 Undefined Classes
-#########################################
-
-
-zend-eventmanager classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-eventmanager 3.0.0 has 14 classes, 3 traits and 9 interfaces;
-
-4 new classes 
-, 1 new trait 
-. 2 removed classes 
-, 1 removed trait 
-. See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Eventmanager30                    |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-eventmanager-3.1.0-undefined-classes:
-
-zend-eventmanager 3.1.0 Undefined Classes
-#########################################
-
-
-zend-eventmanager classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-eventmanager 3.1.0 has 14 classes, 3 traits and 9 interfaces;
-
-  See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Eventmanager31                    |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-eventmanager-3.2.0-undefined-classes:
-
-zend-eventmanager 3.2.0 Undefined Classes
-#########################################
-
-
-zend-eventmanager classes, interfaces and traits that are not defined in version 3.2.0.
-
-zend-eventmanager 3.2.0 has 14 classes, 2 traits and 9 interfaces;
-
-  See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/Zf3Eventmanager32 |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _zend-eventmanager-usage:
-
-zend-eventmanager Usage
-#######################
-
-
-zend-eventmanager usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 3.1.0..
-
-zend-eventmanager has 16 classes, 4 traits and 12 interfaces;
-
-See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Eventmanager                      |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-feed-2.5.0-undefined-classes:
-
-zend-feed 2.5.0 Undefined Classes
-#################################
-
-
-zend-feed classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-feed 2.5.0 has 88 classes, no traits and 15 interfaces;
-
-  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Feed25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-feed-2.6.0-undefined-classes:
-
-zend-feed 2.6.0 Undefined Classes
-#################################
-
-
-zend-feed classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-feed 2.6.0 has 93 classes, no traits and 17 interfaces;
-
-5 new classes 
-.  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Feed26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-feed-2.7.0-undefined-classes:
-
-zend-feed 2.7.0 Undefined Classes
-#################################
-
-
-zend-feed classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-feed 2.7.0 has 93 classes, no traits and 17 interfaces;
-
-  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Feed27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-feed-2.8.0-undefined-classes:
-
-zend-feed 2.8.0 Undefined Classes
-#################################
-
-
-zend-feed classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-feed 2.8.0 has 93 classes, no traits and 17 interfaces;
-
-  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Feed28      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-feed-usage:
-
-zend-feed Usage
-###############
-
-
-zend-feed usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-feed has 93 classes, no traits and 17 interfaces;
-
-See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Feed        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-file-2.5.0-undefined-classes:
-
-zend-file 2.5.0 Undefined Classes
-#################################
-
-
-zend-file classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-file 2.5.0 has 14 classes, no traits and 2 interfaces;
-
-  See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3File25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-file-2.6.0-undefined-classes:
-
-zend-file 2.6.0 Undefined Classes
-#################################
-
-
-zend-file classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-file 2.6.0 has 14 classes, no traits and 2 interfaces;
-
-  See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3File26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-file-2.7.0-undefined-classes:
-
-zend-file 2.7.0 Undefined Classes
-#################################
-
-
-zend-file classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-file 2.7.0 has 14 classes, no traits and 2 interfaces;
-
-  See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3File27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-file-usage:
-
-zend-file Usage
-###############
-
-
-zend-file usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-file has 14 classes, no traits and 2 interfaces;
-
-See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3File        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-filter-2.5.0-undefined-classes:
-
-zend-filter 2.5.0 Undefined Classes
-###################################
-
-
-zend-filter classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-filter 2.5.0 has 73 classes, no traits and 4 interfaces;
-
-  See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Filter25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-filter-2.6.0-undefined-classes:
-
-zend-filter 2.6.0 Undefined Classes
-###################################
-
-
-zend-filter classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-filter 2.6.0 has 73 classes, no traits and 4 interfaces;
-
-  See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Filter26    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-filter-2.7.0-undefined-classes:
-
-zend-filter 2.7.0 Undefined Classes
-###################################
-
-
-zend-filter classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-filter 2.7.0 has 76 classes, no traits and 4 interfaces;
-
-3 new classes 
-.  See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Filter27    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-filter-usage:
-
-zend-filter Usage
-#################
-
-
-zend-filter usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-filter has 76 classes, no traits and 4 interfaces;
-
-See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Filter      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-2.5.0-undefined-classes:
-
-zend-form 2.5.0 Undefined Classes
-#################################
-
-
-zend-form classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-form 2.5.0 has 115 classes, 2 traits and 9 interfaces;
-
-  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-2.6.0-undefined-classes:
-
-zend-form 2.6.0 Undefined Classes
-#################################
-
-
-zend-form classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-form 2.6.0 has 115 classes, 2 traits and 9 interfaces;
-
-  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-2.7.0-undefined-classes:
-
-zend-form 2.7.0 Undefined Classes
-#################################
-
-
-zend-form classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-form 2.7.0 has 116 classes, 2 traits and 9 interfaces;
-
-1 new classe 
-.  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-2.8.0-undefined-classes:
-
-zend-form 2.8.0 Undefined Classes
-#################################
-
-
-zend-form classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-form 2.8.0 has 120 classes, 2 traits and 9 interfaces;
-
-4 new classes 
-.  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form28      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-2.9.0-undefined-classes:
-
-zend-form 2.9.0 Undefined Classes
-#################################
-
-
-zend-form classes, interfaces and traits that are not defined in version 2.9.0.
-
-zend-form 2.9.0 has 123 classes, 3 traits and 9 interfaces;
-
-4 new classes 
-, 1 new trait 
-. 1 removed classe 
-. See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form29      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-form-usage:
-
-zend-form Usage
-###############
-
-
-zend-form usage, based on classes, interfaces and traits. This covers all five versions, from 2.5.0 to 2.9.0..
-
-zend-form has 124 classes, 3 traits and 9 interfaces;
-
-See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Form        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-http-2.5.0-undefined-classes:
-
-zend-http 2.5.0 Undefined Classes
-#################################
-
-
-zend-http classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-http 2.5.0 has 97 classes, no traits and 8 interfaces;
-
-  See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Http25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-http-2.6.0-undefined-classes:
-
-zend-http 2.6.0 Undefined Classes
-#################################
-
-
-zend-http classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-http 2.6.0 has 97 classes, no traits and 8 interfaces;
-
-  See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Http26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-http-2.7.0-undefined-classes:
-
-zend-http 2.7.0 Undefined Classes
-#################################
-
-
-zend-http classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-http 2.7.0 has 97 classes, no traits and 8 interfaces;
-
-  See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Http27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-http-usage:
-
-zend-http Usage
-###############
-
-
-zend-http usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-http has 97 classes, no traits and 8 interfaces;
-
-See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Http        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-i18n-2.5.0-undefined-classes:
-
-zend-i18n 2.5.0 Undefined Classes
-#################################
-
-
-zend-i18n classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-i18n 2.5.0 has 40 classes, 1 traits and 5 interfaces;
-
-  See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3I18n25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-i18n-2.6.0-undefined-classes:
-
-zend-i18n 2.6.0 Undefined Classes
-#################################
-
-
-zend-i18n classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-i18n 2.6.0 has 40 classes, 1 traits and 5 interfaces;
-
-  See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3I18n26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-i18n-2.7.0-undefined-classes:
-
-zend-i18n 2.7.0 Undefined Classes
-#################################
-
-
-zend-i18n classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-i18n 2.7.0 has 43 classes, 1 traits and 5 interfaces;
-
-3 new classes 
-.  See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3I18n27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-i18n-usage:
-
-zend-i18n Usage
-###############
-
-
-zend-i18n usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-i18n has 43 classes, 1 traits and 5 interfaces;
-
-See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3I18n        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-i18n-resources-usage:
-
-zend-i18n resources Usage
-#########################
-
-
-zend-i18n-resources usage, based on classes, interfaces and traits. This covers the only version, 2.5.0.
-
-zend-i18n has 1 classe, no traits and no interfaces;
-
-See also : `zend-i18n-resources <https://github.com/zendframework/zend-i18n-resources>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/Zf3I18n_resources |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _zend-i18n-resources-2.5.x:
-
-zend-i18n-resources 2.5.x
-#########################
-
-
-zend-i18n-resources, all versions 2.5.x.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3I18n_resources25 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-inputfilter-2.5.0-undefined-classes:
-
-zend-inputfilter 2.5.0 Undefined Classes
-########################################
-
-
-zend-inputfilter classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-inputfilter 2.5.0 has 11 classes, 1 traits and 9 interfaces;
-
-  See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+------------------------+
-| Short name | ZendF/Zf3Inputfilter25 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _zend-inputfilter-2.6.0-undefined-classes:
-
-zend-inputfilter 2.6.0 Undefined Classes
-########################################
-
-
-zend-inputfilter classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-inputfilter 2.6.0 has 11 classes, 1 traits and 9 interfaces;
-
-  See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+------------------------+
-| Short name | ZendF/Zf3Inputfilter26 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _zend-inputfilter-2.7.0-undefined-classes:
-
-zend-inputfilter 2.7.0 Undefined Classes
-########################################
-
-
-zend-inputfilter classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-inputfilter 2.7.0 has 14 classes, 1 traits and 9 interfaces;
-
-3 new classes 
-.  See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+------------------------+
-| Short name | ZendF/Zf3Inputfilter27 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _zend-inputfilter-usage:
-
-zend-inputfilter Usage
-######################
-
-
-zend-inputfilter usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-inputfilter has 14 classes, 1 traits and 9 interfaces;
-
-See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Inputfilter |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-json-2.5.0-undefined-classes:
-
-zend-json 2.5.0 Undefined Classes
-#################################
-
-
-zend-json classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-json 2.5.0 has 22 classes, no traits and 2 interfaces;
-
-  See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Json25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-json-2.6.0-undefined-classes:
-
-zend-json 2.6.0 Undefined Classes
-#################################
-
-
-zend-json classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-json 2.6.0 has 22 classes, no traits and 2 interfaces;
-
-  See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Json26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-json-3.0.0-undefined-classes:
-
-zend-json 3.0.0 Undefined Classes
-#################################
-
-
-zend-json classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-json 3.0.0 has 8 classes, no traits and 1 interfaces;
-
-14 removed classes. 
-
-See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Json30      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-json-usage:
-
-zend-json Usage
-###############
-
-
-zend-json usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 3.0.0..
-
-zend-json has 22 classes, no traits and 2 interfaces;
-
-See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Json        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-loader-2.5.0-undefined-classes:
-
-zend-loader 2.5.0 Undefined Classes
-###################################
-
-
-zend-loader classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-loader 2.5.0 has 13 classes, no traits and 4 interfaces;
-
-  See also : `zend-loader <https://github.com/zendframework/zend-loader>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Loader25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-loader-usage:
-
-zend-loader Usage
-#################
-
-
-zend-loader usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-loader has 13 classes, no traits and 4 interfaces;
-
-See also : `zend-loader <https://github.com/zendframework/zend-loader>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Loader      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-2.5.0-undefined-classes:
-
-zend-log 2.5.0 Undefined Classes
-################################
-
-
-zend-log classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-log 2.5.0 has 42 classes, 1 traits and 9 interfaces;
-
-  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log25       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-2.6.0-undefined-classes:
-
-zend-log 2.6.0 Undefined Classes
-################################
-
-
-zend-log classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-log 2.6.0 has 45 classes, 1 traits and 9 interfaces;
-
-3 new classes 
-.  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log26       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-2.7.0-undefined-classes:
-
-zend-log 2.7.0 Undefined Classes
-################################
-
-
-zend-log classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-log 2.7.0 has 47 classes, 1 traits and 9 interfaces;
-
-2 new classes 
-.  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log27       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-2.8.0-undefined-classes:
-
-zend-log 2.8.0 Undefined Classes
-################################
-
-
-zend-log classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-log 2.8.0 has 53 classes, 1 traits and 9 interfaces;
-
-6 new classes 
-.  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log28       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-2.9.0-undefined-classes:
-
-zend-log 2.9.0 Undefined Classes
-################################
-
-
-zend-log classes, interfaces and traits that are not defined in version 2.9.0.
-
-zend-log 2.9.0 has 56 classes, 1 traits and 11 interfaces;
-
-3 new classes 
-.  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log29       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-log-usage:
-
-zend-log Usage
-##############
-
-
-zend-log usage, based on classes, interfaces and traits. This covers all five versions, from 2.5.0 to 2.9.0..
-
-zend-log has 56 classes, 1 traits and 11 interfaces;
-
-See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Log         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mail-2.5.0-undefined-classes:
-
-zend-mail 2.5.0 Undefined Classes
-#################################
-
-
-zend-mail classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-mail 2.5.0 has 74 classes, no traits and 16 interfaces;
-
-  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mail25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mail-2.6.0-undefined-classes:
-
-zend-mail 2.6.0 Undefined Classes
-#################################
-
-
-zend-mail classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-mail 2.6.0 has 74 classes, no traits and 16 interfaces;
-
-  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mail26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mail-2.7.0-undefined-classes:
-
-zend-mail 2.7.0 Undefined Classes
-#################################
-
-
-zend-mail classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-mail 2.7.0 has 77 classes, no traits and 16 interfaces;
-
-3 new classes 
-.  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mail27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mail-2.8.0-undefined-classes:
-
-zend-mail 2.8.0 Undefined Classes
-#################################
-
-
-zend-mail classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-mail 2.8.0 has 77 classes, 1 traits and 16 interfaces;
-
-1 new trait 
-.  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mail28      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mail-usage:
-
-zend-mail Usage
-###############
-
-
-zend-mail usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-mail has 77 classes, no traits and 16 interfaces;
-
-See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mail        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-math-2.5.0-undefined-classes:
-
-zend-math 2.5.0 Undefined Classes
-#################################
-
-
-zend-math classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-math 2.5.0 has 12 classes, no traits and 3 interfaces;
-
-  See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Math25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-math-2.6.0-undefined-classes:
-
-zend-math 2.6.0 Undefined Classes
-#################################
-
-
-zend-math classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-math 2.6.0 has 11 classes, no traits and 3 interfaces;
-
-1 removed classe. 
-
-See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Math26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-math-2.7.0-undefined-classes:
-
-zend-math 2.7.0 Undefined Classes
-#################################
-
-
-zend-math classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-math 2.7.0 has 11 classes, no traits and 3 interfaces;
-
-  See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Math27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-math-3.0.0-undefined-classes:
-
-zend-math 3.0.0 Undefined Classes
-#################################
-
-
-zend-math classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-math 3.0.0 has 10 classes, no traits and 3 interfaces;
-
-1 removed classe. 
-
-See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Math30      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-math-usage:
-
-zend-math Usage
-###############
-
-
-zend-math usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 3.0.0..
-
-zend-math has 12 classes, no traits and 3 interfaces;
-
-See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Math        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-memory-2.5.0-undefined-classes:
-
-zend-memory 2.5.0 Undefined Classes
-###################################
-
-
-zend-memory classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-memory 2.5.0 has 8 classes, no traits and 2 interfaces;
-
-  See also : `zend-memory <https://github.com/zendframework/zend-memory>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Memory25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-memory-usage:
-
-zend-memory Usage
-#################
-
-
-zend-memory usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-memory has 8 classes, no traits and 2 interfaces;
-
-See also : `zend-memory <https://github.com/zendframework/zend-memory>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Memory      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mime-2.5.0-undefined-classes:
-
-zend-mime 2.5.0 Undefined Classes
-#################################
-
-
-zend-mime classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-mime 2.5.0 has 6 classes, no traits and 1 interfaces;
-
-  See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mime25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mime-2.6.0-undefined-classes:
-
-zend-mime 2.6.0 Undefined Classes
-#################################
-
-
-zend-mime classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-mime 2.6.0 has 6 classes, no traits and 1 interfaces;
-
-  See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mime26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mime-usage:
-
-zend-mime Usage
-###############
-
-
-zend-mime usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-mime has 6 classes, no traits and 1 interfaces;
-
-See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mime        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-modulemanager-2.5.0-undefined-classes:
-
-zend-modulemanager 2.5.0 Undefined Classes
-##########################################
-
-
-zend-modulemanager classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-modulemanager 2.5.0 has 19 classes, no traits and 27 interfaces;
-
-  See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------+
-| Short name | ZendF/Zf3Modulemanager25 |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
-.. _zend-modulemanager-2.6.0-undefined-classes:
-
-zend-modulemanager 2.6.0 Undefined Classes
-##########################################
-
-
-zend-modulemanager classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-modulemanager 2.6.0 has 19 classes, no traits and 27 interfaces;
-
-  See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------+
-| Short name | ZendF/Zf3Modulemanager26 |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
-.. _zend-modulemanager-2.7.0-undefined-classes:
-
-zend-modulemanager 2.7.0 Undefined Classes
-##########################################
-
-
-zend-modulemanager classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-modulemanager 2.7.0 has 19 classes, no traits and 27 interfaces;
-
-  See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------+
-| Short name | ZendF/Zf3Modulemanager27 |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
-.. _zend-modulemanager-2.8.0-undefined-classes:
-
-zend-modulemanager 2.8.0 Undefined Classes
-##########################################
-
-
-zend-modulemanager classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-modulemanager 2.8.0 has 19 classes, no traits and 27 interfaces;
-
-  See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------+
-| Short name | ZendF/Zf3Modulemanager28 |
-+------------+--------------------------+
-| Themes     | :ref:`ZendFramework`     |
-+------------+--------------------------+
-
-
-
-.. _zend-modulemanager-usage:
-
-zend-modulemanager Usage
-########################
-
-
-zend-modulemanager usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-modulemanager has 19 classes, no traits and 27 interfaces;
-
-See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+------------------------+
-| Short name | ZendF/Zf3Modulemanager |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _zend-mvc-2.5.x:
-
-zend-mvc 2.5.x
-##############
-
-
-zend-mvc, all versions 2.5.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc25       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mvc-2.6.x:
-
-zend-mvc 2.6.x
-##############
-
-
-zend-mvc, all versions 2.6.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc26       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mvc-2.7.x:
-
-zend-mvc 2.7.x
-##############
-
-
-zend-mvc, all versions 2.7.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc27       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mvc-3.0.x:
-
-zend-mvc 3.0.x
-##############
-
-
-zend-mvc, all versions 3.0.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc30       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mvc-3.1.0-undefined-classes:
-
-zend-mvc 3.1.0 Undefined Classes
-################################
-
-
-zend-mvc classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-mvc 3.1.0 has 77 classes, 1 traits and 5 interfaces;
-
-5 new classes 
-.  See also : `zend-mvc <https://github.com/zendframework/zend-mvc>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc31       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-mvc-usage:
-
-zend-mvc Usage
-##############
-
-
-zend-mvc usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Mvc         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-navigation-2.5.0-undefined-classes:
-
-zend-navigation 2.5.0 Undefined Classes
-#######################################
-
-
-zend-navigation classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-navigation 2.5.0 has 14 classes, no traits and 1 interfaces;
-
-  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Navigation25 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-navigation-2.6.0-undefined-classes:
-
-zend-navigation 2.6.0 Undefined Classes
-#######################################
-
-
-zend-navigation classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-navigation 2.6.0 has 15 classes, no traits and 1 interfaces;
-
-1 new classe 
-.  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Navigation26 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-navigation-2.7.0-undefined-classes:
-
-zend-navigation 2.7.0 Undefined Classes
-#######################################
-
-
-zend-navigation classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-navigation 2.7.0 has 18 classes, no traits and 1 interfaces;
-
-3 new classes 
-.  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Navigation27 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-navigation-2.8.0-undefined-classes:
-
-zend-navigation 2.8.0 Undefined Classes
-#######################################
-
-
-zend-navigation classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-navigation 2.8.0 has 18 classes, no traits and 1 interfaces;
-
-  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Navigation28 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-navigation-usage:
-
-zend-navigation Usage
-#####################
-
-
-zend-navigation usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 2.8.0..
-
-zend-navigation has 18 classes, no traits and 1 interfaces;
-
-See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Navigation  |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-paginator-2.5.0-undefined-classes:
-
-zend-paginator 2.5.0 Undefined Classes
-######################################
-
-
-zend-paginator classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-paginator 2.5.0 has 26 classes, no traits and 5 interfaces;
-
-  See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Paginator25 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-paginator-2.6.0-undefined-classes:
-
-zend-paginator 2.6.0 Undefined Classes
-######################################
-
-
-zend-paginator classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-paginator 2.6.0 has 27 classes, no traits and 5 interfaces;
-
-1 new classe 
-.  See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Paginator26 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-paginator-2.7.0-undefined-classes:
-
-zend-paginator 2.7.0 Undefined Classes
-######################################
-
-
-zend-paginator classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-paginator 2.7.0 has 31 classes, no traits and 5 interfaces;
-
-4 new classes 
-.  See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Paginator27 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-paginator-usage:
-
-zend-paginator Usage
-####################
-
-
-zend-paginator usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-paginator has 31 classes, no traits and 5 interfaces;
-
-See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Paginator   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-progressbar-2.5.0-undefined-classes:
-
-zend-progressbar 2.5.0 Undefined Classes
-########################################
-
-
-zend-progressbar classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-progressbar 2.5.0 has 15 classes, no traits and 3 interfaces;
-
-  See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+------------------------+
-| Short name | ZendF/Zf3Progressbar25 |
-+------------+------------------------+
-| Themes     | :ref:`ZendFramework`   |
-+------------+------------------------+
-
-
-
-.. _zend-progressbar-usage:
-
-zend-progressbar Usage
-######################
-
-
-zend-progressbar usage, based on classes, interfaces and traits. This covers version 2.5.0.
-
-zend-progressbar has 15 classes, no traits and 3 interfaces;
-
-See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Progressbar |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-serializer-2.5.0-undefined-classes:
-
-zend-serializer 2.5.0 Undefined Classes
-#######################################
-
-
-zend-serializer classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-serializer 2.5.0 has 17 classes, no traits and 2 interfaces;
-
-  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Serializer25 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-serializer-2.6.0-undefined-classes:
-
-zend-serializer 2.6.0 Undefined Classes
-#######################################
-
-
-zend-serializer classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-serializer 2.6.0 has 17 classes, no traits and 2 interfaces;
-
-  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Serializer26 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-serializer-2.7.0-undefined-classes:
-
-zend-serializer 2.7.0 Undefined Classes
-#######################################
-
-
-zend-serializer classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-serializer 2.7.0 has 20 classes, no traits and 2 interfaces;
-
-3 new classes 
-.  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Serializer27 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-serializer-2.8.0-undefined-classes:
-
-zend-serializer 2.8.0 Undefined Classes
-#######################################
-
-
-zend-serializer classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-serializer 2.8.0 has 20 classes, no traits and 2 interfaces;
-
-  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-----------------------+
-| Short name | ZendF/Zf3Serializer28 |
-+------------+-----------------------+
-| Themes     | :ref:`ZendFramework`  |
-+------------+-----------------------+
-
-
-
-.. _zend-serializer-usage:
-
-zend-serializer Usage
-#####################
-
-
-zend-serializer usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 2.8.0..
-
-zend-serializer has 20 classes, no traits and 2 interfaces;
-
-See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Serializer  |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-server-2.5.0-undefined-classes:
-
-zend-server 2.5.0 Undefined Classes
-###################################
-
-
-zend-server classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-server 2.5.0 has 22 classes, no traits and 4 interfaces;
-
-  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Server25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-server-2.6.0-undefined-classes:
-
-zend-server 2.6.0 Undefined Classes
-###################################
-
-
-zend-server classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-server 2.6.0 has 22 classes, no traits and 4 interfaces;
-
-  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Server26    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-server-2.7.0-undefined-classes:
-
-zend-server 2.7.0 Undefined Classes
-###################################
-
-
-zend-server classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-server 2.7.0 has 22 classes, no traits and 4 interfaces;
-
-  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Server27    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-server-usage:
-
-zend-server Usage
-#################
-
-
-zend-server usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-server has 22 classes, no traits and 4 interfaces;
-
-See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Server      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-servicemanager-2.5.0-undefined-classes:
-
-zend-servicemanager 2.5.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-servicemanager 2.5.0 has 17 classes, 2 traits and 10 interfaces;
-
-  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager25 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-2.6.0-undefined-classes:
-
-zend-servicemanager 2.6.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-servicemanager 2.6.0 has 17 classes, 2 traits and 10 interfaces;
-
-  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager26 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-2.7.0-undefined-classes:
-
-zend-servicemanager 2.7.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-servicemanager 2.7.0 has 18 classes, 2 traits and 10 interfaces;
-
-1 new classe 
-.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager27 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-3.0.0-undefined-classes:
-
-zend-servicemanager 3.0.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-servicemanager 3.0.0 has 10 classes, no traits and 12 interfaces;
-
-2 new classes 
-. 10 removed classes 
-, 2 removed traits 
-. See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager30 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-3.1.0-undefined-classes:
-
-zend-servicemanager 3.1.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-servicemanager 3.1.0 has 11 classes, 1 traits and 12 interfaces;
-
-1 new classe 
-, 1 new trait 
-.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager31 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-3.2.0-undefined-classes:
-
-zend-servicemanager 3.2.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 3.2.0.
-
-zend-servicemanager 3.2.0 has 17 classes, 1 traits and 12 interfaces;
-
-6 new classes 
-.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager32 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-3.3.0-undefined-classes:
-
-zend-servicemanager 3.3.0 Undefined Classes
-###########################################
-
-
-zend-servicemanager classes, interfaces and traits that are not defined in version 3.3.0.
-
-zend-servicemanager 3.3.0 has 17 classes, 1 traits and 12 interfaces;
-
-  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+---------------------------+
-| Short name | ZendF/Zf3Servicemanager33 |
-+------------+---------------------------+
-| Themes     | :ref:`ZendFramework`      |
-+------------+---------------------------+
-
-
-
-.. _zend-servicemanager-usage:
-
-zend-servicemanager Usage
-#########################
-
-
-zend-servicemanager usage, based on classes, interfaces and traits. This covers all seven versions, from 2.5.0 to 3.3.0..
-
-zend-servicemanager has 27 classes, 3 traits and 15 interfaces;
-
-See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+-------------------------+
-| Short name | ZendF/Zf3Servicemanager |
-+------------+-------------------------+
-| Themes     | :ref:`ZendFramework`    |
-+------------+-------------------------+
-
-
-
-.. _zend-session-2.5.0-undefined-classes:
-
-zend-session 2.5.0 Undefined Classes
-####################################
-
-
-zend-session classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-session 2.5.0 has 26 classes, no traits and 7 interfaces;
-
-  See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Session25   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-session-2.6.0-undefined-classes:
-
-zend-session 2.6.0 Undefined Classes
-####################################
-
-
-zend-session classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-session 2.6.0 has 27 classes, 1 traits and 7 interfaces;
-
-2 new classes 
-, 1 new trait 
-. 1 removed classe 
-. See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Session26   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-session-2.7.0-undefined-classes:
-
-zend-session 2.7.0 Undefined Classes
-####################################
-
-
-zend-session classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-session 2.7.0 has 31 classes, 1 traits and 7 interfaces;
-
-6 new classes 
-. 2 removed classes 
-. See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Session27   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-session-2.8.0-undefined-classes:
-
-zend-session 2.8.0 Undefined Classes
-####################################
-
-
-zend-session classes, interfaces and traits that are not defined in version 2.8.0.
-
-zend-session 2.8.0 has 31 classes, 1 traits and 7 interfaces;
-
-  See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Session28   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-session-usage:
-
-zend-session Usage
-##################
-
-
-zend-session usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
-
-zend-session has 33 classes, 1 traits and 7 interfaces;
-
-See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Session     |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-soap-2.5.0-undefined-classes:
-
-zend-soap 2.5.0 Undefined Classes
-#################################
-
-
-zend-soap classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-soap 2.5.0 has 20 classes, no traits and 3 interfaces;
-
-  See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Soap25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-soap-2.6.0-undefined-classes:
-
-zend-soap 2.6.0 Undefined Classes
-#################################
-
-
-zend-soap classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-soap 2.6.0 has 20 classes, no traits and 3 interfaces;
-
-  See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Soap26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-soap-usage:
-
-zend-soap Usage
-###############
-
-
-zend-soap usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-soap has 20 classes, no traits and 3 interfaces;
-
-See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Soap        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-2.5.0-undefined-classes:
-
-zend-stdlib 2.5.0 Undefined Classes
-###################################
-
-
-zend-stdlib classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-stdlib 2.5.0 has 65 classes, 5 traits and 26 interfaces;
-
-  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-2.6.0-undefined-classes:
-
-zend-stdlib 2.6.0 Undefined Classes
-###################################
-
-
-zend-stdlib classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-stdlib 2.6.0 has 67 classes, 5 traits and 26 interfaces;
-
-2 new classes 
-.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib26    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-2.7.0-undefined-classes:
-
-zend-stdlib 2.7.0 Undefined Classes
-###################################
-
-
-zend-stdlib classes, interfaces and traits that are not defined in version 2.7.0.
-
-zend-stdlib 2.7.0 has 68 classes, 5 traits and 26 interfaces;
-
-1 new classe 
-.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib27    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-3.0.0-undefined-classes:
-
-zend-stdlib 3.0.0 Undefined Classes
-###################################
-
-
-zend-stdlib classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-stdlib 3.0.0 has 30 classes, 4 traits and 12 interfaces;
-
-38 removed classes, 1 removed trait. 
-
-See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib30    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-3.1.0-undefined-classes:
-
-zend-stdlib 3.1.0 Undefined Classes
-###################################
-
-
-zend-stdlib classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-stdlib 3.1.0 has 31 classes, 4 traits and 12 interfaces;
-
-1 new classe.  
-
-See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib31    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-stdlib-usage:
-
-zend-stdlib Usage
-#################
-
-
-zend-stdlib usage, based on classes, interfaces and traits. This covers all five versions, from 2.5.0 to 3.1.0..
-
-zend-stdlib has 69 classes, 5 traits and 27 interfaces;
-
-See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Stdlib      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-tag-2.5.0-undefined-classes:
-
-zend-tag 2.5.0 Undefined Classes
-################################
-
-
-zend-tag classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-tag 2.5.0 has 14 classes, no traits and 4 interfaces;
-
-  See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Tag25       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-tag-2.6.0-undefined-classes:
-
-zend-tag 2.6.0 Undefined Classes
-################################
-
-
-zend-tag classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-tag 2.6.0 has 14 classes, no traits and 4 interfaces;
-
-  See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Tag26       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-tag-usage:
-
-zend-tag Usage
-##############
-
-
-zend-tag usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-tag has 14 classes, no traits and 4 interfaces;
-
-See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Tag         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-test-2.5.0-undefined-classes:
-
-zend-test 2.5.0 Undefined Classes
-#################################
-
-
-zend-test classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-test 2.5.0 has 4 classes, no traits and no interfaces;
-
-  See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Test25                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-test-2.6.0-undefined-classes:
-
-zend-test 2.6.0 Undefined Classes
-#################################
-
-
-zend-test classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-test 2.6.0 has 4 classes, no traits and no interfaces;
-
-  See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Test26                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-test-3.0.0-undefined-classes:
-
-zend-test 3.0.0 Undefined Classes
-#################################
-
-
-zend-test classes, interfaces and traits that are not defined in version 3.0.0.
-
-zend-test 3.0.0 has 4 classes, no traits and no interfaces;
-
-  See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Test30                            |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-test-3.1.0-undefined-classes:
-
-zend-test 3.1.0 Undefined Classes
-#################################
-
-
-zend-test classes, interfaces and traits that are not defined in version 3.1.0.
-
-zend-test 3.1.0 has 4 classes, no traits and no interfaces;
-
-  See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Test31      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-test-usage:
-
-zend-test Usage
-###############
-
-
-zend-test usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 3.0.0..
-
-zend-test has 4 classes, no traits and no interfaces;
-
-See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+--------------------------------------------+
-| Short name | ZendF/Zf3Test                              |
-+------------+--------------------------------------------+
-| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+------------+--------------------------------------------+
-
-
-
-.. _zend-text-2.5.0-undefined-classes:
-
-zend-text 2.5.0 Undefined Classes
-#################################
-
-
-zend-text classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-text 2.5.0 has 22 classes, no traits and 4 interfaces;
-
-  See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Text25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-text-2.6.0-undefined-classes:
-
-zend-text 2.6.0 Undefined Classes
-#################################
-
-
-zend-text classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-text 2.6.0 has 22 classes, no traits and 4 interfaces;
-
-  See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Text26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-text-usage:
-
-zend-text Usage
-###############
-
-
-zend-text usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-text has 22 classes, no traits and 4 interfaces;
-
-See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Text        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-uri:
-
-zend-uri
-########
-
-
-zend-uri, all versions beyond 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Uri         |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-uri-2.5.x:
-
-zend-uri 2.5.x
-##############
-
-
-zend-uri, all versions 2.5.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Uri25       |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-validator-2.6.x:
-
-zend-validator 2.6.x
-####################
-
-
-zend-validator, all versions 2.6.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Validator26 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-validator-2.7.x:
-
-zend-validator 2.7.x
-####################
-
-
-zend-validator, all versions 2.7.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Validator27 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-validator-2.8.x:
-
-zend-validator 2.8.x
-####################
-
-
-zend-validator, all versions 2.8.x.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Validator28 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-validator-2.9.0-undefined-classes:
-
-zend-validator 2.9.0 Undefined Classes
-######################################
-
-
-zend-validator classes, interfaces and traits that are not defined in version 2.9.0.
-
-zend-validator 2.9.0 has 104 classes, no traits and 7 interfaces;
-
-  See also : `zend-validator <https://github.com/zendframework/zend-validator>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Validator29 |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-validator-usage:
-
-zend-validator Usage
-####################
-
-
-zend-validator, all versions beyond 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Validator   |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-2.5.0-undefined-classes:
-
-zend-view 2.5.0 Undefined Classes
-#################################
-
-
-zend-view classes, interfaces and traits that are not defined in version 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View25      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-2.6.0-undefined-classes:
-
-zend-view 2.6.0 Undefined Classes
-#################################
-
-
-zend-view classes, interfaces and traits that are not defined in version 2.6.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View26      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-2.7.0-undefined-classes:
-
-zend-view 2.7.0 Undefined Classes
-#################################
-
-
-zend-view classes, interfaces and traits that are not defined in version 2.7.0.
-1 new trait
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View27      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-2.8.0-undefined-classes:
-
-zend-view 2.8.0 Undefined Classes
-#################################
-
-
-zend-view classes, interfaces and traits that are not defined in version 2.8.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View28      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-2.9.0-undefined-classes:
-
-zend-view 2.9.0 Undefined Classes
-#################################
-
-
-zend-view classes, interfaces and traits that are not defined in version 2.9.0.
-2 new classes
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View29      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-view-usage:
-
-zend-view Usage
-###############
-
-
-zend-view usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3View        |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-xmlrpc-2.5.0-undefined-classes:
-
-zend-xmlrpc 2.5.0 Undefined Classes
-###################################
-
-
-zend-xmlrpc classes, interfaces and traits that are not defined in version 2.5.0.
-
-zend-xmlrpc 2.5.0 has 41 classes, no traits and 4 interfaces;
-
-  See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Xmlrpc25    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-xmlrpc-2.6.0-undefined-classes:
-
-zend-xmlrpc 2.6.0 Undefined Classes
-###################################
-
-
-zend-xmlrpc classes, interfaces and traits that are not defined in version 2.6.0.
-
-zend-xmlrpc 2.6.0 has 41 classes, no traits and 4 interfaces;
-
-  See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Xmlrpc26    |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
-
-
-
-.. _zend-xmlrpc-usage:
-
-zend-xmlrpc Usage
-#################
-
-
-zend-xmlrpc usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
-
-zend-xmlrpc has 41 classes, no traits and 4 interfaces;
-
-See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
-
-+------------+----------------------+
-| Short name | ZendF/Zf3Xmlrpc      |
-+------------+----------------------+
-| Themes     | :ref:`ZendFramework` |
-+------------+----------------------+
 
 
 

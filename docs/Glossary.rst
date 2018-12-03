@@ -175,7 +175,6 @@ Glossary
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Useless Switch <useless-switch>`
-      + :ref:`ZF3 Usage Of Deprecated <zf3-usage-of-deprecated>`
 
 
 + `C`
@@ -289,7 +288,6 @@ Glossary
 
       + :ref:`Check JSON <check-json>`
       + :ref:`Don't Echo Error <don't-echo-error>`
-      + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Implied If <implied-if>`
       + :ref:`No Hardcoded Port <no-hardcoded-port>`
@@ -297,7 +295,6 @@ Glossary
       + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`ext/mysql <ext/mysql>`
 
     + `dirname()`
@@ -337,12 +334,10 @@ Glossary
     + `exit`
 
       + :ref:`Don't Echo Error <don't-echo-error>`
-      + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Object Api <use-object-api>`
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`ext/dba <ext/dba>`
 
     + `extract()`
@@ -381,11 +376,11 @@ Glossary
 
     + `file()`
 
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
 
     + `file_get_contents()`
 
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
 
     + `file_put_contents()`
 
@@ -451,7 +446,6 @@ Glossary
     + `header()`
 
       + :ref:`Should Use SetCookie() <should-use-setcookie()>`
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
     + `highlight_file()`
 
@@ -472,10 +466,14 @@ Glossary
 
 
 + `I`
+    + `Isset`
+
+      + :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
+
     + `implode()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
 
     + `import_request_variables()`
 
@@ -498,13 +496,6 @@ Glossary
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Undefined ::class <undefined-\:\:class>`
-      + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
-      + :ref:`Undefined Class 2.1 <undefined-class-2.1>`
-      + :ref:`Undefined Class 2.2 <undefined-class-2.2>`
-      + :ref:`Undefined Class 2.3 <undefined-class-2.3>`
-      + :ref:`Undefined Class 2.4 <undefined-class-2.4>`
-      + :ref:`Undefined Class 2.5 <undefined-class-2.5>`
-      + :ref:`Undefined Class 3.0 <undefined-class-3.0>`
       + :ref:`Undefined Classes <undefined-classes>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
@@ -512,7 +503,6 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Use is_countable <use-is\_countable>`
       + :ref:`Useless Interfaces <useless-interfaces>`
-      + :ref:`Zend Typehinting <zend-typehinting>`
       + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
     + `insteadof`
@@ -567,6 +557,7 @@ Glossary
 
       + :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
       + :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+      + :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No isset() With empty() <no-isset()-with-empty()>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
@@ -581,10 +572,6 @@ Glossary
     + `magic_quotes_runtime()`
 
       + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `mail()`
-
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
     + `mb_substr()`
 
@@ -612,7 +599,6 @@ Glossary
 
     + `mt_rand()`
 
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `mt_srand()`
@@ -628,7 +614,7 @@ Glossary
 
     + `nl2br()`
 
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
 
 
 + `O`
@@ -640,7 +626,6 @@ Glossary
 + `P`
     + `ParseError`
 
-      + :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
       + :ref:`eval() Without Try <eval()-without-try>`
 
     + `pack()`
@@ -685,7 +670,15 @@ Glossary
       + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
+    + `php_egg_logo_guid()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+
     + `php_logo_guid()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+
+    + `php_real_logo_guid()`
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 
@@ -717,10 +710,6 @@ Glossary
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
-    + `print()`
-
-      + :ref:`No Echo In Route Callable <no-echo-in-route-callable>`
-
     + `print_r()`
 
       + :ref:`var_dump()... Usage <var\_dump()...-usage>`
@@ -739,12 +728,11 @@ Glossary
     + `rand()`
 
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `readfile()`
 
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
 
 
 + `S`
@@ -828,7 +816,7 @@ Glossary
 
     + `str_replace()`
 
-      + :ref:`Join file() <join-file()>`
+      + :ref:`Joining file() <joining-file()>`
       + :ref:`Make One Call With Array <make-one-call-with-array>`
 
     + `stream_socket_server()`
@@ -950,7 +938,6 @@ Glossary
 
     + `vprintf()`
 
-      + :ref:`Prepare Placeholder <prepare-placeholder>`
       + :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 
 
@@ -959,6 +946,12 @@ Glossary
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+
+
++ `Z`
+    + `zend_logo_guid()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 
 
 + `_`
@@ -1026,7 +1019,6 @@ Glossary
       + :ref:`Should Chain Exception <should-chain-exception>`
       + :ref:`Should Have Destructor <should-have-destructor>`
       + :ref:`Should Use Local Class <should-use-local-class>`
-      + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Too Many Injections <too-many-injections>`
       + :ref:`Unitialized Properties <unitialized-properties>`

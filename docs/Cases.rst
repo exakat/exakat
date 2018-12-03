@@ -965,6 +965,47 @@ df_display() actually requires only 2 arguments, while three are provided. The l
     	return $st->display($context, $template_name);
     }
 
+Undefined static:: Or self::
+============================
+
+.. _xataface-classes-undefinedstaticmp:
+
+xataface
+^^^^^^^^
+
+:ref:`undefined-static\:\:-or-self\:\:`, in actions/forgot_password.php:194. 
+
+This is probably a typo, since the property called 	public static $EX_NO_USERS_WITH_EMAIL = 501; is defined in that class. 
+
+.. code-block:: php
+
+    if ( !$user ) throw new Exception(df_translate('actions.forgot_password.null_user',"Cannot send email for null user"), self::$EX_NO_USERS_FOUND_WITH_EMAIL);
+
+
+--------
+
+
+.. _sugarcrm-classes-undefinedstaticmp:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`undefined-static\:\:-or-self\:\:`, in actions/forgot_password.php:194. 
+
+self::$sugar_strptime_long_mon refers to the current class, which extends DateTime. No static property was defined at either of them, with the name '$sugar_strptime_long_mon'. This has been a Fatal error at execution time since PHP 5.3, at least. 
+
+.. code-block:: php
+
+    if ( isset($regexp['positions']['F']) && !empty($dateparts[$regexp['positions']['F']])) {
+                           // FIXME: locale?
+                $mon = $dateparts[$regexp['positions']['F']];
+                if(isset(self::$sugar_strptime_long_mon[$mon])) {
+                    $data["tm_mon"] = self::$sugar_strptime_long_mon[$mon];
+                } else {
+                    return false;
+                }
+            }
+
 Useless Return
 ==============
 
@@ -1080,6 +1121,107 @@ In this context, the priority of execution is used on purpose; $coreFile only co
 .. code-block:: php
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
+
+Catch Overwrite Variable
+========================
+
+.. _phpipam-structures-catchshadowsvariable:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`catch-overwrite-variable`, in app/subnets/scan/subnet-scan-snmp-route.php:58. 
+
+$e is used both as 'local' variable : it is local to the catch clause, and it is a blind variable in a foreach(). There is little overlap between the two occurrences, but one reader may wonder why the caught exception is shown later on. 
+
+.. code-block:: php
+
+    try {
+            $res = $Snmp->get_query(get_routing_table);
+            // remove those not in subnet
+            if (sizeof($res)>0) {
+               // save for debug
+               $debug[$d->hostname][$q] = $res;
+    
+               // save result
+               $found[$d->id][$q] = $res;
+            }
+        } catch (Exception $e) {
+           // save for debug
+           $debug[$d->hostname][$q] = $res;
+           $errors[] = $e->getMessage();
+    	}
+    
+    // lots of code
+    // on line 132
+        // print errors
+        if (isset($errors)) {
+            print <hr>;
+            foreach ($errors as $e) {
+                print $Result->show (warning, $e, false, false, true);
+            }
+        }
+
+
+--------
+
+
+.. _suitecrm-structures-catchshadowsvariable:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`catch-overwrite-variable`, in modules/Emails/EmailUIAjax.php:1082. 
+
+$e starts as an Email(), in the 'getMultipleMessagesFromSugar' case, while a few lines later, in 'refreshSugarFolders', $e is now an exception. Breaks are in place, so both occurrences are separated, yet, one may wonder why an email is a warning, or a mail is a warning. 
+
+.. code-block:: php
+
+    // On line 900, $e is a Email
+            case getMultipleMessagesFromSugar:
+                $GLOBALS['log']->debug(********** EMAIL 2.0 - Asynchronous - at: getMultipleMessagesFromSugar);
+                if (isset($_REQUEST['uid']) && !empty($_REQUEST['uid'])) {
+                    $exIds = explode(,, $_REQUEST['uid']);
+                    $out = array();
+    
+                    foreach ($exIds as $id) {
+                        $e = new Email();
+                        $e->retrieve($id);
+                        $e->description_html = from_html($e->description_html);
+                        $ie->email = $e;
+                        $out[] = $ie->displayOneEmail($id, $_REQUEST['mbox']);
+                    }
+    
+                    echo $json->encode($out);
+                }
+    
+                break;
+    
+    
+    // lots of code
+    // on line 1082
+            case refreshSugarFolders:
+                try {
+                    $GLOBALS['log']->debug(********** EMAIL 2.0 - Asynchronous - at: refreshSugarFolders);
+                    $rootNode = new ExtNode('', '');
+                    $folderOpenState = $current_user->getPreference('folderOpenState', 'Emails');
+                    $folderOpenState = (empty($folderOpenState)) ?  : $folderOpenState;
+                    $ret = $email->et->folder->getUserFolders(
+                        $rootNode,
+                        sugar_unserialize($folderOpenState),
+                        $current_user,
+                        true
+                    );
+                    $out = $json->encode($ret);
+                    echo $out;
+                } catch (SugarFolderEmptyException $e) {
+                    $GLOBALS['log']->warn($e);
+                    $out = $json->encode(array(
+                        'message' => 'No folder selected warning message here...',
+                    ));
+                    echo $out;
+                }
+                break;
 
 Deep Definitions
 ================
@@ -2518,7 +2660,7 @@ Mixed Concat And Interpolation
 
 .. _suitecrm-structures-mixedconcatinterpolation:
 
-SuiteCRM
+SuiteCrm
 ^^^^^^^^
 
 :ref:`mixed-concat-and-interpolation`, in modules/AOW_Actions/actions/actionSendEmail.php:89. 
@@ -2713,7 +2855,7 @@ Here, the $amountToBreakDown is either $currentRemain or $result.
 
 .. _suitecrm-structures-iszero:
 
-SuiteCRM
+SuiteCrm
 ^^^^^^^^
 
 :ref:`is-actually-zero`, in modules/AOR_Charts/lib/pChart/class/pDraw.class.php:523. 
@@ -3180,6 +3322,24 @@ A case where PHP needs help : if the PHP version is older than 5.3, then it is v
 
     if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
 
+Abstract Or Implements
+======================
+
+.. _zurmo-classes-abstractorimplements:
+
+Zurmo
+^^^^^
+
+:ref:`abstract-or-implements`, in app/protected/extensions/zurmoinc/framework/views/MassEditProgressView.php:30. 
+
+The class MassEditProgressView extends ProgressView, which is an abstract class. That class defines one abstract method : abstract protected function headerLabelPrefixContent(). Yet, the class MassEditProgressView doesn't implements this method. This means that the class can't be instatiated, and indeed, it isn't. The class MassEditProgressView is subclassed, by the class MarketingListMembersMassSubscribeProgressView, which implements the method headerLabelPrefixContent(). As such, MassEditProgressView should be marked abstract, so as to prevent any instantiation attempt. 
+
+.. code-block:: php
+
+    class MassEditProgressView extends ProgressView { 
+        /**/ 
+    }
+
 Incompatible Signature Methods
 ==============================
 
@@ -3440,7 +3600,7 @@ Slow Functions
 
 .. _suitecrm-performances-slowfunctions:
 
-SuiteCRM
+SuiteCrm
 ^^^^^^^^
 
 :ref:`slow-functions`, in include/json_config.php:242. 
@@ -3451,15 +3611,15 @@ This is a equivalent for nl2br()
 
     preg_replace("/\r\n/", "<BR>", $focus->$field)
 
-Join file()
-===========
+Joining file()
+==============
 
 .. _wordpress-performances-joinfile:
 
 WordPress
 ^^^^^^^^^
 
-:ref:`join-file()`, in wp-admin/includes/misc.php:74. 
+:ref:`joining-file()`, in wp-admin/includes/misc.php:74. 
 
 This code actually loads the file, join it, then split it again. file() would be sufficient. 
 
@@ -3476,7 +3636,7 @@ This code actually loads the file, join it, then split it again. file() would be
 SPIP
 ^^^^
 
-:ref:`join-file()`, in ecrire/inc/install.php:109. 
+:ref:`joining-file()`, in ecrire/inc/install.php:109. 
 
 When the file is not accessible, file() returns null, and can't be processed by join(). 
 
@@ -3493,7 +3653,7 @@ When the file is not accessible, file() returns null, and can't be processed by 
 ExpressionEngine
 ^^^^^^^^^^^^^^^^
 
-:ref:`join-file()`, in ExpressionEngine_Core2.9.2/system/expressionengine/libraries/simplepie/idn/idna_convert.class.php:100. 
+:ref:`joining-file()`, in ExpressionEngine_Core2.9.2/system/expressionengine/libraries/simplepie/idn/idna_convert.class.php:100. 
 
 join('', ) is used as a replacement for file_get_contents(), which was introduced in PHP 4.3.0.
 
@@ -3514,7 +3674,7 @@ join('', ) is used as a replacement for file_get_contents(), which was introduce
 PrestaShop
 ^^^^^^^^^^
 
-:ref:`join-file()`, in classes/module/Module.php:2972. 
+:ref:`joining-file()`, in classes/module/Module.php:2972. 
 
 implode('', ) is probably not the slowest part in these lines.
 

@@ -32,13 +32,13 @@ Here is the list of the current recipes supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
+|:ref:`CompatibilityPHP74`                      | List features that are incompatible with PHP 7.4. It is known as php-src, work in progress.          |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP73`                      | List features that are incompatible with PHP 7.3.                                                    |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP72`                      | List features that are incompatible with PHP 7.2.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1.                                                    |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP72`                      | List features that are incompatible with PHP 7.2. It is also known as php-src.                       |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -49,6 +49,10 @@ Here is the list of the current recipes supported by Exakat Engine.
 |:ref:`Wordpress`                               | Check for code used with the Wordpress platform                                                      |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Zend Framework <zendframework>`          | Check for code used with the Zend Framework 3                                                        |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP55`                      | List features that are incompatible with PHP 5.5.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -66,8 +70,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 27 Nov 2018 11:08:27 +0000
-.. comment: Generation hash : 22aba7b919dba3965413b6025e6b11e7856b0d7f
+.. comment: Generation date : Mon, 03 Dec 2018 18:05:47 +0000
+.. comment: Generation hash : be73f48adf83c4d24255f58f1b8d30845c855bd6
 
 
 .. _analyze:
@@ -75,7 +79,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 351 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -392,6 +396,7 @@ Total : 351 analysis
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
+* :ref:`Useless Alias <useless-alias>`
 * :ref:`Useless Brackets <useless-brackets>`
 * :ref:`Useless Casting <useless-casting>`
 * :ref:`Useless Catch <useless-catch>`
@@ -428,31 +433,6 @@ Total : 351 analysis
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
-
-.. _cakephp:
-
-Cakephp
-+++++++
-
-Total : 17 analysis
-
-* :ref:`CakePHP 2.5.0 Undefined Classes <cakephp-2.5.0-undefined-classes>`
-* :ref:`CakePHP 2.6.0 Undefined Classes <cakephp-2.6.0-undefined-classes>`
-* :ref:`CakePHP 2.7.0 Undefined Classes <cakephp-2.7.0-undefined-classes>`
-* :ref:`CakePHP 2.8.0 Undefined Classes <cakephp-2.8.0-undefined-classes>`
-* :ref:`CakePHP 2.9.0 Undefined Classes <cakephp-2.9.0-undefined-classes>`
-* :ref:`CakePHP 3.0 Deprecated Class <cakephp-3.0-deprecated-class>`
-* :ref:`CakePHP 3.0.0 Undefined Classes <cakephp-3.0.0-undefined-classes>`
-* :ref:`CakePHP 3.1.0 Undefined Classes <cakephp-3.1.0-undefined-classes>`
-* :ref:`CakePHP 3.2.0 Undefined Classes <cakephp-3.2.0-undefined-classes>`
-* :ref:`CakePHP 3.3 Deprecated Class <cakephp-3.3-deprecated-class>`
-* :ref:`CakePHP 3.3.0 Undefined Classes <cakephp-3.3.0-undefined-classes>`
-* :ref:`CakePHP 3.4.0 Undefined Classes <cakephp-3.4.0-undefined-classes>`
-* :ref:`CakePHP Used <cakephp-used>`
-* :ref:`Deprecated Methodcalls in Cake 3.2 <deprecated-methodcalls-in-cake-3.2>`
-* :ref:`Deprecated Methodcalls in Cake 3.3 <deprecated-methodcalls-in-cake-3.3>`
-* :ref:`Deprecated Static calls in Cake 3.3 <deprecated-static-calls-in-cake-3.3>`
-* :ref:`Deprecated Trait in Cake 3.3 <deprecated-trait-in-cake-3.3>`
 
 .. _classreview:
 
@@ -977,7 +957,7 @@ Total : 24 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 14 analysis
+Total : 15 analysis
 
 * Classes/AbstractOrImplements
 * Classes/Finalclass
@@ -993,13 +973,14 @@ Total : 14 analysis
 * Traits/MethodCollisionTraits
 * Traits/UndefinedInsteadof
 * Traits/UndefinedTrait
+* Traits/UselessAlias
 
 .. _performances:
 
 Performances
 ++++++++++++
 
-Total : 37 analysis
+Total : 38 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -1014,7 +995,8 @@ Total : 37 analysis
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
-* :ref:`Join file() <join-file()>`
+* :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
+* :ref:`Joining file() <joining-file()>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`Processing Collector <processing-collector>`
@@ -1086,45 +1068,12 @@ Total : 39 analysis
 * Structures/VardumpUsage
 * Structures/pregOptionE
 
-.. _slim:
-
-Slim
-++++
-
-Total : 25 analysis
-
-* :ref:`No Echo In Route Callable <no-echo-in-route-callable>`
-* :ref:`SlimPHP 1.0.0 Undefined Classes <slimphp-1.0.0-undefined-classes>`
-* :ref:`SlimPHP 1.1.0 Undefined Classes <slimphp-1.1.0-undefined-classes>`
-* :ref:`SlimPHP 1.2.0 Undefined Classes <slimphp-1.2.0-undefined-classes>`
-* :ref:`SlimPHP 1.3.0 Undefined Classes <slimphp-1.3.0-undefined-classes>`
-* :ref:`SlimPHP 1.5.0 Undefined Classes <slimphp-1.5.0-undefined-classes>`
-* :ref:`SlimPHP 1.6.0 Undefined Classes <slimphp-1.6.0-undefined-classes>`
-* :ref:`SlimPHP 2.0.0 Undefined Classes <slimphp-2.0.0-undefined-classes>`
-* :ref:`SlimPHP 2.1.0 Undefined Classes <slimphp-2.1.0-undefined-classes>`
-* :ref:`SlimPHP 2.2.0 Undefined Classes <slimphp-2.2.0-undefined-classes>`
-* :ref:`SlimPHP 2.3.0 Undefined Classes <slimphp-2.3.0-undefined-classes>`
-* :ref:`SlimPHP 2.4.0 Undefined Classes <slimphp-2.4.0-undefined-classes>`
-* :ref:`SlimPHP 2.5.0 Undefined Classes <slimphp-2.5.0-undefined-classes>`
-* :ref:`SlimPHP 2.6.0 Undefined Classes <slimphp-2.6.0-undefined-classes>`
-* :ref:`SlimPHP 3.0.0 Undefined Classes <slimphp-3.0.0-undefined-classes>`
-* :ref:`SlimPHP 3.1.0 Undefined Classes <slimphp-3.1.0-undefined-classes>`
-* :ref:`SlimPHP 3.2.0 Undefined Classes <slimphp-3.2.0-undefined-classes>`
-* :ref:`SlimPHP 3.3.0 Undefined Classes <slimphp-3.3.0-undefined-classes>`
-* :ref:`SlimPHP 3.4.0 Undefined Classes <slimphp-3.4.0-undefined-classes>`
-* :ref:`SlimPHP 3.5.0 Undefined Classes <slimphp-3.5.0-undefined-classes>`
-* :ref:`SlimPHP 3.6.0 Undefined Classes <slimphp-3.6.0-undefined-classes>`
-* :ref:`SlimPHP 3.7.0 Undefined Classes <slimphp-3.7.0-undefined-classes>`
-* :ref:`SlimPHP 3.8.0 Undefined Classes <slimphp-3.8.0-undefined-classes>`
-* :ref:`Use Slim <use-slim>`
-* :ref:`Used Routes <used-routes>`
-
 .. _suggestions:
 
 Suggestions
 +++++++++++
 
-Total : 68 analysis
+Total : 69 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1176,6 +1125,7 @@ Total : 68 analysis
 * Functions/NoReturnUsed
 * Interfaces/AlreadyParentsInterface
 * Interfaces/UnusedInterfaces
+* Performances/IssetWholeArray
 * Performances/SubstrFirst
 * Php/CompactInexistant
 * Php/DetectCurrentClass
@@ -1194,288 +1144,4 @@ Total : 68 analysis
 * Structures/RepeatedPrint
 * Structures/UnreachableCode
 * Structures/WhileListEach
-
-.. _wordpress:
-
-Wordpress
-+++++++++
-
-Total : 27 analysis
-
-* :ref:`Avoid Double Prepare <avoid-double-prepare>`
-* :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
-* :ref:`No Direct Input To Wpdb <no-direct-input-to-wpdb>`
-* :ref:`No Global Modification <no-global-modification>`
-* :ref:`Nonce Creation <nonce-creation>`
-* :ref:`Prepare Placeholder <prepare-placeholder>`
-* :ref:`Private Function Usage <private-function-usage>`
-* :ref:`Strange Names For Methods <strange-names-for-methods>`
-* :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
-* :ref:`Unverified Nonce <unverified-nonce>`
-* :ref:`Use $wpdb Api <use-$wpdb-api>`
-* :ref:`Use Wordpress Functions <use-wordpress-functions>`
-* :ref:`Using Short Tags <using-short-tags>`
-* :ref:`Wordpress 4.0 Undefined Classes <wordpress-4.0-undefined-classes>`
-* :ref:`Wordpress 4.1 Undefined Classes <wordpress-4.1-undefined-classes>`
-* :ref:`Wordpress 4.2 Undefined Classes <wordpress-4.2-undefined-classes>`
-* :ref:`Wordpress 4.3 Undefined Classes <wordpress-4.3-undefined-classes>`
-* :ref:`Wordpress 4.4 Undefined Classes <wordpress-4.4-undefined-classes>`
-* :ref:`Wordpress 4.5 Undefined Classes <wordpress-4.5-undefined-classes>`
-* :ref:`Wordpress 4.6 Undefined Classes <wordpress-4.6-undefined-classes>`
-* :ref:`Wordpress 4.7 Undefined Classes <wordpress-4.7-undefined-classes>`
-* :ref:`Wordpress 4.8 Undefined Classes <wordpress-4.8-undefined-classes>`
-* :ref:`Wordpress 4.9 Undefined Classes <wordpress-4.9-undefined-classes>`
-* :ref:`Wordpress Usage <wordpress-usage>`
-* :ref:`Wpdb Best Usage <wpdb-best-usage>`
-* :ref:`Wpdb Prepare Or Not <wpdb-prepare-or-not>`
-* Structures/EvalUsage
-
-.. _zendframework:
-
-ZendFramework
-+++++++++++++
-
-Total : 241 analysis
-
-* :ref:`Action Should Be In Controller <action-should-be-in-controller>`
-* :ref:`Avoid PHP Superglobals <avoid-php-superglobals>`
-* :ref:`Defined View Property <defined-view-property>`
-* :ref:`Error Messages <error-messages>`
-* :ref:`Is Zend Framework 1 Controller <is-zend-framework-1-controller>`
-* :ref:`Is Zend Framework 1 Helper <is-zend-framework-1-helper>`
-* :ref:`Is Zend View File <is-zend-view-file>`
-* :ref:`No Echo Outside View <no-echo-outside-view>`
-* :ref:`Should Always Prepare <should-always-prepare>`
-* :ref:`Should Regenerate Session Id <should-regenerate-session-id>`
-* :ref:`Thrown Exceptions <thrown-exceptions>`
-* :ref:`Undefined Class 2.0 <undefined-class-2.0>`
-* :ref:`Undefined Class 2.1 <undefined-class-2.1>`
-* :ref:`Undefined Class 2.2 <undefined-class-2.2>`
-* :ref:`Undefined Class 2.3 <undefined-class-2.3>`
-* :ref:`Undefined Class 2.4 <undefined-class-2.4>`
-* :ref:`Undefined Class 2.5 <undefined-class-2.5>`
-* :ref:`Undefined Class 3.0 <undefined-class-3.0>`
-* :ref:`Undefined Zend 1.10 <undefined-zend-1.10>`
-* :ref:`Undefined Zend 1.11 <undefined-zend-1.11>`
-* :ref:`Undefined Zend 1.12 <undefined-zend-1.12>`
-* :ref:`Undefined Zend 1.8 <undefined-zend-1.8>`
-* :ref:`Undefined Zend 1.9 <undefined-zend-1.9>`
-* :ref:`Wrong Class Location <wrong-class-location>`
-* :ref:`ZF3 Usage Of Deprecated <zf3-usage-of-deprecated>`
-* :ref:`Zend Classes <zend-classes>`
-* :ref:`Zend Interface <zend-interface>`
-* :ref:`Zend Trait <zend-trait>`
-* :ref:`Zend Typehinting <zend-typehinting>`
-* :ref:`Zend\Config`
-* :ref:`zend-authentication 2.5.0 Undefined Classes <zend-authentication-2.5.0-undefined-classes>`
-* :ref:`zend-authentication Usage <zend-authentication-usage>`
-* :ref:`zend-barcode 2.5.0 Undefined Classes <zend-barcode-2.5.0-undefined-classes>`
-* :ref:`zend-barcode 2.6.0 Undefined Classes <zend-barcode-2.6.0-undefined-classes>`
-* :ref:`zend-barcode Usage <zend-barcode-usage>`
-* :ref:`zend-cache 2.5.0 Undefined Classes <zend-cache-2.5.0-undefined-classes>`
-* :ref:`zend-cache 2.6.0 Undefined Classes <zend-cache-2.6.0-undefined-classes>`
-* :ref:`zend-cache 2.7.0 Undefined Classes <zend-cache-2.7.0-undefined-classes>`
-* :ref:`zend-cache Usage <zend-cache-usage>`
-* :ref:`zend-captcha 2.5.0 Undefined Classes <zend-captcha-2.5.0-undefined-classes>`
-* :ref:`zend-captcha 2.6.0 Undefined Classes <zend-captcha-2.6.0-undefined-classes>`
-* :ref:`zend-captcha 2.7.0 Undefined Classes <zend-captcha-2.7.0-undefined-classes>`
-* :ref:`zend-captcha Usage <zend-captcha-usage>`
-* :ref:`zend-code 2.5.0 Undefined Classes <zend-code-2.5.0-undefined-classes>`
-* :ref:`zend-code 2.6.0 Undefined Classes <zend-code-2.6.0-undefined-classes>`
-* :ref:`zend-code 3.0.0 Undefined Classes <zend-code-3.0.0-undefined-classes>`
-* :ref:`zend-code 3.1.0 Undefined Classes <zend-code-3.1.0-undefined-classes>`
-* :ref:`zend-code 3.2.0 Undefined Classes <zend-code-3.2.0-undefined-classes>`
-* :ref:`zend-code Usage <zend-code-usage>`
-* :ref:`zend-config 2.5.x <zend-config-2.5.x>`
-* :ref:`zend-config 2.6.x <zend-config-2.6.x>`
-* :ref:`zend-config 3.0.x <zend-config-3.0.x>`
-* :ref:`zend-config 3.1.x <zend-config-3.1.x>`
-* :ref:`zend-console 2.5.0 Undefined Classes <zend-console-2.5.0-undefined-classes>`
-* :ref:`zend-console 2.6.0 Undefined Classes <zend-console-2.6.0-undefined-classes>`
-* :ref:`zend-console Usage <zend-console-usage>`
-* :ref:`zend-crypt 2.5.0 Undefined Classes <zend-crypt-2.5.0-undefined-classes>`
-* :ref:`zend-crypt 2.6.0 Undefined Classes <zend-crypt-2.6.0-undefined-classes>`
-* :ref:`zend-crypt 3.0.0 Undefined Classes <zend-crypt-3.0.0-undefined-classes>`
-* :ref:`zend-crypt 3.1.0 Undefined Classes <zend-crypt-3.1.0-undefined-classes>`
-* :ref:`zend-crypt 3.2.0 Undefined Classes <zend-crypt-3.2.0-undefined-classes>`
-* :ref:`zend-crypt Usage <zend-crypt-usage>`
-* :ref:`zend-db 2.5.0 Undefined Classes <zend-db-2.5.0-undefined-classes>`
-* :ref:`zend-db 2.6.0 Undefined Classes <zend-db-2.6.0-undefined-classes>`
-* :ref:`zend-db 2.7.0 Undefined Classes <zend-db-2.7.0-undefined-classes>`
-* :ref:`zend-db 2.8.0 Undefined Classes <zend-db-2.8.0-undefined-classes>`
-* :ref:`zend-db Usage <zend-db-usage>`
-* :ref:`zend-debug 2.5.0 Undefined Classes <zend-debug-2.5.0-undefined-classes>`
-* :ref:`zend-debug Usage <zend-debug-usage>`
-* :ref:`zend-di 2.5.0 Undefined Classes <zend-di-2.5.0-undefined-classes>`
-* :ref:`zend-di 2.6.0 Undefined Classes <zend-di-2.6.0-undefined-classes>`
-* :ref:`zend-di Usage <zend-di-usage>`
-* :ref:`zend-dom 2.5.0 Undefined Classes <zend-dom-2.5.0-undefined-classes>`
-* :ref:`zend-dom 2.6.0 Undefined Classes <zend-dom-2.6.0-undefined-classes>`
-* :ref:`zend-dom Usage <zend-dom-usage>`
-* :ref:`zend-escaper 2.5.0 Undefined Classes <zend-escaper-2.5.0-undefined-classes>`
-* :ref:`zend-escaper Usage <zend-escaper-usage>`
-* :ref:`zend-eventmanager 2.5.0 Undefined Classes <zend-eventmanager-2.5.0-undefined-classes>`
-* :ref:`zend-eventmanager 2.6.0 Undefined Classes <zend-eventmanager-2.6.0-undefined-classes>`
-* :ref:`zend-eventmanager 3.0.0 Undefined Classes <zend-eventmanager-3.0.0-undefined-classes>`
-* :ref:`zend-eventmanager 3.1.0 Undefined Classes <zend-eventmanager-3.1.0-undefined-classes>`
-* :ref:`zend-eventmanager 3.2.0 Undefined Classes <zend-eventmanager-3.2.0-undefined-classes>`
-* :ref:`zend-eventmanager Usage <zend-eventmanager-usage>`
-* :ref:`zend-feed 2.5.0 Undefined Classes <zend-feed-2.5.0-undefined-classes>`
-* :ref:`zend-feed 2.6.0 Undefined Classes <zend-feed-2.6.0-undefined-classes>`
-* :ref:`zend-feed 2.7.0 Undefined Classes <zend-feed-2.7.0-undefined-classes>`
-* :ref:`zend-feed 2.8.0 Undefined Classes <zend-feed-2.8.0-undefined-classes>`
-* :ref:`zend-feed Usage <zend-feed-usage>`
-* :ref:`zend-file 2.5.0 Undefined Classes <zend-file-2.5.0-undefined-classes>`
-* :ref:`zend-file 2.6.0 Undefined Classes <zend-file-2.6.0-undefined-classes>`
-* :ref:`zend-file 2.7.0 Undefined Classes <zend-file-2.7.0-undefined-classes>`
-* :ref:`zend-file Usage <zend-file-usage>`
-* :ref:`zend-filter 2.5.0 Undefined Classes <zend-filter-2.5.0-undefined-classes>`
-* :ref:`zend-filter 2.6.0 Undefined Classes <zend-filter-2.6.0-undefined-classes>`
-* :ref:`zend-filter 2.7.0 Undefined Classes <zend-filter-2.7.0-undefined-classes>`
-* :ref:`zend-filter Usage <zend-filter-usage>`
-* :ref:`zend-form 2.5.0 Undefined Classes <zend-form-2.5.0-undefined-classes>`
-* :ref:`zend-form 2.6.0 Undefined Classes <zend-form-2.6.0-undefined-classes>`
-* :ref:`zend-form 2.7.0 Undefined Classes <zend-form-2.7.0-undefined-classes>`
-* :ref:`zend-form 2.8.0 Undefined Classes <zend-form-2.8.0-undefined-classes>`
-* :ref:`zend-form 2.9.0 Undefined Classes <zend-form-2.9.0-undefined-classes>`
-* :ref:`zend-form Usage <zend-form-usage>`
-* :ref:`zend-http 2.5.0 Undefined Classes <zend-http-2.5.0-undefined-classes>`
-* :ref:`zend-http 2.6.0 Undefined Classes <zend-http-2.6.0-undefined-classes>`
-* :ref:`zend-http 2.7.0 Undefined Classes <zend-http-2.7.0-undefined-classes>`
-* :ref:`zend-http Usage <zend-http-usage>`
-* :ref:`zend-i18n 2.5.0 Undefined Classes <zend-i18n-2.5.0-undefined-classes>`
-* :ref:`zend-i18n 2.6.0 Undefined Classes <zend-i18n-2.6.0-undefined-classes>`
-* :ref:`zend-i18n 2.7.0 Undefined Classes <zend-i18n-2.7.0-undefined-classes>`
-* :ref:`zend-i18n Usage <zend-i18n-usage>`
-* :ref:`zend-i18n resources Usage <zend-i18n-resources-usage>`
-* :ref:`zend-i18n-resources 2.5.x <zend-i18n-resources-2.5.x>`
-* :ref:`zend-inputfilter 2.5.0 Undefined Classes <zend-inputfilter-2.5.0-undefined-classes>`
-* :ref:`zend-inputfilter 2.6.0 Undefined Classes <zend-inputfilter-2.6.0-undefined-classes>`
-* :ref:`zend-inputfilter 2.7.0 Undefined Classes <zend-inputfilter-2.7.0-undefined-classes>`
-* :ref:`zend-inputfilter Usage <zend-inputfilter-usage>`
-* :ref:`zend-json 2.5.0 Undefined Classes <zend-json-2.5.0-undefined-classes>`
-* :ref:`zend-json 2.6.0 Undefined Classes <zend-json-2.6.0-undefined-classes>`
-* :ref:`zend-json 3.0.0 Undefined Classes <zend-json-3.0.0-undefined-classes>`
-* :ref:`zend-json Usage <zend-json-usage>`
-* :ref:`zend-loader 2.5.0 Undefined Classes <zend-loader-2.5.0-undefined-classes>`
-* :ref:`zend-loader Usage <zend-loader-usage>`
-* :ref:`zend-log 2.5.0 Undefined Classes <zend-log-2.5.0-undefined-classes>`
-* :ref:`zend-log 2.6.0 Undefined Classes <zend-log-2.6.0-undefined-classes>`
-* :ref:`zend-log 2.7.0 Undefined Classes <zend-log-2.7.0-undefined-classes>`
-* :ref:`zend-log 2.8.0 Undefined Classes <zend-log-2.8.0-undefined-classes>`
-* :ref:`zend-log 2.9.0 Undefined Classes <zend-log-2.9.0-undefined-classes>`
-* :ref:`zend-log Usage <zend-log-usage>`
-* :ref:`zend-mail 2.5.0 Undefined Classes <zend-mail-2.5.0-undefined-classes>`
-* :ref:`zend-mail 2.6.0 Undefined Classes <zend-mail-2.6.0-undefined-classes>`
-* :ref:`zend-mail 2.7.0 Undefined Classes <zend-mail-2.7.0-undefined-classes>`
-* :ref:`zend-mail 2.8.0 Undefined Classes <zend-mail-2.8.0-undefined-classes>`
-* :ref:`zend-mail Usage <zend-mail-usage>`
-* :ref:`zend-math 2.5.0 Undefined Classes <zend-math-2.5.0-undefined-classes>`
-* :ref:`zend-math 2.6.0 Undefined Classes <zend-math-2.6.0-undefined-classes>`
-* :ref:`zend-math 2.7.0 Undefined Classes <zend-math-2.7.0-undefined-classes>`
-* :ref:`zend-math 3.0.0 Undefined Classes <zend-math-3.0.0-undefined-classes>`
-* :ref:`zend-math Usage <zend-math-usage>`
-* :ref:`zend-memory 2.5.0 Undefined Classes <zend-memory-2.5.0-undefined-classes>`
-* :ref:`zend-memory Usage <zend-memory-usage>`
-* :ref:`zend-mime 2.5.0 Undefined Classes <zend-mime-2.5.0-undefined-classes>`
-* :ref:`zend-mime 2.6.0 Undefined Classes <zend-mime-2.6.0-undefined-classes>`
-* :ref:`zend-mime Usage <zend-mime-usage>`
-* :ref:`zend-modulemanager 2.5.0 Undefined Classes <zend-modulemanager-2.5.0-undefined-classes>`
-* :ref:`zend-modulemanager 2.6.0 Undefined Classes <zend-modulemanager-2.6.0-undefined-classes>`
-* :ref:`zend-modulemanager 2.7.0 Undefined Classes <zend-modulemanager-2.7.0-undefined-classes>`
-* :ref:`zend-modulemanager 2.8.0 Undefined Classes <zend-modulemanager-2.8.0-undefined-classes>`
-* :ref:`zend-modulemanager Usage <zend-modulemanager-usage>`
-* :ref:`zend-mvc 2.5.x <zend-mvc-2.5.x>`
-* :ref:`zend-mvc 2.6.x <zend-mvc-2.6.x>`
-* :ref:`zend-mvc 2.7.x <zend-mvc-2.7.x>`
-* :ref:`zend-mvc 3.0.x <zend-mvc-3.0.x>`
-* :ref:`zend-mvc 3.1.0 Undefined Classes <zend-mvc-3.1.0-undefined-classes>`
-* :ref:`zend-mvc Usage <zend-mvc-usage>`
-* :ref:`zend-navigation 2.5.0 Undefined Classes <zend-navigation-2.5.0-undefined-classes>`
-* :ref:`zend-navigation 2.6.0 Undefined Classes <zend-navigation-2.6.0-undefined-classes>`
-* :ref:`zend-navigation 2.7.0 Undefined Classes <zend-navigation-2.7.0-undefined-classes>`
-* :ref:`zend-navigation 2.8.0 Undefined Classes <zend-navigation-2.8.0-undefined-classes>`
-* :ref:`zend-navigation Usage <zend-navigation-usage>`
-* :ref:`zend-paginator 2.5.0 Undefined Classes <zend-paginator-2.5.0-undefined-classes>`
-* :ref:`zend-paginator 2.6.0 Undefined Classes <zend-paginator-2.6.0-undefined-classes>`
-* :ref:`zend-paginator 2.7.0 Undefined Classes <zend-paginator-2.7.0-undefined-classes>`
-* :ref:`zend-paginator Usage <zend-paginator-usage>`
-* :ref:`zend-progressbar 2.5.0 Undefined Classes <zend-progressbar-2.5.0-undefined-classes>`
-* :ref:`zend-progressbar Usage <zend-progressbar-usage>`
-* :ref:`zend-serializer 2.5.0 Undefined Classes <zend-serializer-2.5.0-undefined-classes>`
-* :ref:`zend-serializer 2.6.0 Undefined Classes <zend-serializer-2.6.0-undefined-classes>`
-* :ref:`zend-serializer 2.7.0 Undefined Classes <zend-serializer-2.7.0-undefined-classes>`
-* :ref:`zend-serializer 2.8.0 Undefined Classes <zend-serializer-2.8.0-undefined-classes>`
-* :ref:`zend-serializer Usage <zend-serializer-usage>`
-* :ref:`zend-server 2.5.0 Undefined Classes <zend-server-2.5.0-undefined-classes>`
-* :ref:`zend-server 2.6.0 Undefined Classes <zend-server-2.6.0-undefined-classes>`
-* :ref:`zend-server 2.7.0 Undefined Classes <zend-server-2.7.0-undefined-classes>`
-* :ref:`zend-server Usage <zend-server-usage>`
-* :ref:`zend-servicemanager 2.5.0 Undefined Classes <zend-servicemanager-2.5.0-undefined-classes>`
-* :ref:`zend-servicemanager 2.6.0 Undefined Classes <zend-servicemanager-2.6.0-undefined-classes>`
-* :ref:`zend-servicemanager 2.7.0 Undefined Classes <zend-servicemanager-2.7.0-undefined-classes>`
-* :ref:`zend-servicemanager 3.0.0 Undefined Classes <zend-servicemanager-3.0.0-undefined-classes>`
-* :ref:`zend-servicemanager 3.1.0 Undefined Classes <zend-servicemanager-3.1.0-undefined-classes>`
-* :ref:`zend-servicemanager 3.2.0 Undefined Classes <zend-servicemanager-3.2.0-undefined-classes>`
-* :ref:`zend-servicemanager 3.3.0 Undefined Classes <zend-servicemanager-3.3.0-undefined-classes>`
-* :ref:`zend-servicemanager Usage <zend-servicemanager-usage>`
-* :ref:`zend-session 2.5.0 Undefined Classes <zend-session-2.5.0-undefined-classes>`
-* :ref:`zend-session 2.6.0 Undefined Classes <zend-session-2.6.0-undefined-classes>`
-* :ref:`zend-session 2.7.0 Undefined Classes <zend-session-2.7.0-undefined-classes>`
-* :ref:`zend-session 2.8.0 Undefined Classes <zend-session-2.8.0-undefined-classes>`
-* :ref:`zend-session Usage <zend-session-usage>`
-* :ref:`zend-soap 2.5.0 Undefined Classes <zend-soap-2.5.0-undefined-classes>`
-* :ref:`zend-soap 2.6.0 Undefined Classes <zend-soap-2.6.0-undefined-classes>`
-* :ref:`zend-soap Usage <zend-soap-usage>`
-* :ref:`zend-stdlib 2.5.0 Undefined Classes <zend-stdlib-2.5.0-undefined-classes>`
-* :ref:`zend-stdlib 2.6.0 Undefined Classes <zend-stdlib-2.6.0-undefined-classes>`
-* :ref:`zend-stdlib 2.7.0 Undefined Classes <zend-stdlib-2.7.0-undefined-classes>`
-* :ref:`zend-stdlib 3.0.0 Undefined Classes <zend-stdlib-3.0.0-undefined-classes>`
-* :ref:`zend-stdlib 3.1.0 Undefined Classes <zend-stdlib-3.1.0-undefined-classes>`
-* :ref:`zend-stdlib Usage <zend-stdlib-usage>`
-* :ref:`zend-tag 2.5.0 Undefined Classes <zend-tag-2.5.0-undefined-classes>`
-* :ref:`zend-tag 2.6.0 Undefined Classes <zend-tag-2.6.0-undefined-classes>`
-* :ref:`zend-tag Usage <zend-tag-usage>`
-* :ref:`zend-test 2.5.0 Undefined Classes <zend-test-2.5.0-undefined-classes>`
-* :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
-* :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
-* :ref:`zend-test 3.1.0 Undefined Classes <zend-test-3.1.0-undefined-classes>`
-* :ref:`zend-test Usage <zend-test-usage>`
-* :ref:`zend-text 2.5.0 Undefined Classes <zend-text-2.5.0-undefined-classes>`
-* :ref:`zend-text 2.6.0 Undefined Classes <zend-text-2.6.0-undefined-classes>`
-* :ref:`zend-text Usage <zend-text-usage>`
-* :ref:`zend-uri 2.5.x <zend-uri-2.5.x>`
-* :ref:`zend-uri`
-* :ref:`zend-validator 2.6.x <zend-validator-2.6.x>`
-* :ref:`zend-validator 2.6.x <zend-validator-2.6.x>`
-* :ref:`zend-validator 2.7.x <zend-validator-2.7.x>`
-* :ref:`zend-validator 2.8.x <zend-validator-2.8.x>`
-* :ref:`zend-validator 2.9.0 Undefined Classes <zend-validator-2.9.0-undefined-classes>`
-* :ref:`zend-validator Usage <zend-validator-usage>`
-* :ref:`zend-view 2.5.0 Undefined Classes <zend-view-2.5.0-undefined-classes>`
-* :ref:`zend-view 2.6.0 Undefined Classes <zend-view-2.6.0-undefined-classes>`
-* :ref:`zend-view 2.7.0 Undefined Classes <zend-view-2.7.0-undefined-classes>`
-* :ref:`zend-view 2.8.0 Undefined Classes <zend-view-2.8.0-undefined-classes>`
-* :ref:`zend-view 2.9.0 Undefined Classes <zend-view-2.9.0-undefined-classes>`
-* :ref:`zend-view Usage <zend-view-usage>`
-* :ref:`zend-xmlrpc 2.5.0 Undefined Classes <zend-xmlrpc-2.5.0-undefined-classes>`
-* :ref:`zend-xmlrpc 2.6.0 Undefined Classes <zend-xmlrpc-2.6.0-undefined-classes>`
-* :ref:`zend-xmlrpc Usage <zend-xmlrpc-usage>`
-* Namespaces/ShouldMakeAlias
-* Structures/ExitUsage
-* ZendF/Zf3Cache
-* ZendF/Zf3Code25
-* ZendF/Zf3Code26
-* ZendF/Zf3Code30
-* ZendF/Zf3Code31
-* ZendF/Zf3Code32
-* ZendF/Zf3Eventmanager
-* ZendF/Zf3Eventmanager25
-* ZendF/Zf3Eventmanager26
-* ZendF/Zf3Eventmanager30
-* ZendF/Zf3Eventmanager31
-* ZendF/Zf3Test
-* ZendF/Zf3Test25
-* ZendF/Zf3Test26
-* ZendF/Zf3Test30
 

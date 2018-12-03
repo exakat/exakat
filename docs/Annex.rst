@@ -22,7 +22,6 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Analyze
 * Appcontent
 * Appinfo
-* Cakephp
 * Calisthenics
 * ClassReview
 * ClearPHP
@@ -50,7 +49,6 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Level 4
 * Level 5
 * LintButWontExec
-* Melis
 * Newfeatures
 * OneFile
 * PHP recommendations
@@ -60,14 +58,10 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * RadwellCodes
 * Security
 * Simple
-* Slim
 * Stats
 * Suggestions
-* Symfony
 * Unassigned
 * Under Work
-* Wordpress
-* ZendFramework
 
 Supported Reports
 -----------------
@@ -233,6 +227,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/redis <https://github.com/phpredis/phpredis/>`_
 * `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
 * `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
+* `ext/sdl <https://github.com/Ponup/phpsdl>`_
 * `ext/seaslog <https://github.com/SeasX/SeasLog>`_
 * `ext/sem <http://php.net/manual/en/book.sem.php>`_
 * `ext/session <http://php.net/manual/en/book.session.php>`_
@@ -324,7 +319,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
-* SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
 * `Thelia <https://thelia.net/>`_
@@ -396,6 +390,12 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.5.6
+
+  * Isset() On The Whole Array (Performances/IssetWholeArray ; Performances, Suggestions)
+  * Useless Alias (Traits/UselessAlias ; Analyze, LintButWontExec)
+  * ext/sdl (Extensions/Extsdl)
 
 * 1.5.5
 
@@ -591,14 +591,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.2.1
 
-  * Check Regex (Melis/CheckRegex ; Melis)
-  * Melis/RouteConstraints (Melis/RouteConstraints ; Melis)
   * Possible Increment (Structures/PossibleIncrement ; Suggestions)
   * Properties Declaration Consistence (Classes/PPPDeclarationStyle)
-
-* 1.2.0
-
-  * Private Function Usage (Wordpress/PrivateFunctionUsage)
 
 * 1.1.10
 
@@ -655,21 +649,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.1.2
 
   * Local Globals (Variables/LocalGlobals ; Analyze)
-  * Make Type A String (Melis/MakeTypeAString ; Melis)
-  * Melis Translation String (Melis/TranslationString ; Internal)
   * Missing Include (Files/MissingInclude)
-  * Missing Translation String (Melis/MissingTranslation ; Melis)
-  * No Echo Outside View (ZendF/NoEchoOutsideView ; ZendFramework, Melis)
-  * Undefined Configuration Type (Melis/UndefinedConfType ; Melis)
 
 * 1.1.1
 
-  * Defined View Property (ZendF/DefinedViewProperty ; ZendFramework)
   * Inclusion Wrong Case (Files/InclusionWrongCase)
-  * Is Zend View File (ZendF/IsView ; ZendFramework)
-  * Missing Language (Melis/MissingLanguage ; Melis)
-  * Undefined Configured Class (Melis/UndefinedConfiguredClass ; Melis)
-  * Used View Property (ZendF/UsedViewProperty ; Internal)
 
 * 1.0.11
 
@@ -686,25 +670,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Identical On Both Sides (Structures/IdenticalOnBothSides ; Analyze)
   * Mistaken Concatenation (Arrays/MistakenConcatenation)
   * No Reference For Ternary (Php/NoReferenceForTernary ; Analyze)
-  * Symfony 2.8 Undefined Classes (Symfony/Symfony28Undefined ; Symfony)
-  * Symfony 3.0 Undefined Classes (Symfony/Symfony30Undefined ; Symfony)
-  * Symfony 3.1 Undefined Classes (Symfony/Symfony31Undefined ; Symfony)
-  * Symfony 3.2 Undefined Classes (Symfony/Symfony32Undefined ; Symfony)
-  * Symfony 3.3 Undefined Classes (Symfony/Symfony33Undefined ; Symfony)
-  * Symfony 3.4 Undefined Classes (Symfony/Symfony34Undefined ; Symfony)
-  * Symfony 4.0 Undefined Classes (Symfony/Symfony40Undefined ; Symfony)
-  * Symfony Usage (Symfony/SymfonyUsage ; Symfony)
-  * Wordpress 4.0 Undefined Classes (Wordpress/wordpress40Undefined ; )
-  * Wordpress 4.1 Undefined Classes (Wordpress/wordpress41Undefined ; )
-  * Wordpress 4.2 Undefined Classes (Wordpress/wordpress42Undefined ; )
-  * Wordpress 4.3 Undefined Classes (Wordpress/wordpress43Undefined ; )
-  * Wordpress 4.4 Undefined Classes (Wordpress/wordpress44Undefined ; )
-  * Wordpress 4.5 Undefined Classes (Wordpress/wordpress45Undefined ; )
-  * Wordpress 4.6 Undefined Classes (Wordpress/Wordpress46Undefined ; Wordpress)
-  * Wordpress 4.7 Undefined Classes (Wordpress/Wordpress47Undefined ; Wordpress)
-  * Wordpress 4.8 Undefined Classes (Wordpress/Wordpress48Undefined ; Wordpress)
-  * Wordpress 4.9 Undefined Classes (Wordpress/Wordpress49Undefined ; Wordpress)
-  * Wordpress Usage (Wordpress/WordpressUsage ; Wordpress)
 
 * 1.0.7
 
@@ -724,7 +689,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Invalid Regex (Structures/InvalidRegex ; Analyze)
   * Parent First (Classes/ParentFirst)
   * Same Variables Foreach (Structures/AutoUnsetForeach ; Analyze)
-  * Should Always Prepare (ZendF/Zf3DbAlwaysPrepare ; ZendFramework)
 
 * 1.0.4
 
@@ -756,11 +720,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.0.1
 
-  * Avoid Double Prepare (Wordpress/DoublePrepare ; Wordpress)
   * Could Be Else (Structures/CouldBeElse ; Analyze)
   * Next Month Trap (Structures/NextMonthTrap ; Analyze)
-  * No Direct Input To Wpdb (Wordpress/NoDirectInputToWpdb ; Wordpress)
-  * Prepare Placeholder (Wordpress/PreparePlaceholder ; Wordpress)
   * Printf Number Of Arguments (Structures/PrintfArguments ; Analyze)
   * Simple Switch (Performances/SimpleSwitch)
   * Substring First (Performances/SubstrFirst ; Performances, Suggestions)
@@ -777,15 +738,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Session Variables (Php/SessionVariables ; Inventory)
   * Too Complex Expression (Structures/ComplexExpression ; Appinfo)
   * Unconditional Break In Loop (Structures/UnconditionLoopBreak ; Analyze, Level 3)
-  * zend-eventmanager 3.2.0 Undefined Classes (ZendF/Zf3Eventmanager32 ; ZendFramework)
-  * zend-feed 2.8.0 Undefined Classes (ZendF/Zf3Feed28 ; ZendFramework)
-  * zend-http 2.7.0 Undefined Classes (ZendF/Zf3Http27 ; ZendFramework)
-  * zend-mail 2.8.0 Undefined Classes (ZendF/Zf3Mail28 ; ZendFramework)
-  * zend-modulemanager 2.8.0 Undefined Classes (ZendF/Zf3Modulemanager28 ; ZendFramework)
-  * zend-mvc 3.1.0 Undefined Classes (ZendF/Zf3Mvc31 ; ZendFramework)
-  * zend-session 2.8.0 Undefined Classes (ZendF/Zf3Session28 ; ZendFramework)
-  * zend-test 3.1.0 Undefined Classes (ZendF/Zf3Test31 ; ZendFramework)
-  * zend-validator 2.9.0 Undefined Classes (ZendF/Zf3Validator29 ; ZendFramework)
 
 * 0.12.15
 
@@ -793,7 +745,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Is Actually Zero (Structures/IsZero ; Analyze, Level 2)
   * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze, Level 4)
   * Session Lazy Write (Security/SessionLazyWrite ; Security)
-  * zend-code 3.2.0 Undefined Classes (ZendF/Zf3Code32 ; ZendFramework, ZendFramework)
 
 * 0.12.14
 
@@ -960,235 +911,24 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Method Is Overwritten (Classes/MethodIsOverwritten)
   * No Class In Global (Php/NoClassInGlobal ; Analyze)
   * Repeated Regex (Structures/RepeatedRegex ; Analyze, Level 1)
-  * Thrown Exceptions (ZendF/ThrownExceptions ; ZendFramework)
-  * zend-log 2.5.0 Undefined Classes (ZendF/Zf3Log25 ; ZendFramework)
-  * zend-log 2.6.0 Undefined Classes (ZendF/Zf3Log26 ; ZendFramework)
-  * zend-log 2.7.0 Undefined Classes (ZendF/Zf3Log27 ; ZendFramework)
-  * zend-log 2.8.0 Undefined Classes (ZendF/Zf3Log28 ; ZendFramework)
-  * zend-log 2.9.0 Undefined Classes (ZendF/Zf3Log29 ; ZendFramework)
-  * zend-log Usage (ZendF/Zf3Log ; ZendFramework)
-  * zend-mail 2.5.0 Undefined Classes (ZendF/Zf3Mail25 ; ZendFramework)
-  * zend-mail 2.6.0 Undefined Classes (ZendF/Zf3Mail26 ; ZendFramework)
-  * zend-mail 2.7.0 Undefined Classes (ZendF/Zf3Mail27 ; ZendFramework)
-  * zend-mail Usage (ZendF/Zf3Mail ; ZendFramework)
-  * zend-math 2.5.0 Undefined Classes (ZendF/Zf3Math25 ; ZendFramework)
-  * zend-math 2.6.0 Undefined Classes (ZendF/Zf3Math26 ; ZendFramework)
-  * zend-math 2.7.0 Undefined Classes (ZendF/Zf3Math27 ; ZendFramework)
-  * zend-math 3.0.0 Undefined Classes (ZendF/Zf3Math30 ; ZendFramework)
-  * zend-math Usage (ZendF/Zf3Math ; ZendFramework)
-  * zend-memory 2.5.0 Undefined Classes (ZendF/Zf3Memory25 ; ZendFramework)
-  * zend-memory Usage (ZendF/Zf3Memory ; ZendFramework)
-  * zend-mime 2.5.0 Undefined Classes (ZendF/Zf3Mime25 ; ZendFramework)
-  * zend-mime 2.6.0 Undefined Classes (ZendF/Zf3Mime26 ; ZendFramework)
-  * zend-mime Usage (ZendF/Zf3Mime ; ZendFramework)
-  * zend-modulemanager 2.5.0 Undefined Classes (ZendF/Zf3Modulemanager25 ; ZendFramework)
-  * zend-modulemanager 2.6.0 Undefined Classes (ZendF/Zf3Modulemanager26 ; ZendFramework)
-  * zend-modulemanager 2.7.0 Undefined Classes (ZendF/Zf3Modulemanager27 ; ZendFramework)
-  * zend-modulemanager Usage (ZendF/Zf3Modulemanager ; ZendFramework)
-  * zend-navigation 2.5.0 Undefined Classes (ZendF/Zf3Navigation25 ; ZendFramework)
-  * zend-navigation 2.6.0 Undefined Classes (ZendF/Zf3Navigation26 ; ZendFramework)
-  * zend-navigation 2.7.0 Undefined Classes (ZendF/Zf3Navigation27 ; ZendFramework)
-  * zend-navigation 2.8.0 Undefined Classes (ZendF/Zf3Navigation28 ; ZendFramework)
-  * zend-navigation Usage (ZendF/Zf3Navigation ; ZendFramework)
-  * zend-paginator 2.5.0 Undefined Classes (ZendF/Zf3Paginator25 ; ZendFramework)
-  * zend-paginator 2.6.0 Undefined Classes (ZendF/Zf3Paginator26 ; ZendFramework)
-  * zend-paginator 2.7.0 Undefined Classes (ZendF/Zf3Paginator27 ; ZendFramework)
-  * zend-paginator Usage (ZendF/Zf3Paginator ; ZendFramework)
-  * zend-progressbar 2.5.0 Undefined Classes (ZendF/Zf3Progressbar25 ; ZendFramework)
-  * zend-progressbar Usage (ZendF/Zf3Progressbar ; ZendFramework)
-  * zend-serializer 2.5.0 Undefined Classes (ZendF/Zf3Serializer25 ; ZendFramework)
-  * zend-serializer 2.6.0 Undefined Classes (ZendF/Zf3Serializer26 ; ZendFramework)
-  * zend-serializer 2.7.0 Undefined Classes (ZendF/Zf3Serializer27 ; ZendFramework)
-  * zend-serializer 2.8.0 Undefined Classes (ZendF/Zf3Serializer28 ; ZendFramework)
-  * zend-serializer Usage (ZendF/Zf3Serializer ; ZendFramework)
-  * zend-server 2.5.0 Undefined Classes (ZendF/Zf3Server25 ; ZendFramework)
-  * zend-server 2.6.0 Undefined Classes (ZendF/Zf3Server26 ; ZendFramework)
-  * zend-server 2.7.0 Undefined Classes (ZendF/Zf3Server27 ; ZendFramework)
-  * zend-server Usage (ZendF/Zf3Server ; ZendFramework)
-  * zend-servicemanager 2.5.0 Undefined Classes (ZendF/Zf3Servicemanager25 ; ZendFramework)
-  * zend-servicemanager 2.6.0 Undefined Classes (ZendF/Zf3Servicemanager26 ; ZendFramework)
-  * zend-servicemanager 2.7.0 Undefined Classes (ZendF/Zf3Servicemanager27 ; ZendFramework)
-  * zend-servicemanager 3.0.0 Undefined Classes (ZendF/Zf3Servicemanager30 ; ZendFramework)
-  * zend-servicemanager 3.1.0 Undefined Classes (ZendF/Zf3Servicemanager31 ; ZendFramework)
-  * zend-servicemanager 3.2.0 Undefined Classes (ZendF/Zf3Servicemanager32 ; ZendFramework)
-  * zend-servicemanager 3.3.0 Undefined Classes (ZendF/Zf3Servicemanager33 ; ZendFramework)
-  * zend-servicemanager Usage (ZendF/Zf3Servicemanager ; ZendFramework)
-  * zend-soap 2.5.0 Undefined Classes (ZendF/Zf3Soap25 ; ZendFramework)
-  * zend-soap 2.6.0 Undefined Classes (ZendF/Zf3Soap26 ; ZendFramework)
-  * zend-soap Usage (ZendF/Zf3Soap ; ZendFramework)
-  * zend-stdlib 2.5.0 Undefined Classes (ZendF/Zf3Stdlib25 ; ZendFramework)
-  * zend-stdlib 2.6.0 Undefined Classes (ZendF/Zf3Stdlib26 ; ZendFramework)
-  * zend-stdlib 2.7.0 Undefined Classes (ZendF/Zf3Stdlib27 ; ZendFramework)
-  * zend-stdlib 3.0.0 Undefined Classes (ZendF/Zf3Stdlib30 ; ZendFramework)
-  * zend-stdlib 3.1.0 Undefined Classes (ZendF/Zf3Stdlib31 ; ZendFramework)
-  * zend-stdlib Usage (ZendF/Zf3Stdlib ; ZendFramework)
-  * zend-tag 2.5.0 Undefined Classes (ZendF/Zf3Tag25 ; ZendFramework)
-  * zend-tag 2.6.0 Undefined Classes (ZendF/Zf3Tag26 ; ZendFramework)
-  * zend-tag Usage (ZendF/Zf3Tag ; ZendFramework)
-  * zend-test 2.5.0 Undefined Classes (ZendF/Zf3Test25 ; ZendFramework, ZendFramework)
-  * zend-test 2.6.0 Undefined Classes (ZendF/Zf3Test26 ; ZendFramework, ZendFramework)
-  * zend-test 3.0.0 Undefined Classes (ZendF/Zf3Test30 ; ZendFramework, ZendFramework)
-  * zend-test Usage (ZendF/Zf3Test ; ZendFramework, ZendFramework)
-  * zend-xmlrpc 2.5.0 Undefined Classes (ZendF/Zf3Xmlrpc25 ; ZendFramework)
-  * zend-xmlrpc 2.6.0 Undefined Classes (ZendF/Zf3Xmlrpc26 ; ZendFramework)
-  * zend-xmlrpc Usage (ZendF/Zf3Xmlrpc ; ZendFramework)
-
-* 0.10.8
-
-  * zend-i18n-resources 2.5.x (ZendF/Zf3I18n_resources25)
 
 * 0.10.7
 
-  * Avoid PHP Superglobals (ZendF/DontUseGPC ; ZendFramework)
   * Group Use Declaration (Php/GroupUseDeclaration)
   * Missing Cases In Switch (Structures/MissingCases ; Analyze)
   * New Constants In PHP 7.2 (Php/Php72NewConstants ; CompatibilityPHP72)
   * New Functions In PHP 7.2 (Php/Php72NewFunctions ; CompatibilityPHP72)
   * New Functions In PHP 7.3 (Php/Php73NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
-  * No Echo In Route Callable (Slim/NoEchoInRouteCallable ; Slim)
-  * Slim Missing Classes (Slim/SlimMissing ; Internal)
-  * SlimPHP 1.0.0 Undefined Classes (Slim/Slimphp10 ; Slim)
-  * SlimPHP 1.1.0 Undefined Classes (Slim/Slimphp11 ; Slim)
-  * SlimPHP 1.2.0 Undefined Classes (Slim/Slimphp12 ; Slim)
-  * SlimPHP 1.3.0 Undefined Classes (Slim/Slimphp13 ; Slim)
-  * SlimPHP 1.5.0 Undefined Classes (Slim/Slimphp15 ; Slim)
-  * SlimPHP 1.6.0 Undefined Classes (Slim/Slimphp16 ; Slim)
-  * SlimPHP 2.0.0 Undefined Classes (Slim/Slimphp20 ; Slim)
-  * SlimPHP 2.1.0 Undefined Classes (Slim/Slimphp21 ; Slim)
-  * SlimPHP 2.2.0 Undefined Classes (Slim/Slimphp22 ; Slim)
-  * SlimPHP 2.3.0 Undefined Classes (Slim/Slimphp23 ; Slim)
-  * SlimPHP 2.4.0 Undefined Classes (Slim/Slimphp24 ; Slim)
-  * SlimPHP 2.5.0 Undefined Classes (Slim/Slimphp25 ; Slim)
-  * SlimPHP 2.6.0 Undefined Classes (Slim/Slimphp26 ; Slim)
-  * SlimPHP 3.0.0 Undefined Classes (Slim/Slimphp30 ; Slim)
-  * SlimPHP 3.1.0 Undefined Classes (Slim/Slimphp31 ; Slim)
-  * SlimPHP 3.2.0 Undefined Classes (Slim/Slimphp32 ; Slim)
-  * SlimPHP 3.3.0 Undefined Classes (Slim/Slimphp33 ; Slim)
-  * SlimPHP 3.4.0 Undefined Classes (Slim/Slimphp34 ; Slim)
-  * SlimPHP 3.5.0 Undefined Classes (Slim/Slimphp35 ; Slim)
-  * SlimPHP 3.6.0 Undefined Classes (Slim/Slimphp36 ; Slim)
-  * SlimPHP 3.7.0 Undefined Classes (Slim/Slimphp37 ; Slim)
-  * SlimPHP 3.8.0 Undefined Classes (Slim/Slimphp38 ; Slim)
-  * Use Slim (Slim/UseSlim ; Appinfo, Slim)
-  * Used Routes (Slim/UsedRoutes ; Slim)
-  * zend-authentication 2.5.0 Undefined Classes (ZendF/Zf3Authentication25 ; ZendFramework)
-  * zend-authentication Usage (ZendF/Zf3Authentication ; ZendFramework)
-  * zend-barcode 2.5.0 Undefined Classes (ZendF/Zf3Barcode25 ; ZendFramework)
-  * zend-barcode 2.6.0 Undefined Classes (ZendF/Zf3Barcode26 ; ZendFramework)
-  * zend-barcode Usage (ZendF/Zf3Barcode ; ZendFramework)
-  * zend-captcha 2.5.0 Undefined Classes (ZendF/Zf3Captcha25 ; ZendFramework)
-  * zend-captcha 2.6.0 Undefined Classes (ZendF/Zf3Captcha26 ; ZendFramework)
-  * zend-captcha 2.7.0 Undefined Classes (ZendF/Zf3Captcha27 ; ZendFramework)
-  * zend-captcha Usage (ZendF/Zf3Captcha ; ZendFramework)
-  * zend-code 2.5.0 Undefined Classes (ZendF/Zf3Code25 ; ZendFramework, ZendFramework)
-  * zend-code 2.6.0 Undefined Classes (ZendF/Zf3Code26 ; ZendFramework, ZendFramework)
-  * zend-code 3.0.0 Undefined Classes (ZendF/Zf3Code30 ; ZendFramework, ZendFramework)
-  * zend-code 3.1.0 Undefined Classes (ZendF/Zf3Code31 ; ZendFramework, ZendFramework)
-  * zend-code Usage (ZendF/Zf3Code ; ZendFramework)
-  * zend-console 2.5.0 Undefined Classes (ZendF/Zf3Console25 ; ZendFramework)
-  * zend-console 2.6.0 Undefined Classes (ZendF/Zf3Console26 ; ZendFramework)
-  * zend-console Usage (ZendF/Zf3Console ; ZendFramework)
-  * zend-crypt 2.5.0 Undefined Classes (ZendF/Zf3Crypt25 ; ZendFramework)
-  * zend-crypt 2.6.0 Undefined Classes (ZendF/Zf3Crypt26 ; ZendFramework)
-  * zend-crypt 3.0.0 Undefined Classes (ZendF/Zf3Crypt30 ; ZendFramework)
-  * zend-crypt 3.1.0 Undefined Classes (ZendF/Zf3Crypt31 ; ZendFramework)
-  * zend-crypt 3.2.0 Undefined Classes (ZendF/Zf3Crypt32 ; ZendFramework)
-  * zend-crypt Usage (ZendF/Zf3Crypt ; ZendFramework)
-  * zend-db 2.5.0 Undefined Classes (ZendF/Zf3Db25 ; ZendFramework)
-  * zend-db 2.6.0 Undefined Classes (ZendF/Zf3Db26 ; ZendFramework)
-  * zend-db 2.7.0 Undefined Classes (ZendF/Zf3Db27 ; ZendFramework)
-  * zend-db 2.8.0 Undefined Classes (ZendF/Zf3Db28 ; ZendFramework)
-  * zend-db Usage (ZendF/Zf3Db ; ZendFramework)
-  * zend-debug 2.5.0 Undefined Classes (ZendF/Zf3Debug25 ; ZendFramework)
-  * zend-debug Usage (ZendF/Zf3Debug ; ZendFramework)
-  * zend-di 2.5.0 Undefined Classes (ZendF/Zf3Di25 ; ZendFramework)
-  * zend-di 2.6.0 Undefined Classes (ZendF/Zf3Di26 ; ZendFramework)
-  * zend-di Usage (ZendF/Zf3Di ; ZendFramework)
-  * zend-dom 2.5.0 Undefined Classes (ZendF/Zf3Dom25 ; ZendFramework)
-  * zend-dom 2.6.0 Undefined Classes (ZendF/Zf3Dom26 ; ZendFramework)
-  * zend-dom Usage (ZendF/Zf3Dom ; ZendFramework)
-  * zend-escaper 2.5.0 Undefined Classes (ZendF/Zf3Escaper25 ; ZendFramework)
-  * zend-escaper Usage (ZendF/Zf3Escaper ; ZendFramework)
-  * zend-eventmanager 2.5.0 Undefined Classes (ZendF/Zf3Eventmanager25 ; ZendFramework, ZendFramework)
-  * zend-eventmanager 2.6.0 Undefined Classes (ZendF/Zf3Eventmanager26 ; ZendFramework, ZendFramework)
-  * zend-eventmanager 3.0.0 Undefined Classes (ZendF/Zf3Eventmanager30 ; ZendFramework, ZendFramework)
-  * zend-eventmanager 3.1.0 Undefined Classes (ZendF/Zf3Eventmanager31 ; ZendFramework, ZendFramework)
-  * zend-eventmanager Usage (ZendF/Zf3Eventmanager ; ZendFramework, ZendFramework)
-  * zend-feed 2.5.0 Undefined Classes (ZendF/Zf3Feed25 ; ZendFramework)
-  * zend-feed 2.6.0 Undefined Classes (ZendF/Zf3Feed26 ; ZendFramework)
-  * zend-feed 2.7.0 Undefined Classes (ZendF/Zf3Feed27 ; ZendFramework)
-  * zend-feed Usage (ZendF/Zf3Feed ; ZendFramework)
-  * zend-file 2.5.0 Undefined Classes (ZendF/Zf3File25 ; ZendFramework)
-  * zend-file 2.6.0 Undefined Classes (ZendF/Zf3File26 ; ZendFramework)
-  * zend-file 2.7.0 Undefined Classes (ZendF/Zf3File27 ; ZendFramework)
-  * zend-file Usage (ZendF/Zf3File ; ZendFramework)
-  * zend-filter 2.5.0 Undefined Classes (ZendF/Zf3Filter25 ; ZendFramework)
-  * zend-filter 2.6.0 Undefined Classes (ZendF/Zf3Filter26 ; ZendFramework)
-  * zend-filter 2.7.0 Undefined Classes (ZendF/Zf3Filter27 ; ZendFramework)
-  * zend-filter Usage (ZendF/Zf3Filter ; ZendFramework)
-  * zend-form 2.5.0 Undefined Classes (ZendF/Zf3Form25 ; ZendFramework)
-  * zend-form 2.6.0 Undefined Classes (ZendF/Zf3Form26 ; ZendFramework)
-  * zend-form 2.7.0 Undefined Classes (ZendF/Zf3Form27 ; ZendFramework)
-  * zend-form 2.8.0 Undefined Classes (ZendF/Zf3Form28 ; ZendFramework)
-  * zend-form 2.9.0 Undefined Classes (ZendF/Zf3Form29 ; ZendFramework)
-  * zend-form Usage (ZendF/Zf3Form ; ZendFramework)
-  * zend-http 2.5.0 Undefined Classes (ZendF/Zf3Http25 ; ZendFramework)
-  * zend-http 2.6.0 Undefined Classes (ZendF/Zf3Http26 ; ZendFramework)
-  * zend-http Usage (ZendF/Zf3Http ; ZendFramework)
-  * zend-i18n 2.5.0 Undefined Classes (ZendF/Zf3I18n25 ; ZendFramework)
-  * zend-i18n 2.6.0 Undefined Classes (ZendF/Zf3I18n26 ; ZendFramework)
-  * zend-i18n 2.7.0 Undefined Classes (ZendF/Zf3I18n27 ; ZendFramework)
-  * zend-i18n Usage (ZendF/Zf3I18n ; ZendFramework)
-  * zend-i18n resources Usage (ZendF/Zf3I18n_resources ; ZendFramework)
-  * zend-i18n-resources 2.5.0 Undefined Classes (ZendF/Zf3I18n-resources25 ; )
-  * zend-i18n-resources Usage (ZendF/Zf3I18n-resources ; )
-  * zend-inputfilter 2.5.0 Undefined Classes (ZendF/Zf3Inputfilter25 ; ZendFramework)
-  * zend-inputfilter 2.6.0 Undefined Classes (ZendF/Zf3Inputfilter26 ; ZendFramework)
-  * zend-inputfilter 2.7.0 Undefined Classes (ZendF/Zf3Inputfilter27 ; ZendFramework)
-  * zend-inputfilter Usage (ZendF/Zf3Inputfilter ; ZendFramework)
-  * zend-json 2.5.0 Undefined Classes (ZendF/Zf3Json25 ; ZendFramework)
-  * zend-json 2.6.0 Undefined Classes (ZendF/Zf3Json26 ; ZendFramework)
-  * zend-json 3.0.0 Undefined Classes (ZendF/Zf3Json30 ; ZendFramework)
-  * zend-json Usage (ZendF/Zf3Json ; ZendFramework)
-  * zend-loader 2.5.0 Undefined Classes (ZendF/Zf3Loader25 ; ZendFramework)
-  * zend-loader Usage (ZendF/Zf3Loader ; ZendFramework)
-  * zend-session 2.5.0 Undefined Classes (ZendF/Zf3Session25 ; ZendFramework)
-  * zend-session 2.6.0 Undefined Classes (ZendF/Zf3Session26 ; ZendFramework)
-  * zend-session 2.7.0 Undefined Classes (ZendF/Zf3Session27 ; ZendFramework)
-  * zend-session Usage (ZendF/Zf3Session ; ZendFramework)
-  * zend-text 2.5.0 Undefined Classes (ZendF/Zf3Text25 ; ZendFramework)
-  * zend-text 2.6.0 Undefined Classes (ZendF/Zf3Text26 ; ZendFramework)
-  * zend-text Usage (ZendF/Zf3Text ; ZendFramework)
 
 * 0.10.6
 
-  * CakePHP 2.5.0 Undefined Classes (Cakephp/Cakephp25 ; Cakephp)
-  * CakePHP 2.6.0 Undefined Classes (Cakephp/Cakephp26 ; Cakephp)
-  * CakePHP 2.7.0 Undefined Classes (Cakephp/Cakephp27 ; Cakephp)
-  * CakePHP 2.8.0 Undefined Classes (Cakephp/Cakephp28 ; Cakephp)
-  * CakePHP 2.9.0 Undefined Classes (Cakephp/Cakephp29 ; Cakephp)
-  * CakePHP 3.0.0 Undefined Classes (Cakephp/Cakephp30 ; Cakephp)
-  * CakePHP 3.1.0 Undefined Classes (Cakephp/Cakephp31 ; Cakephp)
-  * CakePHP 3.2.0 Undefined Classes (Cakephp/Cakephp32 ; Cakephp)
-  * CakePHP 3.3.0 Undefined Classes (Cakephp/Cakephp33 ; Cakephp)
-  * CakePHP 3.4.0 Undefined Classes (Cakephp/Cakephp34 ; Cakephp)
-  * CakePHP Unknown Classes (Cakephp/CakePHPMissing)
-  * CakePHP Used (Cakephp/CakePHPUsed ; Appinfo, Cakephp)
   * Check All Types (Structures/CheckAllTypes ; Analyze)
   * Do Not Cast To Int (Php/NoCastToInt ; )
-  * Manipulates INF (Php/IsINF ; Appinfo)
+  * Manipulates INF (Php/IsINF)
   * Manipulates NaN (Php/IsNAN ; Appinfo)
   * Set Cookie Safe Arguments (Security/SetCookieArgs ; Security)
   * Should Use SetCookie() (Php/UseSetCookie ; Analyze)
   * Use Cookies (Php/UseCookies ; Appinfo, Appcontent)
-  * ZF3 Usage Of Deprecated (ZendF/Zf3DeprecatedUsage ; ZendFramework)
-  * zend-cache Usage (ZendF/Zf3Cache ; ZendFramework, ZendFramework)
-  * zend-view 2.5.0 Undefined Classes (ZendF/Zf3View25 ; ZendFramework)
-  * zend-view 2.6.0 Undefined Classes (ZendF/Zf3View26 ; ZendFramework)
-  * zend-view 2.7.0 Undefined Classes (ZendF/Zf3View27 ; ZendFramework)
-  * zend-view 2.8.0 Undefined Classes (ZendF/Zf3View28 ; ZendFramework)
-  * zend-view 2.9.0 Undefined Classes (ZendF/Zf3View29 ; ZendFramework)
-  * zend-view Usage (ZendF/Zf3View ; ZendFramework)
 
 * 0.10.5
 
@@ -1198,35 +938,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Strange Name For Constants (Constants/StrangeName ; Analyze)
   * Strange Name For Variables (Variables/StrangeName ; Analyze)
   * Too Many Finds (Classes/TooManyFinds)
-  * ZF3 Component (ZendF/Zf3Component ; Internal)
-  * Zend Framework 3 Missing Classes (ZendF/Zf3ComponentMissing ; Internal)
-  * Zend\Config (ZendF/Zf3Config ; ZendFramework)
-  * zend-cache 2.5.0 Undefined Classes (ZendF/Zf3Cache25 ; ZendFramework)
-  * zend-cache 2.6.0 Undefined Classes (ZendF/Zf3Cache26 ; ZendFramework)
-  * zend-cache 2.7.0 Undefined Classes (ZendF/Zf3Cache27 ; ZendFramework)
-  * zend-config 2.5.x (ZendF/Zf3Config25 ; ZendFramework)
-  * zend-config 2.6.x (ZendF/Zf3Config26 ; ZendFramework)
-  * zend-config 3.0.x (ZendF/Zf3Config30 ; ZendFramework)
-  * zend-config 3.1.x (ZendF/Zf3Config31 ; ZendFramework)
-  * zend-mvc 2.5.x (ZendF/Zf3Mvc25 ; ZendFramework)
-  * zend-mvc 2.6.x (ZendF/Zf3Mvc26 ; ZendFramework)
-  * zend-mvc 2.7.x (ZendF/Zf3Mvc27 ; ZendFramework)
-  * zend-mvc 3.0.x (ZendF/Zf3Mvc30 ; ZendFramework)
-  * zend-mvc Usage (ZendF/Zf3Mvc ; ZendFramework)
-  * zend-uri (ZendF/Zf3Uri ; ZendFramework)
-  * zend-uri 2.5.x (ZendF/Zf3Uri25 ; ZendFramework)
-  * zend-validator 2.6.x (ZendF/Zf3Validator25 ; ZendFramework)
-  * zend-validator 2.6.x (ZendF/Zf3Validator26 ; ZendFramework)
-  * zend-validator 2.7.x (ZendF/Zf3Validator27 ; ZendFramework)
-  * zend-validator 2.8.x (ZendF/Zf3Validator28 ; ZendFramework)
-  * zend-validator Usage (ZendF/Zf3Validator ; ZendFramework)
 
 * 0.10.4
 
   * No Need For Else (Structures/NoNeedForElse ; Analyze)
-  * Should Regenerate Session Id (ZendF/ShouldRegenerateSessionId ; ZendFramework)
   * Should Use session_regenerateid() (Security/ShouldUseSessionRegenerateId ; Security)
-  * Use Zend Session (ZendF/UseSession ; Internal)
   * ext/ds (Extensions/Extds)
 
 * 0.10.3
@@ -1247,7 +963,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.10.1
 
   * All strings (Type/CharString ; Inventory)
-  * Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals ; Wordpress)
   * SQL queries (Type/Sql ; Inventory, Appinfo)
   * Strange Names For Methods (Classes/StrangeName)
 
@@ -1256,7 +971,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Error_Log() Usage (Php/ErrorLogUsage ; Appinfo)
   * No Boolean As Default (Functions/NoBooleanAsDefault ; Analyze)
   * Raised Access Level (Classes/RaisedAccessLevel)
-  * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables ; )
 
 * 0.9.9
 
@@ -1274,7 +988,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid Large Array Assignation (Structures/NoAssignationInFunction ; Performances)
   * Could Be Protected Property (Classes/CouldBeProtectedProperty)
   * Long Arguments (Structures/LongArguments ; Analyze)
-  * Zend Typehinting (ZendF/ZendTypehinting ; ZendFramework)
 
 * 0.9.6
 
@@ -1298,7 +1011,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Close Tags Consistency (Php/CloseTagsConsistency)
   * Unset() Or (unset) (Php/UnsetOrCast ; Preferences)
-  * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot ; Wordpress)
 
 * 0.9.2
 
@@ -1316,15 +1028,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid array_push() (Performances/AvoidArrayPush ; Performances, PHP recommendations)
   * Could Return Void (Functions/CouldReturnVoid)
   * Invalid Octal In String (Type/OctalInString ; Inventory, CompatibilityPHP71)
-  * Undefined Class 2.0 (ZendF/UndefinedClass20 ; ZendFramework)
-  * Undefined Class 2.1 (ZendF/UndefinedClass21 ; ZendFramework)
-  * Undefined Class 2.2 (ZendF/UndefinedClass22 ; ZendFramework)
-  * Undefined Class 2.3 (ZendF/UndefinedClass23 ; ZendFramework)
-  * Undefined Class 2.4 (ZendF/UndefinedClass24 ; ZendFramework)
-  * Undefined Class 2.5 (ZendF/UndefinedClass25 ; ZendFramework)
-  * Undefined Class 3.0 (ZendF/UndefinedClass30 ; ZendFramework)
-  * Zend Interface (ZendF/ZendInterfaces ; ZendFramework)
-  * Zend Trait (ZendF/ZendTrait ; ZendFramework)
 
 * 0.9.0
 
@@ -1341,7 +1044,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71)
   * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Codacy, Simple, Suggestions, Level 4)
-  * Use Wordpress Functions (Wordpress/UseWpFunctions ; Wordpress)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Codacy, Simple, Level 1)
 
 * 0.8.7
@@ -1361,8 +1063,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.8.5
 
-  * Is Zend Framework 1 Controller (ZendF/IsController ; ZendFramework)
-  * Is Zend Framework 1 Helper (ZendF/IsHelper ; ZendFramework)
   * Should Make Ternary (Structures/ShouldMakeTernary ; Analyze, OneFile, Codacy, Simple)
   * Unused Returned Value (Functions/UnusedReturnedValue)
 
@@ -1381,7 +1081,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Abstract Static Methods (Classes/AbstractStatic ; Analyze, Codacy, Simple)
   * Access Protected Structures (Classes/AccessProtected ; Analyze, Codacy, Simple)
   * Accessing Private (Classes/AccessPrivate ; Analyze, Codacy, Simple)
-  * Action Should Be In Controller (ZendF/ActionInController ; ZendFramework)
   * Adding Zero (Structures/AddZero ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Aliases (Namespaces/Alias ; Appinfo)
   * Aliases Usage (Functions/AliasesUsage ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
@@ -1412,8 +1111,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Break With 0 (Structures/Break0 ; CompatibilityPHP53, OneFile, Codacy)
   * Break With Non Integer (Structures/BreakNonInteger ; CompatibilityPHP54, OneFile, Codacy)
   * Buried Assignation (Structures/BuriedAssignation ; Analyze, Codacy)
-  * CakePHP 3.0 Deprecated Class (Cakephp/Cake30DeprecatedClass ; Cakephp)
-  * CakePHP 3.3 Deprecated Class (Cakephp/Cake33DeprecatedClass ; Cakephp)
   * Calltime Pass By Reference (Structures/CalltimePassByReference ; CompatibilityPHP54, Codacy)
   * Can't Disable Class (Security/CantDisableClass ; Security)
   * Can't Disable Function (Security/CantDisableFunction ; Appinfo, Appcontent)
@@ -1480,10 +1177,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Definitions Only (Files/DefinitionsOnly ; Internal)
   * Dependant Trait (Traits/DependantTrait ; Analyze, Codacy, Level 3)
   * Deprecated Functions (Php/Deprecated ; Analyze, Codacy)
-  * Deprecated Methodcalls in Cake 3.2 (Cakephp/Cake32DeprecatedMethods ; Cakephp)
-  * Deprecated Methodcalls in Cake 3.3 (Cakephp/Cake33DeprecatedMethods ; Cakephp)
-  * Deprecated Static calls in Cake 3.3 (Cakephp/Cake33DeprecatedStaticmethodcall ; Cakephp)
-  * Deprecated Trait in Cake 3.3 (Cakephp/Cake33DeprecatedTraits ; Cakephp)
   * Dereferencing String And Arrays (Structures/DereferencingAS ; Appinfo, CompatibilityPHP54, CompatibilityPHP53)
   * Direct Injection (Security/DirectInjection ; Security)
   * Directives Usage (Php/DirectivesUsage ; Appinfo)
@@ -1517,10 +1210,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Empty Traits (Traits/EmptyTrait ; Analyze, Codacy, Simple)
   * Empty Try Catch (Structures/EmptyTryCatch ; Analyze, Codacy, Level 3)
   * Empty With Expression (Structures/EmptyWithExpression ; OneFile, Suggestions)
-  * Error Messages (Structures/ErrorMessages ; Appinfo, ZendFramework)
-  * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Security, Performances, OneFile, Wordpress, ClearPHP, Codacy, Simple)
+  * Error Messages (Structures/ErrorMessages ; Appinfo)
+  * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Security, Performances, OneFile, ClearPHP, Codacy, Simple)
   * Exception Order (Exceptions/AlreadyCaught ; Dead code)
-  * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, ZendFramework, Codacy)
+  * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, Codacy)
   * Exit-like Methods (Functions/KillsApp ; Internal)
   * Exponent Usage (Php/ExponentUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * External Config Files (Files/Services ; Internal)
@@ -1604,7 +1297,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Is Not Class Family (Classes/IsNotFamily ; Internal)
   * Is PHP Constant (Constants/IsPhpConstant ; Internal)
   * Is Upper Family (Classes/IsUpperFamily ; Internal)
-  * Join file() (Performances/JoinFile ; Performances)
+  * Joining file() (Performances/JoinFile ; Performances)
   * Labels (Php/Labelnames ; Appinfo)
   * Linux Only Files (Portability/LinuxOnlyFiles ; Portability)
   * List Short Syntax (Php/ListShortSyntax ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Internal, CompatibilityPHP53, CompatibilityPHP70)
@@ -1662,7 +1355,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Direct Access (Structures/NoDirectAccess ; Appinfo)
   * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Codacy, Level 2)
   * No Direct Usage (Structures/NoDirectUsage ; Analyze, Codacy, Simple)
-  * No Global Modification (Wordpress/NoGlobalModification ; Wordpress)
   * No Hardcoded Hash (Structures/NoHardcodedHash ; Analyze, Security, Codacy, Simple)
   * No Hardcoded Ip (Structures/NoHardcodedIp ; Analyze, Security, ClearPHP, Codacy, Simple)
   * No Hardcoded Path (Structures/NoHardcodedPath ; Analyze, ClearPHP, Codacy, Simple)
@@ -1680,7 +1372,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Non Static Methods Called In A Static (Classes/NonStaticMethodsCalledStatic ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Codacy, Simple)
   * Non-constant Index In Array (Arrays/NonConstantArray ; Analyze, Codacy, Simple)
   * Non-lowercase Keywords (Php/UpperCaseKeyword ; Coding Conventions, RadwellCodes)
-  * Nonce Creation (Wordpress/NonceCreation ; Wordpress)
   * Normal Methods (Classes/NormalMethods ; Appcontent)
   * Normal Property (Classes/NormalProperty ; Appcontent)
   * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
@@ -1725,7 +1416,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Perl Regex (Type/Pcre ; Inventory)
   * Php 7 Indirect Expression (Variables/Php7IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * Php 7.1 New Class (Php/Php71NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
-  * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
+  * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Phpinfo (Structures/PhpinfoUsage ; Analyze, Security, OneFile, Codacy, Simple)
   * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple, Level 4)
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
@@ -1772,7 +1463,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Short Syntax For Arrays (Arrays/ArrayNSUsage ; Appinfo, CompatibilityPHP53)
   * Should Be Single Quote (Type/ShouldBeSingleQuote ; Coding Conventions, ClearPHP)
   * Should Chain Exception (Structures/ShouldChainException ; Analyze, Codacy, Simple)
-  * Should Make Alias (Namespaces/ShouldMakeAlias ; Analyze, OneFile, ZendFramework, Codacy, Simple)
+  * Should Make Alias (Namespaces/ShouldMakeAlias ; Analyze, OneFile, Codacy, Simple)
   * Should Typecast (Type/ShouldTypecast ; Analyze, OneFile, Codacy, Simple)
   * Should Use Coalesce (Php/ShouldUseCoalesce ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * Should Use Constants (Functions/ShouldUseConstants ; Analyze, Codacy, Simple)
@@ -1820,20 +1511,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Undefined Caught Exceptions (Exceptions/CaughtButNotThrown ; Dead code)
   * Undefined Class Constants (Classes/UndefinedConstants ; Analyze, Codacy)
   * Undefined Classes (Classes/UndefinedClasses ; Analyze, Codacy)
-  * Undefined Classes (ZendF/UndefinedClasses ; )
   * Undefined Constants (Constants/UndefinedConstants ; Analyze, CompatibilityPHP72, Codacy, Simple)
   * Undefined Functions (Functions/UndefinedFunctions ; Analyze, Codacy)
   * Undefined Interfaces (Interfaces/UndefinedInterfaces ; Analyze, Codacy)
   * Undefined Parent (Classes/UndefinedParentMP ; Analyze, Codacy, Simple)
   * Undefined Properties (Classes/UndefinedProperty ; Analyze, ClearPHP, Codacy, Simple)
   * Undefined Trait (Traits/UndefinedTrait ; Analyze, Codacy, LintButWontExec)
-  * Undefined Zend 1.10 (ZendF/UndefinedClass110 ; ZendFramework)
-  * Undefined Zend 1.11 (ZendF/UndefinedClass111 ; ZendFramework)
-  * Undefined Zend 1.12 (ZendF/UndefinedClass112 ; ZendFramework)
-  * Undefined Zend 1.8 (ZendF/UndefinedClass18 ; ZendFramework)
-  * Undefined Zend 1.9 (ZendF/UndefinedClass19 ; ZendFramework)
   * Undefined static:: Or self:: (Classes/UndefinedStaticMP ; Analyze, Codacy, Simple)
-  * Unescaped Variables In Templates (Wordpress/UnescapedVariables ; Wordpress)
   * Unicode Blocks (Type/UnicodeBlock ; Inventory)
   * Unicode Escape Partial (Php/UnicodeEscapePartial ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Unicode Escape Syntax (Php/UnicodeEscapeSyntax ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -1863,9 +1547,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unused Traits (Traits/UnusedTrait ; Codacy, Simple)
   * Unused Use (Namespaces/UnusedUse ; Dead code, ClearPHP, Codacy, Simple)
   * Unusual Case For PHP Functions (Php/UpperCaseFunction ; Coding Conventions)
-  * Unverified Nonce (Wordpress/UnverifiedNonce ; Wordpress)
   * Usage Of class_alias() (Classes/ClassAliasUsage ; Appinfo)
-  * Use $wpdb Api (Wordpress/UseWpdbApi ; Wordpress)
   * Use === null (Php/IsnullVsEqualNull ; Analyze, OneFile, RadwellCodes, Codacy, Simple)
   * Use Cli (Php/UseCli ; Appinfo)
   * Use Const And Functions (Namespaces/UseFunctionsConstants ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
@@ -1908,7 +1590,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Uses Default Values (Functions/UsesDefaultArguments ; Analyze, Codacy, Simple)
   * Uses Environnement (Php/UsesEnv ; Appinfo, Appcontent)
   * Using $this Outside A Class (Classes/UsingThisOutsideAClass ; Analyze, CompatibilityPHP71, Codacy, Simple, LintButWontExec)
-  * Using Short Tags (Structures/ShortTags ; Appinfo, Wordpress)
+  * Using Short Tags (Structures/ShortTags ; Appinfo)
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
   * Var Keyword (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Variable Constants (Constants/VariableConstant ; Appinfo, Stats)
@@ -1918,9 +1600,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Codacy, Simple, Suggestions, Level 2)
-  * Wpdb Best Usage (Wordpress/WpdbBestUsage ; Wordpress)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Codacy, Simple)
-  * Wrong Class Location (ZendF/NotInThatPath ; ZendFramework)
   * Wrong Number Of Arguments (Functions/WrongNumberOfArguments ; Analyze, OneFile, Codacy, Simple)
   * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; Analyze, OneFile, Simple)
   * Wrong Optional Parameter (Functions/WrongOptionalParameter ; Analyze, Codacy, Simple, Level 1)
@@ -1929,7 +1609,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Yield From Usage (Php/YieldFromUsage ; Appinfo, Appcontent)
   * Yield Usage (Php/YieldUsage ; Appinfo, Appcontent)
   * Yoda Comparison (Structures/YodaComparison ; Coding Conventions)
-  * Zend Classes (ZendF/ZendClasses ; Appinfo, ZendFramework)
   * __debugInfo() Usage (Php/debugInfoUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * __halt_compiler (Php/Haltcompiler ; Appinfo)
   * __toString() Throws Exception (Structures/toStringThrowsException ; Analyze, OneFile, Codacy, Simple)
@@ -2084,7 +1763,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-48 PHP error message detailled : 
+49 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2126,6 +1805,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Too few arguments to function foo(), 1 passed and exactly 2 expected <wrong-number-of-arguments>`
 * :ref:`Trait 'T' not found <undefined-trait>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
+* :ref:`Trait method f has not been applied, because there are collisions with other trait methods on x <useless-alias>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined class constant <avoid-self-in-interface>`
 * :ref:`Undefined function <undefined-functions>`
@@ -2234,7 +1914,6 @@ List of external links mentionned in this documentation.
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
-* `2.4 Translations <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Translations>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
@@ -2245,7 +1924,7 @@ List of external links mentionned in this documentation.
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
-* `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
@@ -2275,20 +1954,14 @@ List of external links mentionned in this documentation.
 * `browscap <http://browscap.org/>`_
 * `Bzip2 Functions <http://php.net/bzip2>`_
 * `Cairo Graphics Library <https://cairographics.org/>`_
-* `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
-* `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
-* `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
-* `CakePHP <https://www.cakephp.org/>`_
 * `Calendar Functions <http://www.php.net/manual/en/ref.calendar.php>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
-* `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/abstract>`_
 * `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
-* `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `class_alias <http://php.net/class_alias>`_
 * `Classes abstraction <http://php.net/abstract>`_
 * `Closure class <http://php.net/closure>`_
@@ -2309,7 +1982,6 @@ List of external links mentionned in this documentation.
 * `count <http://php.net/count>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
-* `Creating the required configuration and files <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Creatingtherequiredconfiguration>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
@@ -2331,12 +2003,12 @@ List of external links mentionned in this documentation.
 * `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
+* `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
 * `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
 * `Directly calling __clone is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_
 * `dirname <http://php.net/dirname>`_
-* `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `dist.exakat.io <http://dist.exakat.io/>`_
 * `dl <http://www.php.net/dl>`_
 * `Docker <http://www.docker.com/>`_
@@ -2400,8 +2072,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2424,7 +2096,6 @@ List of external links mentionned in this documentation.
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
-* `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 * `GMP <http://php.net/manual/en/book.gmp.php>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
 * `Goto <http://php.net/manual/en/control-structures.goto.php>`_
@@ -2444,7 +2115,6 @@ List of external links mentionned in this documentation.
 * `htmlentities <http://www.php.net/htmlentities>`_
 * `http://dist.exakat.io/ <http://dist.exakat.io/>`_
 * `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
-* `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
@@ -2467,6 +2137,7 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
+* `Isset <http://php.net/manual/en/function.isset.php>`_
 * `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
@@ -2478,6 +2149,7 @@ List of external links mentionned in this documentation.
 * `Kerberos V <http://php.net/manual/en/book.kadm5.php>`_
 * `Lapack <http://php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
+* `Late Static Bindings <http://php.net/manual/en/language.oop5.late-static-bindings.php>`_
 * `libeio <http://software.schmorp.de/pkg/libeio.html>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
@@ -2523,7 +2195,9 @@ List of external links mentionned in this documentation.
 * `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_
 * `Net SNMP <http://www.net-snmp.org/>`_
 * `net_get_interfaces <http://php.net/net_get_interfaces>`_
+* `New Classes and Interfaces <http://php.net/manual/en/migration70.classes.php>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
+* `New global constants in 7.2 <http://php.net/manual/en/migration72.constants.php>`_
 * `New object type <http://php.net/manual/en/migration72.new-features.php#migration72.new-features.iterable-pseudo-type>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
@@ -2536,7 +2210,6 @@ List of external links mentionned in this documentation.
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
-* `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
@@ -2586,10 +2259,11 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `phpsdl <https://github.com/Ponup/phpsdl>`_
 * `PHPUnit <http://www.phpunit.de/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
@@ -2608,9 +2282,7 @@ List of external links mentionned in this documentation.
 * `PSR-3 : Logger Interface <http://www.php-fig.org/psr/psr-3/>`_
 * `PSR-3 <https://www.php-fig.org/psr/psr-3>`_
 * `PSR-6 : Caching <http://www.php-fig.org/psr/psr-6/>`_
-* `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
-* `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
 * `Rar archiving <http://php.net/manual/en/book.rar.php>`_
 * `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
@@ -2623,7 +2295,6 @@ List of external links mentionned in this documentation.
 * `RFC 822 (MIME) <http://www.faqs.org/rfcs/rfc822.html>`_
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
 * `RFC: Return Type Declarations <https://wiki.php.net/rfc/return_types>`_
-* `Routing <https://www.slimframework.com/docs/objects/router.html>`_
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
@@ -2640,8 +2311,6 @@ List of external links mentionned in this documentation.
 * `shell_exec <http://www.php.net/shell_exec>`_
 * `SimpleXML <http://php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
-* `Slim <https://www.slimframework.com/>`_
-* `SlimPHP <https://www.slimframework.com/>`_
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
 * `Sockets <http://php.net/manual/en/book.sockets.php>`_
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
@@ -2650,8 +2319,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2681,8 +2350,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2717,8 +2386,6 @@ List of external links mentionned in this documentation.
 * `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_
-* `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
-* `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_
 * `xattr <http://php.net/manual/en/book.xattr.php>`_
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
@@ -2733,64 +2400,6 @@ List of external links mentionned in this documentation.
 * `YAML Ain't Markup Language <http://www.yaml.org/>`_
 * `Yii <http://www.yiiframework.com/>`_
 * `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_
-* `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_
-* `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_
-* `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>`_
-* `Zend Framework 1.8 <https://framework.zend.com/manual/1.8/en/index.html>`_
-* `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_
-* `Zend Framework 2.0 <https://framework.zend.com/manual/2.0/en/index.html>`_
-* `Zend Framework 2.1 <https://framework.zend.com/manual/2.1/en/index.html>`_
-* `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_
-* `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_
-* `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_
-* `Zend Framework Components <https://framework.zend.com/learn>`_
-* `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_
-* `Zend View <https://github.com/zendframework/zend-view>`_
-* `zend-authentication <https://github.com/zendframework/zend-authentication>`_
-* `zend-barcode <https://github.com/zendframework/zend-barcode>`_
-* `zend-captcha <https://github.com/zendframework/zend-captcha>`_
-* `zend-code <https://github.com/zendframework/zend-code>`_
-* `Zend-config <https://docs.zendframework.com/zend-config/>`_
-* `zend-console <https://github.com/zendframework/zend-console>`_
-* `zend-crypt <https://github.com/zendframework/zend-crypt>`_
-* `zend-db <https://github.com/zendframework/zend-db>`_
-* `zend-db documentation <https://github.com/zendframework/zend-db/blob/master/docs/book/index.md>`_
-* `zend-debug <https://github.com/zendframework/zend-debug>`_
-* `zend-di <https://github.com/zendframework/zend-di>`_
-* `zend-dom <https://github.com/zendframework/zend-dom>`_
-* `zend-escaper <https://github.com/zendframework/zend-escaper>`_
-* `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_
-* `zend-feed <https://github.com/zendframework/zend-feed>`_
-* `zend-file <https://github.com/zendframework/zend-file>`_
-* `zend-filter <https://github.com/zendframework/zend-filter>`_
-* `zend-form <https://github.com/zendframework/zend-form>`_
-* `zend-http <https://github.com/zendframework/zend-http>`_
-* `zend-i18n <https://github.com/zendframework/zend-i18n>`_
-* `zend-i18n-resources <https://github.com/zendframework/zend-i18n-resources>`_
-* `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_
-* `zend-json <https://github.com/zendframework/zend-json>`_
-* `zend-loader <https://github.com/zendframework/zend-loader>`_
-* `zend-log <https://github.com/zendframework/zend-log>`_
-* `zend-mail <https://github.com/zendframework/zend-mail>`_
-* `zend-math <https://github.com/zendframework/zend-math>`_
-* `zend-memory <https://github.com/zendframework/zend-memory>`_
-* `zend-mime <https://github.com/zendframework/zend-mime>`_
-* `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_
-* `zend-mvc <https://github.com/zendframework/zend-mvc>`_
-* `zend-navigation <https://github.com/zendframework/zend-navigation>`_
-* `zend-paginator <https://github.com/zendframework/zend-paginator>`_
-* `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_
-* `zend-serializer <https://github.com/zendframework/zend-serializer>`_
-* `zend-server <https://github.com/zendframework/zend-server>`_
-* `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_
-* `zend-session <https://github.com/zendframework/zend-session>`_
-* `zend-soap <https://github.com/zendframework/zend-soap>`_
-* `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_
-* `zend-tag <https://github.com/zendframework/zend-tag>`_
-* `zend-test <https://github.com/zendframework/zend-test>`_
-* `zend-text <https://github.com/zendframework/zend-text>`_
-* `zend-validator <https://github.com/zendframework/zend-validator>`_
-* `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
 * `ZeroMQ <http://zeromq.org/>`_
 * `Zip <http://php.net/manual/en/book.zip.php>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
@@ -2801,10 +2410,9 @@ Themes configuration
 
 INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
 
-21 themes detailled here : 
+17 themes detailled here : 
 
 * `Analyze <theme_ini_analyze>`_
-* `Cakephp <theme_ini_cakephp>`_
 * `ClassReview <theme_ini_classreview>`_
 * `Coding Conventions <theme_ini_coding conventions>`_
 * `CompatibilityPHP53 <theme_ini_compatibilityphp53>`_
@@ -2820,10 +2428,7 @@ INI configuration for built-in themes. Copy them in config/themes.ini, and make 
 * `LintButWontExec <theme_ini_lintbutwontexec>`_
 * `Performances <theme_ini_performances>`_
 * `Security <theme_ini_security>`_
-* `Slim <theme_ini_slim>`_
 * `Suggestions <theme_ini_suggestions>`_
-* `Wordpress <theme_ini_wordpress>`_
-* `ZendFramework <theme_ini_zendframework>`_
 
 
 
@@ -3167,6 +2772,7 @@ Analyze
 |   analyzer[] = "Traits/MethodCollisionTraits";
 |   analyzer[] = "Traits/UndefinedInsteadof";
 |   analyzer[] = "Traits/UndefinedTrait";
+|   analyzer[] = "Traits/UselessAlias";
 |   analyzer[] = "Type/NoRealComparison";
 |   analyzer[] = "Type/OneVariableStrings";
 |   analyzer[] = "Type/ShouldTypecast";
@@ -3184,35 +2790,6 @@ Analyze
 |   analyzer[] = "Variables/VariableUsedOnce";
 |   analyzer[] = "Variables/VariableUsedOnceByContext";
 |   analyzer[] = "Variables/WrittenOnlyVariable";| 
-
-
-
-
-
-
-.. _theme_ini_cakephp:
-
-Cakephp
--------
-
-| [Cakephp]
-|   analyzer[] = "Cakephp/Cake30DeprecatedClass";
-|   analyzer[] = "Cakephp/Cake32DeprecatedMethods";
-|   analyzer[] = "Cakephp/Cake33DeprecatedClass";
-|   analyzer[] = "Cakephp/Cake33DeprecatedMethods";
-|   analyzer[] = "Cakephp/Cake33DeprecatedStaticmethodcall";
-|   analyzer[] = "Cakephp/Cake33DeprecatedTraits";
-|   analyzer[] = "Cakephp/CakePHPUsed";
-|   analyzer[] = "Cakephp/Cakephp25";
-|   analyzer[] = "Cakephp/Cakephp26";
-|   analyzer[] = "Cakephp/Cakephp27";
-|   analyzer[] = "Cakephp/Cakephp28";
-|   analyzer[] = "Cakephp/Cakephp29";
-|   analyzer[] = "Cakephp/Cakephp30";
-|   analyzer[] = "Cakephp/Cakephp31";
-|   analyzer[] = "Cakephp/Cakephp32";
-|   analyzer[] = "Cakephp/Cakephp33";
-|   analyzer[] = "Cakephp/Cakephp34";| 
 
 
 
@@ -3804,7 +3381,8 @@ LintButWontExec
 |   analyzer[] = "Interfaces/ConcreteVisibility";
 |   analyzer[] = "Traits/MethodCollisionTraits";
 |   analyzer[] = "Traits/UndefinedInsteadof";
-|   analyzer[] = "Traits/UndefinedTrait";| 
+|   analyzer[] = "Traits/UndefinedTrait";
+|   analyzer[] = "Traits/UselessAlias";| 
 
 
 
@@ -3828,6 +3406,7 @@ Performances
 |   analyzer[] = "Performances/DoInBase";
 |   analyzer[] = "Performances/DoubleArrayFlip";
 |   analyzer[] = "Performances/FetchOneRowFormat";
+|   analyzer[] = "Performances/IssetWholeArray";
 |   analyzer[] = "Performances/JoinFile";
 |   analyzer[] = "Performances/MakeOneCall";
 |   analyzer[] = "Performances/NoConcatInLoop";
@@ -3911,43 +3490,6 @@ Security
 
 
 
-.. _theme_ini_slim:
-
-Slim
-----
-
-| [Slim]
-|   analyzer[] = "Slim/NoEchoInRouteCallable";
-|   analyzer[] = "Slim/Slimphp10";
-|   analyzer[] = "Slim/Slimphp11";
-|   analyzer[] = "Slim/Slimphp12";
-|   analyzer[] = "Slim/Slimphp13";
-|   analyzer[] = "Slim/Slimphp15";
-|   analyzer[] = "Slim/Slimphp16";
-|   analyzer[] = "Slim/Slimphp20";
-|   analyzer[] = "Slim/Slimphp21";
-|   analyzer[] = "Slim/Slimphp22";
-|   analyzer[] = "Slim/Slimphp23";
-|   analyzer[] = "Slim/Slimphp24";
-|   analyzer[] = "Slim/Slimphp25";
-|   analyzer[] = "Slim/Slimphp26";
-|   analyzer[] = "Slim/Slimphp30";
-|   analyzer[] = "Slim/Slimphp31";
-|   analyzer[] = "Slim/Slimphp32";
-|   analyzer[] = "Slim/Slimphp33";
-|   analyzer[] = "Slim/Slimphp34";
-|   analyzer[] = "Slim/Slimphp35";
-|   analyzer[] = "Slim/Slimphp36";
-|   analyzer[] = "Slim/Slimphp37";
-|   analyzer[] = "Slim/Slimphp38";
-|   analyzer[] = "Slim/UseSlim";
-|   analyzer[] = "Slim/UsedRoutes";| 
-
-
-
-
-
-
 .. _theme_ini_suggestions:
 
 Suggestions
@@ -3977,6 +3519,7 @@ Suggestions
 |   analyzer[] = "Functions/TooManyParameters";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
+|   analyzer[] = "Performances/IssetWholeArray";
 |   analyzer[] = "Performances/SubstrFirst";
 |   analyzer[] = "Php/AvoidReal";
 |   analyzer[] = "Php/CompactInexistant";
@@ -4022,298 +3565,6 @@ Suggestions
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Structures/WhileListEach";| 
-
-
-
-
-
-
-.. _theme_ini_wordpress:
-
-Wordpress
----------
-
-| [Wordpress]
-|   analyzer[] = "Classes/StrangeName";
-|   analyzer[] = "Structures/EvalUsage";
-|   analyzer[] = "Structures/ShortTags";
-|   analyzer[] = "Wordpress/AvoidOtherGlobals";
-|   analyzer[] = "Wordpress/DoublePrepare";
-|   analyzer[] = "Wordpress/NoDirectInputToWpdb";
-|   analyzer[] = "Wordpress/NoGlobalModification";
-|   analyzer[] = "Wordpress/NonceCreation";
-|   analyzer[] = "Wordpress/PreparePlaceholder";
-|   analyzer[] = "Wordpress/PrivateFunctionUsage";
-|   analyzer[] = "Wordpress/UnescapedVariables";
-|   analyzer[] = "Wordpress/UnverifiedNonce";
-|   analyzer[] = "Wordpress/UseWpFunctions";
-|   analyzer[] = "Wordpress/UseWpdbApi";
-|   analyzer[] = "Wordpress/Wordpress40Undefined";
-|   analyzer[] = "Wordpress/Wordpress41Undefined";
-|   analyzer[] = "Wordpress/Wordpress42Undefined";
-|   analyzer[] = "Wordpress/Wordpress43Undefined";
-|   analyzer[] = "Wordpress/Wordpress44Undefined";
-|   analyzer[] = "Wordpress/Wordpress45Undefined";
-|   analyzer[] = "Wordpress/Wordpress46Undefined";
-|   analyzer[] = "Wordpress/Wordpress47Undefined";
-|   analyzer[] = "Wordpress/Wordpress48Undefined";
-|   analyzer[] = "Wordpress/Wordpress49Undefined";
-|   analyzer[] = "Wordpress/WordpressUsage";
-|   analyzer[] = "Wordpress/WpdbBestUsage";
-|   analyzer[] = "Wordpress/WpdbPrepareOrNot";| 
-
-
-
-
-
-
-.. _theme_ini_zendframework:
-
-ZendFramework
--------------
-
-| [ZendFramework]
-|   analyzer[] = "Namespaces/ShouldMakeAlias";
-|   analyzer[] = "Structures/ErrorMessages";
-|   analyzer[] = "Structures/ExitUsage";
-|   analyzer[] = "ZendF/ActionInController";
-|   analyzer[] = "ZendF/DefinedViewProperty";
-|   analyzer[] = "ZendF/DontUseGPC";
-|   analyzer[] = "ZendF/IsController";
-|   analyzer[] = "ZendF/IsHelper";
-|   analyzer[] = "ZendF/IsView";
-|   analyzer[] = "ZendF/NoEchoOutsideView";
-|   analyzer[] = "ZendF/NotInThatPath";
-|   analyzer[] = "ZendF/ShouldRegenerateSessionId";
-|   analyzer[] = "ZendF/ThrownExceptions";
-|   analyzer[] = "ZendF/UndefinedClass110";
-|   analyzer[] = "ZendF/UndefinedClass111";
-|   analyzer[] = "ZendF/UndefinedClass112";
-|   analyzer[] = "ZendF/UndefinedClass18";
-|   analyzer[] = "ZendF/UndefinedClass19";
-|   analyzer[] = "ZendF/UndefinedClass20";
-|   analyzer[] = "ZendF/UndefinedClass21";
-|   analyzer[] = "ZendF/UndefinedClass22";
-|   analyzer[] = "ZendF/UndefinedClass23";
-|   analyzer[] = "ZendF/UndefinedClass24";
-|   analyzer[] = "ZendF/UndefinedClass25";
-|   analyzer[] = "ZendF/UndefinedClass30";
-|   analyzer[] = "ZendF/ZendClasses";
-|   analyzer[] = "ZendF/ZendInterfaces";
-|   analyzer[] = "ZendF/ZendTrait";
-|   analyzer[] = "ZendF/ZendTypehinting";
-|   analyzer[] = "ZendF/Zf3Authentication";
-|   analyzer[] = "ZendF/Zf3Authentication25";
-|   analyzer[] = "ZendF/Zf3Barcode";
-|   analyzer[] = "ZendF/Zf3Barcode25";
-|   analyzer[] = "ZendF/Zf3Barcode26";
-|   analyzer[] = "ZendF/Zf3Cache";
-|   analyzer[] = "ZendF/Zf3Cache";
-|   analyzer[] = "ZendF/Zf3Cache25";
-|   analyzer[] = "ZendF/Zf3Cache26";
-|   analyzer[] = "ZendF/Zf3Cache27";
-|   analyzer[] = "ZendF/Zf3Captcha";
-|   analyzer[] = "ZendF/Zf3Captcha25";
-|   analyzer[] = "ZendF/Zf3Captcha26";
-|   analyzer[] = "ZendF/Zf3Captcha27";
-|   analyzer[] = "ZendF/Zf3Code";
-|   analyzer[] = "ZendF/Zf3Code25";
-|   analyzer[] = "ZendF/Zf3Code25";
-|   analyzer[] = "ZendF/Zf3Code26";
-|   analyzer[] = "ZendF/Zf3Code26";
-|   analyzer[] = "ZendF/Zf3Code30";
-|   analyzer[] = "ZendF/Zf3Code30";
-|   analyzer[] = "ZendF/Zf3Code31";
-|   analyzer[] = "ZendF/Zf3Code31";
-|   analyzer[] = "ZendF/Zf3Code32";
-|   analyzer[] = "ZendF/Zf3Code32";
-|   analyzer[] = "ZendF/Zf3Config";
-|   analyzer[] = "ZendF/Zf3Config25";
-|   analyzer[] = "ZendF/Zf3Config26";
-|   analyzer[] = "ZendF/Zf3Config30";
-|   analyzer[] = "ZendF/Zf3Config31";
-|   analyzer[] = "ZendF/Zf3Console";
-|   analyzer[] = "ZendF/Zf3Console25";
-|   analyzer[] = "ZendF/Zf3Console26";
-|   analyzer[] = "ZendF/Zf3Crypt";
-|   analyzer[] = "ZendF/Zf3Crypt25";
-|   analyzer[] = "ZendF/Zf3Crypt26";
-|   analyzer[] = "ZendF/Zf3Crypt30";
-|   analyzer[] = "ZendF/Zf3Crypt31";
-|   analyzer[] = "ZendF/Zf3Crypt32";
-|   analyzer[] = "ZendF/Zf3Db";
-|   analyzer[] = "ZendF/Zf3Db25";
-|   analyzer[] = "ZendF/Zf3Db26";
-|   analyzer[] = "ZendF/Zf3Db27";
-|   analyzer[] = "ZendF/Zf3Db28";
-|   analyzer[] = "ZendF/Zf3DbAlwaysPrepare";
-|   analyzer[] = "ZendF/Zf3Debug";
-|   analyzer[] = "ZendF/Zf3Debug25";
-|   analyzer[] = "ZendF/Zf3DeprecatedUsage";
-|   analyzer[] = "ZendF/Zf3Di";
-|   analyzer[] = "ZendF/Zf3Di25";
-|   analyzer[] = "ZendF/Zf3Di26";
-|   analyzer[] = "ZendF/Zf3Dom";
-|   analyzer[] = "ZendF/Zf3Dom25";
-|   analyzer[] = "ZendF/Zf3Dom26";
-|   analyzer[] = "ZendF/Zf3Escaper";
-|   analyzer[] = "ZendF/Zf3Escaper25";
-|   analyzer[] = "ZendF/Zf3Eventmanager";
-|   analyzer[] = "ZendF/Zf3Eventmanager";
-|   analyzer[] = "ZendF/Zf3Eventmanager25";
-|   analyzer[] = "ZendF/Zf3Eventmanager25";
-|   analyzer[] = "ZendF/Zf3Eventmanager26";
-|   analyzer[] = "ZendF/Zf3Eventmanager26";
-|   analyzer[] = "ZendF/Zf3Eventmanager30";
-|   analyzer[] = "ZendF/Zf3Eventmanager30";
-|   analyzer[] = "ZendF/Zf3Eventmanager31";
-|   analyzer[] = "ZendF/Zf3Eventmanager31";
-|   analyzer[] = "ZendF/Zf3Eventmanager32";
-|   analyzer[] = "ZendF/Zf3Feed";
-|   analyzer[] = "ZendF/Zf3Feed25";
-|   analyzer[] = "ZendF/Zf3Feed26";
-|   analyzer[] = "ZendF/Zf3Feed27";
-|   analyzer[] = "ZendF/Zf3Feed28";
-|   analyzer[] = "ZendF/Zf3File";
-|   analyzer[] = "ZendF/Zf3File25";
-|   analyzer[] = "ZendF/Zf3File26";
-|   analyzer[] = "ZendF/Zf3File27";
-|   analyzer[] = "ZendF/Zf3Filter";
-|   analyzer[] = "ZendF/Zf3Filter25";
-|   analyzer[] = "ZendF/Zf3Filter26";
-|   analyzer[] = "ZendF/Zf3Filter27";
-|   analyzer[] = "ZendF/Zf3Form";
-|   analyzer[] = "ZendF/Zf3Form25";
-|   analyzer[] = "ZendF/Zf3Form26";
-|   analyzer[] = "ZendF/Zf3Form27";
-|   analyzer[] = "ZendF/Zf3Form28";
-|   analyzer[] = "ZendF/Zf3Form29";
-|   analyzer[] = "ZendF/Zf3Http";
-|   analyzer[] = "ZendF/Zf3Http25";
-|   analyzer[] = "ZendF/Zf3Http26";
-|   analyzer[] = "ZendF/Zf3Http27";
-|   analyzer[] = "ZendF/Zf3I18n";
-|   analyzer[] = "ZendF/Zf3I18n25";
-|   analyzer[] = "ZendF/Zf3I18n26";
-|   analyzer[] = "ZendF/Zf3I18n27";
-|   analyzer[] = "ZendF/Zf3I18n_resources";
-|   analyzer[] = "ZendF/Zf3I18n_resources25";
-|   analyzer[] = "ZendF/Zf3Inputfilter";
-|   analyzer[] = "ZendF/Zf3Inputfilter25";
-|   analyzer[] = "ZendF/Zf3Inputfilter26";
-|   analyzer[] = "ZendF/Zf3Inputfilter27";
-|   analyzer[] = "ZendF/Zf3Json";
-|   analyzer[] = "ZendF/Zf3Json25";
-|   analyzer[] = "ZendF/Zf3Json26";
-|   analyzer[] = "ZendF/Zf3Json30";
-|   analyzer[] = "ZendF/Zf3Loader";
-|   analyzer[] = "ZendF/Zf3Loader25";
-|   analyzer[] = "ZendF/Zf3Log";
-|   analyzer[] = "ZendF/Zf3Log25";
-|   analyzer[] = "ZendF/Zf3Log26";
-|   analyzer[] = "ZendF/Zf3Log27";
-|   analyzer[] = "ZendF/Zf3Log28";
-|   analyzer[] = "ZendF/Zf3Log29";
-|   analyzer[] = "ZendF/Zf3Mail";
-|   analyzer[] = "ZendF/Zf3Mail25";
-|   analyzer[] = "ZendF/Zf3Mail26";
-|   analyzer[] = "ZendF/Zf3Mail27";
-|   analyzer[] = "ZendF/Zf3Mail28";
-|   analyzer[] = "ZendF/Zf3Math";
-|   analyzer[] = "ZendF/Zf3Math25";
-|   analyzer[] = "ZendF/Zf3Math26";
-|   analyzer[] = "ZendF/Zf3Math27";
-|   analyzer[] = "ZendF/Zf3Math30";
-|   analyzer[] = "ZendF/Zf3Memory";
-|   analyzer[] = "ZendF/Zf3Memory25";
-|   analyzer[] = "ZendF/Zf3Mime";
-|   analyzer[] = "ZendF/Zf3Mime25";
-|   analyzer[] = "ZendF/Zf3Mime26";
-|   analyzer[] = "ZendF/Zf3Modulemanager";
-|   analyzer[] = "ZendF/Zf3Modulemanager25";
-|   analyzer[] = "ZendF/Zf3Modulemanager26";
-|   analyzer[] = "ZendF/Zf3Modulemanager27";
-|   analyzer[] = "ZendF/Zf3Modulemanager28";
-|   analyzer[] = "ZendF/Zf3Mvc";
-|   analyzer[] = "ZendF/Zf3Mvc25";
-|   analyzer[] = "ZendF/Zf3Mvc26";
-|   analyzer[] = "ZendF/Zf3Mvc27";
-|   analyzer[] = "ZendF/Zf3Mvc30";
-|   analyzer[] = "ZendF/Zf3Mvc31";
-|   analyzer[] = "ZendF/Zf3Navigation";
-|   analyzer[] = "ZendF/Zf3Navigation25";
-|   analyzer[] = "ZendF/Zf3Navigation26";
-|   analyzer[] = "ZendF/Zf3Navigation27";
-|   analyzer[] = "ZendF/Zf3Navigation28";
-|   analyzer[] = "ZendF/Zf3Paginator";
-|   analyzer[] = "ZendF/Zf3Paginator25";
-|   analyzer[] = "ZendF/Zf3Paginator26";
-|   analyzer[] = "ZendF/Zf3Paginator27";
-|   analyzer[] = "ZendF/Zf3Progressbar";
-|   analyzer[] = "ZendF/Zf3Progressbar25";
-|   analyzer[] = "ZendF/Zf3Serializer";
-|   analyzer[] = "ZendF/Zf3Serializer25";
-|   analyzer[] = "ZendF/Zf3Serializer26";
-|   analyzer[] = "ZendF/Zf3Serializer27";
-|   analyzer[] = "ZendF/Zf3Serializer28";
-|   analyzer[] = "ZendF/Zf3Server";
-|   analyzer[] = "ZendF/Zf3Server25";
-|   analyzer[] = "ZendF/Zf3Server26";
-|   analyzer[] = "ZendF/Zf3Server27";
-|   analyzer[] = "ZendF/Zf3Servicemanager";
-|   analyzer[] = "ZendF/Zf3Servicemanager25";
-|   analyzer[] = "ZendF/Zf3Servicemanager26";
-|   analyzer[] = "ZendF/Zf3Servicemanager27";
-|   analyzer[] = "ZendF/Zf3Servicemanager30";
-|   analyzer[] = "ZendF/Zf3Servicemanager31";
-|   analyzer[] = "ZendF/Zf3Servicemanager32";
-|   analyzer[] = "ZendF/Zf3Servicemanager33";
-|   analyzer[] = "ZendF/Zf3Session";
-|   analyzer[] = "ZendF/Zf3Session25";
-|   analyzer[] = "ZendF/Zf3Session26";
-|   analyzer[] = "ZendF/Zf3Session27";
-|   analyzer[] = "ZendF/Zf3Session28";
-|   analyzer[] = "ZendF/Zf3Soap";
-|   analyzer[] = "ZendF/Zf3Soap25";
-|   analyzer[] = "ZendF/Zf3Soap26";
-|   analyzer[] = "ZendF/Zf3Stdlib";
-|   analyzer[] = "ZendF/Zf3Stdlib25";
-|   analyzer[] = "ZendF/Zf3Stdlib26";
-|   analyzer[] = "ZendF/Zf3Stdlib27";
-|   analyzer[] = "ZendF/Zf3Stdlib30";
-|   analyzer[] = "ZendF/Zf3Stdlib31";
-|   analyzer[] = "ZendF/Zf3Tag";
-|   analyzer[] = "ZendF/Zf3Tag25";
-|   analyzer[] = "ZendF/Zf3Tag26";
-|   analyzer[] = "ZendF/Zf3Test";
-|   analyzer[] = "ZendF/Zf3Test";
-|   analyzer[] = "ZendF/Zf3Test25";
-|   analyzer[] = "ZendF/Zf3Test25";
-|   analyzer[] = "ZendF/Zf3Test26";
-|   analyzer[] = "ZendF/Zf3Test26";
-|   analyzer[] = "ZendF/Zf3Test30";
-|   analyzer[] = "ZendF/Zf3Test30";
-|   analyzer[] = "ZendF/Zf3Test31";
-|   analyzer[] = "ZendF/Zf3Text";
-|   analyzer[] = "ZendF/Zf3Text25";
-|   analyzer[] = "ZendF/Zf3Text26";
-|   analyzer[] = "ZendF/Zf3Uri";
-|   analyzer[] = "ZendF/Zf3Uri25";
-|   analyzer[] = "ZendF/Zf3Validator";
-|   analyzer[] = "ZendF/Zf3Validator25";
-|   analyzer[] = "ZendF/Zf3Validator26";
-|   analyzer[] = "ZendF/Zf3Validator27";
-|   analyzer[] = "ZendF/Zf3Validator28";
-|   analyzer[] = "ZendF/Zf3Validator29";
-|   analyzer[] = "ZendF/Zf3View";
-|   analyzer[] = "ZendF/Zf3View25";
-|   analyzer[] = "ZendF/Zf3View26";
-|   analyzer[] = "ZendF/Zf3View27";
-|   analyzer[] = "ZendF/Zf3View28";
-|   analyzer[] = "ZendF/Zf3View29";
-|   analyzer[] = "ZendF/Zf3Xmlrpc";
-|   analyzer[] = "ZendF/Zf3Xmlrpc25";
-|   analyzer[] = "ZendF/Zf3Xmlrpc26";| 
 
 
 
