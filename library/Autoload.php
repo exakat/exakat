@@ -139,6 +139,7 @@ class AutoloadExt {
             $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
             
             if (!file_exists($fullPath)) {
+                display("Missing analyzers.ini in $name\n");
                 $return[] = array();
                 continue; 
             }
