@@ -98,10 +98,6 @@ class Docs {
                              'ClassReview',
                              'LintButWontExec',
 
-                             'Wordpress',
-                             'Slim',
-                             'ZendFramework',
-                             'Cakephp',
                              );
 
     private $extras = array( 
