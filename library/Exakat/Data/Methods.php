@@ -45,7 +45,7 @@ class Methods {
     }
 
     public function getMethodsArgsInterval() {
-        $query = 'SELECT class, name, args_min, args_max FROM methods';
+        $query = 'SELECT class, name, args_min, args_max FROM methods WHERE class != "PHP"';
         $res = $this->sqlite->query($query);
         $return = array();
 
