@@ -37,11 +37,11 @@ class IsZero extends Analyzer {
         }
         
         $MAX_LOOPING = self::MAX_LOOPING;
-        $labels = array('Variable', 
-                        'Integer', 
-                        'Member', 
-                        'Real', 
-                        'Staticproperty', 
+        $labels = array('Variable',
+                        'Integer',
+                        'Member',
+                        'Real',
+                        'Staticproperty',
                         'Array',
                         'Functioncall',
                         'Staticmethodcall',

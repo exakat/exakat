@@ -133,7 +133,7 @@ class Analyze extends Tasks {
     }
     
     private function fetchAnalyzers($analyzer_class, array &$analyzers, array &$dependencies) {
-        if (isset($analyzers[$analyzer_class])) { 
+        if (isset($analyzers[$analyzer_class])) {
             return;
         }
 
