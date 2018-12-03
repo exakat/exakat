@@ -35,7 +35,7 @@ class NoSubstrMinusOne extends Analyzer {
              ->hasNoIn(array('OBJECT', 'CLASS', 'VARIABLE'))
              ->outIs('INDEX')
              ->atomIs('Integer')
-             ->isLess('intval', '0')
+             ->isLess('intval', 0)
              ->back('first');
         $this->prepareQuery();
     }
