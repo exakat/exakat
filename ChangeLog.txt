@@ -1,4 +1,4 @@
-Version 1.5.6 (Jingang, coming up)
+Version 1.5.7 (Vaisravaṇa, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 1.5.6 (Jingang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.6 (Jingang, 2018-12-03)
++ Architecture
+    + Moved all framework to extensions. WIP.
+    + Code cleaning
+    + Refactored the analysis dependency sorting
+    + Now display progress bar for files
+    + Fixed configuration for directories and files
++ Report
+    + Fixed FileDependecy and DependencyWheel, to actually count messages
++ Analyzer
+    + Added a lot more new method descriptions for PHP native classes
+    + New analyzer : suggestion simplification for !isset($a) || !isset($a[1])
+    + New analyzer : Useless Trait alias
+    + New analyzer : report usage of ext/sdl
+    + Upgraded analyzer : Refactored IsZero, to handle assignations and parenthesis
+    + Upgraded analyzer : pack format is better checked
+    + Checked unit tests : 2759 / 2771 test pass (99% pass)
++ Tokenizer
+    + Fixed a missing fullnspath for origin in Use for Traits
+    + Handles simple aliases for traits methods
+    + Fixed mishandling of variables inside strings
+    + Fixed support of negative numbers inside strings
+    + Fixed bug with yield inside an array
+    + Fixed strange case with define and integers as constant names
 
 Version 1.5.5 (Ratnadhvaja, 2018-11-25)
 + Architecture
