@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 class FileDependencies extends Reports {
     const FILE_EXTENSION = 'dot';
-    const FILE_FILENAME  = 'dependencies';
+    const FILE_FILENAME  = 'filedependencies';
 
     public function generate($folder, $name= 'dependencies') {
         $res = $this->sqlite->query('SELECT * FROM filesDependencies');
@@ -70,6 +70,8 @@ class FileDependencies extends Reports {
                 $row['color'] = $colors[$row['type']];
                 $list[$key] = $row;
             }
+            
+            $this->count();
         }
         
         $list = array_map(function($row) {
@@ -97,7 +99,7 @@ class FileDependencies extends Reports {
     $dot
      }";
 
-        file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+        file_put_contents("{$folder}/{$name}.".self::FILE_EXTENSION, $dot);
     }
 }
 

@@ -39,8 +39,8 @@ class Dependencywheel extends Reports {
             return false;
         }
 
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "$folder/.$name";
 
         $this->initFolder();
         
@@ -73,6 +73,8 @@ class Dependencywheel extends Reports {
             } else {
                 $extends[$row['name'] ] = array($row['extends']);
             }
+            
+            $this->count();
         }
 
         $res = $this->sqlite->query('SELECT * FROM cit_implements');
