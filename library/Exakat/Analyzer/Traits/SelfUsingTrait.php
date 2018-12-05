@@ -20,20 +20,19 @@
  *
 */
 
-
-namespace Exakat\Query\DSL;
+namespace Exakat\Analyzer\Traits;
 
 use Exakat\Analyzer\Analyzer;
 
-class GoToAllTraits extends DSL {
-    public function run() : Command {
-        list($self) = func_get_args();
-
-        if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('emit( ).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.')');
-        } else {
-            return new Command('repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.')');
-        }
+class SelfUsingTrait extends Analyzer {
+    // trait t { use t; }
+    public function analyze() {
+        $this->atomIs('Trait')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToAllTraits(self::EXCLUDE_SELF)
+             ->samePropertyAs('fullnspath', 'fnp');
+        $this->prepareQuery();
     }
 }
+
 ?>
