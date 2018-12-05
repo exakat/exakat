@@ -2950,7 +2950,6 @@ SQL
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the traits : a trait is extended when it uses another trait. Traits without any extension are not represented. The same trait may be mentionned several times, as trait may use an arbitrary number of traits.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage('inventories_traittree', $html);
-       
     }
 
     private function generateClassTree() {
@@ -3006,12 +3005,16 @@ SQL
         $this->putBasedPage('inventories_classtree', $html);
     }
     
-    private function extends2ul ($root, $paths) {
+    private function extends2ul ($root, $paths, $level = 0) {
         $return = "<li>$root<ul>";
         foreach($paths[$root] as $sub) {
             if (isset($paths[$sub])){
-                $secondary = $this->extends2ul($sub, $paths);
-                $return .= $secondary;
+                if ($level < 10) {
+                    $secondary = $this->extends2ul($sub, $paths, $level + 1);
+                    $return .= $secondary;
+                } else {
+                    $return .= '<li>Too Deep</li>';
+                }
             } else {
                 $return .= "<li class=\"treeLeaf\">$sub</li>";
             }
