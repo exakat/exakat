@@ -2899,33 +2899,33 @@ SQL
         $list = array();
 
  $res = $this->sqlite->query(<<<SQL
-        SELECT namespaces.namespace || '\' || cit.name AS name, namespaces2.namespace || '\' || cit2.name AS extends 
-        FROM cit
-        JOIN namespaces 
-            ON cit.namespaceId = namespaces.id
-        JOIN cit_implements 
-            ON cit_implements.implementing = cit.id AND
-               cit_implements.type = 'use'
-        JOIN cit cit2 
-            ON cit_implements.implements = cit2.id
-        JOIN namespaces namespaces2
-            ON cit2.namespaceId = namespaces2.id
+SELECT namespaces.namespace || '\' || cit.name AS user, namespaces2.namespace || '\' || cit2.name AS parent
+FROM cit
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+JOIN cit_implements 
+    ON cit_implements.implementing = cit.id AND
+       cit_implements.type = 'use'
+JOIN cit cit2 
+    ON cit_implements.implements = cit2.id
+JOIN namespaces namespaces2
+    ON cit2.namespaceId = namespaces2.id
 
-         WHERE cit.type="trait"
+WHERE cit.type="trait"
 SQL
 );
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['extends'])) {
+            if (empty($row['user'])) {
                 continue;
             }
             
-            $parent = $row['extends'];
+            $parent = $row['user'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
             
-            $list[$parent][] = $row['name'];
+            $list[$parent][] = $row['parent'];
         }
 
         if (empty($list)) {
