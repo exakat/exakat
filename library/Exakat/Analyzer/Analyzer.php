@@ -1790,7 +1790,7 @@ GREMLIN;
 
         if (file_exists($fullpath)) {
             $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);
-        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("$file.ini")) !== null) {
+        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("data/$file")) !== null) {
             $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
         } else {
             assert(false, "No INI for '$file'.");
@@ -1799,7 +1799,6 @@ GREMLIN;
         static $cache;
 
         if (!isset($cache[$fullpath])) {
-            $ini = parse_ini_file($fullpath);
             foreach($ini as &$values) {
                 if (isset($values[0]) && empty($values[0])) {
                     $values = '';
@@ -1820,7 +1819,7 @@ GREMLIN;
 
         if (file_exists($fullpath)) {
             $json = json_decode(file_get_contents($fullpath));
-        } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData($file)) !== null) {
+        } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData("data/$file")) !== null) {
             $json = json_decode($jsonString);
         } else {
             assert(false, "No JSON for '$file'.");

@@ -43,7 +43,7 @@ class Docs {
         
         if (file_exists("{$this->pathToIni}/human/en/$analyzer.ini")) {
             $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", INI_PROCESS_SECTIONS);
-        } elseif ((!is_null($this->ext)) && ($iniString = $this->ext->loadData("$analyzer.ini")) !== null) {
+        } elseif ((!is_null($this->ext)) && ($iniString = $this->ext->loadData("human/en/$analyzer.ini")) !== null) {
             $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
         } else {
             assert(file_exists("{$this->pathToIni}/human/en/$analyzer.ini"), "No documentation for '$analyzer'.");

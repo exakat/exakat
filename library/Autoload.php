@@ -153,7 +153,7 @@ class AutoloadExt {
     
     public function loadData($path) {
         foreach($this->pharList as $phar) {
-            $fullPath = "phar://$phar/human/en/$path";
+            $fullPath = "phar://$phar/$path";
 
             if (file_exists($fullPath)) {
                 return file_get_contents($fullPath);
