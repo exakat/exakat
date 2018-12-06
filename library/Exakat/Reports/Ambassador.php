@@ -2934,12 +2934,18 @@ SQL
             foreach($list as &$l) {
                 sort($l);
             }
+            unset($l);
             
-            $secondaries = array_merge(...array_values($list));
-            $top = array_diff(array_keys($list), $secondaries);
-            
+            $closure = function (&$run, $flipped) {
+                foreach($run as $k => &$v) {
+                    if ($v === '') { continue; }
+                
+                    $v = $flipped[$v];
+                }
+            };
+
             $theTable = array();
-            foreach($top as $t) {
+            foreach(array_keys($list) as $t) {
                 $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
             }
             $theTable = implode(PHP_EOL, $theTable);
@@ -3006,20 +3012,30 @@ SQL
     }
     
     private function extends2ul ($root, $paths, $level = 0) {
-        $return = "<li>$root<ul>";
+        static $done = array();
+        
+        if ($level === 0) {
+            $done = array();
+        }
+        
+        $return = array();
         foreach($paths[$root] as $sub) {
             if (isset($paths[$sub])){
-                if ($level < 10) {
+                print_r($done);
+                print $sub.PHP_EOL;
+                if (!isset($done[$sub]) && $level < 10) {
+                    $done[$sub] = 1;
                     $secondary = $this->extends2ul($sub, $paths, $level + 1);
-                    $return .= $secondary;
+                    $return[] = $secondary;
                 } else {
-                    $return .= '<li>Too Deep</li>';
+                    $return[] = '<li>...</li>';
                 }
             } else {
-                $return .= "<li class=\"treeLeaf\">$sub</li>";
+                $return[] = "<li class=\"treeLeaf\">$sub</li>";
+                $done[$sub] = 1;
             }
         }
-        $return .= "</ul></li>\n";
+        $return = "<li>$root<ul>".implode('', $return)."</ul></li>\n";
         return $return;
     }
     
