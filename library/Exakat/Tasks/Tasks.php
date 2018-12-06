@@ -30,6 +30,7 @@ use Exakat\Graph\Graph;
 use Exakat\Exceptions\AnotherProcessIsRunning;
 use Exakat\Exceptions\ProjectTooLarge;
 use Exakat\Log;
+use Exakat\Data\Data;
 
 abstract class Tasks {
     protected $log        = null;
@@ -113,6 +114,8 @@ abstract class Tasks {
         $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
                                    $this->config->ext,
                                    $this->config->themas);
+                                   
+        Data::$config = $config;
     }
 
     public function __destruct() {
