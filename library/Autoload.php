@@ -162,6 +162,30 @@ class AutoloadExt {
         
         return null;
     }
+
+    public function fileExists($path) {
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/$path";
+
+            if (file_exists($fullPath)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public function copyFile($path, $to) {
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/$path";
+
+            if (file_exists($fullPath)) {
+                copy($fullPath, $to);
+            }
+        }
+        
+        return null;
+    }
 }
 
 spl_autoload_register('Autoload::autoload_library');
