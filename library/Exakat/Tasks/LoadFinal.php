@@ -664,6 +664,7 @@ GREMLIN;
               ->savePropertyAs('lccode', 'name')
               ->back('first')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->raw(<<<GREMLIN
 where(
     __.sideEffect{aliases = [:]; insteadofs = [:]; }
@@ -690,7 +691,7 @@ where(
 .sideEffect{ if (aliases[name] != null) { name = aliases[name]; } }
 GREMLIN
 , array(), array())
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllTraits(Analyzer::INCLUDE_SELF)
               ->raw(<<<GREMLIN
 filter{ insteadofs[name] == null || !(it.get().value('fullnspath') in insteadofs[name]); }
 GREMLIN
