@@ -155,6 +155,27 @@ class Doctor extends Tasks {
             mkdir("{$this->config->projects_root}/config", 0755);
         }
 
+        if (!file_exists("{$this->config->projects_root}/ext")) {
+            mkdir("{$this->config->projects_root}/ext", 0755);
+            file_put_contents("{$this->config->projects_root}/ext/README.txt", <<<TEXT
+This is the extension folder for exakat. Use the 'extension' command to add or remove extensions in this folder.
+
+# list local extensions (default)
+php exakat.phar extension local
+
+# list available extensions from exakat.io
+php exakat.phar extension remote
+
+# install an extension from exakat.io
+php exakat.phar extension install
+
+# uninstall an extension from exakat.io
+php exakat.phar extension uninstall
+
+TEXT
+);
+        }
+
         if (file_exists("{$this->config->projects_root}/config/exakat.ini")) {
             $graphdb = $this->config->graphdb;
         } else {
