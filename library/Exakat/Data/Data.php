@@ -26,20 +26,39 @@ namespace Exakat\Data;
 use Exakat\Config;
 
 abstract class Data {
+    static public $config = null;
+    
     protected $name = '';
 
     private $sqlite = null;
     private $phar_tmp = null;
 
-    public function __construct($name, $path, $is_phar) {
+    public function __construct($name) {
+        assert(self::$config !== null, "No config for data\n");
+
         $this->name = $name;
         
-        if ($is_phar) {
+        $fullpath = self::$config->dir_root."/data/$name.sqlite";
+        if (self::$config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), $name).'.sqlite';
-            copy($path.'/'.$name.'.sqlite', $this->phar_tmp);
+            if (file_exists($fullpath)) {
+                copy($fullpath, $this->phar_tmp);
+            } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+                self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
+            } else {
+                assert(false, "No database for '$file'.");
+            }
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $path.'/'.$name.'.sqlite';
+            if (file_exists($fullpath)) {
+                $docPath = $fullpath;
+            } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+                $this->phar_tmp = tempnam(sys_get_temp_dir(), $name).'.sqlite';
+                self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
+                $docPath = $this->phar_tmp;
+            } else {
+                assert(false, "No database for '$file'.");
+            }
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
