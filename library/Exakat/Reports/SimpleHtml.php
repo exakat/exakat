@@ -34,7 +34,7 @@ class SimpleHtml extends Reports {
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
-            print "Can't produce Ambassador format to stdout\n";
+            print "Can't produce SimpleHtml format to stdout\n";
             return false;
         }
 
@@ -96,7 +96,7 @@ class SimpleHtml extends Reports {
 
         $text = '';
         $titleCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($titleCache[$row['analyzer']])) {
                 $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
             }
@@ -109,6 +109,7 @@ class SimpleHtml extends Reports {
 </tr>
 
 HTML;
+            $this->count();
         }
         
         return $text;

@@ -37,6 +37,7 @@ class PhpConfiguration extends Reports {
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
+            $this->count();
         }
 
         $shouldDisableFunctions = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/shouldDisableFunction.json"));
