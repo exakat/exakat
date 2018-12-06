@@ -3021,8 +3021,6 @@ SQL
         $return = array();
         foreach($paths[$root] as $sub) {
             if (isset($paths[$sub])){
-                print_r($done);
-                print $sub.PHP_EOL;
                 if (!isset($done[$sub]) && $level < 10) {
                     $done[$sub] = 1;
                     $secondary = $this->extends2ul($sub, $paths, $level + 1);
