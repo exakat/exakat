@@ -126,6 +126,19 @@ class AccessPrivate extends Analyzer {
 
              ->back('first');
         $this->prepareQuery();
+
+        // $this->method()
+        $this->atomIs('Methodcall')
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->is('visibility', 'private')
+             ->inIs('METHOD')
+             ->notSamePropertyAs('fullnspath', 'fnp')
+             ->back('first');
+        $this->prepareQuery();
+
     }
 }
 
