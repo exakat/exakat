@@ -4848,6 +4848,7 @@ class Load extends Tasks {
                 $static = $this->addAtom('Staticmethod');
                 $this->addLink($static, $right, 'METHOD');
                 $fullcode = "{$left->fullcode}::{$right->fullcode}";
+                $static->fullnspath = "{$left->fullnspath}::".mb_strtolower($right->fullcode);
 
                 // No need for runplugin
             } else {

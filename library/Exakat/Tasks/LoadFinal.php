@@ -664,7 +664,37 @@ GREMLIN;
               ->savePropertyAs('lccode', 'name')
               ->back('first')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->raw(<<<GREMLIN
+where(
+    __.sideEffect{aliases = [:]; insteadofs = [:]; }
+      .out('USE').out('BLOCK').out('EXPRESSION')
+      .sideEffect{
+        if (it.get().label() == 'Insteadof') {
+            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property('lccode').value();
+            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property('fullnspath').value();
+            if (insteadofs[method] == null) {
+                insteadofs[method] = [theTrait];
+            } else {
+                insteadofs[method].add(theTrait);
+            }
+        }
+
+        if (it.get().label() == 'As') {
+            method = it.get().vertices(OUT, "NAME").next().property('lccode').value();
+            alias = it.get().vertices(OUT, "AS").next().property('lccode').value();
+            aliases[alias] = method;
+        }
+      }
+      .fold()
+    )
+.sideEffect{ if (aliases[name] != null) { name = aliases[name]; } }
+GREMLIN
+, array(), array())
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->raw(<<<GREMLIN
+filter{ insteadofs[name] == null || !(it.get().value('fullnspath') in insteadofs[name]); }
+GREMLIN
+,array(), array())
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
