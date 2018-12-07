@@ -274,6 +274,8 @@ SQL;
             } else {
                 display("$analyzer is not run yet.");
             }
+        } else {
+            $themes = array();
         }
 
         $this->log->log('Still '.count($themes)." to be processed\n");
@@ -958,29 +960,49 @@ SQL
 
         
         $query = <<<GREMLIN
-g.V().hasLabel("Method", "Magicmethod").as('method')
-     .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value('fullnspath'); }
-     .select('method')
-.where( __.sideEffect{ lines = [];}
-               .out("BLOCK").out("EXPRESSION")
-               .emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING)
-               .sideEffect{ lines.add(it.get().value("line")); }
-               .fold()
-      )
-.map{ 
-    x = ['name': it.get().value("fullcode"),
-         'abstract':it.get().properties("abstract").any(),
-         'final':it.get().properties("final").any(),
-         'static':it.get().properties("static").any(),
+g.V().hasLabel("Method", "Usetrait")
+    .coalesce( 
+            __.out("BLOCK").out("EXPRESSION").hasLabel("As"),
+            __.hasLabel("Method", "Magicmethod")
+     )
+     .where(
+        __.coalesce( 
+            __.out("AS").sideEffect{alias = it.get().value("fullcode")}.in("AS")
+              .out("NAME").in("DEFINITION").hasLabel("Method", "Magicmethod"), 
+            __.sideEffect{ alias = false; }
+          )
+         .as("method")
+         .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); }
+         .select("method")
+         .where( __.sideEffect{ lines = [];}
+                   .out("BLOCK").out("EXPRESSION")
+                   .emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING)
+                   .sideEffect{ lines.add(it.get().value("line")); }
+                   .fold()
+          )
+          .map{ 
 
-         'public':    it.get().value("visibility") == 'public',
-         'protected': it.get().value("visibility") == 'protected',
-         'private':   it.get().value("visibility") == 'private',
-         'class':     classe,
-         'begin':     lines.min(),
-         'end':       lines.max()
+    if (alias == false) {
+        name = it.get().value("fullcode");
+    } else {
+        name = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
+    }
+
+    x = ["name": name,
+         "abstract":it.get().properties("abstract").any(),
+         "final":it.get().properties("final").any(),
+         "static":it.get().properties("static").any(),
+
+         "public":    it.get().value("visibility") == "public",
+         "protected": it.get().value("visibility") == "protected",
+         "private":   it.get().value("visibility") == "private",
+         "class":     classe,
+         "begin":     lines.min(),
+         "end":       lines.max()
          ];
-}
+            }
+      ) 
+.map{x;}
 
 GREMLIN;
         $res = $this->gremlin->query($query);
