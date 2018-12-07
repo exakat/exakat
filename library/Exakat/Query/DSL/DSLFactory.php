@@ -76,7 +76,7 @@ class DSLFactory {
             throw new UnknownDsl($name);
         }
         
-        return new $className($this, $this->dictCode, $this->availableAtoms, $this->availableLinks, $this->availableFunctioncalls, $this->availableVariables);
+        return new $className($this, $this->dictCode, $this->availableAtoms, $this->availableLinks, $this->availableFunctioncalls, $this->availableVariables, $this->availableLabels);
     }
 }
 

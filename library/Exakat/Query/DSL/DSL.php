@@ -32,24 +32,29 @@ use Exakat\Analyzer\Analyzer;
 abstract class DSL {
     const VARIABLE_WRITE = true;
     const VARIABLE_READ  = false;
+
+    const LABEL_SET  = true;
+    const LABEL_GO   = false;
     
     protected $dslfactory             = null;
     protected $availableAtoms         = array();
     protected $availableLinks         = array();
     protected $availableFunctioncalls = array();
     protected $availableVariables     = array(); // This one is per query 
+    protected $availableLabels        = array(); // This one is per query 
     protected $dictCode               = null;
 
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
 
-    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables) {
+    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables, &$availableLabels) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = $dictCode;
         $this->availableAtoms         = $availableAtoms;
         $this->availableLinks         = $availableLinks;
         $this->availableFunctioncalls = $availableFunctioncalls;
         $this->availableVariables     = &$availableVariables;
+        $this->availableLabels        = &$availableLabels;
 
         if (empty(self::$linksDown)) {
             self::$linksDown = GraphElements::linksAsList();
@@ -82,7 +87,17 @@ abstract class DSL {
             assert(false, '$v is not a string or an array');
         }
     }
-    
+
+    protected function assertLabel($name, $read = self::LABEL_GO) {
+        if ($read === self::LABEL_SET) {
+            assert(!in_array($name, $this->availableLabels), "Label '$name' is already set");
+            $this->availableLabels[] = $name;
+        } else {
+            assert(in_array($name, $this->availableLabels), "Label '$name' is not set");
+        }
+        return true;
+    }
+        
     protected function assertVariable($name, $write = self::VARIABLE_READ) {
         if ($write === self::VARIABLE_WRITE) {
             assert(!in_array($name, $this->availableVariables), "Variable '$name' is already taken");

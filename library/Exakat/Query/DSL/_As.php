@@ -29,7 +29,7 @@ class _As extends DSL {
     public function run() {
         list($name) = func_get_args();
         
-//        $this->assertLabel($name);
+        assert($this->assertLabel($name, self::LABEL_SET));
 
         return new Command("as(\"$name\")");
     }

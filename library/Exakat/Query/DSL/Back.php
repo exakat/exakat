@@ -29,6 +29,7 @@ class Back extends DSL {
     public function run() {
         list($name) = func_get_args();
 
+        assert($this->assertLabel($name, self::LABEL_GO));
         return new Command("select(\"$name\")");
     }
 }
