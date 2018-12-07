@@ -569,8 +569,23 @@ $exampleTxt
     
         };
         
+        // preserve code to avoid remplacement inside them
+        $codes = array();
+        $saveCode = function ($x) use (&$codes) { 
+            $codes[] = $x[0]; 
+            return "----".(count($codes) - 1)."----"; 
+        };
+        $description = preg_replace_callback('/<\\?php.*?\\?>/s', $saveCode, $description);
+
+
+
         $description = preg_replace_callback('/([^a-zA-Z_`])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])/is', $cbGlossary, ' '.$description);
-    
+
+        $restoreCode = function ($x) use ($codes) {
+            return $codes[$x[1]];
+        };
+        $description = preg_replace_callback('/----(\d+)----/s', $restoreCode, $description);
+
         return $description;
     }
 

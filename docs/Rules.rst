@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 03 Dec 2018 18:05:47 +0000
-.. comment: Generation hash : be73f48adf83c4d24255f58f1b8d30845c855bd6
+.. comment: Generation date : Fri, 07 Dec 2018 16:26:57 +0000
+.. comment: Generation hash : 022d792d702da1256f776937c7f4f83cac7c6d4d
 
 
 .. _$http\_raw\_post\_data:
@@ -97,13 +97,13 @@ PHP 7.1 is stricter and check for $this at several positions. Some are found by 
            $a =& $this;
            $a = 42;
            
-           // Using 'extract(), 'parse_str() or similar functions
+           // Using extract(), parse_str() or similar functions
            extract([this => 42]);  // throw new Error(Cannot re-assign $this)
            var_dump($this);
        }
    
-       static function '__call($name, $args) {
-           // Using '__call
+       static function __call($name, $args) {
+           // Using __call
            var_dump($this); // prints object(C)#1 (0) {}, php-7.0 printed NULL
            $this->test();   // prints ops
        }
@@ -138,7 +138,7 @@ This is unless the class (or its parents) has the ``ArrayAccess`` interface, or 
    <?php
    
    // $this is an array
-   class Foo extends 'ArrayAccess {
+   class Foo extends ArrayAccess {
        function bar() {
            ++$this[3];
        }
@@ -198,7 +198,7 @@ While executing a static method, ``$this`` is actually set to ``NULL``.
        static $staticProperty = 1;
    
        // Static methods should use static properties
-       static public function 'count() {
+       static public function count() {
            return self::$staticProperty++;
        }
        
@@ -240,7 +240,7 @@ PHP has the operator `'** <http://php.net/manual/en/language.operators.arithmeti
    <?php
        $cube = pow(2, 3); // 8
    
-       $cubeInPHP56 = 2 '** 3; // 8
+       $cubeInPHP56 = 2 ** 3; // 8
    ?>
 
 
@@ -709,7 +709,7 @@ That way, the child doesn't need to implement the interface, nor define its meth
    
    class A implements i {
        function i() {
-           return '__METHOD__;
+           return __METHOD__;
        }
    }
    
@@ -722,16 +722,16 @@ That way, the child doesn't need to implement the interface, nor define its meth
    class AB extends A {
        // redefinition of the i method
        function i() {
-           return '__METHOD__.' ';
+           return __METHOD__.' ';
        }
    }
    
    $x = new AB;
-   var_dump($x 'instanceof i);
+   var_dump($x instanceof i);
    // true
    
    $x = new AC;
-   var_dump($x 'instanceof i);
+   var_dump($x instanceof i);
    // true
    
    ?>
@@ -1081,7 +1081,7 @@ Anonymous classes.
    <?php
    
    // Anonymous class, available since PHP 7.0
-   $object = new class { function '__construct() { echo '__METHOD__; } };
+   $object = new class { function __construct() { echo __METHOD__; } };
    
    ?>
 
@@ -1158,7 +1158,7 @@ Since PHP 7.3, a fatal error is emitted : ``Defining a custom `'assert() <http:/
    // Then run this with zend.assertions=0
    
    namespace Test {
-       function 'assert() {
+       function assert() {
            global $foo;
    
            $foo = true;
@@ -1166,9 +1166,9 @@ Since PHP 7.3, a fatal error is emitted : ``Defining a custom `'assert() <http:/
    }
    
    namespace Test {
-       'assert();
+       assert();
    
-       var_dump('isset($foo));
+       var_dump(isset($foo));
    }
    
    ?>
@@ -1206,7 +1206,7 @@ Properties may be assigned default values at declaration time. Such values may b
        private $propertyWithoutDefault;
        private $propertyThatCantHaveDefault;
        
-       public function '__construct() {
+       public function __construct() {
            // Skip this extra line, and give the default value above
            $this->propertyWithoutDefault = 1;
    
@@ -1444,7 +1444,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
    class x {
        function foo() {
            // assign to non local variable is OK. 
-           // Here, to a property, though it may be better in a '__construct or as default values
+           // Here, to a property, though it may be better in a __construct or as default values
            $this->s = array(1,2,3,4,5,6,7,8,9,10,11);
    
            // This is wasting resources, as it is done each time. 
@@ -1487,7 +1487,7 @@ Either make sure the property is set with an actual object rather than with null
    class MyMailer {
        private $logger;
    
-       public function '__construct(LoggerInterface $logger = null) {
+       public function __construct(LoggerInterface $logger = null) {
            $this->logger = $logger;
        }
    
@@ -1816,7 +1816,7 @@ The native function `'array_unique() <http://www.php.net/array_unique>`_ is much
 
    <?php
    
-   // using 'array_unique()
+   // using array_unique()
    $uniques = array_unique($someValues);
    
    // When values are strings or integers
@@ -1870,7 +1870,7 @@ Avoid get_class()
    
        function bar($arg) {
            // Faster, and uses aliases.
-           if ($arg 'instanceof baseClass) {
+           if ($arg instanceof baseClass) {
                // doSomething()
            }
        }
@@ -2103,10 +2103,10 @@ This works with the ``break``, ``continue``, ``throw`` and ``goto`` keywords too
        return $a;
    }
    
-   // Works with 'continue too
+   // Works with continue too
    foreach($array as $a => $b) {
        if ($a > 0) {
-           'continue false;
+           continue false;
        } 
        
        $a++;
@@ -2257,17 +2257,17 @@ It is not possible anymore to include a piece of code inside a loop that will th
    <?php
    
        // outside a loop : This won't compile
-       'break 1; 
+       break 1; 
        
        foreach($array as $a) {
-           'break 1; // Compile OK
+           break 1; // Compile OK
    
-           'break 2; // This won't compile, as this 'break is in one loop, and not 2
+           break 2; // This won't compile, as this break is in one loop, and not 2
        }
    
        foreach($array as $a) {
            foreach($array2 as $a2) {
-               'break 2; // OK in PHP 5 and 7
+               break 2; // OK in PHP 5 and 7
            }
        }
    ?>
@@ -2297,14 +2297,14 @@ Cannot `'break <http://php.net/manual/en/control-structures.break.php>`_ 0, as t
 .. code-block:: php
 
    <?php
-       // Can't 'break 0. Must be 1 or more, depending on the level of nesting.
+       // Can't break 0. Must be 1 or more, depending on the level of nesting.
        for($i = 0; $i < 10; $i++) {
-           'break 0;
+           break 0;
        }
    
        for($i = 0; $i < 10; $i++) {
            for($j = 0; $j < 10; $j++) {
-               'break 2;
+               break 2;
            }
        }
    
@@ -2337,16 +2337,16 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
 .. code-block:: php
 
    <?php
-       // Can't 'break $a, even if it contains an integer.
+       // Can't break $a, even if it contains an integer.
        $a = 1;
        for($i = 0; $i < 10; $i++) {
-           'break $a;
+           break $a;
        }
    
-       // can't 'break on float
+       // can't break on float
        for($i = 0; $i < 10; $i++) {
            for($j = 0; $j < 10; $j++) {
-               'break 2.2;
+               break 2.2;
            }
        }
    
@@ -2473,11 +2473,11 @@ When used with `'array_map() <http://www.php.net/array_map>`_ functions, the cal
    // This return void for every element
    $filtered = array_filter($array, function ($x) {return ; });
    
-   // costly 'array_sum()
+   // costly array_sum()
    $sum = 0;
    $filtered = array_filter($array, function ($x) use (&$sum) {$sum += $x; });
    
-   // costly 'array_sum()
+   // costly array_sum()
    global $sum = 0;
    $filtered = array_filter($array, function () {global $sum; $sum += $x; });
    
@@ -2748,8 +2748,8 @@ PHP reports an error similar to this one : 'Call to private Y\:\:`'__construct()
    $x = new X();
    
    class X {
-       //This is also the case with proctected '__construct
-       private function '__construct() {}
+       //This is also the case with proctected __construct
+       private function __construct() {}
    
        static public function factory() {
            return new X();
@@ -3041,13 +3041,13 @@ In particular, ``NULL`` is a valid decoded JSON response. If you want to avoid m
    $encoded = json_encode($incoming);
    // Unless JSON must contains some non-null data, this mistakes NULL and error
    if(json_last_error() != JSON_ERROR_NONE) {
-       'die('Error when encoding JSON');
+       die('Error when encoding JSON');
    }
    
    $decoded = json_decode($incoming);
    // Unless JSON must contains some non-null data, this mistakes NULL and error
    if($decoded === null) {
-       'die('ERROR');
+       die('ERROR');
    }
    
    ?>
@@ -3399,10 +3399,10 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
    $filtered = array_map(function ($x) { return strtoupper($x);}, $array);
    
    // Methodcall example 
-   $filtered = array_map(function ($x) { return $x->'strtoupper() ;}, $array);
+   $filtered = array_map(function ($x) { return $x->strtoupper() ;}, $array);
    
    // Static methodcall example 
-   $filtered = array_map(function ($x) { return $x::'strtoupper() ;}, $array);
+   $filtered = array_map(function ($x) { return $x::strtoupper() ;}, $array);
    
    ?>
 
@@ -3942,7 +3942,7 @@ Those expressions (using simple operators) may only manipulate other constants, 
    const B = A * 3;
    
    // constant scalar expression
-   const C = [A '** 3, '3' => B];
+   const C = [A ** 3, '3' => B];
    
    ?>
 
@@ -4060,8 +4060,8 @@ Since PHP 7.3, the execution will emit a warning when finding a `'continue <http
    while ($foo) {
        switch ($bar) {
            case 'baz':
-               'continue; // In PHP: Behaves like ''break;'
-                         // In C:   Behaves like ''continue 2;'
+               continue; // In PHP: Behaves like 'break;'
+                         // In C:   Behaves like 'continue 2;'
        }
    }
    
@@ -4477,7 +4477,7 @@ Could Be Static Closure
    
    class Foo
    {
-       function '__construct()
+       function __construct()
        {
    
            // Not possible to use $this
@@ -4673,8 +4673,8 @@ Arguments that are tested with `'instanceof <http://php.net/manual/en/language.o
    <?php
    
    function foo($a, $b) {
-       // $a is tested for B with 'instanceof. 
-       if (!$a 'instanceof B) {
+       // $a is tested for B with instanceof. 
+       if (!$a instanceof B) {
            return;
        }
        
@@ -4897,13 +4897,13 @@ Avoid using `'dirname() <http://www.php.net/dirname>`_ on `'__FILE__ <http://php
    <?php
    
    // Better way
-   $fp = fopen('__DIR__.'/myfile.txt', 'r');
+   $fp = fopen(__DIR__.'/myfile.txt', 'r');
    
    // compatible, but slow way
-   $fp = fopen(dirname('__FILE__).'/myfile.txt', 'r');
+   $fp = fopen(dirname(__FILE__).'/myfile.txt', 'r');
    
    // Since PHP 5.3
-   assert(dirname('__FILE__) == '__DIR__);
+   assert(dirname(__FILE__) == __DIR__);
    
    ?>
 
@@ -5459,7 +5459,7 @@ get_called_class() may be replaced by ``static\:\:class``.
    
    class X {
        function foo() {
-           echo '__CLASS__.\n;          // X
+           echo __CLASS__.\n;          // X
            echo self::class.\n;        // X
            
            echo get_called_class().\n;  // Y
@@ -5502,11 +5502,11 @@ From the RFC : `Doing calls like $obj->`'__clone( <http://php.net/manual/en/lang
    <?php
    
        class Foo {
-           function '__clone() {}
+           function __clone() {}
        }
        
        $a = new Foo;
-       $a->'__clone();
+       $a->__clone();
    ?>
 
 
@@ -5718,14 +5718,14 @@ PHP's uses the ``display_errors`` directive to control display of errors to the 
    <?php
    
    // Inside a 'or' test
-   mysql_connect('localhost', $user, $pass) or 'die(mysql_error());
+   mysql_connect('localhost', $user, $pass) or die(mysql_error());
    
    // Inside a if test
    $result = pg_query( $db, $query );
    if( !$result )
    {
    	echo Erreur SQL: . pg_error();
-   	'exit;
+   	exit;
    }
    
    // Changing PHP configuration
@@ -5879,7 +5879,7 @@ This is true when the receiving structure puts the incoming object immediately t
            $foo->finalize();
        }
    
-       private function '__construct($data) {
+       private function __construct($data) {
            // $this is provided too early
            $this->data = $data;
        }
@@ -5894,7 +5894,7 @@ This is true when the receiving structure puts the incoming object immediately t
        private $bar = null;
        private $data = array();
        
-       function '__construct($data) {
+       function __construct($data) {
            // $this is provided too early
            $this->bar = new Bar($this);
            $this->data = $data;
@@ -5902,7 +5902,7 @@ This is true when the receiving structure puts the incoming object immediately t
    }
    
    class Bar {
-       function '__construct(Foo $foo) {
+       function __construct(Foo $foo) {
            // the cache is now initialized with a wrong 
            $this->cache = $foo->getIt();
        }
@@ -6176,7 +6176,7 @@ Avoid double `'array_flip() <http://www.php.net/array_flip>`_ to gain speed. Whi
    }
    
    // double array_flip
-   // 'array_flip() usage means that $array's values are all unique
+   // array_flip() usage means that $array's values are all unique
    function foo($array, $value) {
        $flipped = array_flip($value);
        unset($flipped[$value]);
@@ -6442,7 +6442,7 @@ It may be in function definitions, either in functioncalls.
    // Identical to foo(1,2,3);
    
    function bar(...$a) {
-       // Identical to : $a = 'func_get_args();
+       // Identical to : $a = func_get_args();
    }
    ?>
 
@@ -6891,7 +6891,7 @@ The code does try, then catch errors but do no act upon the error.
    
    try { 
        doSomething();
-   } catch ('Throwable $e) {
+   } catch (Throwable $e) {
        // ignore this
    }
    
@@ -6930,12 +6930,12 @@ Empty With Expression
 
    <?php
    
-   // PHP 5.5+ 'empty() usage
+   // PHP 5.5+ empty() usage
    if (empty(strtolower($b . $c))) {
        doSomethingWithoutA();
    }
    
-   // Compatible 'empty() usage
+   // Compatible empty() usage
    $a = strtolower($b . $c);
    if (empty($a)) {
        doSomethingWithoutA();
@@ -7010,7 +7010,7 @@ Using `'eval() <http://www.php.net/eval>`_ is bad for performances (compilation 
 .. code-block:: php
 
    <?php
-       // Avoid using incoming data to build the 'eval() expression : any filtering error leads to PHP injection
+       // Avoid using incoming data to build the eval() expression : any filtering error leads to PHP injection
        $mathExpression = $_GET['mathExpression']; 
        $mathExpression = preg_replace('#[^0-9+\-*/\(/)]#is', '', $mathExpression); // expecting 1+2
        $literalCode = '$a = '.$mathExpression.';';
@@ -7018,7 +7018,7 @@ Using `'eval() <http://www.php.net/eval>`_ is bad for performances (compilation 
        echo $a;
    
        // If eval'ed code is known at compile time, it is best to put it inline
-       $literalCode = ''phpinfo();';
+       $literalCode = 'phpinfo();';
        eval($literalCode);
    
    ?>
@@ -7096,7 +7096,7 @@ Using `'exit <http://www.php.net/exit>`_ or `'die() <http://www.php.net/die>`_ i
    throw new \Exception('error');
    
    // Dying with error message. 
-   'die('error');
+   die('error');
    
    function foo() {
        //exiting the function but not dying
@@ -7135,7 +7135,7 @@ Usage of the `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_
 
    <?php
    
-   $eight = 2 '** 3;
+   $eight = 2 ** 3;
    
    $sixteen = 4;
    $sixteen \*\*\= 2;
@@ -7444,7 +7444,7 @@ It is recommended to avoid functioncall in the `'for() <http://php.net/manual/en
    
    // Same as above, but slow
    foreach($portions as &$portion) {
-       // here, 'array_sum() doesn't depends on the $grade. It should be out of the loop
+       // here, array_sum() doesn't depends on the $grade. It should be out of the loop
        $portion = $portion / array_sum($portions);
    } 
    
@@ -8042,7 +8042,7 @@ Those functions were removed in PHP 5.5.
    <?php
    
    echo '<img src="' . $_SERVER['PHP_SELF'] .
-        '?=' . 'php_logo_guid() . '" alt="PHP Logo !" />';
+        '?=' . php_logo_guid() . '" alt="PHP Logo !" />';
    
    ?>
 
@@ -8970,7 +8970,7 @@ PHP has reserved usage of methods starting with ``__`` for magic methods. It is 
    
    class foo{
        // Constructor
-       function '__construct() {}
+       function __construct() {}
    
        // Constructor's typo
        function __constructor() {}
@@ -9135,8 +9135,8 @@ However, such structures are confusing. It is easy to misread them as conditions
 
    <?php
    
-   // Either connect, or 'die
-   mysql_connect('localhost', $user, $pass) or 'die();
+   // Either connect, or die
+   mysql_connect('localhost', $user, $pass) or die();
    
    // Defines a constant if not found. 
    defined('SOME_CONSTANT') and define('SOME_CONSTANT', 1);
@@ -9547,7 +9547,7 @@ The following strings contain variables that are will be replaced. However, the 
    
    class b { 
        public $b = 'c';
-       function '__toString() { return '__CLASS__; }
+       function __toString() { return __CLASS__; }
    }
    $x = array(1 => new B());
    
@@ -9813,13 +9813,13 @@ Isset Multiple Arguments
 
    <?php
    
-   // 'isset without and 
-   if ('isset($a, $b, $c)) {
+   // isset without and 
+   if (isset($a, $b, $c)) {
        // doSomething()
    }
    
-   // 'isset with and 
-   if ('isset($a) && 'isset($b) && 'isset($c)) {
+   // isset with and 
+   if (isset($a) && isset($b) && isset($c)) {
        // doSomething()
    }
    
@@ -9855,12 +9855,12 @@ Isset() works quietly on a whole array. There is no need to test all previous in
    <?php
    
    // Straight to the point
-   if ('isset($a[1]['source'])) {
+   if (isset($a[1]['source'])) {
        // Do something with $a[1]['source']
    }
    
    // Doing too much work
-   if ('isset($a) && 'isset($a[1]) && 'isset($a[1]['source'])) {
+   if (isset($a) && isset($a[1]) && isset($a[1]['source'])) {
        // Do something with $a[1]['source']
    }
    
@@ -10493,16 +10493,16 @@ The class magic methods must have public visibility and cannot be static.
    
    class foo{
        // magic method must bt public and non-static
-       public static function '__clone($name) {    }
+       public static function __clone($name) {    }
    
        // magic method can't be private
-       private function '__get($name) {    }
+       private function __get($name) {    }
    
        // magic method can't be protected
-       private function '__set($name, $value) {    }
+       private function __set($name, $value) {    }
    
        // magic method can't be static
-       public static function '__isset($name) {    }
+       public static function __isset($name) {    }
    }
    
    ?>
@@ -10552,7 +10552,7 @@ Setting the property in the constructor (or in a factory), makes the class easie
    class fooGood {
        private $bar = null;
        
-       function '__construct() {
+       function __construct() {
            global $bar; 
            $this->bar = $bar;
            // Even better, do this via arguments
@@ -10593,7 +10593,7 @@ Calling the same function to chain modifications tends to be slower than calling
    
    $string = 'abcdef'; 
    
-   //'str_replace() accepts arrays as arguments
+   //str_replace() accepts arrays as arguments
    $string = str_replace( ['a', 'b', 'c'],
                           ['A', 'B', 'C'],
                           $string);
@@ -10627,7 +10627,7 @@ Potential replacements :
    $subject = 'Aaaaaa Bbb';
    
    
-   //'preg_replace_callback_array() is better than multiple preg_replace_callback : 
+   //preg_replace_callback_array() is better than multiple preg_replace_callback : 
    preg_replace_callback_array(
        [
            '~[a]+~i' => function ($match) {
@@ -10648,7 +10648,7 @@ Potential replacements :
                echo strlen($match[0]), ' matches for b found', PHP_EOL;
            }, $subject);
    
-   //'str_replace() accepts arrays as arguments
+   //str_replace() accepts arrays as arguments
    $string = str_replace( ['a', 'b', 'c'],
                           ['A', 'B', 'C'],
                           $string);
@@ -10752,7 +10752,7 @@ Those collisions should be solved with a ``use`` expression. When they are not, 
    
    class D {
        use  A, B{
-           B::M 'insteadof A;
+           B::M insteadof A;
        };
    }
    
@@ -11106,19 +11106,19 @@ Switch() structures using strings as literals are compared in this analysis. Whe
    
    // This switch operates on a, b, c, d and default 
    switch($a) {
-       case 'a': doSomethingA(); 'break 1;
-       case 'b': doSomethingB(); 'break 1;
-       case 'c': doSomethingC(); 'break 1;
-       case 'd': doSomethingD(); 'break 1;
+       case 'a': doSomethingA(); break 1;
+       case 'b': doSomethingB(); break 1;
+       case 'c': doSomethingC(); break 1;
+       case 'd': doSomethingD(); break 1;
        default: doNothing();
    }
    
    // This switch operates on a, b, d and default 
    switch($o->p) {
-       case 'a': doSomethingA(); 'break 1;
-       case 'b': doSomethingB(); 'break 1;
+       case 'a': doSomethingA(); break 1;
+       case 'b': doSomethingB(); break 1;
    
-       case 'd': doSomethingD(); 'break 1;
+       case 'd': doSomethingD(); break 1;
        default: doNothing();
    }
    
@@ -11224,7 +11224,7 @@ Add parenthesis to those expression to prevent bugs.
    <?php
    
    // Missing some parenthesis!!
-   if (!$a 'instanceof Stdclass) {
+   if (!$a instanceof Stdclass) {
        print Not\n;
    } else {
        print Is\n;
@@ -11429,12 +11429,12 @@ Modernize Empty With Expression
 
    <?php
    
-   // PHP 5.5+ 'empty() usage
+   // PHP 5.5+ empty() usage
    if (empty(strtolower($b . $c))) {
        doSomethingWithoutA();
    }
    
-   // Compatible 'empty() usage
+   // Compatible empty() usage
    $a = strtolower($b . $c);
    if (empty($a)) {
        doSomethingWithoutA();
@@ -11925,17 +11925,17 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
    
    case ($x) {
        case 1 : 
-           'break;
+           break;
        case true:    // This is a duplicate of the previous
-           'break; 
+           break; 
        case 1 + 0:   // This is a duplicate of the previous
-           'break; 
+           break; 
        case 1.0 :    // This is a duplicate of the previous
-           'break; 
+           break; 
        case A :      // The A constant is actually 1
-           'break; 
+           break; 
        case $y  :    // This is not reported.
-           'break; 
+           break; 
        default:
            
    }
@@ -12021,12 +12021,12 @@ The error is only emitted if the class is instantiated, and a parent class is ca
    <?php
    
    class mySplFileObject extends \SplFileObject {
-       public function '__construct()    { 
-           // Forgottent call to parent::'__construct()
+       public function __construct()    { 
+           // Forgottent call to parent::__construct()
        }
    }
    
-   (new mySplFileObject())->'passthru();
+   (new mySplFileObject())->passthru();
    ?>
 
 
@@ -12069,17 +12069,17 @@ Methods that may not return, but are often expected to : `'__call() <http://php.
    <?php
    
    class foo {
-       public function '__isset($a) {
+       public function __isset($a) {
            // returning something useful
-           return 'isset($this->$var[$a]);
+           return isset($this->$var[$a]);
        }
    
-       public function '__get($a) {
+       public function __get($a) {
            $this->$a++;
            // not returning... 
        }
    
-       public function '__call($name, $args) {
+       public function __call($name, $args) {
            $this->$name(...$args);
            // not returning anything, but that's OK
        }
@@ -12168,7 +12168,7 @@ When using negative power, it is clearer to add parenthesis or to use the `'pow(
    pow(-2, 2) == 4;
    
    // minus 2 to the power of 2 (a negative square)
-   -2 '** 2 == -(2 '** 2) == 4;
+   -2 ** 2 == -(2 ** 2) == 4;
    
    ?>
 
@@ -12905,7 +12905,7 @@ When comparing `'count() <http://www.php.net/count>`_ strictly with 0 (>) it is 
        // doSomething();
    }
    
-   Of course comparing 'count() with negative values, or with >= is useless.
+   Of course comparing count() with negative values, or with >= is useless.
    
    <?php
    
@@ -12963,12 +12963,12 @@ It is recommended to use the magic method with its intended usage, and not to ca
    // Write
      print $x->a;
    // instead of 
-     print $x->'__get('a'); 
+     print $x->__get('a'); 
    
    class Foo {
        private $b = secret;
    
-       public function '__toString() {
+       public function __toString() {
            return strtoupper($this->b);
        }
    }
@@ -13178,9 +13178,9 @@ Either use `'__FILE__ <http://php.net/manual/en/language.constants.predefined.ph
        file_get_contents('http://www.php.net/');
        file_get_contents('php://memory/');
        
-       // 'glob() with special chars * and ? are not reported
+       // glob() with special chars * and ? are not reported
        glob('./*/foo/bar?.txt');
-       // 'glob() without special chars * and ? are reported
+       // glob() without special chars * and ? are reported
        glob('/foo/bar/');
        
    ?>
@@ -13217,7 +13217,7 @@ When connecting to a remove server, port is an important information. It is reco
        // Both hardcoded IP and hostname
        $connection = ssh2_connect('shell.example.com', 22, $methods, $callbacks);
    
-       if (!$connection) 'die('Connection failed');
+       if (!$connection) die('Connection failed');
    ?>
 
 +-------------+---------------------------------+
@@ -13290,7 +13290,7 @@ When overloading properties, they can only be used for scalar values, excluding 
        private $a;
        private $o = array();
    
-       function '__get($name) {
+       function __get($name) {
            return $this->o[$name];
        }
        
@@ -13302,7 +13302,7 @@ When overloading properties, they can only be used for scalar values, excluding 
        }
    
        // This method has no impact on the issue
-       function '__set($name, $value) {
+       function __set($name, $value) {
            $this->o[$name] = $value;
        }
    }
@@ -13363,7 +13363,7 @@ Else is not needed when the Then ends with a `'break <http://php.net/manual/en/c
            return;
        }
    
-       // This has no 'break
+       // This has no break
        if ($a4) {
            $a++;
        } else {
@@ -13439,9 +13439,9 @@ Some PHP language constructs, such are ``include``, ``print``, ``echo`` don't ne
    <?php
    
    // This is an attempt to load 'foo.inc', or kill the script
-   include('foo.inc') or 'die();
+   include('foo.inc') or die();
    // in fact, this is read by PHP as : include 1 
-   // include  'foo.inc' or 'die();
+   // include  'foo.inc' or die();
    
    ?>
 
@@ -14184,7 +14184,7 @@ From the manual : ``No warning is generated if the variable does not exist. That
    }
    
    // Too many tests
-   if ('isset($a) && !empty($a)) {
+   if (isset($a) && !empty($a)) {
        doSomething();
    }
    
@@ -14232,8 +14232,8 @@ In practice, letters outside the scope of ``a-zA-Z0-9`` are rare, and require mo
    
    class 人 {
        // An actual working class in PHP.
-       public function '__construct() {
-           echo '__CLASS__;
+       public function __construct() {
+           echo __CLASS__;
        }
    }
    
@@ -14275,8 +14275,8 @@ PHP 5 and older doesn't check that a method is static or not : at any point, the
 
    <?php
        class x {
-           static public function sm( ) { echo '__METHOD__.\n; }
-           public public sm( ) { echo '__METHOD__.\n; }
+           static public function sm( ) { echo __METHOD__.\n; }
+           public public sm( ) { echo __METHOD__.\n; }
        } 
        
        x::sm( ); // echo x::sm 
@@ -14299,7 +14299,7 @@ in-family method.
    <?php
        class x {
            public function foo( ) { self::bar() }
-           public function bar( ) { echo '__METHOD__.\n; }
+           public function bar( ) { echo __METHOD__.\n; }
        } 
    ?>
 
@@ -14627,9 +14627,9 @@ The manual issues a warning about this syntax : ``Old style constructors are DEP
        }
    
        class bar {
-           function '__construct() { }
+           function __construct() { }
            function bar() {
-               // This doesn't act as constructor, as bar has a '__construct() method
+               // This doesn't act as constructor, as bar has a __construct() method
            }
        }
    }
@@ -14923,11 +14923,11 @@ This may be linted by PHP, when the function definition is in the same file as t
 
    <?php
    
-   function foo(&$bar) { /'**/ }
+   function foo(&$bar) { /**/ }
    
-   function &bar() { /'**/ }
+   function &bar() { /**/ }
    
-   // This is not possible : 'strtolower() returns a value
+   // This is not possible : strtolower() returns a value
    foo(strtolower($string));
    
    // This is valid : bar() returns a reference
@@ -14970,12 +14970,12 @@ Anything else, like literals or static expressions, yield a warning at execution
    
    // Can't return a literal number
    function &foo() {
-       return 3 + 'rand();
+       return 3 + rand();
    }
    
    // bar must return values that are stored in a 
    function &bar() {
-       $a = 3 + 'rand();
+       $a = 3 + rand();
        return $a;
    }
    
@@ -15006,7 +15006,7 @@ Classic old style failed error management.
    <?php
    
    // In case the connexion fails, this kills the current script
-   mysql_connect('localhost', $user, $pass) or 'die();
+   mysql_connect('localhost', $user, $pass) or die();
    
    ?>
 
@@ -15608,7 +15608,7 @@ The last empty line is easier on the VCS, allowing clearer text diffs.
    <?php
    
    function foo($a, $b) {
-       print_r('func_get_args());
+       print_r(func_get_args());
    }
    
    
@@ -15872,26 +15872,26 @@ When calling parent constructor, always put it first in the ``__construct`` meth
    class father {
        protected $name = null;
        
-       function '__construct() {
+       function __construct() {
            $this->name = init();
        }
    }
    
    class goodSon {
-       function '__construct() {
+       function __construct() {
            // parent is build immediately, 
-           parent::'__construct();
+           parent::__construct();
            echo my name is.$this->name;
        }
    }
    
    class badSon {
-       function '__construct() {
+       function __construct() {
            // This will fail.
            echo my name is.$this->name;
    
            // parent is build later, 
-           parent::'__construct();
+           parent::__construct();
        }
    }
    
@@ -16012,7 +16012,7 @@ Pathinfo() Returns May Vary
    //$extension may be missing, leading to empty $filename and filename in $extension
    list( $dirname, $basename, $extension, $filename ) = array_values( pathinfo($file) );
    
-   //Use PHP 7.1 list() syntax to assign correctly the values, and skip 'array_values()
+   //Use PHP 7.1 list() syntax to assign correctly the values, and skip array_values()
    //This emits a warning in case of missing index
    ['dirname'   => $dirname, 
     'basename'  => $basename, 
@@ -16227,7 +16227,7 @@ Phpinfo
    <?php
    
    if (DEBUG) {
-       'phpinfo();
+       phpinfo();
    }
    
    ?>
@@ -16312,8 +16312,8 @@ In case the file is not accessible, comparing the result of the reading to somet
    <?php
    
    $file = fopen('/path/to/file.txt', 'r');
-   // when 'fopen() fails, the next loops is infinite
-   // 'fgets() will always return false, and while will always be true. 
+   // when fopen() fails, the next loops is infinite
+   // fgets() will always return false, and while will always be true. 
    while($line = fgets($file) != 'a') {
        doSomething();
    }
@@ -16504,17 +16504,17 @@ When stopping a script with `'die() <http://www.php.net/die>`_, it is possible t
 
    <?php
    
-   //  'die may do both print and 'die.
+   //  die may do both print and die.
    echo 'Error message';
-   'die();
+   die();
    
-   //  'exit may do both print and 'die.
+   //  exit may do both print and die.
    print 'Error message';
-   'exit;
+   exit;
    
-   //  'exit cannot print integers only : they will be used as status report to the system.
+   //  exit cannot print integers only : they will be used as status report to the system.
    print 'Error message';
-   'exit 1;
+   exit 1;
    
    ?>
 
@@ -17108,7 +17108,7 @@ Classes allows properties to be set with a default value. When those properties 
    class foo {
        public $redefined = 1;
    
-       public function '__construct( ) {
+       public function __construct( ) {
            $this->redefined = 2;
        }
    }
@@ -17872,7 +17872,7 @@ Property shouldn't use both object and scalar syntaxes. When a property may be a
        function foo($string) {
            if (is_string($this->display)) {
                echo $this->string;
-           } elseif ($this->display 'instanceof myDisplayInterface) {
+           } elseif ($this->display instanceof myDisplayInterface) {
                $display->display();
            } else {
                print Error when displaying\n;
@@ -17892,13 +17892,13 @@ Property shouldn't use both object and scalar syntaxes. When a property may be a
    class x2 {
        public $display = null;
        
-       public function '__construct() {
+       public function __construct() {
            $this->display = new nullDisplay();
        }
        
        function foo($string) {
            // Keep the check, as $display is public, and may get wrong values
-           if ($this->display 'instanceof myDisplayInterface) {
+           if ($this->display instanceof myDisplayInterface) {
                $display->display();
            } else {
                print Error when displaying\n;
@@ -17928,6 +17928,56 @@ See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern
 +-------------+--------------------------------+
 | Time To Fix | Slow (1 hour)                  |
 +-------------+--------------------------------+
+
+
+
+.. _self-using-trait:
+
+Self Using Trait
+################
+
+
+Trait uses itsel : this is uncessary. Traits may use themselves, or be used by other traits, that are using the initial trait itself. 
+
+PHP handles the situation quietly, by ignoring all extra use of the same trait, keeping only one valid version.
+
+.. code-block:: php
+
+   <?php
+   
+   // empty, but valid
+   trait a {} 
+   
+   // obvious self usage
+   trait b { use b; }
+   
+   // less obvious self usage
+   trait c { use d, e, f, g, h, c; }
+   
+   // level 2 self usage
+   trait i { use j; }
+   trait j { use i; }
+   
+   ?>
+
+
+See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the extra usage of the trait.
+
++-------------+------------------------------+
+| Short name  | Traits/SelfUsingTrait        |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
 
 
 
@@ -18118,16 +18168,16 @@ This is good for readability, and help at understanding the code. This is especi
    switch ($x) {
        // Is it a fallthrough or not ? 
        case 1:
-           doSomething(); 'break;
+           doSomething(); break;
    
-       // Easily spotted 'break.
+       // Easily spotted break.
        case 1:
            doSomethingElse(); 
-           'break;
+           break;
    
        default : 
            doDefault(); 
-           'break;
+           break;
    }
    
    ?>
@@ -18301,24 +18351,24 @@ Unsetting objects and resources explicitely in the destructor is a good practice
    <?php
    
    class x {
-       function '__construct() {
+       function __construct() {
            $this->p = new y();
        }
    
-       function '__destruct() {
-           print '__METHOD__.PHP_EOL;
+       function __destruct() {
+           print __METHOD__.PHP_EOL;
            unset($this->p);
        }
    }
    
    class y {
-       function '__construct() {
-           print '__METHOD__.PHP_EOL;
+       function __construct() {
+           print __METHOD__.PHP_EOL;
            $this->p = new y();
        }
    
-       function '__destruct() {
-           print '__METHOD__.PHP_EOL;
+       function __destruct() {
+           print __METHOD__.PHP_EOL;
            unset($this->p);
        }
    }
@@ -18382,13 +18432,13 @@ Finally, short names makes the rest of the code readable.
    new a\b\c\d\e\f\g();
    
    // long name, difficult to read, prone to silent dead code if namespace change.
-   if ($o 'instanceof a\b\c\d\e\f\g) {
+   if ($o instanceof a\b\c\d\e\f\g) {
        
    }
    
    // short names Easy to update all at once.
    new Object();
-   if ($o 'instanceof Object) {
+   if ($o instanceof Object) {
        
    }
    
@@ -18558,7 +18608,7 @@ PHP 7 introduced the ``??`` operator, that replaces longer structures to set def
    
    // Fetches the request parameter user and results in 'nobody' if it doesn't exist
    $username = $_GET['user'] ?? 'nobody';
-   // equivalent to: $username = 'isset($_GET['user']) ? $_GET['user'] : 'nobody';
+   // equivalent to: $username = isset($_GET['user']) ? $_GET['user'] : 'nobody';
     
    // Calls a hypothetical model-getting function, and uses the provided default if it fails
    $model = Model::get($id) ?? $default_model;
@@ -18729,7 +18779,7 @@ Methods which are overwritten by a child class are omitted : the parent class ac
    <?php
    
    class foo {
-       public function '__construct() {
+       public function __construct() {
            // This method should do something locally, or be removed.
        }
    }
@@ -18737,9 +18787,9 @@ Methods which are overwritten by a child class are omitted : the parent class ac
    class bar extends foo {
        private $a = 1;
        
-       public function '__construct() {
+       public function __construct() {
            // Calling parent:: is sufficient
-           parent::'__construct();
+           parent::__construct();
        }
    
        public function barbar() {
@@ -18983,7 +19033,7 @@ Avoid writing a whole slow loop, and use the native `'array_column() <http://www
    // Slow and cumbersome code
    $bColumn = array();
    foreach($a as $k => $v) {
-       if ('isset($v['b'])) {
+       if (isset($v['b'])) {
            $bColumn[] = $v['b'];
        }
    }
@@ -19294,30 +19344,30 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
    // Optimized switch. 
    switch($b) {
        case "a":
-           'break;
+           break;
        case "b":
-           'break;
+           break;
        case "c":
-           'break;
+           break;
        case "d":
-           'break;
+           break;
        default :
-           'break;
+           break;
    }
    
    // Unoptimized switch. 
    // Try moving the foo() call in the default, to keep the rest of the switch optimized.
    switch($c) {
        case "a":
-           'break;
+           break;
        case foo($b):
-           'break;
+           break;
        case "c":
-           'break;
+           break;
        case "d":
-           'break;
+           break;
        default :
-           'break;
+           break;
    }
    
    ?>
@@ -20150,13 +20200,13 @@ When the case block is empty, this analysis doesn't report it : the case is then
    switch($variable) {
        case 1 :   // 1 is not reported, as it actually shares the same body as 33
        case 33 :  
-           'break ;
+           break ;
        case 2 : 
-           'break ;
+           break ;
        default: 
            ++$a;
        case 4 : 
-           'break ;
+           break ;
    }
    ?>
 
@@ -20210,23 +20260,23 @@ Note that if condition that uses strict typing (=== or !==) can't be converted t
    switch ($a) {
        case 1 : 
            doSomething(1);
-           'break 1;
+           break 1;
        
        case 2 : 
            doSomething(2);
-           'break 1;
+           break 1;
    
        case 3 : 
            doSomething(3);
-           'break 1;
+           break 1;
    
        case 4 : 
            doSomething(4);
-           'break 1;
+           break 1;
        
        default :
            doSomething();
-           'break 1;
+           break 1;
    }
    
    ?>
@@ -20261,13 +20311,13 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
    
    switch($a) {
        case 1 : 
-           'break;
+           break;
        default : 
-           'break;
+           break;
        case 2 : 
-           'break;
+           break;
        default :  // This default is never reached
-           'break;
+           break;
    }
    
    ?>
@@ -20312,11 +20362,11 @@ Switch statements hold a number of 'case' that cover all known situations, and a
    switch($format) {
        case 'gif' : 
            processGif();
-           'break 1;
+           break 1;
        
        case 'jpeg' : 
            processJpeg();
-           'break 1;
+           break 1;
            
        case 'bmp' :
            throw new UnsupportedFormat($format);
@@ -20328,11 +20378,11 @@ Switch statements hold a number of 'case' that cover all known situations, and a
    switch($format) {
        case 'text' : 
            processText();
-           'break 1;
+           break 1;
        
        case 'jpeg' : 
            processJpeg();
-           'break 1;
+           break 1;
            
        case 'rtf' :
            throw new UnsupportedFormat($format);
@@ -20504,19 +20554,19 @@ Thus, it is recommended to avoid throwing exceptions within the ``__destruct`` m
    
    // No exception thrown
    class Bar { 
-       function '__construct() {
-           throw new Exception(''__construct');
+       function __construct() {
+           throw new Exception('__construct');
        }
    
-       function '__destruct() {
+       function __destruct() {
            $this->cleanObject();
        }
    }
    
    // Potential crash
    class Foo { 
-       function '__destruct() {
-           throw new Exception(''__destruct');
+       function __destruct() {
+           throw new Exception('__destruct');
        }
    }
    
@@ -20745,7 +20795,7 @@ When a class is constructed with more than four dependencies, it should be split
    // This class relies on 5 other instances. 
    // It is probably doing too much.
    class Foo {
-       public function '__construct(
+       public function __construct(
                A $a, 
                B $b, 
                C $c,
@@ -21412,9 +21462,9 @@ or if some external libraries, such as PEAR, are not provided during the analysi
    // FPDF is a classic PDF class, that is usually omitted by Exakat. 
    $o = new FPDF();
    
-   // Exakat reports undefined classes in 'instanceof
+   // Exakat reports undefined classes in instanceof
    // PHP ignores them
-   if ($o 'instanceof SomeClass) {
+   if ($o instanceof SomeClass) {
        // doSomething();
    }
    
@@ -21538,8 +21588,8 @@ Undefined Insteadof
    
    class Talker {
        use A, B {
-           B::C 'insteadof A;
-           B::D 'insteadof A;
+           B::C insteadof A;
+           B::D insteadof A;
        }
    }
    
@@ -21579,7 +21629,7 @@ Some typehints or ``instanceof`` that are relying on undefined interfaces or cla
        // If undefinedInterface is undefined, this code lints but doesn't run
    }
    
-   if ($o 'instanceof undefinedInterface) {
+   if ($o instanceof undefinedInterface) {
        // This is silent dead code
    }
    
@@ -21928,7 +21978,7 @@ Properties that are not initialized in the constructor, nor at definition.
        private $i1 = 1, $i2;
        protected $u1, $u2;
        
-       function '__construct() {
+       function __construct() {
            $this->i2 = 1 + $this->u2;
        }
        
@@ -22216,10 +22266,10 @@ For example, it be located after throw, return, `'exit() <http://www.php.net/exi
    foreach($a as $b) {
        $c += $b;
        if ($c > 10) {
-           'continue 1;
+           continue 1;
        } else {
            $c--;
-           'continue;
+           continue;
        }
        $d += $e;   // this can't be reached
    }
@@ -22342,18 +22392,18 @@ It checks if an variable is of a specific class. However, if the referenced clas
        class C {}
        
        // This is OK, as C is defined in X
-       if ($o 'instanceof C) { }
+       if ($o instanceof C) { }
    
        // This is not OK, as C is not defined in global
-       // 'instanceof respects namespaces and use expressions
-       if ($o 'instanceof \C) { }
+       // instanceof respects namespaces and use expressions
+       if ($o instanceof \C) { }
    
        // This is not OK, as undefinedClass
-       if ($o 'instanceof undefinedClass) { }
+       if ($o instanceof undefinedClass) { }
    
        // This is not OK, as $class is now a full namespace. It actually refers to \c, which doesn't exist
        $class = 'C';
-       if ($o 'instanceof $class) { }
+       if ($o instanceof $class) { }
    }
    ?>
 
@@ -22806,8 +22856,8 @@ They should be removed, as they are probably dead code.
    
    $x = new c;
    
-   // Used in a 'instanceof
-   var_dump($x 'instanceof used); 
+   // Used in a instanceof
+   var_dump($x instanceof used); 
    
    // Used in a typehint
    function foo(Used $x) {}
@@ -23206,7 +23256,7 @@ When receiving a file via Upload, it is recommended to store it under a self-gen
    $extension = substr( strrchr($_FILES['upload']['name'], '.') ,1);
    if (!in_array($extension, array('gif', 'jpeg', 'jpg')) { 
        // process error
-       'continue;
+       continue;
    }
    // Md5 provides a name without special characters
    $name = md5($_FILES['upload']['filename']);
@@ -23385,7 +23435,7 @@ Since PHP 5.6 it is possible to import specific functions or constants from othe
    
    namespace A {
        const X = 1;
-       function foo() { echo '__FUNCTION__; }
+       function foo() { echo __FUNCTION__; }
    }
    
    namespace My{
@@ -23522,9 +23572,9 @@ Last, ``instanceof`` may be upgraded to Typehint, by moving it to the method sig
            return $o->method();
        }
    
-       // use 'instanceof
+       // use instanceof
        public function bar($o) {
-           if ($o 'instanceof myClass) {  // Now, we know which methods are available
+           if ($o instanceof myClass) {  // Now, we know which methods are available
                return $o->method();
            }
            
@@ -23775,7 +23825,7 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
    /* check connection */
    if ($mysqli->connect_errno) {
        printf(Connect failed: %s\n, $mysqli->connect_error);
-       'exit();
+       exit();
    }
    
    /* Create table doesn't return a resultset */
@@ -23802,7 +23852,7 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
    /* check connection */
    if (mysqli_connect_errno()) {
        printf(Connect failed: %s\n, mysqli_connect_error());
-       'exit();
+       exit();
    }
    
    /* Create table doesn't return a resultset */
@@ -23849,8 +23899,8 @@ PHP allocate memory at the end of the double-quoted string, making only one call
    $a = 'foo and ' . $bar;
    
    // Constants can't be used with double quotes
-   $a = 'foo and ' . '__DIR__;
-   $a = foo and '__DIR__; // '__DIR__ is not interpolated
+   $a = 'foo and ' . __DIR__;
+   $a = foo and __DIR__; // __DIR__ is not interpolated
    
    ?>
 
@@ -23883,7 +23933,7 @@ Use `'pathinfo() <http://www.php.net/pathinfo>`_ function instead of string mani
    
    $filename = '/path/to/file.php';
    
-   // With 'pathinfo();
+   // With pathinfo();
    $details = pathinfo($filename);
    print $details['extension'];  // also capture php
    
@@ -23975,7 +24025,7 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
    <?php
    
    // Where the tmp is : 
-   file_put_contents('sys_get_temp_dir().'/tempFile.txt', $content);
+   file_put_contents(sys_get_temp_dir().'/tempFile.txt', $content);
    
    
    // Avoid hard-coding tmp folder : 
@@ -24138,15 +24188,15 @@ is_countable() accepts arrays and object whose class implements \countable.
    
    function foo($arg) {
        if (!is_countable($arg)) {
-           // $arg cannot be passed to 'count()
+           // $arg cannot be passed to count()
            return 0
        }
        return count($arg);
    }
    
    function bar($arg) {
-       if (!is_array($arg) and !$x 'instanceof \Countable) {
-           // $arg cannot be passed to 'count()
+       if (!is_array($arg) and !$x instanceof \Countable) {
+           // $arg cannot be passed to count()
            return 0
        }
    
@@ -24289,7 +24339,7 @@ This analysis reports `'pathinfo() <http://www.php.net/pathinfo>`_ usage, withou
        return $a['dirname'].'/'.$a['basename'];
    }
    
-   // This is OK : 3 calls to 'pathinfo() is slower than array access.
+   // This is OK : 3 calls to pathinfo() is slower than array access.
    function foo_deb() {
        $a = pathinfo($file4);
        return  $a['dirname'].'/'.$a['filename'].'.'.$a['extension'];
@@ -24348,9 +24398,9 @@ Other sources of entropy that should be replaced by random_int() : `'microtime()
        // process case of not enoug random values
    }
    
-   // This is also a source of entropy, based on 'srand()
+   // This is also a source of entropy, based on srand()
    // random_int() is a drop-in replacement here
-   $a = sha256('uniqid());
+   $a = sha256(uniqid());
    
    ?>
 
@@ -24757,7 +24807,7 @@ Among the task of a catch clause : log the exception, clean any mess that was in
    function foo($a) {
        try {
            $b = doSomething($a);
-       } catch ('Throwable $e) {
+       } catch (Throwable $e) {
            // No log of the exception : no one knows it happened.
            
            // return immediately ? 
@@ -24839,14 +24889,14 @@ Class constructor that have empty bodies are useless. They may be removed.
    <?php
    
    class X {
-       function '__construct() {
+       function __construct() {
            // Do nothing
        }
    }
    
    class Y extends X {
        // Useful constructor, as it prevents usage of the parent
-       function '__construct() {
+       function __construct() {
            // Do nothing
        }
    }
@@ -24968,7 +25018,7 @@ Here the useless instructions that are spotted :
    $string = 'This part '.$is.' usefull but '.$not.'';
    
    // This is a typo, that PHP turns into a constant, then a string, then nothing.
-   'continue;
+   continue;
    
    // Empty string in a concatenation
    $a = 'abc' . '';
@@ -24981,9 +25031,9 @@ Here the useless instructions that are spotted :
        return $a++;
    }
    
-   // 'array_replace() with only one argument
+   // array_replace() with only one argument
    $replaced = array_replace($array);
-   // 'array_replace() is OK with ... 
+   // array_replace() is OK with ... 
    $replaced = array_replace(...$array);
    
    // @ operator on source array, in foreach, or when assigning literals
@@ -25042,7 +25092,7 @@ Interfaces should be used in Typehint or with the `'instanceof <http://php.net/m
        }
        
        function bar($arg) { 
-           if (!($arg 'instanceof i)) {
+           if (!($arg instanceof i)) {
                // Now, $arg is always an 'i'
            }
        }
@@ -25173,7 +25223,7 @@ When return is void, and the last element in a function, it is also useless.
    <?php
    
    class foo {
-       function '__construct() {
+       function __construct() {
            // return is not used by PHP
            return 2;
        }
@@ -25222,7 +25272,7 @@ This switch has only one case. It may very well be replaced by a ifthen structur
    switch($a) {
        case 1:
            doSomething();
-           'break;
+           break;
    }
    
    // Same as 
@@ -25675,10 +25725,10 @@ When the number arguments is too high for custom functions, PHP ignores the argu
    <?php
    
    echo strtoupper('This function is', 'ignoring arguments');
-   //Warning: 'strtoupper() expects exactly 1 parameter, 2 given in Command line code on line 1
+   //Warning: strtoupper() expects exactly 1 parameter, 2 given in Command line code on line 1
    
-   echo 'strtoupper();
-   //Warning: 'strtoupper() expects exactly 1 parameter, 0 given in Command line code on line 1
+   echo strtoupper();
+   //Warning: strtoupper() expects exactly 1 parameter, 0 given in Command line code on line 1
    
    function foo($argument) {}
    echo foo();
@@ -25996,15 +26046,15 @@ The magic constant `'__DIR__ <http://php.net/manual/en/language.constants.predef
 
    <?php
    
-   // '__DIR__ = /a/b/c
+   // __DIR__ = /a/b/c
    // $filePath = /a/b/c/g.php
    
    // /a/b/c/d/e/f.txt : correct path
-   echo '__DIR__.'/d/e/f.txt';
+   echo __DIR__.'/d/e/f.txt';
    echo dirname($filePath).'/d/e/f.txt';
    
    // /a/b/cd/e/f.txt : most probably incorrect path
-   echo '__DIR__.'d/e/f.txt';
+   echo __DIR__.'d/e/f.txt';
    echo dirname($filePath).'d/e/f.txt';
    
    ?>
@@ -26040,7 +26090,7 @@ It has been introduced in PHP 5.6. In the previous versions of PHP, this method 
        private $bar = 1;
        private $reallyHidden = 2;
        
-       function '__debugInfo() {
+       function __debugInfo() {
            return ['bar' => $this->bar,
                    'reallyHidden' => 'Secret'];
        }
@@ -26096,12 +26146,12 @@ In fact, `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ may
    class myString {
        private $string = null;
        
-       public function '__construct($string) {
+       public function __construct($string) {
            $this->string = $string;
        }
        
-       public function '__toString() {
-           // Do not throw exceptions in '__toString
+       public function __toString() {
+           // Do not throw exceptions in __toString
            if (!is_string($this->string)) {
                throw new Exception("$this->string is not a string!!");
            }
@@ -26238,7 +26288,7 @@ eval() Without Try
    //PHP 7 style
    try {
        eval($code);
-   } catch ('ParseError $e) {
+   } catch (ParseError $e) {
        cleanUpAfterEval();
    }
    
@@ -26322,7 +26372,7 @@ These functions build the foundation for accessing Berkeley DB style databases.
    
    if (!$id) {
        echo 'dba_open failed'.PHP_EOL;
-       'exit;
+       exit;
    }
    
    dba_replace('key', 'This is an example!', $id);
@@ -26626,7 +26676,7 @@ This extension is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0
    <?php
    $result = mysql_query('SELECT * WHERE 1=1');
    if (!$result) {
-       'die('Invalid query: ' . mysql_error());
+       die('Invalid query: ' . mysql_error());
    }
    
    ?>
@@ -26862,7 +26912,7 @@ Until PHP 7, it was possible to use arrays as constants, but it was not possible
    <?php
    const X = [1,2,3];
    
-   if ('isset(X[4])) {}
+   if (isset(X[4])) {}
    ?>
 
 
@@ -27163,8 +27213,8 @@ self, parent and static may be used in a trait : their actual value will be only
        doSomething();
    }
    
-   // as a 'instanceof
-   if ($x 'instanceof static) {
+   // as a instanceof
+   if ($x instanceof static) {
        doSomething();
    }
    
@@ -27207,7 +27257,7 @@ When in doubt about backward compatibility, just drop the typehint. Otherwise, u
    class foo { function bar(\Exception $e) {} }
    
    // PHP 7+ typehint 
-   class foo { function bar('Throwable $e) {} }
+   class foo { function bar(Throwable $e) {} }
    
    // PHP 5 and PHP 7 compatible typehint (note : there is none)
    class foo { function bar($e) {} }
