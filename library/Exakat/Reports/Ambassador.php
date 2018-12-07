@@ -177,6 +177,7 @@ class Ambassador extends Reports {
         $this->generateProcFiles();
         $this->generateClassTree();
         $this->generateTraitTree();
+        $this->generateTraitMatrix();
         $this->generateInterfaceTree();
 
         $this->generateDashboard();
@@ -2895,6 +2896,108 @@ SQL
        
     }
 
+    private function generateTraitMatrix() {
+
+        // nombre de method en conflict possible
+        // ce trait inclut l'autre
+
+        // list of all traits, for building the table 
+        $query = <<<SQL
+SELECT name FROM cit WHERE type="trait" ORDER BY name
+SQL;
+        $res = $this->sqlite->query($query);
+
+        $traits = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $traits[] = $row['name'];
+        }
+        
+        // INIT
+        $table = array_fill_keys($traits, array_fill_keys($traits, array()));
+        
+        // Get conflicts
+        $query = <<<SQL
+SELECT
+   t1.name AS t1,
+   t2.name AS t2,
+   LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) AS method 
+FROM
+   cit AS t1 
+   JOIN
+      methods AS m1 
+      ON m1.citId = t1.id 
+   JOIN
+      methods AS m2 
+      ON m1.id != m2.id 
+      AND LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) = LOWER(SUBSTR(m2.METHOD, INSTR(m2.METHOD, 'function ') + 9, INSTR(m2.METHOD, '(') - (INSTR(m2.METHOD, 'function ') + 9))) 
+   JOIN
+      cit AS t2 
+      ON m2.citId = t2.id 
+WHERE
+   t1.type = 'trait' 
+   AND t2.type = 'trait'
+SQL;
+        $res = $this->sqlite->query($query);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            print_r($row);
+            $table[$row['t1']][$row['t2']][] = $row['method'];
+        }
+        
+        // Get trait usage
+        $usage = array();
+        $query = <<<SQL
+SELECT
+   t1.name AS t1,
+   t2.name AS t2
+FROM
+   cit AS t1 
+   JOIN
+      cit_implements AS ttu 
+      ON ttu.implementing = t1.id AND
+         ttu.type = 'use'
+   JOIN
+      cit AS t2 
+      ON ttu.implements = t2.id 
+WHERE
+   t1.type = 'trait' 
+   AND t2.type = 'trait'
+SQL;
+        $res = $this->sqlite->query($query);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $usage[$row['t1']][$row['t2']][] = 1;
+        }
+        
+        $rows = array();
+        foreach($table as $name => $row) {
+            $cells = array();
+            foreach($row as $t2 => $r) {
+                $content = empty($r) ? '&nbsp;': implode('(), ', $r).'()';
+                $background = isset($usage[$name][$t2]) ? ' bgcolor="darkgray"' : '';
+                
+                $cells[] = "<td$background>$content</td>";
+            }
+            $cells = implode('', $cells);
+            $rows[] = "<tr><td>$name</td>$cells</tr>\n";
+        }
+        
+        $cells = implode("</td><td>", $traits);
+        $rows = implode('', $rows);
+        $theTable =         $thetable = <<<HTML
+<table class="table table-striped">
+    <tr>
+        <td>&nbsp;</td>
+        <td>$cells</td>
+    </tr>
+    $rows
+</table>
+HTML;
+        
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Traits matrix');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the trait matrix. Conflicting methods between any two traits are listed in the cells : when they are used in the same class, those traits will require conflict resolutions. And dark gray cells are traits that are actually included one into the other.');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_traitmatrix', $html);    }
+    
     private function generateTraitTree() {
         $list = array();
 
