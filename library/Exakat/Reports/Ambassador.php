@@ -2939,7 +2939,6 @@ WHERE
 SQL;
         $res = $this->sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            print_r($row);
             $table[$row['t1']][$row['t2']][] = $row['method'];
         }
         
