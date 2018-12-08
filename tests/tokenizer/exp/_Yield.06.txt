@@ -46,15 +46,15 @@ Label : PROJECT
                   Label : CODE
                     11
             Label : EXPRESSION
-              10
-              Label : YIELD
-                17
-                Label : LEFT
+              17
+              Label : LEFT
+                10
+                Label : YIELD
                   15
-                Label : RIGHT
-                  18
-                  Label : ARGUMENT
-                    6
+              Label : RIGHT
+                18
+                Label : ARGUMENT
+                  6
             Label : EXPRESSION
               10
               Label : YIELD

@@ -166,13 +166,13 @@ Label : PROJECT
                         Label : CLONE
                           24
                     Label : EXPRESSION
-                      43
-                      Label : YIELD
-                        36
-                        Label : INDEX
+                      36
+                      Label : INDEX
+                        43
+                        Label : YIELD
                           34
-                        Label : VALUE
-                          35
+                      Label : VALUE
+                        35
                     Label : EXPRESSION
                       44
                       Label : YIELD

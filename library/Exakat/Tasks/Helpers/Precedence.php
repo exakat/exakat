@@ -63,6 +63,9 @@ class Precedence {
                         'T_STAR'                        => 7,
                         'T_PERCENTAGE'                  => 7,
 
+                        'T_YIELD'                       => 7,
+                        'T_YIELD_FROM'                  => 7,
+
                         'T_PLUS'                        => 8,
                         'T_MINUS'                       => 8,
                         'T_DOT'                         => 8,
@@ -126,8 +129,6 @@ class Precedence {
 
                         'T_RETURN'                      => 31,
                         'T_THROW'                       => 31,
-                        'T_YIELD'                       => 31,
-                        'T_YIELD_FROM'                  => 31,
                         'T_COLON'                       => 31,
                         'T_COMMA'                       => 31,
                         'T_CLOSE_TAG'                   => 31,

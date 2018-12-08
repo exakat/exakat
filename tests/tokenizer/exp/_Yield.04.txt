@@ -18,33 +18,33 @@ Label : PROJECT
               Label : BLOCK
                 8
                 Label : EXPRESSION
-                  18
-                  Label : YIELD
-                    23
-                    Label : INDEX
-                      20
-                      Label : CONCAT
+                  23
+                  Label : INDEX
+                    20
+                    Label : CONCAT
+                      18
+                      Label : YIELD
                         19
-                      Label : CONCAT
-                        13
-                        Label : METHOD
-                          22
-                          Label : ARGUMENT
-                            6
-                          Label : NAME
-                            22
-                        Label : OBJECT
-                          21
-                    Label : VALUE
+                    Label : CONCAT
                       13
                       Label : METHOD
-                        25
+                        22
                         Label : ARGUMENT
                           6
                         Label : NAME
-                          25
+                          22
                       Label : OBJECT
-                        24
+                        21
+                  Label : VALUE
+                    13
+                    Label : METHOD
+                      25
+                      Label : ARGUMENT
+                        6
+                      Label : NAME
+                        25
+                    Label : OBJECT
+                      24
               Label : FINAL
                 3
                 Label : EXPRESSION

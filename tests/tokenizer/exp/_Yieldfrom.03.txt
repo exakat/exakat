@@ -48,13 +48,13 @@ Label : PROJECT
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  9
-                  Label : YIELD
-                    10
-                    Label : LEFT
+                  10
+                  Label : LEFT
+                    9
+                    Label : YIELD
                       6
-                    Label : RIGHT
-                      11
+                  Label : RIGHT
+                    11
               Label : CATCH
                 12
                 Label : BLOCK
@@ -74,13 +74,13 @@ Label : PROJECT
                 Label : VARIABLE
                   15
             Label : EXPRESSION
-              9
-              Label : YIELD
-                10
-                Label : LEFT
+              10
+              Label : LEFT
+                9
+                Label : YIELD
                   6
-                Label : RIGHT
-                  21
+              Label : RIGHT
+                21
           Label : DEFINITION
             16
             Label : DEFINITION
@@ -112,13 +112,13 @@ Label : PROJECT
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  9
-                  Label : YIELD
-                    26
-                    Label : INDEX
+                  26
+                  Label : INDEX
+                    9
+                    Label : YIELD
                       25
-                    Label : VALUE
-                      27
+                  Label : VALUE
+                    27
               Label : CATCH
                 12
                 Label : BLOCK

@@ -36,17 +36,17 @@ Label : PROJECT
                 Label : EXPRESSION
                   7
               Label : CONDITION
-                12
-                Label : YIELD
-                  15
-                  Label : LEFT
+                15
+                Label : LEFT
+                  12
+                  Label : YIELD
                     13
                     Label : ARGUMENT
                       7
                     Label : NAME
                       13
-                  Label : RIGHT
-                    16
+                Label : RIGHT
+                  16
           Label : DEFINITION
             5
             Label : ARGUMENT

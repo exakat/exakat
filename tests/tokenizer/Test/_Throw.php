@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Throw extends Tokenizer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function test_Throw01()  { $this->generic_test('_Throw.01'); }
     public function test_Throw02()  { $this->generic_test('_Throw.02'); }
@@ -21,5 +21,6 @@ class _Throw extends Tokenizer {
     public function test_Throw10()  { $this->generic_test('_Throw.10'); }
     public function test_Throw11()  { $this->generic_test('_Throw.11'); }
     public function test_Throw12()  { $this->generic_test('_Throw.12'); }
+    public function test_Throw13()  { $this->generic_test('_Throw.13'); }
 }
 ?>

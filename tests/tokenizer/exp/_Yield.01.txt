@@ -126,23 +126,23 @@ Label : PROJECT
                     Label : VARIABLE
                       13
                 Label : EXPRESSION
-                  18
-                  Label : YIELD
-                    24
-                    Label : CONDITION
+                  24
+                  Label : CONDITION
+                    18
+                    Label : YIELD
                       23
                       Label : MEMBER
                         22
                       Label : OBJECT
                         13
-                    Label : ELSE
-                      27
-                      Label : LEFT
-                        26
-                      Label : RIGHT
-                        26
-                    Label : THEN
-                      25
+                  Label : ELSE
+                    27
+                    Label : LEFT
+                      26
+                    Label : RIGHT
+                      26
+                  Label : THEN
+                    25
               Label : FINAL
                 3
                 Label : EXPRESSION
