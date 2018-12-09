@@ -103,8 +103,9 @@ GREMLIN;
         $apply = <<<GREMLIN
 out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
 .in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
+.filter{ cbClassNode.value('noDelimiter').length() > 0}
 .sideEffect{
-    cbClass = cbClassNode.value('noDelimiter').toLowerCase(); //.replaceAll( "\\\\\\\\", "\\\\" );
+    cbClass = cbClassNode.value('noDelimiter').toLowerCase(); 
     if (cbClass.toString()[0] != "\\\\") {
         cbClass = "\\\\" + cbClass;
     };
