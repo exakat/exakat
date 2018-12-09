@@ -558,11 +558,23 @@ g.V().hasLabel("Parent").as('parent')
      .addE("DEFINITION")
      .to("parent")
      .count()
-
 GREMLIN;
         $res = $this->gremlin->query($query);
-        $count = $res->toInt();
-        display("Set $count parent definitions");
+        $count1 = $res->toInt();
+
+        $query = <<<GREMLIN
+g.V().hasLabel("String").has('fullnspath', '\\\\parent').as('parent')
+     .repeat( __.in($this->linksIn) ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
+     .out("EXTENDS").in("DEFINITION")
+     .addE("DEFINITION")
+     .to("parent")
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        $count2 = $res->toInt();
+
+
+        display("Set ".($count1 + $count2)." parent definitions");
         $this->log->log(__METHOD__);
     }
     
