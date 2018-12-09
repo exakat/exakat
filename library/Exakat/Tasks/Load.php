@@ -908,6 +908,7 @@ class Load extends Tasks {
                     
                     if ($this->tokens[$this->id][0] === $this->phptokens::T_NUM_STRING) {
                         $index = $this->processSingle('Integer');
+                        $this->runPlugins($index);
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_MINUS) {
                         ++$this->id;
                         $index            = $this->processSingle('Integer');
@@ -2466,8 +2467,7 @@ class Load extends Tasks {
 
         $this->pushExpression($string);
         
-        // Static ?
-        if (in_array($string->atom, array('Parent', 'Self', 'Newcall'))) {
+        if (in_array($string->atom, array('Parent', 'Self', 'Static', 'Newcall'))) {
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
                 $string->fullnspath = $fullnspath;
@@ -2587,10 +2587,12 @@ class Load extends Tasks {
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->line       = $this->tokens[$this->id][2];
             $name->token      = $this->getToken($this->tokens[$this->id][0]);
-
+            
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
+
+            $this->calls->addCall('class', $fullnspath, $name);
 
             $this->pushExpression($name);
             return $name;
@@ -4218,7 +4220,15 @@ class Load extends Tasks {
                 $literal->noDelimiter = substr($literal->code, 1, -1);
             }
 
-            $this->calls->addNoDelimiterCall($literal);
+            if (in_array(mb_strtolower($literal->noDelimiter),  array('parent', 'self', 'static'))) {
+                list($fullnspath, $aliased) = $this->getFullnspath($literal, 'class');
+                $literal->fullnspath = $fullnspath;
+                $literal->aliased    = $aliased;
+
+                $this->calls->addCall('class', $fullnspath, $literal);
+            } else {
+                $this->calls->addNoDelimiterCall($literal);
+            }
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NUM_STRING) {
             $literal->delimiter   = '';
             $literal->noDelimiter = $literal->code;
@@ -4228,7 +4238,6 @@ class Load extends Tasks {
             $literal->delimiter   = '';
             $literal->noDelimiter = '';
         }
-        
         $this->runPlugins($literal);
 
         if (function_exists('mb_detect_encoding')) {
@@ -4409,6 +4418,11 @@ class Load extends Tasks {
         $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
         return $operator;
     }
 
@@ -4452,7 +4466,7 @@ class Load extends Tasks {
         $operator = $this->popExpression();
         $this->pushExpression($operator);
 
-            $this->runPlugins($operator, array('YIELD' => $yieldfrom) );
+        $this->runPlugins($operator, array('YIELD' => $yieldfrom) );
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -5138,12 +5152,12 @@ class Load extends Tasks {
                 ++$this->id;
             }
         }
-
+        
         $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
-        $fullcode[] = $contains->fullcode;
-        $concat[] = $contains;
-        $noDelimiter .= $contains->noDelimiter;
+        $fullcode[]     = $contains->fullcode;
+        $concat[]       = $contains;
+        $noDelimiter   .= $contains->noDelimiter;
         $contains->rank = ++$rank;
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
@@ -5533,7 +5547,23 @@ class Load extends Tasks {
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self', 'Newcall'))) {
+        } elseif (in_array($name->atom, array('Static', 'Self'))) {
+            if (empty($this->currentClassTrait)) {
+                return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
+            } else {
+                return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
+            }
+        } elseif ($name->atom === 'Newcall' && mb_strtolower($name->code) === 'static') {
+            if (empty($this->currentClassTrait)) {
+                return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
+            } else {
+                return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
+            }
+        } elseif (in_array($name->atom, array('Parent'))) {
+            return array('\\parent', self::NOT_ALIASED);
+        } elseif (in_array($name->atom, array('Boolean', 'Null'))) {
+            return array('\\'.mb_strtolower($name->fullcode), self::NOT_ALIASED);
+        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Newcall'))) {
             $fnp = mb_strtolower($name->code);
 
             if (($offset = strpos($fnp, '\\')) === false) {
@@ -5543,23 +5573,7 @@ class Load extends Tasks {
             }
             
             // This is an identifier, self or parent
-            if ($fnp === 'self' ||
-                $fnp === 'static') {
-                if (empty($this->currentClassTrait)) {
-                    return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
-                } else {
-                    return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
-                }
-
-            } elseif ($fnp === 'parent') {
-                if (empty($this->currentParentClassTrait)) {
-                    return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
-                } else {
-                    return array($this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
-                }
-
-            // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][$fnp])) {
+            if ($type === 'class' && isset($this->uses['class'][$fnp])) {
                 $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
                 return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
 
@@ -5587,8 +5601,16 @@ class Load extends Tasks {
                 return array($this->namespace.mb_strtolower($name->fullcode), self::NOT_ALIASED);
             }
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
+            if (in_array(mb_strtolower($name->noDelimiter), array('self', 'static'))) {
+                if (empty($this->currentClassTrait)) {
+                    return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
+                } else {
+                    return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
+                }
+            }
+            
             $prefix =  str_replace('\\\\', '\\', mb_strtolower($name->noDelimiter));
-            $prefix = '\\'.$prefix;
+            $prefix = "\\$prefix";
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
