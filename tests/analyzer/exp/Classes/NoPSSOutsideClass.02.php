@@ -3,6 +3,7 @@
 $expected     = array('$a instanceof self',
                       '$a instanceof PARENT',
                       '$a instanceof static',
+                      'function foo3(parent $ac) { /**/ } ',
                      );
 
 $expected_not = array('$ac instanceof self',

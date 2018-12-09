@@ -49,8 +49,38 @@ class NoPSSOutsideClass extends Analyzer {
              ->atomIs(self::$RELATIVE_CLASS)
              ->back('first');
         $this->prepareQuery();
+        
+        $this->atomIs('Arrayliteral')
+             ->is('count', 2)
+             ->hasNoClassTrait()
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->noDelimiterIs(array('static', 'self', 'parent'))
+             ->back('first');
+        $this->prepareQuery();
+        
+        // typehint are checked by PHP for functions and closures
+        $this->atomIs('Parent')
+             ->inIs('TYPEHINT')
+             ->inIs('ARGUMENT')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->_as('results')
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs('Class')
+             ->hasNoOut('EXTENDS')
+             ->back('results');
+        $this->prepareQuery();
 
-        // typehint is actually taken into account by PHP
+        $this->atomIs('Parent')
+             ->inIs('RETURNTYPE')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->_as('results')
+             ->analyzerIsNot('self')
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs('Class')
+             ->hasNoOut('EXTENDS')
+             ->back('results');
+        $this->prepareQuery();
     }
 }
 

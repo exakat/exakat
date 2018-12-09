@@ -1763,7 +1763,7 @@ class Load extends Tasks {
 
     private function makeNsname() {
         $current = $this->id;
-
+        
         if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR             &&
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                   &&
             in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
@@ -1774,10 +1774,24 @@ class Load extends Tasks {
 
         } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
-                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
+                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'            &&
                   $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
 
             $nsname = $this->addAtom('Null');
+
+            $nsname->noDelimiter = '';
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
+            $nsname = $this->addAtom('Parent');
+            $nsname->fullnspath = '\\parent';
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
+            $nsname = $this->addAtom('Self');
+            $nsname->fullnspath = '\\self';
+        } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
+                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
+                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'self'            &&
+                  $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
+
+            $nsname = $this->addAtom('Self');
 
             $nsname->noDelimiter = '';
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_CALLABLE) {
