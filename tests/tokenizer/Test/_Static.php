@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Static extends Tokenizer {
-    /* 19 methods */
+    /* 20 methods */
 
     public function test_Static01()  { $this->generic_test('_Static.01'); }
     public function test_Static02()  { $this->generic_test('_Static.02'); }
@@ -29,5 +29,6 @@ class _Static extends Tokenizer {
     public function test_Static17()  { $this->generic_test('_Static.17'); }
     public function test_Static18()  { $this->generic_test('_Static.18'); }
     public function test_Static19()  { $this->generic_test('_Static.19'); }
+    public function test_Static20()  { $this->generic_test('_Static.20'); }
 }
 ?>
