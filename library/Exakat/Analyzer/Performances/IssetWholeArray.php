@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class IssetWholeArray extends Analyzer {
-    public function analyze() { 
+    public function analyze() {
         // isset($a) || isset($a[1])
         $this->atomIs('Isset')
              ->outIs('ARGUMENT')
@@ -34,7 +34,7 @@ class IssetWholeArray extends Analyzer {
              ->atomIs('Variablearray')
              ->savePropertyAs('fullcode', 'array')
              ->back('first')
-             ->inIsIE('NOT') // Skip not 
+             ->inIsIE('NOT') // Skip not
              ->inIs(array('LEFT', 'RIGHT'))
              ->_as('results')
              ->outIs(array('LEFT', 'RIGHT'))
@@ -54,7 +54,7 @@ class IssetWholeArray extends Analyzer {
              ->atomIsNot('Variablearray')
              ->savePropertyAs('fullcode', 'array')
              ->back('first')
-             ->inIsIE('NOT') // Skip not 
+             ->inIsIE('NOT') // Skip not
              ->inIs(array('LEFT', 'RIGHT'))
              ->_as('results')
              ->outIs(array('LEFT', 'RIGHT'))
