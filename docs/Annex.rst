@@ -117,6 +117,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
 * `ext/array <http://php.net/manual/en/book.array.php>`_
 * `ext/php-ast <https://pecl.php.net/package/ast>`_
+* `ext/async <https://github.com/concurrent-php/ext-async>`_
 * `ext/bcmath <http://www.php.net/bcmath>`_
 * `ext/bzip2 <http://php.net/bzip2>`_
 * `ext/cairo <https://cairographics.org/>`_
@@ -255,6 +256,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
 * `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
+* `ext/wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
 * `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `ext/wincache <http://www.php.net/wincache>`_
@@ -318,6 +320,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
+* Shopware
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -391,11 +394,19 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.7
+
+  * Method Could Be Static (Classes/CouldBeStatic)
+  * Multiple Usage Of Same Trait (Traits/MultipleUsage ; Unassigned)
+  * Self Using Trait (Traits/SelfUsingTrait ; Dead code)
+  * ext/wasm (Extensions/Extwasm ; Appinfo)
+
 * 1.5.6
 
   * Isset() On The Whole Array (Performances/IssetWholeArray ; Performances, Suggestions)
   * Useless Alias (Traits/UselessAlias ; Analyze, LintButWontExec)
-  * ext/sdl (Extensions/Extsdl)
+  * ext/async (Extensions/Extasync)
+  * ext/sdl (Extensions/Extsdl ; Appinfo)
 
 * 1.5.5
 
@@ -1425,7 +1436,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Could Be Private Property (Classes/CouldBePrivate ; Codacy, ClassReview)
   * Property Is Modified (Classes/IsModified ; Internal)
   * Property Is Read (Classes/IsRead ; Internal)
-  * Property Names (Classes/PropertyDefinition ; Appinfo)
+  * Property Names (Classes/PropertyDefinition ; Internal)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Internal)
   * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
@@ -1556,7 +1567,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Use Instanceof (Classes/UseInstanceof ; Analyze, Codacy, Simple)
   * Use Lower Case For Parent, Static And Self (Php/CaseForPSS ; CompatibilityPHP54, CompatibilityPHP53, Codacy)
   * Use Nullable Type (Php/UseNullableType ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
-  * Use Object Api (Php/UseObjectApi ; Analyze, ClearPHP, Codacy, Simple)
+  * Use PHP Object API (Php/UseObjectApi ; Analyze, ClearPHP, Codacy, Simple)
   * Use Pathinfo (Php/UsePathinfo ; Analyze, Codacy, Simple, Level 3)
   * Use System Tmp (Structures/UseSystemTmp ; Analyze, Codacy, Simple, Level 3)
   * Use This (Classes/UseThis ; Internal)
@@ -1763,7 +1774,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-49 PHP error message detailled : 
+53 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -1777,11 +1788,15 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
 * :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
 * :ref:`Cannot access parent\:\: when current class scope has no parent <avoid-self-in-interface>`
+* :ref:`Cannot access parent\:\: when current class scope has no parent <undefined-parent>`
 * :ref:`Cannot access private const  <unreachable-class-constant>`
 * :ref:`Cannot access static\:\: when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
 * :ref:`Cannot pass parameter 1 by reference <only-variable-for-reference>`
+* :ref:`Cannot use "parent" when no class scope is active <self,-parent,-static-outside-class>`
+* :ref:`Cannot use "self" when no class scope is active <self,-parent,-static-outside-class>`
+* :ref:`Cannot use "static" when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset()-with-constant>`
 * :ref:`Cannot use object of type Foo as array <$this-is-not-an-array>`
 * :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
@@ -2041,6 +2056,7 @@ List of external links mentionned in this documentation.
 * `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
 * `EXP30-C. Do not depend on the order of evaluation for side effects <https://wiki.sei.cmu.edu/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects>`_
 * `expect <http://php.net/manual/en/book.expect.php>`_
+* `ext-async <https://github.com/concurrent-php/ext-async>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
 * `ext/gender manual <http://php.net/manual/en/book.gender.php>`_
@@ -2072,15 +2088,15 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2259,8 +2275,9 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `phpsdl <https://github.com/Ponup/phpsdl>`_
@@ -2296,6 +2313,7 @@ List of external links mentionned in this documentation.
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
 * `RFC: Return Type Declarations <https://wiki.php.net/rfc/return_types>`_
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
+* `Salted Password Hashing - Doing it Right <https://crackstation.net/hashing-security.htm>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Scope Resolution Operator (::) ¶ <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
@@ -2319,8 +2337,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2456,6 +2474,7 @@ Analyze
 |   analyzer[] = "Classes/ConstantClass";
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeFinal";
+|   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
 |   analyzer[] = "Classes/DontUnsetProperties";
@@ -2811,6 +2830,7 @@ ClassReview
 |   analyzer[] = "Classes/CouldBeProtectedConstant";
 |   analyzer[] = "Classes/CouldBeProtectedMethod";
 |   analyzer[] = "Classes/CouldBeProtectedProperty";
+|   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
@@ -3355,7 +3375,8 @@ Dead code
 |   analyzer[] = "Structures/EmptyLines";
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UnsetInForeach";
-|   analyzer[] = "Structures/UnusedLabel";| 
+|   analyzer[] = "Structures/UnusedLabel";
+|   analyzer[] = "Traits/SelfUsingTrait";| 
 
 
 

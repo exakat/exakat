@@ -64,6 +64,42 @@ This only displays E_ERROR, the highest level of error reporting. It should be c
 
     ini_set('error_reporting', 1);
 
+Eval() Usage
+============
+
+.. _xoops-structures-evalusage:
+
+XOOPS
+^^^^^
+
+:ref:`eval()-usage`, in htdocs/modules/system/class/block.php:266. 
+
+eval() execute code that was arbitrarily stored in $this, in one of the properties. Then, it is sent to output, but collected before reaching the browser, and put again in $content. May be the echo/ob_get_contents() could have been skipped.
+
+.. code-block:: php
+
+    ob_start();
+                        echo eval($this->getVar('content', 'n'));
+                        $content = ob_get_contents();
+                        ob_end_clean();
+
+
+--------
+
+
+.. _mautic-structures-evalusage:
+
+Mautic
+^^^^^^
+
+:ref:`eval()-usage`, in app/bundles/InstallBundle/Configurator/Step/CheckStep.php:238. 
+
+create_function() is actually an eval() in disguise : replace it with a closure for code modernization
+
+.. code-block:: php
+
+    create_function('$cfgValue', 'return $cfgValue > 100;')
+
 Not Not
 =======
 
@@ -522,6 +558,50 @@ Both concatenations could be merged, independantly. If readability is important,
     			unlink("$path" . "$filename");
     		}
     	}
+
+Static Methods Can't Contain $this
+==================================
+
+.. _xataface-classes-staticcontainsthis:
+
+xataface
+^^^^^^^^
+
+:ref:`static-methods-can't-contain-$this`, in Dataface/LanguageTool.php:48. 
+
+$this is hidden in the arguments of the static call to the method.
+
+.. code-block:: php
+
+    public static function loadRealm($name){
+    		return self::getInstance($this->app->_conf['default_language'])->loadRealm($name);
+    	}
+
+
+--------
+
+
+.. _sugarcrm-classes-staticcontainsthis:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`static-methods-can't-contain-$this`, in SugarCE-Full-6.5.26/modules/ACLActions/ACLAction.php:332. 
+
+Notice how $this is tested for existence before using it. It seems strange, at first, but we have to remember that if $this is never set when calling a static method, a static method may be called with $this. Confusingly, this static method may be called in two ways. 
+
+.. code-block:: php
+
+    static function hasAccess($is_owner=false, $access = 0){
+    
+            if($access != 0 && $access == ACL_ALLOW_ALL || ($is_owner && $access == ACL_ALLOW_OWNER))return true;
+           //if this exists, then this function is not static, so check the aclaccess parameter
+            if(isset($this) && isset($this->aclaccess)){
+                if($this->aclaccess == ACL_ALLOW_ALL || ($is_owner && $this->aclaccess == ACL_ALLOW_OWNER))
+                return true;
+            }
+            return false;
+        }
 
 Several Instructions On The Same Line
 =====================================
@@ -1906,6 +1986,50 @@ Security tokens should be build with a CSPRNG source. uniqid() is based on time,
 
     $this->installer->change_config('config', '$config[\'encryption_key\'] = \'\';', '$config[\'encryption_key\'] = \''.md5(uniqid()).'\';');
 
+No Hardcoded Hash
+=================
+
+.. _shopware-structures-nohardcodedhash:
+
+Shopware
+^^^^^^^^
+
+:ref:`no-hardcoded-hash`, in engine/Shopware/Models/Document/Data/OrderData.php:254. 
+
+This is actually a hashed hardcoded password. As the file explains, this is a demo order, for populating the database when in demo mode, so this is fine. We also learn that the password are securily sorted here. It may also be advised to avoid hardcoding this password, as any demo shop has the same user credential : it is the first to be tried when a demo installation is found. 
+
+.. code-block:: php
+
+    '_userID' => '3',
+        '_user' => new ArrayObject([
+                'id' => '3',
+                'password' => '$2y$10$GAGAC6.1kMRvN4RRcLrYleDx.EfWhHcW./cmoOQg11sjFUY73SO.C',
+                'encoder' => 'bcrypt',
+                'email' => 'demo@shopware.com',
+                'customernumber' => '20005',
+
+
+--------
+
+
+.. _sugarcrm-structures-nohardcodedhash:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`no-hardcoded-hash`, in SugarCE-Full-6.5.26/include/Smarty/Smarty.class.php:460. 
+
+The MD5('Smarty') is hardcoded in the properties. This property is not used in the class, but in parts of the code, when a unique delimiter is needed. 
+
+.. code-block:: php
+
+    /**
+         * md5 checksum of the string 'Smarty'
+         *
+         * @var string
+         */
+        var $_smarty_md5           = 'f8d698aea36fcbead2b9d5359ffca76f';
+
 Identical Conditions
 ====================
 
@@ -2334,6 +2458,64 @@ $metadata contains data that may be in different formats. When it is a pure XML 
     			// Old style. Not serialized but instead just a raw string of XML.
     			return $metadata;
     		}
+
+Use Positive Condition
+======================
+
+.. _spip-structures-usepositivecondition:
+
+SPIP
+^^^^
+
+:ref:`use-positive-condition`, in ecrire/inc/utils.php:925. 
+
+if (isset($time[$t])) { } else { } would put the important case in first place, and be more readable.
+
+.. code-block:: php
+
+    if (!isset($time[$t])) {
+    		$time[$t] = $a + $b;
+    	} else {
+    		$p = ($a + $b - $time[$t]) * 1000;
+    		unset($time[$t]);
+    #			echo "'$p'";exit;
+    		if ($raw) {
+    			return $p;
+    		}
+    		if ($p < 1000) {
+    			$s = '';
+    		} else {
+    			$s = sprintf("%d ", $x = floor($p / 1000));
+    			$p -= ($x * 1000);
+    		}
+    
+    		return $s . sprintf($s ? "%07.3f ms" : "%.3f ms", $p);
+    	}
+
+
+--------
+
+
+.. _expressionengine-structures-usepositivecondition:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`use-positive-condition`, in system/ee/EllisLab/Addons/forum/mod.forum_core.php:9138. 
+
+Let's be positive, and start processing the presence of $topic first. And let's call it empty(),  not == ''.
+
+.. code-block:: php
+
+    if ($topic != '')
+    						{
+    							$sql .= '('.substr($topic, 0, -3).') OR ';
+    							$sql .= '('.substr($tbody, 0, -3).') ';
+    						}
+    						else
+    						{
+    							$sql = substr($sql, 0, -3);
+    						}
 
 Don't Echo Error
 ================

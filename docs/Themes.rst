@@ -70,8 +70,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 03 Dec 2018 18:05:47 +0000
-.. comment: Generation hash : be73f48adf83c4d24255f58f1b8d30845c855bd6
+.. comment: Generation date : Mon, 10 Dec 2018 18:13:40 +0000
+.. comment: Generation hash : 3260c0532621e6f0b461da0c5d87b4e8e5969a34
 
 
 .. _analyze:
@@ -79,7 +79,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 353 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -212,6 +212,7 @@ Total : 352 analysis
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Method Collision Traits <method-collision-traits>`
+* :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
@@ -385,7 +386,7 @@ Total : 352 analysis
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Named Boolean In Argument Definition <use-named-boolean-in-argument-definition>`
-* :ref:`Use Object Api <use-object-api>`
+* :ref:`Use PHP Object API <use-php-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
 * :ref:`Use Positive Condition <use-positive-condition>`
 * :ref:`Use System Tmp <use-system-tmp>`
@@ -439,7 +440,7 @@ Total : 352 analysis
 ClassReview
 +++++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
@@ -456,6 +457,7 @@ Total : 18 analysis
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * Classes/CouldBeAbstractClass
 * Classes/CouldBeFinal
+* Classes/CouldBeStatic
 * Classes/PropertyCouldBeLocal
 * Classes/UndeclaredStaticProperty
 * Structures/CouldBeStatic
@@ -925,11 +927,12 @@ Total : 2 analysis
 Dead code
 +++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Exception Order <exception-order>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Rethrown Exceptions <rethrown-exceptions>`
+* :ref:`Self Using Trait <self-using-trait>`
 * :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
 * :ref:`Unresolved Catch <unresolved-catch>`
 * :ref:`Unused Classes <unused-classes>`

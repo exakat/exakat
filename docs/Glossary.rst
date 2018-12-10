@@ -6,18 +6,12 @@ Glossary
     + `**`
 
       + :ref:`** For Exponent <**-for-exponent>`
-      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Exponent Usage <exponent-usage>`
       + :ref:`Mismatch Type And Default <mismatch-type-and-default>`
       + :ref:`Negative Power <negative-power>`
-      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 
 
 + `A`
-    + `ArrayAccess`
-
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
-
     + `Array_search()`
 
       + :ref:`Find Key Directly <find-key-directly>`
@@ -89,10 +83,6 @@ Glossary
       + :ref:`Avoid array_push() <avoid-array\_push()>`
       + :ref:`Should Use Operator <should-use-operator>`
 
-    + `array_replace()`
-
-      + :ref:`Useless Instructions <useless-instructions>`
-
     + `array_search()`
 
       + :ref:`Find Key Directly <find-key-directly>`
@@ -101,8 +91,6 @@ Glossary
     + `array_sum()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
-      + :ref:`Callback Needs Return <callback-needs-return>`
-      + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Static Loop <static-loop>`
 
     + `array_udiff()`
@@ -122,10 +110,6 @@ Glossary
     + `array_unshift()`
 
       + :ref:`Slow Functions <slow-functions>`
-
-    + `array_values()`
-
-      + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 
     + `array_walk()`
 
@@ -161,20 +145,12 @@ Glossary
       + :ref:`Continue Is For Loop <continue-is-for-loop>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
-      + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
-      + :ref:`Multiples Identical Case <multiples-identical-case>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
-      + :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
-      + :ref:`Simple Switch <simple-switch>`
       + :ref:`Switch Fallthrough <switch-fallthrough>`
-      + :ref:`Switch To Switch <switch-to-switch>`
-      + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
-      + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Useless Switch <useless-switch>`
 
 
 + `C`
@@ -213,16 +189,11 @@ Glossary
 
     + `closure`
 
-      + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
       + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
-      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
-      + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
-      + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
-      + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
       + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -232,19 +203,15 @@ Glossary
 
     + `continue`
 
-      + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Continue Is For Loop <continue-is-for-loop>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Upload Filename Injection <upload-filename-injection>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
     + `count()`
 
-      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
       + :ref:`No Count With 0 <no-count-with-0>`
@@ -286,16 +253,9 @@ Glossary
 
     + `die`
 
-      + :ref:`Check JSON <check-json>`
-      + :ref:`Don't Echo Error <don't-echo-error>`
       + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`Implied If <implied-if>`
-      + :ref:`No Hardcoded Port <no-hardcoded-port>`
-      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
-      + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`ext/mysql <ext/mysql>`
 
     + `dirname()`
 
@@ -333,16 +293,11 @@ Glossary
 
     + `exit`
 
-      + :ref:`Don't Echo Error <don't-echo-error>`
       + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Use Object Api <use-object-api>`
-      + :ref:`ext/dba <ext/dba>`
 
     + `extract()`
 
-      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`Configure Extract <configure-extract>`
       + :ref:`Register Globals <register-globals>`
 
@@ -389,7 +344,6 @@ Glossary
     + `fopen()`
 
       + :ref:`@ Operator <@-operator>`
-      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
       + :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 
     + `for()`
@@ -427,8 +381,6 @@ Glossary
 
     + `func_get_args()`
 
-      + :ref:`Ellipsis Usage <ellipsis-usage>`
-      + :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
       + :ref:`Wrong Number Of Arguments In Methods <wrong-number-of-arguments-in-methods>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
@@ -439,7 +391,6 @@ Glossary
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
       + :ref:`No Direct Usage <no-direct-usage>`
-      + :ref:`No Hardcoded Path <no-hardcoded-path>`
 
 
 + `H`
@@ -488,27 +439,13 @@ Glossary
 
     + `instanceof`
 
-      + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Could Typehint <could-typehint>`
-      + :ref:`Missing Parenthesis <missing-parenthesis>`
-      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
-      + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Undefined ::class <undefined-\:\:class>`
-      + :ref:`Undefined Classes <undefined-classes>`
-      + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
-      + :ref:`Unused Interfaces <unused-interfaces>`
       + :ref:`Use Instanceof <use-instanceof>`
-      + :ref:`Use is_countable <use-is\_countable>`
       + :ref:`Useless Interfaces <useless-interfaces>`
-      + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
-
-    + `insteadof`
-
-      + :ref:`Method Collision Traits <method-collision-traits>`
-      + :ref:`Undefined Insteadof <undefined-insteadof>`
 
     + `intval()`
 
@@ -555,12 +492,9 @@ Glossary
 
     + `isset`
 
-      + :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
       + :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
       + :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
-      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No isset() With empty() <no-isset()-with-empty()>`
-      + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
@@ -624,10 +558,6 @@ Glossary
 
 
 + `P`
-    + `ParseError`
-
-      + :ref:`eval() Without Try <eval()-without-try>`
-
     + `pack()`
 
       + :ref:`Invalid Pack Format <invalid-pack-format>`
@@ -642,7 +572,6 @@ Glossary
 
     + `parse_str()`
 
-      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
       + :ref:`Register Globals <register-globals>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
@@ -650,10 +579,6 @@ Glossary
     + `parse_url()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
-
-    + `passthru()`
-
-      + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
 
     + `password_hash()`
 
@@ -684,7 +609,6 @@ Glossary
 
     + `phpinfo()`
 
-      + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Phpinfo <phpinfo>`
 
     + `pow()`
@@ -727,7 +651,6 @@ Glossary
 + `R`
     + `rand()`
 
-      + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `readfile()`
@@ -837,15 +760,6 @@ Glossary
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `strtolower()`
-
-      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
-
-    + `strtoupper()`
-
-      + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
-      + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
-
     + `strtr()`
 
       + :ref:`Strtr Arguments <strtr-arguments>`
@@ -875,8 +789,6 @@ Glossary
 
       + :ref:`Can't Throw Throwable <can't-throw-throwable>`
       + :ref:`Empty Try Catch <empty-try-catch>`
-      + :ref:`Useless Catch <useless-catch>`
-      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
     + `throwable`
 
@@ -958,14 +870,11 @@ Glossary
     + `__CLASS__`
 
       + :ref:`Detect Current Class <detect-current-class>`
-      + :ref:`Interpolation <interpolation>`
-      + :ref:`Non Ascii Variables <non-ascii-variables>`
 
     + `__DIR__`
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
-      + :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
       + :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 
     + `__FILE__`
@@ -973,20 +882,8 @@ Glossary
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
 
-    + `__FUNCTION__`
-
-      + :ref:`Use Const And Functions <use-const-and-functions>`
-
-    + `__METHOD__`
-
-      + :ref:`Already Parents Interface <already-parents-interface>`
-      + :ref:`Anonymous Classes <anonymous-classes>`
-      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-      + :ref:`Should Have Destructor <should-have-destructor>`
-
     + `__call`
 
-      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
@@ -997,51 +894,25 @@ Glossary
     + `__clone`
 
       + :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
-      + :ref:`Magic Visibility <magic-visibility>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
     + `__construct`
 
-      + :ref:`Anonymous Classes <anonymous-classes>`
-      + :ref:`Assign Default To Properties <assign-default-to-properties>`
-      + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
-      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Cant Instantiate Class <cant-instantiate-class>`
-      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
-      + :ref:`Illegal Name For Method <illegal-name-for-method>`
-      + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
-      + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
-      + :ref:`Parent First <parent-first>`
-      + :ref:`Redefined Default <redefined-default>`
-      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Chain Exception <should-chain-exception>`
-      + :ref:`Should Have Destructor <should-have-destructor>`
-      + :ref:`Should Use Local Class <should-use-local-class>`
-      + :ref:`Throw In Destruct <throw-in-destruct>`
-      + :ref:`Too Many Injections <too-many-injections>`
-      + :ref:`Unitialized Properties <unitialized-properties>`
-      + :ref:`Useless Constructor <useless-constructor>`
-      + :ref:`Useless Return <useless-return>`
-      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
     + `__debugInfo`
 
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`__debugInfo() Usage <\_\_debuginfo()-usage>`
 
-    + `__destruct`
-
-      + :ref:`Should Have Destructor <should-have-destructor>`
-      + :ref:`Throw In Destruct <throw-in-destruct>`
-
     + `__get`
 
-      + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
-      + :ref:`No Magic With Array <no-magic-with-array>`
 
     + `__invoke`
 
@@ -1049,14 +920,7 @@ Glossary
 
     + `__isset`
 
-      + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Must Return Methods <must-return-methods>`
-
-    + `__set`
-
-      + :ref:`Magic Visibility <magic-visibility>`
-      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
-      + :ref:`No Magic With Array <no-magic-with-array>`
 
     + `__set_state`
 
@@ -1068,9 +932,7 @@ Glossary
 
     + `__toString`
 
-      + :ref:`Interpolation <interpolation>`
       + :ref:`Must Return Methods <must-return-methods>`
-      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 

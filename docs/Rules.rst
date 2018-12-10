@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 07 Dec 2018 16:26:57 +0000
-.. comment: Generation hash : 022d792d702da1256f776937c7f4f83cac7c6d4d
+.. comment: Generation date : Mon, 10 Dec 2018 18:13:40 +0000
+.. comment: Generation hash : 3260c0532621e6f0b461da0c5d87b4e8e5969a34
 
 
 .. _$http\_raw\_post\_data:
@@ -2052,7 +2052,7 @@ For example, ``__TRAIT__`` recently appeared in PHP, as a magic constant. In the
    ?>
 
 
-The analyzer will report any constant which name is __.*.__, or even _.*_ (only one underscore).
+The analyzer will report any constant which name is ``__.*.__``, or even ``_.*_`` (only one underscore).
 
 See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
@@ -4450,7 +4450,7 @@ This global is only used in one function or method. It may be called 'static', i
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/CouldBeStatic                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview`                                              |
+| Themes      | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Analyze`, :ref:`ClassReview`          |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -4857,15 +4857,15 @@ Could Use Try
 #############
 
 
-Some commands may raise exception. It is recommended to use the try/catch block to intercept those exception, and process them.
+Some commands may raise exceptions. It is recommended to use the try/catch block to intercept those exceptions, and process them.
 
-* / : DivisionByZeroError
-* % : DivisionByZeroError
-* intdiv() : DivisionByZeroError
-* << : ArithmeticError
-* >> : ArithmeticError
-* Phar\:\:mungserver : PharException
-* Phar\:\:webphar : PharException
+* / : ``DivisionByZeroError``
+* % : ``DivisionByZeroError``
+* intdiv() : ``DivisionByZeroError``
+* << : ``ArithmeticError``
+* >> : ``ArithmeticError``
+* Phar\:\:mungserver : ``PharException``
+* Phar\:\:webphar : ``PharException``
 
 See also `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_,
          `PharException <http://php.net/manual/en/class.pharexception.php>`_.
@@ -5138,6 +5138,8 @@ See also `crc32() <http://php.net/crc32>`_.
 Curly Arrays
 ############
 
+
+PHP supports the curly brackets for arrays.
 
 It is possible to access individual elements in an array by using its offset between square brackets [] or curly brackets {}. 
 
@@ -7005,6 +7007,8 @@ Eval() Usage
 ############
 
 
+Using `'eval() <http://www.php.net/eval>`_ is evil. 
+
 Using `'eval() <http://www.php.net/eval>`_ is bad for performances (compilation time), for caches (it won't be compiled), and for security (if it includes external data).
 
 .. code-block:: php
@@ -7027,9 +7031,20 @@ Using `'eval() <http://www.php.net/eval>`_ is bad for performances (compilation 
 Most of the time, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
 At worse, including a pregenerated file is faster and cacheable. 
 
+There are several situations where `'eval() <http://www.php.net/eval>`_ is actually the only solution : 
+
 For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>`_ in a try..catch expression.
 
-See also `eval <http://www.php.net/eval>`_.
+See also `eval <http://www.php.net/eval>`_ and 
+         `The Land Where PHP  Uses `'eval() <http://www.php.net/eval>`_ <https://www.exakat.io/land-where-php-uses-eval/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a dynamic feature of PHP to replace the eval'ed code
+* Store the code on the disk, and use include
+* Replace create_function() with a closure!
 
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/EvalUsage                                                          |
@@ -7041,6 +7056,8 @@ See also `eval <http://www.php.net/eval>`_.
 | Time To Fix | Quick (30 mins)                                                               |
 +-------------+-------------------------------------------------------------------------------+
 | ClearPHP    | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
++-------------+-------------------------------------------------------------------------------+
+| Examples    | :ref:`xoops-structures-evalusage`, :ref:`mautic-structures-evalusage`         |
 +-------------+-------------------------------------------------------------------------------+
 
 
@@ -7478,9 +7495,11 @@ Foreach Don't Change Pointer
 ############################
 
 
-A foreach loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `'current() <http://www.php.net/current>`_ or `'next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
+``foreach`` loops use their own internal cursor.
 
-This anly applies when a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
+A ``foreach`` loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `'current() <http://www.php.net/current>`_ or `'next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
+
+This only applies when a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
 
 .. code-block:: php
 
@@ -7822,9 +7841,11 @@ Forgotten Whitespace
 ####################
 
 
+Forgotten whitespaces only bring misery to the code.
+
 White spaces have been left at either end of a file : before the PHP opening tag, or after the closing tag. 
 
-Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them. 
+Usually, such whitespaces are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them. 
 
 .. code-block:: php
 
@@ -7837,6 +7858,13 @@ Usually, such white space are forgotten, and may end up summoning the infamous '
 
 
 See also `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove all whitespaces before and after a script. This doesn't apply to template, which may need to use those spaces.
+* Remove the final tag, to prevent any whitespace to be forgotten at the end of the file. This doesn't apply to the opening PHP tag, which is always necessary.
 
 +-------------+--------------------------------+
 | Short name  | Structures/ForgottenWhiteSpace |
@@ -9179,7 +9207,23 @@ Inclusion should follow exactly the case of included files and path. This preven
    // There must exist a path called path/to and a file library.php with this case
    include path/to/library.php;
    
+   // Error on the case, while the file does exist
+   include path/to/LIBRARY.php;
+   
+   // Error on the case, on the PATH
+   include path/TO/library.php;
+   
    ?>
+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the inclusion string identical to the file name. 
+* Change the name of the file to reflect the actual inclusion. This is the best way when a naming convention has been set up for the project, and the file doesn't adhere to it. Remember to change all other inclusion.
 
 +-------------+--------------------------+
 | Short name  | Files/InclusionWrongCase |
@@ -10824,6 +10868,63 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +-------------+------------------------------+
 | Time To Fix | Quick (30 mins)              |
 +-------------+------------------------------+
+
+
+
+.. _method-could-be-static:
+
+Method Could Be Static
+######################
+
+
+A method that doesn't make any usage of $this could be turned into a static method. 
+
+While static methods are usually harder to handle, recognizing the static status is a first step before turning the method into a standalone function.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       static $property = 1;
+       
+       // legit static method
+       static function staticMethod() {
+           return self::$property;
+       }
+   
+       // This is not using $this, and could be static
+       function nonStaticMethod() {
+           return self::$property;
+       }
+   
+       // This is not using $this nor self, could be a standalone function
+       function nonStaticMethod() {
+           return self::$property;
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the method static
+* Make the method a standalone function
+* Make use of $this in the method : may be it was forgotten.
+
++-------------+-----------------------+
+| Short name  | Classes/CouldBeStatic |
++-------------+-----------------------+
+| Themes      | none                  |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
 
 
 
@@ -12953,7 +13054,9 @@ No Direct Call To Magic Method
 ##############################
 
 
-PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ or `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, are supposed to be used in an object environment, and not with direct call. 
+PHP features magic methods, which are methods related to operators.
+
+Magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_, related to =, or `'__clone() <http://php.net/manual/en/language.oop5.magic.php>`_, related to ``clone``, are supposed to be used in an object environment, and not with direct call. 
 
 It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the ``__toString()`` method.
 
@@ -13099,17 +13202,31 @@ Hashes may be MD5, SHA1, SHA512, Bcrypt or any other. Such values must be easily
            '6a09e667f3bcc908', 'bb67ae8584caa73b', '3c6ef372fe94f82b', 'a54ff53a5f1d36f1', 
        );
    
+       // strings which are obvious conversion are ignored 
+       $decimal = intval('87878877', 12);
    ?>
 
-+-------------+---------------------------------+
-| Short name  | Structures/NoHardcodedHash      |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Severity    | Critical                        |
-+-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
-+-------------+---------------------------------+
+
+See also `Salted Password Hashing - Doing it Right <https://crackstation.net/hashing-security.htm>`_ and 
+         `Hash-Buster <https://github.com/s0md3v/Hash-Buster>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Put any hardcoded hash in a configuration file, a database or a environnement variable. An external source.
+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Structures/NoHardcodedHash                                                             |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                                                        |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Critical                                                                               |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                          |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`shopware-structures-nohardcodedhash`, :ref:`sugarcrm-structures-nohardcodedhash` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 
@@ -19683,7 +19800,6 @@ Static methods are also called ``class methods`` : they may be called even if th
            // This is not possible in a static method
            return $this->property;
        }
-   
    }
    
    ?>
@@ -19692,6 +19808,13 @@ Static methods are also called ``class methods`` : they may be called even if th
 Either this is not a static method, which is fixed by removing the ``static`` keyword, or replace all $this mention by static properties ``Class\:\:$property``.
 
 See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove any $this usage
+* Turn any $this usage into a static call : $this->foo() => self\:\:foo()
 
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/StaticContainsThis                                                                  |
@@ -19703,6 +19826,8 @@ See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 | Time To Fix | Quick (30 mins)                                                                             |
 +-------------+---------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
++-------------+---------------------------------------------------------------------------------------------+
+| Examples    | :ref:`xataface-classes-staticcontainsthis`, :ref:`sugarcrm-classes-staticcontainsthis`      |
 +-------------+---------------------------------------------------------------------------------------------+
 
 
@@ -21658,9 +21783,9 @@ Undefined Parent
 ################
 
 
-List of properties and methods that are accessed using ``parent`` keyword but are not defined in the parent class. 
+List of properties and methods that are accessed using ``parent`` keyword but are not defined in the parent classes. 
 
-This may compile but, eventually yield a fatal error during execution.
+This may compile but, eventually yields a fatal error during execution.
 
 .. code-block:: php
 
@@ -21688,6 +21813,17 @@ This may compile but, eventually yield a fatal error during execution.
 Note that if the parent is defined using ``extends someClass`` but ``someClass`` is not available in the tested code, it will not be reported : it may be in composer, another dependency, or just missing.
 
 See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the usage of the found method
+* Add a definition for the method in the appropriate parent
+* Fix the name of the method, and replace it with a valid definition
+* Change 'parent' with 'self' if the method is eventually defined in the current class
+* Change 'parent' with another object, if the method has been defined in another class
+* Add the 'extends' keyword to the class, to actually have a parent class
 
 +-------------+---------------------------+
 | Short name  | Classes/UndefinedParentMP |
@@ -23602,7 +23738,7 @@ See also `Type Operators <http://php.net/manual/en/language.operators.type.php#l
 Suggestions
 ^^^^^^^^^^^
 
-* Use instanceof and remove is_object
+* Use instanceof and remove is_object()
 * Create a high level interface to check a whole family of classes, instead of testing them individually
 * Use typehint when possible
 * Avoid mixing scalar types and objects in the same variable
@@ -23804,11 +23940,13 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 
 
 
-.. _use-object-api:
+.. _use-php-object-api:
 
-Use Object Api
-##############
+Use PHP Object API
+##################
 
+
+OOP API is the modern version of the PHP API.
 
 When PHP offers the alternative between procedural and OOP api for the same features, it is recommended to use the OOP API. 
 
@@ -24000,15 +24138,24 @@ Negative conditions are not reported when else is not present.
    
    ?>
 
-+-------------+---------------------------------+
-| Short name  | Structures/UsePositiveCondition |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Invert the code in the if branches, and the condition
+
++-------------+------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/UsePositiveCondition                                                                      |
++-------------+------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                       |
++-------------+------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                |
++-------------+------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`spip-structures-usepositivecondition`, :ref:`expressionengine-structures-usepositivecondition` |
++-------------+------------------------------------------------------------------------------------------------------+
 
 
 

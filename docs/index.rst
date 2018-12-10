@@ -24,6 +24,7 @@ Contents:
    Cases
    Reports
    Configuration
+   Extensions
    Development
    Glossary
    Contribute
