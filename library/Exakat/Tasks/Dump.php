@@ -311,8 +311,10 @@ SQL;
                 $query[] = "(NULL, '$class', $counts[$class])";
             }
         }
-
-        $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
+        
+        if (!empty($query)) {
+            $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
+        }
 
         $analyzers = $this->themes->getThemeAnalyzers($theme);
         
