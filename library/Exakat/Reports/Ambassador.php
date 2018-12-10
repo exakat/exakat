@@ -189,6 +189,7 @@ class Ambassador extends Reports {
         $this->generateAnalyzers();
 
         $this->generateIssues();
+        $this->generateNewIssues();
         $this->generateNoIssues();
         $this->generatePerformances();
         $this->generateSuggestions();
@@ -1980,6 +1981,23 @@ SQL;
         );
     }
 
+    private function generateNewIssues() {
+        $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
+
+        $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
+
+        if (file_exists($path)) {
+            $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $path);
+
+            $diff = array_diff($issues, $oldissues);
+        } else {
+            $diff = $issues;
+        }
+
+        $this->generateIssuesEngine('neoissues',
+                                    $diff);
+    }
+    
     private function generateIssues() {
         $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
@@ -2055,7 +2073,16 @@ JAVASCRIPTCODE;
         $this->putBasedPage($filename, $finalHTML);
     }
 
-    public function getIssuesFaceted($theme) {
+    private function getIssuesFaceted($theme) {
+        return $this->getIssuesFacetedDb($theme, $this->sqlite);
+    }
+
+    public function getNewIssuesFaceted($theme, $path) {
+        $sqlite = new \Sqlite3($path);
+        return $this->getIssuesFacetedDb($theme, $sqlite);
+    }
+
+    public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
         if (is_string($theme)) {
             $list = $this->themes->getThemeAnalyzers($theme);
         } else {
@@ -2070,7 +2097,7 @@ SELECT fullcode, file, line, analyzer
     ORDER BY file, line
 
 SQL;
-        $result = $this->sqlite->query($sqlQuery);
+        $result = $sqlite->query($sqlQuery);
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2901,7 +2928,7 @@ SQL
         // nombre de method en conflict possible
         // ce trait inclut l'autre
 
-        // list of all traits, for building the table 
+        // list of all traits, for building the table
         $query = <<<SQL
 SELECT name FROM cit WHERE type="trait" ORDER BY name
 SQL;
