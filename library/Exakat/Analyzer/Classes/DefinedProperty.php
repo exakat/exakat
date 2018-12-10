@@ -76,6 +76,24 @@ class DefinedProperty extends Analyzer {
              ->samePropertyAs('propertyname', 'property')
              ->back('first');
         $this->prepareQuery();
+
+        // defined in parent trait (private excluded)
+        $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->inIs('OBJECT')
+             ->outIs('MEMBER')
+             ->savePropertyAs('code', 'property')
+             ->goToClass()
+             ->goToAllParents(self::EXCLUDE_SELF)
+             ->goToTraits()
+             ->outIs('PPP')
+             ->isNot('visibility', 'private')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
+             ->samePropertyAs('propertyname', 'property')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
