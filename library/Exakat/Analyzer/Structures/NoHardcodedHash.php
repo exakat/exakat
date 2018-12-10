@@ -37,7 +37,23 @@ class NoHardcodedHash extends Analyzer {
                  ->regexIs('noDelimiter', '^[a-fA-Z0-9]{'.$size.'}\\$')
                  ->isNotMixedcase('noDelimiter')
                  ->noDelimiterIsNot($stopwords)
-                 ->regexIsNot('noDelimiter', $regexDate);
+                 ->regexIsNot('noDelimiter', $regexDate)
+                 ->not(
+                    $this->side()
+                         ->filter(
+                            $this->side()
+                                 ->inIs('ARGUMENT')
+                                 ->atomIs('Functioncall')
+                                 ->fullnspathIs(array('\\hexdec',
+                                                      '\\hex2bin',
+                                                      '\\intval',
+                                                      '\\decbin',
+                                                      '\\bindec',
+                                                      '\\dechex',
+                                                      '\\decoct',
+                                                      '\\octdec',
+                                                      )))
+                  );
             $this->prepareQuery();
         }
         
