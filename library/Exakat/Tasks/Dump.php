@@ -435,10 +435,10 @@ SQL;
         }
     }
 
-    private function processResults($class, $count) {
+    private function processResults($class, int $count) {
         $this->sqlite->query("DELETE FROM results WHERE analyzer = '$class'");
 
-        $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \''.$class.'\', '.(int) $count.')');
+        $this->sqlite->query("REPLACE INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES (NULL, '$class', $count)");
 
         $this->log->log( "$class : $count\n");
         // No need to go further
