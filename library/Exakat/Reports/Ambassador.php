@@ -2073,7 +2073,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($filename, $finalHTML);
     }
 
-    private function getIssuesFaceted($theme) {
+    protected function getIssuesFaceted($theme) {
         return $this->getIssuesFacetedDb($theme, $this->sqlite);
     }
 
