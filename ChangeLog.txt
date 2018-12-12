@@ -1,4 +1,4 @@
-Version 1.5.7 (Vaisravaṇa, coming up)
+Version 1.5.8 (Virudhaka, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,38 @@ Version 1.5.7 (Vaisravaṇa, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.7 (Vaisravana, 2018-12-10)
++ Architecture
+    + Extended Dump to support aliased methods
+    + Support for SQLITE in extensions
+    + Moved each framework to extensions
+    + Added Laravel extension
++ Documentation
+    + First version for the Extension chapter
+    + Fixed mysterious ' in the docs
++ Report
+    + Ambassador : added a 'New issues' section, with new analysis
+    + Ambassador : added trait matrix
+    + Ambassador : fixed an infinite loop when trait include themselves in cycles
+    + Added more message count to several reports
++ Analyzer
+    + New analyzer : method could be static
+    + New analyzer : multiple inclusion of traits
+    + New analyzer : avoid self using traits
+    + New analyzer : ext/wasm and ext/async
+    + Upgraded analyzer : No Hardcoded Hash, skip hexadecimal numbers
+    + Upgraded analyzer : Defined properties extends to traits
+    + Upgraded analyzer : PSS outside a class, when PSS are in strings
+    + Upgraded analyzer : Access private works with methods (not just static)
+    + Checked unit tests : 2772 / 2785 test pass (99% pass)
++ Tokenizer
+    + Fixed bug in Dump, when nothing to clean
+    + Fixed edge bug on Callable detection
+    + Extended support for self, static and parent, in typehint and new
+    + Fixed precedence of yield and yield from
+    + Fixed handling of throw at the end of a script
+    + Added support to solve conflict on traits
 
 Version 1.5.6 (Jingang, 2018-12-03)
 + Architecture

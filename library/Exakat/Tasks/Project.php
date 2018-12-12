@@ -189,8 +189,8 @@ class Project extends Tasks {
         // Always run this one first
         $this->analyzeThemes(['First'], $audit_start, true);
 
-        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
         $sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
         if (file_exists($sqliteFileFinal)) {
             copy($sqliteFileFinal, $sqliteFilePrevious);
         }
