@@ -116,7 +116,7 @@ Here are a few steps you can try when running exakat on a very large project.
 * Set environnement variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
-`Does exakat runs on Java 7?`_
+`Does exakat runs on Java 8?`_
 ------------------------------
 
 Exakat itself runs with PHP 7.0+. Exakat relies on a gremlin database : gremlin-server 3.2.x and 3.3.x are supported, which runs on Java 8. 

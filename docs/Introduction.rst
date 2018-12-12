@@ -3,7 +3,7 @@
 Introduction
 ============
 
-This is the documentation of the Exakat engine, version 1.5.7 (Build 835), on Thu, 06 Dec 2018 15:36:44 +0000.
+This is the documentation of the Exakat engine, version 1.5.8 (Build 838), on Wed, 12 Dec 2018 16:58:00 +0000.
 
 What is Exakat ? 
 ----------------
@@ -84,7 +84,7 @@ Exakat provides machine readable format reports, such as json, xml, text that ma
 Exakat ecosystem
 ----------------
 
-`Exakat <http://www.exakat.io/>`_ is an Open Source tool. The code is available on `Github <https://github.com/exakat/exakat>`_, as `Docker image <https://hub.docker.com/r/exakat/exakat/>`_ and `Vagrant file <https://github.com/exakat/exakat-vagrant>`_. It is also available as a phar `download <https://www.exakat.io/download-exakat/>`_.
+`Exakat <http://www.exakat.io/>`_ is an Open Source tool. The code is available on `Github.com/exakat/exakat <https://github.com/exakat/exakat>`_, as `Docker image <https://hub.docker.com/r/exakat/exakat/>`_ and `Vagrant file <https://github.com/exakat/exakat-vagrant>`_. It is also available as a phar `download <https://www.exakat.io/download-exakat/>`_.
 
 `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_ is a SaaS platform, offering exakat audits on code, anytime, at reduced cost. 
 

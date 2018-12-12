@@ -519,13 +519,13 @@ The original idea is Richard Wettel's [Code city](https://wettel.github.io/codec
 
 To use this tool, run an exakat audit, then generate the 'PHPcity' report : `php exakat.phar report -p mycode -format PHPcity -v`
 
-This generates the `exakat.phpcity.json` file, in the `projects/mycode/`folder. 
+This generates the `exakat.phpcity.json` file, in the `projects/mycode/` folder. 
 
 You may test your own report online, at [Adrian Huna](https://github.com/adrianhuna)'s website, by [uploading the results](https://adrianhuna.github.io/PHPCity/) and seeing it live immediately. 
 
 Or, you can install the [PHPcity](https://github.com/adrianhuna/PHPCity) application, and load it locally. 
 
-.. image:: images/exakat.phpcity.png
+.. image:: images/report.phpcity.png
     :alt: Example of a Phpcity report (0)
 
 Phpcity is a JSON report format.

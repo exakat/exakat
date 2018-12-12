@@ -941,7 +941,7 @@ Analysis tests are located in the `tests/analyzer/` folder. In that folder, ther
 * alltests.php : this is a PHPUnit test suite that runs all the unit tests. It also checks some of the test Structures
 * create_test.php : use this tool to create and add a new test to Exakat unit test list. It will create all the necessary files
 
-Unit are run with `PHPUnit <http://www.phpunit.de/>`_ version 7.0+. They were tested with PHPUnit 7.3.5 and are supposed to work with other minor versions. 
+Unit are run with `PHPUnit <https://www.phpunit.de/>`_ version 7.0+. They were tested with PHPUnit 7.3.5 and are supposed to work with other minor versions. 
 
 Writing test
 ------------

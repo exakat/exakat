@@ -13,7 +13,6 @@ Here are some suggestions of help you may provide to enhance your own usage of E
 * Provide new names and adjectives for the audit names. We like to include any first name of community members, and non-derogatory adjectives.
 * Report installation or usage problems
 * Report ambiguity in reports and their documentation
-* Suggest missing :ref:`Strange Names For Methods <strange-names-for-methods>`
 * Suggest interesting Coding reference, like Object Calisthenics, PSR, East-Oriented Programming, etc.
 * Translate the documentation into other languages
 * Port Exakat on Windows or other OS

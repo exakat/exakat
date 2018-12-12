@@ -1991,7 +1991,7 @@ No Hardcoded Hash
 
 .. _shopware-structures-nohardcodedhash:
 
-Shopware
+shopware
 ^^^^^^^^
 
 :ref:`no-hardcoded-hash`, in engine/Shopware/Models/Document/Data/OrderData.php:254. 
@@ -2347,7 +2347,7 @@ Multiple Alias Definitions
 ChurchCRM
 ^^^^^^^^^
 
-:ref:`multiple-alias-definitions`, in Various files:**. 
+:ref:`multiple-alias-definitions`, in Various files:--. 
 
 It is actually surprising to find FamilyQuery defined as ChurchCRM\Base\FamilyQuery only once, while all other reference are for ChurchCRM\FamilyQuery. That lone use is actually useful in the code, so it is not a forgotten refactorisation. 
 
@@ -2367,7 +2367,7 @@ It is actually surprising to find FamilyQuery defined as ChurchCRM\Base\FamilyQu
 Phinx
 ^^^^^
 
-:ref:`multiple-alias-definitions`, in Various files:**. 
+:ref:`multiple-alias-definitions`, in Various files:--. 
 
 One 'Command' is refering to a local Command class, while the other is refering to an imported class. They are all in a similar name space Console\Command. 
 

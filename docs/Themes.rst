@@ -28,8 +28,6 @@ Here is the list of the current recipes supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Analyze`                                 | Check for common best practices.                                                                     |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CakePHP <cakephp>`                       | Check for code used with the Slim Framework                                                          |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP74`                      | List features that are incompatible with PHP 7.4. It is known as php-src, work in progress.          |
@@ -43,12 +41,6 @@ Here is the list of the current recipes supported by Exakat Engine.
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environnement.               |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Slim Framework <slim>`                   | Check for code used with the Slim Framework                                                          |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Wordpress`                               | Check for code used with the Wordpress platform                                                      |
-+-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Zend Framework <zendframework>`          | Check for code used with the Zend Framework 3                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -70,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 10 Dec 2018 18:13:40 +0000
-.. comment: Generation hash : 3260c0532621e6f0b461da0c5d87b4e8e5969a34
+.. comment: Generation date : Wed, 12 Dec 2018 18:50:38 +0000
+.. comment: Generation hash : 76fd89b72c762a2233b0a8c102d91d035d9757b5
 
 
 .. _analyze:
@@ -1076,7 +1068,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 69 analysis
+Total : 71 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1096,6 +1088,8 @@ Total : 69 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`Multiple Identical Closure <multiple-identical-closure>`
+* :ref:`Multiple Usage Of Same Trait <multiple-usage-of-same-trait>`
 * :ref:`Named Regex <named-regex>`
 * :ref:`One If Is Sufficient <one-if-is-sufficient>`
 * :ref:`Possible Increment <possible-increment>`

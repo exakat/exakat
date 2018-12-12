@@ -194,7 +194,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
 * `ext/mhash <http://mhash.sourceforge.net/>`_
 * `ext/ming <http://www.libming.org/>`_
-* `ext/mongo <http://php.net/manual/en/book.mongo.php>`_
+* `ext/mongo <http://php.net/mongo>`_
 * `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
 * `ext/msgpack <https://github.com/msgpack/msgpack-php>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
@@ -320,7 +320,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
-* Shopware
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -394,10 +393,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.8
+
+  * Multiple Identical Closure (Functions/MultipleIdenticalClosure)
+
 * 1.5.7
 
   * Method Could Be Static (Classes/CouldBeStatic)
-  * Multiple Usage Of Same Trait (Traits/MultipleUsage ; Unassigned)
+  * Multiple Usage Of Same Trait (Traits/MultipleUsage ; Suggestions)
   * Self Using Trait (Traits/SelfUsingTrait ; Dead code)
   * ext/wasm (Extensions/Extwasm ; Appinfo)
 
@@ -1886,7 +1889,7 @@ List of external services whose configuration files has been commited in the cod
 * `phalcon <https://phalconphp.com/>`_ - .phalcon
 * `phpbench <https://github.com/phpbench/phpbench>`_ - phpbench.json
 * `phpci <https://www.phptesting.org/>`_ - phpci.yml
-* `phpdocumentor <http://docs.phpdoc.org/>`_ - .phpdoc.xml
+* `Phpdocumentor <https://www.phpdoc.org/>`_ - .phpdoc.xml
 * `phpdox <https://github.com/theseer/phpdox>`_ - phpdox.xml.dist, phpdox.xml
 * `phinx <https://phinx.org/>`_ - phinx.yml
 * `phpformatter <https://github.com/mmoreram/php-formatter>`_ - .formatter.yml
@@ -1895,7 +1898,7 @@ List of external services whose configuration files has been commited in the cod
 * `phpspec <http://www.phpspec.net/en/latest/>`_ - phpspec.yml, .phpspec, phpspec.yml.dist
 * `phpstan <https://github.com/phpstan>`_ - phpstan.neon, .phpstan.neon
 * `phpswitch <https://github.com/jubianchi/phpswitch>`_ - .phpswitch.yml
-* `phpunit <https://phpunit.de/>`_ - phpunit.xml.dist
+* `PHPUnit <https://www.phpunit.de/>`_ - phpunit.xml.dist
 * `prettier <https://prettier.io/>`_ - .prettierrc, .prettierignore
 * `psalm <https://getpsalm.org/>`_ - psalm.xml
 * `puppet <https://puppet.com/>`_ - .puppet
@@ -1903,7 +1906,7 @@ List of external services whose configuration files has been commited in the cod
 * `robo <https://robo.li/>`_ - RoboFile.php
 * `scrutinizer <https://scrutinizer-ci.com/>`_ - .scrutinizer.yml
 * `semantic versioning <http://semver.org/>`_ - .semver
-* `SPIP <http://www.spip.net/>`_ - paquet.xml
+* `SPIP <https://www.spip.net/>`_ - paquet.xml
 * `stickler <https://stickler-ci.com/docs>`_ - .stickler.yml
 * `storyplayer <https://datasift.github.io/storyplayer/>`_ - storyplayer.json.dist
 * `styleci <https://styleci.io/>`_ - .styleci.yml
@@ -1996,7 +1999,7 @@ List of external links mentionned in this documentation.
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `count <http://php.net/count>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
-* `crc32() <http://php.net/crc32>`_
+* `crc32() <http://www.php.net/crc32>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
@@ -2066,7 +2069,6 @@ List of external links mentionned in this documentation.
 * `ext/leveldb on Github <https://github.com/reeze/php-leveldb>`_
 * `ext/lua manual <http://php.net/manual/en/book.lua.php>`_
 * `ext/memcached manual <http://php.net/manual/en/book.memcached.php>`_
-* `ext/mongo <ext/mongo>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
@@ -2088,15 +2090,15 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2111,7 +2113,7 @@ List of external links mentionned in this documentation.
 * `get_class <http://php.net/get_class>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
-* `Github <https://github.com/exakat/exakat>`_
+* `Github.com/exakat/exakat <https://github.com/exakat/exakat>`_
 * `GMP <http://php.net/manual/en/book.gmp.php>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
 * `Goto <http://php.net/manual/en/control-structures.goto.php>`_
@@ -2153,8 +2155,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `Isset <http://php.net/manual/en/function.isset.php>`_
 * `isset <http://www.php.net/isset>`_
+* `Isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2202,6 +2204,7 @@ List of external links mentionned in this documentation.
 * `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
 * `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
 * `Ming (flash) <http://www.libming.org/>`_
+* `MongoDB driver <http://php.net/mongo>`_
 * `move_uploaded_file <http://php.net/move_uploaded_file>`_
 * `msgpack for PHP <https://github.com/msgpack/msgpack-php>`_
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
@@ -2281,7 +2284,7 @@ List of external links mentionned in this documentation.
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `phpsdl <https://github.com/Ponup/phpsdl>`_
-* `PHPUnit <http://www.phpunit.de/>`_
+* `PHPUnit <https://www.phpunit.de/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
@@ -3534,6 +3537,7 @@ Suggestions
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/CouldReturnVoid";
 |   analyzer[] = "Functions/CouldTypehint";
+|   analyzer[] = "Functions/MultipleIdenticalClosure";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
@@ -3585,7 +3589,8 @@ Suggestions
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
-|   analyzer[] = "Structures/WhileListEach";| 
+|   analyzer[] = "Structures/WhileListEach";
+|   analyzer[] = "Traits/MultipleUsage";| 
 
 
 
