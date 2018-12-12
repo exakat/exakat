@@ -40,7 +40,7 @@ class Atom {
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;
     public $delimiter    = '';
-    public $noDelimiter  = null;
+    public $noDelimiter  = '';
     public $variadic     = Load::NOT_VARIADIC;
     public $count        = null;
     public $fullnspath   = '';
@@ -51,7 +51,7 @@ class Atom {
     public $block        = '';
     public $intval       = '';
     public $strval       = '';
-    public $boolean      = ''; // null, so boolean may NOT be available
+    public $boolean      = ''; 
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';

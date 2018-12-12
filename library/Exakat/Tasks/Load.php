@@ -168,35 +168,6 @@ class Load extends Tasks {
                          );
 
     private $optionsTokens = array();
-
-    static public $PROP_ALTERNATIVE = array('Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While');
-//    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
-//    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
-    static public $PROP_DELIMITER   = array('String', 'Heredoc');
-    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname', 'Boolean', 'Integer', 'Real', 'Null');
-    static public $PROP_HEREDOC     = array('Heredoc');
-    static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
-    static public $PROP_ABSOLUTE    = array('Nsname');
-    static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
-    static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
-    static public $PROP_ENCODING    = array('String');
-    static public $PROP_BLOCK       = array('String');
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition', );
-    static public $PROP_STRVAL      = array('String');
-    static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
-    static public $PROP_ARGS_MAX    = array('Function', 'Method', 'Closure', 'Arrayliteral', );
-    static public $PROP_ARGS_MIN    = array('Function', 'Method', 'Closure', 'Arrayliteral', );
-    static public $PROP_BRACKET     = array('Sequence');
-    static public $PROP_CLOSETAG    = array('Php');
-    static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
-    static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
-    static public $PROP_PROPERTYNAME= array('Propertydefinition', 'Assignation');
-    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Functioncall', 'Methodcall', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function', 'Closure');
-    static public $PROP_GLOBALVAR   = array('Array');
-    static public $PROP_BINARYSTRING= array('String', 'Heredoc');
-    static public $PROP_ROOT        = array('File');
-
     private $expressions         = array();
     private $atoms               = array();
     private $argumentsId         = array();
@@ -1260,6 +1231,7 @@ class Load extends Tasks {
             $this->addLink($function, $block, 'BLOCK');
             ++$this->id; // skip the next ;
             $blockFullcode = ' ;';
+            $this->runPlugins($block);
         } else {
             $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
             $this->popExpression();
@@ -1276,7 +1248,6 @@ class Load extends Tasks {
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
-        $this->runPlugins($block);
         $this->runPlugins($function, array('BLOCK' => $block));
 
         array_pop($this->currentFunction);
@@ -3038,6 +3009,7 @@ class Load extends Tasks {
                 }
                 $expression = $this->popExpression();
                 $this->addToSequence($expression);
+                $this->runPlugins($block, array($expression));
             }
 
             $this->endSequence();
@@ -3048,7 +3020,7 @@ class Load extends Tasks {
 
             $this->pushExpression($block);
         }
-
+        
         return $block;
     }
 
@@ -3421,10 +3393,10 @@ class Load extends Tasks {
         $code = $this->popExpression();
         $this->addLink($parenthese, $code, 'CODE');
 
-        $parenthese->code     = '(';
-        $parenthese->fullcode = '('.$code->fullcode.')';
-        $parenthese->line     = $this->tokens[$this->id][2];
-        $parenthese->token    = 'T_OPEN_PARENTHESIS';
+        $parenthese->code        = '(';
+        $parenthese->fullcode    = '('.$code->fullcode.')';
+        $parenthese->line        = $this->tokens[$this->id][2];
+        $parenthese->token       = 'T_OPEN_PARENTHESIS';
         $parenthese->noDelimiter = $code->noDelimiter;
         $this->runPlugins($parenthese, array('CODE' => $code));
 

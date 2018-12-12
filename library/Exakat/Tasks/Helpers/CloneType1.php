@@ -27,14 +27,6 @@ class CloneType1 extends Plugin {
     public $type = 'string';
 
     public function run($atom, $extras) {
-        foreach($extras as $extra) {
-            if ($extra->ctype1 === null)  {
-                $atom->ctype1 = null;
-                $atom->ctype1_size = null;
-                return ;
-            }
-        }
-        
         switch ($atom->atom) {
             case 'Integer' :
                 $atom->ctype1 = 'i';

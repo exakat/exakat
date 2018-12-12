@@ -26,8 +26,6 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition', 'String');
-    
     public function run($atom, $extras) {
         foreach($extras as $extra) {
             if ($extra->intval === '')  {
@@ -202,7 +200,8 @@ class Intval extends Plugin {
                 break;
 
         default :
-            
+        case 'Sequence' :
+            // Nothing, really
         }
     }
 }

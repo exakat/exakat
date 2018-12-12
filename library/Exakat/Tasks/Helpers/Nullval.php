@@ -51,6 +51,7 @@ class Nullval extends Plugin {
             case 'Bitshift' :
             case 'Comparison' :
             case 'Staticclass' :
+            case 'Sequence' :
                 $atom->isNull = false;
                 break;
 

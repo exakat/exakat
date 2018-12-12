@@ -30,14 +30,13 @@ class Constant extends Plugin {
     public $type = 'boolean';
 
     private $deterministFunctions = array();
-    static public $PROP_CONSTANTS      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
     
     public function __construct($config) {
         parent::__construct();
         
         $data = new Methods($config);
         $deterministFunctions = $data->getDeterministFunctions();
-        $this->deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
+        $this->deterministFunctions = array_map(function ($x) { return "\\$x";}, $deterministFunctions);
     }
     
     public function run($atom, $extras = array()) {
@@ -100,7 +99,7 @@ class Constant extends Plugin {
 
             case 'Ternary' :
                 $atom->constant = $extras['CONDITION']->constant &&
-                                  $extras['THEN']->constant  &&
+                                  $extras['THEN']->constant      &&
                                   $extras['ELSE']->constant;
                 break;
 
@@ -124,7 +123,7 @@ class Constant extends Plugin {
                 break;
 
             default :
-                $atom->constant = false;
+                $atom->constant = Load::NOT_CONSTANT_EXPRESSION;
         }
     }
 }

@@ -26,12 +26,10 @@ class Strval extends Plugin {
     public $name = 'noDelimiter';
     public $type = 'string';
 
-    static public $PROP_STRVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
-    
     public function run($atom, $extras) {
         foreach($extras as $extra) {
-            if ($extra->noDelimiter === null)  {
-                $atom->noDelimiter = null;
+            if ($extra->noDelimiter === '')  {
+                $atom->noDelimiter = '';
                 return ;
             }
         }
@@ -195,7 +193,8 @@ class Strval extends Plugin {
                 break;
 
         default :
-            
+        case 'Sequence' : 
+            // Nothing, really
         }
     }
 }

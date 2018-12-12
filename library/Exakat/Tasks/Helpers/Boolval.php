@@ -26,8 +26,6 @@ class Boolval extends Plugin {
     public $name = 'boolean';
     public $type = 'boolean';
 
-    static public $PROP_BOOLVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Nsname');
-    
     public function run($atom, $extras) {
         // Special case for Arraylist, so it won't be blocked by the filter behind.
         if ($atom->atom === 'Arrayliteral') {
