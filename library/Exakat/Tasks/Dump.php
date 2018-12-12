@@ -93,7 +93,8 @@ class Dump extends Tasks {
 
             $query = <<<SQL
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       thema STRING
+                       thema STRING,
+                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
                     )
 SQL;
             $this->sqlite->query($query);
