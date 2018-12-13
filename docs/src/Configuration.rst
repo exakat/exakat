@@ -170,6 +170,7 @@ There may be several sections, as long as the names are distinct.
 It is recommended to use all low-case names for custom themes. Exakat uses names with a first capital letter, which prevents conflicts. Behavior is undefined if a custom theme has the same name as a default theme.
 
 :: 
+
     ['mine']
     analyzer[] = 'Structures/AddZero';
     analyzer[] = 'Performances/ArrayMergeInLoops';
@@ -261,18 +262,7 @@ Some analyzer may be configured individually. Those parameters are then specific
 
 Analyzers may be configured in the `project/*/config.ini`; they may also be configured globally in the `config/exakat.ini` file.
 
-+ :ref:`php-keywords-as-names`
-   + allowedNames : 
-   + reservedNames : 
-+ :ref:`too-many-children`
-   + childrenClassCount : 15
-+ :ref:`too-many-local-variables`
-   + tooManyLocalVariableThreshold : 15
-+ :ref:`too-many-native-calls`
-   + nativeCallCounts : 3
-+ :ref:`too-many-parameters`
-   + parametersCount : 8
-
+{{PARAMETERED_ANALYSIS}}
 
 
 Configuring analysis to be run
@@ -317,6 +307,7 @@ Example
 #######
 
 ::
+
     project_reports[] = 'Drillinstructor';
     project_reports[] = 'Owasp';
 
@@ -327,6 +318,7 @@ Example
 With that configuration, the Drillinstructor and the Owasp report are created automatically when running 'project'. Use the following command to get the specific themes ; 
 
 ::
+
     php exakat.phar report -p <project> -format Text -T Security -v 
     
 

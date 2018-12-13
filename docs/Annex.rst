@@ -1455,7 +1455,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo, Stats)
-  * Variables With Long Names (Variables/VariableLong ; )
+  * Variables With Long Names (Variables/VariableLong ; Appinfo)
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Codacy, Simple, Suggestions, Level 2)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Codacy, Simple)

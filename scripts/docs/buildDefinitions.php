@@ -76,6 +76,7 @@ class Docs {
     private $php_error_list         = array();
     private $exakat_extension_list  = '';
     private $exakat_extension_det   = '';
+    private $parametered_analysis   = '';
     
     private $exakat_site            = '';
     private $exakat_version         = '';
@@ -309,12 +310,25 @@ SELECT GROUP_CONCAT(c.name, ', ') AS categories FROM analyzers a
     WHERE
         a.folder = "$folder" AND
         a.name   = "$analyzer" AND
-        c.name   != 'All'
+        (c.name NOT IN ('All'))
 SQL
     );
             $row = $res->fetchArray(\SQLITE3_ASSOC);
-            
+
+            // Only handling 2 parameters max
             $ini = parse_ini_file($file, true);
+            if (isset($ini['parameter1']) && $row['categories'] != 'Appinfo') {
+                $this->parametered_analysis .= $this->rst_link($ini['name'], $this->rst_anchor($ini['name'])).PHP_EOL.
+'  + '.$ini['parameter1']['name'].' : '.$ini['parameter1']['default'].PHP_EOL.
+'    + '.$ini['parameter1']['description'].PHP_EOL;
+                if (isset($ini['parameter2'])) {
+                $this->parametered_analysis .= 
+'  + '.$ini['parameter2']['name'].' : '.$ini['parameter2']['default'].PHP_EOL.
+'    + '.$ini['parameter2']['description'].PHP_EOL;
+                }
+            }
+            
+            
             if (empty($ini['exakatSince'])) {
                 print "No exakatSince in {$file}\n";
                 continue;
@@ -418,6 +432,7 @@ SQL
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
                             'EXTENSION_LIST'         => $this->exakat_extension_list,
                             'EXTENSION_DETAILS'      => $this->exakat_extension_det,
+                            'PARAMETERED_ANALYSIS'   => $this->parametered_analysis,
                             );
     }
 
