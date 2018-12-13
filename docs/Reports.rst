@@ -330,9 +330,13 @@ Marmelab is a report format to build GraphQL server with exakat's results. Expor
 You may also learn more about GraphQL at [Introducing Json GraphQL Server](https://marmelab.com/blog/2017/07/12/json-graphql-server.html).
 
 ::
+
     php exakat.phar report -p -format Marmelab -file marmelab
     cp projects/myproject/marmelab.json path/to/marmelab
     json-graphql-server db.json
+    
+
+
 
 Marmelab is a JSON report format.
 
@@ -658,7 +662,9 @@ The Text report is a very simple text format.
 The Text report displays one result per line, with the following format  : 
 
 ::
+    
    /path/from/project/root/to/file:line[space]name of analysis
+   
    
 This format is fast, and fitted for machine communications.
 

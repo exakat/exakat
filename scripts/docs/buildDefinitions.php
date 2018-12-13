@@ -801,16 +801,19 @@ SPHINX;
         
             foreach($liste as &$a) {
                 if (isset($deja[$a])) { 
-                    continue; 
+                    $name = $deja[$a];
+                } else {
+                    list($desc, $name) = $this->build_analyzer_doc($a, $a2themes);
+                    $deja[$a] = $name;
+                    $analyzers[$name] = $desc;
                 }
-                $deja[$a] = 1;
-                list($desc, $name) = $this->build_analyzer_doc($a, $a2themes);
-                $a = $this->rst_link($name);
-                $analyzers[$name] = $desc;
+                $a = $this->rst_link($name, $this->rst_anchor($name));
             }
             unset($a);
         
             sort($liste);
+            print $row['name']. ' : '.count($liste).PHP_EOL;
+            print_r($liste);
             $this->text .= $this->rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
         
