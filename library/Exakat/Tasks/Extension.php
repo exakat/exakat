@@ -27,101 +27,157 @@ use Exakat\Config;
 
 class Extension extends Tasks {
     const CONCURENCE = self::ANYTIME;
+    
+    private $extensionList = array();
 
     //install, list, local, uninstall, upgrade
     public function run() {
-        switch($this->config->subcommand) {
-            case 'install' :
-                if (file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
-                    print "This extension already exists in the ext folder. Remove it manually, or with 'uninstall' command.\n";
-                    return;
-                }
+        if (!in_array($this->config->subcommand, array('install',
+                                                       'uninstall',
+                                                       'list',
+                                                       'local',
+                                                       'update',
+                                                     ))) {
+            $this->local();
+        } else {
+            $this->{$this->config->subcommand}();
+        }
+    }
+    
+    private function install() {
+        if (file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
+            print "This extension already exists in the ext folder. Remove it manually, or with 'uninstall' command.\n";
+            return;
+        }
+    
+        $this->fetchExtensionList();
 
-                $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
-                if (empty($json)) {
-                    print "Coudln't reach the remote server.\n";
-                    return;
-                }
+        if (!isset($this->extensionList[$this->config->extension])) {
+            print "Couldn't find that extension on the remote server. Aborting\n";
+            return;
+        }
+    
+        $query = http_build_query(array('file' => $this->config->extension));
+        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?'.$query);
+        
+        if (hash('sha256', $raw) !== $this->extensionList[$this->config->extension]->sha256) {
+            print "Error while downloading the extension : the security signatures don't match. Aborting\n";
+            return;
+        }
+        
+        if (!file_exists("{$this->config->dir_root}/ext/")) {
+            mkdir("{$this->config->dir_root}/ext/", 0700);
+        }
+    
+        $extensionPhar = "{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+        file_put_contents($extensionPhar, $raw);
+        
+        print "{$this->config->extension} installed with success!\n";
+    }
 
-                $list = json_decode($json);
-                if (empty($list)) {
-                    print "Coudln't read the remote list.\n";
-                    return;
-                }
-                
-                $ext = 'none';
-                foreach($list as $e) {
-                    if ($e->name === $this->config->extension) {
-                        $ext = $e;
-                        break;
-                    }
-                }
-                
-                if ($ext === 'none') {
-                    print "Couldn't find that extension on the remote server. Aborting\n";
-                    return;
-                }
+    private function update() {
+        if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
+            print "No such extension to update.\n"."{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+            return;
+        }
 
-                $query = http_build_query(array('file' => $this->config->extension));
-                $raw = file_get_contents('https://www.exakat.io/extensions/index.php?'.$query);
-                
-                if (hash('sha256', $raw) !== $ext->sha256) {
-                    print "Error while downloading the extension : the security signatures don't match. Aborting\n";
-                    return;
-                }
-                
-                
-                if (!file_exists("{$this->config->dir_root}/ext/")) {
-                    mkdir("{$this->config->dir_root}/ext/", 0700);
-                }
+        $this->fetchExtensionList();
 
-                file_put_contents("{$this->config->dir_root}/ext/{$this->config->extension}.phar", $raw);
-                print "{$this->config->extension} installed with success!\n";
-                break 1;
+        if (!isset($this->extensionList[$this->config->extension])) {
+            print "Couldn't find that extension on the remote server. Aborting\n";
+            return;
+        }
 
-            case 'uninstall' :
-                if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
-                    print "No such extension to remove.\n";
-                    return;
-                }
+        $ini = parse_ini_file("phar://{$this->config->dir_root}/ext/{$this->config->extension}.phar/config.ini");
+        if ($this->extensionList[$this->config->extension]->build < $ini['build']) {
+            print "The current extension is newer than the remote one. Remove with 'uninstall' first. Keeping previous version and aborting\n";
+            return;
+        } elseif ($this->extensionList[$this->config->extension]->build > $ini['build']) {
+            print "The current extension is the same as the remote one. Remove with 'uninstall' first. Keeping previous version and aborting\n";
+            return;
+        }
 
-                print "Uninstalling the extension from exakat\n";
-                sleep(2);
-                unlink("{$this->config->dir_root}/ext/{$this->config->extension}.phar");
-                print "Done\n";
+        $query = http_build_query(array('file' => $this->config->extension));
+        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?'.$query);
+        
+        if (hash('sha256', $raw) !== $this->extensionList[$this->config->extension]->sha256) {
+            print "Error while downloading the extension : the security signatures don't match. Keeping previous version. Aborting\n";
+            return;
+        }
+        
+        if (!file_exists("{$this->config->dir_root}/ext/")) {
+            mkdir("{$this->config->dir_root}/ext/", 0700);
+        }
 
-                break 1;
+        $extensionPhar = "{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+        file_put_contents($extensionPhar, $raw);
 
-            case 'list' :
-                $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
-                if (empty($json)) {
-                    print "Coudln't reach the remote server.\n";
-                    return;
-                }
-
-                $list = json_decode($json);
-                if (empty($list)) {
-                    print "Coudln't read the remote list.\n";
-                    return;
-                }
-                
-                $names = array_column($list, 'name');
-                print '+ '.implode(PHP_EOL, $names).PHP_EOL;
-                break 1;
-
-            case 'local' :
-            default :
-                $list = $this->config->ext->getJarList();
-                sort($list);
-
-                print PHP_EOL;
-                foreach($list as $l) {
-                    // drop the .phar
-                    print '+ '.substr($l, 0, -5).PHP_EOL;
-                }
-                
-                print 'Total : '.count($list).' extensions'.PHP_EOL;
-                break 1;
+        print "{$this->config->extension} upgraded to ".$this->extensionList[$this->config->extension]->version." with success!\n";
+    }
+    
+    private function uninstall() {
+        if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
+            print "No such extension to remove.\n";
+            return;
+        }
+    
+        print "Uninstalling the extension from exakat\n";
+        unlink("{$this->config->dir_root}/ext/{$this->config->extension}.phar");
+        print "Done\n";
+    }
+    
+    private function list() {
+        $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
+        if (empty($json)) {
+            print "Coudln't reach the remote server.\n";
+            return;
+        }
+    
+        $list = json_decode($json);
+        if (empty($list)) {
+            print "Coudln't read the remote list.\n";
+            return;
+        }
+        
+        $names = array_column($list, 'name');
+        print '+ '.implode("\n+ ", $names).PHP_EOL;
+    }
+    
+    private function local() {
+        $list = $this->config->ext->getJarList();
+        sort($list);
+    
+        print PHP_EOL;
+        foreach($list as $l) {
+            // drop the .phar
+            if (file_exists("phar://{$this->config->dir_root}/ext/$l/config.ini")) {
+                $ini = parse_ini_file("phar://{$this->config->dir_root}/ext/$l/config.ini");
+            } else {
+                $ini = array('version' => '', 
+                             'build'   => '',
+                             );
+            }
+            printf("+ %-10s  %5s-%5s\n", substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
+        }
+        
+        print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;
+    }
+    
+    private function fetchExtensionList() {
+        $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
+        if (empty($json)) {
+            print "Coudln't reach the remote server.\n";
+            return;
+        }
+    
+        $list = json_decode($json);
+        if (empty($list)) {
+            print "Coudln't read the remote list.\n";
+            return;
+        }
+        
+        foreach($list as $e) {
+            $this->extensionList[$e->name] = $e;
         }
     }
 }

@@ -201,12 +201,12 @@ class CommandLine extends Config {
         
             if ($this->config['command'] === 'extension') {
                 $subcommand = array_shift($args);
-                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local'))) {
+                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local', 'update'))) {
                     $subcommand = 'local';
                 }
                 $this->config['subcommand'] = $subcommand;
                 
-                if (in_array($subcommand, array('install', 'uninstall'))) {
+                if (in_array($subcommand, array('install', 'uninstall', 'update'))) {
                     $this->config['extension'] = array_shift($args);
                 }
             }
