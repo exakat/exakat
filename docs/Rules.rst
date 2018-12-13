@@ -8,19 +8,19 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 12 Dec 2018 18:50:38 +0000
-.. comment: Generation hash : 76fd89b72c762a2233b0a8c102d91d035d9757b5
+.. comment: Generation date : Thu, 13 Dec 2018 14:03:58 +0000
+.. comment: Generation hash : bf8a35b5e8be0438b55db6b110c3aee5754cea73
 
 
-.. _$http\_raw\_post\_data:
+.. _$http\_raw\_post\_data-usage:
 
-$HTTP_RAW_POST_DATA
-###################
+$HTTP_RAW_POST_DATA Usage
+#########################
 
 
-$HTTP_RAW_POST_DATA is deprecated, and should be replaced by php://input. 
+`$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_ is deprecated, and should be replaced by php://input. 
 
-$HTTP_RAW_POST_DATA is deprecated since PHP 5.6.
+`$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_ is deprecated since PHP 5.6.
 
 It is possible to ready by setting always_populate_raw_post_data to -1.
 
@@ -57,11 +57,11 @@ $this Belongs To Classes Or Traits
 ##################################
 
 
-$this variable represents only the current object. 
+`$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable represents only the current object. 
 
 It is a pseudo-variable, and should be used within class's or trait's methods (except for static) and not outside.
 
-PHP 7.1 is stricter and check for $this at several positions. Some are found by static analysis, some are dynamic analysis.
+PHP 7.1 is stricter and check for `$this <http://php.net/manual/en/language.oop5.basic.php>`_ at several positions. Some are found by static analysis, some are dynamic analysis.
 
 .. code-block:: php
 
@@ -129,9 +129,9 @@ $this Is Not An Array
 #####################
 
 
-``$this`` variable represents the current object and it is not an array. 
+`$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable represents the current object and it is not an array. 
 
-This is unless the class (or its parents) has the ``ArrayAccess`` interface, or extends ``ArrayObject`` or ``SimpleXMLElement``.
+This is unless the class (or its parents) has the `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface, or extends ArrayObjec` or `SimpleXMLElement <http://php.net/manual/en/class.simplexmlelement.php>`_.
 
 .. code-block:: php
 
@@ -184,11 +184,11 @@ $this Is Not For Static Methods
 ###############################
 
 
-Static methods shouldn't use $this variable.
+Static methods shouldn't use `$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable.
 
-$this variable represents an object, the current object. It is not compatible with a static method, which may operate without any object. 
+`$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable represents an object, the current object. It is not compatible with a static method, which may operate without any object. 
 
-While executing a static method, ``$this`` is actually set to ``NULL``.
+While executing a static method, `$this <http://php.net/manual/en/language.oop5.basic.php>`_ is actually set to `NULL <http://php.net/manual/en/language.types.null.php>`_.
 
 .. code-block:: php
 
@@ -276,9 +276,9 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 #########
 
 
-PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the class name that is used in the left part of the operator.
+PHP has a special class constant to hold the name of the class : ``class`` keyword. It represents the class name that is used in the left part of the operator.
 
-Using '\:\:class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
+Using ``\:\:class`` is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
 
 It is introduced in PHP 5.5.
 
@@ -303,7 +303,7 @@ It is introduced in PHP 5.5.
    ?>
 
 
-Be aware that ``\:\:class`` is a replacement for ``__CLASS__`` magic constant. 
+Be aware that ``\:\:class`` is a replacement for `__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ magic constant. 
 
 See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_.
 
@@ -333,7 +333,7 @@ Suggestions
 ##########
 
 
-@ is the 'no scream' operator : it suppresses error output. 
+`@ <http://php.net/manual/en/language.operators.errorcontrol.php>`_ is the 'no scream' operator : it suppresses error output. 
 
 .. code-block:: php
 
@@ -762,7 +762,7 @@ Altering Foreach Without Reference
 ##################################
 
 
-Foreach() loop that should use a reference. 
+`Foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop that should use a reference. 
 
 When using a foreach loop that modifies the original source, it is recommended to use referenced variables, rather than access the original value with $source[$index]. 
 
@@ -1129,7 +1129,7 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
    ?>
 
 
-`Closure <http://php.net/manual/fr/class.closure.php>`_ arguments are omitted.
+`Closure <http://php.net/manual/en/class.closure.php>`_ arguments are omitted.
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
@@ -2300,7 +2300,7 @@ Break With 0
 ############
 
 
-Cannot `break <http://php.net/manual/en/control-structures.break.php>`_ 0, as this makes no sense. Break 1 is the minimum, and is the default value.
+Cannot `break <http://php.net/manual/en/control-structures.break.php>`_ 0, as this makes no sense. `Break <http://php.net/manual/en/control-structures.break.php>`_ 1 is the minimum, and is the default value.
 
 .. code-block:: php
 
@@ -2550,7 +2550,7 @@ Can't Count Non-Countable
 #########################
 
 
-Count() emits an error when it tries to count scalars or objects what don't implement Countable interface.
+`Count() <http://www.php.net/count>`_ emits an error when it tries to count scalars or objects what don't implement Countable interface.
 
 .. code-block:: php
 
@@ -2669,7 +2669,7 @@ Can't Throw Throwable
 
 Classes extending ``Throwable`` can't be thrown. The same applies to interfaces. 
 
-Although this code lints, PHP throws a Fatal error when executing or including it : ``Class fooThrowable cannot implement interface `Throwable <http://php.net/manual/fr/class.throwable.php>`_, extend Exception or Error instead``.
+Although this code lints, PHP throws a Fatal error when executing or including it : ``Class fooThrowable cannot implement interface `Throwable <http://php.net/manual/en/class.throwable.php>`_, extend Exception or Error instead``.
 
 .. code-block:: php
 
@@ -2789,7 +2789,7 @@ Cant Use Return Value In Write Context
 ######################################
 
 
-Empty() used to work only on data containers, such as variables. Until PHP 5.5, it was not possible to use directly expressions, such as functioncalls, inside an `empty() <http://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
+`empty() <http://www.php.net/empty>`_ used to work only on data containers, such as variables. Until PHP 5.5, it was not possible to use directly expressions, such as functioncalls, inside an `empty() <http://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
 
 .. code-block:: php
 
@@ -3040,7 +3040,7 @@ Check JSON
 
 Check errors whenever JSON is encoded or decoded. 
 
-In particular, ``NULL`` is a valid decoded JSON response. If you want to avoid mistaking NULL for an error, it is recommended to call ``json_last_error``.
+In particular, ``NULL`` is a valid decoded JSON response. If you want to avoid mistaking `NULL <http://php.net/manual/en/language.types.null.php>`_ for an error, it is recommended to call ``json_last_error``.
 
 .. code-block:: php
 
@@ -3388,11 +3388,11 @@ Closure Could Be A Callback
 ###########################
 
 
-`Closure <http://php.net/manual/fr/class.closure.php>`_ could be simplified to a callback. Callbacks are strings or arrays.
+`Closure <http://php.net/manual/en/class.closure.php>`_ could be simplified to a callback. Callbacks are strings or arrays.
 
 A simple closure that only returns arguments relayed to another function or method, could be reduced to a simpler expression. They 
 
-`Closure <http://php.net/manual/fr/class.closure.php>`_ may be simplified with a string, for functioncall, with an array for methodcalls and static methodcalls. 
+`Closure <http://php.net/manual/en/class.closure.php>`_ may be simplified with a string, for functioncall, with an array for methodcalls and static methodcalls. 
 
 Performances : simplifying a closure tends to reduce the call time by 50%. 
 
@@ -3436,9 +3436,9 @@ Closure May Use $this
 #####################
 
 
-$this is automatically accessible to closures.
+`$this <http://php.net/manual/en/language.oop5.basic.php>`_ is automatically accessible to closures.
 
-When closures were introduced in PHP, they couldn't use the $this variable, making is cumbersome to access local properties when the closure was created within an object. 
+When closures were introduced in PHP, they couldn't use the `$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable, making is cumbersome to access local properties when the closure was created within an object. 
 
 .. code-block:: php
 
@@ -4475,7 +4475,7 @@ Could Be Static Closure
 #######################
 
 
-`Closure <http://php.net/manual/fr/class.closure.php>`_ may be static, and prevent the import of ``$this``. 
+`Closure <http://php.net/manual/en/class.closure.php>`_ may be static, and prevent the import of ``$this``. 
 
 
 
@@ -4752,7 +4752,7 @@ Could Use Compact
 #################
 
 
-Compact() turns a group of variables into an array. It may be used to simplify expressions. 
+`Compact() <http://www.php.net/compact>`_ turns a group of variables into an array. It may be used to simplify expressions. 
 
 .. code-block:: php
 
@@ -5684,7 +5684,7 @@ Don't Change Incomings
 ######################
 
 
-PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
+PHP hands over a lot of information using special variables like `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_, `$_POST <http://php.net/manual/en/reserved.variables.post.php>`_, etc... Modifying those variables and those values inside variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
 
 .. code-block:: php
 
@@ -6437,11 +6437,11 @@ Ellipsis Usage
 ##############
 
 
-Usage of the ellipsis keyword. The keyword is three dots : ... . It is also named variadic or splat operator.
+Usage of the ellipsis keyword. The keyword is three dots : `... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ . It is also named variadic or splat operator.
 
 It may be in function definitions, either in functioncalls.
 
-... allows for packing or unpacking arguments into an array.
+`... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ allows for packing or unpacking arguments into an array.
 
 .. code-block:: php
 
@@ -6910,7 +6910,7 @@ The code does try, then catch errors but do no act upon the error.
 
 At worst, the error should be logged, so as to measure the actual usage of the catch expression.
 
-``catch( Exception $e)`` (PHP 5) or ``catch(`Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e)`` with empty catch block should be banned. They ignore any error and proceed as if nothing happened. At worst, the event should be logged for future analysis. 
+``catch( Exception $e)`` (PHP 5) or ``catch(`Throwable <http://php.net/manual/en/class.throwable.php>`_ $e)`` with empty catch block should be banned. They ignore any error and proceed as if nothing happened. At worst, the event should be logged for future analysis. 
 
 See also `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_.
 
@@ -7359,7 +7359,7 @@ Find Key Directly
 
 No need for a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ to search for a key. 
 
-PHP offers two solutions : `array_search() <http://www.php.net/array_search>`_ and `array_keys() <http://www.php.net/array_keys>`_. Array_search() finds the first key that fits a value, and array_keys returns all the keys. 
+PHP offers two solutions : `array_search() <http://www.php.net/array_search>`_ and `array_keys() <http://www.php.net/array_keys>`_. `Array_search() <http://www.php.net/array_search>`_ finds the first key that fits a value, and array_keys returns all the keys. 
 
 .. code-block:: php
 
@@ -8962,7 +8962,7 @@ Iffectations
 Affectations that appears in a condition. 
 
 Iffectations are a way to do both a test and an affectations. 
-They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition. 
+They may also be typos, such as if ($x = 3) { `... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ }, leading to a constant condition. 
 
 .. code-block:: php
 
@@ -9473,7 +9473,7 @@ Indirect Injection
 ##################
 
 
-Look for injections through indirect usage for GPRC values ($_GET, $_POST, $_REQUEST, $_COOKIE). 
+Look for injections through indirect usage for GPRC values (`$_GET <http://php.net/manual/en/reserved.variables.get.php>`_, `$_POST <http://php.net/manual/en/reserved.variables.post.php>`_, `$_REQUEST <http://php.net/manual/en/reserved.variables.request.php>`_, $_COOKIE). 
 
 .. code-block:: php
 
@@ -9900,7 +9900,7 @@ Isset() On The Whole Array
 ##########################
 
 
-Isset() works quietly on a whole array. There is no need to test all previous index before testing for the target index.
+`Isset() <http://www.php.net/isset>`_ works quietly on a whole array. There is no need to test all previous index before testing for the target index.
 
 .. code-block:: php
 
@@ -10386,7 +10386,7 @@ Even two 'or' comparisons are slower than using a `in_array() <http://www.php.ne
    ?>
 
 
-See also `in_array() <http://php.net/in_array>`_.
+See also `in_array() <http://www.php.net/in_array>`_.
 
 +-------------+----------------------------------------------+
 | Short name  | Performances/LogicalToInArray                |
@@ -10885,7 +10885,7 @@ Method Could Be Static
 ######################
 
 
-A method that doesn't make any usage of $this could be turned into a static method. 
+A method that doesn't make any usage of `$this <http://php.net/manual/en/language.oop5.basic.php>`_ could be turned into a static method. 
 
 While static methods are usually harder to handle, recognizing the static status is a first step before turning the method into a standalone function.
 
@@ -11207,7 +11207,7 @@ It seems that some cases are missing in this switch structure.
 
 When comparing two different `switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures, it appears that some cases are missing in one of them. The set of cases are almost identical, but one of the values are missing. 
 
-Switch() structures using strings as literals are compared in this analysis. When the discrepancy between two lists is below 25%, both switches are reported.
+`Switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures using strings as literals are compared in this analysis. When the discrepancy between two lists is below 25%, both switches are reported.
 
 .. code-block:: php
 
@@ -11560,7 +11560,7 @@ Modernize Empty With Expression
    ?>
 
 
-See also `empty() <http://www.php.net/manual/en/function.empty.php>`_.
+See also `empty() <http://www.php.net/empty>`_.
 
 +-------------+------------------------------+
 | Short name  | Structures/ModernEmpty       |
@@ -11795,7 +11795,7 @@ Multiple Definition Of The Same Argument
 ########################################
 
 
-A method's signature is holding twice (or more) the same argument. For example, function x ($a, $a) { ... }. 
+A method's signature is holding twice (or more) the same argument. For example, function x ($a, $a) { `... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ }. 
 
 This is accepted as is by PHP 5, and the last parameter's value will be assigned to the variable. PHP 7.0 and more recent has dropped this feature, and reports a fatal error when linting the code.
 
@@ -13062,7 +13062,7 @@ No Count With 0
 
 Comparing `count() <http://www.php.net/count>`_, strlen() or mb_strlen() to 0 is a waste of resources. There are three distinct situations.
 
-When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, !=, it is more efficient to use `empty() <http://www.php.net/empty>`_. Empty() is a language constructs that checks if a value is present, while `count() <http://www.php.net/count>`_ actually load the number of element.
+When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, !=, it is more efficient to use `empty() <http://www.php.net/empty>`_. `empty() <http://www.php.net/empty>`_ is a language construct that checks if a value is present, while `count() <http://www.php.net/count>`_ actually load the number of element.
 
 .. code-block:: php
 
@@ -13080,7 +13080,7 @@ When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, 
    ?>
 
 
-When comparing `count() <http://www.php.net/count>`_ strictly with 0 (>) it is more efficient to use !(`empty()) <http://www.php.net/empty>`_
+When comparing `count() <http://www.php.net/count>`_ strictly with 0 and ``>``, it is more efficient to use ``!(empty(  ))``
 
 .. code-block:: php
 
@@ -13147,7 +13147,7 @@ PHP features magic methods, which are methods related to operators.
 
 Magic methods, such as `__get() <http://php.net/manual/en/language.oop5.magic.php>`_, related to =, or `__clone() <http://php.net/manual/en/language.oop5.magic.php>`_, related to ``clone``, are supposed to be used in an object environment, and not with direct call. 
 
-It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the ``__toString()`` method.
+It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ method.
 
 .. code-block:: php
 
@@ -14490,7 +14490,7 @@ PHP 5 and older doesn't check that a method is static or not : at any point, the
 
 
 It is a bad idea to call non-static method statically. Such method may make use of special
-variable $this, which will be undefined. PHP will not check those calls at compile time,
+variable `$this <http://php.net/manual/en/language.oop5.basic.php>`_, which will be undefined. PHP will not check those calls at compile time,
 nor at running time. 
 
 It is recommended to update this situation : make the method actually static, or use it only 
@@ -16702,7 +16702,7 @@ Print And Die
 #############
 
 
-Die() also prints. 
+`Die() <http://www.php.net/die>`_ also prints. 
 
 When stopping a script with `die() <http://www.php.net/die>`_, it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
 
@@ -17645,7 +17645,7 @@ Reserved Keywords In PHP 7
 
 PHP reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
 
-For example, string, float, false, true, null, resource,... are not acceptable as class name. 
+For example, string, float, false, true, null, resource,`... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ are not acceptable as class name. 
 
 .. code-block:: php
 
@@ -18193,7 +18193,7 @@ Sequences In For
 ################
 
 
-For() instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
+`For() <http://php.net/manual/en/control-structures.for.php>`_ instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
 
 .. code-block:: php
 
@@ -18886,7 +18886,7 @@ Should Use Foreach
 
 Use foreach instead of for when traversing an array.
 
-Foreach() is the modern loop : it maps automatically every element of the array to a blind variable, and loop over it. This is faster and safer.
+`Foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ is the modern loop : it maps automatically every element of the array to a blind variable, and loop over it. This is faster and safer.
 
 .. code-block:: php
 
@@ -19094,9 +19094,9 @@ Beware, some edge cases may apply. In particular, backward compatibility may pre
 
 * `array_push() <http://www.php.net/array_push>`_ is equivalent to [] 
 * `is_object() <http://www.php.net/is_object>`_ is equivalent to `instanceof <http://php.net/manual/en/language.operators.type.php>`_
-* function_get_arg() and function_get_args() is equivalent to ellipsis : ``...``
+* function_get_arg() and function_get_args() is equivalent to ellipsis : `... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `chr() <http://www.php.net/chr>`_ is equivalent to string escape sequences, such as ``\n``, ``\x69``, ``u{04699}``
-* `call_user_func() <http://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(...$arguments)``
+* `call_user_func() <http://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(`... <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_$arguments)``
 * `is_null() <http://www.php.net/is_null>`_ is equivalent to ``=== null``
 * php_version() is equivalent to ``PHP_VERSION`` (the constant)
 * `is_array() <http://www.php.net/is_array>`_, `is_int() <http://www.php.net/is_int>`_, `is_object() <http://www.php.net/is_object>`_, etc. is equivalent to a scalar typehint
@@ -19359,13 +19359,13 @@ Should Yield With Key
 #####################
 
 
-iterator_to_array() will overwrite generated values with the same key. 
+`iterator_to_array() <http://www.php.net/iterator_to_array>`_ will overwrite generated values with the same key. 
 
 PHP generators are based on the ``yield`` keyword. They also delegate some generating to other methods, with ``yield from``. 
 
 When delegating, ``yield from`` uses the keys that are generated with ``yield``, and otherwise, it uses auto-generated index, starting with 0. 
 
-The trap is that each ``yield from `` reset the index generation and start again with 0. Coupled with iterator_to_array(), this means that the final generated array may lack some values, while a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop would yield all of them.
+The trap is that each ``yield from`` reset the index generation and start again with 0. Coupled with `iterator_to_array() <http://www.php.net/iterator_to_array>`_, this means that the final generated array may lack some values, while a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop would yield all of them.
 
 .. code-block:: php
 
@@ -19835,7 +19835,7 @@ Static Methods Called From Object
 #################################
 
 
-Static methods may be called without instantiating an object. As such, they never interact with the special variable '$this', as they do not depend on object existence. 
+Static methods may be called without instantiating an object. As such, they never interact with the special variable '`$this <http://php.net/manual/en/language.oop5.basic.php>`_', as they do not depend on object existence. 
 
 Besides this, static methods are normal methods that may be called directly from object context, to perform some utility task. 
 
@@ -19872,7 +19872,7 @@ Static Methods Can't Contain $this
 ##################################
 
 
-Static methods are also called ``class methods`` : they may be called even if the class has no instantiated object. Thus, the local variable ``$this`` won't exist, PHP will set it to NULL as usual. 
+Static methods are also called ``class methods`` : they may be called even if the class has no instantiated object. Thus, the local variable ``$this`` won't exist, PHP will set it to `NULL <http://php.net/manual/en/language.types.null.php>`_ as usual. 
 
 .. code-block:: php
 
@@ -19894,7 +19894,7 @@ Static methods are also called ``class methods`` : they may be called even if th
    ?>
 
 
-Either this is not a static method, which is fixed by removing the ``static`` keyword, or replace all $this mention by static properties ``Class\:\:$property``.
+Either this is not a static method, which is fixed by removing the ``static`` keyword, or replace all `$this <http://php.net/manual/en/language.oop5.basic.php>`_ mention by static properties ``Class\:\:$property``.
 
 See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 
@@ -20235,7 +20235,7 @@ The result of that function may be mistaken with an error.
 
 It is recommended to check the result of `strpos() <http://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
 
-This analyzer list all the `strpos() <http://www.php.net/strpos>`_-like functions that are directly compared with == or !=. preg_match(), when its first argument is a literal, is omitted : this function only returns NULL in case of regex error.
+This analyzer list all the `strpos() <http://www.php.net/strpos>`_-like functions that are directly compared with == or !=. preg_match(), when its first argument is a literal, is omitted : this function only returns `NULL <http://php.net/manual/en/language.types.null.php>`_ in case of regex error.
 
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/StrposCompare                                                                            |
@@ -20259,7 +20259,7 @@ Strtr Arguments
 ###############
 
 
-Strtr() replaces characters by others in a string. When using strings, `strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
+`Strtr() <http://www.php.net/strtr>`_ replaces characters by others in a string. When using strings, `strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
 
 In particular, `strtr() <http://www.php.net/strtr>`_ works on strings of the same size, and cannot be used to remove chars.
 
@@ -20427,7 +20427,7 @@ When the case block is empty, this analysis doesn't report it : the case is then
 
 This analysis cannot take into account comments about the fallthrough. 
 
-See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
+See also `CWE-484: Omitted `Break <http://php.net/manual/en/control-structures.break.php>`_ Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
          `Rule: no-switch-case-fall-through <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
 
 +-------------+------------------------+
@@ -22733,7 +22733,7 @@ On way to exploit unserialize, is to make PHP unserialized the data to an availa
    ?>
 
 
-See also `unserialize() <http://php.net/unserialize>`_, 
+See also `unserialize() <http://www.php.net/unserialize>`_, 
          `Securely Implementing (De)Serialization in PHP <https://paragonie.com/blog/2016/04/securely-implementing-de-serialization-in-php>`_.
 
 
@@ -23025,7 +23025,7 @@ Unused Inherited Variable In Closure
 
 Some closures forgot to make usage of inherited variables.
 
-`Closure <http://php.net/manual/fr/class.closure.php>`_ have two separate set of incoming variables : the arguments (between parenthesis) and the inherited variables, in the 'use' clause. Inherited variables are extracted from the local environment at creation time, and keep their value until execution. 
+`Closure <http://php.net/manual/en/class.closure.php>`_ have two separate set of incoming variables : the arguments (between parenthesis) and the inherited variables, in the 'use' clause. Inherited variables are extracted from the local environment at creation time, and keep their value until execution. 
 
 The reported closures are requesting some local variables, but do not make any usage of them. They may be considered as dead code.  
 
@@ -23852,7 +23852,7 @@ Use List With Foreach
 #####################
 
 
-Foreach() structures accepts list() as blind key. If the loop-value is an array with a fixed structure, it is possible to extract the values directly into variables with explicit names.
+`Foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ structures accepts list() as blind key. If the loop-value is an array with a fixed structure, it is possible to extract the values directly into variables with explicit names.
 
 .. code-block:: php
 
@@ -24790,7 +24790,7 @@ In special situations, variables may be used once :
 
 + PHP predefined variables, as they are already initialized. They are omitted in this analyze.
 + Interface function's arguments, since the function has no body; They are omitted in this analyze.
-+ Dynamically created variables ($$x, ${$this->y} or also using extract), as they are runtime values and can't be determined at static code time. They are reported for manual review.
++ Dynamically created variables ($$x, ${`$this <http://php.net/manual/en/language.oop5.basic.php>`_->y} or also using extract), as they are runtime values and can't be determined at static code time. They are reported for manual review.
 + Dynamically included files will provide in-scope extra variables.
 
 The current analyzer count variables at the application level, and not at a method scope level.
@@ -25200,7 +25200,7 @@ Useless Global
 ##############
 
 
-Global are useless in two cases. First, on super-globals, which are always globals, like $_GET. Secondly, on variables that are not used.
+Global are useless in two cases. First, on super-globals, which are always globals, like `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_. Secondly, on variables that are not used.
 
 .. code-block:: php
 
@@ -25220,7 +25220,7 @@ Global are useless in two cases. First, on super-globals, which are always globa
 
 
 Also, PHP has superglobals, a special team of variables that are always available, whatever the context. 
-They are : $GLOBALS, $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST and $_ENV.
+They are : $GLOBALS, $_SERVER, `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_, `$_POST <http://php.net/manual/en/reserved.variables.post.php>`_, $_FILES, $_COOKIE, $_SESSION, `$_REQUEST <http://php.net/manual/en/reserved.variables.request.php>`_ and `$_ENV <http://php.net/manual/en/reserved.variables.env.php>`_.
 
 +-------------+--------------------------+
 | Short name  | Structures/UselessGlobal |
@@ -25622,7 +25622,7 @@ Default values are provided to methods so as to make it convenient to use. Howev
 
 As much as possible, it is recommended to use explicit values in those methods, so as to prevent from being surprise at a future PHP evolution. 
 
-This analyzer tend to report a lot of false positives, including usage of `count() <http://www.php.net/count>`_. Count() indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
+This analyzer tend to report a lot of false positives, including usage of `count() <http://www.php.net/count>`_. `Count() <http://www.php.net/count>`_ indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
 
 +-------------+--------------------------------+
 | Short name  | Functions/UsesDefaultArguments |
@@ -25664,7 +25664,7 @@ Until PHP 7.1, ``$this`` may be used as an argument in a function or a method, a
 
 Starting with PHP 7.1, the PHP engine check thoroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
 
-Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and validated. If the file is included outside a class context, it will yield a fatal error : ``Using $this when not in object context``.
+Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and validated. If the file is included outside a class context, it will yield a fatal error : ``Using `$this <http://php.net/manual/en/language.oop5.basic.php>`_ when not in object context``.
 
 See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
@@ -25689,7 +25689,7 @@ Usort Sorting In PHP 7.0
 ########################
 
 
-Usort(), `uksort() <http://www.php.net/uksort>`_ and `uasort() <http://www.php.net/uasort>`_ behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
+`Usort() <http://www.php.net/usort>`_, `uksort() <http://www.php.net/uksort>`_ and `uasort() <http://www.php.net/uasort>`_ behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
 
 If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation). 
 
@@ -25894,7 +25894,7 @@ This structure is deprecated since PHP 7.2. It may disappear in the future.
    ?>
  
 
-See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
+See also `PHP RFC: Deprecations for PHP 7.2 : `Each() <http://www.php.net/each>`_ <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
 +-------------+---------------------------------------------------------+
 | Short name  | Structures/WhileListEach                                |
@@ -26405,7 +26405,7 @@ A fatal error is displayed, when an exception is not intercepted in the `__toStr
 
     PHP Fatal error:  Method myString\:\:`__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in ``file.php``
 
-See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
+See also `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_.
 
 +-------------+------------------------------------+
 | Short name  | Structures/toStringThrowsException |

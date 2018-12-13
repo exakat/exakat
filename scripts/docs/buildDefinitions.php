@@ -74,6 +74,8 @@ class Docs {
     private $text                   = '';
     private $ini_themes_config      = '';
     private $php_error_list         = array();
+    private $exakat_extension_list  = '';
+    private $exakat_extension_det   = '';
     
     private $exakat_site            = '';
     private $exakat_version         = '';
@@ -116,8 +118,12 @@ class Docs {
                  'insteadof'                      => 'http://php.net/manual/en/language.oop5.traits.php',
                      
                  '**'                             => 'http://php.net/manual/en/language.operators.arithmetic.php',
+                 '...'                            => 'http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list',
+                 '@'                              => 'http://php.net/manual/en/language.operators.errorcontrol.php',
                  '$_GET'                          => 'http://php.net/manual/en/reserved.variables.get.php',
                  '$_POST'                         => 'http://php.net/manual/en/reserved.variables.post.php',
+                 '$_REQUEST'                      => 'http://php.net/manual/en/reserved.variables.request.php',
+                 '$_ENV'                          => 'http://php.net/manual/en/reserved.variables.env.php',
                  '$HTTP_RAW_POST_DATA'            => 'http://php.net/manual/en/reserved.variables.httprawpostdata.php',
                  '$this'                          => 'http://php.net/manual/en/language.oop5.basic.php',
                   
@@ -138,11 +144,16 @@ class Docs {
                  '__clone'                      => 'http://php.net/manual/en/language.oop5.magic.php',
                  '__debugInfo'                  => 'http://php.net/manual/en/language.oop5.magic.php',
                  
-                 'ArrayAccess'                    => 'http://php.net/manual/en/class.arrayaccess.php',
-                 'Throwable'                      => 'http://php.net/manual/fr/class.throwable.php',
-                 'Closure'                        => 'http://php.net/manual/fr/class.closure.php',
-                 'Traversable'                    => 'http://php.net/manual/fr/class.traversable.php',
-                 'ParseError'                     => 'http://php.net/manual/fr/class.parseerror.php',
+                 'ArrayAccess'                  => 'http://php.net/manual/en/class.arrayaccess.php',
+                 'ArrayObject'                  => 'http://php.net/manual/en/class.arrayobject.php',
+                 'SimpleXMLElement'             => 'http://php.net/manual/en/class.simplexmlelement.php',
+                 'Throwable'                    => 'http://php.net/manual/en/class.throwable.php',
+                 'Generator'                    => 'http://php.net/manual/en/class.generator.php',
+                 'Closure'                      => 'http://php.net/manual/en/class.closure.php',
+                 'Traversable'                  => 'http://php.net/manual/en/class.traversable.php',
+                 'ParseError'                   => 'http://php.net/manual/en/class.parseerror.php',
+                 'DivisionByZeroError'          => 'http://php.net/manual/fr/class.divisionbyzeroerror.php',
+                 'NULL'                         => 'http://php.net/manual/en/language.types.null.php',
                  
                  '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',
@@ -174,7 +185,9 @@ class Docs {
         $this->makeUrlList();
         $this->getExternalLibrary();
         $this->prepareIniThemes();
-        
+
+        $this->prepareExakatExtensions();
+
         $this->getExakatInfo();
         $this->build_reports();
         $this->prepareText();
@@ -403,6 +416,8 @@ SQL
                             'PARAMETER_LIST'         => join('', $this->parameter_list),
                             'INI_THEMES'             => $this->ini_themes_config,
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
+                            'EXTENSION_LIST'         => $this->exakat_extension_list,
+                            'EXTENSION_DETAILS'      => $this->exakat_extension_det,
                             );
     }
 
@@ -554,7 +569,7 @@ $exampleTxt
 
     private function glossary($title, $description) {
         $alt = implode('|',array_keys($this->entries));
-        $alt = str_replace(array('*','(',')'),array('\\*','\(','\)'),$alt);
+        $alt = str_replace(array('*','(',')', '$', '.'), array('\\*','\(','\)', '\\$', '\\.'), $alt);
         
         $cbGlossary = function ($r) use ($title) {
             $letter = strtoupper($r[2]{0});
@@ -562,7 +577,10 @@ $exampleTxt
             
             if (isset($this->entries[$r[2]])) {
                 $url = $this->entries[$r[2]];
-                return $r[1].'`\''.$r[2].$r[3].' <'.$url.'>`_';
+                return $r[1].'`'.$r[2].$r[3].' <'.$url.'>`_';
+            } elseif (isset($this->entries[strtolower($r[2])])) {
+                $url = $this->entries[strtolower($r[2])];
+                return $r[1].'`'.$r[2].$r[3].' <'.$url.'>`_';
             } else {
                 return $r[0];
             }
@@ -576,8 +594,6 @@ $exampleTxt
             return "----".(count($codes) - 1)."----"; 
         };
         $description = preg_replace_callback('/<\\?php.*?\\?>/s', $saveCode, $description);
-
-
 
         $description = preg_replace_callback('/([^a-zA-Z_`])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])/is', $cbGlossary, ' '.$description);
 
@@ -891,5 +907,25 @@ GLOSSARY;
         } else {
             return $phpversion;
         }
+    }
+    
+    private function prepareExakatExtensions() {
+        $json = file_get_contents('https://www.exakat.io/extensions/index.json');
+        $list = json_decode($json);
+        
+        $this->exakat_extension_list = 'List of extensions : there are '.count($list).' extensions'.PHP_EOL.PHP_EOL;
+        $this->exakat_extension_det  = 'Details about the extension'.PHP_EOL.PHP_EOL;
+
+        foreach($list as $ext) {
+            $this->exakat_extension_list .= '* '.$ext->name.PHP_EOL;
+            
+            $this->exakat_extension_det .= $ext->name.PHP_EOL.str_repeat('#', strlen($ext->name)).PHP_EOL;
+            $this->exakat_extension_det .= 'This is the extension for '.$ext->name.PHP_EOL.PHP_EOL;
+        }
+
+        $this->exakat_extension_list .= PHP_EOL.PHP_EOL.PHP_EOL;
+        $this->exakat_extension_det .= PHP_EOL.PHP_EOL;
+        
+        print count($list)." extensions documented\n";
     }
 }

@@ -36,7 +36,7 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-EXTENSION_LIST
+{{EXTENSION_LIST}}
 
 Extension managements
 ---------------------
@@ -81,5 +81,5 @@ You may also remove the extension manually, by removing them from the extension 
 
 
 
-EXTENSIONS_DETAILS
+{{EXTENSION_DETAILS}}
 

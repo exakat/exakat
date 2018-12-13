@@ -2,6 +2,46 @@
 
 Glossary
 ============
++ `$`
+    + `$HTTP_RAW_POST_DATA`
+
+      + :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
+
+    + `$_ENV`
+
+      + :ref:`Useless Global <useless-global>`
+
+    + `$_GET`
+
+      + :ref:`Don't Change Incomings <don't-change-incomings>`
+      + :ref:`Indirect Injection <indirect-injection>`
+      + :ref:`Useless Global <useless-global>`
+
+    + `$_POST`
+
+      + :ref:`Don't Change Incomings <don't-change-incomings>`
+      + :ref:`Indirect Injection <indirect-injection>`
+      + :ref:`Useless Global <useless-global>`
+
+    + `$_REQUEST`
+
+      + :ref:`Indirect Injection <indirect-injection>`
+      + :ref:`Useless Global <useless-global>`
+
+    + `$this`
+
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
+      + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Method Could Be Static <method-could-be-static>`
+      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+      + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
+
+
 + `*`
     + `**`
 
@@ -11,7 +51,31 @@ Glossary
       + :ref:`Negative Power <negative-power>`
 
 
++ `.`
+    + `...`
+
+      + :ref:`Ellipsis Usage <ellipsis-usage>`
+      + :ref:`Iffectations <iffectations>`
+      + :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
+      + :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
+      + :ref:`Should Use Operator <should-use-operator>`
+
+
++ `@`
+    + `@`
+
+      + :ref:`@ Operator <@-operator>`
+
+
 + `A`
+    + `ArrayAccess`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
+    + `ArrayObject`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
     + `Array_search()`
 
       + :ref:`Find Key Directly <find-key-directly>`
@@ -115,10 +179,6 @@ Glossary
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Slow Functions <slow-functions>`
-
-    + `arrayaccess`
-
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
 
     + `assert()`
 
@@ -269,11 +329,6 @@ Glossary
 
       + :ref:`While(List() = Each()) <while(list()-=-each())>`
 
-    + `Empty()`
-
-      + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-      + :ref:`No Count With 0 <no-count-with-0>`
-
     + `each()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
@@ -387,6 +442,10 @@ Glossary
 
 
 + `G`
+    + `generator`
+
+      + :ref:`Don't Loop On Yield <don't-loop-on-yield>`
+
     + `glob()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
@@ -501,6 +560,10 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`isset() With Constant <isset()-with-constant>`
 
+    + `iterator_to_array()`
+
+      + :ref:`Should Yield With Key <should-yield-with-key>`
+
 
 + `M`
     + `magic_quotes_runtime()`
@@ -541,6 +604,19 @@ Glossary
 
 
 + `N`
+    + `NULL`
+
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
+      + :ref:`Check JSON <check-json>`
+      + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `Null`
+
+      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
+      + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
+      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
+
     + `next()`
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -549,6 +625,25 @@ Glossary
     + `nl2br()`
 
       + :ref:`Joining file() <joining-file()>`
+
+    + `null`
+
+      + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
+      + :ref:`Break With Non Integer <break-with-non-integer>`
+      + :ref:`Check All Types <check-all-types>`
+      + :ref:`Don't Unset Properties <don't-unset-properties>`
+      + :ref:`No Reference For Ternary <no-reference-for-ternary>`
+      + :ref:`No get_class() With Null <no-get\_class()-with-null>`
+      + :ref:`Null On New <null-on-new>`
+      + :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
+      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
+      + :ref:`Should Use Coalesce <should-use-coalesce>`
+      + :ref:`Should Use Operator <should-use-operator>`
+      + :ref:`Use === null <use-===-null>`
+      + :ref:`Use Nullable Type <use-nullable-type>`
+      + :ref:`Weak Typing <weak-typing>`
+      + :ref:`isset() With Constant <isset()-with-constant>`
 
 
 + `O`
@@ -659,6 +754,10 @@ Glossary
 
 
 + `S`
+    + `SimpleXMLElement`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
     + `Strtr()`
 
       + :ref:`Strtr Arguments <strtr-arguments>`
@@ -869,6 +968,7 @@ Glossary
 + `_`
     + `__CLASS__`
 
+      + :ref:`::class <\:\:class>`
       + :ref:`Detect Current Class <detect-current-class>`
 
     + `__DIR__`
@@ -933,6 +1033,7 @@ Glossary
     + `__toString`
 
       + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 

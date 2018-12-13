@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 12 Dec 2018 18:50:38 +0000
-.. comment: Generation hash : 76fd89b72c762a2233b0a8c102d91d035d9757b5
+.. comment: Generation date : Thu, 13 Dec 2018 14:03:58 +0000
+.. comment: Generation hash : bf8a35b5e8be0438b55db6b110c3aee5754cea73
 
 
 .. _analyze:
@@ -720,7 +720,7 @@ CompatibilityPHP56
 
 Total : 51 analysis
 
-* :ref:`$HTTP_RAW_POST_DATA`
+* :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * Classes/Anonymous
 * Classes/CantInheritAbstractMethod
 * Classes/ChildRemoveTypehint

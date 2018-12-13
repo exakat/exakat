@@ -36,7 +36,18 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-EXTENSION_LIST
+List of extensions : there are 6 extensions
+
+* Cakephp
+* Laravel
+* Melis
+* Slim
+* Wordpress
+* ZendF
+
+
+
+
 
 Extension managements
 ---------------------
@@ -81,5 +92,33 @@ You may also remove the extension manually, by removing them from the extension 
 
 
 
-EXTENSIONS_DETAILS
+Details about the extension
+
+Cakephp
+#######
+This is the extension for Cakephp
+
+Laravel
+#######
+This is the extension for Laravel
+
+Melis
+#####
+This is the extension for Melis
+
+Slim
+####
+This is the extension for Slim
+
+Wordpress
+#########
+This is the extension for Wordpress
+
+ZendF
+#####
+This is the extension for ZendF
+
+
+
+
 
