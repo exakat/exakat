@@ -113,13 +113,12 @@ PHP extensions should be provided with the list of structures they define (funct
 
 List of extensions : there are 6 extensions
 
-* Cakephp
-* Laravel
-* Melis
-* Slim
-* Wordpress
-* ZendF
-
+* :ref:`Cakephp <extension-cakephp>`
+* :ref:`Laravel <extension-laravel>`
+* :ref:`Melis <extension-melis>`
+* :ref:`Slim <extension-slim>`
+* :ref:`Wordpress <extension-wordpress>`
+* :ref:`ZendF <extension-zendf>`
 
 
 

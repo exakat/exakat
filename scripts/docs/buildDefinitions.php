@@ -812,8 +812,6 @@ SPHINX;
             unset($a);
         
             sort($liste);
-            print $row['name']. ' : '.count($liste).PHP_EOL;
-            print_r($liste);
             $this->text .= $this->rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
         
@@ -916,19 +914,76 @@ GLOSSARY;
         $json = file_get_contents('https://www.exakat.io/extensions/index.json');
         $list = json_decode($json);
         
+        $list2 = array();
+        foreach($list as $ext) {
+            $list2[$ext->name] = $ext;
+        }
+        ksort($list2);
+        $list = $list2;
+        unset($list2);
+        
         $this->exakat_extension_list = 'List of extensions : there are '.count($list).' extensions'.PHP_EOL.PHP_EOL;
         $this->exakat_extension_det  = 'Details about the extension'.PHP_EOL.PHP_EOL;
 
+        $summary = array();
+        $details = array();
         foreach($list as $ext) {
-            $this->exakat_extension_list .= '* '.$ext->name.PHP_EOL;
+            $summary[] = '* '.$this->rst_link($ext->name, $this->rst_anchor('extension '.$ext->name)); 
             
-            $this->exakat_extension_det .= $ext->name.PHP_EOL.str_repeat('#', strlen($ext->name)).PHP_EOL;
-            $this->exakat_extension_det .= 'This is the extension for '.$ext->name.PHP_EOL.PHP_EOL;
+            $details[] = $this->makeExtensionDoc($ext);
         }
 
-        $this->exakat_extension_list .= PHP_EOL.PHP_EOL.PHP_EOL;
-        $this->exakat_extension_det .= PHP_EOL.PHP_EOL;
+        $this->exakat_extension_list .= implode(PHP_EOL, $summary).PHP_EOL.PHP_EOL.PHP_EOL;
+        $this->exakat_extension_det  .= implode(PHP_EOL, $details).PHP_EOL.PHP_EOL;
         
         print count($list)." extensions documented\n";
+    }
+    
+    private function makeExtensionDoc($ext) {
+        $doc = $this->rst_anchor_def('extension '.$ext->name).
+               $ext->name.PHP_EOL.
+               str_repeat('#', strlen($ext->name)).PHP_EOL.
+               PHP_EOL;
+               
+        if (!file_exists('../Extensions/'.$ext->name)) { 
+            $doc .= PHP_EOL.PHP_EOL;
+            return $doc;
+        }
+        
+        if (file_exists('../Extensions/'.$ext->name.'/human/en/docs.ini')) {
+            $docs = parse_ini_file('../Extensions/'.$ext->name.'/human/en/docs.ini');
+            $doc .= $docs['description'];
+        } else {
+            $doc .= "This is extension $ext->name.\n\n";
+        }
+
+        $analyzers = parse_ini_file('../Extensions/'.$ext->name.'/analyzers.ini');
+        $doc .= 'This extension includes '.count($analyzers[$ext->name]).' analyzers.'.PHP_EOL.PHP_EOL;
+        $list = array();
+        foreach($analyzers[$ext->name] as $analyzer) {
+            $ini = parse_ini_file('../Extensions/'.$ext->name."/human/en/$analyzer.ini", true);
+            $list[strtolower($ini['name'])] = $ini['name'].' ('.$analyzer.')';
+            // Will be more detailled than that. Description, example...
+        }
+        ksort($list);
+        $doc .= '* '.implode("\n* ", $list).PHP_EOL.PHP_EOL.PHP_EOL;
+        
+        // Include other themas than All and $ext->name
+        
+        // Reports
+        // Include a presentation of the report : sections, usage. Must be in human/en/Report folder.
+        $reports = glob('../Extensions/'.$ext->name.'/Reports/*.php');
+        if (count($reports) == 1) {
+            $doc .= 'This extension includes one report : '.basename($reports[0], '.php').'.'.PHP_EOL;
+        } elseif (count($reports) > 1) {
+            $doc .= 'This extension includes '.count($reports).' reports.'.PHP_EOL;
+            foreach($reports as $report) {
+                $doc .= "* ".basename($report, '.php').PHP_EOL;
+            }
+            $doc .= PHP_EOL;
+        } // else : no report, no docs.
+
+        $doc .= PHP_EOL.PHP_EOL;
+        return $doc;
     }
 }
