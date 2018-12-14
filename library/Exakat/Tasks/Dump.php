@@ -1954,6 +1954,7 @@ SQL;
         $sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         
         $sqlite = new \Sqlite3($sqliteFile);
+        $sqlite->busyTimeout(5000);
 
         $query = "SELECT analyzer FROM resultsCounts WHERE analyzer IN (".makeList($analyzers).")";
         $ran = array();
