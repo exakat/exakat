@@ -25,29 +25,13 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class FunctioncallIsNot extends DSL {
+class HasNo extends DSL {
     public function run() {
-        list($fullnspath) = func_get_args();
+        list($property) = func_get_args();
 
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
+        assert($this->assertProperty($property));
 
-        $diff = $this->normalizeFunctioncalls($fullnspath);
-
-        if (empty($diff)) {
-            return new Command(Query::NO_QUERY);
-        }
-
-        $atomIs = $this->dslfactory->factory('atomIs');
-        $return = $atomIs->run('Functioncall');
-
-        $has = $this->dslfactory->factory('has');
-        $return->add($has->run('fullnspath'));
-
-        $fullnspathIs = $this->dslfactory->factory('fullnspathIsNot');
-        $return->add($fullnspathIs->run(array_values($diff)));
-
-        return $return;
+        return new Command('not(has(***))', array($property));
     }
 }
 ?>

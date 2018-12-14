@@ -730,6 +730,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function hasNo($property) {
+        $this->query->hasNo($property);
+        
+        return $this;
+    }
     
     public function is($property, $value = true) {
         $this->query->is($property, $value);

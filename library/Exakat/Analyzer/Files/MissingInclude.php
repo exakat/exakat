@@ -78,8 +78,24 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
-             ->raw('not(where( __.out("CONCAT").not(has("noDelimiter")).not( hasLabel("Functioncall").has("fullnspath", "\\\\dirname") ) ) )')
-             ->raw('not(where( __.out("CONCAT").out("CONCAT") ) )')
+             ->IsNot('noDelimiter', '')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->hasNo('noDelimiter')
+                             ->functioncallIsNot('\\dirname')
+                     )
+             )
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->outIs('CONCAT')
+                     )
+             )
              ->raw(<<<GREMLIN
 sideEffect{ 
     including = []; 
