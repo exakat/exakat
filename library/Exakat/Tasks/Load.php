@@ -856,7 +856,7 @@ class Load extends Tasks {
                 ++$this->id;
                 $variable = $this->processSingle($atom);
 
-                if ($atom === 'Variableobject') {
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
                     ++$this->id;
 
                     $propertyName = $this->processNextAsIdentifier();
@@ -873,7 +873,7 @@ class Load extends Tasks {
 
                     $this->pushExpression($property);
                     $elements[] = $property;
-                } elseif ($atom === 'Variablearray') {
+                } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET) {
                     ++$this->id; // Skip $a
                     ++$this->id; // Skip [
                     
@@ -4007,6 +4007,9 @@ class Load extends Tasks {
 
         $this->pushExpression($use);
 
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
         return $use;
     }
 
