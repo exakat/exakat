@@ -75,35 +75,13 @@ class ThemesExt {
 
     }
 
-    public function getThemesForAnalyzer($list = null) {
-        die(__METHOD__);
-        if ($list === null) {
-            $where = '';
-        } elseif (is_string($list)) {
-            $where = " WHERE c.name = \"$list\" ";
-        } elseif (is_array($list)) {
-            $where = ' WHERE c.name IN ('.makeList($list).') ';
-        } else {
-            assert(false, "Wrong type for list : ".gettype($list)." in ".__METHOD__."\n");
-        }
-
-        $query = <<<SQL
-SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
-    JOIN analyzers_categories AS ac
-        ON ac.id_categories = c.id
-    JOIN analyzers AS a
-        ON a.id = ac.id_analyzer
-    $where
-	GROUP BY analyzer
-SQL;
-        $res = self::$sqlite->query($query);
-
+    public function getThemesForAnalyzer($analyzer = null) {
         $return = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = explode(',', $row['categories']);
+        foreach($this->themes as $theme => $extension) {
+            $return[] = $extension->getThemesForAnalyzer($analyzer);
         }
         
-        return $return;
+        return array_merge(...$return);
     }
 
     public function getSeverities() {

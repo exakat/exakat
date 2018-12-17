@@ -68,7 +68,7 @@ class ThemesExtra {
         return $return;
     }
 
-    public function getThemesForAnalyzer($list = null) {
+    public function getThemesForAnalyzer($analyzer = '') {
         $return = array();
         foreach($this->extra_themes as $theme => $analyzers) {
             if (in_array($analyzer, $analyzers)) {

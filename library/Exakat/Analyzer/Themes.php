@@ -60,7 +60,9 @@ class Themes {
     }
 
     public function getThemesForAnalyzer($list = null) {
-        $main = $this->main->getThemesForAnalyzer($list);
+        $main  = $this->main ->getThemesForAnalyzer($list);
+        $extra = $this->extra->getThemesForAnalyzer($list);
+        $ext   = $this->ext  ->getThemesForAnalyzer($list);
         
         return array_merge($main);
     }
