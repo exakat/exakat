@@ -72,6 +72,7 @@ class LoadFinal extends Tasks {
 
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
+        $this->setClassRemoteDefinitionWithTypehint();
         $this->setArrayClassDefinition();
 
         $this->overwrittenMethods();
@@ -516,6 +517,62 @@ GREMLIN;
         $count += $result->toInt();
 
         display("Set $count property remote definitions");
+        $this->log->log(__METHOD__);
+    }
+
+    private function setClassRemoteDefinitionWithTypehint() {
+        display('Set class method remote definitions with typehint');
+
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Methodcall')
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->inIs('NAME')
+              ->atomIs('Parameter')
+              ->outIs('TYPEHINT')
+              ->inIs('DEFINITION')
+              ->atomIs('Class')
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countM = $result->toInt();
+
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Member')
+              ->_as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Name')
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->inIs('NAME')
+              ->atomIs('Parameter')
+              ->outIs('TYPEHINT')
+              ->inIs('DEFINITION')
+              ->atomIs('Class')
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countP = $result->toInt();
+
+        display("Set ".($countP + $countM)." method and properties remote with typehint");
         $this->log->log(__METHOD__);
     }
 
