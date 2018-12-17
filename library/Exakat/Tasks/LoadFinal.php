@@ -74,7 +74,7 @@ class LoadFinal extends Tasks {
         $this->setClassMethodRemoteDefinition();
         $this->setClassRemoteDefinitionWithTypehint();
         $this->setArrayClassDefinition();
-//        $this->setStringMethodDefinition();
+        $this->setStringMethodDefinition();
 
         $this->overwrittenMethods();
         $this->overwrittenProperties();
@@ -338,30 +338,28 @@ GREMLIN;
     private function setStringMethodDefinition() {
         $this->logTime('setStringMethodDefinition');
         display('setStringMethodDefinition');
-        
+
         //$id, $project, $analyzer, $php
         $query = new Query(0, $this->config->project, 'setStringMethodDefinition', null, $this->datastore);
         $query->atomIs('String')
-              ->has('fullnspath')
-              ->is('count', 2)
-              ->outWithRank('ARGUMENT', 1)
-              ->atomIs('String')
-              ->has('noDelimiter')
-              ->savePropertyAs('noDelimiter', 'method')
-              ->back('first')
-              ->outWithRank('ARGUMENT', 0)
-              ->atomIs('String')
+              ->hasIn('DEFINITION')
+              ->regexIs('noDelimiter', '::')
+              ->initVariable('name', '""')
+              ->raw('sideEffect{ name = it.get().value("noDelimiter").split("::")[1].toLowerCase(); }', array(), array())
               ->inIs('DEFINITION')
-              ->outIs(array('MAGICMETHOD', 'METHOD'))
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        $this->logTime('setStringMethodDefinition');
+        display($result->toInt().' setStringMethodDefinition');
+
+        $this->logTime($result->toInt().' setStringMethodDefinition');
         $this->log->log(__METHOD__);
     }
     
