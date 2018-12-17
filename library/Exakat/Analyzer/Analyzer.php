@@ -501,12 +501,6 @@ GREMLIN;
         return $this;
     }
 
-    private function hasNoNamedInstruction($atom = 'Function', $name = null) {
-        $this->query->hasNoNamedInstruction($atom, $name);
-        
-        return $this;
-    }
-
     protected function hasInstruction($atom = 'Function') {
         $this->query->hasInstruction($atom);
 
@@ -1847,18 +1841,6 @@ GREMLIN;
         return $this->rowCount > 0;
     }
 
-    private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->propertyIs($property, $code, $caseSensitive);
-        
-        return $this;
-    }
-
-    private function propertyIsNot($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->propertyIsNot($property, $code, $caseSensitive);
-        
-        return $this;
-    }
-    
     public static function makeBaseName($className) {
         // No Exakat, no Analyzer, using / instead of \
         return $className;

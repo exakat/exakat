@@ -40,7 +40,6 @@ class Weekly extends Ambassador {
                          'F' => '#E50016',
                          );
 
-    protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
     protected $tmpName           = '';
