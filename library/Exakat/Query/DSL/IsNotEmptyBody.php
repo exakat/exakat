@@ -28,14 +28,34 @@ use Exakat\Query\Query;
 class IsNotEmptyBody extends DSL {
     public function run() {
         $gremlin = <<<GREMLIN
-not( 
+not(
     where( 
-        __.not(where( __.map( __.out("EXPRESSION").order().by("rank").tail(1)).hasLabel("Return").out("RETURN").hasLabel("Void", "Null")))
-          .out("EXPRESSION")
+        __.out("EXPRESSION")
           .not(hasLabel("Void", "Global", "Static"))
+          .not(
+            where( 
+                __.hasLabel("Return")
+                  .out("RETURN")
+                  .hasLabel("Void", "Null")
+                )
+            )
         )
-   )
+)
 GREMLIN;
+
+/*
+          .not(
+            where( 
+                __.map( 
+                    __.out("EXPRESSION").order().by("rank").tail(1)
+                  )
+                  .hasLabel("Return")
+                  .out("RETURN")
+                  .hasLabel("Void", "Null")
+                )
+            )
+
+*/
 
         return new Command($gremlin);
     }
