@@ -71,6 +71,12 @@ class Project extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
+        $sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
+        if (file_exists($sqliteFileFinal)) {
+            copy($sqliteFileFinal, $sqliteFilePrevious);
+        }
+
         display("Cleaning project\n");
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
@@ -188,12 +194,6 @@ class Project extends Tasks {
 
         // Always run this one first
         $this->analyzeThemes(['First'], $audit_start, true);
-
-        $sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
-        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
-        if (file_exists($sqliteFileFinal)) {
-            copy($sqliteFileFinal, $sqliteFilePrevious);
-        }
 
         // Dump is a child process
         // initialization and first collection (action done once)

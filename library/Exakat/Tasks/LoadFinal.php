@@ -74,6 +74,7 @@ class LoadFinal extends Tasks {
         $this->setClassMethodRemoteDefinition();
         $this->setClassRemoteDefinitionWithTypehint();
         $this->setArrayClassDefinition();
+//        $this->setStringMethodDefinition();
 
         $this->overwrittenMethods();
         $this->overwrittenProperties();
@@ -333,6 +334,36 @@ GREMLIN;
         display($result->toInt().' overwrittenConstants');
         $this->log->log(__METHOD__);
     }
+
+    private function setStringMethodDefinition() {
+        $this->logTime('setStringMethodDefinition');
+        display('setStringMethodDefinition');
+        
+        //$id, $project, $analyzer, $php
+        $query = new Query(0, $this->config->project, 'setStringMethodDefinition', null, $this->datastore);
+        $query->atomIs('String')
+              ->has('fullnspath')
+              ->is('count', 2)
+              ->outWithRank('ARGUMENT', 1)
+              ->atomIs('String')
+              ->has('noDelimiter')
+              ->savePropertyAs('noDelimiter', 'method')
+              ->back('first')
+              ->outWithRank('ARGUMENT', 0)
+              ->atomIs('String')
+              ->inIs('DEFINITION')
+              ->outIs(array('MAGICMETHOD', 'METHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addEto('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime('setStringMethodDefinition');
+        $this->log->log(__METHOD__);
+    }
     
     private function setArrayClassDefinition() {
         $this->logTime('setArrayClassDefinition');
@@ -354,7 +385,7 @@ GREMLIN;
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addEFrom('DEFINITION', 'first')
+              ->addEto('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

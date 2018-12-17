@@ -77,6 +77,10 @@ class Constant extends Plugin {
                 $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);
                 break;
 
+            case 'Return' :
+                $atom->constant = $extras['RETURN']->constant;
+                break;
+
             case 'Staticconstant' :
                 $atom->constant = $extras['CLASS']->constant;
                 break;

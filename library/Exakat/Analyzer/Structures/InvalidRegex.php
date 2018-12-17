@@ -27,37 +27,49 @@ use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class InvalidRegex extends Analyzer {
     public function analyze() {
-        $functionList = makeList(array_map('addslashes', UnknownPregOption::$functions));
+        $functionList = makeFullnspath(UnknownPregOption::$functions);
 
-        $regexQuery = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath", within($functionList))
-     .out("ARGUMENT")
-     .has("rank", 0)
-     .hasLabel("String")
-     .not( where( __.out("CONCAT")) )
-     .map{
+        $this->atomFunctionIs($functionList)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->raw(<<<GREMLIN
+map{
      if (it.get().value("delimiter") == "'") {
        regex = it.get().value('noDelimiter').replaceAll("\\\\\\\\(['\\\\\\\\])", "\\$1");
      } else {
        regex = it.get().value('noDelimiter').replaceAll('\\\\\\\\(["\\\\\\\\])', "\\$1");
      }
      
-     [regex, it.get().value('fullcode')]};
-GREMLIN;
-        $regexSimple = $this->query($regexQuery);
+     [regex, it.get().value('fullcode')]
+}
 
-        $regexQuery = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath", within($functionList))
-     .out("ARGUMENT")
-     .has("rank", 0)
-     .hasLabel("Concatenation", "String")
-     .where( __.out("CONCAT"))
-     .where( __.out("CONCAT").has("rank", 0).hasLabel("String", "Identifier", "Nsname", "Staticconstant"))
-     .where( __.sideEffect{ c = it.get().value("count") - 1;}.out("CONCAT").filter{ it.get().value("rank") == c;}.hasLabel("String", "Identifier", "Nsname", "Staticconstant").not(where(__.out("CONCAT"))))
-     .not( where( __.out("CONCAT").hasLabel("String", "Identifier", "Nsname", "Staticconstant").not(has("noDelimiter"))) )
-     .where( __.sideEffect{ liste = [];}
+GREMLIN
+);
+        $regexSimple = $this->rawQuery();
+
+        $this->atomFunctionIs($functionList)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('String', 'Concatenation'))
+             ->hasOut('CONCAT')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outWithRank('ARGUMENT', 0)
+                             ->atomIs(array('String', 'Identifier', 'Nsname', 'Staticconstant'))
+                     )
+             )
+             ->raw(<<<GREMLIN
+ where( 
+    __.sideEffect{ c = it.get().value("count") - 1;}
+      .out("CONCAT")
+      .filter{ it.get().value("rank") == c;}
+      .hasLabel("String", "Identifier", "Nsname", "Staticconstant")
+      .not(where(__.out("CONCAT")))
+)
+.not( where( __.out("CONCAT").hasLabel("String", "Identifier", "Nsname", "Staticconstant").not(has("noDelimiter"))) )
+.where( __.sideEffect{ liste = [];}
           .out("CONCAT").order().by('rank')
           .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant")
           .sideEffect{ 
@@ -66,19 +78,20 @@ g.V().hasLabel("Functioncall")
                 } else {
                    liste.add("smi"); // smi is compatible with flags
                 }
-           }
-          .count()
-     )
-     .map{[liste.join(''), it.get().value('fullcode')]};
-GREMLIN;
-        $regexComplex = $this->query($regexQuery);
+          }
+          .fold()
+)
+.map{[liste.join(''), it.get().value('fullcode')]};
+GREMLIN
+);
+        $regexComplex = $this->rawQuery();
         
         $regexList = array_merge($regexSimple->toArray(), $regexComplex->toArray());
 
         $invalid = array();
         foreach($regexList as list($regex, $fullcode)) {
             // @ is important here : we want preg_match to fail silently.
-            if (false === @preg_match($regex, '')) {
+            if (false === preg_match($regex, '')) {
                 $invalid[] = $fullcode;
             }
         }

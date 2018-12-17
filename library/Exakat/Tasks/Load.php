@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -743,7 +743,7 @@ class Load extends Tasks {
         } else {
             $method = end($this->currentFunction)->fullnspath;
         }
-        $this->calls->addDefinition('goto', $class.'::'.$method.'..'.$tag->fullcode, $label);
+        $this->calls->addDefinition('goto', "$class::$method..$tag->fullcode", $label);
 
         $this->pushExpression($label);
         $this->processSemicolon();
@@ -5558,7 +5558,6 @@ class Load extends Tasks {
     }
 
     private function getFullnspath($name, $type = 'class') {
-
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {

@@ -40,7 +40,7 @@ class Atom {
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;
     public $delimiter    = '';
-    public $noDelimiter  = '';
+    public $noDelimiter  = null;
     public $variadic     = Load::NOT_VARIADIC;
     public $count        = null;
     public $fullnspath   = '';
