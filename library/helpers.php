@@ -568,8 +568,8 @@ function raiseDimensions($array, $split='/') {
     $return = array();
     
     foreach($array as $k => $value) {
-        $k = trim($k, $split);
-        $d = explode($split, $k);
+        $kr = trim($k, $split);
+        $d = explode($split, $kr);
         
         $last = array_pop($d);
         $sub = &$return;
@@ -604,8 +604,8 @@ function flattenDimensions($array, $split='/') {
     
     foreach($array as $k => $value) {
         if (is_array($value)) {
-            $value = flattenDimensions($value);
-            foreach($value as $k2 => $value2) {
+            $valueFlattened = flattenDimensions($value);
+            foreach($valueFlattened as $k2 => $value2) {
                 $return["$k$split$k2"] = $value2;
             }
         } else {
