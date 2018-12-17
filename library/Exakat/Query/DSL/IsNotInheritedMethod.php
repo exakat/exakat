@@ -32,6 +32,7 @@ not(
     where( __.out("OVERWRITE")
              .not( where( __.has("abstract", true) ) ) 
              .not( where( __.has("visibility", "private") ) ) 
+             .not( where( __.in("METHOD", "MAGICMETHOD").hasLabel("Interface") ) ) 
     )
 )
 GREMLIN;

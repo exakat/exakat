@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class EmptyFunction extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testFunctions_EmptyFunction01()  { $this->generic_test('Functions_EmptyFunction.01'); }
     public function testFunctions_EmptyFunction02()  { $this->generic_test('Functions_EmptyFunction.02'); }
@@ -19,5 +19,6 @@ class EmptyFunction extends Analyzer {
     public function testFunctions_EmptyFunction08()  { $this->generic_test('Functions/EmptyFunction.08'); }
     public function testFunctions_EmptyFunction09()  { $this->generic_test('Functions/EmptyFunction.09'); }
     public function testFunctions_EmptyFunction10()  { $this->generic_test('Functions/EmptyFunction.10'); }
+    public function testFunctions_EmptyFunction11()  { $this->generic_test('Functions/EmptyFunction.11'); }
 }
 ?>
