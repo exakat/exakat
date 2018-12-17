@@ -63,8 +63,8 @@ class UndefinedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIs('parent')
-             ->fullnspathIs('undefined')
+             ->atomIs('Parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -85,8 +85,8 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIs('parent')
-             ->fullnspathIs('undefined')
+             ->atomIs('Parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -108,8 +108,8 @@ class UndefinedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIs('parent')
-             ->fullnspathIs('undefined')
+             ->atomIs('Parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 

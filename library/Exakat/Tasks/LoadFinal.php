@@ -61,6 +61,7 @@ class LoadFinal extends Tasks {
         $this->spotPHPNativeConstants();
 
         $this->setParentDefinition();
+        $this->setClassAliasDefinition();
         $this->makeClassConstantDefinition();
         $this->makeClassMethodDefinition();
         
@@ -210,7 +211,7 @@ GREMLIN;
         $fallingback = $this->gremlin->query($query)->toArray();
 
         if (!empty($fallingback)) {
-            $phpfunctions = call_user_func_array('array_merge', $this->PHPfunctions);
+            $phpfunctions = array_merge(...$this->PHPfunctions);
             $phpfunctions = array_map('strtolower', $phpfunctions);
             $phpfunctions = array_values($phpfunctions);
 
@@ -546,6 +547,27 @@ GREMLIN;
 
         display("Set $count method remote definitions");
         $this->log->log(__METHOD__);
+    }
+
+    private function setClassAliasDefinition() {
+        display('Set class alias definitions');
+
+        $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
+        $query->atomIs(array('Class', 'Interface', 'Trait'))
+              ->_as('method')
+              ->outIs('DEFINITION')
+              ->inIs('ARGUMENT')
+              ->atomIs('Classalias')
+              ->outWithRank('ARGUMENT', 1)
+              ->outIs('DEFINITION')
+              ->addEFrom('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count = $result->toInt();
+
+        display("Set ".$count." class alias definitions");
+        $this->log->log(__METHOD__);    
     }
 
     private function setParentDefinition() {

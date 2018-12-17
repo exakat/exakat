@@ -38,6 +38,7 @@ abstract class GraphElements {
                                  'Cast',
                                  'Catch',
                                  'Class',
+                                 'Classalias',
                                  'Classanonymous',
                                  'Clone',
                                  'Closure',

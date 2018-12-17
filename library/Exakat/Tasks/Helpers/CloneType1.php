@@ -337,6 +337,7 @@ class CloneType1 extends Plugin {
             case 'Method' :
             case 'Closure' :
             case 'Defineconstant' :
+            case 'Classalias' :
             case 'Magicmethod' :
                 $ctype1 = array_column($extras, 'ctype1');
                 $atom->ctype1 = 'n(){'.implode(',', $ctype1).'}';

@@ -2331,6 +2331,10 @@ class Load extends Tasks {
                 $atom = 'Defineconstant';
             } elseif (strtolower($name->code) === 'define') {
                 $atom = 'Defineconstant';
+            } elseif (strtolower($name->code) === '\\class_alias') {
+                $atom = 'Classalias';
+            } elseif (strtolower($name->code) === 'class_alias') {
+                $atom = 'Classalias';
             } elseif ($name->fullnspath === '\\list') {
                 $atom = 'List';
             } else {
@@ -2360,6 +2364,11 @@ class Load extends Tasks {
             $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsConstants($functioncall);
+        } elseif ($atom === 'Classalias') {
+            $functioncall->fullnspath = '\\classalias';
+            $functioncall->aliased    = self::NOT_ALIASED;
+
+            $this->processDefineAsClassalias($argumentsList);
         } elseif ($atom === 'Methodcallname' || $atom === 'List') {
             // literally, nothing
         } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'))) {
@@ -5438,6 +5447,44 @@ class Load extends Tasks {
                 throw new LoadError("Warning : missing token atom $id  in $this->filename");
             }
         }
+    }
+
+    private function processDefineAsClassalias($argumentsId) {
+        if (empty($this->argumentsId[0]->noDelimiter) || 
+            empty($this->argumentsId[1]->noDelimiter)   ) {
+            $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
+            $this->argumentsId[1]->fullnspath = '\\';
+            return;
+        }
+
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
+            $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
+            $this->argumentsId[1]->fullnspath = '\\';
+            return; // Can't be a constant anyway.
+        }
+
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[1]->noDelimiter)) {
+            $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
+            $this->argumentsId[1]->fullnspath = '\\';
+            return; // Can't be a constant anyway.
+        }
+
+        $fullnspathClass = makeFullNsPath($this->argumentsId[0]->noDelimiter, false);
+        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
+            // Added a second \\ when the string already has one. Actual PHP behavior
+            $fullnspathClass = "\\$fullnspathClass";
+        }
+        $this->argumentsId[0]->fullnspath = $fullnspathClass;
+
+        $fullnspathAlias = makeFullNsPath($this->argumentsId[1]->noDelimiter, false);
+        if ($this->argumentsId[1]->noDelimiter[0] === '\\') {
+            // Added a second \\ when the string already has one. Actual PHP behavior
+            $fullnspathAlias = "\\$fullnspathAlias";
+        }
+        $this->argumentsId[1]->fullnspath = $fullnspathAlias;
+
+        $this->calls->addCall('class', $fullnspathClass, $argumentsId[0]);
+        $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
     private function processDefineAsConstants($argumentsId) {

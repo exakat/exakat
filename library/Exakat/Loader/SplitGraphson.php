@@ -92,6 +92,8 @@ GREMLIN;
         $f = fopen('php://memory', 'r+');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             ++$total;
+            // Skip reflexive definitions, which never exist.
+            if ($row[0] === $row[1]) { continue; }
             fputcsv($f, $row);
         }
         rewind($f);
