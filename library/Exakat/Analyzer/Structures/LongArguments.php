@@ -25,12 +25,14 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class LongArguments extends Analyzer {
+    protected $codeTooLong = 100;
+
     public function analyze() {
         // foo('123456789012345678901234567890123456789012345678901234567890 (50)');
         $this->atomIs(array('Functioncall', 'Methodcallname'))
              ->outIs('ARGUMENT')
              ->atomIs(array('String', 'Heredoc'))
-             ->fullcodeLength(' > 60')
+             ->fullcodeLength(" > $this->codeTooLong")
              ->back('first')
              ->inIsIE('METHOD');
         $this->prepareQuery();
