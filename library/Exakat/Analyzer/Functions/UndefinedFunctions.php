@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -32,6 +32,7 @@ class UndefinedFunctions extends Analyzer {
     }
     
     public function analyze() {
+        // foo(); (no function foo())
         $this->atomIs('Functioncall')
              ->outIs('NAME')
              ->atomIs('Name')

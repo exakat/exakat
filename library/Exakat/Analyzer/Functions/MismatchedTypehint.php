@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MismatchedTypehint extends Analyzer {
     public function analyze() {
         // Based on calls to a function
-        $this->atomIs(array('Function', 'Method', 'Closure'))
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
              ->_as('results')
@@ -49,7 +49,7 @@ class MismatchedTypehint extends Analyzer {
         // Based on Methodcalls : still missing the class of the object
         
         // Based on staticmethodcall
-        $this->atomIs(array('Function', 'Method', 'Closure'))
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
              ->_as('results')

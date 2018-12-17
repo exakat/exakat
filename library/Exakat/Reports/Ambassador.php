@@ -122,9 +122,11 @@ class Ambassador extends Reports {
                     if ($total < 1) {
                         continue;
                     }
-                    $fileName = strtolower(basename($fileName));
+                    $inventory_name = strtolower(basename($fileName));
+                } else {
+                    $inventory_name = $fileName;
                 }
-                $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
+                $inventories .= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
             $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
@@ -260,7 +262,10 @@ class Ambassador extends Reports {
         }
 
         // Copy template
-        copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
+        if (!copyDir("{$this->config->dir_root}/media/devfaceted", $this->tmpName )) {
+            print "Error while preparing the folder. A copy failed\n";
+            return;
+        }
     }
 
     protected function cleanFolder() {
@@ -280,37 +285,6 @@ class Ambassador extends Reports {
         }
 
         rename($this->tmpName, $this->finalName);
-    }
-
-    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
-        --$lineNumber; // array index
-        $lines = array();
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
-
-            $fileLines = file($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath);
-
-            $startLine = 0;
-            $endLine = 10;
-            if(count($fileLines) > $lineNumber) {
-                $startLine = $lineNumber-$numberBeforeAndAfter;
-                if($startLine<0)
-                    $startLine=0;
-
-                if(count($fileLines) - 1 > $lineNumber + $numberBeforeAndAfter) {
-                    $endLine = $lineNumber+$numberBeforeAndAfter;
-                } else {
-                    $endLine = count($fileLines)-1;
-                }
-            }
-
-            for ($i=$startLine; $i < $endLine+1 ; ++$i) {
-                $lines[]= array(
-                            'line' => $i + 1,
-                            'code' => $fileLines[$i]
-                    );
-            }
-        }
-        return $lines;
     }
 
     protected function setPHPBlocs($description){

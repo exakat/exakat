@@ -87,14 +87,13 @@ class CodeSniffer extends Reports {
 
                 $messages = $column[0];
                 foreach($messages as $message) {
-                    $line = $line == -1 ? '  ' : $line;
-                    $line = substr( $padding.$line, -$maxSize);
-                    $text .= ' '.$line.' | '.strtoupper($message['severity']).' | '.$message['message']."\n";
+                    $lineToDisplay = $line == -1 ? '  ' : $line;
+                    $linePadded = substr( $padding.$lineToDisplay, -$maxSize);
+                    $text .= ' '.$linePadded.' | '.strtoupper($message['severity']).' | '.$message['message']."\n";
                     $this->count();
                 }
             }
-            $text .= $separator;
-            $text .= "\n\n\n";
+            $text .= "$separator\n\n\n";
         }
         
         return $text;

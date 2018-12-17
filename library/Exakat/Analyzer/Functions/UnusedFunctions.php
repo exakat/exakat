@@ -62,7 +62,7 @@ class UnusedFunctions extends Analyzer {
 not(
     where(
         __.out("DEFINITION")
-          .repeat( __.not(hasLabel("Function", "Method", "Magicmethod", "Closure")).in({$this->linksDown}))
+          .repeat( __.not(hasLabel("Function", "Closure")).in({$this->linksDown}))
           .emit().times($MAX_LOOPING).hasLabel("Function", "Closure", "File")
           .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
           .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
