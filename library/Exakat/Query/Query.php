@@ -125,7 +125,12 @@ class Query {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$commands[1]);
         }
 
-        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+        $arguments = array_column($this->commands, 'arguments');
+        if (empty($arguments)) {
+            $this->arguments = array();
+        } else {
+            $this->arguments = array_merge(...$arguments);
+        }
 
         // search what ? All ?
         $this->query = <<<GREMLIN
