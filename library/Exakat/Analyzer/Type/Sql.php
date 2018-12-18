@@ -28,22 +28,12 @@ class Sql extends Analyzer {
     public function analyze() {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
         $delimiter = '[\\"'."\\\'".']';
-        $regex = '\\\\s*('.implode('|', $sqlKeywords).')';
+        $regex = '(?i)\\\\s*('.implode('|', $sqlKeywords).')';
         
         // SQL in a literal 'SELECT col FROM table';
-        $this->atomIs('String')
+        $this->atomIs(array('String', 'Heredoc', 'Concatenation'))
              ->hasNoIn('CONCAT')
-             ->regexIs('fullcode', $delimiter.$regex)
-             ->inIsIE('CONCAT');
-        $this->prepareQuery();
-
-        // SQL in a literal 'SELECT col FROM '.$table;
-        $this->atomIs('Concatenation')
-             ->outWithRank('CONCAT', 0)
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->regexIs('noDelimiter', $regex)
-             ->back('first');
+             ->regexIs('fullcode', $regex);
         $this->prepareQuery();
     }
 }
