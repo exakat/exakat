@@ -282,6 +282,9 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
 :ref:`Too Many Native Calls <too-many-native-calls>`
   + nativeCallCounts : 3
     + Number of native calls found inside another call.
+:ref:`Long Arguments <long-arguments>`
+  + codeTooLong : 100
+    + Minimum size of a functioncall or a methodcall to be considered too long.
 
 
 

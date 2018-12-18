@@ -212,6 +212,25 @@ preg_match is used here to identify files with a forbidden extension. The actual
                 }
             }
 
+Empty Function
+==============
+
+.. _contao-functions-emptyfunction:
+
+Contao
+^^^^^^
+
+:ref:`empty-function`, in core-bundle/src/Resources/contao/modules/ModuleQuicklink.php:91. 
+
+The closure used with array_map() is empty : this means that the keys are all set to the returned value of the empty closure, which is null. The actual effect is to reset the values to NULL. A better solution, without using the empty closure, is to rely on array_fill_keys() to create an array with default values.  
+
+.. code-block:: php
+
+    if (!empty($tmp) && \is_array($tmp))
+    			{
+    				$arrPages = array_map(function () {}, array_flip($tmp));
+    			}
+
 Used Once Variables
 ===================
 
@@ -2713,6 +2732,39 @@ __getBaseUrl and __setBaseUrl shouldn't be named like that.
     		return $this->baseUrl;
     	}
 
+Long Arguments
+==============
+
+.. _cleverstyle-structures-longarguments:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`long-arguments`, in core/drivers/DB/MySQLi.php:40. 
+
+This query is not complex, but its length tend to push the end out of the view in the IDE. It could be rewritten as a variable, on the previous line, with some formatting. The same formatting would help without the variable too, yet, mixing the SQL syntax with the PHP methodcall adds a layer of confusion. 
+
+.. code-block:: php
+
+    $this->instance->query("SET SESSION sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'")
+
+
+--------
+
+
+.. _contao-structures-longarguments:
+
+Contao
+^^^^^^
+
+:ref:`long-arguments`, in core-bundle/src/Resources/contao/widgets/CheckBoxWizard.php:145. 
+
+This one-liner includes 9 members and 6 variables : some are formatted by sprintf, some are directly concatenated in the string. Breaking this into two lines improves readbility and code review.
+
+.. code-block:: php
+
+    sprintf('<span><input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> %s<label for="opt_%s">%s</label></span>', $this->strName . ($this->multiple ? '[]' : ''), $this->strId . '_' . $i, ($this->multiple ? \StringUtil::specialchars($arrOption['value']) : 1), (((\is_array($this->varValue) && \in_array($arrOption['value'], $this->varValue)) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''), $this->getAttributes( ), $strButtons, $this->strId . '_' . $i, $arrOption['label'])
+
 Suspicious Comparison
 =====================
 
@@ -4376,6 +4428,50 @@ This foreach reads each element from $entries into entry. $entry, in turn, is wr
     
     				$replacePairs[$searchkey] = $link;
     			}
+
+Could Use array_fill_keys
+=========================
+
+.. _churchcrm-structures-couldusearrayfillkeys:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`could-use-array\_fill\_keys`, in src/ManageEnvelopes.php:107. 
+
+There are two initialisations at the same time here : that should make two call to array_fill_keys().
+
+.. code-block:: php
+
+    foreach ($familyArray as $fam_ID => $fam_Data) {
+            $envelopesByFamID[$fam_ID] = 0;
+            $envelopesToWrite[$fam_ID] = 0;
+        }
+
+
+--------
+
+
+.. _phpipam-structures-couldusearrayfillkeys:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`could-use-array\_fill\_keys`, in functions/scripts/merge_databases.php:418. 
+
+Even when the initialization is mixed with other operations, it is a good idea to extract it from the loop and give it to array_fill_keys(). 
+
+.. code-block:: php
+
+    $arr_new = array();
+    				foreach ($arr as $type=>$objects) {
+    					$arr_new[$type] = array();
+    					if(sizeof($objects)>0) {
+    						foreach($objects as $ok=>$object) {
+    							$arr_new[$type][] = $highest_ids_append[$type] + $object;
+    						}
+    					}
+    				}
 
 Drop Substr Last Arg
 ====================

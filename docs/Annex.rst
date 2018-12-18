@@ -240,6 +240,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.5.8
 
   * Multiple Identical Closure (Functions/MultipleIdenticalClosure)
+  * Path lists (Type/Path ; Unassigned)
 
 * 1.5.7
 
@@ -1382,7 +1383,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unknown Directive Name (Php/DirectiveName ; Analyze, Codacy)
   * Unkown Regex Options (Structures/UnknownPregOption ; Analyze, Codacy, Simple)
   * Unpreprocessed Values (Structures/Unpreprocessed ; Analyze, OneFile, ClearPHP, Codacy, Simple)
-  * Unreachable Code (Structures/UnreachableCode ; Analyze, Dead code, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 3)
+  * Unreachable Code (Structures/UnreachableCode ; Dead code, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 3)
   * Unresolved Catch (Classes/UnresolvedCatch ; Dead code, ClearPHP)
   * Unresolved Classes (Classes/UnresolvedClasses ; Analyze, Codacy)
   * Unresolved Instanceof (Classes/UnresolvedInstanceof ; Analyze, Dead code, ClearPHP, Codacy, Simple)
@@ -1932,8 +1933,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -1997,8 +1998,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `Isset <http://www.php.net/isset>`_
 * `isset <http://www.php.net/isset>`_
+* `Isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2128,6 +2129,7 @@ List of external links mentionned in this documentation.
 * `phpsdl <https://github.com/Ponup/phpsdl>`_
 * `PHPUnit <https://www.phpunit.de/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
+* `Predefined constants <http://php.net/manual/en/dir.constants.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
@@ -2201,6 +2203,7 @@ List of external links mentionned in this documentation.
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
+* `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
 * `The main PPA for PHP (7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
@@ -2214,8 +2217,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2233,8 +2236,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2613,7 +2616,6 @@ Analyze
 |   analyzer[] = "Structures/UnconditionLoopBreak";
 |   analyzer[] = "Structures/UnknownPregOption";
 |   analyzer[] = "Structures/Unpreprocessed";
-|   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UnsetInForeach";
 |   analyzer[] = "Structures/UnusedGlobal";
 |   analyzer[] = "Structures/UseInstanceof";

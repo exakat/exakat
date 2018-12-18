@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Thu, 13 Dec 2018 14:28:56 +0000
-.. comment: Generation hash : 3867868aaaaef0d874f4f4634a4cfb5c0e4ccd72
+.. comment: Generation date : Tue, 18 Dec 2018 11:45:38 +0000
+.. comment: Generation hash : eab41b2812ce5c4b048cd7d381ee3ca761b5064b
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 353 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -363,7 +363,6 @@ Total : 353 analysis
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 * :ref:`Unkown Regex Options <unkown-regex-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
-* :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Classes <unresolved-classes>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Unresolved Use <unresolved-use>`

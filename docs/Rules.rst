@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 13 Dec 2018 14:28:56 +0000
-.. comment: Generation hash : 3867868aaaaef0d874f4f4634a4cfb5c0e4ccd72
+.. comment: Generation date : Tue, 18 Dec 2018 11:45:38 +0000
+.. comment: Generation hash : eab41b2812ce5c4b048cd7d381ee3ca761b5064b
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4942,6 +4942,8 @@ Could Use array_fill_keys
 
 This is twice faster than doing the same with a loop.
 
+Note that is possible to use an object as initializing value : every element of the final array will be pointing to the same value. And, also, using an object as initializing value means that the same object will be used for each key : the object will not be cloned for each value.
+
 .. code-block:: php
 
    <?php
@@ -4949,27 +4951,42 @@ This is twice faster than doing the same with a loop.
    $array = range('a', 'z');
    
    // Fast way to build the array
-   $b = array_fill_key($a, 0);
+   $b = array_fill_keys($a, 0);
+   
+   // Fast way to build the array, but every element will be the same object
+   $b = array_fill_keys($a, new Stdclass());
    
    // Slow way to build the array
    foreach($array as $a) {
        $b[$a] = 0;
    }
    
+   // Setting everything to null, slowly
+   $array = array_map(function() {}, $array);
+   
    ?>
 
 
 See also `array_fill_keys <http://php.net/array_fill_keys>`_.
 
-+-------------+----------------------------------+
-| Short name  | Structures/CouldUseArrayFillKeys |
-+-------------+----------------------------------+
-| Themes      | :ref:`Suggestions`               |
-+-------------+----------------------------------+
-| Severity    | Minor                            |
-+-------------+----------------------------------+
-| Time To Fix | Slow (1 hour)                    |
-+-------------+----------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use array_fill_keys()
+
++-------------+----------------------------------------------------------------------------------------------------+
+| Short name  | Structures/CouldUseArrayFillKeys                                                                   |
++-------------+----------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                                                 |
++-------------+----------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                              |
++-------------+----------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                      |
++-------------+----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-structures-couldusearrayfillkeys`, :ref:`phpipam-structures-couldusearrayfillkeys` |
++-------------+----------------------------------------------------------------------------------------------------+
 
 
 
@@ -6625,6 +6642,8 @@ Function or method whose body is empty.
 
 Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
 
+A method is considered empty when it contains nothing, or contains expressions without impact. For example, ``static $x``, or a lone ``return ; ``.
+
 .. code-block:: php
 
    <?php
@@ -6647,15 +6666,28 @@ Such functions or methods are rarely useful. As a bare minimum, the function sho
    
    ?>
 
-+-------------+-------------------------+
-| Short name  | Functions/EmptyFunction |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
+
+Methods which overwrite another methods are omitted. Methods which are the concrete version of an abstract method are considered.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fill the function with actual code
+* Remove any usage of the function, then remove the function
+
++-------------+---------------------------------------+
+| Short name  | Functions/EmptyFunction               |
++-------------+---------------------------------------+
+| Themes      | :ref:`Analyze`                        |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Quick (30 mins)                       |
++-------------+---------------------------------------+
+| Examples    | :ref:`contao-functions-emptyfunction` |
++-------------+---------------------------------------+
 
 
 
@@ -7696,6 +7728,9 @@ Previously, it was compulsory to extract the data from the blind array :
            // do something 
        }
    ?>
+
+
+See also `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_.
 
 +-------------+------------------------------------------------------+
 | Short name  | Structures/ForeachWithList                           |
@@ -10469,17 +10504,34 @@ When literal arguments are too long, they `break <http://php.net/manual/en/contr
    ?>
 
 
-Literal strings and heredoc strings, including variables, that are over 50 chars longs are reported here.
+Literal strings and heredoc strings, including variables, that are over 50 chars longs are reported here. 
 
-+-------------+--------------------------+
-| Short name  | Structures/LongArguments |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Put the long arguments in a separate variable, and use the variable in the second expression, reducing its total length
+
++-------------+---------+---------+---------------------------------------------------------------------------+
+| Name        | Default | Type    | Description                                                               |
++-------------+---------+---------+---------------------------------------------------------------------------+
+| codeTooLong | 100     | integer | Minimum size of a functioncall or a methodcall to be considered too long. |
++-------------+---------+---------+---------------------------------------------------------------------------+
+
+
+
++-------------+-------------------------------------------------------------------------------------+
+| Short name  | Structures/LongArguments                                                            |
++-------------+-------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                      |
++-------------+-------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                     |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`cleverstyle-structures-longarguments`, :ref:`contao-structures-longarguments` |
++-------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -22514,7 +22566,7 @@ This is dead code, that may be removed.
 +-------------+-----------------------------------------------------------------------------------------+
 | Short name  | Structures/UnreachableCode                                                              |
 +-------------+-----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions`                        |
+| Themes      | :ref:`Dead code <dead-code>`, :ref:`Suggestions`                                        |
 +-------------+-----------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
@@ -22572,8 +22624,6 @@ Unresolved Classes
 
 The following classes are instantiated in the code, but their definition couldn't be found. 
 
-Check for namespaces and aliases and make sure they are correctly configured.
-
 .. code-block:: php
 
    <?php
@@ -22586,6 +22636,14 @@ Check for namespaces and aliases and make sure they are correctly configured.
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check for namespaces and aliases and make sure they are correctly configured.
 
 +-------------+---------------------------+
 | Short name  | Classes/UnresolvedClasses |
