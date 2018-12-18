@@ -178,6 +178,7 @@ TEXT
 
         if (file_exists("{$this->config->projects_root}/config/exakat.ini")) {
             $graphdb = $this->config->graphdb;
+            $folder = '';
         } else {
             $ini = file_get_contents("{$this->config->dir_root}/server/exakat.ini");
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
@@ -191,6 +192,7 @@ TEXT
                     $graphdb = 'tinkergraph';
                 }
             } else {
+                $folder = '';
                 $graphdb = 'NONE';
             }
 
@@ -237,46 +239,47 @@ TEXT
     
     private function checkInstall($graphdb) {
         if ($graphdb === 'gsneo4j') {
-            if (file_exists("{$this->config->projects_root}/tinkergraph/conf/neo4j-empty.properties")) {
-                $properties = file_get_contents("{$this->config->projects_root}/tinkergraph/conf/neo4j-empty.properties");
+            if (file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties")) {
+                $properties = file_get_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties");
                 $properties = preg_replace("#gremlin.neo4j.directory=.*\n#s", "gremlin.neo4j.directory=db/neo4j\n", $properties);
-                file_put_contents("{$this->config->projects_root}/tinkergraph/conf/neo4j-empty.properties", $properties);
+                file_put_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties", $properties);
             }
 
-            if (!file_exists("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh") && 
-                 file_exists("{$this->config->projects_root}/tinkergraph/bin/") 
+            if (!file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh") && 
+                 file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/") 
                  ) {
                 if (copy("{$this->config->dir_root}/server/gsneo4j/gremlin-server.sh",
-                         "{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh")) {
-                    chmod("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh", 0755);
+                         "{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh")) {
+                    chmod("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh", 0755);
                 } else {
-                    display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                    display("Error while copying gremlin-server.exakat.sh file to {$this->config->gsneo4j_folder}.");
                 }
             }
-            $this->checkGremlinServer();
+            $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->gsneo4j_folder}");
         } elseif ($graphdb === 'tinkergraph') {
-            if (!file_exists("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh") && 
-                 file_exists("{$this->config->projects_root}/tinkergraph/bin/")) {
-                if (copy($this->config->dir_root.'/server/tinkergraph/gremlin-server.sh',
-                  $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                    chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+            if (!file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh") && 
+                 file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/")) {
+                if (copy("{$this->config->dir_root}/server/{$this->config->tinkergraph_folder}/gremlin-server.sh",
+                  "{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh")) {
+                    chmod("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh", 0755);
                 } else {
-                    display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                    display("Error while copying gremlin-server.exakat.sh file to {$this->config->tinkergraph_folder}.");
                 }
             }
-            $this->checkGremlinServer();
+            $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->tinkergraph_folder}");
         } else {
             assert(false, "Checking install with unknown graphdb : '$graphdb'");
         }
     }
     
-    private function checkGremlinServer() {
-        if (!file_exists("{$this->config->projects_root}/tinkergraph/")) {
+    private function checkGremlinServer($path) {
+        var_dump($path);
+        if (!file_exists($path)) {
             return;
         }
 
-        if (!file_exists("{$this->config->projects_root}/tinkergraph/db")) {
-            mkdir("{$this->config->projects_root}/tinkergraph/db", 0755);
+        if (!file_exists("$path/db")) {
+            mkdir("$path/db", 0755);
         }
     
         $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
@@ -286,11 +289,11 @@ TEXT
         $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
     
         if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
-             "{$this->config->projects_root}/tinkergraph/conf/gsneo4j.yaml")) {
+             "$path/conf/gsneo4j.yaml")) {
             display("Error while copying gsneo4j{$version}.yaml config file to tinkergraph.");
         }
         if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
-             "{$this->config->projects_root}/tinkergraph/tinkergraph.yaml")) {
+             "$path/tinkergraph.yaml")) {
             display("Error while copying tinkergraph{$version}.yaml config file to tinkergraph.");
         }
     }
@@ -401,8 +404,8 @@ TEXT
             
             $stats['gremlin version'] = $gremlinVersion;
 
-            if (file_exists($this->config->tinkergraph_port.'/db/tinkergraph.pid')) {
-                $stats['running'] = 'Yes (PID : '.trim(file_get_contents($this->config->tinkergraph_port.'/db/tinkergraph.pid')).')';
+            if (file_exists("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) {
+                $stats['running'] = 'Yes (PID : '.trim(file_get_contents("{$this->config->tinkergraph_port}/db/tinkergraph.pid")).')';
             }
         }
         
