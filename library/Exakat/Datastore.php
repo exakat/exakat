@@ -472,8 +472,6 @@ SQLITE;
     }
     
     public function ignoreFile($file, $reason = 'unknown') {
-        print "Ignoring file : $file\n";
-        
         $this->sqliteWrite->query('DELETE FROM files WHERE file = "'.$this->sqliteWrite->escapeString($file).'"');
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, "'.$this->sqliteWrite->escapeString($file).'", "'.$reason.'")');
     }
