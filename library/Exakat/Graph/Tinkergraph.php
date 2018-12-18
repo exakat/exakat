@@ -42,7 +42,7 @@ class Tinkergraph extends Graph {
 
         if (!file_exists("{$this->config->tinkergraph_folder}/lib/")) {
             // No local production, just skip init.
-            $this->status = self::UNAVAIALBLE;
+            $this->status = self::UNAVAILABLE;
             return;
         }
 
