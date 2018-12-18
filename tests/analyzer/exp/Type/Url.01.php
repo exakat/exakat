@@ -7,7 +7,6 @@ $expected     = array('\'http://www.phpOK.net/\'',
                       '\'http://www.ibm.com/developerworks/news/dw_dwtp.rss\'',
                       '\'http://myportal.com:10040/wps/proxy/http/myotherportal.com%3a1234/sitemap\'',
                       '\'ftps://www-01.ibm.com/software/swnews/swnews.nsf/swnewsrss?openview&RestrictToCategory=lotus\'',
-                      'http://www.google.com',
                       '\'strangeproto://www.php.net/\'',
                       '\'http://xn--diseolatinoamericano-66b.com/\'',
                       '\'http://www.php.net\'',
@@ -16,6 +15,7 @@ $expected     = array('\'http://www.phpOK.net/\'',
 
 $expected_not = array('\'http:/www.php.net/\'',
                       '\'https:/www.php.net/\'',
+                      'http://www.google.com',
                      );
 
 ?>

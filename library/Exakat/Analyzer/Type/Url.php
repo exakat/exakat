@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class Url extends Analyzer {
     public function analyze() {
-        $this->atomIs('String')
-             ->hasNoOut('CONCAT')
+        $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->hasNoIn('CONCAT')
+             ->has('noDelimiter')
              ->regexIs('noDelimiter', '^.?([a-z]+)://[-\\\\p{L}0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|].?\\$');
         $this->prepareQuery();
     }
