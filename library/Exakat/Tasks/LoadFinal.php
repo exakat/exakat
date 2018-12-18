@@ -345,7 +345,18 @@ GREMLIN;
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')
               ->initVariable('name', '""')
-              ->raw('sideEffect{ name = it.get().value("noDelimiter").split("::")[1].toLowerCase(); }', array(), array())
+              ->raw(<<<GREMLIN
+filter{ 
+    name = it.get().value("noDelimiter").split("::"); 
+    if (name.length > 1) {
+        name = name[1].toLowerCase();
+    } else {
+        name = false;
+    }
+    name != true;
+}
+GREMLIN
+, array(), array())
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->atomIs(array('Method', 'Magicmethod'))

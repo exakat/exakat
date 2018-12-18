@@ -4035,6 +4035,8 @@ class Load extends Tasks {
             ++$this->id;
             $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
 
+            $fullcode[] = $namespace->fullcode;
+
             list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
     
             $namespace->fullnspath = $fullnspath;
