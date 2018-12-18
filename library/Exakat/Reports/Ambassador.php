@@ -68,6 +68,7 @@ class Ambassador extends Reports {
                                  'Type/Mime'      => 'Mime types',
                                  'Type/Pack'      => 'Pack format',
                                  'Type/Printf'    => 'Printf format',
+                                 'Type/Path'      => 'Paths',
                                  );
 
     private $compatibilities = array();
@@ -114,7 +115,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $menu = file_get_contents("{$this->tmpName}/datas/menu.html");
-            $inventories = '';
+            $inventories = [];
             foreach($this->inventories as $fileName => $title) {
                 if (strpos($fileName, '/') !== false) {
                     $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
@@ -126,15 +127,17 @@ class Ambassador extends Reports {
                 } else {
                     $inventory_name = $fileName;
                 }
-                $inventories .= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
+                $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
-            $compatibilities = '';
+
+            $compatibilities = [];
             $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
-                $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
+                $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
-            $menu = $this->injectBloc($menu, 'INVENTORIES', $inventories);
-            $menu = $this->injectBloc($menu, 'COMPATIBILITIES', $compatibilities);
+
+            $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
+            $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
@@ -2825,19 +2828,18 @@ HTML;
                 $fileName = strtolower(basename($fileName));
             }
 
-            $theTable = '';
-
             $results = new Results($this->sqlite, $theAnalyzer);
             $results->load();
 
-           foreach($results->toArray() as $row) {
-                $theTable .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+            $theTable = array();
+            foreach($results->toArray() as $row) {
+                $theTable []= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>";
             }
 
             $html = $this->getBasedPage('inventories');
             $html = $this->injectBloc($html, 'TITLE', $theTitle);
             $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
-            $html = $this->injectBloc($html, 'TABLE', $theTable);
+            $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
         $this->generateExceptionTree();
