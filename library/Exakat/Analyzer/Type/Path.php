@@ -34,6 +34,7 @@ class Path extends Analyzer {
                            'data',
                            'ssh2',
                            'expects',
+                           'sqlite',
                            );
         $protocolList = implode('|', $protocols);
 
