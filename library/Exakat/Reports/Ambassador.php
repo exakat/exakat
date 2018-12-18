@@ -2811,7 +2811,9 @@ HTML;
             'Type/Pack' => array('description'  => 'List of all pack format mentioned in the code.',
                                   'analyzer'    => 'Type/Pack'),
             'Type/Printf' => array('description' => 'List of all printf() format mentioned in the code.',
-                                  'analyzer'    => 'Type/Url'),
+                                  'analyzer'    => 'Type/Printf'),
+            'Type/Path'   => array('description' => 'List of all paths mentioned in the code.',
+                                  'analyzer'    => 'Type/Path'),
 //            'exceptions' => array('description' => 'List of all defined exceptions.',
 //                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
