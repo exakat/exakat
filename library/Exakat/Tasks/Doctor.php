@@ -273,7 +273,6 @@ TEXT
     }
     
     private function checkGremlinServer($path) {
-        var_dump($path);
         if (!file_exists($path)) {
             return;
         }
