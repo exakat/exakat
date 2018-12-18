@@ -69,6 +69,59 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->atomIsNot('Variable')
              ->back('first');
         $this->prepareQuery();
+
+        //foreach($a as &$v) { $v = constant}
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('VALUE')
+             ->is('reference', true)
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->_as('block')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->samePropertyAs('code', 'blind')
+             ->back('block')
+             ->outIs('RIGHT')
+             ->is('constant', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        //array_map(function() { return 1}, $a)
+        $this->atomFunctionIs('\\array_map')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Closure')
+             ->outIs('BLOCK')
+             ->atomInside('Return')
+             ->is('constant', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        //array_map(function() {}, $a)
+        $this->atomFunctionIs('\\array_map')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Closure')
+             ->outIs('BLOCK')
+             ->noAtomInside('Return')
+             ->back('first');
+        $this->prepareQuery();
+
+        //array_map('foo', $a)
+        $this->atomFunctionIs('\\array_map')
+             ->outWithRank('ARGUMENT', 0)
+             // array, string, identifier...
+             ->inIs('DEFINITION')
+             // method, function...
+             ->outIs('BLOCK')
+             ->atomInside('Return')
+             ->is('constant', true)
+             ->back('first');
+        $this->prepareQuery();
+
     }
 }
 
