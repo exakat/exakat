@@ -91,7 +91,7 @@ GREMLIN
         $invalid = array();
         foreach($regexList as list($regex, $fullcode)) {
             // @ is important here : we want preg_match to fail silently.
-            if (false === preg_match($regex, '')) {
+            if (false === @preg_match($regex, '')) {
                 $invalid[] = $fullcode;
             }
         }

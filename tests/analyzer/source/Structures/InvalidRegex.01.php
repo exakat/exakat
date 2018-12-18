@@ -14,7 +14,7 @@ preg_replace_callback("#|&\#42;e".$s."is#aeimsuxADJSUX", 'b', $c);
 preg_replace_callback("!|&\#42;e".$s."is!", 'b', $c);
 
 // All good
-\preg_grep('(' . $a . '(!?=+)' . $c . ')sie', '$f', $i);
+\preg_grep('(' . $a . '(!?=+)' . $c . ')si', '$f', $i);
 \preg_replace('(' . $b . '(!?=+)' . $d . ')SUD', '$g', $j);
 
 \preg_replace('(' . $b . '(!?=+)' . $d . ')', '$g', $j);

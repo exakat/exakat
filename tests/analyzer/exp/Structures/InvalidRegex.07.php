@@ -1,6 +1,8 @@
 <?php
 
 $expected     = array('preg_replace_callback("/" . $regexp[C] . "/Z", array($this, \'method\'), $x)',
+                      'preg_match($a->_regexDelimiter . \'^\' . $a->g[$d] . \'$\' . $a->f . \'iu\', $d)',
+                      'preg_match($this->F( ) . \'D\', $FF)',
                      );
 
 $expected_not = array('preg_match($a->_regexDelimiter . \'^\' . $a->g[$d] . \'$\' . $a->f . \'iu\', $d)',
