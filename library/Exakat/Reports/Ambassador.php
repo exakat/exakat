@@ -2056,6 +2056,12 @@ JAVASCRIPTCODE;
 
     public function getNewIssuesFaceted($theme, $path) {
         $sqlite = new \Sqlite3($path);
+        $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
+        
+        if ($res->fetchArray(\SQLITE3_NUM) < 10) {
+            return array();
+        }
+
         return $this->getIssuesFacetedDb($theme, $sqlite);
     }
 
