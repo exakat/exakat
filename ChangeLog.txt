@@ -1,4 +1,4 @@
-Version 1.5.8 (Virudhaka, coming up)
+Version 1.5.8 (Dhrtarastra, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 1.5.8 (Virudhaka, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.8 (Virudhaka, 2018-12-17)
++ Architecture
+    + Handles themas provided by extensions
+    + Added busyTimeout for dump.sqlite
+    + Reduced size of thema tables
+    + Docs handle parameter dynamically
+    + Added 'update' for extensions
++ Report
+    + Ambassador : added a 'Path' inventory, with file paths
++ Analyzer
+    + New analysis : Closures that are identical
+    + Upgraded analysis : Url and SQL detection, case sensitivity
+    + Upgraded analysis : Could Use array_fill_keys
+    + Upgraded analysis : Undefined functions doesn't miss functions inside classes, handles interfaces
+    + Upgraded analysis : Empty Functions better handles return; 
+    + Upgraded analysis : Long Argument may be configured
+    + Upgraded analysis : Fixed bug with empty include path
+    + Checked unit tests : 2770 / 2795 test pass (99% pass)
++ Tokenizer
+    + Added FNP to strings
+    + First link between method and definition with typehint
+    + Support for class_alias
+    + Fixed edge case with use ?>
+    + Fixed variable in string behavior for $this and $php variables
 
 Version 1.5.7 (Vaisravana, 2018-12-10)
 + Architecture
@@ -23,14 +48,14 @@ Version 1.5.7 (Vaisravana, 2018-12-10)
     + Ambassador : fixed an infinite loop when trait include themselves in cycles
     + Added more message count to several reports
 + Analyzer
-    + New analyzer : method could be static
-    + New analyzer : multiple inclusion of traits
-    + New analyzer : avoid self using traits
-    + New analyzer : ext/wasm and ext/async
-    + Upgraded analyzer : No Hardcoded Hash, skip hexadecimal numbers
-    + Upgraded analyzer : Defined properties extends to traits
-    + Upgraded analyzer : PSS outside a class, when PSS are in strings
-    + Upgraded analyzer : Access private works with methods (not just static)
+    + New analysis : method could be static
+    + New analysis : multiple inclusion of traits
+    + New analysis : avoid self using traits
+    + New analysis : ext/wasm and ext/async
+    + Upgraded analysis : No Hardcoded Hash, skip hexadecimal numbers
+    + Upgraded analysis : Defined properties extends to traits
+    + Upgraded analysis : PSS outside a class, when PSS are in strings
+    + Upgraded analysis : Access private works with methods (not just static)
     + Checked unit tests : 2772 / 2785 test pass (99% pass)
 + Tokenizer
     + Fixed bug in Dump, when nothing to clean
@@ -51,11 +76,11 @@ Version 1.5.6 (Jingang, 2018-12-03)
     + Fixed FileDependecy and DependencyWheel, to actually count messages
 + Analyzer
     + Added a lot more new method descriptions for PHP native classes
-    + New analyzer : suggestion simplification for !isset($a) || !isset($a[1])
-    + New analyzer : Useless Trait alias
-    + New analyzer : report usage of ext/sdl
-    + Upgraded analyzer : Refactored IsZero, to handle assignations and parenthesis
-    + Upgraded analyzer : pack format is better checked
+    + New analysis : suggestion simplification for !isset($a) || !isset($a[1])
+    + New analysis : Useless Trait alias
+    + New analysis : report usage of ext/sdl
+    + Upgraded analysis : Refactored IsZero, to handle assignations and parenthesis
+    + Upgraded analysis : pack format is better checked
     + Checked unit tests : 2759 / 2771 test pass (99% pass)
 + Tokenizer
     + Fixed a missing fullnspath for origin in Use for Traits
@@ -78,10 +103,10 @@ Version 1.5.5 (Ratnadhvaja, 2018-11-25)
     + Ambassador : Appinfo() now reports keywords used as method or property
     + Fixed reported names of properties
 + Analyzer
-    + New analyzer : checks some HTTP headers for security
-    + New analyzer : Use _file() functions, not file_get_contents()
+    + New analysis : checks some HTTP headers for security
+    + New analysis : Use _file() functions, not file_get_contents()
     + New analyzer : Optimize looks for fgetcsv()
-    + Upgraded analyzers : Several refactored analysis
+    + Upgraded analysis : Several refactored analysis
     + Checked unit tests : 3083 / 3096 test pass (99% pass)
 + Tokenizer
     + Fixed encoding error in loading, for clone types.
@@ -92,7 +117,7 @@ Version 1.5.4 (Mahakasyapa, 2018-11-19)
     + Added GC to Project action
     + Migrated Melis to extension
     + Dumping data is now done en masse
-    + Analysis now handle side-queries
+    + Analysers now handle side-queries
     + Clear message in case of memory limit
     + Doctor doesn't stop at missing helpers
     + VCS leak less errors
@@ -134,11 +159,11 @@ Version 1.5.2 (Master Puti, 2018-11-05)
     + Ambassador : report nothing when there are no trait, interface or class in the tree.
 + Analyzer
     + New analyzer : idn_to_ascii() will get new default
-    + New analysis : support for decimal extension
-    + New analysis : support for psr extension
-    + Upgraded analysis : Extended support to PHP native exceptions
-    + Upgraded analysis : Could use typecast now handles intval() second param
-    + Upgraded analysis : Variable strange names avoids properties
+    + New analyzer : support for decimal extension
+    + New analyzer : support for psr extension
+    + Upgraded analyzer : Extended support to PHP native exceptions
+    + Upgraded analyzer : Could use typecast now handles intval() second param
+    + Upgraded analyzer : Variable strange names avoids properties
     + Checked unit tests : 3058 / 3085 test pass (99% pass)
 + Tokenizer
     + Upgraded support for arrays inside strings (string/constant distinction)
@@ -148,7 +173,7 @@ Version 1.5.2 (Master Puti, 2018-11-05)
 Version 1.5.1 (Eighteen Arhats, 2018-10-29)
 + Analyzer
     + New analyzer : could use basename() second args
-    + Upgraded analysis : Variables strange names do not report ...
+    + Upgraded analyzer : Variables strange names do not report ...
     + Checked unit tests : 3061 / 3079 test pass (99% pass)
 + Tokenizer
     + Moved TRAILING as a property
@@ -167,12 +192,12 @@ Version 1.5.0 (Pilanpo Bodhisattva, 2018-10-22)
 + Analyzer
     + New analyzer : Could Use Try, for native calls that may produce an exception
     + New analyzer : idn_to_ascii() will get new default
-    + Upgraded analysis : Undefined variables exclude $this
-    + Upgraded analysis : Variables used once avoid properties
-    + Upgraded analysis : ext/json : JsonException
-    + Upgraded analysis : added new PHP 7.3 constants (curl, pgsql, mbstring, standard)
-    + Upgraded analysis : scalar or object property now ignore NULL as default
-    + Refactored analysis : UsedProtectedMethod
+    + Upgraded analyzer : Undefined variables exclude $this
+    + Upgraded analyzer : Variables used once avoid properties
+    + Upgraded analyzer : ext/json : JsonException
+    + Upgraded analyzer : added new PHP 7.3 constants (curl, pgsql, mbstring, standard)
+    + Upgraded analyzer : scalar or object property now ignore NULL as default
+    + Refactored analyzer : UsedProtectedMethod
     + Checked unit tests : 3059 / 3071 test pass (99% pass)
 + Tokenizer
     + Handles NaN and INF when the literals reach them
@@ -189,21 +214,21 @@ Version 1.4.9 (Lingji Bodhisattva, 2018-10-15)
 + Report
     + Collect the number of local variables, per method
 + Analyzer
-    + New analysis : report accessing properties the wrong way
-    + New analysis : suggest named patterns
-    + New analysis : check Pack() arguments
-    + New analysis : Return in generators, for PHP 7.0 +
-    + New analysis : Repeated interfaces
-    + New analysis : Static properties shouldn't use references until PHP 7.3
-    + New analysis : Don't read and write in the same expression
-    + Upgraded analysis : is interface methods, extended to magic methods
-    + Upgraded analysis : empty regex
-    + Upgraded analysis : never used properties
-    + Upgraded analysis : logical operators in letters
-    + Upgraded analysis : could use interface, extended with PHP native interfaces
-    + Upgraded analysis : Is Zero, better handling of mixed expressions
-    + Refactored analysis : Empty functions
-    + Refactored analysis : Used Private Methods
+    + New analyzer : report accessing properties the wrong way
+    + New analyzer : suggest named patterns
+    + New analyzer : check Pack() arguments
+    + New analyzer : Return in generators, for PHP 7.0 +
+    + New analyzer : Repeated interfaces
+    + New analyzer : Static properties shouldn't use references until PHP 7.3
+    + New analyzer : Don't read and write in the same expression
+    + Upgraded analyzer : is interface methods, extended to magic methods
+    + Upgraded analyzer : empty regex
+    + Upgraded analyzer : never used properties
+    + Upgraded analyzer : logical operators in letters
+    + Upgraded analyzer : could use interface, extended with PHP native interfaces
+    + Upgraded analyzer : Is Zero, better handling of mixed expressions
+    + Refactored analyzer : Empty functions
+    + Refactored analyzer : Used Private Methods
     + Checked unit tests : 3036 / 3055 test pass (99% pass)
 + Tokenizer
     + Added DEFINITION between new and __construct
