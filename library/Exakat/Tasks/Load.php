@@ -388,7 +388,6 @@ class Load extends Tasks {
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
         );
 
-//        $this->callsDatabase = new \Sqlite3("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
         $this->callsDatabase = new \Sqlite3(':memory:');
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
     }
