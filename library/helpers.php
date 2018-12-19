@@ -199,7 +199,7 @@ function array_ungroupby($array) {
     return $return;
 }
 
-function makeList($array, $delimiter = '"') {
+function makeList(array $array, string $delimiter = '"') {
     return $delimiter.implode("$delimiter, $delimiter", $array).$delimiter;
 }
 
