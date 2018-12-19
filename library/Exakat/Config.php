@@ -66,10 +66,7 @@ class Config {
             if (!file_exists("{$this->projects_root}/projects")) {
                 mkdir("{$this->projects_root}/projects", 0755);
             }
-            if (!file_exists("{$this->projects_root}/projects/.exakat")) {
-                mkdir("{$this->projects_root}/projects/.exakat", 0755);
-            }
-            ini_set('error_log', "{$this->projects_root}/projects/.exakat/php.log");
+            ini_set('error_log', "{$this->projects_root}/projects/php_error.log");
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__, 2);

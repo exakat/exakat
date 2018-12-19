@@ -61,7 +61,7 @@ class Files extends Tasks {
         self::findFiles($path, $files, $ignoredFiles, $this->config);
         display("Found the files.\n");
 
-        $tmpFileName = "{$this->config->projects_root}/projects/.exakat/files".getmypid().'.txt';
+        $tmpFileName = "{$this->exakatDir}/files".getmypid().'.txt';
         $path = "{$this->config->projects_root}/projects/$dir/code";
         $tmpFiles = array_map(function ($file) {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ),

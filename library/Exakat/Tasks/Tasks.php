@@ -42,7 +42,7 @@ abstract class Tasks {
 
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
-    protected $exakatDir  = null;
+    protected $exakatDir             = '/tmp/';
     public    static $semaphore      = null;
     public    static $semaphorePort  = null;
     
@@ -106,11 +106,14 @@ abstract class Tasks {
             mkdir("{$this->config->projects_root}/projects/", 0700);
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/.exakat/")) {
-            mkdir("{$this->config->projects_root}/projects/.exakat/", 0700);
+        if (!empty($this->config->project)) {
+            $this->exakatDir = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/";
+            
+            if (!file_exists($this->exakatDir)) {
+                mkdir($this->exakatDir, 0700);
+            }
         }
 
-        $this->exakatDir = "{$this->config->projects_root}/projects/.exakat/";
         $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
                                    $this->config->ext,
                                    $this->config->themas);
@@ -146,11 +149,11 @@ abstract class Tasks {
 
     protected function addSnitch($values = array()) {
         static $snitch, $pid, $path;
-
+        
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
-            $path = "{$this->config->projects_root}/projects/.exakat/$snitch.json";
+            $path = "{$this->exakatDir}/$snitch.json";
         }
 
         $values['pid'] = $pid;
@@ -163,7 +166,7 @@ abstract class Tasks {
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
-            $path = "{$this->config->projects_root}/projects/.exakat/$snitch.json";
+            $path = "{$this->exakatDir}/$snitch.json";
         }
 
         unlink($path);

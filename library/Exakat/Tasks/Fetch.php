@@ -37,7 +37,7 @@ class Fetch extends Tasks {
             throw new ProjectNeeded();
         }
 
-        $json = @file_get_contents($this->config->projects_root.'projects/.exakat/Project.json');
+        $json = @file_get_contents("$this->exakatDir/Project.json");
         $json = json_decode($json);
         if (isset($json->project) && $project === $json->project) {
             // Too early

@@ -38,9 +38,9 @@ class Status extends Tasks {
         if ($project === 'default') {
             $status = array();
 
-            if (file_exists("{$this->config->projects_root}/projects/.exakat/Project.json")) {
-                if (file_exists("{$this->config->projects_root}/projects/.exakat/Project.json")) {
-                    $json = file_get_contents("{$this->config->projects_root}/projects/.exakat/Project.json");
+            if (file_exists("$this->exakatDir/Project.json")) {
+                if (file_exists("$this->exakatDir/Project.json")) {
+                    $json = file_get_contents("$this->exakatDir/Project.json");
                     if (empty($json)) {
                         $projectStatus = '';
                         $projectStep = '';
@@ -76,8 +76,8 @@ class Status extends Tasks {
                         'loc'     => $this->datastore->getHash('loc')    ?? -1,
                         'tokens'  => $this->datastore->getHash('tokens') ?? -1,
                         );
-        if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
-            $text = file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json');
+        if (file_exists("$this->exakatDir/Project.json")) {
+            $text = file_get_contents("$this->exakatDir/Project.json");
             if (empty($text)) {
                  $inited = $this->datastore->getHash('inited');
                  $status['status'] = empty($inited) ? 'Init phase' : 'Not running';

@@ -165,7 +165,7 @@ class Analyze extends Tasks {
     private function analyze(Analyzer $analyzer, string $analyzer_class) {
         $begin = microtime(true);
 
-        $lock = new Lock("{$this->config->projects_root}/projects/.exakat/", $analyzer_class);
+        $lock = new Lock($this->exakatDir, $analyzer_class);
         if (!$lock->check()) {
             display(" Concurency lock activated for $analyzer_class \n");
             return false;

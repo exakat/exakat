@@ -61,8 +61,8 @@ class SplitGraphson {
         
         $this->graphdb        = $gremlin;
         $this->sqlite3        = $sqlite3;
-        $this->path           = "{$this->config->projects_root}/projects/.exakat/graphdb.graphson";
-        $this->pathDef        = "{$this->config->projects_root}/projects/.exakat/graphdb.def";
+        $this->path           = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/graphdb.graphson";
+        $this->pathDef        = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/graphdb.def";
         
         $this->dictCode  = new Collector();
         $this->datastore = new Datastore($this->config);
