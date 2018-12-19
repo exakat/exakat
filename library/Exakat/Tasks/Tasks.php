@@ -42,7 +42,7 @@ abstract class Tasks {
 
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
-    protected $exakatDir             = '/tmp/';
+    protected $exakatDir             = '/tmp/exakat';
     public    static $semaphore      = null;
     public    static $semaphorePort  = null;
     
@@ -113,7 +113,7 @@ abstract class Tasks {
                 !file_exists($this->exakatDir)) {
                 mkdir($this->exakatDir, 0700);
             }
-        }
+        } 
 
         $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
                                    $this->config->ext,

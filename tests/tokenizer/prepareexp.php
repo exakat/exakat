@@ -77,7 +77,7 @@ function run($test, $number) {
         return;
     }
     
-    $shell = "cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/$test.$number.php -p test; php exakat export -text -f ./tests/tokenizer/exp/$test.$number.txt";
+    $shell = "cd ../..; php exakat cleandb -p test; php exakat load -f ./tests/tokenizer/source/$test.$number.php -p test; php exakat export -text -f ./tests/tokenizer/exp/$test.$number.txt";
     $res = shell_exec($shell);
     
     if (preg_match("/Warning : (.*?)\n/is", $res, $r) !== 0) {
