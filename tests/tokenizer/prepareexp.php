@@ -57,7 +57,8 @@ function run($test, $number) {
     print "$test.$number\n";
     
     $ini = parse_ini_file('../../projects/test/config.ini');
-    $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
+    $phpversion = empty($ini['phpversion']) ? PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION : $ini['phpversion'];
+    if ($phpversion === 'PHP') { $phpversion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION; }
 
     include_once '../../library/Exakat/Phpexec.php';
     include_once '../../library/Exakat/Config.php';
@@ -67,10 +68,10 @@ function run($test, $number) {
     $config = new \Exakat\Config(array('test', '-p', 'test'));
     chdir($pwd);    
 
-    $versionPHP = 'php'.str_replace('.', '', $phpversion);
-
+    print $versionPHP = 'php'.str_replace('.', '', $phpversion);
+    
     $shell = "{$config->$versionPHP} -l ./source/$test.$number.php";
-    $res = shell_exec($shell);
+    $res = shell_exec($shell) ?? '';
     
     if (strpos('No syntax errors detected in', $res) !== false) {
         print "This script doesn't compile with ".PHP_VERSION." .\n";

@@ -1,0 +1,69 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : CLASS
+            5
+        Label : EXPRESSION
+          7
+          Label : CLASS
+            5
+          Label : METHOD
+            8
+            Label : NAME
+              8
+            Label : ARGUMENT
+              9
+            Label : ARGUMENT
+              10
+        Label : EXPRESSION
+          7
+          Label : CLASS
+            5
+          Label : METHOD
+            8
+            Label : ARGUMENT
+              9
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              8
+        Label : EXPRESSION
+          7
+          Label : CLASS
+            5
+          Label : METHOD
+            12
+            Label : ARGUMENT
+              9
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              12
+        Label : EXPRESSION
+          7
+          Label : CLASS
+            5
+          Label : METHOD
+            12
+            Label : ARGUMENT
+              9
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              11
+            Label : ARGUMENT
+              13
+            Label : NAME
+              12
