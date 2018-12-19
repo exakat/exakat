@@ -225,7 +225,7 @@ TEXT
                         );
             $initConfig = new Config($args);
 
-            $init = new InitProject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
+            $init = new Initproject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
             $init->run();
             $a = rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
         }
@@ -267,6 +267,8 @@ TEXT
                 }
             }
             $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->tinkergraph_folder}");
+        } elseif ($graphdb === 'NONE') {
+            // Nothing to do
         } else {
             assert(false, "Checking install with unknown graphdb : '$graphdb'");
         }
