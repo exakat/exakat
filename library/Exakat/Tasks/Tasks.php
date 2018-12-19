@@ -109,7 +109,8 @@ abstract class Tasks {
         if (!empty($this->config->project)) {
             $this->exakatDir = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/";
             
-            if (!file_exists($this->exakatDir)) {
+            if ($this->config->project !== 'default' && 
+                !file_exists($this->exakatDir)) {
                 mkdir($this->exakatDir, 0700);
             }
         }
