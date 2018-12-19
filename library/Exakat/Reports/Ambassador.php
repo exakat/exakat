@@ -2058,7 +2058,7 @@ JAVASCRIPTCODE;
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
         
-        if ($res->fetchArray(\SQLITE3_NUM) < 10) {
+        if ($res->fetchArray(\SQLITE3_NUM)[0] < 10) {
             return array();
         }
 
