@@ -47,7 +47,9 @@ class Analyzer extends TestCase {
                 
         // Test are run with test project.
         $ini = parse_ini_file("$EXAKAT_PATH/projects/test/config.ini");
-        $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
+        $phpversion = empty($ini['phpversion']) ? PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION : $ini['phpversion'];
+        $phpversion = $phpversion === 'PHP' ? PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION : $phpversion;
+        
         $test_config = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', substr(get_class($this), 5));
         $test_config = str_replace('\\', '/', $test_config);
 
