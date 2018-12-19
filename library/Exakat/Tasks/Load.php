@@ -4809,7 +4809,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLASS) {
             if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 ++$this->id;
-                $right = $this->processSingle('Methodcallname');
+                $right = $this->processSingle('Name');
             } else {
                 $right = $this->tokens[$this->id + 1][1];
                 ++$this->id; // Skip ::
