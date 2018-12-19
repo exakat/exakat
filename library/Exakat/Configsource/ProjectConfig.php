@@ -133,6 +133,13 @@ class ProjectConfig extends Config {
             unset($ext);
         }
 
+        if (!isset($this->config['phpversion']) ||
+             $this->config['phpversion'] === 'PHP' ||
+             !in_array($this->config['phpversion'], array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4'))) {
+            $this->config['phpversion'] = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
+        }
+        // else ALL is good
+
         if (isset($this->config['project_reports']) && 
             is_string($this->config['project_reports'])) {
             $this->config['project_reports'] = explode(',', $this->config['project_reports']);

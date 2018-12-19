@@ -95,7 +95,7 @@ class DefaultConfig extends Config {
                                'php73'         => '',
                                'php74'         => '',
  
-                               'phpversion'    => '7.2',
+                               'phpversion'    => '7.3',
                                'token_limit'   => '1000000',
                                
                                'concurencyCheck' => 7610,
