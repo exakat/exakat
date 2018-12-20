@@ -9,6 +9,10 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            6
           Label : METHOD
             8
             Label : ARGUMENT

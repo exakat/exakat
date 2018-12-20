@@ -9,6 +9,8 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
+          Label : DEFINITION
+            8
           Label : METHOD
             7
             Label : ARGUMENT
@@ -27,6 +29,8 @@ Label : PROJECT
             6
         Label : EXPRESSION
           13
+          Label : DEFINITION
+            8
           Label : METHOD
             7
             Label : ARGUMENT
@@ -43,6 +47,8 @@ Label : PROJECT
             14
         Label : EXPRESSION
           15
+          Label : DEFINITION
+            8
           Label : METHOD
             7
             Label : ARGUMENT

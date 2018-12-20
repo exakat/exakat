@@ -17,6 +17,8 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
+          Label : DEFINITION
+            6
           Label : METHOD
             8
             Label : ARGUMENT
@@ -33,6 +35,8 @@ Label : PROJECT
             6
         Label : EXPRESSION
           5
+          Label : DEFINITION
+            16
           Label : METHOD
             18
             Label : ARGUMENT
@@ -49,6 +53,8 @@ Label : PROJECT
             16
         Label : EXPRESSION
           5
+          Label : DEFINITION
+            22
           Label : NAME
             22
           Label : USE

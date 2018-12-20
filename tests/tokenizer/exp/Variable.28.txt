@@ -66,11 +66,11 @@ Label : PROJECT
             Label : CONCAT
               16
             Label : CONCAT
-              19
-            Label : CONCAT
-              11
-              Label : ARGUMENT
+              8
+              Label : INDEX
                 21
+              Label : VARIABLE
+                19
             Label : CONCAT
               16
             Label : CONCAT
@@ -82,11 +82,11 @@ Label : PROJECT
           Label : RIGHT
             23
             Label : CONCAT
-              25
-            Label : CONCAT
-              11
-              Label : ARGUMENT
+              23
+              Label : INDEX
                 27
+              Label : VARIABLE
+                25
             Label : CONCAT
               16
             Label : CONCAT

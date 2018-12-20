@@ -1,0 +1,17 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : USE
+            8
+            Label : AS
+              9
+            Label : NAME
+              6
