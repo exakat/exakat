@@ -31,10 +31,8 @@ class PHP73LastEmptyArgument extends Analyzer {
         // $object->method($a, )
         // $functioncall($a, )
         $this->atomIs(array('Functioncall', 'Methodcallname'))
-             ->isMore('count', 1)
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('Void')
-             ->back('first');
+             ->isMore('count', 0)
+             ->regexIs('fullcode', '\\\\,  \\\)');
         $this->prepareQuery();
     }
 }
