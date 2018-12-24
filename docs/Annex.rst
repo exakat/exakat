@@ -111,12 +111,13 @@ PHP extensions are used to check for defined structures (classes, interfaces, et
 
 PHP extensions should be provided with the list of structures they define (functions, class, constants, traits, variables, interfaces, namespaces), and directives. 
 
-List of extensions : there are 6 extensions
+List of extensions : there are 7 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
 * :ref:`Slim <extension-slim>`
+* :ref:`Symfony <extension-symfony>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -151,6 +152,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `HuMo-Gen <http://humogen.com/>`_
+* Humo-Gen
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
@@ -159,6 +161,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Phinx <https://phinx.org/>`_
+* PhpDocumentor
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `Piwigo <https://www.piwigo.org/>`_
@@ -240,7 +243,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.5.8
 
   * Multiple Identical Closure (Functions/MultipleIdenticalClosure)
-  * Path lists (Type/Path ; Unassigned)
+  * Path lists (Type/Path ; Appinfo)
 
 * 1.5.7
 
@@ -1771,6 +1774,7 @@ External links
 
 List of external links mentionned in this documentation.
 
+* ` <http://www.php.net/empty>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
@@ -1785,8 +1789,8 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
@@ -1933,8 +1937,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -1998,8 +2002,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset <http://www.php.net/isset>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2031,8 +2035,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2121,8 +2125,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
@@ -2217,8 +2221,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_

@@ -36,12 +36,13 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-List of extensions : there are 6 extensions
+List of extensions : there are 7 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
 * :ref:`Slim <extension-slim>`
+* :ref:`Symfony <extension-symfony>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -213,6 +214,21 @@ This extension includes 26 analyzers.
 
 
 This extension includes one report : Slim.
+
+
+
+.. _extension-symfony:
+
+Symfony
+#######
+
+This is extension Symfony.
+
+This extension includes 0 analyzers.
+
+* 
+
+
 
 
 

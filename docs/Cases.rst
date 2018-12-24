@@ -2147,6 +2147,67 @@ At least, it always choose the most secure way : use SSL.
             $form .= zen_href_link($action, $parameters, 'NONSSL');
           }
 
+Useless Switch
+==============
+
+.. _phpdocumentor-structures-uselessswitch:
+
+PhpDocumentor
+^^^^^^^^^^^^^
+
+:ref:`useless-switch`, in fuel/modules/fuel/libraries/Inspection.php:349. 
+
+This method parses comments. In fact, comments are represented by other tokens, which may be added or removed at time while coding.
+
+.. code-block:: php
+
+    public function parse_comments($code)
+    	{
+    		$comments = array();
+    		$tokens = token_get_all($code);
+    		
+    		foreach($tokens as $token)
+    		{
+    			switch($token[0])
+    			{
+    				case T_DOC_COMMENT:
+    					$comments[] = $token[1];
+    					break;
+    		    }
+    		}
+    		return $comments;
+    		
+    	}
+
+
+--------
+
+
+.. _dolphin-structures-uselessswitch:
+
+Dolphin
+^^^^^^^
+
+:ref:`useless-switch`, in Dolphin-v.7.3.5/inc/classes/BxDolModuleDb.php:34. 
+
+$aParams is an argument : this code looks like the switch is reserved for future use.
+
+.. code-block:: php
+
+    function getModulesBy($aParams = array())
+    	{
+    		$sMethod = 'getAll';
+            $sPostfix = $sWhereClause = "";
+    
+            $sOrderClause = "ORDER BY `title`";
+            switch($aParams['type']) {
+                case 'path':
+                	$sMethod = 'getRow';
+                    $sPostfix .= '_path';
+                    $sWhereClause .= "AND `path`='" . $aParams['value'] . "'";
+                    break;
+            }
+
 Should Use Coalesce
 ===================
 
@@ -4428,6 +4489,28 @@ This foreach reads each element from $entries into entry. $entry, in turn, is wr
     
     				$replacePairs[$searchkey] = $link;
     			}
+
+Empty With Expression
+=====================
+
+.. _humo-gen-structures-emptywithexpression:
+
+Humo-Gen
+^^^^^^^^
+
+:ref:`empty-with-expression`, in fanchart.php:297. 
+
+The test on $pid may be directly done on $treeid[$sosa][0]. The distance between the assignation and the empty() makes it hard to spot. 
+
+.. code-block:: php
+
+    $pid=$treeid[$sosa][0];
+    			$birthyr=$treeid[$sosa][1];
+    			$deathyr=$treeid[$sosa][4];
+    			$fontpx=$fontsize;
+    			if($sosa>=16 AND $fandeg==180) { $fontpx=$fontsize-1; }
+    			if($sosa>=32 AND $fandeg!=180) { $fontpx=$fontsize-1; }
+    			if (!empty($pid)) {
 
 Could Use array_fill_keys
 =========================

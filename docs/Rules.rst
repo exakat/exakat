@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 18 Dec 2018 11:45:38 +0000
-.. comment: Generation hash : eab41b2812ce5c4b048cd7d381ee3ca761b5064b
+.. comment: Generation date : Mon, 24 Dec 2018 14:49:03 +0000
+.. comment: Generation hash : 41026f341719b407f21f30fdd0f3bdc42a30f8ea
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6985,17 +6985,28 @@ Empty With Expression
    
    ?>
 
-+-------------+--------------------------------+
-| Short name  | Structures/EmptyWithExpression |
-+-------------+--------------------------------+
-| Themes      | :ref:`Suggestions`             |
-+-------------+--------------------------------+
-| Php Version | With PHP 5.5 and more recent   |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
+
+See also ` <http://www.php.net/empty>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the compatible syntax, and store the result in a local variable before testing it with empty
+
++-------------+------------------------------------------------+
+| Short name  | Structures/EmptyWithExpression                 |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Suggestions`                             |
++-------------+------------------------------------------------+
+| Php Version | With PHP 5.5 and more recent                   |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
+| Examples    | :ref:`humo-gen-structures-emptywithexpression` |
++-------------+------------------------------------------------+
 
 
 
@@ -25576,15 +25587,27 @@ This switch has only one case. It may very well be replaced by a ifthen structur
    }
    ?>
 
-+-------------+--------------------------+
-| Short name  | Structures/UselessSwitch |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
-+-------------+--------------------------+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Turn the switch into a if/then for better readability
+* Add other cases to the switch, making it adapted to the situation
+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Structures/UselessSwitch                                                               |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                         |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                  |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                       |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpdocumentor-structures-uselessswitch`, :ref:`dolphin-structures-uselessswitch` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 
