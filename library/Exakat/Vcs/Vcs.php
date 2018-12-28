@@ -29,12 +29,28 @@ abstract class Vcs {
     protected $branch = '';
     protected $tag    = '';
     
+    protected $checked = false;
+    
     public function __construct($destination, $project_root){
         $this->destination     = $destination;
         $this->destinationFull = "$project_root/projects/$destination";
     }
 
     abstract public function clone($source);
+
+    protected function check() {
+        if ($this->checked === true) {
+            return true;
+        }
+        
+        $this->selfCheck();
+        $this->checked = true;
+        
+        return true;
+    }
+    protected function selfCheck() {}
+
+    public function getLineChanges() { return array(); }
 
     public function update() {}
     

@@ -27,7 +27,9 @@ use Exakat\Exceptions\HelperException;
 class Composer extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-        
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('composer --version 2>&1');
         if (strpos($res, 'Composer') === false) {
             throw new HelperException('Composer');
@@ -35,6 +37,8 @@ class Composer extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         // composer install
         $composer = new \stdClass();
         $composer->{'minimum-stability'} = 'dev';
@@ -48,6 +52,8 @@ class Composer extends Vcs {
     }
 
     public function update() {
+        $this->check();
+
         shell_exec("cd {$this->destinationFull}/code/; composer -q update");
 
         $jsonText = file_get_contents("{$this->destinationFull}/code/composer.json");

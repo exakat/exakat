@@ -25,10 +25,14 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Zip extends Vcs {
+    private $executable = 'zap';
+    
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
-        $res = shell_exec('zip --version  2>&1');
+    }
+    
+    protected function selfCheck() {
+        $res = shell_exec("$this->executable --version  2>&1");
         if (strpos($res, 'Zip') === false) {
             throw new HelperException('zip');
         }
@@ -39,6 +43,8 @@ class Zip extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         $binary = file_get_contents($source);
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip').'.zip';
         file_put_contents($archiveFile, $binary);
@@ -55,7 +61,7 @@ class Zip extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = shell_exec('zip -v  2>&1');
+        $res = shell_exec("$this->executable -v  2>&1");
         if (stripos($res, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {

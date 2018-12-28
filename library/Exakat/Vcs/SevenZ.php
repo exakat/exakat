@@ -27,7 +27,9 @@ use Exakat\Exceptions\HelperException;
 class SevenZ extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('7z  2>&1');
         if (strpos($res, '7-Zip') === false) {
             throw new HelperException('7z');
@@ -39,6 +41,8 @@ class SevenZ extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         $binary = file_get_contents($source);
         $archiveFile = tempnam(sys_get_temp_dir(), 'archive7Z').'.7z';
         file_put_contents($archiveFile, $binary);

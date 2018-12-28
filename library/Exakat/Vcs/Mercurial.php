@@ -27,7 +27,9 @@ use Exakat\Exceptions\HelperException;
 class Mercurial extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('hg --version 2>&1');
         if (strpos($res, 'Mercurial') === false) {
             throw new HelperException('Mercurial');
@@ -35,11 +37,15 @@ class Mercurial extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+        
         $sourceArg = escapeshellarg($source);
         shell_exec("cd {$this->destinationFull}; hg clone $sourceArg code");
     }
 
     public function update() {
+        $this->check();
+
         $res = shell_exec("cd {$this->destinationFull}/code/; hg pull 2>&1; hg update; hg log -l 1");
         preg_match('/changeset:\s+(\S+)/', $res, $changeset);
         preg_match("/date:\s+([^\n]+)/", $res, $date);

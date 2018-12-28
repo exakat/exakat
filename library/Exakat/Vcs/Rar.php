@@ -27,7 +27,9 @@ use Exakat\Exceptions\HelperException;
 class Rar extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('unrar 2>&1');
         if (strpos($res, 'UNRAR') === false) {
             throw new HelperException('rar');
@@ -39,6 +41,8 @@ class Rar extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         $binary = file_get_contents($source);
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveRar').'.rar';
         file_put_contents($archiveFile, $binary);

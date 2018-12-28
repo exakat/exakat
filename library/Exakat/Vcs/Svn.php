@@ -29,7 +29,9 @@ class Svn extends Vcs {
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-        
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('svn --version 2>&1');
         if (strpos($res, 'svn') === false) {
             throw new HelperException('SVN');
@@ -37,11 +39,15 @@ class Svn extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         $source = escapeshellarg($source);
         shell_exec("cd {$this->destinationFull}; svn checkout --quiet $source code");
     }
 
     public function update() {
+        $this->check();
+
         $res = shell_exec("cd $this->destinationFull/code; svn update");
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];

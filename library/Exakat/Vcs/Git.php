@@ -32,7 +32,9 @@ class Git extends Vcs {
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('git --version 2>&1');
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
@@ -48,6 +50,7 @@ class Git extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
         $repositoryDetails = parse_url($source);
 
         if (isset($repositoryDetails['user'])) {
@@ -89,6 +92,8 @@ class Git extends Vcs {
     }
 
     public function update() {
+        $this->check();
+
         $res = shell_exec("cd {$this->destinationFull}/code/; git branch | grep \\*");
         $branch = substr(trim($res), 2);
         

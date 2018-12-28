@@ -27,7 +27,9 @@ use Exakat\Exceptions\HelperException;
 class Targz extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
-
+    }
+    
+    protected function selfCheck() {
         $res = shell_exec('tar --version 2>&1');
         if (!preg_match('#\d+\.\d+\.\d+#s', $res)) {
             throw new HelperException('Tar');
@@ -44,6 +46,8 @@ class Targz extends Vcs {
     }
 
     public function clone($source) {
+        $this->check();
+
         $binary = file_get_contents($source);
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tar.gz';
         file_put_contents($archiveFile, $binary);

@@ -27,6 +27,7 @@ use Exakat\Exceptions\NoSuchDir;
 class Symlink extends Vcs {
     public function clone($source) {
         $source = realpath($source);
+
         if (empty($source)) {
             throw new NoSuchDir();
         }
