@@ -965,14 +965,14 @@ GLOSSARY;
             return $doc;
         }
         
-        if (file_exists('../Extensions/'.$ext->name.'/human/en/docs.ini')) {
+        if (file_exists("../Extensions/{$ext->name}/human/en/docs.ini")) {
             $docs = parse_ini_file('../Extensions/'.$ext->name.'/human/en/docs.ini');
             $doc .= $docs['description'];
         } else {
             $doc .= "This is extension $ext->name.\n\n";
         }
 
-        $analyzers = parse_ini_file('../Extensions/'.$ext->name.'/analyzers.ini');
+        $analyzers = parse_ini_file("../Extensions/{$ext->name}/Analyzer/analyzers.ini");
         $doc .= 'This extension includes '.count($analyzers[$ext->name]).' analyzers.'.PHP_EOL.PHP_EOL;
         $list = array();
         foreach($analyzers[$ext->name] as $analyzer) {
