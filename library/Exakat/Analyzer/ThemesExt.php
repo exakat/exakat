@@ -81,7 +81,7 @@ class ThemesExt {
             $return[] = $extension->getThemesForAnalyzer($analyzer);
         }
         
-        return array_merge(...$return);
+        return empty($return) ? array() : array_merge(...$return);
     }
 
     public function getSeverities() {
@@ -127,6 +127,10 @@ class ThemesExt {
     }
     
     public function listAllAnalyzer($folder = null) {
+        if (empty($this->all)) {
+            return array();
+        }
+
         $return = array_merge(...array_values($this->all));
         if ($folder === null) {
             return $return;
