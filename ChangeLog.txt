@@ -1,4 +1,4 @@
-Version 1.5.8 (Dhrtarastra, coming up)
+Version 1.6.0 (VirupakSa, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 1.5.8 (Dhrtarastra, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.9 (Dhrtarastra, 2018-12-24)
++ Architecture
+    + Use PHP in project config for default PHP version
+    + cleandb uses -p
+    + Moved projects/.exakat to projects/<-p>/.exakat folders
+    + Using $config and not more hardcoded tinkergraph
+    + Extra check on doctor 
++ Report
+    + Ambassador : extra check for 'previous' report
++ Analyzer
+    + Upgraded analysis : Empty With Expression skip a few false positive
+    + Checked unit tests : 2770 / 2795 test pass (99% pass)
++ Tokenizer
+    + Fixed edgecase for methods named 'class'
+    + Fixed class name in Project
 
 Version 1.5.8 (Virudhaka, 2018-12-17)
 + Architecture
