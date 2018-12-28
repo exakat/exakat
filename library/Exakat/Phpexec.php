@@ -149,7 +149,7 @@ class Phpexec {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             // -d short_open_tag=1
             $file = escapeshellarg($file);
-            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$file.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$file.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.escapeshellarg($tmpFile));
             include $tmpFile;
 
             unlink($tmpFile);
