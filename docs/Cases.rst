@@ -137,7 +137,7 @@ This double-call returns $results as a boolean, preventing a spill of data to th
 Tine20
 ^^^^^^
 
-:ref:`not-not`, in /tine20/Calendar/Controller/MSEventFacade.php:392. 
+:ref:`not-not`, in tine20/Calendar/Controller/MSEventFacade.php:392. 
 
 It seems that !! is almost superfluous, as a property called 'is_deleted' should already be a boolean.
 
@@ -1600,6 +1600,23 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
+
+--------
+
+
+.. _wordpress-structures-alteringforeachwithoutreference:
+
+WordPress
+^^^^^^^^^
+
+:ref:`altering-foreach-without-reference`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 No Parenthesis For Language Construct
 =====================================
 
@@ -1608,7 +1625,7 @@ No Parenthesis For Language Construct
 Phpdocumentor
 ^^^^^^^^^^^^^
 
-:ref:`no-parenthesis-for-language-construct`, in /src/Application/Renderer/Router/StandardRouter.php:55. 
+:ref:`no-parenthesis-for-language-construct`, in src/Application/Renderer/Router/StandardRouter.php:55. 
 
 No need for parenthesis with require(). instanceof has a higher precedence than return anyway. 
 
@@ -1625,7 +1642,7 @@ No need for parenthesis with require(). instanceof has a higher precedence than 
 phpMyAdmin
 ^^^^^^^^^^
 
-:ref:`no-parenthesis-for-language-construct`, in /db_datadict.php:170. 
+:ref:`no-parenthesis-for-language-construct`, in db_datadict.php:170. 
 
 Not only echo() doesn't use any parenthesis, but this syntax gives the illusion that echo() only accepts one argument, while it actually accepts an arbitrary number of argument.
 
@@ -1792,12 +1809,29 @@ Thelia
 Should Typecast
 ===============
 
+.. _xataface-type-shouldtypecast:
+
+xataface
+^^^^^^^^
+
+:ref:`should-typecast`, in Dataface/Relationship.php:1612. 
+
+This is an exact example. A little further, the same applies to intval($max)) 
+
+.. code-block:: php
+
+    intval($min);
+
+
+--------
+
+
 .. _openconf-type-shouldtypecast:
 
 OpenConf
 ^^^^^^^^
 
-:ref:`should-typecast`, in /author/upload.php:62. 
+:ref:`should-typecast`, in author/upload.php:62. 
 
 This is another exact example. 
 
@@ -2152,7 +2186,7 @@ Useless Switch
 
 .. _phpdocumentor-structures-uselessswitch:
 
-PhpDocumentor
+Phpdocumentor
 ^^^^^^^^^^^^^
 
 :ref:`useless-switch`, in fuel/modules/fuel/libraries/Inspection.php:349. 
@@ -2648,7 +2682,7 @@ No isset() With empty()
 XOOPS
 ^^^^^
 
-:ref:`no-isset()-with-empty()`, in /htdocs/class/tree.php:297. 
+:ref:`no-isset()-with-empty()`, in htdocs/class/tree.php:297. 
 
 Too much vlaidation
 
@@ -2771,7 +2805,7 @@ Illegal Name For Method
 PrestaShop
 ^^^^^^^^^^
 
-:ref:`illegal-name-for-method`, in /admin-dev/ajaxfilemanager/inc/class.pagination.php:200. 
+:ref:`illegal-name-for-method`, in admin-dev/ajaxfilemanager/inc/class.pagination.php:200. 
 
 __getBaseUrl and __setBaseUrl shouldn't be named like that. 
 
@@ -3258,6 +3292,42 @@ $this is send to $objRegistry. $objRegistry is obtained with a factory, \Model\R
 Parent First
 ============
 
+.. _shopware-classes-parentfirst:
+
+shopware
+^^^^^^^^
+
+:ref:`parent-first`, in wp-admin/includes/misc.php:74. 
+
+Here, the parent is called last. Givent that $title is defined in the same class, it seems that $name may be defined in the BaseContainer class. In fact, it is not, and BasecContainer and FieldSet are fairly independant classes. Thus, the parent::__construct call could be first here, though more as a coding convention.
+
+.. code-block:: php
+
+    /**
+     * Class FieldSet
+     */
+    class FieldSet extends BaseContainer
+    {
+        /**
+         * @var string
+         */
+        protected $title;
+    
+        /**
+         * @param string $name
+         * @param string $title
+         */
+        public function __construct($name, $title)
+        {
+            $this->title = $title;
+            $this->name = $name;
+            parent::__construct();
+        }
+
+
+--------
+
+
 .. _prestashop-classes-parentfirst:
 
 PrestaShop
@@ -3318,7 +3388,7 @@ No Reference For Ternary
 phpadsnew
 ^^^^^^^^^
 
-:ref:`no-reference-for-ternary`, in /lib/OA/Admin/Menu/Section.php334:334. 
+:ref:`no-reference-for-ternary`, in lib/OA/Admin/Menu/Section.php334:334. 
 
 The reference should be removed from the function definition. Either this method returns null, which is never a reference, or it returns $this, which is always a reference, or the results of a methodcall. The latter may or may not be a reference, but the Ternary operator will drop it and return by value. 
 
@@ -3643,7 +3713,7 @@ Incompatible Signature Methods
 SuiteCrm
 ^^^^^^^^
 
-:ref:`incompatible-signature-methods`, in /modules/Home/Dashlets/RSSDashlet/RSSDashlet.php:138. 
+:ref:`incompatible-signature-methods`, in modules/Home/Dashlets/RSSDashlet/RSSDashlet.php:138. 
 
 The class in the RSSDashlet.php file has an 'array' typehint which is not in the parent Dashlet class. While both files compile separately, they yield a PHP warning when running : typehinting mismatch only yields a warning. 
 
@@ -3892,6 +3962,23 @@ The setSpecificField method catches a WebserviceException, representing an issue
 
 Slow Functions
 ==============
+
+.. _churchcrm-performances-slowfunctions:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`slow-functions`, in src/Reports/PrintDeposit.php:35. 
+
+You may replace this with a isset() : $_POST can't contain a NULL value, unless it was set by the script itself.
+
+.. code-block:: php
+
+    array_key_exists("report_type", $_POST);
+
+
+--------
+
 
 .. _suitecrm-performances-slowfunctions:
 
@@ -4250,7 +4337,7 @@ Slice Arrays First
 WordPress
 ^^^^^^^^^
 
-:ref:`slice-arrays-first`, in /modules/InboundEmail/InboundEmail.php:1080. 
+:ref:`slice-arrays-first`, in modules/InboundEmail/InboundEmail.php:1080. 
 
 Instead of reading ALL the keys, and then, keeping only the first fifty, why not read the 50 first items from the array, and then extract the keys?
 
@@ -4495,7 +4582,7 @@ Empty With Expression
 
 .. _humo-gen-structures-emptywithexpression:
 
-Humo-Gen
+HuMo-Gen
 ^^^^^^^^
 
 :ref:`empty-with-expression`, in fanchart.php:297. 
@@ -4630,7 +4717,7 @@ One If Is Sufficient
 Tikiwiki
 ^^^^^^^^
 
-:ref:`one-if-is-sufficient`, in /lib/wiki-plugins/wikiplugin_trade.php:152. 
+:ref:`one-if-is-sufficient`, in lib/wiki-plugins/wikiplugin_trade.php:152. 
 
 empty($params['inputtitle']) should have priority over $params['wanted'] == 'n'.
 
@@ -4654,7 +4741,7 @@ Could Use array_unique
 Dolibarr
 ^^^^^^^^
 
-:ref:`could-use-array\_unique`, in /htdocs/includes/restler/framework/Luracast/Restler/Format/XmlFormat.php:250. 
+:ref:`could-use-array\_unique`, in htdocs/includes/restler/framework/Luracast/Restler/Format/XmlFormat.php:250. 
 
 This loop has two distinct operations : the first collect keys and keep them unique. A combinaison of array_keys() and array_unique() would do that job, while saving the in_array() lookup, and the configuration check with 'static::$importSettingsFromXml'. The second operation is distinct, and could be done with array_map().
 
@@ -4708,7 +4795,7 @@ Should Use Operator
 Zencart
 ^^^^^^^
 
-:ref:`should-use-operator`, in /includes/modules/payment/paypal/paypal_curl.php:378. 
+:ref:`should-use-operator`, in includes/modules/payment/paypal/paypal_curl.php:378. 
 
 Here, $options is merged with $values if it is an array. If it is not an array, it is probably a null value, and may be ignored. Adding a 'array' typehint will strengthen the code an catch situations where TransactionSearch() is called with a string, leading to clearer code.
 

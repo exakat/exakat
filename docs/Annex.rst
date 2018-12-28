@@ -152,7 +152,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `HuMo-Gen <http://humogen.com/>`_
-* Humo-Gen
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
@@ -161,7 +160,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Phinx <https://phinx.org/>`_
-* PhpDocumentor
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `Piwigo <https://www.piwigo.org/>`_
@@ -1774,7 +1772,6 @@ External links
 
 List of external links mentionned in this documentation.
 
-* ` <http://www.php.net/empty>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
@@ -1789,8 +1786,8 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
@@ -1886,6 +1883,7 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
+* `empty <http://www.php.net/empty>`_
 * `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
 * `empty() <http://www.php.net/empty>`_
@@ -1944,8 +1942,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2002,8 +2000,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `Isset <http://www.php.net/isset>`_
 * `isset <http://www.php.net/isset>`_
+* `Isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2035,8 +2033,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2080,6 +2078,7 @@ List of external links mentionned in this documentation.
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
 * `original idea <https://twitter.com/b_viguier/status/940173951908700161>`_
@@ -2221,8 +2220,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2240,8 +2239,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_

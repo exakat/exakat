@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Dec 2018 14:49:03 +0000
-.. comment: Generation hash : 41026f341719b407f21f30fdd0f3bdc42a30f8ea
+.. comment: Generation date : Fri, 28 Dec 2018 12:32:25 +0000
+.. comment: Generation hash : 9393a8d78ed2402d26f753dba23dc0bcca1fc1e5
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -808,7 +808,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-structures-alteringforeachwithoutreference`                                                                       |
+| Examples    | :ref:`wordpress-structures-alteringforeachwithoutreference`, :ref:`wordpress-structures-alteringforeachwithoutreference`          |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -6986,7 +6986,7 @@ Empty With Expression
    ?>
 
 
-See also ` <http://www.php.net/empty>`_.
+See also `empty <http://www.php.net/empty>`_.
 
 
 Suggestions
@@ -16175,17 +16175,17 @@ Suggestions
 
 * Use ``parent\:\:__construct`` as the first call in the constructor.
 
-+-------------+---------------------------------------+
-| Short name  | Classes/ParentFirst                   |
-+-------------+---------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`    |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
-+-------------+---------------------------------------+
-| Examples    | :ref:`prestashop-classes-parentfirst` |
-+-------------+---------------------------------------+
++-------------+----------------------------------------------------------------------------+
+| Short name  | Classes/ParentFirst                                                        |
++-------------+----------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                         |
++-------------+----------------------------------------------------------------------------+
+| Severity    | Minor                                                                      |
++-------------+----------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                            |
++-------------+----------------------------------------------------------------------------+
+| Examples    | :ref:`shopware-classes-parentfirst`, :ref:`prestashop-classes-parentfirst` |
++-------------+----------------------------------------------------------------------------+
 
 
 
@@ -18849,17 +18849,17 @@ Suggestions
 
 * Use a typecast, instead of a functioncall.
 
-+-------------+-------------------------------------+
-| Short name  | Type/ShouldTypecast                 |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
-| Examples    | :ref:`openconf-type-shouldtypecast` |
-+-------------+-------------------------------------+
++-------------+--------------------------------------------------------------------------+
+| Short name  | Type/ShouldTypecast                                                      |
++-------------+--------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                           |
++-------------+--------------------------------------------------------------------------+
+| Severity    | Minor                                                                    |
++-------------+--------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                          |
++-------------+--------------------------------------------------------------------------+
+| Examples    | :ref:`xataface-type-shouldtypecast`, :ref:`openconf-type-shouldtypecast` |
++-------------+--------------------------------------------------------------------------+
 
 
 
@@ -19752,7 +19752,7 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 +--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
 | `array_diff() <http://www.php.net/array_diff>`_              |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
 | `array_intersect() <http://www.php.net/array_intersect>`_    |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
-| `array_key_exists() <http://www.php.net/array_key_exists>`_  |  `isset() <http://www.php.net/isset>`_                                                                                   | 
+| `array_key_exists() <http://www.php.net/array_key_exists>`_  |  `isset() <http://www.php.net/isset>`_ and `array_key_exists() <http://www.php.net/array_key_exists>`_                   | 
 | `array_map() <http://www.php.net/array_map>`_                |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
 | `array_search() <http://www.php.net/array_search>`_          |  `array_flip() <http://www.php.net/array_flip>`_ and `isset() <http://www.php.net/isset>`_                               | 
 | `array_udiff() <http://www.php.net/array_udiff>`_            |  Use another way                                                                                                         | 
@@ -19768,7 +19768,9 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 | `array_unique() <http://www.php.net/array_unique>`_          |  `array_keys() <http://www.php.net/array_keys>`_ and `array_count_values() <http://www.php.net/array_count_values>`_     | 
 +--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
 
-`array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly.
+`array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly from this version on : `Optimize `array_unique() <http://www.php.net/array_unique>`_ <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_.
+
+`array_key_exists() <http://www.php.net/array_key_exists>`_ has been accelerated in PHP 7.4 and may be used directly from this version on : `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <http://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
 
 
 
@@ -19789,7 +19791,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`suitecrm-performances-slowfunctions`                                                                          |
+| Examples    | :ref:`churchcrm-performances-slowfunctions`, :ref:`suitecrm-performances-slowfunctions`                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 
 

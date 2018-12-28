@@ -160,11 +160,18 @@ Melis
 
 This is extension Melis.
 
-This extension includes 8 analyzers.
+This extension includes 15 analyzers.
 
 * Check Regex (Melis/CheckRegex)
 * Make Type A String (Melis/MakeTypeAString)
+* Melis 2.1 Compatibility (Melis/Melis_2_1)
+* Melis 2.2 Compatibility (Melis/Melis_2_2)
+* Melis 2.3 Compatibility (Melis/Melis_2_3)
+* Melis 2.4 Compatibility (Melis/Melis_2_4)
+* Melis 2.5 Compatibility (Melis/Melis_2_5)
+* Melis 3.0 Compatibility (Melis/Melis_3_0)
 * Melis Translation String (Melis/TranslationString)
+* Melis Usage (Melis/MelisUsage)
 * Melis/RouteConstraints (Melis/RouteConstraints)
 * Missing Language (Melis/MissingLanguage)
 * Missing Translation String (Melis/MissingTranslation)
@@ -224,9 +231,18 @@ Symfony
 
 This is extension Symfony.
 
-This extension includes 0 analyzers.
+This extension includes 10 analyzers.
 
-* 
+* Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
+* Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
+* Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
+* Symfony 3.3 Compatibility (Symfony/Symfony_3_3)
+* Symfony 3.4 Compatibility (Symfony/Symfony_3_4)
+* Symfony 4.0 Compatibility (Symfony/Symfony_4_0)
+* Symfony 4.1 Compatibility (Symfony/Symfony_4_1)
+* Symfony 4.2 Compatibility (Symfony/Symfony_4_2)
+* Symfony Missing (Symfony/SymfonyMissing)
+* Symfony Usage (Symfony/SymfonyUsage)
 
 
 
