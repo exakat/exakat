@@ -54,6 +54,7 @@ class DefaultConfig extends Config {
                                'tbz'            => false,
                                'zip'            => false,
                                'rar'            => false,
+                               'seven7'         => false,
  
                                 // directives with literal value
                                'filename'       => '',
