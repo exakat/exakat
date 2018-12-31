@@ -68,7 +68,7 @@ function run($test, $number) {
     $config = new \Exakat\Config(array('test', '-p', 'test'));
     chdir($pwd);    
 
-    print $versionPHP = 'php'.str_replace('.', '', $phpversion);
+    $versionPHP = 'php'.str_replace('.', '', $phpversion);
     
     $shell = "{$config->$versionPHP} -l ./source/$test.$number.php";
     $res = shell_exec($shell) ?? '';
