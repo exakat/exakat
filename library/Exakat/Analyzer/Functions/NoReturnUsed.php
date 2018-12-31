@@ -34,7 +34,14 @@ class NoReturnUsed extends Analyzer {
              ->atomIsNot('Void')
              ->back('first')
              ->hasOut('DEFINITION')
-             ->raw('not(where( __.out("DEFINITION").not(where( __.in("EXPRESSION")))) )');
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->hasNoIn('EXPRESSION')
+                     )
+             );
         $this->prepareQuery();
 
         // Methods
@@ -47,8 +54,29 @@ class NoReturnUsed extends Analyzer {
              ->atomIsNot('Void')
              ->back('first')
              ->goToClass()
-             ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methode; } )')
-             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methode; }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('CLASS')
+                     ->atomIs('Staticmethodcall')
+                     ->outIs('METHOD')
+                     ->tokenIs('T_STRING')
+                     ->samePropertyAs('code', 'methode', self::CASE_INSENSITIVE)
+             )
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->inIs('CLASS')
+                             ->atomIs('Staticmethodcall')
+                             ->outIs('METHOD')
+                             ->tokenIs('T_STRING')
+                             ->samePropertyAs('code', 'methode', self::CASE_INSENSITIVE)
+                             ->inIs('METHOD')
+                             ->hasNoIn('EXPRESSION')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }
