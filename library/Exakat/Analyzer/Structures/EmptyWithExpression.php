@@ -33,7 +33,8 @@ class EmptyWithExpression extends Analyzer {
         // only works for variables
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'String', 'Identifier', 'Nsname', 'Arrayliteral'))
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname'))
+             ->hasAtomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Addition', 'Multiplication', ))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')
