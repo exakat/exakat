@@ -48,13 +48,21 @@ Label : PROJECT
               Label : BLOCK
                 8
                 Label : EXPRESSION
-                  21
-                  Label : YIELD
-                    14
-                    Label : INDEX
-                      19
-                    Label : VALUE
+                  14
+                  Label : INDEX
+                    22
+                    Label : LEFT
+                      21
+                      Label : YIELD
+                        19
+                    Label : RIGHT
+                      16
+                  Label : VALUE
+                    23
+                    Label : LEFT
                       20
+                    Label : RIGHT
+                      17
               Label : SOURCE
                 9
               Label : VALUE
@@ -94,17 +102,17 @@ Label : PROJECT
           Label : BLOCK
             8
             Label : EXPRESSION
-              25
+              27
               Label : ARGUMENT
-                22
+                24
                 Label : CONCAT
                   19
                 Label : CONCAT
-                  23
+                  25
                 Label : CONCAT
                   20
                 Label : CONCAT
-                  24
+                  26
           Label : SOURCE
             5
             Label : ARGUMENT

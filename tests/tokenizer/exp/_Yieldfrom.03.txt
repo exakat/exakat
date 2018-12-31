@@ -112,13 +112,13 @@ Label : PROJECT
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  26
-                  Label : INDEX
-                    9
-                    Label : YIELD
+                  9
+                  Label : YIELD
+                    26
+                    Label : INDEX
                       25
-                  Label : VALUE
-                    27
+                    Label : VALUE
+                      27
               Label : CATCH
                 12
                 Label : BLOCK
