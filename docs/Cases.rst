@@ -1188,6 +1188,64 @@ PHP_VERSION is actually build with PHP_MAJOR_VERSION, PHP_MINOR_VERSION and PHP_
 
     explode('.', PHP_VERSION);
 
+PHP Keywords As Names
+=====================
+
+.. _churchcrm-php-reservednames:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`php-keywords-as-names`, in src/kiosk/index.php:42. 
+
+$false may be true or false (or else...). In fact, the variable is not even defined in this file, and the file do a lot of inclusion. 
+
+.. code-block:: php
+
+    if (!isset($_COOKIE['kioskCookie'])) {
+        if ($windowOpen) {
+            $guid = uniqid();
+            setcookie("kioskCookie", $guid, 2147483647);
+            $Kiosk = new \ChurchCRM\KioskDevice();
+            $Kiosk->setGUIDHash(hash('sha256', $guid));
+            $Kiosk->setAccepted($false);
+            $Kiosk->save();
+        } else {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+    }
+
+
+--------
+
+
+.. _xataface-php-reservednames:
+
+xataface
+^^^^^^^^
+
+:ref:`php-keywords-as-names`, in Dataface/Record.php:1278. 
+
+This one is documented, and in the end, makes a lot of sense.
+
+.. code-block:: php
+
+    function &getRelatedRecord($relationshipName, $index=0, $where=0, $sort=0){
+    		if ( isset($this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort]) ){
+    			return $this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort];
+    		}
+    		$it = $this->getRelationshipIterator($relationshipName, $index, 1, $where, $sort);
+    		if ( $it->hasNext() ){
+    			$rec =& $it->next();
+    			$this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort] =& $rec;
+    			return $rec;
+    		} else {
+    			$null = null;	// stupid hack because literal 'null' can't be returned by ref.
+    			return $null;
+    		}
+    	}
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -1583,6 +1641,27 @@ Parenthesis are useless for calculating $discount_percent, as it is a divisition
     				$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
     			}
     			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
+
+Unresolved Instanceof
+=====================
+
+.. _wordpress-classes-unresolvedinstanceof:
+
+WordPress
+^^^^^^^^^
+
+:ref:`unresolved-instanceof`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    private function resolveTag($match)
+        {
+            $tagReflector = $this->createLinkOrSeeTagFromRegexMatch($match);
+            if (!$tagReflector instanceof Tag\SeeTag && !$tagReflector instanceof Tag\LinkTag) {
+                return $match;
+            }
 
 Altering Foreach Without Reference
 ==================================
@@ -2983,6 +3062,48 @@ This is sneaky bug : the assignation $status = 0 returns a value, and not a vari
 .. code-block:: php
 
     pcntl_waitpid($this->pid, $status = 0)
+
+No Return Used
+==============
+
+.. _spip-functions-noreturnused:
+
+SPIP
+^^^^
+
+:ref:`no-return-used`, in ecrire/inc/utils.php:1067. 
+
+job_queue_remove() is called as an administration order, and the result is not checked. It is considered as a fire-and-forget command. 
+
+.. code-block:: php
+
+    function job_queue_remove($id_job) {
+    	include_spip('inc/queue');
+    
+    	return queue_remove_job($id_job);
+    }
+
+
+--------
+
+
+.. _livezilla-functions-noreturnused:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`no-return-used`, in livezilla/_lib/trdp/Zend/Loader.php:114. 
+
+The loadFile method tries to load a file, aka as include. If the inclusion fails, a PHP error is emitted (an exception would do the same), and there is not error management. Hence, the 'return true;', which is not tested later. It may be dropped.
+
+.. code-block:: php
+
+    public static function loadFile($filename, $dirs = null, $once = false)
+        {
+    // A lot of code to check and include files
+    
+            return true;
+        }
 
 Mixed Concat And Interpolation
 ==============================

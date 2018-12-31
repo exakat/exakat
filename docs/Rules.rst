@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 28 Dec 2018 12:32:25 +0000
-.. comment: Generation hash : 9393a8d78ed2402d26f753dba23dc0bcca1fc1e5
+.. comment: Generation date : Mon, 31 Dec 2018 16:47:23 +0000
+.. comment: Generation hash : 94c33a963fd77d08535f01440476a4304c30de50
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -14144,15 +14144,25 @@ This analysis supports functions and static methods, when a definition may be fo
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Functions/NoReturnUsed             |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
-+-------------+------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the return statement in the function
+* Actually use the value returned by the method, for test or combinaison with other values
+
++-------------+-----------------------------------------------------------------------------+
+| Short name  | Functions/NoReturnUsed                                                      |
++-------------+-----------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                          |
++-------------+-----------------------------------------------------------------------------+
+| Severity    | Minor                                                                       |
++-------------+-----------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                               |
++-------------+-----------------------------------------------------------------------------+
+| Examples    | :ref:`spip-functions-noreturnused`, :ref:`livezilla-functions-noreturnused` |
++-------------+-----------------------------------------------------------------------------+
 
 
 
@@ -16012,6 +16022,14 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_,
          `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_ and 
          `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Rename the structure
+* Choose another naming convention to avoid conflict and rename the current structures
+
 +---------------+---------+--------+------------------------------------------------------------------------------------+
 | Name          | Default | Type   | Description                                                                        |
 +---------------+---------+--------+------------------------------------------------------------------------------------+
@@ -16022,15 +16040,17 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_,
 
 
 
-+-------------+-------------------+
-| Short name  | Php/ReservedNames |
-+-------------+-------------------+
-| Themes      | :ref:`Analyze`    |
-+-------------+-------------------+
-| Severity    | Major             |
-+-------------+-------------------+
-| Time To Fix | Quick (30 mins)   |
-+-------------+-------------------+
++-------------+-----------------------------------------------------------------------+
+| Short name  | Php/ReservedNames                                                     |
++-------------+-----------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                        |
++-------------+-----------------------------------------------------------------------+
+| Severity    | Major                                                                 |
++-------------+-----------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                       |
++-------------+-----------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-php-reservednames`, :ref:`xataface-php-reservednames` |
++-------------+-----------------------------------------------------------------------+
 
 
 
@@ -22708,6 +22728,13 @@ Make sure the following classes are well defined.
 
 See also `instanceof <http://php.net/`instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the call to instanceof and all its dependencies.
+* Fix the class name and use a class existing in the project.
+
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnresolvedInstanceof                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -22718,6 +22745,8 @@ See also `instanceof <http://php.net/`instanceof <http://php.net/manual/en/langu
 | Time To Fix | Instant (5 mins)                                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-unresolvedinstanceof`                                                                   |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 
 
