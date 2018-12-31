@@ -1,4 +1,4 @@
-Version 1.6.0 (VirupakSa, coming up)
+Version 1.6.1 (Golden Light Gate , coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 1.6.0 (VirupakSa, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.0 (VirupakSa, 2018-12-31)
++ Architecture
+    + VCS are not tested when they are not used
++ Analyzer
+    + Updated analysis : Php Reserved names ignores variable variables
+    + Updated analysis : Array not using a constant, with Heredoc
+    + Updated analysis : Long arguments
+    + Updated analysis : Empty With Expression ignores simple assignations
+    + Refactored analysis : Callback needs returns
+    + Refactored analysis : No Return used
+    + Checked unit tests : 2780 / 2805 test pass (99% pass)
++ Tokenizer
+    + Fixed regression with Yield and =>
+    + Fixed edge case "$a[-0x00]"
 
 Version 1.5.9 (Dhrtarastra, 2018-12-24)
 + Architecture
