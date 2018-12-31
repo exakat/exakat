@@ -4324,7 +4324,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator($atom, $finals, $link, $separator = '') {
+    private function processSingleOperator($atom, array $finals = array(), $link, $separator = '') {
         $current = $this->id;
 
         $operator = $this->addAtom($atom);
@@ -4456,7 +4456,11 @@ class Load extends Tasks {
 
             return $yield;
         } else {
-            $operand = $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+            // => is actually a lower priority
+            $finals = $this->precedence->get($this->tokens[$this->id][0]);
+            $id = array_search($this->phptokens::T_DOUBLE_ARROW, $finals);
+            unset($finals[$id]);
+            $operand = $this->processSingleOperator('Yield', $finals, 'YIELD', ' ');
             $yield = $this->popExpression();
             $this->pushExpression($yield);
 
