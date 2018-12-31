@@ -383,7 +383,7 @@ class CloneType1 extends Plugin {
             
             $atom->ctype1 = 'default '.strtolower($atom->atom).' '.++$i;
             
-            print "CLONE DEFAULT : $atom->atom\n";
+//            print "CLONE DEFAULT : $atom->atom\n";
         }
 
         $atom->ctype1_size += count($extras);
