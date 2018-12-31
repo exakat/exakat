@@ -4,7 +4,7 @@ $or = 1;
 
 function null () {}
 
-class true {
+class truish {
     function __call($name, $args) {
         print "$name\n";
     }

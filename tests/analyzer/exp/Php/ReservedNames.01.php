@@ -1,7 +1,6 @@
 <?php
 
 $expected     = array('function null( ) { /**/ } ',
-                      'class true',
                       '$this->die( )',
                       '$this->exit( )',
                       '$or',
@@ -10,6 +9,7 @@ $expected     = array('function null( ) { /**/ } ',
 $expected_not = array('function',
                       'print',
                       'define',
+                      'class true { /**/ } ',
                      );
 
 ?>
