@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$a->b4 + 1 - $d = $a->b4', 
-                      '$a->b1 + 1 - $a->b1', 
-                      '$a->b2 + 1 - ($a->b2)', 
+$expected     = array('$a->b4 + 1 - $d = $a->b4',
+                      '$a->b1 + 1 - $a->b1',
+                      '$a->b2 + 1 - ($a->b2)',
                       '$a->b3 + 1 - ($d = $a->b3)',
                      );
 

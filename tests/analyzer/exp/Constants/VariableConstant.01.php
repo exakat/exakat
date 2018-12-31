@@ -2,7 +2,7 @@
 
 $expected     = array('\'PHP_VERSION\'',
                       '"B"',
-                     '"B$c"',
+                      '"B$c"',
                       '$a',
                      );
 

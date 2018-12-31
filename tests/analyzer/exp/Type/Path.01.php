@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('\'tmp/my/file\'', 
-                      '\'/tmp/my/file.txt\'', 
-                      '\'/www.other-example.com\'', 
+$expected     = array('\'tmp/my/file\'',
+                      '\'/tmp/my/file.txt\'',
+                      '\'/www.other-example.com\'',
                       '\'tmp/my/file.txt\'',
                      );
 

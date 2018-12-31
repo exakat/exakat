@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('\'Access-Control-Allow-Origin\' => \'*\'', 
-                      '\'access-control-allow-origin\' => \'*\'', 
-                      '\'ACCESS-CONTROL-ALLOW-ORIGIN\' => \'*\'', 
-                      'header(\'Access-Control-Allow-Origin\', \'*\')', 
-                      'header(\'access-control-allow-origin\', \'*\')', 
-                      'HEADER(\'ACCESS-CONTROL-ALLOW-ORIGIN\', \'*\')', 
-                      '\'Access-Control-Allow-Origin: *\'', 
-                      '\'access-control-allow-origin: *\'', 
+$expected     = array('\'Access-Control-Allow-Origin\' => \'*\'',
+                      '\'access-control-allow-origin\' => \'*\'',
+                      '\'ACCESS-CONTROL-ALLOW-ORIGIN\' => \'*\'',
+                      'header(\'Access-Control-Allow-Origin\', \'*\')',
+                      'header(\'access-control-allow-origin\', \'*\')',
+                      'HEADER(\'ACCESS-CONTROL-ALLOW-ORIGIN\', \'*\')',
+                      '\'Access-Control-Allow-Origin: *\'',
+                      '\'access-control-allow-origin: *\'',
                       '\'ACCESS-CONTROL-ALLOW-ORIGIN: *\'',
                      );
 

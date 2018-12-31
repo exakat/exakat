@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a->__CLONE( )', 
+$expected     = array('$a->__CLONE( )',
                       '$a->__clone( )',
                       'F::__clone( )',
                      );

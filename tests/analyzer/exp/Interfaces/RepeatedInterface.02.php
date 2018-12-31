@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('interface x extends i, i, i { /**/ } ',
-                      'interface x2 extends i, i, \i { /**/ } ',
+                      'interface x2 extends i, i, \\i { /**/ } ',
                       'interface x3 extends i, a, j { /**/ } ',
                      );
 

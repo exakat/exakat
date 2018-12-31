@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('"nvc*"', 
+$expected     = array('"nvc*"',
                       '"cchars/nint"',
                      );
 

@@ -1,13 +1,12 @@
 <?php
 
-$expected     = array('$XMLWriter->startDTD( )', 
-                      '$XMLWriter->startDTD(1, 2, 3, 4)', 
-                      '$XMLWriter->startDTD(1, 2, 3, 4, 5)', 
-                      '$other->startDTD( )', 
-
-                      'XMLWriter::startDTD( )', 
-                      'XMLWriter::startDTD(1, 2, 3, 4)', 
-                      'XMLWriter::startDTD(1, 2, 3, 4, 5)', 
+$expected     = array('$XMLWriter->startDTD( )',
+                      '$XMLWriter->startDTD(1, 2, 3, 4)',
+                      '$XMLWriter->startDTD(1, 2, 3, 4, 5)',
+                      '$other->startDTD( )',
+                      'XMLWriter::startDTD( )',
+                      'XMLWriter::startDTD(1, 2, 3, 4)',
+                      'XMLWriter::startDTD(1, 2, 3, 4, 5)',
                      );
 
 $expected_not = array('enough::ini_set(1, 2)',

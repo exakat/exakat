@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('idn_to_ascii(\'täst.de\', IDNA_DEFAULT)', 
+$expected     = array('idn_to_ascii(\'täst.de\', IDNA_DEFAULT)',
                       'idn_to_ascii(\'täst.de\')',
                      );
 

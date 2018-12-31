@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('\'X-XSS-PROTECTION\' => \'0\'', 
-                      '\'X-Xss-Protection\' => \'0\'', 
-                      '\'x-xss-protection\' => \'0\'', 
-                      'header(\'X-Xss-Protection\', \'0\')', 
-                      'header(\'x-xss-protection\', \'0\')', 
-                      'HEADER(\'X-XSS-PROTECTION\', \'0\')', 
-                      '\'x-xss-protection: 0\'', 
-                      '\'X-XSS-PROTECTION: 0\'', 
+$expected     = array('\'X-XSS-PROTECTION\' => \'0\'',
+                      '\'X-Xss-Protection\' => \'0\'',
+                      '\'x-xss-protection\' => \'0\'',
+                      'header(\'X-Xss-Protection\', \'0\')',
+                      'header(\'x-xss-protection\', \'0\')',
+                      'HEADER(\'X-XSS-PROTECTION\', \'0\')',
+                      '\'x-xss-protection: 0\'',
+                      '\'X-XSS-PROTECTION: 0\'',
                       '\'X-Xss-Protection: 0\'',
                      );
 

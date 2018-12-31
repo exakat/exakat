@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('class x implements i, i, i { /**/ } ',
-                      'class x2 implements i, i, \i { /**/ } ',
+                      'class x2 implements i, i, \\i { /**/ } ',
                       'class x3 implements i, a, j { /**/ } ',
                      );
 

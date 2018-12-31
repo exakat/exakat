@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$aprotected1 = 10', 
+$expected     = array('$aprotected1 = 10',
                       '$aprotected11 = 24',
                      );
 

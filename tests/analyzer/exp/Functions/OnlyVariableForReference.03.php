@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$this->foo(1, array( ))', 
-                      '$this->foo(1, x( ))', 
-                      '$this->foo(1, C)', 
+$expected     = array('$this->foo(1, array( ))',
+                      '$this->foo(1, x( ))',
+                      '$this->foo(1, C)',
                       '$this->foo(1, 2)',
                      );
 

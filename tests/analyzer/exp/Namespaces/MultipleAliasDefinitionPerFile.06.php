@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('A as B', 
+$expected     = array('A as B',
                       'A as E',
                      );
 

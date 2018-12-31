@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('Decimal', 
-                      'Decimal', 
-                      'Decimal($n, $p)', 
+$expected     = array('Decimal',
+                      'Decimal',
+                      'Decimal($n, $p)',
                       'Decimal("0.1", 4)',
                      );
 

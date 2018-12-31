@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('bar::$buggy = &$f', 
+$expected     = array('bar::$buggy = &$f',
                       'bar::$OK2 = &$f',
                      );
 

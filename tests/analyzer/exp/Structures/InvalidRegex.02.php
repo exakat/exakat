@@ -1,8 +1,6 @@
 <?php
-// This test is different between PHP 7.3 and 7.2
-$expected     = array(//'preg_match(\'/7\\\\u[0-9A-F]{4}/i\', substr(\'abc\', \'abc\', 6))',
-                      'preg_replace(\'/5\' . X::Y . \'/\', \'\', \'abc\')',
-                      //'preg_replace("/^([\\.-\\w]+)\\/([\\.-\\w]+)(.*)$/i", \'$1/$2\', \'abc\')',
+
+$expected     = array('preg_replace(\'/5\' . X::Y . \'/\', \'\', \'abc\')',
                      );
 
 $expected_not = array('preg_match(\'#^\' . $pattern . \'$#\' . $flags, \'abc\')',

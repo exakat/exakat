@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('\'AbcDe\UNUSED\'',
+$expected     = array('\'AbcDe\\UNUSED\'',
                      );
 
-$expected_not = array('\'AbcDe\FgG\USED1\'', 
-                      '\'AbcDe\FgG\USED2\'', 
-                      '\'AbcDe\FgG\USED3\'',
+$expected_not = array('\'AbcDe\\FgG\\USED1\'',
+                      '\'AbcDe\\FgG\\USED2\'',
+                      '\'AbcDe\\FgG\\USED3\'',
                      );
 
 ?>

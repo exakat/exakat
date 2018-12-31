@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('substr(basename($path), 0, 1)', 
-                      'str_replace(a, b, basename($path))', 
+$expected     = array('substr(basename($path), 0, 1)',
+                      'str_replace(a, b, basename($path))',
                       'iconv_substr(basename($path), 0, 1)',
                      );
 

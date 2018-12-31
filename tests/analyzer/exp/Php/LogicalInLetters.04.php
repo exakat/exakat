@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a1 = $b1 and $c1', 
+$expected     = array('$a1 = $b1 and $c1',
                       '$a1 = $d3 and ($b3 or $c3)',
                      );
 

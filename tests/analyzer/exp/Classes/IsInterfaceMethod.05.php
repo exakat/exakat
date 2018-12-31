@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('public function __destruct( ) { /**/ } ', 
-                      'public function a( ) { /**/ } ', 
+$expected     = array('public function __destruct( ) { /**/ } ',
+                      'public function a( ) { /**/ } ',
                       'public function __clone( ) { /**/ } ',
                      );
 

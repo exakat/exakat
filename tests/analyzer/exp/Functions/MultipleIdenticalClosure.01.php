@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('function ($x) { /**/ } ', 
-                      'function ($b) { /**/ } ', 
-                      'function ($a) { /**/ } ', 
-                      'function ($z) { /**/ } ', 
+$expected     = array('function ($x) { /**/ } ',
+                      'function ($b) { /**/ } ',
+                      'function ($a) { /**/ } ',
+                      'function ($z) { /**/ } ',
                       'function ($y) { /**/ } ',
                      );
 

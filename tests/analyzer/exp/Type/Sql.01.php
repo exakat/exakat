@@ -7,8 +7,8 @@ SELECT name FROM $table_users WHERE id = 3
 SQL',
                       '<<<\'SQL\'
 SELECT name FROM $table_users WHERE id = 4
-SQL', 
-                        '<<<\'SQL\'
+SQL',
+                      '<<<\'SQL\'
 SELECT name FROM $table_users WHERE id = 5
 SQL',
                      );

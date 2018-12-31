@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('CacheException', 
+$expected     = array('CacheException',
                       'CacheException',
                      );
 
