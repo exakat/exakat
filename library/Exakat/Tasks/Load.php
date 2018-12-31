@@ -881,9 +881,15 @@ class Load extends Tasks {
                         $this->runPlugins($index);
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_MINUS) {
                         ++$this->id;
-                        $index            = $this->processSingle('Integer');
-                        $index->code     *= -1;
-                        $index->fullcode *= -1;
+                        if ($this->tokens[$this->id][1][0] === '0') {
+                            $index            = $this->processSingle('String');
+                            $index->code      = "-{$index->code}";
+                            $index->fullcode  = "-{$index->fullcode}";
+                        } else {
+                            $index            = $this->processSingle('Integer');
+                            $index->code     *= -1;
+                            $index->fullcode *= -1;
+                        }
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
                         $index = $this->processSingle('String');
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
