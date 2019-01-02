@@ -26,7 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
-use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoCodeInProjectas;
 use Exakat\Exceptions\ProjectNeeded;
 
 class FindExternalLibraries extends Tasks {
@@ -107,7 +107,7 @@ class FindExternalLibraries extends Tasks {
 
         $path = "{$this->config->projects_root}/projects/$project/code";
         if (!file_exists($path)) {
-            throw new NoSuchProject($project);
+            throw new NoCodeInProject($project);
         }
 
         $cacheFile = "{$this->config->projects_root}/projects/$project/config.cache";

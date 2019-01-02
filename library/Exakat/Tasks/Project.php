@@ -31,6 +31,7 @@ use Exakat\Exakat;
 use Exakat\Project as Projectname;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Vcs\Vcs;
@@ -160,6 +161,19 @@ class Project extends Tasks {
         display("Running project '$project'" . PHP_EOL);
         display("Running the following analysis : ".implode(', ', $themesToRun));
         display("Producing the following reports : ".implode(', ', $reportToRun));
+        
+        display("Running files".PHP_EOL);
+        $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze->run();
+        unset($analyze);
+        $this->logTime('Files');
+        $this->addSnitch(array('step'    => 'Files',
+                               'project' => $this->config->project));
+
+        $nb_files = $this->datastore->getHash('files');
+        if ($nb_files === "0") {
+            throw new NoCodeInProject($this->config->project);
+        }
 
         display("Cleaning DB" . PHP_EOL);
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -169,14 +183,6 @@ class Project extends Tasks {
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
         $this->gremlin->resetConnection();
-        
-        display("Running files".PHP_EOL);
-        $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $analyze->run();
-        unset($analyze);
-        $this->logTime('Files');
-        $this->addSnitch(array('step'    => 'Files',
-                               'project' => $this->config->project));
 
         $this->checkTokenLimit();
 
