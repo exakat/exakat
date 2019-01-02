@@ -250,9 +250,14 @@ SQL;
                 throw new NoSuchThema($thema);
             }
             display("Processing thema : $thema");
-            $this->processResultsTheme($thema, $counts);
+            $missing = $this->processResultsTheme($thema, $counts);
             $this->expandThemes();
             $this->collectHashAnalyzer();
+            
+            if ($missing === 0) {
+                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES ( NULL, \"{$this->config->thema}\")");
+                $themes = array();
+            }
 
         } elseif (!empty($this->config->program)) {
             $analyzer = $this->config->program;
@@ -275,16 +280,13 @@ SQL;
             } else {
                 display("$analyzer is not run yet.");
             }
+
         } else {
             $themes = array();
         }
 
         $this->log->log('Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
-
-        if (empty($themes) && !empty($this->config->thema)) {
-            $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
-        }
 
         $this->finish();
     }
@@ -421,6 +423,7 @@ SQL;
 
         $this->log->log("$theme : dumped $saved");
 
+        $error = 0;
         foreach($classes as $class) {
             if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
@@ -430,9 +433,12 @@ SQL;
                 display("All $counts[$class] results saved for $class\n");
             } else {
                 assert($counts[$class] === $readCounts[$class], "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
+                $error++;
                 display("$readCounts[$class] results saved, $counts[$class] expected for $class\n");
             }
         }
+
+        return $error;
     }
 
     private function processResults($class, int $count) {
