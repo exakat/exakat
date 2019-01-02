@@ -73,7 +73,7 @@ class ClassUsage extends Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomFunctionIs('\\class_alias')
+        $this->atomIs('Classalias')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs($classes);

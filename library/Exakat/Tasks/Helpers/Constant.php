@@ -72,6 +72,7 @@ class Constant extends Plugin {
             case 'Arrayliteral' :
             case 'Concatenation' :
             case 'Argument' :
+            case 'Classalias':
             case 'Sequence' :
                 $constants = array_column($extras, 'constant');
                 $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);

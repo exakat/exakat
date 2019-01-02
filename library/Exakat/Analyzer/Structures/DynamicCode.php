@@ -66,7 +66,15 @@ class DynamicCode extends Analyzer {
         $this->prepareQuery();
 
         // class_alias, extract and parse_url
-        $this->atomFunctionIs(array('\\class_alias', '\\extract', '\\parse_str'));
+        $this->atomFunctionIs('\\extract');
+        $this->prepareQuery();
+        
+        $this->atomFunctionIs(array('\parse_str', '\mb_parse_str'))
+             ->noChildWithRank('ARGUMENT', 1);
+        $this->prepareQuery();
+
+        $this->atomIs('Classalias')
+             ->isNot('constant', true);
         $this->prepareQuery();
     }
 }
