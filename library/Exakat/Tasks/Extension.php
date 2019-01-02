@@ -153,7 +153,7 @@ class Extension extends Tasks {
             if (file_exists("phar://{$this->config->dir_root}/ext/$l/config.ini")) {
                 $ini = parse_ini_file("phar://{$this->config->dir_root}/ext/$l/config.ini");
             } else {
-                $ini = array('version' => '', 
+                $ini = array('version' => '',
                              'build'   => '',
                              );
             }

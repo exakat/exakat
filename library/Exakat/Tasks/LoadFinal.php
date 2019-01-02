@@ -664,7 +664,7 @@ GREMLIN;
         $count = $result->toInt();
 
         display("Set ".$count." class alias definitions");
-        $this->log->log(__METHOD__);    
+        $this->log->log(__METHOD__);
     }
 
     private function setParentDefinition() {

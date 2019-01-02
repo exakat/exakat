@@ -36,8 +36,8 @@ class DSLFactory {
     public     $availableAtoms         = array();
     public     $availableLinks         = array();
     public     $availableFunctioncalls = array();
-    private    $availableVariables     = array(); // This one is per query 
-    protected  $availableLabels        = array('first'); // This one is per query 
+    private    $availableVariables     = array(); // This one is per query
+    protected  $availableLabels        = array('first'); // This one is per query
     protected  $dictCode             = null;
     protected  $linksDown            = '';
     protected  $MAX_LOOPING          = Analyzer::MAX_LOOPING;

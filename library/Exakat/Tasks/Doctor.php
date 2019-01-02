@@ -247,8 +247,8 @@ TEXT
                 file_put_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties", $properties);
             }
 
-            if (!file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh") && 
-                 file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/") 
+            if (!file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh") &&
+                 file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/")
                  ) {
                 if (copy("{$this->config->dir_root}/server/gsneo4j/gremlin-server.sh",
                          "{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh")) {
@@ -259,7 +259,7 @@ TEXT
             }
             $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->gsneo4j_folder}");
         } elseif ($graphdb === 'tinkergraph') {
-            if (!file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh") && 
+            if (!file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh") &&
                  file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/")) {
                 if (copy("{$this->config->dir_root}/server/{$this->config->tinkergraph_folder}/gremlin-server.sh",
                   "{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh")) {

@@ -40,8 +40,8 @@ abstract class DSL {
     protected $availableAtoms         = array();
     protected $availableLinks         = array();
     protected $availableFunctioncalls = array();
-    protected $availableVariables     = array(); // This one is per query 
-    protected $availableLabels        = array(); // This one is per query 
+    protected $availableVariables     = array(); // This one is per query
+    protected $availableLabels        = array(); // This one is per query
     protected $dictCode               = null;
 
     protected static $linksDown     = '';
@@ -136,7 +136,7 @@ abstract class DSL {
             assert(false, 'Unsupported type for token : '.gettype($token));
         }
         return true;
-    }    
+    }
 
     protected function assertAtom($atom) {
         if (is_string($atom)) {

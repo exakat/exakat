@@ -51,7 +51,7 @@ class Atom {
     public $block        = '';
     public $intval       = '';
     public $strval       = '';
-    public $boolean      = ''; 
+    public $boolean      = '';
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';

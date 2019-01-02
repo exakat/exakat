@@ -193,7 +193,7 @@ class Strval extends Plugin {
                 break;
 
         default :
-        case 'Sequence' : 
+        case 'Sequence' :
             // Nothing, really
         }
     }

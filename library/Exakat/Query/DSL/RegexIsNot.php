@@ -39,7 +39,7 @@ class RegexIsNot extends DSL {
             }
             
             return new Command('not( has("code", within(***) ) )', array($values));
-        } 
+        }
         
         return new Command(<<<GREMLIN
 has("$property")

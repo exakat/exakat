@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks;
 
 use Exakat\Config;
@@ -29,25 +28,23 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Vcs\Bazaar;
 use Exakat\Vcs\Composer;
 use Exakat\Vcs\Copy;
-use Exakat\Vcs\EmptyCode;
 use Exakat\Vcs\Git;
 use Exakat\Vcs\Mercurial;
 use Exakat\Vcs\Svn;
 use Exakat\Vcs\Symlink;
-use Exakat\Vcs\Tarbz;
-use Exakat\Vcs\Targz;
 use Exakat\Vcs\Zip;
 
-class Update extends Tasks {
+class Update extends Tasks
+{
     const CONCURENCE = self::ANYTIME;
 
     protected $logname = self::LOG_NONE;
 
-    public function run() {
+    public function run()
+    {
         $project = new ProjectName($this->config->project);
 
         if (!$project->validate()) {
@@ -60,18 +57,19 @@ class Update extends Tasks {
             $this->runProject($this->config->project);
         }
     }
-    
-    private function runDefault() {
+
+    private function runDefault()
+    {
         $paths = glob("{$this->config->projects_root}/projects/*");
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
-        
-        print "Updating ".count($projects)." projects".PHP_EOL;
+
+        echo 'Updating '.count($projects).' projects'.PHP_EOL;
         shuffle($projects);
-        foreach($projects as $project) {
+        foreach ($projects as $project) {
             display("updating $project".PHP_EOL);
 
-            $args = array ( 1 => 'update',
+            $args = array(1 => 'update',
                             2 => '-p',
                             3 => $project,
             );
@@ -80,10 +78,11 @@ class Update extends Tasks {
             $this->update($updateConfig);
         }
     }
-    
-    private function runProject($project) {
+
+    private function runProject($project)
+    {
         $path = "{$this->config->projects_root}/projects/$project";
-    
+
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -91,16 +90,17 @@ class Update extends Tasks {
         if (!is_dir($path)) {
             throw new NoSuchProject($this->config->project);
         }
-    
+
         if (!file_exists("$path/code")) {
             throw new NoCodeInProject($this->config->project);
         }
-        
+
         $this->update($this->config);
     }
-    
-    private function update(Config $updateConfig) {
-        switch(true) {
+
+    private function update(Config $updateConfig)
+    {
+        switch (true) {
             // symlink case
             case $updateConfig->project_vcs === 'rar' :
             case $updateConfig->project_vcs === 'zip' :
@@ -124,7 +124,7 @@ class Update extends Tasks {
                 display("Bazaar update $updateConfig->project");
                 $vcs = new Bazaar($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
-                display( "Bazaar updated to revision $new");
+                display("Bazaar updated to revision $new");
                 break;
 
             // mercurial
@@ -153,9 +153,10 @@ class Update extends Tasks {
 
             default :
                 display('No VCS found to update. check project/config.ini and try again.');
+
                 return;
         }
-        
+
         display('Running files');
         $updateCache = new Files($this->gremlin, $updateConfig);
         try {
@@ -166,5 +167,3 @@ class Update extends Tasks {
         }
     }
 }
-
-?>
