@@ -24,13 +24,12 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\FunctionUsage;
 
-class ClassAliasUsage extends FunctionUsage {
+class ClassAliasUsage extends Analyzer {
+
     public function analyze() {
-        $this->functions = array('class_alias');
-
-        parent::analyze();
+        $this->atomIs('Classalias');
+        $this->prepareQuery();
     }
 }
 
