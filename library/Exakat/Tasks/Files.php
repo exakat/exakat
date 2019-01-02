@@ -59,13 +59,13 @@ class Files extends Tasks {
 
         display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
-        display("Found the files.\n");
+        display("Found ".count($files)." files.\n");
 
         $tmpFileName = "{$this->exakatDir}/files".getmypid().'.txt';
         $path = "{$this->config->projects_root}/projects/$dir/code";
         $tmpFiles = array_map(function ($file) {
-            return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ';', '&', ),
-                               array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', '\\;', '\\&'),
+            return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ';', '&', '`', '|', "\t"),
+                               array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', '\\;', '\\&', '\\`', '\\|', "\\\t", ),
                                ".$file");
                                }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
@@ -269,7 +269,7 @@ class Files extends Tasks {
         unset($toRemoveFromFiles);
 
         display('Check short tag (normal pass)');
-        $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code/; cat '.$tmpFileName.' | xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=0 -d error_reporting=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = "cd {$this->config->projects_root}/projects/$dir/code/; cat $tmpFileName | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
 
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
@@ -291,6 +291,9 @@ class Files extends Tasks {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
             foreach($nosot as $value) {
+                if (strpos($value, ' ') === false) {
+                    continue;
+                }
                 list($count, $file) = explode(' ', $value);
                 $nosot2[$file] = $count;
             }
