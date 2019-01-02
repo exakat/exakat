@@ -1,7 +1,7 @@
 <?php
 
 parse_str(a($b->d), $e);
-mb_parse_str(a($b->d), $e);
+mb_parse_str(a($b->d));
 class_alias('a', 'b');
 class_alias('a', $b);
 extract(parse_url($_SERVER["HTTP_DESTINATION"]));

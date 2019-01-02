@@ -1,14 +1,12 @@
 <?php
 
-$expected     = array('explode(\',\', self::A)',
+$expected     = array('explode(\',\', B::A)',
                      );
 
 $expected_not = array('\'C\' . $a[\'b\']',
                       '\'D\' . $a',
-                      'explode(',
-                      ', B::A)',
-                      'explode(',
-                      ', self::A2)',
+                      'explode(\',\', self::A)',
+                      'explode(\',\', self::A2)',
                      );
 
 ?>
