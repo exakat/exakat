@@ -80,7 +80,7 @@ class AvoidUsing extends Analyzer {
         // class_alias is covered by string test just below
         // mentions in strings
         $this->atomIs('String')
-             ->regexIs('noDelimiter', implode('|', $classes));
+             ->regexIs('noDelimiter', addslashes(implode('|', $classes)));
         $this->prepareQuery();
     }
 }
