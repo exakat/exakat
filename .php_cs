@@ -8,6 +8,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in('./library/Exakat/Vcs')
     ->in('./library/Exakat/Loader')
     ->in('./library/Exakat/Graph')
+    ->in('./library/Exakat/Query')
     ->name('*.php');
 
 return PhpCsFixer\Config::create()
