@@ -1,0 +1,81 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          21
+        Label : EXPRESSION
+          11
+          Label : CASES
+            12
+            Label : EXPRESSION
+              13
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  14
+                Label : EXPRESSION
+                  16
+                  Label : PREPLUSPLUS
+                    9
+                Label : EXPRESSION
+                  17
+                Label : EXPRESSION
+                  19
+                  Label : BREAK
+                    10
+            Label : EXPRESSION
+              20
+              Label : CASE
+                22
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  24
+                Label : EXPRESSION
+                  16
+                  Label : PREPLUSPLUS
+                    9
+                Label : EXPRESSION
+                  24
+          Label : CONDITION
+            5
+        Label : EXPRESSION
+          22
+        Label : EXPRESSION
+          26
+          Label : ARGUMENT
+            9

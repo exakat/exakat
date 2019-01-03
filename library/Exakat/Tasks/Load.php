@@ -3173,7 +3173,12 @@ class Load extends Tasks {
     private function processDefault() {
         $default = $this->addAtom('Default');
         $current = $this->id;
-        ++$this->id; // Skip : or ;
+
+        if  (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON,
+                                                             $this->phptokens::T_SEMICOLON,
+                                                             ))) {
+            ++$this->id; // Skip :
+        }
 
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
@@ -3203,7 +3208,9 @@ class Load extends Tasks {
 
         $this->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON,
-                                                                $this->phptokens::T_SEMICOLON))) {
+                                                                $this->phptokens::T_SEMICOLON,
+                                                                $this->phptokens::T_CLOSE_TAG,
+                                                                ))) {
             $this->processNext();
         }
         $this->exitContext();
@@ -3211,7 +3218,11 @@ class Load extends Tasks {
         $item = $this->popExpression();
         $this->addLink($case, $item, 'CASE');
 
-        ++$this->id; // Skip :
+        if  (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON,
+                                                             $this->phptokens::T_SEMICOLON,
+                                                             ))) {
+            ++$this->id; // Skip :
+        }
 
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
