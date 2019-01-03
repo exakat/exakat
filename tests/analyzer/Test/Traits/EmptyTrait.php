@@ -7,9 +7,11 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class EmptyTrait extends Analyzer {
-    /* 2 methods */
+    /* 4 methods */
 
     public function testTraits_EmptyTrait01()  { $this->generic_test('Traits_EmptyTrait.01'); }
     public function testTraits_EmptyTrait02()  { $this->generic_test('Traits/EmptyTrait.02'); }
+    public function testTraits_EmptyTrait03()  { $this->generic_test('Traits/EmptyTrait.03'); }
+    public function testTraits_EmptyTrait04()  { $this->generic_test('Traits/EmptyTrait.04'); }
 }
 ?>
