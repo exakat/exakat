@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class UnusedArguments extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testFunctions_UnusedArguments01()  { $this->generic_test('Functions/UnusedArguments.01'); }
     public function testFunctions_UnusedArguments02()  { $this->generic_test('Functions/UnusedArguments.02'); }
@@ -15,5 +15,6 @@ class UnusedArguments extends Analyzer {
     public function testFunctions_UnusedArguments04()  { $this->generic_test('Functions/UnusedArguments.04'); }
     public function testFunctions_UnusedArguments05()  { $this->generic_test('Functions/UnusedArguments.05'); }
     public function testFunctions_UnusedArguments06()  { $this->generic_test('Functions/UnusedArguments.06'); }
+    public function testFunctions_UnusedArguments07()  { $this->generic_test('Functions/UnusedArguments.07'); }
 }
 ?>

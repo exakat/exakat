@@ -55,13 +55,23 @@ class UnusedArguments extends Analyzer {
              ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(array('Method', 'Magicmethod'))
+             ->outIs('NAME')
+             ->codeIsNot('__set') // Skip __set, because it may be useful there.
+             ->inIs('NAME')
              ->hasNoOut('OVERWRITE')
              ->hasClassTrait()
              ->_as('results')
              ->isNot('abstract', true)
              ->back('first')
              ->outIs('NAME')
-             ->raw('not(where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->analyzerIs('Variables/IsRead')
+                     )
+             )
              ->back('results');
         $this->prepareQuery();
 
@@ -92,7 +102,6 @@ class UnusedArguments extends Analyzer {
              ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('self')
              ->_as('results')
-
              ->hasClassTrait()
              ->isNot('abstract', true)
              ->hasNoOut('OVERWRITE')
@@ -110,7 +119,14 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->back('first')
              ->outIs('USE')
-             ->raw('not(where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->analyzerIs('Variables/IsRead')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
