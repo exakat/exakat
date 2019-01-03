@@ -25,7 +25,7 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Zip extends Vcs {
-    private $executable = 'zap';
+    private $executable = 'zip';
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
