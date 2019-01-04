@@ -575,6 +575,7 @@ SQL;
                         'ignoredFiles',
                         'shortopentag',
                         'tokenCounts',
+                        'linediff',
                         );
         $this->collectTables($tables);
     }

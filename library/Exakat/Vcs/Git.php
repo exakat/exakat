@@ -173,7 +173,7 @@ class Git extends Vcs {
 
         $lines = explode(PHP_EOL, $res);
         foreach($lines as $line) {
-            if (preg_match('#diff --git a/(.*?) b/(.*)#', $line, $r)) {
+            if (preg_match('#diff --git a(/.*?) b(/.*)#', $line, $r)) {
                 $file = $r[1];
                 continue;
             }

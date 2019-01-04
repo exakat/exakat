@@ -462,8 +462,11 @@ class Project extends Tasks {
         return ucfirst($adjective).' '.$name;
     }
     
-    private function getLineDiff($version, $vcs) {
+    private function getLineDiff($current, $vcs) {
         $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
+        if (!isset($sqliteFilePrevious)) {
+            return ;
+        }
         
         $sqlite = new \Sqlite3($sqliteFilePrevious);
         $res = $sqlite->query('SELECT value FROM hash WHERE key="vcs_revision"');
@@ -472,7 +475,7 @@ class Project extends Tasks {
         }
         $revision = $res->fetchArray(\SQLITE3_ASSOC)['value'];
         
-        $diff = $vcs->getDiffLines($version, $revision);
+        $diff = $vcs->getDiffLines($revision, $current);
         if (!empty($diff)) {
             $this->datastore->addRow('linediff', $diff);
         }

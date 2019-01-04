@@ -1965,8 +1965,9 @@ SQL;
 
         if (file_exists($path)) {
             $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $path);
-
+            
             $diff = array_diff($issues, $oldissues);
+            print "DIFF : ".count($diff).PHP_EOL;
         } else {
             $diff = $issues;
         }
@@ -2062,7 +2063,28 @@ JAVASCRIPTCODE;
             return array();
         }
 
-        return $this->getIssuesFacetedDb($theme, $sqlite);
+        $result = $this->sqlite->query('SELECT * FROM linediff');
+        $linediff = array();
+        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $linediff[$row['file']][$row['line']] = $row['diff'];
+        }
+
+        $oldIssues = $this->getIssuesFacetedDb($theme, $sqlite);
+        foreach($oldIssues as &$issue) {
+            $i = json_decode($issue);
+            if (isset($linediff[$i->file]) && $i->line > -1) {
+                foreach($linediff[$i->file] as $line => $diff) {
+                    if ($i->line > $line) {
+                        $i->line += $diff;
+                    }
+                }
+                if ($i->line > $line) {
+                    $issue = json_encode($i);
+                }
+            }
+        }
+
+        return $oldIssues;
     }
 
     public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
