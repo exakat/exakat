@@ -79,6 +79,7 @@ class Datastore {
             $this->cleanTable('composer');
             $this->cleanTable('configFiles');
             $this->cleanTable('dictionary');
+            $this->cleanTable('linediff');
 
             $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
                                         'exakat_build'         => Exakat::BUILD,
@@ -448,6 +449,17 @@ CREATE TABLE dictionary (
   id INTEGER PRIMARY KEY,
   key TEXT UNIQUE,
   value TEXT
+);
+SQLITE;
+                break;
+
+            case 'linediff' :
+                $createTable = <<<SQLITE
+CREATE TABLE linediff (
+  id INTEGER PRIMARY KEY,
+  file TEXT UNIQUE,
+  line INTEGER,
+  diff INTEGER
 );
 SQLITE;
                 break;

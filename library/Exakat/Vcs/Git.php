@@ -26,16 +26,17 @@ use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 
 class Git extends Vcs {
-    private $installed = false;
-    private $optional  = true;
-    private $version   = 'unknown';
+    private $installed  = false;
+    private $optional   = true;
+    private $version    = 'unknown';
+    private $executable = 'git';
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
     
     protected function selfCheck() {
-        $res = shell_exec('git --version 2>&1');
+        $res = shell_exec("$this->executable --version 2>&1");
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
         }
@@ -68,7 +69,7 @@ class Git extends Vcs {
         unset($repositoryDetails['fragment']);
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
-        $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 git clone -q $repositoryNormalizedURL";
+        $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 {$this->executable} clone -q $repositoryNormalizedURL";
 
         if (!empty($this->branch)) {
             display("Check out with branch '$this->branch'");
@@ -94,19 +95,19 @@ class Git extends Vcs {
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code/; git branch | grep \\*");
+        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} branch | grep \\*");
         $branch = substr(trim($res), 2);
         
         if (strpos($branch, ' detached at ') === false) {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
+            $resInitial = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} show-ref --heads $branch");
         } else {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git checkout --quiet; git pull; git branch | grep '* '");
+            $resInitial = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
             print $resInitial;
             $branch = '';
         }
     
-        $date = trim(shell_exec("cd {$this->destinationFull}/code/;GIT_TERMINAL_PROMPT=0  git pull --quiet; git log -1 --format=%cd "));
-        $resFinal = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
+        $date = trim(shell_exec("cd {$this->destinationFull}/code/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet; {$this->executable} log -1 --format=%cd "));
+        $resFinal = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal, ) = explode(' ', $resFinal);
         }
@@ -126,7 +127,7 @@ class Git extends Vcs {
         if (!file_exists("{$this->destinationFull}/code/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/code/; git branch | grep \* 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} branch | grep \* 2>&1");
         return trim($res, " *\n");
     }
 
@@ -134,7 +135,7 @@ class Git extends Vcs {
         if (!file_exists("{$this->destinationFull}/code/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/code/; git rev-parse HEAD 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} rev-parse HEAD 2>&1");
         return trim($res);
     }
     
@@ -162,6 +163,33 @@ class Git extends Vcs {
                        );
 
         return $status;
+    }
+
+    public function getDiffLines($r1, $r2) {
+        $res = shell_exec("cd {$this->destinationFull}/code; {$this->executable} diff -U0 -r $r1 -r $r2");
+
+        $file    = '';
+        $changes = array();
+
+        $lines = explode(PHP_EOL, $res);
+        foreach($lines as $line) {
+            if (preg_match('#diff --git a/(.*?) b/(.*)#', $line, $r)) {
+                $file = $r[1];
+                continue;
+            }
+    
+            if (preg_match('#@@ \-(\d+)(,(\d+))? \+(\d+)(,(\d+))?( )@@#', $line, $r, PREG_UNMATCHED_AS_NULL)) {
+                $c = ($r[6] ?? 1) - ($r[3] ?? 1);
+                if ($c !== 0) { 
+                    $changes[] = array('file' => $file, 
+                                       'line' => $r[1], 
+                                       'diff' => $c,
+                                       );
+                }
+            }
+        }
+
+        return $changes;
     }
 }
 

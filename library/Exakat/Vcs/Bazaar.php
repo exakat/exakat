@@ -92,6 +92,11 @@ class Bazaar extends Vcs {
 
         return $status;
     }
+
+    public function getDiffLines($r1, $r2) {
+        display("No support yet for line diff in Bazaar.\n");
+        return array();
+    }
 }
 
 ?>

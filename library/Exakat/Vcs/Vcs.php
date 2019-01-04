@@ -38,6 +38,10 @@ abstract class Vcs {
 
     abstract public function clone($source);
 
+    public function getDiffLines($r1, $r2) {
+        return array();
+    }
+
     protected function check() {
         if ($this->checked === true) {
             return true;

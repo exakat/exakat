@@ -130,6 +130,7 @@ class Project extends Tasks {
             }
             if (method_exists($vcs, 'getRevision')) {
                 $info['vcs_revision']      = $vcs->getRevision();
+                $this->getLineDiff($info['vcs_revision'], $vcs);
             }
         }
         $this->datastore->addRow('hash', $info);
@@ -459,6 +460,22 @@ class Project extends Tasks {
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];
 
         return ucfirst($adjective).' '.$name;
+    }
+    
+    private function getLineDiff($version, $vcs) {
+        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
+        
+        $sqlite = new \Sqlite3($sqliteFilePrevious);
+        $res = $sqlite->query('SELECT value FROM hash WHERE key="vcs_revision"');
+        if ($res === false) {
+            return;
+        }
+        $revision = $res->fetchArray(\SQLITE3_ASSOC)['value'];
+        
+        $diff = $vcs->getDiffLines($version, $revision);
+        if (!empty($diff)) {
+            $this->datastore->addRow('linediff', $diff);
+        }
     }
 }
 
