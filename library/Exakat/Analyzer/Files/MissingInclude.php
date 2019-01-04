@@ -78,15 +78,23 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
+             // checks 
              ->not(
                 $this->side()
                      ->filter(
                         $this->side()
                              ->outIs('CONCAT')
                              ->hasNo('noDelimiter')
-                             ->functioncallIsNot('\\dirname')
+                             ->not(
+                                $this->side()
+                                     ->filter(
+                                        $this->side()
+                                             ->functioncallIs('\\dirname')
+                                      )
+                             )
                      )
              )
+
              ->not(
                 $this->side()
                      ->filter(
@@ -181,7 +189,8 @@ filter{
 GREMLIN
 , $files
 )
-             ->back('first');
+             ->back('first')
+             ;
         $this->prepareQuery();
     }
 }
