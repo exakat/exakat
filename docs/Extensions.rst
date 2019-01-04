@@ -36,9 +36,10 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-List of extensions : there are 7 extensions
+List of extensions : there are 8 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
+* :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
 * :ref:`Slim <extension-slim>`
@@ -49,7 +50,7 @@ List of extensions : there are 7 extensions
 
 
 
-Extension managements
+Extension management
 ---------------------
 
 The main command to manage the extensions is `extension`. It has 4 different actions : 
@@ -57,6 +58,7 @@ The main command to manage the extensions is `extension`. It has 4 different act
 * `local`
 * `list`
 * `install`
+* `update`
 * `uninstall`
 
 `local` : the local list of extensions
@@ -77,6 +79,16 @@ This command installs a new extension. Check with `extension local` to know whic
 
 You may also install the extensions manually, by downloading the .phar archive, and installing it in the `ext` folder.
 
+`update` : the update command
+###############################
+
+This command updates an installed extension. Check with `extension local` to know which are the locally installed extensions. 
+
+::
+
+    exakat extension update Wordpress
+
+
 
 `uninstall` : the remove command
 ################################
@@ -92,7 +104,8 @@ You may also remove the extension manually, by removing them from the extension 
 
 
 
-Details about the extension
+Details about the extensions
+----------------------------
 
 .. _extension-cakephp:
 
@@ -101,9 +114,14 @@ Cakephp
 
 This is the CakePHP extension for Exakat. 
 
-`CakePHP <http://www.cakephp.org>`_ is an open-source web, rapid development framework that makes building web applications simpler, faster and require less code.
+CakePHP makes building web applications simpler, faster, while requiring less code. A modern PHP 7 framework offering a flexible database access layer and a powerful scaffolding system that makes building both small and complex systems simpler, easier and, of course, tastier. Build fast, grow solid with CakePHP.
 
-This extension checks for classes, traits and interfaces, from version 3.0 to version 3.7. 
+Exakat provides compatibility reports with classes, interfaces and traits from CakePHP 3.0 to 3.4.
+
+
+
+**Home page** : `https://cakephp.org/ <https://cakephp.org/>`_
+**Extension page** : `https://github.com/exakat/Exakat4CakePHP <https://github.com/exakat/Exakat4CakePHP>`_
 
 This extension includes 18 analyzers.
 
@@ -130,12 +148,61 @@ This extension includes 18 analyzers.
 
 
 
+.. _extension-drupal:
+
+Drupal
+######
+
+This is the Drupal extension for Exakat. 
+
+`Drupal <http://www.drupal.org/>`_ is the "leading open-source CMS for ambitious digital experiences that reach your audience across multiple channels".
+
+
+
+**Home page** : `https://www.drupal.org/ <https://www.drupal.org/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Drupal <https://github.com/exakat/Exakat4Drupal>`_
+
+This extension includes 19 analyzers.
+
+* Drupal 6.0 Compatibility (Drupal/Drupal_6_0)
+* Drupal 6.10 Compatibility (Drupal/Drupal_6_10)
+* Drupal 6.20 Compatibility (Drupal/Drupal_6_20)
+* Drupal 6.38 Compatibility (Drupal/Drupal_6_38)
+* Drupal 7.0 Compatibility (Drupal/Drupal_7_0)
+* Drupal 7.10 Compatibility (Drupal/Drupal_7_10)
+* Drupal 7.20 Compatibility (Drupal/Drupal_7_20)
+* Drupal 7.30 Compatibility (Drupal/Drupal_7_30)
+* Drupal 7.40 Compatibility (Drupal/Drupal_7_40)
+* Drupal 7.50 Compatibility (Drupal/Drupal_7_50)
+* Drupal 7.60 Compatibility (Drupal/Drupal_7_60)
+* Drupal 8.0 Compatibility (Drupal/Drupal_8_0)
+* Drupal 8.1 Compatibility (Drupal/Drupal_8_1)
+* Drupal 8.2 Compatibility (Drupal/Drupal_8_2)
+* Drupal 8.3 Compatibility (Drupal/Drupal_8_3)
+* Drupal 8.4 Compatibility (Drupal/Drupal_8_4)
+* Drupal 8.5 Compatibility (Drupal/Drupal_8_5)
+* Drupal 8.6 Compatibility (Drupal/Drupal_8_6)
+* Drupal Usage (Drupal/DrupalUsage)
+
+
+
+
+
 .. _extension-laravel:
 
 Laravel
 #######
 
-This is extension Laravel.
+This is the Laravel extension for Exakat. 
+
+Laravel is the 'The PHP framework for web artisans.'
+
+Exakat provides compatibility reports with classes, interfaces and traits from Laravel 5.0 to 5.7.
+
+
+
+**Home page** : `https://laravel.com/ <https://laravel.com/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Laravel <https://github.com/exakat/Exakat4Laravel>`_
 
 This extension includes 9 analyzers.
 
@@ -158,7 +225,14 @@ This extension includes 9 analyzers.
 Melis
 #####
 
-This is extension Melis.
+This is the Melis extension for Exakat. 
+
+Melis is a new generation of Content Management System and eCommerce platform to achieve and manage websites from a single web interface easy to use while offering the best of open source technology.
+
+
+
+**Home page** : `https://www.melistechnology.com/ <https://www.melistechnology.com/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
 
 This extension includes 15 analyzers.
 
@@ -188,7 +262,16 @@ This extension includes one report : Melis.
 Slim
 ####
 
-This is extension Slim.
+This is the Slim extension for Exakat. 
+
+Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
+
+Exakat provides compatibility reports with classes, interfaces and traits from Slim 1.0 to 3.8.
+
+
+
+**Home page** : `http://www.slimframework.com/ <http://www.slimframework.com/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Slim <https://github.com/exakat/Exakat4Slim>`_
 
 This extension includes 26 analyzers.
 
@@ -229,7 +312,14 @@ This extension includes one report : Slim.
 Symfony
 #######
 
-This is extension Symfony.
+This is the Symfony extension for Exakat. 
+
+Symfony is a new generation of Content Management System and eCommerce platform to achieve and manage websites from a single web interface easy to use while offering the best of open source technology.
+
+
+
+**Home page** : `https://symfony.com/ <https://symfony.com/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
 
 This extension includes 10 analyzers.
 
@@ -253,7 +343,16 @@ This extension includes 10 analyzers.
 Wordpress
 #########
 
-This is extension Wordpress.
+This is the Wordpress extension for Exakat. 
+
+WordPress is open source software you can use to create a beautiful website, blog, or app.
+
+Exakat reports version compatibility with Worpdress 4.0 to 5.0. Exakat also includes extra code validation, inspired by the wordpress PHP guidelines.
+
+
+
+**Home page** : `https://wordpress.org/ <https://wordpress.org/>`_
+**Extension page** : `https://github.com/exakat/Exakat4Wordpress <https://github.com/exakat/Exakat4Wordpress>`_
 
 This extension includes 26 analyzers.
 
@@ -293,7 +392,15 @@ This extension includes 26 analyzers.
 ZendF
 #####
 
-This is extension ZendF.
+This is the Zend Framework extension for Exakat. 
+
+Zend Framework is a collection of professional PHP packages with more than 345 million installations. It can be used to develop web applications and services using PHP 5.6+, and provides 100% object-oriented code using a broad spectrum of language features.
+
+Exakat reports Zend framework compatibility for over 60 components, from versions 2.5 to 3.x. 
+
+
+**Home page** : `https://framework.zend.com/ <https://framework.zend.com/>`_
+**Extension page** : `https://github.com/exakat/Exakat4ZendF <https://github.com/exakat/Exakat4ZendF>`_
 
 This extension includes 228 analyzers.
 

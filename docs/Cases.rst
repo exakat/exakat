@@ -150,6 +150,39 @@ It seems that !! is almost superfluous, as a property called 'is_deleted' should
                     $this->_eventController->createRecurException($exception, !!$exception->is_deleted);
                 }
 
+Phpinfo
+=======
+
+.. _dolphin-structures-phpinfousage:
+
+Dolphin
+^^^^^^^
+
+:ref:`phpinfo`, in Dolphin-v.7.3.5/install/exec.php:4. 
+
+An actual phpinfo(), available during installation. Note that the phpinfo() is actually triggered by a hidden POST variable. 
+
+.. code-block:: php
+
+    <?php
+    
+        if (!empty($_POST['phpinfo']))
+            phpinfo();
+        elseif (!empty($_POST['gdinfo']))
+            echo '<pre>' . print_r(gd_info(), true) . '</pre>';
+    
+    ?>
+    <center>
+    
+        <form method=post>
+            <input type=submit name=phpinfo value="PHP Info">
+        </form>
+        <form method=post>
+            <input type=submit name=gdinfo value="GD Info">
+        </form>
+    
+    </center>
+
 Strpos()-like Comparison
 ========================
 
@@ -2026,6 +2059,83 @@ When daylight saving strike, the email may suddenly be locked for 1 hour minus 3
                     return;
                 }
 
+Unused Arguments
+================
+
+.. _thinkphp-functions-unusedarguments:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`unused-arguments`, in ThinkPHP/Library/Behavior/AgentCheckBehavior.class.php:18. 
+
+$params are requested, but never used. The method is not overloading another one, as the class doesn't extends anything. $params is unused. 
+
+.. code-block:: php
+
+    class AgentCheckBehavior
+    {
+        public function run(&$params)
+        {
+            // 代理访问检测
+            $limitProxyVisit = C('LIMIT_PROXY_VISIT', null, true);
+            if ($limitProxyVisit && ($_SERVER['HTTP_X_FORWARDED_FOR'] || $_SERVER['HTTP_VIA'] || $_SERVER['HTTP_PROXY_CONNECTION'] || $_SERVER['HTTP_USER_AGENT_VIA'])) {
+                // 禁止代理访问
+                exit('Access Denied');
+            }
+        }
+    }
+
+
+--------
+
+
+.. _phpmyadmin-functions-unusedarguments:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`unused-arguments`, in libraries/classes/Display/Results.php:1985. 
+
+Although $column_index is documented, it is not found in the rest of the (long) body of the function. It might have been refactored into $sorted_column_index.
+
+.. code-block:: php
+
+    /**
+         * Prepare parameters and html for sorted table header fields
+         *
+         * @param array    $sort_expression             sort expression
+         * @param array    $sort_expression_nodirection sort expression without direction
+         * @param string   $sort_tbl                    The name of the table to which
+         *                                             the current column belongs to
+         * @param string   $name_to_use_in_sort         The current column under
+         *                                             consideration
+         * @param array    $sort_direction              sort direction
+         * @param stdClass $fields_meta                 set of field properties
+         * @param integer  $column_index                The index number to current column
+         *
+         * @return  array   3 element array - $single_sort_order, $sort_order, $order_img
+         *
+         * @access  private
+         *
+         * @see     _getOrderLinkAndSortedHeaderHtml()
+         */
+        private function _getSingleAndMultiSortUrls(
+            array $sort_expression,
+            array $sort_expression_nodirection,
+            $sort_tbl,
+            $name_to_use_in_sort,
+            array $sort_direction,
+            $fields_meta,
+            $column_index
+        ) {
+        /**/
+            // find the sorted column index in row result
+            // (this might be a multi-table query)
+            $sorted_column_index = false;
+        /**/
+        }
+
 Wrong Parameter Type
 ====================
 
@@ -2938,6 +3048,52 @@ This one-liner includes 9 members and 6 variables : some are formatted by sprint
 .. code-block:: php
 
     sprintf('<span><input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> %s<label for="opt_%s">%s</label></span>', $this->strName . ($this->multiple ? '[]' : ''), $this->strId . '_' . $i, ($this->multiple ? \StringUtil::specialchars($arrOption['value']) : 1), (((\is_array($this->varValue) && \in_array($arrOption['value'], $this->varValue)) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''), $this->getAttributes( ), $strButtons, $this->strId . '_' . $i, $arrOption['label'])
+
+Strange Name For Variables
+==========================
+
+.. _fuelcms-variables-strangename:
+
+FuelCMS
+^^^^^^^
+
+:ref:`strange-name-for-variables`, in fuel/modules/fuel/libraries/parser/dwoo/Dwoo/Adapters/CakePHP/dwoo.php:86. 
+
+Three _ is quite a lot for variables. Would they not be parameters but global variables, that would still be quite a lot.
+
+.. code-block:: php
+
+    public function _render($___viewFn, $___data_for_view, $___play_safe = true, $loadHelpers = true) {
+        /**/
+    }
+
+
+--------
+
+
+.. _phpipam-variables-strangename:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`strange-name-for-variables`, in app/admin/sections/edit-result.php:56. 
+
+$sss is the end-result of a progression, from $subsections (3s) to $ss to $sss. Although it is understandable from the code, a fuller name, like $subsection_subnet or $one_subsection_subnet would make this more readable.
+
+.. code-block:: php
+
+    //fetch subsection subnets
+    		foreach($subsections as $ss) {
+    			$subsection_subnets = $Subnets->fetch_section_subnets($ss->id);	//fetch all subnets in subsection
+    			if(sizeof($subsection_subnets)>0) {
+    				foreach($subsection_subnets as $sss) {
+    					$out[] = $sss;
+    				}
+    			}
+    			$num_subnets = $num_subnets + sizeof($subsection_subnets);
+    			//count all addresses that will be deleted!
+    			$ipcnt = $Addresses->count_addresses_in_multiple_subnets($out);
+    		}
 
 Suspicious Comparison
 =====================

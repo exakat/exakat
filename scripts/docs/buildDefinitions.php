@@ -938,7 +938,9 @@ GLOSSARY;
         unset($list2);
         
         $this->exakat_extension_list = 'List of extensions : there are '.count($list).' extensions'.PHP_EOL.PHP_EOL;
-        $this->exakat_extension_det  = 'Details about the extension'.PHP_EOL.PHP_EOL;
+        $this->exakat_extension_det  = 'Details about the extensions'.PHP_EOL.
+                                        str_repeat('-', 28).
+                                        PHP_EOL.PHP_EOL;
 
         $summary = array();
         $details = array();
@@ -960,14 +962,21 @@ GLOSSARY;
                str_repeat('#', strlen($ext->name)).PHP_EOL.
                PHP_EOL;
                
-        if (!file_exists('../Extensions/'.$ext->name)) { 
+        if (!file_exists("../Extensions/$ext->name")) { 
             $doc .= PHP_EOL.PHP_EOL;
             return $doc;
         }
         
         if (file_exists("../Extensions/{$ext->name}/human/en/docs.ini")) {
-            $docs = parse_ini_file('../Extensions/'.$ext->name.'/human/en/docs.ini');
-            $doc .= $docs['description'];
+            $docs = parse_ini_file("../Extensions/{$ext->name}/human/en/docs.ini");
+            $doc .= $docs['description']."\n";
+            
+            if (isset($docs['home_page'])) {
+                $doc .= "\n";
+                $doc .= "**Home page** : `$docs[home_page] <$docs[home_page]>`_\n";
+                $doc .= "**Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
+                $doc .= "\n";
+            }
         } else {
             $doc .= "This is extension $ext->name.\n\n";
         }
@@ -987,7 +996,7 @@ GLOSSARY;
         
         // Reports
         // Include a presentation of the report : sections, usage. Must be in human/en/Report folder.
-        $reports = glob('../Extensions/'.$ext->name.'/Reports/*.php');
+        $reports = glob("../Extensions/$ext->name/Reports/*.php");
         if (count($reports) == 1) {
             $doc .= 'This extension includes one report : '.basename($reports[0], '.php').'.'.PHP_EOL;
         } elseif (count($reports) > 1) {
@@ -999,6 +1008,7 @@ GLOSSARY;
         } // else : no report, no docs.
 
         $doc .= PHP_EOL.PHP_EOL;
+        
         return $doc;
     }
 }

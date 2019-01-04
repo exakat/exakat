@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 31 Dec 2018 16:47:23 +0000
-.. comment: Generation hash : 94c33a963fd77d08535f01440476a4304c30de50
+.. comment: Generation date : Fri, 04 Jan 2019 11:47:07 +0000
+.. comment: Generation hash : 8790376006d1b9d60225ab6ceb3d7f81d65d6ced
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6907,6 +6907,14 @@ List of all empty trait defined in the code.
 
 Such traits may be reserved for future use. They may also be forgotten, and dead code.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add some code to the trait
+* Remove the trait
+
 +-------------+-------------------+
 | Short name  | Traits/EmptyTrait |
 +-------------+-------------------+
@@ -8375,13 +8383,23 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
 
    <?php
    
-   $ftp_server = '300.1.2.3';   // 
+   $ftp_server = '300.1.2.3';   // yes, this doesn't exists, it's an example
    $conn_id = ftp_connect($ftp_server); 
    
    // login with username and password
    $login_result = ftp_login($conn_id, 'login', 'password'); 
    
    ?>
+
+
+See also `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-security-best-practices/>`_ and 
+         `Git How-To: Remove Your Password from a Repository <https://davidverhasselt.com/git-how-to-remove-your-password-from-a-repository/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove all passwords from the code. Also, check for history if you are using a vcs.
 
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/HardcodedPasswords                                                                                  |
@@ -16523,17 +16541,31 @@ Phpinfo
 
 
 If left in the production code, it may lead to a critical leak, as any attacker gaining access to this data will know a lot about the server configuration.
-It is advised to never leave that kind of instruction in a production code.
 
-+-------------+---------------------------------+
-| Short name  | Structures/PhpinfoUsage         |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+It is advised to never leave that kind of instruction in a production code. 
+
+`phpinfo() <http://www.php.net/phpinfo>`_ may be necessary to access some specific configuration of the server : for example, apache module list are only available via `phpinfo() <http://www.php.net/phpinfo>`_, and apache_get functions, when they are loaded.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove all usage of phpinfo()
+* Add one or more constant to fine-tune the phpinfo(), and limit the amount of displayed information
+* Replace phpinfo() with a more adapted method : get_loaded_extensions() to access the list of loaded extensions
+
++-------------+----------------------------------------+
+| Short name  | Structures/PhpinfoUsage                |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`        |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+| Examples    | :ref:`dolphin-structures-phpinfousage` |
++-------------+----------------------------------------+
 
 
 
@@ -16621,6 +16653,65 @@ It is recommended to check the file resources when they are opened, and always u
 +-------------+---------------------------------+
 | Time To Fix | Quick (30 mins)                 |
 +-------------+---------------------------------+
+
+
+
+.. _possible-missing-subpattern:
+
+Possible Missing Subpattern
+###########################
+
+
+When capturing subpatterns are the last ones in a regex, PHP doesn't fill their spot in the resulting array. 
+
+.. code-block:: php
+
+   <?php
+   
+   // displays a partial array, from 0 to 1
+   preg_match('/(a)(b)?/', 'adc', $r);
+   print_r($r);
+   /*
+   Array
+   (
+       [0] => a
+       [1] => a
+   )
+   */
+   
+   // displays a full array, from 0 to 2
+   preg_match('/(a)(b)?/', 'abc', $r);
+   print_r($r);
+   
+   /*
+   Array
+   (
+       [0] => ab
+       [1] => a
+       [2] => b
+   )
+   */
+   ?>
+
+
+See also `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_ and 
+         `Bug #73948 Preg_match_all should return NULLs on trailing optional capture groups. <https://bugs.php.net/bug.php?id=73948>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add an always capturing subpatterns after the last ?, and it will always be fine
+
++-------------+-----------------------+
+| Short name  | Php/MissingSubpattern |
++-------------+-----------------------+
+| Themes      | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
 
 
 
@@ -19734,13 +19825,24 @@ Always start by reducing an array before applying some transformation on it. The
 
 The gain produced here is greater with longer arrays, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short arrays.
 
-+------------+-----------------------------------------+
-| Short name | Arrays/SliceFirst                       |
-+------------+-----------------------------------------+
-| Themes     | :ref:`Performances`, :ref:`Suggestions` |
-+------------+-----------------------------------------+
-| Examples   | :ref:`wordpress-arrays-slicefirst`      |
-+------------+-----------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the array transforming function on the result of the array shortening function.
+
++-------------+-----------------------------------------+
+| Short name  | Arrays/SliceFirst                       |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Performances`, :ref:`Suggestions` |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+| Examples    | :ref:`wordpress-arrays-slicefirst`      |
++-------------+-----------------------------------------+
 
 
 
@@ -20074,15 +20176,26 @@ This analysis is case-sensitive.
 
 See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_.
 
-+-------------+-----------------------+
-| Short name  | Variables/StrangeName |
-+-------------+-----------------------+
-| Themes      | none                  |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
-+-------------+-----------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of the variable
+* Rename the variable to something better
+* Drop the variable
+
++-------------+----------------------------------------------------------------------------+
+| Short name  | Variables/StrangeName                                                      |
++-------------+----------------------------------------------------------------------------+
+| Themes      | none                                                                       |
++-------------+----------------------------------------------------------------------------+
+| Severity    | Minor                                                                      |
++-------------+----------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                              |
++-------------+----------------------------------------------------------------------------+
+| Examples    | :ref:`fuelcms-variables-strangename`, :ref:`phpipam-variables-strangename` |
++-------------+----------------------------------------------------------------------------+
 
 
 
@@ -20905,12 +21018,18 @@ However, the variable will never be used, as the exception is thrown, and any fo
        throw $e;
    
        // $e is useless
-       throw $e = new() Exception();
+       throw $e = new Exception();
    
    ?>
 
 
 The assignment should be removed.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the assignation
 
 +-------------+----------------------------+
 | Short name  | Structures/ThrowsAndAssign |
@@ -22970,15 +23089,26 @@ Unused argument may have to stay in methods, as the signature is actually define
    }
    ?>
 
-+-------------+---------------------------+
-| Short name  | Functions/UnusedArguments |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Major                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the argument from the signature
+* Actually use that argument in the body of the method
+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Functions/UnusedArguments                                                              |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                         |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                  |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                        |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`thinkphp-functions-unusedarguments`, :ref:`phpmyadmin-functions-unusedarguments` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 

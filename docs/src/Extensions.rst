@@ -38,7 +38,7 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 {{EXTENSION_LIST}}
 
-Extension managements
+Extension management
 ---------------------
 
 The main command to manage the extensions is `extension`. It has 4 different actions : 
@@ -46,6 +46,7 @@ The main command to manage the extensions is `extension`. It has 4 different act
 * `local`
 * `list`
 * `install`
+* `update`
 * `uninstall`
 
 `local` : the local list of extensions
@@ -65,6 +66,16 @@ This command installs a new extension. Check with `extension local` to know whic
 
 
 You may also install the extensions manually, by downloading the .phar archive, and installing it in the `ext` folder.
+
+`update` : the update command
+###############################
+
+This command updates an installed extension. Check with `extension local` to know which are the locally installed extensions. 
+
+::
+
+    exakat extension update Wordpress
+
 
 
 `uninstall` : the remove command

@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 28 Dec 2018 12:32:25 +0000
-.. comment: Generation hash : 9393a8d78ed2402d26f753dba23dc0bcca1fc1e5
+.. comment: Generation date : Fri, 04 Jan 2019 11:47:07 +0000
+.. comment: Generation hash : 8790376006d1b9d60225ab6ceb3d7f81d65d6ced
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 353 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -281,6 +281,7 @@ Total : 352 analysis
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 * :ref:`Phpinfo <phpinfo>`
 * :ref:`Possible Infinite Loop <possible-infinite-loop>`
+* :ref:`Possible Missing Subpattern <possible-missing-subpattern>`
 * :ref:`Pre-increment <pre-increment>`
 * :ref:`Preprocessable <preprocessable>`
 * :ref:`Print And Die <print-and-die>`
