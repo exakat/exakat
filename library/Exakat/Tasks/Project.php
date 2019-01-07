@@ -464,7 +464,7 @@ class Project extends Tasks {
     
     private function getLineDiff($current, $vcs) {
         $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
-        if (!isset($sqliteFilePrevious)) {
+        if (!file_exists($sqliteFilePrevious)) {
             return ;
         }
         
