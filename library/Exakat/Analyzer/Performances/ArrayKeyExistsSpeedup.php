@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayKeyExistsSpeedup extends Analyzer {
-    protected $phpVersion = '7.4-';
+    protected $phpVersion = '7.4+';
 
     public function analyze() {
         // isset($a) || array_search_keys()
