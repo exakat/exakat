@@ -1798,6 +1798,53 @@ SQL;
         // TODO : Constant visibility and value
 
         $query = <<<GREMLIN
+g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("first")
+.out("NAME") .sideEffect{ name = it.get().value("fullcode"); }       .in("NAME")
+.out("VALUE").sideEffect{ default1 = it.get().value("fullcode") }.in("VALUE")
+
+.in("CONST").in("CONST").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
+
+.out("CONST").out("CONST")
+.out("NAME") .filter{ name == it.get().value("fullcode"); }       .in("NAME")
+.out("VALUE").filter{ default2 = it.get().value("fullcode"); default1 != default2; }.in("VALUE")
+
+.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':default2,
+      'class':class1,
+      'classValue':default1];
+     }
+
+GREMLIN;
+        $total += $this->storeClassChanges('Constant Value', $query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("first")
+.out("NAME") .sideEffect{ name = it.get().value("fullcode"); }       .in("NAME")
+
+.in("CONST").sideEffect{ visibility1 = it.get().value("visibility") }
+
+.in("CONST").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
+
+.out("CONST").filter{ visibility2 = it.get().value("visibility"); visibility1 != visibility2; }
+.out("CONST")
+.out("NAME") .filter{ name == it.get().value("fullcode"); }       .in("NAME")
+
+.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':visibility2,
+      'class':class1,
+      'classValue':visibility1];
+     }
+
+GREMLIN;
+        $total += $this->storeClassChanges('Constant visibility', $query);
+
+        $query = <<<GREMLIN
 g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first")
 .out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
 
@@ -1827,7 +1874,7 @@ g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first
 .in("METHOD").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
-.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("visibility") }
 
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
 .map{["name":name,
@@ -1840,7 +1887,7 @@ GREMLIN;
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("code"); }
+.sideEffect{ name = it.get().value("fullcode"); }
 .out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
 
 .in("PPP").in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
@@ -1849,7 +1896,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .out("PPP").out("PPP")
 .out("DEFAULT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("DEFAULT")
 
-.filter{ it.get().value("code") == name}.select("first")
+.filter{ it.get().value("fullcode") == name}.select("first")
 .map{['name':name,
       'parent':class2,
       'parentValue':default2,
