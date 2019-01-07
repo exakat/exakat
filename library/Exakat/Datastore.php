@@ -296,10 +296,10 @@ class Datastore {
     }
 
     public function cleanTable($table) {
-        if ($this->checkTable($table)) {
-            $query = "DELETE FROM $table";
-            $this->sqliteWrite->querySingle($query);
-        }
+        // Total destroy table
+        $query = "DROP TABLE IF EXISTS $table";
+        $this->sqliteWrite->querySingle($query);
+        $this->checkTable($table);
 
         return true;
     }
