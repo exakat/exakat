@@ -1916,7 +1916,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
                    .where(neq("x")) 
 ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
 
-.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != visibility2 }
 
 .out("PPP")
 .filter{ it.get().value("code") == name}.select("first")
