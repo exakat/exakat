@@ -5112,7 +5112,11 @@ class Load extends Tasks {
     }
 
     private function processMultiplication() {
-        return $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0]));
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals[] = $this->phptokens::T_STAR;
+        $finals[] = $this->phptokens::T_SLASH;
+        $finals[] = $this->phptokens::T_PERCENTAGE;
+        return $this->processOperator('Multiplication', $finals);
     }
 
     private function processPower() {
