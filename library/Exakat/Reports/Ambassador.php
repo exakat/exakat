@@ -3328,7 +3328,11 @@ SQL
 
             $parent = '\\'.strtolower($k);
             if (is_string($v)) {
-                $return .= '<div style="font-weight: bold">'.$v.'</div>';
+                if (empty($v)) {
+                    $return .= '<div style="font-weight: bold">\\</div>';
+                } else {
+                    $return .= '<div style="font-weight: bold">'.$v.'</div>';
+                }
             } elseif (count($v) === 1) {
                 if (empty($v[0])) {
                     if (empty($k)) {
