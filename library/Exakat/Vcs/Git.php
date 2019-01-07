@@ -180,9 +180,9 @@ class Git extends Vcs {
     
             if (preg_match('#@@ \-(\d+)(,(\d+))? \+(\d+)(,(\d+))?( )@@#', $line, $r, PREG_UNMATCHED_AS_NULL)) {
                 $c = ($r[6] ?? 1) - ($r[3] ?? 1);
-                if ($c !== 0) { 
-                    $changes[] = array('file' => $file, 
-                                       'line' => $r[1], 
+                if ($c !== 0) {
+                    $changes[] = array('file' => $file,
+                                       'line' => $r[1],
                                        'diff' => $c,
                                        );
                 }

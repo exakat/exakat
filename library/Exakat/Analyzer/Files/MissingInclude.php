@@ -78,7 +78,7 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
-             // checks 
+             // checks
              ->not(
                 $this->side()
                      ->filter(
