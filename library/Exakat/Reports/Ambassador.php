@@ -1967,7 +1967,6 @@ SQL;
             $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $path);
             
             $diff = array_diff($issues, $oldissues);
-            print "DIFF : ".count($diff).PHP_EOL;
         } else {
             $diff = $issues;
         }
