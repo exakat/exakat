@@ -27,14 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class SuperGlobalContagion extends Analyzer {
     public function analyze() {
-        $vars = $this->loadIni('php_incoming.ini');
-        $vars = $vars['incoming'];
-        
         // $_get = $_GET;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Phpvariable')
-             ->codeIs($vars)
              ->back('first')
              ->outIs('LEFT')
              ->atomIs('Variable');
@@ -80,7 +76,7 @@ class SuperGlobalContagion extends Analyzer {
              ->atomIs('Variablearray')
              ->back('result');
         $this->prepareQuery();
-        
+
         // propagation is not implemented yet.
     }
 }
