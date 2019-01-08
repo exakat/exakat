@@ -1,4 +1,4 @@
-Version 1.6.1 (Golden Light Gate , coming up)
+Version 1.6.2 (Silver Headed Gate, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 1.6.1 (Golden Light Gate , coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.1 (Golden Light Gate, 2019-01-07)
++ Architecture
+    + Upgraded documentation for Extensions
+    + Upgraded processing of files, specially with special chars
+    + Project stops when no token are found
+    + Storing hash for each files. RFU.
++ Report
+    + Ambassador : added support for class constant's changes
+    + Ambassador : added classSize report
+    + Ambassador : 'New issues' now takes line difference into account
+    + Themes are better dumped
++ Analyzer
+    + New analysis : array_key_exists() is faster in PHP 7.4
+    + New analysis : partial report from preg_match()
+    + Updated analysis : Avoid Using Class handles \
+    + Updated analysis : Class Usage uses class_alias()
+    + Updated analysis : Empty traits 
+    + Updated analysis : Unused arguments now skips __set()
+    + Updated analysis : Path strings
+    + Updated analysis : Missing include handles more concatenations
+    + Checked unit tests : 2792 / 2812 test pass (99% pass)
++ Tokenizer
+    + Fixed precedence for identical operators
+    + Fixed bug with ?> inside switch
 
 Version 1.6.0 (VirupakSa, 2018-12-31)
 + Architecture
@@ -1057,7 +1082,7 @@ Version 1.0.8 (King of Heat Protection, 2017-12-18)
     + Fixed Constant fqn building
     + UTF-8 protection for propertyname
 
-Version 1.0.7 (King of Heat Protection , 2017-12-11)
+Version 1.0.7 (King of Heat Protection, 2017-12-11)
 + Architecture
     + Added /var to default omitted folders
 + Analyzer
@@ -1995,7 +2020,7 @@ Version 0.8.7 (Naked Demon, 2016-10-31)
     + Fixed line number of <?= 
     + Fixed token on arguments
 
-Version 0.8.6 (Fuyun Sou , 2016-10-24)
+Version 0.8.6 (Fuyun Sou, 2016-10-24)
 + Architecture
     + New command to ping a queue
     + More documentation
