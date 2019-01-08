@@ -120,6 +120,7 @@ Glossary
     + `array_key_exists()`
 
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 
     + `array_keys()`
 
@@ -558,6 +559,7 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
       + :ref:`isset() With Constant <isset()-with-constant>`
 
     + `iterator_to_array()`
@@ -610,6 +612,7 @@ Glossary
       + :ref:`Check JSON <check-json>`
       + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+      + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 
     + `Null`
 

@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 04 Jan 2019 11:47:07 +0000
-.. comment: Generation hash : 8790376006d1b9d60225ab6ceb3d7f81d65d6ced
+.. comment: Generation date : Mon, 07 Jan 2019 15:38:02 +0000
+.. comment: Generation hash : 4ed6131f6bf74d80afed2b7c708382fa9787a20c
 
 
 .. _analyze:
@@ -975,7 +975,7 @@ Total : 15 analysis
 Performances
 ++++++++++++
 
-Total : 38 analysis
+Total : 39 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -1013,6 +1013,7 @@ Total : 38 analysis
 * :ref:`Use The Blind Var <use-the-blind-var>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 * :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
 * :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 
@@ -1068,7 +1069,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 71 analysis
+Total : 72 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1139,6 +1140,7 @@ Total : 71 analysis
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 

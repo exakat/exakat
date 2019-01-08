@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 04 Jan 2019 11:47:07 +0000
-.. comment: Generation hash : 8790376006d1b9d60225ab6ceb3d7f81d65d6ced
+.. comment: Generation date : Mon, 07 Jan 2019 15:38:02 +0000
+.. comment: Generation hash : 4ed6131f6bf74d80afed2b7c708382fa9787a20c
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -549,15 +549,26 @@ Parameter in methods definition may receive a default value. This allows the cal
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Functions/AddDefaultValue |
-+-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+See also `Function arguments <http://php.net/manual/en/functions.arguments.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a default value for parameters
+
++-------------+--------------------------------------------------------------------------------+
+| Short name  | Functions/AddDefaultValue                                                      |
++-------------+--------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                             |
++-------------+--------------------------------------------------------------------------------+
+| Severity    | Minor                                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                |
++-------------+--------------------------------------------------------------------------------+
+| Examples    | :ref:`zurmo-functions-adddefaultvalue`, :ref:`typo3-functions-adddefaultvalue` |
++-------------+--------------------------------------------------------------------------------+
 
 
 
@@ -3311,17 +3322,31 @@ The following names are used at the same time for classes, interfaces or traits.
    ?>
 
 
-Even if they are in different namespaces, this makes them easy to confuse. Besides, it is recommended to have markers to differentiate classes from interfaces from traits.
+Even if they are in different namespaces, identical names makes classes easy to confuse. This is often solved by using alias at import time : this leads to more confusion, as a class suddenly changes its name. 
 
-+-------------+---------------------+
-| Short name  | Classes/CitSameName |
-+-------------+---------------------+
-| Themes      | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
-+-------------+---------------------+
+Internally, PHP use the same list for all classes, interfaces and traits. As such, it is not allowed to have both a trait and a class with the same name.
+
+In PHP 4, and PHP 5 before namespaces, it was not possible to have classes with the same name. They were simply included after a check. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use distinct names for every class, trait and interface. 
+* Keep eponymous classes, traits and interfaces in distinct files, for definition but also for usage. When this happens, rename one of them.
+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Classes/CitSameName                                                       |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                            |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Minor                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                           |
++-------------+---------------------------------------------------------------------------+
+| Examples    | :ref:`shopware-classes-citsamename`, :ref:`nextcloud-classes-citsamename` |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -7048,15 +7073,25 @@ This analysis also detect unicode codepoint with superfluous leading zeros.
    
    ?>
 
-+-------------+-------------------------+
-| Short name  | Security/EncodedLetters |
-+-------------+-------------------------+
-| Themes      | :ref:`Security`         |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make all simple letter appear clearly
+* Add comments about why this code is encoded
+
++-------------+--------------------------------------+
+| Short name  | Security/EncodedLetters              |
++-------------+--------------------------------------+
+| Themes      | :ref:`Security`                      |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | :ref:`zurmo-security-encodedletters` |
++-------------+--------------------------------------+
 
 
 
@@ -11224,15 +11259,26 @@ Ternary operator applies a condition, and yield two different results. Those res
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Structures/MismatchedTernary       |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use compatible data type in both branch of the alternative
+* Turn the ternary into a if/then, with different processing
+
++-------------+--------------------------------------------------------------------------------------------+
+| Short name  | Structures/MismatchedTernary                                                               |
++-------------+--------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                         |
++-------------+--------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                      |
++-------------+--------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                            |
++-------------+--------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpadsnew-structures-mismatchedternary`, :ref:`openemr-structures-mismatchedternary` |
++-------------+--------------------------------------------------------------------------------------------+
 
 
 
@@ -11595,15 +11641,24 @@ Mkdir Default
 
 See also `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_.
 
-+-------------+-----------------------+
-| Short name  | Security/MkdirDefault |
-+-------------+-----------------------+
-| Themes      | :ref:`Security`       |
-+-------------+-----------------------+
-| Severity    | Major                 |
-+-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
-+-------------+-----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use the lowest possible privileges on folders
+* Don't use the PHP default : at least, make it explicit that the 'universal' rights are voluntary
+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Security/MkdirDefault                                                     |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Security`                                                           |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Major                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                           |
++-------------+---------------------------------------------------------------------------+
+| Examples    | :ref:`mautic-security-mkdirdefault`, :ref:`openemr-security-mkdirdefault` |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -12242,7 +12297,7 @@ Multiply By One
 ###############
 
 
-Multiplying by 1 is useless. 
+Multiplying by 1 is a fancy type cast. 
 
 If it is used to type cast a value to number, then casting (integer) or (real) is clearer. This behavior may change with PHP 7.1, which has unified the behavior of all hidden casts. 
 
@@ -12261,6 +12316,17 @@ If it is used to type cast a value to number, then casting (integer) or (real) i
    
    ?>
 
+
+See also `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Typecast to (int) or (float) for better readability
+* Skip useless math operation altogether
+
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultiplyByOne                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -12271,6 +12337,8 @@ If it is used to type cast a value to number, then casting (integer) or (real) i
 | Time To Fix | Instant (5 mins)                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`sugarcrm-structures-multiplybyone`, :ref:`eduosoho-structures-multiplybyone`            |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -18085,17 +18153,27 @@ With those tests, the certificate is verified, and if it isn't valid, the connec
    ?>
 
 
-See also `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_.
+See also `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_,
+         `Certainty: Automated CACert.pem Management for PHP Software <https://paragonie.com/blog/2017/10/certainty-automated-cacert-pem-management-for-php-software>`_ and
+         `Server-Side HTTPS Requests <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software#secure-server-side-https>`_.
 
-+-------------+----------------------+
-| Short name  | Security/CurlOptions |
-+-------------+----------------------+
-| Themes      | :ref:`Security`      |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use CURLOPT_SSL_VERIFYPEER and HTTPS for communication with other servers
+
++-------------+--------------------------------------+
+| Short name  | Security/CurlOptions                 |
++-------------+--------------------------------------+
+| Themes      | :ref:`Security`                      |
++-------------+--------------------------------------+
+| Severity    | Major                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | :ref:`openconf-security-curloptions` |
++-------------+--------------------------------------+
 
 
 
@@ -26658,6 +26736,57 @@ See also `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_.
 +-------------+------------------------------------+
 | Time To Fix | Quick (30 mins)                    |
 +-------------+------------------------------------+
+
+
+
+.. _array\_key\_exists()-speedup:
+
+array_key_exists() Speedup
+##########################
+
+
+`isset() <http://www.php.net/isset>`_ used to be the fastest, but `array_key_exists() <http://www.php.net/array_key_exists>`_ is. Since PHP 7.4, `array_key_exists() <http://www.php.net/array_key_exists>`_ has its own opcode, leading to better features and speed.
+
+`isset() <http://www.php.net/isset>`_ is faster for all non-empty values, but is limited when the value is `NULL <http://php.net/manual/en/language.types.null.php>`_ or empty : then, `array_key_exists() <http://www.php.net/array_key_exists>`_ has the good features.
+
+`This change makes `array_key_exists() <http://www.php.net/array_key_exists>`_ actually faster than `isset() <http://www.php.net/isset>`_ by ~25% (tested with GCC 8, -O3, march=native, mtune=native).`.
+
+.. code-block:: php
+
+   <?php
+   
+   $foo = [123 => 456];
+   
+   // This is sufficient and efficient since PHP 7.4
+   if (array_search_key($foo[123])) {
+       // do something
+   }
+   
+   // taking advantages of performances for PHP 7.4 and older
+   if (isset($foo[123]) || array_search_key($foo[123])) {
+       // do something
+   }
+   
+   ?>
+
+
+See also `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <http://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the logical test and the isset() call
+
++-------------+-----------------------------------------+
+| Short name  | Performances/ArrayKeyExistsSpeedup      |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Performances` |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
 
 
 

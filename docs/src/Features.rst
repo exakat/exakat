@@ -21,19 +21,24 @@ There are currently {{ANALYZERS_COUNT}} different analyzers that check the PHP c
 
 Some of them track rare occurrences, and some are frequent. Some track careless mistakes and some are highly complex situations. In any case, exakat has your back, and will warn you. 
 
-Compatible with PHP 5.2 to 7.3-dev
+Compatible with PHP 5.2 to 7.4-dev
 ----------------------------------
 
 The Exakat engine audits code that with PHP versions that range from PHP 5.2 to PHP 7.3-dev. 
 
 The Exakat engine itself runs on PHP 7.x+ and is regularly checked on those versions. It is possible to run Exakat on 7.2 and audit a code with PHP 5.6. 
 
-Migration guide from 5.2 to 7.3 and dev
+Migration guide from 5.2 to 7.4 and dev
 ----------------------------------------
 
 Every middle version of PHP comes with its migration guide from the manual, and from community's feedback. Incompatibilities are included as analyzers in Exakat, and report everything they can find that may prevent you from moving to the newer version. 
 
-Although they won't catch it all, they do reduce the amount of unexpected surprises by a lot.
+Although they won't catch it all, they do reduce the amount of unexpected surprises by a lot. 
+
+Modernize your code
+-------------------
+
+Migrations are too often considered over when incompatibilities are removed. In fact, the best is still to come : using the new features. Or, using the new features from previous versions, that were forgotten. Exakat dedicates a whole category of suggestions to modern PHP features that should be used now.
 
 List bug fixes for your code
 ----------------------------
@@ -60,8 +65,17 @@ Framework and application support
 Exakat provides support for framework and application specific rules. Supported frameworks includes Cakephp, Zend Framework, Slim, Melis. 
 
 
-Class Hierarchy Diagram
------------------------
+Hierarchy Diagrams
+------------------
 
-Exakat provides a full UML class diagramm, based on inheritance (classes), usage (traits) and implementations (interfaces), grouped by namespaces. 
+Exakat documents the code automatically with  several diagrams, such as : 
+* UML class diagramm, based on inheritance (classes), usage (traits) and implementations (interfaces), grouped by namespaces. 
+* The Exceptions tree
+* 
+
+Code visualizations
+-------------------
+
+Exakat documents the code automatically with  several diagrams, such as : 
+a full UML class diagramm, based on inheritance (classes), usage (traits) and implementations (interfaces), grouped by namespaces. 
 

@@ -100,6 +100,52 @@ create_function() is actually an eval() in disguise : replace it with a closure 
 
     create_function('$cfgValue', 'return $cfgValue > 100;')
 
+Multiply By One
+===============
+
+.. _sugarcrm-structures-multiplybyone:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`multiply-by-one`, in SugarCE-Full-6.5.26/modules/Relationships/views/view.editfields.php:74. 
+
+Here, '$count % 1' is always true, after the first loop of the foreach. There is no need for % usage.
+
+.. code-block:: php
+
+    $count = 0;
+            foreach($this->fields as $def)
+            {
+                if (!empty($def['relationship_field'])) {
+                    $label = !empty($def['vname']) ? $def['vname'] : $def['name'];
+                    echo <td> . translate($label, $this->module) . :</td>
+                       . <td><input id='{$def['name']}' name='{$def['name']}'>  ;
+    
+                    if ($count%1)
+                        echo </tr><tr>;
+                    $count++;
+                }
+            }
+            echo </tr></table></form>;
+
+
+--------
+
+
+.. _eduosoho-structures-multiplybyone:
+
+Eduosoho
+^^^^^^^^
+
+:ref:`multiply-by-one`, in wp-admin/includes/misc.php:74. 
+
+1 is useless here, since 24 * 3600 is already an integer. And, of course, a day is not 24 * 3600... at least every day.
+
+.. code-block:: php
+
+    'yesterdayStart' => date('Y-m-d', strtotime(date('Y-m-d', time())) - 1 * 24 * 3600),
+
 Not Not
 =======
 
@@ -909,6 +955,43 @@ No more than one level of nesting for this ternary call, yet it feels a lot more
 .. code-block:: php
 
     $lc_text .= '<br />' . (zen_get_show_product_switch($listing->fields['products_id'], 'ALWAYS_FREE_SHIPPING_IMAGE_SWITCH') ? (zen_get_product_is_always_free_shipping($listing->fields['products_id']) ? TEXT_PRODUCT_FREE_SHIPPING_ICON . '<br />' : '') : '');
+
+Class, Interface Or Trait With Identical Names
+==============================================
+
+.. _shopware-classes-citsamename:
+
+Shopware
+^^^^^^^^
+
+:ref:`class,-interface-or-trait-with-identical-names`, in engine/Shopware/Components/Form/Interfaces/Element.php:30. 
+
+Most Element classes extends ModelEntity, which is an abstract class. There is also an interface, called Element, for forms. And, last, one of the class Element extends JsonSerializable, which is a PHP native interface. Namespaces are definitely crucial to understand which Element is which. 
+
+.. code-block:: php
+
+    interface Element { /**/ } // in engine/Shopware/Components/Form/Interfaces/Element.php:30
+    
+    class Element implements \JsonSerializable { /**/ } 	// in engine/Shopware/Bundle/EmotionBundle/Struct/Element.php:29
+    
+    class Element extends ModelEntity { /**/ } 	// in /engine/Shopware/Models/Document/Element.php:37
+
+
+--------
+
+
+.. _nextcloud-classes-citsamename:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`class,-interface-or-trait-with-identical-names`, in lib/private/Files/Storage/Storage.php:33. 
+
+Interface Storage extends another Storage class. Here, the fully qualified name is used, so we can understand which storage is which at read time : a 'use' alias would make this line more confusing.
+
+.. code-block:: php
+
+    interface Storage extends \OCP\Files\Storage { /**/ }
 
 Empty Try Catch
 ===============
@@ -3393,6 +3476,45 @@ Classic address class, with every details. May be even shorter than expected.
             $this->state = $state;
         }
 
+Mismatched Ternary Alternatives
+===============================
+
+.. _phpadsnew-structures-mismatchedternary:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`mismatched-ternary-alternatives`, in phpAdsNew-2.0/admin/lib-misc-stats.inc.php:219. 
+
+This is an unusual way to apply a condition. $bgcolor is '#FFFFFF' by default, and if $i % 2, then $bcolor is '#F6F6F6';. A more readable ternary option would be '$bgcolor =  = 	$i % 2 ? "#FFFFFF" : "#F6F6F6";', and make a matched alternative branches.
+
+.. code-block:: php
+
+    $bgcolor = #FFFFFF;
+    	$i % 2 ? 0 : $bgcolor = #F6F6F6;
+
+
+--------
+
+
+.. _openemr-structures-mismatchedternary:
+
+openemr
+^^^^^^^
+
+:ref:`mismatched-ternary-alternatives`, in portal/messaging/messages.php:132. 
+
+IS_DASHBOARD is defined as a boolean or a string. Later, it is tested as a boolean, and displayed as a integer, which will be cast to string by echo. Lots of transtyping are happening here.
+
+.. code-block:: php
+
+    // In two distinct if/then branch
+    l:29) define('IS_DASHBOARD', false);
+    l:41) define('IS_DASHBOARD', $_SESSION['authUser']);
+    
+    l:132) echo IS_DASHBOARD ? IS_DASHBOARD : 0;
+    ?>
+
 Assign With And
 ===============
 
@@ -4739,6 +4861,32 @@ This code only exports the POST variables as globals. And it does clean incoming
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
 
+Safe Curl Options
+=================
+
+.. _openconf-security-curloptions:
+
+OpenConf
+^^^^^^^^
+
+:ref:`safe-curl-options`, in openconf/include.php:703. 
+
+The function that holds that code is only used to call openconf.com, over http, while openconf.com is hosted on https, nowadays. This may be a sign of hard to access certificates.
+
+.. code-block:: php
+
+    $ch = curl_init();
+    			curl_setopt($ch, CURLOPT_URL, $f);
+    			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);       
+    			curl_setopt($ch, CURLOPT_AUTOREFERER, true);       
+    			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);       
+    			curl_setopt($ch, CURLOPT_MAXREDIRS, 5);       
+    			curl_setopt($ch, CURLOPT_HEADER, false);       
+    			$s = curl_exec($ch);
+    			curl_close($ch);
+    			return($s);
+
 Unserialize Second Arg
 ======================
 
@@ -4771,6 +4919,75 @@ unserialize() only extract a non-empty value here. But its content is not checke
 .. code-block:: php
 
     $this->Customs = (!empty($_row["customs"])) ? @unserialize($_row["customs"]) : array();
+
+Encoded Simple Letters
+======================
+
+.. _zurmo-security-encodedletters:
+
+Zurmo
+^^^^^
+
+:ref:`encoded-simple-letters`, in yii/framework/web/CClientScript.php:783. 
+
+This actually decodes into a copyright notice. 
+
+'function cleanAndSanitizeScriptHeader(& $output)
+                        {
+                            $requiredOne = <span>Copyright &#169; Zurmo Inc., 2013. All rights reserved.;....'
+
+
+.. code-block:: php
+
+    eval(\x66\x75\x6e\x63\x74\x69\x6f\x6e\x20\x63\x6c\x65\x61\x6e\x41\x6e\x64\x53\x61\x6e\x69\x74\x69\x7a\x65\x53\x63\x72 .
+         \x69\x70\x74\x48\x65\x61\x64\x65\x72\x28\x26\x20\x24\x6f\x75\x74\x70\x75\x74\x29\x0d\x0a\x20\x20\x20\x20\x20\x20 .
+         \x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x7b\x0d\x0a\x20\x20\x20\x20\x20\x20\x20 .
+         \x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x24\x72\x65\x71\x75\x69\x72 .
+         // several more lines like that
+
+Mkdir Default
+=============
+
+.. _mautic-security-mkdirdefault:
+
+Mautic
+^^^^^^
+
+:ref:`mkdir-default`, in app/bundles/CoreBundle/Helper/AssetGenerationHelper.php:120. 
+
+This code is creating some directories for Javascript or CSS (from the directories names) : those require universal reading access, but probably no execution nor writing access. 0711 would be sufficient in this case.
+
+.. code-block:: php
+
+    //combine the files into their corresponding name and put in the root media folder
+                    if ($env == 'prod') {
+                        $checkPaths = [
+                            $assetsFullPath,
+                            $assetsFullPath/css,
+                            $assetsFullPath/js,
+                        ];
+                        array_walk($checkPaths, function ($path) {
+                            if (!file_exists($path)) {
+                                mkdir($path);
+                            }
+                        });
+
+
+--------
+
+
+.. _openemr-security-mkdirdefault:
+
+OpenEmr
+^^^^^^^
+
+:ref:`mkdir-default`, in interface/main/backuplog.php:27. 
+
+If $BACKUP_EVENTLOG_DIR is a backup for an event log, this should be stored out of the web server reach, with low rights, beside the current user. This is part of a CLI PHP script. 
+
+.. code-block:: php
+
+    mkdir($BACKUP_EVENTLOG_DIR)
 
 Isset Multiple Arguments
 ========================
@@ -5174,6 +5391,52 @@ $funcname is tested with is_callable() before being used as a method. Typehint c
     				return false;
     		return true;
     	}
+
+Add Default Value
+=================
+
+.. _zurmo-functions-adddefaultvalue:
+
+Zurmo
+^^^^^
+
+:ref:`add-default-value`, in wp-admin/includes/misc.php:74. 
+
+Default values may be a literal (1, 'abc', ...), or a constant : global or class. Here, MissionsListConfigurationForm::LIST_TYPE_AVAILABLE may be used directly in the signature of the method
+
+.. code-block:: php
+
+    public function getMetadataFilteredByOption($option)
+            {
+                if ($option == null)
+                {
+                    $option = MissionsListConfigurationForm::LIST_TYPE_AVAILABLE;
+                }
+
+
+--------
+
+
+.. _typo3-functions-adddefaultvalue:
+
+Typo3
+^^^^^
+
+:ref:`add-default-value`, in wp-admin/includes/misc.php:74. 
+
+$extension could get a default value to handle default situations : for example, a file is htm format by default, unless better known. Also, the if/then structure could get a 'else' clause, to handle unknown situations : those are situations where the extension is provided but not known, in particular when the icon is missing in the storage folder.
+
+.. code-block:: php
+
+    public function getIcon($extension)
+        {
+            if ($extension === 'htm') {
+                $extension = 'html';
+            } elseif ($extension === 'jpeg') {
+                $extension = 'jpg';
+            }
+            return 'EXT:indexed_search/Resources/Public/Icons/FileTypes/' . $extension . '.gif';
+        }
 
 Named Regex
 ===========
