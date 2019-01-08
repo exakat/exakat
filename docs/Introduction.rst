@@ -3,14 +3,14 @@
 Introduction
 ============
 
-This is the documentation of the Exakat engine, version 1.6.1 (Build 849), on Wed, 02 Jan 2019 14:54:30 +0000.
+This is the documentation of the Exakat engine, version 1.6.1 (Build 853), on Mon, 07 Jan 2019 19:15:46 +0000.
 
 What is Exakat ? 
 ----------------
 
-Exakat is a tool for analyzing, reporting and assessing PHP code source efficiently and systematically. Exakat can process PHP 5.2 to 7.3 code, as well as reporting on security, performance, code quality, migration. 
+Exakat is a tool for analyzing, reporting and assessing PHP code source efficiently and systematically. Exakat processes PHP 5.2 to 7.4 code, as well as reporting on security, performance, code quality, migration. 
 
-Exakat reads the code, builds an AST and several dependency graphs, then indexes everything in a graph database. Then, it runs analysis, collecting potential errors and descriptive informations about the code. Finally, exakat produces reports, both for human, machines or other services to read.
+Exakat reads the code, builds an AST and several dependency graphs, then indexes all of it in a graph database. From there, exakat runs analysis, collecting potential errors and descriptive information about the code. Finally, exakat produces reports, both for humans and machines.
 
 Exakat Use Cases
 ----------------
@@ -62,8 +62,8 @@ While checking for coding standard, some bugs may be detected, and when checking
 
 Using AST, dependency graphs and knowledge databases, Exakat reviews the code, checks its potential usage and mis-usage. Exakat doesn't take any presentation nor comments into accounts : only functions, variables and their effects.
 
-Phan, PHPstan, PHP SA
-_____________________
+Phan, PHPstan, PHP
+__________________
 
 PHP code quality checks, based on type compatibility, and structure definitions. Exakat shares AST style analysis but it goes a bit further by including common mistakes and actual PHP features detections. 
 

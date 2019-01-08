@@ -23,7 +23,7 @@ Exakat detects hundreds of issues in PHP code : dead code, incompatible calls, u
 PHP version migration
 _____________________
 
-Every PHP middle version is a migration by itself : based on the manual and common practice, exakat find both backward incompatibilities, that prevent migration, and new features, that makes code modern. 
+Every PHP middle version is a migration by itself : based on the manual and common practices, exakat find both backward incompatibilities, that prevent migration, and new features, that makes code modern. 
 
 Exakat review code for minor version, and spot bug fixes that may impact the code. 
 

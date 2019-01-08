@@ -36,7 +36,7 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-{{EXTENSION_LIST}}
+{{EXAKAT_EXTENSION_LIST}}
 
 Extension management
 ---------------------

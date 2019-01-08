@@ -133,10 +133,10 @@ Here, '$count % 1' is always true, after the first loop of the foreach. There is
 --------
 
 
-.. _eduosoho-structures-multiplybyone:
+.. _edusoho-structures-multiplybyone:
 
-Eduosoho
-^^^^^^^^
+Edusoho
+^^^^^^^
 
 :ref:`multiply-by-one`, in wp-admin/includes/misc.php:74. 
 
@@ -961,7 +961,7 @@ Class, Interface Or Trait With Identical Names
 
 .. _shopware-classes-citsamename:
 
-Shopware
+shopware
 ^^^^^^^^
 
 :ref:`class,-interface-or-trait-with-identical-names`, in engine/Shopware/Components/Form/Interfaces/Element.php:30. 
@@ -1591,6 +1591,41 @@ Simply calling print once is better than three times. Here too, echo usage would
     print '<input type=text name=quicksearch value=.$quicksearch. size=10 '.$pattern.' title=.__(Minimum:).$min_chars.__(characters).>';
     			print ' <input type=submit value=.__(Search).>';
     		print </form>;
+
+Useless Global
+==============
+
+.. _zencart-structures-uselessglobal:
+
+Zencart
+^^^^^^^
+
+:ref:`useless-global`, in admin/includes/modules/newsletters/newsletter.php:25. 
+
+$_GET is always a global variable. There is no need to declare it global in any scope.
+
+.. code-block:: php
+
+    function choose_audience() {
+          global $_GET;
+
+
+--------
+
+
+.. _humo-gen-structures-uselessglobal:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`useless-global`, in admin/includes/modules/newsletters/newsletter.php:25. 
+
+It is hard to spot that $generY is useless, but this is the only occurrence where $generY is refered to as a global. It is not accessed anywhere else as a global (there are occurrences of $generY being an argument), and it is not even assigned within that function. 
+
+.. code-block:: php
+
+    function calculate_ancestor($pers) {
+    global $db_functions, $reltext, $sexe, $sexe2, $spouse, $special_spouseY, $language, $ancestortext, $dutchtext, $selected_language, $spantext, $generY, $foundY_nr, $rel_arrayY;
 
 Useless Unset
 =============
@@ -3499,7 +3534,7 @@ This is an unusual way to apply a condition. $bgcolor is '#FFFFFF' by default, a
 
 .. _openemr-structures-mismatchedternary:
 
-openemr
+OpenEMR
 ^^^^^^^
 
 :ref:`mismatched-ternary-alternatives`, in portal/messaging/messages.php:132. 
@@ -4978,7 +5013,7 @@ This code is creating some directories for Javascript or CSS (from the directori
 
 .. _openemr-security-mkdirdefault:
 
-OpenEmr
+OpenEMR
 ^^^^^^^
 
 :ref:`mkdir-default`, in interface/main/backuplog.php:27. 

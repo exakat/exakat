@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 07 Jan 2019 15:38:02 +0000
-.. comment: Generation hash : 4ed6131f6bf74d80afed2b7c708382fa9787a20c
+.. comment: Generation date : Tue, 08 Jan 2019 10:19:02 +0000
+.. comment: Generation hash : 905616036946a64389bc5f7d65c70edec41e6c64
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -12338,7 +12338,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-multiplybyone`, :ref:`eduosoho-structures-multiplybyone`            |
+| Examples    | :ref:`sugarcrm-structures-multiplybyone`, :ref:`edusoho-structures-multiplybyone`             |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -25508,7 +25508,7 @@ Useless Global
 ##############
 
 
-Global are useless in two cases. First, on super-globals, which are always globals, like `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_. Secondly, on variables that are not used.
+Global are useless in two cases. First, on super-globals, which are always globals, like `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_; secondly, on variables that are not used.
 
 .. code-block:: php
 
@@ -25528,17 +25528,25 @@ Global are useless in two cases. First, on super-globals, which are always globa
 
 
 Also, PHP has superglobals, a special team of variables that are always available, whatever the context. 
-They are : $GLOBALS, $_SERVER, `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_, `$_POST <http://php.net/manual/en/reserved.variables.post.php>`_, $_FILES, $_COOKIE, $_SESSION, `$_REQUEST <http://php.net/manual/en/reserved.variables.request.php>`_ and `$_ENV <http://php.net/manual/en/reserved.variables.env.php>`_.
+They are : $GLOBALS, $_SERVER, `$_GET <http://php.net/manual/en/reserved.variables.get.php>`_, `$_POST <http://php.net/manual/en/reserved.variables.post.php>`_, $_FILES, $_COOKIE, $_SESSION, `$_REQUEST <http://php.net/manual/en/reserved.variables.request.php>`_ and `$_ENV <http://php.net/manual/en/reserved.variables.env.php>`_. 
 
-+-------------+--------------------------+
-| Short name  | Structures/UselessGlobal |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the global expression
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/UselessGlobal                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                    |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                   |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`zencart-structures-uselessglobal`, :ref:`humo-gen-structures-uselessglobal` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 

@@ -30,25 +30,19 @@ Exakat produces various reports. Some are general, covering various aspects in a
 Supported PHP Extensions
 ------------------------
 
-PHP extensions are used to check for defined structures (classes, interfaces, etc.), identify dependencies and directives. 
+PHP extensions are used to check for structures usage (classes, interfaces, etc.), to identify dependencies and directives. 
 
-PHP extensions should be provided with the list of structures they define (functions, class, constants, traits, variables, interfaces, namespaces), and directives. 
+PHP extensions are described with the list of structures they define : functions, classes, constants, traits, variables, interfaces, namespaces, and directives. 
 
 {{EXTENSION_LIST}}
 
 Supported Frameworks
 --------------------
 
-Frameworks are supported when they is an analysis related to them. Then, a selection of analysis may be dedicated to them. 
+Frameworks, components and libraries are supported via Exakat extensions.
 
-::
-   php exakat.phar analysis -p <project> -T <Framework> 
+{{EXAKAT_EXTENSION_LIST}}
 
-
-
-* Cakephp
-* Wordpress
-* ZendFramework
 
 Applications
 ------------

@@ -107,9 +107,182 @@ Exakat produces various reports. Some are general, covering various aspects in a
 Supported PHP Extensions
 ------------------------
 
-PHP extensions are used to check for defined structures (classes, interfaces, etc.), identify dependencies and directives. 
+PHP extensions are used to check for structures usage (classes, interfaces, etc.), to identify dependencies and directives. 
 
-PHP extensions should be provided with the list of structures they define (functions, class, constants, traits, variables, interfaces, namespaces), and directives. 
+PHP extensions are described with the list of structures they define : functions, classes, constants, traits, variables, interfaces, namespaces, and directives. 
+
+* `ext/amqp <https://github.com/pdezwart/php-amqp>`_
+* `ext/apache <http://php.net/manual/en/book.apache.php>`_
+* `ext/apc <http://php.net/apc>`_
+* `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
+* `ext/array <http://php.net/manual/en/book.array.php>`_
+* `ext/php-ast <https://pecl.php.net/package/ast>`_
+* `ext/async <https://github.com/concurrent-php/ext-async>`_
+* `ext/bcmath <http://www.php.net/bcmath>`_
+* `ext/bzip2 <http://php.net/bzip2>`_
+* `ext/cairo <https://cairographics.org/>`_
+* `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
+* `ext/cmark <https://github.com/commonmark/cmark>`_
+* `ext/com <http://php.net/manual/en/book.com.php>`_
+* `ext/crypto <https://pecl.php.net/package/crypto>`_
+* `ext/csprng <http://php.net/manual/en/book.csprng.php>`_
+* `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
+* `ext/curl <http://php.net/manual/en/book.curl.php>`_
+* `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
+* `ext/date <http://php.net/manual/en/book.datetime.php>`_
+* `ext/db2 <http://php.net/manual/en/book.ibm-db2.php>`_
+* `ext/dba <http://php.net/manual/en/book.dba.php>`_
+* `ext/decimal <http://php-decimal.io>`_
+* `ext/dio <http://php.net/manual/en/refs.fileprocess.file.php>`_
+* `ext/dom <http://php.net/manual/en/book.dom.php>`_
+* `ext/ds <http://docs.php.net/manual/en/book.ds.php>`_
+* `ext/eaccelerator <http://eaccelerator.net/>`_
+* `ext/eio <http://software.schmorp.de/pkg/libeio.html>`_
+* `ext/enchant <http://php.net/manual/en/book.enchant.php>`_
+* `ext/ereg <http://php.net/manual/en/function.ereg.php>`_
+* `ext/ev <http://php.net/manual/en/book.ev.php>`_
+* `ext/event <http://php.net/event>`_
+* `ext/exif <http://php.net/manual/en/book.exif.php>`_
+* `ext/expect <http://php.net/manual/en/book.expect.php>`_
+* `ext/fam <http://oss.sgi.com/projects/fam/>`_
+* `ext/fann <http://php.net/manual/en/book.fann.php>`_
+* `ext/fdf <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
+* `ext/ffmpeg <http://ffmpeg-php.sourceforge.net/>`_
+* `ext/file <http://www.php.net/manual/en/book.filesystem.php>`_
+* `ext/fileinfo <http://php.net/manual/en/book.fileinfo.php>`_
+* `ext/filter <http://php.net/manual/en/book.filter.php>`_
+* `ext/fpm <http://php.net/fpm>`_
+* `ext/ftp <http://www.faqs.org/rfcs/rfc959>`_
+* `ext/gd <http://php.net/manual/en/book.image.php>`_
+* `ext/gearman <http://php.net/manual/en/book.gearman.php>`_
+* `ext/gender <http://php.net/manual/en/book.gender.php>`_
+* `ext/geoip <http://php.net/manual/en/book.geoip.php>`_
+* `ext/gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
+* `ext/gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
+* `ext/gmp <http://php.net/manual/en/book.gmp.php>`_
+* `ext/gnupgp <http://www.php.net/manual/en/book.gnupg.php>`_
+* `ext/grpc <http://www.grpc.io/>`_
+* `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
+* `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
+* `ext/pecl_http <https://github.com/m6w6/ext-http>`_
+* `ext/ibase <http://php.net/manual/en/book.ibase.php>`_
+* `ext/iconv <http://php.net/iconv>`_
+* `ext/igbinary <https://github.com/igbinary/igbinary/>`_
+* `ext/iis <http://www.php.net/manual/en/book.iisfunc.php>`_
+* `ext/imagick <http://php.net/manual/en/book.imagick.php>`_
+* `ext/imap <http://www.php.net/imap>`_
+* `ext/info <http://php.net/manual/en/book.info.php>`_
+* `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
+* `ext/intl <http://site.icu-project.org/>`_
+* `ext/json <http://www.faqs.org/rfcs/rfc7159>`_
+* `ext/judy <http://judy.sourceforge.net/>`_
+* `ext/kdm5 <http://php.net/manual/en/book.kadm5.php>`_
+* `ext/lapack <http://php.net/manual/en/book.lapack.php>`_
+* `ext/ldap <http://php.net/manual/en/book.ldap.php>`_
+* `ext/leveldb <https://github.com/reeze/php-leveldb>`_
+* `ext/libevent <http://www.libevent.org/>`_
+* `ext/libsodium <https://github.com/jedisct1/libsodium-php>`_
+* `ext/libxml <http://www.php.net/manual/en/book.libxml.php>`_
+* `ext/lua <http://php.net/manual/en/book.lua.php>`_
+* `ext/lzf <http://php.net/lzf>`_
+* `ext/mail <http://www.php.net/manual/en/book.mail.php>`_
+* `ext/mailparse <http://www.faqs.org/rfcs/rfc822.html>`_
+* `ext/math <http://php.net/manual/en/book.math.php>`_
+* `ext/mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
+* `ext/mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
+* `ext/memcache <http://www.php.net/manual/en/book.memcache.php>`_
+* `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
+* `ext/mhash <http://mhash.sourceforge.net/>`_
+* `ext/ming <http://www.libming.org/>`_
+* `ext/mongo <http://php.net/mongo>`_
+* `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
+* `ext/msgpack <https://github.com/msgpack/msgpack-php>`_
+* `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
+* `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
+* `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
+* `ext/ncurses <http://php.net/manual/en/book.ncurses.php>`_
+* `ext/newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
+* `ext/nsapi <http://php.net/manual/en/install.unix.sun.php>`_
+* `ext/ob <http://php.net/manual/en/book.outcontrol.php>`_
+* `ext/oci8 <http://php.net/manual/en/book.oci8.php>`_
+* `ext/odbc <http://www.php.net/manual/en/book.uodbc.php>`_
+* `ext/opcache <http://www.php.net/manual/en/book.opcache.php>`_
+* `ext/opencensus <https://github.com/census-instrumentation/opencensus-php>`_
+* `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
+* `ext/parle <http://php.net/manual/en/book.parle.php>`_
+* `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
+* `ext/pcntl <http://php.net/manual/en/book.pcntl.php>`_
+* `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
+* `ext/pdo <http://php.net/manual/en/book.pdo.php>`_
+* `ext/pgsql <http://php.net/manual/en/book.pgsql.php>`_
+* `ext/phalcon <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `ext/phar <http://www.php.net/manual/en/book.phar.php>`_
+* `ext/posix <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
+* `ext/proctitle <http://php.net/manual/en/book.proctitle.php>`_
+* `ext/pspell <http://php.net/manual/en/book.pspell.php>`_
+* `ext/psr <https://www.php-fig.org/psr/psr-3>`_
+* `ext/rar <http://php.net/manual/en/book.rar.php>`_
+* `ext/rdkafka <https://github.com/arnaud-lb/php-rdkafka>`_
+* `ext/readline <http://php.net/manual/en/book.readline.php>`_
+* `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
+* `ext/redis <https://github.com/phpredis/phpredis/>`_
+* `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
+* `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
+* `ext/sdl <https://github.com/Ponup/phpsdl>`_
+* `ext/seaslog <https://github.com/SeasX/SeasLog>`_
+* `ext/sem <http://php.net/manual/en/book.sem.php>`_
+* `ext/session <http://php.net/manual/en/book.session.php>`_
+* `ext/shmop <http://php.net/manual/en/book.sem.php>`_
+* `ext/simplexml <http://php.net/manual/en/book.simplexml.php>`_
+* `ext/snmp <http://www.net-snmp.org/>`_
+* `ext/soap <http://php.net/manual/en/book.soap.php>`_
+* `ext/sockets <http://php.net/manual/en/book.sockets.php>`_
+* `ext/sphinx <http://php.net/manual/en/book.sphinx.php>`_
+* `ext/spl <http://www.php.net/manual/en/book.spl.php>`_
+* `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
+* `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
+* `ext/sqlsrv <http://php.net/sqlsrv>`_
+* `ext/ssh2 <http://php.net/manual/en/book.ssh2.php>`_
+* `ext/standard <http://php.net/manual/en/ref.info.php>`_
+* `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
+* `String <http://php.net/manual/en/ref.strings.php>`_
+* `ext/suhosin <https://suhosin.org/>`_
+* `ext/swoole <https://www.swoole.com/>`_
+* `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
+* `ext/tokenizer <http://www.php.net/tokenizer>`_
+* `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
+* `ext/trader <https://pecl.php.net/package/trader>`_
+* `ext/uopz <https://pecl.php.net/package/uopz>`_
+* `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
+* `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
+* `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
+* `ext/wasm <https://github.com/Hywan/php-ext-wasm>`_
+* `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
+* `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
+* `ext/wincache <http://www.php.net/wincache>`_
+* `ext/xattr <http://php.net/manual/en/book.xattr.php>`_
+* `ext/xcache <https://xcache.lighttpd.net/>`_
+* `ext/xdebug <https://xdebug.org/>`_
+* `ext/xdiff <http://php.net/manual/en/book.xdiff.php>`_
+* `ext/xhprof <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
+* `ext/xml <http://www.php.net/manual/en/book.xml.php>`_
+* `ext/xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
+* `ext/xmlrpc <http://www.php.net/manual/en/book.xmlrpc.php>`_
+* `ext/xmlwriter <http://php.net/manual/en/book.xmlwriter.php>`_
+* `ext/xsl <http://php.net/manual/en/intro.xsl.php>`_
+* `ext/xxtea <https://pecl.php.net/package/xxtea>`_
+* `ext/yaml <http://www.yaml.org/>`_
+* `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
+* `ext/zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `ext/zip <http://php.net/manual/en/book.zip.php>`_
+* `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
+* `ext/0mq <http://zeromq.org/>`_
+* `ext/zookeeper <http://php.net/zookeeper>`_
+
+Supported Frameworks
+--------------------
+
+Frameworks, components and libraries are supported via Exakat extensions.
 
 List of extensions : there are 8 extensions
 
@@ -125,19 +298,6 @@ List of extensions : there are 8 extensions
 
 
 
-Supported Frameworks
---------------------
-
-Frameworks are supported when they is an analysis related to them. Then, a selection of analysis may be dedicated to them. 
-
-::
-   php exakat.phar analysis -p <project> -T <Framework> 
-
-
-
-* Cakephp
-* Wordpress
-* ZendFramework
 
 Applications
 ------------
@@ -149,7 +309,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Contao <https://contao.org/en/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Dolphin <https://www.boonex.com/>`_
-* Eduosoho
 * `Edusoho <https://www.edusoho.com/en>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
@@ -161,14 +320,12 @@ A number of applications were scanned in order to find real life examples of pat
 * `NextCloud <https://nextcloud.com/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
-* OpenEmr
 * `Phinx <https://phinx.org/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
-* Shopware
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -186,7 +343,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
-* openemr
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `shopware <https://www.shopware.com/>`_
