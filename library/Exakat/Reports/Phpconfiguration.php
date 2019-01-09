@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 
-class PhpConfiguration extends Reports {
+class Phpconfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
     const FILE_FILENAME  = 'php.suggested';
 

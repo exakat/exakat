@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
-class CodeSniffer extends Reports {
+class Codesniffer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'exakat';
 

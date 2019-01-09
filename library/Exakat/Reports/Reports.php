@@ -38,13 +38,12 @@ abstract class Reports {
     
     static private $docs = null;
 
-    static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Drillinstructor',
-                                          'Text', 'Xml', 'Uml', 'PlantUml', 'None', 'SimpleHtml', 'Owasp',
-                                          'PhpConfiguration', 'PhpCompilation', 'Favorites', 'Manual',
-                                          'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
-                                          'ZendFramework',  'CodeSniffer', 'Slim',
-                                          'RadwellCode', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer',
-                                          'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
+    static public $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
+                                          'Text', 'Xml', 'Uml', 'Plantuml', 'None', 'Simplehtml', 'Owasp',
+                                          'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
+                                          'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
+                                          'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 
+                                          'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel', 'Phpcity',
                                           //'DailyTodo',
                                           );

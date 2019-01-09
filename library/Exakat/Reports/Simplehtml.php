@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
-class SimpleHtml extends Reports {
+class Simplehtml extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'exakat';
 

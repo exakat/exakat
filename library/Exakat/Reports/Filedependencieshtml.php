@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 use stdClass;
 
-class FileDependenciesHtml extends Reports {
+class Filedependencieshtml extends Reports {
     const FILE_EXTENSION = 'html';
     const FILE_FILENAME  = 'dependencies';
     

@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 
-class PlantUml extends Reports {
+class Plantuml extends Reports {
     const FILE_EXTENSION = 'puml';
     const FILE_FILENAME  = 'exakat';
 

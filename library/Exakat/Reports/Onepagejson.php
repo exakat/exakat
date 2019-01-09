@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Reports;
 
-class OnepageJson extends Reports {
+class Onepagejson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'onepage';
 

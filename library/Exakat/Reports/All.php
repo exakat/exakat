@@ -33,9 +33,9 @@ class All extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name) {
-        $omit = array('AmbassadorNoMenu',
-                      'FacetedJson',
-                      'OnepageJson',
+        $omit = array('Ambassadornomenu',
+                      'Facetedjson',
+                      'Onepagejson',
                       );
         $reports = array_diff(Reports::$FORMATS, $omit);
 

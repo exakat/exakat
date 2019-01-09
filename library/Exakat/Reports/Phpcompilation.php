@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 
-class PhpCompilation extends Reports {
+class Phpcompilation extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'compilePHP';
 

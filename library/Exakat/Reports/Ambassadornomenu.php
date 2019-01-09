@@ -28,7 +28,7 @@ use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
-class AmbassadorNoMenu extends Ambassador {
+class Ambassadornomenu extends Ambassador {
     protected function getBasedPage($file) {
         static $baseHTML;
 
