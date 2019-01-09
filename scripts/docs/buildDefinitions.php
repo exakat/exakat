@@ -430,7 +430,7 @@ SQL
                             'PARAMETER_LIST'         => join('', $this->parameter_list),
                             'INI_THEMES'             => $this->ini_themes_config,
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
-                            'EXTENSION_LIST'         => $this->exakat_extension_list,
+                            'EXAKAT_EXTENSION_LIST'  => $this->exakat_extension_list,
                             'EXTENSION_DETAILS'      => $this->exakat_extension_det,
                             'PARAMETERED_ANALYSIS'   => $this->parametered_analysis,
                             );
