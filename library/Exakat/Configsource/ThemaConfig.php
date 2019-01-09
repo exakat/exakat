@@ -40,8 +40,22 @@ class ThemaConfig extends Config {
         }
 
         foreach($ini as $name => $values) {
+            if (!isset($values['analyzer'])) {
+                continue;
+            }
+
+            if (!is_array($values['analyzer'])) {
+                continue;
+            }
+            
+            $list = array_filter(array_unique($values['analyzer']), 'filter_analyzer');
+
+            if (empty($list)) {
+                continue;
+            }
+
             // Check for actual existence and drop unknown
-            $this->config[$name] = array_unique($values['analyzer']);
+            $this->config[$name] = $list;
         }
 
         return 'config/themes.ini';
