@@ -201,7 +201,8 @@ class ProjectConfig extends Config {
 
         $configIni = <<<INI
 ;Main PHP version for this code.
-phpversion = {$this->config['phpversion']}
+;default is to use config/exakat.ini
+;phpversion = {$this->config['phpversion']}
 
 ;Ignored dirs and files, relative to code source root.
 $ignore_dirs
