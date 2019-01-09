@@ -85,7 +85,7 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 
 Ambassador is a HTML report format.
 
-Ambassador depends on the following 18 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+Ambassador depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
 
 Clustergrammer
 --------------
@@ -101,7 +101,7 @@ See a live report here : [Clustergrammer](http://amp.pharm.mssm.edu/clustergramm
 
 Clustergrammer is a TEXT report format.
 
-Clustergrammer depends on the following 1 themes : .
+Clustergrammer doesn't depend on themes.
 
 Code Flower
 -----------
@@ -121,7 +121,7 @@ It represents :
 
 Code Flower is a HTML report format.
 
-Code Flower depends on the following 1 themes : .
+Code Flower doesn't depend on themes.
 
 Code Sniffer
 ------------
@@ -186,7 +186,7 @@ It is recommended to review manually the results of the suggested composer.json 
 
 Composer is a JSON report format.
 
-Composer depends on the following 1 themes : Appinfo.
+Composer depends on the following theme : Appinfo.
 
 Dependency Wheel
 ----------------
@@ -202,7 +202,7 @@ It is based on Francois Zaninotto's [DependencyWheel](http://fzaninotto.github.c
 
 Dependency Wheel is a HTML report format.
 
-Dependency Wheel depends on the following 1 themes : .
+Dependency Wheel doesn't depend on themes.
 
 Inventories
 -----------
@@ -262,7 +262,7 @@ Every type of values is exported to a file. If no value of such type was found d
 
 Inventories is a CSV report format.
 
-Inventories depends on the following 1 themes : Inventories.
+Inventories depends on the following theme : Inventories.
 
 Json
 ----
@@ -340,7 +340,7 @@ You may also learn more about GraphQL at [Introducing Json GraphQL Server](https
 
 Marmelab is a JSON report format.
 
-Marmelab depends on the following 1 themes : Analyze.
+Marmelab depends on the following theme : Analyze.
 
 Owasp
 -----
@@ -354,7 +354,7 @@ The OWASP report focuses on the [OWASP top 10](https://www.owasp.org/index.php/C
 
 Owasp is a HTML report format.
 
-Owasp depends on the following 1 themes : Security.
+Owasp depends on the following theme : Security.
 
 PhpCompilation
 --------------
@@ -432,7 +432,7 @@ PhpCompilation bases its selection on the code and its usage of features. PhpCom
 
 PhpCompilation is a Text report format.
 
-PhpCompilation depends on the following 1 themes : Appinfo.
+PhpCompilation depends on the following theme : Appinfo.
 
 PhpConfiguration
 ----------------
@@ -510,7 +510,7 @@ PhpConfiguration bases its selection on the code, and classic recommendations. F
 
 PhpConfiguration is a Text report format.
 
-PhpConfiguration depends on the following 1 themes : Appinfo.
+PhpConfiguration depends on the following theme : Appinfo.
 
 Phpcity
 -------
@@ -534,7 +534,7 @@ Or, you can install the [PHPcity](https://github.com/adrianhuna/PHPCity) applica
 
 Phpcity is a JSON report format.
 
-Phpcity depends on the following 1 themes : .
+Phpcity doesn't depend on themes.
 
 PlantUml
 --------
@@ -551,7 +551,7 @@ PlantUML is an Open Source component that dislays class diagrams.
 
 PlantUml is a puml report format.
 
-PlantUml depends on the following 1 themes : .
+PlantUml doesn't depend on themes.
 
 RadwellCode
 -----------
@@ -575,7 +575,7 @@ Note that all rules are not implemented, especially the 'coding conventions' one
 
 RadwellCode is a Text report format.
 
-RadwellCode depends on the following 1 themes : RadwellCodes.
+RadwellCode depends on the following theme : RadwellCodes.
 
 SimpleTable
 -----------
@@ -589,7 +589,7 @@ Simpletable is suitable for any list of results provided by exakat. It is inspir
 
 SimpleTable is a HTML report format.
 
-SimpleTable depends on the following 1 themes : .
+SimpleTable doesn't depend on themes.
 
 Stats
 -----
@@ -652,7 +652,7 @@ Stats reports PHP structures definition, like class, interfaces, variables, and 
 
 Stats is a JSON report format.
 
-Stats depends on the following 1 themes : Stats.
+Stats depends on the following theme : Stats.
 
 Text
 ----
@@ -702,7 +702,7 @@ Classes, interfaces and traits are represented, along with their constants, meth
 
 Uml is a dot report format.
 
-Uml depends on the following 1 themes : .
+Uml doesn't depend on themes.
 
 Xml
 ---

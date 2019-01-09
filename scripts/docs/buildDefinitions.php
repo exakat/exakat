@@ -516,12 +516,14 @@ $exampleTxt
     
             $section .= $reportIni['name']. " is a $reportIni[type] report format.\n\n";
 
-            if (empty($reportIni['themes'])) {
-                $section .= $reportIni['name']. " doesn't depends on themes.\n\n";
-            } if (isset($reportIni['arbitrarylist']) && $reportIni['arbitrarylist'] == 1) {
+            if (!empty($reportIni['arbitrarylist'])) {
                 $section .= $reportIni['name']. " accepts any arbitrary list of results.\n\n";
+            } elseif (empty($reportIni['themes'][0])) {
+                $section .= $reportIni['name']. " doesn't depend on themes.\n\n";
+            } elseif ($c = count($reportIni['themes']) === 1) {
+                $section .= $reportIni['name']. " depends on the following theme : ".array_pop($reportIni['themes']).".\n\n";
             } else {
-                $section .= $reportIni['name']. " depends on the following ".count($reportIni['themes'])." themes : ".join(', ', $reportIni['themes']).".\n\n";
+                $section .= $reportIni['name']. " depends on the following $c themes : ".join(', ', $reportIni['themes']).".\n\n";
             }
     
             $reportSection[] = $section;
@@ -763,7 +765,7 @@ SPHINX;
             $analyzers = explode(',', $row['analyzers']);
             sort($analyzers);
             $analyzers = implode(',', $analyzers);
-            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('-', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
+            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
         }
         
         $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".join("\n* ", $list)."\n\n\n".join("\n\n", $config);
