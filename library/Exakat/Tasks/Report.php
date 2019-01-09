@@ -54,6 +54,7 @@ class Report extends Tasks {
         }
 
         $reportClass = Reports::getReportClass($this->config->format);
+        $reportClass = ucfirst(strtolower($reportClass));
 
         if (!class_exists($reportClass)) {
             throw new NoSuchFormat($this->config->format, Reports::$FORMATS);
