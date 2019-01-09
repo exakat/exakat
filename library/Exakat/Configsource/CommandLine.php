@@ -143,55 +143,61 @@ class CommandLine extends Config {
 
         foreach($this->valueOptions as $key => $config) {
             while( ($id = array_search($key, $args)) !== false ) {
-                if (isset($args[$id + 1])) {
-                    if (is_string($args[$id + 1]) && isset($this->valueOptions[$args[$id + 1]])) {
-                        // in case this option value is actually the next option (exakat -p -T)
-                        // We just ignore it
-                        unset($args[$id]);
-                        continue;
-                    } 
-                    
-                    // Normal case is here
-                    switch ($config) {
-                        case 'program' :
-                            if (!isset($this->config['program'])) {
-                                $this->config['program'] = $args[$id + 1];
-                            } elseif (is_string($this->config['program'])) {
-                                $this->config['program'] = array($this->config['program'], 
-                                                                 $args[$id + 1],
-                                                                );
-                            } else {
-                                $this->config['program'][] = $args[$id + 1];
-                            }
-                            break;
-
-                        case 'configuration' :
-                            if (empty($this->config['configuration'])) {
-                                $this->config['configuration'] = array();
-                            } 
-                            if (strpos($args[$id + 1], '=') === false) {
-                                $name = trim($args[$id + 1]);
-                                $value = '';
-                            } else {
-                                list($name, $value) = explode('=', trim($args[$id + 1]));
-                            }
-                            if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
-                                if (!isset($this->config['configuration'][$name])) {
-                                    $this->config['configuration'][$name] = array();
-                                }
-                                $this->config['configuration'][$name][] = $value;
-                            } else {
-                                $this->config['configuration'][$name] = $value;
-                            }
-                            break;
-
-                        default : 
-                             $this->config[$config] = $args[$id + 1];
-                    }
-
+                if (!isset($args[$id + 1])) {
+                    // case of a name, without a following name
+                    // We just ignore it
                     unset($args[$id]);
-                    unset($args[$id + 1]);
+                    continue;
+                } 
+
+                if (is_string($args[$id + 1]) && isset($this->valueOptions[$args[$id + 1]])) {
+                    // in case this option value is actually the next option (exakat -p -T)
+                    // We just ignore it
+                    unset($args[$id]);
+                    continue;
+                } 
+
+                // Normal case is here
+                switch ($config) {
+                    case 'program' :
+                        if (!isset($this->config['program'])) {
+                            $this->config['program'] = $args[$id + 1];
+                        } elseif (is_string($this->config['program'])) {
+                            $this->config['program'] = array($this->config['program'], 
+                                                             $args[$id + 1],
+                                                            );
+                        } else {
+                            $this->config['program'][] = $args[$id + 1];
+                        }
+                        break;
+
+                    case 'configuration' :
+                        if (empty($this->config['configuration'])) {
+                            $this->config['configuration'] = array();
+                        } 
+                        if (strpos($args[$id + 1], '=') === false) {
+                            $name = trim($args[$id + 1]);
+                            $value = '';
+                        } else {
+                            list($name, $value) = explode('=', trim($args[$id + 1]));
+                        }
+                        if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
+                            if (!isset($this->config['configuration'][$name])) {
+                                $this->config['configuration'][$name] = array();
+                            }
+                            $this->config['configuration'][$name][] = $value;
+                        } else {
+                            $this->config['configuration'][$name] = $value;
+                        }
+                        break;
+
+                    default : 
+                         $this->config[$config] = $args[$id + 1];
                 }
+
+                unset($args[$id]);
+                unset($args[$id + 1]);
+
             }
         }
         
