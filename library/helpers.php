@@ -663,4 +663,8 @@ function sort_dependencies($array, $level = 0) {
     return $return;
 }
 
+function filter_analyzer($analyzer) {
+    return preg_match('#^\w+/\w+$#', $analyzer); 
+}
+
 ?>
