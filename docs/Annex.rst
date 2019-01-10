@@ -69,34 +69,31 @@ Supported Reports
 Exakat produces various reports. Some are general, covering various aspects in a reference way; others focus on one aspect. 
 
   * Ambassador
-  * AmbassadorNoMenu
+  * Ambassadornomenu
   * Drillinstructor
   * Text
   * Xml
   * Uml
-  * PlantUml
+  * Plantuml
   * None
-  * SimpleHtml
+  * Simplehtml
   * Owasp
-  * PhpConfiguration
-  * PhpCompilation
+  * Phpconfiguration
+  * Phpcompilation
   * Favorites
   * Manual
   * Inventories
   * Clustergrammer
-  * FileDependencies
-  * FileDependenciesHtml
-  * ZendFramework
-  * CodeSniffer
-  * Slim
-  * RadwellCode
+  * Filedependencies
+  * Filedependencieshtml
+  * Radwellcode
   * Grade
   * Weekly
-  * Codacy
   * Scrutinizer
-  * FacetedJson
+  * Codesniffer
+  * Facetedjson
   * Json
-  * OnepageJson
+  * Onepagejson
   * Marmelab
   * Simpletable
   * Codeflower
@@ -2475,7 +2472,7 @@ INI configuration for built-in themes. Copy them in config/themes.ini, and make 
 .. _theme_ini_analyze:
 
 Analyze
--------
+_______
 
 | [Analyze]
 |   analyzer[] = "Arrays/AmbiguousKeys";
@@ -2840,7 +2837,7 @@ Analyze
 .. _theme_ini_classreview:
 
 ClassReview
------------
+___________
 
 | [ClassReview]
 |   analyzer[] = "Classes/CouldBeAbstractClass";
@@ -2871,7 +2868,7 @@ ClassReview
 .. _theme_ini_coding conventions:
 
 Coding Conventions
-------------------
+__________________
 
 | [Coding Conventions]
 |   analyzer[] = "Arrays/CurlyArrays";
@@ -2904,7 +2901,7 @@ Coding Conventions
 .. _theme_ini_compatibilityphp53:
 
 CompatibilityPHP53
-------------------
+__________________
 
 | [CompatibilityPHP53]
 |   analyzer[] = "Arrays/ArrayNSUsage";
@@ -2990,7 +2987,7 @@ CompatibilityPHP53
 .. _theme_ini_compatibilityphp54:
 
 CompatibilityPHP54
-------------------
+__________________
 
 | [CompatibilityPHP54]
 |   analyzer[] = "Arrays/MixedKeys";
@@ -3072,7 +3069,7 @@ CompatibilityPHP54
 .. _theme_ini_compatibilityphp55:
 
 CompatibilityPHP55
-------------------
+__________________
 
 | [CompatibilityPHP55]
 |   analyzer[] = "Classes/Anonymous";
@@ -3146,7 +3143,7 @@ CompatibilityPHP55
 .. _theme_ini_compatibilityphp56:
 
 CompatibilityPHP56
-------------------
+__________________
 
 | [CompatibilityPHP56]
 |   analyzer[] = "Classes/Anonymous";
@@ -3209,7 +3206,7 @@ CompatibilityPHP56
 .. _theme_ini_compatibilityphp70:
 
 CompatibilityPHP70
-------------------
+__________________
 
 | [CompatibilityPHP70]
 |   analyzer[] = "Classes/CantInheritAbstractMethod";
@@ -3264,7 +3261,7 @@ CompatibilityPHP70
 .. _theme_ini_compatibilityphp71:
 
 CompatibilityPHP71
-------------------
+__________________
 
 | [CompatibilityPHP71]
 |   analyzer[] = "Classes/CantInheritAbstractMethod";
@@ -3304,7 +3301,7 @@ CompatibilityPHP71
 .. _theme_ini_compatibilityphp72:
 
 CompatibilityPHP72
-------------------
+__________________
 
 | [CompatibilityPHP72]
 |   analyzer[] = "Constants/UndefinedConstants";
@@ -3337,7 +3334,7 @@ CompatibilityPHP72
 .. _theme_ini_compatibilityphp73:
 
 CompatibilityPHP73
-------------------
+__________________
 
 | [CompatibilityPHP73]
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
@@ -3357,7 +3354,7 @@ CompatibilityPHP73
 .. _theme_ini_compatibilityphp74:
 
 CompatibilityPHP74
-------------------
+__________________
 
 | [CompatibilityPHP74]
 |   analyzer[] = "Php/DetectCurrentClass";
@@ -3371,7 +3368,7 @@ CompatibilityPHP74
 .. _theme_ini_dead code:
 
 Dead code
----------
+_________
 
 | [Dead code]
 |   analyzer[] = "Classes/CantExtendFinal";
@@ -3408,7 +3405,7 @@ Dead code
 .. _theme_ini_lintbutwontexec:
 
 LintButWontExec
----------------
+_______________
 
 | [LintButWontExec]
 |   analyzer[] = "Classes/AbstractOrImplements";
@@ -3435,7 +3432,7 @@ LintButWontExec
 .. _theme_ini_performances:
 
 Performances
-------------
+____________
 
 | [Performances]
 |   analyzer[] = "Arrays/GettingLastElement";
@@ -3486,7 +3483,7 @@ Performances
 .. _theme_ini_security:
 
 Security
---------
+________
 
 | [Security]
 |   analyzer[] = "Functions/HardcodedPasswords";
@@ -3537,7 +3534,7 @@ Security
 .. _theme_ini_suggestions:
 
 Suggestions
------------
+___________
 
 | [Suggestions]
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
