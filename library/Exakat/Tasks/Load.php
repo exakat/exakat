@@ -2755,11 +2755,8 @@ class Load extends Tasks {
         $this->runPlugins($bracket, array('VARIABLE' => $variable,
                                           'INDEX'    => $index));
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        } else {
-            $bracket = $this->processFCOA($bracket);
-        }
+        $bracket = $this->processFCOA($bracket);
+        // No check on ; here
 
         return $bracket;
     }

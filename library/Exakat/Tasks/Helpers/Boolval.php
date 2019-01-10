@@ -109,7 +109,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'Power' :
-                $atom->noDelimiter = (int) (bool) ($extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
+                $atom->boolean = (int) (bool) ((bool) $extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
                 break;
 
             case 'Keyvalue' :

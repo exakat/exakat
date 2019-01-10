@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Power extends Tokenizer {
-    /* 31 methods */
+    /* 32 methods */
 
     public function testPower01()  { $this->generic_test('Power.01'); }
     public function testPower02()  { $this->generic_test('Power.02'); }
@@ -40,5 +40,6 @@ class Power extends Tokenizer {
     public function testPower29()  { $this->generic_test('Power.29'); }
     public function testPower30()  { $this->generic_test('Power.30'); }
     public function testPower31()  { $this->generic_test('Power.31'); }
+    public function testPower32()  { $this->generic_test('Power.32'); }
 }
 ?>
