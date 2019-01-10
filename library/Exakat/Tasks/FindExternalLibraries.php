@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -92,6 +92,7 @@ class FindExternalLibraries extends Tasks {
                                   'drupal\tests\unittestcase'                           => self::WHOLE_DIR, // Drupal
                                   'symfony\bundle\frameworkbundle\test\webtestcase'     => self::WHOLE_DIR, // Symfony
                                   'symfony\bundle\frameworkbundle\test\kerneltestcase'  => self::WHOLE_DIR, // Symfony
+                                  'typo3\testingframework\core\unit\unittestcase'       => self::WHOLE_DIR, // typo3
                                   // behat, peridot, kahlan, phpt?
                                    );
 
