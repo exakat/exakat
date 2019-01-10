@@ -144,7 +144,7 @@ LICENCE;
 LICENCE;
         $licenceCRC2017 = crc32(trim($licence2017));
 
-        $licence2018 = <<<'LICENCE'
+        $licence2018a = <<<'LICENCE'
 /*
  * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -166,9 +166,9 @@ LICENCE;
  *
 */
 LICENCE;
-        $licenceCRC2018a = crc32(trim($licence2018));
+        $licenceCRC2018a = crc32(trim($licence2018a));
 
-        $licence = <<<'LICENCE'
+        $licence2018b = <<<'LICENCE'
 /*
  * Copyright 2012-2018 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -190,8 +190,32 @@ LICENCE;
  *
 */
 LICENCE;
-        $licenceCRC = crc32(trim($licence));
+        $licenceCRC2018b = crc32(trim($licence2018b));
 
+        $licence = <<<'LICENCE'
+/*
+ * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+LICENCE;
+        $licenceCRC = crc32(trim($licence));
+        
         foreach ($files as $file) {
             $tokens = token_get_all(file_get_contents($file));
             
@@ -214,7 +238,9 @@ LICENCE;
                 } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015 || 
                           crc32($tokens[$tokenId + 1][1]) === $licenceCRC2016 || 
                           crc32($tokens[$tokenId + 1][1]) === $licenceCRC2017 || 
-                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2018a
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2018a||
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2018b
+                          
                           ) {
                     print "Updating licence date in file '". $file. "'\n";
                     $tokens[$tokenId + 1][1] = $licence;
