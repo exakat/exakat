@@ -81,7 +81,6 @@ function init($args) {
             $project = autoprojectname();
         }
 
-        print '__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs;
         shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs);
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];

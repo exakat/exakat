@@ -222,6 +222,11 @@ function fetch($args) {
         error('No dump.sqlite available', '');
     }
 
+    // check if the report is done. If not, no dump yet.
+    if (!file_exists("projects/$project/report")) {
+        error('No dump.sqlite available', '');
+    }
+
     shell_exec("cd projects/$project/; zip -r dump.zip dump.sqlite; ");
     serverLog("fetch : $project ".date('r'));
     $fp = fopen("projects/$project/dump.zip", 'r');
