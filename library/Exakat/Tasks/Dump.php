@@ -1812,9 +1812,9 @@ g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("fir
 .select("first")
 .map{['name':name,
       'parent':class2,
-      'parentValue':default2,
+      'parentValue':name + ' = ' + default2,
       'class':class1,
-      'classValue':default1];
+      'classValue':name + ' = ' + default1];
      }
 
 GREMLIN;
@@ -1836,9 +1836,9 @@ g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("fir
 .select("first")
 .map{['name':name,
       'parent':class2,
-      'parentValue':visibility2,
+      'parentValue':visibility2 + ' ' + name,
       'class':class1,
-      'classValue':visibility1];
+      'classValue':visibility1 + ' ' + name];
      }
 
 GREMLIN;
@@ -1879,9 +1879,9 @@ g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
 .map{["name":name,
       "parent":class2,
-      "parentValue":visibility2,
+      "parentValue":visibility2 + ' ' + name,
       "class":class1,
-      "classValue":visibility1];}
+      "classValue":visibility1] + ' ' + name;}
 GREMLIN;
         $total += $this->storeClassChanges('Method Visibility', $query);
         
@@ -1899,16 +1899,16 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .filter{ it.get().value("fullcode") == name}.select("first")
 .map{['name':name,
       'parent':class2,
-      'parentValue':default2,
+      'parentValue': name + ' = ' + default2,
       'class':class1,
-      'classValue':default1];
+      'classValue': name + ' = ' + default1];
      }
 GREMLIN;
         $total += $this->storeClassChanges('Member Default', $query);
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("code"); }.in("PPP")
+.sideEffect{ name = it.get().value("fullcode"); }.in("PPP")
 .sideEffect{ visibility1 = it.get().value("visibility") }
 .in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }
 .repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
@@ -1919,12 +1919,12 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .filter{ visibility2 = it.get().value("visibility"); visibility1 != visibility2 }
 
 .out("PPP")
-.filter{ it.get().value("code") == name}.select("first")
+.filter{ it.get().value("fullcode") == name}.select("first")
 .map{['name':name,
       'parent':class2,
-      'parentValue':visibility2,
+      'parentValue':visibility2 + ' ' + name,
       'class':class1,
-      'classValue':visibility1];
+      'classValue':visibility1 + ' ' + name];
    }
 GREMLIN;
         $total += $this->storeClassChanges('Member Visibility', $query);
