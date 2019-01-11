@@ -3429,7 +3429,7 @@ HTML;
 
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
-            $visibilityTable .= '<tr><td colspan="9">class '.$class.'</td></tr>'.PHP_EOL.
+            $visibilityTable .= '<tr><td colspan="9">class '.PHPSYntax($class).'</td></tr>'.PHP_EOL.
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '').
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '').
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
@@ -3615,7 +3615,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['method'].'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td>'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3693,7 +3693,7 @@ SQL
                 $aClass = array();
             }
 
-            $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
@@ -3708,7 +3708,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
         
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['constant'].'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td>'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3793,7 +3793,7 @@ SQL
                 $aClass = array();
             }
 
-            $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
@@ -3813,7 +3813,7 @@ SQL
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td>'.
                             implode('</td><td>', $visibilities)
                             .'</td></tr>'.PHP_EOL;
         }
