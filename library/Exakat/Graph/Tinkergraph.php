@@ -265,7 +265,6 @@ LEFT JOIN definitions definitions2
     ON definitions2.type       = calls.type       AND
        definitions2.fullnspath = calls.globalpath 
 WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
-GROUP BY calls.id
 SQL;
     }
 
