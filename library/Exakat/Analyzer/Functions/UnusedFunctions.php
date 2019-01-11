@@ -64,8 +64,10 @@ not(
         __.out("DEFINITION")
           .repeat( __.not(hasLabel("Function", "Closure")).in({$this->linksDown}))
           .emit().times($MAX_LOOPING).hasLabel("Function", "Closure", "File")
-          .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
-          .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
+          .coalesce( __.hasLabel("File", "Closure"), 
+                     __.hasLabel("Function").filter{ it.get().value("fullnspath") != fnp;}
+                                            .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
+          )
     )
 )
 GREMLIN
@@ -73,5 +75,4 @@ GREMLIN
         $this->prepareQuery();
     }
 }
-
 ?>
