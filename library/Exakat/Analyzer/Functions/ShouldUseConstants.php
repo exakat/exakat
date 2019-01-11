@@ -29,8 +29,9 @@ class ShouldUseConstants extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('constant_usage.ini');
         
+        // todo : support 0 as a valid value
         $MAX_LOOPING = self::MAX_LOOPING;
-        $authorizedAtoms = array('Logical',
+        $authorizedAtoms = array('Logical', 'Addition',
                                  'Identifier',
                                  'Nsname',
                                  'Variable',
@@ -40,6 +41,8 @@ class ShouldUseConstants extends Analyzer {
                                  'Staticconstant',
                                  'Staticmethodcall',
                                  'Methodcall',
+                                 'Functioncall',
+                                 'Ternary',
                                  'Parenthesis',
                                  'Void',
                                  );
@@ -52,6 +55,7 @@ class ShouldUseConstants extends Analyzer {
 
             $fullnspath = makeFullNsPath($functions["functions{$position}"]);
             
+            // Simple eliminations
             $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
@@ -60,20 +64,29 @@ class ShouldUseConstants extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
 
+            // Simple errors
             $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIs('Logical')
+                 ->outIsIE(array('THEN', 'ELSE', 'CODE'))
+                 ->atomIs(array('Logical', 'Addition'))
+                 ->tokenIsNot(array('T_OR', 'T_PLUS'))
+                 ->back('first');
+            $this->prepareQuery();
+
+            // Complex combinaisons, with logical, parenthesis or ternaries
+            $this->atomFunctionIs($fullnspath)
+                 ->outIs('ARGUMENT')
+                 ->is('rank', $position)
+                 ->outIsIE(array('THEN', 'ELSE', 'CODE'))
+                 ->atomIs(array('Logical', 'Addition'))
+                 ->tokenIs(array('T_OR', 'T_PLUS'))
                  // Skip Ternaries and parenthesis
-                 ->raw(<<<GREMLIN
-where( 
-    __.repeat( __.coalesce(__.out("THEN", "ELSE", "CODE"), filter{true}).out({$this->linksDown}) )
-      .emit( ).times($MAX_LOOPING) 
-      .hasLabel(without(***))
-      )
-GREMLIN
-,$authorizedAtoms
-)
+                 ->filter(
+                    $this->side()
+                         ->followExpression()
+                         ->atomIsNot($authorizedAtoms)
+                 )
                  ->back('first');
             $this->prepareQuery();
         }
