@@ -86,9 +86,9 @@ class Precedence {
 
                         'T_AND'                         => 12,    // &
 
-                        'T_CARET'                       => 13,    // ^
+                        'T_XOR'                         => 13,    // ^
 
-                        'T_PIPE'                        => 14,     // |
+                        'T_OR'                          => 14,     // |
 
                         'T_BOOLEAN_AND'                 => 15, // &&
 

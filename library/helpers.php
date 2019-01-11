@@ -456,7 +456,11 @@ function rst2quote($txt) {
 }
 
 function rst2htmlLink($txt) {
-    return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
+    // `title <url>`_ => <a href="url">title</a>
+    // `anchor`_ => <a href="#anchor">anchor</a>
+    
+    $txt = preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
+    return $txt;
 }
 
 function rst2literal($txt) {

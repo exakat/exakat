@@ -25,40 +25,6 @@ namespace Exakat\Tasks\Helpers;
 
 class Php71 extends Php {
 
-// Exakat home-made tokens
-    const T_BANG                         = '!';
-    const T_CLOSE_BRACKET                = ']';
-    const T_CLOSE_PARENTHESIS            = ')';
-    const T_CLOSE_CURLY                  = '}';
-    const T_COMMA                        = ',';
-    const T_DOT                          = '.';
-    const T_EQUAL                        = '=';
-    const T_MINUS                        = '-';
-    const T_AT                           = '@';
-    const T_OPEN_BRACKET                 = '[';
-    const T_OPEN_CURLY                   = '{';
-    const T_OPEN_PARENTHESIS             = '(';
-    const T_PERCENTAGE                   = '%';
-    const T_PLUS                         = '+';
-    const T_QUESTION                     = '?';
-    const T_COLON                        = ':';
-    const T_SEMICOLON                    = ';';
-    const T_SLASH                        = '/';
-    const T_STAR                         = '*';
-    const T_SMALLER                      = '<';
-    const T_GREATER                      = '>';
-    const T_TILDE                        = '~';
-    const T_QUOTE                        = '"';
-    const T_DOLLAR                       = '$';
-    const T_AND                          = '&';
-    const T_PIPE                         = '|';
-    const T_CARET                        = '^';
-    const T_BACKTICK                     = '`';
-    
-    const T_END                          = 'The End';
-    const T_REFERENCE                    = 'r';
-    const T_VOID                         = 'v';
-
     // PHP tokens
     const T_REQUIRE_ONCE                  = 262;
     const T_REQUIRE                       = 261;
@@ -194,35 +160,6 @@ class Php71 extends Php {
     const T_NS_SEPARATOR                  = 390;
     const T_ELLIPSIS                      = 391;
     const T_DOUBLE_COLON                  = 387;
-    const TOKENS = array(
-                     ';'  => self::T_SEMICOLON,
-                     '+'  => self::T_PLUS,
-                     '-'  => self::T_MINUS,
-                     '/'  => self::T_SLASH,
-                     '*'  => self::T_STAR,
-                     '.'  => self::T_DOT,
-                     '['  => self::T_OPEN_BRACKET,
-                     ']'  => self::T_CLOSE_BRACKET,
-                     '('  => self::T_OPEN_PARENTHESIS,
-                     ')'  => self::T_CLOSE_PARENTHESIS,
-                     '{'  => self::T_OPEN_CURLY,
-                     '}'  => self::T_CLOSE_CURLY,
-                     '='  => self::T_EQUAL,
-                     ','  => self::T_COMMA,
-                     '!'  => self::T_BANG,
-                     '~'  => self::T_TILDE,
-                     '@'  => self::T_AT,
-                     '?'  => self::T_QUESTION,
-                     ':'  => self::T_COLON,
-                     '<'  => self::T_SMALLER,
-                     '>'  => self::T_GREATER,
-                     '%'  => self::T_PERCENTAGE,
-                     '"'  => self::T_QUOTE,
-                     'b"' => self::T_QUOTE,
-                     '$'  => self::T_DOLLAR,
-                     '&'  => self::T_AND,
-                     '|'  => self::T_PIPE,
-                     '^'  => self::T_CARET,
-                     '`'  => self::T_BACKTICK,
-                   );}
+
+}
 ?>

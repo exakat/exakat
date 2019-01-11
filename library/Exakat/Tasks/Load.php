@@ -302,8 +302,8 @@ class Load extends Tasks {
             $this->phptokens::T_LOGICAL_AND              => 'processLogical',
             $this->phptokens::T_LOGICAL_XOR              => 'processLogical',
             $this->phptokens::T_LOGICAL_OR               => 'processLogical',
-            $this->phptokens::T_PIPE                     => 'processLogical',
-            $this->phptokens::T_CARET                    => 'processLogical',
+            $this->phptokens::T_XOR                      => 'processLogical',
+            $this->phptokens::T_OR                       => 'processLogical',
             $this->phptokens::T_AND                      => 'processAnd',
     
             $this->phptokens::T_BOOLEAN_AND              => 'processLogical',
@@ -1028,7 +1028,7 @@ class Load extends Tasks {
                 $catchFullcode[] = $class->fullcode;
                 $extrasCatch['CLASS'.$rankCatch] = $class;
 
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PIPE) {
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OR) {
                     ++$this->id; // Skip |
                 }
             }

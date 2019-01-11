@@ -52,11 +52,9 @@ abstract class Php {
     const T_QUOTE                        = '"';
     const T_DOLLAR                       = '$';
     const T_AND                          = '&';
-    const T_PIPE                         = '|';
-    const T_CARET                        = '^';
     const T_BACKTICK                     = '`';
-    const T_OR                           = '^';
-    const T_XOR                          = '|';
+    const T_OR                           = '|';
+    const T_XOR                          = '^';
     const T_ANDAND                       = '&&';
     const T_OROR                         = '||';
     const T_QUOTE_CLOSE                  = '"_CLOSE';
@@ -95,14 +93,13 @@ abstract class Php {
                      'b"' => self::T_QUOTE,
                      '$'  => self::T_DOLLAR,
                      '&'  => self::T_AND,
-                     '|'  => self::T_PIPE,
-                     '^'  => self::T_CARET,
+                     '|'  => self::T_OR,
+                     '^'  => self::T_XOR,
                      '`'  => self::T_BACKTICK,
                    );
                    
     static public function getInstance($tokens) {
         $errors = [];
-        $total = 0;
 
         if (empty($tokens)) {
             throw new NoRecognizedTokens();
@@ -114,8 +111,7 @@ abstract class Php {
         foreach($versions as $version) {
             $errors = array();
             foreach($tokens as $k => $v) {
-                ++$total;
-                if (@constant(__NAMESPACE__."\\$version::$v") !== $k) {
+                if (constant(__NAMESPACE__."\\$version::$v") !== $k) {
                     $errors[$k] = $v;
                 }
             }
@@ -126,6 +122,7 @@ abstract class Php {
             }
         }
         
+        print_r($errors);
         throw new NoRecognizedTokens();
     }
 }

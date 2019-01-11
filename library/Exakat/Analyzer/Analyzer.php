@@ -809,7 +809,6 @@ GREMLIN;
         return $this;
     }
 
-
     public function isMore($property, $value = 0) {
         $this->query->isMore($property, $value);
 
@@ -919,7 +918,13 @@ GREMLIN;
 
         return $this;
     }
-    
+
+    public function followExpression() {
+        $this->query->FollowExpression();
+        
+        return $this;
+    }
+
     public function values($property) {
         $this->query->values($property);
         
