@@ -2858,10 +2858,13 @@ HTML;
 
             $results = new Results($this->sqlite, $theAnalyzer);
             $results->load();
+            
+            $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
+            $counts = array_map(function($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
 
             $theTable = array();
             foreach($results->toArray() as $row) {
-                $theTable []= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>";
+                $theTable []= "<tr><td>{$counts[$row['htmlcode']]}</td><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>";
             }
 
             $html = $this->getBasedPage('inventories');
