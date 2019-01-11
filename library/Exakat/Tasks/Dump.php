@@ -1881,10 +1881,10 @@ g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first
       "parent":class2,
       "parentValue":visibility2 + ' ' + name,
       "class":class1,
-      "classValue":visibility1] + ' ' + name;}
+      "classValue":visibility1 + ' ' + name];}
 GREMLIN;
         $total += $this->storeClassChanges('Method Visibility', $query);
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
 .sideEffect{ name = it.get().value("fullcode"); }
@@ -1905,7 +1905,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
      }
 GREMLIN;
         $total += $this->storeClassChanges('Member Default', $query);
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
 .sideEffect{ name = it.get().value("fullcode"); }.in("PPP")
