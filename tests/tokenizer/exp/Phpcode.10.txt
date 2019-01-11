@@ -1,7 +1,0 @@
-test
-Label : PROJECT
-  1
-  Label : FILE
-    3
-    Label : EXPRESSION
-      4

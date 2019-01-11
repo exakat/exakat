@@ -1617,7 +1617,6 @@ class Load extends Tasks {
             } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
                 --$this->id;
             }
-
             $this->processNext();
         }
 
@@ -2756,6 +2755,9 @@ class Load extends Tasks {
                                           'INDEX'    => $index));
 
         $bracket = $this->processFCOA($bracket);
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
         // No check on ; here
 
         return $bracket;
@@ -2771,10 +2773,6 @@ class Load extends Tasks {
         } else {
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
                 $this->processNext();
-
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                    $this->processSemicolon();
-                }
             }
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {

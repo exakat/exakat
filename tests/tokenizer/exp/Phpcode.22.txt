@@ -60,19 +60,13 @@ Label : PROJECT
                 Label : NAME
                   23
             Label : EXPRESSION
-              7
-            Label : EXPRESSION
               29
             Label : EXPRESSION
               31
               Label : ARGUMENT
                 17
             Label : EXPRESSION
-              7
-            Label : EXPRESSION
               32
-            Label : EXPRESSION
-              7
             Label : EXPRESSION
               34
           Label : DEFINITION

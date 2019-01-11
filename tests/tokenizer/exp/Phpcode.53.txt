@@ -1,0 +1,69 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      21
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+    Label : EXPRESSION
+      6
+      Label : CODE
+        3
+        Label : EXPRESSION
+          9
+          Label : INDEX
+            10
+          Label : VARIABLE
+            7
+        Label : EXPRESSION
+          11
+        Label : EXPRESSION
+          9
+          Label : INDEX
+            14
+          Label : VARIABLE
+            13
+        Label : EXPRESSION
+          15
+        Label : EXPRESSION
+          9
+          Label : INDEX
+            18
+          Label : VARIABLE
+            9
+            Label : INDEX
+              10
+            Label : VARIABLE
+              17
+        Label : EXPRESSION
+          19
+        Label : EXPRESSION
+          11
+        Label : EXPRESSION
+          9
+          Label : INDEX
+            22
+          Label : VARIABLE
+            9
+            Label : INDEX
+              14
+            Label : VARIABLE
+              21
+    Label : EXPRESSION
+      23
