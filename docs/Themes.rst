@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 08 Jan 2019 10:19:02 +0000
-.. comment: Generation hash : 905616036946a64389bc5f7d65c70edec41e6c64
+.. comment: Generation date : Mon, 14 Jan 2019 14:58:49 +0000
+.. comment: Generation hash : 8efa7ea218b04dd0e7b685c9e106f1091cb80440
 
 
 .. _analyze:
@@ -326,7 +326,6 @@ Total : 353 analysis
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
-* :ref:`Strpos Too Much <strpos-too-much>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 * :ref:`Strtr Arguments <strtr-arguments>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
@@ -425,6 +424,7 @@ Total : 353 analysis
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
+* :ref:`strpos() Too Much <strpos()-too-much>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 .. _classreview:
@@ -504,7 +504,7 @@ Total : 74 analysis
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
-* :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
+* :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -585,7 +585,7 @@ Total : 70 analysis
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
-* :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
+* :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -659,7 +659,7 @@ Total : 62 analysis
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Define With Array <define-with-array>`
-* :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
+* :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -727,7 +727,7 @@ Total : 51 analysis
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Define With Array <define-with-array>`
-* :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
+* :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`

@@ -1134,6 +1134,39 @@ There are two nested foreach here : they both have referenced blind variables. T
                     }
                 }
 
+Aliases Usage
+=============
+
+.. _cleverstyle-functions-aliasesusage:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`aliases-usage`, in modules/HybridAuth/Hybrid/thirdparty/Vimeo/Vimeo.php:422. 
+
+is_writeable() should be written is_writable(). No extra 'e'. 
+
+.. code-block:: php
+
+    is_writeable($chunk_temp_dir)
+
+
+--------
+
+
+.. _phpmyadmin-functions-aliasesusage:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`aliases-usage`, in libraries/classes/Server/Privileges.php:5064. 
+
+join() should be written implode()
+
+.. code-block:: php
+
+    join('`, `', $tmp_privs2['Update'])
+
 Var Keyword
 ===========
 
@@ -1846,6 +1879,22 @@ This code actually loads the file, join it, then split it again. file() would be
 .. code-block:: php
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+Should Use Constants
+====================
+
+.. _tine20-functions-shoulduseconstants:
+
+Tine20
+^^^^^^
+
+:ref:`should-use-constants`, in tine20/Sales/Controller/Invoice.php:560. 
+
+True should be replaced by COUNT_RECURSIVE. The default one is COUNT_NORMAL.
+
+.. code-block:: php
+
+    count($billables, true)
 
 No Parenthesis For Language Construct
 =====================================
@@ -4051,6 +4100,26 @@ This code prepares incoming '$values' for extraction. The keys are cleaned then 
                         $key = strtr($key, '=', '');
                         $key = strtr($key, ',', ';');
                         $keys = explode(';', $key);
+
+strpos() Too Much
+=================
+
+.. _wordpress-performances-strpostoomuch:
+
+WordPress
+^^^^^^^^^
+
+:ref:`strpos()-too-much`, in core/traits/Request/Server.php:127. 
+
+Instead of searching for 'HTTP_', it is faster to compare the first 5 chars to the literal 'HTTP_'. In case of absence, this solution returns faster.
+
+.. code-block:: php
+
+    if (strpos($header, 'HTTP_') === 0) {
+    				$header = substr($header, 5);
+    			} elseif (strpos($header, 'CONTENT_') !== 0) {
+    				continue;
+    			}
 
 Weak Typing
 ===========

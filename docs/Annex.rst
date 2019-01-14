@@ -467,7 +467,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.4.8
 
-  * Direct Call To __clone (Php/DirectCallToClone)
+  * Direct Call To __clone() (Php/DirectCallToClone)
   * filter_input() As A Source (Security/FilterInputSource ; Security)
 
 * 1.4.6
@@ -578,9 +578,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Cant Instantiate Class (Classes/CantInstantiateClass)
   * Do In Base (Performances/DoInBase ; Performances)
   * Php/FailingAnalysis (Php/FailingAnalysis ; Internal)
-  * Strpos Too Much (Performances/StrposTooMuch ; Analyze)
   * Typehinted References (Functions/TypehintedReferences ; Analyze)
   * Weak Typing (Classes/WeakType ; Analyze)
+  * strpos() Too Much (Performances/StrposTooMuch ; Analyze)
 
 * 1.2.7
 
@@ -875,7 +875,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Concatenation Interpolation Consistence (Structures/ConcatenationInterpolationFavorite ; Preferences)
   * Could Make A Function (Functions/CouldCentralize ; Analyze, Suggestions)
-  * Courrier Anti-Pattern (Patterns/CourrierAntiPattern ; Appinfo, Appcontent, Dismell)
+  * Courier Anti-Pattern (Patterns/CourrierAntiPattern ; Appinfo, Appcontent, Dismell)
   * DI Cyclic Dependencies (Classes/TypehintCyclicDependencies ; Dismell)
   * Dependency Injection (Patterns/DependencyInjection ; Appinfo)
   * PSR-13 Usage (Psr/Psr13Usage ; Appinfo)
@@ -1179,7 +1179,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constants Usage (Constants/ConstantUsage ; Appinfo)
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
   * Constructors (Classes/Constructor ; Internal)
-  * Continents (Type/Continents ; Inventory)
+  * Continents (Type/Continents ; )
   * Could Be Class Constant (Classes/CouldBeClassConstant ; Codacy, ClassReview)
   * Could Be Static (Structures/CouldBeStatic ; Analyze, OneFile, Codacy, ClassReview)
   * Could Use Alias (Namespaces/CouldUseAlias ; Analyze, OneFile, Codacy)
@@ -2000,6 +2000,7 @@ List of external links mentionned in this documentation.
 * `compact <http://www.php.net/compact>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
+* `Conflict resolution <http://php.net/manual/en/language.oop5.traits.php#language.oop5.traits.conflict>`_
 * `Constant definition <http://php.net/const>`_
 * `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
 * `constant() <http://php.net/constant>`_
@@ -2007,7 +2008,7 @@ List of external links mentionned in this documentation.
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `count <http://php.net/count>`_
-* `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
+* `Courier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://www.php.net/crc32>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
@@ -2159,6 +2160,7 @@ List of external links mentionned in this documentation.
 * `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_
 * `in_array() <http://www.php.net/in_array>`_
 * `include <http://php.net/manual/en/function.include.php>`_
+* `include_once <http://php.net/manual/en/function.include-once.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
 * `instanceof <http://php.net/instanceof>`_
 * `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
@@ -2291,8 +2293,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
@@ -2354,8 +2356,9 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2396,6 +2399,7 @@ List of external links mentionned in this documentation.
 * `unserialize() <http://www.php.net/unserialize>`_
 * `unset <http://php.net/unset>`_
 * `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_
+* `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
@@ -2428,7 +2432,7 @@ List of external links mentionned in this documentation.
 * `Xdebug <https://xdebug.org/>`_
 * `xdiff <http://php.net/manual/en/book.xdiff.php>`_
 * `XHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
-* `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_
+* `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injection>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_

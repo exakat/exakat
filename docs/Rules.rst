@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 08 Jan 2019 10:19:02 +0000
-.. comment: Generation hash : 905616036946a64389bc5f7d65c70edec41e6c64
+.. comment: Generation date : Mon, 14 Jan 2019 14:58:49 +0000
+.. comment: Generation hash : 8efa7ea218b04dd0e7b685c9e106f1091cb80440
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -131,7 +131,7 @@ $this Is Not An Array
 
 `$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable represents the current object and it is not an array. 
 
-This is unless the class (or its parents) has the `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface, or extends ArrayObjec` or `SimpleXMLElement <http://php.net/manual/en/class.simplexmlelement.php>`_.
+This is unless the class (or its parents) has the `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface, or extends `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ or `SimpleXMLElement <http://php.net/manual/en/class.simplexmlelement.php>`_.
 
 .. code-block:: php
 
@@ -657,6 +657,12 @@ Aliases are more likely to be removed later, but they have been around for a lon
 
 See documentation : `List of function aliases <http://php.net/manual/en/aliases.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use PHP recommended functions
+
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Functions/AliasesUsage                                                              |
 +-------------+-------------------------------------------------------------------------------------+
@@ -667,6 +673,8 @@ See documentation : `List of function aliases <http://php.net/manual/en/aliases.
 | Time To Fix | Quick (30 mins)                                                                     |
 +-------------+-------------------------------------------------------------------------------------+
 | ClearPHP    | `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__ |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`cleverstyle-functions-aliasesusage`, :ref:`phpmyadmin-functions-aliasesusage` |
 +-------------+-------------------------------------------------------------------------------------+
 
 
@@ -1942,7 +1950,7 @@ Besides, whenever possible, use `scandir() <http://www.php.net/scandir>`_ instea
 
 Using `opendir() <http://www.php.net/opendir>`_ and a while loop may be even faster. 
 
-This analysis skips `scandir() <http://www.php.net/scandir>`_ and `glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
+This analysis skips `scandir() <http://www.php.net/scandir>`_ and `glob() <http://www.php.net/glob>`_ if they are expliciely configured with flags (aka, sorting is explicitly needed).
 
 `glob() <http://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `scandir() <http://www.php.net/scandir>`_ or `opendir() <http://www.php.net/opendir>`_.
 
@@ -3442,6 +3450,12 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
 
 See also `Closure class <http://php.net/closure>`_ and 
          `Callbacks / Callables <http://php.net/manual/en/language.types.callable.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the closure by a string, with the name of the called function
 
 +-------------+-----------------------------------------+
 | Short name  | Functions/Closure2String                |
@@ -5539,15 +5553,15 @@ See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecatio
 
 
 
-.. _direct-call-to-\_\_clone:
+.. _direct-call-to-\_\_clone():
 
-Direct Call To __clone
-######################
+Direct Call To __clone()
+########################
 
 
 Direct call to magic method `__clone() <http://php.net/manual/en/language.oop5.magic.php>`_ was forbidden. It is allowed since PHP 7.0. 
 
-From the RFC : `Doing calls like $obj->`__clone( <http://php.net/manual/en/language.oop5.magic.php>`_ ) is now allowed. This was the only magic method that had a compile-time check preventing some calls to it, which doesn't make sense. If we allow all other magic methods to be called, there's no reason to forbid this one`.
+From the RFC : ``Doing calls like $obj->`__clone( <http://php.net/manual/en/language.oop5.magic.php>`_ ) is now allowed. This was the only magic method that had a compile-time check preventing some calls to it, which doesn't make sense. If we allow all other magic methods to be called, there's no reason to forbid this one``.
 
 .. code-block:: php
 
@@ -7317,7 +7331,7 @@ Fetch One Row Format
 ####################
 
 
-When reading results with ext/Sqlite3, it is recommended to explicitely request SQLITE3_NUM or SQLITE3_ASSOC, while avoiding the default value and SQLITE3_BOTH.
+When reading results with ext/Sqlite3, it is recommended to explicitly request SQLITE3_NUM or SQLITE3_ASSOC, while avoiding the default value and SQLITE3_BOTH.
 
 .. code-block:: php
 
@@ -9323,6 +9337,7 @@ Inclusion should follow exactly the case of included files and path. This preven
    ?>
 
 
+See also `include_once <http://php.net/manual/en/function.include-once.php>`_, about case sensitivity and inclusions.
 
 
 
@@ -10429,7 +10444,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Change the letter operators to the symbol one : and => &&, or => ||, xor => ^. Review the new expressions as processing order may have changed.
-* Add parenthesis to make sure that the order is the expted one
+* Add parenthesis to make sure that the order is the expected one
 
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Php/LogicalInLetters                                                                              |
@@ -11105,7 +11120,7 @@ Methodcall On New
 #################
 
 
-It is possible to call a method right at object instanciation. 
+It is possible to call a method right at object instantiation. 
 
 This syntax was added in PHP 5.4+. Before, this was not possible : the object had to be stored in a variable first.
 
@@ -11783,7 +11798,7 @@ Avoid aliasing the same name with different aliases. This leads to confusion.
    ?>
 
 
-See also `Multiple Alias Definitions`_.
+See also `Namespaces/MultipleAliasDefinition`_.
 
 +-------------+-------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitionPerFile |
@@ -13495,7 +13510,18 @@ This may also come handy when testing.
    ?>
 
 
-127.0.0.1, \:\:1 and \:\:0 are omitted, and not considered as a violation.
+127.0.0.1, \:\:1 and \:\:0 are omitted, and not considered as a violation.à
+
+See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_ and 
+         `Never hard code sensitive information <https://wiki.sei.cmu.edu/confluence/display/java/MSC03-J.+Never+hard+code+sensitive+information>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the hardcoded IP to an external source : environnement variable, configuration file, database.
+* Remove the hardcoded IP and ask for it at execution.
 
 +-------------+---------------------------------+
 | Short name  | Structures/NoHardcodedIp        |
@@ -13753,21 +13779,55 @@ No Net For Xml Load
 ###################
 
 
-Simplexml and ext/DOM load all external entities from the web, by default. This is dangerous, in particular when loading unknown XML code.::
+Simplexml and ext/DOM load all external entities from the web, by default. This is dangerous, in particular when loading unknown XML code.
+
+Look at this XML code below : it is valid. It defines an entity ``xxe``, that is filled with a file, read on the system and base64 encoded.::
 
    
    
-   <!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+   &lt;!DOCTYPE replace [&lt;!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"&gt; ]&gt;
    <replace>&xxe;</replace>
    
    
 
 
+This file could be processed with the following code : note, you can replace 'index.php' in the above entity by any valid filepath. 
+
+.. code-block:: php
+
+   <?php 
+       $dom = new DOMDocument();
+       $dom->loadXML($xml, LIBXML_NOENT | LIBXML_DTDLOAD);
+       $info = simplexml_import_dom($dom);
+       
+       print base64_decode($info[0]);
+   ?>
+ 
+
 Here, PHP tries to load the XML file, finds the entity, then solves the entity by encoding a file called ``index.php``. The source code of the file is not used as data in the XML file. 
 
-See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_, 
+At that point, the example illustrates how a XXE works : by using the XML engine to load external resources, and preprocessing the XML code. in fact, there is only one change to make this XML code arbitrarily injected :::
+
+   
+   
+   &lt;!DOCTYPE replace [&lt;!ENTITY writer SYSTEM https://www.example.com/entities.dtd&gt; ]&gt;
+   <replace>&xxe;</replace>
+   
+   
+
+
+With the above example, the XML code is static (as, it never changes), but the 'xxe' definitions are loaded from a remove website, and are completely under the attacker control.
+
+See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injection>`_, 
          `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
          `Detecting and exploiting XXE in SAML Interfaces <https://web-in-security.blogspot.nl/2014/11/detecting-and-exploiting-xxe-in-saml.html>`_.
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Strip out any entity when using external XML
+* Forbid any network to the XML engine, by configuring the XML engine without network access
 
 +-------------+--------------------------+
 | Short name  | Security/NoNetForXmlLoad |
@@ -13965,7 +14025,7 @@ No Reference For Static Property
 ################################
 
 
-Static properties used to behave independantly when set to a reference value. This was fixed in PHP 7.3. 
+Static properties used to behave independently when set to a reference value. This was fixed in PHP 7.3. 
 
 According to the PHP 7.3 changelog : ``In PHP, static properties are shared between inheriting classes, unless the static property is explicitly overridden in a child class. However, due to an implementation artifact it was possible to separate the static properties by assigning a reference. This loophole has been fixed.``.
 
@@ -14099,7 +14159,7 @@ No Return For Generator
 #######################
 
 
-Return is not allowed in pre PHP 7 generators. They yield a fatal Error.
+Return is not allowed in generator. In PHP versions older than 5.6 and older, they yield a fatal Error.
 
 .. code-block:: php
 
@@ -15010,7 +15070,7 @@ The manual issues a warning about this syntax : ``Old style constructors are DEP
    ?>
 
 
-This is no more the case in PHP 5, which relies on `__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
+This is no more the case in PHP 5, which relies on ``__construct()`` to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
 
 Note that classes with methods bearing the class name, but inside a namespace are not following this convention, as this is not breaking backward compatibility. Those are excluded from the analyze.
 
@@ -15211,6 +15271,14 @@ When the goal is to convert a variable to a string, it is recommended to use the
 
 See also `Strings <http://php.net/manual/en/language.types.string.php>`_ and
          `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the surrounding string, keep the variable (or property...)
+* Include in the string any concatenation that comes unconditionaly after or before
+* Convert the variable to a strign with the (type) operator
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Type/OneVariableStrings                                                           |
@@ -15831,8 +15899,8 @@ Several functions are deprecated in PHP 7.2.
 * `assert() <http://www.php.net/assert>`_ on strings
 * Usage of gmp_random(), `create_function() <http://www.php.net/create_function>`_, `each() <http://www.php.net/each>`_
 * Usage of (unset)
-* Usage of $php_errormsg
-* directive mbstring.func_overload (not supported yet)
+* Usage of ``$php_errormsg``
+* directive ``mbstring.func_overload`` (not supported yet)
 
 Deprecated functions and extensions are reported in a separate analysis.
 
@@ -16789,7 +16857,7 @@ Pre-increment
 #############
 
 
-When possible, use the pre-increment operator (++$i or --$i) instead of the post-increment operator ($i++ or $i--).
+When possible, use the pre-increment operator (``++$i`` or ``--$i``) instead of the post-increment operator (``$i++`` or ``$i--``).
 
 The latter needs an extra memory allocation that costs about 10% of performances. 
 
@@ -16808,7 +16876,7 @@ The latter needs an extra memory allocation that costs about 10% of performances
    ?>
 
 
-This is a micro-optimisation. However, its usage is so widespread, including within loops, that it may eventually be visible. As such, it is recommended to adopt this rule, and only consider changing legacy code as they are refactored for other reasons.
+This is a micro-optimisation. However, its usage is so widespread, including within loops, that it may eventually have an significant impact on execution time. As such, it is recommended to adopt this rule, and only consider changing legacy code as they are refactored for other reasons.
 
 +-------------+-------------------------------------+
 | Short name  | Performances/PrePostIncrement       |
@@ -18483,7 +18551,7 @@ Classes that implements SessionHandlerInterface must also implements SessionUpda
 
 The two extra methods are used to help lazy loading : the first actually checks if a sessionId is available, and the seconds updates the time of last usage of the session data in the session storage. 
 
-This was spotted by Nicolas Grekas, and fixed in Symfony `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_. 
+This was spotted by ``Nicolas Grekas``, and fixed in Symfony `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_. 
 
 .. code-block:: php
 
@@ -18501,7 +18569,8 @@ This was spotted by Nicolas Grekas, and fixed in Symfony `[HttpFoundation] Make 
    ?>
 
 
-See also ` <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Sessions <http://php.net/manual/en/book.session.php>`_.
+See also `Sessions: Improve original RFC about lazy_write <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and
+         the `Sessions <http://php.net/manual/en/book.session.php>`_.
 
 +-------------+---------------------------+
 | Short name  | Security/SessionLazyWrite |
@@ -18802,7 +18871,7 @@ Should Have Destructor
 
 PHP destructors are called when the object has to be destroyed. By default, PHP calls recursively the destructor on internal objects, until everything is unset.
 
-Unsetting objects and resources explicitely in the destructor is a good practice to reduce the amount of memory in use. It helps PHP resource counter to keep the numbers low, and easier to clean. This is a major advantage for long running scripts.
+Unsetting objects and resources explicitly in the destructor is a good practice to reduce the amount of memory in use. It helps PHP resource counter to keep the numbers low, and easier to clean. This is a major advantage for long running scripts.
 
 .. code-block:: php
 
@@ -19118,15 +19187,23 @@ The following functions have related constants that should be used as arguments,
 
 See also `Bitmask Constant Arguments in PHP <https://medium.com/@liamhammett/bitmask-constant-arguments-in-php-cf32bf35c73>`_.
 
-+-------------+------------------------------+
-| Short name  | Functions/ShouldUseConstants |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use PHP native constants whenever possible, for better readability.
+
++-------------+--------------------------------------------+
+| Short name  | Functions/ShouldUseConstants               |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Analyze`                             |
++-------------+--------------------------------------------+
+| Severity    | Minor                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
+| Examples    | :ref:`tine20-functions-shoulduseconstants` |
++-------------+--------------------------------------------+
 
 
 
@@ -20423,54 +20500,6 @@ See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, 
 +-------------+-----------------------------+
 | Time To Fix | Quick (30 mins)             |
 +-------------+-----------------------------+
-
-
-
-.. _strpos-too-much:
-
-Strpos Too Much
-###############
-
-
-Strpos covers the whole string before reporting 0. If the expected string is expected be at the beginning, or a fixed place, it is more stable to use substr() for comparison.
-
-The longer the haystack (the searched string), the more efficient is that trick. The string has to be 10k or more to have impact. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This always reads the same amount of string
-   if (substr($html, 0, 6) === '<html>') {
-   
-   }
-   
-   // When searching for a single character, $string[$position] is even faster
-   if ($html[0] === '<') {
-   
-   }
-   
-   // This is the best way, however the needle is found
-   if (strpos($html, '<html>') > 0) {
-   
-   }
-   
-   // When the search fails, the whole string has been read
-   if (strpos($html, '<html>') === 0) {
-   
-   }
-   
-   ?>
-
-+-------------+----------------------------+
-| Short name  | Performances/StrposTooMuch |
-+-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
 
 
 
@@ -23283,6 +23312,15 @@ Recursive functions, level 1, are detected : they are only reported when a call 
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the function in the code
+* Remove the functions from the code
+
 +-------------+------------------------------+
 | Short name  | Functions/UnusedFunctions    |
 +-------------+------------------------------+
@@ -24419,7 +24457,7 @@ Use PHP7 Encapsed Strings
 
 PHP 7 has optimized the handling of double-quoted strings. In particular, double-quoted strings are much less memory hungry than classic concatenations. 
 
-PHP allocate memory at the end of the double-quoted string, making only one call to the allocator. On the other hand, concatenations are allocated each time they include dynamic content, leading to higher memory consumption. 
+PHP allocates memory at the end of the double-quoted string, making only one call to the allocator. On the other hand, concatenations are allocated each time they include dynamic content, leading to higher memory consumption. 
 
 .. code-block:: php
 
@@ -24440,7 +24478,7 @@ PHP allocate memory at the end of the double-quoted string, making only one call
    ?>
 
 
-Concatenations are still needed with constants, static constants, magic constants, functionstatic properties or static methods. 
+Concatenations are still needed with constants, static constants, magic constants, functions, static properties or static methods. 
 
 See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
 
@@ -25234,7 +25272,9 @@ When the method is the only one bearing a name, and being imported, there is no 
 
 
 
-This code lint but doesn't execute.
+This code lints but doesn't execute.
+
+See also `Conflict resolution <http://php.net/manual/en/language.oop5.traits.php#language.oop5.traits.conflict>`_.
 
 
 
@@ -25731,8 +25771,9 @@ This is probably a development artefact that was forgotten. It is better to remo
    <?php
    
    function foo($a, &$b, &$c) {
-       // $c is passed by reference, but only read. This is useless.
+       // $c is passed by reference, but only read. The reference is useless.
        $b = $c + $a;
+       // The reference is useful for $b
    }
    
    ?>
@@ -26757,7 +26798,7 @@ array_key_exists() Speedup
 
 `isset() <http://www.php.net/isset>`_ is faster for all non-empty values, but is limited when the value is `NULL <http://php.net/manual/en/language.types.null.php>`_ or empty : then, `array_key_exists() <http://www.php.net/array_key_exists>`_ has the good features.
 
-`This change makes `array_key_exists() <http://www.php.net/array_key_exists>`_ actually faster than `isset() <http://www.php.net/isset>`_ by ~25% (tested with GCC 8, -O3, march=native, mtune=native).`.
+``This change makes `array_key_exists() <http://www.php.net/array_key_exists>`_ actually faster than `isset() <http://www.php.net/isset>`_ by ~25% (tested with GCC 8, -O3, march=native, mtune=native).``.
 
 .. code-block:: php
 
@@ -27393,7 +27434,7 @@ To speed up this process, it is recommended to dump the csv to memory first, the
    ?>
 
 
-The speed improvement is significant on small rows, while it may be less significant on largers rows : with more data in the rows, the file buffer may fill up more efficiently. On small rows, the speed gain is up to 7 times. 
+The speed improvement is significant on small rows, while it may be less significant on larger rows : with more data in the rows, the file buffer may fill up more efficiently. On small rows, the speed gain is up to 7 times. 
 
 See also ` `
 
@@ -27890,6 +27931,70 @@ When in doubt about backward compatibility, just drop the typehint. Otherwise, u
 +-------------+-----------------------------+
 | Time To Fix | Slow (1 hour)               |
 +-------------+-----------------------------+
+
+
+
+.. _strpos()-too-much:
+
+strpos() Too Much
+#################
+
+
+`strpos() <http://www.php.net/strpos>`_ covers the whole string before reporting 0. If the expected string is expected be at the beginning, or a fixed place, it is more stable to use substr() for comparison.
+
+The longer the haystack (the searched string), the more efficient is that trick. The string has to be 10k or more to have impact, unless it is in a loop. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This always reads the same amount of string
+   if (substr($html, 0, 6) === '<html>') {
+   
+   }
+   
+   // When searching for a single character, checking with a known position ($string[$position]) is even faster
+   if ($html[0] === '<') {
+   
+   }
+   
+   // With strpos(), the best way is to search for something that exist, and use absence as worst case scenario 
+   if (strpos($html, '<html>') > 0) {
+   
+   } else {
+       // 
+   }
+   
+   // When the search fails, the whole string has been read
+   if (strpos($html, '<html>') === 0) {
+   
+   }
+   
+   ?>
+
+
+This applies to `stripos() <http://www.php.net/stripos>`_ too.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check for presence, and not for absence
+* use substr() and compare the extracted string
+* For single chars, try using the position in the string
+
++-------------+---------------------------------------------+
+| Short name  | Performances/StrposTooMuch                  |
++-------------+---------------------------------------------+
+| Themes      | :ref:`Analyze`                              |
++-------------+---------------------------------------------+
+| Severity    | Minor                                       |
++-------------+---------------------------------------------+
+| Time To Fix | Instant (5 mins)                            |
++-------------+---------------------------------------------+
+| Examples    | :ref:`wordpress-performances-strpostoomuch` |
++-------------+---------------------------------------------+
 
 
 

@@ -446,6 +446,7 @@ Glossary
     + `generator`
 
       + :ref:`Don't Loop On Yield <don't-loop-on-yield>`
+      + :ref:`No Return For Generator <no-return-for-generator>`
 
     + `glob()`
 
@@ -851,12 +852,14 @@ Glossary
     + `stripos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`strpos() Too Much <strpos()-too-much>`
 
     + `strpos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+      + :ref:`strpos() Too Much <strpos()-too-much>`
 
     + `strstr()`
 
@@ -996,7 +999,7 @@ Glossary
 
     + `__clone`
 
-      + :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
+      + :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
     + `__construct`
