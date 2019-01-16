@@ -3,7 +3,7 @@
     <target name="validate" depends="php-syntax-check"/>
 
     <target name="php-syntax-check" unless="php-syntax-check.done" description="Perform syntax check on PHP files">
-        <apply executable="php74" failonerror="true" taskname="lint">
+        <apply executable="php" failonerror="true" taskname="lint">
             <arg value="-l"/>
 
             <fileset dir="${basedir}/library">
