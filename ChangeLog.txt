@@ -1,4 +1,4 @@
-Version 1.6.2 (Silver Headed Gate, coming up)
+Version 1.6.3 (Pāragate, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 1.6.2 (Silver Headed Gate, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.2 (Silver Headed Gate, 2019-01-14)
++ Architecture
+    + Fixed infinite loop when an option missed a value
+    + Produce phpversion in config.ini, but leave it commented
++ Report
+    + Ambassador : colored syntax for visibility report
+    + Ambassador : inventory reports now display number of usages
++ Analyzer
+    + Updated analysis : Added support for PHP 7.2.14
+    + Updated analysis : Avoid Using Class handles \
+    + Updated analysis : Unused Functions works with multiple identical functions
+    + Checked unit tests : 2795 / 2817 test pass (99% pass)
++ Tokenizer
+    + Fixed bug that mixed T_OR and T_XOR
+    + Fixed bug that missed intval for Power
+    + Handles multiple definitions of functions
+    + Removed one Void too many with closing tag
 
 Version 1.6.1 (Golden Light Gate, 2019-01-07)
 + Architecture

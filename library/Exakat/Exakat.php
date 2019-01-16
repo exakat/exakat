@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '1.6.2';
-    const BUILD = 853;
+    const BUILD = 855;
 
     private $gremlin = null;
     private $config = null;
@@ -82,10 +82,10 @@ class Exakat {
                 }
                 
                 $size = file_put_contents("{$config->projects_root}/projects/{$config->project}/dump.zip", $res);
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
-                    unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                if (file_exists("{$config->projects_root}/projects/{$config->project}/dump.sqlite")) {
+                    unlink("{$config->projects_root}/projects/{$config->project}/dump.sqlite");
                 }
-                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
+                shell_exec("cd {$config->projects_root}/projects/{$config->project}; unzip dump.zip && rm dump.zip");
                 display("Fetched\n");
 
                 break;
