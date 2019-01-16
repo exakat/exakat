@@ -1,0 +1,73 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      9
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            8
+          Label : DEFINITION
+            8
+          Label : DEFINITION
+            8
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            7
+          Label : EXTENDS
+            6
+          Label : NAME
+            7
+          Label : PPP
+            8
+            Label : TYPEHINT
+              8
+            Label : PPP
+              9
+              Label : DEFINITION
+                18
+                Label : CLASS
+                  7
+                Label : MEMBER
+                  9
+            Label : PPP
+              11
+          Label : PPP
+            8
+            Label : PPP
+              13
+            Label : TYPEHINT
+              8
+          Label : PPP
+            8
+            Label : PPP
+              15
+            Label : TYPEHINT
+              8
+        Label : EXPRESSION
+          19
+          Label : LEFT
+            18
+            Label : CLASS
+              7
+            Label : MEMBER
+              9
+          Label : RIGHT
+            20
+            Label : NEW
+              6

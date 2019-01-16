@@ -1,0 +1,41 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            6
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            6
+          Label : NAME
+            7
+          Label : PPP
+            7
+            Label : TYPEHINT
+              8
+            Label : PPP
+              9
+            Label : PPP
+              11
+          Label : PPP
+            7
+            Label : PPP
+              13
+            Label : TYPEHINT
+              8
+          Label : PPP
+            7
+            Label : PPP
+              15
+            Label : TYPEHINT
+              8

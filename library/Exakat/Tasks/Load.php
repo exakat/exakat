@@ -2282,7 +2282,30 @@ class Load extends Tasks {
     private function processVar() {
         $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
+        // PHP 7.4 typehint
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                            $this->phptokens::T_STRING,
+                                                            $this->phptokens::T_NAMESPACE))) {
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+        }
+
         $ppp = $this->processSGVariable('Ppp');
+
+        if (isset($typehint)) {
+            $this->addLink($ppp, $typehint, 'TYPEHINT');
+        }
+
         $ppp->visibility = 'none';
         return $ppp;
     }
@@ -2290,8 +2313,32 @@ class Load extends Tasks {
     private function processPublic() {
         $public = $this->processOptions('Public');
 
+        // PHP 7.4 typehint
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                            $this->phptokens::T_STRING,
+                                                            $this->phptokens::T_NAMESPACE))) {
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+            $this->optionsTokens['Typehint'] = $typehint->fullcode;
+        }
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
+
+            if (isset($typehint)) {
+                $this->addLink($ppp, $typehint, 'TYPEHINT');
+            }
+
             $this->popExpression();
             return $ppp;
         } else {
@@ -2302,8 +2349,32 @@ class Load extends Tasks {
     private function processProtected() {
         $protected = $this->processOptions('Protected');
 
+        // PHP 7.4 typehint
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                            $this->phptokens::T_STRING,
+                                                            $this->phptokens::T_NAMESPACE))) {
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+            $this->optionsTokens['Typehint'] = $typehint->fullcode;
+        }
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
+
+            if (isset($typehint)) {
+                $this->addLink($ppp, $typehint, 'TYPEHINT');
+            }
+
             $this->popExpression();
             return $ppp;
         } else {
@@ -2314,9 +2385,33 @@ class Load extends Tasks {
     private function processPrivate() {
         $private = $this->processOptions('Private');
 
+        // PHP 7.4 typehint
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                            $this->phptokens::T_STRING,
+                                                            $this->phptokens::T_NAMESPACE))) {
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+
+            $this->optionsTokens['Typehint'] = $typehint->fullcode;
+        }
+        
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
             $this->popExpression();
+            
+            if (isset($typehint)) {
+                $this->addLink($ppp, $typehint, 'TYPEHINT');
+            }
             return $ppp;
         } else {
             return $private;
@@ -2561,6 +2656,35 @@ class Load extends Tasks {
             $this->pushExpression($name);
 
             return $this->processFunctioncall();
+         } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                                   $this->phptokens::T_STRING,
+                                                                   $this->phptokens::T_NAMESPACE))) {
+            $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
+
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            $this->optionsTokens['Typehint'] = $typehint->fullcode;
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+
+            $static = $this->processSGVariable('Ppp');
+            $this->popExpression();
+
+            if (empty($static->visibility)) {
+                $static->visibility = 'none';
+            }
+
+            $this->addLink($static, $typehint, 'TYPEHINT');
+
+            return $static;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             if (($this->isContext(self::CONTEXT_CLASS) ||
                  $this->isContext(self::CONTEXT_TRAIT)   ) &&
@@ -2569,6 +2693,7 @@ class Load extends Tasks {
                 $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
                 $ppp = $this->processSGVariable('Ppp');
+
                 if (empty($ppp->visibility)) {
                     $ppp->visibility = 'none';
                 }
@@ -5387,7 +5512,7 @@ class Load extends Tasks {
 
     private function addLink(Atom $origin, Atom $destination, $label) {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT))) {
-            throw new LoadError('Undefined link '.$label.'.'.$this->filename.':'.__LINE__);
+            throw new LoadError('Undefined link '.$label.' for atom '.$origin->atom.' : '.$this->filename.':'.$origin->line);
         }
         $o = $origin->atom;
         $d = $destination->atom;
@@ -5420,6 +5545,7 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
+            print_r($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
         }
 
@@ -5784,8 +5910,10 @@ class Load extends Tasks {
                 $atom->visibility = strtolower($option);
             } elseif (in_array($name, array('Final', 'Static', 'Abstract'))) {
                 $atom->{strtolower($name)} = 1;
+            } elseif ($name === 'Typehint') {
+                //Nothing, just 
             } else {
-                throw new LoadError("\nUnknown NAME : $name\n");
+                throw new LoadError("\nUnknown option name : $name\n");
             }
         }
         $this->optionsTokens = array();
