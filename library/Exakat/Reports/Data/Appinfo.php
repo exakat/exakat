@@ -174,6 +174,7 @@ class Appinfo extends Data {
                             'Magic methods'     => 'Classes/MagicMethod',
                             'Cloning'           => 'Classes/CloningUsage',
                             'Dynamic class call'=> 'Classes/VariableClasses',
+                            'Typed properties'  => 'Php/TypedPropertyUsage',
 
                             'PHP 4 constructor' => 'Classes/OldStyleConstructor',
                             'Multiple class in one file' => 'Classes/MultipleClassesInFile',
