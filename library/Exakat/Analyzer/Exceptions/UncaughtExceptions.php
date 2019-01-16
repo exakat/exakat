@@ -31,21 +31,34 @@ class UncaughtExceptions extends Analyzer {
     }
     
     public function analyze() {
-        $caught = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
-        $caught = $caught->toArray();
+        $caughtDirect = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
+        $caught = $caughtDirect->toArray();
 
         if (empty($caught)) {
-            return ;
+            // All of them are uncaught then
+            $this->atomIs('Throw')
+                 ->outIs('THROW');
+            $this->prepareQuery();
+        } else {
+            $this->atomIs('Throw')
+                 ->outIs('THROW')
+                 ->atomIs('New')
+                 ->outIs('NEW')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->has('fullnspath')
+                 ->not(
+                    // Check if any parent is catchable
+                    $this->side()
+                         ->filter(
+                             $this->side()
+                                  ->inIs('DEFINITION')
+                                  ->gotoAllParents(self::INCLUDE_SELF)
+                                  ->fullnspathIs($caught)
+                         )
+                 )
+                 ->back('first');
+            $this->prepareQuery();
         }
-        $this->atomIs('Throw')
-             ->outIs('THROW')
-             ->atomIs('New')
-             ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->has('fullnspath')
-             ->fullnspathIsNot($caught)
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 
