@@ -3,15 +3,16 @@
 // No alias of $_GET/... anywhere
 
 function foo($a) {
+    $a = $_GET['cmd'];
     eval($a);
+}
 
-    eval($_GET['cmd']);
+function foo2($a) {
+    EVAL($a);
     
     $b = $_POST['d'];
-    $c = $_POST['d'];
-
-    print $c;
-    eval($b);
+    $c = $b.' yes '.$a;
+    $d = $a.' yes '.$a;
 }
 
 ?>

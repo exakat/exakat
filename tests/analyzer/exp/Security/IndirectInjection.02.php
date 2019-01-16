@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array(
+$expected     = array('eval($b)',
+                      'print $c',
                      );
 
 $expected_not = array('$a',

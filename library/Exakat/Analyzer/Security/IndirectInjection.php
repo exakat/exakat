@@ -33,26 +33,20 @@ class IndirectInjection extends Analyzer {
     }
     
     public function analyze() {
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer","Security/GPRAliases")
-     .out("ANALYZED")
-     .values("fullcode").unique()
-GREMLIN;
-        $vars = $this->query($query)->toArray();
-        
-        if (empty($vars)) {
-            return;
-        }
-
         // Relayed via variable to sensitive function
-        // $a = $_GET['a']; f($a); function f($a) { exec($a);}
+        //  function f() {  $a = $_GET['a'];exec($a);}
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->_as('result')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
-             ->codeIs($vars, true)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
              ->back('first')
 
              ->functionDefinition()
@@ -74,10 +68,18 @@ GREMLIN;
              ->back('result');
         $this->prepareQuery();
 
+        //function f() {  $a = $_GET['a'];exec($a);}
+
+
         // $_GET/_POST ... directly as argument of PHP functions
         // $a = $_GET['a']; exec($a);
         $this->atomIs('Variable')
-             ->codeIs($vars, true)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT');
@@ -86,20 +88,46 @@ GREMLIN;
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs($vars, true)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
              ->inIs('CONCAT');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         $this->atomIs('Variablearray')
-             ->codeIs($vars, true)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
              ->inIs('VARIABLE')
              ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
         $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs($vars, true)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
+             ->inIs('SOURCE');
+        $this->prepareQuery();
+
+        // foreach (looping on incoming variables)
+        $this->atomIs(self::$VARIABLES_ALL)
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->analyzerIs('Security/GPRAliases')
+             )
              ->inIs('SOURCE');
         $this->prepareQuery();
 
