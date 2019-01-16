@@ -7,8 +7,9 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class StrposTooMuch extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPerformances_StrposTooMuch01()  { $this->generic_test('Performances/StrposTooMuch.01'); }
+    public function testPerformances_StrposTooMuch02()  { $this->generic_test('Performances/StrposTooMuch.02'); }
 }
 ?>

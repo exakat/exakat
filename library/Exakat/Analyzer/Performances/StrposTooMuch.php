@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class StrposTooMuch extends Analyzer {
     public function analyze() {
         // strpos($a, $b) === 0
-        $this->atomFunctionIs(array('\\strpos', '\\stripos'))
+        $this->atomFunctionIs(array('\\strpos', '\\stripos', '\\strrpos', '\\strripos'))
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
