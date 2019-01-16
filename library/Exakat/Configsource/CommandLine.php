@@ -76,11 +76,10 @@ class CommandLine extends Config {
                                     '-branch'       => 'branch',
                                     '-tag'          => 'tag',
                                     '-remote'       => 'remote',
+                                    '-graphdb'      => 'gremlin',
 
                                     // This one is finally an array
                                     '-c'            => 'configuration',
-
-//                                '-loader'       => 'Neo4jImport',
                                  );
 
     private $commands = array('analyze'       => 1,
@@ -189,6 +188,11 @@ class CommandLine extends Config {
                         } else {
                             $this->config['configuration'][$name] = $value;
                         }
+                        break;
+
+                    case 'graphdb' :
+                        $this->config['gremlin'] = $args[$id + 1];
+                        
                         break;
 
                     default : 

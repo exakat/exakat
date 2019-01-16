@@ -32,7 +32,7 @@ use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
 
-class SplitGraphson {
+class SplitGraphson extends Loader {
     const CSV_SEPARATOR = ',';
 
     private static $count = -1; // id must start at 0 in batch-import
@@ -70,7 +70,7 @@ class SplitGraphson {
         $this->cleanCsv();
     }
     
-    public function __desctruct() {
+    public function __destruct() {
         $this->cleanCsv();
     }
 
@@ -255,7 +255,7 @@ GREMLIN;
         unlink($this->path);
     }
 
-    public function json_encode($object) {
+    private function json_encode($object) {
         // in case the function name is full of non-encodable characters.
         if (isset($object->properties['fullnspath']) && !mb_check_encoding($object->properties['fullnspath'][0]->value, 'UTF-8')) {
             $object->properties['fullnspath'][0]->value = utf8_encode($object->properties['fullnspath'][0]->value);

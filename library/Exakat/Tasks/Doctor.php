@@ -195,7 +195,7 @@ TEXT
                 }
             } else {
                 $folder = '';
-                $graphdb = 'NONE';
+                $graphdb = 'nogremlin';
             }
 
             $ini = str_replace(array('{VERSION}', '{VERSION_PATH}',   '{GRAPHDB}', ";$graphdb", '{GRAPHDB}_path', ),
@@ -232,7 +232,7 @@ TEXT
             $a = rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
         }
 
-        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/") ? 'Yes' : 'No';
+        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/")    ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists("{$this->config->projects_root}/projects/default/") ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists("{$this->config->projects_root}/projects/onepage/") ? 'Yes' : 'No';
 
@@ -269,10 +269,8 @@ TEXT
                 }
             }
             $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->tinkergraph_folder}");
-        } elseif ($graphdb === 'NONE') {
+        } elseif ($graphdb === 'nogremlin') {
             // Nothing to do
-        } else {
-            assert(false, "Checking install with unknown graphdb : '$graphdb'");
         }
     }
     
@@ -368,10 +366,10 @@ TEXT
         } else {
             $stats['version']         = $php->getConfiguration('phpversion');
             $stats['short_open_tags'] = $php->getConfiguration('short_open_tags') ? 'Yes' : 'No';
-            $stats['tokenizer']       = $php->getConfiguration('tokenizer') ? 'Yes' : 'No';
-            $stats['assertions']      = $php->getConfiguration('assertions') ? 'Yes' : 'No';
+            $stats['tokenizer']       = $php->getConfiguration('tokenizer')       ? 'Yes' : 'No';
+            $stats['assertions']      = $php->getConfiguration('assertions')      ? 'Yes' : 'No';
             $stats['memory_limit']    = $php->getConfiguration('memory_limit');
-            $stats['timezone']        = $php->getConfiguration('timezone') ? 'None' : $php->getConfiguration('timezone');
+            $stats['timezone']        = $php->getConfiguration('timezone')        ? 'None' : $php->getConfiguration('timezone');
 
             if (substr($version, 0, 3) != $displayedVersion) {
                 $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';

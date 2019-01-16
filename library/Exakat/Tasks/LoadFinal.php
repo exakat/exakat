@@ -242,9 +242,9 @@ g.V().hasLabel("Functioncall")
      .by("fullnspath")
      .cap('m')
 GREMLIN;
-        $fixed = $this->gremlin->query($query)->toArray()[0];
+        $fixed = $this->gremlin->query($query)->toArray();
         if (!empty($fixed)) {
-            $this->datastore->addRow('functioncalls', $fixed);
+            $this->datastore->addRow('functioncalls', $fixed[0]);
         }
 
         $this->log->log(__METHOD__);

@@ -55,6 +55,7 @@ class Load extends Tasks {
     private $php    = null;
     private $loader = null;
     private $loaderList = array('SplitGraphson',
+                                'None',
                                 );
 
     private $precedence   = null;
@@ -426,13 +427,11 @@ class Load extends Tasks {
         $this->id0->token     = 'T_WHOLE';
 
         // Restart the connexion each time
-        $clientClass = $this->config->loader;
-        if (!in_array($clientClass, $this->loaderList)) {
+        display("Loading with $clientClass\n");
+        $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+        if (!class_exists($clientClass, $this->loaderList)) {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
-
-        display("Loading with $clientClass\n");
-        $clientClass = "\\Exakat\\Loader\\$clientClass";
         $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
 
         // Cleaning the databases

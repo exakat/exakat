@@ -32,15 +32,15 @@ class ExakatConfig extends Config {
     private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
                                'bitsy'       => 'Bitsy',
-                               'janusgraph'  => 'Janusgraph',
+//                               'janusgraph'  => 'Janusgraph',
                                'nogremlin'   => 'NoGremlin',
                                );
 
     private $loaders = array( 'tinkergraph' => 'SplitGraphson',
                               'gsneo4j'     => 'SplitGraphson',
                               'bitsy'       => 'SplitGraphson',
-                              'janusgraph'  => 'Janusgraph',
-                              'nogremlin'   => 'NoLoader',
+//                              'janusgraph'  => 'Janusgraph',
+                              'nogremlin'   => 'None',
                               );
 
     public function __construct($projects_root) {
@@ -87,7 +87,7 @@ class ExakatConfig extends Config {
         // Validation
         if (!isset($this->config['graphdb']) || 
             !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            $this->config['graphdb'] = 'gsneo4j';
+            $this->config['gremlin'] = 'gsneo4j';
         }
 
         $graphdb = $this->config['graphdb'];
