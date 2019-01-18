@@ -127,7 +127,7 @@ class Load extends Tasks {
 
     const NULLABLE         = true;
     const NOT_NULLABLE     = false;
-
+    
     const ELLIPSIS         = true;
     const NOT_ELLIPSIS     = false;
     
@@ -427,9 +427,9 @@ class Load extends Tasks {
         $this->id0->token     = 'T_WHOLE';
 
         // Restart the connexion each time
-        display("Loading with $clientClass\n");
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
-        if (!class_exists($clientClass, $this->loaderList)) {
+        display("Loading with $clientClass\n");
+        if (!class_exists($clientClass)) {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
         $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
