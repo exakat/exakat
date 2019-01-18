@@ -273,9 +273,9 @@ class Ambassador extends Reports {
     }
 
     protected function cleanFolder() {
-        if (file_exists($this->tmpName.'/datas/base.html')) {
-            unlink($this->tmpName.'/datas/base.html');
-            unlink($this->tmpName.'/datas/menu.html');
+        if (file_exists("{$this->tmpName}/datas/base.html")) {
+            unlink("{$this->tmpName}/datas/base.html");
+            unlink("{$this->tmpName}/datas/menu.html");
         }
 
         // Clean final destination
@@ -284,7 +284,7 @@ class Ambassador extends Reports {
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display("{$this->finalName} folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -2312,7 +2312,7 @@ SQL;
     }
 
     protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpCompilation($this->config);
+        $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate(null, Reports::INLINE);
 
         $id = strpos($report, "\n\n\n");
