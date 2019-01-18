@@ -88,6 +88,7 @@ abstract class Reports {
     protected function _generate($analyzerList) {}
 
     public static function getReportClass($report) {
+        $report = ucfirst(strtolower($report));
         return "\\Exakat\\Reports\\$report";
     }
     
