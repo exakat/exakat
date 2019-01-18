@@ -72,6 +72,10 @@ class Project extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
+        if (!file_exists("{$this->config->projects_root}/projects/$project/code")) {
+            throw new NoCodeInProject($this->config->project);
+        }
+
         $sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
         if (file_exists($sqliteFileFinal)) {

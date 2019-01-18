@@ -26,7 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
-use Exakat\Exceptions\NoCodeInProjectas;
+use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
 
 class FindExternalLibraries extends Tasks {

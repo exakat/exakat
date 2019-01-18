@@ -42,7 +42,7 @@ try {
 
     $exakat = new \Exakat\Exakat($graphDB, $config);
     $exakat->execute($config);
-} catch (Exception $e) {
+} catch (\Exception $e) {
     if($isPhar === false){
         print $e->getMessage();
     } else {
