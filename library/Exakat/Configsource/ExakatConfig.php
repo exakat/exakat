@@ -85,12 +85,14 @@ class ExakatConfig extends Config {
         $this->config = $inis;
 
         // Validation
-        if (!isset($this->config['graphdb']) || 
-            !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            $this->config['gremlin'] = 'gsneo4j';
+        if (isset($this->config['graphdb']) && 
+            in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
+            $graphdb = $this->config['graphdb'];
+        } else {
+            $this->config['graphdb'] = 'nogremlin';
+            $this->config['gremlin'] = 'nogremlin';
         }
 
-        $graphdb = $this->config['graphdb'];
         foreach(array_keys($this->gremlins) as $gdb) {
             $folder = "{$gdb}_folder";
             if (isset($this->config[$folder])) {
