@@ -34,7 +34,7 @@ class ImplementedMethodsArePublic extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->goToClass()
-             ->goToAllImplements()
+             ->goToAllImplements(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
