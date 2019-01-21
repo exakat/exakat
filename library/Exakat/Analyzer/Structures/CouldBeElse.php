@@ -57,8 +57,8 @@ class CouldBeElse extends Analyzer {
         $this->prepareQuery();
 
         // if ($a == 1) {}; if ($a != 1) {}
-            $normalize = '.replaceAll("!=", "==")
-                          .replaceAll("<", ">") ';
+        $normalize = '.replaceAll("!=", "==")
+                      .replaceAll("<", ">") ';
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Comparison')
