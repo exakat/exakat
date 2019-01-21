@@ -2895,8 +2895,17 @@ class Load extends Tasks {
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
         } else {
+            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
+
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
                 $this->processNext();
+            }
+
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
             }
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -5178,6 +5187,9 @@ class Load extends Tasks {
             $this->processSemicolon();
         } else {
             $static = $this->processFCOA($static);
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+               $this->processSemicolon();
+            }
         }
 
         return $static;
