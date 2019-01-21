@@ -1028,7 +1028,7 @@ GREMLIN;
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function not($filter, $arguments = array()) {
+    public function not($filter) {
         // use func_get_args here
         if ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
@@ -1040,7 +1040,7 @@ GREMLIN;
         return $this;
     }
 
-    public function filter($filter, $arguments = array()) {
+    public function filter($filter) {
         // use func_get_args here
         if (is_string($filter)) {
             $filterClean = $this->cleanAnalyzerName($filter);
