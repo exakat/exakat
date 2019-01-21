@@ -30,7 +30,14 @@ class EmptyBlocks extends Analyzer {
         // Block with only empty expressions
         $this->atomIs(array('For', 'While', 'Foreach', 'Dowhile', 'Declare', 'Namespace', 'Declare', 'Switch'))
              ->outIs(array('CASES', 'BLOCK'))
-             ->raw('not( where( __.out("EXPRESSION").not(hasLabel("Void")) ) )')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('EXPRESSION')
+                             ->atomIsNot('Void')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
@@ -38,7 +45,14 @@ class EmptyBlocks extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs(array('THEN', 'ELSE'))
              ->atomIs('Sequence')
-             ->raw('not( where( __.out("EXPRESSION").not(hasLabel("Void", "Ifthen")) ) )')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('EXPRESSION')
+                             ->atomIsNot('Void')
+                     )
+             )
              ->back('first')
              ->inIsIE('ELSE');
         $this->prepareQuery();
