@@ -154,29 +154,29 @@ class Appinfo extends Data {
                     ),
 
                     'Classes' => array(
-                            'Classes'           => 'Classes/Classnames',
-                            'Anonymous Classes' => 'Classes/Anonymous',
-                            'Class aliases'     => 'Classes/ClassAliasUsage',
+                            'Classes'                    => 'Classes/Classnames',
+                            'Anonymous Classes'          => 'Classes/Anonymous',
+                            'Class aliases'              => 'Classes/ClassAliasUsage',
 
-                            'Abstract classes'  => 'Classes/Abstractclass',
-                            'Interfaces'        => 'Interfaces/Interfacenames',
-                            'Traits'            => 'Traits/Traitnames',
+                            'Abstract classes'           => 'Classes/Abstractclass',
+                            'Interfaces'                 => 'Interfaces/Interfacenames',
+                            'Traits'                     => 'Traits/Traitnames',
 
-                            'Static properties' => 'Classes/StaticProperties',
+                            'Static properties'          => 'Classes/StaticProperties',
 
-                            'Static methods'    => 'Classes/StaticMethods',
-                            'Abstract methods'  => 'Classes/Abstractmethods',
-                            'Final methods'     => 'Classes/Finalmethod',
+                            'Static methods'             => 'Classes/StaticMethods',
+                            'Abstract methods'           => 'Classes/Abstractmethods',
+                            'Final methods'              => 'Classes/Finalmethod',
 
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Overwritten constants' => 'Classes/OverwrittenConst',
+                            'Class constants'            => 'Classes/ConstantDefinition',
+                            'Overwritten constants'      => 'Classes/OverwrittenConst',
 
-                            'Magic methods'     => 'Classes/MagicMethod',
-                            'Cloning'           => 'Classes/CloningUsage',
-                            'Dynamic class call'=> 'Classes/VariableClasses',
-                            'Typed properties'  => 'Php/TypedPropertyUsage',
+                            'Magic methods'              => 'Classes/MagicMethod',
+                            'Cloning'                    => 'Classes/CloningUsage',
+                            'Dynamic class call'         => 'Classes/VariableClasses',
+                            'Typed properties'           => 'Php/TypedPropertyUsage',
 
-                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'PHP 4 constructor'          => 'Classes/OldStyleConstructor',
                             'Multiple class in one file' => 'Classes/MultipleClassesInFile',
                     ),
 

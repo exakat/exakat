@@ -2072,6 +2072,8 @@ JAVASCRIPTCODE;
         $oldIssues = $this->getIssuesFacetedDb($theme, $sqlite);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
+            // Skip wrong lines, but why ? 
+            if (!($i instanceof \stdClass)) { continue; }
             if (isset($linediff[$i->file]) && $i->line > -1) {
                 foreach($linediff[$i->file] as $line => $diff) {
                     if ($i->line > $line) {

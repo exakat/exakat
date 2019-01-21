@@ -154,10 +154,10 @@ abstract class DSL {
 
     protected function assertAnalyzer($analyzer) {
         if (is_string($analyzer)) {
-            assert(preg_match('#[A-Z]\w+/[A-Z]\w+#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
+            assert(preg_match('#^[A-Z]\w+/[A-Z]\w+$#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
         } elseif (is_array($analyzer)) {
             foreach($analyzer as $a) {
-                assert(preg_match('#[A-Z]\W\w+/[A-Z]\W\w+#', $a) !== false, "Wrong format for Analyzer : $a");
+                assert(preg_match('#^[A-Z]\W\w+/[A-Z]\W\w+$#', $a) !== false, "Wrong format for Analyzer : $a");
             }
         } else {
             assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));
