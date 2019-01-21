@@ -5467,7 +5467,11 @@ class Load extends Tasks {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        if (in_array($this->tokens[$current][0], array($this->phptokens::T_INCLUDE, $this->phptokens::T_INCLUDE_ONCE, $this->phptokens::T_REQUIRE, $this->phptokens::T_REQUIRE_ONCE))) {
+        if (in_array($this->tokens[$current][0], array($this->phptokens::T_INCLUDE, 
+                                                       $this->phptokens::T_INCLUDE_ONCE, 
+                                                       $this->phptokens::T_REQUIRE, 
+                                                       $this->phptokens::T_REQUIRE_ONCE,
+                                                       ))) {
             $functioncall = $this->addAtom('Include');
         } else {
             $functioncall = $this->addAtom('Print');
@@ -5487,7 +5491,7 @@ class Load extends Tasks {
         $this->pushExpression($functioncall);
         $this->runPlugins($functioncall, array('ARGUMENT' => $index));
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
