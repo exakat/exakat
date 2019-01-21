@@ -3,7 +3,7 @@
 Extensions
 ==========
 
-Exakat support a system of extensions, that bring supplementary analysis, categories, data sources, configurations and reports to the current system. Extensions may focus on specific frameworks or platform, or be a simple way to package a predefined set of configuration. 
+Exakat support a system of extensions, that bring extra analysis, categories, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks or platform. They are a simple way to package a predefined set of configurations and analysis. 
 
 Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
 
@@ -36,9 +36,10 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-List of extensions : there are 8 extensions
+List of extensions : there are 9 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
+* :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
@@ -50,7 +51,7 @@ List of extensions : there are 8 extensions
 
 
 
-Extension management
+Extensions management
 ---------------------
 
 The main command to manage the extensions is `extension`. It has 4 different actions : 
@@ -103,6 +104,82 @@ This command uninstalls a previously installed extension. Check with `extension 
 You may also remove the extension manually, by removing them from the extension folder.
 
 
+Extensions usage
+----------------
+
+Exakat extensions bring several resources to enhance the Exakat engine : 
+
+* Analysis
+* Ruleset
+* Reports
+
+Analysis usage 
+###############
+
+Analysis are used individually by using their short name. They may be used with any command that accepts the -P option. 
+
+::
+
+    exakat analyze -p <project_name> -P Drupal/Drupal_8_6
+    exakat dump    -p <project_name> -P Drupal/Drupal_8_6 -u
+    exakat report -p <project_name> -P Drupal/Drupal_8_6 -format Text
+
+
+Analysis may also be configured in the ``config/themes.ini`` file, by including them in any section. 
+
+::
+
+['specialDrupal']
+analyzer[] = 'Drupal/Drupal_8_6';
+analyzer[] = 'Drupal/Drupal_8_5';
+
+
+['specialDrupal2']
+analyzer[] = 'Drupal/Drupal_8_7';
+analyzer[] = 'Drupal/Drupal_8_6';
+analyzer[] = 'Drupal/Drupal_8_5';
+
+
+Then, they may be used with any command that accept the -T option.
+
+::
+
+    exakat analyze -p <project_name> -T specialDrupal
+    exakat dump    -p <project_name> -T specialDrupal -u
+    exakat report -p <project_name> -T specialDrupal -format Text
+    
+
+Rulesets usage 
+##############
+
+Rulesets are predefined sets of analysis. Currently, an extension always provides one ruleset with the name of the extension : it includes all the analysis in this extension.
+
+For example, the ``Drupal`` extension provides a ``Drupal``ruleset.
+
+::
+
+    exakat analyze -p <project_name> -T Drupal
+    exakat dump    -p <project_name> -T Drupal -u
+    exakat report -p <project_name>  -T Drupal -format Text
+
+Reports usage 
+##############
+
+Reports are specific reports for the extension. 
+
+When no specific report is provided by the extension, results are accessible with the universal reports, such as Text. 
+
+::
+
+    #Report of all Drupal issues, in Text format
+    exakat dump    -p <project_name> -T Drupal -format Text
+
+    #Specific report for melis framework
+    exakat report  -p <project_name> -format Melis
+
+
+
+
 
 Details about the extensions
 ----------------------------
@@ -120,8 +197,11 @@ Exakat provides compatibility reports with classes, interfaces and traits from C
 
 
 
-**Home page** : `https://cakephp.org/ <https://cakephp.org/>`_
-**Extension page** : `https://github.com/exakat/Exakat4CakePHP <https://github.com/exakat/Exakat4CakePHP>`_
+* **Home page** : `https://cakephp.org/ <https://cakephp.org/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4CakePHP <https://github.com/exakat/Exakat4CakePHP>`_
+
+Cakephp analysis
+--------------------------------------------------
 
 This extension includes 18 analyzers.
 
@@ -145,6 +225,56 @@ This extension includes 18 analyzers.
 * Deprecated Trait in Cake 3.3 (Cakephp/Cake33DeprecatedTraits)
 
 
+Cakephp rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Cakephp.
+
+
+Cakephp reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
+
+
+
+.. _extension-codeigniter:
+
+Codeigniter
+###########
+
+This is the Code igniter extension for Exakat. 
+
+Code igniter CodeIgniter is a powerful PHP framework with a very small footprint, built for developers who need a simple and elegant toolkit to create full-featured web applications.
+
+
+
+* **Home page** : `https://codeigniter.com/ <https://codeigniter.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Codeigniter <https://github.com/exakat/Exakat4Codeigniter>`_
+
+Codeigniter analysis
+--------------------------------------------------
+
+This extension includes 6 analyzers.
+
+* Codeigniter 2.0 Compatibility (Codeigniter/Codeigniter_2_0)
+* Codeigniter 2.1 Compatibility (Codeigniter/Codeigniter_2_1)
+* Codeigniter 2.2 Compatibility (Codeigniter/Codeigniter_2_2)
+* Codeigniter 3.0 Compatibility (Codeigniter/Codeigniter_3_0)
+* Codeigniter 3.1 Compatibility (Codeigniter/Codeigniter_3_1)
+* Codeigniter Usage (Codeigniter/CodeigniterUsage)
+
+
+Codeigniter rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Codeigniter.
+
+
+Codeigniter reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
 
 
 
@@ -159,8 +289,11 @@ This is the Drupal extension for Exakat.
 
 
 
-**Home page** : `https://www.drupal.org/ <https://www.drupal.org/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Drupal <https://github.com/exakat/Exakat4Drupal>`_
+* **Home page** : `https://www.drupal.org/ <https://www.drupal.org/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Drupal <https://github.com/exakat/Exakat4Drupal>`_
+
+Drupal analysis
+--------------------------------------------------
 
 This extension includes 19 analyzers.
 
@@ -185,6 +318,16 @@ This extension includes 19 analyzers.
 * Drupal Usage (Drupal/DrupalUsage)
 
 
+Drupal rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Drupal.
+
+
+Drupal reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
 
 
 
@@ -201,8 +344,11 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 
 
 
-**Home page** : `https://laravel.com/ <https://laravel.com/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Laravel <https://github.com/exakat/Exakat4Laravel>`_
+* **Home page** : `https://laravel.com/ <https://laravel.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Laravel <https://github.com/exakat/Exakat4Laravel>`_
+
+Laravel analysis
+--------------------------------------------------
 
 This extension includes 9 analyzers.
 
@@ -217,6 +363,16 @@ This extension includes 9 analyzers.
 * {$this->name}Usage (Laravel/LaravelUsage)
 
 
+Laravel rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Laravel.
+
+
+Laravel reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
 
 
 
@@ -231,8 +387,11 @@ Melis is a new generation of Content Management System and eCommerce platform to
 
 
 
-**Home page** : `https://www.melistechnology.com/ <https://www.melistechnology.com/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
+* **Home page** : `https://www.melistechnology.com/ <https://www.melistechnology.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
+
+Melis analysis
+--------------------------------------------------
 
 This extension includes 15 analyzers.
 
@@ -253,6 +412,15 @@ This extension includes 15 analyzers.
 * Undefined Configured Class (Melis/UndefinedConfiguredClass)
 
 
+Melis rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Melis.
+
+
+Melis reports
+--------------------------------------------------
+
 This extension includes one report : Melis.
 
 
@@ -270,8 +438,11 @@ Exakat provides compatibility reports with classes, interfaces and traits from S
 
 
 
-**Home page** : `http://www.slimframework.com/ <http://www.slimframework.com/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Slim <https://github.com/exakat/Exakat4Slim>`_
+* **Home page** : `http://www.slimframework.com/ <http://www.slimframework.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Slim <https://github.com/exakat/Exakat4Slim>`_
+
+Slim analysis
+--------------------------------------------------
 
 This extension includes 26 analyzers.
 
@@ -303,6 +474,15 @@ This extension includes 26 analyzers.
 * Used Routes (Slim/UsedRoutes)
 
 
+Slim rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Slim.
+
+
+Slim reports
+--------------------------------------------------
+
 This extension includes one report : Slim.
 
 
@@ -318,8 +498,11 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 
 
 
-**Home page** : `https://symfony.com/ <https://symfony.com/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
+* **Home page** : `https://symfony.com/ <https://symfony.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Symfony <https://github.com/exakat/Exakat4Symfony>`_
+
+Symfony analysis
+--------------------------------------------------
 
 This extension includes 10 analyzers.
 
@@ -335,6 +518,16 @@ This extension includes 10 analyzers.
 * Symfony Usage (Symfony/SymfonyUsage)
 
 
+Symfony rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Symfony.
+
+
+Symfony reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
 
 
 
@@ -351,8 +544,11 @@ Exakat reports version compatibility with Worpdress 4.0 to 5.0. Exakat also incl
 
 
 
-**Home page** : `https://wordpress.org/ <https://wordpress.org/>`_
-**Extension page** : `https://github.com/exakat/Exakat4Wordpress <https://github.com/exakat/Exakat4Wordpress>`_
+* **Home page** : `https://wordpress.org/ <https://wordpress.org/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Wordpress <https://github.com/exakat/Exakat4Wordpress>`_
+
+Wordpress analysis
+--------------------------------------------------
 
 This extension includes 26 analyzers.
 
@@ -384,6 +580,19 @@ This extension includes 26 analyzers.
 * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot)
 
 
+Wordpress rulesets
+--------------------------------------------------
+
+This extension includes 3 rulesets.
+
+* Wordpress
+* Machinal
+* pasodfuaf
+
+Wordpress reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
 
 
 
@@ -399,8 +608,11 @@ Zend Framework is a collection of professional PHP packages with more than 345 m
 Exakat reports Zend framework compatibility for over 60 components, from versions 2.5 to 3.x. 
 
 
-**Home page** : `https://framework.zend.com/ <https://framework.zend.com/>`_
-**Extension page** : `https://github.com/exakat/Exakat4ZendF <https://github.com/exakat/Exakat4ZendF>`_
+* **Home page** : `https://framework.zend.com/ <https://framework.zend.com/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4ZendF <https://github.com/exakat/Exakat4ZendF>`_
+
+ZendF analysis
+--------------------------------------------------
 
 This extension includes 228 analyzers.
 
@@ -632,6 +844,15 @@ This extension includes 228 analyzers.
 * ZF3 Component (ZendF/Zf3Component)
 * ZF3 Usage Of Deprecated (ZendF/Zf3DeprecatedUsage)
 
+
+ZendF rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : ZendF.
+
+
+ZendF reports
+--------------------------------------------------
 
 This extension includes one report : ZendFramework.
 

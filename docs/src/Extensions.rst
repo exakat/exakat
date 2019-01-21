@@ -3,7 +3,7 @@
 Extensions
 ==========
 
-Exakat support a system of extensions, that bring supplementary analysis, categories, data sources, configurations and reports to the current system. Extensions may focus on specific frameworks or platform, or be a simple way to package a predefined set of configuration. 
+Exakat support a system of extensions, that bring extra analysis, categories, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks or platform. They are a simple way to package a predefined set of configurations and analysis. 
 
 Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
 
@@ -38,7 +38,7 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 {{EXAKAT_EXTENSION_LIST}}
 
-Extension management
+Extensions management
 ---------------------
 
 The main command to manage the extensions is `extension`. It has 4 different actions : 
@@ -89,6 +89,82 @@ This command uninstalls a previously installed extension. Check with `extension 
 
 
 You may also remove the extension manually, by removing them from the extension folder.
+
+
+Extensions usage
+----------------
+
+Exakat extensions bring several resources to enhance the Exakat engine : 
+
+* Analysis
+* Ruleset
+* Reports
+
+Analysis usage 
+###############
+
+Analysis are used individually by using their short name. They may be used with any command that accepts the -P option. 
+
+::
+
+    exakat analyze -p <project_name> -P Drupal/Drupal_8_6
+    exakat dump    -p <project_name> -P Drupal/Drupal_8_6 -u
+    exakat report -p <project_name> -P Drupal/Drupal_8_6 -format Text
+
+
+Analysis may also be configured in the ``config/themes.ini`` file, by including them in any section. 
+
+::
+
+['specialDrupal']
+analyzer[] = 'Drupal/Drupal_8_6';
+analyzer[] = 'Drupal/Drupal_8_5';
+
+
+['specialDrupal2']
+analyzer[] = 'Drupal/Drupal_8_7';
+analyzer[] = 'Drupal/Drupal_8_6';
+analyzer[] = 'Drupal/Drupal_8_5';
+
+
+Then, they may be used with any command that accept the -T option.
+
+::
+
+    exakat analyze -p <project_name> -T specialDrupal
+    exakat dump    -p <project_name> -T specialDrupal -u
+    exakat report -p <project_name> -T specialDrupal -format Text
+    
+
+Rulesets usage 
+##############
+
+Rulesets are predefined sets of analysis. Currently, an extension always provides one ruleset with the name of the extension : it includes all the analysis in this extension.
+
+For example, the ``Drupal`` extension provides a ``Drupal``ruleset.
+
+::
+
+    exakat analyze -p <project_name> -T Drupal
+    exakat dump    -p <project_name> -T Drupal -u
+    exakat report -p <project_name>  -T Drupal -format Text
+
+Reports usage 
+##############
+
+Reports are specific reports for the extension. 
+
+When no specific report is provided by the extension, results are accessible with the universal reports, such as Text. 
+
+::
+
+    #Report of all Drupal issues, in Text format
+    exakat dump    -p <project_name> -T Drupal -format Text
+
+    #Specific report for melis framework
+    exakat report  -p <project_name> -format Melis
+
+
 
 
 

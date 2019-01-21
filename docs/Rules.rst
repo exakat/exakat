@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 Jan 2019 14:58:49 +0000
-.. comment: Generation hash : 8efa7ea218b04dd0e7b685c9e106f1091cb80440
+.. comment: Generation date : Mon, 21 Jan 2019 15:47:07 +0000
+.. comment: Generation hash : 8676f4719b3359fc470171c8efacec5b012f52dd
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -827,7 +827,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-structures-alteringforeachwithoutreference`, :ref:`wordpress-structures-alteringforeachwithoutreference`          |
+| Examples    | :ref:`contao-structures-alteringforeachwithoutreference`, :ref:`wordpress-structures-alteringforeachwithoutreference`             |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -968,9 +968,9 @@ Ambiguous Array Index
 #####################
 
 
-Those indexes are defined with different types, in the same array. 
+Indexes should not be defined with different types than int or string. 
 
-Array indices only accept integers and strings, so any other type of literal is reported. 
+Array indices only accept integers and strings, so any other type of literal is reported. In fact, ``null`` is turned into an empty string, booleans are turned into an integer, and real numbers are truncated (not rounded).
 
 .. code-block:: php
 
@@ -991,21 +991,26 @@ Array indices only accept integers and strings, so any other type of literal is 
 
 They are indeed distinct, but may lead to confusion. 
 
+See also `array <http://php.net/manual/en/language.types.array.php>`_.
+
 
 Suggestions
 ^^^^^^^^^^^
 
-* Only use string or integer as key for an array.
+* Only use string or integer as key for an array. 
+* Use transtyping operator (string) and (int) to make sure of the type
 
-+-------------+----------------------+
-| Short name  | Arrays/AmbiguousKeys |
-+-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
++-------------+----------------------------------------------------------------------------+
+| Short name  | Arrays/AmbiguousKeys                                                       |
++-------------+----------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                             |
++-------------+----------------------------------------------------------------------------+
+| Severity    | Minor                                                                      |
++-------------+----------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                            |
++-------------+----------------------------------------------------------------------------+
+| Examples    | :ref:`prestashop-arrays-ambiguouskeys`, :ref:`mautic-arrays-ambiguouskeys` |
++-------------+----------------------------------------------------------------------------+
 
 
 
@@ -1213,6 +1218,59 @@ See also `assert <http://php.net/assert>`_ and
 +-------------+-------------------------------------------+
 | Time To Fix | Slow (1 hour)                             |
 +-------------+-------------------------------------------+
+
+
+
+.. _assign-and-compare:
+
+Assign And Compare
+##################
+
+
+Assignation has a lower precedence than comparison. As such, the assignation always happens after the comparison. This leads to the comparison being stored in the variable, and not the value being compared.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($id = strpos($string, $needle) !== false) { 
+       // $id now contains a boolean (true or false), but not the position of the $needle.
+   }
+   
+   // probably valid comparison, as $found will end up being a boolean
+   if ($found = strpos($string, $needle) === false) { 
+       doSomething();
+   }
+   
+   // always valid comparison, with parenthesis
+   if (($id = strpos($string, $needle)) !== false) { 
+       // $id now contains a boolean (true or false), but not the position of the $needle.
+   }
+   
+   // Being a lone instruction, this is always valid : there is no double usage with if condition
+   $isFound = strpos($string, $needle) !== false;
+   
+   
+   ?>
+
+
+See also `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------+
+| Short name  | Structures/AssigneAndCompare |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -4262,15 +4320,26 @@ When two if/then structures follow each other, using a condition and its opposit
    
    ?>
 
-+-------------+------------------------+
-| Short name  | Structures/CouldBeElse |
-+-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
-+-------------+------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge the two conditions into one structure
+* Check if the second condition is still applicable
+
++-------------+-------------------------------------------------------------------------------+
+| Short name  | Structures/CouldBeElse                                                        |
++-------------+-------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                |
++-------------+-------------------------------------------------------------------------------+
+| Severity    | Minor                                                                         |
++-------------+-------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                              |
++-------------+-------------------------------------------------------------------------------+
+| Examples    | :ref:`sugarcrm-structures-couldbeelse`, :ref:`openemr-structures-couldbeelse` |
++-------------+-------------------------------------------------------------------------------+
 
 
 
@@ -5855,7 +5924,7 @@ Use ``yield from``, instead of looping on a generator with ``yield``.
    ?>
 
 
-There is a performance gain when delegating, over looping manually on the generator.
+There is a performance gain when delegating, over looping manually on the generator. You may even consider writing the loop to store all values in an array, then ``yield from`` the array.
 
 See also `Generator delegation via yield from <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.from>`_.
 
@@ -5865,15 +5934,17 @@ Suggestions
 
 * Use `yield from` instead of the whole foreach() loop
 
-+-------------+----------------------------+
-| Short name  | Structures/DontLoopOnYield |
-+-------------+----------------------------+
-| Themes      | :ref:`Suggestions`         |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Structures/DontLoopOnYield                                                             |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                                     |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                  |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                        |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-dontlooponyield`, :ref:`tikiwiki-structures-dontlooponyield` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 
@@ -6610,15 +6681,27 @@ It is recommended to remove those blocks, so as to reduce confusion in the code.
    
    ?>
 
-+-------------+------------------------+
-| Short name  | Structures/EmptyBlocks |
-+-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
-+-------------+------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fill the block with a command
+* Fill the block with a comment that explain the situation
+* Remove the block and its commanding operator
+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Structures/EmptyBlocks                                                           |
++-------------+----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                   |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                 |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`cleverstyle-structures-emptyblocks`, :ref:`phpipam-structures-emptyblocks` |
++-------------+----------------------------------------------------------------------------------+
 
 
 
@@ -6681,7 +6764,7 @@ Function or method whose body is empty.
 
 Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
 
-A method is considered empty when it contains nothing, or contains expressions without impact. For example, ``static $x``, or a lone ``return ; ``.
+A method is considered empty when it contains nothing, or contains expressions without impact. 
 
 .. code-block:: php
 
@@ -9210,6 +9293,14 @@ This error is not reported by lint, but is reported at execution time.
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the implemented method public
+
 +-------------+-------------------------------------+
 | Short name  | Classes/ImplementedMethodsArePublic |
 +-------------+-------------------------------------+
@@ -9596,7 +9687,21 @@ Look for injections through indirect usage for GPRC values (`$_GET <http://php.n
    $a = $_GET['a'];
    echo $a;
    
+   function foo($b) {
+       echo $b;
+   }
+   foo($_POST['c']);
+   
    ?>
+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always validate incoming values before using them.
 
 +-------------+----------------------------+
 | Short name  | Security/IndirectInjection |
@@ -14748,6 +14853,8 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                            |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolphin-classes-nonstaticmethodscalledstatic`, :ref:`magento-classes-nonstaticmethodscalledstatic`                   |
++-------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -14990,6 +15097,8 @@ Objects Don't Need References
 
 There is no need to create references for objects, as those are always passed by reference when used as arguments.
 
+Note that when the argument is assigned another value, including another object, then the reference is needed : PHP forgets about reference when they are replaced.
+
 .. code-block:: php
 
    <?php
@@ -15004,6 +15113,12 @@ There is no need to create references for objects, as those are always passed by
        function foo(&$o) {
            $o->name = 'b';
        }
+   
+       
+       // $o is assigned inside the function : it must be called with a &, or the object won't make it out of the foo3 scope
+       function foo3(&$o) {
+           $o = new stdClass;
+       }
        
        $array = array($object);
        foreach($array as &$o) { // No need to make this a reference
@@ -15015,6 +15130,13 @@ There is no need to create references for objects, as those are always passed by
 
 See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the reference
+* Assign the argument with a new value
+
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ObjectReferences                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -15025,6 +15147,8 @@ See also `Passing by reference <http://php.net/manual/en/language.references.pas
 | Time To Fix | Instant (5 mins)                                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`zencart-structures-objectreferences`, :ref:`xoops-structures-objectreferences`                            |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 
 
@@ -16613,6 +16737,29 @@ The new class is : HashContext.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                                                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _php/typedpropertyusage:
+
+Php/TypedPropertyUsage
+######################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/TypedPropertyUsage                                                                                                                                                                                                 |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -21681,7 +21828,15 @@ The following exceptions are thrown in the code, but are never caught.
    ?>
 
 
-Either they will lead to a fatal error, or they have to be caught by a larger application.
+Either they will lead to a Fatal Error, or they have to be caught by an including application. This is a valid behavior for libaries, but is not for a final application.
+
+See also `Structuring PHP Exceptions <https://www.alainschlesser.com/structuring-php-exceptions/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Catch all the exceptions you throw
 
 +-------------+-------------------------------+
 | Short name  | Exceptions/UncaughtExceptions |
@@ -26265,15 +26420,24 @@ This structure is deprecated since PHP 7.2. It may disappear in the future.
 
 See also `PHP RFC: Deprecations for PHP 7.2 : `Each() <http://www.php.net/each>`_ <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
-+-------------+---------------------------------------------------------+
-| Short name  | Structures/WhileListEach                                |
-+-------------+---------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
-+-------------+---------------------------------------------------------+
-| Severity    | Minor                                                   |
-+-------------+---------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                        |
-+-------------+---------------------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change this loop with foreach
+* Change this loop with an array_* function with a callback
+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Structures/WhileListEach                                                         |
++-------------+----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions`                          |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                 |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`openemr-structures-whilelisteach`, :ref:`dolphin-structures-whilelisteach` |
++-------------+----------------------------------------------------------------------------------+
 
 
 

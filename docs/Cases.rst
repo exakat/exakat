@@ -48,6 +48,51 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
 
+Ambiguous Array Index
+=====================
+
+.. _prestashop-arrays-ambiguouskeys:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`ambiguous-array-index`, in src/PrestaShopBundle/Install/Install.php:532. 
+
+Null, as a key, is actually the empty string. 
+
+.. code-block:: php
+
+    $list = array(
+                'products' => _PS_PROD_IMG_DIR_,
+                'categories' => _PS_CAT_IMG_DIR_,
+                'manufacturers' => _PS_MANU_IMG_DIR_,
+                'suppliers' => _PS_SUPP_IMG_DIR_,
+                'stores' => _PS_STORE_IMG_DIR_,
+                null => _PS_IMG_DIR_.'l/', // Little trick to copy images in img/l/ path with all types
+            );
+
+
+--------
+
+
+.. _mautic-arrays-ambiguouskeys:
+
+Mautic
+^^^^^^
+
+:ref:`ambiguous-array-index`, in app/bundles/CoreBundle/Entity/CommonRepository.php:314. 
+
+True is turned into 1 (integer), and false is turned into 0 (integer). 
+
+.. code-block:: php
+
+    foreach ($metadata->getAssociationMappings() as $field => $association) {
+                        if (in_array($association['type'], [ClassMetadataInfo::ONE_TO_ONE, ClassMetadataInfo::MANY_TO_ONE])) {
+                            $baseCols[true][$entityClass][]  = $association['joinColumns'][0]['name'];
+                            $baseCols[false][$entityClass][] = $field;
+                        }
+                    }
+
 error_reporting() With Integers
 ===============================
 
@@ -409,6 +454,43 @@ The initial C is actually a russian C.
 
     $сheckoutMultishippingSuccess
 
+Non Static Methods Called In A Static
+=====================================
+
+.. _dolphin-classes-nonstaticmethodscalledstatic:
+
+Dolphin
+^^^^^^^
+
+:ref:`non-static-methods-called-in-a-static`, in Dolphin-v.7.3.5/xmlrpc/BxDolXMLRPCFriends.php:11. 
+
+getIdByNickname() is indeed defined in the class 'BxDolXMLRPCUtil' and it calls the database. The class relies on functions (not methods) to query the database with the correct connexion. 
+
+.. code-block:: php
+
+    class BxDolXMLRPCFriends
+    {
+        function getFriends($sUser, $sPwd, $sNick, $sLang)
+        {
+            $iIdProfile = BxDolXMLRPCUtil::getIdByNickname ($sNick);
+
+
+--------
+
+
+.. _magento-classes-nonstaticmethodscalledstatic:
+
+Magento
+^^^^^^^
+
+:ref:`non-static-methods-called-in-a-static`, in app/code/core/Mage/Paypal/Model/Payflowlink.php:143. 
+
+Mage_Payment_Model_Method_Abstract is an abstract class : this way, it is not possible to instantiate it and then, access its methods. The class is extended, so it could be called from one of the objects. Although, the troubling part is that isAvailable() uses $this, so it can't be static. 
+
+.. code-block:: php
+
+    Mage_Payment_Model_Method_Abstract::isAvailable($quote)
+
 Multiple Index Definition
 =========================
 
@@ -700,6 +782,70 @@ Notice how $this is tested for existence before using it. It seems strange, at f
             }
             return false;
         }
+
+While(List() = Each())
+======================
+
+.. _openemr-structures-whilelisteach:
+
+OpenEMR
+^^^^^^^
+
+:ref:`while(list()-=-each())`, in library/report.inc:153. 
+
+The first while() is needed, to read the arbitrary long list returned by the SQL query. The second list may be upgraded with a foreach, to read both the key and the value. This is certainly faster to execute and to read.
+
+.. code-block:: php
+
+    function getInsuranceReport($pid, $type = primary)
+    {
+        $sql = select * from insurance_data where pid=? and type=? order by date ASC;
+        $res = sqlStatement($sql, array($pid, $type));
+        while ($list = sqlFetchArray($res)) {
+            while (list($key, $value) = each($list)) {
+                if ($ret[$key]['content'] != $value && $ret[$key]['date'] < $list['date']) {
+                    $ret[$key]['content'] = $value;
+                    $ret[$key]['date'] = $list['date'];
+                }
+            }
+        }
+    
+        return $ret;
+    }
+
+
+--------
+
+
+.. _dolphin-structures-whilelisteach:
+
+Dolphin
+^^^^^^^
+
+:ref:`while(list()-=-each())`, in Dolphin-v.7.3.5/modules/boonex/forum/classes/Forum.php:1875. 
+
+This clever use of while() and list() is actually a foreach($a as $r) (the keys are ignored)
+
+.. code-block:: php
+
+    function getRssUpdatedTopics ()
+        {
+            global $gConf;
+    
+            $this->_rssPrepareConf ();
+    
+            $a = $this->fdb->getRecentTopics (0);
+    
+            $items = '';
+            $lastBuildDate = '';
+            $ui = array();
+            reset ($a);
+            while ( list (,$r) = each ($a) ) {
+                // acquire user info
+                if (!isset($ui[$r['last_post_user']]) && ($aa = $this->_getUserInfoReadyArray ($r['last_post_user'], false)))
+                    $ui[$r['last_post_user']] = $aa;
+    
+                $td = orca_mb_replace('/#/', $r['count_posts'], '[L[# posts]]') . ' &#183; ' . orca_mb_replace('/#/', $ui[$r['last_post_user']]['title'], '[L[last reply by #]]') . ' &#183; ' . $r['cat_name'] . ' &#187; ' . $r['forum_title'];
 
 Several Instructions On The Same Line
 =====================================
@@ -1625,6 +1771,69 @@ Simply calling print once is better than three times. Here too, echo usage would
     			print ' <input type=submit value=.__(Search).>';
     		print </form>;
 
+Objects Don't Need References
+=============================
+
+.. _zencart-structures-objectreferences:
+
+Zencart
+^^^^^^^
+
+:ref:`objects-don't-need-references`, in includes/library/illuminate/support/helpers.php:484. 
+
+No need for & operator when $class is only used for a method call.
+
+.. code-block:: php
+
+    /**
+         * @param $class
+         * @param $eventID
+         * @param array $paramsArray
+         */
+        public function updateNotifyCheckoutflowFinishedManageSuccessOrderLinkEnd(&$class, $eventID, $paramsArray = array())
+        {
+            $class->getView()->getTplVarManager()->se('flag_show_order_link', false);
+        }
+
+
+--------
+
+
+.. _xoops-structures-objectreferences:
+
+XOOPS
+^^^^^
+
+:ref:`objects-don't-need-references`, in htdocs/class/theme_blocks.phps:221. 
+
+Here, $template is modified, when its properties are modified. When only the properties are modified, or read, then & is not necessary.
+
+.. code-block:: php
+
+    public function buildBlock($xobject, &$template)
+        {
+            // The lame type workaround will change
+            // bid is added temporarily as workaround for specific block manipulation
+            $block = array(
+                'id'      => $xobject->getVar('bid'),
+                'module'  => $xobject->getVar('dirname'),
+                'title'   => $xobject->getVar('title'),
+                // 'name'        => strtolower( preg_replace( '/[^0-9a-zA-Z_]/', '', str_replace( ' ', '_', $xobject->getVar( 'name' ) ) ) ),
+                'weight'  => $xobject->getVar('weight'),
+                'lastmod' => $xobject->getVar('last_modified'));
+    
+            $bcachetime = (int)$xobject->getVar('bcachetime');
+            if (empty($bcachetime)) {
+                $template->caching = 0;
+            } else {
+                $template->caching        = 2;
+                $template->cache_lifetime = $bcachetime;
+            }
+            $template->setCompileId($xobject->getVar('dirname', 'n'));
+            $tplName = ($tplName = $xobject->getVar('template')) ? db:$tplName : 'db:system_block_dummy.tpl';
+            $cacheid = $this->generateCacheId('blk_' . $xobject->getVar('bid'));
+    // more code to the end of the method
+
 Useless Global
 ==============
 
@@ -1850,18 +2059,26 @@ This code actually loads the file, join it, then split it again. file() would be
 Altering Foreach Without Reference
 ==================================
 
-.. _wordpress-structures-alteringforeachwithoutreference:
+.. _contao-structures-alteringforeachwithoutreference:
 
-WordPress
-^^^^^^^^^
+Contao
+^^^^^^
 
-:ref:`altering-foreach-without-reference`, in wp-admin/includes/misc.php:74. 
+:ref:`altering-foreach-without-reference`, in core-bundle/src/Resources/contao/classes/Theme.php:613. 
 
-This code actually loads the file, join it, then split it again. file() would be sufficient. 
+$tmp[$kk] is &$vv.
 
 .. code-block:: php
 
-    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+    foreach ($tmp as $kk=>$vv)
+    								{
+    									// Do not use the FilesModel here – tables are locked!
+    									$objFile = $this->Database->prepare(SELECT uuid FROM tl_files WHERE path=?)
+    															  ->limit(1)
+    															  ->execute($this->customizeUploadPath($vv));
+    
+    									$tmp[$kk] = $objFile->uuid;
+    								}
 
 
 --------
@@ -1874,11 +2091,19 @@ WordPress
 
 :ref:`altering-foreach-without-reference`, in wp-admin/includes/misc.php:74. 
 
-This code actually loads the file, join it, then split it again. file() would be sufficient. 
+$ids[$index] is &$rrid. 
 
 .. code-block:: php
 
-    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+    foreach($ids as $index => $rrid)
+                    {
+                        if($rrid == $this->Id)
+                        {
+                            $ids[$index] = $_id;
+                            $write = true;
+                            break;
+                        }
+                    }
 
 Should Use Constants
 ====================
@@ -2809,6 +3034,59 @@ In this code, ``is_object()`` is used to check the status of the order. Possibly
         // more code
     }
 
+Empty Blocks
+============
+
+.. _cleverstyle-structures-emptyblocks:
+
+cleverstyle
+^^^^^^^^^^^
+
+:ref:`empty-blocks`, in modules/Blogs/api/Controller.php:44. 
+
+Else is empty, but commented. 
+
+.. code-block:: php
+
+    public static function posts_get ($Request) {
+    		$id = $Request->route_ids(0);
+    		if ($id) {
+    			$post = Posts::instance()->get($id);
+    			if (!$post) {
+    				throw new ExitException(404);
+    			}
+    			return $post;
+    		} else {
+    			// TODO: implement latest posts
+    		}
+    	}
+
+
+--------
+
+
+.. _phpipam-structures-emptyblocks:
+
+phpipam
+^^^^^^^
+
+:ref:`empty-blocks`, in wp-admin/includes/misc.php:74. 
+
+The ``then`` block is empty and commented : yet, it may have been clearer to make the condition != and omitted the whole empty block.
+
+.. code-block:: php
+
+    /* checks */
+    if($_POST['action'] == delete) {
+    	# no cecks
+    }
+    else {
+    	# remove spaces
+    	$_POST['name'] = trim($_POST['name']);
+    
+    	# length > 4 and < 12
+    	if( (mb_strlen($_POST['name']) < 2) || (mb_strlen($_POST['name']) > 24) ) 	{ $errors[] = _('Name must be between 4 and 24 characters'); }
+
 Multiple Alias Definitions
 ==========================
 
@@ -3678,6 +3956,72 @@ $Xa may only amount to $iX2, though the expression looks weird.
 
     if ( $X > $iX2 ) { $Xa = $X-($X-$iX2); $Ya = $iY1+($X-$iX2); } else { $Xa = $X; $Ya = $iY1; }
 
+Could Be Else
+=============
+
+.. _sugarcrm-structures-couldbeelse:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`could-be-else`, in SugarCE-Full-6.5.26/modules/Emails/ListViewGroup.php:79. 
+
+The first condition makes different checks if 'query' is in $_REQUEST or not. The second only applies to $_REQUEST['query'], as there is no else. There is also no visible sign that the first condition may change $_REQUEST or not
+
+.. code-block:: php
+
+    if(!isset($_REQUEST['query'])){
+    	//_pp('loading: '.$currentModule.'Group');
+    	//_pp($current_user->user_preferences[$currentModule.'GroupQ']);
+    	$storeQuery->loadQuery($currentModule.'Group');
+    	$storeQuery->populateRequest();
+    } else {
+    	//_pp($current_user->user_preferences[$currentModule.'GroupQ']);
+    	//_pp('saving: '.$currentModule.'Group');
+    	$storeQuery->saveFromGet($currentModule.'Group');
+    }
+    
+    if(isset($_REQUEST['query'])) {
+    	// we have a query
+    	if(isset($_REQUEST['email_type']))				$email_type = $_REQUEST['email_type'];
+    	if(isset($_REQUEST['assigned_to']))				$assigned_to = $_REQUEST['assigned_to'];
+    	if(isset($_REQUEST['status']))					$status = $_REQUEST['status'];
+    	// More code
+    }
+
+
+--------
+
+
+.. _openemr-structures-couldbeelse:
+
+OpenEMR
+^^^^^^^
+
+:ref:`could-be-else`, in library/log.inc:653. 
+
+Those two if structure may definitely merged into one single instruction.
+
+.. code-block:: php
+
+    $success = 1;
+        $checksum = ;
+        if ($outcome === false) {
+            $success = 0;
+        }
+    
+        if ($outcome !== false) {
+            // Should use the $statement rather than the processed
+            // variables, which includes the binded stuff. If do
+            // indeed need the binded values, then will need
+            // to include this as a separate array.
+    
+            //error_log(STATEMENT: .$statement,0);
+            //error_log(BINDS: .$processed_binds,0);
+            $checksum = sql_checksum_of_modified_row($statement);
+            //error_log(CHECKSUM: .$checksum,0);
+        }
+
 Next Month Trap
 ===============
 
@@ -4111,7 +4455,7 @@ WordPress
 
 :ref:`strpos()-too-much`, in core/traits/Request/Server.php:127. 
 
-Instead of searching for 'HTTP_', it is faster to compare the first 5 chars to the literal 'HTTP_'. In case of absence, this solution returns faster.
+Instead of searching for ``HTTP_``, it is faster to compare the first 5 chars to the literal ``HTTP_``. In case of absence, this solution returns faster.
 
 .. code-block:: php
 
@@ -5589,5 +5933,51 @@ $_match[3] is actually extracted two preg_match() before : by the time we read i
                 $_block_force = (bool) preg_match('#[\s]force#', $_block_args);
                 $_block_json = (bool) preg_match('#[\s]json=["\']true["\']\W#', $_block_args);
                 $_block_name = !empty($_match[3]) ? trim($_match[3], '\'"') : $_block_default;
+
+Don't Loop On Yield
+===================
+
+.. _dolibarr-structures-dontlooponyield:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`don't-loop-on-yield`, in htdocs/includes/sabre/sabre/dav/lib/DAV/Server.php:912. 
+
+Yield from is a straight replacement here.
+
+.. code-block:: php
+
+    if (($newDepth === self::DEPTH_INFINITY || $newDepth >= 1) && $childNode instanceof ICollection) {
+                    foreach ($this->generatePathNodes($subPropFind) as $subItem) {
+                        yield $subItem;
+                    }
+                }
+
+
+--------
+
+
+.. _tikiwiki-structures-dontlooponyield:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`don't-loop-on-yield`, in htdocs/includes/sabre/sabre/dav/lib/DAV/Server.php:912. 
+
+The replacement with ``yield from``is not straigthforward here. Yield is only called when $user hasn't been ``$done`` : this is a unicity check. So, the double loop may produce a fully merged array, that may be reduced further by array_unique(). The final array, then, can be used with yield from. 
+
+.. code-block:: php
+
+    $done = [];
+    
+    			foreach ($goal['eligible'] as $groupName) {
+    				foreach ($userlib->get_group_users($groupName) as $user) {
+    					if (! isset($done[$user])) {
+    						yield ['user' => $user, 'group' => null];
+    						$done[$user] = true;
+    					}
+    				}
+    			}
 
 

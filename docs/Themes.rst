@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 14 Jan 2019 14:58:49 +0000
-.. comment: Generation hash : 8efa7ea218b04dd0e7b685c9e106f1091cb80440
+.. comment: Generation date : Mon, 21 Jan 2019 15:47:07 +0000
+.. comment: Generation hash : 8676f4719b3359fc470171c8efacec5b012f52dd
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 353 analysis
+Total : 354 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -91,6 +91,7 @@ Total : 353 analysis
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
+* :ref:`Assign And Compare <assign-and-compare>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
@@ -488,7 +489,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 74 analysis
+Total : 75 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -548,6 +549,7 @@ Total : 74 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -570,7 +572,7 @@ Total : 74 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 70 analysis
+Total : 71 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -628,6 +630,7 @@ Total : 70 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -648,7 +651,7 @@ Total : 70 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 62 analysis
+Total : 63 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -699,6 +702,7 @@ Total : 62 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -718,7 +722,7 @@ Total : 62 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 52 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -763,6 +767,7 @@ Total : 51 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -777,7 +782,7 @@ Total : 51 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 44 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -811,6 +816,7 @@ Total : 43 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
@@ -828,7 +834,7 @@ Total : 43 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 28 analysis
+Total : 29 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -853,6 +859,7 @@ Total : 28 analysis
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
@@ -864,7 +871,7 @@ Total : 28 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 21 analysis
+Total : 22 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -884,6 +891,7 @@ Total : 21 analysis
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
@@ -893,7 +901,7 @@ Total : 21 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 8 analysis
+Total : 9 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -902,6 +910,7 @@ Total : 8 analysis
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
+* :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 
 .. _compatibilityphp74:

@@ -975,8 +975,8 @@ GLOSSARY;
             
             if (isset($docs['home_page'])) {
                 $doc .= "\n";
-                $doc .= "**Home page** : `$docs[home_page] <$docs[home_page]>`_\n";
-                $doc .= "**Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
+                $doc .= "* **Home page** : `$docs[home_page] <$docs[home_page]>`_\n";
+                $doc .= "* **Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
                 $doc .= "\n";
             }
         } else {
@@ -984,6 +984,9 @@ GLOSSARY;
         }
 
         $analyzers = parse_ini_file("../Extensions/{$ext->name}/Analyzer/analyzers.ini");
+        $doc .= "{$ext->name} analysis".PHP_EOL;
+        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+        
         $doc .= 'This extension includes '.count($analyzers[$ext->name]).' analyzers.'.PHP_EOL.PHP_EOL;
         $list = array();
         foreach($analyzers[$ext->name] as $analyzer) {
@@ -995,19 +998,42 @@ GLOSSARY;
         $doc .= '* '.implode("\n* ", $list).PHP_EOL.PHP_EOL.PHP_EOL;
         
         // Include other themas than All and $ext->name
-        
+        $doc .= "{$ext->name} rulesets".PHP_EOL;
+        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+
+        $rulesets = parse_ini_file("../Extensions/$ext->name/Analyzer/analyzers.ini", true);
+        unset($rulesets['All']);
+
+        if (empty($rulesets)) {
+            $doc .= 'This extension includes no specific ruleset.'.PHP_EOL;
+        } elseif (count($rulesets) == 1) {
+            $doc .= 'This extension includes one ruleset : '.array_keys($rulesets)[0].'.'.PHP_EOL.PHP_EOL.PHP_EOL;
+        } elseif (count($rulesets) > 1) {
+            $doc .= 'This extension includes '.count($rulesets).' rulesets.'.PHP_EOL.PHP_EOL;
+            foreach($rulesets as $ruleset => $list) {
+                $doc .= "* ".$ruleset.PHP_EOL;
+            }
+            $doc .= PHP_EOL;
+        } // else : no report, no docs.
+
         // Reports
         // Include a presentation of the report : sections, usage. Must be in human/en/Report folder.
         $reports = glob("../Extensions/$ext->name/Reports/*.php");
-        if (count($reports) == 1) {
+
+        $doc .= "{$ext->name} reports".PHP_EOL;
+        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+
+        if (empty($reports)) {
+            $doc .= 'This extension includes no specific report. Use generic reports, like Text to access the results.'.PHP_EOL;
+        } elseif (count($reports) == 1) {
             $doc .= 'This extension includes one report : '.basename($reports[0], '.php').'.'.PHP_EOL;
         } elseif (count($reports) > 1) {
-            $doc .= 'This extension includes '.count($reports).' reports.'.PHP_EOL;
+            $doc .= 'This extension includes '.count($reports).' reports.'.PHP_EOL.PHP_EOL.PHP_EOL;
             foreach($reports as $report) {
                 $doc .= "* ".basename($report, '.php').PHP_EOL;
             }
             $doc .= PHP_EOL;
-        } // else : no report, no docs.
+        } 
 
         $doc .= PHP_EOL.PHP_EOL;
         
