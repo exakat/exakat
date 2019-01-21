@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$b . \' yes \' . $a', 
+$expected     = array('$b . \' yes \' . $a',
                       'eval($a)',
                      );
 

@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('trait emptySelfTrait { /**/ } ', 
-                      'trait emptyTrait { /**/ } ', 
+$expected     = array('trait emptySelfTrait { /**/ } ',
+                      'trait emptyTrait { /**/ } ',
                       'trait emptyTrait2 { /**/ } ',
                      );
 

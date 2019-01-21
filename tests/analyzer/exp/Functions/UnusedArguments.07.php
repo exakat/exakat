@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function __construct($a = 3) { /**/ } ', 
-                      'function __get($a) { /**/ } ', 
+$expected     = array('function __construct($a = 3) { /**/ } ',
+                      'function __get($a) { /**/ } ',
                       'function __set($a, $C) { /**/ } ',
                      );
 

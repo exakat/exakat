@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('round($value, $precision, 3 + 3)', 
+$expected     = array('round($value, $precision, 3 + 3)',
                       'round($value, $precision, function ( ) { /**/ } )',
                      );
 

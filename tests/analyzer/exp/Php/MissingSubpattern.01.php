@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('preg_match(\'/(a)(b)?/\', \'adc\', $r)', 
+$expected     = array('preg_match(\'/(a)(b)?/\', \'adc\', $r)',
                       'preg_match(\'/(a)(b)?d(c)?(d)?/\', \'adc\', $r)',
                      );
 
