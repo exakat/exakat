@@ -30,7 +30,6 @@ class ShouldUseConstants extends Analyzer {
         $functions = $this->loadIni('constant_usage.ini');
         
         // todo : support 0 as a valid value
-        $MAX_LOOPING = self::MAX_LOOPING;
         $authorizedAtoms = array('Logical', 'Addition',
                                  'Identifier',
                                  'Nsname',
