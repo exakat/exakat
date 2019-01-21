@@ -1,8 +1,7 @@
 <?php
 
-$expected     = array('Stdclass &$b',
-                      '\\Stdclass &$b3 = null',
-                      'Stdclass &$b2 = null',
+$expected     = array('function foo2(array &$a2 = array( ), Stdclass &$b2 = null, \Stdclass &$b3 = null, Callable &$c2 = null) ;', 
+                      'function foo(array &$a, Stdclass &$b, Callable &$c) ;',
                      );
 
 $expected_not = array('array &$a',

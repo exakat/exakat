@@ -35,20 +35,33 @@ class ObjectReferences extends Analyzer {
              ->outIs('TYPEHINT')
              ->fullnspathIsNot($scalars)
              ->inIs('TYPEHINT')
-             ->is('reference', true);
+             ->is('reference', true)
+             ->back('first');
         $this->prepareQuery();
 
         // f(&$x) and $x->y();
         // f(&$x) and $x->y;
+        // No assignation with new inside
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'variable') // Avoid &
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('NAME')
+                             ->outIs('DEFINITION')
+                             ->inIs('LEFT')
+                             ->atomIs('Assignation') // any assignation will break the reference 
+                )
+             )
              ->inIs('ARGUMENT')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition(array('Methodcall', 'Member'))
              ->outIs('OBJECT')
-             ->samePropertyAs('code', 'variable');
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
         $this->prepareQuery();
 
         // foreach($a as &$b) { $b->method;}

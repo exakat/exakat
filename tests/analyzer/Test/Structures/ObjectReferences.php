@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class ObjectReferences extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testStructures_ObjectReferences01()  { $this->generic_test('Structures_ObjectReferences.01'); }
     public function testStructures_ObjectReferences02()  { $this->generic_test('Structures_ObjectReferences.02'); }
@@ -16,5 +16,6 @@ class ObjectReferences extends Analyzer {
     public function testStructures_ObjectReferences05()  { $this->generic_test('Structures/ObjectReferences.05'); }
     public function testStructures_ObjectReferences06()  { $this->generic_test('Structures/ObjectReferences.06'); }
     public function testStructures_ObjectReferences07()  { $this->generic_test('Structures/ObjectReferences.07'); }
+    public function testStructures_ObjectReferences08()  { $this->generic_test('Structures/ObjectReferences.08'); }
 }
 ?>
