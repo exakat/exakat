@@ -148,6 +148,8 @@ class Extension extends Tasks {
         sort($list);
     
         print PHP_EOL;
+        printf("+ %-20s %8s %5s\n", 'Extension', 'Version', 'Build');
+        print str_repeat('-', 40).PHP_EOL;
         foreach($list as $l) {
             // drop the .phar
             if (file_exists("phar://{$this->config->dir_root}/ext/$l/config.ini")) {
@@ -157,7 +159,7 @@ class Extension extends Tasks {
                              'build'   => '',
                              );
             }
-            printf("+ %-10s  %5s-%5s\n", substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
+            printf("+ %-20s %8s %5s\n", substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
         }
         
         print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;
