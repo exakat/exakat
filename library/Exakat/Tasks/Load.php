@@ -37,6 +37,7 @@ use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Calls;
+use Exakat\Tasks\Helpers\Context;
 use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tasks\Helpers\Strval;
 use Exakat\Tasks\Helpers\Boolval;
@@ -154,21 +155,9 @@ class Load extends Tasks {
     const STANDALONE_BLOCK         = true;
     const RELATED_BLOCK            = false;
 
-    const CONTEXT_CLASS        = 1;
-    const CONTEXT_INTERFACE    = 2;
-    const CONTEXT_TRAIT        = 3;
-    const CONTEXT_FUNCTION     = 4;
-    const CONTEXT_NEW          = 5;
-    const CONTEXT_NOSEQUENCE   = 6;
-    private $contexts = array(self::CONTEXT_CLASS        => array(0),
-                              self::CONTEXT_INTERFACE    => array(0),
-                              self::CONTEXT_TRAIT        => array(0),
-                              self::CONTEXT_FUNCTION     => array(0),
-                              self::CONTEXT_NEW          => array(0),
-                              self::CONTEXT_NOSEQUENCE   => array(0),
-                         );
+    private $contexts              = null;
 
-    private $optionsTokens = array();
+    private $optionsTokens       = array();
     private $expressions         = array();
     private $atoms               = array();
     private $argumentsId         = array();
@@ -189,6 +178,8 @@ class Load extends Tasks {
         parent::__construct($gremlin, $config, $subtask);
 
         $this->atomGroup = new AtomGroup();
+
+        $this->contexts    = new Context();
 
         $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         if (!$this->php->isValid()) {
@@ -538,24 +529,18 @@ class Load extends Tasks {
         $this->atoms = array($this->id0->id => $this->id0);
         $this->links = array();
 
-        $this->contexts = array(self::CONTEXT_CLASS      => array(0),
-                                self::CONTEXT_INTERFACE  => array(0),
-                                self::CONTEXT_TRAIT      => array(0),
-                                self::CONTEXT_FUNCTION   => array(0),
-                                self::CONTEXT_NEW        => array(0),
-                                self::CONTEXT_NOSEQUENCE => array(0),
-                                );
+        $this->contexts    = new Context();
         $this->expressions = array();
-        $this->uses   = array('function'       => array(),
-                              'staticmethod'   => array(),
-                              'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'staticconstant' => array(),
-                              'property'       => array(),
-                              'staticproperty' => array(),
-                              'const'          => array(),
-                              'define'         => array(),
-                              'class'          => array(),
-                              );
+        $this->uses        = array('function'       => array(),
+                                   'staticmethod'   => array(),
+                                   'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                                   'staticconstant' => array(),
+                                   'property'       => array(),
+                                   'staticproperty' => array(),
+                                   'const'          => array(),
+                                   'define'         => array(),
+                                   'class'          => array(),
+                                   );
 
         $this->currentMethod           = array();
         $this->currentFunction         = array();
@@ -964,7 +949,7 @@ class Load extends Tasks {
         $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -989,7 +974,7 @@ class Load extends Tasks {
         $variable->token     = $this->getToken($this->tokens[$current][0]);
         $variable->enclosing = self::ENCLOSING;
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -1098,11 +1083,11 @@ class Load extends Tasks {
     private function processFunction() {
         $current = $this->id;
         
-        if (($this->isContext(self::CONTEXT_CLASS) ||
-             $this->isContext(self::CONTEXT_TRAIT) ||
-             $this->isContext(self::CONTEXT_INTERFACE)) &&
+        if (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
+             $this->contexts->isContext(Context::CONTEXT_TRAIT) ||
+             $this->contexts->isContext(Context::CONTEXT_INTERFACE)) &&
              
-             !$this->isContext(self::CONTEXT_FUNCTION)) {
+             !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
                          array('__construct',
                                '__destruct',
@@ -1132,8 +1117,8 @@ class Load extends Tasks {
             $atom = 'Function';
         }
 
-        $this->nestContext(self::CONTEXT_CLASS);
-        $this->nestContext(self::CONTEXT_FUNCTION);
+        $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
 
         $previousContextVariables = $this->currentVariables;
         $this->currentVariables = array();
@@ -1249,8 +1234,8 @@ class Load extends Tasks {
                                 (isset($returnType) ? ' : '.($function->nullable ? '?' : '').$returnType->fullcode : '').
                                 $blockFullcode;
 
-        $this->exitContext(self::CONTEXT_CLASS);
-        $this->exitContext(self::CONTEXT_FUNCTION);
+        $this->contexts->exitContext(Context::CONTEXT_CLASS);
+        $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
         $this->runPlugins($function, array('BLOCK' => $block));
 
         array_pop($this->currentFunction);
@@ -1297,7 +1282,7 @@ class Load extends Tasks {
         $current = $this->id;
         $trait = $this->addAtom('Trait');
         $this->currentClassTrait[] = $trait;
-        $this->toggleContext(self::CONTEXT_TRAIT);
+        $this->contexts->toggleContext(Context::CONTEXT_TRAIT);
 
         $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($trait, $name, 'NAME');
@@ -1319,7 +1304,7 @@ class Load extends Tasks {
         $this->pushExpression($trait);
         $this->processSemicolon();
 
-        $this->toggleContext(self::CONTEXT_TRAIT);
+        $this->contexts->toggleContext(Context::CONTEXT_TRAIT);
 
         array_pop($this->currentClassTrait);
 
@@ -1330,7 +1315,7 @@ class Load extends Tasks {
         $current = $this->id;
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
-        $this->toggleContext(self::CONTEXT_INTERFACE);
+        $this->contexts->toggleContext(Context::CONTEXT_INTERFACE);
 
         $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($interface, $name, 'NAME');
@@ -1370,7 +1355,7 @@ class Load extends Tasks {
         $this->pushExpression($interface);
         $this->processSemicolon();
 
-        $this->toggleContext(self::CONTEXT_INTERFACE);
+        $this->contexts->toggleContext(Context::CONTEXT_INTERFACE);
         array_pop($this->currentClassTrait);
 
         return $interface;
@@ -1497,9 +1482,9 @@ class Load extends Tasks {
         $fullcode = $this->setOptions($class);
 
         $this->currentClassTrait[] = $class;
-        $this->nestContext(self::CONTEXT_CLASS);
-        $this->toggleContext(self::CONTEXT_CLASS);
-        $this->nestContext(self::CONTEXT_FUNCTION);
+        $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->toggleContext(Context::CONTEXT_CLASS);
+        $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
 
         $previousContextVariables = $this->currentVariables;
         $this->currentVariables = array();
@@ -1553,8 +1538,8 @@ class Load extends Tasks {
             $this->processSemicolon();
         }
 
-        $this->exitContext(self::CONTEXT_CLASS);
-        $this->exitContext(self::CONTEXT_FUNCTION);
+        $this->contexts->exitContext(Context::CONTEXT_CLASS);
+        $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         array_pop($this->currentClassTrait);
         if (isset($isExtended)) {
@@ -1693,9 +1678,9 @@ class Load extends Tasks {
         $echo = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $current = $this->id;
 
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
         $functioncall = $this->processArguments('Echo',
                                                 array($this->phptokens::T_SEMICOLON,
@@ -1706,7 +1691,7 @@ class Load extends Tasks {
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         //processArguments goes too far, up to ;
@@ -1766,7 +1751,7 @@ class Load extends Tasks {
             $nsname = $this->addAtom('Nsname');
             $nsname->token      = 'T_ARRAY';
             $nsname->fullnspath = '\\array';
-        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $nsname = $this->addAtom('Newcall');
             $nsname->token     = 'T_STRING';
         } else {
@@ -1842,7 +1827,7 @@ class Load extends Tasks {
             $nsname->aliased    = $aliased;
 
             $this->calls->addCall('class', $fullnspath, $nsname);
-        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
@@ -2062,8 +2047,8 @@ class Load extends Tasks {
         $current = $this->id;
         $argumentsId = array();
 
-        $this->nestContext(self::CONTEXT_NEW);
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $fullcode = array();
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
@@ -2163,8 +2148,8 @@ class Load extends Tasks {
             $this->runPlugins($arguments, $argumentsList);
         }
 
-        $this->exitContext(self::CONTEXT_NOSEQUENCE);
-        $this->exitContext(self::CONTEXT_NEW);
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->exitContext(Context::CONTEXT_NEW);
 
         return $arguments;
     }
@@ -2234,8 +2219,8 @@ class Load extends Tasks {
 
             $this->addLink($const, $def, 'CONST');
 
-            if ($this->isContext(self::CONTEXT_CLASS) ||
-                $this->isContext(self::CONTEXT_INTERFACE)   ) {
+            if ($this->contexts->isContext(Context::CONTEXT_CLASS) ||
+                $this->contexts->isContext(Context::CONTEXT_INTERFACE)   ) {
                 $this->calls->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullcode, $def);
             } else {
                 $this->calls->addDefinition('const', $fullnspath, $def);
@@ -2411,7 +2396,7 @@ class Load extends Tasks {
         ++$this->id; // Skipping the name, set on (
         $current = $this->id;
 
-        if ($this->isContext(self::CONTEXT_NEW)) {
+        if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
             if (strtolower($name->code) === '\\define') {
@@ -2491,7 +2476,7 @@ class Load extends Tasks {
 
         if ( $functioncall->atom === 'Methodcallname') {
             // Nothing, really. in case of A::b()()
-        } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
+        } elseif ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG &&
                    $getFullnspath === self::WITH_FULLNSPATH ) {
              $this->processSemicolon();
@@ -2533,7 +2518,7 @@ class Load extends Tasks {
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->noDelimiter = '';
-        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $string = $this->addAtom('Newcall');
         } else {
             $string = $this->addAtom('Identifier');
@@ -2575,7 +2560,7 @@ class Load extends Tasks {
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $string = $this->processFCOA($string);
@@ -2600,7 +2585,7 @@ class Load extends Tasks {
             $this->pushExpression($plusplus);
             $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
             
@@ -2611,7 +2596,7 @@ class Load extends Tasks {
             $operator = $this->popExpression();
             $this->pushExpression($operator);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
 
@@ -2674,9 +2659,9 @@ class Load extends Tasks {
 
             return $static;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            if (($this->isContext(self::CONTEXT_CLASS) ||
-                 $this->isContext(self::CONTEXT_TRAIT)   ) &&
-                !$this->isContext(self::CONTEXT_FUNCTION)) {
+            if (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
+                 $this->contexts->isContext(Context::CONTEXT_TRAIT)   ) &&
+                !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
                 // something like public static
                 $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
@@ -2691,7 +2676,7 @@ class Load extends Tasks {
             } else {
                 return $this->processStaticVariable();
             }
-        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             // new static;
             $name = $this->addAtom('Newcall');
             $name->code       = $this->tokens[$this->id][1];
@@ -2803,7 +2788,7 @@ class Load extends Tasks {
         
         $this->pushExpression($static);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -2834,9 +2819,9 @@ class Load extends Tasks {
         }
 
         ++$this->id;
-        if ($this->isContext(self::CONTEXT_NEW)) {
+        if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $resetContext = true;
-            $this->toggleContext(self::CONTEXT_NEW);
+            $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
         do {
             $this->processNext();
@@ -2844,7 +2829,7 @@ class Load extends Tasks {
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   ))) ;
         if (isset($resetContext)) {
-            $this->toggleContext(self::CONTEXT_NEW);
+            $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
 
         // Skip closing bracket
@@ -2868,7 +2853,7 @@ class Load extends Tasks {
                                           'INDEX'    => $index));
 
         $bracket = $this->processFCOA($bracket);
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         // No check on ; here
@@ -2884,13 +2869,13 @@ class Load extends Tasks {
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
         } else {
-            $this->nestContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
                 $this->processNext();
             }
-            $this->exitContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
         }
@@ -3176,7 +3161,7 @@ class Load extends Tasks {
                                           'BLOCK'     => $block));
         $this->pushExpression($dowhile);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3316,14 +3301,14 @@ class Load extends Tasks {
         $case = $this->addAtom('Case');
         $current = $this->id;
 
-        $this->nestContext();
+        $this->contexts->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON,
                                                                 $this->phptokens::T_SEMICOLON,
                                                                 $this->phptokens::T_CLOSE_TAG,
                                                                 ))) {
             $this->processNext();
         }
-        $this->exitContext();
+        $this->contexts->exitContext();
 
         $item = $this->popExpression();
         $this->addLink($case, $item, 'CASE');
@@ -3538,7 +3523,7 @@ class Load extends Tasks {
         $this->pushExpression($parenthese);
         ++$this->id; // Skipping the )
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $parenthese = $this->processFCOA($parenthese);
@@ -3571,7 +3556,7 @@ class Load extends Tasks {
 
             $this->pushExpression($functioncall);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && in_array($this->tokens[$this->id + 1][0],
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && in_array($this->tokens[$this->id + 1][0],
                                                                          array($this->phptokens::T_CLOSE_TAG,
                                                                                $this->phptokens::T_COMMA,
                                                                               ))
@@ -3612,7 +3597,7 @@ class Load extends Tasks {
             $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
             $this->pushExpression($functioncall);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
             $this->runPlugins($functioncall);
@@ -3665,7 +3650,7 @@ class Load extends Tasks {
 
         $this->pushExpression($array);
         
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $array = $this->processFCOA($array);
@@ -3698,11 +3683,11 @@ class Load extends Tasks {
                 $then = $this->processNextAsIdentifier();
             }
         } else {
-            $this->nestContext();
+            $this->contexts->nestContext();
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON)) ) {
                 $this->processNext();
             }
-            $this->exitContext();
+            $this->contexts->exitContext();
             $then = $this->popExpression();
         }
 
@@ -3726,18 +3711,18 @@ class Load extends Tasks {
             $finals[] = $this->phptokens::T_COLON; // Added from nested Ternary
             $finals[] = $this->phptokens::T_CLOSE_TAG;
     
-            $this->nestContext();
-            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->nestContext();
+            $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
             do {
                 $this->processNext();
             } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
-            $this->exitContext();
+            $this->contexts->exitContext();
             
             $else = $this->popExpression();
         }
@@ -3757,7 +3742,7 @@ class Load extends Tasks {
         
         $this->pushExpression($ternary);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4016,8 +4001,8 @@ class Load extends Tasks {
                 }
                 $this->addLink($use, $as, 'USE');
 
-                if (!$this->isContext(self::CONTEXT_CLASS) &&
-                    !$this->isContext(self::CONTEXT_TRAIT) ) {
+                if (!$this->contexts->isContext(Context::CONTEXT_CLASS) &&
+                    !$this->contexts->isContext(Context::CONTEXT_TRAIT) ) {
                     $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
                 }
 
@@ -4098,8 +4083,8 @@ class Load extends Tasks {
             } else {
                 $this->addLink($use, $namespace, 'USE');
 
-                if (!$this->isContext(self::CONTEXT_CLASS) &&
-                    !$this->isContext(self::CONTEXT_TRAIT) ) {
+                if (!$this->contexts->isContext(Context::CONTEXT_CLASS) &&
+                    !$this->contexts->isContext(Context::CONTEXT_TRAIT) ) {
 
                     $fullnspath = makeFullNsPath($namespace->fullcode);
                     $namespace->fullnspath = $fullnspath;
@@ -4142,7 +4127,7 @@ class Load extends Tasks {
 
         $this->pushExpression($use);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         return $use;
@@ -4230,14 +4215,14 @@ class Load extends Tasks {
             $this->calls->addCall('class', $class->fullnspath, $variable);
         }
         $this->runPlugins($variable);
-        
+
         if (in_array($atom, array('Variable', 'Variableobject', 'Variablearray')) ) {
             if ($this->currentReturn !== null) {
                 $this->addLink($this->currentReturn, $variable, 'RETURNED');
             }
         }
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
              $variable = $this->processFCOA($variable);
@@ -4263,7 +4248,7 @@ class Load extends Tasks {
             return $nsname;
         } elseif (in_array($nsname->atom, array('Nsname', 'Identifier'))) {
 
-            $type = $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const';
+            $type = $this->contexts->isContext(Context::CONTEXT_NEW) ? 'class' : 'const';
             
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, $type);
             $nsname->fullnspath = $fullnspath;
@@ -4297,7 +4282,7 @@ class Load extends Tasks {
         ++$this->id;
         ++$this->id;
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             // Mostly for arrays
@@ -4312,7 +4297,7 @@ class Load extends Tasks {
         $this->pushExpression($integer);
         $this->runPlugins($integer);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -4325,7 +4310,7 @@ class Load extends Tasks {
         // (int) is for loading into the database
         $this->runPlugins($real);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4377,7 +4362,7 @@ class Load extends Tasks {
             }
         }
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $literal = $this->processFCOA($literal);
@@ -4449,12 +4434,12 @@ class Load extends Tasks {
         $current = $this->id;
 
         $operator = $this->addAtom($atom);
-        $this->nestContext();
+        $this->contexts->nestContext();
         // Do while, so that AT least one loop is done.
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals));
-        $this->exitContext();
+        $this->contexts->exitContext();
 
         $operand = $this->popExpression();
         $this->addLink($operator, $operand, $link);
@@ -4467,7 +4452,7 @@ class Load extends Tasks {
         $this->runPlugins($operator, array($link => $operand));
         $this->pushExpression($operator);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4514,16 +4499,16 @@ class Load extends Tasks {
                 $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
             }
 
-            $this->nestContext();
-            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->nestContext();
+            $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
-            $this->exitContext();
+            $this->contexts->exitContext();
 
             $operator = $this->popExpression();
             $this->pushExpression($operator);
@@ -4532,7 +4517,7 @@ class Load extends Tasks {
 
             $this->runPlugins($operator, array('RETURN' => $return) );
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
 
@@ -4545,7 +4530,7 @@ class Load extends Tasks {
         $operator = $this->popExpression();
         $this->pushExpression($operator);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4598,7 +4583,7 @@ class Load extends Tasks {
 
         $this->runPlugins($operator, array('YIELD' => $yieldfrom) );
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4613,7 +4598,7 @@ class Load extends Tasks {
         
         $this->runPlugins($not, array('NOT' => $not));
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -4641,10 +4626,10 @@ class Load extends Tasks {
     }
 
     private function processDollar() {
-        $this->nestContext();
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext();
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
@@ -4669,7 +4654,7 @@ class Load extends Tasks {
             $variable->token    = $this->getToken($this->tokens[$current][0]);
             $this->pushExpression($variable);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             } elseif (!in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
                                                                        $this->phptokens::T_DOUBLE_COLON,
@@ -4684,10 +4669,10 @@ class Load extends Tasks {
         }
 
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
-        $this->exitContext();
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        $this->contexts->exitContext();
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -4742,23 +4727,23 @@ class Load extends Tasks {
     }
 
     private function processNew() {
-        $this->toggleContext(self::CONTEXT_NEW);
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->toggleContext(Context::CONTEXT_NEW);
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
 
-        $this->toggleContext(self::CONTEXT_NEW);
+        $this->contexts->toggleContext(Context::CONTEXT_NEW);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4797,15 +4782,15 @@ class Load extends Tasks {
         $finals[] = '-';
         $finals[] = '+';
         
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals));
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
         $signed = $this->popExpression();
 
@@ -4824,7 +4809,7 @@ class Load extends Tasks {
 
         $this->pushExpression($signed);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         return $signed;
@@ -4847,7 +4832,7 @@ class Load extends Tasks {
         $addition = $this->addAtom('Addition');
         $this->addLink($addition, $left, 'LEFT');
 
-        $this->nestContext();
+        $this->contexts->nestContext();
         do {
             $this->processNext();
 
@@ -4855,7 +4840,7 @@ class Load extends Tasks {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
-        $this->exitContext();
+        $this->contexts->exitContext();
 
         $right = $this->popExpression();
 
@@ -4871,7 +4856,7 @@ class Load extends Tasks {
 
         $this->pushExpression($addition);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -4883,9 +4868,9 @@ class Load extends Tasks {
         $break = $this->addAtom($this->tokens[$this->id][0] === $this->phptokens::T_BREAK ? 'Break' : 'Continue');
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_LNUMBER) {
-            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
 
             ++$this->id;
@@ -4893,7 +4878,7 @@ class Load extends Tasks {
             $this->popExpression();
 
             if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+                $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             }
 
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
@@ -4916,7 +4901,7 @@ class Load extends Tasks {
         $this->runPlugins($break, array($link => $breakLevel));
         $this->pushExpression($break);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4928,8 +4913,8 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $this->nestContext(self::CONTEXT_NEW);
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             $right = $this->processCurlyExpression();
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOLLAR) {
@@ -4959,8 +4944,8 @@ class Load extends Tasks {
             $this->popExpression();
         }
 
-        $this->exitContext(self::CONTEXT_NEW);
-        $this->exitContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->exitContext(Context::CONTEXT_NEW);
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
@@ -5037,7 +5022,7 @@ class Load extends Tasks {
 
         $this->pushExpression($static);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $static = $this->processFCOA($static);
@@ -5053,8 +5038,8 @@ class Load extends Tasks {
         $left = $this->popExpression();
         $this->addLink($operator, $left, $links[0]);
 
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
-        $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         do {
             $right = $this->processNext();
 
@@ -5063,7 +5048,7 @@ class Load extends Tasks {
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
 
-        $this->exitContext();
+        $this->contexts->exitContext();
         $this->popExpression();
 
         $this->addLink($operator, $right, $links[1]);
@@ -5078,7 +5063,7 @@ class Load extends Tasks {
 
         $this->pushExpression($operator);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -5090,8 +5075,8 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $this->nestContext(self::CONTEXT_NEW);
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             $right = $this->processCurlyExpression();
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
@@ -5111,8 +5096,8 @@ class Load extends Tasks {
             $this->popExpression();
         }
 
-        $this->exitContext(self::CONTEXT_NEW);
-        $this->exitContext(self::CONTEXT_NOSEQUENCE);
+        $this->contexts->exitContext(Context::CONTEXT_NEW);
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
         if (in_array($right->atom, array('Variable',
                                          'Array',
@@ -5155,7 +5140,7 @@ class Load extends Tasks {
                                          ));
         $this->pushExpression($static);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $static = $this->processFCOA($static);
@@ -5243,7 +5228,7 @@ class Load extends Tasks {
         $concat[] = $contains;
         $noDelimiter .= $contains->noDelimiter;
 
-        $this->nestContext();
+        $this->contexts->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $id = array_search($this->phptokens::T_REQUIRE, $finals);
         unset($finals[$id]);
@@ -5258,9 +5243,9 @@ class Load extends Tasks {
         $id = array_search($this->phptokens::T_MINUS, $finals);
         unset($finals[$id]);
 
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
@@ -5285,9 +5270,9 @@ class Load extends Tasks {
         $noDelimiter   .= $contains->noDelimiter;
         $contains->rank = ++$rank;
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
-        $this->exitContext();
+        $this->contexts->exitContext();
 
         $concatenation->code        = $this->tokens[$current][1];
         $concatenation->fullcode    = implode(' . ', $fullcode);
@@ -5300,7 +5285,7 @@ class Load extends Tasks {
 
         $this->pushExpression($concatenation);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -5365,7 +5350,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -5423,9 +5408,9 @@ class Load extends Tasks {
     private function processPrint() {
         $current = $this->id;
 
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         $fullcode = array();
@@ -5434,7 +5419,7 @@ class Load extends Tasks {
             $this->processNext();
         }
         if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
         if (in_array($this->tokens[$current][0], array($this->phptokens::T_INCLUDE, 
@@ -5530,12 +5515,12 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            print_r($this->expressions);
+            var_dump($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
         }
 
-        if ($this->contexts[self::CONTEXT_NOSEQUENCE] !== array(0 => 0)) {
-            throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
+        if (($count = $this->contexts->getCount(Context::CONTEXT_NOSEQUENCE)) !== false) {
+            throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is ".$count.PHP_EOL);
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -5797,24 +5782,6 @@ class Load extends Tasks {
                 return array($this->namespace.mb_strtolower($name->fullcode), 0);
             }
         }
-    }
-
-    private function nestContext($context = self::CONTEXT_NOSEQUENCE) {
-        $this->contexts[$context][] = 0;
-    }
-
-    private function exitContext($context = self::CONTEXT_NOSEQUENCE) {
-        array_pop($this->contexts[$context]);
-    }
-
-    private function toggleContext($context) {
-        $toggled = 1 - $this->contexts[$context][count($this->contexts[$context]) - 1];
-        $this->contexts[$context][count($this->contexts[$context]) - 1] = $toggled;
-        return $toggled;
-    }
-
-    private function isContext($context) {
-        return (boolean) $this->contexts[$context][count($this->contexts[$context]) - 1];
     }
 
     private function setNamespace($namespace = 0) {
