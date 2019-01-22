@@ -5841,7 +5841,7 @@ class Load extends Tasks {
 
     private function toggleContext($context) {
         if ($context === self::CONTEXT_NOSEQUENCE) {
-            ++$this->contexts[self::CONTEXT_NOSEQUENCE][count($this->contexts[self::CONTEXT_NOSEQUENCE) - 1];
+            ++$this->contexts[self::CONTEXT_NOSEQUENCE][count($this->contexts[self::CONTEXT_NOSEQUENCE]) - 1];
         } else {
             $this->contexts[$context] = !$this->contexts[$context];
             return $this->contexts[$context];
