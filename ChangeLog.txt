@@ -1,4 +1,4 @@
-Version 1.6.3 (Pāragate, coming up)
+Version 1.6.4 (Parasamgate, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,25 @@ Version 1.6.3 (Pāragate, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.3 (Paragate, 2019-01-21)
++ Architecture
+    + Better presentation for exakat extensions
+    + Added build.xml for Jenkins
+    + Fixed copyright years
++ Report
+    + Ambassador : fixed class name for Phpcompilation
++ Analyzer
+    + New analysis : assign and compare at the same time
+    + Updated analysis : uncaught exceptions now cover parents
+    + Updated analysis : strpos too much is extended to strrpos and strripos
+    + Updated analysis : Refactored Indirect injections for more refined reports
+    + Updated analysis : Empty Block doesn't omit Ifthen anymore
+    + Updated analysis : Implemented methods are public mistook interface methods
+    + Updated analysis : Object Reference omits arguments that are wholly assigned
+    + Checked unit tests : 2808 / 2826 test pass (99% pass)
++ Tokenizer
+    + Added support for PHP 7.4 typed properties (needs PHP 7.4-dev)
 
 Version 1.6.2 (Silver Headed Gate, 2019-01-14)
 + Architecture
