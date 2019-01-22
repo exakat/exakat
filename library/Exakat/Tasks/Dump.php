@@ -1938,7 +1938,7 @@ GREMLIN;
         $values = array();
         foreach($index->toArray() as $change) {
             $values[] = "('$changeType', 
-                          '$change[name]', 
+                          '{$this->sqlite->escapeString($change['name'])}', 
                           '$change[parent]', 
                           '{$this->sqlite->escapeString($change['parentValue'])}', 
                           '{$change['class']}', 
