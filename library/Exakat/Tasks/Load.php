@@ -165,7 +165,7 @@ class Load extends Tasks {
                               self::CONTEXT_TRAIT        => false,
                               self::CONTEXT_FUNCTION     => 0,
                               self::CONTEXT_NEW          => false,
-                              self::CONTEXT_NOSEQUENCE   => 0
+                              self::CONTEXT_NOSEQUENCE   => array(0)
                          );
 
     private $optionsTokens = array();
@@ -543,7 +543,7 @@ class Load extends Tasks {
                                 self::CONTEXT_TRAIT      => false,
                                 self::CONTEXT_FUNCTION   => 0,
                                 self::CONTEXT_NEW        => false,
-                                self::CONTEXT_NOSEQUENCE => 0,
+                                self::CONTEXT_NOSEQUENCE => array(0),
                                 );
         $this->expressions = array();
         $this->uses   = array('function'       => array(),
@@ -2895,18 +2895,11 @@ class Load extends Tasks {
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
         } else {
-            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
-            if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
-            }
-
+            $this->nestContext(self::CONTEXT_NOSEQUENCE);
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
                 $this->processNext();
             }
-
-            if ($noSequence === false) {
-                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
-            }
+            $this->exitContext(self::CONTEXT_NOSEQUENCE);
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
@@ -5060,6 +5053,7 @@ class Load extends Tasks {
             $this->processSemicolon();
         } else {
             $static = $this->processFCOA($static);
+            
         }
 
         return $static;
@@ -5104,8 +5098,7 @@ class Load extends Tasks {
 
         $this->pushExpression($operator);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
-            $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -5564,7 +5557,8 @@ class Load extends Tasks {
             throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
         }
 
-        if (!empty($this->contexts[self::CONTEXT_NOSEQUENCE])) {
+        if ($this->contexts[self::CONTEXT_NOSEQUENCE] !== array(0 => 0)) {
+            print_r($this->contexts);
             throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
         }
 
@@ -5830,20 +5824,36 @@ class Load extends Tasks {
     }
 
     private function nestContext($context = self::CONTEXT_NOSEQUENCE) {
-        ++$this->contexts[$context];
+        if ($context === self::CONTEXT_NOSEQUENCE) {
+            $this->contexts[self::CONTEXT_NOSEQUENCE][] = false;
+        } else {
+            ++$this->contexts[$context];
+        }
     }
 
     private function exitContext($context = self::CONTEXT_NOSEQUENCE) {
-        --$this->contexts[$context];
+        if ($context === self::CONTEXT_NOSEQUENCE) {
+            array_pop($this->contexts[self::CONTEXT_NOSEQUENCE]);
+        } else {
+            --$this->contexts[$context];
+        }
     }
 
     private function toggleContext($context) {
-        $this->contexts[$context] = !$this->contexts[$context];
-        return $this->contexts[$context];
+        if ($context === self::CONTEXT_NOSEQUENCE) {
+            ++$this->contexts[self::CONTEXT_NOSEQUENCE][count($this->contexts[self::CONTEXT_NOSEQUENCE) - 1];
+        } else {
+            $this->contexts[$context] = !$this->contexts[$context];
+            return $this->contexts[$context];
+        }
     }
 
     private function isContext($context) {
-        return (boolean) $this->contexts[$context];
+        if ($context === self::CONTEXT_NOSEQUENCE) {
+            return (boolean) $this->contexts[$context][count($this->contexts[$context]) - 1];
+        } else {
+            return (boolean) $this->contexts[$context];
+        }
     }
 
     private function setNamespace($namespace = 0) {
