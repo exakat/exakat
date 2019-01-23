@@ -24,12 +24,12 @@
 namespace Exakat\Tasks\Helpers;
 
 class Context {
-    const CONTEXT_CLASS        = 1;
-    const CONTEXT_INTERFACE    = 2;
-    const CONTEXT_TRAIT        = 3;
-    const CONTEXT_FUNCTION     = 4;
-    const CONTEXT_NEW          = 5;
-    const CONTEXT_NOSEQUENCE   = 6;
+    const CONTEXT_CLASS        = 'Class';
+    const CONTEXT_INTERFACE    = 'Interface';
+    const CONTEXT_TRAIT        = 'Trait';
+    const CONTEXT_FUNCTION     = 'Function';
+    const CONTEXT_NEW          = 'New';
+    const CONTEXT_NOSEQUENCE   = 'NoSequence';
     private $contexts = array(self::CONTEXT_CLASS        => array(0),
                               self::CONTEXT_INTERFACE    => array(0),
                               self::CONTEXT_TRAIT        => array(0),
