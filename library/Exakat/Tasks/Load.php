@@ -1119,6 +1119,7 @@ class Load extends Tasks {
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
+        $this->contexts->toggleContext(Context::CONTEXT_FUNCTION);
 
         $previousContextVariables = $this->currentVariables;
         $this->currentVariables = array();
