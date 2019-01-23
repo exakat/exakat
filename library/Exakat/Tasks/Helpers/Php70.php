@@ -161,5 +161,7 @@ class Php70 extends Php {
     const T_ELLIPSIS                      = 391;
     const T_DOUBLE_COLON                  = 387;
 
+    const T_COALESCE_EQUAL                = 1000;
+
 }
 ?>

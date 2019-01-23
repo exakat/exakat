@@ -111,6 +111,7 @@ class Precedence {
                         'T_SL_EQUAL'                    => 19,
                         'T_SR_EQUAL'                    => 19,
                         'T_XOR_EQUAL'                   => 19,
+                        'T_COALESCE_EQUAL'              => 19,
 
                         'T_LOGICAL_AND'                 => 20, // and
 

@@ -201,6 +201,7 @@ class Load extends Tasks {
                                     $this->phptokens::T_SL_EQUAL,
                                     $this->phptokens::T_SR_EQUAL,
                                     $this->phptokens::T_XOR_EQUAL,
+                                    $this->phptokens::T_COALESCE_EQUAL,
                                    );
         
         // Init all plugins here
@@ -287,7 +288,8 @@ class Load extends Tasks {
             $this->phptokens::T_SL_EQUAL                 => 'processAssignation',
             $this->phptokens::T_SR_EQUAL                 => 'processAssignation',
             $this->phptokens::T_XOR_EQUAL                => 'processAssignation',
-    
+            $this->phptokens::T_COALESCE_EQUAL           => 'processAssignation',
+
             $this->phptokens::T_CONTINUE                 => 'processBreak',
             $this->phptokens::T_BREAK                    => 'processBreak',
     
