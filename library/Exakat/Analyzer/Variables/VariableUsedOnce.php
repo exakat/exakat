@@ -29,6 +29,11 @@ class VariableUsedOnce extends Analyzer {
     public function analyze() {
         //Variables mentionned once in the whole application. Just once.
         $this->atomIs(self::$VARIABLES_USER)
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs(array('NAME', 'USE'))
+             )
              ->groupCount('code')
              ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
         $usedOnce = $this->rawQuery()->toArray();
