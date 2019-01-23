@@ -1118,6 +1118,7 @@ class Load extends Tasks {
         }
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->toggleContext(Context::CONTEXT_CLASS);
         $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
         $this->contexts->toggleContext(Context::CONTEXT_FUNCTION);
 
@@ -1486,6 +1487,8 @@ class Load extends Tasks {
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
         $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
 
         $previousContextVariables = $this->currentVariables;
         $this->currentVariables = array();
@@ -1541,6 +1544,8 @@ class Load extends Tasks {
 
         $this->contexts->exitContext(Context::CONTEXT_CLASS);
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
 
         array_pop($this->currentClassTrait);
         if (isset($isExtended)) {
@@ -2049,6 +2054,7 @@ class Load extends Tasks {
         $argumentsId = array();
 
         $this->contexts->nestContext(Context::CONTEXT_NEW);
+        $this->contexts->toggleContext(Context::CONTEXT_NEW);
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $fullcode = array();
 
