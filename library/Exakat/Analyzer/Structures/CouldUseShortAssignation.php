@@ -35,8 +35,8 @@ class CouldUseShortAssignation extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomInsideExpression('Addition')
-             ->hasNoChildren('Arrayliteral', array( array('LEFT', 'RIGHT')) )
              ->tokenIs('T_PLUS')
+             ->hasNoChildren('Arrayliteral', array( array('LEFT', 'RIGHT')) )
              ->outIsIE(array('LEFT', 'RIGHT', 'CODE'))
              ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
@@ -63,9 +63,11 @@ class CouldUseShortAssignation extends Analyzer {
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->codeIs(array('-', '/', '%', '<<=', '>>=', '**', '&', '^', '|'))
+             ->outIsIE('CODE') // skip ()
+             ->codeIs(array('-', '/', '%', '<<', '>>', '**', '&', '^', '|', '??'))
              ->outIs('LEFT')
-             ->samePropertyAs('fullcode', 'receiver')
+             ->outIsIE('CODE') // skip ()
+             ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -78,7 +80,7 @@ class CouldUseShortAssignation extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Concatenation')
              ->outWithRank('CONCAT', 0)
-             ->samePropertyAs('fullcode', 'receiver')
+             ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }
