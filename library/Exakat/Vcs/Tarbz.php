@@ -31,7 +31,7 @@ class Tarbz extends Vcs {
     
     protected function selfCheck() {
         $res = shell_exec('tar --version 2>&1');
-        if (!preg_match('#\d+\.\d+\.\d+#s', $res)) {
+        if (!preg_match('#\d+\.\d+(\.\d+)?#s', $res)) {
             throw new HelperException('Tar');
         }
 
