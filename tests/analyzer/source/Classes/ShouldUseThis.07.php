@@ -1,11 +1,11 @@
 <?php
 
 class c {
-    function cm () {  }
+    function cm () { return 2; }
 }
 
 trait t {
-    function tm () { }
+    function tm () { return 1; }
 }
 
 interface im {
@@ -13,7 +13,7 @@ interface im {
 }
 
 abstract class ax {
-    function axm () { }
+    function axm () { return 3; }
     abstract function axam ();
 }
 

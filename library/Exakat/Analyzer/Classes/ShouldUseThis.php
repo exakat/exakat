@@ -37,18 +37,34 @@ class ShouldUseThis extends Analyzer {
         $this->atomIs('Method')
              ->isNot('static', true)
              ->isNot('abstract', true)
+             ->not(
+                $this->side()
+                     ->outIs('BLOCK')
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Void')
+             )
              ->hasClassTrait()
              ->analyzerIsNot(array('Classes/MethodIsOverwritten',
-                                   'Classes/UseThis'));
+                                   'Classes/UseThis',
+                                   ));
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
         $this->atomIs('Method')
              ->is('static', true)
              ->isNot('abstract', true)
+             ->not(
+                $this->side()
+                     ->outIs('BLOCK')
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Void')
+             )
              ->hasClassTrait()
              ->analyzerIsNot(array('Classes/MethodIsOverwritten',
-                                   'Classes/UseThis'));
+                                   'Classes/UseThis',
+                                   ));
         $this->prepareQuery();
     }
 }

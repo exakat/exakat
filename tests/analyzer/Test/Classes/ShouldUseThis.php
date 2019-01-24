@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class ShouldUseThis extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testClasses_ShouldUseThis01()  { $this->generic_test('Classes_ShouldUseThis.01'); }
     public function testClasses_ShouldUseThis02()  { $this->generic_test('Classes_ShouldUseThis.02'); }
@@ -19,5 +19,6 @@ class ShouldUseThis extends Analyzer {
     public function testClasses_ShouldUseThis08()  { $this->generic_test('Classes/ShouldUseThis.08'); }
     public function testClasses_ShouldUseThis09()  { $this->generic_test('Classes/ShouldUseThis.09'); }
     public function testClasses_ShouldUseThis10()  { $this->generic_test('Classes/ShouldUseThis.10'); }
+    public function testClasses_ShouldUseThis11()  { $this->generic_test('Classes/ShouldUseThis.11'); }
 }
 ?>
