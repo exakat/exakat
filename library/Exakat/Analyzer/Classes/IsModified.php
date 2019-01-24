@@ -54,18 +54,26 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+        $this->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->hasIn('DEFINITION')
+             ->hasNoIn('METHOD') // possibly new too
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
              ->back('first')
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
-             ->is('reference', self::CASE_SENSITIVE)
+             ->is('reference', true)
              ->back('results');
+        $this->prepareQuery();
+
+        // list($a->b)
+        $this->atomIs('List')
+             ->outIs('ARGUMENT')
+             ->atomInside($atoms);
         $this->prepareQuery();
 
         // PHP functions that are references
