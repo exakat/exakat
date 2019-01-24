@@ -80,18 +80,27 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+        $this->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->hasIn('DEFINITION')
+             ->hasNoIn('METHOD') // possibly new too
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
              ->back('first')
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->is('reference', true)
              ->back('results');
+        $this->prepareQuery();
+
+        
+        // arguments : reference variable in a custom function
+        $this->atomIs('List')
+             ->outIs('ARGUMENT')
+             ->atomInside($atoms);
         $this->prepareQuery();
 
         // function/methods definition : all modified by incoming values
@@ -99,7 +108,7 @@ class IsModified extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('NAME')
-             ->atomIs(self::$VARIABLES_ALL);
+             ->atomIs($atoms);
         $this->prepareQuery();
 
         // simple variable + default value : already done in line 18
