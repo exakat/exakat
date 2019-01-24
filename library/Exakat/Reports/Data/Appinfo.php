@@ -52,6 +52,7 @@ class Appinfo extends Data {
                             'Labels'                        => 'Php/Labelnames',
    
                             'Coalesce'                      => 'Php/Coalesce',
+                            'Coalesce Equal'                => 'Php/CoalesceEqual',
                             'Trailing Comma'                => 'Php/TrailingComma',
    
                             'File upload'                   => 'Structures/FileUploadUsage',
