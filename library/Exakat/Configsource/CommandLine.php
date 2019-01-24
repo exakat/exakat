@@ -60,6 +60,7 @@ class CommandLine extends Config {
                                  '-rar'       => 'rar',
                                  '-7z'        => 'sevenz',
                                  '-git'       => 'git',
+                                 '-cvs'       => 'cvs',
                                  );
 
     private $valueOptions   = array('-f'            => 'filename',

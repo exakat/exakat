@@ -81,6 +81,10 @@ abstract class Vcs {
             return Rar::class;
         } elseif ($config->sevenz === true) {
             return SevenZ::class;
+        } elseif ($config->cvs === true) {
+            return Cvs::class;
+        } elseif ($config->none === true) {
+            return EmptyCode::class;
         } elseif ($config->git === true) {
             return Git::class;
         } else {

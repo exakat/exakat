@@ -24,17 +24,18 @@ namespace Exakat\Vcs;
 
 use Exakat\Exceptions\HelperException;
 
-class Svn extends Vcs {
+class Cvs extends Vcs {
     private $info = array();
+    private $exec = 'cvs';
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
     
     protected function selfCheck() {
-        $res = shell_exec('svn --version 2>&1');
-        if (strpos($res, 'svn') === false) {
-            throw new HelperException('SVN');
+        $res = shell_exec($this->exec.' --version 2>&1');
+        if (strpos($res, 'CVS') === false) {
+            throw new HelperException('Cvs');
         }
     }
 
@@ -42,13 +43,13 @@ class Svn extends Vcs {
         $this->check();
 
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; svn checkout --quiet $source code");
+        shell_exec("cd {$this->destinationFull}; {$this->exec} checkout --quiet $source code");
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd $this->destinationFull/code; svn update");
+        $res = shell_exec("cd $this->destinationFull/code; {$this->exec} update");
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }
@@ -61,10 +62,10 @@ class Svn extends Vcs {
     }
 
     private function getInfo() {
-        $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
+        $res = trim(shell_exec("cd {$this->destinationFull}/code; {$this->exec} info"));
         
         if (empty($res)) {
-            $this->info['svn'] = '';
+            $this->info['cvs'] = '';
 
             return;
         }
@@ -75,26 +76,18 @@ class Svn extends Vcs {
     }
 
     public function getBranch() {
-        if (empty($this->info)) {
-            $this->getInfo();
-        }
-
-        return $this->info['Relative URL'] ?? 'trunk';
+        return 'No branch';
     }
 
     public function getRevision() {
-        if (empty($this->info)) {
-            $this->getInfo();
-        }
-
-        return $this->info['Revision'] ?? 'No Revision';
+        return 'No revision';
     }
 
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('svn --version 2>&1'));
-        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
+        $res = trim(shell_exec($this->exec.' --version 2>&1'));
+        if (preg_match('/Concurrent Versions System \(CVS\) ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];
         } else {
@@ -106,7 +99,7 @@ class Svn extends Vcs {
     }
 
     public function getStatus() {
-        $status = array('vcs'       => 'svn',
+        $status = array('vcs'       => 'cvs',
                         'revision'  => $this->getRevision(),
                         'updatable' => false
                        );
@@ -115,7 +108,7 @@ class Svn extends Vcs {
     }
 
     public function getDiffLines($r1, $r2) {
-        display("No support for line diff in SVN.\n");
+        display("No support for line diff in CVS.\n");
         return array();
     }
 
