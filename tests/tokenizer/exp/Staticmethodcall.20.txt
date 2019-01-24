@@ -1,0 +1,41 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            9
+            Label : LEFT
+              6
+              Label : ARGUMENT
+                7
+              Label : NAME
+                6
+            Label : RIGHT
+              10
+          Label : THEN
+            11
+            Label : EXPRESSION
+              12
+            Label : EXPRESSION
+              20
+              Label : CLASS
+                14
+              Label : METHOD
+                16
+                Label : ARGUMENT
+                  18
+                Label : NAME
+                  16
+            Label : EXPRESSION
+              21

@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Assignation extends Tokenizer {
-    /* 35 methods */
+    /* 36 methods */
     public function testAssignation01()  { $this->generic_test('Assignation.01'); }
     public function testAssignation02()  { $this->generic_test('Assignation.02'); }
     public function testAssignation03()  { $this->generic_test('Assignation.03'); }
@@ -43,5 +43,6 @@ class Assignation extends Tokenizer {
     public function testAssignation33()  { $this->generic_test('Assignation.33'); }
     public function testAssignation34()  { $this->generic_test('Assignation.34'); }
     public function testAssignation35()  { $this->generic_test('Assignation.35'); }
+    public function testAssignation36()  { $this->generic_test('Assignation.36'); }
 }
 ?>
