@@ -72,20 +72,26 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs('Functioncall')
-             ->atomIs(self::$STATIC_NAMES)
+        $this->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->hasIn('DEFINITION')
              ->hasNoIn('METHOD') // possibly new too
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
              ->back('first')
-             ->functionDefinition()
-             ->inIs('NAME')
+             ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
-             ->is('reference', self::CASE_SENSITIVE)
+             ->is('reference', true)
              ->back('results');
+        $this->prepareQuery();
+
+        // list($a->b)
+        $this->atomIs('List')
+             ->outIs('ARGUMENT')
+             ->atomInside('Array');
         $this->prepareQuery();
 
         // function/methods definition : all modified by incoming values
