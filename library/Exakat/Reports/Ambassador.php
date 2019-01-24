@@ -3834,6 +3834,7 @@ SQL
         }
 
         $html = $this->getBasedPage('altered_directives');
+        $html = $this->injectBloc($html, 'TITLE', 'Altered PHP directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
         $this->putBasedPage('altered_directives', $html);
     }
