@@ -230,8 +230,9 @@ class Ambassador extends Reports {
             $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
+        $analyserList = $this->themes->getThemeAnalyzers($list);
         $this->generateIssuesEngine('compatibility_issues',
-                                    $this->getIssuesFaceted($list));
+                                    $this->getIssuesFaceted($analyserList));
 
         // Favorites
         $this->generateFavorites();
@@ -4492,7 +4493,7 @@ HTML;
         } elseif ($count === 0) {
             return '<i class="fa fa-check-square-o" style="color: green"></i>';
         } else {
-            return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$analyzer.'">'.$count.' warnings</a>';
+            return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$this->toId($analyzer).'">'.$count.' warnings</a>';
         }
     }
     
