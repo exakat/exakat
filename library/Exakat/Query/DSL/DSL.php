@@ -97,13 +97,17 @@ abstract class DSL {
         }
         return true;
     }
-        
+
+    protected function isVariable($name) {
+        return in_array($name, $this->availableVariables);
+    }
+
     protected function assertVariable($name, $write = self::VARIABLE_READ) {
         if ($write === self::VARIABLE_WRITE) {
-            assert(!in_array($name, $this->availableVariables), "Variable '$name' is already taken");
+            assert(!$this->isVariable($name), "Variable '$name' is already taken");
             $this->availableVariables[] = $name;
         } else {
-            assert(in_array($name, $this->availableVariables), "Variable '$name' is not defined");
+            assert($this->isVariable($name), "Variable '$name' is not defined");
         }
         return true;
     }
@@ -163,16 +167,20 @@ abstract class DSL {
             assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));
         }
     }
+    
+    protected function isProperty($property) {
+        return property_exists(Atom::class, $property) || in_array($property, array('label', 'self'));
+    }
 
     protected function assertProperty($property) {
         if (is_string($property)) {
             assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists(Atom::class, $property) || in_array($property, array('label', 'self')), 'No such property in Atom : "'.$property.'"');
+            assert($this->isProperty($property), 'No such property in Atom : "'.$property.'"');
         } elseif (is_array($property)) {
             $properties = $property;
             foreach($properties as $property) {
                 assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
-                assert(property_exists(Atom::class, $property) || in_array($property, array('label', 'self')), "No such property in Atom : '$property'");
+                assert($this->isProperty($property), "No such property in Atom : '$property'");
             }
         } else {
             assert(false, 'Unsupported type for property : '.gettype($property));

@@ -105,7 +105,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
              ->back('first')
              ->inIs('DEFINITION')
              ->analyzerIsNot('Functions/VariableArguments')
-             ->IsLess('args_min', 'call')
+             ->IsLess('call', 'args_min')
              ->back('first');
         $this->prepareQuery();
 
@@ -115,7 +115,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
              ->back('first')
              ->inIs('DEFINITION')
              ->analyzerIsNot('Functions/VariableArguments')
-             ->isMore('args_max', 'call')
+             ->isMore('call', 'args_max')
              ->back('first');
         $this->prepareQuery();
 

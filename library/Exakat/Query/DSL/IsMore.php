@@ -27,18 +27,33 @@ use Exakat\Query\Query;
 
 class IsMore extends DSL {
     public function run() {
-        list($property, $value) = func_get_args();
+        list($value1, $value2) = func_get_args();
 
-        assert($this->assertProperty($property));
+        $g1 = $this->makeGremlin($value1);
+        $g2 = $this->makeGremlin($value2);
+
+        return new Command("filter{ {$g1} > {$g2};}");
+    }
+    
+    private function makeGremlin($value) {
+        // It is an integer
         if (is_int($value)) {
-            return new Command("filter{ it.get().value(\"{$property}\").toLong() > {$value} }");
-        } elseif (is_string($value)) {
+            return $value;
+        } 
+        
+        // It is a gremlin variable
+        if ($this->isVariable($value)) {
             assert($this->assertVariable($value));
-            // this is a variable name, so it can't use ***
-            return new Command("filter{ it.get().value(\"{$property}\").toLong() > {$value};}");
-        } else {
-            assert(false, '$value must be int or a variable in '.__METHOD__);
+            return $value;
         }
+
+        // It is a gremlin property
+        if ($this->isProperty($value)) {
+            assert($this->assertProperty($value));
+            return " it.get().value(\"{$value}\").toLong()";
+        }
+
+        assert(false, '$value must be int or gremlin variable or proeprty in '.__METHOD__);
     }
 }
 ?>
