@@ -4835,23 +4835,22 @@ class Load extends Tasks {
 
         $current = $this->id;
 
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals = array_merge($this->precedence->get($this->tokens[$this->id][0]),
+                              $this->assignations
+                             );
         $finals = array_slice($finals, 1);
 
         $addition = $this->addAtom('Addition');
         $this->addLink($addition, $left, 'LEFT');
 
-        $this->contexts->nestContext();
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         do {
-            $this->processNext();
-
-            if (in_array($this->tokens[$this->id + 1][0], $this->assignations)) {
-                $this->processNext();
-            }
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
-        $this->contexts->exitContext();
-
-        $right = $this->popExpression();
+            $right = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
+        
+        $this->popExpression();
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
         $this->addLink($addition, $right, 'RIGHT');
         
