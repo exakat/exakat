@@ -2264,23 +2264,7 @@ class Load extends Tasks {
     private function processVar() {
         $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
-        // PHP 7.4 typehint
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE))) {
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
-                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
-            } else {
-                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
-
-                $typehint->fullnspath = $fullnspath;
-                $typehint->aliased    = $aliased;
-                
-                $this->calls->addCall('class', $fullnspath, $typehint);
-            }
-        }
+        $this->processPropertyTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
 
@@ -2295,24 +2279,7 @@ class Load extends Tasks {
     private function processPublic() {
         $public = $this->processOptions('Public');
 
-        // PHP 7.4 typehint
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE))) {
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
-                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
-            } else {
-                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
-
-                $typehint->fullnspath = $fullnspath;
-                $typehint->aliased    = $aliased;
-                
-                $this->calls->addCall('class', $fullnspath, $typehint);
-            }
-            $this->optionsTokens['Typehint'] = $typehint->fullcode;
-        }
+        $this->processPropertyTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2331,24 +2298,7 @@ class Load extends Tasks {
     private function processProtected() {
         $protected = $this->processOptions('Protected');
 
-        // PHP 7.4 typehint
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE))) {
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
-                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
-            } else {
-                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
-
-                $typehint->fullnspath = $fullnspath;
-                $typehint->aliased    = $aliased;
-                
-                $this->calls->addCall('class', $fullnspath, $typehint);
-            }
-            $this->optionsTokens['Typehint'] = $typehint->fullcode;
-        }
+        $this->processPropertyTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2367,25 +2317,7 @@ class Load extends Tasks {
     private function processPrivate() {
         $private = $this->processOptions('Private');
 
-        // PHP 7.4 typehint
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE))) {
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'))) {
-                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
-            } else {
-                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
-
-                $typehint->fullnspath = $fullnspath;
-                $typehint->aliased    = $aliased;
-                
-                $this->calls->addCall('class', $fullnspath, $typehint);
-            }
-
-            $this->optionsTokens['Typehint'] = $typehint->fullcode;
-        }
+        $this->processPropertyTypehint();
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2397,6 +2329,29 @@ class Load extends Tasks {
             return $ppp;
         } else {
             return $private;
+        }
+    }
+    
+    private function processPropertyTypehint() {
+        // PHP 7.4 typehint
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                            $this->phptokens::T_STRING,
+                                                            $this->phptokens::T_ARRAY,
+                                                            $this->phptokens::T_NAMESPACE))) {
+            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'array'))) {
+                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
+            } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
+
+                $typehint->fullnspath = $fullnspath;
+                $typehint->aliased    = $aliased;
+                
+                $this->calls->addCall('class', $fullnspath, $typehint);
+            }
+
+            $this->optionsTokens['Typehint'] = $typehint->fullcode;
         }
     }
 
