@@ -132,7 +132,7 @@ GREMLIN
         
         // Private constructors
         $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fullnspath')
+             ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->is('visibility', 'private')
@@ -144,13 +144,12 @@ GREMLIN
              ->atomInsideNoDefinition('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->samePropertyAs('fullnspath', 'fullnspath')
+             ->samePropertyAs('fullnspath', 'fnp')
              ->back('used');
         $this->prepareQuery();
 
         // Normal Constructors
         $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->isNot('visibility', 'private')
