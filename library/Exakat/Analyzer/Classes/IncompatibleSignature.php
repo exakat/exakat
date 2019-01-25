@@ -30,21 +30,13 @@ class IncompatibleSignature extends Analyzer {
         // non-matching reference
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->raw('sideEffect{ if (it.get().properties("reference").any()) { reference = it.get().value("reference");} else { reference = false; }}')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->inIs('ARGUMENT')
+             ->outIs('OVERWRITE')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->raw('filter{ if (it.get().properties("reference").any()) { reference != it.get().value("reference");} else { reference != false; }}')
              ->back('first');
         $this->prepareQuery();
@@ -52,19 +44,10 @@ class IncompatibleSignature extends Analyzer {
         // non-matching argument count :
         // abstract : exact count
         $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
-             ->savePropertyAs('count', 'count')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->savePropertyAs('count', 'counted')
+             ->outIs('OVERWRITE')
              ->is('abstract', true) //then, it is not private
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
-             ->notSamePropertyAs('count', 'count')
+             ->notSamePropertyAs('count', 'counted')
              ->back('first');
         $this->prepareQuery();
 
@@ -72,41 +55,23 @@ class IncompatibleSignature extends Analyzer {
         // non-abstract : count may be more but not less
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
-             ->savePropertyAs('count', 'count')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->savePropertyAs('count', 'counted')
+             ->outIs('OVERWRITE')
              ->isNot('abstract', true)
-             ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
-             ->isMore('count', 'count')
+             ->isMore('count', 'counted')
              ->back('first');
         $this->prepareQuery();
 
         // non-matching typehint
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->raw('sideEffect{ if (it.get().vertices(OUT, "TYPEHINT").any()) { typehint = it.get().vertices(OUT, "TYPEHINT").next().value("fullnspath");} else { typehint = false; }}')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->inIs('ARGUMENT')
+             ->outIs('OVERWRITE')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->raw('filter{ if (it.get().vertices(OUT, "TYPEHINT").any()) { typehint != it.get().vertices(OUT, "TYPEHINT").next().value("fullnspath");} else { typehint != false; }}')
              ->back('first');
         $this->prepareQuery();
@@ -114,17 +79,8 @@ class IncompatibleSignature extends Analyzer {
         // non-matching return typehint
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
              ->raw('sideEffect{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint = it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint = false; }}')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->outIs('OVERWRITE')
              ->raw('filter{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint != it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint != false; }}')
              ->back('first');
         $this->prepareQuery();
@@ -132,21 +88,13 @@ class IncompatibleSignature extends Analyzer {
         // non-matching nullable
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
-             ->inIs('NAME')
+             ->inIs('ARGUMENT')
+             ->outIs('OVERWRITE')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
              ->back('first');
         $this->prepareQuery();
@@ -154,34 +102,16 @@ class IncompatibleSignature extends Analyzer {
         // non-matching return nullable
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
              ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->outIs('OVERWRITE')
              ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
              ->back('first');
         $this->prepareQuery();
 
         // non-matching visibility
         $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
              ->raw('sideEffect{ if (it.get().properties("visibility").any()) { v = it.get().value("visibility");} else { v = false; }}')
-             ->goToClass()
-             ->hasOut('EXTENDS')
-             ->goToAllParents()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->outIs('OVERWRITE')
              ->raw(<<<GREMLIN
 filter{ 
     if (it.get().properties("visibility").any()) { 

@@ -36,6 +36,54 @@ abstract class DSL {
     const LABEL_SET  = true;
     const LABEL_GO   = false;
     
+    const PROPERTIES = array('id',
+                             'atom',
+                             'code',
+                             'lccode',
+                             'fullcode',
+                             'line',
+                             'token',
+                             'rank',
+                             'alternative',
+                             'reference',
+                             'heredoc',
+                             'delimiter',
+                             'noDelimiter',
+                             'variadic',
+                             'count',
+                             'fullnspath',
+                             'absolute',
+                             'alias',
+                             'origin',
+                             'encoding',
+                             'block',
+                             'intval',
+                             'strval',
+                             'boolean',
+                             'enclosing',
+                             'args_max',
+                             'args_min',
+                             'bracket',
+                             'flexible',
+                             'close_tag',
+                             'aliased',
+                             'propertyname',
+                             'constant',
+                             'root',
+                             'globalvar',
+                             'binaryString',
+                             'isNull',
+                             'visibility',
+                             'final',
+                             'abstract',
+                             'static',
+                             'ctype1',
+                             'ctype1_size',
+                             'noscream',
+                             'nullable',
+                             'trailing',
+                             );
+    
     protected $dslfactory             = null;
     protected $availableAtoms         = array();
     protected $availableLinks         = array();
@@ -105,6 +153,7 @@ abstract class DSL {
     protected function assertVariable($name, $write = self::VARIABLE_READ) {
         if ($write === self::VARIABLE_WRITE) {
             assert(!$this->isVariable($name), "Variable '$name' is already taken");
+            assert(!in_array($name, self::PROPERTIES), "Don't use a property name as a variable ($name)");
             $this->availableVariables[] = $name;
         } else {
             assert($this->isVariable($name), "Variable '$name' is not defined");
