@@ -98,7 +98,7 @@ class Doctor extends Tasks {
         $stats['exakat']['extra themes'] = $this->array2list(array_keys($this->config->themas));
 
         $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
-        if ($list = $this->config->ext->getJarList()) {
+        if ($list = $this->config->ext->getPharList()) {
             $stats['exakat']['extensions']  = $this->array2list($list);
         }
 

@@ -144,7 +144,7 @@ class Extension extends Tasks {
     }
     
     private function local() {
-        $list = $this->config->ext->getJarList();
+        $list = $this->config->ext->getPharList();
         sort($list);
     
         print PHP_EOL;

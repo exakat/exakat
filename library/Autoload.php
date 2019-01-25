@@ -91,7 +91,7 @@ class AutoloadExt {
         spl_autoload_register(array($this, 'autoload'));
     }
 
-    public function getJarList() {
+    public function getPharList() {
         return array_map('basename', $this->pharList);
     }
 
