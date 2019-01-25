@@ -26,32 +26,45 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedClasses extends Analyzer {
+    private $extAnalyzers = array();
     public function dependsOn() {
-        return array('Classes/IsExtClass',
-                     'Composer/IsComposerNsname',
-                     'Interfaces/IsExtInterface',
-                    );
+        $ext = $this->themes->getInstance('Ext/DefinedClasses', $this->gremlin, $this->config);
+        $this->extAnalyzers = $ext->getAnalyzerList();
+
+        return array_merge(
+                array('Classes/IsExtClass',
+                      'Composer/IsComposerNsname',
+                      'Interfaces/IsExtInterface',
+                    ),
+                $this->extAnalyzers);
     }
     
     public function analyze() {
+        $omitted = array_merge(array('Composer/IsComposerNsname',
+                                     'Classes/IsExtClass',
+                                     ),
+                                $this->extAnalyzers,
+                              );
+
+        $omittedAll = $omitted;
+        $omittedAll[] = 'Interfaces/IsExtInterface';
+
         // in a New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot($omitted)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->back('first');
         $this->prepareQuery();
 
         // in a class::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot($omitted)
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -60,7 +73,7 @@ class UndefinedClasses extends Analyzer {
 
         // in a parent::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot($omitted)
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Parent')
@@ -70,7 +83,7 @@ class UndefinedClasses extends Analyzer {
 
         // in a class::$property
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot($omitted)
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
@@ -84,7 +97,6 @@ class UndefinedClasses extends Analyzer {
         // in a parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Parent')
              ->fullnspathIs('\\parent')
              ->back('first');
@@ -92,11 +104,11 @@ class UndefinedClasses extends Analyzer {
 
         // in a class::constante
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot($omitted)
              ->outIs('CLASS')
+             ->analyzerIsNot('Classes/IsExtClass')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -107,7 +119,6 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs('Staticconstant')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Parent')
              ->fullnspathIs('\\parent')
              ->back('first');
@@ -115,12 +126,10 @@ class UndefinedClasses extends Analyzer {
 
         // in a class::instanceof
         $this->atomIs('Instanceof')
-             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
+             ->analyzerIsNot($omittedAll)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->analyzerIsNot('Classes/IsExtClass')
-             ->analyzerIsNot('Interfaces/IsExtInterface')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -132,11 +141,21 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->analyzerIsNot('Composer/IsComposerNsname')
-             ->codeIsNot(array_merge(array('self', 'parent', 'static'), $types))
-             ->tokenIsNot(array('T_ARRAY', 'T_STATIC', 'T_CALLABLE'))
-             ->analyzerIsNot('Classes/IsExtClass')
-             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot($omittedAll)
+             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->codeIsNot($types)
+             ->noClassDefinition()
+             ->noInterfaceDefinition()
+             ->noTraitDefinition();
+        $this->prepareQuery();
+
+        // in a property typehint f(someClass $c)
+        $this->atomIs(self::$CIT)
+             ->outIs('PPP')
+             ->outIs('TYPEHINT')
+             ->analyzerIsNot($omittedAll)
+             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->codeIsNot($types)
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition();
@@ -145,8 +164,7 @@ class UndefinedClasses extends Analyzer {
         // Foo::class
         $this->atomIs('Staticclass')
              ->outIs('CLASS')
-             ->analyzerIsNot('Classes/IsExtClass')
-             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot($omittedAll)
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()

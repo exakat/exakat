@@ -2264,7 +2264,7 @@ class Load extends Tasks {
     private function processVar() {
         $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
-        $this->processPropertyTypehint();
+        $typehint = $this->processPropertyTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
 
@@ -2279,7 +2279,7 @@ class Load extends Tasks {
     private function processPublic() {
         $public = $this->processOptions('Public');
 
-        $this->processPropertyTypehint();
+        $typehint = $this->processPropertyTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2298,7 +2298,7 @@ class Load extends Tasks {
     private function processProtected() {
         $protected = $this->processOptions('Protected');
 
-        $this->processPropertyTypehint();
+        $typehint = $this->processPropertyTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2317,7 +2317,7 @@ class Load extends Tasks {
     private function processPrivate() {
         $private = $this->processOptions('Private');
 
-        $this->processPropertyTypehint();
+        $typehint = $this->processPropertyTypehint();
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
@@ -2352,7 +2352,10 @@ class Load extends Tasks {
             }
 
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
+            return $typehint;
         }
+        
+        return null;
     }
 
     private function processFunctioncall($getFullnspath = self::WITH_FULLNSPATH) {
