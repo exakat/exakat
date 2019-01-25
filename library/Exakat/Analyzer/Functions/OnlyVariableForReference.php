@@ -30,14 +30,14 @@ class OnlyVariableForReference extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->has('reference', true)
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->_as('functioncall')
              ->outIsIE('METHOD')   // For methods, in case
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Member'))
              ->back('functioncall');
         $this->prepareQuery();

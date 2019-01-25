@@ -31,15 +31,15 @@ class AlternativeConsistenceByFile extends Analyzer {
         // $this->linksDown is important here.
         $this->atomIs('File')
              ->initVariable('normal', 0)
-             ->initVariable('alternative', 0)
+             ->initVariable('alt', 0)
              ->filter(
                 $this->side()
                      ->atomInsideNoDefinition($atoms)
-                     ->raw('or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
+                     ->raw('or( __.has("alt").sideEffect{ alt = alt + 1; },
          __.sideEffect{ normal = normal + 1; })')
                      ->raw('fold()')
              )
-            ->filter('normal > 0 && alternative > 0')
+            ->filter('normal > 0 && alt > 0')
             ->back('first');
         $this->prepareQuery();
     }

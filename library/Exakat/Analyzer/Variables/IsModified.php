@@ -86,12 +86,12 @@ class IsModified extends Analyzer {
              ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->_as('results')
              ->back('first')
              ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
              ->is('reference', true)
              ->back('results');
         $this->prepareQuery();
@@ -144,14 +144,14 @@ class IsModified extends Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->_as('results')
              ->inIs('ARGUMENT')
              ->classDefinition()
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->is('reference', true)
              ->back('results');
         $this->prepareQuery();

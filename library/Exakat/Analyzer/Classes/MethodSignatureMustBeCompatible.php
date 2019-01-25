@@ -50,7 +50,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
              ->back('first')
@@ -59,7 +59,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
-             ->outWithRank('ARGUMENT', 'rank')
+             ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'typehint')
              ->back('first');
@@ -72,7 +72,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->hasNoOut('TYPEHINT')
              ->back('first')
              ->inIs('METHOD')
@@ -80,7 +80,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
-             ->outWithRank('ARGUMENT', 'rank')
+             ->outWithRank('ARGUMENT', 'ranked')
              ->hasOut('TYPEHINT')
              ->back('first');
         $this->prepareQuery();
@@ -92,7 +92,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->hasOut('TYPEHINT')
              ->back('first')
              ->inIs('METHOD')
@@ -100,7 +100,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
-             ->outWithRank('ARGUMENT', 'rank')
+             ->outWithRank('ARGUMENT', 'ranked')
              ->hasNoOut('TYPEHINT')
              ->back('first');
         $this->prepareQuery();

@@ -30,10 +30,10 @@ class NeverUsedParameter extends Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENT')
              ->hasOut('DEFAULT')
-             ->savePropertyAs('rank', 'x')
+             ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->hasOut('DEFINITION')  // Make sure this is actually a used function
-             ->raw('not(where( __.out("DEFINITION").out("ARGUMENT").not(hasLabel("Void")).filter{ it.get().value("rank") == x;}))');
+             ->raw('not(where( __.out("DEFINITION").out("ARGUMENT").not(hasLabel("Void")).filter{ it.get().value("rank") == ranked;}))');
         $this->prepareQuery();
     }
 }

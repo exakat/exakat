@@ -108,12 +108,12 @@ class IsRead extends Analyzer {
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->_as('results')
              ->back('first')
              ->functionDefinition()
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
              ->isNot('reference', true)
              ->back('results');
         $this->prepareQuery();

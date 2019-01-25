@@ -98,7 +98,7 @@ class IsRead extends Analyzer {
         // Class constructors with self
         $this->atomIs($atoms)
              ->hasIn('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->codeIs('self')
@@ -111,7 +111,7 @@ class IsRead extends Analyzer {
              ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
              ->isNot('reference', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -119,7 +119,7 @@ class IsRead extends Analyzer {
         // Class constructors with self
         $this->atomIs($atoms)
              ->hasIn('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->codeIs('self')
@@ -132,7 +132,7 @@ class IsRead extends Analyzer {
              ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
              ->isNot('reference', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();

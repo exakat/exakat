@@ -29,7 +29,7 @@ class OrderOfDeclaration extends Analyzer {
         // Use, const, properties and methods
         $this->atomIs('Class')
              ->outIs(array("USE", "METHOD", "CONST", "PPP"))
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->raw('sideEffect{ 
                 if (it.get().label() == "Usetrait") {
                     ok = ["Use", "Const", "Ppp", "Method"];
@@ -43,7 +43,7 @@ class OrderOfDeclaration extends Analyzer {
               }')
              ->inIs(array("USE", "METHOD", "CONST", "PPP"))
              ->outIs(array("USE", "METHOD", "CONST", "PPP"))
-             ->raw('filter{ it.get().value("rank") == rank + 1; }')
+             ->raw('filter{ it.get().value("rank") == ranked + 1; }')
              ->raw('filter{ !(it.get().label() in ok); }')
              ->back('first');
         $this->prepareQuery();

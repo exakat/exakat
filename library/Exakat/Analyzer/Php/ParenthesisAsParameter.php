@@ -32,11 +32,11 @@ class ParenthesisAsParameter extends Analyzer {
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->back('first')
              ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();

@@ -62,7 +62,7 @@ GREMLIN;
         // Relayed call to another function
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->raw($safeIndex)
              ->_as('result')
              ->outIsIE('VARIABLE')
@@ -72,7 +72,7 @@ GREMLIN;
 
              ->functionDefinition()
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
 
              ->savePropertyAs('code', 'varname')
              ->inIs('ARGUMENT')

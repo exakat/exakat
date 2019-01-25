@@ -38,7 +38,7 @@ class MismatchedTypehint extends Analyzer {
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'name')
              ->has('rank')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->inIs('DEFINITION')
@@ -60,7 +60,7 @@ class MismatchedTypehint extends Analyzer {
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'name')
              ->has('rank')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->savePropertyAs('code', 'method')
              ->inIs('METHOD')
@@ -78,7 +78,7 @@ class MismatchedTypehint extends Analyzer {
     
     private function checkDefinition() {
         $this->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'typehint');
              

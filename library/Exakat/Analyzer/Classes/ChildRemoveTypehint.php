@@ -32,7 +32,7 @@ class ChildRemoveTypehint extends Analyzer {
         // class aa extends a { function foo($B){}}
         $this->atomIs('Method')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
              ->back('first')
              ->outIs('NAME')
@@ -44,7 +44,7 @@ class ChildRemoveTypehint extends Analyzer {
              ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
+             ->samePropertyAs('rank', 'ranked')
              ->hasNoOut('TYPEHINT')
              ->back('first');
         $this->prepareQuery();
