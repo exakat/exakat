@@ -315,124 +315,4441 @@ To define a pattern in the code, we use a combinaison of filters on atom, links 
 Atoms
 #####
 
-Here is the list of the 116 available atoms : 
+Here is the list of the 105 available atoms : 
 
-* Addition : an addition or a substraction
-* Array : represents array usage : `$a[4]`, `$this['a']['f']`
-* Arrayappend : represents `$a[]`
-* Arrayliteral : represents an array definition : `array(1,2,3)` and `[4,5 => 3,6]`
-* As : used when aliasing namespaces and methods
-* Assignation : any assignation and short assignation : `$a = 1`, `$b .= 3`
-* Bitshift : any usage of bitshift operators : `>>`, `<<`
-* Block : represents a sequence between curly braces. For example, `foreach($a as $b) { $c += $b; }`
-* Boolean : represents `true` or `false`
-* Break : a break, with or without the level indication
-* Case : a case in a switch
-* Cast : a cast operation, including the `(unset)`
-* Catch : a catch clause in a Try command
-* Class : a class with a name 
-* Classanonymous : a class without a name
-* Clone : clone operator 
-* Closure : a closure
-* Coalesce : the coalesce operator `??`
-* Comparison : a comparison : `==`, `===`, `>`, ...
-* Concatenation : a sequence of containers, linked by the dot operator `.`
-* Const : a constant definition, for classes or global 
-* Constant : a constant definition
-* Continue : a continue operator, with or without its level indicator
-* Declare : a declare command
-* Declaredefinition : option setting in a declare
-* Default : default in a switch
-* Defineconstant : a call to the `define()` function
-* Dowhile : a do...while loop
-* Echo : a call to `echo`
-* Empty : a call to `empty`
-* Eval : a call to `eval`
-* Exit : a call to `exit`
-* File : a source code PHP script. This is the root node.
-* Finally : a finally clause in a try command
-* For : a for loop
-* Foreach : a foreach loop
-* Function : a function definition
-* Functioncall: a function call
-* Global : a global command, gathering multiple definition
-* Globaldefinition : on global variable definition
-* Goto : the goto command
-* Gotolabel : a label for the goto command
-* Halt : the halt compiler token
-* Heredoc : a Heredoc or Nowdoc string 
-* Identifier : a PHP identifier, most likely a constant 
-* Ifthen : an if...then or a elsif..then structure, including the else or not
-* Include : any include or require, _once or not
-* Inlinehtml : raw HTML 
-* Instanceof : the instanceof operator 
-* Insteadof : the insteadof operator, for trait inclusion
-* Integer : an integer
-* Interface : an interface
-* Isset : a call to isset
-* Keyvalue : a `$key => $value` structure
-* List : a call to `list()` or `[]` on the left
-* Logical : a logical operation, with symbolic or lettered operator
-* Magicconstant : any of the magic constant, such as `__dir__`, `__METHOD__`, etc.
-* Member : a property call on an object
-* Magicmethod : any special PHP method, such as `__clone`, `__get`, `__construct`, `__destruct`, etc...
-* Method : any other method
-* Methodcall : a call to a method, magic or not
-* Methodcallname : the name of the method being called
-* Multiplication : a multiplication, a division or a modulo
-* Name : the name of a structure, such as class, interface, trait, function, etc.
-* Namespace : the keyword `namespace`
-* New : an instantiation
-* Newcall : the class being instantiated
-* Not : a not operation, with `!` or `~`
-* Nsname : a identifier with a fully qualified name 
-* Null : the null value
-* Parameter : an argument in a function, method, closure or magicmethod definition
-* Parametername : the name of the above
-* Parent : the `parent` keyword
-* Parenthesis : a standalone parenthesis. Compulsory parenthesis are never in the tree.
-* Php : a PHP script that starts
-* Phpvariable : a PHP reserved variable 
-* Postplusplus : `$a++` and `$a--`
-* Power : the `**` operator
-* Ppp : a property definition in a class or trait
-* Preplusplus : `--$a` and `++$a`
-* Print : a call to `print`
-* Project : the root node of the whole project. It leads to `File`
-* Propertydefinition : a single property definition
-* Real : a real number, such as 1.2, 3.1415926, etc.
-* Return : a `return` call
-* Self : the `self` keyword
-* Sequence : a sequence of command, separated by `;` (or not)
-* Shell : a shell call, with backticks
-* Sign : unary usage of a `+` or `-` sign, when it couldn't be merged with Integer or Real
-* Static : the `static` keyword, when used with methods, new, class constants, etc.
-* Staticclass : `ClassName::class`
-* Staticconstant : a static constant call
-* Staticdefinition : a static variable definition
-* Staticmethod : a static method name with `insteadof`
-* Staticmethodcall : a call to a static method, `ClassName::Methodname()`
-* Staticproperty : a call to a static property
-* Staticpropertyname : the name of static property 
-* String : a literal string
-* Switch : a switch command
-* Ternary : a ternary operator
-* This : the `$this` variable
-* Throw : throw of an exception
-* Trait : a trait
-* Try : a try...catch...finally command
-* Unset : a call to `unset()`
-* Usenamespace : a `use` command in a file
-* Usetrait : a `use` command in class or a trait
-* Var : the old `var` visibility
-* Variable : a variable
-* Variabledefinition : a local variable definition
-* Variablearray : a variable used to build an array
-* Variableobject : a variable used with `->` operator
-* Void : the void operation
-* While : the while loop
-* Yield : the `yield` keyword
-* Yieldfrom : the `yield from` keyword
+* Addition : An addition or a substraction
+* Array : Represents array access : `$a[4]`, `$this['a']['f']` and `foo()[1]['g']`
+* Arrayappend : Represents `$a[]` or `$this->b[]`
+* Arrayliteral : Represents an array definition : `[4,5 => 3,6]` and `array(1,2,3)`
+* As : Docs for As
+* Assignation : Any assignation and short assignation : `$a = 1`, `$b .= 3`
+* Bitshift : Docs for Bitshift
+* Block : Represents a sequence between curly braces. For example, `{ $c += $b; }`.
+* Boolean : Represents `true` or `false`.
+* Break : A break, with or without the level indication. `break 1`;
+* Cast : A case expression in a switch() statement. `case 1: `
+* Cast : A cast operation, like `(array)` or `(unset)`
+* Catch : A catch clause in a try/catch command. For example : `catch (Exception $e)` or `catch{A|B|C $d}`
+* Class : A named class.
+* Classanonymous : A unnamed class, created with `new class {};`
+* Clone : Docs for Clone
+* Closure : Docs for Closure
+* Comparison : A comparison, with any kind of comparison operator : `==`, `===`, `>`, ...
+* Concatenation : A concatenation : a sequence of values, linked by the dot operator `.`
+* Const : A constant definition, for classes or global. `const X = 1;` or `class x { const Y = 2; }`
+* Constant : A constant definition, part of a `Const` atom.
+* Continue : A continue operator, with or without its level indicator
+* Default : Docs for Default
+* Defineconstant : A call to the `define()` function.
+* Dowhile : Docs for Dowhile
+* Echo : A call to `echo`
+* Empty : A call to `empty`
+* Eval : A call to `Eval`
+* Exit : A call to `Exit`
+* File : A file, containing the PHP source code.
+* Finally : A finally clause in a try/catch command.
+* For : A for loop. For example : `for($i = 0; $i < 10; ++$i) { }`
+* Foreach : Docs for Foreach
+* Function : Docs for Function
+* Functioncall : Docs for Functioncall
+* Global : Docs for Global
+* Globaldefinition : Docs for Globaldefinition
+* Goto : Docs for Goto
+* Gotolabel : Docs for Gotolabel
+* Heredoc : Docs for Heredoc
+* Identifier : Docs for Identifier
+* Ifthen : Docs for Ifthen
+* Include : Docs for Include
+* Inlinehtml : Docs for Inlinehtml
+* Instanceof : Docs for Instanceof
+* Integer : Docs for Integer
+* Interface : Docs for Interface
+* Isset : Docs for Isset
+* Keyvalue : Docs for Keyvalue
+* List : Docs for List
+* Logical : Docs for Logical
+* Magicconstant : Docs for Magicconstant
+* Magicmethod : Docs for Magicmethod
+* Member : Docs for Member
+* Method : Docs for Method
+* Methodcall : Docs for Methodcall
+* Methodcallname : Docs for Methodcallname
+* Multiplication : Docs for Multiplication
+* Name : Docs for Name
+* Namespace : Docs for Namespace
+* New : Docs for New
+* Newcall : Docs for Newcall
+* Not : Docs for Not
+* Nsname : Docs for Nsname
+* Null : Docs for Null
+* Parameter : Docs for Parameter
+* Parametername : Docs for Parametername
+* Parent : Docs for Parent
+* Parenthesis : Docs for Parenthesis
+* Php : Docs for Php
+* Phpvariable : A PHP reserved variable, such as `$_GET`, `$_POST`, `$GLOBALS`, etc. 
+* Postplusplus : Docs for Postplusplus
+* Ppp : Docs for Ppp
+* Preplusplus : Docs for Preplusplus
+* Print : Docs for Print
+* Project : Docs for Project
+* Propertydefinition : Docs for Propertydefinition
+* Real : Docs for Real
+* Return : Docs for Return
+* Self : Docs for Self
+* Sequence : Docs for Sequence
+* Sign : A Sign structure : when a `-`or `+` has been added before another expression. For example `- ($a + $b)`.
+* Static : Docs for Static
+* Staticclass : Docs for Staticclass
+* Staticconstant : Docs for Staticconstant
+* Staticdefinition : Docs for Staticdefinition
+* Staticmethodcall : Docs for Staticmethodcall
+* Staticproperty : Docs for Staticproperty
+* Staticpropertyname : Docs for Staticpropertyname
+* String : Docs for String
+* Switch : A switch structure.
+* Ternary : Docs for Ternary
+* This : The special variable `$this`.
+* Throw : Docs for Throw
+* Trait : A trait. For example : `trait t { function foo() {} }`
+* Try : The Try part in a try/catch/finally expression.
+* Unset : Docs for Unset
+* Usenamespace : Docs for Usenamespace
+* Usetrait : Docs for Usetrait
+* Variable : A Variable, as a standalone container. For example : `$a = 1` or `$b += 3`. Variables in arrays are `Variablearray`, while variables in objects are `Variableobject`. 
+* Variablearray : Docs for Variablearray
+* Variabledefinition : Docs for Variabledefinition
+* Variableobject : Docs for Variableobject
+* Void : A Void operation. It represents the absence of data. For example : `foo();;` : there is a Void as argument, and one between the semicolons.
+* While : A While structure, different from a Dowhile structure. For example : `while($a < 10) { $a++;}`
+
+
+Addition
+___________________________
+
+
+An addition or a substraction
+
+.. image:: images/Addition.png
+                            :alt: Addition's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_MINUS
+* T_PLUS
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONCAT
+* CONDITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Array
+___________________________
+
+
+Represents array access : `$a[4]`, `$this['a']['f']` and `foo()[1]['g']`
+
+.. image:: images/Array.png
+                            :alt: Array's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* enclosing
+* fullcode
+* globalvar
+* lccode
+* line
+* noDelimiter
+* noscream
+* rank
+* reference
+
+List of possible tokens : 
+
+* T_CLOSE_BRACKET
+* T_CLOSE_CURLY
+* T_CLOSE_PARENTHESIS
+* T_CURLY_OPEN
+* T_QUOTE
+* T_START_HEREDOC
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* INDEX
+* VARIABLE
+
+List of incoming links : 
+
+* ANALYZED
+* APPEND
+* ARGUMENT
+* CAST
+* CLONE
+* CODE
+* CONCAT
+* CONDITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NAME
+* NOT
+* OBJECT
+* POSTPLUSPLUS
+* PREPLUSPLUS
+* RETURN
+* RIGHT
+* SIGN
+* SOURCE
+* THEN
+* VALUE
+* VARIABLE
+
+
+Arrayappend
+___________________________
+
+
+Represents `$a[]` or `$this->b[]`
+
+.. image:: images/Arrayappend.png
+                            :alt: Arrayappend's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CLOSE_BRACKET
+* T_CLOSE_CURLY
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* APPEND
+
+List of incoming links : 
+
+* ARGUMENT
+* LEFT
+
+
+Arrayliteral
+___________________________
+
+
+Represents an array definition : `[4,5 => 3,6]` and `array(1,2,3)`
+
+.. image:: images/Arrayliteral.png
+                            :alt: Arrayliteral's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* boolean
+* cbClass
+* cbMethod
+* cbObject
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_ARRAY
+* T_OPEN_BRACKET
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CAST
+* DEFAULT
+* DEFINITION
+* ELSE
+* EXPRESSION
+* LEFT
+* RETURN
+* RIGHT
+* SOURCE
+* THEN
+* VALUE
+* YIELD
+
+
+As
+___________________________
+
+
+Docs for As
+
+.. image:: images/As.png
+                            :alt: As's outgoing diagramm
+
+List of available properties : 
+
+* alias
+* code
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_AS
+
+List of outgoing links : 
+
+* AS
+* NAME
+
+List of incoming links : 
+
+* DEFINITION
+* USE
+
+
+Assignation
+___________________________
+
+
+Any assignation and short assignation : `$a = 1`, `$b .= 3`
+
+.. image:: images/Assignation.png
+                            :alt: Assignation's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_AND_EQUAL
+* T_CONCAT_EQUAL
+* T_DIV_EQUAL
+* T_EQUAL
+* T_MINUS_EQUAL
+* T_MOD_EQUAL
+* T_MUL_EQUAL
+* T_OR_EQUAL
+* T_PLUS_EQUAL
+* T_SL_EQUAL
+* T_SR_EQUAL
+* T_XOR_EQUAL
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONDITION
+* ELSE
+* EXPRESSION
+* RETURN
+* RIGHT
+* THEN
+
+
+Bitshift
+___________________________
+
+
+Docs for Bitshift
+
+.. image:: images/Bitshift.png
+                            :alt: Bitshift's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_SL
+* T_SR
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* LEFT
+* RIGHT
+
+
+Block
+___________________________
+
+
+Represents a sequence between curly braces. For example, `{ $c += $b; }`.
+
+.. image:: images/Block.png
+                            :alt: Block's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_CLOSE_BRACKET
+* T_CONSTANT_ENCAPSED_STRING
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* CODE
+
+List of incoming links : 
+
+* MEMBER
+* NAME
+
+
+Boolean
+___________________________
+
+
+Represents `true` or `false`.
+
+.. image:: images/Boolean.png
+                            :alt: Boolean's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_STRING
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CONCAT
+* CONDITION
+* DEFAULT
+* ELSE
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Break
+___________________________
+
+
+A break, with or without the level indication. `break 1`;
+
+.. image:: images/Break.png
+                            :alt: Break's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_BREAK
+
+List of outgoing links : 
+
+* BREAK
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Cast
+___________________________
+
+
+A case expression in a switch() statement. `case 1: `
+
+.. image:: images/Cast.png
+                            :alt: Cast's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CASE
+
+List of outgoing links : 
+
+* CASE
+* CODE
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Cast
+___________________________
+
+
+A cast operation, like `(array)` or `(unset)`
+
+.. image:: images/Cast.png
+                            :alt: Cast's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_ARRAY_CAST
+* T_BOOL_CAST
+* T_DOUBLE_CAST
+* T_INT_CAST
+* T_OBJECT_CAST
+* T_STRING_CAST
+
+List of outgoing links : 
+
+* CAST
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONCAT
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* SOURCE
+* THEN
+* VALUE
+
+
+Catch
+___________________________
+
+
+A catch clause in a try/catch command. For example : `catch (Exception $e)` or `catch{A|B|C $d}`
+
+.. image:: images/Catch.png
+                            :alt: Catch's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_TRY
+* 1
+
+List of outgoing links : 
+
+* BLOCK
+* CLASS
+* VARIABLE
+
+List of incoming links : 
+
+* ANALYZED
+* CATCH
+
+
+Class
+___________________________
+
+
+A named class.
+
+.. image:: images/Class.png
+                            :alt: Class's outgoing diagramm
+
+List of available properties : 
+
+* abstract
+* code
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CLASS
+* 1
+
+List of outgoing links : 
+
+* CONST
+* DEFINITION
+* EXTENDS
+* IMPLEMENTS
+* MAGICMETHOD
+* METHOD
+* NAME
+* PPP
+* USE
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Classanonymous
+___________________________
+
+
+A unnamed class, created with `new class {};`
+
+.. image:: images/Classanonymous.png
+                            :alt: Classanonymous's outgoing diagramm
+
+List of available properties : 
+
+* 
+
+List of possible tokens : 
+
+* 
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* 
+
+
+Clone
+___________________________
+
+
+Docs for Clone
+
+.. image:: images/Clone.png
+                            :alt: Clone's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_CLONE
+
+List of outgoing links : 
+
+* CLONE
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* RETURN
+* RIGHT
+
+
+Closure
+___________________________
+
+
+Docs for Closure
+
+.. image:: images/Closure.png
+                            :alt: Closure's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_FUNCTION
+
+List of outgoing links : 
+
+* ARGUMENT
+* BLOCK
+* DEFINITION
+* RETURNED
+* USE
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* RIGHT
+
+
+Comparison
+___________________________
+
+
+A comparison, with any kind of comparison operator : `==`, `===`, `>`, ...
+
+.. image:: images/Comparison.png
+                            :alt: Comparison's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_GREATER
+* T_IS_EQUAL
+* T_IS_GREATER_OR_EQUAL
+* T_IS_IDENTICAL
+* T_IS_NOT_EQUAL
+* T_IS_NOT_IDENTICAL
+* T_IS_SMALLER_OR_EQUAL
+* T_SMALLER
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONDITION
+* ELSE
+* EXPRESSION
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Concatenation
+___________________________
+
+
+A concatenation : a sequence of values, linked by the dot operator `.`
+
+.. image:: images/Concatenation.png
+                            :alt: Concatenation's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_DOT
+
+List of outgoing links : 
+
+* CONCAT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CODE
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Const
+___________________________
+
+
+A constant definition, for classes or global. `const X = 1;` or `class x { const Y = 2; }`
+
+.. image:: images/Const.png
+                            :alt: Const's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+* visibility
+
+List of possible tokens : 
+
+* T_CONST
+* 1
+
+List of outgoing links : 
+
+* CONST
+
+List of incoming links : 
+
+* CONST
+
+
+Constant
+___________________________
+
+
+A constant definition, part of a `Const` atom.
+
+.. image:: images/Constant.png
+                            :alt: Constant's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_COMMA
+* T_CONST
+* 1
+
+List of outgoing links : 
+
+* DEFINITION
+* NAME
+* OVERWRITE
+* VALUE
+
+List of incoming links : 
+
+* ANALYZED
+* CONST
+* OVERWRITE
+
+
+Continue
+___________________________
+
+
+A continue operator, with or without its level indicator
+
+.. image:: images/Continue.png
+                            :alt: Continue's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CONTINUE
+
+List of outgoing links : 
+
+* CONTINUE
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Default
+___________________________
+
+
+Docs for Default
+
+.. image:: images/Default.png
+                            :alt: Default's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DEFAULT
+
+List of outgoing links : 
+
+* CODE
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Defineconstant
+___________________________
+
+
+A call to the `define()` function.
+
+.. image:: images/Defineconstant.png
+                            :alt: Defineconstant's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_STRING
+
+List of outgoing links : 
+
+* ARGUMENT
+* DEFINITION
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Dowhile
+___________________________
+
+
+Docs for Dowhile
+
+.. image:: images/Dowhile.png
+                            :alt: Dowhile's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DO
+
+List of outgoing links : 
+
+* BLOCK
+* CONDITION
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Echo
+___________________________
+
+
+A call to `echo`
+
+.. image:: images/Echo.png
+                            :alt: Echo's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_ECHO
+* 1
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Empty
+___________________________
+
+
+A call to `empty`
+
+.. image:: images/Empty.png
+                            :alt: Empty's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_EMPTY
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* CODE
+* CONDITION
+* LEFT
+* NOT
+* RIGHT
+* VALUE
+
+
+Eval
+___________________________
+
+
+A call to `Eval`
+
+.. image:: images/Eval.png
+                            :alt: Eval's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_EVAL
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+* NOT
+* RETURN
+
+
+Exit
+___________________________
+
+
+A call to `Exit`
+
+.. image:: images/Exit.png
+                            :alt: Exit's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_COMMA
+* T_EXIT
+* T_OPEN_PARENTHESIS
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+File
+___________________________
+
+
+A file, containing the PHP source code.
+
+.. image:: images/File.png
+                            :alt: File's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_FILENAME
+
+List of outgoing links : 
+
+* DEFINITION
+* FILE
+
+List of incoming links : 
+
+* ANALYZED
+* PROJECT
+
+
+Finally
+___________________________
+
+
+A finally clause in a try/catch command.
+
+.. image:: images/Finally.png
+                            :alt: Finally's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_TRY
+
+List of outgoing links : 
+
+* BLOCK
+
+List of incoming links : 
+
+* FINALLY
+
+
+For
+___________________________
+
+
+A for loop. For example : `for($i = 0; $i < 10; ++$i) { }`
+
+.. image:: images/For.png
+                            :alt: For's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CLOSE_CURLY
+* T_SEMICOLON
+* 1
+
+List of outgoing links : 
+
+* BLOCK
+* FINAL
+* INCREMENT
+* INIT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Foreach
+___________________________
+
+
+Docs for Foreach
+
+.. image:: images/Foreach.png
+                            :alt: Foreach's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_FOREACH
+
+List of outgoing links : 
+
+* BLOCK
+* SOURCE
+* VALUE
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Function
+___________________________
+
+
+Docs for Function
+
+.. image:: images/Function.png
+                            :alt: Function's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_FUNCTION
+
+List of outgoing links : 
+
+* ARGUMENT
+* BLOCK
+* DEFINITION
+* NAME
+* RETURNED
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Functioncall
+___________________________
+
+
+Docs for Functioncall
+
+.. image:: images/Functioncall.png
+                            :alt: Functioncall's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_NS_SEPARATOR
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* ARGUMENT
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CAST
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NEW
+* NOT
+* OBJECT
+* RETURN
+* RIGHT
+* SIGN
+* SOURCE
+* THEN
+* VARIABLE
+
+
+Global
+___________________________
+
+
+Docs for Global
+
+.. image:: images/Global.png
+                            :alt: Global's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_GLOBAL
+
+List of outgoing links : 
+
+* GLOBAL
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Globaldefinition
+___________________________
+
+
+Docs for Globaldefinition
+
+.. image:: images/Globaldefinition.png
+                            :alt: Globaldefinition's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* DEFINITION
+* GLOBAL
+
+
+Goto
+___________________________
+
+
+Docs for Goto
+
+.. image:: images/Goto.png
+                            :alt: Goto's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_GOTO
+
+List of outgoing links : 
+
+* GOTO
+
+List of incoming links : 
+
+* DEFINITION
+* EXPRESSION
+
+
+Gotolabel
+___________________________
+
+
+Docs for Gotolabel
+
+.. image:: images/Gotolabel.png
+                            :alt: Gotolabel's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_COLON
+
+List of outgoing links : 
+
+* DEFINITION
+* GOTOLABEL
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Heredoc
+___________________________
+
+
+Docs for Heredoc
+
+.. image:: images/Heredoc.png
+                            :alt: Heredoc's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* count
+* ctype1
+* ctype1_size
+* delimiter
+* fullcode
+* heredoc
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_START_HEREDOC
+
+List of outgoing links : 
+
+* CONCAT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* RETURN
+* RIGHT
+
+
+Identifier
+___________________________
+
+
+Docs for Identifier
+
+.. image:: images/Identifier.png
+                            :alt: Identifier's outgoing diagramm
+
+List of available properties : 
+
+* aliased
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_ARRAY
+* T_CALLABLE
+* T_STRING
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* AS
+* CASE
+* CAST
+* CLASS
+* CONCAT
+* CONDITION
+* DEFAULT
+* DEFINITION
+* ELSE
+* INDEX
+* LEFT
+* MEMBER
+* NAME
+* NEW
+* NOT
+* RETURN
+* RIGHT
+* THEN
+* TYPEHINT
+
+
+Ifthen
+___________________________
+
+
+Docs for Ifthen
+
+.. image:: images/Ifthen.png
+                            :alt: Ifthen's outgoing diagramm
+
+List of available properties : 
+
+* alternative
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_ELSEIF
+* T_IF
+
+List of outgoing links : 
+
+* CONDITION
+* ELSE
+* THEN
+
+List of incoming links : 
+
+* ANALYZED
+* ELSE
+* EXPRESSION
+
+
+Include
+___________________________
+
+
+Docs for Include
+
+.. image:: images/Include.png
+                            :alt: Include's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_INCLUDE
+* T_INCLUDE_ONCE
+* T_REQUIRE
+* T_REQUIRE_ONCE
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* EXPRESSION
+* NOT
+* RETURN
+* RIGHT
+
+
+Inlinehtml
+___________________________
+
+
+Docs for Inlinehtml
+
+.. image:: images/Inlinehtml.png
+                            :alt: Inlinehtml's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_INLINE_HTML
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Instanceof
+___________________________
+
+
+Docs for Instanceof
+
+.. image:: images/Instanceof.png
+                            :alt: Instanceof's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_INSTANCEOF
+
+List of outgoing links : 
+
+* CLASS
+* VARIABLE
+
+List of incoming links : 
+
+* CODE
+* CONDITION
+* LEFT
+* NOT
+* RIGHT
+
+
+Integer
+___________________________
+
+
+Docs for Integer
+
+.. image:: images/Integer.png
+                            :alt: Integer's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_LNUMBER
+* T_NUM_STRING
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* BREAK
+* CASE
+* CAST
+* CODE
+* CONDITION
+* CONTINUE
+* DEFAULT
+* ELSE
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Interface
+___________________________
+
+
+Docs for Interface
+
+.. image:: images/Interface.png
+                            :alt: Interface's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_INTERFACE
+
+List of outgoing links : 
+
+* DEFINITION
+* EXTENDS
+* MAGICMETHOD
+* METHOD
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Isset
+___________________________
+
+
+Docs for Isset
+
+.. image:: images/Isset.png
+                            :alt: Isset's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_ISSET
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONDITION
+* EXPRESSION
+* LEFT
+* NOT
+* RETURN
+* RIGHT
+
+
+Keyvalue
+___________________________
+
+
+Docs for Keyvalue
+
+.. image:: images/Keyvalue.png
+                            :alt: Keyvalue's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DOUBLE_ARROW
+
+List of outgoing links : 
+
+* INDEX
+* VALUE
+
+List of incoming links : 
+
+* ARGUMENT
+* VALUE
+
+
+List
+___________________________
+
+
+Docs for List
+
+.. image:: images/List.png
+                            :alt: List's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_LIST
+
+List of outgoing links : 
+
+* ARGUMENT
+* NAME
+
+List of incoming links : 
+
+* LEFT
+
+
+Logical
+___________________________
+
+
+Docs for Logical
+
+.. image:: images/Logical.png
+                            :alt: Logical's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_AND
+* T_BOOLEAN_AND
+* T_BOOLEAN_OR
+* T_LOGICAL_AND
+* T_LOGICAL_OR
+* T_LOGICAL_XOR
+* T_OR
+* T_XOR
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CODE
+* CONDITION
+* EXPRESSION
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* VALUE
+
+
+Magicconstant
+___________________________
+
+
+Docs for Magicconstant
+
+.. image:: images/Magicconstant.png
+                            :alt: Magicconstant's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_CLASS_C
+* T_DIR
+* T_FILE
+* T_FUNC_C
+* T_METHOD_C
+* T_NS_C
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CONCAT
+
+
+Magicmethod
+___________________________
+
+
+Docs for Magicmethod
+
+.. image:: images/Magicmethod.png
+                            :alt: Magicmethod's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+* visibility
+
+List of possible tokens : 
+
+* T_FUNCTION
+* 1
+
+List of outgoing links : 
+
+* ARGUMENT
+* BLOCK
+* DEFINITION
+* NAME
+* OVERWRITE
+* RETURNED
+
+List of incoming links : 
+
+* ANALYZED
+* MAGICMETHOD
+* OVERWRITE
+
+
+Member
+___________________________
+
+
+Docs for Member
+
+.. image:: images/Member.png
+                            :alt: Member's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* enclosing
+* fullcode
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_CURLY_OPEN
+* T_OBJECT_OPERATOR
+* T_QUOTE
+* T_START_HEREDOC
+
+List of outgoing links : 
+
+* MEMBER
+* OBJECT
+
+List of incoming links : 
+
+* ANALYZED
+* APPEND
+* ARGUMENT
+* CAST
+* CLONE
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NOT
+* OBJECT
+* POSTPLUSPLUS
+* PREPLUSPLUS
+* RETURN
+* RIGHT
+* SIGN
+* SOURCE
+* THEN
+* VALUE
+* VARIABLE
+
+
+Method
+___________________________
+
+
+Docs for Method
+
+.. image:: images/Method.png
+                            :alt: Method's outgoing diagramm
+
+List of available properties : 
+
+* abstract
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* final
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+* static
+* visibility
+
+List of possible tokens : 
+
+* T_FUNCTION
+* 1
+
+List of outgoing links : 
+
+* ARGUMENT
+* BLOCK
+* DEFINITION
+* NAME
+* OVERWRITE
+* RETURNED
+
+List of incoming links : 
+
+* ANALYZED
+* METHOD
+* OVERWRITE
+
+
+Methodcall
+___________________________
+
+
+Docs for Methodcall
+
+.. image:: images/Methodcall.png
+                            :alt: Methodcall's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* enclosing
+* fullcode
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_CURLY_OPEN
+* T_OBJECT_OPERATOR
+
+List of outgoing links : 
+
+* METHOD
+* OBJECT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CAST
+* CLONE
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NOT
+* OBJECT
+* RETURN
+* RIGHT
+* SOURCE
+* THEN
+* VALUE
+* VARIABLE
+
+
+Methodcallname
+___________________________
+
+
+Docs for Methodcallname
+
+.. image:: images/Methodcallname.png
+                            :alt: Methodcallname's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* ARGUMENT
+* NAME
+
+List of incoming links : 
+
+* METHOD
+
+
+Multiplication
+___________________________
+
+
+Docs for Multiplication
+
+.. image:: images/Multiplication.png
+                            :alt: Multiplication's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_PERCENTAGE
+* T_SLASH
+* T_STAR
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONCAT
+* CONDITION
+* ELSE
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* SIGN
+* THEN
+* VALUE
+
+
+Name
+___________________________
+
+
+Docs for Name
+
+.. image:: images/Name.png
+                            :alt: Name's outgoing diagramm
+
+List of available properties : 
+
+* aliased
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_LIST
+* T_STRING
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* CONSTANT
+* DEFINITION
+* GOTO
+* GOTOLABEL
+* MEMBER
+* NAME
+
+
+Namespace
+___________________________
+
+
+Docs for Namespace
+
+.. image:: images/Namespace.png
+                            :alt: Namespace's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_NAMESPACE
+
+List of outgoing links : 
+
+* BLOCK
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+New
+___________________________
+
+
+Docs for New
+
+.. image:: images/New.png
+                            :alt: New's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_NEW
+
+List of outgoing links : 
+
+* NEW
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* DEFINITION
+* RETURN
+* RIGHT
+* THROW
+* VALUE
+
+
+Newcall
+___________________________
+
+
+Docs for Newcall
+
+.. image:: images/Newcall.png
+                            :alt: Newcall's outgoing diagramm
+
+List of available properties : 
+
+* absolute
+* aliased
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* noscream
+* rank
+
+List of possible tokens : 
+
+* T_LIST
+* T_NS_SEPARATOR
+* T_STRING
+* T_VARIABLE
+
+List of outgoing links : 
+
+* ARGUMENT
+* DEFINITION
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CAST
+* CLASS
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NAME
+* NEW
+* NOT
+* OBJECT
+* RETURN
+* RIGHT
+* SIGN
+* THEN
+* TYPEHINT
+* VALUE
+
+
+Not
+___________________________
+
+
+Docs for Not
+
+.. image:: images/Not.png
+                            :alt: Not's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_BANG
+* T_TILDE
+
+List of outgoing links : 
+
+* NOT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONDITION
+* LEFT
+* NOT
+* RETURN
+* RIGHT
+* VALUE
+
+
+Nsname
+___________________________
+
+
+Docs for Nsname
+
+.. image:: images/Nsname.png
+                            :alt: Nsname's outgoing diagramm
+
+List of available properties : 
+
+* absolute
+* alias
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* origin
+* rank
+
+List of possible tokens : 
+
+* T_NS_SEPARATOR
+* T_STRING
+* 1
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* CLASS
+* DEFINITION
+* EXTENDS
+* IMPLEMENTS
+* NAME
+* NEW
+* TYPEHINT
+* USE
+
+
+Null
+___________________________
+
+
+Docs for Null
+
+.. image:: images/Null.png
+                            :alt: Null's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_STRING
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* DEFAULT
+* ELSE
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Parameter
+___________________________
+
+
+Docs for Parameter
+
+.. image:: images/Parameter.png
+                            :alt: Parameter's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+* reference
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* DEFAULT
+* DEFINITION
+* NAME
+* TYPEHINT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* DEFINITION
+* USE
+
+
+Parametername
+___________________________
+
+
+Docs for Parametername
+
+.. image:: images/Parametername.png
+                            :alt: Parametername's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* GLOBAL
+* NAME
+
+
+Parent
+___________________________
+
+
+Docs for Parent
+
+.. image:: images/Parent.png
+                            :alt: Parent's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_STRING
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* CLASS
+* DEFINITION
+
+
+Parenthesis
+___________________________
+
+
+Docs for Parenthesis
+
+.. image:: images/Parenthesis.png
+                            :alt: Parenthesis's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_OPEN_PARENTHESIS
+
+List of outgoing links : 
+
+* CODE
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CAST
+* CLONE
+* CODE
+* CONCAT
+* CONDITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* NOT
+* RETURN
+* RIGHT
+* SIGN
+* THEN
+* VALUE
+
+
+Php
+___________________________
+
+
+Docs for Php
+
+.. image:: images/Php.png
+                            :alt: Php's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_OPEN_TAG
+
+List of outgoing links : 
+
+* CODE
+
+List of incoming links : 
+
+* EXPRESSION
+
+
+Phpvariable
+___________________________
+
+
+A PHP reserved variable, such as `$_GET`, `$_POST`, `$GLOBALS`, etc. 
+
+.. image:: images/Phpvariable.png
+                            :alt: Phpvariable's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CONDITION
+* DEFINITION
+* LEFT
+* RIGHT
+* SOURCE
+* VALUE
+* VARIABLE
+
+
+Postplusplus
+___________________________
+
+
+Docs for Postplusplus
+
+.. image:: images/Postplusplus.png
+                            :alt: Postplusplus's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DEC
+* T_INC
+
+List of outgoing links : 
+
+* POSTPLUSPLUS
+
+List of incoming links : 
+
+* ANALYZED
+* CODE
+* CONDITION
+* EXPRESSION
+* INDEX
+* RETURN
+* RIGHT
+
+
+Ppp
+___________________________
+
+
+Docs for Ppp
+
+.. image:: images/Ppp.png
+                            :alt: Ppp's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+* static
+* visibility
+
+List of possible tokens : 
+
+* T_PRIVATE
+* T_PROTECTED
+* T_PUBLIC
+* T_STATIC
+* T_VAR
+* 1
+
+List of outgoing links : 
+
+* PPP
+
+List of incoming links : 
+
+* ANALYZED
+* PPP
+
+
+Preplusplus
+___________________________
+
+
+Docs for Preplusplus
+
+.. image:: images/Preplusplus.png
+                            :alt: Preplusplus's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DEC
+* T_INC
+
+List of outgoing links : 
+
+* PREPLUSPLUS
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+* INDEX
+* LEFT
+* RIGHT
+* VALUE
+
+
+Print
+___________________________
+
+
+Docs for Print
+
+.. image:: images/Print.png
+                            :alt: Print's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_PRINT
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Project
+___________________________
+
+
+Docs for Project
+
+.. image:: images/Project.png
+                            :alt: Project's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_WHOLE
+
+List of outgoing links : 
+
+* PROJECT
+
+List of incoming links : 
+
+* 
+
+
+Propertydefinition
+___________________________
+
+
+Docs for Propertydefinition
+
+.. image:: images/Propertydefinition.png
+                            :alt: Propertydefinition's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* propertyname
+* rank
+
+List of possible tokens : 
+
+* T_VARIABLE
+* 1
+
+List of outgoing links : 
+
+* DEFAULT
+* DEFINITION
+* OVERWRITE
+
+List of incoming links : 
+
+* ANALYZED
+* OVERWRITE
+* PPP
+
+
+Real
+___________________________
+
+
+Docs for Real
+
+.. image:: images/Real.png
+                            :alt: Real's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_DNUMBER
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ARGUMENT
+* DEFAULT
+* ELSE
+* LEFT
+* RIGHT
+* VALUE
+
+
+Return
+___________________________
+
+
+Docs for Return
+
+.. image:: images/Return.png
+                            :alt: Return's outgoing diagramm
+
+List of available properties : 
+
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_RETURN
+
+List of outgoing links : 
+
+* RETURN
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Self
+___________________________
+
+
+Docs for Self
+
+.. image:: images/Self.png
+                            :alt: Self's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* intval
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_STRING
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* CLASS
+* DEFINITION
+* NAME
+
+
+Sequence
+___________________________
+
+
+Docs for Sequence
+
+.. image:: images/Sequence.png
+                            :alt: Sequence's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* bracket
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+* root
+
+List of possible tokens : 
+
+* T_CLOSE_CURLY
+* T_CLOSE_PARENTHESIS
+* T_OPEN_CURLY
+* T_OPEN_TAG
+* T_SEMICOLON
+* T_SWITCH
+
+List of outgoing links : 
+
+* EXPRESSION
+
+List of incoming links : 
+
+* ANALYZED
+* BLOCK
+* CASES
+* CODE
+* ELSE
+* EXPRESSION
+* FILE
+* FINAL
+* INCREMENT
+* INIT
+* THEN
+
+
+Sign
+___________________________
+
+
+A Sign structure : when a `-`or `+` has been added before another expression. For example `- ($a + $b)`.
+
+.. image:: images/Sign.png
+                            :alt: Sign's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_CLOSE_BRACKET
+* T_CLOSE_PARENTHESIS
+* T_LNUMBER
+* T_STRING
+* T_VARIABLE
+* 1
+
+List of outgoing links : 
+
+* SIGN
+
+List of incoming links : 
+
+* ARGUMENT
+* CODE
+* ELSE
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Static
+___________________________
+
+
+Docs for Static
+
+.. image:: images/Static.png
+                            :alt: Static's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_STATIC
+
+List of outgoing links : 
+
+* STATIC
+
+List of incoming links : 
+
+* CLASS
+* DEFINITION
+* EXPRESSION
+
+
+Staticclass
+___________________________
+
+
+Docs for Staticclass
+
+.. image:: images/Staticclass.png
+                            :alt: Staticclass's outgoing diagramm
+
+List of available properties : 
+
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_DOUBLE_COLON
+
+List of outgoing links : 
+
+* CLASS
+
+List of incoming links : 
+
+* ARGUMENT
+
+
+Staticconstant
+___________________________
+
+
+Docs for Staticconstant
+
+.. image:: images/Staticconstant.png
+                            :alt: Staticconstant's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_DOUBLE_COLON
+* 1
+
+List of outgoing links : 
+
+* CLASS
+* CONSTANT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CONCAT
+* DEFAULT
+* DEFINITION
+* ELSE
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Staticdefinition
+___________________________
+
+
+Docs for Staticdefinition
+
+.. image:: images/Staticdefinition.png
+                            :alt: Staticdefinition's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* DEFAULT
+* DEFINITION
+
+List of incoming links : 
+
+* ANALYZED
+* DEFINITION
+* STATIC
+
+
+Staticmethodcall
+___________________________
+
+
+Docs for Staticmethodcall
+
+.. image:: images/Staticmethodcall.png
+                            :alt: Staticmethodcall's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DOUBLE_COLON
+
+List of outgoing links : 
+
+* CLASS
+* METHOD
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* EXPRESSION
+* INDEX
+* LEFT
+* NOT
+* RETURN
+* RIGHT
+* SOURCE
+* THEN
+* VALUE
+* VARIABLE
+
+
+Staticproperty
+___________________________
+
+
+Docs for Staticproperty
+
+.. image:: images/Staticproperty.png
+                            :alt: Staticproperty's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DOUBLE_COLON
+* 1
+
+List of outgoing links : 
+
+* CLASS
+* MEMBER
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CONCAT
+* CONDITION
+* DEFINITION
+* INDEX
+* LEFT
+* NOT
+* OBJECT
+* RETURN
+* RIGHT
+* SOURCE
+* VALUE
+* VARIABLE
+
+
+Staticpropertyname
+___________________________
+
+
+Docs for Staticpropertyname
+
+.. image:: images/Staticpropertyname.png
+                            :alt: Staticpropertyname's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_VARIABLE
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* DEFINITION
+* MEMBER
+* NAME
+
+
+String
+___________________________
+
+
+Docs for String
+
+.. image:: images/String.png
+                            :alt: String's outgoing diagramm
+
+List of available properties : 
+
+* block
+* boolean
+* cbMethod
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* delimiter
+* encoding
+* fullcode
+* fullnspath
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_CONSTANT_ENCAPSED_STRING
+* T_ENCAPSED_AND_WHITESPACE
+* T_QUOTE
+* T_STRING
+
+List of outgoing links : 
+
+* CONCAT
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CODE
+* CONCAT
+* DEFAULT
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
+
+
+Switch
+___________________________
+
+
+A switch structure.
+
+.. image:: images/Switch.png
+                            :alt: Switch's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_SWITCH
+* 1
+
+List of outgoing links : 
+
+* CASES
+* CONDITION
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Ternary
+___________________________
+
+
+Docs for Ternary
+
+.. image:: images/Ternary.png
+                            :alt: Ternary's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_QUESTION
+
+List of outgoing links : 
+
+* CONDITION
+* ELSE
+* THEN
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CODE
+* EXPRESSION
+* RETURN
+* RIGHT
+* SOURCE
+* VALUE
+
+
+This
+___________________________
+
+
+The special variable `$this`.
+
+.. image:: images/This.png
+                            :alt: This's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* noscream
+* rank
+* reference
+
+List of possible tokens : 
+
+* T_VARIABLE
+* 1
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CLASS
+* CLONE
+* DEFINITION
+* OBJECT
+* RETURN
+* RIGHT
+* VALUE
+* VARIABLE
+
+
+Throw
+___________________________
+
+
+Docs for Throw
+
+.. image:: images/Throw.png
+                            :alt: Throw's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_THROW
+* 1
+
+List of outgoing links : 
+
+* THROW
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Trait
+___________________________
+
+
+A trait. For example : `trait t { function foo() {} }`
+
+.. image:: images/Trait.png
+                            :alt: Trait's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_TRAIT
+
+List of outgoing links : 
+
+* DEFINITION
+* METHOD
+* NAME
+* PPP
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Try
+___________________________
+
+
+The Try part in a try/catch/finally expression.
+
+.. image:: images/Try.png
+                            :alt: Try's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_TRY
+* 1
+
+List of outgoing links : 
+
+* BLOCK
+* CATCH
+* FINALLY
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Unset
+___________________________
+
+
+Docs for Unset
+
+.. image:: images/Unset.png
+                            :alt: Unset's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_UNSET
+* 1
+
+List of outgoing links : 
+
+* ARGUMENT
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Usenamespace
+___________________________
+
+
+Docs for Usenamespace
+
+.. image:: images/Usenamespace.png
+                            :alt: Usenamespace's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_USE
+* 1
+
+List of outgoing links : 
+
+* USE
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Usetrait
+___________________________
+
+
+Docs for Usetrait
+
+.. image:: images/Usetrait.png
+                            :alt: Usetrait's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_USE
+
+List of outgoing links : 
+
+* USE
+
+List of incoming links : 
+
+* ANALYZED
+* USE
+
+
+Variable
+___________________________
+
+
+A Variable, as a standalone container. For example : `$a = 1` or `$b += 3`. Variables in arrays are `Variablearray`, while variables in objects are `Variableobject`. 
+
+.. image:: images/Variable.png
+                            :alt: Variable's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* enclosing
+* fullcode
+* lccode
+* line
+* noDelimiter
+* noscream
+* rank
+* reference
+
+List of possible tokens : 
+
+* T_CURLY_OPEN
+* T_DOLLAR
+* T_VARIABLE
+
+List of outgoing links : 
+
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* CASE
+* CAST
+* CLASS
+* CLONE
+* CODE
+* CONCAT
+* CONDITION
+* DEFINITION
+* ELSE
+* EXPRESSION
+* INDEX
+* LEFT
+* MEMBER
+* NAME
+* NEW
+* NOT
+* POSTPLUSPLUS
+* PREPLUSPLUS
+* RETURN
+* RETURNED
+* RIGHT
+* SIGN
+* SOURCE
+* THEN
+* THROW
+* VALUE
+* VARIABLE
+* YIELD
+
+
+Variablearray
+___________________________
+
+
+Docs for Variablearray
+
+.. image:: images/Variablearray.png
+                            :alt: Variablearray's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* APPEND
+* DEFINITION
+* RETURNED
+* VARIABLE
+
+
+Variabledefinition
+___________________________
+
+
+Docs for Variabledefinition
+
+.. image:: images/Variabledefinition.png
+                            :alt: Variabledefinition's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* 
+
+List of outgoing links : 
+
+* DEFINITION
+
+List of incoming links : 
+
+* DEFINITION
+* GLOBAL
+
+
+Variableobject
+___________________________
+
+
+Docs for Variableobject
+
+.. image:: images/Variableobject.png
+                            :alt: Variableobject's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* noscream
+
+List of possible tokens : 
+
+* T_VARIABLE
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* DEFINITION
+* OBJECT
+* RETURNED
+
+
+Void
+___________________________
+
+
+A Void operation. It represents the absence of data. For example : `foo();;` : there is a Void as argument, and one between the semicolons.
+
+.. image:: images/Void.png
+                            :alt: Void's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* constant
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* v
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* BLOCK
+* BREAK
+* CAST
+* CODE
+* CONTINUE
+* EXPRESSION
+* RETURN
+* THEN
+
+
+While
+___________________________
+
+
+A While structure, different from a Dowhile structure. For example : `while($a < 10) { $a++;}`
+
+.. image:: images/While.png
+                            :alt: While's outgoing diagramm
+
+List of available properties : 
+
+* alternative
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_WHILE
+
+List of outgoing links : 
+
+* BLOCK
+* CONDITION
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
 
 Atom properties
 ###############
@@ -496,320 +4813,6 @@ Links are oriented : they always start from the mentioned atom, and go to the ne
 
 The destination atom type is rarely defined. PHP always provides a lot of freedom, and various expressions may be used at the same place. Consider calling a function : `foo()`, `\foo()`, '$foo()`, `foo()()`, `$foo[1]()`. So, the target for 'NAME' from a 'Functioncall' atom, may be a 'Name', 'Nsname', 'Variable', 'Functioncall', 'Array'. Usually, it is important to always check the landing atom, before accessing properties.
 
-* Addition
-    * LEFT
-    * RIGHT
-* Array
-    * VARIABLE
-    * INDEX
-* Arrayappend
-    * APPEND
-* Arrayliteral
-    * ARGUMENT
-    * DEFINITION
-* As
-    * NAME
-    * AS
-* Assignation
-    * LEFT
-    * RIGHT
-* Bitshift
-    * LEFT
-    * RIGHT
-* Block
-    * EXPRESSION
-* Boolean
-* Break
-    * BREAK
-* Case
-    * CASE
-    * CODE
-* Cast
-    * CAST
-* Catch
-    * CLASS
-    * VARIABLE
-    * BLOCK
-* Class
-    * NAME
-    * IMPLEMENTS
-    * EXTENDS
-    * METHOD
-    * MAGICMETHOD
-    * CONST
-    * PPP
-    * DEFINITION
-* Classanonymous
-    * NAME
-    * IMPLEMENTS
-    * EXTENDS
-    * METHOD
-    * MAGICMETHOD
-    * CONST
-    * PPP
-    * DEFINITION
-* Clone
-    * CLONE
-* Closure
-    * BLOCK
-    * USE
-    * ARGUMENT
-    * RETURNTYPE
-    * DEFINITION
-    * RETURNED
-* Coalesce
-    * LEFT
-    * RIGHT
-* Comparison
-    * LEFT
-    * RIGHT
-* Concatenation
-    * CONCAT
-* Const
-    * CONST
-* Constant
-    * NAME
-    * VALUE
-    * DEFINITION
-* Continue
-    * CONTINUE
-* Declare
-    * BLOCK
-* Declaredefinition
-    * NAME
-    * VALUE
-* Default
-    * CODE
-* Defineconstant
-    * NAME
-    * VALUE
-    * ARGUMENT
-    * DEFINITION
-* Dowhile
-    * CONDITION
-    * BLOCK
-* Echo
-    * ARGUMENT
-* Empty
-    * ARGUMENT
-* Eval
-    * ARGUMENT
-* Exit
-    * ARGUMENT
-* File
-    * FILE
-* Finally
-    * BLOCK
-* For
-    * INIT
-    * FINAL
-    * INCREMENT
-    * BLOCK
-* Foreach
-    * SOURCE
-    * VALUE
-    * BLOCK
-* Function
-    * NAME
-    * ARGUMENT
-    * RETURNTYPE
-    * BLOCK
-    * DEFINITION
-    * RETURNED
-* Functioncall
-    * NAME
-    * ARGUMENT
-* Global
-    * GLOBAL
-* Globaldefinition
-    * DEFAULT
-    * DEFINITION
-* Goto
-    * GOTO
-* Gotolabel
-    * GOTOLABEL
-* Halt
-* Heredoc
-    * CONCAT
-* Identifier
-* Ifthen
-    * CONDITION
-    * THEN
-    * ELSE
-* Include
-    * ARGUMENT
-* Inlinehtml
-* Instanceof
-    * VARIABLE
-    * CLASS
-* Insteadof
-    * NAME
-    * INSTEADOF
-* Integer
-* Interface
-    * NAME
-    * IMPLEMENTS
-    * METHOD
-    * MAGICMETHOD
-    * CONST
-    * DEFINITION
-* Isset
-    * ARGUMENT
-* Keyvalue
-    * INDEX
-    * VALUE
-* List
-    * ARGUMENT
-    * NAME
-* Logical
-    * LEFT
-    * RIGHT
-* Magicconstant
-* Member
-    * OBJECT
-    * MEMBER
-* Magicmethod
-    * NAME
-    * ARGUMENT
-    * RETURNTYPE
-    * BLOCK
-    * DEFINITION
-    * RETURNED
-* Method
-    * NAME
-    * ARGUMENT
-    * RETURNTYPE
-    * BLOCK
-    * DEFINITION
-    * RETURNED
-* Methodcall
-    * OBJECT
-    * METHOD
-* Methodcallname
-    * NAME
-    * ARGUMENT
-    * DEFINITION
-* Multiplication
-    * LEFT
-    * RIGHT
-* Name
-    * DEFINITION
-* Namespace
-    * NAME
-    * BLOCK
-* New
-    * NEW
-* Newcall
-    * ARGUMENT
-    * NAME
-* Not
-    * NOT
-* Nsname
-* Null
-* Parameter
-    * NULLABLE
-    * TYPEHINT
-    * DEFAULT
-    * NAME
-* Parametername
-    * DEFINITION
-* Parent
-* Parenthesis
-    * CODE
-* Php
-    * CODE
-* Phpvariable
-* Postplusplus
-    * POSTPLUSPLUS
-* Power
-    * LEFT
-    * RIGHT
-* Ppp
-    * PPP
-* Preplusplus
-    * PREPLUSPLUS
-* Print
-    * ARGUMENT
-* Project
-    * PROJECT
-* Propertydefinition
-    * DEFAULT
-    * NAME
-    * DEFINITION
-* Real
-* Return
-    * RETURN
-* Self
-* Sequence
-    * EXPRESSION
-* Shell
-    * CONCAT
-* Sign
-    * SIGN
-* Static
-    * STATIC
-* Staticclass
-    * CLASS
-* Staticconstant
-    * CLASS
-    * CONSTANT
-* Staticdefinition
-    * DEFINITION
-    * DEFAULT
-    * NAME
-* Staticmethod
-* Staticmethodcall
-    * CLASS
-    * METHOD
-* Staticproperty
-    * CLASS
-    * MEMBER
-* Staticpropertyname
-* String
-    * CONCAT
-* Switch
-    * CONDITION
-    * CASES
-* Ternary
-    * CONDITION
-    * THEN
-    * ELSE
-* This
-* Throw
-    * THROW
-* Trait
-    * NAME
-    * USE
-    * METHOD
-    * MAGICMETHOD
-    * PPP
-    * DEFINITION
-* Try
-    * CATCH
-    * FINALLY
-    * BLOCK
-* Unset
-    * ARGUMENT
-* Usenamespace
-    * USE
-* Usetrait
-    * USE
-* Var
-    * PPP
-* Variable
-* Variabledefinition
-    * DEFINITION
-* Variablearray
-* Variableobject
-* Void
-* While
-    * CONDITION
-    * BLOCK
-* Yield
-    * YIELD
-* Yieldfrom
-    * YIELD
-
 Navigating 
 ##########
 
@@ -847,50 +4850,388 @@ All steps
 _________
 
 
-* AddEFrom($stepName) : adds a link between the current atom from the atom called $stepName (see _As())
-* AddETo ($stepName) : adds a link between the current atom to the atom called $stepName (see _As())
-* AnalyzerIs($analyzerName) : checks that the current atom satisfy the analyzer $analyzerName
-* AnalyzerIsNot($analyzerName) : checks that the current atom doesn't satisfy the analyzer $analyzerName
-* AtomFunctionIs($functionName) : checks that the current atom is a Functioncall with the name $functionName
-* AtomInside($atomName) : searches for all atom $atomName inside the current one, by searching every outgoing links
-* AtomInsideNoAnonymous($atomName) : searches for all atom $atomName inside the current one, by searching every outgoing links, but skips anonymous code like Closure and Classanonymous
-* AtomInsideNoBlock($atomName) : searches for all atom $atomName inside the current one, by searching every outgoing links, but skips blocks
-* AtomInsideNoDefinition($atomName) : searches for all atom $atomName inside the current one, by searching every outgoing links, but skips any definition, closure, class, interface, function, etc.
-* AtomIs($atomName) : checks that an atom has a specified name
-* AtomIsNot($atomName) : checks that an atom is not a specified name
-* Back($stepName) : moves the query to the atom called ($stepName) (see _As()
+Here is the list of the 190 available steps : 
+
+* AddEFrom : adds a link between the current atom from the atom called  (see _As())
+
+* AddETo : adds a link between the current atom to the atom called  (see _As())
+
+* AnalyzerInsideMoreThan : Docs for AnalyzerInsideMoreThan
+
+* AnalyzerIs : checks that the current atom satisfy the analyzer 
+
+* AnalyzerIsNot : checks that the current atom doesn't satisfy the analyzer 
+
+* AtomFunctionIs : checks that the current atom is a Functioncall with the name 
+
+* AtomInside : searches for all atom  inside the current one, by searching every outgoing links
+
+* AtomInsideExpression : Docs for AtomInsideExpression
+
+* AtomInsideMoreThan : Docs for AtomInsideMoreThan
+
+* AtomInsideNoAnonymous : searches for all atom  inside the current one, by searching every outgoing links, but skips anonymous code like Closure and Classanonymous
+
+* AtomInsideNoBlock : searches for all atom  inside the current one, by searching every outgoing links, but skips blocks
+
+* AtomInsideNoDefinition : searches for all atom  inside the current one, by searching every outgoing links, but skips any definition, closure, class, interface, function, etc.
+
+* AtomIs : checks that an atom has a specified name
+
+* AtomIsNot : checks that an atom is not a specified name
+
+* Back : moves the query to the atom called () (see _As()
+
 * ClassDefinition : moves the query to the classDefinition, if it exists
-* CodeIs($code) : checks that the 'code' property has a given value
-* CodeIsNot($code) : checks that the 'code' property has a value different from the given one
-* CodeIsPositiveInteger  : checks that the 'code' property is a positive integer
-* CodeLength($lengthStorage) : report the length of the string that represents the code
-* Has($property) : checks if a property $propertyName is available for the current atom 
-* HasIn($linkName) : checks if the current atom has an incoming link with a name
-* HasNoIn($linkName) : checks if the current atom has no incoming link with a name
-* HasNoOut($linkName) : checks if the current atom has no outgoing link with a name
-* HasNoVariadicArgument() : checks if any argument uses the variadic operator 
-* HasOut($linkName) : checks if the current atom has no outgoing link with a name
-* InIs($linkName) : follows the link to the parent atom
-* InIsIE($linkName) : follows a link if it is present, or stay put
-* InIsNot($linkName) : follows a link that is not the given value
-* Is($propertyName, $value) : checks that the property $propertyName has the value $value
-* IsArgument() : checks if the current atom is an argument of a function or method call
-* IsLiteral() : checks if an atom is a literal value
-* IsNot($property, $value) : checks if a property is present, and if its value is different from the given value
-* IsNotArgument() : checks if an atom is not the argument of a functioncall
-* NoAtomInside($atomName) : checks that the current atom has no $atomName inside its links
-* NoChildWithRank($linkName, $link) : checks that the current atom has no children, after following the link $linkName, and checking for the rank $rank
-* NoDelimiterIs($value) : checks that the 'noDelimiter' property has a given value $value
-* NoDelimiterIsNot($value) : checks that the 'noDelimiter' property has not a given value $value
+
+* CodeIs : checks that the 'code' property has a given value
+
+* CodeIsNot : checks that the 'code' property has a value different from the given one
+
+* CodeIsPositiveInteger : Docs for CodeIsPositiveInteger
+
+* CodeLength : report the length of the string that represents the code
+
+* CollectContainers : Docs for CollectContainers
+
+* CollectExtends : Docs for CollectExtends
+
+* CollectImplements : Docs for CollectImplements
+
+* CollectVariables : Docs for CollectVariables
+
+* Command : Docs for Command
+
+* Count : Docs for Count
+
+* CountBy : Docs for CountBy
+
+* DSLFactory : Docs for DSLFactory
+
+* Dedup : Docs for Dedup
+
+* Extending : Docs for Extending
+
+* FetchContext : Docs for FetchContext
+
+* Filter : Docs for Filter
+
+* FollowExpression : Docs for FollowExpression
+
+* FullcodeInside : Docs for FullcodeInside
+
+* FullcodeIs : Docs for FullcodeIs
+
+* FullcodeLength : Docs for FullcodeLength
+
+* FullcodeVariableIs : Docs for FullcodeVariableIs
+
+* FullnspathIs : Docs for FullnspathIs
+
+* FullnspathIsNot : Docs for FullnspathIsNot
+
+* FunctionDefinition : Docs for FunctionDefinition
+
+* FunctionInside : Docs for FunctionInside
+
+* FunctioncallIs : Docs for FunctioncallIs
+
+* FunctioncallIsNot : Docs for FunctioncallIsNot
+
+* GetNameInFNP : Docs for GetNameInFNP
+
+* GetStringLength : Docs for GetStringLength
+
+* GoToAllChildren : Docs for GoToAllChildren
+
+* GoToAllElse : Docs for GoToAllElse
+
+* GoToAllImplements : Docs for GoToAllImplements
+
+* GoToAllParents : Docs for GoToAllParents
+
+* GoToAllParentsTraits : Docs for GoToAllParentsTraits
+
+* GoToAllTraits : Docs for GoToAllTraits
+
+* GoToArray : Docs for GoToArray
+
+* GoToClass : Docs for GoToClass
+
+* GoToCurrentScope : Docs for GoToCurrentScope
+
+* GoToExpression : Docs for GoToExpression
+
+* GoToExtends : Docs for GoToExtends
+
+* GoToFirstExpression : Docs for GoToFirstExpression
+
+* GoToFunction : Docs for GoToFunction
+
+* GoToImplements : Docs for GoToImplements
+
+* GoToInstruction : Docs for GoToInstruction
+
+* GoToInterface : Docs for GoToInterface
+
+* GoToLiteralValue : Docs for GoToLiteralValue
+
+* GoToNamespace : Docs for GoToNamespace
+
+* GoToParent : Docs for GoToParent
+
+* GoToTrait : Docs for GoToTrait
+
+* GoToTraits : Docs for GoToTraits
+
+* GroupCount : Docs for GroupCount
+
+* GroupFilter : Docs for GroupFilter
+
+* Has : checks if a property  is available for the current atom 
+
+* HasAtomInside : Docs for HasAtomInside
+
+* HasChildWithRank : Docs for HasChildWithRank
+
+* HasChildren : Docs for HasChildren
+
+* HasClassDefinition : Docs for HasClassDefinition
+
+* HasClassInterface : Docs for HasClassInterface
+
+* HasClassTrait : Docs for HasClassTrait
+
+* HasConstantDefinition : Docs for HasConstantDefinition
+
+* HasFunction : Docs for HasFunction
+
+* HasFunctionDefinition : Docs for HasFunctionDefinition
+
+* HasIn : checks if the current atom has an incoming link with a name
+
+* HasInstruction : Docs for HasInstruction
+
+* HasInterfaceDefinition : Docs for HasInterfaceDefinition
+
+* HasNextSibling : Docs for HasNextSibling
+
+* HasNo : Docs for HasNo
+
+* HasNoChildren : Docs for HasNoChildren
+
+* HasNoComparison : Docs for HasNoComparison
+
+* HasNoConstantDefinition : Docs for HasNoConstantDefinition
+
+* HasNoCountedInstruction : Docs for HasNoCountedInstruction
+
+* HasNoDefinition : Docs for HasNoDefinition
+
+* HasNoFunction : Docs for HasNoFunction
+
+* HasNoFunctionDefinition : Docs for HasNoFunctionDefinition
+
+* HasNoIn : checks if the current atom has no incoming link with a name
+
+* HasNoInstruction : Docs for HasNoInstruction
+
+* HasNoNamedInstruction : Docs for HasNoNamedInstruction
+
+* HasNoNextSibling : Docs for HasNoNextSibling
+
+* HasNoOut : checks if the current atom has no outgoing link with a name
+
+* HasNoParent : Docs for HasNoParent
+
+* HasNoUsage : Docs for HasNoUsage
+
+* HasNoVariadicArgument : checks if any argument uses the variadic operator 
+
+* HasOut : checks if the current atom has no outgoing link with a name
+
+* HasParent : Docs for HasParent
+
+* HasPropertyInside : Docs for HasPropertyInside
+
+* HasTraitDefinition : Docs for HasTraitDefinition
+
+* HasVariadicArgument : Docs for HasVariadicArgument
+
+* Ignore : Docs for Ignore
+
+* Implementing : Docs for Implementing
+
+* InIs : follows the link to the parent atom
+
+* InIsIE : follows a link if it is present, or stay put
+
+* InIsNot : follows a link that is not the given value
+
+* InitVariable : Docs for InitVariable
+
+* InterfaceDefinition : Docs for InterfaceDefinition
+
+* Is : checks that the property  has the value 
+
+* IsArgument : checks if the current atom is an argument of a function or method call
+
+* IsComplexExpression : Docs for IsComplexExpression
+
+* IsEqual : Docs for IsEqual
+
+* IsGlobalCode : Docs for IsGlobalCode
+
+* IsHash : Docs for IsHash
+
+* IsInCatchBlock : Docs for IsInCatchBlock
+
+* IsLess : Docs for IsLess
+
+* IsLiteral : checks if an atom is a literal value
+
+* IsLocalClass : Docs for IsLocalClass
+
+* IsLowercase : Docs for IsLowercase
+
+* IsMore : Docs for IsMore
+
+* IsNot : checks if a property is present, and if its value is different from the given value
+
+* IsNotArgument : checks if an atom is not the argument of a functioncall
+
+* IsNotEmptyArray : Docs for IsNotEmptyArray
+
+* IsNotEmptyBody : Docs for IsNotEmptyBody
+
+* IsNotExtendingComposer : Docs for IsNotExtendingComposer
+
+* IsNotHash : Docs for IsNotHash
+
+* IsNotInheritedMethod : Docs for IsNotInheritedMethod
+
+* IsNotLiteral : Docs for IsNotLiteral
+
+* IsNotLocalClass : Docs for IsNotLocalClass
+
+* IsNotLowercase : Docs for IsNotLowercase
+
+* IsNotMixedcase : Docs for IsNotMixedcase
+
+* IsNotUppercase : Docs for IsNotUppercase
+
+* IsReassigned : Docs for IsReassigned
+
+* IsReferencedArgument : Docs for IsReferencedArgument
+
+* IsUppercase : Docs for IsUppercase
+
+* IsUsed : Docs for IsUsed
+
+* MakeVariableName : Docs for MakeVariableName
+
+* NextSibling : Docs for NextSibling
+
+* NextSiblings : Docs for NextSiblings
+
+* NoAnalyzerInside : Docs for NoAnalyzerInside
+
+* NoAnalyzerInsideWithProperty : Docs for NoAnalyzerInsideWithProperty
+
+* NoAtomInside : checks that the current atom has no  inside its links
+
+* NoAtomPropertyInside : Docs for NoAtomPropertyInside
+
+* NoAtomWithoutPropertyInside : Docs for NoAtomWithoutPropertyInside
+
+* NoChildWithRank : checks that the current atom has no children, after following the link , and checking for the rank 
+
+* NoClassDefinition : Docs for NoClassDefinition
+
+* NoCodeInside : Docs for NoCodeInside
+
+* NoDelimiterIs : checks that the 'noDelimiter' property has a given value 
+
+* NoDelimiterIsNot : checks that the 'noDelimiter' property has not a given value 
+
+* NoFullcodeInside : Docs for NoFullcodeInside
+
+* NoFunctionInside : Docs for NoFunctionInside
+
+* NoInterfaceDefinition : Docs for NoInterfaceDefinition
+
+* NoTraitDefinition : Docs for NoTraitDefinition
+
+* NoUseDefinition : Docs for NoUseDefinition
+
+* Not : Docs for Not
+
+* NotExtending : Docs for NotExtending
+
+* NotImplementing : Docs for NotImplementing
+
+* NotSamePropertyAs : Docs for NotSamePropertyAs
+
+* OtherSiblings : Docs for OtherSiblings
+
 * OutIs : follow an outgoing link
+
 * OutIsIE : follow an outgoing link if it is present, and stay put otherwise
+
 * OutIsNot : follow an outgoing link if it is not the given value
+
 * OutWithRank : follow an outgoing link to the given rank
-* RegexIs($propertyName, $regex) : apply a regex on the property $propertyName
-* RegexIsNot($propertyName, $regex): apply a regex on the property $propertyName, and checks that is fails
-* TokenIs($tokenName) : checks that the current atom uses the token $tokenName
-* TokenIsNot($tokenName) : checks that the current atom uses a different token than the token $tokenName
-* _As($stepName) : gives a unique name to the current atom. The query may come back to it with Back()
+
+* OutWithoutLastRank : Docs for OutWithoutLastRank
+
+* PreviousSibling : Docs for PreviousSibling
+
+* PreviousSiblings : Docs for PreviousSiblings
+
+* Property : Docs for Property
+
+* PropertyIs : Docs for PropertyIs
+
+* PropertyIsNot : Docs for PropertyIsNot
+
+* Raw : Docs for Raw
+
+* RegexIs : apply a regex on the property 
+
+* RegexIsNot : apply a regex on the property , and checks that is fails
+
+* ReturnCount : Docs for ReturnCount
+
+* SamePropertyAs : Docs for SamePropertyAs
+
+* SamePropertyAsArray : Docs for SamePropertyAsArray
+
+* SaveMethodNameAs : Docs for SaveMethodNameAs
+
+* SaveOutAs : Docs for SaveOutAs
+
+* SavePropertyAs : Docs for SavePropertyAs
+
+* SetProperty : Docs for SetProperty
+
+* Side : Docs for Side
+
+* TokenIs : checks that the current atom uses the token 
+
+* TokenIsNot : checks that the current atom uses a different token than the token 
+
+* Trim : Docs for Trim
+
+* Unique : Docs for Unique
+
+* Values : Docs for Values
+
+* VariableIsAssigned : Docs for VariableIsAssigned
+
+* VariableIsRead : Docs for VariableIsRead
+
+* _As : gives a unique name to the current atom. The query may come back to it with Back()
+
 
 Special values
 ______________

@@ -340,11 +340,9 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
-* cleverstyle
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
-* phpipam
 * `shopware <https://www.shopware.com/>`_
 * `xataface <http://xataface.com/>`_
 
@@ -398,6 +396,10 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.6.4
+
+  * Use Coalesce Equal (Structures/UseCoalesceEqual)
 
 * 1.6.3
 
@@ -1797,11 +1799,12 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-53 PHP error message detailled : 
+54 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
+* :ref:`Access level to x\:\:foo() must be public (as in class i) <implemented-methods-are-public>`
 * :ref:`Access level to xx\:\:$x must be public (as in class x) <redefined-property>`
 * :ref:`Access to undeclared static property <undeclared-static-property>`
 * :ref:`Accessing static property aa\:\:$a as non static <undeclared-static-property>`
@@ -1961,8 +1964,8 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
@@ -2121,8 +2124,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2179,7 +2182,7 @@ List of external links mentionned in this documentation.
 * `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
-* `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 * `isset <http://www.php.net/isset>`_
@@ -2215,8 +2218,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2248,6 +2251,7 @@ List of external links mentionned in this documentation.
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Nowdoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc>`_
+* `Null Coalescing Assignment Operator <https://wiki.php.net/rfc/null_coalesce_equal_operator>`_
 * `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
@@ -2307,8 +2311,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_

@@ -315,7 +315,7 @@ Command
 #######
 ::
 
-    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-zip] [-v] [-D]
+    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-7z|-zip] [-v] [-D]
 
 Options
 #######
@@ -341,6 +341,16 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -copy     | No  | -R path will be recursively copied.                                         |
 +-----------+-----+-----------------------------------------------------------------------------+
+| -zip      | No  | -R is a ZIP archive, local or remote                                        |
++-----------+-----+-----------------------------------------------------------------------------+
+| -tgz      | No  | -R is a .tar.gzip archive, local or remote                                  |
++-----------+-----+-----------------------------------------------------------------------------+
+| -tbz      | No  | -R is a .tar.bz2 archive, local or remote                                   |
++-----------+-----+-----------------------------------------------------------------------------+
+| -rar      | No  | -R is a .rar archive, local or remote                                       |
++-----------+-----+-----------------------------------------------------------------------------+
+| -7z       | No  | -R is a .7z archive, local or remote                                        |
++-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -D        | No  | First erase any pre-existing project with the same name                     |
@@ -352,6 +362,7 @@ Tips
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
 * Default VCS used is git. 
 * `-D` removes any previous project before doing the init.
+* Archives (zip, tar.gz, tar.bz, 7z, rar, etc.) depends on external tools to unpack them. They depends on PHP to reach the file, locally or remotely.
 
 Examples
 ########

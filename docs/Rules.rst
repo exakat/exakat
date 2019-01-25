@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 21 Jan 2019 15:47:07 +0000
-.. comment: Generation hash : 8676f4719b3359fc470171c8efacec5b012f52dd
+.. comment: Generation date : Fri, 25 Jan 2019 14:23:19 +0000
+.. comment: Generation hash : e9d9bef27714eb382d2a864efe56866963889bbd
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3786,7 +3786,7 @@ PHP doesn't lint this, unless the interface and the class are in the same file. 
    ?>
 
 
-See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
+See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_.
 
 +-------------+----------------------------------------+
 | Short name  | Interfaces/ConcreteVisibility          |
@@ -4944,12 +4944,23 @@ Addition and short assignation of addition have a different set of features when
    $j = $j << 9;
    $j <<= 9;
    
+   // PHP 7.4 and more recent
+   $l = $l ?? 'value';
+   $l ??= 'value';
+   
    ?>
 
 
 Short operators are faster than the extended version, though it is a micro-optimization.
 
 See also `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change the expression to use the short assignation
 
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseShortAssignation                                                                         |
@@ -9293,6 +9304,9 @@ This error is not reported by lint, but is reported at execution time.
    
    ?>
 
+
+See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_ and 
+        `Interfaces - the next level of abstraction <https://phpenthusiast.com/object-oriented-php-tutorials/interfaces>`_.
 
 
 
@@ -25294,7 +25308,14 @@ In special situations, variables may be used once :
 + Dynamically created variables ($$x, ${`$this <http://php.net/manual/en/language.oop5.basic.php>`_->y} or also using extract), as they are runtime values and can't be determined at static code time. They are reported for manual review.
 + Dynamically included files will provide in-scope extra variables.
 
-The current analyzer count variables at the application level, and not at a method scope level.
+The current analyzer count variables at the application level, and not at a method scope level. 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the variable
+* Fix the name of variable
+* Use the variable a second time, at least
 
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Variables/VariableUsedOnce                                                            |
@@ -25337,15 +25358,27 @@ This is the list of used once variables, scope by scope. Those variables are use
    
    ?>
 
-+-------------+-------------------------------------+
-| Short name  | Variables/VariableUsedOnceByContext |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the variable
+* Fix the name of variable
+* Use the variable a second time in the current scope, at least
+
++-------------+-----------------------------------------------------+
+| Short name  | Variables/VariableUsedOnceByContext                 |
++-------------+-----------------------------------------------------+
+| Themes      | :ref:`Analyze`                                      |
++-------------+-----------------------------------------------------+
+| Severity    | Minor                                               |
++-------------+-----------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                     |
++-------------+-----------------------------------------------------+
+| Examples    | :ref:`shopware-variables-variableusedoncebycontext` |
++-------------+-----------------------------------------------------+
 
 
 

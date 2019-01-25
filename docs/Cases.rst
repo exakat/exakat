@@ -1196,6 +1196,37 @@ Removing a file : if the file is not 'deleted' by the method call, but raises an
             }
         }
 
+Used Once Variables (In Scope)
+==============================
+
+.. _shopware-variables-variableusedoncebycontext:
+
+shopware
+^^^^^^^^
+
+:ref:`used-once-variables-(in-scope)`, in _sql/migrations/438-add-email-template-header-footer-fields.php:115. 
+
+In the updateEmailTemplate method, $generatedQueries collects all the generated SQL queries. $generatedQueries is not initialized, and never used after initialization. 
+
+.. code-block:: php
+
+    private function updateEmailTemplate($name, $content, $contentHtml = null)
+        {
+            $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+            $this->addSql($sql);
+    
+            if ($contentHtml != null) {
+                $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content", `contentHTML` = "$contentHtml" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+                $generatedQueries[] = $sql;
+            }
+    
+            $this->addSql($sql);
+        }
+
 Dangling Array References
 =========================
 
@@ -3039,7 +3070,7 @@ Empty Blocks
 
 .. _cleverstyle-structures-emptyblocks:
 
-cleverstyle
+Cleverstyle
 ^^^^^^^^^^^
 
 :ref:`empty-blocks`, in modules/Blogs/api/Controller.php:44. 
@@ -3067,7 +3098,7 @@ Else is empty, but commented.
 
 .. _phpipam-structures-emptyblocks:
 
-phpipam
+PhpIPAM
 ^^^^^^^
 
 :ref:`empty-blocks`, in wp-admin/includes/misc.php:74. 
