@@ -43,8 +43,7 @@ class UndefinedClasses extends Analyzer {
         $omitted = array_merge(array('Composer/IsComposerNsname',
                                      'Classes/IsExtClass',
                                      ),
-                                $this->extAnalyzers,
-                              );
+                                $this->extAnalyzers);
 
         $omittedAll = $omitted;
         $omittedAll[] = 'Interfaces/IsExtInterface';
