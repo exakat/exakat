@@ -77,6 +77,9 @@ class Docs {
     private $exakat_extension_list  = '';
     private $exakat_extension_det   = '';
     private $parametered_analysis   = '';
+    private $list_atoms             = array();
+    private $details_atoms          = array();
+    private $list_steps             = array();
     
     private $exakat_site            = '';
     private $exakat_version         = '';
@@ -188,6 +191,7 @@ class Docs {
         $this->prepareIniThemes();
 
         $this->prepareExakatExtensions();
+        $this->prepareDevelopment();
 
         $this->getExakatInfo();
         $this->build_reports();
@@ -295,7 +299,7 @@ class Docs {
         $versions = array();
         foreach($files as $file) {
             $folder = basename(dirname($file));
-            if ($folder === 'Reports') { 
+            if ($folder === 'Reports' || $folder == 'DSL') { 
                 continue; 
             }
             $analyzer = substr(basename($file), 0, -4);
@@ -433,6 +437,9 @@ SQL
                             'EXAKAT_EXTENSION_LIST'  => $this->exakat_extension_list,
                             'EXTENSION_DETAILS'      => $this->exakat_extension_det,
                             'PARAMETERED_ANALYSIS'   => $this->parametered_analysis,
+                            'LIST_ATOMS'             => $this->list_atoms,
+                            'DETAILS_ATOMS'          => $this->details_atoms,
+                            'LIST_STEPS'             => $this->list_steps,
                             );
     }
 
@@ -926,6 +933,78 @@ GLOSSARY;
             return $phpversion;
         }
     }
+    
+    private function prepareDevelopment() {
+        $files = glob('docs/src/Atoms/*.json');
+        
+        foreach($files as $file) {
+            if (strpos( $file, '.auto.') !== false) { continue; }
+            $name = basename($file, '.json');
+            $atoms[$name] = array_merge((array) json_decode(file_get_contents($file)),
+                                        (array) json_decode(@file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]')),
+                                        );
+        }
+        
+        $this->list_atoms = array();
+        $this->details_atoms = array();
+        foreach($atoms as $atom) {
+            $properties = array_diff( array_keys($atom), ['in', 'out', 'name', 'url', 'description', 'token']);
+            sort($properties);
+            if (!empty($atom['token'])) {
+                $atom['token'] = (array) $atom['token'];
+                sort($atom['token']);
+            } else {
+                $atom['token'] = array();
+            }
+            if (!empty($atom['in'])) {
+                $atom['in'] = (array) $atom['in'];
+                ksort($atom['in']);
+            } else {
+                $atom['in'] = array();
+            }
+            if (!empty($atom['out'])) {
+                $atom['out'] = (array) $atom['out'];
+                ksort($atom['out']);
+            } else {
+                $atom['out'] = array();
+            }
+
+            $this->list_atoms[] = "* {$atom['name']} : {$atom['description']}";
+            
+
+            $this->details_atoms[] = "{$atom['name']}\n___________________________\n\n".PHP_EOL.
+                                     "{$atom['description']}\n".PHP_EOL.
+                                     ".. image:: images/$atom[name].png
+                            :alt: $atom[name]'s outgoing diagramm".PHP_EOL.PHP_EOL.
+                                     "List of available properties : \n\n* ".implode("\n* ", $properties).PHP_EOL.PHP_EOL.
+                                     "List of possible tokens : \n\n* ".implode("\n* ", $atom['token']).PHP_EOL.PHP_EOL.
+                                     "List of outgoing links : \n\n* ".implode("\n* ", array_keys($atom['out'])).PHP_EOL.PHP_EOL.
+                                     "List of incoming links : \n\n* ".implode("\n* ", array_keys($atom['in'])).PHP_EOL.PHP_EOL.
+                                     '';
+            if (file_exists("docs/src/Atoms/$atom[name].png")) {
+                copy("docs/src/Atoms/$atom[name].png","docs/images/$atom[name].png" );
+            }
+        }
+        $this->list_atoms = 'Here is the list of the '.count($atoms).' available atoms : '
+                            .PHP_EOL.PHP_EOL.
+                            implode(PHP_EOL, $this->list_atoms);
+
+        $this->details_atoms = PHP_EOL.implode(PHP_EOL, $this->details_atoms);
+
+
+        $files = glob('human/en/DSL/*.ini');
+        foreach($files as $file) {
+            $ini = parse_ini_file($file);
+            
+            $this->list_steps[] = "* $ini[title] : $ini[description]\n";
+        }
+        
+        $this->list_steps = 'Here is the list of the '.count($this->list_steps).' available steps : '
+                            .PHP_EOL.PHP_EOL.
+                            implode(PHP_EOL, $this->list_steps);
+
+    }
+    
     
     private function prepareExakatExtensions() {
         $json = file_get_contents('https://www.exakat.io/extensions/index.json');
