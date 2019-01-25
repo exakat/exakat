@@ -1,0 +1,7 @@
+{
+    "name": "Keyvalue",
+    "description": "An expression with the `=>` operator : for arrays or foreach() instructions.",
+    "url": [
+        ""
+    ]
+}

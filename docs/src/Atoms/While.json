@@ -1,0 +1,7 @@
+{
+    "name": "While",
+    "description": "A While structure, different from a Dowhile structure. For example : `while($a < 10) { $a++;}`",
+    "url": [
+        ""
+    ]
+}

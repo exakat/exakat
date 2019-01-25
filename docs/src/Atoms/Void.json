@@ -1,0 +1,7 @@
+{
+    "name": "Void",
+    "description": "A Void operation. It represents the absence of data. For example : `foo();;` : there is a Void as argument, and one between the semicolons.",
+    "url": [
+        ""
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "name": "Arrayliteral",
+    "description": "Represents an array definition : `[4,5 => 3,6]` and `array(1,2,3)`",
+    "url": [
+        ""
+    ]
+}

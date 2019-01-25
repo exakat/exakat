@@ -1,0 +1,7 @@
+{
+    "name": "Ternary",
+    "description": "The ternary operator : `$a ? $b : 'c'`.",
+    "url": [
+        ""
+    ]
+}

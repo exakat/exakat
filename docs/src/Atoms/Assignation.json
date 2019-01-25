@@ -1,0 +1,7 @@
+{
+    "name": "Assignation",
+    "description": "Any assignation and short assignation : `$a = 1`, `$b .= 3`",
+    "url": [
+        ""
+    ]
+}

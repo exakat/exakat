@@ -1,0 +1,7 @@
+{
+    "name": "Array",
+    "description": "Represents array access : `$a[4]`, `$this['a']['f']` and `foo()[1]['g']`",
+    "url": [
+        ""
+    ]
+}

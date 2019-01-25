@@ -1,0 +1,7 @@
+{
+    "name": "Phpvariable",
+    "description": "A PHP reserved variable, such as `$_GET`, `$_POST`, `$GLOBALS`, etc. ",
+    "url": [
+        ""
+    ]
+}

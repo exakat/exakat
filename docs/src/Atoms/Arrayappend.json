@@ -1,0 +1,7 @@
+{
+    "name": "Arrayappend",
+    "description": "Represents `$a[]` or `$this->b[]`",
+    "url": [
+        ""
+    ]
+}

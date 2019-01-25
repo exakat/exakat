@@ -1,0 +1,7 @@
+{
+    "name": "Catch",
+    "description": "A catch clause in a try/catch command. For example : `catch (Exception $e)` or `catch{A|B|C $d}`",
+    "url": [
+        ""
+    ]
+}

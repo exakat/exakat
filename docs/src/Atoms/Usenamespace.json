@@ -1,0 +1,7 @@
+{
+    "name": "Usenamespace",
+    "description": "Use expression within a namespace, and not in a class or trait.",
+    "url": [
+        ""
+    ]
+}

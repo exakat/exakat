@@ -1,0 +1,7 @@
+{
+    "name": "Propertydefinition",
+    "description": "A property definition. For example : `class x { private $property = 1; var $x; }",
+    "url": [
+        ""
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "name": "Trait",
+    "description": "A trait. For example : `trait t { function foo() {} }`",
+    "url": [
+        ""
+    ]
+}

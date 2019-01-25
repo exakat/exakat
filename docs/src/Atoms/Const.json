@@ -1,0 +1,7 @@
+{
+    "name": "Const",
+    "description": "A constant definition, for classes or global. `const X = 1;` or `class x { const Y = 2; }`",
+    "url": [
+        ""
+    ]
+}

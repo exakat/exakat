@@ -1,0 +1,7 @@
+{
+    "name": "Parenthesis",
+    "description": "A Parenthesis expression. This is not a syntactic parenthesis, like in a switch or functioncall.",
+    "url": [
+        ""
+    ]
+}

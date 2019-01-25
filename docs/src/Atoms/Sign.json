@@ -1,0 +1,7 @@
+{
+    "name": "Sign",
+    "description": "A Sign structure : when a `-`or `+` has been added before another expression. For example `- ($a + $b)`.",
+    "url": [
+        ""
+    ]
+}
