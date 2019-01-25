@@ -31,14 +31,14 @@ class MultipleAliasDefinitionPerFile extends Analyzer {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->_as('results')
-             ->savePropertyAs('fullnspath', 'origin')
+             ->savePropertyAs('fullnspath', 'usepath')
              ->savePropertyAs('fullcode', 'fullcode')
              ->inIs('USE')
              ->inIs('EXPRESSION')
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
-             ->samePropertyAs('fullnspath', 'origin')
+             ->samePropertyAs('fullnspath', 'usepath')
              ->notSamePropertyAs('fullcode', 'fullcode')
              ->back('results');
         $this->prepareQuery();
