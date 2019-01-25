@@ -2056,8 +2056,8 @@ class Load extends Tasks {
         $argumentsId = array();
 
         $this->contexts->nestContext(Context::CONTEXT_NEW);
-        $this->contexts->toggleContext(Context::CONTEXT_NEW);
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         $fullcode = array();
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,

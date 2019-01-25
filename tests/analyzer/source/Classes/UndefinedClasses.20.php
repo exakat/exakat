@@ -21,4 +21,4 @@ class x extends yy {
 
 class YY {}
 
-?>
+?>s
