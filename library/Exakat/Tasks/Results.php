@@ -56,6 +56,18 @@ class Results extends Tasks {
             throw new NeedsAnalyzerThema();
         }
         
+        foreach($analyzersClass as $id => $analyzerClass) {
+            if (substr($analyzerClass, 0, 4) === 'Ext/') {
+                $analyzer = $this->themes->getInstance($analyzerClass, $this->gremlin, $this->config);
+                $analyzerList = $analyzer->getAnalyzerList();
+
+                unset($analyzersClass[$id]);
+                if (!empty($analyzerList)) {
+                    $analyzersClass = array_merge($analyzersClass, $analyzerList);
+                }
+            }
+        }
+        
         $return = array();
         if ($this->config->style === 'BOOLEAN') {
             $queryTemplate = <<<GREMLIN
