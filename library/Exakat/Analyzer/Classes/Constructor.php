@@ -45,14 +45,14 @@ class Constructor extends Analyzer {
         // if no __construct(), then default back on the method with the class name
         $this->atomIs('Class')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'code')
+             ->savePropertyAs('code', 'name')
              ->back('first')
              ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").out("NAME").filter{ it.get().value("fullcode").toLowerCase() == "__construct"} ) )')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('constructor')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'code')
+             ->samePropertyAs('code', 'name')
              ->back('constructor');
         $this->prepareQuery();
     }

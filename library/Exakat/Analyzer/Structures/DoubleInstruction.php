@@ -30,10 +30,10 @@ class DoubleInstruction extends Analyzer {
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
              ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus', 'Void'))
-             ->savePropertyAs('fullcode', 'code')
+             ->savePropertyAs('fullcode', 'expression')
              ->_as('result')
              ->nextSibling()
-             ->samePropertyAs('fullcode', 'code', self::CASE_SENSITIVE)
+             ->samePropertyAs('fullcode', 'expression', self::CASE_SENSITIVE)
              ->back('result');
         $this->prepareQuery();
     }
