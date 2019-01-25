@@ -1,0 +1,37 @@
+[
+    {
+        "function": "\\preg_match",
+        "position": 2,
+        "name": "$matches"
+    },
+    {
+        "function": "\\preg_match_all",
+        "position": 2,
+        "name": "$matches"
+    },
+    {
+        "function": "\\fsockopen",
+        "position": 2,
+        "name": "$errno"
+    },
+    {
+        "function": "\\fsockopen",
+        "position": 3,
+        "name": "$errstr"
+    },
+    {
+        "function": "\\pfsockopen",
+        "position": 2,
+        "name": "$errno"
+    },
+    {
+        "function": "\\pfsockopen",
+        "position": 3,
+        "name": "$errstr"
+    },
+    {
+        "function": "\\parse_str",
+        "position": 1,
+        "name": "$results"
+    }
+]
