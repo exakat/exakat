@@ -56,15 +56,15 @@ class ReuseVariable extends Analyzer {
              ->atomIs($expressions)
              ->analyzerIsNot('self')
              ->savePropertyAs('fullcode', 'expression')
-             ->savePropertyAs('id', 'token')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('id', 'unique')
+             ->savePropertyAs('line', 'row')
              ->isNotEmptyArray()
              ->goToFunction()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition($expressions)
              ->fullcodeVariableIs('expression')
-             ->notSamePropertyAs('id', 'token')
-             ->isMore('line', 'line');
+             ->notSamePropertyAs('id', 'unique')
+             ->isMore('line', 'row');
         $this->prepareQuery();
     }
 }

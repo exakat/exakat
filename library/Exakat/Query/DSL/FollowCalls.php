@@ -20,29 +20,27 @@
  *
 */
 
-namespace Exakat\Analyzer\Namespaces;
 
+namespace Exakat\Query\DSL;
+
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class MultipleAliasDefinitionPerFile extends Analyzer {
-    public function analyze() {
-        // use A as B;
-        // use A as C;
-        $this->atomIs('Usenamespace')
-             ->outIs('USE')
-             ->_as('results')
-             ->savePropertyAs('fullnspath', 'usepath')
-             ->savePropertyAs('fullcode', 'thecode')
-             ->inIs('USE')
-             ->inIs('EXPRESSION')
-             ->outIs('EXPRESSION')
-             ->atomIs('Usenamespace')
-             ->outIs('USE')
-             ->samePropertyAs('fullnspath', 'usepath')
-             ->notSamePropertyAs('fullcode', 'thecode')
-             ->back('results');
-        $this->prepareQuery();
+class FollowCalls extends DSL {
+    public function run() : Command {
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        $linksDown = self::$linksDown;
+
+        // Coalesce is not supported
+        return new Command(<<<GREMLIN
+emit( ).repeat( 
+    __.sideEffect{ ranked = it.get().value("rank");}
+      .out("NAME").out("DEFINITION").in("ARGUMENT").in("DEFINITION")
+      .out("ARGUMENT").filter{it.get().value("rank") == ranked; }
+      )
+.times($MAX_LOOPING) 
+GREMLIN
+);
     }
 }
-
 ?>

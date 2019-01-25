@@ -85,14 +85,14 @@ GREMLIN
              ->inIs('CLASS')
              ->outIs('CONSTANT')
              ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'constant')
+             ->savePropertyAs('code', 'constante')
              
              ->goToClass()
-             ->raw('not( where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constant } ) )')
+             ->raw('not( where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constante } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constant }.count().is(neq(0)) )')
+             ->raw('where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constante }.count().is(neq(0)) )')
 
              ->back('first');
         $this->prepareQuery();

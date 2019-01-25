@@ -33,7 +33,7 @@ class PropertyUsedAbove extends Analyzer {
              ->isNot('static', true)
              ->outIs('PPP')
              ->_as('ppp')
-             ->savePropertyAs('propertyname', 'propertyname')
+             ->savePropertyAs('propertyname', 'name')
              ->goToClass()
              ->filter(
                 $this->side()
@@ -48,7 +48,7 @@ class PropertyUsedAbove extends Analyzer {
                             ->inIs('OBJECT')
                             ->outIs('MEMBER')
                             ->tokenIs('T_STRING')
-                            ->samePropertyAs('code', 'propertyname', self::CASE_SENSITIVE)
+                            ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
                       )
              )
              ->back('ppp');

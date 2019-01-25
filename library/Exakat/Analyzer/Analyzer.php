@@ -924,6 +924,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function followCalls() {
+        $this->query->FollowCalls();
+        
+        return $this;
+    }
 
     public function values($property) {
         $this->query->values($property);

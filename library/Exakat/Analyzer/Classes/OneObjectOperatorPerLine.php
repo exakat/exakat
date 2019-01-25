@@ -29,40 +29,40 @@ class OneObjectOperatorPerLine extends Analyzer {
     public function analyze() {
         // inline operators $a->$b->$c;
         $this->atomIs('Member')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Methodcall')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIsNot('This')
              ->back('first');

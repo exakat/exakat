@@ -30,31 +30,31 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
         // Two expressions in a row
         $this->atomIs(array('Member', 'Methodcall'))
              ->hasNoIn('OBJECT')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->outIs('OBJECT')
              ->atomIs(array('Member', 'Methodcall'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->back('first');
         $this->prepareQuery();
 
         // Two expressions with HTML between
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->nextSibling('CONCAT')
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->nextSibling('CONCAT')
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->back('first');
         $this->prepareQuery();
 
         // f('a'.'b', $c->d);
         $this->atomIs('Concatenation')
              ->hasIn('ARGUMENT')
-             ->savePropertyAs('line', 'line')
+             ->savePropertyAs('line', 'row')
              ->nextSibling('ARGUMENT')
              ->atomIs(array('Concatenation', 'Methodcall', 'Member'))
-             ->samePropertyAs('line', 'line')
+             ->samePropertyAs('line', 'row')
              ->inIs('ARGUMENT');
         $this->prepareQuery();
     }
