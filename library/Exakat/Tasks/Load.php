@@ -1492,6 +1492,7 @@ class Load extends Tasks {
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
+        $this->contexts->nestContext(Context::CONTEXT_NEW);
         $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
 
         $previousContextVariables = $this->currentVariables;
@@ -1547,6 +1548,7 @@ class Load extends Tasks {
         }
 
         $this->contexts->exitContext(Context::CONTEXT_CLASS);
+        $this->contexts->exitContext(Context::CONTEXT_NEW);
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         array_pop($this->currentClassTrait);
