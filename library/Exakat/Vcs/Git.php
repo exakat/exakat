@@ -191,6 +191,23 @@ class Git extends Vcs {
 
         return $changes;
     }
+    
+    public function getFileModificationLoad() {
+        $res = shell_exec("cd {$this->destinationFull}/code; {$this->executable} log --name-only --pretty=format:");
+
+        $files = array();
+        $rows = explode(PHP_EOL, $res);
+        foreach($rows as $row) {
+            if(empty($row)) { continue; }
+            if (isset($files[$row])) {
+                ++$files[$row];
+            } else {
+                $files[$row] = 1 ;
+            }
+        }
+        
+        return $files;
+    }
 }
 
 ?>

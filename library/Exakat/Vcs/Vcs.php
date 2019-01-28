@@ -110,6 +110,10 @@ abstract class Vcs {
             $this->tag = $tag;
         }
     }
+    
+    public function getFileModificationLoad() {
+        return array();
+    }
 }
 
 ?>

@@ -346,7 +346,8 @@ SQLITE;
 CREATE TABLE files (
   id INTEGER PRIMARY KEY,
   file TEXT,
-  fnv132 TEXT
+  fnv132 TEXT,
+  modifications INTEGER
 );
 SQLITE;
                 break;
