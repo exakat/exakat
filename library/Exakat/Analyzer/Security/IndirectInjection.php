@@ -37,7 +37,7 @@ class IndirectInjection extends Analyzer {
         //  function f() {  $a = $_GET['a'];exec($a);}
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'rank')
+             ->savePropertyAs('rank', 'ranked')
              ->_as('result')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
@@ -49,25 +49,50 @@ class IndirectInjection extends Analyzer {
              )
              ->back('first')
 
-             ->functionDefinition()
-             ->inIs('NAME')
+             ->inIs('DEFINITION')
 
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank')
-
-             ->savePropertyAs('code', 'varname')
-             ->inIs('ARGUMENT')
-
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Functioncall')
-             ->outIs('ARGUMENT')
+//             ->followCalls()
+/*
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
-             ->outIsIE('CODE')
-             ->atomIs(self::$VARIABLES_ALL)
-             ->samePropertyAs('code', 'varname')
-             ->back('result');
+             ->back('result')
+             */
+             ;
         $this->prepareQuery();
 
+        // Relayed via argument to sensitive function
+        //  function f($_GET['a']) {  exec($a);}
+        $this->atomIs('Functioncall')
+             ->outIs('ARGUMENT')
+             ->savePropertyAs('rank', 'ranked')
+             ->_as('result')
+             ->outIsIE('VARIABLE')
+             ->atomIs(self::$VARIABLES_ALL)
+->analyzerIs('Security/GPRAliases')
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     
+             )
+             ->back('first')
+
+             ->inIs('DEFINITION')
+
+             ->outIs('ARGUMENT')
+//             ->followCalls()
+/*
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIsIE('CODE')
+             ->analyzerIs('Security/SensitiveArgument')
+             ->back('result')
+             */
+             ;
+        $this->prepareQuery();
         //function f() {  $a = $_GET['a'];exec($a);}
 
 

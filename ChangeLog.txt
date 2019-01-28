@@ -1,4 +1,4 @@
-Version 1.6.4 (Parasamgate, coming up)
+Version 1.6.5 (Mahagate, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,32 @@ Version 1.6.4 (Parasamgate, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.4 (Parasamgate, 2019-01-28)
++ Architecture
+    + Added support for CVS as a VCS
+    + Upgraded support for tar as a VCS
+    + Added support modification counts by files
+    + Added first tracking for closures
+    + Upgraded Tinkergraph driver
++ Report
+    + Added Atoms in the documentations
+    + Extra protection for Class Changes
++ Analyzer
+    + Updated analysis : Use-arguments are now counted as arguments
+    + Updated analysis : Max Argument check was refactored
+    + Updated analysis : IsModified now takes into account extensions
+    + Updated analysis : Should Use This now exclude empty methods
+    + Updated analysis : undefined classes now support PHP 7.4 typed properties
+    + Updated analysis : added missing scalar PHP types
+    + Updated analysis : uncaught exceptions now cover parents
+    + Updated analysis : refactored incompatibility checks for methods
+    + Checked unit tests : 2824 / 2841 test pass (99% pass)
++ Tokenizer
+    + Refactored alternative ending, removed extra VOID
+    + Upgraded contexts and their nesting
+    + Added extra checks on variables names
+    + Added support for ??= (PHP 7.4)
 
 Version 1.6.3 (Paragate, 2019-01-21)
 + Architecture
