@@ -693,7 +693,7 @@ class Load extends Tasks {
             display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring".PHP_EOL);
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring".PHP_EOL);
 
-            throw new LoadError('Processing error');
+            throw new LoadError('Processing error (processNext end)');
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
@@ -2943,15 +2943,8 @@ class Load extends Tasks {
                                       'BLOCK'     => $block));
 
         $this->pushExpression($for);
-        $this->processSemicolon();
-
-        if ($isColon === true) {
-            ++$this->id; // skip endfor
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id; // skip ; (will do just below)
-            }
-        }
-
+        $this->finishWithAlternative($isColon);
+        
         return $for;
     }
 
@@ -3006,14 +2999,7 @@ class Load extends Tasks {
                                           'BLOCK'     => $block));
 
         $this->pushExpression($foreach);
-        $this->processSemicolon();
-
-        if ($isColon === true) {
-            ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id; // skip ;
-            }
-        }
+        $this->finishWithAlternative($isColon);
 
         return $foreach;
     }
@@ -3178,8 +3164,9 @@ class Load extends Tasks {
 
         $this->runPlugins($while, array('CONDITION' => $condition,
                                         'BLOCK'     => $block));
+
         $this->pushExpression($while);
-        $this->processSemicolon();
+        $this->finishWithAlternative($isColon);
 
         return $while;
     }
@@ -3219,21 +3206,19 @@ class Load extends Tasks {
 
         if ($isColon === true) {
             $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
-            ++$this->id; // skip enddeclare
-            ++$this->id; // skip ;
         } else {
             $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') '.self::FULLCODE_BLOCK;
         }
-
-        $this->pushExpression($declare);
-        $this->processSemicolon();
 
         $declare->code        = $this->tokens[$current][1];
         $declare->fullcode    = $fullcode;
         $declare->line        = $this->tokens[$current][2];
         $declare->token       = $this->getToken($this->tokens[$current][0]);
         $declare->alternative = $isColon ;
-        
+
+        $this->pushExpression($declare);
+        $this->finishWithAlternative($isColon);
+
         return $declare;
     }
 
@@ -3384,14 +3369,8 @@ class Load extends Tasks {
                                          'CASES'     => $cases,));
 
         $this->pushExpression($switch);
-        $this->processSemicolon();
+        $this->finishWithAlternative($isColon);
 
-        if ($isColon === true) {
-            ++$this->id; // skip endfor
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id; // skip ; (will do just below)
-            }
-        }
         return $switch;
     }
 
@@ -3461,20 +3440,6 @@ class Load extends Tasks {
             $fullcode = $this->tokens[$current][1].'('.$condition->fullcode.')'.$then->fullcode.$elseFullcode;
         }
 
-        if ($this->tokens[$current][0] === $this->phptokens::T_IF) {
-            $this->pushExpression($ifthen);
-            $this->processSemicolon();
-        }
-
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
-            --$this->id;
-        } elseif ($isColon === true) {
-            ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id; // skip ;
-            }
-        }
-
         $ifthen->code        = $this->tokens[$current][1];
         $ifthen->fullcode    = $fullcode;
         $ifthen->line        = $this->tokens[$current][2];
@@ -3482,6 +3447,14 @@ class Load extends Tasks {
         $ifthen->alternative = $isColon;
         
         $this->runPlugins($ifthen, $extras);
+
+        if ($this->tokens[$current][0] === $this->phptokens::T_IF) {
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_ENDIF) {
+                --$this->id; // otherwise, ifthen : endif doesn't end on endif.
+            }
+            $this->pushExpression($ifthen);
+            $this->finishWithAlternative($isColon);
+        }
 
         return $ifthen;
     }
@@ -5863,6 +5836,21 @@ class Load extends Tasks {
         $this->optionsTokens = array();
         
         return $fullcode;
+    }
+    
+    private function finishWithAlternative($isColon) {
+        if ($isColon === true) {
+            ++$this->id; // Skip endforeach
+            $this->processSemicolon();
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id;
+            } 
+        } else {
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
+                --$this->id;
+            }
+            $this->processSemicolon();
+        }
     }
 }
 

@@ -55,5 +55,3 @@ Label : PROJECT
               8
             Label : VALUE
               10
-        Label : EXPRESSION
-          16
