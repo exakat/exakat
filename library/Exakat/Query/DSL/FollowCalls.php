@@ -33,12 +33,10 @@ class FollowCalls extends DSL {
 
         // Coalesce is not supported
         return new Command(<<<GREMLIN
-emit( ).repeat( 
-    __.sideEffect{ ranked = it.get().value("rank");}
-      .out("NAME").out("DEFINITION").in("ARGUMENT").in("DEFINITION")
-      .out("ARGUMENT").filter{it.get().value("rank") == ranked; }
-      )
-.times($MAX_LOOPING) 
+emit().repeat(
+    __.out('NAME').out('DEFINITION').as('a').in('ARGUMENT').in('DEFINITION').out('ARGUMENT').as('b')
+      .where('a', eq('b') ).by('rank')
+).times($MAX_LOOPING)
 GREMLIN
 );
     }
