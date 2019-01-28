@@ -941,13 +941,13 @@ GLOSSARY;
             if (strpos( $file, '.auto.') !== false) { continue; }
             $name = basename($file, '.json');
             $atoms[$name] = array_merge((array) json_decode(file_get_contents($file)),
-                                        (array) json_decode(@file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]')),
+                                        (array) json_decode(file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]')),
                                         );
         }
         
         $this->list_atoms = array();
         $this->details_atoms = array();
-        foreach($atoms as $atom) {
+        foreach($atoms as $name => $atom) {
             $properties = array_diff( array_keys($atom), ['in', 'out', 'name', 'url', 'description', 'token']);
             sort($properties);
             if (!empty($atom['token'])) {
@@ -968,9 +968,13 @@ GLOSSARY;
             } else {
                 $atom['out'] = array();
             }
+            
+            if (!isset($atom['name'])) {
+                print_r($atom);
+                die('Docs eror with '.$name);
+            }
 
             $this->list_atoms[] = "* {$atom['name']} : {$atom['description']}";
-            
 
             $this->details_atoms[] = "{$atom['name']}\n___________________________\n\n".PHP_EOL.
                                      "{$atom['description']}\n".PHP_EOL.
@@ -985,6 +989,7 @@ GLOSSARY;
                 copy("docs/src/Atoms/$atom[name].png","docs/images/$atom[name].png" );
             }
         }
+
         $this->list_atoms = 'Here is the list of the '.count($atoms).' available atoms : '
                             .PHP_EOL.PHP_EOL.
                             implode(PHP_EOL, $this->list_atoms);
