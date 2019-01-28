@@ -1,6 +1,6 @@
 {
     "name": "Globaldefinition",
-    "description": "Docs for Globaldefinition",
+    "description": "A definition of a global variable, inside a global expression. For example, in `global $x = 1, $y`, `$x = 1` and `$y` are Globaldefinition.",
     "url": [
         ""
     ]

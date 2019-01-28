@@ -1,1 +1,1 @@
-{"fullcode":250559,"lccode":250559,"code":250559,"line":250559,"token":["T_STRING","T_VARIABLE"],"ctype1":250559,"ctype1_size":250559,"count":250559,"args_min":250559,"args_max":250559,"in":{"METHOD":250559},"out":{"ARGUMENT":396111,"NAME":250559}}
+{"fullcode":360260,"lccode":360260,"code":360260,"line":360260,"token":["T_STRING","T_VARIABLE","T_NEW","T_CLOSE_BRACKET","T_CONSTANT_ENCAPSED_STRING","T_DOLLAR"],"ctype1":360260,"ctype1_size":360260,"count":360260,"args_min":360260,"args_max":360260,"in":{"METHOD":360260,"ANALYZED":5},"out":{"ARGUMENT":555553,"NAME":360260}}

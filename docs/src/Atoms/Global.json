@@ -1,6 +1,6 @@
 {
     "name": "Global",
-    "description": "Docs for Global",
+    "description": "An expression with the global keyword. For example, `global $x, $y`.",
     "url": [
         ""
     ]

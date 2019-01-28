@@ -1,1 +1,1 @@
-{"fullcode":5,"lccode":5,"code":5,"line":5,"token":["T_STRING"],"ctype1":5,"ctype1_size":5,"in":{"DEFINITION":5,"NAME":5}}
+{"fullcode":113,"lccode":113,"code":113,"line":113,"fullnspath":17,"token":["T_STRING","T_DOUBLE_COLON"],"ctype1":75,"ctype1_size":113,"in":{"DEFINITION":38,"NAME":102,"ANALYZED":4,"SOURCE":4,"NEW":7},"out":{"CLASS":38,"METHOD":38}}

@@ -1,6 +1,6 @@
 {
     "name": "Staticdefinition",
-    "description": "Docs for Staticdefinition",
+    "description": "A static variable definition, in a method or function. This is not a static property. For example ; `function foo() { static $s; }`.",
     "url": [
         ""
     ]

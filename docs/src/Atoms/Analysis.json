@@ -1,6 +1,6 @@
 {
     "name": "Analysis",
-    "description": "Docs for Analysis",
+    "description": "An analysis, as processed by Exakat.",
     "url": [
         ""
     ]

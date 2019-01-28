@@ -1,1 +1,1 @@
-{"fullcode":13614,"lccode":13614,"code":13614,"rank":13614,"line":13614,"token":["T_FOREACH"],"ctype1":13614,"ctype1_size":13614,"in":{"ANALYZED":2147,"EXPRESSION":13614},"out":{"SOURCE":13614,"VALUE":13614,"BLOCK":13614}}
+{"fullcode":22655,"lccode":22655,"code":22655,"rank":22655,"line":22655,"token":["T_FOREACH"],"ctype1":22655,"ctype1_size":22655,"alternative":7,"in":{"EXPRESSION":22655,"ANALYZED":2735},"out":{"BLOCK":22655,"SOURCE":22655,"VALUE":22655}}

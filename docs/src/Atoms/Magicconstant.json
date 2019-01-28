@@ -1,6 +1,6 @@
 {
     "name": "Magicconstant",
-    "description": "Docs for Magicconstant",
+    "description": "A PHP magic constant. For example : __FILE__ or __class__.",
     "url": [
         ""
     ]

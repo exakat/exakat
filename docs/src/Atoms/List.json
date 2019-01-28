@@ -1,6 +1,6 @@
 {
     "name": "List",
-    "description": "Docs for List",
+    "description": "The list() or [] call when on the right of an assignation.",
     "url": [
         ""
     ]

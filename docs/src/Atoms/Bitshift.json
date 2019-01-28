@@ -1,6 +1,6 @@
 {
     "name": "Bitshift",
-    "description": "Docs for Bitshift",
+    "description": "A bit shift operation on integers, with << or >>",
     "url": [
         ""
     ]

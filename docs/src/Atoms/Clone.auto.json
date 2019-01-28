@@ -1,1 +1,1 @@
-{"noscream":3,"fullcode":427,"lccode":427,"code":427,"rank":49,"line":427,"token":["T_CLONE"],"ctype1":427,"ctype1_size":427,"in":{"ANALYZED":312,"RIGHT":356,"ELSE":4,"ARGUMENT":49,"RETURN":18},"out":{"CLONE":427}}
+{"noscream":4,"fullcode":705,"lccode":705,"code":705,"rank":81,"line":705,"token":["T_CLONE"],"ctype1":705,"ctype1_size":705,"in":{"ANALYZED":398,"ARGUMENT":74,"SOURCE":1,"RIGHT":587,"CODE":1,"THEN":1,"ELSE":7,"EXPRESSION":7,"LEFT":3,"CLONE":3,"RETURN":21},"out":{"CLONE":705}}

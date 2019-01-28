@@ -1,6 +1,6 @@
 {
     "name": "Methodcall",
-    "description": "Docs for Methodcall",
+    "description": "A non-static call to a method. For example, `$a->method();`",
     "url": [
         ""
     ]

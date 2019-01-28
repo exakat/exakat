@@ -1,1 +1,1 @@
-{"fullcode":1,"lccode":1,"code":1,"line":1,"fullnspath":1,"token":["T_STRING"],"ctype1":1,"ctype1_size":1,"count":1,"args_min":1,"args_max":1,"in":{"ANALYZED":2,"RIGHT":1},"out":{"ARGUMENT":2,"NAME":1}}
+{"fullcode":28,"lccode":28,"code":28,"rank":27,"line":28,"fullnspath":28,"token":["T_STRING"],"ctype1":28,"constant":20,"ctype1_size":28,"count":28,"args_min":28,"args_max":28,"in":{"ANALYZED":3,"EXPRESSION":27,"RIGHT":1},"out":{"NAME":28,"ARGUMENT":57}}

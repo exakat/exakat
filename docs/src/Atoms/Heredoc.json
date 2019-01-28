@@ -1,6 +1,6 @@
 {
     "name": "Heredoc",
-    "description": "Docs for Heredoc",
+    "description": "A Heredoc or Nowdoc string",
     "url": [
         ""
     ]

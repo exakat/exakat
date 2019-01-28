@@ -1,1 +1,1 @@
-{"fullcode":837,"lccode":837,"code":837,"line":837,"token":["T_LIST"],"ctype1":837,"ctype1_size":837,"count":837,"args_min":837,"args_max":837,"in":{"LEFT":837},"out":{"ARGUMENT":1740,"NAME":837}}
+{"noscream":6,"fullcode":1533,"lccode":1533,"code":1533,"rank":24,"line":1533,"fullnspath":1,"token":["T_LIST","T_OPEN_BRACKET"],"ctype1":1533,"ctype1_size":1533,"count":1533,"args_min":1533,"args_max":1533,"in":{"LEFT":1473,"VALUE":36,"ANALYZED":6,"ARGUMENT":24},"out":{"ARGUMENT":3264,"NAME":1532}}

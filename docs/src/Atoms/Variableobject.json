@@ -1,6 +1,6 @@
 {
     "name": "Variableobject",
-    "description": "Docs for Variableobject",
+    "description": "A variable when used with the `->` operator.",
     "url": [
         ""
     ]

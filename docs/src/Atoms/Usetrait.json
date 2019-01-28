@@ -1,6 +1,6 @@
 {
     "name": "Usetrait",
-    "description": "Docs for Usetrait",
+    "description": "A `use` expression, when used to import a trait. For exapmle, `class x { use t; }`",
     "url": [
         ""
     ]

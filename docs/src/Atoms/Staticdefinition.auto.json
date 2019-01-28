@@ -1,1 +1,1 @@
-{"fullcode":29,"lccode":29,"code":29,"rank":29,"line":29,"token":["T_VARIABLE"],"ctype1":29,"ctype1_size":29,"in":{"ANALYZED":23,"STATIC":29,"DEFINITION":29},"out":{"DEFAULT":26,"DEFINITION":81}}
+{"fullcode":205,"lccode":205,"code":205,"rank":205,"line":205,"token":["T_VARIABLE"],"ctype1":205,"ctype1_size":205,"in":{"ANALYZED":85,"DEFINITION":205,"STATIC":205,"GLOBAL":2},"out":{"DEFINITION":491,"DEFAULT":153}}

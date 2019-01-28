@@ -1,6 +1,6 @@
 {
     "name": "Magicmethod",
-    "description": "Docs for Magicmethod",
+    "description": "A special PHP method in a class. For example, `__clone()`, `__construct()`, `__get()`, ...",
     "url": [
         ""
     ]

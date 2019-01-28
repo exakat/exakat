@@ -1,6 +1,6 @@
 {
     "name": "Gotolabel",
-    "description": "Docs for Gotolabel",
+    "description": "A target destination for a goto expression.",
     "url": [
         ""
     ]

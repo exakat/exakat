@@ -1,1 +1,1 @@
-{"fullcode":6,"lccode":6,"code":6,"rank":6,"line":6,"token":["T_GOTO"],"ctype1":6,"ctype1_size":6,"in":{"DEFINITION":6,"EXPRESSION":6},"out":{"GOTO":6}}
+{"fullcode":52,"lccode":52,"code":52,"rank":52,"line":52,"token":["T_GOTO"],"ctype1":52,"ctype1_size":52,"in":{"DEFINITION":15,"EXPRESSION":52},"out":{"GOTO":52}}

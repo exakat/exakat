@@ -1,6 +1,6 @@
 {
     "name": "Nsname",
-    "description": "Docs for Nsname",
+    "description": "A fully qualified name, including `\\`. For example, `\\strtolower`, `A\\B\\C`, ...w",
     "url": [
         ""
     ]

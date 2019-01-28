@@ -1,6 +1,6 @@
 {
     "name": "Closure",
-    "description": "Docs for Closure",
+    "description": "A closure definition. For example, `function () { return 3; }`.",
     "url": [
         ""
     ]

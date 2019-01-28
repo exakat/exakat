@@ -1,1 +1,1 @@
-{"fullcode":1644,"lccode":1644,"code":1644,"line":1644,"token":["T_CONSTANT_ENCAPSED_STRING","T_VARIABLE","T_CLOSE_BRACKET","T_STRING"],"ctype1_size":1644,"in":{"MEMBER":1636,"NAME":8},"out":{"CODE":1644}}
+{"fullcode":1901,"lccode":1901,"code":1901,"line":1901,"token":["T_CONSTANT_ENCAPSED_STRING","T_VARIABLE","T_CLOSE_BRACKET","T_STRING","T_QUOTE","T_LNUMBER","T_CLOSE_PARENTHESIS","T_CLOSE_CURLY"],"ctype1_size":1901,"in":{"NAME":54,"MEMBER":1847},"out":{"CODE":1901}}

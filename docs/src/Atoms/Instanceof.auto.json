@@ -1,1 +1,1 @@
-{"fullcode":761,"lccode":761,"code":761,"line":761,"token":["T_INSTANCEOF"],"ctype1":761,"ctype1_size":761,"in":{"CONDITION":427,"NOT":172,"CODE":45,"ANALYZED":5,"LEFT":64,"RIGHT":48,"CASE":5},"out":{"VARIABLE":761,"CLASS":761}}
+{"fullcode":2449,"lccode":2449,"code":2449,"rank":54,"line":2449,"token":["T_INSTANCEOF"],"ctype1":2449,"ctype1_size":2449,"in":{"CONDITION":1285,"NOT":426,"LEFT":231,"RIGHT":188,"ANALYZED":127,"INDEX":1,"CODE":198,"RETURN":28,"CASE":38,"ARGUMENT":54},"out":{"VARIABLE":2449,"CLASS":2449}}

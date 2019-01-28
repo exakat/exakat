@@ -1,6 +1,6 @@
 {
     "name": "Newcall",
-    "description": "Docs for Newcall",
+    "description": "The functioncall in a New expression. For example, in ``new foo()`, `foo()` is the Newcall.",
     "url": [
         ""
     ]

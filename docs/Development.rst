@@ -315,15 +315,16 @@ To define a pattern in the code, we use a combinaison of filters on atom, links 
 Atoms
 #####
 
-Here is the list of the 107 available atoms : 
+Here is the list of the 117 available atoms : 
 
 * Addition : An addition or a substraction
+* Analysis : An analysis, as processed by Exakat.
 * Array : Represents array access : `$a[4]`, `$this['a']['f']` and `foo()[1]['g']`
 * Arrayappend : Represents `$a[]` or `$this->b[]`
 * Arrayliteral : Represents an array definition : `[4,5 => 3,6]` and `array(1,2,3)`
-* As : Docs for As
+* As : The as keyword, when aliasing an imported class
 * Assignation : Any assignation and short assignation : `$a = 1`, `$b .= 3`
-* Bitshift : Docs for Bitshift
+* Bitshift : A bit shift operation on integers, with << or >>
 * Block : Represents a sequence between curly braces. For example, `{ $c += $b; }`.
 * Boolean : Represents `true` or `false`.
 * Break : A break, with or without the level indication. `break 1`;
@@ -331,18 +332,21 @@ Here is the list of the 107 available atoms :
 * Cast : A cast operation, like `(array)` or `(unset)`
 * Catch : A catch clause in a try/catch command. For example : `catch (Exception $e)` or `catch{A|B|C $d}`
 * Class : A named class.
-* Classalias : Docs for Classalias
+* Classalias : A call to the `class_alias` function. 
 * Classanonymous : A unnamed class, created with `new class {};`
-* Clone : Docs for Clone
-* Closure : Docs for Closure
+* Clone : A clone expression
+* Closure : A closure definition. For example, `function () { return 3; }`.
+* Coalesce : An expression with the coalesce operator, `?:`. For example, `$x = $y ?: 'ef';` 
 * Comparison : A comparison, with any kind of comparison operator : `==`, `===`, `>`, ...
 * Concatenation : A concatenation : a sequence of values, linked by the dot operator `.`
 * Const : A constant definition, for classes or global. `const X = 1;` or `class x { const Y = 2; }`
 * Constant : A constant definition, part of a `Const` atom.
 * Continue : A continue operator, with or without its level indicator
-* Default : Docs for Default
+* Declare : A declare expression.
+* Declaredefinition : One configuration expression inside a `declare` definition. For example, in `declare(strict_types=1);`, `strict_types=1`
+* Default : A default case, in a switch statement.
 * Defineconstant : A call to the `define()` function.
-* Dowhile : Docs for Dowhile
+* Dowhile : A do...while() loop. 
 * Echo : A call to `echo`
 * Empty : A call to `empty`
 * Eval : A call to `Eval`
@@ -350,64 +354,69 @@ Here is the list of the 107 available atoms :
 * File : A file, containing the PHP source code.
 * Finally : A finally clause in a try/catch command.
 * For : A for loop. For example : `for($i = 0; $i < 10; ++$i) { }`
-* Foreach : Docs for Foreach
-* Function : Docs for Function
-* Functioncall : Docs for Functioncall
-* Global : Docs for Global
-* Globaldefinition : Docs for Globaldefinition
-* Goto : Docs for Goto
-* Gotolabel : Docs for Gotolabel
-* Heredoc : Docs for Heredoc
-* Identifier : Docs for Identifier
-* Ifthen : Docs for Ifthen
-* Include : Docs for Include
-* Inlinehtml : Docs for Inlinehtml
-* Instanceof : Docs for Instanceof
+* Foreach : A foreach loop.
+* Function : A function definition
+* Functioncall : A call to a function.
+* Global : An expression with the global keyword. For example, `global $x, $y`.
+* Globaldefinition : A definition of a global variable, inside a global expression. For example, in `global $x = 1, $y`, `$x = 1` and `$y` are Globaldefinition.
+* Goto : The goto expression.
+* Gotolabel : A target destination for a goto expression.
+* Halt : The `__halt_compiler` command.
+* Heredoc : A Heredoc or Nowdoc string
+* Identifier : A name for a constant or a class. For example : `$x instanceof Y`, 'echo PHP_INT_MAX`, `new Y`
+* Ifthen : A if/then/else structure.
+* Include : A inclusion, with `require` or `include`, with `_once` or not.
+* Inlinehtml : Raw text, in the middle of a PHP script. For example : `++$a; ?>RAW TEXT<?php ++$b; `
+* Instanceof : A `instanceof` expression
+* Insteadof : A `insteadof` expression
 * Integer : An Integer literal, positive or negative.
-* Interface : Docs for Interface
+* Interface : An interface definition
 * Isset : A call to `isset`
 * Keyvalue : An expression with the `=>` operator : for arrays or foreach() instructions.
-* List : Docs for List
-* Logical : Docs for Logical
-* Magicconstant : Docs for Magicconstant
-* Magicmethod : Docs for Magicmethod
-* Member : Docs for Member
-* Method : Docs for Method
-* Methodcall : Docs for Methodcall
-* Methodcallname : Docs for Methodcallname
+* List : The list() or [] call when on the right of an assignation.
+* Logical : A logical expression. This covers also bitwise operations. For example : `$a | $b`, `$a && $b`, `$a xor $b`.
+* Magicconstant : A PHP magic constant. For example : __FILE__ or __class__.
+* Magicmethod : A special PHP method in a class. For example, `__clone()`, `__construct()`, `__get()`, ...
+* Member : A reference to a member of an object. For example, `$object->member`. 
+* Method : A method definition in a class.
+* Methodcall : A non-static call to a method. For example, `$a->method();`
+* Methodcallname : The name of the method in a methodcall
 * Multiplication : A multiplication `*`, division `/` or modulo `%` operation.
-* Name : Docs for Name
-* Namespace : Docs for Namespace
+* Name : The name of a structure : name of a class, method, interface, trait, interface.
+* Namespace : A namespace declaration
 * New : An instantiation expression, with `new ClassName()`.
-* Newcall : Docs for Newcall
+* Newcall : The functioncall in a New expression. For example, in ``new foo()`, `foo()` is the Newcall.
 * Not : A call to `!` or `~`. 
-* Nsname : Docs for Nsname
+* Nsname : A fully qualified name, including `\`. For example, `\strtolower`, `A\B\C`, ...w
 * Null : The `Null` value
-* Parameter : Docs for Parameter
-* Parametername : Docs for Parametername
-* Parent : Docs for Parent
+* Parameter : A parameter definition, in a function or method definition. When called, it becomes an argument.
+* Parametername : A Parametername
+* Parent : The parent keyword, when it is used to refer to the parent class.
 * Parenthesis : A Parenthesis expression. This is not a syntactic parenthesis, like in a switch or functioncall.
-* Php : Docs for Php
+* Php : A PHP script, inside its tags. This exclude the following and previous raw text in a PHP file. 
 * Phpvariable : A PHP reserved variable, such as `$_GET`, `$_POST`, `$GLOBALS`, etc. 
 * Postplusplus : $i++` expression
-* Ppp : Docs for Ppp
-* Preplusplus : Docs for Preplusplus
-* Print : Docs for Print
+* Power : The power operator, `**`. 
+* Ppp : A properties declaration, in a class or a trait. For example : `private $x, $y = 2;`
+* Preplusplus : ++ or -- when it is before the variable.
+* Print : A call to the function print.
 * Project : The project node : the root above all File.
 * Propertydefinition : A property definition. For example : `class x { private $property = 1; var $x; }
 * Real : A float number
-* Return : Docs for Return
+* Return : The return expression.
 * Self : The `self` keyword, as used inside a class.
-* Sequence : Docs for Sequence
+* Sequence : A virtual atom, that represents the sequence of expression, in a block.
+* Shell : A shell, made with ticks `\``
 * Sign : A Sign structure : when a `-`or `+` has been added before another expression. For example `- ($a + $b)`.
-* Static : Docs for Static
-* Staticclass : Docs for Staticclass
+* Static : The static keyword, when it is used to refer to the current class.
+* Staticclass : A call to `::class`, with the syntax of a static constant. For example, `X::class`.
 * Staticconstant : A staticconstant : `TheClass::TheConstant`
-* Staticdefinition : Docs for Staticdefinition
-* Staticmethodcall : Docs for Staticmethodcall
-* Staticproperty : Docs for Staticproperty
+* Staticdefinition : A static variable definition, in a method or function. This is not a static property. For example ; `function foo() { static $s; }`.
+* Staticmethod : A staticmethod name, when using trait and renaming a method. For example, `trait t { use t2 { C::D as E; }}`. `C::D` is a static method.
+* Staticmethodcall : A static methodcall
+* Staticproperty : A static property syntax. For example, `A::$b` or `self::$d`.
 * Staticpropertyname : The name of a static property : not a variable.
-* String : Docs for String
+* String : A string literal, with or without interpolation. For example, `'$x'`, `"a{$y}"`, `"a"`. 
 * Switch : A switch structure.
 * Ternary : The ternary operator : `$a ? $b : 'c'`.
 * This : The special variable `$this`.
@@ -416,14 +425,15 @@ Here is the list of the 107 available atoms :
 * Try : The Try part in a try/catch/finally expression.
 * Unset : A call to `unset`
 * Usenamespace : Use expression within a namespace, and not in a class or trait.
-* Usetrait : Docs for Usetrait
+* Usetrait : A `use` expression, when used to import a trait. For exapmle, `class x { use t; }`
 * Variable : A Variable, as a standalone container. For example : `$a = 1` or `$b += 3`. Variables in arrays are `Variablearray`, while variables in objects are `Variableobject`. 
-* Variablearray : Docs for Variablearray
-* Variabledefinition : Docs for Variabledefinition
-* Variableobject : Docs for Variableobject
+* Variablearray : A variable, when used to build an array syntax. For example, the `$x` in `$x[0]` or `$x[]`.
+* Variabledefinition : A placeholder to federate local variable definition in a method. 
+* Variableobject : A variable when used with the `->` operator.
 * Void : A Void operation. It represents the absence of data. For example : `foo();;` : there is a Void as argument, and one between the semicolons.
 * While : A While structure, different from a Dowhile structure. For example : `while($a < 10) { $a++;}`
-* Yield : Docs for Yield
+* Yield : A `yield` expression
+* Yieldfrom : A `yield from` expression
 
 
 Addition
@@ -466,14 +476,44 @@ List of incoming links :
 * CODE
 * CONCAT
 * CONDITION
+* DEFAULT
 * ELSE
 * EXPRESSION
 * INDEX
 * LEFT
 * RETURN
 * RIGHT
+* SOURCE
 * THEN
 * VALUE
+
+
+Analysis
+___________________________
+
+
+An analysis, as processed by Exakat.
+
+.. image:: images/Analysis.png
+                            :alt: Analysis's outgoing diagramm
+
+List of available properties : 
+
+* Atom
+* analyzer
+* atom
+
+List of possible tokens : 
+
+* 
+
+List of outgoing links : 
+
+* ANALYZED
+
+List of incoming links : 
+
+* 
 
 
 Array
@@ -499,16 +539,19 @@ List of available properties :
 * noscream
 * rank
 * reference
+* variadic
 
 List of possible tokens : 
 
 * T_CLOSE_BRACKET
 * T_CLOSE_CURLY
 * T_CLOSE_PARENTHESIS
+* T_CONSTANT_ENCAPSED_STRING
 * T_CURLY_OPEN
 * T_QUOTE
 * T_START_HEREDOC
 * T_STRING
+* T_STRING_VARNAME
 * T_VARIABLE
 
 List of outgoing links : 
@@ -521,17 +564,20 @@ List of incoming links :
 * ANALYZED
 * APPEND
 * ARGUMENT
+* CASE
 * CAST
 * CLASS
 * CLONE
 * CODE
 * CONCAT
 * CONDITION
+* DEFAULT
 * ELSE
 * EXPRESSION
 * INDEX
 * LEFT
 * NAME
+* NEW
 * NOT
 * OBJECT
 * POSTPLUSPLUS
@@ -541,6 +587,7 @@ List of incoming links :
 * SIGN
 * SOURCE
 * THEN
+* THROW
 * VALUE
 * VARIABLE
 
@@ -563,11 +610,13 @@ List of available properties :
 * lccode
 * line
 * rank
+* reference
 
 List of possible tokens : 
 
 * T_CLOSE_BRACKET
 * T_CLOSE_CURLY
+* T_CLOSE_PARENTHESIS
 * T_STRING
 * T_VARIABLE
 
@@ -580,7 +629,14 @@ List of incoming links :
 * APPEND
 * ARGUMENT
 * LEFT
+* OBJECT
+* POSTPLUSPLUS
+* PREPLUSPLUS
+* RETURN
+* RIGHT
+* VALUE
 * VARIABLE
+* YIELD
 
 
 Arrayliteral
@@ -610,7 +666,9 @@ List of available properties :
 * lccode
 * line
 * noDelimiter
+* noscream
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -625,18 +683,24 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CASE
 * CAST
+* CLONE
 * CODE
 * DEFAULT
 * DEFINITION
 * ELSE
 * EXPRESSION
+* INDEX
 * LEFT
+* NAME
+* OBJECT
 * RETURN
 * RIGHT
 * SOURCE
 * THEN
 * VALUE
+* VARIABLE
 * YIELD
 
 
@@ -644,7 +708,7 @@ As
 ___________________________
 
 
-Docs for As
+The as keyword, when aliasing an imported class
 
 .. image:: images/As.png
                             :alt: As's outgoing diagramm
@@ -658,6 +722,8 @@ List of available properties :
 * fullnspath
 * lccode
 * line
+* rank
+* visibility
 
 List of possible tokens : 
 
@@ -673,6 +739,7 @@ List of incoming links :
 
 * ANALYZED
 * DEFINITION
+* EXPRESSION
 * USE
 
 
@@ -706,6 +773,7 @@ List of possible tokens :
 * T_MUL_EQUAL
 * T_OR_EQUAL
 * T_PLUS_EQUAL
+* T_POW_EQUAL
 * T_SL_EQUAL
 * T_SR_EQUAL
 * T_XOR_EQUAL
@@ -725,16 +793,20 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
 * RETURN
 * RIGHT
+* SOURCE
 * THEN
+* THROW
+* VALUE
 
 
 Bitshift
 ___________________________
 
 
-Docs for Bitshift
+A bit shift operation on integers, with << or >>
 
 .. image:: images/Bitshift.png
                             :alt: Bitshift's outgoing diagramm
@@ -769,9 +841,11 @@ List of incoming links :
 * ARGUMENT
 * CODE
 * CONDITION
+* DEFAULT
 * LEFT
 * RETURN
 * RIGHT
+* VALUE
 
 
 Block
@@ -794,7 +868,11 @@ List of available properties :
 List of possible tokens : 
 
 * T_CLOSE_BRACKET
+* T_CLOSE_CURLY
+* T_CLOSE_PARENTHESIS
 * T_CONSTANT_ENCAPSED_STRING
+* T_LNUMBER
+* T_QUOTE
 * T_STRING
 * T_VARIABLE
 
@@ -888,7 +966,6 @@ List of outgoing links :
 
 List of incoming links : 
 
-* ANALYZED
 * EXPRESSION
 
 
@@ -937,13 +1014,13 @@ A cast operation, like `(array)` or `(unset)`
 
 List of available properties : 
 
+* binaryString
 * code
 * ctype1
 * ctype1_size
 * fullcode
 * lccode
 * line
-* noscream
 * rank
 
 List of possible tokens : 
@@ -971,12 +1048,15 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
-* NOT
+* NAME
+* POSTPLUSPLUS
 * RETURN
 * RIGHT
+* SIGN
 * SOURCE
 * THEN
 * VALUE
+* YIELD
 
 
 Catch
@@ -1028,6 +1108,7 @@ A named class.
 List of available properties : 
 
 * abstract
+* aliased
 * code
 * ctype1_size
 * final
@@ -1064,10 +1145,50 @@ Classalias
 ___________________________
 
 
-Docs for Classalias
+A call to the `class_alias` function. 
 
 .. image:: images/Classalias.png
                             :alt: Classalias's outgoing diagramm
+
+List of available properties : 
+
+* args_max
+* args_min
+* code
+* constant
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_STRING
+
+List of outgoing links : 
+
+* ARGUMENT
+* NAME
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+* RIGHT
+
+
+Classanonymous
+___________________________
+
+
+A unnamed class, created with `new class {};`
+
+.. image:: images/Classanonymous.png
+                            :alt: Classanonymous's outgoing diagramm
 
 List of available properties : 
 
@@ -1084,50 +1205,30 @@ List of available properties :
 
 List of possible tokens : 
 
-* T_STRING
+* T_CLASS
 
 List of outgoing links : 
 
 * ARGUMENT
-* NAME
+* DEFINITION
+* EXTENDS
+* IMPLEMENTS
+* MAGICMETHOD
+* METHOD
+* PPP
+* USE
 
 List of incoming links : 
 
 * ANALYZED
-* RIGHT
-
-
-Classanonymous
-___________________________
-
-
-A unnamed class, created with `new class {};`
-
-.. image:: images/Classanonymous.png
-                            :alt: Classanonymous's outgoing diagramm
-
-List of available properties : 
-
-* 
-
-List of possible tokens : 
-
-* 
-
-List of outgoing links : 
-
-* 
-
-List of incoming links : 
-
-* 
+* NEW
 
 
 Clone
 ___________________________
 
 
-Docs for Clone
+A clone expression
 
 .. image:: images/Clone.png
                             :alt: Clone's outgoing diagramm
@@ -1155,16 +1256,22 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CLONE
+* CODE
 * ELSE
+* EXPRESSION
+* LEFT
 * RETURN
 * RIGHT
+* SOURCE
+* THEN
 
 
 Closure
 ___________________________
 
 
-Docs for Closure
+A closure definition. For example, `function () { return 3; }`.
 
 .. image:: images/Closure.png
                             :alt: Closure's outgoing diagramm
@@ -1173,6 +1280,7 @@ List of available properties :
 
 * args_max
 * args_min
+* boolean
 * code
 * constant
 * count
@@ -1182,7 +1290,11 @@ List of available properties :
 * fullnspath
 * lccode
 * line
+* noscream
+* nullable
 * rank
+* reference
+* static
 
 List of possible tokens : 
 
@@ -1194,13 +1306,66 @@ List of outgoing links :
 * BLOCK
 * DEFINITION
 * RETURNED
+* RETURNTYPE
 * USE
 
 List of incoming links : 
 
 * ANALYZED
 * ARGUMENT
+* CAST
+* CODE
+* ELSE
+* INDEX
+* RETURN
 * RIGHT
+* SOURCE
+* THEN
+* VALUE
+* VARIABLE
+
+
+Coalesce
+___________________________
+
+
+An expression with the coalesce operator, `?:`. For example, `$x = $y ?: 'ef';` 
+
+.. image:: images/Coalesce.png
+                            :alt: Coalesce's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* isNull
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_COALESCE
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ARGUMENT
+* CODE
+* CONDITION
+* DEFAULT
+* RETURN
+* RIGHT
+* SOURCE
+* THEN
 * VALUE
 
 
@@ -1237,6 +1402,7 @@ List of possible tokens :
 * T_IS_NOT_IDENTICAL
 * T_IS_SMALLER_OR_EQUAL
 * T_SMALLER
+* T_SPACESHIP
 
 List of outgoing links : 
 
@@ -1247,10 +1413,12 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CASE
 * CODE
 * CONDITION
 * ELSE
 * EXPRESSION
+* INDEX
 * LEFT
 * RETURN
 * RIGHT
@@ -1276,6 +1444,7 @@ List of available properties :
 * ctype1
 * ctype1_size
 * fullcode
+* fullnspath
 * intval
 * lccode
 * line
@@ -1296,13 +1465,17 @@ List of incoming links :
 * ARGUMENT
 * CASE
 * CODE
+* CONDITION
+* DEFAULT
 * ELSE
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
 * RETURN
 * RIGHT
 * THEN
+* THROW
 * VALUE
 
 
@@ -1337,7 +1510,9 @@ List of outgoing links :
 
 List of incoming links : 
 
+* ANALYZED
 * CONST
+* EXPRESSION
 
 
 Constant
@@ -1415,11 +1590,75 @@ List of incoming links :
 * EXPRESSION
 
 
+Declare
+___________________________
+
+
+A declare expression.
+
+.. image:: images/Declare.png
+                            :alt: Declare's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_DECLARE
+
+List of outgoing links : 
+
+* BLOCK
+* DECLARE
+
+List of incoming links : 
+
+* ANALYZED
+* EXPRESSION
+
+
+Declaredefinition
+___________________________
+
+
+One configuration expression inside a `declare` definition. For example, in `declare(strict_types=1);`, `strict_types=1`
+
+.. image:: images/Declaredefinition.png
+                            :alt: Declaredefinition's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+
+List of possible tokens : 
+
+* 
+
+List of outgoing links : 
+
+* NAME
+* VALUE
+
+List of incoming links : 
+
+* DECLARE
+
+
 Default
 ___________________________
 
 
-Docs for Default
+A default case, in a switch statement.
 
 .. image:: images/Default.png
                             :alt: Default's outgoing diagramm
@@ -1483,6 +1722,7 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ARGUMENT
 * EXPRESSION
 * RIGHT
 
@@ -1491,7 +1731,7 @@ Dowhile
 ___________________________
 
 
-Docs for Dowhile
+A do...while() loop. 
 
 .. image:: images/Dowhile.png
                             :alt: Dowhile's outgoing diagramm
@@ -1547,11 +1787,13 @@ List of available properties :
 List of possible tokens : 
 
 * T_ECHO
+* T_OPEN_TAG_WITH_ECHO
 * 1
 
 List of outgoing links : 
 
 * ARGUMENT
+* NAME
 
 List of incoming links : 
 
@@ -1598,6 +1840,7 @@ List of incoming links :
 * CONDITION
 * LEFT
 * NOT
+* RETURN
 * RIGHT
 * VALUE
 
@@ -1637,9 +1880,12 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ARGUMENT
+* CODE
 * EXPRESSION
 * NOT
 * RETURN
+* RIGHT
 
 
 Exit
@@ -1756,6 +2002,7 @@ A for loop. For example : `for($i = 0; $i < 10; ++$i) { }`
 
 List of available properties : 
 
+* alternative
 * code
 * ctype1
 * ctype1_size
@@ -1767,6 +2014,7 @@ List of available properties :
 List of possible tokens : 
 
 * T_CLOSE_CURLY
+* T_OPEN_TAG
 * T_SEMICOLON
 * 1
 
@@ -1787,13 +2035,14 @@ Foreach
 ___________________________
 
 
-Docs for Foreach
+A foreach loop.
 
 .. image:: images/Foreach.png
                             :alt: Foreach's outgoing diagramm
 
 List of available properties : 
 
+* alternative
 * code
 * ctype1
 * ctype1_size
@@ -1822,7 +2071,7 @@ Function
 ___________________________
 
 
-Docs for Function
+A function definition
 
 .. image:: images/Function.png
                             :alt: Function's outgoing diagramm
@@ -1839,7 +2088,9 @@ List of available properties :
 * fullnspath
 * lccode
 * line
+* nullable
 * rank
+* reference
 
 List of possible tokens : 
 
@@ -1852,6 +2103,7 @@ List of outgoing links :
 * DEFINITION
 * NAME
 * RETURNED
+* RETURNTYPE
 
 List of incoming links : 
 
@@ -1863,13 +2115,14 @@ Functioncall
 ___________________________
 
 
-Docs for Functioncall
+A call to a function.
 
 .. image:: images/Functioncall.png
                             :alt: Functioncall's outgoing diagramm
 
 List of available properties : 
 
+* aliased
 * args_max
 * args_min
 * code
@@ -1877,16 +2130,29 @@ List of available properties :
 * count
 * ctype1
 * ctype1_size
+* enclosing
 * fullcode
 * fullnspath
 * lccode
 * line
+* noDelimiter
 * noscream
 * rank
+* reference
+* variadic
 
 List of possible tokens : 
 
+* T_CLOSE_BRACKET
+* T_CLOSE_PARENTHESIS
+* T_CONSTANT_ENCAPSED_STRING
+* T_CURLY_OPEN
+* T_DOLLAR
+* T_DOUBLE_COLON
 * T_NS_SEPARATOR
+* T_OBJECT_OPERATOR
+* T_OPEN_BRACKET
+* T_OPEN_PARENTHESIS
 * T_STRING
 * T_VARIABLE
 
@@ -1898,6 +2164,7 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* APPEND
 * ARGUMENT
 * CASE
 * CAST
@@ -1909,6 +2176,7 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
 * NEW
 * NOT
 * OBJECT
@@ -1917,14 +2185,17 @@ List of incoming links :
 * SIGN
 * SOURCE
 * THEN
+* THROW
+* VALUE
 * VARIABLE
+* YIELD
 
 
 Global
 ___________________________
 
 
-Docs for Global
+An expression with the global keyword. For example, `global $x, $y`.
 
 .. image:: images/Global.png
                             :alt: Global's outgoing diagramm
@@ -1958,7 +2229,7 @@ Globaldefinition
 ___________________________
 
 
-Docs for Globaldefinition
+A definition of a global variable, inside a global expression. For example, in `global $x = 1, $y`, `$x = 1` and `$y` are Globaldefinition.
 
 .. image:: images/Globaldefinition.png
                             :alt: Globaldefinition's outgoing diagramm
@@ -1992,7 +2263,7 @@ Goto
 ___________________________
 
 
-Docs for Goto
+The goto expression.
 
 .. image:: images/Goto.png
                             :alt: Goto's outgoing diagramm
@@ -2025,7 +2296,7 @@ Gotolabel
 ___________________________
 
 
-Docs for Gotolabel
+A target destination for a goto expression.
 
 .. image:: images/Gotolabel.png
                             :alt: Gotolabel's outgoing diagramm
@@ -2053,17 +2324,49 @@ List of incoming links :
 * EXPRESSION
 
 
+Halt
+___________________________
+
+
+The `__halt_compiler` command.
+
+.. image:: images/Halt.png
+                            :alt: Halt's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_HALT_COMPILER
+
+List of outgoing links : 
+
+* 
+
+List of incoming links : 
+
+* EXPRESSION
+
+
 Heredoc
 ___________________________
 
 
-Docs for Heredoc
+A Heredoc or Nowdoc string
 
 .. image:: images/Heredoc.png
                             :alt: Heredoc's outgoing diagramm
 
 List of available properties : 
 
+* binaryString
 * boolean
 * code
 * count
@@ -2090,15 +2393,18 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CONCAT
+* DEFAULT
 * RETURN
 * RIGHT
+* VALUE
 
 
 Identifier
 ___________________________
 
 
-Docs for Identifier
+A name for a constant or a class. For example : `$x instanceof Y`, 'echo PHP_INT_MAX`, `new Y`
 
 .. image:: images/Identifier.png
                             :alt: Identifier's outgoing diagramm
@@ -2120,11 +2426,14 @@ List of available properties :
 * noDelimiter
 * noscream
 * rank
+* reference
 
 List of possible tokens : 
 
 * T_ARRAY
 * T_CALLABLE
+* T_CONST
+* T_FUNCTION
 * T_STRING
 
 List of outgoing links : 
@@ -2139,12 +2448,17 @@ List of incoming links :
 * CASE
 * CAST
 * CLASS
+* CODE
 * CONCAT
 * CONDITION
+* CONST
 * DEFAULT
 * DEFINITION
 * ELSE
+* EXPRESSION
+* FUNCTION
 * INDEX
+* INSTEADOF
 * LEFT
 * MEMBER
 * NAME
@@ -2156,13 +2470,14 @@ List of incoming links :
 * THEN
 * TYPEHINT
 * VALUE
+* VARIABLE
 
 
 Ifthen
 ___________________________
 
 
-Docs for Ifthen
+A if/then/else structure.
 
 .. image:: images/Ifthen.png
                             :alt: Ifthen's outgoing diagramm
@@ -2200,7 +2515,7 @@ Include
 ___________________________
 
 
-Docs for Include
+A inclusion, with `require` or `include`, with `_once` or not.
 
 .. image:: images/Include.png
                             :alt: Include's outgoing diagramm
@@ -2233,17 +2548,20 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CODE
+* CONDITION
 * EXPRESSION
 * NOT
 * RETURN
 * RIGHT
+* THEN
 
 
 Inlinehtml
 ___________________________
 
 
-Docs for Inlinehtml
+Raw text, in the middle of a PHP script. For example : `++$a; ?>RAW TEXT<?php ++$b; `
 
 .. image:: images/Inlinehtml.png
                             :alt: Inlinehtml's outgoing diagramm
@@ -2276,7 +2594,7 @@ Instanceof
 ___________________________
 
 
-Docs for Instanceof
+A `instanceof` expression
 
 .. image:: images/Instanceof.png
                             :alt: Instanceof's outgoing diagramm
@@ -2289,6 +2607,7 @@ List of available properties :
 * fullcode
 * lccode
 * line
+* rank
 
 List of possible tokens : 
 
@@ -2302,12 +2621,48 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ARGUMENT
 * CASE
 * CODE
 * CONDITION
+* INDEX
 * LEFT
 * NOT
+* RETURN
 * RIGHT
+
+
+Insteadof
+___________________________
+
+
+A `insteadof` expression
+
+.. image:: images/Insteadof.png
+                            :alt: Insteadof's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_INSTEADOF
+
+List of outgoing links : 
+
+* INSTEADOF
+* NAME
+
+List of incoming links : 
+
+* EXPRESSION
 
 
 Integer
@@ -2327,11 +2682,13 @@ List of available properties :
 * ctype1
 * ctype1_size
 * fullcode
+* fullnspath
 * intval
 * lccode
 * line
 * noDelimiter
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -2349,6 +2706,7 @@ List of incoming links :
 * BREAK
 * CASE
 * CAST
+* CLONE
 * CODE
 * CONCAT
 * CONDITION
@@ -2357,17 +2715,21 @@ List of incoming links :
 * ELSE
 * INDEX
 * LEFT
+* NAME
+* NOT
 * RETURN
 * RIGHT
 * THEN
+* THROW
 * VALUE
+* YIELD
 
 
 Interface
 ___________________________
 
 
-Docs for Interface
+An interface definition
 
 .. image:: images/Interface.png
                             :alt: Interface's outgoing diagramm
@@ -2436,6 +2798,7 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CASE
 * CODE
 * CONDITION
 * EXPRESSION
@@ -2479,13 +2842,14 @@ List of incoming links :
 
 * ARGUMENT
 * VALUE
+* YIELD
 
 
 List
 ___________________________
 
 
-Docs for List
+The list() or [] call when on the right of an assignation.
 
 .. image:: images/List.png
                             :alt: List's outgoing diagramm
@@ -2499,12 +2863,16 @@ List of available properties :
 * ctype1
 * ctype1_size
 * fullcode
+* fullnspath
 * lccode
 * line
+* noscream
+* rank
 
 List of possible tokens : 
 
 * T_LIST
+* T_OPEN_BRACKET
 
 List of outgoing links : 
 
@@ -2513,14 +2881,17 @@ List of outgoing links :
 
 List of incoming links : 
 
+* ANALYZED
+* ARGUMENT
 * LEFT
+* VALUE
 
 
 Logical
 ___________________________
 
 
-Docs for Logical
+A logical expression. This covers also bitwise operations. For example : `$a | $b`, `$a && $b`, `$a xor $b`.
 
 .. image:: images/Logical.png
                             :alt: Logical's outgoing diagramm
@@ -2536,6 +2907,7 @@ List of available properties :
 * intval
 * lccode
 * line
+* noDelimiter
 * rank
 
 List of possible tokens : 
@@ -2561,6 +2933,8 @@ List of incoming links :
 * CASE
 * CODE
 * CONDITION
+* DEFAULT
+* ELSE
 * EXPRESSION
 * INDEX
 * LEFT
@@ -2574,7 +2948,7 @@ Magicconstant
 ___________________________
 
 
-Docs for Magicconstant
+A PHP magic constant. For example : __FILE__ or __class__.
 
 .. image:: images/Magicconstant.png
                             :alt: Magicconstant's outgoing diagramm
@@ -2598,8 +2972,10 @@ List of possible tokens :
 * T_DIR
 * T_FILE
 * T_FUNC_C
+* T_LINE
 * T_METHOD_C
 * T_NS_C
+* T_TRAIT_C
 * 1
 
 List of outgoing links : 
@@ -2610,20 +2986,30 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CODE
 * CONCAT
+* DEFAULT
+* ELSE
+* INDEX
+* LEFT
+* RETURN
+* RIGHT
+* THEN
+* VALUE
 
 
 Magicmethod
 ___________________________
 
 
-Docs for Magicmethod
+A special PHP method in a class. For example, `__clone()`, `__construct()`, `__get()`, ...
 
 .. image:: images/Magicmethod.png
                             :alt: Magicmethod's outgoing diagramm
 
 List of available properties : 
 
+* abstract
 * args_max
 * args_min
 * code
@@ -2652,6 +3038,7 @@ List of outgoing links :
 * NAME
 * OVERWRITE
 * RETURNED
+* RETURNTYPE
 
 List of incoming links : 
 
@@ -2664,7 +3051,7 @@ Member
 ___________________________
 
 
-Docs for Member
+A reference to a member of an object. For example, `$object->member`. 
 
 .. image:: images/Member.png
                             :alt: Member's outgoing diagramm
@@ -2699,6 +3086,7 @@ List of incoming links :
 * APPEND
 * ARGUMENT
 * CAST
+* CLASS
 * CLONE
 * CODE
 * CONCAT
@@ -2708,6 +3096,8 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
+* NEW
 * NOT
 * OBJECT
 * POSTPLUSPLUS
@@ -2717,6 +3107,7 @@ List of incoming links :
 * SIGN
 * SOURCE
 * THEN
+* THROW
 * VALUE
 * VARIABLE
 * YIELD
@@ -2726,7 +3117,7 @@ Method
 ___________________________
 
 
-Docs for Method
+A method definition in a class.
 
 .. image:: images/Method.png
                             :alt: Method's outgoing diagramm
@@ -2745,6 +3136,7 @@ List of available properties :
 * fullnspath
 * lccode
 * line
+* nullable
 * rank
 * reference
 * static
@@ -2763,6 +3155,7 @@ List of outgoing links :
 * NAME
 * OVERWRITE
 * RETURNED
+* RETURNTYPE
 
 List of incoming links : 
 
@@ -2775,7 +3168,7 @@ Methodcall
 ___________________________
 
 
-Docs for Methodcall
+A non-static call to a method. For example, `$a->method();`
 
 .. image:: images/Methodcall.png
                             :alt: Methodcall's outgoing diagramm
@@ -2791,6 +3184,7 @@ List of available properties :
 * line
 * noDelimiter
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -2805,7 +3199,9 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* APPEND
 * ARGUMENT
+* CASE
 * CAST
 * CLONE
 * CODE
@@ -2816,6 +3212,8 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
+* NEW
 * NOT
 * OBJECT
 * RETURN
@@ -2823,15 +3221,17 @@ List of incoming links :
 * SIGN
 * SOURCE
 * THEN
+* THROW
 * VALUE
 * VARIABLE
+* YIELD
 
 
 Methodcallname
 ___________________________
 
 
-Docs for Methodcallname
+The name of the method in a methodcall
 
 .. image:: images/Methodcallname.png
                             :alt: Methodcallname's outgoing diagramm
@@ -2852,6 +3252,8 @@ List of possible tokens :
 
 * T_CLOSE_BRACKET
 * T_CONSTANT_ENCAPSED_STRING
+* T_DOLLAR
+* T_NEW
 * T_STRING
 * T_VARIABLE
 
@@ -2862,6 +3264,7 @@ List of outgoing links :
 
 List of incoming links : 
 
+* ANALYZED
 * METHOD
 
 
@@ -2906,7 +3309,9 @@ List of incoming links :
 * CODE
 * CONCAT
 * CONDITION
+* DEFAULT
 * ELSE
+* EXPRESSION
 * INDEX
 * LEFT
 * RETURN
@@ -2920,7 +3325,7 @@ Name
 ___________________________
 
 
-Docs for Name
+The name of a structure : name of a class, method, interface, trait, interface.
 
 .. image:: images/Name.png
                             :alt: Name's outgoing diagramm
@@ -2938,8 +3343,17 @@ List of available properties :
 
 List of possible tokens : 
 
+* T_ABSTRACT
+* T_CLASS
+* T_INSTANCEOF
 * T_LIST
+* T_NEW
+* T_OPEN_TAG_WITH_ECHO
+* T_PRINT
+* T_PRIVATE
+* T_PUBLIC
 * T_STRING
+* T_THROW
 
 List of outgoing links : 
 
@@ -2953,6 +3367,7 @@ List of incoming links :
 * GOTO
 * GOTOLABEL
 * MEMBER
+* METHOD
 * NAME
 
 
@@ -2960,7 +3375,7 @@ Namespace
 ___________________________
 
 
-Docs for Namespace
+A namespace declaration
 
 .. image:: images/Namespace.png
                             :alt: Namespace's outgoing diagramm
@@ -3009,6 +3424,7 @@ List of available properties :
 * line
 * noscream
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -3022,22 +3438,31 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CAST
+* CLONE
 * CODE
+* CONCAT
+* CONDITION
 * DEFINITION
 * ELSE
+* EXPRESSION
+* INDEX
+* LEFT
 * RETURN
 * RIGHT
 * SOURCE
 * THEN
 * THROW
 * VALUE
+* VARIABLE
+* YIELD
 
 
 Newcall
 ___________________________
 
 
-Docs for Newcall
+The functioncall in a New expression. For example, in ``new foo()`, `foo()` is the Newcall.
 
 .. image:: images/Newcall.png
                             :alt: Newcall's outgoing diagramm
@@ -3061,6 +3486,7 @@ List of available properties :
 
 List of possible tokens : 
 
+* T_DOLLAR
 * T_LIST
 * T_NS_SEPARATOR
 * T_STATIC
@@ -3121,6 +3547,7 @@ List of available properties :
 * lccode
 * line
 * noDelimiter
+* noscream
 * rank
 
 List of possible tokens : 
@@ -3136,13 +3563,17 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CASE
 * CAST
 * CODE
 * CONDITION
+* ELSE
+* EXPRESSION
 * LEFT
 * NOT
 * RETURN
 * RIGHT
+* THEN
 * VALUE
 
 
@@ -3150,7 +3581,7 @@ Nsname
 ___________________________
 
 
-Docs for Nsname
+A fully qualified name, including `\`. For example, `\strtolower`, `A\B\C`, ...w
 
 .. image:: images/Nsname.png
                             :alt: Nsname's outgoing diagramm
@@ -3173,9 +3604,12 @@ List of available properties :
 * noDelimiter
 * origin
 * rank
+* reference
 
 List of possible tokens : 
 
+* T_ARRAY
+* T_CALLABLE
 * T_NS_SEPARATOR
 * T_STRING
 * 1
@@ -3187,14 +3621,22 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ARGUMENT
 * CLASS
+* CONCAT
+* DEFAULT
 * DEFINITION
 * EXTENDS
 * IMPLEMENTS
+* INDEX
+* LEFT
 * NAME
 * NEW
+* RETURNTYPE
+* RIGHT
 * TYPEHINT
 * USE
+* VALUE
 
 
 Null
@@ -3221,6 +3663,7 @@ List of available properties :
 * line
 * noDelimiter
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -3235,8 +3678,12 @@ List of incoming links :
 * ANALYZED
 * ARGUMENT
 * CASE
+* CAST
+* CODE
+* CONDITION
 * DEFAULT
 * ELSE
+* INDEX
 * LEFT
 * RETURN
 * RIGHT
@@ -3248,7 +3695,7 @@ Parameter
 ___________________________
 
 
-Docs for Parameter
+A parameter definition, in a function or method definition. When called, it becomes an argument.
 
 .. image:: images/Parameter.png
                             :alt: Parameter's outgoing diagramm
@@ -3260,6 +3707,7 @@ List of available properties :
 * fullcode
 * lccode
 * line
+* nullable
 * rank
 * reference
 * variadic
@@ -3287,7 +3735,7 @@ Parametername
 ___________________________
 
 
-Docs for Parametername
+A Parametername
 
 .. image:: images/Parametername.png
                             :alt: Parametername's outgoing diagramm
@@ -3321,7 +3769,7 @@ Parent
 ___________________________
 
 
-Docs for Parent
+The parent keyword, when it is used to refer to the parent class.
 
 .. image:: images/Parent.png
                             :alt: Parent's outgoing diagramm
@@ -3337,6 +3785,7 @@ List of available properties :
 * intval
 * lccode
 * line
+* noscream
 
 List of possible tokens : 
 
@@ -3352,7 +3801,9 @@ List of incoming links :
 * ANALYZED
 * CLASS
 * DEFINITION
-* NAME
+* NEW
+* RETURNTYPE
+* TYPEHINT
 
 
 Parenthesis
@@ -3402,12 +3853,15 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
 * NOT
 * OBJECT
 * RETURN
 * RIGHT
 * SIGN
+* SOURCE
 * THEN
+* THROW
 * VALUE
 * VARIABLE
 
@@ -3416,7 +3870,7 @@ Php
 ___________________________
 
 
-Docs for Php
+A PHP script, inside its tags. This exclude the following and previous raw text in a PHP file. 
 
 .. image:: images/Php.png
                             :alt: Php's outgoing diagramm
@@ -3463,6 +3917,8 @@ List of available properties :
 * line
 * noDelimiter
 * rank
+* reference
+* variadic
 
 List of possible tokens : 
 
@@ -3475,13 +3931,16 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* APPEND
 * ARGUMENT
 * CONCAT
 * CONDITION
 * DEFINITION
+* ELSE
 * LEFT
 * RIGHT
 * SOURCE
+* THEN
 * VALUE
 * VARIABLE
 
@@ -3525,16 +3984,55 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NOT
 * RETURN
 * RIGHT
 * THEN
+
+
+Power
+___________________________
+
+
+The power operator, `**`. 
+
+.. image:: images/Power.png
+                            :alt: Power's outgoing diagramm
+
+List of available properties : 
+
+* boolean
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* intval
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_POW
+
+List of outgoing links : 
+
+* LEFT
+* RIGHT
+
+List of incoming links : 
+
+* ARGUMENT
+* CODE
+* VALUE
 
 
 Ppp
 ___________________________
 
 
-Docs for Ppp
+A properties declaration, in a class or a trait. For example : `private $x, $y = 2;`
 
 .. image:: images/Ppp.png
                             :alt: Ppp's outgoing diagramm
@@ -3575,7 +4073,7 @@ Preplusplus
 ___________________________
 
 
-Docs for Preplusplus
+++ or -- when it is before the variable.
 
 .. image:: images/Preplusplus.png
                             :alt: Preplusplus's outgoing diagramm
@@ -3603,21 +4101,25 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CODE
 * CONCAT
+* CONDITION
 * ELSE
 * EXPRESSION
 * INDEX
 * LEFT
+* NOT
 * RETURN
 * RIGHT
 * VALUE
+* YIELD
 
 
 Print
 ___________________________
 
 
-Docs for Print
+A call to the function print.
 
 .. image:: images/Print.png
                             :alt: Print's outgoing diagramm
@@ -3645,7 +4147,10 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ELSE
 * EXPRESSION
+* RIGHT
+* THEN
 
 
 Project
@@ -3738,6 +4243,7 @@ List of available properties :
 * line
 * noDelimiter
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -3750,9 +4256,12 @@ List of outgoing links :
 List of incoming links : 
 
 * ARGUMENT
+* CAST
 * CODE
+* CONCAT
 * DEFAULT
 * ELSE
+* INDEX
 * LEFT
 * RETURN
 * RIGHT
@@ -3764,7 +4273,7 @@ Return
 ___________________________
 
 
-Docs for Return
+The return expression.
 
 .. image:: images/Return.png
                             :alt: Return's outgoing diagramm
@@ -3814,6 +4323,8 @@ List of available properties :
 * intval
 * lccode
 * line
+* noscream
+* reference
 
 List of possible tokens : 
 
@@ -3830,6 +4341,8 @@ List of incoming links :
 * CLASS
 * DEFINITION
 * NAME
+* NEW
+* RETURNTYPE
 * TYPEHINT
 
 
@@ -3837,7 +4350,7 @@ Sequence
 ___________________________
 
 
-Docs for Sequence
+A virtual atom, that represents the sequence of expression, in a block.
 
 .. image:: images/Sequence.png
                             :alt: Sequence's outgoing diagramm
@@ -3861,6 +4374,9 @@ List of possible tokens :
 
 * T_CLOSE_CURLY
 * T_CLOSE_PARENTHESIS
+* T_COLON
+* T_CONSTANT_ENCAPSED_STRING
+* T_INLINE_HTML
 * T_OPEN_CURLY
 * T_OPEN_TAG
 * T_SEMICOLON
@@ -3883,6 +4399,42 @@ List of incoming links :
 * INCREMENT
 * INIT
 * THEN
+
+
+Shell
+___________________________
+
+
+A shell, made with ticks `\``
+
+.. image:: images/Shell.png
+                            :alt: Shell's outgoing diagramm
+
+List of available properties : 
+
+* code
+* count
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* noDelimiter
+* rank
+
+List of possible tokens : 
+
+* T_SHELL_QUOTE
+
+List of outgoing links : 
+
+* CONCAT
+
+List of incoming links : 
+
+* ARGUMENT
+* EXPRESSION
+* RIGHT
 
 
 Sign
@@ -3908,6 +4460,7 @@ List of possible tokens :
 
 * T_CLOSE_BRACKET
 * T_CLOSE_PARENTHESIS
+* T_CONSTANT_ENCAPSED_STRING
 * T_LNUMBER
 * T_STRING
 * T_VARIABLE
@@ -3920,6 +4473,7 @@ List of outgoing links :
 List of incoming links : 
 
 * ARGUMENT
+* CAST
 * CODE
 * ELSE
 * LEFT
@@ -3933,7 +4487,7 @@ Static
 ___________________________
 
 
-Docs for Static
+The static keyword, when it is used to refer to the current class.
 
 .. image:: images/Static.png
                             :alt: Static's outgoing diagramm
@@ -3949,7 +4503,6 @@ List of available properties :
 * lccode
 * line
 * rank
-* reference
 
 List of possible tokens : 
 
@@ -3971,7 +4524,7 @@ Staticclass
 ___________________________
 
 
-Docs for Staticclass
+A call to `::class`, with the syntax of a static constant. For example, `X::class`.
 
 .. image:: images/Staticclass.png
                             :alt: Staticclass's outgoing diagramm
@@ -4003,9 +4556,17 @@ List of incoming links :
 * ANALYZED
 * ARGUMENT
 * CASE
+* CODE
 * CONCAT
+* DEFAULT
+* ELSE
+* INDEX
+* LEFT
+* RETURN
 * RIGHT
+* THEN
 * VALUE
+* YIELD
 
 
 Staticconstant
@@ -4046,6 +4607,7 @@ List of incoming links :
 * ANALYZED
 * ARGUMENT
 * CASE
+* CODE
 * CONCAT
 * CONDITION
 * DEFAULT
@@ -4054,17 +4616,19 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NOT
 * RETURN
 * RIGHT
 * THEN
 * VALUE
+* VARIABLE
 
 
 Staticdefinition
 ___________________________
 
 
-Docs for Staticdefinition
+A static variable definition, in a method or function. This is not a static property. For example ; `function foo() { static $s; }`.
 
 .. image:: images/Staticdefinition.png
                             :alt: Staticdefinition's outgoing diagramm
@@ -4092,14 +4656,53 @@ List of incoming links :
 
 * ANALYZED
 * DEFINITION
+* GLOBAL
 * STATIC
+
+
+Staticmethod
+___________________________
+
+
+A staticmethod name, when using trait and renaming a method. For example, `trait t { use t2 { C::D as E; }}`. `C::D` is a static method.
+
+.. image:: images/Staticmethod.png
+                            :alt: Staticmethod's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* fullnspath
+* lccode
+* line
+
+List of possible tokens : 
+
+* T_DOUBLE_COLON
+* T_STRING
+
+List of outgoing links : 
+
+* CLASS
+* METHOD
+
+List of incoming links : 
+
+* ANALYZED
+* DEFINITION
+* NAME
+* NEW
+* SOURCE
 
 
 Staticmethodcall
 ___________________________
 
 
-Docs for Staticmethodcall
+A static methodcall
 
 .. image:: images/Staticmethodcall.png
                             :alt: Staticmethodcall's outgoing diagramm
@@ -4126,6 +4729,7 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* APPEND
 * ARGUMENT
 * CAST
 * CODE
@@ -4136,13 +4740,16 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
 * NEW
 * NOT
 * OBJECT
 * RETURN
 * RIGHT
+* SIGN
 * SOURCE
 * THEN
+* THROW
 * VALUE
 * VARIABLE
 
@@ -4151,7 +4758,7 @@ Staticproperty
 ___________________________
 
 
-Docs for Staticproperty
+A static property syntax. For example, `A::$b` or `self::$d`.
 
 .. image:: images/Staticproperty.png
                             :alt: Staticproperty's outgoing diagramm
@@ -4187,6 +4794,7 @@ List of incoming links :
 * CONDITION
 * DEFINITION
 * ELSE
+* EXPRESSION
 * INDEX
 * LEFT
 * NOT
@@ -4239,13 +4847,14 @@ String
 ___________________________
 
 
-Docs for String
+A string literal, with or without interpolation. For example, `'$x'`, `"a{$y}"`, `"a"`. 
 
 .. image:: images/String.png
                             :alt: String's outgoing diagramm
 
 List of available properties : 
 
+* binaryString
 * block
 * boolean
 * cbMethod
@@ -4262,7 +4871,9 @@ List of available properties :
 * lccode
 * line
 * noDelimiter
+* noscream
 * rank
+* variadic
 
 List of possible tokens : 
 
@@ -4289,10 +4900,14 @@ List of incoming links :
 * EXPRESSION
 * INDEX
 * LEFT
+* NAME
+* OBJECT
 * RETURN
 * RIGHT
 * THEN
 * VALUE
+* VARIABLE
+* YIELD
 
 
 Switch
@@ -4369,10 +4984,17 @@ List of incoming links :
 * ANALYZED
 * ARGUMENT
 * CODE
+* CONDITION
+* DEFAULT
+* ELSE
 * EXPRESSION
+* INDEX
+* NAME
 * RETURN
 * RIGHT
 * SOURCE
+* THEN
+* THROW
 * VALUE
 
 
@@ -4411,16 +5033,22 @@ List of incoming links :
 
 * ANALYZED
 * ARGUMENT
+* CAST
 * CLASS
 * CLONE
 * DEFINITION
 * ELSE
+* EXPRESSION
+* LEFT
+* NEW
 * OBJECT
 * RETURN
 * RIGHT
 * SOURCE
+* THEN
 * VALUE
 * VARIABLE
+* YIELD
 
 
 Throw
@@ -4483,9 +5111,11 @@ List of possible tokens :
 List of outgoing links : 
 
 * DEFINITION
+* MAGICMETHOD
 * METHOD
 * NAME
 * PPP
+* USE
 
 List of incoming links : 
 
@@ -4593,6 +5223,8 @@ List of possible tokens :
 
 List of outgoing links : 
 
+* CONST
+* FUNCTION
 * USE
 
 List of incoming links : 
@@ -4605,7 +5237,7 @@ Usetrait
 ___________________________
 
 
-Docs for Usetrait
+A `use` expression, when used to import a trait. For exapmle, `class x { use t; }`
 
 .. image:: images/Usetrait.png
                             :alt: Usetrait's outgoing diagramm
@@ -4625,6 +5257,7 @@ List of possible tokens :
 
 List of outgoing links : 
 
+* BLOCK
 * USE
 
 List of incoming links : 
@@ -4656,11 +5289,14 @@ List of available properties :
 * noscream
 * rank
 * reference
+* variadic
 
 List of possible tokens : 
 
 * T_CURLY_OPEN
 * T_DOLLAR
+* T_DOLLAR_OPEN_CURLY_BRACES
+* T_STRING_VARNAME
 * T_VARIABLE
 
 List of outgoing links : 
@@ -4670,6 +5306,7 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* APPEND
 * ARGUMENT
 * CASE
 * CAST
@@ -4681,12 +5318,14 @@ List of incoming links :
 * DEFINITION
 * ELSE
 * EXPRESSION
+* GLOBAL
 * INDEX
 * LEFT
 * MEMBER
 * NAME
 * NEW
 * NOT
+* OBJECT
 * POSTPLUSPLUS
 * PREPLUSPLUS
 * RETURN
@@ -4705,7 +5344,7 @@ Variablearray
 ___________________________
 
 
-Docs for Variablearray
+A variable, when used to build an array syntax. For example, the `$x` in `$x[0]` or `$x[]`.
 
 .. image:: images/Variablearray.png
                             :alt: Variablearray's outgoing diagramm
@@ -4721,6 +5360,7 @@ List of available properties :
 
 List of possible tokens : 
 
+* T_STRING_VARNAME
 * T_VARIABLE
 
 List of outgoing links : 
@@ -4740,7 +5380,7 @@ Variabledefinition
 ___________________________
 
 
-Docs for Variabledefinition
+A placeholder to federate local variable definition in a method. 
 
 .. image:: images/Variabledefinition.png
                             :alt: Variabledefinition's outgoing diagramm
@@ -4761,19 +5401,21 @@ List of possible tokens :
 
 List of outgoing links : 
 
+* DEFAULT
 * DEFINITION
 
 List of incoming links : 
 
 * DEFINITION
 * GLOBAL
+* STATIC
 
 
 Variableobject
 ___________________________
 
 
-Docs for Variableobject
+A variable when used with the `->` operator.
 
 .. image:: images/Variableobject.png
                             :alt: Variableobject's outgoing diagramm
@@ -4801,6 +5443,7 @@ List of incoming links :
 
 * ANALYZED
 * DEFINITION
+* NAME
 * OBJECT
 * RETURNED
 
@@ -4850,6 +5493,7 @@ List of incoming links :
 * NAME
 * RETURN
 * THEN
+* YIELD
 
 
 While
@@ -4891,7 +5535,7 @@ Yield
 ___________________________
 
 
-Docs for Yield
+A `yield` expression
 
 .. image:: images/Yield.png
                             :alt: Yield's outgoing diagramm
@@ -4899,6 +5543,7 @@ Docs for Yield
 List of available properties : 
 
 * code
+* constant
 * ctype1
 * ctype1_size
 * fullcode
@@ -4917,7 +5562,48 @@ List of outgoing links :
 List of incoming links : 
 
 * ANALYZED
+* ARGUMENT
 * CONCAT
+* CONDITION
+* EXPRESSION
+* LEFT
+* RIGHT
+* YIELD
+
+
+Yieldfrom
+___________________________
+
+
+A `yield from` expression
+
+.. image:: images/Yieldfrom.png
+                            :alt: Yieldfrom's outgoing diagramm
+
+List of available properties : 
+
+* code
+* ctype1
+* ctype1_size
+* fullcode
+* lccode
+* line
+* rank
+
+List of possible tokens : 
+
+* T_YIELD_FROM
+
+List of outgoing links : 
+
+* YIELD
+
+List of incoming links : 
+
+* ANALYZED
+* ARGUMENT
+* EXPRESSION
+* LEFT
 
 
 

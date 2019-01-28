@@ -1,6 +1,6 @@
 {
     "name": "Staticmethod",
-    "description": "Docs for Staticmethod",
+    "description": "A staticmethod name, when using trait and renaming a method. For example, `trait t { use t2 { C::D as E; }}`. `C::D` is a static method.",
     "url": [
         ""
     ]

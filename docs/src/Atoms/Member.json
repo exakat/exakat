@@ -1,6 +1,6 @@
 {
     "name": "Member",
-    "description": "Docs for Member",
+    "description": "A reference to a member of an object. For example, `$object->member`. ",
     "url": [
         ""
     ]

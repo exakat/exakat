@@ -1,6 +1,6 @@
 {
     "name": "Methodcallname",
-    "description": "Docs for Methodcallname",
+    "description": "The name of the method in a methodcall",
     "url": [
         ""
     ]

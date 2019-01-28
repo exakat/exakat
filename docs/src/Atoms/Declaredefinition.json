@@ -1,0 +1,7 @@
+{
+    "name": "Declaredefinition",
+    "description": "One configuration expression inside a `declare` definition. For example, in `declare(strict_types=1);`, `strict_types=1`",
+    "url": [
+        ""
+    ]
+}

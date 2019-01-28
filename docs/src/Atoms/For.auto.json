@@ -1,1 +1,1 @@
-{"fullcode":3623,"lccode":3623,"code":3623,"rank":3623,"line":3623,"token":{"T_CLOSE_CURLY":1,"0":"T_CLOSE_CURLY","1":"T_SEMICOLON"},"ctype1":3623,"ctype1_size":3623,"in":{"EXPRESSION":3623,"ANALYZED":920},"out":{"BLOCK":3623,"INCREMENT":3623,"INIT":3623,"FINAL":3623}}
+{"fullcode":6089,"lccode":6089,"code":6089,"rank":6089,"line":6089,"token":{"T_CLOSE_CURLY":1,"0":"T_CLOSE_CURLY","1":"T_SEMICOLON","2":"T_OPEN_TAG"},"ctype1":6089,"ctype1_size":6089,"alternative":1,"in":{"ANALYZED":963,"EXPRESSION":6089},"out":{"BLOCK":6089,"INIT":6089,"INCREMENT":6089,"FINAL":6089}}

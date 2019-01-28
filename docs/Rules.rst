@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 25 Jan 2019 14:43:57 +0000
-.. comment: Generation hash : 55a55b96f8825a6b7fab57a5f6cc6f8a13935a93
+.. comment: Generation date : Mon, 28 Jan 2019 08:52:14 +0000
+.. comment: Generation hash : 638614a97b0dfebdb232064046506ca62f285d9d
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -5814,6 +5814,46 @@ Use SQL expression to compute aggregates.
 
 
 
+.. _don't-be-too-manual:
+
+Don't Be Too Manual
+###################
+
+
+Adapt the examples from the PHP manual to your code. Don't reuse directly the same names in your code : be more specific about what to expect in those variables.
+
+.. code-block:: php
+
+   <?php
+   
+   // Search for phone numbers in a text
+   preg_match_all('/((\d{3})-(\d{3})-(\d{4}))/', $string, $phoneNumber);
+   
+   // Search for phone numbers in a text
+   preg_match_all('/(\d{3})-(\d{3})-(\d{4})/', $string, $matches);
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use precise name with your variables
+
++-------------+------------------------------------------------+
+| Short name  | Structures/DontBeTooManual                     |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
+
+
+
 .. _don't-change-incomings:
 
 Don't Change Incomings
@@ -9255,14 +9295,28 @@ PHP defers the implements check until execution : the code in example does lint,
 
    <?php
    
-   class x {}
+   class x {
+       function foo() {}
+   }
    
-   interface y {}
+   interface y {
+       function foo();
+   }
    
-   // This is wrong
+   // Use implements with an interface
+   class z implements y {}
+   
+   // Implements is for an interface, not a class
    class z implements x {}
    
    ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
 
 +-------------+---------------------------------+
 | Short name  | Classes/ImplementIsForInterface |
@@ -11562,12 +11616,34 @@ Any function definition was found for that function, but a class with that name 
    <?php
    
    // Functioncall
-   $a = foo2();
+   $a = foo();
    
    // Class definition
-   class foo2 {}
+   class foo {}
+   // Function definition
+   function foo {}
+   
+   
+   // Functioncall
+   $a = BAR;
+   
+   // Function definition
+   class bar {}
+   // Constant definition
+   const BAR = 1;
+   
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the new
+* Rename the class to distinguish it from the function
+* Rename the function to distinguish it from the class
 
 +-------------+-----------------------+
 | Short name  | Structures/MissingNew |

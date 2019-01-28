@@ -1,6 +1,6 @@
 {
     "name": "Parameter",
-    "description": "Docs for Parameter",
+    "description": "A parameter definition, in a function or method definition. When called, it becomes an argument.",
     "url": [
         ""
     ]

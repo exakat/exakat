@@ -1,6 +1,6 @@
 {
     "name": "Sequence",
-    "description": "Docs for Sequence",
+    "description": "A virtual atom, that represents the sequence of expression, in a block.",
     "url": [
         ""
     ]

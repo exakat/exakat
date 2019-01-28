@@ -399,7 +399,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.4
 
-  * Use Coalesce Equal (Structures/UseCoalesceEqual)
+  * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions)
+  * Ext/DefinedClasses (Ext/DefinedClasses)
+  * Use Coalesce Equal (Structures/UseCoalesceEqual ; )
 
 * 1.6.3
 
@@ -2907,6 +2909,7 @@ __________________
 |   analyzer[] = "Php/UpperCaseKeyword";
 |   analyzer[] = "Structures/Bracketless";
 |   analyzer[] = "Structures/ConstantComparisonConsistance";
+|   analyzer[] = "Structures/DontBeTooManual";
 |   analyzer[] = "Structures/EchoPrintConsistance";
 |   analyzer[] = "Structures/HeredocDelimiterFavorite";
 |   analyzer[] = "Structures/MixedConcatInterpolation";
