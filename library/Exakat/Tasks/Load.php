@@ -2937,11 +2937,13 @@ class Load extends Tasks {
         $for->token       = $this->getToken($this->tokens[$this->id][0]);
         $for->alternative = $isColon;
 
-        $this->pushExpression($for);
         $this->runPlugins($for, array('INIT'      => $init,
                                       'FINAL'     => $final,
                                       'INCREMENT' => $increment,
                                       'BLOCK'     => $block));
+
+        $this->pushExpression($for);
+        $this->processSemicolon();
 
         if ($isColon === true) {
             ++$this->id; // skip endfor
@@ -2949,7 +2951,6 @@ class Load extends Tasks {
                 ++$this->id; // skip ; (will do just below)
             }
         }
-        $this->processSemicolon();
 
         return $for;
     }
@@ -2989,7 +2990,6 @@ class Load extends Tasks {
         $this->addLink($foreach, $block, 'BLOCK');
 
         if ($isColon === true) {
-            ++$this->id; // skip endforeach
             $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.') : '.self::FULLCODE_SEQUENCE.' endforeach';
         } else {
             $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -3008,8 +3008,11 @@ class Load extends Tasks {
         $this->pushExpression($foreach);
         $this->processSemicolon();
 
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
-            --$this->id;
+        if ($isColon === true) {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id; // skip ;
+            }
         }
 
         return $foreach;
@@ -3383,6 +3386,12 @@ class Load extends Tasks {
         $this->pushExpression($switch);
         $this->processSemicolon();
 
+        if ($isColon === true) {
+            ++$this->id; // skip endfor
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id; // skip ; (will do just below)
+            }
+        }
         return $switch;
     }
 
@@ -3459,6 +3468,11 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
             --$this->id;
+        } elseif ($isColon === true) {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id; // skip ;
+            }
         }
 
         $ifthen->code        = $this->tokens[$current][1];
