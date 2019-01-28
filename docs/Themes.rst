@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 25 Jan 2019 14:43:57 +0000
-.. comment: Generation hash : 55a55b96f8825a6b7fab57a5f6cc6f8a13935a93
+.. comment: Generation date : Mon, 28 Jan 2019 08:52:14 +0000
+.. comment: Generation hash : 638614a97b0dfebdb232064046506ca62f285d9d
 
 
 .. _analyze:
@@ -460,7 +460,7 @@ Total : 19 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 21 analysis
+Total : 22 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -468,6 +468,7 @@ Total : 21 analysis
 * :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Curly Arrays <curly-arrays>`
+* :ref:`Don't Be Too Manual <don't-be-too-manual>`
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Heredoc Delimiter <heredoc-delimiter>`
