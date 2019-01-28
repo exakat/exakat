@@ -534,6 +534,10 @@ class Manual extends Reports {
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
+            case 'Cvs':
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
             case 'Targz':
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;

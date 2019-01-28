@@ -121,6 +121,9 @@ class Initproject extends Tasks {
                 $repositoryBranch =  '';
                 $repositoryTag =  '';
             }
+        } elseif ($this->config->cvs === true) {
+            $vcs = 'cvs';
+            $projectName = basename($repositoryURL);
         } elseif ($this->config->copy === true) {
             $vcs = 'copy';
             $projectName = basename($repositoryURL);
