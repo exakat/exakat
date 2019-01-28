@@ -46,13 +46,7 @@ class Tinkergraph extends Graph {
             return;
         }
 
-        if (!file_exists("{$this->config->tinkergraph_port}/lib/")) {
-            // No local production, just skip init.
-            $this->status = self::UNAVAILABLE;
-            return;
-        }
-        
-        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->tinkergraph_port}/lib/"));
+        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->tinkergraph_folder}/lib/"));
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
@@ -77,7 +71,7 @@ class Tinkergraph extends Graph {
     }
 
     private function checkConfiguration() {
-        $this->db->timeout = 1200;
+        ini_set('default_socket_timeout', 1600);
         $this->db->open();
     }
 
@@ -166,8 +160,9 @@ class Tinkergraph extends Graph {
     }
     
     public function start() {
-        if (!file_exists("{$this->config->tinkergraph_port}/conf")) {
-            throw new GremlinException('No graphdb found.');
+        
+        if (!file_exists("{$this->config->tinkergraph_folder}/conf")) {
+            throw new GremlinException('No tinkgergraph configuration folder found.');
         }
         
         if (!file_exists("{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml")) {
@@ -205,7 +200,6 @@ class Tinkergraph extends Graph {
         } else {
             $pid = 'Not yet';
         }
-
 
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
