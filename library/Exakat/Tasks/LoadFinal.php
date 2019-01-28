@@ -82,6 +82,8 @@ class LoadFinal extends Tasks {
 
         $this->solveTraitMethods();
 
+        $this->followClosureDefinition();
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -882,6 +884,41 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         display('Created '.($result->toInt()).' links for use in traits');
+    }
+    
+    private function followClosureDefinition() {
+        // local usage
+        $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
+        $query->atomIs('Closure')
+              ->inIs('RIGHT')
+              ->outIs('LEFT')
+              ->inIs('DEFINITION')  // Find all variable usage
+              ->outIs('DEFINITION')
+              ->inIs('NAME')
+              ->atomIs('Functioncall')
+              ->addEFrom('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        // relayed usage
+        $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
+        $query->atomIs('Closure')
+              ->hasIn('ARGUMENT')
+              ->savePropertyAs('rank', 'ranked')
+              ->inIs('ARGUMENT')
+              ->inIs('DEFINITION')  // Find all variable usage
+              ->outIs('ARGUMENT')
+              ->samePropertyAs('rank', 'ranked', Analyzer::CASE_SENSITIVE)
+              ->outIs('NAME')
+              ->outIs('DEFINITION')
+              ->inIs('NAME')
+              ->atomIs('Functioncall')
+              ->addEFrom('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        display('Created '.($result->toInt()).' links for closures');
     }
 
     private function defaultIdentifiers() {
