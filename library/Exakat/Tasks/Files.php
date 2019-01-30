@@ -347,7 +347,7 @@ class Files extends Tasks {
         $this->datastore->addRow('files', array_map(function ($a) use ($dir, $modifications) {
                 return array('file'          => $a,
                              'fnv132'        => hash_file('fnv132', "{$this->config->projects_root}/projects/$dir/code/$a"),
-                             'modifications' => $modifications[trim($a, '/')] ?: 0);
+                             'modifications' => $modifications[trim($a, '/')] ?? 0);
         }, $files));
         $this->datastore->addRow('hash', array('files'  => count($files),
                                                'tokens' => $tokens));
@@ -510,10 +510,10 @@ class Files extends Tasks {
             $files = $notIgnored;
         } else {
             $included = preg_grep($includeDirsRegex, $allFiles);
-            $files = array_merge($notIgnored, $included);
-            $files = array_unique($files);
+            $files    = array_merge($notIgnored, $included);
+            $files    = array_unique($files);
         }
-        
+
         $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
 
         foreach($files as $id => $file) {
