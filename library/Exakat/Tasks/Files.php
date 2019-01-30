@@ -347,7 +347,7 @@ class Files extends Tasks {
         $this->datastore->addRow('files', array_map(function ($a) use ($dir, $modifications) {
                 return array('file'          => $a,
                              'fnv132'        => hash_file('fnv132', "{$this->config->projects_root}/projects/$dir/code/$a"),
-                             'modifications' => $modifications[trim($a, '/')] ?: 0);
+                             'modifications' => array_key_exists(trim($a, '/'), $modifications) ? $modifications[trim($a, '/')] : 0);
         }, $files));
         $this->datastore->addRow('hash', array('files'  => count($files),
                                                'tokens' => $tokens));
