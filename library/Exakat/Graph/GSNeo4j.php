@@ -174,7 +174,7 @@ class GSNeo4j extends Graph {
             display('start gremlin server 3.3.x');
             putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
             putenv('PID_DIR=db');
-            exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/gsneo4j.3.3.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
             display('start gremlin server 3.2.x');
             exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/gsneo4j.3.2.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ");
@@ -215,7 +215,7 @@ class GSNeo4j extends Graph {
             display('stop gremlin server 3.3.x');
             putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
             putenv('PID_DIR=db');
-            shell_exec("cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf run/gremlin.pid");
+            shell_exec("GREMLIN_YAML=conf/gsneo4j.3.3.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf db/gremlin.pid");
         }
         
         if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
