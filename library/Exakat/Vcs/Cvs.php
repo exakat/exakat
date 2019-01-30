@@ -54,11 +54,7 @@ class Cvs extends Vcs {
             return $r[1];
         }
         
-        if (preg_match('/At revision (\d+)/', $res, $r)) {
-            return $r[1];
-        }
-        
-        return 'Error : '.$res;
+        return 'CSV updated to last revision';
     }
 
     private function getInfo() {

@@ -28,14 +28,7 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Vcs\Bazaar;
-use Exakat\Vcs\Composer;
-use Exakat\Vcs\Copy;
-use Exakat\Vcs\Git;
-use Exakat\Vcs\Mercurial;
-use Exakat\Vcs\Svn;
-use Exakat\Vcs\Symlink;
-use Exakat\Vcs\Zip;
+use Exakat\Vcs\{Bazaar, Cvs, Composer, Copy, Git, Mercurial, Svn, Symlink, Zip};
 
 class Update extends Tasks
 {
@@ -117,6 +110,14 @@ class Update extends Tasks
                 $vcs = new Svn($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display("SVN updated to revision $new");
+                break;
+
+            // cvs case
+            case $updateConfig->project_vcs === 'cvs' :
+                display("CVS update $updateConfig->project");
+                $vcs = new Cvs($updateConfig->project, $updateConfig->projects_root);
+                $new = $vcs->update();
+                display("CVS updated to revision $new");
                 break;
 
             // bazaar case

@@ -45,6 +45,8 @@
              "file":[".php_cs", ".php_cs.dist", ".phpcs.xml", "php_cs.dist"]},
  "coveralls":{"homepage":"https://coveralls.zendesk.com/",
            "file":[".coveralls.yml"]},
+ "cvs":{"homepage":"http://savannah.nongnu.org/projects/cvs",
+           "file":["CVS"]},
  "docker":{"homepage":"http://www.docker.com/",
            "file":[".dockerignore", ".docker", "docker-compose.yml"]},
  "drone":{"homepage":"http://docs.drone.io/",
