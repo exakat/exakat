@@ -55,8 +55,10 @@ class Themes {
 
     public function getThemeForAnalyzer($analyzer) {
         $main = $this->main->getThemeForAnalyzer($analyzer);
-        
-        return array_merge($main);
+        $extra = $this->extra->getThemeForAnalyzer($analyzer);
+        $ext   = $this->ext  ->getThemeForAnalyzer($analyzer);
+
+        return array_merge($main, $extra, $ext);
     }
 
     public function getThemesForAnalyzer($list = null) {
@@ -64,7 +66,7 @@ class Themes {
         $extra = $this->extra->getThemesForAnalyzer($list);
         $ext   = $this->ext  ->getThemesForAnalyzer($list);
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public function getSeverities() {
@@ -95,8 +97,10 @@ class Themes {
 
     public function listAllThemes($theme = null) {
         $main = $this->main->listAllThemes($theme);
+        $extra = $this->extra->listAllThemes($theme);
+        $ext = $this->ext->listAllThemes($theme);
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public function getClass($name) {
