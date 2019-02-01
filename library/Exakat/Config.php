@@ -59,6 +59,10 @@ class Config {
             $this->projects_root = substr(dirname(phar::running()), 7);
             $this->dir_root      = phar::running();
 
+            // autoload extensions
+            $this->ext = new \AutoloadExt(substr(dirname(phar::running()).'/ext', 5));
+            $this->ext->registerAutoload();
+
             assert_options(ASSERT_ACTIVE, 0);
 
             error_reporting(0);
@@ -77,6 +81,10 @@ class Config {
             } else {
                 $this->projects_root = dirname(__DIR__, 2);
             }
+
+            // autoload extensions
+            $this->ext = new \AutoloadExt("{ $this->dir_root}/ext");
+            $this->ext->registerAutoload();
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
@@ -155,10 +163,6 @@ class Config {
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
-        
-        // autoload extensions
-        $this->ext = new \AutoloadExt("{$this->dir_root}/ext");
-        $this->ext->registerAutoload();
     }
 
     public function __isset($name) {
