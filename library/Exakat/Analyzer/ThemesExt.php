@@ -139,9 +139,13 @@ class ThemesExt {
     }
 
     public function listAllThemes() {
+        if (empty($this->themes)) {
+            return array();
+        }
+
         $return = array();
-        
-        foreach($this->themes as $theme) {
+
+        foreach($this->themes as $name => $theme) {
             $return[] = $theme->listAllThemes();
         }
 
