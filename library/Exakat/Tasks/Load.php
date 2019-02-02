@@ -951,9 +951,7 @@ class Load extends Tasks {
         $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $string;
     }
@@ -970,17 +968,15 @@ class Load extends Tasks {
         ++$this->id; // Skip }
 
         $name = $this->popExpression();
+        $this->addLink($variable, $name, 'NAME');
+
         $variable->code      = $this->tokens[$current][1];
         $variable->fullcode  = '${'.$name->fullcode.'}';
         $variable->line      = $this->tokens[$current][2];
         $variable->token     = $this->getToken($this->tokens[$current][0]);
         $variable->enclosing = self::ENCLOSING;
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
-
-        $this->addLink($variable, $name, 'NAME');
+        $this->checkExpression();
 
         return $variable;
     }
@@ -2554,9 +2550,7 @@ class Load extends Tasks {
             $this->pushExpression($plusplus);
             $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
 
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
+            $this->checkExpression();
             
             return $plusplus;
         } else {
@@ -2565,9 +2559,7 @@ class Load extends Tasks {
             $operator = $this->popExpression();
             $this->pushExpression($operator);
 
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
+            $this->checkExpression();
 
             return $operator;
         }
@@ -2757,9 +2749,7 @@ class Load extends Tasks {
         
         $this->pushExpression($static);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $static;
     }
@@ -2822,10 +2812,7 @@ class Load extends Tasks {
                                           'INDEX'    => $index));
 
         $bracket = $this->processFCOA($bracket);
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
-        // No check on ; here
+        $this->checkExpression();
 
         return $bracket;
     }
@@ -2844,9 +2831,7 @@ class Load extends Tasks {
             }
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
+            $this->checkExpression();
         }
 
         $block = $this->sequence;
@@ -3119,9 +3104,7 @@ class Load extends Tasks {
                                           'BLOCK'     => $block));
         $this->pushExpression($dowhile);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $dowhile;
     }
@@ -3519,7 +3502,7 @@ class Load extends Tasks {
                 ) {
                 $this->processSemicolon();
             }
-            $this->runPlugins($functioncall);
+            $this->checkExpression();
 
             return $functioncall;
         } else {
@@ -3552,11 +3535,9 @@ class Load extends Tasks {
             $functioncall->fullcode   = $this->tokens[$current][1].$argumentsFullcode;
             $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
             $this->pushExpression($functioncall);
-
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
             $this->runPlugins($functioncall);
+
+            $this->checkExpression();
 
             return $functioncall;
         }
@@ -3692,9 +3673,7 @@ class Load extends Tasks {
         
         $this->pushExpression($ternary);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $ternary;
     }
@@ -4077,9 +4056,8 @@ class Load extends Tasks {
 
         $this->pushExpression($use);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
+
         return $use;
     }
 
@@ -4247,9 +4225,7 @@ class Load extends Tasks {
         $this->pushExpression($integer);
         $this->runPlugins($integer);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $integer;
     }
@@ -4260,9 +4236,7 @@ class Load extends Tasks {
         // (int) is for loading into the database
         $this->runPlugins($real);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $real;
     }
@@ -4403,9 +4377,7 @@ class Load extends Tasks {
         $this->runPlugins($operator, array($link => $operand));
         $this->pushExpression($operator);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $operand;
     }
@@ -4464,9 +4436,7 @@ class Load extends Tasks {
 
             $this->runPlugins($operator, array('RETURN' => $return) );
 
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
+            $this->checkExpression();
 
             return $operator;
         }
@@ -4477,9 +4447,7 @@ class Load extends Tasks {
         $operator = $this->popExpression();
         $this->pushExpression($operator);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $operator;
     }
@@ -4530,9 +4498,7 @@ class Load extends Tasks {
 
         $this->runPlugins($operator, array('YIELD' => $yieldfrom) );
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $operator;
     }
@@ -4545,9 +4511,7 @@ class Load extends Tasks {
         
         $this->runPlugins($not, array('NOT' => $not));
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $not;
     }
@@ -4613,9 +4577,7 @@ class Load extends Tasks {
         }
 
         $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $variable;
     }
@@ -4684,9 +4646,7 @@ class Load extends Tasks {
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $operatorId;
     }
@@ -4750,9 +4710,7 @@ class Load extends Tasks {
 
         $this->pushExpression($signed);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         return $signed;
     }
 
@@ -4796,9 +4754,7 @@ class Load extends Tasks {
 
         $this->pushExpression($addition);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $addition;
     }
@@ -4841,9 +4797,7 @@ class Load extends Tasks {
         $this->runPlugins($break, array($link => $breakLevel));
         $this->pushExpression($break);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $break;
     }
@@ -5004,9 +4958,7 @@ class Load extends Tasks {
 
         $this->pushExpression($operator);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
         
         return $operator;
     }
@@ -5174,23 +5126,15 @@ class Load extends Tasks {
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $id = array_search($this->phptokens::T_REQUIRE, $finals);
-        unset($finals[$id]);
-        $id = array_search($this->phptokens::T_REQUIRE_ONCE, $finals);
-        unset($finals[$id]);
-        $id = array_search($this->phptokens::T_INCLUDE, $finals);
-        unset($finals[$id]);
-        $id = array_search($this->phptokens::T_INCLUDE_ONCE, $finals);
-        unset($finals[$id]);
-        $id = array_search($this->phptokens::T_PLUS, $finals);
-        unset($finals[$id]);
-        $id = array_search($this->phptokens::T_MINUS, $finals);
-        unset($finals[$id]);
-
-        $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
-        if ($noSequence === false) {
-            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
-        }
+        $finals = array_diff($finals, array($this->phptokens::T_REQUIRE,
+                                            $this->phptokens::T_REQUIRE_ONCE,
+                                            $this->phptokens::T_INCLUDE,
+                                            $this->phptokens::T_INCLUDE_ONCE,
+                                            $this->phptokens::T_PLUS,
+                                            $this->phptokens::T_MINUS,
+                                            $this->phptokens::T_PRINT,
+                                            $this->phptokens::T_ECHO,
+                                            ));
 
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $contains = $this->processNext();
@@ -5198,25 +5142,23 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOT) {
                 $this->popExpression();
                 $this->addLink($concatenation, $contains, 'CONCAT');
-                $fullcode[] = $contains->fullcode;
-                $concat[] = $contains;
-                $noDelimiter .= $contains->noDelimiter;
+                $fullcode[]     = $contains->fullcode;
+                $concat[]       = $contains;
+                $noDelimiter   .= $contains->noDelimiter;
                 $contains->rank = ++$rank;
 
                 ++$this->id;
             }
         }
         
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+
         $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $fullcode[]     = $contains->fullcode;
         $concat[]       = $contains;
         $noDelimiter   .= $contains->noDelimiter;
         $contains->rank = ++$rank;
-        if ($noSequence === false) {
-            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
-        }
-        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
         $concatenation->code        = $this->tokens[$current][1];
         $concatenation->fullcode    = implode(' . ', $fullcode);
@@ -5225,13 +5167,10 @@ class Load extends Tasks {
         $concatenation->token       = $this->getToken($this->tokens[$current][0]);
         $concatenation->count       = $rank + 1;
         
+        $this->pushExpression($concatenation);
         $this->runPlugins($concatenation, $concat);
 
-        $this->pushExpression($concatenation);
-
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $concatenation;
     }
@@ -5294,9 +5233,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
-        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $this->checkExpression();
 
         return $functioncall;
     }
@@ -5390,10 +5327,8 @@ class Load extends Tasks {
         $this->pushExpression($functioncall);
         $this->runPlugins($functioncall, array('ARGUMENT' => $index));
 
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
-        
+        $this->checkExpression();
+
         return $functioncall;
     }
 
@@ -5852,6 +5787,13 @@ class Load extends Tasks {
             $this->processSemicolon();
         }
     }
+
+    private function checkExpression() {
+        if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+    }
+
 }
 
 ?>
