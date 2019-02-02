@@ -45,6 +45,19 @@ class MultiplyByOne extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $x = $y * 1
+        $this->atomIs('Multiplication')
+             ->codeIs('*')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('RIGHT')
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
+             ->back('first');
+        $this->prepareQuery();
+
         $this->atomIs('Multiplication')
              ->codeIs(array('/', '%'))
              ->outIs('RIGHT')
