@@ -46,6 +46,18 @@ class AddZero extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // 0 + 2
+        $this->atomIs('Addition')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->is('intval', 0)
+             ->is('boolean', false)
+             ->atomIsNot('Arrayliteral')
+             ->back('first');
+        $this->prepareQuery();
+
         // $a = 0; $c = $a + 2;
         $this->atomIs('Assignation')
              ->codeIs('=')

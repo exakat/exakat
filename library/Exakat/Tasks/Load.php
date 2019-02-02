@@ -4767,9 +4767,9 @@ class Load extends Tasks {
 
         $current = $this->id;
 
-        $finals = array_merge($this->precedence->get($this->tokens[$this->id][0]),
-                              $this->assignations
-                             );
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals = array_diff($finals, $this->assignations);
+        $finals = array_unique($finals);
         $finals = array_slice($finals, 1);
 
         $addition = $this->addAtom('Addition');
