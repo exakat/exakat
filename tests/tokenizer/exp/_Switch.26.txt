@@ -59,5 +59,3 @@ Label : PROJECT
                     18
           Label : CONDITION
             6
-        Label : EXPRESSION
-          19

@@ -45,5 +45,3 @@ Label : PROJECT
                     7
                 Label : NAME
                   13
-        Label : EXPRESSION
-          17

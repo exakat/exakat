@@ -73,5 +73,3 @@ Label : PROJECT
                   21
               Label : NAME
                 23
-        Label : EXPRESSION
-          21

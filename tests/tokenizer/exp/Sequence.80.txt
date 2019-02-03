@@ -85,5 +85,3 @@ Label : PROJECT
                   22
               Label : NAME
                 24
-        Label : EXPRESSION
-          22

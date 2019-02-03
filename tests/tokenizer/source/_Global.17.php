@@ -1,1 +1,1 @@
-<? static $x ?>
+<?php static $x ?>

@@ -1,0 +1,37 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      11
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            8
+            Label : LEFT
+              6
+            Label : RIGHT
+              9
+          Label : ELSE
+            3
+            Label : EXPRESSION
+              10
+              Label : PREPLUSPLUS
+                13
+          Label : THEN
+            3
+            Label : EXPRESSION
+              10
+              Label : PREPLUSPLUS
+                11

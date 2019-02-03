@@ -643,6 +643,12 @@ Label : PROJECT
                     20
                     Label : EXPRESSION
                       21
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        22
                       Label : METHOD
                         77
                         Label : ARGUMENT
@@ -857,6 +863,12 @@ Label : PROJECT
                     20
                     Label : EXPRESSION
                       21
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        22
                       Label : NAME
                         22
                       Label : USE

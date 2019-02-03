@@ -36,8 +36,6 @@ Label : PROJECT
                     Label : NAME
                       14
                   Label : EXPRESSION
-                    6
-                  Label : EXPRESSION
                     17
                   Label : EXPRESSION
                     14
@@ -45,8 +43,6 @@ Label : PROJECT
                       19
                     Label : NAME
                       14
-                  Label : EXPRESSION
-                    6
                   Label : EXPRESSION
                     20
                   Label : EXPRESSION

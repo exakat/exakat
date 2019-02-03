@@ -145,8 +145,6 @@ Label : PROJECT
                             88
                 Label : CONDITION
                   82
-              Label : EXPRESSION
-                17
             Label : THEN
               3
               Label : EXPRESSION
@@ -269,5 +267,3 @@ Label : PROJECT
                 38
             Label : EXPRESSION
               42
-        Label : EXPRESSION
-          17

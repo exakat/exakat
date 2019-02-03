@@ -51,8 +51,6 @@ Label : PROJECT
                   24
                   Label : CONTINUE
                     10
-            Label : EXPRESSION
-              10
           Label : SOURCE
             12
             Label : METHOD

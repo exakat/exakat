@@ -23,5 +23,3 @@ Label : PROJECT
             3
           Label : THEN
             3
-        Label : EXPRESSION
-          10

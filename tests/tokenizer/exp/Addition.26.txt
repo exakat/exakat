@@ -14,12 +14,12 @@ Label : PROJECT
         Label : EXPRESSION
           11
           Label : ARGUMENT
-            9
+            6
             Label : LEFT
-              6
-              Label : LEFT
-                5
-              Label : RIGHT
-                7
+              5
             Label : RIGHT
-              10
+              9
+              Label : LEFT
+                7
+              Label : RIGHT
+                10

@@ -38,7 +38,29 @@ Label : PROJECT
               Label : ARGUMENT
                 15
         Label : EXPRESSION
-          17
+          5
+          Label : CONDITION
+            8
+            Label : INDEX
+              13
+              Label : CLASS
+                9
+              Label : CONSTANT
+                11
+            Label : VARIABLE
+              17
+              Label : NAME
+                13
+                Label : CLASS
+                  18
+                Label : CONSTANT
+                  20
+          Label : THEN
+            3
+            Label : EXPRESSION
+              14
+              Label : ARGUMENT
+                15
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -50,46 +72,18 @@ Label : PROJECT
               Label : CONSTANT
                 11
             Label : VARIABLE
-              19
+              17
               Label : NAME
                 13
                 Label : CLASS
-                  20
+                  18
                 Label : CONSTANT
-                  22
+                  20
           Label : THEN
             3
             Label : EXPRESSION
               14
               Label : ARGUMENT
                 15
-        Label : EXPRESSION
-          17
-        Label : EXPRESSION
-          5
-          Label : CONDITION
-            8
-            Label : INDEX
-              13
-              Label : CLASS
-                9
-              Label : CONSTANT
-                11
-            Label : VARIABLE
-              19
-              Label : NAME
-                13
-                Label : CLASS
-                  20
-                Label : CONSTANT
-                  22
-          Label : THEN
-            3
-            Label : EXPRESSION
-              14
-              Label : ARGUMENT
-                15
-        Label : EXPRESSION
-          17
     Label : EXPRESSION
-      24
+      22

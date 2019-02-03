@@ -1051,7 +1051,7 @@ class Load extends Tasks {
             $finally = $this->addAtom('Finally');
 
             ++$this->id;
-            $finallyBlock = $this->processFollowingBlock();
+            $finallyBlock = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
             $this->popExpression();
             $this->addLink($try, $finally, 'FINALLY');
             $this->addLink($finally, $finallyBlock, 'BLOCK');
@@ -2905,7 +2905,7 @@ class Load extends Tasks {
 
         $isColon = ($this->tokens[$current][0] === $this->phptokens::T_FOR) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
 
-        $block = $this->processFollowingBlock(array($this->phptokens::T_ENDFOR));
+        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDFOR) : array());
         $this->popExpression();
         $this->addLink($for, $block, 'BLOCK');
 
@@ -3123,17 +3123,12 @@ class Load extends Tasks {
 
         ++$this->id; // Skip )
         $isColon = ($this->tokens[$current][0] === $this->phptokens::T_WHILE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
-        $block = $this->processFollowingBlock(array($this->phptokens::T_ENDWHILE));
+        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDWHILE) : array());
         $this->popExpression();
 
         $this->addLink($while, $block, 'BLOCK');
 
         if ($isColon === true) {
-            ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id; // skip ;
-            }
-
             $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id - 1][1];
         } else {
             $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -3150,7 +3145,7 @@ class Load extends Tasks {
 
         $this->pushExpression($while);
         $this->finishWithAlternative($isColon);
-
+        
         return $while;
     }
 
@@ -3182,7 +3177,7 @@ class Load extends Tasks {
 
         $isColon = ($this->tokens[$current][0] === $this->phptokens::T_DECLARE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
 
-        $block = $this->processFollowingBlock(array($this->phptokens::T_ENDDECLARE));
+        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDDECLARE) : array());
 
         $this->popExpression();
         $this->addLink($declare, $block, 'BLOCK');
@@ -3787,7 +3782,7 @@ class Load extends Tasks {
             $block = ';';
         } else {
             // Process block
-            $this->processFollowingBlock();
+            $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
             $block = $this->popExpression();
             $this->addLink($namespace, $block, 'BLOCK');
 

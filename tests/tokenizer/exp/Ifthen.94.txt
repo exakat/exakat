@@ -63,5 +63,3 @@ Label : PROJECT
               15
           Label : THEN
             3
-        Label : EXPRESSION
-          19

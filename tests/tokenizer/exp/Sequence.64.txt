@@ -53,7 +53,3 @@ Label : PROJECT
                   12
                 Label : VALUE
                   14
-            Label : EXPRESSION
-              17
-        Label : EXPRESSION
-          17

@@ -48,17 +48,17 @@ Label : PROJECT
                   Label : RIGHT
                     22
                     Label : LEFT
-                      21
-                    Label : RIGHT
                       22
                       Label : LEFT
-                        21
-                      Label : RIGHT
                         22
                         Label : LEFT
-                          23
+                          21
                         Label : RIGHT
-                          24
+                          21
+                      Label : RIGHT
+                        23
+                    Label : RIGHT
+                      24
                 Label : ARGUMENT
                   25
                 Label : ARGUMENT

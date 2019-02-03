@@ -61,5 +61,3 @@ Label : PROJECT
                 15
               Label : RIGHT
                 17
-        Label : EXPRESSION
-          21

@@ -34,14 +34,14 @@ Label : PROJECT
           Label : RIGHT
             15
             Label : LEFT
-              14
-              Label : MEMBER
-                13
-              Label : OBJECT
-                11
-            Label : RIGHT
               15
               Label : LEFT
+                14
+                Label : MEMBER
+                  13
+                Label : OBJECT
+                  11
+              Label : RIGHT
                 16
                 Label : CODE
                   18
@@ -53,9 +53,9 @@ Label : PROJECT
                       19
                     Label : RIGHT
                       21
-              Label : RIGHT
-                14
-                Label : MEMBER
-                  23
-                Label : OBJECT
-                  22
+            Label : RIGHT
+              14
+              Label : MEMBER
+                23
+              Label : OBJECT
+                22

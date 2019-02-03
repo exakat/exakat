@@ -146,8 +146,6 @@ Label : PROJECT
                 Label : EXPRESSION
                   8
             Label : EXPRESSION
-              14
-            Label : EXPRESSION
               5
               Label : BLOCK
                 3
@@ -159,8 +157,6 @@ Label : PROJECT
                 6
               Label : VALUE
                 8
-            Label : EXPRESSION
-              14
             Label : EXPRESSION
               38
               Label : CASES
@@ -195,8 +191,6 @@ Label : PROJECT
                       8
               Label : CONDITION
                 6
-            Label : EXPRESSION
-              14
             Label : EXPRESSION
               45
               Label : BLOCK

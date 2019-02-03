@@ -1,1 +1,1 @@
-<? global $b, $c ?>
+<?php global $b, $c ?>

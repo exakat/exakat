@@ -135,5 +135,3 @@ Label : PROJECT
               9
               Label : POSTPLUSPLUS
                 8
-        Label : EXPRESSION
-          13

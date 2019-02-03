@@ -31,5 +31,3 @@ Label : PROJECT
               14
               Label : ARGUMENT
                 15
-        Label : EXPRESSION
-          16

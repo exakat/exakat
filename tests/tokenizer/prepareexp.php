@@ -23,6 +23,7 @@ if (empty($file)) {
     }
     
     $diff = array_diff($sources, $exp);
+    shuffle($diff);
     
     foreach($diff as $d) {
         list($file, $d) = explode('.', $d);

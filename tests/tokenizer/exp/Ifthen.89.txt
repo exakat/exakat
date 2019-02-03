@@ -64,8 +64,6 @@ Label : PROJECT
                 Label : EXPRESSION
                   15
             Label : EXPRESSION
-              15
-            Label : EXPRESSION
               17
             Label : EXPRESSION
               19
@@ -77,8 +75,6 @@ Label : PROJECT
                   22
                 Label : ARGUMENT
                   11
-            Label : EXPRESSION
-              15
             Label : EXPRESSION
               24
             Label : EXPRESSION
@@ -101,8 +97,6 @@ Label : PROJECT
                   22
                 Label : ARGUMENT
                   11
-            Label : EXPRESSION
-              15
             Label : EXPRESSION
               27
         Label : EXPRESSION

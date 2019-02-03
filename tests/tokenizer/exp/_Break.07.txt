@@ -59,11 +59,7 @@ Label : PROJECT
                     16
                 Label : EXPRESSION
                   4
-            Label : EXPRESSION
-              16
           Label : SOURCE
             7
           Label : VALUE
             9
-        Label : EXPRESSION
-          16

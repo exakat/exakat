@@ -107,5 +107,3 @@ Label : PROJECT
               29
               Label : POSTPLUSPLUS
                 28
-        Label : EXPRESSION
-          26

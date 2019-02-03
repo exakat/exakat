@@ -58,17 +58,17 @@ Label : PROJECT
                     Label : ARGUMENT
                       26
                       Label : LEFT
-                        24
-                        Label : INDEX
-                          25
-                        Label : VARIABLE
-                          23
-                      Label : RIGHT
                         26
                         Label : LEFT
-                          27
+                          24
+                          Label : INDEX
+                            25
+                          Label : VARIABLE
+                            23
                         Label : RIGHT
-                          28
+                          27
+                      Label : RIGHT
+                        28
                     Label : ARGUMENT
                       29
                 Label : EXPRESSION

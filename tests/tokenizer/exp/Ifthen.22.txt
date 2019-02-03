@@ -35,5 +35,3 @@ Label : PROJECT
               8
               Label : EXPRESSION
                 9
-        Label : EXPRESSION
-          11

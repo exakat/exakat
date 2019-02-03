@@ -74,8 +74,6 @@ Label : PROJECT
           Label : CONDITION
             5
         Label : EXPRESSION
-          22
-        Label : EXPRESSION
           26
           Label : ARGUMENT
             9

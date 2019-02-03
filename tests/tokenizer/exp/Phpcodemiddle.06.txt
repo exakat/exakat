@@ -111,5 +111,3 @@ Label : PROJECT
                           28
                 Label : OBJECT
                   28
-        Label : EXPRESSION
-          20

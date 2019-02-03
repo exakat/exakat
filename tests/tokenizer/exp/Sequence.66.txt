@@ -41,5 +41,3 @@ Label : PROJECT
                   21
               Label : OBJECT
                 18
-        Label : EXPRESSION
-          26

@@ -71,7 +71,3 @@ Label : PROJECT
                   24
             Label : EXPRESSION
               26
-            Label : EXPRESSION
-              28
-        Label : EXPRESSION
-          26

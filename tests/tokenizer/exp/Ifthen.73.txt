@@ -229,5 +229,3 @@ Label : PROJECT
                   86
             Label : EXPRESSION
               97
-        Label : EXPRESSION
-          69

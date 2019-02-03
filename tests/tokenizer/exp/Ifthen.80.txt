@@ -62,8 +62,6 @@ Label : PROJECT
               Label : VALUE
                 19
             Label : EXPRESSION
-              7
-            Label : EXPRESSION
               30
               Label : RETURN
                 31

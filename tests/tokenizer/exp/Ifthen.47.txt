@@ -45,5 +45,3 @@ Label : PROJECT
                   10
             Label : EXPRESSION
               14
-        Label : EXPRESSION
-          20

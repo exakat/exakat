@@ -27,5 +27,3 @@ Label : PROJECT
             3
             Label : EXPRESSION
               7
-        Label : EXPRESSION
-          15

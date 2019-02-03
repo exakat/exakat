@@ -22,8 +22,6 @@ Label : PROJECT
                   Label : CONTINUE
                     6
                 Label : EXPRESSION
-                  6
-                Label : EXPRESSION
                   16
               Label : SOURCE
                 10

@@ -66,8 +66,6 @@ Label : PROJECT
                 Label : NEW
                   15
         Label : EXPRESSION
-          20
-        Label : EXPRESSION
           23
           Label : RETURN
             11
