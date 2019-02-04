@@ -29,9 +29,9 @@ class RelayFunction extends Analyzer {
     public function analyze() {
         // function foo($a, $b, $c) { return foo2($a, $b, $c);}
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('NAME')
+             ->outIsIE('NAME')
              ->codeIsNot(array('__construct', '__destruct'))
-             ->inIs('NAME')
+             ->inIsIE('NAME')
              ->saveOutAs('args', 'ARGUMENT', '')
              ->outIs('BLOCK')
              ->is('count', 1)
