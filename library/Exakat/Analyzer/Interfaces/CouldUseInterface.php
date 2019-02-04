@@ -66,7 +66,7 @@ GREMLIN;
              ->collectImplements('interfaces')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
-             ->raw('sideEffect{ i = *** }', $interfaces)
+             ->raw('sideEffect{ php_interfaces = *** }', $interfaces)
              // Collect methods names with argument count
              // can one implement an interface, but with wrong argument counts ?
              ->raw(<<<'GREMLIN'
@@ -80,7 +80,7 @@ GREMLIN
              ->raw(<<<GREMLIN
 filter{
     a = false;
-    i.each{ n, e ->
+    php_interfaces.each{ n, e ->
         if (x.intersect(e) == e) {
             a = true;
             fnp = n;
