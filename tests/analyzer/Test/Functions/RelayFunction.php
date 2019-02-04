@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class RelayFunction extends Analyzer {
-    /* 7 methods */
+    /* 9 methods */
 
     public function testFunctions_RelayFunction01()  { $this->generic_test('Functions/RelayFunction.01'); }
     public function testFunctions_RelayFunction02()  { $this->generic_test('Functions/RelayFunction.02'); }
@@ -16,5 +16,7 @@ class RelayFunction extends Analyzer {
     public function testFunctions_RelayFunction05()  { $this->generic_test('Functions/RelayFunction.05'); }
     public function testFunctions_RelayFunction06()  { $this->generic_test('Functions/RelayFunction.06'); }
     public function testFunctions_RelayFunction07()  { $this->generic_test('Functions/RelayFunction.07'); }
+    public function testFunctions_RelayFunction08()  { $this->generic_test('Functions/RelayFunction.08'); }
+    public function testFunctions_RelayFunction09()  { $this->generic_test('Functions/RelayFunction.09'); }
 }
 ?>
