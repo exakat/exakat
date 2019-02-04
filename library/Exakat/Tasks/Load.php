@@ -5800,7 +5800,7 @@ class Load extends Tasks {
                                                           $this->phptokens::T_DECLARE,
                                                           $this->phptokens::T_SWITCH,
                                                           $this->phptokens::T_IF,
-//                                                          $this->phptokens::T_ELSEIF,
+                                                          $this->phptokens::T_ELSEIF,
                                                          )) && 
                ($this->tokens[$colon][0] === $this->phptokens::T_COLON) ?
                 self::ALTERNATIVE_SYNTAX : 
