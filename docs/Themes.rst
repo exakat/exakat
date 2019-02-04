@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 28 Jan 2019 08:52:14 +0000
-.. comment: Generation hash : 638614a97b0dfebdb232064046506ca62f285d9d
+.. comment: Generation date : Mon, 04 Feb 2019 15:15:21 +0000
+.. comment: Generation hash : bfa6f837e9bb15c4c7953838a0f0283d25df07d0
 
 
 .. _analyze:
@@ -835,7 +835,7 @@ Total : 44 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 29 analysis
+Total : 30 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -861,6 +861,7 @@ Total : 29 analysis
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
+* :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
@@ -872,7 +873,7 @@ Total : 29 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 22 analysis
+Total : 23 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -893,6 +894,7 @@ Total : 22 analysis
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
+* :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
@@ -902,7 +904,7 @@ Total : 22 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 9 analysis
+Total : 10 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -912,6 +914,7 @@ Total : 9 analysis
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
 * :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
+* :ref:`String Initialization <string-initialization>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 
 .. _compatibilityphp74:
@@ -919,9 +922,10 @@ Total : 9 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 2 analysis
+Total : 3 analysis
 
 * :ref:`Detect Current Class <detect-current-class>`
+* :ref:`String Initialization <string-initialization>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
 .. _dead-code:

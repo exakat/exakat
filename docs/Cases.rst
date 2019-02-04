@@ -2136,6 +2136,57 @@ $ids[$index] is &$rrid.
                         }
                     }
 
+Empty Instructions
+==================
+
+.. _zurmo-structures-emptylines:
+
+Zurmo
+^^^^^
+
+:ref:`empty-instructions`, in app/protected/core/widgets/MentionInput.php:84. 
+
+There is no need for a semi-colon after a if/then structure.
+
+.. code-block:: php
+
+    public function run()
+            {
+                $id = $this->getId();
+                $additionalSettingsJs = showAvatars: . var_export($this->showAvatars, true) . ,;
+                if ($this->classes)
+                {
+                    $additionalSettingsJs .=  $this->classes . ',';
+                };
+                if ($this->templates)
+                {
+                    $additionalSettingsJs .=  $this->templates;
+                };
+
+
+--------
+
+
+.. _thinkphp-structures-emptylines:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`empty-instructions`, in ThinkPHP/Library/Vendor/Smarty/sysplugins/smarty_internal_configfileparser.php:83. 
+
+There is no need for a semi-colon after a class structure, unless it is an anonymous class.
+
+.. code-block:: php
+
+    class TPC_yyStackEntry
+    {
+        public $stateno;       /* The state-number */
+        public $major;         /* The major token value.  This is the code
+                         ** number for the token at this stack level */
+        public $minor; /* The user-supplied minor token value.  This
+                         ** is the value of the token  */
+    };
+
 Should Use Constants
 ====================
 
@@ -2854,6 +2905,48 @@ $aParams is an argument : this code looks like the switch is reserved for future
                     break;
             }
 
+Could Use __DIR__
+=================
+
+.. _woocommerce-structures-couldusedir:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`could-use-\_\_dir\_\_`, in includes/class-wc-api.php:162. 
+
+All the 120 occurrences use `dirname( __FILE__ )`, and could be upgraded to __DIR__ if backward compatibility to PHP 5.2 is not critical. 
+
+.. code-block:: php
+
+    private function rest_api_includes() {
+    		// Exception handler.
+    		include_once dirname( __FILE__ ) . '/api/class-wc-rest-exception.php';
+    
+    		// Authentication.
+    		include_once dirname( __FILE__ ) . '/api/class-wc-rest-authentication.php';
+
+
+--------
+
+
+.. _piwigo-structures-couldusedir:
+
+Piwigo
+^^^^^^
+
+:ref:`could-use-\_\_dir\_\_`, in include/random_compat/random.php:50. 
+
+`dirname( __FILE__ )` is cached into $RandomCompatDIR, then reused three times. Using __DIR__ would save that detour.
+
+.. code-block:: php
+
+    $RandomCompatDIR = dirname(__FILE__);
+    
+        require_once $RandomCompatDIR.'/byte_safe_strings.php';
+        require_once $RandomCompatDIR.'/cast_to_int.php';
+        require_once $RandomCompatDIR.'/error_polyfill.php';
+
 Should Use Coalesce
 ===================
 
@@ -3524,6 +3617,22 @@ This one-liner includes 9 members and 6 variables : some are formatted by sprint
 .. code-block:: php
 
     sprintf('<span><input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> %s<label for="opt_%s">%s</label></span>', $this->strName . ($this->multiple ? '[]' : ''), $this->strId . '_' . $i, ($this->multiple ? \StringUtil::specialchars($arrOption['value']) : 1), (((\is_array($this->varValue) && \in_array($arrOption['value'], $this->varValue)) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''), $this->getAttributes( ), $strButtons, $this->strId . '_' . $i, $arrOption['label'])
+
+No Boolean As Default
+=====================
+
+.. _openconf-functions-nobooleanasdefault:
+
+Openconf
+^^^^^^^^
+
+:ref:`no-boolean-as-default`, in openconf/include.php:1264. 
+
+Why do we need a `chair` when printing a cell's file ? 
+
+.. code-block:: php
+
+    function oc_printFileCells(&$sub, $chair = false) { /**/ }
 
 Strange Name For Variables
 ==========================
@@ -4605,6 +4714,39 @@ The class in the RSSDashlet.php file has an 'array' typehint which is not in the
     
     // File /include/Dashlets/Dashlets.php
         public function saveOptions( $req ) {
+
+Ambiguous Visibilities
+======================
+
+.. _typo3-classes-ambiguousvisibilities:
+
+Typo3
+^^^^^
+
+:ref:`ambiguous-visibilities`, in typo3/sysext/backend/Classes/Controller/NewRecordController.php:90. 
+
+$allowedNewTables is declared once  protected and once public. $allowedNewTables is rare : 2 occurences. This may lead to confusion about access to this property.
+
+.. code-block:: php
+
+    class NewRecordController
+    {
+    /.. many lines../
+        /**
+         * @var array
+         */
+        protected $allowedNewTables;
+        
+    class DatabaseRecordList
+    {
+    /..../ 
+        /**
+         * Used to indicate which tables (values in the array) that can have a
+         * create-new-record link. If the array is empty, all tables are allowed.
+         *
+         * @var string[]
+         */
+        public $allowedNewTables = [];
 
 Could Be Abstract Class
 =======================
