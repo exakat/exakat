@@ -205,7 +205,7 @@ class Ambassador extends Reports {
         $this->generateExternalLib();
 
         $this->generateAppinfo();
-//        $this->generateFileDependencies();
+        $this->generateFileDependencies();
         $this->generateBugFixes();
         $this->generatePhpConfiguration();
         $this->generateExternalServices();
@@ -3167,7 +3167,7 @@ SQL
                     $secondary = $this->extends2ul($sub, $paths, $level + 1);
                     $return[] = $secondary;
                 } else {
-                    $return[] = '<li>...</li>';
+                    $return[] = '<li>...(Recursive)</li>';
                 }
             } else {
                 $return[] = "<li class=\"treeLeaf\">$sub</li>";
@@ -4363,11 +4363,28 @@ JAVASCRIPT;
                 $next[$in] = $out;
             }
         }
+        unset($out);
+
+        foreach($next as $in => &$out) {
+            $out = array_keys($out);
+            sort($out);
+        }
+        unset($out);
+        print_r($next);
+
+        $secondaries = array_merge(...array_values($next));
+        $top = array_diff(array_keys($next), $secondaries);
+        
+        $theTable = array();
+        foreach($top as $t) {
+            $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $next).'</ul>';
+        }
+        $theTable = implode(PHP_EOL, $theTable);
 
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'File dependencies tree');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Tree');
-        $html = $this->injectBloc($html, 'CONTENT', 'content');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'This is the list of file dependencies. The top files require the bottom files to be included to be properly running. This dependency tree covers class usage : new, ::, extends and implements.');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage('files_tree', $html);
     }
 
