@@ -33,9 +33,31 @@ class Regex extends Analyzer {
                                '\\preg_relace_callback_array',
                                );
 
+        $pregReplaceFunctions = array('\\preg_replace',
+                                      '\\preg_replace_callback',
+                                      );
+
         // preg_match('/a/', ...)
         $this->atomFunctionIs($pregFunctions)
              ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('String', 'Concatenation'));
+        $this->prepareQuery();
+
+        // preg_match(array(regex1, regex2))
+        $this->atomFunctionIs($pregReplaceFunctions)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Arrayliteral')
+             ->outIs('ARGUMENT')
+             ->outIsIE('VALUE')
+             ->atomIs(array('String', 'Concatenation'));
+        $this->prepareQuery();
+
+        // preg_relace_callback_array(array(regex1 => callback, regex2))
+        $this->atomFunctionIs('\\preg_replace_callback_array')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Arrayliteral')
+             ->outIs('ARGUMENT')
+             ->outIs('INDEX')
              ->atomIs(array('String', 'Concatenation'));
         $this->prepareQuery();
     }
