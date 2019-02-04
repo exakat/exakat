@@ -96,6 +96,9 @@ class Load extends Tasks {
     private $id     = 0;
     private $id0    = null;
 
+    const ALTERNATIVE_SYNTAX = true;
+    const NORMAL_SYNTAX      = false;
+
     const FULLCODE_SEQUENCE = ' /**/ ';
     const FULLCODE_BLOCK    = ' { /**/ } ';
     const FULLCODE_VOID     = ' ';
@@ -2903,14 +2906,14 @@ class Load extends Tasks {
         $increment = $this->popExpression();
         $this->addLink($for, $increment, 'INCREMENT');
 
-        $isColon = ($this->tokens[$current][0] === $this->phptokens::T_FOR) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
+        $isColon = $this->whichSyntax($current, $this->id + 1);
 
-        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDFOR) : array());
+        $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDFOR) : array());
         $this->popExpression();
         $this->addLink($for, $block, 'BLOCK');
 
         $code = $this->tokens[$current][1];
-        if ($isColon) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1].'('.$init->fullcode.' ; '.$final->fullcode.' ; '.$increment->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
         } else {
             $fullcode = $this->tokens[$current][1].'('.$init->fullcode.' ; '.$final->fullcode.' ; '.$increment->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -2960,14 +2963,14 @@ class Load extends Tasks {
         $this->addLink($foreach, $value, 'VALUE');
 
         ++$this->id; // Skip )
-        $isColon = ($this->tokens[$current][0] === $this->phptokens::T_FOREACH) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
+        $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDFOREACH) : array());
 
         $this->popExpression();
         $this->addLink($foreach, $block, 'BLOCK');
 
-        if ($isColon === true) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.') : '.self::FULLCODE_SEQUENCE.' endforeach';
         } else {
             $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -3122,14 +3125,14 @@ class Load extends Tasks {
         $this->addLink($while, $condition, 'CONDITION');
 
         ++$this->id; // Skip )
-        $isColon = ($this->tokens[$current][0] === $this->phptokens::T_WHILE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
-        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDWHILE) : array());
+        $isColon = $this->whichSyntax($current, $this->id + 1);
+        $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDWHILE) : array());
         $this->popExpression();
 
         $this->addLink($while, $block, 'BLOCK');
 
-        if ($isColon === true) {
-            $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id - 1][1];
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
+            $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
         } else {
             $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
         }
@@ -3175,14 +3178,14 @@ class Load extends Tasks {
             ++$this->id; // Skip value
         }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
-        $isColon = ($this->tokens[$current][0] === $this->phptokens::T_DECLARE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
+        $isColon = $this->whichSyntax($current, $this->id + 1);
 
-        $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDDECLARE) : array());
+        $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
 
         $this->popExpression();
         $this->addLink($declare, $block, 'BLOCK');
 
-        if ($isColon === true) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
         } else {
             $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') '.self::FULLCODE_BLOCK;
@@ -3299,7 +3302,7 @@ class Load extends Tasks {
         $extraCases = array();
         ++$this->id;
 
-        $isColon = $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON;
+        $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $rank = 0;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -3329,7 +3332,7 @@ class Load extends Tasks {
         ++$this->id;
         $cases->count = $rank;
 
-        if ($isColon) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1].' ('.$name->fullcode.') :'.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id][1];
         } else {
             $fullcode = $this->tokens[$current][1].' ('.$name->fullcode.')'.self::FULLCODE_BLOCK;
@@ -3366,7 +3369,7 @@ class Load extends Tasks {
 
         ++$this->id; // Skip )
         $isInitialIf = $this->tokens[$current][0] === $this->phptokens::T_IF;
-        $isColon =  $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON;
+        $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF, $this->phptokens::T_ELSE, $this->phptokens::T_ELSEIF));
         $this->popExpression();
@@ -3397,7 +3400,7 @@ class Load extends Tasks {
             $this->addLink($ifthen, $else, 'ELSE');
             $extras['ELSE'] = $else;
 
-            if ($isColon === true) {
+            if ($isColon === self::ALTERNATIVE_SYNTAX) {
                 $elseFullcode .= ' :';
             }
             $elseFullcode .= $else->fullcode;
@@ -3405,14 +3408,14 @@ class Load extends Tasks {
             $elseFullcode = '';
         }
 
-        if ($isInitialIf === true && $isColon === true) {
+        if ($isInitialIf === true && $isColon === self::ALTERNATIVE_SYNTAX) {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
             ++$this->id; // skip ;
         }
 
-        if ($isColon) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1].'('.$condition->fullcode.') : '.$then->fullcode.$elseFullcode.($isInitialIf === true ? ' endif' : '');
         } else {
             $fullcode = $this->tokens[$current][1].'('.$condition->fullcode.')'.$then->fullcode.$elseFullcode;
@@ -5769,7 +5772,7 @@ class Load extends Tasks {
     }
     
     private function finishWithAlternative($isColon) {
-        if ($isColon === true) {
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
             ++$this->id; // Skip endforeach
             $this->processSemicolon();
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
@@ -5787,6 +5790,21 @@ class Load extends Tasks {
         if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
+    }
+    
+    private function whichSyntax($current, $colon) {
+        return in_array($this->tokens[$current][0], array($this->phptokens::T_FOR,
+                                                          $this->phptokens::T_FOREACH,
+                                                          $this->phptokens::T_WHILE,
+                                                          $this->phptokens::T_DO,
+                                                          $this->phptokens::T_DECLARE,
+                                                          $this->phptokens::T_SWITCH,
+                                                          $this->phptokens::T_IF,
+//                                                          $this->phptokens::T_ELSEIF,
+                                                         )) && 
+               ($this->tokens[$colon][0] === $this->phptokens::T_COLON) ?
+                self::ALTERNATIVE_SYNTAX : 
+                self::NORMAL_SYNTAX;
     }
 
 }
