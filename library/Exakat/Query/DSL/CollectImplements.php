@@ -38,8 +38,8 @@ class CollectImplements extends DSL {
         return new Command(<<<GREMLIN
 where( 
     __.sideEffect{ $variable = []; }
-      .repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-      .hasLabel("Interface")
+      .out("IMPLEMENTS", "EXTENDS")
+      .emit().repeat( __.in("DEFINITION").out("IMPLEMENTS", "EXTENDS") ).times($MAX_LOOPING)
       .sideEffect{ $variable.add(it.get().value("fullnspath")) ; }
       .fold() 
 ) 
