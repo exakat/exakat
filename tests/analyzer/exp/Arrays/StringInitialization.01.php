@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('$a = ''',
+$expected     = array('$a = \'\'',
                       '$c = <<<HERE
     
     
 HERE',
-                      '$b = '' . "b"',
+                      '$b = \'\' . "b"',
                       '$d = C',
                      );
 

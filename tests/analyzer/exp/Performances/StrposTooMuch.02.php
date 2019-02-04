@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('strpos($a1, \'c\')',
-                      'stripos($a2, \'c\')',
+$expected     = array('strrpos($a1, \'c\')',
+                      'strripos($a2, \'c\')',
                      );
 
 $expected_not = array('strripos($a3, \'c\')',
