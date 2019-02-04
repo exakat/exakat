@@ -1,4 +1,4 @@
-Version 1.6.5 (Mahagate, coming up)
+Version 1.6.6 (Jiang, King Qinguang , coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,28 @@ Version 1.6.5 (Mahagate, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.5 (Mahagate, 2019-02-04)
++ Architecture
+    + Added CVS as an external service
+    + Graph GSNeo4j export variable for shell access. putenv is not sufficient
+    + Dump : report class name, not its code
+    + Extended listAllThemes to extensions
+    + Fixed bug in extension loader with phar
++ Report
+    + Ambassador : restored file dependencies tree
+    + Ambassador : fixed altered directive filename
+    + Ambassador : added direct link to docs
++ Analyzer
+    + New analysis : arrays that are initialized with strings
+    + New analysis : Avoid Lone variables as conditions
+    + New analysis : Added support for weakref and pcov
+    + Updated analysis : extended regex to arrays in preg_* calls
+    + Updated analysis : Implicit globals now also marks the variable in global space
+    + Updated analysis : Add Zero, Multiply by One also cover 2 * $x = 1;
+    + Updated analysis : Could Use Interface now takes into account PHP interfaces, and classes first level.
+    + Updated analysis : Relay Functions now omits calls to parent's __construct and __destruct
+    + Checked unit tests : 2830 / 2852 test pass (99% pass)
 
 Version 1.6.4 (Parasamgate, 2019-01-28)
 + Architecture
