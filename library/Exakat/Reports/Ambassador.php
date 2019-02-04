@@ -317,6 +317,7 @@ class Ambassador extends Reports {
                 $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
+            $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#'.$this->toOnlineId($description['name']).'">Online docs</a> ]';
 
             $versionCompatibility = $description['phpversion'];
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
@@ -4370,7 +4371,6 @@ JAVASCRIPT;
             sort($out);
         }
         unset($out);
-        print_r($next);
 
         $secondaries = array_merge(...array_values($next));
         $top = array_diff(array_keys($next), $secondaries);
@@ -4516,6 +4516,10 @@ HTML;
     
     protected function toId($name) {
         return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
+    }
+
+    protected function toOnlineId($name) {
+        return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
     }
     
     protected function makeAuditDate(&$finalHTML) {

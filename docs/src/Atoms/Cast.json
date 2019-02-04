@@ -1,6 +1,6 @@
 {
     "name": "Cast",
-    "description": "A cast operation, like `(array)` or `(unset)`",
+    "description": "A cast operation, like ``(array)`` or ``(unset)``",
     "url": [
         ""
     ]
