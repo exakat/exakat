@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('A::$upper', 
-                      '$lower->b', 
+$expected     = array('A::$upper',
+                      '$lower->b',
                       '$x->a',
                      );
 

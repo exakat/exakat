@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( 'function x(a &$b, c $d, &$e, &$f) { /**/ } ',
+$expected     = array('function x(a &$b, c $d, &$e, &$f) { /**/ } ',
                       '$g',
                       '$k',
                       'function x(a &$b, c $d, &$e, &$f) { /**/ } ',

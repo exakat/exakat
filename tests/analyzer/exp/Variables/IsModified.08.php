@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$aa', 
-                      '$ab', 
+$expected     = array('$aa',
+                      '$ab',
                       '$ac',
                       '$a',
                       '$a',
@@ -11,8 +11,8 @@ $expected     = array('$aa',
                       '$a',
                      );
 
-$expected_not = array('$ad', 
-                      '$ae', 
-                      );
+$expected_not = array('$ad',
+                      '$ae',
+                     );
 
 ?>

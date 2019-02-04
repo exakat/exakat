@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('!$m', 
-                      'elseif($c) { /**/ } ', 
-                      '$e ? 1 : 3', 
+$expected     = array('!$m',
+                      'elseif($c) { /**/ } ',
+                      '$e ? 1 : 3',
                       'if($a) { /**/ } ',
                       'for($i = 10 ; $i ; --$i) { /**/ } ',
                      );

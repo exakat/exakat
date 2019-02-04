@@ -7,4 +7,5 @@ $expected     = array('$a = $a ?? $b',
 $expected_not = array('$c = $b ?? $c',
                       '$e = $E ?? $d',
                      );
+
 ?>

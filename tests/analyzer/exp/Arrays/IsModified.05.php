@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('A::$upper[\'a\']', 
+$expected     = array('A::$upper[\'a\']',
                       '$lower[\'a\']',
                       '$x[\'a\']',
                      );
