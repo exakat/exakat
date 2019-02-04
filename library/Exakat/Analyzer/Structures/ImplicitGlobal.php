@@ -27,17 +27,17 @@ use Exakat\Analyzer\Analyzer;
 
 class ImplicitGlobal extends Analyzer {
     public function analyze() {
+        // no Global $x; 
+        // function foo() { global $x; }
         $this->atomIs('Global')
              ->isGlobalCode()
              ->outIs('GLOBAL')
              ->values('code')
              ->unique();
-        $globalGlobal = $this->rawQuery()->toArray();
+        $globalGlobal = $this->rawQuery()
+                             ->toArray();
 
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        $superglobals = $this->dictCode->translate($superglobals);
-        $explicitGlobal = array_merge($superglobals, $globalGlobal);
-        $explicitGlobal = array_unique($explicitGlobal);
 
         // can't bail out here : if $globalGlobal is empty, no global was declared outside functions.
         // This is still useful
@@ -46,7 +46,23 @@ class ImplicitGlobal extends Analyzer {
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($explicitGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+             ->codeIsNot($superglobals, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIsNot($globalGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+        $this->prepareQuery();
+
+        // Those are variables in the global space, 
+        $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+             ->hasNoIn('GLOBAL')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->inIs('DEFINITION')
+                             ->atomIs('Globaldefinition')
+                     )
+             )
+             ->isGlobalCode()
+             ->tokenIs('T_VARIABLE');
         $this->prepareQuery();
     }
 }
