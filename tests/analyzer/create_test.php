@@ -87,13 +87,11 @@
         file_put_contents('./source/'.$test.'.'.$next.'.php/test.01.php', "<?php
 
 ?>");
-        shell_exec('bbedit ./source/'.$test.'.'.$next.'.php/test.01.php');
     } else {
         print "Creating test file\n";
         file_put_contents('./source/'.$test.'.'.$next.'.php', "<?php
 
 ?>");
-        shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
     }
     
     file_put_contents('./exp/'.$test.'.'.$next.'.php', <<<'PHP'
@@ -111,8 +109,6 @@ $expected_not = array('',
 PHP
 );
 
-    shell_exec('bbedit ./exp/'.$test.'.'.$next.'.php');
-    
     echo "New test number : $next\n",
          "Run the tests with     phpunit Test/$test.php\n",
          "Run the tests with     phpunit --filter=$next Test/$test.php\n",
