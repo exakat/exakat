@@ -71,7 +71,7 @@ class IndirectInjection extends Analyzer {
              ->_as('result')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
-->analyzerIs('Security/GPRAliases')
+             ->analyzerIs('Security/GPRAliases')
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')

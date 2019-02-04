@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class AlternativeConsistenceByFile extends Analyzer {
     public function analyze() {
-        $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
+        $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While', 'Declare');
+        // Do...While has no alternative syntax. 
 
         // $this->linksDown is important here.
         $this->atomIs('File')
@@ -34,9 +35,12 @@ class AlternativeConsistenceByFile extends Analyzer {
              ->initVariable('alt', 0)
              ->filter(
                 $this->side()
-                     ->atomInsideNoDefinition($atoms)
-                     ->raw('or( __.has("alt").sideEffect{ alt = alt + 1; },
-         __.sideEffect{ normal = normal + 1; })')
+                     ->atomInside($atoms)
+                     ->raw(<<<GREMLIN
+or( __.has("alternative").sideEffect{ alt = alt + 1; },
+    __.sideEffect{ normal = normal + 1; })
+GREMLIN
+)
                      ->raw('fold()')
              )
             ->filter('normal > 0 && alt > 0')
