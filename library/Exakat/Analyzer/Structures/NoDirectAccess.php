@@ -87,6 +87,18 @@ class NoDirectAccess extends Analyzer {
              ->atomIs('Return')
              ->back('first');
         $this->prepareQuery();
+
+        //if (stristr($_SERVER['REQUEST_URI'], ".inc.php")) die("no access");
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->functioncallIs(array('\\stristr', '\\strstr'))
+             ->back('first')
+             ->outIs('THEN')
+             ->outWithRank('EXPRESSION', 0)
+             ->atomIs('Exit')
+             ->back('first');
+        $this->prepareQuery();
+
     }
 }
 
