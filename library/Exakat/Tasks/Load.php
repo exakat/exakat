@@ -2359,6 +2359,108 @@ class Load extends Tasks {
         return null;
     }
 
+    private function processDefineConstant($namecall) {
+        $namecall->atom = 'Defineconstant';
+        $namecall->fullnspath = '\\define';
+        $namecall->aliased    = self::NOT_ALIASED;
+
+        // Empty call
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+            $namecall->fullcode   = $namecall->code.'( )';
+            $this->pushExpression($namecall);
+
+            $this->runPlugins($namecall, array());
+            ++$this->id; // Skip )
+
+            return $namecall;
+        }
+
+        // First argument : constant name
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                                                ))) {
+            $this->processNext();
+        }
+        $name = $this->popExpression();
+        $this->addLink($namecall, $name, 'NAME');
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+            $namecall->fullcode   = $namecall->code.'('.$name->code.')';
+            $this->pushExpression($namecall);
+
+            $this->runPlugins($namecall, array('NAME'  => $name,));
+            ++$this->id; // Skip )
+
+            return $namecall;
+        }
+
+        // Second argument constant value
+        ++$this->id; // Skip ,
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                                                ))) {
+            $this->processNext();
+        }
+        $value = $this->popExpression();
+        $this->addLink($namecall, $value, 'VALUE');
+
+        // Most common point of exit
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+            $namecall->fullcode   = $namecall->code.'('.$name->fullcode.', '.$value->fullcode.')';
+            $this->pushExpression($namecall);
+
+            $this->runPlugins($namecall, array('NAME'  => $name,
+                                               'VALUE' => $value,
+                                               ));
+            ++$this->id; // Skip )
+
+            $this->processDefineAsConstants($namecall, $name, false);
+    
+            return $namecall;
+        }
+
+        // Third argument : case sensitive
+        ++$this->id; // Skip ,
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                                                ))) {
+            $this->processNext();
+        }
+        $case = $this->popExpression();
+        $this->addLink($namecall, $case, 'CASE');
+
+        $namecall->fullcode   = $namecall->code.'('.$name->fullcode.', '.$value->fullcode.', '.$case->fullcode.')';
+        $this->pushExpression($namecall);
+
+        $this->runPlugins($namecall, array('NAME'  => $name,
+                                           'VALUE' => $value,
+                                           'CASE'  => $case,
+                                           ));
+
+        $this->processDefineAsConstants($namecall, $name, false);
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+            ++$this->id; // Skip )
+
+            return $namecall;
+        }
+        
+        // Ignore everything else
+        $parenthese = 1;
+        while ($parenthese > 0) {
+            ++$this->id;
+
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+                --$parenthese;
+            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+                ++$parenthese;
+            }
+
+        } 
+        
+        return $namecall;
+    }
+
     private function processFunctioncall($getFullnspath = self::WITH_FULLNSPATH) {
         $name = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
@@ -2368,9 +2470,9 @@ class Load extends Tasks {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
             if (strtolower($name->code) === '\\define') {
-                $atom = 'Defineconstant';
+                return $this->processDefineConstant($name);
             } elseif (strtolower($name->code) === 'define') {
-                $atom = 'Defineconstant';
+                return $this->processDefineConstant($name);
             } elseif (strtolower($name->code) === '\\class_alias') {
                 $atom = 'Classalias';
             } elseif (strtolower($name->code) === 'class_alias') {
@@ -2399,11 +2501,6 @@ class Load extends Tasks {
             $functioncall->aliased    = $aliased;
 
             $this->calls->addCall('class', $fullnspath, $functioncall);
-        } elseif ($atom === 'Defineconstant') {
-            $functioncall->fullnspath = '\\define';
-            $functioncall->aliased    = self::NOT_ALIASED;
-
-            $this->processDefineAsConstants($functioncall);
         } elseif ($atom === 'Classalias') {
             $functioncall->fullnspath = '\\classalias';
             $functioncall->aliased    = self::NOT_ALIASED;
@@ -5501,27 +5598,27 @@ class Load extends Tasks {
         $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
-    private function processDefineAsConstants($argumentsId) {
-        if (empty($this->argumentsId[0]->noDelimiter)) {
-            $this->argumentsId[0]->fullnspath = '\\';
+    private function processDefineAsConstants($const, $name, $case_insensitive = false) {
+        if (empty($name->noDelimiter)) {
+            $name->fullnspath = '\\';
             return;
         }
 
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $name->noDelimiter)) {
             return; // Can't be a constant anyway.
         }
         
-        $fullnspath = makeFullNsPath($this->argumentsId[0]->noDelimiter, true);
-        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
+        $fullnspath = makeFullNsPath($name->noDelimiter, true);
+        if ($name->noDelimiter[0] === '\\') {
             // Added a second \\ when the string already has one. Actual PHP behavior
             $fullnspath = "\\$fullnspath";
         }
 
-        $this->calls->addDefinition('const', $fullnspath, $argumentsId);
-        $this->argumentsId[0]->fullnspath = $fullnspath;
+        $this->calls->addDefinition('const', $fullnspath, $const);
+        $name->fullnspath = $fullnspath;
 
-        if ($argumentsId->count === 3) {
-            $this->uses['define'][mb_strtolower($fullnspath)] = $argumentsId;
+        if ($case_insensitive === false) {
+            $this->uses['define'][mb_strtolower($fullnspath)] = $const;
         }
     }
 
