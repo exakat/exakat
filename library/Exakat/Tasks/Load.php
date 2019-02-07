@@ -5871,6 +5871,9 @@ class Load extends Tasks {
     private function finishWithAlternative($isColon) {
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             ++$this->id; // Skip endforeach
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
+                --$this->id;
+            }
             $this->processSemicolon();
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
