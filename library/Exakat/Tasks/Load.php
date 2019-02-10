@@ -5190,7 +5190,7 @@ class Load extends Tasks {
 
     private function processPower() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = $this->phptokens::T_POWER;
+        $finals[] = $this->phptokens::T_POW;
         return $this->processOperator('Power', $finals);
     }
 

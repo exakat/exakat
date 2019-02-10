@@ -104,13 +104,17 @@ class Boolval extends Plugin {
                 if ($atom->code === '*') {
                     $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean * (int) $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '/') {
-                    if ($extras['RIGHT']->boolean === 0) {
-                        $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean / (int) $extras['RIGHT']->boolean);
-                    } else {
+                    if ((int) $extras['RIGHT']->boolean === 0) {
                         $atom->boolean = false;
+                    } else {
+                        $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean / (int) $extras['RIGHT']->boolean);
                     }
-                } elseif ($atom->code === '%' && $extras['RIGHT']->boolean !== 0) {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean % (int) $extras['RIGHT']->boolean);
+                } elseif ($atom->code === '%') {
+                    if ((int) $extras['RIGHT']->boolean === 0) {
+                        $atom->boolean = false;
+                    } else {
+                        $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean % (int) $extras['RIGHT']->boolean);
+                    }
                 }
                 break;
 
