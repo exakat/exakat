@@ -386,6 +386,7 @@ class Load extends Tasks {
         );
 
         $this->callsDatabase = new \Sqlite3(':memory:');
+
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
     }
     
@@ -2376,12 +2377,38 @@ class Load extends Tasks {
         }
 
         // First argument : constant name
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
-                                                                ))) {
-            $this->processNext();
+        ++$this->id;
+        if ($this->tokens[$this->id][0] === $this->phptokens::T_CONSTANT_ENCAPSED_STRING) {
+            $name = $this->processSingle('String');
+            $name->delimiter   = $name->code[0];
+            if ($name->delimiter === 'b' || $name->delimiter === 'B') {
+                $name->binaryString = $name->delimiter;
+                $name->delimiter    = $name->code[1];
+                $name->noDelimiter  = substr($name->code, 2, -1);
+            } else {
+                $name->noDelimiter = substr($name->code, 1, -1);
+            }
+
+            $this->runPlugins($name);
+
+            if (function_exists('mb_detect_encoding')) {
+                $name->encoding = mb_detect_encoding($name->noDelimiter);
+                if ($name->encoding === 'UTF-8') {
+                    $blocks = unicode_blocks($name->noDelimiter);
+                    $name->block = array_keys($blocks)[0];
+                }
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET) {
+                    $name = $this->processBracket();
+                }
+            }
+        } else {
+            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                    $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                                                    ))) {
+                $this->processNext();
+            }
+            $name = $this->popExpression();
         }
-        $name = $this->popExpression();
         $this->addLink($namecall, $name, 'NAME');
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -2415,7 +2442,7 @@ class Load extends Tasks {
             ++$this->id; // Skip )
 
             $this->processDefineAsConstants($namecall, $name, false);
-    
+
             return $namecall;
         }
 
@@ -2429,6 +2456,9 @@ class Load extends Tasks {
         $case = $this->popExpression();
         $this->addLink($namecall, $case, 'CASE');
 
+        $this->processDefineAsConstants($namecall, $name, (bool) $case->boolean);
+
+
         $namecall->fullcode   = $namecall->code.'('.$name->fullcode.', '.$value->fullcode.', '.$case->fullcode.')';
         $this->pushExpression($namecall);
 
@@ -2436,8 +2466,6 @@ class Load extends Tasks {
                                            'VALUE' => $value,
                                            'CASE'  => $case,
                                            ));
-
-        $this->processDefineAsConstants($namecall, $name, false);
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
             ++$this->id; // Skip )
@@ -2455,7 +2483,6 @@ class Load extends Tasks {
             } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 ++$parenthese;
             }
-
         } 
         
         return $namecall;
@@ -2619,9 +2646,7 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
-        }
 
-        if ($string->atom === 'Identifier') {
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
@@ -4816,42 +4841,12 @@ class Load extends Tasks {
             ) {
             return $this->processSign();
         }
-        $left = $this->popExpression();
-
-        $current = $this->id;
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals = array_diff($finals, $this->assignations);
         $finals = array_unique($finals);
         $finals = array_slice($finals, 1);
-
-        $addition = $this->addAtom('Addition');
-        $this->addLink($addition, $left, 'LEFT');
-
-        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
-        $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
-        do {
-            $right = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
-        
-        $this->popExpression();
-        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
-
-        $this->addLink($addition, $right, 'RIGHT');
-        
-        $addition->code     = $this->tokens[$current][1];
-        $addition->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
-        $addition->line     = $this->tokens[$current][2];
-        $addition->token    = $this->getToken($this->tokens[$current][0]);
-        
-        $this->runPlugins($addition, array('RIGHT' => $right,
-                                           'LEFT'  => $left));
-
-        $this->pushExpression($addition);
-
-        $this->checkExpression();
-        
-        return $addition;
+        return $this->processOperator('Addition', $finals, array('LEFT', 'RIGHT'));
     }
 
     private function processBreak() {
@@ -5052,9 +5047,8 @@ class Load extends Tasks {
         $this->runPlugins($operator, $extras);
 
         $this->pushExpression($operator);
-
         $this->checkExpression();
-        
+
         return $operator;
     }
 
@@ -5142,7 +5136,7 @@ class Load extends Tasks {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals = array_merge($finals, $this->assignations);
         
-        return $a = $this->processOperator('Assignation', $finals);
+        return $this->processOperator('Assignation', $finals);
     }
 
     private function processCoalesce() {
@@ -5195,7 +5189,9 @@ class Load extends Tasks {
     }
 
     private function processPower() {
-        return $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0]));
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals[] = $this->phptokens::T_POWER;
+        return $this->processOperator('Power', $finals);
     }
 
     private function processComparison() {
@@ -5617,8 +5613,8 @@ class Load extends Tasks {
         $this->calls->addDefinition('const', $fullnspath, $const);
         $name->fullnspath = $fullnspath;
 
-        if ($case_insensitive === false) {
-            $this->uses['define'][mb_strtolower($fullnspath)] = $const;
+        if ($case_insensitive === true) {
+            $this->calls->addDefinition('const', mb_strtolower($fullnspath), $const);
         }
     }
 
@@ -5673,7 +5669,7 @@ class Load extends Tasks {
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {
                 if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
@@ -5729,10 +5725,10 @@ class Load extends Tasks {
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {
-                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
+//                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
                     return array($this->uses['const'][$name->code]->fullnspath, self::ALIASED);
                 } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
