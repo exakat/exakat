@@ -10,10 +10,10 @@ Label : PROJECT
         Label : EXPRESSION
           6
           Label : LEFT
-            5
-          Label : RIGHT
             6
             Label : LEFT
-              7
+              5
             Label : RIGHT
-              8
+              7
+          Label : RIGHT
+            8
