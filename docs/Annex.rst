@@ -209,6 +209,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
 * `ext/pcntl <http://php.net/manual/en/book.pcntl.php>`_
+* Extensions/Extpcov
 * `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
 * `ext/pdo <http://php.net/manual/en/book.pdo.php>`_
 * `ext/pgsql <http://php.net/manual/en/book.pgsql.php>`_
@@ -255,6 +256,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
 * `ext/wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
+* Extensions/Extweakref
 * `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `ext/wincache <http://www.php.net/wincache>`_
 * `ext/xattr <http://php.net/manual/en/book.xattr.php>`_
@@ -318,6 +320,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `NextCloud <https://nextcloud.com/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
+* Openconf
 * `Phinx <https://phinx.org/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
@@ -396,6 +399,13 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.6.5
+
+  * Extensions/Extpcov (Extensions/Extpcov ; Appinfo)
+  * Extensions/Extweakref (Extensions/Extweakref ; Appinfo)
+  * String Initialization (Arrays/StringInitialization)
+  * Variable Is Not A Condition (Structures/NoVariableIsACondition ; Unassigned)
 
 * 1.6.4
 
@@ -1889,6 +1899,7 @@ List of external services whose configuration files has been commited in the cod
 * `couscous <http://couscous.io/>`_ - couscous.yml
 * `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist
 * `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
+* `cvs <http://savannah.nongnu.org/projects/cvs>`_ - CVS
 * `docker <http://www.docker.com/>`_ - .dockerignore, .docker, docker-compose.yml
 * `drone <http://docs.drone.io/>`_ - .dockerignore, .docker
 * `editorconfig <https://editorconfig.org/>`_ - .drone.yml
@@ -2049,6 +2060,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
+* `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_
 * `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `Dir predefined constants <http://php.net/manual/en/dir.constants.php>`_
@@ -2061,6 +2073,7 @@ List of external links mentionned in this documentation.
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
+* `Don't repeat yourself (DRY) <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`_
 * `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
@@ -2123,6 +2136,7 @@ List of external links mentionned in this documentation.
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
+* `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
@@ -2187,8 +2201,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset <http://www.php.net/isset>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2220,8 +2234,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2264,8 +2278,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2291,6 +2305,7 @@ List of external links mentionned in this documentation.
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
+* `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
@@ -2375,8 +2390,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
@@ -2410,8 +2425,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -3295,6 +3310,7 @@ CompatibilityPHP71
 __________________
 
 | [CompatibilityPHP71]
+|   analyzer[] = "Arrays/StringInitialization";
 |   analyzer[] = "Classes/CantInheritAbstractMethod";
 |   analyzer[] = "Classes/ChildRemoveTypehint";
 |   analyzer[] = "Classes/IntegerAsProperty";
@@ -3336,6 +3352,7 @@ CompatibilityPHP72
 __________________
 
 | [CompatibilityPHP72]
+|   analyzer[] = "Arrays/StringInitialization";
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3370,6 +3387,7 @@ CompatibilityPHP73
 __________________
 
 | [CompatibilityPHP73]
+|   analyzer[] = "Arrays/StringInitialization";
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/CompactInexistant";
@@ -3391,6 +3409,7 @@ CompatibilityPHP74
 __________________
 
 | [CompatibilityPHP74]
+|   analyzer[] = "Arrays/StringInitialization";
 |   analyzer[] = "Php/DetectCurrentClass";
 |   analyzer[] = "Php/IdnUts46";| 
 

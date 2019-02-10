@@ -84,7 +84,7 @@ GREMLIN;
 
         $this->atomIs('Defineconstant')
              ->hasNoOut('DEFINITION')
-             ->outWithRank('ARGUMENT', 0);
+             ->outIs('NAME');
         $this->prepareQuery();
 
         // Const from a const

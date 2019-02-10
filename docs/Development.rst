@@ -329,7 +329,7 @@ Here is the list of the 117 available atoms :
 * Boolean : Represents `true` or `false`.
 * Break : A break, with or without the level indication. `break 1`;
 * Cast : A case expression in a switch() statement. `case 1: `
-* Cast : A cast operation, like `(array)` or `(unset)`
+* Cast : A cast operation, like ``(array)`` or ``(unset)``
 * Catch : A catch clause in a try/catch command. For example : `catch (Exception $e)` or `catch{A|B|C $d}`
 * Class : A named class.
 * Classalias : A call to the `class_alias` function. 
@@ -366,7 +366,7 @@ Here is the list of the 117 available atoms :
 * Identifier : A name for a constant or a class. For example : `$x instanceof Y`, 'echo PHP_INT_MAX`, `new Y`
 * Ifthen : A if/then/else structure.
 * Include : A inclusion, with `require` or `include`, with `_once` or not.
-* Inlinehtml : Raw text, in the middle of a PHP script. For example : `++$a; ?>RAW TEXT<?php ++$b; `
+* Inlinehtml : Raw text, in the middle of a PHP script. For example : ``++$a; ?>RAW TEXT<?php ++$b; ``
 * Instanceof : A `instanceof` expression
 * Insteadof : A `insteadof` expression
 * Integer : An Integer literal, positive or negative.
@@ -1007,7 +1007,7 @@ Cast
 ___________________________
 
 
-A cast operation, like `(array)` or `(unset)`
+A cast operation, like ``(array)`` or ``(unset)``
 
 .. image:: images/Cast.png
                             :alt: Cast's outgoing diagramm
@@ -2561,7 +2561,7 @@ Inlinehtml
 ___________________________
 
 
-Raw text, in the middle of a PHP script. For example : `++$a; ?>RAW TEXT<?php ++$b; `
+Raw text, in the middle of a PHP script. For example : ``++$a; ?>RAW TEXT<?php ++$b; ``
 
 .. image:: images/Inlinehtml.png
                             :alt: Inlinehtml's outgoing diagramm

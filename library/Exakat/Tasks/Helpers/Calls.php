@@ -94,16 +94,8 @@ SQL;
             throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
         }
 
-        if ($type !== 'function') {
-                $globalpath = '';
-        } elseif ($fullnspath === 'undefined') {
-            $globalpath = '';
-        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-            $globalpath = $r[1];
-        } else {
-            $globalpath = '';
-        }
-        
+        $globalpath = $this->makeGlobalPath($fullnspath);
+
         $this->calls[] = "('{$type}',
                            '{$this->callsSqlite->escapeString($fullnspath)}',
                            '{$this->callsSqlite->escapeString($globalpath)}',
@@ -111,7 +103,7 @@ SQL;
                            '{$call->id}')";
     }
 
-    public function addNoDelimiterCall($call) {
+    public function addNoDelimiterCall($call) { 
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
@@ -148,13 +140,7 @@ SQL;
         $atom = 'String';
 
         foreach($types as $type) {
-            if ($fullnspath === 'undefined') {
-                $globalpath = '';
-            } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-                $globalpath = $r[1];
-            } else {
-                $globalpath = '';
-            }
+            $globalpath = $this->makeGlobalPath($fullnspath);
             
             $this->calls[] = "('$type',
                                '{$this->callsSqlite->escapeString($fullnspath)}',
@@ -169,21 +155,25 @@ SQL;
             return;
         }
 
-        if ($type !== 'function') {
-            $globalpath = '';
-        } elseif ($fullnspath === 'undefined') {
-            $globalpath = '';
-        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-            $globalpath = $r[1];
-        } else {
-            $globalpath = '';
-        }
+        $globalpath = $this->makeGlobalPath($fullnspath);
 
         $this->definitions[] = "('{$type}',
                                  '{$this->callsSqlite->escapeString($fullnspath)}',
                                  '{$this->callsSqlite->escapeString($globalpath)}',
                                  '{$definition->atom}',
                                  '{$definition->id}')";
+    }
+    
+    private function makeGlobalPath($fullnspath) {
+        if ($fullnspath === 'undefined') {
+            $globalpath = '';
+        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+            $globalpath = $r[1];
+        } else {
+            $globalpath = substr($fullnspath, strrpos($fullnspath, '\\'));
+        }
+        
+        return $globalpath;
     }
 }
 

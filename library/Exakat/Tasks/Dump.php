@@ -982,7 +982,7 @@ g.V().hasLabel("Method", "Usetrait")
             __.sideEffect{ alias = false; }
           )
          .as("method")
-         .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); }
+         .in("METHOD", "MAGICMETHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); }
          .select("method")
          .where( __.sideEffect{ lines = [];}
                    .out("BLOCK").out("EXPRESSION")

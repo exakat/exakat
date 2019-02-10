@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 28 Jan 2019 08:52:14 +0000
-.. comment: Generation hash : 638614a97b0dfebdb232064046506ca62f285d9d
+.. comment: Generation date : Mon, 04 Feb 2019 15:15:21 +0000
+.. comment: Generation hash : bfa6f837e9bb15c4c7953838a0f0283d25df07d0
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1088,15 +1088,27 @@ It is recommended to handle the same properties in the same way across classes, 
    
    ?>
 
-+-------------+-------------------------------+
-| Short name  | Classes/AmbiguousVisibilities |
-+-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Minor                         |
-+-------------+-------------------------------+
-| Time To Fix | Slow (1 hour)                 |
-+-------------+-------------------------------+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Sync visibilities for both properties, in the different classes
+* Use different names for properties with different usages
+
++-------------+--------------------------------------------+
+| Short name  | Classes/AmbiguousVisibilities              |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Analyze`                             |
++-------------+--------------------------------------------+
+| Severity    | Minor                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Slow (1 hour)                              |
++-------------+--------------------------------------------+
+| Examples    | :ref:`typo3-classes-ambiguousvisibilities` |
++-------------+--------------------------------------------+
 
 
 
@@ -4722,6 +4734,17 @@ The analysis looks for functions calls, and checks the arguments. When the calls
    
    ?>
 
+
+See also `Don't repeat yourself (DRY) <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create a constant for common pieces of data
+* Create a function based on context-free repeated elements
+* Create a class based on repeated elements with dependent values
+
 +-------------+------------------------------------+
 | Short name  | Functions/CouldCentralize          |
 +-------------+------------------------------------+
@@ -5039,15 +5062,24 @@ Avoid using `dirname() <http://www.php.net/dirname>`_ on `__FILE__ <http://php.n
 
 See also `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_.
 
-+-------------+------------------------------------+
-| Short name  | Structures/CouldUseDir             |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use __DIR__ instead of `dirname(__FILE__);
+
++-------------+---------------------------------------------------------------------------------+
+| Short name  | Structures/CouldUseDir                                                          |
++-------------+---------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                              |
++-------------+---------------------------------------------------------------------------------+
+| Severity    | Major                                                                           |
++-------------+---------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                 |
++-------------+---------------------------------------------------------------------------------+
+| Examples    | :ref:`woocommerce-structures-couldusedir`, :ref:`piwigo-structures-couldusedir` |
++-------------+---------------------------------------------------------------------------------+
 
 
 
@@ -6883,15 +6915,26 @@ Comments that explains the reason of the situation are not taken into account.
        if ($condition) { } 
    ?>
 
-+-------------+----------------------------------------------+
-| Short name  | Structures/EmptyLines                        |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Instant (5 mins)                             |
-+-------------+----------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the empty lines
+* Fill the empty lines
+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Structures/EmptyLines                                                     |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Dead code <dead-code>`, :ref:`Analyze`                              |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Minor                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                          |
++-------------+---------------------------------------------------------------------------+
+| Examples    | :ref:`zurmo-structures-emptylines`, :ref:`thinkphp-structures-emptylines` |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -7977,6 +8020,14 @@ The following classes have been found implementing an interface's methods, thoug
    }
    
    ?>
+
+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Mention interfaces explicitely whenever possible
 
 +-------------+------------------------------+
 | Short name  | Interfaces/CouldUseInterface |
@@ -9316,7 +9367,7 @@ PHP defers the implements check until execution : the code in example does lint,
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Create an interface from the class, and use it with the implements keyword
 
 +-------------+---------------------------------+
 | Short name  | Classes/ImplementIsForInterface |
@@ -13268,15 +13319,29 @@ Class constants and constants improve readability when calling the methods or co
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Functions/NoBooleanAsDefault |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
+
+See also `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_ and 
+         `Clean code: The curse of a boolean parameter <https://medium.com/@amlcurran/clean-code-the-curse-of-a-boolean-parameter-c237a830b7a3>`.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use constants or class constants to give value to a boolean literal
+* When constants have been defined, use them when calling the code
+* Split the method into two methods, one for each case
+
++-------------+----------------------------------------------+
+| Short name  | Functions/NoBooleanAsDefault                 |
++-------------+----------------------------------------------+
+| Themes      | :ref:`Analyze`                               |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
+| Examples    | :ref:`openconf-functions-nobooleanasdefault` |
++-------------+----------------------------------------------+
 
 
 
@@ -16117,6 +16182,16 @@ Several functions are deprecated in PHP 7.2.
 * directive ``mbstring.func_overload`` (not supported yet)
 
 Deprecated functions and extensions are reported in a separate analysis.
+
+See also `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the deprecated functions, and replace them with a new feature 
+* Use a replacement function to emulate this old behavior
 
 +-------------+---------------------------+
 | Short name  | Php/Php72Deprecation      |
@@ -20648,6 +20723,50 @@ Function `in_array() <http://www.php.net/in_array>`_ has a third parameter to ma
 
 
 
+.. _string-initialization:
+
+String Initialization
+#####################
+
+
+It used to be possible to initialize a variable with an string, and use it as an array. It is not the case anymore in PHP 7.1.
+
+.. code-block:: php
+
+   <?php
+   
+   // Initialize arrays with array()
+   $a = array();
+   $a[3] = 4;
+   
+   // Don't start with a string
+   $a = '';
+   $a[3] = 4;
+   print $a;
+   
+   ?>
+
+
+See also `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always initialize arrays with an empty array(), not a string.
+
++-------------+------------------------------------------------------------------------------------------------------------+
+| Short name  | Arrays/StringInitialization                                                                                |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _string-may-hold-a-variable:
 
 String May Hold A Variable
@@ -21419,6 +21538,13 @@ When the difference is very small, it requires a better way to measure time diff
 See also `PHP DateTime difference – it’s a trap! <http://blog.codebusters.pl/en/php-datetime-difference-trap/>`_ and 
            `PHP Daylight savings bug? <https://stackoverflow.com/questions/22519091/php-daylight-savings-bug>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* For small time intervals, use hrtime() functions
+* For larger time intervals, use add() method with DateTime
+
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Structures/TimestampDifference                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -21676,6 +21802,16 @@ Beyond 15 variables, it becomes difficult to keep track of their name and usage,
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove some of the variables, and inline them
+* Break the big function into smaller ones
+* Find repeated code and make it a separate function
 
 +-------------------------------+---------+---------+------------------------------------------------------------------+
 | Name                          | Default | Type    | Description                                                      |

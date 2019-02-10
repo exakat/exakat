@@ -136,12 +136,12 @@ GREMLIN;
         // fix path for constants with Const
 
         $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
-        $query->atomIs(array('Identifier', 'Nsname'))
+        $query->atomIs(array('Identifier', 'Nsname'), Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->_as('identifier')
               ->savePropertyAs('fullnspath', 'cc')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Trait', 'Interface', 'Constant', 'Defineconstant'))
+              ->atomIs(array('Class', 'Trait', 'Interface', 'Constant', 'Defineconstant'), Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
 coalesce( __.out("ARGUMENT").has("rank", 0), 
           __.hasLabel("Constant").out('NAME'), 
@@ -168,7 +168,7 @@ GREMLIN
         $constantsPHP = array_values($constants);
 
         $query = new Query(0, $this->config->project, 'spotPHPNativeConstants', null, $this->datastore);
-        $query->atomIs('Identifier')
+        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->values('code')
               ->unique();
@@ -272,7 +272,7 @@ GREMLIN;
         $this->logTime('overwrittenMethods');
         
         $query = new Query(0, $this->config->project, 'overwrittenMethods', null, $this->datastore);
-        $query->atomIs(array('Method', 'Magicmethod'))
+        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'name')
               ->goToClass()
@@ -295,7 +295,7 @@ GREMLIN;
         $this->logTime('overwrittenProperties');
         
         $query = new Query(0, $this->config->project, 'overwrittenProperties', null, $this->datastore);
-        $query->atomIs('Propertydefinition')
+        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
               ->goToClass()
               ->goToAllImplements(Analyzer::EXCLUDE_SELF)
@@ -316,14 +316,14 @@ GREMLIN;
         $this->logTime('overwrittenConstants');
         
         $query = new Query(0, $this->config->project, 'overwrittenConstants', null, $this->datastore);
-        $query->atomIs('Constant')
+        $query->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('code', 'name')
               ->goToClass()
               ->goToAllImplements(Analyzer::EXCLUDE_SELF)
               ->outIs('CONST')
               ->outIs('CONST')
-              ->atomIs('Constant')
+              ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
@@ -343,7 +343,7 @@ GREMLIN;
 
         //$id, $project, $analyzer, $php
         $query = new Query(0, $this->config->project, 'setStringMethodDefinition', null, $this->datastore);
-        $query->atomIs('String')
+        $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')
               ->initVariable('name', '""')
@@ -361,7 +361,7 @@ GREMLIN
 , array(), array())
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->atomIs(array('Method', 'Magicmethod'))
+              ->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
@@ -382,15 +382,15 @@ GREMLIN
         
         //$id, $project, $analyzer, $php
         $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null, $this->datastore);
-        $query->atomIs('Arrayliteral')
+        $query->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)
-              ->atomIs('String')
+              ->atomIs('String', Analyzer::WITH_CONSTANTS)
               ->has('noDelimiter')
               ->savePropertyAs('noDelimiter', 'method')
               ->back('first')
               ->outWithRank('ARGUMENT', 0)
-              ->atomIs('String')
+              ->atomIs('String', Analyzer::WITH_CONSTANTS)
               ->inIs('DEFINITION')
               ->outIs(array('MAGICMETHOD', 'METHOD'))
               ->outIs('NAME')
@@ -517,16 +517,16 @@ GREMLIN;
 
         // For static method calls, in traits
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Staticproperty')
+        $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
-              ->atomIs('Staticpropertyname')
+              ->atomIs('Staticpropertyname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('code', 'name')
               ->inIs('MEMBER')
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
@@ -539,7 +539,7 @@ GREMLIN;
 
         // For normal method calls, in traits
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Member')
+        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
@@ -547,7 +547,7 @@ GREMLIN;
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
@@ -566,20 +566,20 @@ GREMLIN;
         display('Set class method remote definitions with typehint');
 
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Methodcall')
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
-              ->atomIs('Methodcallname')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Parameter')
+              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
-              ->atomIs('Class')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('METHOD')
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
@@ -591,20 +591,20 @@ GREMLIN;
         $countM = $result->toInt();
 
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Member')
+        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
-              ->atomIs('Name')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('code', 'name')
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Parameter')
+              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
-              ->atomIs('Class')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
@@ -623,16 +623,16 @@ GREMLIN;
 
         // For static method calls, in traits
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Staticmethodcall')
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
-              ->atomIs('Methodcallname')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
@@ -652,11 +652,11 @@ GREMLIN;
         display('Set class alias definitions');
 
         $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
-        $query->atomIs(array('Class', 'Interface', 'Trait'))
+        $query->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->outIs('DEFINITION')
               ->inIs('ARGUMENT')
-              ->atomIs('Classalias')
+              ->atomIs('Classalias', Analyzer::WITHOUT_CONSTANTS)
               ->outWithRank('ARGUMENT', 1)
               ->outIs('DEFINITION')
               ->addEFrom('DEFINITION', 'method')
@@ -732,19 +732,19 @@ GREMLIN;
         display('Creating link between Class constant and definition');
         // Create link between Class constant and definition
         $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
-        $query->atomIs('Staticconstant')
+        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->savePropertyAs('code', 'name')
               ->back('first')
               ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'classe')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'))
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
-              ->atomIs('Const')
+              ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
@@ -765,13 +765,13 @@ GREMLIN;
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
         $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-        $query->atomIs('Staticmethodcall')
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'classe')
               ->inIs('DEFINITION')
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -788,10 +788,10 @@ GREMLIN;
         // Create link between Class method and definition
         // This works only for $this
         $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-        $query->atomIs('Methodcall')
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
-              ->atomIs('This')
+              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('OBJECT')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
@@ -843,9 +843,9 @@ GREMLIN
         $__construct = $this->dictCode->translate('__construct');
         if (!empty($__construct)) {
             $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-            $query->atomIs('New')
+            $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
                   ->outIs('NEW')
-                  ->atomIs('Newcall')
+                  ->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
                   ->has('fullnspath')
                   ->inIs('DEFINITION')
                   ->outIs('MAGICMETHOD')
@@ -863,12 +863,12 @@ GREMLIN
 
     private function solveTraitMethods() {
         $query = new Query(0, $this->config->project, 'solveTraitMethods', null, $this->datastore);
-        $query->atomIs('Usetrait')
+        $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
-              ->atomIs('As')
+              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->atomIs('Staticmethod')
+              ->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
               ->_as('results')
               ->tokenIs('T_STRING')
               ->savePropertyAs('lccode', 'methode')
@@ -889,13 +889,13 @@ GREMLIN
     private function followClosureDefinition() {
         // local usage
         $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
-        $query->atomIs('Closure')
+        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
               ->outIs('LEFT')
               ->inIs('DEFINITION')  // Find all variable usage
               ->outIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Functioncall')
+              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
@@ -903,7 +903,7 @@ GREMLIN
 
         // relayed usage
         $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
-        $query->atomIs('Closure')
+        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('ARGUMENT')
               ->savePropertyAs('rank', 'ranked')
               ->inIs('ARGUMENT')
@@ -913,7 +913,7 @@ GREMLIN
               ->outIs('NAME')
               ->outIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Functioncall')
+              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
