@@ -89,6 +89,9 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
+    const WITH_CONSTANTS    = true;
+    const WITHOUT_CONSTANTS = false;
+
     const TRANSLATE    = true;
     const NO_TRANSLATE = false;
 
@@ -537,14 +540,14 @@ GREMLIN;
         return $this;
     }
     
-    public function atomIs($atom) {
-        $this->query->atomIs($atom);
+    public function atomIs($atom, $flag = self::WITHOUT_CONSTANTS) {
+        $this->query->atomIs($atom, $flag);
 
         return $this;
     }
 
-    public function atomIsNot($atom) {
-        $this->query->atomIsNot($atom);
+    public function atomIsNot($atom, $flag = self::WITHOUT_CONSTANTS) {
+        $this->query->atomIsNot($atom, $flag);
         
         return $this;
     }

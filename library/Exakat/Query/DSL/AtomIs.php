@@ -24,18 +24,30 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
 class AtomIs extends DSL {
     public function run() {
-        list($atoms) = func_get_args();
+        list($atoms, $flags) = func_get_args();
 
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atoms));
 
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
+        } elseif ($flags === Analyzer::WITH_CONSTANTS && 
+                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
+            // Ternary are unsupported
+            // arrays, members, static members are not supported
+            $gremlin = <<<GREMLIN
+coalesce( __.hasLabel(within(['Identifier', 'Nsname', 'Staticconstant'])).in('DEFINITION').out('VALUE'),
+          __.hasLabel(within(['Variable'])).in('DEFINITION').out('DEFINITION').in('LEFT').hasLabel('Assignation').out('RIGHT'),
+          __.filter{true})
+.hasLabel(within(***))
+GREMLIN;
+            return new Command($gremlin, array($diff));
         } else {
+            // WITHOUT_CONSTANTS or non-constant atoms
             return new Command('hasLabel(within(***))', array($diff));
         }
     }

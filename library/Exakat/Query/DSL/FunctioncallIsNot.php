@@ -24,6 +24,7 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
 class FunctioncallIsNot extends DSL {
     public function run() {
@@ -39,7 +40,7 @@ class FunctioncallIsNot extends DSL {
         }
 
         $atomIs = $this->dslfactory->factory('atomIs');
-        $return = $atomIs->run('Functioncall');
+        $return = $atomIs->run('Functioncall', Analyzer::WITHOUT_CONSTANTS);
 
         $has = $this->dslfactory->factory('has');
         $return->add($has->run('fullnspath'));

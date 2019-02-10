@@ -40,7 +40,7 @@ class Regex extends Analyzer {
         // preg_match('/a/', ...)
         $this->atomFunctionIs($pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
@@ -49,7 +49,7 @@ class Regex extends Analyzer {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // preg_relace_callback_array(array(regex1 => callback, regex2))

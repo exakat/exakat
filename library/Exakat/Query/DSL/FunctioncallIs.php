@@ -40,7 +40,7 @@ class FunctioncallIs extends DSL {
         }
         
         $atomIs = $this->dslfactory->factory('atomIs');
-        $return = $atomIs->run('Functioncall');
+        $return = $atomIs->run('Functioncall', Analyzer::WITHOUT_CONSTANTS);
 
         $has = $this->dslfactory->factory('has');
         $return->add($has->run('fullnspath'));
