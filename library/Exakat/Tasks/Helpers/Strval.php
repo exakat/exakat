@@ -122,11 +122,11 @@ class Strval extends Plugin {
 
             case 'Logical' :
                 if ($atom->code === '|') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter | (int) $extras['RIGHT']->noDelimiter;
+                    $atom->noDelimiter = $extras['LEFT']->noDelimiter | $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '&') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter & (int) $extras['RIGHT']->noDelimiter;
+                    $atom->noDelimiter = $extras['LEFT']->noDelimiter & $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '^') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter ^ (int) $extras['RIGHT']->noDelimiter;
+                    $atom->noDelimiter = $extras['LEFT']->noDelimiter ^ $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '&&' || mb_strtolower($atom->code) === 'and') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter && (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
