@@ -45,7 +45,7 @@ class Extension extends Tasks {
     }
     
     private function install() {
-        if (file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
+        if (file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
             print "This extension already exists in the ext folder. Remove it manually, or with 'uninstall' command.\n";
             return;
         }
@@ -65,19 +65,19 @@ class Extension extends Tasks {
             return;
         }
         
-        if (!file_exists("{$this->config->dir_root}/ext/")) {
-            mkdir("{$this->config->dir_root}/ext/", 0700);
+        if (!file_exists("{$this->config->ext_root}/")) {
+            mkdir("{$this->config->ext_root}/", 0700);
         }
     
-        $extensionPhar = "{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+        $extensionPhar = "{$this->config->ext_root}/{$this->config->extension}.phar";
         file_put_contents($extensionPhar, $raw);
         
         print "{$this->config->extension} installed with success!\n";
     }
 
     private function update() {
-        if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
-            print "No such extension to update.\n"."{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+        if (!file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
+            print "No such extension to update.\n"."{$this->config->ext_root}/{$this->config->extension}.phar";
             return;
         }
 
@@ -88,7 +88,7 @@ class Extension extends Tasks {
             return;
         }
 
-        $ini = parse_ini_file("phar://{$this->config->dir_root}/ext/{$this->config->extension}.phar/config.ini");
+        $ini = parse_ini_file("phar://{$this->config->ext_root}/{$this->config->extension}.phar/config.ini");
         if ($this->extensionList[$this->config->extension]->build < $ini['build']) {
             print "The current extension is newer than the remote one. Remove with 'uninstall' first. Keeping previous version and aborting\n";
             return;
@@ -105,24 +105,24 @@ class Extension extends Tasks {
             return;
         }
         
-        if (!file_exists("{$this->config->dir_root}/ext/")) {
-            mkdir("{$this->config->dir_root}/ext/", 0700);
+        if (!file_exists("{$this->config->ext_root}/")) {
+            mkdir("{$this->config->ext_root}/", 0700);
         }
 
-        $extensionPhar = "{$this->config->dir_root}/ext/{$this->config->extension}.phar";
+        $extensionPhar = "{$this->config->ext_root}/{$this->config->extension}.phar";
         file_put_contents($extensionPhar, $raw);
 
         print "{$this->config->extension} upgraded to ".$this->extensionList[$this->config->extension]->version." with success!\n";
     }
     
     private function uninstall() {
-        if (!file_exists("{$this->config->dir_root}/ext/{$this->config->extension}.phar")) {
+        if (!file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
             print "No such extension to remove.\n";
             return;
         }
     
         print "Uninstalling the extension from exakat\n";
-        unlink("{$this->config->dir_root}/ext/{$this->config->extension}.phar");
+        unlink("{$this->config->ext_root}/{$this->config->extension}.phar");
         print "Done\n";
     }
     
@@ -152,8 +152,8 @@ class Extension extends Tasks {
         print str_repeat('-', 40).PHP_EOL;
         foreach($list as $l) {
             // drop the .phar
-            if (file_exists("phar://{$this->config->dir_root}/ext/$l/config.ini")) {
-                $ini = parse_ini_file("phar://{$this->config->dir_root}/ext/$l/config.ini");
+            if (file_exists("phar://{$this->config->ext_root}/$l/config.ini")) {
+                $ini = parse_ini_file("phar://{$this->config->ext_root}/$l/config.ini");
             } else {
                 $ini = array('version' => '',
                              'build'   => '',

@@ -31,6 +31,7 @@ class Config {
     const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74');
 
     public  $dir_root              = '.';
+    public  $ext_root              = '.';
     public  $projects_root         = '.';
     public  $is_phar               = true;
     public  $executable            = '';
@@ -58,9 +59,10 @@ class Config {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(phar::running()), 7);
             $this->dir_root      = phar::running();
+            $this->ext_root      = substr(dirname(phar::running()).'/ext', 5);
 
             // autoload extensions
-            $this->ext = new \AutoloadExt(substr(dirname(phar::running()).'/ext', 5));
+            $this->ext = new \AutoloadExt($this->ext_root);
             $this->ext->registerAutoload();
 
             assert_options(ASSERT_ACTIVE, 0);
@@ -75,15 +77,16 @@ class Config {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__, 2);
             // Run projects in the working directory
-            if (dirname($_SERVER['SCRIPT_FILENAME']) === 'bin' &&
+            if (dirname($_SERVER['SCRIPT_FILENAME']) === 'bin'      &&
                 dirname($_SERVER['SCRIPT_FILENAME'], 2) === 'vendor') {
                 $this->projects_root = getcwd();
             } else {
                 $this->projects_root = dirname(__DIR__, 2);
             }
+            $this->ext_root      = $this->dir_root;
 
             // autoload extensions
-            $this->ext = new \AutoloadExt("{ $this->dir_root}/ext");
+            $this->ext = new \AutoloadExt("{$this->ext_root}/ext");
             $this->ext->registerAutoload();
 
             assert_options(ASSERT_ACTIVE, 1);
