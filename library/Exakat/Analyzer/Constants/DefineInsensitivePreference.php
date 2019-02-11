@@ -29,15 +29,21 @@ class DefineInsensitivePreference extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-x2 = it.get().vertices(OUT, "ARGUMENT").size();
+if (it.get().vertices(OUT, "CASE").any()) {
+    x2 = 1;
+} else {
+    x2 = 0;
+}
+
 GREMLIN;
-        $storage = array('sensitive'   => 2,
-                         'insensitive' => 3);
+        $storage = array('sensitive'   => 0,
+                         'insensitive' => 1);
 
         $this->atomIs('Defineconstant')
              ->raw("map{ $mapping }")
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray()[0];
+        $types = $this->rawQuery()
+                      ->toArray()[0];
 
         $store = array();
         $total = 0;
