@@ -184,7 +184,7 @@ GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .not(where( __.in("ARGUMENT").hasLabel("Defineconstant")))
+     .not(where( __.in("NAME").hasLabel("Defineconstant")))
      .filter{ it.get().value("code") in arg1 }
      .sideEffect{
          tokens = it.get().value("fullnspath").tokenize('\\\\');
@@ -412,7 +412,7 @@ GREMLIN
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Defineconstant")
-     .out("ARGUMENT").has("rank", 0)
+     .out("NAME")
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\\$").getCount() == 0 }
      .values('fullnspath').unique();
@@ -450,7 +450,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .addE("DEFINITION")
      .from( 
         g.V().hasLabel("Defineconstant")
-             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
+             .as("a").out("NAME").hasLabel("String")
              .has("fullnspath")
              .filter{ it.get().value("fullnspath") == name}.select("a")
       ).count();
@@ -473,7 +473,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Defineconstant")
-             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .as("a").out("NAME").hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
       ).count()
 
@@ -705,7 +705,7 @@ GREMLIN;
         $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
      .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").coalesce( __.hasLabel("Constant").out("VALUE"),
-                                                                             __.hasLabel("Defineconstant").out("ARGUMENT").has("rank", 1))
+                                                                             __.hasLabel("Defineconstant").out("VALUE"))
      .sideEffect{ 
         if ("intval" in it.get().keys()) {
             constante.property("intval", it.get().value("intval")); 
