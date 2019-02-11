@@ -1656,12 +1656,6 @@ GREMLIN;
         return $this;
     }
     
-    public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
-        $this->query->fetchContext($context);
-        
-        return $this;
-    }
-    
     public function collectContainers($containers = 'containers') {
         $this->query->collectContainers($containers);
         
