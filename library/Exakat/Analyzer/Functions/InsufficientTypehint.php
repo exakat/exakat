@@ -24,24 +24,31 @@ namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 
-class NoClassAsTypehint extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/IsExtClass',
-                    );
-    }
-    
+class InsufficientTypehint extends Analyzer {
     public function analyze() {
-        // Classes reused as typehint
-        $this->atomIs('Class')
-             ->outIs('DEFINITION')
-             ->hasIn('TYPEHINT');
-        $this->prepareQuery();
-
-        // Classes reused as typehint
-        $this->atomIs(array('Function', 'Method', 'Magicmethod'))
+        // function foo(i $a) { $i->a(); } // but interface i has no function a() 
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->_as('arg')
+             ->hasOut('TYPEHINT')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('OBJECT')
+             ->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'call')
+             ->back('arg')
              ->outIs('TYPEHINT')
-             ->analyzerIs('Classes/IsExtClass');
+             ->inIs('DEFINITION')
+             ->not(
+                $this->side()
+                     ->goToAllImplements()
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->outIs('NAME')
+                     ->samePropertyAs('lccode', 'call', self::CASE_INSENSITIVE)
+             )
+             ->back('first');
         $this->prepareQuery();
     }
 }
