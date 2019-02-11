@@ -33,19 +33,23 @@ class ModernEmpty extends Analyzer {
     }
     
     public function analyze() {
-        // $a = source();
-        // if (empty($a)) {}
+
+        // $a = 2; empty($a) ; in a row
+        // only works for variables
         $this->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname'))
+             ->hasAtomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Addition', 'Multiplication', 'Bitshift', 'Power', 'Logical', 'Comparison'))
+             ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')
-             ->savePropertyAs('fullcode', 'variable')
-             ->back('first')
-             ->nextSibling()
+             ->savePropertyAs('code', 'storage')
+             ->inIs('LEFT')
+             ->nextSiblings()
              ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->samePropertyAs('fullcode', 'variable')
-             ->variableIsRead(1)
+             ->samePropertyAs('code', 'storage', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

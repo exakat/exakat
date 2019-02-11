@@ -29,7 +29,7 @@ class Constantnames extends Analyzer {
     public function analyze() {
         // with define
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->is('constant', true);
         $this->prepareQuery();

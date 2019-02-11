@@ -27,41 +27,31 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstRecommended extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
         // define('const', literal);
-        $this->atomIs('Defineconstant')
-             ->_as('args')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->back('args')
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant'))
-             ->hasNoOut('CONCAT')
-             ->back('first');
-        $this->prepareQuery();
-
         // define('const', other constant);
         $this->atomIs('Defineconstant')
              ->_as('args')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->back('args')
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('Identifier', 'Nsname'))
-             ->analyzerIs('Constants/ConstantUsage')
+             ->outIs('VALUE')
+             ->atomIs(array('String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Concatenation'), self::WITH_CONSTANTS)
+             ->is('constant', true)
              ->back('first');
         $this->prepareQuery();
 
         // define('const', expression);
         $this->atomIs('Defineconstant')
              ->_as('args')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->back('args')
-             ->outWithRank('ARGUMENT', 1)
+             ->outIs('VALUE')
              ->atomIsNot(array('Identifier', 'Nsname','String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
              ->noAtomInside(array("Variable", "Functioncall"))
              ->back('first');

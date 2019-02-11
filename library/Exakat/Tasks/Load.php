@@ -2378,7 +2378,9 @@ class Load extends Tasks {
 
         // First argument : constant name
         ++$this->id;
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_CONSTANT_ENCAPSED_STRING) {
+        if ($this->tokens[$this->id][0]     === $this->phptokens::T_CONSTANT_ENCAPSED_STRING && 
+            $this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA
+            ) {
             $name = $this->processSingle('String');
             $name->delimiter   = $name->code[0];
             if ($name->delimiter === 'b' || $name->delimiter === 'B') {
@@ -2402,6 +2404,8 @@ class Load extends Tasks {
                 }
             }
         } else {
+            // back on step
+            --$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                     $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
                                                                     ))) {
@@ -5199,19 +5203,19 @@ class Load extends Tasks {
     }
 
     private function processDot() {
-        $current = $this->id;
+        $current       = $this->id;
         $concatenation = $this->addAtom('Concatenation');
-        $fullcode= array();
-        $concat = array();
-        $noDelimiter = '';
-        $rank = -1;
+        $fullcode      = array();
+        $concat        = array();
+        $noDelimiter   = '';
+        $rank          = -1;
 
-        $contains = $this->popExpression();
-        $this->addLink($concatenation, $contains, 'CONCAT');
+        $contains       = $this->popExpression();
         $contains->rank = ++$rank;
-        $fullcode[] = $contains->fullcode;
-        $concat[] = $contains;
-        $noDelimiter .= $contains->noDelimiter;
+        $fullcode[]     = $contains->fullcode;
+        $concat[]       = $contains;
+        $noDelimiter   .= $contains->noDelimiter;
+        $this->addLink($concatenation, $contains, 'CONCAT');
 
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);

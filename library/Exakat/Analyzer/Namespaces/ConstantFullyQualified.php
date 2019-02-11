@@ -29,7 +29,7 @@ class ConstantFullyQualified extends Analyzer {
     public function analyze() {
         // define('\\full\\namespace\\path', 'value');
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '^(\\\\\\\\)')
              ->back('first');

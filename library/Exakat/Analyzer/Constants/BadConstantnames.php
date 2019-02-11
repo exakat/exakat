@@ -29,7 +29,7 @@ class BadConstantnames extends Analyzer {
     public function analyze() {
         // with define
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->is('constant', true)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
@@ -37,7 +37,7 @@ class BadConstantnames extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->is('constant', true)
              ->atomIs('Concatenation')
              ->regexIs('noDelimiter', '^__(.*)__\\$');

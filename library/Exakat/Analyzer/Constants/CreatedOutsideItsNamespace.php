@@ -29,11 +29,24 @@ class CreatedOutsideItsNamespace extends Analyzer {
     public function analyze() {
         // define('\a\b\c', 3);
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->regexIs('noDelimiter', '\\\\\\\\')
-             ->fetchContext()
-             ->regexIsNot('noDelimiter', '^" + context["namespace"].replaceAll( "\\\\\\\\", "\\\\\\\\\\\\\\\\" ) + "')
+             ->_as('string')
+             ->goToInstruction('Namespace')
+             ->outIs('NAME')
+             ->savePropertyAs('fullcode', 'ns')
+             ->back('string')
+             ->regexIsNot('noDelimiter', '^" + ns.replaceAll( "\\\\\\\\", "\\\\\\\\\\\\\\\\" ) + "')
+             ->back('first');
+        $this->prepareQuery();
+
+        // define('b\c', 3); no namespace
+        $this->atomIs('Defineconstant')
+             ->outIs('NAME')
+             ->atomIs('String')
+             ->regexIs('noDelimiter', '\\\\\\\\')
+             ->hasNoInstruction('Namespace')
              ->back('first');
         $this->prepareQuery();
     }

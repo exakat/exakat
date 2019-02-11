@@ -32,7 +32,7 @@ class PHP73LastEmptyArgument extends Analyzer {
         // $functioncall($a, )
         $this->atomIs(array('Functioncall', 'Methodcallname'))
              ->isMore('count', 0)
-             ->regexIs('fullcode', '\\\\,  \\\)');
+             ->regexIs('fullcode', '\\\\,  \\\)\\$');
         $this->prepareQuery();
     }
 }

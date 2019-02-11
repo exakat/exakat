@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantStrangeNames extends Analyzer {
     public function dependsOn() {
-        return array('Constants/Constantnames');
+        return array('Constants/Constantnames',
+                    );
     }
 
     public function analyze() {

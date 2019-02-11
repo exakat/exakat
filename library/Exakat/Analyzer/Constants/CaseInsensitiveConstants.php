@@ -28,7 +28,7 @@ class CaseInsensitiveConstants extends Analyzer {
     public function analyze() {
         // define('a', 1, true);
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 2)
+             ->outIs('CASE')
              ->is('boolean', true)
              ->back('first');
         $this->prepareQuery();

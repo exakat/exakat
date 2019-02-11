@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$a = strtolower(2)',
+$expected     = array('empty(strtolower(4))',
                      );
 
-$expected_not = array('$c = range(3,4)',
+$expected_not = array('empty(A::$b)', 
                      );
 
 ?>

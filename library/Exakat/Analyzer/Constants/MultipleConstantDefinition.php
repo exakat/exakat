@@ -31,10 +31,10 @@ class MultipleConstantDefinition extends Analyzer {
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Defineconstant")
-     .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
-          __.out("ARGUMENT").has("rank", 2).has('boolean', false),
+     .or( __.out("CASE").count().is(eq(0)),
+          __.out("CASE").has('boolean', false),
          )
-     .out("ARGUMENT").has("rank", 0).hasLabel("String").not(where(__.out("CONCAT") ) )
+     .out("NAME").hasLabel("String").not(where(__.out("CONCAT") ) )
      .values("noDelimiter")
 GREMLIN
 );
@@ -48,9 +48,9 @@ GREMLIN
 
         $cisDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Defineconstant")
-     .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
-     .out("ARGUMENT").has("rank", 0)
-     .hasLabel("String").not(where(__.out("CONCAT") ) )
+     .where( __.out("CASE").has("boolean", true)) 
+     .out("NAME")
+     .hasLabel("String").not( where( __.out("CONCAT") ) )
      .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
@@ -92,10 +92,10 @@ GREMLIN
         $array = array_values($array);
         
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 2)
+             ->outIs('CASE')
              ->is('boolean', true)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
+             ->inIs('CASE')
+             ->outIs('NAME')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);
@@ -109,18 +109,18 @@ GREMLIN
         $array = array_values($array);
 
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 2)
+             ->outIs('CASE')
              ->is('boolean', false)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
+             ->inIs('CASE')
+             ->outIs('NAME')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);
         $this->prepareQuery();
 
         $this->atomIs('Defineconstant')
-             ->noChildWithRank('ARGUMENT', 2)
-             ->outWithRank('ARGUMENT', 0)
+             ->hasNoOut('CASE')
+             ->outIs('NAME')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);

@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Extension;
 
 class Extereg extends Extension {
-    protected $phpVersion = '7.0-';
-    
     public function analyze() {
         $this->source = 'ereg.ini';
         

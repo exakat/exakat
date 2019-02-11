@@ -26,68 +26,16 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
-    /*
-    public function dependsOn() {
-        return array('Constants/ConstantUsage',
-                    );
-    }
-    */
-    
+
     public function analyze() {
-        /*
-        $queryConstants = <<<GREMLIN
-g.V().hasLabel("Analysis")
-     .has("analyzer", "Constants/ConstantUsage")
-     .out("ANALYZED")
-     .map{ 
-        if (it.get().label() == "String") {
-          it.get().value("noDelimiter");
-        } else {
-          it.get().value("fullcode");
-        }
-     }
-     .unique()
-GREMLIN;
-        $constants = $this->query($queryConstants)
-                          ->toArray();
-
-        // Const from a define (case insensitive)
-        $this->atomIs('Defineconstant')
-             ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constants, self::CASE_SENSITIVE);
-        $this->prepareQuery();
-        
-        $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->is('boolean', false)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constants, self::CASE_SENSITIVE);
-        $this->prepareQuery();
-        
-        // Const from a define (case sensitive)
-        $this->atomFunctionIs('\define')
-             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->is('boolean', true)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constants);
-        $this->prepareQuery();
-        */
-
+        // define('A', 1); No A;
         $this->atomIs('Defineconstant')
              ->hasNoOut('DEFINITION')
              ->outIs('NAME');
         $this->prepareQuery();
 
         // Const from a const
+        // const A = 1; No A;
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')

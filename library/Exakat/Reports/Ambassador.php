@@ -2333,7 +2333,7 @@ SQL;
     protected function generateCompatibilityEstimate() {
         $html = $this->getBasedPage('empty');
         
-        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3');
+        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4');
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
@@ -2383,7 +2383,7 @@ SQL;
                             'Structures/BreakOutsideLoop'           => '7.0-',
                             'Structures/SwitchWithMultipleDefault'  => '7.0-',
                             'Type/MalformedOctal'                   => '7.0-',
-                            'Structures/pregOptionE'                => '7.0+',
+                            'Structures/pregOptionE'                => '7.0-',
                             'Classes/Anonymous'                     => '7.0+',
                             'Extensions/Extast'                     => '7.0+',
                             'Extensions/Extzbarcode'                => '7.0+',
@@ -2428,7 +2428,7 @@ SQL;
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
-        $colors = array('59BF00',  'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5');
+        $colors = array('59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5');
 
         $list = makeList(array_keys($analyzers));
         $query = <<<SQL
@@ -2751,7 +2751,8 @@ SQL
     }
 
     protected function generateCompatibility($version) {
-        $compatibility = '';
+        $compatibility = array();
+        $skipped       = array();
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
@@ -2764,15 +2765,19 @@ SQL
         foreach($list as $analyzer) {
             $ini = $this->getDocs($analyzer);
             if (isset($counts[$analyzer])) {
-                $result = (int) $counts[$analyzer];
+                $resultState = (int) $counts[$analyzer];
             } else {
-                $result = -2; // -2 === not run
+                $resultState = -2; // -2 === not run
             }
-            $result = $this->Compatibility($result, $analyzer);
-            $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
-            $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
+            $result = $this->Compatibility($resultState, $analyzer);
+            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for '.$ini['name'].'"><i class="fa fa-book"></i></a>';
+            if ($resultState === Analyzer::VERSION_INCOMPATIBLE) {
+                $skipped []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
+            } else {
+                $compatibility []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
+            }
         }
+        $compatibility = implode(PHP_EOL, $compatibility).PHP_EOL.implode(PHP_EOL, $skipped);
 
         $description = <<<HTML
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
@@ -4372,7 +4377,11 @@ JAVASCRIPT;
         }
         unset($out);
 
-        $secondaries = array_merge(...array_values($next));
+        if (empty($next)) {
+            $secondaries = array();
+        } else {
+            $secondaries = array_merge(...array_values($next));
+        }
         $top = array_diff(array_keys($next), $secondaries);
         
         $theTable = array();
