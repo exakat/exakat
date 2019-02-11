@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NoClassAsTypehint extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsExtClass');
+        return array('Classes/IsExtClass',
+                    );
     }
     
     public function analyze() {
@@ -37,7 +38,7 @@ class NoClassAsTypehint extends Analyzer {
         $this->prepareQuery();
 
         // Classes reused as typehint
-        $this->atomIs(array('Function', 'Method'))
+        $this->atomIs(array('Function', 'Method', 'Magicmethod'))
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->analyzerIs('Classes/IsExtClass');

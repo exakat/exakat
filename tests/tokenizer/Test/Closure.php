@@ -7,8 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Closure extends Tokenizer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClosure01()  { $this->generic_test('Closure.01'); }
+    public function testClosure02()  { $this->generic_test('Closure.02'); }
 }
 ?>

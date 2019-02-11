@@ -166,7 +166,6 @@ class Boolval extends Plugin {
 
             case 'Concatenation' :
                 $boolean = array_column($extras, 'boolean');
-                var_dump($boolean);
                 $atom->boolean = (bool) implode('', $boolean);
                 break;
 
@@ -180,9 +179,9 @@ class Boolval extends Plugin {
 
             case 'Bitshift' :
                 if ($atom->code === '>>') {
-                    $atom->boolean = $extras['LEFT']->boolean >> $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) $extras['LEFT']->boolean >> (int) $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '<<') {
-                    $atom->boolean = $extras['LEFT']->boolean << $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) $extras['LEFT']->boolean << (int) $extras['RIGHT']->boolean;
                 }
                 break;
 

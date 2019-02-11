@@ -20,36 +20,35 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 
-class ConstantClass extends Analyzer {
+class InsufficientTypehint extends Analyzer {
     public function analyze() {
-        // class x { const yx = 2;}
-        $this->atomIs('Class')
-             ->isNot('abstract', true)
+        // function foo(i $a) { $i->a(); } // but interface i has no function a() 
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->_as('arg')
+             ->hasOut('TYPEHINT')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('OBJECT')
+             ->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'call')
+             ->back('arg')
+             ->outIs('TYPEHINT')
+             ->inIs('DEFINITION')
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outis(array('METHOD', 'MAGICMETHOD', 'PPP'))
-                     )
+                     ->goToAllImplements()
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->outIs('NAME')
+                     ->samePropertyAs('lccode', 'call', self::CASE_INSENSITIVE)
              )
-             ->hasOut('CONST');
-        $this->prepareQuery();
-
-        // interface x { const yx = 2;}
-        $this->atomIs('Interface')
-             ->not(
-                $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outis(array('METHOD', 'MAGICMETHOD', 'PPP'))
-                     )
-             )
-             ->hasOut('CONST');
+             ->back('first');
         $this->prepareQuery();
     }
 }
