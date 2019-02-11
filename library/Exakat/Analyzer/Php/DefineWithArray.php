@@ -30,7 +30,7 @@ class DefineWithArray extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 1)
+             ->outIs('VALUE')
              ->atomIs('Arrayliteral')
              ->back('first');
         $this->prepareQuery();

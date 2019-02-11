@@ -31,7 +31,7 @@ class ConditionedConstants extends Analyzer {
         $this->atomIs('Defineconstant')
              ->hasIfthen()
              ->back('first')
-             ->outWithRank('ARGUMENT', 0);
+             ->outIs('NAME');
         $this->prepareQuery();
     }
 }

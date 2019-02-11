@@ -29,7 +29,7 @@ class InvalidName extends Analyzer {
     public function analyze() {
         // Invalid characters
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
@@ -41,7 +41,7 @@ class InvalidName extends Analyzer {
         
         // reserved keywords
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
+             ->outIs('NAME')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$')
