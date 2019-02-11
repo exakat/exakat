@@ -166,7 +166,6 @@ class Boolval extends Plugin {
 
             case 'Concatenation' :
                 $boolean = array_column($extras, 'boolean');
-                var_dump($boolean);
                 $atom->boolean = (bool) implode('', $boolean);
                 break;
 
