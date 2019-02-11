@@ -27,12 +27,29 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantClass extends Analyzer {
     public function analyze() {
+        // class x { const yx = 2;}
         $this->atomIs('Class')
-             ->raw('not(where( __.out("METHOD", "PPP")))');
+             ->isNot('abstract', true)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outis(array('METHOD', 'MAGICMETHOD', 'PPP'))
+                     )
+             )
+             ->hasOut('CONST');
         $this->prepareQuery();
 
+        // interface x { const yx = 2;}
         $this->atomIs('Interface')
-             ->raw('not(where( __.out("METHOD")))');
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outis(array('METHOD', 'MAGICMETHOD', 'PPP'))
+                     )
+             )
+             ->hasOut('CONST');
         $this->prepareQuery();
     }
 }
