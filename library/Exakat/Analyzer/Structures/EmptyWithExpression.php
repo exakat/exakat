@@ -31,20 +31,15 @@ class EmptyWithExpression extends Analyzer {
     public function analyze() {
         // $a = 2; empty($a) ; in a row
         // only works for variables
-        $this->atomIs('Assignation')
-             ->outIs('RIGHT')
-             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname'))
-             ->hasAtomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Addition', 'Multiplication', ))
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'storage')
-             ->inIs('LEFT')
-             ->nextSiblings()
-             ->atomInsideNoDefinition('Empty')
+        $this->atomIs('Empty')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'storage')
+             ->raw(<<<GREMLIN
+coalesce( __.hasLabel("Assignation").out("RIGHT"),
+          __.filter{ true; }
+        )
+GREMLIN
+)
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname', 'Array', 'Variable', 'Member', 'Staticproperty', 'Phpvariable'))
              ->back('first');
         $this->prepareQuery();
 

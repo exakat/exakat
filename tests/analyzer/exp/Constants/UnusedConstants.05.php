@@ -9,7 +9,7 @@ $expected     = array('FOO5 = 11',
                      );
 
 $expected_not = array('FOO3',
-                      'FOO',
+                      'FOO = 1',
                       'FOO4',
                      );
 
