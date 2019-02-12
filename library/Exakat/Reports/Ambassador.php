@@ -2686,7 +2686,7 @@ SQL
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable features</td></tr>\n";
             } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
-                if (in_array($ext, $directives)) {
+                if (in_array($ext, $directives, true)) {
                     $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/$ext.json"));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
                 }
@@ -2926,11 +2926,11 @@ SQL
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
             
-            $theTable = array();
+            $theTableArray = array();
             foreach($top as $t) {
-                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+                $theTableArray[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
             }
-            $theTable = implode(PHP_EOL, $theTable);
+            $theTable = implode(PHP_EOL, $theTableArray);
         }
         
         $html = $this->getBasedPage('empty');
@@ -3280,8 +3280,8 @@ SQL
                 continue;
             }
             $parent = strtolower($r[1]);
-            if ($parent[0] != '\\') {
-                $parent = '\\'.$parent;
+            if ($parent[0] !== '\\') {
+                $parent = "\\$parent";
             }
 
             if (!isset($list[$parent])) {
@@ -3422,7 +3422,7 @@ SQL
                                             array_keys($properties),
                                             array_keys($methods)));
         
-        $visibilityTable = <<<HTML
+        $visibilityTable = array(<<<HTML
 <table class="table table-striped">
     <tr>
         <td>&nbsp;</td>
@@ -3434,17 +3434,19 @@ SQL
         <td>Private</td>
         <td>Constant</td>
     </tr>
-HTML;
+HTML
+);
 
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
-            $visibilityTable .= '<tr><td colspan="9">class '.PHPSYntax($class).'</td></tr>'.PHP_EOL.
+            $visibilityTable []= '<tr><td colspan="9">class '.PHPsyntax($class).'</td></tr>'.PHP_EOL.
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '').
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '').
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
         }
 
-        $visibilityTable .= '</table>';
+        $visibilityTable []= '</table>';
+        $visibilityTable = implode(PHP_EOL, $visibilityTable);
 
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'Visibility recommendations');
@@ -3613,13 +3615,13 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['method'], $couldBePrivate[$row['fullnspath']])) {
+                in_array($row['method'], $couldBePrivate[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['method'], $couldBeProtected[$row['fullnspath']])) {
+                in_array($row['method'], $couldBeProtected[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
@@ -3706,13 +3708,13 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBePrivate[$row['fullnspath']])) {
+                in_array($row['constant'], $couldBePrivate[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBeProtected[$row['fullnspath']])) {
+                in_array($row['constant'], $couldBeProtected[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
@@ -3806,19 +3808,19 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBePrivate[$row['fullnspath']])) {
+                in_array($row['property'], $couldBePrivate[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBeProtected[$row['fullnspath']])) {
+                in_array($row['property'], $couldBeProtected[$row['fullnspath']], true)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
             if (isset($couldBeConstant[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBeConstant[$row['fullnspath']])) {
+                in_array($row['property'], $couldBeConstant[$row['fullnspath']], true)) {
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
