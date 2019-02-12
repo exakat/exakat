@@ -1,4 +1,4 @@
-Version 1.6.6 (Jiang, King Qinguang , coming up)
+Version 1.6.7 (Li, King Chujiang, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.6.6 (Jiang, King Qinguang , coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.6 (Jiang, King Qinguang , 2019-02-11)
++ Architecture
+    + Removed FetchContext() from DSL
+    + Added options to follow constants from atomIs.
++ Report
+    + Now dumps magic methods
++ Analyzer
+    + New analysis : Report insufficient interfaces in typehint
+    + Updated analysis : Class constant now ignore empty classes
+    + Checked unit tests : 2837 / 2858 test pass (99% pass)
++ Tokenizer
+    + Moved 'Define' to its own atom
+    + Upgraded Logical to hanlde Strings as PHP
+    + Fixed T_POWER => T_POW
+    + Refactored calculation for globalpath
+    + Fixed edgecase with endswitch;
 
 Version 1.6.5 (Mahagate, 2019-02-04)
 + Architecture
