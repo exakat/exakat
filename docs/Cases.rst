@@ -1431,6 +1431,39 @@ self::$sugar_strptime_long_mon refers to the current class, which extends DateTi
                 }
             }
 
+list() May Omit Variables
+=========================
+
+.. _openconf-structures-listomissions:
+
+OpenConf
+^^^^^^^^
+
+:ref:`list()-may-omit-variables`, in openconf/author/privacy.php:29. 
+
+The first variable in the list(), $none, isn't reused anywhere in the script. In fact, its name convey the meaning that is it useless, but is in the array nonetheless. 
+
+.. code-block:: php
+
+    list($none, $OC_privacy_policy) = oc_getTemplate('privacy_policy');
+
+
+--------
+
+
+.. _fuelcms-structures-listomissions:
+
+FuelCMS
+^^^^^^^
+
+:ref:`list()-may-omit-variables`, in wp-admin/includes/misc.php:74. 
+
+$a is never reused again. $b, on the other hand is. Not assigning any value to $a saves some memory, and avoid polluting the local variable space. 
+
+.. code-block:: php
+
+    list($b, $a) = array(reset($params->me), key($params->me));
+
 Useless Return
 ==============
 
@@ -2268,6 +2301,39 @@ One example where code review reports errors where unit tests don't : array_mult
 .. code-block:: php
 
     array_multisort($order, SORT_NUMERIC, SORT_DESC, $this->results)
+
+Echo With Concat
+================
+
+.. _phpdocumentor-structures-echowithconcat:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`echo-with-concat`, in src/phpDocumentor/Bootstrap.php:76. 
+
+Simply replace the dot by a comma.
+
+.. code-block:: php
+
+    echo 'PROFILING ENABLED' . PHP_EOL
+
+
+--------
+
+
+.. _teampass-structures-echowithconcat:
+
+TeamPass
+^^^^^^^^
+
+:ref:`echo-with-concat`, in includes/libraries/Authentication/Yubico/PEAR.php:162. 
+
+This is less obvious, but turning print to echo, and the double-quoted string to single quoted string will yield the same optimisation.
+
+.. code-block:: php
+
+    print "PEAR constructor called, class=$classname\n";
 
 Could Be Static
 ===============
@@ -3712,6 +3778,22 @@ If trim($attribs['']['mode']) === 'base64', then it is set to lowercase (althoug
 .. code-block:: php
 
     if (isset($attribs['']['mode']) && strtolower(trim($attribs['']['mode']) === 'base64'))
+
+Strings With Strange Space
+==========================
+
+.. _thelia-type-stringwithstrangespace:
+
+Thelia
+^^^^^^
+
+:ref:`strings-with-strange-space`, in templates/backOffice/default/I18n/fr_FR.php:647. 
+
+This is another example with a translation sentence. Here, the unbreakable space is before the question mark : this is a typography rule, that is common to many language. This would be a false positive, unless typography is handled by another part of the software.
+
+.. code-block:: php
+
+    'Mot de passe oublié ?'
 
 No Empty Regex
 ==============

@@ -400,12 +400,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.6.6
+
+  * Insufficient Typehint (Functions/InsufficientTypehint)
+
 * 1.6.5
 
   * Extensions/Extpcov (Extensions/Extpcov ; Appinfo)
   * Extensions/Extweakref (Extensions/Extweakref ; Appinfo)
   * String Initialization (Arrays/StringInitialization)
-  * Variable Is Not A Condition (Structures/NoVariableIsACondition ; Unassigned)
+  * Variable Is Not A Condition (Structures/NoVariableIsACondition ; Analyze)
 
 * 1.6.4
 
@@ -482,7 +486,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.4.9
 
-  * Don't Read And Write In One Expression (Structures/DontReadAndWriteInOneExpression ; Analyze, CompatibilityPHP73)
+  * Don't Read And Write In One Expression (Structures/DontReadAndWriteInOneExpression ; Analyze, CompatibilityPHP73, CompatibilityPHP74)
   * Invalid Pack Format (Structures/InvalidPackFormat ; Analyze)
   * Named Regex (Structures/NamedRegex ; Suggestions)
   * No Reference For Static Property (Php/NoReferenceForStaticProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
@@ -1984,8 +1988,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2005,6 +2009,7 @@ List of external links mentionned in this documentation.
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_
 * `Bitmask Constant Arguments in PHP <https://medium.com/@liamhammett/bitmask-constant-arguments-in-php-cf32bf35c73>`_
+* `Brandon Savage <https://twitter.com/BrandonSavage>`_
 * `browscap <http://browscap.org/>`_
 * `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_
 * `Bzip2 Functions <http://php.net/bzip2>`_
@@ -2132,16 +2137,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2278,8 +2283,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2328,13 +2333,14 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `phpsdl <https://github.com/Ponup/phpsdl>`_
 * `PHPUnit <https://www.phpunit.de/>`_
+* `PMB <https://www.sigb.net/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
@@ -2619,6 +2625,7 @@ _______
 |   analyzer[] = "Functions/DeepDefinitions";
 |   analyzer[] = "Functions/EmptyFunction";
 |   analyzer[] = "Functions/HardcodedPasswords";
+|   analyzer[] = "Functions/InsufficientTypehint";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
@@ -2791,6 +2798,7 @@ _______
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
 |   analyzer[] = "Structures/NoReferenceOnLeft";
 |   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/NoVariableIsACondition";
 |   analyzer[] = "Structures/Noscream";
 |   analyzer[] = "Structures/NotNot";
 |   analyzer[] = "Structures/ObjectReferences";
@@ -3411,7 +3419,8 @@ __________________
 | [CompatibilityPHP74]
 |   analyzer[] = "Arrays/StringInitialization";
 |   analyzer[] = "Php/DetectCurrentClass";
-|   analyzer[] = "Php/IdnUts46";| 
+|   analyzer[] = "Php/IdnUts46";
+|   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 
 
 

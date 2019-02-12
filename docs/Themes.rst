@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 04 Feb 2019 15:15:21 +0000
-.. comment: Generation hash : bfa6f837e9bb15c4c7953838a0f0283d25df07d0
+.. comment: Generation date : Tue, 12 Feb 2019 09:12:32 +0000
+.. comment: Generation hash : 8e1ab55d806d142c0eb6b5916a9a05216a7b22bb
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 354 analysis
+Total : 356 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -192,6 +192,7 @@ Total : 354 analysis
 * :ref:`Inconsistent Elseif <inconsistent-elseif>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
+* :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
@@ -407,6 +408,7 @@ Total : 354 analysis
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`Var Keyword <var-keyword>`
+* :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
 * :ref:`Weak Typing <weak-typing>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
@@ -922,9 +924,10 @@ Total : 10 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 3 analysis
+Total : 4 analysis
 
 * :ref:`Detect Current Class <detect-current-class>`
+* :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`String Initialization <string-initialization>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 

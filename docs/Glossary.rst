@@ -341,6 +341,7 @@ Glossary
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No isset() With empty() <no-isset()-with-empty()>`
+      + :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
 
     + `eval()`
 
@@ -560,6 +561,7 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
       + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
       + :ref:`isset() With Constant <isset()-with-constant>`
 

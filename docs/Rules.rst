@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 04 Feb 2019 15:15:21 +0000
-.. comment: Generation hash : bfa6f837e9bb15c4c7953838a0f0283d25df07d0
+.. comment: Generation date : Tue, 12 Feb 2019 09:12:32 +0000
+.. comment: Generation hash : 8e1ab55d806d142c0eb6b5916a9a05216a7b22bb
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3977,6 +3977,13 @@ As such, they should be PHP constants (build with define or const), or included 
 
 See also `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the class an interface
+* Make the class an abstract class, to avoid its instanciation
+
 +-------------+-----------------------+
 | Short name  | Classes/ConstantClass |
 +-------------+-----------------------+
@@ -6062,15 +6069,15 @@ Suggestions
 
 * Split the expression in two separate expressions
 
-+-------------+--------------------------------------------+
-| Short name  | Structures/DontReadAndWriteInOneExpression |
-+-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73`  |
-+-------------+--------------------------------------------+
-| Severity    | Critical                                   |
-+-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
-+-------------+--------------------------------------------+
++-------------+----------------------------------------------------------------------+
+| Short name  | Structures/DontReadAndWriteInOneExpression                           |
++-------------+----------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
++-------------+----------------------------------------------------------------------+
+| Severity    | Critical                                                             |
++-------------+----------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                      |
++-------------+----------------------------------------------------------------------+
 
 
 
@@ -6627,6 +6634,14 @@ instead of
      echo $a b $c;
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Turn the concatenation into a list of argument, by replacing the dots by commas.
+
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/EchoWithConcat                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -6637,6 +6652,8 @@ instead of
 | Time To Fix | Quick (30 mins)                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpdocumentor-structures-echowithconcat`, :ref:`teampass-structures-echowithconcat`                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -9877,6 +9894,59 @@ See also `Class Abstraction <http://php.net/abstract>`_.
 +-------------+------------------------------------+
 | Time To Fix | Quick (30 mins)                    |
 +-------------+------------------------------------+
+
+
+
+.. _insufficient-typehint:
+
+Insufficient Typehint
+#####################
+
+
+An argument is typehinted, but it actually calls methods that are not listed in the interface.
+
+Classes may be implementing more methods than the one that are listed in the interface they also implements. This means that filtering objecs with a typehint, but calling other methods will be solved at execution time : if the method is available, it will be used; if it is not, a fatal error is reported.
+
+.. code-block:: php
+
+   <?php
+   
+   class x implements i {
+       function methodI() {}
+       function notInI() {}
+   }
+   
+   interface i {
+       function methodI();
+   }
+   
+   function foo(i $x) {
+       $x->methodI(); // this call is valid
+       $x->notInI();  // this call is not garanteed
+   }
+   ?>
+
+
+Inspired by discussion with `Brandon Savage <https://twitter.com/BrandonSavage>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extend the interface with the missing called methods
+* Change the body of the function to use only the methods that are available in the interface
+* Change the used objects so they don't depend on extra methods
+
++-------------+--------------------------------+
+| Short name  | Functions/InsufficientTypehint |
++-------------+--------------------------------+
+| Themes      | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Major                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
 
 
 
@@ -20845,17 +20915,27 @@ This analysis doesn't report Unicode Codepoint Notation : those are visible in t
    ?>
 
 
-See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, and `disallow irregular whitespace (no-irregular-whitespace) <http://eslint.org/docs/rules/no-irregular-whitespace>`_.
+See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, and 
+         `disallow irregular whitespace (no-irregular-whitespace) <http://eslint.org/docs/rules/no-irregular-whitespace>`_.
 
-+-------------+-----------------------------+
-| Short name  | Type/StringWithStrangeSpace |
-+-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the odd spaces with a normal space
+* If unsecable spaces are important for presentation, add them at the templating level.
+
++-------------+-------------------------------------------+
+| Short name  | Type/StringWithStrangeSpace               |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`                            |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`thelia-type-stringwithstrangespace` |
++-------------+-------------------------------------------+
 
 
 
@@ -26596,6 +26676,54 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
 
 
 
+.. _variable-is-not-a-condition:
+
+Variable Is Not A Condition
+###########################
+
+
+Avoid using a lone variable as a condition. It is recommended to use a comparative value, or one of the filtering function, such as `isset() <http://www.php.net/isset>`_, `empty() <http://www.php.net/empty>`_. 
+
+Using the raw variable as a condition blurs the difference between an undefined variable and an empty value. By using an explicit comparison or validation function, it is easier to understand what the variable stands for.
+
+.. code-block:: php
+
+   <?php
+   
+   if (isset($error)) {
+       echo 'Found one error : '.$error!;
+   }
+   
+   //
+   if ($errors) {
+       print count($errors).' errors found : '.join('', $errors).PHP_EOL;
+       echo 'Not found';
+   }
+   
+   ?>
+
+
+Thanks to the `PMB <https://www.sigb.net/>`_ team for the inspiration.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the validation explicit, by using a comparison operator, or one of the validation function.
+
++-------------+-----------------------------------+
+| Short name  | Structures/NoVariableIsACondition |
++-------------+-----------------------------------+
+| Themes      | :ref:`Analyze`                    |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
+
+
+
 .. _weak-typing:
 
 Weak Typing
@@ -28022,15 +28150,25 @@ list() is the only PHP function that accepts to have omitted arguments. If the f
 
 See also `list <http://php.net/manual/en/function.list.php>`_.
 
-+-------------+------------------------------------+
-| Short name  | Structures/ListOmissions           |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the unused variables from the list call
+* When the ignored values are at the beginning or the end of the array, array_slice may be used to shorten the array.
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/ListOmissions                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                   |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`openconf-structures-listomissions`, :ref:`fuelcms-structures-listomissions` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 

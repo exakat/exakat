@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.6.5';
-    const BUILD = 872;
+    const VERSION = '1.6.6';
+    const BUILD = 878;
 
     private $gremlin = null;
     private $config = null;
