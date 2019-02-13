@@ -106,7 +106,7 @@ class Tinkergraph extends Graph {
             return new GraphResults($result);
         } elseif (is_array($result)) {
             return new GraphResults($result);
-        } elseif ($result instanceof stdClass) {
+        } elseif ($result instanceof \stdClass) {
             return new GraphResults($result);
         } else {
             print "Processing unknown type ".gettype($result).PHP_EOL;
@@ -121,7 +121,7 @@ class Tinkergraph extends Graph {
         }
 
         $res = $this->query($query, $params, $load);
-        if (!($res instanceof stdClass) || !isset($res->results)) {
+        if (!($res instanceof \stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
         
