@@ -50,7 +50,7 @@ class Tinkergraph extends Graph {
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
-        assert(in_array($this->gremlinVersion, array('3.2', '3.3')), "Unknown Gremlin version : $this->gremlinVersion\n");
+        assert(in_array($this->gremlinVersion, array('3.2', '3.3', '3.4')), "Unknown Gremlin version : $this->gremlinVersion\n");
 
         $this->db = new Connection(array(
                                      'host'     => $this->config->tinkergraph_host,
@@ -170,10 +170,10 @@ class Tinkergraph extends Graph {
                  "{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml");
         }
 
-        if ($this->gremlinVersion === '3.3') {
-            putenv('GREMLIN_YAML=conf/tinkergraph.3.3.yaml');
+        if (in_array($this->gremlinVersion, array('3.3', '3.4'), true)) {
+            putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.exakat.sh start &");
+            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
             exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
         } else {
@@ -206,8 +206,8 @@ class Tinkergraph extends Graph {
 
     public function stop() {
         if (file_exists("{$this->config->tinkergraph_folder}/db/gremlin.pid")) {
-            display('stop gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/tinkergraph.3.3.yaml');
+            display("stop gremlin server {$this->gremlinVersion}");
+            putenv("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
             shell_exec("cd {$this->config->tinkergraph_folder}; ./bin/gremlin-server.sh stop");
             if (file_exists("{$this->config->tinkergraph_folder}/db/gremlin.pid")) {
@@ -216,7 +216,7 @@ class Tinkergraph extends Graph {
         }
         
         if (file_exists("{$this->config->tinkergraph_folder}/db/tinkergraph.pid")) {
-            display('stop gremlin server 3.2.x');
+            display('stop gremlin server 3.2');
             shell_exec("kill -9 $(cat {$this->config->tinkergraph_folder}/db/tinkergraph.pid) 2>> gremlin.log; rm -f {$this->config->tinkergraph_folder}/db/tinkergraph.pid");
         }
     }
