@@ -157,6 +157,8 @@ class Load extends Tasks {
     
     const STANDALONE_BLOCK         = true;
     const RELATED_BLOCK            = false;
+    
+    const NO_NAMESPACE = 0;
 
     private $contexts              = null;
 
@@ -3952,7 +3954,7 @@ class Load extends Tasks {
 
             $block = self::FULLCODE_BLOCK;
         }
-        $this->setNamespace(0);
+        $this->setNamespace(self::NO_NAMESPACE);
 
         $namespace->code       = $this->tokens[$current][1];
         $namespace->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.$block;
@@ -5725,7 +5727,6 @@ class Load extends Tasks {
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {
                 if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
@@ -5781,10 +5782,8 @@ class Load extends Tasks {
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {
-//                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
                     return array($this->uses['const'][$name->code]->fullnspath, self::ALIASED);
                 } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
@@ -5830,12 +5829,19 @@ class Load extends Tasks {
         }
     }
 
-    private function setNamespace($namespace = 0) {
-        if ($namespace === 0) {
+    private function setNamespace($namespace = self::NO_NAMESPACE) {
+        if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
-            $this->uses = array('function' => array(),
-                                'const'    => array(),
-                                'class'    => array());
+            $this->uses = array('function'       => array(),
+                                'staticmethod'   => array(),
+                                'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                                'staticconstant' => array(),
+                                'property'       => array(),
+                                'staticproperty' => array(),
+                                'const'          => array(),
+                                'define'         => array(),
+                                'class'          => array(),
+                                );
         } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {
