@@ -90,7 +90,7 @@ class Ambassador extends Reports {
 
     public function dependsOnAnalysis() {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
-                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', //'CompatibilityPHP74',
+                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',
                      'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions', 'ClassReview',
                      'Custom',
@@ -205,11 +205,11 @@ class Ambassador extends Reports {
         $this->generateExternalLib();
 
         $this->generateAppinfo();
-        $this->generateFileDependencies();
         $this->generateBugFixes();
-        $this->generatePhpConfiguration();
-        $this->generateExternalServices();
         $this->generateDirectiveList();
+        $this->generatePhpConfiguration();
+        $this->generateFileDependencies();
+        $this->generateExternalServices();
         $this->generateAlteredDirectives();
         $this->generateStats();
         $this->generateComplexExpressions();
@@ -370,7 +370,7 @@ class Ambassador extends Reports {
                                     $this->getIssuesFaceted('Performances') );
     }
 
-    private function generateFavorites() {
+    protected function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
         $favorites = new Favorites($this->config);
@@ -2600,7 +2600,7 @@ HTML;
         $this->putBasedPage('external_services', $html);
     }
 
-    private function generateDirectiveList() {
+    protected function generateDirectiveList() {
         // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
@@ -4428,7 +4428,7 @@ JAVASCRIPT;
         $this->putBasedPage('variables_confusing', $html);
     }
     
-    private function generateAppinfo() {
+    protected function generateAppinfo() {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();
         

@@ -24,6 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
@@ -64,6 +65,14 @@ class Diplomat extends Ambassador {
         $this->themesToShow = 'Analyze';
     }
 
+    public function dependsOnAnalysis() {
+        return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
+                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
+                     'Analyze', 'Preferences', 
+                     'Appinfo', 
+                     );
+    }
+
     protected function getBasedPage($file) {
         static $baseHTML;
 
@@ -84,6 +93,32 @@ class Diplomat extends Ambassador {
           <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
           <li class="treeview">
+            <a href="#"><i class="fa fa-certificate"></i> <span>Compatibility</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="compatibility_compilations.html"><i class="fa fa-circle-o"></i>Compilations</a></li>
+              <li><a href="compatibility_version.html"><i class="fa fa-circle-o"></i>PHP Version</a></li>
+              {{COMPATIBILITIES}}
+              <li><a href="compatibility_issues.html"><i class="fa fa-circle-o"></i>Compatibility Violations</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#"><i class="fa fa-certificate"></i> <span>Favorites</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="favorites_dashboard.html"><i class="fa fa-circle-o"></i>Overview</a></li>
+              <li><a href="favorites_issues.html"><i class="fa fa-circle-o"></i>Violations</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#"><i class="fa fa-sliders"></i> <span>Audit logs</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="appinfo.html"><i class="fa fa-circle-o"></i>Appinfo()</a></li>
+              <li><a href="bugfixes.html"><i class="fa fa-circle-o"></i>Bugfixes</a></li>
+              <li><a href="php_compilation.html"><i class="fa fa-circle-o"></i>PHP Compilation Directives</a></li>
+              <li><a href="directive_list.html"><i class="fa fa-circle-o"></i>Directive List</a></li>
+              <li><a href="extension_list.html"><i class="fa fa-circle-o"></i>Extensions usage</a></li>
+            </ul>
+          </li>        
+          <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
@@ -96,7 +131,14 @@ class Diplomat extends Ambassador {
         <!-- /.sidebar-menu -->
 MENU;
 
+            $compatibilities = [];
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
+            while($row = $res->fetchArray(\SQLITE3_NUM)) {
+                $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
+            }
+
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
+            $baseHTML = $this->injectBloc($baseHTML, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
         }
 
         $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
@@ -124,8 +166,8 @@ MENU;
             return false;
         }
 
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "$folder/.$name";
 
         $this->projectPath = $folder;
 
@@ -138,6 +180,28 @@ MENU;
         $this->generateCodes();
         $files = array('credits');
 
+        // Compatibility
+        $this->generateCompilations();
+        $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
+        $list = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $list[] = 'CompatibilityPHP'.$row['version'];
+            $this->generateCompatibility($row['version']);
+        }
+        $this->generateCompatibilityEstimate();
+        $analyserList = $this->themes->getThemeAnalyzers($list);
+        $this->generateIssuesEngine('compatibility_issues',
+                                    $this->getIssuesFaceted($analyserList));
+
+        // Favorites
+        $this->generateFavorites();
+
+        // audit logs
+        $this->generateAppinfo();
+        $this->generateBugFixes();
+        $this->generateDirectiveList();
+        $this->generatePhpConfiguration();
+
         foreach($files as $file) {
             $baseHTML = $this->getBasedPage($file);
             $this->putBasedPage($file, $baseHTML);
@@ -148,7 +212,7 @@ MENU;
 
     protected function generateIssues() {
         $this->generateIssuesEngine('issues',
-                                    $this->getIssuesFaceted($this->themesToShow) );
+                                    $this->getIssuesFaceted('Top10') );
     }
 }
 
