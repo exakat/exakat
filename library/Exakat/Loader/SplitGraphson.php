@@ -84,7 +84,6 @@ g.V().hasLabel('File').addE('PROJECT').from(__.V($this->projectId));
 GREMLIN;
         $res = $this->graphdb->query($query);
         
-        $outE = array();
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
        
         $total = 0;

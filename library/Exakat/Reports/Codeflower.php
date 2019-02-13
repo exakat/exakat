@@ -145,7 +145,7 @@ SQL
                 $d->name = $e;
                 $d->size = 50;
 
-                foreach($extends2 as $e3 => $extends3) {
+                foreach(array_keys($extends2) as $e3) {
                     $d3 = new \stdClass();
                     $d3->name = $e3;
                     $d3->size = 50;

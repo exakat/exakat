@@ -46,7 +46,6 @@ class ShouldPreprocess extends Analyzer {
         $functionList = makeFullNsPath($functionList);
 
         // Operator only working on constants
-        $tokenList = makeList( self::$FUNCTIONS_TOKENS );
         $this->atomIs(array('Addition',
                             'Multiplication',
                             'Concatenation',

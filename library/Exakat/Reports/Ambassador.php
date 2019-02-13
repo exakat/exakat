@@ -302,7 +302,6 @@ class Ambassador extends Reports {
     }
 
     protected function generateDocumentation($analyzerList){
-        $datas = array();
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $docHTML = [];
 
@@ -3026,7 +3025,7 @@ SQL;
         
         $cells = implode("</td><td>", $traits);
         $rows = implode('', $rows);
-        $theTable =         $thetable = <<<HTML
+        $theTable = <<<HTML
 <table class="table table-striped">
     <tr>
         <td>&nbsp;</td>
