@@ -15,6 +15,7 @@ class D
 
     public function b(array $fArg)
     {
+        $useArg = 1;
         $a = function () use ($useArg) {
             $this->e = $useArg;
             $this->e = $useUnique;

@@ -157,6 +157,8 @@ class Load extends Tasks {
     
     const STANDALONE_BLOCK         = true;
     const RELATED_BLOCK            = false;
+    
+    const NO_NAMESPACE = 0;
 
     private $contexts              = null;
 
@@ -1209,12 +1211,8 @@ class Load extends Tasks {
         // Process return type
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
-                ++$this->id; // Skip NULLABLE
-                $function->nullable = self::NULLABLE;
-            }
+            $returnType = $this->processTypehint();
 
-            $returnType = $this->processOneNsname();
             $this->addLink($function, $returnType, 'RETURNTYPE');
         }
         
@@ -1373,6 +1371,8 @@ class Load extends Tasks {
     private function makeCitBody($class) {
         ++$this->id;
         $rank = -1;
+        $nullable = self::NOT_NULLABLE;
+
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
@@ -1381,6 +1381,10 @@ class Load extends Tasks {
             
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
                 ++$this->id;
+                
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
+                    continue;
+                }
                 $cpm = $this->processPrivate();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1393,6 +1397,9 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PUBLIC) {
                 ++$this->id;
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
+                    continue;
+                }
                 $cpm = $this->processPublic();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1405,6 +1412,9 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PROTECTED) {
                 ++$this->id;
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
+                    continue;
+                }
                 $cpm = $this->processProtected();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1418,12 +1428,14 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FINAL) {
                 ++$this->id;
                 $cpm = $this->processFinal();
+
                 continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_ABSTRACT) {
                 ++$this->id;
                 $cpm = $this->processAbstract();
+
                 continue;
             }
 
@@ -1432,18 +1444,20 @@ class Load extends Tasks {
                 $cpm = $this->processStatic();
                 ++$this->id;
 
-                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
+                if ($cpm instanceof Atom && 
+                    $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, 'PPP');
                 } else {
                     --$this->id;
                 }
+
                 continue;
             }
             
             $cpm = $this->processNext();
             $this->popExpression();
-
+            
             $cpm->rank = ++$rank;
             if ($cpm->atom === 'Usenamespace' ||
                 $cpm->atom === 'Usetrait') {
@@ -1865,6 +1879,13 @@ class Load extends Tasks {
     }
 
     private function processTypehint() {
+         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
+             ++$this->id;
+             $nullable = self::NULLABLE;
+         } else {
+             $nullable = self::NOT_NULLABLE;
+         }
+
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_ARRAY,
                                                             $this->phptokens::T_CALLABLE,
                                                             $this->phptokens::T_STATIC),
@@ -1896,6 +1917,11 @@ class Load extends Tasks {
                 $this->calls->addCall('class', $fullnspath, $nsname);
             }
             
+            if ($nullable === self::NULLABLE) {
+                $nsname->nullable = self::NULLABLE;
+                $nsname->fullcode = "?$nsname->fullcode";
+            }
+
             return $nsname;
         }
         
@@ -1941,22 +1967,13 @@ class Load extends Tasks {
             $rank       = -1;
             $default    = 0;
             $typehint   = 0;
-            $nullable   = self::NOT_NULLABLE;
             $reference  = self::NOT_REFERENCE;
             $variadic   = self::NOT_ELLIPSIS;
 
             while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
                 do {
                     ++$args_max;
-                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
-                        ++$this->id;
-                        $nullable = self::NULLABLE;
-                    } else {
-                        $nullable = self::NOT_NULLABLE;
-                    }
-
                     $typehint = $this->processTypehint();
-
                     ++$this->id;
 
                     if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
@@ -2013,13 +2030,10 @@ class Load extends Tasks {
 
                     $index->rank = ++$rank;
 
-                    if ($nullable === self::NULLABLE) {
-                        $index->nullable = self::NULLABLE;
+                    if ($typehint !== 0) {
                         $this->addLink($index, $typehint, 'TYPEHINT');
-                        $index->fullcode = "?$typehint->fullcode $index->fullcode";
-                    } elseif ($typehint !== 0) {
-                        $this->addLink($index, $typehint, 'TYPEHINT');
-                        $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
+                        $index->fullcode = "$typehint->fullcode $index->fullcode";
+                        $index->nullable = $typehint->nullable;
                     }
 
                     if ($default !== 0) {
@@ -2276,11 +2290,11 @@ class Load extends Tasks {
     private function processVar() {
         $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
-        $typehint = $this->processPropertyTypehint();
+        $typehint = $this->processTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
 
-        if (isset($typehint)) {
+        if (!empty($typehint)) {
             $this->addLink($ppp, $typehint, 'TYPEHINT');
         }
 
@@ -2291,12 +2305,12 @@ class Load extends Tasks {
     private function processPublic() {
         $public = $this->processOptions('Public');
 
-        $typehint = $this->processPropertyTypehint();
+        $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
 
-            if (isset($typehint)) {
+            if (!empty($typehint)) {
                 $this->addLink($ppp, $typehint, 'TYPEHINT');
             }
 
@@ -2310,12 +2324,12 @@ class Load extends Tasks {
     private function processProtected() {
         $protected = $this->processOptions('Protected');
 
-        $typehint = $this->processPropertyTypehint();
+        $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
 
-            if (isset($typehint)) {
+            if (!empty($typehint)) {
                 $this->addLink($ppp, $typehint, 'TYPEHINT');
             }
 
@@ -2329,13 +2343,13 @@ class Load extends Tasks {
     private function processPrivate() {
         $private = $this->processOptions('Private');
 
-        $typehint = $this->processPropertyTypehint();
+        $typehint = $this->processTypehint();
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
             $this->popExpression();
             
-            if (isset($typehint)) {
+            if (!empty($typehint)) {
                 $this->addLink($ppp, $typehint, 'TYPEHINT');
             }
             return $ppp;
@@ -2344,33 +2358,6 @@ class Load extends Tasks {
         }
     }
     
-    private function processPropertyTypehint() {
-        // PHP 7.4 typehint
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_ARRAY,
-                                                            $this->phptokens::T_NAMESPACE),
-                true)) {
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'array'), true)) {
-                $typehint->fullnspath = '\\'.mb_strtolower($typehint->code);
-            } else {
-                list($fullnspath, $aliased) = $this->getFullnspath($typehint, 'class');
-
-                $typehint->fullnspath = $fullnspath;
-                $typehint->aliased    = $aliased;
-                
-                $this->calls->addCall('class', $fullnspath, $typehint);
-            }
-
-            $this->optionsTokens['Typehint'] = $typehint->fullcode;
-            return $typehint;
-        }
-        
-        return null;
-    }
-
     private function processDefineConstant($namecall) {
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
@@ -2736,12 +2723,13 @@ class Load extends Tasks {
 
             return $this->processFunctioncall();
          } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+                                                                   $this->phptokens::T_QUESTION,
                                                                    $this->phptokens::T_STRING,
                                                                    $this->phptokens::T_NAMESPACE),
                             true)) {
             $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
-            $typehint = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+            $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
             
             if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'), true)) {
@@ -3952,7 +3940,7 @@ class Load extends Tasks {
 
             $block = self::FULLCODE_BLOCK;
         }
-        $this->setNamespace(0);
+        $this->setNamespace(self::NO_NAMESPACE);
 
         $namespace->code       = $this->tokens[$current][1];
         $namespace->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.$block;
@@ -5725,7 +5713,6 @@ class Load extends Tasks {
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {
                 if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
@@ -5781,10 +5768,8 @@ class Load extends Tasks {
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {
-//                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
                     return array($this->uses['const'][$name->code]->fullnspath, self::ALIASED);
                 } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
-//                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
                     return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
@@ -5830,12 +5815,19 @@ class Load extends Tasks {
         }
     }
 
-    private function setNamespace($namespace = 0) {
-        if ($namespace === 0) {
+    private function setNamespace($namespace = self::NO_NAMESPACE) {
+        if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
-            $this->uses = array('function' => array(),
-                                'const'    => array(),
-                                'class'    => array());
+            $this->uses = array('function'       => array(),
+                                'staticmethod'   => array(),
+                                'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                                'staticconstant' => array(),
+                                'property'       => array(),
+                                'staticproperty' => array(),
+                                'const'          => array(),
+                                'define'         => array(),
+                                'class'          => array(),
+                                );
         } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {

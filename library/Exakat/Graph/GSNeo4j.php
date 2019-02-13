@@ -51,9 +51,9 @@ class GSNeo4j extends Graph {
         
         $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->gsneo4j_folder}/lib/"));
         $gremlinVersion = basename(array_pop($gremlinJar));
-        // 3.3 or 3.2
+        // 3.4 or 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
-        assert(in_array($this->gremlinVersion, array('3.2', '3.3')), "Unknown Gremlin version : $this->gremlinVersion\n");
+        assert(in_array($this->gremlinVersion, array('3.2', '3.3', '3.4')), "Unknown Gremlin version : $this->gremlinVersion\n");
 
         $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
                                           'port'     => $this->config->gsneo4j_port,
@@ -170,11 +170,11 @@ class GSNeo4j extends Graph {
                   "{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
         }
 
-        if ($this->gremlinVersion === '3.3') {
-            display('start gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
+        if (in_array($this->gremlinVersion, array('3.3', '3.4'))) {
+            display("start gremlin server {$this->gremlinVersion}.x");
+            putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/gsneo4j.3.3.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
             display('start gremlin server 3.2.x');
             exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/gsneo4j.3.2.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ");

@@ -746,8 +746,6 @@ GREMLIN;
         $classes = $this->gremlin->query($query);
 
         $total = 0;
-        $extendsId = array();
-        $implementsId = array();
         $usesId = array();
         
         $cit = array();

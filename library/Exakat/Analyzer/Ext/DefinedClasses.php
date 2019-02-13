@@ -42,7 +42,9 @@ class DefinedClasses extends Analyzer {
     public function getAnalyzerList() {
         foreach($this->config->ext->getPharList() as $phar) {
             $ext = basename($phar, '.phar');
-            $this->analyzerList[] = "{$ext}/{$ext}Usage";
+            if (class_exists("{$ext}/{$ext}Usage")) {
+                $this->analyzerList[] = "{$ext}/{$ext}Usage";
+            }
         }
         
         return $this->analyzerList;

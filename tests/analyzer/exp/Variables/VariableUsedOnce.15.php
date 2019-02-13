@@ -2,11 +2,11 @@
 
 $expected     = array('$a',
                       '$useUnique',
+                      '$useArg',
                       '$fUnique',
                      );
 
-$expected_not = array('$useArg',
-                      '$fArg',
+$expected_not = array('$fArg',
                      );
 
 ?>
