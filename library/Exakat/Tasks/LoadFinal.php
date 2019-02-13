@@ -449,7 +449,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .filter{ name in arg1 }
      .addE("DEFINITION")
      .from( 
-        g.V().hasLabel("Defineconstant")
+        __.V().hasLabel("Defineconstant")
              .as("a").out("NAME").hasLabel("String")
              .has("fullnspath")
              .filter{ it.get().value("fullnspath") == name}.select("a")
@@ -472,7 +472,7 @@ g.V().hasLabel("Identifier", "Nsname")
      }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Defineconstant")
+        __.V().hasLabel("Defineconstant")
              .as("a").out("NAME").hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
       ).count()
@@ -494,7 +494,7 @@ g.V().hasLabel("Identifier", "Nsname")
      }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Const")
+        __.V().hasLabel("Const")
              .not( where( __.in("CONST") ) ) 
              .out("CONST")
              .out("NAME")

@@ -79,7 +79,7 @@ class SplitGraphson extends Loader {
         $begin = microtime(true);
         $query = <<<GREMLIN
 
-g.V().hasLabel('File').addE('PROJECT').from(g.V($this->projectId));
+g.V().hasLabel('File').addE('PROJECT').from(__.V($this->projectId));
 
 GREMLIN;
         $res = $this->graphdb->query($query);
@@ -167,6 +167,7 @@ GREMLIN;
                     fclose($fp);
                     
                     $res = $this->graphdb->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
+                    assert(isset($res[0]['id']), 'No Id provided'.var_export($res, true));
                     $this->projectId = $res[0]['id'];
                     $this->project = $atom;
                 }
