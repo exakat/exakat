@@ -284,57 +284,74 @@ LICENCE;
     }
 
     public function pharBuild() {
-        
-        echo "Building version ".Exakat::VERSION."\n";
-        
-        if (file_exists('./exakat.phar')) {
-            $res = shell_exec('php exakat.phar version');
-            
-            if (preg_match('/Version : '.Exakat::VERSION.' - Build /', $res)) {
-                print 'Attempt to build the current version. Aborting.'.PHP_EOL;
-                return;
-            }
-            
-        }
         shell_exec('composer update --no-dev');
 
-        if (file_exists('exakat.phar')) {
-            unlink('exakat.phar');
-        }
+if (file_exists('exakat.phar')) { 
+    unlink('exakat.phar');
+}
+
+$php = file_get_contents('library/Exakat/Exakat.php');
+preg_match('/BUILD = (\d+)/is', $php, $r);
+$php = preg_replace('/'.$r[0].'/is', 'BUILD = '.($r[1] + 1), $php);
+file_put_contents('library/Exakat/Exakat.php', $php);
 
 // create with alias "project.phar"
-        $phar = new Phar('exakat.phar', 0, 'exakat.phar');
-        $stub = <<<'PHP'
+$phar = new Phar('exakat.phar', 0, 'exakat.phar');
+$stub = <<<'PHP'
 #!/usr/bin/env php
 <?php
 Phar::mapPhar();
 include 'phar://exakat.phar/exakat';
-__HALT_
+__HALT_C
 PHP
-.'COMPILER();';
-        $phar->setStub($stub);
+.
+<<<PHP
+OMPILER();
+PHP;
+$phar->setStub($stub);
 
-        $phar->addFile('exakat');
+$phar->addFile('exakat');
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/devfaceted')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/codeflower')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/clang')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/simpletable')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/dependencywheel')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/dependencies')) as $file => $b) {
+    if (basename($file) === '.') {continue; }
+    if (basename($file) === '..') {continue; }
+    $phar->addFile($file, str_replace(__DIR__, '', $file));
+}
+$phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/library')), __DIR__);
+$phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/data')),    __DIR__);
+$phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/server')),  __DIR__);
+$phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/vendor')),  __DIR__);
+$phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/human')),   __DIR__);
 
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/library')), __DIR__);
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/data')),    __DIR__);
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/server')),  __DIR__);
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/vendor')),  __DIR__);
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/human')),   __DIR__);
-        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/devfaceted')),   __DIR__);
+shell_exec('composer update');
 
+print "Produced ".ceil(filesize('exakat.phar') / 1024 / 1024)."Mo \n";
+copy('exakat.phar', '../release/exakat.phar');
 
-//        $this->loadFileInPhar($phar, '/media/devfaceted');
-/*
-        $this->loadFileInPhar($phar, '/media/codeflower');
-        $this->loadFileInPhar($phar, '/media/clang');
-        $this->loadFileInPhar($phar, '/media/simpletable');
-        $this->loadFileInPhar($phar, '/media/dependencywheel');
-        $this->loadFileInPhar($phar, '/media/dependencies');
-*/
-        shell_exec('composer update');
-
-        print "Produced ".ceil(filesize('exakat.phar') / 1024 / 1024)."Mo \n";
     }
     
     private function loadFileInPhar($phar, $dir) {
@@ -782,34 +799,14 @@ JOIN categories
             ->files()
             ->name('*.php');
             
-        $errors53 = array();
-        $errors54 = array();
-        $errors55 = array();
         $errors56 = array();
         $errors70 = array();
         $errors71 = array();
         $errors72 = array();
         $errors73 = array();
+        $errors74 = array();
         $total = count($files);
         foreach($files as $file) {
-            $res = shell_exec('php53 -l '.$file);
-            
-            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors53[(string) $file] = $res;
-            }
-
-            $res = shell_exec('php54 -l '.$file);
-            
-            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors54[(string) $file] = $res;
-            }
-
-            $res = shell_exec('php55 -l '.$file);
-            
-            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors55[(string) $file] = $res;
-            }
-
             $res = shell_exec('php56 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
@@ -839,16 +836,20 @@ JOIN categories
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
                 $errors73[(string) $file] = $res;
             }
+
+            $res = shell_exec('php74 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors73[(string) $file] = $res;
+            }
         }
         
-        $this->reportCompilation($errors53, '5.3', $total);
-        $this->reportCompilation($errors54, '5.4', $total);
-        $this->reportCompilation($errors55, '5.5', $total);
         $this->reportCompilation($errors56, '5.6', $total);
         $this->reportCompilation($errors70, '7.0', $total);
         $this->reportCompilation($errors71, '7.1', $total);
         $this->reportCompilation($errors72, '7.2', $total);
         $this->reportCompilation($errors73, '7.3', $total);
+        $this->reportCompilation($errors73, '7.4', $total);
     }
     
     private function reportCompilation($errors, $version, $total) {
@@ -926,8 +927,7 @@ SQL
         }
         */
 
-        print "\n";
-        print $errors." errors\n\n";
+        print "\n$errors errors\n\n";
     }
     
     public function checkComposerData() {
