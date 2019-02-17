@@ -3626,7 +3626,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td class="exakat_short_text">'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3719,7 +3719,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
         
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td class="exakat_short_text">'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3803,6 +3803,8 @@ SQL
                 $theClass = $row['fullnspath'].':'.$row['theClass'];
                 $aClass = array();
             }
+            
+            list($row['property'], ) = explode(' = ', $row['property']);
 
             $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
@@ -3824,7 +3826,7 @@ SQL
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td class="exakat_short_text">'.
                             implode('</td><td>', $visibilities)
                             .'</td></tr>'.PHP_EOL;
         }
