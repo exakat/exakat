@@ -1581,7 +1581,7 @@ HTML;
         return $result->fetchArray(\SQLITE3_NUM);
     }
 
-    private function generateAnalyzers() {
+    protected function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyzers');
@@ -1610,11 +1610,10 @@ HTML;
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
-        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
-        FROM results
-        WHERE analyzer IN ($list)
-        GROUP BY analyzer
-        HAVING Issues > 0
+SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY analyzer
 SQL
         );
 
@@ -1693,7 +1692,7 @@ SQL;
         $this->putBasedPage('no_issues', $finalHTML);
     }
 
-    private function generateFiles() {
+    protected function generateFiles() {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage('files');
@@ -2010,7 +2009,7 @@ $issues
           '<td width="16%"><%= obj.recipe %></td>' +
         '</tr>' +
         '<tr class="fullcode">' +
-          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
+          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" class="btn btn-info">View File</a></div></pre></td>' +
         '</tr>';
       var settings = { 
         items           : data_items,

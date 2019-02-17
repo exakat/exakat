@@ -62,7 +62,7 @@ class Diplomat extends Ambassador {
             $this->severities        = $this->themes->getSeverities();
         }
 
-        $this->themesToShow = 'Analyze';
+        $this->themesToShow = 'Top10';
     }
 
     public function dependsOnAnalysis() {
@@ -117,11 +117,14 @@ class Diplomat extends Ambassador {
               <li><a href="directive_list.html"><i class="fa fa-circle-o"></i>Directive List</a></li>
               <li><a href="extension_list.html"><i class="fa fa-circle-o"></i>Extensions usage</a></li>
             </ul>
-          </li>        
+          </li>
+          <li><a href="files.html"><i class="fa fa-file-code-o"></i> <span>Files</span></a></li>
+          <li><a href="analyzers.html"><i class="fa fa-line-chart"></i> <span>Analyzers</span></a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
+              <li><a href="proc_analyzers.html"><i class="fa fa-circle-o"></i>Processed Analyzers</a></li>
               <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
               <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Documentation</a></li>
               <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
@@ -141,7 +144,7 @@ MENU;
             $baseHTML = $this->injectBloc($baseHTML, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/{$file}.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -173,12 +176,19 @@ MENU;
 
         $this->initFolder();
         $this->generateDashboard();
+
         $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
         $this->generateIssues();
         $this->generateSettings();
+        
+        // annex
         $this->generateAnalyzerSettings();
         $this->generateCodes();
         $files = array('credits');
+        $this->generateAnalyzersList();
+
+        $this->generateFiles();
+        $this->generateAnalyzers();
 
         // Compatibility
         $this->generateCompilations();
@@ -214,6 +224,49 @@ MENU;
         $this->generateIssuesEngine('issues',
                                     $this->getIssuesFaceted('Top10') );
     }
+
+    public function getIssuesBreakdown() {
+       $list = 'IN ('.makeList($this->themes->getThemeAnalyzers('Top10')).')';
+       $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer $list AND count > 0";
+       $res = $this->sqlite->query($query);
+
+       $data = array();
+       while($row = $res->fetchArray(\SQLITE3_ASSOC)){
+           $description = $this->getDocs($row['analyzer']);
+           $data[$description['name']] = $row['count'];
+       }
+
+        // ordonné DESC par valeur
+        uasort($data, function ($a, $b) {
+            return $b <=> $a;
+        });
+        $final = array_slice($data, 0, 3);
+        $others = array_slice($data, 4);
+        $final['Others'] = array_sum($others);
+
+        $issuesHtml = array();
+        $dataScript = array();
+
+        foreach ($final as $key => $value) {
+            $issuesHtml []= '<div class="clearfix">
+                   <div class="block-cell">'.$key.'</div>
+                   <div class="block-cell text-center">'.$value.'</div>
+                 </div>';
+            $dataScript[] = '{label: "'.$key.'", value: '.( (int) $value).'}';
+        }
+        
+        $issuesHtml = array_pad($issuesHtml, 4, '<div class="clearfix">
+                   <div class="block-cell">&nbsp;</div>
+                   <div class="block-cell text-center">&nbsp;</div>
+                 </div>');
+
+        $issuesHtml = implode('', $issuesHtml);
+        $dataScript = implode(', ', $dataScript);
+
+        return array('html'   => $issuesHtml,
+                     'script' => $dataScript);
+    }
 }
+
 
 ?>
