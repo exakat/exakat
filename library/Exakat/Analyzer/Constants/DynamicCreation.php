@@ -20,30 +20,17 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Variables;
+namespace Exakat\Analyzer\Constants;
 
 use Exakat\Analyzer\Analyzer;
 
-class VariableUsedOnce extends Analyzer {
+class DynamicCreation extends Analyzer {
     public function analyze() {
-        //Variables mentionned once in the whole application. Just once.
-        $this->atomIs(self::$VARIABLES_USER)
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->inIs(array('NAME', 'USE'))
-             )
-             ->groupCount('code')
-             ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
-        $usedOnce = $this->rawQuery()->toArray();
-        
-        if (empty($usedOnce)) {
-            return;
-        }
-        
-        $this->atomIs(self::$VARIABLES_USER)
-             ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+        // define($x, $y)
+        $this->atomIs('Defineconstant')
+             ->outIs(array('VALUE', 'NAME'))
+             ->isNot('constant', true)
+             ->back('first');
         $this->prepareQuery();
     }
 }

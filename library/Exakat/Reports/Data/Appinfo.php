@@ -183,6 +183,7 @@ class Appinfo extends Data {
 
                     'Constants' => array(
                             'Constants'           => 'Constants/ConstantUsage',
+                            'Dynamically create'  => 'Constants/DynamicCreations',
                             'Case Insensitive'    => 'Constants/CaseInsensitiveConstants',
                             'Boolean'             => 'Boolean',
                             'Null'                => 'Null',

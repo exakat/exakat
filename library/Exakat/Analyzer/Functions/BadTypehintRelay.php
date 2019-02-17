@@ -20,30 +20,32 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Variables;
+namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 
-class VariableUsedOnce extends Analyzer {
+class BadTypehintRelay extends Analyzer {
     public function analyze() {
-        //Variables mentionned once in the whole application. Just once.
-        $this->atomIs(self::$VARIABLES_USER)
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->inIs(array('NAME', 'USE'))
-             )
-             ->groupCount('code')
-             ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
-        $usedOnce = $this->rawQuery()->toArray();
+        // foo(A $a) { goo($a); } function goo(B $a) {}
         
-        if (empty($usedOnce)) {
-            return;
-        }
-        
-        $this->atomIs(self::$VARIABLES_USER)
-             ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+        // todo : handle class hierarchy
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->savePropertyAs('fullnspath', 'typehint')
+             ->inIs('TYPEHINT')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->savePropertyAs('rank', 'theRank')
+             ->inIs('ARGUMENT')
+             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->inIs('DEFINITION')
+             ->_as('result')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('rank', 'theRank')
+             ->outIs('TYPEHINT')
+             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->back('result');
         $this->prepareQuery();
     }
 }

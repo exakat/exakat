@@ -102,6 +102,10 @@ class Constant extends Plugin {
                 $atom->constant = $extras['YIELD']->constant;
                 break;
 
+            case 'Defineconstant' :
+                $atom->constant = $extras['NAME']->constant && $extras['VALUE']->constant;
+                break;
+
             case 'Ternary' :
                 $atom->constant = $extras['CONDITION']->constant &&
                                   $extras['THEN']->constant      &&

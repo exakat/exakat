@@ -473,6 +473,11 @@ class Project extends Tasks {
         }
         
         $sqlite = new \Sqlite3($sqliteFilePrevious);
+        $res = $sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="hash"');
+        if ($res === false) {
+            return;
+        }
+
         $res = $sqlite->query('SELECT value FROM hash WHERE key="vcs_revision"');
         if ($res === false) {
             return;
