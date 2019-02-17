@@ -223,8 +223,8 @@ TEXT
         if (!file_exists("{$this->config->projects_root}/projects/test")) {
             $args = array ( 1 => 'init',
                             2 => '-p',
-                            3 => 'test',
-                        );
+                            3 => 'test2',
+                          );
             $initConfig = new Config($args);
 
             $init = new Initproject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
