@@ -83,7 +83,7 @@ class Config {
             } else {
                 $this->projects_root = dirname(__DIR__, 2);
             }
-            $this->ext_root      = $this->dir_root;
+            $this->ext_root      = "{$this->dir_root}/ext";
 
             // autoload extensions
             $this->ext = new \AutoloadExt("{$this->ext_root}/ext");
