@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('define(\'a\'.$e, 3 + 4)',
+$expected     = array('define(\'a\' . $e, 3 + 4)',
                       'define(\'a\', $f + 3 + 4)',
                      );
 
