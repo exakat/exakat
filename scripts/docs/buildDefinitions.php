@@ -592,8 +592,14 @@ $exampleTxt
     }
 
     private function glossary($title, $description) {
-        $alt = implode('|',array_keys($this->entries));
-        $alt = str_replace(array('*','(',')', '$', '.'), array('\\*','\(','\)', '\\$', '\\.'), $alt);
+        $chunks = array_chunk(array_keys($this->entries), 1000);
+        
+        $alts = array();
+        foreach($chunks as $chunk) {
+            $alt = implode('|',$chunk);
+            $alt = str_replace(array('*','(',')', '$', '.'), array('\\*','\(','\)', '\\$', '\\.'), $alt);
+            $alts []= '/([^a-zA-Z_`])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])/is';
+        }
         
         $cbGlossary = function ($r) use ($title) {
             $letter = strtoupper($r[2]{0});
@@ -619,7 +625,7 @@ $exampleTxt
         };
         $description = preg_replace_callback('/<\\?php.*?\\?>/s', $saveCode, $description);
 
-        $description = preg_replace_callback('/([^a-zA-Z_`])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])/is', $cbGlossary, ' '.$description);
+        $description = preg_replace_callback($alts, $cbGlossary, ' '.$description);
 
         $restoreCode = function ($x) use ($codes) {
             return $codes[$x[1]];
@@ -780,13 +786,30 @@ SPHINX;
 
     private function prepareText() {
         $recipesList = '"'.implode('","',$this->recipes).'"';
-        $ini = parse_ini_file('./data/php_functions.ini');
-        foreach($ini['functions'] as &$f) {
+        $ext = glob('./human/en/Extensions/Ext*.ini');
+        $functions = array();
+        foreach($ext as $e) {
+            if (preg_match('/Extensions\/Ext(.*?).ini/', $e, $r)) {
+                $functions[] = "./data/$r[1].ini";
+            }
+        }
+        $inis = array();
+        foreach($functions as $function) { 
+            $ini = parse_ini_file($function);
+            if (!isset($ini['functions'])) { continue; }
+            if (empty($ini['functions'])) { continue; }
+            
+            $inis[] = array_filter($ini['functions']);
+        }
+        $ini = array_merge(...$inis);
+        $ini = array_unique($ini);
+        
+        foreach($ini as &$f) {
             $f .= '()';
         }
         unset($f);
         
-        $this->entries = array_flip($ini['functions']);
+        $this->entries = array_flip($ini);
         foreach($this->entries as $f => &$link) {
             $link = 'http://www.php.net/'.substr($f, 0, -2);
         }
