@@ -103,7 +103,7 @@ class Constant extends Plugin {
                 break;
 
             case 'Defineconstant' :
-                $atom->constant = $extras['NAME']->constant && $extras['VALUE']->constant;
+                $atom->constant = $extras['NAME']->constant && $extras['VALUE']->constant ?? false;
                 break;
 
             case 'Ternary' :
