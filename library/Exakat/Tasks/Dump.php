@@ -223,6 +223,12 @@ SQL;
             $this->collectDefinitionsStats();
             $end = microtime(true);
             $this->log->log( 'Collected Definitions stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+
+            $begin = $end;
+            $this->collectClassDepth();
+            $end = microtime(true);
+            $this->log->log( 'Collected Classes stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+
         }
 
         $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
@@ -1727,7 +1733,14 @@ GREMLIN;
 
         display( "$name : ".count($values));
     }
-    
+
+    private function collectClassDepth() {
+        $query = <<<GREMLIN
+g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
+GREMLIN;
+        $this->collectHashCounts($query, 'Class Depth');
+    }
+
     private function collectParameterCounts() {
         $query = <<<GREMLIN
 g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
