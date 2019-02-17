@@ -32,7 +32,7 @@ class VariableUsedOnce extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->inIs('NAME')
+                     ->inIs(array('NAME', 'USE'))
              )
              ->groupCount('code')
              ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
