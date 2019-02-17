@@ -44,7 +44,7 @@ class Regex extends Analyzer {
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
-        $this->atomFunctionIs($pregFunctions)
+        $this->atomFunctionIs($pregFunctions    )
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
