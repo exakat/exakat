@@ -60,6 +60,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Simple
 * Stats
 * Suggestions
+* Top10
 * Unassigned
 * Under Work
 
@@ -400,9 +401,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.6.7
+
+  * Constant Dynamic Creation (Constants/DynamicCreation)
+
 * 1.6.6
 
-  * Insufficient Typehint (Functions/InsufficientTypehint)
+  * Functions/BadTypehintRelay (Functions/BadTypehintRelay)
+  * Insufficient Typehint (Functions/InsufficientTypehint ; Analyze)
 
 * 1.6.5
 
@@ -413,7 +419,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.4
 
-  * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions)
+  * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions, Top10)
   * Ext/DefinedClasses (Ext/DefinedClasses)
   * Use Coalesce Equal (Structures/UseCoalesceEqual ; )
 
@@ -427,7 +433,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.1
 
-  * Possible Missing Subpattern (Php/MissingSubpattern ; Analyze)
+  * Possible Missing Subpattern (Php/MissingSubpattern ; Analyze, Top10)
   * array_key_exists() Speedup (Performances/ArrayKeyExistsSpeedup)
 
 * 1.5.8
@@ -469,7 +475,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.5.2
 
   * PHP Exception (Exceptions/IsPhpException)
-  * Should Yield With Key (Functions/ShouldYieldWithKey ; Analyze)
+  * Should Yield With Key (Functions/ShouldYieldWithKey ; Analyze, Top10)
   * ext/decimal (Extensions/Extdecimal ; Appinfo)
   * ext/psr (Extensions/Extpsr ; Appinfo)
 
@@ -759,7 +765,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php 7.2 New Class (Php/Php72NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Slice Arrays First (Arrays/SliceFirst)
   * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze, CompatibilityPHP73)
-  * Use List With Foreach (Structures/UseListWithForeach ; Suggestions)
+  * Use List With Foreach (Structures/UseListWithForeach ; Suggestions, Top10)
   * Use PHP7 Encapsed Strings (Performances/PHP7EncapsedStrings ; Performances)
   * ext/vips (Extensions/Extvips ; Appinfo, Appcontent)
 
@@ -773,7 +779,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.0.1
 
   * Could Be Else (Structures/CouldBeElse ; Analyze)
-  * Next Month Trap (Structures/NextMonthTrap ; Analyze)
+  * Next Month Trap (Structures/NextMonthTrap ; Analyze, Top10)
   * Printf Number Of Arguments (Structures/PrintfArguments ; Analyze)
   * Simple Switch (Performances/SimpleSwitch)
   * Substring First (Performances/SubstrFirst ; Performances, Suggestions)
@@ -951,7 +957,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.0
 
-  * Could Use str_repeat() (Structures/CouldUseStrrepeat ; Analyze, Level 1)
+  * Could Use str_repeat() (Structures/CouldUseStrrepeat ; Analyze, Level 1, Top10)
   * Crc32() Might Be Negative (Php/Crc32MightBeNegative ; Analyze, PHP recommendations)
   * Empty Final Element (Arrays/EmptyFinal)
   * Strings With Strange Space (Type/StringWithStrangeSpace ; Analyze)
@@ -1095,7 +1101,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * More Than One Level Of Indentation (Structures/OneLevelOfIndentation ; Calisthenics)
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71)
-  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Codacy, Simple, Suggestions, Level 4)
+  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Codacy, Simple, Suggestions, Level 4, Top10)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Codacy, Simple, Level 1)
 
 * 0.8.7
@@ -1218,7 +1224,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
   * Custom Constant Usage (Constants/CustomConstantUsage ; )
-  * Dangling Array References (Structures/DanglingArrayReferences ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple, Level 1)
+  * Dangling Array References (Structures/DanglingArrayReferences ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple, Level 1, Top10)
   * Deep Definitions (Functions/DeepDefinitions ; Analyze, Appinfo, Codacy, Simple)
   * Define With Array (Php/DefineWithArray ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Defined Class Constants (Classes/DefinedConstants ; Internal)
@@ -1269,7 +1275,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Exit-like Methods (Functions/KillsApp ; Internal)
   * Exponent Usage (Php/ExponentUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * External Config Files (Files/Services ; Internal)
-  * Failed Substr Comparison (Structures/FailingSubstrComparison ; Analyze, Codacy, Simple, Level 3)
+  * Failed Substr Comparison (Structures/FailingSubstrComparison ; Analyze, Codacy, Simple, Level 3, Top10)
   * File Is Component (Files/IsComponent ; Internal)
   * File Uploads (Structures/FileUploadUsage ; Appinfo)
   * File Usage (Structures/FileUsage ; Appinfo)
@@ -1358,7 +1364,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Locally Unused Property (Classes/LocallyUnusedProperty ; Dead code, Codacy, Simple)
   * Locally Used Property (Classes/LocallyUsedProperty ; Internal)
   * Logical Mistakes (Structures/LogicalMistakes ; Analyze, Codacy, Simple, Level 1)
-  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 2)
+  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 2, Top10)
   * Lone Blocks (Structures/LoneBlock ; Analyze, Codacy, Simple, Level 4)
   * Lost References (Variables/LostReferences ; Analyze, Codacy, Simple)
   * Magic Constant Usage (Constants/MagicConstantUsage ; Appinfo)
@@ -1402,7 +1408,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * New Functions In PHP 5.6 (Php/Php56NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * New Functions In PHP 7.0 (Php/Php70NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * New Functions In PHP 7.1 (Php/Php71NewFunctions ; CompatibilityPHP71)
-  * No Choice (Structures/NoChoice ; Analyze, Codacy, Simple, Level 2)
+  * No Choice (Structures/NoChoice ; Analyze, Codacy, Simple, Level 2, Top10)
   * No Count With 0 (Performances/NotCountNull ; Performances)
   * No Direct Access (Structures/NoDirectAccess ; Appinfo)
   * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Codacy, Level 2)
@@ -1415,11 +1421,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Parenthesis For Language Construct (Structures/NoParenthesisForLanguageConstruct ; Analyze, ClearPHP, RadwellCodes, Codacy, Simple, Suggestions, Level 2)
   * No Plus One (Structures/PlusEgalOne ; Coding Conventions, OneFile)
   * No Public Access (Classes/NoPublicAccess ; Analyze, Codacy)
-  * No Real Comparison (Type/NoRealComparison ; Analyze, Codacy, Simple, Level 2)
+  * No Real Comparison (Type/NoRealComparison ; Analyze, Codacy, Simple, Level 2, Top10)
   * No Self Referencing Constant (Classes/NoSelfReferencingConstant ; Analyze, Codacy, Simple, LintButWontExec)
   * No String With Append (Php/NoStringWithAppend ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, Codacy, Simple, Suggestions, Level 2)
-  * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Codacy, Simple, Level 2)
+  * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, Codacy, Simple, Suggestions, Level 2, Top10)
+  * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Codacy, Simple, Level 2, Top10)
   * Non Ascii Variables (Variables/VariableNonascii ; Analyze, Codacy)
   * Non Static Methods Called In A Static (Classes/NonStaticMethodsCalledStatic ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Codacy, Simple)
   * Non-constant Index In Array (Arrays/NonConstantArray ; Analyze, Codacy, Simple)
@@ -1433,7 +1439,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
   * Null Coalesce (Php/NullCoalesce ; )
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
-  * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
+  * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2, Top10)
   * Octal Glossary (Type/Octal ; Appinfo)
   * Old Style Constructor (Classes/OldStyleConstructor ; Analyze, Appinfo, OneFile, ClearPHP, Codacy, Simple)
   * Old Style __autoload() (Php/oldAutoloadUsage ; Analyze, OneFile, ClearPHP, Codacy, Simple)
@@ -1469,7 +1475,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php 7 Indirect Expression (Variables/Php7IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * Php 7.1 New Class (Php/Php71NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * Phpinfo (Structures/PhpinfoUsage ; Analyze, Security, OneFile, Codacy, Simple)
+  * Phpinfo (Structures/PhpinfoUsage ; Security, OneFile, Codacy, Simple)
   * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple, Level 4)
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
@@ -1481,7 +1487,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Internal)
   * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
-  * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1)
+  * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1, Top10)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
   * Real Functions (Functions/RealFunctions ; Appcontent, Stats)
   * Real Variables (Variables/RealVariables ; Appcontent, Stats)
@@ -1495,7 +1501,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * References (Variables/References ; Appinfo)
   * Register Globals (Security/RegisterGlobals ; Security)
   * Relay Function (Functions/RelayFunction ; Analyze, Codacy)
-  * Repeated print() (Structures/RepeatedPrint ; Analyze, Codacy, Simple, Suggestions, Level 3)
+  * Repeated print() (Structures/RepeatedPrint ; Analyze, Codacy, Simple, Suggestions, Level 3, Top10)
   * Reserved Keywords In PHP 7 (Php/ReservedKeywords7 ; CompatibilityPHP70)
   * Resources Usage (Structures/ResourcesUsage ; Appinfo)
   * Results May Be Missing (Structures/ResultMayBeMissing ; Analyze, Codacy, Simple)
@@ -1507,7 +1513,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Same Conditions In Condition (Structures/SameConditions ; Analyze, Codacy, Simple)
   * Scalar Typehint Usage (Php/ScalarTypehintUsage ; Appinfo)
   * Sensitive Argument (Security/SensitiveArgument ; Internal)
-  * Sequences In For (Structures/SequenceInFor ; Analyze, Codacy)
+  * Sequences In For (Structures/SequenceInFor ; Codacy)
   * Setlocale() Uses Constants (Structures/SetlocaleNeedsConstants ; CompatibilityPHP70)
   * Several Instructions On The Same Line (Structures/OneLineTwoInstructions ; Analyze, Codacy)
   * Shell Usage (Structures/ShellUsage ; Appinfo)
@@ -1535,7 +1541,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Strict Comparison With Booleans (Structures/BooleanStrictComparison ; Analyze, Codacy, Simple, Suggestions, Level 2)
   * String May Hold A Variable (Type/StringHoldAVariable ; Analyze, Codacy, Simple)
   * String glossary (Type/String ; )
-  * Strpos()-like Comparison (Structures/StrposCompare ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple, Level 2)
+  * Strpos()-like Comparison (Structures/StrposCompare ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple, Level 2, Top10)
   * Super Global Usage (Php/SuperGlobalUsage ; Appinfo)
   * Super Globals Contagion (Security/SuperGlobalContagion ; Internal)
   * Switch To Switch (Structures/SwitchToSwitch ; Analyze, RadwellCodes, Codacy, Simple)
@@ -1579,7 +1585,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unreachable Code (Structures/UnreachableCode ; Dead code, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 3)
   * Unresolved Catch (Classes/UnresolvedCatch ; Dead code, ClearPHP)
   * Unresolved Classes (Classes/UnresolvedClasses ; Analyze, Codacy)
-  * Unresolved Instanceof (Classes/UnresolvedInstanceof ; Analyze, Dead code, ClearPHP, Codacy, Simple)
+  * Unresolved Instanceof (Classes/UnresolvedInstanceof ; Analyze, Dead code, ClearPHP, Codacy, Simple, Top10)
   * Unresolved Use (Namespaces/UnresolvedUse ; Analyze, ClearPHP, Codacy, Simple)
   * Unserialize Second Arg (Security/UnserializeSecondArg ; Security)
   * Unset Arguments (Functions/UnsetOnArguments ; OneFile)
@@ -1614,7 +1620,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Use This (Classes/UseThis ; Internal)
   * Use Web (Php/UseWeb ; Appinfo)
   * Use With Fully Qualified Name (Namespaces/UseWithFullyQualifiedNS ; Analyze, Coding Conventions, PHP recommendations, Codacy, Simple)
-  * Use const (Constants/ConstRecommended ; Analyze, Coding Conventions, Codacy)
+  * Use const (Constants/ConstRecommended ; Analyze, Coding Conventions, Codacy, Top10)
   * Use password_hash() (Php/Password55 ; CompatibilityPHP55)
   * Use random_int() (Php/BetterRand ; Analyze, Security, CompatibilityPHP71, Codacy, Simple, Level 2)
   * Used Classes (Classes/UsedClass ; Internal)
@@ -1622,7 +1628,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Used Interfaces (Interfaces/UsedInterfaces ; Internal)
   * Used Methods (Classes/UsedMethods ; Internal)
   * Used Once Variables (In Scope) (Variables/VariableUsedOnceByContext ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 4)
-  * Used Once Variables (Variables/VariableUsedOnce ; Analyze, OneFile, Codacy, Simple)
+  * Used Once Variables (Variables/VariableUsedOnce ; Analyze, OneFile, Codacy, Simple, Top10)
   * Used Private Methods (Classes/UsedPrivateMethod ; Internal)
   * Used Protected Method (Classes/UsedProtectedMethod ; )
   * Used Static Properties (Classes/UsedPrivateProperty ; Internal)
@@ -1988,8 +1994,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2137,16 +2143,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2239,8 +2245,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2283,8 +2289,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2396,11 +2402,12 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
+* `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 * `strtr <http://www.php.net/strtr>`_
 * `Structuring PHP Exceptions <https://www.alainschlesser.com/structuring-php-exceptions/>`_
 * `Subpatterns <http://php.net/manual/en/regexp.reference.subpatterns.php>`_
@@ -2451,8 +2458,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2620,6 +2627,7 @@ _______
 |   analyzer[] = "Files/MissingInclude";
 |   analyzer[] = "Functions/AliasesUsage";
 |   analyzer[] = "Functions/AvoidBooleanArgument";
+|   analyzer[] = "Functions/BadTypehintRelay";
 |   analyzer[] = "Functions/CallbackNeedsReturn";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/DeepDefinitions";
@@ -2806,7 +2814,6 @@ _______
 |   analyzer[] = "Structures/OneLineTwoInstructions";
 |   analyzer[] = "Structures/OnlyVariableReturnedByReference";
 |   analyzer[] = "Structures/OrDie";
-|   analyzer[] = "Structures/PhpinfoUsage";
 |   analyzer[] = "Structures/PossibleInfiniteLoop";
 |   analyzer[] = "Structures/PrintAndDie";
 |   analyzer[] = "Structures/PrintWithoutParenthesis";
@@ -2818,7 +2825,6 @@ _______
 |   analyzer[] = "Structures/ResultMayBeMissing";
 |   analyzer[] = "Structures/ReturnTrueFalse";
 |   analyzer[] = "Structures/SameConditions";
-|   analyzer[] = "Structures/SequenceInFor";
 |   analyzer[] = "Structures/ShouldChainException";
 |   analyzer[] = "Structures/ShouldMakeTernary";
 |   analyzer[] = "Structures/ShouldPreprocess";

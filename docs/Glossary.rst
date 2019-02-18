@@ -85,6 +85,13 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`No Real Comparison <no-real-comparison>`
 
+    + `array()`
+
+      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+      + :ref:`Could Be Class Constant <could-be-class-constant>`
+      + :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
+      + :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
+
     + `array_column()`
 
       + :ref:`Should Use array_column() <should-use-array\_column()>`
@@ -152,6 +159,7 @@ Glossary
 
       + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `array_sum()`
 
@@ -248,6 +256,10 @@ Glossary
       + :ref:`Should Preprocess Chr <should-preprocess-chr>`
       + :ref:`Should Use Operator <should-use-operator>`
 
+    + `class_exists()`
+
+      + :ref:`Undefined ::class <undefined-\:\:class>`
+
     + `closure`
 
       + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
@@ -257,6 +269,14 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+    + `collator_compare()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `collator_get_sort_key()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `constant()`
 
@@ -292,15 +312,24 @@ Glossary
       + :ref:`Use password_hash() <use-password\_hash()>`
       + :ref:`crypt() Without Salt <crypt()-without-salt>`
 
+    + `curl_exec()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
     + `current()`
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
 
 + `D`
-    + `Die`
+    + `Die()`
 
       + :ref:`Print And Die <print-and-die>`
+
+    + `date_create()`
+
+      + :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 
     + `define()`
 
@@ -313,6 +342,12 @@ Glossary
       + :ref:`Use const <use-const>`
 
     + `die`
+
+      + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Print And Die <print-and-die>`
+      + :ref:`Unreachable Code <unreachable-code>`
+
+    + `die()`
 
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Print And Die <print-and-die>`
@@ -343,6 +378,22 @@ Glossary
       + :ref:`No isset() With empty() <no-isset()-with-empty()>`
       + :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
 
+    + `ereg()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `ereg_replace()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `eregi()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `eregi_replace()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
     + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
@@ -353,6 +404,10 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Unreachable Code <unreachable-code>`
 
+    + `exit()`
+
+      + :ref:`Unreachable Code <unreachable-code>`
+
     + `extract()`
 
       + :ref:`Configure Extract <configure-extract>`
@@ -360,10 +415,6 @@ Glossary
 
 
 + `F`
-    + `For()`
-
-      + :ref:`Sequences In For <sequences-in-for>`
-
     + `Foreach()`
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
@@ -373,6 +424,10 @@ Glossary
     + `feof()`
 
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+
+    + `fgetc()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `fgetcsv()`
 
@@ -393,10 +448,20 @@ Glossary
     + `file_get_contents()`
 
       + :ref:`Joining file() <joining-file()>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `file_put_contents()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `filter_input()`
+
+      + :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
+
+    + `filter_input_array()`
+
+      + :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
 
     + `fopen()`
 
@@ -431,6 +496,7 @@ Glossary
     + `fread()`
 
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `func_get_arg()`
 
@@ -449,13 +515,45 @@ Glossary
       + :ref:`Don't Loop On Yield <don't-loop-on-yield>`
       + :ref:`No Return For Generator <no-return-for-generator>`
 
+    + `get_called_class()`
+
+      + :ref:`Detect Current Class <detect-current-class>`
+
+    + `get_class()`
+
+      + :ref:`No get_class() With Null <no-get\_class()-with-null>`
+
     + `glob()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
       + :ref:`No Direct Usage <no-direct-usage>`
 
+    + `gmp_random()`
+
+      + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+
 
 + `H`
+    + `hash()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `hash_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `hash_hmac()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `hash_update()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `hash_update_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
     + `header()`
 
       + :ref:`Should Use SetCookie() <should-use-setcookie()>`
@@ -482,6 +580,62 @@ Glossary
     + `Isset`
 
       + :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
+
+    + `iconv()`
+
+      + :ref:`Substring First <substring-first>`
+
+    + `iconv_strpos()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `iconv_strrpos()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `idn_to_ascii()`
+
+      + :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
+
+    + `idn_to_utf8()`
+
+      + :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
+
+    + `imagecolorallocate()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `imagecolorallocatealpha()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `imagepsbbox()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsencodefont()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsextendfont()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsfreefont()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsloadfont()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsslantfont()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepstext()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `implode()`
 
@@ -570,14 +724,80 @@ Glossary
       + :ref:`Should Yield With Key <should-yield-with-key>`
 
 
++ `J`
+    + `jpeg2wbmp()`
+
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+
+    + `json_decode()`
+
+      + :ref:`Use json_decode() Options <use-json\_decode()-options>`
+
+
++ `L`
+    + `List()`
+
+      + :ref:`List With Appends <list-with-appends>`
+
+    + `list()`
+
+      + :ref:`Empty List <empty-list>`
+      + :ref:`Foreach With list() <foreach-with-list()>`
+      + :ref:`List Short Syntax <list-short-syntax>`
+      + :ref:`List With Keys <list-with-keys>`
+      + :ref:`No List With String <no-list-with-string>`
+      + :ref:`Use List With Foreach <use-list-with-foreach>`
+      + :ref:`list() May Omit Variables <list()-may-omit-variables>`
+
+
 + `M`
     + `magic_quotes_runtime()`
 
       + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
+    + `mb_chr()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+
+    + `mb_ord()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+
+    + `mb_scrub()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+
+    + `mb_strlen()`
+
+      + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
     + `mb_substr()`
 
       + :ref:`No Substr() One <no-substr()-one>`
+
+    + `mcrypt_cbc()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_cfb()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_ecb()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_ofb()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `md5()`
 
@@ -627,6 +847,7 @@ Glossary
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Static Loop <static-loop>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `nl2br()`
 
@@ -657,6 +878,10 @@ Glossary
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 
+    + `openssl_random_pseudo_bytes()`
+
+      + :ref:`Use random_int() <use-random\_int()>`
+
 
 + `P`
     + `pack()`
@@ -681,20 +906,23 @@ Glossary
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 
-    + `password_hash()`
+    + `parsekit_compile_file()`
 
-      + :ref:`Compare Hash <compare-hash>`
-      + :ref:`Use password_hash() <use-password\_hash()>`
+      + :ref:`Directly Use File <directly-use-file>`
 
-    + `password_verify()`
+    + `parsekit_compile_string()`
 
-      + :ref:`Compare Hash <compare-hash>`
+      + :ref:`Directly Use File <directly-use-file>`
 
     + `pathinfo()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
       + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
+
+    + `pcntl_getpriority()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `php_egg_logo_guid()`
 
@@ -712,10 +940,23 @@ Glossary
 
       + :ref:`Phpinfo <phpinfo>`
 
+    + `png2wbmp()`
+
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+
     + `pow()`
 
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
+
+    + `preg_match()`
+
+      + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `preg_match_all()`
+
+      + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
     + `preg_replace()`
 
@@ -735,9 +976,9 @@ Glossary
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
-    + `print_r()`
+    + `prev()`
 
-      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `printf()`
 
@@ -754,9 +995,37 @@ Glossary
 
       + :ref:`Use random_int() <use-random\_int()>`
 
+    + `random_bytes()`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Random Without Try <random-without-try>`
+      + :ref:`Use random_int() <use-random\_int()>`
+
+    + `random_int()`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Random Without Try <random-without-try>`
+      + :ref:`Use random_int() <use-random\_int()>`
+
+    + `readdir()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
     + `readfile()`
 
       + :ref:`Joining file() <joining-file()>`
+
+    + `recode()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `recode_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `recode_string()`
+
+      + :ref:`Directly Use File <directly-use-file>`
 
 
 + `S`
@@ -768,6 +1037,10 @@ Glossary
 
       + :ref:`Strtr Arguments <strtr-arguments>`
 
+    + `Substr()`
+
+      + :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
+
     + `Switch()`
 
       + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
@@ -775,6 +1048,10 @@ Glossary
     + `scandir()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
+
+    + `session_start()`
+
+      + :ref:`Use session_start() Options <use-session\_start()-options>`
 
     + `set_error_handler()`
 
@@ -822,9 +1099,29 @@ Glossary
 
       + :ref:`Directly Use File <directly-use-file>`
 
+    + `simplexml_load_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `simplexml_load_string()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
     + `sleep()`
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
+
+    + `split()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `spliti()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `sql_regcase()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `srand()`
 
@@ -847,6 +1144,10 @@ Glossary
       + :ref:`Joining file() <joining-file()>`
       + :ref:`Make One Call With Array <make-one-call-with-array>`
 
+    + `stream_isatty()`
+
+      + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+
     + `stream_socket_server()`
 
       + :ref:`@ Operator <@-operator>`
@@ -854,7 +1155,13 @@ Glossary
     + `stripos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
       + :ref:`strpos() Too Much <strpos()-too-much>`
+
+    + `strlen()`
+
+      + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`No Count With 0 <no-count-with-0>`
 
     + `strpos()`
 
@@ -863,13 +1170,37 @@ Glossary
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
       + :ref:`strpos() Too Much <strpos()-too-much>`
 
+    + `strripos()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `strrpos()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
     + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
 
+    + `strtok()`
+
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `strtotime()`
+
+      + :ref:`Next Month Trap <next-month-trap>`
+
     + `strtr()`
 
       + :ref:`Strtr Arguments <strtr-arguments>`
+
+    + `substr()`
+
+      + :ref:`No List With String <no-list-with-string>`
+      + :ref:`No Substr() One <no-substr()-one>`
+      + :ref:`Substring First <substring-first>`
+      + :ref:`Use Basename Suffix <use-basename-suffix>`
+      + :ref:`strpos() Too Much <strpos()-too-much>`
 
     + `substr_replace()`
 
@@ -900,6 +1231,11 @@ Glossary
     + `throwable`
 
       + :ref:`Can't Throw Throwable <can't-throw-throwable>`
+
+    + `time()`
+
+      + :ref:`Use random_int() <use-random\_int()>`
+      + :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 
     + `token_get_all()`
 
@@ -965,6 +1301,16 @@ Glossary
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+
+
++ `Y`
+    + `yaml_parse()`
+
+      + :ref:`Directly Use File <directly-use-file>`
+
+    + `yaml_parse_file()`
+
+      + :ref:`Directly Use File <directly-use-file>`
 
 
 + `Z`
