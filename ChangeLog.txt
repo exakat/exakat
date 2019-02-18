@@ -1,4 +1,4 @@
-Version 1.6.7 (Li, King Chujiang, coming up)
+Version 1.6.8 (Li, King Songdi, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.6.7 (Li, King Chujiang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.6.7 (Li, King Chujiang, coming up)
++ Architecture
+    + Documentation covers more PHP functions
+    + Added some missing PHP functions
+    + Fixed destination folder for extensions
++ Report
+    + Ambassador : limited size of default values in visibility report.
+    + Ambassador : reporting class depth
+    + Ambassador : reporting dynamically created constants
+    + Diplomat : leanner, meaner version of Ambassador
+    + New category : Top 10 classic mistakes
++ Analyzer
+    + New analysis : Report when relayed typehint are not the sames
+    + Updated analysis : Regex now handles local variables and constants
+    + Updated analysis : Variables Used Once now covers closures and use
+    + Checked unit tests : 2846 / 2867 test pass (99% pass)
++ Tokenizer
+    + Defineconstant may be constant
+    + Fixed handling of Nullable for typehint
+    + Started preparing for Gremlin 3.4.0 : WIP
 
 Version 1.6.6 (Jiang, King Qinguang , 2019-02-11)
 + Architecture
