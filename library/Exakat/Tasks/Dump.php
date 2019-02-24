@@ -223,6 +223,19 @@ SQL;
             $this->collectDefinitionsStats();
             $end = microtime(true);
             $this->log->log( 'Collected Definitions stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+
+            $begin = $end;
+            $this->collectClassDepth();
+            $end = microtime(true);
+            $this->log->log( 'Collected Classes stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+
+            $begin = $end;
+            $this->collectForeachFavorite();
+            $end = microtime(true);
+            $this->log->log( 'Collected Foreach favorites : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            
+            
+
         }
 
         $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
@@ -1727,7 +1740,14 @@ GREMLIN;
 
         display( "$name : ".count($values));
     }
-    
+
+    private function collectClassDepth() {
+        $query = <<<GREMLIN
+g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
+GREMLIN;
+        $this->collectHashCounts($query, 'Class Depth');
+    }
+
     private function collectParameterCounts() {
         $query = <<<GREMLIN
 g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
@@ -1949,6 +1969,41 @@ GREMLIN;
         }
         
         return count($values);
+    }
+
+    private function collectForeachFavorite() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Foreach").out("VALUE").not(hasLabel("Keyvalue")).values("fullcode")
+GREMLIN;
+        $valuesOnly = $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
+GREMLIN;
+        $values = $this->gremlin->query($query);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
+GREMLIN;
+        $keys = $this->gremlin->query($query);
+
+        $statsKeys = array_count_values($keys->toArray());
+        $statsKeys['None'] = count($valuesOnly);
+
+        $statsValues = array_count_values(array_merge($values->toArray(), $valuesOnly->toArray()));
+
+        $valuesSQL = array();
+        foreach($statsValues as $name => $count) {
+            $valuesSQL[] = "(\"Foreach Values\", \"$name\", $count)";
+        }
+        foreach($statsKeys as $name => $count) {
+            $valuesSQL[] = "(\"Foreach Keys\", \"$name\", $count)";
+        }
+
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $valuesSQL);
+        $this->sqlite->query($query);
+        
+        return count($valuesSQL);
     }
 
     private function collectReadability() {

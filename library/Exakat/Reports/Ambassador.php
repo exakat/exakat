@@ -204,6 +204,7 @@ class Ambassador extends Reports {
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
+// Audit Logs
         $this->generateAppinfo();
         $this->generateBugFixes();
         $this->generateDirectiveList();
@@ -242,6 +243,7 @@ class Ambassador extends Reports {
         $this->generateDynamicCode();
         $this->generateGlobals();
         $this->generateInventories();
+        $this->generateClassDepth();
 
         // Annex
         $this->generateAnalyzerSettings();
@@ -3624,7 +3626,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td class="exakat_short_text">'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3717,7 +3719,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
         
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td class="exakat_short_text">'.
                                     implode('</td><td>', $visibilities)
                                  .'</td></tr>'.PHP_EOL;
         }
@@ -3801,6 +3803,8 @@ SQL
                 $theClass = $row['fullnspath'].':'.$row['theClass'];
                 $aClass = array();
             }
+            
+            list($row['property'], ) = explode(' = ', $row['property']);
 
             $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
@@ -3822,7 +3826,7 @@ SQL
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td>'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td class="exakat_short_text">'.
                             implode('</td><td>', $visibilities)
                             .'</td></tr>'.PHP_EOL;
         }
@@ -3874,6 +3878,180 @@ SQL
         $this->putBasedPage('changed_classes', $html);
     }
 
+    private function generateClassDepth() {
+        $finalHTML = $this->getBasedPage('classes_depth');
+
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT * FROM hashResults
+    WHERE name="Class Depth"
+    ORDER BY key
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $data[$value['key']] = $value['value'];
+                $xAxis[] = "'".$value['key']." extension'";
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['key'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Lines',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class depth');
+        $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
+
+        $this->putBasedPage('classes_depth', $finalHTML);
+    }
+    
     private function generateClassSize() {
         $finalHTML = $this->getBasedPage('cit_size');
 

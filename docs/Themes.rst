@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 12 Feb 2019 09:12:32 +0000
-.. comment: Generation hash : 8e1ab55d806d142c0eb6b5916a9a05216a7b22bb
+.. comment: Generation date : Mon, 18 Feb 2019 21:53:45 +0000
+.. comment: Generation hash : 3a2f3329fce678107fd77b68a2e4065aa86504d4
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 356 analysis
+Total : 355 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -171,6 +171,7 @@ Total : 356 analysis
 * :ref:`Forgotten Whitespace <forgotten-whitespace>`
 * :ref:`Fully Qualified Constants <fully-qualified-constants>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
+* :ref:`Functions/BadTypehintRelay <functions/badtypehintrelay>`
 * :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
@@ -281,7 +282,6 @@ Total : 356 analysis
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
-* :ref:`Phpinfo <phpinfo>`
 * :ref:`Possible Infinite Loop <possible-infinite-loop>`
 * :ref:`Possible Missing Subpattern <possible-missing-subpattern>`
 * :ref:`Pre-increment <pre-increment>`
@@ -306,7 +306,6 @@ Total : 356 analysis
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
 * :ref:`Same Variables Foreach <same-variables-foreach>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
-* :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
 * :ref:`Should Chain Exception <should-chain-exception>`

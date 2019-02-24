@@ -241,39 +241,6 @@ It seems that !! is almost superfluous, as a property called 'is_deleted' should
                     $this->_eventController->createRecurException($exception, !!$exception->is_deleted);
                 }
 
-Phpinfo
-=======
-
-.. _dolphin-structures-phpinfousage:
-
-Dolphin
-^^^^^^^
-
-:ref:`phpinfo`, in Dolphin-v.7.3.5/install/exec.php:4. 
-
-An actual phpinfo(), available during installation. Note that the phpinfo() is actually triggered by a hidden POST variable. 
-
-.. code-block:: php
-
-    <?php
-    
-        if (!empty($_POST['phpinfo']))
-            phpinfo();
-        elseif (!empty($_POST['gdinfo']))
-            echo '<pre>' . print_r(gd_info(), true) . '</pre>';
-    
-    ?>
-    <center>
-    
-        <form method=post>
-            <input type=submit name=phpinfo value="PHP Info">
-        </form>
-        <form method=post>
-            <input type=submit name=gdinfo value="GD Info">
-        </form>
-    
-    </center>
-
 Strpos()-like Comparison
 ========================
 
@@ -1546,6 +1513,72 @@ PHP_VERSION is actually build with PHP_MAJOR_VERSION, PHP_MINOR_VERSION and PHP_
 .. code-block:: php
 
     explode('.', PHP_VERSION);
+
+Lone Blocks
+===========
+
+.. _thinkphp-structures-loneblock:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`lone-blocks`, in ThinkPHP/Library/Vendor/Hprose/HproseReader.php:163. 
+
+There is no need for block in a case/default clause. PHP executes all command in order, until a break or the end of the switch. There is another occurrence of that situation in this code : it seems to be a coding convention, while only applied to a few switch statements.
+
+.. code-block:: php
+
+    for ($i = 0; $i < $len; ++$i) {
+                switch (ord($this->stream->getc()) >> 4) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7: {
+                        // 0xxx xxxx
+                        $utf8len++;
+                        break;
+                    }
+                    case 12:
+                    case 13: {
+                        // 110x xxxx   10xx xxxx
+                        $this->stream->skip(1);
+                        $utf8len += 2;
+                        break;
+                    }
+
+
+--------
+
+
+.. _tine20-structures-loneblock:
+
+Tine20
+^^^^^^
+
+:ref:`lone-blocks`, in tine20/Addressbook/Convert/Contact/VCard/Abstract.php:199. 
+
+A case of empty case, with empty blocks. This is useless code. Event the curly brackets with the final case are useless.
+
+.. code-block:: php
+
+    switch ( $property['TYPE'] ) {
+                            case 'JPG' : {}
+                            case 'jpg' : {}
+                            case 'Jpg' : {}
+                            case 'Jpeg' : {}
+                            case 'jpeg' : {}
+                            case 'PNG' : {}
+                            case 'png' : {}
+                            case 'JPEG' : {
+                                if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) 
+                                    Tinebase_Core::getLogger()->warn(__METHOD__ . '::' . __LINE__ . ' Photo: passing on invalid ' . $property['TYPE'] . ' image as is (' . strlen($property->getValue()) .')' );
+                                $jpegphoto = $property->getValue();
+                                break;
+                            }
 
 PHP Keywords As Names
 =====================
@@ -5691,6 +5724,39 @@ If $BACKUP_EVENTLOG_DIR is a backup for an event log, this should be stored out 
 .. code-block:: php
 
     mkdir($BACKUP_EVENTLOG_DIR)
+
+Phpinfo
+=======
+
+.. _dolphin-structures-phpinfousage:
+
+Dolphin
+^^^^^^^
+
+:ref:`phpinfo`, in Dolphin-v.7.3.5/install/exec.php:4. 
+
+An actual phpinfo(), available during installation. Note that the phpinfo() is actually triggered by a hidden POST variable. 
+
+.. code-block:: php
+
+    <?php
+    
+        if (!empty($_POST['phpinfo']))
+            phpinfo();
+        elseif (!empty($_POST['gdinfo']))
+            echo '<pre>' . print_r(gd_info(), true) . '</pre>';
+    
+    ?>
+    <center>
+    
+        <form method=post>
+            <input type=submit name=phpinfo value="PHP Info">
+        </form>
+        <form method=post>
+            <input type=submit name=gdinfo value="GD Info">
+        </form>
+    
+    </center>
 
 Isset Multiple Arguments
 ========================

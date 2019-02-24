@@ -1381,11 +1381,11 @@ class Load extends Tasks {
             
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
                 ++$this->id;
+                $cpm = $this->processPrivate();
                 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                     continue;
                 }
-                $cpm = $this->processPrivate();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
@@ -1397,10 +1397,11 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PUBLIC) {
                 ++$this->id;
+                $cpm = $this->processPublic();
+
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                     continue;
                 }
-                $cpm = $this->processPublic();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
@@ -1412,10 +1413,11 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PROTECTED) {
                 ++$this->id;
+                $cpm = $this->processProtected();
+
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                     continue;
                 }
-                $cpm = $this->processProtected();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
@@ -1442,14 +1444,12 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                 ++$this->id;
                 $cpm = $this->processStatic();
-                ++$this->id;
 
                 if ($cpm instanceof Atom && 
                     $cpm->atom === 'Ppp'){
+                    ++$this->id;
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, 'PPP');
-                } else {
-                    --$this->id;
                 }
 
                 continue;
@@ -1468,7 +1468,7 @@ class Load extends Tasks {
                 
             $this->addLink($class, $cpm, $link);
         }
-        
+
         ++$this->id;
     }
     
@@ -1879,6 +1879,11 @@ class Load extends Tasks {
     }
 
     private function processTypehint() {
+        // static can't be a typehint : too late for compilation
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
+            return 0;
+        }
+
          if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
              ++$this->id;
              $nullable = self::NULLABLE;
@@ -1888,7 +1893,7 @@ class Load extends Tasks {
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_ARRAY,
                                                             $this->phptokens::T_CALLABLE,
-                                                            $this->phptokens::T_STATIC),
+                                                            ),
                      true)) {
             $nsname = $this->processNextAsIdentifier();
             $nsname->fullnspath = '\\'.mb_strtolower($nsname->code);
@@ -2725,7 +2730,8 @@ class Load extends Tasks {
          } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                                    $this->phptokens::T_QUESTION,
                                                                    $this->phptokens::T_STRING,
-                                                                   $this->phptokens::T_NAMESPACE),
+                                                                   $this->phptokens::T_NAMESPACE,
+                                                                   ),
                             true)) {
             $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
@@ -2788,8 +2794,7 @@ class Load extends Tasks {
             $this->pushExpression($name);
             return $name;
         } else {
-            $r = $this->processOptions('Static');
-            return $r;
+            return $this->processOptions('Static');
         }
     }
 

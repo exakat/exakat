@@ -44,12 +44,12 @@ class Regex extends Analyzer {
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
-        $this->atomFunctionIs($pregReplaceFunctions)
+        $this->atomFunctionIs($pregFunctions    )
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('Arrayliteral')
+             ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
+             ->atomIs(array('String', 'Concatenation'));
         $this->prepareQuery();
 
         // preg_relace_callback_array(array(regex1 => callback, regex2))
