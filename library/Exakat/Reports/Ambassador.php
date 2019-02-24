@@ -2424,6 +2424,8 @@ SQL;
                             'Php/ListWithReference'                 => '7.3+',
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
+                            'Php/PHP80RemovedFunctions'             => '8.0-',
+                            'Php/PHP80RemovedConstants'             => '8.0-',
                           );
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
