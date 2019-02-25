@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Feb 2019 21:53:45 +0000
-.. comment: Generation hash : 3a2f3329fce678107fd77b68a2e4065aa86504d4
+.. comment: Generation date : Mon, 25 Feb 2019 20:08:25 +0000
+.. comment: Generation hash : 5b36ee233f64fb35f6e9b8b90bbf288c2cbd5ebd
 
 
 .. _analyze:
@@ -930,6 +930,16 @@ Total : 4 analysis
 * :ref:`String Initialization <string-initialization>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
+.. _compatibilityphp80:
+
+CompatibilityPHP80
+++++++++++++++++++
+
+Total : 2 analysis
+
+* :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
+* :ref:`PHP 80 Removed Constants <php-80-removed-constants>`
+
 .. _dead-code:
 
 Dead code
@@ -1085,7 +1095,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 72 analysis
+Total : 73 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1115,6 +1125,7 @@ Total : 72 analysis
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
+* :ref:`Law of Demeter <law-of-demeter>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Multiple Identical Closure <multiple-identical-closure>`

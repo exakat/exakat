@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Feb 2019 21:53:45 +0000
-.. comment: Generation hash : 3a2f3329fce678107fd77b68a2e4065aa86504d4
+.. comment: Generation date : Mon, 25 Feb 2019 20:08:25 +0000
+.. comment: Generation hash : 5b36ee233f64fb35f6e9b8b90bbf288c2cbd5ebd
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1220,6 +1220,11 @@ Since PHP 7.3, a fatal error is emitted : ``Defining a custom `assert() <http://
 
 See also `assert <http://php.net/assert>`_ and 
          `User-defined assert function is optimized away with zend.assertions=-1 <https://bugs.php.net/bug.php?id=75445>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Rename the custom function with another name
 
 +-------------+-------------------------------------------+
 | Short name  | Php/AssertFunctionIsReserved              |
@@ -7323,7 +7328,7 @@ Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation t
        eval($literalCode);
        echo $a;
    
-       // If eval'ed code is known at compile time, it is best to put it inline
+       // If the code code given to eval() is known at compile time, it is best to put it inline
        $literalCode = 'phpinfo();';
        eval($literalCode);
    
@@ -7344,7 +7349,7 @@ See also `eval <http://www.php.net/eval>`_ and
 Suggestions
 ^^^^^^^^^^^
 
-* Use a dynamic feature of PHP to replace the eval'ed code
+* Use a dynamic feature of PHP to replace the dynamic code
 * Store the code on the disk, and use include
 * Replace create_function() with a closure!
 
@@ -10435,6 +10440,56 @@ Suggestions
 
 
 
+.. _law-of-demeter:
+
+Law of Demeter
+##############
+
+
+The law of Demeter specifies a number of constraints to apply to methodcalls from within an method, so as to keep dependencies to a minimum. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function foo($arg) {
+           $this->foo();    // calling oneself is OK
+           $this->x->bar(); // calling one's property is OK
+           $arg->bar2();    // calling arg's methods is OK
+   
+           $local = new y();
+           $z = $y->bar3();      // calling a local variable is OK
+   
+           $z->bar4();      // calling a method on a previous result is wrong
+       }
+   }
+   
+   ?>
+
+
+See also `Do your objects talk to strangers? <https://www.brandonsavage.net/do-your-objects-talk-to-strangers/>`_ and 
+        `Law of Demeter <https://en.wikipedia.org/wiki/Law_of_Demeter>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+--------------------+
+| Short name  | Classes/DemeterLaw |
++-------------+--------------------+
+| Themes      | :ref:`Suggestions` |
++-------------+--------------------+
+| Severity    | Minor              |
++-------------+--------------------+
+| Time To Fix | Quick (30 mins)    |
++-------------+--------------------+
+
+
+
 .. _list-short-syntax:
 
 List Short Syntax
@@ -12585,15 +12640,24 @@ PHP doesn't raise any error when traits are included multiple times.
 
 See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 
-+-------------+----------------------+
-| Short name  | Traits/MultipleUsage |
-+-------------+----------------------+
-| Themes      | :ref:`Suggestions`   |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove any multiple traits from use expressions
+* Review the class tree, and remove any trait mentionned multiple times
+
++-------------+---------------------------------------+
+| Short name  | Traits/MultipleUsage                  |
++-------------+---------------------------------------+
+| Themes      | :ref:`Suggestions`                    |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Instant (5 mins)                      |
++-------------+---------------------------------------+
+| Examples    | :ref:`nextcloud-traits-multipleusage` |
++-------------+---------------------------------------+
 
 
 
@@ -13738,15 +13802,24 @@ For example, `glob() <http://www.php.net/glob>`_ returns an array, unless some e
        }
    ?>
 
-+-------------+--------------------------+
-| Short name  | Structures/NoDirectUsage |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check the return of the function before using it, in particular for false, or array().
+
++-------------+--------------------------------------------------------------------------------+
+| Short name  | Structures/NoDirectUsage                                                       |
++-------------+--------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                 |
++-------------+--------------------------------------------------------------------------------+
+| Severity    | Major                                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                  |
++-------------+--------------------------------------------------------------------------------+
+| Examples    | :ref:`edusoho-structures-nodirectusage`, :ref:`xoops-structures-nodirectusage` |
++-------------+--------------------------------------------------------------------------------+
 
 
 
@@ -13830,7 +13903,7 @@ See also `Salted Password Hashing - Doing it Right <https://crackstation.net/has
 Suggestions
 ^^^^^^^^^^^
 
-* Put any hardcoded hash in a configuration file, a database or a environnement variable. An external source.
+* Put any hardcoded hash in a configuration file, a database or a environment variable. An external source.
 
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedHash                                                             |
@@ -13883,7 +13956,7 @@ See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/wind
 Suggestions
 ^^^^^^^^^^^
 
-* Move the hardcoded IP to an external source : environnement variable, configuration file, database.
+* Move the hardcoded IP to an external source : environment variable, configuration file, database.
 * Remove the hardcoded IP and ask for it at execution.
 
 +-------------+---------------------------------+
@@ -15264,9 +15337,9 @@ Not Not
 #######
 
 
-Double not makes a boolean, not a true.
+Double not makes a boolean, not a ``true``.
 
-This is a wrongly done casting to boolean. PHP supports ``(boolean)`` to do the same, faster and cleaner.
+This is a wrong casting to boolean. PHP supports ``(boolean)`` to do the same, faster and cleaner.
 
 .. code-block:: php
 
@@ -16536,6 +16609,62 @@ The following PHP native functions were removed in PHP 7.0.
 
 
 
+.. _php-8.0-removed-functions:
+
+PHP 8.0 Removed Functions
+#########################
+
+
+The following PHP native functions were removed in PHP 8.0.
+
+* `image2wbmp() <http://www.php.net/image2wbmp>`_
+* `png2wbmp() <http://www.php.net/png2wbmp>`_ 
+* `jpeg2wbmp() <http://www.php.net/jpeg2wbmp>`_
+* `ldap_sort() <http://www.php.net/ldap_sort>`_
+
++-------------+---------------------------+
+| Short name  | Php/Php80RemovedFunctions |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Php Version | With PHP 7.0 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _php-80-removed-constants:
+
+PHP 80 Removed Constants
+########################
+
+
+The following PHP native constants were removed in PHP 8.0.
+
+* INTL_IDNA_VARIANT_2003 (See `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_)
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove usage of INTL_IDNA_VARIANT_2003 and use
+
++-------------+---------------------------+
+| Short name  | Php/Php80RemovedConstant  |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Severity    | Critical                  |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _php-keywords-as-names:
 
 PHP Keywords As Names
@@ -16640,6 +16769,14 @@ See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70
 |$foo->$bar['baz']()    |$foo->{$bar['baz']}()    |($foo->$bar)['baz']()    |
 |Foo\:\:$bar['baz']()   |Foo\:\:{$bar['baz']}()   |(Foo\:\:$bar)['baz']()   |
 +-----------------------+-------------------------+-------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using complex expressions, mixing ``$$\``, ``[0]`` and ``->`` in the same expression
+* Add curly braces {} to ensure that the precedence is the same between PHP 5 and 7. For example, ``$$v`` becomes ``${$v}``
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Variables/Php5IndirectExpression                                                                           |
@@ -16916,6 +17053,13 @@ You should check them so they don't behave strangely.
 
 See also `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using complex expressions, mixing $$, [0] and -> in the same expression
+* Add curly braces {} to ensure that the precedence is the same between PHP 5 and 7. For example, ``$$v`` becomes ``${$v}``
+
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Variables/Php7IndirectExpression                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -17096,7 +17240,7 @@ If left in the production code, it may lead to a critical leak, as any attacker 
 
 It is advised to never leave that kind of instruction in a production code. 
 
-`phpinfo() <http://www.php.net/phpinfo>`_ may be necessary to access some specific configuration of the server : for example, apache module list are only available via `phpinfo() <http://www.php.net/phpinfo>`_, and apache_get functions, when they are loaded.
+`phpinfo() <http://www.php.net/phpinfo>`_ may be necessary to access some specific configuration of the server : for example, apache module list are only available via `phpinfo() <http://www.php.net/phpinfo>`_, and apache_get(), when they are loaded.
 
 
 
@@ -17294,15 +17438,24 @@ The latter needs an extra memory allocation that costs about 10% of performances
 
 This is a micro-optimisation. However, its usage is so widespread, including within loops, that it may eventually have an significant impact on execution time. As such, it is recommended to adopt this rule, and only consider changing legacy code as they are refactored for other reasons.
 
-+-------------+-------------------------------------+
-| Short name  | Performances/PrePostIncrement       |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances` |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the pre increment when the new value is not reused.
+
++-------------+--------------------------------------------------------------------------------------------------+
+| Short name  | Performances/PrePostIncrement                                                                    |
++-------------+--------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Performances`                                                              |
++-------------+--------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                            |
++-------------+--------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                  |
++-------------+--------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`expressionengine-performances-prepostincrement`, :ref:`traq-performances-prepostincrement` |
++-------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -18974,7 +19127,7 @@ Set Cookie Safe Arguments
 
 The last five arguments of `setcookie() <http://www.php.net/setcookie>`_ and `setrawcookie() <http://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.
 
-setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )
+``setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )``
 
 The ``$expire`` argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
 
@@ -18982,7 +19135,7 @@ The ``$path`` argument limits the transmission of the cookie to URL whose path m
 
 The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentioned here. By default, it is ``''``, which means any server on the internet. At worse, you may use ``mydomain.com`` to cover your whole domain, or better, refine it with the actual subdomain of usage.
 
-The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
+The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environment variable is false on HTTP, and true on HTTPS.
 
 The ``$httponly`` argument limits the access of the cookie to JavaScript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
 
@@ -20744,7 +20897,7 @@ Strict Comparison With Booleans
 
 Strict comparisons prevent from mistaking an error with a false. 
 
-Booleans may be easily mistaken with other values, especially when the function may return integer or boolean as a normal course of action. 
+Boolean values may be easily mistaken with other values, especially when the function may return integer or boolean as a normal course of action. 
 
 It is encouraged to use strict comparison === or !== when booleans are involved in a comparison.
 
@@ -20779,17 +20932,26 @@ It is encouraged to use strict comparison === or !== when booleans are involved 
 
 `switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures always uses == comparisons. 
 
-Function `in_array() <http://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
+Native function `in_array() <http://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
 
-+-------------+------------------------------------+
-| Short name  | Structures/BooleanStrictComparison |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use strict comparison whenever possible
+
++-------------+--------------------------------------------------------------------------------------------------+
+| Short name  | Structures/BooleanStrictComparison                                                               |
++-------------+--------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                               |
++-------------+--------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                            |
++-------------+--------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                  |
++-------------+--------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phinx-structures-booleanstrictcomparison`, :ref:`typo3-structures-booleanstrictcomparison` |
++-------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -22757,6 +22919,11 @@ List of properties that are not explicitly defined in the class, its parents or 
 
 See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 
+Suggestions
+^^^^^^^^^^^
+
+* Add an explicit property definition, and give it ``null`` as a default value : this way, it behaves the same as undefined.
+
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UndefinedProperty                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -22767,6 +22934,8 @@ See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 | Time To Fix | Quick (30 mins)                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-undefinedproperty`, :ref:`mediawiki-classes-undefinedproperty`                        |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -28193,7 +28362,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Remove the unused variables from the list call
-* When the ignored values are at the beginning or the end of the array, array_slice may be used to shorten the array.
+* When the ignored values are at the beginning or the end of the array, array_slice() may be used to shorten the array.
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/ListOmissions                                                          |

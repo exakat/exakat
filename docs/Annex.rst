@@ -36,6 +36,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * CompatibilityPHP72
 * CompatibilityPHP73
 * CompatibilityPHP74
+* CompatibilityPHP80
 * Custom
 * Dead code
 * DefensiveProgrammingTM
@@ -401,9 +402,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.6.8
+
+  * PHP 8.0 Removed Functions (Php/Php80RemovedFunctions ; CompatibilityPHP80)
+  * PHP 80 Removed Constants (Php/Php80RemovedConstant)
+
 * 1.6.7
 
-  * Constant Dynamic Creation (Constants/DynamicCreation)
+  * An OOP Factory (Patterns/Factory ; Appinfo)
+  * Constant Dynamic Creation (Constants/DynamicCreation ; Appinfo)
+  * Law of Demeter (Classes/DemeterLaw)
 
 * 1.6.6
 
@@ -1987,15 +1995,15 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2068,6 +2076,7 @@ List of external links mentionned in this documentation.
 * `define <http://php.net/manual/en/function.define.php>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
 * `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
+* `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
@@ -2080,6 +2089,7 @@ List of external links mentionned in this documentation.
 * `dirname <http://php.net/dirname>`_
 * `dist.exakat.io <http://dist.exakat.io/>`_
 * `dl <http://www.php.net/dl>`_
+* `Do your objects talk to strangers? <https://www.brandonsavage.net/do-your-objects-talk-to-strangers/>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
@@ -2136,6 +2146,7 @@ List of external links mentionned in this documentation.
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `extract <http://php.net/extract>`_
 * `Ez <https://ez.no/>`_
+* `Factory (object-oriented programming) <https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)>`_
 * `FAM <http://oss.sgi.com/projects/fam/>`_
 * `FastCGI Process Manager <http://php.net/fpm>`_
 * `FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
@@ -2245,8 +2256,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2289,8 +2300,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2402,8 +2413,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
@@ -2438,8 +2449,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2458,8 +2469,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2499,7 +2510,7 @@ Themes configuration
 
 INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
 
-17 themes detailled here : 
+18 themes detailled here : 
 
 * `Analyze <theme_ini_analyze>`_
 * `ClassReview <theme_ini_classreview>`_
@@ -2513,6 +2524,7 @@ INI configuration for built-in themes. Copy them in config/themes.ini, and make 
 * `CompatibilityPHP72 <theme_ini_compatibilityphp72>`_
 * `CompatibilityPHP73 <theme_ini_compatibilityphp73>`_
 * `CompatibilityPHP74 <theme_ini_compatibilityphp74>`_
+* `CompatibilityPHP80 <theme_ini_compatibilityphp80>`_
 * `Dead code <theme_ini_dead code>`_
 * `LintButWontExec <theme_ini_lintbutwontexec>`_
 * `Performances <theme_ini_performances>`_
@@ -3433,6 +3445,20 @@ __________________
 
 
 
+.. _theme_ini_compatibilityphp80:
+
+CompatibilityPHP80
+__________________
+
+| [CompatibilityPHP80]
+|   analyzer[] = "Php/Php80RemovedConstant";
+|   analyzer[] = "Php/Php80RemovedFunctions";| 
+
+
+
+
+
+
 .. _theme_ini_dead code:
 
 Dead code
@@ -3608,6 +3634,7 @@ ___________
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Arrays/ShouldPreprocess";
 |   analyzer[] = "Arrays/SliceFirst";
+|   analyzer[] = "Classes/DemeterLaw";
 |   analyzer[] = "Classes/ParentFirst";
 |   analyzer[] = "Classes/ShouldHaveDestructor";
 |   analyzer[] = "Classes/ShouldUseSelf";
