@@ -312,6 +312,7 @@ class Datastore {
         }
 
         switch($table) {
+            case 'compilation80' :
             case 'compilation74' :
             case 'compilation73' :
             case 'compilation72' :

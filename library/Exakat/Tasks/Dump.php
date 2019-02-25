@@ -579,6 +579,7 @@ SQL;
                         'compilation72',
                         'compilation73',
                         'compilation74',
+                        'compilation80',
                         'composer',
                         'configFiles',
                         'externallibraries',

@@ -1,0 +1,111 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            6
+            Label : ARGUMENT
+              16
+            Label : NAME
+              6
+          Label : DEFINITION
+            21
+          Label : NAME
+            6
+          Label : PPP
+            7
+            Label : PPP
+              8
+              Label : DEFAULT
+                10
+        Label : EXPRESSION
+          14
+          Label : LEFT
+            12
+          Label : RIGHT
+            15
+            Label : NEW
+              6
+              Label : ARGUMENT
+                16
+              Label : NAME
+                6
+        Label : EXPRESSION
+          14
+          Label : LEFT
+            8
+          Label : RIGHT
+            18
+        Label : EXPRESSION
+          14
+          Label : LEFT
+            19
+          Label : RIGHT
+            20
+            Label : ARGUMENT
+              21
+            Label : ARGUMENT
+              18
+            Label : ARGUMENT
+              22
+            Label : ARGUMENT
+              23
+        Label : EXPRESSION
+          24
+          Label : ARGUMENT
+            25
+            Label : CONCAT
+              26
+              Label : MEMBER
+                8
+              Label : OBJECT
+                12
+            Label : CONCAT
+              27
+        Label : EXPRESSION
+          24
+          Label : ARGUMENT
+            25
+            Label : CONCAT
+              26
+              Label : MEMBER
+                30
+                Label : CODE
+                  28
+                  Label : INDEX
+                    29
+                  Label : VARIABLE
+                    19
+              Label : OBJECT
+                12
+            Label : CONCAT
+              27

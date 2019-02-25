@@ -47,7 +47,7 @@ class RegisterGlobals extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
              ->analyzerIs('Variables/IsModified')
-             ->tokenIs('T_DOLLAR')
+             ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->outIs('NAME')
              ->samePropertyAs('code','k')
              ->back('first');

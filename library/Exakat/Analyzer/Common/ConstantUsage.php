@@ -20,19 +20,19 @@
  *
 */
 
-namespace Exakat\Analyzer\Php;
+
+namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
 
-class UseNullableType extends Analyzer {
-    protected $phpVersion = '7.1+';
+class ConstantUsage extends Analyzer {
+    protected $constants = array();
     
     public function analyze() {
-        // Return type function foo(): ?String
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs(array('RETURNTYPE', 'ARGUMENT'))
-             ->is('nullable', true)
-             ->back('first'); // Go back to fucntion
+        $constants =  makeFullNsPath($this->constants, \FNP_CONSTANT);
+
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->fullnspathIs($constants, Analyzer::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

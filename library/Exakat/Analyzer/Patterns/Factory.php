@@ -20,19 +20,31 @@
  *
 */
 
-namespace Exakat\Analyzer\Php;
+namespace Exakat\Analyzer\Patterns;
 
 use Exakat\Analyzer\Analyzer;
 
-class UseNullableType extends Analyzer {
-    protected $phpVersion = '7.1+';
-    
+class Factory extends Analyzer {
     public function analyze() {
-        // Return type function foo(): ?String
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs(array('RETURNTYPE', 'ARGUMENT'))
-             ->is('nullable', true)
-             ->back('first'); // Go back to fucntion
+        // function foo() { return new A(); }
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('New')
+             ->goToFunction();
+        $this->prepareQuery();
+
+        // function foo() { $a = new A(); return $a; }
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Variable')
+             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomIs('New')
+             ->goToFunction()
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

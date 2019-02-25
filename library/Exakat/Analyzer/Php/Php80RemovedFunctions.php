@@ -20,20 +20,22 @@
  *
 */
 
+
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\FunctionUsage;
 
-class UseNullableType extends Analyzer {
-    protected $phpVersion = '7.1+';
+class Php80RemovedFunctions extends FunctionUsage {
+    protected $phpVersion = '8.0-';
     
     public function analyze() {
-        // Return type function foo(): ?String
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs(array('RETURNTYPE', 'ARGUMENT'))
-             ->is('nullable', true)
-             ->back('first'); // Go back to fucntion
-        $this->prepareQuery();
+        $this->functions = array('image2wbmp',
+                                 'png2wbmp', 
+                                 'jpeg2wbmp',
+                                 'ldap_sort',
+                                 );
+        parent::analyze();
     }
 }
 

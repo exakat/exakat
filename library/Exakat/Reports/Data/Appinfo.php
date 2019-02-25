@@ -106,6 +106,7 @@ class Appinfo extends Data {
                     'Patterns' => array(
                         'Dependency Injection'               => 'Patterns/DependencyInjection',
                         'Courrier Anti-pattern'              => 'Patterns/CourrierAntiPattern',
+                        'Factory'                            => 'Patterns/Factory',
                     ),
 
                     'Namespaces' => array(
