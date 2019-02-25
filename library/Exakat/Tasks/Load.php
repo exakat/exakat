@@ -4713,7 +4713,7 @@ class Load extends Tasks {
             $variable->code     = $this->tokens[$current][1];
             $variable->fullcode = $this->tokens[$current][1].'{'.$expression->fullcode.'}';
             $variable->line     = $this->tokens[$current][2];
-            $variable->token    = $this->getToken($this->tokens[$current][0]);
+            $variable->token    = 'T_DOLLAR_OPEN_CURLY_BRACES';
             $this->pushExpression($variable);
 
             if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {

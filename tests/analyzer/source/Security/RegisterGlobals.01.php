@@ -25,6 +25,11 @@ foreach($_REQUEST as $k5 => $v5) {
     $$k5 = $v5;
 }
 
+// Some loop on GPC with $$k 
+foreach($_REQUEST as $k6 => $v6) {
+    ${$k6} = $v6;
+}
+
 // With extract
 extract($_FILES);
 extract($_GET, EXTR_IF_EXISTS);
