@@ -227,3 +227,8 @@ VCS
 changelog
 iterable
 natively
+HTTPS
+HTTP
+FTP
+FTPS
+SFTP
