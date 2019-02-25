@@ -1899,6 +1899,11 @@ class Load extends Tasks {
             $nsname = $this->processNextAsIdentifier();
             $nsname->fullnspath = '\\'.mb_strtolower($nsname->code);
 
+            if ($nullable === self::NULLABLE) {
+                $nsname->nullable = self::NULLABLE;
+                $nsname->fullcode = "?$nsname->fullcode";
+            }
+
             return $nsname;
         }
         
