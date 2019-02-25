@@ -105,8 +105,8 @@ abstract class Php {
             throw new NoRecognizedTokens();
         }
         
-        //'Php74',
-        $versions = array('Php80', 'Php74', 'Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55',);
+        //'Php80',
+        $versions = array('Php74', 'Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55', );
         
         foreach($versions as $version) {
             $errors = array();

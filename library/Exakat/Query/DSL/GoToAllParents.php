@@ -30,9 +30,9 @@ class GoToAllParents extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times(3)');
         } elseif ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.')');
+            return new Command('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times(3)');
         } else {
             assert(false, 'No such self as '.$self);
         }
