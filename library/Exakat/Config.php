@@ -28,7 +28,7 @@ use Exakat\Reports\Reports;
 use Phar;
 
 class Config {
-    const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74');
+    const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80',);
 
     public  $dir_root              = '.';
     public  $ext_root              = '.';
