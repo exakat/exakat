@@ -393,9 +393,12 @@ function makeArray($value) {
     }
 }
 
-function makeFullNsPath($functions, $constant = false) {
+const FNP_CONSTANT = true;
+const FNP_NOT_CONSTANT = false;
+
+function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
     // case for classes and functions
-    if ($constant === false) {
+    if ($constant === \FNP_NOT_CONSTANT) {
         $cb = function ($x) {
             $r = mb_strtolower($x);
             if (strpos($r, '\\\\') !== false) {
