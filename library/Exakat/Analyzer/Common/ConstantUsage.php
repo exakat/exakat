@@ -30,7 +30,7 @@ class ConstantUsage extends Analyzer {
     
     public function analyze() {
         $constants =  makeFullNsPath($this->constants, \FNP_CONSTANT);
-        print_r($constants);
+
         $this->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($constants, Analyzer::CASE_SENSITIVE);
         $this->prepareQuery();
