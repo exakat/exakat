@@ -2657,6 +2657,7 @@ class Load extends Tasks {
             $this->calls->addCall('class', $fullnspath, $string);
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
+
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
 
@@ -4137,20 +4138,34 @@ class Load extends Tasks {
                             $this->pushExpression($nsname);
                             $this->processAs();
                             $alias = $this->popExpression();
-    
-                            $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
-                            $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
-    
-                            $alias->fullnspath  = $prefix.mb_strtolower($nsname->fullcode);
-                            $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
+
+                            if ($useType === 'const') {
+                                $nsname->fullnspath = $prefix.$nsname->fullcode;
+                                $nsname->origin     = $prefix.$nsname->fullcode;
+        
+                                $alias->fullnspath  = $prefix.$nsname->fullcode;
+                                $alias->origin      = $prefix.$nsname->fullcode;
+                            } else {
+                                $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                                $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+        
+                                $alias->fullnspath  = $prefix.mb_strtolower($nsname->fullcode);
+                                $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
+                            }
+
     
                             $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
                             $alias->alias = $aliasName;
                             $this->addLink($use, $alias, 'USE');
                         } else {
                             $this->addLink($use, $nsname, 'USE');
-                            $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
-                            $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+                            if ($useType === 'const') {
+                                $nsname->fullnspath = $prefix.$nsname->fullcode;
+                                $nsname->origin     = $prefix.$nsname->fullcode;
+                            } else {
+                                $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                                $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+                            }
     
                             $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
                             $nsname->alias = $alias;
@@ -4164,36 +4179,21 @@ class Load extends Tasks {
             } else {
                 $this->addLink($use, $namespace, 'USE');
 
-                if (!$this->contexts->isContext(Context::CONTEXT_CLASS) &&
-                    !$this->contexts->isContext(Context::CONTEXT_TRAIT) ) {
+                $fullnspath = makeFullNsPath($namespace->fullcode, $useType === 'const' ? \FNP_CONSTANT : \FNP_NOT_CONSTANT);
+                $namespace->fullnspath = $fullnspath;
+                $namespace->origin     = $fullnspath;
 
-                    $fullnspath = makeFullNsPath($namespace->fullcode);
-                    $namespace->fullnspath = $fullnspath;
-                    $namespace->origin     = $fullnspath;
-
-                    if (isset($this->uses['class'][$prefix])) {
-                        $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
-                    }
-
-                    $namespace->fullnspath = $fullnspath;
-
-                    $alias = $this->addNamespaceUse($alias, $alias, $useType, $namespace);
-
-                    $namespace->alias = $alias;
-                    $origin->alias = $alias;
- 
-                } elseif (isset($this->uses['class'][$prefix])) {
+                if (isset($this->uses['class'][$prefix])) {
                     $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
-                    $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
-    
-                    $this->calls->addCall('class', $namespace->fullnspath, $namespace);
-                } else {
-                    list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
-    
-                    $namespace->fullnspath = $fullnspath;
-                    $namespace->aliased    = $aliased;
-                    $this->calls->addCall('class', $namespace->fullnspath, $namespace);
                 }
+
+                $namespace->fullnspath = $fullnspath;
+
+                $alias = $this->addNamespaceUse($alias, $alias, $useType, $namespace);
+
+                $namespace->alias = $alias;
+                $origin->alias = $alias;
+ 
 
                 $fullcode[] = $namespace->fullcode;
             }
@@ -5755,8 +5755,11 @@ class Load extends Tasks {
         } elseif (in_array($name->atom, array('Boolean', 'Null'), true)) {
             return array('\\'.mb_strtolower($name->fullcode), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Name', 'Newcall'), true)) {
-            $fnp = mb_strtolower($name->code);
-
+            if ($name->atom === 'Newcall') {
+               $fnp = mb_strtolower($name->code);
+            } else {
+               $fnp = $name->code;
+            }
             if (($offset = strpos($fnp, '\\')) === false) {
                 $prefix = $fnp;
             } else {
