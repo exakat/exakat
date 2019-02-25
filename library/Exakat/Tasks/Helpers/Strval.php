@@ -122,11 +122,23 @@ class Strval extends Plugin {
 
             case 'Logical' :
                 if ($atom->code === '|') {
-                    $atom->noDelimiter = $extras['LEFT']->noDelimiter | $extras['RIGHT']->noDelimiter;
+                    if (is_string($extras['LEFT']->noDelimiter) && is_string($extras['RIGHT']->noDelimiter)) {
+                        $atom->noDelimiter = $extras['LEFT']->noDelimiter | $extras['RIGHT']->noDelimiter;
+                    } else {
+                        $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter | (int) $extras['RIGHT']->noDelimiter);
+                    }
                 } elseif ($atom->code === '&') {
-                    $atom->noDelimiter = $extras['LEFT']->noDelimiter & $extras['RIGHT']->noDelimiter;
+                    if (is_string($extras['LEFT']->noDelimiter) && is_string($extras['RIGHT']->noDelimiter)) {
+                        $atom->noDelimiter = $extras['LEFT']->noDelimiter & $extras['RIGHT']->noDelimiter;
+                    } else {
+                        $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter & (int) $extras['RIGHT']->noDelimiter);
+                    }
                 } elseif ($atom->code === '^') {
-                    $atom->noDelimiter = $extras['LEFT']->noDelimiter ^ $extras['RIGHT']->noDelimiter;
+                    if (is_string($extras['LEFT']->noDelimiter) && is_string($extras['RIGHT']->noDelimiter)) {
+                        $atom->noDelimiter = $extras['LEFT']->noDelimiter ^ $extras['RIGHT']->noDelimiter;
+                    } else {
+                        $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter ^ (int) $extras['RIGHT']->noDelimiter);
+                    }
                 } elseif ($atom->code === '&&' || mb_strtolower($atom->code) === 'and') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter && (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
