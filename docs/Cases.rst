@@ -201,7 +201,7 @@ Cleverstyle
 
 :ref:`not-not`, in modules/OAuth2/OAuth2.php:190. 
 
-This double-call returns $results as a boolean, preventing a spill of data to the calling method. (bool) would be clearer here.
+This double-call returns ``$results`` as a boolean, preventing a spill of data to the calling method. The ``(bool)`` operator would be clearer here.
 
 .. code-block:: php
 
@@ -1514,6 +1514,79 @@ PHP_VERSION is actually build with PHP_MAJOR_VERSION, PHP_MINOR_VERSION and PHP_
 
     explode('.', PHP_VERSION);
 
+Undefined Properties
+====================
+
+.. _wordpress-classes-undefinedproperty:
+
+WordPress
+^^^^^^^^^
+
+:ref:`undefined-properties`, in wp-admin/includes/misc.php:74. 
+
+Properties are not defined, but they are thoroughly initialized when the XML document is parsed. All those definition should be in a property definition, for clear documentation.
+
+.. code-block:: php
+
+    $this->DeliveryLine1 = '';
+            $this->DeliveryLine2 = '';
+            $this->City = '';
+            $this->State = '';
+            $this->ZipAddon = '';
+
+
+--------
+
+
+.. _mediawiki-classes-undefinedproperty:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`undefined-properties`, in wp-admin/includes/misc.php:74. 
+
+parsedParametersDeleteLog is an undefined property. Defining the property with a null default value is important here, to keep the code running. 
+
+.. code-block:: php
+
+    protected function getMessageParameters() {
+    		if ( isset( $this->parsedParametersDeleteLog ) ) {
+    			return $this->parsedParametersDeleteLog;
+    		}
+
+Strict Comparison With Booleans
+===============================
+
+.. _phinx-structures-booleanstrictcomparison:
+
+Phinx
+^^^^^
+
+:ref:`strict-comparison-with-booleans`, in src/Phinx/Db/Adapter/MysqlAdapter.php:1131. 
+
+`ìsNull( )`` always returns a boolean : it may be only be ``true`` or ``false``. Until typehinted properties or return typehint are used, isNull() may return anything else. 
+
+.. code-block:: php
+
+    $column->isNull( ) == false
+
+
+--------
+
+
+.. _typo3-structures-booleanstrictcomparison:
+
+Typo3
+^^^^^
+
+:ref:`strict-comparison-with-booleans`, in typo3/sysext/lowlevel/Classes/Command/FilesWithMultipleReferencesCommand.php:90. 
+
+When 'dry-run' is not defined, the getOption( ) method actually returns a ``null``value. So, comparing the result of getOption() to false is actually wrong : using a constant to prevent values to be inconsistent is recommended here.
+
+.. code-block:: php
+
+    $input->getOption('dry-run') != false
+
 Lone Blocks
 ===========
 
@@ -2491,6 +2564,55 @@ Thelia
 
     $size = $size / 1024;
 
+Pre-increment
+=============
+
+.. _expressionengine-performances-prepostincrement:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`pre-increment`, in system/ee/EllisLab/ExpressionEngine/Controller/Utilities/Communicate.php:650. 
+
+Using preincrement in for() loops is safe and straightforward. 
+
+.. code-block:: php
+
+    for ($x = 0; $x < $number_to_send; $x++)
+    		{
+    			$email_address = array_shift($recipient_array);
+    
+    			if ( ! $this->deliverEmail($email, $email_address))
+    			{
+    				$email->delete();
+    
+    				$debug_msg = ee()->email->print_debugger(array());
+    
+    				show_error(lang('error_sending_email').BR.BR.$debug_msg);
+    			}
+    			$email->total_sent++;
+    		}
+
+
+--------
+
+
+.. _traq-performances-prepostincrement:
+
+Traq
+^^^^
+
+:ref:`pre-increment`, in src/Controllers/Tickets.php:84. 
+
+$this->currentProject->next_ticket_id value is ignored by the code. It may be turned into a preincrement.
+
+.. code-block:: php
+
+    TimelineModel::newTicketEvent($this->currentUser, $ticket)->save();
+    
+                $this->currentProject->next_ticket_id++;
+                $this->currentProject->save();
+
 Should Typecast
 ===============
 
@@ -2523,6 +2645,42 @@ This is another exact example.
 .. code-block:: php
 
     intval($_POST['pid']);
+
+No Direct Usage
+===============
+
+.. _edusoho-structures-nodirectusage:
+
+Edusoho
+^^^^^^^
+
+:ref:`no-direct-usage`, in edusoho/src/AppBundle/Controller/Admin/FinanceSettingController.php:107. 
+
+Glob() returns false, in case of error. It returns an empty array in case everything is fine, but nothing was found. In case of error, array_map() will stop the script.
+
+.. code-block:: php
+
+    array_map('unlink', glob($dir.'/MP_verify_*.txt'));
+
+
+--------
+
+
+.. _xoops-structures-nodirectusage:
+
+XOOPS
+^^^^^
+
+:ref:`no-direct-usage`, in htdocs/Frameworks/moduleclasses/moduleadmin/moduleadmin.php:585. 
+
+Although the file is readable, file() may return false in case of failure. On the other hand, implode doesn't accept boolean values.
+
+.. code-block:: php
+
+    $file = XOOPS_ROOT_PATH . /modules/{$module_dir}/docs/changelog.txt;
+                if ( is_readable( $file ) ) {
+                    $ret .= implode( '<br>', file( $file ) ) . \n;
+                }
 
 preg_replace With Option e
 ==========================
@@ -6300,5 +6458,25 @@ The replacement with ``yield from``is not straigthforward here. Yield is only ca
     					}
     				}
     			}
+
+Multiple Usage Of Same Trait
+============================
+
+.. _nextcloud-traits-multipleusage:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`multiple-usage-of-same-trait`, in build/integration/features/bootstrap/WebDav.php:41. 
+
+WebDav uses Sharing, and Sharing uses Webdav. Once using the other is sufficient. 
+
+.. code-block:: php
+
+    trait WebDav { 
+        use Sharing;
+        
+    }
+    //Trait Sharing is in /build/integration/features/bootstrap/Sharing.php:36
 
 

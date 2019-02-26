@@ -150,25 +150,29 @@ class ZendF3 {
         if ($component !== null) {
             $where[] = 'components.component = "'.$component.'"';
         }
+
         if ($release !== null) {
             $where[] = "releases.release = \"release-$release.0\"";
         }
+
         if (empty($where)) {
-            $where = '';
+            $whereSQL = '';
         } else {
-            $where = ' WHERE '.implode(' AND ', $where);
+            $whereSQL = ' WHERE '.implode(' AND ', $where);
         }
         
         
-        $query = 'SELECT type, cit, name, namespaces.namespace, release FROM deprecated 
-                    JOIN namespaces 
-                      ON deprecated.namespace_id = namespaces.id
-                    JOIN releases 
-                      ON namespaces.release_id = releases.id
-                    JOIN components 
-                      ON releases.component_id = components.id 
-                    '.$where.' 
-                    GROUP BY type, cit, name';
+        $query = <<<SQL
+SELECT type, cit, name, namespaces.namespace, release FROM deprecated 
+    JOIN namespaces 
+      ON deprecated.namespace_id = namespaces.id
+    JOIN releases 
+      ON namespaces.release_id = releases.id
+    JOIN components 
+      ON releases.component_id = components.id 
+    $whereSQL
+    GROUP BY type, cit, name
+SQL;
 
         $res = $this->sqlite->query($query);
         $return = array();

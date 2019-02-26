@@ -29,10 +29,12 @@ class GoToAllTraits extends DSL {
     public function run() : Command {
         list($self) = func_get_args();
 
-        if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('emit( ).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtap1").emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtap2").simplePath().from("gtap1").to("gtap2").by(id)');
+
+        if ($self === Analyzer::EXCLUDE_SELF) {
+            return new Command('as("gtat1").repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.').as("gtat2").simplePath().from("gtat1").to("gtat2").by(id)');
         } else {
-            return new Command('repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtat1").emit( ).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtat2").simplePath().from("gtat1").to("gtat2").by(id)');
         }
     }
 }

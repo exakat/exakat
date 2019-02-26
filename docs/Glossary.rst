@@ -601,6 +601,10 @@ Glossary
 
       + :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
+    + `image2wbmp()`
+
+      + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
+
     + `imagecolorallocate()`
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
@@ -728,6 +732,7 @@ Glossary
     + `jpeg2wbmp()`
 
       + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+      + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
     + `json_decode()`
 
@@ -738,6 +743,10 @@ Glossary
     + `List()`
 
       + :ref:`List With Appends <list-with-appends>`
+
+    + `ldap_sort()`
+
+      + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
     + `list()`
 
@@ -943,6 +952,7 @@ Glossary
     + `png2wbmp()`
 
       + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+      + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
     + `pow()`
 

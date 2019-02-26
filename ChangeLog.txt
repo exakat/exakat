@@ -1,4 +1,4 @@
-Version 1.6.8 (Li, King Songdi, coming up)
+Version 1.6.9 (Li, King Songdi, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,25 @@ Version 1.6.8 (Li, King Songdi, coming up)
 + Tokenizer
     + 
 
-Version 1.6.7 (Li, King Chujiang, coming up)
+Version 1.6.8 (Li, King Songdi, 2019-02-25)
++ Architecture
+    + Added support for PHP 8.0
+    + Fixed Constant FNP
+    + Advance progressbar when ignoring files
++ Report
+    + Ambassador : report usage of factories
+    + Collect stats about Foreach usage
++ Analyzer
+    + New analysis : Report violation of law of Demeter
+    + New analysis : Report removed constants and functions in PHP 8.0
+    + Updated analysis : Refactored Nullable Typehint
+    + Checked unit tests : 2851 / 2872 test pass (99% pass)
++ Tokenizer
+    + Fixed edge case for Logical with strings
+    + Reduced max level of looping in GoToAllParents
+    + Distinguish $$ and ${$
+
+Version 1.6.7 (Li, King Chujiang, 2019-02-18)
 + Architecture
     + Documentation covers more PHP functions
     + Added some missing PHP functions
