@@ -30,9 +30,9 @@ class GoToAllParentsTraits extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtapt1").repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.').as("gtapt2").simplePath().from("gtapt1").to("gtapt2").by(id)');
         } else {
-            return new Command('filter{true}.emit( ).repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtapt1").emit( ).repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.').as("gtapt2").simplePath().from("gtapt1").to("gtapt2").by(id)');
         }
     }
 }

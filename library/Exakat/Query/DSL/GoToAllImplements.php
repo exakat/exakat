@@ -30,9 +30,9 @@ class GoToAllImplements extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtai1").repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.').as("gtai2").simplePath().from("gtai1").to("gtai2").by(id)');
         } else {
-            return new Command('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtai1").filter{true}.emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtai2").simplePath().from("gtai1").to("gtai2").by(id)');
         }
     }
 }

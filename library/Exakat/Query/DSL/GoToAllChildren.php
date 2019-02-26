@@ -30,10 +30,10 @@ class GoToAllChildren extends DSL {
     public function run() {
         list($self) = func_get_args();
 
-        if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::$MAX_LOOPING.')');
+        if ($self === Analyzer::EXCLUDE_SELF) {
+            return new Command('as("gtac1").repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::$MAX_LOOPING.').as("gtac2").simplePath().from("gtac1").to("gtac2").by(id)');
         } else {
-            return new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('as("gtac1").emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::$MAX_LOOPING.').as("gtac2").simplePath().from("gtac1").to("gtac2").by(id)');
         }
     }
 }
