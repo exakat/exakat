@@ -763,18 +763,23 @@ GREMLIN;
         $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
         $query->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
+              ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('DEFINITION')
+              ->is('rank', 0)
               ->inIs('ARGUMENT')
               ->atomIs('Classalias', Analyzer::WITHOUT_CONSTANTS)
               ->outWithRank('ARGUMENT', 1)
               ->outIs('DEFINITION')
+              ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), Analyzer::WITHOUT_CONSTANTS)
+              ->dedup('')
+              ->property('fullnspath', 'fnp')
               ->addEFrom('DEFINITION', 'method')
               ->returnCount();
-        $query->prepareRawQuery();
+        $query->prepareRawQuery();   
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count = $result->toInt();
 
-        display("Set ".$count." class alias definitions");
+        display("Set $count class alias definitions");
         $this->log->log(__METHOD__);
     }
 
