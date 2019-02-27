@@ -27,6 +27,7 @@ class Command {
     static private $id = 0;
     public $gremlin = '';
     public $arguments = array();
+    private $sack = null;
     
     function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
@@ -45,6 +46,14 @@ class Command {
         
         $this->gremlin = $command;
         $this->arguments = $arguments;
+    }
+    
+    public function setSack($default = 0) {
+        $this->sack = $default;
+    }
+
+    public function getSack() {
+        return $this->sack;
     }
     
     function add(Command $other) {

@@ -30,11 +30,13 @@ class GoToAllParents extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("gtap1").repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.').as("gtap2").simplePath().from("gtap1").to("gtap2").by(id)');
-        } elseif ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('as("gtap1").emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtap2").simplePath().from("gtap1").to("gtap2").by(id)');
+            $command = new Command('repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         } else {
-            assert(false, 'No such self as '.$self);
+            $command = new Command('emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         }
     }
 }

@@ -30,9 +30,13 @@ class GoToAllImplements extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("gtai1").repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.').as("gtai2").simplePath().from("gtai1").to("gtai2").by(id)');
+            $command = new Command('repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         } else {
-            return new Command('as("gtai1").filter{true}.emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtai2").simplePath().from("gtai1").to("gtai2").by(id)');
+            $command = new Command('emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         }
     }
 }

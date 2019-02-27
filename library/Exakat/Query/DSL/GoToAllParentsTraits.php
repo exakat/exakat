@@ -30,9 +30,13 @@ class GoToAllParentsTraits extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("gtapt1").repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.').as("gtapt2").simplePath().from("gtapt1").to("gtapt2").by(id)');
+            $command = new Command('repeat( __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         } else {
-            return new Command('as("gtapt1").emit( ).repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.').as("gtapt2").simplePath().from("gtapt1").to("gtapt2").by(id)');
+            $command = new Command('emit( ).repeat( __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         }
     }
 }

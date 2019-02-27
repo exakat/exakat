@@ -97,7 +97,18 @@ class Query {
         }
         
         $this->analyzerId = $analyzerId;
-        
+
+        $sack = '';
+        foreach($this->commands as $command) {
+            if ($command->getSack() !== null) {
+                if (empty($sack)) {
+                    $sack = '.withSack {'.$command->getSack().'}{it.clone()}';
+                } else {
+                    die("There is already one sack used. Review this, please.");
+                }
+            }
+        }
+
         $commands = array_column($this->commands, 'gremlin');
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
@@ -108,7 +119,7 @@ class Query {
         if (substr($commands[0], 0, 9) === 'hasLabel(') {
             $first = $commands[0];
             array_shift($commands);
-            $this->query = "g.V().$first.groupCount(\"processed\").by(count()).as(\"first\")";
+            $this->query = "g{$sack}.V().$first.groupCount(\"processed\").by(count()).as(\"first\")";
             if (!empty($commands)) {
                 $this->query .= '.'.implode(".\n", $commands);
             }
@@ -117,7 +128,7 @@ class Query {
             array_shift($commands);
             $arg0 = array_pop($this->commands[0]->arguments);
             unset($this->commands[0]);
-            $this->query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
+            $this->query = 'g'.$sack.'.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
             if (!empty($commands)) {
                 $this->query .= '.'.implode(".\n", $commands);
             }
