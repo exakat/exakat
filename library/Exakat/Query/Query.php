@@ -98,16 +98,7 @@ class Query {
         
         $this->analyzerId = $analyzerId;
 
-        $sack = '';
-        foreach($this->commands as $command) {
-            if ($command->getSack() !== null) {
-                if (empty($sack)) {
-                    $sack = '.withSack {'.$command->getSack().'}{it.clone()}';
-                } else {
-                    die("There is already one sack used. Review this, please.");
-                }
-            }
-        }
+        $sack = $this->prepareSack($this->commands);
 
         $commands = array_column($this->commands, 'gremlin');
 
@@ -164,30 +155,24 @@ GREMLIN;
         $commands = implode('.', $commands);
         $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
 
+        $sack = $this->prepareSack($this->commands);
+
         $this->query = <<<GREMLIN
-g.V().as('first').$commands
+g{$sack}.V().as('first').$commands
 
 // Query (#{$this->id}) for {$this->analyzer}
 // php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n
 
 GREMLIN;
 
-//        print_r($this);
     }
     
     public function printRawQuery() {
-        $commands = array_column($this->commands, 'gremlin');
-        $commands = implode('.', $commands);
-//        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+        $this->prepareRawQuery();
 
-        $query = <<<GREMLIN
-g.V().as('first').$commands
-
-// Query (#{$this->id}) for {$this->analyzer}
-// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n
-
-GREMLIN;
-        print $query.PHP_EOL;
+        print $this->query.PHP_EOL;
+        print_r($this->arguments);
+        die();
     }
 
     public function getQuery() {
@@ -222,6 +207,21 @@ GREMLIN;
         }
 
         die();
+    }
+    
+    private function prepareSack($commands) {
+        $sack = '';
+        foreach($commands as $command) {
+            if ($command->getSack() !== null) {
+                if (empty($sack)) {
+                    $sack = '.withSack{'.$command->getSack().'}{it.clone()}';
+                } else {
+                  //  print("There is already one sack used. Review this, please : ".$command->getSack()).PHP_EOL;
+                }
+            }
+        }
+        
+        return $sack;
     }
 }
 ?>

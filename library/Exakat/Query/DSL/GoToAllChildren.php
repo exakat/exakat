@@ -31,11 +31,11 @@ class GoToAllChildren extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
+            $command = new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
             $command->setSack('[]');
             return $command;
         } else {
-            $command = new Command('emit().repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
+            $command = new Command('emit().repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
             $command->setSack('[]');
             return $command;
         }

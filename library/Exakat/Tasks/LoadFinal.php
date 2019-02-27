@@ -513,8 +513,6 @@ GREMLIN;
     }
 
     private function setClassPropertyRemoteDefinition() {
-        display('Set class property remote definitions');
-
         // For static method calls, in traits
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
         $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
@@ -559,12 +557,9 @@ GREMLIN;
         $count += $result->toInt();
 
         display("Set $count property remote definitions");
-        $this->log->log(__METHOD__);
     }
 
     private function setClassRemoteDefinitionWithTypehint() {
-        display('Set class method remote definitions with typehint');
-
         $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -838,7 +833,6 @@ GREMLIN;
     }
 
     private function makeClassConstantDefinition() {
-        display('Creating link between Class constant and definition');
         // Create link between Class constant and definition
         $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
         $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
