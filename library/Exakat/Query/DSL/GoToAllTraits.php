@@ -29,12 +29,14 @@ class GoToAllTraits extends DSL {
     public function run() : Command {
         list($self) = func_get_args();
 
-            return new Command('as("gtap1").emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtap2").simplePath().from("gtap1").to("gtap2").by(id)');
-
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("gtat1").repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.').as("gtat2").simplePath().from("gtat1").to("gtat2").by(id)');
+            $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         } else {
-            return new Command('as("gtat1").emit( ).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.').as("gtat2").simplePath().from("gtat1").to("gtat2").by(id)');
+            $command = new Command('emit( ).repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").sideEffect{ a = it.get().value("fullnspath"); }.as("a").sack().filter{!it.get().contains(a); }.select("a").sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.')');
+            $command->setSack('[]');
+            return $command;
         }
     }
 }

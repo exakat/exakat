@@ -372,7 +372,6 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         display($result->toInt().' setStringMethodDefinition');
-
         $this->logTime($result->toInt().' setStringMethodDefinition');
         $this->log->log(__METHOD__);
     }
@@ -648,8 +647,6 @@ GREMLIN;
     }
 
     private function setClassPropertyDefinitionWithTypehint() {
-        display('Set class property definitions with typehint');
-
         $query = new Query(0, $this->config->project, 'linkTypedProperty', null, $this->datastore);
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
@@ -723,7 +720,8 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-        display("Set ".($countP + $countM)." method, class and properties with typehinted properties");
+        $count = $countP + $countM;
+        display("Set $count method, class and properties with typehinted properties");
         $this->log->log(__METHOD__);
     }
 
@@ -784,38 +782,36 @@ GREMLIN;
     }
 
     private function setParentDefinition() {
-        display('Set parent definitions');
+        $query = new Query(0, $this->config->project, 'setParentDefinition 1', null, $this->datastore);
+        $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('parent')
+              ->goToClass()
+              ->outIs('EXTENDS')
+              ->inIs('DEFINITION')
+              ->addETo('DEFINITION', 'parent')
+              ->returnCount();
+        $query->prepareRawQuery();   
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count1 = $result->toInt();
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Parent").as('parent')
-     .repeat( __.in($this->linksIn) ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
-     .out("EXTENDS").in("DEFINITION")
-     .addE("DEFINITION")
-     .to("parent")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count1 = $res->toInt();
-
-        $query = <<<GREMLIN
-g.V().hasLabel("String").has('fullnspath', '\\\\parent').as('parent')
-     .repeat( __.in($this->linksIn) ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
-     .out("EXTENDS").in("DEFINITION")
-     .addE("DEFINITION")
-     .to("parent")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count2 = $res->toInt();
-
-
-        display("Set ".($count1 + $count2)." parent definitions");
-        $this->log->log(__METHOD__);
+        $query = new Query(0, $this->config->project, 'setParentDefinition 2', null, $this->datastore);
+        $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
+              ->fullnspathIs('\\\\parent', Analyzer::CASE_SENSITIVE)
+              ->_as('parent')
+              ->goToClass()
+              ->outIs('EXTENDS')
+              ->inIs('DEFINITION')
+              ->addETo('DEFINITION', 'parent')
+              ->returnCount();
+        $query->prepareRawQuery();   
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count2 = $result->toInt();
+        
+        $count = $count1 + $count2;
+        display("Set $count parent definitions");
     }
     
     private function setConstantDefinition() {
-        display('Set constant definitions');
-
         $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
      .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").coalesce( __.hasLabel("Constant").out("VALUE"),
@@ -839,7 +835,6 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $count = $res->toInt();
         display("Set $count constant definitions");
-        $this->log->log(__METHOD__);
     }
 
     private function makeClassConstantDefinition() {
@@ -867,8 +862,10 @@ GREMLIN;
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        
+        $count = $result->toInt();
 
-        display('Create '.($result->toInt()).' link between Class constant and definition');
+        display("Create $count link between Class constant and definition");
         $this->logTime('Class::constant definition');
         $this->log->log(__METHOD__);
     }
