@@ -1764,7 +1764,7 @@ GREMLIN;
         
         print_r($this->query->getArguments());
 
-        die();
+        die(__METHOD__);
     }
     
     private function initNewQuery() {
