@@ -482,7 +482,7 @@ class Load extends Tasks {
         $nbTokens = 0;
         $path = "{$this->config->projects_root}/projects/{$project}/code";
         if ($this->config->verbose && !$this->config->quiet) {
-           $progressBar = new Progressbar(0, count($files) + 1, exec('tput cols'));
+           $progressBar = new Progressbar(0, count($files) + 1, $this->config->screen_cols);
         }
         foreach($files as $file) {
             try {
