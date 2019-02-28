@@ -221,13 +221,6 @@ class Tinkergraph extends Graph {
         }
     }
 
-    public function getId() {
-        $query = 'g.V().id().max()';
-        $resId = $this->query($query);
-        
-        return $resId->toInt() + 1;
-    }
-
     private function simplifyArray($result) {
         $return = array();
         
@@ -250,7 +243,7 @@ class Tinkergraph extends Graph {
 
     public function getDefinitionSQL() {
         return <<<SQL
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id ELSE definitions.id END AS definition, calls.id AS call
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND

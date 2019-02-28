@@ -113,8 +113,12 @@ class Analyze extends Tasks {
         }
         
         $analyzerList = sort_dependencies($dependencies);
+        if (empty($analyzerList)) {
+            display("Done\n");
+            return;
+        }
         if (!$this->config->verbose && !$this->config->quiet) {
-           $this->progressBar = new Progressbar(0, count($analyzerList) + 1, exec('tput cols'));
+            $this->progressBar = new Progressbar(0, count($analyzerList) + 1, $this->config->screen_cols);
         }
         
         foreach($analyzerList as $analyzer_class) {

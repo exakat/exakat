@@ -73,6 +73,7 @@ class LoadFinal extends Tasks {
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setClassRemoteDefinitionWithTypehint();
+        $this->setClassRemoteDefinitionWithLocalNew();
         $this->setClassPropertyDefinitionWithTypehint();
         $this->setArrayClassDefinition();
         $this->setStringMethodDefinition();
@@ -559,6 +560,69 @@ GREMLIN;
         display("Set $count property remote definitions");
     }
 
+    private function setClassRemoteDefinitionWithLocalNew() {
+        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
+              ->outIs('RIGHT')
+              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countM = $result->toInt();
+
+        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
+        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
+              ->outIs('RIGHT')
+              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countP = $result->toInt();
+
+        $count = $countP + $countM;
+        display("Set $count method and properties remote with local new");
+        $this->log->log(__METHOD__);
+    }
+
     private function setClassRemoteDefinitionWithTypehint() {
         $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
@@ -751,8 +815,6 @@ GREMLIN;
     }
 
     private function setClassAliasDefinition() {
-        display('Set class alias definitions');
-
         $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
         $query->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -889,6 +951,7 @@ GREMLIN;
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count1 = $result->toInt();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -906,11 +969,11 @@ GREMLIN;
               ->raw(<<<GREMLIN
 where(
     __.sideEffect{aliases = [:]; insteadofs = [:]; }
-      .out('USE').out('BLOCK').out('EXPRESSION')
+      .out("USE").out("BLOCK").out("EXPRESSION")
       .sideEffect{
-        if (it.get().label() == 'Insteadof') {
-            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property('lccode').value();
-            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property('fullnspath').value();
+        if (it.get().label() == "Insteadof") {
+            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property("lccode").value();
+            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property("fullnspath").value();
             if (insteadofs[method] == null) {
                 insteadofs[method] = [theTrait];
             } else {
@@ -918,9 +981,9 @@ where(
             }
         }
 
-        if (it.get().label() == 'As') {
-            method = it.get().vertices(OUT, "NAME").next().property('lccode').value();
-            alias = it.get().vertices(OUT, "AS").next().property('lccode').value();
+        if (it.get().label() == "As") {
+            method = it.get().vertices(OUT, "NAME").next().property("lccode").value();
+            alias = it.get().vertices(OUT, "AS").next().property("lccode").value();
             aliases[alias] = method;
         }
       }
@@ -941,8 +1004,12 @@ GREMLIN
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
+
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        display('Create '.($result->toInt()).' link between $this->methodcall() and definition');
+        $count2 = $result->toInt();
+        
+        $count = $count1 + $count2;
+        display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call
         $__construct = $this->dictCode->translate('__construct');
@@ -959,9 +1026,10 @@ GREMLIN
                   ->returnCount();
             $query->prepareRawQuery();
             $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+            display('Create '.($result->toInt()).' link between new class and definition');
         }
 
-        display('Create '.($result->toInt()).' link between new class and definition');
         $this->logTime('Class::method() definition');
         $this->log->log(__METHOD__);
     }

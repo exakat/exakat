@@ -60,31 +60,25 @@ or(
 GREMLIN;
 
         // Relayed call to another function
-        $this->atomIs('Functioncall')
+        $this->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->raw($safeIndex)
-             ->_as('result')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')
 
-             ->savePropertyAs('code', 'varname')
-             ->inIs('ARGUMENT')
-
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(array('Functioncall', 'Print', 'Echo', 'Exit'))
-             ->outIs('ARGUMENT')
-             ->outIsIE('CODE')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             
              ->analyzerIs('Security/SensitiveArgument')
-             ->atomIs(array('Variable', 'Variableobject'))
-             ->samePropertyAs('code', 'varname')
-             ->back('result');
+             ->back('first');
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
