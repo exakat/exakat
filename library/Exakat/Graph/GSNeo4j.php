@@ -168,6 +168,8 @@ class GSNeo4j extends Graph {
         if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml")) {
             copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.{$this->gremlinVersion}.yaml",
                   "{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
+            copy( "{$this->config->dir_root}/server/gsneo4j/exakat.properties",
+                  "{$this->config->gsneo4j_folder}/conf/exakat.properties");
         }
 
         if (in_array($this->gremlinVersion, array('3.3', '3.4'))) {
