@@ -31,14 +31,28 @@ class CleanDb extends Tasks {
     public function run() {
         $this->cleanTmpDir();
          if (Tasks::$semaphore === null) {
-            $this->gremlin->clean();
+            $this->manageServer();
         } else {
             fclose(Tasks::$semaphore);
             try {
-                $this->gremlin->clean();
+                $this->manageServer();
             } finally {
                 Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
             }
+        }
+        
+    }
+    
+    private function manageServer() {
+        if ($this->config->stop === true) {
+            display('Stop gremlin server');
+            $this->gremlin->stop();
+        } elseif ($this->config->start === true) {
+            display('Start gremlin server');
+            $this->gremlin->start();
+        } else {
+            display('Restart gremlin server');
+            $this->gremlin->clean();
         }
     }
 
