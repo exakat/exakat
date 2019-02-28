@@ -172,7 +172,7 @@ GREMLIN;
 
         print $this->query.PHP_EOL;
         print_r($this->arguments);
-        die();
+        die(__METHOD__);
     }
 
     public function getQuery() {
@@ -189,7 +189,7 @@ GREMLIN;
         
         var_dump($this->query);
         print_r($this->arguments);
-        die();
+        die(__METHOD__);
     }
 
     public function debugQuery() {
@@ -206,7 +206,7 @@ GREMLIN;
             $this->rowCount = 0;
         }
 
-        die();
+        die(__METHOD__);
     }
     
     private function prepareSack($commands) {

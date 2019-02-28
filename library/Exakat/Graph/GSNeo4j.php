@@ -113,7 +113,7 @@ class GSNeo4j extends Graph {
         } else {
             print "Processing unknown type ".gettype($result).PHP_EOL;
             var_dump($result);
-            die();
+            die(__METHOD__);
         }
     }
     
