@@ -493,7 +493,9 @@ class Load extends Tasks {
                 }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($file, $e->getMessage());
-                echo $progressBar->advance();
+                if ($this->config->verbose && !$this->config->quiet) {
+                    echo $progressBar->advance();
+                }
             }
         }
 

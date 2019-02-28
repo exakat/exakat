@@ -187,6 +187,8 @@ class Config {
             $return = $this->themas;
         } elseif (isset($this->options[$name])) {
             $return = $this->options[$name];
+        } elseif ($name === 'screen_cols') {
+            $return = $this->screen_cols;
         } else {
 //            debug_print_backtrace();
 //            assert(false, "No such config property as '$name'");
