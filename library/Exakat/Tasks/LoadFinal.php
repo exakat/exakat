@@ -751,8 +751,6 @@ GREMLIN;
     }
 
     private function setClassAliasDefinition() {
-        display('Set class alias definitions');
-
         $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
         $query->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -889,6 +887,7 @@ GREMLIN;
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count1 = $result->toInt();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -906,11 +905,11 @@ GREMLIN;
               ->raw(<<<GREMLIN
 where(
     __.sideEffect{aliases = [:]; insteadofs = [:]; }
-      .out('USE').out('BLOCK').out('EXPRESSION')
+      .out("USE").out("BLOCK").out("EXPRESSION")
       .sideEffect{
-        if (it.get().label() == 'Insteadof') {
-            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property('lccode').value();
-            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property('fullnspath').value();
+        if (it.get().label() == "Insteadof") {
+            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property("lccode").value();
+            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property("fullnspath").value();
             if (insteadofs[method] == null) {
                 insteadofs[method] = [theTrait];
             } else {
@@ -918,9 +917,9 @@ where(
             }
         }
 
-        if (it.get().label() == 'As') {
-            method = it.get().vertices(OUT, "NAME").next().property('lccode').value();
-            alias = it.get().vertices(OUT, "AS").next().property('lccode').value();
+        if (it.get().label() == "As") {
+            method = it.get().vertices(OUT, "NAME").next().property("lccode").value();
+            alias = it.get().vertices(OUT, "AS").next().property("lccode").value();
             aliases[alias] = method;
         }
       }
@@ -941,8 +940,12 @@ GREMLIN
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
+
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        display('Create '.($result->toInt()).' link between $this->methodcall() and definition');
+        $count2 = $result->toInt();
+        
+        $count = $count1 + $count2;
+        display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call
         $__construct = $this->dictCode->translate('__construct');
@@ -959,9 +962,10 @@ GREMLIN
                   ->returnCount();
             $query->prepareRawQuery();
             $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+            display('Create '.($result->toInt()).' link between new class and definition');
         }
 
-        display('Create '.($result->toInt()).' link between new class and definition');
         $this->logTime('Class::method() definition');
         $this->log->log(__METHOD__);
     }
