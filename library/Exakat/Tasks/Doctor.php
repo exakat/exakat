@@ -247,27 +247,8 @@ TEXT
                 file_put_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties", $properties);
             }
 
-            if (!file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh") &&
-                 file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/")
-                 ) {
-                if (copy("{$this->config->dir_root}/server/gsneo4j/gremlin-server.sh",
-                         "{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh")) {
-                    chmod("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/bin/gremlin-server.exakat.sh", 0755);
-                } else {
-                    display("Error while copying gremlin-server.exakat.sh file to {$this->config->gsneo4j_folder}.");
-                }
-            }
             $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->gsneo4j_folder}");
         } elseif ($graphdb === 'tinkergraph') {
-            if (!file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh") &&
-                 file_exists("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/")) {
-                if (copy("{$this->config->dir_root}/server/{$this->config->tinkergraph_folder}/gremlin-server.sh",
-                  "{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh")) {
-                    chmod("{$this->config->projects_root}/{$this->config->tinkergraph_folder}/bin/gremlin-server.exakat.sh", 0755);
-                } else {
-                    display("Error while copying gremlin-server.exakat.sh file to {$this->config->tinkergraph_folder}.");
-                }
-            }
             $this->checkGremlinServer("{$this->config->projects_root}/{$this->config->tinkergraph_folder}");
         } elseif ($graphdb === 'nogremlin') {
             // Nothing to do
@@ -398,9 +379,9 @@ TEXT
             $stats['host'] = $this->config->tinkergraph_host;
             $stats['port'] = $this->config->tinkergraph_port;
 
-            $gremlinJar = glob($this->config->tinkergraph_folder.'/lib/gremlin-core-*.jar');
+            $gremlinJar = glob("{$this->config->tinkergraph_folder}/lib/gremlin-core-*.jar");
             $gremlinVersion = basename(array_pop($gremlinJar));
-            //gremlin-core-3.2.5.jar
+            //example : gremlin-core-3.2.5.jar
             $gremlinVersion = substr($gremlinVersion, 13, -4);
             
             $stats['gremlin version'] = $gremlinVersion;
