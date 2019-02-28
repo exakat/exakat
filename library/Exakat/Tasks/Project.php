@@ -474,12 +474,12 @@ class Project extends Tasks {
         
         $sqlite = new \Sqlite3($sqliteFilePrevious);
         $res = $sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="hash"');
-        if ($res === false) {
+        if (!$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
             return;
         }
 
         $res = $sqlite->query('SELECT value FROM hash WHERE key="vcs_revision"');
-        if ($res === false) {
+        if (!$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
             return;
         }
         $revision = $res->fetchArray(\SQLITE3_ASSOC)['value'];
