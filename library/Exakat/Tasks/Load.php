@@ -523,6 +523,18 @@ class Load extends Tasks {
 
         $this->reset();
 
+/*
+        $loader = $this->loader;
+        $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
+        foreach($ignoredFiles as $file => $reason) {
+            try {
+                $this->processFile($file, $dir);
+            } catch (NoFileToProcess $e) {
+                $this->datastore->ignoreFile($file, $e->getMessage());
+            }
+        }
+        $this->loader = $loader;
+*/
         $nbTokens = 0;
         foreach($files as $file) {
             try {
