@@ -21,10 +21,11 @@
 */
 
 
-namespace Exakat\Tasks;
+namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Themes;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Query\Query;
@@ -32,18 +33,36 @@ use Exakat\Query\DSL\DSL;
 use Exakat\Data\Dictionary;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
+use Exakat\Datastore;
+use Exakat\Log;
 
-class LoadFinal extends Tasks {
-    const CONCURENCE = self::ANYTIME;
-
-    private $linksIn = '';
-
+class LoadFinal {
     private $PHPconstants = array();
     private $PHPfunctions = array();
     private $dictCode = null;
+    
+    protected $gremlin   = null;
+    protected $config    = null;
+    protected $datastore = null;
+    protected $log       = null;
+
+    public function __construct(Graph $gremlin, Config $config, Datastore $datastore) {
+        $this->gremlin   = $gremlin;
+        $this->config    = $config;
+        $this->datastore = $datastore;
+
+        $a = get_class($this);
+        $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
+        $this->log = new Log($this->logname,
+                             "{$this->config->projects_root}/projects/{$this->config->project}");
+
+    }
+
+    protected function newQuery($title) : Query {
+        return new Query(0, $this->config->project, $title, null, $this->datastore);
+    }
 
     public function run() {
-        $this->linksIn = GraphElements::linksAsList();
 
         $this->dictCode = Dictionary::factory($this->datastore);
 
@@ -73,6 +92,7 @@ class LoadFinal extends Tasks {
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setClassRemoteDefinitionWithTypehint();
+        $this->setClassRemoteDefinitionWithReturnTypehint();
         $this->setClassRemoteDefinitionWithLocalNew();
         $this->setClassPropertyDefinitionWithTypehint();
         $this->setArrayClassDefinition();
@@ -80,11 +100,15 @@ class LoadFinal extends Tasks {
 
         $this->overwrittenMethods();
         $this->overwrittenProperties();
-        $this->overwrittenConstants();
 
-        $this->solveTraitMethods();
+        $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
+        $task->run();
 
-        $this->followClosureDefinition();
+        $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+
+        $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
 
         display('End load final');
         $this->logTime('Final');
@@ -311,31 +335,6 @@ GREMLIN;
 
         $this->logTime($result->toInt().' overwrittenProperties end');
         display($result->toInt().' overwrittenProperties');
-        $this->log->log(__METHOD__);
-    }
-
-    private function overwrittenConstants() {
-        $this->logTime('overwrittenConstants');
-        
-        $query = new Query(0, $this->config->project, 'overwrittenConstants', null, $this->datastore);
-        $query->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->savePropertyAs('code', 'name')
-              ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
-              ->outIs('CONST')
-              ->outIs('CONST')
-              ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
-              ->inIs('NAME')
-              ->addEFrom('OVERWRITE', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $this->logTime($result->toInt().' overwrittenConstant end');
-        display($result->toInt().' overwrittenConstants');
         $this->log->log(__METHOD__);
     }
 
@@ -705,6 +704,99 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
 
+    private function setClassRemoteDefinitionWithReturnTypehint() {
+        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countM = $result->toInt();
+
+        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
+        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countP = $result->toInt();
+
+        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
+        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('constante')
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->inIs('CONSTANT')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'constante')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countC = $result->toInt();
+
+        display("Set ".($countP + $countM + $countC)." method, constants and properties remote with return typehint");
+    }
+
     private function setClassPropertyDefinitionWithTypehint() {
         $query = new Query(0, $this->config->project, 'linkTypedProperty', null, $this->datastore);
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
@@ -1032,66 +1124,6 @@ GREMLIN
 
         $this->logTime('Class::method() definition');
         $this->log->log(__METHOD__);
-    }
-
-    private function solveTraitMethods() {
-        $query = new Query(0, $this->config->project, 'solveTraitMethods', null, $this->datastore);
-        $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('BLOCK')
-              ->outIs('EXPRESSION')
-              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('results')
-              ->tokenIs('T_STRING')
-              ->savePropertyAs('lccode', 'methode')
-              ->back('first')
-              ->outIs('USE')
-              ->inIs('DEFINITION')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'results')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        display('Created '.($result->toInt()).' links for use in traits');
-    }
-    
-    private function followClosureDefinition() {
-        // local usage
-        $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
-        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('RIGHT')
-              ->outIs('LEFT')
-              ->inIs('DEFINITION')  // Find all variable usage
-              ->outIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        // relayed usage
-        $query = new Query(0, $this->config->project, 'followClosureDefinition', null, $this->datastore);
-        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
-              ->hasIn('ARGUMENT')
-              ->savePropertyAs('rank', 'ranked')
-              ->inIs('ARGUMENT')
-              ->inIs('DEFINITION')  // Find all variable usage
-              ->outIs('ARGUMENT')
-              ->samePropertyAs('rank', 'ranked', Analyzer::CASE_SENSITIVE)
-              ->outIs('NAME')
-              ->outIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        display('Created '.($result->toInt()).' links for closures');
     }
 
     private function defaultIdentifiers() {
