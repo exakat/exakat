@@ -24,6 +24,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\GraphElements;
+use Exakat\Graph\Graph;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
@@ -33,7 +34,7 @@ use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchLoader;
 use Exakat\Phpexec;
-use Exakat\Tasks\LoadFinal;
+use Exakat\Tasks\LoadFinal\LoadFinal;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Calls;
@@ -179,7 +180,7 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
+    public function __construct(Graph $gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
         $this->atomGroup = new AtomGroup();
@@ -467,7 +468,7 @@ class Load extends Tasks {
         $this->loader->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
-        $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
+        $loadFinal = new LoadFinal($this->gremlin, $this->config, $this->datastore);
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
@@ -2384,6 +2385,7 @@ class Load extends Tasks {
             $this->runPlugins($namecall, array());
             ++$this->id; // Skip )
 
+            $this->checkExpression();
             return $namecall;
         }
 
@@ -2434,6 +2436,7 @@ class Load extends Tasks {
             $this->runPlugins($namecall, array('NAME'  => $name,));
             ++$this->id; // Skip )
 
+            $this->checkExpression();
             return $namecall;
         }
 
@@ -2460,6 +2463,7 @@ class Load extends Tasks {
 
             $this->processDefineAsConstants($namecall, $name, false);
 
+            $this->checkExpression();
             return $namecall;
         }
 
@@ -2488,6 +2492,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
             ++$this->id; // Skip )
 
+            $this->checkExpression();
             return $namecall;
         }
         
@@ -2501,8 +2506,9 @@ class Load extends Tasks {
             } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 ++$parenthese;
             }
-        } 
-        
+        }
+
+        $this->checkExpression();
         return $namecall;
     }
 

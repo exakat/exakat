@@ -1,0 +1,27 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          11
+          Label : LEFT
+            7
+            Label : INDEX
+              8
+              Label : NAME
+                9
+              Label : VALUE
+                10
+            Label : VARIABLE
+              5
+          Label : RIGHT
+            12
