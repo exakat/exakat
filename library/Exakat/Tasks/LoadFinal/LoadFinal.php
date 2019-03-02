@@ -90,13 +90,21 @@ class LoadFinal {
         $this->propagateConstants();
 
         $this->setClassPropertyRemoteDefinition();
-        $this->setClassMethodRemoteDefinition();
+        $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $this->setClassRemoteDefinitionWithTypehint();
         $this->setClassRemoteDefinitionWithReturnTypehint();
-        $this->setClassRemoteDefinitionWithLocalNew();
+
+        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $this->setClassPropertyDefinitionWithTypehint();
         $this->setArrayClassDefinition();
         $this->setStringMethodDefinition();
+
+        $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
+        $task->run();
 
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
@@ -516,69 +524,6 @@ GREMLIN;
         display("Set $count property remote definitions");
     }
 
-    private function setClassRemoteDefinitionWithLocalNew() {
-        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
-        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
-              ->hasNoIn('DEFINITION')
-              ->outIs('METHOD')
-              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('lccode', 'name')
-              ->inIs('METHOD')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
-              ->outIs('RIGHT')
-              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NEW')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('METHOD')
-              ->outIs('NAME')
-              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countM = $result->toInt();
-
-        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('member')
-              ->hasNoIn('DEFINITION')
-              ->outIs('MEMBER')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('MEMBER')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
-              ->outIs('RIGHT')
-              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NEW')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countP = $result->toInt();
-
-        $count = $countP + $countM;
-        display("Set $count method and properties remote with local new");
-        $this->log->log(__METHOD__);
-    }
-
     private function setClassRemoteDefinitionWithTypehint() {
         $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
@@ -830,36 +775,6 @@ GREMLIN;
 
         $count = $countP + $countM;
         display("Set $count method, class and properties with typehinted properties");
-        $this->log->log(__METHOD__);
-    }
-
-    private function setClassMethodRemoteDefinition() {
-        display('Set class method remote definitions');
-
-        // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
-              ->hasNoIn('DEFINITION')
-              ->outIs('METHOD')
-              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('lccode', 'name')
-              ->inIs('METHOD')
-              ->outIs('CLASS')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count = $result->toInt();
-
-        display("Set $count method remote definitions");
         $this->log->log(__METHOD__);
     }
 
