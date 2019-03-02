@@ -99,8 +99,11 @@ class LoadFinal {
         $this->setStringMethodDefinition();
 
         $this->overwrittenMethods();
-        $this->overwrittenProperties();
 
+        $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
 
@@ -292,50 +295,6 @@ GREMLIN;
         display('   /'.$title);
         $this->logTime('end '.$title);
         $this->log->log($method);
-    }
-
-    private function overwrittenMethods() {
-        $this->logTime('overwrittenMethods');
-        
-        $query = new Query(0, $this->config->project, 'overwrittenMethods', null, $this->datastore);
-        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->savePropertyAs('lccode', 'name')
-              ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addEFrom('OVERWRITE', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $this->logTime($result->toInt().' overwrittenMethods end');
-        display($result->toInt().' overwrittenMethods');
-        $this->log->log(__METHOD__);
-    }
-
-    private function overwrittenProperties() {
-        $this->logTime('overwrittenProperties');
-        
-        $query = new Query(0, $this->config->project, 'overwrittenProperties', null, $this->datastore);
-        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('propertyname', 'name')
-              ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
-              ->addEFrom('OVERWRITE', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $this->logTime($result->toInt().' overwrittenProperties end');
-        display($result->toInt().' overwrittenProperties');
-        $this->log->log(__METHOD__);
     }
 
     private function setStringMethodDefinition() {
