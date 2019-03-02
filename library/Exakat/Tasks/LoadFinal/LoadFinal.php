@@ -98,8 +98,6 @@ class LoadFinal {
         $this->setArrayClassDefinition();
         $this->setStringMethodDefinition();
 
-        $this->overwrittenMethods();
-
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);

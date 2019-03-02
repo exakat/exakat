@@ -48,6 +48,7 @@ use Exakat\Tasks\Helpers\Precedence;
 use Exakat\Tasks\Helpers\CloneType1;
 use Exakat\Tasks\Helpers\Php;
 use ProgressBar\Manager as ProgressBar;
+use Exakat\Loader\Collector;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -57,6 +58,7 @@ class Load extends Tasks {
     private $php    = null;
     private $loader = null;
     private $loaderList = array('SplitGraphson',
+                                'Collector',
                                 'None',
                                 );
 
