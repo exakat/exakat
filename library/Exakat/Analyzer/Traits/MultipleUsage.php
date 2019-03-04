@@ -31,7 +31,8 @@ class MultipleUsage extends Analyzer {
         $this->atomIs('Usetrait')
              ->outIs('USE')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->goToTrait()
+             ->inIs('USE')
+             ->inIs('USE')
              ->_as('result')
              ->filter(
                 $this->side()

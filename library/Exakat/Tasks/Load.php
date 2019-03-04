@@ -5792,11 +5792,10 @@ class Load extends Tasks {
             } else {
                 $prefix = substr($fnp, 0, $offset);
             }
-            
             // This is an identifier, self or parent
-            if ($type === 'class' && isset($this->uses['class'][$fnp])) {
-                $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
-                return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
+            if ($type === 'class' && isset($this->uses['class'][mb_strtolower($fnp)])) {
+                $this->addLink($name, $this->uses['class'][mb_strtolower($fnp)], 'DEFINITION');
+                return array($this->uses['class'][mb_strtolower($fnp)]->fullnspath, self::ALIASED);
 
             } elseif ($type === 'class' && isset($this->uses['class'][$prefix])) {
                 $this->addLink($name, $this->uses['class'][$prefix], 'DEFINITION');
