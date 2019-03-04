@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('$i->h( )', 
-                      '$this->b()->d()',
+                      '$this->b( )->d( )',
                      );
 
 $expected_not = array('$e->getMessage( )', 
