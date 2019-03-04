@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class VariableUsedOnce extends Analyzer {
-    /* 16 methods */
+    /* 17 methods */
 
     public function testVariables_VariableUsedOnce01()  { $this->generic_test('Variables_VariableUsedOnce.01'); }
     public function testVariables_VariableUsedOnce02()  { $this->generic_test('Variables_VariableUsedOnce.02'); }
@@ -25,5 +25,6 @@ class VariableUsedOnce extends Analyzer {
     public function testVariables_VariableUsedOnce14()  { $this->generic_test('Variables/VariableUsedOnce.14'); }
     public function testVariables_VariableUsedOnce15()  { $this->generic_test('Variables/VariableUsedOnce.15'); }
     public function testVariables_VariableUsedOnce16()  { $this->generic_test('Variables/VariableUsedOnce.16'); }
+    public function testVariables_VariableUsedOnce17()  { $this->generic_test('Variables/VariableUsedOnce.17'); }
 }
 ?>
