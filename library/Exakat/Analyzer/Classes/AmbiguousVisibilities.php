@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AmbiguousVisibilities extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // Properties with the same name, but with different visibility
         $query = <<<GREMLIN
