@@ -28,24 +28,24 @@ use Exakat\Query\Query;
 
 class SetClassRemoteDefinitionWithInjection extends LoadFinal {
     public function run() {
+        print "Running SetClassRemoteDefinitionWithInjection\n";
         $query = new Query(0, $this->config->project, 'SetClassRemoteDefinitionWithInjection', null, $this->datastore);
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('member')
-              ->inIs('LEFT')
-              ->atomis('Assignation', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('RIGHT')
+        $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('TYPEHINT')
+              ->outIs('NAME')
+              ->outIs('DEFINITION')
               ->atomIs('Variable', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('RIGHT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('LEFT')
+              ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+
               ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->outIs('TYPEHINT')
-              ->inIs('DEFINITION')
-              ->_as('theClass')
-              
-              ->back('first')
-              ->inIs('DEFINITION')
+              ->atomIs('Propertydefinition',  Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'theClass')
+              ->addEFrom('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
