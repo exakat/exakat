@@ -86,6 +86,9 @@ class LoadFinal {
         
         $this->setConstantDefinition();
 
+        $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
