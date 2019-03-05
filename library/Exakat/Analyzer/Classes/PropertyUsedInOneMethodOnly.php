@@ -35,16 +35,13 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->analyzerIsNot('Classes/UsedOnceProperty')
-             ->raw(<<<GREMLIN
-where( 
-    __.out("DEFINITION")
-      .repeat( __.in() ).until(hasLabel("Magicmethod", "Method"))
-      .dedup()
-      .count()
-      .is(eq(1))
-    )
-GREMLIN
-);
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->goToInstruction(array('Magicmethod', 'Method'))
+                     ->dedup()
+                     ->raw('count().is(eq(1))')
+             );
         $this->prepareQuery();
     }
 }
