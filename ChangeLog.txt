@@ -1,4 +1,4 @@
-Version 1.6.9 (Li, King Songdi, coming up)
+Version 1.6.9 (Bao King Yama, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,32 @@ Version 1.6.9 (Li, King Songdi, coming up)
 + Tokenizer
     + 
 
-Version 1.6.8 (Li, King Songdi, 2019-02-25)
+Version 1.6.9 (Lu King Wuguan, 2019-03-04)
++ Architecture
+    + Optimized Dump when navigating the links to the File Atom
+    + Refactored LoadFinal into separate classes
+    + Upgraded to Tinkergraph 3.3.5
+    + Added options to cleandb to stop and start gremlin from exakat
+    + Skip the task if no analysis has to run
++ Report
+    + 
++ Analyzer
+    + New analysis : Report inconsistent usage of properties or variables
+    + New analysis : Typehinted return must return
+    + Updated analysis : Variables used once handles closure (use) correctly
+    + Updated analysis : Is Zero was refactored partially (WIP)
+    + Updated analysis : Bad Typehint relay got a fix
+    + Updated analysis : Function Subscripting is only suggested for one usage
+    + Updated analysis : Lost References was modernized
+    + Checked unit tests : 2854 / 2881 test pass (99% pass)
++ Tokenizer
+    + Added definition for injected properties
+    + Fixed sack() for subqueries
+    + $this is not a classic variable
+    + Removed double DEFINITION links
+    + Fixed edge case with define() at the end of a script
+
+Version 1.6.8 (Yu King Songdi, 2019-02-25)
 + Architecture
     + Added support for PHP 8.0
     + Fixed Constant FNP
@@ -26,7 +51,7 @@ Version 1.6.8 (Li, King Songdi, 2019-02-25)
     + Reduced max level of looping in GoToAllParents
     + Distinguish $$ and ${$
 
-Version 1.6.7 (Li, King Chujiang, 2019-02-18)
+Version 1.6.7 (Li King Chujiang, 2019-02-18)
 + Architecture
     + Documentation covers more PHP functions
     + Added some missing PHP functions
@@ -47,7 +72,7 @@ Version 1.6.7 (Li, King Chujiang, 2019-02-18)
     + Fixed handling of Nullable for typehint
     + Started preparing for Gremlin 3.4.0 : WIP
 
-Version 1.6.6 (Jiang, King Qinguang , 2019-02-11)
+Version 1.6.6 (Jiang King Qinguang , 2019-02-11)
 + Architecture
     + Removed FetchContext() from DSL
     + Added options to follow constants from atomIs.
