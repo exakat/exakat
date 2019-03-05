@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Feb 2019 20:08:25 +0000
-.. comment: Generation hash : 5b36ee233f64fb35f6e9b8b90bbf288c2cbd5ebd
+.. comment: Generation date : Tue, 05 Mar 2019 15:01:32 +0000
+.. comment: Generation hash : f4a722291d2e71bf5ff77aa5cea61aa19e84dc62
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1371,6 +1371,14 @@ It is recommended to use the &&, ^ and || operators, instead of and, or and xor,
 
 
 See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use symbol && rather than letter and
+* To be safe, add parenthesis to enforce priorities
 
 +-------------+-------------------------------+
 | Short name  | Php/AssignAnd                 |
@@ -8313,17 +8321,27 @@ Since PHP 5.4, it is now possible use function results as an array, and access d
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Structures/FunctionPreSubscripting |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
-+-------------+------------------------------------+
-| Php Version | With PHP 5.4 and more recent       |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Skip the local variable and directly use the return value from the function
+
++-------------+----------------------------------------------------+
+| Short name  | Structures/FunctionPreSubscripting                 |
++-------------+----------------------------------------------------+
+| Themes      | :ref:`Analyze`                                     |
++-------------+----------------------------------------------------+
+| Php Version | With PHP 5.4 and more recent                       |
++-------------+----------------------------------------------------+
+| Severity    | Minor                                              |
++-------------+----------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                   |
++-------------+----------------------------------------------------+
+| Examples    | :ref:`openconf-structures-functionpresubscripting` |
++-------------+----------------------------------------------------+
 
 
 
@@ -11032,15 +11050,22 @@ When assigning a referenced variable with another reference, the initial referen
 
 Do not reassign a reference with another reference. Assign new content to the reference to change its value.
 
-+-------------+--------------------------+
-| Short name  | Variables/LostReferences |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+Suggestions
+^^^^^^^^^^^
+
+* Always assign new value to an referenced argument, and don't reassign a new reference
+
++-------------+-------------------------------------------+
+| Short name  | Variables/LostReferences                  |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`                            |
++-------------+-------------------------------------------+
+| Severity    | Major                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`wordpress-variables-lostreferences` |
++-------------+-------------------------------------------+
 
 
 
@@ -16176,6 +16201,53 @@ List of directives that are removed in PHP 7.0.
 
 
 
+.. _php-7.0-removed-functions:
+
+PHP 7.0 Removed Functions
+#########################
+
+
+The following PHP native functions were removed in PHP 7.0.
+
+* `ereg() <http://www.php.net/ereg>`_
+* `ereg_replace() <http://www.php.net/ereg_replace>`_
+* `eregi() <http://www.php.net/eregi>`_
+* `eregi_replace() <http://www.php.net/eregi_replace>`_
+* `split() <http://www.php.net/split>`_
+* `spliti() <http://www.php.net/spliti>`_
+* `sql_regcase() <http://www.php.net/sql_regcase>`_
+* `magic_quotes_runtime() <http://www.php.net/magic_quotes_runtime>`_
+* `set_magic_quotes_runtime() <http://www.php.net/set_magic_quotes_runtime>`_
+* `call_user_method() <http://www.php.net/call_user_method>`_
+* `call_user_method_array() <http://www.php.net/call_user_method_array>`_
+* `set_socket_blocking() <http://www.php.net/set_socket_blocking>`_
+* `mcrypt_ecb() <http://www.php.net/mcrypt_ecb>`_
+* `mcrypt_cbc() <http://www.php.net/mcrypt_cbc>`_
+* `mcrypt_cfb() <http://www.php.net/mcrypt_cfb>`_
+* `mcrypt_ofb() <http://www.php.net/mcrypt_ofb>`_
+* datefmt_set_timezone_id()
+* `imagepsbbox() <http://www.php.net/imagepsbbox>`_
+* `imagepsencodefont() <http://www.php.net/imagepsencodefont>`_
+* `imagepsextendfont() <http://www.php.net/imagepsextendfont>`_
+* `imagepsfreefont() <http://www.php.net/imagepsfreefont>`_
+* `imagepsloadfont() <http://www.php.net/imagepsloadfont>`_
+* `imagepsslantfont() <http://www.php.net/imagepsslantfont>`_
+* `imagepstext() <http://www.php.net/imagepstext>`_
+
++-------------+------------------------------------------------------+
+| Short name  | Php/Php70RemovedFunctions                            |
++-------------+------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++-------------+------------------------------------------------------+
+| Php Version | With PHP 7.0 and older                               |
++-------------+------------------------------------------------------+
+| Severity    | Major                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                        |
++-------------+------------------------------------------------------+
+
+
+
 .. _php-7.0-scalar-typehints:
 
 PHP 7.0 Scalar Typehints
@@ -16559,53 +16631,6 @@ The following PHP native functions were removed in PHP 7.3.
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
 +-------------+---------------------------+
-
-
-
-.. _php-70-removed-functions:
-
-PHP 70 Removed Functions
-########################
-
-
-The following PHP native functions were removed in PHP 7.0.
-
-* `ereg() <http://www.php.net/ereg>`_
-* `ereg_replace() <http://www.php.net/ereg_replace>`_
-* `eregi() <http://www.php.net/eregi>`_
-* `eregi_replace() <http://www.php.net/eregi_replace>`_
-* `split() <http://www.php.net/split>`_
-* `spliti() <http://www.php.net/spliti>`_
-* `sql_regcase() <http://www.php.net/sql_regcase>`_
-* `magic_quotes_runtime() <http://www.php.net/magic_quotes_runtime>`_
-* `set_magic_quotes_runtime() <http://www.php.net/set_magic_quotes_runtime>`_
-* `call_user_method() <http://www.php.net/call_user_method>`_
-* `call_user_method_array() <http://www.php.net/call_user_method_array>`_
-* `set_socket_blocking() <http://www.php.net/set_socket_blocking>`_
-* `mcrypt_ecb() <http://www.php.net/mcrypt_ecb>`_
-* `mcrypt_cbc() <http://www.php.net/mcrypt_cbc>`_
-* `mcrypt_cfb() <http://www.php.net/mcrypt_cfb>`_
-* `mcrypt_ofb() <http://www.php.net/mcrypt_ofb>`_
-* datefmt_set_timezone_id()
-* `imagepsbbox() <http://www.php.net/imagepsbbox>`_
-* `imagepsencodefont() <http://www.php.net/imagepsencodefont>`_
-* `imagepsextendfont() <http://www.php.net/imagepsextendfont>`_
-* `imagepsfreefont() <http://www.php.net/imagepsfreefont>`_
-* `imagepsloadfont() <http://www.php.net/imagepsloadfont>`_
-* `imagepsslantfont() <http://www.php.net/imagepsslantfont>`_
-* `imagepstext() <http://www.php.net/imagepstext>`_
-
-+-------------+------------------------------------------------------+
-| Short name  | Php/Php70RemovedFunctions                            |
-+-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
-+-------------+------------------------------------------------------+
-| Php Version | With PHP 7.0 and older                               |
-+-------------+------------------------------------------------------+
-| Severity    | Major                                                |
-+-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
-+-------------+------------------------------------------------------+
 
 
 
@@ -17563,6 +17588,11 @@ The following expression are made of literals or already known values : they may
 
 By doing so, this will reduce the amount of work of PHP.
 
+Suggestions
+^^^^^^^^^^^
+
+* Do the work yourself, instead of giving it to PHP
+
 +-------------+--------------------------------------------------------+
 | Short name  | Structures/ShouldPreprocess                            |
 +-------------+--------------------------------------------------------+
@@ -17571,6 +17601,8 @@ By doing so, this will reduce the amount of work of PHP.
 | Severity    | Minor                                                  |
 +-------------+--------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                       |
++-------------+--------------------------------------------------------+
+| Examples    | :ref:`phpadsnew-structures-shouldpreprocess`           |
 +-------------+--------------------------------------------------------+
 
 
@@ -19597,11 +19629,20 @@ This is a micro-optimisation.
 
 See also `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_.
 
-+------------+----------------------+
-| Short name | Php/ShouldPreprocess |
-+------------+----------------------+
-| Themes     | none                 |
-+------------+----------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use PHP string sequences, and skip chr() at execution time
+
++------------+---------------------------------------+
+| Short name | Php/ShouldPreprocess                  |
++------------+---------------------------------------+
+| Themes     | none                                  |
++------------+---------------------------------------+
+| Examples   | :ref:`phpadsnew-php-shouldpreprocess` |
++------------+---------------------------------------+
 
 
 
@@ -21261,17 +21302,26 @@ Always start by reducing a string before applying some transformation on it. The
 
 The gain produced here is greater with longer strings, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short strings and single string reductions.
 
-This works with any reduction function instead of `substr() <http://www.php.net/substr>`_, like `trim() <http://www.php.net/trim>`_, `iconv() <http://www.php.net/iconv>`_, etc.
+This works with any reduction function instead of `substr() <http://www.php.net/substr>`_, like `trim() <http://www.php.net/trim>`_, `iconv() <http://www.php.net/iconv>`_, etc. 
 
-+-------------+-----------------------------------------+
-| Short name  | Performances/SubstrFirst                |
-+-------------+-----------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions` |
-+-------------+-----------------------------------------+
-| Severity    | Minor                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Instant (5 mins)                        |
-+-------------+-----------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always reduce the string first, then apply some transformation
+
++-------------+--------------------------------------------+
+| Short name  | Performances/SubstrFirst                   |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Performances`, :ref:`Suggestions`    |
++-------------+--------------------------------------------+
+| Severity    | Minor                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Instant (5 mins)                           |
++-------------+--------------------------------------------+
+| Examples    | :ref:`prestashop-performances-substrfirst` |
++-------------+--------------------------------------------+
 
 
 
@@ -22244,6 +22294,50 @@ See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.ne
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _typehint-must-be-returned:
+
+Typehint Must Be Returned
+#########################
+
+
+When using a typehint for a method, it is compulsory to use a at least one return in the method's body.
+
+.. code-block:: php
+
+   <?php
+   
+   // Empty function : 
+   function foo() : Bar { return new Bar(); }
+   
+   // Empty function : 
+   function foo() : Bar { }
+   
+   ?>
+
+
+PHP lint this, but won't execute it.
+
+See also `Return Type Declaration <http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration>`_ and 
+         `Type hint in PHP function parameters and return values <https://mlocati.github.io/articles/php-type-hinting.html>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a
+
++-------------+----------------------------------------+
+| Short name  | Functions/TypehintMustBeReturned       |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
 
 
 

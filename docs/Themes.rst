@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 25 Feb 2019 20:08:25 +0000
-.. comment: Generation hash : 5b36ee233f64fb35f6e9b8b90bbf288c2cbd5ebd
+.. comment: Generation date : Tue, 05 Mar 2019 15:01:32 +0000
+.. comment: Generation hash : f4a722291d2e71bf5ff77aa5cea61aa19e84dc62
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 355 analysis
+Total : 356 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -342,6 +342,7 @@ Total : 355 analysis
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Too Many Native Calls <too-many-native-calls>`
+* :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Typehinted References <typehinted-references>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
@@ -811,10 +812,10 @@ Total : 44 analysis
 * :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 * :ref:`PHP 7.1 Scalar Typehints <php-7.1-scalar-typehints>`
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
-* :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
@@ -855,11 +856,11 @@ Total : 30 analysis
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
-* :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php/TypedPropertyUsage <php/typedpropertyusage>`
 * :ref:`String Initialization <string-initialization>`
@@ -978,7 +979,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 15 analysis
+Total : 16 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -990,6 +991,7 @@ Total : 15 analysis
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
+* :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Useless Alias <useless-alias>`

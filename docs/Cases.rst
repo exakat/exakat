@@ -1028,6 +1028,29 @@ The default case is actually processed after the switch, by the next if/then str
             return '';
         }
 
+Function Subscripting, Old Style
+================================
+
+.. _openconf-structures-functionpresubscripting:
+
+OpenConf
+^^^^^^^^
+
+:ref:`function-subscripting,-old-style`, in openconf/include.php:1469. 
+
+Here, $advocateid may be directly read from ocsql_fetch_assoc(), although, checking for the existence of 'advocateid' before accessing it would make the code more robust
+
+.. code-block:: php
+
+    $advocateid = false;
+    	if (isset($GLOBALS['OC_configAR']['OC_paperAdvocates']) && $GLOBALS['OC_configAR']['OC_paperAdvocates']) {
+    		$ar = ocsql_query(SELECT `advocateid` FROM ` . OCC_TABLE_PAPERADVOCATE . ` WHERE `paperid`=' . safeSQLstr($pid) . ') or err('Unable to retrieve advocate');
+    		if (ocsql_num_rows($ar) == 1) {
+    			$al = ocsql_fetch_assoc($ar);
+    			$advocateid = $al['advocateid'];
+    		}
+    	}
+
 Nested Ternary
 ==============
 
@@ -2004,6 +2027,22 @@ Here, $template is modified, when its properties are modified. When only the pro
             $cacheid = $this->generateCacheId('blk_' . $xobject->getVar('bid'));
     // more code to the end of the method
 
+Lost References
+===============
+
+.. _wordpress-variables-lostreferences:
+
+WordPress
+^^^^^^^^^
+
+:ref:`lost-references`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 Useless Global
 ==============
 
@@ -2038,6 +2077,27 @@ It is hard to spot that $generY is useless, but this is the only occurrence wher
 
     function calculate_ancestor($pers) {
     global $db_functions, $reltext, $sexe, $sexe2, $spouse, $special_spouseY, $language, $ancestortext, $dutchtext, $selected_language, $spantext, $generY, $foundY_nr, $rel_arrayY;
+
+Preprocessable
+==============
+
+.. _phpadsnew-structures-shouldpreprocess:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`preprocessable`, in phpAdsNew-2.0/adview.php:302. 
+
+Each call to chr() may be done before. First, chr() may be replace with the hexadecimal sequence "0x3B"; Secondly, 0x3b is a rather long replacement for a simple semi-colon. The whole pragraph could be stored in a separate file, for easier modifications. 
+
+.. code-block:: php
+
+    echo chr(0x47).chr(0x49).chr(0x46).chr(0x38).chr(0x39).chr(0x61).chr(0x01).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x80).chr(0x00).chr(0x00).chr(0x04).chr(0x02).chr(0x04).
+    		 	 chr(0x00).chr(0x00).chr(0x00).chr(0x21).chr(0xF9).chr(0x04).chr(0x01).chr(0x00).
+    		     chr(0x00).chr(0x00).chr(0x00).chr(0x2C).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x01).chr(0x00).chr(0x00).chr(0x02).chr(0x02).chr(0x44).
+    		     chr(0x01).chr(0x00).chr(0x3B);
 
 Useless Unset
 =============
@@ -5622,6 +5682,22 @@ Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
             return $pathinfo['extension'];
         }
 
+Substring First
+===============
+
+.. _prestashop-performances-substrfirst:
+
+Prestashop
+^^^^^^^^^^
+
+:ref:`substring-first`, in admin-dev/filemanager/include/utils.php:197. 
+
+dirname() reduces the string (or at least, keeps it the same size), so it more efficient to have it first.
+
+.. code-block:: php
+
+    dirname(str_replace(' ', '~', $str))
+
 Slice Arrays First
 ==================
 
@@ -6063,6 +6139,27 @@ Even when the initialization is mixed with other operations, it is a good idea t
     						}
     					}
     				}
+
+Should Preprocess Chr
+=====================
+
+.. _phpadsnew-php-shouldpreprocess:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`should-preprocess-chr`, in phpAdsNew-2.0/adview.php:302. 
+
+Each call to chr() may be done before. First, chr() may be replace with the hexadecimal sequence "0x3B"; Secondly, 0x3b is a rather long replacement for a simple semi-colon. The whole pragraph could be stored in a separate file, for easier modifications. 
+
+.. code-block:: php
+
+    echo chr(0x47).chr(0x49).chr(0x46).chr(0x38).chr(0x39).chr(0x61).chr(0x01).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x80).chr(0x00).chr(0x00).chr(0x04).chr(0x02).chr(0x04).
+    		 	 chr(0x00).chr(0x00).chr(0x00).chr(0x21).chr(0xF9).chr(0x04).chr(0x01).chr(0x00).
+    		     chr(0x00).chr(0x00).chr(0x00).chr(0x2C).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x01).chr(0x00).chr(0x00).chr(0x02).chr(0x02).chr(0x44).
+    		     chr(0x01).chr(0x00).chr(0x3B);
 
 Drop Substr Last Arg
 ====================

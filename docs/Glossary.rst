@@ -245,11 +245,11 @@ Glossary
 
     + `call_user_method()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `call_user_method_array()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `chr()`
 
@@ -380,19 +380,19 @@ Glossary
 
     + `ereg()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `ereg_replace()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `eregi()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `eregi_replace()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `eval()`
 
@@ -615,31 +615,31 @@ Glossary
 
     + `imagepsbbox()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepsencodefont()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepsextendfont()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepsfreefont()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepsloadfont()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepsslantfont()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `imagepstext()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `implode()`
 
@@ -762,7 +762,7 @@ Glossary
 + `M`
     + `magic_quotes_runtime()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `mb_chr()`
 
@@ -791,22 +791,22 @@ Glossary
     + `mcrypt_cbc()`
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `mcrypt_cfb()`
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `mcrypt_ecb()`
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `mcrypt_ofb()`
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `md5()`
 
@@ -1073,11 +1073,11 @@ Glossary
 
     + `set_magic_quotes_runtime()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `set_socket_blocking()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `setcookie()`
 
@@ -1123,15 +1123,15 @@ Glossary
 
     + `split()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `spliti()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `sql_regcase()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
     + `srand()`
 
