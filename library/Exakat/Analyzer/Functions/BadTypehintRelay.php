@@ -36,6 +36,7 @@ class BadTypehintRelay extends Analyzer {
              ->inIs('TYPEHINT')
              ->outIs('NAME')
              ->outIs('DEFINITION')
+             ->has('rank')
              ->savePropertyAs('rank', 'theRank')
              ->inIs('ARGUMENT')
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
@@ -45,7 +46,8 @@ class BadTypehintRelay extends Analyzer {
              ->samePropertyAs('rank', 'theRank')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'typehint')
-             ->back('result');
+             ->back('result')
+             ;
         $this->prepareQuery();
     }
 }
