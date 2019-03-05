@@ -1392,7 +1392,7 @@ g.V().$filter
                   file='None'; 
       }
      .until( hasLabel('File') )
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() 
+     .repeat( __.inE().hasLabel({$this->linksDown}).outV() 
                 .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
      )
      .map{ 
@@ -1580,9 +1580,9 @@ GREMLIN;
         // Finding typehint
         $query = <<<GREMLIN
 g.V().hasLabel("Nsname", "Identifier").as("classe").where( __.in("TYPEHINT"))
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1601,9 +1601,9 @@ GREMLIN;
         // Finding trait use
         $query = <<<GREMLIN
 g.V().hasLabel("Usetrait").out("USE").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1622,9 +1622,9 @@ GREMLIN;
         // traits
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Trait").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1643,9 +1643,9 @@ GREMLIN;
         // Functioncall()
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
      .map{['file':calling, 'include':called]}
 GREMLIN;
         $functioncall = $this->gremlin->query($query);
@@ -1664,9 +1664,9 @@ GREMLIN;
         // constants
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").not(where( __.in("NAME", "CLASS", "MEMBER", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ) ) )
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'include':called];}
 GREMLIN;
         $constants = $this->gremlin->query($query);
@@ -1685,9 +1685,9 @@ GREMLIN;
         // New
         $query = <<<GREMLIN
 g.V().hasLabel("New").out("NEW").as("i")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
      .map{ [ "file":calling, "include":called];}
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1707,9 +1707,9 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty").as("i")
      .sideEffect{ type = it.get().label().toLowerCase(); }
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
      .out("CLASS").in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
         $statics = $this->gremlin->query($query);
@@ -2022,7 +2022,7 @@ g.V().sideEffect{ functions = 0; name=""; expression=0;}
     .sideEffect{ ++total; }
     .not(hasLabel("Void"))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
-    .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ file = it.get().value("fullcode"); })
+    .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ file = it.get().value("fullcode"); })
     .fold()
     )
     .map{ if (expression > 0) {
