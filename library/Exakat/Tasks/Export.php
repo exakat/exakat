@@ -114,22 +114,24 @@ class Export extends Tasks {
                     $v['fullcode'] =  'NO CODE PROVIDED';
                 }
             }
-             $R = $id.' [label="'.addslashes($v['fullcode']).'"';
+            $R = $id.' [label="'.addslashes($v['fullcode']).'"';
+            /*
+            if ($v['label'] === 'Variable') {
+                $R .= ' style="filled" fillcolor="blue"';
+            }
+            */
+
             if (isset($v['atom'])) {
                 $R .= ' shape=box ';
             }
-             $R .= "];\n";
+            $R .= "];\n";
 
-             $r .= $R;
+            $r .= $R;
         }
 
         foreach($E as $start => $e) {
             foreach($e as $end => $label) {
-                if ($label == 'NEXT') {
-                    $r .= "$start -> $end [label=\"$label\"  color=green];\n";
-                } else {
-                    $r .= "$start -> $end [label=\"$label\"];\n";
-                }
+                $r .= "$start -> $end [label=\"$label\"];\n";
             }
         }
 
