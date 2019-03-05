@@ -40,10 +40,6 @@ Label : PROJECT
             Label : DEFINITION
               6
               Label : DEFINITION
-                12
-            Label : DEFINITION
-              6
-              Label : DEFINITION
                 14
         Label : EXPRESSION
           7
@@ -79,10 +75,6 @@ Label : PROJECT
                         12
                     Label : EXPRESSION
                       16
-                  Label : DEFINITION
-                    6
-                    Label : DEFINITION
-                      12
                   Label : DEFINITION
                     6
                     Label : DEFINITION
@@ -137,10 +129,6 @@ Label : PROJECT
                               12
                           Label : EXPRESSION
                             16
-                        Label : DEFINITION
-                          6
-                          Label : DEFINITION
-                            12
                         Label : DEFINITION
                           6
                           Label : DEFINITION

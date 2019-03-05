@@ -1,1 +1,55 @@
-Whole
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            16
+          Label : DEFINITION
+            17
+          Label : METHOD
+            7
+            Label : ARGUMENT
+              8
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                11
+                Label : ARGUMENT
+                  14
+                  Label : CONCAT
+                    13
+                    Label : CLASS
+                      12
+                  Label : CONCAT
+                    15
+              Label : EXPRESSION
+                11
+                Label : ARGUMENT
+                  14
+                  Label : CONCAT
+                    13
+                    Label : CLASS
+                      16
+                  Label : CONCAT
+                    15
+              Label : EXPRESSION
+                11
+                Label : ARGUMENT
+                  14
+                  Label : CONCAT
+                    13
+                    Label : CLASS
+                      17
+                  Label : CONCAT
+                    15
+            Label : NAME
+              7
+          Label : NAME
+            6

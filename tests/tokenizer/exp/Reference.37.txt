@@ -55,6 +55,16 @@ Label : PROJECT
                 15
                 Label : RETURN
                   10
+            Label : DEFINITION
+              21
+              Label : METHOD
+                11
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  11
+              Label : OBJECT
+                17
             Label : NAME
               11
           Label : METHOD

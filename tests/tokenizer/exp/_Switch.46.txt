@@ -2,15 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    28
     Label : DEFINITION
-      28
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,51 +14,51 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            10
+            9
             Label : EXPRESSION
-              11
+              10
               Label : CASE
-                16
+                15
                 Label : CLASS
-                  13
+                  12
                 Label : CONSTANT
-                  14
+                  13
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  16
                 Label : EXPRESSION
-                  19
+                  18
                   Label : BREAK
-                    17
+                    16
             Label : EXPRESSION
-              20
+              19
               Label : CASE
-                16
+                15
                 Label : CLASS
-                  13
+                  12
                 Label : CONSTANT
-                  22
+                  21
               Label : CODE
                 3
             Label : EXPRESSION
-              24
+              23
               Label : CASE
-                16
+                15
                 Label : CLASS
-                  13
+                  12
                 Label : CONSTANT
-                  26
+                  25
               Label : CODE
                 3
                 Label : EXPRESSION
                   29
                   Label : LEFT
-                    28
+                    27
                   Label : RIGHT
                     30
                     Label : ARGUMENT
-                      9
+                      8
                       Label : MEMBER
                         31
                       Label : OBJECT
@@ -72,9 +66,9 @@ Label : PROJECT
                     Label : NAME
                       30
                 Label : EXPRESSION
-                  19
+                  18
                   Label : BREAK
-                    17
+                    16
             Label : EXPRESSION
               32
               Label : CODE
@@ -84,8 +78,8 @@ Label : PROJECT
                   Label : RETURN
                     34
           Label : CONDITION
-            9
+            8
             Label : MEMBER
-              8
+              7
             Label : OBJECT
               6

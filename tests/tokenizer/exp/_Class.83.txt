@@ -59,6 +59,18 @@ Label : PROJECT
                 14
               Label : TYPEHINT
                 13
+            Label : DEFINITION
+              23
+              Label : METHOD
+                10
+                Label : NAME
+                  10
+                Label : ARGUMENT
+                  22
+                Label : ARGUMENT
+                  18
+              Label : OBJECT
+                22
             Label : NAME
               10
           Label : NAME

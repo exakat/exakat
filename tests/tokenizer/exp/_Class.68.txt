@@ -41,10 +41,6 @@ Label : PROJECT
                         12
                     Label : RIGHT
                       8
-                Label : DEFINITION
-                  9
-                  Label : DEFINITION
-                    12
                 Label : NAME
                   10
           Label : NAME

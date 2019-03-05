@@ -64,10 +64,6 @@ Label : PROJECT
           Label : DEFINITION
             12
             Label : DEFINITION
-              15
-          Label : DEFINITION
-            12
-            Label : DEFINITION
               18
           Label : DEFINITION
             12

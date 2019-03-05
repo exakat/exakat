@@ -2,19 +2,15 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      13
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      7
-  Label : DEFINITION
-    8
+    13
     Label : DEFINITION
       14
   Label : DEFINITION
-    8
+    13
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    13
     Label : DEFINITION
       15
   Label : FILE
@@ -26,25 +22,25 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            11
+            10
             Label : LEFT
               6
               Label : NOT
-                10
+                9
                 Label : MEMBER
-                  9
+                  8
                 Label : OBJECT
                   7
             Label : RIGHT
-              12
+              11
               Label : ARGUMENT
-                13
+                12
               Label : ARGUMENT
                 14
               Label : ARGUMENT
                 15
               Label : NAME
-                12
+                11
           Label : THEN
             16
             Label : EXPRESSION

@@ -222,26 +222,6 @@ Label : PROJECT
           Label : DEFINITION
             14
             Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-            Label : DEFINITION
-              22
-          Label : DEFINITION
-            14
-            Label : DEFINITION
               27
             Label : DEFINITION
               27

@@ -2,13 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
-      8
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      5
+      7
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,7 +14,7 @@ Label : PROJECT
         Label : EXPRESSION
           10
           Label : METHOD
-            7
+            6
             Label : ARGUMENT
               10
               Label : MEMBER
@@ -28,8 +24,8 @@ Label : PROJECT
                 Label : MEMBER
                   9
                 Label : OBJECT
-                  8
+                  7
             Label : NAME
-              7
+              6
           Label : OBJECT
             5

@@ -2,17 +2,11 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
+      15
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       22
     Label : DEFINITION
@@ -22,15 +16,15 @@ Label : PROJECT
     Label : DEFINITION
       22
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       40
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       43
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       45
     Label : DEFINITION
@@ -42,25 +36,25 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          13
+          12
           Label : METHOD
-            7
+            6
             Label : ARGUMENT
-              12
+              11
               Label : CLASS
-                8
+                7
               Label : CONSTANT
-                10
+                9
             Label : NAME
-              7
+              6
           Label : OBJECT
             5
         Label : EXPRESSION
-          14
+          13
           Label : CONDITION
-            15
+            14
             Label : NOT
-              16
+              15
           Label : THEN
             17
             Label : EXPRESSION
@@ -74,7 +68,7 @@ Label : PROJECT
           Label : BLOCK
             17
             Label : EXPRESSION
-              14
+              13
               Label : CONDITION
                 25
                 Label : LEFT
@@ -88,7 +82,7 @@ Label : PROJECT
               Label : THEN
                 17
                 Label : EXPRESSION
-                  13
+                  12
                   Label : METHOD
                     28
                     Label : ARGUMENT
@@ -100,7 +94,7 @@ Label : PROJECT
                     Label : NAME
                       28
                   Label : OBJECT
-                    13
+                    12
                     Label : MEMBER
                       27
                     Label : OBJECT
@@ -130,7 +124,7 @@ Label : PROJECT
             Label : BLOCK
               17
               Label : EXPRESSION
-                13
+                12
                 Label : METHOD
                   41
                   Label : ARGUMENT
@@ -152,25 +146,25 @@ Label : PROJECT
                   Label : NAME
                     41
                 Label : OBJECT
-                  13
+                  12
                   Label : MEMBER
-                    7
+                    6
                   Label : OBJECT
                     40
               Label : EXPRESSION
-                14
+                13
                 Label : CONDITION
                   45
                 Label : THEN
                   17
                   Label : EXPRESSION
-                    13
+                    12
                     Label : METHOD
-                      11
+                      10
                       Label : ARGUMENT
                         34
                       Label : NAME
-                        11
+                        10
                     Label : OBJECT
                       45
             Label : CLASS

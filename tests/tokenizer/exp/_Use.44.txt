@@ -24,7 +24,7 @@ Label : PROJECT
               Label : EXPRESSION
                 9
             Label : DEFINITION
-              43
+              42
               Label : METHOD
                 8
                 Label : ARGUMENT
@@ -60,7 +60,7 @@ Label : PROJECT
               Label : METHOD
                 8
             Label : DEFINITION
-              43
+              42
               Label : METHOD
                 8
                 Label : ARGUMENT
@@ -84,7 +84,7 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                43
+                42
                 Label : METHOD
                   8
                   Label : ARGUMENT
@@ -93,10 +93,6 @@ Label : PROJECT
                     8
                 Label : OBJECT
                   41
-            Label : DEFINITION
-              42
-              Label : DEFINITION
-                41
             Label : NAME
               40
           Label : NAME

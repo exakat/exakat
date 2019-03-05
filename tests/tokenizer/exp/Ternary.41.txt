@@ -2,51 +2,35 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
+      10
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,13 +40,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -70,11 +54,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   13
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -82,13 +66,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -96,11 +80,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   17
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -108,13 +92,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -122,11 +106,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   17
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -134,13 +118,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -148,11 +132,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   17
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -160,13 +144,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -174,11 +158,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   13
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -190,13 +174,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -204,11 +188,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   13
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW
@@ -220,13 +204,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            9
             Label : LEFT
-              8
+              7
               Label : APPEND
-                9
+                8
                 Label : MEMBER
-                  8
+                  7
                 Label : OBJECT
                   6
             Label : RIGHT
@@ -234,11 +218,11 @@ Label : PROJECT
               Label : CONDITION
                 12
                 Label : LEFT
-                  11
+                  10
                 Label : RIGHT
                   13
               Label : ELSE
-                11
+                10
               Label : THEN
                 15
                 Label : NEW

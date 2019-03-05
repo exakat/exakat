@@ -118,14 +118,6 @@ Label : PROJECT
             Label : DEFINITION
               16
               Label : DEFINITION
-                20
-              Label : DEFINITION
-                20
-              Label : DEFINITION
-                20
-            Label : DEFINITION
-              16
-              Label : DEFINITION
                 21
               Label : DEFINITION
                 21

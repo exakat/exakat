@@ -19,8 +19,6 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : DEFINITION
-            24
           Label : METHOD
             7
             Label : ARGUMENT
@@ -33,12 +31,6 @@ Label : PROJECT
                 12
                 Label : ARGUMENT
                   10
-            Label : DEFINITION
-              18
-              Label : ARGUMENT
-                24
-              Label : ARGUMENT
-                20
             Label : NAME
               7
           Label : NAME

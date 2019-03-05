@@ -10,90 +10,68 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             6
-          Label : ARGUMENT
+          Label : VALUE
             7
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             8
-          Label : ARGUMENT
+          Label : VALUE
             7
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             9
-          Label : ARGUMENT
+          Label : VALUE
             10
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             11
-          Label : ARGUMENT
+          Label : VALUE
             12
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             13
-          Label : ARGUMENT
+          Label : VALUE
             14
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             15
-          Label : ARGUMENT
+          Label : VALUE
             16
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             17
-          Label : ARGUMENT
+          Label : VALUE
             10
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             18
-          Label : ARGUMENT
+          Label : VALUE
             19
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             20
-          Label : ARGUMENT
+          Label : VALUE
             21
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             22
-          Label : ARGUMENT
+          Label : VALUE
             23
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             24
-          Label : ARGUMENT
+          Label : VALUE
             25
         Label : EXPRESSION
           26

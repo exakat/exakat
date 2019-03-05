@@ -2,21 +2,17 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      6
-  Label : DEFINITION
-    7
+    14
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
+    14
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    14
     Label : DEFINITION
       17
   Label : FILE
@@ -28,27 +24,27 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            9
+            8
             Label : MEMBER
-              8
+              7
             Label : OBJECT
               6
         Label : EXPRESSION
           5
           Label : RETURN
-            12
+            11
             Label : CLASS
-              10
+              9
             Label : CONSTANT
-              11
+              10
         Label : EXPRESSION
           5
           Label : RETURN
-            12
+            11
             Label : CLASS
-              13
+              12
             Label : MEMBER
-              14
+              13
         Label : EXPRESSION
           5
           Label : RETURN
@@ -56,7 +52,7 @@ Label : PROJECT
             Label : ARGUMENT
               16
             Label : ARGUMENT
-              14
+              13
             Label : ARGUMENT
               17
             Label : NAME

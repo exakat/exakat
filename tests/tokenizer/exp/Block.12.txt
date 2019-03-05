@@ -2,29 +2,25 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    16
     Label : DEFINITION
-      7
+      15
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    8
+    16
     Label : DEFINITION
       18
   Label : DEFINITION
-    8
+    16
     Label : DEFINITION
       19
   Label : DEFINITION
-    8
+    16
     Label : DEFINITION
       21
     Label : DEFINITION
       21
   Label : DEFINITION
-    8
+    16
     Label : DEFINITION
       22
   Label : FILE
@@ -38,25 +34,25 @@ Label : PROJECT
           Label : CONDITION
             6
             Label : ARGUMENT
-              12
+              11
               Label : INDEX
-                13
+                12
               Label : VARIABLE
-                11
+                10
                 Label : MEMBER
-                  9
+                  8
                 Label : OBJECT
                   7
           Label : ELSE
-            15
+            14
             Label : EXPRESSION
-              15
+              14
               Label : EXPRESSION
                 17
                 Label : POSTPLUSPLUS
                   18
             Label : EXPRESSION
-              15
+              14
               Label : EXPRESSION
                 20
                 Label : LEFT
@@ -68,7 +64,7 @@ Label : PROJECT
               Label : EXPRESSION
                 24
                 Label : LEFT
-                  12
+                  11
                   Label : INDEX
                     23
                   Label : VARIABLE
@@ -78,8 +74,8 @@ Label : PROJECT
                   Label : POSTPLUSPLUS
                     21
           Label : THEN
-            15
+            14
             Label : EXPRESSION
               17
               Label : POSTPLUSPLUS
-                16
+                15
