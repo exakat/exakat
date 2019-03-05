@@ -36,17 +36,17 @@ class FunctionPreSubscripting extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs(self::$FUNCTIONS_CALLS)
              ->back('first')
+
              ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'varray')
-             ->back('first')
-             ->nextSibling() // one must check more than the next sibling
-             ->atomIs('Assignation')
-             ->_as('second')
-             ->outIs('RIGHT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'varray')
+             ->atomIs('Variable') // variable
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->inIs('VARIABLE')
+                     ->atomIs('Array')
+                     ->raw('count().is(eq(1))')
+              )
              ->back('first');
         $this->prepareQuery();
     }
