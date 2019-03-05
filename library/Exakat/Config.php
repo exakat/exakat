@@ -87,7 +87,7 @@ class Config {
             $this->ext_root      = "{$this->dir_root}/ext";
 
             // autoload extensions
-            $this->ext = new \AutoloadExt("{$this->ext_root}/ext");
+            $this->ext = new \AutoloadExt($this->ext_root);
             $this->ext->registerAutoload();
 
             assert_options(ASSERT_ACTIVE, 1);
