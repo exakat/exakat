@@ -28,7 +28,6 @@ use Exakat\Query\Query;
 
 class SetClassRemoteDefinitionWithInjection extends LoadFinal {
     public function run() {
-        print "Running SetClassRemoteDefinitionWithInjection\n";
         $query = new Query(0, $this->config->project, 'SetClassRemoteDefinitionWithInjection', null, $this->datastore);
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')

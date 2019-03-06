@@ -45,6 +45,25 @@ class ArrayMergeInLoops extends Analyzer {
              ->samePropertyAs('fullcode', 'var')
              ->goToLoop();
         $this->prepareQuery();
+
+        // with one level of functioncall : foreach($a as $b) { foo($a); }; function foo(c) { array_merge($c); }
+        $this->atomFunctionIs($functions)
+             ->hasNoLoop()
+             ->goToFunction()
+             ->outIs('DEFINITION')
+             ->hasLoop()
+             ->goToLoop();
+        $this->prepareQuery();
+
+        // with one level of functioncall : array_map($array, 'foo'); function foo(c) { array_merge($c); }
+        $this->atomFunctionIs($functions)
+             ->hasNoLoop()
+             ->goToFunction()
+             ->outIs('DEFINITION')
+             ->atomIs(array('String', 'Concatenation'))
+             ->inIs('ARGUMENT')
+             ->functioncallIs('\\array_map');
+        $this->prepareQuery();
     }
 }
 
