@@ -674,4 +674,11 @@ function filter_analyzer($analyzer) {
     return preg_match('#^\w+/\w+$#', $analyzer); 
 }
 
+function array_sub_sort(&$list) {
+    foreach($list as &$l) {
+        sort($l);
+    }
+    unset($l);
+}
+
 ?>

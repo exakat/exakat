@@ -396,8 +396,8 @@ class Load extends Tasks {
     }
     
     function __destruct() {
-        unset($this->callsDatabase);
-        unset($this->loader);
+        $this->callsDatabase = null;
+        $this->loader        = null;
 
         if (file_exists("{$this->config->projects_root}/projects/.exakat/calls.sqlite")) {
             unlink("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
@@ -5724,7 +5724,7 @@ class Load extends Tasks {
         $this->sequence->count = $this->sequenceRank[$this->sequenceCurrentRank] + 1;
         
         $this->runPlugins($this->sequence, $this->sequence->elements);
-        unset($this->sequence->elements);
+        $this->sequence->elements = null;
 
         array_pop($this->sequences);
         array_pop($this->sequenceRank);

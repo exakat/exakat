@@ -36,8 +36,6 @@ class OnePage extends Tasks {
     const TOTAL_STEPS = 7;
 
     public function run() {
-        $progress = 0;
-
         $begin = microtime(true);
         $this->project_dir = $this->config->projects_root.'/projects/onepage/';
         

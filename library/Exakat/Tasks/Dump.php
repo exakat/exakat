@@ -1477,10 +1477,11 @@ GREMLIN;
     private function collectDefinitionsStats() {
         $insert = array();
         $types = array('Staticconstant'   => 'staticconstants',
-                       'Methodcall'       => 'methodcalls',
                        'Staticmethodcall' => 'staticmethodcalls',
-                       'Member'           => 'members',
                        'Staticproperty'   => 'staticproperty',
+
+                       'Methodcall'       => 'methodcalls',
+                       'Member'           => 'members',
                         );
         
         foreach($types as $label => $name) {

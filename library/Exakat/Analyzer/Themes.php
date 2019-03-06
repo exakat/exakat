@@ -40,9 +40,9 @@ class Themes {
     }
 
     public function __destruct() {
-        unset($this->main);
-        unset($this->ext);
-        unset($this->extra);
+        $this->main  = null;
+        $this->ext   = null;
+        $this->extra = null;
     }
     
     public function getThemeAnalyzers($theme = null) {

@@ -2087,6 +2087,7 @@ JAVASCRIPTCODE;
                 }
             }
         }
+        unset($issue);
 
         return $oldIssues;
     }
@@ -2921,9 +2922,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No interface were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
+            array_sub_sort($list);
 
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
@@ -3080,10 +3079,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No trait were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
-            unset($l);
+            array_sub_sort($list);
             
             $closure = function (&$run, $flipped) {
                 foreach($run as $k => &$v) {
@@ -3139,9 +3135,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No class were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
+            array_sub_sort($list);
             
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
@@ -3293,9 +3287,7 @@ SQL
             $list[$parent][] = $row['fullcode'];
         }
         
-        foreach($list as &$l) {
-            sort($l);
-        }
+        array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
         $html = $this->getBasedPage('empty');

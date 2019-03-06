@@ -503,7 +503,6 @@ class Files extends Tasks {
 
         $exts = $config->file_extensions;
 
-        $ignored    = preg_grep($ignoreDirsRegex, $allFiles);
         $notIgnored = preg_grep($ignoreDirsRegex, $allFiles, PREG_GREP_INVERT);
 
         if (empty($includeDirsRegex)) {
