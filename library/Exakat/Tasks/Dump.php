@@ -233,9 +233,6 @@ SQL;
             $this->collectForeachFavorite();
             $end = microtime(true);
             $this->log->log( 'Collected Foreach favorites : '.number_format(1000 * ($end - $begin), 2)."ms\n");
-            
-            
-
         }
 
         $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
@@ -590,6 +587,9 @@ SQL;
                         'shortopentag',
                         'tokenCounts',
                         'linediff',
+                        
+                        'cit',
+                        'namespaces',
                         );
         $this->collectTables($tables);
     }
@@ -677,6 +677,7 @@ GREMLIN;
     private function collectStructures() {
 
         // Name spaces
+        /*
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query(<<<SQL
 CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -684,6 +685,7 @@ CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL
 );
+*/
         $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
         $query = <<<GREMLIN
@@ -713,6 +715,7 @@ GREMLIN;
         display("$total namespaces\n");
 
         // Classes
+        /*
         $this->sqlite->query('DROP TABLE IF EXISTS cit');
         $this->sqlite->query('CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    name STRING,
@@ -725,7 +728,7 @@ GREMLIN;
                                                    file INTEGER,
                                                    namespaceId INTEGER DEFAULT 1
                                                  )');
-
+        */
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
@@ -764,7 +767,7 @@ GREMLIN;
         
         $cit = array();
         $citId = array();
-        $citCount = 0;
+        $citCount = $this->sqlite->querySingle('SELECT count(*) FROM cit');
 
         foreach($classes as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
@@ -894,10 +897,10 @@ GREMLIN;
                            ", '".$this->files[$row['file']]."'".
                            " )";
             }
-
+            
             if (!empty($query)) {
                 $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES '.implode(", \n", $query);
-                $this->sqlite->query($query);
+                $r = $this->sqlite->query($query);
             }
 
             $query = array();

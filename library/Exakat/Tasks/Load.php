@@ -445,7 +445,13 @@ class Load extends Tasks {
             if (!is_file($filename)) {
                 throw new MustBeAFile($filename);
             }
-            $this->processFile($filename, '');
+            
+            try {
+                $this->processFile($filename, '');
+            } catch (NoFileToProcess $e) {
+                $this->datastore->ignoreFile($file, $e->getMessage());
+            }
+
             $files = 1;
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -467,7 +473,6 @@ class Load extends Tasks {
                        );
         $this->datastore->addRow('hash', $stats);
 
-        $this->loader->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
         $loadFinal = new LoadFinal($this->gremlin, $this->config, $this->datastore);
@@ -482,11 +487,14 @@ class Load extends Tasks {
             throw new NoFileToProcess($project, 'empty');
         }
 
+        $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
+
         $nbTokens = 0;
         $path = "{$this->config->projects_root}/projects/{$project}/code";
         if ($this->config->verbose && !$this->config->quiet) {
-           $progressBar = new Progressbar(0, count($files) + 1, $this->config->screen_cols);
+           $progressBar = new Progressbar(0, count($files) + count($omittedFiles) + 1, $this->config->screen_cols);
         }
+
         foreach($files as $file) {
             try {
                 $r = $this->processFile($file, $path);
@@ -501,6 +509,27 @@ class Load extends Tasks {
                 }
             }
         }
+        $this->loader->finalize();
+
+        $loader = $this->loader;
+        $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
+        $this->callsDatabase = new \Sqlite3(':memory:');
+        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+
+        foreach($omittedFiles as $file) {
+            try {
+                $r = $this->processFile($file, $path);
+                if ($this->config->verbose && !$this->config->quiet) {
+                    echo $progressBar->advance();
+                }
+            } catch (NoFileToProcess $e) {
+                if ($this->config->verbose && !$this->config->quiet) {
+                    echo $progressBar->advance();
+                }
+            }
+        }
+        $this->loader->finalize();
+        $this->loader = $loader;
 
         if ($this->config->verbose && !$this->config->quiet) {
             echo $progressBar->advance();
@@ -525,7 +554,6 @@ class Load extends Tasks {
 
         $this->reset();
 
-/*
         $loader = $this->loader;
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         foreach($ignoredFiles as $file => $reason) {
@@ -535,8 +563,8 @@ class Load extends Tasks {
                 $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
-        $this->loader = $loader;
-*/
+//        $this->loader = $loader;
+
         $nbTokens = 0;
         foreach($files as $file) {
             try {

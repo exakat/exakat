@@ -81,6 +81,9 @@ class Datastore {
             $this->cleanTable('dictionary');
             $this->cleanTable('linediff');
 
+            $this->cleanTable('cit');
+            $this->cleanTable('namespaces');
+
             $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
                                         'exakat_build'         => Exakat::BUILD,
                                         'datastore_creation'   => date('r', time()),
@@ -463,6 +466,30 @@ CREATE TABLE linediff (
   line INTEGER,
   diff INTEGER
 );
+SQLITE;
+                break;
+
+            case 'cit' :
+                $createTable = <<<SQLITE
+CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name STRING,
+                    abstract INTEGER,
+                    final INTEGER,
+                    type TEXT,
+                    extends TEXT DEFAULT "",
+                    begin INTEGER,
+                    end INTEGER,
+                    file INTEGER,
+                    namespaceId INTEGER DEFAULT 1
+                )
+SQLITE;
+                break;
+
+            case 'namespaces' :
+                $createTable = <<<SQLITE
+CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           namespace STRING
+                        )
 SQLITE;
                 break;
 
