@@ -92,11 +92,15 @@ class LoadFinal {
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
-        $this->setClassPropertyRemoteDefinition();
+        $task = new setClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->setClassRemoteDefinitionWithTypehint();
         $this->setClassRemoteDefinitionWithReturnTypehint();
+
+        $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
+        $task->run();
 
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
@@ -478,53 +482,6 @@ GREMLIN;
         $this->logTime('Constant definitions');
         display('Link constant definitions');
         $this->log->log(__METHOD__);
-    }
-
-    private function setClassPropertyRemoteDefinition() {
-        // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('property')
-              ->hasNoIn('DEFINITION')
-              ->outIs('MEMBER')
-              ->atomIs('Staticpropertyname', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('MEMBER')
-              ->outIs('CLASS')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'property')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count = $result->toInt();
-
-        // For normal method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('property')
-              ->hasNoIn('DEFINITION')
-              ->outIs('MEMBER')
-              ->savePropertyAs('code', 'name')
-              ->inIs('MEMBER')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'property')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count += $result->toInt();
-
-        display("Set $count property remote definitions");
     }
 
     private function setClassRemoteDefinitionWithTypehint() {
