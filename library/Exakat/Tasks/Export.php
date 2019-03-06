@@ -29,6 +29,7 @@ class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
+//        $queryTemplate = 'g.V().valueMap().by(unfold()).with(WithOptions.tokens)';
         $queryTemplate = 'g.V()';
 
         $vertices = $this->gremlin->query($queryTemplate);
