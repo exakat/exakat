@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('\pcov\stop( )', 
-                      '\pcov\start( )', 
-                      '\pcov\collect( )',
+$expected     = array('\\pcov\\stop( )',
+                      '\\pcov\\start( )',
+                      '\\pcov\\collect( )',
                      );
 
-$expected_not = array('\pcov\stap( )', 
+$expected_not = array('\\pcov\\stap( )',
                      );
 
 ?>
