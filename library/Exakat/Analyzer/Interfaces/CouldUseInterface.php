@@ -52,7 +52,7 @@ GREMLIN;
         $phpInterfaces = $this->loadJson('php_interfaces_methods.json');
         foreach($phpInterfaces as $interface => $methods) {
             $translations = $this->dictCode->translate(array_column($methods, 'name'));
-            if (count($methods) != count($translations)) {
+            if (count($methods) !== count($translations)) {
                 continue;
             }
             

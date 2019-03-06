@@ -54,9 +54,9 @@ class Dictionary {
         $code = makeArray($code);
 
         if ($case === self::CASE_SENSITIVE) {
-            $case = function ($x) { return $x; }
+            $case = function ($x) { return $x; };
         } else {
-            $case = function ($x) { return mb_strtolower($x); }
+            $case = function ($x) { return mb_strtolower($x); };
         }
 
         foreach($code as $c) {
@@ -99,7 +99,7 @@ class Dictionary {
         if (preg_match('/ > (\d+)/', $length, $r)) {
             $closure = function ($s) use ($r) { return strlen($s) > $r[1]; };
         } elseif (preg_match('/ == (\d+)/', $length, $r)) {
-            $closure = function ($s) use ($r) { return strlen($s) == $r[1]; };
+            $closure = function ($s) use ($r) { return strlen($s) === $r[1]; };
         } elseif (preg_match('/ < (\d+)/', $length, $r)) {
             $closure = function ($s) use ($r) { return strlen($s) < $r[1]; };
         } else {
