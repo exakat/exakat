@@ -94,7 +94,6 @@ GREMLIN;
             // Skip reflexive definitions, which never exist.
             if ($row[0] === $row[1]) { continue; }
             fputcsv($f, $row);
-            print_r($row);
         }
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
