@@ -641,6 +641,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function atomInsideWithCall($atom) {
+        $this->query->atomInsideWithCall($atom);
+        
+        return $this;
+    }
     
     public function atomInsideMoreThan($atom, $times = 1) {
         $this->query->atomInsideMoreThan($atom, $times);
@@ -1541,6 +1547,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function hasNoLoop() {
+        $this->hasNoInstruction(self::$LOOPS_ALL);
+
+        return $this;
+    }
 
     public function hasIfthen() {
         $this->hasInstruction('Ifthen');
@@ -1812,6 +1824,7 @@ GREMLIN;
                     $values = '';
                 }
             }
+            unset($values);
             $cache[$fullpath] = $ini;
         }
         

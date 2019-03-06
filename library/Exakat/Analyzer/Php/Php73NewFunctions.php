@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php73NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '7.3-';
-    
     public function analyze() {
         $this->functions = array('net_get_interfaces',
                                  'gmp_binomial',
