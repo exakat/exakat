@@ -83,9 +83,10 @@ class Weekly extends Ambassador {
         $this->timesToFix        = $this->themes->getTimesToFix();
         $this->severities        = $this->themes->getSeverities();
         
-        $this->current =  date('Y-W', strtotime(date('Y')."W".(date('W'))."1"));
+        $this->current = (new \Datetime('now'))->format('Y-W');
         for ($i = 0; $i < 5; ++$i) {
-            $date = date('Y-W', strtotime(date('Y')."W".(date('W') - $i)."1"));
+            $date = (new \Datetime('now'))->sub(new \DateInterval('P'.($i * 7).'D'))->format('Y-W');
+            
             $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
             $this->weeks[$date] = json_decode($json);
             
