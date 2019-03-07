@@ -89,7 +89,7 @@ class CouldUseCompact extends Analyzer {
                                 $this->side()
                                      ->outIs('INDEX')
                                      ->atomIs(array('String', 'Identifier', 'Nsname', 'Concatenation'))
-                                     ->raw('sideEffect{ name = "$" + it.get().value("noDelimiter"); }')
+                                     ->raw('sideEffect{ name = "\\$" + it.get().value("noDelimiter"); }')
                                      ->inIs('INDEX')
                                      ->outIs('VALUE')
                                      ->atomIs('Variable')
