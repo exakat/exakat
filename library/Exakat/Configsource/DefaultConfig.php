@@ -136,7 +136,7 @@ class DefaultConfig extends Config {
                                
                                'remote'              => 'none',
  
-                               'project_reports'     => array('Ambassador',
+                               'project_reports'     => array('Diplomat',
                                                              ),
                                'project_themes'      => array('CompatibilityPHP53', 
                                                               'CompatibilityPHP54', 
@@ -150,6 +150,7 @@ class DefaultConfig extends Config {
                                                               'Dead code', 
                                                               'Security', 
                                                               'Analyze', 
+                                                              'Top10',
                                                               'Preferences',
                                                               'Appinfo', 
                                                               'Appcontent',
