@@ -78,6 +78,7 @@ class Dump extends Tasks {
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/.dump.sqlite";
+        $this->sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
         $this->sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
@@ -89,60 +90,7 @@ class Dump extends Tasks {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
-            $this->sqlite = new \Sqlite3($this->sqliteFile);
-
-            $query = <<<SQL
-CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       thema STRING,
-                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
-                    )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        fullcode STRING,
-                        file STRING,
-                        line INTEGER,
-                        namespace STRING,
-                        class STRING,
-                        function STRING,
-                        analyzer STRING,
-                        severity STRING
-                     )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                             analyzer STRING,
-                             count INTEGER DEFAULT -6,
-                            CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
-                           )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
-                            analyzer TEXT,
-                            key TEXT UNIQUE,
-                            value TEXT
-                          );
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            name TEXT,
-                            key TEXT,
-                            value TEXT
-                          );
-SQL;
-            $this->sqlite->query($query);
-
-            $this->collectDatastore();
-
-            display('Inited tables');
+            $this->initDump();
         }
         
         if ($this->config->collect === true) {
@@ -582,14 +530,10 @@ SQL;
                         'externallibraries',
                         'files',
                         'hash',
-//                        'hashAnalyzer',
                         'ignoredFiles',
                         'shortopentag',
                         'tokenCounts',
                         'linediff',
-                        
-                        'cit',
-                        'namespaces',
                         );
         $this->collectTables($tables);
     }
@@ -677,7 +621,6 @@ GREMLIN;
     private function collectStructures() {
 
         // Name spaces
-        /*
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query(<<<SQL
 CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -685,7 +628,6 @@ CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL
 );
-*/
         $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
         $query = <<<GREMLIN
@@ -715,7 +657,6 @@ GREMLIN;
         display("$total namespaces\n");
 
         // Classes
-        /*
         $this->sqlite->query('DROP TABLE IF EXISTS cit');
         $this->sqlite->query('CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    name STRING,
@@ -728,7 +669,7 @@ GREMLIN;
                                                    file INTEGER,
                                                    namespaceId INTEGER DEFAULT 1
                                                  )');
-        */
+
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
@@ -2110,6 +2051,77 @@ SQL;
             $query = 'INSERT INTO themas (thema) VALUES ("'.implode('"), ("', $add).'")';
             $res = $this->sqlite->query($query);
         }
+    }
+    
+    private function initDump() {
+        if (file_exists($this->sqliteFile)) {
+            unlink($this->sqliteFile);
+        }
+        $this->sqlite = new \Sqlite3($this->sqliteFile);
+
+        $query = <<<SQL
+CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
+                       thema STRING,
+                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
+                    )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        fullcode STRING,
+                        file STRING,
+                        line INTEGER,
+                        namespace STRING,
+                        class STRING,
+                        function STRING,
+                        analyzer STRING,
+                        severity STRING
+                     )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             analyzer STRING,
+                             count INTEGER DEFAULT -6,
+                            CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
+                           )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
+                            analyzer TEXT,
+                            key TEXT UNIQUE,
+                            value TEXT
+                          );
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            name TEXT,
+                            key TEXT,
+                            value TEXT
+                          );
+SQL;
+        $this->sqlite->query($query);
+
+        $this->collectDatastore();
+
+        $time   = time();
+        $id     = random_int(0, PHP_INT_MAX);
+        $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
+        $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+        $query = <<<SQL
+INSERT INTO hash VALUES (NULL, 'dump_time', $time),
+                        (NULL, 'dump_id', $id),
+                        (NULL, 'dump_serial', $serial)
+SQL;
+        $this->sqlite->query($query);
+
+        display('Inited tables');
     }
 }
 
