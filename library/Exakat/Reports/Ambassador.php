@@ -2811,7 +2811,7 @@ HTML;
     private function generateGlobals() {
         $theGlobals = '';
 
-        $results = new Results($this->sqlite, 'Structures/GlobalInGlobal');
+        $results = new Results($this->sqlite, array('Structures/GlobalInGlobal', 'Structures/GlobalUsage'));
         $results->load();
 
         foreach($results->toArray() as $row) {
