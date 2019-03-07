@@ -448,8 +448,9 @@ class Load extends Tasks {
             
             try {
                 $this->processFile($filename, '');
+                $this->loader->finalize();
             } catch (NoFileToProcess $e) {
-                $this->datastore->ignoreFile($file, $e->getMessage());
+                $this->datastore->ignoreFile($filename, $e->getMessage());
             }
 
             $files = 1;
@@ -563,7 +564,8 @@ class Load extends Tasks {
                 $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
-//        $this->loader = $loader;
+        $this->loader->finalize();
+        $this->loader = $loader;
 
         $nbTokens = 0;
         foreach($files as $file) {
