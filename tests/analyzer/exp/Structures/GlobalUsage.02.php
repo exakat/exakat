@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('$GLOBALS',
-                      '\'d\'',
+                      '$GLOBALS[\'d\']',
                      );
 
 $expected_not = array('$globals',
