@@ -104,6 +104,7 @@ class Docs {
                              'Suggestions',
                              'ClassReview',
                              'LintButWontExec',
+                             'Top10',
 
                              );
 
