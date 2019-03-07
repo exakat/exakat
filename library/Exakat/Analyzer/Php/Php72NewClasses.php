@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassDefinition;
 
 class Php72NewClasses extends ClassDefinition {
-    protected $phpVersion = '7.2-';
-    
     public function analyze() {
         $this->classes = array('HashContext',
                                );

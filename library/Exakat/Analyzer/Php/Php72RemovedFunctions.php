@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php72RemovedFunctions extends FunctionUsage {
-    protected $phpVersion = '7.2-';
-    
     public function analyze() {
         $this->functions = array('png2wbmp',
                                  'jpeg2wbmp',

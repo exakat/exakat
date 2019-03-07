@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php71NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '7.1-';
-    
     public function analyze() {
         $this->functions = array(
 'curl_share_strerror',

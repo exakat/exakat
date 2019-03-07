@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php54NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '5.3-';
-    
     public function analyze() {
         $this->functions = array(
 'hex2bin',

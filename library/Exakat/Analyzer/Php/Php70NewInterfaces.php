@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\InterfaceDefinition;
 
 class Php70NewInterfaces extends InterfaceDefinition {
-    protected $phpVersion = '7.0-';
-    
     public function analyze() {
         $this->interfaces = array(
 'Throwable',

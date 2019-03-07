@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php70NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '7.0-';
-    
     public function analyze() {
         $this->functions = array(
 'get_resources',

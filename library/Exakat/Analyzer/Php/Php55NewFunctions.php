@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php55NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '5.5-';
-    
     public function analyze() {
         $this->functions = array(
 'array_column',

@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ConstantDefinition;
 
 class Php72NewConstants extends ConstantDefinition {
-    protected $phpVersion = '7.2-';
-
     public function analyze() {
         $this->constants = array('PHP_OS_FAMILY',
                                  'PHP_FLOAT_DIG',
