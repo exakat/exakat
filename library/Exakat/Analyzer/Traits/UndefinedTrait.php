@@ -28,6 +28,7 @@ class UndefinedTrait extends Analyzer {
         // class x { use t; } // no trait t {}
         $this->atomIs('Usetrait')
              ->outIs('USE')
+             ->isNotIgnored()
              ->noTraitDefinition();
         $this->prepareQuery();
     }
