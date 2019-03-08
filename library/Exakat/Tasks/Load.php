@@ -555,6 +555,17 @@ class Load extends Tasks {
 
         $this->reset();
 
+        $nbTokens = 0;
+        foreach($files as $file) {
+            try {
+                $r = $this->processFile($file, $dir);
+                $nbTokens += $r;
+            } catch (NoFileToProcess $e) {
+                $this->datastore->ignoreFile($file, $e->getMessage());
+            }
+        }
+        $this->loader->finalize();
+
         $loader = $this->loader;
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         foreach($ignoredFiles as $file => $reason) {
@@ -565,17 +576,6 @@ class Load extends Tasks {
             }
         }
         $this->loader->finalize();
-        $this->loader = $loader;
-
-        $nbTokens = 0;
-        foreach($files as $file) {
-            try {
-                $r = $this->processFile($file, $dir);
-                $nbTokens += $r;
-            } catch (NoFileToProcess $e) {
-                $this->datastore->ignoreFile($file, $e->getMessage());
-            }
-        }
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
