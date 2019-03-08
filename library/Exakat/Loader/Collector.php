@@ -26,7 +26,8 @@ namespace Exakat\Loader;
 use Exakat\Datastore;
 
 class Collector extends Loader {
-    private $cit    = array();
+    private $cit        = array();
+
     private $datastore = null;
 
     public function __construct($gremlin, $config, \Sqlite3 $sqlite3) {
@@ -34,21 +35,16 @@ class Collector extends Loader {
     }
     
     public function finalize() {
-        $res = $this->datastore->addRow('cit', $this->cit);
+        $this->datastore->addRow('ignoredCit', $this->cit);
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) { 
         foreach($atoms as $atom) {
             if (in_array($atom->atom, array('Class', 'Interface', 'Trait'))) {
-                $this->cit[] = array('name'        => $atom->fullnspath,
-                                     'abstract'    => $atom->abstract,
-                                     'final'       => $atom->final,
-                                     'type'        => $atom->fullcode,
-                                     'extends'     => 'none',
-                                     'begin'       => '0',
-                                     'end'         => '0',
-                                     'file'        => '0',
-                                     'namespaceId' => '0',
+                $this->cit[] = array('name'        => $atom->fullcode,
+                                     'fullnspath'  => $atom->fullnspath,
+                                     'fullcode'    => $atom->fullcode,
+                                     'type'        => strtolower($atom->atom),
                               );
             }
         }

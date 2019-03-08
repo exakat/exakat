@@ -38,9 +38,10 @@ class DSLFactory {
     public     $availableFunctioncalls = array();
     private    $availableVariables     = array(); // This one is per query
     protected  $availableLabels        = array('first'); // This one is per query
-    protected  $dictCode             = null;
-    protected  $linksDown            = '';
-    protected  $MAX_LOOPING          = Analyzer::MAX_LOOPING;
+    protected  $ignoredcit             = array(); 
+    protected  $dictCode               = null;
+    protected  $linksDown              = '';
+    protected  $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
     public function __construct($datastore) {
         $this->dictCode = Dictionary::factory($datastore);
@@ -62,6 +63,8 @@ class DSLFactory {
             }
 
             $this->availableFunctioncalls = $datastore->getCol('functioncalls', 'functioncall');
+            
+            $this->ignoredcit = $datastore->getCol('ignoredcit', 'fullnspath');
         }
     }
 
@@ -76,7 +79,15 @@ class DSLFactory {
             throw new UnknownDsl($name);
         }
         
-        return new $className($this, $this->dictCode, $this->availableAtoms, $this->availableLinks, $this->availableFunctioncalls, $this->availableVariables, $this->availableLabels);
+        return new $className($this, 
+                              $this->dictCode, 
+                              $this->availableAtoms, 
+                              $this->availableLinks, 
+                              $this->availableFunctioncalls, 
+                              $this->availableVariables, 
+                              $this->availableLabels,
+                              $this->ignoredcit
+                              );
     }
 }
 

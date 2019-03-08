@@ -68,6 +68,12 @@ class Datastore {
 
         if ($create === self::CREATE) {
             $this->cleanTable('hash');
+            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
+                                        'exakat_build'         => Exakat::BUILD,
+                                        'datastore_creation'   => date('r', time()),
+                                        'project'              => $config->project,
+                                        ));
+
             $this->cleanTable('hashAnalyzer');
             $this->cleanTable('analyzed');
             $this->cleanTable('tokenCounts');
@@ -81,14 +87,7 @@ class Datastore {
             $this->cleanTable('dictionary');
             $this->cleanTable('linediff');
 
-            $this->cleanTable('cit');
-            $this->cleanTable('namespaces');
-
-            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
-                                        'exakat_build'         => Exakat::BUILD,
-                                        'datastore_creation'   => date('r', time()),
-                                        'project'              => $config->project,
-                                        ));
+            $this->cleanTable('ignoredCit');
         }
     }
 
@@ -469,27 +468,14 @@ CREATE TABLE linediff (
 SQLITE;
                 break;
 
-            case 'cit' :
+            case 'ignoredCit' :
                 $createTable = <<<SQLITE
-CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name STRING,
-                    abstract INTEGER,
-                    final INTEGER,
-                    type TEXT,
-                    extends TEXT DEFAULT "",
-                    begin INTEGER,
-                    end INTEGER,
-                    file INTEGER,
-                    namespaceId INTEGER DEFAULT 1
+CREATE TABLE ignoredCit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           name TEXT,
+                           fullnspath TEXT,
+                           fullcode TEXT,
+                           type TEXT
                 )
-SQLITE;
-                break;
-
-            case 'namespaces' :
-                $createTable = <<<SQLITE
-CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           namespace STRING
-                        )
 SQLITE;
                 break;
 

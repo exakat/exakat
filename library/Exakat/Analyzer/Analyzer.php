@@ -557,6 +557,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function isNotIgnored() {
+        $this->query->isNotIgnored();
+        
+        return $this;
+    }
     
     public function functioncallIs($fullnspath) {
         $this->query->functioncallIs($fullnspath);
