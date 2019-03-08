@@ -2112,8 +2112,12 @@ SQL;
 
         $time   = time();
         $id     = random_int(0, PHP_INT_MAX);
-        $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
-        $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+        if (file_exists($this->sqliteFilePrevious)) {
+            $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
+            $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+        } else {
+            $serial = 1;
+        }
         $query = <<<SQL
 INSERT INTO hash VALUES (NULL, 'dump_time', $time),
                         (NULL, 'dump_id', $id),
