@@ -96,7 +96,8 @@ class LoadFinal {
         $task->run();
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->setClassRemoteDefinitionWithTypehint();
+        $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $this->setClassRemoteDefinitionWithReturnTypehint();
 
         $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
@@ -481,88 +482,6 @@ GREMLIN;
         // TODO : handle case-insensitive
         $this->logTime('Constant definitions');
         display('Link constant definitions');
-        $this->log->log(__METHOD__);
-    }
-
-    private function setClassRemoteDefinitionWithTypehint() {
-        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
-        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
-              ->hasNoIn('DEFINITION')
-              ->outIs('METHOD')
-              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('lccode', 'name')
-              ->inIs('METHOD')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('METHOD')
-              ->outIs('NAME')
-              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countM = $result->toInt();
-
-        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('member')
-              ->hasNoIn('DEFINITION')
-              ->outIs('MEMBER')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('MEMBER')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countP = $result->toInt();
-
-        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
-        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('constante')
-              ->hasNoIn('DEFINITION')
-              ->outIs('CONSTANT')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('CONSTANT')
-              ->outIs('CLASS')
-              ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->outIs('CONST')
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constante')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countC = $result->toInt();
-
-        display("Set ".($countP + $countM + $countC)." method, constants and properties remote with typehint");
         $this->log->log(__METHOD__);
     }
 
