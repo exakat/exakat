@@ -372,8 +372,6 @@ class Load extends Tasks {
             $this->phptokens::T_INTERFACE                => 'processInterface',
             $this->phptokens::T_NAMESPACE                => 'processNamespace',
             $this->phptokens::T_USE                      => 'processUse',
-            $this->phptokens::T_AS                       => 'processAs',
-            $this->phptokens::T_INSTEADOF                => 'processInsteadof',
     
             $this->phptokens::T_ABSTRACT                 => 'processAbstract',
             $this->phptokens::T_FINAL                    => 'processFinal',
@@ -2660,11 +2658,6 @@ class Load extends Tasks {
                     true) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
-        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_AS,
-                                                                  $this->phptokens::T_INSTEADOF,
-                                                                  ),
-                            true)) {
-            $string = $this->addAtom('Staticmethod'); // This is for USE with traits
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
             $string = $this->addAtom('Self');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
@@ -4297,15 +4290,17 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             //use A\B{} // Group
-            $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
+            $block = $this->processUseBlock();
 
-            $this->popExpression();
             $this->addLink($use, $block, 'BLOCK');
             $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
             // Several namespaces ? This has to be recalculated inside the block!!
             $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
-         }
+            
+            // No ; at the end
+            $this->processSemicolon();
+        }
 
         $use->code     = $this->tokens[$current][1];
         $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(", ", $fullcode);
@@ -4314,6 +4309,64 @@ class Load extends Tasks {
         $this->pushExpression($use);
 
         return $use;
+    }
+
+    private function processUseBlock() {
+        $this->startSequence();
+
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        ++$this->id;
+        do {
+            ++$this->id;
+            $origin = $this->processOneNsname();
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
+                ++$this->id;
+                $method =  $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+                
+                $class = $origin;
+                list($fullnspath, $aliased) = $this->getFullnspath($class, 'class');
+                $class->fullnspath = $fullnspath;
+                $class->aliased    = $aliased;
+                $this->calls->addCall('class', $class->fullnspath, $class);
+
+                $origin = $this->addAtom('Staticmethod');
+                $this->addLink($origin, $class, 'CLASS');
+                $this->addLink($origin, $method, 'METHOD');
+
+                
+                $origin->fullcode = "{$class->fullcode}::{$method->fullcode}";
+                $origin->line = $class->line;
+            }
+            $this->pushExpression($origin);
+
+            ++$this->id;
+            // instead of ? 
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
+                $as = $this->processAs();
+            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
+                $as = $this->processInsteadof();
+            } else {
+                assert(false, "Usetrait without as or insteadof : ".$this->tokens[$this->id + 1][1]);
+            }
+
+            $this->processSemicolon(); // ;
+            ++$this->id;
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+        ++$this->id;
+
+        $this->checkExpression();
+
+        $block = $this->sequence;
+        $this->endSequence();
+
+        $block->code     = '{}';
+        $block->fullcode = static::FULLCODE_BLOCK;
+        $block->line     = $this->tokens[$this->id][2];
+        $block->token    = $this->getToken($this->tokens[$this->id][0]);
+        $block->bracket  = self::BRACKET;
+
+        return $block;
     }
 
     private function processVariable() {
@@ -5067,28 +5120,11 @@ class Load extends Tasks {
                 $static->noDelimiter = $left->fullcode;
             }
         } elseif ($right->atom === 'Name') {
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_INSTEADOF,
-                                                                $this->phptokens::T_AS),
-                        true)) {
-
-                list($fullnspath, $aliased) = $this->getFullnspath($left);
-                $this->calls->addCall('class', $fullnspath, $left);
-                $left->fullnspath = $fullnspath;
-                $left->aliased    = $aliased;
-
-                $static = $this->addAtom('Staticmethod');
-                $this->addLink($static, $right, 'METHOD');
-                $fullcode = "{$left->fullcode}::{$right->fullcode}";
-                $static->fullnspath = "{$left->fullnspath}::".mb_strtolower($right->fullcode);
-
-                // No need for runplugin
-            } else {
-                $static = $this->addAtom('Staticconstant');
-                $this->addLink($static, $right, 'CONSTANT');
-                $fullcode = "{$left->fullcode}::{$right->fullcode}";
-                $this->runPlugins($static, array('CLASS'    => $left,
-                                                 'CONSTANT' => $right));
-            }
+            $static = $this->addAtom('Staticconstant');
+            $this->addLink($static, $right, 'CONSTANT');
+            $fullcode = "{$left->fullcode}::{$right->fullcode}";
+            $this->runPlugins($static, array('CLASS'    => $left,
+                                             'CONSTANT' => $right));
         } elseif (in_array($right->atom, array('Variable', 
                                                'Array', 
                                                'Arrayappend', 

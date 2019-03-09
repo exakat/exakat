@@ -8,6 +8,8 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
+          22
+        Label : EXPRESSION
           5
           Label : EXTENDS
             8
@@ -22,19 +24,19 @@ Label : PROJECT
                 Label : INSTEADOF
                   11
                 Label : NAME
-                  18
+                  16
                   Label : CLASS
-                    13
-                  Label : METHOD
                     16
+                  Label : METHOD
+                    17
               Label : EXPRESSION
                 19
                 Label : INSTEADOF
                   13
                 Label : NAME
-                  18
+                  16
                   Label : CLASS
-                    11
+                    16
                   Label : METHOD
                     20
             Label : USE

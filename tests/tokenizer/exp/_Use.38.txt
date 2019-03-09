@@ -17,10 +17,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
-          Label : DEFINITION
-            6
           Label : METHOD
             8
             Label : ARGUMENT
@@ -43,18 +39,6 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   17
-            Label : DEFINITION
-              26
-              Label : CLASS
-                6
-              Label : METHOD
-                15
-            Label : DEFINITION
-              26
-              Label : CLASS
-                6
-              Label : METHOD
-                15
             Label : NAME
               15
           Label : NAME
@@ -69,12 +53,6 @@ Label : PROJECT
             18
           Label : DEFINITION
             18
-          Label : DEFINITION
-            18
-          Label : DEFINITION
-            18
-          Label : DEFINITION
-            18
           Label : METHOD
             8
             Label : ARGUMENT
@@ -85,18 +63,6 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   20
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                8
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                8
             Label : NAME
               8
           Label : METHOD
@@ -109,16 +75,12 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   21
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                15
             Label : NAME
               15
           Label : NAME
             18
+        Label : EXPRESSION
+          10
         Label : EXPRESSION
           22
           Label : NAME
@@ -134,7 +96,7 @@ Label : PROJECT
                 Label : NAME
                   26
                   Label : CLASS
-                    18
+                    26
                   Label : METHOD
                     8
               Label : EXPRESSION
@@ -144,13 +106,15 @@ Label : PROJECT
                 Label : NAME
                   26
                   Label : CLASS
-                    6
+                    26
                   Label : METHOD
                     15
             Label : USE
               6
             Label : USE
               18
+        Label : EXPRESSION
+          10
         Label : EXPRESSION
           22
           Label : NAME
@@ -166,7 +130,7 @@ Label : PROJECT
                 Label : NAME
                   26
                   Label : CLASS
-                    18
+                    26
                   Label : METHOD
                     8
               Label : EXPRESSION
@@ -176,7 +140,7 @@ Label : PROJECT
                 Label : NAME
                   26
                   Label : CLASS
-                    6
+                    26
                   Label : METHOD
                     15
               Label : EXPRESSION
@@ -186,7 +150,7 @@ Label : PROJECT
                 Label : NAME
                   26
                   Label : CLASS
-                    18
+                    26
                   Label : METHOD
                     15
             Label : USE

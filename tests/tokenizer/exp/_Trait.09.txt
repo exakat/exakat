@@ -11,8 +11,6 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
           Label : METHOD
             6
             Label : ARGUMENT
@@ -27,14 +25,6 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              21
-              Label : CLASS
-                6
-              Label : METHOD
-                6
-            Label : DEFINITION
-              6
             Label : NAME
               6
           Label : NAME
@@ -57,16 +47,12 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              6
             Label : NAME
               6
           Label : NAME
             16
         Label : EXPRESSION
           5
-          Label : DEFINITION
-            17
           Label : DEFINITION
             17
           Label : METHOD
@@ -83,12 +69,6 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              21
-              Label : CLASS
-                17
-              Label : METHOD
-                6
             Label : DEFINITION
               27
               Label : METHOD
@@ -99,12 +79,12 @@ Label : PROJECT
                   6
               Label : OBJECT
                 26
-            Label : DEFINITION
-              6
             Label : NAME
               6
           Label : NAME
             17
+        Label : EXPRESSION
+          7
         Label : EXPRESSION
           18
           Label : DEFINITION
@@ -156,7 +136,7 @@ Label : PROJECT
                 Label : NAME
                   21
                   Label : CLASS
-                    6
+                    21
                   Label : METHOD
                     6
               Label : EXPRESSION
@@ -166,7 +146,7 @@ Label : PROJECT
                 Label : NAME
                   21
                   Label : CLASS
-                    17
+                    21
                   Label : METHOD
                     6
               Label : EXPRESSION
@@ -174,7 +154,7 @@ Label : PROJECT
                 Label : AS
                   24
                 Label : NAME
-                  6
+                  21
             Label : USE
               6
             Label : USE
