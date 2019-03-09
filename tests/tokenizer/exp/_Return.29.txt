@@ -18,9 +18,11 @@ Label : PROJECT
               Label : BLOCK
                 8
                 Label : EXPRESSION
-                  17
-                  Label : YIELD
-                    15
+                  15
+                  Label : RETURN
+                    6
+                Label : EXPRESSION
+                  16
               Label : SOURCE
                 10
                 Label : NAME
@@ -46,14 +48,8 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            19
+            5
             Label : ARGUMENT
-              5
-              Label : ARGUMENT
-                6
-              Label : NAME
-                5
+              6
             Label : NAME
-              19
-          Label : NAME
-            18
+              5

@@ -4668,7 +4668,6 @@ class Load extends Tasks {
                                                             $this->phptokens::T_CLOSE_BRACKET,
                                                             $this->phptokens::T_COMMA,
                                                             $this->phptokens::T_SEMICOLON,
-                                                            $this->phptokens::T_CLOSE_TAG,
                                    ),
                     true)) {
             $current = $this->id;
@@ -4685,6 +4684,30 @@ class Load extends Tasks {
             $yield->token    = $this->getToken($this->tokens[$current][0]);
 
             $this->pushExpression($yield);
+            $this->runPlugins($yield, array('YIELD' => $yieldArg) );
+
+            return $yield;
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,  
+                                                                 ),
+                    true)) {
+            $current = $this->id;
+
+            // Case of return ? >A<?php ;
+            ++$this->id;
+            ++$this->id;
+            $yieldArg = $this->processSingle('Inlinehtml');
+            ++$this->id;
+            $yield = $this->addAtom('Yield');
+
+            $this->addLink($yield, $yieldArg, 'YIELD');
+
+            $yield->code     = $this->tokens[$current][1];
+            $yield->fullcode = $this->tokens[$current][1].' '.$yieldArg->fullcode;
+            $yield->line     = $this->tokens[$current][2];
+            $yield->token    = $this->getToken($this->tokens[$current][0]);
+
+            $this->addToSequence($yield);
+
             $this->runPlugins($yield, array('YIELD' => $yieldArg) );
 
             return $yield;
