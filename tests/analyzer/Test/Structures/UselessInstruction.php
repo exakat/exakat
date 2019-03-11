@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class UselessInstruction extends Analyzer {
-    /* 22 methods */
+    /* 23 methods */
 
     public function testStructures_UselessInstruction01()  { $this->generic_test('Structures_UselessInstruction.01'); }
     public function testStructures_UselessInstruction02()  { $this->generic_test('Structures_UselessInstruction.02'); }
@@ -31,5 +31,6 @@ class UselessInstruction extends Analyzer {
     public function testStructures_UselessInstruction20()  { $this->generic_test('Structures/UselessInstruction.20'); }
     public function testStructures_UselessInstruction21()  { $this->generic_test('Structures/UselessInstruction.21'); }
     public function testStructures_UselessInstruction22()  { $this->generic_test('Structures/UselessInstruction.22'); }
+    public function testStructures_UselessInstruction23()  { $this->generic_test('Structures/UselessInstruction.23'); }
 }
 ?>
