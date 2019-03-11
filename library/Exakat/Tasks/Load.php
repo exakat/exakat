@@ -4317,28 +4317,27 @@ class Load extends Tasks {
         // Case for {}
         ++$this->id;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
-            ++$this->id;
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
+
+            ++$this->id; // skip }
         } else {
             $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
             do {
-                ++$this->id;
                 $origin = $this->processOneNsname();
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
-                    ++$this->id;
-                    $method =  $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+                    ++$this->id; // skip ::
+                    $method =  $this->processNextAsIdentifier();
                     
                     $class = $origin;
                     list($fullnspath, $aliased) = $this->getFullnspath($class, 'class');
                     $class->fullnspath = $fullnspath;
                     $class->aliased    = $aliased;
                     $this->calls->addCall('class', $class->fullnspath, $class);
-    
+
                     $origin = $this->addAtom('Staticmethod');
                     $this->addLink($origin, $class, 'CLASS');
                     $this->addLink($origin, $method, 'METHOD');
-    
                     
                     $origin->fullcode = "{$class->fullcode}::{$method->fullcode}";
                     $origin->line = $class->line;
