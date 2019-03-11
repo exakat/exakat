@@ -28,6 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class FunctionPreSubscripting extends Analyzer {
     protected $phpVersion = '5.4+';
     
+    public function dependsOn() {
+        return array('Variables/SelfTransform',
+                    );
+    }
+
     public function analyze() {
         // $x = f();
         // $x['e']
@@ -38,6 +43,7 @@ class FunctionPreSubscripting extends Analyzer {
              ->back('first')
 
              ->outIs('LEFT')
+             ->analyzerIsNot('Variables/SelfTransform')
              ->atomIs('Variable') // variable
              ->filter(
                 $this->side()
