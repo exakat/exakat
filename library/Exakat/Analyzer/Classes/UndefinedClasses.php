@@ -55,6 +55,7 @@ class UndefinedClasses extends Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->noClassDefinition()
+//             ->isNotIgnored()
              ->back('first');
         $this->prepareQuery();
 
