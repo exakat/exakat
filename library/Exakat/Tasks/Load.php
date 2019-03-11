@@ -4317,6 +4317,7 @@ class Load extends Tasks {
         // Case for {}
         ++$this->id;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
+            ++$this->id;
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
         } else {

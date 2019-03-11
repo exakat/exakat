@@ -16,6 +16,8 @@ Label : PROJECT
               Label : USE
                 10
             Label : EXPRESSION
+              22
+            Label : EXPRESSION
               12
               Label : EXTENDS
                 15
@@ -26,17 +28,17 @@ Label : PROJECT
                 Label : BLOCK
                   19
                   Label : EXPRESSION
-                    22
+                    21
                     Label : NAME
                       20
                   Label : EXPRESSION
-                    22
+                    21
                     Label : NAME
-                      23
+                      20
                   Label : EXPRESSION
-                    22
+                    21
                     Label : NAME
-                      25
+                      20
                 Label : USE
                   17
           Label : NAME

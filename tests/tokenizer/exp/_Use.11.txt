@@ -93,8 +93,6 @@ Label : PROJECT
                     19
                   Label : NAME
                     17
-              Label : DEFINITION
-                17
               Label : NAME
                 17
               Label : PPP

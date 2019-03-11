@@ -87,8 +87,6 @@ Label : PROJECT
                     14
                   Label : NAME
                     13
-              Label : DEFINITION
-                13
               Label : METHOD
                 11
                 Label : ARGUMENT

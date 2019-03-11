@@ -19,12 +19,12 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
-            Label : DEFINITION
-              8
             Label : NAME
               8
           Label : NAME
             6
+        Label : EXPRESSION
+          9
         Label : EXPRESSION
           12
           Label : NAME
@@ -34,14 +34,14 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                16
+                17
                 Label : AS
-                  17
+                  18
                 Label : NAME
-                  8
+                  16
               Label : EXPRESSION
-                16
+                17
                 Label : NAME
-                  17
+                  16
             Label : USE
               6

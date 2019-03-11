@@ -2,15 +2,17 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    18
+    12
     Label : DEFINITION
-      17
+      18
   Label : FILE
     3
     Label : EXPRESSION
       4
       Label : CODE
         3
+        Label : EXPRESSION
+          16
         Label : EXPRESSION
           5
           Label : NAME
@@ -20,9 +22,9 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                14
+                13
                 Label : AS
-                  15
+                  14
                 Label : NAME
                   12
             Label : USE
@@ -32,4 +34,4 @@ Label : PROJECT
           Label : EXPRESSION
             19
             Label : POSTPLUSPLUS
-              17
+              18

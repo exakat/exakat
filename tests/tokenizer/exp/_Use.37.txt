@@ -23,14 +23,12 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   14
-            Label : DEFINITION
-              8
-            Label : DEFINITION
-              8
             Label : NAME
               8
           Label : NAME
             6
+        Label : EXPRESSION
+          10
         Label : EXPRESSION
           16
           Label : NAME
@@ -40,24 +38,26 @@ Label : PROJECT
             Label : BLOCK
               12
               Label : EXPRESSION
-                20
+                21
                 Label : NAME
-                  8
+                  20
             Label : USE
               6
         Label : EXPRESSION
+          10
+        Label : EXPRESSION
           16
           Label : NAME
-            21
+            22
           Label : USE
             19
             Label : BLOCK
               12
               Label : EXPRESSION
-                20
+                21
                 Label : AS
-                  23
+                  24
                 Label : NAME
-                  8
+                  20
             Label : USE
               6
