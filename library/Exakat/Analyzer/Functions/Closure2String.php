@@ -34,8 +34,8 @@ class Closure2String extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
-             ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
+             ->atomIs(self::$CALLS)
+             ->noAtomInside(self::$CALLS)
              ->back('first');
         $this->prepareQuery();
     }

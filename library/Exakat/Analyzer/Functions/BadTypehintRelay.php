@@ -39,7 +39,7 @@ class BadTypehintRelay extends Analyzer {
              ->has('rank')
              ->savePropertyAs('rank', 'theRank')
              ->inIs('ARGUMENT')
-             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->atomIs(self::$CALLS)
              ->inIs('DEFINITION')
              ->_as('result')
              ->outIs('ARGUMENT')

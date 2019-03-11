@@ -114,6 +114,7 @@ abstract class Analyzer {
     static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
+    static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
