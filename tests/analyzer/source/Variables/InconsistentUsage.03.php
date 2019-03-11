@@ -9,7 +9,7 @@ class x {
     private $p3 = array();
     private $p3a = 3;
 
-    private $p4 ;
+    private $p4;
     private $p4a;
     
     function foo() {
@@ -28,7 +28,7 @@ class x {
         $this->p4->b = 1;
 
         $this->p4a = new c;
-        $this->p4a = 1;
+        $this->p4a = clone c;
     }
 
 }

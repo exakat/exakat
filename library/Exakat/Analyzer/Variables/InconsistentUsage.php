@@ -39,6 +39,7 @@ GREMLIN
 ->outIs('DEFINITION');
         $this->prepareQuery();
 
+        // Not taking into account absence of default on purpose. 
         $this->atomIs('Propertydefinition')
              ->raw(<<<GREMLIN
 where(
@@ -49,14 +50,13 @@ __.sideEffect{ s = ['class':0, 'array':0, 'variable':0];}
    else if (it.get().label() == 'Arrayliteral')    { s['array']++; }
    else                                            { s['variable']++; }
     }.fold()
-  ).where(
-    __.not(__.where(out('DEFAULT'))).sideEffect{s['class']++; }.fold()
   )
   .out('DEFINITION')
   .not( __.where(__.in('LEFT').hasLabel('Assignation').out('RIGHT').hasLabel('New')))
   .inE().not(hasLabel('ANALYZED', 'DEFINITION', 'RETURN')).sideEffect{
           if (it.get().label() == 'OBJECT')   { s['class']++; }
      else if (it.get().label() == 'CLASS')    { s['class']++; }
+     else if (it.get().label() == 'CLONE')    { s['class']++; }
      else if (it.get().label() == 'APPEND')   { s['array']++; }
      else if (it.get().label() == 'VARIABLE') { s['array']++; }
      else { s['variable']++; };
