@@ -92,7 +92,7 @@ class LoadFinal {
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
-        $task = new setClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
+        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
