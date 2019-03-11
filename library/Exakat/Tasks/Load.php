@@ -4314,47 +4314,53 @@ class Load extends Tasks {
     private function processUseBlock() {
         $this->startSequence();
 
-        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        // Case for {}
         ++$this->id;
-        do {
-            ++$this->id;
-            $origin = $this->processOneNsname();
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
+            $void = $this->addAtomVoid();
+            $this->addToSequence($void);
+        } else {
+            $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+            do {
                 ++$this->id;
-                $method =  $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-                
-                $class = $origin;
-                list($fullnspath, $aliased) = $this->getFullnspath($class, 'class');
-                $class->fullnspath = $fullnspath;
-                $class->aliased    = $aliased;
-                $this->calls->addCall('class', $class->fullnspath, $class);
-
-                $origin = $this->addAtom('Staticmethod');
-                $this->addLink($origin, $class, 'CLASS');
-                $this->addLink($origin, $method, 'METHOD');
-
-                
-                $origin->fullcode = "{$class->fullcode}::{$method->fullcode}";
-                $origin->line = $class->line;
-            }
-            $this->pushExpression($origin);
-
+                $origin = $this->processOneNsname();
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
+                    ++$this->id;
+                    $method =  $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+                    
+                    $class = $origin;
+                    list($fullnspath, $aliased) = $this->getFullnspath($class, 'class');
+                    $class->fullnspath = $fullnspath;
+                    $class->aliased    = $aliased;
+                    $this->calls->addCall('class', $class->fullnspath, $class);
+    
+                    $origin = $this->addAtom('Staticmethod');
+                    $this->addLink($origin, $class, 'CLASS');
+                    $this->addLink($origin, $method, 'METHOD');
+    
+                    
+                    $origin->fullcode = "{$class->fullcode}::{$method->fullcode}";
+                    $origin->line = $class->line;
+                }
+                $this->pushExpression($origin);
+    
+                ++$this->id;
+                // instead of ? 
+                if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
+                    $as = $this->processAs();
+                } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
+                    $as = $this->processInsteadof();
+                } else {
+                    assert(false, "Usetrait without as or insteadof : ".$this->tokens[$this->id + 1][1]);
+                }
+    
+                $this->processSemicolon(); // ;
+                ++$this->id;
+            } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
+            $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
             ++$this->id;
-            // instead of ? 
-            if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
-                $as = $this->processAs();
-            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
-                $as = $this->processInsteadof();
-            } else {
-                assert(false, "Usetrait without as or insteadof : ".$this->tokens[$this->id + 1][1]);
-            }
-
-            $this->processSemicolon(); // ;
-            ++$this->id;
-        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
-        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
-        ++$this->id;
-
+        }
+        
         $this->checkExpression();
 
         $block = $this->sequence;
