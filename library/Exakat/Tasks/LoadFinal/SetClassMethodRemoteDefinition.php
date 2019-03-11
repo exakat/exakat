@@ -55,7 +55,7 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
               ->_as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('CLASS')
