@@ -76,7 +76,8 @@ class LoadFinal {
 
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
-        $this->fixFullnspathConstants();
+        $task = new FixFullnspathConstants($this->gremlin, $this->config, $this->datastore);
+        $task->run();
         $this->spotPHPNativeConstants();
 
         $this->setParentDefinition();
@@ -126,6 +127,9 @@ class LoadFinal {
 
         $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        
+        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
 
         display('End load final');
         $this->logTime('Final');
@@ -151,10 +155,10 @@ class LoadFinal {
         $begin = $end;
     }
 
+    // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
     private function fixFullnspathFunctions() {
         display("fixing Fullnspath for Functions");
 
-        // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
@@ -174,35 +178,6 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
     
-    private function fixFullnspathConstants() {
-        display("fixing Fullnspath for Constants");
-        // fix path for constants with Const
-
-        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
-        $query->atomIs(array('Identifier', 'Nsname'), Analyzer::WITHOUT_CONSTANTS)
-              ->has('fullnspath')
-              ->_as('identifier')
-              ->savePropertyAs('fullnspath', 'cc')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Trait', 'Interface', 'Constant', 'Defineconstant'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<GREMLIN
-coalesce( __.out("ARGUMENT").has("rank", 0), 
-          __.hasLabel("Constant").out('NAME'), 
-          filter{ true; })
-GREMLIN
-, array(), array())
-              ->savePropertyAs('fullnspath', 'actual')
-              ->filter('actual != cc', array())
-              ->back('identifier')
-              ->setProperty('fullnspath', 'actual')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
-        display("Fixed Fullnspath for Constants");
-        $this->log->log(__METHOD__);
-    }
-
     private function spotPHPNativeConstants() {
         $title = 'mark PHP native constants call';
         $constants = call_user_func_array('array_merge', $this->PHPconstants);

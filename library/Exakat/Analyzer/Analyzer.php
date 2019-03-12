@@ -174,7 +174,7 @@ abstract class Analyzer {
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
-            self::$availableAtoms = array('Project', 'File');
+            self::$availableAtoms = array('Project', 'File', 'Virtualproperty');
             self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
 
             foreach($data as $token){

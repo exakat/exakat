@@ -430,7 +430,7 @@ class Files extends Tasks {
         $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
         $licenses = $licenses['files'];
         
-        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        $path = "{$this->config->projects_root}/projects/{$dir}/code";
         foreach($licenses as $file) {
             if (file_exists("$path/$file")) {
                 $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
