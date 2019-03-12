@@ -445,6 +445,7 @@ class Load extends Tasks {
             }
             
             try {
+                ++$this->stats['files'];
                 $this->processFile($filename, '');
                 $this->loader->finalize();
             } catch (NoFileToProcess $e) {
@@ -496,6 +497,7 @@ class Load extends Tasks {
 
         foreach($files as $file) {
             try {
+                ++$this->stats['files'];
                 $r = $this->processFile($file, $path);
                 $nbTokens += $r;
                 if ($this->config->verbose && !$this->config->quiet) {
@@ -517,6 +519,7 @@ class Load extends Tasks {
 
         $file_extensions = $this->config->file_extensions;
 
+        $stats = $this->stats;
         foreach($omittedFiles as $id => $file) {
             try {
                 $ext = pathinfo($file, PATHINFO_EXTENSION);
@@ -537,6 +540,7 @@ class Load extends Tasks {
         }
         $this->loader->finalize();
         $this->loader = $loader;
+        $this->stats = $stats;
 
         if ($this->config->verbose && !$this->config->quiet) {
             echo $progressBar->advance();
@@ -564,6 +568,7 @@ class Load extends Tasks {
         $nbTokens = 0;
         foreach($files as $file) {
             try {
+                ++$this->stats['files'];
                 $r = $this->processFile($file, $dir);
                 $nbTokens += $r;
             } catch (NoFileToProcess $e) {
@@ -574,6 +579,7 @@ class Load extends Tasks {
 
         $loader = $this->loader;
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
+        $stats = $this->stats;
         foreach($ignoredFiles as $file => $reason) {
             try {
                 $this->processFile($file, $dir);
@@ -582,6 +588,7 @@ class Load extends Tasks {
             }
         }
         $this->loader->finalize();
+        $this->stats = $stats;
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -618,8 +625,6 @@ class Load extends Tasks {
         $fullpath = $path.$filename;
         
         $this->filename = $filename;
-
-        ++$this->stats['files'];
 
         $this->line = 0;
         $log = array();
