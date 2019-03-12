@@ -203,6 +203,7 @@ class Ambassador extends Reports {
 
         $this->generateAnalyzersList();
         $this->generateExternalLib();
+        $this->generateConcentratedIssues();
 
 // Audit Logs
         $this->generateAppinfo();
@@ -1681,10 +1682,7 @@ SQL;
                 continue;
             }
 
-            $filesHTML.= '<tr>';
-            $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
-                         &nbsp; {$this->getDocs($row['analyzer'], 'name')}</td>";
-            $filesHTML.= '</tr>';
+            $filesHTML.= '<tr><td>'.$this->makeDocLink($row['analyzer']).'</td></tr>'.PHP_EOL;
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -4569,6 +4567,36 @@ JAVASCRIPT;
         $this->putBasedPage('files_tree', $html);
     }
 
+    private function generateConcentratedIssues() {
+        $listAnalyzers = $this->themes->getThemeAnalyzers('Analyze');
+        $sqlList = makeList($listAnalyzers);
+
+        $sql = <<<SQL
+SELECT file, line, COUNT(*) AS count, GROUP_CONCAT(DISTINCT analyzer) AS list FROM results
+    WHERE analyzer IN ($sqlList)
+    GROUP BY file, line
+    HAVING count(DISTINCT analyzer) > 5
+    ORDER BY count(*) DESC
+SQL;
+        $res = $this->sqlite->query($sql);
+
+        $table = array();
+        while(['line' => $line, 'file' => $file, 'count' => $count, 'list' => $list] = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $listHtml = array();
+            foreach(explode(',', $list) as $l) { 
+                $listHtml[] = '<li>'.$this->makeDocLink($l).'</li>';
+            }
+            $listHtml = '<ul>'.implode('', $listHtml).'</u>';
+            $table[] = "<tr><td>$file:$line</td><td>$count</td><td>$listHtml</td></tr>\n";
+        }
+
+        $table = implode(PHP_EOL, $table);
+
+        $html = $this->getBasedPage('concentrated_issues');
+        $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $table);
+        $this->putBasedPage('concentrated_issues', $html);
+    }
+
     private function generateConfusingVariables() {
         $data = new Data\CloseNaming($this->sqlite);
         $results = $data->prepare();
@@ -4772,6 +4800,10 @@ HTML;
         }
         
         return $info;
+    }
+    
+    private function makeDocLink($analyzer) {
+        return "<a href=\"analyzers_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
     }
 }
 
