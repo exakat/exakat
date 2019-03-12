@@ -515,8 +515,16 @@ class Load extends Tasks {
         $this->callsDatabase = new \Sqlite3(':memory:');
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
 
-        foreach($omittedFiles as $file) {
+        $file_extensions = $this->config->file_extensions;
+
+        foreach($omittedFiles as $id => $file) {
             try {
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                if (!in_array($ext, $file_extensions)) {
+                    echo $progressBar->advance();
+                    continue;
+                }
+
                 $r = $this->processFile($file, $path);
                 if ($this->config->verbose && !$this->config->quiet) {
                     echo $progressBar->advance();
@@ -1851,10 +1859,15 @@ class Load extends Tasks {
             $fullcode[] = $this->tokens[$this->id - 1][1];
 
             $nsname->absolute = self::ABSOLUTE;
-        } else {
+        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NS_SEPARATOR) {
             $fullcode[] = '';
 
             $nsname->absolute = self::ABSOLUTE;
+        } else {
+            $fullcode[] = $this->tokens[$this->id][1];
+            ++$this->id;
+
+            $nsname->absolute = self::NOT_ABSOLUTE;
         }
 
         while ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR    &&
@@ -4727,6 +4740,7 @@ class Load extends Tasks {
                                                             $this->phptokens::T_CLOSE_BRACKET,
                                                             $this->phptokens::T_COMMA,
                                                             $this->phptokens::T_SEMICOLON,
+                                                            $this->phptokens::T_CLOSE_TAG,
                                    ),
                     true)) {
             $current = $this->id;
@@ -4745,29 +4759,9 @@ class Load extends Tasks {
             $this->pushExpression($yield);
             $this->runPlugins($yield, array('YIELD' => $yieldArg) );
 
-            return $yield;
-        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,  
-                                                                 ),
-                    true)) {
-            $current = $this->id;
-
-            // Case of return ? >A<?php ;
-            ++$this->id;
-            ++$this->id;
-            $yieldArg = $this->processSingle('Inlinehtml');
-            ++$this->id;
-            $yield = $this->addAtom('Yield');
-
-            $this->addLink($yield, $yieldArg, 'YIELD');
-
-            $yield->code     = $this->tokens[$current][1];
-            $yield->fullcode = $this->tokens[$current][1].' '.$yieldArg->fullcode;
-            $yield->line     = $this->tokens[$current][2];
-            $yield->token    = $this->getToken($this->tokens[$current][0]);
-
-            $this->addToSequence($yield);
-
-            $this->runPlugins($yield, array('YIELD' => $yieldArg) );
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+                $this->processSemicolon();
+            }
 
             return $yield;
         } else {
