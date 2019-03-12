@@ -41,6 +41,7 @@ class CreateVirtualProperty extends LoadFinal {
               ->raw('addV("Virtualproperty").sideEffect{ it.get().property("code", f);
                                                          it.get().property("fullcode", f); 
                                                          it.get().property("line", -1); 
+                                                         it.get().property("visibility", "none");
                                                        }.addE("PPP").from("laClasse")', array(), array())
 
               ->returnCount();
