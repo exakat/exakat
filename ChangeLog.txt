@@ -1,4 +1,4 @@
-Version 1.6.9 (Bao King Yama, coming up)
+Version 1.7.1 (Bi King Biancheng, coming up)
 + Architecture
     + 
 + Report
@@ -8,6 +8,25 @@ Version 1.6.9 (Bao King Yama, coming up)
 + Tokenizer
     + 
 
+Version 1.7.0 (Bao King Yama, 2019-03-11)
++ Architecture
+    + Added auto-documenting 'ignored' cit to weed out obvious false positive
++ Report
+    + Made Diplomat the default report
+    + Added History report : it stores metrics from audit to audit
++ Analyzer
+    + New analysis : Identify self transforming variables ($x = foo($x))
+    + New analysis : Report unclonable variables
+    + Updated analysis : Undefined Classes, Interfaces and Trait now omit 'ignored' cit from folders
+    + Updated analysis : Inconsistent usage is refactored for properties
+    + Updated analysis : Useless expression, with clone new x
+    + Updated analysis : Only Variable For Reference accepts $this, $_GET
+    + Updated analysis : Lost References was modernized
+    + Checked unit tests : 2854 / 2884 test pass (99% pass)
++ Tokenizer
+    + Refactored support for Staticmethod (in a trait's use)
+    + Added definitions for trait's use
+    
 Version 1.6.9 (Lu King Wuguan, 2019-03-04)
 + Architecture
     + Optimized Dump when navigating the links to the File Atom
@@ -15,8 +34,6 @@ Version 1.6.9 (Lu King Wuguan, 2019-03-04)
     + Upgraded to Tinkergraph 3.3.5
     + Added options to cleandb to stop and start gremlin from exakat
     + Skip the task if no analysis has to run
-+ Report
-    + 
 + Analyzer
     + New analysis : Report inconsistent usage of properties or variables
     + New analysis : Typehinted return must return
