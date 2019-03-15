@@ -72,64 +72,96 @@ class LoadFinal {
         $this->init();
 
         $this->fixFullnspathFunctions();
+        $this->log->log('fixFullnspathFunctions');
         $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
+        $this->log->log('spotPHPNativeFunctions');
 
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
+        $this->log->log('spotFallbackConstants');
         $task = new FixFullnspathConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('FixFullnspathConstants');
         $this->spotPHPNativeConstants();
+        $this->log->log('spotPHPNativeConstants');
 
         $this->setParentDefinition();
+        $this->log->log('setParentDefinition');
         $this->setClassAliasDefinition();
+        $this->log->log('setClassAliasDefinition');
         $this->makeClassConstantDefinition();
+        $this->log->log('makeClassConstantDefinition');
         $this->makeClassMethodDefinition();
+        $this->log->log('makeClassMethodDefinition');
         
         $this->setConstantDefinition();
+        $this->log->log('setConstantDefinition');
 
         $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassRemoteDefinitionWithInjection');
 
         $this->defaultIdentifiers();
+        $this->log->log('defaultIdentifiers');
         $this->propagateConstants();
+        $this->log->log('propagateConstants');
 
         $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassPropertyRemoteDefinition');
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassMethodRemoteDefinition');
         $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassRemoteDefinitionWithTypehint');
         $this->setClassRemoteDefinitionWithReturnTypehint();
+        $this->log->log('setClassRemoteDefinitionWithReturnTypehint');
 
         $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetCloneLink');
 
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassRemoteDefinitionWithLocalNew');
         $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassRemoteDefinitionWithParenthesis');
         $this->setClassPropertyDefinitionWithTypehint();
-        $this->setArrayClassDefinition();
-        $this->setStringMethodDefinition();
+        $this->log->log('setClassPropertyDefinitionWithTypehint');
+        $task = new SetArrayClassDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log->log('setArrayClassDefinition');
+        $task = new SetStringMethodDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log->log('SetStringMethodDefinition');
 
         $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SetClassPropertyDefinitionWithFluentInterface');
 
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('OverwrittenMethods');
         $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('OverwrittenProperties');
         $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('OverwrittenConstants');
 
         $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('SolveTraitMethods');
 
         $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('FollowClosureDefinition');
         
         $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log->log('CreateVirtualProperty');
 
         display('End load final');
         $this->logTime('Final');
@@ -284,73 +316,6 @@ GREMLIN;
         display('   /'.$title);
         $this->logTime('end '.$title);
         $this->log->log($method);
-    }
-
-    private function setStringMethodDefinition() {
-        $this->logTime('setStringMethodDefinition');
-        display('setStringMethodDefinition');
-
-        //$id, $project, $analyzer, $php
-        $query = new Query(0, $this->config->project, 'setStringMethodDefinition', null, $this->datastore);
-        $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
-              ->hasIn('DEFINITION')
-              ->regexIs('noDelimiter', '::')
-              ->initVariable('name', '""')
-              ->raw(<<<GREMLIN
-filter{ 
-    name = it.get().value("noDelimiter").split("::"); 
-    if (name.length > 1) {
-        name = name[1].toLowerCase();
-    } else {
-        name = false;
-    }
-    name != true;
-}
-GREMLIN
-, array(), array())
-              ->inIs('DEFINITION')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
-              ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        display($result->toInt().' setStringMethodDefinition');
-        $this->logTime($result->toInt().' setStringMethodDefinition');
-        $this->log->log(__METHOD__);
-    }
-    
-    private function setArrayClassDefinition() {
-        $this->logTime('setArrayClassDefinition');
-        display('setArrayClassDefinition');
-        
-        //$id, $project, $analyzer, $php
-        $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null, $this->datastore);
-        $query->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
-              ->is('count', 2)
-              ->outWithRank('ARGUMENT', 1)
-              ->atomIs('String', Analyzer::WITH_CONSTANTS)
-              ->has('noDelimiter')
-              ->savePropertyAs('noDelimiter', 'method')
-              ->back('first')
-              ->outWithRank('ARGUMENT', 0)
-              ->atomIs('String', Analyzer::WITH_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->outIs(array('MAGICMETHOD', 'METHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $this->logTime('setArrayClassDefinition end');
-        $this->log->log(__METHOD__);
     }
 
     private function spotFallbackConstants() {
@@ -744,7 +709,6 @@ GREMLIN;
 
         display("Create $count link between Class constant and definition");
         $this->logTime('Class::constant definition');
-        $this->log->log(__METHOD__);
     }
 
     private function makeClassMethodDefinition() {
@@ -833,23 +797,20 @@ GREMLIN
         display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call
-        $__construct = $this->dictCode->translate('__construct');
-        if (!empty($__construct)) {
-            $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-            $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-                  ->outIs('NEW')
-                  ->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
-                  ->has('fullnspath')
-                  ->inIs('DEFINITION')
-                  ->outIs('MAGICMETHOD')
-                  ->codeIs($__construct, Analyzer::NO_TRANSLATE, Analyzer::CASE_INSENSITIVE)
-                  ->addETo('DEFINITION', 'first')
-                  ->returnCount();
-            $query->prepareRawQuery();
-            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
+        $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
+              ->has('fullnspath')
+              ->inIs('DEFINITION')
+              ->outIs('MAGICMETHOD')
+              ->codeIs('__construct', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-            display('Create '.($result->toInt()).' link between new class and definition');
-        }
+        display('Create '.($result->toInt()).' link between new class and definition');
 
         $this->logTime('Class::method() definition');
         $this->log->log(__METHOD__);
