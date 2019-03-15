@@ -148,8 +148,8 @@ class Phpexec {
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             // -d short_open_tag=1
-            $file = escapeshellarg($file);
-            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$file.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.escapeshellarg($tmpFile));
+            $filename = $this->escapeFile($file);
+            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$filename.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.escapeshellarg($tmpFile));
             include $tmpFile;
 
             unlink($tmpFile);
@@ -161,11 +161,15 @@ class Phpexec {
         }
         return $tokens;
     }
+    
+    private function escapeFile($file) {
+        return "'".str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file)."'";
+    }
 
     public function countTokenFromFile($file) {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
-        $filename = str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file);
-        $res = shell_exec($this->phpexec.' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(\''.$filename.'\'))); ?>" 2>&1    ');
+        $filename = $this->escapeFile($file);
+        $res = shell_exec($this->phpexec.' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents('.$filename.'))); ?>" 2>&1    ');
 
         return $res;
     }
