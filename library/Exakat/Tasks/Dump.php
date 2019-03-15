@@ -277,7 +277,7 @@ class Dump extends Tasks {
             $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
         }
 
-        $analyzers = $this->themes->getThemeAnalyzers($theme);
+        $analyzers = $classes;
         
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
@@ -540,7 +540,7 @@ SQL;
 
     private function collectTables($tables) {
         $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
-        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+        $this->sqlite->query("ATTACH $datastorePath AS datastore");
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
@@ -2114,7 +2114,13 @@ SQL;
         $id     = random_int(0, PHP_INT_MAX);
         if (file_exists($this->sqliteFilePrevious)) {
             $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
-            $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+
+            $presence = $sqliteOld->querySingle('SELECT count(*) FROM sqlite_master WHERE type="table" AND name="hash"');
+            if ($presence == 1) {
+                $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+            } else {
+                $serial = 0;
+            }
         } else {
             $serial = 1;
         }
