@@ -59,7 +59,7 @@ Label : PROJECT
             14
             Label : CLASS
               10
-            Label : METHOD
+            Label : CONSTANT
               12
           Label : VALUE
             16

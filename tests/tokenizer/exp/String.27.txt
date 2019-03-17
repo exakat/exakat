@@ -141,3 +141,39 @@ Label : PROJECT
               9
               Label : DEFAULT
                 11
+          Label : PPP
+            $this->a
+            Label : DEFINITION
+              18
+              Label : MEMBER
+                10
+              Label : OBJECT
+                20
+          Label : PPP
+            $x->a
+            Label : DEFINITION
+              18
+              Label : MEMBER
+                10
+              Label : OBJECT
+                21
+            Label : DEFINITION
+              18
+              Label : MEMBER
+                10
+              Label : OBJECT
+                21
+          Label : PPP
+            $_GET->a
+            Label : DEFINITION
+              18
+              Label : MEMBER
+                10
+              Label : OBJECT
+                22
+            Label : DEFINITION
+              18
+              Label : MEMBER
+                10
+              Label : OBJECT
+                22

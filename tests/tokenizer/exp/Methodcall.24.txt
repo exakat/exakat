@@ -59,24 +59,6 @@ Label : PROJECT
                 11
                 Label : RETURN
                   12
-            Label : DEFINITION
-              21
-              Label : METHOD
-                13
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  13
-              Label : OBJECT
-                21
-                Label : METHOD
-                  7
-                  Label : ARGUMENT
-                    8
-                  Label : NAME
-                    7
-                Label : OBJECT
-                  17
             Label : NAME
               13
           Label : METHOD
@@ -89,32 +71,6 @@ Label : PROJECT
                 11
                 Label : RETURN
                   12
-            Label : DEFINITION
-              21
-              Label : METHOD
-                14
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  14
-              Label : OBJECT
-                21
-                Label : METHOD
-                  13
-                  Label : ARGUMENT
-                    8
-                  Label : NAME
-                    13
-                Label : OBJECT
-                  21
-                  Label : METHOD
-                    7
-                    Label : ARGUMENT
-                      8
-                    Label : NAME
-                      7
-                  Label : OBJECT
-                    17
             Label : NAME
               14
           Label : METHOD
@@ -127,40 +83,6 @@ Label : PROJECT
                 11
                 Label : RETURN
                   12
-            Label : DEFINITION
-              21
-              Label : METHOD
-                15
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  15
-              Label : OBJECT
-                21
-                Label : METHOD
-                  14
-                  Label : ARGUMENT
-                    8
-                  Label : NAME
-                    14
-                Label : OBJECT
-                  21
-                  Label : METHOD
-                    13
-                    Label : ARGUMENT
-                      8
-                    Label : NAME
-                      13
-                  Label : OBJECT
-                    21
-                    Label : METHOD
-                      7
-                      Label : ARGUMENT
-                        8
-                      Label : NAME
-                        7
-                    Label : OBJECT
-                      17
             Label : NAME
               15
           Label : METHOD
@@ -173,48 +95,6 @@ Label : PROJECT
                 11
                 Label : RETURN
                   12
-            Label : DEFINITION
-              21
-              Label : METHOD
-                16
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  16
-              Label : OBJECT
-                21
-                Label : METHOD
-                  15
-                  Label : ARGUMENT
-                    8
-                  Label : NAME
-                    15
-                Label : OBJECT
-                  21
-                  Label : METHOD
-                    14
-                    Label : ARGUMENT
-                      8
-                    Label : NAME
-                      14
-                  Label : OBJECT
-                    21
-                    Label : METHOD
-                      13
-                      Label : ARGUMENT
-                        8
-                      Label : NAME
-                        13
-                    Label : OBJECT
-                      21
-                      Label : METHOD
-                        7
-                        Label : ARGUMENT
-                          8
-                        Label : NAME
-                          7
-                      Label : OBJECT
-                        17
             Label : NAME
               16
           Label : NAME

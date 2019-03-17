@@ -8,7 +8,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          19
+          23
         Label : EXPRESSION
           5
           Label : NAME
@@ -18,154 +18,154 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                13
+                14
                 Label : NAME
                   12
               Label : EXPRESSION
-                16
+                20
                 Label : INSTEADOF
-                  17
+                  21
                 Label : NAME
-                  12
+                  19
                   Label : CLASS
-                    12
+                    15
                   Label : METHOD
-                    14
+                    17
             Label : USE
               9
         Label : EXPRESSION
-          19
+          23
         Label : EXPRESSION
           5
           Label : NAME
-            21
+            25
           Label : USE
             8
             Label : BLOCK
               11
               Label : EXPRESSION
-                13
+                14
                 Label : AS
-                  23
+                  27
                 Label : NAME
                   12
             Label : USE
               9
         Label : EXPRESSION
-          25
+          29
           Label : DEFINITION
-            31
+            35
           Label : DEFINITION
-            34
+            38
           Label : DEFINITION
-            26
+            30
           Label : METHOD
-            28
+            32
             Label : ARGUMENT
-              19
+              23
             Label : BLOCK
               11
               Label : EXPRESSION
-                30
-                Label : ARGUMENT
-                  33
-                  Label : CONCAT
-                    31
-                  Label : CONCAT
-                    37
-                    Label : METHOD
-                      35
-                      Label : ARGUMENT
-                        19
-                      Label : NAME
-                        35
-                    Label : OBJECT
-                      34
-            Label : NAME
-              28
-          Label : METHOD
-            35
-            Label : ARGUMENT
-              19
-            Label : BLOCK
-              19
-            Label : DEFINITION
-              37
-              Label : METHOD
-                35
-                Label : ARGUMENT
-                  19
-                Label : NAME
-                  35
-              Label : OBJECT
                 34
+                Label : ARGUMENT
+                  37
+                  Label : CONCAT
+                    35
+                  Label : CONCAT
+                    41
+                    Label : METHOD
+                      39
+                      Label : ARGUMENT
+                        23
+                      Label : NAME
+                        39
+                    Label : OBJECT
+                      38
             Label : NAME
-              35
+              32
+          Label : METHOD
+            39
+            Label : ARGUMENT
+              23
+            Label : BLOCK
+              23
+            Label : DEFINITION
+              41
+              Label : METHOD
+                39
+                Label : ARGUMENT
+                  23
+                Label : NAME
+                  39
+              Label : OBJECT
+                38
+            Label : NAME
+              39
           Label : NAME
-            26
+            30
         Label : EXPRESSION
           5
           Label : DEFINITION
-            34
+            38
           Label : DEFINITION
-            34
+            38
           Label : METHOD
-            35
+            39
             Label : ARGUMENT
-              19
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                43
-                Label : RETURN
-                  37
-                  Label : MEMBER
-                    42
-                  Label : OBJECT
-                    34
-            Label : NAME
-              35
-          Label : METHOD
-            44
-            Label : ARGUMENT
-              46
-              Label : NAME
-                46
-                Label : DEFINITION
-                  46
+              23
             Label : BLOCK
               11
               Label : EXPRESSION
                 47
-                Label : LEFT
-                  37
+                Label : RETURN
+                  41
                   Label : MEMBER
-                    42
+                    46
                   Label : OBJECT
-                    34
-                Label : RIGHT
-                  46
+                    38
             Label : NAME
-              44
+              39
+          Label : METHOD
+            48
+            Label : ARGUMENT
+              50
+              Label : NAME
+                50
+                Label : DEFINITION
+                  50
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                51
+                Label : LEFT
+                  41
+                  Label : MEMBER
+                    46
+                  Label : OBJECT
+                    38
+                Label : RIGHT
+                  50
+            Label : NAME
+              48
           Label : NAME
-            38
+            42
           Label : PPP
-            40
+            44
             Label : PPP
-              41
+              45
               Label : DEFINITION
-                37
+                41
                 Label : MEMBER
-                  42
+                  46
                 Label : OBJECT
-                  34
+                  38
               Label : DEFINITION
-                37
+                41
                 Label : MEMBER
-                  42
+                  46
                 Label : OBJECT
-                  34
+                  38
           Label : USE
             8
             Label : USE
-              26
+              30

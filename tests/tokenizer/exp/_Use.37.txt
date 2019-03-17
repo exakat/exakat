@@ -38,9 +38,9 @@ Label : PROJECT
             Label : BLOCK
               12
               Label : EXPRESSION
-                21
+                20
                 Label : NAME
-                  20
+                  8
             Label : USE
               6
         Label : EXPRESSION
@@ -48,16 +48,16 @@ Label : PROJECT
         Label : EXPRESSION
           16
           Label : NAME
-            22
+            21
           Label : USE
             19
             Label : BLOCK
               12
               Label : EXPRESSION
-                21
+                20
                 Label : AS
-                  24
+                  23
                 Label : NAME
-                  20
+                  8
             Label : USE
               6

@@ -24,19 +24,19 @@ Label : PROJECT
                 Label : INSTEADOF
                   11
                 Label : NAME
-                  16
+                  18
                   Label : CLASS
-                    16
+                    13
                   Label : METHOD
-                    17
+                    16
               Label : EXPRESSION
                 19
                 Label : INSTEADOF
                   13
                 Label : NAME
-                  16
+                  18
                   Label : CLASS
-                    16
+                    11
                   Label : METHOD
                     20
             Label : USE

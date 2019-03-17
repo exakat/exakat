@@ -8,7 +8,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          35
+          36
         Label : EXPRESSION
           5
           Label : NAME
@@ -30,11 +30,11 @@ Label : PROJECT
             Label : BLOCK
               29
               Label : EXPRESSION
-                32
+                33
                 Label : AS
-                  33
+                  34
                 Label : NAME
-                  30
+                  32
                   Label : CLASS
                     30
                   Label : METHOD

@@ -8,7 +8,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          17
+          18
         Label : EXPRESSION
           5
           Label : NAME
@@ -18,13 +18,13 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                14
+                15
+                Label : INSTEADOF
+                  17
                 Label : INSTEADOF
                   16
-                Label : INSTEADOF
-                  15
                 Label : NAME
-                  12
+                  14
                   Label : CLASS
                     12
                   Label : METHOD
