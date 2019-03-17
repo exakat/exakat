@@ -26,7 +26,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
-class SetClassPropertyDefinitionWithFluentInterface extends LoadFinal {
+class SetStringMethodDefinition extends LoadFinal {
     public function run() {
         //$id, $project, $analyzer, $php
         $query = new Query(0, $this->config->project, 'SetClassPropertyDefinitionWithFluentInterface', null, $this->datastore);
