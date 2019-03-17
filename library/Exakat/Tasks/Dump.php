@@ -539,8 +539,8 @@ SQL;
     }
 
     private function collectTables($tables) {
-        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
-        $this->sqlite->query("ATTACH $datastorePath AS datastore");
+        $datastorePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
+        $this->sqlite->query("ATTACH '$datastorePath' AS datastore");
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
