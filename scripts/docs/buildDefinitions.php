@@ -105,6 +105,7 @@ class Docs {
                              'ClassReview',
                              'LintButWontExec',
                              'Top10',
+                             'Suggestions',
 
                              );
 
@@ -503,6 +504,10 @@ SQL
             $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
             $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
 
+            if (!isset($reportIni['examples'])) {
+                print "No examples for $reportFile\n";
+                continue;
+            }
             foreach($reportIni['examples'] as $id => $example) {
                 if (preg_match('/\.png$/', $example)) {
                     $section .= ".. image:: images/$example
