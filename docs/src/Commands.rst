@@ -494,7 +494,7 @@ Options
 Report formats
 ##############
 
-All reports are detailed in the `Reports`_ section.
+All reports are detailed in the Reports_ section.
 
 +-------------+-----------------------------------------------------------------------------+
 | Report      | Description                                                                 |

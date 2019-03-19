@@ -1551,6 +1551,39 @@ $a is never reused again. $b, on the other hand is. Not assigning any value to $
 
     list($b, $a) = array(reset($params->me), key($params->me));
 
+Or Die
+======
+
+.. _tine20-structures-ordie:
+
+Tine20
+^^^^^^
+
+:ref:`or-die`, in scripts/addgrant.php:34. 
+
+Typical error handling, which also displays the MySQL error message, and leaks informations about the system. One may also note that mysql_connect is not supported anymore, and was replaced with mysqli_ and pdo : this may be a backward compatibile file.
+
+.. code-block:: php
+
+    $link = mysql_connect($host, $user, $pass) or die("No connection: " . mysql_error( ))
+
+
+--------
+
+
+.. _openconf-structures-ordie:
+
+OpenConf
+^^^^^^^^
+
+:ref:`or-die`, in openconf/chair/export.inc:143. 
+
+or die() is also applied to many situations, where a blocking situation arise. Here, with the creation of a temporary file.
+
+.. code-block:: php
+
+    $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
+
 Useless Return
 ==============
 
@@ -2990,7 +3023,7 @@ Silently Cast Integer
 
 .. _mediawiki-type-silentlycastinteger:
 
-Mediawiki
+MediaWiki
 ^^^^^^^^^
 
 :ref:`silently-cast-integer`, in includes/debug/logger/monolog/AvroFormatter.php:167. 
@@ -4224,7 +4257,7 @@ No Boolean As Default
 
 .. _openconf-functions-nobooleanasdefault:
 
-Openconf
+OpenConf
 ^^^^^^^^
 
 :ref:`no-boolean-as-default`, in openconf/include.php:1264. 

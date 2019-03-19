@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 19 Mar 2019 10:06:04 +0000
-.. comment: Generation hash : a5de099debce1f91ca4fffb066aa4ce85fe37e7b
+.. comment: Generation date : Tue, 19 Mar 2019 14:52:20 +0000
+.. comment: Generation hash : a8f6a3e8552bd83aa07a86d4a8cfddadcf261893
 
 
 .. _analyze:

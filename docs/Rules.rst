@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 19 Mar 2019 10:06:04 +0000
-.. comment: Generation hash : a5de099debce1f91ca4fffb066aa4ce85fe37e7b
+.. comment: Generation date : Tue, 19 Mar 2019 14:52:20 +0000
+.. comment: Generation hash : a8f6a3e8552bd83aa07a86d4a8cfddadcf261893
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -15279,7 +15279,7 @@ From the manual : ``No warning is generated if the variable does not exist. That
    ?>
 
 
-See also `isset <http://www.php.net/`isset <http://www.php.net/isset>`_>`_ and 
+See also `Isset <http://www.php.net/`isset <http://www.php.net/isset>`_>`_ and 
          `empty <http://www.php.net/empty>`_.
 
 
@@ -15392,7 +15392,7 @@ in-family method.
    ?>
 
 
-See also `static keyword <http://php.net/manual/en/language.oop5.static.php>`_.
+See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 
 
 
@@ -16134,6 +16134,17 @@ Classic old style failed error management.
 
 Interrupting a script will leave the application with a blank page, will make your life miserable for testing. Just don't do that.
 
+See also `pg_last_error <http://php.net/manual/en/function.pg-last-error.php>`_ or 
+         `PDO\:\:exec <http://php.net/manual/en/pdo.exec.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Throw an exception
+* Trigger an error with trigger_error()
+* Use your own error mechanism
+
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/OrDie                                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -16144,6 +16155,8 @@ Interrupting a script will leave the application with a blank page, will make yo
 | Time To Fix | Quick (30 mins)                                                                           |
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`tine20-structures-ordie`, :ref:`openconf-structures-ordie`                          |
 +-------------+-------------------------------------------------------------------------------------------+
 
 

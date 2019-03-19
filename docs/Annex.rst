@@ -319,11 +319,9 @@ A number of applications were scanned in order to find real life examples of pat
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
-* Mediawiki
 * `NextCloud <https://nextcloud.com/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
-* Openconf
 * `Phinx <https://phinx.org/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
@@ -2169,16 +2167,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2231,6 +2229,7 @@ List of external links mentionned in this documentation.
 * `include <http://php.net/manual/en/function.include.php>`_
 * `include_once <http://php.net/manual/en/function.include-once.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
+* `Info Predefined Constants <http://php.net/manual/en/info.constants.php>`_
 * `instanceof <http://php.net/instanceof>`_
 * `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
@@ -2238,8 +2237,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset <http://www.php.net/isset>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2339,6 +2338,7 @@ List of external links mentionned in this documentation.
 * `PEAR <http://pear.php.net/>`_
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
 * `PECL ext/xxtea <https://pecl.php.net/package/xxtea>`_
+* `pg_last_error <http://php.net/manual/en/function.pg-last-error.php>`_
 * `Phalcon <https://phalconphp.com/>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
@@ -2368,7 +2368,6 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
@@ -2376,7 +2375,6 @@ List of external links mentionned in this documentation.
 * `PHPUnit <https://www.phpunit.de/>`_
 * `PMB <https://www.sigb.net/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
-* `Predefined Constants <http://php.net/manual/en/info.constants.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
@@ -2432,7 +2430,6 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
@@ -2489,8 +2486,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
