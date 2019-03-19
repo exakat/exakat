@@ -25,9 +25,9 @@ namespace Exakat\Query\DSL;
 
 class Command {
     static private $id = 0;
-    public $gremlin = '';
-    public $arguments = array();
-    private $sack = null;
+    public  $gremlin   = '';
+    public  $arguments = array();
+    private $sack      = null;
     
     function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
@@ -48,7 +48,7 @@ class Command {
         $this->arguments = $arguments;
     }
     
-    public function setSack($default = 0) {
+    public function setSack($default = null) {
         $this->sack = $default;
     }
 

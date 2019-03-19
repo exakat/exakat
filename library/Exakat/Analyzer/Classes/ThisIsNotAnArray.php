@@ -34,8 +34,24 @@ class ThisIsNotAnArray extends Analyzer {
              ->atomIs(array('Array', 'Arrayappend'))
              // class may be \ArrayAccess
              ->goToClass()
-             ->notImplementing(array('\arrayaccess'))
-             ->notExtending(array('\simplexmlelement', '\arrayobject'))
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->implementing(array('\arrayaccess'))
+                     )
+             )
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->goToAllImplements(self::INCLUDE_SELF)
+                             ->extending(array('\simplexmlelement', 
+                                               '\arrayobject',
+                                              ))
+                     )
+             )
+
              ->back('results');
         $this->prepareQuery();
     }

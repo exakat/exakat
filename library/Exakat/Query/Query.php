@@ -215,22 +215,17 @@ GREMLIN;
     }
     
     private function prepareSack($commands, $toGremlin = self::TO_GREMLIN) {
-        $sack = '';
         foreach($commands as $command) {
             if ($command->getSack() !== null) {
-                if (empty($sack)) {
-                    if ($toGremlin === self::TO_GREMLIN) {
-                        $sack = '.withSack{'.$command->getSack().'}{it.clone()}';
-                    } else {
-                        $sack = $command->getSack();
-                    }
+                if ($toGremlin === self::TO_GREMLIN) {
+                    return '.withSack{'.$command->getSack().'}{it.clone()}';
                 } else {
-                  //  print("There is already one sack used. Review this, please : ".$command->getSack()).PHP_EOL;
+                    return $command->getSack();
                 }
             }
         }
         
-        return $sack;
+        return null;
     }
 }
 ?>
