@@ -1,4 +1,4 @@
-Version 1.7.1 (Bi King Biancheng, coming up)
+Version 1.7.2 (Dong King Taishan, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 1.7.1 (Bi King Biancheng, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.1 (Bi King Biancheng, 2019-03-18)
++ Report
+    + Ambassador : report lines that concentrate lots of issues
++ Analyzer
+    + Extended GoToAllImplements to extended interfaces
+    + Updated analysis : NoScream usage, with authorized functioncall list like fopen
+    + Updated analysis : HiddenUse with support for virtual properties
+    + Checked unit tests : 2867 / 2900 test pass (99% pass)
++ Tokenizer
+    + Added support for 'Virtualproperties'
+    + Harmonized file escaping feature
 
 Version 1.7.0 (Bao King Yama, 2019-03-11)
 + Architecture
