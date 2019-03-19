@@ -172,6 +172,7 @@ class Load extends Tasks {
     private $sequence            = array();
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
+    private $callsDatabase       = null;
     
     private $processing = array();
     
@@ -500,12 +501,12 @@ class Load extends Tasks {
                 ++$this->stats['files'];
                 $r = $this->processFile($file, $path);
                 $nbTokens += $r;
-                if ($this->config->verbose && !$this->config->quiet) {
+                if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($file, $e->getMessage());
-                if ($this->config->verbose && !$this->config->quiet) {
+                if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
             }
@@ -529,11 +530,11 @@ class Load extends Tasks {
                 }
 
                 $r = $this->processFile($file, $path);
-                if ($this->config->verbose && !$this->config->quiet) {
+                if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
             } catch (NoFileToProcess $e) {
-                if ($this->config->verbose && !$this->config->quiet) {
+                if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
             }
@@ -542,7 +543,7 @@ class Load extends Tasks {
         $this->loader = $loader;
         $this->stats = $stats;
 
-        if ($this->config->verbose && !$this->config->quiet) {
+        if (isset($progressBar)) {
             echo $progressBar->advance();
         }
 
@@ -842,6 +843,8 @@ class Load extends Tasks {
                 $closeQuote = substr($openQuote, 3);
             }
             $type = $this->phptokens::T_START_HEREDOC;
+        } else {
+            throw new LoadError(__METHOD__.' : unsupported type of open quote : '.$this->tokens[$current][0]);
         }
         
         // Set default, in case the whole loop is skipped
@@ -853,9 +856,9 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CURLY_OPEN) {
                 $open = $this->id + 1;
                 ++$this->id; // Skip {
-                while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
+                do {
                     $part = $this->processNext();
-                }
+                } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
                 ++$this->id; // Skip }
                 
                 $this->popExpression();
