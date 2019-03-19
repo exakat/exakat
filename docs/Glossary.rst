@@ -323,6 +323,10 @@ Glossary
 
 
 + `D`
+    + `DateTime`
+
+      + :ref:`Timestamp Difference <timestamp-difference>`
+
     + `Die()`
 
       + :ref:`Print And Die <print-and-die>`
@@ -330,6 +334,10 @@ Glossary
     + `date_create()`
 
       + :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
+
+    + `datetime`
+
+      + :ref:`Timestamp Difference <timestamp-difference>`
 
     + `define()`
 
@@ -1359,6 +1367,7 @@ Glossary
 
       + :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`Should Deep Clone <should-deep-clone>`
 
     + `__construct`
 

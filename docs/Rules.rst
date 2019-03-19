@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 05 Mar 2019 15:01:32 +0000
-.. comment: Generation hash : f4a722291d2e71bf5ff77aa5cea61aa19e84dc62
+.. comment: Generation date : Tue, 19 Mar 2019 10:06:04 +0000
+.. comment: Generation hash : a5de099debce1f91ca4fffb066aa4ce85fe37e7b
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -111,15 +111,25 @@ PHP 7.1 is stricter and check for `$this <http://php.net/manual/en/language.oop5
    }
    ?>
 
-+-------------+--------------------------+
-| Short name  | Classes/ThisIsForClasses |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------------------------------+
+| Short name  | Classes/ThisIsForClasses                |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Major                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+| Examples    | :ref:`openemr-classes-thisisforclasses` |
++-------------+-----------------------------------------+
 
 
 
@@ -353,7 +363,14 @@ The only situation where ``@`` is useful is when a native PHP function displays 
 
 This is the case with `fopen() <http://www.php.net/fopen>`_, `stream_socket_server() <http://www.php.net/stream_socket_server>`_, `token_get_all() <http://www.php.net/token_get_all>`_. 
 
-See also `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_.
+See also `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_ and 
+         `Five reasons why the shut-op operator (`@) <http://php.net/manual/en/language.operators.errorcontrol.php>`_ should be avoided <https://derickrethans.nl/five-reasons-why-the-shutop-operator-should-be-avoided.html>`_. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the @ operator by default
 
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/Noscream                                                                   |
@@ -365,6 +382,8 @@ See also `Error Control Operators <http://php.net/manual/en/language.operators.e
 | Time To Fix | Quick (30 mins)                                                                       |
 +-------------+---------------------------------------------------------------------------------------+
 | ClearPHP    | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`phinx-structures-noscream`, :ref:`phpipam-structures-noscream`                  |
 +-------------+---------------------------------------------------------------------------------------+
 
 
@@ -950,15 +969,25 @@ When comparing them to 0, the following expressions are always true and should b
    
    ?>
 
-+-------------+--------------------------+
-| Short name  | Structures/NeverNegative |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Compare count() to non-zero values
+* Use empty()
+
++-------------+-----------------------------------------+
+| Short name  | Structures/NeverNegative                |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Major                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Instant (5 mins)                        |
++-------------+-----------------------------------------+
+| Examples    | :ref:`magento-structures-nevernegative` |
++-------------+-----------------------------------------+
 
 
 
@@ -1327,7 +1356,12 @@ Properties may be assigned default values at declaration time. Such values may b
    ?>
 
 
-Default values will save some instructions in the constructor, and makes the value obvious in the code.
+Default values will save some instructions in the constructor, and makes the value obvious in the code. 
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a default value whenever possible. This is easy for scalars, and array()
 
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/MakeDefault                                                                                                       |
@@ -1339,6 +1373,8 @@ Default values will save some instructions in the constructor, and makes the val
 | Time To Fix | Instant (5 mins)                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`livezilla-classes-makedefault`, :ref:`phpmyadmin-classes-makedefault`                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -2873,15 +2909,17 @@ See also `In a PHP5 class, when does a private constructor get called? <https://
          `Named Constructors in PHP <http://verraes.net/2014/06/named-constructors-in-php/>`_ and 
          `PHP Constructor Best Practices And The Prototype Pattern <http://ralphschindler.com/2012/03/09/php-constructor-best-practices-and-the-prototype-pattern>`_.
 
-+-------------+------------------------------+
-| Short name  | Classes/CantInstantiateClass |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Critical                     |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
++-------------+-----------------------------------------------+
+| Short name  | Classes/CantInstantiateClass                  |
++-------------+-----------------------------------------------+
+| Themes      | :ref:`Analyze`                                |
++-------------+-----------------------------------------------+
+| Severity    | Critical                                      |
++-------------+-----------------------------------------------+
+| Time To Fix | Quick (30 mins)                               |
++-------------+-----------------------------------------------+
+| Examples    | :ref:`wordpress-classes-cantinstantiateclass` |
++-------------+-----------------------------------------------+
 
 
 
@@ -3476,6 +3514,56 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 
 
 
+.. _clone-with-non-object:
+
+Clone With Non-Object
+#####################
+
+
+The ``clone`` keyword must be used on variables, properties or results from a function or method call. 
+
+``clone`` cannot be used with constants or literals.
+
+.. code-block:: php
+
+   <?php
+   
+   class x { }
+   $x = new x();
+   
+   // Valid clone
+   $y = clone $x;
+   
+   // Invalid clone
+   $y = clone x;
+   
+   ?>
+
+
+Cloning a non-object lint but won't execute.
+
+See also `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* 
+* Only clone containers (like variables, properties...)
+
++-------------+----------------------------------------+
+| Short name  | Classes/CloneWithNonObject             |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+
+
+
 .. _close-tags:
 
 Close Tags
@@ -3995,7 +4083,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Make the class an interface
-* Make the class an abstract class, to avoid its instanciation
+* Make the class an abstract class, to avoid its instantiation
 
 +-------------+-----------------------+
 | Short name  | Classes/ConstantClass |
@@ -4617,8 +4705,6 @@ Could Be Static Closure
 
 `Closure <http://php.net/manual/en/class.closure.php>`_ may be static, and prevent the import of ``$this``. 
 
-
-
 .. code-block:: php
 
    <?php
@@ -4648,15 +4734,23 @@ Could Be Static Closure
 See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_ and 
          `Static anonymous functions <http://php.net/manual/en/functions.anonymous.php#functions.anonymous-functions.static>`_.
 
-+-------------+--------------------------------+
-| Short name  | Functions/CouldBeStaticClosure |
-+-------------+--------------------------------+
-| Themes      | :ref:`Suggestions`             |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the static keyword to the closure.
+
++-------------+----------------------------------------------+
+| Short name  | Functions/CouldBeStaticClosure               |
++-------------+----------------------------------------------+
+| Themes      | :ref:`Suggestions`                           |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
+| Examples    | :ref:`piwigo-functions-couldbestaticclosure` |
++-------------+----------------------------------------------+
 
 
 
@@ -4807,15 +4901,24 @@ The following functions may bear the void return typehint.
 See also `Returning values <http://php.net/manual/en/functions.returning-values.php>`_ and 
          `Void Return Type <https://wiki.php.net/rfc/void_return_type>`_.
 
-+-------------+---------------------------+
-| Short name  | Functions/CouldReturnVoid |
-+-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the return type void to the method or function
+
++-------------+--------------------------------------------+
+| Short name  | Functions/CouldReturnVoid                  |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Suggestions`                         |
++-------------+--------------------------------------------+
+| Severity    | Minor                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
+| Examples    | :ref:`wordpress-functions-couldreturnvoid` |
++-------------+--------------------------------------------+
 
 
 
@@ -4888,7 +4991,7 @@ This long name may be reduced by using an available alias.
 +-------------+--------------------------+
 | Short name  | Namespaces/CouldUseAlias |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Themes      | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -4927,15 +5030,24 @@ Note that compact accepts any string, and any undefined variable is not set, wit
 
 See also `compact <http://www.php.net/compact>`_.
 
-+-------------+----------------------------+
-| Short name  | Structures/CouldUseCompact |
-+-------------+----------------------------+
-| Themes      | :ref:`Suggestions`         |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the array() call with a compact() call.
+
++-------------+---------------------------------------------+
+| Short name  | Structures/CouldUseCompact                  |
++-------------+---------------------------------------------+
+| Themes      | :ref:`Suggestions`                          |
++-------------+---------------------------------------------+
+| Severity    | Minor                                       |
++-------------+---------------------------------------------+
+| Time To Fix | Quick (30 mins)                             |
++-------------+---------------------------------------------+
+| Examples    | :ref:`wordpress-structures-couldusecompact` |
++-------------+---------------------------------------------+
 
 
 
@@ -5280,7 +5392,7 @@ Making a loop to repeat the same concatenation is actually much longer than usin
 +-------------+------------------------------+
 | Short name  | Structures/CouldUseStrrepeat |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Themes      | :ref:`Analyze`, :ref:`Top10` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -5424,7 +5536,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/DanglingArrayReferences                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                            |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
@@ -5894,15 +6006,15 @@ Suggestions
 
 * Use precise name with your variables
 
-+-------------+------------------------------------------------+
-| Short name  | Structures/DontBeTooManual                     |
-+-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
-+-------------+------------------------------------------------+
++-------------+--------------------------------------------------------------+
+| Short name  | Structures/DontBeTooManual                                   |
++-------------+--------------------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
++-------------+--------------------------------------------------------------+
+| Severity    | Minor                                                        |
++-------------+--------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                              |
++-------------+--------------------------------------------------------------+
 
 
 
@@ -6229,7 +6341,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Classes/DontUnsetProperties                                                          |
 +-------------+--------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                       |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                         |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                |
 +-------------+--------------------------------------------------------------------------------------+
@@ -7521,7 +7633,7 @@ This is also true for negative lengths.
 +-------------+------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/FailingSubstrComparison                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                       |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                |
 +-------------+------------------------------------------------------------------------------------------------------+
@@ -8332,7 +8444,7 @@ Suggestions
 +-------------+----------------------------------------------------+
 | Short name  | Structures/FunctionPreSubscripting                 |
 +-------------+----------------------------------------------------+
-| Themes      | :ref:`Analyze`                                     |
+| Themes      | :ref:`Suggestions`                                 |
 +-------------+----------------------------------------------------+
 | Php Version | With PHP 5.4 and more recent                       |
 +-------------+----------------------------------------------------+
@@ -9058,15 +9170,25 @@ It is where everyone expect them, and it is less confusing than having them at v
    
    ?>
 
-+-------------+----------------------+
-| Short name  | Namespaces/HiddenUse |
-+-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Group all uses together, at the beginning of the namespace or class
+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Namespaces/HiddenUse                                                      |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                            |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Minor                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                          |
++-------------+---------------------------------------------------------------------------+
+| Examples    | :ref:`tikiwiki-namespaces-hiddenuse`, :ref:`openemr-namespaces-hiddenuse` |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -9783,6 +9905,50 @@ This analysis reports chains of elseif that don't share a common variable (or ar
 +-------------+-------------------------------+
 | Time To Fix | Slow (1 hour)                 |
 +-------------+-------------------------------+
+
+
+
+.. _inconsistent-usage:
+
+Inconsistent Usage
+##################
+
+
+Those variables are used in various and inconsistent ways. It is difficult to understand if they are an array, an object or a scalar variable.
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is an array, then $b is a string.
+   $a = ['a', 'b', 'c'];
+   $b = implode('-', $a);
+   
+   // $a is an array, then it is a string.
+   $a = ['a', 'b', 'c'];
+   $a = implode('-', $a);
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep one type for each variable. This keeps the code readable. 
+* Give different names to variables with different types.
+
++-------------+----------------------------------------------+
+| Short name  | Variables/InconsistentUsage                  |
++-------------+----------------------------------------------+
+| Themes      | :ref:`Suggestions`                           |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Slow (1 hour)                                |
++-------------+----------------------------------------------+
+| Examples    | :ref:`wordpress-variables-inconsistentusage` |
++-------------+----------------------------------------------+
 
 
 
@@ -10839,7 +11005,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Php/LogicalInLetters                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                                |
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -11783,17 +11949,27 @@ When comparing two different `switch() <http://php.net/manual/en/control-structu
    ?>
 
 
-In the example, one may argue that the 'c' case is actually handled by the 'default' case. Otherwise, business logic may request that omission.
+In the example, one may argue that the 'c' case is actually handled by the 'default' case. Otherwise, business logic may request that omission. 
 
-+-------------+-------------------------+
-| Short name  | Structures/MissingCases |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the missing cases
+* Add comments to mention that missing cases are processed in the default case
+
++-------------+-----------------------------------------+
+| Short name  | Structures/MissingCases                 |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Slow (1 hour)                           |
++-------------+-----------------------------------------+
+| Examples    | :ref:`tikiwiki-structures-missingcases` |
++-------------+-----------------------------------------+
 
 
 
@@ -12670,7 +12846,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Remove any multiple traits from use expressions
-* Review the class tree, and remove any trait mentionned multiple times
+* Review the class tree, and remove any trait mentioned multiple times
 
 +-------------+---------------------------------------+
 | Short name  | Traits/MultipleUsage                  |
@@ -13468,7 +13644,7 @@ See also `It is the 31st again <https://twitter.com/rasmus/status/92543173412819
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/NextMonthTrap                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                    |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -13513,7 +13689,7 @@ Class constants and constants improve readability when calling the methods or co
 
 
 See also `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_ and 
-         `Clean code: The curse of a boolean parameter <https://medium.com/@amlcurran/clean-code-the-curse-of-a-boolean-parameter-c237a830b7a3>`.
+         `Clean code: The curse of a boolean parameter <https://medium.com/@amlcurran/clean-code-the-curse-of-a-boolean-parameter-c237a830b7a3>`_.
 
 
 Suggestions
@@ -13575,7 +13751,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------+
 | Short name  | Structures/NoChoice                                                      |
 +-------------+--------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                           |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                             |
 +-------------+--------------------------------------------------------------------------+
 | Severity    | Major                                                                    |
 +-------------+--------------------------------------------------------------------------+
@@ -13592,7 +13768,7 @@ No Class As Typehint
 ####################
 
 
-Avoid using classes as typehint : always use interfaces. This way, different classes, or versions of classes may be passed as argument. 
+Avoid using classes as typehint : always use interfaces. This way, different classes, or versions of classes may be passed as argument. The typehint is not linked to an implementation, but to signatures.
 
 .. code-block:: php
 
@@ -13622,15 +13798,23 @@ Avoid using classes as typehint : always use interfaces. This way, different cla
 
 See also `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_.
 
-+-------------+-----------------------------+
-| Short name  | Functions/NoClassAsTypehint |
-+-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Major                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create an interface with the important methods, and use that interface
+
++-------------+-------------------------------------------------------------------------------------------+
+| Short name  | Functions/NoClassAsTypehint                                                               |
++-------------+-------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                            |
++-------------+-------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                     |
++-------------+-------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                           |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`vanilla-functions-noclassastypehint`, :ref:`phpmyadmin-functions-noclassastypehint` |
++-------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -13658,15 +13842,25 @@ Avoid defining structures in Global namespace. Always prefer using a namespace. 
    
    ?>
 
-+-------------+---------------------+
-| Short name  | Php/NoClassInGlobal |
-+-------------+---------------------+
-| Themes      | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Slow (1 hour)       |
-+-------------+---------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a specific namespace for your classes
+
++-------------+------------------------------------+
+| Short name  | Php/NoClassInGlobal                |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`                     |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | :ref:`dolphin-php-noclassinglobal` |
++-------------+------------------------------------+
 
 
 
@@ -14469,7 +14663,7 @@ See also `Floating point numbers <http://php.net/manual/en/language.types.float.
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Type/NoRealComparison                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                      |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -14935,15 +15129,15 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
 
 Beware that `substr() <http://www.php.net/substr>`_ and ``$v[$pos]`` are similar, while `mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
 
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Structures/NoSubstrOne                                                             |
-+-------------+------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions` |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                   |
-+-------------+------------------------------------------------------------------------------------+
++-------------+--------------------------------------------------------------------------------------------------+
+| Short name  | Structures/NoSubstrOne                                                                           |
++-------------+--------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
++-------------+--------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                            |
++-------------+--------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                 |
++-------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -14995,10 +15189,17 @@ To handle arrays that may be quite big, it is recommended to avoid using `array_
 
 Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `file_put_contents() <http://www.php.net/file_put_contents>`_ are affected and reported the same way.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Store all intermediate arrays in a temporary variable, and use array_merge once, with ellipsis or call_user_func_array().
+
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/ArrayMergeInLoops                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`                                                                         |
+| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Top10`                                                           |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -15344,6 +15545,12 @@ Thanks to ``Benoit Viguier`` for the `original idea <https://twitter.com/b_vigui
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not use ``int`` as a class name, an interface name or a trait name.
+
 +-------------+-------------------+
 | Short name  | Php/NotScalarType |
 +-------------+-------------------+
@@ -15497,7 +15704,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ObjectReferences                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                  |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -15561,7 +15768,7 @@ See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.d
 Suggestions
 ^^^^^^^^^^^
 
-* Remove old style constructor and make it __construct
+* Remove old style constructor and make it ``__construct()``
 * Remove old libraries and use a modern component
 
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -16315,7 +16522,7 @@ In previous PHP versions, those dates only used seconds, leading to lazy compari
 
 This code displays true in PHP 7.0 and older, (unless the code was run too close from the next second). In PHP 7.1, this is always false.
 
-This is also true with Datetime : 
+This is also true with ``DateTime`` : 
 
 .. code-block:: php
 
@@ -16634,6 +16841,35 @@ The following PHP native functions were removed in PHP 7.3.
 
 
 
+.. _php-8.0-removed-constants:
+
+PHP 8.0 Removed Constants
+#########################
+
+
+The following PHP native constants were removed in PHP 8.0.
+
+* INTL_IDNA_VARIANT_2003 (See `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_)
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove usage of INTL_IDNA_VARIANT_2003 and use
+
++-------------+---------------------------+
+| Short name  | Php/Php80RemovedConstant  |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Severity    | Critical                  |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _php-8.0-removed-functions:
 
 PHP 8.0 Removed Functions
@@ -16657,35 +16893,6 @@ The following PHP native functions were removed in PHP 8.0.
 | Severity    | Major                     |
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
-+-------------+---------------------------+
-
-
-
-.. _php-80-removed-constants:
-
-PHP 80 Removed Constants
-########################
-
-
-The following PHP native constants were removed in PHP 8.0.
-
-* INTL_IDNA_VARIANT_2003 (See `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_)
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Remove usage of INTL_IDNA_VARIANT_2003 and use
-
-+-------------+---------------------------+
-| Short name  | Php/Php80RemovedConstant  |
-+-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP80` |
-+-------------+---------------------------+
-| Severity    | Critical                  |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
 
 
@@ -16840,6 +17047,12 @@ With PHP 7, `dirname() <http://www.php.net/dirname>`_ has a second argument that
 
 
 See also `dirname <http://php.net/dirname>`_.
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use dirname()'s second argument
 
 +-------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/PHP7Dirname                                                                                                         |
@@ -17178,29 +17391,6 @@ The new class is : HashContext.
 
 
 
-.. _php/typedpropertyusage:
-
-Php/TypedPropertyUsage
-######################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/TypedPropertyUsage                                                                                                                                                                                                 |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                                                                                  |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _php7-relaxed-keyword:
 
 Php7 Relaxed Keyword
@@ -17424,15 +17614,15 @@ Suggestions
 
 * Add an always capturing subpatterns after the last ?, and it will always be fine
 
-+-------------+-----------------------+
-| Short name  | Php/MissingSubpattern |
-+-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
-+-------------+-----------------------+
++-------------+------------------------------+
+| Short name  | Php/MissingSubpattern        |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -17972,15 +18162,15 @@ It is recommended to reduce the number of queries by making one query, and dispa
 
 This optimisation is not always possible : for example, some SQL queries may not be prepared, like ``DROP TABLE`` or ``DESC``. ``UPDATE`` commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
 
-+-------------+--------------------------+
-| Short name  | Structures/QueriesInLoop |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
++-------------+------------------------------+
+| Short name  | Structures/QueriesInLoop     |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
 
 
 
@@ -18535,7 +18725,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/RepeatedPrint                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                                |
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -19064,7 +19254,7 @@ Self Using Trait
 ################
 
 
-Trait uses itsel : this is uncessary. Traits may use themselves, or be used by other traits, that are using the initial trait itself. 
+Trait uses itself : this is unnecessary. Traits may use themselves, or be used by other traits, that are using the initial trait itself. 
 
 PHP handles the situation quietly, by ignoring all extra use of the same trait, keeping only one valid version.
 
@@ -19427,6 +19617,74 @@ See also `Exception\:\:`__construct <http://php.net/manual/en/language.oop5.deco
 +-------------+---------------------------------+
 | Time To Fix | Instant (5 mins)                |
 +-------------+---------------------------------+
+
+
+
+.. _should-deep-clone:
+
+Should Deep Clone
+#################
+
+
+By default, PHP makes a shallow clone. It only clone the scalars, and keep the reference to any object already referenced. This means that the cloned object and its original share any object they hold as property.
+
+This is where the magic method `__clone() <http://php.net/manual/en/language.oop5.magic.php>`_ comes into play. It is called, when defined, at clone time, so that the cloned object may clone all the needed sub-objects.
+
+It is recommended to use the `__clone() <http://php.net/manual/en/language.oop5.magic.php>`_ method whenever the objects hold objects. 
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       public $b = null;
+       
+       function __construct() {
+           $this->b =  new Stdclass();
+           $this->b->c = 1;
+       }
+   }
+   
+   class ab extends a {
+       function __clone() {
+           $this->b = clone $this->b;
+       }
+   }
+   
+   // class A is shallow clone, so $a->b is not cloned
+   $a = new a();
+   $b = clone $a;
+   $a->b->c = 3;
+   echo $b->b->c;
+   // displays 3
+   
+   // class Ab is deep clone, so $a->b is cloned
+   $a = new ab();
+   $b = clone $a;
+   $a->b->c = 3;
+   echo $b->b->c;
+   // displays 1
+   
+   ?>
+
+
+See also `PHP Clone and Shallow vs Deep Copying <http://jacob-walker.com/blog/php-clone-and-shallow-vs-deep-copying.html>`_ and 
+         `Cloning objects <http://php.net/manual/en/language.oop5.cloning.php>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-------------------------+
+| Short name  | Classes/ShouldDeepClone |
++-------------+-------------------------+
+| Themes      | :ref:`Suggestions`      |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
 
 
 
@@ -20340,7 +20598,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Functions/ShouldYieldWithKey |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Themes      | :ref:`Analyze`, :ref:`Top10` |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -20389,15 +20647,24 @@ This applies to binary (``0b10101``...), octal (``0123123``...) and hexadecimal 
 
 See also `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_.
 
-+-------------+--------------------------+
-| Short name  | Type/SilentlyCastInteger |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make sure hexadecimal numbers have the right number of digits : generally, it is 15, but it may depends on your PHP version.
+
++-------------+-------------------------------------------+
+| Short name  | Type/SilentlyCastInteger                  |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`                            |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`mediawiki-type-silentlycastinteger` |
++-------------+-------------------------------------------+
 
 
 
@@ -21028,15 +21295,15 @@ Suggestions
 
 * Always initialize arrays with an empty array(), not a string.
 
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Short name  | Arrays/StringInitialization                                                                                |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
-+-------------+------------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Arrays/StringInitialization |
++-------------+-----------------------------+
+| Themes      | :ref:`CompatibilityPHP71`   |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -21215,7 +21482,7 @@ See also `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/StrposCompare                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                      |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -22297,6 +22564,49 @@ See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.ne
 
 
 
+.. _typed-property-usage:
+
+Typed Property Usage
+####################
+
+
+Traditionnally, PHP properties aren't typed. Since PHP 7.4, it is possible to type properties, just like arguments.
+
+.. code-block:: php
+
+   <?php
+   
+   class User {
+       public int $id;
+       public string $name;
+    
+       public function __construct(int $id, string $name) {
+           $this->id = $id;
+           $this->name = $name;
+       }
+   }
+   ?>
+
+
+See also `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/TypedPropertyUsage                                                                                                                                                                                                 |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _typehint-must-be-returned:
 
 Typehint Must Be Returned
@@ -23283,56 +23593,15 @@ Properties that are not initialized in the constructor, nor at definition.
 With the above class, when m() is accessed right after instantiation, there will be a missing property. 
 Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
 
-+-------------+------------------------------------+
-| Short name  | Classes/UnitializedProperties      |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-
-
-
-.. _unknown-directive-name:
-
-Unknown Directive Name
-######################
-
-
-Unknown directives names used in the code. 
-
-The following list has directive mentionned in the code, that are not known from PHP or any extension. If this is due to a mistake, the directive must be fixed to be actually useful.
-
-.. code-block:: php
-
-   <?php
-   
-   // non-existing directive
-   $reporting_error = ini_get('reporting_error');
-   $error_reporting = ini_get('error_reproting'); // Note the inversion
-   if (ini_set('dump_globals')) {
-       // doSomething()
-   }
-   
-   // Correct directives
-   $error_reporting = ini_get('reporting_error');
-   if (ini_set('xdebug.dump_globals')) {
-       // doSomething()
-   }
-   
-   ?>
-
-+-------------+-------------------+
-| Short name  | Php/DirectiveName |
-+-------------+-------------------+
-| Themes      | :ref:`Analyze`    |
-+-------------+-------------------+
-| Severity    | Minor             |
-+-------------+-------------------+
-| Time To Fix | Quick (30 mins)   |
-+-------------+-------------------+
++-------------+--------------------------------------------------+
+| Short name  | Classes/UnitializedProperties                    |
++-------------+--------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10` |
++-------------+--------------------------------------------------+
+| Severity    | Major                                            |
++-------------+--------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                  |
++-------------+--------------------------------------------------+
 
 
 
@@ -23719,7 +23988,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnresolvedInstanceof                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
+| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Top10`                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -24987,7 +25256,7 @@ See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http
 +-------------+------------------------------------------------+
 | Short name  | Structures/UseListWithForeach                  |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Suggestions`                             |
+| Themes      | :ref:`Suggestions`, :ref:`Top10`               |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -25497,15 +25766,15 @@ This way, constant will be defined at compile time, and not at execution time.
      echo b;
    ?>
 
-+-------------+----------------------------------------------------------------+
-| Short name  | Constants/ConstRecommended                                     |
-+-------------+----------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
-+-------------+----------------------------------------------------------------+
-| Severity    | Minor                                                          |
-+-------------+----------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                  |
-+-------------+----------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------+
+| Short name  | Constants/ConstRecommended                                                   |
++-------------+------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
++-------------+------------------------------------------------------------------------------+
+| Severity    | Minor                                                                        |
++-------------+------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                |
++-------------+------------------------------------------------------------------------------+
 
 
 
@@ -25544,6 +25813,12 @@ is_countable() accepts arrays and object whose class implements \countable.
 
 
 See also `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use is_countable()
 
 +-------------+------------------------------+
 | Short name  | Php/CouldUseIsCountable      |
@@ -25906,7 +26181,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Variables/VariableUsedOnce                                                            |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                        |
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                          |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -26019,9 +26294,9 @@ Useless Alias
 
 It is not possible to declare an alias of a method with the same name. 
 
-PHP reports that `Trait method f has not been applied, because there are collisions with other trait methods on x`, which is a way to say that the alias will be in conflict with the method name. 
+PHP reports that ``Trait method f has not been applied, because there are collisions with other trait methods on x``, which is a way to say that the alias will be in conflict with the method name. 
 
-When the method is the only one bearing a name, and being imported, there is no need to alias it. When the method is imported in several traits, the keyword `insteadof` is available to solve the conflict.
+When the method is the only one bearing a name, and being imported, there is no need to alias it. When the method is imported in several traits, the keyword ``insteadof`` is available to solve the conflict.
 
 .. code-block:: php
 
@@ -26515,6 +26790,12 @@ Sometimes, the parenthesis provide the same execution order than the default ord
 
 
 See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove useless parenthesis, unless they are important for readability.
 
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessParenthesis                                                                 |
@@ -28273,7 +28554,6 @@ To speed up this process, it is recommended to dump the csv to memory first, the
 
 The speed improvement is significant on small rows, while it may be less significant on larger rows : with more data in the rows, the file buffer may fill up more efficiently. On small rows, the speed gain is up to 7 times. 
 
-See also ` `
 
 
 Suggestions
@@ -28380,15 +28660,24 @@ include_once() and require_once() functions should be avoided for performances r
 
 Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same file without errors.
 
-+-------------+----------------------+
-| Short name  | Structures/OnceUsage |
-+-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using include_once() whenever possible 
+* Use autoload() to load classes, and avoid loading them with include
+
++-------------+-------------------------------------------------------------------------+
+| Short name  | Structures/OnceUsage                                                    |
++-------------+-------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                          |
++-------------+-------------------------------------------------------------------------+
+| Severity    | Minor                                                                   |
++-------------+-------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                         |
++-------------+-------------------------------------------------------------------------+
+| Examples    | :ref:`xoops-structures-onceusage`, :ref:`tikiwiki-structures-onceusage` |
++-------------+-------------------------------------------------------------------------+
 
 
 
@@ -28915,6 +29204,13 @@ var_dump()... Usage
 
 They may be tolerated during development time, but must be removed so as not to have any chance to be run in production.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove usage of var_dump(), print_r(), var_export() without 2nd argument, and other debug functions.
+* Push all logging to an external file, instead of the browser.
+
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/VardumpUsage                                                                   |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -28925,6 +29221,8 @@ They may be tolerated during development time, but must be removed so as not to 
 | Time To Fix | Instant (5 mins)                                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`tine20-structures-vardumpusage`, :ref:`piwigo-structures-vardumpusage`              |
 +-------------+-------------------------------------------------------------------------------------------+
 
 
