@@ -160,6 +160,12 @@ class Docs {
                  'ParseError'                   => 'http://php.net/manual/en/class.parseerror.php',
                  'DivisionByZeroError'          => 'http://php.net/manual/fr/class.divisionbyzeroerror.php',
                  'NULL'                         => 'http://php.net/manual/en/language.types.null.php',
+                 'Datetime'                     => 'http://php.net/manual/en/class.datetime.php',
+                 'DatetimeImmutable'            => 'http://php.net/manual/en/class.datetimeimmutable.php',
+                 'DatetimeInterface'            => 'http://php.net/manual/en/class.datetimeinterface.php',
+                 'Datetimezone'                 => 'http://php.net/manual/en/class.datetimezone.php',
+                 'Datetimeinterval'             => 'http://php.net/manual/en/class.dateinterval.php',
+                 'Dateperiod'                   => 'http://php.net/manual/en/class.dateperiod.php',
                  
                  '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',
