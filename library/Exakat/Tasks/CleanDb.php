@@ -50,6 +50,9 @@ class CleanDb extends Tasks {
         } elseif ($this->config->start === true) {
             display('Start gremlin server');
             $this->gremlin->start();
+        } elseif ($this->config->restart === true) {
+            display('Restart gremlin server');
+            $this->gremlin->clean();
         } else {
             display('Restart gremlin server');
             $this->gremlin->clean();
