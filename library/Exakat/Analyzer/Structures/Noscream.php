@@ -36,7 +36,7 @@ class Noscream extends Analyzer {
                       'Array',
                       'Arrayappend',
                       'Arrayliteral',
-                      'Assignation',
+                      //'Assignation',  Not possible
                       'Bitshift',
                       'Boolean',
                       'Break',
@@ -65,7 +65,7 @@ class Noscream extends Analyzer {
                       'Integer',
                       'Isset',
                       'List',
-                      'Logical',
+                      //'Logical', Not possible
                       'Magicconstant',
                       'Member',
                       'Methodcall',
