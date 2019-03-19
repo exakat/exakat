@@ -26,7 +26,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
-class setClassRemoteDefinitionWithTypehint extends LoadFinal {
+class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
     public function run() {
         $query = $this->newQuery('setClassRemoteDefinitionWithTypehint methods');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
