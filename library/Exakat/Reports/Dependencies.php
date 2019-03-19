@@ -288,7 +288,7 @@ DOT
     .PHP_EOL
     .implode(PHP_EOL, $linksDot).PHP_EOL.'}'.PHP_EOL;
 
-        file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+        file_put_contents("$folder/$name.".self::FILE_EXTENSION, $dot);
     }
 }
 

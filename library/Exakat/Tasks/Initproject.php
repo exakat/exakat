@@ -39,11 +39,11 @@ class Initproject extends Tasks {
     public function run() {
         $project = new Project($this->config->project);
 
-        if ($project === 'default') {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
         
-        if ($project === 'test') {
+        if ($this->config->project === 'test') {
             throw new InvalidProjectName('Can\t use test as project name.');
         }
 

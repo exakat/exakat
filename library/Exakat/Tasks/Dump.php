@@ -39,8 +39,9 @@ class Dump extends Tasks {
 
     private $sqlite            = null;
 
-    private $sqliteFile        = null;
-    private $sqliteFileFinal   = null;
+    private $sqliteFile         = null;
+    private $sqliteFileFinal    = null;
+    private $sqliteFilePrevious = null;
     
     private $files = array();
     

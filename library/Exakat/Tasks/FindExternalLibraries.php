@@ -28,6 +28,7 @@ use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoSuchProject;
 
 class FindExternalLibraries extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -225,8 +226,8 @@ class FindExternalLibraries extends Tasks {
                 }
 
                 $lclass = strtolower($class);
+                $returnPath = '';
                 if (isset($this->classic[$lclass])) {
-                    $returnPath = '';
                     if ($this->classic[$lclass] === static::WHOLE_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                     } elseif ($this->classic[$lclass] === static::PARENT_DIR) {
