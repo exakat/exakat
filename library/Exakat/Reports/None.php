@@ -22,11 +22,9 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-
 class None extends Reports {
-    public function generate($folder, $name = '') {
-        // this report doesn't produce anything.
+    public function generate($folder, $name) {
+        display("Generating the empty format. ");
     }
 }
 
