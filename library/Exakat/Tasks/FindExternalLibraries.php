@@ -64,7 +64,7 @@ class FindExternalLibraries extends Tasks {
                              'pclzip'           => self::FILE_ONLY,
                              'gacl'             => self::WHOLE_DIR,
                              'propel'           => self::PARENT_DIR,
-                             'gettext_reader'   => self::WHOLE_DIR,
+                             'gettext_reader'   => self::FILE_ONLY,
                              'phpexcel'         => self::WHOLE_DIR,
                              'phpmailer'        => self::WHOLE_DIR,
                              'qrcode'           => self::FILE_ONLY,
@@ -94,7 +94,7 @@ class FindExternalLibraries extends Tasks {
                                   'symfony\bundle\frameworkbundle\test\webtestcase'     => self::WHOLE_DIR, // Symfony
                                   'symfony\bundle\frameworkbundle\test\kerneltestcase'  => self::WHOLE_DIR, // Symfony
                                   'typo3\testingframework\core\unit\unittestcase'       => self::WHOLE_DIR, // typo3
-                                  // behat, peridot, kahlan, phpt?
+                                  // behat, peridot, kahlan, phpt? avalon
                                    );
 
     public function run() {
@@ -120,7 +120,10 @@ class FindExternalLibraries extends Tasks {
         }
 
         display('Processing files');
-        $files = $this->datastore->getCol('files', 'file');
+        $dir = $this->config->project;
+        $path = "{$this->config->projects_root}/projects/$dir/code";
+        Files::findFiles($path, $files, $ignoredFiles, $this->config);
+
         if (empty($files)) {
             display('No files to process. Aborting');
             return;
