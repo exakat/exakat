@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
+use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Phar;
@@ -38,7 +38,6 @@ class Config {
     public  $ext                   = null;
 
     private $projectConfig         = null;
-    private $codacyConfig          = null;
     private $commandLineConfig     = null;
     private $defaultConfig         = null;
     private $exakatConfig          = null;
@@ -137,22 +136,12 @@ class Config {
             $this->dotExakatConfig->loadConfig(null);
         }
         
-        if ($this->commandLineConfig->get('command') === 'codacy') {
-            $this->codacyConfig = new CodacyConfig($this->projects_root);
-            if ($file = $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'))) {
-                $this->configFiles[] = $file;
-            }
-        } else {
-            $this->codacyConfig    = new EmptyConfig();
-        }
-
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->defaultConfig->toArray(), 
                                      $this->exakatConfig->toArray(), 
                                      $this->envConfig->toArray(),
                                      $this->projectConfig->toArray(), 
                                      $this->dotExakatConfig->toArray(), 
-                                     $this->codacyConfig->toArray(), 
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;
