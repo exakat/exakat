@@ -91,8 +91,9 @@ class LoadFinal {
         $this->log->log('setClassAliasDefinition');
         $this->makeClassConstantDefinition();
         $this->log->log('makeClassConstantDefinition');
-        $this->makeClassMethodDefinition();
-        $this->log->log('makeClassMethodDefinition');
+        $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log->log('MakeClassMethodDefinition');
         
         $this->setConstantDefinition();
         $this->log->log('setConstantDefinition');
@@ -709,111 +710,6 @@ GREMLIN;
 
         display("Create $count link between Class constant and definition");
         $this->logTime('Class::constant definition');
-    }
-
-    private function makeClassMethodDefinition() {
-        // Warning : no support for overwritten methods : ALL methods are linked
-
-        // Create link between static Class method and its definition
-        // This works outside a class too, for static.
-        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('METHOD')
-              ->savePropertyAs('lccode', 'name')
-              ->inIs('METHOD')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('fullnspath', 'classe')
-              ->inIs('DEFINITION')
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->is('static', true)
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count1 = $result->toInt();
-
-        // Create link between Class method and definition
-        // This works only for $this
-        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('OBJECT')
-              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('OBJECT')
-              ->outIs('METHOD')
-              ->savePropertyAs('lccode', 'name')
-              ->back('first')
-              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->raw(<<<GREMLIN
-where(
-    __.sideEffect{aliases = [:]; insteadofs = [:]; }
-      .out("USE").out("BLOCK").out("EXPRESSION")
-      .sideEffect{
-        if (it.get().label() == "Insteadof") {
-            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property("lccode").value();
-            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property("fullnspath").value();
-            if (insteadofs[method] == null) {
-                insteadofs[method] = [theTrait];
-            } else {
-                insteadofs[method].add(theTrait);
-            }
-        }
-
-        if (it.get().label() == "As") {
-            method = it.get().vertices(OUT, "NAME").next().property("lccode").value();
-            alias = it.get().vertices(OUT, "AS").next().property("lccode").value();
-            aliases[alias] = method;
-        }
-      }
-      .fold()
-    )
-.sideEffect{ if (aliases[name] != null) { name = aliases[name]; } }
-GREMLIN
-, array(), array())
-              ->goToAllTraits(Analyzer::INCLUDE_SELF)
-              ->raw(<<<GREMLIN
-filter{ insteadofs[name] == null || !(it.get().value('fullnspath') in insteadofs[name]); }
-GREMLIN
-,array(), array())
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count2 = $result->toInt();
-        
-        $count = $count1 + $count2;
-        display("Create $count link between \$this->methodcall() and definition");
-
-        // Create link between constructor and new call
-        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
-        $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NEW')
-              ->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
-              ->has('fullnspath')
-              ->inIs('DEFINITION')
-              ->outIs('MAGICMETHOD')
-              ->codeIs('__construct', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        display('Create '.($result->toInt()).' link between new class and definition');
-
-        $this->logTime('Class::method() definition');
-        $this->log->log(__METHOD__);
     }
 
     private function defaultIdentifiers() {
