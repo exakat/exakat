@@ -75,9 +75,10 @@ class Atom {
     public $nullable     = 0;
     public $trailing     = 0;
 
-    public function __construct($id, $atom) {
+    public function __construct($id, $atom, $line) {
         $this->id   = $id;
         $this->atom = $atom;
+        $this->line = $line;
     }
     
     public function toArray() {

@@ -48,6 +48,7 @@ class SplitGraphson extends Loader {
 
     private $graphdb        = null;
     private $path           = null;
+    private $pathDef        = null;
     
     private $dictCode = null;
     

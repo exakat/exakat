@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '1.7.1';
-    const BUILD = 896;
+    const BUILD = 897;
 
     private $gremlin = null;
     private $config = null;
@@ -236,11 +236,6 @@ class Exakat {
 
             case 'upgrade' :
                 $task = new Tasks\Upgrade($this->gremlin, $this->config);
-                $task->run();
-                break;
-
-            case 'codacy' :
-                $task = new Tasks\Codacy($this->gremlin, $this->config);
                 $task->run();
                 break;
 

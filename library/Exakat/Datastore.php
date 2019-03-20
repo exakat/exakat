@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Exceptions;
-use Exceptions\WrongNumberOfColsForAHash;
-use Exceptions\NoStructureForTable;
+use Exakat\Exceptions\WrongNumberOfColsForAHash;
+use Exakat\Exceptions\NoStructureForTable;
 
 class Datastore {
     protected $sqliteRead = null;
