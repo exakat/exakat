@@ -2418,6 +2418,7 @@ class Load extends Tasks {
 
         // Empty call
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+
             $namecall->fullcode   = $namecall->code.'( )';
             $this->pushExpression($namecall);
 
@@ -2433,7 +2434,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0]     === $this->phptokens::T_CONSTANT_ENCAPSED_STRING && 
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA
             ) {
-            $name = $this->processSingle('String');
+            $name = $this->processSingle('Identifier');
             $name->delimiter   = $name->code[0];
             if ($name->delimiter === 'b' || $name->delimiter === 'B') {
                 $name->binaryString = $name->delimiter;
@@ -2442,7 +2443,10 @@ class Load extends Tasks {
             } else {
                 $name->noDelimiter = substr($name->code, 1, -1);
             }
-
+            list($fullnspath, $aliased) = $this->getFullnspath($name, 'const');
+            $name->fullnspath = $fullnspath;
+            $name->aliased = $aliased;
+            
             $this->runPlugins($name);
 
             if (function_exists('mb_detect_encoding')) {
@@ -2456,7 +2460,7 @@ class Load extends Tasks {
                 }
             }
         } else {
-            // back on step
+            // back one step
             --$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                     $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...

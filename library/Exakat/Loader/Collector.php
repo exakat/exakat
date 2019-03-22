@@ -43,6 +43,8 @@ class Collector extends Loader {
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) { 
+        $isDefine = false;
+
         foreach($atoms as $atom) {
             if (in_array($atom->atom, array('Class', 'Interface', 'Trait'))) {
                 $this->cit[] = array('name'        => $atom->fullcode,
@@ -61,22 +63,32 @@ class Collector extends Loader {
                 continue;
             }
 
-            if (in_array($atom->atom, array('Const'))) {
-                $this->constants[] = array('name'        => $atom->fullcode,
-                                           'fullnspath'  => $atom->fullnspath,
-                                           'fullcode'    => $atom->fullcode,
-                                           'value'       => strtolower($atom->atom),
-                              );
+            if (in_array($atom->atom, array('Identifier'))) {
+                if ($isDefine === true) {
+                    $this->constants[] = array('name'        => $atom->fullcode,
+                                               'fullnspath'  => $atom->fullnspath,
+                                               'fullcode'    => $atom->fullcode,
+                                               'value'       => strtolower($atom->atom),
+                                          );
+                    $isDefine = false;
+                } else {
+                    $lastConst = array('name'        => $atom->fullcode,
+                                       'fullnspath'  => $atom->fullnspath,
+                                       'fullcode'    => $atom->fullcode,
+                                       'value'       => strtolower($atom->atom),
+                                  );
+                }
+                continue;
+            }
+
+            if (in_array($atom->atom, array('Constant'))) {
+                $this->constants[] = $lastConst;
+                $lastConst = array();
                 continue;
             }
 
             if (in_array($atom->atom, array('Defineconstant'))) {
-                $this->constants[] = array('name'        => $atom->fullcode,
-                                           'fullnspath'  => $atom->fullnspath,
-                                           'fullcode'    => $atom->fullcode,
-                                           'value'       => strtolower($atom->atom),
-                              );
-                continue;
+                $isDefine = true;
             }
 
 
