@@ -83,8 +83,6 @@ class Jobqueue extends Tasks {
         }
         stream_set_blocking($pipe, false);
         
-        $commandRegex = '/^('.implode('|', self::COMMANDS).') /';
-
         //////// process the queue ////////
         $round = 0;
         while(1) {

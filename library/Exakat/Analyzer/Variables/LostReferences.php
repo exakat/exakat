@@ -27,18 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class LostReferences extends Analyzer {
     public function analyze() {
-        // foo(&$f) { $b = $f[1];}
+        // foo(&$f) { $f =& $b;}
         $this->atomIs('Parametername')
-             ->savePropertyAs('code', 'parameter')
-             ->inIs('NAME')
-             ->is('reference', true)
-             ->inIs('ARGUMENT')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Assignation')
-             ->outIs('LEFT')
-             ->samePropertyAs('code', 'parameter', self::CASE_SENSITIVE)
+             ->back('first')
+             ->outIs('DEFINITION')
              ->inIs('LEFT')
+             ->atomIs('Assignation')
              ->outIs('RIGHT')
+             ->is('reference', true)
+             ->back('first')
+             ->inIs('NAME')
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();

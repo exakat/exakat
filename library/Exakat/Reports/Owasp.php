@@ -648,7 +648,7 @@ SQL;
         return $row['number'];
     }
 
-    private function generateFiles() {
+    protected function generateFiles() {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage('files');

@@ -34,6 +34,7 @@ class Tinkergraph extends Graph {
     const UNAVAILABLE = 1;
     
     private $status     = self::UNCHECKED;
+    private $db         = null;
 
     private $gremlinVersion = '3.3';
     
@@ -177,7 +178,7 @@ class Tinkergraph extends Graph {
         } elseif ($this->gremlinVersion === '3.2') {
             exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
         } else {
-            throw new GremlinException("Wrong version for tinkergraph : $this->GremlinVersion");
+            throw new GremlinException("Wrong version for tinkergraph : $this->gremlinVersion");
         }
         $this->resetConnection();
         sleep(1);

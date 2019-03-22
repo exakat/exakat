@@ -13,4 +13,6 @@ function foo($a, &$b) {
     
 }
 
+function x() {}
+
 ?>

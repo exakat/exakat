@@ -46,5 +46,11 @@ class abstractSubClass5 extends abstractClass5 {
     function ac2() { $a++; }
 }
 
+abstract class abstractClass7 {
+             function ac1() {}
+             function ac2() {}
+}
+
+
 
 ?>

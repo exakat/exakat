@@ -94,7 +94,11 @@ SQL;
             throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
         }
 
-        $globalpath = $this->makeGlobalPath($fullnspath);
+        if ($type === 'class') {
+            $globalpath = $fullnspath;
+        } else {
+            $globalpath = $this->makeGlobalPath($fullnspath);
+        }
 
         $this->calls[] = "('{$type}',
                            '{$this->callsSqlite->escapeString($fullnspath)}',

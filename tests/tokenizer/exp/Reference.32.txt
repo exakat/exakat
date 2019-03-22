@@ -2,15 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    15
+    21
     Label : DEFINITION
-      21
-  Label : DEFINITION
-    15
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,7 +14,7 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CODE
-            18
+            17
             Label : LEFT
               10
               Label : LEFT
@@ -40,23 +34,23 @@ Label : PROJECT
                     Label : CONSTANT
                       11
                   Label : RIGHT
-                    17
+                    16
                     Label : MEMBER
-                      16
+                      15
                     Label : OBJECT
                       14
             Label : RIGHT
-              19
+              18
               Label : NAME
-                19
+                18
               Label : ARGUMENT
-                17
+                16
                 Label : MEMBER
-                  20
+                  19
                 Label : OBJECT
                   14
               Label : ARGUMENT
-                17
+                16
                 Label : METHOD
                   22
                   Label : ARGUMENT
@@ -64,4 +58,4 @@ Label : PROJECT
                   Label : NAME
                     22
                 Label : OBJECT
-                  21
+                  20

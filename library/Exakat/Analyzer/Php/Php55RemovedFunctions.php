@@ -27,10 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php55RemovedFunctions extends FunctionUsage {
-    protected $phpVersion = '5.5-';
-    
     public function analyze() {
-        // php_logo_guid();
         $this->functions = array('php_logo_guid',
                                  'php_egg_logo_guid',
                                  'php_real_logo_guid',

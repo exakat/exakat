@@ -30,6 +30,9 @@ use Exakat\Query\DSL\Command;
 class Query {
     const STOP_QUERY = 'filter{ false; }';
     const NO_QUERY = 'filter{ true; }';
+
+    const TO_GREMLIN = true;
+    const NO_GREMLIN = false;
     
     private $analyzerId = null;
     private $id         = null;
@@ -79,9 +82,11 @@ class Query {
         $args = array_merge(...$args);
 
         $query = str_replace(array_keys($args), '***', $query);
-        
+
+        $sack = $this->prepareSack($this->commands, self::NO_GREMLIN);
 
         $return = new Command("where( $query )", array_values($args));
+        $return->setSack($sack);
 
         $this->commands = array_pop($this->sides);
         return $return;
@@ -209,19 +214,18 @@ GREMLIN;
         die(__METHOD__);
     }
     
-    private function prepareSack($commands) {
-        $sack = '';
+    private function prepareSack($commands, $toGremlin = self::TO_GREMLIN) {
         foreach($commands as $command) {
             if ($command->getSack() !== null) {
-                if (empty($sack)) {
-                    $sack = '.withSack{'.$command->getSack().'}{it.clone()}';
+                if ($toGremlin === self::TO_GREMLIN) {
+                    return '.withSack{'.$command->getSack().'}{it.clone()}';
                 } else {
-                  //  print("There is already one sack used. Review this, please : ".$command->getSack()).PHP_EOL;
+                    return $command->getSack();
                 }
             }
         }
         
-        return $sack;
+        return null;
     }
 }
 ?>

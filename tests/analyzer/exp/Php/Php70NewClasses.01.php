@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('class Error',
-                      'class ParseError',
-                      'class ArithmeticError',
-                      'class DivisionByZeroError',
+$expected     = array('class DivisionByZeroError { /**/ } ', 
+                      'class ArithmeticError { /**/ } ', 
+                      'class ParseError { /**/ } ', 
+                      'class Error { /**/ } ',
                      );
 
-$expected_not = array(
+$expected_not = array('class ANewPHP70Error { /**/ } ',
                      );
 
 ?>

@@ -48,42 +48,41 @@ class IsZero extends Analyzer {
                         'Methodcall',
                         );
         $labelsList = makeList($labels);
-        
-        $skip = 'coalesce( __.in("CODE"), __.in("RIGHT").hasLabel("Assignation"), __.filter{true})';
-        $skip .= ".$skip";
-        
+
         $this->atomIs('Addition')
              ->hasNoParent('Addition', array('LEFT'))
              ->hasNoParent('Addition', array('RIGHT'))
              ->raw(<<<GREMLIN
 sideEffect{x = [:]; id2 = it.get().id();}
 .where(
-   __.repeat(
-       __.out('LEFT', 'RIGHT', 'SIGN', 'CODE')
+   __.sideEffect{ previous = 1; supervious = 1;}
+     .repeat(
+       __.where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT").hasLabel("Addition").sideEffect{ previous = p;}.fold())
+         .where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT", "CODE", "SIGN").hasLabel("Assignation", "Parenthesis", "Sign").sideEffect{ previous = 1; supervious *= p;}.fold())
+         .out("LEFT", "RIGHT", "CODE", "SIGN")
    )
     .emit().times($MAX_LOOPING)
-    .hasLabel($labelsList)
-    .where(
-       __
-        .sideEffect{ v = it.get().value('fullcode'); inc = 1; }
-        .where( __.in('SIGN').hasLabel('Sign').has('code', $minus[0]).sideEffect{ inc = -1; }.fold())
-        .where( __.$skip.in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
-        .where( __.$skip.in('LEFT').hasLabel('Addition').$skip.in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
+    .hasLabel($labelsList).not(where( __.in("LEFT").hasLabel("Assignation")))
+    .sideEffect{ v = it.get().value("fullcode");}
 
-        .repeat(__.in('LEFT', 'RIGHT', 'SIGN', 'CODE')
-                  .where( __.in('SIGN').hasLabel('Sign').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
-                  .where( __.in('LEFT').hasLabel('Addition').in('RIGHT').hasLabel('Addition').has('code', $minus[0]).sideEffect{ inc *= -1; }.fold())
-        ).until(__.filter{ it.get().id() == id2;})
+    .where(__.in("RIGHT").sideEffect{ if (it.get().value("code") == $minus[0]) { inc = -1 * supervious; } else { inc = supervious;} }.fold())
+    .where(__.in("LEFT").sideEffect{ inc = previous;}.fold())
+    .where(__.in("SIGN").sideEffect{ inc = supervious;}.fold())
+    .where(__.in("CODE").sideEffect{ inc = supervious;}.fold())
 
-        .fold()
-       )
     .sideEffect{ 
-    if (x[v] == null) {
-       x[v] = 0;
-    }
-
-    x[v] += inc; 
-
+        if ((v =~ "-" ).getCount() != 0 ) {
+            inc *=  -1;
+        }
+        
+        v = v.replaceAll('\\\+', '').replaceAll('\\\-', ''); 
+        
+        if (x[v] == null) {
+           x[v] = 0;
+        }
+        
+        x[v] += inc; 
+    
     }
     .fold()
 )

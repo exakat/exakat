@@ -61,10 +61,6 @@ Label : PROJECT
     6
     Label : DEFINITION
       37
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      38
   Label : FILE
     3
     Label : EXPRESSION

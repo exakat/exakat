@@ -203,6 +203,7 @@ class Ambassador extends Reports {
 
         $this->generateAnalyzersList();
         $this->generateExternalLib();
+        $this->generateConcentratedIssues();
 
 // Audit Logs
         $this->generateAppinfo();
@@ -1681,10 +1682,7 @@ SQL;
                 continue;
             }
 
-            $filesHTML.= '<tr>';
-            $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
-                         &nbsp; {$this->getDocs($row['analyzer'], 'name')}</td>";
-            $filesHTML.= '</tr>';
+            $filesHTML.= '<tr><td>'.$this->makeDocLink($row['analyzer']).'</td></tr>'.PHP_EOL;
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -2087,6 +2085,7 @@ JAVASCRIPTCODE;
                 }
             }
         }
+        unset($issue);
 
         return $oldIssues;
     }
@@ -2430,7 +2429,7 @@ SQL;
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
-        $colors = array('59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5');
+        $colors = array('59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
 
         $list = makeList(array_keys($analyzers));
         $query = <<<SQL
@@ -2810,7 +2809,7 @@ HTML;
     private function generateGlobals() {
         $theGlobals = '';
 
-        $results = new Results($this->sqlite, 'Structures/GlobalInGlobal');
+        $results = new Results($this->sqlite, array('Structures/GlobalInGlobal', 'Structures/GlobalUsage'));
         $results->load();
 
         foreach($results->toArray() as $row) {
@@ -2921,9 +2920,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No interface were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
+            array_sub_sort($list);
 
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
@@ -3080,10 +3077,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No trait were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
-            unset($l);
+            array_sub_sort($list);
             
             $closure = function (&$run, $flipped) {
                 foreach($run as $k => &$v) {
@@ -3139,9 +3133,7 @@ SQL
         if (empty($list)) {
             $theTable = 'No class were found in this repository.';
         } else {
-            foreach($list as &$l) {
-                sort($l);
-            }
+            array_sub_sort($list);
             
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
@@ -3293,9 +3285,7 @@ SQL
             $list[$parent][] = $row['fullcode'];
         }
         
-        foreach($list as &$l) {
-            sort($l);
-        }
+        array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
         $html = $this->getBasedPage('empty');
@@ -4577,6 +4567,36 @@ JAVASCRIPT;
         $this->putBasedPage('files_tree', $html);
     }
 
+    private function generateConcentratedIssues() {
+        $listAnalyzers = $this->themes->getThemeAnalyzers('Analyze');
+        $sqlList = makeList($listAnalyzers);
+
+        $sql = <<<SQL
+SELECT file, line, COUNT(*) AS count, GROUP_CONCAT(DISTINCT analyzer) AS list FROM results
+    WHERE analyzer IN ($sqlList)
+    GROUP BY file, line
+    HAVING count(DISTINCT analyzer) > 5
+    ORDER BY count(*) DESC
+SQL;
+        $res = $this->sqlite->query($sql);
+
+        $table = array();
+        while(['line' => $line, 'file' => $file, 'count' => $count, 'list' => $list] = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $listHtml = array();
+            foreach(explode(',', $list) as $l) { 
+                $listHtml[] = '<li>'.$this->makeDocLink($l).'</li>';
+            }
+            $listHtml = '<ul>'.implode('', $listHtml).'</u>';
+            $table[] = "<tr><td>$file:$line</td><td>$count</td><td>$listHtml</td></tr>\n";
+        }
+
+        $table = implode(PHP_EOL, $table);
+
+        $html = $this->getBasedPage('concentrated_issues');
+        $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $table);
+        $this->putBasedPage('concentrated_issues', $html);
+    }
+
     private function generateConfusingVariables() {
         $data = new Data\CloseNaming($this->sqlite);
         $results = $data->prepare();
@@ -4780,6 +4800,10 @@ HTML;
         }
         
         return $info;
+    }
+    
+    private function makeDocLink($analyzer) {
+        return "<a href=\"analyzers_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
     }
 }
 

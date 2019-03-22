@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php54RemovedFunctions extends FunctionUsage {
-    protected $phpVersion = '5.4-';
-    
     public function analyze() {
         $this->functions = array('mcrypt_generic_end',
                                  'mysql_list_dbs');

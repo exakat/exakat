@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php72NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '7.2-';
-    
     public function analyze() {
         $this->functions = array( 'mb_ord',
                                   'mb_chr',

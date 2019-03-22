@@ -35,6 +35,7 @@ use Exakat\Reports\Helpers\Docs;
 use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
+use Exakat\Query\DSL\IsNotIgnored;
 
 abstract class Analyzer {
     static public $datastore  = null;
@@ -114,6 +115,7 @@ abstract class Analyzer {
     static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
+    static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -173,7 +175,7 @@ abstract class Analyzer {
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
-            self::$availableAtoms = array('Project', 'File');
+            self::$availableAtoms = array('Project', 'File', 'Virtualproperty');
             self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
 
             foreach($data as $token){
@@ -557,6 +559,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function isNotIgnored($type = IsNotIgnored::IGNORED_CLASSES) {
+        $this->query->isNotIgnored($type);
+        
+        return $this;
+    }
     
     public function functioncallIs($fullnspath) {
         $this->query->functioncallIs($fullnspath);
@@ -638,6 +646,12 @@ GREMLIN;
 
     public function atomInsideNoDefinition($atom) {
         $this->query->atomInsideNoDefinition($atom);
+        
+        return $this;
+    }
+
+    public function atomInsideWithCall($atom) {
+        $this->query->atomInsideWithCall($atom);
         
         return $this;
     }
@@ -1541,6 +1555,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function hasNoLoop() {
+        $this->hasNoInstruction(self::$LOOPS_ALL);
+
+        return $this;
+    }
 
     public function hasIfthen() {
         $this->hasInstruction('Ifthen');
@@ -1812,6 +1832,7 @@ GREMLIN;
                     $values = '';
                 }
             }
+            unset($values);
             $cache[$fullpath] = $ini;
         }
         

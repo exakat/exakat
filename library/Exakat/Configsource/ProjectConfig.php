@@ -101,9 +101,9 @@ class ProjectConfig extends Config {
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
         if (file_exists($pathToCache)) {
             $iniCache = parse_ini_file($pathToCache);
-            if ($iniCache !== false) {
-                $this->config = array_merge($this->config,
-                                            $iniCache);
+            if (isset($iniCache['ignore_dirs'])) {
+                $this->config['ignore_dirs'] = array_merge($this->config['ignore_dirs'],
+                                                           $iniCache['ignore_dirs']);
             }
         }
 

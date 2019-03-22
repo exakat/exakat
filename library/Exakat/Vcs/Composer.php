@@ -98,7 +98,7 @@ class Composer extends Vcs {
     public function getStatus() {
         $composerLockPath = "{$this->destinationFull}/composer.lock";
         if (!file_exists($composerLockPath)) {
-            $status['updatable'] = false;
+            $status['updatable'] = 'No';
             $status['hash']      = 'No composer.lock';
             
             return $status;

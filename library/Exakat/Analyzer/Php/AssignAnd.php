@@ -39,7 +39,15 @@ class AssignAnd extends Analyzer {
              ->back('first')
              ->outIs('RIGHT')
              ->atomIsNot('Exit')
-             ->raw('not( __.hasLabel("Functioncall").in("DEFINITION").in("ANALYZED").has("analyzer", "Functions/KillsApp"))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->atomIs('Functioncall')
+                             ->inIs('DEFINITION')
+                             ->analyzerIs('Functions/KillsApp')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }

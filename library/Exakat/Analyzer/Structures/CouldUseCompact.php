@@ -28,35 +28,75 @@ class CouldUseCompact extends Analyzer {
     public function analyze() {
         // $a = array('a' => $a, 'b' => $b);
         $this->atomIs('Arrayliteral')
-             ->raw('not( where( __.out("ARGUMENT").not(hasLabel("Keyvalue", "Void")) ) ) ') // Only keep Keyvalue and void
-             ->raw('where( __.out("ARGUMENT").hasLabel("Keyvalue") )') // At least one Keyvalue
-             ->raw(<<<GREMLIN
-not( where( __.out("ARGUMENT")
-              .hasLabel("Keyvalue")
-              .out("INDEX")
-              .not(hasLabel("String", "Identifier", "Nsname", "Concatenation").has("noDelimiter"))
-    )     )
-GREMLIN
-) // Only keep String as name
-             ->raw(<<<GREMLIN
-not( where( __.out("ARGUMENT")
-              .hasLabel("Keyvalue")
-              .out("VALUE")
-              .not(hasLabel("Variable"))
-    )     )
-
-GREMLIN
-) // Only keep variable as value
-             ->raw(<<<GREMLIN
-not(
-    __.where( __.out("ARGUMENT").hasLabel("Keyvalue")
-                .where( __.out("INDEX").hasLabel("String", "Identifier", "Nsname", "Concatenation").sideEffect{ name = '$' + it.get().value("noDelimiter"); }.in("INDEX")
-                          .out("VALUE").hasLabel("Variable").filter{it.get().value("fullcode") != name}
-                      )
+            // Only keep Keyvalue and void
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('ARGUMENT')
+                             ->atomIsNot(array('Keyvalue', 'Void'))
+                     )
+             )
+            // At least one Keyvalue
+             ->filter(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs('Keyvalue')
+             )
+            // Only keep String as name
+            ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('ARGUMENT')
+                             ->atomIs('Keyvalue')
+                             ->outIs('INDEX')
+                             ->not(
+                                $this->side()
+                                     ->filter(
+                                        $this->side()
+                                             ->atomIs(array("String", "Identifier", "Nsname", "Concatenation"))
+                                             ->has('noDelimiter')
+                                     )
+                             )
+                     )
             )
-)
-GREMLIN
-) // Only string = variable name
+            ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('ARGUMENT')
+                             ->atomIs('Keyvalue')
+                             ->outIs('VALUE')
+                             ->not(
+                                $this->side()
+                                     ->filter(
+                                        $this->side()
+                                             ->atomIs("Variable")
+                                     )
+                             )
+                     )
+            )
+            
+            // Only string = variable name
+            ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('ARGUMENT')
+                             ->atomIs('Keyvalue')
+                             ->filter(
+                                $this->side()
+                                     ->outIs('INDEX')
+                                     ->atomIs(array('String', 'Identifier', 'Nsname', 'Concatenation'))
+                                     ->raw('sideEffect{ name = "\\$" + it.get().value("noDelimiter"); }')
+                                     ->inIs('INDEX')
+                                     ->outIs('VALUE')
+                                     ->atomIs('Variable')
+                                     ->raw('filter{it.get().value("fullcode") != name}')
+                             )
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }

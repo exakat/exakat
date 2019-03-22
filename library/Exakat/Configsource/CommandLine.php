@@ -104,7 +104,6 @@ class CommandLine extends Config {
                               'queue'         => 1,
                               'load'          => 1,
                               'project'       => 1,
-                              'codacy'        => 1,
                               'report'        => 1,
                               'results'       => 1,
                               'stat'          => 1,
@@ -241,17 +240,6 @@ class CommandLine extends Config {
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));
             $this->config['quiet']     = true;
             $this->config['norefresh'] = true;
-        }
-
-        // Special case for onepage command. It will only work on 'onepage' project
-        if (isset($this->config['command']) && 
-            $this->config['command'] == 'codacy') {
-            $this->config['thema']     = 'Codacy';
-            $this->config['format']    = 'Codacy';
-            $this->config['quiet']     = true;
-            $this->config['norefresh'] = true;
-
-            $this->config['project']   = 'codacy';
         }
 
         return true;

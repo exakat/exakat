@@ -38,10 +38,6 @@ Label : PROJECT
   Label : DEFINITION
     6
     Label : DEFINITION
-      47
-  Label : DEFINITION
-    6
-    Label : DEFINITION
       54
   Label : DEFINITION
     6

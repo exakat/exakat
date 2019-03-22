@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassDefinition;
 
 class Php70NewClasses extends ClassDefinition {
-    protected $phpVersion = '7.0-';
-    
     public function analyze() {
         $this->classes = array(
 'Error',

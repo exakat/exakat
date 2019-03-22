@@ -27,11 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class Noscream extends Analyzer {
     public function analyze() {
+        $authorized = array( '\fopen',
+                             '\token_get_all',
+                             '\stream_socket_server',
+        );
+        
         $list = array('Addition',
                       'Array',
                       'Arrayappend',
                       'Arrayliteral',
-                      'Assignation',
+                      //'Assignation',  Not possible
                       'Bitshift',
                       'Boolean',
                       'Break',
@@ -51,7 +56,6 @@ class Noscream extends Analyzer {
                       'Eval',
                       'Exit',
                       'Function',
-                      'Functioncall',
                       'Global',
                       'Heredoc',
                       'Identifier',
@@ -61,7 +65,7 @@ class Noscream extends Analyzer {
                       'Integer',
                       'Isset',
                       'List',
-                      'Logical',
+                      //'Logical', Not possible
                       'Magicconstant',
                       'Member',
                       'Methodcall',
@@ -105,6 +109,13 @@ class Noscream extends Analyzer {
         $this->atomIs($list)
              ->is('noscream', true);
         $this->prepareQuery();
+
+        // @fopen($s, 'r')
+        $this->atomIs('Functioncall')
+             ->fullnspathIsNot($authorized)
+             ->is('noscream', true);
+        $this->prepareQuery();
+
     }
 }
 

@@ -29,7 +29,7 @@ class DontLoopOnYield extends Analyzer {
         // foreach($g as $h) { yield $h; }
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->atomIs(self::$CALLS)
              ->back('first')
              ->hasAtomInside('Yield')
              ->back('first');

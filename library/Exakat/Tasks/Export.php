@@ -29,6 +29,7 @@ class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
+//        $queryTemplate = 'g.V().valueMap().by(unfold()).with(WithOptions.tokens)';
         $queryTemplate = 'g.V()';
 
         $vertices = $this->gremlin->query($queryTemplate);
@@ -114,22 +115,57 @@ class Export extends Tasks {
                     $v['fullcode'] =  'NO CODE PROVIDED';
                 }
             }
-             $R = $id.' [label="'.addslashes($v['fullcode']).'"';
+            $R = $id.' [label="'.addslashes($v['fullcode']).'"';
+
+        //https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/
+        //        #e6194B, #3cb44b, #ffe119, #4363d8, #f58231, #911eb4, #42d4f4, #f032e6, #bfef45, #fabebe, #469990, #e6beff, #9A6324, #fffac8, #800000, #aaffc3, #808000, #ffd8b1, #000075, #a9a9a9, #ffffff, #000000
+
+            switch($v['label']) {
+                case 'Variable' : 
+                case 'This' : 
+                case 'Variableobject' : 
+                case 'Variablearray' : 
+                    $R .= ' style="filled" fillcolor="#e6194B"';
+                    break;
+
+                case 'Functioncall' : 
+                case 'Methodcall' : 
+                case 'Staticmethodcall' : 
+                    $R .= ' style="filled" fillcolor="#3cb44b"';
+                    break;
+
+                case 'Class' : 
+                    $R .= ' style="filled" fillcolor="#ffe119"';
+                    break;
+
+                case 'Interface' : 
+                    $R .= ' style="filled" fillcolor="#4363d8"';
+                    break;
+
+                case 'Trait' : 
+                    $R .= ' style="filled" fillcolor="#911eb4"';
+                    break;
+
+                case 'Method' : 
+                case 'Magicmethod' : 
+                    $R .= ' style="filled" fillcolor="#42d4f4"';
+                    break;
+
+                default: 
+                    // nothing, really
+            }
+
             if (isset($v['atom'])) {
                 $R .= ' shape=box ';
             }
-             $R .= "];\n";
+            $R .= "];\n";
 
-             $r .= $R;
+            $r .= $R;
         }
 
         foreach($E as $start => $e) {
             foreach($e as $end => $label) {
-                if ($label == 'NEXT') {
-                    $r .= "$start -> $end [label=\"$label\"  color=green];\n";
-                } else {
-                    $r .= "$start -> $end [label=\"$label\"];\n";
-                }
+                $r .= "$start -> $end [label=\"$label\"];\n";
             }
         }
 

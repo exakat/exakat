@@ -48,6 +48,7 @@ class SplitGraphson extends Loader {
 
     private $graphdb        = null;
     private $path           = null;
+    private $pathDef        = null;
     
     private $dictCode = null;
     
@@ -85,7 +86,7 @@ GREMLIN;
         $res = $this->graphdb->query($query);
         
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
-       
+
         $total = 0;
         // Fast dump, with a write to memory first
         $f = fopen('php://memory', 'r+');

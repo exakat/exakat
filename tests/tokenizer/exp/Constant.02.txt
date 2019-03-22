@@ -10,8 +10,6 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NAME
-            5
-          Label : ARGUMENT
             6
-          Label : ARGUMENT
+          Label : VALUE
             7

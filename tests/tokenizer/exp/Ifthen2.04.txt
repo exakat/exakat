@@ -16,10 +16,6 @@ Label : PROJECT
   Label : DEFINITION
     7
     Label : DEFINITION
-      14
-  Label : DEFINITION
-    7
-    Label : DEFINITION
       28
   Label : DEFINITION
     7

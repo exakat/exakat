@@ -11,9 +11,12 @@ There are several reports that may be extracted from Exakat :
 * `Code Sniffer`_
 * `Composer`_
 * `Dependency Wheel`_
+* `Diplomat`_
+* `History`_
 * `Inventories`_
 * `Json`_
 * `Marmelab`_
+* `None`_
 * `Owasp`_
 * `PhpCompilation`_
 * `PhpConfiguration`_
@@ -64,7 +67,7 @@ Reports may be generated at any time, during execution of the analysis (partial 
 Ambassador
 ----------
 
-Ambassador is the most complete Exakat report.
+Ambassador is the most complete Exakat report. It used to be the default report, until Exakat 1.7.0
 
 Ambassador includes : 
 
@@ -85,7 +88,7 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 
 Ambassador is a HTML report format.
 
-Ambassador depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+Ambassador depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
 
 Clustergrammer
 --------------
@@ -203,6 +206,62 @@ It is based on Francois Zaninotto's [DependencyWheel](http://fzaninotto.github.c
 Dependency Wheel is a HTML report format.
 
 Dependency Wheel doesn't depend on themes.
+
+Diplomat
+--------
+
+The Diplomat is the default human readable report.
+
+The Diplomat report is the default report since Exakat 1.7.0. It is a light version of the Ambassador report, and uses a shorter list of analysis. 
+
+
+::
+
+    Name,File,Line
+    0,/features/bootstrap/FeatureContext.php,61
+    10000,/features/bootstrap/FeatureContext.php,61
+    777,/features/bootstrap/FeatureContext.php,63
+    20,/features/bootstrap/FeatureContext.php,73
+    0,/features/bootstrap/FeatureContext.php,334
+    0,/features/bootstrap/FeatureContext.php,339
+    0,/features/bootstrap/FeatureContext.php,344
+    0,/features/bootstrap/FeatureContext.php,362
+    0,/features/bootstrap/FeatureContext.php,366
+    0,/features/bootstrap/FeatureContext.php,368
+    0,/features/bootstrap/FeatureContext.php,372
+    777,/features/bootstrap/FeatureContext.php,423
+    777,/features/bootstrap/FeatureContext.php,431
+    0,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,68
+    1,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,69
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,84
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,150
+    
+
+Diplomat is a HTML report format.
+
+Diplomat depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Top10, Preferences, Appinfo, Appcontent, Suggestions.
+
+History
+-------
+
+The History report collects meta information between audits. It saves the values from the current audit into a separate 'history.sqlite' database.
+
+
+The history tables are the same as the dump.sqlite tables, except for the extra 'serial' table. Each audit comes with 3 identifiers : 
+
++ 'dump_timestamp' : this is a timmestamp taken when the dump was build
++ 'dump_serial'    : this is a serial number, based on the previous audit, and incremented by one. This is handy to keep the values in sequence
++ 'dump_id'        : this is a unique random id, which helps distinguish audits which may have inconsistence between serial or timestamp.
+
+This report provides a 'history.sqlite' database. The following tables are inventoried : 
+
++ hash 
++ resultsCounts
+
+
+History is a Sqlite report format.
+
+History doesn't depend on themes.
 
 Inventories
 -----------
@@ -341,6 +400,17 @@ You may also learn more about GraphQL at [Introducing Json GraphQL Server](https
 Marmelab is a JSON report format.
 
 Marmelab depends on the following theme : Analyze.
+
+None
+----
+
+None is the empty report. It runs the report generating stack, but doesn't produce any result. 
+
+None is a utility report, aimed to test exakat's installation.
+
+None is a None report format.
+
+None depends on the following theme : Any.
 
 Owasp
 -----

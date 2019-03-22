@@ -33,10 +33,6 @@ class Regex extends Analyzer {
                                '\\preg_relace_callback_array',
                                );
 
-        $pregReplaceFunctions = array('\\preg_replace',
-                                      '\\preg_replace_callback',
-                                      );
-
         // preg_match('/a/', ...)
         $this->atomFunctionIs($pregFunctions)
              ->outWithRank('ARGUMENT', 0)

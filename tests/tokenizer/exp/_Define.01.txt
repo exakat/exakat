@@ -19,14 +19,12 @@ Label : PROJECT
           8
           Label : DEFINITION
             6
-          Label : ARGUMENT
-            6
           Label : DEFINITION
             6
-          Label : ARGUMENT
-            7
           Label : NAME
-            8
+            6
+          Label : VALUE
+            7
         Label : EXPRESSION
           9
           Label : ARGUMENT

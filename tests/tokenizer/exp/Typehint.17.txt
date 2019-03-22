@@ -2,7 +2,7 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    31
+    45
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -96,57 +96,67 @@ Label : PROJECT
               Label : EXPRESSION
                 29
                 Label : CONDITION
-                  38
+                  37
                   Label : LEFT
-                    37
+                    36
                     Label : CLASS
                       25
                     Label : VARIABLE
-                      34
+                      33
                       Label : MEMBER
-                        35
-                      Label : OBJECT
                         34
+                      Label : OBJECT
+                        33
                         Label : METHOD
-                          32
+                          31
                           Label : ARGUMENT
                             17
                           Label : NAME
-                            32
+                            31
                         Label : OBJECT
                           30
                   Label : RIGHT
-                    39
+                    38
                 Label : THEN
                   16
                   Label : EXPRESSION
-                    41
+                    40
                     Label : RETURN
-                      34
+                      33
                       Label : METHOD
-                        44
+                        43
                         Label : NAME
-                          44
+                          43
                         Label : ARGUMENT
                           28
                         Label : ARGUMENT
                           15
                       Label : OBJECT
-                        34
+                        33
                         Label : MEMBER
-                          42
+                          41
                         Label : OBJECT
                           30
             Label : DEFINITION
-              31
-              Label : DEFINITION
-                30
-              Label : DEFINITION
-                30
-            Label : DEFINITION
-              31
+              45
               Label : DEFINITION
                 15
+            Label : DEFINITION
+              33
+              Label : METHOD
+                21
+                Label : ARGUMENT
+                  48
+                Label : ARGUMENT
+                  49
+                Label : ARGUMENT
+                  50
+                Label : ARGUMENT
+                  51
+                Label : NAME
+                  21
+              Label : OBJECT
+                9
             Label : NAME
               21
             Label : RETURNED
@@ -155,6 +165,10 @@ Label : PROJECT
               15
           Label : NAME
             19
+          Label : PPP
+            $this->D( )->E
+          Label : PPP
+            $this->G
         Label : EXPRESSION
           46
           Label : LEFT
@@ -168,7 +182,7 @@ Label : PROJECT
               Label : NAME
                 19
         Label : EXPRESSION
-          34
+          33
           Label : METHOD
             21
             Label : ARGUMENT

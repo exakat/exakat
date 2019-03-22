@@ -38,7 +38,24 @@ class OnlyVariableForReference extends Analyzer {
              ->outIsIE('METHOD')   // For methods, in case
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')
-             ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Member'))
+             ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Member', 'This', 'Phpvariable'))
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->atomIs(self::$CALLS)
+                             ->inIs('DEFINITION')
+                             ->is('reference', true)
+                     )
+             )
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->atomIs(self::$CALLS)
+                             ->hasNoIn('DEFINITION')
+                     )
+             )
              ->back('functioncall');
         $this->prepareQuery();
     }

@@ -39,8 +39,9 @@ class Dump extends Tasks {
 
     private $sqlite            = null;
 
-    private $sqliteFile        = null;
-    private $sqliteFileFinal   = null;
+    private $sqliteFile         = null;
+    private $sqliteFileFinal    = null;
+    private $sqliteFilePrevious = null;
     
     private $files = array();
     
@@ -78,6 +79,7 @@ class Dump extends Tasks {
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/.dump.sqlite";
+        $this->sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
         $this->sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
@@ -89,60 +91,7 @@ class Dump extends Tasks {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
-            $this->sqlite = new \Sqlite3($this->sqliteFile);
-
-            $query = <<<SQL
-CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       thema STRING,
-                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
-                    )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        fullcode STRING,
-                        file STRING,
-                        line INTEGER,
-                        namespace STRING,
-                        class STRING,
-                        function STRING,
-                        analyzer STRING,
-                        severity STRING
-                     )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                             analyzer STRING,
-                             count INTEGER DEFAULT -6,
-                            CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
-                           )
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
-                            analyzer TEXT,
-                            key TEXT UNIQUE,
-                            value TEXT
-                          );
-SQL;
-            $this->sqlite->query($query);
-
-            $query = <<<SQL
-CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            name TEXT,
-                            key TEXT,
-                            value TEXT
-                          );
-SQL;
-            $this->sqlite->query($query);
-
-            $this->collectDatastore();
-
-            display('Inited tables');
+            $this->initDump();
         }
         
         if ($this->config->collect === true) {
@@ -233,9 +182,6 @@ SQL;
             $this->collectForeachFavorite();
             $end = microtime(true);
             $this->log->log( 'Collected Foreach favorites : '.number_format(1000 * ($end - $begin), 2)."ms\n");
-            
-            
-
         }
 
         $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
@@ -332,7 +278,7 @@ SQL;
             $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
         }
 
-        $analyzers = $this->themes->getThemeAnalyzers($theme);
+        $analyzers = $classes;
         
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
@@ -585,7 +531,6 @@ SQL;
                         'externallibraries',
                         'files',
                         'hash',
-//                        'hashAnalyzer',
                         'ignoredFiles',
                         'shortopentag',
                         'tokenCounts',
@@ -595,8 +540,8 @@ SQL;
     }
 
     private function collectTables($tables) {
-        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
-        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+        $datastorePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
+        $this->sqlite->query("ATTACH '$datastorePath' AS datastore");
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
@@ -764,7 +709,7 @@ GREMLIN;
         
         $cit = array();
         $citId = array();
-        $citCount = 0;
+        $citCount = $this->sqlite->querySingle('SELECT count(*) FROM cit');
 
         foreach($classes as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
@@ -894,10 +839,10 @@ GREMLIN;
                            ", '".$this->files[$row['file']]."'".
                            " )";
             }
-
+            
             if (!empty($query)) {
                 $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES '.implode(", \n", $query);
-                $this->sqlite->query($query);
+                $r = $this->sqlite->query($query);
             }
 
             $query = array();
@@ -1392,7 +1337,7 @@ g.V().$filter
                   file='None'; 
       }
      .until( hasLabel('File') )
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() 
+     .repeat( __.inE().hasLabel({$this->linksDown}).outV() 
                 .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
      )
      .map{ 
@@ -1477,10 +1422,11 @@ GREMLIN;
     private function collectDefinitionsStats() {
         $insert = array();
         $types = array('Staticconstant'   => 'staticconstants',
-                       'Methodcall'       => 'methodcalls',
                        'Staticmethodcall' => 'staticmethodcalls',
-                       'Member'           => 'members',
                        'Staticproperty'   => 'staticproperty',
+
+                       'Methodcall'       => 'methodcalls',
+                       'Member'           => 'members',
                         );
         
         foreach($types as $label => $name) {
@@ -1580,9 +1526,9 @@ GREMLIN;
         // Finding typehint
         $query = <<<GREMLIN
 g.V().hasLabel("Nsname", "Identifier").as("classe").where( __.in("TYPEHINT"))
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1601,9 +1547,9 @@ GREMLIN;
         // Finding trait use
         $query = <<<GREMLIN
 g.V().hasLabel("Usetrait").out("USE").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1622,9 +1568,9 @@ GREMLIN;
         // traits
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Trait").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
      .select("classe").out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
+     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1643,9 +1589,9 @@ GREMLIN;
         // Functioncall()
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
      .map{['file':calling, 'include':called]}
 GREMLIN;
         $functioncall = $this->gremlin->query($query);
@@ -1664,9 +1610,9 @@ GREMLIN;
         // constants
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").not(where( __.in("NAME", "CLASS", "MEMBER", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ) ) )
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'include':called];}
 GREMLIN;
         $constants = $this->gremlin->query($query);
@@ -1685,9 +1631,9 @@ GREMLIN;
         // New
         $query = <<<GREMLIN
 g.V().hasLabel("New").out("NEW").as("i")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value("fullcode"); })
      .map{ [ "file":calling, "include":called];}
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1707,9 +1653,9 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty").as("i")
      .sideEffect{ type = it.get().label().toLowerCase(); }
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
      .out("CLASS").in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
         $statics = $this->gremlin->query($query);
@@ -2022,7 +1968,7 @@ g.V().sideEffect{ functions = 0; name=""; expression=0;}
     .sideEffect{ ++total; }
     .not(hasLabel("Void"))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
-    .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ file = it.get().value("fullcode"); })
+    .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ file = it.get().value("fullcode"); })
     .fold()
     )
     .map{ if (expression > 0) {
@@ -2106,6 +2052,87 @@ SQL;
             $query = 'INSERT INTO themas (thema) VALUES ("'.implode('"), ("', $add).'")';
             $res = $this->sqlite->query($query);
         }
+    }
+    
+    private function initDump() {
+        if (file_exists($this->sqliteFile)) {
+            unlink($this->sqliteFile);
+        }
+        $this->sqlite = new \Sqlite3($this->sqliteFile);
+
+        $query = <<<SQL
+CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
+                       thema STRING,
+                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
+                    )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        fullcode STRING,
+                        file STRING,
+                        line INTEGER,
+                        namespace STRING,
+                        class STRING,
+                        function STRING,
+                        analyzer STRING,
+                        severity STRING
+                     )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             analyzer STRING,
+                             count INTEGER DEFAULT -6,
+                            CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
+                           )
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
+                            analyzer TEXT,
+                            key TEXT UNIQUE,
+                            value TEXT
+                          );
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<SQL
+CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            name TEXT,
+                            key TEXT,
+                            value TEXT
+                          );
+SQL;
+        $this->sqlite->query($query);
+
+        $this->collectDatastore();
+
+        $time   = time();
+        $id     = random_int(0, PHP_INT_MAX);
+        if (file_exists($this->sqliteFilePrevious)) {
+            $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
+
+            $presence = $sqliteOld->querySingle('SELECT count(*) FROM sqlite_master WHERE type="table" AND name="hash"');
+            if ($presence == 1) {
+                $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
+            } else {
+                $serial = 0;
+            }
+        } else {
+            $serial = 1;
+        }
+        $query = <<<SQL
+INSERT INTO hash VALUES (NULL, 'dump_time', $time),
+                        (NULL, 'dump_id', $id),
+                        (NULL, 'dump_serial', $serial)
+SQL;
+        $this->sqlite->query($query);
+
+        display('Inited tables');
     }
 }
 

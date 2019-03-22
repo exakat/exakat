@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TrailingComma extends Analyzer {
     public function analyze() {
         // foo(1,2,3,);
-        $this->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+        $this->atomIs(self::$CALLS)
              ->regexIs('fullcode', ',  \\\)\$');
         $this->prepareQuery();
     }

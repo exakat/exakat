@@ -27,13 +27,32 @@ use Exakat\Analyzer\Analyzer;
 class DemeterLaw extends Analyzer {
     public function analyze() {
         // law of demeter
-        // Still missing foreach and fluent interfaces
+        // Still missing foreach and fluent interfaces, static methodcall and static properties
         $this->atomIs('Methodcall')
             // Not a local method
-             ->outIsIE('OBJECT')
-             ->outIsIE('VARIABLE')
-             ->atomIsNot(array('This', 'Phpvariable'))
-             
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('OBJECT')
+                             ->outIsIE('VARIABLE') // array calls
+                             ->atomIs(array('This', 'Phpvariable'))
+                             )
+                )
+
+            // Not a local property
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('OBJECT')
+                             ->atomIs('Member')
+                             ->outIs('OBJECT')
+                             ->atomIs(array('This', 'Phpvariable'))
+                             )
+                )
+
+            ->outIs('OBJECT')
             // variable is not an argument
              ->not(
                 $this->side()

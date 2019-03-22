@@ -32,34 +32,55 @@ class UselessAbstract extends Analyzer {
     }
     
     public function analyze() {
-        // abstract class that are never used
+        // abstract class that are never instanciated
         $this->atomIs('Class')
              ->is('abstract', true)
              ->analyzerIsNot('Classes/OnlyStaticMethods')
-             ->hasNoOut('DEFINITION');
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->atomIsNot('This')
+                     )
+             );
         $this->prepareQuery();
 
         // abstract class without nothing in
         $this->atomIs('Class')
              ->is('abstract', true)
-             ->hasOut('DEFINITION')
-             ->hasNoOut(self::$CLASS_ELEMENTS);
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIsNot('This')
+             )
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs(self::$CLASS_ELEMENTS)
+                             ->atomIsNot('Virtualproperty')
+                     )
+             );
         $this->prepareQuery();
 
         // abstract class with not methods nor const nor trait
         $this->atomIs('Class')
              ->is('abstract', true)
-             ->hasOut('DEFINITION')
-             ->hasNoOut(self::$CLASS_ELEMENTS);
-        $this->prepareQuery();
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIsNot('This')
+             )
 
-        // abstract class with not abstract methods
-        $this->atomIs('Class')
-             ->is('abstract', true)
-             ->hasOut('DEFINITION')
-             ->hasOut(array('METHOD', 'MAGICMETHOD'))
-             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").has("abstract", true) ) )')
-             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").has("abstract", true) ) )');
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs(self::$CLASS_ELEMENTS)
+                             ->atomIsNot('Virtualproperty')
+                     )
+             );
         $this->prepareQuery();
      }
 }

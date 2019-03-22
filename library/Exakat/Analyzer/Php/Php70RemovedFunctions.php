@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php70RemovedFunctions extends FunctionUsage {
-    protected $phpVersion = '7.0-';
-    
     public function analyze() {
         $this->functions = array('ereg',
                                  'ereg_replace',

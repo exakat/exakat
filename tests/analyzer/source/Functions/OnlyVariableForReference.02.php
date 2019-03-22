@@ -15,4 +15,6 @@ class A {
     }
 }
 
+function x() { }
+
 ?>

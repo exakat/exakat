@@ -38,7 +38,7 @@ class Clean extends Tasks {
             throw new ProjectNeeded();
         }
 
-        $path = $this->config->projects_root.'/projects/'.$this->config->project;
+        $path = "{$this->config->projects_root}/projects/{$this->config->project}";
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -95,9 +95,9 @@ class Clean extends Tasks {
                              );
         $total = 0;
         foreach($filesToErase as $file) {
-            $filePath = $path.'/'.$file;
+            $filePath = "$path/$file";
             if (file_exists($filePath)) {
-                display('removing '.$file);
+                display("removing $file");
                 unlink($filePath);
                 ++$total;
             }

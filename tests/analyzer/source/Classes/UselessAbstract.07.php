@@ -39,4 +39,8 @@ abstract class E {
 class EE extends E {
 }
 
+abstract class abstractClass8 {
+    function foo() { }
+}
+
 ?>

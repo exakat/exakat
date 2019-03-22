@@ -25,8 +25,6 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php72ObjectKeyword extends Analyzer {
-    protected $phpVersion = '7.2-';
-    
     public function analyze() {
         // class object {}
         $this->atomIs(self::$CIT)

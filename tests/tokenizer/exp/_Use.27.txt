@@ -2,15 +2,21 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    26
+    28
     Label : DEFINITION
-      25
+      27
   Label : FILE
     3
     Label : EXPRESSION
       4
       Label : CODE
         3
+        Label : EXPRESSION
+          17
+        Label : EXPRESSION
+          17
+        Label : EXPRESSION
+          17
         Label : EXPRESSION
           5
           Label : NAME
@@ -38,9 +44,9 @@ Label : PROJECT
                 Label : NAME
                   12
             Label : USE
-              17
-            Label : USE
               19
+            Label : USE
+              21
           Label : USE
             8
             Label : BLOCK
@@ -52,12 +58,12 @@ Label : PROJECT
                 Label : NAME
                   12
             Label : USE
-              21
-            Label : USE
               23
+            Label : USE
+              25
         Label : EXPRESSION
           11
           Label : EXPRESSION
-            27
+            29
             Label : POSTPLUSPLUS
-              25
+              27

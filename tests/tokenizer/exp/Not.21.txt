@@ -2,19 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
-      12
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,15 +14,15 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            11
+            10
             Label : LEFT
-              10
+              9
               Label : MEMBER
-                8
+                7
               Label : OBJECT
                 6
             Label : RIGHT
-              12
+              11
           Label : ELSE
             3
             Label : EXPRESSION
@@ -50,7 +40,7 @@ Label : PROJECT
             Label : EXPRESSION
               16
               Label : LEFT
-                10
+                9
                 Label : MEMBER
                   14
                 Label : OBJECT
@@ -58,7 +48,7 @@ Label : PROJECT
               Label : RIGHT
                 17
                 Label : LEFT
-                  10
+                  9
                   Label : MEMBER
                     14
                   Label : OBJECT
@@ -74,7 +64,7 @@ Label : PROJECT
             Label : EXPRESSION
               16
               Label : LEFT
-                10
+                9
                 Label : MEMBER
                   24
                 Label : OBJECT

@@ -39,7 +39,7 @@ class Doctor extends Tasks {
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->config  = $config;
         $this->gremlin = $gremlin;
-        // Ignoring everything
+        // Ignoring everything else
     }
 
     public function run() {
@@ -268,7 +268,16 @@ TEXT
         $gremlinVersion = basename(array_pop($gremlinJar));
         //gremlin-core-3.2.5.jar
         $gremlinVersion = substr($gremlinVersion, 13, -4);
-        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
+        if (version_compare('3.4.0', $gremlinVersion)) {
+            $version = '.3.4';
+        } elseif (version_compare('3.3.0', $gremlinVersion)) {
+            $version = '.3.3';
+        } elseif (version_compare('3.2.0', $gremlinVersion)) {
+            $version = '.3.2';
+        } else {
+            print "Warning : Wrong Gremlin version found : $gremlinVersion read. Possible version range from 3.2.0 to 3.4.0.";
+            return;
+        }
     
         if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
              "$path/conf/gsneo4j.yaml")) {
@@ -338,29 +347,6 @@ TEXT
         } finally {
             return $stats;
         }
-
-        $version = $php->getConfiguration('phpversion');
-        if (strpos($version, 'not found') !== false) {
-            $stats['installed'] = 'No';
-        } elseif (strpos($version, 'No such file') !== false) {
-            $stats['installed'] = 'No';
-        } else {
-            $stats['version']         = $php->getConfiguration('phpversion');
-            $stats['short_open_tags'] = $php->getConfiguration('short_open_tags') ? 'Yes' : 'No';
-            $stats['tokenizer']       = $php->getConfiguration('tokenizer')       ? 'Yes' : 'No';
-            $stats['assertions']      = $php->getConfiguration('assertions')      ? 'Yes' : 'No';
-            $stats['memory_limit']    = $php->getConfiguration('memory_limit');
-            $stats['timezone']        = $php->getConfiguration('timezone')        ? 'None' : $php->getConfiguration('timezone');
-
-            if (substr($version, 0, 3) != $displayedVersion) {
-                $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';
-            }
-
-            $tokens = $php->getTokens();
-            $stats['token_version'] = substr(get_class(Php::getInstance($tokens)), -5);
-        }
-
-        return $stats;
     }
 
     private function array2list(array $array) {

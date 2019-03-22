@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class UndefinedInterfaces extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testInterfaces_UndefinedInterfaces01()  { $this->generic_test('Interfaces_UndefinedInterfaces.01'); }
     public function testInterfaces_UndefinedInterfaces02()  { $this->generic_test('Interfaces_UndefinedInterfaces.02'); }
@@ -18,5 +18,6 @@ class UndefinedInterfaces extends Analyzer {
     public function testInterfaces_UndefinedInterfaces07()  { $this->generic_test('Interfaces/UndefinedInterfaces.07'); }
     public function testInterfaces_UndefinedInterfaces08()  { $this->generic_test('Interfaces/UndefinedInterfaces.08'); }
     public function testInterfaces_UndefinedInterfaces09()  { $this->generic_test('Interfaces/UndefinedInterfaces.09'); }
+    public function testInterfaces_UndefinedInterfaces10()  { $this->generic_test('Interfaces/UndefinedInterfaces.10'); }
 }
 ?>

@@ -2,17 +2,13 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      10
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      5
-  Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       11
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,17 +16,17 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          9
+          8
           Label : LEFT
-            8
+            7
             Label : MEMBER
-              7
+              6
             Label : OBJECT
               5
           Label : RIGHT
-            10
+            9
             Label : NAME
-              10
+              9
             Label : ARGUMENT
               12
               Label : CONCAT

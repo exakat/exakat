@@ -83,18 +83,48 @@ Label : PROJECT
                             36
                           Label : VALUE
                             38
-                      Label : DEFINITION
-                        34
-                      Label : DEFINITION
+                      Label : PPP
+                        40
+                        Label : PPP
+                          9
+                          Label : DEFAULT
+                            41
+                        Label : PPP
+                          16
+                      Label : PPP
+                        42
+                        Label : PPP
+                          18
+                      Label : PPP
+                        43
+                        Label : PPP
+                          19
+                          Label : DEFAULT
+                            17
+                      Label : PPP
+                        $x->a
+                        Label : DEFINITION
+                          75
+                          Label : MEMBER
+                            23
+                          Label : OBJECT
+                            67
+                      Label : PPP
+                        ${$a . "_1"}->a
+                        Label : DEFINITION
+                          75
+                          Label : MEMBER
+                            23
+                          Label : OBJECT
+                            72
+                            Label : NAME
+                              73
+                              Label : CONCAT
+                                9
+                              Label : CONCAT
+                                74
+                      Label : NAME
                         22
-                      Label : DEFINITION
-                        22
-                      Label : EXTENDS
-                        24
-                      Label : IMPLEMENTS
-                        26
-                      Label : IMPLEMENTS
-                        28
                       Label : METHOD
                         44
                         Label : ARGUMENT
@@ -585,26 +615,32 @@ Label : PROJECT
                             76
                         Label : NAME
                           47
-                      Label : NAME
+                      Label : IMPLEMENTS
+                        28
+                      Label : IMPLEMENTS
+                        26
+                      Label : EXTENDS
+                        24
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
                         22
                       Label : PPP
-                        40
-                        Label : PPP
-                          9
-                          Label : DEFAULT
-                            41
-                        Label : PPP
-                          16
-                      Label : PPP
-                        42
-                        Label : PPP
-                          18
-                      Label : PPP
-                        43
-                        Label : PPP
-                          19
-                          Label : DEFAULT
-                            17
+                        $x->{a . "_1"}
+                        Label : DEFINITION
+                          75
+                          Label : MEMBER
+                            20
+                            Label : CODE
+                              73
+                              Label : CONCAT
+                                23
+                              Label : CONCAT
+                                74
+                          Label : OBJECT
+                            67
                   Label : USE
                     18
                   Label : USE
@@ -862,6 +898,8 @@ Label : PROJECT
                   Label : BLOCK
                     20
                     Label : EXPRESSION
+                      45
+                    Label : EXPRESSION
                       21
                       Label : DEFINITION
                         34
@@ -880,7 +918,7 @@ Label : PROJECT
                             Label : INSTEADOF
                               44
                             Label : NAME
-                              35
+                              10
                               Label : CLASS
                                 102
                               Label : METHOD
@@ -890,7 +928,7 @@ Label : PROJECT
                             Label : AS
                               108
                             Label : NAME
-                              35
+                              10
                               Label : CLASS
                                 104
                               Label : METHOD

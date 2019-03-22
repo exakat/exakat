@@ -55,7 +55,7 @@ class UselessGlobal extends Analyzer {
                                 ->toArray();
 
         $counts = array_count_values(array_merge($inGlobals, $inglobal, $implicitGLobals));
-        $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
+        $loneGlobal = array_filter($counts, function ($x) { return $x === 1; });
         $loneGlobal = array_keys($loneGlobal);
 
         if (!empty($loneGlobal)) {

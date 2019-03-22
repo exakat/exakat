@@ -68,7 +68,7 @@ class Diplomat extends Ambassador {
     public function dependsOnAnalysis() {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
-                     'Analyze', 'Preferences', 
+                     'Top10', 'Preferences', 
                      'Appinfo', 
                      );
     }
@@ -177,7 +177,9 @@ MENU;
         $this->initFolder();
         $this->generateDashboard();
 
-        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_unique($analyzersList);
+        $this->generateDocumentation($analyzersList);
         $this->generateIssues();
         $this->generateSettings();
         

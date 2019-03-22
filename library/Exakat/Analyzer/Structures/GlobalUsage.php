@@ -34,15 +34,16 @@ class GlobalUsage extends Analyzer {
         // $GLOBALS as a whole
         $this->atomIs('Phpvariable')
              ->hasNoIn('VARIABLE')
-             ->codeIs('$GLOBALS', true);
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         // $GLOBALS as a whole
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->codeIs('$GLOBALS', true)
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
-             ->outIs('INDEX');
+             ->outIs('INDEX')
+             ->back('first');
         $this->prepareQuery();
     }
 }

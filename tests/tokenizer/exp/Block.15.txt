@@ -20,10 +20,6 @@ Label : PROJECT
   Label : DEFINITION
     7
     Label : DEFINITION
-      20
-  Label : DEFINITION
-    7
-    Label : DEFINITION
       22
   Label : DEFINITION
     7

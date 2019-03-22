@@ -33,7 +33,7 @@ class Implementing extends DSL {
         $MAX_LOOPING = self::$MAX_LOOPING;
         return new Command(<<<GREMLIN
 where( __.emit().repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).times({$MAX_LOOPING})
-                        .out("IMPLEMENTS").has("fullnspath", within(***)) ) 
+                        .out("IMPLEMENTS", "EXTENDS").has("fullnspath", within(***)) ) 
 GREMLIN
 , $fullnspath);
     }

@@ -35,7 +35,19 @@ class UnreachableCode extends Analyzer {
         // code after a halt_compiler is expected to be unreachable.
         $finalTokens = array('Gotolabel', 'Class', 'Function', 'Interface', 'Trait');
 
+        // anything directly after those
         $this->atomIs(array('Return', 'Throw', 'Break', 'Continue', 'Goto', 'Exit'))
+             ->nextSiblings()
+             ->atomIsNot($finalTokens);
+        $this->prepareQuery();
+
+        // anything directly after the try of a finally
+        $this->atomIs(array('Return', 'Throw', 'Break', 'Continue', 'Goto', 'Exit'))
+             ->inIs('EXPRESSION')
+             ->inIs('BLOCK')
+             ->atomIs('Finally')
+             ->inIs('FINALLY')
+             ->atomIs('Try')
              ->nextSiblings()
              ->atomIsNot($finalTokens);
         $this->prepareQuery();

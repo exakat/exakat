@@ -104,6 +104,8 @@ class Docs {
                              'Suggestions',
                              'ClassReview',
                              'LintButWontExec',
+                             'Top10',
+                             'Suggestions',
 
                              );
 
@@ -159,6 +161,12 @@ class Docs {
                  'ParseError'                   => 'http://php.net/manual/en/class.parseerror.php',
                  'DivisionByZeroError'          => 'http://php.net/manual/fr/class.divisionbyzeroerror.php',
                  'NULL'                         => 'http://php.net/manual/en/language.types.null.php',
+                 'Datetime'                     => 'http://php.net/manual/en/class.datetime.php',
+                 'DatetimeImmutable'            => 'http://php.net/manual/en/class.datetimeimmutable.php',
+                 'DatetimeInterface'            => 'http://php.net/manual/en/class.datetimeinterface.php',
+                 'Datetimezone'                 => 'http://php.net/manual/en/class.datetimezone.php',
+                 'Datetimeinterval'             => 'http://php.net/manual/en/class.dateinterval.php',
+                 'Dateperiod'                   => 'http://php.net/manual/en/class.dateperiod.php',
                  
                  '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',
@@ -496,6 +504,10 @@ SQL
             $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
             $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
 
+            if (!isset($reportIni['examples'])) {
+                print "No examples for $reportFile\n";
+                continue;
+            }
             foreach($reportIni['examples'] as $id => $example) {
                 if (preg_match('/\.png$/', $example)) {
                     $section .= ".. image:: images/$example

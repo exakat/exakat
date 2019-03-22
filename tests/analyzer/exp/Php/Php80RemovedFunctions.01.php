@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('ldap_sort( )', 
-                      'png2wbmp( )', 
-                      'jpeg2wbmp( )', 
+$expected     = array('ldap_sort( )',
+                      'png2wbmp( )',
+                      'jpeg2wbmp( )',
                       'image2wbmp( )',
                      );
 

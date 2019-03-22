@@ -113,6 +113,12 @@ Label : PROJECT
                           17
                     Label : MEMBER
                       12
+                  Label : DEFINITION
+                    40
+                    Label : CLASS
+                      17
+                    Label : MEMBER
+                      12
             Label : EXPRESSION
               9
               Label : DEFINITION

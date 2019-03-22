@@ -33,8 +33,6 @@ Label : PROJECT
                 6
               Label : METHOD
                 6
-            Label : DEFINITION
-              6
             Label : NAME
               6
           Label : NAME
@@ -57,8 +55,6 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              6
             Label : NAME
               6
           Label : NAME
@@ -84,13 +80,7 @@ Label : PROJECT
                   Label : CONCAT
                     14
             Label : DEFINITION
-              21
-              Label : CLASS
-                17
-              Label : METHOD
-                6
-            Label : DEFINITION
-              28
+              27
               Label : METHOD
                 6
                 Label : ARGUMENT
@@ -100,11 +90,17 @@ Label : PROJECT
               Label : OBJECT
                 26
             Label : DEFINITION
-              6
+              21
+              Label : CLASS
+                17
+              Label : METHOD
+                6
             Label : NAME
               6
           Label : NAME
             17
+        Label : EXPRESSION
+          7
         Label : EXPRESSION
           18
           Label : DEFINITION
@@ -118,7 +114,7 @@ Label : PROJECT
             Label : BLOCK
               9
               Label : EXPRESSION
-                28
+                27
                 Label : METHOD
                   6
                   Label : ARGUMENT
@@ -129,8 +125,18 @@ Label : PROJECT
                   26
             Label : DEFINITION
               27
-              Label : DEFINITION
-                26
+              Label : METHOD
+                25
+                Label : ARGUMENT
+                  7
+                Label : NAME
+                  25
+              Label : OBJECT
+                28
+                Label : CODE
+                  29
+                  Label : NEW
+                    19
             Label : NAME
               25
           Label : NAME
@@ -172,7 +178,7 @@ Label : PROJECT
             Label : USE
               17
         Label : EXPRESSION
-          28
+          27
           Label : METHOD
             25
             Label : ARGUMENT
@@ -180,8 +186,8 @@ Label : PROJECT
             Label : NAME
               25
           Label : OBJECT
-            29
+            28
             Label : CODE
-              30
+              29
               Label : NEW
                 19

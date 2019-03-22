@@ -1,10 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    13
-    Label : DEFINITION
-      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,15 +10,15 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : THROW
-            15
+            14
             Label : METHOD
               10
               Label : ARGUMENT
                 11
                 Label : ARGUMENT
-                  15
+                  14
                   Label : MEMBER
-                    14
+                    13
                   Label : OBJECT
                     12
                 Label : NAME

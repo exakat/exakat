@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassDefinition;
 
 class Php71NewClasses extends ClassDefinition {
-    protected $phpVersion = '7.1-';
-    
     public function analyze() {
         $this->classes = array('Void',
                                'ReflectionClassConstant',

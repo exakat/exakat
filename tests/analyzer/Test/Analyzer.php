@@ -58,7 +58,7 @@ class Analyzer extends TestCase {
         chdir($EXAKAT_PATH);
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
-
+        
         $themes = new Themes("$EXAKAT_PATH/data/analyzers.sqlite", 
                              new AutoloadExt('')
                             );
@@ -74,6 +74,10 @@ class Analyzer extends TestCase {
         require("exp/$file.php");
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
+        if (empty($config->$versionPHP)) {
+            $versionPHP = 'php'.PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+        }
+
         $res = shell_exec("{$config->$versionPHP} -l $TEST_PATH/source/$file.php 2>/dev/null");
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');

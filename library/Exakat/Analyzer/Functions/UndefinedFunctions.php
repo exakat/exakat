@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\IsNotIgnored;
 
 class UndefinedFunctions extends Analyzer {
     public function dependsOn() {
@@ -38,7 +39,8 @@ class UndefinedFunctions extends Analyzer {
              ->atomIs('Name')
              ->inIs('NAME')
              ->analyzerIsNot('Functions/IsExtFunction')
-             ->hasNoFunctionDefinition();
+             ->hasNoFunctionDefinition()
+             ->isNotIgnored(IsNotIgnored::IGNORED_FUNCTIONS);
         $this->prepareQuery();
     }
 }

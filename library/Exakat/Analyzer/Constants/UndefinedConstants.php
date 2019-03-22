@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Constants;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\isNotIgnored;
 
 class UndefinedConstants extends Analyzer {
     public function dependsOn() {
@@ -40,6 +41,7 @@ class UndefinedConstants extends Analyzer {
              ->analyzerIsNot('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
              ->analyzerIsNot('Constants/IsExtConstant')
+             ->isNotIgnored(IsNotIgnored::IGNORED_CONSTANTS)
              ->hasNoParent('Declare', array('LEFT', 'ARGUMENT'));
         $this->prepareQuery();
     }

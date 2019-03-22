@@ -23,6 +23,16 @@ Label : PROJECT
               8
               Label : DEFAULT
                 10
+              Label : DEFINITION
+                21
+                Label : MEMBER
+                  9
+                Label : OBJECT
+                  19
+                  Label : CODE
+                    20
+                    Label : NEW
+                      6
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -37,6 +47,20 @@ Label : PROJECT
                 15
                 Label : RETURN
                   16
+            Label : DEFINITION
+              21
+              Label : METHOD
+                9
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  9
+              Label : OBJECT
+                19
+                Label : CODE
+                  20
+                  Label : NEW
+                    11
             Label : NAME
               9
           Label : NAME

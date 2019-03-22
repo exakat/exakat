@@ -8,9 +8,9 @@ $expected     = array('$a',
                       '$d',
                       '$c',
                       '$GLOBALS',
-                      '\'G\'',
-                      '\'H\'',
-                      '\'J\'',
+                      '$GLOBALS[\'G\']', 
+                      '$GLOBALS[\'J\']', 
+                      '$GLOBALS[\'H\']'
                      );
 
 $expected_not = array('$z',

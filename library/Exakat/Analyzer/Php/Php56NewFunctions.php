@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php56NewFunctions extends FunctionDefinition {
-    protected $phpVersion = '5.6-';
-    
     public function analyze() {
         $this->functions = array(
 'gmp_root',

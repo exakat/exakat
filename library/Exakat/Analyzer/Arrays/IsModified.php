@@ -72,7 +72,7 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+        $this->atomIs(self::$CALLS)
              ->hasIn('DEFINITION')
              ->hasNoIn('METHOD') // possibly new too
              ->outIsIE('METHOD')

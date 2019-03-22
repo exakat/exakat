@@ -241,6 +241,39 @@ It seems that !! is almost superfluous, as a property called 'is_deleted' should
                     $this->_eventController->createRecurException($exception, !!$exception->is_deleted);
                 }
 
+include_once() Usage
+====================
+
+.. _xoops-structures-onceusage:
+
+XOOPS
+^^^^^
+
+:ref:`include\_once()-usage`, in /htdocs/xoops_lib/modules/protector/admin/center.php:5. 
+
+Loading() classes should be down with autoload(). autload() may be build in several distinct functions, using spl_autoload_register().
+
+.. code-block:: php
+
+    require_once dirname(__DIR__) . 'class/gtickets.php'
+
+
+--------
+
+
+.. _tikiwiki-structures-onceusage:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`include\_once()-usage`, in tiki-mytiki_shared.php :140. 
+
+Turn the code from tiki-mytiki_shared.php into a function or a method, and call it when needed. 
+
+.. code-block:: php
+
+    include_once('tiki-mytiki_shared.php');
+
 Strpos()-like Comparison
 ========================
 
@@ -302,6 +335,52 @@ preg_match is used here to identify files with a forbidden extension. The actual
                         );
                 }
             }
+
+var_dump()... Usage
+===================
+
+.. _tine20-structures-vardumpusage:
+
+Tine20
+^^^^^^
+
+:ref:`var\_dump()...-usage`, in tine20/library/Ajam/Connection.php:122. 
+
+Two usage of var_dump(). They are protected by configuration, since the debug property must be set to 'true'. Yet, it is safer to avoid them altogether, and log the information to an external file.
+
+.. code-block:: php
+
+    if($this->debug === true) {
+                var_dump($this->getLastRequest());
+                var_dump($response);
+            }
+
+
+--------
+
+
+.. _piwigo-structures-vardumpusage:
+
+Piwigo
+^^^^^^
+
+:ref:`var\_dump()...-usage`, in include/ws_core.inc.php:273. 
+
+This is a hidden debug system : when the response format is not available, the whole object is dumped in the output.
+
+.. code-block:: php
+
+    function run()
+      {
+        if ( is_null($this->_responseEncoder) )
+        {
+          set_status_header(400);
+          @header("Content-Type: text/plain");
+          echo ("Cannot process your request. Unknown response format.
+    Request format: ".@$this->_requestFormat." Response format: ".@$this->_responseFormat."\n");
+          var_export($this);
+          die(0);
+        }
 
 Empty Function
 ==============
@@ -1028,6 +1107,47 @@ The default case is actually processed after the switch, by the next if/then str
             return '';
         }
 
+$this Belongs To Classes Or Traits
+==================================
+
+.. _openemr-classes-thisisforclasses:
+
+OpenEMR
+^^^^^^^
+
+:ref:`$this-belongs-to-classes-or-traits`, in ccr/display.php:24. 
+
+$this is used to call the document_upload_download_log() method, although this piece of code is not part of a class, nor is included in a class.
+
+.. code-block:: php
+
+    <?php 
+    require_once(dirname(__FILE__) . "/../interface/globals.php");
+    
+    $type = $_GET['type'];
+    $document_id = $_GET['doc_id'];
+    $d = new Document($document_id);
+    $url =  $d->get_url();
+    $storagemethod = $d->get_storagemethod();
+    $couch_docid = $d->get_couch_docid();
+    $couch_revid = $d->get_couch_revid();
+    
+    if ($couch_docid && $couch_revid) {
+        $couch = new CouchDB();
+        $data = array($GLOBALS['couchdb_dbase'],$couch_docid);
+        $resp = $couch->retrieve_doc($data);
+        $xml = base64_decode($resp->data);
+        if ($content=='' && $GLOBALS['couchdb_log']==1) {
+            $log_content = date('Y-m-d H:i:s')." ==> Retrieving document\r\n";
+            $log_content = date('Y-m-d H:i:s')." ==> URL: ".$url."\r\n";
+            $log_content .= date('Y-m-d H:i:s')." ==> CouchDB Document Id: ".$couch_docid."\r\n";
+            $log_content .= date('Y-m-d H:i:s')." ==> CouchDB Revision Id: ".$couch_revid."\r\n";
+            $log_content .= date('Y-m-d H:i:s')." ==> Failed to fetch document content from CouchDB.\r\n";
+            //$log_content .= date('Y-m-d H:i:s')." ==> Will try to download file from HardDisk if exists.\r\n\r\n";
+            $this->document_upload_download_log($d->get_foreign_id(), $log_content);
+            die(xlt("File retrieval from CouchDB failed"));
+        }
+
 Nested Ternary
 ==============
 
@@ -1430,6 +1550,39 @@ $a is never reused again. $b, on the other hand is. Not assigning any value to $
 .. code-block:: php
 
     list($b, $a) = array(reset($params->me), key($params->me));
+
+Or Die
+======
+
+.. _tine20-structures-ordie:
+
+Tine20
+^^^^^^
+
+:ref:`or-die`, in scripts/addgrant.php:34. 
+
+Typical error handling, which also displays the MySQL error message, and leaks informations about the system. One may also note that mysql_connect is not supported anymore, and was replaced with mysqli_ and pdo : this may be a backward compatibile file.
+
+.. code-block:: php
+
+    $link = mysql_connect($host, $user, $pass) or die("No connection: " . mysql_error( ))
+
+
+--------
+
+
+.. _openconf-structures-ordie:
+
+OpenConf
+^^^^^^^^
+
+:ref:`or-die`, in openconf/chair/export.inc:143. 
+
+or die() is also applied to many situations, where a blocking situation arise. Here, with the creation of a temporary file.
+
+.. code-block:: php
+
+    $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
 Useless Return
 ==============
@@ -2004,6 +2157,22 @@ Here, $template is modified, when its properties are modified. When only the pro
             $cacheid = $this->generateCacheId('blk_' . $xobject->getVar('bid'));
     // more code to the end of the method
 
+Lost References
+===============
+
+.. _wordpress-variables-lostreferences:
+
+WordPress
+^^^^^^^^^
+
+:ref:`lost-references`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 Useless Global
 ==============
 
@@ -2038,6 +2207,27 @@ It is hard to spot that $generY is useless, but this is the only occurrence wher
 
     function calculate_ancestor($pers) {
     global $db_functions, $reltext, $sexe, $sexe2, $spouse, $special_spouseY, $language, $ancestortext, $dutchtext, $selected_language, $spantext, $generY, $foundY_nr, $rel_arrayY;
+
+Preprocessable
+==============
+
+.. _phpadsnew-structures-shouldpreprocess:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`preprocessable`, in phpAdsNew-2.0/adview.php:302. 
+
+Each call to chr() may be done before. First, chr() may be replace with the hexadecimal sequence "0x3B"; Secondly, 0x3b is a rather long replacement for a simple semi-colon. The whole pragraph could be stored in a separate file, for easier modifications. 
+
+.. code-block:: php
+
+    echo chr(0x47).chr(0x49).chr(0x46).chr(0x38).chr(0x39).chr(0x61).chr(0x01).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x80).chr(0x00).chr(0x00).chr(0x04).chr(0x02).chr(0x04).
+    		 	 chr(0x00).chr(0x00).chr(0x00).chr(0x21).chr(0xF9).chr(0x04).chr(0x01).chr(0x00).
+    		     chr(0x00).chr(0x00).chr(0x00).chr(0x2C).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x01).chr(0x00).chr(0x00).chr(0x02).chr(0x02).chr(0x44).
+    		     chr(0x01).chr(0x00).chr(0x3B);
 
 Useless Unset
 =============
@@ -2408,6 +2598,90 @@ One example where code review reports errors where unit tests don't : array_mult
 
     array_multisort($order, SORT_NUMERIC, SORT_DESC, $this->results)
 
+Assign Default To Properties
+============================
+
+.. _livezilla-classes-makedefault:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`assign-default-to-properties`, in livezilla/_lib/functions.external.inc.php:174. 
+
+Flags may default to array() in the class definition. Filled array(), with keys and values, are also possible. 
+
+.. code-block:: php
+
+    class OverlayChat
+    {
+        public $Botmode;
+        public $Human;
+        public $HumanGeneral;
+        public $RepollRequired;
+        public $OperatorCount;
+        public $Flags;
+        public $LastMessageReceived;
+        public $LastPostReceived;
+        public $IsHumanChatAvailable;
+        public $IsChatAvailable;
+        public $ChatHTML;
+        public $OverlayHTML;
+        public $PostHTML;
+        public $FullLoad;
+        public $LanguageRequired = false;
+        public $LastPoster;
+        public $EyeCatcher;
+        public $GroupBuilder;
+        public $CurrentOperatorId;
+        public $BotTitle;
+        public $OperatorPostCount;
+        public $PlaySound;
+        public $SpeakingToHTML;
+        public $SpeakingToAdded;
+        public $Version = 1;
+    
+        public static $MaxPosts = 50;
+        public static $Response;
+    
+        function __construct()
+        {
+            $this->Flags = array();
+            VisitorChat::$Router = new ChatRouter();
+        }
+
+
+--------
+
+
+.. _phpmyadmin-classes-makedefault:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`assign-default-to-properties`, in libraries/classes/Console.ph:55. 
+
+_isEnabled may default to true. It could also default to a class constant.
+
+.. code-block:: php
+
+    class Console
+    {
+        /**
+         * Whether to display anything
+         *
+         * @access private
+         * @var bool
+         */
+        private $_isEnabled;
+    
+    // some code ignored here
+        /**
+         * Creates a new class instance
+         */
+        public function __construct()
+        {
+            $this->_isEnabled = true;
+
 Echo With Concat
 ================
 
@@ -2743,6 +3017,26 @@ var2js() acts as an alternative for json_encode(). Yet, it used to be directly c
     		return var2js($v);
     	}
     }
+
+Silently Cast Integer
+=====================
+
+.. _mediawiki-type-silentlycastinteger:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`silently-cast-integer`, in includes/debug/logger/monolog/AvroFormatter.php:167. 
+
+Too many ff in the masks. 
+
+.. code-block:: php
+
+    private function encodeLong( $id ) {
+    		$high   = ( $id & 0xffffffff00000000 ) >> 32;
+    		$low    = $id & 0x00000000ffffffff;
+    		return pack( 'NN', $high, $low );
+    	}
 
 Timestamp Difference
 ====================
@@ -3415,6 +3709,25 @@ In this code, ``is_object()`` is used to check the status of the order. Possibly
         // more code
     }
 
+Always Positive Comparison
+==========================
+
+.. _magento-structures-nevernegative:
+
+Magento
+^^^^^^^
+
+:ref:`always-positive-comparison`, in app/code/core/Mage/Dataflow/Model/Profile.php:85. 
+
+strlen(($actiosXML) will never be negative, and hence, is always false. This exception is never thrown. 
+
+.. code-block:: php
+
+    if (strlen($actionsXML) < 0 &&
+            @simplexml_load_string('<data>' . $actionsXML . '</data>', null, LIBXML_NOERROR) === false) {
+                Mage::throwException(Mage::helper('dataflow')->__("Actions XML is not valid."));
+            }
+
 Empty Blocks
 ============
 
@@ -3467,6 +3780,70 @@ The ``then`` block is empty and commented : yet, it may have been clearer to mak
     
     	# length > 4 and < 12
     	if( (mb_strlen($_POST['name']) < 2) || (mb_strlen($_POST['name']) > 24) ) 	{ $errors[] = _('Name must be between 4 and 24 characters'); }
+
+Hidden Use Expression
+=====================
+
+.. _tikiwiki-namespaces-hiddenuse:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`hidden-use-expression`, in /lib/core/Tiki/Command/DailyReportSendCommand.php:17. 
+
+Sneaky error_reporting, hidden among the use calls. 
+
+.. code-block:: php
+
+    namespace Tiki\Command;
+    
+    use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Input\InputArgument;
+    use Symfony\Component\Console\Input\InputInterface;
+    use Symfony\Component\Console\Input\InputOption;
+    use Symfony\Component\Console\Output\OutputInterface;
+    error_reporting(E_ALL);
+    use TikiLib;
+    use Reports_Factory;
+
+
+--------
+
+
+.. _openemr-namespaces-hiddenuse:
+
+OpenEMR
+^^^^^^^
+
+:ref:`hidden-use-expression`, in interface/patient_file/summary/browse.php:23. 
+
+Use expression is only reached when the csrf token is checked. This probably save some CPU when no csrf is available, but it breaks the readability of the file.
+
+.. code-block:: php
+
+    <?php
+    /**
+     * Patient selector for insurance gui
+     *
+     * @package   OpenEMR
+     * @link      http://www.open-emr.org
+     * @author    Brady Miller <brady.g.miller@gmail.com>
+     * @copyright Copyright (c) 2018 Brady Miller <brady.g.miller@gmail.com>
+     * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
+     */
+    
+    
+    require_once(../../globals.php);
+    require_once($srcdir/patient.inc);
+    require_once($srcdir/options.inc.php);
+    
+    if (!empty($_POST)) {
+        if (!verifyCsrfToken($_POST[csrf_token_form])) {
+            csrfNotVerified();
+        }
+    }
+    
+    use OpenEMR\Core\Header;
 
 Multiple Alias Definitions
 ==========================
@@ -3880,7 +4257,7 @@ No Boolean As Default
 
 .. _openconf-functions-nobooleanasdefault:
 
-Openconf
+OpenConf
 ^^^^^^^^
 
 :ref:`no-boolean-as-default`, in openconf/include.php:1264. 
@@ -3936,6 +4313,52 @@ $sss is the end-result of a progression, from $subsections (3s) to $ss to $sss. 
     			//count all addresses that will be deleted!
     			$ipcnt = $Addresses->count_addresses_in_multiple_subnets($out);
     		}
+
+Missing Cases In Switch
+=======================
+
+.. _tikiwiki-structures-missingcases:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`missing-cases-in-switch`, in lib/articles/artlib.php:1075. 
+
+This switch handles 3 cases, plus the default for all others. There are other switch structures which also handle the '' case. There may be a missing case here. In particular, projects/tikiwiki/code//article_image.php host another switch with the same case, plus another 'topic' case.
+
+.. code-block:: php
+
+    switch ($image_type) {
+    			case 'article':
+    				$image_cache_prefix = 'article';
+    				break;
+    			case 'submission':
+    				$image_cache_prefix = 'article_submission';
+    				break;
+    			case 'preview':
+    				$image_cache_prefix = 'article_preview';
+    				break;
+    			default:
+    				return false;
+    		}
+
+No Class In Global
+==================
+
+.. _dolphin-php-noclassinglobal:
+
+Dolphin
+^^^^^^^
+
+:ref:`no-class-in-global`, in Dolphin-v.7.3.5/inc/classes/BxDolXml.php:10. 
+
+This class should be put away in a 'dolphin' or 'boonex' namespace.
+
+.. code-block:: php
+
+    class BxDolXml { 
+        /* class BxDolXML code */ 
+    }
 
 Suspicious Comparison
 =====================
@@ -4076,6 +4499,46 @@ This is sneaky bug : the assignation $status = 0 returns a value, and not a vari
 .. code-block:: php
 
     pcntl_waitpid($this->pid, $status = 0)
+
+No Class As Typehint
+====================
+
+.. _vanilla-functions-noclassastypehint:
+
+Vanilla
+^^^^^^^
+
+:ref:`no-class-as-typehint`, in library/Vanilla/Formatting/Formats/RichFormat.php:51. 
+
+All three typehints are based on classes. When Parser or Renderer are changed, for testing, versioning or moduling reasons, they must subclass the original class. 
+
+.. code-block:: php
+
+    public function __construct(Quill\Parser $parser, Quill\Renderer $renderer, Quill\Filterer $filterer) {
+            $this->parser = $parser;
+            $this->renderer = $renderer;
+            $this->filterer = $filterer;
+        }
+
+
+--------
+
+
+.. _phpmyadmin-functions-noclassastypehint:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`no-class-as-typehint`, in libraries/classes/CreateAddField.php:29. 
+
+Although the class is named 'DatabaseInterface', it is a class.
+
+.. code-block:: php
+
+    public function __construct(DatabaseInterface $dbi)
+        {
+            $this->dbi = $dbi;
+        }
 
 No Return Used
 ==============
@@ -4250,6 +4713,43 @@ Classic address class, with every details. May be even shorter than expected.
             $this->country = $country;
             $this->state = $state;
         }
+
+@ Operator
+==========
+
+.. _phinx-structures-noscream:
+
+Phinx
+^^^^^
+
+:ref:`@-operator`, in src/Phinx/Util/Util.php:239. 
+
+fopen() may be tested for existence, readability before using it. Although, it actually emits some errors on Windows, with network volumes.
+
+.. code-block:: php
+
+    $isReadable = @\fopen($filePath, 'r') !== false;
+    
+            if (!$filePath || !$isReadable) {
+                throw new \Exception(sprintf(Cannot open file %s \n, $filename));
+            }
+
+
+--------
+
+
+.. _phpipam-structures-noscream:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`@-operator`, in functions/classes/class.Log.php:322. 
+
+Variable and index existence should always be tested with isset() : it is faster than using ``@``.
+
+.. code-block:: php
+
+    $_SESSION['ipamusername']
 
 Mismatched Ternary Alternatives
 ===============================
@@ -4857,6 +5357,22 @@ This code prepares incoming '$values' for extraction. The keys are cleaned then 
                         $key = strtr($key, '=', '');
                         $key = strtr($key, ',', ';');
                         $keys = explode(';', $key);
+
+Cant Instantiate Class
+======================
+
+.. _wordpress-classes-cantinstantiateclass:
+
+WordPress
+^^^^^^^^^
+
+:ref:`cant-instantiate-class`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 strpos() Too Much
 =================
@@ -5622,6 +6138,22 @@ Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
             return $pathinfo['extension'];
         }
 
+Substring First
+===============
+
+.. _prestashop-performances-substrfirst:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`substring-first`, in admin-dev/filemanager/include/utils.php:197. 
+
+dirname() reduces the string (or at least, keeps it the same size), so it more efficient to have it first.
+
+.. code-block:: php
+
+    dirname(str_replace(' ', '~', $str))
+
 Slice Arrays First
 ==================
 
@@ -5916,6 +6448,26 @@ An actual phpinfo(), available during installation. Note that the phpinfo() is a
     
     </center>
 
+Could Return Void
+=================
+
+.. _wordpress-functions-couldreturnvoid:
+
+WordPress
+^^^^^^^^^
+
+:ref:`could-return-void`, in wp-admin/includes/misc.php:74. 
+
+In fact, RunQuery returns a boolean, which should be also returned here. No Void needed if the last called method is not returning void too.
+
+.. code-block:: php
+
+    function RemoveVolunteerOpportunity($iPersonID, $iVolID)
+    {
+        $sSQL = 'DELETE FROM person2volunteeropp_p2vo WHERE p2vo_per_ID = '.$iPersonID.' AND p2vo_vol_ID = '.$iVolID;
+        RunQuery($sSQL);
+    }
+
 Isset Multiple Arguments
 ========================
 
@@ -6020,6 +6572,22 @@ The test on $pid may be directly done on $treeid[$sosa][0]. The distance between
     			if($sosa>=32 AND $fandeg!=180) { $fontpx=$fontsize-1; }
     			if (!empty($pid)) {
 
+Could Use Compact
+=================
+
+.. _wordpress-structures-couldusecompact:
+
+WordPress
+^^^^^^^^^
+
+:ref:`could-use-compact`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 Could Use array_fill_keys
 =========================
 
@@ -6063,6 +6631,27 @@ Even when the initialization is mixed with other operations, it is a good idea t
     						}
     					}
     				}
+
+Should Preprocess Chr
+=====================
+
+.. _phpadsnew-php-shouldpreprocess:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`should-preprocess-chr`, in phpAdsNew-2.0/adview.php:302. 
+
+Each call to chr() may be done before. First, chr() may be replace with the hexadecimal sequence "0x3B"; Secondly, 0x3b is a rather long replacement for a simple semi-colon. The whole pragraph could be stored in a separate file, for easier modifications. 
+
+.. code-block:: php
+
+    echo chr(0x47).chr(0x49).chr(0x46).chr(0x38).chr(0x39).chr(0x61).chr(0x01).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x80).chr(0x00).chr(0x00).chr(0x04).chr(0x02).chr(0x04).
+    		 	 chr(0x00).chr(0x00).chr(0x00).chr(0x21).chr(0xF9).chr(0x04).chr(0x01).chr(0x00).
+    		     chr(0x00).chr(0x00).chr(0x00).chr(0x2C).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    		     chr(0x01).chr(0x00).chr(0x01).chr(0x00).chr(0x00).chr(0x02).chr(0x02).chr(0x44).
+    		     chr(0x01).chr(0x00).chr(0x3B);
 
 Drop Substr Last Arg
 ====================
@@ -6262,6 +6851,30 @@ $override should an an array : if not, it is actually set by default to empty ar
     	}
     	return( $override );
     }
+
+Could Be Static Closure
+=======================
+
+.. _piwigo-functions-couldbestaticclosure:
+
+Piwigo
+^^^^^^
+
+:ref:`could-be-static-closure`, in include/ws_core.inc.php:620. 
+
+The closure function($m) makes no usage of the current object : using static prevents $this to be forwarded with the closure.
+
+.. code-block:: php
+
+    /**
+       * WS reflection method implementation: lists all available methods
+       */
+      static function ws_getMethodList($params, &$service)
+      {
+        $methods = array_filter($service->_methods,
+          function($m) { return empty($m["options"]["hidden"]) || !$m["options"]["hidden"];} );
+        return array('methods' => new PwgNamedArray( array_keys($methods),'method' ) );
+      }
 
 Could Be Typehinted Callable
 ============================
@@ -6478,5 +7091,48 @@ WebDav uses Sharing, and Sharing uses Webdav. Once using the other is sufficient
         
     }
     //Trait Sharing is in /build/integration/features/bootstrap/Sharing.php:36
+
+Inconsistent Usage
+==================
+
+.. _wordpress-variables-inconsistentusage:
+
+WordPress
+^^^^^^^^^
+
+:ref:`inconsistent-usage`, in wp-includes/IXR/class-IXR-client.php:86. 
+
+$request is used successively as an object (IXR_Request), then as a string (The POST). Separatring both usage with different names will help readability.
+
+.. code-block:: php
+
+    $request = new IXR_Request($method, $args);
+            $length = $request->getLength();
+            $xml = $request->getXml();
+            $r = "\r\n";
+            $request  = "POST {$this->path} HTTP/1.0$r";
+
+Function Subscripting, Old Style
+================================
+
+.. _openconf-structures-functionpresubscripting:
+
+OpenConf
+^^^^^^^^
+
+:ref:`function-subscripting,-old-style`, in openconf/include.php:1469. 
+
+Here, $advocateid may be directly read from ocsql_fetch_assoc(), although, checking for the existence of 'advocateid' before accessing it would make the code more robust
+
+.. code-block:: php
+
+    $advocateid = false;
+    	if (isset($GLOBALS['OC_configAR']['OC_paperAdvocates']) && $GLOBALS['OC_configAR']['OC_paperAdvocates']) {
+    		$ar = ocsql_query(SELECT `advocateid` FROM ` . OCC_TABLE_PAPERADVOCATE . ` WHERE `paperid`=' . safeSQLstr($pid) . ') or err('Unable to retrieve advocate');
+    		if (ocsql_num_rows($ar) == 1) {
+    			$al = ocsql_fetch_assoc($ar);
+    			$advocateid = $al['advocateid'];
+    		}
+    	}
 
 

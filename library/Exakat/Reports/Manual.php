@@ -430,11 +430,7 @@ class Manual extends Reports {
             return '';
         }
         
-        foreach($list as &$l) {
-            sort($l);
-        }
-        
-        
+        array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
         $this->summary['Structures'][] = '[Exception Tree](#exception-tree)';

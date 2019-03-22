@@ -1,9 +1,26 @@
 <?php
 
+abstract class NoAbstractMethods{
+    public function foo() {
+        $this->undefinedp = 3;
+    }
+}
+
+abstract class WithUndefined{
+    private $b = 2;
+    static function foo() {
+        $this->undefinedp = 3;
+    }
+}
+
 abstract class NoMethods{
     private $b = 2;
-     function foo() {}
+    function foo() {
+        $this->undefinedp = 3;
+    }
 }
+
+
 class NoMethods2 extends NoMethods {}
 
 abstract class OneMethod{

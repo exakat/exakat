@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$HTTP_RAW_POST_DATA',
-                      '$_SERVER[\'QUERY_STRING\']',
-                      '$_SERVER[\'PHP_SELF\']',
+$expected     = array('f2($HTTP_RAW_POST_DATA, $http_raw_post_data)',
+                      'f3($_SERVER[\'DOCUMENT_ROOT\'], $_SERVER[\'QUERY_STRING\'])',
+                      'f4($_SERVER[\'DOCUMENT_ROOT\'], $_SERVER[\'PHP_SELF\'])',
                      );
 
 $expected_not = array('$_SERVER[\'DOCUMENT_ROOT\']',

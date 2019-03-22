@@ -12,20 +12,6 @@ Label : PROJECT
   Label : DEFINITION
     6
     Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
-    6
-    Label : DEFINITION
       15
     Label : DEFINITION
       15

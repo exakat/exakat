@@ -75,10 +75,6 @@ Label : PROJECT
             12
             Label : DEFINITION
               22
-          Label : DEFINITION
-            12
-            Label : DEFINITION
-              24
           Label : NAME
             5
           Label : RETURNED

@@ -20,19 +20,19 @@ Label : PROJECT
               Label : NAME
                 10
             Label : EXPRESSION
-              16
+              15
               Label : METHOD
-                14
+                13
                 Label : ARGUMENT
                   7
                 Label : NAME
-                  14
+                  13
               Label : OBJECT
                 12
             Label : EXPRESSION
               18
               Label : LEFT
-                17
+                16
               Label : RIGHT
                 19
                 Label : ARGUMENT
@@ -48,7 +48,7 @@ Label : PROJECT
             Label : EXPRESSION
               18
               Label : LEFT
-                17
+                16
               Label : RIGHT
                 23
                 Label : ARGUMENT
@@ -56,7 +56,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   27
                 Label : ARGUMENT
-                  17
+                  16
                 Label : NAME
                   23
             Label : EXPRESSION
@@ -64,25 +64,21 @@ Label : PROJECT
             Label : EXPRESSION
               31
               Label : ARGUMENT
-                17
+                16
             Label : EXPRESSION
               32
             Label : EXPRESSION
               34
           Label : DEFINITION
-            13
+            17
             Label : DEFINITION
-              12
-          Label : DEFINITION
-            13
+              16
             Label : DEFINITION
-              17
+              16
             Label : DEFINITION
-              17
+              16
             Label : DEFINITION
-              17
-            Label : DEFINITION
-              17
+              16
           Label : NAME
             5
         Label : EXPRESSION

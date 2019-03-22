@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Exceptions;
-use Exceptions\WrongNumberOfColsForAHash;
-use Exceptions\NoStructureForTable;
+use Exakat\Exceptions\WrongNumberOfColsForAHash;
+use Exakat\Exceptions\NoStructureForTable;
 
 class Datastore {
     protected $sqliteRead = null;
@@ -68,6 +68,12 @@ class Datastore {
 
         if ($create === self::CREATE) {
             $this->cleanTable('hash');
+            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
+                                        'exakat_build'         => Exakat::BUILD,
+                                        'datastore_creation'   => date('r', time()),
+                                        'project'              => $config->project,
+                                        ));
+
             $this->cleanTable('hashAnalyzer');
             $this->cleanTable('analyzed');
             $this->cleanTable('tokenCounts');
@@ -81,11 +87,9 @@ class Datastore {
             $this->cleanTable('dictionary');
             $this->cleanTable('linediff');
 
-            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
-                                        'exakat_build'         => Exakat::BUILD,
-                                        'datastore_creation'   => date('r', time()),
-                                        'project'              => $config->project,
-                                        ));
+            $this->cleanTable('ignoredCit');
+            $this->cleanTable('ignoredFunctions');
+            $this->cleanTable('ignoredConstants');
         }
     }
 
@@ -463,6 +467,38 @@ CREATE TABLE linediff (
   line INTEGER,
   diff INTEGER
 );
+SQLITE;
+                break;
+
+            case 'ignoredCit' :
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredCit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           name TEXT,
+                           fullnspath TEXT,
+                           fullcode TEXT,
+                           type TEXT
+                )
+SQLITE;
+                break;
+
+            case 'ignoredFunctions' :
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredFunctions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 name TEXT,
+                                 fullnspath TEXT,
+                                 fullcode TEXT
+                )
+SQLITE;
+                break;
+
+            case 'ignoredConstants' :
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredConstants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 name TEXT,
+                                 fullnspath TEXT,
+                                 fullcode TEXT,
+                                 value TEXT
+                )
 SQLITE;
                 break;
 
