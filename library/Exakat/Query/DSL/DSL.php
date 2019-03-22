@@ -92,11 +92,13 @@ abstract class DSL {
     protected $availableLabels        = array(); // This one is per query
     protected $dictCode               = null;
     protected $ignoredcit             = null;
+    protected $ignoredfunctions       = null;
+    protected $ignoredconstants       = null;
 
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
 
-    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables, &$availableLabels, $ignoredcit) {
+    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables, &$availableLabels, $ignoredcit, $ignoredfunctions, $ignoredconstants) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = $dictCode;
         $this->availableAtoms         = $availableAtoms;
@@ -105,6 +107,8 @@ abstract class DSL {
         $this->availableVariables     = &$availableVariables;
         $this->availableLabels        = &$availableLabels;
         $this->ignoredcit             = $ignoredcit;
+        $this->ignoredfunctions       = $ignoredfunctions;
+        $this->ignoredconstants       = $ignoredconstants;
 
         if (empty(self::$linksDown)) {
             self::$linksDown = GraphElements::linksAsList();

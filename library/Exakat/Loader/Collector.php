@@ -27,6 +27,8 @@ use Exakat\Datastore;
 
 class Collector extends Loader {
     private $cit        = array();
+    private $functions  = array();
+    private $constants  = array();
 
     private $datastore = null;
 
@@ -36,6 +38,8 @@ class Collector extends Loader {
     
     public function finalize() {
         $this->datastore->addRow('ignoredCit', $this->cit);
+        $this->datastore->addRow('ignoredFunctions', $this->functions);
+        $this->datastore->addRow('ignoredConstants', $this->constants);
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) { 
@@ -46,7 +50,36 @@ class Collector extends Loader {
                                      'fullcode'    => $atom->fullcode,
                                      'type'        => strtolower($atom->atom),
                               );
+                continue;
             }
+
+            if (in_array($atom->atom, array('Function'))) {
+                $this->functions[] = array('name'        => $atom->fullcode,
+                                           'fullnspath'  => $atom->fullnspath,
+                                           'fullcode'    => $atom->fullcode
+                              );
+                continue;
+            }
+
+            if (in_array($atom->atom, array('Const'))) {
+                $this->constants[] = array('name'        => $atom->fullcode,
+                                           'fullnspath'  => $atom->fullnspath,
+                                           'fullcode'    => $atom->fullcode,
+                                           'value'       => strtolower($atom->atom),
+                              );
+                continue;
+            }
+
+            if (in_array($atom->atom, array('Defineconstant'))) {
+                $this->constants[] = array('name'        => $atom->fullcode,
+                                           'fullnspath'  => $atom->fullnspath,
+                                           'fullcode'    => $atom->fullcode,
+                                           'value'       => strtolower($atom->atom),
+                              );
+                continue;
+            }
+
+
         }
     }
 

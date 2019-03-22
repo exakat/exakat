@@ -64,7 +64,10 @@ class DSLFactory {
 
             $this->availableFunctioncalls = $datastore->getCol('functioncalls', 'functioncall');
             
-            $this->ignoredcit = $datastore->getCol('ignoredcit', 'fullnspath');
+            $this->ignoredcit       = $datastore->getCol('ignoredcit', 'fullnspath');
+            $this->ignoredfunctions = $datastore->getCol('ignoredfunctions', 'fullnspath');
+            $this->ignoredconstants = $datastore->getCol('ignoredconstants', 'fullnspath');
+            
         }
     }
 
@@ -86,7 +89,9 @@ class DSLFactory {
                               $this->availableFunctioncalls, 
                               $this->availableVariables, 
                               $this->availableLabels,
-                              $this->ignoredcit
+                              $this->ignoredcit,
+                              $this->ignoredfunctions,
+                              $this->ignoredconstants
                               );
     }
 }

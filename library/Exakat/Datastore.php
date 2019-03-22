@@ -88,6 +88,8 @@ class Datastore {
             $this->cleanTable('linediff');
 
             $this->cleanTable('ignoredCit');
+            $this->cleanTable('ignoredFunctions');
+            $this->cleanTable('ignoredConstants');
         }
     }
 
@@ -475,6 +477,27 @@ CREATE TABLE ignoredCit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            fullnspath TEXT,
                            fullcode TEXT,
                            type TEXT
+                )
+SQLITE;
+                break;
+
+            case 'ignoredFunctions' :
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredFunctions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 name TEXT,
+                                 fullnspath TEXT,
+                                 fullcode TEXT
+                )
+SQLITE;
+                break;
+
+            case 'ignoredConstants' :
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredConstants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 name TEXT,
+                                 fullnspath TEXT,
+                                 fullcode TEXT,
+                                 value TEXT
                 )
 SQLITE;
                 break;
