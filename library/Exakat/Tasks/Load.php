@@ -3980,7 +3980,27 @@ class Load extends Tasks {
         return $namespace;
     }
 
-    private function processAs() {
+    private function processAlias($useType) {
+        $current = $this->id;
+        $as = $this->addAtom('As');
+
+        $left = $this->popExpression();
+        $this->addLink($as, $left, 'NAME');
+
+        $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+        $right->fullnspath = '\\'.mb_strtolower($right->code);
+        $this->addLink($as, $right, 'AS');
+
+        $as->code     = $this->tokens[$current][1];
+        $as->fullcode = $left->fullcode.' '.$this->tokens[$this->id - 1][1].' '.$right->fullcode;
+        $as->token    = $this->getToken($this->tokens[$current][0]);
+
+        $alias = $this->addNamespaceUse($left, $as, $useType, $as);
+
+        return $as;
+    }
+
+    private function processAsTrait() {
         $current = $this->id;
         $as = $this->addAtom('As');
 
@@ -4092,9 +4112,9 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
                 ++$this->id;
+
                 $this->pushExpression($namespace);
-                $this->processAs();
-                $as = $this->popExpression();
+                $as = $this->processAlias($useType);
                 $as->fullnspath = makeFullNsPath($namespace->fullcode, $useType === 'const');
                 $fullcode[] = $as->fullcode;
                 $as->alias = mb_strtolower(substr($as->fullcode, strrpos($as->fullcode, ' as ') + 4));
@@ -4104,14 +4124,9 @@ class Load extends Tasks {
                 }
                 $this->addLink($use, $as, 'USE');
 
-                if (!$this->contexts->isContext(Context::CONTEXT_CLASS) &&
-                    !$this->contexts->isContext(Context::CONTEXT_TRAIT) ) {
-                    $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
-                }
-
                 $namespace = $as;
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
-                //use A\B\ {} // Prefixes, within a Class/Trait
+                //use A\B\ {} 
                 $this->addLink($use, $namespace, 'GROUPUSE');
                 $prefix = makeFullNsPath($namespace->fullcode);
                 if ($prefix[0] !== '\\') {
@@ -4157,8 +4172,7 @@ class Load extends Tasks {
                             // A\B as C
                             ++$this->id;
                             $this->pushExpression($nsname);
-                            $this->processAs();
-                            $alias = $this->popExpression();
+                            $alias = $this->processAs();
 
                             if ($useType === 'const') {
                                 $nsname->fullnspath = $prefix.$nsname->fullcode;
@@ -4174,7 +4188,6 @@ class Load extends Tasks {
                                 $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
                             }
 
-    
                             $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
                             $alias->alias = $aliasName;
                             $this->addLink($use, $alias, 'USE');
@@ -4189,6 +4202,7 @@ class Load extends Tasks {
                             }
     
                             $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
+
                             $nsname->alias = $alias;
                         }
                     }
@@ -4315,7 +4329,7 @@ class Load extends Tasks {
                 ++$this->id;
                 // instead of ? 
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
-                    $as = $this->processAs();
+                    $as = $this->processAsTrait();
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
                     $as = $this->processInsteadof();
                 } else {
@@ -5805,7 +5819,7 @@ class Load extends Tasks {
         } elseif (in_array($name->atom, array('Boolean', 'Null'), true)) {
             return array('\\'.mb_strtolower($name->fullcode), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Name', 'Newcall'), true)) {
-            if ($name->atom === 'Newcall') {
+            if (in_array($name->atom, array('Newcall', 'Name'))) {
                $fnp = mb_strtolower($name->code);
             } else {
                $fnp = $name->code;
@@ -5815,6 +5829,7 @@ class Load extends Tasks {
             } else {
                 $prefix = substr($fnp, 0, $offset);
             }
+
             // This is an identifier, self or parent
             if ($type === 'class' && isset($this->uses['class'][mb_strtolower($fnp)])) {
                 $this->addLink($name, $this->uses['class'][mb_strtolower($fnp)], 'DEFINITION');
