@@ -85,6 +85,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
+                 ->has('fullnspath')
                  ->isHash('fullnspath', $argsMinsFNP, "$nb")
                  ->back('first');
             $this->prepareQuery();
@@ -122,6 +123,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
+                 ->has('fullnspath')
                  ->isHash('fullnspath', $argsMaxsFNP, "$nb")
                  ->back('first');
             $this->prepareQuery();
