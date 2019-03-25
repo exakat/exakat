@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('class DivisionByZeroError { /**/ } ', 
-                      'class ArithmeticError { /**/ } ', 
-                      'class ParseError { /**/ } ', 
+$expected     = array('class DivisionByZeroError { /**/ } ',
+                      'class ArithmeticError { /**/ } ',
+                      'class ParseError { /**/ } ',
                       'class Error { /**/ } ',
                      );
 

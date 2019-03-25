@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('function trim4(string $f = C ? D : null) { /**/ } ',
-                      'function trim5(string $f = C ? \D : null) { /**/ } ',
+                      'function trim5(string $f = C ? \\D : null) { /**/ } ',
                       'function trim7(string $f = C ? x::F : null) { /**/ } ',
                      );
 

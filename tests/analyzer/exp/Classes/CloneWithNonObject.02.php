@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('clone fooString( )', 
+$expected     = array('clone fooString( )',
                       'clone fooXorNull( )',
                       'clone fooVoid( )',
                      );

@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$len', 
-                      '$array[2]', 
-                      '$len2', 
-                      '$o->m', 
+$expected     = array('$len',
+                      '$array[2]',
+                      '$len2',
+                      '$o->m',
                       'A::C',
                      );
 
