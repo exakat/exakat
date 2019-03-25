@@ -45,6 +45,7 @@ class Collector extends Loader {
     public function saveFiles($exakatDir, $atoms, $links, $id0) { 
         $isDefine = false;
 
+        $lastConst = array();
         foreach($atoms as $atom) {
             if (in_array($atom->atom, array('Class', 'Interface', 'Trait'))) {
                 $this->cit[] = array('name'        => $atom->fullcode,
@@ -82,7 +83,9 @@ class Collector extends Loader {
             }
 
             if (in_array($atom->atom, array('Constant'))) {
-                $this->constants[] = $lastConst;
+                if (!empty($lastConst)) {
+                    $this->constants[] = $lastConst;
+                }
                 $lastConst = array();
                 continue;
             }
