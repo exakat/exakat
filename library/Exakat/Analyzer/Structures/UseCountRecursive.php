@@ -35,11 +35,12 @@ class UseCountRecursive extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\count')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('fullcode', 'blind')
+             ->inIs('ARGUMENT')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Addition')
-             ->outIs(array('LEFT', 'RIGHT'))
-             ->outWithRank('ARGUMENT', 0)
-             ->samePropertyAs('fullcode', 'blind')
+             ->codeIs('+')
              ->back('first');
         $this->prepareQuery();
 
@@ -52,12 +53,12 @@ class UseCountRecursive extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\count')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('fullcode', 'blind')
+             ->inIs('ARGUMENT')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->codeIs('+=')
-             ->outIs('RIGHT')
-             ->outWithRank('ARGUMENT', 0)
-             ->samePropertyAs('fullcode', 'blind')
              ->back('first');
         $this->prepareQuery();
     }
