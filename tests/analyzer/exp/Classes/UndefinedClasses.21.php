@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('new \\d',
+$expected     = array('new d',
                      );
 
 $expected_not = array('new A\\ca',
