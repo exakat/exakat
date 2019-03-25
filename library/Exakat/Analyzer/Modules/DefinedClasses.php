@@ -19,24 +19,24 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-namespace Exakat\Analyzer\Traits;
+
+namespace Exakat\Analyzer\Modules;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\ClassUsage;
 
-class UndefinedTrait extends Analyzer {
-    public function dependsOn() {
-        return array('Modules/DefinedTraits',
-                    );
-    }
+class DefinedClasses extends ClassUsage {
+    protected $classes = array();
 
     public function analyze() {
-        // class x { use t; } // no trait t {}
-        $this->atomIs('Usetrait')
-             ->outIs('USE')
-             ->noTraitDefinition()
-             ->analyzerIsNot('Modules/DefinedTraits')
-             ->isNotIgnored();
-        $this->prepareQuery();
+        $classes = $this->config->ext->loadIni('classes.ini', 'classes');
+        
+        if (empty($classes)) { 
+            return;
+        }
+
+        $this->classes = $classes;
+        return parent::analyze();
     }
 }
 

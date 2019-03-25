@@ -26,24 +26,19 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedClasses extends Analyzer {
-    private $extAnalyzers = array();
     public function dependsOn() {
-        $ext = $this->themes->getInstance('Ext/DefinedClasses', $this->gremlin, $this->config);
-        $this->extAnalyzers = $ext->getAnalyzerList();
-
-        return array_merge(
-                array('Classes/IsExtClass',
+        return  array('Classes/IsExtClass',
                       'Composer/IsComposerNsname',
                       'Interfaces/IsExtInterface',
-                    ),
-                $this->extAnalyzers);
+                      'Modules/DefinedClasses',
+                     );
     }
     
     public function analyze() {
-        $omitted = array_merge(array('Composer/IsComposerNsname',
-                                     'Classes/IsExtClass',
-                                     ),
-                                $this->extAnalyzers);
+        $omitted = array('Composer/IsComposerNsname',
+                         'Classes/IsExtClass',
+                         'Modules/DefinedClasses',
+                         );
 
         $omittedAll = $omitted;
         $omittedAll[] = 'Interfaces/IsExtInterface';
@@ -70,6 +65,7 @@ class UndefinedClasses extends Analyzer {
              ->noTraitDefinition()
              ->back('first');
         $this->prepareQuery();
+
 
         // in a parent::Method()
         $this->atomIs('Staticmethodcall')

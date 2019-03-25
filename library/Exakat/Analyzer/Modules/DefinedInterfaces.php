@@ -19,24 +19,25 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-namespace Exakat\Analyzer\Traits;
+
+namespace Exakat\Analyzer\Modules;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\InterfaceUsage;
 
-class UndefinedTrait extends Analyzer {
-    public function dependsOn() {
-        return array('Modules/DefinedTraits',
-                    );
-    }
+class DefinedInterfaces extends InterfaceUsage {
+    protected $interfaces = array();
 
     public function analyze() {
-        // class x { use t; } // no trait t {}
-        $this->atomIs('Usetrait')
-             ->outIs('USE')
-             ->noTraitDefinition()
-             ->analyzerIsNot('Modules/DefinedTraits')
-             ->isNotIgnored();
-        $this->prepareQuery();
+        $interfaces = $this->config->ext->loadIni('interfaces.ini', 'interfaces');
+
+        print_r($interfaces);
+        if (empty($interfaces)) { 
+            return;
+        }
+        
+        $this->interfaces = $interfaces;
+        return parent::analyze();
     }
 }
 

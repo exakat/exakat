@@ -20,36 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\Ext;
+namespace Exakat\Analyzer\Modules;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\TraitUsage;
 
-class DefinedClasses extends Analyzer {
-    private $analyzerList = array();
+class DefinedTraits extends TraitUsage {
+    protected $traits = array();
 
     public function analyze() {
-        foreach($this->getAnalyzerList() as $analyzer) {
-            $classesUsage = $this->themes->getInstance($analyzer, $this->gremlin, $this->config);
-            $classesUsage->run();
-    
-            $this->rowCount        += $classesUsage->getRowCount();
-            $this->processedCount  += $classesUsage->getProcessedCount();
-            $this->queryCount      += $classesUsage->getQueryCount();
-            $this->rawQueryCount   += $classesUsage->getRawQueryCount();
-        }
-    }
-    
-    public function getAnalyzerList() {
-        foreach($this->config->ext->getPharList() as $phar) {
-            $ext = basename($phar, '.phar');
-            if (class_exists("{$ext}/{$ext}Usage")) {
-                $this->analyzerList[] = "{$ext}/{$ext}Usage";
-            }
+        $traits = $this->config->ext->loadIni('traits.ini', 'traits');
+        
+        if (empty($traits)) { 
+            return;
         }
         
-        return $this->analyzerList;
+        $this->traits = $traits;
+        return parent::analyze();
     }
-
 }
 
 ?>

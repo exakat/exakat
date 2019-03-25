@@ -57,6 +57,8 @@ class Autoload {
 }
 
 class AutoloadExt {
+    const LOAD_ALL = null;
+    
     private $pharList = array();
     
     public function __construct($path) {
@@ -150,17 +152,47 @@ class AutoloadExt {
 
         return $return;
     }
-    
+
+    public function loadIni($name, $libel = self::LOAD_ALL) {
+        $return = array();
+
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/data/$name";
+
+            if (!file_exists($fullPath)) {
+                continue;
+            }
+            
+            $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
+            if (empty($ini)) {
+                continue;
+            }
+            
+            if ($libel === self::LOAD_ALL) {
+                $return[] = $ini;
+            } else {
+                $return[] = $ini[$libel];
+            }
+        }
+        
+        if (empty($return)) {
+            return array();
+        }
+
+        return array_merge(...$return);
+    }
+
     public function loadData($path) {
+        $return = array();
         foreach($this->pharList as $phar) {
             $fullPath = "phar://$phar/$path";
 
             if (file_exists($fullPath)) {
-                return file_get_contents($fullPath);
+                $return[] = file_get_contents($fullPath);
             }
         }
         
-        return null;
+        return implode('', $return);
     }
 
     public function fileExists($path) {
