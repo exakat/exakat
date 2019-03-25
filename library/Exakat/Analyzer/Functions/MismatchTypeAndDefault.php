@@ -33,6 +33,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->outIs('DEFAULT')
              ->outIsIE(array('THEN', 'ELSE', 'LEFT', 'RIGHT')) // basic handling of ternary
              ->goToLiteralValue()
+             ->atomIsNot(array('Null', 'Nsname', 'Identifier', 'Staticconstant'))
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')

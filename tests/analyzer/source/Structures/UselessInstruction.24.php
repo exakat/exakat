@@ -3,7 +3,7 @@
             $str .= '.0';
         }
 
-        for ($len = 2; $len > 0; $len--) {
+        for ($len3 = 2; $len > 0; $len--) {
             $str .= '.0';
         }
 
