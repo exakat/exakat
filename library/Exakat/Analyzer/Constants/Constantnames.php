@@ -30,15 +30,17 @@ class Constantnames extends Analyzer {
         // with define
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
-             ->atomIs('String')
-             ->is('constant', true);
+             ->is('constant', true)
+             ->has('noDelimiter');
         $this->prepareQuery();
 
         // with const
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
-             ->outIs('NAME');
+             ->atomIs('Constant')
+             ->outIs('NAME')
+             ->atomIs('Identifier');
         $this->prepareQuery();
     }
 }

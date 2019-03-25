@@ -33,6 +33,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->outIs('DEFAULT')
              ->outIsIE(array('THEN', 'ELSE', 'LEFT', 'RIGHT')) // basic handling of ternary
              ->goToLiteralValue()
+             ->atomIsNot(array('Null', 'Nsname', 'Identifier', 'Staticconstant')) // case for no available definitions
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
@@ -40,7 +41,7 @@ class MismatchTypeAndDefault extends Analyzer {
 filter{
     switch(it.get().value("fullnspath")) {
         case '\\\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Null"]);
+            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass"]);
             break;
 
         case '\\\\int' : 

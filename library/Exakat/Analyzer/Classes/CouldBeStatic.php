@@ -27,9 +27,23 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeStatic extends Analyzer {
     public function analyze() {
         // class x { function foo() { return self::$a + 1; }}
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs('Method') // No Magic method
              ->outIs('BLOCK')
              ->noAtomInside('This') // works for property and methods
+             ->not( // Empty method
+                $this->side()
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Void')
+             )
+
+             ->not( // one constant return
+                $this->side()
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Return')
+                     ->is('constant', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }

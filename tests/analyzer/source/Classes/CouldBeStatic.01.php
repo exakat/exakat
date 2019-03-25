@@ -2,7 +2,7 @@
 
 class x {
     function couldBeStatic() {
-        return 1;
+        return rand(3,4);
     }
 
     function couldNotBeStatic() {

@@ -27,7 +27,9 @@ use Exakat\Query\Query;
 
 class GoToLiteralValue extends DSL {
     public function run() {
-        return new Command('coalesce(__.in("DEFINITION").out("VALUE"), __.filter{ true; })');
+        return new Command('coalesce(__.in("DEFINITION").in("NAME").out("VALUE"), 
+                                     __.in("DEFINITION").out("VALUE"), 
+                                        __.filter{ true; })');
     }
 }
 ?>

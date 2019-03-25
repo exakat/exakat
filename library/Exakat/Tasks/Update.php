@@ -28,7 +28,7 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Vcs\{Bazaar, Cvs, Composer, Copy, Git, Mercurial, Svn, Symlink, Zip};
+use Exakat\Vcs\{Bazaar, Cvs, Composer, Git, Mercurial, Svn};
 
 class Update extends Tasks
 {

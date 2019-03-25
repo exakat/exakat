@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\i3', 
+$expected     = array('\\i3',
                       'i3',
                      );
 

@@ -86,7 +86,6 @@ class Migration73 extends Ambassador {
 
         $this->initFolder();
 
-        $this->generateSettings();
         $this->generateSuggestions();
 
         $this->generateDashboard();
