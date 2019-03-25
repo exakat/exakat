@@ -181,7 +181,6 @@ MENU;
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateIssues();
-        $this->generateSettings();
         
         // annex
         $this->generateAnalyzerSettings();

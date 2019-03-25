@@ -178,7 +178,6 @@ class Ambassador extends Reports {
 
         $this->initFolder();
 
-        $this->generateSettings();
         $this->generateProcFiles();
         $this->generateClassTree();
         $this->generateTraitTree();
@@ -2162,40 +2161,6 @@ SQL;
         return $class;
     }
 
-    protected function generateSettings() {
-        $info = array(array('Project name', $this->config->project_name));
-        if (!empty($this->config->project_description)) {
-            $info[] = array('Code description', $this->config->project_description);
-        }
-        if (!empty($this->config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
-        }
-        $info = array_merge($info, $this->getVCSInfo());
-
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
-
-        $info[] = array('Report production date', date('r', strtotime('now')));
-
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $php->getConfiguration('phpversion').' (version '.$this->config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
-
-        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
-
-        $settings = '';
-        foreach($info as $i) {
-            $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
-        }
-
-        $html = $this->getBasedPage('used_settings');
-        $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        $html = $this->injectBloc($html, 'TITLE', 'Analyzer settings\' list');
-
-        $this->putBasedPage('used_settings', $html);
-    }
-
     protected function generateProcFiles() {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
@@ -2555,6 +2520,12 @@ HTML;
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getConfiguration('phpversion').')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
+        $list = $this->config->ext->getPharList();
+        $html = array();
+        foreach($list as $name => $extension) {
+            $html[] = "<li>".basename($name, '.phar')."</li>";
+        }
+        $info[] = array('Exakat modules', '<ul>'.implode(PHP_EOL, $html).'</ul>');
 
         foreach($info as &$row) {
             $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';

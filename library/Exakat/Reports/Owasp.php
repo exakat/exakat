@@ -196,7 +196,6 @@ MENU;
         $this->projectPath = $folder;
 
         $this->initFolder();
-        $this->generateSettings();
         $this->generateProcFiles();
 
         $this->generateDashboard();
