@@ -4108,7 +4108,7 @@ class Load extends Tasks {
             }
 
             $this->calls->addCall('class', $fullnspath, $namespace);
-            
+
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
                 ++$this->id;
@@ -4172,7 +4172,7 @@ class Load extends Tasks {
                             // A\B as C
                             ++$this->id;
                             $this->pushExpression($nsname);
-                            $alias = $this->processAs();
+                            $alias = $this->processAlias($useType);
 
                             if ($useType === 'const') {
                                 $nsname->fullnspath = $prefix.$nsname->fullcode;
