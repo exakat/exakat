@@ -4314,6 +4314,56 @@ $sss is the end-result of a progression, from $subsections (3s) to $ss to $sss. 
     			$ipcnt = $Addresses->count_addresses_in_multiple_subnets($out);
     		}
 
+Check All Types
+===============
+
+.. _zend-config-structures-checkalltypes:
+
+Zend-Config
+^^^^^^^^^^^
+
+:ref:`check-all-types`, in src/Writer/Ini.php:122. 
+
+$value must be an array or a string here. 
+
+.. code-block:: php
+
+    foreach ($config as $key => $value) {
+                $group = array_merge($parents, [$key]);
+    
+                if (is_array($value)) {
+                    $iniString .= $this->addBranch($value, $group);
+                } else {
+                    $iniString .= implode($this->nestSeparator, $group)
+                               .  ' = '
+                               .  $this->prepareValue($value)
+                               .  \n;
+                }
+            }
+
+
+--------
+
+
+.. _vanilla-structures-checkalltypes:
+
+Vanilla
+^^^^^^^
+
+:ref:`check-all-types`, in src/Writer/Ini.php:122. 
+
+When $this->_FormValues is not null, then it is an array or an object, as it may be used immediately with foreach(). A check with is_array() would be a stronger option here.
+
+.. code-block:: php
+
+    if (is_null($this->_FormValues)) {
+                $this->formValues();
+            }
+    
+            $result = [[]];
+            foreach ($this->_FormValues as $key => $value) {
+                if (is_array($value)) {
+
 Missing Cases In Switch
 =======================
 
@@ -4360,6 +4410,43 @@ This class should be put away in a 'dolphin' or 'boonex' namespace.
         /* class BxDolXML code */ 
     }
 
+Could Use str_repeat()
+======================
+
+.. _zencart-structures-couldusestrrepeat:
+
+Zencart
+^^^^^^^
+
+:ref:`could-use-str\_repeat()`, in includes/functions/functions_general.php:1234. 
+
+That's a 45 repeat of &nbsp;
+
+.. code-block:: php
+
+    if ( (!zen_browser_detect('MSIE')) && (zen_browser_detect('Mozilla/4')) ) {
+          for ($i=0; $i<45; $i++) $pre .= '&nbsp;';
+        }
+
+
+--------
+
+
+.. _zencart-structures-couldusestrrepeat:
+
+Zencart
+^^^^^^^
+
+:ref:`could-use-str\_repeat()`, in includes/functions/functions_general.php:1234. 
+
+That's a $len repeat of &nbsp;. Also, the first $len is useless.
+
+.. code-block:: php
+
+    for ($len; $len > 0; $len--) {
+                $str .= '.0';
+            }
+
 Suspicious Comparison
 =====================
 
@@ -4395,6 +4482,23 @@ If trim($attribs['']['mode']) === 'base64', then it is set to lowercase (althoug
 
 Strings With Strange Space
 ==========================
+
+.. _openemr-type-stringwithstrangespace:
+
+OpenEMR
+^^^^^^^
+
+:ref:`strings-with-strange-space`, in library/globals.inc.php:3270. 
+
+The name of the contry contains both an unsecable space (the first, after Tonga), and a normal space (between Tonga and Islands). Translations are stored in a database, which preserves the unbreakable spaces. This also means that fixing the translation must be applied to every piece of data at the same time. The xl() function, which handles the translations, is also a good place to clean the spaces before searching for the right translation.
+
+.. code-block:: php
+
+    'to' => xl('Tonga (Tonga Islands)'),
+
+
+--------
+
 
 .. _thelia-type-stringwithstrangespace:
 
@@ -5120,6 +5224,31 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
         $warnings = 0;
     }
 
+
+--------
+
+
+.. _humo-gen-structures-identicalonbothsides:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`identical-on-both-sides`, in libraries/classes/DatabaseInterface.php:323. 
+
+In that long logical expression, $personDb->pers_cal_date is tested twice
+
+.. code-block:: php
+
+    // *** Filter person's WITHOUT any date's ***
+    			if ($user[group_filter_date]=='j'){
+    				if ($personDb->pers_birth_date=='' AND $personDb->pers_bapt_date==''
+    				AND $personDb->pers_death_date=='' AND $personDb->pers_buried_date==''
+    				AND $personDb->pers_cal_date=='' AND $personDb->pers_cal_date==''
+    				){
+    					$privacy_person='';
+    				}
+    			}
+
 No Reference For Ternary
 ========================
 
@@ -5426,6 +5555,22 @@ The is_null() test detects a special situation, that requires usage of default v
                 $personal_folder = $node->personal_folder;
             }
 
+Mismatch Type And Default
+=========================
+
+.. _wordpress-functions-mismatchtypeanddefault:
+
+WordPress
+^^^^^^^^^
+
+:ref:`mismatch-type-and-default`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 Bad Constants Names
 ===================
 
@@ -5574,6 +5719,60 @@ A 'Generic' class sounds like a class that could be 'abstract'.
         // More class code
     }
 
+Method Could Be Static
+======================
+
+.. _fuelcms-classes-couldbestatic:
+
+FuelCMS
+^^^^^^^
+
+:ref:`method-could-be-static`, in fuel/modules/fuel/models/Fuel_assets_model.php:240. 
+
+This method makes no usage of $this : it only works on the incoming argument, $file. This may even be a function.
+
+.. code-block:: php
+
+    public function get_file($file)
+    	{
+    		// if no extension is provided, then we determine that it needs to be decoded
+    		if (strpos($file, '.') === FALSE)
+    		{
+    			$file = uri_safe_decode($file);
+    		}
+    		return $file;
+    	}
+
+
+--------
+
+
+.. _expressionengine-classes-couldbestatic:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`method-could-be-static`, in system/ee/legacy/libraries/Upload.ph:859. 
+
+This method returns the list of mime type, by using a hidden global value : ee() is a functioncall that give access to the external storage of values.
+
+.. code-block:: php
+
+    /**
+    	 * List of Mime Types
+    	 *
+    	 * This is a list of mime types.  We use it to validate
+    	 * the allowed types set by the developer
+    	 *
+    	 * @param	string
+    	 * @return	string
+    	 */
+    	public function mimes_types($mime)
+    	{
+    		ee()->load->library('mime_type');
+    		return ee()->mime_type->isSafeForUpload($mime);
+    	}
+
 Could Be Private Class Constant
 ===============================
 
@@ -5596,6 +5795,39 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_REGULAR = 65535;
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
+
+One Letter Functions
+====================
+
+.. _thinkphp-functions-oneletterfunctions:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`one-letter-functions`, in ThinkPHP/Mode/Api/functions.php:859. 
+
+There are also the functions C, E, G... The applications is written in a foreign language, which may be a base for non-significant function names.
+
+.. code-block:: php
+
+    function F($name, $value = '', $path = DATA_PATH)
+
+
+--------
+
+
+.. _cleverstyle-functions-oneletterfunctions:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`one-letter-functions`, in core/drivers/DB/PostgreSQL.php:71. 
+
+There is also function f(). Those are actually overwritten methods. From the documentation, q() is for query, and f() is for fetch. Those are short names for frequently used functions.
+
+.. code-block:: php
+
+    public function q ($query, ...$params) {
 
 __debugInfo() Usage
 ===================
@@ -6141,6 +6373,25 @@ Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
 Substring First
 ===============
 
+.. _spip-performances-substrfirst:
+
+SPIP
+^^^^
+
+:ref:`substring-first`, in ecrire/inc/filtres.php:1694. 
+
+The code first makes everything uppercase, including the leading and trailing spaces, and then, removes them : it would be best to swap those operations. Note that spip_substr() is not considered in this analysis, but with SPIP knowledge, it could be moved inside the calls. 
+
+.. code-block:: php
+
+    function filtre_initiale($nom) {
+    	return spip_substr(trim(strtoupper(extraire_multi($nom))), 0, 1);
+    }
+
+
+--------
+
+
 .. _prestashop-performances-substrfirst:
 
 PrestaShop
@@ -6572,6 +6823,63 @@ The test on $pid may be directly done on $treeid[$sosa][0]. The distance between
     			if($sosa>=32 AND $fandeg!=180) { $fontpx=$fontsize-1; }
     			if (!empty($pid)) {
 
+Should Use array_filter()
+=========================
+
+.. _xataface-php-shouldusearrayfilter:
+
+xataface
+^^^^^^^^
+
+:ref:`should-use-array\_filter()`, in actions/manage_build_index.php:38. 
+
+This selection process has three tests : the two first are exclusive, and the third is inclusive. They could fit in one or several closures.
+
+.. code-block:: php
+
+    $indexable = array();
+    		foreach ( $tables as $key=>$table ){
+    			if ( preg_match('/^dataface__/', $table) ){
+    				continue;
+    			}
+    			if ( preg_match('/^_/', $table) ){
+    				continue;
+    			}
+    			
+    			if ( $index->isTableIndexable($table) ){
+    				$indexable[] = $table;
+    				//unset($tables[$key]);
+    			}
+    			
+    		}
+
+
+--------
+
+
+.. _shopware-php-shouldusearrayfilter:
+
+shopware
+^^^^^^^^
+
+:ref:`should-use-array\_filter()`, in engine/Shopware/Bundle/StoreFrontBundle/Service/Core/VariantCoverService.php:71. 
+
+Closure would be the best here, since $covers has to be injected in the array_filter callback. 
+
+.. code-block:: php
+
+    $covers = $this->variantMediaGateway->getCovers(
+                $products,
+                $context
+            );
+    
+            $fallback = [];
+            foreach ($products as $product) {
+                if (!array_key_exists($product->getNumber(), $covers)) {
+                    $fallback[] = $product;
+                }
+            }
+
 Could Use Compact
 =================
 
@@ -6631,6 +6939,44 @@ Even when the initialization is mixed with other operations, it is a good idea t
     						}
     					}
     				}
+
+Use Count Recursive
+===================
+
+.. _wordpress-structures-usecountrecursive:
+
+WordPress
+^^^^^^^^^
+
+:ref:`use-count-recursive`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+
+--------
+
+
+.. _prestashop-structures-usecountrecursive:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`use-count-recursive`, in controllers/admin/AdminSearchController.php:342. 
+
+This could be improved with count() recursive and a array_filter call, to remove empty $list.
+
+.. code-block:: php
+
+    $nb_results = 0;
+                foreach ($this->_list as $list) {
+                    if ($list != false) {
+                        $nb_results += count($list);
+                    }
+                }
 
 Should Preprocess Chr
 =====================

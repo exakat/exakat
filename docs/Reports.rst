@@ -18,6 +18,7 @@ There are several reports that may be extracted from Exakat :
 * `Marmelab`_
 * `None`_
 * `Owasp`_
+* `Perfile`_
 * `PhpCompilation`_
 * `PhpConfiguration`_
 * `Phpcity`_
@@ -425,6 +426,54 @@ The OWASP report focuses on the [OWASP top 10](https://www.owasp.org/index.php/C
 Owasp is a HTML report format.
 
 Owasp depends on the following theme : Security.
+
+Perfile
+-------
+
+The Perfile report lays out the results file per file.
+
+The Perfile report displays one result per line, grouped by file, and ordered by line number : 
+
+::
+    
+   /path/from/project/root/to/file:line[space]name of analysis
+   
+   
+This format is fast, and fitted for human review.
+
+
+
+::
+
+    ---------------------------------------------------------
+     line  /themes/Rozier/Controllers/LoginController.php
+    ---------------------------------------------------------
+       34  Multiple Alias Definitions 
+       36  Unresolved Use 
+       43  Multiple Alias Definitions 
+       51  Class Could Be Final 
+       58  Undefined Interfaces 
+       81  Undefined Interfaces 
+       81  Unused Arguments 
+       81  Used Once Variables (In Scope) 
+       91  Undefined Interfaces 
+       91  Unused Arguments 
+       91  Used Once Variables (In Scope) 
+      101  Undefined Interfaces 
+      103  Nested Ifthen 
+      104  Unresolved Classes 
+      106  Buried Assignation 
+      106  Iffectations 
+      106  Use Positive Condition 
+      121  Uncaught Exceptions 
+      121  Unresolved Classes 
+      129  Uncaught Exceptions 
+    ---------------------------------------------------------
+    
+
+Perfile is a Text report format.
+
+Perfile accepts any arbitrary list of results.
 
 PhpCompilation
 --------------

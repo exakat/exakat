@@ -95,7 +95,6 @@ Glossary
     + `array_column()`
 
       + :ref:`Should Use array_column() <should-use-array\_column()>`
-      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
 
     + `array_count_values()`
 
@@ -1356,6 +1355,7 @@ Glossary
 
     + `__call`
 
+      + :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 

@@ -62,8 +62,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 19 Mar 2019 14:52:20 +0000
-.. comment: Generation hash : a8f6a3e8552bd83aa07a86d4a8cfddadcf261893
+.. comment: Generation date : Mon, 25 Mar 2019 16:13:03 +0000
+.. comment: Generation hash : ea3a87417597f695e5faa94d6b90a414e8a833f0
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 354 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -111,6 +111,7 @@ Total : 354 analysis
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Check All Types <check-all-types>`
 * :ref:`Check JSON <check-json>`
+* :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
@@ -197,7 +198,6 @@ Total : 354 analysis
 * :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
-* :ref:`Local Globals <local-globals>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Logical To in_array <logical-to-in\_array>`
@@ -216,7 +216,6 @@ Total : 354 analysis
 * :ref:`Missing Include <missing-include>`
 * :ref:`Missing New ? <missing-new-?>`
 * :ref:`Missing Parenthesis <missing-parenthesis>`
-* :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
@@ -268,7 +267,6 @@ Total : 354 analysis
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
 * :ref:`Old Style __autoload() <old-style-\_\_autoload()>`
-* :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One Variable String <one-variable-string>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
@@ -460,7 +458,7 @@ Total : 19 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 22 analysis
+Total : 24 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -473,10 +471,12 @@ Total : 22 analysis
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Heredoc Delimiter <heredoc-delimiter>`
 * :ref:`Interpolation <interpolation>`
+* :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+* :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Order Of Declaration <order-of-declaration>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
@@ -974,7 +974,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 17 analysis
+Total : 18 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -985,6 +985,7 @@ Total : 17 analysis
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Method Collision Traits <method-collision-traits>`
+* :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
