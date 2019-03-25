@@ -15,7 +15,7 @@ other::startDTD(1, 2, 3);
 other::startDTD(1, 2, 3, 4);
 other::startDTD(1, 2, 3, 4, 5);
 
-
+$XMLWriter = new XMLWriter();
 $XMLWriter->startDTD();
 $other->startDTD();
 $XMLWriter->startDTD_unknown();
