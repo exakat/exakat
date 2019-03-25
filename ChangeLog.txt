@@ -1,4 +1,4 @@
-Version 1.7.2 (Dong King Taishan, coming up)
+Version 1.7.3 (Huang, King Dushi, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.7.2 (Dong King Taishan, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.2 (Dong King Taishan, 2019-03-25)
++ Architecture
+    + Restored the external library checker
+    + Added support for extension's CIT (Symfony, Drupal)
++ Report
+    + Ambassador : added Suggestions theme to docs.
+    + Perfile : New report, text, per file
++ Analyzer
+    + New analysis : Report potential 'unsupported operand type'
+    + New analysis : Check for existence with __call() and __callstatic
+    + Updated analysis : Wrong number of arguments (methods) upgraded
+    + Updated analysis : Could Be Static ignores empty methods, constants methods
+    + Updated analysis : Added Variable to possibly useless expression
+    + Updated analysis : Constant names are detected based on available noDelimiter
+    + Updated analysis : Abstract classes may have no abstract methods
+    + Checked unit tests : 2889 / 2912 test pass (99% pass)
++ Tokenizer
+    + Added link between __clone and clone
+    + Now handling functions and constants when ignored
+    + Fixed dynamic constants in collector
 
 Version 1.7.1 (Bi King Biancheng, 2019-03-18)
 + Report
