@@ -39,6 +39,8 @@ abstract class Tasks {
 
     protected $gremlin    = null;
     protected $config     = null;
+    
+    private $concurencyCheck = null;
 
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
