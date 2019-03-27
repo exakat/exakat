@@ -27,15 +27,50 @@ use Exakat\Analyzer\Analyzer;
 class Closure2String extends Analyzer {
     public function analyze() {
         // function ($x) { return strtoupper($x);}
-        // Very little checks ATM :
         $this->atomIs('Closure')
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
-             ->atomIs(self::$CALLS)
-             ->noAtomInside(self::$CALLS)
+             ->atomIs(array('Functioncall', 'Staticmethodcall'))
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs(array_merge(self::$CALLS, 
+                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Real', 'Boolean', 'Null')))
+             )
+
+             ->outIsIE('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // function ($x) use ($a) { return $a->b($x);}
+        // array($a, 'b')
+        $this->atomIs('Closure')
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->tokenIs('T_STRING')
+             ->inIs('METHOD')
+
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs(array_merge(self::$CALLS, 
+                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Real', 'Boolean', 'Null')))
+              )
+              
+              ->outIs('OBJECT')
+              ->raw('coalesce( __.in("DEFINITION").in("USE"),
+                               __.hasLabel("This")
+              )')
+
              ->back('first');
         $this->prepareQuery();
     }
