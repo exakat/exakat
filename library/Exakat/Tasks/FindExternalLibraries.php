@@ -66,7 +66,7 @@ class FindExternalLibraries extends Tasks {
                              'propel'           => self::PARENT_DIR,
                              'gettext_reader'   => self::FILE_ONLY,
                              'phpexcel'         => self::WHOLE_DIR,
-                             'phpmailer'        => self::WHOLE_DIR,
+                             'phpmailer'        => self::FILE_ONLY,
                              'qrcode'           => self::FILE_ONLY,
                              'services_json'    => self::FILE_ONLY,
                              'sfyaml'           => self::WHOLE_DIR,
@@ -167,6 +167,7 @@ class FindExternalLibraries extends Tasks {
             $newConfigs = call_user_func_array('array_merge', $r);
         }
 
+        
         if (count($newConfigs) === 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
         } elseif (!empty($newConfigs)) {
