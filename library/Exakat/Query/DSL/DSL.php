@@ -205,7 +205,7 @@ abstract class DSL {
                 assert($a === ucfirst(strtolower($a)), "Wrong format for Atom name : $a");
             }
         } else {
-            assert(false, 'Unsupported type for atom : '.gettype($analyzer));
+            assert(false, 'Unsupported type for atom : '.gettype($atom));
         }
 
         return true;
@@ -281,7 +281,7 @@ abstract class DSL {
             } elseif (is_string($l)) {
                 $return[] = ".$direction(\"$l\")";
             } else {
-                assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
+                assert(false, __METHOD__.' received an unprocessable object '.gettype($l));
             }
         }
         
