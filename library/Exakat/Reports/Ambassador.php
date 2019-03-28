@@ -2199,24 +2199,25 @@ SQL;
     }
 
     private function generateExternalLib() {
-        $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
+        $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
-        $libraries = '';
+        $libraries = array();
         $externallibrariesList = $this->datastore->getRow('externallibraries');
+        print_r($externallibrariesList);
 
         foreach($externallibrariesList as $row) {
-            $url = $externallibraries->{strtolower($row['library'])}->homepage;
+            $url  = $externallibraries->{strtolower($row['library'])}->homepage;
             $name = $externallibraries->{strtolower($row['library'])}->name;
             if (empty($url)) {
                 $homepage = '';
             } else {
-                $homepage = "<a href=\"".$url."\">".$row['library']."</a>";
+                $homepage = "<a href=\"$url\">$row[library]</a>";
             }
-            $libraries .= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>\n";
+            $libraries []= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>";
         }
 
         $html = $this->getBasedPage('ext_lib');
-        $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
+        $html = $this->injectBloc($html, 'LIBRARIES', implode(PHP_EOL, $libraries));
         $html = $this->injectBloc($html, 'TITLE', 'External Libraries\' list');
 
         $this->putBasedPage('ext_lib', $html);
