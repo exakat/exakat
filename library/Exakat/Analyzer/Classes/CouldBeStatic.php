@@ -28,6 +28,7 @@ class CouldBeStatic extends Analyzer {
     public function analyze() {
         // class x { function foo() { return self::$a + 1; }}
         $this->atomIs('Method') // No Magic method
+             ->isNot('static', true)
              ->outIs('BLOCK')
              ->noAtomInside('This') // works for property and methods
              ->not( // Empty method
