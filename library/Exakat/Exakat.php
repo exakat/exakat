@@ -259,6 +259,11 @@ class Exakat {
                 $task->run();
                 break;
 
+            case 'show' :
+                $task = new Tasks\Show($this->gremlin, $this->config);
+                $task->run();
+                break;
+
             case 'version' :
             default :
                 $version = self::VERSION;
@@ -273,7 +278,7 @@ class Exakat {
 |________|[__]`\_]\'-;__/[__|  \_]\'-;__/\__/  
                                                
 
-Exakat : @ 2014-2018 Damien Seguy. 
+Exakat : @ 2014-2019 Damien Seguy. 
 Version : ", $version, ' - Build ', $build, ' - ', $date, "\n";
 
                 break;
