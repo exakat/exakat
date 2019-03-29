@@ -94,6 +94,10 @@ class LoadFinal {
         $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('MakeClassMethodDefinition');
+
+        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateVirtualProperty');
         
         $this->setConstantDefinition();
         $this->log('setConstantDefinition');
@@ -162,10 +166,6 @@ class LoadFinal {
         $task->run();
         $this->log('FollowClosureDefinition');
         
-        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualProperty');
-
         display('End load final');
         $this->logTime('Final');
     }
