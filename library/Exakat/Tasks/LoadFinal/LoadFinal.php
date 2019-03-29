@@ -66,108 +66,113 @@ class LoadFinal {
 
         $this->dictCode = Dictionary::factory($this->datastore);
 
-        $this->logTime('Start');
+        $this->log('Start');
         display('Start load final');
 
         $this->init();
 
         $this->fixFullnspathFunctions();
-        $this->log->log('fixFullnspathFunctions');
+        $this->log('fixFullnspathFunctions');
         $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
-        $this->log->log('spotPHPNativeFunctions');
+        $this->log('spotPHPNativeFunctions');
 
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
-        $this->log->log('spotFallbackConstants');
+        $this->log('spotFallbackConstants');
         $task = new FixFullnspathConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('FixFullnspathConstants');
+        $this->log('FixFullnspathConstants');
         $this->spotPHPNativeConstants();
-        $this->log->log('spotPHPNativeConstants');
+        $this->log('spotPHPNativeConstants');
 
         $this->setParentDefinition();
-        $this->log->log('setParentDefinition');
+        $this->log('setParentDefinition');
         $this->setClassAliasDefinition();
-        $this->log->log('setClassAliasDefinition');
+        $this->log('setClassAliasDefinition');
         $this->makeClassConstantDefinition();
-        $this->log->log('makeClassConstantDefinition');
+        $this->log('makeClassConstantDefinition');
         $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('MakeClassMethodDefinition');
+        $this->log('MakeClassMethodDefinition');
         
         $this->setConstantDefinition();
-        $this->log->log('setConstantDefinition');
+        $this->log('setConstantDefinition');
 
         $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassRemoteDefinitionWithInjection');
+        $this->log('SetClassRemoteDefinitionWithInjection');
 
         $this->defaultIdentifiers();
-        $this->log->log('defaultIdentifiers');
+        $this->log('defaultIdentifiers');
         $this->propagateConstants();
-        $this->log->log('propagateConstants');
+        $this->log('propagateConstants');
 
         $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassPropertyRemoteDefinition');
+        $this->log('SetClassPropertyRemoteDefinition');
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassMethodRemoteDefinition');
+        $this->log('SetClassMethodRemoteDefinition');
         $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassRemoteDefinitionWithTypehint');
+        $this->log('SetClassRemoteDefinitionWithTypehint');
         $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('setClassRemoteDefinitionWithReturnTypehint');
+        $this->log('setClassRemoteDefinitionWithReturnTypehint');
 
         $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetCloneLink');
+        $this->log('SetCloneLink');
 
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassRemoteDefinitionWithLocalNew');
+        $this->log('SetClassRemoteDefinitionWithLocalNew');
         $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassRemoteDefinitionWithParenthesis');
+        $this->log('SetClassRemoteDefinitionWithParenthesis');
         $task = new SetClassPropertyDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('setClassPropertyDefinitionWithTypehint');
+        $this->log('setClassPropertyDefinitionWithTypehint');
         $task = new SetArrayClassDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('setArrayClassDefinition');
+        $this->log('setArrayClassDefinition');
         $task = new SetStringMethodDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetStringMethodDefinition');
+        $this->log('SetStringMethodDefinition');
 
         $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SetClassPropertyDefinitionWithFluentInterface');
+        $this->log('SetClassPropertyDefinitionWithFluentInterface');
 
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('OverwrittenMethods');
+        $this->log('OverwrittenMethods');
         $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('OverwrittenProperties');
+        $this->log('OverwrittenProperties');
         $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('OverwrittenConstants');
+        $this->log('OverwrittenConstants');
 
         $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('SolveTraitMethods');
+        $this->log('SolveTraitMethods');
 
         $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('FollowClosureDefinition');
+        $this->log('FollowClosureDefinition');
         
         $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log->log('CreateVirtualProperty');
+        $this->log('CreateVirtualProperty');
 
         display('End load final');
         $this->logTime('Final');
+    }
+    
+    private function log($step) {
+        $this->logTime($step);
+        $this->log->log($step);
     }
 
     private function logTime($step) {
