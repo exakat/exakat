@@ -22,6 +22,8 @@
 
 namespace Exakat\Configsource;
 
+use \Exakat\Phpexec;
+
 class ProjectConfig extends Config {
     private $projects_root = '.';
     private $project = '';
@@ -135,7 +137,7 @@ class ProjectConfig extends Config {
 
         if (!isset($this->config['phpversion']) ||
              $this->config['phpversion'] === 'PHP' ||
-             !in_array($this->config['phpversion'], array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4'))) {
+             !in_array($this->config['phpversion'], Phpexec::VERSIONS)) {
             $this->config['phpversion'] = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
         }
         // else ALL is good
