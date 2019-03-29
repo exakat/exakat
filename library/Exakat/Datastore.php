@@ -185,7 +185,8 @@ class Datastore {
                 $d = array(\Sqlite3::escapeString($row));
             }
 
-            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN (".makeList($d).")";
+            $list = makeList($d);
+            $query = "DELETE FROM $table WHERE $col IN (makeList($d))";
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -193,15 +194,10 @@ class Datastore {
     }
 
     public function getRow($table) {
-        $return = array();
         try {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
-            $res = false;
-        }
-
-        if (!$res) {
             return array();
         }
         $return = array();
@@ -214,14 +210,13 @@ class Datastore {
     }
 
     public function getCol($table, $col) {
-        $return = array();
-
         $query = "SELECT $col FROM $table";
-        $res = $this->sqliteRead->query($query);
-
-        if (!$res) {
+        try {
+            $res = $this->sqliteRead->query($query);
+        } catch (\Exception $e) {
             return array();
         }
+
         $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -246,7 +241,7 @@ class Datastore {
     }
 
     public function getAllHash($table) {
-        $query = 'SELECT key, value FROM '.$table;
+        $query = "SELECT key, value FROM $table";
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();
 
