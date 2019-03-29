@@ -29,7 +29,7 @@ use Exakat\Query\Query;
 class SetClassPropertyRemoteDefinition extends LoadFinal {
     public function run() {
         // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
         $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
               ->hasNoIn('DEFINITION')
@@ -51,7 +51,7 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
         $count = $result->toInt();
 
         // For normal method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query = $this->newQuery('SetClassPropertyRemoteDefinition member');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
               ->hasNoIn('DEFINITION')

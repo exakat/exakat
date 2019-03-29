@@ -29,7 +29,7 @@ use Exakat\Query\Query;
 class SetStringMethodDefinition extends LoadFinal {
     public function run() {
         //$id, $project, $analyzer, $php
-        $query = new Query(0, $this->config->project, 'SetClassPropertyDefinitionWithFluentInterface', null, $this->datastore);
+        $query = $this->newQuery('SetClassPropertyDefinitionWithFluentInterface');
         $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')

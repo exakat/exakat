@@ -28,10 +28,8 @@ use Exakat\Query\Query;
 
 class SetArrayClassDefinition extends LoadFinal {
     public function run() {
-        $query = new Query(0, $this->config->project, 'CreateVirtualProperty VirtualProperty', null, $this->datastore);
-
         //$id, $project, $analyzer, $php
-        $query = new Query(0, $this->config->project, 'SetArrayClassDefinition', null, $this->datastore);
+        $query = $this->newQuery('SetArrayClassDefinition');
         $query->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)

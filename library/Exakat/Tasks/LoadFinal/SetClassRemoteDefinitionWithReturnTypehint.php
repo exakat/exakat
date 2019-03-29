@@ -26,7 +26,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
-class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
+class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
     public function run() {
         $query = $this->newQuery('setClassRemoteDefinitionWithTypehint methods');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
@@ -38,9 +38,14 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
               ->inIs('METHOD')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
+              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -54,7 +59,7 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countM = $result->toInt();
 
-        $query = $this->newQuery('setClassRemoteDefinitionWithTypehint member');
+        $query = $this->newQuery('setClassRemoteDefinitionWithTypehint properties');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
@@ -64,9 +69,14 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
+              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -89,9 +99,14 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
               ->inIs('CONSTANT')
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('TYPEHINT')
+              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('LEFT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RIGHT') 
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -105,8 +120,7 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-        $count = $countP + $countM + $countC;
-        display("Set $count method, constants and properties remote with typehint");
+        display("Set ".($countP + $countM + $countC)." method, constants and properties remote with return typehint");
     }
 }
 

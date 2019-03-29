@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class SetClassRemoteDefinitionWithParenthesis extends LoadFinal {
     public function run() {
-        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
+        $query = $this->newQuery('SetClassRemoteDefinitionWithParenthesis methods');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
@@ -54,7 +54,7 @@ class SetClassRemoteDefinitionWithParenthesis extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countM = $result->toInt();
 
-        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
+        $query = $this->newQuery('SetClassRemoteDefinitionWithParenthesis property');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')

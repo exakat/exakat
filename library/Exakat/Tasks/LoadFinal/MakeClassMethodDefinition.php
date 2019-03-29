@@ -32,7 +32,7 @@ class MakeClassMethodDefinition extends LoadFinal {
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
-        $query = new Query(0, $this->config->project, 'MakeClassMethodDefinition static', null, $this->datastore);
+        $query = $this->newQuery('MakeClassMethodDefinition static');
         $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
@@ -56,7 +56,7 @@ class MakeClassMethodDefinition extends LoadFinal {
 
         // Create link between Class method and definition
         // This works only for $this
-        $query = new Query(0, $this->config->project, 'MakeClassMethodDefinition method', null, $this->datastore);
+        $query = $this->newQuery('MakeClassMethodDefinition method');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
@@ -113,7 +113,7 @@ GREMLIN
         display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call
-        $query = new Query(0, $this->config->project, 'MakeClassMethodDefinition new', null, $this->datastore);
+        $query = $this->newQuery('MakeClassMethodDefinition new');
         $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
@@ -130,7 +130,7 @@ GREMLIN
 
         // Create link between __clone and clone
         // parenthesis, typehint, local new, 
-        $query = new Query(0, $this->config->project, 'MakeClassMethodDefinition clone', null, $this->datastore);
+        $query = $this->newQuery('MakeClassMethodDefinition clone');
         $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CLONE')
               ->inIs('DEFINITION')

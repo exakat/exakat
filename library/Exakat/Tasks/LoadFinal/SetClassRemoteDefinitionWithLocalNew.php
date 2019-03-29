@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
     public function run() {
-        $query = new Query(0, $this->config->project, 'linkMethodcall', null, $this->datastore);
+        $query = $this->newQuery('SetClassRemoteDefinitionWithLocalNew methods');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
@@ -38,6 +38,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->inIs('METHOD')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')  // No check on atoms : 
+              ->atomIs('Variabledefinition', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
@@ -57,7 +58,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countM = $result->toInt();
 
-        $query = new Query(0, $this->config->project, 'linkMember', null, $this->datastore);
+        $query = $this->newQuery('SetClassRemoteDefinitionWithLocalNew Member');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
@@ -67,6 +68,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
+              ->atomIs('Variabledefinition', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
