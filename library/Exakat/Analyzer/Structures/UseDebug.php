@@ -47,8 +47,8 @@ class UseDebug extends Analyzer {
 
         // Using constants
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->outIs('NAME')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($debug['constants']);
         $this->prepareQuery();

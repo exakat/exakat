@@ -221,6 +221,7 @@ class Ambassador extends Reports {
         $this->generateMethodSize();
         $this->generateParameterCounts();
         $this->generateConfusingVariables();
+        $this->generateIdenticalFiles();
         
         // Compatibility
         $this->generateCompilations();
@@ -4561,7 +4562,34 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage('files_tree', $html);
     }
+    
+    private function generateIdenticalFiles() {
+        $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 2 ORDER BY COUNT(*), file');
 
+        $theTable = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $list = str_replace(',', "</li>\n<li>", $row['list']);
+            $theTable[] = <<<HTML
+<tr>
+    <td>$row[count]</td>
+    <td>
+        <ul>
+            <li>$list</li>
+        </ul>
+    </td>
+</tr>
+HTML;
+        }
+        
+        print count($theTable)." fichiers identiques\n";
+        $theTable = implode(PHP_EOL, $theTable);
+        
+
+        $html = $this->getBasedPage('identical_files');
+        $html = $this->injectBloc($html, 'IDENTICAL', $theTable);
+        $this->putBasedPage('identical_files', $html);
+    }
+    
     private function generateConcentratedIssues() {
         $listAnalyzers = $this->themes->getThemeAnalyzers('Analyze');
         $sqlList = makeList($listAnalyzers);
