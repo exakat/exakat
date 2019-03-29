@@ -35,7 +35,14 @@ class IsModified extends Analyzer {
         // $a[3]++;
         $this->atomIs('Array')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'CAST'))
-             ->raw('not(where( __.in("CAST").has("token", "T_UNSET_CAST") ) )')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->inIs('CAST')
+                             ->tokenIs('T_UNSET_CAST')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
