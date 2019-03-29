@@ -118,6 +118,7 @@ class CommandLine extends Config {
                               'proxy'         => 1,
                               'config'        => 1,
                               'extension'     => 1,
+                              'show'          => 1,
                               );
 
     public function loadConfig($args = array()) {

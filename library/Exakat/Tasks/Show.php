@@ -21,22 +21,31 @@
 */
 
 
-namespace Exakat\Query\DSL;
+namespace Exakat\Tasks;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+use Exakat\Project as ProjectName;
+use Exakat\Exceptions\InvalidProjectName;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
-class IsHash extends DSL {
+class Show extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run() {
-        list($property, $hash, $index) = func_get_args();
+        $project = new ProjectName($this->config->project);
 
-        if (empty($hash)) {
-            return new Command(Query::STOP_QUERY);
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
         }
 
-        assert($this->assertProperty($property));
+        if ($this->config->project === 'default') {
+            throw new ProjectNeeded();
+        }
         
-        return new Command("has(\"$property\").filter{ it.get().value(\"$property\") in ***[$index]}", array($hash));
+        print "Create project '$project' with : 
+    {$this->config->php} {$this->config->executable} init -p $project -R {$this->config->project_url} -{$this->config->project_vcs} -v\n";
     }
 }
+
 ?>

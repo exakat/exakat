@@ -2199,24 +2199,25 @@ SQL;
     }
 
     private function generateExternalLib() {
-        $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
+        $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
-        $libraries = '';
+        $libraries = array();
         $externallibrariesList = $this->datastore->getRow('externallibraries');
+        print_r($externallibrariesList);
 
         foreach($externallibrariesList as $row) {
-            $url = $externallibraries->{strtolower($row['library'])}->homepage;
+            $url  = $externallibraries->{strtolower($row['library'])}->homepage;
             $name = $externallibraries->{strtolower($row['library'])}->name;
             if (empty($url)) {
                 $homepage = '';
             } else {
-                $homepage = "<a href=\"".$url."\">".$row['library']."</a>";
+                $homepage = "<a href=\"$url\">$row[library]</a>";
             }
-            $libraries .= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>\n";
+            $libraries []= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>";
         }
 
         $html = $this->getBasedPage('ext_lib');
-        $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
+        $html = $this->injectBloc($html, 'LIBRARIES', implode(PHP_EOL, $libraries));
         $html = $this->injectBloc($html, 'TITLE', 'External Libraries\' list');
 
         $this->putBasedPage('ext_lib', $html);
@@ -2778,14 +2779,37 @@ HTML;
     }
 
     private function generateGlobals() {
-        $theGlobals = '';
-
         $results = new Results($this->sqlite, array('Structures/GlobalInGlobal', 'Structures/GlobalUsage'));
         $results->load();
 
+        $tree = array();
         foreach($results->toArray() as $row) {
-            $theGlobals .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $row['fullcode']);
+            if (substr($row['fullcode'], 0, 8) === '$GLOBALS') {
+                $origin = '$GLOBALS';
+            } else {
+                $origin = 'global';
+            }
+            $tree[$name]["$row[file]:$row[line]"] = $origin;
         }
+        
+        uasort($tree, function($a, $b) { return count($a) <=> count($b);});
+
+        $theGlobals = array();
+        foreach($tree as $variable => $locations) {
+            $count = count($locations);
+            $list = array();
+            $types = array();
+            uksort($locations, function($a, $b) { list($fa, $la) = explode(':', $a); list($fb, $lb) = explode(':', $b); $r = $fa <=> $fb; if ($r == 0) { $r = $la <=> $lb; } return $r;});
+            foreach($locations as $file => $type) {
+                $list[] = "<li>$file</li>";
+                $types[$type] = 1;
+            }
+            $list = '<ul>'.implode(PHP_EOL, $list).'</ul>';
+            $types = implode('-', array_keys($types));
+            $theGlobals []= "<tr><td><span style=\"color: #0000BB\">$variable</span></td><td>$count</td><td>$types</td><td>$list</td></tr>\n";
+        }
+        $theGlobals = implode('', $theGlobals);
 
         $html = $this->getBasedPage('globals');
         $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
@@ -3138,7 +3162,7 @@ SQL
                     $secondary = $this->extends2ul($sub, $paths, $level + 1);
                     $return[] = $secondary;
                 } else {
-                    $return[] = '<li>...(Recursive)</li>';
+                    $return[] = '<li>'.$sub.'...(Recursive)</li>';
                 }
             } else {
                 $return[] = "<li class=\"treeLeaf\">$sub</li>";

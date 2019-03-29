@@ -504,26 +504,15 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 Symfony analysis
 --------------------------------------------------
 
-This extension includes 10 analyzers.
+This extension includes 0 analyzers.
 
-* Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
-* Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
-* Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
-* Symfony 3.3 Compatibility (Symfony/Symfony_3_3)
-* Symfony 3.4 Compatibility (Symfony/Symfony_3_4)
-* Symfony 4.0 Compatibility (Symfony/Symfony_4_0)
-* Symfony 4.1 Compatibility (Symfony/Symfony_4_1)
-* Symfony 4.2 Compatibility (Symfony/Symfony_4_2)
-* Symfony Missing (Symfony/SymfonyMissing)
-* Symfony Usage (Symfony/SymfonyUsage)
+* 
 
 
 Symfony rulesets
 --------------------------------------------------
 
-This extension includes one ruleset : Symfony.
-
-
+This extension includes no specific ruleset.
 Symfony reports
 --------------------------------------------------
 

@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class CreateVirtualProperty extends LoadFinal {
     public function run() {
-        $query = new Query(0, $this->config->project, 'CreateVirtualProperty VirtualProperty', null, $this->datastore);
+        $query = $this->newQuery('CreateVirtualProperty VirtualProperty');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->savePropertyAs('fullcode', 'f')
@@ -51,7 +51,7 @@ class CreateVirtualProperty extends LoadFinal {
 
         display("Created $count virtual properties");
 
-        $query = new Query(0, $this->config->project, 'CreateVirtualProperty definitions', null, $this->datastore);
+        $query = $this->newQuery('CreateVirtualProperty definitions');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->savePropertyAs('fullcode', 'f')

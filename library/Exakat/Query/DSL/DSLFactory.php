@@ -39,6 +39,8 @@ class DSLFactory {
     private    $availableVariables     = array(); // This one is per query
     protected  $availableLabels        = array('first'); // This one is per query
     protected  $ignoredcit             = array(); 
+    protected  $ignoredfunctions       = array();
+    protected  $ignoredconstants       = array();
     protected  $dictCode               = null;
     protected  $linksDown              = '';
     protected  $MAX_LOOPING            = Analyzer::MAX_LOOPING;

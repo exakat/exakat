@@ -13,7 +13,10 @@ usort($a,function($A,$B){
     }, $r);
 
     $r = preg_replace_callback('/([a-z0-9])([A-Z])/', function($A1) {
-      return strtolower($A1[2]);
+      return strtolower($A1);
+    }, $r);
+    $r = preg_replace_callback('/([a-z0-9])([A-Z])/', function($A2) {
+      return strtolower($A2[2]);
     }, $r);
 
 ?>

@@ -65,6 +65,9 @@ class Phpexec {
     private $version          = null;
     private $actualVersion    = null;
     private $requestedVersion = null;
+    
+    const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0',);
+    const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
 
     public function __construct($phpversion = null, $pathToBinary) {
         assert($phpversion !== null, "Can't use null for PHP version");

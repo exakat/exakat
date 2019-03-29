@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('function ($c, $a) { /**/ } ',
-                      'function ($o) { /**/ } ',
-                      'function ($f) { /**/ } ',
+$expected     = array('function ($f) { /**/ } ',
                      );
 
-$expected_not = array('function ($n) { /**/ } ',
+$expected_not = array('function ($c, $a) { /**/ } ',
+                      'function ($o) { /**/ } ',
+                      'function ($n) { /**/ } ',
                       'function foo($n) { /**/ } ',
                      );
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 19 Mar 2019 14:52:20 +0000
-.. comment: Generation hash : a8f6a3e8552bd83aa07a86d4a8cfddadcf261893
+.. comment: Generation date : Mon, 25 Mar 2019 16:13:03 +0000
+.. comment: Generation hash : ea3a87417597f695e5faa94d6b90a414e8a833f0
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3160,15 +3160,25 @@ Using `is_callable() <http://www.php.net/is_callable>`_, is_iterable() with this
 
 Using a type test without else is also accepted here. This is a special treatment for this test, and all others are ignored. This aspect may vary depending on situations and projects.
 
-+-------------+--------------------------+
-| Short name  | Structures/CheckAllTypes |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Include a default case to handle all unknown situations
+* Include and process explicit types as much as possible
+
++-------------+--------------------------------------------------------------------------------------+
+| Short name  | Structures/CheckAllTypes                                                             |
++-------------+--------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                       |
++-------------+--------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                |
++-------------+--------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                      |
++-------------+--------------------------------------------------------------------------------------+
+| Examples    | :ref:`zend-config-structures-checkalltypes`, :ref:`vanilla-structures-checkalltypes` |
++-------------+--------------------------------------------------------------------------------------+
 
 
 
@@ -3213,6 +3223,62 @@ See also `Option to make json_encode and json_decode throw exceptions on errors 
 +-------------+----------------------+
 | Time To Fix | Quick (30 mins)      |
 +-------------+----------------------+
+
+
+
+.. _check-on-\_\_call-usage:
+
+Check On __Call Usage
+#####################
+
+
+When using the magic methods `__call() <http://php.net/manual/en/language.oop5.magic.php>`_ and __staticcall(), make sure the method exists before calling it. 
+
+If the method doesn't exists, then the same method will be called again, leading to the same failure. Finally, it will crash PHP.
+
+.. code-block:: php
+
+   <?php
+   
+   class safeCall {
+       function __class($name, $args) {
+           // unsafe call, no checks
+           if (method_exists($this, $name)) {
+               $this->$name(...$args);
+           }
+       }
+   }
+   
+   class unsafeCall {
+       function __class($name, $args) {
+           // unsafe call, no checks
+           $this->$name(...$args);
+       }
+   }
+   
+   ?>
+
+
+See also `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
+        ``Magical PHP: `__call() <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a call to method_exists() before using any method name
+* Relay the call to another object that doesn't handle __call() or __callStatic()
+
++-------------+--------------------------+
+| Short name  | Classes/CheckOnCallUsage |
++-------------+--------------------------+
+| Themes      | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -5389,15 +5455,25 @@ Making a loop to repeat the same concatenation is actually much longer than usin
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Structures/CouldUseStrrepeat |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
-+-------------+------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use strrepeat whenever possible
+
++-------------+------------------------------------------------------------------------------------------+
+| Short name  | Structures/CouldUseStrrepeat                                                             |
++-------------+------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                                             |
++-------------+------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                    |
++-------------+------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                            |
++-------------+------------------------------------------------------------------------------------------+
+| Examples    | :ref:`zencart-structures-couldusestrrepeat`, :ref:`zencart-structures-couldusestrrepeat` |
++-------------+------------------------------------------------------------------------------------------+
 
 
 
@@ -6090,6 +6166,13 @@ Error messages should be logged, but not displayed.
 
 See also `Error reporting <https://php.earth/docs/security/intro#error-reporting>`_ and 
          `List of php.ini directives <http://php.net/manual/en/ini.list.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove any echo, print, printf() call built with error messages from an exception, or external source.
 
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Security/DontEchoError                                                               |
@@ -9351,17 +9434,26 @@ Operands should be different when comparing or making a logical combination. Of 
    
    ?>
 
-+-------------+---------------------------------------------------+
-| Short name  | Structures/IdenticalOnBothSides                   |
-+-------------+---------------------------------------------------+
-| Themes      | :ref:`Analyze`                                    |
-+-------------+---------------------------------------------------+
-| Severity    | Major                                             |
-+-------------+---------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                   |
-+-------------+---------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-structures-identicalonbothsides` |
-+-------------+---------------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove one of the alternative, and remove the logical link
+* Modify one of the alternative, and make it different from the other
+
++-------------+----------------------------------------------------------------------------------------------------+
+| Short name  | Structures/IdenticalOnBothSides                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                     |
++-------------+----------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                              |
++-------------+----------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpmyadmin-structures-identicalonbothsides`, :ref:`humo-gen-structures-identicalonbothsides` |
++-------------+----------------------------------------------------------------------------------------------------+
 
 
 
@@ -10832,54 +10924,6 @@ See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_a
 
 
 
-.. _local-globals:
-
-Local Globals
-#############
-
-
-A global variable is used locally in a method. 
-
-Either the global keyword has been forgotten, or the local variable should be renamed in a less ambiguous manner.
-
-Having both a global and a local variable with the same name is legit. PHP keeps the contexts separated, and it processes them independently.
-
-However, in the mind of the coder, it is easy to mistake the local variable $x and the global variable $x. May they be given different meaning, and this is an error-prone situation. 
-
-It is recommended to keep the global variables's name distinct from the local variables. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This is actualy a global variable
-   $variable = 1;
-   $globalVariable = 2;
-   
-   function foo() {
-       global $globalVariable2;
-       
-       $variable = 4;
-       $localVariable = 3;
-       
-       // This always displays 423, instead of 123
-       echo $variable .' ' . $globalVariable . ' ' . $localVariable;
-   }
-   
-   ?>
-
-+-------------+------------------------+
-| Short name  | Variables/LocalGlobals |
-+-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Slow (1 hour)          |
-+-------------+------------------------+
-
-
-
 .. _locally-unused-property:
 
 Locally Unused Property
@@ -11057,6 +11101,12 @@ Even two 'or' comparisons are slower than using a `in_array() <http://www.php.ne
 
 
 See also `in_array() <http://www.php.net/in_array>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the list of comparisons with a in_array call
 
 +-------------+----------------------------------------------+
 | Short name  | Performances/LogicalToInArray                |
@@ -11628,15 +11678,17 @@ Suggestions
 * Make the method a standalone function
 * Make use of $this in the method : may be it was forgotten.
 
-+-------------+-----------------------+
-| Short name  | Classes/CouldBeStatic |
-+-------------+-----------------------+
-| Themes      | none                  |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
-+-------------+-----------------------+
++-------------+-------------------------------------------------------------------------------------+
+| Short name  | Classes/CouldBeStatic                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Themes      | none                                                                                |
++-------------+-------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                     |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`fuelcms-classes-couldbestatic`, :ref:`expressionengine-classes-couldbestatic` |
++-------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -11761,23 +11813,39 @@ The default value may also be a constant scalar expression : since PHP 7, some o
    // works without problem
    foo('string');
    
-   // Fatal error at execution time
+   // Fatal error at compile time
    foo();
+   
+   // Fail only at execution time (missing D), and when default is needed
+   function foo2(string $s = D ? null : array()) {
+       echo $s;
+   }
    
    ?>
 
 
+PHP report typehint and default mismatch at compilation time, unless there is a static expression that can't be resolved within the compiled file : then it is checked only at runtime, leading to a Fatal error.
+
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
-+-------------+----------------------------------+
-| Short name  | Functions/MismatchTypeAndDefault |
-+-------------+----------------------------------+
-| Themes      | :ref:`Analyze`                   |
-+-------------+----------------------------------+
-| Severity    | Critical                         |
-+-------------+----------------------------------+
-| Time To Fix | Slow (1 hour)                    |
-+-------------+----------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the typehint with the default value
+
++-------------+---------------------------------------------------+
+| Short name  | Functions/MismatchTypeAndDefault                  |
++-------------+---------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`            |
++-------------+---------------------------------------------------+
+| Severity    | Critical                                          |
++-------------+---------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                     |
++-------------+---------------------------------------------------+
+| Examples    | :ref:`wordpress-functions-mismatchtypeanddefault` |
++-------------+---------------------------------------------------+
 
 
 
@@ -12131,15 +12199,15 @@ A unexpected structure is built for initialization. It may be a typo that create
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Arrays/MistakenConcatenation |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Arrays/MistakenConcatenation                   |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
 
 
 
@@ -12176,6 +12244,13 @@ Mixed usage of concatenation and string interpolation is error prone. It is hard
 Fixing this issue has no impact on the output. It makes code less error prone.
 
 There are some situations where using concatenation are compulsory : when using a constant, calling a function, running a complex expression or make use of the escape sequence. You may also consider pushing the storing of such expression in a local variable.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Only use one type of variable usage : either interpolation, or concatenation
 
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/MixedConcatInterpolation                                                                     |
@@ -13640,6 +13715,14 @@ Avoid using '+1 month', and rely on 'first day of next month' or 'last day of ne
 
 
 See also `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Review strtotime() usage for month additions
+* Use datetime() and other classes, not PHP native functions
+* Use a external library, like carbon, to handle dates
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/NextMonthTrap                                                        |
@@ -15325,12 +15408,18 @@ In practice, letters outside the scope of ``a-zA-Z0-9`` are rare, and require mo
        }
    }
    
-   $people = new 人();
+   $人民 = new 人();
    
    ?>
 
 
 See also `Variables <http://php.net/manual/en/language.variables.basics.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make sure those special chars have actual meaning.
 
 +-------------+-------------------------------------------+
 | Short name  | Variables/VariableNonascii                |
@@ -15914,15 +16003,26 @@ One letter functions seems to be really short for a meaningful name. This may ha
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Functions/OneLetterFunctions |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use full names for functions
+* Remove the function name altogether : use a closure
+
++-------------+-----------------------------------------------------------------------------------------------+
+| Short name  | Functions/OneLetterFunctions                                                                  |
++-------------+-----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>`                                                |
++-------------+-----------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                         |
++-------------+-----------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                               |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`thinkphp-functions-oneletterfunctions`, :ref:`cleverstyle-functions-oneletterfunctions` |
++-------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -20447,7 +20547,7 @@ Should Use array_filter()
 
 Should use `array_filter() <http://www.php.net/array_filter>`_.
 
-`array_filter() <http://www.php.net/array_filter>`_ is a native PHP function, that extract elements from an array, based on a closure. 
+`array_filter() <http://www.php.net/array_filter>`_ is a native PHP function, that extract elements from an array, based on a closure or a function. Using `array_filter() <http://www.php.net/array_filter>`_ shortens your code, and allows for reusing the filtering logic across the application, instead of hard coding it every time.
 
 .. code-block:: php
 
@@ -20455,32 +20555,47 @@ Should use `array_filter() <http://www.php.net/array_filter>`_.
    
    $a = range(0, 10); // integers from 0 to 10
    
-   $odds = array_filter(function($x) { return $x % 2; });
+   // Extracts odd numbers
+   $odds = array_filter($a, function($x) { return $x % 2; });
+   $odds = array_filter($a, 'odd');
    
-   // Slow and cumbersome code
+   // Slow and cumbersome code for extracting odd numbers
    $odds = array();
-   foreach($a as $k => $v) {
-       if ($a % 2 == 1) {
+   foreach($a as $v) {
+       if ($a % 2) { // same filter than the closure above, or the odd function below
            $bColumn[] = $v;
        }
+   }
+   
+   function foo($x) {
+       return $x % 2; 
    }
    
    ?>
 
 
-`array_column() <http://www.php.net/array_column>`_ is faster than `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
+`array_filter() <http://www.php.net/array_filter>`_ is faster than `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
 
 See also `array_filter <https://php.net/array_filter>`_.
 
-+-------------+--------------------------+
-| Short name  | Php/ShouldUseArrayFilter |
-+-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use array_filter()
+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Php/ShouldUseArrayFilter                                                           |
++-------------+------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                                 |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                      |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`xataface-php-shouldusearrayfilter`, :ref:`shopware-php-shouldusearrayfilter` |
++-------------+------------------------------------------------------------------------------------+
 
 
 
@@ -21408,17 +21523,17 @@ Suggestions
 * Replace the odd spaces with a normal space
 * If unsecable spaces are important for presentation, add them at the templating level.
 
-+-------------+-------------------------------------------+
-| Short name  | Type/StringWithStrangeSpace               |
-+-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`                            |
-+-------------+-------------------------------------------+
-| Severity    | Minor                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`thelia-type-stringwithstrangespace` |
-+-------------+-------------------------------------------+
++-------------+---------------------------------------------------------------------------------------+
+| Short name  | Type/StringWithStrangeSpace                                                           |
++-------------+---------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                        |
++-------------+---------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                 |
++-------------+---------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                       |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`openemr-type-stringwithstrangespace`, :ref:`thelia-type-stringwithstrangespace` |
++-------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -21591,17 +21706,17 @@ Suggestions
 
 * Always reduce the string first, then apply some transformation
 
-+-------------+--------------------------------------------+
-| Short name  | Performances/SubstrFirst                   |
-+-------------+--------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions`    |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Instant (5 mins)                           |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`prestashop-performances-substrfirst` |
-+-------------+--------------------------------------------+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Performances/SubstrFirst                                                         |
++-------------+----------------------------------------------------------------------------------+
+| Themes      | :ref:`Performances`, :ref:`Suggestions`                                          |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                 |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`spip-performances-substrfirst`, :ref:`prestashop-performances-substrfirst` |
++-------------+----------------------------------------------------------------------------------+
 
 
 
@@ -21949,6 +22064,14 @@ The cast may introduce a distortion to the value, and still lead to the unwanted
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Test with the cast value
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/TestThenCast                                                         |
@@ -22650,7 +22773,7 @@ See also `Return Type Declaration <http://php.net/manual/en/functions.returning-
 Suggestions
 ^^^^^^^^^^^
 
-* Add a
+* Add a return with a valid value
 
 +-------------+----------------------------------------+
 | Short name  | Functions/TypehintMustBeReturned       |
@@ -25143,15 +25266,23 @@ The second argument of count, when set to ``COUNT_RECURSIVE``, count recursively
 
 See also `count <http://php.net/count>`_.
 
-+-------------+------------------------------+
-| Short name  | Structures/UseCountRecursive |
-+-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
-+-------------+------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the loop and use the 2nd argument of count()
+
++-------------+-----------------------------------------------------------------------------------------------+
+| Short name  | Structures/UseCountRecursive                                                                  |
++-------------+-----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                                            |
++-------------+-----------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                         |
++-------------+-----------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                 |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-structures-usecountrecursive`, :ref:`prestashop-structures-usecountrecursive` |
++-------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -26286,6 +26417,15 @@ Abstract classes that have only static methods are omitted here : one usage of s
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the abstract keyword
+* Actually add an abstract keyword
 
 +-------------+-------------------------+
 | Short name  | Classes/UselessAbstract |

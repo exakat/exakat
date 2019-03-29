@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class FixFullnspathConstants extends LoadFinal {
     public function run() {
-        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
+        $query = $this->newQuery('fixFullnspathConstants');
         $query->atomIs(array('Identifier', 'Nsname'), Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->_as('identifier')
