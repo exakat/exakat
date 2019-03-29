@@ -31,18 +31,32 @@ class CreateVirtualProperty extends LoadFinal {
         $query = $this->newQuery('CreateVirtualProperty VirtualProperty');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
-              ->savePropertyAs('fullcode', 'f')
               ->hasNoIn('DEFINITION')
               ->dedup('fullcode')
+              ->outIs('MEMBER')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('lccode', 'lower')
+              ->savePropertyAs('code', 'ncode')
+              ->savePropertyAs('fullcode', 'full')
               
               ->goToClass()
               ->_as('laClasse')
 
-              ->raw('addV("Virtualproperty").sideEffect{ it.get().property("code", f);
-                                                         it.get().property("fullcode", f); 
-                                                         it.get().property("line", -1); 
-                                                         it.get().property("visibility", "none");
-                                                       }.addE("PPP").from("laClasse")', array(), array())
+              ->raw(<<<GREMLIN
+addV("Ppp").sideEffect{ it.get().property("code", ncode);
+                        it.get().property("lccode", lower); 
+                        it.get().property("fullcode", '\$' + full); 
+                        it.get().property("line", -1); 
+                        it.get().property("visibility", "none");
+                       }.as('ppp').addE("PPP").from("laClasse").
+addV("Virtualproperty").sideEffect{ it.get().property("code", ncode);
+                                    it.get().property("lccode", lower); 
+                                    it.get().property("fullcode", '\$' + full); 
+                                    it.get().property("propertyname", lower); 
+                                    it.get().property("line", -1); 
+                                  }.addE("PPP").from("ppp")
+GREMLIN
+, array(), array())
 
               ->returnCount();
         $query->prepareRawQuery();
@@ -54,13 +68,15 @@ class CreateVirtualProperty extends LoadFinal {
         $query = $this->newQuery('CreateVirtualProperty definitions');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
-              ->savePropertyAs('fullcode', 'f')
               ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->savePropertyAs('lccode', 'name')
               
               ->goToClass()
               ->outIs('PPP')
+              ->outIs('PPP')
               ->atomIs('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
-              ->samePropertyAs('fullcode', 'f', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member')
 
               ->returnCount();
