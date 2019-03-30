@@ -59,6 +59,8 @@ Label : PROJECT
                 36
               Label : USE
                 38
+                Label : DEFINITION
+                  38
                 Label : FUNCTION
                   14
               Label : USE
@@ -151,6 +153,12 @@ Label : PROJECT
                   68
                   Label : ARGUMENT
                     66
+              Label : DEFINITION
+                38
+                Label : ARGUMENT
+                  5
+                Label : NAME
+                  38
               Label : NAME
                 38
             Label : EXPRESSION
