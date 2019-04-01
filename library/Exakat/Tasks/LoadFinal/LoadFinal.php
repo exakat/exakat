@@ -633,6 +633,32 @@ GREMLIN;
         $total += $res;
         display("propagating $res Concatenations with constants");
 
+        display("propagating Constant value in Sign");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Sign").not(has("intval"))
+     .where( __.out("SIGN").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("SIGN").not(has("intval")) ) )
+     .where( __.out("SIGN").sideEffect{ x = it.get().value("intval") }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_PLUS') {
+            it.get().property("intval", x); 
+            it.get().property("boolean", x != 0);
+            it.get().property("noDelimiter", x.toString()); 
+        } else if (it.get().value("token") == 'T_MINUS') {
+            it.get().property("intval", -1 * x); 
+            it.get().property("boolean", x != 0);
+            it.get().property("noDelimiter", (-1 * x).toString()); 
+        }
+
+        i = null;
+     }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Signs with constants");
+
         display("propagating Constant value in Addition");
         // fix path for constants with Const
         $query = <<<GREMLIN
