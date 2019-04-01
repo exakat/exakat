@@ -28,16 +28,43 @@ class CouldUseTry extends Analyzer {
     public function analyze() {
         // $a = $b << $c; (No try... )
         $this->atomIs('Bitshift')
-             ->hasNoTryCatch();
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->isLess('intval', 0)
+             ->hasNoTryCatch()
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a = $b << $c; (No try... )
+        $this->atomIs('Bitshift')
+             ->outIs('RIGHT')
+             ->hasNo('intval')
+             ->hasNoTryCatch()
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Multiplication')
              ->codeIs(array('%', '/'))
-             ->hasNoTryCatch();
+             ->outIs('RIGHT')
+             ->hasNo('intval')
+             ->hasNoTryCatch()
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Multiplication')
+             ->codeIs(array('%', '/'))
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->is('intval', 0)
+             ->hasNoTryCatch()
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\intdiv')
-             ->hasNoTryCatch();
+             ->outWithRank('ARGUMENT', 1)
+             ->hasNo('intval')
+             ->hasNoTryCatch()
+             ->back('first');
         $this->prepareQuery();
         
         // All reflection classes must catch ReflectionExpression
@@ -45,7 +72,7 @@ class CouldUseTry extends Analyzer {
         $reflectionFNP = makeFullNsPath($reflectionClasses);
         $this->atomIs('New')
              ->outIs('NEW')
-             ->has('fullnspath', $reflectionFNP)
+             ->is('fullnspath', $reflectionFNP)
              ->hasNoTryCatch();
         $this->prepareQuery();
 
