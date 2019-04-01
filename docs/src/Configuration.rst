@@ -159,7 +159,7 @@ Here are the currently available options in Exakat's configuration file : config
 +--------------------+-------------------------------------------------------------------------------------------+
 
 Custom rulesets
-#############
+###############
 
 Create custom rulesets by creating a 'config/themes.ini' directive files. 
 

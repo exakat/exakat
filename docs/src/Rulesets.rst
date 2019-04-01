@@ -58,7 +58,7 @@ Here is the list of the current rulesets supported by Exakat Engine.
 Note : in command line, don't forget to add quotes to rulesets' names that include white space.
 
 Rulesets details
-###############
+################
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details

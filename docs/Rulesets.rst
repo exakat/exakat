@@ -1,16 +1,16 @@
-.. _Themes:
+.. _Rulesets:
 
-Themes
-******
+Rulesets
+********
 
 Presentation
 ############
 
-Analysis are grouped in different standard recipes, that may be run independantly. Each recipe has a focus target, 
+Analysis are grouped in different rulesets, that may be run independantly. Each ruleset has a focus target, 
 
-Recipes runs all its analysis and any needed dependency.
+Rulesets runs all its analysis and any needed dependency.
 
-Recipes are configured with the -T option, when running exakat in command line.
+Rulesets are configured with the -T option, when running exakat in command line. For example : 
 
 ::
 
@@ -18,10 +18,10 @@ Recipes are configured with the -T option, when running exakat in command line.
 
 
 
-List of recipes
-###############
+List of rulesets
+################
 
-Here is the list of the current recipes supported by Exakat Engine.
+Here is the list of the current rulesets supported by Exakat Engine.
 
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |Name                                           | Description                                                                                          |
@@ -55,15 +55,15 @@ Here is the list of the current recipes supported by Exakat Engine.
 |:ref:`Coding Conventions <coding-conventions>` | List coding conventions violations.                                                                  |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 
-Note : in command line, don't forget to add quotes to recipes's names that include white space.
+Note : in command line, don't forget to add quotes to rulesets' names that include white space.
 
-Recipes details
-###############
+Rulesets details
+################
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
-.. comment: Recipes details
-.. comment: Generation date : Mon, 25 Mar 2019 16:13:03 +0000
-.. comment: Generation hash : ea3a87417597f695e5faa94d6b90a414e8a833f0
+.. comment: Rulesets details
+.. comment: Generation date : Mon, 01 Apr 2019 14:51:18 +0000
+.. comment: Generation hash : eefa90b29c62ffb2a9c26482ce435df9158067da
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 351 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -114,7 +114,6 @@ Total : 352 analysis
 * :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Function Confusion <class-function-confusion>`
-* :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
@@ -462,7 +461,6 @@ Total : 24 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
-* :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Curly Arrays <curly-arrays>`
@@ -471,6 +469,7 @@ Total : 24 analysis
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Heredoc Delimiter <heredoc-delimiter>`
 * :ref:`Interpolation <interpolation>`
+* :ref:`Invalid Class Name <invalid-class-name>`
 * :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
@@ -1179,7 +1178,7 @@ Total : 77 analysis
 Top10
 +++++
 
-Total : 22 analysis
+Total : 21 analysis
 
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Dangling Array References <dangling-array-references>`
@@ -1198,7 +1197,6 @@ Total : 22 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Should Yield With Key <should-yield-with-key>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
-* :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use const <use-const>`

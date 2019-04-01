@@ -19,7 +19,7 @@ Contents:
    Tutorial
    FAQ
    Commands
-   Themes
+   Rulesets
    Rules
    Cases
    Reports

@@ -2565,6 +2565,22 @@ Not only echo() doesn't use any parenthesis, but this syntax gives the illusion 
 
     echo (($row['Null'] == 'NO') ? __('No') : __('Yes'))
 
+No Hardcoded Port
+=================
+
+.. _wordpress-structures-nohardcodedport:
+
+WordPress
+^^^^^^^^^
+
+:ref:`no-hardcoded-port`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 Use Constant As Arguments
 =========================
 
@@ -3789,7 +3805,7 @@ Hidden Use Expression
 Tikiwiki
 ^^^^^^^^
 
-:ref:`hidden-use-expression`, in /lib/core/Tiki/Command/DailyReportSendCommand.php:17. 
+:ref:`hidden-use-expression`, in lib/core/Tiki/Command/DailyReportSendCommand.php:17. 
 
 Sneaky error_reporting, hidden among the use calls. 
 
@@ -4219,6 +4235,29 @@ __getBaseUrl and __setBaseUrl shouldn't be named like that.
     		return $this->baseUrl;
     	}
 
+
+--------
+
+
+.. _magento-classes-wrongname:
+
+Magento
+^^^^^^^
+
+:ref:`illegal-name-for-method`, in app/code/core/Mage/Core/Block/Abstract.php:1139. 
+
+public method, called '__'. Example : $this->__();
+
+.. code-block:: php
+
+    public function __()
+        {
+            $args = func_get_args();
+            $expr = new Mage_Core_Model_Translate_Expr(array_shift($args), $this->getModuleName());
+            array_unshift($args, $expr);
+            return $this->_getApp()->getTranslator()->translate($args);
+        }
+
 Long Arguments
 ==============
 
@@ -4391,6 +4430,39 @@ This switch handles 3 cases, plus the default for all others. There are other sw
     			default:
     				return false;
     		}
+
+Repeated Regex
+==============
+
+.. _vanilla-structures-repeatedregex:
+
+Vanilla
+^^^^^^^
+
+:ref:`repeated-regex`, in library/core/class.pluginmanager.php:1200. 
+
+This regex is actually repeated 4 times across the Vanilla database, including this variation : '#^(https?:)?//#i'.
+
+.. code-block:: php
+
+    '`^https?://`'
+
+
+--------
+
+
+.. _tikiwiki-structures-repeatedregex:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`repeated-regex`, in tiki-login.php:369. 
+
+This regex is use twice, identically, in the same file, with a few line of distance. It may be federated at the file level.
+
+.. code-block:: php
+
+    preg_match('/(tiki-register|tiki-login_validate|tiki-login_scr)\.php/', $url)
 
 No Class In Global
 ==================
@@ -4893,6 +4965,22 @@ IS_DASHBOARD is defined as a boolean or a string. Later, it is tested as a boole
     
     l:132) echo IS_DASHBOARD ? IS_DASHBOARD : 0;
     ?>
+
+Mismatched Typehint
+===================
+
+.. _wordpress-functions-mismatchedtypehint:
+
+WordPress
+^^^^^^^^^
+
+:ref:`mismatched-typehint`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 Assign With And
 ===============
@@ -5796,6 +5884,22 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
 
+Invalid Class Name
+==================
+
+.. _wordpress-classes-wrongcase:
+
+WordPress
+^^^^^^^^^
+
+:ref:`invalid-class-name`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 One Letter Functions
 ====================
 
@@ -6445,6 +6549,41 @@ The array $allowedScriptDomains is flipped, to unset 'self', then, unflipped (or
     				}
     			}
 
+Closure Could Be A Callback
+===========================
+
+.. _tine20-functions-closure2string:
+
+Tine20
+^^^^^^
+
+:ref:`closure-could-be-a-callback`, in tine20/Tinebase/Convert/Json.php:318. 
+
+is_scalar() is sufficient here.
+
+.. code-block:: php
+
+    $value = array_filter($value, function ($val) { return is_scalar($val); });
+
+
+--------
+
+
+.. _nextcloud-functions-closure2string:
+
+Nextcloud
+^^^^^^^^^
+
+:ref:`closure-could-be-a-callback`, in apps/files_sharing/lib/ShareBackend/Folder.php:114. 
+
+$qb is the object for the methodcall, passed via use. The closure may have been replaced with array($qb, 'createNamedParameter').
+
+.. code-block:: php
+
+    $parents = array_map(function($parent) use ($qb) {
+    				return $qb->createNamedParameter($parent);
+    			}, $parents);
+
 Compare Hash
 ============
 
@@ -6698,6 +6837,54 @@ An actual phpinfo(), available during installation. Note that the phpinfo() is a
         </form>
     
     </center>
+
+Argument Should Be Typehinted
+=============================
+
+.. _dolphin-functions-shouldbetypehinted:
+
+Dolphin
+^^^^^^^
+
+:ref:`argument-should-be-typehinted`, in Dolphin-v.7.3.5/plugins/intervention-image/Intervention/Image/Gd/Commands/WidenCommand.php:20. 
+
+This closures make immediate use of the $constraint argument, and calls its method aspectRatio. No check is made on this argument, and it may easily be mistaken with another class, or a null. Adding a typehint here will ensure a more verbose development error and help detect misuse of the closure. 
+
+.. code-block:: php
+
+    $this->arguments[2] = function ($constraint) use ($additionalConstraints) {
+                $constraint->aspectRatio();
+                if(is_callable($additionalConstraints)) 
+                    $additionalConstraints($constraint);
+            };
+
+
+--------
+
+
+.. _dolphin-functions-shouldbetypehinted:
+
+Dolphin
+^^^^^^^
+
+:ref:`argument-should-be-typehinted`, in app/bundles/PluginBundle/Helper/IntegrationHelper.php:374. 
+
+This piece of code inside a 275 lines method. Besides, there are 11 classes that offer a 'getPriority' method, although $returnServices could help to semantically reduce the number of possible classes. Here, typehints on $a and $b help using the wrong kind of object. 
+
+.. code-block:: php
+
+    if (empty($alphabetical)) {
+                // Sort by priority
+                uasort($returnServices, function ($a, $b) {
+                    $aP = (int) $a->getPriority();
+                    $bP = (int) $b->getPriority();
+    
+                    if ($aP === $bP) {
+                        return 0;
+                    }
+    
+                    return ($aP < $bP) ? -1 : 1;
+                });
 
 Could Return Void
 =================
@@ -7371,6 +7558,55 @@ $_match[3] is actually extracted two preg_match() before : by the time we read i
                 $_block_force = (bool) preg_match('#[\s]force#', $_block_args);
                 $_block_json = (bool) preg_match('#[\s]json=["\']true["\']\W#', $_block_args);
                 $_block_name = !empty($_match[3]) ? trim($_match[3], '\'"') : $_block_default;
+
+Could Use Try
+=============
+
+.. _mautic-exceptions-couldusetry:
+
+Mautic
+^^^^^^
+
+:ref:`could-use-try`, in app/bundles/StageBundle/Controller/StageController.php:78. 
+
+$limit is read as a session variable or a default value. There are no check here that $limit is not null, before using it in a division. It is easy to imagine this is done elsewhere, yet a try/catch could help intercept unwanted situations.
+
+.. code-block:: php
+
+    //set limits
+            $limit = $this->get('session')->get(
+                'mautic.stage.limit',
+                $this->coreParametersHelper->getParameter('default_pagelimit')
+            );
+    /... Code where $limit is read but not modified /
+            $count = count($stages);
+            if ($count && $count < ($start + 1)) {
+                $lastPage = ($count === 1) ? 1 : (ceil($count / $limit)) ?: 1;
+
+
+--------
+
+
+.. _mautic-exceptions-couldusetry:
+
+Mautic
+^^^^^^
+
+:ref:`could-use-try`, in app/bundles/StageBundle/Controller/StageController.php:78. 
+
+$limit is read as a session variable or a default value. There are no check here that $limit is not null, before using it in a division. It is easy to imagine this is done elsewhere, yet a try/catch could help intercept unwanted situations.
+
+.. code-block:: php
+
+    //set limits
+            $limit = $this->get('session')->get(
+                'mautic.stage.limit',
+                $this->coreParametersHelper->getParameter('default_pagelimit')
+            );
+    /... Code where $limit is read but not modified /
+            $count = count($stages);
+            if ($count && $count < ($start + 1)) {
+                $lastPage = ($count === 1) ? 1 : (ceil($count / $limit)) ?: 1;
 
 Don't Loop On Yield
 ===================

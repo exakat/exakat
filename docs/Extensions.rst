@@ -22,8 +22,8 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
                                config/themes.ini
         graphdb              : gsneo4j
         reports              : Ambassador
-        themes               : mine2
-        extra themes         : mine,
+        rulesets             : mine2
+        extra rulesets       : mine,
                                special,
                                MonologExtra
         tokenslimit          : 1 000 000 000
@@ -36,15 +36,19 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
 
 
 
-List of extensions : there are 9 extensions
+List of extensions : there are 13 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
+* :ref:`Monolog <extension-monolog>`
+* :ref:`Prestashop <extension-prestashop>`
+* :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
 * :ref:`Symfony <extension-symfony>`
+* :ref:`Twig <extension-twig>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -203,21 +207,30 @@ Exakat provides compatibility reports with classes, interfaces and traits from C
 Cakephp analysis
 --------------------------------------------------
 
-This extension includes 18 analyzers.
+This extension includes 27 analyzers.
 
 * CakePHP 2.5.0 Undefined Classes (Cakephp/Cakephp25)
 * CakePHP 2.6.0 Undefined Classes (Cakephp/Cakephp26)
 * CakePHP 2.7.0 Undefined Classes (Cakephp/Cakephp27)
 * CakePHP 2.8.0 Undefined Classes (Cakephp/Cakephp28)
 * CakePHP 2.9.0 Undefined Classes (Cakephp/Cakephp29)
+* Cakephp 3.0 Compatibility (Cakephp/Cakephp_3_0)
 * CakePHP 3.0 Deprecated Class (Cakephp/Cake30DeprecatedClass)
 * CakePHP 3.0.0 Undefined Classes (Cakephp/Cakephp30)
+* Cakephp 3.1 Compatibility (Cakephp/Cakephp_3_1)
 * CakePHP 3.1.0 Undefined Classes (Cakephp/Cakephp31)
+* Cakephp 3.2 Compatibility (Cakephp/Cakephp_3_2)
 * CakePHP 3.2.0 Undefined Classes (Cakephp/Cakephp32)
+* Cakephp 3.3 Compatibility (Cakephp/Cakephp_3_3)
 * CakePHP 3.3 Deprecated Class (Cakephp/Cake33DeprecatedClass)
 * CakePHP 3.3.0 Undefined Classes (Cakephp/Cakephp33)
+* Cakephp 3.4 Compatibility (Cakephp/Cakephp_3_4)
 * CakePHP 3.4.0 Undefined Classes (Cakephp/Cakephp34)
+* Cakephp 3.5 Compatibility (Cakephp/Cakephp_3_5)
+* Cakephp 3.6 Compatibility (Cakephp/Cakephp_3_6)
+* Cakephp 3.7 Compatibility (Cakephp/Cakephp_3_7)
 * CakePHP Unknown Classes (Cakephp/CakePHPMissing)
+* Cakephp Usage (Cakephp/CakephpUsage)
 * CakePHP Used (Cakephp/CakePHPUsed)
 * Deprecated Methodcalls in Cake 3.2 (Cakephp/Cake32DeprecatedMethods)
 * Deprecated Methodcalls in Cake 3.3 (Cakephp/Cake33DeprecatedMethods)
@@ -350,7 +363,7 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 Laravel analysis
 --------------------------------------------------
 
-This extension includes 9 analyzers.
+This extension includes 18 analyzers.
 
 * Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
 * Compatibility Laravel v5_1_0 (Laravel/Laravel_v5_1_0)
@@ -360,7 +373,16 @@ This extension includes 9 analyzers.
 * Compatibility Laravel v5_5_0 (Laravel/Laravel_v5_5_0)
 * Compatibility Laravel v5_6_0 (Laravel/Laravel_v5_6_0)
 * Compatibility Laravel v5_7_0 (Laravel/Laravel_v5_7_0)
-* {$this->name}Usage (Laravel/LaravelUsage)
+* Laravel 5.0 Compatibility (Laravel/Laravel_5_0)
+* Laravel 5.1 Compatibility (Laravel/Laravel_5_1)
+* Laravel 5.2 Compatibility (Laravel/Laravel_5_2)
+* Laravel 5.3 Compatibility (Laravel/Laravel_5_3)
+* Laravel 5.4 Compatibility (Laravel/Laravel_5_4)
+* Laravel 5.5 Compatibility (Laravel/Laravel_5_5)
+* Laravel 5.6 Compatibility (Laravel/Laravel_5_6)
+* Laravel 5.7 Compatibility (Laravel/Laravel_5_7)
+* Laravel 5.8 Compatibility (Laravel/Laravel_5_8)
+* Laravel Usage (Laravel/LaravelUsage)
 
 
 Laravel rulesets
@@ -425,6 +447,160 @@ This extension includes one report : Melis.
 
 
 
+.. _extension-monolog:
+
+Monolog
+#######
+
+This is the Monolog extension for Exakat. 
+
+Monolog is a popular logging component for PHP, written by ` <https://twitter.com/seldaek>`_. 
+
+
+* **Home page** : `https://github.com/Seldaek/monolog <https://github.com/Seldaek/monolog>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Monolog <https://github.com/exakat/Exakat4Monolog>`_
+
+Monolog analysis
+--------------------------------------------------
+
+This extension includes 52 analyzers.
+
+* Monolog 1.0 Compatibility (Monolog/Monolog_1_0)
+* Monolog 1.0.0 Compatibility (Monolog/Monolog_1_0_0)
+* Monolog 1.1 Compatibility (Monolog/Monolog_1_1)
+* Monolog 1.1.0 Compatibility (Monolog/Monolog_1_1_0)
+* Monolog 1.10 Compatibility (Monolog/Monolog_1_10)
+* Monolog 1.10.0 Compatibility (Monolog/Monolog_1_10_0)
+* Monolog 1.11 Compatibility (Monolog/Monolog_1_11)
+* Monolog 1.11.0 Compatibility (Monolog/Monolog_1_11_0)
+* Monolog 1.12 Compatibility (Monolog/Monolog_1_12)
+* Monolog 1.12.0 Compatibility (Monolog/Monolog_1_12_0)
+* Monolog 1.13 Compatibility (Monolog/Monolog_1_13)
+* Monolog 1.13.0 Compatibility (Monolog/Monolog_1_13_0)
+* Monolog 1.14 Compatibility (Monolog/Monolog_1_14)
+* Monolog 1.14.0 Compatibility (Monolog/Monolog_1_14_0)
+* Monolog 1.15 Compatibility (Monolog/Monolog_1_15)
+* Monolog 1.15.0 Compatibility (Monolog/Monolog_1_15_0)
+* Monolog 1.16 Compatibility (Monolog/Monolog_1_16)
+* Monolog 1.16.0 Compatibility (Monolog/Monolog_1_16_0)
+* Monolog 1.17 Compatibility (Monolog/Monolog_1_17)
+* Monolog 1.17.0 Compatibility (Monolog/Monolog_1_17_0)
+* Monolog 1.18 Compatibility (Monolog/Monolog_1_18)
+* Monolog 1.18.0 Compatibility (Monolog/Monolog_1_18_0)
+* Monolog 1.19 Compatibility (Monolog/Monolog_1_19)
+* Monolog 1.19.0 Compatibility (Monolog/Monolog_1_19_0)
+* Monolog 1.2 Compatibility (Monolog/Monolog_1_2)
+* Monolog 1.2.0 Compatibility (Monolog/Monolog_1_2_0)
+* Monolog 1.20 Compatibility (Monolog/Monolog_1_20)
+* Monolog 1.20.0 Compatibility (Monolog/Monolog_1_20_0)
+* Monolog 1.21 Compatibility (Monolog/Monolog_1_21)
+* Monolog 1.21.0 Compatibility (Monolog/Monolog_1_21_0)
+* Monolog 1.22 Compatibility (Monolog/Monolog_1_22)
+* Monolog 1.22.0 Compatibility (Monolog/Monolog_1_22_0)
+* Monolog 1.23 Compatibility (Monolog/Monolog_1_23)
+* Monolog 1.23.0 Compatibility (Monolog/Monolog_1_23_0)
+* Monolog 1.24 Compatibility (Monolog/Monolog_1_24)
+* Monolog 1.24.0 Compatibility (Monolog/Monolog_1_24_0)
+* Monolog 1.3 Compatibility (Monolog/Monolog_1_3)
+* Monolog 1.3.0 Compatibility (Monolog/Monolog_1_3_0)
+* Monolog 1.4 Compatibility (Monolog/Monolog_1_4)
+* Monolog 1.4.0 Compatibility (Monolog/Monolog_1_4_0)
+* Monolog 1.5 Compatibility (Monolog/Monolog_1_5)
+* Monolog 1.5.0 Compatibility (Monolog/Monolog_1_5_0)
+* Monolog 1.6 Compatibility (Monolog/Monolog_1_6)
+* Monolog 1.6.0 Compatibility (Monolog/Monolog_1_6_0)
+* Monolog 1.7 Compatibility (Monolog/Monolog_1_7)
+* Monolog 1.7.0 Compatibility (Monolog/Monolog_1_7_0)
+* Monolog 1.8 Compatibility (Monolog/Monolog_1_8)
+* Monolog 1.8.0 Compatibility (Monolog/Monolog_1_8_0)
+* Monolog 1.9 Compatibility (Monolog/Monolog_1_9)
+* Monolog 1.9.0 Compatibility (Monolog/Monolog_1_9_0)
+* Monolog 2.0 Compatibility (Monolog/Monolog_2_0)
+* Monolog Usage (Monolog/MonologUsage)
+
+
+Monolog rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Monolog.
+
+
+Monolog reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
+
+
+
+.. _extension-prestashop:
+
+Prestashop
+##########
+
+This is the Prestashop extension for Exakat. 
+
+PrestaShop is an efficient and innovative e-commerce solution with all the features you need to create an online store and grow your business.
+
+
+* **Home page** : `https://www.prestashop.com/ <https://www.prestashop.com/>`_
+* **Extension page** : ` <>`_
+
+Prestashop analysis
+--------------------------------------------------
+
+This extension includes 4 analyzers.
+
+* Prestashop 1.5 Compatibility (Prestashop/Prestashop_1_5)
+* Prestashop 1.6 Compatibility (Prestashop/Prestashop_1_6)
+* Prestashop 1.7 Compatibility (Prestashop/Prestashop_1_7)
+* Prestashop Usage (Prestashop/PrestashopUsage)
+
+
+Prestashop rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Prestashop.
+
+
+Prestashop reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
+
+
+
+.. _extension-shopware:
+
+Shopware
+########
+
+This is the Skeleton extension for Exakat. 
+Shopware analysis
+--------------------------------------------------
+
+This extension includes 6 analyzers.
+
+* Shopware 5.0 Compatibility (Shopware/Shopware_5_0)
+* Shopware 5.1 Compatibility (Shopware/Shopware_5_1)
+* Shopware 5.2 Compatibility (Shopware/Shopware_5_2)
+* Shopware 5.3 Compatibility (Shopware/Shopware_5_3)
+* Shopware 5.4 Compatibility (Shopware/Shopware_5_4)
+* Shopware 5.5 Compatibility (Shopware/Shopware_5_5)
+
+
+Shopware rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Shopware.
+
+
+Shopware reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
+
+
+
 .. _extension-slim:
 
 Slim
@@ -444,10 +620,24 @@ Exakat provides compatibility reports with classes, interfaces and traits from S
 Slim analysis
 --------------------------------------------------
 
-This extension includes 26 analyzers.
+This extension includes 40 analyzers.
 
 * No Echo In Route Callable (Slim/NoEchoInRouteCallable)
+* Slim 3.0 Compatibility (Slim/Slim_3_0)
+* Slim 3.1 Compatibility (Slim/Slim_3_1)
+* Slim 3.10 Compatibility (Slim/Slim_3_10)
+* Slim 3.11 Compatibility (Slim/Slim_3_11)
+* Slim 3.12 Compatibility (Slim/Slim_3_12)
+* Slim 3.2 Compatibility (Slim/Slim_3_2)
+* Slim 3.3 Compatibility (Slim/Slim_3_3)
+* Slim 3.4 Compatibility (Slim/Slim_3_4)
+* Slim 3.5 Compatibility (Slim/Slim_3_5)
+* Slim 3.6 Compatibility (Slim/Slim_3_6)
+* Slim 3.7 Compatibility (Slim/Slim_3_7)
+* Slim 3.8 Compatibility (Slim/Slim_3_8)
+* Slim 3.9 Compatibility (Slim/Slim_3_9)
 * Slim Missing Classes (Slim/SlimMissing)
+* Slim Usage (Slim/SlimUsage)
 * SlimPHP 1.0.0 Undefined Classes (Slim/Slimphp10)
 * SlimPHP 1.1.0 Undefined Classes (Slim/Slimphp11)
 * SlimPHP 1.2.0 Undefined Classes (Slim/Slimphp12)
@@ -504,16 +694,69 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 Symfony analysis
 --------------------------------------------------
 
-This extension includes 0 analyzers.
+This extension includes 10 analyzers.
 
-* 
+* Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
+* Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
+* Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
+* Symfony 3.3 Compatibility (Symfony/Symfony_3_3)
+* Symfony 3.4 Compatibility (Symfony/Symfony_3_4)
+* Symfony 4.0 Compatibility (Symfony/Symfony_4_0)
+* Symfony 4.1 Compatibility (Symfony/Symfony_4_1)
+* Symfony 4.2 Compatibility (Symfony/Symfony_4_2)
+* Symfony Missing (Symfony/SymfonyMissing)
+* Symfony Usage (Symfony/SymfonyUsage)
 
 
 Symfony rulesets
 --------------------------------------------------
 
-This extension includes no specific ruleset.
+This extension includes one ruleset : Symfony.
+
+
 Symfony reports
+--------------------------------------------------
+
+This extension includes no specific report. Use generic reports, like Text to access the results.
+
+
+
+.. _extension-twig:
+
+Twig
+####
+
+This is the Twig extension for Exakat. 
+
+The flexible, fast, and secure template engine for PHP
+
+
+* **Home page** : `https://twig.symfony.com/index.html <https://twig.symfony.com/index.html>`_
+* **Extension page** : ` <>`_
+
+Twig analysis
+--------------------------------------------------
+
+This extension includes 9 analyzers.
+
+* Twig 2.0 Compatibility (Twig/Twig_2_0)
+* Twig 2.1 Compatibility (Twig/Twig_2_1)
+* Twig 2.2 Compatibility (Twig/Twig_2_2)
+* Twig 2.3 Compatibility (Twig/Twig_2_3)
+* Twig 2.4 Compatibility (Twig/Twig_2_4)
+* Twig 2.5 Compatibility (Twig/Twig_2_5)
+* Twig 2.6 Compatibility (Twig/Twig_2_6)
+* Twig 2.7 Compatibility (Twig/Twig_2_7)
+* Twig Usage (Twig/TwigUsage)
+
+
+Twig rulesets
+--------------------------------------------------
+
+This extension includes one ruleset : Twig.
+
+
+Twig reports
 --------------------------------------------------
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
@@ -539,7 +782,7 @@ Exakat reports version compatibility with Worpdress 4.0 to 5.0. Exakat also incl
 Wordpress analysis
 --------------------------------------------------
 
-This extension includes 26 analyzers.
+This extension includes 39 analyzers.
 
 * Avoid Double Prepare (Wordpress/DoublePrepare)
 * Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals)
@@ -554,16 +797,29 @@ This extension includes 26 analyzers.
 * Use $wpdb Api (Wordpress/UseWpdbApi)
 * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables)
 * Use Wordpress Functions (Wordpress/UseWpFunctions)
+* Wordpress 3.9 Compatibility (Wordpress/Wordpress_3_9)
+* Wordpress 4.0 Compatibility (Wordpress/Wordpress_4_0)
 * Wordpress 4.0 Undefined Classes (Wordpress/Wordpress40Undefined)
+* Wordpress 4.1 Compatibility (Wordpress/Wordpress_4_1)
 * Wordpress 4.1 Undefined Classes (Wordpress/Wordpress41Undefined)
+* Wordpress 4.2 Compatibility (Wordpress/Wordpress_4_2)
 * Wordpress 4.2 Undefined Classes (Wordpress/Wordpress42Undefined)
+* Wordpress 4.3 Compatibility (Wordpress/Wordpress_4_3)
 * Wordpress 4.3 Undefined Classes (Wordpress/Wordpress43Undefined)
+* Wordpress 4.4 Compatibility (Wordpress/Wordpress_4_4)
 * Wordpress 4.4 Undefined Classes (Wordpress/Wordpress44Undefined)
+* Wordpress 4.5 Compatibility (Wordpress/Wordpress_4_5)
 * Wordpress 4.5 Undefined Classes (Wordpress/Wordpress45Undefined)
+* Wordpress 4.6 Compatibility (Wordpress/Wordpress_4_6)
 * Wordpress 4.6 Undefined Classes (Wordpress/Wordpress46Undefined)
+* Wordpress 4.7 Compatibility (Wordpress/Wordpress_4_7)
 * Wordpress 4.7 Undefined Classes (Wordpress/Wordpress47Undefined)
+* Wordpress 4.8 Compatibility (Wordpress/Wordpress_4_8)
 * Wordpress 4.8 Undefined Classes (Wordpress/Wordpress48Undefined)
+* Wordpress 4.9 Compatibility (Wordpress/Wordpress_4_9)
 * Wordpress 4.9 Undefined Classes (Wordpress/Wordpress49Undefined)
+* Wordpress 5.0 Compatibility (Wordpress/Wordpress_5_0)
+* Wordpress 5.1 Compatibility (Wordpress/Wordpress_5_1)
 * Wordpress Usage (Wordpress/WordpressUsage)
 * Wpdb Best Usage (Wordpress/WpdbBestUsage)
 * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot)
@@ -572,11 +828,8 @@ This extension includes 26 analyzers.
 Wordpress rulesets
 --------------------------------------------------
 
-This extension includes 3 rulesets.
+This extension includes one ruleset : Wordpress.
 
-* Wordpress
-* Machinal
-* pasodfuaf
 
 Wordpress reports
 --------------------------------------------------

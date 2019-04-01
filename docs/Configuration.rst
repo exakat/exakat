@@ -95,13 +95,13 @@ Here are the currently available options in Exakat's configuration file : config
 | tinkergraph_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
 |                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
 +--------------------+-------------------------------------------------------------------------------------------+
-| project_themes     | List of analysis themes to be run. The list may include extra themes that are not used    |
-|                    | by the default reports : you can then summon them manually.                               |
+| project_themes     | List of analysis rulesets to be run. The list may include extra rulesets that are not     |
+|                    | used by the default reports : you can then summon them manually.                          |
 |                    | project_themes[] = 'Theme', one per line.                                                 |
 +--------------------+-------------------------------------------------------------------------------------------+
 | project_reports    | The list of reports that can be produced when running 'project' command.                  |
-|                    | This list may automatically add extra themes if a report requires them. For example,      |
-|                    | the 'Ambassador' report requires 'Security' theme, while 'Text' has no pre-requisite.     |
+|                    | This list may automatically add extra rulesets if a report requires them. For example,    |
+|                    | the 'Ambassador' report requires 'Security' ruleset, while 'Text' has no pre-requisite.   |
 |                    | project_reports is 'Ambassador', by default.                                              |
 |                    | project_reports[] = 'Report', one per line.                                               |
 +--------------------+-------------------------------------------------------------------------------------------+
@@ -158,16 +158,16 @@ Here are the currently available options in Exakat's configuration file : config
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
 
-Custom themes
-#############
+Custom rulesets
+###############
 
-Create custom themes by creating a 'config/themes.ini' directive files. 
+Create custom rulesets by creating a 'config/themes.ini' directive files. 
 
-This file is a .INI file, build with several sections. Each section is the name of a theme : for example, 'mine' is the name for the theme below. 
+This file is a .INI file, build with several sections. Each section is the name of a ruleset : for example, 'mine' is the name for the ruleset below. 
 
 There may be several sections, as long as the names are distinct. 
 
-It is recommended to use all low-case names for custom themes. Exakat uses names with a first capital letter, which prevents conflicts. Behavior is undefined if a custom theme has the same name as a default theme.
+It is recommended to use all low-case names for custom rulesets. Exakat uses names with a first capital letter, which prevents conflicts. Behavior is undefined if a custom ruleset has the same name as a default ruleset.
 
 :: 
 
@@ -176,9 +176,9 @@ It is recommended to use all low-case names for custom themes. Exakat uses names
     analyzer[] = 'Performances/ArrayMergeInLoops';
 
 
-The list of analyzer in the theme is based on the 'analyzer' array. The analyzer is identified by its 'shortname'. Analyzer shortname may be found in the documentation (:ref:`Rules` or within the Ambassador report). Analyzers names have a 'A/B' structure.
+The list of analyzer in the ruleset is based on the 'analyzer' array. The analyzer is identified by its 'shortname'. Analyzer shortname may be found in the documentation (:ref:`Rules` or within the Ambassador report). Analyzers names have a 'A/B' structure.
 
-The list of available themes, including the custom ones, is listed with the `doctor` command.
+The list of available rulesets, including the custom ones, is listed with the `doctor` command.
 
 Project Configuration
 ---------------------
@@ -291,40 +291,40 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
 Configuring analysis to be run
 ------------------------------
 
-Exakat builds a list of analysis to run, based on two directives : project_reports and projects_themes. Both are list of themes. Unknown themes are omitted. 
+Exakat builds a list of analysis to run, based on two directives : `project_reports` and `projects_themes`. Both are list of rulesets. Unknown rulesets are omitted. 
 
-project_reports makes sure you can extract those reports, while projects_themes allow you to build reports a la carte later, and avoid running the whole audit again.
+project_reports makes sure you can extract those reports, while `projects_themes` allow you to build reports a la carte later, and avoid running the whole audit again.
 
-Required themes
-###############
-First, analysis are very numerous, and it is very tedious to sort them by hand. Exakat only handles 'themes' which are groups of analysis. There are several list of themes available by default, and it is possible to customize those lists. 
+Required rulesets
+#################
+First, analysis are very numerous, and it is very tedious to sort them by hand. Exakat only handles 'themes' which are groups of analysis. There are several list of rulesets available by default, and it is possible to customize those lists. 
 
-When using the projects_themes directive, you can configure which themes must be processed by exakat, each time a 'project' command is run. Those themes will always be run. 
+When using the `projects_themes` directive, you can configure which rulesets must be processed by exakat, each time a 'project' command is run. Those rulesets will always be run. 
 
-Report-needed themes
-####################
+Report-needed rulesets
+######################
 
-Reports are build based on results found during the auditing phase. Some reports, like 'Ambassador' or 'Drillinstructor' needs the results of specific themes. Others, like 'Text' or 'Json' build reports at the last moment. 
+Reports are build based on results found during the auditing phase. Some reports, like 'Ambassador' or 'Drillinstructor' needs the results of specific rulesets. Others, like 'Text' or 'Json' build reports at the last moment. 
 
-As such, exakat uses the project_reports directive to collect the list of necessary themes, and add them to the projects_themes results. 
+As such, exakat uses the project_reports directive to collect the list of necessary rulesets, and add them to the `projects_themes` results. 
 
 Late reports
 ############
 
 It is possible de extract a report, even if the configuration has not been explicitly set for it. 
 
-For example, it is possible to build the Owasp report after telling exakat to build a 'Ambassador' report, as Ambassador includes all the analysis needed for Owasp. On the other hand, the contrary is not true : one can't get the Ambassador report after running exakat for the Owasp report, as Owasp only covers the security themes, and Ambassador requires other themes. 
+For example, it is possible to build the Owasp report after telling exakat to build a 'Ambassador' report, as Ambassador includes all the analysis needed for Owasp. On the other hand, the contrary is not true : one can't get the Ambassador report after running exakat for the Owasp report, as Owasp only covers the security rulesets, and Ambassador requires other rulesets. 
 
 Recommendations
 ###############
 
-* The 'Ambassador' report has all the classic themes, it's the best easy choice. 
-* To collect everything possible, use the theme 'All'. It's also the slowest theme to run. 
+* The 'Ambassador' report has all the classic rulesets, it's the most comprehensive choice. 
+* To collect everything possible, use the ruleset 'All'. It's also the longest-running ruleset of all. 
 * To get one report, simply configure project_report with that report. 
-* You may configure several themes, like 'Security', 'Suggestions', 'CompatibilityPHP73', and later extract independant results with the 'Text' or 'Json' format.
+* You may configure several rulesets, like 'Security', 'Suggestions', 'CompatibilityPHP73', and later extract independant results with the 'Text' or 'Json' format.
 * If you just want one compulsory report and two optional reports (total of three), simply configure all of them with project_report. It's better to produce extra reports, than run again a whole audit to collect missing informations. 
-* It is possible to configure customized themes, and use them in project_themes
-* Excluding one analyzer is not supported. Use custom themes to build a new one instead. 
+* It is possible to configure customized rulesets, and use them in project_rulesets
+* Excluding one analyzer is not supported. Use custom rulesets to build a new one instead. 
 
 Example
 #######
@@ -338,7 +338,7 @@ Example
     project_themes[] = 'Suggestions';
     
 
-With that configuration, the Drillinstructor and the Owasp report are created automatically when running 'project'. Use the following command to get the specific themes ; 
+With that configuration, the Drillinstructor and the Owasp report are created automatically when running 'project'. Use the following command to get the specific rulesets ; 
 
 ::
 
