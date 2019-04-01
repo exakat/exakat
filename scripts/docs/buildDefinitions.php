@@ -86,7 +86,7 @@ class Docs {
     private $exakat_build           = '';
     private $exakat_date            = '';
 
-    private $recipes = array('Analyze',
+    private $rulesets = array('Analyze',
                              'CompatibilityPHP80',
                              'CompatibilityPHP74',
                              'CompatibilityPHP73',
@@ -668,9 +668,9 @@ $exampleTxt
         
         if (isset($a2themes[$name])) {
             $c = array_map(array($this, 'rst_link'),$a2themes[$name]);
-            $recipes = implode(', ',$c);
+            $rulesets = implode(', ',$c);
         } else {
-            $recipes = 'none';
+            $rulesets = 'none';
         }
         
         $examples = array();
@@ -742,7 +742,7 @@ SPHINX;
         }
         
         $info = array( array('Short name',  $commandLine),
-                       array('Themes',      $recipes),
+                       array('Themes',      $rulesets),
                       );
     
         if (isset($ini['phpversion'])) {
@@ -772,7 +772,7 @@ SPHINX;
     }
     
     private function prepareIniThemes() {
-        $recipesList = '"'.implode('","',$this->recipes).'"';
+        $rulesetsList = '"'.implode('","',$this->rulesets).'"';
 
         $query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
                         FROM categories c
@@ -780,7 +780,7 @@ SPHINX;
                             ON c.id = ac.id_categories
                         JOIN analyzers a
                             ON a.id = ac.id_analyzer
-                        WHERE c.name IN ('.$recipesList.')
+                        WHERE c.name IN ('.$rulesetsList.')
                         GROUP BY c.name';
         $res = $this->analyzers->query($query);
         
@@ -798,7 +798,7 @@ SPHINX;
     }
 
     private function prepareText() {
-        $recipesList = '"'.implode('","',$this->recipes).'"';
+        $rulesetsList = '"'.implode('","',$this->rulesets).'"';
         $ext = glob('./human/en/Extensions/Ext*.ini');
         $functions = array();
         foreach($ext as $e) {
@@ -836,7 +836,7 @@ SPHINX;
                             ON c.id = ac.id_categories
                         JOIN analyzers a
                             ON a.id = ac.id_analyzer
-                        WHERE c.name IN ('.$recipesList.')
+                        WHERE c.name IN ('.$rulesetsList.')
                         GROUP BY a.name';
         $res = $this->analyzers->query($query);
         $a2themes = array();
@@ -850,7 +850,7 @@ SPHINX;
                             ON c.id = ac.id_categories
                         JOIN analyzers a
                             ON a.id = ac.id_analyzer
-                        WHERE c.name IN ('.$recipesList.')
+                        WHERE c.name IN ('.$rulesetsList.')
                         GROUP BY c.name';
         
         $res = $this->analyzers->query($query);
@@ -899,8 +899,8 @@ SPHINX;
         $rst = file_get_contents('./docs/src/Themes.rst');
         $date = date('r');
         $hash = shell_exec('git rev-parse HEAD');
-        $rst = preg_replace('/.. comment: Recipes details(.*)$/is',".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->text",$rst);
-        print file_put_contents('docs/Themes.rst', $rst)." octets written for Recipes\n";
+        $rst = preg_replace('/.. comment: Rulesets details(.*)$/is',".. comment: Rulesets details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->text",$rst);
+        print file_put_contents('docs/Themes.rst', $rst)." octets written for rulesets\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
         $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);
