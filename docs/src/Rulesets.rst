@@ -1,16 +1,16 @@
-.. _Themes:
+.. _Rulesets:
 
-Themes
-******
+Rulesets
+********
 
 Presentation
 ############
 
-Analysis are grouped in different standard recipes, that may be run independantly. Each recipe has a focus target, 
+Analysis are grouped in different rulesets, that may be run independantly. Each ruleset has a focus target, 
 
-Recipes runs all its analysis and any needed dependency.
+Rulesets runs all its analysis and any needed dependency.
 
-Recipes are configured with the -T option, when running exakat in command line.
+Rulesets are configured with the -T option, when running exakat in command line. For example : 
 
 ::
 
@@ -18,10 +18,10 @@ Recipes are configured with the -T option, when running exakat in command line.
 
 
 
-List of recipes
-###############
+List of rulesets
+################
 
-Here is the list of the current recipes supported by Exakat Engine.
+Here is the list of the current rulesets supported by Exakat Engine.
 
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |Name                                           | Description                                                                                          |
@@ -55,13 +55,13 @@ Here is the list of the current recipes supported by Exakat Engine.
 |:ref:`Coding Conventions <coding-conventions>` | List coding conventions violations.                                                                  |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 
-Note : in command line, don't forget to add quotes to recipes's names that include white space.
+Note : in command line, don't forget to add quotes to rulesets' names that include white space.
 
-Recipes details
+Rulesets details
 ###############
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
-.. comment: Recipes details
+.. comment: Rulesets details
 .. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
 .. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
