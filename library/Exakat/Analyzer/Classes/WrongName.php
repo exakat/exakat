@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongName extends Analyzer {
     public function analyze() {
-        // class x { function __constructor() {}; fucntion __something__(); }
+        // class x { function __constructor() {}; function __something__(); }
         $this->atomIs('Method')
              ->outIs('NAME')
              ->regexIs('fullcode', '^__.*')
