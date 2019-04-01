@@ -896,11 +896,11 @@ SPHINX;
     }
     
     private function replaceSpecials() {
-        $rst = file_get_contents('./docs/src/Themes.rst');
+        $rst = file_get_contents('./docs/src/Rulesets.rst');
         $date = date('r');
         $hash = shell_exec('git rev-parse HEAD');
         $rst = preg_replace('/.. comment: Rulesets details(.*)$/is',".. comment: Rulesets details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->text",$rst);
-        print file_put_contents('docs/Themes.rst', $rst)." octets written for rulesets\n";
+        print file_put_contents('docs/Rulesets.rst', $rst)." octets written for rulesets\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
         $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);
