@@ -2204,7 +2204,6 @@ SQL;
 
         $libraries = array();
         $externallibrariesList = $this->datastore->getRow('externallibraries');
-        print_r($externallibrariesList);
 
         foreach($externallibrariesList as $row) {
             $url  = $externallibraries->{strtolower($row['library'])}->homepage;
