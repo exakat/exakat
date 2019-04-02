@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('{$人}', 
+$expected     = array('{$人}',
                       '@$小',
                      );
 

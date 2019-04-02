@@ -4,7 +4,7 @@ $expected     = array('E',
                       '$d',
                       '$f',
                       '-F',
-                      '-3'
+                      '-3',
                      );
 
 $expected_not = array('+F',

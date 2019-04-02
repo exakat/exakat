@@ -24,7 +24,6 @@ namespace Exakat;
 
 use Exakat\Config;
 use Exakat\Exakat;
-use Exakat\Exceptions;
 use Exakat\Exceptions\WrongNumberOfColsForAHash;
 use Exakat\Exceptions\NoStructureForTable;
 

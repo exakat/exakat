@@ -38,6 +38,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->isNot('static', true)
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
