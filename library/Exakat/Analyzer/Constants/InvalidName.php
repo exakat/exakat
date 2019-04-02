@@ -30,7 +30,7 @@ class InvalidName extends Analyzer {
         // Invalid characters
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
              ->regexIsNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
@@ -42,7 +42,7 @@ class InvalidName extends Analyzer {
         // reserved keywords
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$')
              ->regexIs('noDelimiter', '\\\\\\\\')
