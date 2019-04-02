@@ -38,11 +38,11 @@ class UndefinedConstants extends Analyzer {
         $this->atomIs(array('Identifier', 'Nsname'))
              ->hasNoIn(array('AS', 'TYPEHINT', 'RETURNTYPE', 'GOTOLABEL', 'GOTO'))
              ->analyzerIs('Constants/ConstantUsage')
-             ->analyzerIsNot('Constants/CustomConstantUsage')
+             ->analyzerIsNot(array('Constants/CustomConstantUsage',
+                                   'Constants/IsExtConstant',
+                                   ))
              ->hasNoConstantDefinition()
-             ->analyzerIsNot('Constants/IsExtConstant')
-             ->isNotIgnored(IsNotIgnored::IGNORED_CONSTANTS)
-             ->hasNoParent('Declare', array('LEFT', 'ARGUMENT'));
+             ->isNotIgnored(IsNotIgnored::IGNORED_CONSTANTS);
         $this->prepareQuery();
     }
 }
