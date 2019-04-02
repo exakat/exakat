@@ -40,20 +40,29 @@ class CreateVirtualProperty extends LoadFinal {
               ->savePropertyAs('fullcode', 'full')
               
               ->goToClass()
+              ->not(
+                $query->side()
+                      ->goToAllParents(Analyzer::EXCLUDE_SELF)
+                      ->outIs('PPP')
+                      ->outIs('PPP')
+                      ->atomIsNot('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
+                      ->samePropertyAs('propertyname', 'ncode', Analyzer::CASE_SENSITIVE)
+                      ->prepareSide()
+              )
               ->_as('laClasse')
 
               ->raw(<<<GREMLIN
-addV("Ppp").sideEffect{ it.get().property("code", ncode);
-                        it.get().property("lccode", lower); 
+addV("Ppp").sideEffect{ it.get().property("code", 0);
+                        it.get().property("lccode", 0); 
                         it.get().property("fullcode", '\$' + full); 
                         it.get().property("line", -1); 
                         it.get().property("count", 1); 
                         it.get().property("visibility", "none");
                        }.as('ppp').addE("PPP").from("laClasse").
-addV("Virtualproperty").sideEffect{ it.get().property("code", ncode);
-                                    it.get().property("lccode", lower); 
+addV("Virtualproperty").sideEffect{ it.get().property("code", 0);
+                                    it.get().property("lccode", 0); 
                                     it.get().property("fullcode", '\$' + full); 
-                                    it.get().property("propertyname", lower); 
+                                    it.get().property("propertyname", ncode); 
                                     it.get().property("line", -1); 
                                   }.addE("PPP").from("ppp")
 GREMLIN
