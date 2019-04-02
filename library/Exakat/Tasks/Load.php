@@ -4120,7 +4120,7 @@ class Load extends Tasks {
                 $fullcode[] = $as->fullcode;
                 $as->alias = mb_strtolower(substr($as->fullcode, strrpos($as->fullcode, ' as ') + 4));
 
-                $alias = $this->addNamespaceUse($origin, $as, $useType, $use);
+                $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
 
                 if (isset($this->uses['class'][$prefix])) {
                     $this->addLink($as, $this->uses['class'][$prefix], 'DEFINITION');
