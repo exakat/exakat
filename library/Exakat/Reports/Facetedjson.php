@@ -52,8 +52,8 @@ SQL;
             $row['error'] = $ini['name'];
 
             $a = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['severity'] = $this->getDocs($analyzer, 'severity');
-            $row['impact']   = $this->getDocs($analyzer, 'timetofix');
+            $row['severity'] = $this->getDocs($row['analyzer'], 'severity');
+            $row['impact']   = $this->getDocs($row['analyzer'], 'timetofix');
             $row['recipes']  = $a->getThemes();
 
             $items[] = $row;

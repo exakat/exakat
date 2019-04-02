@@ -25,7 +25,7 @@ namespace Exakat\Data;
 
 class Symfony extends Data {
     public function __construct($path, $is_phar) {
-        parent::__construct('symfony', $path, $is_phar);
+        parent::__construct('symfony');
     }
 
     public function __destruct() {

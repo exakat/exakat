@@ -46,7 +46,7 @@ abstract class Data {
             } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
                 self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
             } else {
-                assert(false, "No database for '$file'.");
+                assert(false, "No database for '$name.sqlite'.");
             }
             $docPath = $this->phar_tmp;
         } else {
@@ -57,7 +57,7 @@ abstract class Data {
                 self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
                 $docPath = $this->phar_tmp;
             } else {
-                assert(false, "No database for '$file'.");
+                assert(false, "No database for '$name.sqlite'.");
             }
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);

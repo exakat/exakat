@@ -47,6 +47,7 @@ addV("Ppp").sideEffect{ it.get().property("code", ncode);
                         it.get().property("lccode", lower); 
                         it.get().property("fullcode", '\$' + full); 
                         it.get().property("line", -1); 
+                        it.get().property("count", 1); 
                         it.get().property("visibility", "none");
                        }.as('ppp').addE("PPP").from("laClasse").
 addV("Virtualproperty").sideEffect{ it.get().property("code", ncode);

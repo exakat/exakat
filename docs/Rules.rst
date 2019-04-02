@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Mar 2019 16:13:03 +0000
-.. comment: Generation hash : ea3a87417597f695e5faa94d6b90a414e8a833f0
+.. comment: Generation date : Mon, 01 Apr 2019 14:51:18 +0000
+.. comment: Generation hash : eefa90b29c62ffb2a9c26482ce435df9158067da
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1198,6 +1198,12 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the typehint to the function arguments
+
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/ShouldBeTypehinted                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -1208,6 +1214,8 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 | Time To Fix | Slow (1 hour)                                                                                 |
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`dolphin-functions-shouldbetypehinted`      |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -3415,47 +3423,6 @@ When functions and classes bear the same name, calling them may be confusing. Th
 
 
 
-.. _class-name-case-difference:
-
-Class Name Case Difference
-##########################
-
-
-The spotted classes are used with a different case than their definition. While PHP accepts this, it makes the code harder to read. 
-
-It may also be a violation of coding conventions.
-
-.. code-block:: php
-
-   <?php
-   
-   // This use statement has wrong case for origin.
-   use Foo as X;
-   
-   // Definition of the class
-   class foo {}
-   
-   // Those instantiations have wrong case
-   new FOO();
-   new X();
-   
-   ?>
-
-
-See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
-
-+-------------+----------------------------------------------------------------+
-| Short name  | Classes/WrongCase                                              |
-+-------------+----------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
-+-------------+----------------------------------------------------------------+
-| Severity    | Minor                                                          |
-+-------------+----------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                               |
-+-------------+----------------------------------------------------------------+
-
-
-
 .. _class-should-be-final-by-ocramius:
 
 Class Should Be Final By Ocramius
@@ -3676,11 +3643,17 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
    // Here the closure doesn't add any feature over strtoupper
    $filtered = array_map(function ($x) { return strtoupper($x);}, $array);
    
-   // Methodcall example 
+   // Methodcall example : no fix
    $filtered = array_map(function ($x) { return $x->strtoupper() ;}, $array);
+   
+   // Methodcall example  : replace with array($y, 'strtoupper')
+   $filtered = array_map(function ($x) use ($y) { return $y->strtoupper($x) ;}, $array);
    
    // Static methodcall example 
    $filtered = array_map(function ($x) { return $x::strtoupper() ;}, $array);
+   
+   // Static methodcall example   : replace with array('A', 'strtoupper')
+   $filtered = array_map(function ($x) { return A::strtoupper($x) ;}, $array);
    
    ?>
 
@@ -3694,15 +3667,17 @@ Suggestions
 
 * Replace the closure by a string, with the name of the called function
 
-+-------------+-----------------------------------------+
-| Short name  | Functions/Closure2String                |
-+-------------+-----------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Performances` |
-+-------------+-----------------------------------------+
-| Severity    | Minor                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
-+-------------+-----------------------------------------+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Functions/Closure2String                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Performances`                                           |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                   |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`tine20-functions-closure2string`, :ref:`nextcloud-functions-closure2string` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -3943,7 +3918,7 @@ Concrete Visibility
 
 Methods that implements an interface in a class must be public. 
 
-PHP doesn't lint this, unless the interface and the class are in the same file. At execution, it stops immediately with a Fatal error : 'Access level to c\:\:iPrivate() must be public (as in class i) ';
+PHP does lint this, unless the interface and the class are in the same file. At execution, it stops immediately with a Fatal error : 'Access level to c\:\:iPrivate() must be public (as in class i) ';
 
 .. code-block:: php
 
@@ -3966,6 +3941,13 @@ PHP doesn't lint this, unless the interface and the class are in the same file. 
 
 
 See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
 
 +-------------+----------------------------------------+
 | Short name  | Interfaces/ConcreteVisibility          |
@@ -5218,15 +5200,24 @@ Some commands may raise exceptions. It is recommended to use the try/catch block
 See also `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_,
          `PharException <http://php.net/manual/en/class.pharexception.php>`_.
 
-+-------------+------------------------+
-| Short name  | Exceptions/CouldUseTry |
-+-------------+------------------------+
-| Themes      | :ref:`Suggestions`     |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
-+-------------+------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a try/catch clause around those commands
+* Add a check on the values used with those operator : for example, check a dividend is not 0, or a bitshift is not negative
+
++-------------+----------------------------------------------------------------------------+
+| Short name  | Exceptions/CouldUseTry                                                     |
++-------------+----------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                         |
++-------------+----------------------------------------------------------------------------+
+| Severity    | Minor                                                                      |
++-------------+----------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                            |
++-------------+----------------------------------------------------------------------------+
+| Examples    | :ref:`mautic-exceptions-couldusetry`, :ref:`mautic-exceptions-couldusetry` |
++-------------+----------------------------------------------------------------------------+
 
 
 
@@ -6752,6 +6743,9 @@ In case of injection in the variable, the dynamic loading of a library gives a l
        // dynamically loading ext/vips
    	dl('vips.' . PHP_SHLIB_SUFFIX);
    
+       // static loading ext/vips (unix only)
+   	dl('vips.so');
+   
    ?>
 
 
@@ -7394,6 +7388,14 @@ At worst, the error should be logged, so as to measure the actual usage of the c
 ``catch( Exception $e)`` (PHP 5) or ``catch(`Throwable <http://php.net/manual/en/class.throwable.php>`_ $e)`` with empty catch block should be banned. They ignore any error and proceed as if nothing happened. At worst, the event should be logged for future analysis. 
 
 See also `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add some logging in the catch
+* Add a comment to mention why the catch is empty
+* Change the exception, chain it and throw again
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/EmptyTryCatch                                                          |
@@ -9595,17 +9597,24 @@ PHP has reserved usage of methods starting with ``__`` for magic methods. It is 
 
 See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
-+-------------+-------------------------------------+
-| Short name  | Classes/WrongName                   |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Major                               |
-+-------------+-------------------------------------+
-| Time To Fix | Slow (1 hour)                       |
-+-------------+-------------------------------------+
-| Examples    | :ref:`prestashop-classes-wrongname` |
-+-------------+-------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid method names starting with a double underscore : ``__``
+* Use method visibilities to ensure that methods are only available to the current class or its children
+
++-------------+-----------------------------------------------------------------------+
+| Short name  | Classes/WrongName                                                     |
++-------------+-----------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                        |
++-------------+-----------------------------------------------------------------------+
+| Severity    | Major                                                                 |
++-------------+-----------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                         |
++-------------+-----------------------------------------------------------------------+
+| Examples    | :ref:`prestashop-classes-wrongname`, :ref:`magento-classes-wrongname` |
++-------------+-----------------------------------------------------------------------+
 
 
 
@@ -10337,6 +10346,55 @@ See also `Double quoted <http://php.net/manual/en/language.types.string.php#lang
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
+
+
+
+.. _invalid-class-name:
+
+Invalid Class Name
+##################
+
+
+The spotted classes are used with a different case than their definition. While PHP accepts this, it makes the code harder to read. 
+
+It may also be a violation of coding conventions.
+
+.. code-block:: php
+
+   <?php
+   
+   // This use statement has wrong case for origin.
+   use Foo as X;
+   
+   // Definition of the class
+   class foo {}
+   
+   // Those instantiations have wrong case
+   new FOO();
+   new X();
+   
+   ?>
+
+
+See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the defined class name with the called name
+
++-------------+------------------------------------------------+
+| Short name  | Classes/WrongCase                              |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-wrongcase`             |
 +-------------+------------------------------------------------+
 
 
@@ -11968,15 +12026,24 @@ Typehint acts as a filter method. When an object is checked with a first class, 
 
 Note : This analysis currently doesn't check generalisation of classes : for example, when B is a child of BB, it is still reported as a mismatch.
 
-+-------------+------------------------------+
-| Short name  | Functions/MismatchedTypehint |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Ensure that the default value match the expected typehint.
+
++-------------+-----------------------------------------------+
+| Short name  | Functions/MismatchedTypehint                  |
++-------------+-----------------------------------------------+
+| Themes      | :ref:`Analyze`                                |
++-------------+-----------------------------------------------+
+| Severity    | Major                                         |
++-------------+-----------------------------------------------+
+| Time To Fix | Quick (30 mins)                               |
++-------------+-----------------------------------------------+
+| Examples    | :ref:`wordpress-functions-mismatchedtypehint` |
++-------------+-----------------------------------------------+
 
 
 
@@ -14339,15 +14406,25 @@ When connecting to a remove server, port is an important information. It is reco
        if (!$connection) die('Connection failed');
    ?>
 
-+-------------+---------------------------------+
-| Short name  | Structures/NoHardcodedPort      |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the port to a configuration file, an environnement variable
+
++-------------+---------------------------------------------+
+| Short name  | Structures/NoHardcodedPort                  |
++-------------+---------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`             |
++-------------+---------------------------------------------+
+| Severity    | Minor                                       |
++-------------+---------------------------------------------+
+| Time To Fix | Quick (30 mins)                             |
++-------------+---------------------------------------------+
+| Examples    | :ref:`wordpress-structures-nohardcodedport` |
++-------------+---------------------------------------------+
 
 
 
@@ -18790,15 +18867,24 @@ When a regex is repeatedly used in the code, it is getting harder to update.
 
 Regex that are repeated at least once (aka, used twice or more) are reported. Regex that are dynamically build are not reported.
 
-+-------------+--------------------------+
-| Short name  | Structures/RepeatedRegex |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create a central library of regexes
+* Use the regex inventory to spot other regex that are close, and should be identical.
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/RepeatedRegex                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                    |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                   |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`vanilla-structures-repeatedregex`, :ref:`tikiwiki-structures-repeatedregex` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -23729,15 +23815,15 @@ Properties that are not initialized in the constructor, nor at definition.
 With the above class, when m() is accessed right after instantiation, there will be a missing property. 
 Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
 
-+-------------+--------------------------------------------------+
-| Short name  | Classes/UnitializedProperties                    |
-+-------------+--------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10` |
-+-------------+--------------------------------------------------+
-| Severity    | Major                                            |
-+-------------+--------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                  |
-+-------------+--------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/UnitializedProperties      |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 

@@ -33,9 +33,9 @@ class HiddenUse extends Analyzer {
              ->filter(
                 $this->side()
                      ->outIs('EXPRESSION')
-                     ->raw('filter{ it.get().value("rank") < ranked; }')
+                     ->has('rank')
+                     ->isLess('rank', 'ranked')
                      ->atomIsNot(array('Usenamespace', 'Usetrait', 'Declare', 'Include'))
-//                     ->tokenIsNot(array('T_INCLUDE', 'T_INCLUDE_ONCE', 'T_REQUIRE', 'T_REQUIRE_ONCE'))
                )
              ->back('first');
         $this->prepareQuery();
@@ -48,8 +48,8 @@ class HiddenUse extends Analyzer {
              ->filter(
                 $this->side()
                      ->outIs(array('CONST', 'METHOD', 'PPP'))
-                     ->atomIsNot('Virtualproperty')
-                     ->raw('filter{ it.get().value("rank") < ranked; }')
+                     ->has('rank')
+                     ->isLess('rank', 'ranked')
              )
              ->back('first');
         $this->prepareQuery();

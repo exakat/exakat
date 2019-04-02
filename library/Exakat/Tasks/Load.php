@@ -4905,6 +4905,7 @@ class Load extends Tasks {
     /// processing binary operators
     //////////////////////////////////////////////////////
     private function processSign() {
+        $current = $this->id;
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
         while (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PLUS,
@@ -4951,7 +4952,7 @@ class Load extends Tasks {
 
             $sign->code     = $signExpression[$i];
             $sign->fullcode = $signExpression[$i].$signed->fullcode;
-            $sign->token    = $this->getToken($this->tokens[$this->id][0]);
+            $sign->token    = $this->getToken($this->tokens[$current][0]);
 
             $signed = $sign;
         }

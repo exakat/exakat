@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class WrongCase extends Analyzer {
-    /* 14 methods */
+    /* 16 methods */
 
     public function testClasses_WrongCase01()  { $this->generic_test('Classes_WrongCase.01'); }
     public function testClasses_WrongCase02()  { $this->generic_test('Classes_WrongCase.02'); }
@@ -23,5 +23,7 @@ class WrongCase extends Analyzer {
     public function testClasses_WrongCase12()  { $this->generic_test('Classes/WrongCase.12'); }
     public function testClasses_WrongCase13()  { $this->generic_test('Classes/WrongCase.13'); }
     public function testClasses_WrongCase14()  { $this->generic_test('Classes/WrongCase.14'); }
+    public function testClasses_WrongCase15()  { $this->generic_test('Classes/WrongCase.15'); }
+    public function testClasses_WrongCase16()  { $this->generic_test('Classes/WrongCase.16'); }
 }
 ?>

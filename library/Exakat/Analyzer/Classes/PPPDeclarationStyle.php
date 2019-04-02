@@ -29,16 +29,21 @@ class PPPDeclarationStyle extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-if (it.get().value("count") > 1) {
-    x2 = 'several';
-} else {
+if (it.get().value("count") == 1) {
     x2 = 'one';
+} else {
+    x2 = 'several';
 }
 GREMLIN;
         $storage = array('unique'   => 'one',
                          'multiple' => 'several');
 
         $this->atomIs('Ppp')
+             ->not(
+                $this->side()
+                     ->outIs('PPP')
+                     ->atomIs('Virtualproperty')
+             )
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -63,6 +68,11 @@ GREMLIN;
         $types = array_keys($types);
 
         $this->atomIs('Ppp')
+             ->not(
+                $this->side()
+                     ->outIs('PPP')
+                     ->atomIs('Virtualproperty')
+             )
              ->raw('map{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');

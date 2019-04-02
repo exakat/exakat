@@ -22,8 +22,8 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
                                config/themes.ini
         graphdb              : gsneo4j
         reports              : Ambassador
-        themes               : mine2
-        extra themes         : mine,
+        rulesets             : mine2
+        extra rulesets       : mine,
                                special,
                                MonologExtra
         tokenslimit          : 1 000 000 000

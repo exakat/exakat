@@ -32,9 +32,20 @@ class WrongCase extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->codeIsNot(array('static', 'parent', 'self'), self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
-             ->classDefinition()
+             ->outIsIE('NAME')
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
+             ->inIsIE('NAME')
+             ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
@@ -44,10 +55,26 @@ class WrongCase extends Analyzer {
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->raw('not(where(__.out("DEFINITION").hasLabel("As", "Nsname", "Identifier")))') // No use is in place
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
-             ->classDefinition()
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFINITION')
+                             ->atomIs(array('As', 'Nsname', 'Identifier'))
+                     )
+             )
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
+             ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
@@ -57,9 +84,18 @@ class WrongCase extends Analyzer {
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
-             ->classDefinition()
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
+             ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
@@ -70,9 +106,18 @@ class WrongCase extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
-             ->classDefinition()
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
+             ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first')
@@ -83,9 +128,18 @@ class WrongCase extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
-             ->classDefinition()
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
+             ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
@@ -95,8 +149,17 @@ class WrongCase extends Analyzer {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIsIE('NAME')
-             ->savePropertyAs('fullcode', 'classe')
-             ->getNameInFNP('classe')
+             ->initVariable('classe')
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().value("token") == "T_STRING") {
+        classe = it.get().value('fullcode');
+    } else { // it is a namespace
+        classe = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+)
              ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)

@@ -285,15 +285,19 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 9 extensions
+List of extensions : there are 13 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
+* :ref:`Monolog <extension-monolog>`
+* :ref:`Prestashop <extension-prestashop>`
+* :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
 * :ref:`Symfony <extension-symfony>`
+* :ref:`Twig <extension-twig>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -320,6 +324,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
+* Nextcloud
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Phinx <https://phinx.org/>`_
@@ -358,9 +363,11 @@ Libraries that are popular, large and often included in repositories are identif
 
 Those libraries, or even some of the, may be included again in the analysis by commenting the ignored_dir[] line, in the projects/<project>/config.ini file. 
 
+* `atoum <http://atoum.org/>`_
 * `BBQ <https://github.com/eventio/bbq>`_
 * `CI xmlRPC <http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html>`_
 * `CPDF <https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html>`_
+* `Codeception <https://codeception.com/>`_
 * `DomPDF <https://github.com/dompdf/dompdf>`_
 * `FPDF <http://www.fpdf.org/>`_
 * `gettext Reader <http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html>`_
@@ -382,15 +389,19 @@ Those libraries, or even some of the, may be included again in the analysis by c
 * `Propel <http://propelorm.org/>`_
 * `phpExecl <https://phpexcel.codeplex.com/>`_
 * `phpMailer <https://github.com/PHPMailer/PHPMailer>`_
+* `PHPSpec <http://www.phpspec.net/en/stable/>`_
+* `PHPUnit <https://www.phpunit.de/>`_
 * `qrCode <http://phpqrcode.sourceforge.net/>`_
 * `Services_JSON <https://pear.php.net/package/Services_JSON>`_
 * `sfYaml <https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php>`_
+* `SimpleTest <https://github.com/simpletest/simpletest>`_
 * `swift <http://swiftmailer.org/>`_
 * `Smarty <http://www.smarty.net/>`_
 * `tcpdf <http://www.tcpdf.org/>`_
 * `text_diff <https://pear.php.net/package/Text_Diff>`_
 * `text highlighter <https://pear.php.net/package/Text_Highlighter/>`_
 * `tfpdf <http://www.fpdf.org/en/script/script92.php>`_
+* `Typo3TestingFramework <https://github.com/TYPO3/testing-framework>`_
 * UTF8
 * `Yii <http://www.yiiframework.com/>`_
 * `Zend Framework <http://framework.zend.com/>`_
@@ -398,7 +409,7 @@ Those libraries, or even some of the, may be included again in the analysis by c
 New analyzers
 -------------
 
-List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
+List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
 * 1.7.2
@@ -1124,7 +1135,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * More Than One Level Of Indentation (Structures/OneLevelOfIndentation ; Calisthenics)
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71)
-  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Simple, Suggestions, Level 4, Top10)
+  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Simple, Suggestions, Level 4)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Simple, Level 1)
 
 * 0.8.7
@@ -1204,7 +1215,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Caught Expressions (Php/TryCatchUsage ; Appinfo)
   * Class Const With Array (Php/ClassConstWithArray ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Class Has Fluent Interface (Classes/HasFluentInterface ; )
-  * Class Name Case Difference (Classes/WrongCase ; Analyze, Coding Conventions, RadwellCodes, Simple)
   * Class Usage (Classes/ClassUsage ; )
   * Class, Interface Or Trait With Identical Names (Classes/CitSameName ; Analyze)
   * Classes Mutually Extending Each Other (Classes/MutualExtension ; Analyze, LintButWontExec)
@@ -1362,6 +1372,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Internally Used Properties (Classes/PropertyUsedInternally ; )
   * Internet Ports (Type/Ports ; Inventory)
   * Interpolation (Type/StringInterpolation ; Coding Conventions)
+  * Invalid Class Name (Classes/WrongCase ; Coding Conventions, RadwellCodes, Simple)
   * Invalid Constant Name (Constants/InvalidName ; Analyze, Simple)
   * Is An Extension Class (Classes/IsExtClass ; )
   * Is An Extension Constant (Constants/IsExtConstant ; Internal, First)
@@ -2646,7 +2657,6 @@ _______
 |   analyzer[] = "Classes/UselessFinal";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Classes/WeakType";
-|   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Classes/WrongName";
 |   analyzer[] = "Constants/BadConstantnames";
 |   analyzer[] = "Constants/ConstRecommended";
@@ -3747,7 +3757,6 @@ _____
 
 | [Top10]
 |   analyzer[] = "Classes/DontUnsetProperties";
-|   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Functions/ShouldYieldWithKey";

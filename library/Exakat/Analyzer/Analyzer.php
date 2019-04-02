@@ -60,6 +60,7 @@ abstract class Analyzer {
     private static $calledDirectives      = null;
 
     private $analyzer         = '';       // Current class of the analyzer (called from below)
+    private $shortAnalyzer = '';
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
 
@@ -1009,7 +1010,7 @@ GREMLIN;
     }
     
     public function fullcodeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->propertyIsNot('fullcode', $code, $caseSensitive);
+        $this->query->propertyIsNot('fullcode', $code, $caseSensitive);
         
         return $this;
     }
@@ -1056,7 +1057,7 @@ GREMLIN;
         if ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, "Wrong type for not : ".get_type($filter));
+            assert(false, "Wrong type for not : ".gettype($filter));
         }
         $this->query->not($filterClean, array());
 
