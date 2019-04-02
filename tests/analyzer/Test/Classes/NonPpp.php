@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class NonPpp extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testClasses_NonPpp01()  { $this->generic_test('Classes_NonPpp.01'); }
     public function testClasses_NonPpp02()  { $this->generic_test('Classes_NonPpp.02'); }
@@ -17,5 +17,6 @@ class NonPpp extends Analyzer {
     public function testClasses_NonPpp06()  { $this->generic_test('Classes_NonPpp.06'); }
     public function testClasses_NonPpp07()  { $this->generic_test('Classes_NonPpp.07'); }
     public function testClasses_NonPpp08()  { $this->generic_test('Classes/NonPpp.08'); }
+    public function testClasses_NonPpp09()  { $this->generic_test('Classes/NonPpp.09'); }
 }
 ?>
