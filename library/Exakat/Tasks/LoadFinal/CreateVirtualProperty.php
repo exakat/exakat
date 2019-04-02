@@ -62,7 +62,7 @@ addV("Ppp").sideEffect{ it.get().property("code", 0);
 addV("Virtualproperty").sideEffect{ it.get().property("code", 0);
                                     it.get().property("lccode", 0); 
                                     it.get().property("fullcode", '\$' + full); 
-                                    it.get().property("propertyname", ncode); 
+                                    it.get().property("propertyname", lower); 
                                     it.get().property("line", -1); 
                                   }.addE("PPP").from("ppp")
 GREMLIN
