@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$this->a',
+$expected     = array('self::$a',
                       'b::$b',
                      );
 
-$expected_not = array('self::$a',
+$expected_not = array('$this->a',
                       '$this->b',
                      );
 

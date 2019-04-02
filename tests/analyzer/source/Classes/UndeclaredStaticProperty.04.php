@@ -12,9 +12,12 @@ class aa extends a {
 }
 
 class b { 
+    static private $c = 3;
+    
     function foo() {
-        echo a::$b;     // They are defined in the class below, so we can't find them
-        echo $this->$b; // They are defined in the class below, so we can't find them
+        echo b::$b;     // They are defined in the class below, so we can't find them
+        echo $this->b; // They are defined in the class below, so we can't find them
+        echo $this->c; // They are defined in the class below, so we can't find them
     }
 }
 

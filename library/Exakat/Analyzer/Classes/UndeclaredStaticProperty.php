@@ -30,8 +30,15 @@ class UndeclaredStaticProperty extends Analyzer {
         // a::$a
         $this->atomIs('Staticproperty')
              ->inIs('DEFINITION')
+             ->atomIsNot('Virtualproperty')
              ->inIs('PPP')
              ->isNot('static', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticproperty')
+             ->inIs('DEFINITION')
+             ->atomIs('Virtualproperty')
              ->back('first');
         $this->prepareQuery();
 
