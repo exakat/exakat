@@ -44,10 +44,10 @@ class Jobqueue extends Tasks {
     }
 
     public function run() {
-        if (!file_exists($this->config->projects_root.'/projects/log/')) {
-            mkdir($this->config->projects_root.'/projects/log/', 0700);
+        if (!file_exists("{$this->config->projects_root}/projects/log/")) {
+            mkdir("{$this->config->projects_root}/projects/log/", 0700);
         }
-        $this->jobQueueLog = fopen($this->config->projects_root.'/projects/log/jobqueue.log', 'a');
+        $this->jobQueueLog = fopen("{$this->config->projects_root}/projects/log/jobqueue.log", 'a');
         $this->log('Open Job Queue '.date('r')."\n");
 
         $this->log->log('Started jobQueue : '.time()."\n");
@@ -151,8 +151,8 @@ class Jobqueue extends Tasks {
         $config = new ConfigExakat($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing init job '.$job[1].PHP_EOL);
-        $this->log('start init : '.$job[1]);
+        display( 'processing init job '.$job[2].PHP_EOL);
+        $this->log('start init : '.$job[2]);
         $begin = microtime(true);
         try {
             $analyze->run();
@@ -163,8 +163,8 @@ class Jobqueue extends Tasks {
             unset($analyze);
         }
         $end = microtime(true);
-        $this->log('end init : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
-        display( 'processing init job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+        $this->log('end init : '.$job[2].' ('.number_format($end -$begin, 2).' s)');
+        display( 'processing init job '.$job[2].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
     
     private function processPing($job) {
@@ -179,13 +179,13 @@ class Jobqueue extends Tasks {
         }
         $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing report job '.$job[1].PHP_EOL);
-        $this->log('start report : '.$job[1]);
+        display( 'processing report job '.$job[2].PHP_EOL);
+        $this->log('start report : '.$job[2]);
         $begin = microtime(true);
         $analyze->run();
         $end = microtime(true);
         unset($analyze);
-        display( 'processing report job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+        display( 'processing report job '.$job[2].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processProject($job) {
@@ -196,8 +196,8 @@ class Jobqueue extends Tasks {
         }
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing project job '.$job[1].PHP_EOL);
-        $this->log('start project : '.$job[1]);
+        display( 'processing project job '.$job[2].PHP_EOL);
+        $this->log('start project : '.$job[2]);
         $begin = microtime(true);
         try {
             $analyze->run();
@@ -208,8 +208,8 @@ class Jobqueue extends Tasks {
             unset($analyze);
         }
         $end = microtime(true);
-        $this->log('end project : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
-        display( 'processing project job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+        $this->log('end project : '.$job[2].' ('.number_format($end -$begin, 2).' s)');
+        display( 'processing project job '.$job[2].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processConfig($job) {
@@ -220,17 +220,17 @@ class Jobqueue extends Tasks {
         }
         $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing config job '.$job[1].PHP_EOL);
-        $this->log('start config : '.$job[1]);
+        display( 'processing config job '.$job[2].PHP_EOL);
+        $this->log('start config : '.$job[2]);
         $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
         }
         $end = microtime(true);
-        $this->log('end config : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
+        $this->log('end config : '.$job[2].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing config job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+        display( 'processing config job '.$job[2].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processRemove($job) {
@@ -241,8 +241,8 @@ class Jobqueue extends Tasks {
         }
         $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing remove job '.$job[1].PHP_EOL);
-        $this->log('start report : '.$job[1]);
+        display( 'processing remove job '.$job[2].PHP_EOL);
+        $this->log('start report : '.$job[2]);
         $begin = microtime(true);
         try {
             $analyze->run();
@@ -252,11 +252,11 @@ class Jobqueue extends Tasks {
         }
         $end = microtime(true);
         unset($analyze);
-        display( 'processing remove job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+        display( 'processing remove job '.$job[2].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function log($message) {
-        fwrite($this->jobQueueLog, date('r')."\t".$message."\n");
+        fwrite($this->jobQueueLog, date('r')."\t{$message}\n");
     }
 }
 
