@@ -28,15 +28,17 @@ use Exakat\Data\GroupBy;
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
         // Case of $object->property (that's another public access)
-        $query = <<<GREMLIN
-g.V().hasLabel("Member")
-     .not( __.where( __.out("OBJECT").hasLabel("This") ) )
-     .out("MEMBER")
-     .hasLabel("Name")
-     .values("code")
-     .unique()
-GREMLIN;
-        $publicProperties = $this->query($query)->toArray();
+        $this->atomIs('Member')
+             ->not(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->atomIs('This')
+             )
+             ->outis('MEMBER')
+             ->atomIs('Name')
+             ->values('code')
+             ->unique();
+        $publicProperties = $this->rawQuery()->toArray();
         
         // Member that is not used outside this class or its children
         $this->atomIs('Ppp')
@@ -44,25 +46,25 @@ GREMLIN;
              ->isNot('static', true)
              ->hasClass()
              ->outIs('PPP')
+                 ->atomIsNot('Virtualproperty')
              ->isNot('propertyname', $publicProperties);
         $this->prepareQuery();
 
         // Case of class::property (that's another public access)
-        $res = $this->query(<<<GREMLIN
-g.V().hasLabel("Staticproperty").as("init")
-     .out("CLASS").hasLabel("Identifier", "Nsname")
-     .not(hasLabel("Self", "Static")).as("classe")
-     .sideEffect{ fnp = it.get().value("fullnspath") }
-     .in("CLASS")
-     .where( __.repeat( __.in({$this->linksDown})).until(hasLabel("Class", "File"))
-               .or(hasLabel("File"), 
-                   hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
-           )
-     .out("MEMBER").hasLabel("Staticpropertyname").as("variable")
-     .select("classe", "variable").by("fullnspath").by("code")
-     .unique();
-GREMLIN
-);
+        $this->atomIs('Staticproperty')
+             ->_as('init')
+             ->outIs('CLASS')
+             ->atomIs(array("Identifier", "Nsname"))
+             ->_as('classe')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->inIs('CLASS')
+             ->hasNoClass()
+             ->outIs('MEMBER')
+             ->atomIs('Staticpropertyname')
+             ->_as('variable')
+             ->raw('select("classe", "variable").by("fullnspath").by("code")')
+             ->unique();
+            $res = $this->rawQuery()->toArray();
 
         $publicStaticProperties = new GroupBy();
         foreach($res as $value) {
@@ -78,6 +80,7 @@ GREMLIN
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('PPP')
+                 ->atomIsNot('Virtualproperty')
                  ->isNotHash('code', $publicStaticProperties->toArray(), 'fnp');
             $this->prepareQuery();
         }
