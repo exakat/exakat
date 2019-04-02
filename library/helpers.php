@@ -106,10 +106,10 @@ function copyDir($src, $dst) {
     return $total;
 }
 
-function rglob($pattern, $flags = 0) {
+function rglob($pattern, $flags = \GLOB_NOSORT) {
     $pattern = str_replace('\\', '\\\\', $pattern);
     $files = glob("$pattern/*", $flags);
-    $dirs  = glob("$pattern/*", GLOB_ONLYDIR | GLOB_NOSORT);
+    $dirs  = glob("$pattern/*", \GLOB_ONLYDIR | \GLOB_NOSORT);
     $files = array_diff($files, $dirs);
 
     $subdirs = array($files);
