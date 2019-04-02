@@ -108,7 +108,6 @@ abstract class Analyzer {
     static public $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $STATIC_NAMES     = array('Nsname', 'Identifier');
-    static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
