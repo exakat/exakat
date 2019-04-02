@@ -39,6 +39,7 @@ class PropertyNeverUsed extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->analyzerIsNot(array('Classes/PropertyUsedInternally',
                                    'Classes/PropertyUsedAbove',
                                    'Classes/PropertyUsedBelow',
