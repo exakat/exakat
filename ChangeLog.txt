@@ -1,4 +1,4 @@
-Version 1.7.3 (Huang, King Dushi, coming up)
+Version 1.7.4 (Lu King Pingdeng , coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 1.7.3 (Huang, King Dushi, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.3 (Huang, King Dushi, 2019-04-01)
++ Architecture
+    + New command 'show' that display project creation command
+    + Refactored UT detection mechanism
++ Report
+    + Ambassador : report identical files in the code
+    + Ambassador : global variable inventory is now grouped by name
++ Analyzer
+    + Updated analysis : PPPDeclaration style : handles Virtualproperties
+    + Updated analysis : Closure2string : extended analysis
+    + Updated analysis : Non-Ascii variable skips { }, & and @
+    + Updated analysis : Could Be Static exclude abstract methods
+    + Updated analysis : MismatchedTypehint : handles methodcalls and class hierarchy
+    + Updated analysis : Could Use Try : refined analysis to avoid literals
+    + Updated analysis : Hidden use, handles Virtualproperty
+    + Updated analysis : Classes, wrong case, handles FQN
+    + Checked unit tests : 2846 / 2926 test pass (97% pass)
++ Tokenizer
+    + Moved creation of Virtualproperty early, to catch more situations
+    + Virtualproperty mimic Propertydefinition
+    + Added extra check when roaming the classes tree
+    + Handles Sign constant values correctly
 
 Version 1.7.2 (Dong King Taishan, 2019-03-25)
 + Architecture

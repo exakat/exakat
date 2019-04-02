@@ -4563,7 +4563,7 @@ JAVASCRIPT;
     }
     
     private function generateIdenticalFiles() {
-        $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 2 ORDER BY COUNT(*), file');
+        $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 1 ORDER BY COUNT(*), file');
 
         $theTable = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -4579,8 +4579,6 @@ JAVASCRIPT;
 </tr>
 HTML;
         }
-        
-        print count($theTable)." fichiers identiques\n";
         $theTable = implode(PHP_EOL, $theTable);
         
 
