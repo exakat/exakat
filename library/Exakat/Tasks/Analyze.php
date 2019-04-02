@@ -132,7 +132,7 @@ class Analyze extends Tasks {
             echo $this->progressBar->advance();
         }
         
-        display( "Done\n");
+        display("Done\n");
     }
     
     private function fetchAnalyzers($analyzer_class, array &$analyzers, array &$dependencies) {

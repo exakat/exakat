@@ -26,20 +26,22 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
-class CreateVirtualProperty extends LoadFinal {
+class CreateVirtualStaticProperty extends LoadFinal {
     public function run() {
-        $query = $this->newQuery('CreateVirtualProperty VirtualProperty');
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+        $query = $this->newQuery('CreateVirtualStaticProperty VirtualProperty');
+        $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
               ->dedup('fullcode')
               ->outIs('MEMBER')
-              ->tokenIs('T_STRING')
+              ->tokenIs('T_VARIABLE')
               ->savePropertyAs('lccode', 'lower')
               ->savePropertyAs('code', 'ncode')
               ->savePropertyAs('fullcode', 'full')
               
-              ->goToClass()
+              ->inIs('MEMBER')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
               ->not(
                 $query->side()
                       ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
@@ -47,22 +49,23 @@ class CreateVirtualProperty extends LoadFinal {
                       ->isNot('visibility', 'private')
                       ->outIs('PPP')
                       ->atomIsNot('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
-                      ->samePropertyAs('propertyname', 'ncode', Analyzer::CASE_SENSITIVE)
+                      ->samePropertyAs('code', 'ncode', Analyzer::CASE_SENSITIVE)
                       ->prepareSide()
               )
               ->_as('laClasse')
 
               ->raw(<<<GREMLIN
-addV("Ppp").sideEffect{ it.get().property("code", 0);
-                        it.get().property("lccode", 0); 
-                        it.get().property("fullcode", '\$' + full); 
+addV("Ppp").sideEffect{ it.get().property("code", ncode);
+                        it.get().property("lccode", lower); 
+                        it.get().property("fullcode", 'static ' + full); 
                         it.get().property("line", -1); 
                         it.get().property("count", 1); 
+                        it.get().property("static", true); 
                         it.get().property("visibility", "none");
                        }.as('ppp').addE("PPP").from("laClasse").
-addV("Virtualproperty").sideEffect{ it.get().property("code", 0);
-                                    it.get().property("lccode", 0); 
-                                    it.get().property("fullcode", '\$' + full); 
+addV("Virtualproperty").sideEffect{ it.get().property("code", ncode);
+                                    it.get().property("lccode", lower); 
+                                    it.get().property("fullcode", full); 
                                     it.get().property("propertyname", ncode); 
                                     it.get().property("line", -1); 
                                   }.addE("PPP").from("ppp")
@@ -73,20 +76,23 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count = $result->toInt();
 
-        display("Created $count virtual properties");
+        display("Created $count virtual static properties");
 
-        $query = $this->newQuery('CreateVirtualProperty definitions');
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+        $query = $this->newQuery('CreateVirtualStaticProperty definitions');
+        $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
-              ->savePropertyAs('lccode', 'name')
+              ->savePropertyAs('code', 'ncode')
               
-              ->goToClass()
+              ->inIs('MEMBER')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+
               ->outIs('PPP')
               ->outIs('PPP')
               ->atomIs('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
-              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('code', 'ncode', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member')
 
               ->returnCount();
@@ -94,7 +100,7 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count = $result->toInt();
 
-        display("Created $count definitions to virtual properties");
+        display("Created $count definitions to virtual static properties");
     }
 }
 

@@ -98,6 +98,9 @@ class LoadFinal {
         $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateVirtualProperty');
+        $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateVirtualStaticProperty');
         
         $this->setConstantDefinition();
         $this->log('setConstantDefinition');

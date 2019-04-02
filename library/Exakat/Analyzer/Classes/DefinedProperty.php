@@ -31,67 +31,8 @@ class DefinedProperty extends Analyzer {
         // locally defined
         // defined in local class (private included)
         $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
-             ->back('first');
-        $this->prepareQuery();
-
-        // defined in parent class (private excluded)
-        $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->outIs('PPP')
-             ->isNot('visibility', 'private')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
-             ->back('first');
-        $this->prepareQuery();
-
-        // defined in traits (via use)
-        $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToTraits()
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
-             ->back('first');
-        $this->prepareQuery();
-
-        // defined in parent trait (private excluded)
-        $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->goToTraits()
-             ->outIs('PPP')
-             ->isNot('visibility', 'private')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
+             ->inIs('DEFINITION')
+             ->atomIsNot('Virtualproperty')
              ->back('first');
         $this->prepareQuery();
     }
