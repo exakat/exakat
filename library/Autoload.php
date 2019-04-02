@@ -66,7 +66,7 @@ class AutoloadExt {
             // Ignoring it all
             return;
         }
-        $list = glob("$path/*.phar");
+        $list = glob("$path/*.phar", GLOB_NOSORT);
         
         foreach($list as $phar) {
             $this->pharList[basename($phar, '.phar')] = $phar;
