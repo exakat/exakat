@@ -29,12 +29,34 @@ class GoToAllParentsTraits extends DSL {
     public function run() : Command {
         list($self) = func_get_args();
 
+        $MAX_LOOPING = self::$MAX_LOOPING;
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).hasLabel("Class", "Classanonymous", "Trait").in("DEFINITION").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.').hasLabel("Class", "Classanonymous", "Trait")');
+            $command = new Command(<<<GREMLIN
+repeat( 
+    __.out("USE", "EXTENDS").
+      .coalesce( __.out("USE"), __.filter{ true; })
+      .in("DEFINITION")
+      .hasLabel("Class", "Classanonymous", "Trait")
+                .filter{!it.sack().contains(it.get().value("fullnspath")) }
+                .sack {m,v -> m.add(v.value("fullnspath")); m} )
+                .emit( )
+                .times($MAX_LOOPING)
+                .hasLabel("Class", "Classanonymous", "Trait")
+GREMLIN
+);
             $command->setSack('[]');
             return $command;
         } else {
-            $command = new Command('emit( ).repeat( __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").hasLabel("Class", "Classanonymous", "Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.').hasLabel("Class", "Classanonymous", "Trait")');
+            $command = new Command(<<<GREMLIN
+emit( ).repeat( 
+    __.out("USE", "EXTENDS")
+      .coalesce( __.out("USE"), __.filter{true; })
+      .in("DEFINITION")
+      .hasLabel("Class", "Classanonymous", "Trait")
+      .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times($MAX_LOOPING)
+      .hasLabel("Class", "Classanonymous", "Trait")
+GREMLIN
+);
             $command->setSack('[]');
             return $command;
         }

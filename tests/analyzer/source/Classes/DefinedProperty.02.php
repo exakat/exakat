@@ -4,14 +4,15 @@ class a { public $cpa1, $cpa2; }
 
 //trait t { public $tca1; }
 
-class b implements a { public $cpb1 = 1; 
+class b extends a { public $cpb1 = 1; 
                        public $cpb2 = 2; 
                         }
 
-class c1 implements b { public $cpc11 = 1; }
-class c2 implements b { public $cpc21 = 1; }
+class c1 extends b { public $cpc11 = 1; }
+class c2 extends c1 { public $cpc21 = 1; }
 
-class d implements c1, c2 { 
+
+class d extends c2 { 
     public $cpd1 = 1; 
     
     public function x() {

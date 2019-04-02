@@ -42,8 +42,9 @@ class CreateVirtualProperty extends LoadFinal {
               ->goToClass()
               ->not(
                 $query->side()
-                      ->goToAllParents(Analyzer::EXCLUDE_SELF)
+                      ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
                       ->outIs('PPP')
+                      ->isNot('visibility', 'private')
                       ->outIs('PPP')
                       ->atomIsNot('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
                       ->samePropertyAs('propertyname', 'ncode', Analyzer::CASE_SENSITIVE)
@@ -62,12 +63,11 @@ addV("Ppp").sideEffect{ it.get().property("code", 0);
 addV("Virtualproperty").sideEffect{ it.get().property("code", 0);
                                     it.get().property("lccode", 0); 
                                     it.get().property("fullcode", '\$' + full); 
-                                    it.get().property("propertyname", lower); 
+                                    it.get().property("propertyname", ncode); 
                                     it.get().property("line", -1); 
                                   }.addE("PPP").from("ppp")
 GREMLIN
 , array(), array())
-
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
