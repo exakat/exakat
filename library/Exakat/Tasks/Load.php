@@ -525,7 +525,9 @@ class Load extends Tasks {
             try {
                 $ext = pathinfo($file, PATHINFO_EXTENSION);
                 if (!in_array($ext, $file_extensions)) {
-                    echo $progressBar->advance();
+                    if (isset($progressBar)) {
+                        echo $progressBar->advance();
+                    }
                     continue;
                 }
 
