@@ -69,6 +69,8 @@ class Query {
     public function side() {
         $this->sides[] = $this->commands;
         $this->commands = array();
+        
+        return $this;
     }
 
     public function prepareSide() {
