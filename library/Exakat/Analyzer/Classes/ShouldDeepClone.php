@@ -26,19 +26,29 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldDeepClone extends Analyzer {
     public function analyze() {
+        // Based on typehinting of functions. 
+        // Other options ? 
         $this->atomIs('Clone')
-             ->outIs('CLONE')
-             ->inIs('DEFINITION')
-             ->atomIs(array('Class', 'Classanonymous'))
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->goToAllParents(self::INCLUDE_SELF)
-                             ->outIs('MAGICMETHOD')
-                             ->outIs('NAME')
-                             ->codeIs('__clone')
-                     )
+                     ->inIs('DEFINITION')
+                     ->atomIs('Magicmethod')
+                     ->outIs('NAME')
+                     ->codeIs('__clone', self::TRANSLATE, self::CASE_INSENSITIVE)
+             )
+             ->outIs('CLONE')
+             ->inIs('DEFINITION')
+             ->inIs('NAME')
+             ->outIs('TYPEHINT')
+             ->inIs('DEFINITION')
+             ->filter(
+                $this->side()
+                     ->outIs('PPP')
+                     ->outIs('PPP')
+                     ->atomIs('Propertydefinition')
+                     ->outIs('DEFINITION')
+                     ->inIs('OBJECT')
+                     ->atomIs(array('Member', 'Methodcall'))
              )
              ->back('first');
         $this->prepareQuery();

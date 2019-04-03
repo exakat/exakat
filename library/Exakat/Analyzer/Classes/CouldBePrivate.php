@@ -57,6 +57,7 @@ class CouldBePrivate extends Analyzer {
                  ->isNot('visibility', 'private')
                  ->isNot('static', true)
                  ->outIs('PPP')
+                 ->atomIsNot('Virtualproperty')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->isNot('propertyname', $publicProperties);
             $this->prepareQuery();
@@ -78,6 +79,7 @@ class CouldBePrivate extends Analyzer {
 
         $this->atomIs('Staticproperty')
              ->inIs('DEFINITION')
+             ->atomIsNot('Virtualproperty')
              ->inIs('PPP')
              ->inIs('PPP')
              ->savePropertyAs('fullnspath', 'fnp')
@@ -114,6 +116,7 @@ class CouldBePrivate extends Analyzer {
              ->isNot('visibility', 'private')
              ->is('static', true)
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->analyzerIsNot('Classes/PropertyUsedBelow')
              ->_as('results')
              ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)

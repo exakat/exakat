@@ -176,7 +176,7 @@ abstract class Analyzer {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
             self::$availableAtoms = array('Project', 'File', 'Virtualproperty');
-            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {
@@ -780,6 +780,24 @@ GREMLIN;
 
     public function isComplexExpression($threshold = 30) {
         $this->query->isComplexExpression($threshold);
+
+        return $this;
+    }
+    
+    public function IsPropertyDefined() {
+        $this->query->isPropertyDefined();
+
+        return $this;
+    }
+
+    public function IsNotPropertyDefined() {
+        $this->query->isNotPropertyDefined();
+
+        return $this;
+    }
+    
+    public function isMissingOrNull() {
+        $this->query->isMissingOrNull();
 
         return $this;
     }

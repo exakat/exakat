@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class LocallyUsedProperty extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testClasses_LocallyUsedProperty01()  { $this->generic_test('Classes_LocallyUsedProperty.01'); }
     public function testClasses_LocallyUsedProperty02()  { $this->generic_test('Classes_LocallyUsedProperty.02'); }
@@ -16,5 +16,6 @@ class LocallyUsedProperty extends Analyzer {
     public function testClasses_LocallyUsedProperty05()  { $this->generic_test('Classes/LocallyUsedProperty.05'); }
     public function testClasses_LocallyUsedProperty06()  { $this->generic_test('Classes/LocallyUsedProperty.06'); }
     public function testClasses_LocallyUsedProperty07()  { $this->generic_test('Classes/LocallyUsedProperty.07'); }
+    public function testClasses_LocallyUsedProperty08()  { $this->generic_test('Classes/LocallyUsedProperty.08'); }
 }
 ?>

@@ -36,18 +36,8 @@ class DefinedParentMP extends Analyzer {
         $this->atomIs('Parent')
              ->hasIn('DEFINITION')
              ->inIs('CLASS')
-             ->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name')
-             ->back('first')
-             ->inIs('CLASS');
+             ->atomIs(array('Staticmethodcall', 'Staticconstant'))
+             ->hasIn('DEFINITION');
         $this->prepareQuery();
 
         // parent::$property
@@ -55,36 +45,7 @@ class DefinedParentMP extends Analyzer {
              ->hasIn('DEFINITION')
              ->inIs('CLASS')
              ->atomIs('Staticproperty')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('PPP')
-             ->isNot('visibility', 'private')
-             ->outIs('PPP')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first')
-             ->inIs('CLASS');
-        $this->prepareQuery();
-
-        // parent::constant
-        $this->atomIs('Parent')
-             ->hasIn('DEFINITION')
-             ->inIs('CLASS')
-             ->atomIs('Staticconstant')
-             ->outIs('CONSTANT')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('CONST')
-             ->isNot('visibility', 'private')
-             ->outIs('CONST')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->inIs('CLASS');
+             ->isPropertyDefined();
         $this->prepareQuery();
 
         // parent::$property or parent::methodcall or parent::constant

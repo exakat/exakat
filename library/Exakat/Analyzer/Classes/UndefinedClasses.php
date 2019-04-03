@@ -54,7 +54,6 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // in a class::Method()
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot($omitted)
              ->outIs('CLASS')
@@ -73,7 +72,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Parent')
-             ->fullnspathIs('\\parent')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 

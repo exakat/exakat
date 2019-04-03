@@ -84,9 +84,10 @@ GREMLIN
              ->raw(<<<GREMLIN
 not(where( __.repeat(__.out({$this->linksDown})).emit().times($MAX_LOOPING)
                                      .not(where(__.in("CLASS", "NAME")))
-                                     .not(hasLabel("Identifier", "Nsname", "Staticconstant").has("noDelimiter"))
-                                     .not(hasLabel("Parenthesis", "Magicconstant", "String", "Name"))
+                                     .not(hasLabel("Identifier", "Nsname", "Staticconstant", "Parenthesis").has("noDelimiter"))
+                                     .not(hasLabel("Magicconstant", "String", "Name"))
                                      .not(hasLabel("Functioncall").has("fullnspath", "\\\\dirname") ) 
+                                     .not(__.has('noDelimiter'))
          )
    )
 GREMLIN
@@ -156,7 +157,7 @@ sideEffect{
                     including.add(it.value("noDelimiter"));
                 }
             } else {
-                    including.add(it.value("noDelimiter"));
+                including.add(it.value("noDelimiter"));
             }
         }; 
     including = including.join(""); 

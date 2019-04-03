@@ -30,8 +30,6 @@ class AvoidOptionalProperties extends Analyzer {
     }
     
     public function analyze() {
-        $checkNullAsDefault = 'or( __.not(where( __.out("DEFAULT") )), __.out("DEFAULT").hasLabel("Null") )';
-        
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
@@ -54,8 +52,9 @@ class AvoidOptionalProperties extends Analyzer {
              ->goToClass()
              ->outIs('PPP')
              ->outIs('PPP')
-             ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw($checkNullAsDefault)
+             ->atomIs('Propertydefinition')
+             ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
+             ->isMissingOrNull()
              ->back('results');
         $this->prepareQuery();
 
@@ -72,8 +71,9 @@ class AvoidOptionalProperties extends Analyzer {
              ->goToClass()
              ->outIs('PPP')
              ->outIs('PPP')
-             ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw($checkNullAsDefault)
+             ->atomIs('Propertydefinition')
+             ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
+             ->isMissingOrNull()
              ->back('results');
         $this->prepareQuery();
 
@@ -94,8 +94,9 @@ class AvoidOptionalProperties extends Analyzer {
              ->goToClass()
              ->outIs('PPP')
              ->outIs('PPP')
-             ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw($checkNullAsDefault)
+             ->atomIs('Propertydefinition')
+             ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
+             ->isMissingOrNull()
              ->back('results');
         $this->prepareQuery();
 

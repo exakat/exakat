@@ -34,7 +34,7 @@ class CreateVirtualStaticProperty extends LoadFinal {
               ->hasNoIn('DEFINITION')
               ->dedup('fullcode')
               ->outIs('MEMBER')
-              ->tokenIs('T_VARIABLE')
+              ->atomIs('Staticpropertyname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'lower')
               ->savePropertyAs('code', 'ncode')
               ->savePropertyAs('fullcode', 'full')
@@ -83,11 +83,14 @@ GREMLIN
               ->_as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
+              ->atomIs('Staticpropertyname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('code', 'ncode')
               
               ->inIs('MEMBER')
               ->outIs('CLASS')
               ->inIs('DEFINITION')
+              
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS )
 
               ->outIs('PPP')
               ->outIs('PPP')

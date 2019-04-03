@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Graph\Graph;
 use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
@@ -40,74 +41,29 @@ class FindExternalLibraries extends Tasks {
     private $php = null;
     private $phpTokens = array();
 
-    // classic must be in lower case form.
-    private $classic = array('adoconnection'    => self::WHOLE_DIR,
-                             'bbq'              => self::WHOLE_DIR,
-                             'cpdf'             => self::WHOLE_DIR, // ezpdf
-                             'cakeplugin'       => self::PARENT_DIR, // cakephp
-                             'dompdf'           => self::PARENT_DIR,
-                             'fpdf'             => self::FILE_ONLY,
-                             'graph'            => self::PARENT_DIR, // Jpgraph
-                             'jpgraph'          => self::PARENT_DIR,
-                             'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
-                             'htmlpurifier'     => self::FILE_ONLY,
-                             'http_class'       => self::WHOLE_DIR,
-                             'idna_convert'     => self::WHOLE_DIR,
-                             'lessc'            => self::FILE_ONLY,
-                             'magpierss'        => self::WHOLE_DIR,
-                             'markdown_parser'  => self::FILE_ONLY,
-                             'markdown'         => self::WHOLE_DIR,
-                             'mpdf'             => self::WHOLE_DIR,
-                             'oauthtoken'       => self::WHOLE_DIR,
-                             'passwordhash'     => self::FILE_ONLY,
-                             'pchart'           => self::WHOLE_DIR,
-                             'pclzip'           => self::FILE_ONLY,
-                             'gacl'             => self::WHOLE_DIR,
-                             'propel'           => self::PARENT_DIR,
-                             'gettext_reader'   => self::FILE_ONLY,
-                             'phpexcel'         => self::WHOLE_DIR,
-                             'phpmailer'        => self::FILE_ONLY,
-                             'qrcode'           => self::FILE_ONLY,
-                             'services_json'    => self::FILE_ONLY,
-                             'sfyaml'           => self::WHOLE_DIR,
-                             'swift'            => self::PARENT_DIR,
-                             'simplepie'        => self::FILE_ONLY,
-                             'smarty'           => self::WHOLE_DIR,
-                             'tcpdf'            => self::WHOLE_DIR,
-                             'text_diff'        => self::FILE_ONLY,
-                             'text_highlighter' => self::WHOLE_DIR,
-                             'tfpdf'            => self::WHOLE_DIR,
-                             'utf8'             => self::WHOLE_DIR,
-                             'ci_xmlrpc'        => self::FILE_ONLY,
-                             'xajax'            => self::PARENT_DIR,
-                             'yii'              => self::WHOLE_DIR,
-                             'zend_view'        => self::WHOLE_DIR,
-                             );
+    private $classicTestsNames = array();
+    private $classicTests      = array();
+    private $classic           = array();
 
-    // classic must be in lower case form.
-    private $classicTests = array('phpunit_framework_testcase'                          => self::WHOLE_DIR, // PHPunit
-                                  'codeception\test\unit'                               => self::WHOLE_DIR, // Codeception
-                                  'objectbehavior'                                      => self::WHOLE_DIR, // PHP spec
-                                  'unittestcase'                                        => self::WHOLE_DIR, // Simpletest
-                                  'atoum'                                               => self::WHOLE_DIR, // Atoum
-                                  'drupal\tests\unittestcase'                           => self::WHOLE_DIR, // Drupal
-                                  'symfony\bundle\frameworkbundle\test\webtestcase'     => self::WHOLE_DIR, // Symfony
-                                  'symfony\bundle\frameworkbundle\test\kerneltestcase'  => self::WHOLE_DIR, // Symfony
-                                  'typo3\testingframework\core\unit\unittestcase'       => self::WHOLE_DIR, // typo3
-                                  // behat, peridot, kahlan, phpt? avalon
-                                   );
+    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
+        parent::__construct($gremlin, $config, $subTask);
 
-    private $classicTestsNames = array('phpunit_framework_testcase'                          => 'PHPUnit', // PHPunit
-                                       'codeception\test\unit'                               => 'Codeception', // Codeception
-                                       'objectbehavior'                                      => 'PHPSpec', // PHP spec
-                                       'unittestcase'                                        => 'Simpletest', // Simpletest
-                                       'atoum'                                               => 'Atoum', // Atoum
-                                       'drupal\tests\unittestcase'                           => 'Simpletest', // Drupal 7 
-                                       'symfony\bundle\frameworkbundle\test\webtestcase'     => 'PHPUnit', // Symfony
-                                       'symfony\bundle\frameworkbundle\test\kerneltestcase'  => 'PHPUnit', // Symfony
-                                       'typo3\testingframework\core\unit\unittestcase'       => 'Typo3TestingFramework', // typo3
-                                       // behat, peridot, kahlan, phpt? avalon
-                                        );
+        $json = json_decode(file_get_contents('data/externallibraries.json'));
+        foreach((array) $json as $name => $o) {
+            if ($o->type === 'classic') {
+                foreach($o->classes as $class) {
+                    $this->classic[$class] = constant("self::$o->ignore");
+                }
+            } elseif ($o->type === 'test') {
+                foreach($o->classes as $class) {
+                    $this->classicTests[$class] = constant("self::$o->ignore");
+                    $this->classicTestsNames[$class] = $o->name;
+                }
+            } else {
+                assert(false, "[External libraries] : Wrong type for $name : $o->type\n");
+            }
+        }
+    }
 
     public function run() {
         $project = $this->config->project;
@@ -154,7 +110,7 @@ class FindExternalLibraries extends Tasks {
         rsort($files);
         $ignore = 'None';
         $ignoreLength = 0;
-        foreach($files as $id => $file) {
+        foreach($files as $file) {
             if (substr($file, 0, $ignoreLength) === $ignore) {
                 display( "Ignore $file ($ignore)\n");
                 continue;
@@ -171,10 +127,9 @@ class FindExternalLibraries extends Tasks {
         if (empty($r)) {
             $newConfigs = array();
         } else {
-            $newConfigs = call_user_func_array('array_merge', $r);
+            $newConfigs = array_merge(...$r);
         }
 
-        
         if (count($newConfigs) === 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
         } elseif (!empty($newConfigs)) {
@@ -195,7 +150,7 @@ class FindExternalLibraries extends Tasks {
                 return; //Cancel task
             }
 
-             display('Updating '.$project.'/config.cache');
+             display("'Updating $project/config.cache");
              $ini = '; This file contains configuration auto-generated by exakat. '                    .PHP_EOL.
                     '; Do not edit this file manually : in case of doubt, remove it to regenerate it. '.PHP_EOL.
                     '; This file was auto-generated on '.date('r')                                     .PHP_EOL;

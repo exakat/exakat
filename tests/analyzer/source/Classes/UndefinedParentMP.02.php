@@ -1,8 +1,8 @@
 <?php
 
 class definedClassA extends definedClassC {
-    private $definedProperty;
-    protected $definedProtectedProperty;
+    private static $definedProperty;
+    protected static $definedProtectedProperty;
 }
 
 class definedClassB extends definedClassA {

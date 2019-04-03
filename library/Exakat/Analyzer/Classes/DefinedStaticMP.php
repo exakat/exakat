@@ -29,60 +29,12 @@ class DefinedStaticMP extends Analyzer {
     public function analyze() {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->atomIs(array('Static', 'Self'))
-             ->back('first')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->goToClass()
-             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("lccode") == name} )')
-             ->back('first');
-        $this->prepareQuery();
-
-        // static::method() parents and beyond
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->atomIs(array('Static', 'Self'))
-             ->back('first')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->goToClass()
-             ->goToAllParents()
-             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("lccode") == name} )')
-             ->back('first');
+             ->hasIn('DEFINITION');
         $this->prepareQuery();
 
         // static::$property the current class
         $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->atomIs(array('Static', 'Self'))
-             ->back('first')
-             ->outIs('MEMBER')
-             ->outIsIE('VARIABLE')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // static::$property Parents
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->atomIs(array('Static', 'Self'))
-             ->back('first')
-             ->outIs('MEMBER')
-             ->outIsIE('VARIABLE')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->goToAllParents()
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
+             ->IsPropertyDefined();
         $this->prepareQuery();
     }
 }

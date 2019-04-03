@@ -2,8 +2,7 @@
 
 $expected     = array('assert(<<<HEREDOC
 heredoc
-HEREDOC
-)',
+HEREDOC)',
                       'assert("is_int(\\$int3) /* $int parameter must be an int, not just numeric */")',
                       'assert(\'is_int($int2) \' . \'/* $int parameter must be an int, not just numeric */\')',
                       'assert(\'is_int($int1) /* $int parameter must be an int, not just numeric */\')',

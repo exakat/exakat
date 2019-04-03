@@ -46,7 +46,7 @@ class DependantTrait extends Analyzer {
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
-             ->hasNoIn('DEFINITION')
+             ->isNotPropertyDefined()
              ->back('first');
         $this->prepareQuery();
 
@@ -60,11 +60,11 @@ class DependantTrait extends Analyzer {
              ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->hasNoIn('DEFINITION')
+             ->isNotPropertyDefined()
              ->back('first');
         $this->prepareQuery();
 
-        // Case for class::methodcall
+        // Case for class::methodcall()
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
