@@ -53,6 +53,30 @@ Label : PROJECT
                   6
                 Label : MEMBER
                   9
+              Label : PPP
+                15
+                Label : PPP
+                  15
+                  Label : DEFINITION
+                    20
+                    Label : CLASS
+                      20
+                      Label : CLASS
+                        6
+                      Label : MEMBER
+                        9
+                    Label : MEMBER
+                      15
+                  Label : DEFINITION
+                    20
+                    Label : CLASS
+                      20
+                      Label : CLASS
+                        6
+                      Label : MEMBER
+                        9
+                    Label : MEMBER
+                      15
         Label : EXPRESSION
           5
           Label : DEFINITION
