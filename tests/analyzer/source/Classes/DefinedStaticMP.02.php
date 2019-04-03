@@ -4,7 +4,7 @@ class a extends c {
      private $x = 1;
      
      function definedInParent() { print __METHOD__."\n";}
-     private $pdefinedInParent;
+     protected static $pdefinedInParent;
 }
 
 class b extends a {
@@ -23,14 +23,14 @@ class b extends a {
      }
      
      function definedinStatic() { print __METHOD__."\n";}
-     private $pdefinedinStatic;
+     protected static $pdefinedinStatic;
 }
 
 class c {
      private $x = 1;
 
      function definedInParentParent() { print __METHOD__."\n";}
-     private $pdefinedInParentParent;
+     protected static $pdefinedInParentParent;
 }
 
 
