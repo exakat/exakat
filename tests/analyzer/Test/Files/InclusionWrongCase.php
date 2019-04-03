@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class InclusionWrongCase extends Analyzer {
-    /* 16 methods */
+    /* 17 methods */
 
     public function testFiles_InclusionWrongCase01()  { $this->generic_test('Files/InclusionWrongCase.01'); }
     public function testFiles_InclusionWrongCase02()  { $this->generic_test('Files/InclusionWrongCase.02'); }
@@ -25,5 +25,6 @@ class InclusionWrongCase extends Analyzer {
     public function testFiles_InclusionWrongCase14()  { $this->generic_test('Files/InclusionWrongCase.14'); }
     public function testFiles_InclusionWrongCase15()  { $this->generic_test('Files/InclusionWrongCase.15'); }
     public function testFiles_InclusionWrongCase16()  { $this->generic_test('Files/InclusionWrongCase.16'); }
+    public function testFiles_InclusionWrongCase17()  { $this->generic_test('Files/InclusionWrongCase.17'); }
 }
 ?>

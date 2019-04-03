@@ -204,6 +204,14 @@ class Strval extends Plugin {
                 }
                 break;
 
+            case 'Functioncall' :
+                if (in_array($atom->fullnspath, array('\basename', '\dirname'))) {
+                    $function = $atom->fullnspath;
+                    $atom->noDelimiter = $function($extras[0]->noDelimiter);
+                } // else, ignore it
+                
+                break;
+
         default :
         case 'Sequence' :
             // Nothing, really
