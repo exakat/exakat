@@ -795,6 +795,12 @@ GREMLIN;
 
         return $this;
     }
+    
+    public function isMissingOrNull() {
+        $this->query->isMissingOrNull();
+
+        return $this;
+    }
 
     public function isNotHash($property, $hash, $index) {
         $this->query->isNotHash($property, $hash, $index);
