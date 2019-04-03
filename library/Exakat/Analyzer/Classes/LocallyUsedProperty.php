@@ -31,11 +31,12 @@ class LocallyUsedProperty extends Analyzer {
 
         // normal property
         // static property in an variable static::$c
-        $this->atomIs(array('Class', 'Trait'))
+        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
              ->savePropertyAs('id', 'citId')
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
+             ->atomIs('Propertydefinition')
              ->_as('ppp')
              ->outIs('DEFINITION')
              ->goToInstruction(array('Class', 'Trait'))
