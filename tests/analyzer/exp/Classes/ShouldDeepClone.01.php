@@ -1,11 +1,10 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('clone $b',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('clone $a',
+                      'clone $c',
                      );
 
 ?>
