@@ -44,16 +44,38 @@ class UndefinedStaticMP extends Analyzer {
              ->hasNoIn('DEFINITION');
         $this->prepareQuery();
 
-        // static::$property 1rst level
+        // static::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Self', 'Static'))
+             ->atomIs(array('Self', 'Static')) // self class static step
              ->back('first')
              ->outIs('MEMBER')
              ->tokenIs('T_VARIABLE')
              ->back('first')
-             ->analyzerIsNot('Composer/IsComposerNsname')
-             ->hasNoIn('DEFINITION');
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Virtualproperty')
+             )
+             ->back('first');
+        $this->prepareQuery();
+
+        // static::$property, with a non-static property definition
+        $this->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->atomIs(array('Self', 'Static')) // self class static step
+             ->back('first')
+             ->outIs('MEMBER')
+             ->tokenIs('T_VARIABLE')
+             ->back('first')
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+                     ->inIs('PPP')
+                     ->isNot('static', true)
+             )
+             ->back('first');
         $this->prepareQuery();
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
+// members are protected but not static
 class a extends c {
      private $x = 1;
      
      function definedInParent() { print __METHOD__."\n";}
-     protected static $pdefinedInParent;
+     protected $pdefinedInParent;
+     public static $publicdefinedInParent = 3;
 }
 
 class b extends a {
@@ -17,20 +19,21 @@ class b extends a {
         static::definedinStatic();
 
         static::$pdefinedInParent;
+        static::$publicdefinedInParent;
         static::$pdefinedInParentParent;
         static::$pundefined;
         static::$pdefinedinStatic;
      }
      
      function definedinStatic() { print __METHOD__."\n";}
-     private static $pdefinedinStatic;
+     protected $pdefinedinStatic;
 }
 
 class c {
      private $x = 1;
 
      function definedInParentParent() { print __METHOD__."\n";}
-     protected static $pdefinedInParentParent;
+     protected $pdefinedInParentParent;
 }
 
 
