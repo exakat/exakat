@@ -1,128 +1,428 @@
 {
- "atoum":{"homepage":"http://atoum.org/",
-        "ignore":"WHOLE_DIR",
-        "name":"atoum"},
- "bbq":{"homepage":"https://github.com/eventio/bbq",
-        "ignore":"WHOLE_DIR",
-        "name":"BBQ"},
- "ci_xmlrpc":{"homepage":"http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html",
-              "ignore":"FILE_ONLY",
-              "name":"CI xmlRPC"},
- "cpdf":{"homepage":"https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html",
-         "ignore":"WHOLE_DIR",
-         "name":"CPDF"},
- "Codeception":{"homepage":"https://codeception.com/",
-              "ignore":"WHOLE_DIR",
-              "name":"Codeception"},
- "dompdf":{"homepage":"https://github.com/dompdf/dompdf",
-           "ignore":"WHOLE_DIR",
-           "name":"DomPDF"},
- "fpdf":{"homepage":"http://www.fpdf.org/",
-         "ignore":"FILE_ONLY",
-         "name":"FPDF"},
- "gettext_reader":{"homepage":"http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html",
-                   "ignore":"PARENT_DIR",
-                   "name":"gettext Reader"},
- "graph":{"homepage":"http://jpgraph.net/",
-          "ignore":"PARENT_DIR",
-          "name":"jpGraph"},
- "html2pdf":{"homepage":"http://sourceforge.net/projects/phphtml2pdf/",
-             "ignore":"WHOLE_DIR",
-             "name":"HTML2PDF"},
- "htmlpurifier":{"homepage":"http://htmlpurifier.org/",
-                 "ignore":"FILE_ONLY",
-                 "name":"HTMLPurifier"},
- "http_class":{"homepage":"",
-               "ignore":"WHOLE_DIR",
-               "name":"http_class"},
- "idna_convert":{"homepage":"https://github.com/phpWhois/idna-convert",
-                 "ignore":"WHOLE_DIR",
-                 "name":"IDNA convert"},
- "lessc":{"homepage":"http://leafo.net/lessphp/",
-          "ignore":"FILE_ONLY",
-          "name":"lessc"},
- "licence":{"homepage":"http://leafo.net/lessphp/",
-          "ignore":"FILE_ONLY",
-          "name":"lessc"},
- "magpierss":{"homepage":"http://magpierss.sourceforge.net/",
-              "ignore":"WHOLE_DIR",
-              "name":"magpieRSS"},
- "markdown_parser":{"homepage":"http://processwire.com/apigen/class-Markdown_Parser.html",
-                    "ignore":"FILE_ONLY",
-                    "name":"MarkDown Parser"},
- "markdown":{"homepage":"https://github.com/michelf/php-markdown",
-             "ignore":"WHOLE_DIR",
-             "name":"Markdown"},
- "mpdf":{"homepage":"http://www.mpdf1.com/mpdf/index.php",
-         "ignore":"WHOLE_DIR",
-         "name":"mpdf"},
- "oauthtoken":{"homepage":"",
-               "ignore":"WHOLE_DIR",
-               "name":"oauthToken"},
- "passwordhash":{"homepage":"",
-                 "ignore":"FILE_ONLY",
-                 "name":"passwordHash"},
- "pchart":{"homepage":"http://www.pchart.net/",
-           "ignore":"WHOLE_DIR",
-           "name":"pChart"},
- "pclzip":{"homepage":"http://www.phpconcept.net/pclzip/",
-           "ignore":"FILE_ONLY",
-           "name":"pclZip"},
- "propel":{"homepage":"http://propelorm.org/",
-           "ignore":"PARENT_DIR",
-           "name":"Propel"},
- "phpexcel":{"homepage":"https://phpexcel.codeplex.com/",
-             "ignore":"WHOLE_DIR",
-             "name":"phpExecl"},
- "phpmailer":{"homepage":"https://github.com/PHPMailer/PHPMailer",
-              "ignore":"WHOLE_DIR",
-              "name":"phpMailer"},
- "phpspecs":{"homepage":"http://www.phpspec.net/en/stable/",
-           "ignore":"WHOLE_DIR",
-           "name":"PHPSpec"},
- "phpunit":{"homepage":"https://www.phpunit.de/",
-              "ignore":"WHOLE_DIR",
-              "name":"PHPUnit"},
- "qrcode":{"homepage":"http://phpqrcode.sourceforge.net/",
-           "ignore":"FILE_ONLY",
-           "name":"qrCode"},
- "services_json":{"homepage":"https://pear.php.net/package/Services_JSON",
-           "ignore":"FILE_ONLY",
-           "name":"Services_JSON"},
- "sfyaml":{"homepage":"https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php",
-           "ignore":"WHOLE_DIR",
-           "name":"sfYaml"},
- "simpletest":{"homepage":"https://github.com/simpletest/simpletest",
-              "ignore":"WHOLE_DIR",
-              "name":"SimpleTest"},
- "swift":{"homepage":"http://swiftmailer.org/",
-           "ignore":"WHOLE_DIR",
-           "name":"swift"},
- "smarty":{"homepage":"http://www.smarty.net/",
-           "ignore":"WHOLE_DIR",
-           "name":"Smarty"},
- "tcpdf":{"homepage":"http://www.tcpdf.org/",
-          "ignore":"WHOLE_DIR",
-          "name":"tcpdf"},
- "text_diff":{"homepage":"https://pear.php.net/package/Text_Diff",
-              "ignore":"WHOLE_DIR",
-              "name":"text_diff"},
- "text_highlighter":{"homepage":"https://pear.php.net/package/Text_Highlighter/",
-                     "ignore":"WHOLE_DIR",
-                     "name":"text highlighter"},
- "tfpdf":{"homepage":"http://www.fpdf.org/en/script/script92.php",
-          "ignore":"WHOLE_DIR",
-          "name":"tfpdf"},
- "Typo3TestingFramework":{"homepage":"https://github.com/TYPO3/testing-framework",
-          "ignore":"WHOLE_DIR",
-          "name":"Typo3TestingFramework"},
- "utf8":{"homepage":"",
-         "ignore":"WHOLE_DIR",
-         "name":"UTF8"},
- "yii":{"homepage":"http://www.yiiframework.com/",
-        "ignore":"FILE_ONLY",
-        "name":"Yii"},
- "zend_view":{"homepage":"http://framework.zend.com/",
-              "ignore":"WHOLE_DIR",
-              "name":"Zend Framework"}
+  "adoconnection": {
+    "homepage": "https://adodb.org/dokuwiki/doku.php/",
+    "ignore": "WHOLE_DIR",
+    "name": "ADOdb",
+    "classes": [
+      "adoconnection"
+    ],
+    "type": "classic"
+  },
+  "atoum": {
+    "homepage": "http://atoum.org/",
+    "ignore": "WHOLE_DIR",
+    "name": "atoum",
+    "classes": [
+      "atoum"
+    ],
+    "type": "test"
+  },
+  "bbq": {
+    "homepage": "https://github.com/eventio/bbq",
+    "ignore": "WHOLE_DIR",
+    "name": "BBQ",
+    "classes": [
+      "bbq"
+    ],
+    "type": "classic"
+  },
+  "cakeplugin": {
+    "homepage": "https://cakephp.org/",
+    "ignore": "WHOLE_DIR",
+    "name": "CakePHP",
+    "classes": [
+      "cakeplugin"
+    ],
+    "type": "classic"
+  },
+  "ci_xmlrpc": {
+    "homepage": "http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html",
+    "ignore": "FILE_ONLY",
+    "name": "CI xmlRPC",
+    "classes": [
+      "ci_xmlrpc"
+    ],
+    "type": "classic"
+  },
+  "cpdf": {
+    "homepage": "https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html",
+    "ignore": "WHOLE_DIR",
+    "name": "CPDF",
+    "classes": [
+      "cpdf"
+    ],
+    "type": "classic"
+  },
+  "Codeception": {
+    "homepage": "https://codeception.com/",
+    "ignore": "WHOLE_DIR",
+    "name": "Codeception",
+    "classes": [
+      "codeception\\test\\unit"
+    ],
+    "type": "test"
+  },
+  "dompdf": {
+    "homepage": "https://github.com/dompdf/dompdf",
+    "ignore": "PARENT_DIR",
+    "name": "DomPDF",
+    "classes": [
+      "dompdf"
+    ],
+    "type": "classic"
+  },
+  "fpdf": {
+    "homepage": "http://www.fpdf.org/",
+    "ignore": "FILE_ONLY",
+    "name": "FPDF",
+    "classes": [
+      "fpdf"
+    ],
+    "type": "classic"
+  },
+  "gacl": {
+    "homepage": "http://phpgacl.sourceforge.net/",
+    "ignore": "WHOLE_DIR",
+    "name": "phpGACL",
+    "classes": [
+      "gacl"
+    ],
+    "type": "classic"
+  },
+  "gettext_reader": {
+    "homepage": "http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html",
+    "ignore": "FILE_ONLY",
+    "name": "gettext Reader",
+    "classes": [
+      "gettext_reader"
+    ],
+    "type": "classic"
+  },
+  "graph": {
+    "homepage": "http://jpgraph.net/",
+    "ignore": "PARENT_DIR",
+    "name": "jpGraph",
+    "classes": [
+      "graph",
+      "jpgraph"
+    ],
+    "type": "classic"
+  },
+  "html2pdf": {
+    "homepage": "http://sourceforge.net/projects/phphtml2pdf/",
+    "ignore": "WHOLE_DIR",
+    "name": "HTML2PDF",
+    "classes": [
+      "html2pdf"
+    ],
+    "type": "classic"
+  },
+  "htmlpurifier": {
+    "homepage": "http://htmlpurifier.org/",
+    "ignore": "FILE_ONLY",
+    "name": "HTMLPurifier",
+    "classes": [
+      "htmlpurifier"
+    ],
+    "type": "classic"
+  },
+  "http_class": {
+    "homepage": "",
+    "ignore": "WHOLE_DIR",
+    "name": "http_class",
+    "classes": [
+      "http_class"
+    ],
+    "type": "classic"
+  },
+  "idna_convert": {
+    "homepage": "https://github.com/phpWhois/idna-convert",
+    "ignore": "WHOLE_DIR",
+    "name": "IDNA convert",
+    "classes": [
+      "idna_convert"
+    ],
+    "type": "classic"
+  },
+  "lessc": {
+    "homepage": "http://leafo.net/lessphp/",
+    "ignore": "FILE_ONLY",
+    "name": "lessc",
+    "classes": [
+      "lessc"
+    ],
+    "type": "classic"
+  },
+  "magpierss": {
+    "homepage": "http://magpierss.sourceforge.net/",
+    "ignore": "WHOLE_DIR",
+    "name": "magpieRSS",
+    "classes": [
+      "magpierss"
+    ],
+    "type": "classic"
+  },
+  "markdown_parser": {
+    "homepage": "http://processwire.com/apigen/class-Markdown_Parser.html",
+    "ignore": "FILE_ONLY",
+    "name": "MarkDown Parser",
+    "classes": [
+      "markdown_parser"
+    ],
+    "type": "classic"
+  },
+  "markdown": {
+    "homepage": "https://github.com/michelf/php-markdown",
+    "ignore": "WHOLE_DIR",
+    "name": "Markdown",
+    "classes": [
+      "markdown"
+    ],
+    "type": "classic"
+  },
+  "mpdf": {
+    "homepage": "http://www.mpdf1.com/mpdf/index.php",
+    "ignore": "WHOLE_DIR",
+    "name": "mpdf",
+    "classes": [
+      "mpdf"
+    ],
+    "type": "classic"
+  },
+  "oauthtoken": {
+    "homepage": "",
+    "ignore": "WHOLE_DIR",
+    "name": "oauthToken",
+    "classes": [
+      "oauthtoken"
+    ],
+    "type": "classic"
+  },
+  "passwordhash": {
+    "homepage": "",
+    "ignore": "FILE_ONLY",
+    "name": "passwordHash",
+    "classes": [
+      "passwordhash"
+    ],
+    "type": "classic"
+  },
+  "pchart": {
+    "homepage": "http://www.pchart.net/",
+    "ignore": "WHOLE_DIR",
+    "name": "pChart",
+    "classes": [
+      "pchart"
+    ],
+    "type": "classic"
+  },
+  "pclzip": {
+    "homepage": "http://www.phpconcept.net/pclzip/",
+    "ignore": "FILE_ONLY",
+    "name": "pclZip",
+    "classes": [
+      "pclzip"
+    ],
+    "type": "classic"
+  },
+  "propel": {
+    "homepage": "http://propelorm.org/",
+    "ignore": "PARENT_DIR",
+    "name": "Propel",
+    "classes": [
+      "propel"
+    ],
+    "type": "classic"
+  },
+  "phpexcel": {
+    "homepage": "https://phpexcel.codeplex.com/",
+    "ignore": "WHOLE_DIR",
+    "name": "phpExecl",
+    "classes": [
+      "phpexcel"
+    ],
+    "type": "classic"
+  },
+  "phpmailer": {
+    "homepage": "https://github.com/PHPMailer/PHPMailer",
+    "ignore": "FILE_ONLY",
+    "name": "phpMailer",
+    "classes": [
+      "phpmailer"
+    ],
+    "type": "classic"
+  },
+  "phpspecs": {
+    "homepage": "http://www.phpspec.net/en/stable/",
+    "ignore": "WHOLE_DIR",
+    "name": "PHPSpec",
+    "classes": [
+      "objectbehavior"
+    ],
+    "type": "test"
+  },
+  "phpunit": {
+    "homepage": "https://www.phpunit.de/",
+    "ignore": "WHOLE_DIR",
+    "name": "PHPUnit",
+    "classes": [
+      "phpunit_framework_testcase"
+    ],
+    "type": "test"
+  },
+  "qrcode": {
+    "homepage": "http://phpqrcode.sourceforge.net/",
+    "ignore": "FILE_ONLY",
+    "name": "qrCode",
+    "type": "classic",
+    "classes": [
+      "qrcode"
+    ]
+  },
+  "services_json": {
+    "homepage": "https://pear.php.net/package/Services_JSON",
+    "ignore": "FILE_ONLY",
+    "name": "Services_JSON",
+    "classes": [
+      "services_json"
+    ],
+    "type": "classic"
+  },
+  "sfyaml": {
+    "homepage": "https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php",
+    "ignore": "WHOLE_DIR",
+    "name": "sfYaml",
+    "type": "classic",
+    "classes": [
+      "sfyaml"
+    ]
+  },
+  "simplepie": {
+    "homepage": "http://simplepie.org/",
+    "ignore": "FILE_ONLY",
+    "name": "SimplePie",
+    "type": "classic",
+    "classes": [
+      "simplepie"
+    ]
+  },
+  "simpletest": {
+    "homepage": "https://github.com/simpletest/simpletest",
+    "ignore": "WHOLE_DIR",
+    "name": "SimpleTest",
+    "type": "test",
+    "classes": [
+      "drupal\\tests\\unittestcase",
+      "unittestcase"
+    ]
+  },
+  "swift": {
+    "homepage": "http://swiftmailer.org/",
+    "ignore": "PARENT_DIR",
+    "name": "swift",
+    "type": "classic",
+    "classes": [
+      "swift"
+    ]
+  },
+  "smarty": {
+    "homepage": "http://www.smarty.net/",
+    "ignore": "WHOLE_DIR",
+    "name": "Smarty",
+    "type": "classic",
+    "classes": [
+      "smarty"
+    ]
+  },
+  "symfomy_test": {
+    "homepage": "https://symfony.com/doc/current/testing.html",
+    "ignore": "WHOLE_DIR",
+    "name": "Symfony Unit Test",
+    "type": "test",
+    "classes": [
+      "symfony\\bundle\\frameworkbundle\\test\\webtestcase",
+      "symfony\\bundle\\frameworkbundle\\test\\kerneltestcase"
+    ]
+  },
+  "tcpdf": {
+    "homepage": "http://www.tcpdf.org/",
+    "ignore": "WHOLE_DIR",
+    "name": "tcpdf",
+    "type": "classic",
+    "classes": [
+      "tcpdf"
+    ]
+  },
+  "text_diff": {
+    "homepage": "https://pear.php.net/package/Text_Diff",
+    "ignore": "FILE_ONLY",
+    "name": "text_diff",
+    "type": "classic",
+    "classes": [
+      "text_diff"
+    ]
+  },
+  "text_highlighter": {
+    "homepage": "https://pear.php.net/package/Text_Highlighter/",
+    "ignore": "WHOLE_DIR",
+    "name": "text highlighter",
+    "type": "classic",
+    "classes": [
+      "text_highlighter"
+    ]
+  },
+  "tfpdf": {
+    "homepage": "http://www.fpdf.org/en/script/script92.php",
+    "ignore": "WHOLE_DIR",
+    "name": "tfpdf",
+    "type": "classic",
+    "classes": [
+      "tfpdf"
+    ]
+  },
+  "Typo3TestingFramework": {
+    "homepage": "https://github.com/TYPO3/testing-framework",
+    "ignore": "WHOLE_DIR",
+    "name": "Typo3TestingFramework",
+    "type": "test",
+    "classes": [
+      "typo3\\testingframework\\core\\unit\\unittestcase"
+    ]
+  },
+  "utf8": {
+    "homepage": "",
+    "ignore": "WHOLE_DIR",
+    "name": "UTF8",
+    "type": "classic",
+    "classes": [
+      "yii"
+    ]
+  },
+  "xajax": {
+    "homepage": "https://github.com/Xajax/Xajax",
+    "ignore": "PARENT_DIR",
+    "name": "Xajax",
+    "type": "classic",
+    "classes": [
+      "xajax"
+    ]
+  },
+  "yii": {
+    "homepage": "http://www.yiiframework.com/",
+    "ignore": "WHOLE_DIR",
+    "name": "Yii",
+    "type": "classic",
+    "classes": [
+      "yii"
+    ]
+  },
+  "zend_view": {
+    "homepage": "http://framework.zend.com/",
+    "ignore": "WHOLE_DIR",
+    "name": "Zend Framework",
+    "classes": [
+      "zend_view"
+    ],
+    "type": "classic"
+  }
 }
