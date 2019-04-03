@@ -34,7 +34,7 @@ g.V().hasLabel("Defineconstant")
      .or( __.out("CASE").count().is(eq(0)),
           __.out("CASE").has('boolean', false),
          )
-     .out("NAME").hasLabel("String").not(where(__.out("CONCAT") ) )
+     .out("NAME").hasLabel("Identifier").not(where(__.out("CONCAT") ) )
      .values("noDelimiter")
 GREMLIN
 );
@@ -50,7 +50,7 @@ GREMLIN
 g.V().hasLabel("Defineconstant")
      .where( __.out("CASE").has("boolean", true)) 
      .out("NAME")
-     .hasLabel("String").not( where( __.out("CONCAT") ) )
+     .hasLabel("Identifier").not( where( __.out("CONCAT") ) )
      .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
@@ -96,7 +96,7 @@ GREMLIN
              ->is('boolean', true)
              ->inIs('CASE')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);
         $this->prepareQuery();
@@ -113,7 +113,7 @@ GREMLIN
              ->is('boolean', false)
              ->inIs('CASE')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);
         $this->prepareQuery();
@@ -121,7 +121,7 @@ GREMLIN
         $this->atomIs('Defineconstant')
              ->hasNoOut('CASE')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($array);
         $this->prepareQuery();
