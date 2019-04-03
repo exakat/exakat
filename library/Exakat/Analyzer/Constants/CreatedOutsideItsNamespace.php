@@ -30,7 +30,7 @@ class CreatedOutsideItsNamespace extends Analyzer {
         // define('\a\b\c', 3);
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->regexIs('noDelimiter', '\\\\\\\\')
              ->_as('string')
              ->goToInstruction('Namespace')
@@ -44,7 +44,7 @@ class CreatedOutsideItsNamespace extends Analyzer {
         // define('b\c', 3); no namespace
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->regexIs('noDelimiter', '\\\\\\\\')
              ->hasNoInstruction('Namespace')
              ->back('first');

@@ -40,8 +40,8 @@ class ConstantDefinition extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Defineconstant')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->outIs('NAME')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->fullnspathIs($fullnspath);
         $this->prepareQuery();

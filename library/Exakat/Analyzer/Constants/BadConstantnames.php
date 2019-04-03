@@ -31,7 +31,7 @@ class BadConstantnames extends Analyzer {
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
              ->is('constant', true)
-             ->atomIs('String')
+             ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^__(.*)__\\$');
         $this->prepareQuery();
