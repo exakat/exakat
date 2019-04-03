@@ -176,7 +176,7 @@ abstract class Analyzer {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
             self::$availableAtoms = array('Project', 'File', 'Virtualproperty');
-            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {
