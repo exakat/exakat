@@ -39,7 +39,7 @@ class CreateVirtualProperty extends LoadFinal {
               ->savePropertyAs('code', 'ncode')
               ->savePropertyAs('fullcode', 'full')
               
-              ->goToClass()
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->not(
                 $query->side()
                       ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
@@ -82,7 +82,7 @@ GREMLIN
               ->outIs('MEMBER')
               ->savePropertyAs('lccode', 'name')
               
-              ->goToClass()
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->outIs('PPP')
               ->outIs('PPP')
               ->atomIs('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
