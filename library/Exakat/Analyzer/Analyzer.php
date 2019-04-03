@@ -783,6 +783,18 @@ GREMLIN;
 
         return $this;
     }
+    
+    public function IsPropertyDefined() {
+        $this->query->isPropertyDefined();
+
+        return $this;
+    }
+
+    public function IsNotPropertyDefined() {
+        $this->query->isNotPropertyDefined();
+
+        return $this;
+    }
 
     public function isNotHash($property, $hash, $index) {
         $this->query->isNotHash($property, $hash, $index);
