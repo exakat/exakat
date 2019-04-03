@@ -85,12 +85,15 @@ class LoadFinal {
         $this->spotPHPNativeConstants();
         $this->log('spotPHPNativeConstants');
 
-        $this->setParentDefinition();
-        $this->log('setParentDefinition');
-        $this->setClassAliasDefinition();
-        $this->log('setClassAliasDefinition');
-        $this->makeClassConstantDefinition();
-        $this->log('makeClassConstantDefinition');
+        $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('SetParentDefinition');
+        $task = new SetClassAliasDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('SetClassAliasDefinition');
+        $task = new MakeClassConstantDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('MakeClassConstantDefinition');
         $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('MakeClassMethodDefinition');
@@ -436,60 +439,6 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
 
-    private function setClassAliasDefinition() {
-        $query = new Query(0, $this->config->project, 'setClassAliasDefinition', null, $this->datastore);
-        $query->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
-              ->savePropertyAs('fullnspath', 'fnp')
-              ->outIs('DEFINITION')
-              ->is('rank', 0)
-              ->inIs('ARGUMENT')
-              ->atomIs('Classalias', Analyzer::WITHOUT_CONSTANTS)
-              ->outWithRank('ARGUMENT', 1)
-              ->outIs('DEFINITION')
-              ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), Analyzer::WITHOUT_CONSTANTS)
-              ->dedup('')
-              ->property('fullnspath', 'fnp')
-              ->addEFrom('DEFINITION', 'method')
-              ->returnCount();
-        $query->prepareRawQuery();   
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count = $result->toInt();
-
-        display("Set $count class alias definitions");
-        $this->log->log(__METHOD__);
-    }
-
-    private function setParentDefinition() {
-        $query = new Query(0, $this->config->project, 'setParentDefinition 1', null, $this->datastore);
-        $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('parent')
-              ->goToClass()
-              ->outIs('EXTENDS')
-              ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'parent')
-              ->returnCount();
-        $query->prepareRawQuery();   
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count1 = $result->toInt();
-
-        $query = new Query(0, $this->config->project, 'setParentDefinition 2', null, $this->datastore);
-        $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
-              ->fullnspathIs('\\\\parent', Analyzer::CASE_SENSITIVE)
-              ->_as('parent')
-              ->goToClass()
-              ->outIs('EXTENDS')
-              ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'parent')
-              ->returnCount();
-        $query->prepareRawQuery();   
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count2 = $result->toInt();
-        
-        $count = $count1 + $count2;
-        display("Set $count parent definitions");
-    }
-    
     private function setConstantDefinition() {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
@@ -514,37 +463,6 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $count = $res->toInt();
         display("Set $count constant definitions");
-    }
-
-    private function makeClassConstantDefinition() {
-        // Create link between Class constant and definition
-        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
-        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('CONSTANT')
-              ->savePropertyAs('code', 'name')
-              ->back('first')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('fullnspath', 'classe')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('CONST')
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
-        $count = $result->toInt();
-
-        display("Create $count link between Class constant and definition");
-        $this->logTime('Class::constant definition');
     }
 
     private function defaultIdentifiers() {
