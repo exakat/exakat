@@ -7,9 +7,9 @@ class x extends unavailableParentM {
 }
 
 class x2 extends unavailableParentP { 
-    protected $zo = 1;
-    private   $zi = 1;
-    public    $zu = 1;
+    protected static $zo = 1;
+    protected static $zi = 1;
+    public    static $zu = 1;
     
     function a() {
         parent::$y;

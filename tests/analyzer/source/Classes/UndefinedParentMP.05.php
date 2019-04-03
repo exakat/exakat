@@ -1,9 +1,9 @@
 <?php
 
-class a0 {    protected $b0; }
-class a1 extends a0 {    protected $b1; }
-class a2 extends a1 {    protected $b2; }
-class a3 extends a2 {    protected $b3; 
+class a0 {    protected static $b0; }
+class a1 extends a0 {    protected static $b1; }
+class a2 extends a1 {    protected static $b2; }
+class a3 extends a2 {    protected static $b3; 
     function c3() {
         parent::$b3;
         parent::$b2;

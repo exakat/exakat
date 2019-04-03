@@ -1,8 +1,8 @@
 <?php
 
 trait definedClassA {
-    private $definedProperty;
-    protected $definedProtectedProperty;
+    protected static $definedProperty;
+    protected static $definedProtectedProperty;
 }
 
 class definedClassB extends definedClassA {
