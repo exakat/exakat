@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 01 Apr 2019 14:51:18 +0000
-.. comment: Generation hash : eefa90b29c62ffb2a9c26482ce435df9158067da
+.. comment: Generation date : Thu, 04 Apr 2019 16:47:53 +0000
+.. comment: Generation hash : 6fbee452b5f59bf0129bc2c301a80922714d1d4d
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -122,7 +122,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Classes/ThisIsForClasses                |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`  |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -234,7 +234,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/ThisIsNotForStatic                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`                                                      |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -1215,7 +1215,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`dolphin-functions-shouldbetypehinted`      |
+| Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`mautic-functions-shouldbetypehinted`       |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -3268,7 +3268,7 @@ If the method doesn't exists, then the same method will be called again, leading
 
 
 See also `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
-        ``Magical PHP: `__call() <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
+        ``Magical PHP: `__call( <http://php.net/manual/en/language.oop5.magic.php>`_ ) <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
 
 
 
@@ -5207,17 +5207,17 @@ Suggestions
 * Add a try/catch clause around those commands
 * Add a check on the values used with those operator : for example, check a dividend is not 0, or a bitshift is not negative
 
-+-------------+----------------------------------------------------------------------------+
-| Short name  | Exceptions/CouldUseTry                                                     |
-+-------------+----------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                         |
-+-------------+----------------------------------------------------------------------------+
-| Severity    | Minor                                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                            |
-+-------------+----------------------------------------------------------------------------+
-| Examples    | :ref:`mautic-exceptions-couldusetry`, :ref:`mautic-exceptions-couldusetry` |
-+-------------+----------------------------------------------------------------------------+
++-------------+--------------------------------------+
+| Short name  | Exceptions/CouldUseTry               |
++-------------+--------------------------------------+
+| Themes      | :ref:`Suggestions`                   |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | :ref:`mautic-exceptions-couldusetry` |
++-------------+--------------------------------------+
 
 
 
@@ -5256,7 +5256,7 @@ See also `Magic Constants <http://php.net/manual/en/language.constants.predefine
 Suggestions
 ^^^^^^^^^^^
 
-* Use __DIR__ instead of `dirname(__FILE__);
+* Use __DIR__ instead of ``dirname(__FILE__);``
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseDir                                                          |
@@ -5454,17 +5454,17 @@ Suggestions
 
 * Use strrepeat whenever possible
 
-+-------------+------------------------------------------------------------------------------------------+
-| Short name  | Structures/CouldUseStrrepeat                                                             |
-+-------------+------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                             |
-+-------------+------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                    |
-+-------------+------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                            |
-+-------------+------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-couldusestrrepeat`, :ref:`zencart-structures-couldusestrrepeat` |
-+-------------+------------------------------------------------------------------------------------------+
++-------------+---------------------------------------------+
+| Short name  | Structures/CouldUseStrrepeat                |
++-------------+---------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Top10`                |
++-------------+---------------------------------------------+
+| Severity    | Minor                                       |
++-------------+---------------------------------------------+
+| Time To Fix | Slow (1 hour)                               |
++-------------+---------------------------------------------+
+| Examples    | :ref:`zencart-structures-couldusestrrepeat` |
++-------------+---------------------------------------------+
 
 
 
@@ -5768,6 +5768,15 @@ Note that these functions may be still usable : they generate warning that help 
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace those deprecated with modern syntax
+* Stop using deprecated syntax
+
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Php/Deprecated                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -5778,6 +5787,8 @@ Note that these functions may be still usable : they generate warning that help 
 | Time To Fix | Quick (30 mins)                                                                           |
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolphin-php-deprecated`                                                             |
 +-------------+-------------------------------------------------------------------------------------------+
 
 
@@ -8344,6 +8355,13 @@ Traits, classes and interfaces are checked.
 
 See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ and `Understanding The Concept Of Visibility In Object Oriented PHP <https://torquemag.io/2016/05/understanding-concept-visibility-object-oriented-php/>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Always add explicit visibility to methods and constants in a class
+* Always add explicit visibility to properties in a class, after PHP 7.4
+
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NonPpp                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -8354,6 +8372,8 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ a
 | Time To Fix | Instant (5 mins)                                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__ |
++-------------+-------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`fuelcms-classes-nonppp`, :ref:`livezilla-classes-nonppp`                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -9655,15 +9675,15 @@ Suggestions
 
 * Create an interface from the class, and use it with the implements keyword
 
-+-------------+---------------------------------+
-| Short name  | Classes/ImplementIsForInterface |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
++-------------+----------------------------------------+
+| Short name  | Classes/ImplementIsForInterface        |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
 
 
 
@@ -13507,15 +13527,26 @@ Properties that are never used. They are defined, but never actually used.
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Classes/PropertyNeverUsed |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
-+-------------+---------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop unused properties
+* Find usage for unused properties
+
++-------------+--------------------------------------------+
+| Short name  | Classes/PropertyNeverUsed                  |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Analyze`                             |
++-------------+--------------------------------------------+
+| Severity    | Minor                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Slow (1 hour)                              |
++-------------+--------------------------------------------+
+| Examples    | :ref:`wordpress-classes-propertyneverused` |
++-------------+--------------------------------------------+
 
 
 
@@ -17141,7 +17172,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------+
 | Short name  | Php/ReservedNames                                                     |
 +-------------+-----------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                        |
+| Themes      | :ref:`Coding Conventions <coding-conventions>`                        |
 +-------------+-----------------------------------------------------------------------+
 | Severity    | Major                                                                 |
 +-------------+-----------------------------------------------------------------------+
@@ -23124,15 +23155,15 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+-------------+------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty   |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Critical                           |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty                           |
++-------------+------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview`, :ref:`LintButWontExec` |
++-------------+------------------------------------------------------------+
+| Severity    | Critical                                                   |
++-------------+------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                            |
++-------------+------------------------------------------------------------+
 
 
 
@@ -23813,17 +23844,26 @@ Properties that are not initialized in the constructor, nor at definition.
 
 
 With the above class, when m() is accessed right after instantiation, there will be a missing property. 
-Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
+Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent. 
 
-+-------------+------------------------------------+
-| Short name  | Classes/UnitializedProperties      |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add an explicit initialization for each property.
+
++-------------+-------------------------------------------+
+| Short name  | Classes/UnitializedProperties             |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`        |
++-------------+-------------------------------------------+
+| Severity    | Major                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`spip-classes-unitializedproperties` |
++-------------+-------------------------------------------+
 
 
 

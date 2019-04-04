@@ -3,9 +3,9 @@
 Extensions
 ==========
 
-Exakat support a system of extensions, that bring extra analysis, categories, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks or platform. They are a simple way to package a predefined set of configurations and analysis. 
+Exakat support a system of extensions, that bring extra analysis, rules sets, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks, platform, or aspect of coding. They are a simple way to package a predefined set of configurations and analysis. 
 
-Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
+Extensions are bundled as PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
 
 ::
 
@@ -15,8 +15,8 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
     
     exakat : 
         executable           : exakat
-        version              : 1.5.7
-        build                : 835
+        version              : 1.7.5
+        build                : 905
         exakat.ini           : ./config/exakat.ini,
                                config/remotes.json,
                                config/themes.ini
@@ -66,11 +66,63 @@ The main command to manage the extensions is `extension`. It has 4 different act
 * `update`
 * `uninstall`
 
-`local` : the local list of extensions
-######################################
+`local`  
+########
 
-`list` : the remote list of extensions
-######################################
+This command lists the local and installed extensions. This command is the default command. 
+
+::
+
+    exakat extension local
+    
+This command may display something like this : 
+
+:: 
+
+    + Extension             Version Build
+    ----------------------------------------
+    + Drupal                    0.1   (5)
+    + Pmb                       0.5   (8)
+    + Prestashop                0.1   (5)
+    + Symfony                   0.6  (12)
+    + Wordpress                 0.5  (28)
+    
+    Total : 5 extensions
+
+
+Each installed extension has a version number, and a build number. The build number increases with each build, while version are milestones.
+
+`list`
+######
+
+This command lists the remote and installable extensions. It checks the www.exakat.io web server, and collects the most recent list of extensions.
+
+::
+
+    exakat extension list
+    
+This command may display something like this : 
+
+:: 
+
+    + Extension             Version Build
+    ----------------------------------------
+    + Cakephp                   0.5   (8)
+    + Codeigniter               0.1   (5)
+    + Drupal                    0.1   (7)
+    + Laravel                   0.1   (6)
+    + Melis                     0.5  (25)
+    + Monolog                   0.1   (3)
+    + Prestashop                0.1   (5)
+    + Shopware                  0.1   (5)
+    + Slim                      0.1  (22)
+    + Symfony                   0.6  (15)
+    + Twig                      0.1   (3)
+    + Wordpress                 0.5  (28)
+    + ZendF                     0.5   (5)
+    
+    Total : 13 extensions
+ 
 
 `install` : the install command
 ###############################
@@ -84,8 +136,8 @@ This command installs a new extension. Check with `extension local` to know whic
 
 You may also install the extensions manually, by downloading the .phar archive, and installing it in the `ext` folder.
 
-`update` : the update command
-###############################
+`update`
+########
 
 This command updates an installed extension. Check with `extension local` to know which are the locally installed extensions. 
 
@@ -95,8 +147,8 @@ This command updates an installed extension. Check with `extension local` to kno
 
 
 
-`uninstall` : the remove command
-################################
+`uninstall`
+###########
 
 This command uninstalls a previously installed extension. Check with `extension local` to know which are the locally installed extensions. 
 
@@ -133,15 +185,15 @@ Analysis may also be configured in the ``config/themes.ini`` file, by including 
 
 ::
 
-['specialDrupal']
-analyzer[] = 'Drupal/Drupal_8_6';
-analyzer[] = 'Drupal/Drupal_8_5';
-
-
-['specialDrupal2']
-analyzer[] = 'Drupal/Drupal_8_7';
-analyzer[] = 'Drupal/Drupal_8_6';
-analyzer[] = 'Drupal/Drupal_8_5';
+    ['specialDrupal']
+    analyzer[] = 'Drupal/Drupal_8_6';
+    analyzer[] = 'Drupal/Drupal_8_5';
+    
+    
+    ['specialDrupal2']
+    analyzer[] = 'Drupal/Drupal_8_7';
+    analyzer[] = 'Drupal/Drupal_8_6';
+    analyzer[] = 'Drupal/Drupal_8_5';
 
 
 Then, they may be used with any command that accept the -T option.
@@ -158,7 +210,7 @@ Rulesets usage
 
 Rulesets are predefined sets of analysis. Currently, an extension always provides one ruleset with the name of the extension : it includes all the analysis in this extension.
 
-For example, the ``Drupal`` extension provides a ``Drupal``ruleset.
+For example, the ``Drupal`` extension provides a ``Drupal`` ruleset.
 
 ::
 
@@ -205,7 +257,7 @@ Exakat provides compatibility reports with classes, interfaces and traits from C
 * **Extension page** : `https://github.com/exakat/Exakat4CakePHP <https://github.com/exakat/Exakat4CakePHP>`_
 
 Cakephp analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 27 analyzers.
 
@@ -239,13 +291,13 @@ This extension includes 27 analyzers.
 
 
 Cakephp rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Cakephp.
 
 
 Cakephp reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -266,7 +318,7 @@ Code igniter CodeIgniter is a powerful PHP framework with a very small footprint
 * **Extension page** : `https://github.com/exakat/Exakat4Codeigniter <https://github.com/exakat/Exakat4Codeigniter>`_
 
 Codeigniter analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 6 analyzers.
 
@@ -279,13 +331,13 @@ This extension includes 6 analyzers.
 
 
 Codeigniter rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Codeigniter.
 
 
 Codeigniter reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -306,7 +358,7 @@ This is the Drupal extension for Exakat.
 * **Extension page** : `https://github.com/exakat/Exakat4Drupal <https://github.com/exakat/Exakat4Drupal>`_
 
 Drupal analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 19 analyzers.
 
@@ -332,13 +384,13 @@ This extension includes 19 analyzers.
 
 
 Drupal rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Drupal.
 
 
 Drupal reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -361,7 +413,7 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 * **Extension page** : `https://github.com/exakat/Exakat4Laravel <https://github.com/exakat/Exakat4Laravel>`_
 
 Laravel analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 18 analyzers.
 
@@ -386,13 +438,13 @@ This extension includes 18 analyzers.
 
 
 Laravel rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Laravel.
 
 
 Laravel reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -413,7 +465,7 @@ Melis is a new generation of Content Management System and eCommerce platform to
 * **Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
 
 Melis analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 15 analyzers.
 
@@ -435,13 +487,13 @@ This extension includes 15 analyzers.
 
 
 Melis rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Melis.
 
 
 Melis reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes one report : Melis.
 
@@ -461,7 +513,7 @@ Monolog is a popular logging component for PHP, written by ` <https://twitter.co
 * **Extension page** : `https://github.com/exakat/Exakat4Monolog <https://github.com/exakat/Exakat4Monolog>`_
 
 Monolog analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 52 analyzers.
 
@@ -520,13 +572,13 @@ This extension includes 52 analyzers.
 
 
 Monolog rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Monolog.
 
 
 Monolog reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -543,27 +595,27 @@ PrestaShop is an efficient and innovative e-commerce solution with all the featu
 
 
 * **Home page** : `https://www.prestashop.com/ <https://www.prestashop.com/>`_
-* **Extension page** : ` <>`_
 
 Prestashop analysis
---------------------------------------------------
+__________________________________________________
 
-This extension includes 4 analyzers.
+This extension includes 6 analyzers.
 
 * Prestashop 1.5 Compatibility (Prestashop/Prestashop_1_5)
 * Prestashop 1.6 Compatibility (Prestashop/Prestashop_1_6)
 * Prestashop 1.7 Compatibility (Prestashop/Prestashop_1_7)
 * Prestashop Usage (Prestashop/PrestashopUsage)
+* Should Use Tools::getValue (Prestashop/UseToolsClass)
 
 
 Prestashop rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Prestashop.
 
 
 Prestashop reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -576,7 +628,7 @@ Shopware
 
 This is the Skeleton extension for Exakat. 
 Shopware analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 6 analyzers.
 
@@ -589,13 +641,13 @@ This extension includes 6 analyzers.
 
 
 Shopware rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Shopware.
 
 
 Shopware reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -618,7 +670,7 @@ Exakat provides compatibility reports with classes, interfaces and traits from S
 * **Extension page** : `https://github.com/exakat/Exakat4Slim <https://github.com/exakat/Exakat4Slim>`_
 
 Slim analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 40 analyzers.
 
@@ -665,13 +717,13 @@ This extension includes 40 analyzers.
 
 
 Slim rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Slim.
 
 
 Slim reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes one report : Slim.
 
@@ -692,7 +744,7 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 * **Extension page** : `https://github.com/exakat/Exakat4Symfony <https://github.com/exakat/Exakat4Symfony>`_
 
 Symfony analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 10 analyzers.
 
@@ -709,13 +761,13 @@ This extension includes 10 analyzers.
 
 
 Symfony rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Symfony.
 
 
 Symfony reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -732,10 +784,9 @@ The flexible, fast, and secure template engine for PHP
 
 
 * **Home page** : `https://twig.symfony.com/index.html <https://twig.symfony.com/index.html>`_
-* **Extension page** : ` <>`_
 
 Twig analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 9 analyzers.
 
@@ -751,13 +802,13 @@ This extension includes 9 analyzers.
 
 
 Twig rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Twig.
 
 
 Twig reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -780,7 +831,7 @@ Exakat reports version compatibility with Worpdress 4.0 to 5.0. Exakat also incl
 * **Extension page** : `https://github.com/exakat/Exakat4Wordpress <https://github.com/exakat/Exakat4Wordpress>`_
 
 Wordpress analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 39 analyzers.
 
@@ -826,13 +877,13 @@ This extension includes 39 analyzers.
 
 
 Wordpress rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : Wordpress.
 
 
 Wordpress reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.
 
@@ -854,7 +905,7 @@ Exakat reports Zend framework compatibility for over 60 components, from version
 * **Extension page** : `https://github.com/exakat/Exakat4ZendF <https://github.com/exakat/Exakat4ZendF>`_
 
 ZendF analysis
---------------------------------------------------
+__________________________________________________
 
 This extension includes 228 analyzers.
 
@@ -1088,13 +1139,13 @@ This extension includes 228 analyzers.
 
 
 ZendF rulesets
---------------------------------------------------
+__________________________________________________
 
 This extension includes one ruleset : ZendF.
 
 
 ZendF reports
---------------------------------------------------
+__________________________________________________
 
 This extension includes one report : ZendFramework.
 

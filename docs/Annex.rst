@@ -318,8 +318,10 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
+* Fuelcms
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
+* Livezilla
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
@@ -363,20 +365,22 @@ Libraries that are popular, large and often included in repositories are identif
 
 Those libraries, or even some of the, may be included again in the analysis by commenting the ignored_dir[] line, in the projects/<project>/config.ini file. 
 
+* `ADOdb <https://adodb.org/dokuwiki/doku.php/>`_
 * `atoum <http://atoum.org/>`_
 * `BBQ <https://github.com/eventio/bbq>`_
+* `CakePHP <https://cakephp.org/>`_
 * `CI xmlRPC <http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html>`_
 * `CPDF <https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html>`_
 * `Codeception <https://codeception.com/>`_
 * `DomPDF <https://github.com/dompdf/dompdf>`_
 * `FPDF <http://www.fpdf.org/>`_
+* `phpGACL <http://phpgacl.sourceforge.net/>`_
 * `gettext Reader <http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html>`_
 * `jpGraph <http://jpgraph.net/>`_
 * `HTML2PDF <http://sourceforge.net/projects/phphtml2pdf/>`_
-* `HTMLPurifier <http://htmlpurifier.org/>`_
+* `HTML Purifier <http://htmlpurifier.org/>`_
 * http_class
 * `IDNA convert <https://github.com/phpWhois/idna-convert>`_
-* `lessc <http://leafo.net/lessphp/>`_
 * `lessc <http://leafo.net/lessphp/>`_
 * `magpieRSS <http://magpierss.sourceforge.net/>`_
 * `MarkDown Parser <http://processwire.com/apigen/class-Markdown_Parser.html>`_
@@ -394,15 +398,18 @@ Those libraries, or even some of the, may be included again in the analysis by c
 * `qrCode <http://phpqrcode.sourceforge.net/>`_
 * `Services_JSON <https://pear.php.net/package/Services_JSON>`_
 * `sfYaml <https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php>`_
+* `SimplePie <http://simplepie.org/>`_
 * `SimpleTest <https://github.com/simpletest/simpletest>`_
 * `swift <http://swiftmailer.org/>`_
 * `Smarty <http://www.smarty.net/>`_
+* `Symfony Unit Test <https://symfony.com/doc/current/testing.html>`_
 * `tcpdf <http://www.tcpdf.org/>`_
 * `text_diff <https://pear.php.net/package/Text_Diff>`_
 * `text highlighter <https://pear.php.net/package/Text_Highlighter/>`_
 * `tfpdf <http://www.fpdf.org/en/script/script92.php>`_
 * `Typo3TestingFramework <https://github.com/TYPO3/testing-framework>`_
 * UTF8
+* `Xajax <https://github.com/Xajax/Xajax>`_
 * `Yii <http://www.yiiframework.com/>`_
 * `Zend Framework <http://framework.zend.com/>`_
 
@@ -1161,9 +1168,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.8.4
 
   * $HTTP_RAW_POST_DATA Usage (Php/RawPostDataUsage ; Appinfo, CompatibilityPHP56)
-  * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple)
+  * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple, LintButWontExec)
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze)
-  * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze)
+  * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze, LintButWontExec)
   * ** For Exponent (Php/NewExponent ; Suggestions)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
   * <?= Usage (Php/EchoTagUsage ; Appinfo, Simple)
@@ -1356,7 +1363,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Identical Conditions (Structures/IdenticalConditions ; Analyze, Simple)
   * If With Same Conditions (Structures/IfWithSameConditions ; Analyze, Simple)
   * Iffectations (Structures/Iffectation ; Analyze)
-  * Implement Is For Interface (Classes/ImplementIsForInterface ; Analyze, Simple)
+  * Implement Is For Interface (Classes/ImplementIsForInterface ; Analyze, Simple, LintButWontExec)
   * Implicit Global (Structures/ImplicitGlobal ; Analyze)
   * Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Simple)
   * Inclusions (Structures/IncludeUsage ; Appinfo)
@@ -1497,7 +1504,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PHP Constant Usage (Constants/PhpConstantUsage ; Appinfo)
   * PHP Handlers Usage (Php/SetHandlers ; )
   * PHP Interfaces (Interfaces/Php ; )
-  * PHP Keywords As Names (Php/ReservedNames ; Analyze, Simple)
+  * PHP Keywords As Names (Php/ReservedNames ; Coding Conventions, Simple)
   * PHP Sapi (Type/Sapi ; Internal)
   * PHP Variables (Variables/VariablePhp ; )
   * PHP5 Indirect Variable Expression (Variables/Php5IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -2752,7 +2759,6 @@ _______
 |   analyzer[] = "Php/NoReferenceForTernary";
 |   analyzer[] = "Php/NotScalarType";
 |   analyzer[] = "Php/PathinfoReturns";
-|   analyzer[] = "Php/ReservedNames";
 |   analyzer[] = "Php/ShortOpenTagRequired";
 |   analyzer[] = "Php/ShouldUseCoalesce";
 |   analyzer[] = "Php/StrtrArguments";
@@ -2981,6 +2987,7 @@ __________________
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Php/CloseTags";
+|   analyzer[] = "Php/ReservedNames";
 |   analyzer[] = "Php/ReturnWithParenthesis";
 |   analyzer[] = "Php/UpperCaseFunction";
 |   analyzer[] = "Php/UpperCaseKeyword";
@@ -3539,10 +3546,14 @@ _______________
 |   analyzer[] = "Classes/CloneWithNonObject";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
+|   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/ThisIsForClasses";
+|   analyzer[] = "Classes/ThisIsNotForStatic";
+|   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";

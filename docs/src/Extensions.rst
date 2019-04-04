@@ -3,9 +3,9 @@
 Extensions
 ==========
 
-Exakat support a system of extensions, that bring extra analysis, categories, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks or platform. They are a simple way to package a predefined set of configurations and analysis. 
+Exakat support a system of extensions, that bring extra analysis, rules sets, data sources, configurations and reports to the exakat engine. Extensions focus on specific frameworks, platform, or aspect of coding. They are a simple way to package a predefined set of configurations and analysis. 
 
-Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
+Extensions are bundled as PHP archives (`.phar` file), installed in the `ext` folder. Check the local extensions with `doctor`.
 
 ::
 
@@ -15,8 +15,8 @@ Extensions are PHP archives (`.phar` file), installed in the `ext` folder. Check
     
     exakat : 
         executable           : exakat
-        version              : 1.5.7
-        build                : 835
+        version              : 1.7.5
+        build                : 905
         exakat.ini           : ./config/exakat.ini,
                                config/remotes.json,
                                config/themes.ini
@@ -49,11 +49,63 @@ The main command to manage the extensions is `extension`. It has 4 different act
 * `update`
 * `uninstall`
 
-`local` : the local list of extensions
-######################################
+`local`  
+########
 
-`list` : the remote list of extensions
-######################################
+This command lists the local and installed extensions. This command is the default command. 
+
+::
+
+    exakat extension local
+    
+This command may display something like this : 
+
+:: 
+
+    + Extension             Version Build
+    ----------------------------------------
+    + Drupal                    0.1   (5)
+    + Pmb                       0.5   (8)
+    + Prestashop                0.1   (5)
+    + Symfony                   0.6  (12)
+    + Wordpress                 0.5  (28)
+    
+    Total : 5 extensions
+
+
+Each installed extension has a version number, and a build number. The build number increases with each build, while version are milestones.
+
+`list`
+######
+
+This command lists the remote and installable extensions. It checks the www.exakat.io web server, and collects the most recent list of extensions.
+
+::
+
+    exakat extension list
+    
+This command may display something like this : 
+
+:: 
+
+    + Extension             Version Build
+    ----------------------------------------
+    + Cakephp                   0.5   (8)
+    + Codeigniter               0.1   (5)
+    + Drupal                    0.1   (7)
+    + Laravel                   0.1   (6)
+    + Melis                     0.5  (25)
+    + Monolog                   0.1   (3)
+    + Prestashop                0.1   (5)
+    + Shopware                  0.1   (5)
+    + Slim                      0.1  (22)
+    + Symfony                   0.6  (15)
+    + Twig                      0.1   (3)
+    + Wordpress                 0.5  (28)
+    + ZendF                     0.5   (5)
+    
+    Total : 13 extensions
+ 
 
 `install` : the install command
 ###############################
@@ -67,8 +119,8 @@ This command installs a new extension. Check with `extension local` to know whic
 
 You may also install the extensions manually, by downloading the .phar archive, and installing it in the `ext` folder.
 
-`update` : the update command
-###############################
+`update`
+########
 
 This command updates an installed extension. Check with `extension local` to know which are the locally installed extensions. 
 
@@ -78,8 +130,8 @@ This command updates an installed extension. Check with `extension local` to kno
 
 
 
-`uninstall` : the remove command
-################################
+`uninstall`
+###########
 
 This command uninstalls a previously installed extension. Check with `extension local` to know which are the locally installed extensions. 
 
@@ -116,15 +168,15 @@ Analysis may also be configured in the ``config/themes.ini`` file, by including 
 
 ::
 
-['specialDrupal']
-analyzer[] = 'Drupal/Drupal_8_6';
-analyzer[] = 'Drupal/Drupal_8_5';
-
-
-['specialDrupal2']
-analyzer[] = 'Drupal/Drupal_8_7';
-analyzer[] = 'Drupal/Drupal_8_6';
-analyzer[] = 'Drupal/Drupal_8_5';
+    ['specialDrupal']
+    analyzer[] = 'Drupal/Drupal_8_6';
+    analyzer[] = 'Drupal/Drupal_8_5';
+    
+    
+    ['specialDrupal2']
+    analyzer[] = 'Drupal/Drupal_8_7';
+    analyzer[] = 'Drupal/Drupal_8_6';
+    analyzer[] = 'Drupal/Drupal_8_5';
 
 
 Then, they may be used with any command that accept the -T option.
@@ -141,7 +193,7 @@ Rulesets usage
 
 Rulesets are predefined sets of analysis. Currently, an extension always provides one ruleset with the name of the extension : it includes all the analysis in this extension.
 
-For example, the ``Drupal`` extension provides a ``Drupal``ruleset.
+For example, the ``Drupal`` extension provides a ``Drupal`` ruleset.
 
 ::
 
