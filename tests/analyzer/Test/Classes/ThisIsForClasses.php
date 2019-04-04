@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class ThisIsForClasses extends Analyzer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testClasses_ThisIsForClasses01()  { $this->generic_test('Classes_ThisIsForClasses.01'); }
     public function testClasses_ThisIsForClasses02()  { $this->generic_test('Classes_ThisIsForClasses.02'); }
@@ -21,5 +21,6 @@ class ThisIsForClasses extends Analyzer {
     public function testClasses_ThisIsForClasses10()  { $this->generic_test('Classes/ThisIsForClasses.10'); }
     public function testClasses_ThisIsForClasses11()  { $this->generic_test('Classes/ThisIsForClasses.11'); }
     public function testClasses_ThisIsForClasses12()  { $this->generic_test('Classes/ThisIsForClasses.12'); }
+    public function testClasses_ThisIsForClasses13()  { $this->generic_test('Classes/ThisIsForClasses.13'); }
 }
 ?>
