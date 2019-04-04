@@ -57,10 +57,6 @@ Label : PROJECT
               17
               Label : DEFINITION
                 9
-              Label : DEFINITION
-                9
-              Label : DEFINITION
-                9
             Label : DEFINITION
               17
               Label : DEFINITION

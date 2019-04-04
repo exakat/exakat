@@ -16,10 +16,6 @@ Label : PROJECT
   Label : DEFINITION
     6
     Label : DEFINITION
-      17
-  Label : DEFINITION
-    6
-    Label : DEFINITION
       21
     Label : DEFINITION
       21
@@ -29,10 +25,6 @@ Label : PROJECT
     6
     Label : DEFINITION
       26
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      27
   Label : DEFINITION
     6
     Label : DEFINITION

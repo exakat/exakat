@@ -1,12 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    35
-    Label : DEFINITION
-      34
-    Label : DEFINITION
-      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -100,28 +94,28 @@ Label : PROJECT
             Label : EXPRESSION
               29
               Label : CLASS
-                36
+                35
               Label : MEMBER
                 34
             Label : EXPRESSION
               29
               Label : CLASS
-                38
+                37
               Label : METHOD
-                40
+                39
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  40
+                  39
             Label : EXPRESSION
               29
               Label : CLASS
-                41
-              Label : METHOD
                 40
+              Label : METHOD
+                39
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  40
+                  39
           Label : NAME
             9

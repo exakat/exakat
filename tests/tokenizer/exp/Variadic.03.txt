@@ -28,10 +28,6 @@ Label : PROJECT
   Label : DEFINITION
     18
     Label : DEFINITION
-      36
-  Label : DEFINITION
-    18
-    Label : DEFINITION
       37
   Label : DEFINITION
     18

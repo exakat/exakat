@@ -2,13 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    25
     Label : DEFINITION
-      25
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      7
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,38 +12,38 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          9
           Label : LEFT
-            9
+            8
             Label : CLASS
               5
             Label : MEMBER
               7
           Label : RIGHT
-            9
+            8
             Label : CLASS
-              11
+              10
             Label : METHOD
-              13
+              12
               Label : NAME
-                13
+                12
               Label : ARGUMENT
-                20
+                19
                 Label : ARGUMENT
-                  17
+                  16
                   Label : CONCAT
-                    15
+                    14
                   Label : CONCAT
-                    18
+                    17
               Label : ARGUMENT
-                20
+                19
                 Label : ARGUMENT
-                  17
+                  16
                   Label : CONCAT
-                    21
+                    20
                   Label : CONCAT
-                    23
+                    22
                   Label : CONCAT
-                    25
+                    24
                   Label : CONCAT
                     26

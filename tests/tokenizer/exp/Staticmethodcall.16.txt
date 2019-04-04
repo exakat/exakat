@@ -5,10 +5,6 @@ Label : PROJECT
     20
     Label : DEFINITION
       19
-    Label : DEFINITION
-      19
-    Label : DEFINITION
-      19
   Label : FILE
     3
     Label : EXPRESSION

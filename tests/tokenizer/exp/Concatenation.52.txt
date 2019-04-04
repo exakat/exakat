@@ -2,17 +2,13 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
-      8
+      10
+    Label : DEFINITION
+      10
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       13
     Label : DEFINITION
@@ -20,13 +16,13 @@ Label : PROJECT
     Label : DEFINITION
       13
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       18
     Label : DEFINITION
       18
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       21
     Label : DEFINITION
@@ -36,13 +32,13 @@ Label : PROJECT
     Label : DEFINITION
       21
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       33
     Label : DEFINITION
       33
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       41
     Label : DEFINITION
@@ -70,7 +66,7 @@ Label : PROJECT
                   Label : ARGUMENT
                     18
                   Label : ARGUMENT
-                    11
+                    10
                 Label : RIGHT
                   20
               Label : THEN
@@ -168,7 +164,7 @@ Label : PROJECT
                           Label : RETURN
                             38
           Label : SOURCE
-            10
+            9
             Label : CLASS
               6
             Label : MEMBER
@@ -176,6 +172,6 @@ Label : PROJECT
           Label : VALUE
             12
             Label : INDEX
-              11
+              10
             Label : VALUE
               13

@@ -22,41 +22,35 @@ Label : PROJECT
               Label : EXPRESSION
                 9
               Label : EXPRESSION
-                16
+                15
                 Label : LEFT
-                  15
+                  14
                   Label : CLASS
                     12
                   Label : MEMBER
                     13
                 Label : RIGHT
-                  17
+                  16
                   Label : NEW
-                    18
+                    17
                     Label : ARGUMENT
                       9
                     Label : NAME
-                      18
+                      17
               Label : EXPRESSION
-                22
+                21
                 Label : METHOD
-                  20
+                  19
                   Label : ARGUMENT
                     9
                   Label : NAME
-                    20
+                    19
                 Label : OBJECT
-                  15
+                  14
                   Label : CLASS
                     12
                   Label : MEMBER
                     13
-            Label : DEFINITION
-              14
-              Label : DEFINITION
-                13
-              Label : DEFINITION
-                13
             Label : NAME
               7
           Label : NAME
@@ -65,3 +59,15 @@ Label : PROJECT
             13
             Label : PPP
               13
+              Label : DEFINITION
+                14
+                Label : CLASS
+                  12
+                Label : MEMBER
+                  13
+              Label : DEFINITION
+                14
+                Label : CLASS
+                  12
+                Label : MEMBER
+                  13

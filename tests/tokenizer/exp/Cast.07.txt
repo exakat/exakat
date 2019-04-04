@@ -2,13 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
-      13
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      7
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,24 +14,24 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CAST
-            9
+            8
             Label : CLASS
               6
             Label : MEMBER
               7
         Label : EXPRESSION
-          10
+          9
           Label : CAST
-            9
+            8
             Label : CLASS
-              11
+              10
             Label : CONSTANT
-              11
+              10
         Label : EXPRESSION
-          12
+          11
           Label : CAST
             15
             Label : MEMBER
               14
             Label : OBJECT
-              13
+              12

@@ -13,8 +13,6 @@ Label : PROJECT
       11
     Label : DEFINITION
       11
-    Label : DEFINITION
-      11
   Label : DEFINITION
     7
     Label : DEFINITION

@@ -29,8 +29,6 @@ Label : PROJECT
     6
     Label : DEFINITION
       16
-    Label : DEFINITION
-      16
   Label : DEFINITION
     6
     Label : DEFINITION
