@@ -1,10 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,7 +10,7 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NEW
-            10
+            9
             Label : CLASS
               6
             Label : MEMBER

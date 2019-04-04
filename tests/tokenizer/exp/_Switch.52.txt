@@ -2,55 +2,43 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-    Label : DEFINITION
-      39
-  Label : DEFINITION
-    11
+    39
     Label : DEFINITION
       45
     Label : DEFINITION
       45
   Label : DEFINITION
-    11
+    39
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+  Label : DEFINITION
+    39
     Label : DEFINITION
       71
     Label : DEFINITION
       71
   Label : DEFINITION
-    11
+    39
     Label : DEFINITION
       74
     Label : DEFINITION
@@ -68,61 +56,61 @@ Label : PROJECT
             Label : NOT
               7
               Label : ARGUMENT
-                13
+                12
                 Label : INDEX
-                  14
+                  13
                 Label : VARIABLE
-                  12
+                  11
                   Label : CLASS
                     8
                   Label : MEMBER
                     10
           Label : THEN
-            16
+            15
             Label : EXPRESSION
-              19
+              18
               Label : LEFT
-                17
+                16
               Label : RIGHT
-                12
+                11
                 Label : CLASS
-                  20
+                  19
                 Label : METHOD
-                  22
+                  21
                   Label : NAME
-                    22
+                    21
                   Label : ARGUMENT
-                    26
+                    25
                     Label : CONCAT
-                      24
+                      23
                     Label : CONCAT
-                      27
+                      26
                       Label : NAME
-                        27
+                        26
                       Label : ARGUMENT
-                        12
+                        11
                         Label : CLASS
                           8
                         Label : MEMBER
                           10
                       Label : ARGUMENT
-                        29
+                        28
                   Label : ARGUMENT
-                    31
+                    30
             Label : EXPRESSION
-              33
+              32
               Label : CASES
-                34
+                33
                 Label : EXPRESSION
-                  35
+                  34
                   Label : CASE
-                    37
+                    36
                   Label : CODE
                     3
                     Label : EXPRESSION
                       40
                       Label : LEFT
-                        39
+                        38
                       Label : RIGHT
                         41
                         Label : ARGUMENT
@@ -140,49 +128,49 @@ Label : PROJECT
                         Label : NOT
                           7
                           Label : ARGUMENT
-                            13
+                            12
                             Label : INDEX
                               47
                             Label : VARIABLE
-                              39
+                              38
                       Label : THEN
-                        16
+                        15
                         Label : EXPRESSION
-                          12
+                          11
                           Label : CLASS
                             8
                           Label : METHOD
                             48
                             Label : ARGUMENT
-                              13
+                              12
                               Label : INDEX
                                 47
                               Label : VARIABLE
-                                39
+                                38
                             Label : NAME
                               48
                     Label : EXPRESSION
                       50
                       Label : RETURN
-                        13
+                        12
                         Label : ARGUMENT
                           51
                           Label : INDEX
-                            14
-                          Label : VALUE
-                            52
-                        Label : ARGUMENT
-                          51
-                          Label : INDEX
-                            52
-                          Label : VALUE
                             13
+                          Label : VALUE
+                            52
+                        Label : ARGUMENT
+                          51
+                          Label : INDEX
+                            52
+                          Label : VALUE
+                            12
                             Label : ARGUMENT
-                              13
+                              12
                               Label : INDEX
-                                37
+                                36
                               Label : VARIABLE
-                                12
+                                11
                                 Label : CLASS
                                   8
                                 Label : MEMBER
@@ -190,13 +178,13 @@ Label : PROJECT
                             Label : ARGUMENT
                               55
                               Label : CONDITION
-                                13
+                                12
                                 Label : INDEX
                                   54
                                 Label : VARIABLE
-                                  39
+                                  38
                               Label : ELSE
-                                12
+                                11
                                 Label : CLASS
                                   58
                                 Label : METHOD
@@ -212,7 +200,7 @@ Label : PROJECT
                           Label : INDEX
                             64
                           Label : VALUE
-                            13
+                            12
                             Label : ARGUMENT
                               56
                 Label : EXPRESSION
@@ -224,7 +212,7 @@ Label : PROJECT
                     Label : EXPRESSION
                       40
                       Label : LEFT
-                        39
+                        38
                       Label : RIGHT
                         41
                         Label : ARGUMENT
@@ -246,13 +234,13 @@ Label : PROJECT
                           Label : NOT
                             7
                             Label : ARGUMENT
-                              13
+                              12
                               Label : INDEX
                                 54
                               Label : VARIABLE
-                                39
+                                38
                         Label : ELSE
-                          12
+                          11
                           Label : CLASS
                             58
                           Label : METHOD
@@ -262,11 +250,11 @@ Label : PROJECT
                             Label : NAME
                               60
                         Label : THEN
-                          13
+                          12
                           Label : INDEX
                             54
                           Label : VARIABLE
-                            39
+                            38
                     Label : EXPRESSION
                       40
                       Label : LEFT
@@ -278,13 +266,13 @@ Label : PROJECT
                           Label : NOT
                             7
                             Label : ARGUMENT
-                              13
+                              12
                               Label : INDEX
                                 47
                               Label : VARIABLE
-                                39
+                                38
                         Label : ELSE
-                          12
+                          11
                           Label : CLASS
                             58
                           Label : METHOD
@@ -294,11 +282,11 @@ Label : PROJECT
                             Label : NAME
                               60
                         Label : THEN
-                          13
+                          12
                           Label : INDEX
                             47
                           Label : VARIABLE
-                            39
+                            38
                     Label : EXPRESSION
                       5
                       Label : CONDITION
@@ -306,51 +294,51 @@ Label : PROJECT
                         Label : NOT
                           7
                           Label : ARGUMENT
-                            13
+                            12
                             Label : INDEX
                               46
                             Label : VARIABLE
-                              39
+                              38
                       Label : THEN
-                        16
+                        15
                         Label : EXPRESSION
-                          12
+                          11
                           Label : CLASS
                             8
                           Label : METHOD
                             48
                             Label : ARGUMENT
-                              13
+                              12
                               Label : INDEX
                                 46
                               Label : VARIABLE
-                                39
+                                38
                             Label : NAME
                               48
                     Label : EXPRESSION
                       50
                       Label : RETURN
-                        13
+                        12
                         Label : ARGUMENT
                           51
                           Label : INDEX
-                            14
-                          Label : VALUE
-                            52
-                        Label : ARGUMENT
-                          51
-                          Label : INDEX
-                            52
-                          Label : VALUE
                             13
+                          Label : VALUE
+                            52
+                        Label : ARGUMENT
+                          51
+                          Label : INDEX
+                            52
+                          Label : VALUE
+                            12
                             Label : ARGUMENT
-                              26
+                              25
                               Label : CONCAT
-                                13
+                                12
                                 Label : INDEX
                                   68
                                 Label : VARIABLE
-                                  12
+                                  11
                                   Label : CLASS
                                     8
                                   Label : MEMBER
@@ -366,15 +354,15 @@ Label : PROJECT
                           Label : INDEX
                             64
                           Label : VALUE
-                            13
+                            12
                             Label : ARGUMENT
                               56
               Label : CONDITION
-                13
+                12
                 Label : INDEX
-                  14
+                  13
                 Label : VARIABLE
-                  12
+                  11
                   Label : CLASS
                     8
                   Label : MEMBER

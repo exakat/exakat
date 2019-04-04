@@ -29,14 +29,14 @@ class UndefinedClasses extends Analyzer {
     public function dependsOn() {
         return  array('Classes/IsExtClass',
                       'Composer/IsComposerNsname',
-                      'Interfaces/IsExtInterface',
                       'Modules/DefinedClasses',
+                      'Interfaces/IsExtInterface',
                      );
     }
     
     public function analyze() {
-        $omitted = array('Composer/IsComposerNsname',
-                         'Classes/IsExtClass',
+        $omitted = array('Classes/IsExtClass',
+                         'Composer/IsComposerNsname',
                          'Modules/DefinedClasses',
                          );
 
@@ -54,9 +54,10 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // Methodcalls 
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot($omitted)
              ->outIs('CLASS')
+             ->analyzerIsNot($omitted)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->noClassDefinition()
@@ -65,35 +66,37 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-
-        // in a parent::Method()
-        $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot($omitted)
+        // Methodcalls, Staticproperties with Parent
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Parent')
              ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->analyzerIsNot($omitted)
+             ->back('first');
+        $this->prepareQuery();
+
+        // No extends
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->hasNoOut('EXTENDS')
              ->back('first');
         $this->prepareQuery();
 
         // in a class::$property
-        $this->atomIs('Staticproperty')
-             ->analyzerIsNot($omitted)
+        $this->atomIs(array('Staticproperty', 'Staticclass'))
              ->outIs('CLASS')
+             ->analyzerIsNot($omitted)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
-             ->back('first');
-        $this->prepareQuery();
-
-        // in a parent::$property
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -110,16 +113,7 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // in a parent::constante
-        $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Composer/IsComposerNsname')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->fullnspathIs('\\parent')
-             ->back('first');
-        $this->prepareQuery();
-
-        // in a class::instanceof
+        // in a instanceof
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->analyzerIsNot($omittedAll)
@@ -131,20 +125,56 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // in a instanceof with parent
+        $this->atomIs('Instanceof')
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->not(
+                $this->side()
+                     ->goToClass()
+                     ->outIs('EXTENDS')
+                     ->analyzerIs($omitted)
+             )
+             ->back('first');
+        $this->prepareQuery();
+
         // in a typehint f(someClass $c)
         $types = $this->loadIni('php_reserved_types.ini', 'type');
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->analyzerIsNot($omittedAll)
-             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->codeIsNot($types)
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition();
         $this->prepareQuery();
 
-        // in a property typehint f(someClass $c)
+        // in a typehint f(parent $c)
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->analyzerIsNot($omitted)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->hasNoOut('EXTENDS')
+             ->back('first');
+        $this->prepareQuery();
+
+        // in a property typehint class x (private someClass $c)
         $this->atomIs(self::$CIT)
              ->outIs('PPP')
              ->outIs('TYPEHINT')
@@ -156,13 +186,25 @@ class UndefinedClasses extends Analyzer {
              ->noTraitDefinition();
         $this->prepareQuery();
 
-        // Foo::class
-        $this->atomIs('Staticclass')
-             ->outIs('CLASS')
-             ->analyzerIsNot($omittedAll)
-             ->noClassDefinition()
-             ->noInterfaceDefinition()
-             ->noTraitDefinition()
+        // in a property typehint class x (private parent $c)
+        $this->atomIs(self::$CIT)
+             ->outIs('PPP')
+             ->outIs('TYPEHINT')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->analyzerIsNot($omitted)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(self::$CIT)
+             ->outIs('PPP')
+             ->outIs('TYPEHINT')
+             ->atomIs('Parent')
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->hasNoOut('EXTENDS')
              ->back('first');
         $this->prepareQuery();
     }

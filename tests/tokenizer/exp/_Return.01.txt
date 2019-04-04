@@ -2,17 +2,15 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    14
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    14
-    Label : DEFINITION
-      13
+    16
     Label : DEFINITION
       13
   Label : DEFINITION
-    14
+    16
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    16
     Label : DEFINITION
       17
   Label : FILE
@@ -48,12 +46,12 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            15
+            14
             Label : ARGUMENT
-              16
+              15
             Label : ARGUMENT
               13
             Label : ARGUMENT
               17
             Label : NAME
-              15
+              14

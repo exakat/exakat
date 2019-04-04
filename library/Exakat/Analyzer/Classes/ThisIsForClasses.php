@@ -71,6 +71,12 @@ class ThisIsForClasses extends Analyzer {
              ->hasNoIn('METHOD')
              ->back('first');
         $this->prepareQuery();
+        
+        // self, parent, static : when outside a class, in static or typehint
+        $this->atomIs(array('Self', 'Parent', 'Static'))
+             ->hasNoClassTrait()
+             ->inIs(array('TYPEHINT', 'CLASS')); // Instanceof, typehint
+        $this->prepareQuery();
     }
 }
 

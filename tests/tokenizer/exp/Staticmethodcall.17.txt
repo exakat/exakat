@@ -1,14 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    20
-    Label : DEFINITION
-      19
-    Label : DEFINITION
-      19
-    Label : DEFINITION
-      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -154,7 +146,7 @@ Label : PROJECT
           Label : MEMBER
             19
         Label : EXPRESSION
-          21
+          20
           Label : DEFINITION
             6
           Label : DEFINITION
@@ -172,111 +164,127 @@ Label : PROJECT
           Label : DEFINITION
             8
           Label : METHOD
-            23
-            Label : ARGUMENT
-              12
-            Label : BLOCK
-              24
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  6
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  7
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  8
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : CONSTANT
-                  25
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : CONSTANT
-                  25
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : CONSTANT
-                  25
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : METHOD
-                  27
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    27
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : METHOD
-                  27
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    27
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : METHOD
-                  27
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    27
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : MEMBER
-                  28
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : MEMBER
-                  28
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : MEMBER
-                  28
-            Label : DEFINITION
-              20
-              Label : DEFINITION
-                28
-              Label : DEFINITION
-                28
-              Label : DEFINITION
-                28
-            Label : NAME
-              23
-          Label : NAME
             22
+            Label : ARGUMENT
+              12
+            Label : BLOCK
+              23
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  6
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  7
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  8
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : CONSTANT
+                  24
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : CONSTANT
+                  24
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : CONSTANT
+                  24
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : METHOD
+                  26
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    26
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : METHOD
+                  26
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    26
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : METHOD
+                  26
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    26
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  27
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : MEMBER
+                  27
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  27
+            Label : NAME
+              22
+          Label : NAME
+            21
           Label : PPP
-            28
+            27
             Label : PPP
-              28
+              27
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  27
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  27
           Label : PPP
-            28
+            27
             Label : PPP
-              28
+              27
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  27
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  27
         Label : EXPRESSION
-          29
+          28
           Label : DEFINITION
             6
           Label : DEFINITION
@@ -294,106 +302,122 @@ Label : PROJECT
           Label : DEFINITION
             8
           Label : METHOD
-            23
+            22
             Label : ARGUMENT
               12
             Label : BLOCK
-              24
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  6
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  7
-              Label : EXPRESSION
-                5
-                Label : NEW
-                  8
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : CONSTANT
-                  31
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : CONSTANT
-                  31
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : CONSTANT
-                  31
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : METHOD
-                  33
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    33
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : METHOD
-                  33
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    33
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : METHOD
-                  33
-                  Label : ARGUMENT
-                    12
-                  Label : NAME
-                    33
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  6
-                Label : MEMBER
-                  34
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  7
-                Label : MEMBER
-                  34
-              Label : EXPRESSION
-                17
-                Label : CLASS
-                  8
-                Label : MEMBER
-                  34
-            Label : DEFINITION
-              20
-              Label : DEFINITION
-                34
-              Label : DEFINITION
-                34
-              Label : DEFINITION
-                34
-            Label : NAME
               23
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  6
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  7
+              Label : EXPRESSION
+                5
+                Label : NEW
+                  8
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : CONSTANT
+                  30
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : CONSTANT
+                  30
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : CONSTANT
+                  30
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    32
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    32
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    32
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  33
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  7
+                Label : MEMBER
+                  33
+              Label : EXPRESSION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  33
+            Label : NAME
+              22
           Label : NAME
-            30
+            29
           Label : PPP
-            34
+            33
             Label : PPP
-              34
+              33
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  33
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  33
           Label : PPP
-            34
+            33
             Label : PPP
-              34
+              33
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  33
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  33

@@ -2867,9 +2867,17 @@ HTML;
             $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
             $counts = array_map(function($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
 
-            $theTable = array();
+            $groups = array();
             foreach($results->toArray() as $row) {
-                $theTable []= "<tr><td>{$counts[$row['htmlcode']]}</td><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>";
+                $groups[$row['htmlcode']][] = $row['file'];
+            }
+            uasort($groups, function($a, $b) { return count($a) <=> count($b);});
+
+            $theTable = array();
+            foreach($groups as $code => $list) {
+                $c = count($list);
+                $htmlList = '<ul><li>'.join('</li><li>', $list).'</li></ul>';
+                $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
             }
 
             $html = $this->getBasedPage('inventories');

@@ -1,10 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,28 +8,28 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          9
           Label : LEFT
-            9
+            8
             Label : CLASS
               5
             Label : MEMBER
               6
           Label : RIGHT
-            10
+            9
             Label : LEFT
-              9
+              8
               Label : CLASS
                 5
               Label : CONSTANT
-                11
+                10
             Label : RIGHT
-              9
+              8
               Label : CLASS
                 5
               Label : METHOD
-                13
+                12
                 Label : ARGUMENT
-                  14
-                Label : NAME
                   13
+                Label : NAME
+                  12

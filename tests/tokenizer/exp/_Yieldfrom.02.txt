@@ -579,10 +579,6 @@ Label : PROJECT
                           10
                           Label : DEFINITION
                             76
-                          Label : DEFINITION
-                            76
-                          Label : DEFINITION
-                            76
                         Label : NAME
                           47
                       Label : NAME

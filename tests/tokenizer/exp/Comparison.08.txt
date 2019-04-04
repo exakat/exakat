@@ -2,17 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    15
     Label : DEFINITION
-      15
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      7
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      19
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -22,35 +14,35 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            12
+            11
             Label : LEFT
-              10
+              9
               Label : INDEX
-                11
+                10
               Label : VARIABLE
-                9
+                8
                 Label : CLASS
                   6
                 Label : MEMBER
                   7
             Label : RIGHT
-              13
+              12
           Label : THEN
-            14
+            13
             Label : EXPRESSION
               17
               Label : LEFT
-                10
+                9
                 Label : INDEX
                   16
                 Label : VARIABLE
-                  15
+                  14
               Label : RIGHT
-                10
+                9
                 Label : INDEX
                   20
                 Label : VARIABLE
-                  9
+                  8
                   Label : CLASS
                     18
                   Label : MEMBER

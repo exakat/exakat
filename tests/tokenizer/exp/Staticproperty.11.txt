@@ -1,26 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      21
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,13 +22,13 @@ Label : PROJECT
               Label : DEFAULT
                 11
               Label : DEFINITION
-                20
+                19
                 Label : CLASS
                   6
                 Label : MEMBER
                   9
               Label : DEFINITION
-                20
+                19
                 Label : CLASS
                   6
                 Label : MEMBER
@@ -57,26 +37,6 @@ Label : PROJECT
                 15
                 Label : PPP
                   15
-                  Label : DEFINITION
-                    20
-                    Label : CLASS
-                      20
-                      Label : CLASS
-                        6
-                      Label : MEMBER
-                        9
-                    Label : MEMBER
-                      15
-                  Label : DEFINITION
-                    20
-                    Label : CLASS
-                      20
-                      Label : CLASS
-                        6
-                      Label : MEMBER
-                        9
-                    Label : MEMBER
-                      15
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -92,9 +52,9 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            20
+            19
             Label : CLASS
-              20
+              19
               Label : CLASS
                 6
               Label : MEMBER
@@ -104,13 +64,13 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            20
+            19
             Label : CLASS
-              20
+              19
               Label : CLASS
-                20
+                19
                 Label : CLASS
-                  20
+                  19
                   Label : CLASS
                     6
                   Label : MEMBER
@@ -118,6 +78,6 @@ Label : PROJECT
                 Label : MEMBER
                   15
               Label : MEMBER
-                21
+                20
             Label : MEMBER
-              22
+              21

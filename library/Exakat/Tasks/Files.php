@@ -330,6 +330,28 @@ class Files extends Tasks {
             }
         }
 
+        $vcsClass = Vcs::getVcs($this->config);
+        $vcs = new $vcsClass($dir, $this->config->projects_root);
+        $fileModifications = $vcs->getFileModificationLoad();
+
+        $filesRows = array();
+        $hashes = array();
+        $duplicates = 0;
+        foreach($files as $id => $file) {
+            $fnv132 = hash_file('fnv132', "{$this->config->projects_root}/projects/$dir/code/$file");
+            if (isset($hashes[$fnv132])) {
+                $ignoredFiles[$file] = "Duplicate ({$hashes[$fnv132]})";
+                ++$duplicates;
+                unset($files[$id]);
+                continue;
+            } else {
+                $hashes[$fnv132] = $file;
+            }
+            $modifications = $fileModifications[trim($file, '/')] ?? 0;
+            $filesRows[] = compact('file', 'fnv132', 'modifications');
+        }
+        display("Removed $duplicates duplicates files\n");
+
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
             $i[] = compact('file', 'reason');
@@ -340,15 +362,7 @@ class Files extends Tasks {
 
         $this->datastore->cleanTable('files');
 
-        $vcsClass = Vcs::getVcs($this->config);
-        $vcs = new $vcsClass($dir, $this->config->projects_root);
-        $modifications = $vcs->getFileModificationLoad();
-
-        $this->datastore->addRow('files', array_map(function ($a) use ($dir, $modifications) {
-                return array('file'          => $a,
-                             'fnv132'        => hash_file('fnv132', "{$this->config->projects_root}/projects/$dir/code/$a"),
-                             'modifications' => $modifications[trim($a, '/')] ?? 0);
-        }, $files));
+        $this->datastore->addRow('files', $filesRows);
         $this->datastore->addRow('hash', array('files'  => count($files),
                                                'tokens' => $tokens));
         $this->datastore->reload();
