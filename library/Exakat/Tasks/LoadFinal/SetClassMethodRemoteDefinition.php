@@ -28,6 +28,7 @@ use Exakat\Query\Query;
 
 class SetClassMethodRemoteDefinition extends LoadFinal {
     public function run() {
+    /*
         $query = $this->newQuery('SetClassMethodRemoteDefinition calls');
         $query->atomIs(array('Staticmethodcall', 'Methodcall'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -37,6 +38,7 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs(array('CLASS', 'OBJECT'))
+              ->atomIsNot(array('Parent', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
@@ -49,13 +51,14 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
-
+*/
+        
         $query = $this->newQuery('SetClassMethodRemoteDefinition traits');
         $query->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
-              ->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Identifier', 'Nsname'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('CLASS')
@@ -72,7 +75,7 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countT = $result->toInt();
 
-        $count = $countT + $countC;
+        $count = $countT;// + $countC;
         display("Set $count method remote definitions");
     }
 }

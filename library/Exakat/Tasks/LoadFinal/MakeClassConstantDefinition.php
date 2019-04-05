@@ -37,11 +37,10 @@ class MakeClassConstantDefinition extends LoadFinal {
               ->savePropertyAs('code', 'name')
               ->back('first')
               ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'classe')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
               ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CONST')
@@ -79,6 +78,30 @@ class MakeClassConstantDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countI = $result->toInt();
 
+        $query = $this->newQuery('MakeClassConstantDefinition Parent only');
+        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'classe')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
+              ->isNot('visibility', 'private')
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countI = $result->toInt();
         $count = $countD + $countI;
         
         display("Create $count link between Class constant and definition");

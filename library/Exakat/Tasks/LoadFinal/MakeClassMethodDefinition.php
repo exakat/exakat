@@ -32,19 +32,17 @@ class MakeClassMethodDefinition extends LoadFinal {
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
-        $query = $this->newQuery('MakeClassMethodDefinition static');
+        $query = $this->newQuery('MakeClassMethodDefinition direct');
         $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('fullnspath', 'classe')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->goToClass()
               ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->is('static', true)
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
@@ -53,6 +51,53 @@ class MakeClassMethodDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
+
+        // Create link between static Class method and its definition
+        // This works outside a class too, for static.
+        $query = $this->newQuery('MakeClassMethodDefinition parents');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->goToClass()
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->isNot('visibility', 'private')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count2 = $result->toInt();
+
+        // Create link between static Class method and its definition
+        // This works outside a class too, for static.
+        $query = $this->newQuery('MakeClassMethodDefinition parent');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->isNot('visibility', 'private')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count3 = $result->toInt();
 
         // Create link between Class method and definition
         // This works only for $this
