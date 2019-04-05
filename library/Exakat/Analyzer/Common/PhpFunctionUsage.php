@@ -21,16 +21,33 @@
 */
 
 
-namespace Exakat\Analyzer\Php;
+namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\PhpFunctionUsage;
 
-class Php73RemovedFunctions extends PhpFunctionUsage {
+class PhpFunctionUsage extends Analyzer {
+    protected $functions = array();
+    
+    function dependsOn() {
+        return array('Functions/ConditionedFunctions',
+                     'Functions/RedeclaredPhpFunction',
+                    );
+    }
+    
     public function analyze() {
-        $this->functions = array('image2wbmp',
-                                );
-        parent::analyze();
+        $functions =  makeFullNsPath($this->functions);
+        
+        $this->atomFunctionIs($functions)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->inIs('DEFINITION')
+                             ->analyzerIs('Functions/ConditionedFunctions')
+                             ->analyzerIs('Functions/RedeclaredPhpFunction')
+                     )
+             );
+        $this->prepareQuery();
     }
 }
 
