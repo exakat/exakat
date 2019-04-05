@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('gmp_init',
+$expected     = array('function split($number, $base = 0) { /**/ } ',
                      );
 
-$expected_not = array('display',
-                      '__construct',
+$expected_not = array('function display( ) { /**/ } ',
+                      'function __construct( ) { /**/ } ',
                      );
 
 ?>
