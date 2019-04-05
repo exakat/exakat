@@ -34,7 +34,6 @@ class DefinedParentMP extends Analyzer {
     public function analyze() {
         // parent::methodcall()
         $this->atomIs('Parent')
-             ->hasIn('DEFINITION')
              ->inIs('CLASS')
              ->atomIs(array('Staticmethodcall', 'Staticconstant'))
              ->hasIn('DEFINITION');
@@ -42,31 +41,21 @@ class DefinedParentMP extends Analyzer {
 
         // parent::$property
         $this->atomIs('Parent')
-             ->hasIn('DEFINITION')
              ->inIs('CLASS')
              ->atomIs('Staticproperty')
              ->isPropertyDefined();
         $this->prepareQuery();
 
-        // parent::$property or parent::methodcall or parent::constant
-        $this->atomIs('Parent')
-             ->hasNoIn('DEFINITION')
-             ->analyzerIs(array('Composer/IsComposerNsname',
-                                'Classes/IsExtClass',
-                                ))
-             ->inIs('CLASS')
-             ->atomIsNot('Staticclass');
-        $this->prepareQuery();
-
         // handle composer/extensions case
         $this->atomIs('Parent')
              ->inIs('CLASS') // Check it has ::
+             ->analyzerIsNot('self')
              ->atomIsNot('Staticclass')
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->analyzerIs(array('Composer/IsComposerNsname',
-                                'Composer/IsExtClass',
+                                'Classes/IsExtClass',
                                ))
              ->back('first')
              ->inIs('CLASS');
