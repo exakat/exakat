@@ -6,7 +6,8 @@ $expected     = array('parent::definedMethod( )',
                       'parent::$property3',
                      );
 
-$expected_not = array('parent::undefinedMethod( )',
+$expected_not = array('parent::definedPrivateMethod( )',
+                      'parent::undefinedMethod( )',
                       'parent::class',
                       'parent::$property1',
                       'parent::constant2',

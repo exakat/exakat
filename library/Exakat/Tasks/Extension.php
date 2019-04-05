@@ -29,6 +29,8 @@ class Extension extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
     private $extensionList = array();
+    
+    const FORMAT = "+ %-20s %8s %5s\n";
 
     //install, list, local, uninstall, upgrade
     public function run() {
@@ -138,9 +140,16 @@ class Extension extends Tasks {
             print "Coudln't read the remote list.\n";
             return;
         }
+
+        print PHP_EOL;
+        printf(self::FORMAT, 'Extension', 'Version', 'Build');
+        print str_repeat('-', 40).PHP_EOL;
         
-        $names = array_column($list, 'name');
-        print '+ '.implode("\n+ ", $names).PHP_EOL;
+        foreach($list as $extension) {
+            printf(self::FORMAT, $extension->name, $extension->version, '('.$extension->build.')');
+        }
+
+        print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;
     }
     
     private function local() {
@@ -148,7 +157,7 @@ class Extension extends Tasks {
         sort($list);
     
         print PHP_EOL;
-        printf("+ %-20s %8s %5s\n", 'Extension', 'Version', 'Build');
+        printf(self::FORMAT, 'Extension', 'Version', 'Build');
         print str_repeat('-', 40).PHP_EOL;
         foreach($list as $l) {
             // drop the .phar
@@ -159,7 +168,7 @@ class Extension extends Tasks {
                              'build'   => '',
                              );
             }
-            printf("+ %-20s %8s %5s\n", substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
+            printf(self::FORMAT, substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
         }
         
         print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;

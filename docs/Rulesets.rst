@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 01 Apr 2019 14:51:18 +0000
-.. comment: Generation hash : eefa90b29c62ffb2a9c26482ce435df9158067da
+.. comment: Generation date : Thu, 04 Apr 2019 16:47:53 +0000
+.. comment: Generation hash : 6fbee452b5f59bf0129bc2c301a80922714d1d4d
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 351 analysis
+Total : 350 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -274,7 +274,6 @@ Total : 351 analysis
 * :ref:`Overwriting Variable <overwriting-variable>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
-* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
@@ -457,7 +456,7 @@ Total : 19 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -477,6 +476,7 @@ Total : 24 analysis
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Order Of Declaration <order-of-declaration>`
+* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
@@ -973,8 +973,10 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 18 analysis
+Total : 22 analysis
 
+* :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+* :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
@@ -982,12 +984,14 @@ Total : 18 analysis
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
+* :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
+* :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Useless Alias <useless-alias>`

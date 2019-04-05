@@ -29,6 +29,8 @@ class AnalyzerIs extends DSL {
     public function run() {
         list($analyzer) = func_get_args();
 
+        assert($this->assertAnalyzer($analyzer));
+
         return new Command('where( __.in("ANALYZED").has("analyzer", within(***)))', array($analyzer));
     }
 }

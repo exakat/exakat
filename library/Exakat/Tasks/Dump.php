@@ -1437,7 +1437,7 @@ GREMLIN;
             $insert[] = '("'.$name.'", '.$res->toInt().')';
 
             $query = <<<GREMLIN
-g.V().hasLabel("$label").where(__.in("DEFINITION")).count();
+g.V().hasLabel("$label").where(__.in("DEFINITION").not(hasLabel("Virtualproperty"))).count();
 GREMLIN;
             $res = $this->gremlin->query($query);
             $insert[] = '("'.$name.' defined", '.$res->toInt().')';

@@ -1,4 +1,4 @@
-.. Reports:
+.. reports:
 
 Reports
 =======

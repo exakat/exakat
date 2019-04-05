@@ -211,7 +211,8 @@ class FindExternalLibraries extends Tasks {
                     }
                 }
 
-                if (is_array($tokens[$id + 4]) &&
+                if (isset($tokens[$id + 4])    &&
+                    is_array($tokens[$id + 4]) &&
                     $tokens[$id + 4][0] === $this->phpTokens['T_EXTENDS']) {
                     $ix = $id + 6;
                     $extends = '';

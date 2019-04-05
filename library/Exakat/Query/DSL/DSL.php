@@ -98,7 +98,16 @@ abstract class DSL {
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
 
-    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables, &$availableLabels, $ignoredcit, $ignoredfunctions, $ignoredconstants) {
+    public function __construct($dslfactory, 
+                                $dictCode, 
+                                $availableAtoms, 
+                                $availableLinks, 
+                                $availableFunctioncalls, 
+                                &$availableVariables, 
+                                &$availableLabels, 
+                                $ignoredcit, 
+                                $ignoredfunctions, 
+                                $ignoredconstants) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = $dictCode;
         $this->availableAtoms         = $availableAtoms;
@@ -214,13 +223,17 @@ abstract class DSL {
     protected function assertAnalyzer($analyzer) {
         if (is_string($analyzer)) {
             assert(preg_match('#^[A-Z]\w+/[A-Z]\w+$#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
+            assert(class_exists('\\Exakat\\Analyzer\\'.str_replace('/', '\\', $analyzer)), "No such analyzer as $analyzer");
         } elseif (is_array($analyzer)) {
             foreach($analyzer as $a) {
                 assert(preg_match('#^[A-Z]\W\w+/[A-Z]\W\w+$#', $a) !== false, "Wrong format for Analyzer : $a");
+                assert(class_exists('\\Exakat\\Analyzer\\'.str_replace('/', '\\', $a)), "No such analyzer as $a");
             }
         } else {
             assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));
         }
+        
+        return true;
     }
     
     protected function isProperty($property) {

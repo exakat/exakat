@@ -537,6 +537,59 @@ Mage_Payment_Model_Method_Abstract is an abstract class : this way, it is not po
 
     Mage_Payment_Model_Method_Abstract::isAvailable($quote)
 
+Forgotten Visibility
+====================
+
+.. _fuelcms-classes-nonppp:
+
+Fuelcms
+^^^^^^^
+
+:ref:`forgotten-visibility`, in /fuel/modules/fuel/controllers/Module.php:713. 
+
+Missing visibility for the index() method,and all the methods in the Module class.
+
+.. code-block:: php
+
+    class Module extends Fuel_base_controller {
+    	
+    	// --------------------------------------------------------------------
+    	
+    	/**
+    	 * Displays the list (table) view
+    	 *
+    	 * @access	public
+    	 * @return	void
+    	 */	
+    	function index()
+    	{
+    		$this->items();
+    	}
+
+
+--------
+
+
+.. _livezilla-classes-nonppp:
+
+Livezilla
+^^^^^^^^^
+
+:ref:`forgotten-visibility`, in livezilla/_lib/objects.global.users.inc.php:2516. 
+
+Static method that could be public.
+
+.. code-block:: php
+
+    class Visitor extends BaseUser 
+    {
+    // Lots of code
+    
+        static function CreateSPAMFilter($_userId,$_base64=true)
+        {
+            if(!empty(Server::$Configuration->File[gl_sfa]))
+            {
+
 Multiple Index Definition
 =========================
 
@@ -1314,6 +1367,22 @@ In the updateEmailTemplate method, $generatedQueries collects all the generated 
             $this->addSql($sql);
         }
 
+Deprecated Functions
+====================
+
+.. _dolphin-php-deprecated:
+
+Dolphin
+^^^^^^^
+
+:ref:`deprecated-functions`, in Dolphin-v.7.3.5/inc/classes/BxDolAdminSettings.php:270. 
+
+Split() was abandonned in PHP 7.0
+
+.. code-block:: php
+
+    split(',', $aItem['extra']);
+
 Dangling Array References
 =========================
 
@@ -1561,7 +1630,7 @@ Tine20
 
 :ref:`or-die`, in scripts/addgrant.php:34. 
 
-Typical error handling, which also displays the MySQL error message, and leaks informations about the system. One may also note that mysql_connect is not supported anymore, and was replaced with mysqli_ and pdo : this may be a backward compatibile file.
+Typical error handling, which also displays the MySQL error message, and leaks informations about the system. One may also note that mysql_connect is not supported anymore, and was replaced with mysqli and pdo : this may be a backward compatibile file.
 
 .. code-block:: php
 
@@ -1734,7 +1803,7 @@ Typo3
 
 :ref:`strict-comparison-with-booleans`, in typo3/sysext/lowlevel/Classes/Command/FilesWithMultipleReferencesCommand.php:90. 
 
-When 'dry-run' is not defined, the getOption( ) method actually returns a ``null``value. So, comparing the result of getOption() to false is actually wrong : using a constant to prevent values to be inconsistent is recommended here.
+When ``dry-run`` is not defined, the getOption() method actually returns a ``null`` value. So, comparing the result of getOption() to false is actually wrong : using a constant to prevent values to be inconsistent is recommended here.
 
 .. code-block:: php
 
@@ -1805,64 +1874,6 @@ A case of empty case, with empty blocks. This is useless code. Event the curly b
                                 $jpegphoto = $property->getValue();
                                 break;
                             }
-
-PHP Keywords As Names
-=====================
-
-.. _churchcrm-php-reservednames:
-
-ChurchCRM
-^^^^^^^^^
-
-:ref:`php-keywords-as-names`, in src/kiosk/index.php:42. 
-
-$false may be true or false (or else...). In fact, the variable is not even defined in this file, and the file do a lot of inclusion. 
-
-.. code-block:: php
-
-    if (!isset($_COOKIE['kioskCookie'])) {
-        if ($windowOpen) {
-            $guid = uniqid();
-            setcookie("kioskCookie", $guid, 2147483647);
-            $Kiosk = new \ChurchCRM\KioskDevice();
-            $Kiosk->setGUIDHash(hash('sha256', $guid));
-            $Kiosk->setAccepted($false);
-            $Kiosk->save();
-        } else {
-            header("HTTP/1.1 401 Unauthorized");
-            exit;
-        }
-    }
-
-
---------
-
-
-.. _xataface-php-reservednames:
-
-xataface
-^^^^^^^^
-
-:ref:`php-keywords-as-names`, in Dataface/Record.php:1278. 
-
-This one is documented, and in the end, makes a lot of sense.
-
-.. code-block:: php
-
-    function &getRelatedRecord($relationshipName, $index=0, $where=0, $sort=0){
-    		if ( isset($this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort]) ){
-    			return $this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort];
-    		}
-    		$it = $this->getRelationshipIterator($relationshipName, $index, 1, $where, $sort);
-    		if ( $it->hasNext() ){
-    			$rec =& $it->next();
-    			$this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort] =& $rec;
-    			return $rec;
-    		} else {
-    			$null = null;	// stupid hack because literal 'null' can't be returned by ref.
-    			return $null;
-    		}
-    	}
 
 Logical Should Use Symbolic Operators
 =====================================
@@ -2166,6 +2177,22 @@ WordPress
 ^^^^^^^^^
 
 :ref:`lost-references`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+Never Used Properties
+=====================
+
+.. _wordpress-classes-propertyneverused:
+
+WordPress
+^^^^^^^^^
+
+:ref:`never-used-properties`, in wp-admin/includes/misc.php:74. 
 
 This code actually loads the file, join it, then split it again. file() would be sufficient. 
 
@@ -4098,6 +4125,49 @@ Too much vlaidation
 
     isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child']);
 
+Unitialized Properties
+======================
+
+.. _spip-classes-unitializedproperties:
+
+SPIP
+^^^^
+
+:ref:`unitialized-properties`, in ecrire/public/interfaces.php:584. 
+
+The class Critere (Criteria) has no method at all. When using a class as an array, to capture values, one of the advantage of the class is in the default values for the properties. In particular, the last property here, called $not, should be initialized with a false. 
+
+.. code-block:: php
+
+    /**
+     * Description d'un critère de boucle
+     *
+     * Sous-noeud de Boucle
+     *
+     * @package SPIP\Core\Compilateur\AST
+     **/
+    class Critere {
+    	/**
+    	 * Type de noeud
+    	 *
+    	 * @var string
+    	 */
+    	public $type = 'critere';
+    
+    	/**
+    	 * Opérateur (>, <, >=, IN, ...)
+    	 *
+    	 * @var null|string
+    	 */
+    	public $op;
+    
+    	/**
+    	 * Présence d'une négation (truc !op valeur)
+    	 *
+    	 * @var null|string
+    	 */
+    	public $not;
+
 Bail Out Early
 ==============
 
@@ -4499,25 +4569,6 @@ That's a 45 repeat of &nbsp;
     if ( (!zen_browser_detect('MSIE')) && (zen_browser_detect('Mozilla/4')) ) {
           for ($i=0; $i<45; $i++) $pre .= '&nbsp;';
         }
-
-
---------
-
-
-.. _zencart-structures-couldusestrrepeat:
-
-Zencart
-^^^^^^^
-
-:ref:`could-use-str\_repeat()`, in includes/functions/functions_general.php:1234. 
-
-That's a $len repeat of &nbsp;. Also, the first $len is useless.
-
-.. code-block:: php
-
-    for ($len; $len > 0; $len--) {
-                $str .= '.0';
-            }
 
 Suspicious Comparison
 =====================
@@ -5933,6 +5984,64 @@ There is also function f(). Those are actually overwritten methods. From the doc
 
     public function q ($query, ...$params) {
 
+PHP Keywords As Names
+=====================
+
+.. _churchcrm-php-reservednames:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`php-keywords-as-names`, in src/kiosk/index.php:42. 
+
+$false may be true or false (or else...). In fact, the variable is not even defined in this file, and the file do a lot of inclusion. 
+
+.. code-block:: php
+
+    if (!isset($_COOKIE['kioskCookie'])) {
+        if ($windowOpen) {
+            $guid = uniqid();
+            setcookie("kioskCookie", $guid, 2147483647);
+            $Kiosk = new \ChurchCRM\KioskDevice();
+            $Kiosk->setGUIDHash(hash('sha256', $guid));
+            $Kiosk->setAccepted($false);
+            $Kiosk->save();
+        } else {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+    }
+
+
+--------
+
+
+.. _xataface-php-reservednames:
+
+xataface
+^^^^^^^^
+
+:ref:`php-keywords-as-names`, in Dataface/Record.php:1278. 
+
+This one is documented, and in the end, makes a lot of sense.
+
+.. code-block:: php
+
+    function &getRelatedRecord($relationshipName, $index=0, $where=0, $sort=0){
+    		if ( isset($this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort]) ){
+    			return $this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort];
+    		}
+    		$it = $this->getRelationshipIterator($relationshipName, $index, 1, $where, $sort);
+    		if ( $it->hasNext() ){
+    			$rec =& $it->next();
+    			$this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort] =& $rec;
+    			return $rec;
+    		} else {
+    			$null = null;	// stupid hack because literal 'null' can't be returned by ref.
+    			return $null;
+    		}
+    	}
+
 __debugInfo() Usage
 ===================
 
@@ -6862,10 +6971,10 @@ This closures make immediate use of the $constraint argument, and calls its meth
 --------
 
 
-.. _dolphin-functions-shouldbetypehinted:
+.. _mautic-functions-shouldbetypehinted:
 
-Dolphin
-^^^^^^^
+Mautic
+^^^^^^
 
 :ref:`argument-should-be-typehinted`, in app/bundles/PluginBundle/Helper/IntegrationHelper.php:374. 
 
@@ -7561,31 +7670,6 @@ $_match[3] is actually extracted two preg_match() before : by the time we read i
 
 Could Use Try
 =============
-
-.. _mautic-exceptions-couldusetry:
-
-Mautic
-^^^^^^
-
-:ref:`could-use-try`, in app/bundles/StageBundle/Controller/StageController.php:78. 
-
-$limit is read as a session variable or a default value. There are no check here that $limit is not null, before using it in a division. It is easy to imagine this is done elsewhere, yet a try/catch could help intercept unwanted situations.
-
-.. code-block:: php
-
-    //set limits
-            $limit = $this->get('session')->get(
-                'mautic.stage.limit',
-                $this->coreParametersHelper->getParameter('default_pagelimit')
-            );
-    /... Code where $limit is read but not modified /
-            $count = count($stages);
-            if ($count && $count < ($start + 1)) {
-                $lastPage = ($count === 1) ? 1 : (ceil($count / $limit)) ?: 1;
-
-
---------
-
 
 .. _mautic-exceptions-couldusetry:
 

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class GPRAliases extends Analyzer {
     public function analyze() {
         // Web variables
-        $webVariables = array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE');
+        $webVariables = $this->loadIni('php_web_variables.ini', 'variables');
 
         // $a = $_POST
         $this->atomIs('Assignation')
