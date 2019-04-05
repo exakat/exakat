@@ -30,8 +30,8 @@ class AnalyzerInsideMoreThan extends DSL {
     public function run() : Command {
         list($analyzer, $atoms, $times) = func_get_args();
 
-        $this->assertAtom($atoms);
-        $this->assertAnalyzer($analyzer);
+        assert($this->assertAtom($atoms));
+        assert($this->assertAnalyzer($analyzer));
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);

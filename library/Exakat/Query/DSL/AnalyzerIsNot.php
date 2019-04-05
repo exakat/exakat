@@ -29,6 +29,8 @@ class AnalyzerIsNot extends DSL {
     public function run() {
         list($analyzer) = func_get_args();
 
+        assert($this->assertAnalyzer($analyzer));
+
         return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', array($analyzer));
     }
 }
