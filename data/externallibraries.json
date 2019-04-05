@@ -126,6 +126,15 @@
     ],
     "type": "classic"
   },
+  "htmlpurifier": {
+    "homepage": "http://htmlpurifier.org/",
+    "ignore": "WHOLE_DIR",
+    "name": "HTML Purifier",
+    "classes": [
+      "htmlpurifier"
+    ],
+    "type": "classic"
+  },
   "http_class": {
     "homepage": "",
     "ignore": "WHOLE_DIR",
@@ -176,7 +185,8 @@
     "ignore": "WHOLE_DIR",
     "name": "Markdown",
     "classes": [
-      "markdown"
+      "markdown", 
+      "michelf\\markdown"
     ],
     "type": "classic"
   },
