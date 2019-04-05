@@ -62,10 +62,10 @@ class DefaultConfig extends Config {
                                'project'        => 'default',
                                'program'        => '',
                                'repository'     => false,
-                               'thema'          => '',
+                               'thema'          => array(),
                                'analyzers'      => array(), 
-                               'report'         => 'Premier',
-                               'format'         => 'Text',
+                               'report'         => 'Diplomat',
+                               'format'         => array('Text'),
                                'file'           =>  '',
                                'style'          => 'ALL',
  
