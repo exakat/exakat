@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Sql extends Analyzer {
     public function analyze() {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
-        $regex = '(?i)\\\\s*('.implode('|', $sqlKeywords).')';
+        $regex = '^(?i)\\\\s*('.implode('|', $sqlKeywords).') ';
         
         // SQL in a literal 'SELECT col FROM table';
         $this->atomIs(array('String', 'Heredoc', 'Concatenation'))
