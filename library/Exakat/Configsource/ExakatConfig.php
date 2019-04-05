@@ -31,14 +31,14 @@ class ExakatConfig extends Config {
 
     private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
-                               'bitsy'       => 'Bitsy',
+//                               'bitsy'       => 'Bitsy',
 //                               'janusgraph'  => 'Janusgraph',
                                'nogremlin'   => 'NoGremlin',
                                );
 
     private $loaders = array( 'tinkergraph' => 'SplitGraphson',
                               'gsneo4j'     => 'SplitGraphson',
-                              'bitsy'       => 'SplitGraphson',
+//                              'bitsy'       => 'SplitGraphson',
 //                              'janusgraph'  => 'Janusgraph',
                               'nogremlin'   => 'None',
                               );

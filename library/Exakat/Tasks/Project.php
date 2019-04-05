@@ -141,7 +141,7 @@ class Project extends Tasks {
         
         $themesToRun = array($this->config->project_themes);
         $reportToRun = array();
-
+        
         foreach($this->reports as $format) {
             $reportClass = "\Exakat\Reports\\$format";
             if (!class_exists($reportClass)) {

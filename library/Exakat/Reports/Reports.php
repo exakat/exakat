@@ -106,11 +106,7 @@ abstract class Reports {
                 return false;
             }
 
-            if (isset($themas[$this->config->thema])){
-                $list = $themas[$this->config->thema];
-            } else {
-                $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
-            }
+            $list = $this->themes->getThemeAnalyzers($themas);
         } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {
@@ -140,7 +136,7 @@ abstract class Reports {
         if (empty($this->config->thema)) {
             return array();
         } else {
-            return array($this->config->thema);
+            return $this->config->thema;
         }
     }
     

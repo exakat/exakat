@@ -208,13 +208,14 @@ class Dump extends Tasks {
                 }
                 throw new NoSuchThema($thema);
             }
-            display("Processing thema : $thema");
+            display("Processing thema ".(count($thema) > 1 ? 's' : '' )." : ".implode(', ', $thema));
             $missing = $this->processResultsTheme($thema, $counts);
             $this->expandThemes();
             $this->collectHashAnalyzer();
             
             if ($missing === 0) {
-                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES ( NULL, \"{$this->config->thema}\")");
+                $list = '(NULL, "'.implode('"), (NULL, "', $thema).'")';
+                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
                 $themes = array();
             }
 
@@ -380,7 +381,7 @@ SQL;
             $this->sqlite->query($query);
         }
 
-        $this->log->log("$theme : dumped $saved");
+        $this->log->log(implode(', ', $theme)." : dumped $saved");
 
         $error = 0;
         foreach($classes as $class) {

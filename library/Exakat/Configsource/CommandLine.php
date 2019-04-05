@@ -193,11 +193,19 @@ class CommandLine extends Config {
 
                     case 'graphdb' :
                         $this->config['gremlin'] = $args[$id + 1];
-                        
                         break;
 
-                    default : 
-                         $this->config[$config] = $args[$id + 1];
+                    case 'format' : 
+                    case 'thema' : 
+                        if (isset($this->config[$config])) {
+                            $this->config[$config][] = $args[$id + 1];
+                        } else {
+                            $this->config[$config] = array($args[$id + 1]);
+                        }
+                        break;
+
+                    default:
+                        $this->config[$config] = $args[$id + 1];
                 }
 
                 unset($args[$id]);
@@ -237,7 +245,7 @@ class CommandLine extends Config {
             $this->config['project']   = 'onepage';
             $this->config['thema']     = 'OneFile';
             
-            $this->config['format']    = 'OnepageJson';
+            $this->config['format']    = array('OnepageJson');
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));
             $this->config['quiet']     = true;
             $this->config['norefresh'] = true;
