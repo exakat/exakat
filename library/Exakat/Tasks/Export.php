@@ -59,16 +59,16 @@ class Export extends Tasks {
             }
         }
 
-        if ($this->config->format == 'Dot') {
+        if (in_array('Dot', $this->config->format)) {
             $text = $this->display_dot($V, $E, $root);
-        } elseif ($this->config->format  == 'Table') {
+        } elseif (in_array('Table', $this->config->format)) {
             $text = $this->display_table($V, $E, $root);
         } else {
             $text = $this->display_text($V, $E, $root);
         }
 
         if ($this->config->filename) {
-            if ($this->config->format == 'Dot') {
+            if (in_array('Dot', $this->config->format)) {
                 $fp = fopen($this->config->filename.'.dot', 'w+');
             } else {
                 $fp = fopen($this->config->filename, 'w+');
