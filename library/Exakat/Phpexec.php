@@ -253,7 +253,7 @@ PHP;
             $res = shell_exec("{$this->phpexec} -r \"$php\" 2>&1");
             if (strpos($res, 'Error') === false ) {
                 try {
-                    // @ hides potential errors. 
+                    // @ hides potential errors.
                     @eval($res);
                     
                     if ($config['crc'] === $crc) {

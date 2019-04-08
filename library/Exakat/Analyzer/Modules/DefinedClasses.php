@@ -31,7 +31,7 @@ class DefinedClasses extends ClassUsage {
     public function analyze() {
         $classes = $this->config->ext->loadIni('classes.ini', 'classes');
         
-        if (empty($classes)) { 
+        if (empty($classes)) {
             return;
         }
 

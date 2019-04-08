@@ -61,7 +61,7 @@ class Exakat {
                 $res = $remote->send($json);
                 break;
 
-            case 'fetch' : 
+            case 'fetch' :
                 $res = $remote->send($json);
 
                 if (strlen($res) < 1024) {
@@ -90,12 +90,12 @@ class Exakat {
 
                 break;
 
-            case 'status' : 
+            case 'status' :
                 $res = $remote->send($json);
                 print $res;
                 break;
 
-            default : 
+            default :
                 $res = $remote->send($json);
                 print $res;
                 break;

@@ -42,7 +42,7 @@ class Collector extends Loader {
         $this->datastore->addRow('ignoredConstants', $this->constants);
     }
 
-    public function saveFiles($exakatDir, $atoms, $links, $id0) { 
+    public function saveFiles($exakatDir, $atoms, $links, $id0) {
         $isDefine = false;
 
         $lastConst = array();

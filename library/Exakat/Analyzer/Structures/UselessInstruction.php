@@ -145,7 +145,7 @@ class UselessInstruction extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // New in a clone 
+        // New in a clone
         $this->atomIs('New')
              ->inIsIE(array('CODE', 'CLONE'))
              ->atomIs('Clone');

@@ -24,7 +24,7 @@ namespace Exakat\Configsource;
 
 class EnvConfig extends Config {
     public function loadConfig($args) {
-        // Which ENV variable are worth using ? 
+        // Which ENV variable are worth using ?
         
         return self::NOT_LOADED;
         

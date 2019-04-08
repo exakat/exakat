@@ -31,7 +31,7 @@ class DefinedFunctions extends FunctionUsage {
     public function analyze() {
         $functions = $this->config->ext->loadIni('functions.ini', 'functions');
         
-        if (empty($functions)) { 
+        if (empty($functions)) {
             return;
         }
         

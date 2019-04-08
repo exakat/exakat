@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldCentralize extends Analyzer {
     // Looking for calls to function with identical literals
     public function analyze() {
-        $excluded = array('\\\\defined', 
+        $excluded = array('\\\\defined',
                           '\\\\extension_loaded',
                          );
         $excludedList = makeList($excluded);

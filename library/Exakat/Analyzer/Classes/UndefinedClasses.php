@@ -54,7 +54,7 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Methodcalls 
+        // Methodcalls
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->analyzerIsNot($omitted)

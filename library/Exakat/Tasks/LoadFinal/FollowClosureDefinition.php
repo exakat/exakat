@@ -29,7 +29,7 @@ use Exakat\Query\Query;
 class FollowClosureDefinition extends LoadFinal {
     public function run() {
         // local usage
-        $query = $this->newQuery('followClosureDefinition 1'); 
+        $query = $this->newQuery('followClosureDefinition 1');
         $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
               ->outIs('LEFT')
@@ -43,7 +43,7 @@ class FollowClosureDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         // relayed usage
-        $query = $this->newQuery('followClosureDefinition 1'); 
+        $query = $this->newQuery('followClosureDefinition 1');
         $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('ARGUMENT')
               ->savePropertyAs('rank', 'ranked')

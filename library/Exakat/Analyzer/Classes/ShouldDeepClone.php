@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldDeepClone extends Analyzer {
     public function analyze() {
-        // Based on typehinting of functions. 
-        // Other options ? 
+        // Based on typehinting of functions.
+        // Other options ?
         $this->atomIs('Clone')
              ->not(
                 $this->side()

@@ -28,7 +28,7 @@ abstract class Config {
 
     protected $config = array();
     
-    abstract public function loadConfig($args) ; 
+    abstract public function loadConfig($args) ;
 
     public function toArray() {
         return $this->config;

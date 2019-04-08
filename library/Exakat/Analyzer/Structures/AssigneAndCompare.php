@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class AssigneAndCompare extends Analyzer {
     public function analyze() {
-        // if ($a = strpos($b, $c) > 0) 
+        // if ($a = strpos($b, $c) > 0)
         $this->atomIs('Assignation')
              ->hasNoIn('EXPRESSION')
              ->outIs('RIGHT')

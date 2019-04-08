@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class AlternativeConsistenceByFile extends Analyzer {
     public function analyze() {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While', 'Declare');
-        // Do...While has no alternative syntax. 
+        // Do...While has no alternative syntax.
 
         // $this->linksDown is important here.
         $this->atomIs('File')

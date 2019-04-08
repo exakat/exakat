@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldUseAlias extends Analyzer {
     public function analyze() {
-        // use a\b as C; and  a\b::D(); 
+        // use a\b as C; and  a\b::D();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')
              ->tokenIs('T_NS_SEPARATOR')
@@ -42,7 +42,7 @@ class CouldUseAlias extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // use a\b as C; and  a\b\c\d::D(); 
+        // use a\b as C; and  a\b\c\d::D();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')
              ->tokenIs('T_NS_SEPARATOR')
@@ -64,7 +64,7 @@ class CouldUseAlias extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // use a\b as C; and  a\b::D(); 
+        // use a\b as C; and  a\b::D();
         $this->atomIs('Nsname')
              ->hasIn(array('CLASS', 'EXTENDS', 'IMPLEMENTS'))
              ->tokenIs('T_NS_SEPARATOR')
@@ -80,7 +80,7 @@ class CouldUseAlias extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // use function a\b as C; and  a\b(); 
+        // use function a\b as C; and  a\b();
         $this->atomIs('Functioncall')
              ->tokenIs('T_NS_SEPARATOR')
              ->has('fullnspath')
@@ -95,7 +95,7 @@ class CouldUseAlias extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // use const a\b as C; and  a\b; 
+        // use const a\b as C; and  a\b;
         $this->atomIs('Nsname')
              ->tokenIs('T_NS_SEPARATOR')
              ->has('fullnspath')
@@ -110,7 +110,7 @@ class CouldUseAlias extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // case for constants ? for functions ? 
+        // case for constants ? for functions ?
     }
 }
 

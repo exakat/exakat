@@ -42,7 +42,7 @@ abstract class Reports {
                                           'Text', 'Xml', 'Uml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
-                                          'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 
+                                          'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer',
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel', 'Phpcity',
                                           //'DailyTodo',

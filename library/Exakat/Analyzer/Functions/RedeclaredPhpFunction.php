@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RedeclaredPhpFunction extends Analyzer {
     public function analyze() {
-        // function split() {} 
+        // function split() {}
         $extensions = $this->loadIni('php_distribution_53.ini');
         
         $e = array();

@@ -46,7 +46,7 @@ class ThisIsNotAnArray extends Analyzer {
                      ->filter(
                         $this->side()
                              ->goToAllImplements(self::INCLUDE_SELF)
-                             ->extending(array('\simplexmlelement', 
+                             ->extending(array('\simplexmlelement',
                                                '\arrayobject',
                                               ))
                      )

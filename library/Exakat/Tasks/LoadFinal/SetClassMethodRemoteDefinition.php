@@ -28,7 +28,6 @@ use Exakat\Query\Query;
 
 class SetClassMethodRemoteDefinition extends LoadFinal {
     public function run() {
-    /*
         $query = $this->newQuery('SetClassMethodRemoteDefinition calls');
         $query->atomIs(array('Staticmethodcall', 'Methodcall'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -51,8 +50,8 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
-*/
-        
+
+
         $query = $this->newQuery('SetClassMethodRemoteDefinition traits');
         $query->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -77,6 +76,40 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
 
         $count = $countT;// + $countC;
         display("Set $count method remote definitions");
+
+        $query = $this->newQuery('SetClassMethodRemoteDefinition staticmethodcall within class');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->filter(
+                    $query->side()
+                         ->goToClass()
+                         ->GoToAllParents(Analyzer::INCLUDE_SELF)
+                         ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_SENSITIVE)
+                         ->prepareSide(),
+                    array()
+              )
+              ->inIs('DEFINITION')
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countT = $result->toInt();
+
+        $count = $countT;// + $countC;
+        display("Set $count internal definition for method for static calls");
     }
 }
 

@@ -39,7 +39,7 @@ class IsMore extends DSL {
         // It is an integer
         if (is_int($value)) {
             return $value;
-        } 
+        }
         
         // It is a gremlin variable
         if ($this->isVariable($value)) {

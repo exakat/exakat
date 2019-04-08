@@ -34,7 +34,7 @@ class DefinedProperty extends PropertyUsage {
         // convert the properties into a hash
         die('Needs a HASH here');
         
-        if (empty($functions)) { 
+        if (empty($functions)) {
             return;
         }
         

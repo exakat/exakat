@@ -107,7 +107,7 @@ SQL;
                            '{$call->id}')";
     }
 
-    public function addNoDelimiterCall($call) { 
+    public function addNoDelimiterCall($call) {
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }

@@ -35,7 +35,7 @@ class AtomIs extends DSL {
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
-        } elseif ($flags === Analyzer::WITH_CONSTANTS && 
+        } elseif ($flags === Analyzer::WITH_CONSTANTS &&
                  array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ImplicitGlobal extends Analyzer {
     public function analyze() {
-        // no Global $x; 
+        // no Global $x;
         // function foo() { global $x; }
         $this->atomIs('Global')
              ->isGlobalCode()
@@ -50,7 +50,7 @@ class ImplicitGlobal extends Analyzer {
              ->codeIsNot($globalGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
-        // Those are variables in the global space, 
+        // Those are variables in the global space,
         $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
              ->hasNoIn('GLOBAL')
              ->not(

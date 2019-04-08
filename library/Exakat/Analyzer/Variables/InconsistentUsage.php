@@ -39,7 +39,7 @@ GREMLIN
 ->outIs('DEFINITION');
         $this->prepareQuery();
 
-        // Not taking into account absence of default on purpose. 
+        // Not taking into account absence of default on purpose.
         $this->atomIs('Propertydefinition')
              ->raw(<<<GREMLIN
 where(

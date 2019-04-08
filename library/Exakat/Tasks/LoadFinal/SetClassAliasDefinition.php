@@ -44,7 +44,7 @@ class SetClassAliasDefinition extends LoadFinal {
               ->property('fullnspath', 'fnp')
               ->addEFrom('DEFINITION', 'method')
               ->returnCount();
-        $query->prepareRawQuery();   
+        $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count = $result->toInt();
 

@@ -38,7 +38,7 @@ class DSLFactory {
     public     $availableFunctioncalls = array();
     private    $availableVariables     = array(); // This one is per query
     protected  $availableLabels        = array('first'); // This one is per query
-    protected  $ignoredcit             = array(); 
+    protected  $ignoredcit             = array();
     protected  $ignoredfunctions       = array();
     protected  $ignoredconstants       = array();
     protected  $dictCode               = null;
@@ -84,12 +84,12 @@ class DSLFactory {
             throw new UnknownDsl($name);
         }
         
-        return new $className($this, 
-                              $this->dictCode, 
-                              $this->availableAtoms, 
-                              $this->availableLinks, 
-                              $this->availableFunctioncalls, 
-                              $this->availableVariables, 
+        return new $className($this,
+                              $this->dictCode,
+                              $this->availableAtoms,
+                              $this->availableLinks,
+                              $this->availableFunctioncalls,
+                              $this->availableVariables,
                               $this->availableLabels,
                               $this->ignoredcit,
                               $this->ignoredfunctions,
