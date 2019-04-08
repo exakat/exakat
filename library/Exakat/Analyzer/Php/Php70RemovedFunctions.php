@@ -24,9 +24,9 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\FunctionUsage;
+use Exakat\Analyzer\Common\PhpFunctionUsage;
 
-class Php70RemovedFunctions extends FunctionUsage {
+class Php70RemovedFunctions extends PhpFunctionUsage {
     public function analyze() {
         $this->functions = array('ereg',
                                  'ereg_replace',
@@ -51,7 +51,8 @@ class Php70RemovedFunctions extends FunctionUsage {
                                  'imagepsfreefont',
                                  'imagepsloadfont',
                                  'imagepsslantfont',
-                                 'imagepstext' );
+                                 'imagepstext',
+                                  );
         parent::analyze();
     }
 }

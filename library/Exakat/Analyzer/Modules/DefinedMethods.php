@@ -34,7 +34,7 @@ class DefinedMethods extends MethodUsage {
         // convert the properties into a hash
         die('Needs a HASH here');
         
-        if (empty($classConstants)) { 
+        if (empty($classConstants)) {
             return;
         }
         

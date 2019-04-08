@@ -31,7 +31,7 @@ class DefinedInterfaces extends InterfaceUsage {
     public function analyze() {
         $interfaces = $this->config->ext->loadIni('interfaces.ini', 'interfaces');
 
-        if (empty($interfaces)) { 
+        if (empty($interfaces)) {
             return;
         }
         

@@ -126,7 +126,7 @@ class CommandLine extends Config {
             return false;
         }
 
-        // TODO : move this to VCS 
+        // TODO : move this to VCS
         $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', );
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
@@ -148,14 +148,14 @@ class CommandLine extends Config {
                     // We just ignore it
                     unset($args[$id]);
                     continue;
-                } 
+                }
 
                 if (is_string($args[$id + 1]) && isset($this->valueOptions[$args[$id + 1]])) {
                     // in case this option value is actually the next option (exakat -p -T)
                     // We just ignore it
                     unset($args[$id]);
                     continue;
-                } 
+                }
 
                 // Normal case is here
                 switch ($config) {
@@ -163,7 +163,7 @@ class CommandLine extends Config {
                         if (!isset($this->config['program'])) {
                             $this->config['program'] = $args[$id + 1];
                         } elseif (is_string($this->config['program'])) {
-                            $this->config['program'] = array($this->config['program'], 
+                            $this->config['program'] = array($this->config['program'],
                                                              $args[$id + 1],
                                                             );
                         } else {
@@ -174,7 +174,7 @@ class CommandLine extends Config {
                     case 'configuration' :
                         if (empty($this->config['configuration'])) {
                             $this->config['configuration'] = array();
-                        } 
+                        }
                         if (strpos($args[$id + 1], '=') === false) {
                             $name = trim($args[$id + 1]);
                             $value = '';
@@ -193,11 +193,19 @@ class CommandLine extends Config {
 
                     case 'graphdb' :
                         $this->config['gremlin'] = $args[$id + 1];
-                        
                         break;
 
-                    default : 
-                         $this->config[$config] = $args[$id + 1];
+                    case 'format' :
+                    case 'thema' :
+                        if (isset($this->config[$config])) {
+                            $this->config[$config][] = $args[$id + 1];
+                        } else {
+                            $this->config[$config] = array($args[$id + 1]);
+                        }
+                        break;
+
+                    default:
+                        $this->config[$config] = $args[$id + 1];
                 }
 
                 unset($args[$id]);
@@ -231,13 +239,13 @@ class CommandLine extends Config {
         }
 
         // Special case for onepage command. It will only work on 'onepage' project
-        if (isset($this->config['command']) && 
+        if (isset($this->config['command']) &&
             $this->config['command'] == 'onepage') {
 
             $this->config['project']   = 'onepage';
             $this->config['thema']     = 'OneFile';
             
-            $this->config['format']    = 'OnepageJson';
+            $this->config['format']    = array('OnepageJson');
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));
             $this->config['quiet']     = true;
             $this->config['norefresh'] = true;

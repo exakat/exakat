@@ -31,7 +31,7 @@ class Php80RemovedFunctions extends FunctionUsage {
     
     public function analyze() {
         $this->functions = array('image2wbmp',
-                                 'png2wbmp', 
+                                 'png2wbmp',
                                  'jpeg2wbmp',
                                  'ldap_sort',
                                  );

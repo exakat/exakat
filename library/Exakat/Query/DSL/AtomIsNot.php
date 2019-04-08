@@ -37,7 +37,7 @@ class AtomIsNot extends DSL {
             return new Command(Query::NO_QUERY);
         }
 
-        if ($flags === Analyzer::WITH_CONSTANTS && 
+        if ($flags === Analyzer::WITH_CONSTANTS &&
                  array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported

@@ -90,10 +90,10 @@ class Analyze extends Tasks {
                 throw new NoSuchThema($thema, $this->themes->getSuggestionThema($thema));
             }
 
-            $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
+            $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );
 
-            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', $this->config->thema));
-            $this->log = new Log('analyze.'.strtolower(str_replace(' ', '_', $this->config->thema)),
+            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', implode('-', $this->config->thema)));
+            $this->log = new Log('analyze.'.strtolower(str_replace(' ', '_', implode('-', $this->config->thema))),
                                  "{$this->config->projects_root}/projects/{$this->config->project}");
         } else {
             throw new NeedsAnalyzerThema();

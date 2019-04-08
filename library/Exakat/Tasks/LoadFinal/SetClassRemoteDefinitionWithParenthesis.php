@@ -41,7 +41,7 @@ class SetClassRemoteDefinitionWithParenthesis extends LoadFinal {
               ->outIs('CODE')
               ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
-              ->inIs('DEFINITION')  // No check on atoms : 
+              ->inIs('DEFINITION')  // No check on atoms :
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
@@ -67,7 +67,7 @@ class SetClassRemoteDefinitionWithParenthesis extends LoadFinal {
               ->outIs('CODE')
               ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
-              ->inIs('DEFINITION')  // No check on atoms : 
+              ->inIs('DEFINITION')  // No check on atoms :
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')

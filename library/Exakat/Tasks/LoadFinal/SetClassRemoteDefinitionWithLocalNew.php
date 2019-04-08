@@ -37,7 +37,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('OBJECT')
-              ->inIs('DEFINITION')  // No check on atoms : 
+              ->inIs('DEFINITION')  // No check on atoms :
               ->atomIs('Variabledefinition', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')

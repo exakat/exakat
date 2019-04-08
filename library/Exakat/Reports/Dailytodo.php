@@ -42,7 +42,7 @@ class Dailytodo extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $thema = $this->config->thema ?? 'Analyzer';
+        $thema = $this->config->thema ?? array('Analyzer');
         $list = $this->themes->getThemeAnalyzers($thema);
         $list = makeList($list);
 

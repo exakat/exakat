@@ -53,11 +53,6 @@ class Report extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $reportClass = Reports::getReportClass($this->config->format);
-        if (!class_exists($reportClass)) {
-            throw new NoSuchFormat($this->config->format, Reports::$FORMATS);
-        }
-
         if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite")) {
             throw new ProjectNotInited($this->config->project);
         }
@@ -67,28 +62,40 @@ class Report extends Tasks {
             throw new NoDump($this->config->project);
         }
 
-        Analyzer::$datastore = $this->datastore;
-        // errors, warnings, fixable and filename
-        // line number => columnnumber => type, source, severity, fixable, message
-
         $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
-
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
-
+    
         if (empty($row) || ($row[0] === 0)) {
             throw new NoDumpYet($this->config->project);
         }
 
+        Analyzer::$datastore = $this->datastore;
+
+        foreach($this->config->format as $format) {
+            $reportClass = Reports::getReportClass($format);
+            if (!class_exists($reportClass)) {
+                display("No such format as $format. Omitting.");
+                continue;
+            }
+
+            $report = new $reportClass($this->config);
+
+            $this->format($report, $format);
+        }
+    }
+    
+    private function format(Reports $report, $format) {
         $begin = microtime(true);
 
-        $report = new $reportClass($this->config);
-        if (empty($this->config->file)) {
-            display("Building report for project {$this->config->project} in '".$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '')."', with format {$this->config->format}\n");
+        if (empty($this->config->file) || count($this->config->format) > 1) {
+            $file = $report::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '');
+            display("Building report for project {$this->config->project} in '".$file."', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
-            display("Building report for project {$this->config->project} to stdout, with format {$this->config->format}\n");
+            $file = 'STDOUT';
+            display("Building report for project {$this->config->project} to stdout, with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", Reports::STDOUT);
         } else {
             // to files + extension
@@ -96,15 +103,15 @@ class Report extends Tasks {
             if (in_array($filename, array('.', '..'))) {
                 $filename = $reportClass::FILE_FILENAME;
             }
-            display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
+            display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '')."', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
-        display('Reported '.$report->getCount().' messages in '.$this->config->format);
+        display('Reported '.$report->getCount()." messages in $format");
 
         $end = microtime(true);
         display('Processing time : '.number_format($end - $begin, 2).'s');
 
-        $this->datastore->addRow('hash', array($this->config->format => $this->config->file));
+        $this->datastore->addRow('hash', array($format => $this->config->file));
         display('Done');
     }
 }

@@ -174,7 +174,7 @@ GREMLIN
         display('Create '.($result->toInt()).' link between new class and definition');
 
         // Create link between __clone and clone
-        // parenthesis, typehint, local new, 
+        // parenthesis, typehint, local new,
         $query = $this->newQuery('MakeClassMethodDefinition clone');
         $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CLONE')

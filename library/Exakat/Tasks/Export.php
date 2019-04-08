@@ -59,16 +59,16 @@ class Export extends Tasks {
             }
         }
 
-        if ($this->config->format == 'Dot') {
+        if (in_array('Dot', $this->config->format)) {
             $text = $this->display_dot($V, $E, $root);
-        } elseif ($this->config->format  == 'Table') {
+        } elseif (in_array('Table', $this->config->format)) {
             $text = $this->display_table($V, $E, $root);
         } else {
             $text = $this->display_text($V, $E, $root);
         }
 
         if ($this->config->filename) {
-            if ($this->config->format == 'Dot') {
+            if (in_array('Dot', $this->config->format)) {
                 $fp = fopen($this->config->filename.'.dot', 'w+');
             } else {
                 $fp = fopen($this->config->filename, 'w+');
@@ -121,37 +121,37 @@ class Export extends Tasks {
         //        #e6194B, #3cb44b, #ffe119, #4363d8, #f58231, #911eb4, #42d4f4, #f032e6, #bfef45, #fabebe, #469990, #e6beff, #9A6324, #fffac8, #800000, #aaffc3, #808000, #ffd8b1, #000075, #a9a9a9, #ffffff, #000000
 
             switch($v['label']) {
-                case 'Variable' : 
-                case 'This' : 
-                case 'Variableobject' : 
-                case 'Variablearray' : 
+                case 'Variable' :
+                case 'This' :
+                case 'Variableobject' :
+                case 'Variablearray' :
                     $R .= ' style="filled" fillcolor="#e6194B"';
                     break;
 
-                case 'Functioncall' : 
-                case 'Methodcall' : 
-                case 'Staticmethodcall' : 
+                case 'Functioncall' :
+                case 'Methodcall' :
+                case 'Staticmethodcall' :
                     $R .= ' style="filled" fillcolor="#3cb44b"';
                     break;
 
-                case 'Class' : 
+                case 'Class' :
                     $R .= ' style="filled" fillcolor="#ffe119"';
                     break;
 
-                case 'Interface' : 
+                case 'Interface' :
                     $R .= ' style="filled" fillcolor="#4363d8"';
                     break;
 
-                case 'Trait' : 
+                case 'Trait' :
                     $R .= ' style="filled" fillcolor="#911eb4"';
                     break;
 
-                case 'Method' : 
-                case 'Magicmethod' : 
+                case 'Method' :
+                case 'Magicmethod' :
                     $R .= ' style="filled" fillcolor="#42d4f4"';
                     break;
 
-                default: 
+                default:
                     // nothing, really
             }
 

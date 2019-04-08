@@ -26,11 +26,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class RedeclaredPhpFunction extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/Functionnames');
-    }
-    
     public function analyze() {
+        // function split() {}
         $extensions = $this->loadIni('php_distribution_53.ini');
         
         $e = array();
@@ -39,12 +36,12 @@ class RedeclaredPhpFunction extends Analyzer {
                 $e[] = $iniFile;
             }
         }
-        $extensionFunctions = call_user_func_array('array_merge', $e);
+        $extensionFunctions = array_merge(...$e);
+        $extensionFunctions = makefullnspath($extensionFunctions);
         
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIs('Functions/Functionnames')
-             ->codeIs($extensionFunctions, true);
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
+             ->fullnspathIs($extensionFunctions);
         $this->prepareQuery();
     }
 }

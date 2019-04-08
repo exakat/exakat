@@ -108,8 +108,8 @@ class Datastore {
 
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                if ($row['name'] === 'id') { 
-                    continue; 
+                if ($row['name'] === 'id') {
+                    continue;
                 }
                 $cols[] = $row['name'];
             }
@@ -233,7 +233,7 @@ class Datastore {
 
         if (!$res) {
             return null;
-        } 
+        }
 
         $row = $res->fetchArray(\SQLITE3_ASSOC);
         return $row['value'];
@@ -246,7 +246,7 @@ class Datastore {
 
         if (!$res) {
             return array();
-        } 
+        }
         
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
@@ -305,8 +305,8 @@ class Datastore {
     private function checkTable($table) {
         $res = $this->sqliteWrite->querySingle("SELECT count(*) FROM sqlite_master WHERE name=\"$table\"");
 
-        if ($res === 1) { 
-            return true; 
+        if ($res === 1) {
+            return true;
         }
 
         switch($table) {

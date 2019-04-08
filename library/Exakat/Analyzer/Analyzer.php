@@ -189,10 +189,10 @@ abstract class Analyzer {
             self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
         
-        $this->query = new Query((count($this->queries) + 1), 
-                                  $this->config->project, 
-                                  $this->analyzerQuoted, 
-                                  $this->config->executable, 
+        $this->query = new Query((count($this->queries) + 1),
+                                  $this->config->project,
+                                  $this->analyzerQuoted,
+                                  $this->config->executable,
                                   self::$datastore);
         
         self::$methods = new Methods($this->config);

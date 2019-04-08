@@ -31,14 +31,14 @@ class ExakatConfig extends Config {
 
     private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
-                               'bitsy'       => 'Bitsy',
+//                               'bitsy'       => 'Bitsy',
 //                               'janusgraph'  => 'Janusgraph',
                                'nogremlin'   => 'NoGremlin',
                                );
 
     private $loaders = array( 'tinkergraph' => 'SplitGraphson',
                               'gsneo4j'     => 'SplitGraphson',
-                              'bitsy'       => 'SplitGraphson',
+//                              'bitsy'       => 'SplitGraphson',
 //                              'janusgraph'  => 'Janusgraph',
                               'nogremlin'   => 'None',
                               );
@@ -69,13 +69,13 @@ class ExakatConfig extends Config {
                 // overwrite existing with the new, keep the default values
                 $ini = @parse_ini_file($configFile);
                 if (is_array($ini)) {
-                    $inis = $ini + $inis[0]; 
+                    $inis = $ini + $inis[0];
                     break 1;
                 } else {
                     $error = error_get_last();
                     print "Invalid config file '$configFile' : $error[message]Ignoring '$configFile'\n\n";
                 }
-            } 
+            }
         }
 
         if ($inis === null) {
@@ -85,7 +85,7 @@ class ExakatConfig extends Config {
         $this->config = $inis;
 
         // Validation
-        if (isset($this->config['graphdb']) && 
+        if (isset($this->config['graphdb']) &&
             in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
             $graphdb = $this->config['graphdb'];
         } else {

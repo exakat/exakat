@@ -37,7 +37,7 @@ class SetParentDefinition extends LoadFinal {
               ->inIs('DEFINITION')
               ->addETo('DEFINITION', 'parent')
               ->returnCount();
-        $query->prepareRawQuery();   
+        $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
 
@@ -50,7 +50,7 @@ class SetParentDefinition extends LoadFinal {
               ->inIs('DEFINITION')
               ->addETo('DEFINITION', 'parent')
               ->returnCount();
-        $query->prepareRawQuery();   
+        $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count2 = $result->toInt();
         

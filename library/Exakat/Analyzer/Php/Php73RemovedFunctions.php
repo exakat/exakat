@@ -24,9 +24,9 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\FunctionUsage;
+use Exakat\Analyzer\Common\PhpFunctionUsage;
 
-class Php73RemovedFunctions extends FunctionUsage {
+class Php73RemovedFunctions extends PhpFunctionUsage {
     public function analyze() {
         $this->functions = array('image2wbmp',
                                 );

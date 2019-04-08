@@ -53,7 +53,7 @@ class ObjectReferences extends Analyzer {
                              ->outIs('NAME')
                              ->outIs('DEFINITION')
                              ->inIs('LEFT')
-                             ->atomIs('Assignation') // any assignation will break the reference 
+                             ->atomIs('Assignation') // any assignation will break the reference
                 )
              )
              ->inIs('ARGUMENT')

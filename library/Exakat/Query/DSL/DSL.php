@@ -98,15 +98,15 @@ abstract class DSL {
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
 
-    public function __construct($dslfactory, 
-                                $dictCode, 
-                                $availableAtoms, 
-                                $availableLinks, 
-                                $availableFunctioncalls, 
-                                &$availableVariables, 
-                                &$availableLabels, 
-                                $ignoredcit, 
-                                $ignoredfunctions, 
+    public function __construct($dslfactory,
+                                $dictCode,
+                                $availableAtoms,
+                                $availableLinks,
+                                $availableFunctioncalls,
+                                &$availableVariables,
+                                &$availableLabels,
+                                $ignoredcit,
+                                $ignoredfunctions,
                                 $ignoredconstants) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = $dictCode;

@@ -68,8 +68,8 @@ class Diplomat extends Ambassador {
     public function dependsOnAnalysis() {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
-                     'Top10', 'Preferences', 
-                     'Appinfo', 
+                     'Top10', 'Preferences',
+                     'Appinfo',
                      );
     }
 

@@ -33,17 +33,17 @@ class Project {
 
     public function validate() {
         if (strpos($this->project, DIRECTORY_SEPARATOR) !== false) {
-            $this->error = 'Project name can\'t use '.DIRECTORY_SEPARATOR; 
+            $this->error = 'Project name can\'t use '.DIRECTORY_SEPARATOR;
             return false;
         }
 
         if (in_array(mb_strtolower($this->project), array('onepage', '.', '..', '...'))) {
-            $this->error = 'Project name can\'t use reserved keyword '.$this->project; 
+            $this->error = 'Project name can\'t use reserved keyword '.$this->project;
             return false;
         }
 
         if (preg_match_all('/[^\w_\.\-]/u', $this->project, $r)) {
-            $this->error = 'Project name can\'t use those chars : "'.implode('", "', $r[0]).'"'; 
+            $this->error = 'Project name can\'t use those chars : "'.implode('", "', $r[0]).'"';
             return false;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-function gmp_init ($number, $base = 0) {}
+function split ($number, $base = 0) {}
 
 function display() {}
 

@@ -35,14 +35,14 @@ class ProjectConfig extends Config {
                               'project_description' => '',
                               'project_branch'      => '',
                               'project_tag'         => '',
-                              'file_extensions'     => array('php', 
-                                                             'php3', 
-                                                             'inc', 
-                                                             'tpl', 
-                                                             'phtml', 
-                                                             'tmpl', 
-                                                             'phps', 
-                                                             'ctp', 
+                              'file_extensions'     => array('php',
+                                                             'php3',
+                                                             'inc',
+                                                             'tpl',
+                                                             'phtml',
+                                                             'tmpl',
+                                                             'phps',
+                                                             'ctp',
                                                              'module',
                                                              ),
                               'include_dirs'        => array('/',
@@ -117,7 +117,7 @@ class ProjectConfig extends Config {
         }
         
         // Converting the string format to arrays when necessary
-        if (isset($this->config['other_php_versions']) && 
+        if (isset($this->config['other_php_versions']) &&
             is_string($this->config['other_php_versions'])) {
             $this->config['other_php_versions'] = explode(',', $this->config['other_php_versions']);
             foreach($this->config['other_php_versions'] as &$version) {
@@ -126,7 +126,7 @@ class ProjectConfig extends Config {
             unset($version);
         }
 
-        if (isset($this->config['file_extensions']) && 
+        if (isset($this->config['file_extensions']) &&
             is_string($this->config['file_extensions'])) {
             $this->config['file_extensions'] = explode(',', $this->config['file_extensions']);
             foreach($this->config['file_extensions'] as &$ext) {
@@ -142,7 +142,7 @@ class ProjectConfig extends Config {
         }
         // else ALL is good
 
-        if (isset($this->config['project_reports']) && 
+        if (isset($this->config['project_reports']) &&
             is_string($this->config['project_reports'])) {
             $this->config['project_reports'] = explode(',', $this->config['project_reports']);
             foreach($this->config['project_reports'] as &$ext) {
@@ -151,7 +151,7 @@ class ProjectConfig extends Config {
             unset($ext);
         }
 
-        if (isset($this->config['project_themes']) && 
+        if (isset($this->config['project_themes']) &&
             is_string($this->config['project_themes'])) {
             $this->config['project_themes'] = explode(',', $this->config['project_themes']);
             foreach($this->config['project_themes'] as &$ext) {

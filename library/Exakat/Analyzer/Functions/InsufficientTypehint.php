@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class InsufficientTypehint extends Analyzer {
     public function analyze() {
-        // function foo(i $a) { $i->a(); } // but interface i has no function a() 
+        // function foo(i $a) { $i->a(); } // but interface i has no function a()
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->_as('arg')

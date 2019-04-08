@@ -2072,7 +2072,7 @@ JAVASCRIPTCODE;
         $oldIssues = $this->getIssuesFacetedDb($theme, $sqlite);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
-            // Skip wrong lines, but why ? 
+            // Skip wrong lines, but why ?
             if (!($i instanceof \stdClass)) { continue; }
             if (isset($linediff[$i->file]) && $i->line > -1) {
                 foreach($linediff[$i->file] as $line => $diff) {
@@ -4611,7 +4611,7 @@ SQL;
         $table = array();
         while(['line' => $line, 'file' => $file, 'count' => $count, 'list' => $list] = $res->fetchArray(\SQLITE3_ASSOC)) {
             $listHtml = array();
-            foreach(explode(',', $list) as $l) { 
+            foreach(explode(',', $list) as $l) {
                 $listHtml[] = '<li>'.$this->makeDocLink($l).'</li>';
             }
             $listHtml = '<ul>'.implode('', $listHtml).'</u>';

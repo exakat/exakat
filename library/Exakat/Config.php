@@ -137,11 +137,11 @@ class Config {
         }
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
-        $this->options = array_merge($this->defaultConfig->toArray(), 
-                                     $this->exakatConfig->toArray(), 
+        $this->options = array_merge($this->defaultConfig->toArray(),
+                                     $this->exakatConfig->toArray(),
                                      $this->envConfig->toArray(),
-                                     $this->projectConfig->toArray(), 
-                                     $this->dotExakatConfig->toArray(), 
+                                     $this->projectConfig->toArray(),
+                                     $this->dotExakatConfig->toArray(),
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;

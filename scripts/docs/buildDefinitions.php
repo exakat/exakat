@@ -1096,7 +1096,9 @@ GLOSSARY;
             if (isset($docs['home_page'])) {
                 $doc .= "\n";
                 $doc .= "* **Home page** : `$docs[home_page] <$docs[home_page]>`_\n";
-                $doc .= "* **Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
+                if (!empty($docs['extension_page'])) {
+                    $doc .= "* **Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
+                }
                 $doc .= "\n";
             }
         } else {
@@ -1105,7 +1107,7 @@ GLOSSARY;
 
         $analyzers = parse_ini_file("../Extensions/{$ext->name}/Analyzer/analyzers.ini");
         $doc .= "{$ext->name} analysis".PHP_EOL;
-        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+        $doc .= str_repeat('_', 50).PHP_EOL.PHP_EOL;
         
         $doc .= 'This extension includes '.count($analyzers[$ext->name]).' analyzers.'.PHP_EOL.PHP_EOL;
         $list = array();
@@ -1119,7 +1121,7 @@ GLOSSARY;
         
         // Include other themas than All and $ext->name
         $doc .= "{$ext->name} rulesets".PHP_EOL;
-        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+        $doc .= str_repeat('_', 50).PHP_EOL.PHP_EOL;
 
         $rulesets = parse_ini_file("../Extensions/$ext->name/Analyzer/analyzers.ini", true);
         unset($rulesets['All']);
@@ -1141,7 +1143,7 @@ GLOSSARY;
         $reports = glob("../Extensions/$ext->name/Reports/*.php");
 
         $doc .= "{$ext->name} reports".PHP_EOL;
-        $doc .= str_repeat('-', 50).PHP_EOL.PHP_EOL;
+        $doc .= str_repeat('_', 50).PHP_EOL.PHP_EOL;
 
         if (empty($reports)) {
             $doc .= 'This extension includes no specific report. Use generic reports, like Text to access the results.'.PHP_EOL;

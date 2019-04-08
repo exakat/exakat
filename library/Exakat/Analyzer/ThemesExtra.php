@@ -44,7 +44,11 @@ class ThemesExtra {
             foreach($theme as $t) {
                 $return[] = $this->extra_themes[$t] ?? array();
             }
-            return array_unique(array_merge(...$return));
+            if (empty($return)) {
+                return array();
+            } else {
+                return array_unique(array_merge(...$return));
+            }
         } elseif ($theme === 'Random') {
             $shorList = array_keys($this->extra_themes);
             shuffle($shorList);

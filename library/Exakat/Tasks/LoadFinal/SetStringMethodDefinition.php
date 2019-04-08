@@ -56,7 +56,7 @@ GREMLIN
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count = $result->toInt(); 
+        $count = $result->toInt();
 
         display("Set $count strings to Definition");
     }

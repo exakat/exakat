@@ -44,7 +44,7 @@ class IsNotIgnored extends DSL {
             case IsNotIgnored::IGNORED_FUNCTIONS :
                 $fullnspath = $this->ignoredfunctions;
                 break;
-            default : 
+            default :
                 throw new \Exception('Unknown type of ignored structure');
         }
 

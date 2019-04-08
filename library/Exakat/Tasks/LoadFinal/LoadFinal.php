@@ -71,6 +71,8 @@ class LoadFinal {
 
         $this->init();
 
+        $this->removeInterfaceToClassExtends();
+        $this->log('removeInterfaceToClassExtends');
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
         $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
@@ -199,6 +201,24 @@ class LoadFinal {
 
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
+    }
+
+    private function removeInterfaceToClassExtends() {
+        display("fixing Fullnspath for Functions");
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Interface")
+     .out("EXTENDS")
+     .inE()
+     .hasLabel("DEFINITION")
+     .where(__.outV().hasLabel("Class", "Trait", "Classanonymous"))
+     .drop()
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
+
+        display($result->toInt().' fixed interface to class link');
+        $this->log->log(__METHOD__);
     }
 
     // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded

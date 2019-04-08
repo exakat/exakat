@@ -7,7 +7,7 @@ $expected     = array('parent::$inTraitP',
 $expected_not = array('parent::$notInTraitP',
                       'parent::notInTrait(parent::$notInTraitP)',
                       'parent::inPrivateTrait(parent::$inPrivateTraitP)',
-                      'parent::$inPrivateTraitP'
+                      'parent::$inPrivateTraitP',
                      );
 
 ?>

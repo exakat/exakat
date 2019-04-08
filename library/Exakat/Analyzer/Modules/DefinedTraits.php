@@ -31,7 +31,7 @@ class DefinedTraits extends TraitUsage {
     public function analyze() {
         $traits = $this->config->ext->loadIni('traits.ini', 'traits');
         
-        if (empty($traits)) { 
+        if (empty($traits)) {
             return;
         }
         
