@@ -2621,6 +2621,7 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
+            $functioncall->absolute   = $name->absolute;
 
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
