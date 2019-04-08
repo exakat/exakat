@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('static::$pdefinedinStatic', 
-                      'static::$pundefined', 
-                      'static::$pdefinedInParentParent', 
-                      'static::$pdefinedInParent', 
+$expected     = array('static::$pdefinedinStatic',
+                      'static::$pundefined',
+                      'static::$pdefinedInParentParent',
+                      'static::$pdefinedInParent',
                       'static::undefined( )',
                      );
 

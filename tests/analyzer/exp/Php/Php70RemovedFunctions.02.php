@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('ereg(\'a\', \'b\')'
+$expected     = array('ereg(\'a\', \'b\')',
                      );
 
-$expected_not = array('split(\'a\', \'b\')'
+$expected_not = array('split(\'a\', \'b\')',
                      );
 
 ?>

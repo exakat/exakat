@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$i', 
-                      '$g1', 
+$expected     = array('$i',
+                      '$g1',
                       '$g',
                      );
 
