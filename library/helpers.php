@@ -440,7 +440,7 @@ function trimOnce($string, $trim = '\'"'){
         return $string;
     }
 
-    if ($string[0] === $string[$length -1] && 
+    if ($string[0] === $string[$length -1] &&
         strpos($trim, $string[0]) !== false &&
         strpos($trim, $string[$length -1]) !== false
          ) {
@@ -499,7 +499,7 @@ function rsttable2html($raw) {
                 $td = array_map('trim', $td);
                 
                 $html[] = "<tr><td>".implode("</td><td>", $td)."</td></tr>";
-            } 
+            }
         } else {
             $html []= $line;
         }
@@ -644,7 +644,7 @@ function sort_dependencies($array, $level = 0) {
     $return = array();
     $next = array();
     
-    foreach($array as $a => $b) { 
+    foreach($array as $a => $b) {
         if (empty($b)) {
             $return[] = $a;
         } else {
@@ -671,7 +671,7 @@ function sort_dependencies($array, $level = 0) {
 }
 
 function filter_analyzer($analyzer) {
-    return preg_match('#^\w+/\w+$#', $analyzer); 
+    return preg_match('#^\w+/\w+$#', $analyzer);
 }
 
 function array_sub_sort(&$list) {
