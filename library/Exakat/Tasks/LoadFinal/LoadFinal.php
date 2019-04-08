@@ -211,7 +211,7 @@ g.V().hasLabel("Interface")
      .out("EXTENDS")
      .inE()
      .hasLabel("DEFINITION")
-     .where(__.outV().hasLabel("Class"))
+     .where(__.outV().hasLabel("Class", "Trait", "Classanonymous"))
      .drop()
      .count();
 GREMLIN;
