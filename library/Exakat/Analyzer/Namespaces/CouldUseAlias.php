@@ -26,22 +26,91 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldUseAlias extends Analyzer {
     public function analyze() {
-        // use a\b as C;
-        // a\b::D(); and also a\b\d\e
-        $this->atomIs(array('Nsname', 'Newcall'))
-             ->hasNoIn(array('USE', 'NAME', 'METHOD', 'VARIABLE'))
+        // use a\b as C; and  a\b::D(); 
+        $this->atomIs('Newcall')
+             ->hasNoIn('NAME')
              ->tokenIs('T_NS_SEPARATOR')
              ->codeIsNot('[')
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
-             ->outIs('BLOCK')
+             ->outIs(array('BLOCK', 'CODE'))
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
-             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") ).getCount() > 0 }')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
+
+        // use a\b as C; and  a\b\c\d::D(); 
+        $this->atomIs('Newcall')
+             ->hasNoIn('NAME')
+             ->tokenIs('T_NS_SEPARATOR')
+             ->codeIsNot('[')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->savePropertyAs('fullcode', 'written')
+             ->goToNamespace()
+             ->outIs(array('BLOCK', 'CODE'))
+             ->outIs('EXPRESSION')
+             ->atomIs('Usenamespace')
+             ->not(
+                $this->side()
+                     ->outIs('USE')
+                     ->raw('filter{ (written.tokenize("\\\\")[0].toLowerCase() == it.get().value("alias"))}')
+              )
+             ->outIs('USE')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "..").getCount() > 0 }')
+             ->back('first');
+        $this->prepareQuery();
+
+        // use a\b as C; and  a\b::D(); 
+        $this->atomIs('Nsname')
+             ->hasIn(array('CLASS', 'EXTENDS', 'IMPLEMENTS'))
+             ->tokenIs('T_NS_SEPARATOR')
+             ->codeIsNot('[')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToNamespace()
+             ->outIs(array('BLOCK', 'CODE'))
+             ->outIs('EXPRESSION')
+             ->atomIs('Usenamespace')
+             ->outIs('USE')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
+             ->back('first');
+        $this->prepareQuery();
+
+        // use function a\b as C; and  a\b(); 
+        $this->atomIs('Functioncall')
+             ->tokenIs('T_NS_SEPARATOR')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToNamespace()
+             ->outIs(array('BLOCK', 'CODE'))
+             ->outIs('EXPRESSION')
+             ->atomIs('Usenamespace')
+             ->hasOut('FUNCTION')
+             ->outIs('USE')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
+             ->back('first');
+        $this->prepareQuery();
+
+        // use const a\b as C; and  a\b; 
+        $this->atomIs('Nsname')
+             ->tokenIs('T_NS_SEPARATOR')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToNamespace()
+             ->outIs(array('BLOCK', 'CODE'))
+             ->outIs('EXPRESSION')
+             ->atomIs('Usenamespace')
+             ->hasOut('CONST')
+             ->outIs('USE')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
+             ->back('first');
+        $this->prepareQuery();
+
+        // case for constants ? for functions ? 
     }
 }
 
