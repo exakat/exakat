@@ -73,7 +73,7 @@ class AutoloadExt {
         }
         
         // Add a list of check on the phars
-        // Could we autoload everything ? 
+        // Could we autoload everything ?
     }
 
     public function autoload($name) {
@@ -105,10 +105,10 @@ class AutoloadExt {
             
             if (!file_exists($fullPath)) {
                 $return[] = array();
-                continue; 
+                continue;
             }
             $ini = parse_ini_file($fullPath);
-            unset($ini['All']); // And other pre-defined themes ? 
+            unset($ini['All']); // And other pre-defined themes ?
             
             $return[$name] = array_keys($ini);
         }
@@ -124,7 +124,7 @@ class AutoloadExt {
             
             if (!file_exists($fullPath)) {
                 $return[] = array();
-                continue; 
+                continue;
             }
             $ini = parse_ini_file($fullPath);
             
@@ -143,7 +143,7 @@ class AutoloadExt {
             if (!file_exists($fullPath)) {
                 display("Missing analyzers.ini in $name\n");
                 $return[] = array();
-                continue; 
+                continue;
             }
             $ini = parse_ini_file($fullPath);
             

@@ -37,7 +37,6 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs(array('CLASS', 'OBJECT'))
-              ->atomIsNot(array('Parent', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
@@ -87,6 +86,7 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
               ->savePropertyAs('lccode', 'name')
               ->back('first')
               ->outIs('CLASS')
+              ->has('fullnspath')
               ->savePropertyAs('fullnspath', 'fnp')
               ->filter(
                     $query->side()
