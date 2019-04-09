@@ -217,7 +217,49 @@ g.V().hasLabel("Interface")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' fixed interface to class link');
+        display($result->toInt().' removed interface extends link');
+        $this->log->log(__METHOD__);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Class")
+     .out("EXTENDS")
+     .inE()
+     .hasLabel("DEFINITION")
+     .where(__.outV().hasLabel("Interface", "Trait"))
+     .drop()
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
+
+        display($result->toInt().' removed class extends link');
+        $this->log->log(__METHOD__);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Class")
+     .out("IMPLEMENTS")
+     .inE()
+     .hasLabel("DEFINITION")
+     .where(__.outV().hasLabel("Class", "Trait", "Classanonymous"))
+     .drop()
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
+
+        display($result->toInt().' removed class implements link');
+        $this->log->log(__METHOD__);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Usetrait")
+     .out("USE")
+     .inE()
+     .hasLabel("DEFINITION")
+     .where(__.outV().hasLabel("Class", "Interface", "Classanonymous"))
+     .drop()
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
+
+        display($result->toInt().' removed class implements link');
         $this->log->log(__METHOD__);
     }
 
