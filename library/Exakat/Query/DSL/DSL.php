@@ -242,7 +242,7 @@ abstract class DSL {
 
     protected function assertProperty($property) {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
+            assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified')) , 'Wrong format for property name : "'.$property.'"');
             assert($this->isProperty($property), 'No such property in Atom : "'.$property.'"');
         } elseif (is_array($property)) {
             $properties = $property;

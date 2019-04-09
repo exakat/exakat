@@ -34,93 +34,10 @@ class IsModified extends Analyzer {
     
     public function analyze() {
         $atoms = array('Member', 'Staticproperty');
-
         $this->atomIs($atoms)
-             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
-             ->back('first');
+             ->is('isModified', true);
         $this->prepareQuery();
-
-        $this->atomIs($atoms)
-             ->inIs('CAST')
-             ->tokenIs('T_UNSET_CAST')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs($atoms)
-             ->inIsIE(array('VARIABLE', 'APPEND'))
-             ->inIs(array('LEFT', 'APPEND'))
-             ->atomIs(array('Assignation', 'Arrayappend'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // arguments : reference variable in a custom function
-        $this->atomIs(self::$CALLS)
-             ->hasIn('DEFINITION')
-             ->hasNoIn('METHOD') // possibly new too
-             ->outIsIE('METHOD')
-             ->outIs('ARGUMENT')
-             ->atomIs($atoms)
-             ->savePropertyAs('rank', 'ranked')
-             ->_as('results')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
-             ->is('reference', true)
-             ->back('results');
-        $this->prepareQuery();
-
-        // list($a->b)
-        $this->atomIs('List')
-             ->outIs('ARGUMENT')
-             ->atomInside($atoms);
-        $this->prepareQuery();
-
-        // PHP functions that are references
-        $functions = self::$methods->getFunctionsReferenceArgs();
-        $references = new GroupBy();
-        
-        foreach($functions as $function) {
-            $references[$function['position']] = '\\'.$function['function'];
-        }
-        
-        foreach($references as $position => $functions) {
-            $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
-                 ->atomIs($atoms);
-            $this->prepareQuery();
-        }
-
-        // foreach($a as $b->c)
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
-             ->atomIs(array('Member', 'Staticproperty'))
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Unset')
-             ->outIs('ARGUMENT')
-             ->atomIs($atoms);
-        $this->prepareQuery();
-
-        // Class constructors (__construct)
-        $this->atomIs('Newcall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENT')
-             ->atomIs($atoms)
-             ->savePropertyAs('rank', 'ranked')
-             ->_as('results')
-             ->back('first')
-             ->classDefinition()
-             ->outIs(array('MAGICMETHOD', 'METHOD'))
-             ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
-             ->is('reference', self::CASE_SENSITIVE)
-             ->back('results');
-        $this->prepareQuery();
+        return;
     }
 }
 

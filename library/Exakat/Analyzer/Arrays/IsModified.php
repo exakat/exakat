@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class IsModified extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/Constructor',
-                    );
-    }
-    
     public function analyze() {
+        $this->atomIs('Array')
+             ->is('isModified', true);
+        $this->prepareQuery();
+        return;
+
         // $a[3]++;
         $this->atomIs('Array')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'CAST'))

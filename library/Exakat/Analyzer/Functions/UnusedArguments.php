@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedArguments extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsRead',
-                     );
-    }
-    
     public function analyze() {
         // Arguments, not reference, function
         $this->atomIs('Parameter')
@@ -69,7 +64,7 @@ class UnusedArguments extends Analyzer {
                      ->filter(
                         $this->side()
                              ->outIs('DEFINITION')
-                             ->analyzerIs('Variables/IsRead')
+                             ->is('isRead', true)
                      )
              )
              ->back('results');
@@ -124,7 +119,7 @@ class UnusedArguments extends Analyzer {
                      ->filter(
                         $this->side()
                              ->outIs('DEFINITION')
-                             ->analyzerIs('Variables/IsRead')
+                             ->is('isRead', true)
                      )
              )
              ->back('first');

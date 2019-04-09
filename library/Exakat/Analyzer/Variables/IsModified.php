@@ -39,6 +39,12 @@ class IsModified extends Analyzer {
                        'Parametername',
                       );
 
+        $this->atomIs($atoms)
+             ->is('isModified', true);
+        $this->prepareQuery();
+        return;
+        
+
         $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS'));
@@ -112,13 +118,6 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // simple variable + default value : already done in line 18
-
-        // typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->atomIs($atoms);
-        $this->prepareQuery();
 
         // PHP functions that are using references
         $functions = self::$methods->getFunctionsReferenceArgs();

@@ -26,8 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedVariable extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsRead',
-                     'Variables/IsModified',
+        return array('Variables/IsModified',
                     );
     }
 
@@ -41,7 +40,7 @@ not(
 GREMLIN
 )
             ->raw(<<<GREMLIN
-where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").where( __.in("ANALYZED").has("analyzer", within('Variables/IsRead'))))
+where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").has("isRead", true))
 GREMLIN
 )
             ->outIs('DEFINITION');

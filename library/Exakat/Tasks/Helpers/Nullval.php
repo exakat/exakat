@@ -39,7 +39,6 @@ class Nullval extends Plugin {
             case 'Integer' :
             case 'Real' :
             case 'String' :
-            case 'Heredoc' :
             case 'Addition' :
             case 'Multiplication' :
             case 'Power' :
