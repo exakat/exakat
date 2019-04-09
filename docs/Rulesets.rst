@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 04 Apr 2019 16:47:53 +0000
-.. comment: Generation hash : 6fbee452b5f59bf0129bc2c301a80922714d1d4d
+.. comment: Generation date : Tue, 09 Apr 2019 09:52:57 +0000
+.. comment: Generation hash : 4f3fd7750b4c21da725cf3b31489805c08a27e60
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 350 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -193,6 +193,7 @@ Total : 350 analysis
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
+* :ref:`Invalid Class Name <invalid-class-name>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
@@ -274,6 +275,7 @@ Total : 350 analysis
 * :ref:`Overwriting Variable <overwriting-variable>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
+* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
@@ -456,7 +458,7 @@ Total : 19 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 25 analysis
+Total : 24 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -476,7 +478,6 @@ Total : 25 analysis
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Order Of Declaration <order-of-declaration>`
-* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
@@ -973,10 +974,8 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 22 analysis
+Total : 18 analysis
 
-* :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
-* :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
@@ -984,14 +983,12 @@ Total : 22 analysis
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
-* :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
-* :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Useless Alias <useless-alias>`
@@ -1127,7 +1124,7 @@ Total : 77 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
-* :ref:`Inconsistent Usage <inconsistent-usage>`
+* :ref:`Inconsistent Variable Usage <inconsistent-variable-usage>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
 * :ref:`Law of Demeter <law-of-demeter>`
@@ -1182,7 +1179,7 @@ Total : 77 analysis
 Top10
 +++++
 
-Total : 21 analysis
+Total : 22 analysis
 
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Dangling Array References <dangling-array-references>`
@@ -1201,6 +1198,7 @@ Total : 21 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Should Yield With Key <should-yield-with-key>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+* :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use const <use-const>`

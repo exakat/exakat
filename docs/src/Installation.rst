@@ -77,27 +77,27 @@ For each version, MD5 and SHA256 signatures are available. The downloaded MD5 mu
 Quick installation with OSX
 ---------------------------
 
-Paste the following commands in a terminal prompt. It downloads Exakat, and installs tinkerpop version 3.3.4. 
+Paste the following commands in a terminal prompt. It downloads Exakat, and installs tinkerpop version 3.3.6. 
 PHP 7.0 or more recent, curl, homebrew are required.
 
-OSX installation with tinkergraph 3.3.4
+OSX installation with tinkergraph 3.3.6
 ***************************************
 
-This is the installation script for Exakat and tinkergraph 3.3.4. 
+This is the installation script for Exakat and tinkergraph 3.3.6. 
 
 ::
 
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.3.4-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.4-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.3.4-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.3.4 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.3.4-bin.zip 
+    curl -o apache-tinkerpop-gremlin-server-3.3.6-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.3.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.3.4
+    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
     cd ..
     
     php exakat.phar doctor
@@ -173,10 +173,10 @@ The following commands are an optional pre-requisite to the Quick installation g
 Quick installation with Debian/Ubuntu
 -------------------------------------
 
-Debian/Ubuntu installation with Tinkergraph 3.3.4
+Debian/Ubuntu installation with Tinkergraph 3.3.6
 *************************************************
 
-Paste the following commands in a terminal prompt. It installs Exakat most recent version with Tinkergraph 3.3.4. 
+Paste the following commands in a terminal prompt. It installs Exakat most recent version with Tinkergraph 3.3.6. 
 PHP 7.2 (7.0 or more recent), wget and unzip are expected.
 
 ::
@@ -184,14 +184,14 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.3.4-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.4-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.3.4-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.3.4 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.3.4-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.3.6-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.3.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.3.4
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.3.6
     cd ..
 
     php exakat.phar doctor
@@ -264,7 +264,7 @@ The final audit is now in the projects/sculpin/report directory.
 Composer installation with Tinkergraph 3.2.10
 *********************************************
 
-This installation script is for Tinkergraph 3.2.10. Use the above script, with more recent version 3.3.4, whenever possible.
+This installation script is for Tinkergraph 3.2.10. Use the above script, with more recent version 3.3.6, whenever possible.
 
 ::
 
@@ -291,9 +291,9 @@ You need at least one version of PHP to run exakat. This version needs the `curl
 
 Extra PHP-CLI versions allow more linting of the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
-Exakat recommends PHP 7.2.6 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1, 7.2 and 7.3 (aka php-src master).
+Exakat recommends PHP 7.3.4 (or newer version) to run Exakat. We also recommend the installation of PHP versions 5.6, 7.1, 7.2, 7.3, 7.4 and 8.0 (aka php-src master).
 
-To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
+To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_ or compile PHP yourself. 
 
 Optional installations
@@ -314,7 +314,7 @@ Installation guide with Docker
 
 Installation with docker is easy, and convenient. It hides the dependency on the graph database, and keeps all files in the 'projects' folder, created in the working directory.
 
-Currently, Docker installation only ships with one PHP version (7.1), and with support for git, svn and mercurial.
+Currently, Docker installation only ships with one PHP version (7.3), and with support for git, svn, composer and mercurial.
 
 * Install `Docker <http://www.docker.com/>`_
 * Start Docker
