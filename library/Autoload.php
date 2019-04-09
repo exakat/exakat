@@ -182,6 +182,40 @@ class AutoloadExt {
         return array_merge(...$return);
     }
 
+    public function loadJson($name, $libel = self::LOAD_ALL) {
+        $return = array();
+
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/data/$name";
+
+            if (!file_exists($fullPath)) {
+                continue;
+            }
+            
+            $json = file_get_contents($fullPath);
+            if (empty($json)) {
+                continue;
+            }
+
+            $data = json_decode($json);
+            if (empty($data)) {
+                continue;
+            }
+            
+            if ($libel === self::LOAD_ALL) {
+                $return[] = (array) $data;
+            } else {
+                $return[] = array_column($data, $libel);
+            }
+        }
+        
+        if (empty($return)) {
+            return array();
+        }
+
+        return array_merge(...$return);
+    }
+
     public function loadData($path) {
         $return = array();
         foreach($this->pharList as $phar) {

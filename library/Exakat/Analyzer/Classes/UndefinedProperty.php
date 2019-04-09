@@ -29,6 +29,7 @@ class UndefinedProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/DefinedProperty',
                      'Classes/HasMagicProperty',
+                     'Modules/DefinedProperty',
                     );
     }
     
@@ -48,6 +49,7 @@ class UndefinedProperty extends Analyzer {
 
         // static properties without a definition
         $this->atomIs('Staticproperty')
+             ->anayzerIsNot('Modules/DefinedProperty')
              ->hasNoIn('DEFINITION');
         $this->prepareQuery();
     }
