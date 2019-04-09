@@ -1,4 +1,4 @@
-Version 1.7.4 (Lu King Pingdeng , coming up)
+Version 1.7.5 (Xue King Zhuanlun, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,33 @@ Version 1.7.4 (Lu King Pingdeng , coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.4 (Lu King Pingdeng, 2019-04-08)
++ Architecture
+    + reports, themes may be specified multiple times
+    + 'project' command also work on themes and report from command line
+    + Added htmlpurifier in auto-ignored libraries
+    + Counting definitions, omitting Virtualproperties
+    + Automatically detect identical files
++ Report
+    + Inventories are grouped by values, sorted by count
++ Analyzer
+    + Updated analysis : This is for class : extended analysis to self and parent
+    + Updated analysis : Undefined Classes
+    + Updated analysis : Refactored Defined Parent MP 
+    + Updated analysis : Redefined PHP function is restricted to global scope
+    + Updated analysis : Could Use Alias also covers functions, constants.
+    + Updated analysis : Refined SQL detection
+    + Fixed step : goToALlParentsTrait missed some of the parent
+    + Checked unit tests : 2916 / 2944 test pass (99% pass)
++ Tokenizer
+    + Removed impossible implementations of traits
+    + Fixed functioncalls' 'absolute' property
+    + Refined parent's definitions
+    + Trait also sports virtualproperties
+    + Virtualproperties now respect visibilities
+    + Distinguish Variables from Staticpropertynames
+    + Added missing DEFINITION for Use (namespaces)
 
 Version 1.7.3 (Huang, King Dushi, 2019-04-01)
 + Architecture
