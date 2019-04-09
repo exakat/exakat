@@ -610,6 +610,7 @@ Glossary
 
     + `image2wbmp()`
 
+      + :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
       + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
     + `imagecolorallocate()`

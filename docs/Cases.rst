@@ -542,7 +542,7 @@ Forgotten Visibility
 
 .. _fuelcms-classes-nonppp:
 
-Fuelcms
+FuelCMS
 ^^^^^^^
 
 :ref:`forgotten-visibility`, in /fuel/modules/fuel/controllers/Module.php:713. 
@@ -572,7 +572,7 @@ Missing visibility for the index() method,and all the methods in the Module clas
 
 .. _livezilla-classes-nonppp:
 
-Livezilla
+LiveZilla
 ^^^^^^^^^
 
 :ref:`forgotten-visibility`, in livezilla/_lib/objects.global.users.inc.php:2516. 
@@ -1875,6 +1875,64 @@ A case of empty case, with empty blocks. This is useless code. Event the curly b
                                 break;
                             }
 
+PHP Keywords As Names
+=====================
+
+.. _churchcrm-php-reservednames:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`php-keywords-as-names`, in src/kiosk/index.php:42. 
+
+$false may be true or false (or else...). In fact, the variable is not even defined in this file, and the file do a lot of inclusion. 
+
+.. code-block:: php
+
+    if (!isset($_COOKIE['kioskCookie'])) {
+        if ($windowOpen) {
+            $guid = uniqid();
+            setcookie("kioskCookie", $guid, 2147483647);
+            $Kiosk = new \ChurchCRM\KioskDevice();
+            $Kiosk->setGUIDHash(hash('sha256', $guid));
+            $Kiosk->setAccepted($false);
+            $Kiosk->save();
+        } else {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+    }
+
+
+--------
+
+
+.. _xataface-php-reservednames:
+
+xataface
+^^^^^^^^
+
+:ref:`php-keywords-as-names`, in Dataface/Record.php:1278. 
+
+This one is documented, and in the end, makes a lot of sense.
+
+.. code-block:: php
+
+    function &getRelatedRecord($relationshipName, $index=0, $where=0, $sort=0){
+    		if ( isset($this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort]) ){
+    			return $this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort];
+    		}
+    		$it = $this->getRelationshipIterator($relationshipName, $index, 1, $where, $sort);
+    		if ( $it->hasNext() ){
+    			$rec =& $it->next();
+    			$this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort] =& $rec;
+    			return $rec;
+    		} else {
+    			$null = null;	// stupid hack because literal 'null' can't be returned by ref.
+    			return $null;
+    		}
+    	}
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -2725,6 +2783,67 @@ _isEnabled may default to true. It could also default to a class constant.
         {
             $this->_isEnabled = true;
 
+No Hardcoded Ip
+===============
+
+.. _openemr-structures-nohardcodedip:
+
+OpenEMR
+^^^^^^^
+
+:ref:`no-hardcoded-ip`, in wp-admin/includes/misc.php:74. 
+
+Although they are commented just above, the values provided here are suspicious.
+
+.. code-block:: php
+
+    // FTP parameters that you must customize.  If you are not sending
+     // then set $FTP_SERVER to an empty string.
+     //
+     $FTP_SERVER = 192.168.0.30;
+     $FTP_USER   = openemr;
+     $FTP_PASS   = secret;
+     $FTP_DIR    = ;
+
+
+--------
+
+
+.. _nextcloud-structures-nohardcodedip:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`no-hardcoded-ip`, in config/config.sample.php:1561. 
+
+Although they are documented as empty array, 3 values are provided as examples. They do not responds, at the time of writing, but they may.
+
+.. code-block:: php
+
+    /**
+     * List of trusted proxy servers
+     *
+     * You may set this to an array containing a combination of
+     * - IPv4 addresses, e.g. `192.168.2.123`
+     * - IPv4 ranges in CIDR notation, e.g. `192.168.2.0/24`
+     * - IPv6 addresses, e.g. `fd9e:21a7:a92c:2323::1`
+     *
+     * _(CIDR notation for IPv6 is currently work in progress and thus not
+     * available as of yet)_
+     *
+     * When an incoming request's `REMOTE_ADDR` matches any of the IP addresses
+     * specified here, it is assumed to be a proxy instead of a client. Thus, the
+     * client IP will be read from the HTTP header specified in
+     * `forwarded_for_headers` instead of from `REMOTE_ADDR`.
+     *
+     * So if you configure `trusted_proxies`, also consider setting
+     * `forwarded_for_headers` which otherwise defaults to `HTTP_X_FORWARDED_FOR`
+     * (the `X-Forwarded-For` header).
+     *
+     * Defaults to an empty array.
+     */
+    'trusted_proxies' => array('203.0.113.45', '198.51.100.128', '192.168.2.0/24'),
+
 Echo With Concat
 ================
 
@@ -3015,6 +3134,49 @@ This call extract text between [code] tags, then process it with $this->codedisp
 
     $message = preg_replace("/\s*\[code\](.+?)\[\/code\]\s*/ies", "$this->codedisp('\1')", $message);
 
+eval() Without Try
+==================
+
+.. _fuelcms-structures-evalwithouttry:
+
+FuelCMS
+^^^^^^^
+
+:ref:`eval()-without-try`, in fuel/modules/fuel/controllers/Blocks.php:268. 
+
+The @ will prevent any error, while the try/catch allows the processing of certain types of error, namely the Fatal ones. 
+
+.. code-block:: php
+
+    @eval($_name_var_eval)
+
+
+--------
+
+
+.. _expressionengine-structures-evalwithouttry:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`eval()-without-try`, in system/ee/EllisLab/Addons/member/mod.member_memberlist.php:637. 
+
+$cond is build from values extracted from the $fields array. Although it is probably reasonably safe, a try/catch here will collect any unexpected situation cleaningly.
+
+.. code-block:: php
+
+    elseif (isset($fields[$val['3']]))
+    					{
+    						if (array_key_exists('m_field_id_'.$fields[$val['3']], $row))
+    						{
+    							$v = $row['m_field_id_'.$fields[$val['3']]];
+    
+    							$lcond = str_replace($val['3'], "$v", $lcond);
+    							$cond = $lcond.' '.$rcond;
+    							$cond = str_replace("\|", "|", $cond);
+    
+    							eval("$result = ".$cond.";");
+
 Relay Function
 ==============
 
@@ -3204,6 +3366,39 @@ Although $column_index is documented, it is not found in the rest of the (long) 
         /**/
         }
 
+Switch To Switch
+================
+
+.. _thelia-structures-switchtoswitch:
+
+Thelia
+^^^^^^
+
+:ref:`switch-to-switch`, in core/lib/Thelia/Controller/Admin/TranslationsController.php:100. 
+
+The two first comparison may be turned into a case, and the last one could be default, or default with a check on empty(). 
+
+.. code-block:: php
+
+    if($modulePart == 'core') { /**/ } elseif($modulePart == 'admin-includes') { /**/ } elseif(!empty($modulePart)) { /**/ }
+
+
+--------
+
+
+.. _xoops-structures-switchtoswitch:
+
+XOOPS
+^^^^^
+
+:ref:`switch-to-switch`, in htdocs/search.php:74. 
+
+Here, converting this structure to switch requires to drop the === usage. Also, no default usage here. 
+
+.. code-block:: php
+
+    if($action === 'results') { /**/ } elseif($action === 'showall') { /**/ } elseif($action === 'showallbyuser') { /**/ }
+
 Wrong Parameter Type
 ====================
 
@@ -3295,6 +3490,22 @@ Security tokens should be build with a CSPRNG source. uniqid() is based on time,
 .. code-block:: php
 
     $this->installer->change_config('config', '$config[\'encryption_key\'] = \'\';', '$config[\'encryption_key\'] = \''.md5(uniqid()).'\';');
+
+Invalid Class Name
+==================
+
+.. _wordpress-classes-wrongcase:
+
+WordPress
+^^^^^^^^^
+
+:ref:`invalid-class-name`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 No Hardcoded Hash
 =================
@@ -3823,6 +4034,40 @@ The ``then`` block is empty and commented : yet, it may have been clearer to mak
     
     	# length > 4 and < 12
     	if( (mb_strlen($_POST['name']) < 2) || (mb_strlen($_POST['name']) > 24) ) 	{ $errors[] = _('Name must be between 4 and 24 characters'); }
+
+Dependant Trait
+===============
+
+.. _zencart-traits-dependanttrait:
+
+Zencart
+^^^^^^^
+
+:ref:`dependant-trait`, in app/library/zencart/CheckoutFlow/src/AccountFormValidator.php:14. 
+
+Note that addressEntries is used, and is also expected to be an array or an object with ArrayAccess. $addressEntries is only defined in a class called 'Guest' which is also the only one using that trait. Any other class using the AccountFormValidator trait must define addressEntries.
+
+.. code-block:: php
+
+    trait AccountFormValidator
+    {
+    
+        abstract protected function getAddressFieldValue($fieldName);
+    
+        /**
+         * @return bool|int
+         */
+        protected function errorProcessing()
+        {
+            $error = false;
+            foreach ($this->addressEntries as $fieldName => $fieldDetails) {
+                $this->addressEntries[$fieldName]['value'] = $this->getAddressFieldValue($fieldName);
+                $fieldError = $this->processFieldValidator($fieldName, $fieldDetails);
+                $this->addressEntries[$fieldName]['error'] = $fieldError;
+                $error = $error | $fieldError;
+            }
+            return $error;
+        }
 
 Hidden Use Expression
 =====================
@@ -5935,22 +6180,6 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
 
-Invalid Class Name
-==================
-
-.. _wordpress-classes-wrongcase:
-
-WordPress
-^^^^^^^^^
-
-:ref:`invalid-class-name`, in wp-admin/includes/misc.php:74. 
-
-This code actually loads the file, join it, then split it again. file() would be sufficient. 
-
-.. code-block:: php
-
-    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
-
 One Letter Functions
 ====================
 
@@ -5983,64 +6212,6 @@ There is also function f(). Those are actually overwritten methods. From the doc
 .. code-block:: php
 
     public function q ($query, ...$params) {
-
-PHP Keywords As Names
-=====================
-
-.. _churchcrm-php-reservednames:
-
-ChurchCRM
-^^^^^^^^^
-
-:ref:`php-keywords-as-names`, in src/kiosk/index.php:42. 
-
-$false may be true or false (or else...). In fact, the variable is not even defined in this file, and the file do a lot of inclusion. 
-
-.. code-block:: php
-
-    if (!isset($_COOKIE['kioskCookie'])) {
-        if ($windowOpen) {
-            $guid = uniqid();
-            setcookie("kioskCookie", $guid, 2147483647);
-            $Kiosk = new \ChurchCRM\KioskDevice();
-            $Kiosk->setGUIDHash(hash('sha256', $guid));
-            $Kiosk->setAccepted($false);
-            $Kiosk->save();
-        } else {
-            header("HTTP/1.1 401 Unauthorized");
-            exit;
-        }
-    }
-
-
---------
-
-
-.. _xataface-php-reservednames:
-
-xataface
-^^^^^^^^
-
-:ref:`php-keywords-as-names`, in Dataface/Record.php:1278. 
-
-This one is documented, and in the end, makes a lot of sense.
-
-.. code-block:: php
-
-    function &getRelatedRecord($relationshipName, $index=0, $where=0, $sort=0){
-    		if ( isset($this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort]) ){
-    			return $this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort];
-    		}
-    		$it = $this->getRelationshipIterator($relationshipName, $index, 1, $where, $sort);
-    		if ( $it->hasNext() ){
-    			$rec =& $it->next();
-    			$this->cache[__FUNCTION__][$relationshipName][$index][$where][$sort] =& $rec;
-    			return $rec;
-    		} else {
-    			$null = null;	// stupid hack because literal 'null' can't be returned by ref.
-    			return $null;
-    		}
-    	}
 
 __debugInfo() Usage
 ===================
@@ -6680,7 +6851,7 @@ is_scalar() is sufficient here.
 
 .. _nextcloud-functions-closure2string:
 
-Nextcloud
+NextCloud
 ^^^^^^^^^
 
 :ref:`closure-could-be-a-callback`, in apps/files_sharing/lib/ShareBackend/Folder.php:114. 
@@ -7175,6 +7346,39 @@ Closure would be the best here, since $covers has to be injected in the array_fi
                     $fallback[] = $product;
                 }
             }
+
+** For Exponent
+===============
+
+.. _traq-php-newexponent:
+
+Traq
+^^^^
+
+:ref:`**-for-exponent`, in src/views/layouts/_footer.phtm:5. 
+
+pow(1024, 2) could be (1023 ** 2), to convert bytes into Mb. 
+
+.. code-block:: php
+
+    <?=round((microtime(true) - START_TIME), 2); ?>s, <?php echo round((memory_get_peak_usage() - START_MEM) / pow(1024, 2), 3)?>mb
+
+
+--------
+
+
+.. _teampass-php-newexponent:
+
+TeamPass
+^^^^^^^^
+
+:ref:`**-for-exponent`, in includes/libraries/Authentication/phpseclib/Math/BigInteger.php:286. 
+
+pow(2, 62) could also be hard coded with 0x4000000000000000. 
+
+.. code-block:: php
+
+    pow(2, 62)
 
 Could Use Compact
 =================
@@ -7758,15 +7962,15 @@ WebDav uses Sharing, and Sharing uses Webdav. Once using the other is sufficient
     }
     //Trait Sharing is in /build/integration/features/bootstrap/Sharing.php:36
 
-Inconsistent Usage
-==================
+Inconsistent Variable Usage
+===========================
 
 .. _wordpress-variables-inconsistentusage:
 
 WordPress
 ^^^^^^^^^
 
-:ref:`inconsistent-usage`, in wp-includes/IXR/class-IXR-client.php:86. 
+:ref:`inconsistent-variable-usage`, in wp-includes/IXR/class-IXR-client.php:86. 
 
 $request is used successively as an object (IXR_Request), then as a string (The POST). Separatring both usage with different names will help readability.
 

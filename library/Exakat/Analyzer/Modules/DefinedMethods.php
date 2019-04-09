@@ -26,19 +26,15 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\MethodUsage;
 
 class DefinedMethods extends MethodUsage {
-    protected $classConstants = array();
+    protected $methodList = array();
 
     public function analyze() {
-        $classConstants = $this->config->ext->loadJson('methods.json');
+        $this->methodList = $this->config->ext->loadJson('methods.json');
         
-        // convert the properties into a hash
-        die('Needs a HASH here');
-        
-        if (empty($classConstants)) {
+        if (empty($this->methodList)) {
             return;
         }
         
-        $this->functions = $functions;
         return parent::analyze();
     }
 }

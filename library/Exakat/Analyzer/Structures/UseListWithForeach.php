@@ -25,11 +25,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseListWithForeach extends Analyzer {
-    public function dependsOn() {
-        return array('Arrays/IsRead',
-                    );
-    }
-
     public function analyze() {
         // foreach($a as $b) { list($d) = $b; }
         $this->atomIs('Foreach')
@@ -75,7 +70,7 @@ class UseListWithForeach extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
-             ->analyzerIs('Arrays/IsRead')
+             ->is('isRead', true)
              ->outIs('VARIABLE')
              ->atomIs('Variablearray')
              ->samePropertyAs('fullcode', 'blind')

@@ -20,22 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\Modules;
+
+namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\PropertyUsage;
 
-class DefinedProperty extends PropertyUsage {
-    protected $properties = array();
-
+class ClassConstantUsage extends Analyzer {
+    protected $classConstants = array();
+    
     public function analyze() {
-        $this->properties = $this->config->ext->loadJson('properties.json');
-        
-        if (empty($this->properties)) {
-            return;
-        }
-        
-        return parent::analyze();
+        $this->atomIs('Staticconstant')
+             ->outIs('CLASS')
+             ->fullnspathIs(array_keys($this->classConstants))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->inIs('CLASS')
+             ->outIs('CONSTANT')
+             ->isHash('fullcode', $this->classConstants, 'fnp')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

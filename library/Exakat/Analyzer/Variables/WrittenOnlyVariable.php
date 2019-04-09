@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class WrittenOnlyVariable extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsRead',
-                    );
-    }
-    
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw(<<<GREMLIN
@@ -39,7 +34,7 @@ out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true})
 .not( 
       __.where(
           __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
-            .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
+            .has("isRead", true)
               )
      )
 .out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")

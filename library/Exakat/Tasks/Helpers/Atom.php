@@ -74,6 +74,8 @@ class Atom {
     public $noscream     = 0;
     public $nullable     = 0;
     public $trailing     = 0;
+    public $isRead       = 0;
+    public $isModified   = 0;
 
     public function __construct($id, $atom, $line) {
         $this->id   = $id;
@@ -145,6 +147,8 @@ class Atom {
                                'noscream',
                                'nullable',
                                'trailing',
+                               'isRead',
+                               'isModified',
                                'reference',
                                'static',
                                'variadic',
@@ -163,6 +167,8 @@ class Atom {
                              'noscream',
                              'nullable',
                              'trailing',
+                             'isRead',
+                             'isModified',
                              'reference',
                              'variadic',
                              );

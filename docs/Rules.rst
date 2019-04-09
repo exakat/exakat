@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 04 Apr 2019 16:47:53 +0000
-.. comment: Generation hash : 6fbee452b5f59bf0129bc2c301a80922714d1d4d
+.. comment: Generation date : Tue, 09 Apr 2019 09:52:57 +0000
+.. comment: Generation hash : 4f3fd7750b4c21da725cf3b31489805c08a27e60
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -122,7 +122,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Classes/ThisIsForClasses                |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`  |
+| Themes      | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -234,7 +234,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/ThisIsNotForStatic                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`                                                      |
+| Themes      | :ref:`Analyze`                                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -264,19 +264,43 @@ PHP has the operator `** <http://php.net/manual/en/language.operators.arithmetic
 
 If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
 
+Be aware the the '-' operator has lower priority than the `** <http://php.net/manual/en/language.operators.arithmetic.php>`_ operator : this leads to the following confusing result.
+
+.. code-block:: php
+
+   <?php
+       echo -3 ** 2;
+       // displays -9, instead of 9
+   ?>
+
+
+This is due to the parser that process separately ``-`` and the following number. Since ``**`` has priority, the power operation happens first.
+
+Being an operator, ``**`` is faster than `pow() <http://www.php.net/pow>`_. This is a microoptimisation. 
+
 See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
-+-------------+------------------------------+
-| Short name  | Php/NewExponent              |
-+-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
-+-------------+------------------------------+
-| Php Version | With PHP 5.6 and more recent |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the ** operator
+* For powers of 2, use the bitshift operators
+* For literal powers of 2, consider using the 0xFFFFFFFFF syntax.
+
++-------------+--------------------------------------------------------------+
+| Short name  | Php/NewExponent                                              |
++-------------+--------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                           |
++-------------+--------------------------------------------------------------+
+| Php Version | With PHP 5.6 and more recent                                 |
++-------------+--------------------------------------------------------------+
+| Severity    | Minor                                                        |
++-------------+--------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                              |
++-------------+--------------------------------------------------------------+
+| Examples    | :ref:`traq-php-newexponent`, :ref:`teampass-php-newexponent` |
++-------------+--------------------------------------------------------------+
 
 
 
@@ -3947,7 +3971,7 @@ See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#lang
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Always set interface methods to public.
 
 +-------------+----------------------------------------+
 | Short name  | Interfaces/ConcreteVisibility          |
@@ -5019,22 +5043,48 @@ Could Use Alias
 
 This long name may be reduced by using an available alias.
 
+This applies to classes (as full name or prefix), and to constants and functions.
+
 .. code-block:: php
 
    <?php
    
    use a\b\c;
+   use function a\b\c\foo;
+   use const a\b\c\D;
    
-   // This may be reduced with the above alias
+   // This may be reduced with the above alias to c\d()
    new a\b\c\d();
    
-   // This too
+   // This may be reduced to c\d\e\f 
    new a\b\c\d\e\f();
    
-   // This yet again
+   // This may be reduced to c()
    new a\b\c();
    
+   // This may be reduced to D
+   echo a\b\c\D;
+   
+   // This may be reduced to D
+   a\b\c\foo();
+   
+   // This can't be reduced : it is an absolute name
+   \a\b\c\foo();
+   
+   // This can't be reduced : it is no an alias nor a prefix
+   a\b\d\foo();
+   
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use all your aliases so as to make the code shorter and more readable
+* Add new aliases for missing path
+* Make class names absolute and drop the aliases
 
 +-------------+--------------------------+
 | Short name  | Namespaces/CouldUseAlias |
@@ -5734,15 +5784,26 @@ This may also lead to dead code : when the trait is removed, the host class have
    }
    ?>
 
-+-------------+-----------------------+
-| Short name  | Traits/DependantTrait |
-+-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
-+-------------+-----------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add local property definitions to make the trait independant
+* Add local property definitions to make the trait independant
+
++-------------+--------------------------------------+
+| Short name  | Traits/DependantTrait                |
++-------------+--------------------------------------+
+| Themes      | :ref:`Analyze`                       |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Slow (1 hour)                        |
++-------------+--------------------------------------+
+| Examples    | :ref:`zencart-traits-dependanttrait` |
++-------------+--------------------------------------+
 
 
 
@@ -9675,15 +9736,15 @@ Suggestions
 
 * Create an interface from the class, and use it with the implements keyword
 
-+-------------+----------------------------------------+
-| Short name  | Classes/ImplementIsForInterface        |
-+-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Minor                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
++-------------+---------------------------------+
+| Short name  | Classes/ImplementIsForInterface |
++-------------+---------------------------------+
+| Themes      | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
@@ -10029,10 +10090,10 @@ This analysis reports chains of elseif that don't share a common variable (or ar
 
 
 
-.. _inconsistent-usage:
+.. _inconsistent-variable-usage:
 
-Inconsistent Usage
-##################
+Inconsistent Variable Usage
+###########################
 
 
 Those variables are used in various and inconsistent ways. It is difficult to understand if they are an array, an object or a scalar variable.
@@ -10405,17 +10466,17 @@ Suggestions
 
 * Match the defined class name with the called name
 
-+-------------+------------------------------------------------+
-| Short name  | Classes/WrongCase                              |
-+-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
-+-------------+------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-wrongcase`             |
-+-------------+------------------------------------------------+
++-------------+----------------------------------------------------------------+
+| Short name  | Classes/WrongCase                                              |
++-------------+----------------------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++-------------+----------------------------------------------------------------+
+| Severity    | Minor                                                          |
++-------------+----------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                               |
++-------------+----------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-wrongcase`                             |
++-------------+----------------------------------------------------------------+
 
 
 
@@ -14358,16 +14419,19 @@ Suggestions
 
 * Move the hardcoded IP to an external source : environment variable, configuration file, database.
 * Remove the hardcoded IP and ask for it at execution.
+* Use a literal value for default messages in form.
 
-+-------------+---------------------------------+
-| Short name  | Structures/NoHardcodedIp        |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
-+-------------+---------------------------------+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Structures/NoHardcodedIp                                                           |
++-------------+------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                                                    |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                      |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
++-------------+------------------------------------------------------------------------------------+
 
 
 
@@ -16662,6 +16726,19 @@ The following PHP native functions were removed in PHP 7.0.
 * `imagepsslantfont() <http://www.php.net/imagepsslantfont>`_
 * `imagepstext() <http://www.php.net/imagepstext>`_
 
+This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
+
+See also `PHP 7.0 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the old functions with modern functions
+* Remove the usage of the old functions
+* Create an alternative function by wiring the old name to a new feature
+
 +-------------+------------------------------------------------------+
 | Short name  | Php/Php70RemovedFunctions                            |
 +-------------+------------------------------------------------------+
@@ -16933,6 +17010,8 @@ The following PHP native functions were removed in PHP 7.2.
 * `png2wbmp() <http://www.php.net/png2wbmp>`_
 * `jpeg2wbmp() <http://www.php.net/jpeg2wbmp>`_
 
+This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
+
 See also `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_.
 
 +-------------+---------------------------+
@@ -17046,7 +17125,11 @@ PHP 7.3 Removed Functions
 
 The following PHP native functions were removed in PHP 7.3.
 
-* image2wbmp
+* `image2wbmp() <http://www.php.net/image2wbmp>`_
+
+This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
+
+See also `PHP 7.3 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/Php73RemovedFunctions |
@@ -17172,7 +17255,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------+
 | Short name  | Php/ReservedNames                                                     |
 +-------------+-----------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`                        |
+| Themes      | :ref:`Analyze`                                                        |
 +-------------+-----------------------------------------------------------------------+
 | Severity    | Major                                                                 |
 +-------------+-----------------------------------------------------------------------+
@@ -21946,7 +22029,7 @@ Switch To Switch
 
 The following structures are based on if / elseif / else. Since they have more than three conditions (not withstanding the final else), it is recommended to use the switch structure, so as to make this more readable.
 
-On the other hand, `switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures will less than 3 elements should be expressed as a if / else structure.
+On the other hand, `switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures with less than 3 elements should be expressed as a if / else structure.
 
 Note that if condition that uses strict typing (=== or !==) can't be converted to `switch() <http://php.net/manual/en/control-structures.switch.php>`_ as the latter only performs == or != comparisons.
 
@@ -21991,15 +22074,29 @@ Note that if condition that uses strict typing (=== or !==) can't be converted t
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Structures/SwitchToSwitch |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+Note that simple switch statement, which compare a variable to a literal are optimised in PHP 7.2 and more recent. This gives a nice performance boost, and keep code readable.
+
+See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_ and 
+         `Is Your Code Readable By Humans? Cognitive Complexity Tells You <https://www.tomasvotruba.cz/blog/2018/05/21/is-your-code-readable-by-humans-cognitive-complexity-tells-you/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a simple switch statement, rather than a long string of if/else
+
++-------------+---------------------------------------------------------------------------------+
+| Short name  | Structures/SwitchToSwitch                                                       |
++-------------+---------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                  |
++-------------+---------------------------------------------------------------------------------+
+| Severity    | Minor                                                                           |
++-------------+---------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                 |
++-------------+---------------------------------------------------------------------------------+
+| Examples    | :ref:`thelia-structures-switchtoswitch`, :ref:`xoops-structures-switchtoswitch` |
++-------------+---------------------------------------------------------------------------------+
 
 
 
@@ -23155,15 +23252,15 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+-------------+------------------------------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty                           |
-+-------------+------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview`, :ref:`LintButWontExec` |
-+-------------+------------------------------------------------------------+
-| Severity    | Critical                                                   |
-+-------------+------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                            |
-+-------------+------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty   |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Critical                           |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -23853,17 +23950,17 @@ Suggestions
 
 * Add an explicit initialization for each property.
 
-+-------------+-------------------------------------------+
-| Short name  | Classes/UnitializedProperties             |
-+-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`        |
-+-------------+-------------------------------------------+
-| Severity    | Major                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`spip-classes-unitializedproperties` |
-+-------------+-------------------------------------------+
++-------------+--------------------------------------------------+
+| Short name  | Classes/UnitializedProperties                    |
++-------------+--------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10` |
++-------------+--------------------------------------------------+
+| Severity    | Major                                            |
++-------------+--------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                  |
++-------------+--------------------------------------------------+
+| Examples    | :ref:`spip-classes-unitializedproperties`        |
++-------------+--------------------------------------------------+
 
 
 
@@ -25522,6 +25619,12 @@ Use List With Foreach
 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the list keyword (or the short syntax), and simplify the array calls in the loop.
 
 +-------------+------------------------------------------------+
 | Short name  | Structures/UseListWithForeach                  |
@@ -28350,17 +28453,25 @@ eval() Without Try
 
 Note that it will catch situations where ``eval()`` is provided with code that can't be used, but it will not catch security problems. Avoid using ``eval()`` with incoming data.
 
-+-------------+---------------------------------+
-| Short name  | Structures/EvalWithoutTry       |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Php Version | With PHP 7.0 and more recent    |
-+-------------+---------------------------------+
-| Severity    | Critical                        |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always add a try/catch block around eval() call
+
++-------------+---------------------------------------------------------------------------------------------+
+| Short name  | Structures/EvalWithoutTry                                                                   |
++-------------+---------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                                                             |
++-------------+---------------------------------------------------------------------------------------------+
+| Php Version | With PHP 7.0 and more recent                                                                |
++-------------+---------------------------------------------------------------------------------------------+
+| Severity    | Critical                                                                                    |
++-------------+---------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                             |
++-------------+---------------------------------------------------------------------------------------------+
+| Examples    | :ref:`fuelcms-structures-evalwithouttry`, :ref:`expressionengine-structures-evalwithouttry` |
++-------------+---------------------------------------------------------------------------------------------+
 
 
 

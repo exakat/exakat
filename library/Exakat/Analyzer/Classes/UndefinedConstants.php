@@ -28,13 +28,16 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedConstants extends Analyzer {
     public function dependsOn() {
         return array('Classes/DefinedConstants',
+                     'Modules/DefinedClassConstants'
                     );
     }
     
     public function analyze() {
         // A::Undefined
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Classes/DefinedConstants')
+             ->analyzerIsNot(array('Classes/DefinedConstants',
+                                   'Modules/DefinedClassConstants',
+                                  ))
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
              ->back('first');

@@ -65,7 +65,7 @@ GREMLIN;
             }
             
             $this->atomFunctionIs($functions)
-                 ->analyzerIsNot('Functions/CouldCentralize')
+                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'name')
                  ->outWithRank('ARGUMENT', $i)
                  ->isHash('fullcode', $args, 'name')

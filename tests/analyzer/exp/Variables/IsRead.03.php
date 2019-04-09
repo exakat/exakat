@@ -6,6 +6,9 @@ $expected     = array('$r1',
                       '$w1',
                       '$w2',
                       '$w3',
+                      '$r4', 
+                      '$r6', 
+                      '$r5',
                      );
 
 $expected_not = array('$read3b',

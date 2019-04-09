@@ -46,6 +46,8 @@ use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
 use Exakat\Tasks\Helpers\CloneType1;
+use Exakat\Tasks\Helpers\IsRead;
+use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
 use ProgressBar\Manager as ProgressBar;
 use Exakat\Loader\Collector;
@@ -220,6 +222,8 @@ class Load extends Tasks {
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
         $this->plugins[] = new CloneType1();
+        $this->plugins[] = new IsRead();
+        $this->plugins[] = new IsModified();
 
         $this->precedence = new Precedence(get_class($this->phptokens));
 
@@ -2050,6 +2054,7 @@ class Load extends Tasks {
                 }
 
                 $variable = $this->processSingle('Parametername');
+                $this->runPlugins($variable);
 
                 $index = $this->addAtom('Parameter');
                 $index->code     = $variable->fullcode;
@@ -2114,7 +2119,6 @@ class Load extends Tasks {
             --$this->id;
         }
         $arguments->count    = $rank + 1;
-
 
         // Skip the )
         ++$this->id;
@@ -2641,6 +2645,7 @@ class Load extends Tasks {
                    $getFullnspath === self::WITH_FULLNSPATH ) {
              $this->processSemicolon();
         } else {
+            $argumentsList[] = $name;
             $this->runPlugins($functioncall, $argumentsList);
             $functioncall = $this->processFCOA($functioncall);
         }

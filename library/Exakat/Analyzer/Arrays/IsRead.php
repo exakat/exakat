@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class IsRead extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/Constructor',
-                    );
-    }
-    
     public function analyze() {
+        $this->atomIs('Array')
+             ->is('isRead', true);
+        $this->prepareQuery();
+        return;
+
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE')
              ->hasIn(array('NOT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'CONDITION', 'THEN', 'ELSE',

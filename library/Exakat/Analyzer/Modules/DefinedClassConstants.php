@@ -23,21 +23,18 @@
 namespace Exakat\Analyzer\Modules;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\ClassConstantUsage;
 
 class DefinedClassConstants extends ClassConstantUsage {
     protected $classConstants = array();
 
     public function analyze() {
-        $classConstants = $this->config->ext->loadJson('classconstants.json');
+        $this->classConstants = $this->config->ext->loadJson('classConstants.json');
         
-        // convert the properties into a hash
-        die('Needs a HASH here');
-        
-        if (empty($classConstants)) {
+        if (empty($this->classConstants)) {
             return;
         }
-        
-        $this->functions = $functions;
+
         return parent::analyze();
     }
 }

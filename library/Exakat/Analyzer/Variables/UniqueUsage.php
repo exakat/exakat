@@ -26,10 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UniqueUsage extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsRead',
-                     'Classes/IsRead',
-                     'Arrays/IsRead',
-                     'Variables/IsModified',
+        return array('Variables/IsModified',
                      'Classes/IsModified',
                      'Arrays/IsModified',
                     );
@@ -40,7 +37,7 @@ class UniqueUsage extends Analyzer {
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->raw(<<<GREMLIN
- where( __.out("DEFINITION").in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")).count().is(eq(1)))
+ where( __.out("DEFINITION").has("isRead").count().is(eq(1)))
 .where( __.out("DEFINITION").in("ANALYZED").has("analyzer", within("Variables/IsModified", "Classes/IsModified", "Arrays/IsModified")).count().is(eq(1)))
 GREMLIN
 )

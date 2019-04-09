@@ -318,15 +318,12 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
-* Fuelcms
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
-* Livezilla
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
-* Nextcloud
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Phinx <https://phinx.org/>`_
@@ -433,7 +430,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.9
 
-  * Inconsistent Usage (Variables/InconsistentUsage ; Suggestions)
+  * Inconsistent Variable Usage (Variables/InconsistentUsage ; Suggestions)
   * Typehint Must Be Returned (Functions/TypehintMustBeReturned)
 
 * 1.6.8
@@ -1142,7 +1139,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * More Than One Level Of Indentation (Structures/OneLevelOfIndentation ; Calisthenics)
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71)
-  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Simple, Suggestions, Level 4)
+  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Simple, Suggestions, Level 4, Top10)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Simple, Level 1)
 
 * 0.8.7
@@ -1168,9 +1165,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.8.4
 
   * $HTTP_RAW_POST_DATA Usage (Php/RawPostDataUsage ; Appinfo, CompatibilityPHP56)
-  * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple, LintButWontExec)
+  * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple)
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze)
-  * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze, LintButWontExec)
+  * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze)
   * ** For Exponent (Php/NewExponent ; Suggestions)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
   * <?= Usage (Php/EchoTagUsage ; Appinfo, Simple)
@@ -1363,7 +1360,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Identical Conditions (Structures/IdenticalConditions ; Analyze, Simple)
   * If With Same Conditions (Structures/IfWithSameConditions ; Analyze, Simple)
   * Iffectations (Structures/Iffectation ; Analyze)
-  * Implement Is For Interface (Classes/ImplementIsForInterface ; Analyze, Simple, LintButWontExec)
+  * Implement Is For Interface (Classes/ImplementIsForInterface ; Analyze, Simple)
   * Implicit Global (Structures/ImplicitGlobal ; Analyze)
   * Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Simple)
   * Inclusions (Structures/IncludeUsage ; Appinfo)
@@ -1379,7 +1376,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Internally Used Properties (Classes/PropertyUsedInternally ; )
   * Internet Ports (Type/Ports ; Inventory)
   * Interpolation (Type/StringInterpolation ; Coding Conventions)
-  * Invalid Class Name (Classes/WrongCase ; Coding Conventions, RadwellCodes, Simple)
+  * Invalid Class Name (Classes/WrongCase ; Analyze, Coding Conventions, RadwellCodes, Simple)
   * Invalid Constant Name (Constants/InvalidName ; Analyze, Simple)
   * Is An Extension Class (Classes/IsExtClass ; )
   * Is An Extension Constant (Constants/IsExtConstant ; Internal, First)
@@ -1504,7 +1501,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PHP Constant Usage (Constants/PhpConstantUsage ; Appinfo)
   * PHP Handlers Usage (Php/SetHandlers ; )
   * PHP Interfaces (Interfaces/Php ; )
-  * PHP Keywords As Names (Php/ReservedNames ; Coding Conventions, Simple)
+  * PHP Keywords As Names (Php/ReservedNames ; Analyze, Simple)
   * PHP Sapi (Type/Sapi ; Internal)
   * PHP Variables (Variables/VariablePhp ; )
   * PHP5 Indirect Variable Expression (Variables/Php5IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -2191,16 +2188,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2369,8 +2366,11 @@ List of external links mentionned in this documentation.
 * `PHP - Fatal error: Unsupported operand types [duplicate] <https://stackoverflow.com/questions/2108875/php-fatal-error-unsupported-operand-types>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
+* `PHP 7.0 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
+* `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
+* `PHP 7.3 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
@@ -2478,7 +2478,7 @@ List of external links mentionned in this documentation.
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
-* `The main PPA for PHP (7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `The main PPA for PHP (7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
@@ -2512,8 +2512,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2664,6 +2664,7 @@ _______
 |   analyzer[] = "Classes/UselessFinal";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Classes/WeakType";
+|   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Classes/WrongName";
 |   analyzer[] = "Constants/BadConstantnames";
 |   analyzer[] = "Constants/ConstRecommended";
@@ -2759,6 +2760,7 @@ _______
 |   analyzer[] = "Php/NoReferenceForTernary";
 |   analyzer[] = "Php/NotScalarType";
 |   analyzer[] = "Php/PathinfoReturns";
+|   analyzer[] = "Php/ReservedNames";
 |   analyzer[] = "Php/ShortOpenTagRequired";
 |   analyzer[] = "Php/ShouldUseCoalesce";
 |   analyzer[] = "Php/StrtrArguments";
@@ -2987,7 +2989,6 @@ __________________
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Php/CloseTags";
-|   analyzer[] = "Php/ReservedNames";
 |   analyzer[] = "Php/ReturnWithParenthesis";
 |   analyzer[] = "Php/UpperCaseFunction";
 |   analyzer[] = "Php/UpperCaseKeyword";
@@ -3546,14 +3547,10 @@ _______________
 |   analyzer[] = "Classes/CloneWithNonObject";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
-|   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
-|   analyzer[] = "Classes/ThisIsForClasses";
-|   analyzer[] = "Classes/ThisIsNotForStatic";
-|   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
@@ -3768,6 +3765,7 @@ _____
 
 | [Top10]
 |   analyzer[] = "Classes/DontUnsetProperties";
+|   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Functions/ShouldYieldWithKey";

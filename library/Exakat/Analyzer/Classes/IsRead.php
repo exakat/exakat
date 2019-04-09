@@ -27,13 +27,11 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class IsRead extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/Constructor',
-                     'Variables/IsRead');
-    }
-    
     public function analyze() {
-        $atoms = array('Member', 'Staticproperty');
+        $this->atomIs(array('Member', 'Staticproperty'))
+             ->is('isRead', true);
+        $this->prepareQuery();
+        return;
         
         $this->atomIs($atoms)
              ->hasIn(array('NOT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
@@ -45,7 +43,7 @@ class IsRead extends Analyzer {
         // right or left, same
         $this->atomIs($atoms)
              ->inIs(array('RIGHT', 'LEFT'))
-             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
+             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Power'))
              ->back('first');
         $this->prepareQuery();
 
