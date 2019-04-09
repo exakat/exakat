@@ -16,4 +16,6 @@ class x3 {
 new x($r1, $w1);
 new x2($r2, $w2);
 new x3($r3, $w3);
-?>
+echo $r4, $r5;
+
+?>A<?= $r6; ?>
