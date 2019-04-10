@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('parent::$zi',
-                      'parent::$y',
+$expected     = array('parent::$y',
                       'parent::y( )',
                      );
 
-$expected_not = array('parent::$zu',
+$expected_not = array('parent::$zi',
+                      'parent::$zu',
                       'parent::$zo',
                      );
 

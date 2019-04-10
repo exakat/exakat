@@ -19,10 +19,10 @@ $expected     = array('$h',
                       '&$f',
                       '&$d4',
                       '&$h',
-                      '$b[3]',
                      );
 
 $expected_not = array('$i',
+                      '$b[3]',
                      );
 
 ?>
