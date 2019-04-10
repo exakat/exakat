@@ -29,7 +29,7 @@ use Exakat\Query\DSL\Command;
 
 class Query {
     const STOP_QUERY = 'filter{ false; }';
-    const NO_QUERY = 'filter{ true; }';
+    const NO_QUERY   = 'filter{ true;  }';
 
     const TO_GREMLIN = true;
     const NO_GREMLIN = false;
