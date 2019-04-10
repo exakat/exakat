@@ -25,41 +25,24 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsaMagicProperty extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/DefinedProperty',
-                     'Classes/IsRead',
-                     'Classes/IsModified',
-                    );
-    }
-    
     public function analyze() {
         // echo $this->a;
         $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->back('first')
-             ->analyzerIsNot('Classes/DefinedProperty')
-             ->analyzerIs('Classes/IsRead')
-             ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('MAGICMETHOD')
+             ->is('isRead', true)
+             ->inIs('DEFINITION')
+             ->atomIs('Magicmethod')
              ->outIs('NAME')
-             ->codeIs('__get')
+             ->codeIs('__get', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // $this->a = 1;
         $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->back('first')
-             ->analyzerIsNot('Classes/DefinedProperty')
-             ->analyzerIs('Classes/IsModified')
-             ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('MAGICMETHOD')
+             ->is('isModified', true)
+             ->inIs('DEFINITION')
+             ->atomIs('Magicmethod')
              ->outIs('NAME')
-             ->codeIs('__set')
+             ->codeIs('__set', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

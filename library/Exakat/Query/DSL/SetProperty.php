@@ -28,7 +28,13 @@ class SetProperty extends DSL {
         list($property, $value) = func_get_args();
 
         $this->assertProperty($property);
-        return new Command("sideEffect{ it.get().property(\"$property\", $value); }");
+        if ($value === true) {
+            return new Command("sideEffect{ it.get().property(\"$property\", true); }");
+        } elseif ($value === false) {
+            return new Command("sideEffect{ it.get().property(\"$property\", false); }");
+        } else {
+            return new Command("sideEffect{ it.get().property(\"$property\", $value); }");
+        }
     }
 }
 ?>

@@ -25,11 +25,6 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class UseBlindVar extends Analyzer {
-    public function dependsOn() {
-        return array('Arrays/IsModified',
-                    );
-    }
-    
     public function analyze() {
         // foreach($a as $k => $b) { $c = $a[$k] + 2;}
         $this->atomIs('Foreach')
@@ -47,7 +42,7 @@ class UseBlindVar extends Analyzer {
              ->atomInsideNoDefinition('Array')
 
              ->_as('array')
-             ->analyzerIsNot('Arrays/IsModified')
+             ->isNot('isModified', true)
              ->outIs('INDEX')
              ->samePropertyAs('fullcode', 'index')
              ->back('array')

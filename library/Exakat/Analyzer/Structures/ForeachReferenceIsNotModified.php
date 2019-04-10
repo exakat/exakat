@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachReferenceIsNotModified extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
         // case of a variable
         $this->atomIs('Foreach')

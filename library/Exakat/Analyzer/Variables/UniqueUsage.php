@@ -25,20 +25,14 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UniqueUsage extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                     'Classes/IsModified',
-                     'Arrays/IsModified',
-                    );
-    }
-    
     public function analyze() {
+        // function foo() { $a = 1; echo $a;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->raw(<<<GREMLIN
- where( __.out("DEFINITION").has("isRead").count().is(eq(1)))
-.where( __.out("DEFINITION").in("ANALYZED").has("analyzer", within("Variables/IsModified", "Classes/IsModified", "Arrays/IsModified")).count().is(eq(1)))
+ where( __.out("DEFINITION").has("isRead", true).count().is(eq(1)))
+.where( __.out("DEFINITION").has("isModified", true).count().is(eq(1)))
 GREMLIN
 )
              ->outIs('DEFINITION');

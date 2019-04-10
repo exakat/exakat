@@ -70,6 +70,7 @@ class Strval extends Plugin {
     
             case 'Null' :
             case 'Void' :
+            case 'Name' :
                 $atom->noDelimiter = '';
                 break;
 
@@ -213,7 +214,6 @@ class Strval extends Plugin {
                 break;
 
         default :
-        case 'Sequence' :
             // Nothing, really
         }
     }

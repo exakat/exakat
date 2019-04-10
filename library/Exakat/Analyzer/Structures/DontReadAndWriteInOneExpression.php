@@ -25,11 +25,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontReadAndWriteInOneExpression extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsRead',
-                    );
-    }
-
     public function analyze() {
         //$a + ($a = 2);
         $this->atomIs('Assignation')
@@ -42,7 +37,7 @@ class DontReadAndWriteInOneExpression extends Analyzer {
              ->atomInsideNoDefinition('Variable')
              ->notSamePropertyAs('self', 'assigned')
              ->samePropertyAs('fullcode', 'variable')
-             ->analyzerIs('Variables/IsRead')
+             ->is('isRead', true)
              ->back('first');
         $this->prepareQuery();
     }

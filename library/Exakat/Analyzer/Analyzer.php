@@ -1741,12 +1741,6 @@ GREMLIN;
         return $this;
     }
 
-    public function variableIsRead($times = 1) {
-        $this->query->VariableIsRead($times);
-
-        return $this;
-    }
-
     public function run() {
         $this->analyze();
 

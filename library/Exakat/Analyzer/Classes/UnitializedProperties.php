@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class UnitializedProperties extends Analyzer {
     public function dependsOn() {
         return array('Classes/Constructor',
-                     'Classes/IsModified',
                     );
     }
     
@@ -52,7 +51,7 @@ class UnitializedProperties extends Analyzer {
                         $this->side()
                              ->outIs('BLOCK')
                              ->atomInsideNoDefinition('Member')
-                             ->analyzerIs('Classes/IsModified')
+                             ->is('isModified', true)
                              ->outIs('MEMBER')
                              ->tokenIs('T_STRING')
                              ->samePropertyAs('code', 'property')
@@ -67,14 +66,15 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->isNot('static', true)
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
              ->not(
                 $this->side()
-                     ->outIs(array('MAGICMETHOD', 'METHOD'))
-                     ->atomIs('Magicmethod')
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->atomIs(array('Method', 'Magicmethod'))
                      ->analyzerIs('Classes/Constructor')
              )
              ->back('results');
@@ -87,12 +87,13 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->is('static', true)
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
-             ->outIs('MAGICMETHOD')
-             ->atomIs('Magicmethod')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'))
              ->analyzerIs('Classes/Constructor')
              ->not(
                 $this->side()
@@ -100,7 +101,7 @@ class UnitializedProperties extends Analyzer {
                         $this->side()
                              ->outIs('BLOCK')
                              ->atomInsideNoDefinition('Staticproperty')
-                             ->analyzerIs('Classes/IsModified')
+                             ->is('isModified', true)
                              ->outIs('CLASS')
                              ->samePropertyAs('fullnspath', 'classe')
                              ->inIs('CLASS')
@@ -119,13 +120,14 @@ class UnitializedProperties extends Analyzer {
              ->is('static', true)
              ->outIs('PPP')
              ->hasNoOut('DEFAULT')
+             ->atomIsNot('Virtualproperty')
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
              ->not(
                 $this->side()
                      ->outIs(array('MAGICMETHOD', 'METHOD'))
-                     ->atomIs('Magicmethod')
+                     ->atomIs(array('Method', 'Magicmethod'))
                      ->analyzerIs('Classes/Constructor')
              )
              ->back('results');

@@ -1,8 +1,8 @@
 <?php
 
 trait t {
-    private $a = array();
-    private $d = array();
+    protected $a = array();
+    protected $d = array();
 }
 
 class c {

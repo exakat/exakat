@@ -27,13 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ModernEmpty extends Analyzer {
     protected $phpVersion = '5.5+';
     
-    public function dependsOn() {
-        return array('Variables/IsRead',
-                     );
-    }
-    
     public function analyze() {
-
         // $a = 2; empty($a) ; in a row
         // only works for variables
         $this->atomIs('Assignation')

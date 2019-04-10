@@ -25,26 +25,42 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedVariable extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-
     public function analyze() {
-        // function foo() { $b->c = 2;}
+        // function foo() { echo $b;}
         $this->atomIs('Variabledefinition')
-             ->raw(<<<GREMLIN
-not(
-    where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").where( __.in("ANALYZED").has("analyzer", within('Variables/IsModified'))))
-)
-GREMLIN
-)
-            ->raw(<<<GREMLIN
-where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").has("isRead", true))
-GREMLIN
-)
+            ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs('Variable')
+                     ->is('isRead', true)
+            )
+            ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs('Variable')
+                     ->is('isModified', true)
+            )
             ->outIs('DEFINITION');
         $this->prepareQuery();
+
+        // function foo() { $b->c = 2;}
+        $this->atomIs('Variabledefinition')
+             ->analyzerIsNot('self')
+             ->filter(
+                 $this->side()
+                      ->outIs('DEFINITION')
+                      ->atomIs(array('Variableobject', 'Variablearray'))
+             )
+            ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs('Variable')
+                     ->is('isModified', true)
+            )
+            ->outIs('DEFINITION');
+        $this->prepareQuery();
+
+
     }
 }
 

@@ -1,7 +1,9 @@
 <?php
 
 class A  {
-    public $modified = [];
+    public $modified0 = [];
+    public $modified1 = [];
+    public $modified2 = [];
     public $read = [];
 
     public function b()    {
@@ -9,7 +11,9 @@ class A  {
     }
 
     protected function C($e) {
-        $this->modified['c'][] = 3;
+        $this->modified0[] = 3;
+        $this->modified1['c'][] = 3;
+        $this->modified2['c']["3"][] = 3;
         $b = $this->read['c'];
     }
 }

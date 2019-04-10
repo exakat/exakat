@@ -49,7 +49,7 @@ class UndefinedProperty extends Analyzer {
 
         // static properties without a definition
         $this->atomIs('Staticproperty')
-             ->anayzerIsNot('Modules/DefinedProperty')
+             ->analyzerIsNot('Modules/DefinedProperty')
              ->hasNoIn('DEFINITION');
         $this->prepareQuery();
     }

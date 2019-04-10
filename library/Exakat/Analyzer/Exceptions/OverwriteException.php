@@ -26,12 +26,8 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class OverwriteException extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-
     public function analyze() {
+        // try { } catch (E $e) { $e = 3;}
         $this->atomIs('Catch')
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'exception')
@@ -39,7 +35,7 @@ class OverwriteException extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'exception')
-             ->analyzerIs('Variables/IsModified')
+             ->is('isModified', true)
              // not chained and replaced.
              ->raw(<<<GREMLIN
 not( 

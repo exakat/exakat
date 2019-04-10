@@ -56,6 +56,7 @@ class Constant extends Plugin {
             case 'Nsname' :
             case 'Identifier' :
             case 'Staticclass' :
+            case 'Name' : 
                 $atom->constant = true;
                 break;
     
@@ -95,6 +96,11 @@ class Constant extends Plugin {
                 break;
 
             case 'Parenthesis' :
+                if (!isset($extras['CODE'])) {
+                    var_dump($extras);
+                    var_dump($atom);
+                    die();
+                }
                 $atom->constant = $extras['CODE']->constant;
                 break;
 

@@ -25,11 +25,6 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessReferenceArgument extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
         //function foo(&$a) { echo $a; }
         $this->atomIs(self::$FUNCTIONS_ALL)
@@ -38,7 +33,12 @@ class UselessReferenceArgument extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('BLOCK')
-             ->NoAnalyzerInsideWithProperty(array('Variable', 'Variablearray', 'Variableobject'), 'Variables/IsModified', 'code', 'name')
+             ->not(
+                $this->side()
+                     ->atomInsideNoDefinition(array('Variable', 'Variablearray', 'Variableobject'))
+                     ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+                     ->is('isModified', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }
