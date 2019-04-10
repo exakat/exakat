@@ -56,6 +56,7 @@ class Nullval extends Plugin {
 
             case 'Null' :
             case 'Void' :
+            case 'Name' :
                 $atom->isNull = true;
                 break;
     

@@ -33,21 +33,13 @@ class Boolval extends Plugin {
             return;
         }
         
-        /*
-        foreach($extras as $extra) {
-            if ($extra->boolean === '')  {
-                $atom->boolean = '';
-                return;
-            }
-        }
-        */
-
         switch ($atom->atom) {
             case 'Staticclass' :
-            case 'Self' :
-            case 'Parent' :
-            case 'Closure' :
-            case 'Sequence' :
+            case 'Self'        :
+            case 'Parent'      :
+            case 'Closure'     :
+            case 'Sequence'    :
+            case 'Name'        :
                 $atom->boolean = true;
                 break;
 
@@ -61,6 +53,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'Nsname' :
+            case 'Name'   :
                 // when it is a string, there is no fallback
                 $atom->boolean = false;
                 break;

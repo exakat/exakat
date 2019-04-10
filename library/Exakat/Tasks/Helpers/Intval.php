@@ -70,12 +70,13 @@ class Intval extends Plugin {
                 break;
     
             case 'Staticclass' :
-            case 'Identifier' :
-            case 'Nsname' :
-            case 'Self' :
-            case 'Parent' :
-            case 'Null' :
-            case 'Void' :
+            case 'Identifier'  :
+            case 'Nsname'      :
+            case 'Self'        :
+            case 'Parent'      :
+            case 'Null'        :
+            case 'Void'        :
+            case 'Name'        :
                 $atom->intval = 0;
                 break;
     
