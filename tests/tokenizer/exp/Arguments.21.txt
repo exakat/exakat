@@ -11,7 +11,7 @@ Label : PROJECT
           5
           Label : IMPLEMENTS
             9
-          Label : IMPLEMENTS, DEFINITION
+          Label : IMPLEMENTS
             7
           Label : NAME
             6

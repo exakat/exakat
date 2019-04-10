@@ -1,0 +1,53 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : EXTENDS, DEFINITION
+            8
+          Label : NAME
+            8
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : NAME
+            9
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : NAME
+            10
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            11
+          Label : NAME
+            11
+        Label : EXPRESSION
+          12
+          Label : DEFINITION
+            7
+          Label : IMPLEMENTS
+            11
+          Label : NAME
+            7
+        Label : EXPRESSION
+          13
+          Label : NEW
+            7
