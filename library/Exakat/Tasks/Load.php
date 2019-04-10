@@ -2636,6 +2636,7 @@ class Load extends Tasks {
         }
 
         $this->addLink($functioncall, $name, 'NAME');
+        $this->runPlugins($name);
         $this->pushExpression($functioncall);
 
         if ( $functioncall->atom === 'Methodcallname') {

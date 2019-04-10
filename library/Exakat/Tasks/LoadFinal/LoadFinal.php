@@ -100,6 +100,10 @@ class LoadFinal {
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
+        $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateMagicProperty');
+
         $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateVirtualProperty');
@@ -173,6 +177,11 @@ class LoadFinal {
         $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('FollowClosureDefinition');
+
+        $task = new FinishIsModified($this->gremlin, $this->config, $this->datastore);
+        $task->setMethods(new Methods($this->config));
+        $task->run();
+        $this->log('FinishIsModified');
         
         display('End load final');
         $this->logTime('Final');

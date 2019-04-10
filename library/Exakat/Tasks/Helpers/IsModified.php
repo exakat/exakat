@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 class IsModified extends Plugin {
     public $name = 'isModified';
     public $type = 'boolean';
-    private $variables = array('Variable', 'Member', 'Staticproperty', 'Phpvariable',);
+    private $variables = array('Variable', 'Array', 'Member', 'Staticproperty', 'Phpvariable',);
 
     public function run($atom, $extras) {
         switch ($atom->atom) {
@@ -55,6 +55,7 @@ class IsModified extends Plugin {
                 break;
 
             case 'List' : 
+            case 'Unset' : 
                 foreach($extras as &$extra) {
                     if (in_array($extra->atom, $this->variables)) {
                         $extra->isModified = true;
@@ -64,6 +65,12 @@ class IsModified extends Plugin {
 
             case 'Parametername' : 
                 $atom->isModified = true;
+                break;
+
+            case 'Arrayappend' : 
+                if (in_array($extras['APPEND']->atom, $this->variables)) {
+                    $extras['APPEND']->isModified = true;
+                }
                 break;
 
             case 'Preplusplus' : 
