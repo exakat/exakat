@@ -33,6 +33,7 @@ use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
+use Exakat\Query\Query;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
@@ -1458,18 +1459,19 @@ GREMLIN;
                                                  )');
 
         // Direct inclusion
-        $query = <<<GREMLIN
-g.V().hasLabel("File").as("file")
-     .repeat( out($this->linksDown) ).emit().times($MAX_LOOPING).hasLabel("Include").as("include")
-     .select("file", "include").by("fullcode").by("fullcode")
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        
-        $query = array();
-        if (isset($res->results)) {
-            $includes = $res->results;
+        $query = $this->newQuery('Inclusions');
+        $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('include')
+              ->goToInstruction('File')
+              ->_as('file')
+              ->select(array('file'    => 'fullcode', 
+                             'include' => 'fullcode'));
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-            foreach($includes as $link) {
+        $query = array();
+        if (count($result) > 0) {
+            foreach($result->toArray() as $link) {
                 $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'INCLUDE')";
             }
 
@@ -1477,7 +1479,7 @@ GREMLIN;
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
-            display(count($includes)." inclusions ");
+            display(count($result).' inclusions');
         }
 
         // Finding extends and implements
@@ -2134,6 +2136,10 @@ SQL;
         $this->sqlite->query($query);
 
         display('Inited tables');
+    }
+    
+    private function newQuery($title) {
+        return new Query(0, $this->config->project, $title, null, $this->datastore);
     }
 }
 
