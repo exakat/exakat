@@ -25,11 +25,6 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class CacheVariableOutsideLoop extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
 
@@ -51,11 +46,7 @@ where(
             x[it.get().value("code")] = 1;
         }
       }
-      .or(
-      __.where( __.in("ANALYZED").has("analyzer", "Variables/IsModified")),
-      __.where( __.in("VARIABLE").in("ANALYZED").has("analyzer", "Arrays/IsModified")),
-      __.where( __.in("OBJECT").in("ANALYZED").has("analyzer", "Classes/IsModified")),
-      )
+      .has("isModified", true)
       .sideEffect{ x[it.get().value("code")] = 0;}
       .fold()
 )

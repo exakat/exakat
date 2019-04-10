@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class RegisterGlobals extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
         $superGlobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         
@@ -46,7 +41,7 @@ class RegisterGlobals extends Analyzer {
              ->inIs('VALUE')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
-             ->analyzerIs('Variables/IsModified')
+             ->is('isModified', true)
              ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->outIs('NAME')
              ->samePropertyAs('code','k')

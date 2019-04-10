@@ -26,13 +26,9 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class funcGetArgModified extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
-        $this->atomIs('Function')
+        // function foo($a = 3) { $args = func_get_args(); $a++; }
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIsIE('RIGHT')
              ->savePropertyAs('rank', 'ranked')
@@ -50,7 +46,7 @@ class funcGetArgModified extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'arg')
-             ->analyzerIs('Variables/IsModified')
+             ->is('isModified', true)
              ->back('first');
         $this->prepareQuery();
     }

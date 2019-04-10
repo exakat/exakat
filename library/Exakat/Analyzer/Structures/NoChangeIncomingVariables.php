@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                     'Arrays/IsModified');
-    }
-    
     public function analyze() {
         $incomingVariables = array('$_GET','$_POST','$_REQUEST','$_FILES',
                                    '$_ENV', '$_SERVER',
@@ -41,12 +36,13 @@ class NoChangeIncomingVariables extends Analyzer {
         $this->atomIs('Phpvariable')
              ->hasNoIn('VARIABLE') // avoid double counting Arrays
              ->codeIs($incomingVariables)
-             ->analyzerIs('Variables/IsModified');
+             ->is('isModified', true);
         $this->prepareQuery();
 
         // $_POST['s']
         $this->atomIs('Array')
-             ->analyzerIs('Arrays/IsModified')
+             ->hasNoIn('VARIABLE') // avoid double counting Arrays
+             ->is('isModified', true)
              ->outIsIE('VARIABLE')
              ->codeIs($incomingVariables)
              ->back('first');

@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldBeClassConstant extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsModified',
-                     'Classes/LocallyUnusedProperty',
+        return array('Classes/LocallyUnusedProperty',
                     );
     }
     
@@ -72,7 +71,7 @@ class CouldBeClassConstant extends Analyzer {
                                      ->outIs('MEMBER')
                                      ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
                              )
-                             ->analyzerIs('Classes/IsModified')
+                             ->is('isModified', true)
                      )
               )
 
@@ -93,7 +92,7 @@ class CouldBeClassConstant extends Analyzer {
                                          ->outIs('MEMBER')
                                          ->samePropertyAs('code', 'staticName', self::CASE_SENSITIVE)
                                  )
-                                 ->analyzerIs('Classes/IsModified')
+                                 ->is('isModified', true)
                          )
                 )
              ->back('first');

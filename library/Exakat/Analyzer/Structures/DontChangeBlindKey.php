@@ -25,12 +25,8 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontChangeBlindKey extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
+        // foreach($a as $b) { $b +=3 ; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('INDEX', 'VALUE'))
@@ -40,7 +36,7 @@ class DontChangeBlindKey extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('fullcode', 'blind')
-             ->analyzerIs('Variables/IsModified')
+             ->is('isModified', true)
              ->back('first');
         $this->prepareQuery();
     }

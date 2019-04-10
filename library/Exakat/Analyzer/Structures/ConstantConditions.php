@@ -26,12 +26,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantConditions extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                     'Constants/IsPhpConstant',
-                    );
-    }
-    
     public function analyze() {
         $this->atomIs('While')
              ->outIs('CONDITION')
