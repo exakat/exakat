@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('$am',
+                      '$cmr',
                      );
 
-$expected_not = array('$cmr',
+$expected_not = array(
                       '$hr',
                       '$dr',
                      );
