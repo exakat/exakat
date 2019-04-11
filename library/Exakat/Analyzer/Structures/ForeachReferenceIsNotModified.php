@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ForeachReferenceIsNotModified extends Analyzer {
     public function analyze() {
         // case of a variable
+        // foreach($a as &$b) { $c += $b; } // $b is not modified
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE('RIGHT')
@@ -35,7 +36,12 @@ class ForeachReferenceIsNotModified extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->NoAnalyzerInsideWithProperty(array('Variable', 'Variablearray', 'Variableobject'), 'Variables/IsModified', 'code', 'name')
+             ->not(
+                $this->side()
+                     ->atomInsideNoDefinition(array('Variable', 'Variablearray', 'Variableobject'))
+                     ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+                     ->is('isModified', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }
