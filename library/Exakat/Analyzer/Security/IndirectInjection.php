@@ -34,11 +34,10 @@ class IndirectInjection extends Analyzer {
     
     public function analyze() {
         // Relayed via variable to sensitive function
-        //  function f() {  $a = $_GET['a'];exec($a);}
-        $this->atomIs('Functioncall')
+        // function f() {  $a = $_GET['a'];exec($a);}
+        $this->atomIs(self::$CALLS)
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
-             ->_as('result')
+             ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
              ->filter(
@@ -47,68 +46,32 @@ class IndirectInjection extends Analyzer {
                      ->outIs('DEFINITION')
                      ->analyzerIs('Security/GPRAliases')
              )
-             ->back('first')
-
-             ->inIs('DEFINITION')
-
-             ->outIs('ARGUMENT')
-//             ->followCalls()
-/*
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIsIE('CODE')
-             ->analyzerIs('Security/SensitiveArgument')
-             ->back('result')
-             */
-             ;
+             ->back('first');
         $this->prepareQuery();
 
         // Relayed via argument to sensitive function
         //  function f($_GET['a']) {  exec($a);}
-        $this->atomIs('Functioncall')
+        $this->atomIs(self::$CALLS)
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
-             ->_as('result')
-             ->outIsIE('VARIABLE')
-             ->atomIs(self::$VARIABLES_ALL)
-             ->analyzerIs('Security/GPRAliases')
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
-                     
-             )
-             ->back('first')
-
-             ->inIs('DEFINITION')
-
-             ->outIs('ARGUMENT')
-//             ->followCalls()
-/*
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIsIE('CODE')
-             ->analyzerIs('Security/SensitiveArgument')
-             ->back('result')
-             */
-             ;
-        $this->prepareQuery();
-        //function f() {  $a = $_GET['a'];exec($a);}
-
-
-        // $_GET/_POST ... directly as argument of PHP functions
-        // $a = $_GET['a']; exec($a);
-        $this->atomIs('Variable')
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->outIs('DEFINITION')
                      ->analyzerIs('Security/GPRAliases')
              )
+             ->savePropertyAs('rank', 'ranked')
+             ->back('first')
+
+             ->inIs('DEFINITION')
+
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
              ->analyzerIs('Security/SensitiveArgument')
-             ->inIsIE('CODE')
-             ->inIs('ARGUMENT');
+             ->back('first');
         $this->prepareQuery();
+        //function f() {  $a = $_GET['a'];exec($a);}
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
@@ -144,18 +107,6 @@ class IndirectInjection extends Analyzer {
              )
              ->inIs('SOURCE');
         $this->prepareQuery();
-
-        // foreach (looping on incoming variables)
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
-                     ->analyzerIs('Security/GPRAliases')
-             )
-             ->inIs('SOURCE');
-        $this->prepareQuery();
-
     }
 }
 
