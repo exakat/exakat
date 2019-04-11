@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ContinueIsForLoop extends Analyzer {
     public function analyze() {
         // foreach() { switch () { case 1 : continue; } }
-        $this->atomIs(array('For', 'Foreach', 'Dowhile', 'While'))
+        $this->atomIs(self::$LOOPS_ALL)
              ->outIs('BLOCK')
              ->atomInside('Switch')
              ->outIs('CASES')

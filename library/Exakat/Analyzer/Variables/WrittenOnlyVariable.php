@@ -28,19 +28,22 @@ use Exakat\Analyzer\Analyzer;
 class WrittenOnlyVariable extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->raw(<<<GREMLIN
-out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true})
-.as("origin")
-.not( 
-      __.where(
-          __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
-            .has("isRead", true)
+             ->outIs(array('ARGUMENT', 'DEFINITION'))
+             ->outIsIE('NAME')
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$VARIABLES_USER)
+                     ->is('isRead', true)
               )
-     )
-.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
-    
-GREMLIN
-);
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$VARIABLES_USER)
+                     ->is('isModified', true)
+              )
+              ->outIs('DEFINITION')
+              ->atomIs(self::$VARIABLES_USER);
         $this->prepareQuery();
     }
 }

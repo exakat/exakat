@@ -23,22 +23,28 @@
 
 namespace Exakat\Query\DSL;
 
-class VariableIsRead extends DSL {
+class Select extends DSL {
     public function run() : Command {
-        list($times) = func_get_args();
+        list($values) = func_get_args();
+        
+        $by     = array();
+        $select = array();
+        foreach($values as $k => $v) {
+            if (is_int($k)) {
+                $select[] = $v;
+            } else {
+                $select[] = $k;
+                $by[]     = "by(\"$v\")";
+            }
+        }
+        
+        if (empty($by)) {
+            $command = "select(".makeList($select).")";
+        } else {
+            $command = "select(".makeList($select).").".implode('.', $by);
+        }
 
-        $gremlin = <<<GREMLIN
-where( 
-    __.in("DEFINITION")
-      .out("DEFINITION")
-      .where( 
-        __.in("ANALYZED")
-          .has("analyzer", "Variables/IsRead")
-            )
-      .count().is(eq($times))
-    )
-GREMLIN;
-        return new Command($gremlin);
+        return new Command($command);
     }
 }
 ?>

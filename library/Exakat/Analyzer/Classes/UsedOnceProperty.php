@@ -33,6 +33,7 @@ class UsedOnceProperty extends Analyzer {
              ->outIs('PPP')
              ->isNot('visibility', 'public')
              ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
              ->_as('results')
              ->raw(<<<GREMLIN
 where( 
