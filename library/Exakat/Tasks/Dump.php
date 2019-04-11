@@ -1461,6 +1461,8 @@ GREMLIN;
         // Direct inclusion
         $query = $this->newQuery('Inclusions');
         $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('ARGUMENT')
+              ->outIsIE('CODE')
               ->_as('include')
               ->goToInstruction('File')
               ->_as('file')
