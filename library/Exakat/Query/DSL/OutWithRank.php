@@ -35,7 +35,7 @@ class OutWithRank extends DSL {
             return new Command('map( __.out("'.$link.'").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {
             return new Command('map( __.out("'.$link.'").order().by("rank").tail(2) )');
-        } elseif (is_string($rank)) {
+        } elseif (preg_match('/\D/', $rank)) {
             $this->assertVariable($rank, self::VARIABLE_READ);
             return new Command('out("'.$link.'").filter{ it.get().value("rank") == '.$rank.'; }');
         } elseif (abs((int) $rank) >= 0) {
