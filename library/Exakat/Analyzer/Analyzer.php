@@ -116,6 +116,8 @@ abstract class Analyzer {
     static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
+    static public $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
+    
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -978,6 +980,12 @@ GREMLIN;
 
     public function unique() {
         $this->query->unique();
+        
+        return $this;
+    }
+
+    public function select(array $steps) {
+        $this->query->select($steps);
         
         return $this;
     }

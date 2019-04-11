@@ -26,12 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UnconditionLoopBreak extends Analyzer {
 
-    // foreach($a as $b) { $c++; continue; }
     public function analyze() {
-        $this->atomIs(array('For', 'Foreach', 'While', 'Dowhile'))
+        // foreach($a as $b) { $c++; continue; }
+        $this->atomIs(self::$LOOPS_ALL)
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
-             ->atomIs(array('Goto', 'Return', 'Break', 'Continue'))
+             ->atomIs(self::$BREAKS)
              ->back('first');
         $this->prepareQuery();
     }

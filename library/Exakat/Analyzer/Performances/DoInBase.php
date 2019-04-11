@@ -57,7 +57,7 @@ class DoInBase extends Analyzer {
              ->atomInsideNoDefinition('Assignation')
              ->codeIs('+=')
              ->outIs('RIGHT')
-             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(self::$VARIABLES_USER)
              ->samePropertyAs('code', 'row')
 
              ->back('first');
@@ -87,7 +87,7 @@ class DoInBase extends Analyzer {
              ->atomInsideNoDefinition('Assignation')
              ->codeIs(array('+='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(self::$VARIABLES_USER)
              ->samePropertyAs('code', 'row')
 
              ->back('first');
