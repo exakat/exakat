@@ -35,7 +35,7 @@ class IndirectInjection extends Analyzer {
     public function analyze() {
         // Relayed via variable to sensitive function
         // function f() {  $a = $_GET['a'];exec($a);}
-        $this->atomIs(self::$CALLS)
+        $this->atomIs(self::$FUNCTIONS_USAGE)
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('VARIABLE')
@@ -51,7 +51,7 @@ class IndirectInjection extends Analyzer {
 
         // Relayed via argument to sensitive function
         //  function f($_GET['a']) {  exec($a);}
-        $this->atomIs(self::$CALLS)
+        $this->atomIs(self::$FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->filter(

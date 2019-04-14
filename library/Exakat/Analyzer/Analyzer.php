@@ -111,11 +111,12 @@ abstract class Analyzer {
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
+    static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
+    static public $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
     static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
-    static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     static public $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
     
