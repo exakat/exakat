@@ -64,7 +64,7 @@ class ExakatConfig extends Config {
 
         // Attempt each init path, and stop at the first file we find
         $ini = null;
-        foreach($configFiles as $id => $configFile) {
+        foreach($configFiles as $configFile) {
             if (file_exists($configFile)) {
                 // overwrite existing with the new, keep the default values
                 $ini = @parse_ini_file($configFile);
@@ -85,11 +85,8 @@ class ExakatConfig extends Config {
         $this->config = $inis;
 
         // Validation
-        if (isset($this->config['graphdb']) &&
-            in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            $graphdb = $this->config['graphdb'];
-        } else {
-            $this->config['graphdb'] = 'nogremlin';
+        if (!isset($this->config['graphdb']) ||
+            !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
             $this->config['gremlin'] = 'nogremlin';
         }
 

@@ -146,7 +146,6 @@ class Owasp extends Ambassador {
 
         if (empty($baseHTML)) {
             $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -275,7 +274,7 @@ MENU;
         
         $content = '<p>Documentation is extracted from the OWASP TOP 10 2017, with extra content from Exakat.</p><ul>';
         
-        foreach($owasp as $section => $doc) {
+        foreach($owasp as $doc) {
             $content.="<h2>$doc->code - $doc->name</h2>";
             $content .= "<p>$doc->description</p>\n";
             if (!empty($doc->url)) {

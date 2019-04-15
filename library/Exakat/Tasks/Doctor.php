@@ -229,7 +229,7 @@ TEXT
 
             $init = new Initproject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
             $init->run();
-            $a = rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
+            rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
         }
 
         $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/")    ? 'Yes' : 'No';
@@ -341,7 +341,7 @@ TEXT
         $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
         try {
-            $php = new Phpexec($displayedVersion, $pathToBinary);
+            new Phpexec($displayedVersion, $pathToBinary);
         } catch (NoPhpBinary $e) {
             $stats['installed'] = 'Invalid path : '.$pathToBinary;
         } finally {

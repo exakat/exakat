@@ -124,7 +124,6 @@ HTML;
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }
 
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $analysisResults = new Results($this->sqlite, $list);
         $analysisResults->load();
 

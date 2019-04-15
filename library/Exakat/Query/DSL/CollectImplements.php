@@ -31,8 +31,7 @@ class CollectImplements extends DSL {
         list($variable) = func_get_args();
         
         $this->assertVariable($variable, self::VARIABLE_WRITE);
-        
-        $LINKS_DOWN = self::$linksDown;
+
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         return new Command(<<<GREMLIN
