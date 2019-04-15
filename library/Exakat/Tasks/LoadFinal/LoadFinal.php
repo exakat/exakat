@@ -100,6 +100,10 @@ class LoadFinal {
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
+        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('SetClassPropertyRemoteDefinition');
+
         $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateMagicProperty');
@@ -110,7 +114,7 @@ class LoadFinal {
         $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateVirtualStaticProperty');
-        
+
         $this->setConstantDefinition();
         $this->log('setConstantDefinition');
 
