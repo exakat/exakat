@@ -21,5 +21,6 @@ if ($condition) {
     function conditionnedFunction () {}
 
     define('ConditionedConstant', 1);
+    
 }
 ?>

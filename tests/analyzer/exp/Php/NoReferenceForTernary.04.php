@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('rand() ?: $a', 
+$expected     = array('rand() ?: $a',
                      );
 
-$expected_not = array('rand() ?: $d', 
+$expected_not = array('rand() ?: $d',
                      );
 
 ?>

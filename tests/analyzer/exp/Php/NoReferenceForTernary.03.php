@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('1 ? $b : $b', 
-                      '1 ? 3 : $b', 
+$expected     = array('1 ? $b : $b',
+                      '1 ? 3 : $b',
                       '1 ? $b : 2',
                      );
 
