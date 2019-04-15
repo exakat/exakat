@@ -263,7 +263,7 @@
     "type": "classic"
   },
   "phpspecs": {
-    "homepage": "http://www.phpspec.net/en/stable/",
+    "homepage": "http://www.phpspec.net/en/latest/",
     "ignore": "WHOLE_DIR",
     "name": "PHPSpec",
     "classes": [
