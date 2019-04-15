@@ -43,7 +43,7 @@ class InsufficientTypehint extends Analyzer {
              ->inIs('DEFINITION')
              ->not(
                 $this->side()
-                     ->goToAllImplements()
+                     ->goToAllImplements(self::INCLUDE_SELF)
                      ->outIs(array('METHOD', 'MAGICMETHOD'))
                      ->outIs('NAME')
                      ->samePropertyAs('lccode', 'call', self::CASE_INSENSITIVE)
