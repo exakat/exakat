@@ -40,15 +40,15 @@ class MultipleTypeVariable extends Analyzer {
         $this->prepareQuery();
 
         // $a = join('', $a);
-        $this->atomFunctionIs(array('\\join', '\\implode'))
-             ->outWithRank('ARGUMENT', 1)
+        $this->atomFunctionIs(array('\\join', '\\implode', '\\split', '\\explode', '\\unserialize', '\\urldecode', '\\parse_ini_string', '\\http_build_query'))
+             ->outIs('ARGUMENT')
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->samePropertyAs('fullcode', 'variable')
+             ->samePropertyAs('fullcode', 'variable', self::CASE_SENSITIVE)
              ->inIs('LEFT');
         $this->prepareQuery();
     }
