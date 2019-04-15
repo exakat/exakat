@@ -33,10 +33,22 @@ class ImplementIsForInterface extends Analyzer {
     }
     
     public function analyze() {
+        $this->atomIs(array('Class', 'Trait'))
+             ->values('fullnspath')
+             ->unique();
+        $classesTraits = $this->rawQuery()->toArray();
+
+        $this->atomIs('Interfaces')
+             ->values('fullnspath')
+             ->unique();
+        $interfaces = $this->rawQuery()->toArray();
+        
+        $notValid = array_diff($classesTraits, $interfaces);
+
         // class a with implements
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
-             ->hasClassDefinition()
+             ->fullnspathIs($notValid)
              ->back('first');
         $this->prepareQuery();
 
@@ -51,13 +63,6 @@ class ImplementIsForInterface extends Analyzer {
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Composer/IsComposerClass')
-             ->back('first');
-        $this->prepareQuery();
-
-        // trait t with implements
-        $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('IMPLEMENTS')
-             ->hasTraitDefinition()
              ->back('first');
         $this->prepareQuery();
     }
