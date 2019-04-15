@@ -37,8 +37,9 @@ class RedeclaredPhpFunction extends Analyzer {
             }
         }
         $extensionFunctions = array_merge(...$e);
+        $extensionFunctions = array_values(array_unique($extensionFunctions));
         $extensionFunctions = makefullnspath($extensionFunctions);
-        
+
         $this->atomIs('Function')
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
              ->fullnspathIs($extensionFunctions);
