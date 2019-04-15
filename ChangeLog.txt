@@ -1,4 +1,4 @@
-Version 1.7.5 (Xue King Zhuanlun, coming up)
+Version 1.7.6 (Jade Maiden of Yin, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 1.7.5 (Xue King Zhuanlun, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.5 (Xue King Zhuanlun, 2019-04-15)
++ Architecture
+    + Cleaned unused variables
++ Report
+    + Ambassador : bugfixes report version 7.3, dropped 5.6 and 5.5
++ Analyzer
+    + Updated analysis : Already interface : extended to interface parents
+    + Updated analysis : Else if to elseif : extended to one-liners
+    + Updated analysis : No reference for ternary was extended
+    + Updated analysis : Implements is for interface
+    + Updated analysis : Refactored Is a Magic Property
+    + Updated analysis : Refactored Conditional structures for constants
+    + Checked unit tests : 2926 / 2950 test pass (99% pass)
++ Tokenizer
+    + Link properties to magicmethod
+    + Deduplicated virtual properties
+    + Added isRead and IsModified properties. Omitting the corresponding analysis.
 
 Version 1.7.4 (Lu King Pingdeng, 2019-04-08)
 + Architecture
