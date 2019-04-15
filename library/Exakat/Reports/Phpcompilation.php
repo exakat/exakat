@@ -50,7 +50,7 @@ TEXT
         ,
         './configure');
         $pecl = array();
-        foreach($configureDirectives as $ext => $configure) {
+        foreach($configureDirectives as $configure) {
             if (isset($sources[$configure->analysis])) {
                 if(!empty($configure->activate) && $sources[$configure->analysis] != 0) {
                     $return[] = ' '.$configure->activate;

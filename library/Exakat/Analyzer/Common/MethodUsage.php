@@ -48,11 +48,11 @@ class MethodUsage extends Analyzer {
             }
         }
         
-        foreach($staticHash as $class => &$methods) {
+        foreach($staticHash as &$methods) {
             $methods = $this->dictCode->translate(array_unique($methods), Dictionary::CASE_INSENSITIVE);
         }
         unset($methods);
-        foreach($methodHash as $class => &$methods) {
+        foreach($methodHash as &$methods) {
             $methods = $this->dictCode->translate(array_unique($methods), Dictionary::CASE_INSENSITIVE);
         }
         unset($methods);

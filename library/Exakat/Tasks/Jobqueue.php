@@ -84,7 +84,6 @@ class Jobqueue extends Tasks {
         stream_set_blocking($pipe, false);
         
         //////// process the queue ////////
-        $round = 0;
         while(1) {
             while($input = trim(fgets($pipe))) {
                 stream_set_blocking($pipe, false);

@@ -80,7 +80,6 @@ class Manual extends Reports {
 
     private function generateEmpty() {
         $empty = $this->summary['Empty'];
-        $total = count($empty);
         sort($empty);
         unset($this->summary['Empty']);
 

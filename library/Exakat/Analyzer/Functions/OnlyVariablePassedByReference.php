@@ -27,14 +27,16 @@ use Exakat\Data\GroupBy;
 
 class OnlyVariablePassedByReference extends Analyzer {
     public function analyze() {
-        $containers = array('Variable', 'Phpvariable', 'Member', 'Staticproperty', 'Array');
-        $notReferenceReturningFunction = 'not( where(__.hasLabel("Functioncall").in("DEFINITION").has("reference", true)) )';
-
         // Functioncalls
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->atomIsNot($containers)
-             ->raw($notReferenceReturningFunction)
+             ->atomIsNot(self::$CONTAINERS)
+             ->not(
+                $this->side()
+                     ->atomIs(self::$FUNCTIONS_CALLS)
+                     ->inIs('DEFINITION')
+                     ->is('reference', true)
+             )
              // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
@@ -51,8 +53,13 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->outIs('ARGUMENT')
-             ->atomIsNot($containers)
-             ->raw($notReferenceReturningFunction)
+             ->atomIsNot(self::$CONTAINERS)
+             ->not(
+                $this->side()
+                     ->atomIs(self::$FUNCTIONS_CALLS)
+                     ->inIs('DEFINITION')
+                     ->is('reference', true)
+             )
              // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
@@ -80,8 +87,7 @@ class OnlyVariablePassedByReference extends Analyzer {
             $this->atomIs('Functioncall')
                  ->fullnspathIs($functions)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIsNot($containers)
-//                 ->raw($notReferenceReturningFunction)
+                 ->atomIsNot(self::$CONTAINERS)
                  ->back('first');
             $this->prepareQuery();
         }

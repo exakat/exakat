@@ -333,7 +333,7 @@ GREMLIN;
         $readCounts = array_fill_keys($classes, 0);
 
         $query = array();
-        foreach($res as $id => $result) {
+        foreach($res as $result) {
             if (empty($result)) {
                 continue;
             }
@@ -421,7 +421,7 @@ SQL;
         $severity = $docs->getDocs($class)['severity'];
 
         $query = array();
-        foreach($res as $id => $result) {
+        foreach($res as $result) {
             if (empty($result)) {
                 continue;
             }
@@ -844,7 +844,7 @@ GREMLIN;
             
             if (!empty($query)) {
                 $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES '.implode(", \n", $query);
-                $r = $this->sqlite->query($query);
+                $this->sqlite->query($query);
             }
 
             $query = array();
@@ -1405,9 +1405,8 @@ g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
 GREMLIN;
         $res = $this->gremlin->query($query);
         
-        $total = 0;
         $query = array();
-        foreach($res as $value => $row) {
+        foreach($res as $row) {
             if (isset($row['block'])){
                 $query[] = '(\''.$row['encoding'].'\', \''.$row['block'].'\')';
             } else {
@@ -1450,7 +1449,6 @@ GREMLIN;
     }
 
     private function collectFilesDependencies() {
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
         $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                                including STRING,
@@ -2055,7 +2053,7 @@ SQL;
         
         if (!empty($add)) {
             $query = 'INSERT INTO themas (thema) VALUES ("'.implode('"), ("', $add).'")';
-            $res = $this->sqlite->query($query);
+            $this->sqlite->query($query);
         }
     }
     

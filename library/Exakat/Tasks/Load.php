@@ -457,7 +457,6 @@ class Load extends Tasks {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
             }
 
-            $files = 1;
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
                 throw new MustBeADir($dirName);
@@ -586,7 +585,7 @@ class Load extends Tasks {
 
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         $stats = $this->stats;
-        foreach($ignoredFiles as $file => $reason) {
+        foreach($ignoredFiles as $reason) {
             try {
                 $this->processFile($file, $dir);
             } catch (NoFileToProcess $e) {
@@ -1357,7 +1356,6 @@ class Load extends Tasks {
         // Process block
         $this->makeCitBody($trait);
 
-        list($fullnspath, $aliased) = $this->getFullnspath($name);
         $trait->code       = $this->tokens[$current][1];
         $trait->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.static::FULLCODE_BLOCK;
         $trait->token      = $this->getToken($this->tokens[$current][0]);
@@ -1755,7 +1753,6 @@ class Load extends Tasks {
     private function processOpenWithEcho() {
         // Processing ECHO
         $echo = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-        $current = $this->id;
 
         $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
@@ -1789,8 +1786,6 @@ class Load extends Tasks {
     }
 
     private function makeNsname() {
-        $current = $this->id;
-        
         if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                         &&
             in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'), true) &&
@@ -2563,7 +2558,6 @@ class Load extends Tasks {
     private function processFunctioncall($getFullnspath = self::WITH_FULLNSPATH) {
         $name = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
-        $current = $this->id;
 
         if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $atom = 'Newcall';
@@ -2587,7 +2581,6 @@ class Load extends Tasks {
 
         $functioncall = $this->processArguments($atom, array($this->phptokens::T_CLOSE_PARENTHESIS), $argumentsList);
         $argumentsFullcode       = $functioncall->fullcode;
-        $arguments               = $functioncall;
 
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = "{$name->fullcode}({$argumentsFullcode})";
@@ -3790,8 +3783,6 @@ class Load extends Tasks {
     }
 
     private function processTernary() {
-        $current = $this->id;
-
         $condition = $this->popExpression();
         $ternary = $this->addAtom('Ternary');
 
@@ -5074,7 +5065,6 @@ class Load extends Tasks {
 
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
-            $links = 'CLASS';
             $fullcode = "$left->fullcode::$right";
             // We are not sending $left, as it has no impact
             $this->runPlugins($left);
@@ -5659,7 +5649,6 @@ class Load extends Tasks {
             }
         }
 
-        $O = array_count_values($O);
         $D = array_count_values($D);
 
         foreach($this->atoms as $id => $atom) {
