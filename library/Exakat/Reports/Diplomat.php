@@ -78,7 +78,6 @@ class Diplomat extends Ambassador {
 
         if (empty($baseHTML)) {
             $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);

@@ -2238,17 +2238,21 @@ SQL;
         }
 
         foreach($bugfixes as $bugfix) {
+            if (empty($bugfix['solvedIn73']) && 
+                empty($bugfix['solvedIn72']) && 
+                empty($bugfix['solvedIn71']) && 
+                empty($bugfix['solvedIn70']) ) { continue; }
+
             if (!empty($bugfix['function'])) {
                 if (!isset($rows[$bugfix['function']])) { continue; }
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-').'</td>
     <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
-    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
     <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
     <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
     <td>'.$cve.'</td>
@@ -2261,11 +2265,10 @@ SQL;
                 if ($subanalyze === 0) { continue; }
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-').'</td>
     <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
-    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
     <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
     <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
     <td>'.$cve.'</td>

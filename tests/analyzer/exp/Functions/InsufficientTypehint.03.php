@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('function foo2a(i $a) { /**/ } ',
+$expected     = array('function foo2(i $a) { /**/ } ',
+                      'function foo2a(i $a) { /**/ } ',
                      );
 
-$expected_not = array('function foo2(i $a) { /**/ } ',
-                      'function foo($a) { /**/ } ',
+$expected_not = array('function foo($a) { /**/ } ',
                       'function foo1(i $a) { /**/ } ',
                      );
 

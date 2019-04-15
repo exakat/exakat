@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 09 Apr 2019 09:52:57 +0000
-.. comment: Generation hash : 4f3fd7750b4c21da725cf3b31489805c08a27e60
+.. comment: Generation date : Mon, 15 Apr 2019 17:35:08 +0000
+.. comment: Generation hash : ea6963c35582b339eb2791cf44359e193b7f6992
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -806,15 +806,25 @@ That way, the child doesn't need to implement the interface, nor define its meth
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Interfaces/AlreadyParentsInterface |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep the implements call in the class that do implements the methods. Remove it from the children classes.
+
++-------------+-------------------------------------------------------------------------------------------------------+
+| Short name  | Interfaces/AlreadyParentsInterface                                                                    |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                                    |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                 |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                      |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-interfaces-alreadyparentsinterface`, :ref:`thelia-interfaces-alreadyparentsinterface` |
++-------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3292,7 +3302,7 @@ If the method doesn't exists, then the same method will be called again, leading
 
 
 See also `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
-        ``Magical PHP: `__call( <http://php.net/manual/en/language.oop5.magic.php>`_ ) <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
+        ``Magical PHP: `__call <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
 
 
 
@@ -7007,17 +7017,28 @@ Always use elseif instead of else and if.
    
    ?>
 
-.
 
-+-------------+-------------------------+
-| Short name  | Structures/ElseIfElseif |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
+See also `elseif/else if <https://www.php.net/manual/en/control-structures.elseif.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge else and if into elseif
+* Turn the else expression into a block, and have more than the second if in this block
+* Turn the if / else if / else into a switch structure
+
++-------------+---------------------------------------------------------------------------------------+
+| Short name  | Structures/ElseIfElseif                                                               |
++-------------+---------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                        |
++-------------+---------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                 |
++-------------+---------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                       |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`teampass-structures-elseifelseif`, :ref:`phpdocumentor-structures-elseifelseif` |
++-------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -10090,50 +10111,6 @@ This analysis reports chains of elseif that don't share a common variable (or ar
 
 
 
-.. _inconsistent-variable-usage:
-
-Inconsistent Variable Usage
-###########################
-
-
-Those variables are used in various and inconsistent ways. It is difficult to understand if they are an array, an object or a scalar variable.
-
-.. code-block:: php
-
-   <?php
-   
-   // $a is an array, then $b is a string.
-   $a = ['a', 'b', 'c'];
-   $b = implode('-', $a);
-   
-   // $a is an array, then it is a string.
-   $a = ['a', 'b', 'c'];
-   $a = implode('-', $a);
-   
-   ?>
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Keep one type for each variable. This keeps the code readable. 
-* Give different names to variables with different types.
-
-+-------------+----------------------------------------------+
-| Short name  | Variables/InconsistentUsage                  |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Suggestions`                           |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Slow (1 hour)                                |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`wordpress-variables-inconsistentusage` |
-+-------------+----------------------------------------------+
-
-
-
 .. _indices-are-int-or-string:
 
 Indices Are Int Or String
@@ -10190,15 +10167,54 @@ As a general rule of thumb, only use integers or strings that don\'t look like i
 
 This analyzer may find constant definitions, when available.
 
-+-------------+----------------------------------+
-| Short name  | Structures/IndicesAreIntOrString |
-+-------------+----------------------------------+
-| Themes      | :ref:`Analyze`                   |
-+-------------+----------------------------------+
-| Severity    | Major                            |
-+-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
-+-------------+----------------------------------+
+Note also that PHP detects integer inside strings, and silently turn them into integers. Partial numbers and octals are not transformed.
+
+.. code-block:: php
+
+   <?php
+       $a = [1      => 1,
+             '2'    => 2,
+             '011'  => 9, // octal number
+             '11d'  => 11, // partial number 
+             ];
+             
+       var_dump($a);
+   
+   /*
+   The above displays
+   array(4) {
+     [1]=>
+     int(1)
+     [2]=>
+     int(2)
+     [011]=>
+     int(9)
+     [11d]=>
+     int(11)
+   }*/
+   ?>
+
+
+See also `Arrays syntax <https://www.php.net/manual/en/language.types.array.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not use any type but string or integer
+* Force typecast the keys when building an array
+
++-------------+-------------------------------------------------------------------------------------------------+
+| Short name  | Structures/IndicesAreIntOrString                                                                |
++-------------+-------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                  |
++-------------+-------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                           |
++-------------+-------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                 |
++-------------+-------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`zencart-structures-indicesareintorstring`, :ref:`mautic-structures-indicesareintorstring` |
++-------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -10852,56 +10868,6 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Examples    | :ref:`wordpress-performances-joinfile`, :ref:`spip-performances-joinfile`, :ref:`expressionengine-performances-joinfile`, :ref:`prestashop-performances-joinfile` |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _law-of-demeter:
-
-Law of Demeter
-##############
-
-
-The law of Demeter specifies a number of constraints to apply to methodcalls from within an method, so as to keep dependencies to a minimum. 
-
-.. code-block:: php
-
-   <?php
-   
-   class x {
-       function foo($arg) {
-           $this->foo();    // calling oneself is OK
-           $this->x->bar(); // calling one's property is OK
-           $arg->bar2();    // calling arg's methods is OK
-   
-           $local = new y();
-           $z = $y->bar3();      // calling a local variable is OK
-   
-           $z->bar4();      // calling a method on a previous result is wrong
-       }
-   }
-   
-   ?>
-
-
-See also `Do your objects talk to strangers? <https://www.brandonsavage.net/do-your-objects-talk-to-strangers/>`_ and 
-        `Law of Demeter <https://en.wikipedia.org/wiki/Law_of_Demeter>`_.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+--------------------+
-| Short name  | Classes/DemeterLaw |
-+-------------+--------------------+
-| Themes      | :ref:`Suggestions` |
-+-------------+--------------------+
-| Severity    | Minor              |
-+-------------+--------------------+
-| Time To Fix | Quick (30 mins)    |
-+-------------+--------------------+
 
 
 
@@ -13029,15 +12995,27 @@ Incrementing variables, with math operations or concatenation, is OK : the conte
    
    ?>
 
-+-------------+---------------------------------+
-| Short name  | Structures/MultipleTypeVariable |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a class that accepts one type of argument, and exports another type of argument.
+* Use different variable for each type of data format : $rows (for array), $list (for implode('', $rows))
+* Pass the final result as argument to another method, avoiding the temporary variable
+
++-------------+----------------------------------------------------------------------------------------------+
+| Short name  | Structures/MultipleTypeVariable                                                              |
++-------------+----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                               |
++-------------+----------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                        |
++-------------+----------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                              |
++-------------+----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`typo3-structures-multipletypevariable`, :ref:`vanilla-structures-multipletypevariable` |
++-------------+----------------------------------------------------------------------------------------------+
 
 
 
@@ -14610,15 +14588,21 @@ In this analysis, only properties that are found to be magic are reported. For e
 
 See also `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_.
 
-+-------------+--------------------------+
-| Short name  | Classes/NoMagicWithArray |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a distinct method to append a new value to that property
+
++-------------+----------------------------------------+
+| Short name  | Classes/NoMagicWithArray               |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Slow (1 hour)                          |
++-------------+----------------------------------------+
 
 
 
@@ -15009,6 +14993,14 @@ This applies to methods, functions and closures.
 
 See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
          `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the reference at assignation time
+* Drop the reference in the argument definition
+* Drop the reference in the function return definition
 
 +-------------+--------------------------------------------+
 | Short name  | Php/NoReferenceForTernary                  |
@@ -16330,6 +16322,12 @@ This may be linted by PHP, when the function definition is in the same file as t
 
 
 This analysis currently covers functioncalls and static methodcalls, but omits methodcalls.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Store the previous result in a variable, and then call the function.
 
 +-------------+----------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/OnlyVariablePassedByReference                                                                        |
@@ -23950,17 +23948,17 @@ Suggestions
 
 * Add an explicit initialization for each property.
 
-+-------------+--------------------------------------------------+
-| Short name  | Classes/UnitializedProperties                    |
-+-------------+--------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10` |
-+-------------+--------------------------------------------------+
-| Severity    | Major                                            |
-+-------------+--------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                  |
-+-------------+--------------------------------------------------+
-| Examples    | :ref:`spip-classes-unitializedproperties`        |
-+-------------+--------------------------------------------------+
++-------------+-------------------------------------------+
+| Short name  | Classes/UnitializedProperties             |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Top10`          |
++-------------+-------------------------------------------+
+| Severity    | Major                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | :ref:`spip-classes-unitializedproperties` |
++-------------+-------------------------------------------+
 
 
 

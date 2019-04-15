@@ -128,7 +128,6 @@ SQL
         $root->name = '';
         $root->size = 200;
         $root->children = array();
-        $ns = array('' => $root);
         foreach($classes as $name => $extends) {
             if ($name === '') {
                 $c = $root;

@@ -110,8 +110,6 @@ HTML;
     }
 
     private function cleanFolder() {
-        $html = file_get_contents($this->tmpName.'/index.html');
-
         if (file_exists($this->finalName)) {
             rename($this->finalName, $this->tmpName.'2');
         }

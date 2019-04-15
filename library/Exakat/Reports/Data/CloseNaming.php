@@ -28,7 +28,6 @@ use Exakat\Reports\Reports;
 
 class CloseNaming extends Data {
     public function prepare() {
-        $begin = microtime(true);
         $res = $this->sqlite->query(<<<'SQL'
 SELECT variable FROM variables 
     WHERE LENGTH(variable) > 3    AND 

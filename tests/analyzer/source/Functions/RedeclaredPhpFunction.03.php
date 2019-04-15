@@ -7,6 +7,7 @@ if (!function_exists('magic_quotes_runtime')) {
 }
 
 function split($a, $b){}
+function splitb($a, $b){}
 
 magic_quotes_runtime();
 split();

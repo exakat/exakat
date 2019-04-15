@@ -1,16 +1,16 @@
 <?php
 
-$expected     = array('E',
-                      '$d',
-                      '$f',
-                      '-F',
-                      '-3',
+$expected     = array('4 / E',
+                      '5 / $d',
+                      '3 << $f',
+                      '5 >> -F',
+                      '3 << -3',
                      );
 
-$expected_not = array('+F',
-                      '3',
-                      '10',
-                      '4',
+$expected_not = array('3 << -3',
+                      '3 << $f',
+                      '5 >> -F',
+                      '5 >> +F',
                      );
 
 ?>

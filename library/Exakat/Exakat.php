@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.7.4';
-    const BUILD = 908;
+    const VERSION = '1.7.5';
+    const BUILD = 911;
 
     private $gremlin = null;
     private $config = null;
@@ -48,7 +48,6 @@ class Exakat {
     private function remote(Config $config) {
         $json = $config->commandLineJson();
 
-        $class = $config->remote;
         $remote = new Remote($config->remotes[$config->remote], $this->config->transit_key);
         
         switch ($config->command) {
@@ -80,8 +79,8 @@ class Exakat {
                     print "Error: $json->error\n";
                     return;
                 }
-                
-                $size = file_put_contents("{$config->projects_root}/projects/{$config->project}/dump.zip", $res);
+
+                file_put_contents("{$config->projects_root}/projects/{$config->project}/dump.zip", $res);
                 if (file_exists("{$config->projects_root}/projects/{$config->project}/dump.sqlite")) {
                     unlink("{$config->projects_root}/projects/{$config->project}/dump.sqlite");
                 }

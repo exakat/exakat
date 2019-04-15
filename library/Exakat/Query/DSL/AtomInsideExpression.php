@@ -36,7 +36,6 @@ class AtomInsideExpression extends DSL {
             return new Command(Query::STOP_QUERY);
         }
 
-        $linksDown = self::$linksDown;
         $MAX_LOOPING  = self::$MAX_LOOPING;
 
         $gremlin = <<<GREMLIN

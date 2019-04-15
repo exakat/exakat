@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedInOneBranch extends Analyzer {
     public function analyze() {
-        $equal = $this->dictCode->translate(array('='));
-
         // if() {$b = 1; } else { }
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')

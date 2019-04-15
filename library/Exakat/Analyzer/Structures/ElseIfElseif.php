@@ -31,7 +31,7 @@ class ElseIfElseif extends Analyzer {
     public function analyze() {
         $this->atomIs('Ifthen')
              ->outIs('ELSE')
-             ->raw('where( __.out("EXPRESSION").count().is(eq(1)) )')
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Ifthen')
              ->tokenIsNot('T_ELSEIF');

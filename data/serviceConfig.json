@@ -31,7 +31,7 @@
                 "file":["circle.yml", ".circleci"]},
  "codacy":{"homepage":"http://www.codacy.com/",
                 "file":[".codacy.json"]},
- "codeception":{"homepage":"http://codeception.com/",
+ "codeception":{"homepage":"https://codeception.com/",
                 "file":["codeception.yml", "codeception.dist.yml"]},
  "codecov":{"homepage":"https://codecov.io/",
            "file":[".codecov.yml", "codecov.yml"]},

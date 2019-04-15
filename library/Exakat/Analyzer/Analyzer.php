@@ -286,7 +286,7 @@ GREMLIN;
                     $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "$this->analyzerQuoted").outE("ANALYZED").drop()
 GREMLIN;
-                    $res = $this->gremlin->query($query);
+                    $this->gremlin->query($query);
                 }
             }
         } else {

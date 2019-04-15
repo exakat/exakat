@@ -54,7 +54,7 @@ class ThemesExt {
         }
         
         $return = array();
-        foreach($this->themes as $name => $t) {
+        foreach($this->themes as $t) {
             $return[] = $t->getThemeAnalyzers($theme);
         }
         
@@ -67,7 +67,7 @@ class ThemesExt {
         }
         
         $return = array();
-        foreach($this->themes as $name => $t) {
+        foreach($this->themes as $t) {
             $return[] = $t->getThemeForAnalyzer($analyzer);
         }
         
@@ -77,7 +77,7 @@ class ThemesExt {
 
     public function getThemesForAnalyzer($analyzer = null) {
         $return = array();
-        foreach($this->themes as $theme => $extension) {
+        foreach($this->themes as $extension) {
             $return[] = $extension->getThemesForAnalyzer($analyzer);
         }
         
@@ -145,7 +145,7 @@ class ThemesExt {
 
         $return = array();
 
-        foreach($this->themes as $name => $theme) {
+        foreach($this->themes as $theme) {
             $return[] = $theme->listAllThemes();
         }
 

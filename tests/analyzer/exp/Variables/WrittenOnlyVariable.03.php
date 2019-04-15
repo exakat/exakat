@@ -4,8 +4,7 @@ $expected     = array('$am',
                       '$cmr',
                      );
 
-$expected_not = array(
-                      '$hr',
+$expected_not = array('$hr',
                       '$dr',
                      );
 

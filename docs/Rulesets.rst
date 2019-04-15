@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 09 Apr 2019 09:52:57 +0000
-.. comment: Generation hash : 4f3fd7750b4c21da725cf3b31489805c08a27e60
+.. comment: Generation date : Mon, 15 Apr 2019 17:35:08 +0000
+.. comment: Generation hash : ea6963c35582b339eb2791cf44359e193b7f6992
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 351 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -357,7 +357,6 @@ Total : 352 analysis
 * :ref:`Undefined Variable <undefined-variable>`
 * :ref:`Undefined \:\:class <undefined-\:\:class>`
 * :ref:`Undefined static\:\: Or self\:\: <undefined-static\:\:-or-self\:\:>`
-* :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 * :ref:`Unkown Regex Options <unkown-regex-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
@@ -974,7 +973,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -986,6 +985,7 @@ Total : 18 analysis
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
+* :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
@@ -1094,7 +1094,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 77 analysis
+Total : 75 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1124,10 +1124,8 @@ Total : 77 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
-* :ref:`Inconsistent Variable Usage <inconsistent-variable-usage>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
-* :ref:`Law of Demeter <law-of-demeter>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Multiple Identical Closure <multiple-identical-closure>`

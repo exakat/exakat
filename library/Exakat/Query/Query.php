@@ -122,7 +122,6 @@ class Query {
                 $this->query .= '.'.implode(".\n", $commands);
             }
         } elseif (substr($commands[0], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-            $first = $commands[0];
             array_shift($commands);
             $arg0 = array_pop($this->commands[0]->arguments);
             unset($this->commands[0]);

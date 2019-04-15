@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once './Test/Analyzer.php';
 
 class RandomlySortedLiterals extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testArrays_RandomlySortedLiterals01()  { $this->generic_test('Arrays/RandomlySortedLiterals.01'); }
     public function testArrays_RandomlySortedLiterals02()  { $this->generic_test('Arrays/RandomlySortedLiterals.02'); }
@@ -16,5 +16,6 @@ class RandomlySortedLiterals extends Analyzer {
     public function testArrays_RandomlySortedLiterals05()  { $this->generic_test('Arrays/RandomlySortedLiterals.05'); }
     public function testArrays_RandomlySortedLiterals06()  { $this->generic_test('Arrays/RandomlySortedLiterals.06'); }
     public function testArrays_RandomlySortedLiterals07()  { $this->generic_test('Arrays/RandomlySortedLiterals.07'); }
+    public function testArrays_RandomlySortedLiterals08()  { $this->generic_test('Arrays/RandomlySortedLiterals.08'); }
 }
 ?>

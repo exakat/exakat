@@ -87,6 +87,7 @@ class CreateMagicProperty extends LoadFinal {
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
               ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
@@ -108,6 +109,7 @@ class CreateMagicProperty extends LoadFinal {
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
               ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
@@ -131,6 +133,7 @@ class CreateMagicProperty extends LoadFinal {
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
               ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
@@ -151,6 +154,7 @@ class CreateMagicProperty extends LoadFinal {
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
               ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
