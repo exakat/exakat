@@ -35,6 +35,29 @@ class NoReferenceForTernary extends Analyzer {
              ->atomIs(array('Ternary', 'Coalesce'))
              ->back('first');
         $this->prepareQuery();
+
+        // function foo() { $a = &$b; $c = rand() ?? $a; }
+        $this->atomIs('Variable')
+             ->is('reference', true)
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
+             ->inIs(array('THEN', 'ELSE'))
+             ->atomIs(array('Ternary', 'Coalesce'));
+        $this->prepareQuery();
+
+        // function foo(&$a) { 1 ?? $a ; }
+        $this->atomIs('Variable')
+             ->inIs(array('THEN', 'ELSE'))
+             ->atomIs(array('Ternary', 'Coalesce'))
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->inIs('NAME')
+             ->is('reference', true)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
