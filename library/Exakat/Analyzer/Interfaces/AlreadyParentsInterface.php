@@ -26,12 +26,12 @@ use Exakat\Analyzer\Analyzer;
 class AlreadyParentsInterface extends Analyzer {
     public function analyze() {
         // Find classes which are implementing several times the same interface
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->savePropertyAs('fullnspath', 'i')
              ->inIs('IMPLEMENTS')
-             ->goToAllParents()
-             ->outIs('IMPLEMENTS')
+             ->goToAllImplements(self::EXCLUDE_SELF)
+             ->outIs(array('IMPLEMENTS', 'EXTENDS')) 
              ->samePropertyAs('fullnspath', 'i')
              ->back('first');
         $this->prepareQuery();
