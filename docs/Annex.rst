@@ -335,6 +335,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
+* Teampass
 * `Thelia <https://thelia.net/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Tikiwiki <https://tiki.org/>`_
@@ -390,7 +391,7 @@ Those libraries, or even some of the, may be included again in the analysis by c
 * `Propel <http://propelorm.org/>`_
 * `phpExecl <https://phpexcel.codeplex.com/>`_
 * `phpMailer <https://github.com/PHPMailer/PHPMailer>`_
-* `PHPSpec <http://www.phpspec.net/en/stable/>`_
+* `PHPSpec <http://www.phpspec.net/en/latest/>`_
 * `PHPUnit <https://www.phpunit.de/>`_
 * `qrCode <http://phpqrcode.sourceforge.net/>`_
 * `Services_JSON <https://pear.php.net/package/Services_JSON>`_
@@ -430,7 +431,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.9
 
-  * Inconsistent Variable Usage (Variables/InconsistentUsage ; Suggestions)
+  * Inconsistent Variable Usage (Variables/InconsistentUsage ; Under Work)
   * Typehint Must Be Returned (Functions/TypehintMustBeReturned)
 
 * 1.6.8
@@ -892,7 +893,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Child Class Removes Typehint (Classes/ChildRemoveTypehint)
   * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions)
   * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
-  * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4)
+  * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4, LintButWontExec)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
   * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72)
   * ext/xattr (Extensions/Extxattr ; Appinfo)
@@ -1139,7 +1140,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * More Than One Level Of Indentation (Structures/OneLevelOfIndentation ; Calisthenics)
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71)
-  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Simple, Suggestions, Level 4, Top10)
+  * Unitialized Properties (Classes/UnitializedProperties ; OneFile, Simple, Suggestions, Level 4, Top10)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Simple, Level 1)
 
 * 0.8.7
@@ -1943,7 +1944,7 @@ List of external services whose configuration files has been commited in the cod
 * `bower <http://bower.io/>`_ - bower.json, .bowerrc
 * `circleCI <https://circleci.com/>`_ - circle.yml, .circleci
 * `codacy <http://www.codacy.com/>`_ - .codacy.json
-* `codeception <http://codeception.com/>`_ - codeception.yml, codeception.dist.yml
+* `codeception <https://codeception.com/>`_ - codeception.yml, codeception.dist.yml
 * `codecov <https://codecov.io/>`_ - .codecov.yml, codecov.yml
 * `codeclimate <http://www.codeclimate.com/>`_ - .codeclimate.yml
 * `composer <https://getcomposer.org/>`_ - composer.json, composer.lock, vendor
@@ -2028,21 +2029,22 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
+* `Arrays syntax <https://www.php.net/manual/en/language.types.array.php>`_
 * `assert <http://php.net/assert>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -2134,6 +2136,7 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
+* `elseif/else if <https://www.php.net/manual/en/control-structures.elseif.php>`_
 * `empty <http://www.php.net/empty>`_
 * `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
@@ -2196,8 +2199,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2258,8 +2261,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset <http://www.php.net/isset>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2491,8 +2494,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
@@ -2653,7 +2656,6 @@ _______
 |   analyzer[] = "Classes/UndefinedProperty";
 |   analyzer[] = "Classes/UndefinedStaticMP";
 |   analyzer[] = "Classes/UndefinedStaticclass";
-|   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Classes/UnresolvedClasses";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
 |   analyzer[] = "Classes/UseClassOperator";
@@ -3549,6 +3551,7 @@ _______________
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/MutualExtension";
+|   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
@@ -3678,7 +3681,6 @@ ___________
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Arrays/ShouldPreprocess";
 |   analyzer[] = "Arrays/SliceFirst";
-|   analyzer[] = "Classes/DemeterLaw";
 |   analyzer[] = "Classes/ParentFirst";
 |   analyzer[] = "Classes/ShouldDeepClone";
 |   analyzer[] = "Classes/ShouldHaveDestructor";
@@ -3750,8 +3752,7 @@ ___________
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Structures/WhileListEach";
-|   analyzer[] = "Traits/MultipleUsage";
-|   analyzer[] = "Variables/InconsistentUsage";| 
+|   analyzer[] = "Traits/MultipleUsage";| 
 
 
 

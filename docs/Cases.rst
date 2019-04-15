@@ -2877,6 +2877,58 @@ This is less obvious, but turning print to echo, and the double-quoted string to
 
     print "PEAR constructor called, class=$classname\n";
 
+Else If Versus Elseif
+=====================
+
+.. _teampass-structures-elseifelseif:
+
+Teampass
+^^^^^^^^
+
+:ref:`else-if-versus-elseif`, in items.php:819. 
+
+This code could be turned into a switch() structure.
+
+.. code-block:: php
+
+    if ($field[3] === 'text') {
+                    echo '
+                            <input type=text id=edit_field_.$field[0]._.$elem[0]. class=edit_item_field input_text text ui-widget-content ui-corner-all size=40 data-field-type=.$field[3]. data-field-masked=.$field[4]. data-field-is-mandatory=.$field[5]. data-template-id=.$templateID.>';
+                } else if ($field[3] === 'textarea') {
+                    echo '
+                            <textarea id=edit_field_.$field[0]._.$elem[0]. class=edit_item_field input_text text ui-widget-content ui-corner-all colums=40 rows=5 data-field-type=.$field["3"]. data-field-masked=.$field[4]. data-field-is-mandatory=.$field[5]. data-template-id=.$templateID.></textarea>';
+                }
+
+
+--------
+
+
+.. _phpdocumentor-structures-elseifelseif:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`else-if-versus-elseif`, in src/phpDocumentor/Plugin/Core/Transformer/Writer/Xsl.php:112. 
+
+The first then block is long and complex. The else block, on the other hand, only contains a single if/then/else. Both conditions are distinct at first sight, so a if / elseif / then structure would be the best.
+
+.. code-block:: php
+
+    if ($transformation->getQuery() !== '') {
+    /** Long then block **/
+            } else {
+                if (substr($transformation->getArtifact(), 0, 1) == '$') {
+                    // not a file, it must become a variable!
+                    $variable_name = substr($transformation->getArtifact(), 1);
+                    $this->xsl_variables[$variable_name] = $proc->transformToXml($structure);
+                } else {
+                    $relativeFileName = substr($artifact, strlen($transformation->getTransformer()->getTarget()) + 1);
+                    $proc->setParameter('', 'root', str_repeat('../', substr_count($relativeFileName, '/')));
+    
+                    $this->writeToFile($artifact, $proc, $structure);
+                }
+            }
+
 Could Be Static
 ===============
 
@@ -3048,6 +3100,60 @@ $this->currentProject->next_ticket_id value is ignored by the code. It may be tu
     
                 $this->currentProject->next_ticket_id++;
                 $this->currentProject->save();
+
+Indices Are Int Or String
+=========================
+
+.. _zencart-structures-indicesareintorstring:
+
+Zencart
+^^^^^^^
+
+:ref:`indices-are-int-or-string`, in includes/modules/payment/paypaldp.php:2523. 
+
+All those strings ends up as integers.
+
+.. code-block:: php
+
+    // Build Currency format table
+        $curFormat = Array();
+        $curFormat[036]=2;
+        $curFormat[124]=2;
+        $curFormat[203]=2;
+        $curFormat[208]=2;
+        $curFormat[348]=2;
+        $curFormat[392]=0;
+        $curFormat[554]=2;
+        $curFormat[578]=2;
+        $curFormat[702]=2;
+        $curFormat[752]=2;
+        $curFormat[756]=2;
+        $curFormat[826]=2;
+        $curFormat[840]=2;
+        $curFormat[978]=2;
+        $curFormat[985]=2;
+
+
+--------
+
+
+.. _mautic-structures-indicesareintorstring:
+
+Mautic
+^^^^^^
+
+:ref:`indices-are-int-or-string`, in app/bundles/CoreBundle/Entity/CommonRepository.php:315. 
+
+$baseCols has 1 and 0 (respectively) for index.
+
+.. code-block:: php
+
+    foreach ($metadata->getAssociationMappings() as $field => $association) {
+                        if (in_array($association['type'], [ClassMetadataInfo::ONE_TO_ONE, ClassMetadataInfo::MANY_TO_ONE])) {
+                            $baseCols[true][$entityClass][]  = $association['joinColumns'][0]['name'];
+                            $baseCols[false][$entityClass][] = $field;
+                        }
+                    }
 
 Should Typecast
 ===============
@@ -3490,6 +3596,55 @@ Security tokens should be build with a CSPRNG source. uniqid() is based on time,
 .. code-block:: php
 
     $this->installer->change_config('config', '$config[\'encryption_key\'] = \'\';', '$config[\'encryption_key\'] = \''.md5(uniqid()).'\';');
+
+Already Parents Interface
+=========================
+
+.. _wordpress-interfaces-alreadyparentsinterface:
+
+WordPress
+^^^^^^^^^
+
+:ref:`already-parents-interface`, in src/Phinx/Db/Adapter/AbstractAdapter.php:41. 
+
+SqlServerAdapter extends PdoAdapter, PdoAdapter extends AbstractAdapter. The first and the last both implements AdapterInterface. Only one is needed.
+
+.. code-block:: php
+
+    /**
+     * Base Abstract Database Adapter.
+     */
+    abstract class AbstractAdapter implements AdapterInterface
+    {
+    
+    /// In the src/src/Phinx/Db/Adapter/SqlServerAdapter.php, line 45
+    /**
+     * Phinx SqlServer Adapter.
+     *
+     */
+    class SqlServerAdapter extends PdoAdapter implements AdapterInterface
+    {
+
+
+--------
+
+
+.. _thelia-interfaces-alreadyparentsinterface:
+
+Thelia
+^^^^^^
+
+:ref:`already-parents-interface`, in core/lib/Thelia/Core/Template/Loop/BaseSpecificModule.php:35. 
+
+PropelSearchLoopInterface is implemented by both BaseSpecificModule and Payment
+
+.. code-block:: php
+
+    abstract class BaseSpecificModule extends BaseI18nLoop implements PropelSearchLoopInterface
+    
+    /* in file  core/lib/Thelia/Core/Template/Loop/Payment.php, line 28 */
+    
+    class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
 
 Invalid Class Name
 ==================
@@ -4370,49 +4525,6 @@ Too much vlaidation
 
     isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child']);
 
-Unitialized Properties
-======================
-
-.. _spip-classes-unitializedproperties:
-
-SPIP
-^^^^
-
-:ref:`unitialized-properties`, in ecrire/public/interfaces.php:584. 
-
-The class Critere (Criteria) has no method at all. When using a class as an array, to capture values, one of the advantage of the class is in the default values for the properties. In particular, the last property here, called $not, should be initialized with a false. 
-
-.. code-block:: php
-
-    /**
-     * Description d'un critère de boucle
-     *
-     * Sous-noeud de Boucle
-     *
-     * @package SPIP\Core\Compilateur\AST
-     **/
-    class Critere {
-    	/**
-    	 * Type de noeud
-    	 *
-    	 * @var string
-    	 */
-    	public $type = 'critere';
-    
-    	/**
-    	 * Opérateur (>, <, >=, IN, ...)
-    	 *
-    	 * @var null|string
-    	 */
-    	public $op;
-    
-    	/**
-    	 * Présence d'une négation (truc !op valeur)
-    	 *
-    	 * @var null|string
-    	 */
-    	public $not;
-
 Bail Out Early
 ==============
 
@@ -4949,7 +5061,7 @@ Dolphin
 
 :ref:`only-variable-passed-by-reference`, in administration/charts.json.php:89. 
 
-This is not possible, as array_slice returns a new array, and not a reference. Minimaly, the intermediate result must be saved in a variable, to be popped. Actually, this code extracts the element at key 1 in the $aData array, although this also works with hash (non-numeric keys).
+This is not possible, as array_slice() returns a new array, and not a reference. Minimally, the intermediate result must be saved in a variable, then popped. Actually, this code extracts the element at key 1 in the $aData array, although this also works with hash (non-numeric keys).
 
 .. code-block:: php
 
@@ -4966,7 +5078,7 @@ PhpIPAM
 
 :ref:`only-variable-passed-by-reference`, in functions/classes/class.Thread.php:243. 
 
-This is sneaky bug : the assignation $status = 0 returns a value, and not a variable. This leads PHP to mistake the initialized 0 with the variable $status and faild. It is not possible to initialize variable AND use them as argument.
+This is sneaky bug : the assignation $status = 0 returns a value, and not a variable. This leads PHP to mistake the initialized 0 with the variable $status and fails. It is not possible to initialize variable AND use them as argument.
 
 .. code-block:: php
 
@@ -5321,6 +5433,62 @@ Long list of == are harder to read. Using an in_array() call gathers all the str
     {
       $user = $_POST['user'];
     }
+
+Multiple Type Variable
+======================
+
+.. _typo3-structures-multipletypevariable:
+
+Typo3
+^^^^^
+
+:ref:`multiple-type-variable`, in typo3/sysext/backend/Classes/Form/Element/InputDateTimeElement.php:270. 
+
+$fullElement is an array most of the time, but finally ends up being a string. Since the array is not the final state, it may be interesting to make it a class, which collects the various variables, and export the final string. Such class would be usefull in several places in this repository.
+
+.. code-block:: php
+
+    $fullElement = [];
+                $fullElement[] = '<div class=checkbox t3js-form-field-eval-null-placeholder-checkbox>';
+                $fullElement[] =     '<label for= . $nullControlNameEscaped . >';
+                $fullElement[] =         '<input type=hidden name= . $nullControlNameEscaped .  value= . $fallbackValue .  />';
+                $fullElement[] =         '<input type=checkbox name= . $nullControlNameEscaped .  id= . $nullControlNameEscaped .  value=1' . $checked . $disabled . ' />';
+                $fullElement[] =         $overrideLabel;
+                $fullElement[] =     '</label>';
+                $fullElement[] = '</div>';
+                $fullElement[] = '<div class=t3js-formengine-placeholder-placeholder>';
+                $fullElement[] =    '<div class=form-control-wrap style=max-width: . $width . px>';
+                $fullElement[] =        '<input type=text class=form-control disabled=disabled value= . $shortenedPlaceholder .  />';
+                $fullElement[] =    '</div>';
+                $fullElement[] = '</div>';
+                $fullElement[] = '<div class=t3js-formengine-placeholder-formfield>';
+                $fullElement[] =    $expansionHtml;
+                $fullElement[] = '</div>';
+                $fullElement = implode(LF, $fullElement);
+
+
+--------
+
+
+.. _vanilla-structures-multipletypevariable:
+
+Vanilla
+^^^^^^^
+
+:ref:`multiple-type-variable`, in typo3/sysext/backend/Classes/Form/Element/InputDateTimeElement.php:270. 
+
+Here, $value may be of different type. The if() structures merges all the incoming format into one standard type (int). This is actually the contrary of this analysis, and is a false positive.
+
+.. code-block:: php
+
+    if (is_array($value)) {
+                            $value = count($value);
+                        } elseif (stringEndsWith($field, 'UserID', true)) {
+                            $value = 1;
+                        }
+    
+    
+    vanilla	$value = count($value)	/library/core/functions.general.php:1427
 
 Is Actually Zero
 ================
@@ -7219,6 +7387,49 @@ This is the equivalent of !(isset($Data["Series"][$SerieA]["Data"]) && isset($Da
 
     !isset($Data["Series"][$SerieA]["Data"]) || !isset($Data["Series"][$SerieB]["Data"])
 
+Unitialized Properties
+======================
+
+.. _spip-classes-unitializedproperties:
+
+SPIP
+^^^^
+
+:ref:`unitialized-properties`, in ecrire/public/interfaces.php:584. 
+
+The class Critere (Criteria) has no method at all. When using a class as an array, to capture values, one of the advantage of the class is in the default values for the properties. In particular, the last property here, called $not, should be initialized with a false. 
+
+.. code-block:: php
+
+    /**
+     * Description d'un critère de boucle
+     *
+     * Sous-noeud de Boucle
+     *
+     * @package SPIP\Core\Compilateur\AST
+     **/
+    class Critere {
+    	/**
+    	 * Type de noeud
+    	 *
+    	 * @var string
+    	 */
+    	public $type = 'critere';
+    
+    	/**
+    	 * Opérateur (>, <, >=, IN, ...)
+    	 *
+    	 * @var null|string
+    	 */
+    	public $op;
+    
+    	/**
+    	 * Présence d'une négation (truc !op valeur)
+    	 *
+    	 * @var null|string
+    	 */
+    	public $not;
+
 Use List With Foreach
 =====================
 
@@ -7961,26 +8172,6 @@ WebDav uses Sharing, and Sharing uses Webdav. Once using the other is sufficient
         
     }
     //Trait Sharing is in /build/integration/features/bootstrap/Sharing.php:36
-
-Inconsistent Variable Usage
-===========================
-
-.. _wordpress-variables-inconsistentusage:
-
-WordPress
-^^^^^^^^^
-
-:ref:`inconsistent-variable-usage`, in wp-includes/IXR/class-IXR-client.php:86. 
-
-$request is used successively as an object (IXR_Request), then as a string (The POST). Separatring both usage with different names will help readability.
-
-.. code-block:: php
-
-    $request = new IXR_Request($method, $args);
-            $length = $request->getLength();
-            $xml = $request->getXml();
-            $r = "\r\n";
-            $request  = "POST {$this->path} HTTP/1.0$r";
 
 Function Subscripting, Old Style
 ================================
