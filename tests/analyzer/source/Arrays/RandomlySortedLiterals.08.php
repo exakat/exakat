@@ -7,5 +7,5 @@ $a = 	array('Boolean', 'Array', 'Null');
 $a = 	array('Boolean');
 $a = 	array('Array');
 
-$b = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+$b =    array('Integer', 'Real', 'Null', 'Boolean', 'String');
 ?>

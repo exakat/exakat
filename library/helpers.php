@@ -25,6 +25,9 @@ use Exakat\Exceptions\NoSuchDir;
 const INI_PROCESS_SECTIONS = true;
 const INI_DONT_PROCESS_SECTIONS = false;
 
+const STRICT_COMPARISON = true;
+const LOOSE_COMPARISON  = false;
+
 function display($text) {
     global $VERBOSE;
     
