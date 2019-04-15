@@ -25,56 +25,56 @@ namespace Exakat\Tasks\Helpers;
 class IsRead extends Plugin {
     public $name = 'isRead';
     public $type = 'boolean';
-    private $variables = array('Variable', 'Variableobject', 'Variablearray', 
-                               'Member', 'Staticproperty', 
-                               'Phpvariable', 'This', 
+    private $variables = array('Variable', 'Variableobject', 'Variablearray',
+                               'Member', 'Staticproperty',
+                               'Phpvariable', 'This',
                                'Array',);
 
     public function run($atom, $extras) {
         switch ($atom->atom) {
-            case 'Assignation' : 
+            case 'Assignation' :
                 if (in_array($extras['RIGHT']->atom, $this->variables)) {
                     $extras['RIGHT']->isRead = true;
                 }
                 break;
 
-            case 'Not' : 
+            case 'Not' :
                 if (in_array($extras['NOT']->atom, $this->variables)) {
                     $extras['NOT']->isRead = true;
                 }
                 break;
 
-            case 'Sign' : 
+            case 'Sign' :
                 if (in_array($extras['SIGN']->atom, $this->variables)) {
                     $extras['SIGN']->isRead = true;
                 }
                 break;
 
-            case 'Throw' : 
+            case 'Throw' :
                 if (in_array($extras['THROW']->atom, $this->variables)) {
                     $extras['THROW']->isRead = true;
                 }
                 break;
 
-            case 'Return' : 
+            case 'Return' :
                 if (in_array($extras['RETURN']->atom, $this->variables)) {
                     $extras['RETURN']->isRead = true;
                 }
                 break;
 
-            case 'Clone' : 
+            case 'Clone' :
                 if (in_array($extras['CLONE']->atom, $this->variables)) {
                     $extras['CLONE']->isRead = true;
                 }
                 break;
 
-            case 'Foreach' : 
+            case 'Foreach' :
                 if (in_array($extras['SOURCE']->atom, $this->variables)) {
                     $extras['SOURCE']->isRead = true;
                 }
                 break;
 
-            case 'For' : 
+            case 'For' :
                 if (in_array($extras['INIT']->atom, $this->variables)) {
                     $extras['INIT']->isRead = true;
                 }
@@ -86,19 +86,19 @@ class IsRead extends Plugin {
                 }
                 break;
 
-            case 'Switch' : 
+            case 'Switch' :
                 if (in_array($extras['CONDITION']->atom, $this->variables)) {
                     $extras['CONDITION']->isRead = true;
                 }
                 break;
 
-            case 'Case' : 
+            case 'Case' :
                 if (in_array($extras['CASE']->atom, $this->variables)) {
                     $extras['CASE']->isRead = true;
                 }
                 break;
 
-            case 'Coalesce' : 
+            case 'Coalesce' :
                 if (in_array($extras['LEFT']->atom, $this->variables)) {
                     $extras['LEFT']->isRead = true;
                 }
@@ -107,7 +107,7 @@ class IsRead extends Plugin {
                 }
                 break;
 
-            case 'Ternary' : 
+            case 'Ternary' :
                 if (in_array($extras['CONDITION']->atom, $this->variables)) {
                     $extras['CONDITION']->isRead = true;
                 }
@@ -119,13 +119,13 @@ class IsRead extends Plugin {
                 }
                 break;
 
-            case 'Cast' : 
+            case 'Cast' :
                 if (in_array($extras['CAST']->atom, $this->variables)) {
                     $extras['CAST']->isRead = true;
                 }
                 break;
 
-            case 'Keyvalue' : 
+            case 'Keyvalue' :
                 if (in_array($extras['INDEX']->atom, $this->variables)) {
                     $extras['INDEX']->isRead = true;
                 }
@@ -134,13 +134,13 @@ class IsRead extends Plugin {
                 }
                 break;
 
-            case 'Preplusplus' : 
+            case 'Preplusplus' :
                 if (in_array($extras['PREPLUSPLUS']->atom, $this->variables)) {
                     $extras['PREPLUSPLUS']->isRead = true;
                 }
                 break;
 
-            case 'Postplusplus' : 
+            case 'Postplusplus' :
                 if (in_array($extras['POSTPLUSPLUS']->atom, $this->variables)) {
                     $extras['POSTPLUSPLUS']->isRead = true;
                 }
@@ -149,7 +149,7 @@ class IsRead extends Plugin {
             case 'Addition':
             case 'Multiplication':
             case 'Logical' :
-            case 'Comparison' : 
+            case 'Comparison' :
             case 'Bitshift':
             case 'Power':
                 if (in_array($extras['RIGHT']->atom, $this->variables)) {
@@ -192,7 +192,7 @@ class IsRead extends Plugin {
             case 'Methodcall' :
             case 'Newcall' :
             case 'Echo' :
-            case 'Sequence' : 
+            case 'Sequence' :
                 foreach($extras as &$extra) {
                     if (in_array($extra->atom, $this->variables)) {
                         $extra->isRead = true;

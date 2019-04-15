@@ -1464,7 +1464,7 @@ GREMLIN;
               ->_as('include')
               ->goToInstruction('File')
               ->_as('file')
-              ->select(array('file'    => 'fullcode', 
+              ->select(array('file'    => 'fullcode',
                              'include' => 'fullcode'));
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
