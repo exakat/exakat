@@ -43,7 +43,7 @@ class MissingInclude extends Analyzer {
               ->_as('include')
               ->goToInstruction('File')
               ->_as('file')
-              ->select(array('file'    => 'fullcode', 
+              ->select(array('file'    => 'fullcode',
                              'include' => 'fullcode'));
         $result = $this->rawQuery();
 //        print $result->count().' found'.PHP_EOL;
@@ -277,8 +277,8 @@ GREMLIN
 
         if (count($bits) == 1) {
             $file = trim($file, '"\'');
-            $file = str_replace(array_keys($vars), 
-                                array_values($vars), 
+            $file = str_replace(array_keys($vars),
+                                array_values($vars),
                                 $file
                                 );
         } else {

@@ -29,33 +29,33 @@ class IsModified extends Plugin {
 
     public function run($atom, $extras) {
         switch ($atom->atom) {
-            case 'Assignation' : 
+            case 'Assignation' :
                 if (in_array($extras['LEFT']->atom, $this->variables)) {
                     $extras['LEFT']->isModified = true;
                 }
                 break;
 
-            case 'Cast' : 
-                if ($atom->token === 'T_UNSET_CAST' && 
+            case 'Cast' :
+                if ($atom->token === 'T_UNSET_CAST' &&
                     in_array($extras['CAST']->atom, $this->variables)) {
                     $extras['CAST']->isModified = true;
                 }
                 break;
 
-            case 'Catch' : 
+            case 'Catch' :
                 if (in_array($extras['VARIABLE']->atom, $this->variables)) {
                     $extras['VARIABLE']->isModified = true;
                 }
                 break;
 
-            case 'Foreach' : 
+            case 'Foreach' :
                 if (in_array($extras['VALUE']->atom, $this->variables)) {
                     $extras['VALUE']->isModified = true;
                 }
                 break;
 
-            case 'List' : 
-            case 'Unset' : 
+            case 'List' :
+            case 'Unset' :
                 foreach($extras as &$extra) {
                     if (in_array($extra->atom, $this->variables)) {
                         $extra->isModified = true;
@@ -63,23 +63,23 @@ class IsModified extends Plugin {
                 }
                 break;
 
-            case 'Parametername' : 
+            case 'Parametername' :
                 $atom->isModified = true;
                 break;
 
-            case 'Arrayappend' : 
+            case 'Arrayappend' :
                 if (in_array($extras['APPEND']->atom, $this->variables)) {
                     $extras['APPEND']->isModified = true;
                 }
                 break;
 
-            case 'Preplusplus' : 
+            case 'Preplusplus' :
                 if (in_array($extras['PREPLUSPLUS']->atom, $this->variables)) {
                     $extras['PREPLUSPLUS']->isModified = true;
                 }
                 break;
 
-            case 'Postplusplus' : 
+            case 'Postplusplus' :
                 if (in_array($extras['POSTPLUSPLUS']->atom, $this->variables)) {
                     $extras['POSTPLUSPLUS']->isModified = true;
                 }

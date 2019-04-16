@@ -2238,9 +2238,9 @@ SQL;
         }
 
         foreach($bugfixes as $bugfix) {
-            if (empty($bugfix['solvedIn73']) && 
-                empty($bugfix['solvedIn72']) && 
-                empty($bugfix['solvedIn71']) && 
+            if (empty($bugfix['solvedIn73']) &&
+                empty($bugfix['solvedIn72']) &&
+                empty($bugfix['solvedIn71']) &&
                 empty($bugfix['solvedIn70']) ) { continue; }
 
             if (!empty($bugfix['function'])) {

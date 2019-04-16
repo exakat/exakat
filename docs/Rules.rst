@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 15 Apr 2019 17:35:08 +0000
-.. comment: Generation hash : ea6963c35582b339eb2791cf44359e193b7f6992
+.. comment: Generation date : Tue, 16 Apr 2019 07:58:38 +0000
+.. comment: Generation hash : 866be355bbcf26dd53a7f7781b252ec9d209c567
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -12180,6 +12180,14 @@ The analysis doesn't take into account include_path. This may yield false positi
 
 
 Missing included files may lead to a fatal error, a warning or other error later in the execution.
+
++------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name                   | Default | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                    |
++------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| <constant or variable> | 100     | string | Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names. |
++------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 
 +-------------+----------------------+
 | Short name  | Files/MissingInclude |

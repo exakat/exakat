@@ -254,6 +254,8 @@ ignore_dirs and include_dirs are the option used to select files within a folder
 * omitting ignore_dirs defaults to `"ignore_dirs[] = ""`
 * including or ignoring files multiple times only has effect once
 
+include_dirs has priority over the `config.cache` configuration file. If a folder has been marked for exclusion in the `config.cache` file, it may be forced to be included by configuring its value with include_dirs in the `config.ini` file. 
+
 
 Specific analyser configurations
 --------------------------------

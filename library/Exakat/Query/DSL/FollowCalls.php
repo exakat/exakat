@@ -29,7 +29,6 @@ use Exakat\Analyzer\Analyzer;
 class FollowCalls extends DSL {
     public function run() : Command {
         $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
 
         // Coalesce is not supported
         return new Command(<<<GREMLIN

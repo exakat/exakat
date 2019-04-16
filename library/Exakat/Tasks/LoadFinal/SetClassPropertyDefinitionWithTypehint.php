@@ -101,7 +101,7 @@ class SetClassPropertyDefinitionWithTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-        $count = $countP + $countM;
+        $count = $countP + $countM + $countC;
         display("Set $count method, class and properties with typehinted properties");
         $this->log->log(__METHOD__);
     }

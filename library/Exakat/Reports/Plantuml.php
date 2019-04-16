@@ -42,7 +42,6 @@ SQL
         $id = 0;
         $ids = array();
         $puml = array();
-        $links = array();
         $extends = array();
         $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue');
         $subgraphs = array();
