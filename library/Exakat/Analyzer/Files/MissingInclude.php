@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class MissingInclude extends Analyzer {
+    protected $constant_or_variable_name = 100;
+    
     public function analyze() {
         $files = array_merge(self::$datastore->getCol('files', 'file'),
                              self::$datastore->getCol('ignoredFiles', 'file'));
@@ -34,9 +36,7 @@ class MissingInclude extends Analyzer {
                   ->values('fullcode');
             $files = $this->rawQuery()->toArray();
         }
-//        print_r($files);
 
-//        print_r($files);
         $this->atomIs('Include')
               ->outIs('ARGUMENT')
               ->outIsIE('CODE')
@@ -297,8 +297,6 @@ GREMLIN
         while(preg_match('|^(.*/)[^/\.]+?/\.\./(.*)$|', $file, $r)) {
             $file = $r[1].$r[2];
         }
-        
-//        var_dump($file);
 
         if (in_array($file, $files)) { return true; }
         
@@ -315,7 +313,6 @@ GREMLIN
         if (substr($file, 0, 9) === '../../../' && in_array(substr($file, 8), $files)) { return true;}
 
         if (isset($file[0]) && $file[0] !== '/') {
-//            if (in_array("/$file", $files)) { return true; }
 
             if (in_array(dirname($including).'/'.$file, $files)) { return true; }
         }

@@ -62,6 +62,13 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'Block' :
+            case 'Parenthesis' :
+                if (in_array($extras['CODE']->atom, $this->variables)) {
+                    $extras['CODE']->isRead = true;
+                }
+                break;
+
             case 'Clone' :
                 if (in_array($extras['CLONE']->atom, $this->variables)) {
                     $extras['CLONE']->isRead = true;
@@ -71,6 +78,12 @@ class IsRead extends Plugin {
             case 'Foreach' :
                 if (in_array($extras['SOURCE']->atom, $this->variables)) {
                     $extras['SOURCE']->isRead = true;
+                }
+                break;
+
+            case 'Ifthen' :
+                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                    $extras['CONDITION']->isRead = true;
                 }
                 break;
 
@@ -160,6 +173,12 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'New' :
+                if (in_array($extras['NEW']->atom, $this->variables)) {
+                    $extras['NEW']->isRead = true;
+                }
+                break;
+
             case 'Arrayappend':
                 if (in_array($extras['APPEND']->atom, $this->variables)) {
                     $extras['APPEND']->isRead = true;
@@ -170,12 +189,35 @@ class IsRead extends Plugin {
                 if (in_array($extras['VARIABLE']->atom, $this->variables)) {
                     $extras['VARIABLE']->isRead = true;
                 }
+                if (in_array($extras['INDEX']->atom, $this->variables)) {
+                    $extras['INDEX']->isRead = true;
+                }
+                break;
+
+            case 'Instanceof':
+                if (in_array($extras['VARIABLE']->atom, $this->variables)) {
+                    $extras['VARIABLE']->isRead = true;
+                }
+                if (in_array($extras['CLASS']->atom, $this->variables)) {
+                    $extras['CLASS']->isRead = true;
+                }
                 break;
 
             case 'Member':
+                if (in_array($extras['OBJECT']->atom, $this->variables)) {
+                    $extras['OBJECT']->isRead = true;
+                }
+                if (in_array($extras['MEMBER']->atom, $this->variables)) {
+                    $extras['MEMBER']->isRead = true;
+                }
+                break;
+
             case 'Methodcall':
                 if (in_array($extras['OBJECT']->atom, $this->variables)) {
                     $extras['OBJECT']->isRead = true;
+                }
+                if (in_array($extras['METHOD']->atom, $this->variables)) {
+                    $extras['METHOD']->isRead = true;
                 }
                 break;
 
@@ -188,6 +230,7 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'Methodcallname' :
             case 'Arrayliteral' :
             case 'Functioncall' :
             case 'Methodcall' :

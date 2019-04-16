@@ -2635,7 +2635,8 @@ class Load extends Tasks {
         $this->pushExpression($functioncall);
 
         if ( $functioncall->atom === 'Methodcallname') {
-            // Nothing, really. in case of A::b()()
+            $argumentsList[] = $name;
+            $this->runPlugins($functioncall, $argumentsList);
         } elseif ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG &&
                    $getFullnspath === self::WITH_FULLNSPATH ) {
