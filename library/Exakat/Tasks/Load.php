@@ -4785,6 +4785,8 @@ class Load extends Tasks {
 
         $this->addLink($block, $code, 'CODE');
 
+        $this->runPlugins($block, array('CODE' => $code));
+
         ++$this->id; // Skip }
 
         return $block;

@@ -185,6 +185,26 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'Yield':
+            case 'Yieldfrom':
+                if (in_array($extras['YIELD']->atom, $this->variables)) {
+                    $extras['YIELD']->isRead = true;
+                }
+                break;
+
+            case 'Dowhile':
+            case 'While':
+                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                    $extras['CONDITION']->isRead = true;
+                }
+                break;
+
+            case 'Include':
+                if (in_array($extras['ARGUMENT']->atom, $this->variables)) {
+                    $extras['ARGUMENT']->isRead = true;
+                }
+                break;
+
             case 'Array':
                 if (in_array($extras['VARIABLE']->atom, $this->variables)) {
                     $extras['VARIABLE']->isRead = true;
@@ -236,6 +256,7 @@ class IsRead extends Plugin {
             case 'Methodcall' :
             case 'Newcall' :
             case 'Echo' :
+            case 'Exit' :
             case 'Isset' :
             case 'Empty' :
             case 'Print' :
