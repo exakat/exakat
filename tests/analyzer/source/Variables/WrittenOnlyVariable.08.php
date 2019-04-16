@@ -18,6 +18,9 @@ $a = function () {
 
     $b5 = foo();
     print $b5;
+
+    $b6 = foo();
+    ?>A<?= $b6;
     
     $c = foo();
     echo $c::d();

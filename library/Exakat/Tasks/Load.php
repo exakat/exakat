@@ -5441,6 +5441,8 @@ class Load extends Tasks {
         $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
         $functioncall->aliased    = self::NOT_ALIASED;
 
+        $this->runPlugins($functioncall, $argumentsList);
+
         $this->pushExpression($functioncall);
 
         $this->checkExpression();
@@ -5466,6 +5468,8 @@ class Load extends Tasks {
         $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($functioncall);
+
+        $this->runPlugins($functioncall, $argumentsList);
 
         // processArguments goes too far, up to ;
         --$this->id;

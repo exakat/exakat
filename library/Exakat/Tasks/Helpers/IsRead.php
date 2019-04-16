@@ -193,6 +193,9 @@ class IsRead extends Plugin {
             case 'Methodcall' :
             case 'Newcall' :
             case 'Echo' :
+            case 'Isset' :
+            case 'Empty' :
+            case 'Print' :
             case 'Sequence' :
                 foreach($extras as &$extra) {
                     if (in_array($extra->atom, $this->variables)) {
