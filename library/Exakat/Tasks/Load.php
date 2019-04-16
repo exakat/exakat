@@ -925,6 +925,9 @@ class Load extends Tasks {
 
                     $this->addLink($property, $variable, 'OBJECT');
                     $this->addLink($property, $propertyName, 'MEMBER');
+                    $this->runPlugins($property, array('OBJECT' => $variable,
+                                                       'MEMBER' => $propertyName,
+                                                       ));
 
                     $this->pushExpression($property);
                     $elements[] = $property;
@@ -964,6 +967,9 @@ class Load extends Tasks {
 
                     $this->addLink($array, $variable, 'VARIABLE');
                     $this->addLink($array, $index, 'INDEX');
+                    $this->runPlugins($array, array('VARIABLE' => $variable,
+                                                    'INDEX'    => $index,
+                                                     ));
 
                     $this->pushExpression($array);
                     $elements[] = $array;
@@ -1042,6 +1048,8 @@ class Load extends Tasks {
         $variable->fullcode  = '${'.$name->fullcode.'}';
         $variable->token     = $this->getToken($this->tokens[$current][0]);
         $variable->enclosing = self::ENCLOSING;
+        
+        $this->runPlugins($variable, array('NAME' => $name));
 
         $this->checkExpression();
 
@@ -2522,7 +2530,6 @@ class Load extends Tasks {
         $this->addLink($namecall, $case, 'CASE');
 
         $this->processDefineAsConstants($namecall, $name, (bool) $case->boolean);
-
 
         $namecall->fullcode   = $namecall->code.'('.$name->fullcode.', '.$value->fullcode.', '.$case->fullcode.')';
         $this->pushExpression($namecall);
@@ -4815,6 +4822,7 @@ class Load extends Tasks {
             $variable->code     = $this->tokens[$current][1];
             $variable->fullcode = $this->tokens[$current][1].'{'.$expression->fullcode.'}';
             $variable->token    = 'T_DOLLAR_OPEN_CURLY_BRACES';
+            $this->runPlugins($variable, array('NAME' => $expression));
             $this->pushExpression($variable);
 
             if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {

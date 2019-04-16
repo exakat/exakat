@@ -205,6 +205,19 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'Defineconstant':
+                if (in_array($extras['NAME']->atom, $this->variables)) {
+                    $extras['NAME']->isRead = true;
+                }
+                if (in_array($extras['VALUE']->atom, $this->variables)) {
+                    $extras['VALUE']->isRead = true;
+                }
+                if (isset($extras['CASE']) &&
+                    in_array($extras['CASE']->atom, $this->variables)) {
+                    $extras['CASE']->isRead = true;
+                }
+                break;
+
             case 'Array':
                 if (in_array($extras['VARIABLE']->atom, $this->variables)) {
                     $extras['VARIABLE']->isRead = true;
@@ -220,6 +233,13 @@ class IsRead extends Plugin {
                 }
                 if (in_array($extras['CLASS']->atom, $this->variables)) {
                     $extras['CLASS']->isRead = true;
+                }
+                break;
+
+            case 'Variable':
+                if (isset($extras['NAME']) &&
+                    in_array($extras['NAME']->atom, $this->variables)) {
+                    $extras['NAME']->isRead = true;
                 }
                 break;
 
