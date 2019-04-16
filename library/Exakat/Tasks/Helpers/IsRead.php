@@ -188,6 +188,7 @@ class IsRead extends Plugin {
                 }
                 break;
 
+            case 'Arrayliteral' :
             case 'Functioncall' :
             case 'Methodcall' :
             case 'Newcall' :
@@ -202,6 +203,16 @@ class IsRead extends Plugin {
 
             case 'This' :
                 $atom->isRead = true;
+                break;
+
+            case 'Concatenation' :
+            case 'Heredoc' :
+            case 'String' :
+                foreach($extras as &$extra) {
+                    if (in_array($extra->atom, $this->variables)) {
+                        $extra->isRead = true;
+                    }
+                }
                 break;
 
             default :
