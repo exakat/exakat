@@ -254,6 +254,8 @@ ignore_dirs and include_dirs are the option used to select files within a folder
 * omitting ignore_dirs defaults to `"ignore_dirs[] = ""`
 * including or ignoring files multiple times only has effect once
 
+include_dirs has priority over the `config.cache` configuration file. If a folder has been marked for exclusion in the `config.cache` file, it may be forced to be included by configuring its value with include_dirs in the `config.ini` file. 
+
 
 Specific analyser configurations
 --------------------------------
@@ -268,6 +270,9 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
 :ref:`Too Many Injections <too-many-injections>`
   + injectionsCount : 5
     + Threshold for too many injected parameters for one class.
+:ref:`Missing Include <missing-include>`
+  + <constant or variable> : 100
+    + Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names.
 :ref:`Too Many Local Variables <too-many-local-variables>`
   + tooManyLocalVariableThreshold : 15
     + Minimal number of variables in one function or method to report.
