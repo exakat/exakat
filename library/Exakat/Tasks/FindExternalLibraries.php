@@ -110,7 +110,10 @@ class FindExternalLibraries extends Tasks {
         rsort($files);
         $ignore = 'None';
         $ignoreLength = 0;
-        foreach($files as $file) {
+        $regex = '$^('.implode('|', $this->config->include_dirs).')$';
+        $toCheckFiles = preg_grep($regex, $files, PREG_GREP_INVERT);
+
+        foreach($toCheckFiles as $file) {
             if (substr($file, 0, $ignoreLength) === $ignore) {
                 display( "Ignore $file ($ignore)\n");
                 continue;
@@ -129,6 +132,8 @@ class FindExternalLibraries extends Tasks {
         } else {
             $newConfigs = array_merge(...$r);
         }
+
+        $newConfigs = array_diff($newConfigs, $this->config->include_dirs);
 
         if (count($newConfigs) === 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
