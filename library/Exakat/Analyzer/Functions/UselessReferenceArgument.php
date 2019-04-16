@@ -37,6 +37,7 @@ class UselessReferenceArgument extends Analyzer {
                 $this->side()
                      ->atomInsideNoDefinition(self::$VARIABLES_USER)
                      ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+                     ->inIsIE(array('VARIABLE', 'OBJECT'))
                      ->is('isModified', true)
              )
              ->back('first');
