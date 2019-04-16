@@ -4958,6 +4958,7 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
         $signed = $this->popExpression();
+        $firstSigned = $signed;
 
         for($i = strlen($signExpression) - 1; $i >= 0; --$i) {
             $sign = $this->addAtom('Sign');
@@ -4969,7 +4970,7 @@ class Load extends Tasks {
 
             $signed = $sign;
         }
-        $this->runPlugins($sign, array('SIGN' => $signed));
+        $this->runPlugins($sign, array('SIGN' => $firstSigned));
 
         $this->pushExpression($signed);
 
