@@ -18,7 +18,16 @@ return PhpCsFixer\Config::create()
         'line_ending' => true,
         'elseif' => true,
         'no_trailing_whitespace' => true,
-        'indentation_type' => true
+        'indentation_type' => true,
+        'array_syntax' => array('syntax' => 'long'),
+        'elseif' => true,
+        'lowercase_constants' => true,
+        'new_with_braces' => true,
+//        'no_extra_consecutive_blank_lines' => true,
+         'no_trailing_whitespace' => true,
+         'single_quote' => true,
+//         'yoda_style' => true,
+         'visibility_required' => true,
         )
     )
     ->setFinder($finder)
