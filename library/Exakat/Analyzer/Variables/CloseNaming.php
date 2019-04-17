@@ -54,7 +54,7 @@ GREMLIN;
             if (isset($uniques[$v])) {
                 $uniques[$v][] = $u;
             } else {
-                $uniques[$v] = [$u];
+                $uniques[$v] = array($u);
             }
         }
         

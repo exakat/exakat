@@ -115,7 +115,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $menu = file_get_contents("{$this->tmpName}/datas/menu.html");
-            $inventories = [];
+            $inventories = array();
             foreach($this->inventories as $fileName => $title) {
                 if (strpos($fileName, '/') !== false) {
                     $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
@@ -130,7 +130,7 @@ class Ambassador extends Reports {
                 $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
 
-            $compatibilities = [];
+            $compatibilities = array();
             $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
@@ -306,7 +306,7 @@ class Ambassador extends Reports {
 
     protected function generateDocumentation($analyzerList){
         $baseHTML = $this->getBasedPage('analyzers_doc');
-        $docHTML = [];
+        $docHTML = array();
 
         foreach($analyzerList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);

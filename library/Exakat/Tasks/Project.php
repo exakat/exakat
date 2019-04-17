@@ -204,7 +204,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Always run this one first
-        $this->analyzeThemes(['First'], $audit_start, true);
+        $this->analyzeThemes(array('First'), $audit_start, true);
 
         // Dump is a child process
         // initialization and first collection (action done once)

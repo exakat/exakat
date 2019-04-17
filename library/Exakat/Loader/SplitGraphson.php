@@ -196,7 +196,7 @@ GREMLIN;
                         if (isset($json[$d['destination']]->inE)) {
                             $json[$d['destination']]->inE->$type[] = (object) array("id" => $linkId,"outV" => $d['origin']);
                         } else {
-                            $json[$d['destination']]->inE = (object) array( $type => [ (object) ["id" => $linkId,"outV" => $d['origin']]]);
+                            $json[$d['destination']]->inE = (object) array( $type => array( (object) array("id" => $linkId,"outV" => $d['origin'])));
                         }
 
                         if ($d['origin'] === 1) {
@@ -204,7 +204,7 @@ GREMLIN;
                         } elseif (isset($json[$d['origin']]->outE)) {
                             $json[$d['origin']]->outE->$type[] = (object) array("id" => $linkId,"inV" => $d['destination']);
                         } else {
-                            $json[$d['origin']]->outE     = (object) array( $type => [ (object) ["id" => $linkId,"inV" => $d['destination']]]);
+                            $json[$d['origin']]->outE     = (object) array( $type => array( (object) array("id" => $linkId,"inV" => $d['destination'])));
                         }
 
                         if (isset($this->tokenCounts[$type])) {

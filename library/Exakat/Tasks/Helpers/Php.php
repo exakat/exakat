@@ -99,7 +99,7 @@ abstract class Php {
                    );
                    
     static public function getInstance($tokens) {
-        $errors = [];
+        $errors = array();
 
         if (empty($tokens)) {
             throw new NoRecognizedTokens();

@@ -209,7 +209,7 @@ class Atom {
             } elseif (in_array($l, $integerValues)) {
                 $value = (integer) $value;
             }
-            $properties[$l] = [ new Property($id++, $value) ];
+            $properties[$l] = array( new Property($id++, $value) );
         }
         
         $object = array('id'         => $this->id,

@@ -64,7 +64,7 @@ class Grade extends Ambassador {
     const G_NOTICE   = 2;
     const G_NONE     = 1;
 
-    private $grading = [];
+    private $grading = array();
     private $results = null;
     private $resultsCounts = null;
 
@@ -248,11 +248,11 @@ HTML;
         $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
-        $globalData = array(self::G_CRITICAL  => (object) ['label' => 'Critical', 'value' => 0],
-                            self::G_ERROR     => (object) ['label' => 'Error',    'value' => 0],
-                            self::G_WARNING   => (object) ['label' => 'Warning',  'value' => 0],
-                            self::G_NOTICE    => (object) ['label' => 'Notice',   'value' => 0],
-                            self::G_NONE      => (object) ['label' => 'OK',       'value' => 0]);
+        $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
+                            self::G_ERROR     => (object) array('label' => 'Error',    'value' => 0),
+                            self::G_WARNING   => (object) array('label' => 'Warning',  'value' => 0),
+                            self::G_NOTICE    => (object) array('label' => 'Notice',   'value' => 0),
+                            self::G_NONE      => (object) array('label' => 'OK',       'value' => 0));
         foreach($this->resultsCounts as $name => $value) {
             if ($value > 0) {
                 $globalData[$this->grading[$name]]->value += floor(100 * min(log($value * $this->grading[$name]) / log(10), 5)) / 100;
