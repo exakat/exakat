@@ -75,8 +75,11 @@ class LoadFinal {
         $this->log('removeInterfaceToClassExtends');
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
-        $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
-        $this->log('spotPHPNativeFunctions');
+
+        $task = new SpotPHPNativeFunctions($this->gremlin, $this->config, $this->datastore);
+        $task->setPHPfunctions($this->PHPfunctions);
+        $task->run();
+        $this->log('SpotPHPNativeFunctions');
 
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
@@ -187,6 +190,19 @@ class LoadFinal {
         $task->run();
         $this->log('FinishIsModified');
         
+        // stats calulcation. 
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .groupCount('m')
+     .by("fullnspath")
+     .cap('m')
+GREMLIN;
+        $fixed = $this->gremlin->query($query)->toArray();
+        if (!empty($fixed)) {
+            $this->datastore->addRow('functioncalls', $fixed[0]);
+        }
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -339,58 +355,6 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
     
-    private function spotPHPNativeFunctions() {
-        $title = 'mark PHP native functions call';
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath")
-     .has("token", "T_STRING")
-     .not(where( __.in("DEFINITION")))
-     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
-     .map{ name = parts.last().toLowerCase();}
-     .unique()
-GREMLIN;
-        $fallingback = $this->gremlin->query($query)->toArray();
-
-        if (!empty($fallingback)) {
-            $phpfunctions = array_merge(...$this->PHPfunctions);
-            $phpfunctions = array_map('strtolower', $phpfunctions);
-            $phpfunctions = array_values($phpfunctions);
-
-            $diff = array_values(array_intersect($fallingback, $phpfunctions));
-
-            $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath")
-     .has("token", "T_STRING")
-     .not(where( __.in("DEFINITION")))
-     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
-     .filter{ name = parts.last().toLowerCase(); name in arg1 }
-     .sideEffect{
-         fullnspath = "\\\\" + name;
-         it.get().property("fullnspath", fullnspath); 
-     }.count();
-
-GREMLIN;
-            $this->runQuery($query, $title, array('arg1' => $diff), __METHOD__);
-        }
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath")
-     .groupCount('m')
-     .by("fullnspath")
-     .cap('m')
-GREMLIN;
-        $fixed = $this->gremlin->query($query)->toArray();
-        if (!empty($fixed)) {
-            $this->datastore->addRow('functioncalls', $fixed[0]);
-        }
-
-        $this->log->log(__METHOD__);
-    }
-
     private function runQuery($query, $title, $args = array(), $method = __METHOD__) {
         display($title);
 
