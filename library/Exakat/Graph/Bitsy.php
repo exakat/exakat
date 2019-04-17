@@ -111,7 +111,7 @@ class Bitsy extends Graph {
         } elseif ($result instanceof stdClass) {
             return new GraphResults($result);
         } else {
-            print "Processing unknown type ".gettype($result).PHP_EOL;
+            print 'Processing unknown type '.gettype($result).PHP_EOL;
             var_dump($result);
             die();
         }
@@ -172,7 +172,7 @@ class Bitsy extends Graph {
             display('start gremlin server 3.3.x');
             exec("cd {$this->config->bitsy_folder}; rm -rf db/bitsy; mkdir db/bitsy; ./bin/gremlin-server.sh conf/bitsy.yaml > gremlin.log 2>&1 &  echo $! > db/bitsy.pid ");
         } elseif ($version === '3.2') {
-            die("Not supported");
+            die('Not supported');
         }
         display('started gremlin server');
         $this->resetConnection();

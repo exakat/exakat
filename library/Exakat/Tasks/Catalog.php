@@ -56,7 +56,7 @@ class Catalog extends Tasks {
 
             foreach($data as $theme => $list) {
                 $display .= count($list)." $theme : \n";
-                $display .= "   ".implode("\n   ", $list)."\n";
+                $display .= '   '.implode("\n   ", $list)."\n";
             }
 
             print $display;

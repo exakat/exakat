@@ -70,7 +70,7 @@ class Clustergrammer extends Reports {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $txt);
 
             display( count($all)." issues reported\n");
-            print "Upload ".$name.'.'.self::FILE_EXTENSION." on http://amp.pharm.mssm.edu/clustergrammer/\n";
+            print 'Upload '.$name.'.'.self::FILE_EXTENSION." on http://amp.pharm.mssm.edu/clustergrammer/\n";
         }
     }
 }

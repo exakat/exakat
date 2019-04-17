@@ -102,7 +102,7 @@ class Dependencywheel extends Reports {
                 } elseif ((int) $ext > 0) {
                     $e = $dict[$ids[$ext]];
                 } else {
-                    assert(false, "\$ext is not a string nor an integer.");
+                    assert(false, '$ext is not a string nor an integer.');
                 }
                 
                 $results[$dict[$name]][$e] = 1;

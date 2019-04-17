@@ -47,7 +47,7 @@ class Perfile extends Reports {
 
             $maxLine = max($maxLine, $row['line']);
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']));
-            $perfile[$row['file']][] = sprintf(" % 4s  %s ", $row['line'], $titleCache[$row['analyzer']]);
+            $perfile[$row['file']][] = sprintf(' % 4s  %s ', $row['line'], $titleCache[$row['analyzer']]);
         }
 
         $text = '';

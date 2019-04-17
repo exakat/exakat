@@ -30,7 +30,7 @@ class Dedup extends DSL {
         list($by) = func_get_args();
 
         if (empty($by)) {
-            return new Command("dedup()");
+            return new Command('dedup()');
         }
 
         assert($this->assertProperty($by));

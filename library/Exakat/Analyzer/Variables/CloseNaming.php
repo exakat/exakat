@@ -71,7 +71,7 @@ GREMLIN;
         $doubles = $this->dictCode->underscoreCloseVariables();
         
         if (!empty($doubles)) {
-            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
                  ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
@@ -80,7 +80,7 @@ GREMLIN;
         $doubles = $this->dictCode->numberCloseVariables();
 
         if (!empty($doubles)) {
-            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
                  ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }

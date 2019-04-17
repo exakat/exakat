@@ -39,9 +39,9 @@ class Select extends DSL {
         }
         
         if (empty($by)) {
-            $command = "select(".makeList($select).")";
+            $command = 'select('.makeList($select).')';
         } else {
-            $command = "select(".makeList($select).").".implode('.', $by);
+            $command = 'select('.makeList($select).').'.implode('.', $by);
         }
 
         return new Command($command);

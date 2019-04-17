@@ -78,7 +78,7 @@ class Git extends Vcs {
             display("Check out with tag '$this->tag'");
             $shell .= " -b $this->tag ";
         } else {
-            display("Check out simple");
+            display('Check out simple');
         }
         
         $shell .= ' code 2>&1 ';

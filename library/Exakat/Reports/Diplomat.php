@@ -159,7 +159,7 @@ MENU;
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace("{{".$bloc."}}", $content, $html);
+        return str_replace('{{'.$bloc.'}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {

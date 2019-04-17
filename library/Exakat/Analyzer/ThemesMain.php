@@ -121,7 +121,7 @@ SQL;
         } elseif (is_array($list)) {
             $where = ' WHERE c.name IN ('.makeList($list).') ';
         } else {
-            assert(false, "Wrong type for list : ".gettype($list)." in ".__METHOD__."\n");
+            assert(false, 'Wrong type for list : '.gettype($list).' in '.__METHOD__."\n");
         }
 
         $query = <<<SQL

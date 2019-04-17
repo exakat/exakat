@@ -120,7 +120,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-        display("Set ".($countP + $countM + $countC)." method, constants and properties remote with return typehint");
+        display('Set '.($countP + $countM + $countC).' method, constants and properties remote with return typehint');
     }
 }
 

@@ -102,7 +102,7 @@ abstract class Reports {
             $themas = $this->config->thema;
 
             if ($missing = $this->checkMissingThemes()) {
-                print "Can't produce ".static::class." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+                print "Can't produce ".static::class.' format. There are '.count($missing).' missing themes : '.implode(', ', $missing).".\n";
                 return false;
             }
 
@@ -162,7 +162,7 @@ abstract class Reports {
     }
     
     public function getDocs($analyzer, $property = null) {
-        assert(self::$docs !== null, "Docs needs to be initialized with an object.");
+        assert(self::$docs !== null, 'Docs needs to be initialized with an object.');
 
         if ($property === null) {
             return self::$docs->getDocs($analyzer);

@@ -49,11 +49,11 @@ class ZendF3 {
     public function getVersions($component = null) {
         $query = 'SELECT DISTINCT replace(release, "release-","") AS version FROM releases';
         if ($component !== null) {
-            $query .= "  JOIN components 
+            $query .= '  JOIN components 
                       ON releases.component_id = components.id 
- WHERE components.component = \"".$component."\"";
+ WHERE components.component = "'.$component.'"';
         }
-        $query .= " ORDER BY 1";
+        $query .= ' ORDER BY 1';
         $res = $this->sqlite->query($query);
 
         $return = array();

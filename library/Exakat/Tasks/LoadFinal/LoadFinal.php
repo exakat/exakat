@@ -217,7 +217,7 @@ class LoadFinal {
     }
 
     private function removeInterfaceToClassExtends() {
-        display("fixing Fullnspath for Functions");
+        display('fixing Fullnspath for Functions');
 
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
@@ -278,7 +278,7 @@ GREMLIN;
 
     // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
     private function fixFullnspathFunctions() {
-        display("fixing Fullnspath for Functions");
+        display('fixing Fullnspath for Functions');
 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
@@ -541,7 +541,7 @@ GREMLIN;
     }
 
     private function defaultIdentifiers() {
-        display("defaulting Identifiers and Nsname");
+        display('defaulting Identifiers and Nsname');
         // fix path for constants with Const
         // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
         $query = <<<GREMLIN
@@ -584,7 +584,7 @@ GREMLIN;
         
         //Needs realval, nullval, arrayval
 
-        display("propagating Constant value in Const");
+        display('propagating Constant value in Const');
         // fix path for constants with Const
         // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
         $query = <<<GREMLIN
@@ -602,7 +602,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res constants");
 
-        display("propagating Constant value in Concatenations");
+        display('propagating Constant value in Concatenations');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Concatenation").not(has("noDelimiter"))
@@ -629,7 +629,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Concatenations with constants");
 
-        display("propagating Constant value in Sign");
+        display('propagating Constant value in Sign');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Sign").not(has("intval"))
@@ -655,7 +655,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Signs with constants");
 
-        display("propagating Constant value in Addition");
+        display('propagating Constant value in Addition');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Addition").not(has("intval"))
@@ -681,7 +681,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Addition with constants");
 
-        display("propagating Constant value in Power");
+        display('propagating Constant value in Power');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Power").not(has("intval"))
@@ -704,7 +704,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Power with constants");
         
-        display("propagating Constant value in Comparison");
+        display('propagating Constant value in Comparison');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Comparison").has("constant", true).not(has("boolean"))
@@ -744,7 +744,7 @@ GREMLIN;
         display("propagating $res Comparison with constants");
 
 
-        display("propagating Constant value in Logical");
+        display('propagating Constant value in Logical');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Logical").has("constant", true).not(has("boolean"))
@@ -781,7 +781,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Logical with constants");
 
-        display("propagating Constant value in Parenthesis");
+        display('propagating Constant value in Parenthesis');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Parenthesis").not(has("intval"))
@@ -801,7 +801,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Parenthesis with constants");
 
-        display("propagating Constant value in Not");
+        display('propagating Constant value in Not');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Not").not(has("intval"))
@@ -827,7 +827,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Not with constants");
 
-        display("propagating Constant value in Coalesce");
+        display('propagating Constant value in Coalesce');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Coalesce").not(has("intval"))
@@ -855,7 +855,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Coalesce with constants");
 
-        display("propagating Constant value in Ternary");
+        display('propagating Constant value in Ternary');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Ternary").has("constant", true).not(has("intval"))
@@ -888,7 +888,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Ternary with constants");
 
-        display("propagating Constant value in Bitshift");
+        display('propagating Constant value in Bitshift');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Bitshift").not(has("intval"))
@@ -916,7 +916,7 @@ GREMLIN;
         $total += $res;
         display("propagating $res Bitshift with constants");
 
-        display("propagating Constant value in Multiplication");
+        display('propagating Constant value in Multiplication');
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Multiplication").not(has("intval"))

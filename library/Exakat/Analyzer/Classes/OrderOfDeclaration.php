@@ -28,7 +28,7 @@ class OrderOfDeclaration extends Analyzer {
     public function analyze() {
         // Use, const, properties and methods
         $this->atomIs('Class')
-             ->outIs(array("USE", "METHOD", "CONST", "PPP"))
+             ->outIs(array('USE', 'METHOD', 'CONST', 'PPP'))
              ->not(
                 $this->side()
                      ->outIs('PPP')
@@ -46,8 +46,8 @@ class OrderOfDeclaration extends Analyzer {
                     ok = ["Method"];
                 }
               }')
-             ->inIs(array("USE", "METHOD", "CONST", "PPP"))
-             ->outIs(array("USE", "METHOD", "CONST", "PPP"))
+             ->inIs(array('USE', 'METHOD', 'CONST', 'PPP'))
+             ->outIs(array('USE', 'METHOD', 'CONST', 'PPP'))
              ->not(
                 $this->side()
                      ->outIs('PPP')

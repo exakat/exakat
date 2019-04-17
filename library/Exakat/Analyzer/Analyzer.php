@@ -1087,7 +1087,7 @@ GREMLIN;
         if ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, "Wrong type for not : ".gettype($filter));
+            assert(false, 'Wrong type for not : '.gettype($filter));
         }
         $this->query->not($filterClean, array());
 
@@ -1101,7 +1101,7 @@ GREMLIN;
         } elseif ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, "Wrong type for filter : ".get_type($filter));
+            assert(false, 'Wrong type for filter : '.get_type($filter));
         }
         $this->query->filter($filterClean, array());
 

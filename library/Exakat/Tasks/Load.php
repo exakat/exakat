@@ -3871,7 +3871,7 @@ class Load extends Tasks {
     private function processSingle($atomName) {
         $atom = $this->addAtom($atomName);
         if (strlen($this->tokens[$this->id][1]) > 100000) {
-            $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000).PHP_EOL."[.... 100000 / ".strlen($this->tokens[$this->id][1])."]".PHP_EOL;
+            $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000).PHP_EOL.'[.... 100000 / '.strlen($this->tokens[$this->id][1]).']'.PHP_EOL;
         }
         $atom->code     = $this->tokens[$this->id][1];
         $atom->fullcode = $this->tokens[$this->id][1];
@@ -4247,7 +4247,7 @@ class Load extends Tasks {
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
 
         $use->code     = $this->tokens[$current][1];
-        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(", ", $fullcode);
+        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(', ', $fullcode);
         $use->token    = $this->getToken($this->tokens[$current][0]);
 
         $this->pushExpression($use);
@@ -4297,7 +4297,7 @@ class Load extends Tasks {
         }
 
         $use->code     = $this->tokens[$current][1];
-        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(", ", $fullcode);
+        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(', ', $fullcode);
         $use->token    = $this->getToken($this->tokens[$current][0]);
         $this->pushExpression($use);
 
@@ -4343,7 +4343,7 @@ class Load extends Tasks {
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
                     $as = $this->processInsteadof();
                 } else {
-                    assert(false, "Usetrait without as or insteadof : ".$this->tokens[$this->id + 1][1]);
+                    assert(false, 'Usetrait without as or insteadof : '.$this->tokens[$this->id + 1][1]);
                 }
     
                 $this->processSemicolon(); // ;
@@ -5120,7 +5120,7 @@ class Load extends Tasks {
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));
         } else {
-            throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom.':'.$this->filename.':'.__LINE__);
+            throw new LoadError('Unprocessed atom in static call (right) : '.$right->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($static, $left, 'CLASS');
@@ -5235,7 +5235,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            throw new LoadError("Unprocessed atom in object call (right) : ".$right->atom.':'.$this->filename.':'.__LINE__);
+            throw new LoadError('Unprocessed atom in object call (right) : '.$right->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($static, $left, 'OBJECT');

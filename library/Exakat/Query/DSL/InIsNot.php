@@ -30,7 +30,7 @@ class InIsNot extends DSL {
         list($link) = func_get_args();
 
         $this->assertLink($link);
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() <= 1, 'Too many arguments for '.__METHOD__);
 
         $diff = $this->normalizeLinks($link);
         if (empty($diff)) {

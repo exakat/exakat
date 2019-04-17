@@ -96,7 +96,7 @@ class Weekly extends Ambassador {
         }
 
     // special case for 'Future read'
-        $date = date('Y-W', strtotime(date('Y')."W".(date('W') + 1)."1"));
+        $date = date('Y-W', strtotime(date('Y').'W'.(date('W') + 1).'1'));
         $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
         $this->weeks[$date] = json_decode($json);
         
@@ -239,7 +239,7 @@ MENU;
         }
 
         $analyzerList = $this->weeks["$year-$week"]->analysis;
-        $this->generateIssuesEngine("weekly",
+        $this->generateIssuesEngine('weekly',
                                     $this->getIssuesFaceted($analyzerList));
 
         $analyzerListSql = makeList($analyzerList);
@@ -264,9 +264,9 @@ MENU;
         
         $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
 
-        $begin = date('M jS, Y', strtotime($year."W".$week."1"));
-        $end   = date('M jS, Y', strtotime($year."W".$week."7"));
-        $titleDate = $year.' '.ordinal($week)." week";
+        $begin = date('M jS, Y', strtotime($year.'W'.$week.'1'));
+        $end   = date('M jS, Y', strtotime($year.'W'.$week.'7'));
+        $titleDate = $year.' '.ordinal($week).' week';
 
         $finalHTML = str_replace('<WEEK>', $titleDate, $html);
         $fullweek = array("From $begin to $end : <br /> Total : $total_issues <br />");
@@ -619,7 +619,7 @@ JAVASCRIPT;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();

@@ -110,7 +110,7 @@ class Strval extends Plugin {
                 break;
 
             case 'Arrayliteral' :
-                $atom->noDelimiter    = "Array";
+                $atom->noDelimiter    = 'Array';
                 break;
 
             case 'Not' :

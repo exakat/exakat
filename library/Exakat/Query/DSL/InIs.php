@@ -29,7 +29,7 @@ class InIs extends DSL {
     public function run() {
         list($link) = func_get_args();
 
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() <= 1, 'Too many arguments for '.__METHOD__);
         $this->assertLink($link);
 
         if (empty($link)) {

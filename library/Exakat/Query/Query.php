@@ -182,7 +182,7 @@ GREMLIN;
     }
 
     public function getQuery() {
-        assert($this->query !== null, "Null Query found!");
+        assert($this->query !== null, 'Null Query found!');
         return $this->query;
     }
 
