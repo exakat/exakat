@@ -60,7 +60,7 @@ class Bitsy extends Graph {
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
-        $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', TRUE);
+        $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
     }
     
     public function resetConnection() {
@@ -70,7 +70,7 @@ class Bitsy extends Graph {
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
-        $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', TRUE);
+        $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
         $this->status = self::UNCHECKED;
     }
     
