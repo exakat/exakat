@@ -45,8 +45,8 @@ abstract class Tasks {
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
     protected $exakatDir             = '/tmp/exakat';
-    public    static $semaphore      = null;
-    public    static $semaphorePort  = null;
+    public static $semaphore      = null;
+    public static $semaphorePort  = null;
     
     protected $themes = null;
 

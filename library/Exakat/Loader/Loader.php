@@ -24,7 +24,7 @@
 namespace Exakat\Loader;
 
 abstract class Loader {
-    public abstract function __construct($gremlin, $config, \Sqlite3 $sqlite3) ;
+    abstract public function __construct($gremlin, $config, \Sqlite3 $sqlite3) ;
     
     public function finalize() {}
 

@@ -24,12 +24,12 @@
 namespace Exakat\Query\DSL;
 
 class Command {
-    static private $id = 0;
-    public  $gremlin   = '';
-    public  $arguments = array();
+    private static $id = 0;
+    public $gremlin    = '';
+    public $arguments  = array();
     private $sack      = null;
     
-    function __construct(string $command, array $args = array()) {
+    public function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
         
         assert(is_array($args), "Args is not an array : ($command).".print_r($args, true));
@@ -56,7 +56,7 @@ class Command {
         return $this->sack;
     }
     
-    function add(Command $other) {
+    public function add(Command $other) {
         $this->gremlin .= ".$other->gremlin";
         $this->arguments += $other->arguments;
         

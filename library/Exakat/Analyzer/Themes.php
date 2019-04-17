@@ -31,7 +31,7 @@ class Themes {
     private $ext    = null;
     private $extra  = array();
 
-    static private $instanciated = array();
+    private static $instanciated = array();
 
     public function __construct($path, AutoloadExt $ext, array $extra_themes = array()) {
         $this->main  = new ThemesMain($path);

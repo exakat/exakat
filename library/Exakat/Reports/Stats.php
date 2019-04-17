@@ -28,7 +28,7 @@ class Stats extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat.stat';
     
-    private     $extensions = array(
+    private $extensions = array(
                 'Summary' => array(
                         'Namespaces'     => 'Namespace',
                         'Classes'        => 'Class',

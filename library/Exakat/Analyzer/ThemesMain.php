@@ -30,7 +30,7 @@ class ThemesMain {
     private static $sqlite = null;
     private $phar_tmp      = null;
 
-    static private $instanciated = array();
+    private static $instanciated = array();
     
     public function __construct($path) {
         if (substr($path, 0, 4) == 'phar') {

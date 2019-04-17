@@ -98,7 +98,7 @@ abstract class Php {
                      '`'  => self::T_BACKTICK,
                    );
                    
-    static public function getInstance($tokens) {
+    public static function getInstance($tokens) {
         $errors = array();
 
         if (empty($tokens)) {

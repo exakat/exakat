@@ -58,7 +58,7 @@ abstract class Vcs {
 
     public function update() {}
     
-    static public function getVcs($config) {
+    public static function getVcs($config) {
         if ($config->svn === true) {
             return Svn::class;
         } elseif ($config->hg === true) {

@@ -36,9 +36,9 @@ abstract class Reports {
     const STDOUT = 'stdout';
     const INLINE = 'inline';
     
-    static private $docs = null;
+    private static $docs = null;
 
-    static public $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
+    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
                                           'Text', 'Xml', 'Uml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
