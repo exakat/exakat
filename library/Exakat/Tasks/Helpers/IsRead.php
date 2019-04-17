@@ -277,6 +277,7 @@ class IsRead extends Plugin {
             case 'Newcall' :
             case 'Echo' :
             case 'Exit' :
+            case 'Eval' :
             case 'Isset' :
             case 'Empty' :
             case 'Print' :
