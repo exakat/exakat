@@ -58,36 +58,43 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countM = $result->toInt();
-
-        $query = $this->newQuery('setClassRemoteDefinitionWithTypehint properties');
-        $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('member')
-              ->hasNoIn('DEFINITION')
-              ->outIs('MEMBER')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('MEMBER')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('RIGHT')
-              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->outIs('RETURNTYPE')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countP = $result->toInt();
+        
+        $countP = 0;
+//        for($i = 0; $i < 2; ++$i) {
+            $query = $this->newQuery('setClassRemoteDefinitionWithTypehint properties');
+            $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+                  ->outIs('DEFINITION')
+                  ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+                  ->inIs('RIGHT')
+                  ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+                  ->outIs('LEFT')
+                  // can be anythingm really
+                  ->inIs('DEFINITION')
+//                  ->atomIs(array('Variabledefinition' ,'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
+    // Variable definition ou bien proeprty definition
+                  ->outIs('DEFINITION')
+                  ->inIs('OBJECT')
+                  ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+                  ->hasNoIn('DEFINITION')
+                  ->_as('member')
+                  ->outIs('MEMBER')
+                  ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+                  ->savePropertyAs('code', 'name')
+    
+                  ->back('first')
+                  ->outIs('RETURNTYPE')
+                  ->inIs('DEFINITION')
+                  ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+                  ->goToAllParents(Analyzer::INCLUDE_SELF)
+                  ->outIs('PPP')
+                  ->outIs('PPP')
+                  ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+                  ->addETo('DEFINITION', 'member')
+                  ->returnCount();
+            $query->prepareRawQuery();
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countP += $result->toInt();
+//        }
 
         $query = $this->newQuery('setClassRemoteDefinitionWithTypehint constants');
         $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
