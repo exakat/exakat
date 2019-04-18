@@ -4343,9 +4343,9 @@ class Load extends Tasks {
                 ++$this->id;
                 // instead of ?
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
-                    $as = $this->processAsTrait();
+                    $this->processAsTrait();
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
-                    $as = $this->processInsteadof();
+                    $this->processInsteadof();
                 } else {
                     assert(false, 'Usetrait without as or insteadof : '.$this->tokens[$this->id + 1][1]);
                 }
