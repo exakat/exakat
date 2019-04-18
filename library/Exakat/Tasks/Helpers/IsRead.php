@@ -296,6 +296,7 @@ class IsRead extends Plugin {
             case 'Concatenation' :
             case 'Heredoc' :
             case 'String' :
+            case 'Shell' :
                 foreach($extras as &$extra) {
                     if (in_array($extra->atom, $this->variables)) {
                         $extra->isRead = true;
