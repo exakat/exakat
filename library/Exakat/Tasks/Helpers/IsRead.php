@@ -206,10 +206,12 @@ class IsRead extends Plugin {
                 break;
 
             case 'Defineconstant':
-                if (in_array($extras['NAME']->atom, $this->variables)) {
+                if (isset($extras['NAME']) &&
+                    in_array($extras['NAME']->atom, $this->variables)) {
                     $extras['NAME']->isRead = true;
                 }
-                if (in_array($extras['VALUE']->atom, $this->variables)) {
+                if (isset($extras['VALUE']) &&
+                    in_array($extras['VALUE']->atom, $this->variables)) {
                     $extras['VALUE']->isRead = true;
                 }
                 if (isset($extras['CASE']) &&
