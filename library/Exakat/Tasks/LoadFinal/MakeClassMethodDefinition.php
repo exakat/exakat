@@ -152,9 +152,9 @@ GREMLIN
         $query->prepareRawQuery();
 
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count2 = $result->toInt();
+        $count4 = $result->toInt();
         
-        $count = $count1 + $count2;
+        $count = $count1 + $count2 + $count3 + $count4;
         display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call

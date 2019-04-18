@@ -212,7 +212,7 @@ class CloneType1 extends Plugin {
                 $variable = $extras['VARIABLE'];
                 $classes = array_slice($extras, 0, -2);
 
-                $atom->ctype1 = 'catch('.implode('|', array_column($classes, 'ctype1')). ' '.$variable->ctype1.')'. $extras['BLOCK']->ctype1;
+                $atom->ctype1 = 'catch('.implode('|', array_column($classes, 'ctype1')). ' '.$variable->ctype1.')'. $block->ctype1;
                 break;
 
             case 'Finally' :

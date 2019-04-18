@@ -209,8 +209,7 @@ class ThemesExt {
         if (empty($this->all)) {
             return array();
         }
-        $list = array_merge(...array_values($this->all));
-        
+
         return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
             $l = levenshtein($c, $name);
 

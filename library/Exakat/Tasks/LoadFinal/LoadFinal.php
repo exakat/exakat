@@ -422,7 +422,7 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count();
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
+            $this->gremlin->query($query, array('arg1' => $defineConstants));
 
             // Second round, with fallback to global constants
             // Based on define() definitions
@@ -444,7 +444,7 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
+            $this->gremlin->query($query, array('arg1' => $defineConstants));
         }
 
         $this->logTime('constants const : '.count($constConstants));
@@ -469,7 +469,7 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constConstants));
+            $this->gremlin->query($query, array('arg1' => $constConstants));
         }
             
         // TODO : handle case-insensitive

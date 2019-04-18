@@ -295,6 +295,14 @@ class IsRead extends Plugin {
                 $atom->isRead = true;
                 break;
 
+            case 'Closure' :
+                foreach($extras as $extra) {
+                    if (in_array($extra->atom, $this->variables)) {
+                        $extra->isRead = true;
+                    }
+                }
+                break;
+
             case 'Concatenation' :
             case 'Heredoc' :
             case 'String' :

@@ -61,8 +61,6 @@ GREMLIN;
 
     public function analyze() {
         $functions = '\\preg_replace';
-        // delimiters
-        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
         // preg_match with a string
         $this->atomFunctionIs($functions)

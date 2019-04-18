@@ -42,6 +42,20 @@ class UselessReferenceArgument extends Analyzer {
              )
              ->back('first');
         $this->prepareQuery();
+
+        //foreach($a as &$b) {$b->a = $b->m();}
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('VALUE')
+             ->is('reference', true)
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Variableobject')
+             ->samePropertyAs('code', 'variable', self::CASE_SENSITIVE)
+             ->inIs('OBJECT')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

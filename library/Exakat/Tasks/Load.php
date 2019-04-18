@@ -1213,15 +1213,15 @@ class Load extends Tasks {
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         
-        if ( $function->atom === 'Function') {
+        if ($function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $this->calls->addDefinition('function', $fullnspath, $function);
-        } elseif ( $function->atom === 'Closure') {
+        } elseif ($function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
             // closure may be static
             $fullcode = $this->setOptions($function);
-        } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
+        } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
             $fullcode = $this->setOptions($function);
@@ -1248,6 +1248,7 @@ class Load extends Tasks {
             ++$this->id; // Skip (
 
             $rank = 0;
+            $uses = array();
             $useFullcode = array();
             do {
                 ++$this->id; // Skip ( or ,
@@ -1262,6 +1263,7 @@ class Load extends Tasks {
                 ++$this->id;
                 
                 $useFullcode[] = $arg->fullcode;
+                $users[] = $arg;
                 $arg->rank = ++$rank;
                 
                 $this->addLink($function, $arg, 'USE');
@@ -1270,6 +1272,8 @@ class Load extends Tasks {
                     $this->addLink($previousContextVariables[$arg->code], $arg, 'DEFINITION');
                 }
             } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
+            
+            $this->runPlugins($function, $uses);
         }
 
         // Process return type
@@ -4339,9 +4343,9 @@ class Load extends Tasks {
                 ++$this->id;
                 // instead of ?
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
-                    $as = $this->processAsTrait();
+                    $this->processAsTrait();
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
-                    $as = $this->processInsteadof();
+                    $this->processInsteadof();
                 } else {
                     assert(false, 'Usetrait without as or insteadof : '.$this->tokens[$this->id + 1][1]);
                 }
