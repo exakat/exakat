@@ -585,7 +585,7 @@ class Load extends Tasks {
 
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         $stats = $this->stats;
-        foreach($ignoredFiles as $reason) {
+        foreach($ignoredFiles as $file => $reason) {
             try {
                 $this->processFile($file, $dir);
             } catch (NoFileToProcess $e) {

@@ -169,7 +169,6 @@ abstract class Tasks {
 
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
-            $pid = getmypid();
             $path = "{$this->exakatDir}/$snitch.json";
         }
 

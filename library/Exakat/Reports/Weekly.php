@@ -613,7 +613,7 @@ JAVASCRIPT;
         $listSQL = makeList($list);
         $list = array_flip($list);
 
-        $query = "SELECT analyzer, count(*) AS number
+        $query = "SELECT analyzer, count(*) AS value
                     FROM results
                     WHERE analyzer in ($listSQL)
                     GROUP BY analyzer
@@ -624,13 +624,12 @@ JAVASCRIPT;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
+            $data[] = $row;
             unset($list[$row['analyzer']]);
         }
-        foreach($list as $analyzer => $foo) {
-            $data[] = array('analyzer' => $analyzer,
-                            'value'    => 0);
+        $value = 0;
+        foreach(array_keys($list) as $analyzer) {
+            $data[] = compact('analyzer','value');
         }
 
         return $data;

@@ -32,7 +32,6 @@ class CollectExtends extends DSL {
         
         $this->assertVariable($variable, self::VARIABLE_WRITE);
         
-        $LINKS_DOWN = self::$linksDown;
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         return new Command(<<<GREMLIN

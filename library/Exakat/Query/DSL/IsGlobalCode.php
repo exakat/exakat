@@ -27,9 +27,6 @@ use Exakat\Query\Query;
 
 class IsGlobalCode extends DSL {
     public function run() {
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
         $gremlin = <<<GREMLIN
 not( 
     where( 

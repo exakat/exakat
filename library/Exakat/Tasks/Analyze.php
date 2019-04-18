@@ -102,7 +102,6 @@ class Analyze extends Tasks {
         $this->log->log("Analyzing project $project");
         $this->log->log("Runnable analyzers\t".count($analyzersClass));
 
-        $total_results = 0;
         $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         $analyzers = array();
@@ -232,19 +231,19 @@ GREMLIN;
             display( "$analyzer_class running\n");
             try {
                 $analyzer->run($this->config);
-            } catch(QueryException $error) {
+            } catch(QueryException $e) {
                 $end = microtime(true);
                 display( "$analyzer_class : DSL building exception\n");
-                display($error->getMessage());
-                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                display($e->getMessage());
+                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 
-            } catch(Exception $error) {
+            } catch(Exception $e) {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
-                display($error->getMessage());
-                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                display($e->getMessage());
+                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 

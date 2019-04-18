@@ -336,8 +336,6 @@ TEXT
     private function checkPHP($pathToBinary, $displayedVersion) {
         $stats = array();
         
-        $version = 'php'.str_replace('.', '', $displayedVersion);
-        
         $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
         try {
