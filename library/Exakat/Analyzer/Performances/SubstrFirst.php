@@ -25,16 +25,15 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class SubstrFirst extends Analyzer {
-      private  $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname',
+      private $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname',
                                         '\\chop', '\\trim', '\\rtrim', '\\ltrim',);
-      private  $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
+      private $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
                                     '\\iconv',
                                     '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth',
                                     '\\preg_replace', '\\preg_relace_callback', '\\preg_replace_calback_array',
                                     );
 
     public function analyze() {
-
         // substr(strtolower('a'), 1, 100);
         $this->atomFunctionIs($this->substrFunctions)
              ->outWithRank('ARGUMENT', 0)
@@ -68,7 +67,6 @@ class SubstrFirst extends Analyzer {
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

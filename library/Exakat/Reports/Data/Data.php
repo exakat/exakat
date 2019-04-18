@@ -38,7 +38,7 @@ abstract class Data {
         return $this->values;
     }
     
-    public abstract function prepare();
+    abstract public function prepare();
 }
 
 ?>

@@ -113,7 +113,7 @@ sideEffect{
             } else if (it.label() == "Functioncall" && 
                        it.value("fullnspath") == "\\\\dirname") {
                 loop = 1;
-                dirname = it.vertices(OUT, "ARGUMENT").next();
+                dirname = it.vertices(OUT, "ARGUMENT").findAll{ it.property('rank').value() == 0; }[0]; 
                 
                 while( dirname.label() == 'Functioncall' && 
                        dirname.value("fullnspath") == "\\\\dirname") {
@@ -136,7 +136,7 @@ sideEffect{
                     code.value("fullnspath") == "\\\\dirname") {
 
                     loop = 1;
-                    dirname = code.vertices(OUT, "ARGUMENT").next();
+                    dirname = code.vertices(OUT, "ARGUMENT").findAll{ it.property('rank').value() == 0; }[0]; 
                     
                     while( dirname.label() == 'Functioncall' && 
                            dirname.value("fullnspath") == "\\\\dirname") {

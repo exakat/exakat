@@ -96,7 +96,7 @@ class Weekly extends Ambassador {
         }
 
     // special case for 'Future read'
-        $date = date('Y-W', strtotime(date('Y')."W".(date('W') + 1)."1"));
+        $date = date('Y-W', strtotime(date('Y').'W'.(date('W') + 1).'1'));
         $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
         $this->weeks[$date] = json_decode($json);
         
@@ -239,7 +239,7 @@ MENU;
         }
 
         $analyzerList = $this->weeks["$year-$week"]->analysis;
-        $this->generateIssuesEngine("weekly",
+        $this->generateIssuesEngine('weekly',
                                     $this->getIssuesFaceted($analyzerList));
 
         $analyzerListSql = makeList($analyzerList);
@@ -264,9 +264,9 @@ MENU;
         
         $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
 
-        $begin = date('M jS, Y', strtotime($year."W".$week."1"));
-        $end   = date('M jS, Y', strtotime($year."W".$week."7"));
-        $titleDate = $year.' '.ordinal($week)." week";
+        $begin = date('M jS, Y', strtotime($year.'W'.$week.'1'));
+        $end   = date('M jS, Y', strtotime($year.'W'.$week.'7'));
+        $titleDate = $year.' '.ordinal($week).' week';
 
         $finalHTML = str_replace('<WEEK>', $titleDate, $html);
         $fullweek = array("From $begin to $end : <br /> Total : $total_issues <br />");
@@ -341,11 +341,11 @@ HTML;
         $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis, "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
-        $globalData = array(self::G_CRITICAL  => (object) ['label' => 'Critical', 'value' => 0],
-                            self::G_ERROR     => (object) ['label' => 'Error',    'value' => 0],
-                            self::G_WARNING   => (object) ['label' => 'Warning',  'value' => 0],
-                            self::G_NOTICE    => (object) ['label' => 'Notice',   'value' => 0],
-                            self::G_NONE      => (object) ['label' => 'OK',       'value' => 0]);
+        $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
+                            self::G_ERROR     => (object) array('label' => 'Error',    'value' => 0),
+                            self::G_WARNING   => (object) array('label' => 'Warning',  'value' => 0),
+                            self::G_NOTICE    => (object) array('label' => 'Notice',   'value' => 0),
+                            self::G_NONE      => (object) array('label' => 'OK',       'value' => 0));
         foreach($this->resultsCounts as $name => $value) {
             if ($value > 0) {
                 $globalData[$this->grading[$name]]->value += floor(100 * min(log($value * $this->grading[$name]) / log(10), 5)) / 100;
@@ -613,24 +613,23 @@ JAVASCRIPT;
         $listSQL = makeList($list);
         $list = array_flip($list);
 
-        $query = "SELECT analyzer, count(*) AS number
+        $query = "SELECT analyzer, count(*) AS value
                     FROM results
                     WHERE analyzer in ($listSQL)
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
+            $data[] = $row;
             unset($list[$row['analyzer']]);
         }
-        foreach($list as $analyzer => $foo) {
-            $data[] = array('analyzer' => $analyzer,
-                            'value'    => 0);
+        $value = 0;
+        foreach(array_keys($list) as $analyzer) {
+            $data[] = compact('analyzer','value');
         }
 
         return $data;

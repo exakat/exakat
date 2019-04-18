@@ -55,7 +55,7 @@ class CouldUseCompact extends Analyzer {
                                 $this->side()
                                      ->filter(
                                         $this->side()
-                                             ->atomIs(array("String", "Identifier", "Nsname", "Concatenation"))
+                                             ->atomIs(array('String', 'Identifier', 'Nsname', 'Concatenation'))
                                              ->has('noDelimiter')
                                      )
                              )
@@ -72,7 +72,7 @@ class CouldUseCompact extends Analyzer {
                                 $this->side()
                                      ->filter(
                                         $this->side()
-                                             ->atomIs("Variable")
+                                             ->atomIs('Variable')
                                      )
                              )
                      )

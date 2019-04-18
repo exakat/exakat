@@ -33,7 +33,7 @@ class Upgrade extends Tasks {
         $options = array(
             'http'=>array(
                 'method' => 'GET',
-                'header' => "User-Agent: exakat-".Exakat::VERSION
+                'header' => 'User-Agent: exakat-'.Exakat::VERSION
             )
         );
 

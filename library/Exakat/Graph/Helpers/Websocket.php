@@ -215,7 +215,7 @@ class Websocket {
       // Get the close status.
       if ($payload_length >= 2) {
         $status_bin = $payload[0] . $payload[1];
-        $status = bindec(sprintf("%08b%08b", ord($payload[0]), ord($payload[1])));
+        $status = bindec(sprintf('%08b%08b', ord($payload[0]), ord($payload[1])));
         $this->close_status = $status;
         $payload = substr($payload, 2);
 
@@ -268,7 +268,7 @@ class Websocket {
 
     if ($written < strlen($data)) {
       throw new \Exception(
-        "Could only write $written out of " . strlen($data) . " bytes."
+        "Could only write $written out of " . strlen($data) . ' bytes.'
       );
     }
   }
@@ -303,7 +303,7 @@ class Websocket {
    */
   protected static function sprintB($string) {
     $return = '';
-    for ($i = 0; $i < strlen($string); $i++) $return .= sprintf("%08b", ord($string[$i]));
+    for ($i = 0; $i < strlen($string); $i++) $return .= sprintf('%08b', ord($string[$i]));
     return $return;
   }
 
@@ -401,7 +401,7 @@ class Websocket {
 
     // Default headers (using lowercase for simpler array_merge below).
     $headers = array(
-      'host'                  => $host . ":" . $port,
+      'host'                  => $host . ':' . $port,
       'user-agent'            => 'websocket-client-php',
       'connection'            => 'Upgrade',
       'upgrade'               => 'websocket',
@@ -423,7 +423,7 @@ class Websocket {
     }
 
     $header =
-      "GET " . $path_with_query . " HTTP/1.1\r\n"
+      'GET ' . $path_with_query . " HTTP/1.1\r\n"
       . implode(
         "\r\n", array_map(
           function($key, $value) { return "$key: $value"; }, array_keys($headers), $headers

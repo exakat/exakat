@@ -209,7 +209,7 @@ class Dump extends Tasks {
                 }
                 throw new NoSuchThema($thema);
             }
-            display("Processing thema ".(count($thema) > 1 ? 's' : '' )." : ".implode(', ', $thema));
+            display('Processing thema '.(count($thema) > 1 ? 's' : '' ).' : '.implode(', ', $thema));
             $missing = $this->processResultsTheme($thema, $counts);
             $this->expandThemes();
             $this->collectHashAnalyzer();
@@ -829,17 +829,17 @@ GREMLIN;
                     $namespaceId = 1;
                 }
 
-                $query[] = "(".$citId[$row['fullnspath']].
+                $query[] = '('.$citId[$row['fullnspath']].
                            ", '".$this->sqlite->escapeString($row['name'])."'".
-                           ", ".$namespaceId.
-                           ", ".(int) $row['abstract'].
-                           ",".(int) $row['final'].
+                           ', '.$namespaceId.
+                           ', '.(int) $row['abstract'].
+                           ','.(int) $row['final'].
                            ", '".$row['type']."'".
-                           ", ".$extends.
-                           ", ".(int) $row['begin'].
-                           ", ".(int) $row['end'].
+                           ', '.$extends.
+                           ', '.(int) $row['begin'].
+                           ', '.(int) $row['end'].
                            ", '".$this->files[$row['file']]."'".
-                           " )";
+                           ' )';
             }
             
             if (!empty($query)) {
@@ -855,9 +855,9 @@ GREMLIN;
 
                 foreach($row['implements'] as $implements) {
                     if (isset($citId[$implements])) {
-                        $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$implements], 'implements')";
+                        $query[] = '(null, '.$citId[$row['fullnspath']].", $citId[$implements], 'implements')";
                     } else {
-                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($implements)."', 'implements')";
+                        $query[] = '(null, '.$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($implements)."', 'implements')";
                     }
                 }
             }
@@ -875,9 +875,9 @@ GREMLIN;
                 
                 foreach($row['uses'] as $uses) {
                     if (isset($citId[$uses])) {
-                        $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$uses], 'use')";
+                        $query[] = '(null, '.$citId[$row['fullnspath']].", $citId[$uses], 'use')";
                     } else {
-                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($uses)."', 'use')";
+                        $query[] = '(null, '.$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($uses)."', 'use')";
                     }
                 }
             }
@@ -993,8 +993,8 @@ GREMLIN;
                 continue;
             }
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
-                        ", ".(int) $row['static'].", ".(int) $row['final'].", ".(int) $row['abstract'].", '".$visibility."'".
-                        ", ".(int) $row['begin'].", ".(int) $row['end'].")";
+                        ', '.(int) $row['static'].', '.(int) $row['final'].', '.(int) $row['abstract'].", '".$visibility."'".
+                        ', '.(int) $row['begin'].', '.(int) $row['end'].')';
 
             ++$total;
         }
@@ -1074,7 +1074,7 @@ GREMLIN;
             }
 
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
-                        ", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."', ".(int) $row['static'].")";
+                        ", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."', ".(int) $row['static'].')';
 
             ++$total;
         }
@@ -1139,7 +1139,7 @@ GREMLIN;
             }
 
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."'".
-                       ", ".$citId[$row['class']].
+                       ', '.$citId[$row['class']].
                        ", '".$visibility."'".
                        ", '".$this->sqlite->escapeString($row['value'])."')";
 
@@ -1302,7 +1302,7 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', '".$this->files[$row['file']]."', ".(int) $row['begin'].", ".(int) $row['end'].")";
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', '".$this->files[$row['file']]."', ".(int) $row['begin'].', '.(int) $row['end'].')';
 
             ++$total;
         }
@@ -1503,7 +1503,7 @@ GREMLIN;
             $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
-        display(count($extends)." extends for classes ");
+        display(count($extends).' extends for classes ');
 
         // Finding extends for interfaces
         $query = <<<GREMLIN
@@ -1524,7 +1524,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res)." extends for interfaces ");
+        display(count($res).' extends for interfaces ');
 
         // Finding typehint
         $query = <<<GREMLIN
@@ -1545,7 +1545,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res)." typehints ");
+        display(count($res).' typehints ');
 
         // Finding trait use
         $query = <<<GREMLIN
@@ -1566,7 +1566,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res)." traits ");
+        display(count($res).' traits ');
 
         // traits
         $query = <<<GREMLIN
@@ -1587,7 +1587,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res)." use ");
+        display(count($res).' use ');
 
         // Functioncall()
         $query = <<<GREMLIN
@@ -1608,7 +1608,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($functioncall)." functioncall ");
+        display(count($functioncall).' functioncall ');
 
         // constants
         $query = <<<GREMLIN
@@ -1629,7 +1629,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($constants)." constants ");
+        display(count($constants).' constants ');
 
         // New
         $query = <<<GREMLIN
@@ -1650,7 +1650,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res)." new ");
+        display(count($res).' new ');
 
         // static calls (property, constant, method)
         $query = <<<GREMLIN
@@ -1672,7 +1672,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($statics)." static calls CPM");
+        display(count($statics).' static calls CPM');
     }
 
     private function collectHashCounts($query, $name) {
@@ -2013,7 +2013,7 @@ SQL;
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->busyTimeout(5000);
 
-        $query = "SELECT analyzer FROM resultsCounts WHERE analyzer IN (".makeList($analyzers).")";
+        $query = 'SELECT analyzer FROM resultsCounts WHERE analyzer IN ('.makeList($analyzers).')';
         $ran = array();
         $res = $sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

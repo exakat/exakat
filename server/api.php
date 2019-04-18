@@ -223,7 +223,7 @@ function fetch($args) {
     }
 
     // check if the report is done. If not, no dump yet.
-    if (!file_exists("projects/$project/report")) {
+    if (!file_exists("projects/$project/diplomat")) {
         error('No dump.sqlite available', '');
     }
 

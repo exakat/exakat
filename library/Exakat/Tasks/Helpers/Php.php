@@ -98,8 +98,8 @@ abstract class Php {
                      '`'  => self::T_BACKTICK,
                    );
                    
-    static public function getInstance($tokens) {
-        $errors = [];
+    public static function getInstance($tokens) {
+        $errors = array();
 
         if (empty($tokens)) {
             throw new NoRecognizedTokens();

@@ -54,7 +54,7 @@ class CouldBeProtectedProperty extends Analyzer {
         $this->atomIs('Staticproperty')
              ->_as('init')
              ->outIs('CLASS')
-             ->atomIs(array("Identifier", "Nsname"))
+             ->atomIs(array('Identifier', 'Nsname'))
              ->_as('classe')
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')

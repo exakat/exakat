@@ -38,7 +38,7 @@ use Exakat\Query\DSL\DSL;
 use Exakat\Query\DSL\IsNotIgnored;
 
 abstract class Analyzer {
-    static public $datastore  = null;
+    public static $datastore  = null;
     
     protected $rowCount       = 0; // Number of found values
     protected $processedCount = 0; // Number of initial values
@@ -97,27 +97,27 @@ abstract class Analyzer {
     const TRANSLATE    = true;
     const NO_TRANSLATE = false;
 
-    static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
-    static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
-    static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
-    static public $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
-    static public $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
-    static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
-    static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
-    static public $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
-    static public $CLASSES_ALL      = array('Class', 'Classanonymous');
-    static public $STATIC_NAMES     = array('Nsname', 'Identifier');
-    static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
-    static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
-    static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
-    static public $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
-    static public $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
-    static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
-    static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
-    static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
-    static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
-    static public $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
+    public static $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
+    public static $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
+    public static $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
+    public static $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
+    public static $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
+    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
+    public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
+    public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
+    public static $CLASSES_ALL      = array('Class', 'Classanonymous');
+    public static $STATIC_NAMES     = array('Nsname', 'Identifier');
+    public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+    public static $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
+    public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
+    public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
+    public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
+    public static $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
+    public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
+    public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
+    public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
     
     const INCLUDE_SELF = false;
@@ -1087,7 +1087,7 @@ GREMLIN;
         if ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, "Wrong type for not : ".gettype($filter));
+            assert(false, 'Wrong type for not : '.gettype($filter));
         }
         $this->query->not($filterClean, array());
 
@@ -1101,7 +1101,7 @@ GREMLIN;
         } elseif ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, "Wrong type for filter : ".get_type($filter));
+            assert(false, 'Wrong type for filter : '.get_type($filter));
         }
         $this->query->filter($filterClean, array());
 
@@ -1774,7 +1774,7 @@ GREMLIN;
         return $this->queryCount;
     }
 
-    public abstract function analyze();
+    abstract public function analyze();
 
     public function printQuery() {
         $this->query->printQuery();

@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class GlobalCodeOnly extends Analyzer {
     public function analyze() {
-        $definitionsFunctionsList = "\"\\\\".implode("\", \"\\\\", DefinitionsOnly::$definitionsFunctions)."\"";
-        $definitionsList = "\"".implode("\", \"", DefinitionsOnly::$definitions)."\"";
+        $definitionsFunctionsList = '"\\\\'.implode('", "\\\\', DefinitionsOnly::$definitionsFunctions).'"';
+        $definitionsList = '"'.implode('", "', DefinitionsOnly::$definitions).'"';
 
         // one or several namespaces
         $this->atomIs('File')

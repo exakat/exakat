@@ -143,14 +143,14 @@ class Status extends Tasks {
 
         foreach($status as $field => $value) {
             if (is_array($value)) {
-                $sub = substr($field.str_repeat(' ', $size), 0, $size)." : ".PHP_EOL;
+                $sub = substr($field.str_repeat(' ', $size), 0, $size).' : '.PHP_EOL;
 
                 $sizea = 0;
                 foreach($value as $k => $v) {
                     $sizea = max($sizea, strlen($k));
                 }
                 foreach($value as $k => $v) {
-                    $sub .= "    ".substr($k.str_repeat(' ', $sizea), 0, $sizea)." : $v".PHP_EOL;
+                    $sub .= '    '.substr($k.str_repeat(' ', $sizea), 0, $sizea)." : $v".PHP_EOL;
                 }
                 $text .= PHP_EOL.$sub.PHP_EOL;
             } else {

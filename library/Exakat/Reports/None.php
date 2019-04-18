@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 class None extends Reports {
     public function generate($folder, $name) {
-        display("Generating the empty format. ");
+        display('Generating the empty format. ');
     }
 }
 

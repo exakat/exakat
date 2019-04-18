@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class PhpFunctionUsage extends Analyzer {
     protected $functions = array();
     
-    function dependsOn() {
+    public function dependsOn() {
         return array('Functions/ConditionedFunctions',
                      'Functions/RedeclaredPhpFunction',
                     );

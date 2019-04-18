@@ -60,7 +60,7 @@ class Files extends Tasks {
 
         display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
-        display("Found ".count($files)." files.\n");
+        display('Found '.count($files)." files.\n");
 
         $tmpFileName = "{$this->exakatDir}/files".getmypid().'.txt';
         $path = "{$this->config->projects_root}/projects/$dir/code";
@@ -490,7 +490,7 @@ class Files extends Tasks {
             }
 
             if ($include === '/') {
-                $includeDirs[] = "/.*";
+                $includeDirs[] = '/.*';
             } elseif ($include[0] === '/') {
                 $includeDirs[] = "$include.*";
             } else {

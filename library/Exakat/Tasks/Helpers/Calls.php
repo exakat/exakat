@@ -91,7 +91,7 @@ SQL;
         }
         
         if (!is_string($fullnspath)) {
-            throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
+            throw new LoadError( 'Warning : fullnspath is not a string : it is '.gettype($fullnspath).PHP_EOL);
         }
 
         if ($type === 'class') {

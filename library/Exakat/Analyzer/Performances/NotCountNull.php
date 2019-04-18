@@ -39,7 +39,7 @@ class NotCountNull extends Analyzer {
              ->_as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer')
-             ->codeIs("0")
+             ->codeIs('0')
              ->back('results');
         $this->prepareQuery();
 

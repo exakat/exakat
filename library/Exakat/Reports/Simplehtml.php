@@ -73,7 +73,7 @@ class Simplehtml extends Reports {
 
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $text .= "<tr><th>Exakat version :</th><td>".\Exakat\Exakat::VERSION." (".\Exakat\Exakat::BUILD.") </td></tr>\n";
+            $text .= '<tr><th>Exakat version :</th><td>'.\Exakat\Exakat::VERSION.' ('.\Exakat\Exakat::BUILD.") </td></tr>\n";
         }
 
         return $text;

@@ -115,7 +115,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $menu = file_get_contents("{$this->tmpName}/datas/menu.html");
-            $inventories = [];
+            $inventories = array();
             foreach($this->inventories as $fileName => $title) {
                 if (strpos($fileName, '/') !== false) {
                     $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
@@ -130,7 +130,7 @@ class Ambassador extends Reports {
                 $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
 
-            $compatibilities = [];
+            $compatibilities = array();
             $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
@@ -167,7 +167,7 @@ class Ambassador extends Reports {
         }
         
         if ($missing = $this->checkMissingThemes()) {
-            print "Can't produce Ambassador format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+            print "Can't produce Ambassador format. There are ".count($missing).' missing themes : '.implode(', ', $missing).".\n";
             return false;
         }
 
@@ -306,7 +306,7 @@ class Ambassador extends Reports {
 
     protected function generateDocumentation($analyzerList){
         $baseHTML = $this->getBasedPage('analyzers_doc');
-        $docHTML = [];
+        $docHTML = array();
 
         foreach($analyzerList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
@@ -1574,9 +1574,9 @@ HTML;
     }
 
     protected function getTotalAnalyzer($issues = false) {
-        $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
-            WHERE rc.count >= 0";
+            WHERE rc.count >= 0';
 
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();
@@ -1622,7 +1622,6 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1706,7 +1705,7 @@ SQL;
                         <td>'.$file['loc'].'</td>
                         <td>'.$file['issues'].'</td>
                         <td>'.$file['analyzers'].'</td>';
-            $filesHTML.= "</tr>";
+            $filesHTML.= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -1764,7 +1763,7 @@ SQL;
                     GROUP BY file
                     ORDER BY number DESC ";
         if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -1846,7 +1845,7 @@ SQL;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -2128,12 +2127,12 @@ SQL;
             $item['file' ]          = $row['line'] === -1 ? $this->config->project_name : $row['file'];
             $item['file_md5' ]      = $this->toId($row['file']);
             $item['code' ]          = PHPSyntax($row['fullcode']);
-            $item['code_detail']    = "<i class=\"fa fa-plus \"></i>";
+            $item['code_detail']    = '<i class="fa fa-plus "></i>';
             $item['code_plus']      = PHPSyntax($row['fullcode']);
             $item['link_file']      = $row['file'];
             $item['line' ]          = $row['line'];
-            $item['severity']       = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
-            $item['complexity']     = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
+            $item['severity']       = '<i class="fa fa-warning" style="color: '.$severityColors[$this->severities[$row['analyzer']]].'"></i>';
+            $item['complexity']     = '<i class="fa fa-cog" style="color: '.$TTFColors[$this->timesToFix[$row['analyzer']]].'"></i>';
             $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines                  = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
@@ -2189,7 +2188,7 @@ SQL;
         $analyzers = '';
 
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzers .= "<tr><td>".$this->getDocs($analyzer, 'name')."</td></tr>\n";
+            $analyzers .= '<tr><td>'.$this->getDocs($analyzer, 'name')."</td></tr>\n";
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -2289,7 +2288,7 @@ SQL;
 
         $id = strpos($report, "\n\n\n");
         $configline = trim($report);
-        $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
+        $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
         
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
@@ -2462,8 +2461,8 @@ SQL;
         }
         
         $table = '';
-        $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data2)[0]) )."</th></tr>";
-            $table .= "<tr><td>&nbsp;</td><td>Compilation</td><td>".implode('</td><td>', $incompilable)."</td></tr>\n";
+        $titles = '<tr><th>Version</th><th>Name</th><th>'.implode('</th><th>', array_keys(array_values($data2)[0]) ).'</th></tr>';
+            $table .= '<tr><td>&nbsp;</td><td>Compilation</td><td>'.implode('</td><td>', $incompilable)."</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
@@ -2527,7 +2526,7 @@ HTML;
         $list = $this->config->ext->getPharList();
         $html = array();
         foreach($list as $name => $extension) {
-            $html[] = "<li>".basename($name, '.phar')."</li>";
+            $html[] = '<li>'.basename($name, '.phar').'</li>';
         }
         $info[] = array('Exakat modules', '<ul>'.implode(PHP_EOL, $html).'</ul>');
 
@@ -2566,7 +2565,7 @@ HTML;
             if (empty($row['homepage'])) {
                 $link = '';
             } else {
-                $link = "<a href=\"".$row['homepage']."\">".$row['homepage']."&nbsp;<i class=\"fa fa-sign-out\"></i></a>";
+                $link = '<a href="'.$row['homepage'].'">'.$row['homepage'].'&nbsp;<i class="fa fa-sign-out"></i></a>';
             }
 
             $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
@@ -3029,7 +3028,7 @@ SQL;
             $rows[] = "<tr><td>$name</td>$cells</tr>\n";
         }
         
-        $cells = implode("</td><td>", $traits);
+        $cells = implode('</td><td>', $traits);
         $rows = implode('', $rows);
         $theTable = <<<HTML
 <table class="table table-striped">
@@ -4452,14 +4451,14 @@ JAVASCRIPT;
 
     protected function generateCodes() {
         $path = "{$this->tmpName}/datas/sources";
-        $pathToSource = dirname($this->tmpName)."/code";
+        $pathToSource = dirname($this->tmpName).'/code';
         mkdir($path, 0755);
 
         $filesList = $this->datastore->getRow('files');
         $files = '';
         $dirs = array('/' => 1);
         foreach($filesList as $row) {
-            $subdirs = explode('/', trim(dirname($row['file']), "/"));
+            $subdirs = explode('/', trim(dirname($row['file']), '/'));
             $dir = '';
             foreach($subdirs as $subdir) {
                 $dir .= "/$subdir";
@@ -4643,7 +4642,7 @@ SQL;
             $confused = array();
 
             foreach($close as $reason => $variables) {
-                $list = "<ul><li>".implode('</li><li>', $variables)."</li></ul>\n";
+                $list = '<ul><li>'.implode('</li><li>', $variables)."</li></ul>\n";
                 $confused[] = "<tr><td>$list</td><td>{$reasons[$reason]}</td></tr>\n";
             }
 

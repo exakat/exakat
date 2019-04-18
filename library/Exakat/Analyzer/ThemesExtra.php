@@ -29,7 +29,7 @@ use AutoloadExt;
 class ThemesExtra {
     private $extra_themes  = array();
 
-    static private $instanciated = array();
+    private static $instanciated = array();
     
     public function __construct(array $extra_themes = array()) {
         $this->extra_themes = $extra_themes;

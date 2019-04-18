@@ -96,7 +96,7 @@ class MismatchedTypehint extends Analyzer {
              ->notSamePropertyAs('fullnspath', 'typehint')
              ->not(
                 $this->side()
-                     ->inIs("DEFINITION")
+                     ->inIs('DEFINITION')
                      ->goToAllParents(self::INCLUDE_SELF)
                      ->notSamePropertyAs('fullnspath', 'typehint')
              );

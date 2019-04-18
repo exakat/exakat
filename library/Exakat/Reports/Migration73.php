@@ -75,7 +75,7 @@ class Migration73 extends Ambassador {
         }
         
         if ($missing = $this->checkMissingThemes()) {
-            print "Can't produce Migration73 format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+            print "Can't produce Migration73 format. There are ".count($missing).' missing themes : '.implode(', ', $missing).".\n";
             return false;
         }
 
@@ -125,7 +125,7 @@ class Migration73 extends Ambassador {
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -489,7 +489,7 @@ SQL;
     }
 
     protected function getTotalAnalysedFile() {
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer in (".makeList($this->analyzerList).")";
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer in (".makeList($this->analyzerList).')';
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
@@ -497,10 +497,10 @@ SQL;
     }
 
     protected function getTotalAnalyzer($issues = false) {
-        $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
             WHERE rc.count >= 0 AND
-                  analyzer in (".makeList($this->analyzerList).")";
+                  analyzer in ('.makeList($this->analyzerList).')';
 
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();

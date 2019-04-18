@@ -45,8 +45,8 @@ abstract class Tasks {
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
     protected $exakatDir             = '/tmp/exakat';
-    public    static $semaphore      = null;
-    public    static $semaphorePort  = null;
+    public static $semaphore      = null;
+    public static $semaphorePort  = null;
     
     protected $themes = null;
 
@@ -81,7 +81,7 @@ abstract class Tasks {
                     self::$semaphorePort = $this->config->concurencyCheck + 3;
                 }
 
-                if ($socket = @stream_socket_server("udp://0.0.0.0:".self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
+                if ($socket = @stream_socket_server('udp://0.0.0.0:'.self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
                     self::$semaphore = $socket;
                 } else {
                     throw new AnotherProcessIsRunning();
@@ -169,7 +169,6 @@ abstract class Tasks {
 
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
-            $pid = getmypid();
             $path = "{$this->exakatDir}/$snitch.json";
         }
 

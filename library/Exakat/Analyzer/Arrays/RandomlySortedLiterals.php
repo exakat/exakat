@@ -79,7 +79,7 @@ g.V().hasLabel("Arrayliteral")
      .sideEffect{ m = it.get()['m'] }
      .sideEffect{ n = it.get()['n'] }.map{m;}.toList()[0].findAll{ a,b -> b != n[a.sort(false)] }.keySet()
 GREMLIN
-, ['arg' => $uniqueArrays])->toArray();
+, array('arg' => $uniqueArrays))->toArray();
         if (empty($unsortedArrays)) {
             return;
         }

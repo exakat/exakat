@@ -106,7 +106,7 @@ class Jobqueue extends Tasks {
                     continue;
                 }
                 
-                $command = array_merge(['exakat'], $command);
+                $command = array_merge(array('exakat'), $command);
                 switch($command[1]) {
                     case 'init' :
                         $this->processInit($command);

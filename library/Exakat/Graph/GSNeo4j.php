@@ -111,7 +111,7 @@ class GSNeo4j extends Graph {
         } elseif ($result instanceof stdClass) {
             return new GraphResults($result);
         } else {
-            print "Processing unknown type ".gettype($result).PHP_EOL;
+            print 'Processing unknown type '.gettype($result).PHP_EOL;
             var_dump($result);
             die(__METHOD__);
         }

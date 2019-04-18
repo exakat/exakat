@@ -26,7 +26,7 @@ namespace Exakat\Data;
 use Exakat\Config;
 
 abstract class Data {
-    static public $config = null;
+    public static $config = null;
     
     protected $name = '';
 

@@ -36,9 +36,9 @@ abstract class Reports {
     const STDOUT = 'stdout';
     const INLINE = 'inline';
     
-    static private $docs = null;
+    private static $docs = null;
 
-    static public $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
+    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
                                           'Text', 'Xml', 'Uml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
@@ -102,7 +102,7 @@ abstract class Reports {
             $themas = $this->config->thema;
 
             if ($missing = $this->checkMissingThemes()) {
-                print "Can't produce ".static::class." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+                print "Can't produce ".static::class.' format. There are '.count($missing).' missing themes : '.implode(', ', $missing).".\n";
                 return false;
             }
 
@@ -162,7 +162,7 @@ abstract class Reports {
     }
     
     public function getDocs($analyzer, $property = null) {
-        assert(self::$docs !== null, "Docs needs to be initialized with an object.");
+        assert(self::$docs !== null, 'Docs needs to be initialized with an object.');
 
         if ($property === null) {
             return self::$docs->getDocs($analyzer);

@@ -33,17 +33,17 @@ class DSLFactory {
     const VARIABLE_WRITE = true;
     const VARIABLE_READ  = false;
     
-    public     $availableAtoms         = array();
-    public     $availableLinks         = array();
-    public     $availableFunctioncalls = array();
-    private    $availableVariables     = array(); // This one is per query
-    protected  $availableLabels        = array('first'); // This one is per query
-    protected  $ignoredcit             = array();
-    protected  $ignoredfunctions       = array();
-    protected  $ignoredconstants       = array();
-    protected  $dictCode               = null;
-    protected  $linksDown              = '';
-    protected  $MAX_LOOPING            = Analyzer::MAX_LOOPING;
+    public $availableAtoms            = array();
+    public $availableLinks            = array();
+    public $availableFunctioncalls    = array();
+    private $availableVariables       = array(); // This one is per query
+    protected $availableLabels        = array('first'); // This one is per query
+    protected $ignoredcit             = array();
+    protected $ignoredfunctions       = array();
+    protected $ignoredconstants       = array();
+    protected $dictCode               = null;
+    protected $linksDown              = '';
+    protected $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
     public function __construct($datastore) {
         $this->dictCode = Dictionary::factory($datastore);

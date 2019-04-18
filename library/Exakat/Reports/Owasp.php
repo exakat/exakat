@@ -570,7 +570,7 @@ SQL;
     }
 
     protected function getTotalAnalysedFile() {
-        $query = "SELECT COUNT(DISTINCT file) FROM results";
+        $query = 'SELECT COUNT(DISTINCT file) FROM results';
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
@@ -578,9 +578,9 @@ SQL;
     }
 
     protected function getTotalAnalyzer($issues = false) {
-        $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
-            WHERE rc.count >= 0";
+            WHERE rc.count >= 0';
 
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();
@@ -595,13 +595,13 @@ SQL;
         $analyserHTML = '';
 
         foreach ($analysers as $analyser) {
-            $analyserHTML.= "<tr>";
+            $analyserHTML.= '<tr>';
             $analyserHTML.='<td>'.$analyser['label'].'</td>
                         <td>'.$analyser['recipes'].'</td>
                         <td>'.$analyser['issues'].'</td>
                         <td>'.$analyser['files'].'</td>
                         <td>'.$analyser['severity'].'</td>';
-            $analyserHTML.= "</tr>";
+            $analyserHTML.= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
@@ -653,12 +653,12 @@ SQL;
         $filesHTML = '';
 
         foreach ($files as $file) {
-            $filesHTML.= "<tr>";
+            $filesHTML.= '<tr>';
             $filesHTML.='<td>'.$file['file'].'</td>
                         <td>'.$file['loc'].'</td>
                         <td>'.$file['issues'].'</td>
                         <td>'.$file['analyzers'].'</td>';
-            $filesHTML.= "</tr>";
+            $filesHTML.= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -738,7 +738,7 @@ SQL;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT ".$limit;
+            $query .= ' LIMIT '.$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();

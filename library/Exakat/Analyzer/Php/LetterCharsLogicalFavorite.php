@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class LetterCharsLogicalFavorite extends Analyzer {
 
     public function analyze() {
-        $operators = $this->dictCode->translate(["&&", "||", "^"]);
+        $operators = $this->dictCode->translate(array('&&', '||', '^'));
         $operatorsList = makeList($operators, '');
         
         $mapping = <<<GREMLIN

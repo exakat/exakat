@@ -79,7 +79,7 @@ TEXT
         $final = '';
         if (!empty($pecl)) {
             $c = count($pecl);
-            $final .= "# install ".( $c === 1 ? 'one' : $c)." extra extension".($c === 1 ? '' : 's')."\n";
+            $final .= '# install '.( $c === 1 ? 'one' : $c).' extra extension'.($c === 1 ? '' : 's')."\n";
             $final .= implode("\n", $pecl)."\n\n";
         }
         $final .= implode("\n", $return);

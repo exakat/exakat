@@ -89,7 +89,7 @@ class Project extends Tasks {
         // Reset datastore for the others
         Analyzer::$datastore = $this->datastore;
 
-        display("Search for external libraries".PHP_EOL);
+        display('Search for external libraries'.PHP_EOL);
         $pathCache = "{$this->config->projects_root}/projects/$project/config.cache";
         if (file_exists($pathCache)) {
             unlink($pathCache);
@@ -164,10 +164,10 @@ class Project extends Tasks {
         }
 
         display("Running project '$project'" . PHP_EOL);
-        display("Running the following analysis : ".implode(', ', $themesToRun));
-        display("Producing the following reports : ".implode(', ', $reportToRun));
+        display('Running the following analysis : '.implode(', ', $themesToRun));
+        display('Producing the following reports : '.implode(', ', $reportToRun));
         
-        display("Running files".PHP_EOL);
+        display('Running files'.PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -176,11 +176,11 @@ class Project extends Tasks {
                                'project' => $this->config->project));
 
         $nb_files = $this->datastore->getHash('files');
-        if ($nb_files === "0") {
+        if ($nb_files === '0') {
             throw new NoCodeInProject($this->config->project);
         }
 
-        display("Cleaning DB" . PHP_EOL);
+        display('Cleaning DB' . PHP_EOL);
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -204,7 +204,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Always run this one first
-        $this->analyzeThemes(['First'], $audit_start, true);
+        $this->analyzeThemes(array('First'), $audit_start, true);
 
         // Dump is a child process
         // initialization and first collection (action done once)
@@ -219,7 +219,7 @@ class Project extends Tasks {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         }
 
-        display("Analyzed project".PHP_EOL);
+        display('Analyzed project'.PHP_EOL);
         $this->logTime('Analyze');
         $this->addSnitch(array('step'    => 'Analyzed',
                                'project' => $this->config->project));
@@ -367,11 +367,11 @@ class Project extends Tasks {
 
         $diff = array_diff($themes, $availableThemes);
         if (!empty($diff)) {
-            display("Ignoring the following unknown themes : ".implode(', ', $diff).PHP_EOL);
+            display('Ignoring the following unknown themes : '.implode(', ', $diff).PHP_EOL);
         }
         
         $themes = array_intersect($availableThemes, $themes);
-        display("Running the following themes : ".implode(', ', $themes).PHP_EOL);
+        display('Running the following themes : '.implode(', ', $themes).PHP_EOL);
 
         global $VERBOSE;
         $oldVerbose = $VERBOSE;
@@ -413,14 +413,14 @@ class Project extends Tasks {
                 $dumpConfig = new Config($args);
 
                 $audit_end = time();
-                $query = "g.V().count()";
+                $query = 'g.V().count()';
                 $res = $this->gremlin->query($query);
                 if (isset($res->results)) {
                     $nodes = $res->results[0];
                 } else {
                     $nodes = $res[0];
                 }
-                $query = "g.E().count()";
+                $query = 'g.E().count()';
                 $res = $this->gremlin->query($query);
                 if (isset($res->results)) {
                     $links = $res->results[0];

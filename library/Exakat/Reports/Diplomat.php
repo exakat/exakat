@@ -133,7 +133,7 @@ class Diplomat extends Ambassador {
         <!-- /.sidebar-menu -->
 MENU;
 
-            $compatibilities = [];
+            $compatibilities = array();
             $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
@@ -159,7 +159,7 @@ MENU;
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace("{{".$bloc."}}", $content, $html);
+        return str_replace('{{'.$bloc.'}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {

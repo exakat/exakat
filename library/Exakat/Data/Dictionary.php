@@ -32,7 +32,7 @@ class Dictionary {
     private $dictionary = array();
     private $lcindex    = array();
     
-    static private $singleton = null;
+    private static $singleton = null;
     
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
@@ -41,7 +41,7 @@ class Dictionary {
         }
     }
     
-    static public function factory($datastore) {
+    public static function factory($datastore) {
         if (self::$singleton === null) {
             self::$singleton = new self($datastore);
         }

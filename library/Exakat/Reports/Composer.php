@@ -49,11 +49,11 @@ class Composer extends Reports {
             $composer = new \stdClass();
         
             $composer->name = $this->config->project_name;   //
-            $composer->description = "";                     //
-            $composer->type = "library";                     // default value
+            $composer->description = '';                     //
+            $composer->type = 'library';                     // default value
             $composer->keywords = array();                   // where to find them ?
-            $composer->homepage = "";                        //
-            $composer->license = "";                         //
+            $composer->homepage = '';                        //
+            $composer->license = '';                         //
 
             $composer->support = new \stdClass();
             if ($this->config->project_url !== null) {
