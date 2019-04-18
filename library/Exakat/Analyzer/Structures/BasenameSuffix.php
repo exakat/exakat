@@ -26,19 +26,21 @@ use Exakat\Analyzer\Analyzer;
 
 class BasenameSuffix extends Analyzer {
     public function analyze() {
+        $substringFunctions = array('\substr', '\mb_substring', '\iconv_substr');
+
         // substr(basename($path), -4);
-        $this->atomFunctionIs(array('\substr', '\mb_substring', '\iconv_substr'))
+        $this->atomFunctionIs($substringFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->functioncallIs('\basename')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
-        // basename(substr($path), -4);
+        // basename(substr($path, -4));
         $this->atomFunctionIs('\basename')
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs(array('\substr', '\mb_substring', '\iconv_substr'))
+             ->functioncallIs($substringFunctions)
              ->back('first');
         $this->prepareQuery();
         
