@@ -28,13 +28,15 @@ use AutoloadExt;
 
 class ThemesExtra {
     private $extra_themes  = array();
+    private $ext           = null;
 
     private static $instanciated = array();
     
-    public function __construct(array $extra_themes = array()) {
+    public function __construct(array $extra_themes = array(), Autoloadext $ext) {
         $this->extra_themes = $extra_themes;
+        $this->ext = $ext;
     }
-    
+
     public function getThemeAnalyzers($theme = null) {
         // Main installation
         if ($theme === null) {
@@ -72,23 +74,66 @@ class ThemesExtra {
         return $return;
     }
 
-    public function getThemesForAnalyzer($analyzer = '') {
+    public function getThemesForAnalyzer($analyzer = null) {
         $return = array();
+
+        if ($analyzer === null) {
+            foreach($this->extra_themes as $theme => $analyzers) {
+                foreach($analyzers as $analyzer)  {
+                    if (isset($return[$analyzer])) {
+                        $return[$analyzer][] = $theme;
+                    } else {
+                        $return[$analyzer] = array($theme);
+                    }
+                }
+            }
+            
+            return $return;
+        }
+
         foreach($this->extra_themes as $theme => $analyzers) {
             if (in_array($analyzer, $analyzers)) {
                 $return[] = $theme;
             }
         }
-        
+
         return $return;
     }
 
     public function getSeverities() {
-        die(__METHOD__);
+        $return = array();
+        foreach($this->extra_themes as $theme => $analyzers) {
+            foreach($analyzers as $analyzer)  {
+                $data = $this->ext->loadData("human/en/$analyzer.ini");
+                
+                if (empty($data)) { continue; }
+                $ini = parse_ini_string($data);
+
+                if (isset($ini['severity'])) {
+                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['severity']);
+                }
+            }
+        }
+
+        return $return;
     }
 
     public function getTimesToFix() {
-        die(__METHOD__);
+        $return = array();
+        foreach($this->extra_themes as $theme => $analyzers) {
+            foreach($analyzers as $analyzer)  {
+                $data = $this->ext->loadData("human/en/$analyzer.ini");
+                
+                if (empty($data)) { continue; }
+                $ini = parse_ini_string($data);
+
+                if (isset($ini['timetofix'])) {
+                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['timetofix']);
+                }
+            }
+        }
+
+        return $return;
     }
 
     public function getFrequences() {

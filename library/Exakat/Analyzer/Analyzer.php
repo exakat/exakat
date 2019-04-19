@@ -1843,8 +1843,10 @@ GREMLIN;
 
         if (file_exists($fullpath)) {
             $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);
-        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("data/$file")) !== null) {
+        } elseif (($this->config->ext !== null) && ($iniString = $this->config->ext->loadData("data/$file")) != '') {
             $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
+        } elseif (($this->config->extension_dev !== null) && file_exists("{$this->config->extension_dev}data/$file")) {
+            $ini = parse_ini_file("{$this->config->extension_dev}data/$file", INI_PROCESS_SECTIONS);
         } else {
             assert(false, "No INI for '$file'.");
         }

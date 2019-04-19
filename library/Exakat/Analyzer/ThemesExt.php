@@ -43,7 +43,7 @@ class ThemesExt {
             $this->all[$name] = $list['All'];
             unset($list['All']);
             if (!empty($list)) {
-                $this->themes[$name] = new ThemesExtra($list);
+                $this->themes[$name] = new ThemesExtra($list, $this->ext);
             }
         }
     }
@@ -85,45 +85,30 @@ class ThemesExt {
     }
 
     public function getSeverities() {
-        die(__METHOD__);
-        $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
-
         $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['severity']);
+        foreach($this->themes as $extension) {
+            $return[] = $extension->getSeverities();
         }
-
-        return $return;
+        
+        return empty($return) ? array() : array_merge(...$return);
     }
 
     public function getTimesToFix() {
-        die(__METHOD__);
-        $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
-
         $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['timetofix']);
+        foreach($this->themes as $extension) {
+            $return[] = $extension->getTimesToFix();
         }
-
-        return $return;
+        
+        return empty($return) ? array() : array_merge(...$return);
     }
 
     public function getFrequences() {
-        die(__METHOD__);
-        $query = "SELECT analyzers.folder||'/'||analyzers.name AS analyzer, frequence / 100 AS frequence 
-            FROM  analyzers
-            LEFT JOIN analyzers_popularity 
-                ON analyzers_popularity.id = analyzers.id";
-
         $return = array();
-        $res = self::$sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['frequence']) ? 0 : $row['frequence'];
+        foreach($this->themes as $extension) {
+            $return[] = $extension->getFrequences();
         }
-
-        return $return;
+        
+        return empty($return) ? array() : array_merge(...$return);
     }
     
     public function listAllAnalyzer($folder = null) {
