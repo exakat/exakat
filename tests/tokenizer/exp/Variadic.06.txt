@@ -96,8 +96,8 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            15
-            Label : LEFT
+            26
+            Label : CONDITION
               22
               Label : INDEX
                 25
@@ -111,14 +111,18 @@ Label : PROJECT
                     23
                   Label : VARIABLE
                     21
-            Label : RIGHT
+            Label : ELSE
+              16
+              Label : ARGUMENT
+                12
+            Label : THEN
               16
               Label : ARGUMENT
                 12
           Label : NAME
             5
         Label : EXPRESSION
-          26
+          27
           Label : LEFT
             18
           Label : RIGHT

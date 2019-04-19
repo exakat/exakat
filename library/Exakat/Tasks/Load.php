@@ -5282,20 +5282,18 @@ class Load extends Tasks {
     }
 
     private function processEllipsis() {
-        // At least one.
-        do {
+        // Simply skipping the ...
+        $finals = $this->precedence->get($this->phptokens::T_ELLIPSIS);
+        while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
             $this->processNext();
-        } while(in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
-                                                                $this->phptokens::T_DOUBLE_COLON,
-                                                              ),
-                        STRICT_COMPARISON));
+        }
 
         $operand = $this->popExpression();
         $operand->fullcode  = '...'.$operand->fullcode;
-        $operand->variadic = self::VARIADIC;
-    
+        $operand->variadic  = self::VARIADIC;
+
         $this->pushExpression($operand);
-    
+
         return $operand;
     }
 
