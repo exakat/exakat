@@ -419,9 +419,9 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
 
             $d = explode('\\', $r2);
             $last = array_pop($d);
-            $r = mb_strtolower(implode('\\', $d)).'\\'.$last;
+            $r = mb_strtolower(implode('\\', $d))."\\$last";
             if (isset($r[0]) && $r[0] != '\\') {
-                $r = '\\' . $r;
+                $r = "\\$r";
             }
             return $r;
         };
@@ -465,8 +465,7 @@ function rst2htmlLink($txt) {
     // `title <url>`_ => <a href="url">title</a>
     // `anchor`_ => <a href="#anchor">anchor</a>
     
-    $txt = preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
-    return $txt;
+    return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
 
 function rst2literal($txt) {
@@ -484,7 +483,7 @@ function rsttable2html($raw) {
     $lines = explode("\n", $raw);
     $table = false;
     
-    foreach($lines as $line ) {
+    foreach($lines as $line) {
         if (preg_match('/^[\+-]+<br \/>$/', $line, $r)) {
             if ($table !== true) {
                 $table = true;
@@ -493,15 +492,15 @@ function rsttable2html($raw) {
             continue;
         } elseif ($table === true) {
             if (preg_match('/^[\+-]+$/', $line, $r)) {
-                $html[] = "<tr>".str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
+                $html[] = '<tr>'.str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
             } elseif (strpos($line, '|') === false) {
                 $table = false;
-                $html []= "</table>";
-                $html []= "";
+                $html []= '</table>';
+                $html []= '';
             } elseif (!empty($td = explode('|', str_replace('<br />', '', $line)))) {
                 $td = array_map('trim', $td);
                 
-                $html[] = "<tr><td>".implode("</td><td>", $td)."</td></tr>";
+                $html[] = '<tr><td>'.implode('</td><td>', $td).'</td></tr>';
             }
         } else {
             $html []= $line;
@@ -560,9 +559,9 @@ function str2array($string, $delimiter = ',') {
 function ordinal($number) {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
     if ((($number % 100) >= 11) && (($number%100) <= 13))
-        return $number. 'th';
+        return "{$number}th";
     else
-        return $number. $ends[$number % 10];
+        return $number . $ends[$number % 10];
 }
 
 /*
@@ -666,7 +665,7 @@ function sort_dependencies($array, $level = 0) {
             }
         }
         
-        assert($level < 10, "Too many levels in dependencies. Aborting");
+        assert($level < 10, 'Too many levels in dependencies. Aborting');
         $return = array_merge($return, sort_dependencies($next, ++$level));
     }
     

@@ -37,17 +37,19 @@ class CouldBePrivateMethod extends Analyzer {
 
         // Non-static methods
         // Case of object->method() (that's another public access)
-$query = <<<GREMLIN
-g.V().hasLabel("Methodcall")
-     .not( where( __.out("OBJECT").hasLabel("This")) )
-     .out("METHOD")
-     .hasLabel("Methodcallname")
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $publicMethods = $this->query($query)
+        $this->atomIs('Methodcall')
+             ->not(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->atomIs('This')
+             )
+             ->outIs('METHOD')
+             ->atomIs('Methodcallname')
+             ->values('lccode')
+             ->unique();
+        $publicMethods = $this->rawQuery()
                               ->toArray();
-        
+
         $this->atomIs('Method')
              ->isNot('visibility', 'private')
              ->isNot('static', true)
@@ -59,25 +61,25 @@ GREMLIN;
 
         // Static methods
         // Case of class::method() (that's another public access)
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticmethodcall")
-     .where( __.in("ANALYZED").has("analyzer", "Classes/IsNotFamily"))
-     .out("CLASS")
-     .hasLabel("Identifier", "Nsname")
-     .as("classe")
-     .sideEffect{ fns = it.get().value("fullnspath"); }
-     .in("CLASS")
-     .out("METHOD")
-     .hasLabel("Methodcallname")
-     .sideEffect{ name = it.get().value("code"); }
-     .as("method")
-     .repeat( __.in({$this->linksDown})).until( hasLabel("Class", "File") )
-     .select("classe", "method").by("fullnspath").by("lccode")
-     .unique()
-GREMLIN;
-        $publicStaticMethods = $this->query($query)
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIs('Classes/IsNotFamily')
+             ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->_as('classe')
+             ->savePropertyAs('fullnspath', 'fns')
+             ->inIs('CLASS')
+             ->outIs('METHOD')
+             ->atomIs('Methodcallname')
+             ->savePropertyAs('code', 'name')
+             ->_as('method')
+//             ->goToClass()
+             ->select(array('classe' => 'fullnspath',
+                            'method' => 'lccode',
+                            ))
+             ->unique();
+        $publicStaticMethods = $this->rawQuery()
                                     ->toArray();
-        
+
         if (!empty($publicStaticMethods)) {
             $calls = array();
             foreach($publicStaticMethods as $value) {
@@ -87,7 +89,7 @@ GREMLIN;
                     $calls[$value['method']] = array($value['classe']);
                 }
             }
-            
+
             // Property that is not used outside this class or its children
             $this->atomIs('Method')
                  ->isNot('visibility', 'private')

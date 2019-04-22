@@ -37,13 +37,6 @@ class VariableArguments extends Analyzer {
                                     ))
              ->back('first');
         $this->prepareQuery();
-        
-        // Using function_get_args
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->is('variadic', true)
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 

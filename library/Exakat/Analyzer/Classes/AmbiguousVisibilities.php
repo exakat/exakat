@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class AmbiguousVisibilities extends Analyzer {
     public function analyze() {
         // Properties with the same name, but with different visibility
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Ppp")
      .as("visibility")
      .out("PPP")

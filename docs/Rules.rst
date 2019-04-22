@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 16 Apr 2019 07:58:38 +0000
-.. comment: Generation hash : 866be355bbcf26dd53a7f7781b252ec9d209c567
+.. comment: Generation date : Mon, 22 Apr 2019 16:55:37 +0000
+.. comment: Generation hash : 61ab7c282f17a82d164987368156c8f4a4114b43
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2123,7 +2123,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Use FilesystemIterator, DirectoryIterator classes.
-* Use RegexIterator to filter any unwanted results from FilesystemIterator.
+* Use ``RegexIterator`` to filter any unwanted results from ``FilesystemIterator``.
 
 +-------------+------------------------------------------------------------------------+
 | Short name  | Performances/NoGlob                                                    |
@@ -2145,7 +2145,7 @@ Avoid set_error_handler $context Argument
 #########################################
 
 
-Avoid configuring `set_error_handler() <http://www.php.net/set_error_handler>`_ with a method that accepts 5 arguments. The last argument, $errcontext, is deprecated since PHP 7.2, and will be removed later.
+Avoid configuring `set_error_handler() <http://www.php.net/set_error_handler>`_ with a method that accepts 5 arguments. The last argument, ``$errcontext``, is deprecated since PHP 7.2, and will be removed later.
 
 .. code-block:: php
 
@@ -2162,15 +2162,23 @@ Avoid configuring `set_error_handler() <http://www.php.net/set_error_handler>`_ 
 
 See also `set_error_handler() <http://www.php.net/set_error_handler>`_;
 
-+-------------+------------------------------------+
-| Short name  | Php/AvoidSetErrorHandlerContextArg |
-+-------------+------------------------------------+
-| Themes      | :ref:`CompatibilityPHP72`          |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
-+-------------+------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the 6th argument of registered handlers.
+
++-------------+---------------------------------------------------+
+| Short name  | Php/AvoidSetErrorHandlerContextArg                |
++-------------+---------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP72`                         |
++-------------+---------------------------------------------------+
+| Severity    | Major                                             |
++-------------+---------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                     |
++-------------+---------------------------------------------------+
+| Examples    | :ref:`vanilla-php-avoidseterrorhandlercontextarg` |
++-------------+---------------------------------------------------+
 
 
 
@@ -3301,7 +3309,7 @@ If the method doesn't exists, then the same method will be called again, leading
    ?>
 
 
-See also `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
+See also `Method overloading <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
         ``Magical PHP: `__call <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
 
 
@@ -7018,7 +7026,7 @@ Always use elseif instead of else and if.
    ?>
 
 
-See also `elseif/else if <https://www.php.net/manual/en/control-structures.elseif.php>`_.
+See also `elseif/else if <http://php.net/manual/en/control-structures.elseif.php>`_.
 
 
 Suggestions
@@ -7731,6 +7739,13 @@ Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/`die <http
 
 Try exiting the function/class with return, or throw exception that may be caught later in the code.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid exit and die. Let the script finish.
+* Throw an exception and let it be handled before finishing
+
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/ExitUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
@@ -7741,6 +7756,8 @@ Try exiting the function/class with return, or throw exception that may be caugh
 | Time To Fix | Quick (30 mins)                                                               |
 +-------------+-------------------------------------------------------------------------------+
 | ClearPHP    | `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__ |
++-------------+-------------------------------------------------------------------------------+
+| Examples    | :ref:`traq-structures-exitusage`, :ref:`thinkphp-structures-exitusage`        |
 +-------------+-------------------------------------------------------------------------------+
 
 
@@ -8347,7 +8364,7 @@ The following classes have been found implementing an interface's methods, thoug
 Suggestions
 ^^^^^^^^^^^
 
-* Mention interfaces explicitely whenever possible
+* Mention interfaces explicitly whenever possible
 
 +-------------+------------------------------+
 | Short name  | Interfaces/CouldUseInterface |
@@ -10195,7 +10212,7 @@ Note also that PHP detects integer inside strings, and silently turn them into i
    ?>
 
 
-See also `Arrays syntax <https://www.php.net/manual/en/language.types.array.php>`_.
+See also `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_.
 
 
 Suggestions
@@ -10315,7 +10332,7 @@ Insufficient Typehint
 
 An argument is typehinted, but it actually calls methods that are not listed in the interface.
 
-Classes may be implementing more methods than the one that are listed in the interface they also implements. This means that filtering objecs with a typehint, but calling other methods will be solved at execution time : if the method is available, it will be used; if it is not, a fatal error is reported.
+Classes may be implementing more methods than the one that are listed in the interface they also implements. This means that filtering objects with a typehint, but calling other methods will be solved at execution time : if the method is available, it will be used; if it is not, a fatal error is reported.
 
 .. code-block:: php
 
@@ -12181,11 +12198,11 @@ The analysis doesn't take into account include_path. This may yield false positi
 
 Missing included files may lead to a fatal error, a warning or other error later in the execution.
 
-+------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Name                   | Default | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                    |
-+------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| <constant or variable> | 100     | string | Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names. |
-+------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name                      | Default | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                    |
++---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| constant_or_variable_name | 100     | string | Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names. |
++---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12600,7 +12617,7 @@ Avoid aliasing the same name with different aliases. This leads to confusion.
    ?>
 
 
-See also `Namespaces/MultipleAliasDefinition`_.
+See also Namespaces/MultipleAliasDefinition.
 
 +-------------+-------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitionPerFile |
@@ -13024,6 +13041,50 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------+
 | Examples    | :ref:`typo3-structures-multipletypevariable`, :ref:`vanilla-structures-multipletypevariable` |
 +-------------+----------------------------------------------------------------------------------------------+
+
+
+
+.. _multiple-unset():
+
+Multiple Unset()
+################
+
+
+`Unset() <http://www.php.net/unset>`_ accepts multiple arguments, unsetting them one after each other. It is more efficient to call `unset() <http://www.php.net/unset>`_ once, than multiple times.
+
+.. code-block:: php
+
+   <?php
+   
+   // One call to unset only
+   unset($a, $b, $c, $d);
+   
+   // Too many calls to unset
+   unset($a);
+   unset($b);
+   unset($c);
+   unset($d);
+   
+   ?>
+
+
+See also `unset <http://php.net/unset>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge all unset into one call
+
++-------------+--------------------------+
+| Short name  | Structures/MultipleUnset |
++-------------+--------------------------+
+| Themes      | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -15206,7 +15267,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Remove the return statement in the function
-* Actually use the value returned by the method, for test or combinaison with other values
+* Actually use the value returned by the method, for test or combination with other values
 
 +-------------+-----------------------------------------------------------------------------+
 | Short name  | Functions/NoReturnUsed                                                      |
@@ -15449,7 +15510,7 @@ Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ 
 Suggestions
 ^^^^^^^^^^^
 
-* Store all intermediate arrays in a temporary variable, and use array_merge once, with ellipsis or call_user_func_array().
+* Store all intermediate arrays in a temporary variable, and use array_merge() once, with ellipsis or call_user_func_array().
 
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/ArrayMergeInLoops                                                                              |
@@ -16734,7 +16795,7 @@ The following PHP native functions were removed in PHP 7.0.
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
-See also `PHP 7.0 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
+See also `PHP 7.0 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
 
  
 
@@ -17135,7 +17196,7 @@ The following PHP native functions were removed in PHP 7.3.
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
-See also `PHP 7.3 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
+See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/Php73RemovedFunctions |
@@ -17550,17 +17611,26 @@ Pathinfo() Returns May Vary
    ?>
 
 
-The same applies to `parse_url() <http://www.php.net/parse_url>`_, which returns an array with various index.
+The same applies to `parse_url() <http://www.php.net/parse_url>`_, which returns an array with various index. 
 
-+-------------+---------------------+
-| Short name  | Php/PathinfoReturns |
-+-------------+---------------------+
-| Themes      | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
-+-------------+---------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a check on the return value of pathinfo() before using it.
+
++-------------+--------------------------------------+
+| Short name  | Php/PathinfoReturns                  |
++-------------+--------------------------------------+
+| Themes      | :ref:`Analyze`                       |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | :ref:`nextcloud-php-pathinforeturns` |
++-------------+--------------------------------------+
 
 
 
@@ -19220,15 +19290,26 @@ This may be applied to assignations and ternary operators too.
    
    ?>
 
-+-------------+----------------------------+
-| Short name  | Structures/ReturnTrueFalse |
-+-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Major                      |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Return directly the comparison, without using the if/then structure
+* Cast the value to (boolean) and use it instead of the ternary
+
++-------------+-------------------------------------------------------------------------------------+
+| Short name  | Structures/ReturnTrueFalse                                                          |
++-------------+-------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                      |
++-------------+-------------------------------------------------------------------------------------+
+| Severity    | Major                                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                     |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`mautic-structures-returntruefalse`, :ref:`fuelcms-structures-returntruefalse` |
++-------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -23017,7 +23098,7 @@ Typehinted arguments have no need for references. Since they are only an object,
 
 In fact, adding the & on the argument definition may lead to error like ``Only variables should be passed by reference``.
 
-This applies to the 'object' type hint, but not the the others, such as int or bool.
+This applies to the ``object`` type hint, but not the the others, such as int or bool.
 
 .. code-block:: php
 
@@ -23045,6 +23126,12 @@ This applies to the 'object' type hint, but not the the others, such as int or b
 
 See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_ and 
          `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove reference for typedhinted arguments, unless the typehint is a scalar typehint.
 
 +-------------+--------------------------------+
 | Short name  | Functions/TypehintedReferences |
@@ -23087,7 +23174,7 @@ The following exceptions are thrown in the code, but are never caught.
    ?>
 
 
-Either they will lead to a Fatal Error, or they have to be caught by an including application. This is a valid behavior for libaries, but is not for a final application.
+Either they will lead to a Fatal Error, or they have to be caught by an including application. This is a valid behavior for libraries, but is not for a final application.
 
 See also `Structuring PHP Exceptions <https://www.alainschlesser.com/structuring-php-exceptions/>`_.
 
@@ -25324,11 +25411,19 @@ Using `basename() <http://www.php.net/basename>`_ instead of `substr() <http://w
 
 See also `basename <http://www.php.net/basename>`_.
 
-+------------+---------------------------+
-| Short name | Structures/BasenameSuffix |
-+------------+---------------------------+
-| Themes     | :ref:`Suggestions`        |
-+------------+---------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use basename, remove more complex code based on substr or str_replace
+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Structures/BasenameSuffix                                                             |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                    |
++------------+---------------------------------------------------------------------------------------+
+| Examples   | :ref:`nextcloud-structures-basenamesuffix`, :ref:`dolibarr-structures-basenamesuffix` |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -25421,6 +25516,53 @@ See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/languag
 +-------------+---------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                   |
 +-------------+---------------------------------------------------------------------------------+
+
+
+
+.. _use-constant:
+
+Use Constant
+############
+
+
+The following functioncall have a constant equivalent, that is faster to use than calling the functions. 
+
+This applies to the following functions : 
+
+* `pi() <http://www.php.net/pi>`_ : replace with `M_PI`
+* `phpversion() <http://www.php.net/phpversion>`_ : replace with `PHP_VERSION`
+* `php_sapi_name() <http://www.php.net/php_sapi_name>`_ : replace with `PHP_SAPI_NAME`
+
+.. code-block:: php
+
+   <?php
+   
+   // recommended way 
+   echo PHP_VERSION;
+   
+   // slow version
+   echo php_version();
+   
+   ?>
+
+
+See also `PHP why `pi() <http://www.php.net/pi>`_ and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the constant version, not the function.
+
++-------------+------------------------+
+| Short name  | Structures/UseConstant |
++-------------+------------------------+
+| Themes      | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Instant (5 mins)       |
++-------------+------------------------+
 
 
 
@@ -26198,6 +26340,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Use is_countable()
+* Create a compatibility function that replaces is_countable() until the code is ready for PHP 7.3
 
 +-------------+------------------------------+
 | Short name  | Php/CouldUseIsCountable      |
@@ -27209,6 +27352,8 @@ The argument has a reference, but is only used for reading.
 
 This is probably a development artefact that was forgotten. It is better to remove it. 
 
+This analysis also applies to `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loops, that declare the blind variable as reference, then use the variable as an object, accessing properties and methods. When a variable contains an object, there is no need to declare a reference : it is a reference automatically.
+
 .. code-block:: php
 
    <?php
@@ -27219,9 +27364,14 @@ This is probably a development artefact that was forgotten. It is better to remo
        // The reference is useful for $b
    }
    
+   foreach ($array as &$element) {
+       $element->method();
+   }
+   
    ?>
 
 
+See also `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_.
 
 
 Suggestions
@@ -27435,6 +27585,11 @@ Default values are provided to methods so as to make it convenient to use. Howev
 As much as possible, it is recommended to use explicit values in those methods, so as to prevent from being surprise at a future PHP evolution. 
 
 This analyzer tend to report a lot of false positives, including usage of `count() <http://www.php.net/count>`_. `Count() <http://www.php.net/count>`_ indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
+
+Suggestions
+^^^^^^^^^^^
+
+* Mention all arguments, as much as possible
 
 +-------------+--------------------------------+
 | Short name  | Functions/UsesDefaultArguments |
@@ -29536,7 +29691,7 @@ time() Vs strtotime()
 #####################
 
 
-`time() <http://www.php.net/time>`_ is actually faster than strtotime('now').
+`time() <http://www.php.net/time>`_ is actually faster than `strtotime() <http://www.php.net/strtotime>`_ with 'now' key string.
 
 .. code-block:: php
 
@@ -29558,7 +29713,7 @@ This is a micro-optimisation. Relative gain is real, but small unless the functi
 Suggestions
 ^^^^^^^^^^^
 
-* Replace strtotime('now') with time(). Do not change strtotime() with other value than 'now'.
+* Replace strtotime() with time(). Do not change strtotime() with other value than 'now'.
 
 +-------------+-------------------------------------------------+
 | Short name  | Performances/timeVsstrtotime                    |

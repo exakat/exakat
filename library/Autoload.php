@@ -254,6 +254,37 @@ class AutoloadExt {
     }
 }
 
+class AutoloadDev {
+    private $path = '';
+    
+    public function __construct($path) {
+        var_dump(phar::running());
+        var_dump($path);
+        if (phar::running()) {
+            // No autoloadDev with phar
+            // Ignoring it all
+            return;
+        }
+        
+        $this->path = $path;
+    }
+
+    public function autoload_dev($name) {
+        if (empty($this->path)) { return; }
+
+        $fileName = str_replace('Exakat\\', '', $name);
+        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
+        $file = "{$fileName}.php";
+
+        $fullPath = "{$this->path}/$file";
+        if (file_exists($fullPath)) {
+            include $fullPath;
+
+            return;
+        }
+    }
+}
+
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     include __DIR__.'/../vendor/autoload.php';

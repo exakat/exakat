@@ -37,7 +37,7 @@ class OverwriteException extends Analyzer {
              ->samePropertyAs('code', 'exception')
              ->is('isModified', true)
              // not chained and replaced.
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not( 
     __.where( 
         __.in("LEFT")

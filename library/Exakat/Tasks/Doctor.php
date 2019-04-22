@@ -159,7 +159,7 @@ class Doctor extends Tasks {
 
         if (!file_exists("{$this->config->projects_root}/ext")) {
             mkdir("{$this->config->projects_root}/ext", 0755);
-            file_put_contents("{$this->config->projects_root}/ext/README.txt", <<<TEXT
+            file_put_contents("{$this->config->projects_root}/ext/README.txt", <<<'TEXT'
 This is the extension folder for exakat. Use the 'extension' command to add or remove extensions in this folder.
 
 # list local extensions (default)

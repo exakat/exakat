@@ -166,7 +166,7 @@ class Phpexec {
     }
     
     private function escapeFile($file) {
-        return "'".str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file)."'";
+        return "'".str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file)."'";
     }
 
     public function countTokenFromFile($file) {

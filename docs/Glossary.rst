@@ -494,6 +494,7 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Should Yield With Key <should-yield-with-key>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Useless Referenced Argument <useless-referenced-argument>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
     + `fputcsv()`
@@ -953,9 +954,21 @@ Glossary
 
       + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 
+    + `php_sapi_name()`
+
+      + :ref:`Use Constant <use-constant>`
+
     + `phpinfo()`
 
       + :ref:`Phpinfo <phpinfo>`
+
+    + `phpversion()`
+
+      + :ref:`Use Constant <use-constant>`
+
+    + `pi()`
+
+      + :ref:`Use Constant <use-constant>`
 
     + `png2wbmp()`
 
@@ -1207,6 +1220,7 @@ Glossary
     + `strtotime()`
 
       + :ref:`Next Month Trap <next-month-trap>`
+      + :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 
     + `strtr()`
 
@@ -1265,6 +1279,10 @@ Glossary
 
 
 + `U`
+    + `Unset()`
+
+      + :ref:`Multiple Unset() <multiple-unset()>`
+
     + `Usort()`
 
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
@@ -1290,6 +1308,10 @@ Glossary
     + `unserialize()`
 
       + :ref:`Unserialize Second Arg <unserialize-second-arg>`
+
+    + `unset()`
+
+      + :ref:`Multiple Unset() <multiple-unset()>`
 
     + `usleep()`
 

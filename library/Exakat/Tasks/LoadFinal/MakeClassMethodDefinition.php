@@ -112,7 +112,7 @@ class MakeClassMethodDefinition extends LoadFinal {
               ->back('first')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{aliases = [:]; insteadofs = [:]; }
       .out("USE").out("BLOCK").out("EXPRESSION")
@@ -139,7 +139,7 @@ where(
 GREMLIN
 , array(), array())
               ->goToAllTraits(Analyzer::INCLUDE_SELF)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 filter{ insteadofs[name] == null || !(it.get().value('fullnspath') in insteadofs[name]); }
 GREMLIN
 ,array(), array())

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyFinal extends Analyzer {
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if( it.get().value('fullcode').toString().reverse().take(4).reverse() == ',  )' ||
     it.get().value('fullcode').toString().reverse().take(4).reverse() == ',  ]') {
         x2 = 'trailing';

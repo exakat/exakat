@@ -54,7 +54,7 @@ class CreateVirtualStaticProperty extends LoadFinal {
               )
               ->_as('laClasse')
 
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 addV("Ppp").sideEffect{ it.get().property("code", ncode);
                         it.get().property("lccode", lower); 
                         it.get().property("fullcode", 'static ' + full); 
@@ -106,7 +106,7 @@ GREMLIN
               )
               ->_as('laClasse')
 
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 addV("Ppp").sideEffect{ it.get().property("code", ncode);
                         it.get().property("lccode", lower); 
                         it.get().property("fullcode", 'static ' + full); 

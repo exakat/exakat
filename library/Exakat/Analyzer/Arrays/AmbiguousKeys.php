@@ -29,7 +29,7 @@ class AmbiguousKeys extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Arrayliteral')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")

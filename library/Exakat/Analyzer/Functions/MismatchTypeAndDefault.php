@@ -37,7 +37,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {
         case '\\\\string' : 

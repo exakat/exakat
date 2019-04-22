@@ -63,6 +63,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Top10
 * Unassigned
 * Under Work
+* php-cs-fixable
 
 Supported Reports
 -----------------
@@ -93,6 +94,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Weekly
   * Scrutinizer
   * Codesniffer
+  * Phpcsfixer
   * Facetedjson
   * Json
   * Onepagejson
@@ -318,6 +320,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
+* Fuelcms
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Magento <https://magento.com/>`_
@@ -335,7 +338,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
-* Teampass
 * `Thelia <https://thelia.net/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Tikiwiki <https://tiki.org/>`_
@@ -416,6 +418,16 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
+
+* 1.7.6
+
+  * Caught Variable (Exceptions/CatchE)
+  * Modules/InListWithAnalyzer (Modules/InListWithAnalyzer ; )
+  * Modules/InListWithType (Modules/InListWithType ; )
+  * Modules/NotInListWithAnalyzer (Modules/NotInListWithAnalyzer ; )
+  * Multiple Unset() (Structures/MultipleUnset ; Suggestions, php-cs-fixable)
+  * PHP Overridden Function (Php/OveriddenFunction ; Appinfo)
+  * array_merge With Ellipsis (Structures/ArrayMergeWithEllipsis ; )
 
 * 1.7.2
 
@@ -891,7 +903,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Assign With And (Php/AssignAnd ; Analyze)
   * Avoid Concat In Loop (Performances/NoConcatInLoop ; Performances)
   * Child Class Removes Typehint (Classes/ChildRemoveTypehint)
-  * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions)
+  * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions, php-cs-fixable)
   * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
   * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4, LintButWontExec)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
@@ -1257,7 +1269,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Be Static (Structures/CouldBeStatic ; Analyze, OneFile, ClassReview)
   * Could Use Alias (Namespaces/CouldUseAlias ; OneFile, Suggestions)
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Simple)
-  * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Simple, Suggestions, Level 3)
+  * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Simple, Suggestions, Level 3, php-cs-fixable)
   * Could Use self (Classes/ShouldUseSelf ; Analyze, Simple, Suggestions, Level 3)
   * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
@@ -1292,7 +1304,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Echo Or Print (Structures/EchoPrintConsistance ; Coding Conventions, Preferences)
   * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Simple, Suggestions)
   * Ellipsis Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Simple)
+  * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Simple, php-cs-fixable)
   * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics, Stats)
   * Email Addresses (Type/Email ; Inventory, Appinfo)
   * Empty Blocks (Structures/EmptyBlocks ; Analyze, Simple)
@@ -1403,7 +1415,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Locally Unused Property (Classes/LocallyUnusedProperty ; Dead code, Simple)
   * Locally Used Property (Classes/LocallyUsedProperty ; Internal)
   * Logical Mistakes (Structures/LogicalMistakes ; Analyze, Simple, Level 1)
-  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Simple, Suggestions, Level 2, Top10)
+  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Simple, Suggestions, Level 2, Top10, php-cs-fixable)
   * Lone Blocks (Structures/LoneBlock ; Analyze, Simple, Level 4)
   * Lost References (Variables/LostReferences ; Analyze, Simple)
   * Magic Constant Usage (Constants/MagicConstantUsage ; Appinfo)
@@ -1470,9 +1482,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Non-constant Index In Array (Arrays/NonConstantArray ; Analyze, Simple)
   * Non-lowercase Keywords (Php/UpperCaseKeyword ; Coding Conventions, RadwellCodes)
   * Normal Methods (Classes/NormalMethods ; Appcontent)
-  * Normal Property (Classes/NormalProperty ; Appcontent)
+  * Normal Property (Classes/NormalProperty ; Under Work)
   * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
-  * Not Not (Structures/NotNot ; Analyze, OneFile, Simple)
+  * Not Not (Structures/NotNot ; Analyze, OneFile, Simple, php-cs-fixable)
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
@@ -1506,7 +1518,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PHP Sapi (Type/Sapi ; Internal)
   * PHP Variables (Variables/VariablePhp ; )
   * PHP5 Indirect Variable Expression (Variables/Php5IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * PHP7 Dirname (Structures/PHP7Dirname ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Suggestions)
+  * PHP7 Dirname (Structures/PHP7Dirname ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Suggestions, php-cs-fixable)
   * Parent, Static Or Self Outside Class (Classes/PssWithoutClass ; Analyze, Simple)
   * Parenthesis As Parameter (Php/ParenthesisAsParameter ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Pear Usage (Php/PearUsage ; Appinfo, Appcontent)
@@ -1645,10 +1657,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unused Use (Namespaces/UnusedUse ; Dead code, ClearPHP, Simple)
   * Unusual Case For PHP Functions (Php/UpperCaseFunction ; Coding Conventions)
   * Usage Of class_alias() (Classes/ClassAliasUsage ; Appinfo)
-  * Use === null (Php/IsnullVsEqualNull ; Analyze, OneFile, RadwellCodes, Simple)
+  * Use === null (Php/IsnullVsEqualNull ; Analyze, OneFile, RadwellCodes, Simple, php-cs-fixable)
   * Use Cli (Php/UseCli ; Appinfo)
   * Use Const And Functions (Namespaces/UseFunctionsConstants ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Use Constant (Structures/UseConstant ; PHP recommendations)
+  * Use Constant (Structures/UseConstant ; Analyze, PHP recommendations, php-cs-fixable)
   * Use Constant As Arguments (Functions/UseConstantAsArguments ; Analyze, Simple)
   * Use Instanceof (Classes/UseInstanceof ; Analyze, Simple)
   * Use Lower Case For Parent, Static And Self (Php/CaseForPSS ; CompatibilityPHP54, CompatibilityPHP53)
@@ -2044,7 +2056,7 @@ List of external links mentionned in this documentation.
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
-* `Arrays syntax <https://www.php.net/manual/en/language.types.array.php>`_
+* `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
 * `assert <http://php.net/assert>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -2136,7 +2148,7 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
-* `elseif/else if <https://www.php.net/manual/en/control-structures.elseif.php>`_
+* `elseif/else if <http://php.net/manual/en/control-structures.elseif.php>`_
 * `empty <http://www.php.net/empty>`_
 * `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
@@ -2191,16 +2203,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2261,8 +2273,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `Isset <http://www.php.net/isset>`_
 * `isset <http://www.php.net/isset>`_
+* `Isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2306,7 +2318,7 @@ List of external links mentionned in this documentation.
 * `MD5 <http://php.net/md5>`_
 * `Media Type <https://en.wikipedia.org/wiki/Media_type>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
-* `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_
+* `Method overloading <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_
 * `mhash <http://mhash.sourceforge.net/>`_
 * `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
 * `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
@@ -2336,6 +2348,7 @@ List of external links mentionned in this documentation.
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
@@ -2369,11 +2382,11 @@ List of external links mentionned in this documentation.
 * `PHP - Fatal error: Unsupported operand types [duplicate] <https://stackoverflow.com/questions/2108875/php-fatal-error-unsupported-operand-types>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
-* `PHP 7.0 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.0 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
-* `PHP 7.3 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.3 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
@@ -2397,6 +2410,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP why pi() and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_
+* `PHP-cs-fixer <https://github.com/FriendsOfPHP/PHP-CS-Fixer>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
@@ -2900,6 +2915,7 @@ _______
 |   analyzer[] = "Structures/Unpreprocessed";
 |   analyzer[] = "Structures/UnsetInForeach";
 |   analyzer[] = "Structures/UnusedGlobal";
+|   analyzer[] = "Structures/UseConstant";
 |   analyzer[] = "Structures/UseInstanceof";
 |   analyzer[] = "Structures/UsePositiveCondition";
 |   analyzer[] = "Structures/UseSystemTmp";
@@ -3736,6 +3752,7 @@ ___________
 |   analyzer[] = "Structures/JsonWithOption";
 |   analyzer[] = "Structures/ListOmissions";
 |   analyzer[] = "Structures/MismatchedTernary";
+|   analyzer[] = "Structures/MultipleUnset";
 |   analyzer[] = "Structures/NamedRegex";
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
 |   analyzer[] = "Structures/NoSubstrOne";

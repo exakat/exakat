@@ -35,8 +35,8 @@ class Themes {
 
     public function __construct($path, AutoloadExt $ext, array $extra_themes = array()) {
         $this->main  = new ThemesMain($path);
-        $this->ext   = new ThemesExt($ext);
-        $this->extra = new ThemesExtra($extra_themes);
+        $this->ext   = new ThemesExt($ext, $ext);
+        $this->extra = new ThemesExtra($extra_themes, $ext);
     }
 
     public function __destruct() {
@@ -70,15 +70,19 @@ class Themes {
     }
 
     public function getSeverities() {
-        $main = $this->main->getSeverities();
+        $main  = $this->main ->getSeverities();
+        $extra = $this->extra->getSeverities();
+        $ext   = $this->ext  ->getSeverities();
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public function getTimesToFix() {
-        $main = $this->main->getTimesToFix();
+        $main  = $this->main ->getTimesToFix();
+        $extra = $this->extra->getTimesToFix();
+        $ext   = $this->ext  ->getTimesToFix();
         
-        return array_merge($main);
+        return array_merge($main, $extra, $ext);
     }
 
     public function getFrequences() {

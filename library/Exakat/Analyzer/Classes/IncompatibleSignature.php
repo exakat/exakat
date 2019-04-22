@@ -112,7 +112,7 @@ class IncompatibleSignature extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->raw('sideEffect{ if (it.get().properties("visibility").any()) { v = it.get().value("visibility");} else { v = false; }}')
              ->outIs('OVERWRITE')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 filter{ 
     if (it.get().properties("visibility").any()) { 
         if (v == "private") {

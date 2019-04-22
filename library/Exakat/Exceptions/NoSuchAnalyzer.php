@@ -38,7 +38,7 @@ class NoSuchAnalyzer extends \RuntimeException {
             } else {
                 $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
                 if (count($r) > 5) {
-                    $die .= " (".(count($r) - 5)." more possible)";
+                    $die .= ' ('.(count($r) - 5).' more possible)';
                 }
                 $die .= "\n";
             }

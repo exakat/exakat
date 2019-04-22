@@ -36,7 +36,7 @@ class MixedKeys extends Analyzer {
              ->_as('result')
 
              // count keys styles
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
    __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")

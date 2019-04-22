@@ -101,8 +101,7 @@ class Ambassador extends Reports {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
-            $title = ($file === 'index') ? 'Dashboard' : $file;
+            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -314,7 +313,7 @@ class Ambassador extends Reports {
             $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description['name'].'</a></h2>';
 
             $badges = array();
-            $exakatSince = $description['exakatSince'];
+            $exakatSince = $description['exakatSince'] ?? '';
             if(!empty($v)){
                 $badges[] = "[Since $exakatSince]";
             }
@@ -2144,8 +2143,7 @@ SQL;
         return $items;
     }
 
-    private function getClassByType($type)
-    {
+    private function getClassByType($type) {
         if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
         } elseif ($type === 'Major' || $type === 'Slow') {
