@@ -2096,7 +2096,11 @@ class Load extends Tasks {
                     }
                     $default = $this->popExpression();
                 } else {
-                    ++$args_min;
+                    if ($index->variadic === self::ELLIPSIS) {
+                        $args_max = 100;
+                    } else {
+                        ++$args_min;
+                    }
                     $default = 0;
                 }
 
