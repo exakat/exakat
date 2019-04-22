@@ -1,0 +1,32 @@
+{
+    "Php\/IsnullVsEqualNull": {
+        "is_null": true
+    },
+    "Structures\/ElseIfElseif": {
+        "elseif": true
+    },
+    "Structures\/MultipleUnset": {
+        "combine_consecutive_unsets": true
+    },
+    "Classes\/DontUnsetProperties": {
+        "no_unset_on_property": true
+    },
+    "Structures\/UseConstant": {
+        "function_to_constant": true
+    },
+    "Structures\/PHP7Dirname": {
+        "combine_nested_dirname": true
+    },
+    "Structures\/CouldUseDir": {
+        "dir_constant": true
+    },
+    "Php\/IssetMultipleArgs": {
+        "combine_consecutive_issets": true
+    },
+    "Php\/LogicalInLetters": {
+        "logical_operators": true
+    },
+    "Structures\/NotNot": {
+        "no_short_bool_cast": true
+    }
+}
