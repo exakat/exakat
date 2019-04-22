@@ -145,6 +145,69 @@ create_function() is actually an eval() in disguise : replace it with a closure 
 
     create_function('$cfgValue', 'return $cfgValue > 100;')
 
+Exit() Usage
+============
+
+.. _traq-structures-exitusage:
+
+Traq
+^^^^
+
+:ref:`exit()-usage`, in src/Controllers/attachments.php:75. 
+
+This acts as a view. The final 'exit' is meant to ensure that no other piece of data is emitted, potentially polluting the view. This also prevent any code cleaning to happen.
+
+.. code-block:: php
+
+    /**
+         * View attachment page
+         *
+         * @param integer $attachment_id
+         */
+        public function action_view($attachment_id)
+        {
+            // Don't try to load a view
+            $this->render['view'] = false;
+    
+            header(Content-type: {$this->attachment->type});
+            $content_type = explode('/', $this->attachment->type);
+    
+            // Check what type of file we're dealing with.
+            if($content_type[0] == 'text' or $content_type[0] == 'image') {
+                // If the mime-type is text, we can just display it
+                // as plain text. I hate having to download files.
+                if ($content_type[0] == 'text') {
+                    header(Content-type: text/plain);
+                }
+                header("Content-Disposition: filename=\"{$this->attachment->name}\"");
+            }
+            // Anything else should be downloaded
+            else {
+                header("Content-Disposition: attachment; filename=\"{$this->attachment->name}\"");
+            }
+    
+            // Decode the contents and display it
+            print(base64_decode($this->attachment->contents));
+            exit;
+        }
+
+
+--------
+
+
+.. _thinkphp-structures-exitusage:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`exit()-usage`, in ThinkPHP/Library/Vendor/EaseTemplate/template.core.php:60. 
+
+Here, exit is used as a rudimentary error management. When the version is not correctly provided via EaseTemplateVer, the application stop totally.
+
+.. code-block:: php
+
+    $this->version		= (trim($_GET['EaseTemplateVer']))?die('Ease Templae E3!'):'';
+
 Multiply By One
 ===============
 
@@ -2882,7 +2945,7 @@ Else If Versus Elseif
 
 .. _teampass-structures-elseifelseif:
 
-Teampass
+TeamPass
 ^^^^^^^^
 
 :ref:`else-if-versus-elseif`, in items.php:819. 
@@ -3803,6 +3866,49 @@ At least, it always choose the most secure way : use SSL.
           } else {
             $form .= zen_href_link($action, $parameters, 'NONSSL');
           }
+
+Return True False
+=================
+
+.. _mautic-structures-returntruefalse:
+
+Mautic
+^^^^^^
+
+:ref:`return-true-false`, in app/bundles/LeadBundle/Model/ListModel.php:125. 
+
+$isNew could be a typecast.
+
+.. code-block:: php
+
+    $isNew = ($entity->getId()) ? false : true;
+
+
+--------
+
+
+.. _fuelcms-structures-returntruefalse:
+
+Fuelcms
+^^^^^^^
+
+:ref:`return-true-false`, in fuel/modules/fuel/helpers/validator_helper.php:254. 
+
+If/then is a lot of code to produce a boolean.
+
+.. code-block:: php
+
+    function length_min($str, $limit = 1)
+    	{
+    		if (strlen(strval($str)) < $limit)
+    		{
+    			return FALSE;
+    		}
+    		else
+    		{
+    			return TRUE;
+    		}
+    	}
 
 Useless Switch
 ==============
@@ -5434,6 +5540,27 @@ Long list of == are harder to read. Using an in_array() call gathers all the str
       $user = $_POST['user'];
     }
 
+Pathinfo() Returns May Vary
+===========================
+
+.. _nextcloud-php-pathinforeturns:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`pathinfo()-returns-may-vary`, in lib/private/Preview/Office.php:56. 
+
+$absPath is build with the toTmpFile() method, which may return a boolean (false) in case of error. Error situations include the inability to create the temporary file.
+
+.. code-block:: php
+
+    $absPath = $fileview->toTmpFile($path);
+    
+    // More code
+    
+    			list($dirname, , , $filename) = array_values(pathinfo($absPath));
+    			$pngPreview = $dirname . '/' . $filename . '.png';
+
 Multiple Type Variable
 ======================
 
@@ -6438,6 +6565,22 @@ Since PHP 7.0, dirname( , 2); does the job.
     		$this->setVar( 'IP', $IP );
     	}
 
+Avoid set_error_handler $context Argument
+=========================================
+
+.. _vanilla-php-avoidseterrorhandlercontextarg:
+
+Vanilla
+^^^^^^^
+
+:ref:`avoid-set\_error\_handler-$context-argument`, in library/core/functions.error.php:747. 
+
+Gdn_ErrorHandler is a function that requires 6 arguments. 
+
+.. code-block:: php
+
+    set_error_handler('Gdn_ErrorHandler', E_ALL & ~E_STRICT)
+
 Unused Private Properties
 =========================
 
@@ -6772,7 +6915,7 @@ Phinx
 
 :ref:`avoid-glob()-usage`, in src/Phinx/Migration/Manager.php:362. 
 
-glob() searches for a list of files in the migration folder. Those files are not known, but they have a format, as checked later with the regex : a combinaison of FilesystemIterator and RegexIterator would do the trick too.
+glob() searches for a list of files in the migration folder. Those files are not known, but they have a format, as checked later with the regex : a combinaison of ``FilesystemIterator`` and ``RegexIterator`` would do the trick too.
 
 .. code-block:: php
 
@@ -6797,7 +6940,7 @@ NextCloud
 
 :ref:`avoid-glob()-usage`, in lib/private/legacy/helper.php:185. 
 
-Recursive copy of folders, based on scandir. DirectoryIterator and FilesystemIterator would do the same without the recursion.
+Recursive copy of folders, based on scandir(). ``DirectoryIterator`` and ``FilesystemIterator`` would do the same without the recursion.
 
 .. code-block:: php
 
@@ -8106,6 +8249,39 @@ $limit is read as a session variable or a default value. There are no check here
             $count = count($stages);
             if ($count && $count < ($start + 1)) {
                 $lastPage = ($count === 1) ? 1 : (ceil($count / $limit)) ?: 1;
+
+Use Basename Suffix
+===================
+
+.. _nextcloud-structures-basenamesuffix:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`use-basename-suffix`, in lib/private/URLGenerator.php:176. 
+
+This code removes the 4 last letters from the images. It may be 'png', 'jpg' or 'txt'. 
+
+.. code-block:: php
+
+    substr(basename($image), 0, -4)
+
+
+--------
+
+
+.. _dolibarr-structures-basenamesuffix:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`use-basename-suffix`, in htdocs/core/website.inc.php:42. 
+
+The extension '.tpl.php' is dropped from the file name, unless it appears somewhere else in the $websitepagefile variable.
+
+.. code-block:: php
+
+    str_replace(array('.tpl.php', 'page'), array('', ''), basename($websitepagefile))
 
 Don't Loop On Yield
 ===================

@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 15 Apr 2019 17:35:08 +0000
-.. comment: Generation hash : ea6963c35582b339eb2791cf44359e193b7f6992
+.. comment: Generation date : Mon, 22 Apr 2019 16:55:37 +0000
+.. comment: Generation hash : 61ab7c282f17a82d164987368156c8f4a4114b43
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 351 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -371,6 +371,7 @@ Total : 351 analysis
 * :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Class Operator <use-class-operator>`
+* :ref:`Use Constant <use-constant>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Named Boolean In Argument Definition <use-named-boolean-in-argument-definition>`
@@ -1094,7 +1095,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 75 analysis
+Total : 76 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1129,6 +1130,7 @@ Total : 75 analysis
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Multiple Identical Closure <multiple-identical-closure>`
+* :ref:`Multiple Unset() <multiple-unset()>`
 * :ref:`Multiple Usage Of Same Trait <multiple-usage-of-same-trait>`
 * :ref:`Named Regex <named-regex>`
 * :ref:`Never Used Parameter <never-used-parameter>`
