@@ -38,7 +38,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
               ->inIs('METHOD')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Propertydefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
@@ -60,6 +60,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
         $countM = $result->toInt();
         
         $countP = 0;
+// This is for method propagation
 //        for($i = 0; $i < 2; ++$i) {
             $query = $this->newQuery('setClassRemoteDefinitionWithTypehint properties');
             $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
@@ -70,7 +71,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
                   ->outIs('LEFT')
                   // can be anythingm really
                   ->inIs('DEFINITION')
-//                  ->atomIs(array('Variabledefinition' ,'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
+                  ->atomIs(array('Variabledefinition' ,'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
     // Variable definition ou bien proeprty definition
                   ->outIs('DEFINITION')
                   ->inIs('OBJECT')

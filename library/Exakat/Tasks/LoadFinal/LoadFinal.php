@@ -138,7 +138,13 @@ class LoadFinal {
         $this->log('SetClassMethodRemoteDefinition');
         $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        
+        // This one is doubled below. 
         $this->log('SetClassRemoteDefinitionWithTypehint');
+        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('SetClassRemoteDefinitionWithLocalNew');
+
         $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('setClassRemoteDefinitionWithReturnTypehint');
