@@ -419,9 +419,9 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
 
             $d = explode('\\', $r2);
             $last = array_pop($d);
-            $r = mb_strtolower(implode('\\', $d)).'\\'.$last;
+            $r = mb_strtolower(implode('\\', $d))."\\$last";
             if (isset($r[0]) && $r[0] != '\\') {
-                $r = '\\' . $r;
+                $r = "\\$r";
             }
             return $r;
         };
@@ -465,8 +465,7 @@ function rst2htmlLink($txt) {
     // `title <url>`_ => <a href="url">title</a>
     // `anchor`_ => <a href="#anchor">anchor</a>
     
-    $txt = preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
-    return $txt;
+    return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
 
 function rst2literal($txt) {
@@ -484,7 +483,7 @@ function rsttable2html($raw) {
     $lines = explode("\n", $raw);
     $table = false;
     
-    foreach($lines as $line ) {
+    foreach($lines as $line) {
         if (preg_match('/^[\+-]+<br \/>$/', $line, $r)) {
             if ($table !== true) {
                 $table = true;
