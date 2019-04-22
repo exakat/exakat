@@ -37,7 +37,7 @@ class Calls {
 
         $this->callsSqlite = $sqlite;
 
-        $calls = <<<SQL
+        $calls = <<<'SQL'
 CREATE TABLE calls (
     type STRING,
     fullnspath STRING,
@@ -48,7 +48,7 @@ CREATE TABLE calls (
 SQL;
         $this->callsSqlite->query($calls);
 
-        $definitions = <<<SQL
+        $definitions = <<<'SQL'
 CREATE TABLE definitions (
     type STRING,
     fullnspath STRING,

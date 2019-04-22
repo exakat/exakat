@@ -34,7 +34,7 @@ class SetStringMethodDefinition extends LoadFinal {
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')
               ->initVariable('name', '""')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 filter{ 
     name = it.get().value("noDelimiter").split("::"); 
     if (name.length > 1) {

@@ -29,7 +29,7 @@ class Uml extends Reports {
     const FILE_FILENAME  = 'exakat.uml';
 
     public function _generate($analyzerList) {
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
        (SELECT GROUP_CONCAT( case when value != '' then property || " = " || substr(value, 0, 40) else property end, "||") FROM properties WHERE citId = cit.id) AS properties
@@ -95,7 +95,7 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT implementing, implements, type FROM cit_implements
 SQL
         );
@@ -106,7 +106,7 @@ SQL
             $links[] = "{$ids[$row['implementing']]} -> \"{$ids[$row['implements']]}\" [label=\"$row[type]\"];";
         }
 
-        $dot = <<<DOT
+        $dot = <<<'DOT'
         digraph graphname {        
         fontname = "Bitstream Vera Sans"
         fontsize = 8

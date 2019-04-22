@@ -587,7 +587,7 @@ SQL;
                                                         type STRING
                                                  )');
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Variable", "Variablearray", "Variableobject").has("token", "T_VARIABLE")
                                                              .map{ ['name' : it.get().value("fullcode"), 
                                                                     'type' : it.get().label()        ] };
@@ -625,7 +625,7 @@ GREMLIN;
 
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            namespace STRING
                         )
@@ -633,7 +633,7 @@ SQL
 );
         $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] }.unique();
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -913,7 +913,7 @@ GREMLIN;
 
         // Methods
         $this->sqlite->query('DROP TABLE IF EXISTS methods');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         method INTEGER,
                         citId INTEGER,
@@ -1008,7 +1008,7 @@ GREMLIN;
 
         // Properties
         $this->sqlite->query('DROP TABLE IF EXISTS properties');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            property INTEGER,
                            citId INTEGER,
@@ -1019,7 +1019,7 @@ CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Propertydefinition").as("property")
      .in("PPP")
 .sideEffect{ 
@@ -1087,7 +1087,7 @@ GREMLIN;
 
         // Class Constant
         $this->sqlite->query('DROP TABLE IF EXISTS constants');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           constant INTEGER,
                           citId INTEGER,
@@ -1097,7 +1097,7 @@ CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Classanonymous", "Trait")
      .out('CONST')
 .sideEffect{ 
@@ -1163,7 +1163,7 @@ GREMLIN;
 
     private function collectPhpStructures() {
         $this->sqlite->query('DROP TABLE IF EXISTS phpStructures');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               name TEXT,
                               type TEXT,
@@ -1205,7 +1205,7 @@ GREMLIN;
     }
     
     private function collectConstants() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Defineconstant")
      .where( __.out("ARGUMENT").has("rank", 0).has("constant", true).sideEffect{ name = it.get().value("fullcode"); } )
      .where( __.out("ARGUMENT").has("rank", 1).has("constant", true).sideEffect{ v = it.get().value("fullcode"); } )
@@ -1235,7 +1235,7 @@ GREMLIN;
             $this->sqlite->query($query);
         }
 
-        $gremlinQuery = <<<GREMLIN
+        $gremlinQuery = <<<'GREMLIN'
 g.V().hasLabel("Const")
      .not(where(__.in("CONST")))
      .out("CONST")
@@ -1274,7 +1274,7 @@ GREMLIN;
 
         // Functions
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
-        $this->sqlite->query(<<<SQL
+        $this->sqlite->query(<<<'SQL'
 CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           function TEXT,
                           file TEXT,
@@ -1394,7 +1394,7 @@ GREMLIN;
                                               CONSTRAINT "encoding" UNIQUE (encoding, block)
                                             )');
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
     if (it.get().values('block').size() != 0) {
         x['block'] = it.get().values('block')[0];
@@ -1483,7 +1483,7 @@ GREMLIN;
         }
 
         // Finding extends and implements
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Interface").as("classe")
      .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
      .outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()
@@ -1506,7 +1506,7 @@ GREMLIN;
         display(count($extends).' extends for classes ');
 
         // Finding extends for interfaces
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Interface").as("classe")
      .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
      .select("classe").out("EXTENDS")
@@ -1692,42 +1692,42 @@ GREMLIN;
     }
 
     private function collectClassDepth() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
 GREMLIN;
         $this->collectHashCounts($query, 'Class Depth');
     }
 
     private function collectParameterCounts() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
 GREMLIN;
         $this->collectHashCounts($query, 'ParameterCounts');
     }
 
     private function collectLocalVariableCounts() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by( __.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap('m'); 
 GREMLIN;
         $this->collectHashCounts($query, 'LocalVariableCounts');
     }
 
     private function collectMethodsCounts() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
     private function collectPropertyCounts() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
     private function collectConstantCounts() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
@@ -1748,7 +1748,7 @@ GREMLIN;
     private function collectClassChanges() {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS classChanges');
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE classChanges (  
     id           INTEGER PRIMARY KEY AUTOINCREMENT,
     changeType   STRING,
@@ -1922,17 +1922,17 @@ GREMLIN;
     }
 
     private function collectForeachFavorite() {
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Foreach").out("VALUE").not(hasLabel("Keyvalue")).values("fullcode")
 GREMLIN;
         $valuesOnly = $this->gremlin->query($query);
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
 GREMLIN;
         $values = $this->gremlin->query($query);
         
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
 GREMLIN;
         $keys = $this->gremlin->query($query);
@@ -1984,7 +1984,7 @@ GREMLIN;
         $index = $this->gremlin->query($query);
 
         $this->sqlite->query('DROP TABLE IF EXISTS readability');
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE readability (  
     id      INTEGER PRIMARY KEY AUTOINCREMENT,
     name    STRING,
@@ -2063,7 +2063,7 @@ SQL;
         }
         $this->sqlite = new \Sqlite3($this->sqliteFile);
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
                        thema STRING,
                        CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
@@ -2071,7 +2071,7 @@ CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         fullcode STRING,
                         file STRING,
@@ -2085,7 +2085,7 @@ CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                              analyzer STRING,
                              count INTEGER DEFAULT -6,
@@ -2094,7 +2094,7 @@ CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
                             analyzer TEXT,
                             key TEXT UNIQUE,
@@ -2103,7 +2103,7 @@ CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                             name TEXT,
                             key TEXT,

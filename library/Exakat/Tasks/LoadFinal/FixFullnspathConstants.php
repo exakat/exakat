@@ -35,7 +35,7 @@ class FixFullnspathConstants extends LoadFinal {
               ->savePropertyAs('fullnspath', 'cc')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Trait', 'Interface', 'Constant', 'Defineconstant'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 coalesce( __.out("ARGUMENT").has("rank", 0), 
           __.hasLabel("Constant").out('NAME'), 
           filter{ true; })
