@@ -33,7 +33,7 @@ class UsedFunctions extends Analyzer {
         $this->prepareQuery();
 
         // function name used in a string
-        $functionsInStrings = $this->query(<<<GREMLIN
+        $functionsInStrings = $this->query(<<<'GREMLIN'
 g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()
 GREMLIN
 )->toArray();

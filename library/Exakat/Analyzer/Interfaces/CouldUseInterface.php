@@ -31,7 +31,7 @@ class CouldUseInterface extends Analyzer {
 
     public function analyze() {
         // Custom interfaces
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Interface")
      .as("name")
      .out("METHOD", "MAGICMETHOD").as("methodCount").out("NAME").as("method")
@@ -77,7 +77,7 @@ where(
 )
 GREMLIN
 )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 filter{
     a = false;
     php_interfaces.each{ n, e ->
