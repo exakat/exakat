@@ -502,7 +502,8 @@ SQL
             $reportList[] = '`'.$reportIni['name'].'`_';
     
             $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
-            $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
+            $description = $this->internalLink($reportIni['description']);
+            $section .= $reportIni['mission']."\n\n".$description."\n\n";
 
             if (!isset($reportIni['examples'])) {
                 print "No examples for $reportFile\n";
@@ -1161,4 +1162,14 @@ GLOSSARY;
         
         return $doc;
     }
+    
+    private function internalLink($text) {
+        return preg_replace_callback('# ([^/ ]+/[^/ :]+) #', function($m) {
+            $ini = parse_ini_file("./human/en/{$m[1]}.ini");
+            
+            return ":ref:`".$this->rst_anchor($ini['name'])."`";
+        }, $text);
+    }
 }
+
+?>
