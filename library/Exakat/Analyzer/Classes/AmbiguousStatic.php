@@ -28,7 +28,7 @@ use Exakat\Data\Dictionary;
 class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
-        $queryMethodStatic = <<<GREMLIN
+        $queryMethodStatic = <<<'GREMLIN'
 g.V().hasLabel("Method")
      .has("static", true)
      .values("lccode")
@@ -40,7 +40,7 @@ GREMLIN;
         $staticMethod = array_unique($staticMethod);
 
         // Global are unused if used only once
-        $queryMethod = <<<GREMLIN
+        $queryMethod = <<<'GREMLIN'
 g.V().hasLabel("Method")
      .not(has("static", true))
      .values("lccode")
@@ -62,7 +62,7 @@ GREMLIN;
 
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
-        $queryStaticProperty = <<<GREMLIN
+        $queryStaticProperty = <<<'GREMLIN'
 g.V().hasLabel("Ppp")
      .has("static", true)
      .out("PPP")
@@ -72,7 +72,7 @@ GREMLIN;
         $staticProperty = $this->query($queryStaticProperty)->toArray();
 
         // Global are unused if used only once
-        $queryProperty = <<<GREMLIN
+        $queryProperty = <<<'GREMLIN'
 g.V().hasLabel("Ppp")
      .not(has("static", true))
      .out("PPP")

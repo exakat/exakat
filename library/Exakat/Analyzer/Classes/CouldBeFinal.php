@@ -31,7 +31,7 @@ class CouldBeFinal extends Analyzer {
         $this->atomIs(array('Class', 'Classanonymous'))
              ->isNot('final', true)
              ->isNot('abstract', true) // though, this is another problem
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     where(
         __.out("DEFINITION").in("EXTENDS")

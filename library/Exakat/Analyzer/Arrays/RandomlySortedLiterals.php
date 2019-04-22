@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RandomlySortedLiterals extends Analyzer {
     public function analyze() {
-        $uniqueArrays = $this->query(<<<GREMLIN
+        $uniqueArrays = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
      .filter{ it.get().value("count") > 2 }
@@ -51,7 +51,7 @@ GREMLIN
             return;
         }
 
-        $unsortedArrays = $this->query(<<<GREMLIN
+        $unsortedArrays = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
      .filter{ it.get().value("count") > 2 }

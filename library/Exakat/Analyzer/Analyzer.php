@@ -346,7 +346,7 @@ GREMLIN;
 
     public function getCalledTraits() {
         if (self::$calledTraits === null) {
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Analyzer")
      .has("analyzer", "Traits/TraitUsage")
      .out("ANALYZED")
@@ -361,7 +361,7 @@ GREMLIN;
 
     public function getCalledNamespaces() {
         if (self::$calledNamespaces === null) {
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Namespace")
      .values("fullnspath")
      .unique()
@@ -375,7 +375,7 @@ GREMLIN;
 
     public function getCalledDirectives() {
         if (self::$calledDirectives === null) {
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis")
      .has("analyzer", "Php/DirectivesUsage")
      .out("ANALYZED")

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeProtectedMethod extends Analyzer {
     public function analyze() {
         // Case of property->property (that's another public access)
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Methodcall")
      .not( __.where( __.repeat( __.out("OBJECT")).emit().hasLabel("This") ) )
      .out("METHOD")

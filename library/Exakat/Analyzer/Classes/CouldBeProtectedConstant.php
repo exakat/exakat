@@ -30,7 +30,7 @@ class CouldBeProtectedConstant extends Analyzer {
         // Searching for properties that are never used outside the definition class or its children
 
         // global static constants : the one with no definition class : they are all ignored.
-        $queryUndefinedConstants = <<<GREMLIN
+        $queryUndefinedConstants = <<<'GREMLIN'
 g.V().hasLabel("Staticconstant")
      .not( __.where( __.out("CLASS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface") ) )
      .out("CONSTANT")

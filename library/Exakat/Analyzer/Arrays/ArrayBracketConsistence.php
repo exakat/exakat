@@ -29,7 +29,7 @@ class ArrayBracketConsistence extends Analyzer {
 
     public function analyze() {
 
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 x2 = it.get().value("token");
 GREMLIN;
         $storage = array('array()' => 'T_ARRAY',
