@@ -2143,8 +2143,7 @@ SQL;
         return $items;
     }
 
-    private function getClassByType($type)
-    {
+    private function getClassByType($type) {
         if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
         } elseif ($type === 'Major' || $type === 'Slow') {

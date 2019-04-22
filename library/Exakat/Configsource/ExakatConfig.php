@@ -49,7 +49,7 @@ class ExakatConfig extends Config {
 
     public function loadConfig($args) {
         // Default values
-        $inis =  array( 
+        $inis =  array(
                     array('graphdb'            => 'gsneo4j',
                           'gremlin'            => $this->gremlins['gsneo4j'],
                           'loader'             => $this->loaders['gsneo4j'],

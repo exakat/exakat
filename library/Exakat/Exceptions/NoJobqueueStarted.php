@@ -26,7 +26,7 @@ namespace Exakat\Exceptions;
 class NoJobqueueStarted extends \RuntimeException {
     public function __construct() {
 
-        parent::__construct( "No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.");
+        parent::__construct( 'No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.');
     }
 }
 

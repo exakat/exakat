@@ -30,12 +30,12 @@ use Phar;
 class Config {
     const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80',);
 
-    public  $dir_root              = '.';
-    public  $ext_root              = '.';
-    public  $projects_root         = '.';
-    public  $is_phar               = true;
-    public  $executable            = '';
-    public  $ext                   = null;
+    public $dir_root              = '.';
+    public $ext_root              = '.';
+    public $projects_root         = '.';
+    public $is_phar               = true;
+    public $executable            = '';
+    public $ext                   = null;
 
     private $projectConfig         = null;
     private $commandLineConfig     = null;

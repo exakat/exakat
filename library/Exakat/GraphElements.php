@@ -24,7 +24,7 @@
 namespace Exakat;
 
 abstract class GraphElements {
-    static public $ATOMS = array('Addition',
+    public static $ATOMS = array('Addition',
                                  'Array',
                                  'Arrayappend',
                                  'Arrayliteral',
@@ -142,11 +142,11 @@ abstract class GraphElements {
                                  'Yield',
                                  'Yieldfrom',
                                 );
-    static public $ATOMS_EXAKAT = array('Analysis',
+    public static $ATOMS_EXAKAT = array('Analysis',
                                         'Noresult',
                                        );
     
-    static public $LINKS = array('APPEND',
+    public static $LINKS = array('APPEND',
                                  'ARGUMENT',
                                  'AS',
                                  'BLOCK',
@@ -208,12 +208,12 @@ abstract class GraphElements {
                                  'VARIABLE',
                                  'YIELD',
                                 );
-    static public $LINKS_EXAKAT = array('DEFINITION',
+    public static $LINKS_EXAKAT = array('DEFINITION',
                                         'ANALYZED',
                                         'RETURNED',
                                         'OVERWRITE'
                                        );
-    static public $LINKS_DOWN = array('APPEND',
+    public static $LINKS_DOWN = array('APPEND',
                                       'ARGUMENT',
                                       'AS',
                                       'BLOCK',
@@ -266,7 +266,7 @@ abstract class GraphElements {
                                       'YIELD',
                                 );
 
-    static public $ATOMS_LINKS = array('Addition'                  => array('LEFT', 'RIGHT'),
+    public static $ATOMS_LINKS = array('Addition'                  => array('LEFT', 'RIGHT'),
                                        'Array'                     => array('VARIABLE', 'INDEX'),
                                        'Arrayappend'               => array('APPEND'),
                                        'Arrayliteral'              => array('ARGUMENT', 'DEFINITION'),
@@ -384,11 +384,11 @@ abstract class GraphElements {
                                        'Yieldfrom'                 => array('YIELD'),
                                 );
 
-    static public function linksAsList() {
+    public static function linksAsList() {
         return makeList(self::$LINKS);
     }
 
-    static public function linksDownAsList() {
+    public static function linksDownAsList() {
         return makeList(self::$LINKS_DOWN);
     }
 }

@@ -493,15 +493,15 @@ function rsttable2html($raw) {
             continue;
         } elseif ($table === true) {
             if (preg_match('/^[\+-]+$/', $line, $r)) {
-                $html[] = "<tr>".str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
+                $html[] = '<tr>'.str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
             } elseif (strpos($line, '|') === false) {
                 $table = false;
-                $html []= "</table>";
-                $html []= "";
+                $html []= '</table>';
+                $html []= '';
             } elseif (!empty($td = explode('|', str_replace('<br />', '', $line)))) {
                 $td = array_map('trim', $td);
                 
-                $html[] = "<tr><td>".implode("</td><td>", $td)."</td></tr>";
+                $html[] = '<tr><td>'.implode('</td><td>', $td).'</td></tr>';
             }
         } else {
             $html []= $line;
@@ -666,7 +666,7 @@ function sort_dependencies($array, $level = 0) {
             }
         }
         
-        assert($level < 10, "Too many levels in dependencies. Aborting");
+        assert($level < 10, 'Too many levels in dependencies. Aborting');
         $return = array_merge($return, sort_dependencies($next, ++$level));
     }
     

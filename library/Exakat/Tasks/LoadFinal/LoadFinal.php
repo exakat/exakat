@@ -190,7 +190,7 @@ class LoadFinal {
         $task->run();
         $this->log('FinishIsModified');
         
-        // stats calulcation. 
+        // stats calulcation.
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
