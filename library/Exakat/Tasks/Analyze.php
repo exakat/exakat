@@ -87,7 +87,7 @@ class Analyze extends Tasks {
             $thema = $this->config->thema;
 
             if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
-                throw new NoSuchThema($thema, $this->themes->getSuggestionThema($thema));
+                throw new NoSuchThema(implode(', ', $thema), $this->themes->getSuggestionThema($thema));
             }
 
             $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );

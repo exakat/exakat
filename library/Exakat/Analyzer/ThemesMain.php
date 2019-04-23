@@ -265,12 +265,17 @@ SQL;
         }
     }
 
-    public function getSuggestionThema($thema) {
+    public function getSuggestionThema(array $thema) {
         $list = $this->listAllThemes();
 
         return array_filter($list, function($c) use ($thema) {
-            $l = levenshtein($c, $thema);
-            return $l < 8;
+            foreach($thema as $theme) {
+                $l = levenshtein($c, $theme);
+                if ($l < 8) {
+                    return true;
+                }
+            }
+            return false;
         });
     }
     

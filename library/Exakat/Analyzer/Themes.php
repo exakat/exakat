@@ -123,7 +123,7 @@ class Themes {
         return false;
     }
 
-    public function getSuggestionThema($thema) {
+    public function getSuggestionThema(array $thema) {
         $main  = $this->main->getSuggestionThema($thema);
         $extra = $this->extra->getSuggestionThema($thema);
         $ext   = $this->ext->getSuggestionThema($thema);
