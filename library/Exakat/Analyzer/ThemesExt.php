@@ -48,7 +48,7 @@ class ThemesExt {
         }
     }
     
-    public function getThemeAnalyzers($theme = null) {
+    public function getThemeAnalyzers(array $theme = null) {
         if (empty($this->themes)) {
             return array();
         }
