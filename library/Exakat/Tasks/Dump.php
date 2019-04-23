@@ -2044,11 +2044,9 @@ SQL;
 
         $add = array();
         
-        foreach($themas as $theme) {
-            $themes = $this->themes->getThemeAnalyzers($theme);
-            if (empty(array_diff($themes, $analyzers))) {
-                $add[] = $theme;
-            }
+        $themes = $this->themes->getThemeAnalyzers($themas);
+        if (empty(array_diff($themes, $analyzers))) {
+            $add[] = $theme;
         }
         
         if (!empty($add)) {

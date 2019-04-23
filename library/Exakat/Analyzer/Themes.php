@@ -45,7 +45,7 @@ class Themes {
         $this->extra = null;
     }
     
-    public function getThemeAnalyzers($theme = null) {
+    public function getThemeAnalyzers(array $theme = null) {
         $main  = $this->main ->getThemeAnalyzers($theme);
         $extra = $this->extra->getThemeAnalyzers($theme);
         $ext   = $this->ext  ->getThemeAnalyzers($theme);
