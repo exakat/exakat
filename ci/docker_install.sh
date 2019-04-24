@@ -9,12 +9,12 @@ set -xe
 mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1
 
 echo "memory_limit=-1" >> /usr/local/etc/php/php.ini
-export TERM="xterm"
+
 export JAVA_OPTIONS="-Xms32m -Xmx2512m"
 
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
-apt-get install default-jre apt-utils git lsof unzip procps -yqq
+apt-get install default-jre apt-utils git lsof unzip -yqq
 
 # Install phpunit, the tool that we will use for testing
 curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
@@ -58,12 +58,6 @@ mv projects/test2 projects/test
 mkdir projects/test/code
 php exakat clean -p test -v
 php exakat status -p test -v
-ls -hla projects/test/
+ls -hla projects/test/  
 
 php exakat cleandb -start
-
-ps aux | grep java
-
-# Install mysql driver
-# Here you can install any other extension that you need
-#docker-php-ext-install sqlite3
