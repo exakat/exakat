@@ -8,10 +8,14 @@ set -xe
 # Make place ready for Java installation
 mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1
 
-
 echo "memory_limit=-1" >> /usr/local/etc/php/php.ini
 export TERM="xterm"
 export JAVA_OPTIONS="-Xms32m -Xmx2512m"
+
+pwd
+
+ls -hla 
+exit 1;
 
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
@@ -31,7 +35,7 @@ php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 composer  install --no-plugins --no-scripts 
 
 curl --silent -o apache-tinkerpop-gremlin-server-3.3.6-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.6-bin.zip
-unzip apache-tinkerpop-gremlin-server-3.3.6-bin.zip
+unzip -qq apache-tinkerpop-gremlin-server-3.3.6-bin.zip
 mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
 rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip
 cd tinkergraph
