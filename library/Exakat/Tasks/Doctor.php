@@ -279,7 +279,7 @@ TEXT
             return;
         }
     
-        if (!copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph{$version}.yaml",
+        if (!copy("{$this->config->dir_root}/server/tinkergraph/gsneo4j{$version}.yaml",
              "$path/conf/gsneo4j.yaml")) {
             display("Error while copying gsneo4j{$version}.yaml config file to tinkergraph.");
         }
@@ -388,22 +388,22 @@ TEXT
         } elseif (!file_exists($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/')) {
             $stats['installed'] = 'Partially (missing neo4j folder : '.$this->config->gsneo4j_folder.')';
         } else {
-            $stats['installed'] = 'Yes (folder : '.$this->config->gsneo4j_folder.')';
+            $stats['installed'] = "'Yes (folder : {$this->config->gsneo4j_folder})'";
             $stats['host'] = $this->config->gsneo4j_host;
             $stats['port'] = $this->config->gsneo4j_port;
 
             $plugins = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/plugin/*.jar");
-            if (count($plugins) !== 73) {
+            if (count($plugins) !== 72) {
                 $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
             }
             
-            $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+            $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
             $gremlinVersion = basename(array_pop($gremlinJar));
             //gremlin-core-3.2.5.jar
             $gremlinVersion = substr($gremlinVersion, 13, -4);
             $stats['gremlin version'] = $gremlinVersion;
 
-            $neo4jJar = glob($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/lib/neo4j-*.jar');
+            $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
             $neo4jJar = array_filter($neo4jJar, function($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
             $neo4jVersion = basename(array_pop($neo4jJar));
 
@@ -411,8 +411,8 @@ TEXT
             $neo4jVersion = substr($neo4jVersion, 6, -4);
             $stats['neo4j version'] = $neo4jVersion;
             
-            if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
-                $stats['running'] = 'Yes (PID : '.trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid')).')';
+            if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
+                $stats['running'] = 'Yes (PID : '.trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")).')';
             }
         }
 
