@@ -56,8 +56,9 @@ php exakat doctor
 php exakat init -p test2
 mv projects/test2 projects/test
 mkdir projects/test/code
-php exakat clean -p test2 -v
-php exakat status -p test2 -v
+php exakat clean -p test -v
+php exakat status -p test -v
+ls -hla projects/test/
 
 php exakat cleandb -start
 
