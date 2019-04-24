@@ -5,6 +5,7 @@ namespace Test;
 use Exakat\Phpexec;
 use Exakat\Analyzer\Themes;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestSuite;
 use AutoloadExt;
 
 if (file_exists(__DIR__.'/../config.php')) {
@@ -38,7 +39,8 @@ spl_autoload_register('Autoload::autoload_library');
 class Analyzer extends TestCase {
     public function generic_test($file) {
         global $EXAKAT_PATH;
-        $TEST_PATH = '.';
+        
+        $test_path = dirname(__DIR__);
         
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
@@ -71,14 +73,14 @@ class Analyzer extends TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
-        require("exp/$file.php");
+        require("$test_path/exp/$file.php");
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         if (empty($config->$versionPHP)) {
             $versionPHP = 'php'.PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
         }
 
-        $res = shell_exec("{$config->$versionPHP} -l $TEST_PATH/source/$file.php 2>/dev/null");
+        $res = shell_exec("{$config->$versionPHP} -l $test_path/source/$file.php 2>/dev/null");
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
@@ -98,12 +100,12 @@ class Analyzer extends TestCase {
         }
         
         $analyzer = escapeshellarg($test_config);
-        $source = "source/$file.php";
+        $source = "$test_path/source/$file.php";
 
         if (is_dir($source)) {
-            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d $TEST_PATH/tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d $source -P $analyzer -p test -q -o -json";
         } else {
-            $shell = "cd $EXAKAT_PATH/; php exakat test    -f $TEST_PATH/tests/analyzer/$source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test    -f $source -P $analyzer -p test -q -o -json";
         }
 
         $shell_res = shell_exec($shell);
@@ -172,6 +174,68 @@ class AutoloadRemoteTest {
     public function registerAutoload() {
         spl_autoload_register(array($this, 'autoload'));
     }
+}
+
+function testSuiteBuilder(array $tests) {
+    $suite = new TestSuite('PHPUnit Framework');
+ 
+    foreach($tests as $i => $test) {
+        $name  = str_replace(array(__DIR__, '/Test/', '\\', '.php',), array('', '', '/', '', ), $test);
+        $name_ = str_replace(array(__DIR__.'/', '/Test/', '/', '.php',), array('', '', '_', '', ), $test);
+    
+        // check code
+        $code = file_get_contents(__DIR__."/$name.php");
+        preg_match_all('#test'.$name_.'(\d\d)#', $code, $r);
+        $methods = $r[1];
+
+        $sources = glob(dirname(__DIR__)."/source/$name.*.php");
+        foreach($sources as &$v) {
+            $v = preg_replace('#'.dirname(__DIR__).'/source/'.$name.'\.(\d+)\.php#is', '\1', $v);
+        }
+        unset($v);
+
+        $exp = glob(dirname(__DIR__).'/exp/'.$name.'.*.php');
+        foreach($exp as &$v) {
+            $v = preg_replace('#'.dirname(__DIR__).'/exp/'.$name.'\.(\d+)\.php#is', '\1', $v);
+        }
+
+        $diff = array_diff($sources, $methods);
+        if ($diff) {
+            $out = array("missing ".count($diff)." test methods in Test/$name.php\n");
+            foreach($diff as $d) {
+                $out []= "    public function test$name$d()  { \$this->generic_test('$name.$d'); }\n";
+            }
+            $out []= "\n";
+            
+            print implode('', $out);
+        }
+        
+        $diff = array_diff($exp, $methods);
+        if ($diff) {
+            echo "Missing ".count($diff)." methods for tests in Test/$name.php\n",
+                 "   php prepareexp.php $name\n\n";
+        }
+
+        $diff = array_diff($methods, $exp);
+        if ($diff) {
+            echo "Missing ".count($diff)." exp for tests in Test/$name.php\n",
+                 implode(', ', $diff)."\n\n";
+        }
+
+        $diff = array_diff($methods, $sources);
+        if ($diff) {
+            echo "missing ".count($diff)." sources for tests in Test/$name.php\n",
+                 implode(', ', $diff)."\n\n";
+        }
+    
+        $d = basename($test, '.php');
+        $c = basename(dirname($test));
+        $testClass = "\\Test\\$c\\$d";
+    
+        $suite->addTestSuite($testClass);
+    }
+    
+    return $suite;
 }
 
 ?>
