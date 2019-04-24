@@ -1,0 +1,9 @@
+image: php:7.3
+
+before_script:
+# Install dependencies
+- bash ci/docker_install.sh > /dev/null
+
+test:app:
+  script:
+  - phpunit --testsuite one
