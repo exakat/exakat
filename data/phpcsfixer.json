@@ -39,5 +39,8 @@
     },
     "Structures\/ShouldUseOperator": {
         "is_null": true
+    },
+    "Php\/ImplodeOneArg": {
+        "implode_call": true
     }
 }
