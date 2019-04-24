@@ -5,6 +5,9 @@
 
 set -xe
 
+# Make place ready for Java installation
+mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1
+
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
 apt-get install default-jre apt-utils git lsof unzip -yqq
