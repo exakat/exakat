@@ -50,26 +50,11 @@ php73 = /usr/local/bin/php
 
 " >> config/exakat.ini
 
-
-pwd
-ls -hla 
-ls -hla tinkergraph
-ls -hla tinkergraph/ext
-ls -hla tinkergraph/ext/neo4j-gremlin
-ls -hla tinkergraph/ext/neo4j-gremlin/lib
-ls -hla tinkergraph/ext/neo4j-gremlin/plugin
-more config/exakat.ini
-
-php exakat doctor
-
-exit 1;
-
-
 php exakat doctor
 
 php exakat cleandb -start
 
-php exakat doctor
+ps aux | grep java
 
 # Install mysql driver
 # Here you can install any other extension that you need
