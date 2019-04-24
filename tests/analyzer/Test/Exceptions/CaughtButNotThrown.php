@@ -4,7 +4,7 @@ namespace Test\Exceptions;
 
 use Test\Analyzer;
 
-include_once './Test/Analyzer.php';
+include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class CaughtButNotThrown extends Analyzer {
     /* 2 methods */

@@ -4,7 +4,7 @@ namespace Test\Files;
 
 use Test\Analyzer;
 
-include_once './Test/Analyzer.php';
+include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class IsComponent extends Analyzer {
     /* 7 methods */
