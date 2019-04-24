@@ -35,8 +35,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-
-class Analyzer extends TestCase {
+abstract class Analyzer extends TestCase {
     public function generic_test($file) {
         global $EXAKAT_PATH;
         
