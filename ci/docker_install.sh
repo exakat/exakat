@@ -31,7 +31,7 @@ unzip apache-tinkerpop-gremlin-server-3.3.6-bin.zip
 mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
 rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip
 cd tinkergraph
-#bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
+bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
 cd .. 
 
 php exakat doctor
