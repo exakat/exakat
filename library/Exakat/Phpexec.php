@@ -65,6 +65,7 @@ class Phpexec {
     private $version          = null;
     private $actualVersion    = null;
     private $requestedVersion = null;
+    private $error            = array();
     
     const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0',);
     const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
@@ -202,9 +203,189 @@ class Phpexec {
     public function compile($file) {
         $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
         $shell = trim($shell);
-        $shell = preg_replace('/\s*(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/m', '', $shell);
         
-        return $shell === 'No syntax errors detected in '.$file;
+        return !$this->isError(explode("\n", $shell)[0]);
+    }
+
+    public function getError() {
+        $r = $this->error;
+        $this->error = array();
+        return $r;
+    }
+    
+    public function isError($resFile) {
+        if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
+            return false;
+            // do nothing. All is fine.
+        } 
+
+        if (substr($resFile, 0, 15) == 'Errors parsing ') {
+            return false; // ignore this one
+        } 
+
+        if (trim($resFile) == '') {
+            return false; // do nothing. All is fine.
+        } 
+
+        if (preg_match('#^(?:PHP )?Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1], 
+                                 'file'  => $r[2], 
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        } 
+
+        if (preg_match('#^Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1], 
+                                 'file'  => $r[2], 
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        } 
+
+        if (preg_match('#^(?:PHP )?Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1], 
+                                 'file'  => $r[2], 
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        }        
+        
+        if (preg_match('#^(?:PHP )?Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1], 
+                                 'file'  => $r[2], 
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        }
+
+        var_dump($resFile);
+        print "\nDon't know that \n";
+        die();
+        return false;
+/*
+        if (substr($resFile, 0, 13) == 'Parse error: ') {
+            // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
+            if (in_array($version, array('52', '70', '71', '72', '73'))) {
+                preg_match('#Parse error: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                if (isset($incompilables[$fileName])) {
+                    continue;
+
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 14) == 'PHP Warning:  ') {
+            preg_match('#PHP Warning:  (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $file = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$file"])) {
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                $toRemoveFromFiles["/$file"] = 1;
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
+            // Actually, a repeat of the previous. We just ignore it.
+            continue;
+        } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
+            preg_match('#PHP Strict standards:  (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $file = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$file"])) {
+                $toRemoveFromFiles["/$file"] = 1;
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 18) == 'Strict Standards: ') {
+            preg_match('#Strict Standards: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$fileName"])) {
+                $toRemoveFromFiles["/$fileName"] = 1;
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 18) == 'Strict standards: ') {
+            preg_match('#Strict standards: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $file = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$file"])) {
+                $toRemoveFromFiles["/$file"] = 1;
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 22) == 'PHP Strict Standards: ') {
+            preg_match('#PHP Strict Standards: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $file = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$file"])) {
+                $toRemoveFromFiles["/$file"] = 1;
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 12) == 'Deprecated: ') {
+            preg_match('#Deprecated: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $file = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$file"])) {
+                $toRemoveFromFiles["/$file"] = 1;
+                $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 9) == 'Warning: ') {
+            preg_match('#Warning: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$fileName"])) {
+                $toRemoveFromFiles["/$fileName"] = 1;
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 8) == 'Notice: ') {
+            preg_match('#Notice: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$fileName"])) {
+                $toRemoveFromFiles["/$fileName"] = 1;
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 12) == 'PHP Notice: ') {
+            preg_match('#PHP Notice: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
+            $fileName = str_replace("{$this->config->projects_root}/projects/{$dir}/code/", '', $r[2]);
+            if (!isset($toRemoveFromFiles["/$fileName"])) {
+                $toRemoveFromFiles["/$fileName"] = 1;
+                if (isset($incompilables[$fileName])) {
+                    continue;
+                }
+                $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+            }
+        } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
+            continue;
+        } elseif (trim($resFile) == 'Could not open input file: {}') {
+            display("One path is too long\n");
+            continue;
+        } else {
+            assert(false,  "'".print_r($resFile, true)."'\n");
+        }
+        */
     }
 
     public function getWhiteCode() {

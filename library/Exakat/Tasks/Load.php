@@ -645,7 +645,11 @@ class Load extends Tasks {
         }
 
         if (!$this->php->compile($fullpath)) {
-            throw new NoFileToProcess($filename, 'won\'t compile');
+            $error = $this->php->getError();
+            $error['file'] = $filename;
+
+            $this->datastore->addRow('compilation'.str_replace('.', '', $this->config->phpversion), array($error));
+            return;
         }
 
         $tokens = $this->php->getTokenFromFile($fullpath);
