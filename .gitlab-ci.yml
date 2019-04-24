@@ -2,7 +2,7 @@ image: php:7.3-cli-stretch
 
 before_script:
 # Install dependencies
-- bash ci/docker_install.sh > /dev/null
+- bash ci/docker_install.sh
 
 test:app:
   script:
