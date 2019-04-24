@@ -34,7 +34,6 @@ cd tinkergraph
 bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
 cd .. 
 
-mkdir config
 echo "graphdb = 'gsneo4j';
 
 ; where is neo4j inside a gremlin server host
