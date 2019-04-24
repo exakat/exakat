@@ -84,6 +84,7 @@ class Files extends Tasks {
         }
 
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
+        $this->datastore->cleanTable("compilation$analyzingVersion");
         $id = array_search($analyzingVersion, $versions);
         unset($versions[$id]);
 
@@ -261,9 +262,9 @@ class Files extends Tasks {
                 }
             }
 
-            $this->datastore->cleanTable('compilation'.$version);
-            $this->datastore->addRow('compilation'.$version, array_values($incompilables));
-            $stats['notCompilable'.$version] = count($incompilables);
+            $this->datastore->cleanTable("compilation$version");
+            $this->datastore->addRow("compilation$version", array_values($incompilables));
+            $stats["notCompilable$version"] = count($incompilables);
         }
 
         $files = array_diff($files, array_keys($toRemoveFromFiles));
