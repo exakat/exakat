@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestSuite;
 
 include_once './Test/Analyzer.php';
 
-class Framework_Randomtest extends TestSuite {
+class Randomtest extends TestSuite {
 
     public static function suite() {
         $tests = glob(__DIR__.'/Test/*/*.php');
