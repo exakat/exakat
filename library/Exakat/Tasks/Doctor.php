@@ -388,7 +388,7 @@ TEXT
         } elseif (!file_exists($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/')) {
             $stats['installed'] = 'Partially (missing neo4j folder : '.$this->config->gsneo4j_folder.')';
         } else {
-            $stats['installed'] = "'Yes (folder : {$this->config->gsneo4j_folder})'";
+            $stats['installed'] = "Yes (folder : {$this->config->gsneo4j_folder})";
             $stats['host'] = $this->config->gsneo4j_host;
             $stats['port'] = $this->config->gsneo4j_port;
 
