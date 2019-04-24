@@ -25,7 +25,7 @@
         "ext-curl": "*",
         "ext-mbstring": "*",
         "guiguiboy/php-cli-progress-bar":"0.0.4",
-        "brightzone/gremlin-php": "3.0.2"
+        "brightzone/gremlin-php": "3.1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7.1",

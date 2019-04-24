@@ -4,30 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53cbe0018f03e4d10a96ddb2d95f5ef8",
+    "content-hash": "5f670320f1944d1360734431b6bfea86",
     "packages": [
         {
             "name": "brightzone/gremlin-php",
-            "version": "v3.0.2",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PommeVerte/gremlin-php.git",
-                "reference": "9643b7fdf2f539e62e483830840a75d74eb91473"
+                "reference": "507eb6d1c6719c65f1ecb13b9f5d1032edd3ff8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PommeVerte/gremlin-php/zipball/9643b7fdf2f539e62e483830840a75d74eb91473",
-                "reference": "9643b7fdf2f539e62e483830840a75d74eb91473",
+                "url": "https://api.github.com/repos/PommeVerte/gremlin-php/zipball/507eb6d1c6719c65f1ecb13b9f5d1032edd3ff8b",
+                "reference": "507eb6d1c6719c65f1ecb13b9f5d1032edd3ff8b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/php-code-coverage": "~2.2|~4.0",
-                "phpunit/phpunit": "~4.8|~5.7",
-                "satooshi/php-coveralls": "dev-master",
-                "yiisoft/yii2-apidoc": "*"
+                "phpunit/php-code-coverage": "~2.2||~4.0||~5.3",
+                "phpunit/phpunit": "~4.8||~5.7||~6.5",
+                "satooshi/php-coveralls": "~2.0",
+                "yiisoft/yii2-apidoc": "~2.1"
             },
             "type": "library",
             "extra": {
@@ -60,7 +60,7 @@
                 "rexpro",
                 "rexpro-php"
             ],
-            "time": "2017-08-31T06:37:53+00:00"
+            "time": "2019-01-21T23:20:36+00:00"
         },
         {
             "name": "guiguiboy/php-cli-progress-bar",
