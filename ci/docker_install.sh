@@ -55,6 +55,9 @@ php exakat doctor
 # create test project, empty
 php exakat init -p test2
 mv projects/test2 projects/test
+mkdir projects/test/code
+php exakat clean -p test2 -v
+php exakat status -p test2 -v
 
 php exakat cleandb -start
 
