@@ -12,11 +12,6 @@ echo "memory_limit=-1" >> /usr/local/etc/php/php.ini
 export TERM="xterm"
 export JAVA_OPTIONS="-Xms32m -Xmx2512m"
 
-pwd
-
-ls -hla 
-exit 1;
-
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
 apt-get install default-jre apt-utils git lsof unzip -yqq
@@ -54,6 +49,19 @@ phpversion = 7.3
 php73 = /usr/local/bin/php
 
 " >> config/exakat.ini
+
+
+pwd
+ls -hla 
+ls -hla tinkergraph
+ls -hla tinkergraph/ext
+ls -hla tinkergraph/ext/neo4j-gremlin
+more config/exakat.ini
+
+php exakat doctor
+
+exit 1;
+
 
 php exakat doctor
 
