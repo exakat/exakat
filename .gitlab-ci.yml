@@ -8,13 +8,10 @@ build:
   artifacts:
     paths:
       - ./
-  script:
-    - bash ci/docker_install.sh
 
 test:
   stage: test
   image: php:7.3-cli-stretch
-  dependencies: 
-    - test
   script:
+    - bash ci/docker_install.sh
     - phpunit --testsuite One
