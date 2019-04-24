@@ -8,6 +8,8 @@ build:
   artifacts:
     paths:
       - ./
+  script:
+    - bash ci/docker_install.sh
 
 test:
   stage: test

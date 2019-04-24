@@ -52,6 +52,10 @@ php73 = /usr/local/bin/php
 
 php exakat doctor
 
+# create test project, empty
+php exakat init -p test2
+mv projects/test2 projects/test
+
 php exakat cleandb -start
 
 ps aux | grep java
