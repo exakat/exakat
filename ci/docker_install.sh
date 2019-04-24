@@ -15,4 +15,4 @@ chmod +x /usr/local/bin/phpunit
 
 # Install mysql driver
 # Here you can install any other extension that you need
-docker-php-ext-install sqlite3
+#docker-php-ext-install sqlite3

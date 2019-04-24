@@ -6,4 +6,4 @@ before_script:
 
 test:app:
   script:
-  - phpunit --testsuite one
+  - phpunit --testsuite One
