@@ -96,7 +96,7 @@ class Config {
             ini_set('display_errors', 1);
         }
 
-        $cols = intval(exec('command -v tput && tput cols'));
+        $cols = intval(exec('command -v tput -T xterm-256color && tput cols'));
         if ($cols > 0) {
             $this->screen_cols = $cols;
         }
