@@ -32,7 +32,7 @@ class Phpcsfixer extends Reports {
     const FILE_FILENAME  = 'php_cs';
 
     public function generate($dirName, $fileName = null) {
-        $analyzerList =  $this->themes->getThemeAnalyzers('php-cs-fixable');
+        $analyzerList =  $this->themes->getThemeAnalyzers(array('php-cs-fixable'));
         $analysisResults = new Results($this->sqlite, $analyzerList);
         $analysisResults->load();
         $found = array_column($analysisResults->toArray(), 'analyzer');

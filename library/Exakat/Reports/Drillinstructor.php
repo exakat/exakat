@@ -430,7 +430,7 @@ JAVASCRIPT;
         foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
-            $analyzers = $this->themes->getThemeAnalyzers('Level '.$level);
+            $analyzers = $this->themes->getThemeAnalyzers(array('Level '.$level));
             if (empty($analyzers)) {
                 continue;
             }

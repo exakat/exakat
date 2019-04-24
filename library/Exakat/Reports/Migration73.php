@@ -115,7 +115,7 @@ class Migration73 extends Ambassador {
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP73');
+        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP73'));
         $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number

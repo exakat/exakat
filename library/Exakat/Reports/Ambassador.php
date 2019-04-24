@@ -1482,7 +1482,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers($categorie)).')';
+            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers(array($categorie))).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1644,25 +1644,27 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge($this->themes->getThemeAnalyzers('Analyze'),
-                            $this->themes->getThemeAnalyzers('Security'),
-                            $this->themes->getThemeAnalyzers('Performances'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP74'),
-                            array('Project/Dump')
-                            );
-        $list = makeList($list);
+        $list = $this->themes->getThemeAnalyzers(array(
+        'Analyze',
+        'Security',
+        'Performances',
+        'CompatibilityPHP53',
+        'CompatibilityPHP54',
+        'CompatibilityPHP55',
+        'CompatibilityPHP56',
+        'CompatibilityPHP70',
+        'CompatibilityPHP71',
+        'CompatibilityPHP72',
+        'CompatibilityPHP73',
+        'CompatibilityPHP74',
+        'CompatibilityPHP80',
+        ));
+        $list[] = 'Project/Dump';
+        $sqlList = makeList($list);
 
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
-WHERE analyzer NOT IN ($list) AND 
+WHERE analyzer NOT IN ($sqlList) AND 
       count = 0 AND
       analyzer LIKE "%/%" AND
       analyzer NOT LIKE "Common/%"
@@ -2090,7 +2092,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
         if (is_string($theme)) {
-            $list = $this->themes->getThemeAnalyzers($theme);
+            $list = $this->themes->getThemeAnalyzers(array($theme));
         } else {
             $list = $theme;
         }
@@ -2727,7 +2729,7 @@ SQL
         $compatibility = array();
         $skipped       = array();
 
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP'.$version));
 
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($list).')');
         $counts = array();
@@ -4596,7 +4598,7 @@ HTML;
     }
     
     private function generateConcentratedIssues() {
-        $listAnalyzers = $this->themes->getThemeAnalyzers('Analyze');
+        $listAnalyzers = $this->themes->getThemeAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
 
         $sql = <<<SQL

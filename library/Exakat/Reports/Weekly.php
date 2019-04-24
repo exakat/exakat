@@ -617,7 +617,7 @@ JAVASCRIPT;
                     FROM results
                     WHERE analyzer in ($listSQL)
                     GROUP BY analyzer
-                    ORDER BY number DESC ";
+                    ORDER BY count(*) DESC ";
         if ($limit) {
             $query .= ' LIMIT '.$limit;
         }

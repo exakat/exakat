@@ -70,7 +70,7 @@ class Grade extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->themesToShow      = 'Security';
+        $this->themesToShow      = array('Security');
         $this->timesToFix        = $this->themes->getTimesToFix();
         $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
         $this->severities        = $this->themes->getSeverities();

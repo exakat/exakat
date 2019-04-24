@@ -28,7 +28,7 @@ class Favorites extends Reports {
     const FILE_FILENAME  = 'favorites';
 
     public function _generate($analyzerList) {
-        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
+        $analyzers = $this->themes->getThemeAnalyzers(array('Preferences'));
         
         $return = array();
         foreach($analyzers as $analyzer) {
