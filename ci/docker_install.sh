@@ -34,6 +34,20 @@ cd tinkergraph
 bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
 cd .. 
 
+mkdir config
+echo "graphdb = 'gsneo4j';
+
+; where is neo4j inside a gremlin server host
+gsneo4j_host     = '127.0.0.1';
+gsneo4j_port     = '8182';
+gsneo4j_folder   = 'tinkergraph';
+
+phpversion = 7.3
+
+php73 = /usr/local/bin/php
+
+" >> config/exakat.ini
+
 php exakat doctor
 
 # Install mysql driver
