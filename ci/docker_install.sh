@@ -56,6 +56,8 @@ ls -hla
 ls -hla tinkergraph
 ls -hla tinkergraph/ext
 ls -hla tinkergraph/ext/neo4j-gremlin
+ls -hla tinkergraph/ext/neo4j-gremlin/lib
+ls -hla tinkergraph/ext/neo4j-gremlin/plugin
 more config/exakat.ini
 
 php exakat doctor
