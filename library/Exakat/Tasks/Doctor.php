@@ -263,23 +263,23 @@ TEXT
         if (!file_exists("$path/db")) {
             mkdir("$path/db", 0755);
         }
-    
+
         $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
         //gremlin-core-3.2.5.jar
         $gremlinVersion = substr($gremlinVersion, 13, -4);
-        if (version_compare('3.4.0', $gremlinVersion)) {
+        if (version_compare('3.4.0', $gremlinVersion) < 0) {
             $version = '.3.4';
-        } elseif (version_compare('3.3.0', $gremlinVersion)) {
+        } elseif (version_compare('3.3.0', $gremlinVersion) < 0) {
             $version = '.3.3';
-        } elseif (version_compare('3.2.0', $gremlinVersion)) {
+        } elseif (version_compare('3.2.0', $gremlinVersion) < 0) {
             $version = '.3.2';
         } else {
             print "Warning : Wrong Gremlin version found : $gremlinVersion read. Possible version range from 3.2.0 to 3.4.0.";
             return;
         }
-    
-        if (!copy("{$this->config->dir_root}/server/tinkergraph/gsneo4j{$version}.yaml",
+
+        if (!copy("{$this->config->dir_root}/server/gsneo4j/gsneo4j{$version}.yaml",
              "$path/conf/gsneo4j.yaml")) {
             display("Error while copying gsneo4j{$version}.yaml config file to tinkergraph.");
         }
