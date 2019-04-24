@@ -44,7 +44,7 @@ class Config {
     private $dotExakatConfig       = null;
     private $envConfig             = null;
     private $argv                  = null;
-    private $screen_cols           = 80;
+    private $screen_cols           = 100;
 
     private $configFiles = array();
     private $options     = array();
@@ -96,11 +96,6 @@ class Config {
             ini_set('display_errors', 1);
         }
 
-        $cols = intval(exec('command -v tput -T xterm-256color && tput cols'));
-        if ($cols > 0) {
-            $this->screen_cols = $cols;
-        }
-        
         unset($argv[0]);
 
         $this->defaultConfig = new DefaultConfig();
