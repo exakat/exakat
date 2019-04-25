@@ -12,4 +12,5 @@ test:
   stage: test
   image: php:7.3-cli-stretch
   script:
+    - bash ci/docker_install.sh
     - phpunit --testsuite One
