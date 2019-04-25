@@ -107,7 +107,7 @@ class Grade extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
-            $menu = <<<MENU
+            $menu = <<<'MENU'
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">&nbsp;</li>

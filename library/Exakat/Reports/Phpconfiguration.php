@@ -84,7 +84,7 @@ class Phpconfiguration extends Reports {
                              );
 
         $data = array();
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT analyzer FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
             analyzer IN ("Structures/FileUploadUsage", 
@@ -111,7 +111,7 @@ SQL
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
                       $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
-                $res2 = $this->sqlite->query(<<<SQL
+                $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableFunction";
 SQL
@@ -130,7 +130,7 @@ SQL
                 $data['Disable features'][0]->suggested = implode(', ', $suggestions);
                 $data['Disable features'][0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
-                $res2 = $this->sqlite->query(<<<SQL
+                $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableClass";
 SQL
@@ -150,7 +150,7 @@ SQL
             }
         }
 
-        $directives = <<<TEXT
+        $directives = <<<'TEXT'
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Suggestion for php.ini ;

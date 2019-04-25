@@ -37,7 +37,7 @@ class Dependencies extends Reports {
         $nodes    = array('class' => array(), 'trait' => array(), 'interface' => array(), 'unknown' => array());
         $fullcode = array();
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
@@ -47,7 +47,7 @@ GREMLIN;
             $nodes['class'][] = $v[0];
         }
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Trait").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
@@ -56,7 +56,7 @@ GREMLIN;
             $names[$v[0]] = $v[1];
             $nodes['trait'][] = $v[0];
         }
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Interface").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
@@ -69,7 +69,7 @@ GREMLIN;
         $nodesId = array_flip(call_user_func_array('array_merge', array_values($nodes)));
 
         // static constants
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Staticconstant").as('fullcode')
 .out('CLASS').as('destination')
 .repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
@@ -95,7 +95,7 @@ GREMLIN;
         display( $total.' Static constants');
 
         // static property
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Staticproperty").as('fullcode')
 .out('CLASS').as('destination')
 .repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
@@ -122,7 +122,7 @@ GREMLIN;
         display( $total.' Static constants');
 
         // Instantiation
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("New").as('fullcode')
 .out('NEW').as('destination')
 .has('fullnspath')
@@ -149,7 +149,7 @@ GREMLIN;
         display( $total. ' New');
 
         // Typehint
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Function").as("fullcode")
 .out("ARGUMENT").out("TYPEHINT").as("destination")
 .repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as("origin")
@@ -175,7 +175,7 @@ GREMLIN;
         display( $total. ' Typehint');
 
         // instanceof
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Instanceof").as('fullcode')
 .out('CLASS').as('destination')
 .has('fullnspath')
@@ -202,7 +202,7 @@ GREMLIN;
         display( $total. ' Instanceof');
 
         // static methods
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Staticmethodcall").as('fullcode')
 .out('CLASS').as('destination')
 .has('fullnspath')

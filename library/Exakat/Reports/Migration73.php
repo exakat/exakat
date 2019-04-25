@@ -211,7 +211,7 @@ class Migration73 extends Ambassador {
         $analyzerHTML = $this->getTopAnalyzers($this->analyzerList);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Morris.Donut({

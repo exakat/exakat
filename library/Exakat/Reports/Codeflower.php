@@ -52,7 +52,7 @@ class Codeflower extends Reports {
 
     private function getFileDependencies() {
         $files = array();
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT DISTINCT including, included 
     FROM filesDependencies
 WHERE including != included AND
@@ -96,7 +96,7 @@ SQL
     }
 
     private function getClassHierarchy() {
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, cit.id AS id, extends, type, namespace
     FROM cit
     JOIN namespaces
@@ -162,7 +162,7 @@ SQL
     }
     
     private function getNamespaces() {
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, cit.id, extends, type, namespace
     FROM cit
     JOIN namespaces

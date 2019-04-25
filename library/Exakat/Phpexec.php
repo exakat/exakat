@@ -217,37 +217,37 @@ class Phpexec {
         if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             return false;
             // do nothing. All is fine.
-        } 
+        }
 
         if (substr($resFile, 0, 15) == 'Errors parsing ') {
             return false; // ignore this one
-        } 
+        }
 
         if (trim($resFile) == '') {
             return false; // do nothing. All is fine.
-        } 
+        }
 
         if (preg_match('#^(?:PHP )?Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1], 
-                                 'file'  => $r[2], 
+            $this->error = array('error' => $r[1],
+                                 'file'  => $r[2],
                                  'line'  => $r[3],
                                  );
 
             return true;
-        } 
+        }
 
         if (preg_match('#^(?:PHP )?Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1], 
-                                 'file'  => $r[2], 
+            $this->error = array('error' => $r[1],
+                                 'file'  => $r[2],
                                  'line'  => $r[3],
                                  );
 
             return true;
-        }        
+        }
         
         if (preg_match('#^(?:PHP )?Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1], 
-                                 'file'  => $r[2], 
+            $this->error = array('error' => $r[1],
+                                 'file'  => $r[2],
                                  'line'  => $r[3],
                                  );
 
@@ -255,8 +255,17 @@ class Phpexec {
         }
 
         if (preg_match('#^(?:PHP )?Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1], 
-                                 'file'  => $r[2], 
+            $this->error = array('error' => $r[1],
+                                 'file'  => $r[2],
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        }
+
+        if (preg_match('#^(?:PHP )?Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1],
+                                 'file'  => $r[2],
                                  'line'  => $r[3],
                                  );
 

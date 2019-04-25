@@ -41,7 +41,7 @@ class Phpcompilation extends Reports {
         $configureDirectives = json_decode(file_get_contents("{$this->config->dir_root}/data/configure.json"));
 
         // preparing the list of PHP extensions to compile PHP with
-        $return = array(<<<TEXT
+        $return = array(<<<'TEXT'
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; PHP configure list   ;
 ;;;;;;;;;;;;;;;;;;;;;;;;
