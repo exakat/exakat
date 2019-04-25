@@ -35,8 +35,6 @@ mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
 rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip
 cd tinkergraph
 
-chown -R gitlab-runner:gitlab-runner .
-
 bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
 cd .. 
 
