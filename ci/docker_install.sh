@@ -63,3 +63,9 @@ php exakat clean -p test -v
 php exakat status -p test -v
 
 php exakat cleandb -start
+
+whoami
+
+ls -hla tinkergraph/db/
+
+ls -hla tinkergraph/db/neo4j
