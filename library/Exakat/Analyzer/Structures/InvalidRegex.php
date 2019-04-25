@@ -36,9 +36,9 @@ class InvalidRegex extends Analyzer {
              ->raw(<<<'GREMLIN'
 map{
      if (it.get().value("delimiter") == "'") {
-       regex = it.get().value('noDelimiter').replaceAll("\\\\\\\\(['\\\\\\\\])", "\\$1");
+       regex = it.get().value('noDelimiter').replaceAll("\\\\(['\\\\])", "\$1");
      } else {
-       regex = it.get().value('noDelimiter').replaceAll('\\\\\\\\(["\\\\\\\\])', "\\$1");
+       regex = it.get().value('noDelimiter').replaceAll('\\\\(["\\\\])', "\$1");
      }
      
      [regex, it.get().value('fullcode')]

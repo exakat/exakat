@@ -47,7 +47,7 @@ class UnknownPregOption extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->raw('filter{ it.get().value("noDelimiter") != delimiter + delimiterFinal ; }')
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*)\\$')
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*)\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -66,7 +66,7 @@ class UnknownPregOption extends Analyzer {
              ->isNot('noDelimiter', '')
              ->inIs('CONCAT')
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*).\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*).\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -84,7 +84,7 @@ class UnknownPregOption extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->back('concat')
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*).\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")([a-zA-Z]*[^ '.$options.'" + delimiterFinal + "][a-zA-Z]*).\$')
              ->back('first');
         $this->prepareQuery();
     }

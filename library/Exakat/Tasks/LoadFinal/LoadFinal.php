@@ -386,7 +386,7 @@ GREMLIN;
 g.V().hasLabel("Defineconstant")
      .out("NAME")
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
-     .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\\$").getCount() == 0 }
+     .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\$").getCount() == 0 }
      .values('fullnspath').unique();
 GREMLIN;
         $defineConstants = $this->gremlin->query($query)
@@ -397,7 +397,7 @@ g.V().hasLabel("Const")
      .not( where( __.in("CONST") ) )  // Not a class or an interface
      .out("CONST")
      .out("NAME")
-     .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+     .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\$").getCount() == 1 }
      .values('fullnspath').unique();
 
 GREMLIN;
@@ -470,7 +470,7 @@ g.V().hasLabel("Identifier", "Nsname")
              .not( where( __.in("CONST") ) ) 
              .out("CONST")
              .out("NAME")
-             .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+             .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\$").getCount() == 1 }
        )
        .count()
 
