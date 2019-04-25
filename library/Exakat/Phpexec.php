@@ -236,15 +236,6 @@ class Phpexec {
             return true;
         } 
 
-        if (preg_match('#^Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1], 
-                                 'file'  => $r[2], 
-                                 'line'  => $r[3],
-                                 );
-
-            return true;
-        } 
-
         if (preg_match('#^(?:PHP )?Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
             $this->error = array('error' => $r[1], 
                                  'file'  => $r[2], 
@@ -255,6 +246,15 @@ class Phpexec {
         }        
         
         if (preg_match('#^(?:PHP )?Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
+            $this->error = array('error' => $r[1], 
+                                 'file'  => $r[2], 
+                                 'line'  => $r[3],
+                                 );
+
+            return true;
+        }
+
+        if (preg_match('#^(?:PHP )?Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
             $this->error = array('error' => $r[1], 
                                  'file'  => $r[2], 
                                  'line'  => $r[3],
