@@ -34,13 +34,13 @@ class CompactInexistant extends Analyzer {
              ->savePropertyAs('noDelimiter', 'variable_name')
              ->makeVariableName('variable_name')
              ->goToFunction()
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     __.where(__.out("DEFINITION").filter{ it.get().value("fullcode") == variable_name; })
 )
 GREMLIN
 )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     __.where(__.out("ARGUMENT").out("NAME").filter{ it.get().value("fullcode") == variable_name; })
 )

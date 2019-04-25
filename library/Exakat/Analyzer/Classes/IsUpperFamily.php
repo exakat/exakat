@@ -37,7 +37,7 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('code', 'methode')
              
              ->goToClass()
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not( 
     where( 
         __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
@@ -48,7 +48,7 @@ GREMLIN
 
              ->goToAllParents()
              ->atomIs('Class')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where( 
     __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
 )

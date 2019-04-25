@@ -34,7 +34,7 @@ g.V().hasLabel('Comparison').has("code", within($compareCodeList)).out('LEFT', '
 GREMLIN;
         $comparedStrings = $this->query($query)->toArray();
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel('Assignation').out('RIGHT').hasLabel('String').not(where(__.out('CONCAT'))).not(has("noDelimiter", "")).values('noDelimiter').unique()
 GREMLIN;
         $assignedStrings = $this->query($query)->toArray();

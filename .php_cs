@@ -20,14 +20,30 @@ return PhpCsFixer\Config::create()
         'no_trailing_whitespace' => true,
         'indentation_type' => true,
         'array_syntax' => array('syntax' => 'long'),
+        'list_syntax'  => array('syntax' => 'long'),
         'elseif' => true,
         'lowercase_constants' => true,
         'new_with_braces' => true,
-//        'no_extra_consecutive_blank_lines' => true,
          'no_trailing_whitespace' => true,
          'single_quote' => true,
-//         'yoda_style' => true,
          'visibility_required' => true,
+
+
+// Interesting, but too many fixes at once
+//        'no_extra_consecutive_blank_lines' => true,
+
+// experimental
+//         'yoda_style' => true,
+
+// Too many problemes with double-escaped \ (inside gremlin queries)
+//         'heredoc_to_nowdoc' => true,
+
+// experimental
+//         'braces' => [
+//             'position_after_control_structures'            => 'same',
+//             'position_after_functions_and_oop_constructs'  => 'same',
+//             'position_after_anonymous_constructs'          => 'same',
+//    ],
         )
     )
     ->setFinder($finder)

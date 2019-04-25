@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class IsNotInheritedMethod extends DSL {
     public function run() {
-        $gremlin = <<<GREMLIN
+        $gremlin = <<<'GREMLIN'
 not( 
     where( __.out("OVERWRITE")
              .not( where( __.has("abstract", true) ) ) 

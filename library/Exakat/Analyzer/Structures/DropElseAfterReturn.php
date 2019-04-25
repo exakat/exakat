@@ -29,7 +29,7 @@ class DropElseAfterReturn extends Analyzer {
         //if ($a) { return $a; } else { doSomething(); }
         $this->atomIs('Ifthen')
              ->tokenIsNot('T_ELSEIF')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     where(
         __.in("EXPRESSION")
@@ -52,7 +52,7 @@ GREMLIN
         //if ($a) { doSomething(); } else { return $a; }
         $this->atomIs('Ifthen')
              ->tokenIsNot('T_ELSEIF')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     where(
         __.in("EXPRESSION")

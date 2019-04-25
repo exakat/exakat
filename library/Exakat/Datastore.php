@@ -332,7 +332,7 @@ SQLITE;
                 break;
 
             case 'shortopentag' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE shortopentag (
   id INTEGER PRIMARY KEY,
   file TEXT
@@ -341,7 +341,7 @@ SQLITE;
                 break;
 
             case 'files' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE files (
   id INTEGER PRIMARY KEY,
   file TEXT,
@@ -352,7 +352,7 @@ SQLITE;
                 break;
 
             case 'ignoredFiles' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE ignoredFiles (
   id INTEGER PRIMARY KEY,
   file TEXT,
@@ -362,7 +362,7 @@ SQLITE;
                 break;
 
             case 'hash' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE hash (
   id INTEGER PRIMARY KEY,
   key TEXT UNIQUE,
@@ -372,7 +372,7 @@ SQLITE;
                 break;
 
             case 'hashAnalyzer' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE hashAnalyzer (
   id INTEGER PRIMARY KEY,
   analyzer TEXT,
@@ -383,7 +383,7 @@ SQLITE;
                 break;
 
             case 'analyzed' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE analyzed (
   id INTEGER PRIMARY KEY,
   analyzer TEXT UNIQUE,
@@ -393,7 +393,7 @@ SQLITE;
                 break;
 
             case 'tokenCounts' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE tokenCounts (
   id INTEGER PRIMARY KEY,
   token TEXT UNIQUE,
@@ -403,7 +403,7 @@ SQLITE;
                 break;
 
             case 'functioncalls' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE functioncalls (
   id INTEGER PRIMARY KEY,
   functioncall TEXT UNIQUE,
@@ -413,7 +413,7 @@ SQLITE;
                 break;
 
             case 'externallibraries' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE externallibraries (
   id INTEGER PRIMARY KEY,
   library TEXT UNIQUE,
@@ -423,7 +423,7 @@ SQLITE;
                 break;
 
             case 'composer' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE composer (
   id INTEGER PRIMARY KEY,
   component TEXT UNIQUE,
@@ -433,7 +433,7 @@ SQLITE;
                 break;
 
             case 'configFiles' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE configFiles (
   id INTEGER PRIMARY KEY,
   file TEXT UNIQUE,
@@ -444,7 +444,7 @@ SQLITE;
                 break;
 
             case 'dictionary' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE dictionary (
   id INTEGER PRIMARY KEY,
   key TEXT UNIQUE,
@@ -454,7 +454,7 @@ SQLITE;
                 break;
 
             case 'linediff' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE linediff (
   id INTEGER PRIMARY KEY,
   file TEXT UNIQUE,
@@ -465,7 +465,7 @@ SQLITE;
                 break;
 
             case 'ignoredCit' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE ignoredCit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            name TEXT,
                            fullnspath TEXT,
@@ -476,7 +476,7 @@ SQLITE;
                 break;
 
             case 'ignoredFunctions' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE ignoredFunctions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                  name TEXT,
                                  fullnspath TEXT,
@@ -486,7 +486,7 @@ SQLITE;
                 break;
 
             case 'ignoredConstants' :
-                $createTable = <<<SQLITE
+                $createTable = <<<'SQLITE'
 CREATE TABLE ignoredConstants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                  name TEXT,
                                  fullnspath TEXT,

@@ -80,7 +80,7 @@ class SplitGraphson extends Loader {
         display("Finishing last upload : $this->total lines\n");
         if ($this->total !== 0) {
             $this->saveNodes();
-        } 
+        }
 
         display("Init finalize\n");
         $begin = microtime(true);
@@ -266,7 +266,7 @@ GREMLIN;
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
         
-        $fp = fopen('./splitgraphson.log', "a");
+        $fp = fopen('./splitgraphson.log', 'a');
         $d1 =  (int) ($b1 - $b) / 100000;
         $d2 =  (int) ($b2 - $b1) / 100000;
         fwrite($fp, "$fileName\t$total\t$d1\t$d2\n");

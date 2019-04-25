@@ -33,7 +33,7 @@ class WrittenOnlyVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('DEFINITION')
-                     ->raw(<<<GREMLIN
+                     ->raw(<<<'GREMLIN'
 coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
           __.filter{ true; }
         )
@@ -45,7 +45,7 @@ GREMLIN
                 $this->side()
                      ->outIs('DEFINITION')
                      ->atomIs(self::$VARIABLES_USER)
-                     ->raw(<<<GREMLIN
+                     ->raw(<<<'GREMLIN'
 coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
           __.filter{ true; }
         )

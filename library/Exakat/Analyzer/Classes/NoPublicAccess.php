@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoPublicAccess extends Analyzer {
     public function analyze() {
 
-        $queryProperties = <<<GREMLIN
+        $queryProperties = <<<'GREMLIN'
 g.V().hasLabel("Member")
      .not(where( __.out("OBJECT").hasLabel("This")) )
      .out("MEMBER").hasLabel("Name")
@@ -48,7 +48,7 @@ GREMLIN;
             $this->prepareQuery();
         }
 
-        $queryStaticProperties = <<<GREMLIN
+        $queryStaticProperties = <<<'GREMLIN'
 g.V().hasLabel("Staticproperty")
      .where( 
      __.out("CLASS")

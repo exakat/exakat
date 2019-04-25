@@ -36,7 +36,7 @@ class AlternativeConsistenceByFile extends Analyzer {
              ->filter(
                 $this->side()
                      ->atomInside($atoms)
-                     ->raw(<<<GREMLIN
+                     ->raw(<<<'GREMLIN'
 or( __.has("alternative").sideEffect{ alt = alt + 1; },
     __.sideEffect{ normal = normal + 1; })
 GREMLIN

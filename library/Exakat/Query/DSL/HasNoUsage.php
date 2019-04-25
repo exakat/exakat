@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 
 class HasNoUsage extends DSL {
     public function run() : Command {
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
 not(
     where(                  
         __.out("DEFINITION").not(hasLabel("Usenamespace"))

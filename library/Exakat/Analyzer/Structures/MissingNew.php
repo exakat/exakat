@@ -31,7 +31,7 @@ class MissingNew extends Analyzer {
     }
 
     public function analyze() {
-        $customClasses = $this->query(<<<GREMLIN
+        $customClasses = $this->query(<<<'GREMLIN'
 g.V().hasLabel('Class').values('fullnspath').unique();
 GREMLIN
 );

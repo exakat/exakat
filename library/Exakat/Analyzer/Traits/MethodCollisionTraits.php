@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MethodCollisionTraits extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
  where(
   __.sideEffect{ methods = []; insteadof = [];}
     .out("USE")

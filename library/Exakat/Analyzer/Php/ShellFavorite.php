@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ShellFavorite extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().label() == 'Shell') {
     x2 = 'backtick';
 } else if ( it.get().value('fullnspath') == '\\\\exec') {

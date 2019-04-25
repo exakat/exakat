@@ -69,7 +69,7 @@ class Methods {
     }
 
     public function getFunctionsLastArgsNotBoolean() {
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT '\\' || lower(methods.name) AS fullnspath, args_max - 1 AS position FROM methods 
 JOIN args_type ON args_type.name = methods.name
 WHERE methods.class = "PHP" AND
@@ -172,7 +172,7 @@ SQL;
     public function getBugFixes() {
         $return = array();
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT * FROM bugfixes ORDER BY SUBSTR(solvedIn72, 5) + 0 DESC, SUBSTR(solvedIn71, 5) + 0 DESC, SUBSTR(solvedIn70, 5) + 0 DESC, SUBSTR(56, 5) + 0 DESC 
 SQL;
         $res = $this->sqlite->query($query);
@@ -187,7 +187,7 @@ SQL;
     public function getFunctionsByReturn() {
         $return = array();
 
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT return, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
 SQL;
         $res = $this->sqlite->query($query);

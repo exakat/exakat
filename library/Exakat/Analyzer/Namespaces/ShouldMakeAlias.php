@@ -35,7 +35,7 @@ class ShouldMakeAlias extends Analyzer {
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where( __.out("BLOCK", "CODE").out("EXPRESSION")
          .hasLabel("Usenamespace").out("USE")
          .filter{ (possibleAlias =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )

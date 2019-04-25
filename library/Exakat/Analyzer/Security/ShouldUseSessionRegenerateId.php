@@ -31,7 +31,7 @@ class ShouldUseSessionRegenerateId extends Analyzer {
     }
     
     public function analyze() {
-        $sessions = $this->query(<<<GREMLIN
+        $sessions = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Analyze")
      .has("analyzer", "Extensions/Extsession")
      .out("ANALYZED")

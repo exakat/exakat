@@ -154,7 +154,7 @@ GREMLIN
                              ->outIs('CONCAT')
                      )
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     including = []; 
     ignore = false;

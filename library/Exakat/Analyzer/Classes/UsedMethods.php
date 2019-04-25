@@ -30,7 +30,7 @@ class UsedMethods extends Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query(<<<GREMLIN
+        $methods = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
 GREMLIN
 )->toArray();
@@ -45,7 +45,7 @@ GREMLIN
         }
 
         // Staticmethodcall
-        $staticmethods = $this->query(<<<GREMLIN
+        $staticmethods = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
 GREMLIN
 )->toArray();
@@ -62,7 +62,7 @@ GREMLIN
 
         // Staticmethodcall in arrays
         // non-staticmethodcall in arrays, with $this
-        $callablesStrings = $this->query(<<<GREMLIN
+        $callablesStrings = $this->query(<<<'GREMLIN'
 g.V().hasLabel("String")
      .where(__.in("DEFINITION"))
      .has('noDelimiter')
@@ -91,7 +91,7 @@ g.V().hasLabel("String")
 GREMLIN
         )->toArray();
 
-        $callablesArray = $this->query(<<<GREMLIN
+        $callablesArray = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Arrayliteral")
      .where(__.values("count").is(eq(2)) )
      .where(__.out("ARGUMENT").has("rank", 0).hasLabel("String").in("DEFINITION"))
@@ -104,7 +104,7 @@ g.V().hasLabel("Arrayliteral")
 GREMLIN
         )->toArray();
 
-        $callablesThisArray = $this->query(<<<GREMLIN
+        $callablesThisArray = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Arrayliteral")
      .where(__.values("count").is(eq(2)) )
      .where(__.out("ARGUMENT").has("rank", 0).hasLabel("This"))

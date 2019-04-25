@@ -29,7 +29,7 @@ class MultipleConstantDefinition extends Analyzer {
     public function analyze() {
         // case-insensitive constants with Define
         // Search for definitions and count them
-        $csDefinitions = $this->query(<<<GREMLIN
+        $csDefinitions = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Defineconstant")
      .or( __.out("CASE").count().is(eq(0)),
           __.out("CASE").has('boolean', false),
@@ -39,14 +39,14 @@ g.V().hasLabel("Defineconstant")
 GREMLIN
 );
 
-        $constDefinitions = $this->query(<<<GREMLIN
+        $constDefinitions = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Const").not( where( __.in("CONST").hasLabel("Class", "Trait") ) )
                        .out("CONST")
                        .out("NAME").values("fullcode")
 GREMLIN
 );
 
-        $cisDefinitions = $this->query(<<<GREMLIN
+        $cisDefinitions = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Defineconstant")
      .where( __.out("CASE").has("boolean", true)) 
      .out("NAME")

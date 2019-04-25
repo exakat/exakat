@@ -34,7 +34,7 @@ class WrongCase extends Analyzer {
              ->codeIsNot(array('static', 'parent', 'self'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outIsIE('NAME')
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');
@@ -64,7 +64,7 @@ GREMLIN
                      )
              )
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');
@@ -85,7 +85,7 @@ GREMLIN
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');
@@ -107,7 +107,7 @@ GREMLIN
              ->outIs('TYPEHINT')
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');
@@ -129,7 +129,7 @@ GREMLIN
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');
@@ -150,7 +150,7 @@ GREMLIN
              ->outIs('USE')
              ->outIsIE('NAME')
              ->initVariable('classe')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == "T_STRING") {
         classe = it.get().value('fullcode');

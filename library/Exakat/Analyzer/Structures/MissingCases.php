@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingCases extends Analyzer {
     public function analyze() {
-        $switches = $this->query(<<<GREMLIN
+        $switches = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Switch")
      .sideEffect{ x = []; }
      .sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})

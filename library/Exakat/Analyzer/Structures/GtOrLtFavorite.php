@@ -33,7 +33,7 @@ class GtOrLtFavorite extends Analyzer {
             return;
         }
 
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().value("code") in ***) {
     x2 = '>';
 } else {

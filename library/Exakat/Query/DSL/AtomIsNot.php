@@ -41,7 +41,7 @@ class AtomIsNot extends DSL {
                  array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported
-            $gremlin = <<<GREMLIN
+            $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(['Identifier', 'Nsname', 'Staticconstant'])).in('DEFINITION').out('VALUE'),
           __.hasLabel(within(['Variable'])).in('DEFINITION').out('DEFINITION').in('LEFT').hasLabel('Assignation').out('RIGHT'),
           __.filter{true})

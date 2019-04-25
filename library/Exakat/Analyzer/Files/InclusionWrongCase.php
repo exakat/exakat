@@ -93,7 +93,7 @@ not(where( __.repeat(__.out({$this->linksDown})).emit().times($MAX_LOOPING)
 GREMLIN
 )
 
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     including = []; 
     ignore = false;
