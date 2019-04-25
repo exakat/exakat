@@ -5,9 +5,6 @@ stages:
 build:
   stage: build
   image: php:7.3-cli-stretch
-  artifacts:
-    paths:
-      - ./
   script:
     - bash ci/docker_install.sh
 
@@ -15,5 +12,4 @@ test:
   stage: test
   image: php:7.3-cli-stretch
   script:
-    - bash ci/docker_install.sh
     - phpunit --testsuite One
