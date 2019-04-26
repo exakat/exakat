@@ -48,7 +48,7 @@ class ThemesExt {
         }
     }
     
-    public function getThemeAnalyzers($theme = null) {
+    public function getThemeAnalyzers(array $theme = null) {
         if (empty($this->themes)) {
             return array();
         }
@@ -181,12 +181,17 @@ class ThemesExt {
         }
     }
 
-    public function getSuggestionThema(string $thema) {
+    public function getSuggestionThema(array $thema) {
         $list = $this->listAllThemes();
-
+        
         return array_filter($list, function($c) use ($thema) {
-            $l = levenshtein($c, $thema);
-            return $l < 8;
+            foreach($thema as $theme) {
+                $l = levenshtein($c, $theme);
+                if ($l < 8) {
+                    return true;
+                }
+            }
+            return false;
         });
     }
     

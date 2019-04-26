@@ -28,14 +28,14 @@ use Exakat\Analyzer\Analyzer;
 class ConstDefineFavorite extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 x2 = it.get().label();
 GREMLIN;
         $storage = array('const'    => 'Const',
                          'define()' => 'Defineconstant');
 
         $this->atomIs(array('Const', 'Defineconstant'))
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 or( __.hasLabel("Defineconstant"), 
     __.hasLabel("Const").not( where( __.in("CONST") ) ) 
   )
@@ -64,7 +64,7 @@ GREMLIN
         }
 
         $this->atomIs(array('Const', 'Defineconstant'))
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 or( __.hasLabel("Defineconstant"), 
     __.hasLabel("Const").not( where( __.in("CONST") ) ) 
   )

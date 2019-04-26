@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UsedClass extends Analyzer {
     public function analyze() {
 
-        $new = $this->query(<<<GREMLIN
+        $new = $this->query(<<<'GREMLIN'
 g.V().hasLabel("New").out("NEW").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 )->toArray();
@@ -42,7 +42,7 @@ GREMLIN
         }
         
         // classed used in a extends
-        $extends = $this->query(<<<GREMLIN
+        $extends = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Class").out("EXTENDS", "IMPLEMENTS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 )->toArray();
@@ -54,7 +54,7 @@ GREMLIN
         }
         
         // class used in static property
-        $staticproperties = $this->query(<<<GREMLIN
+        $staticproperties = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Staticproperty", "Staticconstant", "Staticmethodcall", "Instanceof").out("CLASS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 )->toArray();
@@ -66,7 +66,7 @@ GREMLIN
         }
         
         // class used in a typehint
-        $typehints = $this->query(<<<GREMLIN
+        $typehints = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Function").out("ARGUMENT").out("TYPEHINT").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 )->toArray();
@@ -79,7 +79,7 @@ GREMLIN
         }
         
         // class used in a Use
-        $uses = $this->query(<<<GREMLIN
+        $uses = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Use").out("USE").values("fullnspath").unique()
 GREMLIN
 )->toArray();
@@ -90,11 +90,11 @@ GREMLIN
         }
 
         // class used in a String (full string only)
-        $strings = $this->query(<<<GREMLIN
+        $strings = $this->query(<<<'GREMLIN'
 g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
      .not(where( __.in("ARGUMENT").hasLabel("Arrayliteral") ) )
      .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
-     .filter{ (it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\\x7f-\\xff]/).getCount() == 0}
+     .filter{ (it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/).getCount() == 0}
      .map{ it.get().value("noDelimiter"); }.unique()
 GREMLIN
 )->toArray();
@@ -119,7 +119,7 @@ GREMLIN
         }
 
         // class used in an array
-        $arrays = $this->query(<<<GREMLIN
+        $arrays = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Functioncall").out("ARGUMENT")
         .hasLabel("Arrayliteral")
         .where( __.out("ARGUMENT").has("rank", 0).in("DEFINITION") )

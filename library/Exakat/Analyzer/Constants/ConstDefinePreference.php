@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstDefinePreference extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 x2 = it.get().label();
 GREMLIN;
         $storage = array('const'  => 'Const',

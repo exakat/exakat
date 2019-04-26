@@ -41,7 +41,7 @@ class Simpletable extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $list = $this->themes->getThemeAnalyzers('Analyze');
+        $list = $this->themes->getThemeAnalyzers(array('Analyze'));
         $list = makeList($list);
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');

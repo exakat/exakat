@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ConcatenationInterpolationFavorite extends Analyzer {
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 x2 = it.get().label();
 GREMLIN;
         $storage = array('concatenation'  => 'Concatenation',

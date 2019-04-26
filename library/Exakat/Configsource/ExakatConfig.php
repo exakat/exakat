@@ -89,7 +89,7 @@ class ExakatConfig extends Config {
         // Validation
         if (!isset($this->config['graphdb']) ||
             !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            $this->config['gremlin'] = 'nogremlin';
+            $this->config['graphdb'] = 'nogremlin';
         }
 
         foreach(array_keys($this->gremlins) as $gdb) {

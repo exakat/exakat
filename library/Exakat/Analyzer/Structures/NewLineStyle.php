@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NewLineStyle extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().label() == "String") {
     x2 = "slash-n"
 } else {

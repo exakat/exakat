@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 class IsNotLiteral extends DSL {
     public function run() {
         // Closures are literal if not using a variable from the context
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
 not( 
     __.hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral")
       .has("constant", true) 

@@ -247,8 +247,8 @@ class GSNeo4j extends Graph {
     }
     
     public function getDefinitionSQL() {
-        return <<<SQL
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
+        return <<<'SQL'
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id  ELSE definitions.id  END AS definition, calls.id AS call
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND

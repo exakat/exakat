@@ -29,7 +29,7 @@ class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
 
-        $notPregMatchWithLiteral = <<<GREMLIN
+        $notPregMatchWithLiteral = <<<'GREMLIN'
 not( 
     where( 
         __.has("fullnspath", "\\\\preg_match")

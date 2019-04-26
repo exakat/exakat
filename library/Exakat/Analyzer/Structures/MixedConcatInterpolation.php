@@ -29,7 +29,7 @@ class MixedConcatInterpolation extends Analyzer {
         // $a."b$c";
         $this->atomIs('Concatenation')
             // constant, methodcall and functioncall are ignored as not interpolable.
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where( __.out("CONCAT").coalesce( __.hasLabel("Variable"),
                                   __.hasLabel("Array").where( __.out("INDEX").hasLabel("Integer", "String"))
                                                       .where( __.out("VARIABLE").hasLabel("Variablearray")),

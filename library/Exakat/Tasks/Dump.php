@@ -1833,25 +1833,30 @@ g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first
 GREMLIN;
         $total += $this->storeClassChanges('Method Signature', $query);
         
-        $query = <<<GREMLIN
-g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first")
-.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
-
-.sideEffect{ visibility1 = it.get().value("visibility") }
-
-.in("METHOD").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
-
-.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("visibility") }
-
-.out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
-.map{["name":name,
-      "parent":class2,
-      "parentValue":visibility2 + ' ' + name,
-      "class":class1,
-      "classValue":visibility1 + ' ' + name];}
-GREMLIN;
-        $total += $this->storeClassChanges('Method Visibility', $query);
+         $query = $this->newQuery('Inclusions');
+         $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->savePropertyAs('visibility', 'visibility1')
+              ->inIs(array('METHOD', 'MAGICMETHOD'))
+              ->savePropertyAs('fullcode', 'name1')
+              ->back('first')
+              ->inIs('OVERWRITE')
+              ->savePropertyAs('visibility', 'visibility2')
+              ->filter('visibility1  != visibility2;', array(), array())
+              ->inIs('METHOD')
+              ->savePropertyAs('fullcode', 'name2')
+              ->raw(<<<'GREMLIN'
+map{
+     
+     ["name":fnp.tokenize('::')[1],
+      "parent":name1,
+      "parentValue":visibility2 + ' ' + fnp.tokenize('::')[1],
+      "class":name2,
+      "classValue":visibility1 + ' ' + fnp.tokenize('::')[1]];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Method Visibility', $query);
 
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
@@ -1903,6 +1908,17 @@ GREMLIN;
     private function storeClassChanges($changeType, $query) {
         $index = $this->gremlin->query($query);
         
+        return $this->storeInDump($changeType, $index);
+    }
+
+    private function storeClassChangesNewQuery($changeType, $query) {
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        
+        return $this->storeInDump($changeType, $result);
+    }
+    
+    private function storeInDump($changeType, $index) {
         $values = array();
         foreach($index->toArray() as $change) {
             $values[] = "('$changeType', 
@@ -2044,11 +2060,9 @@ SQL;
 
         $add = array();
         
-        foreach($themas as $theme) {
-            $themes = $this->themes->getThemeAnalyzers($theme);
-            if (empty(array_diff($themes, $analyzers))) {
-                $add[] = $theme;
-            }
+        $themes = $this->themes->getThemeAnalyzers($themas);
+        if (empty(array_diff($themes, $analyzers))) {
+            $add[] = $theme;
         }
         
         if (!empty($add)) {

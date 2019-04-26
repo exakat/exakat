@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="All">
+            <file>./tests/analyzer/alltests.php</file>
+        </testsuite>
+        <testsuite name="Random">
+            <file>./tests/analyzer/randomtest.php</file>
+        </testsuite>
+        <testsuite name="gitlab">
+            <file>./tests/analyzer/gitlab.php</file>
+        </testsuite>
+        <testsuite name="One">
+            <file>./tests/analyzer/one.php</file>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="display_errors" value="On" />
+        <ini name="display_startup_errors" value="On" />
+    </php>
+</phpunit>

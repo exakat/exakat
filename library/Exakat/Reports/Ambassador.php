@@ -709,7 +709,7 @@ JAVASCRIPT;
         $analyzerHTML = $this->getTopAnalyzers($this->themes->getThemeAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Morris.Donut({
@@ -970,7 +970,7 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage('parameter_counts');
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT key, value FROM hashResults
 WHERE name = "ParameterCounts"
 ORDER BY key
@@ -994,7 +994,7 @@ SQL
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Highcharts.theme = {
@@ -1144,7 +1144,7 @@ JAVASCRIPT;
 
     protected function generateExtensionsBreakdown() {
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT analyzer, count(*) AS count FROM results 
 WHERE analyzer LIKE "Extensions/Ext%"
 GROUP BY analyzer
@@ -1170,7 +1170,7 @@ SQL
 
     protected function generatePHPFunctionBreakdown() {
         // List of php functions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
 FROM phpStructures 
 WHERE type = "function"
@@ -1195,7 +1195,7 @@ SQL
 
     protected function generatePHPConstantsBreakdown() {
         // List of php functions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
 FROM phpStructures 
 WHERE type = "constant"
@@ -1220,7 +1220,7 @@ SQL
 
     protected function generatePHPClassesBreakdown() {
         // List of php functions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
 FROM phpStructures 
 WHERE type in ("class", "interface", "trait")
@@ -1247,7 +1247,7 @@ SQL
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Highcharts.theme = {
@@ -1482,7 +1482,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers($categorie)).')';
+            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers(array($categorie))).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1644,25 +1644,27 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge($this->themes->getThemeAnalyzers('Analyze'),
-                            $this->themes->getThemeAnalyzers('Security'),
-                            $this->themes->getThemeAnalyzers('Performances'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
-                            $this->themes->getThemeAnalyzers('CompatibilityPHP74'),
-                            array('Project/Dump')
-                            );
-        $list = makeList($list);
+        $list = $this->themes->getThemeAnalyzers(array(
+        'Analyze',
+        'Security',
+        'Performances',
+        'CompatibilityPHP53',
+        'CompatibilityPHP54',
+        'CompatibilityPHP55',
+        'CompatibilityPHP56',
+        'CompatibilityPHP70',
+        'CompatibilityPHP71',
+        'CompatibilityPHP72',
+        'CompatibilityPHP73',
+        'CompatibilityPHP74',
+        'CompatibilityPHP80',
+        ));
+        $list[] = 'Project/Dump';
+        $sqlList = makeList($list);
 
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
-WHERE analyzer NOT IN ($list) AND 
+WHERE analyzer NOT IN ($sqlList) AND 
       count = 0 AND
       analyzer LIKE "%/%" AND
       analyzer NOT LIKE "Common/%"
@@ -1718,7 +1720,7 @@ SQL;
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
-        $result = $this->sqlite->query(<<<SQL
+        $result = $this->sqlite->query(<<<'SQL'
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
         FROM results
         WHERE line != -1
@@ -2090,7 +2092,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
         if (is_string($theme)) {
-            $list = $this->themes->getThemeAnalyzers($theme);
+            $list = $this->themes->getThemeAnalyzers(array($theme));
         } else {
             $list = $theme;
         }
@@ -2592,7 +2594,7 @@ HTML;
                              );
 
         $directiveList = '';
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT analyzer, count FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
             analyzer IN ("Structures/FileUploadUsage", 
@@ -2625,7 +2627,7 @@ SQL
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
                       $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
-                $res2 = $this->sqlite->query(<<<SQL
+                $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableFunction";
 SQL
@@ -2644,7 +2646,7 @@ SQL
                 $data[0]->suggested = implode(', ', $suggestions);
                 $data[0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
-                $res2 = $this->sqlite->query(<<<SQL
+                $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableClass";
 SQL
@@ -2727,7 +2729,7 @@ SQL
         $compatibility = array();
         $skipped       = array();
 
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP'.$version));
 
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($list).')');
         $counts = array();
@@ -2752,7 +2754,7 @@ SQL
         }
         $compatibility = implode(PHP_EOL, $compatibility).PHP_EOL.implode(PHP_EOL, $skipped);
 
-        $description = <<<HTML
+        $description = <<<'HTML'
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
 HTML;
 
@@ -2949,7 +2951,7 @@ SQL
         // ce trait inclut l'autre
 
         // list of all traits, for building the table
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT name FROM cit WHERE type="trait" ORDER BY name
 SQL;
         $res = $this->sqlite->query($query);
@@ -2963,7 +2965,7 @@ SQL;
         $table = array_fill_keys($traits, array_fill_keys($traits, array()));
         
         // Get conflicts
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT
    t1.name AS t1,
    t2.name AS t2,
@@ -2991,7 +2993,7 @@ SQL;
         
         // Get trait usage
         $usage = array();
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT
    t1.name AS t1,
    t2.name AS t2
@@ -3417,7 +3419,7 @@ SQL
                                             array_keys($properties),
                                             array_keys($methods)));
         
-        $visibilityTable = array(<<<HTML
+        $visibilityTable = array(<<<'HTML'
 <table class="table table-striped">
     <tr>
         <td>&nbsp;</td>
@@ -3502,7 +3504,7 @@ HTML;
 
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'Class Option Recommendations');
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -3877,7 +3879,7 @@ SQL
         $finalHTML = $this->getBasedPage('classes_depth');
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT * FROM hashResults
     WHERE name="Class Depth"
     ORDER BY key
@@ -3898,7 +3900,7 @@ SQL
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Highcharts.theme = {
@@ -4079,7 +4081,7 @@ SQL
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Highcharts.theme = {
@@ -4261,7 +4263,7 @@ SQL
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Highcharts.theme = {
@@ -4482,7 +4484,7 @@ JAVASCRIPT;
             file_put_contents("$path$row[file]", $source);
         }
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
 <script>
   "use strict";
 
@@ -4596,7 +4598,7 @@ HTML;
     }
     
     private function generateConcentratedIssues() {
-        $listAnalyzers = $this->themes->getThemeAnalyzers('Analyze');
+        $listAnalyzers = $this->themes->getThemeAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
 
         $sql = <<<SQL
@@ -4609,7 +4611,7 @@ SQL;
         $res = $this->sqlite->query($sql);
 
         $table = array();
-        while(['line' => $line, 'file' => $file, 'count' => $count, 'list' => $list] = $res->fetchArray(\SQLITE3_ASSOC)) {
+        while(list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list) = $res->fetchArray(\SQLITE3_ASSOC)) {
             $listHtml = array();
             foreach(explode(',', $list) as $l) {
                 $listHtml[] = '<li>'.$this->makeDocLink($l).'</li>';

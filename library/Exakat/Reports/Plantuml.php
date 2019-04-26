@@ -86,7 +86,7 @@ SQL
             $puml .= "Class{$ids[$extended]} <|-- Class{$extending}\n";
         }
 
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT implementing, implements, type FROM cit_implements
 SQL
         );

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnsetOrCast extends Analyzer {
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().label() == "Cast") {
     x2 = "(unset)";
 } else {

@@ -4,7 +4,7 @@ namespace Test\Classes;
 
 use Test\Analyzer;
 
-include_once './Test/Analyzer.php';
+include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class NonStaticMethodsCalledStatic extends Analyzer {
     /* 10 methods */

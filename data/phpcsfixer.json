@@ -28,5 +28,19 @@
     },
     "Structures\/NotNot": {
         "no_short_bool_cast": true
+    },
+    "Php\/NewExponent": {
+        "pow_to_exponentiation": {
+			"style": "pre"
+		}
+    },
+    "Performances\/PrePostIncrement": {
+        "increment_style": true
+    },
+    "Structures\/ShouldUseOperator": {
+        "is_null": true
+    },
+    "Php\/ImplodeOneArg": {
+        "implode_call": true
     }
 }

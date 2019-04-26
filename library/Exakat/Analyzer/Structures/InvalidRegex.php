@@ -33,12 +33,12 @@ class InvalidRegex extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 map{
      if (it.get().value("delimiter") == "'") {
-       regex = it.get().value('noDelimiter').replaceAll("\\\\\\\\(['\\\\\\\\])", "\\$1");
+       regex = it.get().value('noDelimiter').replaceAll("\\\\(['\\\\])", "\$1");
      } else {
-       regex = it.get().value('noDelimiter').replaceAll('\\\\\\\\(["\\\\\\\\])', "\\$1");
+       regex = it.get().value('noDelimiter').replaceAll('\\\\(["\\\\])', "\$1");
      }
      
      [regex, it.get().value('fullcode')]
@@ -60,7 +60,7 @@ GREMLIN
                              ->atomIs(array('String', 'Identifier', 'Nsname', 'Staticconstant'))
                      )
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
  where( 
     __.sideEffect{ c = it.get().value("count") - 1;}
       .out("CONCAT")

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class PPPDeclarationStyle extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().value("count") == 1) {
     x2 = 'one';
 } else {

@@ -30,7 +30,7 @@ class Phpcompilation extends Reports {
     const FILE_FILENAME  = 'compilePHP';
 
     protected function _generate($analyzerList) {
-        $themed = $this->themes->getThemeAnalyzers('Appinfo');
+        $themed = $this->themes->getThemeAnalyzers(array('Appinfo'));
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($themed).') AND count > -1');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -41,7 +41,7 @@ class Phpcompilation extends Reports {
         $configureDirectives = json_decode(file_get_contents("{$this->config->dir_root}/data/configure.json"));
 
         // preparing the list of PHP extensions to compile PHP with
-        $return = array(<<<TEXT
+        $return = array(<<<'TEXT'
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; PHP configure list   ;
 ;;;;;;;;;;;;;;;;;;;;;;;;

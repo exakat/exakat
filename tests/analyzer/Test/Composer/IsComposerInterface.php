@@ -4,7 +4,7 @@ namespace Test\Composer;
 
 use Test\Analyzer;
 
-include_once './Test/Analyzer.php';
+include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class IsComposerInterface extends Analyzer {
     /* 3 methods */

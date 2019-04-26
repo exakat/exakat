@@ -55,7 +55,7 @@ call_user_func(array($obj, 'myCallbackMethod'));
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // working with functions (not methods)
 
-        $apply = <<<GREMLIN
+        $apply = <<<'GREMLIN'
 sideEffect{
     i = it.get().value('noDelimiter').indexOf("::");
     if (i > 0) {
@@ -100,7 +100,7 @@ GREMLIN;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array('Class', 'method');
 
-        $apply = <<<GREMLIN
+        $apply = <<<'GREMLIN'
 out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
 .in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .filter{ cbClassNode.value('noDelimiter').length() > 0}
@@ -117,7 +117,7 @@ out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
 
 GREMLIN;
 
-        $arrayContainsTwoStrings = <<<GREMLIN
+        $arrayContainsTwoStrings = <<<'GREMLIN'
 where( __.out("ARGUMENT").count().is(eq(2)) )
 .where( __.out("ARGUMENT").hasLabel("String").where( __.out("CONCAT").count().is(eq(0))).count().is(eq(2)) )
 
@@ -136,7 +136,7 @@ GREMLIN;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array($object, 'method'); Also, [$object, 'method']
-        $apply = <<<GREMLIN
+        $apply = <<<'GREMLIN'
 out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
 .in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .sideEffect{

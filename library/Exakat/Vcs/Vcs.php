@@ -22,6 +22,8 @@
 
 namespace Exakat\Vcs;
 
+use Exakat\Config;
+
 abstract class Vcs {
     protected $destination     = '';
     protected $destinationFull = '';
@@ -42,6 +44,11 @@ abstract class Vcs {
         return array();
     }
 
+    public function getName() {
+        $path = explode('\\', get_called_class());
+        return strtolower(array_pop($path));
+    }
+
     protected function check() {
         if ($this->checked === true) {
             return true;
@@ -52,13 +59,14 @@ abstract class Vcs {
         
         return true;
     }
+
     protected function selfCheck() {}
 
     public function getLineChanges() { return array(); }
 
     public function update() {}
     
-    public static function getVcs($config) {
+    public static function getVcs(Config $config) {
         if ($config->svn === true) {
             return Svn::class;
         } elseif ($config->hg === true) {
@@ -84,11 +92,11 @@ abstract class Vcs {
         } elseif ($config->cvs === true) {
             return Cvs::class;
         } elseif ($config->none === true) {
-            return EmptyCode::class;
+            return None::class;
         } elseif ($config->git === true) {
             return Git::class;
         } else {
-            return EmptyCode::class;
+            return None::class;
         }
     }
 
@@ -110,7 +118,7 @@ abstract class Vcs {
             $this->tag = $tag;
         }
     }
-    
+
     public function getFileModificationLoad() {
         return array();
     }

@@ -48,9 +48,6 @@ class Test extends Tasks {
             throw new NoSuchAnalyzer($analyzerName, $this->themes);
         }
 
-        $analyze = new FindExternalLibraries($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $analyze->run();
-
         display("Cleaning DB\n");
         $args = array ( 1 => 'cleandb',
                         2 => '-p',

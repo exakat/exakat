@@ -30,7 +30,7 @@ class UniqueUsage extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
  where( __.out("DEFINITION").has("isRead", true).count().is(eq(1)))
 .where( __.out("DEFINITION").has("isModified", true).count().is(eq(1)))
 GREMLIN

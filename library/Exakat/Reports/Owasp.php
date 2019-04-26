@@ -134,7 +134,7 @@ class Owasp extends Ambassador {
         }
 
         if ($this->themes !== null) {
-            $this->themesToShow      = 'Security';
+            $this->themesToShow      = array('Security');
             $this->timesToFix        = $this->themes->getTimesToFix();
             $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
             $this->severities        = $this->themes->getSeverities();
@@ -152,7 +152,7 @@ class Owasp extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
-            $menu = <<<MENU
+            $menu = <<<'MENU'
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">&nbsp;</li>
@@ -672,7 +672,7 @@ SQL;
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
-        $result = $this->sqlite->query(<<<SQL
+        $result = $this->sqlite->query(<<<'SQL'
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
         GROUP BY file
 SQL
@@ -836,7 +836,7 @@ SQL;
             $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
         }
 
-        $description = <<<HTML
+        $description = <<<'HTML'
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
 HTML;
 

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MultipleAliasDefinitions extends Analyzer {
     public function analyze() {
         // alias with varied values
-        $aliases = $this->query(<<<GREMLIN
+        $aliases = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Usenamespace").out("USE")
      .group("a").by("alias").by("fullnspath")
      .cap("a").next()

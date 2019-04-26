@@ -29,7 +29,7 @@ class DeclareStrict extends Analyzer {
     protected $phpVersion = '7.0+';
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().label() == "Sequence") {
     x2 = "relaxed types";
 } else {

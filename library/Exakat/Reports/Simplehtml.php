@@ -81,7 +81,7 @@ class Simplehtml extends Reports {
 
     private function makeSummary($folder) {
         if (empty($this->config->thema)) {
-            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
+            $list = $this->themes->getThemeAnalyzers($this->config->thema);
             $list = makeList($list);
         } elseif (!empty($this->config->program)) {
             $list = '"'.$this->config->program.'"';

@@ -33,7 +33,7 @@ class MultipleDeclarations extends Analyzer {
         // case-insensitive constants
 
         $this->atomIs($this->atom)
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1}
 GREMLIN
 );

@@ -62,7 +62,7 @@ class Diplomat extends Ambassador {
             $this->severities        = $this->themes->getSeverities();
         }
 
-        $this->themesToShow = 'Top10';
+        $this->themesToShow = array('Top10');
     }
 
     public function dependsOnAnalysis() {
@@ -84,7 +84,7 @@ class Diplomat extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
-            $menu = <<<MENU
+            $menu = <<<'MENU'
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">&nbsp;</li>
@@ -226,7 +226,7 @@ MENU;
     }
 
     public function getIssuesBreakdown() {
-       $list = 'IN ('.makeList($this->themes->getThemeAnalyzers('Top10')).')';
+       $list = 'IN ('.makeList($this->themes->getThemeAnalyzers(array('Top10'))).')';
        $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer $list AND count > 0";
        $res = $this->sqlite->query($query);
 

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class InconsistentUsage extends Analyzer {
     public function analyze() {
         $this->atomIs('Variabledefinition')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
 __.sideEffect{ s = [:];}
   .out('DEFINITION').sideEffect{ s[it.get().label()] = 1;}.fold()
@@ -41,7 +41,7 @@ GREMLIN
 
         // Not taking into account absence of default on purpose.
         $this->atomIs('Propertydefinition')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
 __.sideEffect{ s = ['class':0, 'array':0, 'variable':0];}
   .where(

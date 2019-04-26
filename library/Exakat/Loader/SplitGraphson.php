@@ -49,6 +49,7 @@ class SplitGraphson extends Loader {
     private $graphdb        = null;
     private $path           = null;
     private $pathDef        = null;
+    private $total          = 0;
     
     private $dictCode = null;
     
@@ -76,6 +77,11 @@ class SplitGraphson extends Loader {
     }
 
     public function finalize() {
+        display("Finishing last upload : $this->total lines\n");
+        if ($this->total !== 0) {
+            $this->saveNodes();
+        }
+
         display("Init finalize\n");
         $begin = microtime(true);
         $query = <<<GREMLIN
@@ -217,8 +223,9 @@ GREMLIN;
             }
         }
         
-        $fp = fopen($this->path, 'w+');
-
+        $total = 0; // local total
+        $b = hrtime(true);
+        $fp = fopen($this->path, 'a');
         foreach($json as $j) {
             if ($j->label === 'Project') {
                 continue;
@@ -247,13 +254,30 @@ GREMLIN;
             } else {
                 $this->tokenCounts[$j->label] = 1;
             }
+            ++$this->total;
+            ++$total;
         }
         fclose($fp);
-        $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
+        $b1 = hrtime(true);
+        $total_log = $this->total;
+        if ($this->total > 5000) {
+            $this->saveNodes();
+        }
+        $b2 = hrtime(true);
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
-
+        
+        $fp = fopen('./splitgraphson.log', 'a');
+        $d1 =  (int) ($b1 - $b) / 100000;
+        $d2 =  (int) ($b2 - $b1) / 100000;
+        fwrite($fp, "$fileName\t$total_log\t$d1\t$d2\n");
+        fclose($fp);
+    }
+    
+    private function saveNodes() {
+        $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
+        $this->total = 0;
     }
 
     private function json_encode($object) {

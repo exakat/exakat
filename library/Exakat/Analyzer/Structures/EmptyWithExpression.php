@@ -33,7 +33,7 @@ class EmptyWithExpression extends Analyzer {
         // only works for variables
         $this->atomIs('Empty')
              ->outIs('ARGUMENT')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 coalesce( __.hasLabel("Assignation").out("RIGHT"),
           __.filter{ true; }
         )

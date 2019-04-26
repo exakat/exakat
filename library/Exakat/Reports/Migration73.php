@@ -115,7 +115,7 @@ class Migration73 extends Ambassador {
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP73');
+        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP73'));
         $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
@@ -211,7 +211,7 @@ class Migration73 extends Ambassador {
         $analyzerHTML = $this->getTopAnalyzers($this->analyzerList);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
       Morris.Donut({

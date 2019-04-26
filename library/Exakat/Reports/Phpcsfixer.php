@@ -28,11 +28,11 @@ use Exakat\Datastore;
 use Exakat\Reports\Helpers\Results;
 
 class Phpcsfixer extends Reports {
-    const FILE_EXTENSION = 'json';
+    const FILE_EXTENSION = 'php';
     const FILE_FILENAME  = 'php_cs';
 
     public function generate($dirName, $fileName = null) {
-        $analyzerList =  $this->themes->getThemeAnalyzers('php-cs-fixable');
+        $analyzerList =  $this->themes->getThemeAnalyzers(array('php-cs-fixable'));
         $analysisResults = new Results($this->sqlite, $analyzerList);
         $analysisResults->load();
         $found = array_column($analysisResults->toArray(), 'analyzer');
@@ -44,14 +44,11 @@ class Phpcsfixer extends Reports {
         $config = array();
         foreach($found as $f) {
             $config[] = (array) $phpcsfixer[$f] ?? array();
+            $this->count();
         }
-        $config = array_merge($config);
+        $config = array_merge(...$config);
 
-        $array = array('encoding' => true,
-                        'line_ending' => true,
-                        'braces' => array('position_after_control_structures' => 'name'));
-                        
-        $configArray = var_export($array, true);
+        $configArray = var_export($config, true);
         $configArray = str_replace("\n", "\n                ", $configArray);
 
 $config = <<<PHPCS
@@ -65,14 +62,14 @@ return PhpCsFixer\Config::create()
     ->setRules(        
                 $configArray
     )
-    ->setFinder(\$finder)
-;
+    ->setFinder(\$finder);
+    
 PHPCS;
 
         if ($fileName === null) {
-            return $configArray;
+            return $config;
         } else {
-            file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, $configArray);
+            file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, $config);
             return true;
         }
     }

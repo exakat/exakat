@@ -978,7 +978,7 @@ GLOSSARY;
             if (strpos( $file, '.auto.') !== false) { continue; }
             $name = basename($file, '.json');
             $atoms[$name] = array_merge((array) json_decode(file_get_contents($file)),
-                                        (array) json_decode(file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]')),
+                                        (array) json_decode(file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]'))
                                         );
         }
         

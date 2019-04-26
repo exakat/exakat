@@ -122,7 +122,7 @@ class Project extends Tasks {
                                          ));
 
         $info = array();
-        if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
+        if (($vcsClass = Vcs::getVcs($this->config)) === 'None') {
             $info['vcs_type'] = 'Standalone archive';
         } else {
             $info['vcs_type'] = strtolower($vcsClass);

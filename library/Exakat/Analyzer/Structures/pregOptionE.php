@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
-    const FETCH_DELIMITER = <<<GREMLIN
+    const FETCH_DELIMITER = <<<'GREMLIN'
 filter{ 
     base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
     
@@ -43,7 +43,7 @@ filter{
 }
 GREMLIN;
         
-    const MAKE_DELIMITER_FINAL = <<<GREMLIN
+    const MAKE_DELIMITER_FINAL = <<<'GREMLIN'
 sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
     else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
@@ -52,7 +52,7 @@ sideEffect{
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
     else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
     else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
-    else if (delimiter == "\\$") { delimiter = "\\\\\\$"; delimiterFinal = "\\\\\\$"; } 
+    else if (delimiter == "\$") { delimiter = "\\\\\$"; delimiterFinal = "\\\\\$"; } 
     else if (delimiter == ".") { delimiter = "\\\\."; delimiterFinal = "\\\\."; } 
     else { delimiterFinal = delimiter; } 
 }
@@ -69,7 +69,7 @@ GREMLIN;
              ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?)\\$')
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?)\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -82,7 +82,7 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -99,7 +99,7 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
              ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important

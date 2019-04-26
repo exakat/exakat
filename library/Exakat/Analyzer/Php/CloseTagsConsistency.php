@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CloseTagsConsistency extends Analyzer {
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().properties('close_tag').size() > 0) {
     x2 = 'closeTag';
 } else {

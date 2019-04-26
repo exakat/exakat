@@ -243,7 +243,7 @@ class Tinkergraph extends Graph {
     }
 
     public function getDefinitionSQL() {
-        return <<<SQL
+        return <<<'SQL'
 SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
 FROM calls
 LEFT JOIN definitions 

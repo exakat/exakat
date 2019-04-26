@@ -42,7 +42,7 @@ class CloseNaming extends Analyzer {
         }
 
         // Identical, except for case
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .values("fullcode")
      .unique()

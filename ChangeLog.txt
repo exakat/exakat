@@ -1,4 +1,4 @@
-Version 1.7.6 (Jade Maiden of Yin, coming up)
+Version 1.7.7 (Sima Qing of Dingmao, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 1.7.6 (Jade Maiden of Yin, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.6 (Jade Maiden of Yin, 2019-04-22)
++ Architecture
+    + Refactored Class definition with return typehint 
+    + Added configuration for including development extensions.
+    + Extended LoadFinal typehint hunting
++ Report
+    + Phpcsfixer : new report
+    + Ambassador : report usage of overridden PHP functions
+    + Ambassador : new favorite : variable name in catch clause
++ Analyzer
+    + New analysis : array_merge and ellipsis should use coalesce
+    + New analysis : Report overridden PHP native functions
+    + New analysis : Merge all unset() into one
+    + Updated analysis : Added missing constant for curl, pgsql, openssl
+    + Updated analysis : Variadic are not variable arguments
+    + Updated analysis : Useless Reference argument extended to foreach()
+    + Updated analysis : Use Constant also covers pi()
+    + Updated analysis : Inclusion Wrong Case handles dirname with 2nd argument
+    + Updated analysis : Useless Argument : handles some edge cases with arrays
+    + Checked unit tests : 2947 / 2975 test pass (99% pass)
++ Tokenizer
+    + Upgraded handling of isRead and isModified attributes
+    + Changed variadic argument counts in method declarations
+    + Fixed original value in 'Sign'
 
 Version 1.7.5 (Xue King Zhuanlun, 2019-04-15)
 + Architecture

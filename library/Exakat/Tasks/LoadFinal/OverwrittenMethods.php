@@ -33,7 +33,7 @@ class OverwrittenMethods extends LoadFinal {
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'name')
               ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)

@@ -139,7 +139,7 @@ class LoadFinal {
         $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
         
-        // This one is doubled below. 
+        // This one is doubled below.
         $this->log('SetClassRemoteDefinitionWithTypehint');
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
@@ -197,7 +197,7 @@ class LoadFinal {
         $this->log('FinishIsModified');
         
         // stats calulcation.
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .groupCount('m')
@@ -241,7 +241,7 @@ GREMLIN;
     private function removeInterfaceToClassExtends() {
         display('fixing Fullnspath for Functions');
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Interface")
      .out("EXTENDS")
      .inE()
@@ -255,7 +255,7 @@ GREMLIN;
         display($result->toInt().' removed interface extends link');
         $this->log->log(__METHOD__);
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class")
      .out("EXTENDS")
      .inE()
@@ -269,7 +269,7 @@ GREMLIN;
         display($result->toInt().' removed class extends link');
         $this->log->log(__METHOD__);
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Class")
      .out("IMPLEMENTS")
      .inE()
@@ -283,7 +283,7 @@ GREMLIN;
         display($result->toInt().' removed class implements link');
         $this->log->log(__METHOD__);
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Usetrait")
      .out("USE")
      .inE()
@@ -302,7 +302,7 @@ GREMLIN;
     private function fixFullnspathFunctions() {
         display('fixing Fullnspath for Functions');
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .as("identifier")
@@ -341,7 +341,7 @@ GREMLIN;
         if (empty($constants)) {
             display('No PHP Constants');
         } else {
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
@@ -382,22 +382,22 @@ GREMLIN;
         display("spotFallbackConstants\n");
         
         // Define-style constant definitions
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Defineconstant")
      .out("NAME")
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
-     .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\\$").getCount() == 0 }
+     .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\$").getCount() == 0 }
      .values('fullnspath').unique();
 GREMLIN;
         $defineConstants = $this->gremlin->query($query)
                                          ->toArray();
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Const")
      .not( where( __.in("CONST") ) )  // Not a class or an interface
      .out("CONST")
      .out("NAME")
-     .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+     .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\$").getCount() == 1 }
      .values('fullnspath').unique();
 
 GREMLIN;
@@ -413,7 +413,7 @@ GREMLIN;
         }
         if (!empty($defineConstants)) {
             // This only works with define() and case sensitivity
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
@@ -434,7 +434,7 @@ GREMLIN;
             // Based on define() definitions
             $this->logTime('constants define : '.count($defineConstants));
 
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
@@ -456,7 +456,7 @@ GREMLIN;
         $this->logTime('constants const : '.count($constConstants));
         if (!empty($constConstants)) {
             // Based on const definitions
-            $query = <<<GREMLIN
+            $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION", "EXTENDS", "IMPLEMENTS") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); 
@@ -470,7 +470,7 @@ g.V().hasLabel("Identifier", "Nsname")
              .not( where( __.in("CONST") ) ) 
              .out("CONST")
              .out("NAME")
-             .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+             .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\$").getCount() == 1 }
        )
        .count()
 
@@ -514,7 +514,7 @@ GREMLIN;
         display('defaulting Identifiers and Nsname');
         // fix path for constants with Const
         // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier")
      .not(has("noDelimiter"))
      .sideEffect{ 
@@ -529,7 +529,7 @@ GREMLIN;
         display("defaulting $res Identifiers");
 
         // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Nsname")
      .not(has("noDelimiter"))
      .sideEffect{ 
@@ -557,7 +557,7 @@ GREMLIN;
         display('propagating Constant value in Const');
         // fix path for constants with Const
         // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname", "Staticconstant").not(has("noDelimiter")).as("init")
      .in("DEFINITION").out('VALUE').has("noDelimiter").sideEffect{ x = it.get(); }
      .select('init').sideEffect{ 
@@ -574,7 +574,7 @@ GREMLIN;
 
         display('propagating Constant value in Concatenations');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Concatenation").not(has("noDelimiter"))
      .sideEffect{ x = []; }
      .where( __.out("CONCAT").hasLabel("Identifier", "Nsname", "Staticconstant") )
@@ -601,7 +601,7 @@ GREMLIN;
 
         display('propagating Constant value in Sign');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Sign").not(has("intval"))
      .where( __.out("SIGN").hasLabel("Identifier", "Nsname") )
      .not(where( __.out("SIGN").not(has("intval")) ) )
@@ -627,7 +627,7 @@ GREMLIN;
 
         display('propagating Constant value in Addition');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Addition").not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -653,7 +653,7 @@ GREMLIN;
 
         display('propagating Constant value in Power');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Power").not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -676,7 +676,7 @@ GREMLIN;
         
         display('propagating Constant value in Comparison');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Comparison").has("constant", true).not(has("boolean"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -716,7 +716,7 @@ GREMLIN;
 
         display('propagating Constant value in Logical');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Logical").has("constant", true).not(has("boolean"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -753,7 +753,7 @@ GREMLIN;
 
         display('propagating Constant value in Parenthesis');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Parenthesis").not(has("intval"))
      .where( __.out("CODE").has("intval"))
      .where( __.out("CODE").sideEffect{ x = it.get(); }.count())
@@ -773,7 +773,7 @@ GREMLIN;
 
         display('propagating Constant value in Not');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Not").not(has("intval"))
      .has("token", within("T_BANG", "T_TILDE"))
      .where( __.out("NOT").has("intval"))
@@ -799,7 +799,7 @@ GREMLIN;
 
         display('propagating Constant value in Coalesce');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Coalesce").not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -827,7 +827,7 @@ GREMLIN;
 
         display('propagating Constant value in Ternary');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Ternary").has("constant", true).not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("CONDITION", "THEN", "ELSE").hasLabel("Identifier", "Nsname") )
@@ -860,7 +860,7 @@ GREMLIN;
 
         display('propagating Constant value in Bitshift');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Bitshift").not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
@@ -888,7 +888,7 @@ GREMLIN;
 
         display('propagating Constant value in Multiplication');
         // fix path for constants with Const
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Multiplication").not(has("intval"))
      .sideEffect{ x = []; }
      .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )

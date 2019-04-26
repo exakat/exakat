@@ -32,7 +32,7 @@ class Phpcity extends Reports {
     public function _generate($analyzerList) {
         $results = array();
         
-        $query = <<<SQL
+        $query = <<<'SQL'
 SELECT
      cit.id,
      files.file AS file,

@@ -32,17 +32,17 @@ class CouldBeStatic extends Analyzer {
     }
     
     public function analyze() {
-        $uniqueGlobals = $this->query(<<<GREMLIN
+        $uniqueGlobals = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Globaldefinition").groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet();
 GREMLIN
 )->toArray();
 
-        $globalvar = $this->query(<<<GREMLIN
+        $globalvar = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Array").values("globalvar");
 GREMLIN
 )->toArray();
 
-        $implicitvar = $this->query(<<<GREMLIN
+        $implicitvar = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Variable", "Globaldefinition").where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal")).values("code");
 GREMLIN
 )->toArray();

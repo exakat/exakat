@@ -29,8 +29,8 @@ class NewOnFunctioncallOrIdentifier extends Analyzer {
 
     public function analyze() {
 
-        $mapping = <<<GREMLIN
-if ( (it.get().value("fullcode") =~ "\\\\(" ).getCount() != 0 ) {
+        $mapping = <<<'GREMLIN'
+if ( (it.get().value("fullcode") =~ "\\(" ).getCount() != 0 ) {
     x2 = 'Newcall';
 } else {
     x2 = 'Identifier';

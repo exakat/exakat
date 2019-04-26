@@ -37,7 +37,7 @@ class UnusedClass extends Analyzer {
         $this->atomIs('Class')
              ->isNot('abstract', true)
              ->analyzerIsNot('Classes/TestClass')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     where(
         __.out("DEFINITION").not( 
@@ -55,7 +55,7 @@ GREMLIN
 
         $this->atomIs('Class')
              ->is('abstract', true)
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 not(
     where(
         out("DEFINITION").in("EXTENDS")

@@ -47,7 +47,7 @@ class History extends Reports {
         $res = $sqlite->querySingle($query);
         
         if (empty($res)) {
-            $sqlite->query(<<<SQLITE
+            $sqlite->query(<<<'SQLITE'
 CREATE TABLE hash (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   serial TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE hash (
 SQLITE
 );
 
-            $sqlite->query(<<<SQLITE
+            $sqlite->query(<<<'SQLITE'
 CREATE TABLE resultsCounts ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     serial TEXT,

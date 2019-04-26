@@ -1,0 +1,16 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: php:7.3-cli-stretch
+  script:
+    - bash ci/docker_install.sh
+
+test:
+  stage: test
+  image: php:7.3-cli-stretch
+  script:
+    - sh ci/docker_install.sh
+    - phpunit --testsuite One

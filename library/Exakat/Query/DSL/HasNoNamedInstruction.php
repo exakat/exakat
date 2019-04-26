@@ -34,7 +34,7 @@ class HasNoNamedInstruction extends DSL {
             return $this->hasNoInstruction($atom);
         }
 
-        $gremlin = <<<GREMLIN
+        $gremlin = <<<'GREMLIN'
 not( 
     where( 
         __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File"))

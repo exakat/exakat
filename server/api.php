@@ -165,8 +165,10 @@ function doctor($args) {
         shell_exec('__PHP__ __EXAKAT__ queue doctor');
         serverLog('doctor');
 
-        echo json_encode(array('doctor' => $project, 
-                               'start' => date('r')));
+        error('No project configured', '');
+
+        echo json_encode(array('doctor' => 'no project', 
+                               'start'  => date('r')));
     } else {
         $project = $args[$id + 1];
 
@@ -209,7 +211,6 @@ function fetch($args) {
     }
 
     $id = array_search('-format', $args);
-    $format = $args[$id + 1];
 
     $json = @file_get_contents('projects/.exakat/Project.json');
     $json = json_decode($json);

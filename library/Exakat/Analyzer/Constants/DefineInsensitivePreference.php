@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DefineInsensitivePreference extends Analyzer {
 
     public function analyze() {
-        $mapping = <<<GREMLIN
+        $mapping = <<<'GREMLIN'
 if (it.get().vertices(OUT, "CASE").any()) {
     x2 = 1;
 } else {

@@ -4,7 +4,7 @@ namespace Test\Extensions;
 
 use Test\Analyzer;
 
-include_once './Test/Analyzer.php';
+include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class Extwikidiff2 extends Analyzer {
     /* 1 methods */
