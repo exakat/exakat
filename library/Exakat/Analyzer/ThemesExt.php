@@ -219,5 +219,15 @@ class ThemesExt {
         }
     }
 
+    public function getAnalyzerInExtension($name) {
+        $return = array();
+        
+        foreach($this->all as $ext) {
+            $return[] = preg_grep("#/$name\$#", $ext);
+        }
+
+        return array_merge(...$return ?? array(array()) );
+    }
+
 }
 ?>

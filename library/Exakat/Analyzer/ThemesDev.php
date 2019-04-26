@@ -64,5 +64,12 @@ class ThemesDev {
         
         return array_merge(...$return);
     }
+
+    public function getAnalyzerInExtension($name) {
+        if (!isset($this->all['All'])) {
+            return array();
+        }
+        return preg_grep("#/$name\$#", $this->all['All']);
+    }
 }
 ?>

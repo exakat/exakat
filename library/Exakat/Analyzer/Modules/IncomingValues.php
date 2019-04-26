@@ -20,20 +20,20 @@
  *
 */
 
-namespace Exakat\Analyzer\Php;
+namespace Exakat\Analyzer\Modules;
 
 use Exakat\Analyzer\Analyzer;
 
-class IncomingVariables extends Analyzer {
+class IncomingValues extends Analyzer {
+    public function dependsOn() {
+        $incomingValues = $this->themes->getAnalyzerInExtension('IncomingValues');
+
+        return $incomingValues;
+    }
+
     public function analyze() {
-        // $_POST 
-        $this->atomIs('Phpvariable')
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILES', '$_COOKIE'))
-             ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->outIs('INDEX')
-             ->atomIs('String');
-        $this->prepareQuery();
+        // empty on purpose, all is done in dependsOn()
+        return;
     }
 }
 

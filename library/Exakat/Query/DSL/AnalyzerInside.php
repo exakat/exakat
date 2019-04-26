@@ -20,21 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\Php;
 
+namespace Exakat\Query\DSL;
+
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class IncomingVariables extends Analyzer {
-    public function analyze() {
-        // $_POST 
-        $this->atomIs('Phpvariable')
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILES', '$_COOKIE'))
-             ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->outIs('INDEX')
-             ->atomIs('String');
-        $this->prepareQuery();
+class AnalyzerInside extends DSL {
+    public function run() : Command {
+        list($analyzers) = func_get_args();
+
+//        $this->assertAtom($atoms);
+//        $diff = $this->normalizeAtoms($atoms);
+//        if (empty($diff)) {
+//            return new Command(Query::STOP_QUERY);
+//        }
+
+        $gremlin = 'emit().repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').where( __.in("ANALYZED").has("analyzer", within(***)))';
+        return new Command($gremlin, array($analyzers));
     }
 }
-
 ?>

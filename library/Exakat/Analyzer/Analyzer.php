@@ -609,7 +609,13 @@ GREMLIN;
         
         return $this;
     }
-    
+
+    public function analyzerInside($analyzers) {
+        $this->query->analyzerInside($analyzers);
+        
+        return $this;
+    }
+
     public function atomInsideExpression($atom) {
         $this->query->atomInsideExpression($atom);
         

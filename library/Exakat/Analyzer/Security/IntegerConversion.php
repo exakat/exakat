@@ -25,7 +25,23 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class IntegerConversion extends Analyzer {
+    private $dependsOn = null;
+    public function dependsOn() {
+        if ($this->dependsOn === null) {
+            $module = $this->themes->getInstance('Modules/IncomingValues', $this->gremlin, $this->config);
+            $modules = $module->dependsOn();
+    
+            $this->dependsOn = array_merge( array('Php/IncomingValues'),
+                                            $modules,
+                                          );
+        }
+                                      
+        return $this->dependsOn;
+    }
+
     public function analyze() {
+        $incomingValues = $this->dependsOn();
+
         // $a = $_GET['a']; if ($a == 3) {}
         $this->atomIs('Variable')
              ->inIs(array('LEFT', 'RIGHT'))
@@ -40,7 +56,7 @@ class IntegerConversion extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomInside('Phpvariable')
+             ->analyzerIs($incomingValues)
              ->back('results');
         $this->prepareQuery();
 
@@ -60,13 +76,12 @@ class IntegerConversion extends Analyzer {
              // methods, closures, functions...
              ->outIs('DEFINITION')
              ->outWithRank('ARGUMENT', 'ranked')
-             ->atomInside('Phpvariable')
+             ->analyzerIs($incomingValues)
              ->back('results');
         $this->prepareQuery();
 
         // if ($_COOKIES['a'] == 3) {} }
-        $this->atomIs('Phpvariable')
-             ->inIsIE('VARIABLE')
+        $this->analyzerIs($incomingValues)
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIsNot(array('===', '!=='), self::TRANSLATE, self::CASE_SENSITIVE)
@@ -77,7 +92,7 @@ class IntegerConversion extends Analyzer {
         $this->prepareQuery();
 
         // if ((int) $_COOKIES['a'] === 3) {} }
-        $this->atomIs('Phpvariable')
+        $this->analyzerIs($incomingValues)
              ->inIsIE('VARIABLE')
              ->inIs('CAST') 
              ->tokenIs('T_INT_CAST') // casting to integer

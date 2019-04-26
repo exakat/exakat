@@ -144,6 +144,16 @@ class Themes {
         return array_merge($main, $extra, $ext);
     }
 
+    public function getAnalyzerInExtension($name) {
+//        $main  = $this->main ->getAnalyzerInExtension($name);
+//        $extra = $this->extra->getAnalyzerInExtension($name);
+        $ext   = $this->ext  ->getAnalyzerInExtension($name);
+        $dev   = $this->dev  ->getAnalyzerInExtension($name);
+        
+//        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($ext, $dev);
+    }
+
     public static function resetCache() {
         self::$instanciated = array();
     }
