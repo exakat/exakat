@@ -87,22 +87,22 @@ class Themes {
 
     public function getFrequences() {
         $main = $this->main->getFrequences();
-        
+
         return array_merge($main);
     }
     
     public function listAllAnalyzer($folder = null) {
-        $main = $this->main->listAllAnalyzer($folder);
+        $main = $this->main  ->listAllAnalyzer($folder);
         $extra = $this->extra->listAllAnalyzer($folder);
-        $ext = $this->ext->listAllAnalyzer($folder);
+        $ext = $this->ext    ->listAllAnalyzer($folder);
         
         return array_merge($main, $extra, $ext);
     }
 
     public function listAllThemes($theme = null) {
-        $main = $this->main->listAllThemes($theme);
+        $main = $this->main  ->listAllThemes($theme);
         $extra = $this->extra->listAllThemes($theme);
-        $ext = $this->ext->listAllThemes($theme);
+        $ext = $this->ext    ->listAllThemes($theme);
         
         return array_merge($main, $extra, $ext);
     }
@@ -123,18 +123,18 @@ class Themes {
         return false;
     }
 
-    public function getSuggestionThema(array $thema) {
-        $main  = $this->main->getSuggestionThema($thema);
-        $extra = $this->extra->getSuggestionThema($thema);
-        $ext   = $this->ext->getSuggestionThema($thema);
+    public function getSuggestionThema(array $theme) {
+        $main  = $this->main ->getSuggestionThema($theme);
+        $extra = $this->extra->getSuggestionThema($theme);
+        $ext   = $this->ext  ->getSuggestionThema($theme);
         
         return array_merge($main, $extra, $ext);
     }
     
     public function getSuggestionClass($name) {
-        $main  = $this->main->getSuggestionClass($name);
+        $main  = $this->main ->getSuggestionClass($name);
         $extra = $this->extra->getSuggestionClass($name);
-        $ext   = $this->ext->getSuggestionClass($name);
+        $ext   = $this->ext  ->getSuggestionClass($name);
         
         return array_merge($main, $extra, $ext);
     }
