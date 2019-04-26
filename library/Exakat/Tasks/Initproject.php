@@ -32,6 +32,7 @@ use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 use Exakat\Project;
 use Exakat\Vcs\Vcs;
+use Exakat\Vcs\None;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -89,15 +90,20 @@ class Initproject extends Tasks {
         $repositoryBranch    = '';
         $repositoryTag       = '';
         $include_dirs        = $this->config->include_dirs;
+
+        $dotProject          = ".$project";
+        if (empty($repositoryURL)) {
+            $vcs = new None($dotProject, $this->config->projects_root);
+        } else {
+            $vcsClass = Vcs::getVcs($this->config);
+            $vcs = new $vcsClass($dotProject, $this->config->projects_root);
+        }
  
-        if ($repositoryURL === false) {
-            $vcs = 'none';
+        if (empty($repositoryURL)) {
             $projectName = $project;
         } elseif ($this->config->symlink === true) {
-            $vcs = 'symlink';
             $projectName = basename($repositoryURL);
         } elseif ($this->config->svn === true) {
-            $vcs = 'svn';
             $projectName = basename($repositoryURL);
             if (in_array($projectName, array('trunk', 'code'))) {
                 $projectName = basename(dirname($repositoryURL));
@@ -106,7 +112,6 @@ class Initproject extends Tasks {
                 }
             }
         } elseif ($this->config->git === true) {
-            $vcs = 'git';
             $projectName = basename($repositoryURL);
             $projectName = str_replace('.git', '', $projectName);
             
@@ -122,41 +127,32 @@ class Initproject extends Tasks {
                 $repositoryTag =  '';
             }
         } elseif ($this->config->cvs === true) {
-            $vcs = 'cvs';
             $projectName = basename($repositoryURL);
         } elseif ($this->config->copy === true) {
-            $vcs = 'copy';
             $projectName = basename($repositoryURL);
         } elseif ($this->config->bzr === true) {
-            $vcs = 'bzr';
             list(, $projectName) = explode(':', $repositoryURL);
         } elseif ($this->config->hg === true) {
-            $vcs = 'hg';
             $projectName = basename($repositoryURL);
         } elseif ($this->config->zip === true) {
-            $vcs = 'zip';
             $projectName = basename($repositoryURL);
             $projectName = str_replace('.zip', '', $projectName);
         } elseif ($this->config->rar === true) {
-            $vcs = 'rar';
             $projectName = basename($repositoryURL);
             $projectName = str_replace('.rar', '', $projectName);
         } elseif ($this->config->tgz === true) {
-            $vcs = 'tgz';
             $projectName = basename($repositoryURL);
             $projectName = str_replace(array('.tgz', '.tar.gz'), '', $projectName);
         } elseif ($this->config->composer === true) {
-            $vcs = 'composer';
             $projectName = str_replace('/', '_', $repositoryURL);
  
             // Updating config.ini to include the vendor directory
             $include_dirs[] = "/vendor/$repositoryURL";
         } else {
-            $vcs = '';
             $projectName = basename($repositoryURL);
             $projectName = preg_replace('/\.git/', '', $projectName);
         }
- 
+
         // default initial config. Found in test project.
         $phpversion = $this->config->phpversion;
         if ($this->config->composer === true) {
@@ -170,7 +166,7 @@ class Initproject extends Tasks {
         $projectConfig->setConfig('phpversion',     $phpversion);
         $projectConfig->setConfig('project_name',   $projectName);
         $projectConfig->setConfig('project_url',    $repositoryURL);
-        $projectConfig->setConfig('project_vcs',    $vcs);
+        $projectConfig->setConfig('project_vcs',    $vcs->getName());
         $projectConfig->setConfig('project_tag',    $repositoryBranch);
         $projectConfig->setConfig('project_branch', $repositoryTag);
  
@@ -180,10 +176,6 @@ class Initproject extends Tasks {
         shell_exec("chmod -R g+w $tmpPath");
         $repositoryDetails = parse_url($repositoryURL);
 
-        $dotProject          = ".$project";
-        
-        $vcsClass = Vcs::getVcs($this->config);
-        $vcs = new $vcsClass($dotProject, $this->config->projects_root);
         if (!empty($this->config->branch)){
             $vcs->setBranch($this->config->branch);
         }

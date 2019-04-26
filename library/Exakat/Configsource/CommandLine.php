@@ -38,7 +38,6 @@ class CommandLine extends Config {
 
                                  '-nodep'     => 'noDependencies',
                                  '-norefresh' => 'noRefresh',
-                                 '-none'      => 'none',
                                  '-text'      => 'text',
                                  '-o'         => 'output',
                                  '-stop'      => 'stop',
@@ -61,6 +60,7 @@ class CommandLine extends Config {
                                  '-7z'        => 'sevenz',
                                  '-git'       => 'git',
                                  '-cvs'       => 'cvs',
+                                 '-none'      => 'none',
                                  );
 
     private $valueOptions   = array('-f'            => 'filename',
@@ -127,7 +127,7 @@ class CommandLine extends Config {
         }
 
         // TODO : move this to VCS
-        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', );
+        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', 'none', );
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {

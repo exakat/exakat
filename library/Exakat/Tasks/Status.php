@@ -95,7 +95,7 @@ class Status extends Tasks {
             $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
         }
 
-        if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
+        if (($vcsClass = Vcs::getVcs($this->config)) === 'None') {
             $status['hash']      = 'None';
             $status['updatable'] = 'N/A';
         } else {

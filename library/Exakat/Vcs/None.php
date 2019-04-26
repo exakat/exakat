@@ -22,7 +22,7 @@
 
 namespace Exakat\Vcs;
 
-class EmptyCode extends Vcs {
+class None extends Vcs {
     public function clone($source) {
     }
 
