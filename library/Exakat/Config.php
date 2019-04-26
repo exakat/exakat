@@ -25,6 +25,8 @@ namespace Exakat;
 use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
+use Exakat\Autoload\AutoloadDev;
+use Exakat\Autoload\AutoloadExt;
 use Phar;
 
 class Config {
@@ -36,6 +38,7 @@ class Config {
     public $is_phar               = true;
     public $executable            = '';
     public $ext                   = null;
+    public $dev                   = null;
 
     private $projectConfig         = null;
     private $commandLineConfig     = null;
@@ -61,10 +64,6 @@ class Config {
             $this->dir_root      = phar::running();
             $this->ext_root      = substr(dirname(phar::running()).'/ext', 5);
 
-            // autoload extensions
-            $this->ext = new \AutoloadExt($this->ext_root);
-            $this->ext->registerAutoload();
-
             assert_options(ASSERT_ACTIVE, 0);
 
             error_reporting(0);
@@ -85,9 +84,6 @@ class Config {
             }
             $this->ext_root      = "{$this->dir_root}/ext";
 
-            // autoload extensions
-            $this->ext = new \AutoloadExt($this->ext_root);
-            $this->ext->registerAutoload();
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
@@ -156,6 +152,15 @@ class Config {
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
+
+        // autoload dev
+        $this->dev = new AutoloadDev($this->extension_dev);
+        $this->dev->registerAutoload();
+
+        // autoload extensions
+        $this->ext = new AutoloadExt($this->ext_root);
+        $this->ext->registerAutoload();
+
     }
 
     public function __isset($name) {

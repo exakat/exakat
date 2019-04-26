@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
-use AutoloadExt;
+use Exakat\Autoload\AutoloadExt;
 
 class ThemesMain {
     private static $sqlite = null;

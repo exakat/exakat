@@ -146,6 +146,7 @@ abstract class Analyzer {
         assert($config !== null, 'Can\'t call Analyzer without a config');
         $this->themes = new Themes("{$config->dir_root}/data/analyzers.sqlite",
                                    $config->ext,
+                                   $config->dev,
                                    $config->themas);
         $this->config = $config;
 

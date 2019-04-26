@@ -23,6 +23,7 @@
 namespace Exakat\Reports\Helpers;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Autoload\AutoloadExt;
 
 class Docs {
     private $pathToIni = null;
@@ -30,7 +31,7 @@ class Docs {
     
     private static $docs = null;
     
-    public function __construct($pathToIni, \AutoloadExt $ext = null) {
+    public function __construct($pathToIni, AutoloadExt $ext = null) {
         $this->pathToIni = $pathToIni;
         
         $this->ext = $ext;

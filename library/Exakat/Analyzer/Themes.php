@@ -24,19 +24,22 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
-use AutoloadExt;
+use Exakat\Autoload\AutoloadExt;
+use Exakat\Autoload\AutoloadDev;
 
 class Themes {
     private $main   = null;
     private $ext    = null;
     private $extra  = array();
+    private $dev    = null;
 
     private static $instanciated = array();
 
-    public function __construct($path, AutoloadExt $ext, array $extra_themes = array()) {
+    public function __construct($path, AutoloadExt $ext, AutoloadDev $dev, array $extra_themes = array()) {
         $this->main  = new ThemesMain($path);
         $this->ext   = new ThemesExt($ext, $ext);
         $this->extra = new ThemesExtra($extra_themes, $ext);
+        $this->dev   = new ThemesDev($dev, $dev);
     }
 
     public function __destruct() {
@@ -49,8 +52,9 @@ class Themes {
         $main  = $this->main ->getThemeAnalyzers($theme);
         $extra = $this->extra->getThemeAnalyzers($theme);
         $ext   = $this->ext  ->getThemeAnalyzers($theme);
+        $dev   = $this->dev  ->getThemeAnalyzers($theme);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getThemeForAnalyzer($analyzer) {
@@ -127,8 +131,9 @@ class Themes {
         $main  = $this->main ->getSuggestionThema($theme);
         $extra = $this->extra->getSuggestionThema($theme);
         $ext   = $this->ext  ->getSuggestionThema($theme);
+        $dev   = $this->dev  ->getSuggestionThema($theme);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
     
     public function getSuggestionClass($name) {

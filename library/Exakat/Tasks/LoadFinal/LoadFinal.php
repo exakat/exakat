@@ -936,6 +936,7 @@ GREMLIN;
 
         $themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
                              $this->config->ext,
+                             $this->config->dev,
                              $this->config->themas
                              );
 

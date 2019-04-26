@@ -23,10 +23,20 @@ try {
     $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){
-        include_once __DIR__.'/library/Autoload.php';
+        require __DIR__.'/library/helpers.php';
+        require __DIR__.'/library/Exakat/Autoload/Autoload.php';
     } else {
-        require_once phar::running().'/library/Autoload.php';
+        require phar::running().'/library/helpers.php';
+        require phar::running().'/library/Exakat/Autoload/Autoload.php';
     }
+    
+    register_shutdown_function('shutdown');
+    
+    spl_autoload_register(array(\Exakat\Autoload\Autoload::class, 'autoload_library'));
+    
+    if (file_exists(__DIR__.'/vendor/autoload.php')) {
+        require __DIR__.'/vendor/autoload.php';
+    } 
 
     $config = new \Exakat\Config($GLOBALS['argv']);
     
