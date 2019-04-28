@@ -30,7 +30,6 @@ use Exakat\Analyzer\Structures\UnknownPregOption;
 class UnknownPcre2Option extends Analyzer {
     public function analyze() {
         // Options list : S and X
-//        $options = '[a-zA-Z]*[^eimsuxADJU][a-zA-Z]*';
         $options = '[a-zA-Z\\\\s]*[S][a-zA-Z\\\\s]*';
         
         // preg_match with a string
@@ -94,7 +93,6 @@ class UnknownPcre2Option extends Analyzer {
              ->regexIs('noDelimiter', '\\\\\\\\['.$letters.']')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
