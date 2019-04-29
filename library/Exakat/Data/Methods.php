@@ -70,7 +70,7 @@ class Methods {
 
     public function getFunctionsLastArgsNotBoolean() {
         $query = <<<'SQL'
-SELECT '\\' || lower(methods.name) AS fullnspath, args_max - 1 AS position FROM methods 
+SELECT '\' || lower(methods.name) AS fullnspath, args_max - 1 AS position FROM methods 
 JOIN args_type ON args_type.name = methods.name
 WHERE methods.class = "PHP" AND
       (args_max = 1 AND not instr(arg0, 'bool') AND arg0 != '') OR   
@@ -154,7 +154,7 @@ SQL;
         $args = array('arg0', 'arg1');
         foreach($args as $id => $arg) {
             $query = <<<SQL
-SELECT $arg, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' AND $arg IN ('int', 'array', 'bool','string') GROUP BY $arg
+SELECT $arg, lower(GROUP_CONCAT('\' || name)) AS functions FROM args_type WHERE class='PHP' AND $arg IN ('int', 'array', 'bool','string') GROUP BY $arg
 SQL;
             $res = $this->sqlite->query($query);
 
@@ -188,7 +188,7 @@ SQL;
         $return = array();
 
         $query = <<<'SQL'
-SELECT return, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
+SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
 SQL;
         $res = $this->sqlite->query($query);
 
