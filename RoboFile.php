@@ -23,8 +23,8 @@
 use Symfony\Component\Finder\Finder;
 use Exakat\Exakat;
 
-include __DIR__.'/library/Autoload.php';
-spl_autoload_register('Autoload::autoload_library');
+include __DIR__.'/library/Exakat/Autoload/Autoload.php';
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 
 class RoboFile extends \Robo\Tasks {
     public function versionBump($version = null) {
