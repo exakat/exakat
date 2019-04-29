@@ -66,15 +66,15 @@ class Composer extends Reports {
             $composer->require->php = '^7.0';
         }
         
-        $setting = array();
         foreach($configureDirectives as $ext => $details) {
             if (in_array($ext, $noExtensions)) {
                 continue;
-            } elseif (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
+            } 
+            
+            if (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
                 $extName = 'ext-'.$ext;
                 if (!isset($composer->require->{$extName})) {
                     $composer->require->{$extName} = '*';
-                    $setting[] = "\"$extName\": \"*\"";
                 }
             }
         }

@@ -1880,16 +1880,18 @@ GREMLIN;
     protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
-        if (file_exists($fullpath)) {
-            $json = json_decode(file_get_contents($fullpath));
-        } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData("data/$file")) !== null) {
-            $json = json_decode($jsonString);
-        } else {
-            assert(false, "No JSON for '$file'.");
-        }
-
         static $cache;
-        if (!isset($cache[$fullpath])) {
+        if (isset($cache[$fullpath])) {
+            $json = $cache[$fullpath];
+        } else {
+            if (file_exists($fullpath)) {
+                $json = json_decode(file_get_contents($fullpath));
+            } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData("data/$file")) !== null) {
+                $json = json_decode($jsonString);
+            } else {
+                assert(false, "No JSON for '$file'.");
+            }
+
             $cache[$fullpath] = $json;
         }
         

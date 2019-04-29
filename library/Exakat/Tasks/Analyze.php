@@ -66,7 +66,6 @@ class Analyze extends Tasks {
         }
 
         $this->checkTokenLimit();
-        $begin = microtime(true);
 
         // Take this before we clean it up
         $this->checkAnalyzed();

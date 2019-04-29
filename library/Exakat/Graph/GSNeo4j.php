@@ -84,7 +84,6 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
-        $b = microtime(true);
         $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
@@ -112,7 +111,6 @@ class GSNeo4j extends Graph {
             return new GraphResults($result);
         } else {
             print 'Processing unknown type '.gettype($result).PHP_EOL;
-            var_dump($result);
             die(__METHOD__);
         }
     }

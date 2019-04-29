@@ -46,7 +46,6 @@ class MissingInclude extends Analyzer {
               ->select(array('file'    => 'fullcode',
                              'include' => 'fullcode'));
         $result = $this->rawQuery();
-//        print $result->count().' found'.PHP_EOL;
 
         $inclusions = array();
         $missing = array();

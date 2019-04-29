@@ -159,20 +159,6 @@ class Datastore {
 
         $this->checkTable($table);
 
-        $first = current($data);
-        if (is_array($first)) {
-            $cols = array_keys($first);
-        } else {
-            $query = "PRAGMA table_info($table)";
-            $res = $this->sqliteRead->query($query);
-
-            $cols = array();
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                if ($row['name'] === 'id') { continue; }
-                $cols[] = $row['name'];
-            }
-        }
-
         foreach($data as $col => $row) {
             if (is_array($row)) {
                 $d = array_values($row);

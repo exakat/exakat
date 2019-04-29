@@ -319,7 +319,6 @@ class Files extends Tasks {
     
     public static function findFiles($path, &$files, &$ignoredFiles, $config) {
         $ignore_dirs = $config->ignore_dirs;
-        $dir = $config->project;
 
         $ignore_files = parse_ini_file("{$config->dir_root}/data/ignore_files.ini");
         $ignore_files = array_flip($ignore_files['files']);

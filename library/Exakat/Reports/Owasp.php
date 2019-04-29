@@ -514,7 +514,7 @@ SQL
         $issuesHtml = '';
         $dataScript = '';
 
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">'.$value['label'].'</div>
                    <div class="block-cell text-center">'.$value['value'].'</div>
@@ -552,7 +552,7 @@ SQL;
 
         $html = '';
         $dataScript = '';
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             $html .= '<div class="clearfix">
                    <div class="block-cell">'.$value['label'].'</div>
                    <div class="block-cell text-center">'.$value['value'].'</div>

@@ -102,7 +102,7 @@ class ThemesExtra {
 
     public function getSeverities() {
         $return = array();
-        foreach($this->extra_themes as $theme => $analyzers) {
+        foreach($this->extra_themes as $analyzers) {
             foreach($analyzers as $analyzer)  {
                 $data = $this->ext->loadData("human/en/$analyzer.ini");
                 
@@ -120,7 +120,7 @@ class ThemesExtra {
 
     public function getTimesToFix() {
         $return = array();
-        foreach($this->extra_themes as $theme => $analyzers) {
+        foreach($this->extra_themes as $analyzers) {
             foreach($analyzers as $analyzer)  {
                 $data = $this->ext->loadData("human/en/$analyzer.ini");
                 

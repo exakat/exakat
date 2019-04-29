@@ -102,7 +102,7 @@ GREMLIN;
         $task->run();
         $this->log('FixFullnspathConstants');
 
-        $task = new spotPHPNativeConstants($this->gremlin, $this->config, $this->datastore);
+        $task = new SpotPHPNativeConstants($this->gremlin, $this->config, $this->datastore);
         $task->setPHPconstants($this->PHPconstants);
         $task->run();
         $this->log('spotPHPNativeConstants');
