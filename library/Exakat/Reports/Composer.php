@@ -69,7 +69,7 @@ class Composer extends Reports {
         foreach($configureDirectives as $ext => $details) {
             if (in_array($ext, $noExtensions)) {
                 continue;
-            } 
+            }
             
             if (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
                 $extName = 'ext-'.$ext;

@@ -45,7 +45,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         if (empty($constantsPHP)) {
             display('No PHP Constants');
             return;
-        } 
+        }
         
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS )
@@ -66,7 +66,7 @@ GREMLIN
         display($result->toInt().' SpotPHPNativeConstants');
     }
     
-    function setPHPconstants(array $PHPconstants = array()) {
+    public function setPHPconstants(array $PHPconstants = array()) {
         $this->PHPconstants = $PHPconstants;
     }
 }
