@@ -34,6 +34,8 @@ class SpotPHPNativeFunctions extends LoadFinal {
 
         $query = $this->newQuery('SpotPHPNativeFunctions fallingback');
         $query->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
+              ->isNot('absolute', true)
+              ->tokenIs('T_STRING')
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
               ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
@@ -53,8 +55,10 @@ class SpotPHPNativeFunctions extends LoadFinal {
             $query = $this->newQuery('SpotPHPNativeFunctions update');
             $query->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
                   ->has('fullnspath')
+                  ->isNot('absolute', true)
+                  ->tokenIs('T_STRING')
                   ->hasNoIn('DEFINITION')
-                  ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\\\\\"); parts.size() > 1 }', array(), array())
+                  ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
                   ->raw('filter{ name = parts.last().toLowerCase(); name in *** }', array(), array($diff))
                   ->raw('sideEffect{
          fullnspath = "\\\\" + name;

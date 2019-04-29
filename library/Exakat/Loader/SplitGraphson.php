@@ -224,7 +224,6 @@ GREMLIN;
         }
         
         $total = 0; // local total
-        $b = hrtime(true);
         $fp = fopen($this->path, 'a');
         foreach($json as $j) {
             if ($j->label === 'Project') {
@@ -258,20 +257,13 @@ GREMLIN;
             ++$total;
         }
         fclose($fp);
-        $b1 = hrtime(true);
+
         $total_log = $this->total;
         if ($this->total > 5000) {
             $this->saveNodes();
         }
-        $b2 = hrtime(true);
-        
+
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
-        
-        $fp = fopen('./splitgraphson.log', 'a');
-        $d1 =  (int) ($b1 - $b) / 100000;
-        $d2 =  (int) ($b2 - $b1) / 100000;
-        fwrite($fp, "$fileName\t$total_log\t$d1\t$d2\n");
-        fclose($fp);
     }
     
     private function saveNodes() {

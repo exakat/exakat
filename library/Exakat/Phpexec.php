@@ -254,13 +254,9 @@ class Phpexec {
             return true;
         }
 
+        // Warnings are considered OK.
         if (preg_match('#^(?:PHP )?Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
-            $this->error = array('error' => $r[1],
-                                 'file'  => $r[2],
-                                 'line'  => $r[3],
-                                 );
-
-            return true;
+            return false;
         }
 
         if (preg_match('#^(?:PHP )?Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {

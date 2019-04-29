@@ -28,6 +28,7 @@ class SuspiciousComparison extends Analyzer {
     public function analyze() {
         $functions = self::$methods->getFunctionsLastArgsNotBoolean();
 
+        // intval($c === 3);
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

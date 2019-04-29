@@ -73,8 +73,22 @@ class LoadFinal {
 
         $this->removeInterfaceToClassExtends();
         $this->log('removeInterfaceToClassExtends');
+
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
+
+        // stats calulcation : it will fill the functioncall list
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .groupCount('m')
+     .by("fullnspath")
+     .cap('m')
+GREMLIN;
+        $fixed = $this->gremlin->query($query)->toArray();
+        if (!empty($fixed)) {
+            $this->datastore->addRow('functioncalls', $fixed[0]);
+        }
 
         $task = new SpotPHPNativeFunctions($this->gremlin, $this->config, $this->datastore);
         $task->setPHPfunctions($this->PHPfunctions);
@@ -198,19 +212,6 @@ class LoadFinal {
         $task->setMethods(new Methods($this->config));
         $task->run();
         $this->log('FinishIsModified');
-        
-        // stats calulcation.
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Functioncall")
-     .has("fullnspath")
-     .groupCount('m')
-     .by("fullnspath")
-     .cap('m')
-GREMLIN;
-        $fixed = $this->gremlin->query($query)->toArray();
-        if (!empty($fixed)) {
-            $this->datastore->addRow('functioncalls', $fixed[0]);
-        }
 
         display('End load final');
         $this->logTime('Final');
@@ -307,6 +308,8 @@ GREMLIN;
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
+     .not(has('absolute', true))
+     .has('token', 'T_STRING')
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
