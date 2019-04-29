@@ -87,7 +87,10 @@ class LoadFinal {
         $task = new FixFullnspathConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('FixFullnspathConstants');
-        $this->spotPHPNativeConstants();
+
+        $task = new spotPHPNativeConstants($this->gremlin, $this->config, $this->datastore);
+        $task->setPHPconstants($this->PHPconstants);
+        $task->run();
         $this->log('spotPHPNativeConstants');
 
         $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
@@ -318,46 +321,6 @@ GREMLIN;
         $result = $this->gremlin->query($query);
 
         display($result->toInt().' fixed Fullnspath for Functions');
-        $this->log->log(__METHOD__);
-    }
-    
-    private function spotPHPNativeConstants() {
-        $title = 'mark PHP native constants call';
-        $constants = call_user_func_array('array_merge', $this->PHPconstants);
-        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
-        // May be array_keys
-        $constantsPHP = array_values($constants);
-
-        $query = new Query(0, $this->config->project, 'spotPHPNativeConstants', null, $this->datastore);
-        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
-              ->has('fullnspath')
-              ->values('code')
-              ->unique();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $constants = array_values(array_intersect($result->toArray(), $this->dictCode->translate($constantsPHP) ));
-
-        if (empty($constants)) {
-            display('No PHP Constants');
-        } else {
-            $query = <<<'GREMLIN'
-g.V().hasLabel("Identifier")
-     .has("fullnspath")
-     .not(where( __.in("DEFINITION")))
-     .not(where( __.in("NAME").hasLabel("Defineconstant")))
-     .filter{ it.get().value("code") in arg1 }
-     .sideEffect{
-         tokens = it.get().value("fullnspath").tokenize('\\\\');
-         fullnspath = "\\\\" + tokens.last();
-         it.get().property("fullnspath", fullnspath); 
-     }.count();
-
-GREMLIN;
-
-            $this->runQuery($query, $title, array('arg1' => $constants), __METHOD__);
-        }
-
         $this->log->log(__METHOD__);
     }
     
