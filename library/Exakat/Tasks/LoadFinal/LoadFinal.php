@@ -73,6 +73,7 @@ class LoadFinal {
 
         $this->removeInterfaceToClassExtends();
         $this->log('removeInterfaceToClassExtends');
+
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
 
@@ -307,6 +308,8 @@ GREMLIN;
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
+     .not(has('absolute', true))
+     .has('token', 'T_STRING')
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
