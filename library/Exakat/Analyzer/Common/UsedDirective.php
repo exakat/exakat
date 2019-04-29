@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Common;
 use Exakat\Analyzer\Analyzer;
 
 class UsedDirective extends Analyzer {
-    protected $directives = '';
+    protected $directives = array();
     
     public function analyze() {
         // Processing ini_get_all ?
@@ -57,6 +57,7 @@ class UsedDirective extends Analyzer {
             $functions[] = array('\\magic_quotes_gpc',
                                 );
         }
+
         if (in_array('magic_quotes_runtime', $this->directives)) {
             $functions[] = array('\\get_magic_quotes_runtime',
                                  '\\set_magic_quotes_runtime',
@@ -67,7 +68,7 @@ class UsedDirective extends Analyzer {
             $functions[] = array('\\set_time_limit',
                                 );
         }
-        
+
         if (empty($functions)) {
             return;
         }
@@ -82,7 +83,6 @@ class UsedDirective extends Analyzer {
                                     '\\set_time_limit',
                                     ));
         $this->prepareQuery();
-
     }
 }
 

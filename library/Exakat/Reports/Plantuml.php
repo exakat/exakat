@@ -43,7 +43,6 @@ SQL
         $ids = array();
         $puml = array();
         $extends = array();
-        $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue');
         $subgraphs = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

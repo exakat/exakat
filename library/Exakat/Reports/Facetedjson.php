@@ -44,8 +44,6 @@ SELECT  id AS id,
 SQL;
         $res = $sqlite->query($sqlQuery);
 
-        $datastore = new Datastore($this->config);
-
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $ini = $this->getDocs($row['analyzer']);

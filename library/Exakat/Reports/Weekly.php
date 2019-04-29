@@ -663,10 +663,7 @@ SQL;
     }
     
     protected function generateWeeklyTable() {
-        $data = $this->getFilesCount($this->weeks[$this->current]->analysis, self::TOPLIMIT);
-
-        $html = '';
-        $html .= str_repeat('<div class="clearfix">
+        $html = str_repeat('<div class="clearfix">
               <div class="block-cell-name">&nbsp;</div>
               <div class="block-cell-issue text-center">&nbsp;</div>
           </div>', 5);

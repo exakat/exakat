@@ -103,7 +103,7 @@ class Stats extends Reports {
         }
         
         $results = $this->extensions;
-        foreach($results as $section => &$analyzers) {
+        foreach($results as &$analyzers) {
             foreach($analyzers as $name => &$analyzer) {
                 $analyzer = $atoms[$analyzer] ?? 0;
             }

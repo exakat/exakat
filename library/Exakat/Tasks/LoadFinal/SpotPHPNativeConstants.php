@@ -42,7 +42,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        if (empty($constants)) {
+        if (empty($constantsPHP)) {
             display('No PHP Constants');
             return;
         } 
@@ -51,7 +51,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS )
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
-              ->codeIs($constants, Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+              ->codeIs($constantsPHP, Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
               ->raw(<<<'GREMLIN'
 sideEffect{
    tokens = it.get().value("fullnspath").tokenize('\\');

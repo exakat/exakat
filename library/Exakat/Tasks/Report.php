@@ -94,7 +94,6 @@ class Report extends Tasks {
             display("Building report for project {$this->config->project} in '".$file."', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
-            $file = 'STDOUT';
             display("Building report for project {$this->config->project} to stdout, with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", Reports::STDOUT);
         } else {

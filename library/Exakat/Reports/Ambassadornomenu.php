@@ -34,7 +34,6 @@ class Ambassadornomenu extends Ambassador {
 
         if (empty($baseHTML)) {
             $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
-            $title = ($file == 'index') ? 'Dashboard' : $file;
             $project_name = $this->config->project_name;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
