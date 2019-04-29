@@ -5,7 +5,6 @@ namespace Test\Type;
 use Test\Analyzer;
 
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
-spl_autoload_register('Autoload::autoload_library');
 
 class Binary extends Analyzer {
     /* 3 methods */
