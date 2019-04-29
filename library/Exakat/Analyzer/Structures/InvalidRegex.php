@@ -36,9 +36,9 @@ class InvalidRegex extends Analyzer {
              ->raw(<<<'GREMLIN'
 map{
      if (it.get().value("delimiter") == "'") {
-       regex = it.get().value('noDelimiter').replaceAll("\\\\(['\\\\])", "\$1");
+       regex = it.get().value('noDelimiter').replaceAll("\\\\([\$'\\\\])", "\$1");
      } else {
-       regex = it.get().value('noDelimiter').replaceAll('\\\\(["\\\\])', "\$1");
+       regex = it.get().value('noDelimiter').replaceAll('\\\\([\$"\\\\])', "\$1");
      }
      
      [regex, it.get().value('fullcode')]
@@ -60,6 +60,11 @@ GREMLIN
                              ->atomIs(array('String', 'Identifier', 'Nsname', 'Staticconstant'))
                      )
              )
+             ->not(
+                $this->side()
+                     ->outIs('CONCAT')
+                     ->outIs('CONCAT')
+             )
              ->raw(<<<'GREMLIN'
  where( 
     __.sideEffect{ c = it.get().value("count") - 1;}
@@ -71,10 +76,10 @@ GREMLIN
 .not( where( __.out("CONCAT").hasLabel("String", "Identifier", "Nsname", "Staticconstant").not(has("noDelimiter"))) )
 .where( __.sideEffect{ liste = [];}
           .out("CONCAT").order().by('rank')
-          .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant")
+          .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant", 'Parenthesis')
           .sideEffect{ 
-               if (it.get().label() in ["String", "Identifier", "Nsname", "Staticconstant"] ) {
-                   liste.add(it.get().value("noDelimiter"));
+               if ('noDelimiter' in it.get().keys()) {
+                   liste.add(it.get().value("noDelimiter").replaceAll('\\\\([\$\\\'"\\\\])', "\$1"));
                 } else {
                    liste.add("smi"); // smi is compatible with flags
                 }
