@@ -53,7 +53,7 @@ class ThemesExt {
             return array();
         }
         
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $t) {
             $return[] = $t->getThemeAnalyzers($theme);
         }
@@ -66,7 +66,7 @@ class ThemesExt {
             return array();
         }
         
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $t) {
             $return[] = $t->getThemeForAnalyzer($analyzer);
         }
@@ -76,39 +76,39 @@ class ThemesExt {
     }
 
     public function getThemesForAnalyzer($analyzer = null) {
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $extension) {
             $return[] = $extension->getThemesForAnalyzer($analyzer);
         }
         
-        return empty($return) ? array() : array_merge(...$return);
+        return array_merge(...$return);
     }
 
     public function getSeverities() {
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $extension) {
             $return[] = $extension->getSeverities();
         }
         
-        return empty($return) ? array() : array_merge(...$return);
+        return array_merge(...$return);
     }
 
     public function getTimesToFix() {
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $extension) {
             $return[] = $extension->getTimesToFix();
         }
         
-        return empty($return) ? array() : array_merge(...$return);
+        return array_merge(...$return);
     }
 
     public function getFrequences() {
-        $return = array();
+        $return = array(array());
         foreach($this->themes as $extension) {
             $return[] = $extension->getFrequences();
         }
-        
-        return empty($return) ? array() : array_merge(...$return);
+
+        return array_merge(...$return);
     }
     
     public function listAllAnalyzer($folder = null) {
@@ -120,6 +120,7 @@ class ThemesExt {
         if ($folder === null) {
             return $return;
         }
+        
         return preg_grep("#$folder/#", $return);
     }
 
@@ -128,7 +129,7 @@ class ThemesExt {
             return array();
         }
 
-        $return = array();
+        $return = array(array());
 
         foreach($this->themes as $theme) {
             $return[] = $theme->listAllThemes();
@@ -220,13 +221,13 @@ class ThemesExt {
     }
 
     public function getAnalyzerInExtension($name) {
-        $return = array();
+        $return = array(array());
         
         foreach($this->all as $ext) {
             $return[] = preg_grep("#/$name\$#", $ext);
         }
 
-        return array_merge(...$return ?? array(array()) );
+        return array_merge(...$return);
     }
 
 }
