@@ -20,41 +20,9 @@
  *
 */
 
+namespace Exakat\Autoload;
+
 use Exakat\Config;
-
-include 'helpers.php';
-
-register_shutdown_function('shutdown');
-
-class Autoload {
-    public static function autoload_library($name) {
-        $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-
-        if (file_exists($file)) {
-            include $file;
-        }
-    }
-
-    public static function autoload_test($name) {
-        $path = dirname(__DIR__);
-
-        $file = "$path/tests/analyzer/".str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-
-        if (file_exists($file)) {
-            include $file;
-        }
-    }
-
-    public static function autoload_phpunit($name) {
-        $fileName = preg_replace('/^([^_]+?)_(.*)$/', '$1'.DIRECTORY_SEPARATOR.'$2', $name);
-        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
-        $file = "{$fileName}.php";
-
-        if (file_exists($file)) {
-            include $file;
-        }
-    }
-}
 
 class AutoloadExt {
     const LOAD_ALL = null;
@@ -253,44 +221,5 @@ class AutoloadExt {
         return null;
     }
 }
-
-class AutoloadDev {
-    private $path = '';
-    
-    public function __construct($path) {
-        var_dump(phar::running());
-        var_dump($path);
-        if (phar::running()) {
-            // No autoloadDev with phar
-            // Ignoring it all
-            return;
-        }
-        
-        $this->path = $path;
-    }
-
-    public function autoload_dev($name) {
-        if (empty($this->path)) { return; }
-
-        $fileName = str_replace('Exakat\\', '', $name);
-        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
-        $file = "{$fileName}.php";
-
-        $fullPath = "{$this->path}/$file";
-        if (file_exists($fullPath)) {
-            include $fullPath;
-
-            return;
-        }
-    }
-}
-
-spl_autoload_register('Autoload::autoload_library');
-if (file_exists(__DIR__.'/../vendor/autoload.php')) {
-    include __DIR__.'/../vendor/autoload.php';
-} elseif (file_exists(__DIR__.'/../../../../vendor/autoload.php')) {
-    include __DIR__.'/../../../../vendor/autoload.php';
-}
-
 
 ?>

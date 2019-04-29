@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
-use AutoloadExt;
+use Exakat\Autoload\AutoloadExt;
 
 class ThemesExt {
     private $ext           = null;
@@ -217,6 +217,16 @@ class ThemesExt {
             display("No such class as '$name'");
             return null;
         }
+    }
+
+    public function getAnalyzerInExtension($name) {
+        $return = array();
+        
+        foreach($this->all as $ext) {
+            $return[] = preg_grep("#/$name\$#", $ext);
+        }
+
+        return array_merge(...$return ?? array(array()) );
     }
 
 }

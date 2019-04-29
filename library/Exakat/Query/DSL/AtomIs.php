@@ -40,8 +40,8 @@ class AtomIs extends DSL {
             // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
-coalesce( __.hasLabel(within(['Identifier', 'Nsname', 'Staticconstant'])).in('DEFINITION').out('VALUE'),
-          __.hasLabel(within(['Variable'])).in('DEFINITION').out('DEFINITION').in('LEFT').hasLabel('Assignation').out('RIGHT'),
+coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
+          __.hasLabel(within(["Variable"])).in("DEFINITION").out("DEFINITION").in("LEFT").hasLabel("Assignation").out("RIGHT"),
           __.filter{true})
 .hasLabel(within(***))
 GREMLIN;

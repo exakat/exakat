@@ -6,7 +6,8 @@ use Exakat\Phpexec;
 use Exakat\Analyzer\Themes;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
-use AutoloadExt;
+use Exakat\Autoload\AutoloadExt;
+use Exakat\Autoload\AutoloadDev;
 
 if (file_exists(__DIR__.'/../config.php')) {
     include __DIR__.'/../config.php';
@@ -30,10 +31,14 @@ if (file_exists(__DIR__.'/../config.php')) {
     die("Run the tests from tests/analyzer/ or create a config.php file, with $EXAKAT_PATH leading to the root of a valid exakat installation.\n");
 }
 
-include_once "$EXAKAT_PATH/library/Autoload.php";
-spl_autoload_register('Autoload::autoload_test');
-spl_autoload_register('Autoload::autoload_phpunit');
-spl_autoload_register('Autoload::autoload_library');
+include "$EXAKAT_PATH/library/Exakat/Autoload/Autoload.php";
+include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadExt.php";
+include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadDev.php";
+include "$EXAKAT_PATH/library/helpers.php";
+
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_test');
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_phpunit');
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 
 abstract class Analyzer extends TestCase {
     public function generic_test($file) {
@@ -61,7 +66,8 @@ abstract class Analyzer extends TestCase {
         chdir($pwd);
         
         $themes = new Themes("$EXAKAT_PATH/data/analyzers.sqlite", 
-                             new AutoloadExt('')
+                             new AutoloadExt(''),
+                             new AutoloadDev('')
                             );
 
         $analyzerobject = $themes->getInstance($test_config, null, $config);

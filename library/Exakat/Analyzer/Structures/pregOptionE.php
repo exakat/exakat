@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class pregOptionE extends Analyzer {
     const FETCH_DELIMITER = <<<'GREMLIN'
 filter{ 
-    base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
+    base = it.get().value("noDelimiter").replaceAll("\\s", "");
     
     if (base.length() == 0) {
         false;
@@ -45,18 +45,29 @@ GREMLIN;
         
     const MAKE_DELIMITER_FINAL = <<<'GREMLIN'
 sideEffect{ 
-    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
-    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
-    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
-    else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
-    else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
-    else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
-    else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
-    else if (delimiter == "\$") { delimiter = "\\\\\$"; delimiterFinal = "\\\\\$"; } 
-    else if (delimiter == ".") { delimiter = "\\\\."; delimiterFinal = "\\\\."; } 
+         if (delimiter == "{") { delimiter = "\\{";   delimiterFinal = "\\}"; } 
+    else if (delimiter == "}") { delimiter = "\\}";   delimiterFinal = "\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\(";   delimiterFinal = "\\)"; } 
+    else if (delimiter == ")") { delimiter = "\\)";   delimiterFinal = "\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\[";   delimiterFinal = "\\]"; } 
+    else if (delimiter == "]") { delimiter = "\\]";   delimiterFinal = "\\]"; } 
+    else if (delimiter == "*") { delimiter = "\\*";   delimiterFinal = "\\*"; } 
+    else if (delimiter == "|") { delimiter = "\\|";   delimiterFinal = "\\|"; } 
+    else if (delimiter == "?") { delimiter = "\\?";   delimiterFinal = "\\?"; } 
+    else if (delimiter == "+") { delimiter = "\\+";   delimiterFinal = "\\+"; } 
+    else if (delimiter == '$') { delimiter = "\\\$";  delimiterFinal = "\\\$"; } 
+    else if (delimiter == ".") { delimiter = "\\.";   delimiterFinal = "\\." ; } 
+    
+    // default case : accept
     else { delimiterFinal = delimiter; } 
 }
-.filter{ delimiter != "\\\\\\\\" }
+// Remove any invalid delimiter
+.filter{ !(delimiter in ["\\", 
+                         "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+                         ]); }
+
 GREMLIN;
 
     public function analyze() {
@@ -69,7 +80,7 @@ GREMLIN;
              ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?)\$')
+             ->regexIs('noDelimiter', '^\\\\s*(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?)\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -82,7 +93,7 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -99,7 +110,7 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\$')
              ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
