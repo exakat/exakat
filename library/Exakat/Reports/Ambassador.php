@@ -1877,7 +1877,6 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);

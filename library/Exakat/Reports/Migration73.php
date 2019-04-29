@@ -140,8 +140,7 @@ class Migration73 extends Ambassador {
         $compilations = '';
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
-        $info = array();
-        
+
         $suffixes = array_unique(array_merge(array('73', $this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions));
         foreach($suffixes as $suffix) {
             $version = "$suffix[0].$suffix[1]";
@@ -464,8 +463,7 @@ JAVASCRIPT;
 
     protected function getSeveritiesNumberBy($type = 'file') {
         $listSQL = makeList($this->analyzerList);
-        $list = $this->analyzerList;
-        
+
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
     FROM results
