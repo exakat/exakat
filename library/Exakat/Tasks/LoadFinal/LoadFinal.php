@@ -77,7 +77,12 @@ class LoadFinal {
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
 
-        // stats calulcation : it will fill the functioncall list
+        $task = new SpotPHPNativeFunctions($this->gremlin, $this->config, $this->datastore);
+        $task->setPHPfunctions($this->PHPfunctions);
+        $task->run();
+        $this->log('SpotPHPNativeFunctions');
+
+        // stats calculation : it will fill the functioncall list
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
@@ -89,11 +94,6 @@ GREMLIN;
         if (!empty($fixed)) {
             $this->datastore->addRow('functioncalls', $fixed[0]);
         }
-
-        $task = new SpotPHPNativeFunctions($this->gremlin, $this->config, $this->datastore);
-        $task->setPHPfunctions($this->PHPfunctions);
-        $task->run();
-        $this->log('SpotPHPNativeFunctions');
 
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
