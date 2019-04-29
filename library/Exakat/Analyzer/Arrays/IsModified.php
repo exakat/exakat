@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class IsModified extends Analyzer {
     public function analyze() {
+        // $a[33] = 44;
         $this->atomIs('Array')
              ->is('isModified', true);
         $this->prepareQuery();
-        return;
     }
 }
 
