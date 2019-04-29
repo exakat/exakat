@@ -6,7 +6,7 @@ class foo {
         switch($array) {
             case 'b': 
                 // This is a second level of indentation
-                if ($this->check($b)) { continue; }
+                if ($this->check($b)) { break; }
                 $return[] = $b;
             default : 
                 $return[] = 'b';
@@ -22,7 +22,7 @@ class foo {
             switch($b) {
                 case 'b': 
                     // This is a second level of indentation
-                    if ($this->check($b)) { continue; }
+                    if ($this->check($b)) { break; }
                     $return[] = $b;
                 default : 
                     $return[] = 'b';
