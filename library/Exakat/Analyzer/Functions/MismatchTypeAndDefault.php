@@ -40,23 +40,23 @@ class MismatchTypeAndDefault extends Analyzer {
              ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {
-        case '\\\\string' : 
+        case '\\string' : 
             !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass"]);
             break;
 
-        case '\\\\int' : 
+        case '\\int' : 
             !(type in ["Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
-        case '\\\\float' : 
+        case '\\float' : 
             !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
-        case '\\\\bool' : 
+        case '\\bool' : 
             !(type in ["Boolean", "Null", "Comparison", "Logical", "Not"]);
             break;
 
-        case '\\\\array' : 
+        case '\\array' : 
             !(type in ["Arrayliteral", "Addition", "Null"]);
             break;
         
