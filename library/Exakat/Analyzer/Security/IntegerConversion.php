@@ -32,7 +32,7 @@ class IntegerConversion extends Analyzer {
             $modules = $module->dependsOn();
     
             $this->dependsOn = array_merge( array('Php/IncomingValues'),
-                                            $modules,
+                                            $modules
                                           );
         }
                                       
