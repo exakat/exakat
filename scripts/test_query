@@ -24,8 +24,11 @@
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Config;
 
-include_once(dirname(__DIR__).'/library/Autoload.php');
-spl_autoload_register('Autoload::autoload_library');
+include_once(dirname(__DIR__).'/library/Exakat/Autoload/Autoload.php');
+include_once(dirname(__DIR__).'/library/helpers.php');
+require __DIR__.'/../vendor/autoload.php';
+
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 
 $config = new Config(array());
 
@@ -115,11 +118,6 @@ g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("fir
 
 g.V().hasLabel("Methodcall").count();
 g.V().hasLabel("Methodcall").where(__.in("DEFINITION")).count();
-
-g.V().hasLabel(within(['Variable', 'Class'])).count()
-
-
-
 
 QUERY;
 //
