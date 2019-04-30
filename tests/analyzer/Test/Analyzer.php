@@ -43,9 +43,9 @@ spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 abstract class Analyzer extends TestCase {
     public function generic_test($file) {
         global $EXAKAT_PATH;
-        
+
         $test_path = dirname(__DIR__);
-        
+
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
         }
@@ -103,14 +103,13 @@ abstract class Analyzer extends TestCase {
             
             $this->markTestSkipped("Needs configuration : $confs.");
         }
-        
-        $analyzer = escapeshellarg($test_config);
-        $source = "$test_path/source/$file.php";
 
-        if (is_dir($source)) {
-            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d $source -P $analyzer -p test -q -o -json";
+        $analyzer = escapeshellarg($test_config);
+
+        if (is_dir("$test_path/source/$file.php")) {
+            $shell = "cd $EXAKAT_PATH/; php exakat test -r -d ./tests/analyzer/source/$file.php -P $analyzer -p test -q -o -json";
         } else {
-            $shell = "cd $EXAKAT_PATH/; php exakat test    -f $source -P $analyzer -p test -q -o -json";
+            $shell = "cd $EXAKAT_PATH/; php exakat test    -f ./tests/analyzer/source/$file.php -P $analyzer -p test -q -o -json";
         }
 
         $shell_res = shell_exec($shell);
