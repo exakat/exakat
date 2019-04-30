@@ -1565,7 +1565,10 @@ HTML;
     }
 
     protected function getTotalAnalysedFile() {
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' ";
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
+
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer NOT IN ('Php/Incompilable')";
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
