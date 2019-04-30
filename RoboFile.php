@@ -799,7 +799,7 @@ JOIN categories
             ->files()
             ->name('*.php');
             
-        $errors56 = array();
+//        $errors56 = array();
         $errors70 = array();
         $errors71 = array();
         $errors72 = array();
@@ -807,11 +807,11 @@ JOIN categories
         $errors74 = array();
         $total = count($files);
         foreach($files as $file) {
-            $res = shell_exec('php56 -l '.$file);
-            
-            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors56[(string) $file] = $res;
-            }
+//            $res = shell_exec('php56 -l '.$file);
+//            
+//            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+//                $errors56[(string) $file] = $res;
+//            }
 
             $res = shell_exec('php -l '.$file);
             
