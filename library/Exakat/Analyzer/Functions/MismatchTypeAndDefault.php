@@ -37,6 +37,56 @@ class MismatchTypeAndDefault extends Analyzer {
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
+             ->isNot('nullable', true)
+             ->raw(<<<'GREMLIN'
+filter{
+    switch(it.get().value("fullnspath")) {
+        case '\\string' : 
+            !(type in ["String", "Heredoc", "Concatenation", "Staticclass"]);
+            break;
+
+        case '\\int' : 
+            !(type in ["Integer", "Addition", "Multiplication", "Power"]);
+            break;
+
+        case '\\float' : 
+            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power"]);
+            break;
+
+        case '\\bool' : 
+            !(type in ["Boolean", "Comparison", "Logical", "Not"]);
+            break;
+
+        case '\\array' : 
+            !(type in ["Arrayliteral", "Addition"]);
+            break;
+        
+        // callable
+        // object
+        // iterable
+        // self, static
+        default : 
+            !(type in ["Null"]);
+            break;
+    }
+}
+GREMLIN
+)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(?string $s = 3)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->_as('arg')
+             ->outIs('DEFAULT')
+             ->outIsIE(array('THEN', 'ELSE', 'LEFT', 'RIGHT')) // basic handling of ternary
+             ->goToLiteralValue()
+             ->atomIsNot(array('Nsname', 'Identifier', 'Staticconstant')) // case for no available definitions
+             ->savePropertyAs('label', 'type')
+             ->back('arg')
+             ->outIs('TYPEHINT')
+             ->is('nullable', true)
              ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {
