@@ -82,7 +82,6 @@ class Load extends Tasks {
                             'class'          => array(),
                             );
     private $filename   = null;
-    private $line       = 0;
 
     private $links = array();
     
@@ -585,7 +584,7 @@ class Load extends Tasks {
 
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         $stats = $this->stats;
-        foreach($ignoredFiles as $file => $reason) {
+        foreach(array_keys($ignoredFiles) as $file) {
             try {
                 $this->processFile($file, $dir);
             } catch (NoFileToProcess $e) {
@@ -628,7 +627,7 @@ class Load extends Tasks {
     private function processFile($filename, $path) {
         $begin = microtime(true);
         $fullpath = $path.$filename;
-        
+
         $this->filename = $filename;
 
         $log = array();
@@ -675,10 +674,12 @@ class Load extends Tasks {
                     $line = $t[2];
                     $this->tokens[] = $t;
                 }
-            } else {
+            } elseif (is_string($t)) {
                 $this->tokens[] = array(0 => $this->phptokens::TOKENS[$t],
                                         1 => $t,
                                         2 => $line);
+            } else {
+                assert(false, "$t is in a wrong token type : ".gettype($t));
             }
         }
         $this->stats['loc'] -= $comments;
@@ -795,11 +796,8 @@ class Load extends Tasks {
             $class = end($this->currentClassTrait)->fullcode;
         }
 
-        if (empty($this->currentFunction)) {
-            $method = '';
-        } else {
-            $method = end($this->currentFunction)->fullnspath;
-        }
+        $method = empty($this->currentFunction) ? '' : $method = end($this->currentFunction)->fullnspath;
+
         $this->calls->addDefinition('goto', "$class::$method..$tag->fullcode", $label);
 
         $this->pushExpression($label);
@@ -843,11 +841,9 @@ class Load extends Tasks {
                 $string->binaryString = $openQuote[0];
                 $openQuote = substr($openQuote, 1);
             }
-            if ($openQuote[3] === "'") {
-                $closeQuote = substr($openQuote, 4, -2);
-            } else {
-                $closeQuote = substr($openQuote, 3);
-            }
+
+            $closeQuote = $openQuote[3] === "'" ? substr($openQuote, 4, -2) : $closeQuote = substr($openQuote, 3);
+
             $type = $this->phptokens::T_START_HEREDOC;
         } else {
             throw new LoadError(__METHOD__.' : unsupported type of open quote : '.$this->tokens[$current][0]);
@@ -1267,7 +1263,6 @@ class Load extends Tasks {
                 ++$this->id;
                 
                 $useFullcode[] = $arg->fullcode;
-                $users[] = $arg;
                 $arg->rank = ++$rank;
                 
                 $this->addLink($function, $arg, 'USE');
@@ -1558,7 +1553,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 // Process arguments
                 ++$this->id; // Skip arguments
-                $class = $this->processArguments('Classanonymous', array(), $argumentsList);
+                $class = $this->processArguments('Classanonymous', array());
                 $argumentsFullcode = $class->fullcode;
             } else {
                 $class = $this->addAtom('Classanonymous');
@@ -1778,8 +1773,7 @@ class Load extends Tasks {
                                                 array($this->phptokens::T_SEMICOLON,
                                                       $this->phptokens::T_CLOSE_TAG,
                                                       $this->phptokens::T_END,
-                                                      ),
-                                                $argumentsList);
+                                                      ));
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
@@ -2148,7 +2142,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processArguments($atom, $finals = array(), &$argumentsList) {
+    private function processArguments($atom, $finals = array(), &$argumentsList = array()) {
         if (empty($finals)) {
             $finals = array($this->phptokens::T_CLOSE_PARENTHESIS);
         }
@@ -3725,8 +3719,7 @@ class Load extends Tasks {
                                                           $this->phptokens::T_CLOSE_CURLY,
                                                           $this->phptokens::T_COLON,
                                                           $this->phptokens::T_END,
-                                                          ),
-                                                    $argumentsList);
+                                                          ));
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
                 $argumentsFullcode = "($argumentsFullcode)";
@@ -4272,13 +4265,11 @@ class Load extends Tasks {
     private function processUseTrait() {
         $use = $this->addAtom('Usetrait');
         $current = $this->id;
-        $useType = 'class';
 
         $fullcode = array();
 
         --$this->id;
         do {
-            $prefix = '';
             ++$this->id;
             $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
 
@@ -4309,7 +4300,7 @@ class Load extends Tasks {
         }
 
         $use->code     = $this->tokens[$current][1];
-        $use->fullcode = $this->tokens[$current][1].(isset($const) ? ' '.$const->code : '').' '.implode(', ', $fullcode);
+        $use->fullcode = $this->tokens[$current][1] . ' ' . implode(', ', $fullcode);
         $use->token    = $this->getToken($this->tokens[$current][0]);
         $this->pushExpression($use);
 
