@@ -30,6 +30,7 @@ class BailOutEarly extends Analyzer {
 
         // if ($a) { return; } else { not return; }
         $this->atomIs('Ifthen')
+             ->tokenIsNot('T_ELSEIF')
              ->outIs('THEN')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIs($bailout)
@@ -42,6 +43,7 @@ class BailOutEarly extends Analyzer {
 
         // if ($a) { not return; } else { return; }
         $this->atomIs('Ifthen')
+             ->tokenIsNot('T_ELSEIF')
              ->outIs('THEN')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIsNot($bailout)

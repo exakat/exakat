@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IncomingVariables extends Analyzer {
     public function analyze() {
-        // $_POST 
+        // $_POST
         $this->atomIs('Phpvariable')
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILES', '$_COOKIE'))
              ->inIs('VARIABLE')
