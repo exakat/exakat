@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 22 Apr 2019 16:55:37 +0000
-.. comment: Generation hash : 61ab7c282f17a82d164987368156c8f4a4114b43
+.. comment: Generation date : Tue, 30 Apr 2019 10:23:06 +0000
+.. comment: Generation hash : beacc5c96a080b78bb1733d7794a61d27686076b
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -139,7 +139,7 @@ $this Is Not An Array
 #####################
 
 
-`$this <http://php.net/manual/en/language.oop5.basic.php>`_ variable represents the current object and it is not an array. 
+``$this`` variable represents the current object and it is not an array. 
 
 This is unless the class (or its parents) has the `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface, or extends `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ or `SimpleXMLElement <http://php.net/manual/en/class.simplexmlelement.php>`_.
 
@@ -164,16 +164,16 @@ This is unless the class (or its parents) has the `ArrayAccess <http://php.net/m
    ?>
 
 
-See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_,
-         `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ and 
+See also `ArrayAccess <http://www.php.net/manual/en/class.arrayaccess.php>`_,
+         `ArrayObject <http://www.php.net/manual/en/class.arrayobject.php>`_
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-* Extends ArrayObject, or a class that extends it, to use $this as an array too.
-* Implements ArrayAccess to use $this as an array too.
+* Extends ``ArrayObject``, or a class that extends it, to use ``$this`` as an array too.
+* Implements ``ArrayAccess`` to use ``$this`` as an array too.
 * Use a property in the current class to store the data, instead of $this directly.
 
 +-------------+--------------------------+
@@ -862,7 +862,7 @@ Using references is then must faster, and easier to read.
 
 You may also use `array_walk() <http://www.php.net/array_walk>`_ or `array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
-See also `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
 Suggestions
 ^^^^^^^^^^^
@@ -8117,9 +8117,9 @@ Foreach Don't Change Pointer
 ############################
 
 
-``foreach`` loops use their own internal cursor.
+`foreach <http://php.net/manual/en/control-structures.foreach.php>`_ loops use their own internal cursor.
 
-A ``foreach`` loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `current() <http://www.php.net/current>`_ or `next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
+A foreach loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `current() <http://www.php.net/current>`_ or `next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
 
 This only applies when a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
 
@@ -8137,7 +8137,8 @@ This only applies when a `foreach() <http://php.net/manual/en/control-structures
    ?>
 
 
-See also `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_.
+See also `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_ and
+         `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
 +-------------+------------------------------+
 | Short name  | Php/ForeachDontChangePointer |
@@ -9928,6 +9929,52 @@ It is recommended to use a real 'if then' structures, to make the condition read
 
 
 
+.. _implode-one-arg:
+
+Implode One Arg
+###############
+
+
+`implode() <http://www.php.net/implode>`_ may be called with one arg. It is recommended to avoid it. 
+
+Using two arguments makes it less surprising to new comers, and consistent with `explode() <http://www.php.net/explode>`_ syntax. 
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range('a', 'c');
+   
+   // empty string is the glue
+   print implode('', $array);
+   
+   // only the array : PHP uses the empty string as glue. 
+   // Avoid this
+   print implode($array);
+   
+   ?>
+
+
+See also `implode <http://php.net/implode>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add an empty string as first argument
+
++-------------+--------------------+
+| Short name  | Php/ImplodeOneArg  |
++-------------+--------------------+
+| Themes      | :ref:`Suggestions` |
++-------------+--------------------+
+| Severity    | Minor              |
++-------------+--------------------+
+| Time To Fix | Quick (30 mins)    |
++-------------+--------------------+
+
+
+
 .. _inclusion-wrong-case:
 
 Inclusion Wrong Case
@@ -10420,6 +10467,67 @@ See also `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.
 
 
 
+.. _integer-conversion:
+
+Integer Conversion
+##################
+
+
+Comparing incoming variables to integer may lead to injection.
+
+When comparing a variable to an integer, PHP applies type juggling, and transform the variable in an integer too. When the value converts smoothly to an integer, this means the validation may pass and yet, the value may carry an injection.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is safer
+   if ($_GET['x'] === 2) {
+       echo $_GET['x'];
+   }
+   
+   // Using (int) for validation and display
+   if ((int) $_GET['x'] === 2) {
+       echo (int) $_GET['x'];
+   }
+   
+   // This is an injection
+   if ($_GET['x'] == 2) {
+       echo $_GET['x'];
+   }
+   
+   // This is unsafe, as $_GET['x']  is tester as an integer, but echo'ed raw
+   if ((int) $_GET['x'] === 2) {
+       echo $_GET['x'];
+   }
+   
+   ?>
+
+
+This analysis spots situations where an incoming value is compared to an integer. The usage of the validated value is not considered.
+
+See also `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_,
+         `PHP STRING COMPARISON VULNERABILITIES <https://hydrasky.com/network-security/php-string-comparison-vulnerabilities/>`_ and 
+         `PHP Magic Tricks: Type Juggling <https://www.owasp.org/images/6/6b/PHPMagicTricks-TypeJuggling.pdf>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------+
+| Short name  | Security/IntegerConversion |
++-------------+----------------------------+
+| Themes      | :ref:`Security`            |
++-------------+----------------------------+
+| Severity    | Major                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+
+
+
 .. _interpolation:
 
 Interpolation
@@ -10673,15 +10781,24 @@ Regex are check with the Exakat version of PHP.
 
 Dynamic regex are only checked for simple values. Dynamic values may eventually generate a compilation error.
 
-+-------------+-------------------------+
-| Short name  | Structures/InvalidRegex |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the regex before running it
+
++-------------+-----------------------------------------+
+| Short name  | Structures/InvalidRegex                 |
++-------------+-----------------------------------------+
+| Themes      | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Major                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+| Examples    | :ref:`sugarcrm-structures-invalidregex` |
++-------------+-----------------------------------------+
 
 
 
@@ -17953,7 +18070,7 @@ Possible Missing Subpattern
 ###########################
 
 
-When capturing subpatterns are the last ones in a regex, PHP doesn't fill their spot in the resulting array. 
+When capturing subpatterns are the last ones in a regex, PHP doesn't fill their spot in the resulting array. This leads to a possible missing index in the result array.
 
 .. code-block:: php
 
@@ -17982,8 +18099,32 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
        [2] => b
    )
    */
+   
+   // double 'b' when it is found
+   print preg_replace(',^a(b)?,', './
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+', 'abc'); // prints ./abbc
+   print preg_replace(',^a(b)?,', './
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+', 'adc'); // prints ./dc
+   
    ?>
 
+?>
+
+The same applies to `preg_replace() <http://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
 
 See also `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_ and 
          `Bug #73948 Preg_match_all should return NULLs on trailing optional capture groups. <https://bugs.php.net/bug.php?id=73948>`_.
@@ -17992,17 +18133,21 @@ See also `Bug #50887 preg_match , last optional sub-patterns ignored when empty 
 Suggestions
 ^^^^^^^^^^^
 
-* Add an always capturing subpatterns after the last ?, and it will always be fine
+* Add an always capturing subpatterns after the last ?
+* Move the ? inside the parenthesis, so the parenthesis is always on, but the content may be empty
+* Add a test on the last index of the resulting array, to ensure it is available when needed
 
-+-------------+------------------------------+
-| Short name  | Php/MissingSubpattern        |
-+-------------+------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
++-------------+----------------------------------------------------------------------------+
+| Short name  | Php/MissingSubpattern                                                      |
++-------------+----------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Top10`                                               |
++-------------+----------------------------------------------------------------------------+
+| Severity    | Minor                                                                      |
++-------------+----------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                            |
++-------------+----------------------------------------------------------------------------+
+| Examples    | :ref:`phpmyadmin-php-missingsubpattern`, :ref:`spip-php-missingsubpattern` |
++-------------+----------------------------------------------------------------------------+
 
 
 
@@ -20472,15 +20617,28 @@ Use foreach instead of for when traversing an array.
    
    ?>
 
-+-------------+-----------------------------+
-| Short name  | Structures/ShouldUseForeach |
-+-------------+-----------------------------+
-| Themes      | :ref:`Suggestions`          |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Instant (5 mins)            |
-+-------------+-----------------------------+
+
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_ and 
+         `5 Ways To Loop Through An Array In PHP <https://www.codewall.co.uk/5-ways-to-loop-through-array-php/>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move for() loops to foreach(), whenever they apply to a finite list of elemeents
+
++-------------+-----------------------------------------------------------------------------------------------------+
+| Short name  | Structures/ShouldUseForeach                                                                         |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                                                  |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                               |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                    |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`expressionengine-structures-shoulduseforeach`, :ref:`woocommerce-structures-shoulduseforeach` |
++-------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -22424,17 +22582,17 @@ Suggestions
 * Add the new operator to the call
 * Make sure the function is really a functioncall, not a class name
 
-+-------------+----------------------------------------------+
-| Short name  | Exceptions/ThrowFunctioncall                 |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`                               |
-+-------------+----------------------------------------------+
-| Severity    | Major                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Instant (5 mins)                             |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`sugarcrm-exceptions-throwfunctioncall` |
-+-------------+----------------------------------------------+
++-------------+-----------------------------------------------------------------------------------------+
+| Short name  | Exceptions/ThrowFunctioncall                                                            |
++-------------+-----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                          |
++-------------+-----------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                   |
++-------------+-----------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                        |
++-------------+-----------------------------------------------------------------------------------------+
+| Examples    | :ref:`sugarcrm-exceptions-throwfunctioncall`, :ref:`zurmo-exceptions-throwfunctioncall` |
++-------------+-----------------------------------------------------------------------------------------+
 
 
 

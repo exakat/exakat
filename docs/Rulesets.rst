@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 22 Apr 2019 16:55:37 +0000
-.. comment: Generation hash : 61ab7c282f17a82d164987368156c8f4a4114b43
+.. comment: Generation date : Tue, 30 Apr 2019 10:23:06 +0000
+.. comment: Generation hash : beacc5c96a080b78bb1733d7794a61d27686076b
 
 
 .. _analyze:
@@ -1048,7 +1048,7 @@ Total : 39 analysis
 Security
 ++++++++
 
-Total : 39 analysis
+Total : 40 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1063,6 +1063,7 @@ Total : 39 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
+* :ref:`Integer Conversion <integer-conversion>`
 * :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -1095,7 +1096,7 @@ Total : 39 analysis
 Suggestions
 +++++++++++
 
-Total : 76 analysis
+Total : 77 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1125,6 +1126,7 @@ Total : 76 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
+* :ref:`Implode One Arg <implode-one-arg>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`

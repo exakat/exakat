@@ -112,7 +112,7 @@ PHP extensions are used to check for structures usage (classes, interfaces, etc.
 
 PHP extensions are described with the list of structures they define : functions, classes, constants, traits, variables, interfaces, namespaces, and directives. 
 
-* `ext/amqp <https://github.com/pdezwart/php-amqp>`_
+* `ext/amqp <https://github.com/alanxz/rabbitmq-c>`_
 * `ext/apache <http://php.net/manual/en/book.apache.php>`_
 * `ext/apc <http://php.net/apc>`_
 * `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
@@ -287,7 +287,7 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 13 extensions
+List of extensions : there are 14 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Codeigniter <extension-codeigniter>`
@@ -295,6 +295,7 @@ List of extensions : there are 13 extensions
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
 * :ref:`Monolog <extension-monolog>`
+* :ref:`Pmb <extension-pmb>`
 * :ref:`Prestashop <extension-prestashop>`
 * :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
@@ -320,7 +321,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
-* Fuelcms
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Magento <https://magento.com/>`_
@@ -419,12 +419,15 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.7.7
+
+  * Implode One Arg (Php/ImplodeOneArg)
+  * Integer Conversion (Security/IntegerConversion ; Security)
+  * Php/IncomingValues (Php/IncomingValues ; Unassigned)
+
 * 1.7.6
 
   * Caught Variable (Exceptions/CatchE)
-  * Modules/InListWithAnalyzer (Modules/InListWithAnalyzer ; )
-  * Modules/InListWithType (Modules/InListWithType ; )
-  * Modules/NotInListWithAnalyzer (Modules/NotInListWithAnalyzer ; )
   * Multiple Unset() (Structures/MultipleUnset ; Suggestions, php-cs-fixable)
   * PHP Overridden Function (Php/OveriddenFunction ; Appinfo)
   * array_merge With Ellipsis (Structures/ArrayMergeWithEllipsis ; )
@@ -1181,7 +1184,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple)
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze)
   * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze)
-  * ** For Exponent (Php/NewExponent ; Suggestions)
+  * ** For Exponent (Php/NewExponent ; Suggestions, php-cs-fixable)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
   * <?= Usage (Php/EchoTagUsage ; Appinfo, Simple)
   * @ Operator (Structures/Noscream ; Analyze, Appinfo, ClearPHP)
@@ -2041,20 +2044,21 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
+* `ArrayAccess <http://www.php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
 * `assert <http://php.net/assert>`_
@@ -2212,8 +2216,6 @@ List of external links mentionned in this documentation.
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
-* `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2260,6 +2262,7 @@ List of external links mentionned in this documentation.
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
 * `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up array_key_exists() <https://github.com/php/php-src/pull/3360>`_
+* `implode <http://php.net/implode>`_
 * `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_
 * `in_array() <http://www.php.net/in_array>`_
 * `include <http://php.net/manual/en/function.include.php>`_
@@ -2273,8 +2276,8 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset <http://www.php.net/isset>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2306,8 +2309,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2352,8 +2355,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2388,7 +2391,6 @@ List of external links mentionned in this documentation.
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP 7.3 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
-* `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Clone and Shallow vs Deep Copying <http://jacob-walker.com/blog/php-clone-and-shallow-vs-deep-copying.html>`_
@@ -2436,6 +2438,7 @@ List of external links mentionned in this documentation.
 * `PSR-3 <https://www.php-fig.org/psr/psr-3>`_
 * `PSR-6 : Caching <http://www.php-fig.org/psr/psr-6/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
+* `RabbitMQ AMQP client library <https://github.com/alanxz/rabbitmq-c>`_
 * `Rar archiving <http://php.net/manual/en/book.rar.php>`_
 * `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
@@ -2491,7 +2494,6 @@ List of external links mentionned in this documentation.
 * `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
-* `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
@@ -2509,8 +2511,9 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
@@ -2530,8 +2533,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -3657,6 +3660,7 @@ ________
 |   analyzer[] = "Security/EncodedLetters";
 |   analyzer[] = "Security/FilterInputSource";
 |   analyzer[] = "Security/IndirectInjection";
+|   analyzer[] = "Security/IntegerConversion";
 |   analyzer[] = "Security/MkdirDefault";
 |   analyzer[] = "Security/MoveUploadedFile";
 |   analyzer[] = "Security/NoNetForXmlLoad";
@@ -3727,6 +3731,7 @@ ___________
 |   analyzer[] = "Php/CompactInexistant";
 |   analyzer[] = "Php/CouldUseIsCountable";
 |   analyzer[] = "Php/DetectCurrentClass";
+|   analyzer[] = "Php/ImplodeOneArg";
 |   analyzer[] = "Php/IssetMultipleArgs";
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/NewExponent";

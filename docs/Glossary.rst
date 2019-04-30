@@ -31,7 +31,6 @@ Glossary
     + `$this`
 
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
       + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Method Could Be Static <method-could-be-static>`
@@ -187,6 +186,14 @@ Glossary
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Slow Functions <slow-functions>`
+
+    + `arrayaccess`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
+    + `arrayobject`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
 
     + `assert()`
 
@@ -414,6 +421,10 @@ Glossary
     + `exit()`
 
       + :ref:`Unreachable Code <unreachable-code>`
+
+    + `explode()`
+
+      + :ref:`Implode One Arg <implode-one-arg>`
 
     + `extract()`
 
@@ -653,6 +664,7 @@ Glossary
     + `implode()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
+      + :ref:`Implode One Arg <implode-one-arg>`
       + :ref:`Joining file() <joining-file()>`
 
     + `import_request_variables()`
@@ -992,6 +1004,7 @@ Glossary
     + `preg_replace()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`Possible Missing Subpattern <possible-missing-subpattern>`
       + :ref:`Processing Collector <processing-collector>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
