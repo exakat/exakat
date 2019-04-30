@@ -1,4 +1,4 @@
-Version 1.7.7 (Sima Qing of Dingmao, coming up)
+Version 1.7.8 (Cui Juqing of Dingyi, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 1.7.7 (Sima Qing of Dingmao, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.7 (Sima Qing of Dingmao, 2019-04-29)
++ Architecture
+    + Upgraded to gremlin-php 3.1.1
+    + Moved autoload into its own namespace
+    + Started extending themes to modules
+    + Skip external libraries when unit testing
+    + Dump got one more query moved to DSL
+    + Fixed build for overwritten methods, extended to magic methods
+    + Load tokens by batch (5000+ tokens), not by file. 
++ Analyzer
+    + New analysis : Security : integer conversion
+    + New analysis : implode() with one argument
+    + Updated analysis : Invalid Regex handles \\ more precisely
+    + Updated analysis : delimiter detection was checked for all of them
+    + Checked unit tests : 2947 / 2983 test pass (99% pass)
++ Tokenizer
+    + Upgraded Fallback detection for functions
 
 Version 1.7.6 (Jade Maiden of Yin, 2019-04-22)
 + Architecture
