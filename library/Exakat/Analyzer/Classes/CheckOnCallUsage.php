@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CheckOnCallUsage extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsNotFamily');
+        return array('Classes/IsNotFamily',
+                    );
     }
 
     public function analyze() {
@@ -43,16 +44,11 @@ class CheckOnCallUsage extends Analyzer {
                      ->functioncallIs('\\method_exists')
              )
 
-            // call is made directly on $this with $a
+            // call is made directly on $this
              ->outIs('EXPRESSION')
              ->atomIs('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->inIs('DEFINITION')
-             ->hasIn('NAME')
              ->back('first');
         $this->prepareQuery();
 
@@ -74,11 +70,6 @@ class CheckOnCallUsage extends Analyzer {
              ->outIs('CLASS')
              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
              ->analyzerIsNot('Classes/IsNotFamily')
-             ->inIs('CLASS')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->inIs('DEFINITION')
-             ->hasIn('NAME')
              ->back('first');
         $this->prepareQuery();
     }
