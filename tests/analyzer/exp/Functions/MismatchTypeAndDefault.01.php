@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array('function foo12(string $s = \\INTEGER) { /**/ } ',
+$expected     = array('function foo1(?string $s = null) { /**/ } ',
+                      'function foo12(string $s = \\INTEGER) { /**/ } ',
                       'function foo16(string $s = i::ARRAY) { /**/ } ',
                       'function foo14(string $s = i::INTEGER) { /**/ } ',
                       'function foo13(string $s = INTEGER) { /**/ } ',

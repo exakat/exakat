@@ -30,7 +30,7 @@ class OnlyVariablePassedByReference extends Analyzer {
         // Functioncalls
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::$CONTAINERS_PHP)
              ->not(
                 $this->side()
                      ->atomIs(self::$FUNCTIONS_CALLS)
@@ -41,8 +41,29 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->functionDefinition()
+             ->outWithRank('ARGUMENT', 'position')
+             ->is('reference', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // methods calls
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->tokenIs('T_STRING')
+             ->savePropertyAs('code', 'method')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'position')
+             ->atomIsNot(self::$CONTAINERS_PHP)
+             ->not(
+                $this->side()
+                     ->atomIs(self::$FUNCTIONS_CALLS)
+                     ->inIs('DEFINITION')
+                     ->is('reference', true)
+             )
+             // Case for static method call ?
+             ->savePropertyAs('rank', 'position')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->outWithRank('ARGUMENT', 'position')
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +74,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->outIs('ARGUMENT')
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::$CONTAINERS_PHP)
              ->not(
                 $this->side()
                      ->atomIs(self::$FUNCTIONS_CALLS)
@@ -63,13 +84,8 @@ class OnlyVariablePassedByReference extends Analyzer {
              // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
-             ->outIs('CLASS')
-             ->classDefinition()
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->samePropertyAs('code', 'method')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'position')
+             ->inIs('DEFINITION')
+             ->outWithRank('ARGUMENT', 'position')
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
@@ -77,17 +93,18 @@ class OnlyVariablePassedByReference extends Analyzer {
         // Checking PHP Native functions
         $functions = self::$methods->getFunctionsReferenceArgs();
         $references = new GroupBy();
-        
+
         foreach($functions as $function) {
-            $references[$function['position']] = "\\$function[function]";
+            $references[$function['position']] = makeFullnspath($function['function']);
         }
+        
+//        $references = array(2 => $references[2]);
 
         foreach($references as $position => $functions) {
             // Functioncalls
-            $this->atomIs('Functioncall')
-                 ->fullnspathIs($functions)
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIsNot(self::$CONTAINERS)
+                 ->atomIsNot(self::$CONTAINERS_PHP)
                  ->back('first');
             $this->prepareQuery();
         }

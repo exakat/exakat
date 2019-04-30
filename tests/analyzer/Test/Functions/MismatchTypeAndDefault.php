@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class MismatchTypeAndDefault extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testFunctions_MismatchTypeAndDefault01()  { $this->generic_test('Functions/MismatchTypeAndDefault.01'); }
     public function testFunctions_MismatchTypeAndDefault02()  { $this->generic_test('Functions/MismatchTypeAndDefault.02'); }
@@ -18,5 +18,6 @@ class MismatchTypeAndDefault extends Analyzer {
     public function testFunctions_MismatchTypeAndDefault07()  { $this->generic_test('Functions/MismatchTypeAndDefault.07'); }
     public function testFunctions_MismatchTypeAndDefault08()  { $this->generic_test('Functions/MismatchTypeAndDefault.08'); }
     public function testFunctions_MismatchTypeAndDefault09()  { $this->generic_test('Functions/MismatchTypeAndDefault.09'); }
+    public function testFunctions_MismatchTypeAndDefault10()  { $this->generic_test('Functions/MismatchTypeAndDefault.10'); }
 }
 ?>

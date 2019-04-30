@@ -3850,7 +3850,10 @@ class Load extends Tasks {
             
             $else = $this->popExpression();
         }
-        
+
+        if (in_array($then->atom, array('Identifier', 'Nsname'), STRICT_COMPARISON)) {
+            $this->calls->addCall('const', $then->fullnspath, $then);
+        }
         $this->addLink($ternary, $condition, 'CONDITION');
         $this->addLink($ternary, $then, 'THEN');
         $this->addLink($ternary, $else, 'ELSE');

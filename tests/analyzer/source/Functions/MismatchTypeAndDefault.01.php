@@ -3,6 +3,7 @@
 //declare(strict_types=1);
 
 //function foo(string $s = 1) {}
+function foo1(string $s = null) {}
 function foo2(string $s = "1") {}
 //function foo3(string $s = 1.1) {}
 function foo4(string $s = 'a'.'b') {}

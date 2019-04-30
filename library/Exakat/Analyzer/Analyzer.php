@@ -98,6 +98,7 @@ abstract class Analyzer {
     const NO_TRANSLATE = false;
 
     public static $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
+    public static $CONTAINERS_PHP   = array('Variable', 'Staticproperty', 'Member', 'Array', 'Phpvariable');
     public static $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     public static $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');

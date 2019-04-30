@@ -31,9 +31,9 @@ class ShellFavorite extends Analyzer {
         $mapping = <<<'GREMLIN'
 if (it.get().label() == 'Shell') {
     x2 = 'backtick';
-} else if ( it.get().value('fullnspath') == '\\\\exec') {
+} else if ( it.get().value('fullnspath') == '\\exec') {
     x2 = 'exec';
-} else if ( it.get().value('fullnspath') == '\\\\shell_exec') {
+} else if ( it.get().value('fullnspath') == '\\shell_exec') {
     x2 = 'shell_exec';
 }
 

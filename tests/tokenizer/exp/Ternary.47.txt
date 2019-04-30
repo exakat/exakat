@@ -1,0 +1,153 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONST
+            5
+            Label : DEFINITION
+              6
+            Label : DEFINITION
+              6
+            Label : DEFINITION
+              6
+            Label : DEFINITION
+              6
+            Label : DEFINITION
+              6
+            Label : DEFINITION
+              6
+            Label : NAME
+              6
+            Label : VALUE
+              8
+        Label : EXPRESSION
+          5
+          Label : CONST
+            5
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              9
+            Label : NAME
+              9
+            Label : VALUE
+              11
+        Label : EXPRESSION
+          12
+          Label : CONST
+            5
+            Label : CONST
+              5
+              Label : NAME
+                14
+              Label : VALUE
+                16
+                Label : ARGUMENT
+                  17
+          Label : DEFINITION
+            13
+          Label : NAME
+            13
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              9
+            Label : THEN
+              21
+              Label : CLASS
+                13
+              Label : CONSTANT
+                15
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              9
+            Label : THEN
+              9
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              9
+            Label : THEN
+              22
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              9
+            Label : THEN
+              17
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              22
+            Label : THEN
+              17
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CONDITION
+              6
+            Label : ELSE
+              9
+            Label : THEN
+              24
+              Label : ARGUMENT
+                17
+              Label : NAME
+                24
+        Label : EXPRESSION
+          24
+          Label : ARGUMENT
+            17
+          Label : BLOCK
+            25
+            Label : EXPRESSION
+              17
+          Label : DEFINITION
+            24
+            Label : ARGUMENT
+              17
+            Label : NAME
+              24
+          Label : NAME
+            24
