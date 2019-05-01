@@ -3,14 +3,12 @@ stages:
   - build
   - test
 
-
 lint:
   stage: lint
   image: sixlive/php-lint-fix
 
   script:
     - php-cs-fixer fix --dry-run
-    - exit;
 
 build:
   stage: build
