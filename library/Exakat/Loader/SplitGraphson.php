@@ -43,7 +43,7 @@ class SplitGraphson extends Loader {
     private $config = null;
     
     private $project   = null;
-    private $projectId = null;
+    private $id0       = null;
     private $id        = 1;
 
     private $graphdb        = null;
@@ -84,11 +84,10 @@ class SplitGraphson extends Loader {
 
         display("Init finalize\n");
         $begin = microtime(true);
-        $query = <<<GREMLIN
+        $query = 'g.V().hasLabel("Project").id();';
+        $res = $this->graphdb->query($query);
 
-g.V().hasLabel('File').addE('PROJECT').from(__.V($this->projectId));
-
-GREMLIN;
+        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V('.$res->toInt().'));';
         $res = $this->graphdb->query($query);
         
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
@@ -157,41 +156,34 @@ GREMLIN;
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         $fileName = 'unknown';
         
+        if (empty($this->id0)) {
+            $jsonText = json_encode($id0->toGraphsonLine($id0)).PHP_EOL;
+            assert(!json_last_error(), 'Error encoding '.$id0->atom.' : '.json_last_error_msg());
+            
+            $fp = fopen($this->path, 'a');
+            fwrite($fp, $jsonText);
+            fclose($fp);
+            
+            ++$this->total;
+            $this->id0 = $id0;
+        }
+
         $json = array();
         foreach($atoms as $atom) {
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
             }
+            $json[$atom->id] = $atom->toGraphsonLine($this->id);
             
-            if ($atom->atom === 'Project') {
-                if ($this->projectId === null) {
-                    $jsonText = json_encode($atom->toGraphsonLine($this->id)).PHP_EOL;
-                    assert(!json_last_error(), 'Error encoding '.$atom->atom.' : '.json_last_error_msg());
-                    
-                    $fp = fopen($this->path, 'a');
-                    fwrite($fp, $jsonText);
-                    fclose($fp);
-                    
-                    $res = $this->graphdb->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
-                    assert(isset($res[0]['id']), 'No Id provided'.var_export($res, true));
-                    $this->projectId = $res[0]['id'];
-                    $this->project = $atom;
-                }
-            } else {
-                $json[$atom->id] = $atom->toGraphsonLine($this->id);
-            
-                if ($atom->atom === 'Functioncall' &&
-                    !empty($atom->fullnspath)) {
-                    if (isset($this->functioncalls[$atom->fullnspath])) {
-                        ++$this->functioncalls[$atom->fullnspath];
-                    } else {
-                        $this->functioncalls[$atom->fullnspath] = 1;
-                    }
+            if ($atom->atom === 'Functioncall' &&
+                !empty($atom->fullnspath)) {
+                if (isset($this->functioncalls[$atom->fullnspath])) {
+                    ++$this->functioncalls[$atom->fullnspath];
+                } else {
+                    $this->functioncalls[$atom->fullnspath] = 1;
                 }
             }
         }
-        
-        unset($links['PROJECT']);
 
         foreach($links as $type => $a) {
             foreach($a as $b) {
@@ -226,10 +218,6 @@ GREMLIN;
         $total = 0; // local total
         $fp = fopen($this->path, 'a');
         foreach($json as $j) {
-            if ($j->label === 'Project') {
-                continue;
-            }
-            
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
             
