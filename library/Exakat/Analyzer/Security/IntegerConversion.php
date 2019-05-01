@@ -94,7 +94,7 @@ class IntegerConversion extends Analyzer {
         // if ((int) $_COOKIES['a'] === 3) {} }
         $this->analyzerIs($incomingValues)
              ->inIsIE('VARIABLE')
-             ->inIs('CAST')
+             ->inIs('CAST') 
              ->tokenIs('T_INT_CAST') // casting to integer
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
