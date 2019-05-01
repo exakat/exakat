@@ -10,6 +10,9 @@ $expected     = array('include \'../../nonexistant.php\'',
                       'include \'../nonexistant.php\'',
                       'include \'../nonexistant.php\'',
                       'include \'../../nonexistant.php\'',
+                      'include \'../include_a.php\'', 
+                      'include \'../../include_a.php\'', 
+                      'include \'../include_b.php\'',
                      );
 
 $expected_not = array('include \'./include.php\'',
