@@ -26,12 +26,18 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class NonConstantArray extends Analyzer {
+    public function dependsOn() {
+        return array('Constants/IsExtConstant',
+                    );
+    }
+
     public function analyze() {
         // Array, outside a string
         $this->atomIs('Array')
              ->hasNoParent('String', 'CONCAT')
              ->outIs('INDEX')
              ->atomIs(array('Identifier', 'Nsname'))
+             ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
 
@@ -41,6 +47,7 @@ class NonConstantArray extends Analyzer {
              ->tokenIs(array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN'))
              ->outIs('INDEX')
              ->atomIs(array('Identifier', 'Nsname'))
+             ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
     }

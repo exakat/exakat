@@ -1,6 +1,14 @@
 stages:
+  - lint
   - build
   - test
+
+lint:
+  stage: lint
+  image: sixlive/php-lint-fix
+
+  script:
+    - php-cs-fixer fix --dry-run
 
 build:
   stage: build

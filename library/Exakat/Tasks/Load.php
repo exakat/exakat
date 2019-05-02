@@ -429,6 +429,7 @@ class Load extends Tasks {
         $this->id0->code      = $this->config->project;
         $this->id0->fullcode  = $this->config->project_name;
         $this->id0->token     = 'T_WHOLE';
+        $this->atoms = array();
 
         // Restart the connexion each time
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
@@ -455,7 +456,6 @@ class Load extends Tasks {
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
             }
-
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
                 throw new MustBeADir($dirName);
@@ -568,8 +568,6 @@ class Load extends Tasks {
         }
         Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
-        $this->reset();
-
         $nbTokens = 0;
         foreach($files as $file) {
             try {
@@ -599,7 +597,7 @@ class Load extends Tasks {
     }
 
     private function reset() {
-        $this->atoms = array($this->id0->id => $this->id0);
+        $this->atoms = array();
         $this->links = array();
 
         $this->contexts    = new Context();
@@ -706,8 +704,6 @@ class Load extends Tasks {
         $id1->code     = $filename;
         $id1->fullcode = $filename;
         $id1->token    = 'T_FILENAME';
-
-        $this->addLink($this->id0, $id1, 'PROJECT');
 
         $this->currentMethod           = array($id1);
         $this->currentFunction         = array($id1);
@@ -5677,7 +5673,7 @@ class Load extends Tasks {
             if ($id === 1) { continue; }
             if ($atom->atom === 'Variabledefinition') { continue; }
 
-            if (!isset($D[$id])) {
+            if (!isset($D[$id]) && $atom->atom !== 'File') {
                 throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
             }
 

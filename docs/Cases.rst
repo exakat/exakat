@@ -3889,7 +3889,7 @@ $isNew could be a typecast.
 
 .. _fuelcms-structures-returntruefalse:
 
-Fuelcms
+FuelCMS
 ^^^^^^^
 
 :ref:`return-true-false`, in fuel/modules/fuel/helpers/validator_helper.php:254. 
@@ -4180,6 +4180,32 @@ SugarCRM uses exceptions to fill work in progress. Here, we recognize a forgotte
         {
             throw Exception("Not Implemented");
         }
+
+
+--------
+
+
+.. _zurmo-exceptions-throwfunctioncall:
+
+Zurmo
+^^^^^
+
+:ref:`throw-functioncall`, in app/protected/modules/gamification/rules/collections/GameCollectionRules.php:66. 
+
+Other part of the code actually instantiate the exception before throwing it.
+
+.. code-block:: php
+
+    abstract class GameCollectionRules
+        {
+            /**
+             * @return string
+             * @throws NotImplementedException - Implement in children classes
+             */
+            public static function getType()
+            {
+                throw NotImplementedException();
+            }
 
 Use Instanceof
 ==============
@@ -5880,6 +5906,22 @@ A good number of properties are set in the current object even before the parent
     
             parent::__construct();
 
+Invalid Regex
+=============
+
+.. _sugarcrm-structures-invalidregex:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`invalid-regex`, in SugarCE-Full-6.5.26/include/utils/file_utils.php:513. 
+
+This yields an error at execution time : ``Compilation failed: invalid range in character class at offset 4 ``.
+
+.. code-block:: php
+
+    preg_replace('/[^\w-._]+/i', '', $name)
+
 Identical On Both Sides
 =======================
 
@@ -6451,6 +6493,52 @@ This method returns the list of mime type, by using a hidden global value : ee()
     		ee()->load->library('mime_type');
     		return ee()->mime_type->isSafeForUpload($mime);
     	}
+
+Possible Missing Subpattern
+===========================
+
+.. _phpmyadmin-php-missingsubpattern:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`possible-missing-subpattern`, in libraries/classes/Advisor.php:557. 
+
+The last capturing subpattern is ``( \[(.*)\])?`` and it is optional. Indeed, when the pattern succeed, the captured values are stored in ``$match``. Yet, the code checks for the existence of ``$match[3]`` before using it.
+
+.. code-block:: php
+
+    if (preg_match("/rule\s'(.*)'( \[(.*)\])?$/", $line, $match)) {
+                        $ruleLine = 1;
+                        $ruleNo++;
+                        $rules[$ruleNo] = ['name' => $match[1]];
+                        $lines[$ruleNo] = ['name' => $i + 1];
+                        if (isset($match[3])) {
+                            $rules[$ruleNo]['precondition'] = $match[3];
+                            $lines[$ruleNo]['precondition'] = $i + 1;
+                        }
+
+
+--------
+
+
+.. _spip-php-missingsubpattern:
+
+SPIP
+^^^^
+
+:ref:`possible-missing-subpattern`, in ecrire/inc/filtres_dates.php:73. 
+
+This code avoid the PHP notice by padding the resulting array (see comment in French : eviter === avoid)
+
+.. code-block:: php
+
+    if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs)) {
+    				$regs = array_pad($regs, 4, null); // eviter notice php
+    				$date = preg_replace("@/@", "-", $regs[1]) . "-00" . $regs[3];
+    			} else {
+    				$date = date("Y-m-d H:i:s", strtotime($date));
+    			}
 
 Could Be Private Class Constant
 ===============================
@@ -7831,6 +7919,82 @@ This could be improved with count() recursive and a array_filter call, to remove
                         $nb_results += count($list);
                     }
                 }
+
+Should Use Foreach
+==================
+
+.. _expressionengine-structures-shoulduseforeach:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`should-use-foreach`, in system/ee/EllisLab/ExpressionEngine/Service/Model/Query/Builder.php:241. 
+
+This code could turn the string into an array, with the explode() function, and use foreach(), instead of calculating the length() initially, and then building the loop.
+
+.. code-block:: php
+
+    $length = strlen($str);
+    		$words = array();
+    
+    		$word = '';
+    		$quote = '';
+    		$quoted = FALSE;
+    
+    		for ($i = 0; $i < $length; $i++)
+    		{
+    			$char = $str[$i];
+    
+    			if (($quoted == FALSE && $char == ' ') || ($quoted == TRUE && $char == $quote))
+    			{
+    				if (strlen($word) > 2)
+    				{
+    					$words[] = $word;
+    				}
+    
+    				$quoted = FALSE;
+    				$quote = '';
+    				$word = '';
+    
+    				continue;
+    			}
+    
+    			if ($quoted == FALSE && ($char == ' || $char == ") && ($word === '' || $word == '-'))
+    			{
+    				$quoted = TRUE;
+    				$quote = $char;
+    				continue;
+    			}
+    
+    			$word .= $char;
+    		}
+
+
+--------
+
+
+.. _woocommerce-structures-shoulduseforeach:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`should-use-foreach`, in includes/libraries/class-wc-eval-math.php:84. 
+
+This loops reviews the 'stack' and updates its elements. The same loop may leverage foreach and references for more efficient code.
+
+.. code-block:: php
+
+    $stack_size = count( $stack );
+    				for ( $i = 0; $i < $stack_size; $i++ ) { // freeze the state of the non-argument variables
+    					$token = $stack[ $i ];
+    					if ( preg_match( '/^[a-z]\w*$/', $token ) and ! in_array( $token, $args ) ) {
+    						if ( array_key_exists( $token, self::$v ) ) {
+    							$stack[ $i ] = self::$v[ $token ];
+    						} else {
+    							return self::trigger( "undefined variable '$token' in function definition" );
+    						}
+    					}
+    				}
 
 Should Preprocess Chr
 =====================

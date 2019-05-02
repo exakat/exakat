@@ -36,7 +36,7 @@ Extensions are bundled as PHP archives (`.phar` file), installed in the `ext` fo
 
 
 
-List of extensions : there are 13 extensions
+List of extensions : there are 14 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Codeigniter <extension-codeigniter>`
@@ -44,6 +44,7 @@ List of extensions : there are 13 extensions
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
 * :ref:`Monolog <extension-monolog>`
+* :ref:`Pmb <extension-pmb>`
 * :ref:`Prestashop <extension-prestashop>`
 * :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
@@ -584,6 +585,48 @@ This extension includes no specific report. Use generic reports, like Text to ac
 
 
 
+.. _extension-pmb:
+
+Pmb
+###
+
+This is the Pmb extension for Exakat. 
+
+PMB is a fully featured open source integrated library system. It is continuously developed and maintained by the French company PMB Services.
+
+
+
+* **Home page** : `https://www.sigb.net/ <https://www.sigb.net/>`_
+* **Extension page** : `https://github.com/exakat/Exakat4Pmb <https://github.com/exakat/Exakat4Pmb>`_
+
+Pmb analysis
+__________________________________________________
+
+This extension includes 6 analyzers.
+
+* Parametre PMB (Pmb/Parametre)
+* Paramètre explicitement global (Pmb/GlobalParameter)
+* Paramètre non utilisé (Pmb/UnusedParametre)
+* Pmb/OpacModifiedParameter (Pmb/OpacModifiedParameter)
+* Should Use Pmb Functions (Pmb/ShouldUsePmbFunctions)
+* Synchronisation de CMS Module (Pmb/CmsModules)
+
+
+Pmb rulesets
+__________________________________________________
+
+This extension includes 2 rulesets.
+
+* Pmb
+* Review
+
+Pmb reports
+__________________________________________________
+
+This extension includes one report : Pmb.
+
+
+
 .. _extension-prestashop:
 
 Prestashop
@@ -599,8 +642,9 @@ PrestaShop is an efficient and innovative e-commerce solution with all the featu
 Prestashop analysis
 __________________________________________________
 
-This extension includes 6 analyzers.
+This extension includes 8 analyzers.
 
+*  (Prestashop/IncomingValues)
 * Prestashop 1.5 Compatibility (Prestashop/Prestashop_1_5)
 * Prestashop 1.6 Compatibility (Prestashop/Prestashop_1_6)
 * Prestashop 1.7 Compatibility (Prestashop/Prestashop_1_7)

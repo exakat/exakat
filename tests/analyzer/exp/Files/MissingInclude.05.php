@@ -8,6 +8,7 @@ $expected     = array('include_once (dirname(__DIR__, 2) . \'/abc.php\')',
                       'require_once (dirname(__DIR__) . \'a.php\')',
                       'require_once (dirname(__DIR__) . \'include.php\')',
                       'include_once (dirname(dirname(dirname(__DIR__))) . \'/abc.php\')',
+                      'require_once (dirname(__DIR__, 1) . \'/include.php\')',
                      );
 
 $expected_not = array('require_once (dirname(__DIR__, 1) . \'/include.php\')',

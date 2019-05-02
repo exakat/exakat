@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestSuite;
 
-include_once './Test/Analyzer.php';
+include_once __DIR__.'/Test/Analyzer.php';
 
 class Randomtest extends TestSuite {
 
