@@ -51,21 +51,7 @@ class Datastore {
             }
             // force creation
             $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-            $this->sqliteWrite->close();
-            $this->sqliteWrite = null;
-        }
 
-        if ($this->sqliteWrite === null) {
-            $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-            $this->sqliteWrite->enableExceptions(true);
-            $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
-            // open the read connexion AFTER the write, to have the sqlite databse created
-            $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
-            $this->sqliteRead->enableExceptions(true);
-            $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
-        }
-
-        if ($create === self::CREATE) {
             $this->cleanTable('hash');
             $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
                                         'exakat_build'         => Exakat::BUILD,
@@ -89,7 +75,19 @@ class Datastore {
             $this->cleanTable('ignoredCit');
             $this->cleanTable('ignoredFunctions');
             $this->cleanTable('ignoredConstants');
+
+            $this->sqliteWrite->close();
+            $this->sqliteWrite = null;
         }
+
+       $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+       $this->sqliteWrite->enableExceptions(true);
+       $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
+
+       // open the read connexion AFTER the write, to have the sqlite databse created
+       $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+       $this->sqliteRead->enableExceptions(true);
+       $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
 
     public function addRow($table, $data) {
@@ -104,7 +102,7 @@ class Datastore {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
-            $res = $this->sqliteRead->query($query);
+            $res = $this->sqliteWrite->query($query);
 
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -113,8 +111,11 @@ class Datastore {
                 }
                 $cols[] = $row['name'];
             }
+            
 
             if (count($cols) !== 2) {
+                print_r($cols);
+                print_r($data);
                 throw new WrongNumberOfColsForAHash($table, count($cols));
             }
         }
@@ -145,7 +146,7 @@ class Datastore {
         }
 
         if (!empty($values)) {
-                $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
+            $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
             $this->sqliteWrite->querySingle($query);
         }
 

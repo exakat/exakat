@@ -159,7 +159,7 @@ class DefaultConfig extends Config {
                                                               'Suggestions',
                                                               ),
 
-                                'inside_code'          => Configuration::INSIDE_CODE,
+                                'inside_code'          => Configuration::WITH_PROJECTS,
                               );
 
     public function loadConfig($args) {

@@ -61,7 +61,7 @@ class Analyze extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/$project")) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($project);
         }
 
@@ -166,7 +166,7 @@ class Analyze extends Tasks {
     private function analyze(Analyzer $analyzer, string $analyzer_class) {
         $begin = microtime(true);
 
-        $lock = new Lock($this->exakatDir, $analyzer_class);
+        $lock = new Lock($this->config->tmp_dir, $analyzer_class);
         if (!$lock->check()) {
             display(" Concurency lock activated for $analyzer_class \n");
             return false;

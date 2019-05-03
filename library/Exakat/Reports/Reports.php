@@ -65,9 +65,8 @@ abstract class Reports {
         assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
-        $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
-        if (file_exists($path)) {
-            $this->sqlite = new \Sqlite3($path, \SQLITE3_OPEN_READONLY);
+        if (file_exists($this->config->dump)) {
+            $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
             $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",

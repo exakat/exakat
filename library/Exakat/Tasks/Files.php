@@ -58,7 +58,6 @@ class Files extends Tasks {
         $ignoredFiles = array();
         $files = array();
         $tokens = 0;
-        $path = "{$this->config->projects_root}/projects/$dir/code";
 
         display( "Searching for files \n");
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
@@ -284,6 +283,7 @@ class Files extends Tasks {
                 $this->datastore->addRow('composer', (array) $composer->require);
             }
         }
+
         $this->datastore->addRow('hash', $composerInfo);
     }
     

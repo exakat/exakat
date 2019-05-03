@@ -48,7 +48,7 @@ class FindExternalLibraries extends Tasks {
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
 
-        $json = json_decode(file_get_contents('data/externallibraries.json'));
+        $json = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
         foreach((array) $json as $name => $o) {
             if ($o->type === 'classic') {
                 foreach($o->classes as $class) {
@@ -71,21 +71,19 @@ class FindExternalLibraries extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/$project/")) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($project);
         }
 
-        $path = "{$this->config->projects_root}/projects/$project/code";
-        if (!file_exists($path)) {
+        if (!file_exists($this->config->code_dir)) {
             throw new NoCodeInProject($project);
         }
 
-        $cacheFile = "{$this->config->projects_root}/projects/$project/config.cache";
+        $cacheFile = "{$this->config->project_dir}/config.cache";
 
         display('Processing files');
         $dir = $this->config->project;
-        $path = "{$this->config->projects_root}/projects/$dir/code";
-        Files::findFiles($path, $files, $ignoredFiles, $this->config);
+        Files::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
 
         if (empty($files)) {
             display('No files to process. Aborting');
@@ -94,7 +92,7 @@ class FindExternalLibraries extends Tasks {
 
         $missing = array();
         foreach($files as $file) {
-            if (!file_exists($path.$file)) {
+            if (!file_exists($this->config->code_dir.$file)) {
                 $missing[] = $file;
             }
         }

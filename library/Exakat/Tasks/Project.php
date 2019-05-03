@@ -68,16 +68,16 @@ class Project extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/$project")) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/$project/code")) {
+        if (!file_exists($this->config->code_dir)) {
             throw new NoCodeInProject($this->config->project);
         }
 
-        $sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
-        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
+        $sqliteFileFinal    = $this->config->dump;
+        $sqliteFilePrevious = $this->config->dump_previous;
         if (file_exists($sqliteFileFinal)) {
             copy($sqliteFileFinal, $sqliteFilePrevious);
         }
@@ -276,7 +276,7 @@ class Project extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen("{$this->project_dir}/log/project.timing.csv", 'w+');
+            $log = fopen("{$this->config->log_dir}/project.timing.csv", 'w+');
         }
 
         $end = microtime(true);
@@ -350,7 +350,7 @@ class Project extends Tasks {
             unset($dumpConfig);
         } catch (\Exception $e) {
             echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
-            file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/log/analyze.final.log", $e->getMessage());
+            file_put_contents("{$this->config->log_dir}/analyze.final.log", $e->getMessage());
         }
     }
 
@@ -443,7 +443,7 @@ class Project extends Tasks {
                 $this->logTime("Dumped : $theme");
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
-                file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/log/analyze.$themeForFile.final.log", $e->getMessage());
+                file_put_contents("{$this->config->log_dir}/analyze.$themeForFile.final.log", $e->getMessage());
             }
         }
         $VERBOSE = $oldVerbose;
@@ -467,12 +467,11 @@ class Project extends Tasks {
     }
     
     private function getLineDiff($current, $vcs) {
-        $sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
-        if (!file_exists($sqliteFilePrevious)) {
+        if (!file_exists($this->config->dump_previous)) {
             return ;
         }
         
-        $sqlite = new \Sqlite3($sqliteFilePrevious);
+        $sqlite = new \Sqlite3($this->config->dump_previous);
         $res = $sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="hash"');
         if (!$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
             return;

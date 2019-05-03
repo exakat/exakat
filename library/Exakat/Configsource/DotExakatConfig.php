@@ -29,12 +29,13 @@ class DotExakatConfig extends Config {
     private $dotExakat = '';
 
     public function __construct() {
-        $this->dotExakat = getcwd()."/.exakat.ini";
+        $this->dotExakat = getcwd().'/.exakat.ini';
         // also support json?
     }
 
     public function loadConfig($project) {
         if (!file_exists($this->dotExakat)) {
+            $this->config['inside_code'] = Configuration::WITH_PROJECTS;
             return self::NOT_LOADED;
         }
 
@@ -108,7 +109,7 @@ class DotExakatConfig extends Config {
             unset($ext);
         }
 
-        return "$project/.exakat";
+        return '.exakat.ini';
     }
 }
 
