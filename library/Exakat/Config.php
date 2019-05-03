@@ -116,7 +116,8 @@ class Config {
         // then read the config for the project in its folder
         if ($this->commandLineConfig->get('project') === null) {
             $this->projectConfig   = new EmptyConfig();
-            $this->dotExakatConfig = new DotExakatConfig($this->projects_root);
+
+            $this->dotExakatConfig = new DotExakatConfig();
             $this->dotExakatConfig->loadConfig(null);
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
@@ -171,16 +172,24 @@ class Config {
     private function finishConfigs() {
         $this->options['pid'] = getmypid();
 
-        if ($this->options['inside_code'] === true) {
-            $this->options['code_dir']  = getcwd();
-            $this->options['log_dir']   = getcwd() . '/.exakat';
-            $this->options['tmp_dir']   = getcwd() . '/.exakat';
-            $this->options['datastore'] = getcwd() . '/.exakat/datastore.sqlite';
+        if ($this->options['inside_code'] === Config::INSIDE_CODE) {
+            $this->options['project_dir']   = getcwd();
+            $this->options['code_dir']      = getcwd();
+            $this->options['log_dir']       = getcwd() . '/.exakat';
+            $this->options['tmp_dir']       = getcwd() . '/.exakat';
+            $this->options['datastore']     = getcwd() . '/.exakat/datastore.sqlite';
+            $this->options['dump']          = getcwd() . '/.exakat/dump.sqlite';
+            $this->options['dump_previous'] = getcwd() . '/.exakat/dump-1.sqlite';
+            $this->options['dump']          = getcwd() . '/.exakat/dump.sqlite';
+            $this->options['dump_tmp']      = getcwd() . '/.exakat/.dump.sqlite';
         } else {
-            $this->options['code_dir']  = $this->options['projects_root'].'/projects/'.$this->projects.'/code';
-            $this->options['log_dir']   = $this->options['projects_root'].'/projects/'.$this->projects.'/log';
-            $this->options['tmp_dir']   = $this->options['projects_root'].'/projects/'.$this->projects.'/.exakat';
-            $this->options['datastore'] = $this->options['projects_root'].'/projects/'.$this->projects.'/datastore.sqlite';
+            $this->options['project_dir']   = $this->projects_root.'/projects/'.$this->options['project'];
+            $this->options['code_dir']      = $this->options['project_dir'] . '/code';
+            $this->options['log_dir']       = $this->options['project_dir'] . '/log';
+            $this->options['tmp_dir']       = $this->options['project_dir'] . '/.exakat';
+            $this->options['datastore']     = $this->options['project_dir'] . '/datastore.sqlite';
+            $this->options['dump_previous'] = $this->options['project_dir'] . '/dump-1.sqlite';
+            $this->options['dump_tmp']      = $this->options['project_dir'] . '/.dump.sqlite';
         }
     }
 
