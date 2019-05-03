@@ -22,6 +22,8 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Config as Configuration;
+
 class DefaultConfig extends Config {
     protected $config  = array( // directives with boolean value
                                'verbose'        => false,
@@ -156,7 +158,8 @@ class DefaultConfig extends Config {
                                                               'Appcontent',
                                                               'Suggestions',
                                                               ),
-                               
+
+                                'inside_code'          => Configuration::INSIDE_CODE,
                               );
 
     public function loadConfig($args) {

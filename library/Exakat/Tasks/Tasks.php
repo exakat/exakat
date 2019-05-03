@@ -44,7 +44,6 @@ abstract class Tasks {
 
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
-    protected $exakatDir             = '/tmp/exakat';
     public static $semaphore      = null;
     public static $semaphorePort  = null;
     
@@ -99,8 +98,7 @@ abstract class Tasks {
                                  "{$this->config->projects_root}/projects/{$this->config->project}");
         }
 
-        if ($this->config->project !== 'default' &&
-            file_exists("{$this->config->projects_root}/projects/{$this->config->project}")) {
+        if ($this->config->project !== 'default') {
             $this->datastore = new Datastore($this->config);
         }
 
@@ -108,13 +106,11 @@ abstract class Tasks {
             mkdir("{$this->config->projects_root}/projects/", 0700);
         }
 
-        if (!empty($this->config->project)) {
-            $this->exakatDir = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/";
-            
-            if ($this->config->project !== 'default' &&
-                file_exists(dirname($this->exakatDir)) &&
-                !file_exists($this->exakatDir)) {
-                mkdir($this->exakatDir, 0700);
+        if ($this->config->inside_code === Config::INSIDE_CODE ||
+            $this->config->project !== 'default') {
+                if (!file_exists($this->config->tmp_dir)) {
+                    var_dump($this->config->tmp_dir);
+                    mkdir($this->config->tmp_dir, 0700);
             }
         }
 

@@ -95,19 +95,19 @@ class Git extends Vcs {
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} branch | grep \\*");
+        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \\*");
         $branch = substr(trim($res), 2);
         
         if (strpos($branch, ' detached at ') === false) {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} show-ref --heads $branch");
+            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         } else {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
+            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
             print $resInitial;
             $branch = '';
         }
     
-        $date = trim(shell_exec("cd {$this->destinationFull}/code/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet; {$this->executable} log -1 --format=%cd "));
-        $resFinal = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} show-ref --heads $branch");
+        $date = trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet; {$this->executable} log -1 --format=%cd "));
+        $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal, ) = explode(' ', $resFinal);
         }
@@ -124,18 +124,18 @@ class Git extends Vcs {
     }
 
     public function getBranch() {
-        if (!file_exists("{$this->destinationFull}/code/")) {
+        if (!file_exists("{$this->destinationFull}/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} branch | grep \* 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \* 2>&1");
         return trim($res, " *\n");
     }
 
     public function getRevision() {
-        if (!file_exists("{$this->destinationFull}/code/")) {
+        if (!file_exists("{$this->destinationFull}/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/code/; {$this->executable} rev-parse HEAD 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} rev-parse HEAD 2>&1");
         return trim($res);
     }
     
@@ -166,7 +166,7 @@ class Git extends Vcs {
     }
 
     public function getDiffLines($r1, $r2) {
-        $res = shell_exec("cd {$this->destinationFull}/code; {$this->executable} diff -U0 -r $r1 -r $r2");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -U0 -r $r1 -r $r2");
 
         $file    = '';
         $changes = array();
@@ -193,7 +193,7 @@ class Git extends Vcs {
     }
     
     public function getFileModificationLoad() {
-        $res = shell_exec("cd {$this->destinationFull}/code; {$this->executable} log --name-only --pretty=format:");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:");
 
         $files = array();
         $rows = explode(PHP_EOL, $res);

@@ -61,8 +61,8 @@ class CleanDb extends Tasks {
 
     private function cleanTmpDir() {
         if ($this->config->project !== 'default') {
-            rmdirRecursive($this->exakatDir);
-            mkdir($this->exakatDir, 0700);
+            rmdirRecursive($this->config->tmp_dir);
+            mkdir($this->config->tmp_dir, 0700);
         }
     }
 }

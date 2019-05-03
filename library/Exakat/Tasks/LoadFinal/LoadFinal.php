@@ -226,7 +226,7 @@ GREMLIN;
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen("{$this->config->projects_root}/projects/{$this->config->project}/log/loadfinal.timing.csv", 'w+');
+            $log = fopen("{$this->config->log_dir}/loadfinal.timing.csv", 'w+');
             if ($log === false) {
                 return;
             }

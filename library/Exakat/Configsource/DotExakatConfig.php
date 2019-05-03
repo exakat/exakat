@@ -23,10 +23,14 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Config as Configuration;
 
 class DotExakatConfig extends Config {
-    public function __construct($projects_root) {
-        $this->dotExakat = "{$projects_root}/projects/code/.exakat";
+    private $dotExakat = '';
+
+    public function __construct() {
+        $this->dotExakat = getcwd()."/.exakat.ini";
+        // also support json?
     }
 
     public function loadConfig($project) {
@@ -45,11 +49,11 @@ class DotExakatConfig extends Config {
         unset($value);
 
         $other_php_versions = array();
-        foreach(self::PHP_VERSIONS as $version) {
+        foreach(Configuration::PHP_VERSIONS as $version) {
             if (empty($this->configFile['php'.$version])) {
                 continue;
             }
-            $php = new Phpexec($version[0].'.'.$version[1], $this->configFile['php'.$version]);
+            $php = new Phpexec($version[0].'.'.$version[1], $this->configFile["php$version"]);
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }
@@ -60,10 +64,11 @@ class DotExakatConfig extends Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
-//                           'loader'             => 'Neo4jImport',
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
-                           'project_reports'    => array('Ambassador'),
+                           'project_reports'    => array('Text'),
                         );
+
+        $this->config['inside_code'] = Configuration::INSIDE_CODE;
 
         foreach($defaults as $name => $value) {
             if (empty($this->config[$name])) {
@@ -102,11 +107,9 @@ class DotExakatConfig extends Config {
             }
             unset($ext);
         }
-        
+
         return "$project/.exakat";
     }
-
-
 }
 
 ?>

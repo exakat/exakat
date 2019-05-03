@@ -32,6 +32,9 @@ use Phar;
 class Config {
     const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80',);
 
+    const INSIDE_CODE   = true;
+    const WITH_PROJECTS = false;
+
     public $dir_root              = '.';
     public $ext_root              = '.';
     public $projects_root         = '.';
@@ -94,7 +97,7 @@ class Config {
 
         unset($argv[0]);
 
-        $this->defaultConfig = new DefaultConfig();
+        $this->defaultConfig = new DefaultConfig($this->projects_root);
 
         $this->exakatConfig = new ExakatConfig($this->projects_root);
         if ($file = $this->exakatConfig->loadConfig(null)) {
@@ -113,7 +116,8 @@ class Config {
         // then read the config for the project in its folder
         if ($this->commandLineConfig->get('project') === null) {
             $this->projectConfig   = new EmptyConfig();
-            $this->dotExakatConfig = new EmptyConfig();
+            $this->dotExakatConfig = new DotExakatConfig($this->projects_root);
+            $this->dotExakatConfig->loadConfig(null);
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
@@ -160,7 +164,24 @@ class Config {
         // autoload extensions
         $this->ext = new AutoloadExt($this->ext_root);
         $this->ext->registerAutoload();
+        
+        $this->finishConfigs();
+    }
+    
+    private function finishConfigs() {
+        $this->options['pid'] = getmypid();
 
+        if ($this->options['inside_code'] === true) {
+            $this->options['code_dir']  = getcwd();
+            $this->options['log_dir']   = getcwd() . '/.exakat';
+            $this->options['tmp_dir']   = getcwd() . '/.exakat';
+            $this->options['datastore'] = getcwd() . '/.exakat/datastore.sqlite';
+        } else {
+            $this->options['code_dir']  = $this->options['projects_root'].'/projects/'.$this->projects.'/code';
+            $this->options['log_dir']   = $this->options['projects_root'].'/projects/'.$this->projects.'/log';
+            $this->options['tmp_dir']   = $this->options['projects_root'].'/projects/'.$this->projects.'/.exakat';
+            $this->options['datastore'] = $this->options['projects_root'].'/projects/'.$this->projects.'/datastore.sqlite';
+        }
     }
 
     public function __isset($name) {

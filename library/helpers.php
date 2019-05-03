@@ -49,6 +49,11 @@ function rmdirRecursive($dir) {
         // Do nothing
         return 0;
     }
+    
+    if ($dir != '/Users/famille/Desktop/analyzeG3/projects/test/log') {
+        print __FUNCTION__." $dir\n";
+        die();
+    }
 
     // Remove symlink, but not their content
     if (is_link($dir)) {

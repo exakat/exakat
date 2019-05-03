@@ -38,10 +38,10 @@ class Datastore {
     const TIMEOUT_READ = 6000;
 
     public function __construct(Config $config, $create = self::REUSE) {
-        $this->sqlitePath = "$config->projects_root/projects/{$config->project}/datastore.sqlite";
+        $this->sqlitePath = $config->datastore;
 
         // if project dir isn't created, we are about to create it.
-        if (!file_exists("$config->projects_root/projects/{$config->project}")) {
+        if (!file_exists(dirname($this->sqlitePath))) {
             return;
         }
 
