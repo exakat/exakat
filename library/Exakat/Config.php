@@ -125,11 +125,7 @@ class Config {
                 $this->configFiles[] = $file;
             }
 
-            $this->dotExakatConfig = new DotExakatConfig($this->projects_root);
-            if ($file = $this->dotExakatConfig->loadConfig($this->commandLineConfig->get('project'))) {
-                $this->configFiles[] = $file;
-            }
-            $this->dotExakatConfig->loadConfig(null);
+            $this->dotExakatConfig   = new EmptyConfig();
         }
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
@@ -190,6 +186,7 @@ class Config {
             $this->options['datastore']     = $this->options['project_dir'] . '/datastore.sqlite';
             $this->options['dump_previous'] = $this->options['project_dir'] . '/dump-1.sqlite';
             $this->options['dump_tmp']      = $this->options['project_dir'] . '/.dump.sqlite';
+            $this->options['dump']          = $this->options['project_dir'] . '/dump.sqlite';
         }
     }
 

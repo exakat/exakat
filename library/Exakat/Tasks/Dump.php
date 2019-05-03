@@ -79,8 +79,8 @@ class Dump extends Tasks {
         
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
-        $this->sqliteFile         = "{$this->config->tmp_dir}/.dump.sqlite";
-        $this->sqliteFilePrevious = "{$this->config->tmp_dir}/dump-1.sqlite";
+        $this->sqliteFile         = $this->config->dump_tmp;
+        $this->sqliteFilePrevious = $this->config->dump_previous;
         $this->sqliteFileFinal    = $this->config->dump;
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
