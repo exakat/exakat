@@ -38,8 +38,8 @@ class Simplehtml extends Reports {
             return false;
         }
 
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName = "{$this->config->tmp_dir}/.$name";
         
         $blocks = array();
         $contents = array();
@@ -55,9 +55,9 @@ class Simplehtml extends Reports {
         $blocks[] = '{{LIST}}';
         $contents[] = $this->makeList($folder);
 
-        $html = file_get_contents($this->tmpName.'/index.html');
+        $html = file_get_contents("{$this->tmpName}/index.html");
         $html = str_replace($blocks, $contents, $html);
-        file_put_contents($this->tmpName.'/index.html', $html);
+        file_put_contents("{$this->tmpName}/index.html", $html);
         
         $this->cleanFolder();
     }
@@ -90,9 +90,8 @@ class Simplehtml extends Reports {
             $list = makeList($list);
         }
 
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM resultsCounts WHERE analyzer in ('.$list.') AND count > 0';
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
 
         $text = '';
         $titleCache = array();

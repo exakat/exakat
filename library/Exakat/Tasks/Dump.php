@@ -251,7 +251,7 @@ class Dump extends Tasks {
     }
     
     public function finalMark($finalMark) {
-        $sqlite = new \Sqlite3( "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite" );
+        $sqlite = new \Sqlite3($this->config->dump);
 
         $values = array();
         foreach($finalMark as $key => $value) {
@@ -2020,7 +2020,7 @@ SQL;
     }
 
     public function checkThemes($theme, array $analyzers) {
-        $sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->busyTimeout(5000);

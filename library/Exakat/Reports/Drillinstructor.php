@@ -32,18 +32,14 @@ class Drillinstructor extends Ambassador {
     const FILE_FILENAME  = 'drill';
     const FILE_EXTENSION = '';
 
-    public function __construct($config) {
-        parent::__construct($config);
-    }
-
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
             print "Can't produce DrillInstructor format to stdout\n";
             return false;
         }
         
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->projectPath = $folder;
 

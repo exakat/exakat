@@ -32,8 +32,8 @@ class Simpletable extends Reports {
     private $finalName   = '';
 
     public function generate($folder, $name= 'table') {
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
         $this->generateData($folder);
@@ -44,9 +44,8 @@ class Simpletable extends Reports {
         $list = $this->themes->getThemeAnalyzers(array('Analyze'));
         $list = makeList($list);
 
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.') ORDER BY analyzer';
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
         
         $results = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){

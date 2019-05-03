@@ -30,9 +30,8 @@ class Onepagejson extends Reports {
     const FILE_FILENAME  = 'onepage';
 
     public function generate($folder, $name = null) {
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = "SELECT * FROM results WHERE analyzer in $this->themesList";
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
 
         $results = array();
         $titleCache = array();

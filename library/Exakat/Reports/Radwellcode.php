@@ -54,8 +54,7 @@ class Radwellcode extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
 
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $resultsAnalyzers = new Results($sqlite, $list);
+        $resultsAnalyzers = new Results($this->sqlite, $list);
         $resultsAnalyzers->load();
 
         $results = array();

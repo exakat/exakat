@@ -33,8 +33,8 @@ class Dailytodo extends Reports {
     private $finalName   = '';
 
     public function generate($folder, $name= 'todo') {
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
         $this->generateData($folder);
@@ -46,9 +46,8 @@ class Dailytodo extends Reports {
         $list = $this->themes->getThemeAnalyzers($thema);
         $list = makeList($list);
 
-        $sqlite = new \Sqlite3("$folder/dump.sqlite");
         $sqlQuery = "SELECT count(*) AS nb FROM results WHERE analyzer in ($list)";
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
         $row = $res->fetchArray(\SQLITE3_ASSOC);
         $total = $row['nb'];
         $reporting = 10;

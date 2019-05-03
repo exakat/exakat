@@ -31,8 +31,6 @@ class Facetedjson extends Reports {
     const FILE_FILENAME  = 'faceted';
 
     public function generate($dirName, $fileName = null) {
-        $sqlite      = new \Sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
-
         $sqlQuery = <<<SQL
 SELECT  id AS id,
         fullcode AS code, 
@@ -42,7 +40,7 @@ SELECT  id AS id,
     FROM results 
     WHERE analyzer IN $this->themesList
 SQL;
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {

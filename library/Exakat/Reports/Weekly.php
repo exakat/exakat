@@ -184,8 +184,8 @@ MENU;
             return false;
         }
         
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->projectPath = $folder;
 

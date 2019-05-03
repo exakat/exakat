@@ -58,6 +58,7 @@ class Report extends Tasks {
         }
 
         if (!file_exists($this->config->dump)) {
+            print $this->config->dump;
             throw new NoDump($this->config->project);
         }
 
