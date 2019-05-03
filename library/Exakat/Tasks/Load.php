@@ -414,7 +414,7 @@ class Load extends Tasks {
     
     public function run() {
         $this->logTime('Start');
-        $files = glob("{$this->exakatDir}/*.csv");
+        $files = glob("{$this->config->tmp_dir}/*.csv");
 
         foreach($files as $file) {
             unlink($file);
@@ -486,14 +486,14 @@ class Load extends Tasks {
 
     private function processProject($project) {
         $files = $this->datastore->getCol('files', 'file');
+
         if (empty($files)) {
-            throw new NoFileToProcess($project, 'empty');
+            throw new NoFileToProcess($project, "No file to load.\n");
         }
 
         $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
 
         $nbTokens = 0;
-        $path = "{$this->config->projects_root}/projects/{$project}/code";
         if ($this->config->verbose && !$this->config->quiet) {
            $progressBar = new Progressbar(0, count($files) + count($omittedFiles) + 1, $this->config->screen_cols);
         }
@@ -501,7 +501,7 @@ class Load extends Tasks {
         foreach($files as $file) {
             try {
                 ++$this->stats['files'];
-                $r = $this->processFile($file, $path);
+                $r = $this->processFile($file, $this->config->code_dir);
                 $nbTokens += $r;
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
@@ -533,7 +533,7 @@ class Load extends Tasks {
                     continue;
                 }
 
-                $r = $this->processFile($file, $path);
+                $r = $this->processFile($file, $this->config->code_dir);
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
@@ -5754,7 +5754,7 @@ class Load extends Tasks {
     }
 
     private function saveFiles() {
-        $this->loader->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
+        $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links, $this->id0);
         $this->reset();
     }
 
@@ -5961,7 +5961,7 @@ class Load extends Tasks {
         static $begin, $end, $start;
 
         if ($this->logTimeFile === null) {
-            $this->logTimeFile = fopen("{$this->config->projects_root}/projects/{$this->config->project}/log/load.timing.csv", 'w+');
+            $this->logTimeFile = fopen("{$this->config->log_dir}/load.timing.csv", 'w+');
         }
 
         $end = microtime(true);

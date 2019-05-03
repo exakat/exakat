@@ -29,7 +29,6 @@ class CleanDb extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function run() {
-        $this->cleanTmpDir();
          if (Tasks::$semaphore === null) {
             $this->manageServer();
         } else {
@@ -56,13 +55,6 @@ class CleanDb extends Tasks {
         } else {
             display('Restart gremlin server');
             $this->gremlin->clean();
-        }
-    }
-
-    private function cleanTmpDir() {
-        if ($this->config->project !== 'default') {
-            rmdirRecursive($this->exakatDir);
-            mkdir($this->exakatDir, 0700);
         }
     }
 }

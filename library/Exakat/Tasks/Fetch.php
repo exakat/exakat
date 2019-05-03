@@ -37,28 +37,23 @@ class Fetch extends Tasks {
             throw new ProjectNeeded();
         }
 
-        $json = @file_get_contents("$this->exakatDir/Project.json");
+        $json = @file_get_contents("{$this->config->tmp_dir}/Project.json");
         $json = json_decode($json);
         if (isset($json->project) && $project === $json->project) {
             // Too early
             throw new NoDump($project);
         }
 
-        $projectPath = "{$this->config->projects_root}/projects/$project";
-        if (!file_exists($projectPath)) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($project);
         }
 
-        if (!file_exists($projectPath)) {
-            throw new NoSuchProject($project);
-        }
-
-        if (!file_exists("$projectPath/dump.sqlite")) {
-            throw new NoSuchProject($project);
+        if (!file_exists($this->config->dump)) {
+            throw new NoDump($project);
         }
         
         // transmits the dump sqlite database
-        readfile("$projectPath/dump.sqlite");
+        readfile($this->config->dump);
     }
 }
 

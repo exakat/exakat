@@ -49,20 +49,20 @@ class Report extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/")) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
 
-        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite")) {
+        if (!file_exists($this->config->datastore)) {
             throw new ProjectNotInited($this->config->project);
         }
 
-        $dumpFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
-        if (!file_exists($dumpFile)) {
+        if (!file_exists($this->config->dump)) {
+            print $this->config->dump;
             throw new NoDump($this->config->project);
         }
 
-        $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
+        $dump = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
@@ -92,10 +92,10 @@ class Report extends Tasks {
         if (empty($this->config->file) || count($this->config->format) > 1) {
             $file = $report::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '');
             display("Building report for project {$this->config->project} in '".$file."', with format {$format}\n");
-            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $report::FILE_FILENAME);
+            $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
             display("Building report for project {$this->config->project} to stdout, with format {$format}\n");
-            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", Reports::STDOUT);
+            $report->generate($this->config->project_dir, Reports::STDOUT);
         } else {
             // to files + extension
             $filename = basename($this->config->file);

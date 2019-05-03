@@ -269,7 +269,7 @@ class Ambassador extends Reports {
         }
 
         // Copy template
-        if (!copyDir("{$this->config->dir_root}/media/devfaceted", $this->tmpName )) {
+        if (!copyDir("{$this->config->dir_root}/media/devfaceted", $this->tmpName)) {
             print "Error while preparing the folder. A copy failed\n";
             return;
         }
@@ -1964,10 +1964,8 @@ SQL;
     private function generateNewIssues() {
         $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
 
-        $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
-
-        if (file_exists($path)) {
-            $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $path);
+        if (file_exists($this->config->dump_previous)) {
+            $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $this->config->dump_previous);
             
             $diff = array_diff($issues, $oldissues);
         } else {

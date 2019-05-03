@@ -71,8 +71,7 @@ SQLITE
 );
         }
 
-        $dump = new \Sqlite3($folder.'/dump.sqlite');
-        $serial = $dump->querysingle('SELECT value FROM hash WHERE key="dump_serial"');
+        $serial = $this->sqlite->querysingle('SELECT value FROM hash WHERE key="dump_serial"');
         if (empty($serial))  {
             print "Couldn't get a an for the current dataset. Ignoring\n";
             return;
@@ -86,7 +85,7 @@ SQLITE
         
         display("Add dataset #$serial to history\n");
 
-        $sqlite->query('ATTACH "'.$folder.'/dump.sqlite" AS dump');
+        $sqlite->query('ATTACH "'.$this->config->dump.'" AS dump');
 
         $query = "INSERT INTO hash SELECT NULL, \"$serial\", key, value FROM dump.hash";
         $sqlite->query($query);

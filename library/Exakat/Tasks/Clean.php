@@ -38,31 +38,32 @@ class Clean extends Tasks {
             throw new ProjectNeeded();
         }
 
-        $path = "{$this->config->projects_root}/projects/{$this->config->project}";
-        if (!file_exists($path)) {
+        if (!file_exists(dirname($this->config->code_dir))) {
             throw new NoSuchProject($this->config->project);
         }
 
-        display( "Cleaning project {$this->config->project}\n" );
+        display( "Cleaning project {$this->config->project}\n");
 
-        $dirsToErase = array('log',
-                             'report',
-                             'Premier-ace',
-                             'faceted',
-                             'faceted2',
-                             'ambassador',
-                             'oldreport',
+        $dirsToErase = array('report',
+                             'diplomat',
                              );
         foreach($dirsToErase as $dir) {
-            $dirPath = $path.'/'.$dir;
+            $dirPath = "{$this->config->project_dir}/$dir";
             if (file_exists($dirPath)) {
-                display('removing '.$dir);
+                display("removing $dir");
                 rmdirRecursive($dirPath);
             }
         }
 
+        // rebuild tmp
+        rmdirRecursive($this->config->tmp_dir);
+        mkdir($this->config->tmp_dir, 0755);
+
         // rebuild log
-        mkdir($path.'/log', 0755);
+        rmdirRecursive($this->config->log_dir);
+        if (!file_exists($this->config->log_dir)) {
+            mkdir($this->config->log_dir, 0755);
+        }
 
         $filesToErase = array('Flat-html.html',
                               'Flat-markdown.md',
@@ -95,7 +96,7 @@ class Clean extends Tasks {
                              );
         $total = 0;
         foreach($filesToErase as $file) {
-            $filePath = "$path/$file";
+            $filePath = "{$this->config->project_dir}/$file";
             if (file_exists($filePath)) {
                 display("removing $file");
                 unlink($filePath);

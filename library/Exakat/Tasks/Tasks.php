@@ -44,7 +44,6 @@ abstract class Tasks {
 
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
-    protected $exakatDir             = '/tmp/exakat';
     public static $semaphore      = null;
     public static $semaphorePort  = null;
     
@@ -99,23 +98,21 @@ abstract class Tasks {
                                  "{$this->config->projects_root}/projects/{$this->config->project}");
         }
 
-        if ($this->config->project !== 'default' &&
-            file_exists("{$this->config->projects_root}/projects/{$this->config->project}")) {
-            $this->datastore = new Datastore($this->config);
-        }
-
-        if (!file_exists("{$this->config->projects_root}/projects/")) {
-            mkdir("{$this->config->projects_root}/projects/", 0700);
-        }
-
-        if (!empty($this->config->project)) {
-            $this->exakatDir = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/";
-            
-            if ($this->config->project !== 'default' &&
-                file_exists(dirname($this->exakatDir)) &&
-                !file_exists($this->exakatDir)) {
-                mkdir($this->exakatDir, 0700);
+        if ($this->config->inside_code === Config::INSIDE_CODE ||
+            $this->config->project !== 'default') {
+                if (!file_exists($this->config->tmp_dir) && 
+                     file_exists(dirname($this->config->tmp_dir)) ) {
+                    var_dump($this->config->tmp_dir);
+                    mkdir($this->config->tmp_dir, 0700);
             }
+        } else {
+            if (!file_exists("{$this->config->projects_root}/projects/")) {
+                mkdir("{$this->config->projects_root}/projects/", 0700);
+            }
+        }
+
+        if ($this->config->project !== 'default') {
+            $this->datastore = new Datastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
         }
 
         $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
@@ -146,7 +143,7 @@ abstract class Tasks {
     abstract public function run();
 
     protected function cleanLogForProject($project) {
-        $logs = glob("{$this->config->projects_root}/projects/$project/log/*");
+        $logs = glob("{$this->config->log_dir}/*");
         foreach($logs as $log) {
             unlink($log);
         }
@@ -158,7 +155,7 @@ abstract class Tasks {
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
-            $path = "{$this->exakatDir}/$snitch.json";
+            $path = "{$this->config->tmp_dir}/$snitch.json";
         }
 
         $values['pid'] = $pid;
@@ -170,7 +167,7 @@ abstract class Tasks {
 
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
-            $path = "{$this->exakatDir}/$snitch.json";
+            $path = "{$this->config->tmp_dir}/$snitch.json";
         }
 
         unlink($path);

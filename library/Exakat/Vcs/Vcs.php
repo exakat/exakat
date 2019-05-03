@@ -33,9 +33,9 @@ abstract class Vcs {
     
     protected $checked = false;
     
-    public function __construct($destination, $project_root){
+    public function __construct($destination, $code_dir){
         $this->destination     = $destination;
-        $this->destinationFull = "$project_root/projects/$destination";
+        $this->destinationFull = $code_dir;
     }
 
     abstract public function clone($source);

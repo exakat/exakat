@@ -32,10 +32,10 @@ class Filedependencieshtml extends Reports {
     private $tmpName     = '';
 
     public function generate($folder, $name= 'dependencies') {
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
-        copyDir($this->config->dir_root.'/media/dependencies', $this->tmpName );
+        copyDir("{$this->config->dir_root}/media/dependencies", $this->tmpName);
 
         $res = $this->sqlite->query('SELECT * FROM filesDependencies');
 

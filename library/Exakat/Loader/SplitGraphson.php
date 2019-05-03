@@ -63,8 +63,8 @@ class SplitGraphson extends Loader {
         
         $this->graphdb        = $gremlin;
         $this->sqlite3        = $sqlite3;
-        $this->path           = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/graphdb.graphson";
-        $this->pathDef        = "{$this->config->projects_root}/projects/{$this->config->project}/.exakat/graphdb.def";
+        $this->path           = "{$this->config->tmp_dir}/graphdb.graphson";
+        $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
         
         $this->dictCode  = new Collector();
         $this->datastore = new Datastore($this->config);

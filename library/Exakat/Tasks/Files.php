@@ -42,28 +42,28 @@ class Files extends Tasks {
             $stats["notCompilable$version"] = 'N/C';
         }
 
-        if ($this->config->project === 'default') {
+        if ($this->config->inside_code === Config::INSIDE_CODE) {
+            // OK
+        } elseif ($this->config->project === 'default') {
             throw new ProjectNeeded();
-        } elseif (!file_exists("{$this->config->projects_root}/projects/$dir")) {
+        } elseif (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
-        } elseif (!file_exists("{$this->config->projects_root}/projects/$dir/code/")) {
+        } elseif (!file_exists($this->config->code_dir)) {
             throw new NoCodeInProject($this->config->project);
         }
 
-        $this->checkComposer($dir);
-        $this->checkLicence($dir);
+        $this->checkComposer($this->config->code_dir);
+        $this->checkLicence($this->config->code_dir);
 
         $ignoredFiles = array();
         $files = array();
         $tokens = 0;
-        $path = "{$this->config->projects_root}/projects/$dir/code";
 
         display( "Searching for files \n");
-        self::findFiles($path, $files, $ignoredFiles, $this->config);
+        self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
         display('Found '.count($files)." files.\n");
 
-        $tmpFileName = "{$this->exakatDir}/files".getmypid().'.txt';
-        $path = "{$this->config->projects_root}/projects/$dir/code";
+        $tmpFileName = "{$this->config->tmp_dir}/files{$this->config->pid}.txt";
         $tmpFiles = array_map(function ($file) {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ';', '&', '`', '|', "\t"),
                                array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', '\\;', '\\&', '\\`', '\\|', "\\\t", ),
@@ -75,10 +75,11 @@ class Files extends Tasks {
 
         $missing = array();
         foreach($files as $file) {
-            if (!file_exists($path.$file)) {
+            if (!file_exists($this->config->code_dir.$file)) {
                 $missing[] = $file;
             }
         }
+
         if (!empty($missing)) {
             throw new MissingFile($missing);
         }
@@ -98,7 +99,7 @@ class Files extends Tasks {
             display("Check compilation for $version");
             $stats['notCompilable'.$version] = -1;
             
-            $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code; cat '.$tmpFileName.' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = "cd {$this->config->code_dir}; cat $tmpFileName".' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
 
             $res = trim(shell_exec($shell));
 
@@ -132,13 +133,13 @@ class Files extends Tasks {
         unset($toRemoveFromFiles);
 
         display('Check short tag (normal pass)');
-        $shell = "cd {$this->config->projects_root}/projects/$dir/code/; cat $tmpFileName | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
+        $shell = "cd {$this->config->code_dir}; cat $tmpFileName | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
 
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code/; cat '.$tmpFileName.' |  xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = "cd {$this->config->code_dir}; cat $tmpFileName |  xargs -n1 -P5 ".$this->config->php.' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
@@ -193,14 +194,14 @@ class Files extends Tasks {
         }
 
         $vcsClass = Vcs::getVcs($this->config);
-        $vcs = new $vcsClass($dir, $this->config->projects_root);
+        $vcs = new $vcsClass($dir, $this->config->code_dir);
         $fileModifications = $vcs->getFileModificationLoad();
 
         $filesRows = array();
         $hashes = array();
         $duplicates = 0;
         foreach($files as $id => $file) {
-            $fnv132 = hash_file('fnv132', "{$this->config->projects_root}/projects/$dir/code/$file");
+            $fnv132 = hash_file('fnv132', $this->config->code_dir.$file);
             if (isset($hashes[$fnv132])) {
                 $ignoredFiles[$file] = "Duplicate ({$hashes[$fnv132]})";
                 ++$duplicates;
@@ -234,7 +235,7 @@ class Files extends Tasks {
 
         // check for special files
         display('Check config files');
-        $files = glob("{$this->config->projects_root}/projects/$dir/code/{,.}*", GLOB_BRACE);
+        $files = glob("{$this->config->code_dir}{,.}*", GLOB_BRACE);
         $files = array_map('basename', $files);
 
         $services = json_decode(file_get_contents("{$this->config->dir_root}/data/serviceConfig.json"));
@@ -267,10 +268,10 @@ class Files extends Tasks {
         // composer.json
         display('Check composer');
         $composerInfo = array();
-        if ($composerInfo['composer.json'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
-            $composerInfo['composer.lock'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.lock');
+        if ($composerInfo['composer.json'] = file_exists("{$dir}/composer.json")) {
+            $composerInfo['composer.lock'] = file_exists("{$dir}/composer.lock");
 
-            $composer = json_decode(file_get_contents($this->config->projects_root.'/projects/'.$dir.'/code/composer.json'));
+            $composer = json_decode(file_get_contents("{$dir}/composer.json"));
 
             if (isset($composer->autoload)) {
                 $composerInfo['autoload'] = isset($composer->autoload->{'psr-0'}) ? 'psr-0' : 'psr-4';
@@ -282,6 +283,7 @@ class Files extends Tasks {
                 $this->datastore->addRow('composer', (array) $composer->require);
             }
         }
+
         $this->datastore->addRow('hash', $composerInfo);
     }
     
@@ -306,9 +308,8 @@ class Files extends Tasks {
         $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
         $licenses = $licenses['files'];
         
-        $path = "{$this->config->projects_root}/projects/{$dir}/code";
         foreach($licenses as $file) {
-            if (file_exists("$path/$file")) {
+            if (file_exists("$dir/$file")) {
                 $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
 
                 return true;
@@ -316,7 +317,7 @@ class Files extends Tasks {
         }
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
     }
-    
+
     public static function findFiles($path, &$files, &$ignoredFiles, $config) {
         $ignore_dirs = $config->ignore_dirs;
 

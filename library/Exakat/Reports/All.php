@@ -30,7 +30,7 @@ use Exakat\Config;
 
 class All extends Reports {
     const FILE_EXTENSION = '';
-    const FILE_FILENAME  = 'exakat';
+    const FILE_FILENAME  = 'allExakat';
 
     public function generate($folder, $name) {
         $omit = array('Ambassadornomenu',
@@ -52,7 +52,6 @@ class All extends Reports {
         return array('All',
                      );
     }
-
 }
 
 ?>

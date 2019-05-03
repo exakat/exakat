@@ -38,7 +38,7 @@ use Exakat\Query\Query;
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
 
-    private $sqlite            = null;
+    private $sqlite             = null;
 
     private $sqliteFile         = null;
     private $sqliteFileFinal    = null;
@@ -56,13 +56,13 @@ class Dump extends Tasks {
         parent::__construct($gremlin, $config, $subTask);
         
         $this->log = new Log('dump',
-                             "{$this->config->projects_root}/projects/{$this->config->project}");
+                             $this->config->project_dir);
 
         $this->linksDown = GraphElements::linksAsList();
     }
 
     public function run() {
-        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}")) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
 
@@ -79,9 +79,9 @@ class Dump extends Tasks {
         
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
-        $this->sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/.dump.sqlite";
-        $this->sqliteFilePrevious = "{$this->config->projects_root}/projects/{$this->config->project}/dump-1.sqlite";
-        $this->sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        $this->sqliteFile         = $this->config->dump_tmp;
+        $this->sqliteFilePrevious = $this->config->dump_previous;
+        $this->sqliteFileFinal    = $this->config->dump;
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
@@ -185,10 +185,8 @@ class Dump extends Tasks {
             $this->log->log( 'Collected Foreach favorites : '.number_format(1000 * ($end - $begin), 2)."ms\n");
         }
 
-        $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
-
         $counts = array();
-        $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
+        $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
         $datastore->busyTimeout(5000);
         $res = $datastore->query('SELECT * FROM analyzed');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -253,7 +251,7 @@ class Dump extends Tasks {
     }
     
     public function finalMark($finalMark) {
-        $sqlite = new \Sqlite3( "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite" );
+        $sqlite = new \Sqlite3($this->config->dump);
 
         $values = array();
         foreach($finalMark as $key => $value) {
@@ -275,13 +273,13 @@ class Dump extends Tasks {
                 $query[] = "(NULL, '$class', $counts[$class])";
             }
         }
-        
+
         if (!empty($query)) {
             $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
         }
 
         $analyzers = $classes;
-        
+
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
                           'Composer/UseComposerLock',
@@ -290,7 +288,7 @@ class Dump extends Tasks {
         $diff = array_intersect($specials, $classes);
         if (!empty($diff)) {
             foreach($diff as $d) {
-                $this->processResults($d, $counts[$d]);
+                $this->processResults($d, $counts[$d] ?? -3);
             }
             $classes = array_diff($classes, $diff);
         }
@@ -542,8 +540,7 @@ SQL;
     }
 
     private function collectTables($tables) {
-        $datastorePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
-        $this->sqlite->query("ATTACH '$datastorePath' AS datastore");
+        $this->sqlite->query("ATTACH '{$this->config->datastore}' AS datastore");
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
@@ -560,8 +557,7 @@ SQL;
     }
 
     private function collectTablesData($tables) {
-        $datastorePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
-        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+        $this->sqlite->query("ATTACH '{$this->config->datastore}' AS datastore");
 
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
@@ -2024,7 +2020,7 @@ SQL;
     }
 
     public function checkThemes($theme, array $analyzers) {
-        $sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->busyTimeout(5000);
