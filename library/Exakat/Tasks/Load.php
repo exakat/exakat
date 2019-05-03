@@ -486,7 +486,7 @@ class Load extends Tasks {
 
     private function processProject($project) {
         $files = $this->datastore->getCol('files', 'file');
-        print_r($files);
+
         if (empty($files)) {
             throw new NoFileToProcess($project, "No file to load.\n");
         }
