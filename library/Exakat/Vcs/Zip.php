@@ -46,7 +46,7 @@ class Zip extends Vcs {
         $this->check();
 
         $binary = file_get_contents($source);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip').'.zip';
+        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip') . '.zip';
         file_put_contents($archiveFile, $binary);
 
         shell_exec("unzip $archiveFile -d {$this->destinationFull}/code/");

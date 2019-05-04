@@ -57,7 +57,7 @@ class Svn extends Vcs {
             return $r[1];
         }
         
-        return 'Error : '.$res;
+        return 'Error : ' . $res;
     }
 
     private function getInfo() {

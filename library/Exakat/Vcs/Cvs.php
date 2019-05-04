@@ -33,7 +33,7 @@ class Cvs extends Vcs {
     }
     
     protected function selfCheck() {
-        $res = shell_exec($this->exec.' --version 2>&1');
+        $res = shell_exec($this->exec . ' --version 2>&1');
         if (strpos($res, 'CVS') === false) {
             throw new HelperException('Cvs');
         }
@@ -82,7 +82,7 @@ class Cvs extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec($this->exec.' --version 2>&1'));
+        $res = trim(shell_exec($this->exec . ' --version 2>&1'));
         if (preg_match('/Concurrent Versions System \(CVS\) ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];

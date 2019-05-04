@@ -146,7 +146,7 @@ class Git extends Vcs {
         if ($this->installed === true) {
             $stats['version'] = $this->version;
             if (version_compare($this->version, '2.3') < 0) {
-                $stats['version 2.3'] = 'It is recommended to use git version 2.3 or more recent ('.$this->version.' detected), for security reasons and the support of GIT_TERMINAL_PROMPT';
+                $stats['version 2.3'] = 'It is recommended to use git version 2.3 or more recent (' . $this->version . ' detected), for security reasons and the support of GIT_TERMINAL_PROMPT';
             }
         } else {
             $stats['optional'] = 'Yes';

@@ -49,7 +49,7 @@ class Targz extends Vcs {
         $this->check();
 
         $binary = file_get_contents($source);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tar.gz';
+        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz') . '.tar.gz';
         file_put_contents($archiveFile, $binary);
         
         $res = shell_exec("tar -tzf $archiveFile 2>&1 >/dev/null");

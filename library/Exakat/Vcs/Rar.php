@@ -44,7 +44,7 @@ class Rar extends Vcs {
         $this->check();
 
         $binary = file_get_contents($source);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveRar').'.rar';
+        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveRar') . '.rar';
         file_put_contents($archiveFile, $binary);
 
         shell_exec("unrar x $archiveFile {$this->destinationFull}/code/");
