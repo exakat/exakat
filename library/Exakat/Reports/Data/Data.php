@@ -34,7 +34,7 @@ abstract class Data {
         $this->sqlite = $sqlite;
     }
     
-    public function values(){
+    public function values() {
         return $this->values;
     }
     

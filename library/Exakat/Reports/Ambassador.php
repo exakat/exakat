@@ -294,7 +294,7 @@ class Ambassador extends Reports {
         rename($this->tmpName, $this->finalName);
     }
 
-    protected function setPHPBlocs($description){
+    protected function setPHPBlocs($description) {
         $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function ($x) {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>';
             return $return;
@@ -303,7 +303,7 @@ class Ambassador extends Reports {
         return $description;
     }
 
-    protected function generateDocumentation($analyzerList){
+    protected function generateDocumentation($analyzerList) {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $docHTML = array();
 
@@ -2795,14 +2795,14 @@ HTML;
             $tree[$name]["$row[file]:$row[line]"] = $origin;
         }
         
-        uasort($tree, function($a, $b) { return count($a) <=> count($b);});
+        uasort($tree, function ($a, $b) { return count($a) <=> count($b);});
 
         $theGlobals = array();
         foreach($tree as $variable => $locations) {
             $count = count($locations);
             $list = array();
             $types = array();
-            uksort($locations, function($a, $b) { list($fa, $la) = explode(':', $a); list($fb, $lb) = explode(':', $b); $r = $fa <=> $fb; if ($r == 0) { $r = $la <=> $lb; } return $r;});
+            uksort($locations, function ($a, $b) { list($fa, $la) = explode(':', $a); list($fb, $lb) = explode(':', $b); $r = $fa <=> $fb; if ($r == 0) { $r = $la <=> $lb; } return $r;});
             foreach($locations as $file => $type) {
                 $list[] = "<li>$file</li>";
                 $types[$type] = 1;
@@ -2867,13 +2867,13 @@ HTML;
             $results->load();
             
             $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-            $counts = array_map(function($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
+            $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
 
             $groups = array();
             foreach($results->toArray() as $row) {
                 $groups[$row['htmlcode']][] = $row['file'];
             }
-            uasort($groups, function($a, $b) { return count($a) <=> count($b);});
+            uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
 
             $theTable = array();
             foreach($groups as $code => $list) {
@@ -3157,7 +3157,7 @@ SQL
         $this->putBasedPage('inventories_classtree', $html);
     }
     
-    private function extends2ul ($root, $paths, $level = 0) {
+    private function extends2ul($root, $paths, $level = 0) {
         static $done = array();
         
         if ($level === 0) {
@@ -4477,7 +4477,7 @@ JAVASCRIPT;
             $source = @show_source($sourcePath, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function($x) {
+            $source = preg_replace_callback('#<br />#is', function ($x) {
                 static $i = 0;
                 return '<br /><a name="l'.++$i.'" />';
             }, $source);

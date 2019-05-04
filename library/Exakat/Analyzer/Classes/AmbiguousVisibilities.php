@@ -41,7 +41,7 @@ GREMLIN;
         foreach($visibilities as $case) {
             $mixed[$case['ppp']][$case['visibility'] === 'none' ? 'public' : $case['visibility']] = 1;
         }
-        $mixed = array_filter($mixed, function($x) { return count($x) > 1;});
+        $mixed = array_filter($mixed, function ($x) { return count($x) > 1;});
         $mixedProperty = array_keys($mixed);
 
         if (!empty($mixedProperty)){

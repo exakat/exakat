@@ -236,7 +236,7 @@ MENU;
         rename($this->tmpName, $this->finalName);
     }
 
-    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
+    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter) {
         --$lineNumber; // array index
         $lines = array();
         if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
@@ -267,7 +267,7 @@ MENU;
         return $lines;
     }
 
-    private function generateOwaspDocumentation(){
+    private function generateOwaspDocumentation() {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         
         $owasp = json_decode(file_get_contents($this->config->dir_root.'/data/owasp.top10.json'));

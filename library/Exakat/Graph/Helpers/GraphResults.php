@@ -103,20 +103,20 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return $this->type === $type;
     }
 
-    public function offsetExists ($offset) {
+    public function offsetExists($offset) {
         return isset($this->data[$offset]);
     }
 
-    public function offsetGet ($offset) {
+    public function offsetGet($offset) {
         return $this->data[$offset];
     }
 
-    public function offsetSet ($offset, $value) {
+    public function offsetSet($offset, $value) {
         // Nothing. No update on that result
         return;
     }
 
-    public function offsetUnset ( $offset ) {
+    public function offsetUnset($offset) {
         // Nothing. No update on that result
         return;
     }
@@ -153,7 +153,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return false;
     }
 
-    public function count( ) {
+    public function count() {
         if ($this->type === self::ARRAY) {
             return count($this->data);
         }

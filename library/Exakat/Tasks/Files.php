@@ -374,7 +374,7 @@ class Files extends Tasks {
         }
         chdir($path);
         $allFiles = rglob('.');
-        $allFiles = array_map(function($path) { return substr($path, 1); }, $allFiles);
+        $allFiles = array_map(function ($path) { return substr($path, 1); }, $allFiles);
         chdir($d);
 
         $exts = $config->file_extensions;

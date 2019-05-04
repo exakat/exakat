@@ -41,7 +41,7 @@ class ThemesDev {
     }
     
     public function getSuggestionThema(array $thema) {
-        return array_filter($this->themes, function($c) use ($thema) {
+        return array_filter($this->themes, function ($c) use ($thema) {
             foreach($thema as $theme) {
                 $l = levenshtein($c, $theme);
                 if ($l < 8) {

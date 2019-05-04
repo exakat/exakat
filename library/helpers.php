@@ -437,7 +437,7 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
     return $r;
 }
 
-function trimOnce($string, $trim = '\'"'){
+function trimOnce($string, $trim = '\'"') {
     $length = strlen($string);
     if ($length < 2) {
         return $string;

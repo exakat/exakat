@@ -33,7 +33,7 @@ abstract class Vcs {
     
     protected $checked = false;
     
-    public function __construct($destination, $code_dir){
+    public function __construct($destination, $code_dir) {
         $this->destination     = $destination;
         $this->destinationFull = $code_dir;
     }

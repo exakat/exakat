@@ -140,7 +140,7 @@ abstract class Reports {
         }
     }
     
-    public function checkMissingThemes(){
+    public function checkMissingThemes() {
         $required = $this->dependsOnAnalysis();
         
         if (empty($required)) {

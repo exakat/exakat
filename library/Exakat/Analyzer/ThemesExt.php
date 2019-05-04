@@ -185,7 +185,7 @@ class ThemesExt {
     public function getSuggestionThema(array $thema) {
         $list = $this->listAllThemes();
         
-        return array_filter($list, function($c) use ($thema) {
+        return array_filter($list, function ($c) use ($thema) {
             foreach($thema as $theme) {
                 $l = levenshtein($c, $theme);
                 if ($l < 8) {
@@ -201,7 +201,7 @@ class ThemesExt {
             return array();
         }
 
-        return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
+        return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
 
             return $l < 8;

@@ -404,7 +404,7 @@ TEXT
             $stats['gremlin version'] = $gremlinVersion;
 
             $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
-            $neo4jJar = array_filter($neo4jJar, function($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
+            $neo4jJar = array_filter($neo4jJar, function ($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
             $neo4jVersion = basename(array_pop($neo4jJar));
 
             //neo4j-2.3.3.jar
