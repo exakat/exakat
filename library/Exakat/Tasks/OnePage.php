@@ -37,13 +37,13 @@ class OnePage extends Tasks {
 
     public function run() {
         $begin = microtime(true);
-        $this->project_dir = $this->config->projects_root.'/projects/onepage/';
+        $this->project_dir = $this->config->projects_root . '/projects/onepage/';
         
-        if (!file_exists($this->project_dir.'/code/')) {
-            $this->project_dir.'/code/';
+        if (!file_exists($this->project_dir . '/code/')) {
+            $this->project_dir . '/code/';
         }
-        if (!file_exists($this->project_dir.'/reports/')) {
-            $this->project_dir.'/reports/';
+        if (!file_exists($this->project_dir . '/reports/')) {
+            $this->project_dir . '/reports/';
         }
 
         // todo : check that there is indeed this project or create it.
@@ -79,8 +79,8 @@ class OnePage extends Tasks {
         $task = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
-        rename($this->config->projects_root.'/projects/onepage/log/analyze.log',
-               $this->config->projects_root.'/projects/onepage/log/analyze.onepage.log');
+        rename($this->config->projects_root . '/projects/onepage/log/analyze.log',
+               $this->config->projects_root . '/projects/onepage/log/analyze.onepage.log');
 
         display('Project analyzed');
         $this->logTime('Analyze');
@@ -107,7 +107,7 @@ class OnePage extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
+            $log = fopen($this->project_dir . '/log/project.timing.csv', 'w+');
         }
 
         $end = microtime(true);
@@ -116,7 +116,7 @@ class OnePage extends Tasks {
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        fwrite($log, $step . "\t" . ($end - $begin) . "\t" . ($end - $start) . "\n");
         $begin = $end;
     }
 }

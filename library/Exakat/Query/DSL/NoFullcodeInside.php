@@ -31,7 +31,7 @@ class NoFullcodeInside extends DSL {
         list($fullcode) = func_get_args();
 
         // $fullcode is a name of a variable
-        $gremlin = 'not( where( __.emit( ).repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
+        $gremlin = 'not( where( __.emit( ).repeat( out(' . self::$linksDown . ') ).times(' . self::$MAX_LOOPING . ').filter{ it.get().value("fullcode") == ' . $fullcode . '}) )';
         return new Command($gremlin);
     }
 }

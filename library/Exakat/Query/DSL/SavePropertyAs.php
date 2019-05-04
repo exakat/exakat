@@ -33,13 +33,13 @@ class SavePropertyAs extends DSL {
         $this->assertProperty($property);
 
         if ($property === 'label') {
-            return new Command('sideEffect{ '.$name.' = it.get().label(); }');
+            return new Command('sideEffect{ ' . $name . ' = it.get().label(); }');
         } elseif ($property === 'id') {
-            return new Command('sideEffect{ '.$name.' = it.get().id(); }');
+            return new Command('sideEffect{ ' . $name . ' = it.get().id(); }');
         } elseif ($property === 'self') {
-            return new Command('sideEffect{ '.$name.' = it.get(); }');
+            return new Command('sideEffect{ ' . $name . ' = it.get(); }');
         } else {
-            return new Command('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
+            return new Command('sideEffect{ ' . $name . ' = it.get().value("' . $property . '"); }');
         }
     }
 }

@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class OutIsNot extends DSL {
     public function run() {
-        assert(func_num_args() <= 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         list($link) = func_get_args();
         
         $this->assertLink($link);
@@ -36,7 +36,7 @@ class OutIsNot extends DSL {
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {
-            return new Command('not( where( __.out('.$this->SorA($diff).')) )');
+            return new Command('not( where( __.out(' . $this->SorA($diff) . ')) )');
         }
     }
 }

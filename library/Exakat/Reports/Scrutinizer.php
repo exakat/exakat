@@ -108,7 +108,7 @@ XML;
         if ($name === self::STDOUT) {
             echo $return;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $return);
         }
     }
 }

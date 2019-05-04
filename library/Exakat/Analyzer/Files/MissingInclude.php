@@ -121,7 +121,7 @@ class MissingInclude extends Analyzer {
         
         // simplify /dir/../ => /
         while(preg_match('|^(.*/)[^/\.]+?/\.\./(.*)$|', $file, $r)) {
-            $file = $r[1].$r[2];
+            $file = $r[1] . $r[2];
         }
 
         if (in_array($file, $files)) { return true; }
@@ -129,7 +129,7 @@ class MissingInclude extends Analyzer {
         if (substr($file, 0, 2) === './') {
             if (in_array(substr($file, 1), $files)) { return true; }
             
-            if (in_array(dirname($including).substr($file, 1), $files)) { return true; }
+            if (in_array(dirname($including) . substr($file, 1), $files)) { return true; }
         }
 
         if (substr($file, 0, 3) === '../' && in_array(substr($file, 2), $files)) { return true;}
@@ -140,7 +140,7 @@ class MissingInclude extends Analyzer {
 
         if (isset($file[0]) && $file[0] !== '/') {
 
-            if (in_array(dirname($including).'/'.$file, $files)) { return true; }
+            if (in_array(dirname($including) . '/' . $file, $files)) { return true; }
         }
         
         if (strpos($file, '$')  !== false) { return true;}

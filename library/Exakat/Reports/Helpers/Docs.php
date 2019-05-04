@@ -61,13 +61,13 @@ class Docs {
         if (empty($ini['severity'])) {
             $ini['severity'] = Analyzer::S_NONE;
         } else {
-            $ini['severity'] = constant(Analyzer::class.'::'.$ini['severity']);
+            $ini['severity'] = constant(Analyzer::class . '::' . $ini['severity']);
         }
 
         if (empty($ini['timetofix'])) {
             $ini['timetofix'] = Analyzer::S_NONE;
         } else {
-            $ini['timetofix'] = constant(Analyzer::class.'::'.$ini['timetofix']);
+            $ini['timetofix'] = constant(Analyzer::class . '::' . $ini['timetofix']);
         }
 
         if (empty($ini['phpversion'])) {

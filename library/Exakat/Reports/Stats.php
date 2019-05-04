@@ -96,7 +96,7 @@ class Stats extends Reports {
             $atoms[$d['atom']] = (int) $d['count'];
         }
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($analyzerList).')');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($analyzerList) . ')');
         while($d = $res->fetchArray(\SQLITE3_ASSOC)) {
             $atoms[$d['analyzer']] = (int) $d['count'];
             $this->count();

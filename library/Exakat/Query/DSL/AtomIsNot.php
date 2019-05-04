@@ -30,7 +30,7 @@ class AtomIsNot extends DSL {
     public function run() {
         list($atoms, $flags) = func_get_args();
 
-        assert(func_num_args() <= 2, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() <= 2, 'Too many arguments for ' . __METHOD__);
         $this->assertAtom($atoms);
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {

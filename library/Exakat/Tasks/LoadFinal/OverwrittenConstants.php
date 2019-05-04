@@ -45,7 +45,7 @@ class OverwrittenConstants extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display($result->toInt().' overwrittenConstants');
+        display($result->toInt() . ' overwrittenConstants');
     }
 }
 

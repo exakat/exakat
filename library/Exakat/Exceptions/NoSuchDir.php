@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoSuchDir extends \RuntimeException {
     public function __construct($filename = '', $code = 0, \Exception $previous = null) {
-        parent::__construct('No such dir as "'.$filename.'"', $code, $previous);
+        parent::__construct('No such dir as "' . $filename . '"', $code, $previous);
     }
 }
 

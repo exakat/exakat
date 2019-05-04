@@ -31,24 +31,24 @@ class Clustergrammer extends Reports {
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         $analyzers = $this->themes->getThemeAnalyzers($this->themesToShow);
-        display( count($analyzers)." analyzers\n");
+        display( count($analyzers) . " analyzers\n");
 
-        $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY analyzer');
+        $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("' . implode('","', $analyzers) . '") ORDER BY analyzer');
         $skeleton = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $skeleton[$row['analyzer']] = 0;
         }
-        display( count($skeleton)." distinct analyzers\n");
+        display( count($skeleton) . " distinct analyzers\n");
 
         $titles = array();
         foreach($skeleton as $analyzer => $foo) {
             if ($analyzer == 'total') { continue; }
             $ini = $this->getDocs($analyzer);
-            $titles[$analyzer] = '"'.$ini['name'].'"';
+            $titles[$analyzer] = '"' . $ini['name'] . '"';
         }
 
         $all = array();
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY file');
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("' . implode('","', $analyzers) . '") ORDER BY file');
         $total = 0;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($all[$row['file']])) {
@@ -57,20 +57,20 @@ class Clustergrammer extends Reports {
             ++$all[$row['file']][$row['analyzer']];
             ++$total;
         }
-        display( $total." issues read\n");
+        display( $total . " issues read\n");
 
-        $txt = " \t".implode("\t", array_values($titles))."\n";
+        $txt = " \t" . implode("\t", array_values($titles)) . "\n";
         foreach($all as $file => $values) {
-            $txt .= "$file\t".implode("\t", array_values($values))."\n";
+            $txt .= "$file\t" . implode("\t", array_values($values)) . "\n";
         }
         
         if ($name === self::STDOUT) {
             echo $txt;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $txt);
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $txt);
 
-            display( count($all)." issues reported\n");
-            print 'Upload '.$name.'.'.self::FILE_EXTENSION." on http://amp.pharm.mssm.edu/clustergrammer/\n";
+            display( count($all) . " issues reported\n");
+            print 'Upload ' . $name . '.' . self::FILE_EXTENSION . " on http://amp.pharm.mssm.edu/clustergrammer/\n";
         }
     }
 }

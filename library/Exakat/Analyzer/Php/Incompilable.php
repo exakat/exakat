@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Incompilable extends Analyzer {
     public function analyze() {
-        $r = Analyzer::$datastore->getRow('compilation'.$this->config->phpversion[0].$this->config->phpversion[2]);
+        $r = Analyzer::$datastore->getRow('compilation' . $this->config->phpversion[0] . $this->config->phpversion[2]);
 
         $this->rowCount       = count($r);
         $this->processedCount = 1;
@@ -43,7 +43,7 @@ class Incompilable extends Analyzer {
         $report = array();
         
         foreach($this->config->other_php_versions as $version) {
-            $r = Analyzer::$datastore->getRow('compilation'.$version);
+            $r = Analyzer::$datastore->getRow('compilation' . $version);
             
             foreach($r as $l) {
                 $l['version'] = $version;
@@ -62,8 +62,8 @@ class Incompilable extends Analyzer {
         $report = array();
         // Collect version from datastore
         $r = Analyzer::$datastore->getHash('php_version');
-        $version = $r[0].$r[2];
-        $r = Analyzer::$datastore->getRow('compilation'.$version);
+        $version = $r[0] . $r[2];
+        $r = Analyzer::$datastore->getRow('compilation' . $version);
         $report = array();
         
         foreach($r as $l) {
@@ -81,7 +81,7 @@ class Incompilable extends Analyzer {
 
     public function hasResults() {
         foreach($this->config->other_php_versions as $version) {
-            $r = Analyzer::$datastore->getRow('compilation'.$version);
+            $r = Analyzer::$datastore->getRow('compilation' . $version);
             
             if (!empty($r)) {
                 return true;

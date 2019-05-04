@@ -35,7 +35,7 @@ class HasChildWithRank extends DSL {
             return new Command(Query::STOP_QUERY);
         }
 
-        return new Command('where( __.out('.$this->SorA($diff).').has("rank", ***).not(hasLabel("Void")) )', array(abs((int) $rank)));
+        return new Command('where( __.out(' . $this->SorA($diff) . ').has("rank", ***).not(hasLabel("Void")) )', array(abs((int) $rank)));
     }
 }
 ?>

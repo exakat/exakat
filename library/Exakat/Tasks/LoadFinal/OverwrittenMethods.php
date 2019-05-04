@@ -43,7 +43,7 @@ class OverwrittenMethods extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display($result->toInt().' overwrittenMethods');
+        display($result->toInt() . ' overwrittenMethods');
     }
 }
 

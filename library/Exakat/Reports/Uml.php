@@ -52,14 +52,14 @@ SQL
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$id;
             if (empty($row['properties'])) {
-                $row['properties'] = '+&nbsp;'.str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties']))."<br align='left'/>";
+                $row['properties'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties'])) . "<br align='left'/>";
             } elseif ($row['type'] === 'interface') {
                 $row['properties'] = '&nbsp;';
             } else {
                 $row['properties'] = '<i>No properties</i>';
             }
             if (empty($row['methods'])) {
-                $row['methods'] = '+&nbsp;'.str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['methods']))."<br align='left'/>";
+                $row['methods'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['methods'])) . "<br align='left'/>";
             } else {
                 $row['methods'] = '<i>No methods</i>';
             }
@@ -75,7 +75,7 @@ SQL
                               <td color='black' align='left'>$row[methods]</td>
                           </tr>
                        </table>>";
-            $R = $id.' [label='.$label.' shape="none"];';
+            $R = $id . ' [label=' . $label . ' shape="none"];';
 
             $ids[$row['id']] = $id;
             $subgraphs[$row['namespace']] = $R;
@@ -125,7 +125,7 @@ SQL
         ]
  
 DOT
-        .$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
+        . $this->subgraphs($dot) . "\n\n" . implode("\n", $links) . "\n}\n";
     
         return $dot;
     }

@@ -62,13 +62,13 @@ SQL;
 
     public function save() {
         if (!empty($this->calls)) {
-            $query = 'INSERT INTO calls VALUES '.implode(', ', $this->calls);
+            $query = 'INSERT INTO calls VALUES ' . implode(', ', $this->calls);
             $this->callsSqlite->query($query);
             $this->calls = array();
         }
 
         if (!empty($this->definitions)) {
-            $query = 'INSERT INTO definitions VALUES '.implode(', ', $this->definitions);
+            $query = 'INSERT INTO definitions VALUES ' . implode(', ', $this->definitions);
             $this->callsSqlite->query($query);
             $this->definitions = array();
         }
@@ -91,7 +91,7 @@ SQL;
         }
         
         if (!is_string($fullnspath)) {
-            throw new LoadError( 'Warning : fullnspath is not a string : it is '.gettype($fullnspath).PHP_EOL);
+            throw new LoadError( 'Warning : fullnspath is not a string : it is ' . gettype($fullnspath) . PHP_EOL);
         }
 
         if ($type === 'class') {
@@ -125,7 +125,7 @@ SQL;
 
             $fullnspath = mb_strtolower($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
-                $fullnspath = '\\'.$fullnspath;
+                $fullnspath = '\\' . $fullnspath;
             }
             if (strpos($fullnspath, '\\\\') !== false) {
                 $fullnspath = stripslashes($fullnspath);
@@ -136,7 +136,7 @@ SQL;
             if (empty($fullnspath)) {
                 $fullnspath = '\\';
             } elseif ($fullnspath[0] !== '\\') {
-                $fullnspath = '\\'.$fullnspath;
+                $fullnspath = '\\' . $fullnspath;
             }
             $types = array('class');
         }

@@ -35,10 +35,10 @@ class Log {
         if (!is_dir("$dir/log/")) { return ; }
         if (file_exists("$dir/log/{$this->name}.log")) {
             $this->log = fopen("$dir/log/{$this->name}.log", 'a');
-            $this->first = "$this->name resuming on ".date('r');
+            $this->first = "$this->name resuming on " . date('r');
         } else {
             $this->log = fopen("$dir/log/{$this->name}.log", 'w+');
-            $this->first = "{$this->name} created on ".date('r');
+            $this->first = "{$this->name} created on " . date('r');
         }
         if (!$this->log) {
             display("Couldn\'t create log in $dir/log/");
@@ -53,10 +53,10 @@ class Log {
             return;
         }
         
-        $this->log('Duration : '.number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
-        $this->log('Memory : '.memory_get_usage(true));
-        $this->log('Memory peak : '.memory_get_peak_usage(true));
-        $this->log("{$this->name} closed on ".date('r'));
+        $this->log('Duration : ' . number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
+        $this->log('Memory : ' . memory_get_usage(true));
+        $this->log('Memory peak : ' . memory_get_peak_usage(true));
+        $this->log("{$this->name} closed on " . date('r'));
 
         fclose($this->log);
         unset($this->log);

@@ -34,23 +34,23 @@ class SamePropertyAsArray extends DSL {
         $this->assertVariable($name);
 
         if ($property === 'label') {
-            return new Command('filter{ it.get().label() in '.$name.'}');
+            return new Command('filter{ it.get().label() in ' . $name . '}');
         } elseif ($property === 'id') {
-            return new Command('filter{ it.get().id() in '.$name.'}');
+            return new Command('filter{ it.get().id() in ' . $name . '}');
         } elseif ($property === 'self') {
-            return new Command('filter{ it.get() in '.$name.'}');
+            return new Command('filter{ it.get() in ' . $name . '}');
         } elseif ($property === 'code' || $property === 'lccode') {
             if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
-                return new Command('filter{ it.get().value("code") in '.$name.'}');
+                return new Command('filter{ it.get().value("code") in ' . $name . '}');
             } else {
-                return new Command('filter{ it.get().value("lccode") in '.$name.'}');
+                return new Command('filter{ it.get().value("lccode") in ' . $name . '}');
             }
         } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
-            return new Command('filter{ it.get().value("'.$property.'") in '.$name.'}');
+            return new Command('filter{ it.get().value("' . $property . '") in ' . $name . '}');
         } else {
             $caseSensitive = $caseSensitive === Analyzer::CASE_SENSITIVE ? '' : '.toLowerCase()';
 
-            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in '.$name.$caseSensitive.'}');
+            return new Command('filter{ it.get().value("' . $property . '")' . $caseSensitive . ' in ' . $name . $caseSensitive . '}');
         }
     }
 }

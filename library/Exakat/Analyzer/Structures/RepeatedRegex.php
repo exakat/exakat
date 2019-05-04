@@ -28,7 +28,7 @@ class RepeatedRegex extends Analyzer {
     public function analyze() {
         // pcre_last_error is too much here
         $functions = $this->loadIni('pcre.ini', 'functions');
-        $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
+        $functionsList = '"\\\\' . implode('", "\\\\', $functions) . '"';
     
         $repeatedRegex = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").has("fullnspath", within($functionsList))

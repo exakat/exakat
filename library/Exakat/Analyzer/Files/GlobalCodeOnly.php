@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class GlobalCodeOnly extends Analyzer {
     public function analyze() {
-        $definitionsFunctionsList = '"\\\\'.implode('", "\\\\', DefinitionsOnly::$definitionsFunctions).'"';
-        $definitionsList = '"'.implode('", "', DefinitionsOnly::$definitions).'"';
+        $definitionsFunctionsList = '"\\\\' . implode('", "\\\\', DefinitionsOnly::$definitionsFunctions) . '"';
+        $definitionsList = '"' . implode('", "', DefinitionsOnly::$definitions) . '"';
 
         // one or several namespaces
         $this->atomIs('File')
@@ -36,10 +36,10 @@ class GlobalCodeOnly extends Analyzer {
              ->outIs('EXPRESSION')
              ->outIs('CODE')
              ->raw('coalesce( __.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
-             ->raw('where( __.out("EXPRESSION").hasLabel('.$definitionsList.').count().is(eq(0)) )')
+             ->raw('where( __.out("EXPRESSION").hasLabel(' . $definitionsList . ').count().is(eq(0)) )')
              ->raw('where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )')
              ->raw('where( __.in("ANALYZED").not(has("analyzer", "Structures/NoDirectAccess") ).count().is(eq(0)) )')
-             ->raw('where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in ['.$definitionsFunctionsList.'] }.count().is(eq(0)) )')
+             ->raw('where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [' . $definitionsFunctionsList . '] }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

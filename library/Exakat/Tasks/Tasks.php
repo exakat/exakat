@@ -66,7 +66,7 @@ abstract class Tasks {
         $this->config  = $config;
         $this->is_subtask = $subTask;
 
-        assert(defined('static::CONCURENCE'), get_class($this)." is missing CONCURENCE\n");
+        assert(defined('static::CONCURENCE'), get_class($this) . " is missing CONCURENCE\n");
 
         if (static::CONCURENCE !== self::ANYTIME && $subTask === self::IS_NOT_SUBTASK) {
             if (self::$semaphore === null) {
@@ -80,7 +80,7 @@ abstract class Tasks {
                     self::$semaphorePort = $this->config->concurencyCheck + 3;
                 }
 
-                if ($socket = @stream_socket_server('udp://0.0.0.0:'.self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
+                if ($socket = @stream_socket_server('udp://0.0.0.0:' . self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
                     self::$semaphore = $socket;
                 } else {
                     throw new AnotherProcessIsRunning();

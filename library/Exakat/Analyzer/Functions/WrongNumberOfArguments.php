@@ -39,10 +39,10 @@ class WrongNumberOfArguments extends Analyzer {
 
         foreach($functions as $function) {
             if ($function['args_min'] > 0) {
-                $argsMins[$function['args_min']][] = '\\'.$function['name'];
+                $argsMins[$function['args_min']][] = '\\' . $function['name'];
             }
             if ($function['args_max'] < 100) {
-                $argsMaxs[$function['args_max']][] = '\\'.$function['name'];
+                $argsMaxs[$function['args_max']][] = '\\' . $function['name'];
             }
         }
 

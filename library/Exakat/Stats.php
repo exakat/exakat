@@ -52,10 +52,10 @@ class Stats {
     }
 
     public function collect() {
-        $this->stats['tokens_count']        = $this->gremlin->queryOne('g.V().has(id, neq(0))'.$this->file_filter.'.count()');//'.has("atom",not(within("Index")))
-        $this->stats['relations_count']     = $this->gremlin->queryOne('g.E().has(id, neq(0))'.$this->file_filter.'.count()');
-        $this->stats['atoms_count']         = $this->gremlin->queryOne('g.V().label().unique()'.$this->file_filter.'.size()');
-        $this->stats['LINK_count']          = $this->gremlin->queryOne('g.E().label().unique()'.$this->file_filter.'.size()');
+        $this->stats['tokens_count']        = $this->gremlin->queryOne('g.V().has(id, neq(0))' . $this->file_filter . '.count()');//'.has("atom",not(within("Index")))
+        $this->stats['relations_count']     = $this->gremlin->queryOne('g.E().has(id, neq(0))' . $this->file_filter . '.count()');
+        $this->stats['atoms_count']         = $this->gremlin->queryOne('g.V().label().unique()' . $this->file_filter . '.size()');
+        $this->stats['LINK_count']          = $this->gremlin->queryOne('g.E().label().unique()' . $this->file_filter . '.size()');
         $this->stats['file_count']          = $this->gremlin->queryOne('g.V().inE("FILE").count(); ');
     }
 }

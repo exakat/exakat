@@ -43,7 +43,7 @@ class Pcre extends Analyzer {
         foreach($delimiters as $in => $out) {
             // regex like $in....$out
             $this->atomIs($atoms)
-                 ->regexIs('fullcode', '^([\'\\"])'.$in.'[^'.$out.']+?'.$out.'[imsxeADSUXJu]*[\'\\"]');
+                 ->regexIs('fullcode', '^([\'\\"])' . $in . '[^' . $out . ']+?' . $out . '[imsxeADSUXJu]*[\'\\"]');
             $this->prepareQuery();
         }
     }

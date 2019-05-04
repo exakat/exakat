@@ -147,12 +147,12 @@ class Xml extends Reports {
             $this->generateFileReport($file);
         }
 
-        $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<phpcs version="'.Exakat::VERSION.'">'.PHP_EOL.$this->cachedData.'</phpcs>'.PHP_EOL;
+        $return = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '<phpcs version="' . Exakat::VERSION . '">' . PHP_EOL . $this->cachedData . '</phpcs>' . PHP_EOL;
 
         if ($name === self::STDOUT) {
             echo $return;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $return);
         }
     }
 }

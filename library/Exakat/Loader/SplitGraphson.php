@@ -87,7 +87,7 @@ class SplitGraphson extends Loader {
         $query = 'g.V().hasLabel("Project").id();';
         $res = $this->graphdb->query($query);
 
-        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V('.$res->toInt().'));';
+        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V(' . $res->toInt() . '));';
         $res = $this->graphdb->query($query);
         
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
@@ -129,7 +129,7 @@ GREMLIN;
 
         self::saveTokenCounts();
 
-        display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
+        display('loaded nodes (duration : ' . number_format( ($end - $begin) * 1000, 2) . ' ms)');
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -157,8 +157,8 @@ GREMLIN;
         $fileName = 'unknown';
         
         if (empty($this->id0)) {
-            $jsonText = json_encode($id0->toGraphsonLine($id0)).PHP_EOL;
-            assert(!json_last_error(), 'Error encoding '.$id0->atom.' : '.json_last_error_msg());
+            $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
+            assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
             
             $fp = fopen($this->path, 'a');
             fwrite($fp, $jsonText);
@@ -233,8 +233,8 @@ GREMLIN;
             }
 
             $X = $this->json_encode($j);
-            assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-            fwrite($fp, $X.PHP_EOL);
+            assert(!json_last_error(), $fileName . ' : error encoding normal ' . $j->label . ' : ' . json_last_error_msg() . "\n" . print_r($j, true));
+            fwrite($fp, $X . PHP_EOL);
             
             if (isset($this->tokenCounts[$j->label])) {
                 ++$this->tokenCounts[$j->label];

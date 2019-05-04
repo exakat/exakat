@@ -85,7 +85,7 @@ function copyDir($src, $dst) {
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new NoSuchDir("Can't open dir : '$src' : ".error_get_last()[0]);
+        throw new NoSuchDir("Can't open dir : '$src' : " . error_get_last()[0]);
     }
 
     $total = 0;
@@ -204,7 +204,7 @@ function array_ungroupby($array) {
 }
 
 function makeList(array $array, string $delimiter = '"') {
-    return $delimiter.implode("$delimiter, $delimiter", $array).$delimiter;
+    return $delimiter . implode("$delimiter, $delimiter", $array) . $delimiter;
 }
 
 function unicode_blocks($string) {
@@ -374,7 +374,7 @@ function PHPSyntax($code) {
     if (substr($php, 0, 7) === '</span>') {
         $php = substr($php, 7, 10000);
     } else {
-        $php = '<span style="color: #0000BB">'.$php;
+        $php = '<span style="color: #0000BB">' . $php;
     }
     if (substr($php, -17) === '<span style="colo') {
     //<br /></span><span style="colo
@@ -419,7 +419,7 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
 
             $d = explode('\\', $r2);
             $last = array_pop($d);
-            $r = mb_strtolower(implode('\\', $d))."\\$last";
+            $r = mb_strtolower(implode('\\', $d)) . "\\$last";
             if (isset($r[0]) && $r[0] != '\\') {
                 $r = "\\$r";
             }
@@ -432,7 +432,7 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
     } elseif (is_array($functions)) {
         $r = array_map($cb, $functions);
     } else {
-        throw new \Exception('Function is of the wrong type : '.var_export($functions));
+        throw new \Exception('Function is of the wrong type : ' . var_export($functions));
     }
     return $r;
 }
@@ -470,7 +470,7 @@ function rst2htmlLink($txt) {
 
 function rst2literal($txt) {
    $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
-       $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.str_replace('<br />', '', $x[1]).'?&gt;</pre>';
+       $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . str_replace('<br />', '', $x[1]) . '?&gt;</pre>';
        return $return;
    }, $txt);
 
@@ -492,7 +492,7 @@ function rsttable2html($raw) {
             continue;
         } elseif ($table === true) {
             if (preg_match('/^[\+-]+$/', $line, $r)) {
-                $html[] = '<tr>'.str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
+                $html[] = '<tr>' . str_repeat('<td></td>', substr_count('+', $r[0])) . "</tr>\n";
             } elseif (strpos($line, '|') === false) {
                 $table = false;
                 $html []= '</table>';
@@ -500,7 +500,7 @@ function rsttable2html($raw) {
             } elseif (!empty($td = explode('|', str_replace('<br />', '', $line)))) {
                 $td = array_map('trim', $td);
                 
-                $html[] = '<tr><td>'.implode('</td><td>', $td).'</td></tr>';
+                $html[] = '<tr><td>' . implode('</td><td>', $td) . '</td></tr>';
             }
         } else {
             $html []= $line;

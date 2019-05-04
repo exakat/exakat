@@ -91,7 +91,7 @@ SQL
             $root->children[] = $c;
         }
         
-        file_put_contents($this->tmpName.'/data/inclusions.json', json_encode($root));
+        file_put_contents($this->tmpName . '/data/inclusions.json', json_encode($root));
         $this->select['By inclusions'] = 'inclusions.json';
     }
 
@@ -107,7 +107,7 @@ SQL
         $classes = array();
         $classesId = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $class = $row['namespace'].'\\'.$row['name'];
+            $class = $row['namespace'] . '\\' . $row['name'];
             $classes[$row['extends']][$class] = array();
 
             $classesId[$row['id']] = $class;
@@ -157,7 +157,7 @@ SQL
 
         }
 
-        file_put_contents($this->tmpName.'/data/classes.json', json_encode($root));
+        file_put_contents($this->tmpName . '/data/classes.json', json_encode($root));
         $this->select['By class hierarchy'] = 'classes.json';
     }
     
@@ -177,7 +177,7 @@ SQL
         $ns = array('' => $root);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $c = new \stdClass();
-            $c->name = $row['namespace'].'\\'.$row['name'];
+            $c->name = $row['namespace'] . '\\' . $row['name'];
             $c->type = $row['type'];
             $c->size = 50;
             
@@ -189,7 +189,7 @@ SQL
                 $m = null;
                 foreach($d as $e) {
                     $namep = $name;
-                    $name .= '\\'.$e;
+                    $name .= '\\' . $e;
                     if (isset($ns[$name])) { continue; }
 
                     $n = new \stdClass();
@@ -206,7 +206,7 @@ SQL
             $ns[$row['namespace']]->children[] = $c;
         }
 
-        file_put_contents($this->tmpName.'/data/namespaces.json', json_encode($root));
+        file_put_contents($this->tmpName . '/data/namespaces.json', json_encode($root));
         $this->select['By namespace'] = 'namespaces.json';
     }
 
@@ -217,26 +217,26 @@ SQL
         }
 
         // Copy template
-        copyDir($this->config->dir_root.'/media/codeflower', $this->tmpName );
+        copyDir($this->config->dir_root . '/media/codeflower', $this->tmpName );
     }
 
     private function cleanFolder() {
-        $html = file_get_contents($this->tmpName.'/index.html');
+        $html = file_get_contents($this->tmpName . '/index.html');
         $select = '';
         foreach($this->select as $name => $file) {
             $select .= "            <option value=\"data/$file\">$name</option>";
         }
         $html = str_replace('<SELECT>', $select, $html);
-        file_put_contents($this->tmpName.'/index.html', $html);
+        file_put_contents($this->tmpName . '/index.html', $html);
 
         if (file_exists($this->finalName)) {
-            rename($this->finalName, $this->tmpName.'2');
+            rename($this->finalName, $this->tmpName . '2');
         }
 
         rename($this->tmpName, $this->finalName);
 
-        if (file_exists($this->tmpName.'2')) {
-            rmdirRecursive($this->tmpName.'2');
+        if (file_exists($this->tmpName . '2')) {
+            rmdirRecursive($this->tmpName . '2');
         }
     }
 

@@ -32,13 +32,13 @@ class Command {
     public function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
         
-        assert(is_array($args), "Args is not an array : ($command).".print_r($args, true));
-        assert($c === count($args), "Wrong number of arguments for Command : $c placeholders, ".count($args). " provided. ($command)");
+        assert(is_array($args), "Args is not an array : ($command)." . print_r($args, true));
+        assert($c === count($args), "Wrong number of arguments for Command : $c placeholders, " . count($args) . " provided. ($command)");
 
         $arguments = array();
         foreach($args as $arg) {
             ++self::$id;
-            $arguments['arg'.self::$id] = $arg;
+            $arguments['arg' . self::$id] = $arg;
         }
 
         $command = str_replace(array('%', '***'), array('%%', '%s'), $command);

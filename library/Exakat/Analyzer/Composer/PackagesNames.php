@@ -44,7 +44,7 @@ class PackagesNames extends Analyzer {
         $data = Analyzer::$datastore->getRow('composer');
         $this->report = array();
         foreach($data as $d) {
-            $this->report[$d['component']. ' ('.$d['version'].')'] = true;
+            $this->report[$d['component'] . ' (' . $d['version'] . ')'] = true;
         }
         
         return !empty($this->report);

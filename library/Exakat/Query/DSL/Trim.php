@@ -31,7 +31,7 @@ class Trim extends DSL {
         
         $this->assertVariable($variable);
         
-        return new Command('sideEffect{'.$variable.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1"); }');
+        return new Command('sideEffect{' . $variable . '.replaceFirst("^[' . $chars . ']?(.*?)[' . $chars . ']?\$", "\$1"); }');
     }
 }
 ?>

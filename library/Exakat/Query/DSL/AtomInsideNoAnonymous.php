@@ -36,7 +36,7 @@ class AtomInsideNoAnonymous extends DSL {
             return new Command(Query::STOP_QUERY);
         }
 
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
+        $gremlin = 'emit( ).repeat( __.out(' . self::$linksDown . ').not(hasLabel("Closure", "Classanonymous")) ).times(' . self::$MAX_LOOPING . ').hasLabel(within(***))';
         return new Command($gremlin, array($diff));
     }
 }

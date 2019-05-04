@@ -36,7 +36,7 @@ GREMLIN;
                          '[]'      => 'T_OPEN_BRACKET');
         
         $this->atomIs('Arrayliteral')
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
         
@@ -61,7 +61,7 @@ GREMLIN;
         $types = array_keys($types);
 
         $this->atomIs('Arrayliteral')
-             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('sideEffect{ ' . $mapping . ' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();

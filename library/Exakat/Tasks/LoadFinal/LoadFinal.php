@@ -238,7 +238,7 @@ GREMLIN;
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        fwrite($log, $step . "\t" . ($end - $begin) . "\t" . ($end - $start) . "\n");
         $begin = $end;
     }
 
@@ -256,7 +256,7 @@ g.V().hasLabel("Interface")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' removed interface extends link');
+        display($result->toInt() . ' removed interface extends link');
         $this->log->log(__METHOD__);
 
         $query = <<<'GREMLIN'
@@ -270,7 +270,7 @@ g.V().hasLabel("Class")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' removed class extends link');
+        display($result->toInt() . ' removed class extends link');
         $this->log->log(__METHOD__);
 
         $query = <<<'GREMLIN'
@@ -284,7 +284,7 @@ g.V().hasLabel("Class")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' removed class implements link');
+        display($result->toInt() . ' removed class implements link');
         $this->log->log(__METHOD__);
 
         $query = <<<'GREMLIN'
@@ -298,7 +298,7 @@ g.V().hasLabel("Usetrait")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' removed class implements link');
+        display($result->toInt() . ' removed class implements link');
         $this->log->log(__METHOD__);
     }
 
@@ -323,7 +323,7 @@ g.V().hasLabel("Functioncall")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt().' fixed Fullnspath for Functions');
+        display($result->toInt() . ' fixed Fullnspath for Functions');
         $this->log->log(__METHOD__);
     }
     
@@ -338,8 +338,8 @@ GREMLIN;
             // This should be handled nicely!!!
         }
 
-        display('   /'.$title);
-        $this->logTime('end '.$title);
+        display('   /' . $title);
+        $this->logTime('end ' . $title);
         $this->log->log($method);
     }
 
@@ -371,7 +371,7 @@ GREMLIN;
                                         ->toArray();
 
         $constants = array_merge($constConstants, $defineConstants);
-        $this->logTime('constants : '.count($constants));
+        $this->logTime('constants : ' . count($constants));
 
         if (empty($constants)) {
             display('Link constant definitions : skipping.');
@@ -398,7 +398,7 @@ GREMLIN;
 
             // Second round, with fallback to global constants
             // Based on define() definitions
-            $this->logTime('constants define : '.count($defineConstants));
+            $this->logTime('constants define : ' . count($defineConstants));
 
             $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
@@ -419,7 +419,7 @@ GREMLIN;
             $this->gremlin->query($query, array('arg1' => $defineConstants));
         }
 
-        $this->logTime('constants const : '.count($constConstants));
+        $this->logTime('constants const : ' . count($constConstants));
         if (!empty($constConstants)) {
             // Based on const definitions
             $query = <<<'GREMLIN'
@@ -911,7 +911,7 @@ GREMLIN;
         $exts[] = 'php_functions';
 
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
+            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $fullpath = "{$this->config->dir_root}/data/$inifile";
 
             $iniFile = parse_ini_file($fullpath);

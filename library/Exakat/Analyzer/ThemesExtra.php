@@ -110,7 +110,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['severity'])) {
-                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['severity']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['severity']);
                 }
             }
         }
@@ -128,7 +128,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['timetofix'])) {
-                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['timetofix']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['timetofix']);
                 }
             }
         }
@@ -163,7 +163,7 @@ class ThemesExtra {
                 $class = "Exakat\\Analyzer\\$name";
             }
         } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
+            $class = 'Exakat\\Analyzer\\' . str_replace('/', '\\', $name);
         } else {
             $class = $name;
         }

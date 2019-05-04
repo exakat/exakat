@@ -30,11 +30,11 @@ class GoToAllTraits extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.').hasLabel("Trait")');
+            $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Trait")');
             $command->setSack('[]');
             return $command;
         } else {
-            $command = new Command('emit( ).repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.').hasLabel("Trait")');
+            $command = new Command('emit( ).repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times(' . self::$MAX_LOOPING . ').hasLabel("Trait")');
             $command->setSack('[]');
             return $command;
         }

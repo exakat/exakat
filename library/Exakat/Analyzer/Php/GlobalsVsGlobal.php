@@ -43,8 +43,8 @@ GREMLIN;
                          'global'   => 'global');
 
         $this->atomIs(self::$VARIABLES_ALL)
-             ->raw('or( has("code", '.$globals[0].'), __.in("GLOBAL")) ')
-             ->raw('map{ '.$mapping.' }')
+             ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -68,8 +68,8 @@ GREMLIN;
         }
         
         $this->atomIs(self::$VARIABLES_ALL)
-             ->raw('or( has("code", '.$globals[0].'), __.in("GLOBAL")) ')
-             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
+             ->raw('sideEffect{ ' . $mapping . ' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();

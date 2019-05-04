@@ -57,10 +57,10 @@ class Update extends Tasks
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
 
-        echo 'Updating '.count($projects).' projects'.PHP_EOL;
+        echo 'Updating ' . count($projects) . ' projects' . PHP_EOL;
         shuffle($projects);
         foreach ($projects as $project) {
-            display("updating $project".PHP_EOL);
+            display("updating $project" . PHP_EOL);
 
             $args = array(1 => 'update',
                             2 => '-p',

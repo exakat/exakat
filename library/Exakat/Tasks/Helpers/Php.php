@@ -111,13 +111,13 @@ abstract class Php {
         foreach($versions as $version) {
             $errors = array();
             foreach($tokens as $k => $v) {
-                if (constant(__NAMESPACE__."\\$version::$v") !== $k) {
+                if (constant(__NAMESPACE__ . "\\$version::$v") !== $k) {
                     $errors[$k] = $v;
                 }
             }
             
             if (empty($errors)) {
-                $className = __NAMESPACE__."\\$version";
+                $className = __NAMESPACE__ . "\\$version";
                 return new $className();
             }
         }

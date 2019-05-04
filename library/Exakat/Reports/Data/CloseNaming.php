@@ -115,7 +115,7 @@ SQL
             $d = substr($a, $i + 1);
             $e = substr($a, 1, $i);
             if ($d === $e) { continue; }
-            $c = '$'.$d.$e;
+            $c = '$' . $d . $e;
             if ($c === $b) {
                 return true;
             }

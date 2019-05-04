@@ -110,7 +110,7 @@ class Tinkergraph extends Graph {
         } elseif ($result instanceof \stdClass) {
             return new GraphResults($result);
         } else {
-            print 'Processing unknown type '.gettype($result).PHP_EOL;
+            print 'Processing unknown type ' . gettype($result) . PHP_EOL;
             var_dump($result);
             die();
         }
@@ -134,7 +134,7 @@ class Tinkergraph extends Graph {
     }
 
     public function checkConnection() {
-        $res = @stream_socket_client('tcp://' . $this->config->tinkergraph_host .':'.$this->config->tinkergraph_port,
+        $res = @stream_socket_client('tcp://' . $this->config->tinkergraph_host . ':' . $this->config->tinkergraph_port,
                                      $errno,
                                      $errorMessage,
                                      1,
@@ -202,7 +202,7 @@ class Tinkergraph extends Graph {
             $pid = 'Not yet';
         }
 
-        display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
+        display('started [' . $pid . '] in ' . number_format(($e - $b) * 1000, 2) . ' ms' );
     }
 
     public function stop() {

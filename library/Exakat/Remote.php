@@ -49,7 +49,7 @@ class Remote {
     
     private function sendWithPipe($json) {
         $queuePipe = fopen($this->bits['path'], 'w');
-        fwrite($queuePipe, $json.PHP_EOL);
+        fwrite($queuePipe, $json . PHP_EOL);
         fclose($queuePipe);
     }
 
@@ -69,7 +69,7 @@ class Remote {
         );
 
         $context  = stream_context_create($options);
-        $html = file_get_contents($this->bits['scheme'].'://'.$this->bits['host'].':'.$this->bits['port'], false, $context);
+        $html = file_get_contents($this->bits['scheme'] . '://' . $this->bits['host'] . ':' . $this->bits['port'], false, $context);
         
         return $html;
     }
@@ -88,7 +88,7 @@ class Remote {
         );
     
         $cipher = base64_encode(
-            $nonce.
+            $nonce .
             sodium_crypto_secretbox(
                 $message,
                 $nonce,

@@ -61,7 +61,7 @@ SQL;
             // @todo Log if $json == false
             return $json;
         } else {
-            file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));
+            file_put_contents($dirName . '/' . $fileName . '.' . self::FILE_EXTENSION, json_encode($items));
             return true;
         }
     }

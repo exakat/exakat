@@ -38,9 +38,9 @@ abstract class Data {
 
         $this->name = $name;
         
-        $fullpath = self::$config->dir_root."/data/$name.sqlite";
+        $fullpath = self::$config->dir_root . "/data/$name.sqlite";
         if (self::$config->is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), $name).'.sqlite';
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
             if (file_exists($fullpath)) {
                 copy($fullpath, $this->phar_tmp);
             } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
@@ -53,7 +53,7 @@ abstract class Data {
             if (file_exists($fullpath)) {
                 $docPath = $fullpath;
             } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
-                $this->phar_tmp = tempnam(sys_get_temp_dir(), $name).'.sqlite';
+                $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
                 self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
                 $docPath = $this->phar_tmp;
             } else {

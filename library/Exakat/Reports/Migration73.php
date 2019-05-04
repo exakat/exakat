@@ -61,7 +61,7 @@ class Migration73 extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -74,7 +74,7 @@ class Migration73 extends Ambassador {
         }
         
         if ($missing = $this->checkMissingThemes()) {
-            print "Can't produce Migration73 format. There are ".count($missing).' missing themes : '.implode(', ', $missing).".\n";
+            print "Can't produce Migration73 format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
             return false;
         }
 
@@ -124,7 +124,7 @@ class Migration73 extends Ambassador {
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= ' LIMIT '.$limit;
+            $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -141,7 +141,7 @@ class Migration73 extends Ambassador {
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
 
-        $suffixes = array_unique(array_merge(array('73', $this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions));
+        $suffixes = array_unique(array_merge(array('73', $this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions));
         foreach($suffixes as $suffix) {
             $version = "$suffix[0].$suffix[1]";
             $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
@@ -160,7 +160,7 @@ class Migration73 extends Ambassador {
                 $errors      = 'N/A';
                 $total_error = 'N/A';
             } else {
-                $res = $this->sqlite->query('SELECT error FROM compilation'.$suffix);
+                $res = $this->sqlite->query('SELECT error FROM compilation' . $suffix);
                 $readErrors = array();
                 while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                     $readErrors[] = $row['error'];
@@ -168,11 +168,11 @@ class Migration73 extends Ambassador {
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
-                $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
+                $errors       = '<ul><li>' . implode("</li>\n<li>", $errors) . '</li></ul>';
 
-                $total_error = count($files).' ('.number_format(count($files) / $total * 100, 0).'%)';
+                $total_error = count($files) . ' (' . number_format(count($files) / $total * 100, 0) . '%)';
                 $files       = array_keys(array_count_values($files));
-                $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
+                $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
             $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
@@ -486,7 +486,7 @@ SQL;
     }
 
     protected function getTotalAnalysedFile() {
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer in (".makeList($this->analyzerList).')';
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer in (" . makeList($this->analyzerList) . ')';
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
@@ -497,7 +497,7 @@ SQL;
         $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
             WHERE rc.count >= 0 AND
-                  analyzer in ('.makeList($this->analyzerList).')';
+                  analyzer in (' . makeList($this->analyzerList) . ')';
 
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();
@@ -518,7 +518,7 @@ SQL;
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 

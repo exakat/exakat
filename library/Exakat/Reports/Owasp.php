@@ -145,7 +145,7 @@ class Owasp extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -177,7 +177,7 @@ MENU;
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -218,9 +218,9 @@ MENU;
     }
 
     protected function cleanFolder() {
-        if (file_exists($this->tmpName.'/datas/base.html')) {
-            unlink($this->tmpName.'/datas/base.html');
-            unlink($this->tmpName.'/datas/menu.html');
+        if (file_exists($this->tmpName . '/datas/base.html')) {
+            unlink($this->tmpName . '/datas/base.html');
+            unlink($this->tmpName . '/datas/menu.html');
         }
 
         // Clean final destination
@@ -229,7 +229,7 @@ MENU;
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -239,9 +239,9 @@ MENU;
     private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter) {
         --$lineNumber; // array index
         $lines = array();
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
+        if (file_exists($this->config->projects_root . '/projects/' . $this->config->project . '/code/' . $filePath)) {
 
-            $fileLines = file($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath);
+            $fileLines = file($this->config->projects_root . '/projects/' . $this->config->project . '/code/' . $filePath);
 
             $startLine = 0;
             $endLine = 10;
@@ -270,7 +270,7 @@ MENU;
     private function generateOwaspDocumentation() {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         
-        $owasp = json_decode(file_get_contents($this->config->dir_root.'/data/owasp.top10.json'));
+        $owasp = json_decode(file_get_contents($this->config->dir_root . '/data/owasp.top10.json'));
         
         $content = '<p>Documentation is extracted from the OWASP TOP 10 2017, with extra content from Exakat.</p><ul>';
         
@@ -298,9 +298,9 @@ MENU;
             $total = 0;
             if (empty($analyzers)) {
                 $levelRows .= "<tr><td>-</td><td>&nbsp;</td><td>-</td></tr>\n";
-                $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
+                $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
                             <td style="background-color: lightgrey">-</td></td>
-                            <td style="background-color: lightgrey; font-weight: bold; font-size: 20; text-align: center"">N/A</td></tr>'.PHP_EOL.
+                            <td style="background-color: lightgrey; font-weight: bold; font-size: 20; text-align: center"">N/A</td></tr>' . PHP_EOL .
                        $levelRows;
                 continue;
             }
@@ -342,9 +342,9 @@ SQL
             }
             $color = self::COLORS[$grade];
             
-            $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
-                            <td style="background-color: lightgrey">'.$total.'</td></td>
-                            <td style="background-color: '.$color.'; font-weight: bold; font-size: 20; text-align: center; ">'.$grade.'</td></tr>'.PHP_EOL.
+            $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
+                            <td style="background-color: lightgrey">' . $total . '</td></td>
+                            <td style="background-color: ' . $color . '; font-weight: bold; font-size: 20; text-align: center; ">' . $grade . '</td></tr>' . PHP_EOL .
                        $levelRows;
         }
 
@@ -399,9 +399,9 @@ SQL
             }
             $color = self::COLORS[$grade];
             
-            $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
+            $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
                             <td style="background-color: lightgrey">&nbsp;</td></td>
-                            <td style="background-color: '.$color.'">'.$grade.'</td></tr>'.PHP_EOL;
+                            <td style="background-color: ' . $color . '">' . $grade . '</td></tr>' . PHP_EOL;
         }
 
         $html = $this->getBasedPage('levels');
@@ -411,7 +411,7 @@ SQL
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -444,41 +444,41 @@ SQL
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span># of PHP</span> files</p>
-                                <p class="value">'.$info['Number of PHP files'].'</p>
+                                <p class="value">' . $info['Number of PHP files'] . '</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> Used</p>
-                                <p class="value">'.$info['PHP used'].'</p>
+                                <p class="value">' . $info['PHP used'] . '</p>
                              </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> LoC</p>
-                                <p class="value">'.$info['Number of lines of code'].'</p>
+                                <p class="value">' . $info['Number of lines of code'] . '</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>Total</span> LoC</p>
-                                <p class="value">'.$info['Number of lines of code with comments'].'</p>
+                                <p class="value">' . $info['Number of lines of code with comments'] . '</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <div class="title">Files free of issues (%)</div>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentFile.'%">
-                                        '.$totalFileSansError.'
-                                    </div><div style="color:black; text-align:center;">'.$totalFileAnalysed.'</div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
+                                        ' . $totalFileSansError . '
+                                    </div><div style="color:black; text-align:center;">' . $totalFileAnalysed . '</div>
                                 </div>
-                                <div class="pourcentage">'.$percentFile.'%</div>
+                                <div class="pourcentage">' . $percentFile . '%</div>
                             </div>
                             <div class="sub-div">
                                 <div class="title">Analyzers free of issues (%)</div>
                                 <div class="progress progress-sm active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentAnalyzer.'%">
-                                        '.$totalAnalyzerWithoutError.'
-                                    </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
+                                        ' . $totalAnalyzerWithoutError . '
+                                    </div><div style="color:black; text-align:center;">' . $totalAnalyzerReporting . '</div>
                                 </div>
-                                <div class="pourcentage">'.$percentAnalyzer.'%</div>
+                                <div class="pourcentage">' . $percentAnalyzer . '%</div>
                             </div>
                         </div>
                     </div>
@@ -495,7 +495,7 @@ SQL
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', $this->themes->getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ("' . implode('", "', $this->themes->getThemeAnalyzers($categorie)) . '")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -516,10 +516,10 @@ SQL
 
         foreach ($data as $value) {
             $issuesHtml .= '<div class="clearfix">
-                   <div class="block-cell">'.$value['label'].'</div>
-                   <div class="block-cell text-center">'.$value['value'].'</div>
+                   <div class="block-cell">' . $value['label'] . '</div>
+                   <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         $filler = '<div class="clearfix">
@@ -534,7 +534,7 @@ SQL
 
     public function getSeverityBreakdown() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = '"' . implode('", "', $list) . '"';
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -554,10 +554,10 @@ SQL;
         $dataScript = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                   <div class="block-cell">'.$value['label'].'</div>
-                   <div class="block-cell text-center">'.$value['value'].'</div>
+                   <div class="block-cell">' . $value['label'] . '</div>
+                   <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         $filler = '<div class="clearfix">
@@ -596,11 +596,11 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= '<tr>';
-            $analyserHTML.='<td>'.$analyser['label'].'</td>
-                        <td>'.$analyser['recipes'].'</td>
-                        <td>'.$analyser['issues'].'</td>
-                        <td>'.$analyser['files'].'</td>
-                        <td>'.$analyser['severity'].'</td>';
+            $analyserHTML.='<td>' . $analyser['label'] . '</td>
+                        <td>' . $analyser['recipes'] . '</td>
+                        <td>' . $analyser['issues'] . '</td>
+                        <td>' . $analyser['files'] . '</td>
+                        <td>' . $analyser['severity'] . '</td>';
             $analyserHTML.= '</tr>';
         }
 
@@ -612,7 +612,7 @@ SQL;
 
     protected function getAnalyzersResultsCounts() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
@@ -654,10 +654,10 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= '<tr>';
-            $filesHTML.='<td>'.$file['file'].'</td>
-                        <td>'.$file['loc'].'</td>
-                        <td>'.$file['issues'].'</td>
-                        <td>'.$file['analyzers'].'</td>';
+            $filesHTML.='<td>' . $file['file'] . '</td>
+                        <td>' . $file['loc'] . '</td>
+                        <td>' . $file['issues'] . '</td>
+                        <td>' . $file['analyzers'] . '</td>';
             $filesHTML.= '</tr>';
         }
 
@@ -670,7 +670,7 @@ SQL;
 
     private function getFilesResultsCounts() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<'SQL'
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -707,7 +707,7 @@ SQL;
         $dataMinor    = array();
         $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis[] = "'".$value['file']."'";
+            $xAxis[] = "'" . $value['file'] . "'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
             $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
@@ -730,7 +730,7 @@ SQL;
 
     protected function getAnalyzersCount($limit) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = '"' . implode('", "', $list) . '"';
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -738,7 +738,7 @@ SQL;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= ' LIMIT '.$limit;
+            $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -785,7 +785,7 @@ SQL;
 
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
-            $xAxis[] = "'".$value['analyzer']."'";
+            $xAxis[] = "'" . $value['analyzer'] . "'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
             $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
@@ -815,7 +815,7 @@ SQL;
     protected function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP' . $version);
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
@@ -832,7 +832,7 @@ SQL;
             }
             $result = $this->Compatibility($result);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
         }
 
@@ -842,9 +842,9 @@ HTML;
 
         $html = $this->getBasedPage('compatibility');
         $html = $this->injectBloc($html, 'COMPATIBILITY', $compatibility);
-        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP '.$version[0].'.'.$version[1]);
+        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP ' . $version[0] . '.' . $version[1]);
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-        $this->putBasedPage('compatibility_php'.$version, $html);
+        $this->putBasedPage('compatibility_php' . $version, $html);
     }
 
     private function generateDynamicCode() {
@@ -852,7 +852,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $dynamicCode .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -883,15 +883,15 @@ HTML;
         } elseif ($count === 0) {
             return '<i class="fa fa-check-square-o"></i>';
         } else {
-            return '<i class="fa fa-warning red"></i>&nbsp;'.$count.' warnings';
+            return '<i class="fa fa-warning red"></i>&nbsp;' . $count . ' warnings';
         }
     }
     
     protected function makeAuditDate(&$finalHTML) {
-        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+            $audit_date .= ' - &quot;' . $audit_name . '&quot;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }

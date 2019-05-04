@@ -41,7 +41,7 @@ class Path extends Analyzer {
         // /path/to/file.php
         $this->atomIs('String')
              ->has('noDelimiter')
-             ->regexIs('noDelimiter', '^((?!('.$protocolList.')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$');
+             ->regexIs('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$');
         $this->prepareQuery();
         
         $functions = array('\fopen',

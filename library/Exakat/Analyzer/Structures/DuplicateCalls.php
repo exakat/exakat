@@ -31,7 +31,7 @@ class DuplicateCalls extends Analyzer {
         $atoms = array('Methodcall', 'Functioncall');
         
         foreach($atoms as $atom) {
-            $calls = $this->query('g.V().hasLabel("'.$atom.'").not( where( __.in("METHOD") ) )
+            $calls = $this->query('g.V().hasLabel("' . $atom . '").not( where( __.in("METHOD") ) )
                                       .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= 2; }.keySet()');
             $calls = $calls->toArray();
             if (empty($calls)) {

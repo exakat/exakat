@@ -32,7 +32,7 @@ class Psr7Usage extends InterfaceUsage {
         // Using the defined interfaces
         $this->interfaces = array();
         foreach($info->interfaces as $interface) {
-            $this->interfaces[] = $interface->namespace.'\\'.$interface->name;
+            $this->interfaces[] = $interface->namespace . '\\' . $interface->name;
         }
         parent::analyze();
     }

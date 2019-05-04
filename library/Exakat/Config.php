@@ -65,7 +65,7 @@ class Config {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(phar::running()), 7);
             $this->dir_root      = phar::running();
-            $this->ext_root      = substr(dirname(phar::running()).'/ext', 5);
+            $this->ext_root      = substr(dirname(phar::running()) . '/ext', 5);
 
             assert_options(ASSERT_ACTIVE, 0);
 
@@ -179,7 +179,7 @@ class Config {
             $this->options['dump']          = getcwd() . '/.exakat/dump.sqlite';
             $this->options['dump_tmp']      = getcwd() . '/.exakat/.dump.sqlite';
         } else {
-            $this->options['project_dir']   = $this->projects_root.'/projects/'.$this->options['project'];
+            $this->options['project_dir']   = $this->projects_root . '/projects/' . $this->options['project'];
             $this->options['code_dir']      = $this->options['project_dir'] . '/code';
             $this->options['log_dir']       = $this->options['project_dir'] . '/log';
             $this->options['tmp_dir']       = $this->options['project_dir'] . '/.exakat';
@@ -220,7 +220,7 @@ class Config {
 
     private function checkSelf() {
         if (version_compare(PHP_VERSION, '7.0.0') < 0) {
-            throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.('.PHP_VERSION.' provided)');
+            throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.(' . PHP_VERSION . ' provided)');
         }
         $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
         
@@ -232,7 +232,7 @@ class Config {
         }
         
         if (!empty($missing)) {
-           throw new InaptPHPBinary('PHP needs '.(count($missing) == 1 ? 'one' : count($missing)).' extension'.(count($missing) > 1 ? 's' : '').' with the current version : '.implode(', ', $missing));
+           throw new InaptPHPBinary('PHP needs ' . (count($missing) == 1 ? 'one' : count($missing)) . ' extension' . (count($missing) > 1 ? 's' : '') . ' with the current version : ' . implode(', ', $missing));
         }
     }
     

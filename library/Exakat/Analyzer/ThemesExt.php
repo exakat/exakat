@@ -152,7 +152,7 @@ class ThemesExt {
                 $class = "Exakat\\Analyzer\\$name";
             }
         } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
+            $class = 'Exakat\\Analyzer\\' . str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
             $found = $this->getSuggestionClass($name);
 

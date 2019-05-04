@@ -89,7 +89,7 @@ class Project extends Tasks {
         // Reset datastore for the others
         Analyzer::$datastore = $this->datastore;
 
-        display('Search for external libraries'.PHP_EOL);
+        display('Search for external libraries' . PHP_EOL);
         $pathCache = "{$this->config->projects_root}/projects/$project/config.cache";
         if (file_exists($pathCache)) {
             unlink($pathCache);
@@ -164,10 +164,10 @@ class Project extends Tasks {
         }
 
         display("Running project '$project'" . PHP_EOL);
-        display('Running the following analysis : '.implode(', ', $themesToRun));
-        display('Producing the following reports : '.implode(', ', $reportToRun));
+        display('Running the following analysis : ' . implode(', ', $themesToRun));
+        display('Producing the following reports : ' . implode(', ', $reportToRun));
         
-        display('Running files'.PHP_EOL);
+        display('Running files' . PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -209,7 +209,7 @@ class Project extends Tasks {
         // Dump is a child process
         // initialization and first collection (action done once)
         display('Initial dump');
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -T First -collect';
+        $shell = $this->config->php . ' ' . $this->config->executable . ' dump -p ' . $this->config->project . ' -T First -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
@@ -219,7 +219,7 @@ class Project extends Tasks {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         }
 
-        display('Analyzed project'.PHP_EOL);
+        display('Analyzed project' . PHP_EOL);
         $this->logTime('Analyze');
         $this->addSnitch(array('step'    => 'Analyzed',
                                'project' => $this->config->project));
@@ -238,8 +238,8 @@ class Project extends Tasks {
         }
         
         foreach($reportToRun as $format) {
-            display("Reporting $format".PHP_EOL);
-            $this->addSnitch(array('step'    => 'Report : '.$format,
+            display("Reporting $format" . PHP_EOL);
+            $this->addSnitch(array('step'    => 'Report : ' . $format,
                                    'project' => $this->config->project));
 
             try {
@@ -263,7 +263,7 @@ class Project extends Tasks {
             unset($reportConfig);
         }
 
-        display('Reported project'.PHP_EOL);
+        display('Reported project' . PHP_EOL);
         
         // Reset cache from Themes
         Themes::resetCache();
@@ -285,7 +285,7 @@ class Project extends Tasks {
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start).PHP_EOL);
+        fwrite($log, $step . "\t" . ($end - $begin) . "\t" . ($end - $start) . PHP_EOL);
         $begin = $end;
     }
 
@@ -312,7 +312,7 @@ class Project extends Tasks {
             $analyze->run();
             unset($analyze);
             unset($analyzeConfig);
-            $this->logTime('Analyze : '.(is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
+            $this->logTime('Analyze : ' . (is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
 
             $args = array ( 1 => 'dump',
                             2 => '-p',
@@ -367,17 +367,17 @@ class Project extends Tasks {
 
         $diff = array_diff($themes, $availableThemes);
         if (!empty($diff)) {
-            display('Ignoring the following unknown themes : '.implode(', ', $diff).PHP_EOL);
+            display('Ignoring the following unknown themes : ' . implode(', ', $diff) . PHP_EOL);
         }
         
         $themes = array_intersect($availableThemes, $themes);
-        display('Running the following themes : '.implode(', ', $themes).PHP_EOL);
+        display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
 
         global $VERBOSE;
         $oldVerbose = $VERBOSE;
         $VERBOSE = false;
         foreach($themes as $theme) {
-            $this->addSnitch(array('step'    => 'Analyze : '.$theme,
+            $this->addSnitch(array('step'    => 'Analyze : ' . $theme,
                                    'project' => $this->config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
@@ -463,7 +463,7 @@ class Project extends Tasks {
         $name = $names[ $x % (count($names) - 1)];
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];
 
-        return ucfirst($adjective).' '.$name;
+        return ucfirst($adjective) . ' ' . $name;
     }
     
     private function getLineDiff($current, $vcs) {

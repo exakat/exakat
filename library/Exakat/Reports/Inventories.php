@@ -36,7 +36,7 @@ class Inventories extends Reports {
             return false;
         }
 
-        $path = $folder.'/'.$name;
+        $path = $folder . '/' . $name;
 
         if (file_exists($path)) {
             rmdirRecursive($path);
@@ -71,7 +71,7 @@ class Inventories extends Reports {
     }
 
     private function saveInventory($analyzer, $file) {
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$analyzer.'"');
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="' . $analyzer . '"');
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
         $step = 0;
@@ -84,7 +84,7 @@ class Inventories extends Reports {
     }
 
     private function saveAtom($atom, $file) {
-        $res = $this->sqlite->query('SELECT name, file, line FROM literal'.$atom);
+        $res = $this->sqlite->query('SELECT name, file, line FROM literal' . $atom);
         if ($res === false) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
             return;
@@ -101,7 +101,7 @@ class Inventories extends Reports {
     }
 
     private function saveTable($table, $file) {
-        $res = $this->sqlite->query('SELECT variable, type FROM '.$table);
+        $res = $this->sqlite->query('SELECT variable, type FROM ' . $table);
         if ($res === false) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
             return;

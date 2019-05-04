@@ -90,8 +90,8 @@ class Report extends Tasks {
         $begin = microtime(true);
 
         if (empty($this->config->file) || count($this->config->format) > 1) {
-            $file = $report::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '');
-            display("Building report for project {$this->config->project} in '".$file."', with format {$format}\n");
+            $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
+            display("Building report for project {$this->config->project} in '" . $file . "', with format {$format}\n");
             $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
             display("Building report for project {$this->config->project} to stdout, with format {$format}\n");
@@ -102,13 +102,13 @@ class Report extends Tasks {
             if (in_array($filename, array('.', '..'))) {
                 $filename = $reportClass::FILE_FILENAME;
             }
-            display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '')."', with format {$format}\n");
+            display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
-        display('Reported '.$report->getCount()." messages in $format");
+        display('Reported ' . $report->getCount() . " messages in $format");
 
         $end = microtime(true);
-        display('Processing time : '.number_format($end - $begin, 2).'s');
+        display('Processing time : ' . number_format($end - $begin, 2) . 's');
 
         $this->datastore->addRow('hash', array($format => $this->config->file));
         display('Done');

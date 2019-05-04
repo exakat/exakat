@@ -26,7 +26,7 @@ namespace Exakat\Exceptions;
 class HelperException extends \Exception {
     public function __construct($helper = '', $code = 0, \Exception $previous = null) {
 
-        parent::__construct($helper.' not found. Please, check exakat doctor to ensure all helpers are available', $code, $previous);
+        parent::__construct($helper . ' not found. Please, check exakat doctor to ensure all helpers are available', $code, $previous);
     }
 }
 

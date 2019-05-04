@@ -34,7 +34,7 @@ class ThemesMain {
     
     public function __construct($path) {
         if (substr($path, 0, 4) == 'phar') {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs').'.sqlite';
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs') . '.sqlite';
             copy($path, $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
@@ -58,16 +58,16 @@ class ThemesMain {
             $where = 'WHERE a.folder != "Common" ';
         } elseif (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE a.folder != "Common" AND c.name in ('.makeList($theme).')';
+            $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($theme) . ')';
         } elseif ($theme === 'Random') {
             $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
             shuffle($shorList);
             $theme = $shorList[0];
             display( "Random theme is : $theme\n");
 
-            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
+            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($theme, '"') . '"';
         } elseif (in_array($theme, $all)) {
-            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
+            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($theme, '"') . '"';
         } else {
             return array();
         }
@@ -119,9 +119,9 @@ SQL;
         } elseif (is_string($list)) {
             $where = " WHERE c.name = \"$list\" ";
         } elseif (is_array($list)) {
-            $where = ' WHERE c.name IN ('.makeList($list).') ';
+            $where = ' WHERE c.name IN (' . makeList($list) . ') ';
         } else {
-            assert(false, 'Wrong type for list : '.gettype($list).' in '.__METHOD__."\n");
+            assert(false, 'Wrong type for list : ' . gettype($list) . ' in ' . __METHOD__ . "\n");
         }
 
         $query = <<<SQL
@@ -149,7 +149,7 @@ SQL;
         $return = array();
         $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['severity']);
+            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant(Analyzer::class . '::' . $row['severity']);
         }
 
         return $return;
@@ -161,7 +161,7 @@ SQL;
         $return = array();
         $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['timetofix']);
+            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant(Analyzer::class . '::' . $row['timetofix']);
         }
 
         return $return;
@@ -235,7 +235,7 @@ SQL;
                 $class = "Exakat\\Analyzer\\$name";
             }
         } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
+            $class = 'Exakat\\Analyzer\\' . str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
             $found = $this->getSuggestionClass($name);
 

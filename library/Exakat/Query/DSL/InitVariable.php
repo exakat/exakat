@@ -31,7 +31,7 @@ class InitVariable extends DSL {
 
         // Value should not be a direct groovy code!!!
         $this->assertVariable($name, self::VARIABLE_WRITE);
-        return new Command('sideEffect{ '.$name.' = '.$value.' }');
+        return new Command('sideEffect{ ' . $name . ' = ' . $value . ' }');
     }
 }
 ?>

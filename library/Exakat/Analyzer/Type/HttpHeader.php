@@ -31,18 +31,18 @@ class HttpHeader extends Analyzer {
         
         $this->atomIs('String')
              ->hasNoIn('CONCAT')
-             ->regexIs('noDelimiter', '('.implode('|', $HttpHeadersList).'): .*');
+             ->regexIs('noDelimiter', '(' . implode('|', $HttpHeadersList) . '): .*');
         $this->prepareQuery();
 
         $this->atomIs('Heredoc')
              ->outIs('CONCAT')
              ->atomIs('String')
-             ->regexIs('noDelimiter', '('.implode('|', $HttpHeadersList).'): .*')
+             ->regexIs('noDelimiter', '(' . implode('|', $HttpHeadersList) . '): .*')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Concatenation')
-             ->regexIs('fullcode', '('.implode('|', $HttpHeadersList).'): .*')
+             ->regexIs('fullcode', '(' . implode('|', $HttpHeadersList) . '): .*')
              ->back('first');
         $this->prepareQuery();
     }

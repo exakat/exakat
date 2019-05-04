@@ -88,11 +88,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'staticconstant';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'staticconstant';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total.' Static constants');
+        display( $total . ' Static constants');
 
         // static property
         $query = <<<'GREMLIN'
@@ -115,11 +115,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'staticproperty';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'staticproperty';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total.' Static constants');
+        display( $total . ' Static constants');
 
         // Instantiation
         $query = <<<'GREMLIN'
@@ -142,11 +142,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'instanciation';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'instanciation';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total. ' New');
+        display( $total . ' New');
 
         // Typehint
         $query = <<<'GREMLIN'
@@ -168,11 +168,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'typehint';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'typehint';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total. ' Typehint');
+        display( $total . ' Typehint');
 
         // instanceof
         $query = <<<'GREMLIN'
@@ -195,11 +195,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'instanceof';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'instanceof';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total. ' Instanceof');
+        display( $total . ' Instanceof');
 
         // static methods
         $query = <<<'GREMLIN'
@@ -221,11 +221,11 @@ GREMLIN;
                 $nodes['unknown'][] = $v['destination'];
                 $nodesId[$v['destination']] = count($nodes) - 1;
             }
-            $links[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = 'staticmethodcall';
-            $fullcode[$nodesId[$v['destination']].' -> '.$nodesId[$v['origin']]][] = $v['fullcode'];
+            $links[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = 'staticmethodcall';
+            $fullcode[$nodesId[$v['destination']] . ' -> ' . $nodesId[$v['origin']]][] = $v['fullcode'];
             ++$total;
         }
-        display( $total. ' Static methods');
+        display( $total . ' Static methods');
 
         // Final preparation
         // Nodes
@@ -256,7 +256,7 @@ DOT;
         $linksDot = array();
         foreach($links as $link => $type) {
             foreach($type as $id => $t) {
-                $linksDot[] = $link.' [shape="none" color="'.$colors[$t].'" label="'.str_replace('"', '\\"', $fullcode[$link][$id]).'"];';
+                $linksDot[] = $link . ' [shape="none" color="' . $colors[$t] . '" label="' . str_replace('"', '\\"', $fullcode[$link][$id]) . '"];';
             }
         }
         unset($type);
@@ -281,14 +281,14 @@ digraph graphname {
     ]
     
 DOT
-    .implode(PHP_EOL, $nodes['class'])      .PHP_EOL
-    .implode(PHP_EOL, $nodes['trait'])      .PHP_EOL
-    .implode(PHP_EOL, $nodes['interface'])  .PHP_EOL
-    .implode(PHP_EOL, $nodes['unknown'])    .PHP_EOL
-    .PHP_EOL
-    .implode(PHP_EOL, $linksDot).PHP_EOL.'}'.PHP_EOL;
+    . implode(PHP_EOL, $nodes['class']) . PHP_EOL
+    . implode(PHP_EOL, $nodes['trait']) . PHP_EOL
+    . implode(PHP_EOL, $nodes['interface']) . PHP_EOL
+    . implode(PHP_EOL, $nodes['unknown']) . PHP_EOL
+    . PHP_EOL
+    . implode(PHP_EOL, $linksDot) . PHP_EOL . '}' . PHP_EOL;
 
-        file_put_contents("$folder/$name.".self::FILE_EXTENSION, $dot);
+        file_put_contents("$folder/$name." . self::FILE_EXTENSION, $dot);
     }
 }
 

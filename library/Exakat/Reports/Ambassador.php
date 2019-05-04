@@ -140,7 +140,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -156,7 +156,7 @@ class Ambassador extends Reports {
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace('{{'.$bloc.'}}', $content, $html);
+        return str_replace('{{' . $bloc . '}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
@@ -166,7 +166,7 @@ class Ambassador extends Reports {
         }
         
         if ($missing = $this->checkMissingThemes()) {
-            print "Can't produce Ambassador format. There are ".count($missing).' missing themes : '.implode(', ', $missing).".\n";
+            print "Can't produce Ambassador format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
             return false;
         }
 
@@ -227,7 +227,7 @@ class Ambassador extends Reports {
         $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $list[] = 'CompatibilityPHP'.$row['version'];
+            $list[] = 'CompatibilityPHP' . $row['version'];
             $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
@@ -296,7 +296,7 @@ class Ambassador extends Reports {
 
     protected function setPHPBlocs($description) {
         $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function ($x) {
-            $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>';
+            $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . PHPSyntax($x[1]) . '?&gt;</pre>';
             return $return;
         }, $description);
         
@@ -310,28 +310,28 @@ class Ambassador extends Reports {
         foreach($analyzerList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $this->getDocs($analyzerName);
-            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description['name'].'</a></h2>';
+            $analyzersDocHTML = '<h2><a href="issues.html#analyzer=' . $this->toId($analyzerName) . '" id="' . $this->toId($analyzerName) . '">' . $description['name'] . '</a></h2>';
 
             $badges = array();
             $exakatSince = $description['exakatSince'] ?? '';
             if(!empty($v)){
                 $badges[] = "[Since $exakatSince]";
             }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-            $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#'.$this->toOnlineId($description['name']).'">Online docs</a> ]';
+            $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
+            $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
 
             $versionCompatibility = $description['phpversion'];
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
                 if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
+                    $versionCompatibility = substr($versionCompatibility, 0, -1) . ' and more recent ';
                 } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
+                    $versionCompatibility = ' older than ' . substr($versionCompatibility, 0, -1);
                 }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
+                $badges[] = '[ PHP ' . $versionCompatibility . ']';
             }
 
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description['description'])).'</p>';
+            $analyzersDocHTML .= '<p>' . implode(' - ', $badges) . '</p>';
+            $analyzersDocHTML .= '<p>' . nl2br($this->setPHPBlocs($description['description'])) . '</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
@@ -340,7 +340,7 @@ class Ambassador extends Reports {
             
             $clearphp = $description['clearphp'];
             if(!empty($clearphp)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearphp.'.md">'.$clearphp.'</a>, in the clearPHP reference.</p>';
+                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/' . $clearphp . '.md">' . $clearphp . '</a>, in the clearPHP reference.</p>';
             }
             $docHTML[] = $analyzersDocHTML;
         }
@@ -392,12 +392,12 @@ class Ambassador extends Reports {
             foreach($analyzerList as $key => $value) {
                 $table .= '
                 <div class="clearfix">
-                   <div class="block-cell">'.makeHtml($key).'</div>
-                   <div class="block-cell text-center">'.$value.'</div>
+                   <div class="block-cell">' . makeHtml($key) . '</div>
+                   <div class="block-cell text-center">' . $value . '</div>
                  </div>
 ';
                 if ($value > 0) {
-                    $values[] = '{label:"'.$key.'", value:'.( (int) $value).'}';
+                    $values[] = '{label:"' . $key . '", value:' . ( (int) $value) . '}';
                 }
                 $total += $value;
             }
@@ -665,7 +665,7 @@ JAVASCRIPT;
   </script>
 
 JAVASCRIPT;
-        $html = '<div class="row">'.implode(PHP_EOL, $html).'</div>';
+        $html = '<div class="row">' . implode(PHP_EOL, $html) . '</div>';
 
         $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
         $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);
@@ -983,12 +983,12 @@ SQL
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $xAxis[] = "'".$value['key']." param.'";
+            $xAxis[] = "'" . $value['key'] . " param.'";
             $data[$value['key']] = $value['value'];
 
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['key'].' param.</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                      <div class="block-cell-name">' . $value['key'] . ' param.</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
 
@@ -1160,8 +1160,8 @@ SQL
             $data[$value['analyzer']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$shortName.'</div>
-                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                      <div class="block-cell-name">' . $shortName . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
         
@@ -1185,8 +1185,8 @@ SQL
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['name'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                      <div class="block-cell-name">' . $value['name'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
         
@@ -1210,8 +1210,8 @@ SQL
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['name'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                      <div class="block-cell-name">' . $value['name'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
         
@@ -1235,8 +1235,8 @@ SQL
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['name'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                      <div class="block-cell-name">' . $value['name'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
         
@@ -1396,7 +1396,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1431,41 +1431,41 @@ JAVASCRIPT;
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span># of PHP</span> files</p>
-                                <p class="value">'.$info['Number of PHP files'].'</p>
+                                <p class="value">' . $info['Number of PHP files'] . '</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> Used</p>
-                                <p class="value">'.$info['PHP used'].'</p>
+                                <p class="value">' . $info['PHP used'] . '</p>
                              </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> LoC</p>
-                                <p class="value">'.$info['Number of lines of code'].'</p>
+                                <p class="value">' . $info['Number of lines of code'] . '</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>Total</span> LoC</p>
-                                <p class="value">'.$info['Number of lines of code with comments'].'</p>
+                                <p class="value">' . $info['Number of lines of code with comments'] . '</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <div class="title">Files free of issues (%)</div>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentFile.'%">
-                                        '.$totalFileSansError.'
-                                    </div><div style="color:black; text-align:center;">'.$totalFileAnalysed.'</div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
+                                        ' . $totalFileSansError . '
+                                    </div><div style="color:black; text-align:center;">' . $totalFileAnalysed . '</div>
                                 </div>
-                                <div class="pourcentage">'.$percentFile.'%</div>
+                                <div class="pourcentage">' . $percentFile . '%</div>
                             </div>
                             <div class="sub-div">
                                 <div class="title">Analyzers free of issues (%)</div>
                                 <div class="progress progress-sm active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentAnalyzer.'%">
-                                        '.$totalAnalyzerWithoutError.'
-                                    </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
+                                        ' . $totalAnalyzerWithoutError . '
+                                    </div><div style="color:black; text-align:center;">' . $totalAnalyzerReporting . '</div>
                                 </div>
-                                <div class="pourcentage">'.$percentAnalyzer.'%</div>
+                                <div class="pourcentage">' . $percentAnalyzer . '%</div>
                             </div>
                         </div>
                     </div>
@@ -1482,7 +1482,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers(array($categorie))).')';
+            $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array($categorie))) . ')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1504,10 +1504,10 @@ JAVASCRIPT;
 
         foreach ($data as $key => $value) {
             $issuesHtml .= '<div class="clearfix">
-                   <div class="block-cell">'.$value['label'].'</div>
-                   <div class="block-cell text-center">'.$value['value'].'</div>
+                   <div class="block-cell">' . $value['label'] . '</div>
+                   <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
+            $dataScript[] = '{label: "' . $value['label'] . '", value: ' . ( (int) $value['value']) . '}';
         }
         $dataScript = implode(', ', $dataScript);
         
@@ -1550,7 +1550,7 @@ SQL;
     <div class="block-cell text-center">$value[value]</div>
 </div>
 HTML;
-            $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
+            $dataScript[] = '{label: "' . $value['label'] . '", value: ' . ( (int) $value['value']) . '}';
         }
         $html = implode('', $html);
         $dataScript = implode(', ', $dataScript);
@@ -1595,12 +1595,12 @@ HTML;
         foreach ($analysers as $analyser) {
             $analyserHTML .= '<tr>';
                                 
-            $analyserHTML.= '<td><a href="issues.html#analyzer='.$this->toId($analyser['analyzer']).'" title="'.$analyser['label'].'">'.$analyser['label'].'</a></td>
-                        <td>'.$analyser['recipes'].'</td>
-                        <td>'.$analyser['issues'].'</td>
-                        <td>'.$analyser['files'].'</td>
-                        <td>'.$analyser['severity'].'</td>
-                        <td>'.$this->frequences[$analyser['analyzer']].' %</td>';
+            $analyserHTML.= '<td><a href="issues.html#analyzer=' . $this->toId($analyser['analyzer']) . '" title="' . $analyser['label'] . '">' . $analyser['label'] . '</a></td>
+                        <td>' . $analyser['recipes'] . '</td>
+                        <td>' . $analyser['issues'] . '</td>
+                        <td>' . $analyser['files'] . '</td>
+                        <td>' . $analyser['severity'] . '</td>
+                        <td>' . $this->frequences[$analyser['analyzer']] . ' %</td>';
             $analyserHTML .= '</tr>';
         }
 
@@ -1685,7 +1685,7 @@ SQL;
                 continue;
             }
 
-            $filesHTML.= '<tr><td>'.$this->makeDocLink($row['analyzer']).'</td></tr>'.PHP_EOL;
+            $filesHTML.= '<tr><td>' . $this->makeDocLink($row['analyzer']) . '</td></tr>' . PHP_EOL;
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -1705,10 +1705,10 @@ SQL;
             $filesHTML.= '<tr>';
                                
 
-            $filesHTML.='<td> <a href="issues.html#file='.$this->toId($file['file']).'" title="'.$file['file'].'">'.$file['file'].'</a></td>
-                        <td>'.$file['loc'].'</td>
-                        <td>'.$file['issues'].'</td>
-                        <td>'.$file['analyzers'].'</td>';
+            $filesHTML.='<td> <a href="issues.html#file=' . $this->toId($file['file']) . '" title="' . $file['file'] . '">' . $file['file'] . '</a></td>
+                        <td>' . $file['loc'] . '</td>
+                        <td>' . $file['issues'] . '</td>
+                        <td>' . $file['analyzers'] . '</td>';
             $filesHTML.= '</tr>';
         }
 
@@ -1757,7 +1757,7 @@ SQL;
         } elseif (is_array($themes)) {
             $list = $themes;
         } else {
-            die('$themes must be an array or null : '.__METHOD__);
+            die('$themes must be an array or null : ' . __METHOD__);
         }
         $list = makeList($list, "'");
 
@@ -1767,7 +1767,7 @@ SQL;
                     GROUP BY file
                     ORDER BY number DESC ";
         if ($limit !== null) {
-            $query .= ' LIMIT '.$limit;
+            $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -1793,10 +1793,10 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="'.$file.'.html#file='.$this->toId($value['file']).'" title="'.$value['file'].'">
-                      <div class="block-cell-name">'.$value['file'].'</div>
+                    <a href="' . $file . '.html#file=' . $this->toId($value['file']) . '" title="' . $value['file'] . '">
+                      <div class="block-cell-name">' . $value['file'] . '</div>
                     </a>
-                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                    <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
 
@@ -1818,7 +1818,7 @@ SQL;
         $dataMinor    = array();
         $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis[] = "'".addslashes($value['file'])."'";
+            $xAxis[] = "'" . addslashes($value['file']) . "'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
             $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
@@ -1849,7 +1849,7 @@ SQL;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= ' LIMIT '.$limit;
+            $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -1876,7 +1876,7 @@ SQL;
                     WHERE analyzer IN ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC
-                    LIMIT ".self::TOPLIMIT;
+                    LIMIT " . self::TOPLIMIT;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
@@ -1888,10 +1888,10 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="'.$file.'.html#analyzer='.$this->toId($value['name']).'" title="'.$value['label'].'">
-                      <div class="block-cell-name">'.$value['label'].'</div> 
+                    <a href="' . $file . '.html#analyzer=' . $this->toId($value['name']) . '" title="' . $value['label'] . '">
+                      <div class="block-cell-name">' . $value['label'] . '</div> 
                     </a>
-                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                    <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
 
@@ -1940,7 +1940,7 @@ SQL;
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
             $ini = $this->getDocs($value['analyzer']);
-            $xAxis[] = "'".addslashes($ini['name'])."'";
+            $xAxis[] = "'" . addslashes($ini['name']) . "'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
             $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
@@ -1986,7 +1986,7 @@ SQL;
         $baseHTML = $this->getBasedPage($filename);
 
         $total = count($issues);
-        $issues = implode(', '.PHP_EOL, $issues);
+        $issues = implode(', ' . PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
         
   <script>
@@ -2132,8 +2132,8 @@ SQL;
             $item['code_plus']      = PHPSyntax($row['fullcode']);
             $item['link_file']      = $row['file'];
             $item['line' ]          = $row['line'];
-            $item['severity']       = '<i class="fa fa-warning" style="color: '.$severityColors[$this->severities[$row['analyzer']]].'"></i>';
-            $item['complexity']     = '<i class="fa fa-cog" style="color: '.$TTFColors[$this->timesToFix[$row['analyzer']]].'"></i>';
+            $item['severity']       = '<i class="fa fa-warning" style="color: ' . $severityColors[$this->severities[$row['analyzer']]] . '"></i>';
+            $item['complexity']     = '<i class="fa fa-cog" style="color: ' . $TTFColors[$this->timesToFix[$row['analyzer']]] . '"></i>';
             $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines                  = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
@@ -2188,7 +2188,7 @@ SQL;
         $analyzers = '';
 
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzers .= '<tr><td>'.$this->getDocs($analyzer, 'name')."</td></tr>\n";
+            $analyzers .= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -2247,30 +2247,30 @@ SQL;
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
                 $table .= '<tr>
-    <td>'.$bugfix['title'].'</td>
-    <td>'.($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-').'</td>
-    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
-    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
-    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
-    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
-    <td>'.$cve.'</td>
+    <td>' . $bugfix['title'] . '</td>
+    <td>' . ($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-') . '</td>
+    <td>' . ($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-') . '</td>
+    <td><a href="https://bugs.php.net/bug.php?id=' . $bugfix['bugs'] . '">#' . $bugfix['bugs'] . '</a></td>
+    <td>' . $cve . '</td>
                 </tr>';
             } elseif (!empty($bugfix['analyzer'])) {
-                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "'.$bugfix['analyzer'].'"');
+                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "' . $bugfix['analyzer'] . '"');
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
                 if ($subanalyze === 0) { continue; }
                 $table .= '<tr>
-    <td>'.$bugfix['title'].'</td>
-    <td>'.($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-').'</td>
-    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
-    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
-    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
-    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
-    <td>'.$cve.'</td>
+    <td>' . $bugfix['title'] . '</td>
+    <td>' . ($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-') . '</td>
+    <td>' . ($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-') . '</td>
+    <td><a href="https://bugs.php.net/bug.php?id=' . $bugfix['bugs'] . '">#' . $bugfix['bugs'] . '</a></td>
+    <td>' . $cve . '</td>
                 </tr>';
             } else {
                 continue; // ignore. Possibly some mis-configuration
@@ -2434,7 +2434,7 @@ SQL;
         
         $incompilable = array();
         foreach($versions as $version) {
-            $shortVersion = $version[0].$version[2];
+            $shortVersion = $version[0] . $version[2];
 
             $query = <<<SQL
 SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$shortVersion';
@@ -2461,8 +2461,8 @@ SQL;
         }
         
         $table = '';
-        $titles = '<tr><th>Version</th><th>Name</th><th>'.implode('</th><th>', array_keys(array_values($data2)[0]) ).'</th></tr>';
-            $table .= '<tr><td>&nbsp;</td><td>Compilation</td><td>'.implode('</td><td>', $incompilable)."</td></tr>\n";
+        $titles = '<tr><th>Version</th><th>Name</th><th>' . implode('</th><th>', array_keys(array_values($data2)[0]) ) . '</th></tr>';
+            $table .= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
@@ -2470,9 +2470,9 @@ SQL;
             
             $description = $this->getDocs($name, 'description');
 
-            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
-            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
+            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
         }
 
         $theTable = <<<HTML
@@ -2487,9 +2487,9 @@ HTML;
         $key = array_keys($scores, $max);
         
         if ($max === count($data)) {
-            $suggestion = 'This code is compatible with PHP '.implode(', ', $key);
+            $suggestion = 'This code is compatible with PHP ' . implode(', ', $key);
         } else {
-            $suggestion = 'We have determined '.count($key).' PHP version'.(count($key) > 1 ? 's' : '').'. The compatible estimations are PHP '.implode(', ', $key).'. ';
+            $suggestion = 'We have determined ' . count($key) . ' PHP version' . (count($key) > 1 ? 's' : '') . '. The compatible estimations are PHP ' . implode(', ', $key) . '. ';
         }
 
         $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
@@ -2507,7 +2507,7 @@ HTML;
             $info[] = array('Code description', $this->config->project_description);
         }
         if (!empty($this->config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/' . $this->config->project_packagist . '">' . $this->config->project_packagist . '</a>');
         }
         $info = array_merge($info, $this->getVCSInfo());
 
@@ -2519,19 +2519,19 @@ HTML;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getConfiguration('phpversion').')');
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $info[] = array('PHP used', $this->config->phpversion . ' (' . $php->getConfiguration('phpversion') . ')');
 
-        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
+        $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');
         $list = $this->config->ext->getPharList();
         $html = array();
         foreach($list as $name => $extension) {
-            $html[] = '<li>'.basename($name, '.phar').'</li>';
+            $html[] = '<li>' . basename($name, '.phar') . '</li>';
         }
-        $info[] = array('Exakat modules', '<ul>'.implode(PHP_EOL, $html).'</ul>');
+        $info[] = array('Exakat modules', '<ul>' . implode(PHP_EOL, $html) . '</ul>');
 
         foreach($info as &$row) {
-            $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
+            $row = '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
         }
         unset($row);
 
@@ -2565,7 +2565,7 @@ HTML;
             if (empty($row['homepage'])) {
                 $link = '';
             } else {
-                $link = '<a href="'.$row['homepage'].'">'.$row['homepage'].'&nbsp;<i class="fa fa-sign-out"></i></a>';
+                $link = '<a href="' . $row['homepage'] . '">' . $row['homepage'] . '&nbsp;<i class="fa fa-sign-out"></i></a>';
             }
 
             $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
@@ -2644,7 +2644,7 @@ SQL
 
                 // disable_functions
                 $data[0]->suggested = implode(', ', $suggestions);
-                $data[0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
+                $data[0]->documentation .= "\n; " . count($list) . " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
                 $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
@@ -2657,7 +2657,7 @@ SQL
 
                 // disable_functions
                 $data[1]->suggested = implode(',', $suggestions);
-                $data[1]->documentation .= "\n; ".count($list). " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
+                $data[1]->documentation .= "\n; " . count($list) . " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable features</td></tr>\n";
             } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
@@ -2683,7 +2683,7 @@ SQL
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
         
-        foreach(array_unique(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
+        foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
             $version = "$suffix[0].$suffix[1]";
             $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
             if (!$res) {
@@ -2701,7 +2701,7 @@ SQL
                 $errors      = 'N/A';
                 $total_error = 'N/A';
             } else {
-                $res = $this->sqlite->query('SELECT error FROM compilation'.$suffix);
+                $res = $this->sqlite->query('SELECT error FROM compilation' . $suffix);
                 $readErrors = array();
                 while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                     $readErrors[] = $row['error'];
@@ -2709,11 +2709,11 @@ SQL
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
-                $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
+                $errors       = '<ul><li>' . implode("</li>\n<li>", $errors) . '</li></ul>';
 
-                $total_error = count($files).' ('.number_format(count($files) / $total * 100, 0).'%)';
+                $total_error = count($files) . ' (' . number_format(count($files) / $total * 100, 0) . '%)';
                 $files       = array_keys(array_count_values($files));
-                $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
+                $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
             $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
@@ -2729,9 +2729,9 @@ SQL
         $compatibility = array();
         $skipped       = array();
 
-        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP'.$version));
+        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP' . $version));
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($list).')');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($list) . ')');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['count'];
@@ -2745,14 +2745,14 @@ SQL
                 $resultState = -2; // -2 === not run
             }
             $result = $this->Compatibility($resultState, $analyzer);
-            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for '.$ini['name'].'"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#' . $this->toId($analyzer) . '" alt="Documentation for ' . $ini['name'] . '"><i class="fa fa-book"></i></a>';
             if ($resultState === Analyzer::VERSION_INCOMPATIBLE) {
                 $skipped []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
             } else {
                 $compatibility []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
             }
         }
-        $compatibility = implode(PHP_EOL, $compatibility).PHP_EOL.implode(PHP_EOL, $skipped);
+        $compatibility = implode(PHP_EOL, $compatibility) . PHP_EOL . implode(PHP_EOL, $skipped);
 
         $description = <<<'HTML'
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
@@ -2760,9 +2760,9 @@ HTML;
 
         $html = $this->getBasedPage('compatibility');
         $html = $this->injectBloc($html, 'COMPATIBILITY', $compatibility);
-        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP '.$version[0].'.'.$version[1]);
+        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP ' . $version[0] . '.' . $version[1]);
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-        $this->putBasedPage('compatibility_php'.$version, $html);
+        $this->putBasedPage('compatibility_php' . $version, $html);
     }
 
     private function generateDynamicCode() {
@@ -2807,7 +2807,7 @@ HTML;
                 $list[] = "<li>$file</li>";
                 $types[$type] = 1;
             }
-            $list = '<ul>'.implode(PHP_EOL, $list).'</ul>';
+            $list = '<ul>' . implode(PHP_EOL, $list) . '</ul>';
             $types = implode('-', array_keys($types));
             $theGlobals []= "<tr><td><span style=\"color: #0000BB\">$variable</span></td><td>$count</td><td>$types</td><td>$list</td></tr>\n";
         }
@@ -2878,7 +2878,7 @@ HTML;
             $theTable = array();
             foreach($groups as $code => $list) {
                 $c = count($list);
-                $htmlList = '<ul><li>'.join('</li><li>', $list).'</li></ul>';
+                $htmlList = '<ul><li>' . join('</li><li>', $list) . '</li></ul>';
                 $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
             }
 
@@ -2886,7 +2886,7 @@ HTML;
             $html = $this->injectBloc($html, 'TITLE', $theTitle);
             $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
             $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
-            $this->putBasedPage('inventories_'.$fileName, $html);
+            $this->putBasedPage('inventories_' . $fileName, $html);
         }
         $this->generateExceptionTree();
         $this->generateNamespaceTree();
@@ -2932,7 +2932,7 @@ SQL
             
             $theTableArray = array();
             foreach($top as $t) {
-                $theTableArray[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+                $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
             }
             $theTable = implode(PHP_EOL, $theTableArray);
         }
@@ -3019,7 +3019,7 @@ SQL;
         foreach($table as $name => $row) {
             $cells = array();
             foreach($row as $t2 => $r) {
-                $content = empty($r) ? '&nbsp;': implode('(), ', $r).'()';
+                $content = empty($r) ? '&nbsp;': implode('(), ', $r) . '()';
                 $background = isset($usage[$name][$t2]) ? ' bgcolor="darkgray"' : '';
                 
                 $cells[] = "<td$background>$content</td>";
@@ -3094,7 +3094,7 @@ SQL
 
             $theTable = array();
             foreach(array_keys($list) as $t) {
-                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+                $theTable[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
             }
             $theTable = implode(PHP_EOL, $theTable);
         }
@@ -3145,7 +3145,7 @@ SQL
             
             $theTable = array();
             foreach($top as $t) {
-                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+                $theTable[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
             }
             $theTable = implode(PHP_EOL, $theTable);
         }
@@ -3172,14 +3172,14 @@ SQL
                     $secondary = $this->extends2ul($sub, $paths, $level + 1);
                     $return[] = $secondary;
                 } else {
-                    $return[] = '<li>'.$sub.'...(Recursive)</li>';
+                    $return[] = '<li>' . $sub . '...(Recursive)</li>';
                 }
             } else {
                 $return[] = "<li class=\"treeLeaf\">$sub</li>";
                 $done[$sub] = 1;
             }
         }
-        $return = "<li>$root<ul>".implode('', $return)."</ul></li>\n";
+        $return = "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
         return $return;
     }
     
@@ -3335,25 +3335,25 @@ SQL
         foreach($path as $k => $v) {
             $return .= '<li>';
 
-            $parent = '\\'.strtolower($k);
+            $parent = '\\' . strtolower($k);
             if (is_string($v)) {
                 if (empty($v)) {
                     $return .= '<div style="font-weight: bold">\\</div>';
                 } else {
-                    $return .= '<div style="font-weight: bold">'.$v.'</div>';
+                    $return .= '<div style="font-weight: bold">' . $v . '</div>';
                 }
             } elseif (count($v) === 1) {
                 if (empty($v[0])) {
                     if (empty($k)) {
                         $return .= '<div style="font-weight: bold">\\</div>';
                     } else {
-                        $return .= '<div style="font-weight: bold">'.$k.'</div>';
+                        $return .= '<div style="font-weight: bold">' . $k . '</div>';
                     }
                 } else {
-                    $return .= '<div style="font-weight: bold">'.$k.'</div>'.$this->pathtree2ul($v);
+                    $return .= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
                 }
             } else {
-                $return .= '<div style="font-weight: bold">'.$k.'</div>'.$this->pathtree2ul($v);
+                $return .= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
             }
 
             $return .= '</li>';
@@ -3391,11 +3391,11 @@ SQL
         foreach($tree as $k => $v) {
             $return .= '<li>';
 
-            $parent = '\\'.strtolower($k);
+            $parent = '\\' . strtolower($k);
             if (isset($display[$parent])) {
-                $return .= '<div style="font-weight: bold">'.$k.'</div><ul><li>'.implode('</li><li>', $display[$parent]).'</li></ul>';
+                $return .= '<div style="font-weight: bold">' . $k . '</div><ul><li>' . implode('</li><li>', $display[$parent]) . '</li></ul>';
             } else {
-                $return .= '<div style="font-weight: bold; color: darkgray">'.$k.'</div>';
+                $return .= '<div style="font-weight: bold; color: darkgray">' . $k . '</div>';
             }
 
             if (is_array($v)) {
@@ -3436,9 +3436,9 @@ HTML
 
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
-            $visibilityTable []= '<tr><td colspan="9">class '.PHPsyntax($class).'</td></tr>'.PHP_EOL.
-                                (isset($constants[$id])  ? implode('', $constants[$id])  : '').
-                                (isset($properties[$id]) ? implode('', $properties[$id]) : '').
+            $visibilityTable []= '<tr><td colspan="9">class ' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
+                                (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
+                                (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
         }
 
@@ -3526,7 +3526,7 @@ HTML
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
 
             $couldBeFinal[$fullnspath] = $row['fullcode'];
         }
@@ -3542,7 +3542,7 @@ HTML
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
 
             $couldBeAbstract[$fullnspath] = $row['fullcode'];
         }
@@ -3557,7 +3557,7 @@ HTML
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
 
             if (isset($couldBePrivate[$fullnspath])) {
                 $couldBePrivate[$fullnspath][] = $row['fullcode'];
@@ -3572,7 +3572,7 @@ HTML
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
             
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $row['fullcode'];
@@ -3602,9 +3602,9 @@ SQL
         $aClass = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
                 $aClass = array();
             }
 
@@ -3623,9 +3623,9 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['method']).'</td><td class="exakat_short_text">'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
-                                 .'</td></tr>'.PHP_EOL;
+                                 . '</td></tr>' . PHP_EOL;
         }
 
         $return[$theClass] = $aClass;
@@ -3642,7 +3642,7 @@ SQL
                 continue; // it is an interface or a trait
             }
 
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
             
             if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
                 continue;
@@ -3661,7 +3661,7 @@ SQL
             if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
                 continue; // it is an interface or a trait
             }
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
             
             if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
                 continue;
@@ -3695,9 +3695,9 @@ SQL
 
         $aClass = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
                 $aClass = array();
             }
 
@@ -3716,9 +3716,9 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
         
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['constant']).'</td><td class="exakat_short_text">'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['constant']) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
-                                 .'</td></tr>'.PHP_EOL;
+                                 . '</td></tr>' . PHP_EOL;
         }
 
         $return[$theClass] = $aClass;
@@ -3733,11 +3733,11 @@ SQL
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
-            assert(isset($classname[1]), 'Missing class in '.$row['class']);
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            assert(isset($classname[1]), 'Missing class in ' . $row['class']);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
             
             preg_match('/(\$\S+)/i', $row['fullcode'], $code);
-            assert(isset($code[1]), 'Missing class in '.$row['fullcode']);
+            assert(isset($code[1]), 'Missing class in ' . $row['fullcode']);
 
             if (isset($couldBePrivate[$fullnspath])) {
                 $couldBePrivate[$fullnspath][] = $code[1];
@@ -3750,7 +3750,7 @@ SQL
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
             
@@ -3765,7 +3765,7 @@ SQL
         $couldBeConstant = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
-            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
             
@@ -3795,9 +3795,9 @@ SQL
 
         $aClass = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
                 $aClass = array();
             }
             
@@ -3823,9 +3823,9 @@ SQL
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
-            $aClass[] = '<tr><td>&nbsp;</td><td>'.PHPSyntax($row['property']).'</td><td class="exakat_short_text">'.
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['property']) . '</td><td class="exakat_short_text">' .
                             implode('</td><td>', $visibilities)
-                            .'</td></tr>'.PHP_EOL;
+                            . '</td></tr>' . PHP_EOL;
         }
         $return[$theClass] = $aClass;
         unset($return['']);
@@ -3837,7 +3837,7 @@ SQL
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $alteredDirectives .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('altered_directives');
@@ -3851,19 +3851,19 @@ SQL
         if ($res) {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['changeType'] === 'Member Visibility') {
-                    $row['parentValue'] .= ' $'.$row['name'];
-                    $row['childValue']   = ' $'.$row['name'];
+                    $row['parentValue'] .= ' $' . $row['name'];
+                    $row['childValue']   = ' $' . $row['name'];
                 } elseif ($row['changeType'] === 'Member Default') {
-                    $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
-                    $row['childValue']  = '$'.$row['name'].' = '.$row['childValue'];
+                    $row['parentValue'] = '$' . $row['name'] . ' = ' . $row['parentValue'];
+                    $row['childValue']  = '$' . $row['name'] . ' = ' . $row['childValue'];
                 }
                 
-                $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
-                                       '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
-                                       '</tr><tr>'.
-                                       '<td>'.PHPSyntax($row['childClass']).'</td>'.PHP_EOL.
-                                       '<td>'.PHPSyntax($row['childValue']).'</td>'.PHP_EOL.
-                                       '</tr>'.PHP_EOL.
+                $changedClasses .= '<tr><td>' . PHPSyntax($row['parentClass']) . '</td>' . PHP_EOL .
+                                       '<td>' . PHPSyntax($row['parentValue']) . '</td>' . PHP_EOL .
+                                       '</tr><tr>' .
+                                       '<td>' . PHPSyntax($row['childClass']) . '</td>' . PHP_EOL .
+                                       '<td>' . PHPSyntax($row['childValue']) . '</td>' . PHP_EOL .
+                                       '</tr>' . PHP_EOL .
                                        '<tr><td colspan="2"><hr /></td></tr>';
             }
         } else {
@@ -3890,11 +3890,11 @@ SQL
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $data[$value['key']] = $value['value'];
-                $xAxis[] = "'".$value['key']." extension'";
+                $xAxis[] = "'" . $value['key'] . " extension'";
 
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['key'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                      <div class="block-cell-name">' . $value['key'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
 
@@ -4071,11 +4071,11 @@ SQL
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
-                $xAxis[] = "'".$value['shortName']."'";
+                $xAxis[] = "'" . $value['shortName'] . "'";
             }
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['name'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['size'].'</div>
+                      <div class="block-cell-name">' . $value['name'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['size'] . '</div>
                   </div>';
         }
 
@@ -4253,11 +4253,11 @@ SQL
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
-                $xAxis[] = "'".$value['shortName']."'";
+                $xAxis[] = "'" . $value['shortName'] . "'";
             }
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$value['name'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['size'].'</div>
+                      <div class="block-cell-name">' . $value['name'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['size'] . '</div>
                   </div>';
         }
 
@@ -4451,7 +4451,7 @@ JAVASCRIPT;
 
     protected function generateCodes() {
         $path = "{$this->tmpName}/datas/sources";
-        $pathToSource = dirname($this->tmpName).'/code';
+        $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
 
         $filesList = $this->datastore->getRow('files');
@@ -4463,7 +4463,7 @@ JAVASCRIPT;
             foreach($subdirs as $subdir) {
                 $dir .= "/$subdir";
                 if (!isset($dirs[$dir])) {
-                    mkdir($path.$dir, 0755);
+                    mkdir($path . $dir, 0755);
                     $dirs[$dir] = 1;
                 }
             }
@@ -4475,11 +4475,11 @@ JAVASCRIPT;
 
             $id = str_replace('/', '_', $row['file']);
             $source = @show_source($sourcePath, true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
+            $files .= '<li><a href="#" id="' . $id . '" class="menuitem">' . makeHtml($row['file']) . "</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function ($x) {
                 static $i = 0;
-                return '<br /><a name="l'.++$i.'" />';
+                return '<br /><a name="l' . ++$i . '" />';
             }, $source);
             file_put_contents("$path$row[file]", $source);
         }
@@ -4523,7 +4523,7 @@ JAVASCRIPT;
         $nodes = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($nodes[$row['including']][$row['included']])) {
-                $nodes[$row['including']][$row['included']] .= ', '.$row['type'];
+                $nodes[$row['including']][$row['included']] .= ', ' . $row['type'];
             } else {
                 $nodes[$row['including']][$row['included']] = $row['type'];
             }
@@ -4561,7 +4561,7 @@ JAVASCRIPT;
         
         $theTable = array();
         foreach($top as $t) {
-            $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $next).'</ul>';
+            $theTable[] = '<ul class="tree">' . $this->extends2ul($t, $next) . '</ul>';
         }
         $theTable = implode(PHP_EOL, $theTable);
 
@@ -4614,9 +4614,9 @@ SQL;
         while(list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list) = $res->fetchArray(\SQLITE3_ASSOC)) {
             $listHtml = array();
             foreach(explode(',', $list) as $l) {
-                $listHtml[] = '<li>'.$this->makeDocLink($l).'</li>';
+                $listHtml[] = '<li>' . $this->makeDocLink($l) . '</li>';
             }
-            $listHtml = '<ul>'.implode('', $listHtml).'</u>';
+            $listHtml = '<ul>' . implode('', $listHtml) . '</u>';
             $table[] = "<tr><td>$file:$line</td><td>$count</td><td>$listHtml</td></tr>\n";
         }
 
@@ -4642,13 +4642,13 @@ SQL;
             $confused = array();
 
             foreach($close as $reason => $variables) {
-                $list = '<ul><li>'.implode('</li><li>', $variables)."</li></ul>\n";
+                $list = '<ul><li>' . implode('</li><li>', $variables) . "</li></ul>\n";
                 $confused[] = "<tr><td>$list</td><td>{$reasons[$reason]}</td></tr>\n";
             }
 
             $count = count($close);
             $first = array_shift($confused);
-            $table[] = str_replace('<tr>', "<tr><td rowspan=\"$count\">$variable</td>", $first).PHP_EOL.implode('', $confused);
+            $table[] = str_replace('<tr>', "<tr><td rowspan=\"$count\">$variable</td>", $first) . PHP_EOL . implode('', $confused);
         }
         $table = implode(PHP_EOL, $table);
 
@@ -4728,12 +4728,12 @@ HTML;
         }
         
         if (strpos($cve, ', ') === false) {
-            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=' . $cve . '">' . $cve . '</a>';
         } else {
             $cves = explode(', ', $cve);
             $cveHtml = array();
             foreach($cves as $cve) {
-                $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+                $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=' . $cve . '">' . $cve . '</a>';
             }
             $cveHtml = implode(',<br />', $cveHtml);
         }
@@ -4749,7 +4749,7 @@ HTML;
         } elseif ($count === 0) {
             return '<i class="fa fa-check-square-o" style="color: green"></i>';
         } else {
-            return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$this->toId($analyzer).'">'.$count.' warnings</a>';
+            return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer=' . $this->toId($analyzer) . '">' . $count . ' warnings</a>';
         }
     }
     
@@ -4762,7 +4762,7 @@ HTML;
     }
     
     protected function makeAuditDate(&$finalHTML) {
-        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
             $audit_date .= " - &quot;$audit_name&quot;";

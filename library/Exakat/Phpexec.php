@@ -86,7 +86,7 @@ class Phpexec {
             }
 
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
-                throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' ('.PHP_BINARY.') doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
+                throw new NoPhpBinary('PHP binary for version ' . $this->requestedVersion . ' (' . PHP_BINARY . ') doesn\'t have the right middle version : "' . $this->actualVersion . '". Please, check config/exakat.ini');
             }
         }
 
@@ -102,12 +102,12 @@ class Phpexec {
 
         if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
             $folder = $pathToBinary;
-            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php -v 2>&1');
+            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":' . $folder . ' -w ' . $folder . ' ' . $this->phpexec . ' php -v 2>&1');
 
             if (substr($res, 0, 4) === 'PHP ') {
-                $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php ';
+                $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":' . $folder . ' -w ' . $folder . ' ' . $this->phpexec . ' php ';
             } else {
-                throw new NoPhpBinary('Error when accessing Docker\'s PHP : "'.$res.'". Please, check config/exakat.ini');
+                throw new NoPhpBinary('Error when accessing Docker\'s PHP : "' . $res . '". Please, check config/exakat.ini');
             }
         } else {
             if (!file_exists($this->phpexec)) {
@@ -115,7 +115,7 @@ class Phpexec {
             }
 
             if (!is_executable($this->phpexec)) {
-                throw new NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
+                throw new NoPhpBinary('PHP binary for version ' . $phpversion . ' exists but is not executable : "' . $this->phpexec . '". Please, check config/exakat.ini');
             }
         }
     }
@@ -128,7 +128,7 @@ class Phpexec {
             $tokens = array_flip($x['tokenizer']);
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; unset(\\$x[\'tokenizer\'][\'TOKEN_PARSE\']); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec . ' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; unset(\\$x[\'tokenizer\'][\'TOKEN_PARSE\']); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > ' . $tmpFile);
             include $tmpFile;
             unlink($tmpFile);
             if (empty($tokens)) {
@@ -153,7 +153,7 @@ class Phpexec {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             // -d short_open_tag=1
             $filename = $this->escapeFile($file);
-            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$filename.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.escapeshellarg($tmpFile));
+            shell_exec($this->phpexec . '  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(' . $filename . '); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > ' . escapeshellarg($tmpFile));
             include $tmpFile;
 
             unlink($tmpFile);
@@ -167,13 +167,13 @@ class Phpexec {
     }
     
     private function escapeFile($file) {
-        return "'".str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file)."'";
+        return "'" . str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file) . "'";
     }
 
     public function countTokenFromFile($file) {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
         $filename = $this->escapeFile($file);
-        $res = shell_exec($this->phpexec.' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents('.$filename.'))); ?>" 2>&1    ');
+        $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
 
         return $res;
     }
@@ -186,12 +186,12 @@ class Phpexec {
         if (empty($this->phpexec)) {
             return false;
         }
-        $res = shell_exec($this->phpexec.' -v 2>&1');
+        $res = shell_exec($this->phpexec . ' -v 2>&1');
         if (preg_match('/^PHP ([0-9\.]+)/', $res, $r)) {
             $this->actualVersion = $r[1];
 
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
-                throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' doesn\'t have the right middle version : "'.$this->actualVersion.'" is provided. Please, check config/exakat.ini');
+                throw new NoPhpBinary('PHP binary for version ' . $this->requestedVersion . ' doesn\'t have the right middle version : "' . $this->actualVersion . '" is provided. Please, check config/exakat.ini');
             }
 
             return strpos($res, 'The PHP Group') !== false;
@@ -201,7 +201,7 @@ class Phpexec {
     }
 
     public function compile($file) {
-        $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
+        $shell = shell_exec($this->phpexec . ' -l ' . escapeshellarg($file) . ' 2>&1');
         $shell = trim($shell);
         
         return !$this->isError(explode("\n", $shell)[0]);

@@ -61,7 +61,7 @@ class FileDependencies extends Reports {
                 $row['included'] = $cnodes;
             }
 
-            $key = $row['including'].$row['included'].$row['type'];
+            $key = $row['including'] . $row['included'] . $row['type'];
             
             if (isset($list[$key])) {
                 ++$list[$key]['count'];
@@ -86,7 +86,7 @@ class FileDependencies extends Reports {
                            array_values($nodes));
         $nodes = implode(PHP_EOL, $nodes);
 
-        $version = \Exakat\Exakat::VERSION.' ('.\Exakat\Exakat::BUILD.')';
+        $version = \Exakat\Exakat::VERSION . ' (' . \Exakat\Exakat::BUILD . ')';
         $date = date('r');
         
         $dot = "digraph graphname {
@@ -99,7 +99,7 @@ class FileDependencies extends Reports {
     $dot
      }";
 
-        file_put_contents("{$folder}/{$name}.".self::FILE_EXTENSION, $dot);
+        file_put_contents("{$folder}/{$name}." . self::FILE_EXTENSION, $dot);
     }
 }
 

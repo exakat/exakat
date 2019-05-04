@@ -75,9 +75,9 @@ class DSLFactory {
 
     public function factory($name) {
         if (strtolower($name) === '_as') {
-            $className = __NAMESPACE__.'\\_As';
+            $className = __NAMESPACE__ . '\\_As';
         } else {
-            $className = __NAMESPACE__.'\\'.ucfirst($name);
+            $className = __NAMESPACE__ . '\\' . ucfirst($name);
         }
         
         if (!class_exists($className)) {

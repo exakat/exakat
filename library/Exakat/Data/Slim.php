@@ -31,11 +31,11 @@ class Slim {
 
     public function __construct($path, $config) {
         if ($config->is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exslim').'.sqlite';
-            copy($path.'/slim.sqlite', $this->phar_tmp);
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exslim') . '.sqlite';
+            copy($path . '/slim.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $path.'/slim.sqlite';
+            $docPath = $path . '/slim.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }

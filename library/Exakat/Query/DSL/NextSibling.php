@@ -33,7 +33,7 @@ class NextSibling extends DSL {
         $hasIn = $this->dslfactory->factory('hasIn');
         $return = $hasIn->run($link); // Extra command
         
-        $nextSibling = new Command('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
+        $nextSibling = new Command('sideEffect{sibling = it.get().value("rank");}.in("' . $link . '").out("' . $link . '").filter{sibling + 1 == it.get().value("rank")}');
         $return->add($nextSibling);
         
         return $return;

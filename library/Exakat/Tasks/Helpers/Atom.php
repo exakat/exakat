@@ -85,13 +85,13 @@ class Atom {
     
     public function toArray() {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
-            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->code) . ' chars]';
         }
         if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
-            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
+            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->lccode) . ' chars]';
         }
         if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
-            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->fullcode) . ' chars]';
         }
         
         $this->code          = $this->protectString($this->code       );

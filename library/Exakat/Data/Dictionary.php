@@ -121,8 +121,8 @@ class Dictionary {
         foreach($variables as $v1 => $k1) {
             foreach($variables as $v2 => $k2) {
                 if ($v1 === $v2) { continue; }
-                if ($v1.'s' === $v2) { continue; }
-                if ($v1 === $v2.'s') { continue; }
+                if ($v1 . 's' === $v2) { continue; }
+                if ($v1 === $v2 . 's') { continue; }
                 
                 if (levenshtein($v1, $v2) === 1) {
                     $return[$v1] = $k1;
@@ -202,7 +202,7 @@ class Dictionary {
         foreach($doublecolon as $key => $value) {
             // how can this regex fail ?
             if (preg_match('/^[\'"](.+?)::(.+?)/', $key, $r)) {
-                $return['\\'.$r[1]] = $value;
+                $return['\\' . $r[1]] = $value;
             }
         }
         

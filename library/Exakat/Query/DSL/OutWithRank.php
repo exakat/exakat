@@ -32,16 +32,16 @@ class OutWithRank extends DSL {
         if ($rank === 'first') {
             // @note : can't use has() with integer!
         } elseif ($rank === 'last') {
-            return new Command('map( __.out("'.$link.'").order().by("rank").tail(1) )');
+            return new Command('map( __.out("' . $link . '").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {
-            return new Command('map( __.out("'.$link.'").order().by("rank").tail(2) )');
+            return new Command('map( __.out("' . $link . '").order().by("rank").tail(2) )');
         } elseif (preg_match('/\D/', $rank)) {
             $this->assertVariable($rank, self::VARIABLE_READ);
-            return new Command('out("'.$link.'").filter{ it.get().value("rank") == '.$rank.'; }');
+            return new Command('out("' . $link . '").filter{ it.get().value("rank") == ' . $rank . '; }');
         } elseif (abs((int) $rank) >= 0) {
-            return new Command('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
+            return new Command('out("' . $link . '").has("rank", eq(' . abs((int) $rank) . '))');
         } else {
-            assert(false, "rank '$rank' is wrong in ".__METHOD__);
+            assert(false, "rank '$rank' is wrong in " . __METHOD__);
         }
     }
 }

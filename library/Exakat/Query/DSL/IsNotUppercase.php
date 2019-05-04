@@ -34,7 +34,7 @@ class IsNotUppercase extends DSL {
         if ($property === 'code') {
             return new Command('filter{it.get().value("code") != it.get().value("lccode").toUpperCase()}');
         } else {
-            return new Command('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
+            return new Command('filter{it.get().value("' . $property . '") != it.get().value("' . $property . '").toUpperCase()}');
         }
     }
 }

@@ -38,7 +38,7 @@ class IsExtClass extends Analyzer {
         
         $c = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
+            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['classes'][0])) {

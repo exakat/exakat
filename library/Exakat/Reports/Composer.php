@@ -31,18 +31,18 @@ class Composer extends Reports {
 
     public function _generate($analyzerList) {
         $themed = $this->themes->getThemeAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("' . implode('", "', $themed) . '")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
         }
 
-        $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
+        $configureDirectives = json_decode(file_get_contents($this->config->dir_root . '/data/configure.json'));
         // List of extensions that must be avoided
-        $noExtensions = parse_ini_file($this->config->dir_root.'/data/php_no_extension.ini');
+        $noExtensions = parse_ini_file($this->config->dir_root . '/data/php_no_extension.ini');
         $noExtensions = $noExtensions['ext'];
 
-        $composerPath = $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json';
+        $composerPath = $this->config->projects_root . '/projects/' . $this->config->project . '/code/composer.json';
         if (file_exists($composerPath)) {
             $composer = json_decode(file_get_contents($composerPath));
         } else {
@@ -72,7 +72,7 @@ class Composer extends Reports {
             }
             
             if (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
-                $extName = 'ext-'.$ext;
+                $extName = 'ext-' . $ext;
                 if (!isset($composer->require->{$extName})) {
                     $composer->require->{$extName} = '*';
                 }

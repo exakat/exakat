@@ -29,7 +29,7 @@ class InIs extends DSL {
     public function run() {
         list($link) = func_get_args();
 
-        assert(func_num_args() <= 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         $this->assertLink($link);
 
         if (empty($link)) {
@@ -40,7 +40,7 @@ class InIs extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {
-            return new Command('in('.$this->SorA($diff).')');
+            return new Command('in(' . $this->SorA($diff) . ')');
         }
     }
 }

@@ -33,7 +33,7 @@ class Phpconfiguration extends Reports {
         $final = '';
 
         $themed = $this->themes->getThemeAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("' . implode('", "', $themed) . '")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
@@ -99,15 +99,15 @@ SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
-                $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+                $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
-                $data['Environnement'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+                $data['Environnement'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/env.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
-                $data['Error log'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+                $data['Error log'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/errorlog.json'));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap') {
-                $data['Browscap'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+                $data['Browscap'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/browscap.json'));
             } elseif ($row['analyzer'] === 'Php/DlUsage') {
-                $data['Dl'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+                $data['Dl'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/enable_dl.json'));
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
                       $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
@@ -128,7 +128,7 @@ SQL
 
                 // disable_functions
                 $data['Disable features'][0]->suggested = implode(', ', $suggestions);
-                $data['Disable features'][0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
+                $data['Disable features'][0]->documentation .= "\n; " . count($list) . " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
                 $res2 = $this->sqlite->query(<<<'SQL'
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
@@ -141,11 +141,11 @@ SQL
 
                 // disable_functions
                 $data['Disable features'][1]->suggested = implode(',', $suggestions);
-                $data['Disable features'][1]->documentation .= "\n; ".count($list). " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
+                $data['Disable features'][1]->documentation .= "\n; " . count($list) . " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
-                    $data[$ext] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                    $data[$ext] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/' . $ext . '.json'));
                 }
             }
         }
@@ -177,7 +177,7 @@ TEXT;
 
 ";
                 } else {
-                    $documentation = wordwrap(' '.$detail->documentation, 80, "\n; ");
+                    $documentation = wordwrap(' ' . $detail->documentation, 80, "\n; ");
                     $directives .= ";$documentation
 $detail->name = $detail->suggested
 
@@ -196,7 +196,7 @@ disable_classes = $classesList
             $directives .= "\n\n";
         }
 
-        $final .= "\n\n".$directives;
+        $final .= "\n\n" . $directives;
         
         return $final;
     }

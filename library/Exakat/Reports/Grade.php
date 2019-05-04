@@ -100,7 +100,7 @@ class Grade extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -130,7 +130,7 @@ MENU;
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -168,9 +168,9 @@ MENU;
     }
 
     protected function cleanFolder() {
-        if (file_exists($this->tmpName.'/datas/base.html')) {
-            unlink($this->tmpName.'/datas/base.html');
-            unlink($this->tmpName.'/datas/menu.html');
+        if (file_exists($this->tmpName . '/datas/base.html')) {
+            unlink($this->tmpName . '/datas/base.html');
+            unlink($this->tmpName . '/datas/menu.html');
         }
 
         // Clean final destination
@@ -179,7 +179,7 @@ MENU;
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 

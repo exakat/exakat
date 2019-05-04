@@ -71,15 +71,15 @@ SQL
                 $extends[$id] =  $row['extends'];
             }
 
-            $object = $type.' "'.$row['name'].'" as Class'.$id.' { '.
-"\n".$properties.
-"\n".$methods.
+            $object = $type . ' "' . $row['name'] . '" as Class' . $id . ' { ' .
+"\n" . $properties .
+"\n" . $methods .
 "\n}";
             
             $puml[] = $object;
         }
         
-        $puml = implode("\n", $puml)."\n\n";
+        $puml = implode("\n", $puml) . "\n\n";
 
         foreach($extends as $extending => $extended) {
             $puml .= "Class{$ids[$extended]} <|-- Class{$extending}\n";
@@ -115,7 +115,7 @@ PUML;
         if ($name === self::STDOUT) {
             echo $dot ;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $dot);
         }
     }
 
@@ -138,7 +138,7 @@ PUML;
         label=\"$nsname$key\";
         color=\"$level\";
         ";
-                $r .= $this->subgraphs($a, $level + 1, $nsname.'\\\\'.$key);
+                $r .= $this->subgraphs($a, $level + 1, $nsname . '\\\\' . $key);
                 $r .= "}\n";
             }
         }

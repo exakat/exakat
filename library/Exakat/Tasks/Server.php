@@ -55,11 +55,11 @@ class Server extends Tasks {
         file_put_contents("{$this->config->projects_root}/projects/index.php", $php);
 
         if (!file_exists("{$this->config->projects_root}/projects/server.log")) {
-            file_put_contents("{$this->config->projects_root}/projects/server.log", date('r')."\tCreated file\n");
+            file_put_contents("{$this->config->projects_root}/projects/server.log", date('r') . "\tCreated file\n");
         }
 
         display('Start server');
-        exec($this->config->php.' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+        exec($this->config->php . ' -S 0.0.0.0:7447 -t ' . $this->config->projects_root . '/projects/ ' . $this->config->projects_root . '/projects/index.php > /dev/null 2 > /dev/null &');
         display('Started server');
     }
 }

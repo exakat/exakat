@@ -100,89 +100,89 @@ class Dump extends Tasks {
             $begin = microtime(true);
             $this->collectClassChanges();
             $end = microtime(true);
-            $this->log->log( 'Collected Class Changes: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Class Changes: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectFiles();
             $end = microtime(true);
-            $this->log->log( 'Collected Files: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Files: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectFilesDependencies();
             $end = microtime(true);
-            $this->log->log( 'Collected Files Dependencies: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Files Dependencies: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->getAtomCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Atom Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Atom Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectPhpStructures();
             $end = microtime(true);
-            $this->log->log( 'Collected Php Structures: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Php Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectStructures();
             $end = microtime(true);
-            $this->log->log( 'Collected Structures: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectFunctions();
             $end = microtime(true);
-            $this->log->log( 'Collected Functions: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Functions: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectConstants();
             $end = microtime(true);
-            $this->log->log( 'Collected Constants: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Constants: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectVariables();
             $end = microtime(true);
-            $this->log->log( 'Collected Variables: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectLiterals();
             $end = microtime(true);
-            $this->log->log( 'Collected Literals: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Literals: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectReadability();
             $end = microtime(true);
-            $this->log->log( 'Collected Readability: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectParameterCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Parameter Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Parameter Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectLocalVariableCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Local Variable Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Local Variable Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectMethodsCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Method Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Method Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectPropertyCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Property Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Property Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectConstantCounts();
             $end = microtime(true);
-            $this->log->log( 'Collected Constant Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Constant Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectNativeCallsPerExpressions();
             $end = microtime(true);
-            $this->log->log( 'Collected Native Calls Per Expression: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
             $this->collectDefinitionsStats();
             $end = microtime(true);
-            $this->log->log( 'Collected Definitions stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
             $this->collectClassDepth();
             $end = microtime(true);
-            $this->log->log( 'Collected Classes stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Classes stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
             $this->collectForeachFavorite();
             $end = microtime(true);
-            $this->log->log( 'Collected Foreach favorites : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Foreach favorites : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -192,8 +192,8 @@ class Dump extends Tasks {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = (int) $row['counts'];
         }
-        $this->log->log('count analyzed : '.count($counts)."\n");
-        $this->log->log('counts '.implode(', ', $counts)."\n");
+        $this->log->log('count analyzed : ' . count($counts) . "\n");
+        $this->log->log('counts ' . implode(', ', $counts) . "\n");
         $datastore->close();
         unset($datastore);
 
@@ -207,13 +207,13 @@ class Dump extends Tasks {
                 }
                 throw new NoSuchThema($thema);
             }
-            display('Processing thema '.(count($thema) > 1 ? 's' : '' ).' : '.implode(', ', $thema));
+            display('Processing thema ' . (count($thema) > 1 ? 's' : '' ) . ' : ' . implode(', ', $thema));
             $missing = $this->processResultsTheme($thema, $counts);
             $this->expandThemes();
             $this->collectHashAnalyzer();
             
             if ($missing === 0) {
-                $list = '(NULL, "'.implode('"), (NULL, "', $thema).'")';
+                $list = '(NULL, "' . implode('"), (NULL, "', $thema) . '")';
                 $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
                 $themes = array();
             }
@@ -231,7 +231,7 @@ class Dump extends Tasks {
                     throw new NoSuchAnalyzer($theme, $this->themes);
                 }
             }
-            display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
+            display('Processing ' . count($themes) . ' analyzer' . (count($themes) > 1 ? 's' : '') . ' : ' . implode(', ', $themes));
 
             if (isset($counts[$analyzer])) {
                 $this->processResults($analyzer, $counts[$analyzer]);
@@ -244,8 +244,8 @@ class Dump extends Tasks {
             $themes = array();
         }
 
-        $this->log->log('Still '.count($themes)." to be processed\n");
-        display('Still '.count($themes)." to be processed\n");
+        $this->log->log('Still ' . count($themes) . " to be processed\n");
+        display('Still ' . count($themes) . " to be processed\n");
 
         $this->finish();
     }
@@ -258,7 +258,7 @@ class Dump extends Tasks {
             $values[] = "(null, '$key', '$value')";
         }
 
-        $sqlite->query('REPLACE INTO hash VALUES '.implode(', ', $values));
+        $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
     private function processResultsTheme($theme, array $counts = array()) {
@@ -275,7 +275,7 @@ class Dump extends Tasks {
         }
 
         if (!empty($query)) {
-            $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES '. implode(', ', $query));
+            $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $query));
         }
 
         $analyzers = $classes;
@@ -380,7 +380,7 @@ SQL;
             $this->sqlite->query($query);
         }
 
-        $this->log->log(implode(', ', $theme)." : dumped $saved");
+        $this->log->log(implode(', ', $theme) . " : dumped $saved");
 
         $error = 0;
         foreach($classes as $class) {
@@ -487,10 +487,10 @@ SQL;
             }
         }
         
-        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES '.implode(', ', $counts);
+        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES ' . implode(', ', $counts);
         $this->sqlite->query($query);
         
-        display(count($atomsCount)." atoms\n");
+        display(count($atomsCount) . " atoms\n");
     }
 
     private function finish() {
@@ -542,7 +542,7 @@ SQL;
     private function collectTables($tables) {
         $this->sqlite->query("ATTACH '{$this->config->datastore}' AS datastore");
 
-        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
+        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('" . implode("', '", $tables) . "');";
         $existingTables = $this->sqlite->query($query);
 
         while($table = $existingTables->fetchArray(\SQLITE3_ASSOC)) {
@@ -550,7 +550,7 @@ SQL;
             $createTable = str_replace('CREATE TABLE ', 'CREATE TABLE IF NOT EXISTS ', $createTable);
 
             $this->sqlite->query($createTable);
-            $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
+            $this->sqlite->query('REPLACE INTO ' . $table['name'] . ' SELECT * FROM datastore.' . $table['name']);
         }
 
         $this->sqlite->query('DETACH datastore');
@@ -559,11 +559,11 @@ SQL;
     private function collectTablesData($tables) {
         $this->sqlite->query("ATTACH '{$this->config->datastore}' AS datastore");
 
-        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
+        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('" . implode("', '", $tables) . "');";
         $existingTables = $this->sqlite->query($query);
 
         while($table = $existingTables->fetchArray(\SQLITE3_ASSOC)) {
-            $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
+            $this->sqlite->query('REPLACE INTO ' . $table['name'] . ' SELECT * FROM datastore.' . $table['name']);
         }
 
         $this->sqlite->query('DETACH datastore');
@@ -599,18 +599,18 @@ GREMLIN;
                       );
         $unique = array();
         foreach($variables as $row) {
-            if (isset($unique[$row['name'].$row['type']])) {
+            if (isset($unique[$row['name'] . $row['type']])) {
                 continue;
             }
             $name = str_replace(array('&', '...'), '', $row['name']);
-            $unique[$name.$row['type']] = 1;
+            $unique[$name . $row['type']] = 1;
             $type = $types[$row['type']];
-            $query[] = "(null, '".strtolower($this->sqlite->escapeString($name))."', '".$type."')";
+            $query[] = "(null, '" . strtolower($this->sqlite->escapeString($name)) . "', '" . $type . "')";
             ++$total;
         }
         
         if (!empty($query)) {
-            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         
@@ -637,12 +637,12 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '\\".strtolower($this->sqlite->escapeString($row['name']))."')";
+            $query[] = "(null, '\\" . strtolower($this->sqlite->escapeString($row['name'])) . "')";
             ++$total;
         }
         
         if (!empty($query)) {
-            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -825,21 +825,21 @@ GREMLIN;
                     $namespaceId = 1;
                 }
 
-                $query[] = '('.$citId[$row['fullnspath']].
-                           ", '".$this->sqlite->escapeString($row['name'])."'".
-                           ', '.$namespaceId.
-                           ', '.(int) $row['abstract'].
-                           ','.(int) $row['final'].
-                           ", '".$row['type']."'".
-                           ', '.$extends.
-                           ', '.(int) $row['begin'].
-                           ', '.(int) $row['end'].
-                           ", '".$this->files[$row['file']]."'".
+                $query[] = '(' . $citId[$row['fullnspath']] .
+                           ", '" . $this->sqlite->escapeString($row['name']) . "'" .
+                           ', ' . $namespaceId .
+                           ', ' . (int) $row['abstract'] .
+                           ',' . (int) $row['final'] .
+                           ", '" . $row['type'] . "'" .
+                           ', ' . $extends .
+                           ', ' . (int) $row['begin'] .
+                           ', ' . (int) $row['end'] .
+                           ", '" . $this->files[$row['file']] . "'" .
                            ' )';
             }
             
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES '.implode(", \n", $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES ' . implode(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -851,15 +851,15 @@ GREMLIN;
 
                 foreach($row['implements'] as $implements) {
                     if (isset($citId[$implements])) {
-                        $query[] = '(null, '.$citId[$row['fullnspath']].", $citId[$implements], 'implements')";
+                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", $citId[$implements], 'implements')";
                     } else {
-                        $query[] = '(null, '.$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($implements)."', 'implements')";
+                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", '" . $this->sqlite->escapeString($implements) . "', 'implements')";
                     }
                 }
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES ' . implode(', ', $query);
                 $this->sqlite->query($query);
             }
 
@@ -871,15 +871,15 @@ GREMLIN;
                 
                 foreach($row['uses'] as $uses) {
                     if (isset($citId[$uses])) {
-                        $query[] = '(null, '.$citId[$row['fullnspath']].", $citId[$uses], 'use')";
+                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", $citId[$uses], 'use')";
                     } else {
-                        $query[] = '(null, '.$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($uses)."', 'use')";
+                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", '" . $this->sqlite->escapeString($uses) . "', 'use')";
                     }
                 }
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES ' . implode(', ', $query);
                 $this->sqlite->query($query);
             }
         }
@@ -902,7 +902,7 @@ GREMLIN;
             }
         }
         if (!empty($query)) {
-            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total uses \n");
@@ -988,15 +988,15 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
-                        ', '.(int) $row['static'].', '.(int) $row['final'].', '.(int) $row['abstract'].", '".$visibility."'".
-                        ', '.(int) $row['begin'].', '.(int) $row['end'].')';
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+                        ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
+                        ', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "begin", "end") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "begin", "end") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1069,13 +1069,13 @@ GREMLIN;
                 continue;
             }
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
-                        ", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."', ".(int) $row['static'].')';
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+                        ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] . ')';
 
             ++$total;
         }
         if (!empty($query)) {
-            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         
@@ -1134,16 +1134,16 @@ GREMLIN;
                 $namespaceId = 1;
             }
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."'".
-                       ', '.$citId[$row['class']].
-                       ", '".$visibility."'".
-                       ", '".$this->sqlite->escapeString($row['value'])."')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "'" .
+                       ', ' . $citId[$row['class']] .
+                       ", '" . $visibility . "'" .
+                       ", '" . $this->sqlite->escapeString($row['value']) . "')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
@@ -1188,13 +1188,13 @@ GREMLIN;
         foreach($res as $row) {
             $count = current($row);
             $name = key($row);
-            $query[] = "(null, '".$this->sqlite->escapeString($name)."', '$type', $count)";
+            $query[] = "(null, '" . $this->sqlite->escapeString($name) . "', '$type', $count)";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total PHP {$type}s\n");
@@ -1221,13 +1221,13 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString(trim($row['name'], "'\""))."', 0, 0, '".$this->sqlite->escapeString($row['value'])."')";
+            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', 0, 0, '" . $this->sqlite->escapeString($row['value']) . "')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1252,13 +1252,13 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', 0, 0, '".$this->sqlite->escapeString($row['value'])."')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', 0, 0, '" . $this->sqlite->escapeString($row['value']) . "')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1298,13 +1298,13 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', '".$this->files[$row['file']]."', ".(int) $row['begin'].', '.(int) $row['end'].')';
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->files[$row['file']] . "', " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO functions ("id", "function", "file", "begin", "end") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO functions ("id", "function", "file", "begin", "end") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1315,15 +1315,15 @@ GREMLIN;
         $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
 
         foreach($types as $type) {
-            $this->sqlite->query('DROP TABLE IF EXISTS literal'.$type);
-            $this->sqlite->query('CREATE TABLE literal'.$type.' (  
+            $this->sqlite->query('DROP TABLE IF EXISTS literal' . $type);
+            $this->sqlite->query('CREATE TABLE literal' . $type . ' (  
                                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    name STRING,
                                                    file STRING,
                                                    line INTEGER
                                                  )');
 
-            $filter = 'hasLabel("'.$type.'")';
+            $filter = 'hasLabel("' . $type . '")';
 
             $b = microtime(true);
             $query = <<<GREMLIN
@@ -1351,17 +1351,17 @@ GREMLIN;
             $total = 0;
             $query = array();
             foreach($res as $value => $row) {
-                $query[] = "('".$this->sqlite->escapeString($row['name'])."','".$this->sqlite->escapeString($row['file'])."',".$row['line'].')';
+                $query[] = "('" . $this->sqlite->escapeString($row['name']) . "','" . $this->sqlite->escapeString($row['file']) . "'," . $row['line'] . ')';
                 ++$total;
                 if ($total % 10000 === 0) {
-                    $query = "INSERT INTO literal$type (name, file, line) VALUES ".implode(', ', $query);
+                    $query = "INSERT INTO literal$type (name, file, line) VALUES " . implode(', ', $query);
                     $this->sqlite->query($query);
                     $query = array();
                 }
             }
             
             if (!empty($query)) {
-                $query = "INSERT INTO literal$type (name, file, line) VALUES ".implode(', ', $query);
+                $query = "INSERT INTO literal$type (name, file, line) VALUES " . implode(', ', $query);
                 $this->sqlite->query($query);
             }
             
@@ -1404,14 +1404,14 @@ GREMLIN;
         $query = array();
         foreach($res as $row) {
             if (isset($row['block'])){
-                $query[] = '(\''.$row['encoding'].'\', \''.$row['block'].'\')';
+                $query[] = '(\'' . $row['encoding'] . '\', \'' . $row['block'] . '\')';
             } else {
-                $query[] = '(\''.$row['encoding'].'\', \'\')';
+                $query[] = '(\'' . $row['encoding'] . '\', \'\')';
             }
         }
        
        if (!empty($query)) {
-           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES '.implode(', ', $query);
+           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES ' . implode(', ', $query);
            $this->sqlite->query($query);
        }
     }
@@ -1431,16 +1431,16 @@ GREMLIN;
 g.V().hasLabel("$label").count();
 GREMLIN;
             $res = $this->gremlin->query($query);
-            $insert[] = '("'.$name.'", '.$res->toInt().')';
+            $insert[] = '("' . $name . '", ' . $res->toInt() . ')';
 
             $query = <<<GREMLIN
 g.V().hasLabel("$label").where(__.in("DEFINITION").not(hasLabel("Virtualproperty"))).count();
 GREMLIN;
             $res = $this->gremlin->query($query);
-            $insert[] = '("'.$name.' defined", '.$res->toInt().')';
+            $insert[] = '("' . $name . ' defined", ' . $res->toInt() . ')';
         }
 
-        $this->sqlite->query('REPLACE INTO hash ("key", "value") VALUES '.implode(', ', $insert));
+        $this->sqlite->query('REPLACE INTO hash ("key", "value") VALUES ' . implode(', ', $insert));
         display('Definitions Stats');
     }
 
@@ -1468,14 +1468,14 @@ GREMLIN;
         $query = array();
         if (count($result) > 0) {
             foreach($result->toArray() as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'INCLUDE')";
+                $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'INCLUDE')";
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
                 $this->sqlite->query($query);
             }
-            display(count($result).' inclusions');
+            display(count($result) . ' inclusions');
         }
 
         // Finding extends and implements
@@ -1492,14 +1492,14 @@ GREMLIN;
         $query = array();
 
         foreach($extends as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', '".$link['type']."')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . $link['type'] . "')";
         }
 
         if (!empty($query)) {
-            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
-        display(count($extends).' extends for classes ');
+        display(count($extends) . ' extends for classes ');
 
         // Finding extends for interfaces
         $query = <<<'GREMLIN'
@@ -1513,14 +1513,14 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'EXTENDS')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'EXTENDS')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res).' extends for interfaces ');
+        display(count($res) . ' extends for interfaces ');
 
         // Finding typehint
         $query = <<<GREMLIN
@@ -1534,14 +1534,14 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'TYPEHINT')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'TYPEHINT')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res).' typehints ');
+        display(count($res) . ' typehints ');
 
         // Finding trait use
         $query = <<<GREMLIN
@@ -1555,14 +1555,14 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'USE')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'USE')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res).' traits ');
+        display(count($res) . ' traits ');
 
         // traits
         $query = <<<GREMLIN
@@ -1576,14 +1576,14 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'USE')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'USE')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res).' use ');
+        display(count($res) . ' use ');
 
         // Functioncall()
         $query = <<<GREMLIN
@@ -1597,14 +1597,14 @@ GREMLIN;
         $query = array();
 
         foreach($functioncall as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'FUNCTIONCALL')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'FUNCTIONCALL')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($functioncall).' functioncall ');
+        display(count($functioncall) . ' functioncall ');
 
         // constants
         $query = <<<GREMLIN
@@ -1618,14 +1618,14 @@ GREMLIN;
         $query = array();
 
         foreach($constants as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'CONSTANT')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'CONSTANT')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($constants).' constants ');
+        display(count($constants) . ' constants ');
 
         // New
         $query = <<<GREMLIN
@@ -1639,14 +1639,14 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'NEW')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'NEW')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res).' new ');
+        display(count($res) . ' new ');
 
         // static calls (property, constant, method)
         $query = <<<GREMLIN
@@ -1661,14 +1661,14 @@ GREMLIN;
         $query = array();
 
         foreach($statics as $link) {
-            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', '".strtoupper($link['type'])."')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . strtoupper($link['type']) . "')";
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($statics).' static calls CPM');
+        display(count($statics) . ' static calls CPM');
     }
 
     private function collectHashCounts($query, $name) {
@@ -1680,11 +1680,11 @@ GREMLIN;
         }
         
         if (!empty($values)) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $values);
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
             $this->sqlite->query($query);
         }
 
-        display( "$name : ".count($values));
+        display( "$name : " . count($values));
     }
 
     private function collectClassDepth() {
@@ -1926,7 +1926,7 @@ GREMLIN;
         }
         
         if (!empty($values)) {
-            $query = 'INSERT INTO classChanges ("changeType", "name", "parentClass", "parentValue", "childClass", "childValue") VALUES '.implode(', ', $values);
+            $query = 'INSERT INTO classChanges ("changeType", "name", "parentClass", "parentValue", "childClass", "childValue") VALUES ' . implode(', ', $values);
             $this->sqlite->query($query);
         }
         
@@ -1962,7 +1962,7 @@ GREMLIN;
             $valuesSQL[] = "(\"Foreach Keys\", \"$name\", $count)";
         }
 
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $valuesSQL);
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
         $this->sqlite->query($query);
         
         return count($valuesSQL);
@@ -2013,10 +2013,10 @@ SQL;
             $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression], '{$this->sqlite->escapeString($row['file'])}') ";
         }
 
-        $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES '.implode(', ', $values);
+        $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES ' . implode(', ', $values);
         $this->sqlite->query($query);
 
-        display( count($values).' readability index');
+        display( count($values) . ' readability index');
     }
 
     public function checkThemes($theme, array $analyzers) {
@@ -2025,7 +2025,7 @@ SQL;
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->busyTimeout(5000);
 
-        $query = 'SELECT analyzer FROM resultsCounts WHERE analyzer IN ('.makeList($analyzers).')';
+        $query = 'SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($analyzers) . ')';
         $ran = array();
         $res = $sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -2062,7 +2062,7 @@ SQL;
         }
         
         if (!empty($add)) {
-            $query = 'INSERT INTO themas (thema) VALUES ("'.implode('"), ("', $add).'")';
+            $query = 'INSERT INTO themas (thema) VALUES ("' . implode('"), ("', $add) . '")';
             $this->sqlite->query($query);
         }
     }

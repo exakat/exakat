@@ -50,7 +50,7 @@ GREMLIN;
 
 
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('map{ '.$mapping.' }', $lower, $upper)
+             ->raw('map{ ' . $mapping . ' }', $lower, $upper)
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -69,11 +69,11 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+        $types = '[' . str_replace('\\', '\\\\', makeList(array_keys($types))) . ']';
 
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('map{ '.$mapping.' }', $lower, $upper)
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('map{ ' . $mapping . ' }', $lower, $upper)
+             ->raw('filter{ x2 in ' . $types . '}')
              ->back('first');
         $this->prepareQuery();
     }

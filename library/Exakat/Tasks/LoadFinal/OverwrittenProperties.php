@@ -41,7 +41,7 @@ class OverwrittenProperties extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         
-        display($result->toInt().' overwrittenProperties');
+        display($result->toInt() . ' overwrittenProperties');
     }
 }
 

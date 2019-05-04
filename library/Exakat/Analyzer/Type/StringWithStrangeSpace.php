@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class StringWithStrangeSpace extends Analyzer {
     public function analyze() {
         $weirdSpaces = $this->loadIni('weirdSpaces.ini', 'space');
-        $regex = '('.implode('|', array_keys($weirdSpaces)).'})';
+        $regex = '(' . implode('|', array_keys($weirdSpaces)) . '})';
         
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
