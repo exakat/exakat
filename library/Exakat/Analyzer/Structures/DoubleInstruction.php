@@ -43,9 +43,11 @@ where(
       .fold()
       .filter{
               // check that doubles has expression in multiple lines and lines are following each other
-              doubles = doubles.findAll{ a, b -> b.size() > 1}.findAll{a,b -> b.intersect( b.collect{it2 -> it2 + 1}).size() > 0}.values().flatten(); 
-              // removing the second occurrence
-              doubles = doubles - doubles.collect{ it + 1;};
+              doubles = doubles.findAll{ a, b -> b.size() > 1}
+                               .findAll{a,b -> b.intersect( b.collect{it2 -> it2 + 1}).size() > 0}
+                               .values()
+                               .collect{it3 -> it3 - it3.collect{ it4 -> it4 + 1}}
+                               .flatten(); 
               // check if there are any result finally
               doubles.size() > 0 ; 
              }  
