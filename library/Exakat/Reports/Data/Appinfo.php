@@ -354,6 +354,7 @@ class Appinfo extends Data {
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/standard'   => 'Extensions/Extstandard',
                             'ext/stats'      => 'Extensions/Extstats',
+                            'ext/svm'        => 'Extensions/Extsvm',
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/trader'     => 'Extensions/Exttrader',
