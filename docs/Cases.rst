@@ -1305,6 +1305,67 @@ No more than one level of nesting for this ternary call, yet it feels a lot more
 
     $lc_text .= '<br />' . (zen_get_show_product_switch($listing->fields['products_id'], 'ALWAYS_FREE_SHIPPING_IMAGE_SWITCH') ? (zen_get_product_is_always_free_shipping($listing->fields['products_id']) ? TEXT_PRODUCT_FREE_SHIPPING_ICON . '<br />' : '') : '');
 
+Non-constant Index In Array
+===========================
+
+.. _dolibarr-arrays-nonconstantarray:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`non-constant-index-in-array`, in htdocs/includes/OAuth/Common/Storage/DoliStorage.php:245. 
+
+The `state` constant in the `$result` array is coming from the SQL query. There is no need to make this a constant : making it a string will remove some warnings in the logs.
+
+.. code-block:: php
+
+    public function hasAuthorizationState($service)
+        {
+            // get state from db
+            dol_syslog("get state from db");
+            $sql = "SELECT state FROM ".MAIN_DB_PREFIX."oauth_state";
+            $sql.= " WHERE service='".$this->db->escape($service)."'";
+            $resql = $this->db->query($sql);
+            $result = $this->db->fetch_array($resql);
+            $states[$service] = $result[state];
+            $this->states[$service] = $states[$service];
+    
+            return is_array($states)
+            && isset($states[$service])
+            && null !== $states[$service];
+        }
+
+
+--------
+
+
+.. _zencart-arrays-nonconstantarray:
+
+Zencart
+^^^^^^^
+
+:ref:`non-constant-index-in-array`, in app/library/zencart/Services/src/LeadLanguagesRoutes.php:112. 
+
+The `fields` constant in the `$tableEntry` which holds a list of tables. It seems to be a SQL result, but it is conveniently abstracted with `$this->listener->getTableList()`, so we can't be sure.
+
+.. code-block:: php
+
+    public function updateLanguageTables($insertId)
+        {
+            $tableList = $this->listener->getTableList();
+            if (count($tableList) == 0) {
+                return;
+            }
+            foreach ($tableList as $tableEntry) {
+                $languageKeyField = issetorArray($tableEntry, 'languageKeyField', 'language_id');
+                $sql = " INSERT IGNORE INTO :table: (";
+                $sql = $this->dbConn->bindVars($sql, ':table:', $tableEntry ['table'], 'noquotestring');
+                $sql .= $languageKeyField. ", ";
+                $fieldNames = "";
+                foreach ($tableEntry[fields] as $fieldName => $fieldType) {
+                    $fieldNames .= $fieldName . ", ";
+                }
+
 Class, Interface Or Trait With Identical Names
 ==============================================
 
@@ -3867,6 +3928,39 @@ At least, it always choose the most secure way : use SSL.
             $form .= zen_href_link($action, $parameters, 'NONSSL');
           }
 
+Logical Mistakes
+================
+
+.. _dolibarr-structures-logicalmistakes:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`logical-mistakes`, in htdocs/core/lib/admin.lib.php:1165. 
+
+This expression is always true. When `$nbtabsql` is `$nbtablib`, the left part is true; When `$nbtabsql` is `$nbtabsqlsort`, the right part is true; When any other value is provided, both operands are true. 
+
+.. code-block:: php
+
+    $nbtablib != $nbtabsql || $nbtabsql != $nbtabsqlsort
+
+
+--------
+
+
+.. _cleverstyle-structures-logicalmistakes:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`logical-mistakes`, in modules/HybridAuth/Hybrid/Providers/DigitalOcean.php:123. 
+
+This expression is always false. When `$data->account->email_verified` is `true`, the right part is false; When `$data->account->email_verified` is `$data->account->email`, the right part is false; The only viable solution is to have ` $data->account->email`true : this is may be the intend it, though it is not easy to understand. 
+
+.. code-block:: php
+
+    TRUE == $data->account->email_verified and $data->account->email == $data->account->email_verified
+
 Return True False
 =================
 
@@ -6207,6 +6301,56 @@ This code prepares incoming '$values' for extraction. The keys are cleaned then 
                         $key = strtr($key, '=', '');
                         $key = strtr($key, ',', ';');
                         $keys = explode(';', $key);
+
+Callback Needs Return
+=====================
+
+.. _contao-functions-callbackneedsreturn:
+
+Contao
+^^^^^^
+
+:ref:`callback-needs-return`, in core-bundle/src/Resources/contao/modules/ModuleQuicklink.php:91. 
+
+The empty closure returns `null`. The array_flip() array has now all its values set to null, and reset, as intended. A better alternative is to use the array_fill_keys() function, which set a default value to every element of an array, once provided with the expected keys.
+
+.. code-block:: php
+
+    $arrPages = array_map(function () {}, array_flip($tmp));
+
+
+--------
+
+
+.. _phpdocumentor-functions-callbackneedsreturn:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`callback-needs-return`, in core-bundle/src/Resources/contao/modules/ModuleQuicklink.php:91. 
+
+The array_walk() function is called on the plugin's list. Each element is registered with the application, but is not used directly : this is for later. The error mechanism is to throw an exception : this is the only expected feedback. As such, no return is expected. May be a 'foreach' loop would be more appropriate here, but this is syntactic sugar.
+
+.. code-block:: php
+
+    array_walk(
+                $plugins,
+                function ($plugin) use ($app) {
+                    /** @var Plugin $plugin */
+                    $provider = (strpos($plugin->getClassName(), '\') === false)
+                        ? sprintf('phpDocumentor\Plugin\%s\ServiceProvider', $plugin->getClassName())
+                        : $plugin->getClassName();
+                    if (!class_exists($provider)) {
+                        throw new \RuntimeException('Loading Service Provider for ' . $provider . ' failed.');
+                    }
+    
+                    try {
+                        $app->register(new $provider($plugin));
+                    } catch (\InvalidArgumentException $e) {
+                        throw new \RuntimeException($e->getMessage());
+                    }
+                }
+            );
 
 Cant Instantiate Class
 ======================
