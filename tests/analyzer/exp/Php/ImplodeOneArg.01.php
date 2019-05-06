@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('implode($a)',
+                      '\implode($aa)',
                      );
 
 $expected_not = array('\a\implode($a1)',
