@@ -34,8 +34,7 @@ class NoAtomInside extends DSL {
 
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
-        
-        
+
         $gremlin = <<<GREMLIN
 not(
     where( __.repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) ).emit( )
