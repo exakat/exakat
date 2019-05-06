@@ -28,13 +28,33 @@ use Exakat\Analyzer\Analyzer;
 class DoubleInstruction extends Analyzer {
     public function analyze() {
         $this->atomIs('Sequence')
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ doubles = [:]; }
+      .out("EXPRESSION")
+      .not(hasLabel('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus', 'Void'))
+      .sideEffect{ 
+         if (doubles[it.get().value("fullcode")] == null) {
+           doubles[it.get().value("fullcode")] = [it.get().value("rank")];
+         } else {
+           doubles[it.get().value("fullcode")].add(it.get().value("rank"));
+         }
+      }
+      .fold()
+      .filter{
+              // check that doubles has expression in multiple lines and lines are following each other
+              doubles = doubles.findAll{ a, b -> b.size() > 1}.findAll{a,b -> b.intersect( b.collect{it2 -> it2 + 1}).size() > 0}.values().flatten(); 
+              // removing the second occurrence
+              doubles = doubles - doubles.collect{ it + 1;};
+              // check if there are any result finally
+              doubles.size() > 0 ; 
+             }  
+)
+GREMLIN
+)
              ->outIs('EXPRESSION')
              ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus', 'Void'))
-             ->savePropertyAs('fullcode', 'expression')
-             ->_as('result')
-             ->nextSibling()
-             ->samePropertyAs('fullcode', 'expression', self::CASE_SENSITIVE)
-             ->back('result');
+             ->filter('it.get().value("rank") in doubles');
         $this->prepareQuery();
     }
 }
