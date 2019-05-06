@@ -95,7 +95,7 @@ class Git extends Vcs {
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \\*");
+        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \\* 2>&1");
         $branch = substr(trim($res), 2);
         
         if (strpos($branch, ' detached at ') === false) {

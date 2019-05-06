@@ -99,7 +99,7 @@ class Status extends Tasks {
             $status['hash']      = 'None';
             $status['updatable'] = 'N/A';
         } else {
-            $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
+            $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
             $status = array_merge($status, $vcs->getStatus());
         }
 

@@ -128,7 +128,7 @@ class Project extends Tasks {
             $info['vcs_type'] = strtolower($vcsClass);
             $info['vcs_url']  = $this->config->project_url;
             
-            $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
+            $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
             if (method_exists($vcs, 'getBranch')) {
                 $info['vcs_branch']      = $vcs->getBranch();
             }

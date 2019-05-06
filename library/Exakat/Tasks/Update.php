@@ -36,8 +36,7 @@ class Update extends Tasks
 
     protected $logname = self::LOG_NONE;
 
-    public function run()
-    {
+    public function run() {
         $project = new ProjectName($this->config->project);
 
         if (!$project->validate()) {
@@ -51,8 +50,7 @@ class Update extends Tasks
         }
     }
 
-    private function runDefault()
-    {
+    private function runDefault() {
         $paths = glob("{$this->config->projects_root}/projects/*");
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
@@ -72,8 +70,7 @@ class Update extends Tasks
         }
     }
 
-    private function runProject($project)
-    {
+    private function runProject($project) {
         $path = "{$this->config->projects_root}/projects/$project";
 
         if (!file_exists($path)) {
@@ -107,7 +104,7 @@ class Update extends Tasks
             // svn case
             case $updateConfig->project_vcs === 'svn' :
                 display("SVN update $updateConfig->project");
-                $vcs = new Svn($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Svn($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("SVN updated to revision $new");
                 break;
@@ -115,7 +112,7 @@ class Update extends Tasks
             // cvs case
             case $updateConfig->project_vcs === 'cvs' :
                 display("CVS update $updateConfig->project");
-                $vcs = new Cvs($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Cvs($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("CVS updated to revision $new");
                 break;
@@ -123,7 +120,7 @@ class Update extends Tasks
             // bazaar case
             case $updateConfig->project_vcs === 'bzr' :
                 display("Bazaar update $updateConfig->project");
-                $vcs = new Bazaar($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Bazaar($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("Bazaar updated to revision $new");
                 break;
@@ -131,7 +128,7 @@ class Update extends Tasks
             // mercurial
             case $updateConfig->project_vcs === 'hg' :
                 display("Mercurial update $updateConfig->project");
-                $vcs = new Mercurial($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Mercurial($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("Mercurial updated to revision $new");
                 break;
@@ -139,7 +136,7 @@ class Update extends Tasks
             // composer case
             case $updateConfig->project_vcs === 'composer' :
                 display("Composer update $updateConfig->project");
-                $vcs = new Composer($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Composer($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("Composer updated to version $new");
                 break;
@@ -147,7 +144,7 @@ class Update extends Tasks
             // Git case
             case $updateConfig->project_vcs === 'git' :
                 display("Git pull for $updateConfig->project");
-                $vcs = new Git($updateConfig->project, $updateConfig->projects_root);
+                $vcs = new Git($updateConfig->project, $updateConfig->code_dir);
                 $new = $vcs->update();
                 display("Updated git version $new");
                 break;

@@ -323,7 +323,7 @@ TEXT
         foreach($optionals as $class => $section) {
             try {
                 $fullClass = "\Exakat\Vcs\\$class";
-                $vcs = new $fullClass($this->config->project, $this->config->projects_root);
+                $vcs = new $fullClass($this->config->project, $this->config->code_dir);
                 $stats[$section] = $vcs->getInstallationInfo();
             } catch (HelperException $e) {
                 $stats[$section] = array('installed' => 'No');
