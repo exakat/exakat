@@ -28,21 +28,56 @@ use Exakat\Analyzer\Analyzer;
 class DoubleAssignation extends Analyzer {
     public function analyze() {
         // $a = 1; $a = 2;
-        $this->atomIs('Assignation')
+        $this->atomIs('Sequence')
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ doubles = [:]; }
+      .out("EXPRESSION")
+      .hasLabel("Assignation")
+      .out("LEFT")
+      .hasLabel("Variable", "Array", "Member", "Staticproperty")
+      .sideEffect{
+         rank = it.get().vertices(IN, "LEFT").next().value("rank");
+         if (doubles[it.get().value("fullcode")] == null) {
+           doubles[it.get().value("fullcode")] = [rank];
+         } else {
+           doubles[it.get().value("fullcode")].add(rank);
+         }
+      }
+      .fold()
+      .filter{
+              // check that doubles has expression in multiple lines and lines are following each other
+              doubles = doubles.findAll{ a, b -> b.size() > 1}
+                               .findAll{a,b -> b.intersect( b.collect{it2 -> it2 + 1}).size() > 0}
+                               .values();
+              following = doubles.collect{it3 -> it3.collect{ it4 -> it4 + 1}.intersect(it3)}
+                               .flatten(); 
+              doubles = doubles.collect{it3 -> it3 - it3.collect{ it4 -> it4 + 1}}
+                               .flatten(); 
+              // check if there are any result finally
+              doubles.size() > 0 ; 
+             }  
+)
+
+GREMLIN
+)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             ->filter('it.get().value("rank") in doubles')
+             ->initVariable('ranked')
+             ->raw('sideEffect{ranked = it.get().value("rank") + 1}')
+             ->codeIs('=')
+             ->_as('results')
              ->outIs('LEFT')
              ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
-             ->nextSibling()
-             ->atomIs('Assignation')
+             ->inIs('EXPRESSION')
+             ->outWithRank('EXPRESSION', 'ranked')
              ->codeIs('=')
-             ->outIs('LEFT')
-             ->samePropertyAs('fullcode', 'name')
-             ->inIs('LEFT')
              ->outIs('RIGHT')
-             // No self assignation (after operation)
              ->isReassigned('name')
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
     }
 }
