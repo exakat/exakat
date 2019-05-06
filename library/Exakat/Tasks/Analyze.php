@@ -123,6 +123,7 @@ class Analyze extends Tasks {
                 echo $this->progressBar->advance();
             }
 
+            assert($analyzers[$analyzer_class] !== null, "Unknown analyzer $analyzer_class from dependsOn()\n");
             $this->analyze($analyzers[$analyzer_class], $analyzer_class);
         }
 
