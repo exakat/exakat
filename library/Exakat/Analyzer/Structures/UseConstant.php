@@ -27,7 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class UseConstant extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs(array('\\php_version', '\\php_sapi_name', '\\pi'))
+        $this->atomFunctionIs(array('\\php_version', 
+                                    '\\php_sapi_name', 
+                                    '\\pi',
+                                    ))
              ->back('first');
         $this->prepareQuery();
 
@@ -41,7 +44,7 @@ class UseConstant extends Analyzer {
         $this->atomFunctionIs('\\dirname')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
-             ->codeIs('__FILE__', self::TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIs('__file__', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }
