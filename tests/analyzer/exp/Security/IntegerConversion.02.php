@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$_COOKIE[\'g\'] == A', 
+$expected     = array('$_COOKIE[\'g\'] == A',
                       '$_POST[\'d\'] == 2',
                      );
 

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( 'array_map(function ($a5) { /**/ } , array_flip($tmp))',
+$expected     = array('array_map(function ($a5) { /**/ } , array_flip($tmp))',
                      );
 
 $expected_not = array('array_map(function ($a1) { /**/ } , array_flip($tmp))',
