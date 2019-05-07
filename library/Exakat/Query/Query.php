@@ -158,6 +158,12 @@ GREMLIN;
     
     public function prepareRawQuery() {
         $commands = array_column($this->commands, 'gremlin');
+
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
+            // any 'stop_query' is blocking
+            return $this->query = "// Query with STOP_QUERY\n";
+        }
+
         $commands = implode('.', $commands);
         $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
 
