@@ -42,7 +42,7 @@ class History extends Reports {
             return false;
         }
 
-        $sqlite = new \Sqlite3("$folder/$name.".self::FILE_EXTENSION);
+        $sqlite = new \Sqlite3("$folder/$name." . self::FILE_EXTENSION);
         $query = "SELECT name FROM sqlite_master WHERE type='table' AND name = 'hash';";
         $res = $sqlite->querySingle($query);
         
@@ -77,7 +77,7 @@ SQLITE
             return;
         }
 
-        $already = $sqlite->querysingle('SELECT id FROM hash WHERE key="dump_serial" AND value="'.$serial.'"');
+        $already = $sqlite->querysingle('SELECT id FROM hash WHERE key="dump_serial" AND value="' . $serial . '"');
         if (!empty($already))  {
             print "Dataset #$serial is already in history. Ignoring\n";
             return;
@@ -85,7 +85,7 @@ SQLITE
         
         display("Add dataset #$serial to history\n");
 
-        $sqlite->query('ATTACH "'.$this->config->dump.'" AS dump');
+        $sqlite->query('ATTACH "' . $this->config->dump . '" AS dump');
 
         $query = "INSERT INTO hash SELECT NULL, \"$serial\", key, value FROM dump.hash";
         $sqlite->query($query);

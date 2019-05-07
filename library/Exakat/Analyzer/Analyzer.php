@@ -271,7 +271,7 @@ GREMLIN;
                 // Creating analysis vertex
                 $resId = $this->gremlin->getId();
                 
-                $query = 'g.addV().property(T.id, '.$resId.').property(T.label, "Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                $query = 'g.addV().property(T.id, ' . $resId . ').property(T.label, "Analysis").property("analyzer", "' . $this->analyzerQuoted . '").property("atom", "Analysis").id()';
                 $res = $this->gremlin->query($query);
                 $this->analyzerId = $res->toString();
             } else {
@@ -280,7 +280,7 @@ GREMLIN;
                     // Creating analysis vertex
                     $resId = $this->gremlin->getId();
 
-                    $query = 'g.addV().property(T.id, '.$resId.').property(T.label, "Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                    $query = 'g.addV().property(T.id, ' . $resId . ').property(T.label, "Analysis").property("analyzer", "' . $this->analyzerQuoted . '").property("atom", "Analysis").id()';
                     $res = $this->gremlin->query($query);
                     $this->analyzerId = $res->toString();
                 } else {
@@ -295,7 +295,7 @@ GREMLIN;
             $this->analyzerId = $analyzerId;
         }
 
-        assert($this->analyzerId != 0, self::class.' was inited with Id 0. Can\'t save with that!');
+        assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
         return $this->analyzerId;
     }
 
@@ -436,7 +436,7 @@ GREMLIN;
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
-            display($e->getMessage().$queryString);
+            display($e->getMessage() . $queryString);
             $result = new \StdClass();
             $result->processed = 0;
             $result->total = 0;
@@ -450,7 +450,7 @@ GREMLIN;
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
-            display($e->getMessage().
+            display($e->getMessage() .
                     $queryString);
             $result = new \StdClass();
             $result->processed = 0;
@@ -920,14 +920,14 @@ GREMLIN;
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() <= 2, 'Wrong number of arguments for '.__METHOD__);
+        assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIs($code, $caseSensitive);
         
         return $this;
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() <= 2, 'Wrong number of arguments for '.__METHOD__);
+        assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIsNot($code, $caseSensitive);
         
         return $this;
@@ -1095,7 +1095,7 @@ GREMLIN;
         if ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, 'Wrong type for not : '.gettype($filter));
+            assert(false, 'Wrong type for not : ' . gettype($filter));
         }
         $this->query->not($filterClean, array());
 
@@ -1109,7 +1109,7 @@ GREMLIN;
         } elseif ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, 'Wrong type for filter : '.get_type($filter));
+            assert(false, 'Wrong type for filter : ' . get_type($filter));
         }
         $this->query->filter($filterClean, array());
 

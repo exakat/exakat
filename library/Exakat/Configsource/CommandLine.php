@@ -234,7 +234,7 @@ class CommandLine extends Config {
         if (!empty($args)) {
             $c = count($args);
             if (isset($this->config['verbose'])) {
-                display( 'Found '.$c.' argument'.($c > 1 ? 's' : '').' that '.($c > 1 ? 'are' : 'is')." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ".($c > 1 ? 'them all' : 'it'.".\n"));
+                display( 'Found ' . $c . ' argument' . ($c > 1 ? 's' : '') . ' that ' . ($c > 1 ? 'are' : 'is') . " not understood.\n\n\"" . implode('", "', $args) . "\"\n\nIgnoring " . ($c > 1 ? 'them all' : 'it' . ".\n"));
             }
         }
 

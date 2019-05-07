@@ -46,7 +46,7 @@ class Doctor extends Tasks {
         $stats = array_merge($this->checkPreRequisite(),
                              $this->checkAutoInstall());
 
-        $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
+        $phpBinaries = array('php' . str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
         foreach(Config::PHP_VERSIONS as $shortVersion) {
             $configName = "php$shortVersion";
             if (!empty($this->config->$configName)) {
@@ -68,9 +68,9 @@ class Doctor extends Tasks {
 
         $doctor = '';
         foreach($stats as $section => $details) {
-            $doctor .= "$section : ".PHP_EOL;
+            $doctor .= "$section : " . PHP_EOL;
             foreach($details as $k => $v) {
-                $doctor .= '    '.substr("$k                          ", 0, 20).' : '.$v.PHP_EOL;
+                $doctor .= '    ' . substr("$k                          ", 0, 20) . ' : ' . $v . PHP_EOL;
             }
             $doctor .= PHP_EOL;
         }
@@ -183,7 +183,7 @@ TEXT
             $folder = '';
         } else {
             $ini = file_get_contents("{$this->config->dir_root}/server/exakat.ini");
-            $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+            $version = PHP_MAJOR_VERSION . PHP_MINOR_VERSION;
             
             if (file_exists("{$this->config->projects_root}/tinkergraph")) {
                 $folder = 'tinkergraph';
@@ -323,7 +323,7 @@ TEXT
         foreach($optionals as $class => $section) {
             try {
                 $fullClass = "\Exakat\Vcs\\$class";
-                $vcs = new $fullClass($this->config->project, $this->config->projects_root);
+                $vcs = new $fullClass($this->config->project, $this->config->code_dir);
                 $stats[$section] = $vcs->getInstallationInfo();
             } catch (HelperException $e) {
                 $stats[$section] = array('installed' => 'No');
@@ -336,12 +336,12 @@ TEXT
     private function checkPHP($pathToBinary, $displayedVersion) {
         $stats = array();
         
-        $stats['configured'] = 'Yes ('.$pathToBinary.')';
+        $stats['configured'] = 'Yes (' . $pathToBinary . ')';
 
         try {
             new Phpexec($displayedVersion, $pathToBinary);
         } catch (NoPhpBinary $e) {
-            $stats['installed'] = 'Invalid path : '.$pathToBinary;
+            $stats['installed'] = 'Invalid path : ' . $pathToBinary;
         } finally {
             return $stats;
         }
@@ -357,9 +357,9 @@ TEXT
         if (empty($this->config->tinkergraph_folder)) {
             $stats['configured'] = 'No tinkergraph configured in config/exakat.ini.';
         } elseif (!file_exists($this->config->tinkergraph_folder)) {
-            $stats['installed'] = 'No (folder : '.$this->config->tinkergraph_folder.')';
+            $stats['installed'] = 'No (folder : ' . $this->config->tinkergraph_folder . ')';
         } else {
-            $stats['installed'] = 'Yes (folder : '.$this->config->tinkergraph_folder.')';
+            $stats['installed'] = 'Yes (folder : ' . $this->config->tinkergraph_folder . ')';
             $stats['host'] = $this->config->tinkergraph_host;
             $stats['port'] = $this->config->tinkergraph_port;
 
@@ -371,7 +371,7 @@ TEXT
             $stats['gremlin version'] = $gremlinVersion;
 
             if (file_exists("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) {
-                $stats['running'] = 'Yes (PID : '.trim(file_get_contents("{$this->config->tinkergraph_port}/db/tinkergraph.pid")).')';
+                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) . ')';
             }
         }
         
@@ -384,9 +384,9 @@ TEXT
         if (empty($this->config->gsneo4j_folder)) {
             $stats['configured'] = 'No tinkergraph/neo4j configured in config/exakat.ini.';
         } elseif (!file_exists($this->config->gsneo4j_folder)) {
-            $stats['installed'] = 'No (folder : '.$this->config->gsneo4j_folder.')';
-        } elseif (!file_exists($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/')) {
-            $stats['installed'] = 'Partially (missing neo4j folder : '.$this->config->gsneo4j_folder.')';
+            $stats['installed'] = 'No (folder : ' . $this->config->gsneo4j_folder . ')';
+        } elseif (!file_exists($this->config->gsneo4j_folder . '/ext/neo4j-gremlin/')) {
+            $stats['installed'] = 'Partially (missing neo4j folder : ' . $this->config->gsneo4j_folder . ')';
         } else {
             $stats['installed'] = "Yes (folder : {$this->config->gsneo4j_folder})";
             $stats['host'] = $this->config->gsneo4j_host;
@@ -404,7 +404,7 @@ TEXT
             $stats['gremlin version'] = $gremlinVersion;
 
             $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
-            $neo4jJar = array_filter($neo4jJar, function($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
+            $neo4jJar = array_filter($neo4jJar, function ($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
             $neo4jVersion = basename(array_pop($neo4jJar));
 
             //neo4j-2.3.3.jar
@@ -412,7 +412,7 @@ TEXT
             $stats['neo4j version'] = $neo4jVersion;
             
             if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
-                $stats['running'] = 'Yes (PID : '.trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")).')';
+                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) . ')';
             }
         }
 

@@ -33,9 +33,9 @@ class OtherSiblings extends DSL {
         ++$sibling;
         
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("sibling'.$sibling.'").in("'.$link.'").out("'.$link.'").where(neq("sibling'.$sibling.'"))');
+            return new Command('as("sibling' . $sibling . '").in("' . $link . '").out("' . $link . '").where(neq("sibling' . $sibling . '"))');
         } else {
-            return new Command('in("'.$link.'").out("'.$link.'")');
+            return new Command('in("' . $link . '").out("' . $link . '")');
         }
     }
 }

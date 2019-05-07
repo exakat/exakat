@@ -30,7 +30,7 @@ class IsUppercase extends DSL {
     public function run() {
         list($property) = func_get_args();
         
-        return new Command('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
+        return new Command('filter{it.get().value("' . $property . '") == it.get().value("' . $property . '").toUpperCase()}');
     }
 }
 ?>

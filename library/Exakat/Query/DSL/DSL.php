@@ -145,7 +145,7 @@ abstract class DSL {
         if (is_array($value)) {
             return makeList($value);
         } elseif (is_string($value)) {
-            return '"'.$value.'"';
+            return '"' . $value . '"';
         } else {
             assert(false, '$v is not a string or an array');
         }
@@ -178,15 +178,15 @@ abstract class DSL {
 
     protected function assertLink($link) {
         if (is_string($link)) {
-            assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link.' is no more');
+            assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link . ' is no more');
             assert($link === strtoupper($link), "Wrong format for LINK name : $link");
         } elseif (is_array($link)) {
             foreach($link as $l) {
-                assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l.' is no more');
+                assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l . ' is no more');
                 assert($l === strtoupper($l), "Wrong format for LINK name : $l");
             }
         } else {
-            assert(false, 'Unsupported type for link : '.gettype($link));
+            assert(false, 'Unsupported type for link : ' . gettype($link));
         }
         return true;
     }
@@ -201,7 +201,7 @@ abstract class DSL {
                 assert($t === strtoupper($t), "Wrong format for TOKEN name : $t");
             }
         } else {
-            assert(false, 'Unsupported type for token : '.gettype($token));
+            assert(false, 'Unsupported type for token : ' . gettype($token));
         }
         return true;
     }
@@ -214,7 +214,7 @@ abstract class DSL {
                 assert($a === ucfirst(strtolower($a)), "Wrong format for Atom name : $a");
             }
         } else {
-            assert(false, 'Unsupported type for atom : '.gettype($atom));
+            assert(false, 'Unsupported type for atom : ' . gettype($atom));
         }
 
         return true;
@@ -223,14 +223,14 @@ abstract class DSL {
     protected function assertAnalyzer($analyzer) {
         if (is_string($analyzer)) {
             assert(preg_match('#^[A-Z]\w+/[A-Z]\w+$#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
-            assert(class_exists('\\Exakat\\Analyzer\\'.str_replace('/', '\\', $analyzer)), "No such analyzer as $analyzer");
+            assert(class_exists('\\Exakat\\Analyzer\\' . str_replace('/', '\\', $analyzer)), "No such analyzer as $analyzer");
         } elseif (is_array($analyzer)) {
             foreach($analyzer as $a) {
                 assert(preg_match('#^[A-Z]\W\w+/[A-Z]\W\w+$#', $a) !== false, "Wrong format for Analyzer : $a");
-                assert(class_exists('\\Exakat\\Analyzer\\'.str_replace('/', '\\', $a)), "No such analyzer as $a");
+                assert(class_exists('\\Exakat\\Analyzer\\' . str_replace('/', '\\', $a)), "No such analyzer as $a");
             }
         } else {
-            assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));
+            assert(false, 'Unsupported type for analyzer : ' . gettype($analyzer));
         }
         
         return true;
@@ -242,8 +242,8 @@ abstract class DSL {
 
     protected function assertProperty($property) {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified')) , 'Wrong format for property name : "'.$property.'"');
-            assert($this->isProperty($property), 'No such property in Atom : "'.$property.'"');
+            assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified')) , 'Wrong format for property name : "' . $property . '"');
+            assert($this->isProperty($property), 'No such property in Atom : "' . $property . '"');
         } elseif (is_array($property)) {
             $properties = $property;
             foreach($properties as $property) {
@@ -251,7 +251,7 @@ abstract class DSL {
                 assert($this->isProperty($property), "No such property in Atom : '$property'");
             }
         } else {
-            assert(false, 'Unsupported type for property : '.gettype($property));
+            assert(false, 'Unsupported type for property : ' . gettype($property));
         }
         return true;
     }
@@ -273,7 +273,7 @@ abstract class DSL {
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
         } else {
-            assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
+            assert(false, __METHOD__ . ' received an unprocessable object ' . gettype($code));
         }
     }
 
@@ -294,7 +294,7 @@ abstract class DSL {
             } elseif (is_string($l)) {
                 $return[] = ".$direction(\"$l\")";
             } else {
-                assert(false, __METHOD__.' received an unprocessable object '.gettype($l));
+                assert(false, __METHOD__ . ' received an unprocessable object ' . gettype($l));
             }
         }
         

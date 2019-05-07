@@ -31,11 +31,11 @@ class ZendF3 {
 
     public function __construct($path, $is_phar) {
         if ($is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf3').'.sqlite';
-            copy($path.'/zendf3.sqlite', $this->phar_tmp);
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf3') . '.sqlite';
+            copy($path . '/zendf3.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $path.'/zendf3.sqlite';
+            $docPath = $path . '/zendf3.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
@@ -51,7 +51,7 @@ class ZendF3 {
         if ($component !== null) {
             $query .= '  JOIN components 
                       ON releases.component_id = components.id 
- WHERE components.component = "'.$component.'"';
+ WHERE components.component = "' . $component . '"';
         }
         $query .= ' ORDER BY 1';
         $res = $this->sqlite->query($query);
@@ -72,7 +72,7 @@ class ZendF3 {
                       ON namespaces.release_id = releases.id 
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"release-$release.0\"";
         }
@@ -99,7 +99,7 @@ class ZendF3 {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"release-$release.0\"";
         }
@@ -126,7 +126,7 @@ class ZendF3 {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"release-$release.0\"";
         }
@@ -148,7 +148,7 @@ class ZendF3 {
     public function getDeprecated($component = null, $release = null) {
         $where = array();
         if ($component !== null) {
-            $where[] = 'components.component = "'.$component.'"';
+            $where[] = 'components.component = "' . $component . '"';
         }
 
         if ($release !== null) {
@@ -158,7 +158,7 @@ class ZendF3 {
         if (empty($where)) {
             $whereSQL = '';
         } else {
-            $whereSQL = ' WHERE '.implode(' AND ', $where);
+            $whereSQL = ' WHERE ' . implode(' AND ', $where);
         }
         
         

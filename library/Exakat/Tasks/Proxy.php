@@ -33,18 +33,18 @@ class Proxy extends Tasks {
         if ($this->config->stop    === true ||
             $this->config->restart === true
             ) {
-            $display = @file_get_contents('http://localhost:'.self::PORT.'?json=["stop"]');
+            $display = @file_get_contents('http://localhost:' . self::PORT . '?json=["stop"]');
             if (empty($display)) {
                 $display = 'No proxy found';
             }
-            display('Shut proxy server ('.$display.')');
+            display('Shut proxy server (' . $display . ')');
             
             if ($this->config->stop === true) {
                 return;
             }
         }
 
-        if (file_exists($this->config->dir_root.'/projects/proxy.php')) {
+        if (file_exists($this->config->dir_root . '/projects/proxy.php')) {
             display('A server is already installed. Aborting.');
             return;
         }
@@ -54,19 +54,19 @@ class Proxy extends Tasks {
         unset($slaves['ici']);   // remove queue, but why ?
 
         display('Copy router server');
-        $php = file_get_contents($this->config->dir_root.'/server/proxy.php');
+        $php = file_get_contents($this->config->dir_root . '/server/proxy.php');
         $php = str_replace('__PHP__', $this->config->php, $php);
         $php = str_replace('__EXAKAT__', $this->config->executable, $php);
         $php = str_replace('__SLAVES__', var_export($slaves, true), $php);
-        file_put_contents($this->config->projects_root.'/projects/proxy.php', $php);
+        file_put_contents($this->config->projects_root . '/projects/proxy.php', $php);
 
-        if (!file_exists($this->config->projects_root.'/projects/server.log')) {
-            file_put_contents($this->config->projects_root.'/projects/server.log', date('r')."\tCreated file\n");
+        if (!file_exists($this->config->projects_root . '/projects/server.log')) {
+            file_put_contents($this->config->projects_root . '/projects/server.log', date('r') . "\tCreated file\n");
         }
         
         display('Start server');
 //        exec($this->config->php.' -S 0.0.0.0:'.self::PORT.' -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/proxy.php > /dev/null 2 > /dev/null &');
-        exec($this->config->php.' -S 0.0.0.0:'.self::PORT.' -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/proxy.php > /dev/null 2>&1 > /dev/null & ');
+        exec($this->config->php . ' -S 0.0.0.0:' . self::PORT . ' -t ' . $this->config->projects_root . '/projects/ ' . $this->config->projects_root . '/projects/proxy.php > /dev/null 2>&1 > /dev/null & ');
         display('Started server');
     }
 }

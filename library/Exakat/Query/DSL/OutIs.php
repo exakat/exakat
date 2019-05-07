@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class OutIs extends DSL {
     public function run() {
-        assert(func_num_args() <= 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         list($link) = func_get_args();
         
         if (empty($link)) {
@@ -40,7 +40,7 @@ class OutIs extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {
-            return new Command('out('.$this->SorA($diff).')');
+            return new Command('out(' . $this->SorA($diff) . ')');
         }
     }
 }

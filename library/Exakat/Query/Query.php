@@ -79,7 +79,7 @@ class Query {
         assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
         assert(!empty($commands), 'No command in side query');
 
-        $query = '__.'.implode(".\n", $commands);
+        $query = '__.' . implode(".\n", $commands);
         $args = array_column($this->commands, 'arguments');
         $args = array_merge(...$args);
 
@@ -96,7 +96,7 @@ class Query {
 
     public function prepareQuery($analyzerId) {
         assert($this->query === null, 'query is already ready');
-        assert(empty($this->sides), 'sides are not empty : left '.count($this->sides).' element');
+        assert(empty($this->sides), 'sides are not empty : left ' . count($this->sides) . ' element');
 
         // @doc This is when the object is a placeholder for others.
         if (empty($this->commands)) {
@@ -119,18 +119,18 @@ class Query {
             array_shift($commands);
             $this->query = "g{$sack}.V().$first.groupCount(\"processed\").by(count()).as(\"first\")";
             if (!empty($commands)) {
-                $this->query .= '.'.implode(".\n", $commands);
+                $this->query .= '.' . implode(".\n", $commands);
             }
         } elseif (substr($commands[0], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             array_shift($commands);
             $arg0 = array_pop($this->commands[0]->arguments);
             unset($this->commands[0]);
-            $this->query = 'g'.$sack.'.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
+            $this->query = 'g' . $sack . '.V().hasLabel("Analysis").has("analyzer", within(' . makeList($arg0) . ')).out("ANALYZED").as("first").groupCount("processed").by(count())';
             if (!empty($commands)) {
-                $this->query .= '.'.implode(".\n", $commands);
+                $this->query .= '.' . implode(".\n", $commands);
             }
         } else {
-            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$commands[1]);
+            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[1]);
         }
 
         $arguments = array_column($this->commands, 'arguments');
@@ -176,7 +176,7 @@ GREMLIN;
     public function printRawQuery() {
         $this->prepareRawQuery();
 
-        print $this->query.PHP_EOL;
+        print $this->query . PHP_EOL;
         print_r($this->arguments);
         die(__METHOD__);
     }
@@ -202,7 +202,7 @@ GREMLIN;
         foreach($commands as $command) {
             if ($command->getSack() !== null) {
                 if ($toGremlin === self::TO_GREMLIN) {
-                    return '.withSack{'.$command->getSack().'}{it.clone()}';
+                    return '.withSack{' . $command->getSack() . '}{it.clone()}';
                 } else {
                     return $command->getSack();
                 }

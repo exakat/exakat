@@ -31,7 +31,7 @@ class MultipleIdenticalClosure extends Analyzer {
              ->values('ctype1');
         $blocks = $this->rawQuery()->toArray();
         $all = array_count_values($blocks);
-        $multiples = array_filter($all, function($x) { return $x > 1;});
+        $multiples = array_filter($all, function ($x) { return $x > 1;});
 
         // Closures with identical blocks
         $this->atomIs('Closure')

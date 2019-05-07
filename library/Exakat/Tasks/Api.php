@@ -34,24 +34,24 @@ class Api extends Tasks {
         if ($this->config->stop    === true ||
             $this->config->restart === true
             ) {
-            $display = @file_get_contents('http://localhost:'.self::PORT.'/?json=["stop"]');
+            $display = @file_get_contents('http://localhost:' . self::PORT . '/?json=["stop"]');
             if (empty($display)) {
                 $display = 'No server found';
             }
-            display('Shut down server ('.$display.')');
+            display('Shut down server (' . $display . ')');
             
             if ($this->config->stop === true) {
                 return;
             }
         }
 
-        if (file_exists($this->config->dir_root.'/projects/api.php')) {
+        if (file_exists($this->config->dir_root . '/projects/api.php')) {
             display('An API is already installed. Aborting.');
             return;
         }
 
         display('Copy router server');
-        $php = file_get_contents($this->config->dir_root.'/server/api.php');
+        $php = file_get_contents($this->config->dir_root . '/server/api.php');
 
         $tags = array('__PHP__', '__EXAKAT__', '__SECRET_KEY__');
         $values = array($this->config->php, $this->config->executable, $this->config->transit_key);
@@ -60,11 +60,11 @@ class Api extends Tasks {
         file_put_contents("{$this->config->projects_root}/projects/api.php", $php);
 
         if (!file_exists("{$this->config->projects_root}/projects/api.log")) {
-            file_put_contents("{$this->config->projects_root}/projects/api.log", date('r')."\tCreated file\n");
+            file_put_contents("{$this->config->projects_root}/projects/api.log", date('r') . "\tCreated file\n");
         }
 
         display('Start api');
-        exec($this->config->php.' -S 0.0.0.0:'.self::PORT.' -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/api.php > /dev/null 2 > /dev/null &');
+        exec($this->config->php . ' -S 0.0.0.0:' . self::PORT . ' -t ' . $this->config->projects_root . '/projects/ ' . $this->config->projects_root . '/projects/api.php > /dev/null 2 > /dev/null &');
         display('Started api');
     }
 }

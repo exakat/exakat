@@ -91,15 +91,15 @@ class Analyze extends Tasks {
 
             $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );
 
-            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', implode('-', $this->config->thema)));
-            $this->log = new Log('analyze.'.strtolower(str_replace(' ', '_', implode('-', $this->config->thema))),
+            $this->logname = 'analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->thema)));
+            $this->log = new Log('analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->thema))),
                                  "{$this->config->projects_root}/projects/{$this->config->project}");
         } else {
             throw new NeedsAnalyzerThema();
         }
 
         $this->log->log("Analyzing project $project");
-        $this->log->log("Runnable analyzers\t".count($analyzersClass));
+        $this->log->log("Runnable analyzers\t" . count($analyzersClass));
 
         $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
@@ -123,6 +123,7 @@ class Analyze extends Tasks {
                 echo $this->progressBar->advance();
             }
 
+            assert($analyzers[$analyzer_class] !== null, "Unknown analyzer $analyzer_class from dependsOn()\n");
             $this->analyze($analyzers[$analyzer_class], $analyzer_class);
         }
 
@@ -234,7 +235,7 @@ GREMLIN;
                 $end = microtime(true);
                 display( "$analyzer_class : DSL building exception\n");
                 display($e->getMessage());
-                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$e->getMessage());
+                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 
@@ -242,7 +243,7 @@ GREMLIN;
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
                 display($e->getMessage());
-                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$e->getMessage());
+                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 
@@ -256,7 +257,7 @@ GREMLIN;
             $total_results = $count;
             display( "$analyzer_class run ($count / $processed)\n");
             $end = microtime(true);
-            $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
+            $this->log->log("$analyzer_class\t" . ($end - $begin) . "\t$count\t$processed\t$queries\t$rawQueries");
             // storing the number of row found in Hash table (datastore)
             $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
         }

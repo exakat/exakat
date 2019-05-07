@@ -49,7 +49,6 @@ class LogicalMistakes extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
-
         $this->prepareQuery();
 
         //if ( $a == 1 || $a != 2)
@@ -74,7 +73,6 @@ class LogicalMistakes extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
-
         $this->prepareQuery();
 
         //if ( $a == 1 && $a == 2)
@@ -99,7 +97,6 @@ class LogicalMistakes extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
-
         $this->prepareQuery();
 
         //if ( $a == 1 && $a != 2)
@@ -124,9 +121,8 @@ class LogicalMistakes extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
-
         $this->prepareQuery();
-        
+
         // Extension to this rule :
         // Check for methodcalls, function calls
         // add support for xor (although, it is rare)

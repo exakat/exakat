@@ -31,7 +31,7 @@ class FunctionInside extends DSL {
         list($fullnspath) = func_get_args();
 
         // $fullcode is a name of a variable
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
+        $gremlin = 'emit( ).repeat( __.out(' . self::$linksDown . ').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times(' . self::$MAX_LOOPING . ').hasLabel("Functioncall").has("fullnspath", within(***))';
         return new Command($gremlin, array(makeArray($fullnspath)));
     }
 }

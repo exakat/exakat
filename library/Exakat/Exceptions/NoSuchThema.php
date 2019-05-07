@@ -28,7 +28,7 @@ class NoSuchThema extends \RuntimeException {
         $exception = "No such analysis thema as '$message'. \n";
         
         if (!empty($themes)) {
-            $exception .= 'You can try : '.implode(', ', $themes).PHP_EOL;
+            $exception .= 'You can try : ' . implode(', ', $themes) . PHP_EOL;
         }
 
         parent::__construct($exception);

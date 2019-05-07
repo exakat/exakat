@@ -58,42 +58,42 @@ class Anonymize extends Tasks {
 
                 $files = rglob($dir);
                 $total = 0;
-                if (file_exists($dir.'.anon')) {
-                    rmdirRecursive($dir.'.anon');
+                if (file_exists($dir . '.anon')) {
+                    rmdirRecursive($dir . '.anon');
                 }
-                mkdir($dir.'.anon', 0755);
+                mkdir($dir . '.anon', 0755);
                 foreach($files as $file) {
                     if ($this->checkCompilation($file)) {
                         ++$this->strings;
-                        $total += (int) $this->processFile($file, $dir.'.anon/'.$this->strings.'.php');
+                        $total += (int) $this->processFile($file, $dir . '.anon/' . $this->strings . '.php');
                     }
                 }
                 display("Anonymized $total files\n");
             } elseif (($project = $this->config->project) !== 'default') {
                 display("Anonymizing project $project\n");
-                $dir = $this->config->projects_root.'/projects/'.$project.'/'.$project;
+                $dir = $this->config->projects_root . '/projects/' . $project . '/' . $project;
 
-                if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
+                if (!file_exists($this->config->projects_root . '/projects/' . $project)) {
                     throw new NoSuchProject($project);
                 }
 
-                if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code')) {
+                if (!file_exists($this->config->projects_root . '/projects/' . $project . '/code')) {
                     throw new NoCodeInProject($project);
                 }
 
                 $files = $this->datastore->getCol('files', 'file');
 
-                $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
+                $path = $this->config->projects_root . '/projects/' . $this->config->project . '/code';
 
                 $total = 0;
-                if (file_exists($dir.'.anon')) {
-                    rmdirRecursive($dir.'.anon');
+                if (file_exists($dir . '.anon')) {
+                    rmdirRecursive($dir . '.anon');
                 }
-                mkdir($dir.'.anon', 0755);
+                mkdir($dir . '.anon', 0755);
                 foreach($files as $file) {
-                    if ($this->checkCompilation($path.$file)) {
+                    if ($this->checkCompilation($path . $file)) {
                         ++$this->strings;
-                        $total += (int) $this->processFile($path.$file, $dir.'.anon/'.$this->strings.'.php');
+                        $total += (int) $this->processFile($path . $file, $dir . '.anon/' . $this->strings . '.php');
                     }
                 }
                 display("Anonymized $total files\n");
@@ -110,12 +110,12 @@ class Anonymize extends Tasks {
             }
 
             if (!$this->checkCompilation($file)) {
-                die('Can\'t anonymize '.$file.' as it doesn\'t compile with PHP '.PHP_VERSION."\n");
+                die('Can\'t anonymize ' . $file . ' as it doesn\'t compile with PHP ' . PHP_VERSION . "\n");
             }
             $this->processFile($file);
         }
 
-        display( 'Processing file '.$file.' into '.$file.".anon\n");
+        display( 'Processing file ' . $file . ' into ' . $file . ".anon\n");
     }
 
     private function processFile($file, $anonFile = null) {
@@ -166,7 +166,7 @@ class Anonymize extends Tasks {
                             if (isset($this->variableNames[$t[1]])) {
                                 $t[1] = $this->variableNames[$t[1]];
                             } else {
-                                $this->variableNames[$t[1]] = '$'.++$this->variables;
+                                $this->variableNames[$t[1]] = '$' . ++$this->variables;
                                 $t[1] = $this->variableNames[$t[1]];
                             }
                         }
@@ -179,7 +179,7 @@ class Anonymize extends Tasks {
                         if (isset($this->stringsNames[$t[1]])) {
                             $t[1] = $this->stringsNames[$t[1]];
                         } else {
-                            $this->stringsNames[$t[1]] = "'".$this->strings."'";
+                            $this->stringsNames[$t[1]] = "'" . $this->strings . "'";
                             $t[1] = $this->stringsNames[$t[1]];
                         }
                         break;
@@ -223,12 +223,12 @@ class Anonymize extends Tasks {
                         }
 
                         if ($short[0] == "'") {
-                            $t[1] = "<<<'".$this->stringsNames[$short]."'\n";
+                            $t[1] = "<<<'" . $this->stringsNames[$short] . "'\n";
                         } else {
-                            $t[1] = '<<<'.$this->stringsNames[$short]."\n";
+                            $t[1] = '<<<' . $this->stringsNames[$short] . "\n";
                         }
 
-                        $heredoc = "\n".$this->stringsNames[$short];
+                        $heredoc = "\n" . $this->stringsNames[$short];
 
                         break;
 
@@ -394,7 +394,7 @@ class Anonymize extends Tasks {
             }
         }
         if ($anonFile === null) {
-            $anonFile = $file.'.anon';
+            $anonFile = $file . '.anon';
         }
 
         file_put_contents($anonFile, $php);
@@ -403,7 +403,7 @@ class Anonymize extends Tasks {
     }
 
     private function checkCompilation($file) {
-        $res = shell_exec($this->config->php . ' -l '.$file.' 2>&1');
+        $res = shell_exec($this->config->php . ' -l ' . $file . ' 2>&1');
         //@todo : differentiate fatal error and non-fatal ones.
         return substr($res, 0, 28) == 'No syntax errors detected in';
     }

@@ -30,8 +30,8 @@ class FunctioncallIs extends DSL {
     public function run() {
         list($fullnspath) = func_get_args();
 
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for ' . __METHOD__);
+        assert($fullnspath !== null, 'fullnspath can\'t be null in ' . __METHOD__);
 
         $diff = $this->normalizeFunctioncalls($fullnspath);
         

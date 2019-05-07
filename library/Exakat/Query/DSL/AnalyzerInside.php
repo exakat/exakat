@@ -36,7 +36,7 @@ class AnalyzerInside extends DSL {
 //            return new Command(Query::STOP_QUERY);
 //        }
 
-        $gremlin = 'emit().repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').where( __.in("ANALYZED").has("analyzer", within(***)))';
+        $gremlin = 'emit().repeat( out(' . self::$linksDown . ') ).times(' . self::$MAX_LOOPING . ').where( __.in("ANALYZED").has("analyzer", within(***)))';
         return new Command($gremlin, array($analyzers));
     }
 }

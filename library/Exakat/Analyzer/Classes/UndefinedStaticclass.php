@@ -25,12 +25,26 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedStaticclass extends Analyzer {
+    public function dependsOn() {
+        return  array('Classes/IsExtClass',
+                      'Composer/IsComposerNsname',
+                      'Modules/DefinedClasses',
+                      'Interfaces/IsExtInterface',
+                     );
+    }
+
     public function analyze() {
         //echo  undefinedClass::class
         $this->atomIs('Staticclass')
              ->outIs('CLASS')
              ->hasNoIn('DEFINITION')
              ->atomIs(array('Identifier', 'Nsname'))
+             ->analyzerIsNot(array('Classes/IsExtClass',
+                                   'Composer/IsComposerNsname',
+                                   'Modules/DefinedClasses',
+                                   'Interfaces/IsExtInterface',
+                                  )
+             )
              ->back('first');
         $this->prepareQuery();
     }

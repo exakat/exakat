@@ -110,7 +110,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['severity'])) {
-                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['severity']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['severity']);
                 }
             }
         }
@@ -128,7 +128,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['timetofix'])) {
-                    $return[$analyzer] = constant(Analyzer::class.'::'.$ini['timetofix']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['timetofix']);
                 }
             }
         }
@@ -163,7 +163,7 @@ class ThemesExtra {
                 $class = "Exakat\\Analyzer\\$name";
             }
         } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
+            $class = 'Exakat\\Analyzer\\' . str_replace('/', '\\', $name);
         } else {
             $class = $name;
         }
@@ -184,7 +184,7 @@ class ThemesExtra {
     public function getSuggestionThema($thema) {
         $list = $this->listAllThemes();
 
-        return array_filter($list, function($c) use ($thema) {
+        return array_filter($list, function ($c) use ($thema) {
             foreach($thema as $theme) {
                 $l = levenshtein($c, $theme);
                 if ($l < 8) {
@@ -196,7 +196,7 @@ class ThemesExtra {
     }
     
     public function getSuggestionClass($name) {
-        return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
+        return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
 
             return $l < 8;

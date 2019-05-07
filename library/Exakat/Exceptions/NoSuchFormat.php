@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoSuchFormat extends \RuntimeException {
     public function __construct($requested, $formats, $code = 0, \Exception $previous = null) {
-        parent::__construct("Format '".$requested."' doesn't exist. Choose among : ".implode(', ', $formats), $code, $previous);
+        parent::__construct("Format '" . $requested . "' doesn't exist. Choose among : " . implode(', ', $formats), $code, $previous);
     }
 }
 

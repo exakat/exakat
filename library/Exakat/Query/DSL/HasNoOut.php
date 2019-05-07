@@ -36,7 +36,7 @@ class HasNoOut extends DSL {
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {
-            return new Command('not( where( __.out('.$this->SorA($diff).') ) )');
+            return new Command('not( where( __.out(' . $this->SorA($diff) . ') ) )');
         }
     }
 }

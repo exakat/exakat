@@ -28,15 +28,15 @@ class IsComponent extends Analyzer {
         $inert = '.not(hasLabel("Usenamespace", "Class", "Const", "Interface", "Function", "Trait", "Include", "Global", "Static", "Void", "Defineconstant"))
                   .not(where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }) )';
         
-        $inertWithIfthen = $inert.'
-                  .where( __.hasLabel("Ifthen").where( __.out("THEN", "ELSE").out("EXPRESSION")'.$inert.'.count().is(eq(0)) ).count().is(eq(0)) )';
+        $inertWithIfthen = $inert . '
+                  .where( __.hasLabel("Ifthen").where( __.out("THEN", "ELSE").out("EXPRESSION")' . $inert . '.count().is(eq(0)) ).count().is(eq(0)) )';
         
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->outIs('CODE')
              ->raw('coalesce(__.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"),  __.filter{true} )')
-             ->raw('where( __.out("EXPRESSION")'.$inertWithIfthen.'.count().is(eq(0)) )')
+             ->raw('where( __.out("EXPRESSION")' . $inertWithIfthen . '.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

@@ -28,17 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
-
-        $notPregMatchWithLiteral = <<<'GREMLIN'
-not( 
-    where( 
-        __.has("fullnspath", "\\\\preg_match")
-          .out("ARGUMENT")
-          .has("rank", 0)
-          .not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member", "Functioncall", "Methodcall", "Staticmethodcall" )))
-         )
-   )
-GREMLIN;
         $fullnspaths = makeFullnspath($operator);
         
         // if (.. == strpos(..)) {}
@@ -49,7 +38,16 @@ GREMLIN;
              ->outIs('LEFT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
              ->back('first')
-             ->raw($notPregMatchWithLiteral);
+             ->not(
+                $this->side()
+                     ->fullnspathIs('\preg_match')
+                     ->outWithRank('ARGUMENT', 0)
+                     ->not(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->atomIs(array('Variable', 'Array', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+                     )
+             );
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
@@ -60,7 +58,16 @@ GREMLIN;
              ->outIs('RIGHT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
              ->back('first')
-             ->raw($notPregMatchWithLiteral);
+             ->not(
+                $this->side()
+                     ->fullnspathIs('\preg_match')
+                     ->outWithRank('ARGUMENT', 0)
+                     ->not(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->atomIs(array('Variable', 'Array', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+                     )
+             );
         $this->prepareQuery();
 
         // if (strpos(..)) {}
@@ -69,7 +76,16 @@ GREMLIN;
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('first')
-             ->raw($notPregMatchWithLiteral);
+             ->not(
+                $this->side()
+                     ->fullnspathIs('\preg_match')
+                     ->outWithRank('ARGUMENT', 0)
+                     ->not(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->atomIs(array('Variable', 'Array', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+                     )
+             );
         $this->prepareQuery();
 
         // if ($x = strpos(..)) {}
@@ -80,7 +96,16 @@ GREMLIN;
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('first')
-             ->raw($notPregMatchWithLiteral);
+             ->not(
+                $this->side()
+                     ->fullnspathIs('\preg_match')
+                     ->outWithRank('ARGUMENT', 0)
+                     ->not(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->atomIs(array('Variable', 'Array', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+                     )
+             );
         $this->prepareQuery();
 
         // if (($x = strpos(..)) == false) {}
@@ -98,7 +123,16 @@ GREMLIN;
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('first')
-             ->raw($notPregMatchWithLiteral);
+             ->not(
+                $this->side()
+                     ->fullnspathIs('\preg_match')
+                     ->outWithRank('ARGUMENT', 0)
+                     ->not(
+                        $this->side()
+                             ->outIs('CONCAT')
+                             ->atomIs(array('Variable', 'Array', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+                     )
+             );
         $this->prepareQuery();
     }
 }

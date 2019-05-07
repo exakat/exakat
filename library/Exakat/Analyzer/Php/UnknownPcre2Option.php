@@ -41,7 +41,7 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
              ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('noDelimiter', '^\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.')\\$')
+             ->regexIs('noDelimiter', '^\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")(' . $options . ')\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -58,7 +58,7 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
              ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")(' . $options . ').\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -78,7 +78,7 @@ class UnknownPcre2Option extends Analyzer {
              ->back('concat')
              ->raw('filter{ it.get().value("fullcode").length() >= (delimiter + delimiterFinal).length() + 2 }')
              ->raw('filter{ (it.get().value("fullcode") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")(' . $options . ').\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -90,7 +90,7 @@ class UnknownPcre2Option extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')
-             ->regexIs('noDelimiter', '\\\\\\\\['.$letters.']')
+             ->regexIs('noDelimiter', '\\\\\\\\[' . $letters . ']')
              ->back('first');
         $this->prepareQuery();
     }

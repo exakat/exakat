@@ -70,7 +70,7 @@ class Drillinstructor extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
             $title = ($file == 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
@@ -105,7 +105,7 @@ MENU;
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -426,7 +426,7 @@ JAVASCRIPT;
         foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
-            $analyzers = $this->themes->getThemeAnalyzers(array('Level '.$level));
+            $analyzers = $this->themes->getThemeAnalyzers(array('Level ' . $level));
             if (empty($analyzers)) {
                 continue;
             }
@@ -464,7 +464,7 @@ SQL
                 $total += $row['count'];
                 $count += (int) $row['count'] === 0;
     
-                $levelRows .= '<tr><td>'.$ini['name']."</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
+                $levelRows .= '<tr><td>' . $ini['name'] . "</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
             }
 
             if ((count($analyzers) - 1) === 0) {
@@ -475,9 +475,9 @@ SQL
             }
             $color = $colors[$grade];
             
-            $levels .= '<tr><td style="background-color: #bbbbbb">Level '.$level.'</td>
-                            <td style="background-color: #bbbbbb">'.$total.'</td></td>
-                            <td style="background-color: '.$color.'">'.$grade.'</td></tr>'.PHP_EOL.
+            $levels .= '<tr><td style="background-color: #bbbbbb">Level ' . $level . '</td>
+                            <td style="background-color: #bbbbbb">' . $total . '</td></td>
+                            <td style="background-color: ' . $color . '">' . $grade . '</td></tr>' . PHP_EOL .
                        $levelRows;
         }
 

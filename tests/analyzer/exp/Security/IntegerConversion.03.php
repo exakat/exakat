@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('(int) $_GET[\'x\'] === 2', 
+$expected     = array('(int) $_GET[\'x\'] === 2',
                       '(int) $_GET[\'xc\'] === $c',
                       '(int) $_GET[\'xe\'] === $e',
                      );

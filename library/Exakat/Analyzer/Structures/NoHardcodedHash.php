@@ -34,7 +34,7 @@ class NoHardcodedHash extends Analyzer {
         foreach(array_keys((array) $algos) as $size) {
             $this->atomIs('String')
                  ->hasNoOut('CONCAT')
-                 ->regexIs('noDelimiter', '^[a-fA-Z0-9]{'.$size.'}\\$')
+                 ->regexIs('noDelimiter', '^[a-fA-Z0-9]{' . $size . '}\\$')
                  ->isNotMixedcase('noDelimiter')
                  ->noDelimiterIsNot($stopwords)
                  ->regexIsNot('noDelimiter', $regexDate)

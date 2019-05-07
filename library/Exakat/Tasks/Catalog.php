@@ -38,7 +38,7 @@ class Catalog extends Tasks {
         sort($themas);
         $themas = array_map( function ($x) {
             if (strpos($x, ' ') !== false) {
-                $x = '"'.$x.'"';
+                $x = '"' . $x . '"';
             }
             return $x;
         }, $themas);
@@ -55,8 +55,8 @@ class Catalog extends Tasks {
             $display = '';
 
             foreach($data as $theme => $list) {
-                $display .= count($list)." $theme : \n";
-                $display .= '   '.implode("\n   ", $list)."\n";
+                $display .= count($list) . " $theme : \n";
+                $display .= '   ' . implode("\n   ", $list) . "\n";
             }
 
             print $display;

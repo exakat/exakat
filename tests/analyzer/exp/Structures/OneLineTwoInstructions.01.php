@@ -1,12 +1,12 @@
 <?php
 
 $expected     = array('$a++',
-                      '$b++',
                       '$d++',
                       'h($i)',
                      );
 
 $expected_not = array('$c++',
+                      '$b++',
                       '$e = $f + 1',
                      );
 

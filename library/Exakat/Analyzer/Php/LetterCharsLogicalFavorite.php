@@ -44,7 +44,7 @@ GREMLIN;
         $this->atomIs('Logical')
              ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
                              'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
         
@@ -70,7 +70,7 @@ GREMLIN;
         $this->atomIs('Logical')
              ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
                              'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('filter{ x2 in *** ; }', $types)
              ->back('first');
         $this->prepareQuery();

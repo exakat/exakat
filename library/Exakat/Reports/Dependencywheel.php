@@ -147,26 +147,26 @@ class Dependencywheel extends Reports {
         }
 
         // Copy template
-        copyDir($this->config->dir_root.'/media/dependencywheel', $this->tmpName );
+        copyDir($this->config->dir_root . '/media/dependencywheel', $this->tmpName );
     }
 
     private function cleanFolder() {
-        $html = file_get_contents($this->tmpName.'/index.html');
+        $html = file_get_contents($this->tmpName . '/index.html');
 
         $html = str_replace(array('<MATRIX>',    '<PROJECT>',            '<PACKAGENAMES>'),
                             array($this->matrix, $this->config->project, $this->packagenames),
                             $html);
 
-        file_put_contents($this->tmpName.'/index.html', $html);
+        file_put_contents($this->tmpName . '/index.html', $html);
 
         if (file_exists($this->finalName)) {
-            rename($this->finalName, $this->tmpName.'2');
+            rename($this->finalName, $this->tmpName . '2');
         }
 
         rename($this->tmpName, $this->finalName);
 
-        if (file_exists($this->tmpName.'2')) {
-            rmdirRecursive($this->tmpName.'2');
+        if (file_exists($this->tmpName . '2')) {
+            rmdirRecursive($this->tmpName . '2');
         }
     }
 

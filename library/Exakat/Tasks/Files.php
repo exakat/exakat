@@ -61,7 +61,7 @@ class Files extends Tasks {
 
         display( "Searching for files \n");
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
-        display('Found '.count($files)." files.\n");
+        display('Found ' . count($files) . " files.\n");
 
         $tmpFileName = "{$this->config->tmp_dir}/files{$this->config->pid}.txt";
         $tmpFiles = array_map(function ($file) {
@@ -75,7 +75,7 @@ class Files extends Tasks {
 
         $missing = array();
         foreach($files as $file) {
-            if (!file_exists($this->config->code_dir.$file)) {
+            if (!file_exists($this->config->code_dir . $file)) {
                 $missing[] = $file;
             }
         }
@@ -84,7 +84,7 @@ class Files extends Tasks {
             throw new MissingFile($missing);
         }
 
-        $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
+        $analyzingVersion = $this->config->phpversion[0] . $this->config->phpversion[2];
         $this->datastore->cleanTable("compilation$analyzingVersion");
         $id = array_search($analyzingVersion, $versions);
         unset($versions[$id]);
@@ -97,9 +97,9 @@ class Files extends Tasks {
             }
 
             display("Check compilation for $version");
-            $stats['notCompilable'.$version] = -1;
+            $stats['notCompilable' . $version] = -1;
             
-            $shell = "cd {$this->config->code_dir}; cat $tmpFileName".' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = "cd {$this->config->code_dir}; cat $tmpFileName" . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "' . $this->config->{'php' . $version} . ' -l {} 2>&1 || true "';
 
             $res = trim(shell_exec($shell));
 
@@ -139,7 +139,7 @@ class Files extends Tasks {
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = "cd {$this->config->code_dir}; cat $tmpFileName |  xargs -n1 -P5 ".$this->config->php.' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = "cd {$this->config->code_dir}; cat $tmpFileName |  xargs -n1 -P5 " . $this->config->php . ' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
@@ -189,7 +189,7 @@ class Files extends Tasks {
                 }
                 $this->datastore->addRow('shortopentag', $shortOpenTag);
             } else {
-                $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
+                $this->log->log('Error in short open tag analyze : not the same number of files ' . count($nosot) . ' / ' . count($sot) . ".\n");
             }
         }
 
@@ -201,7 +201,7 @@ class Files extends Tasks {
         $hashes = array();
         $duplicates = 0;
         foreach($files as $id => $file) {
-            $fnv132 = hash_file('fnv132', $this->config->code_dir.$file);
+            $fnv132 = hash_file('fnv132', $this->config->code_dir . $file);
             if (isset($hashes[$fnv132])) {
                 $ignoredFiles[$file] = "Duplicate ({$hashes[$fnv132]})";
                 ++$duplicates;
@@ -250,7 +250,7 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);
-        display("\n + ".implode("\n + ", array_map(function ($x) { return $x['file']; }, $configFiles))."\n\n");
+        display("\n + " . implode("\n + ", array_map(function ($x) { return $x['file']; }, $configFiles)) . "\n\n");
         // Composer is check previously
 
         display('Done');
@@ -290,10 +290,10 @@ class Files extends Tasks {
     private function countTokens($path, &$files, &$ignoredFiles) {
         $tokens = 0;
 
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         foreach($files as $id => $file) {
-            if (($t = $php->countTokenFromFile($path.$file)) < 2) {
+            if (($t = $php->countTokenFromFile($path . $file)) < 2) {
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Not a PHP File';
             } else {
@@ -305,7 +305,7 @@ class Files extends Tasks {
     }
 
     private function checkLicence($dir) {
-        $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
+        $licenses = parse_ini_file($this->config->dir_root . '/data/license.ini');
         $licenses = $licenses['files'];
         
         foreach($licenses as $file) {
@@ -341,7 +341,7 @@ class Files extends Tasks {
         if (empty($ignoreDirs)) {
             $ignoreDirsRegex = '#^$#';
         } else {
-            $ignoreDirsRegex = '#('.implode('|', $ignoreDirs).')#';
+            $ignoreDirsRegex = '#(' . implode('|', $ignoreDirs) . ')#';
         }
 
         // Regex to include files and folders
@@ -362,7 +362,7 @@ class Files extends Tasks {
         if (empty($includeDirs)) {
             $includeDirsRegex = '';
         } else {
-            $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
+            $includeDirsRegex = '#^(' . implode('|', $includeDirs) . ')#';
         }
 
         $d = getcwd();
@@ -374,7 +374,7 @@ class Files extends Tasks {
         }
         chdir($path);
         $allFiles = rglob('.');
-        $allFiles = array_map(function($path) { return substr($path, 1); }, $allFiles);
+        $allFiles = array_map(function ($path) { return substr($path, 1); }, $allFiles);
         chdir($d);
 
         $exts = $config->file_extensions;

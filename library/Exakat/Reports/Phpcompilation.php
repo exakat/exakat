@@ -31,7 +31,7 @@ class Phpcompilation extends Reports {
 
     protected function _generate($analyzerList) {
         $themed = $this->themes->getThemeAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($themed).') AND count > -1');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count > -1');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
@@ -53,15 +53,15 @@ TEXT
         foreach($configureDirectives as $configure) {
             if (isset($sources[$configure->analysis])) {
                 if(!empty($configure->activate) && $sources[$configure->analysis] != 0) {
-                    $return[] = ' '.$configure->activate;
+                    $return[] = ' ' . $configure->activate;
                     if (!empty($configure->others)) {
-                        $return[] = '   '.implode(PHP_EOL.'    ', $configure->others);
+                        $return[] = '   ' . implode(PHP_EOL . '    ', $configure->others);
                     }
                     if (!empty($configure->pecl)) {
-                        $pecl[] = '#pecl install '.basename($configure->pecl).' ('.$configure->pecl.')';
+                        $pecl[] = '#pecl install ' . basename($configure->pecl) . ' (' . $configure->pecl . ')';
                     }
                 } elseif(!empty($configure->deactivate) && $sources[$configure->analysis] == 0) {
-                    $return[] = ' '.$configure->deactivate;
+                    $return[] = ' ' . $configure->deactivate;
                 }
             }
         }
@@ -79,8 +79,8 @@ TEXT
         $final = '';
         if (!empty($pecl)) {
             $c = count($pecl);
-            $final .= '# install '.( $c === 1 ? 'one' : $c).' extra extension'.($c === 1 ? '' : 's')."\n";
-            $final .= implode("\n", $pecl)."\n\n";
+            $final .= '# install ' . ( $c === 1 ? 'one' : $c) . ' extra extension' . ($c === 1 ? '' : 's') . "\n";
+            $final .= implode("\n", $pecl) . "\n\n";
         }
         $final .= implode("\n", $return);
         

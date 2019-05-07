@@ -48,7 +48,7 @@ SQL
                 continue;
             }
             $v = str_replace('_', '', $variable);
-            $r = array_filter( $variables, function($x) use ($v) { return str_replace('_', '', $x) === $v; });
+            $r = array_filter( $variables, function ($x) use ($v) { return str_replace('_', '', $x) === $v; });
             if (count($r) > 1) {
                 $results[$variable]['_'] = array_diff($r, array($variable));
             }
@@ -57,9 +57,9 @@ SQL
         // Only case as difference
         $lowerCase = array_map('mb_strtolower', $variables);
         $groupBy = array_count_values($lowerCase);
-        $diff = array_keys(array_filter($groupBy, function($x) { return $x > 1;}));
+        $diff = array_keys(array_filter($groupBy, function ($x) { return $x > 1;}));
         foreach($diff as $variable) {
-            $r = array_filter( $variables, function($x) use ($variable) { return mb_strtolower($x) === mb_strtolower($variable); });
+            $r = array_filter( $variables, function ($x) use ($variable) { return mb_strtolower($x) === mb_strtolower($variable); });
             if (count($r) > 1) {
                 $results[$variable]['case'] = array_diff($r, array($variable));
             }
@@ -69,7 +69,7 @@ SQL
         $numbers = preg_grep('/[0-9]/', $variables);
         foreach($numbers as $variable) {
             $v = str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $variable);
-            $r = array_filter( $variables, function($x) use ($v) { return str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $x) === $v; });
+            $r = array_filter( $variables, function ($x) use ($v) { return str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $x) === $v; });
             if (count($r) > 1) {
                 $results[$variable]['numbers'] = array_diff($r, array($variable));
             }
@@ -87,7 +87,7 @@ SQL
         $sizes[] = array();// Extra one for the next loop
         foreach($sizes as $size => $vars) {
             foreach($vars as $variable) {
-                $r = array_filter( $sizes[$size + 1], function($x) use ($variable) { return levenshtein($x, $variable) === 1; });
+                $r = array_filter( $sizes[$size + 1], function ($x) use ($variable) { return levenshtein($x, $variable) === 1; });
                 if (!empty($r)) {
                     $results[$variable]['one'] = $r;
                 }
@@ -98,7 +98,7 @@ SQL
         foreach($sizes as $size => $vars) {
             if ($size < 5) { continue; }
             foreach($vars as $variable) {
-                $r = array_filter( $vars, function($x) use ($variable) { return $this->groupSwap($x, $variable); });
+                $r = array_filter( $vars, function ($x) use ($variable) { return $this->groupSwap($x, $variable); });
                 if (!empty($r)) {
                     $results[$variable]['swap'] = $r;
                 }
@@ -115,7 +115,7 @@ SQL
             $d = substr($a, $i + 1);
             $e = substr($a, 1, $i);
             if ($d === $e) { continue; }
-            $c = '$'.$d.$e;
+            $c = '$' . $d . $e;
             if ($c === $b) {
                 return true;
             }

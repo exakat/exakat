@@ -35,6 +35,15 @@ class MultipleUnset extends Analyzer {
              ->atomIsNot('Unset')
              ->back('first');
         $this->prepareQuery();
+
+        // ++$a; unset($a); unset($b);
+        $this->atomIs('Unset')
+             ->is('rank', 0)
+             ->nextSibling('EXPRESSION')
+             ->atomIs('Unset')
+             ->back('first')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

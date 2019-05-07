@@ -31,7 +31,7 @@ class ZendF {
 
     public function __construct($path, $is_phar) {
         if ($is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf').'.sqlite';
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf') . '.sqlite';
             copy("$path/zendf.sqlite", $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {

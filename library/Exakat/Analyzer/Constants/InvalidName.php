@@ -37,7 +37,7 @@ class InvalidName extends Analyzer {
         $this->prepareQuery();
 
         $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
-        $invalidNames = "'".implode("', '", $invalidNames)."'";
+        $invalidNames = "'" . implode("', '", $invalidNames) . "'";
         
         // reserved keywords
         $this->atomIs('Defineconstant')
@@ -47,7 +47,7 @@ class InvalidName extends Analyzer {
              ->regexIs('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$')
              ->regexIs('noDelimiter', '\\\\\\\\')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
-             ->filter('['.$invalidNames.'].intersect(it.get().value("noDelimiter").tokenize("\\\\\\\\")).size() > 0');
+             ->filter('[' . $invalidNames . '].intersect(it.get().value("noDelimiter").tokenize("\\\\\\\\")).size() > 0');
         $this->prepareQuery();
     }
 }

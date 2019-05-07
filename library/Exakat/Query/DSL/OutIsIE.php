@@ -30,7 +30,7 @@ class OutIsIE extends DSL {
     public function run() : Command {
         list($links) = func_get_args();
 
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for ' . __METHOD__);
         assert($this->assertLink($links));
 
         $diff = $this->normalizeLinks($links);
@@ -38,7 +38,7 @@ class OutIsIE extends DSL {
             return new Command(Query::NO_QUERY);
         }
         
-        return new Command('until( __.not(outE('.$this->SorA($diff).')) ).repeat(out('.$this->SorA($diff).'))');
+        return new Command('until( __.not(outE(' . $this->SorA($diff) . ')) ).repeat(out(' . $this->SorA($diff) . '))');
     }
 }
 ?>

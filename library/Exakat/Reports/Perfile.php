@@ -54,14 +54,14 @@ class Perfile extends Reports {
         $line = strlen($maxLine) + $maxTitle + 10;
         foreach($perfile as $file => $issues) {
             sort($issues);
-            $text .= str_repeat('-', $line)."\n".
-                     " line  $file\n".
-                     str_repeat('-', $line)."\n".
-                     implode("\n", $issues)."\n".
-                     str_repeat('-', $line)."\n"
+            $text .= str_repeat('-', $line) . "\n" .
+                     " line  $file\n" .
+                     str_repeat('-', $line) . "\n" .
+                     implode("\n", $issues) . "\n" .
+                     str_repeat('-', $line) . "\n"
                      
-                     ."\n"
-                     ."\n";
+                     . "\n"
+                     . "\n";
         }
         
         return $text;

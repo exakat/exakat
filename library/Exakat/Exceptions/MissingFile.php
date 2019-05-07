@@ -29,11 +29,11 @@ class MissingFile extends \Exception {
         $c = count($missing);
         if ($c > 3) {
             $display = array_slice($missing, 0, 3);
-            $displayNames = implode(', ', $display).'...';
+            $displayNames = implode(', ', $display) . '...';
         } else {
             $displayNames = implode(', ', $missing);
         }
-        parent::__construct($c.' file'.($c > 1 ? 's are' : ' is').' missing from the cache ('.$displayNames.'). Please, run "files" command to refresh the cache. '.PHP_EOL.'Aborting'.PHP_EOL, $code, $previous);
+        parent::__construct($c . ' file' . ($c > 1 ? 's are' : ' is') . ' missing from the cache (' . $displayNames . '). Please, run "files" command to refresh the cache. ' . PHP_EOL . 'Aborting' . PHP_EOL, $code, $previous);
     }
 }
 

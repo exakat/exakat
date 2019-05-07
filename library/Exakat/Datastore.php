@@ -135,10 +135,10 @@ class Datastore {
                 $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
             }
             
-            $values[] = '('.makeList($d, "'").')';
+            $values[] = '(' . makeList($d, "'") . ')';
             
             if (count($values) > 10) {
-                $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
+                $query = "REPLACE INTO $table ($colList) VALUES " . makeList($values, '');
                 $this->sqliteWrite->querySingle($query);
 
                 $values = array();
@@ -146,7 +146,7 @@ class Datastore {
         }
 
         if (!empty($values)) {
-            $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
+            $query = "REPLACE INTO $table ($colList) VALUES " . makeList($values, '');
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -504,8 +504,8 @@ SQLITE;
     }
     
     public function ignoreFile($file, $reason = 'unknown') {
-        $this->sqliteWrite->query('DELETE FROM files WHERE file = "'.$this->sqliteWrite->escapeString($file).'"');
-        $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, "'.$this->sqliteWrite->escapeString($file).'", "'.$reason.'")');
+        $this->sqliteWrite->query('DELETE FROM files WHERE file = "' . $this->sqliteWrite->escapeString($file) . '"');
+        $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, "' . $this->sqliteWrite->escapeString($file) . '", "' . $reason . '")');
     }
 }
 

@@ -44,7 +44,7 @@ class Simpletable extends Reports {
         $list = $this->themes->getThemeAnalyzers(array('Analyze'));
         $list = makeList($list);
 
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.') ORDER BY analyzer';
+        $sqlQuery = 'SELECT * FROM results WHERE analyzer in (' . $list . ') ORDER BY analyzer';
         $res = $this->sqlite->query($sqlQuery);
         
         $results = array();
@@ -89,9 +89,9 @@ HTML;
 HTML;
         }
         
-        $html = file_get_contents($this->tmpName.'/index.html');
+        $html = file_get_contents($this->tmpName . '/index.html');
         $html = str_replace('<sections />', $table, $html);
-        file_put_contents($this->tmpName.'/index.html', $html);
+        file_put_contents($this->tmpName . '/index.html', $html);
     }
 
     private function initFolder() {
@@ -105,27 +105,27 @@ HTML;
         }
 
         // Copy template
-        copyDir($this->config->dir_root.'/media/simpletable', $this->tmpName );
+        copyDir($this->config->dir_root . '/media/simpletable', $this->tmpName );
     }
 
     private function cleanFolder() {
         if (file_exists($this->finalName)) {
-            rename($this->finalName, $this->tmpName.'2');
+            rename($this->finalName, $this->tmpName . '2');
         }
 
         rename($this->tmpName, $this->finalName);
 
-        if (file_exists($this->tmpName.'2')) {
-            rmdirRecursive($this->tmpName.'2');
+        if (file_exists($this->tmpName . '2')) {
+            rmdirRecursive($this->tmpName . '2');
         }
     }
 
     private function syntaxColoring($source) {
-        $colored = highlight_string('<?php '.$source.' ;?>', true);
+        $colored = highlight_string('<?php ' . $source . ' ;?>', true);
         $colored = substr($colored, 79, -65);
 
         if ($colored[0] === '$') {
-            $colored = '<span style="color: #0000BB">'.$colored;
+            $colored = '<span style="color: #0000BB">' . $colored;
         }
 
         return $colored;

@@ -60,7 +60,7 @@ class Extension extends Tasks {
         }
     
         $query = http_build_query(array('file' => $this->config->extension));
-        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?'.$query);
+        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?' . $query);
         
         if (hash('sha256', $raw) !== $this->extensionList[$this->config->extension]->sha256) {
             print "Error while downloading the extension : the security signatures don't match. Aborting\n";
@@ -79,7 +79,7 @@ class Extension extends Tasks {
 
     private function update() {
         if (!file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
-            print "No such extension to update.\n"."{$this->config->ext_root}/{$this->config->extension}.phar";
+            print "No such extension to update.\n" . "{$this->config->ext_root}/{$this->config->extension}.phar";
             return;
         }
 
@@ -100,7 +100,7 @@ class Extension extends Tasks {
         }
 
         $query = http_build_query(array('file' => $this->config->extension));
-        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?'.$query);
+        $raw = file_get_contents('https://www.exakat.io/extensions/index.php?' . $query);
         
         if (hash('sha256', $raw) !== $this->extensionList[$this->config->extension]->sha256) {
             print "Error while downloading the extension : the security signatures don't match. Keeping previous version. Aborting\n";
@@ -114,7 +114,7 @@ class Extension extends Tasks {
         $extensionPhar = "{$this->config->ext_root}/{$this->config->extension}.phar";
         file_put_contents($extensionPhar, $raw);
 
-        print "{$this->config->extension} upgraded to ".$this->extensionList[$this->config->extension]->version." with success!\n";
+        print "{$this->config->extension} upgraded to " . $this->extensionList[$this->config->extension]->version . " with success!\n";
     }
     
     private function uninstall() {
@@ -143,13 +143,13 @@ class Extension extends Tasks {
 
         print PHP_EOL;
         printf(self::FORMAT, 'Extension', 'Version', 'Build');
-        print str_repeat('-', 40).PHP_EOL;
+        print str_repeat('-', 40) . PHP_EOL;
         
         foreach($list as $extension) {
-            printf(self::FORMAT, $extension->name, $extension->version, '('.$extension->build.')');
+            printf(self::FORMAT, $extension->name, $extension->version, '(' . $extension->build . ')');
         }
 
-        print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;
+        print PHP_EOL . 'Total : ' . count($list) . ' extensions' . PHP_EOL;
     }
     
     private function local() {
@@ -158,7 +158,7 @@ class Extension extends Tasks {
     
         print PHP_EOL;
         printf(self::FORMAT, 'Extension', 'Version', 'Build');
-        print str_repeat('-', 40).PHP_EOL;
+        print str_repeat('-', 40) . PHP_EOL;
         foreach($list as $l) {
             // drop the .phar
             if (file_exists("phar://{$this->config->ext_root}/$l/config.ini")) {
@@ -168,10 +168,10 @@ class Extension extends Tasks {
                              'build'   => '',
                              );
             }
-            printf(self::FORMAT, substr($l, 0, -5), $ini['version'], '('.$ini['build'].')');
+            printf(self::FORMAT, substr($l, 0, -5), $ini['version'], '(' . $ini['build'] . ')');
         }
         
-        print PHP_EOL.'Total : '.count($list).' extensions'.PHP_EOL;
+        print PHP_EOL . 'Total : ' . count($list) . ' extensions' . PHP_EOL;
     }
     
     private function fetchExtensionList() {

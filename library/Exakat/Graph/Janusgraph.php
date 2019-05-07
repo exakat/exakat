@@ -41,7 +41,7 @@ class Janusgraph extends Graph {
     public function __construct($config) {
         parent::__construct($config);
         
-        $this->client = new Client('ws://'.$this->config->janusgraph_host.':'.$this->config->janusgraph_port.'/',
+        $this->client = new Client('ws://' . $this->config->janusgraph_host . ':' . $this->config->janusgraph_port . '/',
                                     array('timeout'       => 123,
                                           'fragment_size' => 1024 * 1024));
     }
@@ -127,7 +127,7 @@ class Janusgraph extends Graph {
     }
     
     public function checkConnection() {
-        $res = @stream_socket_client('tcp://' . $this->config->janusgraph_host .':'.$this->config->janusgraph_port,
+        $res = @stream_socket_client('tcp://' . $this->config->janusgraph_host . ':' . $this->config->janusgraph_port,
                                      $errno,
                                      $errorMessage,
                                      1,
@@ -143,12 +143,12 @@ class Janusgraph extends Graph {
     }
     
     public function start() {
-        if (!file_exists($this->config->janusgraph_folder.'/conf/gremlin-server/exakat.yaml')) {
-            copy( $this->config->dir_root.'/server/janusgraph/conf//gremlin-server/exakat.yaml',
-                  $this->config->janusgraph_folder.'/conf/gremlin-server/exakat.yaml');
+        if (!file_exists($this->config->janusgraph_folder . '/conf/gremlin-server/exakat.yaml')) {
+            copy( $this->config->dir_root . '/server/janusgraph/conf//gremlin-server/exakat.yaml',
+                  $this->config->janusgraph_folder . '/conf/gremlin-server/exakat.yaml');
         }
 
-        exec('cd '.$this->config->janusgraph_folder.'; rm -rf db/berkeley;  sh ./bin/gremlin-server.sh conf/gremlin-server/exakat.yaml  >/dev/null 2>&1 & echo $! > db/janus.pid ');
+        exec('cd ' . $this->config->janusgraph_folder . '; rm -rf db/berkeley;  sh ./bin/gremlin-server.sh conf/gremlin-server/exakat.yaml  >/dev/null 2>&1 & echo $! > db/janus.pid ');
         sleep(1);
         
         // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
@@ -164,15 +164,15 @@ class Janusgraph extends Graph {
         } while (empty($res));
         
         if ($round >= 10) {
-            die( 'Not able to start Janusgraph. Please, check your installation'.PHP_EOL);
+            die( 'Not able to start Janusgraph. Please, check your installation' . PHP_EOL);
         } else {
             display('Janusgraph restarted');
         }
     }
 
     public function stop() {
-        if (file_exists($this->config->janusgraph_folder.'/db/janus.pid')) {
-            shell_exec('cat '.$this->config->janusgraph_folder.'/db/janus.pid | xargs kill ');
+        if (file_exists($this->config->janusgraph_folder . '/db/janus.pid')) {
+            shell_exec('cat ' . $this->config->janusgraph_folder . '/db/janus.pid | xargs kill ');
         }
     }
 

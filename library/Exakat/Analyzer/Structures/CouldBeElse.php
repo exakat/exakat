@@ -68,7 +68,7 @@ class CouldBeElse extends Analyzer {
              ->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Comparison')
-             ->filter('it.get().value("fullcode").toString()'.$normalize.' == condition'.$normalize)
+             ->filter('it.get().value("fullcode").toString()' . $normalize . ' == condition' . $normalize)
              ->back('first')
              ;
         $this->prepareQuery();

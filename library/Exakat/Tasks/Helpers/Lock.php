@@ -26,7 +26,7 @@ class Lock {
     private $path = null;
     
     public function __construct($path, $name) {
-        $this->path = $path.'/'.md5($name);
+        $this->path = $path . '/' . md5($name);
     }
 
     public function check() {

@@ -33,7 +33,7 @@ abstract class Vcs {
     
     protected $checked = false;
     
-    public function __construct($destination, $code_dir){
+    public function __construct($destination, $code_dir) {
         $this->destination     = $destination;
         $this->destinationFull = $code_dir;
     }
@@ -60,11 +60,15 @@ abstract class Vcs {
         return true;
     }
 
-    protected function selfCheck() {}
+    protected function selfCheck() {
+    }
 
-    public function getLineChanges() { return array(); }
+    public function getLineChanges() {
+        return array();
+    }
 
-    public function update() {}
+    public function update() {
+    }
     
     public static function getVcs(Config $config) {
         if ($config->svn === true) {

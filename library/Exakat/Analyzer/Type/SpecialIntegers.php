@@ -29,7 +29,7 @@ class SpecialIntegers extends Analyzer {
     public function analyze() {
         $codes = $this->loadIni('SpecialIntegers.ini', 'code');
         $codes = array_keys($codes);
-        $codes = array_map(function($x) { return (string) $x; }, $codes);
+        $codes = array_map(function ($x) { return (string) $x; }, $codes);
         
         $this->atomIs('Integer')
              ->codeIs($codes, self::TRANSLATE, self::CASE_SENSITIVE);

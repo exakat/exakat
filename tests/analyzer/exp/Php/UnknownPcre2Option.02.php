@@ -6,9 +6,9 @@ $expected     = array('preg_split(\'/\\#/S\', $url)',
 
 $expected_not = array('preg_split(\'\\#\', $url)',
                       'preg_split(\'/\\#/sx\', $url)',
-                      'preg_split(\'/\#/\', $url)', 
-                      'preg_split(\'\#\', $url)', 
-                      'preg_split(\'/\#/sx\', $url)',
+                      'preg_split(\'/\\#/\', $url)',
+                      'preg_split(\'\\#\', $url)',
+                      'preg_split(\'/\\#/sx\', $url)',
                      );
 
 ?>

@@ -39,7 +39,7 @@ class TooManyInjections extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->analyzerIs('Patterns/DependencyInjection')
                      ->count()
-                     ->raw('is(gte('.$this->injectionsCount.'))')
+                     ->raw('is(gte(' . $this->injectionsCount . '))')
              );
         $this->prepareQuery();
     }

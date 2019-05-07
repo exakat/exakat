@@ -31,11 +31,11 @@ class ZendF2 {
 
     public function __construct($path, $config) {
         if ($config->is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf2').'.sqlite';
-            copy($path.'/zendf2.sqlite', $this->phar_tmp);
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf2') . '.sqlite';
+            copy($path . '/zendf2.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $path.'/zendf2.sqlite';
+            $docPath = $path . '/zendf2.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }

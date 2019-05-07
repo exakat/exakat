@@ -42,7 +42,7 @@ GREMLIN;
              ->outIs(array('BLOCK', 'THEN', 'ELSE'))
              ->atomIs('Sequence')
              ->is('count', 1)
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -69,7 +69,7 @@ GREMLIN;
              ->outIs('BLOCK')
              ->atomIs('Sequence')
              ->is('count', 1)
-             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('sideEffect{ ' . $mapping . ' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();

@@ -63,7 +63,7 @@ GREMLIN
                 ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        display($result->toInt().' SpotPHPNativeConstants');
+        display($result->toInt() . ' SpotPHPNativeConstants');
     }
     
     public function setPHPconstants(array $PHPconstants = array()) {

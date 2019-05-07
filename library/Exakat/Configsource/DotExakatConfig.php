@@ -29,7 +29,7 @@ class DotExakatConfig extends Config {
     private $dotExakat = '';
 
     public function __construct() {
-        $this->dotExakat = getcwd().'/.exakat.ini';
+        $this->dotExakat = getcwd() . '/.exakat.ini';
         // also support json?
     }
 
@@ -51,10 +51,10 @@ class DotExakatConfig extends Config {
 
         $other_php_versions = array();
         foreach(Configuration::PHP_VERSIONS as $version) {
-            if (empty($this->configFile['php'.$version])) {
+            if (empty($this->configFile['php' . $version])) {
                 continue;
             }
-            $php = new Phpexec($version[0].'.'.$version[1], $this->configFile["php$version"]);
+            $php = new Phpexec($version[0] . '.' . $version[1], $this->configFile["php$version"]);
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }

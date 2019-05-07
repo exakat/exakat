@@ -249,6 +249,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `String <http://php.net/manual/en/ref.strings.php>`_
 * `ext/suhosin <https://suhosin.org/>`_
+* `ext/svm <http://www.php.net/svm>`_
 * `ext/swoole <https://www.swoole.com/>`_
 * `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
@@ -419,6 +420,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.7.8
+
+  * ext/svm (Extensions/Extsvm)
+
 * 1.7.7
 
   * Implode One Arg (Php/ImplodeOneArg)
@@ -562,8 +567,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.4.6
 
-  * Custom/FirstTest (Custom/FirstTest)
-  * Only Variable For Reference (Functions/OnlyVariableForReference ; Analyze, LintButWontExec)
+  * Only Variable For Reference (Functions/OnlyVariableForReference)
 
 * 1.4.5
 
@@ -2490,6 +2494,7 @@ List of external links mentionned in this documentation.
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
 * `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_
 * `Supported PHP Extensions <http://exakat.readthedocs.io/en/latest/Annex.html#supported-php-extensions>`_
+* `SVM <http://www.php.net/svm>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
@@ -2511,8 +2516,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_

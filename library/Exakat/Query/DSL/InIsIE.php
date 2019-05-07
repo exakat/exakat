@@ -36,7 +36,7 @@ class InIsIE extends DSL {
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {
-            return new Command('until(__.inE('.$this->SorA($diff).').count().is(eq(0))).repeat(__.in('.$this->SorA($diff).'))');
+            return new Command('until(__.inE(' . $this->SorA($diff) . ').count().is(eq(0))).repeat(__.in(' . $this->SorA($diff) . '))');
         }
     }
 }

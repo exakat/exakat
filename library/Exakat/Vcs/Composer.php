@@ -46,8 +46,8 @@ class Composer extends Vcs {
         $composer->require->$source = 'dev-master';
         $json = json_encode($composer, JSON_PRETTY_PRINT);
 
-        mkdir($this->destinationFull.'/code', 0755);
-        file_put_contents($this->destinationFull.'/code/composer.json', $json);
+        mkdir($this->destinationFull . '/code', 0755);
+        file_put_contents($this->destinationFull . '/code/composer.json', $json);
         shell_exec("cd {$this->destinationFull}/code/; composer -q install");
     }
 
@@ -70,7 +70,7 @@ class Composer extends Vcs {
         $jsonLock = json_decode($jsonLockText);
 
         $return = '';
-        foreach($jsonLock->packages as $package) {
+        foreach ($jsonLock->packages as $package) {
             if ($package->name === $component) {
                 $return = "{$package->source->reference} (version : {$package->version})";
             }
@@ -118,7 +118,6 @@ class Composer extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

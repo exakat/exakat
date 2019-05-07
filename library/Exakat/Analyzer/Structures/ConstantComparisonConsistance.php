@@ -46,7 +46,7 @@ GREMLIN;
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
              ->back('first')
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -74,7 +74,7 @@ GREMLIN;
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
              ->back('first')
-             ->raw('sideEffect{ '.$mapping.'; }')
+             ->raw('sideEffect{ ' . $mapping . '; }')
              ->raw('filter{ x2 in *** ; }', $types)
              ->back('first');
         $this->prepareQuery();

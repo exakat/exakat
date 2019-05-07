@@ -57,7 +57,7 @@ class Svn extends Vcs {
             return $r[1];
         }
         
-        return 'Error : '.$res;
+        return 'Error : ' . $res;
     }
 
     private function getInfo() {
@@ -68,7 +68,7 @@ class Svn extends Vcs {
 
             return;
         }
-        foreach(explode("\n", $res) as $info) {
+        foreach (explode("\n", $res) as $info) {
             list($name, $value) = explode(': ', trim($info));
             $this->info[$name] = $value;
         }
@@ -118,7 +118,6 @@ class Svn extends Vcs {
         display("No support for line diff in SVN.\n");
         return array();
     }
-
 }
 
 ?>

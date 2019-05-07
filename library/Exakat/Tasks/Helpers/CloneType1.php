@@ -49,7 +49,7 @@ class CloneType1 extends Plugin {
 
             case 'Global' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = strtolower($atom->atom).implode(', ', $ctype1);
+                $atom->ctype1 = strtolower($atom->atom) . implode(', ', $ctype1);
                 break;
 
             case 'Nsname' :
@@ -72,7 +72,7 @@ class CloneType1 extends Plugin {
             case 'Globaldefinition' :
                 $atom->ctype1 = '$v';
                 if (isset($extras['DEFAULT'])) {
-                    $atom->ctype1 .= ' = '.$extras['DEFAULT']->ctype1;
+                    $atom->ctype1 .= ' = ' . $extras['DEFAULT']->ctype1;
                 }
                 break;
 
@@ -129,27 +129,27 @@ class CloneType1 extends Plugin {
 
             case 'Ifthen' :
             case 'Ternary' :
-                $atom->ctype1 = 'if ('.$extras['CONDITION']->ctype1.') '.$extras['THEN']->ctype1;
+                $atom->ctype1 = 'if (' . $extras['CONDITION']->ctype1 . ') ' . $extras['THEN']->ctype1;
                 if (isset($extras['ELSE'])) {
-                    $atom->ctype1 .= 'else '.$extras['ELSE']->ctype1;
+                    $atom->ctype1 .= 'else ' . $extras['ELSE']->ctype1;
                 }
                 break;
 
             case 'Shell' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = '`'.implode(' ', $ctype1).'`';
+                $atom->ctype1 = '`' . implode(' ', $ctype1) . '`';
                 break;
 
             case 'Cast' :
-                $atom->ctype1 = strtolower($atom->code).$extras['CAST']->ctype1;
+                $atom->ctype1 = strtolower($atom->code) . $extras['CAST']->ctype1;
                 break;
 
             case 'Clone' :
-                $atom->ctype1 = 'clone '.$extras['CLONE']->ctype1;
+                $atom->ctype1 = 'clone ' . $extras['CLONE']->ctype1;
                 break;
 
             case 'Sign' :
-                $atom->ctype1 = strtolower($atom->code).$extras['SIGN']->ctype1;
+                $atom->ctype1 = strtolower($atom->code) . $extras['SIGN']->ctype1;
                 break;
 
             case 'Heredoc' :
@@ -168,31 +168,31 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Switch' :
-                $atom->ctype1 = 'switch ('.$extras['CONDITION']->ctype1 . ') ' . $extras['CASES']->ctype1;
+                $atom->ctype1 = 'switch (' . $extras['CONDITION']->ctype1 . ') ' . $extras['CASES']->ctype1;
                 break;
 
             case 'While' :
-                $atom->ctype1 = 'while ('.$extras['CONDITION']->ctype1 . ') ' . $extras['BLOCK']->ctype1;
+                $atom->ctype1 = 'while (' . $extras['CONDITION']->ctype1 . ') ' . $extras['BLOCK']->ctype1;
                 break;
 
             case 'Dowhile' :
-                $atom->ctype1 = 'do '.$extras['BLOCK']->ctype1 . ' while( ' . $extras['CONDITION']->ctype1.')';
+                $atom->ctype1 = 'do ' . $extras['BLOCK']->ctype1 . ' while( ' . $extras['CONDITION']->ctype1 . ')';
                 break;
 
             case 'Case' :
-                $atom->ctype1 = 'case '.$extras['CASE']->ctype1 . ':' . $extras['CODE']->ctype1;
+                $atom->ctype1 = 'case ' . $extras['CASE']->ctype1 . ':' . $extras['CODE']->ctype1;
                 break;
 
             case 'Default' :
-                $atom->ctype1 = 'default : '. $extras['CODE']->ctype1;
+                $atom->ctype1 = 'default : ' . $extras['CODE']->ctype1;
                 break;
 
             case 'Array' :
-                $atom->ctype1 = $extras['VARIABLE']->ctype1 . '[' . $extras['INDEX']->ctype1 .']';
+                $atom->ctype1 = $extras['VARIABLE']->ctype1 . '[' . $extras['INDEX']->ctype1 . ']';
                 break;
 
             case 'Break' :
-                $atom->ctype1 = strtolower($atom->atom).$extras['BREAK']->ctype1;
+                $atom->ctype1 = strtolower($atom->atom) . $extras['BREAK']->ctype1;
                 break;
 
             case 'Constant' :
@@ -200,11 +200,11 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Continue' :
-                $atom->ctype1 = strtolower($atom->atom).$extras['CONTINUE']->ctype1;
+                $atom->ctype1 = strtolower($atom->atom) . $extras['CONTINUE']->ctype1;
                 break;
 
             case 'Try' :
-                $atom->ctype1 = 'try '.implode('; ', array_column($extras, 'ctype1'));
+                $atom->ctype1 = 'try ' . implode('; ', array_column($extras, 'ctype1'));
                 break;
 
             case 'Catch' :
@@ -212,15 +212,15 @@ class CloneType1 extends Plugin {
                 $variable = $extras['VARIABLE'];
                 $classes = array_slice($extras, 0, -2);
 
-                $atom->ctype1 = 'catch('.implode('|', array_column($classes, 'ctype1')). ' '.$variable->ctype1.')'. $block->ctype1;
+                $atom->ctype1 = 'catch(' . implode('|', array_column($classes, 'ctype1')) . ' ' . $variable->ctype1 . ')' . $block->ctype1;
                 break;
 
             case 'Finally' :
-                $atom->ctype1 = 'finally'. $extras['BLOCK']->ctype1;
+                $atom->ctype1 = 'finally' . $extras['BLOCK']->ctype1;
                 break;
 
             case 'Methodcall' :
-                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1.'()';
+                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1 . '()';
                 break;
 
             case 'Member' :
@@ -244,11 +244,11 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'For' :
-                $atom->ctype1 = 'for('.$extras['INIT']->ctype1.';'.$extras['FINAL']->ctype1.';'.$extras['INCREMENT']->ctype1.')'.$extras['BLOCK']->ctype1;
+                $atom->ctype1 = 'for(' . $extras['INIT']->ctype1 . ';' . $extras['FINAL']->ctype1 . ';' . $extras['INCREMENT']->ctype1 . ')' . $extras['BLOCK']->ctype1;
                 break;
 
             case 'Foreach' :
-                $atom->ctype1 = 'foreach('.$extras['SOURCE']->ctype1.' as '.$extras['VALUE']->ctype1.')'.$extras['BLOCK']->ctype1;
+                $atom->ctype1 = 'foreach(' . $extras['SOURCE']->ctype1 . ' as ' . $extras['VALUE']->ctype1 . ')' . $extras['BLOCK']->ctype1;
                 break;
 
             case 'Arrayappend' :
@@ -256,7 +256,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Instanceof' :
-                $atom->ctype1 = $extras['CLASS']->ctype1 . 'instanceof'. $extras['VARIABLE']->ctype1;
+                $atom->ctype1 = $extras['CLASS']->ctype1 . 'instanceof' . $extras['VARIABLE']->ctype1;
                 break;
 
             case 'Magicconstant' :
@@ -305,7 +305,7 @@ class CloneType1 extends Plugin {
 
             case 'Ppp' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = strtolower($atom->atom) . '('.implode(',', $ctype1).')';
+                $atom->ctype1 = strtolower($atom->atom) . '(' . implode(',', $ctype1) . ')';
                 break;
 
             case 'Functioncall' :
@@ -319,11 +319,11 @@ class CloneType1 extends Plugin {
             case 'Exit'   :
             case 'Eval'   :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = strtolower($atom->atom) . '('.implode(',', $ctype1).')';
+                $atom->ctype1 = strtolower($atom->atom) . '(' . implode(',', $ctype1) . ')';
                 break;
 
             case 'Parenthesis':
-                $atom->ctype1 = '('.$extras['CODE']->ctype1.')';
+                $atom->ctype1 = '(' . $extras['CODE']->ctype1 . ')';
                 break;
 
             case 'Classanonymous' :
@@ -340,25 +340,25 @@ class CloneType1 extends Plugin {
             case 'Classalias' :
             case 'Magicmethod' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = 'n(){'.implode(',', $ctype1).'}';
+                $atom->ctype1 = 'n(){' . implode(',', $ctype1) . '}';
                 break;
                 
             case 'Arrayliteral' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = $atom->code . '('.implode(',', $ctype1).')';
+                $atom->ctype1 = $atom->code . '(' . implode(',', $ctype1) . ')';
                 break;
             
             case 'Goto' :
-                $atom->ctype1 = 'goto'.$extras['GOTO']->ctype1;
+                $atom->ctype1 = 'goto' . $extras['GOTO']->ctype1;
                 break;
 
             case 'Gotolabel' :
-                $atom->ctype1 = 'label'.$extras['GOTOLABEL']->ctype1;
+                $atom->ctype1 = 'label' . $extras['GOTOLABEL']->ctype1;
                 break;
 
             case 'Declare' :
                 // only one argument for declare ?
-                $atom->ctype1 = 'label'.$extras[0]->ctype1;
+                $atom->ctype1 = 'label' . $extras[0]->ctype1;
                 break;
                 
             case 'Insteadof' :
@@ -370,18 +370,18 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'As' :
-                $atom->ctype1 = $extras['NAME']->ctype1.' as '.$extras['AS']->ctype1;
+                $atom->ctype1 = $extras['NAME']->ctype1 . ' as ' . $extras['AS']->ctype1;
                 break;
 
             case 'Yield' :
             case 'Yieldfrom' :
-                $atom->ctype1 = 'yield'.$extras['YIELD']->ctype1;
+                $atom->ctype1 = 'yield' . $extras['YIELD']->ctype1;
                 break;
 
         default :
             static $i = 0;
             
-            $atom->ctype1 = 'default '.strtolower($atom->atom).' '.++$i;
+            $atom->ctype1 = 'default ' . strtolower($atom->atom) . ' ' . ++$i;
             
 //            print "CLONE DEFAULT : $atom->atom\n";
         }

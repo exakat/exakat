@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NotProjectInGraph extends \RuntimeException {
     public function __construct($project = '', $inGraph = '') {
-        parent::__construct('The analyzed project is not the same as the requested one : "'.$project.'" / "'.$inGraph.'". You probably want to use  -p '.$inGraph.'.', 0, null);
+        parent::__construct('The analyzed project is not the same as the requested one : "' . $project . '" / "' . $inGraph . '". You probably want to use  -p ' . $inGraph . '.', 0, null);
     }
 }
 

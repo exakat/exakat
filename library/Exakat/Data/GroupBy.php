@@ -69,7 +69,7 @@ class GroupBy implements ArrayAccess, Iterator {
         reset($this->data);
     }
 
-    public function valid () {
+    public function valid() {
         return key($this->data) !== null;
     }
 }

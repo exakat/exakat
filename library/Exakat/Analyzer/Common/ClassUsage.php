@@ -42,7 +42,7 @@ class ClassUsage extends Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot('Array')

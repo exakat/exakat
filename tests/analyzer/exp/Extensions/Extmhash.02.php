@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('mhash(\'hash\', \'data1\')', 
-                      '\mhash(\'hash\', \'data4\')',
+$expected     = array('mhash(\'hash\', \'data1\')',
+                      '\\mhash(\'hash\', \'data4\')',
                      );
 
 $expected_not = array('\\a\\mhash(\'hasha\', \'dataa2\')',

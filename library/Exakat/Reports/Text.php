@@ -70,7 +70,7 @@ class Text extends Reports {
             foreach($file['messages'] as $line => $column) {
                 $messages = $column[0];
                 foreach($messages as $message) {
-                    $text .= $file['filename'].':'.$line.' '.$message['message']."\n";
+                    $text .= $file['filename'] . ':' . $line . ' ' . $message['message'] . "\n";
                     $this->count();
                 }
             }

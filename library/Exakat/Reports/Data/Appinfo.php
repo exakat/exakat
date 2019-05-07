@@ -354,6 +354,7 @@ class Appinfo extends Data {
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/standard'   => 'Extensions/Extstandard',
                             'ext/stats'      => 'Extensions/Extstats',
+                            'ext/svm'        => 'Extensions/Extsvm',
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/trader'     => 'Extensions/Exttrader',
@@ -407,7 +408,7 @@ class Appinfo extends Data {
         public function prepare() {
             // collecting information for Extensions
             $themed = array_merge(...array_values($this->extensions));
-            $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($themed).')');
+            $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ')');
 
             $sources = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -471,7 +472,7 @@ class Appinfo extends Data {
             } elseif (empty($row['block'])) {
                 $this->values['Strings'][$row['encoding']] = Ambassador::YES;
             } else {
-                $this->values['Strings'][$row['encoding'] . ' ('. $row['block'].')' ] = Ambassador::YES;
+                $this->values['Strings'][$row['encoding'] . ' (' . $row['block'] . ')' ] = Ambassador::YES;
             }
         }
         

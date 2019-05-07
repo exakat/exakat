@@ -53,7 +53,7 @@ class IsNot extends DSL {
                 return new Command("has(\"$property\").not(has(\"$property\", within(***)))", array($value));
             }
         } else {
-            throw new QueryException('Not understood type for isNot : '.gettype($value));
+            throw new QueryException('Not understood type for isNot : ' . gettype($value));
         }
     }
 }

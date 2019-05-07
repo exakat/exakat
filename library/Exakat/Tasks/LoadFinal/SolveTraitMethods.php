@@ -50,7 +50,7 @@ class SolveTraitMethods extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display('Created '.($result->toInt()).' links for use in traits');
+        display('Created ' . ($result->toInt()) . ' links for use in traits');
     }
 }
 

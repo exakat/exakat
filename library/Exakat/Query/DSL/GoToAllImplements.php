@@ -30,11 +30,11 @@ class GoToAllImplements extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times('.self::$MAX_LOOPING.').hasLabel("Class", "Classanonymous", "Interface")');
+            $command = new Command('repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Class", "Classanonymous", "Interface")');
             $command->setSack('[]');
             return $command;
         } else {
-            $command = new Command('emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times('.self::$MAX_LOOPING.').hasLabel("Class", "Classanonymous", "Interface")');
+            $command = new Command('emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times(' . self::$MAX_LOOPING . ').hasLabel("Class", "Classanonymous", "Interface")');
             $command->setSack('[]');
             return $command;
         }

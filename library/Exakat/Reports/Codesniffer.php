@@ -66,15 +66,15 @@ class Codesniffer extends Reports {
             ++$results[ $row['file'] ]['warnings'];
         }
 
-        $separator = str_repeat('-', 80)."\n";
+        $separator = str_repeat('-', 80) . "\n";
         $text = '';
         foreach($results as $file) {
             ksort($file['messages']);
-            $text .= 'FILE : '.$file['filename']."\n";
+            $text .= 'FILE : ' . $file['filename'] . "\n";
             $text .= $separator;
             $c = count($file['messages']);
             $l = count(array_filter(array_unique(array_keys($file['messages'])), function ($x) { return $x > 0; }));
-            $text .= 'FOUND '.$c.' ISSUE'.( $c > 1 ? 'S' : '').' AFFECTING '.$l.' LINE'.( $l > 1 ? 'S' : '')."\n";
+            $text .= 'FOUND ' . $c . ' ISSUE' . ( $c > 1 ? 'S' : '') . ' AFFECTING ' . $l . ' LINE' . ( $l > 1 ? 'S' : '') . "\n";
             $text .= $separator;
             
             $maxSize = strlen(max(array_keys($file['messages'])));
@@ -88,8 +88,8 @@ class Codesniffer extends Reports {
                 $messages = $column[0];
                 foreach($messages as $message) {
                     $lineToDisplay = $line == -1 ? '  ' : $line;
-                    $linePadded = substr( $padding.$lineToDisplay, -$maxSize);
-                    $text .= ' '.$linePadded.' | '.strtoupper($message['severity']).' | '.$message['message']."\n";
+                    $linePadded = substr( $padding . $lineToDisplay, -$maxSize);
+                    $text .= ' ' . $linePadded . ' | ' . strtoupper($message['severity']) . ' | ' . $message['message'] . "\n";
                     $this->count();
                 }
             }

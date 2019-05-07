@@ -71,7 +71,7 @@ class Dailytodo extends Reports {
             $docs = $this->getDocs($row['analyzer']);
             
             $fullcode = $this->syntaxColoring($row['fullcode']);
-            $file = $row['file'].':'.$row['line'];
+            $file = $row['file'] . ':' . $row['line'];
             $first = substr($docs['description'], 0, strpos($docs['description'], '.') + 1 );
             $todos[] = <<<HTML
                 <tr>
@@ -95,7 +95,7 @@ HTML;
             ++$count;
         }
         
-        $html = file_get_contents($this->tmpName.'/invoice.html');
+        $html = file_get_contents($this->tmpName . '/invoice.html');
         $html = str_replace('<reporting>', $reporting, $html);
         $html = str_replace('<count>', $count, $html);
         $html = str_replace('<total>', $total, $html);
@@ -103,7 +103,7 @@ HTML;
         $html = str_replace('<date>', date('l, F jS Y'), $html);
         $html = str_replace('<todos>', implode('', $todos), $html);
         $html = str_replace('<thanks>', $this->getThanks(), $html);
-        file_put_contents($this->tmpName.'/index.html', $html);
+        file_put_contents($this->tmpName . '/index.html', $html);
     }
 
     private function initFolder() {
@@ -122,22 +122,22 @@ HTML;
 
     private function cleanFolder() {
         if (file_exists($this->finalName)) {
-            rename($this->finalName, $this->tmpName.'2');
+            rename($this->finalName, $this->tmpName . '2');
         }
 
         rename($this->tmpName, $this->finalName);
 
-        if (file_exists($this->tmpName.'2')) {
-            rmdirRecursive($this->tmpName.'2');
+        if (file_exists($this->tmpName . '2')) {
+            rmdirRecursive($this->tmpName . '2');
         }
     }
 
     private function syntaxColoring($source) {
-        $colored = highlight_string('<?php '.$source.' ;?>', true);
+        $colored = highlight_string('<?php ' . $source . ' ;?>', true);
         $colored = substr($colored, 79, -65);
 
         if ($colored[0] === '$') {
-            $colored = '<span style="color: #0000BB">'.$colored;
+            $colored = '<span style="color: #0000BB">' . $colored;
         }
 
         return $colored;

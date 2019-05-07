@@ -47,7 +47,7 @@ GREMLIN;
         $comparators = array('==', '===', '!==', '!=');
         $this->atomIs('Comparison')
              ->codeIs($comparators)
-             ->raw('map{ '.$mapping.' }', $codeInt)
+             ->raw('map{ ' . $mapping . ' }', $codeInt)
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -76,7 +76,7 @@ GREMLIN;
 
         $this->atomIs('Comparison')
              ->codeIs($comparators)
-             ->raw('map{ '.$mapping.' }', $codeInt)
+             ->raw('map{ ' . $mapping . ' }', $codeInt)
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();

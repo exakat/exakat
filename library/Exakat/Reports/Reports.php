@@ -102,7 +102,7 @@ abstract class Reports {
             $themas = $this->config->thema;
 
             if ($missing = $this->checkMissingThemes()) {
-                print "Can't produce ".static::class.' format. There are '.count($missing).' missing themes : '.implode(', ', $missing).".\n";
+                print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
                 return false;
             }
 
@@ -120,7 +120,7 @@ abstract class Reports {
         } elseif ($name === self::INLINE) {
             return $final ;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.$this::FILE_EXTENSION, $final);
+            file_put_contents($folder . '/' . $name . '.' . $this::FILE_EXTENSION, $final);
         }
     }
 
@@ -140,7 +140,7 @@ abstract class Reports {
         }
     }
     
-    public function checkMissingThemes(){
+    public function checkMissingThemes() {
         $required = $this->dependsOnAnalysis();
         
         if (empty($required)) {

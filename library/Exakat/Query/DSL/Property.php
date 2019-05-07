@@ -33,7 +33,7 @@ class Property extends DSL {
         assert($this->assertProperty($property));
 
         // Currently, a gremlin variable
-        return new Command('sideEffect{ it.get().property("'.$property.'", '.$value.'); }', array());
+        return new Command('sideEffect{ it.get().property("' . $property . '", ' . $value . '); }', array());
     }
 }
 ?>

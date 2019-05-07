@@ -38,7 +38,7 @@ class Context {
                               self::CONTEXT_NOSEQUENCE   => array(0),
                          );
 
-    public function getCount($context = self::CONTEXT_NOSEQUENCE){
+    public function getCount($context = self::CONTEXT_NOSEQUENCE) {
         return $this->contexts[$context] !== array(0 => 0);
     }
 

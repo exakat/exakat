@@ -43,12 +43,12 @@ class Remove extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+        if (!file_exists($this->config->projects_root . '/projects/' . $this->config->project)) {
             throw new NoSuchProject($this->config->project);
         }
 
-        rmdirRecursive($this->config->projects_root.'/projects/'.$this->config->project);
-        display('Project '.$this->config->project.' removed.');
+        rmdirRecursive($this->config->projects_root . '/projects/' . $this->config->project);
+        display('Project ' . $this->config->project . ' removed.');
     }
 }
 

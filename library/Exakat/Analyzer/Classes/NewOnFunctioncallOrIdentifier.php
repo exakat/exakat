@@ -42,7 +42,7 @@ GREMLIN;
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -61,13 +61,13 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+        $types = '[' . str_replace('\\', '\\\\', makeList(array_keys($types))) . ']';
 
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->raw('sideEffect{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('sideEffect{ ' . $mapping . ' }')
+             ->raw('filter{ x2 in ' . $types . '}')
              ->back('first');
         $this->prepareQuery();
     }

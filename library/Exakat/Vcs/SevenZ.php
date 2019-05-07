@@ -44,7 +44,7 @@ class SevenZ extends Vcs {
         $this->check();
 
         $binary = file_get_contents($source);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'archive7Z').'.7z';
+        $archiveFile = tempnam(sys_get_temp_dir(), 'archive7Z') . '.7z';
         file_put_contents($archiveFile, $binary);
 
         shell_exec("7z x $archiveFile -oc:{$this->destinationFull}/code/");
@@ -79,7 +79,6 @@ class SevenZ extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

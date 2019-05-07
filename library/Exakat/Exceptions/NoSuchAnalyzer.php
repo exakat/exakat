@@ -36,9 +36,9 @@ class NoSuchAnalyzer extends \RuntimeException {
             if (empty($r)) {
                 $die .= "Couldn't find a suggestion. Check the documentation http://exakat.readthedocs.io/\n";
             } else {
-                $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
+                $die .= 'Did you mean : ' . str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
                 if (count($r) > 5) {
-                    $die .= ' ('.(count($r) - 5).' more possible)';
+                    $die .= ' (' . (count($r) - 5) . ' more possible)';
                 }
                 $die .= "\n";
             }

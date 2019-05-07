@@ -32,7 +32,7 @@ class MimeType extends Analyzer {
         // $x = ' asfa "text/fdf+xml"';
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->regexIs('fullcode', '[\\\\\'\"]('.implode('|', $mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\\\\\'\"]');
+             ->regexIs('fullcode', '[\\\\\'\"](' . implode('|', $mimeTypes) . ')/[a-zA-Z0-9+\\\\-]+[\\\\\'\"]');
         $this->prepareQuery();
     }
 }

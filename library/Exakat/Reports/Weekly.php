@@ -85,7 +85,7 @@ class Weekly extends Ambassador {
         
         $this->current = (new \Datetime('now'))->format('Y-W');
         for ($i = 0; $i < 5; ++$i) {
-            $date = (new \Datetime('now'))->sub(new \DateInterval('P'.($i * 7).'D'))->format('Y-W');
+            $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
             
             $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
             $this->weeks[$date] = json_decode($json);
@@ -96,7 +96,7 @@ class Weekly extends Ambassador {
         }
 
     // special case for 'Future read'
-        $date = date('Y-W', strtotime(date('Y').'W'.(date('W') + 1).'1'));
+        $date = date('Y-W', strtotime(date('Y') . 'W' . (date('W') + 1) . '1'));
         $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
         $this->weeks[$date] = json_decode($json);
         
@@ -131,7 +131,7 @@ class Weekly extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
             $title = ($file == 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
@@ -226,7 +226,7 @@ MENU;
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -264,16 +264,16 @@ MENU;
         
         $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
 
-        $begin = date('M jS, Y', strtotime($year.'W'.$week.'1'));
-        $end   = date('M jS, Y', strtotime($year.'W'.$week.'7'));
-        $titleDate = $year.' '.ordinal($week).' week';
+        $begin = date('M jS, Y', strtotime($year . 'W' . $week . '1'));
+        $end   = date('M jS, Y', strtotime($year . 'W' . $week . '7'));
+        $titleDate = $year . ' ' . ordinal($week) . ' week';
 
         $finalHTML = str_replace('<WEEK>', $titleDate, $html);
         $fullweek = array("From $begin to $end : <br /> Total : $total_issues <br />");
         foreach($docs as $analyzer => $doc) {
             $fullweek[] = " $doc ({$counts[$analyzer]}) ";
         }
-        $finalHTML = str_replace('<FULLWEEK>', implode(' - ', $fullweek), $finalHTML).' - ';
+        $finalHTML = str_replace('<FULLWEEK>', implode(' - ', $fullweek), $finalHTML) . ' - ';
         
         file_put_contents("{$this->tmpName}/datas/weekly.html", $finalHTML);
 
@@ -619,7 +619,7 @@ JAVASCRIPT;
                     GROUP BY analyzer
                     ORDER BY count(*) DESC ";
         if ($limit) {
-            $query .= ' LIMIT '.$limit;
+            $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
@@ -674,10 +674,10 @@ SQL;
                 $total += $this->resultsCounts[$analyzer];
             }
             $html .= '<div class="clearfix">
-                    <a href="weekly-'.$week.'.html">
-                      <div class="block-cell-name">'.$this->titles[$id].'</div>
+                    <a href="weekly-' . $week . '.html">
+                      <div class="block-cell-name">' . $this->titles[$id] . '</div>
                     </a>
-                    <div class="block-cell-issue text-center">'.$total.'</div>
+                    <div class="block-cell-issue text-center">' . $total . '</div>
                   </div>';
         }
 

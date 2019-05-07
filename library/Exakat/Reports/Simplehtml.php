@@ -73,7 +73,7 @@ class Simplehtml extends Reports {
 
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $text .= '<tr><th>Exakat version :</th><td>'.\Exakat\Exakat::VERSION.' ('.\Exakat\Exakat::BUILD.") </td></tr>\n";
+            $text .= '<tr><th>Exakat version :</th><td>' . \Exakat\Exakat::VERSION . ' (' . \Exakat\Exakat::BUILD . ") </td></tr>\n";
         }
 
         return $text;
@@ -84,13 +84,13 @@ class Simplehtml extends Reports {
             $list = $this->themes->getThemeAnalyzers($this->config->thema);
             $list = makeList($list);
         } elseif (!empty($this->config->program)) {
-            $list = '"'.$this->config->program.'"';
+            $list = '"' . $this->config->program . '"';
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
             $list = makeList($list);
         }
 
-        $sqlQuery = 'SELECT * FROM resultsCounts WHERE analyzer in ('.$list.') AND count > 0';
+        $sqlQuery = 'SELECT * FROM resultsCounts WHERE analyzer in (' . $list . ') AND count > 0';
         $res = $this->sqlite->query($sqlQuery);
 
         $text = '';
@@ -193,18 +193,18 @@ HTML;
         }
 
         // Copy template
-        copyDir($this->config->dir_root.'/media/clang', $this->tmpName );
+        copyDir($this->config->dir_root . '/media/clang', $this->tmpName );
     }
 
     private function cleanFolder() {
         if (file_exists($this->finalName)) {
-            rename($this->finalName, $this->tmpName.'2');
+            rename($this->finalName, $this->tmpName . '2');
         }
 
         rename($this->tmpName, $this->finalName);
 
-        if (file_exists($this->tmpName.'2')) {
-            rmdirRecursive($this->tmpName.'2');
+        if (file_exists($this->tmpName . '2')) {
+            rmdirRecursive($this->tmpName . '2');
         }
     }
     

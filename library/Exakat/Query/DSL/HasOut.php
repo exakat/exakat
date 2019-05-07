@@ -36,7 +36,7 @@ class HasOut extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {
-            return new Command('where( __.out('.$this->SorA($diff).') )');
+            return new Command('where( __.out(' . $this->SorA($diff) . ') )');
         }
     }
 }

@@ -67,7 +67,7 @@ class CallbackNeedsReturn extends Analyzer {
                          )
                  )
                  ->outIs('BLOCK')
-                 ->noAtomInside('Return')
+                 ->noAtomInside(array('Return', 'Void'))
                  ->back('first');
             $this->prepareQuery();
 

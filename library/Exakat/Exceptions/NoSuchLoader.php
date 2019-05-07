@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoSuchLoader extends \RuntimeException {
     public function __construct($loader = '', $loaderList = array(), $code = 0, \Exception $previous = null) {
-        parent::__construct('No such loader as "'.$loader.'". Use one of '.implode(', ', $loaderList)."\n", $code, $previous);
+        parent::__construct('No such loader as "' . $loader . '". Use one of ' . implode(', ', $loaderList) . "\n", $code, $previous);
     }
 }
 

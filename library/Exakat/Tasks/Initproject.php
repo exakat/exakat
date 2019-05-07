@@ -63,7 +63,7 @@ class Initproject extends Tasks {
             rmdirRecursive("{$this->config->projects_root}/projects/$project");
         }
         
-        display("Initializing $project".(!empty($repositoryURL) ? " with $repositoryURL" : '') );
+        display("Initializing $project" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
         $this->init_project($project, $repositoryURL);
 
         display('Done');
@@ -93,10 +93,10 @@ class Initproject extends Tasks {
 
         $dotProject          = ".$project";
         if (empty($repositoryURL)) {
-            $vcs = new None($dotProject, $this->config->projects_root);
+            $vcs = new None($dotProject, "$tmpPath/code");
         } else {
             $vcsClass = Vcs::getVcs($this->config);
-            $vcs = new $vcsClass($dotProject, $this->config->projects_root);
+            $vcs = new $vcsClass($dotProject, "$tmpPath/code");
         }
  
         if (empty($repositoryURL)) {

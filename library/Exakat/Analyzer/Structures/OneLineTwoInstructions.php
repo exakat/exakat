@@ -28,33 +28,41 @@ use Exakat\Analyzer\Analyzer;
 class OneLineTwoInstructions extends Analyzer {
     public function analyze() {
         // Two expressions in a row
+        // except for break, continue, void and inlineHtml
         $this->atomIs('Sequence')
-             ->outIs('EXPRESSION')
-             ->atomIsNot('Void')
-             ->_as('report')
-             ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
-             ->savePropertyAs('line', 'line_number')
-             ->nextSibling()
-             ->atomIsNot(array('Inlinehtml', 'Break', 'Continue'))
-             ->samePropertyAs('line', 'line_number')
-             ->back('report');
-        $this->prepareQuery();
-
-        // Two expressions with HTML between
-        $this->atomIs('Sequence')
-             ->outIs('EXPRESSION')
-             ->atomIsNot('Void')
-             ->atomIs('Inlinehtml')
-             ->nextSibling()
-             ->_as('report')
-             ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
-             ->savePropertyAs('line', 'line_number')
-             ->nextSibling()
-             ->atomIs('Inlinehtml')
-             ->nextSibling()
-             ->atomIsNot('Inlinehtml')
-             ->samePropertyAs('line', 'line_number')
-             ->back('report');
+             ->raw(<<<'GREMLIN'
+where(
+        __.sideEffect{ lines = [:]; }
+          .out("EXPRESSION")
+          .not(hasLabel("Global", "Const", "Inlinehtml", "Void", "Break", "Continue"))
+          .sideEffect{ 
+            if (lines[it.get().value("line")] == null) {
+               lines[it.get().value("line")] = 1;
+            } else {
+               ++lines[it.get().value("line")];
+            }
+          }
+          .fold()
+          .filter{lines = lines.findAll{ a, b -> b > 1}; lines.size() > 0 ; } 
+)
+.local(
+    __.sideEffect{ prems = [:];}
+    .where( 
+        __.out('EXPRESSION')
+          .not(hasLabel("Global", "Const", "Inlinehtml", "Void", "Break", "Continue"))
+          .filter{ it.get().value("line") in lines}
+          .sideEffect{ 
+        if (prems[it.get().value("line")] == null) { 
+            prems[it.get().value("line")] = it.get();
+        } else if (prems[it.get().value("line")].value("rank") > it.get().value("rank")) {
+            prems[it.get().value("line")] = it.get();
+        }
+            }.fold()
+    )
+    .map{prems.values();}.unfold()
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

@@ -31,11 +31,11 @@ class CakePHP {
 
     public function __construct($path, $is_phar) {
         if ($is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'excakephp').'.sqlite';
-            copy($path.'/cakephp.sqlite', $this->phar_tmp);
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'excakephp') . '.sqlite';
+            copy($path . '/cakephp.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $path.'/cakephp.sqlite';
+            $docPath = $path . '/cakephp.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
@@ -66,7 +66,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id 
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }
@@ -93,7 +93,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }
@@ -121,7 +121,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "'.$component.'"';
+                    WHERE components.component = "' . $component . '"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }

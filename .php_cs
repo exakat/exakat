@@ -27,7 +27,9 @@ return PhpCsFixer\Config::create()
          'no_trailing_whitespace' => true,
          'single_quote' => true,
          'visibility_required' => true,
-
+         'function_declaration' => true,
+         'declare_equal_normalize' => array('space' => 'single'),
+         'concat_space' => array('spacing' => 'one'),
 
 // Interesting, but too many fixes at once
 //        'no_extra_consecutive_blank_lines' => true,

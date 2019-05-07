@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 30 Apr 2019 10:23:06 +0000
-.. comment: Generation hash : beacc5c96a080b78bb1733d7794a61d27686076b
+.. comment: Generation date : Mon, 06 May 2019 16:20:32 +0000
+.. comment: Generation hash : f5e37ec2376d4df9c6f83de0d6ac38aa1c0c1a7e
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2682,15 +2682,24 @@ When used with `array_map() <http://www.php.net/array_map>`_ functions, the call
 
 See also `array_map <http://php.net/array_map>`_.
 
-+-------------+-------------------------------+
-| Short name  | Functions/CallbackNeedsReturn |
-+-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
-+-------------+-------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add an explicit return to the callabck
+* Use `null` to unset elements in an array without destroying the index
+
++-------------+-------------------------------------------------------------------------------------------------+
+| Short name  | Functions/CallbackNeedsReturn                                                                   |
++-------------+-------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                  |
++-------------+-------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                           |
++-------------+-------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                |
++-------------+-------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`contao-functions-callbackneedsreturn`, :ref:`phpdocumentor-functions-callbackneedsreturn` |
++-------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -10056,6 +10065,12 @@ This problem emits a fatal error, for abstract methods, or a warning error, for 
 
 See also `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Make signatures compatible again
+
 +-------------+-----------------------------------------------+
 | Short name  | Classes/IncompatibleSignature                 |
 +-------------+-----------------------------------------------+
@@ -11219,7 +11234,7 @@ Sometimes, the logic is not what it seems. It is important to check the actual i
 
    <?php 
    
-   // Always false
+   // Always true
    if ($a != 1 || $a != 2) { } 
    
    // $a == 1 is useless
@@ -11236,15 +11251,24 @@ Sometimes, the logic is not what it seems. It is important to check the actual i
 
 Based on article from ``Andrey Karpov``  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 
-+-------------+----------------------------+
-| Short name  | Structures/LogicalMistakes |
-+-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Critical                   |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change the expressions for them to have a real meaning
+
++-------------+-------------------------------------------------------------------------------------------+
+| Short name  | Structures/LogicalMistakes                                                                |
++-------------+-------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                            |
++-------------+-------------------------------------------------------------------------------------------+
+| Severity    | Critical                                                                                  |
++-------------+-------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                           |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-logicalmistakes`, :ref:`cleverstyle-structures-logicalmistakes` |
++-------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -12114,6 +12138,14 @@ Although it is possible to have different default values, it is worth checking w
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
 
 +-------------+--------------------------------------+
 | Short name  | Functions/MismatchedDefaultArguments |
@@ -15896,15 +15928,25 @@ Note that PHP 7.2 removes the support for this feature.
 See also `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_ and 
          `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
 
-+-------------+-------------------------+
-| Short name  | Arrays/NonConstantArray |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Instant (5 mins)        |
-+-------------+-------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Declare the constant to give it an actual value
+* Turn the constant name into a string
+
++-------------+---------------------------------------------------------------------------------+
+| Short name  | Arrays/NonConstantArray                                                         |
++-------------+---------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                  |
++-------------+---------------------------------------------------------------------------------+
+| Severity    | Minor                                                                           |
++-------------+---------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                |
++-------------+---------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-arrays-nonconstantarray`, :ref:`zencart-arrays-nonconstantarray` |
++-------------+---------------------------------------------------------------------------------+
 
 
 

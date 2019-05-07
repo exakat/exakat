@@ -29,11 +29,11 @@ class Composer {
 
     public function __construct($config) {
         if ($config->is_phar) {
-            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
-            copy($config->dir_root.'/data/composer.sqlite', $this->phar_tmp);
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods') . '.sqlite';
+            copy($config->dir_root . '/data/composer.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $config->dir_root.'/data/composer.sqlite';
+            $docPath = $config->dir_root . '/data/composer.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }

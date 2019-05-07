@@ -77,7 +77,7 @@ class Diplomat extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -153,13 +153,13 @@ MENU;
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
+        $html = str_replace('{{TITLE}}', 'PHP Static analysis for ' . $this->config->project, $html);
 
-        file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
+        file_put_contents($this->tmpName . '/datas/' . $file . '.html', $html);
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace('{{'.$bloc.'}}', $content, $html);
+        return str_replace('{{' . $bloc . '}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
@@ -195,7 +195,7 @@ MENU;
         $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $list[] = 'CompatibilityPHP'.$row['version'];
+            $list[] = 'CompatibilityPHP' . $row['version'];
             $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
@@ -226,7 +226,7 @@ MENU;
     }
 
     public function getIssuesBreakdown() {
-       $list = 'IN ('.makeList($this->themes->getThemeAnalyzers(array('Top10'))).')';
+       $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array('Top10'))) . ')';
        $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer $list AND count > 0";
        $res = $this->sqlite->query($query);
 
@@ -249,10 +249,10 @@ MENU;
 
         foreach ($final as $key => $value) {
             $issuesHtml []= '<div class="clearfix">
-                   <div class="block-cell">'.$key.'</div>
-                   <div class="block-cell text-center">'.$value.'</div>
+                   <div class="block-cell">' . $key . '</div>
+                   <div class="block-cell text-center">' . $value . '</div>
                  </div>';
-            $dataScript[] = '{label: "'.$key.'", value: '.( (int) $value).'}';
+            $dataScript[] = '{label: "' . $key . '", value: ' . ( (int) $value) . '}';
         }
         
         $issuesHtml = array_pad($issuesHtml, 4, '<div class="clearfix">

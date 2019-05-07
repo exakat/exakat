@@ -171,7 +171,7 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display('Create '.($result->toInt()).' link between new class and definition');
+        display('Create ' . ($result->toInt()) . ' link between new class and definition');
 
         // Create link between __clone and clone
         // parenthesis, typehint, local new,
@@ -190,7 +190,7 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display('Create '.($result->toInt()).' link between clone and magic method');
+        display('Create ' . ($result->toInt()) . ' link between clone and magic method');
 
         $this->log->log(__METHOD__);
     }

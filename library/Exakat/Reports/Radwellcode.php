@@ -96,7 +96,7 @@ class Radwellcode extends Reports {
             foreach($file['messages'] as $line => $column) {
                 $messages = $column[0];
                 foreach($messages as $message) {
-                    $text .= $file['filename'].':'.$line.' '.$message['message']."\n";
+                    $text .= $file['filename'] . ':' . $line . ' ' . $message['message'] . "\n";
                     $this->count();
                 }
             }
@@ -105,7 +105,7 @@ class Radwellcode extends Reports {
         if ($name === Reports::STDOUT) {
             echo $text;
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $text);
         }
     }
 

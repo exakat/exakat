@@ -81,7 +81,7 @@ class Filedependencieshtml extends Reports {
                                                'outgoing' => $out[$id]);
         }
 
-        file_put_contents($this->tmpName.'/fidep.json', json_encode($json));
+        file_put_contents($this->tmpName . '/fidep.json', json_encode($json));
 
         // Finalisation
         if ($this->finalName !== '/') {
@@ -89,7 +89,7 @@ class Filedependencieshtml extends Reports {
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 

@@ -40,8 +40,8 @@ class Results {
         }
     }
     
-    public function load(){
-        $res = $this->sqlite->query('SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN ('.$this->analyzerList.')');
+    public function load() {
+        $res = $this->sqlite->query('SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN (' . $this->analyzerList . ')');
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['htmlcode'] = PHPSyntax($row['fullcode']);

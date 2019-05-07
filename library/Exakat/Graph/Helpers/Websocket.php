@@ -43,9 +43,9 @@ class Websocket {
     'pong'         => 10,
   );
 
-  public function getLastOpcode()  { return $this->last_opcode;  }
+  public function getLastOpcode() { return $this->last_opcode;  }
   public function getCloseStatus() { return $this->close_status; }
-  public function isConnected()    { return $this->is_connected; }
+  public function isConnected() { return $this->is_connected; }
 
   public function setTimeout($timeout) {
     $this->options['timeout'] = $timeout;
@@ -426,7 +426,7 @@ class Websocket {
       'GET ' . $path_with_query . " HTTP/1.1\r\n"
       . implode(
         "\r\n", array_map(
-          function($key, $value) { return "$key: $value"; }, array_keys($headers), $headers
+          function ($key, $value) { return "$key: $value"; }, array_keys($headers), $headers
         )
       )
       . "\r\n\r\n";

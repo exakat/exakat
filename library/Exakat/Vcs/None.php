@@ -37,7 +37,6 @@ class None extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

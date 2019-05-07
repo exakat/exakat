@@ -26,7 +26,7 @@ class RemoteConfig extends Config {
     private $remoteJsonFile = 'config/remotes.json';
     
     public function __construct($projects_root) {
-        $this->remoteJsonFile = $projects_root.'/config/remotes.json';
+        $this->remoteJsonFile = $projects_root . '/config/remotes.json';
     }
 
     public function loadConfig($project) {

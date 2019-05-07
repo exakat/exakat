@@ -123,7 +123,7 @@ GREMLIN;
                 $return[] = $row;
             }
         } elseif ($this->config->style === 'DISTINCT') {
-            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").values("code").unique()';
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer . '").out("ANALYZED").values("code").unique()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
@@ -131,7 +131,7 @@ GREMLIN;
                 $return[] = array($values);
             }
         } elseif ($this->config->style === 'COUNTED') {
-            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m").by("code").cap("m")';
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer . '").out("ANALYZED").groupCount("m").by("code").cap("m")';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
@@ -159,7 +159,7 @@ GREMLIN;
                 } else {
                     $text .= "+ $k\n";
                     if (is_array($r)) {
-                        $text .= '  + '.implode("\n  + ", $r)."\n";
+                        $text .= '  + ' . implode("\n  + ", $r) . "\n";
                     } else {
                         $text .= "+ $r\n";
                     }
@@ -172,7 +172,7 @@ GREMLIN;
                 if ($this->config->style === 'COUNTED') {
                     $text .= "$k => $v\n";
                 } else {
-                    $text .= implode(', ', $v)."\n";
+                    $text .= implode(', ', $v) . "\n";
                 }
             }
         }
@@ -201,7 +201,7 @@ GREMLIN;
         }
 
         if ($this->config->file != '') {
-            $name = $this->config->file.'.'.$extension;
+            $name = $this->config->file . '.' . $extension;
             if (file_exists($name)) {
                 die( "$name already exists. Aborting\n");
             }

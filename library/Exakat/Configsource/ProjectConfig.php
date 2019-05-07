@@ -177,9 +177,9 @@ class ProjectConfig extends Config {
         if ($this->config['include_dirs'] === array('/')) {
             $include_dirs = 'include_dirs[] = "";';
         } else {
-            $include_dirs = 'include_dirs[] = "'.implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs'])."\";\n";
+            $include_dirs = 'include_dirs[] = "' . implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs']) . "\";\n";
         }
-        $ignore_dirs  = 'ignore_dirs[] = "'.implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs'])."\";\n";
+        $ignore_dirs  = 'ignore_dirs[] = "' . implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs']) . "\";\n";
         $file_extensions  = implode(',', $this->config['file_extensions']);
         
         $custom_configs = array();
@@ -191,7 +191,7 @@ class ProjectConfig extends Config {
             
             $cc = "[$key]\n";
             foreach($value as $name => $values) {
-                $cc .= "{$name}[] = ".implode(";\n{$name}[] = ", $values).";\n\n";
+                $cc .= "{$name}[] = " . implode(";\n{$name}[] = ", $values) . ";\n\n";
             }
             
             $cc .= PHP_EOL;

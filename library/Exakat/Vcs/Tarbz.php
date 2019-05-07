@@ -49,7 +49,7 @@ class Tarbz extends Vcs {
         $this->check();
 
         $binary = file_get_contents($source);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tar.bz2';
+        $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz') . '.tar.bz2';
         file_put_contents($archiveFile, $binary);
 
         $res = shell_exec("tar -tjf $archiveFile 2>&1 >/dev/null");
@@ -99,7 +99,6 @@ class Tarbz extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

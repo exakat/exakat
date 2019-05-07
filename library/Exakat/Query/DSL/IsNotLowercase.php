@@ -34,7 +34,7 @@ class IsNotLowercase extends DSL {
         if ($property === 'code') {
             return new Command('filter{it.get().value("code") != it.get().value("lccode")}');
         } else {
-            return new Command('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+            return new Command('filter{it.get().value("' . $property . '") != it.get().value("' . $property . '").toLowerCase()}');
         }
     }
 }
