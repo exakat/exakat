@@ -1,13 +1,9 @@
 <?php
 
-$expected     = array('undefined( )',
+$expected     = array('D\foo( )'
                      );
 
-$expected_not = array('f( )',
-                      'f2( )',
-                      'f3( )',
-                      'A\\fa( )',
-                      'B\\fb( )',
+$expected_not = array('C\D\foo( )',
                      );
 
 ?>
