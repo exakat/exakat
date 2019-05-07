@@ -203,7 +203,7 @@ class Project extends Tasks {
         display('Initial dump');
         $dumpConfig = $this->config->duplicate(array('collect' => true,
                                                      'thema'   => array('First')));
-        $firstDump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $firstDump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
         $firstDump->run();
         unset($firstDump);
         $this->logTime('Dumped and inited');
@@ -341,6 +341,9 @@ class Project extends Tasks {
         $themes = array_intersect($availableThemes, $themes);
         display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
 
+        global $VERBOSE;
+        $oldVerbose = $VERBOSE;
+        $VERBOSE = false;
         foreach($themes as $theme) {
             $this->addSnitch(array('step'    => 'Analyze : ' . $theme,
                                    'project' => $this->config->project));
@@ -398,6 +401,7 @@ class Project extends Tasks {
                 file_put_contents("{$this->config->log_dir}/analyze.$themeForFile.final.log", $e->getMessage());
             }
         }
+        $VERBOSE = $oldVerbose;
     }
     
     private function generateName() {
