@@ -34,11 +34,11 @@ class FunctioncallIs extends DSL {
         assert($fullnspath !== null, 'fullnspath can\'t be null in ' . __METHOD__);
 
         $diff = $this->normalizeFunctioncalls($fullnspath);
-        
+
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }
-        
+
         $atomIs = $this->dslfactory->factory('atomIs');
         $return = $atomIs->run('Functioncall', Analyzer::WITHOUT_CONSTANTS);
 
