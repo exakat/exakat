@@ -43,7 +43,6 @@ class Copy extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

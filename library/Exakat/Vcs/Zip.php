@@ -81,7 +81,6 @@ class Zip extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

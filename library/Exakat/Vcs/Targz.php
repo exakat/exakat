@@ -99,7 +99,6 @@ class Targz extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

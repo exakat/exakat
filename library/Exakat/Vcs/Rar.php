@@ -79,7 +79,6 @@ class Rar extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

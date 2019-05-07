@@ -79,7 +79,6 @@ class SevenZ extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

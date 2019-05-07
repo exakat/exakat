@@ -65,7 +65,7 @@ class Cvs extends Vcs {
 
             return;
         }
-        foreach(explode("\n", $res) as $info) {
+        foreach (explode("\n", $res) as $info) {
             list($name, $value) = explode(': ', trim($info));
             $this->info[$name] = $value;
         }
@@ -107,7 +107,6 @@ class Cvs extends Vcs {
         display("No support for line diff in CVS.\n");
         return array();
     }
-
 }
 
 ?>

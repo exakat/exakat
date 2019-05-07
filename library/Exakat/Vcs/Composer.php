@@ -70,7 +70,7 @@ class Composer extends Vcs {
         $jsonLock = json_decode($jsonLockText);
 
         $return = '';
-        foreach($jsonLock->packages as $package) {
+        foreach ($jsonLock->packages as $package) {
             if ($package->name === $component) {
                 $return = "{$package->source->reference} (version : {$package->version})";
             }
@@ -118,7 +118,6 @@ class Composer extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>

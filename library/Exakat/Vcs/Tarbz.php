@@ -99,7 +99,6 @@ class Tarbz extends Vcs {
 
         return $status;
     }
-
 }
 
 ?>
