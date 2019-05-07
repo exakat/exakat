@@ -93,10 +93,10 @@ class Initproject extends Tasks {
 
         $dotProject          = ".$project";
         if (empty($repositoryURL)) {
-            $vcs = new None($dotProject, $this->config->code_dir);
+            $vcs = new None($dotProject, "$tmpPath/code");
         } else {
             $vcsClass = Vcs::getVcs($this->config);
-            $vcs = new $vcsClass($dotProject, $this->config->code_dir);
+            $vcs = new $vcsClass($dotProject, "$tmpPath/code");
         }
  
         if (empty($repositoryURL)) {

@@ -69,7 +69,8 @@ class Git extends Vcs {
         unset($repositoryDetails['fragment']);
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
-        $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 {$this->executable} clone -q $repositoryNormalizedURL";
+        $codePath = dirname($this->destinationFull);
+        $shell = "cd $codePath;GIT_TERMINAL_PROMPT=0 {$this->executable} clone -q $repositoryNormalizedURL";
 
         if (!empty($this->branch)) {
             display("Check out with branch '$this->branch'");
@@ -172,7 +173,7 @@ class Git extends Vcs {
         $changes = array();
 
         $lines = explode(PHP_EOL, $res);
-        foreach($lines as $line) {
+        foreach ($lines as $line) {
             if (preg_match('#diff --git a(/.*?) b(/.*)#', $line, $r)) {
                 $file = $r[1];
                 continue;
@@ -197,8 +198,10 @@ class Git extends Vcs {
 
         $files = array();
         $rows = explode(PHP_EOL, $res);
-        foreach($rows as $row) {
-            if(empty($row)) { continue; }
+        foreach ($rows as $row) {
+            if (empty($row)) {
+                continue;
+            }
             if (isset($files[$row])) {
                 ++$files[$row];
             } else {
