@@ -103,7 +103,6 @@ class Git extends Vcs {
             $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         } else {
             $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
-            print $resInitial;
             $branch = '';
         }
     

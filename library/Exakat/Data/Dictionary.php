@@ -36,7 +36,7 @@ class Dictionary {
     
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
-        foreach($this->dictionary as $key => $value) {
+        foreach(array_keys($this->dictionary) as $key) {
             $this->lcindex[mb_strtolower($key)] = 1;
         }
     }

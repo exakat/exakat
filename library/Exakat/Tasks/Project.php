@@ -39,8 +39,6 @@ use Exakat\Vcs\Vcs;
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
 
-    private $project_dir = '.';
-
     protected $themesToRun = array('Analyze',
                                    'Preferences',
                                    );
@@ -61,8 +59,6 @@ class Project extends Tasks {
         if (!$project->validate()) {
             throw new InvalidProjectName($project->getError());
         }
-
-        $this->project_dir = "{$this->config->projects_root}/projects/$project";
 
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
@@ -90,20 +86,16 @@ class Project extends Tasks {
         Analyzer::$datastore = $this->datastore;
 
         display('Search for external libraries' . PHP_EOL);
-        $pathCache = "{$this->config->projects_root}/projects/$project/config.cache";
+        $pathCache = "{$this->config->project_dir}/config.cache";
         if (file_exists($pathCache)) {
             unlink($pathCache);
         }
-        $args = array ( 1 => 'findextlib',
-                        2 => '-p',
-                        3 => $this->config->project,
-                        4 => '-u',
-                        );
 
-        $configThema = new Config($args);
+        $configThema = $this->config->duplicate(array('update' => true));
 
         $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
         $analyze->run();
+        unset($configThema);
 
         $this->addSnitch(array('step'    => 'External lib',
                                'project' => $this->config->project));
@@ -209,8 +201,11 @@ class Project extends Tasks {
         // Dump is a child process
         // initialization and first collection (action done once)
         display('Initial dump');
-        $shell = $this->config->php . ' ' . $this->config->executable . ' dump -p ' . $this->config->project . ' -T First -collect';
-        shell_exec($shell);
+        $dumpConfig = $this->config->duplicate(array('collect' => true,
+                                                     'thema'   => array('First')));
+        $firstDump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $firstDump->run();
+        unset($firstDump);
         $this->logTime('Dumped and inited');
 
         if (empty($this->config->program)) {
@@ -226,13 +221,7 @@ class Project extends Tasks {
 
         $this->logTime('Analyze');
 
-        $args = array ( 1 => 'dump',
-                        2 => '-p',
-                        3 => $this->config->project,
-                    );
-        $dumpConfig = new Config($args);
-
-        $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+        $dump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         foreach($this->config->themas as $name => $analyzers) {
             $dump->checkThemes($name, $analyzers);
         }
@@ -243,17 +232,8 @@ class Project extends Tasks {
                                    'project' => $this->config->project));
 
             try {
-                $args = array ( 1 => 'report',
-                                2 => '-p',
-                                3 => $this->config->project,
-                                4 => '-file',
-                                5 => constant("\Exakat\Reports\\$format::FILE_FILENAME"),
-                                6 => '-format',
-                                7 => $format,
-                                );
-
-                $reportConfig = new Config($args);
-    
+                $reportConfig = $this->config->duplicate(array('file'   => constant("\Exakat\Reports\\$format::FILE_FILENAME"),
+                                                               'format' => array($format)));
                 $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
 
                 $report->run();
@@ -293,20 +273,12 @@ class Project extends Tasks {
         $this->addSnitch(array('step'    => 'Analyzer',
                                'project' => $this->config->project));
 
-        $args = array ( 1 => 'analyze',
-                        2 => '-p',
-                        3 => $this->config->project,
-                        4 => '-P',
-                        5 => $analyzers,
-                        6 => '-norefresh',
-                        7 => '-u'
-                        );
-        if ($quiet === true) {
-            $args[] = '-q';
-        }
-
         try {
-            $analyzeConfig = new Config($args);
+            $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
+                                                            'update'    => true,
+                                                            'program'   => $analyzers,
+                                                            'verbose'   => false,
+                                                            ));
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
             $analyze->run();
@@ -314,15 +286,11 @@ class Project extends Tasks {
             unset($analyzeConfig);
             $this->logTime('Analyze : ' . (is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
 
-            $args = array ( 1 => 'dump',
-                            2 => '-p',
-                            3 => $this->config->project,
-                            4 => '-P',
-                            5 => $analyzers,
-                            6 => '-u',
-                        );
-            $dumpConfig = new Config($args);
-
+            print_r($analyzers);
+            $dumpConfig = $this->config->duplicate(array('update'    => true,
+                                                         'program'   => $analyzers,
+                                                         ));
+ 
             $audit_end = time();
             $query = 'g.V().count()';
             $res = $this->gremlin->query($query);
@@ -373,28 +341,17 @@ class Project extends Tasks {
         $themes = array_intersect($availableThemes, $themes);
         display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
 
-        global $VERBOSE;
-        $oldVerbose = $VERBOSE;
-        $VERBOSE = false;
         foreach($themes as $theme) {
             $this->addSnitch(array('step'    => 'Analyze : ' . $theme,
                                    'project' => $this->config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
-            $args = array ( 1 => 'analyze',
-                            2 => '-p',
-                            3 => $this->config->project,
-                            4 => '-T',
-                            5 => $theme,
-                            6 => '-norefresh',
-                            7 => '-u'
-                            );
-            if ($quiet === true) {
-                $args[] = '-q';
-            }
-
             try {
-                $analyzeConfig = new Config($args);
+                $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
+                                                                'update'    => true,
+                                                                'thema'     => array($theme),
+                                                                'verbose'   => false,
+                                                                ));
 
                 $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
                 $analyze->run();
@@ -402,15 +359,10 @@ class Project extends Tasks {
                 unset($analyzeConfig);
                 $this->logTime("Analyze : $theme");
 
-                $args = array ( 1 => 'dump',
-                                2 => '-p',
-                                3 => $this->config->project,
-                                4 => '-T',
-                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
-                                6 => '-u',
-                            );
-
-                $dumpConfig = new Config($args);
+                $dumpConfig = $this->config->duplicate(array('update'    => true,
+                                                             'thema'     => array($theme),
+                                                             'verbose'   => false,
+                                                             ));
 
                 $audit_end = time();
                 $query = 'g.V().count()';
@@ -446,7 +398,6 @@ class Project extends Tasks {
                 file_put_contents("{$this->config->log_dir}/analyze.$themeForFile.final.log", $e->getMessage());
             }
         }
-        $VERBOSE = $oldVerbose;
     }
     
     private function generateName() {

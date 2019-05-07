@@ -179,7 +179,7 @@ class Export extends Tasks {
     private function display_table($V, $E, $root) {
         $r = '<table>';
 
-        foreach($V as $id => $v) {
+        foreach($V as $v) {
             $row = array(highlight_string($v['code'], true));
             if (isset($v['atom'])) {
                 $row[] = $v['atom'];

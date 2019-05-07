@@ -245,6 +245,19 @@ class Config {
         unset($return[0]);
         return json_encode(array_values($return));
     }
+    
+    public function duplicate($options) {
+        $return = clone $this;
+        
+        // Only update existing values : ignoring the rest
+        foreach($options as $key => $value) {
+            if (isset($return->options[$key])) {
+                $return->options[$key] = $value;
+            }
+        }
+
+        return $return;
+    }
 }
 
 ?>
