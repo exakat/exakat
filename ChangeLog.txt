@@ -1,4 +1,4 @@
-Version 1.7.8 (Cui Juqing of Dingyi, coming up)
+Version 1.7.9 (Shi Shutong of Dingwei, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 1.7.8 (Cui Juqing of Dingyi, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.8 (Cui Juqing of Dingyi, 2019-05-06)
++ Architecture
+    + renamed test.php to ut.php in tests
+    + reorganized destinations folders 
+    + organized exakat for 'inside code' audit
++ Analyzer
+    + New analysis : support for libsvm
+    + Updated analysis : Multiple unset() handles unset() at the beginning of the scope
+    + Updated analysis : undefined static class now accounts for PHP and module classes
+    + Checked unit tests : 2961 / 2995 test pass (99% pass)
++ Tokenizer
+    + Extended class usage to static::class.
+    + refactored 2 analysis for speed : double instruction and double assignations
+    + fixed recent bug where Project token is twice.
 
 Version 1.7.7 (Sima Qing of Dingmao, 2019-04-29)
 + Architecture
