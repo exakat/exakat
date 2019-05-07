@@ -140,7 +140,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
