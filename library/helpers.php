@@ -90,7 +90,7 @@ function copyDir($src, $dst) {
 
     $total = 0;
     mkdir($dst, 0755);
-    while(is_string($file = readdir($dir))) {
+    while (is_string($file = readdir($dir))) {
         if ($file === '.' || $file === '..' ) {
             continue;
         }
@@ -101,7 +101,6 @@ function copyDir($src, $dst) {
             copy("$src/$file", "$dst/$file");
             ++$total;
         }
-        
     }
 
     closedir($dir);
@@ -168,7 +167,7 @@ function unparse_url($parsed_url) {
 function array_array_unique($array) {
     $return = array();
     
-    foreach($array as $a) {
+    foreach ($array as $a) {
         sort($a);
         $key = crc32(implode('', $a));
         
@@ -181,7 +180,7 @@ function array_array_unique($array) {
 // [a => b, ...] to [ b => [a1, a2, ...]]
 function array_groupby($array) {
     $return = array();
-    foreach($array as $k => $v) {
+    foreach ($array as $k => $v) {
         if (isset($return[$v])) {
             $return[$v][] = $k;
         } else {
@@ -194,8 +193,8 @@ function array_groupby($array) {
 
 function array_ungroupby($array) {
     $return = array();
-    foreach($array as $k => $v) {
-        foreach($v as $w) {
+    foreach ($array as $k => $v) {
+        foreach ($v as $w) {
             $return[$w] = $k;
         }
     }
@@ -337,9 +336,9 @@ function unicode_blocks($string) {
     );
     
     $return = array();
-    foreach($characters as $i => $e) {
+    foreach ($characters as $i => $e) {
         $previous = '';
-        foreach($ranges as $low => $name) {
+        foreach ($ranges as $low => $name) {
             if ($low > $e) {
                 if (isset($return[$previous])) {
                     ++$return[$previous];
@@ -377,7 +376,7 @@ function PHPSyntax($code) {
         $php = '<span style="color: #0000BB">' . $php;
     }
     if (substr($php, -17) === '<span style="colo') {
-    //<br /></span><span style="colo
+        //<br /></span><span style="colo
         $php = substr($php, 0, -30);
         $php .= '</span>';
     } else {
@@ -469,10 +468,10 @@ function rst2htmlLink($txt) {
 }
 
 function rst2literal($txt) {
-   $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
-       $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . str_replace('<br />', '', $x[1]) . '?&gt;</pre>';
-       return $return;
-   }, $txt);
+    $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
+        $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . str_replace('<br />', '', $x[1]) . '?&gt;</pre>';
+        return $return;
+    }, $txt);
 
     return $return;
 }
@@ -483,7 +482,7 @@ function rsttable2html($raw) {
     $lines = explode("\n", $raw);
     $table = false;
     
-    foreach($lines as $line) {
+    foreach ($lines as $line) {
         if (preg_match('/^[\+-]+<br \/>$/', $line, $r)) {
             if ($table !== true) {
                 $table = true;
@@ -516,7 +515,7 @@ function rstlist2html($raw) {
     $lines = explode("\n", $raw);
     $list = false;
     
-    foreach($lines as $line ) {
+    foreach ($lines as $line ) {
         if (preg_match('/^\*\s+([^\*]+)\s*<br \/>$/', $line, $r)) {
             if ($list === true) {
                 $html [] = "<li>$r[1]</li>";
@@ -558,10 +557,11 @@ function str2array($string, $delimiter = ',') {
 
 function ordinal($number) {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
-    if ((($number % 100) >= 11) && (($number%100) <= 13))
+    if ((($number % 100) >= 11) && (($number%100) <= 13)) {
         return "{$number}th";
-    else
+    } else {
         return $number . $ends[$number % 10];
+    }
 }
 
 /*
@@ -577,13 +577,13 @@ array('a/b' => 1 ) to Array
 function raiseDimensions($array, $split='/') {
     $return = array();
     
-    foreach($array as $k => $value) {
+    foreach ($array as $k => $value) {
         $kr = trim($k, $split);
         $d = explode($split, $kr);
         
         $last = array_pop($d);
         $sub = &$return;
-        foreach($d as $e) {
+        foreach ($d as $e) {
             if (isset($sub[$e]) && is_array($sub[$e])) {
                 $sub = &$sub[$e];
             } else {
@@ -612,10 +612,10 @@ Array
 function flattenDimensions($array, $split='/') {
     $return = array();
     
-    foreach($array as $k => $value) {
+    foreach ($array as $k => $value) {
         if (is_array($value)) {
             $valueFlattened = flattenDimensions($value);
-            foreach($valueFlattened as $k2 => $value2) {
+            foreach ($valueFlattened as $k2 => $value2) {
                 $return["$k$split$k2"] = $value2;
             }
         } else {
@@ -629,8 +629,8 @@ function flattenDimensions($array, $split='/') {
 function array_flip_arrays($array) {
     $return = array();
 
-    foreach($array as $key => $value) {
-        foreach($value as $v) {
+    foreach ($array as $key => $value) {
+        foreach ($value as $v) {
             if (isset($return[$v])) {
                 $return[$v][] = $key;
             } else {
@@ -646,7 +646,7 @@ function sort_dependencies($array, $level = 0) {
     $return = array();
     $next = array();
     
-    foreach($array as $a => $b) {
+    foreach ($array as $a => $b) {
         if (empty($b)) {
             $return[] = $a;
         } else {
@@ -656,7 +656,7 @@ function sort_dependencies($array, $level = 0) {
     
     if (!empty($next)) {
         $keys = array_keys($next);
-        foreach($next as $a => &$b) {
+        foreach ($next as $a => &$b) {
             $b = array_diff($b, $return);
             
             if (empty(array_intersect($b, $keys))) {
@@ -677,7 +677,7 @@ function filter_analyzer($analyzer) {
 }
 
 function array_sub_sort(&$list) {
-    foreach($list as &$l) {
+    foreach ($list as &$l) {
         sort($l);
     }
     unset($l);

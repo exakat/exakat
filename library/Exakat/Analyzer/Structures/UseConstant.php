@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UseConstant extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs(array('\\php_version', 
-                                    '\\php_sapi_name', 
+        $this->atomFunctionIs(array('\\php_version',
+                                    '\\php_sapi_name',
                                     '\\pi',
                                     ))
              ->back('first');
