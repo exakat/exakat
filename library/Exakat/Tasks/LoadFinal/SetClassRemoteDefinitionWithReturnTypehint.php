@@ -29,22 +29,26 @@ use Exakat\Query\Query;
 class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
     public function run() {
         $query = $this->newQuery('setClassRemoteDefinitionWithTypehint methods');
-        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
-              ->hasNoIn('DEFINITION')
+        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->hasOut('RETURNTYPE')
+              ->outIs('DEFINITION')
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('RIGHT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('LEFT')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Propertydefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('OBJECT')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
-              ->outIs('OBJECT')
-              ->inIs('DEFINITION')
-              ->atomIs(array('Propertydefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('RIGHT')
-              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
+              ->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->back('first')
+              
               ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
@@ -64,71 +68,39 @@ class SetClassRemoteDefinitionWithReturnTypehint extends LoadFinal {
 //        for($i = 0; $i < 2; ++$i) {
             $query = $this->newQuery('setClassRemoteDefinitionWithTypehint properties');
             $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
-                  ->outIs('DEFINITION')
-                  ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
-                  ->inIs('RIGHT')
-                  ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-                  ->outIs('LEFT')
-                  // can be anythingm really
-                  ->inIs('DEFINITION')
-                  ->atomIs(array('Variabledefinition' ,'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
-    // Variable definition ou bien proeprty definition
-                  ->outIs('DEFINITION')
-                  ->inIs('OBJECT')
-                  ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-                  ->hasNoIn('DEFINITION')
-                  ->_as('member')
-                  ->outIs('MEMBER')
-                  ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-                  ->savePropertyAs('code', 'name')
-    
-                  ->back('first')
-                  ->outIs('RETURNTYPE')
-                  ->inIs('DEFINITION')
-                  ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-                  ->goToAllParents(Analyzer::INCLUDE_SELF)
-                  ->outIs('PPP')
-                  ->outIs('PPP')
-                  ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
-                  ->addETo('DEFINITION', 'member')
-                  ->returnCount();
+              ->hasOut('RETURNTYPE')
+              ->outIs('DEFINITION')
+              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('RIGHT')
+              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('LEFT')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Propertydefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
+              ->inIs('OBJECT')
+              ->hasNoIn('DEFINITION')
+              ->_as('member')
+              ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('MEMBER')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member')
+              ->returnCount();
             $query->prepareRawQuery();
             $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
             $countP += $result->toInt();
 //        }
 
-        $query = $this->newQuery('setClassRemoteDefinitionWithTypehint constants');
-        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('constante')
-              ->hasNoIn('DEFINITION')
-              ->outIs('CONSTANT')
-              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('code', 'name')
-              ->inIs('CONSTANT')
-              ->outIs('CLASS')
-              ->inIs('DEFINITION')
-              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('RIGHT')
-              ->atomIs(Analyzer::$FUNCTIONS_CALLS, Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->outIs('RETURNTYPE')
-              ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->outIs('CONST')
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constante')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countC = $result->toInt();
-
-        display('Set ' . ($countP + $countM + $countC) . ' method, constants and properties remote with return typehint');
+        // constant can't be assigned a method results
+        display('Set ' . ($countP + $countM) . ' method and properties remote with return typehint');
     }
 }
 
