@@ -116,11 +116,16 @@ abstract class Reports {
         $final = $this->_generate($list);
 
         if ($name === self::STDOUT) {
-            echo $final ;
+            if (!empty($final)) {
+                echo $final;
+                exit(1);
+            } else {
+                exit(0);
+            }
         } elseif ($name === self::INLINE) {
             return $final ;
         } else {
-            file_put_contents($folder . '/' . $name . '.' . $this::FILE_EXTENSION, $final);
+            file_put_contents("$folder/$name." . $this::FILE_EXTENSION, $final);
         }
     }
 

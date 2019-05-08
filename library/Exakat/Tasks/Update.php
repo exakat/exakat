@@ -30,8 +30,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Vcs\{Bazaar, Cvs, Composer, Git, Mercurial, Svn};
 
-class Update extends Tasks
-{
+class Update extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     protected $logname = self::LOG_NONE;
@@ -51,18 +50,24 @@ class Update extends Tasks
     }
 
     private function runDefault() {
+        if (!file_exists('./projects')) {
+            display("No a root install. Aborting all update. Provide .exakat.ini to enable update in this folder.\n");
+            return;
+        }
+
         $paths = glob("{$this->config->projects_root}/projects/*");
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
 
         echo 'Updating ' . count($projects) . ' projects' . PHP_EOL;
+        sleep(3); // This is letting the user understand the command.
         shuffle($projects);
         foreach ($projects as $project) {
-            display("updating $project" . PHP_EOL);
+            display("updating $project\n");
 
             $args = array(1 => 'update',
-                            2 => '-p',
-                            3 => $project,
+                          2 => '-p',
+                          3 => $project,
             );
             $updateConfig = new Config($args);
 
@@ -71,25 +76,22 @@ class Update extends Tasks
     }
 
     private function runProject($project) {
-        $path = "{$this->config->projects_root}/projects/$project";
-
-        if (!file_exists($path)) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
 
-        if (!is_dir($path)) {
+        if (!is_dir($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
 
-        if (!file_exists("$path/code")) {
+        if (!file_exists($this->config->code_dir)) {
             throw new NoCodeInProject($this->config->project);
         }
 
         $this->update($this->config);
     }
 
-    private function update(Config $updateConfig)
-    {
+    private function update(Config $updateConfig) {
         switch (true) {
             // symlink case
             case $updateConfig->project_vcs === 'rar' :

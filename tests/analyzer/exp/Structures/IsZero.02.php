@@ -5,8 +5,9 @@ $expected     = array('$c - $c',
                       '$d + $e - $d',
                       '-$c + $c',
                       '$c + $d - $e - $c',
-                      '-$d + $d + $e',
-                      '$d - $d + $e',
+                      '$d - $d + $e', 
+                      '-$d + $d + $e', 
+                      '-$c - $c',
                      );
 
 $expected_not = array('$b[3] + $c6 + $d->foo(1,2,3) - $c6 + $b[3]',

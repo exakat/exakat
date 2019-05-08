@@ -42,23 +42,23 @@ class MismatchTypeAndDefault extends Analyzer {
 filter{
     switch(it.get().value("fullnspath")) {
         case '\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Staticclass"]);
+            !(type in ["String", "Heredoc", "Concatenation", "Staticclass", "Null"]);
             break;
 
         case '\\int' : 
-            !(type in ["Integer", "Addition", "Multiplication", "Power"]);
+            !(type in ["Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
         case '\\float' : 
-            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power"]);
+            !(type in ["Real", "Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
         case '\\bool' : 
-            !(type in ["Boolean", "Comparison", "Logical", "Not"]);
+            !(type in ["Boolean", "Comparison", "Logical", "Not", "Null"]);
             break;
 
         case '\\array' : 
-            !(type in ["Arrayliteral", "Addition"]);
+            !(type in ["Arrayliteral", "Addition", "Null"]);
             break;
         
         // callable
@@ -91,7 +91,7 @@ GREMLIN
 filter{
     switch(it.get().value("fullnspath")) {
         case '\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass"]);
+            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass", "Integer", "Real"]);
             break;
 
         case '\\int' : 
@@ -99,7 +99,7 @@ filter{
             break;
 
         case '\\float' : 
-            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
+            !(type in ["Real", "Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
         case '\\bool' : 

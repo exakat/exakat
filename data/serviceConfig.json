@@ -48,7 +48,7 @@
  "cvs":{"homepage":"http://savannah.nongnu.org/projects/cvs",
            "file":["CVS"]},
  "docker":{"homepage":"http://www.docker.com/",
-           "file":[".dockerignore", ".docker", "docker-compose.yml"]},
+           "file":[".dockerignore", ".docker", "docker-compose.yml", "Dockerfile"]},
  "drone":{"homepage":"http://docs.drone.io/",
            "file":[".dockerignore", ".docker"]},
  "editorconfig":{"homepage":"https://editorconfig.org/",

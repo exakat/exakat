@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('new SVM( )',
+$expected     = array('SVM( )',
                      );
 
-$expected_not = array('new SVN( )',
+$expected_not = array('SVN( )',
                      );
 
 ?>

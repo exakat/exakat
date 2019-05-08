@@ -2001,7 +2001,6 @@ class Load extends Tasks {
         $this->currentMethod[]   = $arguments;
 
         $current = $this->id;
-        $argumentsId = array();
 
         $argumentsList  = array();
 
@@ -2016,7 +2015,6 @@ class Load extends Tasks {
             $arguments->args_max = 0;
             $arguments->args_min = 0;
             $arguments->count    = 0;
-            $argumentsId[]       = $void;
 
             $this->runPlugins($arguments, array($void));
 
@@ -2113,7 +2111,6 @@ class Load extends Tasks {
                 }
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
-                $argumentsId[] = $index;
                 
                 $fullcode[] = $index->fullcode;
                 $argumentsList[] = $index;
@@ -5520,7 +5517,6 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
-        $fullcode = array();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
             $this->processNext();
@@ -5542,7 +5538,6 @@ class Load extends Tasks {
         $index = $this->popExpression();
         $index->rank = 0;
         $this->addLink($functioncall, $index, 'ARGUMENT');
-        $fullcode[] = $index->fullcode;
 
         $functioncall->code       = $this->tokens[$current][1];
         $functioncall->fullcode   = $this->tokens[$current][1] . ' ' . $index->fullcode;

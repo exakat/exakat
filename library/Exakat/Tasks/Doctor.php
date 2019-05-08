@@ -220,16 +220,25 @@ TEXT
         }
 
         // projects
-        if (!file_exists("{$this->config->projects_root}/projects/test")) {
+        if ( file_exists('./projects') && 
+            !file_exists("{$this->config->projects_root}/projects/test")) {
+
+            $i = 0;
+            do {
+                ++$i;
+                $id = rand(0, PHP_INT_MAX);
+            } while (file_exists("{$this->config->projects_root}/projects/test$id") && $i < 100);
+
             $args = array ( 1 => 'init',
                             2 => '-p',
-                            3 => 'test2',
+                            3 => "test$id",
                           );
             $initConfig = new Config($args);
-
             $init = new Initproject($this->gremlin, $initConfig, Tasks::IS_SUBTASK);
             $init->run();
-            rename("{$this->config->projects_root}/projects/test2", "{$this->config->projects_root}/projects/test");
+            rename("{$this->config->projects_root}/projects/test$id", "{$this->config->projects_root}/projects/test");
+            unset($init);
+            unset($initConfig);
         }
 
         $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/")    ? 'Yes' : 'No';

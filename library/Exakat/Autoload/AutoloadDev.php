@@ -26,6 +26,8 @@ use Exakat\Config;
 use Phar;
 
 class AutoloadDev {
+    const LOAD_ALL = null;
+
     private $path = '';
     
     public function __construct($path) {
@@ -67,6 +69,58 @@ class AutoloadDev {
         $ini = parse_ini_file($fullPath);
 
         return $ini ?? array();
+    }
+
+    public function loadIni($name, $libel = self::LOAD_ALL) {
+        $fullPath = "{$this->path}/data/$name";
+
+        if (!file_exists($fullPath)) {
+            return array();
+        }
+        
+        $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
+        if (empty($ini)) {
+            return array();
+        }
+        
+        if ($libel === self::LOAD_ALL) {
+            $return = $ini;
+        } else {
+            $return = $ini[$libel];
+        }
+
+        return array_merge($return);
+    }
+
+    public function loadJson($name, $libel = self::LOAD_ALL) {
+        $fullPath = "{$this->path}/data/$name";
+
+        if (!file_exists($fullPath)) {
+            return array();
+        }
+        
+        $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
+        if (empty($ini)) {
+            return array();
+        }
+
+        $json = file_get_contents($fullPath);
+        if (empty($json)) {
+            return array();
+        }
+ 
+        $data = json_decode($json);
+        if (empty($data)) {
+            return array();
+        }
+        
+        if ($libel === self::LOAD_ALL) {
+            $return = (array) $data;
+        } else {
+            $return = array_column($data, $libel);
+        }
+
+        return $return;
     }
 }
 

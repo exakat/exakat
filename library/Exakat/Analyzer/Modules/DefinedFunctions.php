@@ -26,17 +26,17 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class DefinedFunctions extends FunctionUsage {
-    protected $traits = array();
+    protected $functions = array();
 
     public function analyze() {
-        $functions = $this->config->ext->loadIni('functions.ini', 'functions');
+        $functions = $this->config->dev->loadIni('functions.ini', 'functions');
         
         if (empty($functions)) {
             return;
         }
         
         $this->functions = $functions;
-        return parent::analyze();
+        parent::analyze();
     }
 }
 

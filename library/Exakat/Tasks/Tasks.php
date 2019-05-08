@@ -102,7 +102,6 @@ abstract class Tasks {
             $this->config->project !== 'default') {
                 if (!file_exists($this->config->tmp_dir) &&
                      file_exists(dirname($this->config->tmp_dir)) ) {
-                    var_dump($this->config->tmp_dir);
                     mkdir($this->config->tmp_dir, 0700);
             }
         } else {

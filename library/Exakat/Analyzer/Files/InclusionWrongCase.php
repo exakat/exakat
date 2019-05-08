@@ -61,7 +61,6 @@ filter{
         including = path + including;
     }
 
-    
     including = including.replaceAll('/\\\./', '/');
     including = including.replaceAll('/[^/]+/\\\.\\\./', '/');
 
@@ -111,12 +110,12 @@ sideEffect{
             } else if (it.label() == "Staticconstant") {
                 including.add(it.value("noDelimiter"));
             } else if (it.label() == "Functioncall" && 
-                       it.value("fullnspath") == "\\\\dirname") {
+                       it.value("fullnspath") == "\\dirname") {
                 loop = 1;
                 dirname = it.vertices(OUT, "ARGUMENT").findAll{ it.property('rank').value() == 0; }[0]; 
                 
                 while( dirname.label() == 'Functioncall' && 
-                       dirname.value("fullnspath") == "\\\\dirname") {
+                       dirname.value("fullnspath") == "\\dirname") {
                     dirname = dirname.vertices(OUT, "ARGUMENT").next();
                     ++loop;
                 };
@@ -133,13 +132,13 @@ sideEffect{
             } else if (it.label() == "Parenthesis") {
                 code = it.vertices(OUT, "CODE").next();
                 if (code.label() == "Functioncall" && 
-                    code.value("fullnspath") == "\\\\dirname") {
+                    code.value("fullnspath") == "\\dirname") {
 
                     loop = 1;
                     dirname = code.vertices(OUT, "ARGUMENT").findAll{ it.property('rank').value() == 0; }[0]; 
                     
                     while( dirname.label() == 'Functioncall' && 
-                           dirname.value("fullnspath") == "\\\\dirname") {
+                           dirname.value("fullnspath") == "\\dirname") {
                         dirname = dirname.vertices(OUT, "ARGUMENT").next();
                         ++loop;
                     };

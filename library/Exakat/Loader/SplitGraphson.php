@@ -77,7 +77,6 @@ class SplitGraphson extends Loader {
     }
 
     public function finalize() {
-        display("Finishing last upload : $this->total lines\n");
         if ($this->total !== 0) {
             $this->saveNodes();
         }
