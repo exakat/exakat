@@ -58,6 +58,7 @@ sideEffect{x = [:]; id2 = it.get().id();}
    __.sideEffect{ previous = 1; supervious = 1;}
      .repeat(
        __.where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT").hasLabel("Addition").sideEffect{ previous = p;}.fold())
+         .where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("SIGN").sideEffect{ previous = p;}.fold())
          .where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT", "CODE", "SIGN").hasLabel("Assignation", "Parenthesis", "Sign").sideEffect{ previous = 1; supervious *= p;}.fold())
          .out("LEFT", "RIGHT", "CODE", "SIGN")
    )
@@ -65,9 +66,10 @@ sideEffect{x = [:]; id2 = it.get().id();}
     .hasLabel($labelsList).not(where( __.in("LEFT").hasLabel("Assignation")))
     .sideEffect{ v = it.get().value("fullcode");}
 
-    .where(__.in("RIGHT").sideEffect{ if (it.get().value("code") == $minus[0]) { inc = -1 * supervious; } else { inc = supervious;} }.fold())
-    .where(__.in("LEFT").sideEffect{ inc = previous;}.fold())
-    .where(__.in("SIGN").sideEffect{ inc = supervious;}.fold())
+    .where(__.in("RIGHT").sideEffect{ if (it.get().value("token") == 'T_MINUS') { inc = -1; } else { inc = 1;} }.fold())
+    .where(__.in("LEFT").not(where(__.in("RIGHT"))).sideEffect{ inc = 1;}.fold())
+    .where(__.in("LEFT").in("RIGHT").sideEffect{ if (it.get().value("token") == 'T_MINUS') { inc = -1; } else { inc = 1;} }.fold())
+    .where(__.in("SIGN").sideEffect{ inc = previous * supervious;}.fold())
     .where(__.in("CODE").sideEffect{ inc = supervious;}.fold())
 
     .sideEffect{ 
