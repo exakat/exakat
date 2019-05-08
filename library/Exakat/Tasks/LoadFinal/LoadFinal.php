@@ -82,6 +82,10 @@ class LoadFinal {
         $task->run();
         $this->log('SpotPHPNativeFunctions');
 
+        $task = new SpotExtensionNativeFunctions($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('Spot Extensions Native Functions');
+
         // stats calculation : it will fill the functioncall list
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
