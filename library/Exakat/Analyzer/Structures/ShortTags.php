@@ -26,12 +26,15 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShortTags extends Analyzer {
+    protected $phpVersion = '7.0-';
+
     protected $phpConfiguration = array('short_open_tag' => true,
                                         'asp_tags'       => true);
 
     public function analyze() {
+        // <? code
         $this->atomIs('Phpcode')
-             ->codeIs(array('<?', '<script language="php">', '<%=', '<%'), true);
+             ->codeIs(array('<?', '<script language="php">', '<%=', '<%'), self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }
