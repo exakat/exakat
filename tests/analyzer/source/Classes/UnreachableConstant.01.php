@@ -5,8 +5,8 @@ class x {
     
     function foo() {
         echo x::A;
-        echo self::A;
-        echo static::A;
+        echo Self::A;
+        echo Static::A;
         echo \x::A;
 
         echo Z::A; // Just unknown
@@ -16,10 +16,10 @@ class x {
 class y extends x {
     function foo() {
         echo x::A;
-        echo self::A;
-        echo static::A;
+        echo sElf::A;
+        echo sTatic::A;
         echo \x::A;
-        echo parent::A;
+        echo pArent::A;
 
         echo Z::A; // Just unknown
     }
