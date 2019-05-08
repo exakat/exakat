@@ -33,8 +33,10 @@ class NoChildWithRank extends DSL {
 
         if (is_int($rank)) {
             return new Command('not( where( __.out(' . $this->SorA($link) . ').has("rank", ***) ) )', array(abs($rank)));
-        } else {
-            return new Command('not( where( __.out(' . $this->SorA($link) . ').filter{it.get().value("rank") == ***; } ) )', array($rank));
+        } elseif ($this->isVariable($rank)) {
+            assert($this->assertVariable($rank), "$rank is not a variable");
+
+            return new Command('not( where( __.out(' . $this->SorA($link) . ').filter{it.get().value("rank") == '.$rank.'; } ) )');
         }
     }
 }
