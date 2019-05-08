@@ -273,6 +273,7 @@ class Appinfo extends Data {
                             'ext/expect'     => 'Extensions/Extexpect',
                             'ext/fann'       => 'Extensions/Extfann',
                             'ext/fdf'        => 'Extensions/Extfdf',
+                            'ext/ffi'        => 'Extensions/Extffi',
                             'ext/ffmpeg'     => 'Extensions/Extffmpeg',
                             'ext/file'       => 'Extensions/Extfile',
                             'ext/fileinfo'   => 'Extensions/Extfileinfo',
