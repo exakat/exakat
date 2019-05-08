@@ -35,7 +35,7 @@ where( __.out("CONCAT").coalesce( __.hasLabel("Variable"),
                                                       .where( __.out("VARIABLE").hasLabel("Variablearray")),
                                   __.hasLabel("Member").where(__.out("MEMBER").hasLabel("Name"))
                                                        .where(__.out("OBJECT").hasLabel("Variableobject", "Member")),
-                                  __.hasLabel("Identifier").has("fullnspath", "\\\\PHP_EOL")
+                                  __.hasLabel("Identifier").has("fullnspath", "\\PHP_EOL")
                                  )
      )
 GREMLIN
