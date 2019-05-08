@@ -41,7 +41,7 @@ class UnsupportedOperandTypes extends Analyzer {
         // const A = array(); $b = 1 + array();
         $this->atomIs('Addition')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('String', 'Integer', 'Float'))
+             ->atomIs(array('String', 'Integer', 'Real', 'Boolean'))
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
