@@ -53,7 +53,7 @@ class ThemesDev {
     }
 
     public function getThemeAnalyzers(array $theme = null) {
-        if (empty($this->themes)) {
+        if (empty($theme)) {
             return array();
         }
         
@@ -61,7 +61,7 @@ class ThemesDev {
         foreach($theme as $t) {
             $return[] = $this->all[$t] ?? array();
         }
-        
+
         return array_merge(...$return);
     }
 

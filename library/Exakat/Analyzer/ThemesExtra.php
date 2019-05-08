@@ -110,7 +110,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['severity'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['severity']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['severity'] ?: 'S_NONE'));
                 }
             }
         }
@@ -128,7 +128,7 @@ class ThemesExtra {
                 $ini = parse_ini_string($data);
 
                 if (isset($ini['timetofix'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . $ini['timetofix']);
+                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['timetofix'] ?: 'T_NONE'));
                 }
             }
         }
