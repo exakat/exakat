@@ -25,12 +25,10 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Mercurial extends Vcs {
-    public function __construct($destination, $project_root) {
-        parent::__construct($destination, $project_root);
-    }
-    
+    private $executable = 'hg';
+
     protected function selfCheck() {
-        $res = shell_exec('hg --version 2>&1');
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'Mercurial') === false) {
             throw new HelperException('Mercurial');
         }
@@ -40,13 +38,13 @@ class Mercurial extends Vcs {
         $this->check();
         
         $sourceArg = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; hg clone $sourceArg code");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} clone $sourceArg code");
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code/; hg pull 2>&1; hg update; hg log -l 1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} pull 2>&1; {$this->executable} update; {$this->executable} log -l 1");
         preg_match('/changeset:\s+(\S+)/', $res, $changeset);
         preg_match("/date:\s+([^\n]+)/", $res, $date);
 
@@ -69,12 +67,12 @@ class Mercurial extends Vcs {
     }
 
     public function getBranch() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; hg summary 2>&1 | grep branch");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} summary 2>&1 | grep branch");
         return trim(substr($res, 8), " *\n");
     }
 
     public function getRevision() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; hg summary 2>&1 | grep parent");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} summary 2>&1 | grep parent");
         return trim(substr($res, 8), " *\n");
     }
 

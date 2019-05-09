@@ -127,15 +127,15 @@ class Git extends Vcs {
         if (!file_exists("{$this->destinationFull}/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \* 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} branch | grep \* 2>&1");
         return trim($res, " *\n");
     }
 
     public function getRevision() {
-        if (!file_exists("{$this->destinationFull}/")) {
+        if (!file_exists($this->destinationFull)) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} rev-parse HEAD 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} rev-parse HEAD 2>&1");
         return trim($res);
     }
     

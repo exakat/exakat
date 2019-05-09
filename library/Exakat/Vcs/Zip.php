@@ -32,7 +32,7 @@ class Zip extends Vcs {
     }
     
     protected function selfCheck() {
-        $res = shell_exec("$this->executable --version  2>&1");
+        $res = shell_exec("{$this->executable} --version  2>&1");
         if (strpos($res, 'Zip') === false) {
             throw new HelperException('zip');
         }
@@ -49,7 +49,7 @@ class Zip extends Vcs {
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip') . '.zip';
         file_put_contents($archiveFile, $binary);
 
-        shell_exec("unzip $archiveFile -d {$this->destinationFull}/code/");
+        shell_exec("{$this->executable} $archiveFile -d {$this->destinationFull}");
 
         unlink($archiveFile);
     }
@@ -61,7 +61,7 @@ class Zip extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = shell_exec("$this->executable -v  2>&1");
+        $res = shell_exec("{$this->executable} -v  2>&1");
         if (stripos($res, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {

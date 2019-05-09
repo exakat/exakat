@@ -25,6 +25,11 @@ namespace Exakat\Vcs;
 use Exakat\Config;
 
 abstract class Vcs {
+    const SUPPORTED_VCS = array('git', 'svn', 'cvs', 'bzr', 'hg', 
+                                'composer', 
+                                'tgz', 'tbz', 'zip', 'rar', 'sevenz', 
+                                'none', 'symlink', 'copy');
+
     protected $destination     = '';
     protected $destinationFull = '';
     

@@ -32,7 +32,7 @@ class Copy extends Vcs {
             throw new NoSuchDir();
         }
 
-        copyDir($source, "{$this->destinationFull}/code");
+        copyDir($source, $this->destinationFull);
     }
 
     public function getStatus() {

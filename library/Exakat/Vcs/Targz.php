@@ -25,10 +25,6 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Targz extends Vcs {
-    public function __construct($destination, $project_root) {
-        parent::__construct($destination, $project_root);
-    }
-    
     protected function selfCheck() {
         $res = shell_exec('tar --version 2>&1');
         if (!preg_match('#\d+\.\d+(\.\d+)?#s', $res)) {
@@ -59,7 +55,7 @@ class Targz extends Vcs {
             return;
         }
 
-        shell_exec("mkdir {$this->destinationFull}/code/; tar -zxf $archiveFile -C {$this->destinationFull}/code/");
+        shell_exec("mkdir {$this->destinationFull}; tar -zxf $archiveFile -C {$this->destinationFull}");
 
         unlink($archiveFile);
     }
