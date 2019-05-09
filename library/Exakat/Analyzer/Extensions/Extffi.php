@@ -20,22 +20,18 @@
  *
 */
 
+
 namespace Exakat\Analyzer\Extensions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\Extension;
 
-class Extffi extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
+class Extffi extends Extension {
+
     public function analyze() {
-        $this->atomIs('Identifier')
-             ->back('first');
-        $this->printQuery();
-        $this->prepareQuery();
+        $this->source = 'ffi.ini';
+        
+        parent::analyze();
     }
 }
 
