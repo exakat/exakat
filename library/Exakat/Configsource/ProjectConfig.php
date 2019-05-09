@@ -22,7 +22,8 @@
 
 namespace Exakat\Configsource;
 
-use \Exakat\Phpexec;
+use Exakat\Phpexec;
+use Exakat\Vcs\Vcs;
 
 class ProjectConfig extends Config {
     private $projects_root = '.';
@@ -160,7 +161,7 @@ class ProjectConfig extends Config {
             unset($ext);
         }
         
-        if (in_array($this->config['project_vcs'], array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar'))) {
+        if (in_array($this->config['project_vcs'], Vcs::SUPPORTED_VCS)) {
             $this->config['git'] = false; // remove Git, which is by default
             $this->config[$this->config['project_vcs']] = true; // potentially, revert git
         }

@@ -228,7 +228,7 @@ class Project extends Tasks {
         
         foreach($reportToRun as $format) {
             display("Reporting $format" . PHP_EOL);
-            $this->addSnitch(array('step'    => 'Report : ' . $format,
+            $this->addSnitch(array('step'    => "Report : $format",
                                    'project' => $this->config->project));
 
             try {

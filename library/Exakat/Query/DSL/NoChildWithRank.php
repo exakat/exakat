@@ -36,7 +36,7 @@ class NoChildWithRank extends DSL {
         } elseif ($this->isVariable($rank)) {
             assert($this->assertVariable($rank), "$rank is not a variable");
 
-            return new Command('not( where( __.out(' . $this->SorA($link) . ').filter{it.get().value("rank") == '.$rank.'; } ) )');
+            return new Command('not( where( __.out(' . $this->SorA($link) . ').filter{it.get().value("rank") == ' . $rank . '; } ) )');
         }
     }
 }

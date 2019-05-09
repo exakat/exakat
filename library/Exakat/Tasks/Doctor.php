@@ -220,7 +220,7 @@ TEXT
         }
 
         // projects
-        if ( file_exists('./projects') && 
+        if ( file_exists('./projects') &&
             !file_exists("{$this->config->projects_root}/projects/test")) {
 
             $i = 0;
@@ -320,6 +320,7 @@ TEXT
         $optionals = array('Git'       => 'git',
                            'Mercurial' => 'hg',
                            'Svn'       => 'svn',
+                           'Cvs'       => 'cvs',
                            'Bazaar'    => 'bzr',
                            'Composer'  => 'composer',
                            'Zip'       => 'zip',
