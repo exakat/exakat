@@ -371,12 +371,13 @@ class Load extends Tasks {
             $this->phptokens::T_CLOSE_TAG                => 'processClosingTag',
     
             $this->phptokens::T_FUNCTION                 => 'processFunction',
+            $this->phptokens::T_FN                       => 'processFn',
             $this->phptokens::T_CLASS                    => 'processClass',
             $this->phptokens::T_TRAIT                    => 'processTrait',
             $this->phptokens::T_INTERFACE                => 'processInterface',
             $this->phptokens::T_NAMESPACE                => 'processNamespace',
             $this->phptokens::T_USE                      => 'processUse',
-    
+
             $this->phptokens::T_ABSTRACT                 => 'processAbstract',
             $this->phptokens::T_FINAL                    => 'processFinal',
             $this->phptokens::T_PRIVATE                  => 'processPrivate',
@@ -393,6 +394,7 @@ class Load extends Tasks {
         );
 
         $this->callsDatabase = new \Sqlite3(':memory:');
+//        $this->callsDatabase = new \Sqlite3('/tmp/load.sqlite');
 
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
     }
@@ -1146,10 +1148,59 @@ class Load extends Tasks {
         return $try;
     }
 
+    private function processFn() {
+        $current = $this->id;
+        
+        $atom = 'Arrowfunction';
+        ++$this->id;
+        $fn       = $this->processParameters($atom);
+        $static = $this->setOptions($fn);
+
+        // Process return type
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
+            ++$this->id;
+            $returnType = $this->processTypehint();
+
+            $this->addLink($fn, $returnType, 'RETURNTYPE');
+        }
+
+        ++$this->id; // skip =>
+
+        $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
+        $this->contexts->toggleContext(Context::CONTEXT_FUNCTION);
+
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                                $this->phptokens::T_CLOSE_CURLY,
+                                                                $this->phptokens::T_SEMICOLON,
+                                                                $this->phptokens::T_CLOSE_BRACKET,
+                                                                $this->phptokens::T_CLOSE_TAG,
+                                                                $this->phptokens::T_COLON,
+                                                                ),
+               STRICT_COMPARISON)) {
+           $this->processNext();
+        }
+
+        $block = $this->popExpression();
+        $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
+
+        $this->addLink($fn, $block, 'BLOCK');
+
+        $fn->token      = $this->getToken($this->tokens[$current][0]);
+        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode.') => ' . $block->fullcode;
+
+        $this->pushExpression($fn);
+        $this->checkExpression();
+
+        return $fn;
+    }
+
     private function processFunction() {
         $current = $this->id;
         
-        if (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
+        if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
+            $atom = 'Arrowfunction';
+        } elseif (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
              $this->contexts->isContext(Context::CONTEXT_TRAIT) ||
              $this->contexts->isContext(Context::CONTEXT_INTERFACE)) &&
              
@@ -1278,7 +1329,7 @@ class Load extends Tasks {
 
             $this->addLink($function, $returnType, 'RETURNTYPE');
         }
-        
+
         // Process block
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
             $block = $this->addAtomVoid();
@@ -2714,6 +2765,13 @@ class Load extends Tasks {
             $string->aliased    = $aliased;
 
             $this->calls->addCall('class', $fullnspath, $string);
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+            list($fullnspath, $aliased) = $this->getFullnspath($string, 'function');
+            $string->fullnspath = $fullnspath;
+            $string->aliased    = $aliased;
+        } elseif (in_array($string->atom, array('Boolean', 'Null'))) {
+            $string->fullnspath = '\\' . mb_strtolower($string->fullcode);
+            $string->aliased    = self::NOT_ALIASED;
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
 
@@ -5618,6 +5676,11 @@ class Load extends Tasks {
         if (!empty($this->expressions)) {
             var_dump($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : " . count($this->expressions));
+        }
+
+        if (!empty($this->options)) {
+            var_dump($this->options);
+            throw new LoadError( "Warning : options is not empty in $filename : " . count($this->options));
         }
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_NOSEQUENCE)) !== false) {

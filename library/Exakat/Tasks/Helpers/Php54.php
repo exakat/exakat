@@ -159,6 +159,6 @@ class Php54 extends Php {
     const T_COALESCE                      = 1000;
     const T_YIELD                         = 1000;
     const T_COALESCE_EQUAL                = 1000;
-
+    const T_FN                            = 1000;
 }
 ?>
