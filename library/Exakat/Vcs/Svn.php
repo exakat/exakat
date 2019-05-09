@@ -26,13 +26,14 @@ use Exakat\Exceptions\HelperException;
 
 class Svn extends Vcs {
     private $info = array();
+    private $executable = 'svn';
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
     
     protected function selfCheck() {
-        $res = shell_exec('svn --version 2>&1');
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'svn') === false) {
             throw new HelperException('SVN');
         }
@@ -42,13 +43,13 @@ class Svn extends Vcs {
         $this->check();
 
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; svn checkout --quiet $source code");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout --quiet $source code");
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd $this->destinationFull/code; svn update");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update");
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }
@@ -61,7 +62,7 @@ class Svn extends Vcs {
     }
 
     private function getInfo() {
-        $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info"));
         
         if (empty($res)) {
             $this->info['svn'] = '';
@@ -93,7 +94,7 @@ class Svn extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('svn --version 2>&1'));
+        $res = trim(shell_exec("{$this->executable} --version 2>&1"));
         if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];

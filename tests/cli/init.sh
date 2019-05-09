@@ -5,6 +5,11 @@ php exakat init -p ut1 -v
 php exakat status -p ut1 
 php exakat remove -p ut1
 
+#empty project
+php exakat init -p ut1 -none -v
+php exakat status -p ut1 
+php exakat remove -p ut1
+
 #git project
 php exakat init -p ut2 -R https://github.com/sculpin/sculpin.git -v
 php exakat status -p ut2 
@@ -19,8 +24,18 @@ php exakat init -p ut4 -tgz -R https://files.phpmyadmin.net/phpMyAdmin/4.6.4/php
 php exakat remove -p ut4
 
 #zip project
-php exakat init -p ut5 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip -v
+php exakat init -p ut5 -zip -R tests/cli/sculpin.zip -v
 php exakat remove -p ut5
+
+php exakat init -p ut5 -rar -R tests/cli/sculpin.rar -v
+php exakat remove -p ut5
+
+php exakat init -p ut5 -sevenz -R  tests/cli/sculpin.7z -v
+php exakat remove -p ut5
+
+#cvs
+#svn
+
 
 #copy project
 php exakat init -p ut6 -copy -R projects/ut5/code 

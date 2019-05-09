@@ -28,6 +28,7 @@ abstract class GraphElements {
                                  'Array',
                                  'Arrayappend',
                                  'Arrayliteral',
+                                 'Arrowfunction',
                                  'As',
                                  'Assignation',
                                  'Bitshift',

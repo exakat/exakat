@@ -26,14 +26,10 @@ use Exakat\Exceptions\HelperException;
 
 class Cvs extends Vcs {
     private $info = array();
-    private $exec = 'cvs';
-    
-    public function __construct($destination, $project_root) {
-        parent::__construct($destination, $project_root);
-    }
-    
+    private $executable = 'cvs';
+
     protected function selfCheck() {
-        $res = shell_exec($this->exec . ' --version 2>&1');
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'CVS') === false) {
             throw new HelperException('Cvs');
         }
@@ -43,13 +39,13 @@ class Cvs extends Vcs {
         $this->check();
 
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; {$this->exec} checkout --quiet $source code");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout --quiet $source code");
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd $this->destinationFull/code; {$this->exec} update");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update");
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }
@@ -58,7 +54,7 @@ class Cvs extends Vcs {
     }
 
     private function getInfo() {
-        $res = trim(shell_exec("cd {$this->destinationFull}/code; {$this->exec} info"));
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info"));
         
         if (empty($res)) {
             $this->info['cvs'] = '';
@@ -82,7 +78,7 @@ class Cvs extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec($this->exec . ' --version 2>&1'));
+        $res = trim(shell_exec("{$this->executable} --version 2>&1"));
         if (preg_match('/Concurrent Versions System \(CVS\) ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];

@@ -25,12 +25,14 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Bazaar extends Vcs {
+    private $executable = 'bzr';
+
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
     
     protected function selfCheck() {
-        $res = shell_exec('bzr --version 2>&1');
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'Bazaar') === false) {
             throw new HelperException('Bazar');
         }
@@ -40,13 +42,13 @@ class Bazaar extends Vcs {
         $this->check();
         
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; bzr branch $source code");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} branch $source code");
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code; bzr update 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update 2>&1");
         if (preg_match('/revision (\d+)/', $res, $r)) {
             return $r[1];
         } else {
@@ -57,21 +59,21 @@ class Bazaar extends Vcs {
     public function getBranch() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code/; bzr version-info 2>&1 | grep branch-nick");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep branch-nick");
         return trim(substr($res, 13), " *\n");
     }
 
     public function getRevision() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}/code/; bzr version-info 2>&1 | grep revno");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep revno");
         return trim(substr($res, 7), " *\n");
     }
 
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('bzr --version 2>&1'));
+        $res = trim(shell_exec("{$this->executable} --version 2>&1"));
         if (preg_match('/Bazaar \(bzr\) ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];

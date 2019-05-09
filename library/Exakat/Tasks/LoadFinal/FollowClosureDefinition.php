@@ -30,7 +30,7 @@ class FollowClosureDefinition extends LoadFinal {
     public function run() {
         // local usage
         $query = $this->newQuery('followClosureDefinition 1');
-        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
               ->outIs('LEFT')
               ->inIs('DEFINITION')  // Find all variable usage
@@ -44,7 +44,7 @@ class FollowClosureDefinition extends LoadFinal {
 
         // relayed usage
         $query = $this->newQuery('followClosureDefinition 1');
-        $query->atomIs('Closure', Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('ARGUMENT')
               ->savePropertyAs('rank', 'ranked')
               ->inIs('ARGUMENT')
@@ -60,7 +60,7 @@ class FollowClosureDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display('Created ' . ($result->toInt()) . ' links for closures');
+        display('Created ' . ($result->toInt()) . ' links for closures and arrow functions');
     }
 }
 

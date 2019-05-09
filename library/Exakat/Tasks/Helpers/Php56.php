@@ -165,6 +165,6 @@ class Php56 extends Php {
     const T_YIELD_FROM                    = 1000;
     const T_COALESCE                      = 1000;
     const T_COALESCE_EQUAL                = 1000;
-
+    const T_FN                            = 1000;
 }
 ?>

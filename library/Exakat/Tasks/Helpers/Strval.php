@@ -47,9 +47,9 @@ class Strval extends Plugin {
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($value, 1));
                 } elseif ($value[0] === '+' || $value[0] === '-') {
-                    $actual = (int) pow(-1, substr_count($value, '-')) * (int) strtr($value, '+-', '  ');
+                    $actual = (string) (int) pow(-1, substr_count($value, '-')) * (int) strtr($value, '+-', '  ');
                 } else {
-                    $actual = (int) $value;
+                    $actual = (string) (int) $value;
                 }
     
                 $atom->noDelimiter = (string) abs($actual) > PHP_INT_MAX ? 0 : $actual;

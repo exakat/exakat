@@ -162,6 +162,6 @@ class Php71 extends Php {
     const T_DOUBLE_COLON                  = 387;
 
     const T_COALESCE_EQUAL                = 1000;
-
+    const T_FN                            = 1000;
 }
 ?>

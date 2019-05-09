@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
+use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Exakat\Autoload\AutoloadDev;
@@ -48,6 +48,7 @@ class Config {
     private $defaultConfig         = null;
     private $exakatConfig          = null;
     private $dotExakatConfig       = null;
+    private $dotExakatYamlConfig   = null;
     private $envConfig             = null;
     private $argv                  = null;
     private $screen_cols           = 100;
@@ -118,14 +119,21 @@ class Config {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
-            $this->dotExakatConfig->loadConfig(null);
+            if ($this->dotExakatConfig->loadConfig(null) === Configsource::NOT_LOADED) {
+                $this->dotExakatYamlConfig = new DotExakatYamlConfig();
+                $this->dotExakatYamlConfig->loadConfig(null);
+            } else {
+                $this->dotExakatYamlConfig = new EmptyConfig();
+            }
+
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
                 $this->configFiles[] = $file;
             }
 
-            $this->dotExakatConfig   = new EmptyConfig();
+            $this->dotExakatConfig     = new EmptyConfig();
+            $this->dotExakatYamlConfig = new EmptyConfig();
         }
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
@@ -134,6 +142,7 @@ class Config {
                                      $this->envConfig->toArray(),
                                      $this->projectConfig->toArray(),
                                      $this->dotExakatConfig->toArray(),
+                                     $this->dotExakatYamlConfig->toArray(),
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;

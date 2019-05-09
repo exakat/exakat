@@ -25,12 +25,14 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Composer extends Vcs {
+    private $executable = 'composer';
+
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
     
     protected function selfCheck() {
-        $res = shell_exec('composer --version 2>&1');
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'Composer') === false) {
             throw new HelperException('Composer');
         }
@@ -46,24 +48,24 @@ class Composer extends Vcs {
         $composer->require->$source = 'dev-master';
         $json = json_encode($composer, JSON_PRETTY_PRINT);
 
-        mkdir($this->destinationFull . '/code', 0755);
-        file_put_contents($this->destinationFull . '/code/composer.json', $json);
-        shell_exec("cd {$this->destinationFull}/code/; composer -q install");
+        mkdir("{$this->destinationFull}/code", 0755);
+        file_put_contents("{$this->destinationFull}/code/composer.json", $json);
+        shell_exec("cd {$this->destinationFull}; {$this->executable} -q install");
     }
 
     public function update() {
         $this->check();
 
-        shell_exec("cd {$this->destinationFull}/code/; composer -q update");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} -q update");
 
-        $jsonText = file_get_contents("{$this->destinationFull}/code/composer.json");
+        $jsonText = file_get_contents("{$this->destinationFull}/composer.json");
         if (empty($jsonText)) {
             return '';
         }
         $json = json_decode($jsonText);
         $component = array_keys( (array) $json->require)[0];
 
-        $jsonLockText = file_get_contents("{$this->destinationFull}/code/composer.lock");
+        $jsonLockText = file_get_contents("{$this->destinationFull}/composer.lock");
         if (empty($jsonLockText)) {
             return $jsonLockText;
         }
@@ -82,7 +84,7 @@ class Composer extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('composer -V 2>&1'));
+        $res = trim(shell_exec("{$this->executable} -V 2>&1"));
         // remove colors from shell syntax
         $res = preg_replace('/\e\[[\d;]*m/', '', $res);
         if (preg_match('/Composer version ([0-9\.a-z@_\(\)\-]+) /', $res, $r)) {//

@@ -22,6 +22,8 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Vcs\Vcs;
+
 class CommandLine extends Config {
     private $booleanOptions = array(
                                  '-v'         => 'verbose',
@@ -127,13 +129,12 @@ class CommandLine extends Config {
         }
 
         // TODO : move this to VCS
-        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar', 'sevenz', 'none', );
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
                 // git is default, so it should be unset if another is set
-                if (in_array($config, $vcsList)) {
-                    $this->config = $this->config + array_fill_keys($vcsList, false);
+                if (in_array($config, Vcs::SUPPORTED_VCS)) {
+                    $this->config = $this->config + array_fill_keys(Vcs::SUPPORTED_VCS, false);
                 }
                 $this->config[$config] = true;
 
