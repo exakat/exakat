@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
+use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Exakat\Autoload\AutoloadDev;
@@ -119,7 +119,7 @@ class Config {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
-            if ($this->dotExakatConfig->loadConfig(null) === self::NOT_LOADED) {
+            if ($this->dotExakatConfig->loadConfig(null) === Configsource::NOT_LOADED) {
                 $this->dotExakatYamlConfig = new DotExakatYamlConfig();
                 $this->dotExakatYamlConfig->loadConfig(null);
             } else {
