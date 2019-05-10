@@ -26,9 +26,9 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
-class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
+class SetClassRemoteDefinitionWithGlobal extends LoadFinal {
     public function run() {
-        $query = $this->newQuery('SetClassRemoteDefinitionWithLocalNew methods');
+        $query = $this->newQuery('SetClassRemoteDefinitionWithGlobal methods');
         $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
@@ -37,8 +37,11 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('OBJECT')
-              ->inIs('DEFINITION')  // No check on atoms :
-              ->atomIs(array('Variabledefinition', 'Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->atomIs(array('Globaldefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
@@ -58,7 +61,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countM = $result->toInt();
 
-        $query = $this->newQuery('SetClassRemoteDefinitionWithLocalNew Member');
+        $query = $this->newQuery('SetClassRemoteDefinitionWithGlobal Member');
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
@@ -68,7 +71,10 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->atomIs(array('Variabledefinition', 'Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Globaldefinition', 'Variabledefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('DEFINITION')
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
@@ -88,7 +94,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
         $countP = $result->toInt();
 
         $count = $countP + $countM;
-        display("Set $count method and properties remote with local new");
+        display("Set $count method and properties remote with global var");
         $this->log->log(__METHOD__);
     }
 }

@@ -69,6 +69,7 @@ class Load extends Tasks {
 
     private $atomGroup = null;
     private $calls = null;
+    private $theGlobals = array();
 
     private $namespace = '\\';
     private $uses   = array('function'       => array(),
@@ -394,7 +395,6 @@ class Load extends Tasks {
         );
 
         $this->callsDatabase = new \Sqlite3(':memory:');
-//        $this->callsDatabase = new \Sqlite3('/tmp/load.sqlite');
 
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
     }
@@ -453,10 +453,14 @@ class Load extends Tasks {
             
             try {
                 ++$this->stats['files'];
-                $this->processFile($filename, '');
-                $this->loader->finalize();
+                if ($this->processFile($filename, '')) {
+                    $this->loader->finalize();
+                } else {
+                    print "Error while loading the file.\n";
+                }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
+                print "PHP reported an error : {$e->getMessage()}\n";
             }
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -648,7 +652,8 @@ class Load extends Tasks {
             $error['file'] = $filename;
 
             $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($error));
-            return;
+            
+            return false;
         }
 
         $tokens = $this->php->getTokenFromFile($fullpath);
@@ -1966,7 +1971,9 @@ class Load extends Tasks {
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->calls->addCall('class', $fullnspath, $nsname);
+            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
+                $this->calls->addCall('class', $fullnspath, $nsname);
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
 
@@ -2764,7 +2771,9 @@ class Load extends Tasks {
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
 
-            $this->calls->addCall('class', $fullnspath, $string);
+            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
+                $this->calls->addCall('class', $fullnspath, $string);
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'function');
             $string->fullnspath = $fullnspath;
@@ -2956,6 +2965,12 @@ class Load extends Tasks {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
+                
+                if ($element->atom === 'Globaldefinition') {
+                    $this->makeGlobal($element);
+
+                    $this->calls->addGlobal($this->theGlobals[$element->code]->id, $element->id);
+                }
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id;
@@ -3056,6 +3071,9 @@ class Load extends Tasks {
         if ($variable->code === '$GLOBALS' && !empty($index->noDelimiter)) {
             // Build the name of the global, dropping the fi
             $bracket->globalvar = '$' . $index->noDelimiter;
+            
+            $this->makeGlobal($index);
+            $this->calls->addGlobal($this->theGlobals[$bracket->globalvar]->id, $bracket->id);
         }
 
         $bracket->code      = $opening;
@@ -3936,17 +3954,26 @@ class Load extends Tasks {
         $atom->fullcode = $this->tokens[$this->id][1];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if (!in_array($atomName, array('Parametername', 'Parameter', 'Staticpropertyname', 'Propertydefinition', 'Globaldefinition', 'Staticdefinition', 'This'), STRICT_COMPARISON) &&
+        if ($atomName === 'Phpvariable' && in_array($atom->code, array('$GLOBALS','$_SERVER','$_REQUEST','$_POST','$_GET','$_FILES','$_ENV','$_COOKIE','$_SESSION'), STRICT_COMPARISON)) {
+            $this->makeGlobal($atom);
+            $this->calls->addGlobal($this->theGlobals[$atom->code]->id, $atom->id);
+        } elseif (!in_array($atomName, array('Parametername', 'Parameter', 'Staticpropertyname', 'Propertydefinition', 'Globaldefinition', 'Staticdefinition', 'This'), STRICT_COMPARISON) &&
             $this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
             } else {
                 $definition = $this->addAtom('Variabledefinition');
+                $definition->code = $atom->code;
                 $definition->fullcode = $atom->fullcode;
                 $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
                 $this->currentVariables[$atom->code] = $definition;
                 
                 $this->addLink($definition, $atom, 'DEFINITION');
+
+                if (!$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
+                    $this->makeGlobal($definition);
+                    $this->calls->addGlobal($this->theGlobals[$definition->code]->id, $definition->id);
+                }
             }
         }
 
@@ -5731,7 +5758,7 @@ class Load extends Tasks {
             if ($id === 1) { continue; }
             if ($atom->atom === 'Variabledefinition') { continue; }
 
-            if (!isset($D[$id]) && $atom->atom !== 'File') {
+            if (!isset($D[$id]) && $atom->atom !== 'File' && $atom->atom !== 'Virtualglobal') {
                 throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
             }
 
@@ -6100,6 +6127,31 @@ class Load extends Tasks {
                ($this->tokens[$colon][0] === $this->phptokens::T_COLON) ?
                 self::ALTERNATIVE_SYNTAX :
                 self::NORMAL_SYNTAX;
+    }
+    
+    private function makeGlobal($element) {
+        if ($element->atom === 'Globaldefinition') {
+            $name = $element->code;
+        } elseif ($element->atom === 'Variabledefinition') {
+            $name = $element->code;
+        } elseif ($element->atom === 'Phpvariable') {
+            $name = $element->code;
+        } elseif (!empty($element->noDelimiter)) {
+            $name = '$'.$element->noDelimiter;
+        } else {
+            return;
+        }
+
+        if (!isset($this->theGlobals[$name])) {
+            $this->theGlobals[$name] = $this->addAtom('Virtualglobal');
+            $this->theGlobals[$name]->fullcode = "[global {$element->code}]";
+            $this->theGlobals[$name]->code = $element->code;
+            $this->theGlobals[$name]->lccode = $element->code;
+            $this->theGlobals[$name]->line = -1;
+            $this->theGlobals[$name]->globalvar = substr($name, 1);
+    
+//            $this->addLink($this->id0, $this->theGlobals[$name], 'GLOBAL');
+        }
     }
 }
 

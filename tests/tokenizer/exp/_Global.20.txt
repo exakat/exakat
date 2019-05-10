@@ -1,0 +1,159 @@
+test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+  Label : DEFINITION
+    21
+    Label : INDEX
+      22
+    Label : VARIABLE
+      18
+  Label : DEFINITION
+    21
+    Label : INDEX
+      22
+    Label : VARIABLE
+      18
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+  Label : DEFINITION
+    16
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+  Label : DEFINITION
+    18
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    10
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : GLOBAL
+            6
+          Label : GLOBAL
+            8
+          Label : GLOBAL
+            10
+        Label : EXPRESSION
+          12
+          Label : ARGUMENT
+            13
+          Label : BLOCK
+            15
+            Label : EXPRESSION
+              5
+              Label : GLOBAL
+                6
+              Label : GLOBAL
+                16
+            Label : EXPRESSION
+              23
+              Label : LEFT
+                21
+                Label : INDEX
+                  22
+                Label : VARIABLE
+                  18
+              Label : RIGHT
+                24
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            16
+          Label : NAME
+            12
+        Label : EXPRESSION
+          25
+          Label : ARGUMENT
+            13
+          Label : BLOCK
+            15
+            Label : EXPRESSION
+              5
+              Label : GLOBAL
+                6
+              Label : GLOBAL
+                16
+              Label : GLOBAL
+                26
+              Label : GLOBAL
+                28
+            Label : EXPRESSION
+              23
+              Label : LEFT
+                31
+              Label : RIGHT
+                34
+            Label : EXPRESSION
+              23
+              Label : LEFT
+                35
+              Label : RIGHT
+                37
+            Label : EXPRESSION
+              23
+              Label : LEFT
+                21
+                Label : INDEX
+                  34
+                Label : VARIABLE
+                  21
+                  Label : INDEX
+                    22
+                  Label : VARIABLE
+                    18
+              Label : RIGHT
+                24
+          Label : DEFINITION
+            6
+          Label : DEFINITION
+            16
+          Label : DEFINITION
+            26
+          Label : DEFINITION
+            28
+          Label : DEFINITION
+            36
+            Label : DEFINITION
+              35
+          Label : NAME
+            25
