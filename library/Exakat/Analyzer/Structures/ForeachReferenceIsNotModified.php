@@ -33,6 +33,7 @@ class ForeachReferenceIsNotModified extends Analyzer {
              ->outIs('VALUE')
              ->outIsIE('RIGHT')
              ->is('reference', true)
+             ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->inIs('VALUE')
              ->outIs('BLOCK')
@@ -40,6 +41,7 @@ class ForeachReferenceIsNotModified extends Analyzer {
                 $this->side()
                      ->atomInsideNoDefinition(self::$VARIABLES_USER)
                      ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+                     ->inIsIE(array('VARIABLE', 'OBJECT'))
                      ->is('isModified', true)
              )
              ->back('first');
