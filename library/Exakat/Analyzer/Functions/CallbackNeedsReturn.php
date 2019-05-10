@@ -28,14 +28,12 @@ class CallbackNeedsReturn extends Analyzer {
     public function analyze() {
         $ini = $this->loadIni('php_with_callback.ini');
 
-        // array_map(function ($x) { }, $a)
-        
         foreach($ini as $position => $functions) {
             $rank = substr($position, 9);
             if ($rank[0] === '_') {
                 list(, $rank) = explode('_', $position);
             }
-            
+
             //String callback
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
@@ -53,7 +51,7 @@ class CallbackNeedsReturn extends Analyzer {
                  ->noAtomInside('Return')
                  ->back('first');
             $this->prepareQuery();
-    
+
             //Closure callback
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)

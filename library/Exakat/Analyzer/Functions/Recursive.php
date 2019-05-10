@@ -38,22 +38,42 @@ class Recursive extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $a = function () use (&$a) { foo(); }
+        $this->atomIs('Closure')
+             ->outIs('USE')
+             ->is('reference', true)
+             ->savePropertyAs('code', 'useVar')
+             ->back('first')
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'useVar', self::CASE_SENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
         // function foo() { $this->foo(); }
-        $this->atomIs('Method')
+        $this->atomIs(self::$FUNCTIONS_METHOD)
+             ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
+             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('METHOD')
-             ->samePropertyAs('lccode', 'name')
+             ->outIs('NAME')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // function foo() { self::foo(); }
-        $this->atomIs('Method')
+        $this->atomIs(self::$FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
+             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Staticmethodcall')
              ->outIs('METHOD')
@@ -61,8 +81,10 @@ class Recursive extends Analyzer {
              ->inIs('METHOD')
              ->outIs('CLASS')
              ->inIs('DEFINITION')
-             ->outIs('METHOD')
-             ->samePropertyAs('lccode', 'name');
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->outIs('NAME')
+             ->samePropertyAs('lccode', 'name')
+              ->inIs('NAME');
         $this->prepareQuery();
     }
 }

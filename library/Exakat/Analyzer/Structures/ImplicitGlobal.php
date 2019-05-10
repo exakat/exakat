@@ -51,7 +51,7 @@ class ImplicitGlobal extends Analyzer {
         $this->prepareQuery();
 
         // Those are variables in the global space,
-        $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+        $this->atomIs(self::$VARIABLES_USER)
              ->hasNoIn('GLOBAL')
              ->not(
                 $this->side()

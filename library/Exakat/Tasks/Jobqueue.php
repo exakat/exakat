@@ -129,7 +129,7 @@ class Jobqueue extends Tasks {
                         break;
                     
                     default :
-                        print "Unknown command '$command[1]'\n";
+                        echo 'Unknown command "', $command[1], '"', PHP_EOL;
                         $this->log("Unknown command '$command[1]'");
                 }
 

@@ -53,6 +53,7 @@ GREMLIN
                 // No common ground
                 if (empty($diff)) { continue; }
                 $diff = array_merge( array_diff($s, $a), array_diff($a, $s));
+
                 // No differences between the lists
                 if (empty($diff)) { continue; }
 

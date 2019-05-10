@@ -29,12 +29,12 @@ spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 class RoboFile extends \Robo\Tasks {
     public function versionBump($version = null) {
         if (!$version) {
-            $versionParts = explode('.', \Exakat::VERSION);
+            $versionParts = explode('.', Exakat::VERSION);
             ++$versionParts[count($versionParts)-1];
             $version = implode('.', $versionParts);
         }
         $this->taskReplaceInFile(__DIR__.'/library/Exakat/Exakat.php')
-            ->from("VERSION = '".\Exakat::VERSION."'")
+            ->from("VERSION = '".Exakat::VERSION."'")
             ->to("VERSION = '".$version."'")
             ->run();
     }

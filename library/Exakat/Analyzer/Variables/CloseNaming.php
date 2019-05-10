@@ -62,7 +62,7 @@ GREMLIN;
         if (!empty($uniques)) {
             $doubles = array_merge(...array_values($uniques));
     
-            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+            $this->atomIs(self::$VARIABLES_USER)
                  ->codeIs($doubles);
             $this->prepareQuery();
         }
@@ -71,7 +71,7 @@ GREMLIN;
         $doubles = $this->dictCode->underscoreCloseVariables();
         
         if (!empty($doubles)) {
-            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+            $this->atomIs(self::$VARIABLES_USER)
                  ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
@@ -80,7 +80,7 @@ GREMLIN;
         $doubles = $this->dictCode->numberCloseVariables();
 
         if (!empty($doubles)) {
-            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+            $this->atomIs(self::$VARIABLES_USER)
                  ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }

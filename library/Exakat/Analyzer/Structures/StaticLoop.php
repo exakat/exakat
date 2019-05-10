@@ -122,8 +122,8 @@ class StaticLoop extends Analyzer {
     private function checkBlindVariable() {
         $this->not(
             $this->side()
-                 ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
-                 ->samePropertyAsArray('code', 'blind', self::CASE_SENSITIVE)
+                 ->atomInsideNoDefinition(self::$CONTAINERS_ROOTS)
+                 ->filter('it.get().value("fullcode").replaceAll("&", "") in blind')
         );
         
         return $this;
@@ -134,8 +134,8 @@ class StaticLoop extends Analyzer {
             $this->side()
                  ->initVariable('blind', '[]')
                  ->outIs(array('CONDITION', 'INCREMENT', 'INIT', 'VALUE'))
-                 ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
-                 ->raw('sideEffect{ blind.push(it.get().value("code")) }.fold()')
+                 ->atomInsideNoDefinition(self::$CONTAINERS_ROOTS)
+                 ->raw('sideEffect{ blind.push(it.get().value("fullcode").replaceAll("&", "")) }.fold()')
         );
 
         return $this;

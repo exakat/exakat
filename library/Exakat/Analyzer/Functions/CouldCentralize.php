@@ -45,7 +45,11 @@ g.V().hasLabel("Functioncall", "Exit")
      .groupCount('m').by{x;}.cap('m')
 GREMLIN;
             $res = $this->query($query);
-            
+
+            if (empty($res)) {
+                continue;
+            }
+
             $functions = array();
             $args = array();
             foreach($res[0] as $key => $count) {

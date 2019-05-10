@@ -25,7 +25,11 @@ foreach($e as &$f) {
 }
 
 foreach($g as &$h) {
-    (unset) $h;
+//    (unset) $h;
+}
+
+foreach($g as &$i->j) {
+//    (unset) $h;
 }
 
 ?>

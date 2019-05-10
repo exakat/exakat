@@ -28,10 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class RedeclaredPhpFunction extends Analyzer {
     public function analyze() {
         // function split() {}
-        $extensions = $this->loadIni('php_distribution_53.ini');
-        
+        $extensions = $this->loadIni('php_distribution_53.ini', 'ext');
+
         $e = array();
-        foreach($extensions['ext'] as $ext) {
+        foreach($extensions as $ext) {
             if ($iniFile = $this->loadIni($ext . '.ini', 'functions')) {
                 $e[] = $iniFile;
             }

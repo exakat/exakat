@@ -98,25 +98,31 @@ abstract class Analyzer {
     const NO_TRANSLATE = false;
 
     public static $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
+    public static $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray');
     public static $CONTAINERS_PHP   = array('Variable', 'Staticproperty', 'Member', 'Array', 'Phpvariable');
-    public static $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
-    public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    public static $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
+    public static $CONTAINERS_ROOTS = array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray');
     public static $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
-    public static $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
+    public static $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
+
+    public static $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+
+    public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
     public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
+
+    public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     public static $CLASSES_ALL      = array('Class', 'Classanonymous');
+    public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public static $STATIC_NAMES     = array('Nsname', 'Identifier');
     public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
-    public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+    public static $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
+
     public static $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
-    public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
-    public static $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
-    public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
+
     public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
