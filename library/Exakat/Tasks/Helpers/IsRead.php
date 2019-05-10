@@ -33,128 +33,128 @@ class IsRead extends Plugin {
     public function run($atom, $extras) {
         switch ($atom->atom) {
             case 'Assignation' :
-                if (in_array($extras['RIGHT']->atom, $this->variables)) {
+                if (in_array($extras['RIGHT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['RIGHT']->isRead = true;
                 }
                 break;
 
             case 'Not' :
-                if (in_array($extras['NOT']->atom, $this->variables)) {
+                if (in_array($extras['NOT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['NOT']->isRead = true;
                 }
                 break;
 
             case 'Sign' :
-                if (in_array($extras['SIGN']->atom, $this->variables)) {
+                if (in_array($extras['SIGN']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['SIGN']->isRead = true;
                 }
                 break;
 
             case 'Throw' :
-                if (in_array($extras['THROW']->atom, $this->variables)) {
+                if (in_array($extras['THROW']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['THROW']->isRead = true;
                 }
                 break;
 
             case 'Return' :
-                if (in_array($extras['RETURN']->atom, $this->variables)) {
+                if (in_array($extras['RETURN']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['RETURN']->isRead = true;
                 }
                 break;
 
             case 'Block' :
             case 'Parenthesis' :
-                if (in_array($extras['CODE']->atom, $this->variables)) {
+                if (in_array($extras['CODE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CODE']->isRead = true;
                 }
                 break;
 
             case 'Clone' :
-                if (in_array($extras['CLONE']->atom, $this->variables)) {
+                if (in_array($extras['CLONE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CLONE']->isRead = true;
                 }
                 break;
 
             case 'Foreach' :
-                if (in_array($extras['SOURCE']->atom, $this->variables)) {
+                if (in_array($extras['SOURCE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['SOURCE']->isRead = true;
                 }
                 break;
 
             case 'Ifthen' :
-                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                if (in_array($extras['CONDITION']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CONDITION']->isRead = true;
                 }
                 break;
 
             case 'For' :
-                if (in_array($extras['INIT']->atom, $this->variables)) {
+                if (in_array($extras['INIT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['INIT']->isRead = true;
                 }
-                if (in_array($extras['FINAL']->atom, $this->variables)) {
+                if (in_array($extras['FINAL']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['FINAL']->isRead = true;
                 }
-                if (in_array($extras['INCREMENT']->atom, $this->variables)) {
+                if (in_array($extras['INCREMENT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['INCREMENT']->isRead = true;
                 }
                 break;
 
             case 'Switch' :
-                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                if (in_array($extras['CONDITION']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CONDITION']->isRead = true;
                 }
                 break;
 
             case 'Case' :
-                if (in_array($extras['CASE']->atom, $this->variables)) {
+                if (in_array($extras['CASE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CASE']->isRead = true;
                 }
                 break;
 
             case 'Coalesce' :
-                if (in_array($extras['LEFT']->atom, $this->variables)) {
+                if (in_array($extras['LEFT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['LEFT']->isRead = true;
                 }
-                if (in_array($extras['RIGHT']->atom, $this->variables)) {
+                if (in_array($extras['RIGHT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['RIGHT']->isRead = true;
                 }
                 break;
 
             case 'Ternary' :
-                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                if (in_array($extras['CONDITION']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CONDITION']->isRead = true;
                 }
-                if (in_array($extras['THEN']->atom, $this->variables)) {
+                if (in_array($extras['THEN']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['THEN']->isRead = true;
                 }
-                if (in_array($extras['ELSE']->atom, $this->variables)) {
+                if (in_array($extras['ELSE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['ELSE']->isRead = true;
                 }
                 break;
 
             case 'Cast' :
-                if (in_array($extras['CAST']->atom, $this->variables)) {
+                if (in_array($extras['CAST']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CAST']->isRead = true;
                 }
                 break;
 
             case 'Keyvalue' :
-                if (in_array($extras['INDEX']->atom, $this->variables)) {
+                if (in_array($extras['INDEX']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['INDEX']->isRead = true;
                 }
-                if (in_array($extras['VALUE']->atom, $this->variables)) {
+                if (in_array($extras['VALUE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['VALUE']->isRead = true;
                 }
                 break;
 
             case 'Preplusplus' :
-                if (in_array($extras['PREPLUSPLUS']->atom, $this->variables)) {
+                if (in_array($extras['PREPLUSPLUS']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['PREPLUSPLUS']->isRead = true;
                 }
                 break;
 
             case 'Postplusplus' :
-                if (in_array($extras['POSTPLUSPLUS']->atom, $this->variables)) {
+                if (in_array($extras['POSTPLUSPLUS']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['POSTPLUSPLUS']->isRead = true;
                 }
                 break;
@@ -165,100 +165,100 @@ class IsRead extends Plugin {
             case 'Comparison' :
             case 'Bitshift':
             case 'Power':
-                if (in_array($extras['RIGHT']->atom, $this->variables)) {
+                if (in_array($extras['RIGHT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['RIGHT']->isRead = true;
                 }
-                if (in_array($extras['LEFT']->atom, $this->variables)) {
+                if (in_array($extras['LEFT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['LEFT']->isRead = true;
                 }
                 break;
 
             case 'New' :
-                if (in_array($extras['NEW']->atom, $this->variables)) {
+                if (in_array($extras['NEW']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['NEW']->isRead = true;
                 }
                 break;
 
             case 'Arrayappend':
-                if (in_array($extras['APPEND']->atom, $this->variables)) {
+                if (in_array($extras['APPEND']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['APPEND']->isRead = true;
                 }
                 break;
 
             case 'Yield':
             case 'Yieldfrom':
-                if (in_array($extras['YIELD']->atom, $this->variables)) {
+                if (in_array($extras['YIELD']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['YIELD']->isRead = true;
                 }
                 break;
 
             case 'Dowhile':
             case 'While':
-                if (in_array($extras['CONDITION']->atom, $this->variables)) {
+                if (in_array($extras['CONDITION']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CONDITION']->isRead = true;
                 }
                 break;
 
             case 'Include':
-                if (in_array($extras['ARGUMENT']->atom, $this->variables)) {
+                if (in_array($extras['ARGUMENT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['ARGUMENT']->isRead = true;
                 }
                 break;
 
             case 'Defineconstant':
                 if (isset($extras['NAME']) &&
-                    in_array($extras['NAME']->atom, $this->variables)) {
+                    in_array($extras['NAME']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['NAME']->isRead = true;
                 }
                 if (isset($extras['VALUE']) &&
-                    in_array($extras['VALUE']->atom, $this->variables)) {
+                    in_array($extras['VALUE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['VALUE']->isRead = true;
                 }
                 if (isset($extras['CASE']) &&
-                    in_array($extras['CASE']->atom, $this->variables)) {
+                    in_array($extras['CASE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CASE']->isRead = true;
                 }
                 break;
 
             case 'Array':
-                if (in_array($extras['VARIABLE']->atom, $this->variables)) {
+                if (in_array($extras['VARIABLE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['VARIABLE']->isRead = true;
                 }
-                if (in_array($extras['INDEX']->atom, $this->variables)) {
+                if (in_array($extras['INDEX']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['INDEX']->isRead = true;
                 }
                 break;
 
             case 'Instanceof':
-                if (in_array($extras['VARIABLE']->atom, $this->variables)) {
+                if (in_array($extras['VARIABLE']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['VARIABLE']->isRead = true;
                 }
-                if (in_array($extras['CLASS']->atom, $this->variables)) {
+                if (in_array($extras['CLASS']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CLASS']->isRead = true;
                 }
                 break;
 
             case 'Variable':
                 if (isset($extras['NAME']) &&
-                    in_array($extras['NAME']->atom, $this->variables)) {
+                    in_array($extras['NAME']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['NAME']->isRead = true;
                 }
                 break;
 
             case 'Member':
-                if (in_array($extras['OBJECT']->atom, $this->variables)) {
+                if (in_array($extras['OBJECT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['OBJECT']->isRead = true;
                 }
-                if (in_array($extras['MEMBER']->atom, $this->variables)) {
+                if (in_array($extras['MEMBER']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['MEMBER']->isRead = true;
                 }
                 break;
 
             case 'Methodcall':
-                if (in_array($extras['OBJECT']->atom, $this->variables)) {
+                if (in_array($extras['OBJECT']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['OBJECT']->isRead = true;
                 }
-                if (in_array($extras['METHOD']->atom, $this->variables)) {
+                if (in_array($extras['METHOD']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['METHOD']->isRead = true;
                 }
                 break;
@@ -267,7 +267,7 @@ class IsRead extends Plugin {
             case 'Staticmethodcall':
             case 'Staticclass':
             case 'Staticconstant':
-                if (in_array($extras['CLASS']->atom, $this->variables)) {
+                if (in_array($extras['CLASS']->atom, $this->variables, STRICT_COMPARISON)) {
                     $extras['CLASS']->isRead = true;
                 }
                 break;
@@ -285,7 +285,7 @@ class IsRead extends Plugin {
             case 'Print' :
             case 'Sequence' :
                 foreach($extras as &$extra) {
-                    if (in_array($extra->atom, $this->variables)) {
+                    if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
                     }
                 }
@@ -297,7 +297,7 @@ class IsRead extends Plugin {
 
             case 'Closure' :
                 foreach($extras as $extra) {
-                    if (in_array($extra->atom, $this->variables)) {
+                    if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
                     }
                 }
@@ -308,7 +308,7 @@ class IsRead extends Plugin {
             case 'String' :
             case 'Shell' :
                 foreach($extras as &$extra) {
-                    if (in_array($extra->atom, $this->variables)) {
+                    if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
                     }
                 }
