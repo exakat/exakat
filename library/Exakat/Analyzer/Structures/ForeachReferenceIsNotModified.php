@@ -38,7 +38,7 @@ class ForeachReferenceIsNotModified extends Analyzer {
              ->outIs('BLOCK')
              ->not(
                 $this->side()
-                     ->atomInsideNoDefinition(self::$VARIABLE_USER)
+                     ->atomInsideNoDefinition(self::$VARIABLES_USER)
                      ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
                      ->is('isModified', true)
              )
