@@ -1966,7 +1966,9 @@ class Load extends Tasks {
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->calls->addCall('class', $fullnspath, $nsname);
+            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
+                $this->calls->addCall('class', $fullnspath, $nsname);
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
 
@@ -2764,7 +2766,9 @@ class Load extends Tasks {
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
 
-            $this->calls->addCall('class', $fullnspath, $string);
+            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
+                $this->calls->addCall('class', $fullnspath, $string);
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'function');
             $string->fullnspath = $fullnspath;
