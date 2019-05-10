@@ -32,6 +32,10 @@ class CreateVirtualProperty extends LoadFinal {
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
+              // Only local properties. 
+              ->outIs('OBJECT')
+              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
               ->outIs('MEMBER')
               ->tokenIs('T_STRING')
               ->dedup('fullcode')
@@ -55,14 +59,14 @@ class CreateVirtualProperty extends LoadFinal {
               ->raw(<<<'GREMLIN'
 addV("Ppp").sideEffect{ it.get().property("code", 0);
                         it.get().property("lccode", 0); 
-                        it.get().property("fullcode", '\\$' + full); 
+                        it.get().property("fullcode", '\$' + full); 
                         it.get().property("line", -1); 
                         it.get().property("count", 1); 
                         it.get().property("visibility", "none");
                        }.as('ppp').addE("PPP").from("laClasse").
 addV("Virtualproperty").sideEffect{ it.get().property("code", 0);
                                     it.get().property("lccode", 0); 
-                                    it.get().property("fullcode", '\\$' + full); 
+                                    it.get().property("fullcode", '\$' + full); 
                                     it.get().property("propertyname", ncode); 
                                     it.get().property("line", -1); 
                                   }.addE("PPP").from("ppp")
@@ -79,6 +83,8 @@ GREMLIN
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
+
+
               ->outIs('MEMBER')
               ->savePropertyAs('lccode', 'name')
               

@@ -38,7 +38,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->inIs('METHOD')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')  // No check on atoms :
-              ->atomIs(array('Variabledefinition', 'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Variabledefinition', 'Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
@@ -68,7 +68,7 @@ class SetClassRemoteDefinitionWithLocalNew extends LoadFinal {
               ->inIs('MEMBER')
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
-              ->atomIs(array('Variabledefinition', 'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Variabledefinition', 'Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
