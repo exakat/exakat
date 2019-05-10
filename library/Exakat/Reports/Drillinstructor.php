@@ -467,7 +467,7 @@ SQL
                 $levelRows .= '<tr><td>' . $ini['name'] . "</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
             }
 
-            if ((count($analyzers) - 1) === 0) {
+            if (count($analyzers) === 1) {
                 $grade = 'A';
             } else {
                 $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));

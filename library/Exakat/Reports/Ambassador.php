@@ -3083,14 +3083,6 @@ SQL
             $theTable = 'No trait were found in this repository.';
         } else {
             array_sub_sort($list);
-            
-            $closure = function (&$run, $flipped) {
-                foreach($run as $k => &$v) {
-                    if ($v === '') { continue; }
-                
-                    $v = $flipped[$v];
-                }
-            };
 
             $theTable = array();
             foreach(array_keys($list) as $t) {

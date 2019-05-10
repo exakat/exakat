@@ -2075,7 +2075,7 @@ class Load extends Tasks {
             ++$this->id;
             return $arguments;
         }
-        
+
         $fullcode       = array();
         $args_max       = 0;
         $args_min       = 0;
@@ -4388,7 +4388,7 @@ class Load extends Tasks {
                     $origin = $this->addAtom('Staticmethod');
                     $this->addLink($origin, $class, 'CLASS');
                     $this->addLink($origin, $method, 'METHOD');
-                    
+
                     $origin->fullcode = "{$class->fullcode}::{$method->fullcode}";
                 }
                 $this->pushExpression($origin);
