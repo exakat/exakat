@@ -187,6 +187,7 @@ class Analyze extends Tasks {
             return $this->analyzed[$analyzer_class];
         }
 
+        $total_results = 0;
         if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
             $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
 
@@ -207,7 +208,6 @@ GREMLIN;
             $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
             display("$analyzer is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
-            $total_results = 0;
         } elseif (!$analyzer->checkPhpConfiguration($this->Php)) {
             $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
             $analyzer = str_replace('\\', '\\\\', $analyzer_class);
@@ -226,7 +226,6 @@ GREMLIN;
             $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
 
             display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
-            $total_results = 0;
         } else {
             display( "$analyzer_class running\n");
             try {
@@ -250,16 +249,16 @@ GREMLIN;
                 return 0;
             }
 
-            $count      = $analyzer->getRowCount();
-            $processed  = $analyzer->getProcessedCount();
-            $queries    = $analyzer->getQueryCount();
-            $rawQueries = $analyzer->getRawQueryCount();
-            $total_results = $count;
-            display( "$analyzer_class run ($count / $processed)\n");
+            $total_results = $analyzer->getRowCount();
+            $processed     = $analyzer->getProcessedCount();
+            $queries       = $analyzer->getQueryCount();
+            $rawQueries    = $analyzer->getRawQueryCount();
+
+            display( "$analyzer_class run ($total_results / $processed)\n");
             $end = microtime(true);
-            $this->log->log("$analyzer_class\t" . ($end - $begin) . "\t$count\t$processed\t$queries\t$rawQueries");
+            $this->log->log("$analyzer_class\t" . ($end - $begin) . "\t$total_results\t$processed\t$queries\t$rawQueries");
             // storing the number of row found in Hash table (datastore)
-            $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
+            $this->datastore->addRow('analyzed', array($analyzer_class => $total_results ) );
         }
 
         $this->checkAnalyzed();
