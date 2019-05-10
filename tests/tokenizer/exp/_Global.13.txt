@@ -1,4 +1,8 @@
 test
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
 Label : PROJECT
   1
   Label : FILE

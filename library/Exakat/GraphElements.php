@@ -138,6 +138,8 @@ abstract class GraphElements {
                                  'Variabledefinition',
                                  'Variablearray',
                                  'Variableobject',
+                                 'Virtualglobal',
+                                 'Virtualproperty',
                                  'Void',
                                  'While',
                                  'Yield',
@@ -266,6 +268,9 @@ abstract class GraphElements {
                                       'VARIABLE',
                                       'YIELD',
                                 );
+
+    public static $ATOMS_VIRTUAL = array('Project', 'File', 'Virtualproperty', 'Virtualglobal');
+    public static $LINKS_VIRTUAL = array('Project', 'File', 'Virtualproperty', 'Virtualglobal');
 
     public static $ATOMS_LINKS = array('Addition'                  => array('LEFT', 'RIGHT'),
                                        'Array'                     => array('VARIABLE', 'INDEX'),

@@ -55,7 +55,6 @@ class LoadFinal {
         $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
         $this->log = new Log($this->logname,
                              "{$this->config->projects_root}/projects/{$this->config->project}");
-
     }
 
     protected function newQuery($title) : Query {
@@ -157,14 +156,19 @@ GREMLIN;
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassMethodRemoteDefinition');
+
         $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
+        $this->log('SetClassRemoteDefinitionWithTypehint');
         
         // This one is doubled below.
-        $this->log('SetClassRemoteDefinitionWithTypehint');
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassRemoteDefinitionWithLocalNew');
+
+        $task = new SetClassRemoteDefinitionWithGlobal($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('SetClassRemoteDefinitionWithGlobal');
 
         $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
