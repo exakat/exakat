@@ -27,13 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class DirectCallToMagicMethod extends Analyzer {
     public function analyze() {
-        $magicMethods = $this->loadIni('php_magic_methods.ini');
-        $magicMethods = $magicMethods['magicMethod'];
+        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
         $this->atomIs('Methodcallname')
              ->codeIs($magicMethods)
              ->inIs('METHOD')
-             ->raw('not( where( __.out("CLASS").hasLabel(within("Static", "Parent", "Self"))) )');
+             ->not(
+                $this->side()
+                     ->outIs('CLASS')
+                     ->atomIs(self::$RELATIVE_CLASS)
+             );
         $this->prepareQuery();
     }
 }
