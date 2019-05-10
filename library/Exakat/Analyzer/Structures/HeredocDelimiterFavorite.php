@@ -29,9 +29,13 @@ class HeredocDelimiterFavorite extends Analyzer {
         $this->atomIs(array('Heredoc', 'Nowdoc'))
              ->raw('map{ it.get().value("delimiter").trim(); }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray()[0];
+        $types = $this->rawQuery()->toArray();
         
-        $storage = array_combine(array_keys($types), array_keys($types));
+        if (empty($types)) {
+            return;
+        }
+
+        $storage = array_combine(array_keys($types[0]), array_keys($types[0]));
         
         $store = array();
         $total = 0;
