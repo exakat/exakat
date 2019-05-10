@@ -58,6 +58,14 @@ CREATE TABLE definitions (
 )
 SQL;
         $this->callsSqlite->query($definitions);
+
+        $definitions = <<<'SQL'
+CREATE TABLE globals (
+    origin INTEGER,
+    destination INTEGER
+)
+SQL;
+        $this->callsSqlite->query($definitions);
     }
 
     public function save() {
@@ -72,6 +80,16 @@ SQL;
             $this->callsSqlite->query($query);
             $this->definitions = array();
         }
+
+        if (!empty($this->globals)) {
+            $query = 'INSERT INTO globals VALUES ' . implode(', ', $this->globals);
+            $this->callsSqlite->query($query);
+            $this->globals = array();
+        }
+    }
+
+    public function addGlobal($origin, $destination) {
+        $this->globals[] = "('{$origin}','{$destination}')";
     }
 
     public function addCall($type, $fullnspath, $call) {

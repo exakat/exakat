@@ -85,15 +85,25 @@ class SplitGraphson extends Loader {
         $begin = microtime(true);
         $query = 'g.V().hasLabel("Project").id();';
         $res = $this->graphdb->query($query);
+        $project_id = $res->toInt();
 
-        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V(' . $res->toInt() . '));';
+        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V(' . $project_id . '));';
         $res = $this->graphdb->query($query);
+
+        $query = 'g.V().hasLabel("Virtualglobal").addE("GLOBAL").from(__.V(' . $project_id . '));';
+        $res = $this->graphdb->query($query);
+
+        $f = fopen('php://memory', 'r+');
+
+        $res = $this->sqlite3->query('SELECT origin -1, destination - 1  FROM globals');
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            fputcsv($f, $row);
+        }
+        unset($res);
         
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
-
         $total = 0;
         // Fast dump, with a write to memory first
-        $f = fopen('php://memory', 'r+');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             ++$total;
             // Skip reflexive definitions, which never exist.
@@ -246,7 +256,7 @@ GREMLIN;
         fclose($fp);
 
         $total_log = $this->total;
-        if ($this->total > 5000) {
+        if ($this->total > 10000) {
             $this->saveNodes();
         }
 
