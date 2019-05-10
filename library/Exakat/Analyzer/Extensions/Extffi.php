@@ -27,10 +27,11 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Extension;
 
 class Extffi extends Extension {
+    protected $phpVersion = '7.4+';
 
     public function analyze() {
         $this->source = 'ffi.ini';
-        
+
         parent::analyze();
     }
 }
