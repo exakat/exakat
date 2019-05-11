@@ -61,7 +61,7 @@ class RegexDelimiter extends Analyzer {
         }
         Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
 
-        if ($total == 0) {
+        if ($total === 0) {
             return;
         }
 
