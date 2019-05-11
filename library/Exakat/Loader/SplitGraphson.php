@@ -94,21 +94,22 @@ class SplitGraphson extends Loader {
         $res = $this->graphdb->query($query);
 
         $f = fopen('php://memory', 'r+');
+        $total = 0;
 
-        $res = $this->sqlite3->query('SELECT origin -1, destination - 1  FROM globals');
+        $res = $this->sqlite3->query('SELECT origin - 1, destination -1 FROM globals');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             fputcsv($f, $row);
+            ++$total;
         }
         unset($res);
         
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
-        $total = 0;
         // Fast dump, with a write to memory first
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            ++$total;
             // Skip reflexive definitions, which never exist.
             if ($row[0] === $row[1]) { continue; }
             fputcsv($f, $row);
+            ++$total;
         }
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
