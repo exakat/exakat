@@ -1648,7 +1648,7 @@ class Load extends Tasks {
                 $fullcodeImplements[] = $implements->fullcode;
 
                 $this->getFullnspath($implements, 'class', $implements);
-                $this->calls->addCall('class', $fullnspath, $implements);
+                $this->calls->addCall('class', $implements->fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
 
@@ -1947,19 +1947,19 @@ class Load extends Tasks {
 
             $this->getFullnspath($nsname, 'class', $nsname);
 
-            $this->calls->addCall('class', $fullnspath, $nsname);
+            $this->calls->addCall('class', $nsname->fullnspath, $nsname);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE ||
             (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === $this->phptokens::T_INSTANCEOF)
             ) {
 
             $this->getFullnspath($nsname, 'class', $nsname);
 
-            $this->calls->addCall('class', $fullnspath, $nsname);
+            $this->calls->addCall('class', $nsname->fullnspath, $nsname);
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $this->getFullnspath($nsname, 'class', $nsname);
 
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
-                $this->calls->addCall('class', $fullnspath, $nsname);
+                $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
@@ -1967,7 +1967,7 @@ class Load extends Tasks {
         } else {
             $this->getFullnspath($nsname, 'const', $nsname);
 
-            $this->calls->addCall('const', $fullnspath, $nsname);
+            $this->calls->addCall('const', $nsname->fullnspath, $nsname);
         }
         
         $this->pushExpression($nsname);
@@ -2018,7 +2018,7 @@ class Load extends Tasks {
             } else {
                 $this->getFullnspath($nsname, 'class', $nsname);
                 
-                $this->calls->addCall('class', $fullnspath, $nsname);
+                $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             }
             
             if ($nullable === self::NULLABLE) {
@@ -2727,7 +2727,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 $this->getFullnspath($string, 'class', $string);
 
-                $this->calls->addCall('class', $fullnspath, $string);
+                $this->calls->addCall('class', $string->fullnspath, $string);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
@@ -2736,7 +2736,7 @@ class Load extends Tasks {
             $this->getFullnspath($string, 'class', $string);
 
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
-                $this->calls->addCall('class', $fullnspath, $string);
+                $this->calls->addCall('class', $string->fullnspath, $string);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($string, 'function', $string);
@@ -2795,7 +2795,7 @@ class Load extends Tasks {
             $identifier = $this->processSingle('Static');
             $this->pushExpression($identifier);
             $this->getFullnspath($identifier, 'class', $identifier);
-            $this->calls->addCall('class', $fullnspath, $identifier);
+            $this->calls->addCall('class', $identifier->fullnspath, $identifier);
 
             return $identifier;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
@@ -2825,7 +2825,7 @@ class Load extends Tasks {
             } else {
                 $this->getFullnspath($typehint, 'class', $typehint);
 
-                $this->calls->addCall('class', $fullnspath, $typehint);
+                $this->calls->addCall('class', $typehint->fullnspath, $typehint);
             }
 
             $static = $this->processSGVariable('Ppp');
@@ -2865,7 +2865,7 @@ class Load extends Tasks {
             
             $this->getFullnspath($name, 'class', $name);
 
-            $this->calls->addCall('class', $fullnspath, $name);
+            $this->calls->addCall('class', $name->fullnspath, $name);
 
             $this->pushExpression($name);
             return $name;
@@ -4542,7 +4542,7 @@ class Load extends Tasks {
             if (in_array(mb_strtolower($literal->noDelimiter),  array('parent', 'self', 'static'), STRICT_COMPARISON)) {
                 $this->getFullnspath($literal, 'class', $literal);
 
-                $this->calls->addCall('class', $fullnspath, $literal);
+                $this->calls->addCall('class', $literal->fullnspath, $literal);
             } else {
                 $this->calls->addNoDelimiterCall($literal);
             }
@@ -5438,7 +5438,7 @@ class Load extends Tasks {
         $this->addLink($instanceof, $right, 'CLASS');
         
         $this->getFullnspath($right, 'class', $right);
-        $this->calls->addCall('class', $fullnspath, $right);
+        $this->calls->addCall('class', $right->fullnspath, $right);
 
         $instanceof->code     = $this->tokens[$current][1];
         $instanceof->fullcode = $left->fullcode . ' ' . $this->tokens[$current][1] . ' ' . $right->fullcode;
