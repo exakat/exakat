@@ -51,7 +51,7 @@ GREMLIN;
         if (empty($types)) {
             return;
         }
-        $types = $type[0];
+        $types = $types[0];
 
         $store = array();
         $total = 0;
