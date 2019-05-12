@@ -2485,7 +2485,7 @@ class Load extends Tasks {
             } else {
                 $name->noDelimiter = substr($name->code, 1, -1);
             }
-            $this->getFullnspath($name, 'const', $names);
+            $this->getFullnspath($name, 'const', $name);
             
             $this->runPlugins($name);
 
