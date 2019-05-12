@@ -1266,7 +1266,7 @@ class Load extends Tasks {
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         
         if ($function->atom === 'Function') {
-            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $this->calls->addDefinition('function', $fullnspath, $function);
         } elseif ($function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
@@ -1638,6 +1638,9 @@ class Load extends Tasks {
 
             $this->addLink($class, $extends, 'EXTENDS');
             list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
+            $extends->fullnspath = $fullnspath;
+            $extends->aliased = $aliased;
+
             $this->calls->addCall('class', $extends->fullnspath, $extends);
 
             $this->currentParentClassTrait[] = $extends;
@@ -1654,7 +1657,7 @@ class Load extends Tasks {
                 $this->addLink($class, $implements, 'IMPLEMENTS');
                 $fullcodeImplements[] = $implements->fullcode;
 
-                list($fullnspath, $aliased) = $this->getFullnspath($implements);
+                list($fullnspath, $aliased) = $this->getFullnspath($implements, 'class');
                 $this->calls->addCall('class', $fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
@@ -1979,7 +1982,6 @@ class Load extends Tasks {
 
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'const');
-
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
@@ -2033,7 +2035,6 @@ class Load extends Tasks {
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
             } else {
                 list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
-
                 $nsname->fullnspath = $fullnspath;
                 $nsname->aliased    = $aliased;
                 
@@ -2846,7 +2847,7 @@ class Load extends Tasks {
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->token      = $this->getToken($this->tokens[$this->id][0]);
 
-            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
 
@@ -2910,7 +2911,7 @@ class Load extends Tasks {
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->token      = $this->getToken($this->tokens[$this->id][0]);
             
-            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
 
@@ -3048,6 +3049,7 @@ class Load extends Tasks {
         }
 
         ++$this->id;
+        $resetContext = false;
         if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $resetContext = true;
             $this->contexts->toggleContext(Context::CONTEXT_NEW);
@@ -3058,7 +3060,7 @@ class Load extends Tasks {
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   ),
                  STRICT_COMPARISON));
-        if (isset($resetContext)) {
+        if ($resetContext === true) {
             $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
 
@@ -4017,7 +4019,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
             $nsname = $this->processOneNsname();
 
-            list($fullnspath, $aliased) = $this->getFullnspath($nsname);
+            list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
             $this->pushExpression($nsname);
@@ -5498,7 +5500,7 @@ class Load extends Tasks {
 
         $this->addLink($instanceof, $right, 'CLASS');
         
-        list($fullnspath, $aliased) = $this->getFullnspath($right);
+        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
         $this->calls->addCall('class', $fullnspath, $right);
         $right->fullnspath = $fullnspath;
         $right->aliased = $aliased;
@@ -5736,7 +5738,6 @@ class Load extends Tasks {
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
         // Except Variabledefinition
-        $O = array();
         $D = array();
         foreach($this->links as $label => $origins) {
             if ($label === 'DEFINITION') {
@@ -5745,7 +5746,6 @@ class Load extends Tasks {
             foreach($origins as $destinations) {
                 foreach($destinations as $links) {
                     foreach($links as $link) {
-                        $O[] = $link['origin'];
                         $D[] = $link['destination'];
                     }
                 }
