@@ -35,7 +35,6 @@ use Exakat\Reports\Helpers\Docs;
 use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
-use Exakat\Query\DSL\IsNotIgnored;
 
 abstract class Analyzer {
     public static $datastore  = null;
@@ -575,8 +574,8 @@ GREMLIN;
         return $this;
     }
 
-    public function isNotIgnored($type = IsNotIgnored::IGNORED_CLASSES) {
-        $this->query->isNotIgnored($type);
+    public function isNotIgnored() {
+        $this->query->isNotIgnored();
         
         return $this;
     }
