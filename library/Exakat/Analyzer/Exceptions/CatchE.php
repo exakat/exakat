@@ -36,7 +36,8 @@ class CatchE extends Analyzer {
             return;
         }
         
-        $storage = array_combine(array_keys($types[0]), array_keys($types[0]));
+        $types = $types[0];
+        $storage = array_combine(array_keys($types), array_keys($types));
         
         $store = array();
         $total = 0;

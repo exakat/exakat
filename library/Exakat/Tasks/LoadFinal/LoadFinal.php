@@ -221,6 +221,10 @@ GREMLIN;
         $task->run();
         $this->log('FinishIsModified');
 
+        $task = new IsInIgnoredDir($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('IsInIgnoredDir');
+
         display('End load final');
         $this->logTime('Final');
     }

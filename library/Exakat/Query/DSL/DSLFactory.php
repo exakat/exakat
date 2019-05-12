@@ -69,7 +69,6 @@ class DSLFactory {
             $this->ignoredcit       = $datastore->getCol('ignoredcit', 'fullnspath');
             $this->ignoredfunctions = $datastore->getCol('ignoredfunctions', 'fullnspath');
             $this->ignoredconstants = $datastore->getCol('ignoredconstants', 'fullnspath');
-            
         }
     }
 
