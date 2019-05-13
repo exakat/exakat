@@ -32,8 +32,7 @@ class RegexOnCollector extends Analyzer {
         //    foo($b);
         //}
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->savePropertyAs('fullcode', 'increment')
              ->back('first')
              ->outIs('BLOCK')
@@ -58,12 +57,11 @@ class RegexOnCollector extends Analyzer {
         $this->prepareQuery();
 
         //foreach ($a as $b) {
-        //    $c .= $b;
+        //    $c []= $b;
         //    foo($b);
         //}
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->savePropertyAs('fullcode', 'increment')
              ->back('first')
              ->outIs('BLOCK')

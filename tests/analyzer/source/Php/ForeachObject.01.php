@@ -8,4 +8,8 @@ foreach ($array3 as $o -> b) {}
 
 foreach ($array4 as $k => $o -> b) {}
 
+foreach ($array5 as [$o -> b]) {}
+
+foreach ($array6 as $o -> $b -> $c) {}
+
 ?>

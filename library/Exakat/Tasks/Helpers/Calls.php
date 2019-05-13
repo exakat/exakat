@@ -129,12 +129,12 @@ SQL;
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
-        if ((int) $call->noDelimiter) {
+        if ((int) $call->noDelimiter !== 0) {
             return; // Can't be a class anyway.
         }
         // single : is OK
         // \ is OK (for hardcoded path)
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
+        if (preg_match_all('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter, $r)) {
             return; // Can't be a class anyway.
         }
 
@@ -149,14 +149,17 @@ SQL;
                 $fullnspath = stripslashes($fullnspath);
             }
         } else {
-            $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
+            $fullnspath = mb_strtolower($call->noDelimiter);
 
             if (empty($fullnspath)) {
-                $fullnspath = '\\';
+                return;
+            } elseif ($fullnspath[0] === ':') {
+                return;
             } elseif ($fullnspath[0] !== '\\') {
                 $fullnspath = '\\' . $fullnspath;
             }
-            $types = array('class');
+
+            $types = array('staticmethod');
         }
 
         $atom = 'String';

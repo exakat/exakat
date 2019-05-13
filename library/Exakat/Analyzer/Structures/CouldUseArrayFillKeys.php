@@ -28,33 +28,10 @@ class CouldUseArrayFillKeys extends Analyzer {
     public function analyze() {
         // foreach($a as $b) { $c[$b] = 3; }
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
+             ->outIs(array('INDEX', 'VALUE'))
              ->savePropertyAs('fullcode', 'index')
              ->back('first')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Array')
-             ->outIs('INDEX')
-             ->samePropertyAs('fullcode', 'index')
-             ->inIs('INDEX')
-             ->inIs('LEFT')
-             ->atomIs('Assignation')
-             ->codeIs('=')
-             ->outIs('RIGHT')
-             ->noFullcodeInside('index')
-             ->atomIsNot('Variable')
-             ->back('first');
-        $this->prepareQuery();
 
-        // foreach($a as $b => $c) { $c[$b] = 3; }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIs(array('INDEX', 'VALUE'))
-             ->savePropertyAs('fullcode', 'index')
-             ->inIs(array('INDEX', 'VALUE'))
-             ->outIs(array('INDEX', 'VALUE'))
-             ->notSamePropertyAs('fullcode', 'index')
-             ->savePropertyAs('fullcode', 'secondary')
-             ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
              ->outIs('INDEX')
@@ -65,7 +42,6 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->codeIs('=')
              ->outIs('RIGHT')
              ->noFullcodeInside('index')
-             ->noFullcodeInside('secondary')
              ->atomIsNot('Variable')
              ->back('first');
         $this->prepareQuery();
@@ -73,10 +49,10 @@ class CouldUseArrayFillKeys extends Analyzer {
         //foreach($a as &$v) { $v = constant}
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE')
              ->is('reference', true)
              ->savePropertyAs('code', 'blind')
              ->back('first')
+
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')

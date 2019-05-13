@@ -82,14 +82,11 @@ class UselessUnset extends Analyzer {
 
         // unset on foreach (KeyVal -> value)
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->outIs('VALUE')
+             ->outIs('INDEX')
              ->atomIs(array('Variable', 'Member'))
              ->outIsIE('OBJECT')        // Case it is a property...
              ->savePropertyAs('code', 'varname')
              ->inIsIE('OBJECT')
-             ->inIs('VALUE')
              ->inIs('VALUE')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Unset')
@@ -99,21 +96,6 @@ class UselessUnset extends Analyzer {
              ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->inIsIE('OBJECT')
              ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
-             ->back('result');
-        $this->prepareQuery();
-
-        // unset on foreach (KeyVal -> key)
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIs('INDEX')
-             ->atomIs('Member')
-             ->savePropertyAs('fullcode', 'varname')
-             ->inIsIE('VALUE')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Unset')
-             ->_as('result')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('fullcode', 'varname', self::CASE_SENSITIVE)
              ->back('result');
         $this->prepareQuery();
 

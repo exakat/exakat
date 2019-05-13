@@ -29,10 +29,10 @@ class ShouldUseArrayColumn extends Analyzer {
         // foreach($a as $b) { $c[] = $b->e; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->back('first')
+
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')

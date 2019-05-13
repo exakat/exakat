@@ -26,10 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldUseStrrepeat extends Analyzer {
     public function analyze() {
+        // for() { $a .= A; }
         $this->atomIs('Assignation')
-             ->codeIs('.=')
+             ->tokenIs('T_CONCAT_EQUAL')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Concatenation'))
+             ->atomIs(array('String', 'Heredoc', 'Concatenation', 'Identifier', 'Nsname'))
              ->is('constant', true)
              ->inIs('RIGHT')
              ->is('rank', 0)

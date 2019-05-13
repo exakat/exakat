@@ -33,7 +33,6 @@ class UseBlindVar extends Analyzer {
              ->savePropertyAs('fullcode', 'source')
              ->back('first')
 
-             ->outIs('VALUE')
              ->outIs('INDEX')
              ->savePropertyAs('fullcode', 'index')
              ->back('first')

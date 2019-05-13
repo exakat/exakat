@@ -47,6 +47,7 @@ class CallbackNeedsReturn extends Analyzer {
                                  ->is('reference', true)
                          )
                  )
+                 ->atomIs(self::$FUNCTIONS_ALL)
                  ->outIs('BLOCK')
                  ->noAtomInside('Return')
                  ->back('first');

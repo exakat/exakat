@@ -34,11 +34,10 @@ class RegisterGlobals extends Analyzer {
              ->outIs('SOURCE')
              ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('SOURCE')
-             ->outIs('VALUE')
              ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
-             ->inIs('INDEX')
-             ->inIs('VALUE')
+             ->back('first')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
              ->is('isModified', true)

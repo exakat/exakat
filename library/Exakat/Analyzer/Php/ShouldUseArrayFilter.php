@@ -29,10 +29,10 @@ class ShouldUseArrayFilter extends Analyzer {
         // foreach($a as $b) { if ($a) {$c[] = $b->e;} }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->back('first')
+
              ->outIs('BLOCK')
              ->has('count', 1)
              ->outIs('EXPRESSION')

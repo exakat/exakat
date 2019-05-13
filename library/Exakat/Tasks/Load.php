@@ -3176,12 +3176,21 @@ class Load extends Tasks {
                     STRICT_COMPARISON)) {
             $this->processNext();
         }
+        $value = $this->popExpression();
+        $valueFullcode = $value->fullcode;
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
-            $this->processNext();
+            $this->addLink($foreach, $value, 'INDEX');
+            ++$this->id;
+            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
+                                                                    ),
+                        STRICT_COMPARISON)) {
+                $this->processNext();
+            }
+            $value = $this->popExpression();
+            $valueFullcode .= " => {$value->fullcode}";
         }
 
-        $value = $this->popExpression();
         $this->addLink($foreach, $value, 'VALUE');
 
         ++$this->id; // Skip )
@@ -3193,9 +3202,9 @@ class Load extends Tasks {
         $this->addLink($foreach, $block, 'BLOCK');
 
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
-            $fullcode = $this->tokens[$current][1] . '(' . $source->fullcode . ' ' . $as . ' ' . $value->fullcode . ') : ' . self::FULLCODE_SEQUENCE . ' endforeach';
+            $fullcode = $this->tokens[$current][1] . '(' . $source->fullcode . ' ' . $as . ' ' . $valueFullcode . ') : ' . self::FULLCODE_SEQUENCE . ' endforeach';
         } else {
-            $fullcode = $this->tokens[$current][1] . '(' . $source->fullcode . ' ' . $as . ' ' . $value->fullcode . ')' . ($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
+            $fullcode = $this->tokens[$current][1] . '(' . $source->fullcode . ' ' . $as . ' ' . $valueFullcode . ')' . ($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
         }
 
         $foreach->code        = $this->tokens[$current][1];
@@ -5416,6 +5425,7 @@ class Load extends Tasks {
         
         $this->pushExpression($concatenation);
         $this->runPlugins($concatenation, $concat);
+        $this->calls->addNoDelimiterCall($concatenation);
 
         $this->checkExpression();
 

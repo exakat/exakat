@@ -74,14 +74,7 @@ class UsedDirective extends Analyzer {
         }
         $functions = array_merge(...$functions);
 
-        $this->atomFunctionIs(array('\\set_include_path',
-                                    '\\get_include_path',
-                                    '\\restore_include_path',
-                                    '\\get_magic_quotes_gpc',
-                                    '\\get_magic_quotes_runtime',
-                                    '\\set_magic_quotes_runtime',
-                                    '\\set_time_limit',
-                                    ));
+        $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
 }

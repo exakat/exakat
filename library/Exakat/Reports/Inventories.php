@@ -36,7 +36,7 @@ class Inventories extends Reports {
             return false;
         }
 
-        $path = $folder . '/' . $name;
+        $path = "$folder/$name";
 
         if (file_exists($path)) {
             rmdirRecursive($path);
@@ -68,6 +68,9 @@ class Inventories extends Reports {
         $this->saveAtom('Heredoc',      "$path/heredoc.csv");
         $this->saveAtom('Real',         "$path/real.csv");
         $this->saveAtom('String',       "$path/strings.csv");
+
+        $this->saveTable('globalVariables',       "$path/globals.csv", array("variable", "file", "line", "isRead", "isModified", "type"));
+        $this->saveTable('inclusions',       "$path/inclusions.csv", array("including", "included"));
     }
 
     private function saveInventory($analyzer, $file) {
@@ -100,8 +103,12 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-    private function saveTable($table, $file) {
-        $res = $this->sqlite->query('SELECT variable, type FROM ' . $table);
+    private function saveTable($table, $file, $columns = 'variable, type') {
+        if (is_array($columns)) {
+            $columns = implode(', ', $columns);
+        } 
+
+        $res = $this->sqlite->query("SELECT $columns FROM $table");
         if ($res === false) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
             return;
@@ -120,7 +127,6 @@ class Inventories extends Reports {
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$step;
-            $row['variable'] = preg_replace('/^.*?(\$\w+).*?$/', '$1', $row['variable']);
             fputcsv($fp, $row);
         }
         $this->count($step);

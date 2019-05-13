@@ -280,7 +280,7 @@ class IsRead extends Plugin {
             case 'Echo' :
             case 'Exit' :
             case 'Eval' :
-            case 'Isset' :
+//            case 'Isset' : isset() doesn't read the variable. Just checks its existence
             case 'Empty' :
             case 'Print' :
             case 'Sequence' :

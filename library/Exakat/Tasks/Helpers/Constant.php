@@ -69,6 +69,15 @@ class Constant extends Plugin {
                 $atom->constant = $extras['LEFT']->constant && $extras['RIGHT']->constant;
                 break;
 
+            case 'Heredoc' :
+                if ($atom->heredoc !== true) { // it is a now doc
+                    $atom->constant = true;
+                    break;
+                }
+                $constants = array_column($extras, 'constant');
+                $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);
+                break;
+
             case 'String' :
             case 'Arrayliteral' :
             case 'Concatenation' :

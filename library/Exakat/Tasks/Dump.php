@@ -97,6 +97,7 @@ class Dump extends Tasks {
         
         if ($this->config->collect === true) {
             display('Collecting data');
+
             $begin = microtime(true);
             $this->collectClassChanges();
             $end = microtime(true);
@@ -183,6 +184,16 @@ class Dump extends Tasks {
             $this->collectForeachFavorite();
             $end = microtime(true);
             $this->log->log( 'Collected Foreach favorites : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = microtime(true);
+            $this->collectGlobalVariables();
+            $end = microtime(true);
+            $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = microtime(true);
+            $this->collectInclusions();
+            $end = microtime(true);
+            $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -618,7 +629,6 @@ GREMLIN;
     }
     
     private function collectStructures() {
-
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query(<<<'SQL'
@@ -1479,19 +1489,26 @@ GREMLIN;
         }
 
         // Finding extends and implements
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Interface").as("classe")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ calling = it.get().value('fullcode'); })
-     .outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()
-     .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).sideEffect{ called = it.get().value('fullcode'); })
-     .map{ [ 'file':calling, 'type':type, 'include':called];}
-GREMLIN;
+        $query = $this->newQuery('Extensions');
+        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'calling')
+              ->back('first')
 
-        $extends = $this->gremlin->query($query);
+              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'called')
+
+              ->raw('map{ ["file":calling, "type":type, "include":called]; }', array(), array());
+        $query->prepareRawQuery();
+        $extends = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
         $query = array();
-
-        foreach($extends as $link) {
+        foreach($extends->toArray() as $link) {
             $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . $link['type'] . "')";
         }
 
@@ -1499,7 +1516,7 @@ GREMLIN;
             $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
-        display(count($extends) . ' extends for classes ');
+        display($extends->toInt() . ' extends for classes ');
 
         // Finding extends for interfaces
         $query = <<<'GREMLIN'
@@ -1761,75 +1778,108 @@ SQL;
 
         // TODO : Constant visibility and value
 
-        $query = <<<GREMLIN
-g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("first")
-.out("NAME") .sideEffect{ name = it.get().value("fullcode"); }       .in("NAME")
-.out("VALUE").sideEffect{ default1 = it.get().value("fullcode") }.in("VALUE")
+        $query = $this->newQuery('Constant Value');
+        $query->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'name')
+              ->inIs('NAME')
+              ->outIs('VALUE')
+              ->savePropertyAs('fullcode', 'default1')
+              ->inIs('VALUE')
 
-.in("CONST").in("CONST").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
+              ->inIs('CONST')
+              ->inIs('CONST')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              
+              ->savePropertyAs('fullcode', 'class1')
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2') // another class
+              
+              ->outIs('CONST')
+              ->outIs('CONST')
 
-.out("CONST").out("CONST")
-.out("NAME") .filter{ name == it.get().value("fullcode"); }       .in("NAME")
-.out("VALUE").filter{ default2 = it.get().value("fullcode"); default1 != default2; }.in("VALUE")
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
 
-.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue':name + ' = ' + default2,
-      'class':class1,
-      'classValue':name + ' = ' + default1];
-     }
+              ->outIs('VALUE')
+              ->notSamePropertyAs('fullcode', 'default1', Analyzer::CASE_SENSITIVE) // test
+              ->savePropertyAs('fullcode', 'default2') // collect
 
-GREMLIN;
-        $total += $this->storeClassChanges('Constant Value', $query);
+              ->raw(<<<'GREMLIN'
+map{[ "name":name,
+      "parent":class2,
+      "parentValue":name + " = " + default2,
+      "class":class1,
+      "classValue":name + " = " + default1];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Constant Value', $query);
 
-        $query = <<<GREMLIN
-g.V().hasLabel(within(['Constant'])).groupCount("processed").by(count()).as("first")
-.out("NAME") .sideEffect{ name = it.get().value("fullcode"); }       .in("NAME")
+        $query = $this->newQuery('Constant visibility');
+        $query->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'name')
+              ->inIs('NAME')
 
-.in("CONST").sideEffect{ visibility1 = it.get().value("visibility") }
+              ->inIs('CONST')
+              ->savePropertyAs('visibility', 'default1')
+              ->inIs('CONST')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              
+              ->savePropertyAs('fullcode', 'class1')
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2') // another class
 
-.in("CONST").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
+              ->outIs('CONST')
+              ->notSamePropertyAs('visibility', 'default1', Analyzer::CASE_SENSITIVE) // test
+              ->savePropertyAs('visibility', 'default2') // collect
+              ->outIs('CONST')
 
-.out("CONST").filter{ visibility2 = it.get().value("visibility"); visibility1 != visibility2; }
-.out("CONST")
-.out("NAME") .filter{ name == it.get().value("fullcode"); }       .in("NAME")
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
 
-.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue':visibility2 + ' ' + name,
-      'class':class1,
-      'classValue':visibility1 + ' ' + name];
-     }
+              ->raw(<<<'GREMLIN'
+map{[ "name":name,
+      "parent":class2,
+      "parentValue":visibility2 + ' ' + name,
+      "class":class1,
+      "classValue":visibility1 + ' ' + name];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Constant visibility', $query);
 
-GREMLIN;
-        $total += $this->storeClassChanges('Constant visibility', $query);
+        $query = $this->newQuery('Method Signature');
+        $query->atomIs('Method', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'name')
+              ->inIs('NAME')
+              ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }', array(), array())
+              ->inIs('METHOD')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              
+              ->savePropertyAs('fullcode', 'class1')
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
 
-        $query = <<<GREMLIN
-g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first")
-.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
-
-.sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }
-
-.in("METHOD").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
-
-.sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature2.add(it.value("fullcode"));} }
-.filter{ signature2 != signature1; }
-
-.out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
-.map{["name":name,
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->raw('sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }.filter{ signature2 != signature1; }', array(), array())
+              ->raw(<<<'GREMLIN'
+map{["name":name,
       "parent":class2,
       "parentValue":"function " + name + "(" + signature2.join(", ") + ")",
       "class":class1,
-      "classValue":"function " + name + "(" + signature1.join(", ") + ")"];}
-GREMLIN;
-        $total += $this->storeClassChanges('Method Signature', $query);
-        
-         $query = $this->newQuery('Inclusions');
+      "classValue":"function " + name + "(" + signature1.join(", ") + ")"];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Method Signature', $query);
+
+         $query = $this->newQuery('Method Visibility');
          $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'fnp')
               ->savePropertyAs('visibility', 'visibility1')
@@ -1854,50 +1904,68 @@ GREMLIN
 , array(), array());
         $total += $this->storeClassChangesNewQuery('Method Visibility', $query);
 
-        $query = <<<GREMLIN
-g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }
-.out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
+        $query = $this->newQuery('Member Default');
+        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'name')
+              ->outIs('DEFAULT')
+              ->savePropertyAs('fullcode', 'default1')
+              ->inIs('DEFAULT')
+              ->inIs('PPP')
+              ->inIs('PPP')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'class1')
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2')
+              
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
 
-.in("PPP").in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
+              ->outIs('DEFAULT')
+              ->notSamePropertyAs('fullcode', 'default1', Analyzer::CASE_SENSITIVE)
+              ->savePropertyAs('fullcode', 'default2')
+              ->inIs('DEFAULT')
+              ->raw(<<<'GREMLIN'
+map{
+     ["name":name,
+      "parent":class2,
+      "parentValue":name + ' = ' + default2,
+      "class":class1,
+      "classValue":name + ' = ' + default1];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Member Default', $query);
 
-.out("PPP").out("PPP")
-.out("DEFAULT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("DEFAULT")
+        $query = $this->newQuery('Member Visibility');
+        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'name')
+              ->inIs('PPP')
+              ->savePropertyAs('visibility', 'visibility1')
+              ->inIs('PPP')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'class1')
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2')
+              
+              ->outIs('PPP')
+              ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE)
+              ->savePropertyAs('visibility', 'visibility2')
+              ->outIs('PPP')
+              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
 
-.filter{ it.get().value("fullcode") == name}.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue': name + ' = ' + default2,
-      'class':class1,
-      'classValue': name + ' = ' + default1];
-     }
-GREMLIN;
-        $total += $this->storeClassChanges('Member Default', $query);
+              ->raw(<<<'GREMLIN'
+map{
+     ["name":name,
+      "parent":class2,
+      "parentValue":visibility2 + ' ' + name,
+      "class":class1,
+      "classValue":visibility1 + ' ' + name];
+}
+GREMLIN
+, array(), array());
+        $total += $this->storeClassChangesNewQuery('Member Visibility', $query);
 
-        $query = <<<GREMLIN
-g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }.in("PPP")
-.sideEffect{ visibility1 = it.get().value("visibility") }
-.in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }
-.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
-                   .in("DEFINITION")
-                   .where(neq("x")) 
-).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
-
-.filter{ visibility2 = it.get().value("visibility"); visibility1 != visibility2 }
-
-.out("PPP")
-.filter{ it.get().value("fullcode") == name}.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue':visibility2 + ' ' + name,
-      'class':class1,
-      'classValue':visibility1 + ' ' + name];
-   }
-GREMLIN;
-        $total += $this->storeClassChanges('Member Visibility', $query);
-                        
         display("Found $total class changes\n");
     }
     
@@ -1965,6 +2033,92 @@ GREMLIN;
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
         $this->sqlite->query($query);
         
+        return count($valuesSQL);
+    }
+
+    private function collectInclusions() {
+        $this->sqlite->query('DROP TABLE IF EXISTS inclusions');
+        $this->sqlite->query(<<<'GREMLIN'
+CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           including STRING,
+                           included STRING
+                        )
+GREMLIN
+);
+
+        $query = $this->newQuery('Including');
+        $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('included')
+              ->goToInstruction('File')
+              ->_as('including')
+              ->select(array('included'  => 'fullcode',
+                             'including' => 'fullcode'));
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        
+        if (empty($result->toArray())) {
+            return 0;
+        }
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            $valuesSQL[] = "('".$this->sqlite->escapeString($row['including'])."', '".$this->sqlite->escapeString($row['included'])."') \n";
+        }
+
+        $query = 'INSERT INTO inclusions ("including", "included") VALUES ' . implode(', ', $valuesSQL);
+        $this->sqlite->query($query);
+
+        return count($valuesSQL);
+    }
+
+    private function collectGlobalVariables() {
+        $this->sqlite->query('DROP TABLE IF EXISTS globalVariables');
+        $this->sqlite->query(<<<'GREMLIN'
+CREATE TABLE globalVariables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                variable STRING,
+                                file STRING,
+                                line INTEGER,
+                                isRead INTEGER,
+                                isModified INTEGER,
+                                type STRING
+                            )
+GREMLIN
+);
+
+        $query = $this->newQuery('Global Variables');
+        $query->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
+              ->codeIsNot('$GLOBALS', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+              ->outIs('DEFINITION')
+              ->savePropertyAs('label', 'type')
+              ->outIsIE('DEFINITION')
+              ->_as('variable')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'path')
+              ->back('variable')
+              ->raw(<<<GREMLIN
+map{['file':path,
+     'line' : it.get().value('line'),
+     'variable' : it.get().value('fullcode'),
+     'isRead' : 'isRead' in it.get().keys() ? 1 : 0,
+     'isModified' : 'isModified' in it.get().keys() ? 1 : 0,
+     'type' : type == 'Variabledefinition' ? 'implicit' : type == 'Globaldefinition' ? 'global' : '\$GLOBALS'
+     ];
+
+}
+GREMLIN
+,array(), array()
+);
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            $valuesSQL[] = "('".$this->sqlite->escapeString($row['variable'])."', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
+        }
+
+        $query = 'INSERT INTO globalVariables ("variable", "file", "line", "isRead", "isModified", "type") VALUES ' . implode(', ', $valuesSQL);
+        $this->sqlite->query($query);
+
         return count($valuesSQL);
     }
 

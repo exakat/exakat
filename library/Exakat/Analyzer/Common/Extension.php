@@ -149,7 +149,7 @@ class Extension extends Analyzer {
                 $usedDirectives = array_values($usedDirectives);
                 $this->analyzerIs('Php/DirectivesUsage')
                      ->outWithRank('ARGUMENT', 0)
-                     ->noDelimiterIs($ini['directives'], self::CASE_SENSITIVE);
+                     ->noDelimiterIs($usedDirectives, self::CASE_SENSITIVE);
                 $this->prepareQuery();
             }
         }

@@ -43,7 +43,6 @@ SQL
         $ids = array();
         $puml = array();
         $extends = array();
-        $subgraphs = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$id;

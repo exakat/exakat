@@ -1114,7 +1114,7 @@ GREMLIN;
         } elseif ($filter instanceof self) {
             $filterClean = $filter->prepareSide();
         } else {
-            assert(false, 'Wrong type for filter : ' . get_type($filter));
+            assert(false, 'Wrong type for filter : ' . gettype($filter));
         }
         $this->query->filter($filterClean, array());
 

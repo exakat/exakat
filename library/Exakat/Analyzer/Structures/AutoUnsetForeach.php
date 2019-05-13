@@ -32,7 +32,7 @@ class AutoUnsetForeach extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'source')
              ->back('first')
-             ->outIs('VALUE')
+             ->outIs(array('INDEX', 'VALUE'))
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'source')
              ->back('first');
