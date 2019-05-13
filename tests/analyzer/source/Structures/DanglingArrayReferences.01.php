@@ -5,8 +5,18 @@ foreach ($arr as &$value_unset) {
 }
 unset($value_unset);
 
+foreach ($arr as $k => &$value_unset2) {
+    $value_unset2 = $value_unset2 * 2;
+}
+unset($value_unset2);
+
+
 foreach ($arr as &$value_not_unset) {
     $value_not_unset = $value_not_unset * 2;
+}
+
+foreach ($arr as $k => &$value_not_unset2) {
+    $value_not_unset2 = $value_not_unset2 * 2;
 }
 
 foreach ($arr as &$value_unset_other) {
