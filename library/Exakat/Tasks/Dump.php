@@ -1997,6 +1997,10 @@ GREMLIN
                              'including' => 'fullcode'));
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        
+        if (empty($result->toArray())) {
+            return 0;
+        }
 
         $valuesSQL = array();
         foreach($result->toArray() as $row) {
