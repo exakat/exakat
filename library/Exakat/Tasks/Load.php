@@ -5425,6 +5425,7 @@ class Load extends Tasks {
         
         $this->pushExpression($concatenation);
         $this->runPlugins($concatenation, $concat);
+        $this->calls->addNoDelimiterCall($concatenation);
 
         $this->checkExpression();
 
