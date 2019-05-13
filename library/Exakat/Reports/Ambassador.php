@@ -2781,35 +2781,44 @@ HTML;
     }
 
     private function generateGlobals() {
-        $results = new Results($this->sqlite, array('Structures/GlobalInGlobal', 'Structures/GlobalUsage'));
-        $results->load();
+// pen + glasses
+//            return '<i class="fa fa-cogs" style="color: orange"></i>';
+
+        $res = $this->sqlite->query('SELECT * FROM globalVariables');
+        // global, implicit, GLOBALS
 
         $tree = array();
-        foreach($results->toArray() as $row) {
-            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $row['fullcode']);
-            if (substr($row['fullcode'], 0, 8) === '$GLOBALS') {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $row['variable']);
+            if (substr($row['variable'], 0, 8) === '$GLOBALS') {
                 $origin = '$GLOBALS';
             } else {
                 $origin = 'global';
             }
-            $tree[$name]["$row[file]:$row[line]"] = $origin;
+            
+            if (isset($tree[$name])) {
+                ++$tree[$name]['count'];
+                $tree[$name]['file'][]       = $row['file'];
+                $tree[$name]['type'][]       = $row['type'];
+                $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ). ' - '.($row['isModified']? 'W' : '&nbsp;' );
+            } else {
+                $tree[$name]['count']      = 1;
+                $tree[$name]['file']       = [$row['file']];
+                $tree[$name]['type']       = [$row['type']];
+                $tree[$name]['status']     = [($row['isRead'] ? 'R' : '&nbsp;' ). ' - '.($row['isModified']? 'W' : '&nbsp;' )];
+            }
         }
         
-        uasort($tree, function ($a, $b) { return count($a) <=> count($b);});
+        uasort($tree, function ($a, $b) { return $a['count'] <=> $b['count'];});
 
         $theGlobals = array();
-        foreach($tree as $variable => $locations) {
-            $count = count($locations);
-            $list = array();
-            $types = array();
-            uksort($locations, function ($a, $b) { list($fa, $la) = explode(':', $a); list($fb, $lb) = explode(':', $b); $r = $fa <=> $fb; if ($r == 0) { $r = $la <=> $lb; } return $r;});
-            foreach($locations as $file => $type) {
-                $list[] = "<li>$file</li>";
-                $types[$type] = 1;
-            }
-            $list = '<ul>' . implode(PHP_EOL, $list) . '</ul>';
-            $types = implode('-', array_keys($types));
-            $theGlobals []= "<tr><td><span style=\"color: #0000BB\">$variable</span></td><td>$count</td><td>$types</td><td>$list</td></tr>\n";
+        foreach($tree as $variable => $details) {
+            $count      = $details['count'];
+            $types      = implode('<br />', $details['type']);
+            $status     = implode('<br />', $details['status']);
+            $files      = implode('<br />', $details['file']);
+
+            $theGlobals []= "<tr><td><span style=\"color: #0000BB\">$variable</span></td><td>$count</td><td>$types</td><td>$status</td><td>$files</td></tr>\n";
         }
         $theGlobals = implode('', $theGlobals);
 
@@ -4826,6 +4835,10 @@ HTML;
     
     private function makeDocLink($analyzer) {
         return "<a href=\"analyzers_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
+    }
+
+    private function toHtmlList(array $array) {
+        return '<ul><li>'. implode("</li>\n<li>", $array).'</li></ul>';
     }
 }
 

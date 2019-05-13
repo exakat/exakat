@@ -97,6 +97,7 @@ class Dump extends Tasks {
         
         if ($this->config->collect === true) {
             display('Collecting data');
+
             $begin = microtime(true);
             $this->collectClassChanges();
             $end = microtime(true);
@@ -183,6 +184,11 @@ class Dump extends Tasks {
             $this->collectForeachFavorite();
             $end = microtime(true);
             $this->log->log( 'Collected Foreach favorites : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = microtime(true);
+            $this->collectGlobalVariables();
+            $end = microtime(true);
+            $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -618,7 +624,6 @@ GREMLIN;
     }
     
     private function collectStructures() {
-
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query(<<<'SQL'
@@ -1965,6 +1970,57 @@ GREMLIN;
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
         $this->sqlite->query($query);
         
+        return count($valuesSQL);
+    }
+    
+    private function collectGlobalVariables() {
+        $this->sqlite->query('DROP TABLE IF EXISTS globalVariables');
+        $this->sqlite->query(<<<'GREMLIN'
+CREATE TABLE globalVariables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                variable STRING,
+                                file STRING,
+                                line INTEGER,
+                                isRead INTEGER,
+                                isModified INTEGER,
+                                type STRING
+                            )
+GREMLIN
+);
+
+        $query = $this->newQuery('Global Variables');
+        $query->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
+              ->codeIsNot('$GLOBALS', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+              ->outIs('DEFINITION')
+              ->savePropertyAs('label', 'type')
+              ->outIsIE('DEFINITION')
+              ->_as('variable')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'path')
+              ->back('variable')
+              ->raw(<<<GREMLIN
+map{['file':path,
+     'line' : it.get().value('line'),
+     'variable' : it.get().value('fullcode'),
+     'isRead' : 'isRead' in it.get().keys() ? 1 : 0,
+     'isModified' : 'isModified' in it.get().keys() ? 1 : 0,
+     'type' : type == 'Variabledefinition' ? 'implicit' : type == 'Globaldefinition' ? 'global' : '\$GLOBALS'
+     ];
+
+}
+GREMLIN
+,array(), array()
+);
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            $valuesSQL[] = "('".$this->sqlite->escapeString($row['variable'])."', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
+        }
+
+        $query = 'INSERT INTO globalVariables ("variable", "file", "line", "isRead", "isModified", "type") VALUES ' . implode(', ', $valuesSQL);
+        $this->sqlite->query($query);
+
         return count($valuesSQL);
     }
 
