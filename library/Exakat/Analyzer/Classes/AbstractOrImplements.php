@@ -26,26 +26,27 @@ use Exakat\Analyzer\Analyzer;
 
 class AbstractOrImplements extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // an abstract parent method is not in the current children
         $this->atomIs('Class')
-             ->raw(<<<GREMLIN
-where(
-__.sideEffect{ methods = []; 
-            abstract_methods = [];
-          }.or( __.not(has("abstract")), __.not(has("abstract", true))).where( out("EXTENDS") ).filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times($MAX_LOOPING).out("METHOD", "MAGICMETHOD")
-.filter{
+             ->isNot('abstract', true)
+             ->filter(
+                $this->side()
+                     ->initVariable('methods', '[]')
+                     ->initVariable('abstract_methods', '[]')
+                     ->goToAllParents(self::INCLUDE_SELF)
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->raw(<<<'GREMLIN'
+sideEffect{
     if (it.get().properties("abstract").any()) {
         abstract_methods.add(it.get().vertices(OUT, 'NAME').next().value("code"));
     } else {
         methods.add(it.get().vertices(OUT, 'NAME').next().value("code"));
     }
 }.fold()
-.filter{ missing = abstract_methods - methods; missing != []; }
-)
 GREMLIN
-);
+)
+             )
+             ->filter('missing = abstract_methods - methods; missing != [];');
         $this->prepareQuery();
     }
 }
