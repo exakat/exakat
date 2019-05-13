@@ -36,6 +36,7 @@ class ProjectConfig extends Config {
                               'project_description' => '',
                               'project_branch'      => '',
                               'project_tag'         => '',
+                              'project_themas'      => array(),
                               'file_extensions'     => array('php',
                                                              'php3',
                                                              'inc',

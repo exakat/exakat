@@ -28,6 +28,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class DotExakatYamlConfig extends Config {
     private $dotExakatYaml = '';
+    private $themas = array();
 
     public function __construct() {
         $this->dotExakatYaml = getcwd() . '/.exakat.yml';
@@ -40,7 +41,6 @@ class DotExakatYamlConfig extends Config {
         }
 
         $this->config = Yaml::parseFIle($this->dotExakatYaml);
-        print_r($this->config);die();
 
         // removing empty values in the INI file
         foreach($this->config as &$value) {
@@ -109,9 +109,18 @@ class DotExakatYamlConfig extends Config {
             }
             unset($ext);
         }
+        
+        if (isset($this->config['rulesets'])) {
+            $this->themas = $this->config['rulesets'];
+            unset($this->config['rulesets']);
+        }
 
-        return '.exakat.ini';
+        return '.exakat.yml';
     }
-}
+    
+    public function getThemas() {
+        return $this->themas;
+    }
+}  
 
 ?>
