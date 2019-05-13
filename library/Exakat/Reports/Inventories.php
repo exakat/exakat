@@ -70,6 +70,7 @@ class Inventories extends Reports {
         $this->saveAtom('String',       "$path/strings.csv");
 
         $this->saveTable('globalVariables',       "$path/globals.csv", array("variable", "file", "line", "isRead", "isModified", "type"));
+        $this->saveTable('inclusions',       "$path/inclusions.csv", array("including", "included"));
     }
 
     private function saveInventory($analyzer, $file) {

@@ -189,6 +189,11 @@ class Dump extends Tasks {
             $this->collectGlobalVariables();
             $end = microtime(true);
             $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = microtime(true);
+            $this->collectInclusions();
+            $end = microtime(true);
+            $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -1972,7 +1977,38 @@ GREMLIN;
         
         return count($valuesSQL);
     }
-    
+
+    private function collectInclusions() {
+        $this->sqlite->query('DROP TABLE IF EXISTS inclusions');
+        $this->sqlite->query(<<<'GREMLIN'
+CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           including STRING,
+                           included STRING
+                        )
+GREMLIN
+);
+
+        $query = $this->newQuery('Including');
+        $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('included')
+              ->goToInstruction('File')
+              ->_as('including')
+              ->select(array('included'  => 'fullcode',
+                             'including' => 'fullcode'));
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            $valuesSQL[] = "('".$this->sqlite->escapeString($row['including'])."', '".$this->sqlite->escapeString($row['included'])."') \n";
+        }
+
+        $query = 'INSERT INTO inclusions ("including", "included") VALUES ' . implode(', ', $valuesSQL);
+        $this->sqlite->query($query);
+
+        return count($valuesSQL);
+    }
+
     private function collectGlobalVariables() {
         $this->sqlite->query('DROP TABLE IF EXISTS globalVariables');
         $this->sqlite->query(<<<'GREMLIN'
