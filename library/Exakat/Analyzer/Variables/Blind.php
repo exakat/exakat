@@ -26,65 +26,14 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class Blind extends Analyzer {
-    
     public function analyze() {
         $blinds = array('Variable', 'Staticproperty', 'Member', 'Array');
         
 // foreach($source as $blind)
-        $this->atomIs($blinds)
-             ->_as('x')
-             ->atomIsNot('Keyvalue')
-             ->inIs('VALUE')
-             ->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->back('x');
+        $this->atomIs('Foreach')
+             ->outIs(array('INDEX', 'VALUE'))
+             ->atomIs($blinds);
         $this->prepareQuery();
-
-// foreach($source as $blindKey => $blindValue)
-        $this->atomIs($blinds)
-             ->_as('x')
-             ->inIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->inIs('VALUE')
-             ->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->back('x');
-        $this->prepareQuery();
-
-        $this->atomIs($blinds)
-             ->_as('x')
-             ->inIs('INDEX')
-             ->atomIs('Keyvalue')
-             ->inIs('VALUE')
-             ->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->back('x');
-        $this->prepareQuery();
-
-// cases of references
-// foreach($source as &$blind)
-        $this->atomIs($blinds)
-             ->_as('x')
-             ->inIs('REFERENCE')
-             ->inIs('VALUE')
-             ->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->back('x');
-        $this->prepareQuery();
-
-// foreach($source as $blindKey => &$blindValue)
-        $this->atomIs($blinds)
-             ->_as('x')
-             ->inIs('REFERENCE')
-             ->inIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->inIs('VALUE')
-             ->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->back('x');
-        $this->prepareQuery();
-        
-// Keys can't be references
     }
 }
 

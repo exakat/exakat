@@ -307,7 +307,7 @@ abstract class GraphElements {
                                        'File'                      => array('FILE'),
                                        'Finally'                   => array('BLOCK'),
                                        'For'                       => array('INIT', 'FINAL', 'INCREMENT', 'BLOCK'),
-                                       'Foreach'                   => array('SOURCE', 'VALUE', 'BLOCK'),
+                                       'Foreach'                   => array('SOURCE', 'VALUE', 'INDEX', 'BLOCK'),
                                        'Function'                  => array('NAME', 'ARGUMENT', 'RETURNTYPE', 'BLOCK', 'DEFINITION', 'RETURNED'),
                                        'Functioncall'              => array('NAME', 'ARGUMENT'),
                                        'Global'                    => array('GLOBAL'),
