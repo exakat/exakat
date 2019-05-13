@@ -38,10 +38,8 @@ class OutWithRank extends DSL {
         } elseif (preg_match('/\D/', $rank)) {
             $this->assertVariable($rank, self::VARIABLE_READ);
             return new Command('out("' . $link . '").filter{ it.get().value("rank") == ' . $rank . '; }');
-        } elseif (abs((int) $rank) >= 0) {
+        } else { // abs((int) $rank) always works, and default to 0
             return new Command('out("' . $link . '").has("rank", eq(' . abs((int) $rank) . '))');
-        } else {
-            assert(false, "rank '$rank' is wrong in " . __METHOD__);
         }
     }
 }

@@ -177,7 +177,7 @@ class Config {
     private function finishConfigs() {
         $this->options['pid'] = getmypid();
 
-        if ($this->options['inside_code'] === Config::INSIDE_CODE) {
+        if ($this->options['inside_code'] === self::INSIDE_CODE) {
             $this->options['project_dir']   = getcwd();
             $this->options['code_dir']      = getcwd();
             $this->options['log_dir']       = getcwd() . '/.exakat';

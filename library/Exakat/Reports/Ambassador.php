@@ -1512,12 +1512,11 @@ JAVASCRIPT;
         $dataScript = implode(', ', $dataScript);
         
         $nb = 4 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $issuesHtml .= '<div class="clearfix">
+        $filler = '<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>';
-        }
+        $issuesHtml .= str_repeat($filler, $nb);
 
         return array('html'   => $issuesHtml,
                      'script' => $dataScript);
