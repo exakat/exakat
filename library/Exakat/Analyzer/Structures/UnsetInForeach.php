@@ -30,12 +30,12 @@ class UnsetInForeach extends Analyzer {
         // foreach($a as $v) { unset($v); }
         // Only valid : Objects (unset on properties) or arrays (if the blind variable is reference)
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
              ->is('reference', true)
              ->savePropertyAs('code', 'blind')
-             ->inIsIE(array('INDEX', 'VALUE'))
+             ->back('first')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
@@ -47,12 +47,12 @@ class UnsetInForeach extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
              ->isNot('reference', true)
-             ->inIsIE(array('INDEX', 'VALUE'))
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
@@ -67,12 +67,12 @@ class UnsetInForeach extends Analyzer {
 // same but with (unset) instead of unset()
 ////////////////////////////////////////////////////////////
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->is('reference', true)
-             ->inIsIE(array('INDEX', 'VALUE'))
+             ->back('first')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Cast')
              ->tokenIs('T_UNSET_CAST')
@@ -85,12 +85,12 @@ class UnsetInForeach extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->isNot('reference', true)
-             ->inIsIE(array('INDEX', 'VALUE'))
+             ->back('first')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Cast')
              ->tokenIs('T_UNSET_CAST')

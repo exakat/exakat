@@ -34,12 +34,9 @@ class AlteringForeachWithoutReference extends Analyzer {
              ->savePropertyAs('code', 'source')
              ->inIs('SOURCE')
 
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
-             ->inIs('INDEX')
-             ->inIs('VALUE')
+             ->back('first')
 
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
@@ -49,13 +46,11 @@ class AlteringForeachWithoutReference extends Analyzer {
                      ->atomIs('Cast')
                      ->tokenIs('T_UNSET_CAST')
              )
-//             ->raw('not( where( __.in("CAST").has("token", "T_UNSET_CAST") ) )' )
              ->not(
                 $this->side()
                      ->inIs('ARGUMENT')
                      ->atomIs('Unset')
              )
-//             ->raw('not( where( __.in("ARGUMENT").has("token", "T_UNSET") ) )' )
              ->is('isModified', true)
 
              ->outIs('VARIABLE')

@@ -133,7 +133,7 @@ class StaticLoop extends Analyzer {
         $this->filter(
             $this->side()
                  ->initVariable('blind', '[]')
-                 ->outIs(array('CONDITION', 'INCREMENT', 'INIT', 'VALUE'))
+                 ->outIs(array('CONDITION', 'INCREMENT', 'INIT', 'VALUE', 'INDEX'))
                  ->atomInsideNoDefinition(self::$CONTAINERS_ROOTS)
                  ->raw('sideEffect{ blind.push(it.get().value("fullcode").replaceAll("&", "")) }.fold()')
         );

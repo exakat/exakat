@@ -32,8 +32,7 @@ class CouldUseArrayUnique extends Analyzer {
         //        }
         //}
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
              ->savePropertyAs('fullcode', 'increment')
              ->back('first')
              ->outIs('BLOCK')

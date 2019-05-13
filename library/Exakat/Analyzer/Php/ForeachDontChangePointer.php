@@ -34,9 +34,9 @@ class ForeachDontChangePointer extends Analyzer {
              ->savePropertyAs('fullcode', 'source')
              ->inIs('SOURCE')
              ->outIs('VALUE')
-             ->outIsIE('VALUE')
              ->is('reference', true)
              ->back('first')
+
              ->outIs('BLOCK')
              ->functioncallIs(array('\\current', '\\next', '\\prev', '\\each', '\\end'))
              ->outIs('ARGUMENT')

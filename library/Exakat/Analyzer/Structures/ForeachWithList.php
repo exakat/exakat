@@ -29,15 +29,8 @@ class ForeachWithList extends Analyzer {
     protected $phpVersion = '5.5+';
     
     public function analyze() {
+        // foreach($a as ['a' => $b]) {}
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('List')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
              ->outIs('VALUE')
              ->atomIs('List')
              ->back('first');

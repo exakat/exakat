@@ -29,7 +29,6 @@ class UseListWithForeach extends Analyzer {
         // foreach($a as $b) { list($d) = $b; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE') // Key/value
              ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'blind')
              ->back('first')
@@ -46,7 +45,6 @@ class UseListWithForeach extends Analyzer {
         // foreach($a as list($b, $c)) { list($e, $f) = $b; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE') // Key/value
              ->atomIs('List')
              ->atomInsideNoDefinition('Variable')
              ->savePropertyAs('fullcode', 'blind')
@@ -64,7 +62,6 @@ class UseListWithForeach extends Analyzer {
         // foreach($a as $b) { $b[2]; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE') // Key/value
              ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'blind')
              ->back('first')

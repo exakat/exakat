@@ -39,12 +39,10 @@ class PregMatchAllFlag extends Analyzer {
              ->samePropertyAs('code', 'r')
              ->inIs('VARIABLE')
              ->inIs('SOURCE')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
              ->inIs('INDEX')
-             ->inIs('VALUE')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
              ->outIs('VARIABLE')// $r[1][$id]
@@ -61,12 +59,13 @@ class PregMatchAllFlag extends Analyzer {
         $this->atomFunctionIs('\preg_match_all')
              ->outWithRank('ARGUMENT', 3)
              ->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs('\preg_pattern_order')
+             ->fullnspathIsNot('\PREG_SET_ORDER')
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'r')
              ->inIs('ARGUMENT')
              ->nextSiblings() // Do we really need all of them? May be limit to 3/5
+
              ->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Array')
@@ -74,12 +73,10 @@ class PregMatchAllFlag extends Analyzer {
              ->samePropertyAs('code', 'r')
              ->inIs('VARIABLE')
              ->inIs('SOURCE')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
              ->inIs('INDEX')
-             ->inIs('VALUE')
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
              ->outIs('VARIABLE')// $r[1][$id]

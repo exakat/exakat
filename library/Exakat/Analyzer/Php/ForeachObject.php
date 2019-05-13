@@ -25,16 +25,24 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachObject extends Analyzer {
-    // foreach ($array as $o -> $b) {}
     public function analyze() {
+        // foreach ($array as $o -> $b) {}
         $this->atomIs('Foreach')
+             ->hasNoOut('INDEX') // if index is here, it is all good
+
              ->outIs('VALUE')
              ->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('Variableobject')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->atomIs('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach ($array as $o -> $b[0]) {}
+        $this->atomIs('Foreach')
+             ->hasNoOut('INDEX') // if index is here, it is all good
+
+             ->outIs('VALUE')
+             ->atomIsNot('Member')
+             ->outIs(array('VARIABLE', 'OBJECT'))
+             ->atomIs('Member')
              ->back('first');
         $this->prepareQuery();
     }

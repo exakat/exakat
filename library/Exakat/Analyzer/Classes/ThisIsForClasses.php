@@ -58,7 +58,7 @@ class ThisIsForClasses extends Analyzer {
         // foreach
         $this->atomIs('This')
              ->hasClassTrait()
-             ->inIsIE(array('INDEX', 'VALUE'))
+             ->inIs(array('INDEX', 'VALUE'))
              ->atomIs('Foreach')
              ->back('first');
         $this->prepareQuery();
