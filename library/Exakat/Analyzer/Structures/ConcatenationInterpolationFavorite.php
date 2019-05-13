@@ -36,7 +36,13 @@ GREMLIN;
              ->hasOut('CONCAT') // Obvious for concat, selective for String
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray()[0];
+        $types = $this->rawQuery()->toArray();
+
+        if (empty($types)) {
+            return;
+        }
+        
+        $types = $types[0];
 
         $store = array();
         $total = 0;

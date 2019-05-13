@@ -47,7 +47,6 @@ SQL
                         'interface' => 'skyblue',
                         'native'    => 'brown1',
                         );
-        $subgraphs = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$id;
@@ -78,7 +77,6 @@ SQL
             $R = $id . ' [label=' . $label . ' shape="none"];';
 
             $ids[$row['id']] = $id;
-            $subgraphs[$row['namespace']] = $R;
 
             $N = explode('\\', $row['namespace']);
             $dotr = &$dot;
