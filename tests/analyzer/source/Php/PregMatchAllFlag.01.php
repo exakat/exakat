@@ -17,5 +17,18 @@ foreach($r as $s) {
     $found .= $s[1].$s[2];
 }
 
+// specified behavior
+preg_match_all('/(a)(c)/', $string, $r, \PREG_PATTERN_ORDER);
+$found = '';
+foreach($r[1] as $id => $s) {
+    $found .= $s.$r[2][$id];
+}
+
+// error behavior
+preg_match_all('/(a)(e)/', $string, $r, preg_set_order);
+$found = '';
+foreach($r[1] as $id => $s) {
+    $found .= $s.$r[2][$id];
+}
 
 ?>
