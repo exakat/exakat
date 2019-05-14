@@ -69,8 +69,8 @@ class Inventories extends Reports {
         $this->saveAtom('Real',         "$path/real.csv");
         $this->saveAtom('String',       "$path/strings.csv");
 
-        $this->saveTable('globalVariables',       "$path/globals.csv", array("variable", "file", "line", "isRead", "isModified", "type"));
-        $this->saveTable('inclusions',       "$path/inclusions.csv", array("including", "included"));
+        $this->saveTable('globalVariables',       "$path/globals.csv", array('variable', 'file', 'line', 'isRead', 'isModified', 'type'));
+        $this->saveTable('inclusions',       "$path/inclusions.csv", array('including', 'included'));
     }
 
     private function saveInventory($analyzer, $file) {
@@ -106,7 +106,7 @@ class Inventories extends Reports {
     private function saveTable($table, $file, $columns = 'variable, type') {
         if (is_array($columns)) {
             $columns = implode(', ', $columns);
-        } 
+        }
 
         $res = $this->sqlite->query("SELECT $columns FROM $table");
         if ($res === false) {

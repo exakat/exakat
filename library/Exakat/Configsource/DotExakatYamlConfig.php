@@ -121,6 +121,6 @@ class DotExakatYamlConfig extends Config {
     public function getThemas() {
         return $this->themas;
     }
-}  
+}
 
 ?>

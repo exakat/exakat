@@ -2799,12 +2799,12 @@ HTML;
                 ++$tree[$name]['count'];
                 $tree[$name]['file'][]       = $row['file'];
                 $tree[$name]['type'][]       = $row['type'];
-                $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ). ' - '.($row['isModified']? 'W' : '&nbsp;' );
+                $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' );
             } else {
                 $tree[$name]['count']      = 1;
-                $tree[$name]['file']       = [$row['file']];
-                $tree[$name]['type']       = [$row['type']];
-                $tree[$name]['status']     = [($row['isRead'] ? 'R' : '&nbsp;' ). ' - '.($row['isModified']? 'W' : '&nbsp;' )];
+                $tree[$name]['file']       = array($row['file']);
+                $tree[$name]['type']       = array($row['type']);
+                $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' ));
             }
         }
         
@@ -4837,7 +4837,7 @@ HTML;
     }
 
     private function toHtmlList(array $array) {
-        return '<ul><li>'. implode("</li>\n<li>", $array).'</li></ul>';
+        return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
 }
 

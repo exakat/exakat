@@ -1192,7 +1192,7 @@ class Load extends Tasks {
         $this->addLink($fn, $block, 'BLOCK');
 
         $fn->token      = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode.') => ' . $block->fullcode;
+        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
 
         $this->pushExpression($fn);
         $this->checkExpression();
@@ -6132,7 +6132,7 @@ class Load extends Tasks {
         } elseif ($element->atom === 'Phpvariable') {
             $name = $element->code;
         } elseif (!empty($element->noDelimiter)) {
-            $name = '$'.$element->noDelimiter;
+            $name = '$' . $element->noDelimiter;
         } else {
             return;
         }

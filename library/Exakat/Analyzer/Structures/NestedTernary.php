@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class NestedTernary extends Analyzer {
     public function analyze() {
-        //$a ? $b : $c ? $d : $e 
+        //$a ? $b : $c ? $d : $e
         $this->atomIs('Ternary')
              ->outIs(array('THEN', 'ELSE'))
              ->outIsIE('CODE') // for parenthesis

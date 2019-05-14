@@ -32,7 +32,7 @@ class CreateVirtualProperty extends LoadFinal {
         $query->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
-              // Only local properties. 
+              // Only local properties.
               ->outIs('OBJECT')
               ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('OBJECT')
