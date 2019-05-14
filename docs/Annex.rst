@@ -148,6 +148,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/fam <http://oss.sgi.com/projects/fam/>`_
 * `ext/fann <http://php.net/manual/en/book.fann.php>`_
 * `ext/fdf <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
+* `ext/ffi <https://www.php.net/manual/en/book.ffi.php>`_
 * `ext/ffmpeg <http://ffmpeg-php.sourceforge.net/>`_
 * `ext/file <http://www.php.net/manual/en/book.filesystem.php>`_
 * `ext/fileinfo <http://php.net/manual/en/book.fileinfo.php>`_
@@ -212,6 +213,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
+* `ext/password <https://www.php.net/manual/en/book.password.php>`_
 * `ext/pcntl <http://php.net/manual/en/book.pcntl.php>`_
 * `ext/pcov <https://github.com/krakjoe/pcov>`_
 * `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
@@ -256,6 +258,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `ext/trader <https://pecl.php.net/package/trader>`_
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
+* `ext/uuid <https://linux.die.net/man/3/libuuid>`_
 * `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
 * `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
@@ -278,6 +281,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/yaml <http://www.yaml.org/>`_
 * `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `ext/zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `ext/zend_monitor <http://files.zend.com/help/Zend-Server/content/zendserverapi/zend_monitor-php_api.htm>`_
 * `ext/zip <http://php.net/manual/en/book.zip.php>`_
 * `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
@@ -419,6 +423,14 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
+
+* 1.7.9
+
+  * Avoid option arrays in constructors (Classes/AvoidOptionArrays)
+  * Useless Default Argument (Functions/UselessDefault ; Suggestions)
+  * ext/ffi (Extensions/Extffi ; Appcontent)
+  * ext/uuid (Extensions/Extuuid ; Unassigned)
+  * ext/zend_monitor (Extensions/Extzendmonitor ; Unassigned)
 
 * 1.7.8
 
@@ -1341,7 +1353,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Fopen Binary Mode (Portability/FopenMode ; Portability)
   * For Using Functioncall (Structures/ForWithFunctioncall ; Performances, ClearPHP, Simple, Level 1)
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer ; CompatibilityPHP70)
-  * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource ; Analyze)
+  * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource ; Under Work)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified ; Analyze, Simple)
   * Foreach With list() (Structures/ForeachWithList ; CompatibilityPHP54, CompatibilityPHP53)
   * Forgotten Visibility (Classes/NonPpp ; Analyze, ClearPHP, Simple, Level 1)
@@ -1805,6 +1817,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/opcache (Extensions/Extopcache ; Appinfo)
   * ext/openssl (Extensions/Extopenssl ; Appinfo)
   * ext/parsekit (Extensions/Extparsekit ; Appinfo)
+  * ext/password (Extensions/Extpassword ; Appcontent)
   * ext/pcntl (Extensions/Extpcntl ; Appinfo)
   * ext/pcre (Extensions/Extpcre ; Appinfo)
   * ext/pdo (Extensions/Extpdo ; Appinfo)
@@ -1971,7 +1984,7 @@ List of external services whose configuration files has been commited in the cod
 * `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist
 * `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
 * `cvs <http://savannah.nongnu.org/projects/cvs>`_ - CVS
-* `docker <http://www.docker.com/>`_ - .dockerignore, .docker, docker-compose.yml
+* `docker <http://www.docker.com/>`_ - .dockerignore, .docker, docker-compose.yml, Dockerfile
 * `drone <http://docs.drone.io/>`_ - .dockerignore, .docker
 * `editorconfig <https://editorconfig.org/>`_ - .drone.yml
 * `eslint <http://eslint.org/>`_ - .eslintrc, .eslintignore, eslintrc.js, .eslintrc.js, .eslintrc.json
@@ -2048,15 +2061,15 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2070,6 +2083,7 @@ List of external links mentionned in this documentation.
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
 * `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_
+* `Avoid option arrays in constructors <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-option-arrays-in-constructors>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -2220,6 +2234,7 @@ List of external links mentionned in this documentation.
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreign Function Interface <https://www.php.net/manual/en/book.ffi.php>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2296,6 +2311,7 @@ List of external links mentionned in this documentation.
 * `libeio <http://software.schmorp.de/pkg/libeio.html>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
+* `libuuid <https://linux.die.net/man/3/libuuid>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
 * `Lightweight Directory Access Protocol <http://php.net/manual/en/book.ldap.php>`_
 * `list <http://php.net/manual/en/function.list.php>`_
@@ -2313,8 +2329,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2359,8 +2375,8 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2377,6 +2393,7 @@ List of external links mentionned in this documentation.
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <https://www.php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2516,8 +2533,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2538,8 +2555,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2570,6 +2587,7 @@ List of external links mentionned in this documentation.
 * `YAML Ain't Markup Language <http://www.yaml.org/>`_
 * `Yii <http://www.yiiframework.com/>`_
 * `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_
+* `Zend Monitor - PHP API <http://files.zend.com/help/Zend-Server/content/zendserverapi/zend_monitor-php_api.htm>`_
 * `ZeroMQ <http://zeromq.org/>`_
 * `Zip <http://php.net/manual/en/book.zip.php>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
@@ -2620,6 +2638,7 @@ _______
 |   analyzer[] = "Classes/AccessProtected";
 |   analyzer[] = "Classes/AmbiguousStatic";
 |   analyzer[] = "Classes/AmbiguousVisibilities";
+|   analyzer[] = "Classes/AvoidOptionArrays";
 |   analyzer[] = "Classes/AvoidOptionalProperties";
 |   analyzer[] = "Classes/CantExtendFinal";
 |   analyzer[] = "Classes/CantInstantiateClass";
@@ -2837,7 +2856,6 @@ _______
 |   analyzer[] = "Structures/EvalWithoutTry";
 |   analyzer[] = "Structures/ExitUsage";
 |   analyzer[] = "Structures/FailingSubstrComparison";
-|   analyzer[] = "Structures/ForeachNeedReferencedSource";
 |   analyzer[] = "Structures/ForeachReferenceIsNotModified";
 |   analyzer[] = "Structures/ForgottenWhiteSpace";
 |   analyzer[] = "Structures/GlobalUsage";
@@ -2974,6 +2992,7 @@ ClassReview
 ___________
 
 | [ClassReview]
+|   analyzer[] = "Classes/AvoidOptionArrays";
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeClassConstant";
 |   analyzer[] = "Classes/CouldBeFinal";
@@ -3726,6 +3745,7 @@ ___________
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
 |   analyzer[] = "Functions/TooManyParameters";
+|   analyzer[] = "Functions/UselessDefault";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Namespaces/CouldUseAlias";

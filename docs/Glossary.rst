@@ -408,6 +408,10 @@ Glossary
 
       + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
+    + `error_clear_last()`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
@@ -529,6 +533,10 @@ Glossary
 
 
 + `G`
+    + `gc_mem_caches()`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `generator`
 
       + :ref:`Don't Loop On Yield <don't-loop-on-yield>`
@@ -688,6 +696,11 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
 
+    + `intdiv()`
+
+      + :ref:`Could Use Try <could-use-try>`
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `intval()`
 
       + :ref:`Should Typecast <should-typecast>`
@@ -707,6 +720,11 @@ Glossary
     + `is_integer()`
 
       + :ref:`Use Instanceof <use-instanceof>`
+
+    + `is_iterable()`
+
+      + :ref:`Check All Types <check-all-types>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `is_null()`
 
@@ -943,6 +961,15 @@ Glossary
     + `parsekit_compile_string()`
 
       + :ref:`Directly Use File <directly-use-file>`
+
+    + `password_hash()`
+
+      + :ref:`Compare Hash <compare-hash>`
+      + :ref:`Use password_hash() <use-password\_hash()>`
+
+    + `password_verify()`
+
+      + :ref:`Compare Hash <compare-hash>`
 
     + `pathinfo()`
 

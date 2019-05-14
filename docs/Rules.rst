@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 May 2019 16:20:32 +0000
-.. comment: Generation hash : f5e37ec2376d4df9c6f83de0d6ac38aa1c0c1a7e
+.. comment: Generation date : Tue, 14 May 2019 07:24:51 +0000
+.. comment: Generation hash : f0681f5dc6feb12fbf23f4299f65770f575c1fd5
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2139,6 +2139,62 @@ Suggestions
 
 
 
+.. _avoid-option-arrays-in-constructors:
+
+Avoid option arrays in constructors
+###################################
+
+
+Avoid option arrays in constructors. Use one parameter per injected element.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       // Distinct arguments, all typehinted if possible
+       function __constructor(A $a, B $b, C $c, D $d) {
+           $this->a = $a;
+           $this->b = $b;
+           $this->c = $c;
+           $this->d = $d;
+       }
+   }
+   
+   class Bar {
+       // One argument, spread over several properties
+       function __constructor(array $options) {
+           $this->a = $options['a'];
+           $this->b = $options['b'];
+           $this->c = $options['c'];
+           $this->d = $options['d'];
+       }
+   }
+   
+   ?>
+
+
+See also `Avoid option arrays in constructors <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-option-arrays-in-constructors>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Spread the options in the argument list, one argument each
+* Use a configuration class, that hold all the elements with clear names, instead of an array
+
++-------------+------------------------------------+
+| Short name  | Classes/AvoidOptionArrays          |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _avoid-set\_error\_handler-$context-argument:
 
 Avoid set_error_handler $context Argument
@@ -3215,7 +3271,7 @@ The safe way is to check the various types all the time, and use the default cas
    ?>
 
 
-Using `is_callable() <http://www.php.net/is_callable>`_, is_iterable() with this structure is fine : when variable is callable or not, while a variable is an integer or else. 
+Using `is_callable() <http://www.php.net/is_callable>`_, `is_iterable() <http://www.php.net/is_iterable>`_ with this structure is fine : when variable is callable or not, while a variable is an integer or else. 
 
 Using a type test without else is also accepted here. This is a special treatment for this test, and all others are ignored. This aspect may vary depending on situations and projects.
 
@@ -3905,7 +3961,7 @@ Here is an example
    ?>
 
 
-You may also use password_hash() and password_verify() : they work together without integer conversion problems, and they can't be confused with a number.
+You may also use `password_hash() <http://www.php.net/password_hash>`_ and `password_verify() <http://www.php.net/password_verify>`_ : they work together without integer conversion problems, and they can't be confused with a number.
 
 See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ and 
          `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
@@ -5268,7 +5324,7 @@ Some commands may raise exceptions. It is recommended to use the try/catch block
 
 * / : ``DivisionByZeroError``
 * % : ``DivisionByZeroError``
-* intdiv() : ``DivisionByZeroError``
+* `intdiv() <http://www.php.net/intdiv>`_ : ``DivisionByZeroError``
 * << : ``ArithmeticError``
 * >> : ``ArithmeticError``
 * Phar\:\:mungserver : ``PharException``
@@ -8163,49 +8219,6 @@ See also `foreach no longer changes the internal array pointer <http://php.net/m
 
 
 
-.. _foreach-needs-reference-array:
-
-Foreach Needs Reference Array
-#############################
-
-
-When using foreach with a reference as value, the source must be a referenced array, which is a variable (or array or property or static property). 
-When the array is the result of an expression, the array is not kept in memory after the foreach loop, and any change made with & are lost.
-
-This will do nothing
-
-.. code-block:: php
-
-   <?php
-       foreach(array(1,2,3) as &$value) {
-           $value *= 2;
-       }
-   ?>
-
-
-This will have an actual effect
-
-.. code-block:: php
-
-   <?php
-       $array = array(1,2,3);
-       foreach($array as &$value) {
-           $value *= 2;
-       }
-   ?>
-
-+-------------+----------------------------------------+
-| Short name  | Structures/ForeachNeedReferencedSource |
-+-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`                         |
-+-------------+----------------------------------------+
-| Severity    | Minor                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
-
-
-
 .. _foreach-on-object:
 
 Foreach On Object
@@ -8272,15 +8285,26 @@ In the spotted loop, reference are used but never modified. They may be removed.
    
    ?>
 
-+-------------+------------------------------------------+
-| Short name  | Structures/ForeachReferenceIsNotModified |
-+-------------+------------------------------------------+
-| Themes      | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Minor                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Quick (30 mins)                          |
-+-------------+------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the reference from the foreach
+* Actually modify the content of the reference
+
++-------------+----------------------------------------------------------+
+| Short name  | Structures/ForeachReferenceIsNotModified                 |
++-------------+----------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                           |
++-------------+----------------------------------------------------------+
+| Severity    | Minor                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                          |
++-------------+----------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-foreachreferenceisnotmodified` |
++-------------+----------------------------------------------------------+
 
 
 
@@ -13925,13 +13949,13 @@ New Functions In PHP 7.0
 The following functions are now native functions in PHP 7.0. It is advised to change them before moving to this new version.
 
 * get_resources()
-* gc_mem_caches()
+* `gc_mem_caches() <http://www.php.net/gc_mem_caches>`_
 * `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_
 * posix_setrlimit()
 * `random_bytes() <http://www.php.net/random_bytes>`_
 * `random_int() <http://www.php.net/random_int>`_
-* intdiv()
-* error_clear_last()
+* `intdiv() <http://www.php.net/intdiv>`_
+* `error_clear_last() <http://www.php.net/error_clear_last>`_
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewFunctions                                                                                      |
@@ -13961,7 +13985,7 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 * `mb_ord() <http://www.php.net/mb_ord>`_
 * `mb_chr() <http://www.php.net/mb_chr>`_
 * `mb_scrub() <http://www.php.net/mb_scrub>`_
-* is_iterable()
+* `is_iterable() <http://www.php.net/is_iterable>`_
 
 +-------------+---------------------------+
 | Short name  | Php/Php71NewFunctions     |
@@ -26601,7 +26625,7 @@ Use password_hash()
 ###################
 
 
-password_hash() and password_check() are a better choice to replace the use of `crypt() <http://www.php.net/crypt>`_ to check password.
+`password_hash() <http://www.php.net/password_hash>`_ and password_check() are a better choice to replace the use of `crypt() <http://www.php.net/crypt>`_ to check password.
 
 PHP 5.5 introduced these functions.
 
@@ -27276,6 +27300,58 @@ Class constructor that have empty bodies are useless. They may be removed.
 +-------------+----------------------------+
 | Time To Fix | Slow (1 hour)              |
 +-------------+----------------------------+
+
+
+
+.. _useless-default-argument:
+
+Useless Default Argument
+########################
+
+
+One of the argument has a default value, and this default value is never used. Every time the method is called, the argumentis provided explicitely, rendering the default value actually useless.
+
+.. code-block:: php
+
+   <?php
+   
+   function goo($a, $b = 3) { 
+       // do something here
+   }
+   
+   // foo is called 3 times, and sometimes, $b is not provided. 
+   goo(1,2);
+   goo(1,2);
+   goo(1);
+   
+   
+   function foo($a, $b = 3) { 
+       // do something here
+   }
+   
+   // foo is called 3 times, and $b is always provided. 
+   foo(1,2);
+   foo(1,2);
+   foo(1,2);
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the default value
+* Remove the explicit argument in the function call, when it is equal to the default value
+
++-------------+--------------------------+
+| Short name  | Functions/UselessDefault |
++-------------+--------------------------+
+| Themes      | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 

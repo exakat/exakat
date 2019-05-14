@@ -1777,6 +1777,39 @@ or die() is also applied to many situations, where a blocking situation arise. H
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
+Foreach Reference Is Not Modified
+=================================
+
+.. _dolibarr-structures-foreachreferenceisnotmodified:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`foreach-reference-is-not-modified`, in htdocs/product/reassort.php:364. 
+
+$data is read for its 
+
+.. code-block:: php
+
+    foreach ($this->_parser->data as &$row) {
+                    foreach ($row as &$data) {
+                        $len = strlen($data);
+                        // check if it begins and ends with single quotes
+                        // if it does, then it double quotes may not be the enclosure
+                        if ($len>=2 && $data[0] == "'" && $data[$len-1] == "'") {
+                            $beginEndWithSingle = true;
+                            break;
+                        }
+                    }
+                    if ($beginEndWithSingle) {
+                        break;
+                    }
+                    $depth++;
+                    if ($depth > $this->_max_depth) {
+                        break;
+                    }
+                }
+
 Useless Return
 ==============
 
