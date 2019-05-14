@@ -1,9 +1,6 @@
 <?php
 
-$expected     = array(//'parent::A',
-                      //'self::A',
-                      //'static::A',
-                      '\\x::A',
+$expected     = array('\\x::A',
                       '\\x::A',
                       'x::A',
                       'x::A',
