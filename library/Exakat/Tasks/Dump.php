@@ -2111,6 +2111,10 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
+        if ($result->toInt() === 0) {
+            return 0;
+        }
+
         $valuesSQL = array();
         foreach($result->toArray() as $row) {
             $valuesSQL[] = "('" . $this->sqlite->escapeString($row['variable']) . "', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
