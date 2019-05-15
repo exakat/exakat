@@ -1,8 +1,20 @@
 test
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
 Label : PROJECT
   1
   Label : DEFINITION
-    30
+    29
     Label : DEFINITION
       29
     Label : DEFINITION
@@ -57,8 +69,6 @@ Label : PROJECT
             16
         Label : EXPRESSION
           22
-          Label : DEFINITION
-            23
           Label : DEFINITION
             23
             Label : ARGUMENT

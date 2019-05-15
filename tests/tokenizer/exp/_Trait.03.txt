@@ -1,8 +1,16 @@
 test
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+    Label : DEFINITION
+      22
 Label : PROJECT
   1
   Label : DEFINITION
-    23
+    22
     Label : DEFINITION
       22
     Label : DEFINITION
@@ -33,8 +41,6 @@ Label : PROJECT
             6
         Label : EXPRESSION
           16
-          Label : DEFINITION
-            17
           Label : DEFINITION
             17
             Label : ARGUMENT
