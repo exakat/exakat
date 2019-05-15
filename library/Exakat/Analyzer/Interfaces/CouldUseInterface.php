@@ -31,24 +31,28 @@ class CouldUseInterface extends Analyzer {
 
     public function analyze() {
         // Custom interfaces
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Interface")
-     .as("name")
-     .out("METHOD", "MAGICMETHOD").as("methodCount").out("NAME").as("method")
-     .select("name", "method", "methodCount").by("fullnspath").by("lccode").by("count");
-GREMLIN;
-
-        $res = $this->query($query)->toArray();
+        $this->atomIs('Interface')
+             ->_as('name')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->_as('methodCount')
+             ->outIs('NAME')
+             ->_as('method')
+             ->select(array('name'        => 'fullnspath',
+                            'method'      => 'lccode',
+                            'methodCount' => 'count'));
+        $res = $this->rawQuery();
 
         $interfaces = array();
-        foreach($res as $row) {
+        $methodNames = array();
+        foreach($res->toArray() as $row) {
             if (isset($interfaces[$row['name']])) {
                 $interfaces[$row['name']][] = "$row[method]-$row[methodCount]";
             } else {
                 $interfaces[$row['name']] = array("$row[method]-$row[methodCount]");
             }
+            $methodNames[$row['method']] = 1;
         }
-        
+
         $phpInterfaces = $this->loadJson('php_interfaces_methods.json');
         foreach($phpInterfaces as $interface => $methods) {
             $translations = $this->dictCode->translate(array_column($methods, 'name'));
@@ -59,24 +63,31 @@ GREMLIN;
             // translations are in the same order than original
             foreach($methods as $id => $method) {
                 $interfaces[$interface][] = $translations[$id] . "-$method->count";
+                $methodNames[$translations[$id]] = 1;
             }
         }
-        
+
+        $methodNames = array_keys($methodNames);
+
         $this->atomIs(self::$CLASSES_ALL)
-             ->collectImplements('interfaces')
-             ->hasOut(array('METHOD', 'MAGICMETHOD'))
+             ->filter(
+                $this->side()
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->outIs('NAME')
+                     ->is('lccode', $methodNames, self::CASE_SENSITIVE)
+             )
              ->raw('sideEffect{ x = []; }')
-             ->raw('sideEffect{ php_interfaces = *** }', $interfaces)
              // Collect methods names with argument count
              // can one implement an interface, but with wrong argument counts ?
              ->raw(<<<'GREMLIN'
 where( 
-    __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
+    __.out("METHOD", "MAGICMETHOD")
       .sideEffect{ x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") ) ; }
       .fold() 
 )
 GREMLIN
 )
+             ->raw('sideEffect{ php_interfaces = *** }', $interfaces)
              ->raw(<<<'GREMLIN'
 filter{
     a = false;
@@ -92,6 +103,8 @@ filter{
 
 GREMLIN
 )
+
+                ->collectImplements('interfaces')
                 ->filter('!(fnp in interfaces) ')
                 ->back('first');
         $this->prepareQuery();

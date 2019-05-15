@@ -34,17 +34,23 @@ class CollectImplements extends DSL {
 
         $MAX_LOOPING = self::$MAX_LOOPING;
 
-        return new Command(<<<GREMLIN
-where( 
-    __.sideEffect{ $variable = []; }
-      .out("IMPLEMENTS", "EXTENDS")
-      .emit().repeat( __.in("DEFINITION").out("IMPLEMENTS", "EXTENDS") ).times($MAX_LOOPING)
-      .sideEffect{ $variable.add(it.get().value("fullnspath")) ; }
-      .fold() 
-) 
-
-GREMLIN
-);
+        $command = new Command('where( 
+__.sideEffect{ '.$variable.' = []; }
+  .repeat( __.out("EXTENDS", "IMPLEMENTS")
+  .in("DEFINITION")
+  .hasLabel("Class", "Classanonymous", "Interface")
+  .filter{!it.sack().contains(it.get().value("fullnspath")) }
+  .sack {m,v -> m.add(v.value("fullnspath")); m} )
+  .emit( )
+  .times(' . self::$MAX_LOOPING . ')
+  .hasLabel("Class", "Classanonymous", "Interface")
+  .out("EXTENDS", "IMPLEMENTS")
+  .sideEffect{ '.$variable.'.add(it.get().value("fullnspath")) ; }
+  .fold() 
+)
+');
+        $command->setSack('[]');
+        return $command;
     }
 }
 ?>
