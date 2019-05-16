@@ -15,6 +15,7 @@ selftest:
   stage: selftest
   image: exakat/exakat
   entrypoint: ["/bin/bash"]
+  command: ["project -v"]
   
   script:
     - pwd
