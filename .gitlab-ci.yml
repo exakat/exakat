@@ -16,7 +16,7 @@ self:
   image: exakat/exakat
 
   script:
-    - /usr/src/exakat/exakat.phar project -v
+    - pwd
 
 build:
   stage: build
