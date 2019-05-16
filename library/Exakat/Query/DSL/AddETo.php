@@ -28,7 +28,9 @@ use Exakat\Query\Query;
 class AddETo extends DSL {
     public function run() {
         list($edgeName, $from) = func_get_args();
-        
+
+        assert($this->assertLabel($from, self::LABEL_GO));
+
         return new Command("addE(\"$edgeName\").to(\"$from\")");
     }
 }

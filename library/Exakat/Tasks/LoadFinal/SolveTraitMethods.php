@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class SolveTraitMethods extends LoadFinal {
     public function run() {
-        $query = $this->newQuery('solveTraitMethods');
+        $query = $this->newQuery('solveTraitMethods as/insteadof');
         $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
@@ -49,8 +49,31 @@ class SolveTraitMethods extends LoadFinal {
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countStatic = $result->toInt();
 
-        display('Created ' . ($result->toInt()) . ' links for use in traits');
+        $query = $this->newQuery('solveTraitMethods as');
+        $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->_as('results')
+              ->atomIs('Nsname', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'methode')
+              ->back('first')
+              ->outIs('USE')
+              ->inIs('DEFINITION')
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'results')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countAs = $result->toInt();
+
+        display('Created ' . ($countStatic + $countAs) . ' links for use in traits');
     }
 }
 
