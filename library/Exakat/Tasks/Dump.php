@@ -1824,7 +1824,7 @@ GREMLIN
               ->inIs('NAME')
 
               ->inIs('CONST')
-              ->savePropertyAs('visibility', 'default1')
+              ->savePropertyAs('visibility', 'visibility1')
               ->inIs('CONST')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
               
@@ -1833,8 +1833,8 @@ GREMLIN
               ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('CONST')
-              ->notSamePropertyAs('visibility', 'default1', Analyzer::CASE_SENSITIVE) // test
-              ->savePropertyAs('visibility', 'default2') // collect
+              ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE) // test
+              ->savePropertyAs('visibility', 'visibility2') // collect
               ->outIs('CONST')
 
               ->outIs('NAME')
