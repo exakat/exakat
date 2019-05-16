@@ -35,7 +35,7 @@ class CollectImplements extends DSL {
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $command = new Command('where( 
-__.sideEffect{ '.$variable.' = []; }
+__.sideEffect{ ' . $variable . ' = []; }
   .repeat( __.out("EXTENDS", "IMPLEMENTS")
   .in("DEFINITION")
   .hasLabel("Class", "Classanonymous", "Interface")
@@ -45,7 +45,7 @@ __.sideEffect{ '.$variable.' = []; }
   .times(' . self::$MAX_LOOPING . ')
   .hasLabel("Class", "Classanonymous", "Interface")
   .out("EXTENDS", "IMPLEMENTS")
-  .sideEffect{ '.$variable.'.add(it.get().value("fullnspath")) ; }
+  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
   .fold() 
 )
 ');
