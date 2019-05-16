@@ -7,7 +7,7 @@ stages:
 selftest:
   image: exakat/exakat
   script:
-    - ls
+    - /usr/src/exakat/exakat.phar project -v
 
 #build:
 #  stage: build
