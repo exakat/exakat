@@ -1,8 +1,8 @@
 stages:
-  - lint
-  - self
-  - build
-  - test
+#  - lint
+  - selftest
+#  - build
+#  - test
 
 lint:
   stage: lint
@@ -11,8 +11,8 @@ lint:
   script:
     - php-cs-fixer fix --dry-run
 
-self:
-  stage: self
+selftest:
+  stage: selftest
   image: exakat/exakat
 
   script:
