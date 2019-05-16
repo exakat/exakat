@@ -14,7 +14,8 @@ lint:
 selftest:
   stage: selftest
   image: exakat/exakat
-
+  entrypoint: ["/bin/bash"]
+  
   script:
     - pwd
 
