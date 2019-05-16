@@ -1,0 +1,15 @@
+project: exakat
+project_name: exakat
+project_themes:
+  - Security
+  - Suggestions
+  - ClassReview
+  - mine
+  - second
+rulesets:
+  mine :
+  - Structures/AddZero
+  - Structures/MultiplyByOne
+  second :
+  - Php/LogicalInLetters
+  - Classes/CouldBePrivateMethod
