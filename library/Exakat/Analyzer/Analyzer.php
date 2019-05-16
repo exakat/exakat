@@ -1743,6 +1743,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function collectTraits($variable = 'classes') {
+        $this->query->collectTraits($variable);
+        
+        return $this;
+    }
     
     // Calculate The lenght of a string in a property, and report it in the named string
     public function getStringLength($property = 'noDelimiter', $variable = 'l') {

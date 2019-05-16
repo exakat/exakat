@@ -27,19 +27,20 @@ use Exakat\Analyzer\Analyzer;
 
 class LoopCalling extends Analyzer {
     public function analyze() {
+        // possitlbe extension to methods but probably very costly
         // loop of 2
         $this->atomIs('Function')
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
 
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
 
              ->samePropertyAs('fullnspath', 'name')
              ->back('first')
@@ -51,20 +52,18 @@ class LoopCalling extends Analyzer {
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->hasNoIn('METHOD')
              ->samePropertyAs('fullnspath', 'name')
 
              ->back('first')
@@ -76,25 +75,25 @@ class LoopCalling extends Analyzer {
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'name')
 
              ->back('first')

@@ -20,25 +20,27 @@
  *
 */
 
-namespace Exakat\Analyzer\Traits;
 
+namespace Exakat\Query\DSL;
+
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class TraitNotFound extends Analyzer {
-    public function analyze() {
-        // class x  { use a, b { c::d insteadof e}}
-        $this->atomIs(self::$CIT)
-             ->collectTraits('traits')
-             ->outIs('USE')
-             ->outIs('BLOCK')
-             ->outIs('EXPRESSION')
-             ->atomIs(array('As', 'Insteadof'))
-             ->outIs(array('NAME', 'INSTEADOF'))
-             ->outIsIE('CLASS')
-             ->fullnspathIsNot('traits')
-             ->back('first');
-        $this->prepareQuery();
+class CollectTraits extends DSL {
+    public function run() : Command {
+        list($variable) = func_get_args();
+        
+        $this->assertVariable($variable, self::VARIABLE_WRITE);
+
+        $command = new Command('where( 
+__.sideEffect{ ' . $variable . ' = []; }
+  .out("USE")
+  .out("USE")
+  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
+  .fold() 
+)
+');
+        return $command;
     }
 }
-
 ?>
