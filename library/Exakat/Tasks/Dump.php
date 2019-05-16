@@ -1759,7 +1759,6 @@ GREMLIN;
     }
 
     private function collectClassChanges() {
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS classChanges');
         $query = <<<'SQL'
 CREATE TABLE classChanges (  

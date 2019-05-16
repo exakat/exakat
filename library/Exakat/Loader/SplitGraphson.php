@@ -132,7 +132,7 @@ new File('$this->pathDef').eachLine {
 }
 
 GREMLIN;
-            $res = $this->graphdb->query($query);
+            $this->graphdb->query($query);
             display("loaded $total definitions");
         }
         $end = microtime(true);
@@ -256,7 +256,6 @@ GREMLIN;
         }
         fclose($fp);
 
-        $total_log = $this->total;
         if ($this->total > 10000) {
             $this->saveNodes();
         }

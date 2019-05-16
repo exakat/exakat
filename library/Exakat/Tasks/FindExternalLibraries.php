@@ -82,7 +82,6 @@ class FindExternalLibraries extends Tasks {
         $cacheFile = "{$this->config->project_dir}/config.cache";
 
         display('Processing files');
-        $dir = $this->config->project;
         Files::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
 
         if (empty($files)) {

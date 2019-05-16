@@ -50,7 +50,6 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-
         $query = $this->newQuery('SetClassMethodRemoteDefinition traits');
         $query->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')

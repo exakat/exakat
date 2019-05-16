@@ -32,8 +32,6 @@ class CollectImplements extends DSL {
         
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
-        $MAX_LOOPING = self::$MAX_LOOPING;
-
         $command = new Command('where( 
 __.sideEffect{ ' . $variable . ' = []; }
   .repeat( __.out("EXTENDS", "IMPLEMENTS")

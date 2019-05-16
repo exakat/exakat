@@ -46,7 +46,6 @@ class CouldBePrivateConstante extends Analyzer {
         $publicUndefinedConstants = $this->rawQuery()
                                          ->toArray();
 
-        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->atomIs('Name')
@@ -70,7 +69,6 @@ filter{
 }
 GREMLIN
 )
-//             ->fullnspathIsNot('fns')
              ->select(array('classe'    => 'fullnspath',
                             'constante' => 'code'))
              ->unique();

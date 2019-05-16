@@ -336,7 +336,7 @@ function unicode_blocks($string) {
     );
     
     $return = array();
-    foreach ($characters as $i => $e) {
+    foreach ($characters as $e) {
         $previous = '';
         foreach ($ranges as $low => $name) {
             if ($low > $e) {

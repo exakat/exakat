@@ -639,7 +639,6 @@ JAVASCRIPT;
     protected function getSeveritiesNumberBy($type = 'file') {
         $list = $this->weeks[$this->current]->analysis;
         $listSQL = makeList($list);
-        $list = array_flip($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
