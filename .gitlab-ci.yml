@@ -4,32 +4,29 @@ stages:
 #  - build
 #  - test
 
-lint:
-  stage: lint
-  image: sixlive/php-lint-fix
-
-  script:
-    - php-cs-fixer fix --dry-run
-
 selftest:
-  stage: selftest
   image: exakat/exakat
-  
   script:
-    - pwd
     - ls
-    - ls /tmp/
 
-build:
-  stage: build
-  image: php:7.3-cli-stretch
-  script:
-    - bash ci/docker_install.sh
-
-test:
-  stage: test
-  image: php:7.3-cli-stretch
-  script:
-    - sh ci/docker_install.sh
-    - phpunit --testsuite One
-
+#build:
+#  stage: build
+#  image: php:7.3-cli-stretch
+#  script:
+#    - bash ci/docker_install.sh
+#
+#test:
+#  stage: test
+#  image: php:7.3-cli-stretch
+#  script:
+#    - sh ci/docker_install.sh
+#    - phpunit --testsuite One
+#
+#
+#lint:
+#  stage: lint
+#  image: sixlive/php-lint-fix
+#
+#  script:
+#    - php-cs-fixer fix --dry-run
+#
