@@ -26,12 +26,15 @@ use Exakat\Analyzer\Analyzer;
 
 class ConcatAndAddition extends Analyzer {
     public function analyze() {
+        // "sum ". $a + $b
         $this->atomIs('Concatenation')
-             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIs('CONCAT')
              ->atomIs('Addition')
              ->back('first');
         $this->prepareQuery();
 
+        // $a + $b . "sum "
+        // for PHP 7.4 and later
         $this->atomIs('Addition')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Concatenation')

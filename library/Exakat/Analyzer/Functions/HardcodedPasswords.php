@@ -37,7 +37,7 @@ class HardcodedPasswords extends Analyzer {
             $function = makeFullNsPath($function);
             $this->atomFunctionIs($function)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('String')
+                 ->atomIs('String', self::WITH_CONSTANTS)
                  ->back('first');
             $this->prepareQuery();
         }

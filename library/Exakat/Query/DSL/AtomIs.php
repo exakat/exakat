@@ -42,6 +42,7 @@ class AtomIs extends DSL {
             $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
           __.hasLabel(within(["Variable"])).in("DEFINITION").out("DEFINITION").in("LEFT").hasLabel("Assignation").out("RIGHT"),
+          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").out("ARGUMENT").filter{ rank == it.get().value('rank');},
           __.filter{true})
 .hasLabel(within(***))
 GREMLIN;
