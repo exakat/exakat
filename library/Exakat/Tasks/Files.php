@@ -341,7 +341,7 @@ class Files extends Tasks {
         if (empty($ignoreDirs)) {
             $ignoreDirsRegex = '#^$#';
         } else {
-            $ignoreDirsRegex = '#(' . implode('|', $ignoreDirs) . ')#';
+            $ignoreDirsRegex = '#^(' . implode('|', $ignoreDirs) . ')#';
         }
 
         // Regex to include files and folders
