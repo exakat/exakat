@@ -1192,7 +1192,7 @@ class Load extends Tasks {
         $this->addLink($fn, $block, 'BLOCK');
 
         $fn->token      = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode.') => ' . $block->fullcode;
+        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
 
         $this->pushExpression($fn);
         $this->checkExpression();
@@ -4319,13 +4319,14 @@ class Load extends Tasks {
 
             $this->addLink($use, $namespace, 'USE');
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
+        $fullcode = implode(', ', $fullcode);
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             //use A\B{} // Group
             $block = $this->processUseBlock();
 
             $this->addLink($use, $block, 'BLOCK');
-            $fullcode[] = $namespace->fullcode . ' ' . $block->fullcode;
+            $fullcode = ' ' . $block->fullcode;
 
             // Several namespaces ? This has to be recalculated inside the block!!
             $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
@@ -4335,7 +4336,7 @@ class Load extends Tasks {
         }
 
         $use->code     = $this->tokens[$current][1];
-        $use->fullcode = $this->tokens[$current][1] . ' ' . implode(', ', $fullcode);
+        $use->fullcode = $this->tokens[$current][1] . ' ' . $fullcode;
         $use->token    = $this->getToken($this->tokens[$current][0]);
         $this->pushExpression($use);
 
@@ -6132,7 +6133,7 @@ class Load extends Tasks {
         } elseif ($element->atom === 'Phpvariable') {
             $name = $element->code;
         } elseif (!empty($element->noDelimiter)) {
-            $name = '$'.$element->noDelimiter;
+            $name = '$' . $element->noDelimiter;
         } else {
             return;
         }

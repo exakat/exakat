@@ -174,7 +174,6 @@ class Initproject extends Tasks {
         $projectConfig->setConfig('include_dirs',   $include_dirs);
 
         shell_exec("chmod -R g+w $tmpPath");
-        $repositoryDetails = parse_url($repositoryURL);
 
         if (!empty($this->config->branch)){
             $vcs->setBranch($this->config->branch);

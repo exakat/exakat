@@ -119,10 +119,14 @@ class Config {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
-            if ($this->dotExakatConfig->loadConfig(null) === Configsource::NOT_LOADED) {
+            if (($file = $this->dotExakatConfig->loadConfig(null)) === Configsource::NOT_LOADED) {
                 $this->dotExakatYamlConfig = new DotExakatYamlConfig();
-                $this->dotExakatYamlConfig->loadConfig(null);
+                $file = $this->dotExakatYamlConfig->loadConfig(null);
+                if ($file !== Configsource::NOT_LOADED) {
+                    $this->configFiles[] = $file;
+                }
             } else {
+                $this->configFiles[] = $file;
                 $this->dotExakatYamlConfig = new EmptyConfig();
             }
 
@@ -157,6 +161,10 @@ class Config {
         if ($file = $themas->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
             $this->themas = $themas->toArray();
+        }
+        
+        if ($this->dotExakatYamlConfig instanceof DotExakatYamlConfig) {
+            $this->themas = array_merge($this->themas, $this->dotExakatYamlConfig->getThemas());
         }
 
         if ($this->options['command'] !== 'doctor') {

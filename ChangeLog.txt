@@ -1,4 +1,4 @@
-Version 1.7.9 (Shi Shutong of Dingwei, coming up)
+Version 1.8.0 (Zang Wengong of Dingyou, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,35 @@ Version 1.7.9 (Shi Shutong of Dingwei, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.7.9 (Shi Shutong of Dingwei, 2019-05-13)
++ Architecture
+    + Upgraded list of functions by extension : openssl, math, hrtime
+    + Added global atom to track all globals
+    + Rewrote several Dump queries with DSL
+    + Added support for Notice in Phpexec
+    + Added support for .exakat.ini and .exakat.yaml
+    + Added support for arrow functions : fn => 
+    + Added support for spread operator in arrays [...[1,2,3]]
++ Report
+    + Inventories : added 'inclusions' and 'global variables'
+    + Ambassador : added global variables
++ Analyzer
+    + New analysis : support for ext/ffi, uuid
+    + Updated analysis : Nested Ternary handles parenthesis
+    + Updated analysis : Static loops is extended to references and arrays
+    + Updated analysis : Recursive function is extended to Magic methods and Closures
+    + Checked unit tests : 3014 / 3019 test pass (99% pass)
++ Tokenizer
+    + Moved 'is_in_ignored_dir' to a property
+    + Cleaned getFullnspath() call in Load
+    + Fixed latent bug on Function fullnspath
+    + Heredoc and Nowdoc are reported as constant if needed
+    + Isset() is not read
+    + Ignore PHP notices when linting
+    + Globals are now centralised across a repository
+    + Extended definitions for Virtualproperties
+    + Removed double DEFINITION link with new
 
 Version 1.7.8 (Cui Juqing of Dingyi, 2019-05-06)
 + Architecture

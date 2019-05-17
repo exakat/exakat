@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 06 May 2019 16:20:32 +0000
-.. comment: Generation hash : f5e37ec2376d4df9c6f83de0d6ac38aa1c0c1a7e
+.. comment: Generation date : Tue, 14 May 2019 07:24:51 +0000
+.. comment: Generation hash : f0681f5dc6feb12fbf23f4299f65770f575c1fd5
 
 
 .. _analyze:
@@ -99,6 +99,7 @@ Total : 352 analysis
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
 * :ref:`Bad Constants Names <bad-constants-names>`
 * :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -162,7 +163,6 @@ Total : 352 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
-* :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach On Object <foreach-on-object>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
 * :ref:`Forgotten Interface <forgotten-interface>`
@@ -431,9 +431,10 @@ Total : 352 analysis
 ClassReview
 +++++++++++
 
-Total : 19 analysis
+Total : 20 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
+* :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
@@ -1096,7 +1097,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 77 analysis
+Total : 78 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1171,6 +1172,7 @@ Total : 77 analysis
 * :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
+* :ref:`Useless Default Argument <useless-default-argument>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`

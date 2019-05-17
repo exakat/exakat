@@ -673,8 +673,10 @@ SQL;
         $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<'SQL'
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
-        GROUP BY file
+SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY file
 SQL
         );
         $return = array();

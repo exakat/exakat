@@ -32,7 +32,7 @@ class CouldBePrivateConstante extends Analyzer {
     }
     
     public function analyze() {
-        // Searching for properties that are never used outside the definition class or its children
+        // Searching for constants that are never used outside the definition class
 
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Staticconstant')
@@ -46,27 +46,31 @@ class CouldBePrivateConstante extends Analyzer {
         $publicUndefinedConstants = $this->rawQuery()
                                          ->toArray();
 
-        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->_as('classe')
-             ->has('fullnspath')
-             ->savePropertyAs('fullnspath', 'fns')
-             ->inIs('CLASS')
              ->outIs('CONSTANT')
              ->atomIs('Name')
              ->savePropertyAs('code', 'name')
              ->_as('constante')
-             ->goToInstruction(array('File', 'Class', 'Classanonymous', 'Interface'))
+             ->back('first')
+             
+             ->outIs('CLASS')
+             ->_as('classe')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fns')
+
+             ->goToInstruction(array('Class', 'Classanonymous', 'File'))
              ->raw(<<<GREMLIN
-     or( __.hasLabel("File"), 
-         __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($MAX_LOOPING)
-           .where( __.out("CONST").out("CONST").filter{ it.get().value("code") == name; } )
-           .filter{it.get().value("fullnspath") != fns; }
-        )
-        .select("classe", "constante").by("fullnspath").by("code")
+filter{
+    if (it.get().label() == 'File') {
+        true;
+    } else {   // in a class
+        fns != it.get().value('fullnspath');
+    }
+}
 GREMLIN
-                  )
+)
+             ->select(array('classe'    => 'fullnspath',
+                            'constante' => 'code'))
              ->unique();
         $publicConstants = $this->rawQuery()
                                 ->toArray();
@@ -94,7 +98,6 @@ GREMLIN
              ->isNotHash('fullnspath', $calls, 'constante')
              ->back('results');
         $this->prepareQuery();
-
     }
 }
 

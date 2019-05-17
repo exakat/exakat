@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('D\foo( )'
+$expected     = array('D\\foo( )',
                      );
 
-$expected_not = array('C\D\foo( )',
+$expected_not = array('C\\D\\foo( )',
                      );
 
 ?>

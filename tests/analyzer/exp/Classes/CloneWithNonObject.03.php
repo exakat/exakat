@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('clone \'a\'', 
+$expected     = array('clone \'a\'',
                       'clone True',
                      );
 

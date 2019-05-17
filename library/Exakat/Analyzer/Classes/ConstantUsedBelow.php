@@ -39,7 +39,7 @@ class ConstantUsedBelow extends Analyzer {
              ->inIs('NAME')
              ->outIs('DEFINITION')
              ->goToClass()
-              ->goToAllParents(self::EXCLUDE_SELF)
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->samePropertyAs('fullnspath', 'classpath')
              ->back('results');
         $this->prepareQuery();

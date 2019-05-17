@@ -39,6 +39,15 @@ class StrangeName extends Analyzer {
              ->regexIs('fullcode', '([^\\\\.])\\\\1{2,}');
         $this->prepareQuery();
 
+        // Using strange type of data
+        $this->atomIs(self::$VARIABLES_SCALAR)
+             ->outIs('NAME')
+             ->atomIs(array('Integer', 'Boolean', 'Null', 'Arrayliteral', 'Comparison', 'Bitshift', 'Typecast'))
+             ->tokenIsNot('T_STRING_CAST')
+             ->back('first');
+        $this->prepareQuery();
+
+
 /*
     // base for letter diversity : this needs nore testing, as diversity drops with size of the name
         $this->atomIs(self::$VARIABLES_ALL)

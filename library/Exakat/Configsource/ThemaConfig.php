@@ -26,7 +26,7 @@ class ThemaConfig extends Config {
     private $remoteIniFile = 'config/themes.ini';
     
     public function __construct($projects_root) {
-        $this->remoteIniFile = $projects_root . '/config/themes.ini';
+        $this->remoteIniFile = "{$projects_root}/config/themes.ini";
     }
 
     public function loadConfig($project) {

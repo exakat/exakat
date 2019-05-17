@@ -1759,7 +1759,6 @@ GREMLIN;
     }
 
     private function collectClassChanges() {
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS classChanges');
         $query = <<<'SQL'
 CREATE TABLE classChanges (  
@@ -1824,7 +1823,7 @@ GREMLIN
               ->inIs('NAME')
 
               ->inIs('CONST')
-              ->savePropertyAs('visibility', 'default1')
+              ->savePropertyAs('visibility', 'visibility1')
               ->inIs('CONST')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
               
@@ -1833,8 +1832,8 @@ GREMLIN
               ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('CONST')
-              ->notSamePropertyAs('visibility', 'default1', Analyzer::CASE_SENSITIVE) // test
-              ->savePropertyAs('visibility', 'default2') // collect
+              ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE) // test
+              ->savePropertyAs('visibility', 'visibility2') // collect
               ->outIs('CONST')
 
               ->outIs('NAME')
@@ -2062,7 +2061,7 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($result->toArray() as $row) {
-            $valuesSQL[] = "('".$this->sqlite->escapeString($row['including'])."', '".$this->sqlite->escapeString($row['included'])."') \n";
+            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['including']) . "', '" . $this->sqlite->escapeString($row['included']) . "') \n";
         }
 
         $query = 'INSERT INTO inclusions ("including", "included") VALUES ' . implode(', ', $valuesSQL);
@@ -2111,9 +2110,13 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
+        if ($result->toInt() === 0) {
+            return 0;
+        }
+
         $valuesSQL = array();
         foreach($result->toArray() as $row) {
-            $valuesSQL[] = "('".$this->sqlite->escapeString($row['variable'])."', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
+            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['variable']) . "', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
         }
 
         $query = 'INSERT INTO globalVariables ("variable", "file", "line", "isRead", "isModified", "type") VALUES ' . implode(', ', $valuesSQL);

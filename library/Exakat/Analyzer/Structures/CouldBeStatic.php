@@ -32,22 +32,22 @@ class CouldBeStatic extends Analyzer {
     }
     
     public function analyze() {
-        $uniqueGlobals = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Globaldefinition").groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet();
-GREMLIN
-)->toArray();
+        $this->atomIs('Globaldefinition')
+             ->raw('groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()');
+        $result = $this->rawQuery();
+        $uniqueGlobals = $result->toArray();
 
-        $globalvar = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Array").values("globalvar");
-GREMLIN
-)->toArray();
+        $this->atomIs('Array')
+             ->values('globalvar');
+        $result = $this->rawQuery();
+        $globalvar = $result->toArray();
 
-        $implicitvar = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Variable", "Globaldefinition").where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal")).values("code");
-GREMLIN
-)->toArray();
+        $this->atomIs(array('Variable', 'Globaldefinition'))
+             ->analyzerIs('Structures/GlobalInGlobal')
+             ->values('code');
+        $result = $this->rawQuery();
+        $implicitvar = $result->toArray();
 
-        $commons = array_intersect($uniqueGlobals, $globalvar);
         $uniqueGlobals = array_values(array_diff($uniqueGlobals, $globalvar, $implicitvar));
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 

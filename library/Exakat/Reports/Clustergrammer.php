@@ -41,7 +41,7 @@ class Clustergrammer extends Reports {
         display( count($skeleton) . " distinct analyzers\n");
 
         $titles = array();
-        foreach($skeleton as $analyzer => $foo) {
+        foreach(array_keys($skeleton) as $analyzer) {
             if ($analyzer == 'total') { continue; }
             $ini = $this->getDocs($analyzer);
             $titles[$analyzer] = '"' . $ini['name'] . '"';

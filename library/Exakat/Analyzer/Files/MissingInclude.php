@@ -67,11 +67,13 @@ class MissingInclude extends Analyzer {
               ->outIsIE('CODE')
               ->fullcodeIs($missing)
               ->back('first');
-        $result = $this->prepareQuery();
+        $this->prepareQuery();
     }
     
     private function searchFile($file, $files, $including) {
-        if (empty($file)) { return false; }
+        if (empty($file)) { 
+            return false; 
+        }
 
         $bits = explode(' . ', $file);
         $vars = $this->config->Files_MissingInclude;

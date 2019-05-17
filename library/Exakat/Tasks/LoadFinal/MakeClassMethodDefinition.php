@@ -52,6 +52,169 @@ class MakeClassMethodDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
 
+        // Create link between Class method and definition
+        // This works only for $this
+        $query = $this->newQuery('MakeClassMethodDefinition with traits');
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('OBJECT')
+              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              
+              ->outIs('USE')
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs(array('As', 'Insteadof'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs(array('AS', 'INSTEADOF'))
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs(array('AS', 'INSTEADOF'))
+              ->outIs('NAME')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'realname')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'realname', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countT = $result->toInt();
+        display("$countT with traits");
+
+        // Create link between Class method and definition
+        // This works only for $this
+        $query = $this->newQuery('MakeClassMethodDefinition with traits');
+        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('OBJECT')
+              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->_as('theClass')
+              
+              ->outIs('USE')
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('AS')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('AS')
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'realname')
+              ->back('theClass')
+
+              ->outIs('USE')
+              ->outIs('USE')
+              ->inIs('DEFINITION')
+              ->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'realname', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countT = $result->toInt();
+        display("$countT with traits");
+
+        // Create link between Class method and definition
+        // This works only for $this
+        $query = $this->newQuery('MakeClassMethodDefinition with traits');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              
+              ->outIs('USE')
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs(array('As', 'Insteadof'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs(array('AS', 'INSTEADOF'))
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs(array('AS', 'INSTEADOF'))
+              ->outIs('NAME')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'realname')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'realname', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countT = $result->toInt();
+        display("$countT with static traits");
+
+        // Create link between Class method and definition
+        // This works only for $this
+        $query = $this->newQuery('MakeClassMethodDefinition with traits and as');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->_as('theClass')
+
+              ->outIs('USE')
+              ->outIs('BLOCK')
+              ->outIs('EXPRESSION')
+              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('AS')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('AS')
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'realname')
+              ->back('theClass')
+
+              ->outIs('USE')
+              ->outIs('USE')
+              ->inIs('DEFINITION')
+              ->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'realname', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countT = $result->toInt();
+        display("$countT with static traits");
+
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
         $query = $this->newQuery('MakeClassMethodDefinition parents');
@@ -98,58 +261,6 @@ class MakeClassMethodDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count3 = $result->toInt();
-
-        // Create link between Class method and definition
-        // This works only for $this
-        $query = $this->newQuery('MakeClassMethodDefinition method');
-        $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('OBJECT')
-              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('OBJECT')
-              ->outIs('METHOD')
-              ->savePropertyAs('lccode', 'name')
-              ->back('first')
-              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
-              ->raw(<<<'GREMLIN'
-where(
-    __.sideEffect{aliases = [:]; insteadofs = [:]; }
-      .out("USE").out("BLOCK").out("EXPRESSION")
-      .sideEffect{
-        if (it.get().label() == "Insteadof") {
-            method = it.get().vertices(OUT, "NAME").next().vertices(OUT, "METHOD").next().property("lccode").value();
-            theTrait = it.get().vertices(OUT, "INSTEADOF").next().property("fullnspath").value();
-            if (insteadofs[method] == null) {
-                insteadofs[method] = [theTrait];
-            } else {
-                insteadofs[method].add(theTrait);
-            }
-        }
-
-        if (it.get().label() == "As") {
-            method = it.get().vertices(OUT, "NAME").next().property("lccode").value();
-            alias = it.get().vertices(OUT, "AS").next().property("lccode").value();
-            aliases[alias] = method;
-        }
-      }
-      .fold()
-    )
-.sideEffect{ if (aliases[name] != null) { name = aliases[name]; } }
-GREMLIN
-, array(), array())
-              ->goToAllTraits(Analyzer::INCLUDE_SELF)
-              ->raw(<<<'GREMLIN'
-filter{ insteadofs[name] == null || !(it.get().value('fullnspath') in insteadofs[name]); }
-GREMLIN
-,array(), array())
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->returnCount();
-        $query->prepareRawQuery();
 
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count4 = $result->toInt();

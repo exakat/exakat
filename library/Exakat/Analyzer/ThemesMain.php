@@ -131,7 +131,7 @@ SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM 
     JOIN analyzers AS a
         ON a.id = ac.id_analyzer
     $where
-	GROUP BY analyzer
+    GROUP BY analyzer
 SQL;
         $res = self::$sqlite->query($query);
 

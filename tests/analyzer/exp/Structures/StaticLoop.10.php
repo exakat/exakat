@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('foreach($i as &$j) { /**/ } ', 
+$expected     = array('foreach($i as &$j) { /**/ } ',
                       'foreach($c as &$d) { /**/ } ',
                      );
 
