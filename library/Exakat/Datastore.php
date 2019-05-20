@@ -504,8 +504,8 @@ SQLITE;
     }
     
     public function ignoreFile($file, $reason = 'unknown') {
-        $this->sqliteWrite->query('DELETE FROM files WHERE file = "' . $this->sqliteWrite->escapeString($file) . '"');
-        $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, "' . $this->sqliteWrite->escapeString($file) . '", "' . $reason . '")');
+        $this->sqliteWrite->query('DELETE FROM files WHERE file = \'' . $this->sqliteWrite->escapeString($file) . '\'');
+        $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }
 }
 
