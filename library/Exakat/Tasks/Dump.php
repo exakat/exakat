@@ -2282,7 +2282,11 @@ SQL;
         $this->collectDatastore();
 
         $time   = time();
-        $id     = random_int(0, PHP_INT_MAX);
+        try {
+            $id     = random_int(0, PHP_INT_MAX);
+        } catch (\Throwable $e) {
+            die("Couldn't generate an id for the current dump file. Aborting");
+        }
         if (file_exists($this->sqliteFilePrevious)) {
             $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
 
