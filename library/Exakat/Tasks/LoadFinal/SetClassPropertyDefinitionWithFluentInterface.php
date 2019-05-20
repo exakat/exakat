@@ -41,20 +41,14 @@ class SetClassPropertyDefinitionWithFluentInterface extends LoadFinal {
               ->atomIs(array('Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
               ->outIsIE('OBJECT')
               ->inIs('DEFINITION')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('BLOCK')
-              ->atomInsideNoDefinition('Return')
-              ->outIs('RETURN')
-              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
 
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
+
               ->addETo('DEFINITION', 'method')
               ->returnCount();
         $query->prepareRawQuery();
