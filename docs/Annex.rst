@@ -424,9 +424,21 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.0
+
+  * Already Parents Trait (Traits/AlreadyParentsTrait ; Analyze)
+  * Casting Ternary (Structures/CastingTernary ; Analyze, OneFile)
+  * Concat And Addition (Php/ConcatAndAddition ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80)
+  * Concat Empty (Structures/ConcatEmpty ; Analyze, OneFile)
+  * Minus One On Error (Security/MinusOneOnError ; Security)
+  * New Functions In PHP 7.4 (Php/Php74NewFunctions ; CompatibilityPHP74)
+  * Php/UnpackingInsideArrays (Php/UnpackingInsideArrays ; Unassigned)
+  * Useless Argument (Functions/UselessArgument)
+
 * 1.7.9
 
   * Avoid option arrays in constructors (Classes/AvoidOptionArrays)
+  * Traits/TraitNotFound (Traits/TraitNotFound ; Analyze, LintButWontExec)
   * Useless Default Argument (Functions/UselessDefault ; Suggestions)
   * ext/ffi (Extensions/Extffi ; Appcontent)
   * ext/uuid (Extensions/Extuuid ; Unassigned)
@@ -1240,7 +1252,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Break With Non Integer (Structures/BreakNonInteger ; CompatibilityPHP54, OneFile)
   * Buried Assignation (Structures/BuriedAssignation ; Analyze)
   * Calltime Pass By Reference (Structures/CalltimePassByReference ; CompatibilityPHP54)
-  * Can't Disable Class (Security/CantDisableClass ; Security)
+  * Can't Disable Class (Security/CantDisableClass ; Appinfo)
   * Can't Disable Function (Security/CantDisableFunction ; Appinfo, Appcontent)
   * Can't Extend Final (Classes/CantExtendFinal ; Analyze, Dead code, Simple)
   * Cant Use Return Value In Write Context (Php/CantUseReturnValueInWriteContext ; CompatibilityPHP54, CompatibilityPHP53)
@@ -2061,15 +2073,14 @@ List of external links mentionned in this documentation.
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2099,8 +2110,10 @@ List of external links mentionned in this documentation.
 * `Cairo Graphics Library <https://cairographics.org/>`_
 * `Calendar Functions <http://www.php.net/manual/en/ref.calendar.php>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
+* `Can you spot the vulnerability? (openssl_verify) <https://twitter.com/ripstech/status/1124325237967994880>`_
 * `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
+* `Change the precedence of the concatenation operator <https://wiki.php.net/rfc/concatenation_precedence>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/abstract>`_
 * `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
@@ -2225,7 +2238,6 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
@@ -2296,7 +2308,6 @@ List of external links mentionned in this documentation.
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 * `Isset <http://www.php.net/isset>`_
-* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
@@ -2336,6 +2347,7 @@ List of external links mentionned in this documentation.
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
+* `mb_str_split <http://php.net/mb_str_split>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_
 * `MD5 <http://php.net/md5>`_
@@ -2376,7 +2388,6 @@ List of external links mentionned in this documentation.
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
-* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
@@ -2528,9 +2539,11 @@ List of external links mentionned in this documentation.
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
+* `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_
 * `trigger_error <http://php.net/trigger_error>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
+* `Type Casting <https://www.php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -2555,8 +2568,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2788,6 +2801,7 @@ _______
 |   analyzer[] = "Php/AssignAnd";
 |   analyzer[] = "Php/BetterRand";
 |   analyzer[] = "Php/ClassFunctionConfusion";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/Crc32MightBeNegative";
 |   analyzer[] = "Php/Deprecated";
 |   analyzer[] = "Php/EmptyList";
@@ -2827,11 +2841,13 @@ _______
 |   analyzer[] = "Structures/BreakOutsideLoop";
 |   analyzer[] = "Structures/BuriedAssignation";
 |   analyzer[] = "Structures/CastToBoolean";
+|   analyzer[] = "Structures/CastingTernary";
 |   analyzer[] = "Structures/CatchShadowsVariable";
 |   analyzer[] = "Structures/CheckAllTypes";
 |   analyzer[] = "Structures/CheckJson";
 |   analyzer[] = "Structures/CommonAlternatives";
 |   analyzer[] = "Structures/ComparedComparison";
+|   analyzer[] = "Structures/ConcatEmpty";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/CouldBeElse";
 |   analyzer[] = "Structures/CouldBeStatic";
@@ -2958,9 +2974,11 @@ _______
 |   analyzer[] = "Structures/WrongRange";
 |   analyzer[] = "Structures/pregOptionE";
 |   analyzer[] = "Structures/toStringThrowsException";
+|   analyzer[] = "Traits/AlreadyParentsTrait";
 |   analyzer[] = "Traits/DependantTrait";
 |   analyzer[] = "Traits/EmptyTrait";
 |   analyzer[] = "Traits/MethodCollisionTraits";
+|   analyzer[] = "Traits/TraitNotFound";
 |   analyzer[] = "Traits/UndefinedInsteadof";
 |   analyzer[] = "Traits/UndefinedTrait";
 |   analyzer[] = "Traits/UselessAlias";
@@ -3079,6 +3097,7 @@ __________________
 |   analyzer[] = "Php/CaseForPSS";
 |   analyzer[] = "Php/ClassConstWithArray";
 |   analyzer[] = "Php/ClosureThisSupport";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/DirectCallToClone";
@@ -3162,6 +3181,7 @@ __________________
 |   analyzer[] = "Php/CantUseReturnValueInWriteContext";
 |   analyzer[] = "Php/CaseForPSS";
 |   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/DirectCallToClone";
@@ -3243,6 +3263,7 @@ __________________
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Namespaces/UseFunctionsConstants";
 |   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/DirectCallToClone";
@@ -3314,6 +3335,7 @@ __________________
 |   analyzer[] = "Classes/NullOnNew";
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/DirectCallToClone";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3377,6 +3399,7 @@ __________________
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Extensions/Extereg";
 |   analyzer[] = "Functions/funcGetArgModified";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/EmptyList";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/ForeachDontChangePointer";
@@ -3432,6 +3455,7 @@ __________________
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Extensions/Extmcrypt";
 |   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3469,6 +3493,7 @@ __________________
 | [CompatibilityPHP72]
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
@@ -3504,6 +3529,7 @@ __________________
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/CompactInexistant";
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/TypedPropertyUsage";
@@ -3522,8 +3548,10 @@ CompatibilityPHP74
 __________________
 
 | [CompatibilityPHP74]
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
 |   analyzer[] = "Php/IdnUts46";
+|   analyzer[] = "Php/Php74NewFunctions";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 
 
@@ -3537,6 +3565,7 @@ CompatibilityPHP80
 __________________
 
 | [CompatibilityPHP80]
+|   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/Php80RemovedConstant";
 |   analyzer[] = "Php/Php80RemovedFunctions";| 
 
@@ -3604,6 +3633,7 @@ _______________
 |   analyzer[] = "Functions/TypehintMustBeReturned";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
 |   analyzer[] = "Traits/MethodCollisionTraits";
+|   analyzer[] = "Traits/TraitNotFound";
 |   analyzer[] = "Traits/UndefinedInsteadof";
 |   analyzer[] = "Traits/UndefinedTrait";
 |   analyzer[] = "Traits/UselessAlias";| 
@@ -3674,7 +3704,6 @@ ________
 |   analyzer[] = "Php/BetterRand";
 |   analyzer[] = "Security/AnchorRegex";
 |   analyzer[] = "Security/AvoidThoseCrypto";
-|   analyzer[] = "Security/CantDisableClass";
 |   analyzer[] = "Security/CompareHash";
 |   analyzer[] = "Security/ConfigureExtract";
 |   analyzer[] = "Security/CurlOptions";
@@ -3685,6 +3714,7 @@ ________
 |   analyzer[] = "Security/FilterInputSource";
 |   analyzer[] = "Security/IndirectInjection";
 |   analyzer[] = "Security/IntegerConversion";
+|   analyzer[] = "Security/MinusOneOnError";
 |   analyzer[] = "Security/MkdirDefault";
 |   analyzer[] = "Security/MoveUploadedFile";
 |   analyzer[] = "Security/NoNetForXmlLoad";
@@ -3745,6 +3775,7 @@ ___________
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
 |   analyzer[] = "Functions/TooManyParameters";
+|   analyzer[] = "Functions/UselessArgument";
 |   analyzer[] = "Functions/UselessDefault";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/UnusedInterfaces";

@@ -3819,6 +3819,22 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
+Ternary In Concat
+=================
+
+.. _teampass-structures-ternaryinconcat:
+
+TeamPass
+^^^^^^^^
+
+:ref:`ternary-in-concat`, in includes/libraries/protect/AntiXSS/UTF8.php:5409. 
+
+The concatenations in the initial comparison are disguised casting. When $str2 is empty too, the ternary operator yields a 0, leading to a systematic failure. 
+
+.. code-block:: php
+
+    $str1 . '' === $str2 . '' ? 0 : strnatcmp(self::strtonatfold($str1), self::strtonatfold($str2))
+
 No Hardcoded Hash
 =================
 
@@ -4993,6 +5009,22 @@ Why do we need a `chair` when printing a cell's file ?
 
     function oc_printFileCells(&$sub, $chair = false) { /**/ }
 
+__DIR__ Then Slash
+==================
+
+.. _traq-structures-dirthenslash:
+
+Traq
+^^^^
+
+:ref:`\_\_dir\_\_-then-slash`, in src/Kernel.php:60. 
+
+When executed in a path '/a/b/c', this code will require '/a../../vendor/autoload.php.
+
+.. code-block:: php
+
+    static::$loader = require __DIR__.'../../vendor/autoload.php';
+
 Strange Name For Variables
 ==========================
 
@@ -5633,6 +5665,30 @@ IS_DASHBOARD is defined as a boolean or a string. Later, it is tested as a boole
     l:132) echo IS_DASHBOARD ? IS_DASHBOARD : 0;
     ?>
 
+Mismatched Default Arguments
+============================
+
+.. _spip-functions-mismatcheddefaultarguments:
+
+SPIP
+^^^^
+
+:ref:`mismatched-default-arguments`, in ecrire/inc/lien.php:160. 
+
+generer_url_entite() takes $connect in, with a default value of empty string. Later, generer_url_entite() receives that value, but uses null as a default value. This forces the ternary test on $connect, to turn it into a null before shipping it to the next function, and having it processed accordingly.
+
+.. code-block:: php
+
+    // http://code.spip.net/@traiter_lien_implicite
+    function traiter_lien_implicite($ref, $texte = '', $pour = 'url', $connect = '') {
+    
+        // some code was edited here
+    
+    	if (is_array($url)) {
+    		@list($type, $id) = $url;
+    		$url = generer_url_entite($id, $type, $args, $ancre, $connect ? $connect : null);
+    	}
+
 Mismatched Typehint
 ===================
 
@@ -6120,6 +6176,60 @@ The reference should be removed from the function definition. Either this method
                 return $this->parentSection != null ? $this->parentSection->getParentOrSelf($type) : null;
             }
     	}
+
+Unused Inherited Variable In Closure
+====================================
+
+.. _shopware-functions-unusedinheritedvariable:
+
+shopware
+^^^^^^^^
+
+:ref:`unused-inherited-variable-in-closure`, in recovery/update/src/app.php:129. 
+
+In the first closuree, $containere is used as the root for the method calls, but $app is not used. It may be dropped. In fact, some of the following calls to $app->map() only request one inherited, $container.
+
+.. code-block:: php
+
+    $app->map('/applyMigrations', function () use ($app, $container) {
+        $container->get('controller.batch')->applyMigrations();
+    })->via('GET', 'POST')->name('applyMigrations');
+    
+    $app->map('/importSnippets', function () use ($container) {
+        $container->get('controller.batch')->importSnippets();
+    })->via('GET', 'POST')->name('importSnippets');
+
+
+--------
+
+
+.. _mautic-functions-unusedinheritedvariable:
+
+Mautic
+^^^^^^
+
+:ref:`unused-inherited-variable-in-closure`, in MauticCrmBundle/Tests/Integration/SalesforceIntegrationTest.php:1202. 
+
+$max is relayed to getLeadsToCreate(), while $restart is omitted. It may be dropped, along with its reference.
+
+.. code-block:: php
+
+    function () use (&$restart, $max) {
+                        $args = func_get_args();
+    
+                        if (false === $args[2]) {
+                            return $max;
+                        }
+    
+                        $createLeads = $this->getLeadsToCreate($args[2], $max);
+    
+                        // determine whether to return a count or records
+                        if (false === $args[2]) {
+                            return count($createLeads);
+                        }
+    
+                        return $createLeads;
+                    }
 
 Useless Referenced Argument
 ===========================
@@ -6833,6 +6943,36 @@ Since PHP 7.0, dirname( , 2); does the job.
 Avoid set_error_handler $context Argument
 =========================================
 
+.. _shopware-php-avoidseterrorhandlercontextarg:
+
+shopware
+^^^^^^^^
+
+:ref:`avoid-set\_error\_handler-$context-argument`, in engine/Shopware/Plugins/Default/Core/ErrorHandler/Bootstrap.php:162. 
+
+The registered handler is a local method, called ``errorHandler``, which has 6 arguments, and relays those 6 arguments to set_error_handler(). 
+
+.. code-block:: php
+
+    public function registerErrorHandler($errorLevel = E_ALL)
+        {
+            // Only register once.  Avoids loop issues if it gets registered twice.
+            if (self::$_registeredErrorHandler) {
+                set_error_handler([$this, 'errorHandler'], $errorLevel);
+    
+                return $this;
+            }
+    
+            self::$_origErrorHandler = set_error_handler([$this, 'errorHandler'], $errorLevel);
+            self::$_registeredErrorHandler = true;
+    
+            return $this;
+        }
+
+
+--------
+
+
 .. _vanilla-php-avoidseterrorhandlercontextarg:
 
 Vanilla
@@ -6892,6 +7032,76 @@ $dispatcher is never used anywhere.
         extends HTML_QuickForm
     {
         private $dispatcher;
+
+Unused Functions
+================
+
+.. _woocommerce-functions-unusedfunctions:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`unused-functions`, in includes/wc-core-functions.php:2124. 
+
+wc_is_external_resource() is unused. This is not obvious immediately, since there is a call from wc_get_relative_url(). Yet since wc_get_relative_url() itself is never used, then it is a dead function. As such, since wc_is_external_resource() is only called by this first function, it also dies, even though it is called in the code.
+
+.. code-block:: php
+
+    /**
+     * Make a URL relative, if possible.
+     *
+     * @since 3.2.0
+     * @param string $url URL to make relative.
+     * @return string
+     */
+    function wc_get_relative_url( $url ) {
+    	return wc_is_external_resource( $url ) ? $url : str_replace( array( 'http://', 'https://' ), '//', $url );
+    }
+    
+    /**
+     * See if a resource is remote.
+     *
+     * @since 3.2.0
+     * @param string $url URL to check.
+     * @return bool
+     */
+    function wc_is_external_resource( $url ) {
+    	$wp_base = str_replace( array( 'http://', 'https://' ), '//', get_home_url( null, '/', 'http' ) );
+    
+    	return strstr( $url, '://' ) && ! strstr( $url, $wp_base );
+    }
+
+
+--------
+
+
+.. _piwigo-functions-unusedfunctions:
+
+Piwigo
+^^^^^^
+
+:ref:`unused-functions`, in admin/include/functions.php:2167. 
+
+get_user_access_level_html_options() is unused and can't be find in the code.
+
+.. code-block:: php
+
+    /**
+     * Returns access levels as array used on template with html_options functions.
+     *
+     * @param int $MinLevelAccess
+     * @param int $MaxLevelAccess
+     * @return array
+     */
+    function get_user_access_level_html_options($MinLevelAccess = ACCESS_FREE, $MaxLevelAccess = ACCESS_CLOSED)
+    {
+      $tpl_options = array();
+      for ($level = $MinLevelAccess; $level <= $MaxLevelAccess; $level++)
+      {
+        $tpl_options[$level] = l10n(sprintf('ACCESS_%d', $level));
+      }
+      return $tpl_options;
+    }
 
 Exception Order
 ===============
@@ -7439,6 +7649,39 @@ $qb is the object for the methodcall, passed via use. The closure may have been 
     $parents = array_map(function($parent) use ($qb) {
     				return $qb->createNamedParameter($parent);
     			}, $parents);
+
+Isset() On The Whole Array
+==========================
+
+.. _tine20-performances-issetwholearray:
+
+Tine20
+^^^^^^
+
+:ref:`isset()-on-the-whole-array`, in tine20/Crm/Model/Lead.php:208. 
+
+Only the second call is necessary : it also includes the first one.
+
+.. code-block:: php
+
+    isset($relation['related_record']) && isset($relation['related_record']['n_fileas'])
+
+
+--------
+
+
+.. _expressionengine-performances-issetwholearray:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`isset()-on-the-whole-array`, in system/ee/legacy/libraries/Form_validation.php:1487. 
+
+This is equivalent to `isset($this->_field_data[$field], $this->_field_data[$field]['postdata'])`, and the second call may be skipped.
+
+.. code-block:: php
+
+    !isset($this->_field_data[$field]) OR !isset($this->_field_data[$field]['postdata'])
 
 Compare Hash
 ============
