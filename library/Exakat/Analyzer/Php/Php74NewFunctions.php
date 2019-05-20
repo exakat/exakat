@@ -30,6 +30,7 @@ class Php74NewFunctions extends FunctionDefinition {
     public function analyze() {
         $this->functions = array('mb_str_split',
                                  'password_algos',
+                                 'fn',
                                 );
         parent::analyze();
     }
