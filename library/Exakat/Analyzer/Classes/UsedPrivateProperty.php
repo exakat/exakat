@@ -27,27 +27,25 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedPrivateProperty extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // property used in a staticproperty \a\b::$b
         $this->atomIs('Ppp')
              ->is('visibility', 'private')
-
              ->outIs('PPP')
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
              ->goToClassTrait(array('Trait', 'Class'))
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->raw(<<<GREMLIN
-where( 
-    __.repeat( __.out($this->linksDown) ).emit( hasLabel("Staticproperty") ).times($MAX_LOOPING)
-                 .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }
-                 .filter{ it.get().value("fullnspath") == classe }.in("CLASS")
-                 .out("MEMBER").filter{ it.get().value("code") == property }
-     )
-GREMLIN
-)
+             ->filter(
+                $this->side()
+                     ->atomInsideNoDefinition('Staticproperty')
+                     ->outIs('CLASS')
+                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+                     ->fullnspathIs('classe')
+                     ->inIs('CLASS')
+                     ->outIs('MEMBER')
+                     ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
+             )
              ->back('ppp');
         $this->prepareQuery();
 
