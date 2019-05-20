@@ -2796,12 +2796,12 @@ HTML;
             
             if (isset($tree[$name])) {
                 ++$tree[$name]['count'];
-                $tree[$name]['file'][]       = $row['file'];
+                $tree[$name]['file'][]       = $row['file'] . ':' . $row['line'];
                 $tree[$name]['type'][]       = $row['type'];
                 $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' );
             } else {
                 $tree[$name]['count']      = 1;
-                $tree[$name]['file']       = array($row['file']);
+                $tree[$name]['file']       = array($row['file'] . ':' . $row['line']);
                 $tree[$name]['type']       = array($row['type']);
                 $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' ));
             }
