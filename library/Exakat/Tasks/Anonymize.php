@@ -155,10 +155,10 @@ class Anonymize extends Tasks {
                         break;
                     case T_DNUMBER:  // real numbers
                         if (isset($this->dnumberValues[$t[1]])) {
-                            $t[1] = floor(mt_rand(0, 100000) ) / 100;
+                            $t[1] = floor(random_int(0, PHP_INT_MAX) ) / 100;
                         } else {
                             $this->dnumberValues[$t[1]] = ++$this->dnumber;
-                            $t[1] = floor(mt_rand(0, 100000) ) / 100;
+                            $t[1] = floor(random_int(0, PHP_INT_MAX) ) / 100;
                         }
                         break;
                     case T_VARIABLE:

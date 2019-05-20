@@ -423,7 +423,7 @@ class Phpexec {
                 'phpversion'      => PHP_VERSION,
             );
         } else {
-            $crc = md5((string) rand(0, 1000000));
+            $crc = random_int(0, PHP_INT_MAX);
             $php = <<<PHP
 \\\$results = array(
     'zend.assertions' => ini_get('zend.assertions'),

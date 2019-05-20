@@ -413,7 +413,7 @@ class Project extends Tasks {
         shuffle($names);
         shuffle($adjectives);
         
-        $x = mt_rand(0, PHP_INT_MAX);
+        $x = random_int(0, PHP_INT_MAX);
         
         $name = $names[ $x % (count($names) - 1)];
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];
