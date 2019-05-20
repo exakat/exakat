@@ -31,8 +31,6 @@ class ThemesDev {
     private $all           = array();
     private $themes        = array();
 
-    private static $instanciated = array();
-    
     public function __construct(AutoloadDev $dev) {
         $this->dev = $dev;
         

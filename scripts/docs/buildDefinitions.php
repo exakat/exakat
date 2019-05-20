@@ -49,7 +49,6 @@ class Docs {
 
     private $analyzers = null;
     
-    private $extensionList = array();
     private $ini_list      = array();
     private $report_list   = array();
     private $docs_list     = array();

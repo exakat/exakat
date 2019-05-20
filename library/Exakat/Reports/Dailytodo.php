@@ -28,7 +28,6 @@ class Dailytodo extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'todo';
     
-    private $select = array();
     private $tmpName     = '';
     private $finalName   = '';
 

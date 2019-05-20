@@ -58,14 +58,6 @@ class Owasp extends Ambassador {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-                                 'exceptions' => 'Exceptions');
-
     private $compatibilities = array();
 
     private $components = array(
