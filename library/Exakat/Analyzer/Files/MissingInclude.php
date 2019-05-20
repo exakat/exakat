@@ -71,8 +71,8 @@ class MissingInclude extends Analyzer {
     }
     
     private function searchFile($file, $files, $including) {
-        if (empty($file)) { 
-            return false; 
+        if (empty($file)) {
+            return false;
         }
 
         $bits = explode(' . ', $file);
