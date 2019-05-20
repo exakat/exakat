@@ -2410,11 +2410,7 @@ SQL;
         $data = array();
         $data2 = array();
         foreach($analyzers as $analyzer => $analyzerVersion) {
-            if (substr($analyzerVersion, -1) === '+') {
-                $coeff = 1;
-            } else {
-                $coeff = -1;
-            }
+            $coeff = $analyzerVersion[-1] === '+' ? 1 : -1;
 
             foreach($versions as $version) {
                 if (!isset($counts[$analyzer])) {

@@ -46,9 +46,7 @@ class Anonymize extends Tasks {
         if (($file = $this->config->file) === 'stdout') {
             $dir = $this->config->dirname;
             if (!empty($dir)) {
-                if (substr($dir, -1) === '/') {
-                    $dir = substr($dir, 0, -1);
-                }
+                $dir = rtrim($dir, '/');
 
                 if (!file_exists($dir)) {
                     throw new NoSuchDir($file);

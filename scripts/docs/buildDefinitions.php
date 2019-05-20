@@ -310,7 +310,7 @@ class Docs {
             if ($folder === 'Reports' || $folder == 'DSL') { 
                 continue; 
             }
-            $analyzer = substr(basename($file), 0, -4);
+            $analyzer = basename($file, '.ini');
             $name = "$folder/$analyzer";
             
             $res = $this->analyzers->query(<<<SQL

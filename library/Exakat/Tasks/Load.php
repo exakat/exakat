@@ -569,9 +569,7 @@ class Load extends Tasks {
 
         $files = array();
         $ignoredFiles = array();
-        if (substr($dir, -1) === '/') {
-            $dir = substr($dir, 0, -1);
-        }
+        $dir = rtrim($dir, '/');
         Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $nbTokens = 0;
@@ -5691,13 +5689,12 @@ class Load extends Tasks {
             }
             foreach($origins as $destinations) {
                 foreach($destinations as $links) {
-                    foreach($links as $link) {
-                        $D[] = $link['destination'];
-                    }
+                    $D[] = array_column($links, 'destination');
                 }
             }
         }
 
+        $D = array_merge(...$D);
         $D = array_count_values($D);
 
         foreach($this->atoms as $id => $atom) {

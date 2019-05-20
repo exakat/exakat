@@ -407,12 +407,12 @@ GREMLIN;
         }
 
         // version and above
-        if ((substr($this->phpVersion, -1) === '+') && version_compare($version, $this->phpVersion) >= 0) {
+        if (($this->phpVersion[-1] === '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) < 0) {
+        if (($this->phpVersion[-1] === '-') && version_compare($version, $this->phpVersion) < 0) {
             return true;
         }
 
@@ -1095,13 +1095,9 @@ GREMLIN;
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function not($filter) {
+    public function not(self $filter) {
         // use func_get_args here
-        if ($filter instanceof self) {
-            $filterClean = $filter->prepareSide();
-        } else {
-            assert(false, 'Wrong type for not : ' . gettype($filter));
-        }
+        $filterClean = $filter->prepareSide();
         $this->query->not($filterClean, array());
 
         return $this;
