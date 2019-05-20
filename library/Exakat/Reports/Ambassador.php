@@ -2786,8 +2786,9 @@ HTML;
 
         $tree = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $row['variable']);
-            if (substr($row['variable'], 0, 8) === '$GLOBALS') {
+            $variable = trim($row['variable'], '{}&@');
+            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $variable);
+            if (substr($variable, 0, 8) === '$GLOBALS') {
                 $origin = '$GLOBALS';
             } else {
                 $origin = 'global';
