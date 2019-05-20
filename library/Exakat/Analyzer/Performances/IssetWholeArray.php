@@ -72,11 +72,11 @@ class IssetWholeArray extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs('Variablearray')
+             ->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'array')
              ->back('first')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable')
+             ->atomIs(array('Variable', 'Phpvariable', 'Member', 'Staticproperty'))
              ->samePropertyAs('fullcode', 'array')
              ->back('first');
         $this->prepareQuery();
@@ -86,18 +86,18 @@ class IssetWholeArray extends Analyzer {
              ->isNot('count', 1)
              ->outIs('ARGUMENT')
              ->atomIs('Array')
+             ->savePropertyAs('rank', 'ranked')
              ->outIs('VARIABLE')
-             ->atomIsNot('Variablearray')
+             ->atomIsNot(array('Variablearray', 'Phpvariable'))
              ->savePropertyAs('fullcode', 'array')
              ->back('first')
              ->outIs('ARGUMENT')
+             ->notSamePropertyAs('rank', 'ranked')
              ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->atomIsNot('Variablearray')
+             ->atomIsNot(array('Variablearray', 'Phpvariable'))
              ->samePropertyAs('fullcode', 'array')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
