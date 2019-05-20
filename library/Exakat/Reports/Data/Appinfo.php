@@ -58,12 +58,11 @@ class Appinfo extends Data {
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environnement Variables'       => 'Php/UsesEnv',
 
-                            'Non Breakable Spaces In Names' => 'Structures/NonBreakableSpaceInNames',
+                            'Dynamically load extensions'   => 'Php/DlUsage',
                             'Relaxed keyword as names'      => 'Php/Php7RelaxedKeyword',
                             'strict_types'                  => 'Php/DeclareStrictType',
                             'encoding'                      => 'Php/DeclareEncoding',
                             'ticks'                         => 'Php/DeclareTicks',
-                            'Dynamically load extensions'   => 'Php/DlUsage',
                     ),
 
                     'Composer' => array(
@@ -122,6 +121,7 @@ class Appinfo extends Data {
                             'Array short syntax'      => 'Arrays/ArrayNSUsage',
                             'List short syntax'       => 'Php/ListShortSyntax',
                             'Variable variables'      => 'Variables/VariableVariables',
+                            'Unpacking inside arrays' => 'Php/UnpackingInsideArrays',
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
 

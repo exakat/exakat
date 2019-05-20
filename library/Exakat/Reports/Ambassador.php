@@ -2388,6 +2388,7 @@ SQL;
                             'Php/ListWithReference'                 => '7.3+',
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
+                            'Php/UnpackingInsideArrays'             => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
@@ -2801,7 +2802,7 @@ HTML;
                 $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' );
             } else {
                 $tree[$name]['count']      = 1;
-                $tree[$name]['file']       = array($row['file'] . ':' . $row['line']);
+                $tree[$name]['file']       = array($row['file'] . ':' . $row['line']        );
                 $tree[$name]['type']       = array($row['type']);
                 $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' ));
             }
