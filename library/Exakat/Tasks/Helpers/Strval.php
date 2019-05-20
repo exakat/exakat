@@ -57,7 +57,12 @@ class Strval extends Plugin {
 
             case 'Real' :
             case 'String' :
-                $atom->noDelimiter = (string) trimOnce($atom->code);
+                if (empty($extra)) {
+                    $atom->noDelimiter = (string) trimOnce($atom->code);
+                } else {
+                    $noDelimiters = array_column($extras, 'noDelimiter');
+                    $atom->noDelimiter = implode('', $noDelimiters);
+                }
                 break;
 
             case 'Constant' :
