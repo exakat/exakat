@@ -55,7 +55,8 @@ class Text extends Reports {
                              'source'   => $row['analyzer'],
                              'severity' => $severityCache[$row['analyzer']],
                              'fixable'  => 'fixable',
-                             'message'  => $titleCache[$row['analyzer']]);
+                             'message'  => $titleCache[$row['analyzer']],
+                             'fullcode' => $row['fullcode']);
 
             if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
                 $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());
@@ -70,7 +71,7 @@ class Text extends Reports {
             foreach($file['messages'] as $line => $column) {
                 $messages = $column[0];
                 foreach($messages as $message) {
-                    $text .= $file['filename'] . ':' . $line . ' ' . $message['message'] . "\n";
+                    $text .= $file['filename'] . ':' . $line . "\t" . $message['source'] . "\t" . $message['message'] . "\t" . $message['fullcode'] . "\n";
                     $this->count();
                 }
             }
