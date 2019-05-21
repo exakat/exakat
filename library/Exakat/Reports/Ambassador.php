@@ -2775,11 +2775,14 @@ HTML;
     }
 
     private function generateGlobals() {
-// pen + glasses
-//            return '<i class="fa fa-cogs" style="color: orange"></i>';
+        $res = $this->sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="globalVariables"');
+        $name = $res->fetchArray(\SQLITE3_ASSOC);
+
+        if (empty($name)) {
+            return;
+        }
 
         $res = $this->sqlite->query('SELECT * FROM globalVariables');
-        // global, implicit, GLOBALS
 
         $tree = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
