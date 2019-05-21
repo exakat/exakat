@@ -111,7 +111,7 @@ class DotExakatYamlConfig extends Config {
         }
         
         if (isset($this->config['rulesets'])) {
-            $this->themas = $this->config['rulesets'];
+            $this->themas = array_map('array_values', $this->config['rulesets']);
             unset($this->config['rulesets']);
         }
 

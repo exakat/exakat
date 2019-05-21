@@ -43,7 +43,7 @@ abstract class Reports {
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
                                           'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
-                                          'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable',
+                                          'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity',
                                           //'DailyTodo',
                                           );
