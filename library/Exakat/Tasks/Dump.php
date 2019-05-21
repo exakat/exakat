@@ -1862,6 +1862,7 @@ GREMLIN
               
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
