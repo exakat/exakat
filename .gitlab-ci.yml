@@ -5,7 +5,7 @@ stages:
   - test
 
 selftest:
-  name: selftest
+  stage: selftest
   image: exakat/exakat:latest
   script:
     - exakat project -v 
