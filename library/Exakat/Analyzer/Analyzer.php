@@ -157,7 +157,7 @@ abstract class Analyzer {
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $description = new Docs($config->dir_root, $config->ext);
+            $description = new Docs($config->dir_root, $config->ext, $config->dev);
             $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");

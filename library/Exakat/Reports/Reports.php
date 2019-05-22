@@ -50,7 +50,7 @@ abstract class Reports {
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                                    '"Dead code"', 'Security', 'Analyze', 'Inventories');
+                                    'Dead code', 'Security', 'Analyze', 'Inventories');
 
     private $count = 0;
 
@@ -81,7 +81,7 @@ abstract class Reports {
         }
         
         if (self::$docs === null) {
-            self::$docs = new Docs($this->config->dir_root, $this->config->ext);
+            self::$docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         }
     }
 

@@ -61,32 +61,36 @@ class Themes {
         $main = $this->main->getThemeForAnalyzer($analyzer);
         $extra = $this->extra->getThemeForAnalyzer($analyzer);
         $ext   = $this->ext  ->getThemeForAnalyzer($analyzer);
+        $dev   = $this->dev  ->getThemeForAnalyzer($analyzer);
 
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getThemesForAnalyzer($list = null) {
         $main  = $this->main ->getThemesForAnalyzer($list);
         $extra = $this->extra->getThemesForAnalyzer($list);
         $ext   = $this->ext  ->getThemesForAnalyzer($list);
+        $dev   = $this->dev  ->getThemesForAnalyzer($list);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getSeverities() {
         $main  = $this->main ->getSeverities();
         $extra = $this->extra->getSeverities();
         $ext   = $this->ext  ->getSeverities();
+        $dev   = $this->dev  ->getSeverities();
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getTimesToFix() {
         $main  = $this->main ->getTimesToFix();
         $extra = $this->extra->getTimesToFix();
         $ext   = $this->ext  ->getTimesToFix();
+        $dev   = $this->dev  ->getTimesToFix();
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getFrequences() {

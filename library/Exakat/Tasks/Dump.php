@@ -337,7 +337,7 @@ GREMLIN;
                              ->toArray();
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severities = array();
         $readCounts = array_fill_keys($classes, 0);
 
@@ -426,7 +426,7 @@ SQL;
         $res = $analyzer->getDump();
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severity = $docs->getDocs($class)['severity'];
 
         $query = array();
