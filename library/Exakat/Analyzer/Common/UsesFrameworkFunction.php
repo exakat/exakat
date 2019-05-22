@@ -20,23 +20,33 @@
  *
 */
 
-
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\FunctionUsage;
 
-class FunctionUsage extends Analyzer {
-    protected $functions = array();
+class UsesFrameworkFunction extends Analyzer {
+    protected $functions    = array();
     
     public function analyze() {
-        $functions =  makeFullNsPath($this->functions);
+        $analyzerId = null;
         
-        $this->atomFunctionIs($functions);
-        $this->prepareQuery();
-    }
-    
-    public function setFunctions(array $functions) {
-        $this->functions = $functions;
+        if (!empty($this->functions[0])) {
+            $functions    = makeFullNsPath($this->functions);
+
+            if (!empty($functions)) {
+                $functionsUsage = new FunctionUsage($this->gremlin, $this->config);
+                $functionsUsage->setAnalyzer(get_class($this));
+                $functionsUsage->setFunctions($functions);
+                $analyzerId = $functionsUsage->init($analyzerId);
+                $functionsUsage->run();
+
+                $this->rowCount        += $functionsUsage->getRowCount();
+                $this->processedCount  += $functionsUsage->getProcessedCount();
+                $this->queryCount      += $functionsUsage->getQueryCount();
+                $this->rawQueryCount   += $functionsUsage->getRawQueryCount();
+            }
+        }
     }
 }
 
