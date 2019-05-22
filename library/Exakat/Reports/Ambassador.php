@@ -318,7 +318,9 @@ class Ambassador extends Reports {
                 $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
-            $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
+            if (isset($description['name'])) {
+                $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
+            }
 
             $versionCompatibility = $description['phpversion'];
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
@@ -338,7 +340,7 @@ class Ambassador extends Reports {
             $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
             $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
-            $clearphp = $description['clearphp'];
+            $clearphp = $description['clearphp'] ?? '';
             if(!empty($clearphp)){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/' . $clearphp . '.md">' . $clearphp . '</a>, in the clearPHP reference.</p>';
             }
@@ -352,12 +354,12 @@ class Ambassador extends Reports {
         $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
-    private function generateSecurity() {
+    protected function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
     }
 
-    private function generateDeadCode() {
+    protected function generateDeadCode() {
         $this->generateIssuesEngine('deadcode_issues',
                                     $this->getIssuesFaceted('Dead code') );
     }
@@ -367,7 +369,7 @@ class Ambassador extends Reports {
                                     $this->getIssuesFaceted('Suggestions') );
     }
 
-    private function generatePerformances() {
+    protected function generatePerformances() {
         $this->generateIssuesEngine('performances_issues',
                                     $this->getIssuesFaceted('Performances') );
     }
@@ -1416,7 +1418,11 @@ JAVASCRIPT;
         // analyzer
         list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
         $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
-        $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
+        if ($totalAnalyzerUsed > 0) {
+            $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
+        } else {
+            $percentAnalyzer = 100;
+        }
         
         $audit_date = date('r', strtotime('now'));
 
@@ -2297,7 +2303,7 @@ SQL;
     protected function generateCompatibilityEstimate() {
         $html = $this->getBasedPage('empty');
         
-        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4');
+        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
@@ -4740,7 +4746,7 @@ HTML;
         return $cveHtml;
     }
 
-    private function Compatibility($count, $analyzer) {
+    protected function Compatibility($count, $analyzer) {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
