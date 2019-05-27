@@ -84,7 +84,7 @@ class ThemesDev {
             }
         } else {
             foreach($this->all as $theme => $ruleset) {
-                if (in_array($analyzer, $ruleset)) {
+                if (in_array($analyzer, $ruleset, STRICT_COMPARISON)) {
                     $return[] = $theme;
                 }
             }

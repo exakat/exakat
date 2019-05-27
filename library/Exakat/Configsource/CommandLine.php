@@ -182,7 +182,7 @@ class CommandLine extends Config {
                         } else {
                             list($name, $value) = explode('=', trim($args[$id + 1]));
                         }
-                        if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
+                        if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'), STRICT_COMPARISON)) {
                             if (!isset($this->config['configuration'][$name])) {
                                 $this->config['configuration'][$name] = array();
                             }
@@ -221,12 +221,12 @@ class CommandLine extends Config {
         
             if ($this->config['command'] === 'extension') {
                 $subcommand = array_shift($args);
-                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local', 'update'))) {
+                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local', 'update'), STRICT_COMPARISON)) {
                     $subcommand = 'local';
                 }
                 $this->config['subcommand'] = $subcommand;
                 
-                if (in_array($subcommand, array('install', 'uninstall', 'update'))) {
+                if (in_array($subcommand, array('install', 'uninstall', 'update'), STRICT_COMPARISON)) {
                     $this->config['extension'] = array_shift($args);
                 }
             }

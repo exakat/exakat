@@ -54,14 +54,15 @@ class Dictionary {
         $code = makeArray($code);
 
         if ($case === self::CASE_SENSITIVE) {
-            $case = function ($x) { return $x; };
+            $caseClosure = function ($x) { return $x; };
         } else {
-            $case = function ($x) { return mb_strtolower($x); };
+            $caseClosure = function ($x) { return mb_strtolower($x); };
         }
 
         foreach($code as $c) {
-            if (isset($this->dictionary[$case($c)])) {
-                $return[] = $this->dictionary[$case($c)];
+            $d = $caseClosure($c);
+            if (isset($this->dictionary[$d])) {
+                $return[] = $this->dictionary[$d];
             }
         }
         

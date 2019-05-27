@@ -38,7 +38,7 @@ class Phpcsfixer extends Reports {
         $found = array_column($analysisResults->toArray(), 'analyzer');
         $found = array_unique($found);
 
-        $phpcsfixer = (array) json_decode(file_get_contents($this->config->dir_root . '/data/phpcsfixer.json'));
+        $phpcsfixer = json_decode(file_get_contents("{$this->config->dir_root}/data/phpcsfixer.json", \JSON_OBJECT_AS_ARRAY));
         assert(!empty($phpcsfixer), 'couldn\'t read phpcsfixer.json file');
 
         $config = array();
