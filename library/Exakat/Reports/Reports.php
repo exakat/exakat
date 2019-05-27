@@ -38,7 +38,7 @@ abstract class Reports {
     
     private static $docs = null;
 
-    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
+    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor', 'Top10',
                                           'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
