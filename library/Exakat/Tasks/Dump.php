@@ -170,6 +170,16 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
+            $this->collectClassTraitsCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            $this->collectClassInterfaceCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Interface count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            $this->collectClassChildrenCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Children count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
             $begin = $end;
             $this->collectDefinitionsStats();
             $end = microtime(true);
@@ -1737,6 +1747,27 @@ GREMLIN;
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
+    }
+
+    private function collectClassTraitsCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassTraits');
+    }
+
+    private function collectClassInterfaceCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassInterfaces');
+    }
+
+    private function collectClassChildrenCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class", "Classanonymous").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassChildren');
     }
 
     private function collectConstantCounts() {
