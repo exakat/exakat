@@ -133,7 +133,8 @@ class Xml extends Reports {
                              'source'   => $row['analyzer'],
                              'severity' => $severityCache[$row['analyzer']],
                              'fixable'  => 'fixable',
-                             'message'  => $titleCache[$row['analyzer']]);
+                             'message'  => $titleCache[$row['analyzer']],
+                             'fullcode' => $row['fullcode']);
 
             if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
                 $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());

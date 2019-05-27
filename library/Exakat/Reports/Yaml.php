@@ -20,13 +20,16 @@
  *
 */
 
+
 namespace Exakat\Reports;
 
+use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Exakat;
 use Exakat\Reports\Helpers\Results;
 
-class Json extends Reports {
-    const FILE_EXTENSION = 'json';
+class Yaml extends Reports {
+    const FILE_EXTENSION = 'yaml';
     const FILE_FILENAME  = 'exakat';
 
     public function _generate($analyzerList) {
@@ -69,7 +72,7 @@ class Json extends Reports {
             $this->count();
         }
 
-        return json_encode($results);
+        return Symfony_Yaml::dump($results);
     }
 }
 
