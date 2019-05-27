@@ -71,6 +71,7 @@ class ThemesDev {
     }
     
     public function getThemesForAnalyzer($analyzer = null) {
+        $return = array();
 
         if ($analyzer === null) {
             $list = $this->all;
