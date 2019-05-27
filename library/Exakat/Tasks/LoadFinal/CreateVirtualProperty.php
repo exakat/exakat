@@ -42,7 +42,7 @@ class CreateVirtualProperty extends LoadFinal {
               ->savePropertyAs('lccode', 'lower')
               ->savePropertyAs('code', 'ncode')
               ->savePropertyAs('fullcode', 'full')
-              
+
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->not(
                 $query->side()
