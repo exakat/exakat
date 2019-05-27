@@ -29,15 +29,15 @@ class PlusEgalOne extends Analyzer {
     public function analyze() {
         // $a += 1; $b -= -1;
         $this->atomIs('Assignation')
-             ->codeIs(array('+=', '-='))
+             ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->codeIs(array('1', '-1'))
+             ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // $a = 1 + $a;
         $this->atomIs('Assignation')
-             ->codeIs('=')
+             ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'A')
              ->back('first')
@@ -45,7 +45,7 @@ class PlusEgalOne extends Analyzer {
              ->atomIs('Addition')
              ->_as('B')
              ->outIs('LEFT')
-             ->codeIs(array('1', '-1'))
+             ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('B')
              ->outIs('RIGHT')
              ->samePropertyAs('fullcode', 'A')
@@ -54,7 +54,7 @@ class PlusEgalOne extends Analyzer {
 
         // $b = -1 + $b;
         $this->atomIs('Assignation')
-             ->codeIs('=')
+             ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'A')
              ->back('first')
@@ -62,7 +62,7 @@ class PlusEgalOne extends Analyzer {
              ->atomIs('Addition')
              ->_as('B')
              ->outIs('RIGHT')
-             ->codeIs(array('1', '-1'))
+             ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('B')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'A')

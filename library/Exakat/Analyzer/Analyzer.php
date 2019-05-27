@@ -122,6 +122,8 @@ abstract class Analyzer {
     public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
+    public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String');
+
     public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
