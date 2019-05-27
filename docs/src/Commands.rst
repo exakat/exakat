@@ -388,7 +388,7 @@ Examples
     php exakat.phar init -p copyProject -copy -R projects/phpmyadmin/code/
 
     # Make a local symlink with the local webserver, 
-    php exakat.phar init -p copyProject -copy -R /var/www/public_html
+    php exakat.phar init -p symlinkProject -symlink -R /var/www/public_html
 
 
 :: _project:
