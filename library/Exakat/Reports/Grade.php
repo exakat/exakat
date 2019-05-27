@@ -46,10 +46,6 @@ class Grade extends Ambassador {
     protected $tmpName           = '';
     private $globalGrade = 0;
 
-    private $timesToFix        = null;
-    private $themesForAnalyzer = null;
-    private $severities        = null;
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -71,9 +67,6 @@ class Grade extends Ambassador {
     public function __construct($config) {
         parent::__construct($config);
         $this->themesToShow      = array('Security');
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->themes->getSeverities();
         
         $this->grading = array(
     'Security/AnchorRegex'                  => self::G_WARNING,
@@ -86,14 +79,11 @@ class Grade extends Ambassador {
     'Structures/EvalUsage'                  => self::G_ERROR,
     'Security/Sqlite3RequiresSingleQuotes'  => self::G_ERROR,
         );
-        
-        $this->results = new Results($this->sqlite, array_keys($this->grading));
-        $this->results->load();
-
-        $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
-        foreach($this->results->toArray() as $result) {
-            $this->resultsCounts[$result['analyzer']]++;
-        }
+    }
+    
+    public function dependsOnAnalysis() {
+        return array('Security',
+                     );
     }
 
     protected function getBasedPage($file) {
@@ -193,6 +183,14 @@ MENU;
     }
 
     private function getGrades() {
+        $this->results = new Results($this->sqlite, array_keys($this->grading));
+        $this->results->load();
+
+        $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
+        foreach($this->results->toArray() as $result) {
+            $this->resultsCounts[$result['analyzer']]++;
+        }
+
         $this->globalGrade = 0;
         
         $grade = 0;

@@ -38,15 +38,18 @@ class Phpcsfixer extends Reports {
         $found = array_column($analysisResults->toArray(), 'analyzer');
         $found = array_unique($found);
 
-        $phpcsfixer = json_decode(file_get_contents("{$this->config->dir_root}/data/phpcsfixer.json", \JSON_OBJECT_AS_ARRAY));
+        $phpcsfixer = json_decode(file_get_contents("{$this->config->dir_root}/data/phpcsfixer.json"), \JSON_OBJECT_AS_ARRAY);
         assert(!empty($phpcsfixer), 'couldn\'t read phpcsfixer.json file');
 
         $config = array();
         foreach($found as $f) {
-            $config[] = (array) $phpcsfixer[$f] ?? array();
+            $config[] = $phpcsfixer[$f] ?? array();
             $this->count();
         }
-        $config = array_merge(...$config);
+
+        if (!empty($config)) {
+            $config = array_merge(...$config);
+        }
 
         $configArray = var_export($config, true);
         $configArray = str_replace("\n", "\n                ", $configArray);

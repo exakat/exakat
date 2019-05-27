@@ -61,7 +61,7 @@ abstract class Reports {
     protected $datastore = null;
     protected $themes    = null;
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
@@ -92,7 +92,7 @@ abstract class Reports {
         return "\\Exakat\\Reports\\$report";
     }
     
-    public function generate($folder, $name) {
+    public function generate($folder, $name = null) {
         if (empty($name)) {
             // FILE_FILENAME is defined in the children class
             $name = $this::FILE_FILENAME;
@@ -118,8 +118,10 @@ abstract class Reports {
         if ($name === self::STDOUT) {
             if (!empty($final)) {
                 echo $final;
+                print "\n EXIT 1 $name \n";
                 exit(1);
             } else {
+                print "\n EXIT 0 \n";
                 exit(0);
             }
         } elseif ($name === self::INLINE) {

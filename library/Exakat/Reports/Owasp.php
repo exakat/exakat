@@ -869,7 +869,7 @@ HTML;
         }
     }
 
-    private function Compatibility($count) {
+    protected function Compatibility($count, $analyzer = '') {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {

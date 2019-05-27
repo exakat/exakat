@@ -23,7 +23,10 @@
 namespace Exakat\Reports;
 
 class None extends Reports {
-    public function generate($folder, $name) {
+    const FILE_EXTENSION = '';
+    const FILE_FILENAME  = 'no_report';
+
+    public function generate($folder, $name = null) {
         display('Generating the empty format. ');
     }
 }

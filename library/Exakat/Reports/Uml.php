@@ -124,7 +124,7 @@ SQL
  
 DOT
         . $this->subgraphs($dot) . "\n\n" . implode("\n", $links) . "\n}\n";
-    
+
         return $dot;
     }
 
