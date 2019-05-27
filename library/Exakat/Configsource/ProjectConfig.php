@@ -36,7 +36,7 @@ class ProjectConfig extends Config {
                               'project_description' => '',
                               'project_branch'      => '',
                               'project_tag'         => '',
-                              'project_themas'      => array(),
+                              'project_themes'      => array(),
                               'file_extensions'     => array('php',
                                                              'php3',
                                                              'inc',
@@ -161,7 +161,7 @@ class ProjectConfig extends Config {
             }
             unset($ext);
         }
-        
+
         if (in_array($this->config['project_vcs'], Vcs::SUPPORTED_VCS)) {
             $this->config['git'] = false; // remove Git, which is by default
             $this->config[$this->config['project_vcs']] = true; // potentially, revert git
