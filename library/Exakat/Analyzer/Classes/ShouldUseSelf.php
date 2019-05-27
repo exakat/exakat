@@ -36,6 +36,7 @@ class ShouldUseSelf extends Analyzer {
              ->atomIsNot(array('Parent', 'Self'))
              ->savePropertyAs('fullnspath', 'fns')
              ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->samePropertyAs('fullnspath', 'fns')
              ->back('first');
         $this->prepareQuery();
@@ -46,11 +47,23 @@ class ShouldUseSelf extends Analyzer {
              ->atomIs(self::$STATIC_NAMES)
              ->savePropertyAs('fullnspath', 'fns')
              ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->samePropertyAs('fullnspath', 'fns')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
+             ->hasClass()
+             ->outIs('CLASS')
+             ->atomIs(self::$STATIC_NAMES)
+             ->savePropertyAs('fullnspath', 'fns')
+             ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->samePropertyAs('fullnspath', 'fns')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticclass')
              ->hasClass()
              ->outIs('CLASS')
              ->atomIs(self::$STATIC_NAMES)
