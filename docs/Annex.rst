@@ -73,9 +73,11 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Ambassador
   * Ambassadornomenu
   * Drillinstructor
+  * Top10
   * Text
   * Xml
   * Uml
+  * Yaml
   * Plantuml
   * None
   * Simplehtml
@@ -100,6 +102,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Onepagejson
   * Marmelab
   * Simpletable
+  * Exakatyaml
   * Codeflower
   * Dependencywheel
   * Phpcity
@@ -428,7 +431,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Already Parents Trait (Traits/AlreadyParentsTrait ; Analyze)
   * Casting Ternary (Structures/CastingTernary ; Analyze, OneFile)
-  * Concat And Addition (Php/ConcatAndAddition ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80)
+  * Concat And Addition (Php/ConcatAndAddition ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, Top10, CompatibilityPHP80)
   * Concat Empty (Structures/ConcatEmpty ; Analyze, OneFile)
   * Minus One On Error (Security/MinusOneOnError ; Security)
   * New Functions In PHP 7.4 (Php/Php74NewFunctions ; CompatibilityPHP74)
@@ -503,7 +506,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.4
 
-  * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions, Top10)
+  * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions)
   * Ext/DefinedClasses (Modules/DefinedClasses)
   * Use Coalesce Equal (Structures/UseCoalesceEqual ; )
 
@@ -626,7 +629,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.3.9
 
   * Assert Function Is Reserved (Php/AssertFunctionIsReserved ; Analyze, CompatibilityPHP73)
-  * Avoid Real (Php/AvoidReal ; Suggestions)
+  * Avoid Real (Php/AvoidReal ; Suggestions, Top10)
   * Case Insensitive Constants (Constants/CaseInsensitiveConstants ; Appinfo, CompatibilityPHP73)
   * Const Or Define Preference (Constants/ConstDefinePreference ; Preferences)
   * Continue Is For Loop (Structures/ContinueIsForLoop ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
@@ -865,7 +868,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Next Month Trap (Structures/NextMonthTrap ; Analyze, Top10)
   * Printf Number Of Arguments (Structures/PrintfArguments ; Analyze)
   * Simple Switch (Performances/SimpleSwitch)
-  * Substring First (Performances/SubstrFirst ; Performances, Suggestions)
+  * Substring First (Performances/SubstrFirst ; Performances, Suggestions, Top10)
 
 * 0.12.17
 
@@ -932,10 +935,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.12.4
 
   * Assign With And (Php/AssignAnd ; Analyze)
-  * Avoid Concat In Loop (Performances/NoConcatInLoop ; Performances)
+  * Avoid Concat In Loop (Performances/NoConcatInLoop ; Performances, Top10)
   * Child Class Removes Typehint (Classes/ChildRemoveTypehint)
   * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions, php-cs-fixable)
-  * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
+  * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences, Top10)
   * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4, LintButWontExec)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
   * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72)
@@ -1363,7 +1366,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Final Class Usage (Classes/Finalclass ; LintButWontExec, ClassReview)
   * Final Methods Usage (Classes/Finalmethod ; LintButWontExec, ClassReview)
   * Fopen Binary Mode (Portability/FopenMode ; Portability)
-  * For Using Functioncall (Structures/ForWithFunctioncall ; Performances, ClearPHP, Simple, Level 1)
+  * For Using Functioncall (Structures/ForWithFunctioncall ; Performances, ClearPHP, Simple, Level 1, Top10)
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer ; CompatibilityPHP70)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource ; Under Work)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified ; Analyze, Simple)
@@ -2340,8 +2343,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2385,6 +2388,7 @@ List of external links mentionned in this documentation.
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
+* `online <https://www.exakat.io/top-10-php-classic-traps/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
@@ -2457,6 +2461,7 @@ List of external links mentionned in this documentation.
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
+* `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_
 * `printf <http://php.net/printf>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
 * `proctitle <http://php.net/manual/en/book.proctitle.php>`_
@@ -2526,6 +2531,7 @@ List of external links mentionned in this documentation.
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
+* `Syntax <https://php.net/manual/en/language.constants.syntax.php>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
@@ -2539,11 +2545,10 @@ List of external links mentionned in this documentation.
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
-* `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_
 * `trigger_error <http://php.net/trigger_error>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
-* `Type Casting <https://www.php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
+* `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3849,12 +3854,18 @@ _____
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Functions/ShouldYieldWithKey";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
+|   analyzer[] = "Performances/CsvInLoops";
+|   analyzer[] = "Performances/NoConcatInLoop";
+|   analyzer[] = "Performances/SubstrFirst";
+|   analyzer[] = "Php/AvoidReal";
+|   analyzer[] = "Php/ConcatAndAddition";
+|   analyzer[] = "Php/LetterCharsLogicalFavorite";
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/MissingSubpattern";
 |   analyzer[] = "Structures/CouldUseStrrepeat";
 |   analyzer[] = "Structures/DanglingArrayReferences";
-|   analyzer[] = "Structures/DontBeTooManual";
 |   analyzer[] = "Structures/FailingSubstrComparison";
+|   analyzer[] = "Structures/ForWithFunctioncall";
 |   analyzer[] = "Structures/NextMonthTrap";
 |   analyzer[] = "Structures/NoChoice";
 |   analyzer[] = "Structures/NoSubstrOne";

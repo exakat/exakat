@@ -28,8 +28,10 @@ There are several reports that may be extracted from Exakat :
 * `SimpleTable`_
 * `Stats`_
 * `Text`_
+* `Top10`_
 * `Uml`_
 * `Xml`_
+* `Yaml`_
 
 
 Configuring a report before the audit
@@ -377,7 +379,7 @@ Simple Json format. It is a structured array with all results, described as obje
         }
     }
 
-Json is a XML report format.
+Json is a Json report format.
 
 Json accepts any arbitrary list of results.
 
@@ -848,6 +850,25 @@ Text is a Text report format.
 
 Text accepts any arbitrary list of results.
 
+Top10
+-----
+
+The top 10 is the companion report for the 'Top 10 classic PHP traps' presentation. 
+
+The Top 10 report is based on the 'Top 10 classic PHP traps' presentation. You can run it on your code and check immediately where those classic traps are waiting for you. Read the whole presentation `online <https://www.exakat.io/top-10-php-classic-traps/>`_
+
+.. image:: images/report.top10.png
+    :alt: Example of a Top10 report (0)
+
+
+::
+
+    
+
+Top10 is a HTML report format.
+
+Top10 depends on the following theme : Top10.
+
 Uml
 ---
 
@@ -888,6 +909,48 @@ XML version of the reports. It uses the same format than PHP Code Sniffer to out
 Xml is a XML report format.
 
 Xml accepts any arbitrary list of results.
+
+Yaml
+----
+
+The Yaml report exports in Yaml format.
+
+Simple Yaml format. It is a structured array with all results, described as object.
+
+::
+
+    Filename => [
+                    errors   => count,
+                    warning  => count,
+                    fixable  => count,
+                    filename => string,
+                    message  => [
+                        line => [
+                            type,
+                            source,
+                            severity,
+                            fixable,
+                            message
+                        ]
+                    ]
+                ]
+
+
+
+
+::
+
+    /src/Altax/Module/Task/Resource/RuntimeTask.php:
+        errors: 0
+        warnings: 22
+        fixable: 0
+        filename: /src/Altax/Module/Task/Resource/RuntimeTask.php
+        messages: { 77: [[{ type: warning, source: Structures/Iffectation, severity: Minor, fixable: fixable, message: Iffectations, fullcode: '$args = $this->getArguments( )' }]], 67: [[{ type: warning, source: Structures/Iffectation, severity: Minor, fixable: fixable, message: Iffectations, fullcode: '$args = $this->input->getArgument(''args'')' }, { type: warning, source: Structures/BuriedAssignation, severity: Minor, fixable: fixable, message: 'Buried Assignation', fullcode: '$args = $this->input->getArgument(''args'')' }]], 114: [[{ type: warning, source: Variables/WrittenOnlyVariable, severity: Minor, fixable: fixable, message: 'Written Only Variables', fullcode: $input }, { type: warning, source: Variables/VariableUsedOnceByContext, severity: Minor, fixable: fixable, message: 'Used Once Variables (In Scope)', fullcode: $input }, { type: warning, source: Classes/UndefinedClasses, severity: Major, fixable: fixable, message: 'Undefined Classes', fullcode: 'new ArrayInput($arguments)' }]], 13: [[{ type: warning, source: Structures/PropertyVariableConfusion, severity: Minor, fixable: fixable, message: 'Property Variable Confusion', fullcode: $input }]], 74: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $default }]], 61: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $string }]], 59: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $string }, { type: warning, source: Functions/RelayFunction, severity: Major, fixable: fixable, message: 'Relay Function', fullcode: 'public function write($string) { /**/ } ' }]], 56: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $string }]], 54: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $string }, { type: warning, source: Functions/RelayFunction, severity: Major, fixable: fixable, message: 'Relay Function', fullcode: 'public function writeln($string) { /**/ } ' }]], 81: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $default }]], 84: [[{ type: warning, source: Php/ReservedNames, severity: Major, fixable: fixable, message: 'PHP Keywords As Names', fullcode: $default }]], 44: [[{ type: warning, source: Functions/RelayFunction, severity: Major, fixable: fixable, message: 'Relay Function', fullcode: 'public function getConfig( ) { /**/ } ' }]], 78: [[{ type: warning, source: Structures/ShouldMakeTernary, severity: Minor, fixable: fixable, message: 'Should Make Ternary', fullcode: 'if(isset($args[$index])) { /**/ } else { /**/ } ' }]], 108: [[{ type: warning, source: Structures/NoVariableIsACondition, severity: Minor, fixable: fixable, message: 'Variable Is Not A Condition', fullcode: '!$command' }]], 109: [[{ type: warning, source: Exceptions/UncaughtExceptions, severity: Minor, fixable: fixable, message: 'Uncaught Exceptions', fullcode: 'throw new \RuntimeException("Not found a before task command ''$taskName''.")' }]], 95: [[{ type: warning, source: Classes/UnusedMethods, severity: Minor, fixable: fixable, message: 'Unused Methods', fullcode: 'public function call($taskName, $arguments = array( )) { /**/ } ' }]], 10: [[{ type: warning, source: Classes/CouldBeFinal, severity: Minor, fixable: fixable, message: 'Class Could Be Final', fullcode: 'class RuntimeTask { /**/ } ' }]] }
+    
+
+Yaml is a Yaml report format.
+
+Yaml accepts any arbitrary list of results.
 
 
 

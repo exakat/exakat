@@ -1777,6 +1777,39 @@ or die() is also applied to many situations, where a blocking situation arise. H
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
+Use const
+=========
+
+.. _phpmyadmin-constants-constrecommended:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`use-const`, in error_report.php:17. 
+
+This may be turned into a `const` call, with a static expression. 
+
+.. code-block:: php
+
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR)
+
+
+--------
+
+
+.. _piwigo-constants-constrecommended:
+
+Piwigo
+^^^^^^
+
+:ref:`use-const`, in include/functions_plugins.inc.php:32. 
+
+Const works efficiently with literal
+
+.. code-block:: php
+
+    define('EVENT_HANDLER_PRIORITY_NEUTRAL', 50)
+
 Foreach Reference Is Not Modified
 =================================
 
@@ -2089,6 +2122,47 @@ This one is documented, and in the end, makes a lot of sense.
     			return $null;
     		}
     	}
+
+Could Use self
+==============
+
+.. _wordpress-classes-shoulduseself:
+
+WordPress
+^^^^^^^^^
+
+:ref:`could-use-self`, in wp-admin/includes/misc.php:74. 
+
+Securimage could be called self.
+
+.. code-block:: php
+
+    class Securimage 
+    {
+    // Lots of code
+                Securimage::$_captchaId = $id;
+    }
+
+
+--------
+
+
+.. _livezilla-classes-shoulduseself:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`could-use-self`, in wp-admin/includes/misc.php:74. 
+
+Using self makes it obvious that Operator::GetSystemId() is a local call, while Communication::GetParameter() is external.
+
+.. code-block:: php
+
+    class Operator extends BaseUser 
+    {
+                $userid = Communication::GetParameter(operator,,$c,FILTER_SANITIZE_SPECIAL_CHARS,null,32,false,false);
+                $sysid = Operator::GetSystemId($userid);
+    }
 
 Logical Should Use Symbolic Operators
 =====================================
@@ -2658,6 +2732,56 @@ This code actually loads the file, join it, then split it again. file() would be
                 return $match;
             }
 
+Use PHP Object API
+==================
+
+.. _wordpress-php-useobjectapi:
+
+WordPress
+^^^^^^^^^
+
+:ref:`use-php-object-api`, in wp-includes/functions.php:2558. 
+
+Finfo has also a class, with the same name.
+
+.. code-block:: php
+
+    finfo_open(FILEINFO_MIME_TYPE)
+
+
+--------
+
+
+.. _prestashop-php-useobjectapi:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`use-php-object-api`, in admin-dev/filemanager/include/utils.php:174. 
+
+transliterator_transliterate() has also a class named Transliterator
+
+.. code-block:: php
+
+    transliterator_transliterate('Accents-Any', $str)
+
+
+--------
+
+
+.. _sugarcrm-php-useobjectapi:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`use-php-object-api`, in SugarCE-Full-6.5.26/include/database/MysqliManager.php:222. 
+
+Mysqli has also a class, with the same name.
+
+.. code-block:: php
+
+    mysqli_fetch_field_direct($result, $i)
+
 Altering Foreach Without Reference
 ==================================
 
@@ -2939,6 +3063,39 @@ _isEnabled may default to true. It could also default to a class constant.
         public function __construct()
         {
             $this->_isEnabled = true;
+
+Should Use Prepared Statement
+=============================
+
+.. _dolibarr-security-shouldusepreparedstatement:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`should-use-prepared-statement`, in htdocs/product/admin/price_rules.ph:76. 
+
+This code is well escaped, as the integer type cast will prevent any special chars to be used. Here, a prepared statement would apply a modern approach to securing this query.
+
+.. code-block:: php
+
+    $db->query("DELETE FROM " . MAIN_DB_PREFIX . "product_pricerules WHERE level = " . (int) $i)
+
+
+--------
+
+
+.. _dolibarr-security-shouldusepreparedstatement:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`should-use-prepared-statement`, in htdocs/product/admin/price_rules.ph:76. 
+
+This code is well escaped, as the integer type cast will prevent any special chars to be used. Here, a prepared statement would apply a modern approach to securing this query.
+
+.. code-block:: php
+
+    $db->query("DELETE FROM " . MAIN_DB_PREFIX . "product_pricerules WHERE level = " . (int) $i)
 
 No Hardcoded Ip
 ===============
@@ -8580,6 +8737,39 @@ This loop is quite complex : it collects $aro_value in $acl_array['aro'][$aro_se
     						$update = 1;
     					}
     				}
+
+Too Many Children
+=================
+
+.. _typo3-classes-toomanychildren:
+
+Typo3
+^^^^^
+
+:ref:`too-many-children`, in typo3/sysext/backend/Classes/Form/AbstractNode.php:26. 
+
+More than 15 children for this class : 15 is the default configuration.
+
+.. code-block:: php
+
+    abstract class AbstractNode implements NodeInterface, LoggerAwareInterface {
+
+
+--------
+
+
+.. _woocommerce-classes-toomanychildren:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`too-many-children`, in includes/abstracts/abstract-wc-rest-controller.php:30. 
+
+This class is extended 22 times, more than the default configuration of 15.
+
+.. code-block:: php
+
+    class WC_REST_Controller extends WP_REST_Controller {
 
 Should Use Operator
 ===================

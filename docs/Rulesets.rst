@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 20 May 2019 17:05:25 +0000
-.. comment: Generation hash : 13dcd04589e290aeefabe3c936f3eef0754ac255
+.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
+.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
 
 
 .. _analyze:
@@ -1201,13 +1201,17 @@ Total : 79 analysis
 Top10
 +++++
 
-Total : 22 analysis
+Total : 28 analysis
 
+* :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
+* :ref:`Avoid Real <avoid-real>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Dangling Array References <dangling-array-references>`
-* :ref:`Don't Be Too Manual <don't-be-too-manual>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
+* :ref:`For Using Functioncall <for-using-functioncall>`
+* :ref:`Logical Operators Favorite <logical-operators-favorite>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Choice <no-choice>`
@@ -1220,9 +1224,11 @@ Total : 22 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Should Yield With Key <should-yield-with-key>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+* :ref:`Substring First <substring-first>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use const <use-const>`
 * :ref:`Used Once Variables <used-once-variables>`
+* :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
 

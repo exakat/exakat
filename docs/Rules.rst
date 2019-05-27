@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 20 May 2019 17:05:25 +0000
-.. comment: Generation hash : 13dcd04589e290aeefabe3c936f3eef0754ac255
+.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
+.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -861,7 +861,7 @@ Trait is already used a parent's class or trait. There is no use to include it a
    ?>
 
 
-See also `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_.
+See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 
 
 Suggestions
@@ -1613,7 +1613,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------+
 | Short name  | Performances/NoConcatInLoop                                                              |
 +-------------+------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                      |
+| Themes      | :ref:`Performances`, :ref:`Top10`                                                        |
 +-------------+------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                    |
 +-------------+------------------------------------------------------------------------------------------+
@@ -1835,15 +1835,15 @@ Suggestions
 * Replace is_real() by is_float()
 * Replace (real) by (float)
 
-+-------------+--------------------+
-| Short name  | Php/AvoidReal      |
-+-------------+--------------------+
-| Themes      | :ref:`Suggestions` |
-+-------------+--------------------+
-| Severity    | Minor              |
-+-------------+--------------------+
-| Time To Fix | Quick (30 mins)    |
-+-------------+--------------------+
++-------------+----------------------------------+
+| Short name  | Php/AvoidReal                    |
++-------------+----------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Top10` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
 
 
 
@@ -2922,6 +2922,16 @@ In a separate file :
        
        }
    ?>
+
+
+See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the final keyword
+* Remove the extending class
 
 +-------------+----------------------------------------------+
 | Short name  | Classes/CantExtendFinal                      |
@@ -4119,15 +4129,15 @@ Suggestions
 * Add parenthesis around the addition to ensure its expected priority
 * Move the addition outside the concatenation
 
-+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                        |
-+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                                                                                                                                                        |
-+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4161,7 +4171,7 @@ Type cast to a string is done with `(string)` operator. There is also the functi
    ?>
 
 
-See also `Type Casting <https://www.php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_ and 
+See also `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_ and 
         `PHP Type Casting <https://developer.hyvor.com/tutorials/php/type-casting>`_.
 
 
@@ -5705,15 +5715,23 @@ It is also routinely used in traits : there, ``self`` represents the class in wh
 
 See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
-+-------------+------------------------------------+
-| Short name  | Classes/ShouldUseSelf              |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* replace the explicit name with self
+
++-------------+--------------------------------------------------------------------------------+
+| Short name  | Classes/ShouldUseSelf                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                             |
++-------------+--------------------------------------------------------------------------------+
+| Severity    | Minor                                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                               |
++-------------+--------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-shoulduseself`, :ref:`livezilla-classes-shoulduseself` |
++-------------+--------------------------------------------------------------------------------+
 
 
 
@@ -6395,15 +6413,15 @@ Suggestions
 
 * Use precise name with your variables
 
-+-------------+--------------------------------------------------------------+
-| Short name  | Structures/DontBeTooManual                                   |
-+-------------+--------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
-+-------------+--------------------------------------------------------------+
-| Severity    | Minor                                                        |
-+-------------+--------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                              |
-+-------------+--------------------------------------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/DontBeTooManual                     |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
 
 
 
@@ -8332,7 +8350,7 @@ This is true with any kind of functioncall that returns the same value throughou
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ForWithFunctioncall                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                                           |
+| Themes      | :ref:`Performances`, :ref:`Top10`                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -11471,6 +11489,49 @@ Suggestions
 
 
 
+.. _logical-operators-favorite:
+
+Logical Operators Favorite
+##########################
+
+
+PHP has two sets of logical operators : letters (and, or, xor) and chars (&&, ||, ^). 
+
+The analyzed code has less than 10% of one of the two sets : for consistency reasons, it is recommended to make them all the same. 
+
+Warning : the two sets of operators have different precedence levels. Using and or && is not exactly the same, especially and not only, when assigning the results to a variable. 
+
+.. code-block:: php
+
+   <?php 
+   
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b or $c;
+   $a1 = $b OR $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b or $c;
+   $a1 = $b OR $c;
+   $a1 = $b ^ $c;
+   
+   ?>
+
+
+Using and or && are also the target of other analysis.
+
+See also `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_ and `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+--------------------------------+
+| Short name | Php/LetterCharsLogicalFavorite |
++------------+--------------------------------+
+| Themes     | :ref:`Top10`                   |
++------------+--------------------------------+
+
+
+
 .. _logical-should-use-symbolic-operators:
 
 Logical Should Use Symbolic Operators
@@ -12393,7 +12454,8 @@ Although it is possible to have different default values, it is worth checking w
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Synchronize default values to avoid surprises
+* Drop some of the default values
 
 +-------------+--------------------------------------------------+
 | Short name  | Functions/MismatchedDefaultArguments             |
@@ -21207,15 +21269,30 @@ Same code, without preparation :
    }
    ?>
 
-+-------------+-------------------------------------+
-| Short name  | Security/ShouldUsePreparedStatement |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`     |
-+-------------+-------------------------------------+
-| Severity    | Major                               |
-+-------------+-------------------------------------+
-| Time To Fix | Slow (1 hour)                       |
-+-------------+-------------------------------------+
+
+See also `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_,
+         `PHP MySQLi Prepared Statements Tutorial to Prevent SQL Injection <https://websitebeaver.com/prepared-statements-in-php-mysqli-to-prevent-sql-injection>`_,
+         `The Best Way to Perform MYSQLI Prepared Statements in PHP <https://developer.hyvor.com/php/prepared-statements>`_.
+         
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use an ORM
+* Change the query to hard code it and make it not injectable
+
++-------------+----------------------------------------------------------------------------------------------------------+
+| Short name  | Security/ShouldUsePreparedStatement                                                                      |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                                                                          |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                            |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-security-shouldusepreparedstatement`, :ref:`dolibarr-security-shouldusepreparedstatement` |
++-------------+----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22475,7 +22552,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Performances/SubstrFirst                                                         |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions`                                          |
+| Themes      | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10`                            |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -23136,15 +23213,17 @@ See also `Why is subclassing too much bad (and hence why should we use prototype
 
 
 
-+-------------+-------------------------+
-| Short name  | Classes/TooManyChildren |
-+-------------+-------------------------+
-| Themes      | :ref:`Suggestions`      |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Classes/TooManyChildren                                                          |
++-------------+----------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                               |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                    |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`typo3-classes-toomanychildren`, :ref:`woocommerce-classes-toomanychildren` |
++-------------+----------------------------------------------------------------------------------+
 
 
 
@@ -26510,17 +26589,27 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
    
    ?>
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Php/UseObjectApi                                                                            |
-+-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                       |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                               |
-+-------------+---------------------------------------------------------------------------------------------+
-| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the object API
+
++-------------+---------------------------------------------------------------------------------------------------------+
+| Short name  | Php/UseObjectApi                                                                                        |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                          |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                   |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                           |
++-------------+---------------------------------------------------------------------------------------------------------+
+| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__             |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-php-useobjectapi`, :ref:`prestashop-php-useobjectapi`, :ref:`sugarcrm-php-useobjectapi` |
++-------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -26817,15 +26906,27 @@ This way, constant will be defined at compile time, and not at execution time.
      echo b;
    ?>
 
-+-------------+------------------------------------------------------------------------------+
-| Short name  | Constants/ConstRecommended                                                   |
-+-------------+------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
-+-------------+------------------------------------------------------------------------------+
-| Severity    | Minor                                                                        |
-+-------------+------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                |
-+-------------+------------------------------------------------------------------------------+
+
+See also `Syntax <https://php.net/manual/en/language.constants.syntax.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use const instead of define()
+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Constants/ConstRecommended                                                             |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`           |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                  |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                          |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpmyadmin-constants-constrecommended`, :ref:`piwigo-constants-constrecommended` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 
@@ -29757,15 +29858,15 @@ Suggestions
 
 *
 
-+-------------+-------------------------+
-| Short name  | Performances/CsvInLoops |
-+-------------+-------------------------+
-| Themes      | :ref:`Performances`     |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
++-------------+-----------------------------------+
+| Short name  | Performances/CsvInLoops           |
++-------------+-----------------------------------+
+| Themes      | :ref:`Performances`, :ref:`Top10` |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
 
 
 
