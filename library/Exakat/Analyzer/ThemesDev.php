@@ -28,13 +28,13 @@ use Exakat\Autoload\AutoloadDev;
 
 class ThemesDev {
     private $dev           = null;
-    private $all           = array();
+    private $all           = array('All' => array());
     private $themes        = array();
 
     public function __construct(AutoloadDev $dev) {
         $this->dev = $dev;
         
-        $this->all = $dev->getAllAnalyzers();
+        $this->all = $dev->getAllAnalyzers() ?: array('All' => array());
         $this->themes = array_keys($this->all);
     }
     
