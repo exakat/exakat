@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\x::class', 
+$expected     = array('\\x::class',
                       'x::class',
                      );
 
