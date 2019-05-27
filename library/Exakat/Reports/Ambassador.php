@@ -2467,8 +2467,8 @@ SQL;
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
-            if ($analyzer === null) { 
-                continue; 
+            if ($analyzer === null) {
+                continue;
             }
 
             $description = $this->getDocs($name, 'description');

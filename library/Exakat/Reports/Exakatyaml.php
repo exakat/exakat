@@ -40,7 +40,7 @@ class Exakatyaml extends Reports {
         
         $rules = array();
         $sqlList = makeList($analyzerList);
-        $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer IN ('.$sqlList.') AND count >= 0');
+        $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer IN (' . $sqlList . ') AND count >= 0');
         while($row = $res->fetcharray(\SQLITE3_ASSOC)) {
             if (isset($rules[$row['count']])) {
                 $rules[$row['count']][] = $row['analyzer'];

@@ -224,7 +224,7 @@ SQL;
             $table[] = "<tr><td>$name</td><td><a href=\"issues.html#analyzer=" . $this->toId($row['analyzer']) . '" title="' . $row['label'] . '">' . $row['label'] . "</a></td><td bgcolor=\"$color\">$count</td></tr>\n";
         }
 
-        $top10 = '<table class="table">'.implode(PHP_EOL, $table).'</table>';
+        $top10 = '<table class="table">' . implode(PHP_EOL, $table) . '</table>';
 
         $description = <<<'HTML'
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
