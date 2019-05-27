@@ -2401,7 +2401,8 @@ SQL;
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
-        $colors = array('59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
+        $colors = array('59BF00', '59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
+        // This must be the same lenght than the list of versions
 
         $list = makeList(array_keys($analyzers));
         $query = <<<SQL
@@ -2460,20 +2461,25 @@ SQL;
             }
         }
         
-        $table = '';
+        $table = array();
         $titles = '<tr><th>Version</th><th>Name</th><th>' . implode('</th><th>', array_keys(array_values($data2)[0]) ) . '</th></tr>';
-            $table .= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
+        $table []= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
-            if ($analyzer === null) { continue; }
-            
+            if ($analyzer === null) { 
+                continue; 
+            }
+
             $description = $this->getDocs($name, 'description');
 
             $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
-            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
+            $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
+            $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
         }
+        
+        $table = implode('', $table);
 
         $theTable = <<<HTML
         					<table class="table table-striped">
