@@ -1,4 +1,4 @@
-Version 1.8.1 (Zhang Wentong of Dinghai , coming up)
+Version 1.8.2 (Zhao Ziyu of Dingchou, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 1.8.1 (Zhang Wentong of Dinghai , coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.1 (Zhang Wentong of Dinghai, 2019-05-27)
++ Architecture
+    + Fixed Symlink destination
+    + Added collecting classes children, traits and interfaces counts
+    + Added support for constants and functions in modules
+    + Added missing functions in data
++ Report
+    + New report : exakatYaml, which help configuring exakat
+    + New report : Yaml
+    + New report : Top10
+    + Updated report : Json, text and xml get 'fullcode'
++ Analyzer
+    + Updated analysis : Should use self is extended to parent classes
+    + Updated analysis : Should use prepared statement now skips some SQL queries
+    + Checked unit tests : 3024 / 3048 test pass (99% pass)
 
 Version 1.8.0 (Zang Wengong of Dingyou, 2019-05-20)
 + Architecture
