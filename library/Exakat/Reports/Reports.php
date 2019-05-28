@@ -108,7 +108,7 @@ abstract class Reports {
 
             $list = $this->themes->getThemeAnalyzers($themas);
         } elseif (!empty($this->config->program)) {
-            $list = array($this->config->program);
+            $list = makeArray($this->config->program);
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }
