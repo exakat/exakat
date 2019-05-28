@@ -236,7 +236,7 @@ function config($args) {
     $status = array();
     
     $ini = file_get_contents(__DIR__."/$project/config.ini");
-    $php_versions = array('7.3', '7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
+    $php_versions = array('8.0', '7.4', '7.3', '7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
     if (!empty($_REQUEST['phpversion']) &&
         in_array($_REQUEST['phpversion'], $php_versions)) {
         $ini = preg_replace("/phpversion = .+?\n/", 'phpversion = '.$_REQUEST['phpversion'].PHP_EOL, $ini);

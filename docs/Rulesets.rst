@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 14 May 2019 07:24:51 +0000
-.. comment: Generation hash : f0681f5dc6feb12fbf23f4299f65770f575c1fd5
+.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
+.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 357 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -84,6 +84,7 @@ Total : 352 analysis
 * :ref:`Adding Zero <adding-zero>`
 * :ref:`Aliases Usage <aliases-usage>`
 * :ref:`Already Parents Interface <already-parents-interface>`
+* :ref:`Already Parents Trait <already-parents-trait>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Alternative Syntax Consistence <alternative-syntax-consistence>`
 * :ref:`Always Positive Comparison <always-positive-comparison>`
@@ -109,6 +110,7 @@ Total : 352 analysis
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
 * :ref:`Cant Instantiate Class <cant-instantiate-class>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
+* :ref:`Casting Ternary <casting-ternary>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Check All Types <check-all-types>`
 * :ref:`Check JSON <check-json>`
@@ -121,6 +123,8 @@ Total : 352 analysis
 * :ref:`Clone With Non-Object <clone-with-non-object>`
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
+* :ref:`Concat And Addition <concat-and-addition>`
+* :ref:`Concat Empty <concat-empty>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
@@ -339,6 +343,7 @@ Total : 352 analysis
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Too Many Native Calls <too-many-native-calls>`
+* :ref:`Traits/TraitNotFound <traits/traitnotfound>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Typehinted References <typehinted-references>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
@@ -491,7 +496,7 @@ Total : 24 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 75 analysis
+Total : 76 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -501,6 +506,7 @@ Total : 75 analysis
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -574,7 +580,7 @@ Total : 75 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 71 analysis
+Total : 72 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -583,6 +589,7 @@ Total : 71 analysis
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -653,12 +660,13 @@ Total : 71 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 63 analysis
+Total : 64 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -724,12 +732,13 @@ Total : 63 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 52 analysis
+Total : 53 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Define With Array <define-with-array>`
@@ -784,11 +793,12 @@ Total : 52 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Empty List <empty-list>`
@@ -836,10 +846,11 @@ Total : 44 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 30 analysis
+Total : 31 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
@@ -874,10 +885,11 @@ Total : 30 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 22 analysis
+Total : 23 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -904,11 +916,12 @@ Total : 22 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 9 analysis
+Total : 10 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
@@ -921,10 +934,12 @@ Total : 9 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 3 analysis
+Total : 5 analysis
 
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
+* :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
 .. _compatibilityphp80:
@@ -932,8 +947,9 @@ Total : 3 analysis
 CompatibilityPHP80
 ++++++++++++++++++
 
-Total : 2 analysis
+Total : 3 analysis
 
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`PHP 8.0 Removed Constants <php-8.0-removed-constants>`
 * :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
@@ -975,7 +991,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 19 analysis
+Total : 20 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -990,6 +1006,7 @@ Total : 19 analysis
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
+* :ref:`Traits/TraitNotFound <traits/traitnotfound>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Trait <undefined-trait>`
@@ -1054,7 +1071,6 @@ Total : 40 analysis
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
-* :ref:`Can't Disable Class <can't-disable-class>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Configure Extract <configure-extract>`
 * :ref:`Direct Injection <direct-injection>`
@@ -1065,6 +1081,7 @@ Total : 40 analysis
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`Integer Conversion <integer-conversion>`
+* :ref:`Minus One On Error <minus-one-on-error>`
 * :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -1097,7 +1114,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 78 analysis
+Total : 79 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1172,6 +1189,7 @@ Total : 78 analysis
 * :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
+* :ref:`Useless Argument <useless-argument>`
 * :ref:`Useless Default Argument <useless-default-argument>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
@@ -1183,13 +1201,17 @@ Total : 78 analysis
 Top10
 +++++
 
-Total : 22 analysis
+Total : 28 analysis
 
+* :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
+* :ref:`Avoid Real <avoid-real>`
+* :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Dangling Array References <dangling-array-references>`
-* :ref:`Don't Be Too Manual <don't-be-too-manual>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
+* :ref:`For Using Functioncall <for-using-functioncall>`
+* :ref:`Logical Operators Favorite <logical-operators-favorite>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Choice <no-choice>`
@@ -1202,9 +1224,11 @@ Total : 22 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Should Yield With Key <should-yield-with-key>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+* :ref:`Substring First <substring-first>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use const <use-const>`
 * :ref:`Used Once Variables <used-once-variables>`
+* :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
 

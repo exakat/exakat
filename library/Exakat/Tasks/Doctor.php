@@ -227,7 +227,7 @@ TEXT
             $i = 0;
             do {
                 ++$i;
-                $id = rand(0, PHP_INT_MAX);
+                $id = random_int(0, PHP_INT_MAX);
             } while (file_exists("{$this->config->projects_root}/projects/test$id") && $i < 100);
 
             $args = array ( 1 => 'init',

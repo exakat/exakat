@@ -23,6 +23,7 @@ class UndefinedConstants extends Analyzer {
     public function testConstants_UndefinedConstants12()  { $this->generic_test('Constants/UndefinedConstants.12'); }
     public function testConstants_UndefinedConstants13()  { $this->generic_test('Constants/UndefinedConstants.13'); }
     public function testConstants_UndefinedConstants14()  { $this->generic_test('Constants/UndefinedConstants.14'); }
+    public function testConstants_UndefinedConstants15()  { $this->generic_test('Constants/UndefinedConstants.15'); }
     public function testConstants_UndefinedConstants16()  { $this->generic_test('Constants/UndefinedConstants.16'); }
 }
 ?>

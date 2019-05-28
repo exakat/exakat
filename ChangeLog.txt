@@ -1,4 +1,4 @@
-Version 1.8.0 (Zang Wengong of Dingyou, coming up)
+Version 1.8.2 (Zhao Ziyu of Dingchou, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,53 @@ Version 1.8.0 (Zang Wengong of Dingyou, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.1 (Zhang Wentong of Dinghai, 2019-05-27)
++ Architecture
+    + Fixed Symlink destination
+    + Added collecting classes children, traits and interfaces counts
+    + Added support for constants and functions in modules
+    + Added missing functions in data
++ Report
+    + New report : exakatYaml, which help configuring exakat
+    + New report : Yaml
+    + New report : Top10
+    + Updated report : Json, text and xml get 'fullcode'
++ Analyzer
+    + Updated analysis : Should use self is extended to parent classes
+    + Updated analysis : Should use prepared statement now skips some SQL queries
+    + Checked unit tests : 3024 / 3048 test pass (99% pass)
+
+Version 1.8.0 (Zang Wengong of Dingyou, 2019-05-20)
++ Architecture
+    + Added missing native PHP functions
+    + Restored anchor for ignore_dirs[] configuration
+    + Removed more MAX_LOOPING usage
++ Report
+    + Ambassador : removed { & @ } artefacts from globals
++ Analyzer
+    + New analysis : Function returning -1 in case of error
+    + New analysis : Report PHP 7.4 unpacking inside array
+    + New analysis : Report PHP 7.4 new functions and fn
+    + New analysis : Useless arguments
+    + New analysis : Addition and concatenation precedence for PHP 7.4
+    + New analysis : report concatenation of empty strings
+    + New analysis : casting has precedence over ternary
+    + New analysis : report already used traits
+    + New analysis : report missing traits in use expression
+    + Updated analysis : isset on whole arrays : extended analysis to Phpvariables
+    + Updated analysis : SQLITE3 requires single quotes
+    + Updated analysis : Dir then slash : extended to constants
+    + Updated analysis : Variable Strange Name extended to strange types
+    + Updated analysis : Possible interface's analysis is sped up
+    + Checked unit tests : 3021 / 3045 test pass (99% pass)
++ Tokenizer
+    + Fixed fullcode of Usetrait
+    + Extended method definitions to traits
+    + Extended fluent interface detection to parents
+    + Fixed dump for visibility change
+    + Handle method aliases in use expression (as)
+    + Better noDelimiter for double quotes strings
 
 Version 1.7.9 (Shi Shutong of Dingwei, 2019-05-13)
 + Architecture

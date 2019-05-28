@@ -1,32 +1,33 @@
 stages:
-#  - lint
+  - lint
   - selftest
-#  - build
-#  - test
+  - build
+  - test
 
 selftest:
-  image: exakat/exakat
+  stage: selftest
+  image: exakat/exakat:latest
   script:
-    - /usr/src/exakat/exakat.phar project -v
+    - exakat project -v 
 
-#build:
-#  stage: build
-#  image: php:7.3-cli-stretch
-#  script:
-#    - bash ci/docker_install.sh
-#
-#test:
-#  stage: test
-#  image: php:7.3-cli-stretch
-#  script:
-#    - sh ci/docker_install.sh
-#    - phpunit --testsuite One
-#
-#
-#lint:
-#  stage: lint
-#  image: sixlive/php-lint-fix
-#
-#  script:
-#    - php-cs-fixer fix --dry-run
-#
+build:
+  stage: build
+  image: php:7.3-cli-stretch
+  script:
+    - bash ci/docker_install.sh
+
+test:
+  stage: test
+  image: php:7.3-cli-stretch
+  script:
+    - sh ci/docker_install.sh
+    - phpunit --testsuite One
+
+
+lint:
+  stage: lint
+  image: sixlive/php-lint-fix
+
+  script:
+    - php-cs-fixer fix --dry-run
+

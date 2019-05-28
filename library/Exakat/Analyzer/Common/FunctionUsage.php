@@ -34,6 +34,10 @@ class FunctionUsage extends Analyzer {
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
+    
+    public function setFunctions(array $functions) {
+        $this->functions = $functions;
+    }
 }
 
 ?>

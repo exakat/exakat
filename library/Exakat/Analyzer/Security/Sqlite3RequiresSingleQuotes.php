@@ -34,10 +34,10 @@ class Sqlite3RequiresSingleQuotes extends Analyzer {
              ->outIs('METHOD')
              ->codeIs('escapeString')
              ->back('first')
-             ->outIs('CONCAT')
-             ->isMore('rank', 'ranked')
-             ->atomIs('String')
-             ->regexIs('noDelimiter', '^\\"')
+             ->raw('sideEffect{ ranked = ranked + 1}')
+             ->outWithRank('CONCAT', 'ranked')
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->regexIs('noDelimiter', '^\\\\\\\\?\\"')
              ->back('first');
         $this->prepareQuery();
 
@@ -60,10 +60,10 @@ class Sqlite3RequiresSingleQuotes extends Analyzer {
              ->samePropertyAs('fullcode', 'variable')
              ->savePropertyAs('rank', 'ranked')
              ->inIs('CONCAT')
-             ->outIs('CONCAT')
-             ->isMore('rank', 'ranked')
-             ->atomIs('String')
-             ->regexIs('noDelimiter', '^\\"')
+             ->raw('sideEffect{ ranked = ranked + 1}')
+             ->outWithRank('CONCAT', 'ranked')
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->regexIs('noDelimiter', '^\\\\\\\\?\\"')
              ->back('first');
         $this->prepareQuery();
     }

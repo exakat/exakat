@@ -1,15 +1,70 @@
 project: exakat
 project_name: exakat
 project_themes:
-  - Security
-  - Suggestions
-  - ClassReview
-  - mine
-  - second
+  - Exakat
+  - ruleset_0
+ignore_dirs:
+  - /tests
+  - /data
+  - /human
+  - /docs
+file_extensions:
+  - .php
 rulesets:
-  mine :
+  Exakat :
   - Structures/AddZero
   - Structures/MultiplyByOne
-  second :
-  - Php/LogicalInLetters
-  - Classes/CouldBePrivateMethod
+  - Structures/ConcatEmpty
+  ruleset_0: # 0 errors found
+       "$HTTP_RAW_POST_DATA Usage": Php/RawPostDataUsage
+       "$this Belongs To Classes Or Traits": Classes/ThisIsForClasses
+       "$this Is Not An Array": Classes/ThisIsNotAnArray
+       "$this Is Not For Static Methods": Classes/ThisIsNotForStatic
+       "Abstract Or Implements": Classes/AbstractOrImplements
+       "Access Protected Structures": Classes/AccessProtected
+       "Accessing Private": Classes/AccessPrivate
+       "Adding Zero": Structures/AddZero
+       "Aliases Usage": Functions/AliasesUsage
+       "Already Parents Interface": Interfaces/AlreadyParentsInterface
+       "Altering Foreach Without Reference": Structures/AlteringForeachWithoutReference
+       "Alternative Syntax Consistence": Structures/AlternativeConsistenceByFile
+       "Always Positive Comparison": Structures/NeverNegative
+       "Ambiguous Array Index": Arrays/AmbiguousKeys
+       "Ambiguous Static": Classes/AmbiguousStatic2
+       "Ambiguous Visibilities": Classes/AmbiguousVisibilities
+       "Anonymous Classes": Classes/Anonymous
+       "Assert Function Is Reserved": Php/AssertFunctionIsReserved
+       "Assign Default To Properties": Classes/MakeDefault
+       "Assign With And": Php/AssignAnd
+       "Avoid Parenthesis": Structures/PrintWithoutParenthesis
+       "Bad Constants Names":                               Constants/BadConstantnames
+       "Can't Count Non-Countable":                         Structures/CanCountNonCountable
+       "Can't Extend Final":                                Classes/CantExtendFinal
+       "Can't Throw Throwable":                             Exceptions/CantThrow
+       "Cant Inherit Abstract Method":                      Classes/CantInheritAbstractMethod
+       "Cant Instantiate Class":                            Classes/CantInstantiateClass
+       "Case Insensitive Constants":                        Constants/CaseInsensitiveConstants
+       "Cast To Boolean":                                   Structures/CastToBoolean
+       "Catch Overwrite Variable":                          Structures/CatchShadowsVariable
+       "Check On __Call Usage":                             Classes/CheckOnCallUsage
+       "Child Class Removes Typehint":                      Classes/ChildRemoveTypehint
+       "Class Function Confusion":                          Php/ClassFunctionConfusion
+       "Class Should Be Final By Ocramius":                 Classes/FinalByOcramius
+       "Class, Interface Or Trait With Identical Names":    Classes/CitSameName
+       "Classes Mutually Extending Each Other":             Classes/MutualExtension
+       "Clone With Non-Object":                             Classes/CloneWithNonObject
+       "Compact Inexistant Variable":                       Php/CompactInexistant
+       "Compare Hash":                                      Security/CompareHash
+       "Compared Comparison":                               Structures/ComparedComparison
+       "Concat And Addition":                               Php/ConcatAndAddition
+       "Concrete Visibility":                               Interfaces/ConcreteVisibility
+       "Configure Extract":                                 Security/ConfigureExtract
+       "Const Visibility Usage":                            Classes/ConstVisibilityUsage
+       "Constants Created Outside Its Namespace":           Constants/CreatedOutsideItsNamespace
+       "Constants With Strange Names":                      Constants/ConstantStrangeNames
+       "Continue Is For Loop":                              Structures/ContinueIsForLoop
+       "Could Be Else":                                     Structures/CouldBeElse
+       "Could Be Static":                                   Structures/CouldBeStatic
+       "Could Use __DIR__":                                 Structures/CouldUseDir
+       "Could Use self":                                    Classes/ShouldUseSelf
+       "Crc32() Might Be Negative":                         Php/Crc32MightBeNegative

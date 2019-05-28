@@ -58,14 +58,6 @@ class Owasp extends Ambassador {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-                                 'exceptions' => 'Exceptions');
-
     private $compatibilities = array();
 
     private $components = array(
@@ -877,7 +869,7 @@ HTML;
         }
     }
 
-    private function Compatibility($count) {
+    protected function Compatibility($count, $analyzer = '') {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {

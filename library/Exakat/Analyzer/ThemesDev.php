@@ -28,15 +28,13 @@ use Exakat\Autoload\AutoloadDev;
 
 class ThemesDev {
     private $dev           = null;
-    private $all           = array();
+    private $all           = array('All' => array());
     private $themes        = array();
 
-    private static $instanciated = array();
-    
     public function __construct(AutoloadDev $dev) {
         $this->dev = $dev;
         
-        $this->all = $dev->getAllAnalyzers();
+        $this->all = $dev->getAllAnalyzers() ?: array('All' => array());
         $this->themes = array_keys($this->all);
     }
     
@@ -70,6 +68,38 @@ class ThemesDev {
             return array();
         }
         return preg_grep("#/$name\$#", $this->all['All']);
+    }
+    
+    public function getThemesForAnalyzer($analyzer = null) {
+        $return = array();
+
+        if ($analyzer === null) {
+            $list = $this->all;
+            $return = array_fill_keys($list['All'], array());
+            unset($list['All']);
+            
+            foreach($list as $theme => $ruleset) {
+                foreach($ruleset as $rule) {
+                    $return[$rule][] = $theme;
+                }
+            }
+        } else {
+            foreach($this->all as $theme => $ruleset) {
+                if (in_array($analyzer, $ruleset, STRICT_COMPARISON)) {
+                    $return[] = $theme;
+                }
+            }
+        }
+        
+        return $return;
+    }
+
+    public function getSeverities() {
+        return array_fill_keys($this->all['All'], Analyzer::S_NONE);
+    }
+
+    public function getTimesToFix() {
+        return array_fill_keys($this->all['All'], Analyzer::T_NONE);
     }
 }
 ?>

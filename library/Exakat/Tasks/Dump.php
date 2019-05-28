@@ -170,6 +170,16 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
+            $this->collectClassTraitsCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            $this->collectClassInterfaceCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Interface count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            $this->collectClassChildrenCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Children count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
             $begin = $end;
             $this->collectDefinitionsStats();
             $end = microtime(true);
@@ -337,7 +347,7 @@ GREMLIN;
                              ->toArray();
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severities = array();
         $readCounts = array_fill_keys($classes, 0);
 
@@ -426,7 +436,7 @@ SQL;
         $res = $analyzer->getDump();
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severity = $docs->getDocs($class)['severity'];
 
         $query = array();
@@ -1739,6 +1749,27 @@ GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
+    private function collectClassTraitsCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassTraits');
+    }
+
+    private function collectClassInterfaceCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassInterfaces');
+    }
+
+    private function collectClassChildrenCounts() {
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class", "Classanonymous").count() ).cap("m"); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassChildren');
+    }
+
     private function collectConstantCounts() {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
@@ -1862,6 +1893,7 @@ GREMLIN
               
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
@@ -2282,7 +2314,11 @@ SQL;
         $this->collectDatastore();
 
         $time   = time();
-        $id     = random_int(0, PHP_INT_MAX);
+        try {
+            $id     = random_int(0, PHP_INT_MAX);
+        } catch (\Throwable $e) {
+            die("Couldn't generate an id for the current dump file. Aborting");
+        }
         if (file_exists($this->sqliteFilePrevious)) {
             $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
 

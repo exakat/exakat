@@ -40,7 +40,7 @@ class Phpconfiguration extends Reports {
             $this->count();
         }
 
-        $shouldDisableFunctions = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/shouldDisableFunction.json"));
+        $shouldDisableFunctions = json_decode(file_get_contents("{$this->config->dir_root}/data/shouldDisableFunction.json"), \JSON_OBJECT_AS_ARRAY);
         $functionsArray = array();
         $classesArray = array();
         foreach($shouldDisableFunctions as $ext => $toDisable) {

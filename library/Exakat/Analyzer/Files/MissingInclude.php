@@ -71,8 +71,8 @@ class MissingInclude extends Analyzer {
     }
     
     private function searchFile($file, $files, $including) {
-        if (empty($file)) { 
-            return false; 
+        if (empty($file)) {
+            return false;
         }
 
         $bits = explode(' . ', $file);
@@ -126,23 +126,23 @@ class MissingInclude extends Analyzer {
             $file = $r[1] . $r[2];
         }
 
-        if (in_array($file, $files)) { return true; }
+        if (in_array($file, $files, STRICT_COMPARISON)) { return true; }
         
         if (substr($file, 0, 2) === './') {
-            if (in_array(substr($file, 1), $files)) { return true; }
+            if (in_array(substr($file, 1), $files, STRICT_COMPARISON)) { return true; }
             
-            if (in_array(dirname($including) . substr($file, 1), $files)) { return true; }
+            if (in_array(dirname($including) . substr($file, 1), $files, STRICT_COMPARISON)) { return true; }
         }
 
-        if (substr($file, 0, 3) === '../' && in_array(substr($file, 2), $files)) { return true;}
+        if (substr($file, 0, 3) === '../' && in_array(substr($file, 2), $files, STRICT_COMPARISON)) { return true;}
 
-        if (substr($file, 0, 6) === '../../' && in_array(substr($file, 5), $files)) { return true;}
+        if (substr($file, 0, 6) === '../../' && in_array(substr($file, 5), $files, STRICT_COMPARISON)) { return true;}
 
-        if (substr($file, 0, 9) === '../../../' && in_array(substr($file, 8), $files)) { return true;}
+        if (substr($file, 0, 9) === '../../../' && in_array(substr($file, 8), $files, STRICT_COMPARISON)) { return true;}
 
         if (isset($file[0]) && $file[0] !== '/') {
 
-            if (in_array(dirname($including) . '/' . $file, $files)) { return true; }
+            if (in_array(dirname($including) . '/' . $file, $files, STRICT_COMPARISON)) { return true; }
         }
         
         if (strpos($file, '$')  !== false) { return true;}

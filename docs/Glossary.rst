@@ -906,6 +906,7 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
+      + :ref:`Casting Ternary <casting-ternary>`
       + :ref:`Check All Types <check-all-types>`
       + :ref:`Don't Unset Properties <don't-unset-properties>`
       + :ref:`No Reference For Ternary <no-reference-for-ternary>`
@@ -1266,6 +1267,10 @@ Glossary
 
       + :ref:`Strtr Arguments <strtr-arguments>`
 
+    + `strval()`
+
+      + :ref:`Concat Empty <concat-empty>`
+
     + `substr()`
 
       + :ref:`No List With String <no-list-with-string>`
@@ -1381,6 +1386,7 @@ Glossary
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Minus One On Error <minus-one-on-error>`
 
 
 + `Y`

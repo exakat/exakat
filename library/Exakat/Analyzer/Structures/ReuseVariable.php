@@ -51,7 +51,7 @@ class ReuseVariable extends Analyzer {
         // $a = foo($b);
         // if (foo($b)) {}
         $this->atomIs('Assignation')
-             ->codeIs('=')
+             ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
              ->atomIs($expressions)
              ->analyzerIsNot('self')

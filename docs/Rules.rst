@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 14 May 2019 07:24:51 +0000
-.. comment: Generation hash : f0681f5dc6feb12fbf23f4299f65770f575c1fd5
+.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
+.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -828,6 +828,59 @@ Suggestions
 
 
 
+.. _already-parents-trait:
+
+Already Parents Trait
+#####################
+
+
+Trait is already used a parent's class or trait. There is no use to include it a second time.
+
+.. code-block:: php
+
+   <?php
+   
+   trait ta {
+       use tb;
+   }
+   
+   trait t1 {
+       use ta;
+       use tb; // also used by ta
+   }
+   
+   class b {
+       use t1; // also required by class c
+       use ta; // also required by trait t1
+   }
+   
+   class c extends b {
+       use t1;
+   }
+   
+   ?>
+
+
+See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Eliminate one of the trait request
+
++-------------+----------------------------+
+| Short name  | Traits/AlreadyParentsTrait |
++-------------+----------------------------+
+| Themes      | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+
+
+
 .. _altering-foreach-without-reference:
 
 Altering Foreach Without Reference
@@ -1448,7 +1501,7 @@ It is recommended to use the &&, ^ and || operators, instead of and, or and xor,
    ?>
 
 
-See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+See also `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
 
 
@@ -1560,7 +1613,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------+
 | Short name  | Performances/NoConcatInLoop                                                              |
 +-------------+------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                      |
+| Themes      | :ref:`Performances`, :ref:`Top10`                                                        |
 +-------------+------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                    |
 +-------------+------------------------------------------------------------------------------------------+
@@ -1782,15 +1835,15 @@ Suggestions
 * Replace is_real() by is_float()
 * Replace (real) by (float)
 
-+-------------+--------------------+
-| Short name  | Php/AvoidReal      |
-+-------------+--------------------+
-| Themes      | :ref:`Suggestions` |
-+-------------+--------------------+
-| Severity    | Minor              |
-+-------------+--------------------+
-| Time To Fix | Quick (30 mins)    |
-+-------------+--------------------+
++-------------+----------------------------------+
+| Short name  | Php/AvoidReal                    |
++-------------+----------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Top10` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
 
 
 
@@ -2224,17 +2277,17 @@ Suggestions
 
 * Remove the 6th argument of registered handlers.
 
-+-------------+---------------------------------------------------+
-| Short name  | Php/AvoidSetErrorHandlerContextArg                |
-+-------------+---------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP72`                         |
-+-------------+---------------------------------------------------+
-| Severity    | Major                                             |
-+-------------+---------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                     |
-+-------------+---------------------------------------------------+
-| Examples    | :ref:`vanilla-php-avoidseterrorhandlercontextarg` |
-+-------------+---------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------+
+| Short name  | Php/AvoidSetErrorHandlerContextArg                                                                    |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP72`                                                                             |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                 |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                         |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`shopware-php-avoidseterrorhandlercontextarg`, :ref:`vanilla-php-avoidseterrorhandlercontextarg` |
++-------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2837,38 +2890,6 @@ See also `Warn when counting non-countable types <http://php.net/manual/en/migra
 
 
 
-.. _can't-disable-class:
-
-Can't Disable Class
-###################
-
-
-This is the list of potentially dangerous PHP class being used in the code, such as \Phar. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This script uses ftp_connect(), therefore, this function shouldn't be disabled. 
-   $phar = new Phar();
-   
-   ?>
-
-
-This analysis is the base for suggesting values for the ``disable_classes`` directive.
-
-+-------------+---------------------------+
-| Short name  | Security/CantDisableClass |
-+-------------+---------------------------+
-| Themes      | :ref:`Security`           |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
-
-
-
 .. _can't-extend-final:
 
 Can't Extend Final
@@ -2901,6 +2922,16 @@ In a separate file :
        
        }
    ?>
+
+
+See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the final keyword
+* Remove the extending class
 
 +-------------+----------------------------------------------+
 | Short name  | Classes/CantExtendFinal                      |
@@ -3173,6 +3204,49 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Examples    | :ref:`mediawiki-structures-casttoboolean`, :ref:`dolibarr-structures-casttoboolean` |
 +-------------+-------------------------------------------------------------------------------------+
+
+
+
+.. _casting-ternary:
+
+Casting Ternary
+###############
+
+
+Type casting has a precedence over ternary operator, and is applied first. When this happens, the condition is cast, although it is often useless as PHP will do it if needed.
+
+This applies to the ternary operator, the coalesce operator ?: and the null-coalesce operator ??.
+
+.. code-block:: php
+
+   <?php
+       $a = (string) $b ? 3 : 4;
+       $a = (string) $b ?: 4;
+       $a = (string) $b ?? 4;
+   ?>
+
+
+The last example generates first an error `Undefined variable: b`, since $b is first cast to a string. The result is then an empty string, which leads to an empty string to be stored into $a. Multiple errors cascade.
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add parenthesis around the ternary operator
+* Skip the casting
+* Cast in another expression
+
++-------------+---------------------------+
+| Short name  | Structures/CastingTernary |
++-------------+---------------------------+
+| Themes      | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 
@@ -3822,7 +3896,7 @@ When closures were introduced in PHP, they couldn't use the `$this <http://php.n
 
 This is not the case anymore since PHP 5.4.
 
-See also `Anonymous Functions <http://php.net/manual/en/functions.anonymous.php>`_.
+See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/ClosureThisSupport    |
@@ -4014,6 +4088,109 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 +-------------+-------------------------------+
 | Time To Fix | Quick (30 mins)               |
 +-------------+-------------------------------+
+
+
+
+.. _concat-and-addition:
+
+Concat And Addition
+###################
+
+
+Precedence between addition and concatenation has changed. In PHP 7.4, addition has precedence, and before, addition and concatenation had the same precedence.
+
+From the RFC : ``Currently the precedence of '.', '+' and '-' operators are equal. Any combination of these operators are simply evaluated left-to-right.
+
+This is counter-intuitive though: you rarely want to add or subtract concatenated strings which in general are not numbers. However, given PHPs capability of seamlessly converting an integer to a string, concatenation of these values is desired.``
+
+.. code-block:: php
+
+   <?php
+   // Extracted from the RFC
+   echo sum: . $a + $b;
+    
+   // current behavior: evaluated left-to-right
+   echo (sum: . $a) + $b;
+    
+   // desired behavior: addition and subtraction have a higher precendence
+   echo sum : . ($a + $b);
+   
+   ?>
+
+
+This analysis reports any addition and concatenation that are mixed, without parenthesis. Addition also means substraction here, aka using `+` or `-`.
+
+See also `Change the precedence of the concatenation operator <https://wiki.php.net/rfc/concatenation_precedence>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add parenthesis around the addition to ensure its expected priority
+* Move the addition outside the concatenation
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _concat-empty:
+
+Concat Empty
+############
+
+
+Using a concatenation to make a value a string should be replaced with a type cast.
+
+Type cast to a string is done with `(string)` operator. There is also the function `strval() <http://www.php.net/strval>`_, although it is less recommended.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 3;
+   
+   // explicite way to cast a value
+   $b = (string) $a; // $b is a string with the content 3
+   
+   // Wrong way to cast a value
+   $c = $a . ''; // $c is a string with the content 3
+   $c = '' . $a; // $c is a string with the content 3
+   $a .= '';     // $a is a string with the content 3
+   
+   // Wrong way to cast a value
+   $c = $a . '' . $b; // This is not reported. The empty string is useless, but not meant to type cast
+   
+   ?>
+
+
+See also `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_ and 
+        `PHP Type Casting <https://developer.hyvor.com/tutorials/php/type-casting>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoir concatenating with empty strings
+* Use (string) operator to cast to string
+* Remove any concatenated empty string
+
++-------------+------------------------+
+| Short name  | Structures/ConcatEmpty |
++-------------+------------------------+
+| Themes      | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
 
 
 
@@ -5538,15 +5715,23 @@ It is also routinely used in traits : there, ``self`` represents the class in wh
 
 See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
-+-------------+------------------------------------+
-| Short name  | Classes/ShouldUseSelf              |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* replace the explicit name with self
+
++-------------+--------------------------------------------------------------------------------+
+| Short name  | Classes/ShouldUseSelf                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                             |
++-------------+--------------------------------------------------------------------------------+
+| Severity    | Minor                                                                          |
++-------------+--------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                               |
++-------------+--------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-shoulduseself`, :ref:`livezilla-classes-shoulduseself` |
++-------------+--------------------------------------------------------------------------------+
 
 
 
@@ -6228,15 +6413,15 @@ Suggestions
 
 * Use precise name with your variables
 
-+-------------+--------------------------------------------------------------+
-| Short name  | Structures/DontBeTooManual                                   |
-+-------------+--------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
-+-------------+--------------------------------------------------------------+
-| Severity    | Minor                                                        |
-+-------------+--------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                              |
-+-------------+--------------------------------------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/DontBeTooManual                     |
++-------------+------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
 
 
 
@@ -8165,7 +8350,7 @@ This is true with any kind of functioncall that returns the same value throughou
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ForWithFunctioncall                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                                           |
+| Themes      | :ref:`Performances`, :ref:`Top10`                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -10918,7 +11103,13 @@ Isset Multiple Arguments
    ?>
 
 
-See also `isset <http://www.php.net/`isset <http://www.php.net/isset>`_>`_.
+See also `Isset <http://www.php.net/`isset <http://www.php.net/isset>`_>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge all isset() calls into one
 
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Php/IssetMultipleArgs                                                         |
@@ -10972,15 +11163,17 @@ Suggestions
 
 * Remove all unnecessary calls to isset()
 
-+-------------+-----------------------------------------+
-| Short name  | Performances/IssetWholeArray            |
-+-------------+-----------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Performances` |
-+-------------+-----------------------------------------+
-| Severity    | Minor                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Instant (5 mins)                        |
-+-------------+-----------------------------------------+
++-------------+--------------------------------------------------------------------------------------------------+
+| Short name  | Performances/IssetWholeArray                                                                     |
++-------------+--------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`Performances`                                                          |
++-------------+--------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                            |
++-------------+--------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                 |
++-------------+--------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`tine20-performances-issetwholearray`, :ref:`expressionengine-performances-issetwholearray` |
++-------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -11293,6 +11486,49 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Examples    | :ref:`dolibarr-structures-logicalmistakes`, :ref:`cleverstyle-structures-logicalmistakes` |
 +-------------+-------------------------------------------------------------------------------------------+
+
+
+
+.. _logical-operators-favorite:
+
+Logical Operators Favorite
+##########################
+
+
+PHP has two sets of logical operators : letters (and, or, xor) and chars (&&, ||, ^). 
+
+The analyzed code has less than 10% of one of the two sets : for consistency reasons, it is recommended to make them all the same. 
+
+Warning : the two sets of operators have different precedence levels. Using and or && is not exactly the same, especially and not only, when assigning the results to a variable. 
+
+.. code-block:: php
+
+   <?php 
+   
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b or $c;
+   $a1 = $b OR $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b and $c;
+   $a1 = $b or $c;
+   $a1 = $b OR $c;
+   $a1 = $b ^ $c;
+   
+   ?>
+
+
+Using and or && are also the target of other analysis.
+
+See also `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_ and `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+--------------------------------+
+| Short name | Php/LetterCharsLogicalFavorite |
++------------+--------------------------------+
+| Themes     | :ref:`Top10`                   |
++------------+--------------------------------+
 
 
 
@@ -12070,6 +12306,55 @@ This syntax is interesting when the object is not reused, and may be discarded
 
 
 
+.. _minus-one-on-error:
+
+Minus One On Error
+##################
+
+
+Some PHP native functions return -1 on error. They also return 1 in case of success, and 0 in case of failure. This leads to confusions.
+
+In case the native function is used as a condition without explicit comparaison, PHP typecase the return value to a boolean. In this case, -1 and 1 are both converted to true, and the condition applies. This means that an error situation is mistaken for a successful event. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Proper check of the return value
+   if (openssl_verify($data, $signature, $public) === 1) {
+       $this->loginAsUser($user);
+   }
+   
+   // if this call fails, it returns -1, and is confused with true
+   if (openssl_verify($data, $signature, $public)) {
+       $this->loginAsUser($user);
+   }
+   ?>
+
+
+This analysis searches for if/then structures, ternary operators dans `while() <http://php.net/manual/en/control-structures.while.php>`_ / do...`while() <http://php.net/manual/en/control-structures.while.php>`_ loops. 
+
+See also `Can you spot the vulnerability? (openssl_verify) <https://twitter.com/ripstech/status/1124325237967994880>`_ and 
+         `Incorrect Signature Verification <https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHPMODULEINFOCARD-70167>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Compare explicitly the return value to 1
+
++-------------+--------------------------+
+| Short name  | Security/MinusOneOnError |
++-------------+--------------------------+
+| Themes      | :ref:`Security`          |
++-------------+--------------------------+
+| Severity    | Critical                 |
++-------------+--------------------------+
+| Time To Fix | Instant (5 mins)         |
++-------------+--------------------------+
+
+
+
 .. _mismatch-type-and-default:
 
 Mismatch Type And Default
@@ -12169,17 +12454,20 @@ Although it is possible to have different default values, it is worth checking w
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Synchronize default values to avoid surprises
+* Drop some of the default values
 
-+-------------+--------------------------------------+
-| Short name  | Functions/MismatchedDefaultArguments |
-+-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
++-------------+--------------------------------------------------+
+| Short name  | Functions/MismatchedDefaultArguments             |
++-------------+--------------------------------------------------+
+| Themes      | :ref:`Analyze`                                   |
++-------------+--------------------------------------------------+
+| Severity    | Minor                                            |
++-------------+--------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                  |
++-------------+--------------------------------------------------+
+| Examples    | :ref:`spip-functions-mismatcheddefaultarguments` |
++-------------+--------------------------------------------------+
 
 
 
@@ -14061,6 +14349,35 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _new-functions-in-php-7.4:
+
+New Functions In PHP 7.4
+########################
+
+
+New functions are added to new PHP version.
+
+The following functions are now native functions in PHP 7.3. It is compulsory to rename any custom function that was created in older versions. One alternative is to move the function to a custom namespace, and update the ``use`` list at the beginning of the script. 
+
+* `mb_str_split <http://php.net/mb_str_split>`_
+* `password_algos <http://php.net/password_algos>`_
+
+Note : At the moment of writing, all links to the manual are not working.
+
++-------------+---------------------------+
+| Short name  | Php/Php74NewFunctions     |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 7.3 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 
@@ -20952,15 +21269,30 @@ Same code, without preparation :
    }
    ?>
 
-+-------------+-------------------------------------+
-| Short name  | Security/ShouldUsePreparedStatement |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`     |
-+-------------+-------------------------------------+
-| Severity    | Major                               |
-+-------------+-------------------------------------+
-| Time To Fix | Slow (1 hour)                       |
-+-------------+-------------------------------------+
+
+See also `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_,
+         `PHP MySQLi Prepared Statements Tutorial to Prevent SQL Injection <https://websitebeaver.com/prepared-statements-in-php-mysqli-to-prevent-sql-injection>`_,
+         `The Best Way to Perform MYSQLI Prepared Statements in PHP <https://developer.hyvor.com/php/prepared-statements>`_.
+         
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use an ORM
+* Change the query to hard code it and make it not injectable
+
++-------------+----------------------------------------------------------------------------------------------------------+
+| Short name  | Security/ShouldUsePreparedStatement                                                                      |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                                                                          |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                            |
++-------------+----------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-security-shouldusepreparedstatement`, :ref:`dolibarr-security-shouldusepreparedstatement` |
++-------------+----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22220,7 +22552,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Performances/SubstrFirst                                                         |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions`                                          |
+| Themes      | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10`                            |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -22537,11 +22869,17 @@ Ternary In Concat
 #################
 
 
-Ternary operator has higher priority than dot '.' for concatenation. This means that : 
+Ternary and coalesce operator have higher priority than dot '.' for concatenation. This means that : 
 
 .. code-block:: php
 
    <?php
+     // print B0CE as expected  
+     print 'B'.$b.'C'. ($b > 1 ? 'D') : 'E';
+   
+     // print E, instead of B0CE
+     print 'B'.$b.'C'. $b > 1 ? 'D' : 'E';
+   
      print 'B'.$b.'C'. $b > 1 ? 'D' : 'E';
    ?>
 
@@ -22550,15 +22888,27 @@ prints actually 'E', instead of the awaited 'B0CE'.
 
 To be safe, always add parenthesis when using ternary operator with concatenation.
 
-+-------------+----------------------------+
-| Short name  | Structures/TernaryInConcat |
-+-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Critical                   |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
+See also `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use parenthesis 
+* Avoid ternaries and coalesace operators inside a string
+
++-------------+--------------------------------------------+
+| Short name  | Structures/TernaryInConcat                 |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Analyze`                             |
++-------------+--------------------------------------------+
+| Severity    | Critical                                   |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
+| Examples    | :ref:`teampass-structures-ternaryinconcat` |
++-------------+--------------------------------------------+
 
 
 
@@ -22863,15 +23213,17 @@ See also `Why is subclassing too much bad (and hence why should we use prototype
 
 
 
-+-------------+-------------------------+
-| Short name  | Classes/TooManyChildren |
-+-------------+-------------------------+
-| Themes      | :ref:`Suggestions`      |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Classes/TooManyChildren                                                          |
++-------------+----------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                               |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                    |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`typo3-classes-toomanychildren`, :ref:`woocommerce-classes-toomanychildren` |
++-------------+----------------------------------------------------------------------------------+
 
 
 
@@ -23222,6 +23574,29 @@ See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.ne
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _traits/traitnotfound:
+
+Traits/TraitNotFound
+####################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------------------+
+| Short name  | Traits/TraitNotFound                   |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
 
 
 
@@ -25021,15 +25396,17 @@ Suggestions
 * Use the function in the code
 * Remove the functions from the code
 
-+-------------+------------------------------+
-| Short name  | Functions/UnusedFunctions    |
-+-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
++-------------+---------------------------------------------------------------------------------------+
+| Short name  | Functions/UnusedFunctions                                                             |
++-------------+---------------------------------------------------------------------------------------+
+| Themes      | :ref:`Dead code <dead-code>`                                                          |
++-------------+---------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                 |
++-------------+---------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                       |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`woocommerce-functions-unusedfunctions`, :ref:`piwigo-functions-unusedfunctions` |
++-------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -25090,15 +25467,23 @@ The reported closures are requesting some local variables, but do not make any u
 
 See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
-+-------------+----------------------------------------------+
-| Short name  | Functions/UnusedInheritedVariable            |
-+-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Major                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------------------------------------------------------------------------------+
+| Short name  | Functions/UnusedInheritedVariable                                                                  |
++-------------+----------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                       |
++-------------+----------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                              |
++-------------+----------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`shopware-functions-unusedinheritedvariable`, :ref:`mautic-functions-unusedinheritedvariable` |
++-------------+----------------------------------------------------------------------------------------------------+
 
 
 
@@ -26204,17 +26589,27 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
    
    ?>
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Php/UseObjectApi                                                                            |
-+-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                       |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                               |
-+-------------+---------------------------------------------------------------------------------------------+
-| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the object API
+
++-------------+---------------------------------------------------------------------------------------------------------+
+| Short name  | Php/UseObjectApi                                                                                        |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                          |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                   |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                           |
++-------------+---------------------------------------------------------------------------------------------------------+
+| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__             |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-php-useobjectapi`, :ref:`prestashop-php-useobjectapi`, :ref:`sugarcrm-php-useobjectapi` |
++-------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -26511,15 +26906,27 @@ This way, constant will be defined at compile time, and not at execution time.
      echo b;
    ?>
 
-+-------------+------------------------------------------------------------------------------+
-| Short name  | Constants/ConstRecommended                                                   |
-+-------------+------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
-+-------------+------------------------------------------------------------------------------+
-| Severity    | Minor                                                                        |
-+-------------+------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                |
-+-------------+------------------------------------------------------------------------------+
+
+See also `Syntax <https://php.net/manual/en/language.constants.syntax.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use const instead of define()
+
++-------------+----------------------------------------------------------------------------------------+
+| Short name  | Constants/ConstRecommended                                                             |
++-------------+----------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`           |
++-------------+----------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                  |
++-------------+----------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                          |
++-------------+----------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpmyadmin-constants-constrecommended`, :ref:`piwigo-constants-constrecommended` |
++-------------+----------------------------------------------------------------------------------------+
 
 
 
@@ -27101,6 +27508,57 @@ Suggestions
 
 
 
+.. _useless-argument:
+
+Useless Argument
+################
+
+
+The argument is always used with the same value. This value could be hard coded in the method, and save one argument slot.
+
+There is no indication that this argument will be used with other values. It may be a development artifact, that survived without cleaning.
+
+.. code-block:: php
+
+   <?php
+   
+   // All foo2 arguments are used with different values
+   function foo2($a, $b) {}
+   foo2(1, 2);
+   foo2(2, 2);
+   foo2(3, 3);
+   
+   // The second argument of foo is always used with 2
+   function foo($a, $b) {}
+   foo(1, 2);
+   foo(2, 2);
+   foo(3, 2);
+   
+   ?>
+
+
+Methods with less than 3 calls are not considered here, to avoid reporting methods used once.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the argument and hard code its value inside the method
+* Add calls to the method, with various arguments
+
++-------------+---------------------------+
+| Short name  | Functions/UselessArgument |
++-------------+---------------------------+
+| Themes      | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _useless-brackets:
 
 Useless Brackets
@@ -27382,7 +27840,7 @@ There is no need to declare them individually final.
    ?>
 
 
-See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
+See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UselessFinal                                                                            |
@@ -28595,15 +29053,27 @@ The magic constant `__DIR__ <http://php.net/manual/en/language.constants.predefi
    
    ?>
 
-+-------------+-------------------------+
-| Short name  | Structures/DirThenSlash |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Instant (5 mins)        |
-+-------------+-------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a check on __DIR__, as it may be '/' when run at the root of the server
+* Add a '/' at the beginning of the path after __DIR__.
+* Add a call to realpath() or file_exists(), before accessing the file.
+
++-------------+-------------------------------------+
+| Short name  | Structures/DirThenSlash             |
++-------------+-------------------------------------+
+| Themes      | :ref:`Analyze`                      |
++-------------+-------------------------------------+
+| Severity    | Major                               |
++-------------+-------------------------------------+
+| Time To Fix | Instant (5 mins)                    |
++-------------+-------------------------------------+
+| Examples    | :ref:`traq-structures-dirthenslash` |
++-------------+-------------------------------------+
 
 
 
@@ -29388,15 +29858,15 @@ Suggestions
 
 *
 
-+-------------+-------------------------+
-| Short name  | Performances/CsvInLoops |
-+-------------+-------------------------+
-| Themes      | :ref:`Performances`     |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
++-------------+-----------------------------------+
+| Short name  | Performances/CsvInLoops           |
++-------------+-----------------------------------+
+| Themes      | :ref:`Performances`, :ref:`Top10` |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
 
 
 

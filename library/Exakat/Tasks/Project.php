@@ -133,7 +133,7 @@ class Project extends Tasks {
         
         $themesToRun = array($this->config->project_themes);
         $reportToRun = array();
-        
+
         foreach($this->reports as $format) {
             $reportClass = "\Exakat\Reports\\$format";
             if (!class_exists($reportClass)) {
@@ -148,6 +148,7 @@ class Project extends Tasks {
         }
 
         $themesToRun = array_merge(...$themesToRun);
+
         if (empty($themesToRun)) {
             // Default values
             $themesToRun = $this->themesToRun;
@@ -413,7 +414,7 @@ class Project extends Tasks {
         shuffle($names);
         shuffle($adjectives);
         
-        $x = mt_rand(0, PHP_INT_MAX);
+        $x = random_int(0, PHP_INT_MAX);
         
         $name = $names[ $x % (count($names) - 1)];
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];

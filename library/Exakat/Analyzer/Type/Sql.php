@@ -30,7 +30,7 @@ class Sql extends Analyzer {
         $regex = '^(?i)(<<<\\\\w+)?(<<<\'\\\\w+\')?[\\"\']?\\\\s*(' . implode('|', $sqlKeywords) . ') ';
         
         // SQL in a literal 'SELECT col FROM table';
-        $this->atomIs(array('String', 'Heredoc', 'Concatenation'))
+        $this->atomIs(self::$STRINGS_ALL)
              ->hasNoIn('CONCAT')
              ->regexIs('fullcode', $regex);
         $this->prepareQuery();

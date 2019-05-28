@@ -36,12 +36,13 @@ class AtomIs extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } elseif ($flags === Analyzer::WITH_CONSTANTS &&
-                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
+                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Real'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
           __.hasLabel(within(["Variable"])).in("DEFINITION").out("DEFINITION").in("LEFT").hasLabel("Assignation").out("RIGHT"),
+          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").out("ARGUMENT").filter{ rank == it.get().value('rank');},
           __.filter{true})
 .hasLabel(within(***))
 GREMLIN;

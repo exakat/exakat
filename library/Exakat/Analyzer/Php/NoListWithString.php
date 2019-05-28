@@ -34,7 +34,7 @@ class NoListWithString extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->atomIs(self::$STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
 
@@ -47,13 +47,13 @@ class NoListWithString extends Analyzer {
              ->inIs('RIGHT')
              ->previousSibling()
              ->atomIs('Assignation')
-             ->codeIs(array('=', '.='))
+             ->codeIs(array('=', '.='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('LEFT')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'name')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->atomIs(self::$STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
     }

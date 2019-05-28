@@ -38,19 +38,19 @@ abstract class Reports {
     
     private static $docs = null;
 
-    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor',
-                                          'Text', 'Xml', 'Uml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
+    public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor', 'Top10',
+                                          'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml',
                                           'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
-                                          'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable',
+                                          'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity',
                                           //'DailyTodo',
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                                    '"Dead code"', 'Security', 'Analyze', 'Inventories');
+                                    'Dead code', 'Security', 'Analyze', 'Inventories');
 
     private $count = 0;
 
@@ -61,7 +61,7 @@ abstract class Reports {
     protected $datastore = null;
     protected $themes    = null;
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
@@ -81,7 +81,7 @@ abstract class Reports {
         }
         
         if (self::$docs === null) {
-            self::$docs = new Docs($this->config->dir_root, $this->config->ext);
+            self::$docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         }
     }
 
@@ -92,7 +92,7 @@ abstract class Reports {
         return "\\Exakat\\Reports\\$report";
     }
     
-    public function generate($folder, $name) {
+    public function generate($folder, $name = null) {
         if (empty($name)) {
             // FILE_FILENAME is defined in the children class
             $name = $this::FILE_FILENAME;
@@ -118,8 +118,10 @@ abstract class Reports {
         if ($name === self::STDOUT) {
             if (!empty($final)) {
                 echo $final;
+                print "\n EXIT 1 $name \n";
                 exit(1);
             } else {
+                print "\n EXIT 0 \n";
                 exit(0);
             }
         } elseif ($name === self::INLINE) {

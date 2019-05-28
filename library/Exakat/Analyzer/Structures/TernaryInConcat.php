@@ -26,10 +26,10 @@ use Exakat\Analyzer\Analyzer;
 class TernaryInConcat extends Analyzer {
     public function analyze() {
         // 'a'. 'b'.$c > 1 ? 'd' : 'e'; Ternary has priority
-        $this->atomIs('Ternary')
-             ->outIs('CONDITION')
-             ->atomIs('Comparison')
-             ->outIs('LEFT')
+        $this->atomIs(array('Ternary', 'Coalesce'))
+             ->outIs(array('CONDITION', 'LEFT'))
+             //->atomIs('Comparison')// Skip
+             ->outIsIE('LEFT')
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();

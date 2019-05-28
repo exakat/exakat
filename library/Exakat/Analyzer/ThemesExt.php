@@ -61,7 +61,7 @@ class ThemesExt {
         return array_merge(...$return);
     }
 
-    public function getThemeForAnalyzer($analyzer) {
+    public function getThemeForAnalyzer($analyzer = null) {
         if (empty($this->themes)) {
             return array();
         }

@@ -318,7 +318,9 @@ class Ambassador extends Reports {
                 $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
-            $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
+            if (isset($description['name'])) {
+                $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
+            }
 
             $versionCompatibility = $description['phpversion'];
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
@@ -338,7 +340,7 @@ class Ambassador extends Reports {
             $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
             $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
-            $clearphp = $description['clearphp'];
+            $clearphp = $description['clearphp'] ?? '';
             if(!empty($clearphp)){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/' . $clearphp . '.md">' . $clearphp . '</a>, in the clearPHP reference.</p>';
             }
@@ -352,12 +354,12 @@ class Ambassador extends Reports {
         $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
-    private function generateSecurity() {
+    protected function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
     }
 
-    private function generateDeadCode() {
+    protected function generateDeadCode() {
         $this->generateIssuesEngine('deadcode_issues',
                                     $this->getIssuesFaceted('Dead code') );
     }
@@ -367,7 +369,7 @@ class Ambassador extends Reports {
                                     $this->getIssuesFaceted('Suggestions') );
     }
 
-    private function generatePerformances() {
+    protected function generatePerformances() {
         $this->generateIssuesEngine('performances_issues',
                                     $this->getIssuesFaceted('Performances') );
     }
@@ -1416,7 +1418,11 @@ JAVASCRIPT;
         // analyzer
         list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
         $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
-        $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
+        if ($totalAnalyzerUsed > 0) {
+            $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
+        } else {
+            $percentAnalyzer = 100;
+        }
         
         $audit_date = date('r', strtotime('now'));
 
@@ -2297,7 +2303,7 @@ SQL;
     protected function generateCompatibilityEstimate() {
         $html = $this->getBasedPage('empty');
         
-        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4');
+        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
@@ -2388,13 +2394,15 @@ SQL;
                             'Php/ListWithReference'                 => '7.3+',
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
+                            'Php/UnpackingInsideArrays'             => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
-        $colors = array('59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
+        $colors = array('59BF00', '59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
+        // This must be the same lenght than the list of versions
 
         $list = makeList(array_keys($analyzers));
         $query = <<<SQL
@@ -2409,11 +2417,7 @@ SQL;
         $data = array();
         $data2 = array();
         foreach($analyzers as $analyzer => $analyzerVersion) {
-            if (substr($analyzerVersion, -1) === '+') {
-                $coeff = 1;
-            } else {
-                $coeff = -1;
-            }
+            $coeff = $analyzerVersion[-1] === '+' ? 1 : -1;
 
             foreach($versions as $version) {
                 if (!isset($counts[$analyzer])) {
@@ -2457,20 +2461,25 @@ SQL;
             }
         }
         
-        $table = '';
+        $table = array();
         $titles = '<tr><th>Version</th><th>Name</th><th>' . implode('</th><th>', array_keys(array_values($data2)[0]) ) . '</th></tr>';
-            $table .= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
+        $table []= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
-            if ($analyzer === null) { continue; }
-            
+            if ($analyzer === null) {
+                continue;
+            }
+
             $description = $this->getDocs($name, 'description');
 
             $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
-            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
+            $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
+            $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
         }
+        
+        $table = implode('', $table);
 
         $theTable = <<<HTML
         					<table class="table table-striped">
@@ -2778,16 +2787,20 @@ HTML;
     }
 
     private function generateGlobals() {
-// pen + glasses
-//            return '<i class="fa fa-cogs" style="color: orange"></i>';
+        $res = $this->sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="globalVariables"');
+        $name = $res->fetchArray(\SQLITE3_ASSOC);
+
+        if (empty($name)) {
+            return;
+        }
 
         $res = $this->sqlite->query('SELECT * FROM globalVariables');
-        // global, implicit, GLOBALS
 
         $tree = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $row['variable']);
-            if (substr($row['variable'], 0, 8) === '$GLOBALS') {
+            $variable = trim($row['variable'], '{}&@');
+            $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $variable);
+            if (substr($variable, 0, 8) === '$GLOBALS') {
                 $origin = '$GLOBALS';
             } else {
                 $origin = 'global';
@@ -2795,12 +2808,12 @@ HTML;
             
             if (isset($tree[$name])) {
                 ++$tree[$name]['count'];
-                $tree[$name]['file'][]       = $row['file'];
+                $tree[$name]['file'][]       = $row['file'] . ':' . $row['line'];
                 $tree[$name]['type'][]       = $row['type'];
                 $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' );
             } else {
                 $tree[$name]['count']      = 1;
-                $tree[$name]['file']       = array($row['file']);
+                $tree[$name]['file']       = array($row['file'] . ':' . $row['line']        );
                 $tree[$name]['type']       = array($row['type']);
                 $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' ));
             }
@@ -4739,7 +4752,7 @@ HTML;
         return $cveHtml;
     }
 
-    private function Compatibility($count, $analyzer) {
+    protected function Compatibility($count, $analyzer) {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {

@@ -49,7 +49,6 @@ class Docs {
 
     private $analyzers = null;
     
-    private $extensionList = array();
     private $ini_list      = array();
     private $report_list   = array();
     private $docs_list     = array();
@@ -311,7 +310,7 @@ class Docs {
             if ($folder === 'Reports' || $folder == 'DSL') { 
                 continue; 
             }
-            $analyzer = substr(basename($file), 0, -4);
+            $analyzer = basename($file, '.ini');
             $name = "$folder/$analyzer";
             
             $res = $this->analyzers->query(<<<SQL
@@ -977,8 +976,8 @@ GLOSSARY;
         foreach($files as $file) {
             if (strpos( $file, '.auto.') !== false) { continue; }
             $name = basename($file, '.json');
-            $atoms[$name] = array_merge((array) json_decode(file_get_contents($file)),
-                                        (array) json_decode(file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]'))
+            $atoms[$name] = array_merge(json_decode(file_get_contents($file), \JSON_OBJECT_AS_ARRAY),
+                                        json_decode(file_get_contents(str_replace('.json', '.auto.json', $file) ?: '[]'), \JSON_OBJECT_AS_ARRAY)
                                         );
         }
         

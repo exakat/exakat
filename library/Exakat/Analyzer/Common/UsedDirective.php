@@ -47,24 +47,24 @@ class UsedDirective extends Analyzer {
         $this->prepareQuery();
         
         $functions = array();
-        if (in_array('include_path', $this->directives)) {
+        if (in_array('include_path', $this->directives, STRICT_COMPARISON)) {
             $functions[] = array('\\set_include_path',
                                  '\\get_include_path',
                                  '\\restore_include_path',
                                 );
         }
-        if (in_array('magic_quotes_gpc', $this->directives)) {
+        if (in_array('magic_quotes_gpc', $this->directives, STRICT_COMPARISON)) {
             $functions[] = array('\\magic_quotes_gpc',
                                 );
         }
 
-        if (in_array('magic_quotes_runtime', $this->directives)) {
+        if (in_array('magic_quotes_runtime', $this->directives, STRICT_COMPARISON)) {
             $functions[] = array('\\get_magic_quotes_runtime',
                                  '\\set_magic_quotes_runtime',
                                 );
         }
 
-        if (in_array('max_execution_time', $this->directives)) {
+        if (in_array('max_execution_time', $this->directives, STRICT_COMPARISON)) {
             $functions[] = array('\\set_time_limit',
                                 );
         }

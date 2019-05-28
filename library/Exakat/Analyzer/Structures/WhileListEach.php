@@ -36,8 +36,7 @@ class WhileListEach extends Analyzer {
              ->atomIs('List')
              ->back('assignation')
              ->outIs('RIGHT')
-             ->atomIs('Functioncall')
-             ->codeIs('each')
+             ->functioncallIs('\\each')
              ->back('first');
         $this->prepareQuery();
     }

@@ -35,6 +35,10 @@ class ConstantUsage extends Analyzer {
              ->fullnspathIs($constants, Analyzer::CASE_SENSITIVE);
         $this->prepareQuery();
     }
+    
+    public function setConstants(array $constants) {
+        $this->constants = $constants;
+    }
 }
 
 ?>

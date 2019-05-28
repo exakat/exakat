@@ -122,6 +122,17 @@ class AutoloadDev {
 
         return $return;
     }
+
+    public function loadData($path) {
+        $fullPath = "{$this->path}/$path";
+
+        if (file_exists($fullPath)) {
+            return file_get_contents($fullPath);
+        } else {
+            return null;
+        }
+    }
+
 }
 
 ?>

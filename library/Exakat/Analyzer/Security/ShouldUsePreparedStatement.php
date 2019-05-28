@@ -50,33 +50,9 @@ class ShouldUsePreparedStatement extends Analyzer {
         // dynamic type in the code : mysql_query($res, "select ".$a." from table");
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Concatenation')
-             ->back('first');
-        $this->prepareQuery();
-
-        // dynamic type in the code : mysql_query($res, "select $a from table");
-        $this->atomFunctionIs($functions)
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs('String')
-             ->hasOut('CONCAT')
-             ->back('first');
-        $this->prepareQuery();
-
-        // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
-        $this->atomFunctionIs($functions)
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Heredoc')
-             ->is('heredoc', true)
-             ->hasOut('CONCAT')
-             ->back('first');
-        $this->prepareQuery();
-
-        // method call $someObject->query('select '. 'b') (probably too wide...)
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->codeIs('query')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('Concatenation')
+             ->atomIs(array('Concatenation', 'String', 'Heredoc'))
+             ->outWithRank('CONCAT', 0)
+             ->regexIsNot('noDelimiter', '(?i)^\\\\s*(FLUSH|ALTER|CREATE|SHOW|DROP|GRANT)')
              ->back('first');
         $this->prepareQuery();
 
@@ -85,19 +61,9 @@ class ShouldUsePreparedStatement extends Analyzer {
              ->outIs('METHOD')
              ->codeIs('query')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->hasOut('CONCAT')
-             ->back('first');
-        $this->prepareQuery();
-
-        // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->codeIs('query')
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Heredoc')
-             ->is('heredoc', true)
-             ->hasOut('CONCAT')
+             ->atomIs(array('Concatenation', 'String', 'Heredoc'))
+             ->outWithRank('CONCAT', 0)
+             ->regexIsNot('noDelimiter', '(?i)^\\\\s*(FLUSH|ALTER|CREATE|SHOW|DROP|GRANT)')
              ->back('first');
         $this->prepareQuery();
     }

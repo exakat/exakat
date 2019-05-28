@@ -32,7 +32,7 @@ class All extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'allExakat';
 
-    public function generate($folder, $name) {
+    public function generate($folder, $name = null) {
         $omit = array('Ambassadornomenu',
                       'Facetedjson',
                       'Onepagejson',
@@ -44,13 +44,27 @@ class All extends Reports {
             $reportClass = Reports::getReportClass($reportName);
             
             $report = new $reportClass($this->config);
-            $report->generate($folder, $name);
+            $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME); 
         }
     }
 
     public function dependsOnAnalysis() {
-        return array('All',
-                     );
+        $reportToRun = array(array('All'));
+
+        foreach(Reports::$FORMATS as $format) {
+            $reportClass = "\Exakat\Reports\\$format";
+            if (!class_exists($reportClass)) {
+                continue;
+            }
+            $reportToRun[] = $format;
+            $report = new $reportClass($this->config);
+            
+            $themesToRun[] = $report->dependsOnAnalysis();
+            unset($report);
+            gc_collect_cycles();
+        }
+        
+        return array_unique(array_merge(...$themesToRun));
     }
 }
 

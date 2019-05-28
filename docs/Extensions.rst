@@ -655,7 +655,7 @@ This is the Skeleton extension for Exakat.
 Shopware analysis
 __________________________________________________
 
-This extension includes 6 analyzers.
+This extension includes 9 analyzers.
 
 * Shopware 5.0 Compatibility (Shopware/Shopware_5_0)
 * Shopware 5.1 Compatibility (Shopware/Shopware_5_1)
@@ -663,6 +663,9 @@ This extension includes 6 analyzers.
 * Shopware 5.3 Compatibility (Shopware/Shopware_5_3)
 * Shopware 5.4 Compatibility (Shopware/Shopware_5_4)
 * Shopware 5.5 Compatibility (Shopware/Shopware_5_5)
+* Shopware Constant Usage (Shopware/ShopwareConstantUsage)
+* Shopware Function Usage (Shopware/ShopwareFunctionsUsage)
+* Shopware Usage (Shopware/ShopwareUsage)
 
 
 Shopware rulesets
@@ -674,7 +677,7 @@ This extension includes one ruleset : Shopware.
 Shopware reports
 __________________________________________________
 
-This extension includes no specific report. Use generic reports, like Text to access the results.
+This extension includes one report : Shopware.
 
 
 

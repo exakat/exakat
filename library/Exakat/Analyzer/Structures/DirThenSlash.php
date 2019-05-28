@@ -32,7 +32,7 @@ class DirThenSlash extends Analyzer {
              ->atomIs('Magicconstant')
              ->is('fullcode', '__DIR__')
              ->nextSibling('CONCAT')
-             ->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[^/]')
              ->back('first');

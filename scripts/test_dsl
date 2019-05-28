@@ -27,8 +27,11 @@ use Exakat\Datastore;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-include_once(dirname(__DIR__).'/library/Autoload.php');
-spl_autoload_register('Autoload::autoload_library');
+include_once(dirname(__DIR__).'/library/Exakat/Autoload/Autoload.php');
+include_once(dirname(__DIR__).'/library/helpers.php');
+require __DIR__.'/../vendor/autoload.php';
+
+spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
 
 $config = new Config(array());
 
@@ -59,9 +62,13 @@ $datastore = new Datastore($config);
 // For normal method calls, in traits
 $query = new Query(0, $project, 'test_dsl', null, $datastore);
 $b = hrtime(true);
+
 $query->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
-      ->returnCount();
+//              ->returnCount();
+              ;
+              
 $query->prepareRawQuery();
+
 $e = hrtime(true);
 print 'Prepare : '.number_format(($e - $b) / 1000000, 2)."ms\n";
 

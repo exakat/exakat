@@ -163,8 +163,6 @@ class CreateMagicProperty extends LoadFinal {
 
         $count = $countThis + $countNew + $countTypehint;
         display("Created $count definitions to magic methods __set");
-        
-        
     }
 }
 

@@ -48,7 +48,7 @@ class Diplomat extends Ambassador {
 
     private $compatibilities = array();
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         parent::__construct($config);
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {

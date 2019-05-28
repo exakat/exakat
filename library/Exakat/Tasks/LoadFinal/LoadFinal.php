@@ -465,8 +465,7 @@ GREMLIN;
     private function setConstantDefinition() {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Identifier", "Nsname")
-     .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").coalesce( __.hasLabel("Constant").out("VALUE"),
-                                                                             __.hasLabel("Defineconstant").out("VALUE"))
+     .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").out("VALUE")
      .sideEffect{ 
         if ("intval" in it.get().keys()) {
             constante.property("intval", it.get().value("intval")); 

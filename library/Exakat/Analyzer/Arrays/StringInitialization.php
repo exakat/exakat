@@ -30,7 +30,7 @@ class StringInitialization extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'))
+             ->atomIs(self::$STRINGS_ALL)
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')
@@ -42,12 +42,12 @@ class StringInitialization extends Analyzer {
 
         // const C = ''; $a = C; $a[1] = 3;
         $this->atomIs('Assignation')
-             ->codeIs('=')
+             ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
              ->atomIs(array('Nsname', 'Identifier'))
              ->inIs('DEFINITION')
              ->outIs('VALUE')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'))
+             ->atomIs(self::$STRINGS_ALL)
              ->back('first')
              ->outIs('LEFT')
              ->atomIs('Variable')

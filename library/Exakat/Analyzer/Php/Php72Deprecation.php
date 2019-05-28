@@ -51,13 +51,13 @@ class Php72Deprecation extends Analyzer {
         // Usage of \\assert with string argument
         $this->atomFunctionIs('\\assert')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->atomIs(self::$STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
         
         // usage of $php_errormsg
         $this->atomIs('Phpvariable')
-             ->codeIs('$php_errormsg', self::CASE_SENSITIVE);
+             ->codeIs('$php_errormsg', self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         // usage of (unset)

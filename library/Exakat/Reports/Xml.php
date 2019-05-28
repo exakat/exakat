@@ -133,7 +133,8 @@ class Xml extends Reports {
                              'source'   => $row['analyzer'],
                              'severity' => $severityCache[$row['analyzer']],
                              'fixable'  => 'fixable',
-                             'message'  => $titleCache[$row['analyzer']]);
+                             'message'  => $titleCache[$row['analyzer']],
+                             'fullcode' => $row['fullcode']);
 
             if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
                 $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());
@@ -150,7 +151,7 @@ class Xml extends Reports {
         $return = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '<phpcs version="' . Exakat::VERSION . '">' . PHP_EOL . $this->cachedData . '</phpcs>' . PHP_EOL;
 
         if ($name === self::STDOUT) {
-            echo $return;
+            return $return;
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $return);
         }

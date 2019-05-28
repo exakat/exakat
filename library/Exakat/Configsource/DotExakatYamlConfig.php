@@ -40,10 +40,10 @@ class DotExakatYamlConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $this->config = Yaml::parseFIle($this->dotExakatYaml);
+        $tmp_config = Yaml::parseFile($this->dotExakatYaml);
 
         // removing empty values in the INI file
-        foreach($this->config as &$value) {
+        foreach($tmp_config as &$value) {
             if (is_array($value) && empty($value[0])) {
                 unset($value[0]);
             }
@@ -68,14 +68,37 @@ class DotExakatYamlConfig extends Config {
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Text'),
+                           'ignore_dirs'        => array('/assets',
+                                                         '/cache',
+                                                         '/css',
+                                                         '/data',
+                                                         '/doc',
+                                                         '/docker',
+                                                         '/docs',
+                                                         '/example',
+                                                         '/examples',
+                                                         '/images',
+                                                         '/js',
+                                                         '/lang',
+                                                         '/spec',
+                                                         '/sql',
+                                                         '/test',
+                                                         '/tests',
+                                                         '/tmp',
+                                                         '/version',
+                                                         '/var',
+                                                        ),
+                           'include_dirs'        => array(),
+                           'rulesets'            => array(),
+                           'project'             => '',
+                           'project_name'        => '',
                         );
 
         $this->config['inside_code'] = Configuration::INSIDE_CODE;
 
-        foreach($defaults as $name => $value) {
-            if (empty($this->config[$name])) {
-                $this->config[$name] = $value;
-            }
+        foreach($defaults as $name => $default_value) {
+            $this->config[$name] = empty($tmp_config[$name]) ? $default_value : $tmp_config[$name];
+            unset($tmp_config[$name]);
         }
 
         if (is_string($this->config['other_php_versions'])) {
@@ -111,8 +134,12 @@ class DotExakatYamlConfig extends Config {
         }
         
         if (isset($this->config['rulesets'])) {
-            $this->themas = $this->config['rulesets'];
+            $this->themas = array_map('array_values', $this->config['rulesets']);
             unset($this->config['rulesets']);
+        }
+
+        if (!empty($tmp_config)) {
+            display('Ignoring '.count($tmp_config)." unkown directives : ".implode(', ', array_keys($tmp_config)));
         }
 
         return '.exakat.yml';

@@ -45,9 +45,6 @@ class Weekly extends Ambassador {
     protected $tmpName           = '';
     private $globalGrade  = 0;
 
-    private $timesToFix        = null;
-    private $severities        = null;
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -77,55 +74,6 @@ class Weekly extends Ambassador {
     private $usedAnalyzer = array();
     private $weeks        = array();
     private $current      = '';
-
-    public function __construct($config) {
-        parent::__construct($config);
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->severities        = $this->themes->getSeverities();
-        
-        $this->current = (new \Datetime('now'))->format('Y-W');
-        for ($i = 0; $i < 5; ++$i) {
-            $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
-            
-            $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
-            $this->weeks[$date] = json_decode($json);
-            
-            if (json_last_error() != '') {
-                print "Error : could not read week details for $date\n";
-            }
-        }
-
-    // special case for 'Future read'
-        $date = date('Y-W', strtotime(date('Y') . 'W' . (date('W') + 1) . '1'));
-        $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
-        $this->weeks[$date] = json_decode($json);
-        
-        if (json_last_error() != '') {
-            print "Error : could not read week details for $date\n";
-        }
-        
-        $all = array_merge(...array_column($this->weeks, 'analysis'));
-        $this->results = new Results($this->sqlite, $all);
-        $this->results->load();
-
-        $this->resultsCounts = array_fill_keys($all, 0);
-        foreach($this->results->toArray() as $result) {
-            ++$this->resultsCounts[$result['analyzer']];
-        }
-        
-        $levels = array(
-            'Critical' => 5,
-            'Major'    => 4,
-            'Minor'    => 3,
-            'Note'     => 2,
-            'None'     => 1,
-        );
-
-        foreach($all as $analyzer) {
-            $severity = $this->getDocs($analyzer, 'severity');
-            $this->grading[$analyzer] = $levels[$severity];
-        }
-    }
 
     protected function getBasedPage($file) {
         static $baseHTML;
@@ -186,6 +134,50 @@ MENU;
         
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
+
+        
+        $this->current = (new \Datetime('now'))->format('Y-W');
+        for ($i = 0; $i < 5; ++$i) {
+            $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
+            
+            $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+            $this->weeks[$date] = json_decode($json);
+            
+            if (json_last_error() != '') {
+                print "Error : could not read week details for $date\n";
+            }
+        }
+
+    // special case for 'Future read'
+        $date = date('Y-W', strtotime(date('Y') . 'W' . (date('W') + 1) . '1'));
+        $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+        $this->weeks[$date] = json_decode($json);
+        
+        if (json_last_error() != '') {
+            print "Error : could not read week details for $date\n";
+        }
+        
+        $all = array_merge(...array_column($this->weeks, 'analysis'));
+        $this->results = new Results($this->sqlite, $all);
+        $this->results->load();
+
+        $this->resultsCounts = array_fill_keys($all, 0);
+        foreach($this->results->toArray() as $result) {
+            ++$this->resultsCounts[$result['analyzer']];
+        }
+        
+        $levels = array(
+            'Critical' => 5,
+            'Major'    => 4,
+            'Minor'    => 3,
+            'Note'     => 2,
+            'None'     => 1,
+        );
+
+        foreach($all as $analyzer) {
+            $severity = $this->getDocs($analyzer, 'severity');
+            $this->grading[$analyzer] = $levels[$severity];
+        }
 
         $this->projectPath = $folder;
 

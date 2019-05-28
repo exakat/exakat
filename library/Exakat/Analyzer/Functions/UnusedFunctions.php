@@ -47,8 +47,6 @@ class UnusedFunctions extends Analyzer {
     }
     
     private function linearlyUnusedFunction() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
        // level 2 of unused : only used by unused functions
        // function foo() {} // no foo();
        // This depends on the order of the functions in the base!!!
@@ -58,20 +56,18 @@ class UnusedFunctions extends Analyzer {
             ->analyzerIsNot('self')
             // Check for recursive
             // Check for already dead calling function
-            ->raw(<<<GREMLIN
-not(
-    where(
-        __.out("DEFINITION")
-          .repeat( __.not(hasLabel("Function", "Closure")).in({$this->linksDown}))
-          .emit().times($MAX_LOOPING).hasLabel("Function", "Closure", "File")
-          .coalesce( __.hasLabel("File", "Closure"), 
-                     __.hasLabel("Function").filter{ it.get().value("fullnspath") != fnp;}
-                                            .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
-          )
-    )
-)
+            ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->goToInstruction(array('Function', 'Closure', 'File'))
+                     ->raw(<<<'GREMLIN'
+coalesce( __.hasLabel("File", "Closure"), 
+          __.hasLabel("Function").filter{ it.get().value("fullnspath") != fnp;}
+                                 .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions"))))
+
 GREMLIN
-);
+)
+        );
         $this->prepareQuery();
     }
 }

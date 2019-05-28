@@ -122,6 +122,8 @@ abstract class Analyzer {
     public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
+    public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String');
+
     public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
@@ -157,7 +159,7 @@ abstract class Analyzer {
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $description = new Docs($config->dir_root, $config->ext);
+            $description = new Docs($config->dir_root, $config->ext, $config->dev);
             $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
@@ -407,12 +409,12 @@ GREMLIN;
         }
 
         // version and above
-        if ((substr($this->phpVersion, -1) === '+') && version_compare($version, $this->phpVersion) >= 0) {
+        if (($this->phpVersion[-1] === '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) < 0) {
+        if (($this->phpVersion[-1] === '-') && version_compare($version, $this->phpVersion) < 0) {
             return true;
         }
 
@@ -1095,13 +1097,9 @@ GREMLIN;
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function not($filter) {
+    public function not(self $filter) {
         // use func_get_args here
-        if ($filter instanceof self) {
-            $filterClean = $filter->prepareSide();
-        } else {
-            assert(false, 'Wrong type for not : ' . gettype($filter));
-        }
+        $filterClean = $filter->prepareSide();
         $this->query->not($filterClean, array());
 
         return $this;
