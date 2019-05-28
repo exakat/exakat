@@ -131,13 +131,13 @@ class Extension extends Tasks {
     private function list() {
         $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
         if (empty($json)) {
-            print "Coudln't reach the remote server.\n";
+            print "Couldn't reach the remote server.\n";
             return;
         }
     
         $list = json_decode($json);
         if (empty($list)) {
-            print "Coudln't read the remote list.\n";
+            print "Couldn't read the remote list.\n";
             return;
         }
 
@@ -177,13 +177,13 @@ class Extension extends Tasks {
     private function fetchExtensionList() {
         $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
         if (empty($json)) {
-            print "Coudln't reach the remote server.\n";
+            print "Couldn't reach the remote server.\n";
             return;
         }
     
         $list = json_decode($json);
         if (empty($list)) {
-            print "Coudln't read the remote list.\n";
+            print "Couldn't read the remote list.\n";
             return;
         }
         
