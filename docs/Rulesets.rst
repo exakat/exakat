@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
-.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
+.. comment: Generation date : Tue, 28 May 2019 16:36:07 +0000
+.. comment: Generation hash : 08a6a327a53b29390ae78181e0daea58a7585c40
 
 
 .. _analyze:
@@ -124,7 +124,7 @@ Total : 357 analysis
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concat And Addition <concat-and-addition>`
-* :ref:`Concat Empty <concat-empty>`
+* :ref:`Concat Empty String <concat-empty-string>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
@@ -1114,7 +1114,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 79 analysis
+Total : 80 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1154,6 +1154,7 @@ Total : 79 analysis
 * :ref:`Multiple Usage Of Same Trait <multiple-usage-of-same-trait>`
 * :ref:`Named Regex <named-regex>`
 * :ref:`Never Used Parameter <never-used-parameter>`
+* :ref:`No Need For get_class() <no-need-for-get\_class()>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Substr() One <no-substr()-one>`

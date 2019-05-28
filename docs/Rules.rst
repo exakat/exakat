@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 May 2019 16:53:57 +0000
-.. comment: Generation hash : db0b30993e6730d76d502cacbabbe36cae0d615f
+.. comment: Generation date : Tue, 28 May 2019 16:36:07 +0000
+.. comment: Generation hash : 08a6a327a53b29390ae78181e0daea58a7585c40
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4141,10 +4141,10 @@ Suggestions
 
 
 
-.. _concat-empty:
+.. _concat-empty-string:
 
-Concat Empty
-############
+Concat Empty String
+###################
 
 
 Using a concatenation to make a value a string should be replaced with a type cast.
@@ -15223,6 +15223,42 @@ See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/obje
 +-------------+--------------------------+
 | Time To Fix | Quick (30 mins)          |
 +-------------+--------------------------+
+
+
+
+.. _no-need-for-get\_class():
+
+No Need For get_class()
+#######################
+
+
+There is no need to call `get_class() <http://www.php.net/get_class>`_ to build a static call. The argument of `get_class() <http://www.php.net/get_class>`_ may be used directly. 
+
+.. code-block:: php
+
+   <?php
+   
+   
+   ?>
+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Structures/NoNeedGetClass |
++-------------+---------------------------+
+| Themes      | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 

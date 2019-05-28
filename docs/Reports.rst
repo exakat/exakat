@@ -839,11 +839,10 @@ This format is fast, and fitted for machine communications.
 
 ::
 
-        /helpers/translation/class.TranslationFileReader.php:99 No Need For Else
-        /helpers/translation/class.TranslationFileReader.php:99 Avoid Optional Properties
-        /test/ClientLibRegistryTest.php:83 Confusing Names
-        /helpers/form/elements/xhtml/class.Radiobox.php:53 Local Globals
-    
+    /classes/test.php:1002	Php/ShouldUseFunction	Should Use Function	array_values(array_unique(array_merge($classTags, $annotations['tags'])))
+    /classes/test.php:1002	Php/ShouldUseFunction	Should Use Function	array_merge($classTags, $annotations['tags'])
+    /classes/test.php:1005	Structures/NoArrayUnique	Avoid array_unique()	array_unique(array_merge($classTags, $this->testMethods[$testMethodName]['tags']))
+    /classes/test.php:1005	Performances/SlowFunctions	Slow Functions	array_unique(array_merge($classTags, $this->testMethods[$testMethodName]['tags']))
     
 
 Text is a Text report format.
@@ -860,10 +859,8 @@ The Top 10 report is based on the 'Top 10 classic PHP traps' presentation. You c
 .. image:: images/report.top10.png
     :alt: Example of a Top10 report (0)
 
-
-::
-
-    
+.. image:: images/report.top10.png
+    :alt: Example of a Top10 report (1)
 
 Top10 is a HTML report format.
 

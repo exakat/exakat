@@ -548,6 +548,7 @@ Glossary
 
     + `get_class()`
 
+      + :ref:`No Need For get_class() <no-need-for-get\_class()>`
       + :ref:`No get_class() With Null <no-get\_class()-with-null>`
 
     + `glob()`
@@ -1269,7 +1270,7 @@ Glossary
 
     + `strval()`
 
-      + :ref:`Concat Empty <concat-empty>`
+      + :ref:`Concat Empty String <concat-empty-string>`
 
     + `substr()`
 
