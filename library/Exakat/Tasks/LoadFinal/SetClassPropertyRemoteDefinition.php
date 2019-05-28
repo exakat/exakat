@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class SetClassPropertyRemoteDefinition extends LoadFinal {
     public function run() {
-        // For static method calls, in traits
+        // For static properties calls, in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
         $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
@@ -42,7 +42,6 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
-              ->isNot('visibility', 'private')
               ->outIs('PPP')
               ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'property')
@@ -64,7 +63,6 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
-              ->isNot('visibility', 'private')
               ->outIs('PPP')
               ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
