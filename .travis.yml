@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker pulll exakat/exakat:latest
+  - docker pull exakat/exakat:latest
 
 script:
   - docker run -it --rm -w /src -v $(pwd):/src --entrypoint "/usr/src/exakat/exakat.phar" exakat/exakat:latest  project -v
