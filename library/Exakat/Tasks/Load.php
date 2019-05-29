@@ -539,7 +539,7 @@ class Load extends Tasks {
                     continue;
                 }
 
-                $r = $this->processFile($file, $this->config->code_dir);
+                $this->processFile($file, $this->config->code_dir);
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
@@ -819,7 +819,6 @@ class Load extends Tasks {
         if ($this->tokens[$current][0] === $this->phptokens::T_QUOTE) {
             $string = $this->addAtom('String');
             $finalToken = $this->phptokens::T_QUOTE;
-            $openQuote = '"';
             $closeQuote = '"';
             $type = $this->phptokens::T_QUOTE;
 
@@ -1445,7 +1444,6 @@ class Load extends Tasks {
         // Process extends
         $rank = 0;
         $fullcode= array();
-        $extends = $this->id + 1;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EXTENDS) {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             do {
@@ -2068,7 +2066,6 @@ class Load extends Tasks {
         $rank       = -1;
         $default    = 0;
         $typehint   = 0;
-        $reference  = self::NOT_REFERENCE;
         $variadic   = self::NOT_ELLIPSIS;
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
