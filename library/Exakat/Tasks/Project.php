@@ -148,18 +148,28 @@ class Project extends Tasks {
         }
 
         $themesToRun = array_merge(...$themesToRun);
+        $themesToRun = array_unique($themesToRun);
+
+        $availableThemes = $this->themes->listAllThemes();
+
+        $diff = array_diff($themesToRun, $availableThemes);
+        if (!empty($diff)) {
+            display('Ignoring the following unknown themes : ' . implode(', ', $diff) . PHP_EOL);
+        }
+        $themesToRun = array_diff($themesToRun, $diff);
+
+        $reportToRun = array_unique($reportToRun);
 
         if (empty($themesToRun)) {
             // Default values
             $themesToRun = $this->themesToRun;
-        } else {
-            $themesToRun = array_unique($themesToRun);
         }
 
         display("Running project '$project'" . PHP_EOL);
         display('Running the following analysis : ' . implode(', ', $themesToRun));
         display('Producing the following reports : ' . implode(', ', $reportToRun));
-        
+        die();
+
         display('Running files' . PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
@@ -331,14 +341,7 @@ class Project extends Tasks {
         if (!is_array($themes)) {
             $themes = array($themes);
         }
-        
-        $availableThemes = $this->themes->listAllThemes();
 
-        $diff = array_diff($themes, $availableThemes);
-        if (!empty($diff)) {
-            display('Ignoring the following unknown themes : ' . implode(', ', $diff) . PHP_EOL);
-        }
-        
         $themes = array_intersect($availableThemes, $themes);
         display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
 
