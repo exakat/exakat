@@ -9,7 +9,7 @@ ignore_dirs:
   - /human
   - /docs
 file_extensions:
-  - .php
+  - php
 rulesets:
   Exakat :
   - Structures/AddZero
