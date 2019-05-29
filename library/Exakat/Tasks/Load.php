@@ -4083,7 +4083,7 @@ class Load extends Tasks {
         }
 
         $as->code     = $this->tokens[$current][1];
-        $as->fullcode = join(' ', $fullcode);
+        $as->fullcode = implode(' ', $fullcode);
         $as->token    = $this->getToken($this->tokens[$current][0]);
 
         $this->pushExpression($as);

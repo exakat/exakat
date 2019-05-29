@@ -113,7 +113,7 @@ class SplitGraphson extends Loader {
         }
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
-        fputs($fp, stream_get_contents($f));
+        fwrite($fp, stream_get_contents($f));
         fclose($fp);
         fclose($f);
         

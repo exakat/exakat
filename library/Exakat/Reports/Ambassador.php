@@ -2897,7 +2897,7 @@ HTML;
             $theTable = array();
             foreach($groups as $code => $list) {
                 $c = count($list);
-                $htmlList = '<ul><li>' . join('</li><li>', $list) . '</li></ul>';
+                $htmlList = '<ul><li>' . implode('</li><li>', $list) . '</li></ul>';
                 $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
             }
 
@@ -3787,7 +3787,8 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
          visibility, property, value
         FROM cit
         JOIN properties 
@@ -3795,7 +3796,8 @@ SQL
         JOIN namespaces 
             ON cit.namespaceId = namespaces.id
          WHERE type="class"
-        ');
+SQL
+);
         $theClass = '';
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -4485,7 +4487,7 @@ JAVASCRIPT;
             }
 
             $id = str_replace('/', '_', $row['file']);
-            $source = @show_source($sourcePath, true);
+            $source = @highlight_file($sourcePath, true);
             $files .= '<li><a href="#" id="' . $id . '" class="menuitem">' . makeHtml($row['file']) . "</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function ($x) {

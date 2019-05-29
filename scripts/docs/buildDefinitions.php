@@ -239,7 +239,7 @@ class Docs {
         }
         sort($list); // alphabetical sort
         
-        $this->php_error_list = count($list)." PHP error message detailled : \n\n* ".join("\n* ", $list)."\n\n";
+        $this->php_error_list = count($list)." PHP error message detailled : \n\n* ".implode("\n* ", $list)."\n\n";
     }
     
     private function getIniList() {
@@ -438,8 +438,8 @@ SQL
                             'EXAKAT_SITE'            => $this->exakat_site,
                             'EXAKAT_DATE'            => $this->exakat_date,
                             'APPLICATIONS'           => $this->applications,
-                            'ISSUES_EXAMPLES'        => join('', $this->issues_examples),
-                            'PARAMETER_LIST'         => join('', $this->parameter_list),
+                            'ISSUES_EXAMPLES'        => implode('', $this->issues_examples),
+                            'PARAMETER_LIST'         => implode('', $this->parameter_list),
                             'INI_THEMES'             => $this->ini_themes_config,
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
                             'EXAKAT_EXTENSION_LIST'  => $this->exakat_extension_list,
@@ -459,7 +459,7 @@ SQL
             $sizes[] = max($strlens);
         }
         
-        $separator = '+'.join('+', array_map(function($x) { return str_pad('', $x + 2, '-'); }, $sizes)).'+'.PHP_EOL;
+        $separator = '+'.implode('+', array_map(function($x) { return str_pad('', $x + 2, '-'); }, $sizes)).'+'.PHP_EOL;
     
         $return = $separator;
         foreach($array as $row) {
@@ -487,7 +487,7 @@ SQL
             } 
             
             return "* $x\n"; }, array_keys($this->applications_names));
-        $this->applications = join('', $names);
+        $this->applications = implode('', $names);
     }
 
     private function build_reports() {
@@ -527,10 +527,10 @@ $exampleTxt
             
             if (!empty($reportIni['depends'][0])) {
                 if (count($reportIni['depends']) === 1) {
-                    $section .= $reportIni['name']. ' includes the report from another other report : '.join(', ', $reportIni['depends']).".\n\n";
+                    $section .= $reportIni['name']. ' includes the report from another other report : '.implode(', ', $reportIni['depends']).".\n\n";
                 } else {
                     sort($reportIni['depends']);
-                    $section .= $reportIni['name']. ' includes the report from '.count($reportIni['depends']).' other reports : '.join(', ', $reportIni['depends']).".\n\n";
+                    $section .= $reportIni['name']. ' includes the report from '.count($reportIni['depends']).' other reports : '.implode(', ', $reportIni['depends']).".\n\n";
                 }
             }
     
@@ -543,14 +543,14 @@ $exampleTxt
             } elseif ($c = count($reportIni['themes']) === 1) {
                 $section .= $reportIni['name']. " depends on the following theme : ".array_pop($reportIni['themes']).".\n\n";
             } else {
-                $section .= $reportIni['name']. " depends on the following $c themes : ".join(', ', $reportIni['themes']).".\n\n";
+                $section .= $reportIni['name']. " depends on the following $c themes : ".implode(', ', $reportIni['themes']).".\n\n";
             }
     
             $reportSection[] = $section;
         }
         
-        $reportList = '* '.join("\n* ", $reportList).PHP_EOL;
-        $reportSection = join('', $reportSection).PHP_EOL;
+        $reportList = '* '.implode("\n* ", $reportList).PHP_EOL;
+        $reportSection = implode('', $reportSection).PHP_EOL;
         
         $file = str_replace('REPORT_LIST', $reportList, $file);
         $file = str_replace('REPORT_DETAILS', $reportSection, $file);
@@ -713,7 +713,7 @@ SPHINX;
             }
         }
         
-        $issues_examples_section = join(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
+        $issues_examples_section = implode(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
         
         $parameters = array();
         for($i = 0; $i < 10; $i++) {
@@ -761,7 +761,7 @@ SPHINX;
             $info[] = array('ClearPHP', $clearPHP);
         }
         if (!empty($examples)) {
-            $info[] = array('Examples', join(', ', $examples));
+            $info[] = array('Examples', implode(', ', $examples));
         }
         
         $table = $this->makeTable($info);
@@ -774,14 +774,16 @@ SPHINX;
     private function prepareIniThemes() {
         $rulesetsList = '"'.implode('","',$this->rulesets).'"';
 
-        $query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
-                        FROM categories c
-                        JOIN analyzers_categories ac
-                            ON c.id = ac.id_categories
-                        JOIN analyzers a
-                            ON a.id = ac.id_analyzer
-                        WHERE c.name IN ('.$rulesetsList.')
-                        GROUP BY c.name';
+        $query = <<<SQL
+SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
+    FROM categories c
+    JOIN analyzers_categories ac
+        ON c.id = ac.id_categories
+    JOIN analyzers a
+        ON a.id = ac.id_analyzer
+    WHERE c.name IN ($rulesetsList)
+    GROUP BY c.name
+SQL;
         $res = $this->analyzers->query($query);
         
         $config = array();
@@ -794,7 +796,7 @@ SPHINX;
             $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
         }
         
-        $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".join("\n* ", $list)."\n\n\n".join("\n\n", $config);
+        $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".implode("\n* ", $list)."\n\n\n".implode("\n\n", $config);
     }
 
     private function prepareText() {
