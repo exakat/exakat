@@ -5,6 +5,9 @@ services:
 
 before_install:
   - docker pull exakat/exakat:latest
+  - pwd
+  - ls -hla 
 
 script:
+  - docker run -it --rm -w /src -v $(pwd):/src --entrypoint "/usr/src/exakat/exakat.phar" exakat/exakat:latest  doctor -v
   - docker run -it --rm -w /src -v $(pwd):/src --entrypoint "/usr/src/exakat/exakat.phar" exakat/exakat:latest  project -v

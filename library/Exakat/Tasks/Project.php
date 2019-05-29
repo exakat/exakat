@@ -168,7 +168,6 @@ class Project extends Tasks {
         display("Running project '$project'" . PHP_EOL);
         display('Running the following analysis : ' . implode(', ', $themesToRun));
         display('Producing the following reports : ' . implode(', ', $reportToRun));
-        die();
 
         display('Running files' . PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
