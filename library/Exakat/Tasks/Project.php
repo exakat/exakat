@@ -341,7 +341,6 @@ class Project extends Tasks {
             $themes = array($themes);
         }
 
-        $themes = array_intersect($availableThemes, $themes);
         display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
 
         global $VERBOSE;
