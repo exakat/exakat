@@ -27,11 +27,12 @@ use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
 
 class DotExakatYamlConfig extends Config {
+    const YAML_FILE = '.exakat.yml';
     private $dotExakatYaml = '';
     private $themas = array();
 
     public function __construct() {
-        $this->dotExakatYaml = getcwd() . '/.exakat.yml';
+        $this->dotExakatYaml = getcwd() . '/'. self::YAML_FILE;
     }
 
     public function loadConfig($project) {
@@ -132,7 +133,7 @@ class DotExakatYamlConfig extends Config {
             }
             unset($ext);
         }
-        
+
         if (isset($this->config['rulesets'])) {
             $this->themas = array_map('array_values', $this->config['rulesets']);
             unset($this->config['rulesets']);
@@ -142,7 +143,7 @@ class DotExakatYamlConfig extends Config {
             display('Ignoring '.count($tmp_config)." unkown directives : ".implode(', ', array_keys($tmp_config)));
         }
 
-        return '.exakat.yml';
+        return self::YAML_FILE;
     }
     
     public function getThemas() {
