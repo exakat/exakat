@@ -204,6 +204,11 @@ class Dump extends Tasks {
             $this->collectInclusions();
             $end = microtime(true);
             $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = microtime(true);
+            $this->collectMissingDefinitions();
+            $end = microtime(true);
+            $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -1712,6 +1717,128 @@ GREMLIN;
         }
 
         display( "$name : " . count($values));
+    }
+    
+    private function collectMissingDefinitions() {
+        $values = array();
+
+        $functioncallCount  = $this->gremlin->query('g.V().hasLabel("Functioncall").count()')[0];
+        $functioncallMissed = $this->gremlin->query('g.V().hasLabel("Functioncall")
+             .has("token", within("T_STRING", "T_NS_SEPARATOR"))
+             .not(where(__.in("DEFINITION")))
+             .not(where(__.in("ANALYZED").has("analyzer", "Functions/IsExtFunction")))
+             .where( __.out("NAME").hasLabel("Identifier", "Nsname", "Name"))
+        ');
+        if ($functioncallMissed !== 0) {
+            file_put_contents("{$this->config->log_dir}/functions.missing.txt", implode(PHP_EOL, array_column($functioncallMissed->toArray(), 'fullcode')));
+            $functioncallMissed = $functioncallMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/functions.missing.txt", 'Nothing found');
+            $functioncallMissed = 0;
+        }
+        $values[] = "('functioncall total', '$functioncallCount')";
+        $values[] = "('functioncall missed', '$functioncallMissed')";
+
+        $methodCount  = $this->gremlin->query('g.V().hasLabel("Methodcall").count()')[0];
+        $methodMissed = $this->gremlin->query('g.V().hasLabel("Methodcall")
+             .not(where(__.in("DEFINITION")))
+             .where( __.out("METHOD").has("token", "T_STRING"))
+        ');
+        if (is_array($methodMissed)) {
+            file_put_contents("{$this->config->log_dir}/methodcall.missing.txt", implode(PHP_EOL, array_column($methodMissed->toArray(), 'fullcode')));
+            $methodMissed = $methodMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/methodcall.missing.txt", 'Nothing found');
+            $methodMissed = 0;
+        }
+        $values[] = "('methodcall total', '$methodCount')";
+        $values[] = "('methodcall missed', '$methodMissed')";
+        
+        $memberCount  = $this->gremlin->query('g.V().hasLabel("Member").count()')[0];
+        $memberMissed = $this->gremlin->query('g.V().hasLabel("Member")
+             .not(where(__.in("DEFINITION")))
+             .where( __.out("MEMBER").has("token", "T_STRING"))
+        ');
+        if (is_array($memberMissed)) {
+            file_put_contents("{$this->config->log_dir}/members.missing.txt", implode(PHP_EOL, array_column($memberMissed->toArray(), 'fullcode')));
+            $memberMissed = $memberMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/members.missing.txt", 'Nothing found');
+            $memberMissed = 0;
+        }
+        $values[] = "('member total', '$memberCount')";
+        $values[] = "('member missed', '$memberMissed')";
+
+        $staticMethodCount  = $this->gremlin->query('g.V().hasLabel("Staticmethodcall").count()')[0];
+        $staticMethodMissed = $this->gremlin->query('g.V().hasLabel("Staticmethodcall")
+             .not(where(__.in("DEFINITION")))
+             .where( __.out("CLASS").hasLabel("Identifier", "Nsname", "Self", "Parent", "Static"))
+             .not(where( __.out("CLASS").in("ANALYZED").has("analyzer", "Classes/IsExtClass")))
+             .where( __.out("METHOD").has("token", "T_STRING"))
+        ');
+        if (is_array($staticMethodMissed)) {
+            file_put_contents("{$this->config->log_dir}/staticmethodcall.missing.txt", implode(PHP_EOL, array_column($staticMethodMissed->toArray(), 'fullcode')));
+            $staticMethodMissed = $staticMethodMissed->count();
+        } else {
+            file_put_contents("{$this->config->log_dir}/staticmethodcall.missing.txt", 'Nothing found');
+            $staticMethodMissed = 0;
+        }
+        $values[] = "('static methodcall total', '$staticMethodCount')";
+        $values[] = "('static methodcall missed', '$staticMethodMissed')";
+        
+        $staticConstantCount  = $this->gremlin->query('g.V().hasLabel("Staticonstant").count()')[0];
+        $staticConstantMissed = $this->gremlin->query('g.V().hasLabel("Staticonstant")
+             .not(where(__.in("DEFINITION")))
+             .not(where( __.out("CLASS").in("ANALYZED").has("analyzer", "Classes/IsExtClass")))
+             .where( __.out("METHOD").has("token", "T_STRING"))
+        ');
+        if (is_array($staticConstantMissed)) {
+            file_put_contents("{$this->config->log_dir}/staticconstant.missing.txt", implode(PHP_EOL, array_column($staticConstantMissed->toArray(), 'fullcode')));
+            $staticConstantMissed = $staticConstantMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/staticconstant.missing.txt", 'Nothing found');
+            $staticConstantMissed = 0;
+        }
+        $values[] = "('static constant total', '$staticConstantCount')";
+        $values[] = "('static constant missed', '$staticConstantMissed')";
+
+        $staticPropertyCount  = $this->gremlin->query('g.V().hasLabel("Staticproperty").count()')[0];
+        $staticPropertyMissed = $this->gremlin->query('g.V().hasLabel("Staticproperty")
+             .not(where(__.in("DEFINITION")))
+             .not(where( __.out("CLASS").in("ANALYZED").has("analyzer", "Classes/IsExtClass")))
+             .where( __.out("MEMBER").has("token", "T_VARIABLE"))
+        ');
+        if (is_array($staticPropertyMissed)) {
+            file_put_contents("{$this->config->log_dir}/staticproperty.missing.txt", implode(PHP_EOL, array_column($staticPropertyMissed->toArray(), 'fullcode')));
+            $staticPropertyMissed = $staticPropertyMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/staticproperty.missing.txt", 'Nothing found');
+            $staticPropertyMissed = 0;
+        }
+        $values[] = "('static property total', '$staticPropertyCount')";
+        $values[] = "('static property missed', '$staticPropertyMissed')";
+
+        $constantCounts = $this->gremlin->query('g.V().hasLabel("Identifier", "Nsname").count()')[0];
+        $constantMissed = $this->gremlin->query('g.V().hasLabel("Identifier", "Nsname")
+             .not(has("token", within("T_CONST", "T_FUNCTION")))
+             .not(where(__.in("DEFINITION")))
+             .not(where(__.in("ANALYZED").has("analyzer", "Constants/IsExtConstant")))
+             .not(where(__.in("NAME").hasLabel("Class", "Defineconstant", "Namespace", "As")))
+             .not(where(__.in("EXTENDS", "IMPLEMENTS").hasLabel("Class", "Classanonymous", "Interface")))
+             .not(where(__.in().hasLabel("Analysis", "Instanceof", "As", "Staticmethod", "Usetrait", "Usenamespace", "Member", "Constant", "Functioncall", "Methodcallname", "Staticmethodcall", "Staticproperty", "Staticclass", "Staticconstant", "Catch", "Parameter")))
+             ') ?: array();
+        if (is_array($constantMissed)) {
+            file_put_contents("{$this->config->log_dir}/constant.missing.txt", implode(PHP_EOL, array_column($constantMissed->toArray(), 'fullcode')));
+            $constantMissed = $constantMissed->toInt();
+        } else {
+            file_put_contents("{$this->config->log_dir}/constant.missing.txt", 'Nothing found');
+            $constantMissed = 0;
+        }
+        $values[] = "('constant total', '$constantCounts')";
+        $values[] = "('constant missed', '$constantMissed')";
+
+        $query = 'INSERT INTO hash ("key", "value") VALUES '.implode(', ', $values);
+        $this->sqlite->query($query);
     }
 
     private function collectClassDepth() {
