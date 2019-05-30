@@ -32,7 +32,7 @@ class UsesFrameworkConstant extends Analyzer {
         $analyzerId = null;
         
         if (!empty($this->constants[0])) {
-            $classes    = makeFullNsPath($this->constants, \FNP_CONSTANT);
+            $constants = makeFullNsPath($this->constants, \FNP_CONSTANT);
 
             if (!empty($constants)) {
                 $constantsUsage = new ConstantUsage($this->gremlin, $this->config);

@@ -108,7 +108,7 @@ abstract class Reports {
 
             $list = $this->themes->getThemeAnalyzers($themas);
         } elseif (!empty($this->config->program)) {
-            $list = array($this->config->program);
+            $list = makeArray($this->config->program);
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }
@@ -118,10 +118,8 @@ abstract class Reports {
         if ($name === self::STDOUT) {
             if (!empty($final)) {
                 echo $final;
-                print "\n EXIT 1 $name \n";
                 exit(1);
             } else {
-                print "\n EXIT 0 \n";
                 exit(0);
             }
         } elseif ($name === self::INLINE) {

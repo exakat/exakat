@@ -44,7 +44,7 @@ class All extends Reports {
             $reportClass = Reports::getReportClass($reportName);
             
             $report = new $reportClass($this->config);
-            $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME); 
+            $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME);
         }
     }
 

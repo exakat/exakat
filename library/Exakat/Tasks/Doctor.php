@@ -141,7 +141,7 @@ class Doctor extends Tasks {
             $stats['project']['phpversion']       = $this->config->phpversion;
 //            $stats['project']['analyzers']        = makeList($this->config->project_analyzers ?? array(), '');
             $stats['project']['reports']          = makeList($this->config->project_reports   ?? array(), '');
-            $stats['project']['themas']           = makeList($this->config->project_thema     ?? array(), '');
+            $stats['project']['rulesets']         = makeList($this->config->project_themes    ?? array(), '');
             $stats['project']['included dirs']    = makeList($this->config->include_dirs      ?? array(), '');
             $stats['project']['ignored dirs']     = makeList($this->config->ignore_dirs       ?? array(), '');
             $stats['project']['file extensions']  = makeList($this->config->file_extensions   ?? array(), '');
@@ -221,7 +221,7 @@ TEXT
         }
 
         // projects
-        if ( file_exists('./projects') &&
+        if (file_exists('./projects') &&
             !file_exists("{$this->config->projects_root}/projects/test")) {
 
             $i = 0;

@@ -9,7 +9,7 @@ ignore_dirs:
   - /human
   - /docs
 file_extensions:
-  - .php
+  - php
 rulesets:
   Exakat :
   - Structures/AddZero
@@ -37,34 +37,3 @@ rulesets:
        "Assign Default To Properties": Classes/MakeDefault
        "Assign With And": Php/AssignAnd
        "Avoid Parenthesis": Structures/PrintWithoutParenthesis
-       "Bad Constants Names":                               Constants/BadConstantnames
-       "Can't Count Non-Countable":                         Structures/CanCountNonCountable
-       "Can't Extend Final":                                Classes/CantExtendFinal
-       "Can't Throw Throwable":                             Exceptions/CantThrow
-       "Cant Inherit Abstract Method":                      Classes/CantInheritAbstractMethod
-       "Cant Instantiate Class":                            Classes/CantInstantiateClass
-       "Case Insensitive Constants":                        Constants/CaseInsensitiveConstants
-       "Cast To Boolean":                                   Structures/CastToBoolean
-       "Catch Overwrite Variable":                          Structures/CatchShadowsVariable
-       "Check On __Call Usage":                             Classes/CheckOnCallUsage
-       "Child Class Removes Typehint":                      Classes/ChildRemoveTypehint
-       "Class Function Confusion":                          Php/ClassFunctionConfusion
-       "Class Should Be Final By Ocramius":                 Classes/FinalByOcramius
-       "Class, Interface Or Trait With Identical Names":    Classes/CitSameName
-       "Classes Mutually Extending Each Other":             Classes/MutualExtension
-       "Clone With Non-Object":                             Classes/CloneWithNonObject
-       "Compact Inexistant Variable":                       Php/CompactInexistant
-       "Compare Hash":                                      Security/CompareHash
-       "Compared Comparison":                               Structures/ComparedComparison
-       "Concat And Addition":                               Php/ConcatAndAddition
-       "Concrete Visibility":                               Interfaces/ConcreteVisibility
-       "Configure Extract":                                 Security/ConfigureExtract
-       "Const Visibility Usage":                            Classes/ConstVisibilityUsage
-       "Constants Created Outside Its Namespace":           Constants/CreatedOutsideItsNamespace
-       "Constants With Strange Names":                      Constants/ConstantStrangeNames
-       "Continue Is For Loop":                              Structures/ContinueIsForLoop
-       "Could Be Else":                                     Structures/CouldBeElse
-       "Could Be Static":                                   Structures/CouldBeStatic
-       "Could Use __DIR__":                                 Structures/CouldUseDir
-       "Could Use self":                                    Classes/ShouldUseSelf
-       "Crc32() Might Be Negative":                         Php/Crc32MightBeNegative

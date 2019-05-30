@@ -427,12 +427,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.1
+
+  * No Need For get_class() (Structures/NoNeedGetClass)
+
 * 1.8.0
 
   * Already Parents Trait (Traits/AlreadyParentsTrait ; Analyze)
   * Casting Ternary (Structures/CastingTernary ; Analyze, OneFile)
   * Concat And Addition (Php/ConcatAndAddition ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, Top10, CompatibilityPHP80)
-  * Concat Empty (Structures/ConcatEmpty ; Analyze, OneFile)
+  * Concat Empty String (Structures/ConcatEmpty ; Analyze, OneFile)
   * Minus One On Error (Security/MinusOneOnError ; Security)
   * New Functions In PHP 7.4 (Php/Php74NewFunctions ; CompatibilityPHP74)
   * Php/UnpackingInsideArrays (Php/UnpackingInsideArrays ; Unassigned)
@@ -3820,6 +3824,7 @@ ___________
 |   analyzer[] = "Structures/MismatchedTernary";
 |   analyzer[] = "Structures/MultipleUnset";
 |   analyzer[] = "Structures/NamedRegex";
+|   analyzer[] = "Structures/NoNeedGetClass";
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/OneIfIsSufficient";

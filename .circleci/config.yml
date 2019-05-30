@@ -1,0 +1,11 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: exakat/exakat:latest
+    steps:
+    - checkout
+    - run:
+        command: |-
+            exakat project
