@@ -28,6 +28,155 @@ use Exakat\Query\Query;
 
 class SetClassPropertyRemoteDefinition extends LoadFinal {
     public function run() {
+        // For properties in traits
+        $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
+        $query->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('PPP')
+              ->atomIs('Ppp', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('source')
+              ->back('first')
+              ->outIs('DEFINITION')
+              ->inIs('USE')
+              ->inIs('USE')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('class')
+              ->raw(<<<GREMLIN
+where(
+    __.addV()
+      .property(label, select('source').label()).as('clone').
+      sideEffect(
+        select('source').properties().as('p').
+        select('clone').
+          property(select('p').key(), select('p').value()).
+          property('virtual', true)
+      )
+      .addE("PPP").from("class")
+    
+    .select('source').where( 
+        __.out('TYPEHINT').as('sourcetypehint')
+          .addV()
+          .property(label, select('sourcetypehint').label()).as('clonetypehint')
+          .sideEffect(
+            select('sourcetypehint').properties().as('p')
+            .select('clonetypehint')
+              .property(select('p').key(), select('p').value())
+              .property('virtual', true)
+           )
+          .addE("TYPEHINT").from("clone")
+    
+    .select('source').where( 
+        __.out('PPP').as('sourceppp')
+          .addV().
+            property(label, select('sourceppp').label()).as('cloneppp').
+          sideEffect(
+            select('sourceppp').properties().as('p').
+            select('cloneppp').
+              property(select('p').key(), select('p').value()).
+              property('virtual', true)
+          )
+          .addE("PPP").from("clone")
+      
+          .select('sourceppp').where( 
+            __.out('DEFAULT').as('sourcedefault')
+              .addV()
+              .property(label, select('sourcedefault').label()).as('clonedefault')
+              .sideEffect(
+                select('sourcedefault').properties().as('p').
+                select('clonedefault')
+                    .property(select('p').key(), select('p').value())
+                    .property('virtual', true)
+                )
+              .addE("DEFAULT").from("cloneppp")
+              .fold()
+            )
+    
+        )
+      .fold()
+    ).fold()
+)
+GREMLIN
+,array(), array())
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countReports = $result->toInt();
+        display("Added $countReports traits property to class definitions");
+
+        // For properties in classes
+        $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
+        $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('PPP')
+              ->isNot('visibility', 'private')
+              ->atomIs('Ppp', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('source')
+              ->back('first')
+              ->outIs('DEFINITION')
+              ->inIs('USE')
+              ->inIs('USE')
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('class')
+              ->raw(<<<GREMLIN
+where(
+    __.addV()
+      .property(label, select('source').label()).as('clone').
+      sideEffect(
+        select('source').properties().as('p').
+        select('clone').
+          property(select('p').key(), select('p').value()).
+          property('virtual', true)
+      )
+      .addE("PPP").from("class")
+    
+    .select('source').where( 
+        __.out('TYPEHINT').as('sourcetypehint')
+          .addV()
+          .property(label, select('sourcetypehint').label()).as('clonetypehint')
+          .sideEffect(
+            select('sourcetypehint').properties().as('p')
+            .select('clonetypehint')
+              .property(select('p').key(), select('p').value())
+              .property('virtual', true)
+           )
+          .addE("TYPEHINT").from("clone")
+    
+    .select('source').where( 
+        __.out('PPP').as('sourceppp')
+          .addV().
+            property(label, select('sourceppp').label()).as('cloneppp').
+          sideEffect(
+            select('sourceppp').properties().as('p').
+            select('cloneppp').
+              property(select('p').key(), select('p').value()).
+              property('virtual', true)
+          )
+          .addE("PPP").from("clone")
+      
+          .select('sourceppp').where( 
+            __.out('DEFAULT').as('sourcedefault')
+              .addV()
+              .property(label, select('sourcedefault').label()).as('clonedefault')
+              .sideEffect(
+                select('sourcedefault').properties().as('p').
+                select('clonedefault')
+                    .property(select('p').key(), select('p').value())
+                    .property('virtual', true)
+                )
+              .addE("DEFAULT").from("cloneppp")
+              .fold()
+            )
+    
+        )
+      .fold()
+    ).fold()
+)
+GREMLIN
+,array(), array())
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countReports = $result->toInt();
+        display("Added $countReports traits property to class definitions");
+
         // For static properties calls, in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
         $query->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
@@ -61,7 +210,7 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+//              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
               ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
