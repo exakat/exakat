@@ -26,8 +26,8 @@ namespace Exakat\Data;
 use Exakat\Config;
 
 class ZendF {
-    protected $sqlite = null;
-    protected $phar_tmp = null;
+    private $sqlite = null;
+    private $phar_tmp = null;
 
     public function __construct($path, $is_phar) {
         if ($is_phar) {
