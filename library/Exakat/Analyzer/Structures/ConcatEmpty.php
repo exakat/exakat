@@ -51,6 +51,7 @@ class ConcatEmpty extends Analyzer {
         $this->atomIs('Assignation')
              ->tokenIs('T_CONCAT_EQUAL')
              ->outIs('RIGHT')
+             ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
              ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
