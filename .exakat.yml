@@ -16,23 +16,13 @@ rulesets:
   - Structures/MultiplyByOne
   - Structures/ConcatEmpty
   ruleset_0: # 0 errors found
-       "$HTTP_RAW_POST_DATA Usage": Php/RawPostDataUsage
-       "$this Belongs To Classes Or Traits": Classes/ThisIsForClasses
-       "$this Is Not An Array": Classes/ThisIsNotAnArray
-       "$this Is Not For Static Methods": Classes/ThisIsNotForStatic
-       "Abstract Or Implements": Classes/AbstractOrImplements
        "Access Protected Structures": Classes/AccessProtected
        "Accessing Private": Classes/AccessPrivate
        "Adding Zero": Structures/AddZero
        "Aliases Usage": Functions/AliasesUsage
        "Already Parents Interface": Interfaces/AlreadyParentsInterface
        "Altering Foreach Without Reference": Structures/AlteringForeachWithoutReference
-       "Alternative Syntax Consistence": Structures/AlternativeConsistenceByFile
-       "Always Positive Comparison": Structures/NeverNegative
        "Ambiguous Array Index": Arrays/AmbiguousKeys
-       "Ambiguous Static": Classes/AmbiguousStatic2
-       "Ambiguous Visibilities": Classes/AmbiguousVisibilities
-       "Anonymous Classes": Classes/Anonymous
        "Assert Function Is Reserved": Php/AssertFunctionIsReserved
        "Assign Default To Properties": Classes/MakeDefault
        "Assign With And": Php/AssignAnd

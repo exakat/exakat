@@ -32,7 +32,7 @@ class DotExakatYamlConfig extends Config {
     private $themas = array();
 
     public function __construct() {
-        $this->dotExakatYaml = getcwd() . '/'. self::YAML_FILE;
+        $this->dotExakatYaml = getcwd() . '/' . self::YAML_FILE;
     }
 
     public function loadConfig($project) {
@@ -140,7 +140,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (!empty($tmp_config)) {
-            display('Ignoring '.count($tmp_config)." unkown directives : ".implode(', ', array_keys($tmp_config)));
+            display('Ignoring ' . count($tmp_config) . ' unkown directives : ' . implode(', ', array_keys($tmp_config)));
         }
 
         return self::YAML_FILE;

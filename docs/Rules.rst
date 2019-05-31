@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 28 May 2019 16:36:07 +0000
-.. comment: Generation hash : 08a6a327a53b29390ae78181e0daea58a7585c40
+.. comment: Generation date : Fri, 31 May 2019 08:40:52 +0000
+.. comment: Generation hash : d44ee1718f19ed159f2f561fe107f7001825bc6e
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -15238,17 +15238,24 @@ There is no need to call `get_class() <http://www.php.net/get_class>`_ to build 
 
    <?php
    
+   // 
+   $a->b::$c
+   
+   // This is too much code
+   get_class($a->b)::$c
    
    ?>
 
 
-
+See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Use get_called_class(), which may carry different class names
+* Use self, static or parent keywords, if you are already in the current class
+* Use the argument of get_class() directly
 
 +-------------+---------------------------+
 | Short name  | Structures/NoNeedGetClass |
@@ -25507,7 +25514,8 @@ See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Remove the unused inherited variable
+* Make us of the unused inherited variable
 
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UnusedInheritedVariable                                                                  |

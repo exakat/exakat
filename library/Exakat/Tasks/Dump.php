@@ -1837,7 +1837,7 @@ GREMLIN;
         $values[] = "('constant total', '$constantCounts')";
         $values[] = "('constant missed', '$constantMissed')";
 
-        $query = 'INSERT INTO hash ("key", "value") VALUES '.implode(', ', $values);
+        $query = 'INSERT INTO hash ("key", "value") VALUES ' . implode(', ', $values);
         $this->sqlite->query($query);
     }
 
