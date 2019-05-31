@@ -26,10 +26,6 @@ class None extends Vcs {
     public function clone($source) {
     }
 
-    public function update() {
-        return '';
-    }
-
     public function getStatus() {
         $status = array('vcs'       => 'none',
                         'updatable' => false

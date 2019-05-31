@@ -54,10 +54,6 @@ class SevenZ extends Vcs {
         unlink($archiveFile);
     }
 
-    public function update() {
-        return 'No Update for .7z';
-    }
-
     public function getInstallationInfo() {
         $stats = array();
 

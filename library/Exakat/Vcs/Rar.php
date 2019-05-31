@@ -54,10 +54,6 @@ class Rar extends Vcs {
         unlink($archiveFile);
     }
 
-    public function update() {
-        return 'No Update for .rar';
-    }
-
     public function getInstallationInfo() {
         $stats = array();
 

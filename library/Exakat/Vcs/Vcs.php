@@ -38,6 +38,8 @@ abstract class Vcs {
     
     protected $checked = false;
     
+    const NO_UPDATE = 'No update';
+    
     public function __construct($destination, $code_dir) {
         $this->destination     = $destination;
         $this->destinationFull = $code_dir;
@@ -73,6 +75,7 @@ abstract class Vcs {
     }
 
     public function update() {
+        return self::NO_UPDATE;
     }
     
     public static function getVcs(Config $config) {

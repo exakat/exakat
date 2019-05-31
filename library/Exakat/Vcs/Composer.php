@@ -58,7 +58,12 @@ class Composer extends Vcs {
 
         shell_exec("cd {$this->destinationFull}; {$this->executable} -q update");
 
-        $jsonText = file_get_contents("{$this->destinationFull}/composer.json");
+        $composerPath = "{$this->destinationFull}/composer.json";
+        if (!file_exists($composerPath)) {
+            return '';
+        }
+
+        $jsonText = file_get_contents($composerPath);
         if (empty($jsonText)) {
             return '';
         }
