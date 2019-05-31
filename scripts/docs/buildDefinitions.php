@@ -656,6 +656,11 @@ $exampleTxt
         $desc = $this->glossary($ini['name'], $ini['description']);
 
         if (isset($ini['modifications'])) {
+            if (!is_array($ini['modifications'])) {
+                $ini['modifications'] = array($ini['modifications']);
+                print "In $analyzer, modifications is not an array\n";
+            }
+            
             $desc .= "\n\nSuggestions\n^^^^^^^^^^^\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
         }
         $desc = trim($this->rst_escape($desc));
@@ -1108,6 +1113,9 @@ GLOSSARY;
         }
 
         $analyzers = parse_ini_file("../Extensions/{$ext->name}/Analyzer/analyzers.ini");
+        if (empty($analyzers)) {
+            $analyzers = array();
+        }
         $doc .= "{$ext->name} analysis".PHP_EOL;
         $doc .= str_repeat('_', 50).PHP_EOL.PHP_EOL;
         
@@ -1166,9 +1174,13 @@ GLOSSARY;
     
     private function internalLink($text) {
         return preg_replace_callback('# ([^/ ]+/[^/ :]+) #', function($m) {
-            $ini = parse_ini_file("./human/en/{$m[1]}.ini");
-            
-            return ":ref:`".$this->rst_anchor($ini['name'])."`";
+            if (file_exists("./human/en/{$m[1]}.ini")) {
+                $ini = parse_ini_file("./human/en/{$m[1]}.ini");
+
+                return ":ref:`".$this->rst_anchor($ini['name'])."`";
+            } else {
+                return $m[0];
+            }
         }, $text);
     }
 }
