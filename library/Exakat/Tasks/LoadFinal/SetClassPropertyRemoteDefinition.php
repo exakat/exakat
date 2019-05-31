@@ -43,57 +43,57 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
               ->raw(<<<GREMLIN
 where(
     __.addV()
-      .property(label, select('source').label()).as('clone').
-      sideEffect(
-        select('source').properties().as('p').
-        select('clone').
-          property(select('p').key(), select('p').value()).
-          property('virtual', true)
+      .property(label, select("source").label()).as("clone")
+      .sideEffect(
+        select("source").properties().as("p")
+        .select("clone")
+          .property(select("p").key(), select("p").value())
+          .property("virtual", true)
       )
       .addE("PPP").from("class")
     
-    .select('source').where( 
-        __.out('TYPEHINT').as('sourcetypehint')
+      .select("source").where( 
+        __.out("TYPEHINT").as("sourcetypehint")
           .addV()
-          .property(label, select('sourcetypehint').label()).as('clonetypehint')
+          .property(label, select("sourcetypehint").label()).as("clonetypehint")
+          .property("virtual", true)
           .sideEffect(
-            select('sourcetypehint').properties().as('p')
-            .select('clonetypehint')
-              .property(select('p').key(), select('p').value())
-              .property('virtual', true)
+            select("sourcetypehint").properties().as("p")
+            .select("clonetypehint")
+              .property(select("p").key(), select("p").value())
            )
           .addE("TYPEHINT").from("clone")
-    
-    .select('source').where( 
-        __.out('PPP').as('sourceppp')
-          .addV().
-            property(label, select('sourceppp').label()).as('cloneppp').
-          sideEffect(
-            select('sourceppp').properties().as('p').
-            select('cloneppp').
-              property(select('p').key(), select('p').value()).
-              property('virtual', true)
+          .fold()
+    )
+    .select("source").where( 
+        __.out("PPP").as("sourceppp")
+          .addV()
+            .property(label, "Propertydefinition")
+            .property("virtual", true).as("cloneppp")
+          .sideEffect(
+            select("sourceppp").properties().as("p")
+            .select("cloneppp")
+              .property(select("p").key(), select("p").value())
           )
           .addE("PPP").from("clone")
       
-          .select('sourceppp').where( 
-            __.out('DEFAULT').as('sourcedefault')
+          .select("sourceppp").where( 
+            __.out("DEFAULT").as("sourcedefault")
               .addV()
-              .property(label, select('sourcedefault').label()).as('clonedefault')
+              .property(label, select("sourcedefault").label()).as("clonedefault")
+              .property("virtual", true)
               .sideEffect(
-                select('sourcedefault').properties().as('p').
-                select('clonedefault')
-                    .property(select('p').key(), select('p').value())
-                    .property('virtual', true)
+                select("sourcedefault").properties().as("p").
+                select("clonedefault")
+                    .property(select("p").key(), select("p").value())
                 )
               .addE("DEFAULT").from("cloneppp")
               .fold()
             )
-    
-        )
-      .fold()
-    ).fold()
-)
+           .fold()
+        ).fold()
+    )
+
 GREMLIN
 ,array(), array())
               ->returnCount();
@@ -102,6 +102,7 @@ GREMLIN
         $countReports = $result->toInt();
         display("Added $countReports traits property to class definitions");
 
+/*
         // For properties in classes
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
@@ -175,7 +176,8 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countReports = $result->toInt();
-        display("Added $countReports traits property to class definitions");
+        display("Added $countReports parent class property to class definitions");
+*/
 
         // For static properties calls, in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
@@ -192,6 +194,7 @@ GREMLIN
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
+              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'property')
               ->returnCount();
@@ -213,7 +216,7 @@ GREMLIN
 //              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
-              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'property')
               ->returnCount();
