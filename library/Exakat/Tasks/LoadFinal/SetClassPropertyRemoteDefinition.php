@@ -28,29 +28,37 @@ use Exakat\Query\Query;
 
 class SetClassPropertyRemoteDefinition extends LoadFinal {
     public function run() {
+
         // For properties in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
         $query->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('PPP')
               ->atomIs('Ppp', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'doublon')
               ->_as('source')
               ->back('first')
               ->outIs('DEFINITION')
               ->inIs('USE')
               ->inIs('USE')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('class')
+              ->_as('classe')
+              // weird : without this deduplication, it creates twice the PPP
+              ->not(
+                $query->side()
+                      ->outIs('PPP')
+                      ->samePropertyAs('fullcode', 'doublon', Analyzer::CASE_SENSITIVE)
+                      ->prepareSide()
+              )
               ->raw(<<<GREMLIN
-where(
-    __.addV()
-      .property(label, select("source").label()).as("clone")
+addV()
+      .property(label, "Ppp").as("clone")
       .sideEffect(
         select("source").properties().as("p")
         .select("clone")
           .property(select("p").key(), select("p").value())
           .property("virtual", true)
       )
-      .addE("PPP").from("class")
+      .addE("PPP").from("classe")
     
       .select("source").where( 
         __.out("TYPEHINT").as("sourcetypehint")
@@ -92,7 +100,7 @@ where(
             )
            .fold()
         ).fold()
-    )
+
 
 GREMLIN
 ,array(), array())
@@ -102,74 +110,80 @@ GREMLIN
         $countReports = $result->toInt();
         display("Added $countReports traits property to class definitions");
 
-/*
         // For properties in classes
-        $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
+        $query = $this->newQuery('SetClassPropertyRemoteDefinition class property');
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('PPP')
               ->isNot('visibility', 'private')
               ->atomIs('Ppp', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullcode', 'doublon')
               ->_as('source')
               ->back('first')
               ->outIs('DEFINITION')
               ->inIs('USE')
               ->inIs('USE')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('class')
+              ->_as('classe')
+              // weird : without this deduplication, it creates twice the PPP
+              ->not(
+                $query->side()
+                      ->outIs('PPP')
+                      ->samePropertyAs('fullcode', 'doublon', Analyzer::CASE_SENSITIVE)
+                      ->prepareSide()
+              )
               ->raw(<<<GREMLIN
-where(
-    __.addV()
-      .property(label, select('source').label()).as('clone').
-      sideEffect(
-        select('source').properties().as('p').
-        select('clone').
-          property(select('p').key(), select('p').value()).
-          property('virtual', true)
+addV()
+      .property(label, "Ppp").as("clone")
+      .sideEffect(
+        select("source").properties().as("p")
+        .select("clone")
+          .property(select("p").key(), select("p").value())
+          .property("virtual", true)
       )
-      .addE("PPP").from("class")
+      .addE("PPP").from("classe")
     
-    .select('source').where( 
-        __.out('TYPEHINT').as('sourcetypehint')
+      .select("source").where( 
+        __.out("TYPEHINT").as("sourcetypehint")
           .addV()
-          .property(label, select('sourcetypehint').label()).as('clonetypehint')
+          .property(label, select("sourcetypehint").label()).as("clonetypehint")
+          .property("virtual", true)
           .sideEffect(
-            select('sourcetypehint').properties().as('p')
-            .select('clonetypehint')
-              .property(select('p').key(), select('p').value())
-              .property('virtual', true)
+            select("sourcetypehint").properties().as("p")
+            .select("clonetypehint")
+              .property(select("p").key(), select("p").value())
            )
           .addE("TYPEHINT").from("clone")
-    
-    .select('source').where( 
-        __.out('PPP').as('sourceppp')
-          .addV().
-            property(label, select('sourceppp').label()).as('cloneppp').
-          sideEffect(
-            select('sourceppp').properties().as('p').
-            select('cloneppp').
-              property(select('p').key(), select('p').value()).
-              property('virtual', true)
+          .fold()
+    )
+    .select("source").where( 
+        __.out("PPP").as("sourceppp")
+          .addV()
+            .property(label, "Propertydefinition")
+            .property("virtual", true).as("cloneppp")
+          .sideEffect(
+            select("sourceppp").properties().as("p")
+            .select("cloneppp")
+              .property(select("p").key(), select("p").value())
           )
           .addE("PPP").from("clone")
       
-          .select('sourceppp').where( 
-            __.out('DEFAULT').as('sourcedefault')
+          .select("sourceppp").where( 
+            __.out("DEFAULT").as("sourcedefault")
               .addV()
-              .property(label, select('sourcedefault').label()).as('clonedefault')
+              .property(label, select("sourcedefault").label()).as("clonedefault")
+              .property("virtual", true)
               .sideEffect(
-                select('sourcedefault').properties().as('p').
-                select('clonedefault')
-                    .property(select('p').key(), select('p').value())
-                    .property('virtual', true)
+                select("sourcedefault").properties().as("p").
+                select("clonedefault")
+                    .property(select("p").key(), select("p").value())
                 )
               .addE("DEFAULT").from("cloneppp")
               .fold()
             )
-    
-        )
-      .fold()
-    ).fold()
-)
+           .fold()
+        ).fold()
+
+
 GREMLIN
 ,array(), array())
               ->returnCount();
@@ -177,7 +191,6 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countReports = $result->toInt();
         display("Added $countReports parent class property to class definitions");
-*/
 
         // For static properties calls, in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
