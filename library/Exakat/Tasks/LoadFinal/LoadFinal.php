@@ -225,6 +225,10 @@ GREMLIN;
         $task->run();
         $this->log('IsInIgnoredDir');
 
+        $task = new CreateCompactVariables($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateCompactVariables');
+
         display('End load final');
         $this->logTime('Final');
     }
