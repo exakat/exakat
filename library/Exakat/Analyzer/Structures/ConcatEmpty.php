@@ -29,6 +29,8 @@ class ConcatEmpty extends Analyzer {
         // '' . $a
         $this->atomIs('Concatenation')
              ->outWithRank('CONCAT', 'first')
+             ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
+             ->hasNoOut('CONCAT')
              ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
@@ -36,7 +38,10 @@ class ConcatEmpty extends Analyzer {
 
         // $a . ''
         $this->atomIs('Concatenation')
+             ->analyzerIsNot('self')
              ->outWithRank('CONCAT', 'last')
+             ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
+             ->hasNoOut('CONCAT')
              ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
