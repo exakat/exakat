@@ -110,6 +110,10 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
+        $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateDefaultValues');
+
         $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetParentDefinition');
@@ -224,6 +228,10 @@ GREMLIN;
         $task = new IsInIgnoredDir($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('IsInIgnoredDir');
+
+        $task = new CreateCompactVariables($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateCompactVariables');
 
         display('End load final');
         $this->logTime('Final');

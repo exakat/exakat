@@ -60,10 +60,6 @@ class Targz extends Vcs {
         unlink($archiveFile);
     }
 
-    public function update() {
-        return 'No Update for Tar.gz';
-    }
-
     public function getInstallationInfo() {
         $stats = array();
 

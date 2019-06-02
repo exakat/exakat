@@ -25,13 +25,16 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Tarbz extends Vcs {
+    private $executableTar   = 'tar';
+    private $executableBzip2 = 'bzip2';
+
     protected function selfCheck() {
-        $res = shell_exec('tar --version 2>&1');
+        $res = shell_exec("{$this->executableTar} --version 2>&1");
         if (!preg_match('#\d+\.\d+(\.\d+)?#s', $res)) {
             throw new HelperException('Tar');
         }
 
-        $res = shell_exec('bzip2 --help 2>&1');
+        $res = shell_exec("{$this->executableBzip2} --help 2>&1");
         if (strpos($res, 'bzip2') === false) {
             throw new HelperException('bzip2');
         }
@@ -48,26 +51,22 @@ class Tarbz extends Vcs {
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz') . '.tar.bz2';
         file_put_contents($archiveFile, $binary);
 
-        $res = shell_exec("tar -tjf $archiveFile 2>&1 >/dev/null");
+        $res = shell_exec("{$this->executableTar} -tjf $archiveFile 2>&1 >/dev/null");
         if (!empty($res)) {
             list($l, ) = explode("\n", $res);
             print "Error while loading tar.bz archive : \"$l\". Aborting\n";
             return;
         }
 
-        shell_exec("mkdir {$this->destinationFull}; tar -jxf $archiveFile --directory $this->destinationFull");
+        shell_exec("mkdir {$this->destinationFull}; {$this->executableTar} -jxf $archiveFile --directory $this->destinationFull");
 
         unlink($archiveFile);
-    }
-
-    public function update() {
-        return 'No Update for tbz';
     }
 
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('tar --version 2>&1'));
+        $res = trim(shell_exec("{$this->executableTar} --version 2>&1"));
         if (preg_match('/^(\w+) ([0-9\.]+) /', $res, $r)) {//
             $stats['tar'] = 'Yes';
             $stats['tar version'] = $r[0];
@@ -76,7 +75,7 @@ class Tarbz extends Vcs {
             $stats['tar optional'] = 'Yes';
         }
 
-        $res = trim(shell_exec('bzip2 --help 2>&1'));
+        $res = trim(shell_exec("{$this->executableBzip2} --help 2>&1"));
         if (preg_match('/Version ([0-9\.]+),/', $res, $r)) {//
             $stats['bzip2'] = 'Yes';
             $stats['bzip2 version'] = $r[1];

@@ -28,7 +28,7 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Vcs\{Bazaar, Cvs, Composer, Git, Mercurial, Svn};
+use Exakat\Vcs\Vcs;
 
 class Update extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -92,75 +92,24 @@ class Update extends Tasks {
     }
 
     private function update(Config $updateConfig) {
-        switch (true) {
-            // symlink case
-            case $updateConfig->project_vcs === 'rar' :
-            case $updateConfig->project_vcs === 'zip' :
-            case $updateConfig->project_vcs === 'tgz' :
-            case $updateConfig->project_vcs === 'tbz' :
-            case $updateConfig->project_vcs === 'symlink' :
-            case $updateConfig->project_vcs === 'copy' :
-                // Nothing to do just ignore
-                break;
+        $vcs = Vcs::getVcs($updateConfig);
+        $vcs = new $vcs($updateConfig->project, $updateConfig->code_dir);
 
-            // svn case
-            case $updateConfig->project_vcs === 'svn' :
-                display("SVN update $updateConfig->project");
-                $vcs = new Svn($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("SVN updated to revision $new");
-                break;
-
-            // cvs case
-            case $updateConfig->project_vcs === 'cvs' :
-                display("CVS update $updateConfig->project");
-                $vcs = new Cvs($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("CVS updated to revision $new");
-                break;
-
-            // bazaar case
-            case $updateConfig->project_vcs === 'bzr' :
-                display("Bazaar update $updateConfig->project");
-                $vcs = new Bazaar($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("Bazaar updated to revision $new");
-                break;
-
-            // mercurial
-            case $updateConfig->project_vcs === 'hg' :
-                display("Mercurial update $updateConfig->project");
-                $vcs = new Mercurial($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("Mercurial updated to revision $new");
-                break;
-
-            // composer case
-            case $updateConfig->project_vcs === 'composer' :
-                display("Composer update $updateConfig->project");
-                $vcs = new Composer($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("Composer updated to version $new");
-                break;
-
-            // Git case
-            case $updateConfig->project_vcs === 'git' :
-                display("Git pull for $updateConfig->project");
-                $vcs = new Git($updateConfig->project, $updateConfig->code_dir);
-                $new = $vcs->update();
-                display("Updated git version $new");
-                break;
-
-            default :
-                display('No VCS found to update. check project/config.ini and try again.');
-
-                return;
+        display("Code update $updateConfig->project with ".$vcs->getName());
+        $new = $vcs->update();
+        if ($new === Vcs::NO_UPDATE) {
+            display('No update available. Skipping');
+            
+            return;
         }
+        
+        display($vcs->getName()." updated to $new");
 
         display('Running files');
         $updateCache = new Files($this->gremlin, $updateConfig);
         try {
-            $updateCache->run();
+            print "Skipping run for tests\n";
+//            $updateCache->run();
         } catch (NoFileToProcess $e) {
             display("No file to process\n");
             // OK, just carry on.

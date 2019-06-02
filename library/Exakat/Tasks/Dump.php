@@ -1042,6 +1042,7 @@ SQL
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Propertydefinition").as("property")
+     .not(has('virtual', true))
      .in("PPP")
 .sideEffect{ 
     x_static = it.get().properties("static").any();
@@ -2064,6 +2065,7 @@ GREMLIN
 
         $query = $this->newQuery('Member Default');
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->isNot('virtual', true)
               ->savePropertyAs('fullcode', 'name')
               ->outIs('DEFAULT')
               ->savePropertyAs('fullcode', 'default1')
@@ -2097,6 +2099,7 @@ GREMLIN
 
         $query = $this->newQuery('Member Visibility');
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->isNot('virtual', true)
               ->savePropertyAs('fullcode', 'name')
               ->inIs('PPP')
               ->savePropertyAs('visibility', 'visibility1')

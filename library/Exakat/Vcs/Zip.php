@@ -54,10 +54,6 @@ class Zip extends Vcs {
         unlink($archiveFile);
     }
 
-    public function update() {
-        return 'No Update for .zip';
-    }
-
     public function getInstallationInfo() {
         $stats = array();
 

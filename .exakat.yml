@@ -14,7 +14,6 @@ rulesets:
   Exakat :
   - Structures/AddZero
   - Structures/MultiplyByOne
-  - Structures/ConcatEmpty
   ruleset_0: # 0 errors found
        "Access Protected Structures": Classes/AccessProtected
        "Accessing Private": Classes/AccessPrivate
