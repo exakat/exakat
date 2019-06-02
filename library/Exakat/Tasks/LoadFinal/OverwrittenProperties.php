@@ -35,6 +35,7 @@ class OverwrittenProperties extends LoadFinal {
               ->goToAllImplements(Analyzer::EXCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
+              ->isNot('virtual', true)
               ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
               ->addEFrom('OVERWRITE', 'first')
               ->returnCount();
