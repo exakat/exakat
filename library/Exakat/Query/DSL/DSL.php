@@ -237,7 +237,7 @@ abstract class DSL {
     }
     
     protected function isProperty($property) {
-        return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir'));
+        return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual'));
     }
 
     protected function assertProperty($property) {
