@@ -37,9 +37,10 @@ class SetClassPropertyRemoteDefinition extends LoadFinal {
               ->savePropertyAs('fullcode', 'doublon')
               ->_as('source')
               ->back('first')
-              ->outIs('DEFINITION')
-              ->inIs('USE')
-              ->inIs('USE')
+              ->raw(<<<'GREMLIN'
+repeat( __.out("DEFINITION").in("USE").in("USE")).emit().times(15).hasLabel("Class")
+GREMLIN
+,array(), array())
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->_as('classe')
               // weird : without this deduplication, it creates twice the PPP
@@ -120,8 +121,7 @@ GREMLIN
               ->_as('source')
               ->back('first')
               ->outIs('DEFINITION')
-              ->inIs('USE')
-              ->inIs('USE')
+              ->inIs('EXTENDS')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->_as('classe')
               // weird : without this deduplication, it creates twice the PPP
