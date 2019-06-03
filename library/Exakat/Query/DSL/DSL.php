@@ -152,6 +152,13 @@ abstract class DSL {
     }
 
     protected function assertLabel($name, $read = self::LABEL_GO) {
+        if (is_array($name)) {
+            foreach($name as $n) {
+                $this->assertLabel($n, $read);
+
+                return true;
+            }
+        }
         if ($read === self::LABEL_SET) {
             assert(!in_array($name, $this->availableLabels), "Label '$name' is already set");
             $this->availableLabels[] = $name;
