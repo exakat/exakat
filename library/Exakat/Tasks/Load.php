@@ -4320,7 +4320,7 @@ class Load extends Tasks {
             $block = $this->processUseBlock();
 
             $this->addLink($use, $block, 'BLOCK');
-            $fullcode = ' ' . $block->fullcode;
+            $fullcode .= ' ' . $block->fullcode;
 
             // Several namespaces ? This has to be recalculated inside the block!!
             $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
