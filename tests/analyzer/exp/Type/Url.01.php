@@ -11,6 +11,7 @@ $expected     = array('\'http://www.phpOK.net/\'',
                       '\'http://xn--diseolatinoamericano-66b.com/\'',
                       '\'http://www.php.net\'',
                       '\'http://www.法国.cn/\'',
+                      '"http://www.google.com$x"',
                      );
 
 $expected_not = array('\'http:/www.php.net/\'',
