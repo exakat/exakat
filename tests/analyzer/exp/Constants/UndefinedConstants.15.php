@@ -1,11 +1,10 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('\constante3',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('\constante1',
+                      '\constante2',
                      );
 
 ?>
