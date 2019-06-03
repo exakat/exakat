@@ -1,4 +1,4 @@
-Version 1.8.2 (Zhao Ziyu of Dingchou, coming up)
+Version 1.8.3 (Jade Man of Yang, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 1.8.2 (Zhao Ziyu of Dingchou, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.2 (Zhao Ziyu of Dingchou, 2019-06-03)
++ Architecture
+    + Refactored 'Update' command, to VCS
+    + Collect missing definitions counts
+    + Report handles a list of analysis names
++ Analyzer
+    + New analysis : No Need To Get_Class
+    + New analysis : Report identical inherited methods
+    + New analysis : Function returning -1 in case of error
+    + Updated analysis : TypeHint must be returned, doesn't apply to abstract methods or interface methods
+    + Updated analysis : 'Could Use Interface' also checks for static and visibility
+    + Updated analysis : 'Concat empty' skips variables
+    + Checked unit tests : 3024 / 3048 test pass (99% pass)
++ Tokenizer
+    + Created 'virtual' properties, for limiting children agglomerations
+    + Fixed normalized code for use traits
+    + Added DEFAULT to all variable definitions
+    + Connect strings to class definitions
+    + Handle variable in 'compact', when they are static
 
 Version 1.8.1 (Zhang Wentong of Dinghai, 2019-05-27)
 + Architecture
