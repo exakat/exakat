@@ -1564,8 +1564,7 @@ class Load extends Tasks {
             $this->popExpression();
             
             $cpm->rank = ++$rank;
-            if ($cpm->atom === 'Usenamespace' ||
-                $cpm->atom === 'Usetrait') {
+            if ($cpm->atom === 'Usetrait') {
                 $link = 'USE';
             } else {
                 $link = strtoupper($cpm->atom);
@@ -4578,7 +4577,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $literal = $this->processFCOA($literal);
         }
-        
+
         return $literal;
     }
 
