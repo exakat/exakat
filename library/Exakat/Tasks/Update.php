@@ -108,8 +108,7 @@ class Update extends Tasks {
         display('Running files');
         $updateCache = new Files($this->gremlin, $updateConfig);
         try {
-            print "Skipping run for tests\n";
-//            $updateCache->run();
+            $updateCache->run();
         } catch (NoFileToProcess $e) {
             display("No file to process\n");
             // OK, just carry on.
