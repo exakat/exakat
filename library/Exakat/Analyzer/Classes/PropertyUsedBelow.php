@@ -32,15 +32,14 @@ class PropertyUsedBelow extends Analyzer {
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('PPP')
+             ->isNot('virtual', true)
              ->isNot('static', true)
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->_as('ppp')
+             ->inIs('OVERWRITE')
              ->outIs('DEFINITION')
              ->atomIs('Member')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->samePropertyAs('fullnspath', 'fnp')
              ->back('ppp');
         $this->prepareQuery();
 
@@ -50,15 +49,14 @@ class PropertyUsedBelow extends Analyzer {
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('PPP')
+             ->isNot('virtual', true)
              ->is('static', true)
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->_as('ppp')
+             ->inIs('OVERWRITE')
              ->outIs('DEFINITION')
              ->atomIs('Staticproperty')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->samePropertyAs('fullnspath', 'fnp')
              ->back('ppp');
         $this->prepareQuery();
         // This could be also checking for fnp : it needs to be a 'family' class check.

@@ -30,6 +30,7 @@ class PropertyUsedAbove extends Analyzer {
         // property + $this->property
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
+             ->isNot('virtual', true)
              ->isNot('static', true)
              ->outIs('PPP')
              ->_as('ppp')
@@ -58,6 +59,7 @@ class PropertyUsedAbove extends Analyzer {
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
+             ->isNot('virtual', true)
              ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
