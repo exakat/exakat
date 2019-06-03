@@ -95,7 +95,7 @@ class Update extends Tasks {
         $vcs = Vcs::getVcs($updateConfig);
         $vcs = new $vcs($updateConfig->project, $updateConfig->code_dir);
 
-        display("Code update $updateConfig->project with ".$vcs->getName());
+        display("Code update $updateConfig->project with " . $vcs->getName());
         $new = $vcs->update();
         if ($new === Vcs::NO_UPDATE) {
             display('No update available. Skipping');
@@ -103,7 +103,7 @@ class Update extends Tasks {
             return;
         }
         
-        display($vcs->getName()." updated to $new");
+        display($vcs->getName() . " updated to $new");
 
         display('Running files');
         $updateCache = new Files($this->gremlin, $updateConfig);

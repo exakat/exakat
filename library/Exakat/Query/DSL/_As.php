@@ -32,7 +32,7 @@ class _As extends DSL {
         assert($this->assertLabel($name, self::LABEL_SET));
 
         if (is_array($name)) {
-            return new Command("as(\"".implode("\").as(\"", $name)."\")");
+            return new Command('as("' . implode('").as("', $name) . '")');
         } else {
             return new Command("as(\"$name\")");
         }
