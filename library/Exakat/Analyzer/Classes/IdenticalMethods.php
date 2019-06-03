@@ -20,35 +20,23 @@
  *
 */
 
+namespace Exakat\Analyzer\Classes;
 
-namespace Exakat\Query\DSL;
-
-use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class CollectImplements extends DSL {
-    public function run() : Command {
-        list($variable) = func_get_args();
-        
-        $this->assertVariable($variable, self::VARIABLE_WRITE);
-
-        $command = new Command('where( 
-__.sideEffect{ ' . $variable . ' = []; }
-  .emit( )
-  .repeat( __.out("EXTENDS", "IMPLEMENTS")
-  .in("DEFINITION")
-  .hasLabel("Class", "Classanonymous", "Interface")
-  .filter{!it.sack().contains(it.get().value("fullnspath")) }
-  .sack {m,v -> m.add(v.value("fullnspath")); m} )
-  .times(' . self::$MAX_LOOPING . ')
-  .hasLabel("Class", "Classanonymous", "Interface")
-  .out("EXTENDS", "IMPLEMENTS")
-  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
-  .fold() 
-)
-');
-        $command->setSack('[]');
-        return $command;
+class IdenticalMethods extends Analyzer {
+    public function analyze() {
+        // class a           { public function foo() { /some code/ } }
+        // class b extends a { public function foo() { /some code/ } }
+        $this->atomIs(self::$FUNCTIONS_METHOD)
+             ->isNot('visibility', 'private')
+             ->savePropertyAs('ctype1', 'clonetype')
+             ->inIs('OVERWRITE')
+             ->atomIs('Method')
+             ->samePropertyAs('ctype1', 'clonetype')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
+
 ?>

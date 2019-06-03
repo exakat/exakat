@@ -28,10 +28,14 @@ use Exakat\Query\Query;
 class _As extends DSL {
     public function run() {
         list($name) = func_get_args();
-        
+
         assert($this->assertLabel($name, self::LABEL_SET));
 
-        return new Command("as(\"$name\")");
+        if (is_array($name)) {
+            return new Command("as(\"".implode("\").as(\"", $name)."\")");
+        } else {
+            return new Command("as(\"$name\")");
+        }
     }
 }
 ?>

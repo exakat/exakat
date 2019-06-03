@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class WrongNumberOfArgumentsMethods extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testFunctions_WrongNumberOfArgumentsMethods01()  { $this->generic_test('Functions_WrongNumberOfArgumentsMethods.01'); }
     public function testFunctions_WrongNumberOfArgumentsMethods02()  { $this->generic_test('Functions/WrongNumberOfArgumentsMethods.02'); }
@@ -19,5 +19,6 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
     public function testFunctions_WrongNumberOfArgumentsMethods08()  { $this->generic_test('Functions/WrongNumberOfArgumentsMethods.08'); }
     public function testFunctions_WrongNumberOfArgumentsMethods09()  { $this->generic_test('Functions/WrongNumberOfArgumentsMethods.09'); }
     public function testFunctions_WrongNumberOfArgumentsMethods10()  { $this->generic_test('Functions/WrongNumberOfArgumentsMethods.10'); }
+    public function testFunctions_WrongNumberOfArgumentsMethods11()  { $this->generic_test('Functions/WrongNumberOfArgumentsMethods.11'); }
 }
 ?>

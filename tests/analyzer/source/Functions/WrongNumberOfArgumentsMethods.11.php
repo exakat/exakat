@@ -1,5 +1,8 @@
 <?php
 
+static $a;
+static $b;
+
 class x {
  function a($b, ...$c) {}
  function b2($b, Stdclass...$c2) {}

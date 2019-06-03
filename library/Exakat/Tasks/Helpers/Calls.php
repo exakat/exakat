@@ -159,7 +159,7 @@ SQL;
                 $fullnspath = '\\' . $fullnspath;
             }
 
-            $types = array('staticmethod');
+            $types = array('staticmethod', 'staticconstant');
         }
 
         $atom = 'String';

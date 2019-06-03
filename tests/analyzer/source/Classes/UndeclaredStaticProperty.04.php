@@ -17,7 +17,7 @@ class b {
     function foo() {
         echo b::$b;     // They are defined in the class below, so we can't find them
         echo $this->b; // They are defined in the class below, so we can't find them
-        echo $this->c; // They are defined in the class below, so we can't find them
+        echo $this->c;  // declared static, used normal
     }
 }
 

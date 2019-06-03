@@ -31,8 +31,8 @@ class CreateDefaultValues extends LoadFinal {
 
         // For variables
         $query = $this->newQuery('CreateDefaultValues variables');
-        $query->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition'), Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoOut('DEFAULT')
+        $query->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition', 'Staticdefinition'), Analyzer::WITHOUT_CONSTANTS)
+//              ->hasNoOut('DEFAULT')
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
@@ -48,7 +48,7 @@ class CreateDefaultValues extends LoadFinal {
         // For properties in traits
         $query = $this->newQuery('CreateDefaultValues variables');
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-              ->hasNoOut('DEFAULT')
+//              ->hasNoOut('DEFAULT')
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)

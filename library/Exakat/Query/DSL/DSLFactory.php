@@ -54,7 +54,7 @@ class DSLFactory {
             $data = $datastore->getCol('TokenCounts', 'token');
             
             $this->availableAtoms = array('Project', 'File', 'Virtualproperty');
-            $this->availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP');
+            $this->availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP', 'DEFAULT');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {

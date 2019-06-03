@@ -2185,10 +2185,7 @@ GREMLIN;
 
         $valuesSQL = array();
         foreach($statsValues as $name => $count) {
-            $valuesSQL[] = "(\"Foreach Values\", \"$name\", $count)";
-        }
-        foreach($statsKeys as $name => $count) {
-            $valuesSQL[] = "(\"Foreach Keys\", \"$name\", $count)";
+            $valuesSQL[] = "(\"Foreach Values\", \"".$this->sqlite->escapeString($name)."\", $count)";
         }
 
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);

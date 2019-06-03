@@ -57,6 +57,12 @@ class MakeDefault extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
              ->samePropertyAs('propertyname', 'propriete')
+             ->not(
+                $this->side()
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->atomIs('Assignation')
+             )
              ->hasNoOut('DEFAULT')
              
              ->back('result');

@@ -30,6 +30,7 @@ class TypehintMustBeReturned extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->hasOut('RETURNTYPE')
              ->outIs('BLOCK')
+             ->atomIsNot('Void')
              ->noAtomInside('Return')
              ->back('first');
         $this->prepareQuery();
