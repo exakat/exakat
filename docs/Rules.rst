@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 31 May 2019 08:40:52 +0000
-.. comment: Generation hash : d44ee1718f19ed159f2f561fe107f7001825bc6e
+.. comment: Generation date : Mon, 03 Jun 2019 15:38:26 +0000
+.. comment: Generation hash : b7a910e5419ec1d9f2554a1e89b04f49a494dc36
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -18,11 +18,11 @@ $HTTP_RAW_POST_DATA Usage
 #########################
 
 
-`$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_ is deprecated, and should be replaced by php://input. 
+``$HTTP_RAW_POST_DATA`` is deprecated, and should be replaced by ``php://input``. 
 
-`$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_ is deprecated since PHP 5.6.
+``$HTTP_RAW_POST_DATA`` is deprecated since PHP 5.6.
 
-It is possible to ready by setting always_populate_raw_post_data to -1.
+It is possible to ready by setting ``always_populate_raw_post_data`` to -1.
 
 .. code-block:: php
 
@@ -8075,6 +8075,15 @@ This is also true for negative lengths.
    
    ?>
 
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the string
+* Fix the length of the string
+* Put the string in a constant, and use strlen() or mb_strlen()
+
 +-------------+------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/FailingSubstrComparison                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------+
@@ -9734,6 +9743,59 @@ They may be a copy/paste with unmodified content. When the content has to be dup
 +-------------+---------------------------------+
 | Time To Fix | Instant (5 mins)                |
 +-------------+---------------------------------+
+
+
+
+.. _identical-methods:
+
+Identical Methods
+#################
+
+
+When the parent class and the child class have the same method, the child might drop it. This reduces code duplication. 
+
+Duplicate code in methods is often the results of code évolution, where a method was copied with the hierarchy, but the original wasn't removed.
+
+This doesn't apply to `private` methods, which are reserved for one class.
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       public function foo() {
+           return rand(0, 100);
+       }
+   }
+   
+   class b extends a {
+       public function foo() {
+           return rand(0, 100);
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the method from the parent class, in particular if only one child uses the method.
+* Drop the method from the child class, in particular if there are several children class
+* Use an abstract method, and make sure every child has its own implementation
+* Modify one of the methods so they are different
+
++-------------+------------------------------------+
+| Short name  | Classes/IdenticalMethods           |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -14434,6 +14496,68 @@ Suggestions
 
 
 
+.. _no-append-on-source:
+
+No Append On Source
+###################
+
+
+Do not append new elements to an array in a foreach loop. Since PHP 7.0, the array is still used as a source, and will be augmented, and used again. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Relying on the initial copy
+   $a = [1];
+   $initial = $a;
+   foreach($initial as $v) {
+       $a[] = $v + 1;
+   }
+   
+   // Keep new results aside
+   $a = [1];
+   $tmp = [];
+   foreach($a as $v) {
+       $tmp[] = $v + 1;
+   }
+   $a = array_merge($a, $tmp);
+   unset($tmp);
+   
+   // Example, courtesy of Frederic Bouchery
+   // This is an infinite loop
+   $a = [1];
+   foreach($a as $v) {
+       $a[] = $v + 1;
+   }
+   
+   ?>
+
+
+Thanks to `Frederic Bouchery <https://twitter.com/FredBouchery>`_ for the reminder.
+
+See also `Foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_ and 
+         `What will this code return? #PHP <https://twitter.com/FredBouchery/status/1135480412703211520>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a copy of the source, to avoid modifying it during the loop
+* Store the new values in a separate storage
+
++-------------+-----------------------------+
+| Short name  | Structures/NoAppendOnSource |
++-------------+-----------------------------+
+| Themes      | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+
+
+
 .. _no-boolean-as-default:
 
 No Boolean As Default
@@ -16340,7 +16464,7 @@ Non-lowercase Keywords
 ######################
 
 
-Usual convention is to write PHP keywords (like as, foreach, switch, case, `break <http://php.net/manual/en/control-structures.break.php>`_, etc.) all in lowercase. 
+The usual convention is to write PHP keywords (like as, ``foreach``, ``switch``, ``case``, ``break``, etc.) all in lowercase. 
 
 .. code-block:: php
 
@@ -16359,7 +16483,7 @@ Usual convention is to write PHP keywords (like as, foreach, switch, case, `brea
    ?>
 
 
-PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many. 
+PHP understands them in lowercase, UPPERCASE or WilD Case, so there is nothing compulsory here. Although, it will look strange to many. 
 
 Some keywords are missing from this analysis : ``extends``, ``implements``, ``as``. This is due to the internal engine, which doesn't keep track of them in its AST representation.
 
@@ -18311,6 +18435,29 @@ The new class is : HashContext.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                                                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _php/unpackinginsidearrays:
+
+Php/UnpackingInsideArrays
+#########################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/UnpackingInsideArrays                                                                                                                                                                                              |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20836,7 +20983,7 @@ Should Preprocess Chr
 Replace literal `chr() <http://www.php.net/chr>`_ calls with their escape sequence.
 
 `chr() <http://www.php.net/chr>`_ is a functioncall, that cannot be cached. It is only resolved at execution time. 
-On the other hand, literal values are pre-processed by PHP and may be cached.
+On the other hand, literal values are presprocessed by PHP and may be cached.
 
 .. code-block:: php
 
@@ -23649,7 +23796,7 @@ Typed Property Usage
 ####################
 
 
-Traditionnally, PHP properties aren't typed. Since PHP 7.4, it is possible to type properties, just like arguments.
+Traditionally, PHP properties aren't typed. Since PHP 7.4, it is possible to type properties, just like arguments.
 
 .. code-block:: php
 
@@ -26726,15 +26873,23 @@ Use `pathinfo() <http://www.php.net/pathinfo>`_ function instead of string manip
 
 When the path contains UTF-8 characters, `pathinfo() <http://www.php.net/pathinfo>`_ may strip them. There, string functions are necessary.
 
-+-------------+-----------------+
-| Short name  | Php/UsePathinfo |
-+-------------+-----------------+
-| Themes      | :ref:`Analyze`  |
-+-------------+-----------------+
-| Severity    | Minor           |
-+-------------+-----------------+
-| Time To Fix | Quick (30 mins) |
-+-------------+-----------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use pathinfo() and its second argument
+
++-------------+----------------------------------------------------------+
+| Short name  | Php/UsePathinfo                                          |
++-------------+----------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                           |
++-------------+----------------------------------------------------------+
+| Severity    | Minor                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                          |
++-------------+----------------------------------------------------------+
+| Examples    | :ref:`suitecrm-php-usepathinfo`, :ref:`-php-usepathinfo` |
++-------------+----------------------------------------------------------+
 
 
 
@@ -27130,7 +27285,7 @@ Use pathinfo() Arguments
 
 It is twice faster to get only one element from `pathinfo() <http://www.php.net/pathinfo>`_ than get the four of them, and use only one.
 
-This analysis reports `pathinfo() <http://www.php.net/pathinfo>`_ usage, without second argument, where only one or two indices are used, afte the call.
+This analysis reports `pathinfo() <http://www.php.net/pathinfo>`_ usage, without second argument, where only one or two indices are used, after the call.
 
 .. code-block:: php
 
@@ -27630,15 +27785,26 @@ Standalone brackets may be a left over of an old instruction, or a misunderstand
    
    ?>
 
-+-------------+----------------------------+
-| Short name  | Structures/UselessBrackets |
-+-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the brackets
+* Restore the flow-control operation that was there and removed
+* Move the block into a method or function, and call it
+
++-------------+---------------------------------------------------------------------------------------+
+| Short name  | Structures/UselessBrackets                                                            |
++-------------+---------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                        |
++-------------+---------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                 |
++-------------+---------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                      |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-structures-uselessbrackets`, :ref:`piwigo-structures-uselessbrackets` |
++-------------+---------------------------------------------------------------------------------------+
 
 
 

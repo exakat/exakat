@@ -2882,6 +2882,39 @@ There is no need for a semi-colon after a class structure, unless it is an anony
                          ** is the value of the token  */
     };
 
+Use Pathinfo
+============
+
+.. _suitecrm-php-usepathinfo:
+
+SuiteCRM
+^^^^^^^^
+
+:ref:`use-pathinfo`, in include/utils/file_utils.php:441. 
+
+Looking for the extension ? Use pathinfo() and PATHINFO_EXTENSION 
+
+.. code-block:: php
+
+    $exp = explode('.', $filename);
+
+
+--------
+
+
+.. _-php-usepathinfo:
+
+
+
+
+:ref:`use-pathinfo`, in :. 
+
+
+
+.. code-block:: php
+
+    
+
 Should Use Constants
 ====================
 
@@ -3537,6 +3570,56 @@ Although the file is readable, file() may return false in case of failure. On th
                 if ( is_readable( $file ) ) {
                     $ret .= implode( '<br>', file( $file ) ) . \n;
                 }
+
+Useless Brackets
+================
+
+.. _churchcrm-structures-uselessbrackets:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`useless-brackets`, in src/Menu.php:72. 
+
+Difficut to guess what was before the block here. It doesn't have any usage for control flow.
+
+.. code-block:: php
+
+    $new_row = false;
+            $count_people = 0;
+    
+            {
+                foreach ($peopleWithBirthDays as $peopleWithBirthDay) {
+                    if ($new_row == false) {
+                        ?>
+    
+                        <div class=row>
+                    <?php
+                        $new_row = true;
+                    } ?>
+                    <div class=col-sm-3>
+
+
+--------
+
+
+.. _piwigo-structures-uselessbrackets:
+
+Piwigo
+^^^^^^
+
+:ref:`useless-brackets`, in picture.php:342. 
+
+There is no need for block braces with case. In fact, it does give a false sense of break, while the case will still fall over to the next one. 
+
+.. code-block:: php
+
+    case 'rate' :
+        {
+          include_once(PHPWG_ROOT_PATH.'include/functions_rate.inc.php');
+          rate_picture($page['image_id'], $_POST['rate']);
+          redirect($url_self);
+        }
 
 preg_replace With Option e
 ==========================
