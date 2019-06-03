@@ -29,7 +29,6 @@ class LostReferences extends Analyzer {
     public function analyze() {
         // foo(&$f) { $f =& $b;}
         $this->atomIs('Parametername')
-             ->back('first')
              ->outIs('DEFINITION')
              ->inIs('LEFT')
              ->atomIs('Assignation')
