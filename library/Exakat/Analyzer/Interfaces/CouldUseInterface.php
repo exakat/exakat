@@ -34,21 +34,24 @@ class CouldUseInterface extends Analyzer {
         $this->atomIs('Interface')
              ->_as('name')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->_as('methodCount')
+             ->_as(array('methodCount', 'static'))
              ->outIs('NAME')
              ->_as('method')
              ->select(array('name'        => 'fullnspath',
                             'method'      => 'lccode',
-                            'methodCount' => 'count'));
+                            'methodCount' => 'count',
+                            'static'      => 'fullcode',
+                            ));
         $res = $this->rawQuery();
 
         $interfaces = array();
         $methodNames = array();
         foreach($res->toArray() as $row) {
+            $row['static'] = preg_match('/^.*static.*function /i', $row['static']) != false ? 'static' : '';
             if (isset($interfaces[$row['name']])) {
-                $interfaces[$row['name']][] = "$row[method]-$row[methodCount]";
+                $interfaces[$row['name']][] = "$row[method]-$row[methodCount]-$row[static]";
             } else {
-                $interfaces[$row['name']] = array("$row[method]-$row[methodCount]");
+                $interfaces[$row['name']] = array("$row[method]-$row[methodCount]-$row[static]");
             }
             $methodNames[$row['method']] = 1;
         }
@@ -62,7 +65,7 @@ class CouldUseInterface extends Analyzer {
             
             // translations are in the same order than original
             foreach($methods as $id => $method) {
-                $interfaces[$interface][] = $translations[$id] . "-$method->count";
+                $interfaces[$interface][] = $translations[$id] . "-$method->count-";
                 $methodNames[$translations[$id]] = 1;
             }
         }
@@ -73,6 +76,7 @@ class CouldUseInterface extends Analyzer {
              ->filter(
                 $this->side()
                      ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->isNot('visibility', array('private', 'protected'))
                      ->outIs('NAME')
                      ->is('lccode', $methodNames, self::CASE_SENSITIVE)
              )
@@ -82,7 +86,14 @@ class CouldUseInterface extends Analyzer {
              ->raw(<<<'GREMLIN'
 where( 
     __.out("METHOD", "MAGICMETHOD")
-      .sideEffect{ x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") ) ; }
+      .sideEffect{ 
+        if (it.get().properties("static").any()) { 
+            s = 'static';
+        } else {
+            s = '';
+        }
+        x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") + "-" + s) ; 
+       }
       .fold() 
 )
 GREMLIN

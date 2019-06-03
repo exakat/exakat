@@ -34,12 +34,12 @@ class CollectImplements extends DSL {
 
         $command = new Command('where( 
 __.sideEffect{ ' . $variable . ' = []; }
+  .emit( )
   .repeat( __.out("EXTENDS", "IMPLEMENTS")
   .in("DEFINITION")
   .hasLabel("Class", "Classanonymous", "Interface")
   .filter{!it.sack().contains(it.get().value("fullnspath")) }
   .sack {m,v -> m.add(v.value("fullnspath")); m} )
-  .emit( )
   .times(' . self::$MAX_LOOPING . ')
   .hasLabel("Class", "Classanonymous", "Interface")
   .out("EXTENDS", "IMPLEMENTS")
