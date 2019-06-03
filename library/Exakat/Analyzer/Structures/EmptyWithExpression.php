@@ -39,7 +39,7 @@ coalesce( __.hasLabel("Assignation").out("RIGHT"),
         )
 GREMLIN
 )
-             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname', 'Array', 'Variable', 'Member', 'Staticproperty', 'Phpvariable'))
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Float', 'Identifier', 'Nsname', 'Array', 'Variable', 'Member', 'Staticproperty', 'Phpvariable'))
              ->back('first');
         $this->prepareQuery();
 

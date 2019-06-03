@@ -68,14 +68,14 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs(array('Real', 'Null', 'Boolean'))
+             ->atomIs(array('Float', 'Null', 'Boolean'))
              ->back('first');
         $this->prepareQuery();
 
         // $x[1.0] = 2;
         $this->atomIs('Array')
              ->outIs('INDEX')
-             ->atomIs(array('Real', 'Null', 'Boolean'))
+             ->atomIs(array('Float', 'Null', 'Boolean'))
              ->back('first');
         $this->prepareQuery();
     }

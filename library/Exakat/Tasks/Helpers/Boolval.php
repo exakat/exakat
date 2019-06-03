@@ -58,7 +58,7 @@ class Boolval extends Plugin {
                 $atom->boolean = false;
                 break;
 
-            case 'Real' :
+            case 'Float' :
                 // $atom->code is a string
                 $atom->boolean = (int) (bool) (float) $atom->code;
                 break;

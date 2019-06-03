@@ -55,7 +55,7 @@ class Strval extends Plugin {
                 $atom->noDelimiter = (string) (abs($actual) > PHP_INT_MAX ? 0 : $actual);
                 break;
 
-            case 'Real' :
+            case 'Float' :
             case 'String' :
                 if (empty($extra)) {
                     $atom->noDelimiter = (string) trimOnce($atom->code);

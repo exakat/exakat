@@ -55,7 +55,7 @@ class Intval extends Plugin {
                 $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
                 break;
 
-            case 'Real' :
+            case 'Float' :
             case 'String' :
             case 'Heredoc' :
                 if (empty($extras)) {

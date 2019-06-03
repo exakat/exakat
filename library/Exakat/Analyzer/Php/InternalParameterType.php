@@ -33,9 +33,9 @@ class InternalParameterType extends Analyzer {
         $args = self::$methods->getInternalParameterType();
 
         $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),
-                                'real'     => 'Real',
+                                'float'    => 'Float',
                                 'int'      => 'Integer',
-                                'numeric'  => array('Real', 'Integer'),
+                                'numeric'  => array('Float', 'Integer'),
                                 'resource' => '',
                                 'bool'     => 'Boolean',
                                 'array'    => '',
@@ -58,7 +58,7 @@ class InternalParameterType extends Analyzer {
                      ->outWithRank('ARGUMENT', $position)
 
                      // only include literals (and closures and literal array)
-                     ->atomIs(array('Integer', 'String', 'Arrayliteral', 'Real', 'Boolean', 'Null', 'Integer', 'Closure'))
+                     ->atomIs(array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Integer', 'Closure'))
 
                     // Constant (Identifier), logical, concatenation, addition ?
                     // Those will have to be replaced after more research

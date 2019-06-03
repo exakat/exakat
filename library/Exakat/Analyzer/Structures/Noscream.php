@@ -85,7 +85,7 @@ class Noscream extends Analyzer {
                       'Preplusplus',
                       'Print',
                       'Propertydefinition',
-                      'Real',
+                      'Float',
                       'Return',
                       'Self',
                       'Shell',

@@ -56,7 +56,7 @@ class UseConstantAsArguments extends Analyzer {
             $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Real', 'String', 'Concatenation', 'Logical'))
+                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
                  ->back('first');
             $this->prepareQuery();
 
@@ -112,7 +112,7 @@ class UseConstantAsArguments extends Analyzer {
            $this->atomFunctionIs($fullnspath)
                 ->outIs('ARGUMENT')
                 ->is('rank', $position)
-                ->atomIs(array('Boolean', 'Null', 'Integer', 'Real'))
+                ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
                 ->codeIsNot($constantNames)
                 ->back('first');
            $this->prepareQuery();

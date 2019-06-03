@@ -38,7 +38,7 @@ class Closure2String extends Analyzer {
                 $this->side()
                      ->outIs('ARGUMENT')
                      ->atomIs(array_merge(self::$CALLS,
-                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Real', 'Boolean', 'Null')))
+                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
              )
 
              ->outIsIE('CLASS')
@@ -63,7 +63,7 @@ class Closure2String extends Analyzer {
                 $this->side()
                      ->outIs('ARGUMENT')
                      ->atomIs(array_merge(self::$CALLS,
-                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Real', 'Boolean', 'Null')))
+                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
               )
               
               ->outIs('OBJECT')

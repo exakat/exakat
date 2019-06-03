@@ -38,9 +38,14 @@ class MistakenConcatenation extends Analyzer {
         // $array = array(1, 2, 3, 4.5, );
         $this->atomIs('Arrayliteral')
              ->hasChildren('Integer', 'ARGUMENT')
-             ->raw('where( __.out("ARGUMENT").hasLabel("Real").count().is(eq(1)) )') // just one
+             ->filter(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs('Float')
+                     ->raw('count().is(eq(1))');
+             )
              ->outIs('ARGUMENT')
-             ->atomIs('Real')
+             ->atomIs('Float')
              ->back('first');
         $this->prepareQuery();
     }

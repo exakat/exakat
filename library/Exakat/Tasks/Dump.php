@@ -1338,7 +1338,7 @@ GREMLIN;
     }
 
     private function collectLiterals() {
-        $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
+        $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
 
         foreach($types as $type) {
             $this->sqlite->query('DROP TABLE IF EXISTS literal' . $type);

@@ -38,7 +38,7 @@ class UselessInstruction extends Analyzer {
              ->outIs('EXPRESSION')
              ->analyzerIsNot('Classes/IsaMagicProperty')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
-                            'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
+                            'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New', 'Variable'))
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'Defineconstant'));
@@ -49,7 +49,7 @@ class UselessInstruction extends Analyzer {
              ->outIs('FINAL')
              ->outWithoutLastRank()
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
-                            'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
+                            'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));

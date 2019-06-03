@@ -30,7 +30,7 @@ class IsNotLiteral extends DSL {
         // Closures are literal if not using a variable from the context
         return new Command(<<<'GREMLIN'
 not( 
-    __.hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral")
+    __.hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Float", "String", "Heredoc", "Closure", "Arrayliteral")
       .has("constant", true) 
 )
 

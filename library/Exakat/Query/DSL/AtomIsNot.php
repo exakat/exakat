@@ -38,7 +38,7 @@ class AtomIsNot extends DSL {
         }
 
         if ($flags === Analyzer::WITH_CONSTANTS &&
-                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Real'))) {
+                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Boolean', 'Magicmethod', 'Float'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'

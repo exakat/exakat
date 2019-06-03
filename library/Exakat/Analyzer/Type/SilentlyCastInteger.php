@@ -27,13 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class SilentlyCastInteger extends Analyzer {
     public function analyze() {
-        // Binary or hexadecimal, cast to Real
-        $this->atomIs('Real')
+        // Binary or hexadecimal, cast to Float
+        $this->atomIs('Float')
              ->regexIs('fullcode', '^0[xXbB]');
         $this->prepareQuery();
 
         // Too long integer
-        $this->atomIs('Real')
+        $this->atomIs('Float')
              ->regexIs('fullcode', '^[0-9]+\\$')
              ->regexIsNot('fullcode', '\\\\.');
         $this->prepareQuery();

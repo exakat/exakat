@@ -40,7 +40,7 @@ class IsZero extends Analyzer {
         $labels = array('Variable',
                         'Integer',
                         'Member',
-                        'Real',
+                        'Float',
                         'Staticproperty',
                         'Array',
                         'Functioncall',

@@ -32,7 +32,7 @@ class ModernEmpty extends Analyzer {
         // only works for variables
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Real', 'Identifier', 'Nsname'))
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Float', 'Identifier', 'Nsname'))
              ->hasAtomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Addition', 'Multiplication', 'Bitshift', 'Power', 'Logical', 'Comparison'))
              ->inIs('RIGHT')
              ->outIs('LEFT')

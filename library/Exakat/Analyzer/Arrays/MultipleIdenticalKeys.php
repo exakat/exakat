@@ -32,7 +32,7 @@ class MultipleIdenticalKeys extends Analyzer {
              ->raw('where(
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Real", "Boolean", "Null", "Staticconstant").not(where(__.out("CONCAT")) )
+      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant").not(where(__.out("CONCAT")) )
       .sideEffect{ 
             if (it.get().label() == "String" && "noDelimiter" in it.get().keys() ) { 
                 k = it.get().value("noDelimiter"); 
@@ -40,7 +40,7 @@ class MultipleIdenticalKeys extends Analyzer {
                     k = k.toInteger();
                 }
             } 
-            else if (it.get().label() == "Real" )           { k = it.get().value("intval"); } 
+            else if (it.get().label() == "Float" )           { k = it.get().value("intval"); } 
             else if (it.get().label() == "Staticconstant" ) { k = it.get().value("fullcode"); } 
             else if (it.get().label() == "Null" )           { k = 0; } 
             else if (it.get().label() == "Boolean" )        { 

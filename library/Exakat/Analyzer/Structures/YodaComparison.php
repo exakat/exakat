@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class YodaComparison extends Analyzer {
     public function analyze() {
-        $literals = array('String', 'Integer', 'Real', 'Boolean', 'Null', 'Identifier', 'Nsname');
+        $literals = array('String', 'Integer', 'Float', 'Boolean', 'Null', 'Identifier', 'Nsname');
         
         $this->atomIs('Comparison')
              ->codeIs(array('==','==='))

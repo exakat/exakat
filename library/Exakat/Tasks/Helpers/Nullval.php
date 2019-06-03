@@ -37,7 +37,7 @@ class Nullval extends Plugin {
         switch ($atom->atom) {
             case 'Boolean' :
             case 'Integer' :
-            case 'Real' :
+            case 'Float' :
             case 'String' :
             case 'Addition' :
             case 'Multiplication' :

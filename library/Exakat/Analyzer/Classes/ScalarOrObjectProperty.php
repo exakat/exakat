@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class ScalarOrObjectProperty extends Analyzer {
     public function analyze() {
-        $literals = array('Integer', 'String', 'Real');
-
         // Property defined as literal, used as object
         $this->atomIs('Class')
              ->outIs('PPP')
@@ -49,7 +47,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('PPP')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
-             ->raw('or( __.out("DEFAULT").hasLabel("Null"), __.not(out("DEFAULT")) )')
+             ->raw('or( __.out("DEFAULT").hasLabel("Null"), __.not(out("DEFAULT").in("RIGHT").hasLabel("Assignation")) )')
 
              ->outIs('DEFINITION')
              ->inIs('LEFT')
@@ -62,7 +60,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs($literals)
+             ->atomIs(self::$LITERALS)
 
              ->back('results');
         $this->prepareQuery();

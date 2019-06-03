@@ -27,10 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class RealFunctions extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
-             ->hasNoChildren('Void', 'NAME')
-             ->hasNoClassInterfaceTrait()
-             ->back('first');
+        // function x() {}
+        $this->atomIs('Function');
         $this->prepareQuery();
     }
 }

@@ -29,7 +29,7 @@ class CanCountNonCountable extends Analyzer {
         // count('abc');
         $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Boolean', 'Integer', 'Real', 'Null'))
+             ->atomIs(array('String', 'Boolean', 'Integer', 'Float', 'Null'))
              ->back('first');
         $this->prepareQuery();
         

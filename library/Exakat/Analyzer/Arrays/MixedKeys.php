@@ -40,7 +40,7 @@ class MixedKeys extends Analyzer {
 where(
    __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant", "Identifier").where(__.out("CONCAT").count().is(eq(0)))
+      .hasLabel("String", "Integer", "Float", "Boolean", "Staticconstant", "Identifier").where(__.out("CONCAT").count().is(eq(0)))
       .sideEffect{ 
             if (it.get().label() in ["Identifier", "Staticconstant"] ) { k = "a"; } else { k = "b"; }
             if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }

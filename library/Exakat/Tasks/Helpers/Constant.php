@@ -49,7 +49,7 @@ class Constant extends Plugin {
 
         switch ($atom->atom) {
             case 'Integer' :
-            case 'Real' :
+            case 'Float' :
             case 'Boolean' :
             case 'Null' :
             case 'Void' :

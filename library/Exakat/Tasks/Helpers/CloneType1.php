@@ -32,7 +32,7 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = 'i';
                 break;
 
-            case 'Real' :
+            case 'Float' :
                 $atom->ctype1 = 'r';
                 break;
 
