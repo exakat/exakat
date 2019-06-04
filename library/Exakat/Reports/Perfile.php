@@ -33,9 +33,11 @@ class Perfile extends Reports {
         $analysisResults = new Results($this->sqlite, $analyzerList);
         $analysisResults->load();
 
-        $perfile = array();
-        $maxLine = 0;
-        $maxTitle = 0;
+        $perfile       = array();
+        $maxLine       = 0;
+        $maxTitle      = 0;
+        $titleCache    = array();
+        $severityCache = array();
         foreach($analysisResults->toArray() as $row) {
 
             if (!isset($titleCache[$row['analyzer']])) {

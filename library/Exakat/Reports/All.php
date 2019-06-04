@@ -49,14 +49,12 @@ class All extends Reports {
     }
 
     public function dependsOnAnalysis() {
-        $reportToRun = array(array('All'));
-
+        $themesToRun = array(array());
         foreach(Reports::$FORMATS as $format) {
             $reportClass = "\Exakat\Reports\\$format";
             if (!class_exists($reportClass)) {
                 continue;
             }
-            $reportToRun[] = $format;
             $report = new $reportClass($this->config);
             
             $themesToRun[] = $report->dependsOnAnalysis();

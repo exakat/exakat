@@ -76,10 +76,6 @@ class ExakatConfig extends Config {
             }
         }
 
-        if ($inis === null) {
-            return self::NOT_LOADED;
-        }
-        
         $this->config = $inis;
 
         // Validation

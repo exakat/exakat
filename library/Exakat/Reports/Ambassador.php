@@ -2410,6 +2410,7 @@ SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >=
 SQL;
         $results = $this->sqlite->query($query);
 
+        $counts = array();
         while($row = $results->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['count'];
         }

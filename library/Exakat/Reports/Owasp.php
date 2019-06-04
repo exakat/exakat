@@ -46,10 +46,6 @@ class Owasp extends Ambassador {
     protected $finalName       = null;
     protected $tmpName           = '';
 
-    private $timesToFix        = null;
-    private $themesForAnalyzer = null;
-    private $severities        = null;
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -125,12 +121,7 @@ class Owasp extends Ambassador {
             $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
         }
 
-        if ($this->themes !== null) {
-            $this->themesToShow      = array('Security');
-            $this->timesToFix        = $this->themes->getTimesToFix();
-            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-            $this->severities        = $this->themes->getSeverities();
-        }
+        $this->themesToShow      = array('Security');
     }
 
     protected function getBasedPage($file) {

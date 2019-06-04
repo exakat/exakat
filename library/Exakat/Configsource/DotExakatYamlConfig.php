@@ -53,18 +53,17 @@ class DotExakatYamlConfig extends Config {
 
         $other_php_versions = array();
         foreach(Configuration::PHP_VERSIONS as $version) {
-            if (empty($this->configFile['php' . $version])) {
+            if (empty($this->config->{"php$version"})) {
                 continue;
             }
-            $php = new Phpexec($version[0] . '.' . $version[1], $this->configFile["php$version"]);
+            $php = new Phpexec($version[0] . '.' . $version[1], $this->config->{"php$version"});
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }
         }
     
         // check and default values
-        $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
-                           'other_php_versions' => $other_php_versions,
+        $defaults = array( 'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
