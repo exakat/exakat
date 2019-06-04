@@ -42,7 +42,7 @@ class MistakenConcatenation extends Analyzer {
                 $this->side()
                      ->outIs('ARGUMENT')
                      ->atomIs('Float')
-                     ->raw('count().is(eq(1))');
+                     ->raw('count().is(eq(1))')
              )
              ->outIs('ARGUMENT')
              ->atomIs('Float')
