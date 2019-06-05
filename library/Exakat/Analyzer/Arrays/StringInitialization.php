@@ -44,7 +44,7 @@ class StringInitialization extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->atomIs(array('Nsname', 'Identifier'))
+             ->atomIs(self::$CONSTANTS_ALL)
              ->inIs('DEFINITION')
              ->outIs('VALUE')
              ->atomIs(self::$STRINGS_ALL)

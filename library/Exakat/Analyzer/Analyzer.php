@@ -124,6 +124,8 @@ abstract class Analyzer {
 
     public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String');
 
+    public static $CONSTANTS_ALL    = array('Identifier', 'Nsname');
+
     public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
     
