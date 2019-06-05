@@ -66,7 +66,7 @@ class Intval extends Plugin {
                 break;
     
             case 'Boolean' :
-                $atom->intval = (int) (mb_strtolower($atom->code) === 'true');
+                $atom->intval = (int) (mb_strtolower(trim($atom->code, '\\')) === 'true');
                 break;
     
             case 'Staticclass' :
