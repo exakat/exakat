@@ -30,6 +30,7 @@ class MultipleIdenticalKeys extends Analyzer {
     public function analyze() {
         // array('a' => 1, 'b' = 2)
         $this->atomIs('Arrayliteral')
+             ->isMore('count', 1)
             // first quick check to skip useless check later
              ->not(
                 $this->side()
