@@ -28,28 +28,31 @@ use Exakat\Analyzer\Analyzer;
 class MultipleIdenticalKeys extends Analyzer {
 
     public function analyze() {
+        // array('a' => 1, 'b' = 2)
         $this->atomIs('Arrayliteral')
+            // first quick check to skip useless check later
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIsNot('Keyvalue')
+             )
              ->raw('where(
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant").not(where(__.out("CONCAT")) )
+      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname").not(where(__.out("CONCAT")) )
       .sideEffect{ 
-            if (it.get().label() == "String" && "noDelimiter" in it.get().keys() ) { 
+            if (it.get().label() in ["String", "Staticclass"] && "noDelimiter" in it.get().keys() ) { 
                 k = it.get().value("noDelimiter"); 
                 if (k.isInteger()) {
                     k = k.toInteger();
+                    
+                    if (k.toString().length() != it.get().value("noDelimiter").length()) {
+                        k = it.get().value("noDelimiter"); 
+                    }
                 }
             } 
-            else if (it.get().label() == "Float" )           { k = it.get().value("intval"); } 
-            else if (it.get().label() == "Staticconstant" ) { k = it.get().value("fullcode"); } 
-            else if (it.get().label() == "Null" )           { k = 0; } 
-            else if (it.get().label() == "Boolean" )        { 
-                if (it.get().value("fullcode").toLowerCase() in ["\\false", "false"] ) { 
-                    k = 0; 
-                } else { 
-                    k = 1; 
-                } 
-            } else { k = it.get().value("intval").toInteger(); }
+            else { k = it.get().value("intval"); } 
+
             if (counts[k] == null) { 
                 counts[k] = 1; 
             } else { 
