@@ -735,31 +735,6 @@ SQL;
         return $data;
     }
 
-    protected function getSeveritiesNumberBy($type = 'file') {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($list);
-
-        $query = <<<SQL
-SELECT $type, severity, count(*) AS count
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY $type, severity
-SQL;
-
-        $stmt = $this->sqlite->query($query);
-
-        $return = array();
-        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if (isset($return[$row[$type]]) ) {
-                $return[$row[$type]][$row['severity']] = $row['count'];
-            } else {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            }
-        }
-
-        return $return;
-    }
-
     protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();

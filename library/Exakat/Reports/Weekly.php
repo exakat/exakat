@@ -628,31 +628,6 @@ JAVASCRIPT;
         return $data;
     }
 
-    protected function getSeveritiesNumberBy($type = 'file') {
-        $list = $this->weeks[$this->current]->analysis;
-        $listSQL = makeList($list);
-
-        $query = <<<SQL
-SELECT $type, severity, count(*) AS count
-    FROM results
-    WHERE analyzer IN ($listSQL)
-    GROUP BY $type, severity
-SQL;
-
-        $stmt = $this->sqlite->query($query);
-
-        $return = array();
-        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if ( isset($return[$row[$type]]) ) {
-                $return[$row[$type]][$row['severity']] = $row['count'];
-            } else {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            }
-        }
-
-        return $return;
-    }
-    
     protected function generateWeeklyTable() {
         $html = str_repeat('<div class="clearfix">
               <div class="block-cell-name">&nbsp;</div>
