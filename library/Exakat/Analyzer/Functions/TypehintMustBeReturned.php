@@ -28,7 +28,9 @@ class TypehintMustBeReturned extends Analyzer {
     public function analyze() {
         // function foo() :A { }
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->hasOut('RETURNTYPE')
+             ->outIs('RETURNTYPE')
+             ->fullnspathIsNot('\\void')
+             ->inIs('RETURNTYPE')
              ->outIs('BLOCK')
              ->atomIsNot('Void')
              ->noAtomInside('Return')
@@ -37,7 +39,9 @@ class TypehintMustBeReturned extends Analyzer {
 
         // function foo() :A { return; }
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->hasOut('RETURNTYPE')
+             ->outIs('RETURNTYPE')
+             ->fullnspathIsNot('\\void')
+             ->inIs('RETURNTYPE')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
