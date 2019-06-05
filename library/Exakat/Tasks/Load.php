@@ -234,7 +234,7 @@ class Load extends Tasks {
             $this->phptokens::T_DOLLAR                   => 'processDollar',
             $this->phptokens::T_VARIABLE                 => 'processVariable',
             $this->phptokens::T_LNUMBER                  => 'processInteger',
-            $this->phptokens::T_DNUMBER                  => 'processReal',
+            $this->phptokens::T_DNUMBER                  => 'processFloat',
     
             $this->phptokens::T_OPEN_PARENTHESIS         => 'processParenthesis',
     
@@ -4518,15 +4518,15 @@ class Load extends Tasks {
         return $integer;
     }
 
-    private function processReal() {
-        $real = $this->processSingle('Real');
-        $this->pushExpression($real);
+    private function processFloat() {
+        $float = $this->processSingle('Float');
+        $this->pushExpression($float);
         // (int) is for loading into the database
-        $this->runPlugins($real);
+        $this->runPlugins($float);
 
         $this->checkExpression();
 
-        return $real;
+        return $float;
     }
 
     private function processLiteral() {

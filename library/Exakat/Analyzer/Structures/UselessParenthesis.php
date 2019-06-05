@@ -105,7 +105,7 @@ class UselessParenthesis extends Analyzer {
         // (literal);
         $this->atomIs('Parenthesis')
              ->outIs('CODE')
-             ->atomIs(array('Integer', 'Real', 'Boolean', 'Identifier', 'Variable',
+             ->atomIs(array('Integer', 'Float', 'Boolean', 'Identifier', 'Variable',
                             'Magicconstant', 'Null', 'Functioncall', 'Member', 'Methodcall',
                             'Staticmethodcall', 'Staticconstant', 'Staticproperty'))
              ->back('first');

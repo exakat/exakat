@@ -47,7 +47,7 @@ class CouldUseInterface extends Analyzer {
         $interfaces = array();
         $methodNames = array();
         foreach($res->toArray() as $row) {
-            $row['static'] = preg_match('/^.*static.*function /i', $row['static']) != false ? 'static' : '';
+            $row['static'] = preg_match('/^.*static.*function /i', $row['static']) === 0 ? '' : 'static';
             if (isset($interfaces[$row['name']])) {
                 $interfaces[$row['name']][] = "$row[method]-$row[methodCount]-$row[static]";
             } else {

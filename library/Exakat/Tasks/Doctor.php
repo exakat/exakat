@@ -78,6 +78,8 @@ class Doctor extends Tasks {
     }
 
     private function checkPreRequisite() {
+        $stats = array();
+
         // Compulsory
         $stats['exakat']['executable']  = $this->config->executable;
         $stats['exakat']['version']     = Exakat::VERSION;

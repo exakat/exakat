@@ -49,7 +49,7 @@ class NoNetForXmlLoad extends Analyzer {
              ->codeIs($methods)
              ->outWithRank('ARGUMENT', 1)
              ->atomIsNot(self::$CONTAINERS)
-             ->noAtomPropertyInside(array('Identifier', 'Nsname'), 'fullnspath', '\LIBXML_NONET')
+             ->noAtomPropertyInside(self::$CONSTANTS_ALL, 'fullnspath', '\LIBXML_NONET')
              ->back('first');
         $this->prepareQuery();
 
@@ -63,7 +63,7 @@ class NoNetForXmlLoad extends Analyzer {
         $this->atomFunctionIs(array('\\simplexml_load_string', '\\simplexml_load_file'))
              ->outWithRank('ARGUMENT', 2)
              ->atomIsNot(self::$CONTAINERS)
-             ->noAtomPropertyInside(array('Identifier', 'Nsname'), 'fullnspath', '\LIBXML_NONET')
+             ->noAtomPropertyInside(self::$CONSTANTS_ALL, 'fullnspath', '\LIBXML_NONET')
              ->back('first');
         $this->prepareQuery();
 
@@ -83,7 +83,7 @@ class NoNetForXmlLoad extends Analyzer {
              ->fullnspathIs(array('\\simplexml', '\SimpleXMLIterator'))
              ->outWithRank('ARGUMENT', 1)
              ->atomIsNot(self::$CONTAINERS)
-             ->noAtomPropertyInside(array('Identifier', 'Nsname'), 'fullnspath', '\LIBXML_NONET')
+             ->noAtomPropertyInside(self::$CONSTANTS_ALL, 'fullnspath', '\LIBXML_NONET')
              ->back('first');
         $this->prepareQuery();
     }

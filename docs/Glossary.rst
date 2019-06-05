@@ -3,10 +3,6 @@
 Glossary
 ============
 + `$`
-    + `$HTTP_RAW_POST_DATA`
-
-      + :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
-
     + `$_ENV`
 
       + :ref:`Useless Global <useless-global>`
@@ -222,7 +218,6 @@ Glossary
       + :ref:`Long Arguments <long-arguments>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
-      + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
       + :ref:`Switch Fallthrough <switch-fallthrough>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`

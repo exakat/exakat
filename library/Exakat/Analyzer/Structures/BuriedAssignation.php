@@ -40,7 +40,7 @@ class BuriedAssignation extends Analyzer {
              // in a property definition
              ->inIsIE('CODE')
              ->hasNoIn(array('CONST', 'CONDITION', 'PPP', 'STATIC'))
-             ->back('first');
+             ->goToExpression();
         $this->prepareQuery();
 
         // Special for for(;;) : only if several instructions with comma
@@ -48,7 +48,8 @@ class BuriedAssignation extends Analyzer {
              ->outIs(array('INIT', 'FINAL', 'INCREMENT'))
              ->isMore('count', 1)
              ->outIs('EXPRESSION')
-             ->atomIs('Assignation');
+             ->atomIs('Assignation')
+             ->back('first');
         $this->prepareQuery();
     }
 }

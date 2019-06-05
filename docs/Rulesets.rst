@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Fri, 31 May 2019 08:40:52 +0000
-.. comment: Generation hash : d44ee1718f19ed159f2f561fe107f7001825bc6e
+.. comment: Generation date : Mon, 03 Jun 2019 15:38:26 +0000
+.. comment: Generation hash : b7a910e5419ec1d9f2554a1e89b04f49a494dc36
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 357 analysis
+Total : 359 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -182,6 +182,7 @@ Total : 357 analysis
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
 * :ref:`Identical Consecutive Expression <identical-consecutive-expression>`
+* :ref:`Identical Methods <identical-methods>`
 * :ref:`Identical On Both Sides <identical-on-both-sides>`
 * :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations <iffectations>`
@@ -239,6 +240,7 @@ Total : 357 analysis
 * :ref:`Never Used Parameter <never-used-parameter>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`Next Month Trap <next-month-trap>`
+* :ref:`No Append On Source <no-append-on-source>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Class As Typehint <no-class-as-typehint>`
@@ -436,7 +438,7 @@ Total : 357 analysis
 ClassReview
 +++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -450,6 +452,7 @@ Total : 20 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
+* :ref:`Identical Methods <identical-methods>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Property Could Be Local <property-could-be-local>`
@@ -496,7 +499,7 @@ Total : 24 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 76 analysis
+Total : 77 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -557,6 +560,7 @@ Total : 76 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -580,7 +584,7 @@ Total : 76 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 72 analysis
+Total : 73 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -639,6 +643,7 @@ Total : 72 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -660,7 +665,7 @@ Total : 72 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 64 analysis
+Total : 65 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -712,6 +717,7 @@ Total : 64 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -732,7 +738,7 @@ Total : 64 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 53 analysis
+Total : 54 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -778,6 +784,7 @@ Total : 53 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -793,7 +800,7 @@ Total : 53 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 46 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -828,6 +835,7 @@ Total : 45 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
@@ -846,7 +854,7 @@ Total : 45 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 31 analysis
+Total : 32 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -872,6 +880,7 @@ Total : 31 analysis
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
@@ -885,7 +894,7 @@ Total : 31 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 23 analysis
+Total : 24 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -906,6 +915,7 @@ Total : 23 analysis
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -916,7 +926,7 @@ Total : 23 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 10 analysis
+Total : 11 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -926,6 +936,7 @@ Total : 10 analysis
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
+* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 

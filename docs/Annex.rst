@@ -321,6 +321,7 @@ Applications
 
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
+* 
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Contao <https://contao.org/en/>`_
@@ -344,6 +345,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
+* SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
 * `Thelia <https://thelia.net/>`_
@@ -427,6 +429,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.2
+
+  * Identical Methods (Classes/IdenticalMethods)
+  * No Append On Source (Structures/NoAppendOnSource ; Analyze)
+
 * 1.8.1
 
   * No Need For get_class() (Structures/NoNeedGetClass)
@@ -439,7 +446,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Concat Empty String (Structures/ConcatEmpty ; Analyze, OneFile)
   * Minus One On Error (Security/MinusOneOnError ; Security)
   * New Functions In PHP 7.4 (Php/Php74NewFunctions ; CompatibilityPHP74)
-  * Php/UnpackingInsideArrays (Php/UnpackingInsideArrays ; Unassigned)
+  * Php/UnpackingInsideArrays (Php/UnpackingInsideArrays ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Useless Argument (Functions/UselessArgument)
 
 * 1.7.9
@@ -447,9 +454,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid option arrays in constructors (Classes/AvoidOptionArrays)
   * Traits/TraitNotFound (Traits/TraitNotFound ; Analyze, LintButWontExec)
   * Useless Default Argument (Functions/UselessDefault ; Suggestions)
-  * ext/ffi (Extensions/Extffi ; Appcontent)
-  * ext/uuid (Extensions/Extuuid ; Unassigned)
-  * ext/zend_monitor (Extensions/Extzendmonitor ; Unassigned)
+  * ext/ffi (Extensions/Extffi ; Appinfo, Appcontent)
+  * ext/uuid (Extensions/Extuuid ; Appinfo)
+  * ext/zend_monitor (Extensions/Extzendmonitor ; Appinfo)
 
 * 1.7.8
 
@@ -459,7 +466,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Implode One Arg (Php/ImplodeOneArg)
   * Integer Conversion (Security/IntegerConversion ; Security)
-  * Php/IncomingValues (Php/IncomingValues ; Unassigned)
+  * Php/IncomingValues (Php/IncomingValues ; Internal)
 
 * 1.7.6
 
@@ -1836,7 +1843,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/opcache (Extensions/Extopcache ; Appinfo)
   * ext/openssl (Extensions/Extopenssl ; Appinfo)
   * ext/parsekit (Extensions/Extparsekit ; Appinfo)
-  * ext/password (Extensions/Extpassword ; Appcontent)
+  * ext/password (Extensions/Extpassword ; Appinfo, Appcontent)
   * ext/pcntl (Extensions/Extpcntl ; Appinfo)
   * ext/pcre (Extensions/Extpcre ; Appinfo)
   * ext/pdo (Extensions/Extpdo ; Appinfo)
@@ -2255,6 +2262,7 @@ List of external links mentionned in this documentation.
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreign Function Interface <https://www.php.net/manual/en/book.ffi.php>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
+* `Frederic Bouchery <https://twitter.com/FredBouchery>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Function arguments <http://php.net/manual/en/functions.arguments.php>`_
@@ -2347,8 +2355,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2676,6 +2684,7 @@ _______
 |   analyzer[] = "Classes/DontUnsetProperties";
 |   analyzer[] = "Classes/EmptyClass";
 |   analyzer[] = "Classes/FinalByOcramius";
+|   analyzer[] = "Classes/IdenticalMethods";
 |   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
 |   analyzer[] = "Classes/IncompatibleSignature";
@@ -2915,6 +2924,7 @@ _______
 |   analyzer[] = "Structures/NestedTernary";
 |   analyzer[] = "Structures/NeverNegative";
 |   analyzer[] = "Structures/NextMonthTrap";
+|   analyzer[] = "Structures/NoAppendOnSource";
 |   analyzer[] = "Structures/NoChangeIncomingVariables";
 |   analyzer[] = "Structures/NoChoice";
 |   analyzer[] = "Structures/NoDirectUsage";
@@ -3032,6 +3042,7 @@ ___________
 |   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
+|   analyzer[] = "Classes/IdenticalMethods";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/RedefinedProperty";
@@ -3146,6 +3157,7 @@ __________________
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/debugInfoUsage";
 |   analyzer[] = "Structures/Break0";
@@ -3230,6 +3242,7 @@ __________________
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/debugInfoUsage";
 |   analyzer[] = "Structures/BreakNonInteger";
@@ -3311,6 +3324,7 @@ __________________
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/debugInfoUsage";
 |   analyzer[] = "Structures/ConstantScalarExpression";
@@ -3378,6 +3392,7 @@ __________________
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/IssetWithConstant";
@@ -3435,6 +3450,7 @@ __________________
 |   analyzer[] = "Php/SetExceptionHandlerPHP7";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/UsortSorting";
 |   analyzer[] = "Structures/BreakOutsideLoop";
@@ -3482,6 +3498,7 @@ __________________
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/NoSubstrOne";
@@ -3519,6 +3536,7 @@ __________________
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Structures/CanCountNonCountable";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/NoGetClassNull";
@@ -3543,6 +3561,7 @@ __________________
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnknownPcre2Option";
+|   analyzer[] = "Php/UnpackingInsideArrays";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 

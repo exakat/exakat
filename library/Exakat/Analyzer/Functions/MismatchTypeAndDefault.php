@@ -50,7 +50,7 @@ filter{
             break;
 
         case '\\float' : 
-            !(type in ["Real", "Integer", "Addition", "Multiplication", "Power", "Null"]);
+            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
         case '\\bool' : 
@@ -91,7 +91,7 @@ GREMLIN
 filter{
     switch(it.get().value("fullnspath")) {
         case '\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass", "Integer", "Real"]);
+            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass", "Integer", "Float"]);
             break;
 
         case '\\int' : 
@@ -99,7 +99,7 @@ filter{
             break;
 
         case '\\float' : 
-            !(type in ["Real", "Integer", "Addition", "Multiplication", "Power", "Null"]);
+            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
             break;
 
         case '\\bool' : 

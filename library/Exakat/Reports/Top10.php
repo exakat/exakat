@@ -184,7 +184,7 @@ MENU;
                                                           'Php/ConcatAndAddition',
                                                          ),
                        'Missing subpattern'      => array('Php/MissingSubpattern',),
-                       'Avoir real'              => array('Php/AvoidReal',
+                       'Avoid real'              => array('Php/AvoidReal',
                                                           'Type/NoRealComparison',),
                      );
 

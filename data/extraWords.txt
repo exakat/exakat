@@ -236,3 +236,8 @@ transtyping
 transtype
 transtypes
 transtyped
+UTF-8
+UTF-16
+api
+__CLASS__
+__DIR__s

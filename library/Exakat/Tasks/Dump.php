@@ -1338,7 +1338,7 @@ GREMLIN;
     }
 
     private function collectLiterals() {
-        $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
+        $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
 
         foreach($types as $type) {
             $this->sqlite->query('DROP TABLE IF EXISTS literal' . $type);
@@ -2185,7 +2185,7 @@ GREMLIN;
 
         $valuesSQL = array();
         foreach($statsValues as $name => $count) {
-            $valuesSQL[] = "(\"Foreach Values\", \"".$this->sqlite->escapeString($name)."\", $count)";
+            $valuesSQL[] = '("Foreach Values", "' . $this->sqlite->escapeString($name) . "\", $count)";
         }
 
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);

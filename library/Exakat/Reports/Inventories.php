@@ -66,7 +66,7 @@ class Inventories extends Reports {
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");
         $this->saveAtom('Heredoc',      "$path/heredoc.csv");
-        $this->saveAtom('Real',         "$path/real.csv");
+        $this->saveAtom('Float',        "$path/float.csv");
         $this->saveAtom('String',       "$path/strings.csv");
 
         $this->saveTable('globalVariables',       "$path/globals.csv", array('variable', 'file', 'line', 'isRead', 'isModified', 'type'));

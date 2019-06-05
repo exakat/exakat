@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$lines4 = array( )',
+$expected     = array('$count = count($lines4 = array( ))',
                      );
 
 $expected_not = array('$count = count($lines1)',

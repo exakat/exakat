@@ -29,7 +29,7 @@ class GoToExpression extends DSL {
         
         return new Command(<<<GREMLIN
 coalesce( __.where( __.in("EXPRESSION")), 
-                    __.repeat( __.in({$linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
+          __.repeat( __.in({$linksDown})).emit( ).until( where(__.in("EXPRESSION") ) ).where( __.in("EXPRESSION") )
         )
 GREMLIN
 );

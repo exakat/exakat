@@ -30,6 +30,8 @@ class IdenticalMethods extends Analyzer {
         // class b extends a { public function foo() { /some code/ } }
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
+             ->isNot('abstract', true)
+             ->hasNoInterface()
              ->savePropertyAs('ctype1', 'clonetype')
              ->inIs('OVERWRITE')
              ->atomIs('Method')

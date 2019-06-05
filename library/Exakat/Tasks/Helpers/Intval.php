@@ -55,7 +55,7 @@ class Intval extends Plugin {
                 $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
                 break;
 
-            case 'Real' :
+            case 'Float' :
             case 'String' :
             case 'Heredoc' :
                 if (empty($extras)) {
@@ -66,7 +66,7 @@ class Intval extends Plugin {
                 break;
     
             case 'Boolean' :
-                $atom->intval = (int) (mb_strtolower($atom->code) === 'true');
+                $atom->intval = (int) (mb_strtolower(trim($atom->code, '\\')) === 'true');
                 break;
     
             case 'Staticclass' :

@@ -110,10 +110,6 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateDefaultValues');
-
         $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetParentDefinition');
@@ -130,6 +126,9 @@ GREMLIN;
         $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassPropertyRemoteDefinition');
+        $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateDefaultValues');
 
         $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();

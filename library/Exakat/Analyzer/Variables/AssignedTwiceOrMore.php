@@ -36,7 +36,7 @@ class AssignedTwiceOrMore extends Analyzer {
              ->inIs('LEFT')
              ->hasNoParent('For', array('EXPRESSION', 'INIT'))
              ->outIs('RIGHT')
-             ->atomIs(array('Integer', 'Real', 'Boolean', 'Null', 'Heredoc', 'String'))
+             ->atomIs(array('Integer', 'Float', 'Boolean', 'Null', 'Heredoc', 'String'))
              ->hasNoOut('CONCAT')
              ->inIs('RIGHT')
              ->outIs('LEFT');

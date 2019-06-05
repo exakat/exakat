@@ -29,7 +29,7 @@ class ConstantScalarExpression extends Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $authorizedAtoms = array('Integer', 'String', 'Real', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
+        $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
         
         // in constants
         $this->atomIs('Const')

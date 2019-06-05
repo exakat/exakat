@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessCheck extends Analyzer {
     public function analyze() {
+        // No check on empty() and isset(), as they also check the variable existence
         //    if (count($anArray) > 0){    foreach ($anArray as $el){
         $this->atomIs('Ifthen')
              ->hasNoOut('ELSE')
@@ -33,25 +34,6 @@ class UselessCheck extends Analyzer {
              ->atomInsideNoDefinition('Functioncall')
              // count($a) > 0, sizeof($a) != 0, !empty($a)
              ->functioncallIs(array('\\count', '\\sizeof'))
-             ->outWithRank('ARGUMENT', 0)
-             ->savePropertyAs('fullcode', 'var')
-             ->back('first')
-             ->outIs('THEN')
-             ->is('count', 1)
-             ->outWithRank('EXPRESSION', 0)
-             ->atomIs('Foreach')
-             ->outIs('SOURCE')
-             ->samePropertyAs('fullcode', 'var')
-             ->back('first');
-        $this->prepareQuery();
-
-        //    if (count($anArray) > 0){    foreach ($anArray as $el){
-        $this->atomIs('Ifthen')
-             ->analyzerIsNot('self')
-             ->hasNoOut('ELSE')
-             ->outIs('CONDITION')
-             ->atomInsideNoDefinition('Empty')
-             // count($a) > 0, sizeof($a) != 0, !empty($a)
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'var')
              ->back('first')

@@ -29,7 +29,7 @@ use Exakat\Query\Query;
 class CreateCompactVariables extends LoadFinal {
     public function run() {
         $query = $this->newQuery('CreateCompactVariables this');
-        $query->atomFunctionis('\compact')
+        $query->atomFunctionIs('\compact')
               ->outIs('ARGUMENT')
               ->has('noDelimiter')
               ->_as('varInString')

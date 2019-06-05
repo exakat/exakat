@@ -33,11 +33,6 @@ class Diplomat extends Ambassador {
     const FILE_FILENAME  = 'diplomat';
     const FILE_EXTENSION = '';
 
-    private $frequences        = array();
-    private $timesToFix        = array();
-    private $themesForAnalyzer = array();
-    private $severities        = array();
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -53,13 +48,6 @@ class Diplomat extends Ambassador {
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {
             $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
-        }
-
-        if ($this->themes !== null) {
-            $this->frequences        = $this->themes->getFrequences();
-            $this->timesToFix        = $this->themes->getTimesToFix();
-            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
-            $this->severities        = $this->themes->getSeverities();
         }
 
         $this->themesToShow = array('Top10');

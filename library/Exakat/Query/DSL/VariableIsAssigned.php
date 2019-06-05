@@ -32,7 +32,7 @@ where(
    __.out("DEFINITION").in("LEFT")
      .hasLabel("Assignation").has("token", "T_EQUAL")
      .not(where(__.in("EXPRESSION").in("INIT")))
-     .out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean")
+     .out("RIGHT").hasLabel("Integer", "String", "Float", "Null", "Boolean")
      .count().is(gte($times))
 )
 GREMLIN;

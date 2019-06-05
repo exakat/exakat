@@ -200,7 +200,7 @@ class Appinfo extends Data {
                             'Hexadecimal'         => 'Type/Hexadecimal',
                             'Octal'               => 'Type/Octal',
                             'Binary'              => 'Type/Binary',
-                            'Real'                => 'Real',
+                            'Float'               => 'Float',
                             'Not-a-Number'        => 'Php/IsNAN',
                             'Infinity'            => 'Php/IsINF',
                     ),

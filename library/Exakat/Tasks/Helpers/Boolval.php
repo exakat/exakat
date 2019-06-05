@@ -58,7 +58,7 @@ class Boolval extends Plugin {
                 $atom->boolean = false;
                 break;
 
-            case 'Real' :
+            case 'Float' :
                 // $atom->code is a string
                 $atom->boolean = (int) (bool) (float) $atom->code;
                 break;
@@ -68,7 +68,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'Boolean' :
-                $atom->boolean = (int) (mb_strtolower($atom->code) === 'true');
+                $atom->boolean = (int) (mb_strtolower(trim($atom->code, '\\')) === 'true');
                 break;
 
             case 'String' :

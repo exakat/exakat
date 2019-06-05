@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$b = intval($c)',
-                      '$b = strtolower($c)',
+$expected     = array('$a = 1 + 2 * ($b = intval($c))', 
+                      'if(false != ($b = strtolower($c))) { /**/ } ',
                      );
 
 $expected_not = array('C = 3',
