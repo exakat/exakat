@@ -141,7 +141,7 @@ addV()
           .property("virtual", true)
       )
       .addE("PPP").from("classe")
-    
+      
       .select("source").where( 
         __.out("TYPEHINT").as("sourcetypehint")
           .addV()
@@ -166,7 +166,17 @@ addV()
               .property(select("p").key(), select("p").value())
           )
           .addE("PPP").from("clone")
-      
+
+          .select("sourceppp").addE("OVERWRITE").from("cloneppp")
+
+          .sideEffect(
+            select('sourceppp').outE().hasLabel('DEFINITION').as('e')
+                .where( select('e').inV().in('LEFT').in('EXPRESSION').in("BLOCK").hasLabel('Method').not(has('visibility', 'private')))
+                .select('cloneppp')
+                .addE(select('e').label()).as('eclone')
+                .to(select('e').inV())
+            )
+
           .select("sourceppp").where( 
             __.out("DEFAULT").not(where(__.in("RIGHT"))).as("sourcedefault")
               .addV()

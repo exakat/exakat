@@ -37,6 +37,7 @@ class OverwrittenProperties extends LoadFinal {
               ->outIs('PPP')
               ->isNot('virtual', true)
               ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
+              ->raw('not(where(__.in("OVERWRITE").where(eq("first"))))', array(), array())
               ->addEFrom('OVERWRITE', 'first')
               ->returnCount();
         $query->prepareRawQuery();
