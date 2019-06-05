@@ -975,24 +975,26 @@ JAVASCRIPT;
         $res = $this->sqlite->query(<<<'SQL'
 SELECT key, value FROM hashResults
 WHERE name = "ParameterCounts"
-ORDER BY key
+ORDER BY key + 0
 SQL
         );
         
         if (!$res) { return ; }
         
-        $html = '';
+        $html = array();
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
             $xAxis[] = "'" . $value['key'] . " param.'";
             $data[$value['key']] = $value['value'];
 
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' param.</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
+        sort($html);
+        $html = implode('', $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
