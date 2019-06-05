@@ -114,28 +114,6 @@ class Migration73 extends Ambassador {
         $this->cleanFolder();
     }
 
-    protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP73'));
-        $list = makeList($list);
-
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer in ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC ";
-        if ($limit) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
-        }
-
-        return $data;
-    }
-
     protected function generateCompilations() {
         $compilations = '';
 
@@ -461,29 +439,6 @@ JAVASCRIPT;
         $this->putBasedPage('index', $finalHTML);
     }
 
-    protected function getSeveritiesNumberBy($type = 'file') {
-        $listSQL = makeList($this->analyzerList);
-
-        $query = <<<SQL
-SELECT $type, severity, count(*) AS count
-    FROM results
-    WHERE analyzer IN ($listSQL)
-    GROUP BY $type, severity
-SQL;
-
-        $stmt = $this->sqlite->query($query);
-
-        $return = array();
-        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if ( isset($return[$row[$type]]) ) {
-                $return[$row[$type]][$row['severity']] = $row['count'];
-            } else {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            }
-        }
-
-        return $return;
-    }
 
     protected function getTotalAnalysedFile() {
         $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer in (" . makeList($this->analyzerList) . ')';
@@ -491,18 +446,6 @@ SQL;
 
         $result = $result->fetchArray(\SQLITE3_NUM);
         return $result[0];
-    }
-
-    protected function getTotalAnalyzer($issues = false) {
-        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
-            FROM resultsCounts AS rc
-            WHERE rc.count >= 0 AND
-                  analyzer in (' . makeList($this->analyzerList) . ')';
-
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray(\SQLITE3_NUM);
     }
 
     protected function cleanFolder() {
