@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NotCountNull extends Analyzer {
     public function analyze() {
         $functions = array('\\count',
+                           '\\sizeof',
                            '\\strlen',
                            '\\mb_strlen',
                            );
