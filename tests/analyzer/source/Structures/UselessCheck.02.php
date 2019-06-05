@@ -1,10 +1,5 @@
 <?php
 
-if (!empty($a)){    
-    foreach ($a as $c){
-    }
-}
-
 if (sizeof($a->b) != 0){    
     $c++;
     foreach ($a->b as $c){
