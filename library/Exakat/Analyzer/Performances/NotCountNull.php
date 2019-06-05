@@ -45,7 +45,9 @@ class NotCountNull extends Analyzer {
 
         // if (count($x))
         $this->atomFunctionIs($functions)
-             ->hasIn('CONDITION');
+             ->inIs('CONDITION')
+             ->atomIsNot('Switch')
+             ->back('first');
         $this->prepareQuery();
 
         // if (count($x) && $x > 2)
