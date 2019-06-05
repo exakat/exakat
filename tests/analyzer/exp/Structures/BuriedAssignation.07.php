@@ -1,8 +1,7 @@
 <?php
 
-$expected     = array('$b2 = count($f2)',
-                      '$b = count($f)',
-                      '$i = 0',
+$expected     = array('for( /**/  ; $i < $d ; $i++) { /**/ } ', 
+                      'for($i2 = 0 ;  /**/  ; $i++) { /**/ } ',
                      );
 
 $expected_not = array('$i2 = 0',
