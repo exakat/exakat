@@ -87,7 +87,7 @@ addV()
           .addE("PPP").from("clone")
       
           .select("sourceppp").where( 
-            __.out("DEFAULT").as("sourcedefault")
+            __.out("DEFAULT").not(where(__.in("RIGHT"))).as("sourcedefault")
               .addV()
               .property(label, select("sourcedefault").label()).as("clonedefault")
               .property("virtual", true)
@@ -168,7 +168,7 @@ addV()
           .addE("PPP").from("clone")
       
           .select("sourceppp").where( 
-            __.out("DEFAULT").as("sourcedefault")
+            __.out("DEFAULT").not(where(__.in("RIGHT"))).as("sourcedefault")
               .addV()
               .property(label, select("sourcedefault").label()).as("clonedefault")
               .property("virtual", true)
@@ -226,7 +226,6 @@ GREMLIN
               ->outIs('OBJECT')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-//              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
               ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
