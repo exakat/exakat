@@ -1,8 +1,38 @@
 test
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFAULT
+      25
+      Label : NEW
+        26
+        Label : ARGUMENT
+          28
+        Label : NAME
+          26
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    18
+    17
+    Label : DEFAULT
+      25
+      Label : NEW
+        26
+        Label : ARGUMENT
+          28
+        Label : NAME
+          26
     Label : DEFINITION
       17
     Label : DEFINITION

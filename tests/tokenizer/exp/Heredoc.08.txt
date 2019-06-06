@@ -1,16 +1,52 @@
 test
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      27
+    Label : DEFAULT
+      23
+      Label : CONCAT
+        25
+    Label : DEFAULT
+      19
+      Label : CONCAT
+        21
+    Label : DEFAULT
+      17
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    14
+    Label : DEFAULT
+      27
+    Label : DEFAULT
+      23
+      Label : CONCAT
+        25
+    Label : DEFAULT
+      19
+      Label : CONCAT
+        21
+    Label : DEFAULT
+      17
     Label : DEFINITION
-      15
+      14
     Label : DEFINITION
-      15
+      14
     Label : DEFINITION
-      15
+      14
     Label : DEFINITION
-      15
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,39 +66,39 @@ Label : PROJECT
               Label : ELSE
                 8
                 Label : EXPRESSION
-                  13
+                  12
                   Label : POSTPLUSPLUS
-                    14
+                    13
               Label : THEN
                 8
                 Label : EXPRESSION
-                  13
+                  12
                   Label : POSTPLUSPLUS
-                    12
+                    11
           Label : DEFINITION
-            11
+            10
             Label : DEFINITION
               10
           Label : DEFINITION
             11
             Label : DEFINITION
-              12
+              11
           Label : DEFINITION
-            11
+            13
             Label : DEFINITION
-              14
+              13
           Label : NAME
             5
         Label : EXPRESSION
           16
           Label : LEFT
-            15
+            14
           Label : RIGHT
             17
         Label : EXPRESSION
           16
           Label : LEFT
-            15
+            14
           Label : RIGHT
             19
             Label : CONCAT
@@ -70,7 +106,7 @@ Label : PROJECT
         Label : EXPRESSION
           16
           Label : LEFT
-            15
+            14
           Label : RIGHT
             23
             Label : CONCAT
@@ -78,7 +114,7 @@ Label : PROJECT
         Label : EXPRESSION
           16
           Label : LEFT
-            15
+            14
           Label : RIGHT
             27
         Label : EXPRESSION
@@ -94,25 +130,25 @@ Label : PROJECT
               Label : ELSE
                 8
                 Label : EXPRESSION
-                  13
+                  12
                   Label : POSTPLUSPLUS
                     32
               Label : THEN
                 8
                 Label : EXPRESSION
-                  13
+                  12
                   Label : POSTPLUSPLUS
                     31
           Label : DEFINITION
-            11
+            30
             Label : DEFINITION
               30
           Label : DEFINITION
-            11
+            31
             Label : DEFINITION
               31
           Label : DEFINITION
-            11
+            32
             Label : DEFINITION
               32
           Label : NAME

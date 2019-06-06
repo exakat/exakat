@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    22
+    21
     Label : DEFINITION
       21
   Label : FILE
@@ -110,7 +116,7 @@ Label : PROJECT
             Label : INDEX
               18
               Label : LEFT
-                23
+                22
               Label : RIGHT
                 19
             Label : VARIABLE
@@ -134,7 +140,7 @@ Label : PROJECT
             Label : INDEX
               18
               Label : LEFT
-                24
+                23
               Label : RIGHT
                 19
             Label : VARIABLE

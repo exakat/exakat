@@ -28,84 +28,54 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                16
+                15
                 Label : LEFT
-                  15
+                  14
                   Label : MEMBER
-                    14
+                    13
                   Label : OBJECT
                     12
                 Label : RIGHT
-                  22
+                  21
                   Label : CONDITION
-                    17
+                    16
                     Label : CODE
-                      20
+                      19
                       Label : LEFT
-                        15
+                        14
                         Label : MEMBER
-                          19
-                        Label : OBJECT
                           18
+                        Label : OBJECT
+                          17
                       Label : RIGHT
-                        21
+                        20
                   Label : ELSE
-                    17
+                    16
                     Label : CODE
-                      27
+                      26
                       Label : LEFT
-                        25
+                        24
                       Label : RIGHT
-                        15
+                        14
                         Label : MEMBER
-                          28
+                          27
                         Label : OBJECT
                           9
                   Label : THEN
-                    23
+                    22
             Label : DEFINITION
-              13
+              12
               Label : DEFINITION
                 12
             Label : DEFINITION
-              13
+              17
               Label : DEFINITION
-                18
+                17
             Label : DEFINITION
-              13
+              24
               Label : DEFINITION
-                25
+                24
             Label : NAME
               7
           Label : NAME
             6
-          Label : PPP
-            0
-            Label : PPP
-              0
-              Label : DEFINITION
-                15
-                Label : MEMBER
-                  14
-                Label : OBJECT
-                  12
-          Label : PPP
-            0
-            Label : PPP
-              0
-              Label : DEFINITION
-                15
-                Label : MEMBER
-                  19
-                Label : OBJECT
-                  18
-          Label : PPP
-            0
-            Label : PPP
-              0
-              Label : DEFINITION
-                15
-                Label : MEMBER
-                  28
-                Label : OBJECT
-                  9

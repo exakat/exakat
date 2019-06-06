@@ -1866,14 +1866,6 @@ class Load extends Tasks {
             $nsname = $this->addAtom('Self');
 
             $nsname->noDelimiter = '';
-        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_CALLABLE) {
-            $nsname = $this->addAtom('Nsname');
-            $nsname->token      = 'T_CALLABLE';
-            $nsname->fullnspath = '\\callable';
-        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_ARRAY) {
-            $nsname = $this->addAtom('Nsname');
-            $nsname->token      = 'T_ARRAY';
-            $nsname->fullnspath = '\\array';
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             $nsname = $this->addAtom('Newcall');
             $nsname->token     = 'T_STRING';
@@ -1889,13 +1881,6 @@ class Load extends Tasks {
             ++$this->id;
 
             $nsname->absolute = self::NOT_ABSOLUTE;
-        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_ARRAY    ||
-                  $this->tokens[$this->id][0] === $this->phptokens::T_CALLABLE ) {
-            $fullcode[] = $this->tokens[$this->id][1];
-
-            ++$this->id;
-
-            $nsname->absolute = self::ABSOLUTE;
         } elseif ($this->tokens[$this->id - 1][0] === $this->phptokens::T_NAMESPACE) {
             $fullcode[] = $this->tokens[$this->id - 1][1];
 
@@ -1983,42 +1968,28 @@ class Load extends Tasks {
              $nullable = self::NOT_NULLABLE;
          }
 
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_ARRAY,
-                                                            $this->phptokens::T_CALLABLE,
-                                                            ),
-                     STRICT_COMPARISON)) {
-            $nsname = $this->processNextAsIdentifier();
-            $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
-
-            if ($nullable === self::NULLABLE) {
-                $nsname->nullable = self::NULLABLE;
-                $nsname->fullcode = "?$nsname->fullcode";
-            }
-
-            return $nsname;
-        }
-        
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                             $this->phptokens::T_STRING,
                                                             $this->phptokens::T_NAMESPACE),
                      STRICT_COMPARISON)) {
-            $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-            
-            if ($this->tokens[$this->id + 1][1] === ',') {
+                     
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable'), STRICT_COMPARISON)) {
                 ++$this->id;
-            }
-            
-            if (in_array(mb_strtolower($nsname->code), array('int', 'bool', 'void', 'float', 'string'), STRICT_COMPARISON)) {
+                $nsname = $this->processSingle('Scalartypehint');
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
             } else {
+                $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
                 $this->getFullnspath($nsname, 'class', $nsname);
-                
                 $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             }
-            
+
             if ($nullable === self::NULLABLE) {
                 $nsname->nullable = self::NULLABLE;
                 $nsname->fullcode = "?$nsname->fullcode";
+            }
+
+            if ($this->tokens[$this->id + 1][1] === ',') {
+                ++$this->id;
             }
 
             return $nsname;

@@ -1,8 +1,52 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    20
+    12
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -16,7 +60,7 @@ Label : PROJECT
     Label : DEFINITION
       12
   Label : DEFINITION
-    20
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -30,7 +74,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    20
+    14
     Label : DEFINITION
       14
     Label : DEFINITION
@@ -218,7 +262,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -236,7 +280,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -256,7 +300,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -274,7 +318,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -294,7 +338,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -312,7 +356,7 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
         Label : EXPRESSION
           21
           Label : LEFT
@@ -332,4 +376,4 @@ Label : PROJECT
             Label : ARGUMENT
               24
             Label : ARGUMENT
-              25
+              27
