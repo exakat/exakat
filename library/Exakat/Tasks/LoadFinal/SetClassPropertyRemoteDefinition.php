@@ -25,9 +25,11 @@ namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
+use Exakat\GraphElements;
 
 class SetClassPropertyRemoteDefinition extends LoadFinal {
     public function run() {
+        $linksDown = GraphElements::linksDownAsList();
 
         // For properties in traits
         $query = $this->newQuery('SetClassPropertyRemoteDefinition property');
@@ -77,7 +79,7 @@ addV()
     .select("source").where( 
         __.out("PPP").as("sourceppp")
           .addV()
-            .property(label, "Propertydefinition")
+            .property(label, select("sourceppp").label())
             .property("virtual", true).as("cloneppp")
           .sideEffect(
             select("sourceppp").properties().as("p")
