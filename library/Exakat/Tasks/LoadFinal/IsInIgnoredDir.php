@@ -59,7 +59,7 @@ class IsInIgnoredDir extends LoadFinal {
         }
         
         $count = $countF + $countC;
-        display("Set $count functions, constantants and class with ignored_dir");
+        display("Set $count functions, constants and class with ignored_dir");
     }
 }
 

@@ -26,13 +26,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyNeverUsed extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/PropertyUsedInternally',
-                     'Classes/PropertyUsedAbove',
-                     'Classes/PropertyUsedBelow',
-                    );
-    }
-
     public function analyze() {
         // class x { private $p = 1; }
         $this->atomIs(self::$CLASSES_ALL)
@@ -41,10 +34,7 @@ class PropertyNeverUsed extends Analyzer {
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
-             ->analyzerIsNot(array('Classes/PropertyUsedInternally',
-                                   'Classes/PropertyUsedAbove',
-                                   'Classes/PropertyUsedBelow',
-                                   ));
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
 }

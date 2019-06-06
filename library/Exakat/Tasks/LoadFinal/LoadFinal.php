@@ -123,9 +123,17 @@ GREMLIN;
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
+        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateVirtualProperty');
+        $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('CreateVirtualStaticProperty');
+
         $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassPropertyRemoteDefinition');
+
         $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateDefaultValues');
@@ -133,13 +141,6 @@ GREMLIN;
         $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateMagicProperty');
-
-        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualProperty');
-        $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualStaticProperty');
 
         $this->setConstantDefinition();
         $this->log('setConstantDefinition');
@@ -232,6 +233,9 @@ GREMLIN;
         $task->run();
         $this->log('CreateCompactVariables');
 
+        $this->removePPPInAbstract();
+        $this->log('removePPPInAbstract');
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -261,8 +265,27 @@ GREMLIN;
         $begin = $end;
     }
 
+    private function removePPPInAbstract() {
+        display('fixing PPP links in abstracts');
+
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Class", "Classanonymous")
+     .has("abstract", true)
+     .out("PPP")
+     .out("PPP")
+     .outE()
+     .hasLabel("DEFINITION")
+     .drop()
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
+
+        display($result->toInt() . ' definition from PPP to abstract code');
+        $this->log->log(__METHOD__);
+    }
+    
     private function removeInterfaceToClassExtends() {
-        display('fixing Fullnspath for Functions');
+        display('fixing Definitions for traits and interfaces');
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Interface")

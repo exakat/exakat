@@ -118,8 +118,10 @@ GREMLIN
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('PPP')
               ->isNot('visibility', 'private')
+              ->_as('sourceppp')
               ->atomIs('Ppp', Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('fullcode', 'doublon')
+              ->outIs('PPP')
+              ->savePropertyAs('propertyname', 'doublon')
               ->_as('source')
               ->back('first')
               ->outIs('DEFINITION')
@@ -130,71 +132,50 @@ GREMLIN
               ->not(
                 $query->side()
                       ->outIs('PPP')
-                      ->samePropertyAs('fullcode', 'doublon', Analyzer::CASE_SENSITIVE)
+                      ->outIs('PPP')
+                      ->samePropertyAs('propertyname', 'doublon', Analyzer::CASE_SENSITIVE)
                       ->prepareSide()
               )
               ->raw(<<<GREMLIN
 addV()
-      .property(label, "Ppp").as("clone")
-      .sideEffect(
-        select("source").properties().as("p")
-        .select("clone")
-          .property(select("p").key(), select("p").value())
-          .property("virtual", true)
-      )
-      .addE("PPP").from("classe")
-      
-      .select("source").where( 
-        __.out("TYPEHINT").as("sourcetypehint")
-          .addV()
-          .property(label, select("sourcetypehint").label()).as("clonetypehint")
-          .property("virtual", true)
-          .sideEffect(
-            select("sourcetypehint").properties().as("p")
-            .select("clonetypehint")
-              .property(select("p").key(), select("p").value())
-           )
-          .addE("TYPEHINT").from("clone")
-          .fold()
-    )
-    .select("source").where( 
-        __.out("PPP").as("sourceppp")
-          .addV()
-            .property(label, "Propertydefinition")
-            .property("virtual", true).as("cloneppp")
-          .sideEffect(
-            select("sourceppp").properties().as("p")
-            .select("cloneppp")
-              .property(select("p").key(), select("p").value())
-          )
-          .addE("PPP").from("clone")
+.property(label, "Ppp").as("cloneppp")
+.sideEffect(
+  select("sourceppp").properties().as("p")
+  .select("cloneppp")
+    .property(select("p").key(), select("p").value())
+///    .property("fullcode", select("p").values("fullcode").toString() + " extra value")
+    .property("virtual", true)
+)
+.addE("PPP").from("classe")
 
-          .select("sourceppp").addE("OVERWRITE").from("cloneppp")
+.select("sourceppp").where( 
+  __.out("TYPEHINT").as("sourcetypehint")
+    .addV()
+    .property(label, select("sourcetypehint").label()).as("clonetypehint")
+    .property("virtual", true)
+    .sideEffect(
+      select("sourcetypehint").properties().as("p")
+      .select("clonetypehint")
+        .property(select("p").key(), select("p").value())
+     )
+    .addE("TYPEHINT").from("cloneppp")
+    .fold()
+)
 
-          .sideEffect(
-            select('sourceppp').outE().hasLabel('DEFINITION').as('e')
-                .where( select('e').inV().in('LEFT').in('EXPRESSION').in("BLOCK").hasLabel('Method').not(has('visibility', 'private')))
-                .select('cloneppp')
-                .addE(select('e').label()).as('eclone')
-                .to(select('e').inV())
-            )
+.select("source")
+.addV()
+.property(label, select("source").label())
+.property("virtual", true).as("clone")
+.sideEffect(
+    select("source").properties().as("p")
+    .select("clone")
+    .property(select("p").key(), select("p").value())
+  )
+.addE("PPP").from("cloneppp")
 
-          .select("sourceppp").where( 
-            __.out("DEFAULT").not(where(__.in("RIGHT"))).as("sourcedefault")
-              .addV()
-              .property(label, select("sourcedefault").label()).as("clonedefault")
-              .property("virtual", true)
-              .sideEffect(
-                select("sourcedefault").properties().as("p").
-                select("clonedefault")
-                    .property(select("p").key(), select("p").value())
-                )
-              .addE("DEFAULT").from("cloneppp")
-              .fold()
-            )
-           .fold()
-        ).fold()
+.select("source").addE("OVERWRITE").from("clone")
 
+.select("source").out("DEFINITION").addE("DEFINITION3333").from("clone")
 
 GREMLIN
 ,array(), array())
