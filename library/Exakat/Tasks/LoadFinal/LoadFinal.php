@@ -123,16 +123,9 @@ GREMLIN;
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
-        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
+        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log('CreateVirtualProperty');
-        $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualStaticProperty');
-
-        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassPropertyRemoteDefinition');
+        $this->log('OverwrittenProperties');
 
         $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
         $task->run();
@@ -205,9 +198,6 @@ GREMLIN;
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('OverwrittenMethods');
-        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenProperties');
         $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('OverwrittenConstants');

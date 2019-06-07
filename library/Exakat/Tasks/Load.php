@@ -96,6 +96,8 @@ class Load extends Tasks {
     private $currentReturn           = null;
     private $currentClassTrait       = array();
     private $currentParentClassTrait = array();
+    private $currentProperties       = array();
+    private $currentPropertiesCalls  = array();
 
     private $tokens = array();
     private $id     = 0;
@@ -1478,6 +1480,9 @@ class Load extends Tasks {
         ++$this->id;
         $rank = -1;
 
+        $this->currentProperties      = array();
+        $this->currentPropertiesCalls = array();
+
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
@@ -1552,6 +1557,7 @@ class Load extends Tasks {
 
                 if ($cpm instanceof Atom &&
                     $cpm->atom === 'Ppp'){
+
                     ++$this->id;
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, 'PPP');
@@ -1569,9 +1575,42 @@ class Load extends Tasks {
             } else {
                 $link = strtoupper($cpm->atom);
             }
-                
+
             $this->addLink($class, $cpm, $link);
         }
+
+        $diff = array_diff(array_keys($this->currentPropertiesCalls), array_keys($this->currentProperties));
+        $currentClass = $this->currentClassTrait[count($this->currentClassTrait) - 1];
+
+        foreach($diff as $missing) {
+            $ppp = $this->addAtom('Ppp');
+            $ppp->fullcode     = 'public $'.$missing;
+            $ppp->visibility   = 'none';
+            $ppp->code         = $missing;
+            $ppp->line         = -1;
+            $this->addLink($currentClass, $ppp, 'PPP');
+
+            $virtual = $this->addAtom('Virtualproperty');
+            $virtual->fullcode     = '$'.$missing;
+            $virtual->propertyname = $missing;
+            $virtual->line         = -1;
+            $this->addLink($ppp, $virtual, 'PPP');
+            
+            $this->currentProperties[$missing] = $virtual;
+        }
+
+        foreach($this->currentProperties as $name => $definition) {
+            if (!isset($this->currentPropertiesCalls[$name])) {
+                continue; 
+            }
+
+            foreach($this->currentPropertiesCalls[$name] as $usage) {
+                $this->addLink($definition, $usage, 'DEFINITION');
+            }
+        }
+        
+        $this->currentProperties      = array();
+        $this->currentPropertiesCalls = array();
 
         ++$this->id;
     }
@@ -2911,7 +2950,8 @@ class Load extends Tasks {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
                 $type = ($static->static === 1 ? 'static' : '') . 'property';
-                $this->calls->addDefinition($type,  end($this->currentClassTrait)->fullnspath . '::' . $element->code, $element);
+//                $this->calls->addDefinition($type,  end($this->currentClassTrait)->fullnspath . '::' . $element->code, $element);
+                $this->currentProperties[$element->propertyname] = $element;
             }
 
             if (isset($default)) {
@@ -5122,6 +5162,17 @@ class Load extends Tasks {
         }
 
         $this->addLink($static, $left, 'CLASS');
+        if ($static->atom  === 'Staticproperty' && 
+            $left->token   === 'T_STRING'       &&
+            $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
+            
+            $name = ltrim($right->code, '$');
+            if (isset($this->currentPropertiesCalls[$name])) { 
+                $this->currentPropertiesCalls[$name][] = $static;
+            } else {
+                $this->currentPropertiesCalls[$name] = array($static);
+            }
+        }
 
         $static->code     = $this->tokens[$current][1];
         $static->fullcode = $fullcode;
@@ -5246,8 +5297,13 @@ class Load extends Tasks {
         if ($left->atom   === 'This' ){
             if ($static->atom === 'Methodcall') {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
-            } elseif ($static->atom === 'Member') {
-                $this->calls->addCall('property',  $left->fullnspath . '::$' . $right->code, $static);
+            } elseif ($static->atom  === 'Member'   && 
+                      $right->token  === 'T_STRING') {
+                if (isset($this->currentPropertiesCalls[$right->code])) { 
+                    $this->currentPropertiesCalls[$right->code][] = $static;
+                } else {
+                    $this->currentPropertiesCalls[$right->code] = array($static);
+                }
             }
         }
         $this->runPlugins($static, array('OBJECT' => $left,
@@ -5579,20 +5635,19 @@ class Load extends Tasks {
         return $void;
     }
 
-    private function addLink(Atom $origin, Atom $destination, $label) {
+    private function addLink(Atom $origin, Atom $destination, string $label) {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT), STRICT_COMPARISON)) {
             throw new LoadError('Undefined link ' . $label . ' for atom ' . $origin->atom . ' : ' . $this->filename . ':' . $origin->line);
         }
         $o = $origin->atom;
         $d = $destination->atom;
 
-        if (!isset($this->links[$label]))         { $this->links[$label]= array(); }
-        if (!isset($this->links[$label][$o]))     { $this->links[$label][$o]= array(); }
+        if (!isset($this->links[$label]))         { $this->links[$label]        = array(); }
+        if (!isset($this->links[$label][$o]))     { $this->links[$label][$o]    = array(); }
         if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d]= array(); }
 
         $this->links[$label][$o][$d][$origin->id . '-' . $destination->id] = array('origin'      => $origin->id,
-                                                                               'destination' => $destination->id);
-        return true;
+                                                                                   'destination' => $destination->id);
     }
 
     private function pushExpression($id) {
