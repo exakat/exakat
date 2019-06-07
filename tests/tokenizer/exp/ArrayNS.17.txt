@@ -1,12 +1,112 @@
 test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          9
+        Label : VALUE
+          13
+          Label : LEFT
+            12
+          Label : RIGHT
+            14
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          15
+        Label : VALUE
+          18
+          Label : LEFT
+            17
+          Label : RIGHT
+            20
+            Label : LEFT
+              19
+            Label : RIGHT
+              21
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          22
+        Label : VALUE
+          8
+          Label : INDEX
+            30
+          Label : VARIABLE
+            29
+            Label : METHOD
+              26
+              Label : ARGUMENT
+                27
+              Label : NAME
+                26
+            Label : OBJECT
+              24
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    24
     Label : DEFINITION
       24
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          9
+        Label : VALUE
+          13
+          Label : LEFT
+            12
+          Label : RIGHT
+            14
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          15
+        Label : VALUE
+          18
+          Label : LEFT
+            17
+          Label : RIGHT
+            20
+            Label : LEFT
+              19
+            Label : RIGHT
+              21
+      Label : ARGUMENT
+        11
+        Label : INDEX
+          22
+        Label : VALUE
+          8
+          Label : INDEX
+            30
+          Label : VARIABLE
+            29
+            Label : METHOD
+              26
+              Label : ARGUMENT
+                27
+              Label : NAME
+                26
+            Label : OBJECT
+              24
     Label : DEFINITION
       5
   Label : FILE
@@ -52,14 +152,14 @@ Label : PROJECT
               Label : VALUE
                 8
                 Label : INDEX
-                  29
+                  30
                 Label : VARIABLE
-                  28
+                  29
                   Label : METHOD
-                    25
+                    26
                     Label : ARGUMENT
-                      26
+                      27
                     Label : NAME
-                      25
+                      26
                   Label : OBJECT
                     24

@@ -1,50 +1,116 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+Label : GLOBAL
+  48
+  Label : DEFINITION
+    48
+    Label : DEFINITION
+      48
+Label : GLOBAL
+  54
+  Label : DEFINITION
+    54
+    Label : DEFINITION
+      54
+Label : GLOBAL
+  62
+  Label : DEFINITION
+    62
+    Label : DEFINITION
+      62
+Label : GLOBAL
+  67
+  Label : DEFINITION
+    67
+    Label : DEFINITION
+      67
+Label : GLOBAL
+  72
+  Label : DEFINITION
+    72
+    Label : DEFINITION
+      72
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      28
+      29
   Label : DEFINITION
-    7
+    36
     Label : DEFINITION
-      35
+      36
   Label : DEFINITION
-    7
+    43
     Label : DEFINITION
-      42
+      43
   Label : DEFINITION
-    7
+    48
     Label : DEFINITION
-      47
+      48
   Label : DEFINITION
-    7
+    54
     Label : DEFINITION
-      52
+      54
   Label : DEFINITION
-    7
+    62
     Label : DEFINITION
-      59
+      62
   Label : DEFINITION
-    7
+    67
     Label : DEFINITION
-      64
+      67
   Label : DEFINITION
-    7
+    72
     Label : DEFINITION
-      69
+      72
   Label : FILE
     3
     Label : EXPRESSION
@@ -64,75 +130,75 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : ELSE
-            34
+            35
             Label : CONDITION
               11
               Label : LEFT
                 10
                 Label : MEMBER
-                  36
+                  37
                 Label : OBJECT
-                  35
+                  36
               Label : RIGHT
-                38
+                39
             Label : ELSE
               3
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  57
+                  60
                   Label : ARGUMENT
                     10
                     Label : MEMBER
-                      60
+                      63
                     Label : OBJECT
-                      59
+                      62
                   Label : NAME
-                    57
+                    60
                 Label : THEN
                   3
                   Label : EXPRESSION
                     5
                     Label : CONDITION
-                      62
+                      65
                       Label : NAME
-                        62
+                        65
                       Label : ARGUMENT
-                        23
+                        24
                         Label : INDEX
-                          67
+                          70
                         Label : VARIABLE
-                          23
+                          24
                           Label : INDEX
-                            65
+                            68
                           Label : VARIABLE
-                            64
+                            67
                       Label : ARGUMENT
                         10
                         Label : MEMBER
-                          70
+                          73
                         Label : OBJECT
-                          69
+                          72
                     Label : THEN
                       3
                       Label : EXPRESSION
-                        31
+                        32
                         Label : RETURN
-                          72
+                          75
             Label : THEN
               3
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  40
+                  41
                   Label : ARGUMENT
                     10
                     Label : MEMBER
-                      43
+                      44
                     Label : OBJECT
-                      42
+                      43
                   Label : NAME
-                    40
+                    41
                 Label : THEN
                   3
                   Label : EXPRESSION
@@ -140,31 +206,31 @@ Label : PROJECT
                     Label : CONDITION
                       19
                       Label : NOT
-                        45
+                        46
                         Label : NAME
-                          45
+                          46
                         Label : ARGUMENT
-                          23
+                          24
                           Label : INDEX
-                            50
+                            52
                           Label : VARIABLE
-                            23
+                            24
                             Label : INDEX
-                              48
+                              50
                             Label : VARIABLE
-                              47
+                              48
                         Label : ARGUMENT
                           10
                           Label : MEMBER
-                            53
+                            56
                           Label : OBJECT
-                            52
+                            54
                     Label : THEN
                       3
                       Label : EXPRESSION
-                        31
+                        32
                         Label : RETURN
-                          55
+                          58
           Label : THEN
             3
             Label : EXPRESSION
@@ -190,24 +256,24 @@ Label : PROJECT
                       Label : NAME
                         20
                       Label : ARGUMENT
-                        23
+                        24
                         Label : INDEX
-                          26
+                          27
                         Label : VARIABLE
-                          23
+                          24
                           Label : INDEX
-                            24
+                            25
                           Label : VARIABLE
                             22
                       Label : ARGUMENT
                         10
                         Label : MEMBER
-                          29
+                          30
                         Label : OBJECT
-                          28
+                          29
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      31
+                      32
                       Label : RETURN
-                        32
+                        33

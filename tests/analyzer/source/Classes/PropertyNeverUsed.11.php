@@ -7,18 +7,20 @@ class A {
     }
 }
 
-class B extends A {
+abstract class B extends A {
     protected $usedProtectedByAbove;
     protected $unusedProtected;
     protected $usedProtectedByBelowC;
     protected $unusedProtectedByBelowD;
     protected $usedProtectedByBelowE;
     protected $usedProtectedByBelowF;
+
     protected $usedProtected;
     
     function xb() {
         $this->usedProtected =3;
     }
+
 }
 
 class C extends B {

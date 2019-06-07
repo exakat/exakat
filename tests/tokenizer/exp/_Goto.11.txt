@@ -1,12 +1,26 @@
 test
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    19
     Label : DEFINITION
       19
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -52,12 +66,12 @@ Label : PROJECT
           Label : CONDITION
             6
           Label : ELSE
-            24
+            25
           Label : THEN
             18
             Label : CONDITION
               19
             Label : ELSE
-              22
+              23
             Label : THEN
-              20
+              21

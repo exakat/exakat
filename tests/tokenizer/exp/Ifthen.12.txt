@@ -1,30 +1,78 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      13
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      16
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFAULT
+      19
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    10
+    Label : DEFAULT
+      13
     Label : DEFINITION
       10
   Label : DEFINITION
-    11
+    14
+    Label : DEFAULT
+      16
     Label : DEFINITION
       14
   Label : DEFINITION
-    11
+    17
+    Label : DEFAULT
+      19
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    11
+    20
     Label : DEFINITION
-      18
+      20
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      22
-  Label : DEFINITION
-    11
+    25
     Label : DEFINITION
       25
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,45 +96,45 @@ Label : PROJECT
               Label : LEFT
                 14
               Label : RIGHT
-                15
-            Label : EXPRESSION
-              12
-              Label : LEFT
                 16
-              Label : RIGHT
-                17
             Label : EXPRESSION
               12
               Label : LEFT
-                19
-                Label : INDEX
-                  20
-                Label : VARIABLE
-                  18
+                17
               Label : RIGHT
-                21
+                19
+            Label : EXPRESSION
+              12
+              Label : LEFT
+                22
+                Label : INDEX
+                  23
+                Label : VARIABLE
+                  20
+              Label : RIGHT
+                24
                 Label : NAME
-                  21
+                  24
                 Label : ARGUMENT
-                  19
+                  22
                   Label : INDEX
-                    23
+                    27
                   Label : VARIABLE
-                    22
+                    25
                 Label : ARGUMENT
-                  28
+                  33
                   Label : LEFT
-                    24
+                    28
                     Label : NAME
-                      24
+                      28
                     Label : ARGUMENT
-                      19
+                      22
                       Label : INDEX
-                        26
+                        31
                       Label : VARIABLE
-                        25
+                        29
                     Label : ARGUMENT
-                      27
+                      32
                   Label : RIGHT
                     13
           Label : THEN

@@ -1,14 +1,74 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      18
+      Label : LEFT
+        6
+      Label : RIGHT
+        14
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      11
+      Label : NAME
+        11
+      Label : ARGUMENT
+        17
+      Label : ARGUMENT
+        14
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    10
+    Label : DEFAULT
+      18
+      Label : LEFT
+        6
+      Label : RIGHT
+        14
     Label : DEFINITION
       10
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      11
+      Label : NAME
+        11
+      Label : ARGUMENT
+        17
+      Label : ARGUMENT
+        14
+    Label : DEFAULT
+      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -16,13 +76,13 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,37 +98,37 @@ Label : PROJECT
               Label : LEFT
                 6
               Label : RIGHT
-                15
+                11
                 Label : NAME
-                  15
+                  11
                 Label : ARGUMENT
-                  16
+                  17
                 Label : ARGUMENT
-                  13
+                  14
             Label : EXPRESSION
               8
               Label : LEFT
                 10
               Label : RIGHT
-                17
+                18
                 Label : LEFT
                   6
                 Label : RIGHT
-                  13
+                  14
           Label : FINAL
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
                 10
               Label : RIGHT
-                12
+                13
           Label : INCREMENT
             3
             Label : EXPRESSION
-              14
+              16
               Label : POSTPLUSPLUS
-                13
+                14
           Label : INIT
             3
             Label : EXPRESSION

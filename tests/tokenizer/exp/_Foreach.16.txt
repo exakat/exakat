@@ -1,20 +1,44 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
-      12
+      11
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
       14
   Label : FILE
@@ -28,18 +52,16 @@ Label : PROJECT
           Label : BLOCK
             13
             Label : EXPRESSION
-              15
+              16
               Label : POSTPLUSPLUS
                 14
+          Label : INDEX
+            10
+            Label : MEMBER
+              7
+            Label : OBJECT
+              8
           Label : SOURCE
             6
           Label : VALUE
             11
-            Label : INDEX
-              10
-              Label : MEMBER
-                9
-              Label : OBJECT
-                8
-            Label : VALUE
-              12

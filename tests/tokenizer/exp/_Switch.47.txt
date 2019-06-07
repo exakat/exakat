@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -36,7 +48,7 @@ Label : PROJECT
                   Label : LEFT
                     17
                     Label : MEMBER
-                      16
+                      7
                     Label : OBJECT
                       15
                   Label : RIGHT

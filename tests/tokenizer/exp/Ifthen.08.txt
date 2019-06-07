@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    9
+    15
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    9
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    9
+    21
     Label : DEFINITION
-      19
+      21
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,31 +78,31 @@ Label : PROJECT
             Label : ELSE
               10
               Label : CONDITION
-                13
+                14
               Label : ELSE
                 10
                 Label : CONDITION
-                  15
+                  17
                 Label : ELSE
                   10
                   Label : CONDITION
-                    17
+                    20
                   Label : ELSE
                     7
                     Label : EXPRESSION
-                      19
+                      23
                   Label : THEN
                     7
                     Label : EXPRESSION
-                      18
+                      21
                 Label : THEN
                   7
                   Label : EXPRESSION
-                    16
+                    18
               Label : THEN
                 7
                 Label : EXPRESSION
-                  14
+                  15
             Label : THEN
               7
               Label : EXPRESSION

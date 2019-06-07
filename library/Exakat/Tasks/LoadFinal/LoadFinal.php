@@ -123,9 +123,10 @@ GREMLIN;
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
-        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
+        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
         $task->run();
-        $this->log('SetClassPropertyRemoteDefinition');
+        $this->log('OverwrittenProperties');
+
         $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateDefaultValues');
@@ -133,13 +134,6 @@ GREMLIN;
         $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateMagicProperty');
-
-        $task = new CreateVirtualProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualProperty');
-        $task = new CreateVirtualStaticProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateVirtualStaticProperty');
 
         $this->setConstantDefinition();
         $this->log('setConstantDefinition');
@@ -153,9 +147,6 @@ GREMLIN;
         $this->propagateConstants();
         $this->log('propagateConstants');
 
-        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassPropertyRemoteDefinition');
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassMethodRemoteDefinition');
@@ -204,9 +195,6 @@ GREMLIN;
         $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('OverwrittenMethods');
-        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenProperties');
         $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('OverwrittenConstants');
@@ -262,7 +250,7 @@ GREMLIN;
     }
 
     private function removeInterfaceToClassExtends() {
-        display('fixing Fullnspath for Functions');
+        display('fixing Definitions for traits and interfaces');
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Interface")
