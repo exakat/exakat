@@ -1271,8 +1271,12 @@ class Load extends Tasks {
         } elseif ($function->atom === 'Closure') {
             $function->fullnspath = $this->makeAnonymous('function');
             $function->aliased    = self::NOT_ALIASED;
+
             // closure may be static
             $fullcode = $this->setOptions($function);
+            if (strtolower($fullcode[0]) === 'static') {
+                $this->currentClassTrait[] = '';
+            }
         } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $function->fullnspath = end($this->currentClassTrait)->fullnspath . '::' . mb_strtolower($name->code);
             $function->aliased    = self::NOT_ALIASED;
@@ -1354,6 +1358,11 @@ class Load extends Tasks {
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
+
+        if ($function->atom === 'Closure' && 
+            strtolower($fullcode[0]) === 'static') {
+            array_pop($this->currentClassTrait);
+        }
 
         $this->contexts->exitContext(Context::CONTEXT_CLASS);
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
@@ -2009,7 +2018,10 @@ class Load extends Tasks {
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                             $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE),
+                                                            $this->phptokens::T_NAMESPACE,
+                                                            $this->phptokens::T_ARRAY,
+                                                            $this->phptokens::T_CALLABLE,
+                                                            ),
                      STRICT_COMPARISON)) {
                      
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable'), STRICT_COMPARISON)) {
@@ -2950,7 +2962,6 @@ class Load extends Tasks {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
                 $type = ($static->static === 1 ? 'static' : '') . 'property';
-//                $this->calls->addDefinition($type,  end($this->currentClassTrait)->fullnspath . '::' . $element->code, $element);
                 $this->currentProperties[$element->propertyname] = $element;
             }
 
