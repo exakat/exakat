@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('$staticPropertyUnused = 5',
+                      '$staticPropertyx = 3',
                      );
 
 $expected_not = array('$staticPropertyStatic = 2',

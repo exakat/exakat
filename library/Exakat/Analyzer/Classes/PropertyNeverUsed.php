@@ -30,7 +30,6 @@ class PropertyNeverUsed extends Analyzer {
         // class x { private $p = 1; }
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
-             ->isNot('virtual', true)
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')

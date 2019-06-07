@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class PropertyNeverUsed extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testClasses_PropertyNeverUsed01()  { $this->generic_test('Classes_PropertyNeverUsed.01'); }
     public function testClasses_PropertyNeverUsed02()  { $this->generic_test('Classes_PropertyNeverUsed.02'); }
@@ -19,5 +19,6 @@ class PropertyNeverUsed extends Analyzer {
     public function testClasses_PropertyNeverUsed08()  { $this->generic_test('Classes_PropertyNeverUsed.08'); }
     public function testClasses_PropertyNeverUsed09()  { $this->generic_test('Classes_PropertyNeverUsed.09'); }
     public function testClasses_PropertyNeverUsed10()  { $this->generic_test('Classes/PropertyNeverUsed.10'); }
+    public function testClasses_PropertyNeverUsed11()  { $this->generic_test('Classes/PropertyNeverUsed.11'); }
 }
 ?>
