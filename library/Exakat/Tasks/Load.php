@@ -2009,7 +2009,10 @@ class Load extends Tasks {
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                             $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE),
+                                                            $this->phptokens::T_NAMESPACE,
+                                                            $this->phptokens::T_ARRAY,
+                                                            $this->phptokens::T_CALLABLE,
+                                                            ),
                      STRICT_COMPARISON)) {
                      
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable'), STRICT_COMPARISON)) {
