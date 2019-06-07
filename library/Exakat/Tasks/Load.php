@@ -5164,6 +5164,7 @@ class Load extends Tasks {
         $this->addLink($static, $left, 'CLASS');
         if ($static->atom  === 'Staticproperty' && 
             $left->token   === 'T_STRING'       &&
+            !empty($this->currentClassTrait)    &&
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
             
             $name = ltrim($right->code, '$');
