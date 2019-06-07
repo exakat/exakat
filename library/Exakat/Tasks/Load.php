@@ -1271,8 +1271,12 @@ class Load extends Tasks {
         } elseif ($function->atom === 'Closure') {
             $function->fullnspath = $this->makeAnonymous('function');
             $function->aliased    = self::NOT_ALIASED;
+
             // closure may be static
             $fullcode = $this->setOptions($function);
+            if (strtolower($fullcode[0]) === 'static') {
+                $this->currentClassTrait[] = '';
+            }
         } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $function->fullnspath = end($this->currentClassTrait)->fullnspath . '::' . mb_strtolower($name->code);
             $function->aliased    = self::NOT_ALIASED;
@@ -1354,6 +1358,11 @@ class Load extends Tasks {
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
+
+        if ($function->atom === 'Closure' && 
+            strtolower($fullcode[0]) === 'static') {
+            array_pop($this->currentClassTrait);
+        }
 
         $this->contexts->exitContext(Context::CONTEXT_CLASS);
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
@@ -2953,7 +2962,6 @@ class Load extends Tasks {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
                 $type = ($static->static === 1 ? 'static' : '') . 'property';
-//                $this->calls->addDefinition($type,  end($this->currentClassTrait)->fullnspath . '::' . $element->code, $element);
                 $this->currentProperties[$element->propertyname] = $element;
             }
 
