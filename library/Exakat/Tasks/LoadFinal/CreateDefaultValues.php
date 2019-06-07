@@ -31,7 +31,7 @@ class CreateDefaultValues extends LoadFinal {
 
         // For variables
         $query = $this->newQuery('CreateDefaultValues variables');
-        $query->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition', 'Staticdefinition'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition', 'Staticdefinition', 'Virtualproperty', 'Propertydefinition'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
               ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
@@ -42,8 +42,8 @@ class CreateDefaultValues extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countVar = $result->toInt();
-        display("Added $countVar default value for variable");
-
+        display("Added $countVar default value for containers");
+/*
         // For properties in traits
         $query = $this->newQuery('CreateDefaultValues variables');
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
@@ -58,6 +58,7 @@ class CreateDefaultValues extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countVar = $result->toInt();
         display("Added $countVar default value for properties");
+        */
     }
 }
 

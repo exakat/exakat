@@ -5,9 +5,10 @@ $expected     = array('$unusedProtected',
                       '$usedProtectedByBelowC',
                       '$usedProtectedByBelowE',
                       '$usedProtectedByBelowF',
+                      '$usedProtectedByAbove',
                      );
 
-$expected_not = array('$usedProtectedByAbove',
+$expected_not = array('$usedProtected',
                      );
 
 ?>

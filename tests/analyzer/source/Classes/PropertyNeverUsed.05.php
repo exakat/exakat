@@ -14,6 +14,11 @@ class B extends A {
     protected $unusedProtectedByBelowD;
     protected $usedProtectedByBelowE;
     protected $usedProtectedByBelowF;
+    protected $usedProtected;
+    
+    function xb() {
+        $this->usedProtected =3;
+    }
 }
 
 class C extends B {

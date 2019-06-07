@@ -147,9 +147,6 @@ GREMLIN;
         $this->propagateConstants();
         $this->log('propagateConstants');
 
-        $task = new SetClassPropertyRemoteDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassPropertyRemoteDefinition');
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassMethodRemoteDefinition');
@@ -223,9 +220,6 @@ GREMLIN;
         $task->run();
         $this->log('CreateCompactVariables');
 
-        $this->removePPPInAbstract();
-        $this->log('removePPPInAbstract');
-
         display('End load final');
         $this->logTime('Final');
     }
@@ -255,25 +249,6 @@ GREMLIN;
         $begin = $end;
     }
 
-    private function removePPPInAbstract() {
-        display('fixing PPP links in abstracts');
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous")
-     .has("abstract", true)
-     .out("PPP")
-     .out("PPP")
-     .outE()
-     .hasLabel("DEFINITION")
-     .drop()
-     .count();
-GREMLIN;
-        $result = $this->gremlin->query($query);
-
-        display($result->toInt() . ' definition from PPP to abstract code');
-        $this->log->log(__METHOD__);
-    }
-    
     private function removeInterfaceToClassExtends() {
         display('fixing Definitions for traits and interfaces');
 
