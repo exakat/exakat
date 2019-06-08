@@ -1274,7 +1274,7 @@ class Load extends Tasks {
 
             // closure may be static
             $fullcode = $this->setOptions($function);
-            if (strtolower($fullcode[0]) === 'static') {
+            if (isset($fullcode[0]) && strtolower($fullcode[0]) === 'static') {
                 $this->currentClassTrait[] = '';
             }
         } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
@@ -1360,6 +1360,7 @@ class Load extends Tasks {
                                 $blockFullcode;
 
         if ($function->atom === 'Closure' && 
+            isset($fullcode[0]) && 
             strtolower($fullcode[0]) === 'static') {
             array_pop($this->currentClassTrait);
         }
@@ -5897,7 +5898,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif (in_array($name->atom, array('Static', 'Self'), STRICT_COMPARISON)) {
-            if (empty($this->currentClassTrait)) {
+            if (empty($this->currentClassTrait) || empty($this->currentClassTrait[count($this->currentClassTrait) - 1])) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
