@@ -36,14 +36,23 @@ class ModernEmpty extends Analyzer {
              ->hasAtomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Addition', 'Multiplication', 'Bitshift', 'Power', 'Logical', 'Comparison'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'storage')
+             ->atomIs(self::$CONTAINERS)
+             ->savePropertyAs('fullcode', 'storage')
              ->inIs('LEFT')
              ->nextSiblings()
+             ->_as('sibling')
              ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'storage', self::CASE_SENSITIVE)
+             ->atomIs(self::$CONTAINERS)
+             ->samePropertyAs('fullcode', 'storage', self::CASE_SENSITIVE)
+             ->back('sibling')
+             ->not(
+                $this->side()
+                     ->atomInsideNoDefinition(self::$CONTAINERS)
+                     ->samePropertyAs('fullcode', 'storage', self::CASE_SENSITIVE)
+                     ->hasNoParent('Empty', array('ARGUMENT'))
+                     ->is('isRead', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }

@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('$h = f(\'y\')',
+                      '$g[1] = f(\'y\')',
                      );
 
 $expected_not = array('$e = M_PI',
