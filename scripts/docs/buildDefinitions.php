@@ -310,6 +310,7 @@ class Docs {
             if ($folder === 'Reports' || $folder == 'DSL') { 
                 continue; 
             }
+
             $analyzer = basename($file, '.ini');
             $name = "$folder/$analyzer";
             
@@ -576,12 +577,11 @@ $exampleTxt
             return $rst;
         }, $r);
 
-    
         $r = preg_replace_callback('/\s*<\?literal(.*?)\?>/is',function ($r) {
             $rst = "::\n\n   ".str_replace("\n","\n   ",$r[1])."\n";
             return $rst;
         }, $r);
-    
+
         return $r;
     }
     
@@ -650,10 +650,11 @@ $exampleTxt
 
     private function build_analyzer_doc($analyzer, $a2themes) {
         $name = $analyzer;
-        $ini = parse_ini_file("human/en/$analyzer.ini", true);
+        $ini = parse_ini_file("./human/en/$analyzer.ini", true);
         $commandLine = $analyzer;
         
         $desc = $this->glossary($ini['name'], $ini['description']);
+        $desc = $this->internalLink($desc);
 
         if (isset($ini['modifications'])) {
             if (!is_array($ini['modifications'])) {
@@ -683,6 +684,9 @@ $exampleTxt
         for($i = 0; $i < 10; $i++) {
             if (isset($ini['example'.$i])) {
                 $issues_examples_section = '';
+                if (!isset($ini['example'.$i]['project'])) {
+                    print 'Missing "project" in '.$analyzer.".ini\n";
+                }
                 $label = $this->rst_anchor($ini['example'.$i]['project'].'-'.str_replace('/', '-', strtolower($analyzer)));
                 
                 $examples[] = ':ref:`'.$label.'`';
@@ -696,7 +700,7 @@ $exampleTxt
                 if (empty($issues_examples_section_list)){
                     $issues_examples_section = $ini['name']."\n".str_repeat('=', strlen($ini['name']))."\n";
                 }
-            
+
                 $issues_examples_section .= <<<SPHINX
 
 .. _$label:
@@ -1173,11 +1177,11 @@ GLOSSARY;
     }
     
     private function internalLink($text) {
-        return preg_replace_callback('# ([^/ ]+/[^/ :]+) #', function($m) {
+        return preg_replace_callback('# ([^/ `\\\']+?/[^/ :`\\\']+?)( |\.)#s', function($m) {
             if (file_exists("./human/en/{$m[1]}.ini")) {
-                $ini = parse_ini_file("./human/en/{$m[1]}.ini");
+                $ini = parse_ini_file("./human/en/{$m[1]}.ini", true);
 
-                return ":ref:`".$this->rst_anchor($ini['name'])."`";
+                return " :ref:`".$this->rst_anchor($ini['name'])."`$r[2] ";
             } else {
                 return $m[0];
             }
