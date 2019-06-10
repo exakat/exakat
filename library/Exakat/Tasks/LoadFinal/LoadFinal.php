@@ -39,7 +39,7 @@ use Exakat\Log;
 class LoadFinal {
     private $PHPconstants = array();
     private $PHPfunctions = array();
-    private $dictCode = null;
+    private $dictCode     = null;
     
     protected $gremlin   = null;
     protected $config    = null;

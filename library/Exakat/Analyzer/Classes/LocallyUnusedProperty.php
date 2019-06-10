@@ -29,12 +29,11 @@ class LocallyUnusedProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/LocallyUsedProperty',
                      'Traits/LocallyUsedProperty',
-                     'Variables/StaticVariables',
                     );
     }
     
     public function analyze() {
-        // class x { public $p = 1; }
+        // class x { public $p = 1; function foo() { $this->pp = 2; }}
         $this->atomIs('Ppp')
              ->hasClassTrait()
              ->outIs('PPP')
@@ -42,7 +41,6 @@ class LocallyUnusedProperty extends Analyzer {
              ->_as('ppp')
              ->analyzerIsNot(array('Traits/LocallyUsedProperty',
                                    'Classes/LocallyUsedProperty',
-                                   'Variables/StaticVariables',
                                    )
                             )
              ->back('ppp');
