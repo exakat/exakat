@@ -27,36 +27,18 @@ use Exakat\Analyzer\Analyzer;
 class LocallyUsedProperty extends Analyzer {
     public function analyze() {
         // normal property
-        $this->atomIs('Ppp')
-             ->isNot('static', true)
-             ->outIs('PPP')
-             ->atomIs('Propertydefinition')
-             ->_as('ppp')
-             ->savePropertyAs('propertyname', 'property')
-             ->goToTrait()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('MEMBER')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->back('ppp');
-        $this->prepareQuery();
-
         // static property in an variable static::$c
-        $this->atomIs('Ppp')
-             ->is('static', true)
+        $this->atomIs('Trait')
+             ->savePropertyAs('id', 'citId')
+             ->outIs('PPP')
+             ->atomIs('Ppp')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
              ->_as('ppp')
-             ->savePropertyAs('code', 'property')
-             ->goToTrait()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticproperty')
-             ->outIs('MEMBER')
-             ->outIsIE(array('VARIABLE', 'APPEND'))
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
+             ->outIs('DEFINITION')
+             ->atomIs(array('Member', 'Staticproperty'))
+             ->goToInstruction('Trait')
+             ->samePropertyAs('id', 'citId')
              ->back('ppp');
         $this->prepareQuery();
     }

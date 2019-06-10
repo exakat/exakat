@@ -1412,8 +1412,8 @@ class Load extends Tasks {
         $trait = $this->addAtom('Trait');
         $this->currentClassTrait[] = $trait;
 
-        $this->contexts->nestContext(Context::CONTEXT_TRAIT);
-        $this->contexts->toggleContext(Context::CONTEXT_TRAIT);
+        $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->toggleContext(Context::CONTEXT_CLASS);
 
         $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($trait, $name, 'NAME');
@@ -1431,7 +1431,7 @@ class Load extends Tasks {
         $this->pushExpression($trait);
         $this->processSemicolon();
 
-        $this->contexts->exitContext(Context::CONTEXT_TRAIT);
+        $this->contexts->exitContext(Context::CONTEXT_CLASS);
 
         array_pop($this->currentClassTrait);
 
@@ -1609,16 +1609,6 @@ class Load extends Tasks {
             $this->currentProperties[$missing] = $virtual;
         }
 
-        foreach($this->currentProperties as $name => $definition) {
-            if (!isset($this->currentPropertiesCalls[$name])) {
-                continue; 
-            }
-
-            foreach($this->currentPropertiesCalls[$name] as $usage) {
-                $this->addLink($definition, $usage, 'DEFINITION');
-            }
-        }
-        
         $this->currentProperties      = array();
         $this->currentPropertiesCalls = array();
 
@@ -2964,6 +2954,14 @@ class Load extends Tasks {
                 $element->propertyname = substr($element->code, 1);
                 $type = ($static->static === 1 ? 'static' : '') . 'property';
                 $this->currentProperties[$element->propertyname] = $element;
+                
+                $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+                if ($static->static === 1) {
+                    $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
+                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                } else {
+                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                }
             }
 
             if (isset($default)) {
@@ -5199,7 +5197,7 @@ class Load extends Tasks {
             } elseif ($static->atom === 'Staticconstant') {
                 $this->calls->addCall('staticconstant',  "$left->fullnspath::$right->code", $static);
             } elseif ($static->atom === 'Staticproperty') {
-                $this->calls->addCall('staticproperty',  "$left->fullnspath::$right->code", $static);
+                $this->calls->addCall('staticproperty', "$left->fullnspath::$right->code", $static);
             }
         }
 
@@ -5308,16 +5306,12 @@ class Load extends Tasks {
         $static->fullcode  = $left->fullcode . '->' . $right->fullcode;
         $static->token     = $this->getToken($this->tokens[$current][0]);
 
-        if ($left->atom   === 'This' ){
+        if ($left->atom === 'This' ){
             if ($static->atom === 'Methodcall') {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
             } elseif ($static->atom  === 'Member'   && 
                       $right->token  === 'T_STRING') {
-                if (isset($this->currentPropertiesCalls[$right->code])) { 
-                    $this->currentPropertiesCalls[$right->code][] = $static;
-                } else {
-                    $this->currentPropertiesCalls[$right->code] = array($static);
-                }
+                $this->calls->addCall('property', "{$left->fullnspath}::{$right->code}", $static);
             }
         }
         $this->runPlugins($static, array('OBJECT' => $left,

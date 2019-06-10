@@ -43,7 +43,9 @@ class IndirectInjection extends Analyzer {
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->outIs('LEFT')
                      ->analyzerIs('Security/GPRAliases')
              )
              ->back('first');
@@ -57,7 +59,9 @@ class IndirectInjection extends Analyzer {
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->outIs('LEFT')
                      ->analyzerIs('Security/GPRAliases')
              )
              ->savePropertyAs('rank', 'ranked')
@@ -79,7 +83,9 @@ class IndirectInjection extends Analyzer {
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->outIs('LEFT')
                      ->analyzerIs('Security/GPRAliases')
              )
              ->inIs('CONCAT');
@@ -90,7 +96,9 @@ class IndirectInjection extends Analyzer {
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->outIs('LEFT')
                      ->analyzerIs('Security/GPRAliases')
              )
              ->inIs('VARIABLE')
@@ -102,7 +110,9 @@ class IndirectInjection extends Analyzer {
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->inIs('RIGHT')
+                     ->outIs('LEFT')
                      ->analyzerIs('Security/GPRAliases')
              )
              ->inIs('SOURCE');

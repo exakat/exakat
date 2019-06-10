@@ -264,6 +264,9 @@ Some analyzer may be configured individually. Those parameters are then specific
 
 Analyzers may be configured in the `project/*/config.ini`; they may also be configured globally in the `config/exakat.ini` file.
 
+:ref:`Make Magic Concrete <make-magic-concrete>`
+  + magicMemberUsage : 1
+    + Minimal number of magic member usage across the code, to trigger a concrete property.
 :ref:`Too Many Children <too-many-children>`
   + childrenClassCount : 15
     + Threshold for too many children classes for one class.

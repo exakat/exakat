@@ -27,6 +27,7 @@ Contents:
    Extensions
    Development
    Glossary
+   Definitions
    Contribute
    Contributors
    Annex

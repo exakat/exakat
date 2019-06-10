@@ -27,11 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class LocallyUsedProperty extends Analyzer {
     public function analyze() {
-        // Using 'DEFINITION' ?
-
         // normal property
         // static property in an variable static::$c
-        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
+        $this->atomIs(array('Class', 'Classanonymous'))
              ->savePropertyAs('id', 'citId')
              ->outIs('PPP')
              ->atomIs('Ppp')
@@ -39,7 +37,8 @@ class LocallyUsedProperty extends Analyzer {
              ->atomIs('Propertydefinition')
              ->_as('ppp')
              ->outIs('DEFINITION')
-             ->goToInstruction(array('Class', 'Trait'))
+             ->atomIs(array('Member', 'Staticproperty'))
+             ->goToInstruction(array('Class', 'Classanonymous'))
              ->samePropertyAs('id', 'citId')
              ->back('ppp');
         $this->prepareQuery();

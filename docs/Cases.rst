@@ -2898,23 +2898,6 @@ Looking for the extension ? Use pathinfo() and PATHINFO_EXTENSION
 
     $exp = explode('.', $filename);
 
-
---------
-
-
-.. _-php-usepathinfo:
-
-
-
-
-:ref:`use-pathinfo`, in :. 
-
-
-
-.. code-block:: php
-
-    
-
 Should Use Constants
 ====================
 
@@ -5040,6 +5023,63 @@ Too much vlaidation
 
     isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child']);
 
+Useless Check
+=============
+
+.. _magento-structures-uselesscheck:
+
+Magento
+^^^^^^^
+
+:ref:`useless-check`, in wp-admin/includes/misc.php:74. 
+
+This code assumes that $delete is an array, then checks if it empty. Foreach will take care of the empty check.
+
+.. code-block:: php
+
+    if (!empty($delete)) {
+                foreach ($delete as $categoryId) {
+                    $where = array(
+                        'product_id = ?'  => (int)$object->getId(),
+                        'category_id = ?' => (int)$categoryId,
+                    );
+    
+                    $write->delete($this->_productCategoryTable, $where);
+                }
+            }
+
+
+--------
+
+
+.. _phinx-structures-uselesscheck:
+
+Phinx
+^^^^^
+
+:ref:`useless-check`, in src/Phinx/Migration/Manager.php:828. 
+
+If $dependencies is not empty, foreach() skips the loops.
+
+.. code-block:: php
+
+    private function getSeedDependenciesInstances(AbstractSeed $seed)
+        {
+            $dependenciesInstances = [];
+            $dependencies = $seed->getDependencies();
+            if (!empty($dependencies)) {
+                foreach ($dependencies as $dependency) {
+                    foreach ($this->seeds as $seed) {
+                        if (get_class($seed) === $dependency) {
+                            $dependenciesInstances[get_class($seed)] = $seed;
+                        }
+                    }
+                }
+            }
+    
+            return $dependenciesInstances;
+        }
+
 Bail Out Early
 ==============
 
@@ -6734,6 +6774,52 @@ The array_walk() function is called on the plugin's list. Each element is regist
                     }
                 }
             );
+
+Wrong Range Check
+=================
+
+.. _dolibarr-structures-wrongrange:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`wrong-range-check`, in htdocs/includes/phpoffice/PhpSpreadsheet/Spreadsheet.php:1484. 
+
+When $tabRatio is 1001, then the condition is valid, and the ratio accepted. The right part of the condition is not executed.
+
+.. code-block:: php
+
+    public function setTabRatio($tabRatio)
+        {
+            if ($tabRatio >= 0 || $tabRatio <= 1000) {
+                $this->tabRatio = (int) $tabRatio;
+            } else {
+                throw new Exception('Tab ratio must be between 0 and 1000.');
+            }
+        }
+
+
+--------
+
+
+.. _wordpress-structures-wrongrange:
+
+Wordpress
+^^^^^^^^^
+
+:ref:`wrong-range-check`, in wp-includes/formatting.php:3634. 
+
+This condition may be easier to read as `$diff >= WEEK_IN_SECONDS && $diff < MONTH_IN_SECONDS`. When testing for outside this interval, using not is also more readable : `!($diff >= WEEK_IN_SECONDS && $diff < MONTH_IN_SECONDS)`.
+
+.. code-block:: php
+
+    } elseif ( $diff < MONTH_IN_SECONDS && $diff >= WEEK_IN_SECONDS ) {
+    		$weeks = round( $diff / WEEK_IN_SECONDS );
+    		if ( $weeks <= 1 ) {
+    			$weeks = 1;
+    		}
+    		/* translators: Time difference between two dates, in weeks. %s: Number of weeks */
+    		$since = sprintf( _n( '%s week', '%s weeks', $weeks ), $weeks );
 
 Cant Instantiate Class
 ======================
@@ -8655,6 +8741,60 @@ This loops reviews the 'stack' and updates its elements. The same loop may lever
     						}
     					}
     				}
+
+Too Many Parameters
+===================
+
+.. _wordpress-functions-toomanyparameters:
+
+WordPress
+^^^^^^^^^
+
+:ref:`too-many-parameters`, in wp-admin/includes/misc.php:74. 
+
+11 parameters is a lot for a function. Note that it is more than the default configuration, and reported there. This may be configured.
+
+.. code-block:: php
+
+    /**
+     * [identifyUserRights description]
+     * @param  string $groupesVisiblesUser  [description]
+     * @param  string $groupesInterditsUser [description]
+     * @param  string $isAdmin              [description]
+     * @param  string $idFonctions          [description]
+     * @return string                       [description]
+     */
+    function identifyUserRights(
+        $groupesVisiblesUser,
+        $groupesInterditsUser,
+        $isAdmin,
+        $idFonctions,
+        $server,
+        $user,
+        $pass,
+        $database,
+        $port,
+        $encoding,
+        $SETTINGS
+    ) {
+
+
+--------
+
+
+.. _churchcrm-functions-toomanyparameters:
+
+Churchcrm
+^^^^^^^^^
+
+:ref:`too-many-parameters`, in src/Reports/ReminderReport.php:192. 
+
+10 parameters is a lot for a function. Here, we may also identify a family (ID, Name), and a full address (Address1, Address2, State, Zip, Country), which may be turned into an object. 
+
+.. code-block:: php
+
+    public function StartNewPage($fam_ID, $fam_Name, $fam_Address1, $fam_Address2, $fam_City, $fam_State, $fam_Zip, $fam_Country, $fundOnlyString, $iFYID) 
+    {
 
 Should Preprocess Chr
 =====================

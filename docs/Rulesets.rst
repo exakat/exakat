@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 03 Jun 2019 15:38:26 +0000
-.. comment: Generation hash : b7a910e5419ec1d9f2554a1e89b04f49a494dc36
+.. comment: Generation date : Mon, 10 Jun 2019 20:12:00 +0000
+.. comment: Generation hash : 69e7359ba863472429a148a662f319ce8bbd8c2e
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 359 analysis
+Total : 360 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -210,6 +210,7 @@ Total : 359 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
@@ -438,7 +439,7 @@ Total : 359 analysis
 ClassReview
 +++++++++++
 
-Total : 21 analysis
+Total : 25 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -450,15 +451,19 @@ Total : 21 analysis
 * :ref:`Could Be Protected Method <could-be-protected-method>`
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Use self <could-use-self>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`
+* :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
+* :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Redefined Property <redefined-property>`
+* :ref:`Self Using Trait <self-using-trait>`
 * :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 
@@ -1030,8 +1035,10 @@ Total : 20 analysis
 Performances
 ++++++++++++
 
-Total : 39 analysis
+Total : 42 analysis
 
+* :ref:`@ Operator <@-operator>`
+* :ref:`Autoappend <autoappend>`
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
@@ -1050,6 +1057,7 @@ Total : 39 analysis
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
 * :ref:`Joining file() <joining-file()>`
+* :ref:`Make Magic Concrete <make-magic-concrete>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
@@ -1125,7 +1133,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 80 analysis
+Total : 81 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1189,6 +1197,7 @@ Total : 80 analysis
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Slice Arrays First <slice-arrays-first>`
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
+* :ref:`Substr To Trim <substr-to-trim>`
 * :ref:`Substring First <substring-first>`
 * :ref:`Too Many Children <too-many-children>`
 * :ref:`Too Many Parameters <too-many-parameters>`

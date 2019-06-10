@@ -106,6 +106,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Codeflower
   * Dependencywheel
   * Phpcity
+  * Sarb
 
 
 Supported PHP Extensions
@@ -321,8 +322,8 @@ Applications
 
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
-* 
 * `ChurchCRM <http://churchcrm.io/>`_
+* Churchcrm
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Contao <https://contao.org/en/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
@@ -357,6 +358,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Vanilla <https://open.vanillaforums.com/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `WordPress <https://www.wordpress.org/>`_
+* Wordpress
 * `XOOPS <https://xoops.org/>`_
 * `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
@@ -428,6 +430,13 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
+
+* 1.8.3
+
+  * Autoappend (Performances/Autoappend ; Performances)
+  * Make Magic Concrete (Classes/MakeMagicConcrete)
+  * Memoize MagicCall (Performances/MemoizeMagicCall ; Analyze, ClassReview)
+  * Substr To Trim (Structures/SubstrToTrim ; Suggestions)
 
 * 1.8.2
 
@@ -543,7 +552,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Method Could Be Static (Classes/CouldBeStatic)
   * Multiple Usage Of Same Trait (Traits/MultipleUsage ; Suggestions)
-  * Self Using Trait (Traits/SelfUsingTrait ; Dead code)
+  * Self Using Trait (Traits/SelfUsingTrait ; Dead code, ClassReview)
   * ext/wasm (Extensions/Extwasm ; Appinfo)
 
 * 1.5.6
@@ -1229,7 +1238,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ** For Exponent (Php/NewExponent ; Suggestions, php-cs-fixable)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
   * <?= Usage (Php/EchoTagUsage ; Appinfo, Simple)
-  * @ Operator (Structures/Noscream ; Analyze, Appinfo, ClearPHP)
+  * @ Operator (Structures/Noscream ; Analyze, Appinfo, Performances, ClearPHP)
   * Abstract Class Usage (Classes/Abstractclass ; Appinfo, Appcontent)
   * Abstract Methods Usage (Classes/Abstractmethods ; Appinfo, Appcontent)
   * Abstract Static Methods (Classes/AbstractStatic ; Analyze, Simple)
@@ -1315,7 +1324,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Use Alias (Namespaces/CouldUseAlias ; OneFile, Suggestions)
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Simple)
   * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Simple, Suggestions, Level 3, php-cs-fixable)
-  * Could Use self (Classes/ShouldUseSelf ; Analyze, Simple, Suggestions, Level 3)
+  * Could Use self (Classes/ShouldUseSelf ; Analyze, Simple, Suggestions, Level 3, ClassReview)
   * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
   * Custom Constant Usage (Constants/CustomConstantUsage ; )
@@ -1518,7 +1527,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Plus One (Structures/PlusEgalOne ; Coding Conventions, OneFile)
   * No Public Access (Classes/NoPublicAccess ; Analyze)
   * No Real Comparison (Type/NoRealComparison ; Analyze, Simple, Level 2, Top10)
-  * No Self Referencing Constant (Classes/NoSelfReferencingConstant ; Analyze, Simple, LintButWontExec)
+  * No Self Referencing Constant (Classes/NoSelfReferencingConstant ; Analyze, Simple, LintButWontExec, ClassReview)
   * No String With Append (Php/NoStringWithAppend ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, Simple, Suggestions, Level 2, Top10)
   * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Simple, Level 2, Top10)
@@ -2083,6 +2092,7 @@ List of external links mentionned in this documentation.
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
 * `__autoload <http://php.net/autoload>`_
+* `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
@@ -2260,9 +2270,9 @@ List of external links mentionned in this documentation.
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_
 * `Foreign Function Interface <https://www.php.net/manual/en/book.ffi.php>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
-* `Frederic Bouchery <https://twitter.com/FredBouchery>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Function arguments <http://php.net/manual/en/functions.arguments.php>`_
@@ -2503,6 +2513,7 @@ List of external links mentionned in this documentation.
 * `RFC: Return Type Declarations <https://wiki.php.net/rfc/return_types>`_
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Salted Password Hashing - Doing it Right <https://crackstation.net/hashing-security.htm>`_
+* `SARB <https://github.com/DaveLiddament/sarb>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Scope Resolution Operator (::) ¶ <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
@@ -2558,13 +2569,14 @@ List of external links mentionned in this documentation.
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `trigger_error <http://php.net/trigger_error>`_
+* `trim <https://www.php.net/manual/en/function.trim.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2813,6 +2825,7 @@ _______
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/LogicalToInArray";
+|   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Performances/PrePostIncrement";
 |   analyzer[] = "Performances/StrposTooMuch";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
@@ -3043,13 +3056,17 @@ ___________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
+|   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/RedefinedProperty";
+|   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UnreachableConstant";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
-|   analyzer[] = "Structures/CouldBeStatic";| 
+|   analyzer[] = "Performances/MemoizeMagicCall";
+|   analyzer[] = "Structures/CouldBeStatic";
+|   analyzer[] = "Traits/SelfUsingTrait";| 
 
 
 
@@ -3679,10 +3696,12 @@ ____________
 | [Performances]
 |   analyzer[] = "Arrays/GettingLastElement";
 |   analyzer[] = "Arrays/SliceFirst";
+|   analyzer[] = "Classes/MakeMagicConcrete";
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Functions/Closure2String";
 |   analyzer[] = "Performances/ArrayKeyExistsSpeedup";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
+|   analyzer[] = "Performances/Autoappend";
 |   analyzer[] = "Performances/AvoidArrayPush";
 |   analyzer[] = "Performances/CacheVariableOutsideLoop";
 |   analyzer[] = "Performances/CsvInLoops";
@@ -3714,6 +3733,7 @@ ____________
 |   analyzer[] = "Structures/NoArrayUnique";
 |   analyzer[] = "Structures/NoAssignationInFunction";
 |   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/Noscream";
 |   analyzer[] = "Structures/SimplePreg";
 |   analyzer[] = "Structures/WhileListEach";| 
 
@@ -3855,6 +3875,7 @@ ___________
 |   analyzer[] = "Structures/ShouldUseMath";
 |   analyzer[] = "Structures/ShouldUseOperator";
 |   analyzer[] = "Structures/SubstrLastArg";
+|   analyzer[] = "Structures/SubstrToTrim";
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
