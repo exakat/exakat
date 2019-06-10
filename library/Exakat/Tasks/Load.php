@@ -2958,6 +2958,7 @@ class Load extends Tasks {
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
                 if ($static->static === 1) {
                     $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
+                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
                 } else {
                     $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
                 }
