@@ -28,8 +28,13 @@ class RedefinedDefault extends Analyzer {
         // class x { private $y = 1; function __construct() { $this->y = 2;}}
         $this->atomIs('Ppp')
              ->outIs('PPP')
+             ->atomIs('Propertydefinition')
              ->savePropertyAs('propertyname', 'name')
-             ->hasOut('DEFAULT')
+             ->filter(
+                $this->side()
+                     ->outIs('DEFAULT')
+                     ->hasNoIn('RIGHT')
+             )
              ->_as('results')
              ->goToClass()
 
