@@ -416,15 +416,35 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 Laravel analysis
 __________________________________________________
 
-This extension includes 0 analyzers.
+This extension includes 20 analyzers.
 
-* 
+*  (Laravel/LaravelEnv)
+* Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
+* Compatibility Laravel v5_1_0 (Laravel/Laravel_v5_1_0)
+* Compatibility Laravel v5_2_0 (Laravel/Laravel_v5_2_0)
+* Compatibility Laravel v5_3_0 (Laravel/Laravel_v5_3_0)
+* Compatibility Laravel v5_4_0 (Laravel/Laravel_v5_4_0)
+* Compatibility Laravel v5_5_0 (Laravel/Laravel_v5_5_0)
+* Compatibility Laravel v5_6_0 (Laravel/Laravel_v5_6_0)
+* Compatibility Laravel v5_7_0 (Laravel/Laravel_v5_7_0)
+* Laravel 5.0 Compatibility (Laravel/Laravel_5_0)
+* Laravel 5.1 Compatibility (Laravel/Laravel_5_1)
+* Laravel 5.2 Compatibility (Laravel/Laravel_5_2)
+* Laravel 5.3 Compatibility (Laravel/Laravel_5_3)
+* Laravel 5.4 Compatibility (Laravel/Laravel_5_4)
+* Laravel 5.5 Compatibility (Laravel/Laravel_5_5)
+* Laravel 5.6 Compatibility (Laravel/Laravel_5_6)
+* Laravel 5.7 Compatibility (Laravel/Laravel_5_7)
+* Laravel 5.8 Compatibility (Laravel/Laravel_5_8)
+* Laravel Usage (Laravel/LaravelUsage)
 
 
 Laravel rulesets
 __________________________________________________
 
-This extension includes no specific ruleset.
+This extension includes one ruleset : Laravel.
+
+
 Laravel reports
 __________________________________________________
 

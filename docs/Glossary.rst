@@ -437,6 +437,7 @@ Glossary
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Should Use Foreach <should-use-foreach>`
       + :ref:`Use List With Foreach <use-list-with-foreach>`
+      + :ref:`Useless Check <useless-check>`
 
     + `feof()`
 
@@ -793,6 +794,10 @@ Glossary
       + :ref:`Use List With Foreach <use-list-with-foreach>`
       + :ref:`list() May Omit Variables <list()-may-omit-variables>`
 
+    + `ltrim()`
+
+      + :ref:`Substr To Trim <substr-to-trim>`
+
 
 + `M`
     + `magic_quotes_runtime()`
@@ -822,6 +827,7 @@ Glossary
     + `mb_substr()`
 
       + :ref:`No Substr() One <no-substr()-one>`
+      + :ref:`Substr To Trim <substr-to-trim>`
 
     + `mcrypt_cbc()`
 
@@ -1095,6 +1101,10 @@ Glossary
 
       + :ref:`Directly Use File <directly-use-file>`
 
+    + `rtrim()`
+
+      + :ref:`Substr To Trim <substr-to-trim>`
+
 
 + `S`
     + `SimpleXMLElement`
@@ -1271,6 +1281,7 @@ Glossary
 
       + :ref:`No List With String <no-list-with-string>`
       + :ref:`No Substr() One <no-substr()-one>`
+      + :ref:`Substr To Trim <substr-to-trim>`
       + :ref:`Substring First <substring-first>`
       + :ref:`Use Basename Suffix <use-basename-suffix>`
       + :ref:`strpos() Too Much <strpos()-too-much>`
@@ -1316,6 +1327,7 @@ Glossary
 
     + `trim()`
 
+      + :ref:`Substr To Trim <substr-to-trim>`
       + :ref:`Substring First <substring-first>`
 
 
