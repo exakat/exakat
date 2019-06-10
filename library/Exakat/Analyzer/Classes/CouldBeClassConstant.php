@@ -26,75 +26,27 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeClassConstant extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/LocallyUnusedProperty',
-                    );
-    }
-    
     public function analyze() {
+        // class x { private }
         $this->atomIs('Ppp')
              ->hasClass()
 
              ->isNot('visibility', array('private', 'protected'))
 
              ->outIs('PPP')
-             ->analyzerIsNot('Classes/LocallyUnusedProperty')
+             ->atomIs('Propertydefinition')
 
              ->outIs('DEFAULT')
+             ->hasNoParent('Assignation', array('ARGUMENT')) // exclude dynamic default
              ->atomIsNot(array('Null', 'Staticconstant'))
              ->inIs('DEFAULT')
-             
-             // Ignore null or static expressions in definitions.
-             ->raw('not(where( __.out("RIGHT").hasLabel("Null", "Staticconstant") ) )')
 
-             ->savePropertyAs('propertyname', 'name')
-
-             ->savePropertyAs('code', 'staticName')
-             ->goToClass()
-
-             ->savePropertyAs('fullnspath', 'fnp')
-
-                // usage as property with $this
-              ->not(
+             ->hasOut('DEFINITION')
+             ->not(
                 $this->side()
-                     ->outIs('METHOD')
-                     ->filter(
-                        $this->side()
-                             ->atomInsideNoDefinition('Member')
-                             ->filter(
-                                $this->side()
-                                     ->outIs('OBJECT')
-                                     ->atomIs('This')
-                             )
-                             ->filter(
-                                $this->side()
-                                     ->outIs('MEMBER')
-                                     ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-                             )
-                             ->is('isModified', true)
-                     )
-              )
-
-                // usage as static property with (namespace, self or static)
-                ->not(
-                    $this->side()
-                         ->outIs('METHOD')
-                         ->filter(
-                            $this->side()
-                                 ->atomInsideNoDefinition('Staticproperty')
-                                 ->filter(
-                                    $this->side()
-                                         ->outIs('CLASS')
-                                         ->fullnspathIs('fnp')
-                                 )
-                                 ->filter(
-                                    $this->side()
-                                         ->outIs('MEMBER')
-                                         ->samePropertyAs('code', 'staticName', self::CASE_SENSITIVE)
-                                 )
-                                 ->is('isModified', true)
-                         )
-                )
+                     ->outIs('DEFINITION')
+                     ->is('isModified', true)
+             )
              ->back('first');
              
              // Exclude situations where property is used as an object or a resource (can't be class constant)
