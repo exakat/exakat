@@ -30,6 +30,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->atomIs('Class')
              ->outIs('PPP')
              ->outIs('PPP')
+             ->atomIs('Propertydefinition')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
              ->outIs('DEFAULT')
@@ -46,21 +47,15 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->_as('results')
-             ->savePropertyAs('propertyname', 'name')
-             ->raw('or( __.out("DEFAULT").hasLabel("Null"), __.not(out("DEFAULT").in("RIGHT").hasLabel("Assignation")) )')
 
-             ->outIs('DEFINITION')
-             ->inIs('LEFT')
-             ->atomIs('Assignation')
-             ->outIs('RIGHT')
-             ->atomIs('New')
+             ->outIs('DEFAULT')
+             ->atomIs('New') // at least ONE default is a NEW
+             ->inIs('DEFAULT')
              
-             ->back('results')
-             ->outIs('DEFINITION')
-             ->inIs('LEFT')
-             ->atomIs('Assignation')
-             ->outIs('RIGHT')
-             ->atomIs(self::$LITERALS)
+             ->outIs('DEFAULT')
+             ->atomIs(self::$LITERALS) // Another definition is a literal
+             ->atomIsNot('Null')
+             ->inIs('DEFAULT')
 
              ->back('results');
         $this->prepareQuery();
