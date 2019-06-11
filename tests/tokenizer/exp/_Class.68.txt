@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : FILE
@@ -32,26 +38,16 @@ Label : PROJECT
                 Label : BLOCK
                   11
                   Label : EXPRESSION
-                    15
+                    14
                     Label : LEFT
-                      14
+                      13
                       Label : MEMBER
-                        13
+                        9
                       Label : OBJECT
                         12
                     Label : RIGHT
                       8
                 Label : NAME
                   10
-              Label : PPP
-                0
-                Label : PPP
-                  0
-                  Label : DEFINITION
-                    14
-                    Label : MEMBER
-                      13
-                    Label : OBJECT
-                      12
           Label : NAME
             5

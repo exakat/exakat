@@ -1,12 +1,28 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -52,11 +68,11 @@ Label : PROJECT
           Label : LEFT
             9
             Label : METHOD
-              13
+              14
               Label : ARGUMENT
-                14
+                15
               Label : NAME
-                13
+                14
             Label : OBJECT
               12
           Label : RIGHT

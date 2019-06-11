@@ -1,22 +1,86 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        8
+        Label : MEMBER
+          12
+        Label : OBJECT
+          10
+      Label : CONCAT
+        13
+      Label : CONCAT
+        14
+      Label : CONCAT
+        16
+      Label : CONCAT
+        17
+      Label : CONCAT
+        19
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        8
+        Label : MEMBER
+          12
+        Label : OBJECT
+          10
+      Label : CONCAT
+        13
+      Label : CONCAT
+        14
+      Label : CONCAT
+        16
+      Label : CONCAT
+        17
+      Label : CONCAT
+        19
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      15
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,16 +98,16 @@ Label : PROJECT
             Label : CONCAT
               8
               Label : MEMBER
-                11
+                12
               Label : OBJECT
                 10
-            Label : CONCAT
-              12
             Label : CONCAT
               13
             Label : CONCAT
               14
             Label : CONCAT
-              15
-            Label : CONCAT
               16
+            Label : CONCAT
+              17
+            Label : CONCAT
+              19

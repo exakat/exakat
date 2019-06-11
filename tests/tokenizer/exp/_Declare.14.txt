@@ -1,11 +1,19 @@
 test
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION, DEFAULT
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    19
+    20
     Label : DEFINITION
       20
-    Label : DEFINITION
+    Label : DEFINITION, DEFAULT
       20
   Label : FILE
     3

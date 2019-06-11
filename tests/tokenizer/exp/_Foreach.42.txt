@@ -1,14 +1,46 @@
 test
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
       14
     Label : DEFINITION
       14
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -16,15 +48,15 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    16
     Label : DEFINITION
       16
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
+    20
     Label : DEFINITION
-      19
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,11 +66,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            17
+            18
             Label : EXPRESSION
-              18
+              19
               Label : POSTPLUSPLUS
                 6
+          Label : INDEX
+            14
           Label : SOURCE
             11
             Label : LEFT
@@ -52,27 +86,25 @@ Label : PROJECT
               Label : ARGUMENT
                 12
           Label : VALUE
-            15
-            Label : INDEX
-              14
-            Label : VALUE
-              16
+            16
         Label : EXPRESSION
           5
           Label : BLOCK
-            17
+            18
             Label : EXPRESSION
-              18
+              19
               Label : POSTPLUSPLUS
                 6
+          Label : INDEX
+            14
           Label : SOURCE
-            22
+            24
             Label : CONDITION
               8
               Label : INDEX
-                20
+                22
               Label : VARIABLE
-                19
+                20
             Label : ELSE
               8
               Label : ARGUMENT
@@ -80,10 +112,6 @@ Label : PROJECT
             Label : THEN
               8
               Label : ARGUMENT
-                23
+                25
           Label : VALUE
-            15
-            Label : INDEX
-              14
-            Label : VALUE
-              16
+            16

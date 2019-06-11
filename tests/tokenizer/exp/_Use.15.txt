@@ -1,8 +1,32 @@
 test
+Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
 Label : PROJECT
   1
   Label : DEFINITION
-    36
+    35
     Label : DEFINITION
       35
     Label : DEFINITION

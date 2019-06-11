@@ -1,8 +1,64 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      12
+      Label : ARGUMENT
+        16
+        Label : MEMBER
+          15
+        Label : OBJECT
+          13
+      Label : NAME
+        12
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -10,27 +66,37 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
-    7
-    Label : DEFINITION
+    10
+    Label : DEFAULT
       12
-  Label : DEFINITION
-    7
+      Label : ARGUMENT
+        16
+        Label : MEMBER
+          15
+        Label : OBJECT
+          13
+      Label : NAME
+        12
     Label : DEFINITION
-      17
+      10
+    Label : DEFINITION
+      10
   Label : DEFINITION
-    7
+    13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    19
     Label : DEFINITION
       19
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
-      21
+      22
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,31 +108,31 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              14
+              16
               Label : METHOD
-                18
+                21
                 Label : ARGUMENT
-                  19
-                Label : NAME
-                  18
-              Label : OBJECT
-                17
-            Label : EXPRESSION
-              20
-              Label : ARGUMENT
-                14
-                Label : METHOD
                   22
-                  Label : ARGUMENT
-                    23
-                  Label : NAME
-                    22
-                Label : OBJECT
+                Label : NAME
                   21
+              Label : OBJECT
+                19
+            Label : EXPRESSION
+              24
+              Label : ARGUMENT
+                16
+                Label : METHOD
+                  7
+                  Label : ARGUMENT
+                    27
+                  Label : NAME
+                    7
+                Label : OBJECT
+                  25
           Label : FINAL
             3
             Label : EXPRESSION
-              15
+              17
               Label : LEFT
                 6
               Label : RIGHT
@@ -74,7 +140,7 @@ Label : PROJECT
           Label : INCREMENT
             3
             Label : EXPRESSION
-              16
+              18
               Label : POSTPLUSPLUS
                 6
           Label : INIT
@@ -90,12 +156,12 @@ Label : PROJECT
               Label : LEFT
                 10
               Label : RIGHT
-                11
+                12
                 Label : ARGUMENT
-                  14
+                  16
                   Label : MEMBER
-                    13
+                    15
                   Label : OBJECT
-                    12
+                    13
                 Label : NAME
-                  11
+                  12
