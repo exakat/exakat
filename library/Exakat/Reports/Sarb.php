@@ -36,12 +36,12 @@ class Sarb extends Reports {
 
         $results = array();
         foreach($analysisResults->toArray() as $row) {
-            if ($row['line'] === -1) { 
+            if ($row['line'] === -1) {
                 // Skip project-wide issues
-                continue; 
+                continue;
             }
             $message = array('type' => $row['analyzer'],
-                             'file' => $code_dir.$row['file'],
+                             'file' => $code_dir . $row['file'],
                              'line' => $row['line'],
                              );
             $results[] = $message;

@@ -1359,8 +1359,8 @@ class Load extends Tasks {
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
 
-        if ($function->atom === 'Closure' && 
-            isset($fullcode[0]) && 
+        if ($function->atom === 'Closure' &&
+            isset($fullcode[0]) &&
             strtolower($fullcode[0]) === 'static') {
             array_pop($this->currentClassTrait);
         }
@@ -1594,14 +1594,14 @@ class Load extends Tasks {
 
         foreach($diff as $missing) {
             $ppp = $this->addAtom('Ppp');
-            $ppp->fullcode     = 'public $'.$missing;
+            $ppp->fullcode     = 'public $' . $missing;
             $ppp->visibility   = 'none';
             $ppp->code         = $missing;
             $ppp->line         = -1;
             $this->addLink($currentClass, $ppp, 'PPP');
 
             $virtual = $this->addAtom('Virtualproperty');
-            $virtual->fullcode     = '$'.$missing;
+            $virtual->fullcode     = '$' . $missing;
             $virtual->propertyname = $missing;
             $virtual->line         = -1;
             $this->addLink($ppp, $virtual, 'PPP');
@@ -2958,9 +2958,9 @@ class Load extends Tasks {
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
                 if ($static->static === 1) {
                     $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
-                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
                 } else {
-                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
                 }
             }
 
@@ -5172,14 +5172,14 @@ class Load extends Tasks {
         }
 
         $this->addLink($static, $left, 'CLASS');
-        if ($static->atom  === 'Staticproperty' && 
+        if ($static->atom  === 'Staticproperty' &&
             $left->token   === 'T_STRING'       &&
             !empty($this->currentClassTrait)    &&
             !empty($this->currentClassTrait[count($this->currentClassTrait) - 1]) &&
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
             
             $name = ltrim($right->code, '$');
-            if (isset($this->currentPropertiesCalls[$name])) { 
+            if (isset($this->currentPropertiesCalls[$name])) {
                 $this->currentPropertiesCalls[$name][] = $static;
             } else {
                 $this->currentPropertiesCalls[$name] = array($static);
@@ -5309,7 +5309,7 @@ class Load extends Tasks {
         if ($left->atom === 'This' ){
             if ($static->atom === 'Methodcall') {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
-            } elseif ($static->atom  === 'Member'   && 
+            } elseif ($static->atom  === 'Member'   &&
                       $right->token  === 'T_STRING') {
                 $this->calls->addCall('property', "{$left->fullnspath}::{$right->code}", $static);
             }
@@ -6172,8 +6172,6 @@ class Load extends Tasks {
             $this->theGlobals[$name]->lccode = $element->code;
             $this->theGlobals[$name]->line = -1;
             $this->theGlobals[$name]->globalvar = substr($name, 1);
-    
-//            $this->addLink($this->id0, $this->theGlobals[$name], 'GLOBAL');
         }
     }
 }

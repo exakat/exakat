@@ -54,7 +54,7 @@ GREMLIN
              ->atomIs('Member')
              ->outIs('MEMBER')
              ->tokenIs('T_STRING')
-             ->filter('members[it.get().value("fullcode")] > '.$this->magicMemberUsage.';');
+             ->filter('members[it.get().value("fullcode")] > ' . $this->magicMemberUsage . ';');
         $this->prepareQuery();
     }
 }
