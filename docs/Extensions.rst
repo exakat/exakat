@@ -412,11 +412,12 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 
 * **Home page** : `https://laravel.com/ <https://laravel.com/>`_
 * **Extension page** : `https://github.com/exakat/Exakat4Laravel <https://github.com/exakat/Exakat4Laravel>`_
+* **Supported versions** : 5.0 (v5.0.35), 5.1 (v5.1.46), 5.2 (v5.2.45), 5.3 (v5.3.31), 5.4 (v5.4.36), 5.5 (v5.5.45), 5.6 (v5.6.39 ), 5.7 (v5.7.28), 5.8 (v5.8.21)
 
 Laravel analysis
 __________________________________________________
 
-This extension includes 20 analyzers.
+This extension includes 22 analyzers.
 
 *  (Laravel/LaravelEnv)
 * Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
@@ -436,6 +437,8 @@ This extension includes 20 analyzers.
 * Laravel 5.6 Compatibility (Laravel/Laravel_5_6)
 * Laravel 5.7 Compatibility (Laravel/Laravel_5_7)
 * Laravel 5.8 Compatibility (Laravel/Laravel_5_8)
+* Laravel Constant Usage (Laravel/LaravelConstantUsage)
+* Laravel Function Usage (Laravel/LaravelFunctionsUsage)
 * Laravel Usage (Laravel/LaravelUsage)
 
 
