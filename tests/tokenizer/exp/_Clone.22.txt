@@ -1,12 +1,42 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      13
+      Label : CAST
+        14
+        Label : CLONE
+          15
+          Label : CAST
+            8
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    10
+    Label : DEFAULT
+      13
+      Label : CAST
+        14
+        Label : CLONE
+          15
+          Label : CAST
+            8
     Label : DEFINITION
       10
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -28,14 +58,14 @@ Label : PROJECT
           Label : THEN
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
                 10
               Label : RIGHT
-                12
+                13
                 Label : CAST
-                  13
+                  14
                   Label : CLONE
-                    14
+                    15
                     Label : CAST
                       8

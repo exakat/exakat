@@ -1,42 +1,96 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
+    16
     Label : DEFINITION
-      15
+      16
   Label : DEFINITION
-    7
+    20
     Label : DEFINITION
-      18
+      20
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      21
-  Label : DEFINITION
-    7
+    24
     Label : DEFINITION
       24
   Label : DEFINITION
-    7
+    28
     Label : DEFINITION
-      27
+      28
   Label : DEFINITION
-    7
+    32
     Label : DEFINITION
-      30
+      32
   Label : DEFINITION
-    7
+    36
     Label : DEFINITION
-      33
+      36
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,23 +110,17 @@ Label : PROJECT
               Label : ARGUMENT
                 12
             Label : EXPRESSION
-              13
+              14
             Label : EXPRESSION
               11
               Label : ARGUMENT
-                15
+                16
             Label : EXPRESSION
-              16
-            Label : EXPRESSION
-              11
-              Label : ARGUMENT
-                18
-            Label : EXPRESSION
-              19
+              18
             Label : EXPRESSION
               11
               Label : ARGUMENT
-                21
+                20
             Label : EXPRESSION
               22
             Label : EXPRESSION
@@ -80,22 +128,28 @@ Label : PROJECT
               Label : ARGUMENT
                 24
             Label : EXPRESSION
-              25
+              26
             Label : EXPRESSION
               11
               Label : ARGUMENT
-                27
+                28
             Label : EXPRESSION
-              28
-            Label : EXPRESSION
-              11
-              Label : ARGUMENT
-                30
-            Label : EXPRESSION
-              31
+              30
             Label : EXPRESSION
               11
               Label : ARGUMENT
-                33
+                32
             Label : EXPRESSION
               34
+            Label : EXPRESSION
+              11
+              Label : ARGUMENT
+                36
+            Label : EXPRESSION
+              38
+            Label : EXPRESSION
+              11
+              Label : ARGUMENT
+                40
+            Label : EXPRESSION
+              42

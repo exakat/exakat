@@ -1,8 +1,68 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFAULT
+      14
+      Label : NEW
+        15
+        Label : ARGUMENT
+          14
+          Label : NEW
+            17
+            Label : ARGUMENT
+              19
+              Label : ARGUMENT
+                22
+                Label : INDEX
+                  20
+                Label : VALUE
+                  23
+              Label : ARGUMENT
+                22
+                Label : INDEX
+                  25
+                Label : VALUE
+                  27
+            Label : NAME
+              17
+        Label : NAME
+          15
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
+    Label : DEFAULT
+      14
+      Label : NEW
+        15
+        Label : ARGUMENT
+          14
+          Label : NEW
+            17
+            Label : ARGUMENT
+              19
+              Label : ARGUMENT
+                22
+                Label : INDEX
+                  20
+                Label : VALUE
+                  23
+              Label : ARGUMENT
+                22
+                Label : INDEX
+                  25
+                Label : VALUE
+                  27
+            Label : NAME
+              17
+        Label : NAME
+          15
     Label : DEFINITION
       11
     Label : DEFINITION

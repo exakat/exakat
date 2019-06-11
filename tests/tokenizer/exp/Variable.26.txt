@@ -1,8 +1,38 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -14,7 +44,7 @@ Label : PROJECT
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -62,15 +92,15 @@ Label : PROJECT
           Label : INDEX
             10
           Label : VARIABLE
-            12
+            13
             Label : MEMBER
               11
             Label : OBJECT
               6
         Label : EXPRESSION
-          12
+          13
           Label : MEMBER
-            13
+            14
             Label : CODE
               8
               Label : INDEX
@@ -82,25 +112,25 @@ Label : PROJECT
         Label : EXPRESSION
           8
           Label : ARGUMENT
-            14
+            15
           Label : NAME
             8
             Label : INDEX
               10
             Label : VARIABLE
-              12
+              13
               Label : MEMBER
                 11
               Label : OBJECT
                 6
         Label : EXPRESSION
-          12
+          13
           Label : METHOD
-            13
+            14
             Label : ARGUMENT
-              14
+              15
             Label : NAME
-              13
+              14
               Label : CODE
                 8
                 Label : INDEX
@@ -112,7 +142,7 @@ Label : PROJECT
         Label : EXPRESSION
           8
           Label : ARGUMENT
-            14
+            15
           Label : NAME
             8
             Label : INDEX
@@ -120,19 +150,19 @@ Label : PROJECT
             Label : VARIABLE
               18
               Label : CLASS
-                16
+                17
               Label : MEMBER
                 11
         Label : EXPRESSION
           18
           Label : CLASS
-            16
+            17
           Label : METHOD
-            13
+            14
             Label : ARGUMENT
-              14
+              15
             Label : NAME
-              13
+              14
               Label : CODE
                 8
                 Label : INDEX

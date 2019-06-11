@@ -1,42 +1,112 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      16
+      Label : NAME
+        16
+      Label : ARGUMENT
+        18
+      Label : ARGUMENT
+        20
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    14
+    Label : DEFAULT
+      16
+      Label : NAME
+        16
+      Label : ARGUMENT
+        18
+      Label : ARGUMENT
+        20
     Label : DEFINITION
       14
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
-      21
+      22
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    7
+    25
     Label : DEFINITION
       25
   Label : DEFINITION
-    7
+    27
     Label : DEFINITION
-      28
+      27
   Label : DEFINITION
-    7
+    31
     Label : DEFINITION
       31
   Label : DEFINITION
-    7
+    35
     Label : DEFINITION
-      36
+      35
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,23 +126,23 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : ELSE
-            30
+            34
             Label : CONDITION
               11
               Label : LEFT
                 10
                 Label : MEMBER
-                  32
+                  37
                 Label : OBJECT
-                  31
+                  35
               Label : RIGHT
-                34
+                38
             Label : THEN
               3
               Label : EXPRESSION
-                29
+                33
                 Label : POSTPLUSPLUS
-                  36
+                  40
           Label : THEN
             3
             Label : EXPRESSION
@@ -86,24 +156,24 @@ Label : PROJECT
                 Label : ARGUMENT
                   18
                 Label : ARGUMENT
-                  19
+                  20
             Label : EXPRESSION
               5
               Label : CONDITION
-                21
-              Label : THEN
                 22
+              Label : THEN
+                23
                 Label : EXPRESSION
-                  23
+                  24
                   Label : BLOCK
-                    22
+                    23
                     Label : EXPRESSION
-                      26
+                      29
                   Label : SOURCE
-                    24
-                  Label : VALUE
                     25
+                  Label : VALUE
+                    27
             Label : EXPRESSION
-              29
+              33
               Label : POSTPLUSPLUS
-                28
+                31

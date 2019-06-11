@@ -1,14 +1,34 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      13
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
+    Label : DEFAULT
+      13
     Label : DEFINITION
       8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -22,9 +42,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : POSTPLUSPLUS
                 6
           Label : SOURCE
@@ -32,10 +52,10 @@ Label : PROJECT
           Label : VALUE
             8
         Label : EXPRESSION
-          9
+          10
           Label : EXPRESSION
-            11
+            12
             Label : LEFT
               8
             Label : RIGHT
-              12
+              13
