@@ -1,0 +1,27 @@
+[
+    {
+        "type": "Classes\/NonPpp",
+        "file": "\/home\/exakat\/elation\/code\/include\/base_class.php",
+        "line": 37
+    },
+    {
+        "type": "Structures\/NoSubstrOne",
+        "file": "\/home\/exakat\/elation\/code\/include\/common_funcs.php",
+        "line": 890
+    },
+    {
+        "type": "Structures\/DropElseAfterReturn",
+        "file": "\/home\/exakat\/elation\/code\/include\/smarty\/SmartyValidate.class.php",
+        "line": 638
+    },
+    {
+        "type": "Variables\/UndefinedVariable",
+        "file": "\/home\/exakat\/elation\/code\/components\/ui\/ui.php",
+        "line": 174
+    },
+    {
+        "type": "Functions\/TooManyLocalVariables",
+        "file": "\/home\/exakat\/elation\/code\/include\/dependencymanager_class.php",
+        "line": 43
+    }
+]
