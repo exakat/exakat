@@ -1110,6 +1110,10 @@ GLOSSARY;
                 if (!empty($docs['extension_page'])) {
                     $doc .= "* **Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
                 }
+                if (!empty($docs['versions'])) {
+                    $versions = preg_replace('/^.*?(\d+\.\d+)(.*)$/', '$1 ($0)', $docs['versions']);
+                    $doc .= "* **Supported versions** : ".implode(', ', $versions)."\n";
+                }
                 $doc .= "\n";
             }
         } else {
@@ -1181,7 +1185,7 @@ GLOSSARY;
             if (file_exists("./human/en/{$m[1]}.ini")) {
                 $ini = parse_ini_file("./human/en/{$m[1]}.ini", true);
 
-                return " :ref:`".$this->rst_anchor($ini['name'])."`$r[2] ";
+                return " :ref:`".$this->rst_anchor($ini['name'])."`$m[2] ";
             } else {
                 return $m[0];
             }
