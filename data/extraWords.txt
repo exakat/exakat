@@ -117,6 +117,7 @@ Symfony
 typehint
 typehints
 typehinted
+typehinting
 syntaxes
 CakePHP
 visibilities
@@ -241,3 +242,12 @@ UTF-16
 api
 __CLASS__
 __DIR__s
+checksum
+checksums
+php
+https
+http
+PSR
+exakat
+MySQL
+ODBC
