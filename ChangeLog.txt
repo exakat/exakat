@@ -1,4 +1,4 @@
-Version 1.8.3 (Jade Man of Yang, coming up)
+Version 1.8.4 (Wang Wenqing of Jiazi, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,34 @@ Version 1.8.3 (Jade Man of Yang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.3 (Jade Man of Yang, 2019-06-10)
++ Architecture
+    + Extension docs show version numbers
+    + Manual uses internal links
++ Report
+    + New report : SARB
+    + Updated report : Ambassador list number of arguments in natural order
++ Analyzer
+    + New analyzer : from substr() to trim()
+    + New analyzer : suggest making magic property a concrete one (2 ways)
+    + New analyzer : no array auto-append
+    + Updated analyzer : 'Scalar or object property' refactored
+    + Updated analyzer : 'Multiple identical keys' get a new check on intval, broadened to constants
+    + Updated analyzer : 'Indirect injection' accelerated
+    + Updated analyzer : 'Could be class constant' accelerated
+    + Updated analyzer : 'Never used property' refactored
+    + Updated analyzer : 'Modern empty' modernized and broadened
+    + Updated analyzer : 'Useless check' skips isset/empty as they may be useful
+    + Updated analyzer : 'Identical methoods' skips abstract methods
+    + Updated analyzer : 'No Count Zero' also uses sizeof(), skips switch()
+    + Checked unit tests : 2993 / 3071 test pass (97% pass)
++ Tokenizer
+    + Upgraded local definitions for properties to Load phase
+    + Handle static keyword in closures
+    + Moved 'Real' to 'Float' 
+    + Created 'Scalartypehint' atom
+    + Fixed intval, boolval for \true and \false
 
 Version 1.8.2 (Zhao Ziyu of Dingchou, 2019-06-03)
 + Architecture
