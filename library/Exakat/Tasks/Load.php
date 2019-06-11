@@ -2520,7 +2520,7 @@ class Load extends Tasks {
         $this->addLink($namecall, $name, 'NAME');
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $namecall->fullcode   = $namecall->code . '(' . $name->code . ')';
+            $namecall->fullcode   = "{$namecall->code}({$name->code})";
             $this->pushExpression($namecall);
 
             $this->runPlugins($namecall, array('NAME'  => $name,));
@@ -2543,7 +2543,7 @@ class Load extends Tasks {
 
         // Most common point of exit
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $namecall->fullcode   = $namecall->code . '(' . $name->fullcode . ', ' . $value->fullcode . ')';
+            $namecall->fullcode   = "{$namecall->code}({$name->fullcode}, {$value->fullcode})";
             $this->pushExpression($namecall);
 
             $this->runPlugins($namecall, array('NAME'  => $name,
@@ -5158,13 +5158,13 @@ class Load extends Tasks {
                         STRICT_COMPARISON)) {
             $static = $this->addAtom('Staticproperty');
             $this->addLink($static, $right, 'MEMBER');
-            $fullcode = $left->fullcode . '::' . $right->fullcode;
+            $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'MEMBER' => $right));
         } elseif ($right->atom === 'Methodcallname') {
             $static = $this->addAtom('Staticmethodcall');
             $this->addLink($static, $right, 'METHOD');
-            $fullcode = $left->fullcode . '::' . $right->fullcode;
+            $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));
         } else {
@@ -5179,7 +5179,9 @@ class Load extends Tasks {
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
             
             $name = ltrim($right->code, '$');
-            if (isset($this->currentPropertiesCalls[$name])) {
+            if (empty($name)) {
+                //nothing, really
+            } elseif(isset($this->currentPropertiesCalls[$name])) {
                 $this->currentPropertiesCalls[$name][] = $static;
             } else {
                 $this->currentPropertiesCalls[$name] = array($static);
@@ -5196,7 +5198,7 @@ class Load extends Tasks {
                 $this->calls->addCall('staticmethod',  "$left->fullnspath::$name", $static);
             } elseif ($static->atom === 'Staticconstant') {
                 $this->calls->addCall('staticconstant',  "$left->fullnspath::$right->code", $static);
-            } elseif ($static->atom === 'Staticproperty') {
+            } elseif ($static->atom === 'Staticproperty' && ($right->token === 'T_VARIABLE')) {
                 $this->calls->addCall('staticproperty', "$left->fullnspath::$right->code", $static);
             }
         }

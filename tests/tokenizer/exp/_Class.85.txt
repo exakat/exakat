@@ -1,8 +1,22 @@
 test
 Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
   18
   Label : DEFINITION
     18
+    Label : DEFAULT
+      21
+      Label : NEW
+        6
+        Label : ARGUMENT
+          22
+        Label : NAME
+          6
     Label : DEFINITION
       18
   Label : DEFINITION
@@ -14,11 +28,19 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    23
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
     18
+    Label : DEFAULT
+      21
+      Label : NEW
+        6
+        Label : ARGUMENT
+          22
+        Label : NAME
+          6
     Label : DEFINITION
       18
   Label : FILE
@@ -83,6 +105,14 @@ Label : PROJECT
           17
           Label : GLOBAL
             18
+            Label : DEFAULT
+              21
+              Label : NEW
+                6
+                Label : ARGUMENT
+                  22
+                Label : NAME
+                  6
             Label : DEFINITION
               18
         Label : EXPRESSION

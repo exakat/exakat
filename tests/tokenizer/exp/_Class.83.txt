@@ -1,16 +1,50 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFAULT
+      20
+      Label : NEW
+        8
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFAULT
+      20
+      Label : NEW
+        6
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
-    19
+    21
+    Label : DEFAULT
+      20
+      Label : NEW
+        8
     Label : DEFINITION
-      22
+      21
     Label : DEFINITION
-      22
+      21
     Label : DEFINITION
-      22
+      21
   Label : DEFINITION
-    19
+    18
+    Label : DEFAULT
+      20
+      Label : NEW
+        6
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -60,46 +94,46 @@ Label : PROJECT
               Label : TYPEHINT
                 13
             Label : DEFINITION
-              23
+              22
               Label : METHOD
                 10
                 Label : NAME
                   10
                 Label : ARGUMENT
-                  22
+                  21
                 Label : ARGUMENT
                   18
               Label : OBJECT
-                22
+                21
             Label : NAME
               10
           Label : NAME
             8
         Label : EXPRESSION
-          20
+          19
           Label : LEFT
             18
           Label : RIGHT
-            21
+            20
             Label : NEW
               6
         Label : EXPRESSION
-          20
+          19
           Label : LEFT
-            22
-          Label : RIGHT
             21
+          Label : RIGHT
+            20
             Label : NEW
               8
         Label : EXPRESSION
-          23
+          22
           Label : METHOD
             10
             Label : NAME
               10
             Label : ARGUMENT
-              22
+              21
             Label : ARGUMENT
               18
           Label : OBJECT
-            22
+            21

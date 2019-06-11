@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    12
     Label : DEFINITION
-      11
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,11 +48,11 @@ Label : PROJECT
               Label : ARGUMENT
                 10
               Label : ARGUMENT
-                11
-              Label : DEFINITION
-                14
-              Label : MAGICMETHOD
                 12
+              Label : DEFINITION
+                16
+              Label : MAGICMETHOD
+                14
                 Label : ARGUMENT
                   8
                   Label : NAME
@@ -42,28 +60,18 @@ Label : PROJECT
                     Label : DEFINITION
                       8
                 Label : BLOCK
-                  13
+                  15
                   Label : EXPRESSION
-                    17
+                    18
                     Label : LEFT
-                      16
+                      17
                       Label : MEMBER
-                        15
+                        9
                       Label : OBJECT
-                        14
+                        16
                     Label : RIGHT
                       8
                 Label : NAME
-                  12
-              Label : PPP
-                0
-                Label : PPP
-                  0
-                  Label : DEFINITION
-                    16
-                    Label : MEMBER
-                      15
-                    Label : OBJECT
-                      14
+                  14
           Label : NAME
             5
