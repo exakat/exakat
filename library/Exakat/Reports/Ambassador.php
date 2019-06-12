@@ -40,10 +40,10 @@ class Ambassador extends Reports {
     protected $finalName       = null;
     protected $tmpName           = '';
 
-    private $frequences        = array();
-    private $timesToFix        = array();
-    private $themesForAnalyzer = array();
-    private $severities        = array();
+    protected $frequences        = array();
+    protected $timesToFix        = array();
+    protected $themesForAnalyzer = array();
+    protected $severities        = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
