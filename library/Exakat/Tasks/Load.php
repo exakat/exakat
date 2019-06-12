@@ -2952,7 +2952,6 @@ class Load extends Tasks {
             if ($atom === 'Propertydefinition') {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
-                $type = ($static->static === 1 ? 'static' : '') . 'property';
                 $this->currentProperties[$element->propertyname] = $element;
                 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
@@ -5065,8 +5064,13 @@ class Load extends Tasks {
             ++$this->id; // skip )
 
             $breakLevel = $this->popExpression();
-        } else {
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG || 
+                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON ) {
             $breakLevel = $this->addAtomVoid();
+        } else {
+            $this->processNext();
+
+            $breakLevel = $this->popExpression();
         }
 
         $link = $this->tokens[$current][0] === $this->phptokens::T_BREAK ? 'BREAK' : 'CONTINUE';
