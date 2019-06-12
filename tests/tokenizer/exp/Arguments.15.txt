@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    8
+    21
     Label : DEFINITION
-      19
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,15 +64,15 @@ Label : PROJECT
               Label : RIGHT
                 6
                 Label : CODE
-                  16
+                  17
                   Label : LEFT
                     9
                     Label : INDEX
-                      15
+                      16
                     Label : VARIABLE
                       9
                       Label : INDEX
-                        14
+                        15
                       Label : VARIABLE
                         12
                   Label : RIGHT
@@ -58,20 +82,20 @@ Label : PROJECT
                       Label : LEFT
                         9
                         Label : INDEX
-                          18
+                          20
                         Label : VARIABLE
-                          17
+                          18
                       Label : RIGHT
                         9
                         Label : INDEX
-                          20
+                          23
                         Label : VARIABLE
-                          19
+                          21
           Label : THEN
-            21
+            24
             Label : EXPRESSION
-              22
+              8
               Label : ARGUMENT
                 10
               Label : NAME
-                22
+                8

@@ -1,18 +1,52 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CAST
+        9
+        Label : ARGUMENT
+          11
+        Label : NAME
+          9
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CAST
+        9
+        Label : ARGUMENT
+          11
+        Label : NAME
+          9
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
-      10
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,6 +62,6 @@ Label : PROJECT
             Label : CAST
               9
               Label : ARGUMENT
-                10
+                11
               Label : NAME
                 9

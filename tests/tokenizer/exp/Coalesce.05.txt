@@ -1,12 +1,92 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      15
+      Label : LEFT
+        10
+        Label : INDEX
+          14
+          Label : ARGUMENT
+            5
+          Label : NAME
+            14
+        Label : VARIABLE
+          10
+          Label : INDEX
+            12
+          Label : VARIABLE
+            10
+            Label : INDEX
+              11
+            Label : VARIABLE
+              8
+      Label : RIGHT
+        18
+        Label : CONCAT
+          16
+        Label : CONCAT
+          5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      15
+      Label : LEFT
+        10
+        Label : INDEX
+          14
+          Label : ARGUMENT
+            5
+          Label : NAME
+            14
+        Label : VARIABLE
+          10
+          Label : INDEX
+            12
+          Label : VARIABLE
+            10
+            Label : INDEX
+              11
+            Label : VARIABLE
+              8
+      Label : RIGHT
+        18
+        Label : CONCAT
+          16
+        Label : CONCAT
+          5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -14,11 +94,11 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       16
   Label : FILE
@@ -34,25 +114,25 @@ Label : PROJECT
           Label : RIGHT
             15
             Label : LEFT
-              9
+              10
               Label : INDEX
-                13
+                14
                 Label : ARGUMENT
                   5
                 Label : NAME
-                  13
+                  14
               Label : VARIABLE
-                9
+                10
                 Label : INDEX
                   12
                 Label : VARIABLE
-                  9
+                  10
                   Label : INDEX
-                    10
+                    11
                   Label : VARIABLE
                     8
             Label : RIGHT
-              17
+              18
               Label : CONCAT
                 16
               Label : CONCAT

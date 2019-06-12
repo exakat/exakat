@@ -1,16 +1,34 @@
 test
+Label : GLOBAL
+  146
+  Label : DEFINITION
+    146
+    Label : DEFINITION
+      146
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  208
+  Label : DEFINITION
+    208
+    Label : DEFINITION
+      208
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    146
     Label : DEFINITION
       146
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    208
     Label : DEFINITION
       208
   Label : FILE
@@ -410,88 +428,88 @@ Label : PROJECT
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  209
+                                  210
                                 Label : VALUE
                                   205
                                   Label : CLASS
-                                    211
+                                    212
                                   Label : CONSTANT
-                                    213
+                                    214
                 Label : RIGHT
                   11
                   Label : ARGUMENT
                     14
                     Label : INDEX
-                      215
+                      216
                     Label : VALUE
                       11
                       Label : ARGUMENT
                         14
                         Label : INDEX
-                          217
+                          218
                         Label : VALUE
-                          219
+                          220
                       Label : ARGUMENT
                         14
                         Label : INDEX
-                          221
+                          222
                         Label : VALUE
-                          223
+                          224
                       Label : ARGUMENT
                         14
                         Label : INDEX
-                          225
+                          226
                         Label : VALUE
                           11
                           Label : ARGUMENT
                             14
                             Label : INDEX
-                              227
+                              228
                             Label : VALUE
                               11
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  229
+                                  230
                                 Label : VALUE
-                                  231
+                                  232
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  233
+                                  234
                                 Label : VALUE
-                                  235
+                                  236
                                   Label : ARGUMENT
-                                    237
+                                    238
                                   Label : NAME
-                                    235
+                                    236
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  239
+                                  240
                                 Label : VALUE
                                   205
                                   Label : CLASS
-                                    241
+                                    242
                                   Label : CONSTANT
-                                    243
+                                    244
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  245
+                                  246
                                 Label : VALUE
-                                  247
+                                  248
                               Label : ARGUMENT
                                 14
                                 Label : INDEX
-                                  249
+                                  250
                                 Label : VALUE
                                   205
                                   Label : CLASS
-                                    251
+                                    252
                                   Label : METHOD
-                                    253
+                                    254
                                     Label : ARGUMENT
                                       155
                                     Label : NAME
-                                      253
+                                      254

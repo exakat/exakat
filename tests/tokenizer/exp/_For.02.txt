@@ -1,8 +1,44 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
+    Label : DEFAULT
+      8
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -10,19 +46,23 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      8
     Label : DEFINITION
-      11
+      12
     Label : DEFINITION
-      11
+      12
     Label : DEFINITION
-      11
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,35 +78,35 @@ Label : PROJECT
         Label : EXPRESSION
           9
           Label : BLOCK
-            16
+            18
             Label : EXPRESSION
-              15
+              17
               Label : POSTPLUSPLUS
                 5
           Label : FINAL
             3
             Label : EXPRESSION
-              12
+              14
               Label : LEFT
                 10
               Label : RIGHT
-                13
+                15
             Label : EXPRESSION
-              12
+              14
               Label : LEFT
-                11
+                12
               Label : RIGHT
-                14
+                16
           Label : INCREMENT
             3
             Label : EXPRESSION
-              15
+              17
               Label : POSTPLUSPLUS
                 10
             Label : EXPRESSION
-              15
+              17
               Label : POSTPLUSPLUS
-                11
+                12
           Label : INIT
             3
             Label : EXPRESSION
@@ -78,6 +118,6 @@ Label : PROJECT
             Label : EXPRESSION
               7
               Label : LEFT
-                11
+                12
               Label : RIGHT
                 8

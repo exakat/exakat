@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : FILE
@@ -28,24 +40,24 @@ Label : PROJECT
             Label : ARGUMENT
               11
             Label : ARGUMENT
-              12
+              13
               Label : CODE
-                15
+                16
                 Label : CONDITION
-                  13
+                  14
                   Label : ARGUMENT
-                    14
+                    15
                   Label : NAME
-                    13
+                    14
                 Label : ELSE
-                  21
+                  22
                 Label : THEN
-                  18
+                  19
                   Label : LEFT
-                    16
+                    17
                   Label : RIGHT
-                    19
+                    20
             Label : ARGUMENT
-              23
+              24
             Label : NAME
               10

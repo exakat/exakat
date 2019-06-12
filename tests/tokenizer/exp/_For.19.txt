@@ -1,38 +1,110 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      10
+      Label : CONCAT
+        8
+      Label : CONCAT
+        11
+        Label : CAST
+          12
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFAULT
+      17
+      Label : ARGUMENT
+        18
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      10
+      Label : CONCAT
+        8
+      Label : CONCAT
+        11
+        Label : CAST
+          12
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    15
+    Label : DEFAULT
+      17
+      Label : ARGUMENT
+        18
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    6
+    21
     Label : DEFINITION
-      20
+      21
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    6
+    25
     Label : DEFINITION
       25
   Label : DEFINITION
-    6
+    27
     Label : DEFINITION
-      30
+      27
   Label : DEFINITION
-    6
+    31
     Label : DEFINITION
-      33
+      31
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -52,60 +124,60 @@ Label : PROJECT
               Label : CAST
                 12
         Label : EXPRESSION
-          13
+          14
           Label : BLOCK
             3
             Label : EXPRESSION
-              16
+              18
           Label : FINAL
             3
             Label : EXPRESSION
-              21
+              23
               Label : LEFT
-                18
+                20
                 Label : ARGUMENT
+                  21
+                Label : NAME
                   20
-                Label : NAME
-                  18
               Label : RIGHT
-                22
+                24
                 Label : ARGUMENT
-                  24
+                  25
                 Label : NAME
-                  22
+                  24
           Label : INCREMENT
             3
             Label : EXPRESSION
               7
               Label : LEFT
-                25
+                27
                 Label : APPEND
-                  25
+                  27
               Label : RIGHT
-                26
+                29
                 Label : ARGUMENT
-                  28
-                  Label : ARGUMENT
-                    30
+                  30
                   Label : ARGUMENT
                     31
-                    Label : ARGUMENT
-                      33
-                    Label : NAME
-                      31
                   Label : ARGUMENT
-                    34
+                    33
+                    Label : ARGUMENT
+                      34
+                    Label : NAME
+                      33
+                  Label : ARGUMENT
+                    36
                   Label : NAME
-                    28
+                    30
                 Label : NAME
-                  26
+                  29
           Label : INIT
             3
             Label : EXPRESSION
               7
               Label : LEFT
-                14
-              Label : RIGHT
                 15
+              Label : RIGHT
+                17
                 Label : ARGUMENT
-                  16
+                  18

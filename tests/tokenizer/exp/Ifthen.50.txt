@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    20
     Label : DEFINITION
-      19
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,45 +48,45 @@ Label : PROJECT
             Label : EXPRESSION
               5
               Label : CONDITION
-                14
+                15
                 Label : LEFT
                   13
                 Label : RIGHT
-                  15
+                  16
               Label : ELSE
                 3
                 Label : EXPRESSION
                   5
                   Label : CONDITION
-                    14
+                    15
                     Label : LEFT
-                      19
-                    Label : RIGHT
                       20
+                    Label : RIGHT
+                      22
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      21
+                      23
                       Label : ARGUMENT
-                        22
+                        24
                         Label : ARGUMENT
-                          23
+                          25
                         Label : NAME
-                          22
+                          24
                       Label : NAME
-                        21
+                        23
               Label : THEN
                 3
                 Label : EXPRESSION
-                  16
+                  17
                   Label : ARGUMENT
-                    17
+                    18
                     Label : ARGUMENT
-                      18
+                      19
                     Label : NAME
-                      17
+                      18
                   Label : NAME
-                    16
+                    17
           Label : THEN
             3
             Label : EXPRESSION
@@ -82,6 +100,6 @@ Label : PROJECT
               Label : NAME
                 9
         Label : EXPRESSION
-          24
+          26
           Label : ARGUMENT
-            25
+            27

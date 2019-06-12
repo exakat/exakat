@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
   Label : FILE
@@ -26,52 +32,52 @@ Label : PROJECT
           Label : ELSE
             3
             Label : EXPRESSION
-              27
+              26
               Label : THROW
-                28
+                27
                 Label : NEW
-                  29
+                  28
                   Label : ARGUMENT
-                    31
+                    30
                   Label : NAME
-                    29
+                    28
           Label : THEN
-            13
+            12
             Label : EXPRESSION
-              16
+              15
               Label : LEFT
                 9
                 Label : MEMBER
-                  14
+                  13
                 Label : OBJECT
                   6
               Label : RIGHT
-                17
+                16
                 Label : LEFT
                   9
                   Label : MEMBER
-                    14
+                    13
                   Label : OBJECT
                     6
                 Label : RIGHT
-                  18
+                  17
                   Label : NOT
-                    23
+                    22
                     Label : CLASS
-                      19
+                      18
                     Label : CONSTANT
-                      21
+                      20
             Label : EXPRESSION
-              16
+              15
               Label : LEFT
                 9
                 Label : MEMBER
-                  24
+                  23
                 Label : OBJECT
                   6
               Label : RIGHT
-                26
+                25
         Label : EXPRESSION
-          33
+          32
           Label : RETURN
-            34
+            33

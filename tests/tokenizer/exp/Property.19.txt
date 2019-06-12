@@ -1,8 +1,26 @@
 test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFAULT
+      19
+      Label : CODE
+        20
+        Label : NEW
+          17
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    25
+    24
+    Label : DEFAULT
+      19
+      Label : CODE
+        20
+        Label : NEW
+          17
     Label : DEFINITION
       24
   Label : FILE
@@ -108,7 +126,7 @@ Label : PROJECT
           Label : RIGHT
             16
         Label : EXPRESSION
-          26
+          25
           Label : LEFT
             24
           Label : RIGHT

@@ -1,12 +1,44 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CLONE
+        9
+        Label : CODE
+          12
+          Label : INDEX
+            13
+          Label : VARIABLE
+            10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CLONE
+        9
+        Label : CODE
+          12
+          Label : INDEX
+            13
+          Label : VARIABLE
+            10
     Label : DEFINITION
       5
   Label : FILE
@@ -24,8 +56,8 @@ Label : PROJECT
             Label : CLONE
               9
               Label : CODE
-                11
+                12
                 Label : INDEX
-                  12
+                  13
                 Label : VARIABLE
                   10

@@ -1,20 +1,44 @@
 test
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    14
     Label : DEFINITION
       14
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    10
+    26
     Label : DEFINITION
       26
   Label : DEFINITION
-    10
+    32
     Label : DEFINITION
       32
   Label : FILE
@@ -70,10 +94,10 @@ Label : PROJECT
           Label : RIGHT
             21
             Label : METHOD
-              33
+              34
               Label : ARGUMENT
-                35
+                36
               Label : NAME
-                33
+                34
             Label : OBJECT
               32

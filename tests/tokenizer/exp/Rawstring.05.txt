@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    10
     Label : DEFINITION
       10
   Label : FILE
@@ -22,12 +28,12 @@ Label : PROJECT
               Label : ARGUMENT
                 10
           Label : ELSE
-            12
+            11
             Label : EXPRESSION
-              15
+              14
           Label : THEN
-            12
+            11
             Label : EXPRESSION
-              13
+              12
     Label : EXPRESSION
-      17
+      16

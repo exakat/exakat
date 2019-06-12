@@ -1,14 +1,26 @@
 test
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    11
+    16
     Label : DEFINITION
-      17
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,30 +44,30 @@ Label : PROJECT
             Label : BLOCK
               9
               Label : EXPRESSION
-                12
+                11
                 Label : POSTPLUSPLUS
                   10
             Label : DEFINITION
-              11
+              10
               Label : DEFINITION
                 10
           Label : ARGUMENT
-            21
+            22
             Label : METHOD
-              19
+              20
               Label : ARGUMENT
-                20
+                21
               Label : NAME
-                19
+                20
             Label : OBJECT
-              13
+              12
               Label : CODE
-                14
+                13
                 Label : NEW
-                  15
+                  14
                   Label : NAME
-                    15
+                    14
                   Label : ARGUMENT
-                    17
+                    16
                   Label : ARGUMENT
                     18

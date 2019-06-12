@@ -1,12 +1,40 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
     Label : DEFINITION
       5
   Label : FILE
@@ -26,4 +54,4 @@ Label : PROJECT
             Label : CONCAT
               11
             Label : CONCAT
-              12
+              13

@@ -9,6 +9,14 @@ Label : GLOBAL
   35
   Label : DEFINITION
     35
+    Label : DEFAULT
+      38
+      Label : NEW
+        39
+        Label : ARGUMENT
+          10
+        Label : NAME
+          39
     Label : DEFINITION
       35
 Label : PROJECT
@@ -19,6 +27,14 @@ Label : PROJECT
       41
   Label : DEFINITION
     35
+    Label : DEFAULT
+      38
+      Label : NEW
+        39
+        Label : ARGUMENT
+          10
+        Label : NAME
+          39
     Label : DEFINITION
       35
   Label : FILE

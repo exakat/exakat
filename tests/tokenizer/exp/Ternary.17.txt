@@ -1,22 +1,102 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      10
+      Label : CONDITION
+        8
+      Label : ELSE
+        21
+        Label : METHOD
+          18
+          Label : ARGUMENT
+            19
+          Label : NAME
+            18
+        Label : OBJECT
+          17
+          Label : CLASS
+            14
+          Label : METHOD
+            15
+            Label : ARGUMENT
+              16
+            Label : NAME
+              15
+      Label : THEN
+        11
+        Label : ARGUMENT
+          12
+        Label : NAME
+          11
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      10
+      Label : CONDITION
+        8
+      Label : ELSE
+        21
+        Label : METHOD
+          18
+          Label : ARGUMENT
+            19
+          Label : NAME
+            18
+        Label : OBJECT
+          17
+          Label : CLASS
+            14
+          Label : METHOD
+            15
+            Label : ARGUMENT
+              16
+            Label : NAME
+              15
+      Label : THEN
+        11
+        Label : ARGUMENT
+          12
+        Label : NAME
+          11
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    6
+    19
     Label : DEFINITION
-      18
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,30 +108,30 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            9
+            10
             Label : CONDITION
               8
             Label : ELSE
-              19
+              21
               Label : METHOD
-                17
+                18
                 Label : ARGUMENT
-                  18
+                  19
                 Label : NAME
-                  17
+                  18
               Label : OBJECT
-                16
+                17
                 Label : CLASS
-                  12
-                Label : METHOD
                   14
+                Label : METHOD
+                  15
                   Label : ARGUMENT
-                    15
+                    16
                   Label : NAME
-                    14
+                    15
             Label : THEN
-              10
+              11
               Label : ARGUMENT
-                11
+                12
               Label : NAME
-                10
+                11

@@ -1,12 +1,26 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -20,21 +34,21 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CONDITION
-                11
+                12
               Label : THEN
-                9
+                10
                 Label : EXPRESSION
-                  12
+                  13
                   Label : POSTPLUSPLUS
                     6
                 Label : EXPRESSION
-                  13
+                  14
                   Label : CONTINUE
-                    14
+                    15
           Label : SOURCE
             6
           Label : VALUE

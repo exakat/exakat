@@ -1,18 +1,76 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : NAME
+        8
+      Label : ARGUMENT
+        10
+        Label : CONCAT
+          9
+        Label : CONCAT
+          11
+        Label : CONCAT
+          13
+        Label : CONCAT
+          17
+          Label : MEMBER
+            16
+          Label : OBJECT
+            14
+      Label : ARGUMENT
+        18
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : NAME
+        8
+      Label : ARGUMENT
+        10
+        Label : CONCAT
+          9
+        Label : CONCAT
+          11
+        Label : CONCAT
+          13
+        Label : CONCAT
+          17
+          Label : MEMBER
+            16
+          Label : OBJECT
+            14
+      Label : ARGUMENT
+        18
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      13
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,12 +92,12 @@ Label : PROJECT
               Label : CONCAT
                 11
               Label : CONCAT
-                12
+                13
               Label : CONCAT
-                15
+                17
                 Label : MEMBER
-                  14
+                  16
                 Label : OBJECT
-                  13
+                  14
             Label : ARGUMENT
-              16
+              18

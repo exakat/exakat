@@ -3,6 +3,14 @@ Label : GLOBAL
   22
   Label : DEFINITION
     22
+    Label : DEFAULT
+      25
+      Label : NEW
+        17
+        Label : ARGUMENT
+          10
+        Label : NAME
+          17
     Label : DEFINITION
       22
     Label : DEFINITION
@@ -11,6 +19,14 @@ Label : PROJECT
   1
   Label : DEFINITION
     22
+    Label : DEFAULT
+      25
+      Label : NEW
+        17
+        Label : ARGUMENT
+          10
+        Label : NAME
+          17
     Label : DEFINITION
       22
     Label : DEFINITION

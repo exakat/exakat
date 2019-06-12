@@ -1,8 +1,28 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -10,7 +30,7 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -24,21 +44,21 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          11
+          12
           Label : MEMBER
             7
             Label : NAME
               8
               Label : ARGUMENT
-                9
+                10
               Label : NAME
                 8
           Label : OBJECT
             5
         Label : EXPRESSION
-          12
+          13
           Label : LEFT
-            11
+            12
             Label : MEMBER
               7
               Label : NAME
@@ -48,13 +68,13 @@ Label : PROJECT
             Label : OBJECT
               5
           Label : RIGHT
-            13
-        Label : EXPRESSION
-          12
-          Label : LEFT
             14
+        Label : EXPRESSION
+          13
+          Label : LEFT
+            15
             Label : APPEND
-              11
+              12
               Label : MEMBER
                 7
                 Label : NAME
@@ -62,4 +82,4 @@ Label : PROJECT
               Label : OBJECT
                 5
           Label : RIGHT
-            15
+            16

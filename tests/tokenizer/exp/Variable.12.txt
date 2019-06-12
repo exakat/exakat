@@ -1,18 +1,108 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        10
+      Label : CONCAT
+        10
+        Label : NAME
+          16
+          Label : CONDITION
+            14
+            Label : INDEX
+              15
+            Label : VARIABLE
+              12
+          Label : ELSE
+            18
+          Label : THEN
+            17
+      Label : CONCAT
+        19
+      Label : CONCAT
+        19
+        Label : NAME
+          16
+          Label : CONDITION
+            14
+            Label : INDEX
+              23
+            Label : VARIABLE
+              21
+          Label : ELSE
+            18
+          Label : THEN
+            17
+      Label : CONCAT
+        24
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        10
+      Label : CONCAT
+        10
+        Label : NAME
+          16
+          Label : CONDITION
+            14
+            Label : INDEX
+              15
+            Label : VARIABLE
+              12
+          Label : ELSE
+            18
+          Label : THEN
+            17
+      Label : CONCAT
+        19
+      Label : CONCAT
+        19
+        Label : NAME
+          16
+          Label : CONDITION
+            14
+            Label : INDEX
+              23
+            Label : VARIABLE
+              21
+          Label : ELSE
+            18
+          Label : THEN
+            17
+      Label : CONCAT
+        24
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    21
     Label : DEFINITION
-      20
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,32 +120,32 @@ Label : PROJECT
             Label : CONCAT
               10
               Label : NAME
-                15
+                16
                 Label : CONDITION
-                  13
+                  14
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
                     12
                 Label : ELSE
-                  17
+                  18
                 Label : THEN
-                  16
+                  17
             Label : CONCAT
-              18
+              19
             Label : CONCAT
-              18
+              19
               Label : NAME
-                15
+                16
                 Label : CONDITION
-                  13
+                  14
                   Label : INDEX
-                    21
+                    23
                   Label : VARIABLE
-                    20
+                    21
                 Label : ELSE
-                  17
+                  18
                 Label : THEN
-                  16
+                  17
             Label : CONCAT
-              6
+              24

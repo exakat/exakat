@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : FILE
@@ -18,16 +24,16 @@ Label : PROJECT
           Label : ARGUMENT
             6
           Label : ARGUMENT
-            13
+            12
             Label : INDEX
-              14
+              13
             Label : VARIABLE
-              11
+              10
               Label : INDEX
-                12
+                11
               Label : VARIABLE
-                10
+                9
                 Label : MEMBER
-                  9
+                  8
                 Label : OBJECT
                   7

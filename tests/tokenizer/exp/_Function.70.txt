@@ -1,14 +1,110 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        12
+        Label : DEFAULT
+          15
+        Label : NAME
+          12
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        5
+        Label : DEFAULT
+          14
+        Label : NAME
+          5
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        12
+        Label : DEFAULT
+          15
+        Label : NAME
+          12
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
     Label : DEFINITION
       12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        5
+        Label : DEFAULT
+          14
+        Label : NAME
+          5
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          9
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -52,7 +148,7 @@ Label : PROJECT
             Label : ARGUMENT
               5
               Label : DEFAULT
-                13
+                14
               Label : NAME
                 5
             Label : BLOCK
@@ -68,23 +164,13 @@ Label : PROJECT
             Label : ARGUMENT
               12
               Label : DEFAULT
-                14
+                15
               Label : NAME
                 12
             Label : BLOCK
               11
               Label : EXPRESSION
                 9
-        Label : EXPRESSION
-          15
-          Label : ARGUMENT
-            9
-          Label : BLOCK
-            11
-            Label : EXPRESSION
-              9
-          Label : NAME
-            15
         Label : EXPRESSION
           16
           Label : ARGUMENT
@@ -98,11 +184,7 @@ Label : PROJECT
         Label : EXPRESSION
           17
           Label : ARGUMENT
-            5
-            Label : DEFAULT
-              13
-            Label : NAME
-              5
+            9
           Label : BLOCK
             11
             Label : EXPRESSION
@@ -112,9 +194,23 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            12
+            5
             Label : DEFAULT
               14
+            Label : NAME
+              5
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              9
+          Label : NAME
+            18
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            12
+            Label : DEFAULT
+              15
             Label : NAME
               12
           Label : BLOCK
@@ -122,4 +218,4 @@ Label : PROJECT
             Label : EXPRESSION
               9
           Label : NAME
-            18
+            19

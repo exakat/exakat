@@ -1,8 +1,54 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      19
+    Label : DEFAULT
+      20
+    Label : DEFAULT
+      17
+    Label : DEFAULT
+      15
+    Label : DEFAULT
+      13
+    Label : DEFAULT
+      11
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      19
+    Label : DEFAULT
+      20
+    Label : DEFAULT
+      17
+    Label : DEFAULT
+      15
+    Label : DEFAULT
+      13
+    Label : DEFAULT
+      11
+    Label : DEFAULT
+      9
     Label : DEFINITION
       6
     Label : DEFINITION

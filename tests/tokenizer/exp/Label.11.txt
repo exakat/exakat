@@ -1,16 +1,38 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    9
+    8
+    Label : DEFAULT
+      11
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    24
     Label : DEFINITION
       24
   Label : FILE

@@ -1,8 +1,94 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          26
+          Label : LEFT
+            11
+            Label : ARGUMENT
+              14
+              Label : INDEX
+                12
+              Label : VALUE
+                17
+                Label : CONCAT
+                  15
+                Label : CONCAT
+                  18
+            Label : ARGUMENT
+              14
+              Label : INDEX
+                20
+              Label : VALUE
+                17
+                Label : CONCAT
+                  22
+                Label : CONCAT
+                  24
+          Label : RIGHT
+            32
+            Label : ARGUMENT
+              27
+              Label : CODE
+                17
+                Label : CONCAT
+                  28
+                Label : CONCAT
+                  30
+        Label : NAME
+          9
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          26
+          Label : LEFT
+            11
+            Label : ARGUMENT
+              14
+              Label : INDEX
+                12
+              Label : VALUE
+                17
+                Label : CONCAT
+                  15
+                Label : CONCAT
+                  18
+            Label : ARGUMENT
+              14
+              Label : INDEX
+                20
+              Label : VALUE
+                17
+                Label : CONCAT
+                  22
+                Label : CONCAT
+                  24
+          Label : RIGHT
+            32
+            Label : ARGUMENT
+              27
+              Label : CODE
+                17
+                Label : CONCAT
+                  28
+                Label : CONCAT
+                  30
+        Label : NAME
+          9
     Label : DEFINITION
       5
   Label : FILE

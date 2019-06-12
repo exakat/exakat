@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      20
-  Label : DEFINITION
-    7
+    22
     Label : DEFINITION
       22
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,42 +70,42 @@ Label : PROJECT
                 Label : EXPRESSION
                   11
                 Label : EXPRESSION
-                  12
+                  13
                   Label : BREAK
-                    13
+                    14
             Label : EXPRESSION
-              15
+              16
               Label : CASE
-                16
+                17
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                 Label : EXPRESSION
-                  12
+                  13
                   Label : BREAK
-                    13
+                    14
             Label : EXPRESSION
-              18
+              20
               Label : CASE
-                19
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  20
-                Label : EXPRESSION
-                  12
-                  Label : BREAK
-                    13
-            Label : EXPRESSION
-              21
+                21
               Label : CODE
                 3
                 Label : EXPRESSION
                   22
                 Label : EXPRESSION
-                  12
+                  13
                   Label : BREAK
-                    13
+                    14
+            Label : EXPRESSION
+              24
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  25
+                Label : EXPRESSION
+                  13
+                  Label : BREAK
+                    14
           Label : CONDITION
             6

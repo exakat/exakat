@@ -1,8 +1,28 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    13
+    15
     Label : DEFINITION
       15
     Label : DEFINITION
@@ -10,7 +30,7 @@ Label : PROJECT
     Label : DEFINITION
       15
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -46,15 +66,15 @@ Label : PROJECT
                   Label : VARIABLE
                     12
           Label : THEN
-            16
+            17
             Label : EXPRESSION
-              17
+              18
         Label : EXPRESSION
-          19
+          20
           Label : BLOCK
-            16
+            17
             Label : EXPRESSION
-              17
+              18
           Label : CONDITION
             6
         Label : EXPRESSION
@@ -70,7 +90,7 @@ Label : PROJECT
               Label : RIGHT
                 11
                 Label : LEFT
-                  20
+                  21
                   Label : NOT
                     10
                 Label : RIGHT
@@ -80,15 +100,15 @@ Label : PROJECT
                   Label : VARIABLE
                     12
           Label : THEN
-            16
+            17
             Label : EXPRESSION
-              17
+              18
         Label : EXPRESSION
-          19
+          20
           Label : BLOCK
-            16
+            17
             Label : EXPRESSION
-              17
+              18
           Label : CONDITION
             6
         Label : EXPRESSION
@@ -112,14 +132,14 @@ Label : PROJECT
                   Label : VARIABLE
                     12
           Label : THEN
-            16
+            17
             Label : EXPRESSION
-              17
+              18
         Label : EXPRESSION
-          19
+          20
           Label : BLOCK
-            16
+            17
             Label : EXPRESSION
-              17
+              18
           Label : CONDITION
             6

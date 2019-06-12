@@ -1,8 +1,62 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      20
+      Label : METHOD
+        9
+        Label : ARGUMENT
+          12
+          Label : CONCAT
+            10
+          Label : CONCAT
+            13
+        Label : ARGUMENT
+          15
+          Label : ARGUMENT
+            16
+        Label : ARGUMENT
+          18
+        Label : ARGUMENT
+          19
+        Label : ARGUMENT
+          19
+        Label : NAME
+          9
+      Label : OBJECT
+        8
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      20
+      Label : METHOD
+        9
+        Label : ARGUMENT
+          12
+          Label : CONCAT
+            10
+          Label : CONCAT
+            13
+        Label : ARGUMENT
+          15
+          Label : ARGUMENT
+            16
+        Label : ARGUMENT
+          18
+        Label : ARGUMENT
+          19
+        Label : ARGUMENT
+          19
+        Label : NAME
+          9
+      Label : OBJECT
+        8
     Label : DEFINITION
       5
   Label : FILE

@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
-      10
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,7 +46,7 @@ Label : PROJECT
         Label : EXPRESSION
           8
           Label : ARGUMENT
-            9
+            10
           Label : NAME
             8
             Label : ARGUMENT
@@ -36,64 +54,64 @@ Label : PROJECT
             Label : NAME
               8
         Label : EXPRESSION
-          10
+          11
           Label : ARGUMENT
-            11
+            13
           Label : NAME
-            10
+            11
             Label : ARGUMENT
-              9
-            Label : NAME
               10
+            Label : NAME
+              11
               Label : ARGUMENT
                 7
               Label : NAME
-                10
+                11
         Label : EXPRESSION
-          12
+          14
           Label : ARGUMENT
             7
           Label : NAME
-            12
-        Label : EXPRESSION
-          13
-          Label : ARGUMENT
             14
-          Label : NAME
-            13
-            Label : ARGUMENT
-              9
-            Label : NAME
-              13
         Label : EXPRESSION
           15
           Label : ARGUMENT
-            17
+            16
           Label : NAME
             15
             Label : ARGUMENT
-              16
+              10
             Label : NAME
               15
-              Label : ARGUMENT
-                11
-              Label : NAME
-                15
         Label : EXPRESSION
-          18
+          17
           Label : ARGUMENT
-            22
+            19
           Label : NAME
-            18
+            17
             Label : ARGUMENT
-              21
-            Label : NAME
               18
+            Label : NAME
+              17
               Label : ARGUMENT
-                20
+                13
               Label : NAME
-                18
+                17
+        Label : EXPRESSION
+          20
+          Label : ARGUMENT
+            24
+          Label : NAME
+            20
+            Label : ARGUMENT
+              23
+            Label : NAME
+              20
+              Label : ARGUMENT
+                22
+              Label : NAME
+                20
                 Label : ARGUMENT
-                  19
+                  21
                 Label : NAME
-                  18
+                  20

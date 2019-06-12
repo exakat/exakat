@@ -1,14 +1,50 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      9
     Label : DEFINITION
       12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -38,11 +74,11 @@ Label : PROJECT
           Label : RIGHT
             9
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15
             Label : CONCAT
-              14
+              15
               Label : INDEX
                 12
               Label : VARIABLE

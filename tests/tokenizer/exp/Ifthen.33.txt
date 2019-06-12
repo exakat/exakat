@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -22,7 +34,7 @@ Label : PROJECT
           Label : ELSE
             3
             Label : EXPRESSION
-              12
+              13
               Label : POSTPLUSPLUS
                 11
           Label : THEN

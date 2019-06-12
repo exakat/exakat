@@ -1,56 +1,218 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFAULT
+      10
+      Label : METHOD
+        31
+        Label : ARGUMENT
+          33
+        Label : NAME
+          31
+      Label : OBJECT
+        30
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+Label : GLOBAL
+  37
+  Label : DEFINITION
+    37
+    Label : DEFINITION
+      37
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+Label : GLOBAL
+  49
+  Label : DEFINITION
+    49
+    Label : DEFAULT
+      50
+      Label : CAST
+        51
+        Label : NAME
+          51
+        Label : ARGUMENT
+          10
+          Label : METHOD
+            54
+            Label : ARGUMENT
+              33
+            Label : NAME
+              54
+          Label : OBJECT
+            53
+        Label : ARGUMENT
+          56
+          Label : ARGUMENT
+            58
+          Label : NAME
+            56
+    Label : DEFINITION
+      49
+Label : GLOBAL
+  53
+  Label : DEFINITION
+    53
+    Label : DEFINITION
+      53
+Label : GLOBAL
+  58
+  Label : DEFINITION
+    58
+    Label : DEFINITION
+      58
+Label : GLOBAL
+  59
+  Label : DEFINITION
+    59
+    Label : DEFAULT
+      10
+      Label : METHOD
+        61
+        Label : ARGUMENT
+          33
+        Label : NAME
+          61
+      Label : OBJECT
+        60
+    Label : DEFINITION
+      59
+Label : GLOBAL
+  60
+  Label : DEFINITION
+    60
+    Label : DEFINITION
+      60
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    7
+    28
+    Label : DEFAULT
+      10
+      Label : METHOD
+        31
+        Label : ARGUMENT
+          33
+        Label : NAME
+          31
+      Label : OBJECT
+        30
     Label : DEFINITION
       28
   Label : DEFINITION
-    7
+    30
     Label : DEFINITION
       30
   Label : DEFINITION
-    7
+    37
     Label : DEFINITION
       37
   Label : DEFINITION
-    7
+    40
     Label : DEFINITION
       40
   Label : DEFINITION
-    7
+    43
     Label : DEFINITION
       43
   Label : DEFINITION
-    7
+    49
+    Label : DEFAULT
+      50
+      Label : CAST
+        51
+        Label : NAME
+          51
+        Label : ARGUMENT
+          10
+          Label : METHOD
+            54
+            Label : ARGUMENT
+              33
+            Label : NAME
+              54
+          Label : OBJECT
+            53
+        Label : ARGUMENT
+          56
+          Label : ARGUMENT
+            58
+          Label : NAME
+            56
     Label : DEFINITION
       49
   Label : DEFINITION
-    7
+    53
     Label : DEFINITION
       53
   Label : DEFINITION
-    7
+    58
     Label : DEFINITION
       58
   Label : DEFINITION
-    7
+    59
+    Label : DEFAULT
+      10
+      Label : METHOD
+        61
+        Label : ARGUMENT
+          33
+        Label : NAME
+          61
+      Label : OBJECT
+        60
     Label : DEFINITION
       59
   Label : DEFINITION
-    7
+    60
     Label : DEFINITION
       60
   Label : FILE

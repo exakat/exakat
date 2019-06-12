@@ -1,8 +1,20 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
+    Label : DEFAULT
+      9
     Label : DEFINITION
       7
     Label : DEFINITION

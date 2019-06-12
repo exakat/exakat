@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      15
+      14
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
-      16
+      18
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,40 +68,40 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          11
           Label : LEFT
             7
             Label : INDEX
               7
               Label : INDEX
-                9
+                10
               Label : VARIABLE
                 8
             Label : VARIABLE
               5
           Label : RIGHT
-            14
+            17
             Label : CONDITION
               7
               Label : INDEX
                 7
                 Label : INDEX
-                  13
+                  16
                 Label : VARIABLE
-                  12
+                  14
               Label : VARIABLE
-                11
+                12
             Label : ELSE
-              19
+              24
             Label : THEN
-              18
+              23
               Label : POSTPLUSPLUS
                 7
                 Label : INDEX
                   7
                   Label : INDEX
-                    17
+                    22
                   Label : VARIABLE
-                    16
+                    20
                 Label : VARIABLE
-                  15
+                  18

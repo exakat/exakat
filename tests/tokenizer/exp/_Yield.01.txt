@@ -1,12 +1,20 @@
 test
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+    Label : DEFINITION
+      30
 Label : PROJECT
   1
   Label : DEFINITION
-    14
+    30
     Label : DEFINITION
-      31
+      30
     Label : DEFINITION
-      31
+      30
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,13 +50,13 @@ Label : PROJECT
               Label : BLOCK
                 11
                 Label : EXPRESSION
-                  18
+                  17
                   Label : YIELD
                     13
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  16
+                  15
                   Label : LEFT
                     13
                   Label : RIGHT
@@ -56,7 +64,7 @@ Label : PROJECT
               Label : INCREMENT
                 3
                 Label : EXPRESSION
-                  17
+                  16
                   Label : LEFT
                     13
                   Label : RIGHT
@@ -64,13 +72,15 @@ Label : PROJECT
               Label : INIT
                 3
                 Label : EXPRESSION
-                  15
+                  14
                   Label : LEFT
                     13
                   Label : RIGHT
                     7
           Label : DEFINITION
-            14
+            13
+            Label : DEFAULT
+              7
             Label : DEFINITION
               13
             Label : DEFINITION
@@ -84,13 +94,13 @@ Label : PROJECT
             Label : NAME
               5
             Label : ARGUMENT
-              29
+              28
             Label : ARGUMENT
-              30
+              29
           Label : NAME
             5
         Label : EXPRESSION
-          19
+          18
           Label : ARGUMENT
             7
             Label : NAME
@@ -118,35 +128,35 @@ Label : PROJECT
               Label : BLOCK
                 11
                 Label : EXPRESSION
-                  18
+                  17
                   Label : YIELD
-                    21
+                    20
                     Label : INDEX
                       10
                     Label : VARIABLE
                       13
                 Label : EXPRESSION
-                  24
+                  23
                   Label : CONDITION
-                    18
+                    17
                     Label : YIELD
-                      23
+                      22
                       Label : MEMBER
-                        22
+                        21
                       Label : OBJECT
                         13
                   Label : ELSE
-                    27
+                    26
                     Label : LEFT
-                      26
+                      25
                     Label : RIGHT
-                      26
+                      25
                   Label : THEN
-                    25
+                    24
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  16
+                  15
                   Label : LEFT
                     13
                   Label : RIGHT
@@ -154,7 +164,7 @@ Label : PROJECT
               Label : INCREMENT
                 3
                 Label : EXPRESSION
-                  17
+                  16
                   Label : LEFT
                     13
                   Label : RIGHT
@@ -162,13 +172,15 @@ Label : PROJECT
               Label : INIT
                 3
                 Label : EXPRESSION
-                  15
+                  14
                   Label : LEFT
                     13
                   Label : RIGHT
                     7
           Label : DEFINITION
-            14
+            13
+            Label : DEFAULT
+              7
             Label : DEFINITION
               13
             Label : DEFINITION
@@ -180,22 +192,22 @@ Label : PROJECT
             Label : DEFINITION
               13
           Label : NAME
-            19
+            18
         Label : EXPRESSION
-          28
+          27
           Label : BLOCK
             11
             Label : EXPRESSION
               32
               Label : ARGUMENT
-                31
+                30
           Label : SOURCE
             5
             Label : NAME
               5
             Label : ARGUMENT
-              29
+              28
             Label : ARGUMENT
-              30
+              29
           Label : VALUE
-            31
+            30

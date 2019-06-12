@@ -1,8 +1,26 @@
 test
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -10,7 +28,9 @@ Label : PROJECT
     Label : DEFINITION
       16
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
   Label : FILE
@@ -48,7 +68,7 @@ Label : PROJECT
               Label : EXPRESSION
                 11
             Label : CLASS
-              17
+              18
             Label : VARIABLE
               16
           Label : CATCH
@@ -58,6 +78,6 @@ Label : PROJECT
               Label : EXPRESSION
                 11
             Label : CLASS
-              19
+              20
             Label : VARIABLE
               16

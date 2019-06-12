@@ -1,16 +1,78 @@
 test
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        14
+        Label : INDEX
+          13
+          Label : CLASS
+            9
+          Label : CONSTANT
+            11
+        Label : VALUE
+          15
+      Label : ARGUMENT
+        14
+        Label : INDEX
+          17
+          Label : MEMBER
+            12
+          Label : OBJECT
+            16
+        Label : VALUE
+          18
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        14
+        Label : INDEX
+          13
+          Label : CLASS
+            9
+          Label : CONSTANT
+            11
+        Label : VALUE
+          15
+      Label : ARGUMENT
+        14
+        Label : INDEX
+          17
+          Label : MEMBER
+            12
+          Label : OBJECT
+            16
+        Label : VALUE
+          18
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
       18
   Label : FILE

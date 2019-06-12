@@ -1,34 +1,184 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      17
+      Label : CONDITION
+        10
+        Label : LEFT
+          8
+        Label : RIGHT
+          15
+          Label : INDEX
+            16
+          Label : VARIABLE
+            14
+            Label : MEMBER
+              13
+            Label : OBJECT
+              11
+      Label : ELSE
+        26
+        Label : LEFT
+          15
+          Label : INDEX
+            25
+          Label : VARIABLE
+            14
+            Label : MEMBER
+              24
+            Label : OBJECT
+              22
+        Label : RIGHT
+          27
+          Label : CODE
+            30
+            Label : LEFT
+              28
+            Label : RIGHT
+              15
+              Label : INDEX
+                34
+              Label : VARIABLE
+                14
+                Label : MEMBER
+                  33
+                Label : OBJECT
+                  31
+      Label : THEN
+        15
+        Label : INDEX
+          21
+        Label : VARIABLE
+          14
+          Label : MEMBER
+            20
+          Label : OBJECT
+            18
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      17
+      Label : CONDITION
+        10
+        Label : LEFT
+          8
+        Label : RIGHT
+          15
+          Label : INDEX
+            16
+          Label : VARIABLE
+            14
+            Label : MEMBER
+              13
+            Label : OBJECT
+              11
+      Label : ELSE
+        26
+        Label : LEFT
+          15
+          Label : INDEX
+            25
+          Label : VARIABLE
+            14
+            Label : MEMBER
+              24
+            Label : OBJECT
+              22
+        Label : RIGHT
+          27
+          Label : CODE
+            30
+            Label : LEFT
+              28
+            Label : RIGHT
+              15
+              Label : INDEX
+                34
+              Label : VARIABLE
+                14
+                Label : MEMBER
+                  33
+                Label : OBJECT
+                  31
+      Label : THEN
+        15
+        Label : INDEX
+          21
+        Label : VARIABLE
+          14
+          Label : MEMBER
+            20
+          Label : OBJECT
+            18
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
-      10
+      11
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
-      16
+      18
   Label : DEFINITION
-    6
+    22
     Label : DEFINITION
-      19
+      22
   Label : DEFINITION
-    6
+    28
     Label : DEFINITION
-      24
+      28
   Label : DEFINITION
-    6
+    31
     Label : DEFINITION
-      26
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,56 +190,56 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            15
+            17
             Label : CONDITION
-              9
+              10
               Label : LEFT
                 8
               Label : RIGHT
-                13
+                15
                 Label : INDEX
-                  14
-                Label : VARIABLE
-                  12
-                  Label : MEMBER
-                    11
-                  Label : OBJECT
-                    10
-            Label : ELSE
-              22
-              Label : LEFT
-                13
-                Label : INDEX
-                  21
-                Label : VARIABLE
-                  12
-                  Label : MEMBER
-                    20
-                  Label : OBJECT
-                    19
-              Label : RIGHT
-                23
-                Label : CODE
-                  25
-                  Label : LEFT
-                    24
-                  Label : RIGHT
-                    13
-                    Label : INDEX
-                      28
-                    Label : VARIABLE
-                      12
-                      Label : MEMBER
-                        27
-                      Label : OBJECT
-                        26
-            Label : THEN
-              13
-              Label : INDEX
-                18
-              Label : VARIABLE
-                12
-                Label : MEMBER
-                  17
-                Label : OBJECT
                   16
+                Label : VARIABLE
+                  14
+                  Label : MEMBER
+                    13
+                  Label : OBJECT
+                    11
+            Label : ELSE
+              26
+              Label : LEFT
+                15
+                Label : INDEX
+                  25
+                Label : VARIABLE
+                  14
+                  Label : MEMBER
+                    24
+                  Label : OBJECT
+                    22
+              Label : RIGHT
+                27
+                Label : CODE
+                  30
+                  Label : LEFT
+                    28
+                  Label : RIGHT
+                    15
+                    Label : INDEX
+                      34
+                    Label : VARIABLE
+                      14
+                      Label : MEMBER
+                        33
+                      Label : OBJECT
+                        31
+            Label : THEN
+              15
+              Label : INDEX
+                21
+              Label : VARIABLE
+                14
+                Label : MEMBER
+                  20
+                Label : OBJECT
+                  18

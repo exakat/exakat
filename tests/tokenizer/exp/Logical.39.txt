@@ -1,46 +1,106 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
+  38
+  Label : DEFINITION
+    38
+    Label : DEFINITION
+      38
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      12
-  Label : DEFINITION
-    6
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    15
     Label : DEFINITION
-      17
+      15
   Label : DEFINITION
-    6
+    19
     Label : DEFINITION
-      21
+      19
   Label : DEFINITION
-    6
+    24
     Label : DEFINITION
-      22
+      24
   Label : DEFINITION
-    6
+    26
     Label : DEFINITION
-      25
+      26
   Label : DEFINITION
-    6
+    30
     Label : DEFINITION
-      32
+      30
   Label : DEFINITION
-    6
+    36
     Label : DEFINITION
-      33
+      36
+  Label : DEFINITION
+    38
+    Label : DEFINITION
+      38
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,7 +108,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          11
           Label : LEFT
             7
             Label : INDEX
@@ -58,78 +118,78 @@ Label : PROJECT
             Label : VARIABLE
               5
           Label : RIGHT
-            11
+            12
         Label : EXPRESSION
-          10
+          11
           Label : LEFT
             7
             Label : INDEX
               8
               Label : PREPLUSPLUS
-                13
+                15
             Label : VARIABLE
-              12
+              13
           Label : RIGHT
-            14
+            17
         Label : EXPRESSION
-          16
+          18
           Label : BLOCK
             3
             Label : EXPRESSION
               8
               Label : POSTPLUSPLUS
-                25
+                30
           Label : CONDITION
-            20
+            23
             Label : LEFT
-              18
+              21
               Label : LEFT
-                17
-              Label : RIGHT
                 19
+              Label : RIGHT
+                22
             Label : RIGHT
               7
               Label : INDEX
-                23
+                28
                 Label : LEFT
-                  22
+                  26
                 Label : RIGHT
-                  24
+                  29
               Label : VARIABLE
-                21
+                24
         Label : EXPRESSION
-          20
+          23
           Label : LEFT
-            26
+            32
           Label : RIGHT
-            28
+            33
             Label : ARGUMENT
-              30
+              34
             Label : NAME
-              28
+              33
         Label : EXPRESSION
-          16
+          18
           Label : BLOCK
             3
             Label : EXPRESSION
-              34
+              40
               Label : CONTINUE
-                35
+                41
           Label : CONDITION
             7
             Label : INDEX
               8
               Label : PREPLUSPLUS
-                33
+                38
             Label : VARIABLE
-              32
+              36
         Label : EXPRESSION
-          20
+          23
           Label : LEFT
-            37
+            43
           Label : RIGHT
-            39
+            44
             Label : ARGUMENT
-              41
+              45
             Label : NAME
-              39
+              44

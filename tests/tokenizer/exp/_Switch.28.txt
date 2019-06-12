@@ -1,30 +1,78 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFAULT
+      16
+      Label : LEFT
+        14
+      Label : RIGHT
+        17
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    11
+    Label : DEFAULT
+      16
+      Label : LEFT
+        14
+      Label : RIGHT
+        17
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      15
+      17
   Label : DEFINITION
-    7
+    25
     Label : DEFINITION
-      22
+      25
   Label : DEFINITION
-    7
+    31
     Label : DEFINITION
-      27
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,42 +90,42 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  12
+                  13
                   Label : LEFT
                     11
                   Label : RIGHT
-                    14
+                    16
                     Label : LEFT
-                      13
+                      14
                     Label : RIGHT
-                      15
+                      17
                 Label : EXPRESSION
-                  16
+                  19
                   Label : BREAK
-                    17
+                    20
             Label : EXPRESSION
-              19
+              22
               Label : CASE
-                20
+                23
               Label : CODE
                 3
                 Label : EXPRESSION
-                  21
+                  24
                   Label : CONDITION
-                    23
+                    27
                     Label : LEFT
-                      22
+                      25
                     Label : RIGHT
-                      24
+                      28
                   Label : THEN
-                    25
+                    29
                     Label : EXPRESSION
-                      26
+                      30
                       Label : RETURN
-                        27
+                        31
                 Label : EXPRESSION
-                  16
+                  19
                   Label : BREAK
-                    17
+                    20
           Label : CONDITION
             6

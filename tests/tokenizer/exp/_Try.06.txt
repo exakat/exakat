@@ -1,28 +1,116 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFAULT
+      10
+      Label : NEW
+        11
+        Label : NAME
+          11
+        Label : ARGUMENT
+          13
+        Label : ARGUMENT
+          10
+          Label : NEW
+            15
+            Label : ARGUMENT
+              17
+            Label : NAME
+              15
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFAULT
+      26
+      Label : NAME
+        26
+      Label : ARGUMENT
+        27
+      Label : ARGUMENT
+        29
+        Label : ARGUMENT
+          7
+        Label : NAME
+          29
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
+    Label : DEFAULT
+      10
+      Label : NEW
+        11
+        Label : NAME
+          11
+        Label : ARGUMENT
+          13
+        Label : ARGUMENT
+          10
+          Label : NEW
+            15
+            Label : ARGUMENT
+              17
+            Label : NAME
+              15
     Label : DEFINITION
       7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    8
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    8
+    22
     Label : DEFINITION
-      20
+      22
   Label : DEFINITION
-    8
+    24
+    Label : DEFAULT
+      26
+      Label : NAME
+        26
+      Label : ARGUMENT
+        27
+      Label : ARGUMENT
+        29
+        Label : ARGUMENT
+          7
+        Label : NAME
+          29
     Label : DEFINITION
-      21
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,32 +136,32 @@ Label : PROJECT
                   Label : ARGUMENT
                     10
                     Label : NEW
-                      14
+                      15
                       Label : ARGUMENT
-                        16
+                        17
                       Label : NAME
-                        14
+                        15
           Label : CATCH
-            17
+            19
             Label : BLOCK
               6
               Label : EXPRESSION
                 9
                 Label : LEFT
-                  21
+                  24
                 Label : RIGHT
-                  22
+                  26
                   Label : NAME
-                    22
+                    26
                   Label : ARGUMENT
-                    23
+                    27
                   Label : ARGUMENT
-                    25
+                    29
                     Label : ARGUMENT
                       7
                     Label : NAME
-                      25
+                      29
             Label : CLASS
-              18
-            Label : VARIABLE
               20
+            Label : VARIABLE
+              22

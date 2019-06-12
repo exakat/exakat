@@ -1,14 +1,64 @@
 test
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CODE
+        8
+        Label : CODE
+          8
+          Label : CODE
+            10
+            Label : LEFT
+              9
+            Label : RIGHT
+              11
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
-      17
+      16
     Label : DEFINITION
-      17
+      16
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CODE
+        8
+        Label : CODE
+          8
+          Label : CODE
+            10
+            Label : LEFT
+              9
+            Label : RIGHT
+              11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -18,9 +68,9 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    19
     Label : DEFINITION
-      20
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -46,13 +96,13 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : CONDITION
-            15
+            14
             Label : MEMBER
               13
             Label : OBJECT
               5
           Label : THEN
-            16
+            15
             Label : EXPRESSION
               8
               Label : ARGUMENT
@@ -60,7 +110,7 @@ Label : PROJECT
               Label : NAME
                 8
                 Label : CODE
-                  15
+                  14
                   Label : MEMBER
                     13
                   Label : OBJECT
@@ -70,12 +120,12 @@ Label : PROJECT
           Label : NAME
             8
             Label : CODE
-              15
+              14
               Label : MEMBER
                 18
               Label : OBJECT
-                17
+                16
           Label : ARGUMENT
-            17
+            16
           Label : ARGUMENT
-            20
+            19

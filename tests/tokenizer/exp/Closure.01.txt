@@ -1,8 +1,454 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        17
+        Label : NAME
+          17
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              16
+              Label : NAME
+                16
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                7
+                Label : LEFT
+                  5
+                Label : RIGHT
+                  8
+                  Label : ARGUMENT
+                    9
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      14
+                      Label : METHOD
+                        6
+                        Label : ARGUMENT
+                          13
+                        Label : NAME
+                          6
+                      Label : OBJECT
+                        12
+                    Label : EXPRESSION
+                      15
+                  Label : DEFINITION
+                    13
+                    Label : DEFINITION
+                      13
+            Label : DEFINITION
+              5
+              Label : DEFAULT
+                8
+                Label : ARGUMENT
+                  9
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    14
+                    Label : METHOD
+                      6
+                      Label : ARGUMENT
+                        13
+                      Label : NAME
+                        6
+                    Label : OBJECT
+                      12
+                  Label : EXPRESSION
+                    15
+                Label : DEFINITION
+                  13
+                  Label : DEFINITION
+                    13
+              Label : DEFINITION
+                5
+      Label : DEFINITION
+        5
+        Label : DEFAULT
+          8
+          Label : ARGUMENT
+            16
+            Label : NAME
+              16
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              7
+              Label : LEFT
+                5
+              Label : RIGHT
+                8
+                Label : ARGUMENT
+                  9
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    14
+                    Label : METHOD
+                      6
+                      Label : ARGUMENT
+                        13
+                      Label : NAME
+                        6
+                    Label : OBJECT
+                      12
+                  Label : EXPRESSION
+                    15
+                Label : DEFINITION
+                  13
+                  Label : DEFINITION
+                    13
+          Label : DEFINITION
+            5
+            Label : DEFAULT
+              8
+              Label : ARGUMENT
+                9
+              Label : BLOCK
+                11
+                Label : EXPRESSION
+                  14
+                  Label : METHOD
+                    6
+                    Label : ARGUMENT
+                      13
+                    Label : NAME
+                      6
+                  Label : OBJECT
+                    12
+                Label : EXPRESSION
+                  15
+              Label : DEFINITION
+                13
+                Label : DEFINITION
+                  13
+            Label : DEFINITION
+              5
+        Label : DEFINITION
+          5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        16
+        Label : NAME
+          16
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              9
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                14
+                Label : METHOD
+                  6
+                  Label : ARGUMENT
+                    13
+                  Label : NAME
+                    6
+                Label : OBJECT
+                  12
+              Label : EXPRESSION
+                15
+            Label : DEFINITION
+              13
+              Label : DEFINITION
+                13
+      Label : DEFINITION
+        5
+        Label : DEFAULT
+          8
+          Label : ARGUMENT
+            9
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              14
+              Label : METHOD
+                6
+                Label : ARGUMENT
+                  13
+                Label : NAME
+                  6
+              Label : OBJECT
+                12
+            Label : EXPRESSION
+              15
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+        Label : DEFINITION
+          5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          14
+          Label : METHOD
+            6
+            Label : ARGUMENT
+              13
+            Label : NAME
+              6
+          Label : OBJECT
+            12
+        Label : EXPRESSION
+          15
+      Label : DEFINITION
+        13
+        Label : DEFINITION
+          13
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        17
+        Label : NAME
+          17
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              16
+              Label : NAME
+                16
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                7
+                Label : LEFT
+                  5
+                Label : RIGHT
+                  8
+                  Label : ARGUMENT
+                    9
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      14
+                      Label : METHOD
+                        6
+                        Label : ARGUMENT
+                          13
+                        Label : NAME
+                          6
+                      Label : OBJECT
+                        12
+                    Label : EXPRESSION
+                      15
+                  Label : DEFINITION
+                    13
+                    Label : DEFINITION
+                      13
+            Label : DEFINITION
+              5
+              Label : DEFAULT
+                8
+                Label : ARGUMENT
+                  9
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    14
+                    Label : METHOD
+                      6
+                      Label : ARGUMENT
+                        13
+                      Label : NAME
+                        6
+                    Label : OBJECT
+                      12
+                  Label : EXPRESSION
+                    15
+                Label : DEFINITION
+                  13
+                  Label : DEFINITION
+                    13
+              Label : DEFINITION
+                5
+      Label : DEFINITION
+        5
+        Label : DEFAULT
+          8
+          Label : ARGUMENT
+            16
+            Label : NAME
+              16
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              7
+              Label : LEFT
+                5
+              Label : RIGHT
+                8
+                Label : ARGUMENT
+                  9
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    14
+                    Label : METHOD
+                      6
+                      Label : ARGUMENT
+                        13
+                      Label : NAME
+                        6
+                    Label : OBJECT
+                      12
+                  Label : EXPRESSION
+                    15
+                Label : DEFINITION
+                  13
+                  Label : DEFINITION
+                    13
+          Label : DEFINITION
+            5
+            Label : DEFAULT
+              8
+              Label : ARGUMENT
+                9
+              Label : BLOCK
+                11
+                Label : EXPRESSION
+                  14
+                  Label : METHOD
+                    6
+                    Label : ARGUMENT
+                      13
+                    Label : NAME
+                      6
+                  Label : OBJECT
+                    12
+                Label : EXPRESSION
+                  15
+              Label : DEFINITION
+                13
+                Label : DEFINITION
+                  13
+            Label : DEFINITION
+              5
+        Label : DEFINITION
+          5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        16
+        Label : NAME
+          16
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              9
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                14
+                Label : METHOD
+                  6
+                  Label : ARGUMENT
+                    13
+                  Label : NAME
+                    6
+                Label : OBJECT
+                  12
+              Label : EXPRESSION
+                15
+            Label : DEFINITION
+              13
+              Label : DEFINITION
+                13
+      Label : DEFINITION
+        5
+        Label : DEFAULT
+          8
+          Label : ARGUMENT
+            9
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              14
+              Label : METHOD
+                6
+                Label : ARGUMENT
+                  13
+                Label : NAME
+                  6
+              Label : OBJECT
+                12
+            Label : EXPRESSION
+              15
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+        Label : DEFINITION
+          5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+      Label : BLOCK
+        11
+        Label : EXPRESSION
+          14
+          Label : METHOD
+            6
+            Label : ARGUMENT
+              13
+            Label : NAME
+              6
+          Label : OBJECT
+            12
+        Label : EXPRESSION
+          15
+      Label : DEFINITION
+        13
+        Label : DEFINITION
+          13
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -26,21 +472,85 @@ Label : PROJECT
             Label : BLOCK
               11
               Label : EXPRESSION
-                15
+                14
                 Label : METHOD
-                  13
+                  6
                   Label : ARGUMENT
-                    14
-                  Label : NAME
                     13
+                  Label : NAME
+                    6
                 Label : OBJECT
                   12
               Label : EXPRESSION
-                16
+                15
             Label : DEFINITION
-              6
+              13
               Label : DEFINITION
-                14
+                13
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              16
+              Label : NAME
+                16
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                7
+                Label : LEFT
+                  5
+                Label : RIGHT
+                  8
+                  Label : ARGUMENT
+                    9
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      14
+                      Label : METHOD
+                        6
+                        Label : ARGUMENT
+                          13
+                        Label : NAME
+                          6
+                      Label : OBJECT
+                        12
+                    Label : EXPRESSION
+                      15
+                  Label : DEFINITION
+                    13
+                    Label : DEFINITION
+                      13
+            Label : DEFINITION
+              5
+              Label : DEFAULT
+                8
+                Label : ARGUMENT
+                  9
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    14
+                    Label : METHOD
+                      6
+                      Label : ARGUMENT
+                        13
+                      Label : NAME
+                        6
+                    Label : OBJECT
+                      12
+                  Label : EXPRESSION
+                    15
+                Label : DEFINITION
+                  13
+                  Label : DEFINITION
+                    13
+              Label : DEFINITION
+                5
         Label : EXPRESSION
           7
           Label : LEFT
@@ -60,51 +570,9 @@ Label : PROJECT
                 Label : RIGHT
                   8
                   Label : ARGUMENT
-                    9
-                  Label : BLOCK
-                    11
-                    Label : EXPRESSION
-                      15
-                      Label : METHOD
-                        13
-                        Label : ARGUMENT
-                          14
-                        Label : NAME
-                          13
-                      Label : OBJECT
-                        12
-                    Label : EXPRESSION
-                      16
-                  Label : DEFINITION
-                    6
-                    Label : DEFINITION
-                      14
-            Label : DEFINITION
-              6
-              Label : DEFINITION
-                5
-        Label : EXPRESSION
-          7
-          Label : LEFT
-            5
-          Label : RIGHT
-            8
-            Label : ARGUMENT
-              18
-              Label : NAME
-                18
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                7
-                Label : LEFT
-                  5
-                Label : RIGHT
-                  8
-                  Label : ARGUMENT
-                    17
+                    16
                     Label : NAME
-                      17
+                      16
                   Label : BLOCK
                     11
                     Label : EXPRESSION
@@ -118,26 +586,108 @@ Label : PROJECT
                         Label : BLOCK
                           11
                           Label : EXPRESSION
-                            15
+                            14
                             Label : METHOD
-                              13
+                              6
                               Label : ARGUMENT
-                                14
-                              Label : NAME
                                 13
+                              Label : NAME
+                                6
                             Label : OBJECT
                               12
                           Label : EXPRESSION
-                            16
+                            15
                         Label : DEFINITION
-                          6
+                          13
                           Label : DEFINITION
-                            14
+                            13
                   Label : DEFINITION
-                    6
+                    5
+                    Label : DEFAULT
+                      8
+                      Label : ARGUMENT
+                        9
+                      Label : BLOCK
+                        11
+                        Label : EXPRESSION
+                          14
+                          Label : METHOD
+                            6
+                            Label : ARGUMENT
+                              13
+                            Label : NAME
+                              6
+                          Label : OBJECT
+                            12
+                        Label : EXPRESSION
+                          15
+                      Label : DEFINITION
+                        13
+                        Label : DEFINITION
+                          13
                     Label : DEFINITION
                       5
             Label : DEFINITION
-              6
+              5
+              Label : DEFAULT
+                8
+                Label : ARGUMENT
+                  16
+                  Label : NAME
+                    16
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    7
+                    Label : LEFT
+                      5
+                    Label : RIGHT
+                      8
+                      Label : ARGUMENT
+                        9
+                      Label : BLOCK
+                        11
+                        Label : EXPRESSION
+                          14
+                          Label : METHOD
+                            6
+                            Label : ARGUMENT
+                              13
+                            Label : NAME
+                              6
+                          Label : OBJECT
+                            12
+                        Label : EXPRESSION
+                          15
+                      Label : DEFINITION
+                        13
+                        Label : DEFINITION
+                          13
+                Label : DEFINITION
+                  5
+                  Label : DEFAULT
+                    8
+                    Label : ARGUMENT
+                      9
+                    Label : BLOCK
+                      11
+                      Label : EXPRESSION
+                        14
+                        Label : METHOD
+                          6
+                          Label : ARGUMENT
+                            13
+                          Label : NAME
+                            6
+                        Label : OBJECT
+                          12
+                      Label : EXPRESSION
+                        15
+                    Label : DEFINITION
+                      13
+                      Label : DEFINITION
+                        13
+                  Label : DEFINITION
+                    5
               Label : DEFINITION
                 5

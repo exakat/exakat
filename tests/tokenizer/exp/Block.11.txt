@@ -1,24 +1,58 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFAULT
+      10
+      Label : POSTPLUSPLUS
+        14
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    11
+    Label : DEFAULT
+      10
+      Label : POSTPLUSPLUS
+        14
     Label : DEFINITION
       11
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      13
-    Label : DEFINITION
-      13
-  Label : DEFINITION
-    9
+    14
     Label : DEFINITION
       14
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,22 +76,22 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : EXPRESSION
-            12
+            13
             Label : LEFT
               11
             Label : RIGHT
               10
               Label : POSTPLUSPLUS
-                13
-          Label : EXPRESSION
-            17
-            Label : LEFT
-              15
-              Label : INDEX
-                16
-              Label : VARIABLE
                 14
+          Label : EXPRESSION
+            20
+            Label : LEFT
+              18
+              Label : INDEX
+                19
+              Label : VARIABLE
+                16
             Label : RIGHT
               10
               Label : POSTPLUSPLUS
-                13
+                14

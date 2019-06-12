@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    18
+    17
     Label : DEFINITION
       17
   Label : FILE

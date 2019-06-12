@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : FILE
@@ -18,13 +30,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            13
+            14
             Label : METHOD
-              10
+              11
               Label : ARGUMENT
-                11
+                12
               Label : NAME
-                10
+                11
             Label : OBJECT
               6
               Label : NAME

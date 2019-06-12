@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    7
+    20
     Label : DEFINITION
-      18
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,26 +62,26 @@ Label : PROJECT
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  17
+                  19
                   Label : ARGUMENT
-                    13
-                    Label : MEMBER
-                      19
-                    Label : OBJECT
-                      18
-              Label : SOURCE
-                13
-                Label : METHOD
-                  14
-                  Label : ARGUMENT
-                    15
-                  Label : NAME
                     14
+                    Label : MEMBER
+                      22
+                    Label : OBJECT
+                      20
+              Label : SOURCE
+                14
+                Label : METHOD
+                  15
+                  Label : ARGUMENT
+                    16
+                  Label : NAME
+                    15
                 Label : OBJECT
-                  13
+                  14
                   Label : MEMBER
-                    12
+                    13
                   Label : OBJECT
                     11
               Label : VALUE
-                16
+                17

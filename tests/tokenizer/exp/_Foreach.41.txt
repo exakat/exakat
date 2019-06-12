@@ -1,28 +1,58 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
-      9
+      10
     Label : DEFINITION
-      9
+      10
     Label : DEFINITION
-      9
+      10
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
-      20
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,55 +64,55 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                17
+                18
                 Label : METHOD
-                  10
+                  12
                   Label : ARGUMENT
-                    14
+                    15
                     Label : CONCAT
-                      12
-                    Label : CONCAT
-                      17
-                      Label : MEMBER
-                        15
-                      Label : OBJECT
-                        9
+                      13
                     Label : CONCAT
                       18
+                      Label : MEMBER
+                        16
+                      Label : OBJECT
+                        10
                     Label : CONCAT
-                      20
+                      19
                     Label : CONCAT
                       21
                     Label : CONCAT
+                      22
+                    Label : CONCAT
                       8
                     Label : CONCAT
-                      23
+                      24
                   Label : NAME
-                    10
+                    12
                 Label : OBJECT
-                  9
+                  10
               Label : RIGHT
-                26
+                27
                 Label : ARGUMENT
-                  28
+                  29
                 Label : ARGUMENT
-                  30
+                  31
                 Label : ARGUMENT
-                  32
+                  33
                 Label : ARGUMENT
-                  17
+                  18
                   Label : METHOD
-                    26
+                    27
                     Label : ARGUMENT
-                      34
+                      35
                     Label : NAME
-                      26
+                      27
                   Label : OBJECT
-                    9
+                    10
                 Label : NAME
-                  26
+                  27
           Label : SOURCE
             6
           Label : VALUE

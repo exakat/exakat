@@ -1,26 +1,92 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      12
+      Label : METHOD
+        13
+        Label : ARGUMENT
+          15
+        Label : NAME
+          13
+      Label : OBJECT
+        12
+        Label : METHOD
+          10
+          Label : ARGUMENT
+            11
+          Label : NAME
+            10
+        Label : OBJECT
+          8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      12
+      Label : METHOD
+        13
+        Label : ARGUMENT
+          15
+        Label : NAME
+          13
+      Label : OBJECT
+        12
+        Label : METHOD
+          10
+          Label : ARGUMENT
+            11
+          Label : NAME
+            10
+        Label : OBJECT
+          8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    6
+    24
     Label : DEFINITION
       24
   Label : DEFINITION
-    6
+    30
     Label : DEFINITION
-      29
+      30
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,11 +108,11 @@ Label : PROJECT
             Label : OBJECT
               12
               Label : METHOD
-                9
+                10
                 Label : ARGUMENT
                   11
                 Label : NAME
-                  9
+                  10
               Label : OBJECT
                 8
         Label : EXPRESSION
@@ -68,13 +134,13 @@ Label : PROJECT
               Label : RETURN
                 12
                 Label : METHOD
-                  30
+                  32
                   Label : ARGUMENT
-                    32
+                    34
                   Label : NAME
-                    30
+                    32
                 Label : OBJECT
-                  29
+                  30
           Label : THEN
             3
             Label : EXPRESSION
@@ -82,10 +148,10 @@ Label : PROJECT
               Label : RETURN
                 12
                 Label : METHOD
-                  25
+                  26
                   Label : ARGUMENT
-                    27
+                    28
                   Label : NAME
-                    25
+                    26
                 Label : OBJECT
                   24

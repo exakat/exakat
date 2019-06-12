@@ -1,18 +1,72 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
+        Label : NAME
+          14
+      Label : CONCAT
+        15
+      Label : CONCAT
+        18
+        Label : INDEX
+          19
+        Label : VARIABLE
+          17
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
+        Label : NAME
+          14
+      Label : CONCAT
+        15
+      Label : CONCAT
+        18
+        Label : INDEX
+          19
+        Label : VARIABLE
+          17
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      16
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,14 +84,14 @@ Label : PROJECT
             Label : CONCAT
               11
             Label : CONCAT
-              12
+              13
               Label : NAME
-                13
+                14
             Label : CONCAT
-              14
+              15
             Label : CONCAT
-              17
+              18
               Label : INDEX
-                18
+                19
               Label : VARIABLE
-                16
+                17

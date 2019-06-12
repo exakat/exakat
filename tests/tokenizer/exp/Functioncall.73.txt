@@ -1,14 +1,90 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -16,47 +92,47 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
-      9
+      10
     Label : DEFINITION
-      9
+      10
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
-      11
+      13
     Label : DEFINITION
-      11
+      13
     Label : DEFINITION
-      11
+      13
     Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    7
+      13
     Label : DEFINITION
       13
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      14
-  Label : DEFINITION
-    7
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
-      19
+      21
   Label : DEFINITION
-    7
+    23
     Label : DEFINITION
-      20
+      23
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -70,60 +146,60 @@ Label : PROJECT
           Label : ARGUMENT
             8
           Label : ARGUMENT
-            10
+            12
             Label : INDEX
-              11
+              13
             Label : VARIABLE
-              9
+              10
           Label : NAME
             5
-        Label : EXPRESSION
-          12
-          Label : NAME
-            12
-          Label : ARGUMENT
-            13
-          Label : ARGUMENT
-            10
-            Label : INDEX
-              11
-            Label : VARIABLE
-              14
         Label : EXPRESSION
           15
           Label : NAME
             15
           Label : ARGUMENT
-            10
-            Label : INDEX
-              11
-            Label : VARIABLE
-              16
+            16
           Label : ARGUMENT
-            17
+            12
+            Label : INDEX
+              13
+            Label : VARIABLE
+              18
         Label : EXPRESSION
-          18
+          20
+          Label : NAME
+            20
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              13
+            Label : VARIABLE
+              21
+          Label : ARGUMENT
+            23
+        Label : EXPRESSION
+          25
           Label : ARGUMENT
             8
           Label : ARGUMENT
-            10
+            12
             Label : INDEX
-              11
+              13
             Label : VARIABLE
-              19
+              26
           Label : ARGUMENT
-            20
+            28
           Label : NAME
-            18
+            25
         Label : EXPRESSION
-          21
+          30
           Label : ARGUMENT
             6
           Label : ARGUMENT
             8
           Label : ARGUMENT
-            10
+            12
             Label : INDEX
-              11
+              13
             Label : VARIABLE
-              9
+              10

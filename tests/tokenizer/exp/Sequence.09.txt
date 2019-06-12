@@ -1,22 +1,80 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFAULT
+      15
+      Label : ARGUMENT
+        16
+      Label : ARGUMENT
+        18
+      Label : ARGUMENT
+        19
+      Label : NAME
+        15
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          11
+        Label : NAME
+          9
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    13
+    Label : DEFAULT
+      15
+      Label : ARGUMENT
+        16
+      Label : ARGUMENT
+        18
+      Label : ARGUMENT
+        19
+      Label : NAME
+        15
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          11
+        Label : NAME
+          9
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
-      15
+      16
     Label : DEFINITION
-      15
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,22 +98,22 @@ Label : PROJECT
           Label : LEFT
             13
           Label : RIGHT
-            14
-            Label : ARGUMENT
-              15
+            15
             Label : ARGUMENT
               16
             Label : ARGUMENT
-              17
-            Label : NAME
-              14
-        Label : EXPRESSION
-          20
-          Label : METHOD
-            18
-            Label : ARGUMENT
-              15
-            Label : NAME
               18
+            Label : ARGUMENT
+              19
+            Label : NAME
+              15
+        Label : EXPRESSION
+          22
+          Label : METHOD
+            20
+            Label : ARGUMENT
+              16
+            Label : NAME
+              20
           Label : OBJECT
             5

@@ -24,22 +24,22 @@ Label : PROJECT
           Label : BLOCK
             10
             Label : EXPRESSION
-              15
+              14
               Label : METHOD
-                13
+                12
                 Label : ARGUMENT
-                  14
-                Label : NAME
                   13
+                Label : NAME
+                  12
               Label : OBJECT
                 11
           Label : DEFINITION
-            12
+            11
             Label : DEFINITION
               11
           Label : DEFINITION
-            12
+            13
             Label : DEFINITION
-              14
+              13
           Label : USE
             9

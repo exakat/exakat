@@ -1,30 +1,68 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
+Label : GLOBAL
+  42
+  Label : DEFINITION
+    42
+    Label : DEFINITION
+      42
+Label : GLOBAL
+  45
+  Label : DEFINITION
+    45
+    Label : DEFINITION
+      45
+    Label : DEFINITION
+      45
 Label : PROJECT
   1
   Label : DEFINITION
-    16
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    16
+    21
     Label : DEFINITION
-      22
+      21
     Label : DEFINITION
-      22
+      21
     Label : DEFINITION
-      22
+      21
     Label : DEFINITION
-      22
+      21
   Label : DEFINITION
-    16
+    40
     Label : DEFINITION
       40
   Label : DEFINITION
-    16
+    42
     Label : DEFINITION
-      43
+      42
   Label : DEFINITION
-    16
+    45
     Label : DEFINITION
       45
     Label : DEFINITION
@@ -56,17 +94,17 @@ Label : PROJECT
             Label : NOT
               15
           Label : THEN
-            17
+            16
             Label : EXPRESSION
-              18
+              17
               Label : THROW
-                19
+                18
                 Label : NEW
-                  20
+                  19
         Label : EXPRESSION
-          21
+          20
           Label : BLOCK
-            17
+            16
             Label : EXPRESSION
               13
               Label : CONDITION
@@ -76,11 +114,11 @@ Label : PROJECT
                   Label : INDEX
                     24
                   Label : VARIABLE
-                    22
+                    21
                 Label : RIGHT
                   26
               Label : THEN
-                17
+                16
                 Label : EXPRESSION
                   12
                   Label : METHOD
@@ -102,31 +140,31 @@ Label : PROJECT
           Label : CATCH
             31
             Label : BLOCK
-              17
+              16
               Label : EXPRESSION
                 34
             Label : CLASS
               32
             Label : VARIABLE
-              22
+              21
           Label : CATCH
             31
             Label : BLOCK
-              17
+              16
               Label : EXPRESSION
                 34
             Label : CLASS
               36
             Label : VARIABLE
-              22
+              21
           Label : CATCH
             31
             Label : BLOCK
-              17
+              16
               Label : EXPRESSION
                 12
                 Label : METHOD
-                  41
+                  22
                   Label : ARGUMENT
                     27
                     Label : NAME
@@ -134,7 +172,7 @@ Label : PROJECT
                     Label : ARGUMENT
                       29
                       Label : ARGUMENT
-                        42
+                        41
                       Label : NAME
                         29
                     Label : ARGUMENT
@@ -142,9 +180,9 @@ Label : PROJECT
                       Label : INDEX
                         44
                       Label : VARIABLE
-                        43
+                        42
                   Label : NAME
-                    41
+                    22
                 Label : OBJECT
                   12
                   Label : MEMBER
@@ -156,7 +194,7 @@ Label : PROJECT
                 Label : CONDITION
                   45
                 Label : THEN
-                  17
+                  16
                   Label : EXPRESSION
                     12
                     Label : METHOD
@@ -170,4 +208,4 @@ Label : PROJECT
             Label : CLASS
               38
             Label : VARIABLE
-              22
+              21

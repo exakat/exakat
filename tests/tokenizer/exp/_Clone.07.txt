@@ -1,8 +1,38 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CLONE
+        13
+        Label : CLASS
+          9
+        Label : METHOD
+          10
+          Label : ARGUMENT
+            11
+          Label : NAME
+            10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CLONE
+        13
+        Label : CLASS
+          9
+        Label : METHOD
+          10
+          Label : ARGUMENT
+            11
+          Label : NAME
+            10
     Label : DEFINITION
       5
   Label : FILE

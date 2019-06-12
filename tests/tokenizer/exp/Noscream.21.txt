@@ -1,14 +1,46 @@
 test
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+    Label : DEFINITION
+      30
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFAULT
+      10
+      Label : CODE
+        12
+        Label : LEFT
+          11
+        Label : RIGHT
+          13
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    30
     Label : DEFINITION
       30
     Label : DEFINITION
       30
   Label : DEFINITION
-    8
+    7
+    Label : DEFAULT
+      10
+      Label : CODE
+        12
+        Label : LEFT
+          11
+        Label : RIGHT
+          13
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -66,15 +98,15 @@ Label : PROJECT
             Label : BLOCK
               6
               Label : EXPRESSION
-                31
+                32
                 Label : ARGUMENT
-                  36
+                  37
                   Label : METHOD
-                    32
+                    33
                     Label : ARGUMENT
-                      34
+                      35
                     Label : NAME
-                      32
+                      33
                   Label : OBJECT
                     30
             Label : CLASS

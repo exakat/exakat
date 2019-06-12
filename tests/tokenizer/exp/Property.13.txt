@@ -1,8 +1,16 @@
 test
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    19
+    17
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -96,7 +104,7 @@ Label : PROJECT
                 Label : OBJECT
                   17
           Label : RIGHT
-            20
+            19
         Label : EXPRESSION
           13
           Label : LEFT
@@ -114,4 +122,4 @@ Label : PROJECT
                 Label : OBJECT
                   17
           Label : RIGHT
-            21
+            20

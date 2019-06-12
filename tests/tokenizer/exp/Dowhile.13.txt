@@ -1,16 +1,34 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
 Label : PROJECT
   1
   Label : DEFINITION
-    13
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    13
+    25
     Label : DEFINITION
       25
   Label : FILE

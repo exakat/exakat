@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -48,8 +60,8 @@ Label : PROJECT
                   Label : NOT
                     15
             Label : ELSE
-              17
+              18
             Label : THEN
-              16
+              17
           Label : NAME
             4

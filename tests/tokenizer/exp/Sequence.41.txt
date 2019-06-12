@@ -1,26 +1,72 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      12
+      Label : NAME
+        12
+      Label : ARGUMENT
+        13
+      Label : ARGUMENT
+        14
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    9
+    Label : DEFAULT
+      12
+      Label : NAME
+        12
+      Label : ARGUMENT
+        13
+      Label : ARGUMENT
+        14
     Label : DEFINITION
       9
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
-      20
+      22
   Label : DEFINITION
-    7
+    31
     Label : DEFINITION
-      28
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,46 +80,46 @@ Label : PROJECT
           Label : THEN
             8
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
                 9
               Label : RIGHT
-                11
+                12
                 Label : NAME
-                  11
-                Label : ARGUMENT
                   12
                 Label : ARGUMENT
                   13
+                Label : ARGUMENT
+                  14
         Label : EXPRESSION
-          29
+          33
           Label : METHOD
-            19
+            21
             Label : NAME
-              19
-            Label : ARGUMENT
-              20
-            Label : ARGUMENT
               21
+            Label : ARGUMENT
+              22
+            Label : ARGUMENT
+              24
               Label : ARGUMENT
-                23
+                26
                 Label : INDEX
-                  22
+                  25
                 Label : VALUE
-                  26
-                  Label : CONCAT
-                    24
+                  29
                   Label : CONCAT
                     27
                   Label : CONCAT
-                    28
+                    30
+                  Label : CONCAT
+                    31
           Label : OBJECT
-            18
+            20
             Label : CLASS
-              14
-            Label : METHOD
               16
+            Label : METHOD
+              18
               Label : ARGUMENT
-                17
+                19
               Label : NAME
-                16
+                18

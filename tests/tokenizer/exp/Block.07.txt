@@ -1,8 +1,32 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -10,7 +34,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -30,13 +54,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            11
+            12
             Label : EXPRESSION
-              11
+              12
               Label : EXPRESSION
-                12
+                13
                 Label : ARGUMENT
-                  13
+                  14
           Label : SOURCE
             9
             Label : MEMBER
@@ -48,17 +72,17 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            11
+            12
             Label : EXPRESSION
-              14
+              15
               Label : POSTPLUSPLUS
                 6
             Label : EXPRESSION
-              11
+              12
               Label : EXPRESSION
-                12
+                13
                 Label : ARGUMENT
-                  15
+                  16
           Label : SOURCE
             9
             Label : MEMBER
@@ -70,15 +94,15 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            11
+            12
             Label : EXPRESSION
-              11
+              12
               Label : EXPRESSION
-                12
+                13
                 Label : ARGUMENT
-                  16
+                  17
             Label : EXPRESSION
-              14
+              15
               Label : POSTPLUSPLUS
                 6
           Label : SOURCE

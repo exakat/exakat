@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    7
+    32
     Label : DEFINITION
-      31
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,7 +50,7 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            15
+            16
             Label : LEFT
               11
               Label : LEFT
@@ -36,36 +60,36 @@ Label : PROJECT
                 Label : RIGHT
                   9
               Label : RIGHT
-                13
+                14
                 Label : LEFT
                   12
                 Label : RIGHT
-                  14
+                  15
             Label : RIGHT
-              29
+              30
               Label : METHOD
-                17
+                19
                 Label : ARGUMENT
-                  26
+                  27
                   Label : CONCAT
-                    25
+                    26
                     Label : CLASS
-                      19
+                      20
                     Label : METHOD
-                      21
+                      22
                       Label : ARGUMENT
-                        23
+                        24
                       Label : NAME
-                        21
+                        22
                   Label : CONCAT
-                    27
+                    28
                 Label : NAME
-                  17
+                  19
               Label : OBJECT
-                16
+                17
           Label : THEN
-            30
+            31
             Label : EXPRESSION
-              32
+              33
               Label : POSTPLUSPLUS
-                31
+                32

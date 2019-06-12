@@ -1,18 +1,88 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      14
+      Label : CONDITION
+        8
+        Label : NOT
+          9
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              13
+            Label : VARIABLE
+              10
+      Label : ELSE
+        21
+      Label : THEN
+        16
+        Label : CONCAT
+          15
+        Label : CONCAT
+          17
+          Label : ARGUMENT
+            19
+          Label : NAME
+            17
+        Label : CONCAT
+          20
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      14
+      Label : CONDITION
+        8
+        Label : NOT
+          9
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              13
+            Label : VARIABLE
+              10
+      Label : ELSE
+        21
+      Label : THEN
+        16
+        Label : CONCAT
+          15
+        Label : CONCAT
+          17
+          Label : ARGUMENT
+            19
+          Label : NAME
+            17
+        Label : CONCAT
+          20
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      16
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,28 +94,28 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            13
+            14
             Label : CONDITION
               8
               Label : NOT
                 9
                 Label : ARGUMENT
-                  11
+                  12
                   Label : INDEX
-                    12
+                    13
                   Label : VARIABLE
                     10
             Label : ELSE
-              19
+              21
             Label : THEN
-              15
+              16
               Label : CONCAT
-                14
+                15
               Label : CONCAT
-                16
+                17
                 Label : ARGUMENT
-                  17
+                  19
                 Label : NAME
-                  16
+                  17
               Label : CONCAT
-                18
+                20

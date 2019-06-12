@@ -1,12 +1,30 @@
 test
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    31
     Label : DEFINITION
       31
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -22,7 +40,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          40
+          41
           Label : ARGUMENT
             14
             Label : CONDITION
@@ -72,7 +90,7 @@ Label : PROJECT
                       Label : ARGUMENT
                         31
                     Label : CONCAT
-                      32
+                      33
                     Label : CONCAT
                       8
                   Label : RIGHT
@@ -80,11 +98,11 @@ Label : PROJECT
                 Label : ELSE
                   7
                   Label : CONCAT
-                    36
+                    37
                   Label : CONCAT
-                    38
+                    39
                 Label : THEN
-                  34
+                  35
               Label : THEN
                 21
             Label : THEN

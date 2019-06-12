@@ -1,14 +1,90 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFAULT
+      52
+    Label : DEFAULT
+      49
+    Label : DEFAULT
+      17
+    Label : DEFAULT
+      14
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFAULT
+      33
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
+Label : GLOBAL
+  37
+  Label : DEFINITION
+    37
+    Label : DEFINITION
+      37
+Label : GLOBAL
+  41
+  Label : DEFINITION
+    41
+    Label : DEFAULT
+      43
+    Label : DEFINITION
+      41
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    11
+    Label : DEFAULT
+      52
+    Label : DEFAULT
+      49
+    Label : DEFAULT
+      17
+    Label : DEFAULT
+      14
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -18,29 +94,33 @@ Label : PROJECT
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    23
     Label : DEFINITION
-      22
+      23
   Label : DEFINITION
-    7
+    26
     Label : DEFINITION
-      24
+      26
   Label : DEFINITION
-    7
+    31
+    Label : DEFAULT
+      33
     Label : DEFINITION
-      28
+      31
   Label : DEFINITION
-    7
+    34
     Label : DEFINITION
-      30
+      34
   Label : DEFINITION
-    7
+    37
     Label : DEFINITION
-      32
+      37
   Label : DEFINITION
-    7
+    41
+    Label : DEFAULT
+      43
     Label : DEFINITION
-      35
+      41
   Label : FILE
     3
     Label : EXPRESSION
@@ -58,126 +138,126 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  12
+                  13
                   Label : LEFT
                     11
                   Label : RIGHT
-                    13
+                    14
             Label : EXPRESSION
-              14
+              15
               Label : CASE
-                15
+                16
               Label : CODE
                 3
                 Label : EXPRESSION
-                  12
+                  13
                   Label : LEFT
                     11
                   Label : RIGHT
-                    16
+                    17
             Label : EXPRESSION
-              17
+              18
               Label : CASE
-                18
+                19
               Label : CODE
                 3
                 Label : EXPRESSION
-                  23
+                  25
                   Label : LEFT
-                    19
+                    20
                     Label : CODE
-                      21
+                      22
                       Label : LEFT
-                        20
+                        21
                         Label : LEFT
                           6
                         Label : RIGHT
                           10
                       Label : RIGHT
-                        20
+                        21
                         Label : LEFT
-                          22
+                          23
                         Label : RIGHT
-                          18
+                          19
                   Label : RIGHT
-                    23
+                    25
                     Label : LEFT
-                      25
+                      28
                       Label : INDEX
-                        27
+                        30
                       Label : VARIABLE
-                        25
-                        Label : INDEX
-                          26
-                        Label : VARIABLE
-                          24
-                    Label : RIGHT
-                      12
-                      Label : LEFT
                         28
-                      Label : RIGHT
-                        29
-                Label : EXPRESSION
-                  23
-                  Label : LEFT
-                    20
-                    Label : LEFT
-                      30
-                    Label : RIGHT
-                      31
-                  Label : RIGHT
-                    23
-                    Label : LEFT
-                      25
-                      Label : INDEX
-                        34
-                      Label : VARIABLE
-                        25
                         Label : INDEX
-                          33
+                          29
                         Label : VARIABLE
-                          32
+                          26
                     Label : RIGHT
-                      12
+                      13
                       Label : LEFT
-                        35
+                        31
                       Label : RIGHT
-                        36
+                        33
                 Label : EXPRESSION
-                  37
-                  Label : BREAK
-                    38
-            Label : EXPRESSION
-              40
-              Label : CASE
-                41
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  12
+                  25
                   Label : LEFT
-                    11
+                    21
+                    Label : LEFT
+                      34
+                    Label : RIGHT
+                      36
                   Label : RIGHT
-                    42
-            Label : EXPRESSION
-              43
-              Label : CODE
-                3
+                    25
+                    Label : LEFT
+                      28
+                      Label : INDEX
+                        40
+                      Label : VARIABLE
+                        28
+                        Label : INDEX
+                          39
+                        Label : VARIABLE
+                          37
+                    Label : RIGHT
+                      13
+                      Label : LEFT
+                        41
+                      Label : RIGHT
+                        43
                 Label : EXPRESSION
-                  37
+                  44
                   Label : BREAK
-                    38
-            Label : EXPRESSION
-              44
-              Label : CASE
-                26
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  12
-                  Label : LEFT
-                    11
-                  Label : RIGHT
                     45
+            Label : EXPRESSION
+              47
+              Label : CASE
+                48
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  13
+                  Label : LEFT
+                    11
+                  Label : RIGHT
+                    49
+            Label : EXPRESSION
+              50
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  44
+                  Label : BREAK
+                    45
+            Label : EXPRESSION
+              51
+              Label : CASE
+                29
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  13
+                  Label : LEFT
+                    11
+                  Label : RIGHT
+                    52
           Label : CONDITION
             6

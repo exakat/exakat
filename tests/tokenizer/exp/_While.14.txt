@@ -1,28 +1,64 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    15
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
-      16
+      18
   Label : DEFINITION
-    6
+    20
     Label : DEFINITION
-      17
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,17 +76,17 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              13
+              14
               Label : POSTPLUSPLUS
                 12
             Label : EXPRESSION
-              15
+              17
               Label : CONDITION
-                14
+                15
               Label : ELSE
-                17
+                20
               Label : THEN
-                16
+                18
           Label : CONDITION
             10
             Label : LEFT

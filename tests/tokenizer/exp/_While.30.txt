@@ -1,20 +1,60 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      14
+      Label : METHOD
+        10
+        Label : ARGUMENT
+          11
+        Label : NAME
+          10
+      Label : OBJECT
+        9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      14
+      Label : METHOD
+        10
+        Label : ARGUMENT
+          11
+        Label : NAME
+          10
+      Label : OBJECT
+        9
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
-      14
+      15
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,9 +68,9 @@ Label : PROJECT
             Label : EXPRESSION
               8
               Label : LEFT
-                14
+                15
                 Label : APPEND
-                  14
+                  15
               Label : RIGHT
                 6
           Label : CONDITION
@@ -38,7 +78,7 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              13
+              14
               Label : METHOD
                 10
                 Label : ARGUMENT

@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    11
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    11
+    25
     Label : DEFINITION
       25
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,19 +50,19 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            17
+            18
             Label : CONDITION
-              15
+              16
               Label : LEFT
                 9
                 Label : INDEX
-                  14
+                  15
                 Label : VARIABLE
                   9
                   Label : INDEX
                     9
                     Label : INDEX
-                      13
+                      14
                     Label : VARIABLE
                       12
                   Label : VARIABLE
@@ -52,44 +76,44 @@ Label : PROJECT
                       Label : MEMBER
                         7
               Label : RIGHT
-                16
+                17
             Label : ELSE
-              19
+              20
             Label : THEN
-              18
+              19
         Label : EXPRESSION
-          20
+          21
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            17
+            18
             Label : CONDITION
-              15
+              16
               Label : LEFT
                 9
                 Label : INDEX
-                  27
+                  30
                 Label : VARIABLE
                   9
                   Label : INDEX
                     9
                     Label : INDEX
-                      26
+                      29
                     Label : VARIABLE
-                      25
+                      27
                   Label : VARIABLE
                     9
                     Label : INDEX
-                      24
+                      25
                     Label : VARIABLE
                       8
                       Label : CLASS
-                        22
-                      Label : MEMBER
                         23
+                      Label : MEMBER
+                        24
               Label : RIGHT
-                28
+                31
             Label : ELSE
-              30
+              33
             Label : THEN
-              29
+              32

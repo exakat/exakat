@@ -1,8 +1,90 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      18
+      Label : METHOD
+        14
+        Label : ARGUMENT
+          15
+        Label : NAME
+          14
+      Label : OBJECT
+        13
+    Label : DEFAULT
+      18
+      Label : METHOD
+        14
+        Label : ARGUMENT
+          15
+        Label : NAME
+          14
+      Label : OBJECT
+        13
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    10
+    Label : DEFAULT
+      18
+      Label : METHOD
+        14
+        Label : ARGUMENT
+          15
+        Label : NAME
+          14
+      Label : OBJECT
+        13
+    Label : DEFAULT
+      18
+      Label : METHOD
+        14
+        Label : ARGUMENT
+          15
+        Label : NAME
+          14
+      Label : OBJECT
+        13
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -16,7 +98,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -24,17 +106,17 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    15
     Label : DEFINITION
-      14
+      15
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    8
+    19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -52,15 +134,15 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : BLOCK
-                18
+                21
                 Label : EXPRESSION
                   5
                   Label : CONDITION
                     6
                     Label : NOT
-                      19
+                      22
                       Label : ARGUMENT
-                        20
+                        23
                         Label : INDEX
                           7
                         Label : VARIABLE
@@ -68,37 +150,37 @@ Label : PROJECT
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      21
+                      24
                       Label : CONTINUE
-                        22
+                        25
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    20
+                    23
                     Label : INDEX
-                      20
+                      23
                       Label : INDEX
                         7
                       Label : VARIABLE
                         10
                     Label : VARIABLE
-                      17
+                      19
                   Label : RIGHT
                     10
               Label : CONDITION
-                11
+                12
                 Label : LEFT
                   10
                 Label : RIGHT
-                  16
+                  18
                   Label : METHOD
-                    13
+                    14
                     Label : ARGUMENT
-                      14
+                      15
                     Label : NAME
-                      13
+                      14
                   Label : OBJECT
-                    12
+                    13
           Label : THEN
             3
             Label : EXPRESSION
@@ -106,24 +188,24 @@ Label : PROJECT
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    17
+                    19
                     Label : APPEND
-                      17
+                      19
                   Label : RIGHT
                     10
               Label : CONDITION
-                11
+                12
                 Label : LEFT
                   10
                 Label : RIGHT
-                  16
+                  18
                   Label : METHOD
-                    13
+                    14
                     Label : ARGUMENT
-                      14
+                      15
                     Label : NAME
-                      13
+                      14
                   Label : OBJECT
-                    12
+                    13

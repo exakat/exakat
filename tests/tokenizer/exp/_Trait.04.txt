@@ -3,6 +3,14 @@ Label : GLOBAL
   29
   Label : DEFINITION
     29
+    Label : DEFAULT
+      32
+      Label : NEW
+        23
+        Label : ARGUMENT
+          10
+        Label : NAME
+          23
     Label : DEFINITION
       29
     Label : DEFINITION
@@ -15,6 +23,14 @@ Label : PROJECT
   1
   Label : DEFINITION
     29
+    Label : DEFAULT
+      32
+      Label : NEW
+        23
+        Label : ARGUMENT
+          10
+        Label : NAME
+          23
     Label : DEFINITION
       29
     Label : DEFINITION

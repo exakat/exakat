@@ -1,8 +1,84 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        8
+        Label : ARGUMENT
+          9
+        Label : ARGUMENT
+          10
+      Label : ARGUMENT
+        8
+        Label : ARGUMENT
+          11
+        Label : ARGUMENT
+          12
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        8
+        Label : ARGUMENT
+          9
+        Label : ARGUMENT
+          10
+      Label : ARGUMENT
+        8
+        Label : ARGUMENT
+          11
+        Label : ARGUMENT
+          12
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -10,33 +86,33 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    15
     Label : DEFINITION
       15
     Label : DEFINITION
       15
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      16
+      17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      25
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      27
+    27
     Label : DEFINITION
       27
   Label : DEFINITION
-    6
+    29
     Label : DEFINITION
-      28
+      29
     Label : DEFINITION
-      28
+      29
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -64,21 +140,21 @@ Label : PROJECT
         Label : EXPRESSION
           13
           Label : BLOCK
-            17
+            19
             Label : EXPRESSION
-              18
+              20
               Label : ARGUMENT
-                19
-                Label : CONCAT
-                  20
-                Label : CONCAT
-                  15
+                21
                 Label : CONCAT
                   22
                 Label : CONCAT
-                  16
+                  15
                 Label : CONCAT
                   24
+                Label : CONCAT
+                  17
+                Label : CONCAT
+                  26
           Label : SOURCE
             5
           Label : VALUE
@@ -88,36 +164,34 @@ Label : PROJECT
             Label : ARGUMENT
               15
             Label : ARGUMENT
-              16
+              17
         Label : EXPRESSION
           13
           Label : BLOCK
-            17
+            19
             Label : EXPRESSION
-              18
+              20
               Label : ARGUMENT
-                19
-                Label : CONCAT
-                  20
-                Label : CONCAT
-                  27
+                21
                 Label : CONCAT
                   22
                 Label : CONCAT
-                  28
+                  29
                 Label : CONCAT
                   24
+                Label : CONCAT
+                  31
+                Label : CONCAT
+                  26
+          Label : INDEX
+            27
           Label : SOURCE
             5
           Label : VALUE
-            26
-            Label : INDEX
-              25
-            Label : VALUE
+            14
+            Label : NAME
               14
-              Label : NAME
-                14
-              Label : ARGUMENT
-                27
-              Label : ARGUMENT
-                28
+            Label : ARGUMENT
+              29
+            Label : ARGUMENT
+              31

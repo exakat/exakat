@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+Label : GLOBAL
+  39
+  Label : DEFINITION
+    39
+    Label : DEFINITION
+      39
+Label : GLOBAL
+  51
+  Label : DEFINITION
+    51
+    Label : DEFINITION
+      51
 Label : PROJECT
   1
   Label : DEFINITION
-    24
+    23
     Label : DEFINITION
       23
   Label : DEFINITION
-    24
+    28
     Label : DEFINITION
       28
   Label : DEFINITION
-    24
+    31
     Label : DEFINITION
       31
   Label : DEFINITION
-    24
+    35
     Label : DEFINITION
-      34
+      35
   Label : DEFINITION
-    24
+    39
     Label : DEFINITION
-      37
+      39
   Label : DEFINITION
-    24
+    51
     Label : DEFINITION
-      49
+      51
   Label : FILE
     3
     Label : EXPRESSION
@@ -58,7 +94,7 @@ Label : PROJECT
           Label : ARGUMENT
             20
         Label : EXPRESSION
-          40
+          42
           Label : LEFT
             22
             Label : ARGUMENT
@@ -76,40 +112,40 @@ Label : PROJECT
             Label : ARGUMENT
               25
               Label : INDEX
-                32
+                33
               Label : VARIABLE
                 31
             Label : ARGUMENT
               25
               Label : INDEX
-                35
+                37
               Label : VARIABLE
-                34
+                35
             Label : ARGUMENT
               25
               Label : INDEX
-                38
+                40
               Label : VARIABLE
-                37
+                39
             Label : NAME
               22
           Label : RIGHT
-            41
+            43
             Label : ARGUMENT
-              43
+              45
               Label : NAME
-                43
-              Label : ARGUMENT
                 45
               Label : ARGUMENT
                 47
+              Label : ARGUMENT
+                49
                 Label : ARGUMENT
                   25
                   Label : INDEX
-                    50
+                    53
                   Label : VARIABLE
-                    49
+                    51
                 Label : NAME
-                  47
+                  49
             Label : NAME
-              41
+              43

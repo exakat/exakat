@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : FILE
@@ -22,6 +28,6 @@ Label : PROJECT
             Label : EXPRESSION
               9
             Label : EXPRESSION
-              11
+              10
               Label : RETURN
-                12
+                11

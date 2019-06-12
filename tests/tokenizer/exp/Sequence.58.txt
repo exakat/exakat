@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -32,13 +38,13 @@ Label : PROJECT
                 Label : EXPRESSION
                   9
               Label : DECLARE
-                7
+                16
                 Label : NAME
                   14
                 Label : VALUE
                   15
             Label : EXPRESSION
-              16
+              17
               Label : BLOCK
                 12
                 Label : EXPRESSION
@@ -50,6 +56,6 @@ Label : PROJECT
                     Label : NAME
                       8
                   Label : OBJECT
-                    18
+                    19
               Label : CONDITION
-                17
+                18

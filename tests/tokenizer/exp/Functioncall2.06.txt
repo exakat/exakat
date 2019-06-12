@@ -1,8 +1,44 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -12,7 +48,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -22,7 +58,7 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    12
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -58,7 +94,7 @@ Label : PROJECT
           Label : NAME
             5
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
             5
             Label : ARGUMENT
@@ -80,11 +116,11 @@ Label : PROJECT
             Label : NAME
               5
           Label : NAME
-            13
-        Label : EXPRESSION
-          13
-          Label : ARGUMENT
             14
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            15
             Label : ARGUMENT
               5
               Label : ARGUMENT
@@ -106,15 +142,15 @@ Label : PROJECT
               Label : NAME
                 5
             Label : NAME
-              14
-          Label : NAME
-            13
-        Label : EXPRESSION
-          13
-          Label : ARGUMENT
-            14
-            Label : ARGUMENT
               15
+          Label : NAME
+            14
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            15
+            Label : ARGUMENT
+              16
               Label : ARGUMENT
                 5
                 Label : ARGUMENT
@@ -136,8 +172,8 @@ Label : PROJECT
                 Label : NAME
                   5
               Label : NAME
-                15
+                16
             Label : NAME
-              14
+              15
           Label : NAME
-            13
+            14

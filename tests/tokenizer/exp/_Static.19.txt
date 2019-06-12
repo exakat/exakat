@@ -15,6 +15,8 @@ Label : PROJECT
               7
             Label : NAME
               6
+              Label : DEFAULT
+                13
               Label : DEFINITION
                 6
           Label : BLOCK
@@ -23,6 +25,8 @@ Label : PROJECT
               9
               Label : STATIC
                 10
+                Label : DEFAULT
+                  12
                 Label : DEFINITION
                   10
             Label : EXPRESSION
@@ -39,6 +43,8 @@ Label : PROJECT
                 13
           Label : DEFINITION
             10
+            Label : DEFAULT
+              12
             Label : DEFINITION
               10
           Label : NAME

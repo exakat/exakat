@@ -1,8 +1,40 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        8
+        Label : MEMBER
+          10
+        Label : OBJECT
+          5
+      Label : CONCAT
+        11
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        9
+      Label : CONCAT
+        8
+        Label : MEMBER
+          10
+        Label : OBJECT
+          5
+      Label : CONCAT
+        11
     Label : DEFINITION
       5
     Label : DEFINITION

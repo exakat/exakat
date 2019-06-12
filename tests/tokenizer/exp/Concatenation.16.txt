@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : FILE
@@ -38,8 +50,8 @@ Label : PROJECT
             Label : CONCAT
               10
               Label : INDEX
-                16
+                17
               Label : VARIABLE
                 15
             Label : CONCAT
-              17
+              18

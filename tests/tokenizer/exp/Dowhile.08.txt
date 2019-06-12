@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    8
+    15
     Label : DEFINITION
-      13
+      15
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,14 +54,14 @@ Label : PROJECT
             Label : EXPRESSION
               6
               Label : BLOCK
-                10
+                11
                 Label : EXPRESSION
-                  12
+                  14
                   Label : POSTPLUSPLUS
-                    11
+                    12
               Label : SOURCE
                 7
               Label : VALUE
                 9
           Label : CONDITION
-            13
+            15

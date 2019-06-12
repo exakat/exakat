@@ -1,8 +1,18 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    22
+    21
     Label : DEFINITION
       21
     Label : DEFINITION
@@ -40,7 +50,7 @@ Label : PROJECT
           Label : DEFINITION
             19
           Label : DEFINITION
-            23
+            22
           Label : EXTENDS
             6
           Label : METHOD
@@ -68,7 +78,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   18
                   Label : ARGUMENT
-                    23
+                    22
                   Label : ARGUMENT
                     20
                 Label : ARGUMENT
@@ -80,13 +90,13 @@ Label : PROJECT
                 Label : ARGUMENT
                   18
                   Label : ARGUMENT
-                    24
+                    23
                   Label : ARGUMENT
                     20
                 Label : ARGUMENT
                   21
             Label : DEFINITION
-              22
+              21
               Label : DEFINITION
                 21
               Label : DEFINITION
@@ -116,7 +126,7 @@ Label : PROJECT
           Label : ARGUMENT
             18
             Label : ARGUMENT
-              23
+              22
             Label : ARGUMENT
               20
           Label : ARGUMENT
@@ -128,7 +138,7 @@ Label : PROJECT
           Label : ARGUMENT
             18
             Label : ARGUMENT
-              24
+              23
             Label : ARGUMENT
               20
           Label : ARGUMENT

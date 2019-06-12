@@ -1,38 +1,86 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
+  47
+  Label : DEFINITION
+    47
+    Label : DEFINITION
+      47
+Label : GLOBAL
+  51
+  Label : DEFINITION
+    51
+    Label : DEFINITION
+      51
+Label : GLOBAL
+  55
+  Label : DEFINITION
+    55
+    Label : DEFINITION
+      55
+Label : GLOBAL
+  63
+  Label : DEFINITION
+    63
+    Label : DEFINITION
+      63
+Label : GLOBAL
+  70
+  Label : DEFINITION
+    70
+    Label : DEFINITION
+      70
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    6
+    36
     Label : DEFINITION
-      35
+      36
   Label : DEFINITION
-    6
+    47
     Label : DEFINITION
-      46
+      47
   Label : DEFINITION
-    6
+    51
     Label : DEFINITION
-      50
+      51
   Label : DEFINITION
-    6
+    55
     Label : DEFINITION
-      53
+      55
   Label : DEFINITION
-    6
+    63
     Label : DEFINITION
-      60
+      63
   Label : DEFINITION
-    6
+    70
     Label : DEFINITION
-      67
+      70
   Label : FILE
     3
     Label : EXPRESSION
@@ -62,102 +110,102 @@ Label : PROJECT
           Label : LEFT
             7
             Label : INDEX
-              19
+              20
             Label : VARIABLE
               18
           Label : RIGHT
             17
             Label : CLASS
-              21
+              22
             Label : METHOD
-              23
+              24
               Label : ARGUMENT
-                25
+                26
               Label : NAME
-                23
+                24
         Label : EXPRESSION
-          27
+          28
           Label : CONDITION
             17
             Label : CLASS
-              28
+              29
             Label : METHOD
-              30
+              31
               Label : ARGUMENT
-                32
+                33
               Label : NAME
-                30
+                31
           Label : THEN
-            34
+            35
             Label : EXPRESSION
               10
               Label : LEFT
                 7
                 Label : INDEX
-                  36
+                  37
                 Label : VARIABLE
-                  35
+                  36
               Label : RIGHT
                 17
                 Label : CLASS
-                  38
+                  39
                 Label : METHOD
-                  40
+                  41
                   Label : ARGUMENT
-                    42
+                    43
                   Label : NAME
-                    40
+                    41
         Label : EXPRESSION
-          27
+          28
           Label : CONDITION
-            44
+            45
             Label : NOT
-              45
+              46
               Label : ARGUMENT
-                49
+                50
                 Label : MEMBER
-                  47
+                  48
                 Label : OBJECT
-                  46
+                  47
           Label : THEN
-            34
+            35
             Label : EXPRESSION
               10
               Label : LEFT
                 7
                 Label : INDEX
-                  51
-                Label : VARIABLE
-                  50
-              Label : RIGHT
-                49
-                Label : MEMBER
-                  54
-                Label : OBJECT
                   53
+                Label : VARIABLE
+                  51
+              Label : RIGHT
+                50
+                Label : MEMBER
+                  57
+                Label : OBJECT
+                  55
         Label : EXPRESSION
           17
           Label : CLASS
-            56
+            59
           Label : METHOD
-            58
+            61
             Label : ARGUMENT
-              49
+              50
               Label : METHOD
-                65
+                68
                 Label : ARGUMENT
-                  67
+                  70
                 Label : NAME
-                  65
+                  68
               Label : OBJECT
-                49
+                50
                 Label : METHOD
-                  61
+                  64
                   Label : ARGUMENT
-                    63
+                    66
                   Label : NAME
-                    61
+                    64
                 Label : OBJECT
-                  60
+                  63
             Label : NAME
-              58
+              61

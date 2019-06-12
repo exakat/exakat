@@ -1,8 +1,84 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      13
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      16
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFAULT
+      19
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFAULT
+      16
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFAULT
+      31
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFAULT
+      35
+    Label : DEFINITION
+      33
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -10,41 +86,53 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    10
+    Label : DEFAULT
+      13
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    14
+    Label : DEFAULT
+      16
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      15
-  Label : DEFINITION
-    7
-    Label : DEFINITION
+    17
+    Label : DEFAULT
       19
-  Label : DEFINITION
-    7
     Label : DEFINITION
-      21
+      17
   Label : DEFINITION
-    7
+    22
+    Label : DEFAULT
+      16
     Label : DEFINITION
-      23
+      22
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    7
+    25
     Label : DEFINITION
       25
   Label : DEFINITION
-    7
+    27
     Label : DEFINITION
-      26
+      27
+  Label : DEFINITION
+    29
+    Label : DEFAULT
+      31
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+  Label : DEFINITION
+    33
+    Label : DEFAULT
+      35
+    Label : DEFINITION
+      33
   Label : FILE
     3
     Label : EXPRESSION
@@ -60,66 +148,64 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
                     10
                   Label : RIGHT
-                    12
-                Label : EXPRESSION
-                  11
-                  Label : LEFT
                     13
-                  Label : RIGHT
-                    14
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    15
+                    14
                   Label : RIGHT
                     16
                 Label : EXPRESSION
-                  17
+                  12
+                  Label : LEFT
+                    17
+                  Label : RIGHT
+                    19
+                Label : EXPRESSION
+                  20
                   Label : CONDITION
                     6
                   Label : THEN
-                    18
+                    21
                     Label : EXPRESSION
-                      11
+                      12
                       Label : LEFT
-                        19
+                        22
                       Label : RIGHT
-                        14
+                        16
                     Label : EXPRESSION
-                      20
+                      24
                       Label : BLOCK
-                        18
+                        21
                         Label : EXPRESSION
-                          17
+                          20
                           Label : CONDITION
-                            11
+                            12
                             Label : LEFT
-                              24
+                              29
                             Label : RIGHT
-                              25
+                              31
                           Label : THEN
-                            18
+                            21
                             Label : EXPRESSION
-                              11
+                              12
                               Label : LEFT
-                                26
+                                33
                               Label : RIGHT
-                                27
+                                35
+                      Label : INDEX
+                        25
                       Label : SOURCE
                         6
                       Label : VALUE
-                        22
-                        Label : INDEX
-                          21
-                        Label : VALUE
-                          23
+                        27
                 Label : EXPRESSION
-                  28
+                  36
                   Label : BREAK
-                    29
+                    37
           Label : CONDITION
             6

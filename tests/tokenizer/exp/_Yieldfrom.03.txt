@@ -1,8 +1,52 @@
 test
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFAULT
+      21
+      Label : ARGUMENT
+        22
+      Label : NAME
+        21
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFAULT
+      26
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
 Label : PROJECT
   1
   Label : DEFINITION
-    16
+    33
+    Label : DEFAULT
+      21
+      Label : ARGUMENT
+        22
+      Label : NAME
+        21
     Label : DEFINITION
       33
     Label : DEFINITION
@@ -14,13 +58,15 @@ Label : PROJECT
     Label : DEFINITION
       33
   Label : DEFINITION
-    16
+    29
+    Label : DEFAULT
+      26
     Label : DEFINITION
-      30
+      29
     Label : DEFINITION
-      30
+      29
   Label : DEFINITION
-    16
+    15
     Label : DEFINITION
       15
     Label : DEFINITION
@@ -60,15 +106,15 @@ Label : PROJECT
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    20
+                    19
                     Label : ARGUMENT
-                      17
+                      16
                       Label : CONCAT
-                        18
+                        17
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        19
+                        18
                 Label : CLASS
                   13
                 Label : VARIABLE
@@ -80,9 +126,9 @@ Label : PROJECT
                 Label : YIELD
                   6
               Label : RIGHT
-                21
+                20
           Label : DEFINITION
-            16
+            15
             Label : DEFINITION
               15
             Label : DEFINITION
@@ -90,21 +136,21 @@ Label : PROJECT
           Label : DEFINITION
             5
             Label : ARGUMENT
-              27
+              26
             Label : NAME
               5
           Label : DEFINITION
             5
             Label : ARGUMENT
-              21
+              20
             Label : NAME
               5
           Label : NAME
             5
         Label : EXPRESSION
-          22
+          21
           Label : ARGUMENT
-            23
+            22
           Label : BLOCK
             7
             Label : EXPRESSION
@@ -114,25 +160,25 @@ Label : PROJECT
                 Label : EXPRESSION
                   9
                   Label : YIELD
-                    26
+                    25
                     Label : INDEX
-                      25
+                      24
                     Label : VALUE
-                      27
+                      26
               Label : CATCH
                 12
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    20
+                    19
                     Label : ARGUMENT
-                      17
+                      16
                       Label : CONCAT
-                        28
+                        27
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        19
+                        18
                 Label : CLASS
                   13
                 Label : VARIABLE
@@ -142,11 +188,11 @@ Label : PROJECT
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  29
+                  28
                   Label : YIELD
                     5
                     Label : ARGUMENT
-                      27
+                      26
                     Label : NAME
                       5
               Label : CATCH
@@ -154,29 +200,29 @@ Label : PROJECT
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    20
+                    19
                     Label : ARGUMENT
-                      17
+                      16
                       Label : CONCAT
-                        28
+                        27
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        19
+                        18
                 Label : CLASS
                   13
                 Label : VARIABLE
                   15
             Label : EXPRESSION
-              29
+              28
               Label : YIELD
                 5
                 Label : ARGUMENT
-                  21
+                  20
                 Label : NAME
                   5
           Label : DEFINITION
-            16
+            15
             Label : DEFINITION
               15
             Label : DEFINITION
@@ -186,21 +232,21 @@ Label : PROJECT
             Label : DEFINITION
               15
           Label : DEFINITION
-            25
+            24
           Label : DEFINITION
-            22
+            21
             Label : ARGUMENT
-              23
-            Label : NAME
               22
+            Label : NAME
+              21
           Label : NAME
-            22
+            21
         Label : EXPRESSION
           31
           Label : LEFT
-            30
+            29
           Label : RIGHT
-            27
+            26
         Label : EXPRESSION
           8
           Label : BLOCK
@@ -216,7 +262,7 @@ Label : PROJECT
                     Label : METHOD
                       41
                       Label : ARGUMENT
-                        23
+                        22
                       Label : NAME
                         41
                     Label : OBJECT
@@ -230,7 +276,7 @@ Label : PROJECT
                   Label : METHOD
                     34
                     Label : ARGUMENT
-                      23
+                      22
                     Label : NAME
                       34
                   Label : OBJECT
@@ -250,7 +296,7 @@ Label : PROJECT
                           Label : POSTPLUSPLUS
                             38
                             Label : CAST
-                              30
+                              29
                         Label : NAME
                           13
                     Label : NAME
@@ -264,25 +310,25 @@ Label : PROJECT
                   Label : LEFT
                     33
                   Label : RIGHT
-                    22
+                    21
                     Label : ARGUMENT
-                      23
-                    Label : NAME
                       22
+                    Label : NAME
+                      21
           Label : CATCH
             12
             Label : BLOCK
               7
               Label : EXPRESSION
-                20
+                19
                 Label : ARGUMENT
-                  17
+                  16
                   Label : CONCAT
-                    42
+                    43
                   Label : CONCAT
                     15
                   Label : CONCAT
-                    19
+                    18
             Label : CLASS
               13
             Label : VARIABLE
@@ -294,7 +340,7 @@ Label : PROJECT
             Label : METHOD
               34
               Label : ARGUMENT
-                23
+                22
               Label : NAME
                 34
             Label : OBJECT

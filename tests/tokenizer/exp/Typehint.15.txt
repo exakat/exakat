@@ -1,14 +1,98 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      12
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      9
+      Label : ARGUMENT
+        14
+      Label : NAME
+        9
+    Label : DEFAULT
+      9
+      Label : ARGUMENT
+        13
+        Label : LEFT
+          10
+        Label : RIGHT
+          12
+      Label : NAME
+        9
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          7
+          Label : LEFT
+            10
+          Label : RIGHT
+            12
+        Label : NAME
+          9
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
+    Label : DEFAULT
+      12
     Label : DEFINITION
       10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      9
+      Label : ARGUMENT
+        14
+      Label : NAME
+        9
+    Label : DEFAULT
+      9
+      Label : ARGUMENT
+        13
+        Label : LEFT
+          10
+        Label : RIGHT
+          12
+      Label : NAME
+        9
+    Label : DEFAULT
+      8
+      Label : NEW
+        9
+        Label : ARGUMENT
+          7
+          Label : LEFT
+            10
+          Label : RIGHT
+            12
+        Label : NAME
+          9
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -16,9 +100,9 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      13
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,7 +122,7 @@ Label : PROJECT
                 Label : LEFT
                   10
                 Label : RIGHT
-                  11
+                  12
               Label : NAME
                 9
         Label : EXPRESSION
@@ -48,11 +132,11 @@ Label : PROJECT
           Label : RIGHT
             9
             Label : ARGUMENT
-              12
+              13
               Label : LEFT
                 10
               Label : RIGHT
-                11
+                12
             Label : NAME
               9
         Label : EXPRESSION
@@ -62,6 +146,6 @@ Label : PROJECT
           Label : RIGHT
             9
             Label : ARGUMENT
-              13
+              14
             Label : NAME
               9

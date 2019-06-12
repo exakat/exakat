@@ -1,12 +1,64 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFAULT
+      19
+      Label : CONDITION
+        18
+        Label : CLASS
+          9
+        Label : METHOD
+          11
+          Label : ARGUMENT
+            15
+            Label : INDEX
+              16
+            Label : VARIABLE
+              13
+          Label : NAME
+            11
+      Label : ELSE
+        21
+      Label : THEN
+        20
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
-      14
+      13
   Label : DEFINITION
-    8
+    7
+    Label : DEFAULT
+      19
+      Label : CONDITION
+        18
+        Label : CLASS
+          9
+        Label : METHOD
+          11
+          Label : ARGUMENT
+            15
+            Label : INDEX
+              16
+            Label : VARIABLE
+              13
+          Label : NAME
+            11
+      Label : ELSE
+        21
+      Label : THEN
+        20
     Label : DEFINITION
       7
   Label : FILE
@@ -18,7 +70,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          9
+          8
           Label : LEFT
             7
           Label : RIGHT
@@ -26,17 +78,17 @@ Label : PROJECT
             Label : CONDITION
               18
               Label : CLASS
-                10
+                9
               Label : METHOD
-                12
+                11
                 Label : ARGUMENT
                   15
                   Label : INDEX
                     16
                   Label : VARIABLE
-                    14
+                    13
                 Label : NAME
-                  12
+                  11
             Label : ELSE
               21
             Label : THEN

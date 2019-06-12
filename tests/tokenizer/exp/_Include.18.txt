@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    25
+    24
     Label : DEFINITION
       24
   Label : FILE
@@ -46,4 +52,4 @@ Label : PROJECT
                   Label : CONCAT
                     24
                   Label : CONCAT
-                    26
+                    25

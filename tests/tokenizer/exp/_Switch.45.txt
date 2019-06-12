@@ -1,286 +1,1178 @@
 test
+Label : GLOBAL
+  266
+  Label : DEFINITION
+    266
+    Label : DEFAULT
+      23
+      Label : CLASS
+        268
+      Label : CONSTANT
+        269
+    Label : DEFINITION
+      266
+Label : GLOBAL
+  85
+  Label : DEFINITION
+    85
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          89
+        Label : VARIABLE
+          88
+    Label : DEFINITION
+      85
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFAULT
+      23
+      Label : CLASS
+        19
+      Label : CONSTANT
+        21
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFAULT
+      26
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFAULT
+      32
+      Label : MEMBER
+        37
+      Label : OBJECT
+        35
+    Label : DEFINITION
+      34
+Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+Label : GLOBAL
+  38
+  Label : DEFINITION
+    38
+    Label : DEFAULT
+      32
+      Label : METHOD
+        42
+        Label : ARGUMENT
+          8
+          Label : INDEX
+            45
+          Label : VARIABLE
+            43
+        Label : NAME
+          42
+      Label : OBJECT
+        40
+    Label : DEFINITION
+      38
+Label : GLOBAL
+  88
+  Label : DEFINITION
+    88
+    Label : DEFINITION
+      88
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+Label : GLOBAL
+  47
+  Label : DEFINITION
+    47
+    Label : DEFAULT
+      8
+      Label : INDEX
+        51
+      Label : VARIABLE
+        49
+    Label : DEFINITION
+      47
+Label : GLOBAL
+  49
+  Label : DEFINITION
+    49
+    Label : DEFINITION
+      49
+Label : GLOBAL
+  60
+  Label : DEFINITION
+    60
+    Label : DEFAULT
+      23
+      Label : CLASS
+        62
+      Label : CONSTANT
+        63
+    Label : DEFINITION
+      60
+Label : GLOBAL
+  64
+  Label : DEFINITION
+    64
+    Label : DEFAULT
+      72
+      Label : CONDITION
+        66
+        Label : CODE
+          69
+          Label : LEFT
+            67
+          Label : RIGHT
+            70
+      Label : ELSE
+        74
+      Label : THEN
+        73
+    Label : DEFINITION
+      64
+Label : GLOBAL
+  67
+  Label : DEFINITION
+    67
+    Label : DEFINITION
+      67
+Label : GLOBAL
+  80
+  Label : DEFINITION
+    80
+    Label : DEFAULT
+      23
+      Label : CLASS
+        81
+      Label : CONSTANT
+        83
+    Label : DEFINITION
+      80
+Label : GLOBAL
+  141
+  Label : DEFINITION
+    141
+    Label : DEFINITION
+      141
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  93
+  Label : DEFINITION
+    93
+    Label : DEFINITION
+      93
+Label : GLOBAL
+  94
+  Label : DEFINITION
+    94
+    Label : DEFINITION
+      94
+Label : GLOBAL
+  96
+  Label : DEFINITION
+    96
+    Label : DEFAULT
+      97
+      Label : CAST
+        98
+    Label : DEFINITION
+      96
+Label : GLOBAL
+  98
+  Label : DEFINITION
+    98
+    Label : DEFINITION
+      98
+Label : GLOBAL
+  100
+  Label : DEFINITION
+    100
+    Label : DEFAULT
+      23
+      Label : CLASS
+        102
+      Label : CONSTANT
+        103
+    Label : DEFINITION
+      100
+Label : GLOBAL
+  108
+  Label : DEFINITION
+    108
+    Label : DEFAULT
+      23
+      Label : CLASS
+        110
+      Label : CONSTANT
+        112
+    Label : DEFINITION
+      108
+Label : GLOBAL
+  114
+  Label : DEFINITION
+    114
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          116
+        Label : VARIABLE
+          115
+    Label : DEFINITION
+      114
+Label : GLOBAL
+  115
+  Label : DEFINITION
+    115
+    Label : DEFINITION
+      115
+Label : GLOBAL
+  120
+  Label : DEFINITION
+    120
+    Label : DEFINITION
+      120
+Label : GLOBAL
+  122
+  Label : DEFINITION
+    122
+    Label : DEFINITION
+      122
+Label : GLOBAL
+  123
+  Label : DEFINITION
+    123
+    Label : DEFAULT
+      97
+      Label : CAST
+        125
+    Label : DEFINITION
+      123
+Label : GLOBAL
+  125
+  Label : DEFINITION
+    125
+    Label : DEFINITION
+      125
+Label : GLOBAL
+  127
+  Label : DEFINITION
+    127
+    Label : DEFAULT
+      23
+      Label : CLASS
+        129
+      Label : CONSTANT
+        130
+    Label : DEFINITION
+      127
+Label : GLOBAL
+  135
+  Label : DEFINITION
+    135
+    Label : DEFAULT
+      23
+      Label : CLASS
+        137
+      Label : CONSTANT
+        138
+    Label : DEFINITION
+      135
+Label : GLOBAL
+  140
+  Label : DEFINITION
+    140
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          143
+        Label : VARIABLE
+          141
+    Label : DEFINITION
+      140
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
+Label : GLOBAL
+  147
+  Label : DEFINITION
+    147
+    Label : DEFINITION
+      147
+Label : GLOBAL
+  174
+  Label : DEFINITION
+    174
+    Label : DEFINITION
+      174
+Label : GLOBAL
+  194
+  Label : DEFINITION
+    194
+    Label : DEFINITION
+      194
+Label : GLOBAL
+  152
+  Label : DEFINITION
+    152
+    Label : DEFINITION
+      152
+Label : GLOBAL
+  154
+  Label : DEFINITION
+    154
+    Label : DEFAULT
+      97
+      Label : CAST
+        156
+    Label : DEFINITION
+      154
+Label : GLOBAL
+  156
+  Label : DEFINITION
+    156
+    Label : DEFINITION
+      156
+Label : GLOBAL
+  158
+  Label : DEFINITION
+    158
+    Label : DEFAULT
+      87
+      Label : CAST
+        160
+    Label : DEFINITION
+      158
+Label : GLOBAL
+  160
+  Label : DEFINITION
+    160
+    Label : DEFINITION
+      160
+Label : GLOBAL
+  166
+  Label : DEFINITION
+    166
+    Label : DEFAULT
+      23
+      Label : CLASS
+        168
+      Label : CONSTANT
+        169
+    Label : DEFINITION
+      166
+Label : GLOBAL
+  170
+  Label : DEFINITION
+    170
+    Label : DEFAULT
+      172
+      Label : NEW
+        173
+        Label : NAME
+          173
+        Label : ARGUMENT
+          8
+          Label : INDEX
+            176
+          Label : VARIABLE
+            174
+        Label : ARGUMENT
+          178
+    Label : DEFINITION
+      170
+Label : GLOBAL
+  196
+  Label : DEFINITION
+    196
+    Label : DEFINITION
+      196
+Label : GLOBAL
+  178
+  Label : DEFINITION
+    178
+    Label : DEFINITION
+      178
+Label : GLOBAL
+  180
+  Label : DEFINITION
+    180
+    Label : DEFINITION
+      180
+Label : GLOBAL
+  183
+  Label : DEFINITION
+    183
+    Label : DEFINITION
+      183
+Label : GLOBAL
+  186
+  Label : DEFINITION
+    186
+    Label : DEFINITION
+      186
+Label : GLOBAL
+  188
+  Label : DEFINITION
+    188
+    Label : DEFINITION
+      188
+Label : GLOBAL
+  190
+  Label : DEFINITION
+    190
+    Label : DEFINITION
+      190
+Label : GLOBAL
+  192
+  Label : DEFINITION
+    192
+    Label : DEFINITION
+      192
+Label : GLOBAL
+  148
+  Label : DEFINITION
+    148
+    Label : DEFINITION
+      148
+Label : GLOBAL
+  150
+  Label : DEFINITION
+    150
+    Label : DEFAULT
+      97
+      Label : CAST
+        152
+    Label : DEFINITION
+      150
+Label : GLOBAL
+  201
+  Label : DEFINITION
+    201
+    Label : DEFINITION
+      201
+Label : GLOBAL
+  206
+  Label : DEFINITION
+    206
+    Label : DEFAULT
+      23
+      Label : CLASS
+        208
+      Label : METHOD
+        209
+        Label : ARGUMENT
+          210
+        Label : ARGUMENT
+          212
+        Label : ARGUMENT
+          214
+        Label : ARGUMENT
+          216
+        Label : ARGUMENT
+          218
+        Label : ARGUMENT
+          220
+        Label : NAME
+          209
+    Label : DEFINITION
+      206
+Label : GLOBAL
+  210
+  Label : DEFINITION
+    210
+    Label : DEFINITION
+      210
+Label : GLOBAL
+  212
+  Label : DEFINITION
+    212
+    Label : DEFINITION
+      212
+Label : GLOBAL
+  214
+  Label : DEFINITION
+    214
+    Label : DEFINITION
+      214
+Label : GLOBAL
+  216
+  Label : DEFINITION
+    216
+    Label : DEFINITION
+      216
+Label : GLOBAL
+  218
+  Label : DEFINITION
+    218
+    Label : DEFINITION
+      218
+Label : GLOBAL
+  220
+  Label : DEFINITION
+    220
+    Label : DEFINITION
+      220
+Label : GLOBAL
+  222
+  Label : DEFINITION
+    222
+    Label : DEFINITION
+      222
+Label : GLOBAL
+  226
+  Label : DEFINITION
+    226
+    Label : DEFINITION
+      226
+Label : GLOBAL
+  228
+  Label : DEFINITION
+    228
+    Label : DEFAULT
+      232
+      Label : CONCAT
+        23
+        Label : CLASS
+          230
+        Label : CONSTANT
+          231
+      Label : CONCAT
+        233
+      Label : CONCAT
+        23
+        Label : CLASS
+          235
+        Label : CONSTANT
+          236
+    Label : DEFINITION
+      228
+Label : GLOBAL
+  237
+  Label : DEFINITION
+    237
+    Label : DEFAULT
+      23
+      Label : CLASS
+        239
+      Label : CONSTANT
+        240
+    Label : DEFINITION
+      237
+Label : GLOBAL
+  245
+  Label : DEFINITION
+    245
+    Label : DEFAULT
+      23
+      Label : CLASS
+        247
+      Label : CONSTANT
+        248
+    Label : DEFINITION
+      245
+Label : GLOBAL
+  249
+  Label : DEFINITION
+    249
+    Label : DEFAULT
+      23
+      Label : CLASS
+        251
+      Label : METHOD
+        252
+        Label : ARGUMENT
+          253
+          Label : ARGUMENT
+            232
+            Label : CONCAT
+              254
+            Label : CONCAT
+              256
+              Label : NAME
+                256
+              Label : ARGUMENT
+                257
+              Label : ARGUMENT
+                259
+                Label : NAME
+                  259
+                Label : ARGUMENT
+                  8
+                  Label : INDEX
+                    262
+                  Label : VARIABLE
+                    260
+                Label : ARGUMENT
+                  264
+          Label : NAME
+            253
+        Label : NAME
+          252
+    Label : DEFINITION
+      249
+Label : GLOBAL
+  260
+  Label : DEFINITION
+    260
+    Label : DEFINITION
+      260
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    266
+    Label : DEFAULT
+      23
+      Label : CLASS
+        268
+      Label : CONSTANT
+        269
     Label : DEFINITION
-      242
+      266
   Label : DEFINITION
-    7
+    85
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          89
+        Label : VARIABLE
+          88
     Label : DEFINITION
-      79
+      85
   Label : DEFINITION
-    7
+    16
+    Label : DEFAULT
+      23
+      Label : CLASS
+        19
+      Label : CONSTANT
+        21
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      23
-  Label : DEFINITION
-    7
+    24
+    Label : DEFAULT
+      26
     Label : DEFINITION
       24
   Label : DEFINITION
-    7
+    26
     Label : DEFINITION
-      27
+      26
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
+      29
+  Label : DEFINITION
+    34
+    Label : DEFAULT
       32
-  Label : DEFINITION
-    7
+      Label : MEMBER
+        37
+      Label : OBJECT
+        35
     Label : DEFINITION
-      33
+      34
   Label : DEFINITION
-    7
+    35
     Label : DEFINITION
-      36
+      35
   Label : DEFINITION
-    7
+    38
+    Label : DEFAULT
+      32
+      Label : METHOD
+        42
+        Label : ARGUMENT
+          8
+          Label : INDEX
+            45
+          Label : VARIABLE
+            43
+        Label : NAME
+          42
+      Label : OBJECT
+        40
     Label : DEFINITION
-      81
+      38
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      40
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      43
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      44
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      54
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      59
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      61
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      74
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      130
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      6
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      86
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      87
-  Label : DEFINITION
-    7
+    88
     Label : DEFINITION
       88
   Label : DEFINITION
-    7
+    43
     Label : DEFINITION
-      90
+      43
   Label : DEFINITION
-    7
+    47
+    Label : DEFAULT
+      8
+      Label : INDEX
+        51
+      Label : VARIABLE
+        49
     Label : DEFINITION
-      91
+      47
   Label : DEFINITION
-    7
+    49
     Label : DEFINITION
-      100
+      49
   Label : DEFINITION
-    7
+    60
+    Label : DEFAULT
+      23
+      Label : CLASS
+        62
+      Label : CONSTANT
+        63
     Label : DEFINITION
-      105
+      60
   Label : DEFINITION
-    7
+    64
+    Label : DEFAULT
+      72
+      Label : CONDITION
+        66
+        Label : CODE
+          69
+          Label : LEFT
+            67
+          Label : RIGHT
+            70
+      Label : ELSE
+        74
+      Label : THEN
+        73
     Label : DEFINITION
-      106
+      64
   Label : DEFINITION
-    7
+    67
     Label : DEFINITION
-      111
+      67
   Label : DEFINITION
-    7
+    80
+    Label : DEFAULT
+      23
+      Label : CLASS
+        81
+      Label : CONSTANT
+        83
     Label : DEFINITION
-      112
+      80
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      113
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      114
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      115
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      124
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      129
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      37
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      135
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      156
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      169
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      138
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      139
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      140
-  Label : DEFINITION
-    7
+    141
     Label : DEFINITION
       141
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
-      142
+      6
   Label : DEFINITION
-    7
+    93
+    Label : DEFINITION
+      93
+  Label : DEFINITION
+    94
+    Label : DEFINITION
+      94
+  Label : DEFINITION
+    96
+    Label : DEFAULT
+      97
+      Label : CAST
+        98
+    Label : DEFINITION
+      96
+  Label : DEFINITION
+    98
+    Label : DEFINITION
+      98
+  Label : DEFINITION
+    100
+    Label : DEFAULT
+      23
+      Label : CLASS
+        102
+      Label : CONSTANT
+        103
+    Label : DEFINITION
+      100
+  Label : DEFINITION
+    108
+    Label : DEFAULT
+      23
+      Label : CLASS
+        110
+      Label : CONSTANT
+        112
+    Label : DEFINITION
+      108
+  Label : DEFINITION
+    114
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          116
+        Label : VARIABLE
+          115
+    Label : DEFINITION
+      114
+  Label : DEFINITION
+    115
+    Label : DEFINITION
+      115
+  Label : DEFINITION
+    120
+    Label : DEFINITION
+      120
+  Label : DEFINITION
+    122
+    Label : DEFINITION
+      122
+  Label : DEFINITION
+    123
+    Label : DEFAULT
+      97
+      Label : CAST
+        125
+    Label : DEFINITION
+      123
+  Label : DEFINITION
+    125
+    Label : DEFINITION
+      125
+  Label : DEFINITION
+    127
+    Label : DEFAULT
+      23
+      Label : CLASS
+        129
+      Label : CONSTANT
+        130
+    Label : DEFINITION
+      127
+  Label : DEFINITION
+    135
+    Label : DEFAULT
+      23
+      Label : CLASS
+        137
+      Label : CONSTANT
+        138
+    Label : DEFINITION
+      135
+  Label : DEFINITION
+    140
+    Label : DEFAULT
+      87
+      Label : CAST
+        8
+        Label : INDEX
+          143
+        Label : VARIABLE
+          141
+    Label : DEFINITION
+      140
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
+  Label : DEFINITION
+    147
     Label : DEFINITION
       147
   Label : DEFINITION
-    7
+    174
+    Label : DEFINITION
+      174
+  Label : DEFINITION
+    194
+    Label : DEFINITION
+      194
+  Label : DEFINITION
+    152
     Label : DEFINITION
       152
   Label : DEFINITION
-    7
+    154
+    Label : DEFAULT
+      97
+      Label : CAST
+        156
     Label : DEFINITION
-      170
+      154
   Label : DEFINITION
-    7
+    156
     Label : DEFINITION
-      159
+      156
   Label : DEFINITION
-    7
+    158
+    Label : DEFAULT
+      87
+      Label : CAST
+        160
+    Label : DEFINITION
+      158
+  Label : DEFINITION
+    160
     Label : DEFINITION
       160
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      163
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      165
-  Label : DEFINITION
-    7
+    166
+    Label : DEFAULT
+      23
+      Label : CLASS
+        168
+      Label : CONSTANT
+        169
     Label : DEFINITION
       166
   Label : DEFINITION
-    7
+    170
+    Label : DEFAULT
+      172
+      Label : NEW
+        173
+        Label : NAME
+          173
+        Label : ARGUMENT
+          8
+          Label : INDEX
+            176
+          Label : VARIABLE
+            174
+        Label : ARGUMENT
+          178
     Label : DEFINITION
-      167
+      170
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      168
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      136
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      137
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      175
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      180
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      185
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      186
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      187
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      188
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      189
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      190
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      191
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      195
-  Label : DEFINITION
-    7
+    196
     Label : DEFINITION
       196
   Label : DEFINITION
-    7
+    178
     Label : DEFINITION
-      208
+      178
   Label : DEFINITION
-    7
+    180
     Label : DEFINITION
-      217
+      180
   Label : DEFINITION
-    7
+    183
+    Label : DEFINITION
+      183
+  Label : DEFINITION
+    186
+    Label : DEFINITION
+      186
+  Label : DEFINITION
+    188
+    Label : DEFINITION
+      188
+  Label : DEFINITION
+    190
+    Label : DEFINITION
+      190
+  Label : DEFINITION
+    192
+    Label : DEFINITION
+      192
+  Label : DEFINITION
+    148
+    Label : DEFINITION
+      148
+  Label : DEFINITION
+    150
+    Label : DEFAULT
+      97
+      Label : CAST
+        152
+    Label : DEFINITION
+      150
+  Label : DEFINITION
+    201
+    Label : DEFINITION
+      201
+  Label : DEFINITION
+    206
+    Label : DEFAULT
+      23
+      Label : CLASS
+        208
+      Label : METHOD
+        209
+        Label : ARGUMENT
+          210
+        Label : ARGUMENT
+          212
+        Label : ARGUMENT
+          214
+        Label : ARGUMENT
+          216
+        Label : ARGUMENT
+          218
+        Label : ARGUMENT
+          220
+        Label : NAME
+          209
+    Label : DEFINITION
+      206
+  Label : DEFINITION
+    210
+    Label : DEFINITION
+      210
+  Label : DEFINITION
+    212
+    Label : DEFINITION
+      212
+  Label : DEFINITION
+    214
+    Label : DEFINITION
+      214
+  Label : DEFINITION
+    216
+    Label : DEFINITION
+      216
+  Label : DEFINITION
+    218
+    Label : DEFINITION
+      218
+  Label : DEFINITION
+    220
+    Label : DEFINITION
+      220
+  Label : DEFINITION
+    222
     Label : DEFINITION
       222
   Label : DEFINITION
-    7
+    226
+    Label : DEFINITION
+      226
+  Label : DEFINITION
+    228
+    Label : DEFAULT
+      232
+      Label : CONCAT
+        23
+        Label : CLASS
+          230
+        Label : CONSTANT
+          231
+      Label : CONCAT
+        233
+      Label : CONCAT
+        23
+        Label : CLASS
+          235
+        Label : CONSTANT
+          236
+    Label : DEFINITION
+      228
+  Label : DEFINITION
+    237
+    Label : DEFAULT
+      23
+      Label : CLASS
+        239
+      Label : CONSTANT
+        240
     Label : DEFINITION
       237
+  Label : DEFINITION
+    245
+    Label : DEFAULT
+      23
+      Label : CLASS
+        247
+      Label : CONSTANT
+        248
+    Label : DEFINITION
+      245
+  Label : DEFINITION
+    249
+    Label : DEFAULT
+      23
+      Label : CLASS
+        251
+      Label : METHOD
+        252
+        Label : ARGUMENT
+          253
+          Label : ARGUMENT
+            232
+            Label : CONCAT
+              254
+            Label : CONCAT
+              256
+              Label : NAME
+                256
+              Label : ARGUMENT
+                257
+              Label : ARGUMENT
+                259
+                Label : NAME
+                  259
+                Label : ARGUMENT
+                  8
+                  Label : INDEX
+                    262
+                  Label : VARIABLE
+                    260
+                Label : ARGUMENT
+                  264
+          Label : NAME
+            253
+        Label : NAME
+          252
+    Label : DEFINITION
+      249
+  Label : DEFINITION
+    260
+    Label : DEFINITION
+      260
   Label : FILE
     3
     Label : EXPRESSION
@@ -298,537 +1190,537 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
                     16
                   Label : RIGHT
-                    22
-                    Label : CLASS
-                      18
-                    Label : CONSTANT
-                      20
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
                     23
-                  Label : RIGHT
-                    24
+                    Label : CLASS
+                      19
+                    Label : CONSTANT
+                      21
                 Label : EXPRESSION
-                  25
-                  Label : CONDITION
+                  18
+                  Label : LEFT
+                    24
+                  Label : RIGHT
                     26
+                Label : EXPRESSION
+                  27
+                  Label : CONDITION
+                    28
                     Label : ARGUMENT
-                      30
+                      32
                       Label : MEMBER
-                        28
+                        30
                       Label : OBJECT
-                        27
+                        29
                   Label : THEN
-                    31
+                    33
                     Label : EXPRESSION
-                      17
+                      18
                       Label : LEFT
+                        34
+                      Label : RIGHT
                         32
-                      Label : RIGHT
-                        30
                         Label : MEMBER
-                          34
+                          37
                         Label : OBJECT
-                          33
+                          35
                     Label : EXPRESSION
-                      17
+                      18
                       Label : LEFT
-                        36
+                        38
                       Label : RIGHT
-                        30
+                        32
                         Label : METHOD
-                          38
+                          42
                           Label : ARGUMENT
                             8
                             Label : INDEX
-                              41
+                              45
                             Label : VARIABLE
-                              40
+                              43
                           Label : NAME
-                            38
+                            42
                         Label : OBJECT
-                          37
+                          40
                     Label : EXPRESSION
-                      17
+                      18
                       Label : LEFT
-                        43
+                        47
                       Label : RIGHT
                         8
                         Label : INDEX
-                          45
+                          51
                         Label : VARIABLE
-                          44
+                          49
                 Label : EXPRESSION
-                  47
+                  53
                   Label : BREAK
-                    48
-            Label : EXPRESSION
-              50
-              Label : CASE
-                52
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
                     54
-                  Label : RIGHT
-                    22
-                    Label : CLASS
-                      55
-                    Label : CONSTANT
-                      57
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    59
-                  Label : RIGHT
-                    65
-                    Label : CONDITION
-                      60
-                      Label : CODE
-                        62
-                        Label : LEFT
-                          61
-                        Label : RIGHT
-                          63
-                    Label : ELSE
-                      68
-                    Label : THEN
-                      66
-                Label : EXPRESSION
-                  47
-                  Label : BREAK
-                    48
             Label : EXPRESSION
-              70
+              56
               Label : CASE
-                72
+                58
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    74
+                    60
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      75
+                      62
                     Label : CONSTANT
-                      77
+                      63
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    79
+                    64
                   Label : RIGHT
+                    72
+                    Label : CONDITION
+                      66
+                      Label : CODE
+                        69
+                        Label : LEFT
+                          67
+                        Label : RIGHT
+                          70
+                    Label : ELSE
+                      74
+                    Label : THEN
+                      73
+                Label : EXPRESSION
+                  53
+                  Label : BREAK
+                    54
+            Label : EXPRESSION
+              76
+              Label : CASE
+                78
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
                     80
+                  Label : RIGHT
+                    23
+                    Label : CLASS
+                      81
+                    Label : CONSTANT
+                      83
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    85
+                  Label : RIGHT
+                    87
                     Label : CAST
                       8
                       Label : INDEX
-                        82
-                      Label : VARIABLE
-                        81
-                Label : EXPRESSION
-                  25
-                  Label : CONDITION
-                    62
-                    Label : LEFT
-                      84
-                      Label : ARGUMENT
-                        86
-                      Label : NAME
-                        84
-                    Label : RIGHT
-                      87
-                  Label : THEN
-                    31
-                    Label : EXPRESSION
-                      17
-                      Label : LEFT
-                        88
-                      Label : RIGHT
                         89
-                        Label : CAST
-                          90
+                      Label : VARIABLE
+                        88
                 Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    91
-                  Label : RIGHT
-                    22
-                    Label : CLASS
-                      92
-                    Label : CONSTANT
+                  27
+                  Label : CONDITION
+                    69
+                    Label : LEFT
+                      91
+                      Label : ARGUMENT
+                        93
+                      Label : NAME
+                        91
+                    Label : RIGHT
                       94
+                  Label : THEN
+                    33
+                    Label : EXPRESSION
+                      18
+                      Label : LEFT
+                        96
+                      Label : RIGHT
+                        97
+                        Label : CAST
+                          98
                 Label : EXPRESSION
-                  47
-                  Label : BREAK
-                    48
-            Label : EXPRESSION
-              96
-              Label : CASE
-                98
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
                     100
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      101
+                      102
                     Label : CONSTANT
                       103
                 Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    105
-                  Label : RIGHT
-                    80
-                    Label : CAST
-                      8
-                      Label : INDEX
-                        107
-                      Label : VARIABLE
-                        106
-                Label : EXPRESSION
-                  25
-                  Label : CONDITION
-                    62
-                    Label : LEFT
-                      109
-                      Label : ARGUMENT
-                        111
-                      Label : NAME
-                        109
-                    Label : RIGHT
-                      112
-                  Label : THEN
-                    31
-                    Label : EXPRESSION
-                      17
-                      Label : LEFT
-                        113
-                      Label : RIGHT
-                        89
-                        Label : CAST
-                          114
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    115
-                  Label : RIGHT
-                    22
-                    Label : CLASS
-                      116
-                    Label : CONSTANT
-                      118
-                Label : EXPRESSION
-                  47
+                  53
                   Label : BREAK
-                    48
+                    54
             Label : EXPRESSION
-              120
+              104
               Label : CASE
-                122
+                106
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    124
+                    108
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      125
+                      110
                     Label : CONSTANT
-                      127
+                      112
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    129
+                    114
                   Label : RIGHT
-                    80
+                    87
                     Label : CAST
                       8
                       Label : INDEX
-                        131
+                        116
                       Label : VARIABLE
-                        130
+                        115
                 Label : EXPRESSION
-                  25
+                  27
                   Label : CONDITION
-                    62
+                    69
                     Label : LEFT
-                      133
+                      118
                       Label : ARGUMENT
-                        135
+                        120
                       Label : NAME
-                        133
+                        118
                     Label : RIGHT
-                      136
+                      122
                   Label : THEN
-                    31
+                    33
                     Label : EXPRESSION
-                      25
+                      18
+                      Label : LEFT
+                        123
+                      Label : RIGHT
+                        97
+                        Label : CAST
+                          125
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    127
+                  Label : RIGHT
+                    23
+                    Label : CLASS
+                      129
+                    Label : CONSTANT
+                      130
+                Label : EXPRESSION
+                  53
+                  Label : BREAK
+                    54
+            Label : EXPRESSION
+              131
+              Label : CASE
+                133
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    135
+                  Label : RIGHT
+                    23
+                    Label : CLASS
+                      137
+                    Label : CONSTANT
+                      138
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    140
+                  Label : RIGHT
+                    87
+                    Label : CAST
+                      8
+                      Label : INDEX
+                        143
+                      Label : VARIABLE
+                        141
+                Label : EXPRESSION
+                  27
+                  Label : CONDITION
+                    69
+                    Label : LEFT
+                      145
+                      Label : ARGUMENT
+                        147
+                      Label : NAME
+                        145
+                    Label : RIGHT
+                      148
+                  Label : THEN
+                    33
+                    Label : EXPRESSION
+                      27
                       Label : CONDITION
-                        17
+                        18
                         Label : LEFT
-                          137
+                          150
                         Label : RIGHT
-                          89
+                          97
                           Label : CAST
-                            138
+                            152
                       Label : ELSE
                         3
                         Label : EXPRESSION
-                          17
+                          18
                           Label : LEFT
-                            141
+                            158
                           Label : RIGHT
-                            80
+                            87
                             Label : CAST
-                              142
+                              160
                       Label : THEN
                         3
                         Label : EXPRESSION
-                          17
+                          18
                           Label : LEFT
-                            139
+                            154
                           Label : RIGHT
-                            89
+                            97
                             Label : CAST
-                              140
+                              156
                 Label : EXPRESSION
-                  47
+                  53
                   Label : BREAK
-                    48
+                    54
             Label : EXPRESSION
-              143
+              162
               Label : CASE
-                145
+                164
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    147
+                    166
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      148
+                      168
                     Label : CONSTANT
-                      150
+                      169
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    152
+                    170
                   Label : RIGHT
-                    153
+                    172
                     Label : NEW
-                      154
+                      173
                       Label : NAME
-                        154
+                        173
                       Label : ARGUMENT
                         8
                         Label : INDEX
-                          157
-                        Label : VARIABLE
-                          156
-                      Label : ARGUMENT
-                        159
-                Label : EXPRESSION
-                  30
-                  Label : METHOD
-                    161
-                    Label : ARGUMENT
-                      163
-                    Label : NAME
-                      161
-                  Label : OBJECT
-                    160
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    164
-                    Label : ARGUMENT
-                      165
-                    Label : ARGUMENT
-                      166
-                    Label : ARGUMENT
-                      167
-                    Label : ARGUMENT
-                      168
-                    Label : ARGUMENT
-                      169
-                    Label : ARGUMENT
-                      170
-                    Label : NAME
-                      164
-                  Label : RIGHT
-                    171
-                    Label : NAME
-                      171
-                    Label : ARGUMENT
-                      173
-                    Label : ARGUMENT
-                      30
-                      Label : METHOD
-                        176
-                        Label : ARGUMENT
-                          178
-                        Label : NAME
                           176
-                      Label : OBJECT
-                        175
+                        Label : VARIABLE
+                          174
+                      Label : ARGUMENT
+                        178
                 Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    180
-                  Label : RIGHT
-                    22
-                    Label : CLASS
-                      181
-                    Label : METHOD
+                  32
+                  Label : METHOD
+                    182
+                    Label : ARGUMENT
                       183
-                      Label : ARGUMENT
-                        185
-                      Label : ARGUMENT
-                        186
-                      Label : ARGUMENT
-                        187
-                      Label : ARGUMENT
-                        188
-                      Label : ARGUMENT
-                        189
-                      Label : ARGUMENT
-                        190
-                      Label : NAME
-                        183
+                    Label : NAME
+                      182
+                  Label : OBJECT
+                    180
                 Label : EXPRESSION
-                  25
-                  Label : CONDITION
-                    192
-                    Label : LEFT
-                      191
-                    Label : RIGHT
-                      193
-                      Label : ARGUMENT
-                        195
-                      Label : NAME
-                        193
-                  Label : ELSE
-                    31
-                    Label : EXPRESSION
-                      17
-                      Label : LEFT
-                        208
-                      Label : RIGHT
-                        22
-                        Label : CLASS
-                          209
-                        Label : CONSTANT
-                          211
-                  Label : THEN
-                    31
-                    Label : EXPRESSION
-                      17
-                      Label : LEFT
-                        196
-                      Label : RIGHT
+                  18
+                  Label : LEFT
+                    185
+                    Label : ARGUMENT
+                      186
+                    Label : ARGUMENT
+                      188
+                    Label : ARGUMENT
+                      190
+                    Label : ARGUMENT
+                      192
+                    Label : ARGUMENT
+                      194
+                    Label : ARGUMENT
+                      196
+                    Label : NAME
+                      185
+                  Label : RIGHT
+                    198
+                    Label : NAME
+                      198
+                    Label : ARGUMENT
+                      199
+                    Label : ARGUMENT
+                      32
+                      Label : METHOD
+                        203
+                        Label : ARGUMENT
+                          204
+                        Label : NAME
+                          203
+                      Label : OBJECT
                         201
-                        Label : CONCAT
-                          22
-                          Label : CLASS
-                            197
-                          Label : CONSTANT
-                            199
-                        Label : CONCAT
-                          202
-                        Label : CONCAT
-                          22
-                          Label : CLASS
-                            204
-                          Label : CONSTANT
-                            206
                 Label : EXPRESSION
-                  47
+                  18
+                  Label : LEFT
+                    206
+                  Label : RIGHT
+                    23
+                    Label : CLASS
+                      208
+                    Label : METHOD
+                      209
+                      Label : ARGUMENT
+                        210
+                      Label : ARGUMENT
+                        212
+                      Label : ARGUMENT
+                        214
+                      Label : ARGUMENT
+                        216
+                      Label : ARGUMENT
+                        218
+                      Label : ARGUMENT
+                        220
+                      Label : NAME
+                        209
+                Label : EXPRESSION
+                  27
+                  Label : CONDITION
+                    224
+                    Label : LEFT
+                      222
+                    Label : RIGHT
+                      225
+                      Label : ARGUMENT
+                        226
+                      Label : NAME
+                        225
+                  Label : ELSE
+                    33
+                    Label : EXPRESSION
+                      18
+                      Label : LEFT
+                        237
+                      Label : RIGHT
+                        23
+                        Label : CLASS
+                          239
+                        Label : CONSTANT
+                          240
+                  Label : THEN
+                    33
+                    Label : EXPRESSION
+                      18
+                      Label : LEFT
+                        228
+                      Label : RIGHT
+                        232
+                        Label : CONCAT
+                          23
+                          Label : CLASS
+                            230
+                          Label : CONSTANT
+                            231
+                        Label : CONCAT
+                          233
+                        Label : CONCAT
+                          23
+                          Label : CLASS
+                            235
+                          Label : CONSTANT
+                            236
+                Label : EXPRESSION
+                  53
                   Label : BREAK
-                    48
+                    54
             Label : EXPRESSION
-              213
+              241
               Label : CASE
-                215
+                243
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    217
+                    245
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      218
+                      247
                     Label : CONSTANT
-                      220
+                      248
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    222
+                    249
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      223
+                      251
                     Label : METHOD
-                      225
+                      252
                       Label : ARGUMENT
-                        227
+                        253
                         Label : ARGUMENT
-                          201
+                          232
                           Label : CONCAT
-                            229
+                            254
                           Label : CONCAT
-                            231
+                            256
                             Label : NAME
-                              231
+                              256
                             Label : ARGUMENT
-                              233
+                              257
                             Label : ARGUMENT
-                              235
+                              259
                               Label : NAME
-                                235
+                                259
                               Label : ARGUMENT
                                 8
                                 Label : INDEX
-                                  238
+                                  262
                                 Label : VARIABLE
-                                  237
+                                  260
                               Label : ARGUMENT
-                                240
+                                264
                         Label : NAME
-                          227
+                          253
                       Label : NAME
-                        225
+                        252
                 Label : EXPRESSION
-                  17
+                  18
                   Label : LEFT
-                    242
+                    266
                   Label : RIGHT
-                    22
+                    23
                     Label : CLASS
-                      243
+                      268
                     Label : CONSTANT
-                      245
+                      269
                 Label : EXPRESSION
-                  47
+                  53
                   Label : BREAK
-                    48
+                    54
           Label : CONDITION
             8
             Label : INDEX

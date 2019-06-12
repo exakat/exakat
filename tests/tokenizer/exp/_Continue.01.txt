@@ -1,8 +1,40 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -12,19 +44,19 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      15
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,11 +66,11 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CONTINUE
-                11
+                12
           Label : SOURCE
             6
           Label : VALUE
@@ -46,32 +78,32 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CONTINUE
-                14
+                16
           Label : SOURCE
-            13
+            14
           Label : VALUE
             8
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
               5
               Label : BLOCK
-                9
+                10
                 Label : EXPRESSION
-                  10
+                  11
                   Label : CONTINUE
-                    16
+                    19
               Label : SOURCE
                 6
               Label : VALUE
                 8
           Label : SOURCE
-            15
+            17
           Label : VALUE
             8

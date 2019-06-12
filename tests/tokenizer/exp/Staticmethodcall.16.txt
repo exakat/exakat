@@ -1,8 +1,18 @@
 test
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFAULT
+      21
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    20
+    19
+    Label : DEFAULT
+      21
     Label : DEFINITION
       19
   Label : FILE
@@ -26,7 +36,7 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : DEFINITION
-            25
+            24
           Label : METHOD
             10
             Label : ARGUMENT
@@ -50,15 +60,15 @@ Label : PROJECT
           Label : ARGUMENT
             6
         Label : EXPRESSION
-          21
+          20
           Label : LEFT
             19
           Label : RIGHT
-            22
+            21
         Label : EXPRESSION
-          23
+          22
           Label : NEW
-            24
+            23
             Label : CLASS
               6
             Label : METHOD
@@ -68,11 +78,11 @@ Label : PROJECT
               Label : NAME
                 19
         Label : EXPRESSION
-          23
+          22
           Label : NEW
-            24
+            23
             Label : CLASS
-              25
+              24
             Label : METHOD
               19
               Label : ARGUMENT

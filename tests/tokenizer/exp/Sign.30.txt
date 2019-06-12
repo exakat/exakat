@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    12
+    23
     Label : DEFINITION
-      22
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,6 +74,6 @@ Label : PROJECT
             Label : RIGHT
               14
               Label : MEMBER
-                23
+                25
               Label : OBJECT
-                22
+                23

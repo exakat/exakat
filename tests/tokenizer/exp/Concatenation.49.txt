@@ -1,8 +1,34 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      10
+      Label : CONCAT
+        8
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
+      Label : CONCAT
+        15
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      10
+      Label : CONCAT
+        8
+      Label : CONCAT
+        11
+      Label : CONCAT
+        13
+      Label : CONCAT
+        15
     Label : DEFINITION
       5
   Label : FILE

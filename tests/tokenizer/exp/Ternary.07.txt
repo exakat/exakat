@@ -1,12 +1,48 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      9
+      Label : CONDITION
+        8
+      Label : ELSE
+        14
+        Label : MEMBER
+          13
+        Label : OBJECT
+          11
+      Label : THEN
+        10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      9
+      Label : CONDITION
+        8
+      Label : ELSE
+        14
+        Label : MEMBER
+          13
+        Label : OBJECT
+          11
+      Label : THEN
+        10
     Label : DEFINITION
       5
   Label : FILE
@@ -24,9 +60,9 @@ Label : PROJECT
             Label : CONDITION
               8
             Label : ELSE
-              13
+              14
               Label : MEMBER
-                12
+                13
               Label : OBJECT
                 11
             Label : THEN

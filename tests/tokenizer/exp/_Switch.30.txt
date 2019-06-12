@@ -1,34 +1,84 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFAULT
+      18
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFAULT
+      35
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    15
+    Label : DEFAULT
+      18
     Label : DEFINITION
       15
   Label : DEFINITION
-    7
+    25
     Label : DEFINITION
-      24
+      25
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      27
+      29
   Label : DEFINITION
-    7
+    33
+    Label : DEFAULT
+      35
     Label : DEFINITION
-      30
+      33
   Label : DEFINITION
-    7
+    40
     Label : DEFINITION
-      36
+      40
   Label : DEFINITION
-    7
+    43
     Label : DEFINITION
-      38
+      43
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,78 +106,78 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  16
+                  17
                   Label : LEFT
                     15
                   Label : RIGHT
-                    17
+                    18
                 Label : EXPRESSION
-                  18
+                  19
                   Label : CONDITION
-                    23
+                    24
                     Label : CLASS
-                      19
+                      20
                     Label : METHOD
-                      21
+                      22
                       Label : ARGUMENT
+                        23
+                      Label : NAME
                         22
-                      Label : NAME
-                        21
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      25
+                      27
                       Label : LEFT
-                        24
+                        25
                       Label : RIGHT
-                        26
+                        28
                 Label : EXPRESSION
                   11
                   Label : RETURN
-                    27
+                    29
             Label : EXPRESSION
-              28
+              31
               Label : CASE
-                29
+                32
               Label : CODE
                 3
                 Label : EXPRESSION
-                  16
+                  17
                   Label : LEFT
-                    30
+                    33
                   Label : RIGHT
-                    31
+                    35
                 Label : EXPRESSION
-                  18
+                  19
                   Label : CONDITION
-                    23
+                    24
                     Label : CLASS
-                      32
+                      36
                     Label : METHOD
-                      34
+                      38
                       Label : ARGUMENT
-                        35
+                        39
                       Label : NAME
-                        34
+                        38
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      25
+                      27
                       Label : LEFT
-                        36
+                        40
                       Label : RIGHT
-                        37
+                        42
                 Label : EXPRESSION
                   11
                   Label : RETURN
-                    38
+                    43
             Label : EXPRESSION
-              39
+              45
               Label : CODE
                 3
                 Label : EXPRESSION
                   11
                   Label : RETURN
-                    40
+                    46
           Label : CONDITION
             6

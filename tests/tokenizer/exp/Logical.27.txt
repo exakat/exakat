@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -22,10 +34,10 @@ Label : PROJECT
             Label : NOT
               6
           Label : RIGHT
-            12
+            13
             Label : POSTPLUSPLUS
-              10
+              11
               Label : INDEX
-                11
+                12
               Label : VARIABLE
                 9
