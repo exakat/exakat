@@ -32,7 +32,22 @@ class DefinedProperty extends Analyzer {
         // defined in local class (private included)
         $this->atomIs('Member')
              ->inIs('DEFINITION')
-             ->atomIsNot('Virtualproperty')
+             ->atomIs('Propertydefinition')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Member')
+             ->inIs('DEFINITION')
+             ->atomIs('Virtualproperty')
+             ->outIs('OVERWRITE')
+             ->atomIs('Propertydefinition')
+             ->not(
+                $this->side()
+                     ->inIs('PPP')
+                     ->is('visibility', 'private')
+                     ->inIs('PPP')
+                     ->atomIs('Class')
+             )
              ->back('first');
         $this->prepareQuery();
     }
