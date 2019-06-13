@@ -32,7 +32,19 @@ class FunctionDefinition extends Analyzer {
         $fullnspath = makeFullNsPath($this->functions);
         
         $this->atomIs('Function')
-             ->fullnspathIs($fullnspath);
+             ->fullnspathIs($fullnspath)
+             ->not(
+                $this->side()
+                     ->inIs('EXPRESSION')
+                     ->inIs(array('THEN', 'ELSE'))
+                     ->atomIs('Ifthen')
+                     ->outIs('CONDITION')
+                     ->filter(
+                        $this->side()
+                             ->atomInside('Functioncall')
+                             ->fullnspathIs('\\function_exists')
+                     )
+             );
         $this->prepareQuery();
     }
 }

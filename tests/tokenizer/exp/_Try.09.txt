@@ -1,34 +1,76 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    8
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      15
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    8
+    17
     Label : DEFINITION
       17
   Label : DEFINITION
-    8
+    19
     Label : DEFINITION
-      18
+      19
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -50,24 +92,24 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : POSTPLUSPLUS
-                11
+                12
           Label : CATCH
-            12
+            14
             Label : BLOCK
               6
               Label : EXPRESSION
                 9
                 Label : POSTPLUSPLUS
-                  16
+                  19
               Label : EXPRESSION
                 9
                 Label : POSTPLUSPLUS
-                  17
+                  21
               Label : EXPRESSION
                 9
                 Label : POSTPLUSPLUS
-                  18
+                  23
             Label : CLASS
-              13
-            Label : VARIABLE
               15
+            Label : VARIABLE
+              17

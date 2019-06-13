@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      16
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,18 +48,18 @@ Label : PROJECT
               Label : LEFT
                 9
               Label : RIGHT
-                12
+                13
                 Label : INDEX
-                  13
+                  14
                   Label : ARGUMENT
-                    14
+                    15
                   Label : NAME
-                    13
+                    14
                 Label : VARIABLE
                   11
         Label : EXPRESSION
-          15
+          16
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            16
+            17

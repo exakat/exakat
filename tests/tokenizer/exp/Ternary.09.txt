@@ -1,12 +1,64 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      9
+      Label : CONDITION
+        8
+      Label : ELSE
+        13
+        Label : INDEX
+          16
+        Label : VARIABLE
+          13
+          Label : INDEX
+            15
+          Label : VARIABLE
+            13
+            Label : INDEX
+              14
+            Label : VARIABLE
+              11
+      Label : THEN
+        10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      9
+      Label : CONDITION
+        8
+      Label : ELSE
+        13
+        Label : INDEX
+          16
+        Label : VARIABLE
+          13
+          Label : INDEX
+            15
+          Label : VARIABLE
+            13
+            Label : INDEX
+              14
+            Label : VARIABLE
+              11
+      Label : THEN
+        10
     Label : DEFINITION
       5
   Label : FILE
@@ -24,17 +76,17 @@ Label : PROJECT
             Label : CONDITION
               8
             Label : ELSE
-              12
+              13
               Label : INDEX
-                15
+                16
               Label : VARIABLE
-                12
+                13
                 Label : INDEX
-                  14
+                  15
                 Label : VARIABLE
-                  12
+                  13
                   Label : INDEX
-                    13
+                    14
                   Label : VARIABLE
                     11
             Label : THEN

@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 10 Jun 2019 20:12:00 +0000
-.. comment: Generation hash : 69e7359ba863472429a148a662f319ce8bbd8c2e
+.. comment: Generation date : Tue, 11 Jun 2019 07:53:51 +0000
+.. comment: Generation hash : 303a58f84c67212fdf7693bb932e4bffc78360c4
 
 
 .. _analyze:

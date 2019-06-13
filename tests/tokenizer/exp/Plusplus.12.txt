@@ -1,14 +1,30 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    9
     Label : DEFINITION
       9
     Label : DEFINITION
       9
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -26,13 +42,13 @@ Label : PROJECT
             Label : PREPLUSPLUS
               6
           Label : RIGHT
-            10
+            11
             Label : POSTPLUSPLUS
               9
         Label : EXPRESSION
           8
           Label : LEFT
-            10
+            11
             Label : POSTPLUSPLUS
               6
           Label : RIGHT

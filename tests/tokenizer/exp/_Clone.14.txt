@@ -1,22 +1,134 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      15
+      Label : CONDITION
+        8
+        Label : ARGUMENT
+          13
+          Label : INDEX
+            14
+          Label : VARIABLE
+            12
+            Label : MEMBER
+              11
+            Label : OBJECT
+              9
+      Label : ELSE
+        12
+        Label : METHOD
+          25
+          Label : ARGUMENT
+            26
+          Label : NAME
+            25
+        Label : OBJECT
+          12
+          Label : METHOD
+            22
+            Label : ARGUMENT
+              23
+            Label : NAME
+              22
+          Label : OBJECT
+            20
+      Label : THEN
+        16
+        Label : CLONE
+          13
+          Label : INDEX
+            19
+          Label : VARIABLE
+            12
+            Label : MEMBER
+              18
+            Label : OBJECT
+              17
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      15
+      Label : CONDITION
+        8
+        Label : ARGUMENT
+          13
+          Label : INDEX
+            14
+          Label : VARIABLE
+            12
+            Label : MEMBER
+              11
+            Label : OBJECT
+              9
+      Label : ELSE
+        12
+        Label : METHOD
+          25
+          Label : ARGUMENT
+            26
+          Label : NAME
+            25
+        Label : OBJECT
+          12
+          Label : METHOD
+            22
+            Label : ARGUMENT
+              23
+            Label : NAME
+              22
+          Label : OBJECT
+            20
+      Label : THEN
+        16
+        Label : CLONE
+          13
+          Label : INDEX
+            19
+          Label : VARIABLE
+            12
+            Label : MEMBER
+              18
+            Label : OBJECT
+              17
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    6
+    20
     Label : DEFINITION
-      19
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,46 +140,46 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            14
+            15
             Label : CONDITION
               8
               Label : ARGUMENT
-                12
+                13
                 Label : INDEX
-                  13
+                  14
                 Label : VARIABLE
-                  11
+                  12
                   Label : MEMBER
-                    10
+                    11
                   Label : OBJECT
                     9
             Label : ELSE
-              11
+              12
               Label : METHOD
-                23
+                25
                 Label : ARGUMENT
-                  24
+                  26
                 Label : NAME
-                  23
+                  25
               Label : OBJECT
-                11
-                Label : METHOD
-                  20
-                  Label : ARGUMENT
-                    21
-                  Label : NAME
-                    20
-                Label : OBJECT
-                  19
-            Label : THEN
-              15
-              Label : CLONE
                 12
+                Label : METHOD
+                  22
+                  Label : ARGUMENT
+                    23
+                  Label : NAME
+                    22
+                Label : OBJECT
+                  20
+            Label : THEN
+              16
+              Label : CLONE
+                13
                 Label : INDEX
-                  18
+                  19
                 Label : VARIABLE
-                  11
+                  12
                   Label : MEMBER
-                    17
+                    18
                   Label : OBJECT
-                    16
+                    17

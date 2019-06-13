@@ -1,12 +1,56 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFAULT
+      12
+      Label : CLASS
+        15
+      Label : METHOD
+        17
+        Label : ARGUMENT
+          18
+        Label : NAME
+          17
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      12
+      Label : CLASS
+        8
+      Label : CONSTANT
+        10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    13
+    Label : DEFAULT
+      12
+      Label : CLASS
+        15
+      Label : METHOD
+        17
+        Label : ARGUMENT
+          18
+        Label : NAME
+          17
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      12
+      Label : CLASS
+        8
+      Label : CONSTANT
+        10
     Label : DEFINITION
       5
   Label : FILE
@@ -32,10 +76,10 @@ Label : PROJECT
           Label : RIGHT
             12
             Label : CLASS
-              14
+              15
             Label : METHOD
-              16
+              17
               Label : ARGUMENT
-                17
+                18
               Label : NAME
-                16
+                17

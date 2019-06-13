@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
-      12
+      13
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      15
+      17
   Label : DEFINITION
-    6
+    19
     Label : DEFINITION
-      16
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,12 +70,12 @@ Label : PROJECT
             Label : ARGUMENT
               11
             Label : ARGUMENT
-              13
-              Label : LEFT
-                12
-              Label : RIGHT
-                14
-            Label : ARGUMENT
               15
+              Label : LEFT
+                13
+              Label : RIGHT
+                16
             Label : ARGUMENT
-              16
+              17
+            Label : ARGUMENT
+              19

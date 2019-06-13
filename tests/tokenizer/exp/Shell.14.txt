@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
-      12
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,6 +52,6 @@ Label : PROJECT
           Label : CONCAT
             11
         Label : EXPRESSION
-          13
+          15
           Label : POSTPLUSPLUS
-            12
+            13

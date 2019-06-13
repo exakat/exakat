@@ -1,8 +1,40 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -16,7 +48,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -36,7 +68,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -48,15 +80,15 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -68,15 +100,15 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -90,15 +122,15 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -110,15 +142,15 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -132,15 +164,15 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
             5
             Label : ARGUMENT
@@ -156,10 +188,10 @@ Label : PROJECT
             Label : NAME
               5
           Label : RIGHT
-            12
+            13
             Label : NAME
-              12
-            Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : ARGUMENT
+              15

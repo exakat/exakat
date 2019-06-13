@@ -1,34 +1,82 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      31
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFAULT
+      34
+    Label : DEFINITION
+      32
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
+    Label : DEFAULT
+      31
     Label : DEFINITION
       8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
-      20
+      22
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      25
-  Label : DEFINITION
-    7
+    28
     Label : DEFINITION
       28
+  Label : DEFINITION
+    32
+    Label : DEFAULT
+      34
+    Label : DEFINITION
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,61 +86,61 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CONDITION
-                11
+                12
                 Label : NOT
-                  12
+                  13
                   Label : ARGUMENT
-                    14
+                    16
                     Label : INDEX
-                      15
+                      17
                     Label : VARIABLE
-                      13
+                      14
               Label : THEN
                 3
                 Label : EXPRESSION
-                  16
+                  18
                   Label : CONTINUE
-                    17
-            Label : EXPRESSION
-              19
-              Label : BLOCK
-                9
-                Label : EXPRESSION
-                  21
-                  Label : POSTPLUSPLUS
-                    20
-              Label : CATCH
-                22
-                Label : BLOCK
-                  9
-                  Label : EXPRESSION
-                    16
-                    Label : CONTINUE
-                      17
-                Label : CLASS
-                  23
-                Label : VARIABLE
-                  25
+                    19
             Label : EXPRESSION
               21
+              Label : BLOCK
+                10
+                Label : EXPRESSION
+                  24
+                  Label : POSTPLUSPLUS
+                    22
+              Label : CATCH
+                25
+                Label : BLOCK
+                  10
+                  Label : EXPRESSION
+                    18
+                    Label : CONTINUE
+                      19
+                Label : CLASS
+                  26
+                Label : VARIABLE
+                  28
+            Label : EXPRESSION
+              24
               Label : POSTPLUSPLUS
                 6
             Label : EXPRESSION
-              26
+              30
               Label : LEFT
                 8
               Label : RIGHT
-                27
+                31
             Label : EXPRESSION
-              26
+              30
               Label : LEFT
-                28
+                32
               Label : RIGHT
-                29
+                34
           Label : SOURCE
             6
           Label : VALUE

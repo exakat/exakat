@@ -1,28 +1,72 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      13
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFAULT
+      18
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFAULT
+      21
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    10
+    Label : DEFAULT
+      13
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
-      12
+      13
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      14
-  Label : DEFINITION
-    7
+    16
+    Label : DEFAULT
+      18
     Label : DEFINITION
       16
+  Label : DEFINITION
+    19
+    Label : DEFAULT
+      21
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,11 +84,11 @@ Label : PROJECT
           Label : ELSE
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
-                16
+                19
               Label : RIGHT
-                17
+                21
           Label : THEN
             3
             Label : EXPRESSION
@@ -52,18 +96,18 @@ Label : PROJECT
               Label : CONDITION
                 6
               Label : ELSE
-                13
+                15
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    14
+                    16
                   Label : RIGHT
-                    15
+                    18
               Label : THEN
                 3
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
                     10
                   Label : RIGHT
-                    12
+                    13

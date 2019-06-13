@@ -1,12 +1,66 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFAULT
+      16
+      Label : CONDITION
+        11
+      Label : ELSE
+        6
+        Label : ARGUMENT
+          9
+        Label : BLOCK
+          8
+          Label : EXPRESSION
+            9
+      Label : THEN
+        6
+        Label : ARGUMENT
+          9
+        Label : BLOCK
+          8
+          Label : EXPRESSION
+            9
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    13
+    Label : DEFAULT
+      16
+      Label : CONDITION
+        11
+      Label : ELSE
+        6
+        Label : ARGUMENT
+          9
+        Label : BLOCK
+          8
+          Label : EXPRESSION
+            9
+      Label : THEN
+        6
+        Label : ARGUMENT
+          9
+        Label : BLOCK
+          8
+          Label : EXPRESSION
+            9
     Label : DEFINITION
       13
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -34,11 +88,11 @@ Label : PROJECT
           Label : ARGUMENT
             11
         Label : EXPRESSION
-          14
+          15
           Label : LEFT
             13
           Label : RIGHT
-            15
+            16
             Label : CONDITION
               11
             Label : ELSE

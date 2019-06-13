@@ -1,8 +1,48 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFAULT
+      28
+    Label : DEFINITION
+      26
+    Label : DEFINITION
+      26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -10,7 +50,9 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    26
+    Label : DEFAULT
+      28
     Label : DEFINITION
       26
     Label : DEFINITION
@@ -18,17 +60,17 @@ Label : PROJECT
     Label : DEFINITION
       26
   Label : DEFINITION
-    7
+    30
     Label : DEFINITION
       30
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      32
-  Label : DEFINITION
-    7
+    33
     Label : DEFINITION
       33
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -78,9 +120,9 @@ Label : PROJECT
           Label : ELSE
             3
             Label : EXPRESSION
-              31
+              32
               Label : POSTPLUSPLUS
-                33
+                34
           Label : THEN
             3
             Label : EXPRESSION
@@ -88,9 +130,9 @@ Label : PROJECT
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  31
+                  32
                   Label : POSTPLUSPLUS
-                    32
+                    33
               Label : FINAL
                 3
                 Label : EXPRESSION
@@ -102,7 +144,7 @@ Label : PROJECT
               Label : INCREMENT
                 3
                 Label : EXPRESSION
-                  31
+                  32
                   Label : POSTPLUSPLUS
                     26
               Label : INIT

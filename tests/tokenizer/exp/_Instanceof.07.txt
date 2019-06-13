@@ -1,38 +1,86 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  37
+  Label : DEFINITION
+    37
+    Label : DEFINITION
+      37
+Label : GLOBAL
+  42
+  Label : DEFINITION
+    42
+    Label : DEFINITION
+      42
+Label : GLOBAL
+  47
+  Label : DEFINITION
+    47
+    Label : DEFINITION
+      47
+Label : GLOBAL
+  53
+  Label : DEFINITION
+    53
+    Label : DEFINITION
+      53
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    12
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    12
+    23
     Label : DEFINITION
       23
   Label : DEFINITION
-    12
+    33
     Label : DEFINITION
-      32
+      33
   Label : DEFINITION
-    12
+    37
     Label : DEFINITION
-      36
+      37
   Label : DEFINITION
-    12
+    42
     Label : DEFINITION
-      41
+      42
   Label : DEFINITION
-    12
+    47
     Label : DEFINITION
-      46
+      47
   Label : DEFINITION
-    12
+    53
     Label : DEFINITION
-      51
+      53
   Label : FILE
     3
     Label : EXPRESSION
@@ -66,63 +114,63 @@ Label : PROJECT
               Label : CASE
                 13
                 Label : CLASS
-                  24
+                  25
                 Label : VARIABLE
                   23
               Label : CODE
                 3
             Label : EXPRESSION
-              26
+              27
               Label : CASE
-                33
+                34
                 Label : CLASS
-                  28
+                  29
                 Label : METHOD
-                  30
+                  31
                   Label : ARGUMENT
-                    32
+                    33
                   Label : NAME
-                    30
+                    31
               Label : CODE
                 3
             Label : EXPRESSION
-              34
+              35
               Label : CASE
                 13
                 Label : CLASS
+                  38
+                Label : VARIABLE
                   37
-                Label : VARIABLE
-                  36
               Label : CODE
                 3
             Label : EXPRESSION
-              39
+              40
               Label : CASE
                 13
                 Label : CLASS
+                  43
+                Label : VARIABLE
                   42
-                Label : VARIABLE
-                  41
               Label : CODE
                 3
             Label : EXPRESSION
-              44
+              45
               Label : CASE
                 13
                 Label : CLASS
+                  49
+                Label : VARIABLE
                   47
-                Label : VARIABLE
-                  46
               Label : CODE
                 3
             Label : EXPRESSION
-              49
+              51
               Label : CASE
                 13
                 Label : CLASS
-                  52
+                  55
                 Label : VARIABLE
-                  51
+                  53
               Label : CODE
                 3
                 Label : EXPRESSION

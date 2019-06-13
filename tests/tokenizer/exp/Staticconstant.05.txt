@@ -1,12 +1,48 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      11
+      Label : CLASS
+        8
+      Label : CONSTANT
+        14
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      11
+      Label : CLASS
+        8
+      Label : CONSTANT
+        10
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      11
+      Label : CLASS
+        8
+      Label : CONSTANT
+        14
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      11
+      Label : CLASS
+        8
+      Label : CONSTANT
+        10
     Label : DEFINITION
       5
   Label : FILE
@@ -34,4 +70,4 @@ Label : PROJECT
             Label : CLASS
               8
             Label : CONSTANT
-              13
+              14

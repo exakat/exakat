@@ -1,14 +1,28 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -20,13 +34,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            11
+            12
             Label : EXPRESSION
-              12
+              13
               Label : LEFT
                 10
               Label : RIGHT
-                13
+                14
           Label : SOURCE
             9
             Label : MEMBER

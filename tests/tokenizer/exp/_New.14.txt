@@ -1,12 +1,26 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -20,9 +34,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NEW
-            17
+            18
             Label : INDEX
-              18
+              19
             Label : VARIABLE
               8
               Label : INDEX
@@ -36,7 +50,7 @@ Label : PROJECT
                   Label : VARIABLE
                     6
                 Label : ARGUMENT
-                  16
+                  17
                   Label : MEMBER
                     14
                   Label : OBJECT

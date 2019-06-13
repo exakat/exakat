@@ -1,26 +1,64 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFAULT
+      19
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    6
+    15
     Label : DEFINITION
-      13
+      15
   Label : DEFINITION
-    6
+    17
+    Label : DEFAULT
+      19
     Label : DEFINITION
-      14
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -36,13 +74,13 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : LEFT
-            10
+            11
             Label : INDEX
-              12
+              14
               Label : LEFT
-                11
+                12
               Label : RIGHT
-                13
+                15
             Label : VARIABLE
               9
           Label : RIGHT
@@ -50,6 +88,6 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : LEFT
-            14
+            17
           Label : RIGHT
-            15
+            19

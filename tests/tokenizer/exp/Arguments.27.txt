@@ -1,34 +1,76 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  40
+  Label : DEFINITION
+    40
+    Label : DEFINITION
+      40
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    7
+    19
     Label : DEFINITION
       19
   Label : DEFINITION
-    7
+    24
     Label : DEFINITION
       24
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      28
+      29
   Label : DEFINITION
-    7
+    40
     Label : DEFINITION
-      39
+      40
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,7 +82,7 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              14
+              15
             Label : EXPRESSION
               16
               Label : ARGUMENT
@@ -52,7 +94,7 @@ Label : PROJECT
               Label : ARGUMENT
                 20
               Label : ARGUMENT
-                25
+                26
                 Label : CONDITION
                   22
                   Label : ARGUMENT
@@ -60,43 +102,45 @@ Label : PROJECT
                   Label : NAME
                     22
                 Label : ELSE
-                  29
+                  30
                   Label : ARGUMENT
-                    31
+                    32
                   Label : ARGUMENT
-                    33
+                    34
                   Label : ARGUMENT
-                    45
+                    46
                     Label : CLASS
-                      35
+                      36
                     Label : METHOD
-                      37
+                      38
                       Label : NAME
-                        37
-                      Label : ARGUMENT
-                        39
+                        38
                       Label : ARGUMENT
                         40
+                      Label : ARGUMENT
+                        41
                         Label : ARGUMENT
-                          12
+                          47
                           Label : INDEX
-                            45
-                            Label : CLASS
-                              41
-                            Label : CONSTANT
-                              43
-                          Label : VALUE
                             46
+                            Label : CLASS
+                              42
+                            Label : CONSTANT
+                              44
+                          Label : VALUE
+                            48
                   Label : NAME
-                    29
+                    30
                 Label : THEN
-                  26
+                  27
                   Label : ARGUMENT
-                    28
+                    29
                   Label : NAME
-                    26
+                    27
             Label : EXPRESSION
-              46
+              48
+          Label : INDEX
+            11
           Label : SOURCE
             8
             Label : INDEX
@@ -104,8 +148,4 @@ Label : PROJECT
             Label : VARIABLE
               6
           Label : VALUE
-            12
-            Label : INDEX
-              11
-            Label : VALUE
-              13
+            13

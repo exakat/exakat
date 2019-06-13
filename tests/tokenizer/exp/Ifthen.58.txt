@@ -1,8 +1,48 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -12,7 +52,7 @@ Label : PROJECT
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -24,15 +64,15 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      15
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -84,7 +124,7 @@ Label : PROJECT
               Label : LEFT
                 11
               Label : RIGHT
-                12
+                13
             Label : ELSE
               3
             Label : THEN
@@ -106,15 +146,15 @@ Label : PROJECT
               Label : LEFT
                 11
               Label : RIGHT
-                12
+                13
             Label : ELSE
               10
               Label : CONDITION
                 8
                 Label : LEFT
-                  13
-                Label : RIGHT
                   14
+                Label : RIGHT
+                  16
               Label : ELSE
                 3
               Label : THEN
@@ -138,23 +178,23 @@ Label : PROJECT
               Label : LEFT
                 11
               Label : RIGHT
-                12
+                13
             Label : ELSE
               10
               Label : CONDITION
                 8
                 Label : LEFT
-                  13
-                Label : RIGHT
                   14
+                Label : RIGHT
+                  16
               Label : ELSE
                 10
                 Label : CONDITION
                   8
                   Label : LEFT
-                    15
+                    17
                   Label : RIGHT
-                    16
+                    19
                 Label : ELSE
                   3
                 Label : THEN

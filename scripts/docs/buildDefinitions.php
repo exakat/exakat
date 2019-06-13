@@ -332,7 +332,7 @@ SQL
             $ini = parse_ini_file($file, true);
             if (isset($ini['parameter1']) && $row['categories'] != 'Appinfo') {
                 $this->parametered_analysis .= $this->rst_link($ini['name'], $this->rst_anchor($ini['name'])).PHP_EOL.
-'  + '.$ini['parameter1']['name'].' : '.$ini['parameter1']['default'].PHP_EOL.
+'  + '.$ini['parameter1']['name'].' : '.$ini['parameter1']['default'].PHP_EOL.PHP_EOL.
 '    + '.$ini['parameter1']['description'].PHP_EOL;
                 if (isset($ini['parameter2'])) {
                 $this->parametered_analysis .= 
@@ -1110,6 +1110,10 @@ GLOSSARY;
                 if (!empty($docs['extension_page'])) {
                     $doc .= "* **Extension page** : `$docs[extension_page] <$docs[extension_page]>`_\n";
                 }
+                if (!empty($docs['versions'])) {
+                    $versions = preg_replace('/^.*?(\d+\.\d+)(.*)$/', '$1 ($0)', $docs['versions']);
+                    $doc .= "* **Supported versions** : ".implode(', ', $versions)."\n";
+                }
                 $doc .= "\n";
             }
         } else {
@@ -1181,7 +1185,7 @@ GLOSSARY;
             if (file_exists("./human/en/{$m[1]}.ini")) {
                 $ini = parse_ini_file("./human/en/{$m[1]}.ini", true);
 
-                return " :ref:`".$this->rst_anchor($ini['name'])."`$r[2] ";
+                return " :ref:`".$this->rst_anchor($ini['name'])."`$m[2] ";
             } else {
                 return $m[0];
             }

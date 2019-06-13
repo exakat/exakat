@@ -1,22 +1,90 @@
 test
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFAULT
+      20
+      Label : ARGUMENT
+        23
+        Label : INDEX
+          21
+        Label : VALUE
+          24
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFAULT
+      10
+      Label : METHOD
+        28
+        Label : ARGUMENT
+          10
+          Label : MEMBER
+            32
+          Label : OBJECT
+            30
+        Label : NAME
+          28
+      Label : OBJECT
+        7
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
 Label : PROJECT
   1
   Label : DEFINITION
-    16
+    18
+    Label : DEFAULT
+      20
+      Label : ARGUMENT
+        23
+        Label : INDEX
+          21
+        Label : VALUE
+          24
     Label : DEFINITION
       18
   Label : DEFINITION
-    16
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    16
+    26
+    Label : DEFAULT
+      10
+      Label : METHOD
+        28
+        Label : ARGUMENT
+          10
+          Label : MEMBER
+            32
+          Label : OBJECT
+            30
+        Label : NAME
+          28
+      Label : OBJECT
+        7
     Label : DEFINITION
       26
   Label : DEFINITION
-    16
+    30
     Label : DEFINITION
-      29
+      30
   Label : FILE
     3
     Label : EXPRESSION
@@ -62,15 +130,15 @@ Label : PROJECT
                 Label : RIGHT
                   10
                   Label : METHOD
-                    27
+                    28
                     Label : ARGUMENT
                       10
                       Label : MEMBER
-                        30
+                        32
                       Label : OBJECT
-                        29
+                        30
                     Label : NAME
-                      27
+                      28
                   Label : OBJECT
                     7
           Label : THEN

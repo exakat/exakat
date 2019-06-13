@@ -1,26 +1,112 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      10
+      Label : CONDITION
+        8
+      Label : ELSE
+        23
+        Label : CLASS
+          18
+          Label : INDEX
+            19
+          Label : VARIABLE
+            16
+            Label : INDEX
+              17
+            Label : VARIABLE
+              14
+        Label : METHOD
+          20
+          Label : ARGUMENT
+            21
+          Label : NAME
+            20
+      Label : THEN
+        11
+        Label : ARGUMENT
+          12
+        Label : NAME
+          11
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      10
+      Label : CONDITION
+        8
+      Label : ELSE
+        23
+        Label : CLASS
+          18
+          Label : INDEX
+            19
+          Label : VARIABLE
+            16
+            Label : INDEX
+              17
+            Label : VARIABLE
+              14
+        Label : METHOD
+          20
+          Label : ARGUMENT
+            21
+          Label : NAME
+            20
+      Label : THEN
+        11
+        Label : ARGUMENT
+          12
+        Label : NAME
+          11
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      18
+      14
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,30 +118,30 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            9
+            10
             Label : CONDITION
               8
             Label : ELSE
-              19
+              23
               Label : CLASS
-                15
+                18
                 Label : INDEX
-                  16
+                  19
                 Label : VARIABLE
-                  13
+                  16
                   Label : INDEX
-                    14
+                    17
                   Label : VARIABLE
-                    12
+                    14
               Label : METHOD
-                17
+                20
                 Label : ARGUMENT
-                  18
+                  21
                 Label : NAME
-                  17
+                  20
             Label : THEN
-              10
+              11
               Label : ARGUMENT
-                11
+                12
               Label : NAME
-                10
+                11

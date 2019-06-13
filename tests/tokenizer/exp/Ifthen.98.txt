@@ -1,50 +1,116 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    7
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      13
-  Label : DEFINITION
-    7
+    14
     Label : DEFINITION
       14
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      15
-  Label : DEFINITION
-    7
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      17
-  Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    20
     Label : DEFINITION
-      19
+      20
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,51 +122,51 @@ Label : PROJECT
           Label : CONDITION
             6
           Label : ELSE
-            10
+            11
             Label : CONDITION
-              11
+              12
             Label : ELSE
-              10
+              11
               Label : CONDITION
-                13
+                16
               Label : ELSE
-                10
+                11
                 Label : CONDITION
-                  15
+                  20
                 Label : ELSE
-                  10
+                  11
                   Label : CONDITION
-                    17
+                    24
                   Label : ELSE
                     3
                     Label : EXPRESSION
                       8
                       Label : EXPRESSION
-                        19
+                        28
                   Label : THEN
                     3
                     Label : EXPRESSION
                       8
                       Label : EXPRESSION
-                        18
+                        26
                 Label : THEN
                   3
                   Label : EXPRESSION
                     8
                     Label : EXPRESSION
-                      16
+                      22
               Label : THEN
                 3
                 Label : EXPRESSION
                   8
                   Label : EXPRESSION
-                    14
+                    18
             Label : THEN
               3
               Label : EXPRESSION
                 8
                 Label : EXPRESSION
-                  12
+                  14
           Label : THEN
             3
             Label : EXPRESSION

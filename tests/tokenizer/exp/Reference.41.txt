@@ -1,8 +1,26 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    15
     Label : DEFINITION
       15
     Label : DEFINITION
@@ -10,7 +28,7 @@ Label : PROJECT
     Label : DEFINITION
       15
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -52,7 +70,7 @@ Label : PROJECT
                 Label : LEFT
                   17
                   Label : CLASS
-                    16
+                    9
                   Label : METHOD
                     10
                     Label : ARGUMENT

@@ -260,44 +260,44 @@ On the other hand, other analysis that currently yield issues needs to be fully 
 
 ::
 
-project: my_project
-project_name: my_project
-project_themes: {  }
-project_reports:
-    - Ambassador
-rulesets:
-    ruleset_0: # 0 errors found
-         "Accessing Private":                                ( Classes/AccessPrivate
- )-failed        "Adding Zero":                                      ( Structures/AddZero
- )-failed        "Aliases Usage":                                    ( Functions/AliasesUsage
- )-failed        "Already Parents Interface":                        ( Interfaces/AlreadyParentsInterface
- )-failed        "Already Parents Trait":                            ( Traits/AlreadyParentsTrait
- )-failed        "Altering Foreach Without Reference":               ( Structures/AlteringForeachWithoutReference
- )-failed        "Alternative Syntax Consistence":                   ( Structures/AlternativeConsistenceByFile
- )-failed        "Always Positive Comparison":                       ( Structures/NeverNegative
-# )-failedOther results here
-    ruleset_1: # 1 errors found
-         "Constant Class":                                   ( Classes/ConstantClass
- )-failed        "Could Be Abstract Class":                          ( Classes/CouldBeAbstractClass
- )-failed        "Dependant Trait":                                  ( Traits/DependantTrait
- )-failed        "Double Instructions":                              ( Structures/DoubleInstruction
-# )-failedOther results here
-    ruleset_2: # 2 errors found
-         "Always Anchor Regex":                              ( Security/AnchorRegex
- )-failed        "Forgotten Interface":                              ( Interfaces/CouldUseInterface
-# )-failedOther results here
-    ruleset_3: # 3 errors found
-         "@ Operator":                                       ( Structures/Noscream
- )-failed        "Indices Are Int Or String":                        ( Structures/IndicesAreIntOrString
- )-failed        "Modernize Empty With Expression":                  ( Structures/ModernEmpty
- )-failed        "Property Variable Confusion":                      ( Structures/PropertyVariableConfusion
-# )-failedOther results here
-    ruleset_4: # 4 errors found
-         "Buried Assignation":                               ( Structures/BuriedAssignation
- )-failed        "Identical Consecutive Expression":                 ( Structures/IdenticalConsecutive
-# )-failedOther results here
-    ruleset_122: # 122 errors found
-         "Method Could Be Static":                            Classes/CouldBeStatic
+    project: my_project
+    project_name: my_project
+    project_themes: {  }
+    project_reports:
+        - Ambassador
+    rulesets:
+        ruleset_0: # 0 errors found
+             "Accessing Private":                                 Classes/AccessPrivate
+             "Adding Zero":                                       Structures/AddZero
+             "Aliases Usage":                                     Functions/AliasesUsage
+             "Already Parents Interface":                         Interfaces/AlreadyParentsInterface
+             "Already Parents Trait":                             Traits/AlreadyParentsTrait
+             "Altering Foreach Without Reference":                Structures/AlteringForeachWithoutReference
+             "Alternative Syntax Consistence":                    Structures/AlternativeConsistenceByFile
+             "Always Positive Comparison":                        Structures/NeverNegative
+    # Other results here
+        ruleset_1: # 1 errors found
+             "Constant Class":                                    Classes/ConstantClass
+             "Could Be Abstract Class":                           Classes/CouldBeAbstractClass
+             "Dependant Trait":                                   Traits/DependantTrait
+             "Double Instructions":                               Structures/DoubleInstruction
+    # Other results here
+        ruleset_2: # 2 errors found
+             "Always Anchor Regex":                               Security/AnchorRegex
+             "Forgotten Interface":                               Interfaces/CouldUseInterface
+    # Other results here
+        ruleset_3: # 3 errors found
+             "@ Operator":                                        Structures/Noscream
+             "Indices Are Int Or String":                         Structures/IndicesAreIntOrString
+             "Modernize Empty With Expression":                   Structures/ModernEmpty
+             "Property Variable Confusion":                       Structures/PropertyVariableConfusion
+    # Other results here
+        ruleset_4: # 4 errors found
+             "Buried Assignation":                                Structures/BuriedAssignation
+             "Identical Consecutive Expression":                  Structures/IdenticalConsecutive
+    # Other results here
+        ruleset_122: # 122 errors found
+             "Method Could Be Static":                            Classes/CouldBeStatic
 
 
 
@@ -1232,16 +1232,16 @@ The Phpcsfixer report provides a configuration file for php-cs-fixer, that autom
 This report builds a configuration file for php-cs-fixer. 
 
 
-+ :ref:`use-===-null` : **is_null**
-+ :ref:`else-if-versus-elseif` : **elseif**
-+ :ref:`multiple-unset()` : **combine_consecutive_unsets**
++ :ref:`use-===-null`  : **is_null**
++ :ref:`else-if-versus-elseif`  : **elseif**
++ :ref:`multiple-unset()`  : **combine_consecutive_unsets**
 + Classes/DontUnsetProperties: **no_unset_on_property**
-+ :ref:`use-constant` : **function_to_constant**
-+ :ref:`php7-dirname` : **combine_nested_dirname**
-+ :ref:`could-use-\_\_dir\_\_` : **dir_constant**
-+ :ref:`isset-multiple-arguments` : **combine_consecutive_issets**
-+ :ref:`logical-should-use-symbolic-operators` : **logical_operators**
-+ :ref:`not-not` : **no_short_bool_cast**
++ :ref:`use-constant`  : **function_to_constant**
++ :ref:`php7-dirname`  : **combine_nested_dirname**
++ :ref:`could-use-\_\_dir\_\_`  : **dir_constant**
++ :ref:`isset-multiple-arguments`  : **combine_consecutive_issets**
++ :ref:`logical-should-use-symbolic-operators`  : **logical_operators**
++ :ref:`not-not`  : **no_short_bool_cast**
 
 
 `PHP-cs-fixer <https://github.com/FriendsOfPHP/PHP-CS-Fixer>`_ is a tool to automatically fix PHP Coding Standards issues. Some of the modifications are more than purely coding standards, such has replacing ``dirname(dirname($path))`` with ``dirname($path, 2)``. 
@@ -1322,7 +1322,33 @@ The Sarb report is a compatibility report with SARB
 
 ::
 
-    
+    [
+        {
+            "type": "Classes\/NonPpp",
+            "file": "\/home\/exakat\/elation\/code\/include\/base_class.php",
+            "line": 37
+        },
+        {
+            "type": "Structures\/NoSubstrOne",
+            "file": "\/home\/exakat\/elation\/code\/include\/common_funcs.php",
+            "line": 890
+        },
+        {
+            "type": "Structures\/DropElseAfterReturn",
+            "file": "\/home\/exakat\/elation\/code\/include\/smarty\/SmartyValidate.class.php",
+            "line": 638
+        },
+        {
+            "type": "Variables\/UndefinedVariable",
+            "file": "\/home\/exakat\/elation\/code\/components\/ui\/ui.php",
+            "line": 174
+        },
+        {
+            "type": "Functions\/TooManyLocalVariables",
+            "file": "\/home\/exakat\/elation\/code\/include\/dependencymanager_class.php",
+            "line": 43
+        }
+    ]
 
 Sarb is a Json report format.
 

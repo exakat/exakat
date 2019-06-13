@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
 Label : PROJECT
   1
   Label : DEFINITION
-    28
+    27
     Label : DEFINITION
       27
   Label : FILE

@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : FILE
@@ -16,15 +28,15 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          15
+          16
           Label : METHOD
             7
             Label : NAME
               7
             Label : ARGUMENT
-              11
+              12
               Label : CLASS
-                12
+                13
               Label : VARIABLE
                 8
                 Label : NEW
@@ -34,6 +46,6 @@ Label : PROJECT
                   Label : NAME
                     9
             Label : ARGUMENT
-              13
+              14
           Label : OBJECT
             5

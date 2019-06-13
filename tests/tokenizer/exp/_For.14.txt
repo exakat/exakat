@@ -1,12 +1,38 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -14,9 +40,9 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    16
     Label : DEFINITION
-      15
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,13 +54,13 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              16
+              18
               Label : METHOD
-                14
+                15
                 Label : ARGUMENT
-                  15
+                  16
                 Label : NAME
-                  14
+                  15
               Label : OBJECT
                 13
           Label : FINAL

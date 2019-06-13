@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    9
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    9
+    22
     Label : DEFINITION
-      20
+      22
   Label : DEFINITION
-    9
+    28
     Label : DEFINITION
-      25
+      28
   Label : DEFINITION
-    9
+    35
     Label : DEFINITION
-      31
+      35
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,35 +76,35 @@ Label : PROJECT
               Label : ARGUMENT
                 8
           Label : ELSE
-            16
+            17
             Label : CONDITION
               6
               Label : NOT
                 7
                 Label : ARGUMENT
-                  17
+                  18
             Label : THEN
               3
               Label : EXPRESSION
-                18
+                20
               Label : EXPRESSION
-                13
+                14
                 Label : ARGUMENT
-                  20
+                  22
               Label : EXPRESSION
-                21
+                24
           Label : THEN
             3
             Label : EXPRESSION
               10
             Label : EXPRESSION
-              13
+              14
               Label : ARGUMENT
                 12
             Label : EXPRESSION
-              14
+              15
         Label : EXPRESSION
-          23
+          26
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -76,22 +112,22 @@ Label : PROJECT
             Label : NOT
               7
               Label : ARGUMENT
-                25
+                28
           Label : THEN
             3
             Label : EXPRESSION
-              26
+              30
             Label : EXPRESSION
-              13
+              14
               Label : ARGUMENT
-                30
+                34
                 Label : CONCAT
-                  28
+                  32
                   Label : ARGUMENT
-                    29
+                    33
                   Label : NAME
-                    28
+                    32
                 Label : CONCAT
-                  31
+                  35
             Label : EXPRESSION
-              32
+              37

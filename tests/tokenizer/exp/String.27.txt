@@ -1,4 +1,12 @@
 test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+  Label : DEFINITION
+    21
+  Label : DEFINITION
+    21
 Label : PROJECT
   1
   Label : FILE
@@ -16,99 +24,179 @@ Label : PROJECT
             Label : BLOCK
               15
               Label : EXPRESSION
-                17
+                16
                 Label : LEFT
                   9
                 Label : RIGHT
-                  18
-                  Label : CONCAT
-                    19
+                  17
                   Label : CONCAT
                     18
+                  Label : CONCAT
+                    17
+                    Label : MEMBER
+                      10
+                    Label : OBJECT
+                      19
+                  Label : CONCAT
+                    18
+                  Label : CONCAT
+                    17
                     Label : MEMBER
                       10
                     Label : OBJECT
                       20
                   Label : CONCAT
-                    19
-                  Label : CONCAT
                     18
+                  Label : CONCAT
+                    17
                     Label : MEMBER
                       10
                     Label : OBJECT
                       21
                   Label : CONCAT
-                    19
-                  Label : CONCAT
                     18
-                    Label : MEMBER
-                      10
-                    Label : OBJECT
-                      22
-                  Label : CONCAT
-                    19
               Label : EXPRESSION
-                17
+                16
                 Label : LEFT
                   9
                 Label : RIGHT
-                  18
-                  Label : CONCAT
-                    19
+                  17
                   Label : CONCAT
                     18
+                  Label : CONCAT
+                    17
+                    Label : INDEX
+                      10
+                    Label : VARIABLE
+                      19
+                  Label : CONCAT
+                    18
+                  Label : CONCAT
+                    17
                     Label : INDEX
                       10
                     Label : VARIABLE
                       20
                   Label : CONCAT
-                    19
-                  Label : CONCAT
                     18
+                  Label : CONCAT
+                    17
                     Label : INDEX
                       10
                     Label : VARIABLE
                       21
                   Label : CONCAT
-                    19
-                  Label : CONCAT
                     18
-                    Label : INDEX
-                      10
-                    Label : VARIABLE
-                      22
-                  Label : CONCAT
-                    19
               Label : EXPRESSION
-                17
+                16
                 Label : LEFT
                   9
                 Label : RIGHT
-                  18
+                  17
+                  Label : CONCAT
+                    18
                   Label : CONCAT
                     19
-                  Label : CONCAT
-                    20
                   Label : CONCAT
                     24
                   Label : CONCAT
+                    17
+                    Label : MEMBER
+                      10
+                    Label : OBJECT
+                      20
+                  Label : CONCAT
                     18
+                  Label : CONCAT
+                    17
                     Label : MEMBER
                       10
                     Label : OBJECT
                       21
                   Label : CONCAT
-                    19
-                  Label : CONCAT
                     18
-                    Label : MEMBER
-                      10
-                    Label : OBJECT
-                      22
-                  Label : CONCAT
+            Label : DEFINITION
+              9
+              Label : DEFAULT
+                17
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  19
+                Label : CONCAT
+                  24
+                Label : CONCAT
+                  17
+                  Label : MEMBER
+                    10
+                  Label : OBJECT
+                    20
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : MEMBER
+                    10
+                  Label : OBJECT
+                    21
+                Label : CONCAT
+                  18
+              Label : DEFAULT
+                17
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : INDEX
+                    10
+                  Label : VARIABLE
                     19
-            Label : DEFINITION
-              16
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : INDEX
+                    10
+                  Label : VARIABLE
+                    20
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : INDEX
+                    10
+                  Label : VARIABLE
+                    21
+                Label : CONCAT
+                  18
+              Label : DEFAULT
+                17
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : MEMBER
+                    10
+                  Label : OBJECT
+                    19
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : MEMBER
+                    10
+                  Label : OBJECT
+                    20
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  17
+                  Label : MEMBER
+                    10
+                  Label : OBJECT
+                    21
+                Label : CONCAT
+                  18
               Label : DEFINITION
                 9
               Label : DEFINITION
@@ -116,21 +204,13 @@ Label : PROJECT
               Label : DEFINITION
                 9
             Label : DEFINITION
-              16
+              20
               Label : DEFINITION
-                21
+                20
               Label : DEFINITION
-                21
+                20
               Label : DEFINITION
-                21
-            Label : DEFINITION
-              16
-              Label : DEFINITION
-                22
-              Label : DEFINITION
-                22
-              Label : DEFINITION
-                22
+                20
             Label : NAME
               12
           Label : NAME

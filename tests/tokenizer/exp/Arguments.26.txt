@@ -1,20 +1,64 @@
 test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFAULT
+      26
+      Label : ARGUMENT
+        18
+        Label : MEMBER
+          29
+        Label : OBJECT
+          28
+      Label : NAME
+        26
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    15
+    24
+    Label : DEFAULT
+      26
+      Label : ARGUMENT
+        18
+        Label : MEMBER
+          29
+        Label : OBJECT
+          28
+      Label : NAME
+        26
     Label : DEFINITION
       24
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
       14
   Label : DEFINITION
-    15
+    28
     Label : DEFINITION
       28
   Label : DEFINITION
-    15
+    31
     Label : DEFINITION
       31
   Label : FILE

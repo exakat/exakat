@@ -196,6 +196,8 @@ class Php80 extends Php {
     const T_ELLIPSIS                      = 392;
     const T_DOUBLE_COLON                  = 388;
 
+    const T_BAD_CHARACTER                 = 1000;
+
     const TOKENS = array(
                      ';'  => self::T_SEMICOLON,
                      '+'  => self::T_PLUS,

@@ -1,36 +1,90 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      14
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    9
+    Label : DEFAULT
+      11
     Label : DEFINITION
       9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      14
     Label : DEFINITION
-      11
+      12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      21
-  Label : DEFINITION
-    6
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
-    6
+    24
     Label : DEFINITION
-      23
+      24
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,37 +102,31 @@ Label : PROJECT
           Label : LEFT
             9
           Label : RIGHT
-            10
+            11
         Label : EXPRESSION
           7
           Label : LEFT
-            11
-          Label : RIGHT
             12
-        Label : EXPRESSION
-          13
-          Label : ARGUMENT
+          Label : RIGHT
             14
+        Label : EXPRESSION
+          6
+          Label : ARGUMENT
+            15
             Label : ARGUMENT
               9
           Label : ARGUMENT
             5
           Label : ARGUMENT
-            15
-            Label : ARGUMENT
-              11
-            Label : NAME
-              15
-          Label : NAME
-            13
-        Label : EXPRESSION
-          13
-          Label : ARGUMENT
             16
+            Label : ARGUMENT
+              12
             Label : NAME
               16
-              Label : DEFINITION
-                16
+          Label : NAME
+            6
+        Label : EXPRESSION
+          6
           Label : ARGUMENT
             17
             Label : NAME
@@ -91,43 +139,49 @@ Label : PROJECT
               18
               Label : DEFINITION
                 18
-          Label : BLOCK
+          Label : ARGUMENT
             19
+            Label : NAME
+              19
+              Label : DEFINITION
+                19
+          Label : BLOCK
+            20
             Label : EXPRESSION
-              20
-              Label : ARGUMENT
-                16
+              21
               Label : ARGUMENT
                 17
               Label : ARGUMENT
                 18
+              Label : ARGUMENT
+                19
           Label : DEFINITION
             8
           Label : DEFINITION
-            13
+            6
             Label : ARGUMENT
-              14
+              15
               Label : ARGUMENT
                 9
             Label : ARGUMENT
               5
             Label : ARGUMENT
-              15
+              16
               Label : ARGUMENT
-                11
+                12
               Label : NAME
-                15
+                16
             Label : NAME
-              13
+              6
           Label : NAME
-            13
+            6
         Label : EXPRESSION
-          20
+          21
           Label : ARGUMENT
-            21
+            22
           Label : ARGUMENT
-            14
+            15
             Label : ARGUMENT
-              22
+              24
           Label : ARGUMENT
-            23
+            26

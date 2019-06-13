@@ -1,8 +1,34 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
+    Label : DEFAULT
+      11
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -10,7 +36,9 @@ Label : PROJECT
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -34,32 +62,32 @@ Label : PROJECT
           Label : LEFT
             9
           Label : RIGHT
-            10
+            11
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            12
+            13
             Label : CONCAT
-              11
+              12
               Label : POSTPLUSPLUS
                 5
             Label : CONCAT
               9
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            12
+            13
             Label : CONCAT
               5
             Label : CONCAT
-              11
+              12
               Label : POSTPLUSPLUS
                 9
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15

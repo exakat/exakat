@@ -30,7 +30,7 @@ Label : PROJECT
           Label : BLOCK
             15
             Label : EXPRESSION
-              23
+              22
               Label : CLASS
                 16
               Label : METHOD
@@ -40,32 +40,32 @@ Label : PROJECT
                 Label : ARGUMENT
                   20
                 Label : ARGUMENT
-                  22
+                  21
             Label : EXPRESSION
-              28
+              27
               Label : LEFT
-                27
+                26
                 Label : MEMBER
-                  25
-                Label : OBJECT
                   24
+                Label : OBJECT
+                  23
               Label : RIGHT
-                29
+                28
           Label : DEFINITION
-            21
+            20
             Label : DEFINITION
               20
           Label : DEFINITION
             21
             Label : DEFINITION
-              22
+              21
           Label : DEFINITION
-            21
+            23
             Label : DEFINITION
-              24
+              23
           Label : DEFINITION
-            21
+            28
             Label : DEFINITION
-              29
+              28
           Label : NAME
             5

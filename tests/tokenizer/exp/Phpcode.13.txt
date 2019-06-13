@@ -1,8 +1,14 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
       9
   Label : FILE
@@ -18,24 +24,24 @@ Label : PROJECT
           Label : CONDITION
             8
             Label : NOT
-              15
+              14
               Label : METHOD
-                11
+                10
                 Label : ARGUMENT
-                  13
+                  12
                 Label : NAME
-                  11
+                  10
               Label : OBJECT
                 9
           Label : THEN
             3
             Label : EXPRESSION
-              16
+              15
               Label : ARGUMENT
-                17
+                16
                 Label : ARGUMENT
-                  19
+                  18
                 Label : NAME
-                  17
+                  16
         Label : EXPRESSION
-          21
+          20

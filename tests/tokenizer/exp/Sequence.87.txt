@@ -1,8 +1,106 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      12
+      Label : CAST
+        16
+        Label : METHOD
+          13
+          Label : ARGUMENT
+            14
+          Label : NAME
+            13
+        Label : OBJECT
+          8
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  46
+  Label : DEFINITION
+    46
+    Label : DEFINITION
+      46
+    Label : DEFINITION
+      46
+    Label : DEFINITION
+      46
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      12
+      Label : CAST
+        16
+        Label : METHOD
+          13
+          Label : ARGUMENT
+            14
+          Label : NAME
+            13
+        Label : OBJECT
+          8
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -28,7 +126,7 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -50,15 +148,15 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    19
     Label : DEFINITION
       19
   Label : DEFINITION
-    7
+    32
     Label : DEFINITION
       32
   Label : DEFINITION
-    7
+    46
     Label : DEFINITION
       46
     Label : DEFINITION
@@ -74,27 +172,27 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
                 6
               Label : RIGHT
-                11
+                12
                 Label : CAST
                   16
                   Label : METHOD
-                    12
+                    13
                     Label : ARGUMENT
                       14
                     Label : NAME
-                      12
+                      13
                   Label : OBJECT
                     8
             Label : EXPRESSION
               17
               Label : RETURN
-                20
+                21
                 Label : CONDITION
                   18
                   Label : CODE
@@ -102,13 +200,13 @@ Label : PROJECT
                 Label : ELSE
                   33
                 Label : THEN
-                  21
+                  22
                   Label : CAST
                     18
                     Label : CODE
                       31
                       Label : LEFT
-                        22
+                        23
                         Label : ARGUMENT
                           16
                           Label : METHOD
@@ -128,7 +226,7 @@ Label : PROJECT
                               Label : NAME
                                 26
                         Label : NAME
-                          22
+                          23
                       Label : RIGHT
                         32
             Label : EXPRESSION
@@ -202,13 +300,13 @@ Label : PROJECT
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  47
+                  48
                   Label : POSTPLUSPLUS
                     46
               Label : INCREMENT
                 3
                 Label : EXPRESSION
-                  48
+                  49
                   Label : POSTPLUSPLUS
                     46
               Label : INIT
@@ -216,7 +314,7 @@ Label : PROJECT
                 Label : EXPRESSION
                   46
             Label : EXPRESSION
-              49
+              50
               Label : BLOCK
                 3
                 Label : EXPRESSION

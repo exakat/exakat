@@ -94,6 +94,14 @@ Label : PROJECT
                         Label : STATIC
                           57
                           Label : DEFAULT
+                            61
+                            Label : NAME
+                              61
+                            Label : ARGUMENT
+                              63
+                            Label : ARGUMENT
+                              65
+                          Label : DEFAULT
                             58
                           Label : DEFINITION
                             57
@@ -245,6 +253,14 @@ Label : PROJECT
                           76
                 Label : DEFINITION
                   57
+                  Label : DEFAULT
+                    61
+                    Label : NAME
+                      61
+                    Label : ARGUMENT
+                      63
+                    Label : ARGUMENT
+                      65
                   Label : DEFAULT
                     58
                   Label : DEFINITION

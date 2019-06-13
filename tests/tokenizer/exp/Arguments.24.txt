@@ -1,16 +1,34 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    19
     Label : DEFINITION
       19
   Label : FILE
@@ -20,7 +38,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          21
+          22
           Label : METHOD
             7
             Label : ARGUMENT
@@ -34,7 +52,7 @@ Label : PROJECT
               Label : CONCAT
                 14
             Label : ARGUMENT
-              20
+              21
               Label : CLASS
                 16
               Label : METHOD

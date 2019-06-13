@@ -1,8 +1,32 @@
 test
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
 Label : PROJECT
   1
   Label : DEFINITION
-    35
+    34
     Label : DEFINITION
       34
     Label : DEFINITION
@@ -102,7 +126,7 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
-                37
+                36
               Label : NAME
                 16
           Label : NAME
@@ -210,7 +234,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   10
                   Label : DEFINITION
@@ -222,7 +246,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   14
                   Label : DEFINITION
@@ -234,7 +258,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   18
                   Label : DEFINITION
@@ -246,7 +270,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   20
                   Label : DEFINITION
@@ -258,7 +282,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   16
                   Label : DEFINITION
@@ -274,9 +298,9 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
-                  37
+                  36
                 Label : VARIABLE
                   34
               Label : NAME
@@ -284,7 +308,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   15
                 Label : VARIABLE
@@ -294,7 +318,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   28
                   Label : DEFINITION
@@ -310,7 +334,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   30
                   Label : DEFINITION
@@ -326,7 +350,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                36
+                35
                 Label : CLASS
                   32
                   Label : DEFINITION

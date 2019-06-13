@@ -1,8 +1,48 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  39
+  Label : DEFINITION
+    39
+    Label : DEFINITION
+      39
+Label : GLOBAL
+  41
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+Label : GLOBAL
+  44
+  Label : DEFINITION
+    44
+    Label : DEFINITION
+      44
+    Label : DEFINITION
+      44
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -14,23 +54,23 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    27
     Label : DEFINITION
-      28
+      27
   Label : DEFINITION
-    7
+    39
     Label : DEFINITION
       39
   Label : DEFINITION
-    7
+    41
     Label : DEFINITION
       41
   Label : DEFINITION
-    7
+    44
     Label : DEFINITION
-      43
+      44
     Label : DEFINITION
-      43
+      44
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,67 +80,67 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            19
+            18
             Label : LEFT
-              13
+              12
               Label : LEFT
-                12
+                11
                 Label : METHOD
                   8
                   Label : ARGUMENT
-                    10
+                    9
                   Label : NAME
                     8
                 Label : OBJECT
                   6
               Label : RIGHT
-                12
+                11
                 Label : METHOD
                   8
                   Label : ARGUMENT
-                    17
+                    16
                   Label : NAME
                     8
                 Label : OBJECT
-                  12
+                  11
                   Label : MEMBER
-                    15
-                  Label : OBJECT
                     14
+                  Label : OBJECT
+                    13
             Label : RIGHT
-              19
+              18
               Label : LEFT
-                20
+                19
                 Label : NOT
-                  12
+                  11
                   Label : METHOD
                     8
                     Label : ARGUMENT
-                      21
+                      20
                     Label : NAME
                       8
                   Label : OBJECT
                     6
               Label : RIGHT
-                27
+                26
                 Label : LEFT
-                  23
+                  22
                   Label : ARGUMENT
-                    12
+                    11
                     Label : METHOD
                       8
                       Label : ARGUMENT
-                        25
+                        24
                       Label : NAME
                         8
                     Label : OBJECT
                       6
                   Label : NAME
-                    23
+                    22
                 Label : RIGHT
-                  23
+                  22
                   Label : ARGUMENT
-                    12
+                    11
                     Label : METHOD
                       29
                       Label : ARGUMENT
@@ -108,9 +148,9 @@ Label : PROJECT
                       Label : NAME
                         29
                     Label : OBJECT
-                      28
+                      27
                   Label : NAME
-                    23
+                    22
           Label : THEN
             3
             Label : EXPRESSION
@@ -120,7 +160,7 @@ Label : PROJECT
                 Label : CONDITION
                   36
                   Label : LEFT
-                    12
+                    11
                     Label : METHOD
                       8
                       Label : ARGUMENT
@@ -136,9 +176,9 @@ Label : PROJECT
                   Label : CODE
                     38
                     Label : CONDITION
-                      13
+                      12
                       Label : LEFT
-                        12
+                        11
                         Label : METHOD
                           8
                           Label : ARGUMENT
@@ -150,7 +190,7 @@ Label : PROJECT
                       Label : RIGHT
                         37
                     Label : ELSE
-                      42
+                      43
                     Label : THEN
                       40
                       Label : POSTPLUSPLUS
@@ -162,9 +202,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            44
+            46
             Label : LEFT
-              43
+              44
             Label : RIGHT
               37
           Label : THEN
@@ -174,4 +214,4 @@ Label : PROJECT
               Label : CODE
                 40
                 Label : POSTPLUSPLUS
-                  43
+                  44

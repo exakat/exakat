@@ -1,8 +1,42 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -10,7 +44,7 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -18,15 +52,15 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,7 +82,7 @@ Label : PROJECT
             Label : LEFT
               8
             Label : RIGHT
-              9
+              10
         Label : EXPRESSION
           7
           Label : LEFT
@@ -60,6 +94,6 @@ Label : PROJECT
             Label : RIGHT
               7
               Label : LEFT
-                9
-              Label : RIGHT
                 10
+              Label : RIGHT
+                12

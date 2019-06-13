@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    9
+    15
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    9
+    20
     Label : DEFINITION
-      18
+      20
   Label : DEFINITION
-    9
+    26
     Label : DEFINITION
-      23
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,28 +68,28 @@ Label : PROJECT
           Label : THEN
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
                 10
               Label : RIGHT
-                12
+                13
         Label : EXPRESSION
-          11
+          12
           Label : LEFT
-            14
+            15
           Label : RIGHT
-            17
+            19
             Label : CONCAT
-              15
+              17
             Label : CONCAT
-              18
+              20
             Label : CONCAT
-              19
-            Label : CONCAT
-              21
-              Label : ARGUMENT
-                23
-              Label : NAME
-                21
+              22
             Label : CONCAT
               24
+              Label : ARGUMENT
+                26
+              Label : NAME
+                24
+            Label : CONCAT
+              28

@@ -32,9 +32,13 @@ class PrintfArguments extends Analyzer {
         // printf(' a %s %s', $a1, ...$a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
-             ->raw('where( __.out("ARGUMENT").has("variadic", true))')
+             ->filter(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->is('variadic', true)
+             )
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              // Count the number of ...variadic
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
@@ -49,9 +53,13 @@ GREMLIN
         // printf(' a %s ', $a1, $a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
-             ->raw('not(where( __.out("ARGUMENT").has("variadic", true)))')
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->is('variadic', true)
+             )
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              // Count the number of ...variadic
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
@@ -71,7 +79,7 @@ GREMLIN
              ->inIs('ARGUMENT')
 
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
              ->filter(<<<GREMLIN

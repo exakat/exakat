@@ -1,8 +1,18 @@
 test
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFAULT
+      24
+    Label : DEFINITION
+      22
 Label : PROJECT
   1
   Label : DEFINITION
-    23
+    22
+    Label : DEFAULT
+      24
     Label : DEFINITION
       22
   Label : FILE
@@ -32,7 +42,7 @@ Label : PROJECT
               Label : DEFINITION
                 12
               Label : DEFINITION
-                27
+                26
               Label : DEFINITION
                 12
               Label : EXTENDS
@@ -82,23 +92,23 @@ Label : PROJECT
                 Label : CLASS
                   12
             Label : EXPRESSION
-              24
+              23
               Label : LEFT
                 22
               Label : RIGHT
-                25
+                24
             Label : EXPRESSION
               17
               Label : ARGUMENT
                 19
                 Label : CLASS
-                  27
+                  26
             Label : EXPRESSION
               17
               Label : ARGUMENT
                 19
                 Label : CLASS
-                  29
+                  28
             Label : EXPRESSION
               17
               Label : ARGUMENT

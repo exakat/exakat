@@ -1,14 +1,32 @@
 test
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    25
     Label : DEFINITION
       25
     Label : DEFINITION
       25
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -68,12 +86,12 @@ Label : PROJECT
                 Label : EXPRESSION
                   17
                   Label : ARGUMENT
-                    26
+                    27
                     Label : NAME
-                      26
+                      27
                     Label : ARGUMENT
-                      28
+                      29
                     Label : ARGUMENT
                       25
                 Label : EXPRESSION
-                  30
+                  31

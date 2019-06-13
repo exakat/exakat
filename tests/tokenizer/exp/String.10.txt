@@ -1,8 +1,76 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        13
+      Label : CONCAT
+        15
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+      Label : CONCAT
+        16
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        13
+      Label : CONCAT
+        12
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+      Label : CONCAT
+        12
+      Label : CONCAT
+        13
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -10,7 +78,45 @@ Label : PROJECT
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        13
+      Label : CONCAT
+        15
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+      Label : CONCAT
+        16
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        13
+      Label : CONCAT
+        12
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        8
+        Label : MEMBER
+          11
+        Label : OBJECT
+          9
+      Label : CONCAT
+        12
+      Label : CONCAT
+        13
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -18,13 +124,13 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
-      12
+      13
     Label : DEFINITION
-      12
+      13
     Label : DEFINITION
-      12
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,44 +146,44 @@ Label : PROJECT
             Label : CONCAT
               8
               Label : MEMBER
-                10
+                11
               Label : OBJECT
                 9
-            Label : CONCAT
-              11
-            Label : CONCAT
-              12
-        Label : EXPRESSION
-          7
-          Label : LEFT
-            5
-          Label : RIGHT
-            8
-            Label : CONCAT
-              12
-            Label : CONCAT
-              11
-            Label : CONCAT
-              8
-              Label : MEMBER
-                10
-              Label : OBJECT
-                9
-        Label : EXPRESSION
-          7
-          Label : LEFT
-            5
-          Label : RIGHT
-            8
             Label : CONCAT
               12
             Label : CONCAT
               13
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : CONCAT
+              13
+            Label : CONCAT
+              12
             Label : CONCAT
               8
               Label : MEMBER
-                10
+                11
+              Label : OBJECT
+                9
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : CONCAT
+              13
+            Label : CONCAT
+              15
+            Label : CONCAT
+              8
+              Label : MEMBER
+                11
               Label : OBJECT
                 9
             Label : CONCAT
-              14
+              16

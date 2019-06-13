@@ -1,24 +1,54 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    31
     Label : DEFINITION
       31
   Label : DEFINITION
-    6
+    32
     Label : DEFINITION
       32
   Label : DEFINITION
-    6
+    33
     Label : DEFINITION
-      34
+      33
   Label : DEFINITION
-    6
+    36
     Label : DEFINITION
       36
   Label : FILE
@@ -73,11 +103,9 @@ Label : PROJECT
               37
               Label : POSTPLUSPLUS
                 36
+          Label : INDEX
+            32
           Label : SOURCE
             31
           Label : VALUE
             33
-            Label : INDEX
-              32
-            Label : VALUE
-              34

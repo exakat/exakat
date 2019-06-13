@@ -1,12 +1,28 @@
 test
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -58,7 +74,7 @@ Label : PROJECT
               Label : CONCAT
                 18
               Label : CONCAT
-                19
+                20
           Label : THEN
             9
             Label : ARGUMENT

@@ -1,8 +1,24 @@
 test
+Label : GLOBAL
+  52
+  Label : DEFINITION
+    52
+    Label : DEFINITION
+      52
+    Label : DEFINITION
+      52
+    Label : DEFINITION
+      52
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
 Label : PROJECT
   1
   Label : DEFINITION
-    27
+    52
     Label : DEFINITION
       52
     Label : DEFINITION
@@ -10,7 +26,7 @@ Label : PROJECT
     Label : DEFINITION
       52
   Label : DEFINITION
-    27
+    26
     Label : DEFINITION
       26
   Label : FILE
@@ -176,21 +192,21 @@ Label : PROJECT
               Label : NEW
                 50
             Label : EXPRESSION
-              53
-              Label : CLASS
-                54
-              Label : VARIABLE
-                52
-            Label : EXPRESSION
-              53
+              54
               Label : CLASS
                 55
               Label : VARIABLE
                 52
             Label : EXPRESSION
-              53
+              54
               Label : CLASS
                 56
+              Label : VARIABLE
+                52
+            Label : EXPRESSION
+              54
+              Label : CLASS
+                57
               Label : VARIABLE
                 52
           Label : NAME

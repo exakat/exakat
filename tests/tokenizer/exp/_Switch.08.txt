@@ -1,12 +1,74 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      29
+    Label : DEFAULT
+      38
+    Label : DEFAULT
+      29
+    Label : DEFAULT
+      20
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  38
+  Label : DEFINITION
+    38
+    Label : DEFINITION
+      38
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
+    Label : DEFAULT
+      29
+    Label : DEFAULT
+      38
+    Label : DEFAULT
+      29
+    Label : DEFAULT
+      20
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -18,23 +80,23 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    7
+    20
     Label : DEFINITION
-      18
+      20
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      26
+      29
     Label : DEFINITION
-      26
+      29
   Label : DEFINITION
-    7
+    38
     Label : DEFINITION
-      34
+      38
   Label : FILE
     3
     Label : EXPRESSION
@@ -44,75 +106,75 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CASES
-                12
+                14
                 Label : EXPRESSION
-                  13
+                  15
                   Label : CASE
-                    15
+                    17
                   Label : CODE
                     3
                     Label : EXPRESSION
-                      17
+                      19
                       Label : LEFT
                         8
                       Label : RIGHT
-                        18
-                    Label : EXPRESSION
-                      19
-                      Label : BREAK
                         20
+                    Label : EXPRESSION
+                      22
+                      Label : BREAK
+                        23
                 Label : EXPRESSION
-                  22
+                  25
                   Label : CASE
-                    24
+                    27
                   Label : CODE
                     3
                     Label : EXPRESSION
-                      17
+                      19
                       Label : LEFT
                         8
                       Label : RIGHT
-                        26
+                        29
                     Label : EXPRESSION
-                      19
+                      22
                       Label : BREAK
-                        27
+                        31
                 Label : EXPRESSION
-                  28
+                  32
                   Label : CASE
-                    30
+                    34
                   Label : CODE
                     3
                     Label : EXPRESSION
-                      17
+                      19
                       Label : LEFT
                         8
                       Label : RIGHT
-                        26
+                        29
                     Label : EXPRESSION
-                      19
+                      22
                       Label : BREAK
-                        32
+                        36
                 Label : EXPRESSION
-                  33
+                  37
                   Label : CODE
                     3
                     Label : EXPRESSION
-                      17
+                      19
                       Label : LEFT
                         8
                       Label : RIGHT
-                        34
+                        38
                     Label : EXPRESSION
-                      19
+                      22
                       Label : BREAK
-                        20
+                        23
               Label : CONDITION
-                11
+                12
           Label : SOURCE
             6
           Label : VALUE

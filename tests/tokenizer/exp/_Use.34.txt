@@ -165,10 +165,6 @@ Label : PROJECT
               69
               Label : DEFINITION
                 40
-                Label : DEFINITION
-                  40
-              Label : DEFINITION
-                40
                 Label : ARGUMENT
                   5
                 Label : NAME

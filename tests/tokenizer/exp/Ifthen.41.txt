@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    9
     Label : DEFINITION
-      10
+      9
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
-      13
+      12
   Label : DEFINITION
-    7
+    22
     Label : DEFINITION
-      23
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,7 +58,7 @@ Label : PROJECT
             Label : EXPRESSION
               5
               Label : CONDITION
-                10
+                9
               Label : THEN
                 3
                 Label : EXPRESSION
@@ -42,32 +66,32 @@ Label : PROJECT
                 Label : EXPRESSION
                   14
                   Label : ARGUMENT
-                    13
+                    12
                 Label : EXPRESSION
                   15
                 Label : EXPRESSION
                   14
                   Label : ARGUMENT
-                    17
+                    16
                     Label : ARGUMENT
-                      18
-                    Label : NAME
                       17
+                    Label : NAME
+                      16
                 Label : EXPRESSION
-                  19
+                  18
                 Label : EXPRESSION
                   14
                   Label : ARGUMENT
-                    22
+                    21
                     Label : CONCAT
-                      17
+                      16
                       Label : ARGUMENT
-                        21
+                        20
                       Label : NAME
-                        17
+                        16
                     Label : CONCAT
-                      23
+                      22
                 Label : EXPRESSION
                   24
             Label : EXPRESSION
-              26
+              25

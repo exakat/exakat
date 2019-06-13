@@ -13,14 +13,10 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
             Label : ARGUMENT
               8
             Label : NAME
               6
-          Label : DEFINITION
-            17
           Label : DEFINITION
             17
             Label : ARGUMENT

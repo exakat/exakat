@@ -1,22 +1,46 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    20
     Label : DEFINITION
-      19
+      20
   Label : DEFINITION
-    8
+    24
     Label : DEFINITION
-      22
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -44,40 +68,40 @@ Label : PROJECT
               Label : LEFT
                 9
                 Label : INDEX
-                  15
+                  16
                 Label : VARIABLE
                   9
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
                     13
               Label : RIGHT
-                21
+                23
                 Label : LEFT
-                  18
+                  19
                   Label : LEFT
-                    16
+                    17
                   Label : RIGHT
                     9
                     Label : INDEX
-                      20
+                      22
                     Label : VARIABLE
-                      19
+                      20
                 Label : RIGHT
-                  18
+                  19
                   Label : LEFT
                     9
                     Label : INDEX
-                      24
+                      27
                     Label : VARIABLE
                       9
                       Label : INDEX
-                        23
+                        26
                       Label : VARIABLE
-                        22
+                        24
                   Label : RIGHT
-                    25
+                    28
           Label : THEN
-            26
+            29
             Label : EXPRESSION
-              27
+              30

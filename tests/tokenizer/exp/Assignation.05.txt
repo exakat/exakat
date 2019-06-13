@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : FILE
@@ -20,12 +32,12 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            11
+            12
             Label : LEFT
-              9
+              10
               Label : INDEX
-                10
+                11
               Label : VARIABLE
                 8
             Label : RIGHT
-              12
+              13

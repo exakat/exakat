@@ -1,18 +1,88 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : ARGUMENT
+          10
+        Label : NAME
+          9
+      Label : ARGUMENT
+        18
+        Label : LEFT
+          17
+          Label : METHOD
+            14
+            Label : ARGUMENT
+              15
+            Label : NAME
+              14
+          Label : OBJECT
+            12
+        Label : RIGHT
+          19
+      Label : ARGUMENT
+        20
+      Label : NAME
+        8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : ARGUMENT
+          10
+        Label : NAME
+          9
+      Label : ARGUMENT
+        18
+        Label : LEFT
+          17
+          Label : METHOD
+            14
+            Label : ARGUMENT
+              15
+            Label : NAME
+              14
+          Label : OBJECT
+            12
+        Label : RIGHT
+          19
+      Label : ARGUMENT
+        20
+      Label : NAME
+        8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
-      11
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,20 +102,20 @@ Label : PROJECT
               Label : NAME
                 9
             Label : ARGUMENT
-              16
-              Label : LEFT
-                15
-                Label : METHOD
-                  12
-                  Label : ARGUMENT
-                    13
-                  Label : NAME
-                    12
-                Label : OBJECT
-                  11
-              Label : RIGHT
-                17
-            Label : ARGUMENT
               18
+              Label : LEFT
+                17
+                Label : METHOD
+                  14
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    14
+                Label : OBJECT
+                  12
+              Label : RIGHT
+                19
+            Label : ARGUMENT
+              20
             Label : NAME
               8

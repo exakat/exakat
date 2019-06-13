@@ -1,8 +1,42 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          12
+        Label : VALUE
+          13
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          12
+        Label : VALUE
+          13
     Label : DEFINITION
       5
   Label : FILE

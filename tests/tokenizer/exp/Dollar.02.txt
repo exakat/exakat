@@ -1,8 +1,24 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
       15
     Label : DEFINITION
@@ -10,7 +26,7 @@ Label : PROJECT
     Label : DEFINITION
       15
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -48,11 +64,11 @@ Label : PROJECT
               Label : CONSTANT
                 11
             Label : VARIABLE
-              17
+              18
               Label : NAME
                 13
                 Label : CLASS
-                  18
+                  17
                 Label : CONSTANT
                   20
           Label : THEN
@@ -72,11 +88,11 @@ Label : PROJECT
               Label : CONSTANT
                 11
             Label : VARIABLE
-              17
+              18
               Label : NAME
                 13
                 Label : CLASS
-                  18
+                  17
                 Label : CONSTANT
                   20
           Label : THEN

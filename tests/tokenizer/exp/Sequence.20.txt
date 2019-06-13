@@ -1,42 +1,144 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      10
+      Label : INDEX
+        11
+      Label : VARIABLE
+        8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFAULT
+      18
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFAULT
+      21
+      Label : CONCAT
+        23
+      Label : CONCAT
+        24
+      Label : CONCAT
+        23
+      Label : CONCAT
+        26
+      Label : CONCAT
+        23
+      Label : CONCAT
+        28
+      Label : CONCAT
+        30
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      10
+      Label : INDEX
+        11
+      Label : VARIABLE
+        8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
-      12
+      13
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      14
-  Label : DEFINITION
-    6
+    16
+    Label : DEFAULT
+      18
     Label : DEFINITION
       16
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      20
-  Label : DEFINITION
-    6
-    Label : DEFINITION
+    19
+    Label : DEFAULT
       21
-  Label : DEFINITION
-    6
+      Label : CONCAT
+        23
+      Label : CONCAT
+        24
+      Label : CONCAT
+        23
+      Label : CONCAT
+        26
+      Label : CONCAT
+        23
+      Label : CONCAT
+        28
+      Label : CONCAT
+        30
     Label : DEFINITION
-      22
+      19
   Label : DEFINITION
-    6
+    24
     Label : DEFINITION
       24
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,44 +150,44 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            9
+            10
             Label : INDEX
-              10
+              11
             Label : VARIABLE
               8
         Label : EXPRESSION
-          11
+          12
           Label : CONDITION
-            12
-          Label : THEN
             13
+          Label : THEN
+            15
             Label : EXPRESSION
               7
               Label : LEFT
-                14
+                16
               Label : RIGHT
-                15
+                18
         Label : EXPRESSION
           7
           Label : LEFT
-            16
+            19
           Label : RIGHT
-            17
+            21
             Label : CONCAT
-              19
+              23
             Label : CONCAT
-              20
+              24
             Label : CONCAT
-              19
+              23
             Label : CONCAT
-              21
+              26
             Label : CONCAT
-              19
+              23
             Label : CONCAT
-              22
+              28
             Label : CONCAT
-              6
+              30
         Label : EXPRESSION
-          23
+          31
           Label : ARGUMENT
-            24
+            32

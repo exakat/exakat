@@ -55,19 +55,3 @@ Label : PROJECT
               7
           Label : NAME
             6
-          Label : PPP
-            13
-            Label : PPP
-              13
-              Label : DEFINITION
-                14
-                Label : CLASS
-                  12
-                Label : MEMBER
-                  13
-              Label : DEFINITION
-                14
-                Label : CLASS
-                  12
-                Label : MEMBER
-                  13

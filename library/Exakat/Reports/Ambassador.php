@@ -40,10 +40,10 @@ class Ambassador extends Reports {
     protected $finalName       = null;
     protected $tmpName           = '';
 
-    private $frequences        = array();
-    private $timesToFix        = array();
-    private $themesForAnalyzer = array();
-    private $severities        = array();
+    protected $frequences        = array();
+    protected $timesToFix        = array();
+    protected $themesForAnalyzer = array();
+    protected $severities        = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -2064,7 +2064,7 @@ JAVASCRIPTCODE;
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
         
-        if ($res->fetchArray(\SQLITE3_NUM)[0] < 10) {
+        if ($res === false || $res->fetchArray(\SQLITE3_NUM)[0] < 10) {
             return array();
         }
 

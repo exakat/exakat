@@ -1,8 +1,62 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      16
+      Label : LEFT
+        13
+        Label : LEFT
+          9
+          Label : CODE
+            13
+            Label : LEFT
+              10
+              Label : ARGUMENT
+                11
+              Label : NAME
+                10
+            Label : RIGHT
+              10
+              Label : ARGUMENT
+                14
+              Label : NAME
+                10
+        Label : RIGHT
+          15
+      Label : RIGHT
+        17
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    5
+    Label : DEFAULT
+      16
+      Label : LEFT
+        13
+        Label : LEFT
+          9
+          Label : CODE
+            13
+            Label : LEFT
+              10
+              Label : ARGUMENT
+                11
+              Label : NAME
+                10
+            Label : RIGHT
+              10
+              Label : ARGUMENT
+                14
+              Label : NAME
+                10
+        Label : RIGHT
+          15
+      Label : RIGHT
+        17
     Label : DEFINITION
       5
   Label : FILE

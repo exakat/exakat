@@ -1,12 +1,56 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CODE
+        9
+        Label : ARGUMENT
+          12
+          Label : LEFT
+            10
+          Label : RIGHT
+            15
+            Label : LEFT
+              13
+            Label : RIGHT
+              16
+        Label : NAME
+          9
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CODE
+        9
+        Label : ARGUMENT
+          12
+          Label : LEFT
+            10
+          Label : RIGHT
+            15
+            Label : LEFT
+              13
+            Label : RIGHT
+              16
+        Label : NAME
+          9
     Label : DEFINITION
       5
   Label : FILE
@@ -28,10 +72,10 @@ Label : PROJECT
                 Label : LEFT
                   10
                 Label : RIGHT
-                  14
+                  15
                   Label : LEFT
                     13
                   Label : RIGHT
-                    15
+                    16
               Label : NAME
                 9

@@ -1,8 +1,74 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : NAME
+          9
+      Label : ARGUMENT
+        10
+        Label : NAME
+          10
+      Label : ARGUMENT
+        11
+        Label : NAME
+          11
+      Label : ARGUMENT
+        14
+        Label : NAME
+          14
+        Label : TYPEHINT
+          12
+      Label : BLOCK
+        15
+        Label : EXPRESSION
+          17
+          Label : POSTPLUSPLUS
+            16
+      Label : DEFINITION
+        16
+        Label : DEFINITION
+          16
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : NAME
+          9
+      Label : ARGUMENT
+        10
+        Label : NAME
+          10
+      Label : ARGUMENT
+        11
+        Label : NAME
+          11
+      Label : ARGUMENT
+        14
+        Label : NAME
+          14
+        Label : TYPEHINT
+          12
+      Label : BLOCK
+        15
+        Label : EXPRESSION
+          17
+          Label : POSTPLUSPLUS
+            16
+      Label : DEFINITION
+        16
+        Label : DEFINITION
+          16
     Label : DEFINITION
       5
   Label : FILE
@@ -42,6 +108,6 @@ Label : PROJECT
                 Label : POSTPLUSPLUS
                   16
             Label : DEFINITION
-              6
+              16
               Label : DEFINITION
                 16

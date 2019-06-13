@@ -323,7 +323,6 @@ Applications
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
 * `ChurchCRM <http://churchcrm.io/>`_
-* Churchcrm
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Contao <https://contao.org/en/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
@@ -346,7 +345,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
-* SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
 * `Thelia <https://thelia.net/>`_
@@ -358,7 +356,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Vanilla <https://open.vanillaforums.com/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `WordPress <https://www.wordpress.org/>`_
-* Wordpress
 * `XOOPS <https://xoops.org/>`_
 * `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
@@ -2103,8 +2100,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2270,7 +2267,6 @@ List of external links mentionned in this documentation.
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
-* `foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_
 * `Foreign Function Interface <https://www.php.net/manual/en/book.ffi.php>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2575,8 +2571,8 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2597,8 +2593,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_

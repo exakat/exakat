@@ -1,26 +1,76 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+      Label : ARGUMENT
+        12
+      Label : ARGUMENT
+        14
+      Label : NAME
+        8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+      Label : ARGUMENT
+        12
+      Label : ARGUMENT
+        14
+      Label : NAME
+        8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
-      11
+      12
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,10 +84,10 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : ARGUMENT
-              9
-            Label : ARGUMENT
               10
             Label : ARGUMENT
-              11
+              12
+            Label : ARGUMENT
+              14
             Label : NAME
               8

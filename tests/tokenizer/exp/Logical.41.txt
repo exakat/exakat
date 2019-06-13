@@ -1,12 +1,50 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
       13
     Label : DEFINITION
@@ -14,7 +52,7 @@ Label : PROJECT
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    21
     Label : DEFINITION
       21
     Label : DEFINITION
@@ -22,13 +60,13 @@ Label : PROJECT
     Label : DEFINITION
       21
   Label : DEFINITION
-    6
+    26
     Label : DEFINITION
       26
   Label : DEFINITION
-    6
+    33
     Label : DEFINITION
-      32
+      33
   Label : FILE
     3
     Label : EXPRESSION
@@ -96,7 +134,7 @@ Label : PROJECT
           Label : RIGHT
             10
             Label : LEFT
-              29
+              30
               Label : INDEX
                 9
                 Label : MEMBER
@@ -108,9 +146,9 @@ Label : PROJECT
                 Label : CLASS
                   12
                 Label : MEMBER
-                  27
+                  28
             Label : RIGHT
-              30
+              31
         Label : EXPRESSION
           16
           Label : LEFT
@@ -120,7 +158,7 @@ Label : PROJECT
               Label : MEMBER
                 7
               Label : OBJECT
-                32
+                33
             Label : RIGHT
               11
               Label : ARGUMENT
@@ -138,7 +176,7 @@ Label : PROJECT
               Label : CLASS
                 12
               Label : METHOD
-                33
+                35
                 Label : ARGUMENT
                   9
                   Label : MEMBER
@@ -146,6 +184,6 @@ Label : PROJECT
                   Label : OBJECT
                     21
                 Label : NAME
-                  33
+                  35
             Label : RIGHT
-              35
+              37

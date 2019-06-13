@@ -1,14 +1,160 @@
 test
+Label : GLOBAL
+  45
+  Label : DEFINITION
+    45
+    Label : DEFINITION
+      45
+    Label : DEFINITION
+      45
+Label : GLOBAL
+  38
+  Label : DEFINITION
+    38
+    Label : DEFAULT
+      41
+      Label : ARGUMENT
+        43
+      Label : ARGUMENT
+        45
+      Label : ARGUMENT
+        46
+      Label : NAME
+        41
+    Label : DEFAULT
+      41
+      Label : ARGUMENT
+        43
+      Label : ARGUMENT
+        45
+      Label : ARGUMENT
+        70
+      Label : NAME
+        41
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+Label : GLOBAL
+  71
+  Label : DEFINITION
+    71
+    Label : DEFAULT
+      55
+      Label : CONDITION
+        6
+        Label : NOT
+          7
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              54
+            Label : VARIABLE
+              38
+      Label : ELSE
+        11
+        Label : CLASS
+          58
+        Label : METHOD
+          60
+          Label : ARGUMENT
+            72
+          Label : NAME
+            60
+      Label : THEN
+        12
+        Label : INDEX
+          54
+        Label : VARIABLE
+          38
+    Label : DEFINITION
+      71
+    Label : DEFINITION
+      71
+Label : GLOBAL
+  74
+  Label : DEFINITION
+    74
+    Label : DEFAULT
+      55
+      Label : CONDITION
+        6
+        Label : NOT
+          7
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              47
+            Label : VARIABLE
+              38
+      Label : ELSE
+        11
+        Label : CLASS
+          58
+        Label : METHOD
+          60
+          Label : ARGUMENT
+            62
+          Label : NAME
+            60
+      Label : THEN
+        12
+        Label : INDEX
+          47
+        Label : VARIABLE
+          38
+    Label : DEFINITION
+      74
+    Label : DEFINITION
+      74
 Label : PROJECT
   1
   Label : DEFINITION
-    39
+    45
     Label : DEFINITION
       45
     Label : DEFINITION
       45
   Label : DEFINITION
-    39
+    38
+    Label : DEFAULT
+      41
+      Label : ARGUMENT
+        43
+      Label : ARGUMENT
+        45
+      Label : ARGUMENT
+        46
+      Label : NAME
+        41
+    Label : DEFAULT
+      41
+      Label : ARGUMENT
+        43
+      Label : ARGUMENT
+        45
+      Label : ARGUMENT
+        70
+      Label : NAME
+        41
     Label : DEFINITION
       38
     Label : DEFINITION
@@ -32,13 +178,69 @@ Label : PROJECT
     Label : DEFINITION
       38
   Label : DEFINITION
-    39
+    71
+    Label : DEFAULT
+      55
+      Label : CONDITION
+        6
+        Label : NOT
+          7
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              54
+            Label : VARIABLE
+              38
+      Label : ELSE
+        11
+        Label : CLASS
+          58
+        Label : METHOD
+          60
+          Label : ARGUMENT
+            72
+          Label : NAME
+            60
+      Label : THEN
+        12
+        Label : INDEX
+          54
+        Label : VARIABLE
+          38
     Label : DEFINITION
       71
     Label : DEFINITION
       71
   Label : DEFINITION
-    39
+    74
+    Label : DEFAULT
+      55
+      Label : CONDITION
+        6
+        Label : NOT
+          7
+          Label : ARGUMENT
+            12
+            Label : INDEX
+              47
+            Label : VARIABLE
+              38
+      Label : ELSE
+        11
+        Label : CLASS
+          58
+        Label : METHOD
+          60
+          Label : ARGUMENT
+            62
+          Label : NAME
+            60
+      Label : THEN
+        12
+        Label : INDEX
+          47
+        Label : VARIABLE
+          38
     Label : DEFINITION
       74
     Label : DEFINITION

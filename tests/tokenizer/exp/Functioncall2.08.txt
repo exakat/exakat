@@ -1,8 +1,24 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -174,9 +190,9 @@ Label : PROJECT
           Label : OBJECT
             11
         Label : EXPRESSION
-          16
+          15
           Label : CLASS
-            15
+            12
           Label : METHOD
             13
             Label : ARGUMENT
@@ -184,9 +200,9 @@ Label : PROJECT
             Label : NAME
               13
         Label : EXPRESSION
-          16
+          15
           Label : CLASS
-            15
+            12
           Label : METHOD
             13
             Label : NAME
@@ -196,9 +212,9 @@ Label : PROJECT
             Label : ARGUMENT
               7
         Label : EXPRESSION
-          16
+          15
           Label : CLASS
-            15
+            12
           Label : METHOD
             13
             Label : ARGUMENT
@@ -210,9 +226,9 @@ Label : PROJECT
             Label : NAME
               13
         Label : EXPRESSION
-          16
+          15
           Label : CLASS
-            15
+            12
           Label : METHOD
             13
             Label : ARGUMENT
@@ -226,9 +242,9 @@ Label : PROJECT
             Label : NAME
               13
         Label : EXPRESSION
-          16
+          15
           Label : CLASS
-            15
+            12
           Label : METHOD
             13
             Label : ARGUMENT

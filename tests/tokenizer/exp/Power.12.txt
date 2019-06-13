@@ -1,14 +1,30 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    12
     Label : DEFINITION
       12
     Label : DEFINITION
       12
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -40,7 +56,7 @@ Label : PROJECT
             Label : CONDITION
               6
               Label : LEFT
-                14
+                15
               Label : RIGHT
                 7
             Label : ELSE
@@ -48,7 +64,7 @@ Label : PROJECT
             Label : THEN
               10
           Label : THEN
-            13
+            14
         Label : EXPRESSION
           9
           Label : CONDITION
@@ -56,8 +72,8 @@ Label : PROJECT
           Label : ELSE
             6
             Label : LEFT
-              14
-            Label : RIGHT
               15
+            Label : RIGHT
+              16
           Label : THEN
-            13
+            14

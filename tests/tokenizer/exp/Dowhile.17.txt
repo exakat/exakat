@@ -1,12 +1,28 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -42,7 +58,7 @@ Label : PROJECT
               Label : POSTPLUSPLUS
                 11
           Label : CONDITION
-            12
+            13
         Label : EXPRESSION
           5
           Label : BLOCK
@@ -52,12 +68,12 @@ Label : PROJECT
               Label : POSTPLUSPLUS
                 6
           Label : CONDITION
-            13
+            14
         Label : EXPRESSION
           5
           Label : BLOCK
             3
             Label : EXPRESSION
-              14
+              15
           Label : CONDITION
-            16
+            17

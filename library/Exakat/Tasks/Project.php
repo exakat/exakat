@@ -430,7 +430,7 @@ class Project extends Tasks {
         
         $sqlite = new \Sqlite3($this->config->dump_previous);
         $res = $sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="hash"');
-        if (!$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
+        if ($res === false || !$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
             return;
         }
 

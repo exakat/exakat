@@ -1,30 +1,80 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      14
+      Label : NEW
+        15
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-  Label : DEFINITION
-    6
-    Label : DEFINITION
+    9
+    Label : DEFAULT
       11
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      14
+      Label : NEW
+        15
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,98 +92,98 @@ Label : PROJECT
           Label : LEFT
             9
           Label : RIGHT
-            10
+            11
         Label : EXPRESSION
           7
           Label : LEFT
-            11
+            12
           Label : RIGHT
-            10
+            11
         Label : EXPRESSION
           7
           Label : LEFT
             5
           Label : RIGHT
-            12
+            14
             Label : NEW
-              13
-        Label : EXPRESSION
-          14
-          Label : ARGUMENT
-            16
-            Label : MEMBER
               15
+        Label : EXPRESSION
+          16
+          Label : ARGUMENT
+            18
+            Label : MEMBER
+              17
               Label : CODE
                 9
             Label : OBJECT
               5
         Label : EXPRESSION
-          14
+          16
           Label : ARGUMENT
-            16
+            18
             Label : MEMBER
-              17
+              19
               Label : NAME
-                19
-                Label : CONCAT
-                  18
+                21
                 Label : CONCAT
                   20
+                Label : CONCAT
+                  22
                   Label : ARGUMENT
-                    18
+                    20
                   Label : NAME
-                    20
+                    22
             Label : OBJECT
               5
         Label : EXPRESSION
-          14
+          16
           Label : ARGUMENT
-            16
-            Label : MEMBER
-              15
-              Label : CODE
-                17
-                Label : NAME
-                  19
-                  Label : CONCAT
-                    18
-                  Label : CONCAT
-                    20
-                    Label : ARGUMENT
-                      18
-                    Label : NAME
-                      20
-            Label : OBJECT
-              5
-        Label : EXPRESSION
-          14
-          Label : ARGUMENT
-            16
+            18
             Label : MEMBER
               17
-              Label : NAME
-                17
+              Label : CODE
+                19
                 Label : NAME
-                  19
-                  Label : CONCAT
-                    18
+                  21
                   Label : CONCAT
                     20
+                  Label : CONCAT
+                    22
                     Label : ARGUMENT
-                      18
-                    Label : NAME
                       20
+                    Label : NAME
+                      22
             Label : OBJECT
               5
         Label : EXPRESSION
-          21
+          16
+          Label : ARGUMENT
+            18
+            Label : MEMBER
+              19
+              Label : NAME
+                19
+                Label : NAME
+                  21
+                  Label : CONCAT
+                    20
+                  Label : CONCAT
+                    22
+                    Label : ARGUMENT
+                      20
+                    Label : NAME
+                      22
+            Label : OBJECT
+              5
+        Label : EXPRESSION
+          23
           Label : DEFINITION
-            13
+            15
           Label : NAME
-            13
+            15
           Label : PPP
-            22
+            24
             Label : PPP
-              23
+              25
               Label : DEFAULT
-                25
+                27

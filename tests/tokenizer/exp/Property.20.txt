@@ -1,14 +1,88 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      11
+      Label : NEW
+        12
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFAULT
+      22
+      Label : ARGUMENT
+        23
+        Label : INDEX
+          8
+        Label : VALUE
+          22
+          Label : ARGUMENT
+            23
+            Label : INDEX
+              24
+            Label : VALUE
+              25
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFAULT
+      28
+      Label : INDEX
+        32
+      Label : VARIABLE
+        28
+        Label : INDEX
+          5
+        Label : VARIABLE
+          20
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
+    Label : DEFAULT
+      11
+      Label : NEW
+        12
     Label : DEFINITION
       9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -18,19 +92,43 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    20
+    Label : DEFAULT
+      22
+      Label : ARGUMENT
+        23
+        Label : INDEX
+          8
+        Label : VALUE
+          22
+          Label : ARGUMENT
+            23
+            Label : INDEX
+              24
+            Label : VALUE
+              25
     Label : DEFINITION
-      19
+      20
     Label : DEFINITION
-      19
+      20
     Label : DEFINITION
-      19
+      20
     Label : DEFINITION
-      19
+      20
   Label : DEFINITION
-    6
+    31
+    Label : DEFAULT
+      28
+      Label : INDEX
+        32
+      Label : VARIABLE
+        28
+        Label : INDEX
+          5
+        Label : VARIABLE
+          20
     Label : DEFINITION
-      29
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,104 +146,104 @@ Label : PROJECT
           Label : LEFT
             9
           Label : RIGHT
-            10
+            11
             Label : NEW
-              11
+              12
         Label : EXPRESSION
-          12
+          13
           Label : CONST
-            12
-            Label : DEFINITION
-              13
-            Label : DEFINITION
-              13
-            Label : NAME
-              13
-            Label : VALUE
-              15
-        Label : EXPRESSION
-          7
-          Label : LEFT
-            18
-            Label : MEMBER
-              16
-            Label : OBJECT
-              9
-          Label : RIGHT
             13
+            Label : DEFINITION
+              14
+            Label : DEFINITION
+              14
+            Label : NAME
+              14
+            Label : VALUE
+              16
         Label : EXPRESSION
           7
           Label : LEFT
             19
+            Label : MEMBER
+              17
+            Label : OBJECT
+              9
           Label : RIGHT
+            14
+        Label : EXPRESSION
+          7
+          Label : LEFT
             20
+          Label : RIGHT
+            22
             Label : ARGUMENT
-              21
+              23
               Label : INDEX
                 8
               Label : VALUE
-                20
+                22
                 Label : ARGUMENT
-                  21
+                  23
                   Label : INDEX
-                    22
+                    24
                   Label : VALUE
-                    23
+                    25
         Label : EXPRESSION
-          24
+          26
           Label : ARGUMENT
-            18
+            19
             Label : MEMBER
-              16
+              17
             Label : OBJECT
-              25
+              27
               Label : NAME
-                26
+                28
                 Label : INDEX
-                  22
+                  24
                 Label : VARIABLE
-                  26
+                  28
                   Label : INDEX
                     5
                   Label : VARIABLE
-                    19
+                    20
           Label : NAME
-            24
+            26
         Label : EXPRESSION
-          27
+          29
           Label : CONDITION
-            28
+            30
             Label : LEFT
-              18
+              19
               Label : MEMBER
-                16
+                17
               Label : OBJECT
-                25
+                27
                 Label : NAME
-                  26
+                  28
                   Label : INDEX
-                    22
+                    24
                   Label : VARIABLE
-                    26
+                    28
                     Label : INDEX
                       5
                     Label : VARIABLE
-                      19
+                      20
             Label : RIGHT
-              13
+              14
           Label : THEN
             3
             Label : EXPRESSION
               7
               Label : LEFT
-                29
+                31
               Label : RIGHT
-                26
+                28
                 Label : INDEX
-                  30
+                  32
                 Label : VARIABLE
-                  26
+                  28
                   Label : INDEX
                     5
                   Label : VARIABLE
-                    19
+                    20

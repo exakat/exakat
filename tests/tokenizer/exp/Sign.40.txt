@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    9
+    16
     Label : DEFINITION
-      15
+      16
   Label : DEFINITION
-    9
+    19
     Label : DEFINITION
-      17
+      19
   Label : DEFINITION
-    9
+    23
     Label : DEFINITION
-      20
+      23
   Label : DEFINITION
-    9
+    26
     Label : DEFINITION
-      22
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,17 +70,17 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            24
+            29
             Label : LEFT
               6
               Label : CODE
-                14
+                15
                 Label : LEFT
                   7
                   Label : CAST
                     6
                     Label : CODE
-                      12
+                      13
                       Label : LEFT
                         10
                         Label : LEFT
@@ -52,48 +88,48 @@ Label : PROJECT
                         Label : RIGHT
                           11
                       Label : RIGHT
-                        13
+                        14
                 Label : RIGHT
-                  14
+                  15
                   Label : LEFT
-                    15
+                    16
                   Label : RIGHT
-                    14
+                    15
                     Label : LEFT
-                      16
+                      18
                     Label : RIGHT
-                      19
+                      22
                       Label : LEFT
                         7
                         Label : CAST
                           6
                           Label : CODE
-                            12
+                            13
                             Label : LEFT
-                              17
+                              19
                             Label : RIGHT
-                              18
+                              21
                       Label : RIGHT
-                        14
+                        15
                         Label : LEFT
                           7
                           Label : CAST
                             6
                             Label : CODE
-                              12
+                              13
                               Label : LEFT
-                                20
+                                23
                               Label : RIGHT
-                                21
+                                25
                         Label : RIGHT
                           7
                           Label : CAST
                             6
                             Label : CODE
-                              12
+                              13
                               Label : LEFT
-                                22
+                                26
                               Label : RIGHT
-                                23
+                                28
             Label : RIGHT
-              25
+              30

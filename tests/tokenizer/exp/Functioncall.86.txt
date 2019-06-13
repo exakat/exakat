@@ -1,4 +1,16 @@
 test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
 Label : PROJECT
   1
   Label : FILE
@@ -48,45 +60,45 @@ Label : PROJECT
                     Label : DEFINITION
                       22
                   Label : GLOBAL
-                    23
+                    24
                     Label : DEFINITION
-                      23
+                      24
                 Label : EXPRESSION
-                  24
+                  26
                   Label : RETURN
-                    25
+                    27
                     Label : INDEX
-                      28
+                      30
                       Label : CONCAT
-                        26
+                        28
                       Label : CONCAT
-                        29
+                        31
                         Label : CODE
-                          33
+                          35
                           Label : CONDITION
-                            30
+                            32
                             Label : ARGUMENT
-                              25
+                              27
                               Label : INDEX
-                                31
+                                33
                               Label : VARIABLE
                                 18
                           Label : ELSE
-                            25
+                            27
                             Label : INDEX
-                              25
+                              27
                               Label : INDEX
-                                31
+                                33
                               Label : VARIABLE
                                 18
                             Label : VARIABLE
-                              25
+                              27
                               Label : INDEX
-                                36
+                                38
                               Label : VARIABLE
-                                23
+                                24
                           Label : THEN
-                            34
+                            36
                     Label : VARIABLE
                       22
               Label : DEFINITION
@@ -94,16 +106,16 @@ Label : PROJECT
                 Label : DEFINITION
                   22
               Label : DEFINITION
-                23
+                24
                 Label : DEFINITION
-                  23
+                  24
               Label : RETURNED
                 22
               Label : RETURNED
                 18
               Label : RETURNED
-                23
+                24
               Label : RETURNED
                 18
           Label : ARGUMENT
-            38
+            40

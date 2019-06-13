@@ -1,36 +1,84 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  41
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+Label : GLOBAL
+  48
+  Label : DEFINITION
+    48
+    Label : DEFINITION
+      48
+Label : GLOBAL
+  56
+  Label : DEFINITION
+    56
+    Label : DEFINITION
+      56
+Label : GLOBAL
+  64
+  Label : DEFINITION
+    64
+    Label : DEFINITION
+      64
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    25
     Label : DEFINITION
       25
   Label : DEFINITION
-    7
+    32
     Label : DEFINITION
       32
   Label : DEFINITION
-    7
+    41
     Label : DEFINITION
       41
   Label : DEFINITION
-    7
+    48
     Label : DEFINITION
       48
   Label : DEFINITION
-    7
+    56
     Label : DEFINITION
       56
   Label : DEFINITION
-    7
+    64
     Label : DEFINITION
       64
   Label : FILE

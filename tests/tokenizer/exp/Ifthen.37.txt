@@ -1,28 +1,60 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
-      14
+      15
   Label : DEFINITION
-    7
+    19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
   Label : DEFINITION
-    7
+    26
     Label : DEFINITION
-      24
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -44,58 +76,58 @@ Label : PROJECT
                   Label : CONDITION
                     12
                   Label : ELSE
-                    15
+                    17
                     Label : CONDITION
-                      16
+                      18
                       Label : ARGUMENT
-                        18
+                        21
                         Label : INDEX
-                          19
+                          22
                         Label : VARIABLE
-                          17
+                          19
                     Label : THEN
-                      13
-                      Label : EXPRESSION
-                        20
-                  Label : THEN
-                    13
-                    Label : EXPRESSION
                       14
+                      Label : EXPRESSION
+                        23
+                  Label : THEN
+                    14
+                    Label : EXPRESSION
+                      15
                 Label : EXPRESSION
-                  23
+                  25
                   Label : ARGUMENT
-                    22
+                    7
                     Label : ARGUMENT
                       10
                     Label : NAME
-                      22
+                      7
                 Label : EXPRESSION
                   11
                   Label : CONDITION
-                    24
+                    26
                   Label : THEN
-                    13
+                    14
                     Label : EXPRESSION
-                      20
+                      23
                 Label : EXPRESSION
                   11
                   Label : CONDITION
-                    17
+                    19
                   Label : THEN
-                    13
+                    14
                     Label : EXPRESSION
-                      20
+                      23
                 Label : EXPRESSION
-                  25
+                  28
                   Label : BREAK
-                    20
+                    23
             Label : EXPRESSION
-              26
+              29
               Label : CODE
                 3
                 Label : EXPRESSION
-                  27
+                  30
                   Label : RETURN
-                    28
+                    31
           Label : CONDITION
             6

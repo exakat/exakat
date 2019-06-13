@@ -1,22 +1,74 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      19
+      Label : METHOD
+        13
+        Label : NAME
+          13
+        Label : ARGUMENT
+          14
+          Label : ARGUMENT
+            15
+        Label : ARGUMENT
+          17
+      Label : OBJECT
+        11
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    9
+    8
+    Label : DEFAULT
+      19
+      Label : METHOD
+        13
+        Label : NAME
+          13
+        Label : ARGUMENT
+          14
+          Label : ARGUMENT
+            15
+        Label : ARGUMENT
+          17
+      Label : OBJECT
+        11
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    9
+    21
     Label : DEFINITION
-      19
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,22 +86,22 @@ Label : PROJECT
               Label : LEFT
                 8
               Label : RIGHT
-                17
+                19
                 Label : METHOD
-                  12
+                  13
                   Label : NAME
-                    12
-                  Label : ARGUMENT
                     13
-                    Label : ARGUMENT
-                      14
                   Label : ARGUMENT
-                    16
+                    14
+                    Label : ARGUMENT
+                      15
+                  Label : ARGUMENT
+                    17
                 Label : OBJECT
                   11
           Label : THEN
             3
             Label : EXPRESSION
-              18
+              20
               Label : RETURN
-                19
+                21

@@ -1,8 +1,42 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      12
+      Label : CONDITION
+        8
+        Label : ARGUMENT
+          10
+        Label : NAME
+          8
+      Label : ELSE
+        16
+      Label : THEN
+        13
+        Label : CAST
+          14
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      12
+      Label : CONDITION
+        8
+        Label : ARGUMENT
+          10
+        Label : NAME
+          8
+      Label : ELSE
+        16
+      Label : THEN
+        13
+        Label : CAST
+          14
     Label : DEFINITION
       5
   Label : FILE

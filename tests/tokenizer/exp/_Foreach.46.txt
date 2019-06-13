@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    7
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      21
+      14
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,30 +76,28 @@ Label : PROJECT
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  13
-                  Label : ARGUMENT
-                    14
-                Label : EXPRESSION
                   16
+                  Label : ARGUMENT
+                    17
+                Label : EXPRESSION
+                  19
               Label : SOURCE
-                11
-              Label : VALUE
                 12
+              Label : VALUE
+                14
+          Label : INDEX
+            8
           Label : SOURCE
             6
           Label : VALUE
-            9
-            Label : INDEX
-              8
-            Label : VALUE
-              10
+            10
         Label : EXPRESSION
-          18
+          21
         Label : EXPRESSION
-          20
+          23
           Label : ARGUMENT
-            22
+            26
             Label : POSTPLUSPLUS
-              21
+              24
           Label : NAME
-            20
+            23

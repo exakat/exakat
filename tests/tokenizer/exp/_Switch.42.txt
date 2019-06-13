@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
+  44
+  Label : DEFINITION
+    44
+    Label : DEFINITION
+      44
+Label : GLOBAL
+  61
+  Label : DEFINITION
+    61
+    Label : DEFINITION
+      61
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    12
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    12
+    28
     Label : DEFINITION
       28
   Label : DEFINITION
-    12
+    36
     Label : DEFINITION
-      35
+      36
   Label : DEFINITION
-    12
+    44
     Label : DEFINITION
-      42
+      44
   Label : DEFINITION
-    12
+    61
     Label : DEFINITION
-      58
+      61
   Label : FILE
     3
     Label : EXPRESSION
@@ -68,7 +104,7 @@ Label : PROJECT
               Label : CASE
                 13
                 Label : CLASS
-                  29
+                  30
                 Label : VARIABLE
                   28
               Label : CODE
@@ -76,58 +112,58 @@ Label : PROJECT
                 Label : EXPRESSION
                   16
                   Label : RETURN
-                    31
+                    32
             Label : EXPRESSION
-              33
+              34
               Label : CASE
                 13
                 Label : CLASS
+                  38
+                Label : VARIABLE
                   36
-                Label : VARIABLE
-                  35
               Label : CODE
                 3
                 Label : EXPRESSION
                   16
                   Label : RETURN
-                    38
+                    40
             Label : EXPRESSION
-              40
+              42
               Label : CASE
                 13
                 Label : CLASS
-                  43
+                  46
                 Label : VARIABLE
-                  42
+                  44
               Label : CODE
                 3
                 Label : EXPRESSION
                   16
                   Label : RETURN
-                    45
+                    48
             Label : EXPRESSION
-              47
+              50
               Label : CODE
                 3
                 Label : EXPRESSION
-                  48
+                  51
                   Label : THROW
-                    49
+                    52
                     Label : NEW
-                      50
+                      53
                       Label : ARGUMENT
-                        52
+                        55
                         Label : NAME
-                          52
+                          55
                         Label : ARGUMENT
-                          54
+                          57
                         Label : ARGUMENT
-                          56
+                          59
                           Label : ARGUMENT
-                            58
+                            61
                           Label : NAME
-                            56
+                            59
                       Label : NAME
-                        50
+                        53
           Label : CONDITION
             6

@@ -1,20 +1,40 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
-      10
+      11
     Label : DEFINITION
-      10
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,7 +44,7 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : INDEX
-            9
+            10
             Label : POSTPLUSPLUS
               8
           Label : VARIABLE
@@ -32,8 +52,8 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : INDEX
-            11
+            13
             Label : PREPLUSPLUS
-              10
+              11
           Label : VARIABLE
-            10
+            11

@@ -1,8 +1,18 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -38,19 +48,19 @@ Label : PROJECT
                 Label : NAME
                   7
             Label : CONCAT
-              14
+              13
               Label : INDEX
-                15
+                14
               Label : VARIABLE
                 12
         Label : EXPRESSION
-          17
+          16
           Label : CONDITION
-            18
+            17
             Label : NAME
-              18
+              17
             Label : ARGUMENT
-              15
+              14
             Label : ARGUMENT
               12
           Label : THEN
@@ -68,8 +78,8 @@ Label : PROJECT
                     Label : NAME
                       7
                 Label : CONCAT
-                  14
+                  13
                   Label : INDEX
-                    15
+                    14
                   Label : VARIABLE
                     12

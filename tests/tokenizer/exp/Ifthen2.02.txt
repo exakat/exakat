@@ -1,14 +1,52 @@
 test
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFAULT
+      24
+    Label : DEFAULT
+      22
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFAULT
+      36
+    Label : DEFAULT
+      34
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    19
+    Label : DEFAULT
+      24
+    Label : DEFAULT
+      22
     Label : DEFINITION
       19
     Label : DEFINITION
       19
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -16,11 +54,15 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    33
+    Label : DEFAULT
+      36
+    Label : DEFAULT
+      34
     Label : DEFINITION
-      32
+      33
     Label : DEFINITION
-      32
+      33
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,42 +98,42 @@ Label : PROJECT
           Label : ELSE
             18
             Label : EXPRESSION
-              20
+              21
               Label : LEFT
                 19
               Label : RIGHT
-                23
+                24
           Label : THEN
             18
             Label : EXPRESSION
-              20
+              21
               Label : LEFT
                 19
               Label : RIGHT
-                21
+                22
         Label : EXPRESSION
-          31
+          32
           Label : CONDITION
-            25
+            26
             Label : CODE
-              28
+              29
               Label : LEFT
                 9
                 Label : INDEX
-                  26
+                  27
                 Label : VARIABLE
                   7
               Label : RIGHT
-                29
+                30
           Label : ELSE
-            20
+            21
             Label : LEFT
-              32
-            Label : RIGHT
-              35
-          Label : THEN
-            20
-            Label : LEFT
-              32
-            Label : RIGHT
               33
+            Label : RIGHT
+              36
+          Label : THEN
+            21
+            Label : LEFT
+              33
+            Label : RIGHT
+              34

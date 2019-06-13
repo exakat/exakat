@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : FILE
@@ -36,20 +48,20 @@ Label : PROJECT
               Label : ARGUMENT
                 16
               Label : ARGUMENT
-                23
+                24
                 Label : METHOD
-                  19
+                  20
                   Label : ARGUMENT
-                    21
+                    22
                   Label : NAME
-                    19
+                    20
                 Label : OBJECT
                   18
           Label : ARGUMENT
             11
             Label : CONCAT
-              24
+              25
             Label : CONCAT
-              26
+              27
             Label : CONCAT
-              28
+              29

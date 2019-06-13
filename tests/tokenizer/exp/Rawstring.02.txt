@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      15
+      14
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -24,10 +36,10 @@ Label : PROJECT
             Label : EXPRESSION
               8
             Label : EXPRESSION
-              10
+              9
             Label : EXPRESSION
-              12
+              11
             Label : EXPRESSION
-              14
+              13
               Label : ARGUMENT
-                15
+                14

@@ -1,18 +1,36 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
       13
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    16
     Label : DEFINITION
-      15
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,7 +50,7 @@ Label : PROJECT
               Label : CODE
                 7
         Label : EXPRESSION
-          14
+          15
           Label : METHOD
             9
             Label : ARGUMENT
@@ -46,7 +64,7 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : CLASS
-            15
+            16
           Label : METHOD
             9
             Label : ARGUMENT
@@ -54,8 +72,8 @@ Label : PROJECT
             Label : NAME
               9
               Label : CODE
-                18
+                20
                 Label : CONCAT
-                  16
+                  18
                 Label : CONCAT
-                  19
+                  21

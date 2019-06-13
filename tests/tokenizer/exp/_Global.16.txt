@@ -1,12 +1,12 @@
 test
 Label : GLOBAL
-  6
-  Label : DEFINITION
-    6
-Label : GLOBAL
   8
   Label : DEFINITION
     8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
 Label : PROJECT
   1
   Label : FILE

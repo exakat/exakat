@@ -1,8 +1,46 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : NAME
+          9
+      Label : BLOCK
+        10
+        Label : EXPRESSION
+          12
+          Label : POSTPLUSPLUS
+            11
+      Label : DEFINITION
+        11
+        Label : DEFINITION
+          11
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        9
+        Label : NAME
+          9
+      Label : BLOCK
+        10
+        Label : EXPRESSION
+          12
+          Label : POSTPLUSPLUS
+            11
+      Label : DEFINITION
+        11
+        Label : DEFINITION
+          11
     Label : DEFINITION
       5
   Label : FILE
@@ -28,6 +66,6 @@ Label : PROJECT
                 Label : POSTPLUSPLUS
                   11
             Label : DEFINITION
-              6
+              11
               Label : DEFINITION
                 11

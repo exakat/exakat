@@ -1,14 +1,36 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -38,46 +60,46 @@ Label : PROJECT
               Label : NAME
                 9
           Label : ELSE
-            19
+            20
             Label : CONDITION
               6
             Label : THEN
               3
               Label : EXPRESSION
-                11
+                12
                 Label : LEFT
                   10
                 Label : RIGHT
-                  14
+                  15
                   Label : CONCAT
-                    20
+                    21
                   Label : CONCAT
-                    17
+                    18
                     Label : ARGUMENT
                       6
                     Label : NAME
-                      17
+                      18
           Label : THEN
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
                 10
               Label : RIGHT
-                14
+                15
                 Label : CONCAT
-                  12
+                  13
                 Label : CONCAT
-                  15
+                  16
                   Label : NAME
-                    15
-                  Label : ARGUMENT
                     16
                   Label : ARGUMENT
                     17
+                  Label : ARGUMENT
+                    18
                     Label : ARGUMENT
                       6
                     Label : NAME
-                      17
+                      18
                 Label : CONCAT
-                  18
+                  19

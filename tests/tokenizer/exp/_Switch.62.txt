@@ -1,8 +1,34 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFAULT
+      11
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
+    Label : DEFAULT
+      11
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -12,7 +38,9 @@ Label : PROJECT
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -34,19 +62,19 @@ Label : PROJECT
           Label : LEFT
             9
           Label : RIGHT
-            10
+            11
         Label : EXPRESSION
-          21
+          20
         Label : EXPRESSION
-          11
+          12
           Label : CASES
-            12
+            13
             Label : EXPRESSION
-              13
+              14
               Label : CODE
                 3
                 Label : EXPRESSION
-                  14
+                  15
                 Label : EXPRESSION
                   16
                   Label : PREPLUSPLUS
@@ -54,26 +82,26 @@ Label : PROJECT
                 Label : EXPRESSION
                   17
                 Label : EXPRESSION
-                  19
+                  18
                   Label : BREAK
-                    10
+                    11
             Label : EXPRESSION
-              20
+              19
               Label : CASE
-                22
+                21
               Label : CODE
                 3
                 Label : EXPRESSION
-                  24
+                  23
                 Label : EXPRESSION
                   16
                   Label : PREPLUSPLUS
                     9
                 Label : EXPRESSION
-                  24
+                  23
           Label : CONDITION
             5
         Label : EXPRESSION
-          26
+          25
           Label : ARGUMENT
             9

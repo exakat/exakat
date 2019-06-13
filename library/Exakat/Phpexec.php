@@ -67,6 +67,8 @@ class Phpexec {
     private $requestedVersion = null;
     private $error            = array();
     
+    private const CLI_OR_DOCKER_REGEX = '#[a-z0-9]+/[a-z0-9]+:[a-z0-9]+#i';
+    
     const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0',);
     const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
 
@@ -100,13 +102,11 @@ class Phpexec {
         
         $this->readConfig();
 
-        if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $folder = $pathToBinary;
-            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":' . $folder . ' -w ' . $folder . ' ' . $this->phpexec . ' php -v 2>&1');
+            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":/exakat  -w /exakat ' . $this->phpexec . ' php -v 2>&1');
 
-            if (substr($res, 0, 4) === 'PHP ') {
-                $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":' . $folder . ' -w ' . $folder . ' ' . $this->phpexec . ' php ';
-            } else {
+            if (!substr($res, 0, 4) === 'PHP ') {
                 throw new NoPhpBinary('Error when accessing Docker\'s PHP : "' . $res . '". Please, check config/exakat.ini');
             }
         } else {
@@ -126,6 +126,17 @@ class Phpexec {
             $x = get_defined_constants(true);
             unset($x['tokenizer']['TOKEN_PARSE']);
             $tokens = array_flip($x['tokenizer']);
+        } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $shell = "docker run -it --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -r \"\\\$x = get_defined_constants(true);  if (!isset(\\\$x['tokenizer'])) { \\\$x['tokenizer'] = array();  } unset(\\\$x['tokenizer']['TOKEN_PARSE']); var_export(array_flip(\\\$x['tokenizer'])); \"'";
+            $res = shell_exec($shell);
+
+            $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
+            file_put_contents($tmpFile, "<?php \$tokens = $res; ?>");
+            include $tmpFile;
+            unlink($tmpFile);
+            if (empty($tokens)) {
+                return false;
+            }
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             shell_exec($this->phpexec . ' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; unset(\\$x[\'tokenizer\'][\'TOKEN_PARSE\']); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > ' . $tmpFile);
@@ -149,6 +160,18 @@ class Phpexec {
     public function getTokenFromFile($file) {
         if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
+        } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $filename = basename($file);
+            $path     = dirname($file);
+
+            $shell      = "docker run -it -v $path:/exakat -w /exakat --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -r \"\\\$code = file_get_contents(\\\"" . $filename . "\\\"); \\\$code = strpos(\\\$code, \\\"<?\\\") === false ? \\\"\\\" : \\\$code; var_export(@token_get_all(\\\$code));\"' ";
+
+            $res = shell_exec($shell);
+            eval("\$tokens = $res;");
+
+            if (empty($tokens)) {
+                return false;
+            }
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             // -d short_open_tag=1
@@ -172,8 +195,13 @@ class Phpexec {
 
     public function countTokenFromFile($file) {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
-        $filename = $this->escapeFile($file);
-        $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $filename = $this->escapeFile($file);
+            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
+        } else {
+            $filename = $this->escapeFile($file);
+            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
+        }
 
         return $res;
     }
@@ -186,25 +214,41 @@ class Phpexec {
         if (empty($this->phpexec)) {
             return false;
         }
-        $res = shell_exec($this->phpexec . ' -v 2>&1');
-        if (preg_match('/^PHP ([0-9\.]+)/', $res, $r)) {
-            $this->actualVersion = $r[1];
 
-            if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
-                throw new NoPhpBinary('PHP binary for version ' . $this->requestedVersion . ' doesn\'t have the right middle version : "' . $this->actualVersion . '" is provided. Please, check config/exakat.ini');
-            }
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $shell = "docker run -it --rm {$this->phpexec} php -v 2>&1";
 
-            return strpos($res, 'The PHP Group') !== false;
+            $res = shell_exec($shell);
         } else {
+            $res = shell_exec("{$this->phpexec} -v 2>&1");
+        }
+        
+        if (!preg_match('/^PHP ([0-9\.]+)/', $res, $r)) {
             return false;
         }
+
+        $this->actualVersion = $r[1];
+
+        if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
+            throw new NoPhpBinary('PHP binary for version ' . $this->requestedVersion . ' doesn\'t have the right middle version : "' . $this->actualVersion . '" is provided. Please, check config/exakat.ini');
+        }
+
+        return strpos($res, 'The PHP Group') !== false;
     }
 
     public function compile($file) {
-        $shell = shell_exec($this->phpexec . ' -l ' . escapeshellarg($file) . ' 2>&1');
-        $shell = trim($shell);
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $filename = basename($file);
+            $dirname  = dirname($file);
+
+            $shell = "docker run -v $dirname:/exakat -w /exakat -it --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -l $filename'";
+            $res = trim(shell_exec($shell));
+       } else {
+            $res = shell_exec($this->phpexec . ' -l ' . escapeshellarg($file) . ' 2>&1');
+            $res = trim($res);
+       }
         
-        return !$this->isError(explode("\n", $shell)[0]);
+        return !$this->isError(explode("\n", $res)[0]);
     }
 
     public function getError() {
@@ -335,6 +379,18 @@ PHP;
                 $this->config = array();
             }
         }
+    }
+    
+    public function compileFiles($project_dir, $tmpFileName) {
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            $shell = "docker run -it -v \"{$project_dir}\":/exakat -w /exakat/code --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'cat /exakat/.exakat/" . basename($tmpFileName) . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "php -l {} 2>&1 || true "\'';
+        } else {
+            $shell = "cd {$project_dir}/code; cat $tmpFileName" . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "' . $this->phpexec . ' -l {} 2>&1 || true "';
+        }
+
+        $res = trim(shell_exec($shell));
+
+        return explode("\n", $res) ?? array();
     }
 }
 

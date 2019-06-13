@@ -1,62 +1,282 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      38
+      Label : METHOD
+        10
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  12
+                Label : RIGHT
+                  15
+            Label : RIGHT
+              18
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  20
+                Label : RIGHT
+                  22
+            Label : RIGHT
+              24
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  14
+                  Label : SIGN
+                    26
+                Label : RIGHT
+                  28
+            Label : RIGHT
+              30
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  14
+                  Label : SIGN
+                    32
+                Label : RIGHT
+                  34
+            Label : RIGHT
+              36
+        Label : NAME
+          10
+      Label : OBJECT
+        8
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
+Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      38
+      Label : METHOD
+        10
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  12
+                Label : RIGHT
+                  15
+            Label : RIGHT
+              18
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  20
+                Label : RIGHT
+                  22
+            Label : RIGHT
+              24
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  14
+                  Label : SIGN
+                    26
+                Label : RIGHT
+                  28
+            Label : RIGHT
+              30
+        Label : ARGUMENT
+          11
+          Label : CODE
+            17
+            Label : LEFT
+              11
+              Label : CODE
+                14
+                Label : LEFT
+                  14
+                  Label : SIGN
+                    32
+                Label : RIGHT
+                  34
+            Label : RIGHT
+              36
+        Label : NAME
+          10
+      Label : OBJECT
+        8
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
-      11
+      12
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      13
-  Label : DEFINITION
-    6
+    15
     Label : DEFINITION
       15
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      17
-  Label : DEFINITION
-    6
+    18
     Label : DEFINITION
       18
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      19
-  Label : DEFINITION
-    6
+    20
     Label : DEFINITION
       20
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      21
-  Label : DEFINITION
-    6
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      23
-  Label : DEFINITION
-    6
+    24
     Label : DEFINITION
       24
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
   Label : FILE
     3
     Label : EXPRESSION
@@ -68,70 +288,70 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            25
+            38
             Label : METHOD
-              9
+              10
               Label : ARGUMENT
-                10
+                11
                 Label : CODE
-                  14
+                  17
                   Label : LEFT
-                    10
+                    11
                     Label : CODE
-                      12
+                      14
                       Label : LEFT
-                        11
+                        12
                       Label : RIGHT
-                        13
-                  Label : RIGHT
-                    15
-              Label : ARGUMENT
-                10
-                Label : CODE
-                  14
-                  Label : LEFT
-                    10
-                    Label : CODE
-                      12
-                      Label : LEFT
-                        16
-                      Label : RIGHT
-                        17
+                        15
                   Label : RIGHT
                     18
               Label : ARGUMENT
-                10
+                11
                 Label : CODE
-                  14
+                  17
                   Label : LEFT
-                    10
+                    11
                     Label : CODE
-                      12
+                      14
                       Label : LEFT
-                        12
-                        Label : SIGN
-                          19
-                      Label : RIGHT
                         20
-                  Label : RIGHT
-                    21
-              Label : ARGUMENT
-                10
-                Label : CODE
-                  14
-                  Label : LEFT
-                    10
-                    Label : CODE
-                      12
-                      Label : LEFT
-                        12
-                        Label : SIGN
-                          22
                       Label : RIGHT
-                        23
+                        22
                   Label : RIGHT
                     24
+              Label : ARGUMENT
+                11
+                Label : CODE
+                  17
+                  Label : LEFT
+                    11
+                    Label : CODE
+                      14
+                      Label : LEFT
+                        14
+                        Label : SIGN
+                          26
+                      Label : RIGHT
+                        28
+                  Label : RIGHT
+                    30
+              Label : ARGUMENT
+                11
+                Label : CODE
+                  17
+                  Label : LEFT
+                    11
+                    Label : CODE
+                      14
+                      Label : LEFT
+                        14
+                        Label : SIGN
+                          32
+                      Label : RIGHT
+                        34
+                  Label : RIGHT
+                    36
               Label : NAME
-                9
+                10
             Label : OBJECT
               8

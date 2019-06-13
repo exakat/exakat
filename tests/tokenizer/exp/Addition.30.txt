@@ -1,8 +1,176 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      7
+      Label : LEFT
+        8
+      Label : RIGHT
+        7
+        Label : LEFT
+          10
+        Label : RIGHT
+          7
+          Label : LEFT
+            12
+          Label : RIGHT
+            7
+            Label : LEFT
+              14
+            Label : RIGHT
+              16
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      19
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          20
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
+    Label : DEFAULT
+      18
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          19
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
+    Label : DEFAULT
+      7
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          7
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFAULT
+      7
+      Label : LEFT
+        12
+      Label : RIGHT
+        7
+        Label : LEFT
+          14
+        Label : RIGHT
+          16
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFAULT
+      20
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
+    Label : DEFAULT
+      19
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
+    Label : DEFAULT
+      7
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      16
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      7
+      Label : LEFT
+        8
+      Label : RIGHT
+        7
+        Label : LEFT
+          10
+        Label : RIGHT
+          7
+          Label : LEFT
+            12
+          Label : RIGHT
+            7
+            Label : LEFT
+              14
+            Label : RIGHT
+              16
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -10,7 +178,49 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
+    Label : DEFAULT
+      19
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          20
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
+    Label : DEFAULT
+      18
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          19
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
+    Label : DEFAULT
+      7
+      Label : LEFT
+        10
+      Label : RIGHT
+        7
+        Label : LEFT
+          12
+        Label : RIGHT
+          7
+          Label : LEFT
+            14
+          Label : RIGHT
+            16
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -18,37 +228,67 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    10
+    Label : DEFAULT
+      7
+      Label : LEFT
+        12
+      Label : RIGHT
+        7
+        Label : LEFT
+          14
+        Label : RIGHT
+          16
     Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    6
+      10
     Label : DEFINITION
       10
     Label : DEFINITION
       10
-    Label : DEFINITION
-      10
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
-    6
+    12
+    Label : DEFAULT
+      20
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
+    Label : DEFAULT
+      19
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
+    Label : DEFAULT
+      7
+      Label : LEFT
+        14
+      Label : RIGHT
+        16
     Label : DEFINITION
       12
     Label : DEFINITION
       12
     Label : DEFINITION
       12
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      16
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -66,19 +306,19 @@ Label : PROJECT
             Label : RIGHT
               7
               Label : LEFT
-                9
+                10
               Label : RIGHT
                 7
                 Label : LEFT
-                  10
+                  12
                 Label : RIGHT
                   7
                   Label : LEFT
-                    11
+                    14
                   Label : RIGHT
-                    12
+                    16
         Label : EXPRESSION
-          13
+          18
           Label : LEFT
             5
           Label : RIGHT
@@ -86,21 +326,21 @@ Label : PROJECT
             Label : LEFT
               8
             Label : RIGHT
-              13
+              18
               Label : LEFT
-                9
+                10
               Label : RIGHT
                 7
                 Label : LEFT
-                  10
+                  12
                 Label : RIGHT
-                  14
+                  19
                   Label : LEFT
-                    11
+                    14
                   Label : RIGHT
-                    12
+                    16
         Label : EXPRESSION
-          14
+          19
           Label : LEFT
             5
           Label : RIGHT
@@ -108,16 +348,16 @@ Label : PROJECT
             Label : LEFT
               8
             Label : RIGHT
-              14
+              19
               Label : LEFT
-                9
+                10
               Label : RIGHT
                 7
                 Label : LEFT
-                  10
+                  12
                 Label : RIGHT
-                  15
+                  20
                   Label : LEFT
-                    11
+                    14
                   Label : RIGHT
-                    12
+                    16

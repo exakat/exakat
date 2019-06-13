@@ -1,20 +1,40 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
       11
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    9
+    22
     Label : DEFINITION
-      21
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,40 +48,40 @@ Label : PROJECT
           Label : THEN
             7
             Label : EXPRESSION
-              17
+              18
               Label : LEFT
                 10
                 Label : INDEX
-                  15
+                  16
                   Label : MEMBER
-                    16
+                    17
                   Label : OBJECT
-                    15
+                    16
                     Label : METHOD
-                      12
+                      13
                       Label : ARGUMENT
-                        13
+                        14
                       Label : NAME
-                        12
+                        13
                     Label : OBJECT
                       11
                 Label : VARIABLE
                   8
               Label : RIGHT
-                19
+                20
                 Label : LEFT
-                  18
+                  19
                 Label : RIGHT
-                  20
-        Label : EXPRESSION
-          22
-          Label : LEFT
-            21
-          Label : RIGHT
-            23
+                  21
         Label : EXPRESSION
           24
+          Label : LEFT
+            22
+          Label : RIGHT
+            25
+        Label : EXPRESSION
+          26
           Label : CONCAT
             11
           Label : CONCAT
-            25
+            27

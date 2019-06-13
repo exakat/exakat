@@ -1359,8 +1359,8 @@ class Load extends Tasks {
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
 
-        if ($function->atom === 'Closure' && 
-            isset($fullcode[0]) && 
+        if ($function->atom === 'Closure' &&
+            isset($fullcode[0]) &&
             strtolower($fullcode[0]) === 'static') {
             array_pop($this->currentClassTrait);
         }
@@ -1594,17 +1594,21 @@ class Load extends Tasks {
 
         foreach($diff as $missing) {
             $ppp = $this->addAtom('Ppp');
-            $ppp->fullcode     = 'public $'.$missing;
+            $ppp->fullcode     = 'public $' . $missing;
             $ppp->visibility   = 'none';
             $ppp->code         = $missing;
             $ppp->line         = -1;
             $this->addLink($currentClass, $ppp, 'PPP');
 
             $virtual = $this->addAtom('Virtualproperty');
-            $virtual->fullcode     = '$'.$missing;
+            $virtual->fullcode     = '$' . $missing;
             $virtual->propertyname = $missing;
             $virtual->line         = -1;
             $this->addLink($ppp, $virtual, 'PPP');
+            
+            foreach($this->currentPropertiesCalls[$missing] as $member) {
+                $this->addLink($virtual, $member, 'DEFINITION');
+            }
             
             $this->currentProperties[$missing] = $virtual;
         }
@@ -2520,7 +2524,7 @@ class Load extends Tasks {
         $this->addLink($namecall, $name, 'NAME');
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $namecall->fullcode   = $namecall->code . '(' . $name->code . ')';
+            $namecall->fullcode   = "{$namecall->code}({$name->code})";
             $this->pushExpression($namecall);
 
             $this->runPlugins($namecall, array('NAME'  => $name,));
@@ -2543,7 +2547,7 @@ class Load extends Tasks {
 
         // Most common point of exit
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $namecall->fullcode   = $namecall->code . '(' . $name->fullcode . ', ' . $value->fullcode . ')';
+            $namecall->fullcode   = "{$namecall->code}({$name->fullcode}, {$value->fullcode})";
             $this->pushExpression($namecall);
 
             $this->runPlugins($namecall, array('NAME'  => $name,
@@ -2952,15 +2956,14 @@ class Load extends Tasks {
             if ($atom === 'Propertydefinition') {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
-                $type = ($static->static === 1 ? 'static' : '') . 'property';
                 $this->currentProperties[$element->propertyname] = $element;
                 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
                 if ($static->static === 1) {
                     $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
-                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
                 } else {
-                    $this->calls->addDefinition('property', $currentFNP . "::".ltrim($element->code, '$'), $element);
+                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
                 }
             }
 
@@ -5065,8 +5068,13 @@ class Load extends Tasks {
             ++$this->id; // skip )
 
             $breakLevel = $this->popExpression();
-        } else {
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG || 
+                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON ) {
             $breakLevel = $this->addAtomVoid();
+        } else {
+            $this->processNext();
+
+            $breakLevel = $this->popExpression();
         }
 
         $link = $this->tokens[$current][0] === $this->phptokens::T_BREAK ? 'BREAK' : 'CONTINUE';
@@ -5158,13 +5166,13 @@ class Load extends Tasks {
                         STRICT_COMPARISON)) {
             $static = $this->addAtom('Staticproperty');
             $this->addLink($static, $right, 'MEMBER');
-            $fullcode = $left->fullcode . '::' . $right->fullcode;
+            $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'MEMBER' => $right));
         } elseif ($right->atom === 'Methodcallname') {
             $static = $this->addAtom('Staticmethodcall');
             $this->addLink($static, $right, 'METHOD');
-            $fullcode = $left->fullcode . '::' . $right->fullcode;
+            $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));
         } else {
@@ -5172,14 +5180,16 @@ class Load extends Tasks {
         }
 
         $this->addLink($static, $left, 'CLASS');
-        if ($static->atom  === 'Staticproperty' && 
+        if ($static->atom  === 'Staticproperty' &&
             $left->token   === 'T_STRING'       &&
             !empty($this->currentClassTrait)    &&
             !empty($this->currentClassTrait[count($this->currentClassTrait) - 1]) &&
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
             
             $name = ltrim($right->code, '$');
-            if (isset($this->currentPropertiesCalls[$name])) { 
+            if (empty($name)) {
+                //nothing, really
+            } elseif(isset($this->currentPropertiesCalls[$name])) {
                 $this->currentPropertiesCalls[$name][] = $static;
             } else {
                 $this->currentPropertiesCalls[$name] = array($static);
@@ -5196,7 +5206,7 @@ class Load extends Tasks {
                 $this->calls->addCall('staticmethod',  "$left->fullnspath::$name", $static);
             } elseif ($static->atom === 'Staticconstant') {
                 $this->calls->addCall('staticconstant',  "$left->fullnspath::$right->code", $static);
-            } elseif ($static->atom === 'Staticproperty') {
+            } elseif ($static->atom === 'Staticproperty' && ($right->token === 'T_VARIABLE')) {
                 $this->calls->addCall('staticproperty', "$left->fullnspath::$right->code", $static);
             }
         }
@@ -5309,9 +5319,15 @@ class Load extends Tasks {
         if ($left->atom === 'This' ){
             if ($static->atom === 'Methodcall') {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
-            } elseif ($static->atom  === 'Member'   && 
+            } elseif ($static->atom  === 'Member'   &&
                       $right->token  === 'T_STRING') {
+
                 $this->calls->addCall('property', "{$left->fullnspath}::{$right->code}", $static);
+                if(isset($this->currentPropertiesCalls[$right->code])) {
+                    $this->currentPropertiesCalls[$right->code][] = $static;
+                } else {
+                    $this->currentPropertiesCalls[$right->code] = array($static);
+                }
             }
         }
         $this->runPlugins($static, array('OBJECT' => $left,
@@ -6172,8 +6188,6 @@ class Load extends Tasks {
             $this->theGlobals[$name]->lccode = $element->code;
             $this->theGlobals[$name]->line = -1;
             $this->theGlobals[$name]->globalvar = substr($name, 1);
-    
-//            $this->addLink($this->id0, $this->theGlobals[$name], 'GLOBAL');
         }
     }
 }

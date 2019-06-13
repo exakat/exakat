@@ -1,8 +1,16 @@
 test
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+    Label : DEFINITION
+      28
 Label : PROJECT
   1
   Label : DEFINITION
-    29
+    28
     Label : DEFINITION
       28
     Label : DEFINITION

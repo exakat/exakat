@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION
-    14
+    20
     Label : DEFINITION
       20
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
       13
   Label : FILE

@@ -1,14 +1,28 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    11
     Label : DEFINITION
       11
     Label : DEFINITION
       11
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
       8
   Label : FILE
@@ -20,7 +34,7 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            12
+            13
             Label : EXPRESSION
               10
               Label : POSTPLUSPLUS

@@ -1,12 +1,28 @@
 test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFAULT
+      18
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    13
+    15
+    Label : DEFAULT
+      18
     Label : DEFINITION
       15
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
       12
   Label : FILE
@@ -36,8 +52,8 @@ Label : PROJECT
             Label : CONCAT
               14
         Label : EXPRESSION
-          16
+          17
           Label : LEFT
             15
           Label : RIGHT
-            17
+            18

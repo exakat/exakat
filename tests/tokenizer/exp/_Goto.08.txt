@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    16
     Label : DEFINITION
       16
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
       11
   Label : FILE
@@ -38,7 +50,7 @@ Label : PROJECT
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : POSTPLUSPLUS
                     16
           Label : CONDITION

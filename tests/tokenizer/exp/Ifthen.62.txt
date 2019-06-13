@@ -1,16 +1,40 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
-      12
+      11
     Label : DEFINITION
-      12
+      11
     Label : DEFINITION
-      12
+      11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -34,17 +58,17 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              9
+              7
           Label : ELSE
             3
             Label : EXPRESSION
               13
               Label : POSTPLUSPLUS
-                12
+                11
           Label : THEN
             3
             Label : EXPRESSION
-              10
+              9
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -52,7 +76,7 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              9
+              7
           Label : ELSE
             3
             Label : EXPRESSION
@@ -62,21 +86,21 @@ Label : PROJECT
                 Label : LEFT
                   6
                 Label : RIGHT
-                  9
+                  7
               Label : ELSE
                 3
                 Label : EXPRESSION
                   13
                   Label : POSTPLUSPLUS
-                    12
+                    11
               Label : THEN
                 3
                 Label : EXPRESSION
-                  10
+                  9
           Label : THEN
             3
             Label : EXPRESSION
-              10
+              9
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -84,7 +108,7 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              9
+              7
           Label : ELSE
             14
             Label : CONDITION
@@ -92,18 +116,18 @@ Label : PROJECT
               Label : LEFT
                 6
               Label : RIGHT
-                9
+                7
             Label : ELSE
               3
               Label : EXPRESSION
                 13
                 Label : POSTPLUSPLUS
-                  12
+                  11
             Label : THEN
               3
               Label : EXPRESSION
-                10
+                9
           Label : THEN
             3
             Label : EXPRESSION
-              10
+              9

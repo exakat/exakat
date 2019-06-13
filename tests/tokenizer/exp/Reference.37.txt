@@ -1,12 +1,62 @@
 test
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFAULT
+      23
+      Label : CLASS
+        6
+      Label : METHOD
+        16
+        Label : ARGUMENT
+          12
+        Label : NAME
+          16
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFAULT
+      20
+      Label : NEW
+        6
+        Label : ARGUMENT
+          12
+        Label : NAME
+          6
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
-    18
+    25
+    Label : DEFAULT
+      23
+      Label : CLASS
+        6
+      Label : METHOD
+        16
+        Label : ARGUMENT
+          12
+        Label : NAME
+          16
     Label : DEFINITION
       25
   Label : DEFINITION
-    18
+    17
+    Label : DEFAULT
+      20
+      Label : NEW
+        6
+        Label : ARGUMENT
+          12
+        Label : NAME
+          6
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -33,8 +83,6 @@ Label : PROJECT
                 8
               Label : VALUE
                 10
-          Label : DEFINITION
-            6
           Label : DEFINITION
             6
             Label : ARGUMENT

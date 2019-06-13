@@ -1,8 +1,68 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFAULT
+      9
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFAULT
+      16
+      Label : CONCAT
+        15
+      Label : CONCAT
+        20
+        Label : MEMBER
+          19
+        Label : OBJECT
+          17
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
+    Label : DEFAULT
+      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -10,29 +70,39 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    13
+    Label : DEFAULT
+      16
+      Label : CONCAT
+        15
+      Label : CONCAT
+        20
+        Label : MEMBER
+          19
+        Label : OBJECT
+          17
     Label : DEFINITION
       13
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    7
-    Label : DEFINITION
-      20
-  Label : DEFINITION
-    7
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
-    7
+    25
     Label : DEFINITION
       25
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      26
+      29
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,39 +118,39 @@ Label : PROJECT
               Label : LEFT
                 13
               Label : RIGHT
-                15
+                16
                 Label : CONCAT
-                  14
+                  15
                 Label : CONCAT
-                  18
+                  20
                   Label : MEMBER
-                    17
+                    19
                   Label : OBJECT
-                    16
+                    17
             Label : EXPRESSION
-              19
+              21
               Label : CONDITION
-                20
+                22
               Label : THEN
-                21
+                24
                 Label : EXPRESSION
-                  23
+                  27
                   Label : LEFT
-                    22
+                    25
                   Label : RIGHT
-                    24
+                    28
             Label : EXPRESSION
-              19
+              21
               Label : CONDITION
-                25
+                29
               Label : THEN
-                21
+                24
                 Label : EXPRESSION
-                  23
+                  27
                   Label : LEFT
-                    26
+                    31
                   Label : RIGHT
-                    27
+                    33
           Label : FINAL
             3
             Label : EXPRESSION

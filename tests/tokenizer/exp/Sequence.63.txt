@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : FILE
@@ -22,14 +34,14 @@ Label : PROJECT
             Label : CONDITION
               6
             Label : ELSE
-              14
+              15
             Label : THEN
               9
               Label : CAST
                 10
                 Label : CODE
-                  12
+                  13
                   Label : INDEX
-                    13
+                    14
                   Label : VARIABLE
                     11

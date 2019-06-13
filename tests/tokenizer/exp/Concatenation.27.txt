@@ -1,12 +1,56 @@
 test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        10
+      Label : CONCAT
+        16
+        Label : CLASS
+          12
+        Label : METHOD
+          14
+          Label : ARGUMENT
+            15
+          Label : NAME
+            14
+      Label : CONCAT
+        17
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    12
     Label : DEFINITION
       12
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : CONCAT
+        10
+      Label : CONCAT
+        16
+        Label : CLASS
+          12
+        Label : METHOD
+          14
+          Label : ARGUMENT
+            15
+          Label : NAME
+            14
+      Label : CONCAT
+        17
     Label : DEFINITION
       5
   Label : FILE
@@ -24,14 +68,14 @@ Label : PROJECT
             Label : CONCAT
               10
             Label : CONCAT
-              15
+              16
               Label : CLASS
                 12
               Label : METHOD
-                13
+                14
                 Label : ARGUMENT
-                  14
+                  15
                 Label : NAME
-                  13
+                  14
             Label : CONCAT
-              16
+              17

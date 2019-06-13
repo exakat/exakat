@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
-      19
+      21
   Label : DEFINITION
-    7
+    31
     Label : DEFINITION
-      28
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,41 +60,41 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            11
+            12
             Label : EXPRESSION
-              12
+              13
               Label : CASE
-                14
+                15
               Label : CODE
                 3
                 Label : EXPRESSION
-                  16
+                  17
                   Label : CONDITION
-                    17
-                  Label : THEN
                     18
+                  Label : THEN
+                    20
                     Label : EXPRESSION
-                      20
+                      23
                       Label : POSTPLUSPLUS
-                        19
+                        21
                 Label : EXPRESSION
-                  21
+                  24
                   Label : BREAK
-                    22
+                    25
             Label : EXPRESSION
-              24
+              27
               Label : CASE
-                26
+                29
               Label : CODE
                 3
                 Label : EXPRESSION
-                  20
+                  23
                   Label : POSTPLUSPLUS
-                    28
+                    31
           Label : CONDITION
             8
             Label : INDEX
-              10
+              11
             Label : VARIABLE
               8
               Label : INDEX

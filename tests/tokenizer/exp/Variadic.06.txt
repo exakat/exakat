@@ -1,26 +1,60 @@
 test
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFAULT
+      14
+      Label : LEFT
+        6
+      Label : RIGHT
+        24
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    16
     Label : DEFINITION
-      17
-    Label : PPP
-      18
-      Label : PPP
-        18
+      16
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
       21
   Label : DEFINITION
-    7
+    18
+    Label : DEFAULT
+      14
+      Label : LEFT
+        6
+      Label : RIGHT
+        24
     Label : DEFINITION
       18
   Label : FILE
@@ -32,39 +66,39 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            15
+            14
             Label : LEFT
-              9
+              8
               Label : MEMBER
-                14
+                13
               Label : OBJECT
-                9
+                8
                 Label : METHOD
-                  11
+                  10
                   Label : ARGUMENT
-                    12
-                  Label : NAME
                     11
-                Label : OBJECT
-                  9
-                  Label : MEMBER
+                  Label : NAME
                     10
-                  Label : OBJECT
+                Label : OBJECT
+                  8
+                  Label : MEMBER
                     9
+                  Label : OBJECT
+                    8
                     Label : MEMBER
-                      8
+                      7
                     Label : OBJECT
                       6
             Label : RIGHT
-              16
+              15
               Label : ARGUMENT
-                12
+                11
           Label : NAME
             5
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            15
+            14
             Label : LEFT
               19
               Label : CLASS
@@ -74,60 +108,60 @@ Label : PROJECT
                   Label : CLASS
                     19
                     Label : CLASS
-                      17
+                      16
                     Label : MEMBER
                       18
                   Label : MEMBER
                     20
                 Label : METHOD
-                  11
+                  10
                   Label : ARGUMENT
-                    12
-                  Label : NAME
                     11
+                  Label : NAME
+                    10
               Label : CONSTANT
-                14
+                13
             Label : RIGHT
-              16
+              15
               Label : ARGUMENT
-                12
+                11
           Label : NAME
             5
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            26
+            27
             Label : CONDITION
-              22
+              23
               Label : INDEX
-                25
+                26
               Label : VARIABLE
-                22
+                23
                 Label : INDEX
-                  24
+                  25
                 Label : VARIABLE
-                  22
+                  23
                   Label : INDEX
-                    23
+                    24
                   Label : VARIABLE
                     21
             Label : ELSE
-              16
+              15
               Label : ARGUMENT
-                12
+                11
             Label : THEN
-              16
+              15
               Label : ARGUMENT
-                12
+                11
           Label : NAME
             5
         Label : EXPRESSION
-          27
+          28
           Label : LEFT
             18
           Label : RIGHT
-            15
+            14
             Label : LEFT
               6
             Label : RIGHT
-              23
+              24

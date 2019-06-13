@@ -1,8 +1,26 @@
 test
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFAULT
+      26
+      Label : ARGUMENT
+        9
+      Label : NAME
+        26
+    Label : DEFINITION
+      23
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    23
+    Label : DEFAULT
+      26
+      Label : ARGUMENT
+        9
+      Label : NAME
+        26
     Label : DEFINITION
       23
   Label : FILE
@@ -38,7 +56,7 @@ Label : PROJECT
             Label : EXPRESSION
               18
               Label : DEFINITION
-                28
+                29
               Label : NAME
                 19
             Label : EXPRESSION
@@ -50,11 +68,11 @@ Label : PROJECT
                 Label : EXPRESSION
                   9
               Label : DEFINITION
-                25
+                26
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  25
+                  26
               Label : NAME
                 21
           Label : NAME
@@ -70,26 +88,26 @@ Label : PROJECT
               Label : NAME
                 22
             Label : EXPRESSION
-              24
+              25
               Label : LEFT
                 23
               Label : RIGHT
-                25
+                26
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  25
+                  26
             Label : EXPRESSION
-              27
+              28
               Label : ARGUMENT
-                31
+                32
                 Label : CLASS
-                  28
+                  29
                 Label : METHOD
-                  30
+                  31
                   Label : ARGUMENT
                     9
                   Label : NAME
-                    30
+                    31
           Label : NAME
             9

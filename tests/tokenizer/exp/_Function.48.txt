@@ -14,43 +14,43 @@ Label : PROJECT
           Label : BLOCK
             8
             Label : EXPRESSION
-              13
+              12
               Label : LEFT
-                12
+                11
                 Label : MEMBER
-                  11
+                  10
                 Label : OBJECT
                   9
               Label : RIGHT
-                14
+                13
                 Label : ARGUMENT
                   6
                 Label : BLOCK
                   8
                   Label : EXPRESSION
-                    15
+                    14
                     Label : RETURN
-                      16
+                      15
                       Label : ARGUMENT
-                        16
+                        15
                         Label : ARGUMENT
-                          18
+                          17
                           Label : INDEX
-                            17
+                            16
                           Label : VALUE
+                            18
+                        Label : ARGUMENT
+                          17
+                          Label : INDEX
                             19
-                        Label : ARGUMENT
-                          18
-                          Label : INDEX
-                            20
                           Label : VALUE
-                            21
+                            20
             Label : EXPRESSION
-              15
+              14
               Label : RETURN
-                22
+                21
           Label : DEFINITION
-            10
+            9
             Label : DEFINITION
               9
           Label : NAME

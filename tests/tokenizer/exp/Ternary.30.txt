@@ -1,32 +1,254 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      13
+      Label : CONDITION
+        8
+        Label : CODE
+          11
+          Label : LEFT
+            9
+          Label : RIGHT
+            12
+      Label : ELSE
+        22
+        Label : LEFT
+          8
+          Label : CODE
+            20
+            Label : LEFT
+              8
+              Label : CODE
+                18
+                Label : LEFT
+                  16
+                  Label : INDEX
+                    17
+                  Label : VARIABLE
+                    14
+                Label : RIGHT
+                  26
+            Label : RIGHT
+              24
+        Label : RIGHT
+          8
+          Label : CODE
+            18
+            Label : LEFT
+              16
+              Label : INDEX
+                23
+              Label : VARIABLE
+                14
+            Label : RIGHT
+              24
+      Label : THEN
+        22
+        Label : LEFT
+          8
+          Label : CODE
+            20
+            Label : LEFT
+              8
+              Label : CODE
+                18
+                Label : LEFT
+                  16
+                  Label : INDEX
+                    17
+                  Label : VARIABLE
+                    14
+                Label : RIGHT
+                  19
+            Label : RIGHT
+              21
+        Label : RIGHT
+          22
+          Label : LEFT
+            8
+            Label : CODE
+              20
+              Label : LEFT
+                8
+                Label : CODE
+                  18
+                  Label : LEFT
+                    16
+                    Label : INDEX
+                      23
+                    Label : VARIABLE
+                      14
+                  Label : RIGHT
+                    24
+              Label : RIGHT
+                24
+          Label : RIGHT
+            8
+            Label : CODE
+              18
+              Label : LEFT
+                16
+                Label : INDEX
+                  25
+                Label : VARIABLE
+                  14
+              Label : RIGHT
+                24
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      13
+      Label : CONDITION
+        8
+        Label : CODE
+          11
+          Label : LEFT
+            9
+          Label : RIGHT
+            12
+      Label : ELSE
+        22
+        Label : LEFT
+          8
+          Label : CODE
+            20
+            Label : LEFT
+              8
+              Label : CODE
+                18
+                Label : LEFT
+                  16
+                  Label : INDEX
+                    17
+                  Label : VARIABLE
+                    14
+                Label : RIGHT
+                  26
+            Label : RIGHT
+              24
+        Label : RIGHT
+          8
+          Label : CODE
+            18
+            Label : LEFT
+              16
+              Label : INDEX
+                23
+              Label : VARIABLE
+                14
+            Label : RIGHT
+              24
+      Label : THEN
+        22
+        Label : LEFT
+          8
+          Label : CODE
+            20
+            Label : LEFT
+              8
+              Label : CODE
+                18
+                Label : LEFT
+                  16
+                  Label : INDEX
+                    17
+                  Label : VARIABLE
+                    14
+                Label : RIGHT
+                  19
+            Label : RIGHT
+              21
+        Label : RIGHT
+          22
+          Label : LEFT
+            8
+            Label : CODE
+              20
+              Label : LEFT
+                8
+                Label : CODE
+                  18
+                  Label : LEFT
+                    16
+                    Label : INDEX
+                      23
+                    Label : VARIABLE
+                      14
+                  Label : RIGHT
+                    24
+              Label : RIGHT
+                24
+          Label : RIGHT
+            8
+            Label : CODE
+              18
+              Label : LEFT
+                16
+                Label : INDEX
+                  25
+                Label : VARIABLE
+                  14
+              Label : RIGHT
+                24
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
     Label : DEFINITION
-      13
+      14
   Label : DEFINITION
-    6
+    27
     Label : DEFINITION
-      25
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,108 +260,108 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            12
+            13
             Label : CONDITION
               8
               Label : CODE
-                10
+                11
                 Label : LEFT
                   9
                 Label : RIGHT
-                  11
+                  12
             Label : ELSE
-              20
+              22
               Label : LEFT
+                8
+                Label : CODE
+                  20
+                  Label : LEFT
+                    8
+                    Label : CODE
+                      18
+                      Label : LEFT
+                        16
+                        Label : INDEX
+                          17
+                        Label : VARIABLE
+                          14
+                      Label : RIGHT
+                        26
+                  Label : RIGHT
+                    24
+              Label : RIGHT
                 8
                 Label : CODE
                   18
                   Label : LEFT
-                    8
-                    Label : CODE
-                      16
-                      Label : LEFT
-                        14
-                        Label : INDEX
-                          15
-                        Label : VARIABLE
-                          13
-                      Label : RIGHT
-                        24
-                  Label : RIGHT
-                    22
-              Label : RIGHT
-                8
-                Label : CODE
-                  16
-                  Label : LEFT
-                    14
+                    16
                     Label : INDEX
-                      21
+                      23
                     Label : VARIABLE
-                      13
+                      14
                   Label : RIGHT
-                    22
+                    24
             Label : THEN
-              20
+              22
               Label : LEFT
                 8
                 Label : CODE
-                  18
+                  20
                   Label : LEFT
                     8
                     Label : CODE
-                      16
+                      18
                       Label : LEFT
-                        14
+                        16
                         Label : INDEX
-                          15
+                          17
                         Label : VARIABLE
-                          13
+                          14
                       Label : RIGHT
-                        17
+                        19
                   Label : RIGHT
-                    19
+                    21
               Label : RIGHT
-                20
+                22
                 Label : LEFT
+                  8
+                  Label : CODE
+                    20
+                    Label : LEFT
+                      8
+                      Label : CODE
+                        18
+                        Label : LEFT
+                          16
+                          Label : INDEX
+                            23
+                          Label : VARIABLE
+                            14
+                        Label : RIGHT
+                          24
+                    Label : RIGHT
+                      24
+                Label : RIGHT
                   8
                   Label : CODE
                     18
                     Label : LEFT
-                      8
-                      Label : CODE
-                        16
-                        Label : LEFT
-                          14
-                          Label : INDEX
-                            21
-                          Label : VARIABLE
-                            13
-                        Label : RIGHT
-                          22
-                    Label : RIGHT
-                      22
-                Label : RIGHT
-                  8
-                  Label : CODE
-                    16
-                    Label : LEFT
-                      14
+                      16
                       Label : INDEX
-                        23
+                        25
                       Label : VARIABLE
-                        13
+                        14
                     Label : RIGHT
-                      22
+                      24
         Label : EXPRESSION
-          26
+          29
           Label : LEFT
-            25
+            27
           Label : RIGHT
-            28
+            31
             Label : CONCAT
-              27
+              30
             Label : CONCAT
               5
             Label : CONCAT
-              29
+              32

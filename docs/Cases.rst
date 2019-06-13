@@ -2887,7 +2887,7 @@ Use Pathinfo
 
 .. _suitecrm-php-usepathinfo:
 
-SuiteCRM
+SuiteCrm
 ^^^^^^^^
 
 :ref:`use-pathinfo`, in include/utils/file_utils.php:441. 
@@ -6804,7 +6804,7 @@ When $tabRatio is 1001, then the condition is valid, and the ratio accepted. The
 
 .. _wordpress-structures-wrongrange:
 
-Wordpress
+WordPress
 ^^^^^^^^^
 
 :ref:`wrong-range-check`, in wp-includes/formatting.php:3634. 
@@ -8784,7 +8784,7 @@ WordPress
 
 .. _churchcrm-functions-toomanyparameters:
 
-Churchcrm
+ChurchCRM
 ^^^^^^^^^
 
 :ref:`too-many-parameters`, in src/Reports/ReminderReport.php:192. 

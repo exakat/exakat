@@ -97,16 +97,12 @@ class Files extends Tasks {
             }
 
             display("Check compilation for $version");
-            $stats['notCompilable' . $version] = -1;
-            
-            $shell = "cd {$this->config->code_dir}; cat $tmpFileName" . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "' . $this->config->{'php' . $version} . ' -l {} 2>&1 || true "';
-
-            $res = trim(shell_exec($shell));
-
-            $resFiles = explode("\n", $res);
-            $incompilables = array();
+            $stats["notCompilable$version"] = -1;
 
             $php = new Phpexec("php$version", $this->config->{"php$version"});
+            $resFiles = $php->compileFiles($this->config->project_dir, $tmpFileName);
+
+            $incompilables = array();
 
             foreach($resFiles as $resFile) {
                 if (trim($resFile) == '') {

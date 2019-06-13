@@ -1,26 +1,148 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          13
+          Label : INDEX
+            14
+          Label : VARIABLE
+            11
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          15
+        Label : VALUE
+          16
+          Label : ARGUMENT
+            13
+            Label : INDEX
+              19
+            Label : VARIABLE
+              17
+          Label : NAME
+            16
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          20
+        Label : VALUE
+          13
+          Label : INDEX
+            23
+          Label : VARIABLE
+            21
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          24
+        Label : VALUE
+          13
+          Label : INDEX
+            27
+          Label : VARIABLE
+            25
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          13
+          Label : INDEX
+            14
+          Label : VARIABLE
+            11
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          15
+        Label : VALUE
+          16
+          Label : ARGUMENT
+            13
+            Label : INDEX
+              19
+            Label : VARIABLE
+              17
+          Label : NAME
+            16
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          20
+        Label : VALUE
+          13
+          Label : INDEX
+            23
+          Label : VARIABLE
+            21
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          24
+        Label : VALUE
+          13
+          Label : INDEX
+            27
+          Label : VARIABLE
+            25
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
       11
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      16
+      17
   Label : DEFINITION
-    6
+    21
     Label : DEFINITION
-      19
+      21
   Label : DEFINITION
-    6
+    25
     Label : DEFINITION
-      22
+      25
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,42 +160,42 @@ Label : PROJECT
               Label : INDEX
                 9
               Label : VALUE
-                12
+                13
                 Label : INDEX
-                  13
+                  14
                 Label : VARIABLE
                   11
             Label : ARGUMENT
               10
               Label : INDEX
-                14
-              Label : VALUE
                 15
+              Label : VALUE
+                16
                 Label : ARGUMENT
-                  12
+                  13
                   Label : INDEX
-                    17
+                    19
                   Label : VARIABLE
-                    16
+                    17
                 Label : NAME
-                  15
+                  16
             Label : ARGUMENT
               10
               Label : INDEX
-                18
+                20
               Label : VALUE
-                12
-                Label : INDEX
-                  20
-                Label : VARIABLE
-                  19
-            Label : ARGUMENT
-              10
-              Label : INDEX
-                21
-              Label : VALUE
-                12
+                13
                 Label : INDEX
                   23
                 Label : VARIABLE
-                  22
+                  21
+            Label : ARGUMENT
+              10
+              Label : INDEX
+                24
+              Label : VALUE
+                13
+                Label : INDEX
+                  27
+                Label : VARIABLE
+                  25

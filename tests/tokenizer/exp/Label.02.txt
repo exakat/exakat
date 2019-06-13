@@ -1,12 +1,32 @@
 test
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFAULT
+      14
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      10
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
-    Label : DEFINITION
+    13
+    Label : DEFAULT
       14
+    Label : DEFINITION
+      13
   Label : DEFINITION
-    9
+    8
+    Label : DEFAULT
+      10
     Label : DEFINITION
       8
   Label : FILE
@@ -20,18 +40,18 @@ Label : PROJECT
           Label : GOTOLABEL
             5
         Label : EXPRESSION
-          10
+          9
           Label : LEFT
             8
           Label : RIGHT
-            11
+            10
         Label : EXPRESSION
           7
           Label : GOTOLABEL
-            12
+            11
         Label : EXPRESSION
-          10
+          9
           Label : LEFT
-            14
+            13
           Label : RIGHT
-            15
+            14

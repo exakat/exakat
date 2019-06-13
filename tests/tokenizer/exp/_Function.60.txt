@@ -35,15 +35,5 @@ Label : PROJECT
                   10
               Label : NAME
                 9
-              Label : PPP
-                0
-                Label : PPP
-                  0
-                  Label : DEFINITION
-                    17
-                    Label : MEMBER
-                      16
-                    Label : OBJECT
-                      15
           Label : NAME
             5

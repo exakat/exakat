@@ -1,38 +1,146 @@
 test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFAULT
+      6
+      Label : CODE
+        24
+        Label : LEFT
+          6
+          Label : CODE
+            21
+            Label : LEFT
+              19
+            Label : RIGHT
+              22
+        Label : RIGHT
+          24
+          Label : LEFT
+            6
+            Label : CODE
+              21
+              Label : LEFT
+                25
+              Label : RIGHT
+                27
+          Label : RIGHT
+            6
+            Label : CODE
+              21
+              Label : LEFT
+                29
+              Label : RIGHT
+                31
+    Label : DEFINITION
+      16
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  22
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
       7
   Label : DEFINITION
-    8
+    16
+    Label : DEFAULT
+      6
+      Label : CODE
+        24
+        Label : LEFT
+          6
+          Label : CODE
+            21
+            Label : LEFT
+              19
+            Label : RIGHT
+              22
+        Label : RIGHT
+          24
+          Label : LEFT
+            6
+            Label : CODE
+              21
+              Label : LEFT
+                25
+              Label : RIGHT
+                27
+          Label : RIGHT
+            6
+            Label : CODE
+              21
+              Label : LEFT
+                29
+              Label : RIGHT
+                31
     Label : DEFINITION
       16
   Label : DEFINITION
-    8
+    19
     Label : DEFINITION
-      18
+      19
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      20
-  Label : DEFINITION
-    8
+    22
     Label : DEFINITION
       22
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      23
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    8
+    25
     Label : DEFINITION
       25
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -62,36 +170,36 @@ Label : PROJECT
           Label : THEN
             15
             Label : EXPRESSION
-              17
+              18
               Label : LEFT
                 16
               Label : RIGHT
                 6
                 Label : CODE
-                  21
+                  24
                   Label : LEFT
                     6
                     Label : CODE
-                      19
+                      21
                       Label : LEFT
-                        18
+                        19
                       Label : RIGHT
-                        20
+                        22
                   Label : RIGHT
-                    21
+                    24
                     Label : LEFT
                       6
                       Label : CODE
-                        19
+                        21
                         Label : LEFT
-                          22
+                          25
                         Label : RIGHT
-                          23
+                          27
                     Label : RIGHT
                       6
                       Label : CODE
-                        19
+                        21
                         Label : LEFT
-                          24
+                          29
                         Label : RIGHT
-                          25
+                          31

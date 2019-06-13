@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    10
+    14
     Label : DEFINITION
       14
   Label : DEFINITION
-    10
+    18
     Label : DEFINITION
-      17
+      18
   Label : DEFINITION
-    10
+    21
     Label : DEFINITION
-      19
+      21
   Label : DEFINITION
-    10
+    28
     Label : DEFINITION
-      25
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -34,13 +64,13 @@ Label : PROJECT
             Label : NOT
               7
               Label : CODE
-                16
+                17
                 Label : LEFT
                   8
                   Label : ARGUMENT
                     12
                     Label : MEMBER
-                      15
+                      16
                     Label : OBJECT
                       13
                       Label : INDEX
@@ -54,26 +84,26 @@ Label : PROJECT
                   Label : NAME
                     8
                 Label : RIGHT
-                  21
+                  24
                   Label : CLASS
-                    22
+                    25
                   Label : VARIABLE
                     12
                     Label : MEMBER
-                      20
+                      23
                     Label : OBJECT
                       13
                       Label : INDEX
-                        19
+                        21
                       Label : VARIABLE
                         12
                         Label : MEMBER
-                          18
+                          20
                         Label : OBJECT
-                          17
+                          18
           Label : THEN
-            24
+            27
             Label : EXPRESSION
-              26
+              30
               Label : POSTPLUSPLUS
-                25
+                28

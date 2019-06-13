@@ -24,7 +24,7 @@ Label : PROJECT
                 Label : LEFT
                   10
                 Label : RIGHT
-                  16
+                  15
                   Label : CLASS
                     12
                   Label : METHOD
@@ -38,7 +38,7 @@ Label : PROJECT
                 Label : EXPRESSION
                   10
           Label : DEFINITION
-            15
+            14
             Label : DEFINITION
               14
           Label : NAME

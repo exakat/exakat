@@ -1,12 +1,68 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -16,7 +72,7 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -26,11 +82,11 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    7
+    15
     Label : DEFINITION
-      16
+      15
   Label : DEFINITION
-    7
+    18
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -38,13 +94,13 @@ Label : PROJECT
     Label : DEFINITION
       18
   Label : DEFINITION
-    7
+    21
     Label : DEFINITION
-      20
+      21
     Label : DEFINITION
-      20
+      21
     Label : DEFINITION
-      20
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,7 +112,7 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              11
+              12
             Label : EXPRESSION
               13
               Label : ARGUMENT
@@ -68,112 +124,110 @@ Label : PROJECT
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  19
+                  20
                   Label : CONDITION
-                    26
+                    27
                     Label : LEFT
                       17
                       Label : INDEX
-                        25
+                        26
                         Label : MEMBER
-                          23
+                          25
                         Label : OBJECT
                           18
                       Label : VARIABLE
                         17
                         Label : INDEX
-                          21
+                          23
                         Label : VARIABLE
-                          20
+                          21
                     Label : RIGHT
-                      27
+                      28
                   Label : THEN
                     3
                     Label : EXPRESSION
                       13
                       Label : ARGUMENT
-                        30
+                        31
                         Label : CONCAT
-                          28
+                          29
                         Label : CONCAT
-                          25
+                          26
                           Label : MEMBER
-                            31
+                            32
                           Label : OBJECT
                             18
                         Label : CONCAT
-                          33
+                          34
               Label : SOURCE
                 17
                 Label : INDEX
                   8
                 Label : VARIABLE
-                  16
+                  15
               Label : VALUE
                 18
             Label : EXPRESSION
-              35
+              36
             Label : EXPRESSION
               13
               Label : ARGUMENT
-                37
+                38
                 Label : ARGUMENT
                   10
                 Label : NAME
-                  37
+                  38
             Label : EXPRESSION
-              39
+              40
             Label : EXPRESSION
               13
               Label : ARGUMENT
-                41
+                42
                 Label : ARGUMENT
                   17
                   Label : INDEX
-                    43
+                    44
                   Label : VARIABLE
                     17
                     Label : INDEX
                       8
                     Label : VARIABLE
-                      20
+                      21
                 Label : NAME
-                  41
+                  42
             Label : EXPRESSION
-              45
+              46
             Label : EXPRESSION
               13
               Label : ARGUMENT
-                37
+                38
                 Label : ARGUMENT
                   10
                 Label : NAME
-                  37
+                  38
             Label : EXPRESSION
-              39
+              40
             Label : EXPRESSION
               13
               Label : ARGUMENT
-                41
+                42
                 Label : ARGUMENT
                   17
                   Label : INDEX
-                    47
+                    48
                   Label : VARIABLE
                     17
                     Label : INDEX
                       8
                     Label : VARIABLE
-                      20
+                      21
                 Label : NAME
-                  41
+                  42
             Label : EXPRESSION
-              49
+              50
+          Label : INDEX
+            8
           Label : SOURCE
             6
           Label : VALUE
-            9
-            Label : INDEX
-              8
-            Label : VALUE
-              10
+            10

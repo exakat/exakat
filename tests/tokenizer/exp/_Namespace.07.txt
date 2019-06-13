@@ -1,8 +1,26 @@
 test
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFAULT
+      23
+      Label : ARGUMENT
+        17
+      Label : NAME
+        23
+    Label : DEFINITION
+      20
 Label : PROJECT
   1
   Label : DEFINITION
-    21
+    20
+    Label : DEFAULT
+      23
+      Label : ARGUMENT
+        17
+      Label : NAME
+        23
     Label : DEFINITION
       20
   Label : FILE

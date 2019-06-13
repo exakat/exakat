@@ -1,26 +1,56 @@
 test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  30
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      30
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    17
     Label : DEFINITION
       17
   Label : DEFINITION
-    7
+    19
     Label : DEFINITION
-      18
+      19
   Label : DEFINITION
-    7
+    29
     Label : DEFINITION
-      27
+      29
   Label : DEFINITION
-    7
+    30
     Label : DEFINITION
-      28
+      30
   Label : FILE
     3
     Label : EXPRESSION
@@ -46,9 +76,9 @@ Label : PROJECT
           Label : ELSE
             14
             Label : EXPRESSION
-              29
+              32
               Label : POSTPLUSPLUS
-                28
+                30
           Label : THEN
             14
             Label : EXPRESSION
@@ -60,22 +90,22 @@ Label : PROJECT
             Label : EXPRESSION
               11
               Label : METHOD
-                19
+                21
                 Label : ARGUMENT
-                  24
-                  Label : CONCAT
-                    23
-                    Label : CLASS
-                      20
-                    Label : CONSTANT
-                      21
+                  26
                   Label : CONCAT
                     25
+                    Label : CLASS
+                      22
+                    Label : CONSTANT
+                      23
+                  Label : CONCAT
+                    27
                     Label : CONCAT
-                      26
+                      28
                     Label : CONCAT
-                      27
+                      29
                 Label : NAME
-                  19
+                  21
               Label : OBJECT
-                18
+                19

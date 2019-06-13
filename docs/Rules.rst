@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 10 Jun 2019 20:12:00 +0000
-.. comment: Generation hash : 69e7359ba863472429a148a662f319ce8bbd8c2e
+.. comment: Generation date : Tue, 11 Jun 2019 07:53:51 +0000
+.. comment: Generation hash : 303a58f84c67212fdf7693bb932e4bffc78360c4
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -542,7 +542,7 @@ Accessing Private
 #################
 
 
-List of calls to private( properties/methods )-failedthat will compile but yield some fatal error upon execution.
+List of calls to private properties/methods that will compile but yield some fatal error upon execution.
 
 .. code-block:: php
 
@@ -1149,10 +1149,10 @@ Try to keep the methods simple and unique. Consider renaming the methods and pro
    }
    
    class b {
-       static function mixedStaticMethod()( {}
+       static function mixedStaticMethod() {}
    }
    
-   /..)-failed. a lot more code later .../
+   /... a lot more code later .../
    
    $c->mixedStaticMethod();
    // or 
@@ -2558,7 +2558,7 @@ Bracketless Blocks
 ##################
 
 
-PHP allows one liners as `for() <http://php.net/manual/en/control-structures.for.php>`_, `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, `while() <http://php.net/manual/en/control-structures.while.php>`_, do/`while() <http://php.net/manual/en/control-structures.while.php>`_ loops, or as( then/else )-failedexpressions. 
+PHP allows one liners as `for() <http://php.net/manual/en/control-structures.for.php>`_, `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, `while() <http://php.net/manual/en/control-structures.while.php>`_, do/`while() <http://php.net/manual/en/control-structures.while.php>`_ loops, or as then/else expressions. 
 
 It is generally considered a bad practice, as readability is lower and there are non-negligible risk of excluding from the loop the next instruction.
 
@@ -3300,7 +3300,7 @@ Catch Overwrite Variable
 ########################
 
 
-The( try/catch )-failedstructure uses some variables that are also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
+The try/catch structure uses some variables that are also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
 
 .. code-block:: php
 
@@ -3493,7 +3493,7 @@ If the method doesn't exists, then the same method will be called again, leading
 
 
 See also `Method overloading <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_  and 
-        ``Magical PHP: `__call <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
+        ``Magical PHP: `__call() <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/index.php/blog/magical-php-call>`_.
 
 
 
@@ -4790,9 +4790,9 @@ Could Be Else
 #############
 
 
-Merge opposition conditions into one( if/then )-failedstructure.
+Merge opposition conditions into one if/then structure.
 
-When two( if/then )-failedstructures follow each other, using a condition and its opposite, they may be merged into one.
+When two if/then structures follow each other, using a condition and its opposite, they may be merged into one.
 
 .. code-block:: php
 
@@ -5541,7 +5541,7 @@ Could Use Try
 #############
 
 
-Some commands may raise exceptions. It is recommended to use the( try/catch )-failedblock to intercept those exceptions, and process them.
+Some commands may raise exceptions. It is recommended to use the try/catch block to intercept those exceptions, and process them.
 
 * / : ``DivisionByZeroError``
 * % : ``DivisionByZeroError``
@@ -5701,8 +5701,8 @@ Always try to use native PHP functions, instead of rebuilding them with custom P
        $unique = array();
        foreach ($array as $b) {
            if (!in_array($b, $unique)) {
-               /*  May be more code( */
-    )-failed           $unique[] = $b;
+               /*  May be more code */
+               $unique[] = $b;
            }
        }
    ?>
@@ -7127,7 +7127,7 @@ In case of injection in the variable, the dynamic loading of a library gives a l
        // dynamically loading ext/vips
    	dl('vips.' . PHP_SHLIB_SUFFIX);
    
-       // static loading( ext/vips )-failed(unix only)
+       // static loading ext/vips (unix only)
    	dl('vips.so');
    
    ?>
@@ -8031,7 +8031,7 @@ Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/`die <http
    ?>
 
 
-Try exiting the( function/class )-failedwith return, or throw exception that may be caught later in the code.
+Try exiting the function/class with return, or throw exception that may be caught later in the code.
 
 
 Suggestions
@@ -8148,7 +8148,7 @@ Fetch One Row Format
 ####################
 
 
-When reading results with( ext/Sqlite3, )-failedit is recommended to explicitly request SQLITE3_NUM or SQLITE3_ASSOC, while avoiding the default value and SQLITE3_BOTH.
+When reading results with ext/Sqlite3, it is recommended to explicitly request SQLITE3_NUM or SQLITE3_ASSOC, while avoiding the default value and SQLITE3_BOTH.
 
 .. code-block:: php
 
@@ -9198,7 +9198,7 @@ The group use declaration is used in the code.
    ?>
 
 
-See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_ and `Using namespaces:( Aliasing/Importing )-failed<http://php.net/manual/en/language.namespaces.importing.php>`_.
+See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_ and `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/GroupUseDeclaration                                                                                    |
@@ -9483,7 +9483,7 @@ The `ext/hash extension <http://www.php.net/manual/en/book.hash.php>`_ used reso
    ?>
 
 
-See also `Move( ext/hash )-failedfrom resources to objects <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.hash-ext-to-objects>`_.
+See also `Move ext/hash from resources to objects <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.hash-ext-to-objects>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/HashUsesObjects       |
@@ -9685,11 +9685,11 @@ The third argument of the functions is the encoding of the string. In PHP 5.3, i
    <?php
    $str = 'A quote is <b>bold</b>';
    
-   // Outputs, without depending on the php.ini: A &#039;quote&#039; is( &lt;b&gt;bold&lt;/b&gt; )-failed
+   // Outputs, without depending on the php.ini: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt; 
    echo htmlentities($str, ENT_QUOTES, 'UTF-8');
    
-   // Outputs, while depending on the php.ini: A quote is( &lt;b&gt;bold&lt;/b&gt;
-   echo )-failedhtmlentities($str);
+   // Outputs, while depending on the php.ini: A quote is &lt;b&gt;bold&lt;/b&gt;
+   echo htmlentities($str);
    
    ?>
 
@@ -9757,7 +9757,7 @@ Identical Consecutive Expression
 
 Identical consecutive expressions are worth being checked. 
 
-They may be a( copy/paste )-failedwith unmodified content. When the content has to be duplicated, it is recommended to avoid executing the expression again, and just access the cached result.
+They may be a copy/paste with unmodified content. When the content has to be duplicated, it is recommended to avoid executing the expression again, and just access the cached result.
 
 .. code-block:: php
 
@@ -9932,7 +9932,7 @@ Successive If / then structures that have the same condition may be either merge
    ?>
 
 
-Note that if the values used in the condition have been modified in the first( if/then )-failedstructure, the two distinct conditions may be needed. 
+Note that if the values used in the condition have been modified in the first if/then structure, the two distinct conditions may be needed. 
 
 .. code-block:: php
 
@@ -10212,9 +10212,9 @@ Implied If
 ##########
 
 
-It is confusing to emulate( if/then )-failedwith boolean operators.
+It is confusing to emulate if/then with boolean operators.
 
-It is possible to emulate a( if/then )-failedstructure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
+It is possible to emulate a if/then structure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
 when the left operand of 'and' is false, the right one is not executed, as its result is useless; 
 when the left operand of 'or' is true, the right one is not executed, as its result is useless; 
 
@@ -10311,7 +10311,7 @@ Inclusion should follow exactly the case of included files and path. This preven
 
    <?php
    
-   // There must exist a path called( path/to )-failedand a file library.php with this case
+   // There must exist a path called path/to and a file library.php with this case
    include path/to/library.php;
    
    // Error on the case, while the file does exist
@@ -10454,7 +10454,7 @@ Inconsistent Elseif
 ###################
 
 
-Chaining( if/elseif )-failedrequires a consistent string of conditions. The conditions are executed one after the other, and the conditions shouldn't overlap.
+Chaining if/elseif requires a consistent string of conditions. The conditions are executed one after the other, and the conditions shouldn't overlap.
 
 This analysis reports chains of elseif that don't share a common variable (or array, or property, etc.. ). As such, testing different conditions are consistent. 
 
@@ -10538,10 +10538,10 @@ Boolean, Null or float will be converted to their integer or string equivalent.
              '2a'  => 5
              ];
              
-      ( print_r($a);
+       print_r($a);
    
    /*
-   The )-failedabove displays
+   The above displays
    Array
    (
        [1] => 8
@@ -10549,13 +10549,13 @@ Boolean, Null or float will be converted to their integer or string equivalent.
        [] => 2
        [0.8] => 3
        [01] => 4
-       [2a] =>( 5
+       [2a] => 5
    )
    */
    ?>
 
 
-Decimal )-failednumbers are rounded to the closest integer; Null is transtyped to '' (empty string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
+Decimal numbers are rounded to the closest integer; Null is transtyped to '' (empty string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
 
 As a general rule of thumb, only use integers or strings that don\'t look like integers. 
 
@@ -10572,10 +10572,10 @@ Note also that PHP detects integer inside strings, and silently turn them into i
              '11d'  => 11, // partial number 
              ];
              
-      ( var_dump($a);
+       var_dump($a);
    
    /*
-   The )-failedabove displays
+   The above displays
    array(4) {
      [1]=>
      int(1)
@@ -10584,12 +10584,12 @@ Note also that PHP detects integer inside strings, and silently turn them into i
      [011]=>
      int(9)
      [11d]=>
-    ( int(11)
+     int(11)
    }*/
    ?>
 
 
-See )-failedalso `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_.
+See also `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_.
 
 
 Suggestions
@@ -10781,7 +10781,7 @@ If the code must be compatible with previous versions, avoid casting arrays to o
    ?>
 
 
-See also `PHP RFC: Convert numeric keys in( object/array )-failedcasts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_.
+See also `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_.
 
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/IntegerAsProperty                                                                                                                                        |
@@ -11572,7 +11572,7 @@ Sometimes, the logic is not what it seems. It is important to check the actual i
    ?>
 
 
-Based on article from ``Andrey Karpov``  `Logical Expressions in( C/C++.)-failed Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
+Based on article from ``Andrey Karpov``  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 
 
 
@@ -12044,7 +12044,7 @@ When a property name is getting used more often, it is worth creating a concrete
    ?>
 
 
-See also :ref:`memoize-magiccall`  
+See also :ref:`memoize-magiccall`.  
 
 
 
@@ -12265,7 +12265,7 @@ Cache calls to magic methods in local variable. Local cache is faster than calli
 The caching is not possible if the processing of the object changes the value of the property. 
 
 See also `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_,
-         :ref:`make-magic-concrete` and 
+         :ref:`make-magic-concrete`  and 
          `Benchmarking magic <https://www.garfieldtech.com/blog/benchmarking-magic>`_.
 
 
@@ -12569,7 +12569,7 @@ In case the native function is used as a condition without explicit comparaison,
    ?>
 
 
-This analysis searches for( if/then )-failedstructures, ternary operators dans `while() <http://php.net/manual/en/control-structures.while.php>`_ / do...`while() <http://php.net/manual/en/control-structures.while.php>`_ loops. 
+This analysis searches for if/then structures, ternary operators dans `while() <http://php.net/manual/en/control-structures.while.php>`_ / do...`while() <http://php.net/manual/en/control-structures.while.php>`_ loops. 
 
 See also `Can you spot the vulnerability? (openssl_verify) <https://twitter.com/ripstech/status/1124325237967994880>`_ and 
          `Incorrect Signature Verification <https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHPMODULEINFOCARD-70167>`_.
@@ -13321,7 +13321,7 @@ Avoid aliasing the same name with different aliases. This leads to confusion.
    ?>
 
 
-See also( Namespaces/MultipleAliasDefinition.)-failed
+See also Namespaces/MultipleAliasDefinition.
 
 +-------------+-------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitionPerFile |
@@ -14643,12 +14643,12 @@ Avoid using '+1 month', and rely on 'first day of next month' or 'last day of ne
    <?php
    
    // Base date is October 31 => 10/31
-   // +1 month adds +1 to 10 =>( 11/31 )-failed
-   // Since November 31rst doesn't exists, it is corrected to( 12/01.)-failed 
+   // +1 month adds +1 to 10 => 11/31 
+   // Since November 31rst doesn't exists, it is corrected to 12/01. 
    echo date('F', strtotime('+1 month',mktime(0,0,0,$i,31,2017))).PHP_EOL;
    
-   // Base date is October 31 =>( 10/31
-   echo )-faileddate('F', strtotime('first day of next month',mktime(0,0,0,$i,31,2017))).PHP_EOL;
+   // Base date is October 31 => 10/31
+   echo date('F', strtotime('first day of next month',mktime(0,0,0,$i,31,2017))).PHP_EOL;
    
    ?>
 
@@ -14717,7 +14717,7 @@ Do not append new elements to an array in a foreach loop. Since PHP 7.0, the arr
 
 Thanks to `Frederic Bouchery <https://twitter.com/FredBouchery/>`_ for the reminder.
 
-See also `foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_ and 
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_ and 
          `What will this code return? #PHP <https://twitter.com/FredBouchery/status/1135480412703211520>`_.
 
 
@@ -15580,19 +15580,19 @@ No Net For Xml Load
 ###################
 
 
-Simplexml and( ext/DOM )-failedload all external entities from the web, by default. This is dangerous, in particular when loading unknown XML code.
+Simplexml and ext/DOM load all external entities from the web, by default. This is dangerous, in particular when loading unknown XML code.
 
 Look at this XML code below : it is valid. It defines an entity ``xxe``, that is filled with a file, read on the system and base64 encoded.::
 
    
    
-   &lt;!DOCTYPE replace [&lt;!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"&gt;( ]&gt;
+   &lt;!DOCTYPE replace [&lt;!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"&gt; ]&gt;
    <replace>&xxe;</replace>
    
    
 
 
-This )-failedfile could be processed with the following code : note, you can replace 'index.php' in the above entity by any valid filepath. 
+This file could be processed with the following code : note, you can replace 'index.php' in the above entity by any valid filepath. 
 
 .. code-block:: php
 
@@ -15611,13 +15611,13 @@ At that point, the example illustrates how a XXE works : by using the XML engine
 
    
    
-   &lt;!DOCTYPE replace [&lt;!ENTITY writer SYSTEM https://www.example.com/entities.dtd&gt;( ]&gt;
+   &lt;!DOCTYPE replace [&lt;!ENTITY writer SYSTEM https://www.example.com/entities.dtd&gt; ]&gt;
    <replace>&xxe;</replace>
    
    
 
 
-With )-failedthe above example, the XML code is static (as, it never changes), but the 'xxe' definitions are loaded from a remove website, and are completely under the attacker control.
+With the above example, the XML code is static (as, it never changes), but the 'xxe' definitions are loaded from a remove website, and are completely under the attacker control.
 
 See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injection>`_, 
          `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
@@ -15784,8 +15784,8 @@ PHP uses an internal representation in base 2 : any number difficult to represen
 
    <?php
    
-   $a =( 1/7;
-   $b )-failed= 2.0;
+   $a = 1/7;
+   $b = 2.0;
    
    // 7 * $a is a real, not an integer
    var_dump( 7 * $a === 1);
@@ -18831,24 +18831,24 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
    <?php
    
    // displays a partial array, from 0 to 1
-   preg_match('/(a)(b)?/', 'adc',( $r);
+   preg_match('/(a)(b)?/', 'adc', $r);
    print_r($r);
    /*
    Array
    (
-    )-failed   [0] => a
+       [0] => a
        [1] => a
    )
    */
    
    // displays a full array, from 0 to 2
-   preg_match('/(a)(b)?/', 'abc',( $r);
+   preg_match('/(a)(b)?/', 'abc', $r);
    print_r($r);
    
    /*
    Array
    (
-    )-failed   [0] => ab
+       [0] => ab
        [1] => a
        [2] => b
    )
@@ -18863,8 +18863,8 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
 .. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
 .. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
-', 'abc'); // prints( ./abbc
-   print )-failedpreg_replace(',^a(b)?,', './
+', 'abc'); // prints ./abbc
+   print preg_replace(',^a(b)?,', './
 .. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
 .. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
@@ -18872,13 +18872,13 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
 .. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
 .. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
-', 'adc'); // prints( ./dc
+', 'adc'); // prints ./dc
    
    ?>
 
 ?>
 
-The )-failedsame applies to `preg_replace() <http://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
+The same applies to `preg_replace() <http://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
 
 See also `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_ and 
          `Bug #73948 Preg_match_all should return NULLs on trailing optional capture groups. <https://bugs.php.net/bug.php?id=73948>`_.
@@ -19511,7 +19511,7 @@ Random Without Try
 ##################
 
 
-`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ require a( try/catch )-failedstructure around them.
+`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ require a try/catch structure around them.
 
 `random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
 
@@ -20147,7 +20147,7 @@ Return True False
 #################
 
 
-These conditional expressions return( true/false, )-faileddepending on the condition. This may be simplified by dropping the control structure altogether.
+These conditional expressions return true/false, depending on the condition. This may be simplified by dropping the control structure altogether.
 
 .. code-block:: php
 
@@ -20380,7 +20380,7 @@ Same Conditions In Condition
 ############################
 
 
-At least two consecutive( if/then )-failedstructures use identical conditions. The latter will probably be ignored.
+At least two consecutive if/then structures use identical conditions. The latter will probably be ignored.
 
 This analysis returns false positive when there are attempt to fix the situation, or to call an alternative solution. 
 
@@ -21613,14 +21613,14 @@ Should Use Prepared Statement
 
 Modern databases provides support for prepared statement : it separates the query from the processed data and raise significantly the security. 
 
-Building queries with concatenations is not recommended, though not always avoidable. When possible, use prepared( statements.
+Building queries with concatenations is not recommended, though not always avoidable. When possible, use prepared statements.
 
 .. code-block:: php
 
    <?php
-   /* )-failedExecute a prepared statement by passing an array of values( */
+   /* Execute a prepared statement by passing an array of values */
    
-   $sql )-failed= 'SELECT name, colour, calories
+   $sql = 'SELECT name, colour, calories
        FROM fruit
        WHERE calories < :calories AND colour = :colour';
    $sth = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -21886,7 +21886,7 @@ The trap is that each ``yield from`` reset the index generation and start again 
    
    function aggregator() : Generator {
    	yield from g1();
-   	yield from( g2();
+   	yield from g2();
    }
    
    print_r(iterator_to_array());
@@ -21894,22 +21894,22 @@ The trap is that each ``yield from`` reset the index generation and start again 
    /*
    Array
    (
-    )-failed   [0] => 6
+       [0] => 6
        [1] => 7
        [2] => 8
        [3] => 9
        [4] => 4  // Note that 4 and 5 still appears
-       [5] => 5  // They are not overwritten by the second( yield
+       [5] => 5  // They are not overwritten by the second yield
    )
    */
    
    
-   foreach )-failed( aggregator() as $i ) {
-   	print( $i.PHP_EOL;
+   foreach ( aggregator() as $i ) {
+   	print $i.PHP_EOL;
    }
    
    /*
-   0 )-failed // Foreach has no overlap and yield it( all.
+   0  // Foreach has no overlap and yield it all.
    1
    2
    3
@@ -21924,7 +21924,7 @@ The trap is that each ``yield from`` reset the index generation and start again 
    ?>
 
 
-Thanks )-failedto `Holger Woltersdorf <https://twitter.com/hollodotme>`_ for `pointing this <https://twitter.com/hollodotme/status/1057909890566537217>`_.
+Thanks to `Holger Woltersdorf <https://twitter.com/hollodotme>`_ for `pointing this <https://twitter.com/hollodotme/status/1057909890566537217>`_.
 
 See also `Generator syntax <http://php.net/manual/en/language.generators.syntax.php>`_ and 
          `Yielding values with keys <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.associative>`_.
@@ -23116,7 +23116,7 @@ Note that if condition that uses strict typing (=== or !==) can't be converted t
    
    }
    
-   // Better way to write long( if/else )-failedlists
+   // Better way to write long if/else lists
    switch ($a) {
        case 1 : 
            doSomething(1);
@@ -24598,7 +24598,7 @@ Some functions are called, but not defined in the code. This means that the func
    // Undefined function 
    foo($a);
    
-   // valid function, as it belongs to the( ext/yaml )-failedextension
+   // valid function, as it belongs to the ext/yaml extension
    $parsed = yaml_parse($yaml);
    
    // This function is not defined in the a\b\c namespace, nor in the global namespace
@@ -25502,10 +25502,10 @@ The following use instructions cannot be resolved to a class or a namespace. The
        // class C is not defined
    }
    
-   namespace( X/Y )-failed{
+   namespace X/Y {
    
-       use( A/B; )-failed // This use is valid
-       use( A/C; )-failed // This use point to nothing.
+       use A/B;  // This use is valid
+       use A/C;  // This use point to nothing.
    
        new B();
        new C();
@@ -25516,7 +25516,7 @@ The following use instructions cannot be resolved to a class or a namespace. The
 
 Use expression are options for the current namespace. 
 
-See also `Using namespaces:( Aliasing/Importing )-failed<http://php.net/manual/en/language.namespaces.importing.php>`_.
+See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/UnresolvedUse                                                                          |
@@ -26545,7 +26545,7 @@ Since PHP 5.6 it is possible to import specific functions or constants from othe
    ?>
 
 
-See also `Using namespaces:( Aliasing/Importing )-failed<http://php.net/manual/en/language.namespaces.importing.php>`_.
+See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Namespaces/UseFunctionsConstants                                                |
@@ -26980,25 +26980,25 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
 
    <?php
    /// OOP version
-   $mysqli = new mysqli(localhost, my_user, my_password,( world);
+   $mysqli = new mysqli(localhost, my_user, my_password, world);
    
-   /* )-failedcheck connection( */
-   if )-failed($mysqli->connect_errno) {
+   /* check connection */
+   if ($mysqli->connect_errno) {
        printf(Connect failed: %s\n, $mysqli->connect_error);
-      ( exit();
+       exit();
    }
    
-   /* )-failedCreate table doesn't return a resultset( */
-   if )-failed($mysqli->query(CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
-       printf(Table myCity successfully( created.\n);
+   /* Create table doesn't return a resultset */
+   if ($mysqli->query(CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
+       printf(Table myCity successfully created.\n);
    }
    
-   /* )-failedSelect queries return a resultset( */
-   if )-failed($result = $mysqli->query(SELECT Name FROM City LIMIT 10)) {
+   /* Select queries return a resultset */
+   if ($result = $mysqli->query(SELECT Name FROM City LIMIT 10)) {
        printf(Select returned %d rows.\n, $result->num_rows);
    
-       /* free result set( */
-    )-failed   $result->close();
+       /* free result set */
+       $result->close();
    }
    ?>
 
@@ -27007,16 +27007,16 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
 
    <?php
    /// Procedural version
-   $link = mysqli_connect(localhost, my_user, my_password,( world);
+   $link = mysqli_connect(localhost, my_user, my_password, world);
    
-   /* )-failedcheck connection( */
-   if )-failed(mysqli_connect_errno()) {
+   /* check connection */
+   if (mysqli_connect_errno()) {
        printf(Connect failed: %s\n, mysqli_connect_error());
-      ( exit();
+       exit();
    }
    
-   /* )-failedCreate table doesn't return a resultset( */
-   if )-failed(mysqli_query($link, CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
+   /* Create table doesn't return a resultset */
+   if (mysqli_query($link, CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
        printf(Table myCity successfully created.\n);
    }
    
@@ -27061,12 +27061,12 @@ PHP allocates memory at the end of the double-quoted string, making only one cal
    <?php
    
    $bar = 'bar';
-   ( 
-   /* )-failedPHP 7 optimized this( */
-   $a )-failed= "foo and $bar";
-   ( 
-   /* )-failedThis is PHP 5 code (aka, don't use it)( */
-   $a )-failed= 'foo and ' . $bar;
+    
+   /* PHP 7 optimized this */
+   $a = "foo and $bar";
+    
+   /* This is PHP 5 code (aka, don't use it) */
+   $a = 'foo and ' . $bar;
    
    // Constants can't be used with double quotes
    $a = 'foo and ' . __DIR__;
@@ -28163,7 +28163,7 @@ Situation where the condition is useless. `Foreach() <http://php.net/manual/en/c
    ?>
 
 
-See also `foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_.
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
 
 
@@ -29577,22 +29577,22 @@ It has been introduced in PHP 5.6. In the previous versions of PHP, this method 
        }
    }
    
-   $f = new( Foo();
+   $f = new Foo();
    var_dump($f);
    
-   /* )-failedDisplays : 
+   /* Displays : 
    object(foo)#1 (2) {
      [bar]=>
      int(1)
      [reallyHidden]=>
-     string(6)( Secret
+     string(6) Secret
    }
    */
    
    ?>
 
 
-See )-failedalso `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
+See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/debugInfoUsage                                                              |
@@ -29906,7 +29906,7 @@ ext/dba
 #######
 
 
-Extension( ext/dba.)-failed
+Extension ext/dba.
 
 These functions build the foundation for accessing Berkeley DB style databases.
 
@@ -29952,7 +29952,7 @@ ext/ereg
 ########
 
 
-Extension( ext/ereg.)-failed
+Extension ext/ereg.
 
 .. code-block:: php
 
@@ -29987,7 +29987,7 @@ ext/fdf
 #######
 
 
-Extension( ext/fdf.)-failed
+Extension ext/fdf.
 
 Forms Data Format (`FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_) is a format for handling forms within PDF documents.
 
@@ -30000,7 +30000,7 @@ Forms Data Format (`FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_)
    fdf_set_file($outfdf, 'http:/testfdf/resultlabel.pdf');
    fdf_save($outfdf, 'outtest.fdf');
    fdf_close($outfdf);
-   Header('Content-type:( application/vnd.)-failedfdf');
+   Header('Content-type: application/vnd.fdf');
    $fp = fopen('outtest.fdf', 'r');
    fpassthru($fp);
    unlink('outtest.fdf');
@@ -30031,7 +30031,7 @@ Extension for mcrypt.
 
 This extension has been deprecated as of PHP 7.1.0 and moved to PECL as of PHP 7.2.0.
 
-This is an interface to the mcrypt library, which supports a wide variety of block algorithms such as DES, TripleDES, Blowfish (default), 3-WAY, SAFER-SK64, SAFER-SK128, TWOFISH, TEA, RC2 and GOST in CBC, OFB, CFB and ECB cipher modes. Additionally, it supports RC6 and IDEA which are considered 'non-free'.( CFB/OFB )-failedare 8bit by default.
+This is an interface to the mcrypt library, which supports a wide variety of block algorithms such as DES, TripleDES, Blowfish (default), 3-WAY, SAFER-SK64, SAFER-SK128, TWOFISH, TEA, RC2 and GOST in CBC, OFB, CFB and ECB cipher modes. Additionally, it supports RC6 and IDEA which are considered 'non-free'. CFB/OFB are 8bit by default.
 
 .. code-block:: php
 
@@ -30147,7 +30147,7 @@ ext/ming
 ########
 
 
-Extension( ext/ming, )-failedto create swf files with PHP.
+Extension ext/ming, to create swf files with PHP.
 
 Ming is an open-source (LGPL) library which allows you to create SWF ('Flash') format movies. 
 

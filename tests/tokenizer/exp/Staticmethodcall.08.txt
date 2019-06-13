@@ -1,12 +1,24 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : FILE
@@ -16,7 +28,7 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          11
+          12
           Label : CLASS
             7
             Label : INDEX

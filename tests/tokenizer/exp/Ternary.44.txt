@@ -1,8 +1,34 @@
 test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    10
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -12,7 +38,7 @@ Label : PROJECT
     Label : DEFINITION
       10
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -42,13 +68,13 @@ Label : PROJECT
           Label : CONDITION
             5
           Label : ELSE
-            12
+            13
           Label : THEN
             7
             Label : CONDITION
               10
             Label : ELSE
-              11
+              12
             Label : THEN
               8
         Label : EXPRESSION
@@ -56,7 +82,7 @@ Label : PROJECT
           Label : CONDITION
             5
           Label : ELSE
-            12
+            13
           Label : THEN
             7
             Label : CONDITION
@@ -64,32 +90,32 @@ Label : PROJECT
             Label : ELSE
               15
             Label : THEN
-              13
+              14
         Label : EXPRESSION
           7
           Label : CONDITION
             5
           Label : ELSE
-            12
+            13
           Label : THEN
             7
             Label : CONDITION
               10
             Label : ELSE
-              19
+              18
             Label : THEN
-              17
+              16
         Label : EXPRESSION
           7
           Label : CONDITION
             5
           Label : ELSE
-            12
+            13
           Label : THEN
             7
             Label : CONDITION
               10
             Label : ELSE
-              21
+              20
             Label : THEN
               8

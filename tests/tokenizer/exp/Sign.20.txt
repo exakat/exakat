@@ -1,30 +1,66 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+Label : GLOBAL
+  14
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    8
     Label : DEFINITION
       8
   Label : DEFINITION
-    6
+    11
     Label : DEFINITION
-      10
+      11
   Label : DEFINITION
-    6
+    14
     Label : DEFINITION
-      12
+      14
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      17
-  Label : DEFINITION
-    6
+    20
     Label : DEFINITION
       20
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -36,32 +72,32 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            9
+            10
             Label : CONCAT
               8
             Label : CONCAT
-              11
+              13
               Label : INDEX
-                13
-                Label : LEFT
-                  12
-                Label : RIGHT
-                  14
-              Label : VARIABLE
-                10
-            Label : CONCAT
-              15
-              Label : CONCAT
                 16
-              Label : CONCAT
-                17
-              Label : CONCAT
-                18
+                Label : LEFT
+                  14
+                Label : RIGHT
+                  17
+              Label : VARIABLE
+                11
             Label : CONCAT
-              15
+              18
               Label : CONCAT
                 19
               Label : CONCAT
                 20
               Label : CONCAT
-                21
+                22
+            Label : CONCAT
+              18
+              Label : CONCAT
+                23
+              Label : CONCAT
+                24
+              Label : CONCAT
+                26

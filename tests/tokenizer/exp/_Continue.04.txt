@@ -1,8 +1,32 @@
 test
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    8
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -12,11 +36,11 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    7
+    6
     Label : DEFINITION
       6
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       13
   Label : FILE
@@ -30,7 +54,7 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              9
+              10
             Label : EXPRESSION
               11
               Label : CONDITION
@@ -42,13 +66,13 @@ Label : PROJECT
               Label : THEN
                 3
                 Label : EXPRESSION
-                  14
-                  Label : CONTINUE
-                    15
-                Label : EXPRESSION
                   15
+                  Label : CONTINUE
+                    16
+                Label : EXPRESSION
+                  16
             Label : EXPRESSION
-              17
+              18
             Label : EXPRESSION
               19
               Label : ARGUMENT

@@ -1,52 +1,120 @@
 test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  32
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+Label : GLOBAL
+  34
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    5
     Label : DEFINITION
       5
   Label : DEFINITION
-    6
+    9
     Label : DEFINITION
       9
   Label : DEFINITION
-    6
+    13
     Label : DEFINITION
-      12
+      13
   Label : DEFINITION
-    6
+    17
     Label : DEFINITION
-      15
+      17
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      16
-  Label : DEFINITION
-    6
+    19
     Label : DEFINITION
       19
   Label : DEFINITION
-    6
+    23
     Label : DEFINITION
-      20
+      23
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      21
-    Label : DEFINITION
-      21
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      22
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      24
-  Label : DEFINITION
-    6
+    25
     Label : DEFINITION
       25
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,7 +124,7 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : INDEX
-            10
+            11
             Label : LEFT
               8
               Label : ARGUMENT
@@ -64,108 +132,108 @@ Label : PROJECT
               Label : NAME
                 8
             Label : RIGHT
-              11
+              12
           Label : VARIABLE
             5
         Label : EXPRESSION
           7
           Label : INDEX
-            10
+            11
             Label : LEFT
               8
               Label : ARGUMENT
-                15
+                17
               Label : NAME
                 8
             Label : RIGHT
-              11
-          Label : VARIABLE
-            13
-            Label : INDEX
-              14
-            Label : VARIABLE
               12
-        Label : EXPRESSION
-          7
-          Label : INDEX
-            10
-            Label : LEFT
-              8
-              Label : ARGUMENT
-                19
-              Label : NAME
-                8
-            Label : RIGHT
-              11
           Label : VARIABLE
-            13
+            15
             Label : INDEX
-              18
+              16
             Label : VARIABLE
               13
-              Label : INDEX
-                17
-              Label : VARIABLE
-                16
         Label : EXPRESSION
           7
           Label : INDEX
-            10
+            11
             Label : LEFT
               8
               Label : ARGUMENT
-                21
+                23
               Label : NAME
                 8
             Label : RIGHT
-              11
+              12
           Label : VARIABLE
-            7
+            15
             Label : INDEX
-              18
-            Label : VARIABLE
-              13
-              Label : INDEX
-                17
-              Label : VARIABLE
-                20
-        Label : EXPRESSION
-          7
-          Label : INDEX
-            10
-            Label : LEFT
-              8
-              Label : ARGUMENT
-                24
-              Label : NAME
-                8
-            Label : RIGHT
-              11
-          Label : VARIABLE
-            7
-            Label : INDEX
-              23
-            Label : VARIABLE
               22
+            Label : VARIABLE
+              15
+              Label : INDEX
+                21
+              Label : VARIABLE
+                19
         Label : EXPRESSION
           7
           Label : INDEX
-            10
+            11
             Label : LEFT
               8
               Label : ARGUMENT
-                21
+                27
               Label : NAME
                 8
             Label : RIGHT
-              11
+              12
           Label : VARIABLE
-            13
+            7
             Label : INDEX
-              18
+              22
+            Label : VARIABLE
+              15
+              Label : INDEX
+                21
+              Label : VARIABLE
+                25
+        Label : EXPRESSION
+          7
+          Label : INDEX
+            11
+            Label : LEFT
+              8
+              Label : ARGUMENT
+                32
+              Label : NAME
+                8
+            Label : RIGHT
+              12
+          Label : VARIABLE
+            7
+            Label : INDEX
+              31
+            Label : VARIABLE
+              29
+        Label : EXPRESSION
+          7
+          Label : INDEX
+            11
+            Label : LEFT
+              8
+              Label : ARGUMENT
+                27
+              Label : NAME
+                8
+            Label : RIGHT
+              12
+          Label : VARIABLE
+            15
+            Label : INDEX
+              22
             Label : VARIABLE
               7
               Label : INDEX
-                17
+                21
               Label : VARIABLE
-                25
+                34
