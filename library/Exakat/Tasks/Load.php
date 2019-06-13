@@ -1606,6 +1606,10 @@ class Load extends Tasks {
             $virtual->line         = -1;
             $this->addLink($ppp, $virtual, 'PPP');
             
+            foreach($this->currentPropertiesCalls[$missing] as $member) {
+                $this->addLink($virtual, $member, 'DEFINITION');
+            }
+            
             $this->currentProperties[$missing] = $virtual;
         }
 
@@ -5317,7 +5321,13 @@ class Load extends Tasks {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
             } elseif ($static->atom  === 'Member'   &&
                       $right->token  === 'T_STRING') {
+
                 $this->calls->addCall('property', "{$left->fullnspath}::{$right->code}", $static);
+                if(isset($this->currentPropertiesCalls[$right->code])) {
+                    $this->currentPropertiesCalls[$right->code][] = $static;
+                } else {
+                    $this->currentPropertiesCalls[$right->code] = array($static);
+                }
             }
         }
         $this->runPlugins($static, array('OBJECT' => $left,

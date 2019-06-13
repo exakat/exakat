@@ -29,15 +29,15 @@ use Exakat\Query\Query;
 class OverwrittenProperties extends LoadFinal {
     public function run() {
         $query = $this->newQuery('overwrittenConstants');
-        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
               ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
-              ->isNot('virtual', true)
+              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
-              ->raw('not(where(__.in("OVERWRITE").where(eq("first"))))', array(), array())
+              ->raw('where(neq("first"))', array(), array())
               ->addEFrom('OVERWRITE', 'first')
               ->returnCount();
         $query->prepareRawQuery();
