@@ -179,12 +179,6 @@ class IsRead extends Plugin {
                 }
                 break;
 
-            case 'Arrayappend':
-                if (in_array($extras['APPEND']->atom, $this->variables, STRICT_COMPARISON)) {
-                    $extras['APPEND']->isRead = true;
-                }
-                break;
-
             case 'Yield':
             case 'Yieldfrom':
                 if (in_array($extras['YIELD']->atom, $this->variables, STRICT_COMPARISON)) {
