@@ -32,8 +32,9 @@ class PropertyNeverUsed extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->hasNoOut('DEFINITION');
+             ->atomIs('Propertydefinition')
+             ->hasNoOut('DEFINITION')
+             ->hasNoOut('OVERWRITE'); // used by a class above, not below
         $this->prepareQuery();
     }
 }
