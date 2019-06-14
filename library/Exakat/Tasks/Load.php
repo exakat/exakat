@@ -1204,9 +1204,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
             $atom = 'Arrowfunction';
-        } elseif (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-             $this->contexts->isContext(Context::CONTEXT_TRAIT) ||
-             $this->contexts->isContext(Context::CONTEXT_INTERFACE)) &&
+        } elseif ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
              
              !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
@@ -1443,8 +1441,8 @@ class Load extends Tasks {
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
 
-        $this->contexts->nestContext(Context::CONTEXT_INTERFACE);
-        $this->contexts->toggleContext(Context::CONTEXT_INTERFACE);
+        $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->toggleContext(Context::CONTEXT_CLASS);
 
         $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($interface, $name, 'NAME');
@@ -1480,7 +1478,7 @@ class Load extends Tasks {
         $this->pushExpression($interface);
         $this->processSemicolon();
 
-        $this->contexts->exitContext(Context::CONTEXT_INTERFACE);
+        $this->contexts->exitContext(Context::CONTEXT_CLASS);
         array_pop($this->currentClassTrait);
 
         return $interface;
@@ -2361,8 +2359,7 @@ class Load extends Tasks {
 
             $this->addLink($const, $def, 'CONST');
 
-            if ($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-                $this->contexts->isContext(Context::CONTEXT_INTERFACE)   ) {
+            if ($this->contexts->isContext(Context::CONTEXT_CLASS)) {
                 $this->calls->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath . '::' . $name->fullcode, $def);
             } else {
                 $this->calls->addDefinition('const', $name->fullnspath, $def);
@@ -2850,8 +2847,7 @@ class Load extends Tasks {
 
             return $static;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            if (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-                 $this->contexts->isContext(Context::CONTEXT_TRAIT)   ) &&
+            if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
                 !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
                 // something like public static
                 $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
@@ -5716,14 +5712,6 @@ class Load extends Tasks {
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_CLASS)) !== false) {
             throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is " . $count . PHP_EOL);
-        }
-
-        if (($count = $this->contexts->getCount(Context::CONTEXT_TRAIT)) !== false) {
-            throw new LoadError( "Warning : context for trait is not back to 0 in $filename : it is " . $count . PHP_EOL);
-        }
-
-        if (($count = $this->contexts->getCount(Context::CONTEXT_INTERFACE)) !== false) {
-            throw new LoadError( "Warning : context for interface is not back to 0 in $filename : it is " . $count . PHP_EOL);
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
