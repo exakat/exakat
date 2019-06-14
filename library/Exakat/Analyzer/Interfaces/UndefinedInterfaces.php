@@ -36,7 +36,7 @@ class UndefinedInterfaces extends Analyzer {
     }
     
     public function analyze() {
-        $omitted = $this->dependsOn;
+        $omitted = $this->dependsOn();
 
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
