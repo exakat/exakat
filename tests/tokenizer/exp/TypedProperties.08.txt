@@ -1,10 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    17
-    Label : DEFINITION
-      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -39,12 +35,6 @@ Label : PROJECT
               8
             Label : PPP
               9
-              Label : DEFINITION
-                18
-                Label : CLASS
-                  7
-                Label : MEMBER
-                  9
             Label : PPP
               11
           Label : PPP
@@ -60,14 +50,14 @@ Label : PROJECT
             Label : TYPEHINT
               8
         Label : EXPRESSION
-          19
+          18
           Label : LEFT
-            18
+            17
             Label : CLASS
               7
             Label : MEMBER
               9
           Label : RIGHT
-            20
+            19
             Label : NEW
               6
