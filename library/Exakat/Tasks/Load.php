@@ -29,9 +29,7 @@ use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
-use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchLoader;
 use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal\LoadFinal;
@@ -187,7 +185,7 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct(Graph $gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
+    public function __construct(Graph $gremlin, Config $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
         $this->atomGroup = new AtomGroup();
