@@ -2017,7 +2017,7 @@ class Load extends Tasks {
                                                             ),
                      STRICT_COMPARISON)) {
                      
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable', 'mixed'), STRICT_COMPARISON)) {
                 ++$this->id;
                 $nsname = $this->processSingle('Scalartypehint');
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
@@ -2828,7 +2828,7 @@ class Load extends Tasks {
             $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
             
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'iterable', 'mixed'), STRICT_COMPARISON)) {
                 $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
             } else {
                 $this->getFullnspath($typehint, 'class', $typehint);
