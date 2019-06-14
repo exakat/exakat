@@ -2397,6 +2397,7 @@ SQL;
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
                             'Php/UnpackingInsideArrays'             => '7.4+',
+                            'Structures/CurlVersionNow'             => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
@@ -4794,7 +4795,9 @@ HTML;
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
-        switch($vcsClass) {
+        $vcsName = explode('\\', $vcsClass);
+        $vcsName = array_pop($vcsName);
+        switch($vcsName) {
             case 'Git':
                 $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
 

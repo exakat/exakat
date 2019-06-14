@@ -27,15 +27,17 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeProtectedMethod extends Analyzer {
     public function analyze() {
         // Case of property->property (that's another public access)
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Methodcall")
-     .not( __.where( __.repeat( __.out("OBJECT")).emit().hasLabel("This") ) )
-     .out("METHOD")
-     .hasLabel("Methodcallname")
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $publicMethods = $this->query($query)->toArray();
+        $this->atomIs('Methodcall')
+             ->not(
+                $this->side()
+                     ->outIsIE('OBJECT')
+                     ->atomIs('This')
+             )
+             ->outIs('METHOD')
+             ->atomIs('Methodcallname')
+             ->values('lccode')
+             ->unique();
+        $publicMethods = $this->rawQuery()->toArray();
 
         // Member that is not used outside this class or its children
         $this->atomIs('Method')
@@ -48,6 +50,7 @@ GREMLIN;
         $this->prepareQuery();
 
         // Case of class::methodcall (that's another public access)
+        
         $publicUsage = $this->query(<<<GREMLIN
 g.V().hasLabel("Staticmethodcall").as("init")
      .out("CLASS").hasLabel("Identifier", "Nsname").as("classe")
@@ -65,11 +68,7 @@ GREMLIN
         
         $publicStaticMethods = array();
         foreach($publicUsage as $value) {
-            if (isset($publicStaticMethods[$value['classe']])) {
-                $publicStaticMethods[$value['classe']][] = $value['method'];
-            } else {
-                $publicStaticMethods[$value['classe']] = array($value['method']);
-            }
+            array_collect_by($publicStaticMethods, $value['classe'], $value['method']);
         }
 
         if (!empty($publicStaticMethods)) {

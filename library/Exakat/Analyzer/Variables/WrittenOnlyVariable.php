@@ -29,6 +29,7 @@ class WrittenOnlyVariable extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs(array('ARGUMENT', 'DEFINITION'))
+             ->atomIs(array('Parameter', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition')) // static and global ? 
              ->outIsIE('NAME')
              ->not(
                 $this->side()

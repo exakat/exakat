@@ -30,7 +30,13 @@ class Php74NewFunctions extends FunctionDefinition {
     public function analyze() {
         $this->functions = array('mb_str_split',
                                  'password_algos',
-                                 'fn',
+                                 'get_mangled_object_vars',
+                                 'openssl_x509_verify',
+                                 'pcntl_unshare',
+                                 'chroot',
+                                 'sapi_windows_set_ctrl_handler',
+                                 'sapi_windows_generate_ctrl_event',
+                                 'fn', // fn is not a function, but a reserved keyword
                                 );
         parent::analyze();
     }

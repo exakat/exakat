@@ -35,8 +35,6 @@ class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $dir = $this->config->project;
-
         $stats = array();
         foreach(Config::PHP_VERSIONS as $version) {
             $stats["notCompilable$version"] = 'N/C';
@@ -190,7 +188,7 @@ class Files extends Tasks {
         }
 
         $vcsClass = Vcs::getVcs($this->config);
-        $vcs = new $vcsClass($dir, $this->config->code_dir);
+        $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
         $fileModifications = $vcs->getFileModificationLoad();
 
         $filesRows = array();

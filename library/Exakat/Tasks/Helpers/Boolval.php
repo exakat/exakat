@@ -39,7 +39,7 @@ class Boolval extends Plugin {
             case 'Parent'      :
             case 'Closure'     :
             case 'Sequence'    :
-            case 'Name'        :
+//            case 'Name'        :
                 $atom->boolean = true;
                 break;
 
@@ -53,7 +53,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'Nsname' :
-            case 'Name'   :
+//            case 'Name'   :
                 // when it is a string, there is no fallback
                 $atom->boolean = false;
                 break;
@@ -199,7 +199,7 @@ class Boolval extends Plugin {
                 break;
 
         default :
-            
+            $atom->boolean = '';
         }
     }
 }

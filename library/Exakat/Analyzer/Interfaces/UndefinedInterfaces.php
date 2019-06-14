@@ -32,36 +32,29 @@ class UndefinedInterfaces extends Analyzer {
                      'Composer/IsComposerClass',
                      'Composer/IsComposerInterface',
                      'Modules/DefinedInterfaces',
+                     'Modules/DefinedClasses',
                      );
     }
     
     public function analyze() {
-        $scalartypes = $this->loadIni('php_scalar_types.ini', 'types');
-        $scalartypes[] = '\iterable';
-        
-        $omitted = array('Classes/IsExtClass',
-                         'Interfaces/IsExtInterface',
-                         'Composer/IsComposerClass',
-                         'Composer/IsComposerInterface',
-                         'Modules/DefinedInterfaces',
-                         );
+        $omitted = $this->dependsOn();
 
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->isNot('aliased', true)
              ->atomIsNot(array('Self', 'Parent'))
-             ->fullnspathIsNot($scalartypes)
+             ->has('fullnspath')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->isNotIgnored()
              ->analyzerIsNot($omitted);
         $this->prepareQuery();
 
-        $this->atomIs(array('Nsname', 'Identifier'))
+        $this->atomIs(self::$CONSTANTS_ALL)
              ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
              ->atomIsNot(array('Self', 'Parent'))
-             ->fullnspathIsNot($scalartypes)
+             ->has('fullnspath')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noUseDefinition()

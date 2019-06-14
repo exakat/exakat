@@ -127,7 +127,7 @@ class Phpexec {
             unset($x['tokenizer']['TOKEN_PARSE']);
             $tokens = array_flip($x['tokenizer']);
         } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
-            $shell = "docker run -it --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -r \"\\\$x = get_defined_constants(true);  if (!isset(\\\$x['tokenizer'])) { \\\$x['tokenizer'] = array();  } unset(\\\$x['tokenizer']['TOKEN_PARSE']); var_export(array_flip(\\\$x['tokenizer'])); \"'";
+            $shell = 'docker run -it --entrypoint /bin/bash --rm ' . $this->phpexec . " -c 'php -r \"\\\$x = get_defined_constants(true);  if (!isset(\\\$x['tokenizer'])) { \\\$x['tokenizer'] = array();  } unset(\\\$x['tokenizer']['TOKEN_PARSE']); var_export(array_flip(\\\$x['tokenizer'])); \"'";
             $res = shell_exec($shell);
 
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');

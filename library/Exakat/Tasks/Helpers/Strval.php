@@ -75,7 +75,7 @@ class Strval extends Plugin {
     
             case 'Null' :
             case 'Void' :
-            case 'Name' :
+//            case 'Name' :
                 $atom->noDelimiter = '';
                 break;
 

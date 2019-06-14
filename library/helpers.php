@@ -683,4 +683,12 @@ function array_sub_sort(&$list) {
     unset($l);
 }
 
+function array_collect_by(array &$array, $key, $value) {
+    if (isset($array[$key])) {
+        $array[$key][] = $value;
+    } else {
+        $array[$key] = [$value];
+    }
+}
+
 ?>

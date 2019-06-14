@@ -29,9 +29,7 @@ use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
-use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
-use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchLoader;
 use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal\LoadFinal;
@@ -187,7 +185,7 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct(Graph $gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
+    public function __construct(Graph $gremlin, Config $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
         $this->atomGroup = new AtomGroup();
@@ -1204,9 +1202,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
             $atom = 'Arrowfunction';
-        } elseif (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-             $this->contexts->isContext(Context::CONTEXT_TRAIT) ||
-             $this->contexts->isContext(Context::CONTEXT_INTERFACE)) &&
+        } elseif ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
              
              !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
@@ -1443,8 +1439,8 @@ class Load extends Tasks {
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
 
-        $this->contexts->nestContext(Context::CONTEXT_INTERFACE);
-        $this->contexts->toggleContext(Context::CONTEXT_INTERFACE);
+        $this->contexts->nestContext(Context::CONTEXT_CLASS);
+        $this->contexts->toggleContext(Context::CONTEXT_CLASS);
 
         $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($interface, $name, 'NAME');
@@ -1480,7 +1476,7 @@ class Load extends Tasks {
         $this->pushExpression($interface);
         $this->processSemicolon();
 
-        $this->contexts->exitContext(Context::CONTEXT_INTERFACE);
+        $this->contexts->exitContext(Context::CONTEXT_CLASS);
         array_pop($this->currentClassTrait);
 
         return $interface;
@@ -2019,7 +2015,7 @@ class Load extends Tasks {
                                                             ),
                      STRICT_COMPARISON)) {
                      
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable', 'mixed'), STRICT_COMPARISON)) {
                 ++$this->id;
                 $nsname = $this->processSingle('Scalartypehint');
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
@@ -2361,8 +2357,7 @@ class Load extends Tasks {
 
             $this->addLink($const, $def, 'CONST');
 
-            if ($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-                $this->contexts->isContext(Context::CONTEXT_INTERFACE)   ) {
+            if ($this->contexts->isContext(Context::CONTEXT_CLASS)) {
                 $this->calls->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath . '::' . $name->fullcode, $def);
             } else {
                 $this->calls->addDefinition('const', $name->fullnspath, $def);
@@ -2831,7 +2826,7 @@ class Load extends Tasks {
             $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
             
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'iterable', 'mixed'), STRICT_COMPARISON)) {
                 $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
             } else {
                 $this->getFullnspath($typehint, 'class', $typehint);
@@ -2850,8 +2845,7 @@ class Load extends Tasks {
 
             return $static;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            if (($this->contexts->isContext(Context::CONTEXT_CLASS) ||
-                 $this->contexts->isContext(Context::CONTEXT_TRAIT)   ) &&
+            if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
                 !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
                 // something like public static
                 $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
@@ -5068,7 +5062,7 @@ class Load extends Tasks {
             ++$this->id; // skip )
 
             $breakLevel = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG || 
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG ||
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON ) {
             $breakLevel = $this->addAtomVoid();
         } else {
@@ -5716,14 +5710,6 @@ class Load extends Tasks {
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_CLASS)) !== false) {
             throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is " . $count . PHP_EOL);
-        }
-
-        if (($count = $this->contexts->getCount(Context::CONTEXT_TRAIT)) !== false) {
-            throw new LoadError( "Warning : context for trait is not back to 0 in $filename : it is " . $count . PHP_EOL);
-        }
-
-        if (($count = $this->contexts->getCount(Context::CONTEXT_INTERFACE)) !== false) {
-            throw new LoadError( "Warning : context for interface is not back to 0 in $filename : it is " . $count . PHP_EOL);
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).

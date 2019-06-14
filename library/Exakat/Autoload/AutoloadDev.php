@@ -99,25 +99,14 @@ class AutoloadDev {
             return array();
         }
         
-        $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
-        if (empty($ini)) {
-            return array();
-        }
-
         $json = file_get_contents($fullPath);
         if (empty($json)) {
             return array();
         }
- 
-        $data = json_decode($json);
-        if (empty($data)) {
+
+        $return = json_decode($json, true);
+        if (empty($return)) {
             return array();
-        }
-        
-        if ($libel === self::LOAD_ALL) {
-            $return = (array) $data;
-        } else {
-            $return = array_column($data, $libel);
         }
 
         return $return;

@@ -36,17 +36,7 @@ class Perfile extends Reports {
         $perfile       = array();
         $maxLine       = 0;
         $maxTitle      = 0;
-        $titleCache    = array();
-        $severityCache = array();
         foreach($analysisResults->toArray() as $row) {
-
-            if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-
-                $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
-            }
-
             $maxLine = max($maxLine, $row['line']);
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']));
             $perfile[$row['file']][] = sprintf(' % 4s  %s ', $row['line'], $titleCache[$row['analyzer']]);

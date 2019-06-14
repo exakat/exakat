@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnusedMethods extends Analyzer {
     public function dependsOn() {
         return array('Classes/UsedMethods',
+                     'Modules/CalledByModule',
                     );
     }
     
@@ -36,7 +37,9 @@ class UnusedMethods extends Analyzer {
         $this->atomIs('Method')
              ->isNot('abstract', true)
              ->hasClassTrait()
-             ->analyzerIsNot('Classes/UsedMethods')
+             ->analyzerIsNot(array('Classes/UsedMethods',
+                                   'Modules/CalledByModule',
+                                ))
              ->back('first');
         $this->prepareQuery();
     }

@@ -166,6 +166,9 @@ class Docs {
                  'Datetimezone'                 => 'http://php.net/manual/en/class.datetimezone.php',
                  'Datetimeinterval'             => 'http://php.net/manual/en/class.dateinterval.php',
                  'Dateperiod'                   => 'http://php.net/manual/en/class.dateperiod.php',
+                 'WeakReference'                => 'https://www.php.net/manual/en/class.weakreference.php',
+                 'Serializable'                 => 'https://www.php.net/manual/en/class.serializable.php',
+                 'ReflectionReference'          => 'https://www.php.net/manual/en/class.reflectionreference.php',
                  
                  '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',

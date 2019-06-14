@@ -35,7 +35,7 @@ class OverwrittenProperties extends LoadFinal {
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
-              ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
               ->raw('where(neq("first"))', array(), array())
               ->addEFrom('OVERWRITE', 'first')
