@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class Php74ArrayKeyExists extends Analyzer {
-    protected $phpVersion = "7.4+";
+    protected $phpVersion = '7.4+';
 
     public function analyze() {
         // array_key_exists() : No initial \, no use definition

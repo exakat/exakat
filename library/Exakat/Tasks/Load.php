@@ -5064,7 +5064,7 @@ class Load extends Tasks {
             ++$this->id; // skip )
 
             $breakLevel = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG || 
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG ||
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON ) {
             $breakLevel = $this->addAtomVoid();
         } else {
