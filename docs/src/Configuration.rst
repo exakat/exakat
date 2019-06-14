@@ -110,53 +110,65 @@ Here are the currently available options in Exakat's configuration file : config
 |                    | Default is 1 million.                                                                     |
 +--------------------+-------------------------------------------------------------------------------------------+
 | php                | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
-|                    | PHP 7.0, or 5.6. The same binary may be used with the following options.                  |
+|                    | PHP 7.3, or 7.4. The same binary may be used with the following options.                  |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php73              | Link to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+| php80              | Path to the PHP 8.0.x binary. This binary is needed to test the compilation with the 8.0  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php72              | Link to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
+| php74              | Path to the PHP 7.4.x binary. This binary is needed to test the compilation with the 7.4  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php71              | Link to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
+| php73              | Path to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is recommended to use this       |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php72              | Path to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php70              | Link to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
+| php71              | Path to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php56              | Link to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
+| php70              | Path to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php55              | Link to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
+| php56              | Path to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php54              | Link to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
+| php55              | Path to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php53              | Link to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
+| php54              | Path to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php52              | Link to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+| php53              | Path to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
+| php52              | Path to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+
+Note : php** configuration may be either a valid PHP binary path, or a valid Docker image. The path on the system may be `/usr/bin/php`, `/usr/sbin/php80`, or `/usr/local/Cellar/php71/7.1.30/bin/php`. The Docker configuration must have the form `abc/def:tag`. The image's name may be any value, as long as Exakat manage to run it, and get the valid PHP signature, with `php -v`. When using Docker, the docker server must be running. 
 
 Custom rulesets
 ###############
