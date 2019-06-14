@@ -67,20 +67,11 @@ class Scrutinizer extends Reports {
         $resultsAnalyzers->load();
 
         $results = array();
-        $titleCache = array();
-        $severityCache = array();
         foreach($resultsAnalyzers->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('filename' => $row['file'],
                               'messages' => array());
                 $results[$row['file']] = $file;
-            }
-
-            if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-
-                $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
             }
 
             $message = array('source'   => $row['analyzer'],

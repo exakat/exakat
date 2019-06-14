@@ -620,7 +620,6 @@ JAVASCRIPT;
             unset($list[$row['analyzer']]);
         }
 
-        $value = 0;
         foreach(array_keys($list) as $analyzer) {
             $data[] = compact('analyzer','value');
         }
