@@ -4795,7 +4795,9 @@ HTML;
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
-        switch($vcsClass) {
+        $vcsName = explode('\\', $vcsClass);
+        $vcsName = array_pop($vcsName);
+        switch($vcsName) {
             case 'Git':
                 $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
 
