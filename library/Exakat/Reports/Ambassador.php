@@ -2397,6 +2397,7 @@ SQL;
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
                             'Php/UnpackingInsideArrays'             => '7.4+',
+                            'Structures/CurlVersionNow'             => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
