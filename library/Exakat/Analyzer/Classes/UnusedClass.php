@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnusedClass extends Analyzer {
     public function dependsOn() {
         return array('Classes/TestClass',
+                     'Modules/CalledByModule',
                     );
     }
 
@@ -36,7 +37,7 @@ class UnusedClass extends Analyzer {
         // new A;
         $this->atomIs('Class')
              ->isNot('abstract', true)
-             ->analyzerIsNot('Classes/TestClass')
+             ->analyzerIsNot($this->dependsOn())
              ->raw(<<<'GREMLIN'
 not(
     where(

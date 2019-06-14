@@ -32,6 +32,7 @@ class UndefinedInterfaces extends Analyzer {
                      'Composer/IsComposerClass',
                      'Composer/IsComposerInterface',
                      'Modules/DefinedInterfaces',
+                     'Modules/DefinedClasses',
                      );
     }
     

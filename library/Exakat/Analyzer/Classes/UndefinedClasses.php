@@ -30,6 +30,7 @@ class UndefinedClasses extends Analyzer {
         return  array('Classes/IsExtClass',
                       'Composer/IsComposerNsname',
                       'Modules/DefinedClasses',
+                      'Modules/DefinedInterfaces',
                       'Interfaces/IsExtInterface',
                      );
     }
@@ -38,6 +39,7 @@ class UndefinedClasses extends Analyzer {
         $omitted = array('Classes/IsExtClass',
                          'Composer/IsComposerNsname',
                          'Modules/DefinedClasses',
+                          'Modules/DefinedInterfaces',
                          );
 
         $omittedAll = $omitted;
