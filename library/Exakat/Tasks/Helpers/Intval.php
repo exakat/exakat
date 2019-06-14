@@ -76,7 +76,6 @@ class Intval extends Plugin {
             case 'Parent'      :
             case 'Null'        :
             case 'Void'        :
-            case 'Name'        :
                 $atom->intval = 0;
                 break;
     
@@ -201,7 +200,8 @@ class Intval extends Plugin {
                 break;
 
         default :
-        case 'Sequence' :
+//            case 'Name'        :
+//        case 'Sequence' :
             // Nothing, really
         }
     }
