@@ -28,32 +28,21 @@ use Exakat\Analyzer\Analyzer;
 class VariableUsedOnce extends Analyzer {
     public function analyze() {
         //Variables mentionned once in the whole application. Just once.
-        $this->atomIs(self::$VARIABLES_USER)
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->inIs(array('NAME')) //, 'USE'
-             )
+        $this->atomIs(array('Variabledefinition'))
+             ->outIs('DEFINITION')
+             ->atomIsNot('Phpvariable')
+             ->back('first')
              ->groupCount('code')
              ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
         $usedOnce = $this->rawQuery()->toArray();
-
-        $this->atomFunctionIs('\compact')
-             ->outIs('ARGUMENT')
-             ->atomIs('String')
-             ->inIs('DEFINITION')
-             ->groupCount('code')
-             ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
-        $compactString = $this->rawQuery()->toArray();
-
-        $usedOnce = array_values(array_diff($usedOnce, $compactString));
 
         if (empty($usedOnce)) {
             return;
         }
 
-        $this->atomIs(self::$VARIABLES_USER)
-             ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+        $this->atomIs(array('Variabledefinition'))
+             ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE)
+             ->outIs('DEFINITION');
         $this->prepareQuery();
     }
 }
