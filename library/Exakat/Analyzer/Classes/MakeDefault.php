@@ -36,36 +36,20 @@ class MakeDefault extends Analyzer {
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')
+             ->_as('assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
              ->atomIs(array('String', 'Integer', 'Boolean', 'Float', 'Null', 'Arrayliteral', 'Ternary', 'Coalesce'))
              ->is('constant', true)
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
-             ->atomIs('Member')
-             ->_as('result')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'propriete')
-             
-             // search for property definition
-             ->goToClass()
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
+             ->inIs('DEFAULT')
              ->atomIs('Propertydefinition')
-             ->samePropertyAs('propertyname', 'propriete')
              ->not(
                 $this->side()
                      ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->atomIs('Assignation')
+                     ->hasNoIn('RIGHT')
              )
-             ->hasNoOut('DEFAULT')
-             
-             ->back('result');
+             ->back('assignation')
+             ->outIs('LEFT');
         $this->prepareQuery();
     }
 }
