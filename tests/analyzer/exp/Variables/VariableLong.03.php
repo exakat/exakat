@@ -28,8 +28,6 @@ $expected_not = array('$a',
                       '$abcdefghijklmnopq',
                       '$abcdefghijklmnopqr',
                       '$abcdefghijklmnopqrs',
-                      '$propertyjklmnopqrstuvwxyz',
-                      '$propertyjklmnopqrstuvwxyz2',
                      );
 
 ?>
