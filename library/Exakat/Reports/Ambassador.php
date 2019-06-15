@@ -314,7 +314,7 @@ class Ambassador extends Reports {
 
             $badges = array();
             $exakatSince = $description['exakatSince'] ?? '';
-            if(!empty($v)){
+            if(!empty($exakatSince)){
                 $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
@@ -1425,8 +1425,6 @@ JAVASCRIPT;
         } else {
             $percentAnalyzer = 100;
         }
-        
-        $audit_date = date('r', strtotime('now'));
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -2474,8 +2472,6 @@ SQL;
             if ($analyzer === null) {
                 continue;
             }
-
-            $description = $this->getDocs($name, 'description');
 
             $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 

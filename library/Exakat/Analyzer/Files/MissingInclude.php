@@ -129,7 +129,7 @@ class MissingInclude extends Analyzer {
         if (in_array($file, $files, STRICT_COMPARISON)) { return true; }
         
         if (substr($file, 0, 2) === './') {
-            if (in_array(substr($file, 1), $files, STRICT_COMPARISON)) { return true; }
+            if (in_array(ltrim($file, '.'), $files, STRICT_COMPARISON)) { return true; }
             
             if (in_array(dirname($including) . substr($file, 1), $files, STRICT_COMPARISON)) { return true; }
         }
