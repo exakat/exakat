@@ -4473,21 +4473,35 @@ class Load extends Tasks {
         // For functions and constants
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET &&
-                  $this->tokens[$this->id + 2][0] === $this->phptokens::T_CLOSE_BRACKET) {
+        } 
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET &&
+            $this->tokens[$this->id + 2][0] === $this->phptokens::T_CLOSE_BRACKET) {
             return $this->processAppend();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET ||
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
+        } 
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET ||
+            $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             return $this->processBracket();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ||
-                  $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
-                  $this->tokens[$this->id - 1][0] === $this->phptokens::T_AS) {
+        } 
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
+            $this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ||
+            $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
+            $this->tokens[$this->id - 1][0] === $this->phptokens::T_AS) {
             return $nsname;
-        } elseif (in_array($nsname->atom, array('Nsname', 'Identifier'), STRICT_COMPARISON)) {
+        } 
+
+        if ($nsname->atom === "Newcall" && 
+            !isset($nsname->count)) {
+            // New call, but no () : it still requires an argument count
+            $nsname->count = 0;
+            return $nsname;
+        } 
+
+        if (in_array($nsname->atom, array('Nsname', 'Identifier'), STRICT_COMPARISON)) {
 
             $type = $this->contexts->isContext(Context::CONTEXT_NEW) ? 'class' : 'const';
-            
             $this->getFullnspath($nsname, $type, $nsname);
 
             if ($type === 'const') {
@@ -4495,9 +4509,9 @@ class Load extends Tasks {
             }
 
             return $nsname;
-        } else {
-            return $nsname;
         }
+
+        return $nsname;
     }
 
     private function processAppend() {
