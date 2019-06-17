@@ -5324,11 +5324,7 @@ class Load extends Tasks {
                       $right->token  === 'T_STRING') {
 
                 $this->calls->addCall('property', "{$left->fullnspath}::{$right->code}", $static);
-                if(isset($this->currentPropertiesCalls[$right->code])) {
-                    $this->currentPropertiesCalls[$right->code][] = $static;
-                } else {
-                    $this->currentPropertiesCalls[$right->code] = array($static);
-                }
+                array_collect_by($this->currentPropertiesCalls, $right->code, $static);
             }
         }
         $this->runPlugins($static, array('OBJECT' => $left,
