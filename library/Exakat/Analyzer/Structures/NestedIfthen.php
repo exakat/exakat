@@ -25,14 +25,23 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NestedIfthen extends Analyzer {
+    protected $nestedIfthen = 3;
+
     public function analyze() {
+        $this->nestedIfthen = abs((int) $this->nestedIfthen); 
+        $this->nestedIfthen = $this->nestedIfthen === 0 ? 1 : $this->nestedIfthen; 
+        
         // 3 level of ifthen (2 is OK)
         $this->atomIs('Ifthen')
-             ->outIs(array('THEN', 'ELSE'))
-             ->atomInsideNoDefinition('Ifthen')
-             ->outIs(array('THEN', 'ELSE'))
-             ->atomInsideNoDefinition('Ifthen')
-             ->back('first');
+             ->tokenIsNot('T_ELSEIF');
+        
+        // Skip the first one
+        for ($i = 1; $i < $this->nestedIfthen; ++$i) {
+            $this->outIs(array('THEN', 'ELSE'))
+                 ->atomInsideNoDefinition('Ifthen');
+        }
+
+        $this->back('first');
         $this->prepareQuery();
     }
 }
