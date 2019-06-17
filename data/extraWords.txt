@@ -251,3 +251,6 @@ PSR
 exakat
 MySQL
 ODBC
+ZooKeeper
+barcodes
+barcode
