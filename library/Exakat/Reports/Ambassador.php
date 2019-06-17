@@ -1479,13 +1479,13 @@ JAVASCRIPT;
     }
 
     public function getIssuesBreakdown() {
-        $receipt = array('Code Smells'  => 'Analyze',
-                         'Dead Code'    => 'Dead code',
-                         'Security'     => 'Security',
-                         'Performances' => 'Performances');
+        $rulesets = array('Code Smells'  => 'Analyze',
+                          'Dead Code'    => 'Dead code',
+                          'Security'     => 'Security',
+                          'Performances' => 'Performances');
 
         $data = array();
-        foreach ($receipt AS $key => $categorie) {
+        foreach ($rulesets AS $key => $categorie) {
             $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array($categorie))) . ')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
@@ -2020,8 +2020,8 @@ $issues
           'analyzer'  : 'Analyzer',
           'file'      : 'File',
           'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
+          'complexity': 'Time To Fix',
+          'receipt'   : 'Rulesets'
         },
         facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
         facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
