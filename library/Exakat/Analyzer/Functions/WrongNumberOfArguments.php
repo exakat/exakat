@@ -38,46 +38,48 @@ class WrongNumberOfArguments extends Analyzer {
         $argsMaxs = array();
 
         foreach($functions as $function) {
-            if ($function['args_min'] > 0) {
-                $argsMins[$function['args_min']][] = '\\' . $function['name'];
-            }
+            $argsMins[makefullnspath($function['name'])] = $function['args_min'];
+
             if ($function['args_max'] < 100) {
-                $argsMaxs[$function['args_max']][] = '\\' . $function['name'];
+                $argsMaxs[makefullnspath($function['name'])] = $function['args_max'];
             }
         }
 
-        foreach($argsMins as $nb => $f) {
-            $this->atomFunctionIs($f)
-                 ->hasNoVariadicArgument()
-                 ->isLess('count', $nb)
-                 ->back('first');
-            $this->prepareQuery();
-        }
-        
-        foreach($argsMaxs as $nb => $f) {
-            $this->atomFunctionIs($f)
-                 ->hasNoVariadicArgument()
-                 ->isMore('count', $nb)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+       $this->atomFunctionIs(array_keys($argsMins))
+            ->savePropertyAs('fullnspath', 'fnp')
+            ->hasNoVariadicArgument()
+            ->isLessHash('count', $argsMins, 'fnp')
+            ->back('first');
+       $this->prepareQuery();
+
+       $this->atomFunctionIs(array_keys($argsMaxs))
+            ->savePropertyAs('fullnspath', 'fnp')
+            ->hasNoVariadicArgument()
+            ->isMoreHash('count', $argsMaxs, 'fnp')
+            ->back('first');
+       $this->prepareQuery();
 
         // this is for custom functions
-        $this->atomIs('Functioncall')
+        $this->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIsIE('METHOD') // for methods calls, static or not. 
              ->hasNoVariadicArgument()
-             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('count', 'args_count')
-             ->functionDefinition()
+             ->inIsIE('METHOD') // for methods calls, static or not. 
+             ->inIsIE('NEW')
+             ->inIs('DEFINITION')
+             ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/VariableArguments')
              ->isMore('args_min', 'args_count')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
+        $this->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIsIE('METHOD') // for methods calls, static or not. 
              ->hasNoVariadicArgument()
-             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('count', 'args_count')
-             ->functionDefinition()
+             ->inIsIE('METHOD') // for methods calls, static or not. 
+             ->inIsIE('NEW')
+             ->inIs('DEFINITION')
              ->analyzerIsNot('Functions/VariableArguments')
              ->isLess('args_max', 'args_count')
              ->back('first');
