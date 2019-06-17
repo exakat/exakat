@@ -46,13 +46,15 @@ class IsExtClass extends Analyzer {
             }
         }
 
-        $classes = call_user_func_array('array_merge', $c);
-        $classes = makeFullNsPath($classes);
-        $classes = array_keys(array_count_values($classes));
-        
+        if (empty($c)) {
+            $classes = array();
+        } else {
+            $classes = array_merge(...$c);
+            $classes = makeFullNsPath($classes);
+            $classes = array_keys(array_count_values($classes));
+        }
+
         $this->analyzerIs('Classes/ClassUsage')
-             ->tokenIs(array('T_STRING','T_NS_SEPARATOR', 'T_AS'))
-             ->atomIsNot(array('Array', 'Null', 'Boolean'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 

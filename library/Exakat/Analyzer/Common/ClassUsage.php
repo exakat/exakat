@@ -44,8 +44,7 @@ class ClassUsage extends Analyzer {
 
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->atomIs(self::$CONSTANTS_ALL)
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
@@ -55,21 +54,19 @@ class ClassUsage extends Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs(array('Nsname', 'Identifier'))
-             ->hasIn('TYPEHINT')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+        $this->atomIs(self::$CONSTANTS_ALL)
+             ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIs(self::$CONSTANTS_ALL)
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
