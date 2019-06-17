@@ -3422,6 +3422,7 @@ class Load extends Tasks {
             $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ';
             
             ++$this->id;
+            $isColon = false;
         } else {
             $isColon = $this->whichSyntax($current, $this->id + 1);
 
