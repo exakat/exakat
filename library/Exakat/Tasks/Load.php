@@ -2954,12 +2954,8 @@ class Load extends Tasks {
                 $this->currentProperties[$element->propertyname] = $element;
                 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                if ($static->static === 1) {
-                    $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
-                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
-                } else {
-                    $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
-                }
+                $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
+                $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
             }
 
             if (isset($default)) {
@@ -5189,19 +5185,15 @@ class Load extends Tasks {
         }
 
         $this->addLink($static, $left, 'CLASS');
-        if ($static->atom  === 'Staticproperty' &&
-            in_array($left->token, array('T_STRING', 'T_STATIC'), STRICT_COMPARISON)       &&
-            !empty($this->currentClassTrait)    &&
-            !empty($this->currentClassTrait[count($this->currentClassTrait) - 1]) &&
-            $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
-            
+        if ($static->atom  === 'Staticproperty'                                      &&
+            in_array($left->token, array('T_STRING', 'T_STATIC'), STRICT_COMPARISON) &&
+            !empty($this->currentClassTrait)                                         &&
+            !empty($this->currentClassTrait[count($this->currentClassTrait) - 1])    &&
+            $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath) {
+
             $name = ltrim($right->code, '$');
-            if (empty($name)) {
-                //nothing, really
-            } elseif(isset($this->currentPropertiesCalls[$name])) {
-                $this->currentPropertiesCalls[$name][] = $static;
-            } else {
-                $this->currentPropertiesCalls[$name] = array($static);
+            if (!empty($name)) {
+                array_collect_by($this->currentPropertiesCalls, $name, $static);
             }
         }
 
