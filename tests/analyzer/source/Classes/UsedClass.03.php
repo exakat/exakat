@@ -7,6 +7,16 @@ spl_autoload_register('Methodname');
 
 print 'Unused2::x';
 
-class Used {}
-class Unused {}
-class UnusedAndUnmentionned {}
+class Used {
+    function x() {}
+}
+class Unused {
+    function x() {}
+}
+
+class Unused2 {
+}
+
+class UnusedAndUnmentionned {
+    function x() {}
+}

@@ -6,5 +6,7 @@
         use inAUseWithAlias2 as b2;
         new b2();
 
+        class inAUseWithoutAlias3 {} 
+        use inAUseWithoutAlias3;
 
 ?>
