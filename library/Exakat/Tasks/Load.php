@@ -5190,7 +5190,7 @@ class Load extends Tasks {
 
         $this->addLink($static, $left, 'CLASS');
         if ($static->atom  === 'Staticproperty' &&
-            $left->token   === 'T_STRING'       &&
+            in_array($left->token, array('T_STRING', 'T_STATIC'), STRICT_COMPARISON)       &&
             !empty($this->currentClassTrait)    &&
             !empty($this->currentClassTrait[count($this->currentClassTrait) - 1]) &&
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath){
