@@ -4469,31 +4469,31 @@ class Load extends Tasks {
         // For functions and constants
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
-        } 
+        }
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET &&
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_CLOSE_BRACKET) {
             return $this->processAppend();
-        } 
+        }
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET ||
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             return $this->processBracket();
-        } 
+        }
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_AS) {
             return $nsname;
-        } 
+        }
 
-        if ($nsname->atom === "Newcall" && 
+        if ($nsname->atom === 'Newcall' &&
             !isset($nsname->count)) {
             // New call, but no () : it still requires an argument count
             $nsname->count = 0;
             return $nsname;
-        } 
+        }
 
         if (in_array($nsname->atom, array('Nsname', 'Identifier'), STRICT_COMPARISON)) {
 

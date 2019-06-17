@@ -28,8 +28,8 @@ class NestedIfthen extends Analyzer {
     protected $nestedIfthen = 3;
 
     public function analyze() {
-        $this->nestedIfthen = abs((int) $this->nestedIfthen); 
-        $this->nestedIfthen = $this->nestedIfthen === 0 ? 1 : $this->nestedIfthen; 
+        $this->nestedIfthen = abs((int) $this->nestedIfthen);
+        $this->nestedIfthen = $this->nestedIfthen === 0 ? 1 : $this->nestedIfthen;
         
         // 3 level of ifthen (2 is OK)
         $this->atomIs('Ifthen')
