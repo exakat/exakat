@@ -31,106 +31,22 @@ class UnitializedProperties extends Analyzer {
     }
     
     public function analyze() {
-        // Normal Properties (with constructor)
-        $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->isNot('static', true)
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->hasNoOut('DEFAULT')
-             ->_as('results')
-             ->savePropertyAs('propertyname', 'property')
-             ->back('first')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs(array('Method', 'Magicmethod'))
-             ->analyzerIs('Classes/Constructor')
+        // Normal Properties (with or without constructor)
+        $this->atomIs('Propertydefinition')
+             // No default value
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('BLOCK')
-                             ->atomInsideNoDefinition('Member')
-                             ->is('isModified', true)
-                             ->outIs('MEMBER')
-                             ->tokenIs('T_STRING')
-                             ->samePropertyAs('code', 'property')
-                     )
+                     ->outIs('DEFAULT')
+                     ->hasNoIn('RIGHT')
              )
-             ->back('results');
-        $this->prepareQuery();
 
-        // Normal Properties (without constructor)
-        $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->isNot('static', true)
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->hasNoOut('DEFAULT')
-             ->_as('results')
-             ->savePropertyAs('propertyname', 'property')
-             ->back('first')
              ->not(
                 $this->side()
-                     ->outIs(array('METHOD', 'MAGICMETHOD'))
-                     ->atomIs(array('Method', 'Magicmethod'))
+                     ->outIs('DEFAULT')
+                     ->goToFunction()
+                     ->atomIs('Magicmethod')
                      ->analyzerIs('Classes/Constructor')
-             )
-             ->back('results');
-        $this->prepareQuery();
-
-        // Static Properties (with constructor)
-        $this->atomIs(self::$CLASSES_ALL)
-             ->savePropertyAs('fullnspath', 'classe')
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->is('static', true)
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->hasNoOut('DEFAULT')
-             ->_as('results')
-             ->savePropertyAs('code', 'property')
-             ->back('first')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs(array('Method', 'Magicmethod'))
-             ->analyzerIs('Classes/Constructor')
-             ->not(
-                $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('BLOCK')
-                             ->atomInsideNoDefinition('Staticproperty')
-                             ->is('isModified', true)
-                             ->outIs('CLASS')
-                             ->samePropertyAs('fullnspath', 'classe')
-                             ->inIs('CLASS')
-                             ->outIs('MEMBER')
-                             ->samePropertyAs('code', 'property')
-                     )
-             )
-             ->back('results');
-        $this->prepareQuery();
-
-        // Static Properties (without constructor)
-        $this->atomIs(self::$CLASSES_ALL)
-             ->savePropertyAs('fullnspath', 'classe')
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->is('static', true)
-             ->outIs('PPP')
-             ->hasNoOut('DEFAULT')
-             ->atomIsNot('Virtualproperty')
-             ->_as('results')
-             ->savePropertyAs('code', 'property')
-             ->back('first')
-             ->not(
-                $this->side()
-                     ->outIs(array('MAGICMETHOD', 'METHOD'))
-                     ->atomIs(array('Method', 'Magicmethod'))
-                     ->analyzerIs('Classes/Constructor')
-             )
-             ->back('results');
+             );
         $this->prepareQuery();
     }
 }

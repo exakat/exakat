@@ -41,6 +41,50 @@ class SetParentDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
 
+        $query = $this->newQuery('SetParentDefinition property');
+        $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('parent')
+              ->inIs('CLASS')
+              ->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('property')
+              ->outIs('MEMBER')
+              ->tokenIs('T_VARIABLE')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->inIs('DEFINITION')
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'property')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count1 = $result->toInt();
+        display("Set $count1 parent property definitions");
+
+        $query = $this->newQuery('SetParentDefinition property');
+        $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('parent')
+              ->inIs('CLASS')
+              ->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('constant')
+              ->outIs('CONSTANT')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->inIs('DEFINITION')
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'constant')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count1 = $result->toInt();
+        display("Set $count1 parent constant definitions");
+
         $query = $this->newQuery('SetParentDefinition direct');
         $query->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\\\parent', Analyzer::CASE_SENSITIVE)
