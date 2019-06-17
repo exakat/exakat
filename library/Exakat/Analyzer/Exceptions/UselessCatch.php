@@ -32,7 +32,9 @@ class UselessCatch extends Analyzer {
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
-             ->atomIs(array('Return'))
+             ->atomIs('Return')
+             ->outIs('RETURN')
+             ->is('constant', true)
              ->back('first');
         $this->prepareQuery();
     }
