@@ -687,7 +687,7 @@ function array_collect_by(array &$array, $key, $value) {
     if (isset($array[$key])) {
         $array[$key][] = $value;
     } else {
-        $array[$key] = [$value];
+        $array[$key] = array($value);
     }
 }
 

@@ -40,6 +40,7 @@ class UndefinedStaticMP extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->back('first')
+
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->hasNoIn('DEFINITION');
         $this->prepareQuery();
@@ -47,35 +48,20 @@ class UndefinedStaticMP extends Analyzer {
         // static::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Self', 'Static')) // self class static step
-             ->back('first')
-             ->outIs('MEMBER')
-             ->tokenIs('T_VARIABLE')
+             ->atomIs(array('Self', 'Static'))
              ->back('first')
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs('Virtualproperty')
-             )
-             ->back('first');
-        $this->prepareQuery();
-
-        // static::$property, with a non-static property definition
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->atomIs(array('Self', 'Static')) // self class static step
-             ->back('first')
-             ->outIs('MEMBER')
-             ->tokenIs('T_VARIABLE')
-             ->back('first')
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->atomIs('Propertydefinition')
-                     ->inIs('PPP')
-                     ->isNot('static', true)
-             )
-             ->back('first');
+                     ->atomIs('Virtualproperty')// No check on visibility, we are locall!
+                     ->not(
+                        $this->side()
+                             ->outIs('OVERWRITE')
+                             ->atomIs('Propertydefinition')
+                             ->inIs('PPP')
+                             ->isNot('visibility', 'private')
+                     )
+              );
         $this->prepareQuery();
     }
 }

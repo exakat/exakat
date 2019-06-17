@@ -28,7 +28,6 @@ class ShouldUseCoalesce extends Analyzer {
     protected $phpVersion = '7.0+';
     
     public function analyze() {
-
         //isset($a) ? $a : 'b';
         $this->atomIs('Ternary')
              ->outIs('CONDITION')
@@ -115,6 +114,40 @@ class ShouldUseCoalesce extends Analyzer {
              ->outWithRank('EXPRESSION', 0)
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        //isset($a) ?: $b;
+        $this->atomIs('Ternary')
+             ->outIs('THEN')
+             ->atomIs('Void')
+             ->back('first')
+             ->outIs('CONDITION')
+             ->atomIs('Isset')
+             ->back('first');
+        $this->prepareQuery();
+
+        //is_null($a) ?? $b;
+        $this->atomIs('Coalesce')
+             ->outIs('LEFT')
+             ->functioncallIs('\\is_null')
+             ->back('first');
+        $this->prepareQuery();
+
+        //isset($a) ?? $b;
+        $this->atomIs('Coalesce')
+             ->outIs('LEFT')
+             ->atomIs('Isset')
+             ->back('first');
+        $this->prepareQuery();
+
+        //$a == null ?? $b;
+        $this->atomIs('Coalesce')
+             ->outIs('LEFT')
+             ->atomIs('Comparison')
+             ->codeIs(array('==', '===', '!=', '==='))
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Null')
              ->back('first');
         $this->prepareQuery();
     }

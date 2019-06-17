@@ -60,7 +60,6 @@ class Exakatyaml extends Reports {
     }
     
     private function format($r) {
-        $number_size = strlen($r[1]) + 2;
         $ident = str_repeat(' ', 8);
         
         $list = explode(', ', $r[2]);

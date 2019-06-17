@@ -314,7 +314,7 @@ class Ambassador extends Reports {
 
             $badges = array();
             $exakatSince = $description['exakatSince'] ?? '';
-            if(!empty($v)){
+            if(!empty($exakatSince)){
                 $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
@@ -1425,8 +1425,6 @@ JAVASCRIPT;
         } else {
             $percentAnalyzer = 100;
         }
-        
-        $audit_date = date('r', strtotime('now'));
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -1481,13 +1479,13 @@ JAVASCRIPT;
     }
 
     public function getIssuesBreakdown() {
-        $receipt = array('Code Smells'  => 'Analyze',
-                         'Dead Code'    => 'Dead code',
-                         'Security'     => 'Security',
-                         'Performances' => 'Performances');
+        $rulesets = array('Code Smells'  => 'Analyze',
+                          'Dead Code'    => 'Dead code',
+                          'Security'     => 'Security',
+                          'Performances' => 'Performances');
 
         $data = array();
-        foreach ($receipt AS $key => $categorie) {
+        foreach ($rulesets AS $key => $categorie) {
             $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array($categorie))) . ')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
@@ -2022,8 +2020,8 @@ $issues
           'analyzer'  : 'Analyzer',
           'file'      : 'File',
           'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
+          'complexity': 'Time To Fix',
+          'receipt'   : 'Rulesets'
         },
         facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
         facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
@@ -2210,8 +2208,9 @@ SQL;
         $externallibrariesList = $this->datastore->getRow('externallibraries');
 
         foreach($externallibrariesList as $row) {
-            $url  = $externallibraries->{strtolower($row['library'])}->homepage;
-            $name = $externallibraries->{strtolower($row['library'])}->name;
+            $name = strtolower($row['library']);
+            $url  = $externallibraries->{$name}->homepage;
+            $name = $externallibraries->{$name}->name;
             if (empty($url)) {
                 $homepage = '';
             } else {
@@ -2475,8 +2474,6 @@ SQL;
                 continue;
             }
 
-            $description = $this->getDocs($name, 'description');
-
             $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
             $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
@@ -2529,7 +2526,8 @@ HTML;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
         $info[] = array('PHP used', $this->config->phpversion . ' (' . $php->getConfiguration('phpversion') . ')');
 
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');

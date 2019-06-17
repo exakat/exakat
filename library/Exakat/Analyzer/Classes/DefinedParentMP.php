@@ -35,15 +35,47 @@ class DefinedParentMP extends Analyzer {
         // parent::methodcall()
         $this->atomIs('Parent')
              ->inIs('CLASS')
-             ->atomIs(array('Staticmethodcall', 'Staticconstant'))
-             ->hasIn('DEFINITION');
+             ->atomIs('Staticmethodcall')
+             ->_as('results')
+             ->inIs('DEFINITION')
+             ->isNot('visibility', 'private')
+             ->back('results');
+        $this->prepareQuery();
+
+        // parent::constant
+        $this->atomIs('Parent')
+             ->inIs('CLASS')
+             ->atomIs('Staticconstant')
+             ->_as('results')
+             ->inIs('DEFINITION')
+             ->inIs('CONST') // just for constants
+             ->isNot('visibility', 'private')
+             ->back('results');
         $this->prepareQuery();
 
         // parent::$property
         $this->atomIs('Parent')
              ->inIs('CLASS')
              ->atomIs('Staticproperty')
-             ->isPropertyDefined();
+             ->_as('results')
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
+             ->isNot('visibility', 'private')
+             ->back('results');
+        $this->prepareQuery();
+
+        $this->atomIs('Parent')
+             ->inIs('CLASS')
+             ->atomIs('Staticproperty')
+             ->_as('results')
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
+             ->atomIs('Virtualproperty')
+             ->outIs('OVERWRITE')
+             ->atomIs('Propertydefinition')
+             ->inIs('PPP')
+             ->isNot('visibility', 'private')
+             ->back('results');
         $this->prepareQuery();
 
         // handle composer/extensions case

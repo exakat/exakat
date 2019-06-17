@@ -29,6 +29,7 @@ class UnusedClass extends Analyzer {
     public function dependsOn() {
         return array('Classes/TestClass',
                      'Modules/CalledByModule',
+                     'Classes/UsedClass',
                     );
     }
 
@@ -36,34 +37,7 @@ class UnusedClass extends Analyzer {
         // class A {}
         // new A;
         $this->atomIs('Class')
-             ->isNot('abstract', true)
-             ->analyzerIsNot($this->dependsOn())
-             ->raw(<<<'GREMLIN'
-not(
-    where(
-        __.out("DEFINITION").not( 
-            where(__.coalesce( __.in("NAME").in("USE"), 
-                               __.in("USE"), 
-                               __.in("USE").hasLabel("Usenamespace"),
-                               __.in("EXTENDS", "IMPLEMENTS").hasLabel("Class", "Interface"))
-                 )
-         )
-    )
-)
-GREMLIN
-);
-        $this->prepareQuery();
-
-        $this->atomIs('Class')
-             ->is('abstract', true)
-             ->raw(<<<'GREMLIN'
-not(
-    where(
-        out("DEFINITION").in("EXTENDS")
-    )
-)
-GREMLIN
-);
+             ->analyzerIsNot($this->dependsOn());
         $this->prepareQuery();
     }
 }

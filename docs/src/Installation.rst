@@ -217,9 +217,16 @@ The binaries above are used with the `init` and `update` commands, to get the so
 Installation guide with Docker
 ------------------------------
 
-Installation with docker is easy, and convenient. It hides the dependency on the graph database, and keeps all files in the 'projects' folder, created in the working directory.
+There are multiple ways to use exakat with docker. There is an image with a full exakat installation, which run with a traditional installation, or inside the audited code. Or, You may use Docker with a standard installation, to run useful part, such as a specific PHP version or the central database. 
 
-Currently, Docker installation only ships with one PHP version (7.3), and with support for git, svn, composer and mercurial.
+image:: images/exakat-and-docker.png
+
+Docker image for Exakat with projects folder
+********************************************
+
+Installation with Docker is easy, and convenient. It hides the dependency of the graph database, and keeps all files in the 'projects' folder, created in the working directory. 
+
+Currently, Docker installation only ships with one PHP version (7.3), and with support for bazaar, composer, git, mercurial, svn, and zip.
 
 * Install `Docker <http://www.docker.com/>`_
 * Start Docker
@@ -276,6 +283,43 @@ You may also create a handy shortcut, by creating an exakat.sh script and put it
     cat 'docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat exakat $1' > /etc/local/sbin/exakat.sh
     chmod u+x  /etc/local/sbin/exakat.sh
     ./exakat.sh version
+
+Docker image for Exakat with projects folder
+********************************************
+
+To run exakat inside the audited code, you must configure the `.exakat.ini` or `.exakat.yaml` file. See `Add Exakat To Your CI Pipeline <https://www.exakat.io/add-exakat-to-your-ci-pipeline/>`_.
+
+Then, you can run the following command, with docker : 
+
+::
+
+  docker run -it --rm -v `$pwd`:/src exakat/exakat:latest exakat project -v 
+
+
+Docker PHP image with Exakat
+****************************
+
+Exakat recognizes docker images configured as PHP binaries. Instead of configuring exakat with local binaries, such as `/usr/bin/php`, you may configure a specific PHP version with a docker image. 
+
+Open the `config/exakat.ini` file, at the root of the exakat installation, and use the following value : 
+
+::
+
+    // configuration with the 'tetraweb/php:5.5' image. 
+    ;php55 = tetraweb/php:5.5
+    php56 = tetraweb/php:5.6
+    # classic configuration with local binary
+    php73 = /usr/bin/php
+
+
+The image may be any docker image that provides a PHP binary. We suggest using `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_, which supports PHP 5.5 to 7.1. There are other images available, and you may also roll out your own.
+
+Docker Gremlin image with Exakat
+********************************
+
+Exakat is able to use only the central database, Gremlin, as a docker image. This is convenient, as the database is only a temporary database, and those data are not necessary for producing the final reports. 
+
+This image is under construction, and will be soon available. 
 
 
 Installation guide with Vagrant and Ansible

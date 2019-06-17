@@ -30,55 +30,13 @@ class PropertyUsedAbove extends Analyzer {
         // property + $this->property
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
-             ->isNot('virtual', true)
-             ->isNot('static', true)
              ->outIs('PPP')
-             ->_as('ppp')
-             ->savePropertyAs('propertyname', 'name')
-             ->goToClass()
+             ->atomIs('Propertydefinition')
              ->filter(
                 $this->side()
-                     ->goToAllParents(self::EXCLUDE_SELF)
-                     ->filter(
-                       $this->side()
-                            ->outIs(array('METHOD', 'MAGICMETHOD'))
-                            ->outIs('BLOCK')
-                            ->atomInsideNoDefinition('Member')
-                            ->outIs('OBJECT')
-                            ->atomIs('This')
-                            ->inIs('OBJECT')
-                            ->outIs('MEMBER')
-                            ->tokenIs('T_STRING')
-                            ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-                      )
-             )
-             ->back('ppp');
-        $this->prepareQuery();
-
-        //////////////////////////////////////////////////////////////////
-        // static property : inside the self class
-        //////////////////////////////////////////////////////////////////
-        $this->atomIs('Ppp')
-             ->isNot('virtual', true)
-             ->is('static', true)
-             ->outIs('PPP')
-             ->_as('ppp')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->filter(
-                $this->side()
-                     ->goToAllParents(self::EXCLUDE_SELF)
-                     ->filter(
-                       $this->side()
-                            ->outIs(array('METHOD', 'MAGICMETHOD'))
-                            ->outIs('BLOCK')
-                            ->atomInsideNoDefinition('Staticproperty')
-                            ->outIs('MEMBER') // Can't test on fnp, it is family, not exact match
-                            ->tokenIs('T_VARIABLE')
-                            ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-                      )
-             )
-             ->back('ppp');
+                     ->outIs('OVERWRITE')
+                     ->outIs('DEFINITION')
+             );
         $this->prepareQuery();
         
         // This could be also checking for fnp : it needs to be a 'family' class check.

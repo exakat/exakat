@@ -34,7 +34,18 @@ class DefinedStaticMP extends Analyzer {
 
         // static::$property the current class
         $this->atomIs('Staticproperty')
-             ->IsPropertyDefined();
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Virtualproperty')// No check on visibility, we are locall!
+                     ->not(
+                        $this->side()
+                             ->outIs('OVERWRITE')
+                             ->atomIs('Propertydefinition')
+                             ->inIs('PPP')
+                             ->isNot('visibility', 'private')
+                     )
+              );
         $this->prepareQuery();
     }
 }

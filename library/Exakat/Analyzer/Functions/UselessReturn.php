@@ -44,7 +44,7 @@ class UselessReturn extends Analyzer {
         $this->prepareQuery();
 
         // function that finally returns void. (the last return is useless)
-        $this->atomIs(array('Function', 'Closure'))
+        $this->atomIs(array('Function', 'Closure', 'Arrowfunction'))
              ->outIs('BLOCK')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIs('Return')

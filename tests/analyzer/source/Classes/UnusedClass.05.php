@@ -6,6 +6,12 @@ spl_autoload_register('UsedButUndefined::x');
 
 print 'Unused2::x';
 
-class Used {}
-class Used2 {}
-class Unused {}
+class Used {
+    function x() {}
+}
+class Used2 {
+    function x() {}
+}
+class Unused {
+    function x() {}
+}

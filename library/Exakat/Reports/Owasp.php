@@ -394,7 +394,8 @@ SQL
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -471,13 +472,13 @@ SQL
     }
 
     public function getIssuesBreakdown() {
-        $receipt = array('Code Smells'  => 'Analyze',
-                         'Dead Code'    => 'Dead code',
-                         'Security'     => 'Security',
-                         'Performances' => 'Performances');
+        $rulesets = array('Code Smells'  => 'Analyze',
+                          'Dead Code'    => 'Dead code',
+                          'Security'     => 'Security',
+                          'Performances' => 'Performances');
 
         $data = array();
-        foreach ($receipt AS $key => $categorie) {
+        foreach ($rulesets AS $key => $categorie) {
             $list = 'IN ("' . implode('", "', $this->themes->getThemeAnalyzers($categorie)) . '")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);

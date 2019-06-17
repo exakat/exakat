@@ -31,7 +31,7 @@ class VariableLong extends Analyzer {
     public function analyze() {
         // $abcdefghijklmnopqrstuvwxyz = 1;
         $this->atomIs(self::$VARIABLES_USER)
-             ->codeLength(" > $this->variableLength");
+             ->fullcodeLength(" > $this->variableLength");
         $this->prepareQuery();
     }
 }

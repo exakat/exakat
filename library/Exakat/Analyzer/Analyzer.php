@@ -107,7 +107,7 @@ abstract class Analyzer {
     public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
 
     public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
+    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction', 'Newcall');
     public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
 
@@ -874,8 +874,20 @@ GREMLIN;
         return $this;
     }
 
+    public function isMoreHash($property, $hash, $index) {
+        $this->query->isMoreHash($property, $hash, $index);
+
+        return $this;
+    }
+
     public function isLess($property, $value = 0) {
         $this->query->isLess($property, $value);
+
+        return $this;
+    }
+
+    public function isLessHash($property, $hash, $index) {
+        $this->query->isLessHash($property, $hash, $index);
 
         return $this;
     }

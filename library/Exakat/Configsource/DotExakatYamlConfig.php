@@ -53,10 +53,11 @@ class DotExakatYamlConfig extends Config {
 
         $other_php_versions = array();
         foreach(Configuration::PHP_VERSIONS as $version) {
-            if (empty($this->config->{"php$version"})) {
+            $phpVersion = "php$version";
+            if (empty($this->config->{$phpVersion})) {
                 continue;
             }
-            $php = new Phpexec($version[0] . '.' . $version[1], $this->config->{"php$version"});
+            $php = new Phpexec($version[0] . '.' . $version[1], $this->config->{$phpVersion});
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }

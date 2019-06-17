@@ -34,28 +34,29 @@ class CalledByModule extends Analyzer {
         $methods = array();
         $classes = array();
         $methods_regex = array();
-        foreach($calledBy['classes'] as $class => $what) {
-            // Classes
-            if (isset($what['classes'])) {
-                $classes[] = $class;
-            }
-
-            // Methods
-            if (isset($what['methods'])) {
-                foreach($what['methods'] as $name) {
-                    if ($name[0] === '/') {
-                        array_collect_by($methods_regex, $class, trim($name, '/'));
-                    } else {
-                        array_collect_by($methods, $class, mb_strtolower($name));
+        if (isset($calleldBy['classes'])) {
+            foreach($calledBy['classes'] as $class => $what) {
+                // Classes
+                if (isset($what['classes'])) {
+                    $classes[] = $class;
+                }
+    
+                // Methods
+                if (isset($what['methods'])) {
+                    foreach($what['methods'] as $name) {
+                        if ($name[0] === '/') {
+                            array_collect_by($methods_regex, $class, trim($name, '/'));
+                        } else {
+                            array_collect_by($methods, $class, mb_strtolower($name));
+                        }
                     }
                 }
             }
-        }
 
         $this->processClasses($classes);
-
         $this->processMethods($methods);
         $this->processMethodsRegex($methods_regex);
+        }
     }
 
     private function processClasses($classes) {

@@ -99,7 +99,8 @@ class FindExternalLibraries extends Tasks {
             throw new MissingFile($missing);
         }
 
-        $this->php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $this->phpTokens = array_flip($this->php->getTokens());
 

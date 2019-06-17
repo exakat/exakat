@@ -2,16 +2,16 @@
 
 $expected     = array('class inANew { /**/ } ',
                       'class inAExtends { /**/ } ',
-                      'class inAImplements { /**/ } ',
-                      'class inAImplements1 { /**/ } ',
-                      'class inAImplements2 { /**/ } ',
-                      'class inAImplements3 { /**/ } ',
                       'class inAStaticMethodcall { /**/ } ',
                       'class inAStaticProperty { /**/ } ',
                       'class inAStaticConstant { /**/ } ',
                       'class inAString { /**/ } ',
                       'class inAInstanceof { /**/ } ',
                       'class inATypehint { /**/ } ',
+                      'class inAImplements { /**/ } ',
+                      'class inAImplements1 { /**/ } ',
+                      'class inAImplements2 { /**/ } ',
+                      'class inAImplements3 { /**/ } ',
                      );
 
 $expected_not = array('class unusedClass { /**/ } ',

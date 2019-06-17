@@ -101,7 +101,8 @@ class Analyze extends Tasks {
         $this->log->log("Analyzing project $project");
         $this->log->log("Runnable analyzers\t" . count($analyzersClass));
 
-        $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $this->Php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $analyzers = array();
         $dependencies = array();
