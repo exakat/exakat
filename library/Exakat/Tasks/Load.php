@@ -192,7 +192,8 @@ class Load extends Tasks {
 
         $this->contexts    = new Context();
 
-        $this->php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getConfiguration('phpversion'));
         }
@@ -6103,7 +6104,8 @@ class Load extends Tasks {
             if (in_array($name, array('Public', 'Protected', 'Private', 'Var'), STRICT_COMPARISON)) {
                 $atom->visibility = strtolower($option);
             } elseif (in_array($name, array('Final', 'Static', 'Abstract'), STRICT_COMPARISON)) {
-                $atom->{strtolower($name)} = 1;
+                $link = strtolower($name);
+                $atom->{$link} = 1;
             } elseif ($name === 'Typehint') {
                 //Nothing, just
             } else {

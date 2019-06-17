@@ -394,7 +394,8 @@ SQL
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),

@@ -89,7 +89,9 @@ class Files extends Tasks {
 
         $toRemoveFromFiles = array();
         foreach($versions as $version) {
-            if (empty($this->config->{"php$version"})) {
+            $phpVersion = "php$version";
+
+            if (empty($this->config->{$phpVersion})) {
                 // This version is not defined
                 continue;
             }
@@ -97,7 +99,7 @@ class Files extends Tasks {
             display("Check compilation for $version");
             $stats["notCompilable$version"] = -1;
 
-            $php = new Phpexec("php$version", $this->config->{"php$version"});
+            $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
             $resFiles = $php->compileFiles($this->config->project_dir, $tmpFileName);
 
             $incompilables = array();
@@ -284,7 +286,8 @@ class Files extends Tasks {
     private function countTokens($path, &$files, &$ignoredFiles) {
         $tokens = 0;
 
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         foreach($files as $id => $file) {
             if (($t = $php->countTokenFromFile($path . $file)) < 2) {
