@@ -3396,6 +3396,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         ++$this->id; // Skip declare
+        $strict_types = false;
         do {
             ++$this->id; // Skip ( or ,
             $name = $this->processSingle('Name');
@@ -3407,6 +3408,8 @@ class Load extends Tasks {
             $declaredefinition = $this->addAtom('Declaredefinition');
             $this->addLink($declaredefinition, $name, 'NAME');
             $this->addLink($declaredefinition, $config, 'VALUE');
+            
+            $strict_types |= strtolower($name->code) === 'strict_types';
 
             $this->addLink($declare, $declaredefinition, 'DECLARE');
             $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
@@ -3415,17 +3418,23 @@ class Load extends Tasks {
             ++$this->id; // Skip value
         }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
-        $isColon = $this->whichSyntax($current, $this->id + 1);
-
-        $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
-
-        $this->popExpression();
-        $this->addLink($declare, $block, 'BLOCK');
-
-        if ($isColon === self::ALTERNATIVE_SYNTAX) {
-            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
+        if ($strict_types === 1) {
+            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ';
+            
+            ++$this->id;
         } else {
-            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ' . self::FULLCODE_BLOCK;
+            $isColon = $this->whichSyntax($current, $this->id + 1);
+
+            $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
+
+            $this->popExpression();
+            $this->addLink($declare, $block, 'BLOCK');
+
+            if ($isColon === self::ALTERNATIVE_SYNTAX) {
+                $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
+            } else {
+                $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ' . self::FULLCODE_BLOCK;
+            }
         }
 
         $declare->code        = $this->tokens[$current][1];
