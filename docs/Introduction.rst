@@ -3,7 +3,7 @@
 Introduction
 ============
 
-This is the documentation of the Exakat engine, version 1.8.3 (Build 950), on Tue, 11 Jun 2019 06:54:54 +0000.
+This is the documentation of the Exakat engine, version 1.8.4 (Build 951), on Mon, 17 Jun 2019 17:35:49 +0000.
 
 What is Exakat ? 
 ----------------

@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 11 Jun 2019 07:53:51 +0000
-.. comment: Generation hash : 303a58f84c67212fdf7693bb932e4bffc78360c4
+.. comment: Generation date : Mon, 17 Jun 2019 19:25:17 +0000
+.. comment: Generation hash : 411298f1506b4ad124168026fd873b1c1e872c56
 
 
 .. _analyze:
@@ -565,7 +565,6 @@ Total : 77 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -573,6 +572,7 @@ Total : 77 analysis
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Use Nullable Type <use-nullable-type>`
@@ -648,13 +648,13 @@ Total : 73 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Use Nullable Type <use-nullable-type>`
@@ -722,13 +722,13 @@ Total : 65 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -789,13 +789,13 @@ Total : 54 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`isset() With Constant <isset()-with-constant>`
@@ -840,12 +840,12 @@ Total : 46 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`ext/ereg <ext/ereg>`
@@ -885,10 +885,10 @@ Total : 32 analysis
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`ext/mcrypt <ext/mcrypt>`
@@ -920,10 +920,10 @@ Total : 24 analysis
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Undefined Constants <undefined-constants>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 .. _compatibilityphp73:
@@ -941,21 +941,23 @@ Total : 11 analysis
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
-* :ref:`Php/UnpackingInsideArrays <php/unpackinginsidearrays>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
+* :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 
 .. _compatibilityphp74:
 
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 5 analysis
+Total : 7 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
+* :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
+* :ref:`Php 7.4 New Class <php-7.4-new-class>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
 .. _compatibilityphp80:
@@ -1035,9 +1037,10 @@ Total : 20 analysis
 Performances
 ++++++++++++
 
-Total : 42 analysis
+Total : 44 analysis
 
 * :ref:`@ Operator <@-operator>`
+* :ref:`Always Use Function With array_key_exists() <always-use-function-with-array\_key\_exists()>`
 * :ref:`Autoappend <autoappend>`
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -1064,6 +1067,7 @@ Total : 42 analysis
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Pre-increment <pre-increment>`
 * :ref:`Processing Collector <processing-collector>`
+* :ref:`Regex On Arrays <regex-on-arrays>`
 * :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
@@ -1133,7 +1137,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 81 analysis
+Total : 82 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1142,6 +1146,7 @@ Total : 81 analysis
 * :ref:`Avoid Real <avoid-real>`
 * :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
+* :ref:`Complex Dynamic Names <complex-dynamic-names>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`
