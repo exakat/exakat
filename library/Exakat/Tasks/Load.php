@@ -2707,6 +2707,13 @@ class Load extends Tasks {
             $string = $this->addAtom('Parent');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
             $string = $this->addAtom('Name');
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+            // This catchs new A and new A()
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+                $string = $this->addAtom('Newcallname');
+            } else {
+                $string = $this->addAtom('Newcall');
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
          } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'), STRICT_COMPARISON)) {
@@ -2716,8 +2723,6 @@ class Load extends Tasks {
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->noDelimiter = '';
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $string = $this->addAtom('Newcall');
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -5892,7 +5897,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             }
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall'), STRICT_COMPARISON)) {
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname'), STRICT_COMPARISON)) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
                     $apply->aliased = self::NOT_ALIASED;
