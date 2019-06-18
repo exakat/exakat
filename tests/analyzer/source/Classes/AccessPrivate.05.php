@@ -8,6 +8,8 @@ class xprivate {
 }
 
 class yprivate extends xprivate {
+    private function B(){}
+
     function bar(){
         $this->a();
     }
@@ -20,6 +22,7 @@ class xpublic {
 class ypublic extends xpublic {
     function bar(){
         $this->A();
+        $this->B();
     }
 }
 
