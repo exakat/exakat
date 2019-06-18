@@ -217,7 +217,7 @@ PHP extensions are described with the list of structures they define : functions
 * `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
-* `ext/password <https://www.php.net/manual/en/book.password.php>`_
+* `ext/password <http://php.net/manual/en/book.password.php>`_
 * `ext/pcntl <http://php.net/manual/en/book.pcntl.php>`_
 * `ext/pcov <https://github.com/krakjoe/pcov>`_
 * `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
@@ -428,6 +428,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.4
+
+  * Always Use Function With array_key_exists() (Performances/Php74ArrayKeyExists)
+  * Complex Dynamic Names (Variables/ComplexDynamicNames ; Suggestions)
+  * New Constants In PHP 7.4 (Php/Php74NewConstants ; CompatibilityPHP74)
+  * Regex On Arrays (Performances/RegexOnArrays ; Performances)
+  * curl_version() Has No Argument (Structures/CurlVersionNow ; Unassigned)
+
 * 1.8.3
 
   * Autoappend (Performances/Autoappend ; Performances)
@@ -452,7 +460,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Concat Empty String (Structures/ConcatEmpty ; Analyze, OneFile)
   * Minus One On Error (Security/MinusOneOnError ; Security)
   * New Functions In PHP 7.4 (Php/Php74NewFunctions ; CompatibilityPHP74)
-  * Php/UnpackingInsideArrays (Php/UnpackingInsideArrays ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
+  * Unpacking Inside Arrays (Php/UnpackingInsideArrays ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Useless Argument (Functions/UselessArgument)
 
 * 1.7.9
@@ -866,6 +874,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Missing New ? (Structures/MissingNew ; Analyze)
   * No get_class() With Null (Structures/NoGetClassNull ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Php 7.2 New Class (Php/Php72NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Php 7.4 New Class (Php/Php74NewClasses ; CompatibilityPHP74)
   * Slice Arrays First (Arrays/SliceFirst)
   * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze, CompatibilityPHP73)
   * Use List With Foreach (Structures/UseListWithForeach ; Suggestions, Top10)
@@ -2082,6 +2091,7 @@ List of external links mentionned in this documentation.
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
+* `.exakat.ini` or `.exakat.yaml` file. See `Add Exakat To Your CI Pipeline <https://www.exakat.io/add-exakat-to-your-ci-pipeline/>`_
 * `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_
 * `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-security-best-practices/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
@@ -2091,6 +2101,7 @@ List of external links mentionned in this documentation.
 * `__autoload <http://php.net/autoload>`_
 * `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
+* `Add array_key_exists() to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
@@ -2107,7 +2118,7 @@ List of external links mentionned in this documentation.
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
-* `ArrayAccess <http://www.php.net/manual/en/class.arrayaccess.php>`_
+* `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
 * `assert <http://php.net/assert>`_
@@ -2167,6 +2178,7 @@ List of external links mentionned in this documentation.
 * `Ctype funtions <http://php.net/manual/en/ref.ctype.php>`_
 * `curl <http://www.php.net/curl>`_
 * `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
+* `curl_version <https://www.php.net/manual/en/function.curl-version.php>`_
 * `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_
 * `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_
 * `Cyrus <http://php.net/manual/en/book.cyrus.php>`_
@@ -2203,6 +2215,7 @@ List of external links mentionned in this documentation.
 * `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
+* `Dynamically Access PHP Object Properties with $this <https://drupalize.me/blog/201508/dynamically-access-php-object-properties>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
 * `elseif/else if <http://php.net/manual/en/control-structures.elseif.php>`_
 * `empty <http://www.php.net/empty>`_
@@ -2361,8 +2374,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2392,6 +2405,7 @@ List of external links mentionned in this documentation.
 * `New Classes and Interfaces <http://php.net/manual/en/migration70.classes.php>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `New global constants in 7.2 <http://php.net/manual/en/migration72.constants.php>`_
+* `New global constants in 7.4 <http://php.net/manual/en/migration74.constants.php>`_
 * `New object type <http://php.net/manual/en/migration72.new-features.php#migration72.new-features.iterable-pseudo-type>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
@@ -2404,6 +2418,7 @@ List of external links mentionned in this documentation.
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2426,7 +2441,7 @@ List of external links mentionned in this documentation.
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
-* `Password Hashing <https://www.php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2478,6 +2493,7 @@ List of external links mentionned in this documentation.
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
+* `preg_filter <https://php.net/preg_filter>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_
 * `printf <http://php.net/printf>`_
@@ -2529,6 +2545,7 @@ List of external links mentionned in this documentation.
 * `Sockets <http://php.net/manual/en/book.sockets.php>`_
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
+* `Spread Operator in Array Expression  <https://wiki.php.net/rfc/spread_operator_for_array>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
@@ -2550,8 +2567,9 @@ List of external links mentionned in this documentation.
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
-* `Syntax <https://php.net/manual/en/language.constants.syntax.php>`_
+* `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
+* `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
@@ -2571,8 +2589,8 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2593,8 +2611,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -3592,6 +3610,8 @@ __________________
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
 |   analyzer[] = "Php/IdnUts46";
+|   analyzer[] = "Php/Php74NewClasses";
+|   analyzer[] = "Php/Php74NewConstants";
 |   analyzer[] = "Php/Php74NewFunctions";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 
@@ -3711,7 +3731,9 @@ ____________
 |   analyzer[] = "Performances/NoGlob";
 |   analyzer[] = "Performances/NotCountNull";
 |   analyzer[] = "Performances/PHP7EncapsedStrings";
+|   analyzer[] = "Performances/Php74ArrayKeyExists";
 |   analyzer[] = "Performances/PrePostIncrement";
+|   analyzer[] = "Performances/RegexOnArrays";
 |   analyzer[] = "Performances/RegexOnCollector";
 |   analyzer[] = "Performances/SimpleSwitch";
 |   analyzer[] = "Performances/SlowFunctions";
@@ -3876,7 +3898,8 @@ ___________
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Structures/WhileListEach";
-|   analyzer[] = "Traits/MultipleUsage";| 
+|   analyzer[] = "Traits/MultipleUsage";
+|   analyzer[] = "Variables/ComplexDynamicNames";| 
 
 
 

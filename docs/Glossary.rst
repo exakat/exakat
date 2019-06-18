@@ -29,6 +29,7 @@ Glossary
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Complex Dynamic Names <complex-dynamic-names>`
       + :ref:`Method Could Be Static <method-could-be-static>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
@@ -63,14 +64,6 @@ Glossary
 
 
 + `A`
-    + `ArrayAccess`
-
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
-
-    + `ArrayObject`
-
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
-
     + `Array_search()`
 
       + :ref:`Find Key Directly <find-key-directly>`
@@ -120,6 +113,7 @@ Glossary
 
     + `array_key_exists()`
 
+      + :ref:`Always Use Function With array_key_exists() <always-use-function-with-array\_key\_exists()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 
@@ -139,6 +133,7 @@ Glossary
     + `array_merge()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+      + :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 
     + `array_merge_recursive()`
 
@@ -233,6 +228,7 @@ Glossary
 
     + `Compact()`
 
+      + :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
       + :ref:`Could Use Compact <could-use-compact>`
 
     + `Count()`
@@ -278,6 +274,10 @@ Glossary
     + `collator_get_sort_key()`
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `compact()`
+
+      + :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 
     + `constant()`
 
@@ -685,7 +685,6 @@ Glossary
 
     + `instanceof`
 
-      + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Could Typehint <could-typehint>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Undefined ::class <undefined-\:\:class>`
@@ -1022,6 +1021,14 @@ Glossary
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
 
+    + `preg_filter()`
+
+      + :ref:`Regex On Arrays <regex-on-arrays>`
+
+    + `preg_grep()`
+
+      + :ref:`Regex On Arrays <regex-on-arrays>`
+
     + `preg_match()`
 
       + :ref:`Results May Be Missing <results-may-be-missing>`
@@ -1042,12 +1049,14 @@ Glossary
     + `preg_replace_callback()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`Regex On Arrays <regex-on-arrays>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `preg_replace_callback_array()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Regex On Arrays <regex-on-arrays>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `prev()`
@@ -1065,6 +1074,10 @@ Glossary
 
 
 + `R`
+    + `ReflectionReference`
+
+      + :ref:`Php 7.4 New Class <php-7.4-new-class>`
+
     + `rand()`
 
       + :ref:`Use random_int() <use-random\_int()>`
@@ -1107,10 +1120,6 @@ Glossary
 
 
 + `S`
-    + `SimpleXMLElement`
-
-      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
-
     + `Strtr()`
 
       + :ref:`Strtr Arguments <strtr-arguments>`
@@ -1390,6 +1399,10 @@ Glossary
 
 
 + `W`
+    + `WeakReference`
+
+      + :ref:`Php 7.4 New Class <php-7.4-new-class>`
+
     + `while()`
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`

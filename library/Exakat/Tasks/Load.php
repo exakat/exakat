@@ -2707,6 +2707,13 @@ class Load extends Tasks {
             $string = $this->addAtom('Parent');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
             $string = $this->addAtom('Name');
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+            // This catchs new A and new A()
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+                $string = $this->addAtom('Newcallname');
+            } else {
+                $string = $this->addAtom('Newcall');
+            }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
          } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'), STRICT_COMPARISON)) {
@@ -2716,8 +2723,6 @@ class Load extends Tasks {
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->noDelimiter = '';
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $string = $this->addAtom('Newcall');
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -3396,6 +3401,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         ++$this->id; // Skip declare
+        $strict_types = false;
         do {
             ++$this->id; // Skip ( or ,
             $name = $this->processSingle('Name');
@@ -3407,6 +3413,8 @@ class Load extends Tasks {
             $declaredefinition = $this->addAtom('Declaredefinition');
             $this->addLink($declaredefinition, $name, 'NAME');
             $this->addLink($declaredefinition, $config, 'VALUE');
+            
+            $strict_types |= strtolower($name->code) === 'strict_types';
 
             $this->addLink($declare, $declaredefinition, 'DECLARE');
             $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
@@ -3415,17 +3423,24 @@ class Load extends Tasks {
             ++$this->id; // Skip value
         }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
-        $isColon = $this->whichSyntax($current, $this->id + 1);
-
-        $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
-
-        $this->popExpression();
-        $this->addLink($declare, $block, 'BLOCK');
-
-        if ($isColon === self::ALTERNATIVE_SYNTAX) {
-            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
+        if ($strict_types === 1) {
+            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ';
+            
+            ++$this->id;
+            $isColon = false;
         } else {
-            $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ' . self::FULLCODE_BLOCK;
+            $isColon = $this->whichSyntax($current, $this->id + 1);
+
+            $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
+
+            $this->popExpression();
+            $this->addLink($declare, $block, 'BLOCK');
+
+            if ($isColon === self::ALTERNATIVE_SYNTAX) {
+                $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
+            } else {
+                $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ' . self::FULLCODE_BLOCK;
+            }
         }
 
         $declare->code        = $this->tokens[$current][1];
@@ -5882,7 +5897,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             }
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall'), STRICT_COMPARISON)) {
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname'), STRICT_COMPARISON)) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
                     $apply->aliased = self::NOT_ALIASED;

@@ -43,8 +43,11 @@ By default, Exakat builds the 'Ambassador' report for any project. If you want a
 
 To do so, open the `projects/<project>/config.ini` file, and mention the list of report like that : 
 
+::
+
     project_reports[] = 'Owasp';
     project_reports[] = 'Weekly';
+
 
 By configuring the reports before the audit, Exakat processes only the needed analysis, and produces all the reports for each audit. 
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 11 Jun 2019 07:53:51 +0000
-.. comment: Generation hash : 303a58f84c67212fdf7693bb932e4bffc78360c4
+.. comment: Generation date : Mon, 17 Jun 2019 19:25:17 +0000
+.. comment: Generation hash : 411298f1506b4ad124168026fd873b1c1e872c56
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -141,7 +141,7 @@ $this Is Not An Array
 
 ``$this`` variable represents the current object and it is not an array. 
 
-This is unless the class (or its parents) has the `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface, or extends `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ or `SimpleXMLElement <http://php.net/manual/en/class.simplexmlelement.php>`_.
+This is unless the class (or its parents) has the ``ArrayAccess`` interface, or extends ``ArrayObject`` or ``SimpleXMLElement``.
 
 .. code-block:: php
 
@@ -164,8 +164,8 @@ This is unless the class (or its parents) has the `ArrayAccess <http://php.net/m
    ?>
 
 
-See also `ArrayAccess <http://www.php.net/manual/en/class.arrayaccess.php>`_,
-         `ArrayObject <http://www.php.net/manual/en/class.arrayobject.php>`_
+See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_,
+         `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 
@@ -1075,6 +1075,57 @@ Suggestions
 +-------------+-----------------------------------------+
 | Examples    | :ref:`magento-structures-nevernegative` |
 +-------------+-----------------------------------------+
+
+
+
+.. _always-use-function-with-array\_key\_exists():
+
+Always Use Function With array_key_exists()
+###########################################
+
+
+`array_key_exists() <http://www.php.net/array_key_exists>`_ has been granted a special VM opcode, and is much faster. This applies to PHP 7.4 and more recent. 
+
+It requires that `array_key_exists() <http://www.php.net/array_key_exists>`_ is statically resolved, either with an initial `\`, or a `use function` expression. This doesn't affect the global namespace.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace my/name/space;
+   
+   // do not forget the 'function' keyword, or it will apply to classes.
+   use function array_key_exists as foo; // the alias is not necessary, and may be omitted.
+   
+   // array_key_exists is aliased to foo : 
+   $c = foo($a, $b);
+   
+   // This call requires a fallback to global, and will be slow.
+   $c = array_key_exists($a, $b);
+   
+   ?>
+
+
+This analysis is related to Php/ShouldUseFunction, and is a special case, that only concerns `array_key_exists() <http://www.php.net/array_key_exists>`_.
+
+See also `Add `array_key_exists() <http://www.php.net/array_key_exists>`_ to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the `use` command for arrray_key_exists(), at the beginning of the script
+* Use an initial \ before array_key_exists()
+* Remove the namespace
+
++-------------+----------------------------------+
+| Short name  | Performances/Php74ArrayKeyExists |
++-------------+----------------------------------+
+| Themes      | :ref:`Performances`              |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
 
 
 
@@ -2163,7 +2214,7 @@ Avoid get_class()
 
 
 See also `get_class <http://php.net/get_class>`_ and 
-         `Type Operators <http://php.net/`instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
+         `Type Operators <http://php.net/manual/en/language.operators.type.php>`_.
 
 +-------------+--------------------------------+
 | Short name  | Structures/UseInstanceof       |
@@ -2839,7 +2890,7 @@ See also `array_map <http://php.net/array_map>`_.
 Suggestions
 ^^^^^^^^^^^
 
-* Add an explicit return to the callabck
+* Add an explicit return to the callback
 * Use `null` to unset elements in an array without destroying the index
 
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -4010,7 +4061,9 @@ Compact Inexistant Variable
 ###########################
 
 
-Compact doesn't warn when it tries to work on an inexisting variable. It just ignores the variable.
+`Compact() <http://www.php.net/compact>`_ doesn't warn when it tries to work on an inexisting variable. It just ignores the variable.
+
+This behavior changed in PHP 7.3, and `compact() <http://www.php.net/compact>`_ now emits a warning when the compacted variable doesn't exist.
 
 .. code-block:: php
 
@@ -4129,6 +4182,60 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 | Themes      | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+
+
+
+.. _complex-dynamic-names:
+
+Complex Dynamic Names
+#####################
+
+
+Avoid using expressions as names for variables or methods. 
+
+There are no place for checks or flow control, leading to any rogue value to be used as is. Besides, the expression is often overlooke, and not expected there : this makes the code less readable.
+
+It is recommended to buildd the name in a separate variable, apply the usual checks for existence and validity, and then use the name.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = new foo();
+   
+   // Code is more readable
+   $name = strolower($string);
+   if (!property_exists($a, $name)) {
+       throw new missingPropertyexception($name);
+   }
+   echo $a->$name;
+   
+   // This is not check
+   echo $a->{strtolower($string)};
+   
+   ?>
+
+
+This analysis only accept simple containers, such as variables, properties. 
+
+See also `Dynamically Access PHP Object Properties with `$this <http://php.net/manual/en/language.oop5.basic.php>`_ <https://drupalize.me/blog/201508/dynamically-access-php-object-properties>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extract the expression from the variable syntax, and make it a separate variable.
+
++-------------+-------------------------------+
+| Short name  | Variables/ComplexDynamicNames |
++-------------+-------------------------------+
+| Themes      | :ref:`Suggestions`            |
++-------------+-------------------------------+
+| Severity    | Minor                         |
 +-------------+-------------------------------+
 | Time To Fix | Quick (30 mins)               |
 +-------------+-------------------------------+
@@ -9284,7 +9391,7 @@ See also `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-se
 Suggestions
 ^^^^^^^^^^^
 
-* Remove all passwords from the code. Also, check for history if you are using a vcs.
+* Remove all passwords from the code. Also, check for history if you are using a VCS.
 
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/HardcodedPasswords                                                                                  |
@@ -9798,7 +9905,7 @@ Identical Methods
 
 When the parent class and the child class have the same method, the child might drop it. This reduces code duplication. 
 
-Duplicate code in methods is often the results of code évolution, where a method was copied with the hierarchy, but the original wasn't removed.
+Duplicate code in methods is often the results of code evolution, where a method was copied with the hierarchy, but the original wasn't removed.
 
 This doesn't apply to `private` methods, which are reserved for one class.
 
@@ -12878,9 +12985,9 @@ Missing Include
 
 The included files doesn't exists in the repository. The inclusions target a files that doesn't exist.
 
-The analysis works with every type of inclusion : include, require, include_once and require_once. It also works with parenthesis when used as parameter delimiter.
+The analysis works with every type of inclusion : include(), require(), include_once() and require_once(). It also works with parenthesis when used as parameter delimiter.
 
-The analysis doesn't take into account include_path. This may yield false positives.
+The analysis doesn't take into account ``include_path``. This may yield false positives.
 
 .. code-block:: php
 
@@ -14161,15 +14268,25 @@ Three levels of ifthen is too much. The method should be split into smaller func
    
    ?>
 
-+-------------+-------------------------+
-| Short name  | Structures/NestedIfthen |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
++--------------+---------+---------+------------------------------------------------------------+
+| Name         | Default | Type    | Description                                                |
++--------------+---------+---------+------------------------------------------------------------+
+| nestedIfthen | 3       | integer | Maximal number of acceptable nesting of if-then structures |
++--------------+---------+---------+------------------------------------------------------------+
+
+
+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Structures/NestedIfthen                                                            |
++-------------+------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                     |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Major                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                    |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`livezilla-structures-nestedifthen`, :ref:`mediawiki-structures-nestedifthen` |
++-------------+------------------------------------------------------------------------------------+
 
 
 
@@ -14309,7 +14426,11 @@ Never Used Properties
 #####################
 
 
-Properties that are never used. They are defined, but never actually used.
+Properties that are never used. They are defined in a class or a trait, but they never actually used.
+
+Properties are considered used when they are used locally, in the same class as their definition, or in a parent class : a parent class is always included with the current class. 
+
+On the other hand, properties which are defined in a class, but only used in children classes is considered unused, since children may also avoid using it. 
 
 .. code-block:: php
 
@@ -14346,6 +14467,8 @@ Suggestions
 ^^^^^^^^^^^
 
 * Drop unused properties
+* Change the name of the unused properties
+* Move the properties to children classes
 * Find usage for unused properties
 
 +-------------+--------------------------------------------+
@@ -14397,6 +14520,81 @@ See also `New global constants in 7.2 <http://php.net/manual/en/migration72.cons
 | Themes      | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _new-constants-in-php-7.4:
+
+New Constants In PHP 7.4
+########################
+
+
+The following constants are now native in PHP 7.4. It is advised to avoid using such names for constant before moving to this new version.
+
+* ``MB_ONIGURUMA_VERSION``
+* ``SO_LABEL``
+* ``SO_PEERLABEL``
+* ``SO_LISTENQLIMIT``
+* ``SO_LISTENQLEN``
+* ``SO_USER_COOKIE``
+* ``PHP_WINDOWS_EVENT_CTRL_C``
+* ``PHP_WINDOWS_EVENT_CTRL_BREAK``
+* ``TIDY_TAG_ARTICLE``
+* ``TIDY_TAG_ASIDE``
+* ``TIDY_TAG_AUDIO``
+* ``TIDY_TAG_BDI``
+* ``TIDY_TAG_CANVAS``
+* ``TIDY_TAG_COMMAND``
+* ``TIDY_TAG_DATALIST``
+* ``TIDY_TAG_DETAILS``
+* ``TIDY_TAG_DIALOG``
+* ``TIDY_TAG_FIGCAPTION``
+* ``TIDY_TAG_FIGURE``
+* ``TIDY_TAG_FOOTER``
+* ``TIDY_TAG_HEADER``
+* ``TIDY_TAG_HGROUP``
+* ``TIDY_TAG_MAIN``
+* ``TIDY_TAG_MARK``
+* ``TIDY_TAG_MENUITEM``
+* ``TIDY_TAG_METER``
+* ``TIDY_TAG_NAV``
+* ``TIDY_TAG_OUTPUT``
+* ``TIDY_TAG_PROGRESS``
+* ``TIDY_TAG_SECTION``
+* ``TIDY_TAG_SOURCE``
+* ``TIDY_TAG_SUMMARY``
+* ``TIDY_TAG_TEMPLATE``
+* ``TIDY_TAG_TIME``
+* ``TIDY_TAG_TRACK``
+* ``TIDY_TAG_VIDEO``
+* ``STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT``
+* ``STREAM_CRYPTO_METHOD_TLSv1_3_SERVER``
+* ``STREAM_CRYPTO_PROTO_TLSv1_3``
+* ``T_COALESCE_EQUAL``
+* ``T_FN``
+
+See also `New global constants in 7.4 <http://php.net/manual/en/migration74.constants.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the constants to a new namspace
+* Remove the old constants
+* Rename the old constants
+
++-------------+---------------------------+
+| Short name  | Php/Php74NewConstants     |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 7.4 and older    |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -15068,7 +15266,7 @@ It is recommended to use the magic method with its intended usage, and not to ca
 Accessing those methods in a static way is also discouraged.
 
 See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and 
-         `Magical PHP: `__call() <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/blog/magical-php-call>`_.
+         `Magical PHP: `__call <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/blog/magical-php-call>`_.
 
 +-------------+---------------------------------+
 | Short name  | Classes/DirectCallToMagicMethod |
@@ -18619,26 +18817,58 @@ The new class is : HashContext.
 
 
 
-.. _php/unpackinginsidearrays:
+.. _php-7.4-new-class:
 
-Php/UnpackingInsideArrays
-#########################
+Php 7.4 New Class
+#################
+
+
+New classes, introduced in PHP 7.4. If classes where created with the same name, in current code, they have to be moved in a namespace, or removed from code to migrate safely to PHP 7.4.
+
+The new classes are : 
+
++ `ReflectionReference <https://www.php.net/manual/en/class.reflectionreference.php>`_
++ `WeakReference <https://www.php.net/manual/en/class.weakreference.php>`_
+
+.. code-block:: php
+
+   <?php
+   
+   namespace {
+       // Global namespace
+       class WeakReference {
+           // Move to a namespace
+           // or, remove this class
+       }
+   }
+   
+   namespace B {
+       class WeakReference {
+           // This is OK : in a namespace
+       }
+   }
+   
+   ?>
+
+
 
 
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Move the current classes with the same names into a distinct domain name
 
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/UnpackingInsideArrays                                                                                                                                                                                              |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                                                                                  |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Php/Php74NewClasses       |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 7.2 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
 
 
 
@@ -19795,6 +20025,77 @@ It is recommended to avoid redefining the same property in a hierarchy.
 
 
 
+.. _regex-on-arrays:
+
+Regex On Arrays
+###############
+
+
+Avoid using a loop with arrays of regex or values. There are several PHP function which work directly on arrays, and much faster.
+
+`preg_grep() <http://www.php.net/preg_grep>`_ is able to extract all matching strings from an array, or non-matching strings. This usually saves a loop over the strings.
+
+`preg_filter() <http://www.php.net/preg_filter>`_ is able to extract all strings from an array, matching at least one regex in an array. This usually saves a double loop over the strings and the regex. The trick here is to provide '.. comment: Rules details
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+' as replacement, leading `preg_filter() <http://www.php.net/preg_filter>`_ to replace the found string by itself.
+
+Finally, `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_ an `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ are also able to apply an array of regex to an array of strings, and then, apply callbacks to the found values. 
+
+.. code-block:: php
+
+   <?php
+   
+   $regexs = ['/ab+c/', '/abd+/', '/abe+/'];
+   $strings = ['/abbbbc/', '/abd/', '/abeee/'];
+   
+   // Directly extract all strings that match one regex
+   foreach($regexs as $regex) {
+       $results[] = preg_grep($regex, $strings);
+   }
+   
+   // extract all matching regex, by string
+   foreach($strings as $string) {
+       $results[] = preg_filter($regexs, array_fill(0, count($regexs), '.. comment: Rules details
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+'), $string);
+   }
+   
+   // very slow way to get all the strings that match a regex
+   foreach($regexs as $regex) {
+       foreach($strings as $string) {
+           if (preg_match($regex, $string)) {
+               $results[] = $string;
+           }
+       }
+   }
+   
+   ?>
+
+
+See also `preg_filter <https://php.net/preg_filter>`_. 
+
+Suggestions
+^^^^^^^^^^^
+
+* Apply preg_match() to an array of string or regex, via preg_filter() or preg_grep().
+* Apply preg_match() to an array of string or regex, via preg_replace_callback() or preg_replace_callback_array().
+
++-------------+----------------------------+
+| Short name  | Performances/RegexOnArrays |
++-------------+----------------------------+
+| Themes      | :ref:`Performances`        |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+
+
+
 .. _register-globals:
 
 Register Globals
@@ -19858,7 +20159,7 @@ Relay functions and methods are delegating the actual work to another function o
    ?>
 
 
-Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and declutter the API. 
+Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and simplify the API. 
 
 
 Suggestions
@@ -21281,6 +21582,12 @@ Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_te
 
 See also `New in PHP 7: null coalesce operator <https://lornajane.net/posts/2015/new-in-php-7-null-coalesce-operator>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the long syntax with the short one
+
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Php/ShouldUseCoalesce                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -21430,7 +21737,17 @@ Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504
    ?>
 
 
+This analysis is a related to Performances/Php74ArrayKeyExists, and is a more general version. 
+
 See also `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the `use` command for arrray_key_exists(), at the beginning of the script
+* Use an initial \ before array_key_exists()
+* Remove the namespace
 
 +-------------+-----------------------+
 | Short name  | Php/ShouldUseFunction |
@@ -21651,19 +21968,20 @@ Suggestions
 ^^^^^^^^^^^
 
 * Use an ORM
+* Use an Active Record library
 * Change the query to hard code it and make it not injectable
 
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Short name  | Security/ShouldUsePreparedStatement                                                                      |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                                          |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                            |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-security-shouldusepreparedstatement`, :ref:`dolibarr-security-shouldusepreparedstatement` |
-+-------------+----------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------------------------+
+| Short name  | Security/ShouldUsePreparedStatement                 |
++-------------+-----------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`Security`                     |
++-------------+-----------------------------------------------------+
+| Severity    | Major                                               |
++-------------+-----------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                       |
++-------------+-----------------------------------------------------+
+| Examples    | :ref:`dolibarr-security-shouldusepreparedstatement` |
++-------------+-----------------------------------------------------+
 
 
 
@@ -21933,7 +22251,7 @@ See also `Generator syntax <http://php.net/manual/en/language.generators.syntax.
 Suggestions
 ^^^^^^^^^^^
 
-* Use iterator_to_array() on each generator separatly, and use array_merge() to merge all the arrays.
+* Use iterator_to_array() on each generator separately, and use array_merge() to merge all the arrays.
 * Always yield with distinct keys
 * Avoid iterator_to_array() and use foreach()
 
@@ -24162,7 +24480,7 @@ See also `Passing by reference <http://php.net/manual/en/language.references.pas
 Suggestions
 ^^^^^^^^^^^
 
-* Remove reference for typedhinted arguments, unless the typehint is a scalar typehint.
+* Remove reference for typehinted arguments, unless the typehint is a scalar typehint.
 
 +-------------+--------------------------------+
 | Short name  | Functions/TypehintedReferences |
@@ -24697,6 +25015,18 @@ Some typehints or ``instanceof`` that are relying on undefined interfaces or cla
    
    ?>
 
+
+See also `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_,
+         `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_, and 
+         `Type Operators <http://php.net/manual/en/language.operators.type.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Implement the missing interfaces
+* Remove the code governed by the missing interface : the whole method if it is an typehint, the whole if/then if it is a condition.
+
 +-------------+--------------------------------+
 | Short name  | Interfaces/UndefinedInterfaces |
 +-------------+--------------------------------+
@@ -25160,6 +25490,53 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 +-------------+------------------------------+
 | Time To Fix | Slow (1 hour)                |
 +-------------+------------------------------+
+
+
+
+.. _unpacking-inside-arrays:
+
+Unpacking Inside Arrays
+#######################
+
+
+The variadic operartor is now available inside arrays. Until PHP 7.4, it is not possible to use the variadic operator, or ``...`` inside arrays. 
+
+The workaround is to use `array_merge() <http://www.php.net/array_merge>`_, after checking that arrays are not empty.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = ['a', 'b', 'c'];
+   $b = ['d', 'e', 'f'];
+   
+   // PHP 7.4 
+   $c = [...$a, ...$b];
+   
+   // PHP 7.3 and older
+   $c = array_merge($a, $b);
+   
+   ?>
+
+
+See also `Spread Operator in Array Expression  <https://wiki.php.net/rfc/spread_operator_for_array>`_ and 
+         `PHP 5.6 and the Splat Operator <https://lornajane.net/posts/2014/php-5-6-and-the-splat-operator>`_ .
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace array_merge() with ``...``.
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/UnpackingInsideArrays                                                                                                                                                                                              |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -26836,7 +27213,7 @@ Use Lower Case For Parent, Static And Self
 ##########################################
 
 
-The special parent, static and self keywords needed to be lowercase to be useable. This was fixed in PHP 5.5; otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
+The special parent, static and self keywords needed to be lowercase to be usable. This was fixed in PHP 5.5; otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
 
 parent, static and self are traditionally written in lowercase only. Mixed case and Upper case are both valid, though.
 
@@ -27348,7 +27725,7 @@ This way, constant will be defined at compile time, and not at execution time.
    ?>
 
 
-See also `Syntax <https://php.net/manual/en/language.constants.syntax.php>`_.
+See also `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
 
 
 
@@ -28120,17 +28497,27 @@ Among the task of a catch clause : log the exception, clean any mess that was in
    ?>
 
 
-See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
+See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_ and 
+         `Best practices for PHP exception handling <https://www.moxio.com/blog/34/best-practices-for-php-exception-handling>`_.
 
-+-------------+-------------------------+
-| Short name  | Exceptions/UselessCatch |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a log call to the catch block
+* Handle correctly the exception
+
++-------------+---------------------------------------------------------------------------------+
+| Short name  | Exceptions/UselessCatch                                                         |
++-------------+---------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                  |
++-------------+---------------------------------------------------------------------------------+
+| Severity    | Minor                                                                           |
++-------------+---------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                   |
++-------------+---------------------------------------------------------------------------------+
+| Examples    | :ref:`zurmo-exceptions-uselesscatch`, :ref:`prestashop-exceptions-uselesscatch` |
++-------------+---------------------------------------------------------------------------------+
 
 
 
@@ -28232,7 +28619,7 @@ Useless Default Argument
 ########################
 
 
-One of the argument has a default value, and this default value is never used. Every time the method is called, the argumentis provided explicitely, rendering the default value actually useless.
+One of the argument has a default value, and this default value is never used. Every time the method is called, the argument is provided explicitly, rendering the default value actually useless.
 
 .. code-block:: php
 
@@ -29198,7 +29585,14 @@ When the number arguments is too high for custom functions, PHP ignores the argu
    ?>
 
 
-It is recommended to check the signature of the methods, and fix the arguments.
+It is recommended to check the signature of the methods, and fix the arguments. 
+
+Suggestions
+^^^^^^^^^^^
+
+* Add more arguments to fill the list of compulsory arguments
+* Remove arguments to fit the list of compulsory arguments
+* Use another method or class
 
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/WrongNumberOfArguments                                                                            |

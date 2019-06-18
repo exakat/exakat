@@ -3088,24 +3088,7 @@ Should Use Prepared Statement
 Dolibarr
 ^^^^^^^^
 
-:ref:`should-use-prepared-statement`, in htdocs/product/admin/price_rules.ph:76. 
-
-This code is well escaped, as the integer type cast will prevent any special chars to be used. Here, a prepared statement would apply a modern approach to securing this query.
-
-.. code-block:: php
-
-    $db->query("DELETE FROM " . MAIN_DB_PREFIX . "product_pricerules WHERE level = " . (int) $i)
-
-
---------
-
-
-.. _dolibarr-security-shouldusepreparedstatement:
-
-Dolibarr
-^^^^^^^^
-
-:ref:`should-use-prepared-statement`, in htdocs/product/admin/price_rules.ph:76. 
+:ref:`should-use-prepared-statement`, in htdocs/product/admin/price_rules.php:76. 
 
 This code is well escaped, as the integer type cast will prevent any special chars to be used. Here, a prepared statement would apply a modern approach to securing this query.
 
@@ -4823,6 +4806,124 @@ One 'Command' is refering to a local Command class, while the other is refering 
     use Phinx\Console\Command	                    //in file /src/Phinx/Console/PhinxApplication.php:34
     use Symfony\Component\Console\Command\Command	//in file /src/Phinx/Console/Command/Init.php:31
     use Symfony\Component\Console\Command\Command	//in file /src/Phinx/Console/Command/AbstractCommand.php:32
+
+Nested Ifthen
+=============
+
+.. _livezilla-structures-nestedifthen:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`nested-ifthen`, in livezilla/_lib/objects.global.inc.php:847. 
+
+The first condition is fairly complex, and could also return early. Then, the second nested if could be merged into one : this would reduce the number of nesting, but make the condition higher. 
+
+.. code-block:: php
+
+    if(isset(Server::$Configuration->File["gl_url_detect"]) && !Server::$Configuration->File["gl_url_detect"] && isset(Server::$Configuration->File["gl_url"]) && !empty(Server::$Configuration->File["gl_url"]))
+            {
+                $url = Server::$Configuration->File["gl_url"];
+            }
+            else if(isset($_SERVER["HTTP_HOST"]) && !empty($_SERVER["HTTP_HOST"]))
+            {
+                $host = $_SERVER["HTTP_HOST"];
+                $path = $_SERVER["PHP_SELF"];
+    
+                if(!empty($path) && !Str::EndsWith(strtolower($path),strtolower($_file)) && strpos(strtolower($path),strtolower($_file)) !== false)
+                {
+                    if(empty(Server::$Configuration->File["gl_kbmr"]))
+                    {
+                        Logging::DebugLog(serialize($_SERVER));
+                        exit("err 888383; can't read $_SERVER[\"HTTP_HOST\"] and $_SERVER[\"PHP_SELF\"]");
+                    }
+                }
+    
+                define("LIVEZILLA_DOMAIN",Communication::GetScheme() . $host);
+                $url = LIVEZILLA_DOMAIN . str_replace($_file,"",htmlentities($path,ENT_QUOTES,"UTF-8"));
+            }
+
+
+--------
+
+
+.. _mediawiki-structures-nestedifthen:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`nested-ifthen`, in includes/Linker.php:1493. 
+
+There are 5 level of nesting here, from the beginning of the method, down to the last condition. All work on local variables, as it is a static method. May be breaking this into smaller functions would help readability.
+
+.. code-block:: php
+
+    public static function normalizeSubpageLink( $contextTitle, $target, &$text ) {
+    		$ret = $target; # default return value is no change
+    
+    		# Some namespaces don't allow subpages,
+    		# so only perform processing if subpages are allowed
+    		if (
+    			$contextTitle && MediaWikiServices::getInstance()->getNamespaceInfo()->
+    			hasSubpages( $contextTitle->getNamespace() )
+    		) {
+    			$hash = strpos( $target, '#' );
+    			if ( $hash !== false ) {
+    				$suffix = substr( $target, $hash );
+    				$target = substr( $target, 0, $hash );
+    			} else {
+    				$suffix = '';
+    			}
+    			# T9425
+    			$target = trim( $target );
+    			$contextPrefixedText = MediaWikiServices::getInstance()->getTitleFormatter()->
+    				getPrefixedText( $contextTitle );
+    			# Look at the first character
+    			if ( $target != '' && $target[0] === '/' ) {
+    				# / at end means we don't want the slash to be shown
+    				$m = [];
+    				$trailingSlashes = preg_match_all( '%(/+)$%', $target, $m );
+    				if ( $trailingSlashes ) {
+    					$noslash = $target = substr( $target, 1, -strlen( $m[0][0] ) );
+    				} else {
+    					$noslash = substr( $target, 1 );
+    				}
+    
+    				$ret = $contextPrefixedText . '/' . trim( $noslash ) . $suffix;
+    				if ( $text === '' ) {
+    					$text = $target . $suffix;
+    				} # this might be changed for ugliness reasons
+    			} else {
+    				# check for .. subpage backlinks
+    				$dotdotcount = 0;
+    				$nodotdot = $target;
+    				while ( strncmp( $nodotdot, "../", 3 ) == 0 ) {
+    					++$dotdotcount;
+    					$nodotdot = substr( $nodotdot, 3 );
+    				}
+    				if ( $dotdotcount > 0 ) {
+    					$exploded = explode( '/', $contextPrefixedText );
+    					if ( count( $exploded ) > $dotdotcount ) { # not allowed to go below top level page
+    						$ret = implode( '/', array_slice( $exploded, 0, -$dotdotcount ) );
+    						# / at the end means don't show full path
+    						if ( substr( $nodotdot, -1, 1 ) === '/' ) {
+    							$nodotdot = rtrim( $nodotdot, '/' );
+    							if ( $text === '' ) {
+    								$text = $nodotdot . $suffix;
+    							}
+    						}
+    						$nodotdot = trim( $nodotdot );
+    						if ( $nodotdot != '' ) {
+    							$ret .= '/' . $nodotdot;
+    						}
+    						$ret .= $suffix;
+    					}
+    				}
+    			}
+    		}
+    
+    		return $ret;
+    	}
 
 Cast To Boolean
 ===============
@@ -6563,6 +6664,57 @@ $value is defined with a reference. In the following code, it is only read and n
                 ? $this->resolvePreferenceRecursive($preferences[$value], $preferences)
                 : $value;
         }
+
+Useless Catch
+=============
+
+.. _zurmo-exceptions-uselesscatch:
+
+Zurmo
+^^^^^
+
+:ref:`useless-catch`, in app/protected/modules/workflows/forms/attributes/ExplicitReadWriteModelPermissionsWorkflowActionAttributeForm.php:99. 
+
+Catch the exception, then return. At least, the comment is honest.
+
+.. code-block:: php
+
+    try
+                    {
+                        $group = Group::getById((int)$this->type);
+                        $explicitReadWriteModelPermissions->addReadWritePermitable($group);
+                    }
+                    catch (NotFoundException $e)
+                    {
+                        //todo: handle exception better
+                        return;
+                    }
+
+
+--------
+
+
+.. _prestashop-exceptions-uselesscatch:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`useless-catch`, in src/Core/Addon/Module/ModuleManagerBuilder.php:170. 
+
+Here, the catch clause will intercept a IO problem while writing element on the disk, and will return false. Since this is a constructor, the returned value will be ignored and the object will be left in a wrong state, since it was not totally inited.
+
+.. code-block:: php
+
+    private function __construct()
+        {
+        // More code......
+                try {
+                    $filesystem = new Filesystem();
+                    $filesystem->dumpFile($phpConfigFile, '<?php return ' . var_export($config, true) . ';' . \n);
+                } catch (IOException $e) {
+                    return false;
+                }
+            }
 
 Test Then Cast
 ==============

@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('$this->a( )',
+                      '$this->A( )',
                      );
 
-$expected_not = array('$this->A( )',
+$expected_not = array(
                      );
 
 ?>

@@ -1,12 +1,45 @@
-Version 1.8.4 (Wang Wenqing of Jiazi, coming up)
+Version 1.8.5 (Zhan Zijiang of Jiaxu, coming up)
 + Architecture
     + 
 + Report
     + 
-+ Analyzer
++ Analysis
     + 
 + Tokenizer
     + 
+
+Version 1.8.4 (Wang Wenqing of Jiazi, 2019-06-17)
++ Architecture
+    + Added support for PHP in docker images for compilation tests
+    + First prototype for Gremlin in a specific docker image 
++ Report
+    + Ambassador : restored original URL
+    + Replaced 'Complexity' => 'Time To Fix'
+    + Replaced 'Receipt' => Ruleset
++ Analysis
+    + New analysis : regex with arrays
+    + New analysis : Complex property names
+    + New analysis : array_key_exists speed up
+    + New analysis : curl_version forbidden argument
+    + New analysis : PHP 7.4 new functions, classes and constants
+    + Fixed analysis : Long Variable
+    + Updated analysis : printf() format check extended to constants
+    + Updated analysis : Written only variables is extended to static and global
+    + Updated analysis : refactored 'Make default' 
+    + Updated analysis : 'Wrong number of arguments' is extended to methods
+    + Updated analysis : 'Use coalesce' checks for
+    + Updated analysis : Refactored 'Nested ifthen' to have a parameter
+    + Updated analysis : Extended 'Class Usage' to return typehint
+    + Updated analysis : Sped up 'Used Classes'
+    + Checked unit tests : 2993 / 3071 test pass (97% pass)
++ Tokenizer
+    + Upgraded handling of declare with strict_types
+    + Support for magic properties across classes and traits
+    + Added support for parent with properties
+    + Properties are handled with static and normal at the same time
+    + Fixed virtualproperties with static keyword (self and parent are ok)
+    + Added argument count for 'new A', without parenthesis
+    + Restored old break behavior for PHP 5 and older.
 
 Version 1.8.3 (Jade Man of Yang, 2019-06-10)
 + Architecture
@@ -15,19 +48,19 @@ Version 1.8.3 (Jade Man of Yang, 2019-06-10)
 + Report
     + New report : SARB
     + Updated report : Ambassador list number of arguments in natural order
-+ Analyzer
-    + New analyzer : from substr() to trim()
-    + New analyzer : suggest making magic property a concrete one (2 ways)
-    + New analyzer : no array auto-append
-    + Updated analyzer : 'Scalar or object property' refactored
-    + Updated analyzer : 'Multiple identical keys' get a new check on intval, broadened to constants
-    + Updated analyzer : 'Indirect injection' accelerated
-    + Updated analyzer : 'Could be class constant' accelerated
-    + Updated analyzer : 'Never used property' refactored
-    + Updated analyzer : 'Modern empty' modernized and broadened
-    + Updated analyzer : 'Useless check' skips isset/empty as they may be useful
-    + Updated analyzer : 'Identical methoods' skips abstract methods
-    + Updated analyzer : 'No Count Zero' also uses sizeof(), skips switch()
++ Analysis
+    + New analysis : from substr() to trim()
+    + New analysis : suggest making magic property a concrete one (2 ways)
+    + New analysis : no array auto-append
+    + Updated analysis : 'Scalar or object property' refactored
+    + Updated analysis : 'Multiple identical keys' get a new check on intval, broadened to constants
+    + Updated analysis : 'Indirect injection' accelerated
+    + Updated analysis : 'Could be class constant' accelerated
+    + Updated analysis : 'Never used property' refactored
+    + Updated analysis : 'Modern empty' modernized and broadened
+    + Updated analysis : 'Useless check' skips isset/empty as they may be useful
+    + Updated analysis : 'Identical methoods' skips abstract methods
+    + Updated analysis : 'No Count Zero' also uses sizeof(), skips switch()
     + Checked unit tests : 2993 / 3071 test pass (97% pass)
 + Tokenizer
     + Upgraded local definitions for properties to Load phase
@@ -41,7 +74,7 @@ Version 1.8.2 (Zhao Ziyu of Dingchou, 2019-06-03)
     + Refactored 'Update' command, to VCS
     + Collect missing definitions counts
     + Report handles a list of analysis names
-+ Analyzer
++ Analysis
     + New analysis : No Need To Get_Class
     + New analysis : Report identical inherited methods
     + New analysis : Function returning -1 in case of error
@@ -67,7 +100,7 @@ Version 1.8.1 (Zhang Wentong of Dinghai, 2019-05-27)
     + New report : Yaml
     + New report : Top10
     + Updated report : Json, text and xml get 'fullcode'
-+ Analyzer
++ Analysis
     + Updated analysis : Should use self is extended to parent classes
     + Updated analysis : Should use prepared statement now skips some SQL queries
     + Checked unit tests : 3024 / 3048 test pass (99% pass)
@@ -79,7 +112,7 @@ Version 1.8.0 (Zang Wengong of Dingyou, 2019-05-20)
     + Removed more MAX_LOOPING usage
 + Report
     + Ambassador : removed { & @ } artefacts from globals
-+ Analyzer
++ Analysis
     + New analysis : Function returning -1 in case of error
     + New analysis : Report PHP 7.4 unpacking inside array
     + New analysis : Report PHP 7.4 new functions and fn
@@ -115,7 +148,7 @@ Version 1.7.9 (Shi Shutong of Dingwei, 2019-05-13)
 + Report
     + Inventories : added 'inclusions' and 'global variables'
     + Ambassador : added global variables
-+ Analyzer
++ Analysis
     + New analysis : support for ext/ffi, uuid
     + Updated analysis : Nested Ternary handles parenthesis
     + Updated analysis : Static loops is extended to references and arrays
@@ -137,7 +170,7 @@ Version 1.7.8 (Cui Juqing of Dingyi, 2019-05-06)
     + renamed test.php to ut.php in tests
     + reorganized destinations folders 
     + organized exakat for 'inside code' audit
-+ Analyzer
++ Analysis
     + New analysis : support for libsvm
     + Updated analysis : Multiple unset() handles unset() at the beginning of the scope
     + Updated analysis : undefined static class now accounts for PHP and module classes
@@ -156,7 +189,7 @@ Version 1.7.7 (Sima Qing of Dingmao, 2019-04-29)
     + Dump got one more query moved to DSL
     + Fixed build for overwritten methods, extended to magic methods
     + Load tokens by batch (5000+ tokens), not by file. 
-+ Analyzer
++ Analysis
     + New analysis : Security : integer conversion
     + New analysis : implode() with one argument
     + Updated analysis : Invalid Regex handles \\ more precisely
@@ -174,7 +207,7 @@ Version 1.7.6 (Jade Maiden of Yin, 2019-04-22)
     + Phpcsfixer : new report
     + Ambassador : report usage of overridden PHP functions
     + Ambassador : new favorite : variable name in catch clause
-+ Analyzer
++ Analysis
     + New analysis : array_merge and ellipsis should use coalesce
     + New analysis : Report overridden PHP native functions
     + New analysis : Merge all unset() into one
@@ -195,7 +228,7 @@ Version 1.7.5 (Xue King Zhuanlun, 2019-04-15)
     + Cleaned unused variables
 + Report
     + Ambassador : bugfixes report version 7.3, dropped 5.6 and 5.5
-+ Analyzer
++ Analysis
     + Updated analysis : Already interface : extended to interface parents
     + Updated analysis : Else if to elseif : extended to one-liners
     + Updated analysis : No reference for ternary was extended
@@ -217,7 +250,7 @@ Version 1.7.4 (Lu King Pingdeng, 2019-04-08)
     + Automatically detect identical files
 + Report
     + Inventories are grouped by values, sorted by count
-+ Analyzer
++ Analysis
     + Updated analysis : This is for class : extended analysis to self and parent
     + Updated analysis : Undefined Classes
     + Updated analysis : Refactored Defined Parent MP 
@@ -242,7 +275,7 @@ Version 1.7.3 (Huang, King Dushi, 2019-04-01)
 + Report
     + Ambassador : report identical files in the code
     + Ambassador : global variable inventory is now grouped by name
-+ Analyzer
++ Analysis
     + Updated analysis : PPPDeclaration style : handles Virtualproperties
     + Updated analysis : Closure2string : extended analysis
     + Updated analysis : Non-Ascii variable skips { }, & and @
@@ -265,7 +298,7 @@ Version 1.7.2 (Dong King Taishan, 2019-03-25)
 + Report
     + Ambassador : added Suggestions theme to docs.
     + Perfile : New report, text, per file
-+ Analyzer
++ Analysis
     + New analysis : Report potential 'unsupported operand type'
     + New analysis : Check for existence with __call() and __callstatic
     + Updated analysis : Wrong number of arguments (methods) upgraded
@@ -282,7 +315,7 @@ Version 1.7.2 (Dong King Taishan, 2019-03-25)
 Version 1.7.1 (Bi King Biancheng, 2019-03-18)
 + Report
     + Ambassador : report lines that concentrate lots of issues
-+ Analyzer
++ Analysis
     + Extended GoToAllImplements to extended interfaces
     + Updated analysis : NoScream usage, with authorized functioncall list like fopen
     + Updated analysis : HiddenUse with support for virtual properties
@@ -297,7 +330,7 @@ Version 1.7.0 (Bao King Yama, 2019-03-11)
 + Report
     + Made Diplomat the default report
     + Added History report : it stores metrics from audit to audit
-+ Analyzer
++ Analysis
     + New analysis : Identify self transforming variables ($x = foo($x))
     + New analysis : Report unclonable variables
     + Updated analysis : Undefined Classes, Interfaces and Trait now omit 'ignored' cit from folders
@@ -317,7 +350,7 @@ Version 1.6.9 (Lu King Wuguan, 2019-03-04)
     + Upgraded to Tinkergraph 3.3.5
     + Added options to cleandb to stop and start gremlin from exakat
     + Skip the task if no analysis has to run
-+ Analyzer
++ Analysis
     + New analysis : Report inconsistent usage of properties or variables
     + New analysis : Typehinted return must return
     + Updated analysis : Variables used once handles closure (use) correctly
@@ -341,7 +374,7 @@ Version 1.6.8 (Yu King Songdi, 2019-02-25)
 + Report
     + Ambassador : report usage of factories
     + Collect stats about Foreach usage
-+ Analyzer
++ Analysis
     + New analysis : Report violation of law of Demeter
     + New analysis : Report removed constants and functions in PHP 8.0
     + Updated analysis : Refactored Nullable Typehint
@@ -362,7 +395,7 @@ Version 1.6.7 (Li King Chujiang, 2019-02-18)
     + Ambassador : reporting dynamically created constants
     + Diplomat : leanner, meaner version of Ambassador
     + New category : Top 10 classic mistakes
-+ Analyzer
++ Analysis
     + New analysis : Report when relayed typehint are not the sames
     + Updated analysis : Regex now handles local variables and constants
     + Updated analysis : Variables Used Once now covers closures and use
@@ -378,7 +411,7 @@ Version 1.6.6 (Jiang King Qinguang , 2019-02-11)
     + Added options to follow constants from atomIs.
 + Report
     + Now dumps magic methods
-+ Analyzer
++ Analysis
     + New analysis : Report insufficient interfaces in typehint
     + Updated analysis : Class constant now ignore empty classes
     + Checked unit tests : 2837 / 2858 test pass (99% pass)
@@ -400,7 +433,7 @@ Version 1.6.5 (Mahagate, 2019-02-04)
     + Ambassador : restored file dependencies tree
     + Ambassador : fixed altered directive filename
     + Ambassador : added direct link to docs
-+ Analyzer
++ Analysis
     + New analysis : arrays that are initialized with strings
     + New analysis : Avoid Lone variables as conditions
     + New analysis : Added support for weakref and pcov
@@ -421,7 +454,7 @@ Version 1.6.4 (Parasamgate, 2019-01-28)
 + Report
     + Added Atoms in the documentations
     + Extra protection for Class Changes
-+ Analyzer
++ Analysis
     + Updated analysis : Use-arguments are now counted as arguments
     + Updated analysis : Max Argument check was refactored
     + Updated analysis : IsModified now takes into account extensions
@@ -444,7 +477,7 @@ Version 1.6.3 (Paragate, 2019-01-21)
     + Fixed copyright years
 + Report
     + Ambassador : fixed class name for Phpcompilation
-+ Analyzer
++ Analysis
     + New analysis : assign and compare at the same time
     + Updated analysis : uncaught exceptions now cover parents
     + Updated analysis : strpos too much is extended to strrpos and strripos
@@ -463,7 +496,7 @@ Version 1.6.2 (Silver Headed Gate, 2019-01-14)
 + Report
     + Ambassador : colored syntax for visibility report
     + Ambassador : inventory reports now display number of usages
-+ Analyzer
++ Analysis
     + Updated analysis : Added support for PHP 7.2.14
     + Updated analysis : Avoid Using Class handles \
     + Updated analysis : Unused Functions works with multiple identical functions
@@ -485,7 +518,7 @@ Version 1.6.1 (Golden Light Gate, 2019-01-07)
     + Ambassador : added classSize report
     + Ambassador : 'New issues' now takes line difference into account
     + Themes are better dumped
-+ Analyzer
++ Analysis
     + New analysis : array_key_exists() is faster in PHP 7.4
     + New analysis : partial report from preg_match()
     + Updated analysis : Avoid Using Class handles \
@@ -502,7 +535,7 @@ Version 1.6.1 (Golden Light Gate, 2019-01-07)
 Version 1.6.0 (VirupakSa, 2018-12-31)
 + Architecture
     + VCS are not tested when they are not used
-+ Analyzer
++ Analysis
     + Updated analysis : Php Reserved names ignores variable variables
     + Updated analysis : Array not using a constant, with Heredoc
     + Updated analysis : Long arguments
@@ -523,7 +556,7 @@ Version 1.5.9 (Dhrtarastra, 2018-12-24)
     + Extra check on doctor 
 + Report
     + Ambassador : extra check for 'previous' report
-+ Analyzer
++ Analysis
     + Upgraded analysis : Empty With Expression skip a few false positive
     + Checked unit tests : 2770 / 2795 test pass (99% pass)
 + Tokenizer
@@ -539,7 +572,7 @@ Version 1.5.8 (Virudhaka, 2018-12-17)
     + Added 'update' for extensions
 + Report
     + Ambassador : added a 'Path' inventory, with file paths
-+ Analyzer
++ Analysis
     + New analysis : Closures that are identical
     + Upgraded analysis : Url and SQL detection, case sensitivity
     + Upgraded analysis : Could Use array_fill_keys
@@ -569,7 +602,7 @@ Version 1.5.7 (Vaisravana, 2018-12-10)
     + Ambassador : added trait matrix
     + Ambassador : fixed an infinite loop when trait include themselves in cycles
     + Added more message count to several reports
-+ Analyzer
++ Analysis
     + New analysis : method could be static
     + New analysis : multiple inclusion of traits
     + New analysis : avoid self using traits
@@ -596,7 +629,7 @@ Version 1.5.6 (Jingang, 2018-12-03)
     + Fixed configuration for directories and files
 + Report
     + Fixed FileDependecy and DependencyWheel, to actually count messages
-+ Analyzer
++ Analysis
     + Added a lot more new method descriptions for PHP native classes
     + New analysis : suggestion simplification for !isset($a) || !isset($a[1])
     + New analysis : Useless Trait alias
@@ -624,10 +657,10 @@ Version 1.5.5 (Ratnadhvaja, 2018-11-25)
     + New report : Php city. See your PHP code as a city
     + Ambassador : Appinfo() now reports keywords used as method or property
     + Fixed reported names of properties
-+ Analyzer
++ Analysis
     + New analysis : checks some HTTP headers for security
     + New analysis : Use _file() functions, not file_get_contents()
-    + New analyzer : Optimize looks for fgetcsv()
+    + New analysis : Optimize looks for fgetcsv()
     + Upgraded analysis : Several refactored analysis
     + Checked unit tests : 3083 / 3096 test pass (99% pass)
 + Tokenizer
@@ -647,10 +680,10 @@ Version 1.5.4 (Mahakasyapa, 2018-11-19)
     + Extended validation for themas
     + Restored Tinkergraph driver 
     + Upgrade logs with extra reports
-+ Analyzer
-    + New analyzer : Report problems with class constant visibilities
-    + New analyzer : Avoid self, parent and static in interfaces
-    + Upgraded analyzer : Variable reuse now skips empty arrays
++ Analysis
+    + New analysis : Report problems with class constant visibilities
+    + New analysis : Avoid self, parent and static in interfaces
+    + Upgraded analysis : Variable reuse now skips empty arrays
     + Checked unit tests : 3077 / 3090 test pass (99% pass)
 + Tokenizer
     + Fixed bug where variable was mistaken for a string inside strings
@@ -664,11 +697,11 @@ Version 1.5.3 (Ananda, 2018-11-12)
     + Fixed handling badly written exakat.ini or PHP binary paths
 + Report
     + Ambassador : report classes that could be final or abstract
-+ Analyzer
-    + New analyzer : Property Used Once : now includes redefined functions
-    + New analyzer : iterator_to_array() should use yield with keys or array_merge()
-    + New analyzer : Don't loop on yield : use yield from
-    + Upgraded analyzer : Dependant trait now include parent-traits
++ Analysis
+    + New analysis : Property Used Once : now includes redefined functions
+    + New analysis : iterator_to_array() should use yield with keys or array_merge()
+    + New analysis : Don't loop on yield : use yield from
+    + Upgraded analysis : Dependant trait now include parent-traits
     + Checked unit tests : 3080 / 3093 test pass (99% pass)
 + Tokenizer
     + Changed handling of variable that are both global AND local
@@ -679,13 +712,13 @@ Version 1.5.2 (Master Puti, 2018-11-05)
 + Report
     + Fixed storage of themes in dump.sqlite
     + Ambassador : report nothing when there are no trait, interface or class in the tree.
-+ Analyzer
-    + New analyzer : idn_to_ascii() will get new default
-    + New analyzer : support for decimal extension
-    + New analyzer : support for psr extension
-    + Upgraded analyzer : Extended support to PHP native exceptions
-    + Upgraded analyzer : Could use typecast now handles intval() second param
-    + Upgraded analyzer : Variable strange names avoids properties
++ Analysis
+    + New analysis : idn_to_ascii() will get new default
+    + New analysis : support for decimal extension
+    + New analysis : support for psr extension
+    + Upgraded analysis : Extended support to PHP native exceptions
+    + Upgraded analysis : Could use typecast now handles intval() second param
+    + Upgraded analysis : Variable strange names avoids properties
     + Checked unit tests : 3058 / 3085 test pass (99% pass)
 + Tokenizer
     + Upgraded support for arrays inside strings (string/constant distinction)
@@ -693,9 +726,9 @@ Version 1.5.2 (Master Puti, 2018-11-05)
     + Fixed value of line for some ***definition
 
 Version 1.5.1 (Eighteen Arhats, 2018-10-29)
-+ Analyzer
-    + New analyzer : could use basename() second args
-    + Upgraded analyzer : Variables strange names do not report ...
++ Analysis
+    + New analysis : could use basename() second args
+    + Upgraded analysis : Variables strange names do not report ...
     + Checked unit tests : 3061 / 3079 test pass (99% pass)
 + Tokenizer
     + Moved TRAILING as a property
@@ -711,15 +744,15 @@ Version 1.5.0 (Pilanpo Bodhisattva, 2018-10-22)
     + Ambassador : now report interface and trait hierarchy
     + Ambassador : new format inventory for pack and printf
     + Dump : Fixed list of traits
-+ Analyzer
-    + New analyzer : Could Use Try, for native calls that may produce an exception
-    + New analyzer : idn_to_ascii() will get new default
-    + Upgraded analyzer : Undefined variables exclude $this
-    + Upgraded analyzer : Variables used once avoid properties
-    + Upgraded analyzer : ext/json : JsonException
-    + Upgraded analyzer : added new PHP 7.3 constants (curl, pgsql, mbstring, standard)
-    + Upgraded analyzer : scalar or object property now ignore NULL as default
-    + Refactored analyzer : UsedProtectedMethod
++ Analysis
+    + New analysis : Could Use Try, for native calls that may produce an exception
+    + New analysis : idn_to_ascii() will get new default
+    + Upgraded analysis : Undefined variables exclude $this
+    + Upgraded analysis : Variables used once avoid properties
+    + Upgraded analysis : ext/json : JsonException
+    + Upgraded analysis : added new PHP 7.3 constants (curl, pgsql, mbstring, standard)
+    + Upgraded analysis : scalar or object property now ignore NULL as default
+    + Refactored analysis : UsedProtectedMethod
     + Checked unit tests : 3059 / 3071 test pass (99% pass)
 + Tokenizer
     + Handles NaN and INF when the literals reach them
@@ -735,22 +768,22 @@ Version 1.4.9 (Lingji Bodhisattva, 2018-10-15)
     + Initial support for extension folder
 + Report
     + Collect the number of local variables, per method
-+ Analyzer
-    + New analyzer : report accessing properties the wrong way
-    + New analyzer : suggest named patterns
-    + New analyzer : check Pack() arguments
-    + New analyzer : Return in generators, for PHP 7.0 +
-    + New analyzer : Repeated interfaces
-    + New analyzer : Static properties shouldn't use references until PHP 7.3
-    + New analyzer : Don't read and write in the same expression
-    + Upgraded analyzer : is interface methods, extended to magic methods
-    + Upgraded analyzer : empty regex
-    + Upgraded analyzer : never used properties
-    + Upgraded analyzer : logical operators in letters
-    + Upgraded analyzer : could use interface, extended with PHP native interfaces
-    + Upgraded analyzer : Is Zero, better handling of mixed expressions
-    + Refactored analyzer : Empty functions
-    + Refactored analyzer : Used Private Methods
++ Analysis
+    + New analysis : report accessing properties the wrong way
+    + New analysis : suggest named patterns
+    + New analysis : check Pack() arguments
+    + New analysis : Return in generators, for PHP 7.0 +
+    + New analysis : Repeated interfaces
+    + New analysis : Static properties shouldn't use references until PHP 7.3
+    + New analysis : Don't read and write in the same expression
+    + Upgraded analysis : is interface methods, extended to magic methods
+    + Upgraded analysis : empty regex
+    + Upgraded analysis : never used properties
+    + Upgraded analysis : logical operators in letters
+    + Upgraded analysis : could use interface, extended with PHP native interfaces
+    + Upgraded analysis : Is Zero, better handling of mixed expressions
+    + Refactored analysis : Empty functions
+    + Refactored analysis : Used Private Methods
     + Checked unit tests : 3036 / 3055 test pass (99% pass)
 + Tokenizer
     + Added DEFINITION between new and __construct
@@ -765,7 +798,7 @@ Version 1.4.8 (Ksitigarbha, 2018-10-08)
     + Cleaning more analysis from MAX_LOOPING variable
     + Better protection for file names 
     + Removed static properties from DSL
-+ Analyzer
++ Analysis
     + New analysis : Don't use __clone before PHP 7.0
     + New analysis : Watch out for filter_input as a data source
     + Upgraded analysis : Method Used Below refactored for speed
@@ -786,7 +819,7 @@ Version 1.4.7 (Maitreya, 2018-10-01)
     + WIP : removing usage of MAX_LOOPING in analysis
     + Added a lot of new external services
     + Added documentation for creating a new analysis
-+ Analyzer
++ Analysis
     + Upgraded analysis : No interface was dropped in PHP 7.2
     + Upgraded analysis : IsAMagicProperty extended to parents
     + Removed anaysis : Relaxed Heredoc was double with Flexible Heredoc
@@ -805,7 +838,7 @@ Version 1.4.6 (Dipankara, 2018-09-24)
     + More docs
 + Report
     + Ambassador/Weekly : fixed ' in analyser titles
-+ Analyzer
++ Analysis
     + Upgraded analysis : Fopen mode accepts 'r+b'
     + Upgraded analysis : Unused Traits
     + Upgraded analysis : Undefined Variables
@@ -823,7 +856,7 @@ Version 1.4.5 (Guanyin Bodhisattva, 2018-09-17)
     + Removed times() for until() in Dumps
 + Report
     + Manual : added folders tree
-+ Analyzer
++ Analysis
     + New analysis : Add Default To Parameter
     + Upgraded analysis : Avoid reporting PHP function as classes
     + Upgraded analysis : More empty Functions than just foo() {}
@@ -842,10 +875,10 @@ Version 1.4.4 (White Dragon Horse, 2018-09-10)
 + Report
     + Ambassador / Phpconfiguration : report disable_functions and disable_classes
     + Finished Weekly report
-+ Analyzer
++ Analysis
     + New analysis : report ext/seaslog
     + Upgraded analysis : Incompatible signatures
-    + Fixed DSL : analyzerIs
+    + Fixed DSL : analysisIs
     + Checked unit tests : 3000 / 3010 test pass (99% pass)
 + Tokenizer
     + Closure are now processed with runplugin
@@ -859,7 +892,7 @@ Version 1.4.3 (Sha Wujing, 2018-09-03)
     + Now reporting PHP native CIT, constants and functions
 + Report
     + Ambassador : php.ini suggestions includes disable_functions
-+ Analyzer
++ Analysis
     + New analysis : report typecasting for json_decode
     + New analysis : report classes that could be final
     + New analysis : simplify closure into callback
@@ -879,7 +912,7 @@ Version 1.4.2 (Zhu Bajie, 2018-08-27)
     + Extended support for clone type 1
 + Report
     + New Report : Weekly report
-+ Analyzer
++ Analysis
     + New analysis : report forgotten conflict in traits
     + New analysis : undefined insteadof
     + New analysis : undefined variable
@@ -894,9 +927,9 @@ Version 1.4.2 (Zhu Bajie, 2018-08-27)
 Version 1.4.1 (Tang Sanzang, 2018-08-20)
 + Architecture
     + Spined off Query for Gremlin, with Exakat DSL.
-    + Centralized 'methods' property in Analyzer class
+    + Centralized 'methods' property in Analysis class
     + Extended MAX_LOOPING usage
-+ Analyzer
++ Analysis
     + Added new thema : Class Review
     + Upgraded analysis : Defined Parent MP (less queries)
     + Upgraded analysis : Less false positives
@@ -914,7 +947,7 @@ Version 1.4.0 (Sun Wu Kong, 2018-08-13)
     + More support for PHP 7.4
 + Report
     + Ambassador : added new Appinfo for relaxed Heredoc, trailing comma...
-+ Analyzer
++ Analysis
     + New analysis : class can be abstract
     + New analysis : trailing comma
     + New analysis : relaxed heredoc
@@ -934,7 +967,7 @@ Version 1.3.9 (Du Ruhui, 2018-08-06)
     + 'Copy' won't update anymore
 + Report
     + Ambassador : fixed repeated 'compatibility' menu entry
-+ Analyzer
++ Analysis
     + New analysis : avoid __CLASS__ and get_called_class().
     + New analysis : prepare for (real) deprecation 
     + New analysis : const / define preference
@@ -951,7 +984,7 @@ Version 1.3.9 (Du Ruhui, 2018-08-06)
 Version 1.3.8 (Fang Xuanling, 2018-07-30)
 + Architecture
     + 'Copy' won't update code anymore.
-+ Analyzer
++ Analysis
     + Upgraded analysis : 'should use operator' only applies to constant chr() call
     + Upgraded analysis : Useless Instructions is faster
     + Checked unit tests : 2948 / 2962 test pass (99% pass). 
@@ -963,7 +996,7 @@ Version 1.3.7 (unnamed demon, 2018-07-16)
     + Fixed handling of multiple updates
 + Report
     + More documentations
-+ Analyzer
++ Analysis
     + New analysis : report usage of callback to process array
     + New analysis : report usage of case insensitive constants
     + Upgraded analysis : Hardcoded passwords is extended to objects
@@ -975,7 +1008,7 @@ Version 1.3.6 (Zhang Gongjin, 2018-07-16)
 + Architecture
     + Added support for Rar archives
     + Removed call to gremlin server at 'status' time
-+ Analyzer
++ Analysis
     + New analysis : support for msgpack extension
     + New analysis : support for lzf extension
     + Upgraded analysis : added missing function names in several extensions
@@ -990,7 +1023,7 @@ Version 1.3.5 (Gao Shilian, 2018-07-09)
     + Reports : doc reading now parses sections (avoid overlap)
     + Ambassador : Added exakat version and build to dashboard.
     + Ambassador : Added Class Tree (All class hierarchies)
-+ Analyzer
++ Analysis
     + Fixed bug with 'last' and '2last'
     + New analysis : Report undefined::class
     + New analysis : Report returned assignations as useless
@@ -1014,7 +1047,7 @@ Version 1.3.4 (Cheng Yaojin, 2018-07-02)
     + Added check when unarchiving tar.gz and tar.bz
     + Added check for neo4j installation, (error grabing)
     + Moved Upgrade to tmp folder
-+ Analyzer
++ Analysis
     + Parameters are actually defined in the class
     + New analysis : ambiguous visibilities of properties
     + New analysis : report usage of PHP 7.1+ hash algorithm
@@ -1040,7 +1073,7 @@ Version 1.3.3 (Ma Sanbao, 2018-06-25)
 + Report
     + Ambassador : fixed regression in the dashboard
     + Fixed edge case with properties
-+ Analyzer
++ Analysis
     + New analysis : closure that can be static
     + Upgraded analysis : empty function doesn't count static or global
     + Upgraded analysis : reported globals include $GLOBALS also
@@ -1074,7 +1107,7 @@ Version 1.3.1 (Liu Hongji, 2018-06-03)
     + Fixed check of php.log folder
 + Report
     + Ambassador : display correct compilation state
-+ Analyzer
++ Analysis
     + Upgraded analysis : used constant is also applied to defined()
     + Upgraded analysis : used protected methods is case insensitive
     + Upgraded analysis : Empty class omits extended classes
@@ -1093,7 +1126,7 @@ Version 1.3.0 (Xue Rengui, 2018-06-03)
 + Report
     + Ambassador : Updated PHP recommendation report with PHP 7.3
     + All : Variables don't sport ... nor & anymore
-+ Analyzer
++ Analysis
     + New analysis : Single Use Variable
     + New analysis : Should Use Operator
     + New analysis : Check JSON production
@@ -1113,7 +1146,7 @@ Version 1.2.9 (Wang Gui, 2018-05-28)
 + Report
     + Ambassador : first 50% of documentation fix : double quotes are not well displayed
     + Ambassador : Results are ordered by files, then by lines
-+ Analyzer
++ Analysis
     + New analysis : Flexible Heredoc syntax
     + New analysis : Non-compatible methods
     + New analysis : Use the Blind Var
@@ -1139,7 +1172,7 @@ Version 1.2.8 (Xu Jingzong, 2018-05-21)
     + Ambassador : fixed naming the audit
     + Ambassador : added 'Dead code' section
     + Doctor : split themes display (default/customs)
-+ Analyzer
++ Analysis
     + New analysis : Report what should be done in SQL
     + New analysis : Typehinted reference
     + New analysis : Strpos doing too much work
@@ -1166,7 +1199,7 @@ Version 1.2.7 (Li Yuanji, 2018-05-14)
     + A lot more documentation, examples, links.
     + Optimized type downloader
     + Added report themes pre-requisites
-+ Analyzer
++ Analysis
     + New analysis : ext/cmark
     + Upgraded analysis : too many children is configurable
     + Upgraded analysis : error_reporting 0 and -1 are not reported as issues.
@@ -1183,7 +1216,7 @@ Version 1.2.6 (Li Jiancheng, 2018-05-07)
     + Upgraded to Robo 1.2.3
 + Report
     + Added support for custom themas for reports.
-+ Analyzer
++ Analysis
     + New analysis : zookeeper
     + New analysis : Report missing parenthesis
     + New analysis : Report invalid interval checks
@@ -1211,7 +1244,7 @@ Version 1.2.5 (Li Yuan, 2018-04-30)
     + Made Exakat reentrant
     + Moved Configuration creation to external file
     + Upgraded status when audit isn't run yet
-+ Analyzer
++ Analysis
     + New analysis : Regex on Collector
     + Upgraded analysis : Only Variable with reference argument
     + Upgraded analysis : File Inclusion Wrong Case
@@ -1226,7 +1259,7 @@ Version 1.2.4 (Li Chunfeng, 2018-04-23)
     + Now fail with explicit message for memory running out
 + Report
     + Ambassador : Updated 'confusing variables' report
-+ Analyzer
++ Analysis
     + Upgraded analysis : Could be short assignment
     + Upgraded analysis : Could be static
     + Upgraded analysis : Fail Substr Comparison (handles constants)
@@ -1243,7 +1276,7 @@ Version 1.2.3 (Yuan Tiangang, 2018-04-16)
 + Report
     + New report : Manual.
     + Ambassador : Rewrote the export of 'confusing variables'
-+ Analyzer
++ Analysis
     + New analysis : report strtr bad usage
     + New analysis : don't unset properties
     + Upgraded analysis : Invalid Regex
@@ -1263,7 +1296,7 @@ Version 1.2.2 (Yin Kaishan, 2018-04-09)
     + Ambassador : new inventory with classes changes in heritage
     + Ambassador : new inventory of large expressions
     + Upgraded report : Defined Exceptions are cleaned of doubles
-+ Analyzer
++ Analysis
     + New analysis : report Redefined Private Properties
     + New analysis : report substr() usage with strlen
     + Upgraded analysis for Inclusion Wrong Case filenames
@@ -1280,7 +1313,7 @@ Version 1.2.1 (Fu Yi, 2018-04-02)
     + Fixed doctor, which wouldn't diagnostic the absence of needed extensions
 + Report
     + More real-life examples in docs
-+ Analyzer
++ Analysis
     + New favorites : property declaration unique or multiples ? 
     + New analysis : $a = +$b;
     + New analysis for Melis : Regex check and Route constraints
@@ -1300,12 +1333,12 @@ Version 1.2.0 (Xiao Yu, 2018-03-26)
     + Added support for Parametrized analysis
     + Better initial configuration with doctor
 + Report
-    + Ambassador : upgraded analyzer settings table
-+ Analyzer
-    + New analyzer : Report Private functions for Wordpress
-    + New analyzer : Suggest simplifying chr(123);
-    + New analyzer : Too many native calls
-    + Updated analyzer : fallthrough are not reported with die
+    + Ambassador : upgraded analysis settings table
++ Analysis
+    + New analysis : Report Private functions for Wordpress
+    + New analysis : Suggest simplifying chr(123);
+    + New analysis : Too many native calls
+    + Updated analysis : fallthrough are not reported with die
     + New Theme : Random
     + Collecting more stats for classes.
     + Checked unit tests : 2758 / 2741 test pass (99% pass). 
@@ -1322,9 +1355,9 @@ Version 1.1.9 (Qin Qiong, 2018-03-19)
     + Upgraded report : Ambassador reports the number of parameters in methods
     + New report : favorites (spin-off from Ambassador)
     + Upgraded report : Inventories also covers Dateformat, Regex, Sql, Url, Email, Unicode Blocks.
-+ Analyzer
-    + New analyzer : too many parameters
-    + New analyzer : report mass creation of arrays
++ Analysis
+    + New analysis : too many parameters
+    + New analysis : report mass creation of arrays
     + Checked unit tests : 2755 / 2738 test pass (99% pass). 
 
 Version 1.1.8 (Yuchi Gong, 2018-03-12)
@@ -1334,7 +1367,7 @@ Version 1.1.8 (Yuchi Gong, 2018-03-12)
 + Report
     + Ambassador : fixed faceted search problems
     + Codacy : added codacy-style report
-+ Analyzer
++ Analysis
     + New analysis : support for IBM db2, leveldb
     + New analysis : should use count's second argument
     + Upgraded analysis : Randomly sorted arrays
@@ -1350,7 +1383,7 @@ Version 1.1.7 (Xu Maogong, 2018-03-05)
     + New format : All, that produces all reports
     + Ambassador : new report estimates fitting PHP version
     + Ambassador : report enable_dl in configuration
-+ Analyzer
++ Analysis
     + New analysis : report dynamic library loading
     + New analysis : suggest array_fill_keys()
     + New analysis : PHP 7.3 optional last argument
@@ -1372,7 +1405,7 @@ Version 1.1.6 (Wei Zheng, 2018-02-26)
     + Restored 'INLINE' results 
     + New reports : Stats
     + Collect PHP native function cool
-+ Analyzer
++ Analysis
     + New analysis : report suggest compact instead of array
     + New analysis : list with references (PHP 7.3+)
     + New analysis : report situation where check is done on non-cast value
@@ -1393,12 +1426,12 @@ Version 1.1.5 (Li Shimin, 2018-02-19)
     + Upgraded BugFixes report to PHP 7.2.2
     + Ambassador : generates a list of confusing variables
     + New report : OWASP
-+ Analyzer
-    + New analyzer : Use Math
-    + New analyzer : Extensions ext/hrtime
-    + New analyzer : Possible Infinite Loops
-    + Upgraded analyzer : addZero, Multiply by one supports new situations
-    + Upgraded analyzer : added microtime, uniqid .. to better rand.
++ Analysis
+    + New analysis : Use Math
+    + New analysis : Extensions ext/hrtime
+    + New analysis : Possible Infinite Loops
+    + Upgraded analysis : addZero, Multiply by one supports new situations
+    + Upgraded analysis : added microtime, uniqid .. to better rand.
     + Checked unit tests : 2719 / 2724 test pass (99% pass). 
 + Tokenizer
     + Fixed check on script compilation that was too strict.
@@ -1413,15 +1446,15 @@ Version 1.1.4 (The Great White Turle, 2018-02-12)
 + Report
     + Ambassador : fixed duration of audit.
     + Composer : provides a full list of depend extensions
-+ Analyzer
-    + New analyzer : Report useless catch
-    + New analyzer : suggest using array_search / array_keys instead of foreach
-    + New analyzer : double array_flip is slow
-    + New analyzer : Suggest using cached values
-    + New analyzer : Functions that fallback to global namespace
-    + Upgraded analyzer : Encoded letters supports leading 0 in unicode codepoint
-    + Upgraded analyzer : Variable strange names now report 3 identical consecutive letters
-    + Upgraded analyzer : Upgraded support to __dir__
++ Analysis
+    + New analysis : Report useless catch
+    + New analysis : suggest using array_search / array_keys instead of foreach
+    + New analysis : double array_flip is slow
+    + New analysis : Suggest using cached values
+    + New analysis : Functions that fallback to global namespace
+    + Upgraded analysis : Encoded letters supports leading 0 in unicode codepoint
+    + Upgraded analysis : Variable strange names now report 3 identical consecutive letters
+    + Upgraded analysis : Upgraded support to __dir__
     + Checked unit tests : 2716 / 2711 test pass (99% pass). 
 + Tokenizer
     + Fixed definitions link for functions
@@ -1429,11 +1462,11 @@ Version 1.1.4 (The Great White Turle, 2018-02-12)
 Version 1.1.3 (The fairy Su'e, 2018-02-05)
 + Report
     + Fixed Ambassador : the favorites weren't displayed. 
-+ Analyzer
-    + New analyzer : Report useless references
-    + New analyzer : Melis configuration : Undefined configuration array
-    + New analyzer : Melis configuration : make string.
-    + Upgraded analyzer : Parent first
++ Analysis
+    + New analysis : Report useless references
+    + New analysis : Melis configuration : Undefined configuration array
+    + New analysis : Melis configuration : make string.
+    + Upgraded analysis : Parent first
     + Checked unit tests : 2700 / 2695 test pass (99% pass). 
 + Tokenizer
     + Better handling of Labels. 
@@ -1442,11 +1475,11 @@ Version 1.1.3 (The fairy Su'e, 2018-02-05)
 Version 1.1.2 (Jade Rabbit Spirit, 2018-01-29)
 + Architecture
     + Upgraded docs to tinkergraph 3.2.7
-+ Analyzer
-    + New analyzer : Report missing included files
-    + New analyzer : ZF3 : No Echo Outside a View.
-    + New analyzer : Local Global variable : report variable that looks global but are not
-    + Upgraded analyzer : Directive names are check with case sensitive analyzer
++ Analysis
+    + New analysis : Report missing included files
+    + New analysis : ZF3 : No Echo Outside a View.
+    + New analysis : Local Global variable : report variable that looks global but are not
+    + Upgraded analysis : Directive names are check with case sensitive analysis
     + Checked unit tests : 2687 / 2693 test pass (99% pass). 
 + Tokenizer
     + Magic Constant hold their actual value
@@ -1457,17 +1490,17 @@ Version 1.1.2 (Jade Rabbit Spirit, 2018-01-29)
 Version 1.1.1 (Wood Xie of Dipper, 2018-01-22)
 + Architecture
     + Fixed path when calling exakat from outside its install folder
-    + First analyzer for Melis Framework
+    + First analysis for Melis Framework
     + Optimized dictionary collection
 + Report
     + Ambassador : upgraded graph for class sizes
-+ Analyzer
-    + New analyzer : report case problems with includes
-    + New analyzer : Melis framework
-    + New analyzer : inventory of view properties for Zend Framework
-    + New analyzer : report view files for Zend Framework
-    + Upgraded analyzer : + is accepted as regex delimiter
-    + Upgraded analyzer : same condition searches inside blocks
++ Analysis
+    + New analysis : report case problems with includes
+    + New analysis : Melis framework
+    + New analysis : inventory of view properties for Zend Framework
+    + New analysis : report view files for Zend Framework
+    + Upgraded analysis : + is accepted as regex delimiter
+    + Upgraded analysis : same condition searches inside blocks
     + Checked unit tests : 2665 / 2671 test pass (99% pass). 
 + Tokenizer
     + Magic constants __DIR__ and __FILE__ get their actual value in noDelimiter
@@ -1490,9 +1523,9 @@ Version 1.0.11 (Wood Dragon of Well, 2018-01-08)
 + Report
     + Ambassador : Added report of classes's size.
     + Fixed missing audit end's time. 
-+ Analyzer
-    + New analyzer : Sqlite3 doesn't escape " 
-    + Upgraded analyzer : Strange names also report qqqq sequences in variable names
++ Analysis
+    + New analysis : Sqlite3 doesn't escape " 
+    + Upgraded analysis : Strange names also report qqqq sequences in variable names
     + Checked unit tests : 2617 / 2657 test pass (99% pass). 
 + Tokenizer
     + Fixed fullnspath handling for constants (case insensitive for the constant name)
@@ -1502,9 +1535,9 @@ Version 1.0.10 (Wood Wolf of Legs, 2018-01-01)
     + Fixed Sqlite3 escaping error : use ', not "
 + Report
     + 
-+ Analyzer
-    + Upgraded analyzer : ? is possible as delimiter
-    + Analyzer works better with nested structures
++ Analysis
+    + Upgraded analysis : ? is possible as delimiter
+    + Analysis works better with nested structures
     + Checked unit tests : 2601 / 2649 test pass (99% pass). 
 + Tokenizer
     + First plugin for Load Task.
@@ -1517,10 +1550,10 @@ Version 1.0.9 (King of Dust Protection, 2017-12-25)
     + Ambassador : list complex expressions.
     + Dump : added function inventory
     + Dump : added begin and end line for structures.
-+ Analyzer
-    + New analyzer : report reference error with Ternary operator
-    + New analyzer : report Undefined classes in Wordpress.
-    + Upgraded analyzer : preg option E, tighter regex.
++ Analysis
+    + New analysis : report reference error with Ternary operator
+    + New analysis : report Undefined classes in Wordpress.
+    + Upgraded analysis : preg option E, tighter regex.
 + Tokenizer
     + Better handling of long path name. TBC.
     + Introduced Parent, Static, Self, Exit, Echo, Print.
@@ -1533,14 +1566,14 @@ Version 1.0.8 (King of Heat Protection, 2017-12-18)
 + Report
     + Ambassador : Regex inventory added
     + Ambassador : Largest expressions reported
-+ Analyzer
-    + New analyzer : report identical operands on both sides of operator
-    + New analyzer : report potentially mistaken concatenation in array
-    + New analyzer : report mistaken scalar typehint
-    + New analyzer : report undefined classes by symfony version
-    + New analyzer : report undefined classes by wordpress version
-    + Upgraded analyzer : Interfaces are also reported from return typehint
-    + Upgraded analyzer : Mistaken concatenation got rid of various false-positives
++ Analysis
+    + New analysis : report identical operands on both sides of operator
+    + New analysis : report potentially mistaken concatenation in array
+    + New analysis : report mistaken scalar typehint
+    + New analysis : report undefined classes by symfony version
+    + New analysis : report undefined classes by wordpress version
+    + Upgraded analysis : Interfaces are also reported from return typehint
+    + Upgraded analysis : Mistaken concatenation got rid of various false-positives
     + Checked unit tests : 2601 / 2633 test pass (99% pass). 
 + Tokenizer
     + Isset, Empty, Phpvariables now have their own atom.
@@ -1551,9 +1584,9 @@ Version 1.0.8 (King of Heat Protection, 2017-12-18)
 Version 1.0.7 (King of Heat Protection, 2017-12-11)
 + Architecture
     + Added /var to default omitted folders
-+ Analyzer
-    + New analyzer : should use array_filter.
-    + New analyzer : ext/igbinary
++ Analysis
+    + New analysis : should use array_filter.
+    + New analysis : ext/igbinary
     + Checked unit tests : 2533 / 2599 test pass (97% pass). 
 + Tokenizer
     + Fixed 
@@ -1562,15 +1595,15 @@ Version 1.0.6 (Fuli, 2017-12-04)
 + Architecture
     + Refactored description
     + Moved PHPsyntax to a function
-+ Analyzer
-    + New analyzer : Never used parameter.
-    + New analyzer : always use named boolean parameters
-    + Upgraded analyzer : unused arguments
++ Analysis
+    + New analysis : Never used parameter.
+    + New analysis : always use named boolean parameters
+    + Upgraded analysis : unused arguments
     + Checked unit tests : 2573 / 2585 test pass (99% pass). 
 + Tokenizer
     + Added new token : This for $this
     + Updated loader to handle PHP 7.3 functioncall syntax (final ,)
-    + Turned Markcallable into an independant analyzer
+    + Turned Markcallable into an independant analysis
 
 Version 1.0.5 (King of Cold Protection, 2017-11-27)
 + Architecture
@@ -1578,18 +1611,18 @@ Version 1.0.5 (King of Cold Protection, 2017-11-27)
     + Documentation now has an external link to extensions. 
 + Report
     + Ambassador : added more inventories : URL SQL, email, GET index, MD5, Mime
-+ Analyzer
-    + New analyzer : parent first
-    + New analyzer : Report uncommon Environnement Vars
-    + New analyzer : Report invalid Regex
-    + New analyzer : Report contatenation in Zend DB
-    + Fixed analyzer : Deprecated Functions
-    + Fixed analyzer : Unknown PCRE2 option 
-    + Upgraded analyzer : hardcoded password
-    + Upgraded analyzer : array_merge in loops 
-    + Upgraded analyzer : substr() first. Handle following expressions
-    + Refactored analyzer : Used Functions
-    + Refactored analyzer : Add Zero
++ Analysis
+    + New analysis : parent first
+    + New analysis : Report uncommon Environnement Vars
+    + New analysis : Report invalid Regex
+    + New analysis : Report contatenation in Zend DB
+    + Fixed analysis : Deprecated Functions
+    + Fixed analysis : Unknown PCRE2 option 
+    + Upgraded analysis : hardcoded password
+    + Upgraded analysis : array_merge in loops 
+    + Upgraded analysis : substr() first. Handle following expressions
+    + Refactored analysis : Used Functions
+    + Refactored analysis : Add Zero
     + Checked unit tests : 2573 / 2585 test pass (99% pass). 
 + Tokenizer
     + Fixed a bug that linked functions and definitions
@@ -1603,28 +1636,28 @@ Version 1.0.4 (Boxiang Demon, 2017-11-20)
     + Added libsodium, Argon2 to Crypto; DL() usage to PHP.
     + Compatibility report only focuses on backward incompatibilities.
     + New recipes will cover 'suggestions for better code'. Coming up. 
-+ Analyzer
-    + New analyzer : " string is better than ' (sorry...)
-    + New analyzer : PHP 7.3's PCRE 2 
-    + New analyzer : report missing 'new' in front of class name.
-    + New analyzer : use is_object instead of is_resource for ext/hash
-    + New analyzer : report non-countable calls
-    + New analyzer : report DL usage in Appinfo
-    + New analyzer : slice first, then map arrays. 
-    + New analyzer : Avoid 5th argument in PHP 7.2 for set_error_handler
-    + New analyzer : avoid null with get_class()
-    + New analyzer : suggest using list() with foreach instead of arrays
-    + New analyzer : avoid using $this as argument in constructor
-    + New analyzer : Report usage of ext/vips
++ Analysis
+    + New analysis : " string is better than ' (sorry...)
+    + New analysis : PHP 7.3's PCRE 2 
+    + New analysis : report missing 'new' in front of class name.
+    + New analysis : use is_object instead of is_resource for ext/hash
+    + New analysis : report non-countable calls
+    + New analysis : report DL usage in Appinfo
+    + New analysis : slice first, then map arrays. 
+    + New analysis : Avoid 5th argument in PHP 7.2 for set_error_handler
+    + New analysis : avoid null with get_class()
+    + New analysis : suggest using list() with foreach instead of arrays
+    + New analysis : avoid using $this as argument in constructor
+    + New analysis : Report usage of ext/vips
     + New inventory : GPC variables
-    + Updated analyzer : Use Class Operator doesn't report methods names anymore
-    + Updated analyzer : Long argument size is raised to 60 chars
-    + Updated analyzer : ignore when missing break is in last case
-    + Updated analyzer : Use This ignores 'self'.
-    + Updated analyzer : Randomly sorted Arrays ignores arrays of 3 or less.
-    + Updated analyzer : ext/mcrypt gets its constants
-    + Updated analyzer : more strange names being used in code
-    + Updated analyzer : more PHP 7.2 removed functions
+    + Updated analysis : Use Class Operator doesn't report methods names anymore
+    + Updated analysis : Long argument size is raised to 60 chars
+    + Updated analysis : ignore when missing break is in last case
+    + Updated analysis : Use This ignores 'self'.
+    + Updated analysis : Randomly sorted Arrays ignores arrays of 3 or less.
+    + Updated analysis : ext/mcrypt gets its constants
+    + Updated analysis : more strange names being used in code
+    + Updated analysis : more PHP 7.2 removed functions
     + Checked unit tests : 2563 / 2572 test pass (99% pass). 
 + Tokenizer
     + Reduced duplicated that may lead to loading error. 
@@ -1639,9 +1672,9 @@ Version 1.0.3 (Baize Demon, 2017-11-13)
     + Upgraded driver gremlin-php to 3.0.2
 + Report
     + Ambassador : Now reports the namespaces as a tree.
-    + New analyzer : report members that are static and not. 
+    + New analysis : report members that are static and not. 
     + Updated analyzis : normal method called statically.
-+ Analyzer
++ Analysis
     + Added support for Drupal, FuelPHP and Phalcon.
 
 Version 1.0.2 (Suanni Demon, 2017-11-06)
@@ -1650,15 +1683,15 @@ Version 1.0.2 (Suanni Demon, 2017-11-06)
     + Updated support for Vagrant 
 + Report
     + Ambassador : Fixed display for 'Callback'
-+ Analyzer
-    + New analyzer : substr() first, then replace.
-    + New analyzer : report double prepare (WP).
-    + New analyzer : avoir the +1 month trap
-    + New analyzer : check for printf() options
-    + New analyzer : check for placeholder in prepare (WP)
-    + New analyzer : avoid direct injection into prepare (WP)
-    + New analyzer : performance recommendation for switch. 
-    + New analyzer : merge if/if into if/then/else
++ Analysis
+    + New analysis : substr() first, then replace.
+    + New analysis : report double prepare (WP).
+    + New analysis : avoir the +1 month trap
+    + New analysis : check for printf() options
+    + New analysis : check for placeholder in prepare (WP)
+    + New analysis : avoid direct injection into prepare (WP)
+    + New analysis : performance recommendation for switch. 
+    + New analysis : merge if/if into if/then/else
     + Checked unit tests : 2500 / 2536 test pass (99% pass). 
 
 Version 1.0.1 (Xueshi Demon, 2017-10-30)
@@ -1669,8 +1702,8 @@ Version 1.0.1 (Xueshi Demon, 2017-10-30)
     + Preparing support for Gremlin 3.3.0
 + Report
     + Added support for PHP 7.1.11 and 7.0.25
-+ Analyzer
-    + New analyzer : could be else (for consecutive opposite if/then)
++ Analysis
+    + New analysis : could be else (for consecutive opposite if/then)
     + Checked unit tests : 2517 / 2527 test pass (99% pass). 
 
 Version 1.0.0 (Roushi Demon, 2017-10-23)
@@ -1683,12 +1716,12 @@ Version 1.0.0 (Roushi Demon, 2017-10-23)
     + Ambassador : fixed link to exception Tree.
     + Inventories : Date format, 
     + Audit names are reported in every Ambassador-style report. 
-+ Analyzer
++ Analysis
     + Upgraded PHP directive list.
     + Functions In For loop : prevent issue if the function uses a loop variable.
     + Useless instruction : do not report return $i++ if $i is reference
     + Useless instruction : Avoir reporting properties when they are magic
-    + New analyzer : mark properties to be magic.
+    + New analysis : mark properties to be magic.
     + Upgraded list of PHP logins, to report hard coded passwords.
     + Upgraded close naming : variables that differ with 1 chars are reported.
     + Added assert(false...) to list of branching syntax.
@@ -1698,11 +1731,11 @@ Version 0.12.16 (Tawny Lion Demon, 2017-10-16)
 + Report
     + Beta version for Drill Instructor
     + Upgraded Inventories report with Sessions, Cookies, Incoming variables
-+ Analyzer
-    + New analyzer : Expression too complex.
-    + New analyzer : Session Handler must implements SessionUpdateTimestampHandlerInterface
-    + New analyzer : is Zero : additions that negate some terms
-    + New analyzer : unconditional loops
++ Analysis
+    + New analysis : Expression too complex.
+    + New analysis : Session Handler must implements SessionUpdateTimestampHandlerInterface
+    + New analysis : is Zero : additions that negate some terms
+    + New analysis : unconditional loops
     + Upgraded Zend Framework review with latest versions (feed, http, eventmanager...)
     + Upgraded 'Strange names' with new typos
     + Upgraded 'Logical to in_array' to handle separated comparisons
@@ -1716,12 +1749,12 @@ Version 0.12.15 (Nine Headed Lion, 2017-10-09)
     + Every audit gets a random name, for easy differentiation
     + Added support for PHP 7.3
 + Report
-    + Ambassador : list of analyzers that report nothing : Good job! 
+    + Ambassador : list of analysiss that report nothing : Good job! 
     + Slim report : fixed build
-+ Analyzer
-    + New analyzer : file upload names vulnerability check
-    + New analyzer : variable that may hold different types of date
-    + New analyzer : always anchor regex
++ Analysis
+    + New analysis : file upload names vulnerability check
+    + New analysis : variable that may hold different types of date
+    + New analysis : always anchor regex
     + Checked unit tests : 2475 / 2480 test pass (99% pass). 
 
 Version 0.12.14 (Grand Saint of Nine Spirits, 2017-10-02)
@@ -1731,9 +1764,9 @@ Version 0.12.14 (Grand Saint of Nine Spirits, 2017-10-02)
 + Report
     + Ambassador : added Security and Performances
     + Ambassador : Upgraded exception presentation
-+ Analyzer
-    + New analyzer : report fallthrough in switch
-    + New analyzer : inventory regex 
++ Analysis
+    + New analysis : report fallthrough in switch
+    + New analysis : inventory regex 
     + Added support for PHP 7.1.10 and 7.0.24
 
 Version 0.12.13 (King of the Southern Hill, 2017-09-25)
@@ -1741,18 +1774,18 @@ Version 0.12.13 (King of the Southern Hill, 2017-09-25)
     + Code cleaning
 + Report
     + Ambassador : changed display of the audit
-+ Analyzer
-    + Refactored several analyzer
++ Analysis
+    + Refactored several analysis
 
 Version 0.12.12 (Ruler of the Kingdom of Miefa, 2017-09-18)
 + Report
     + Ambassador : fixed collect of interfaces and trait names
-+ Analyzer
-    + New analyzer : ext/Parle
-    + New analyzer : help optimize pathinfo() usage
-    + New analyzer : catch array_values() usage with list and pathinfo()
-    + Updated analyzer : Don't show error messages with catch->getMessage();
-    + Updated analyzer : No concat in loop handles $x = $c . $x;
++ Analysis
+    + New analysis : ext/Parle
+    + New analysis : help optimize pathinfo() usage
+    + New analysis : catch array_values() usage with list and pathinfo()
+    + Updated analysis : Don't show error messages with catch->getMessage();
+    + Updated analysis : No concat in loop handles $x = $c . $x;
     + Checked unit tests : 2456 / 2461 test pass (99% pass). 
 + Tokenizer
     + Added support for ', " and > in file names. Still missing support for \
@@ -1765,8 +1798,8 @@ Version 0.12.11 (Half-Guanyin, 2017-09-11)
     + Added support for config in server mode
 + Report
     + Fixed methods dump for interfaces.
-+ Analyzer
-    + Added all analyzer to report could be private/protected for 
++ Analysis
+    + Added all analysis to report could be private/protected for 
 + Tokenizer
     + Fixed handling of '<' char in paths
 
@@ -1776,7 +1809,7 @@ Version 0.12.10 (Golden Nosed Albino Rat Spirit, 2017-09-04)
     + New generated config-cache
 + Report
     + Fixed property names in Visibility report
-+ Analyzer
++ Analysis
     + Arrays/IsModified : arrays are not modified unless in a (unset)
 + Tokenizer
     + Fixed 'constant' for functioncalls
@@ -1789,34 +1822,34 @@ Version 0.12.9 (Lady Earth Flow, 2017-08-28)
     + Creates config.cache, with cached calculated configs. Remove to update.
 + Report
     + GraphQL : Upgraded GraphQL report, with relationships.
-+ Analyzer
-    + New analyzer : suggest moving for() to foreach()
-    + New analyzer : shell_exec/exec/`backtick` favorite
-    + Update analyzer : Abstract Static is for PHP 7.0-
++ Analysis
+    + New analysis : suggest moving for() to foreach()
+    + New analysis : shell_exec/exec/`backtick` favorite
+    + Update analysis : Abstract Static is for PHP 7.0-
 + Tokenizer
     + Removed Arguments and ARGUMENTS. 
     + Finished 'factory' from Config.
     + Better handling of long path names.
 
 Version 0.12.8 (ruler of the Kingdom of Biqiu, 2017-08-21)
-+ Analyzer
-    + New analyzer : use foreach, not for()
-    + New analyzer : ext/fam, ext/rdkafka
++ Analysis
+    + New analysis : use foreach, not for()
+    + New analysis : ext/fam, ext/rdkafka
 + Tokenizer
     + Fixed edge case where pathnames are too long on OSX.
 
 Version 0.12.7 (Old Man of the South Pole, 2017-08-14)
 + Architecture
     + Fixed project_vcs when none is used.
-+ Analyzer
++ Analysis
     + Better documentation for in_array replacements and array_unique()
     + Added support for PHP 7.1.8 and 7.0.22
 
 Version 0.12.6 (White Faced Vixen Spirit, 2017-08-07)
-+ Analyzer
-    + New analyzer : no negative for strings before 7.1
-    + New analyzer : use in_array instead of ||
-    + Updated analyzer : preg_quote has no delimiter
++ Analysis
+    + New analysis : no negative for strings before 7.1
+    + New analysis : use in_array instead of ||
+    + Updated analysis : preg_quote has no delimiter
 + Tokenizer
     + Fixed bug in handling real value for negative numbers
 
@@ -1825,10 +1858,10 @@ Version 0.12.5 (White Deer Spirit, 2017-07-31)
     + Removed config singleton
 + Report
     + New report : simpletables (HTML)
-+ Analyzer
-    + New analyzer : report optional parameters
-    + New analyzer : report concat inside a loop
-    + Updated analyzer : Could Be Class Constant, when no visibility is provided.
++ Analysis
+    + New analysis : report optional parameters
+    + New analysis : report concat inside a loop
+    + Updated analysis : Could Be Class Constant, when no visibility is provided.
 
 Version 0.12.4 (peacock Mahamayuri, 2017-07-24)
 + Architecture
@@ -1836,14 +1869,14 @@ Version 0.12.4 (peacock Mahamayuri, 2017-07-24)
     + Support Neo4j as a driver for Tinkgerpop
 + Report
     + Now covering all PHP 7.2 features
-+ Analyzer
-    + New analyzer : Extension xattr
-    + New analyzer : report 'object' as a class name
-    + New analyzer : No Array for magic property
-    + New analyzer : suggest reducing code for isset
++ Analysis
+    + New analysis : Extension xattr
+    + New analysis : report 'object' as a class name
+    + New analysis : No Array for magic property
+    + New analysis : suggest reducing code for isset
     + New favorite : and / &&
-    + Updated analyzer : fetch correct delimiter, even if escaped.
-    + Extended coverage for several analyzers
+    + Updated analysis : fetch correct delimiter, even if escaped.
+    + Extended coverage for several analysiss
     + Removed several nested-subqueries (bad for performances)
 + Tokenizer
     + Tinkergraph/Neo4j : reworked loading data from disk.
@@ -1854,11 +1887,11 @@ Version 0.12.3 (Golden Winged Great Peng, 2017-07-17)
     + Prepared options for several back servers : Tinkergraph, Gremlin-Server/Neo4j, Janusgraph
 + Report
     + New report : Marmelab (GraphQL server)
-+ Analyzer
-    + New analyzer : Report when a property is used as object or scalar
-    + New analyzer : Mismatched Typehint 
-    + New analyzer : Mismatched Default values 
-    + Upgraded analyzer : 
++ Analysis
+    + New analysis : Report when a property is used as object or scalar
+    + New analysis : Mismatched Typehint 
+    + New analysis : Mismatched Default values 
+    + Upgraded analysis : 
     + Fixed a gremlin bug in noAtomInside
 + Tokenizer
     + Added support for trailing comma in group use (PHP 7.2)
@@ -1871,11 +1904,11 @@ Version 0.12.2 (Samantabhadra, 2017-07-10)
     + Ambassador : reports callback/closures, all 3 declares (ticks, encoding, strict_types)
     + Ambassador : reports strict_types as favorite
     + PlantUML : upgraded report
-+ Analyzer
-    + New analyzer : Mismatched ternary branches
-    + New analyzer : mkdir, by default, uses 777. 
-    + New analyzer : ext/lapack
-    + Upgraded analyzer : option E for preg_match, refined results
++ Analysis
+    + New analysis : Mismatched ternary branches
+    + New analysis : mkdir, by default, uses 777. 
+    + New analysis : ext/lapack
+    + Upgraded analysis : option E for preg_match, refined results
     + Checked unit tests : 2337 / 2366 test pass (99% pass). 
 + Tokenizer
     + Added support for Instanceof and GROUPUSE with Nsname
@@ -1886,10 +1919,10 @@ Version 0.12.1 (Yellow Toothed Elephant, 2017-07-03)
 + Report
     + New report : PlantUML
     + Ambassador : Appinfo now reports how popular is a feature
-+ Analyzer
-    + New analyzer : Const / Define() favorite for constants
-    + New analyzer : do not return in finally
-    + Upgraded analyzer : Add Zero was refactored
++ Analysis
+    + New analysis : Const / Define() favorite for constants
+    + New analysis : do not return in finally
+    + Upgraded analysis : Add Zero was refactored
 + Tokenizer
     + Prepared list of tokens and relations
 
@@ -1899,12 +1932,12 @@ Version 0.12.0 (Manjusri, 2017-06-26)
     + Refactored dump's data collection for speed.bb
 + Report
     + Added support for Wordpress and Joomla as Frameworks
-+ Analyzer
-    + New analyzer : Avoid Optional properties
-    + New analyzer : Multiple declarations of functions
-    + New analyzer : Non breakable spaces in names
-    + New analyzer : Favorite Heredoc delimiter
-    + New analyzer : ext/swoole
++ Analysis
+    + New analysis : Avoid Optional properties
+    + New analysis : Multiple declarations of functions
+    + New analysis : Non breakable spaces in names
+    + New analysis : Favorite Heredoc delimiter
+    + New analysis : ext/swoole
 + Tokenizer
     + Modified several nodes/links names, for compatibility purposes
 
@@ -1914,13 +1947,13 @@ Version 0.11.8 (Xiaozuanfeng, 2017-06-19)
 + Report
     + Ambassador : reports Strings encoding and Unicode-block (when available)
     + Ambassador : reports framework founds (first 6, more as we go).
-    + Ambassador : reports how frequently an analyzer yield results to compare with current situation
-+ Analyzer
-    + New analyzer : Classes where declaration order differs from : use, const, properties and methods.
-    + New analyzer : Could use interface (but implements is missing)
-    + New analyzer : Cant Inherit Abstract Method (PHP 7.2 upgrade)
-    + New analyzer : use session_start() options
-    + Updated analyzer : Dynamica method calls cover {} too
+    + Ambassador : reports how frequently an analysis yield results to compare with current situation
++ Analysis
+    + New analysis : Classes where declaration order differs from : use, const, properties and methods.
+    + New analysis : Could use interface (but implements is missing)
+    + New analysis : Cant Inherit Abstract Method (PHP 7.2 upgrade)
+    + New analysis : use session_start() options
+    + Updated analysis : Dynamica method calls cover {} too
     + Checked unit tests : 2305 / 2305 test pass (100% pass). 
 + Tokenizer
     + Checked code on early PHP 7.2 version
@@ -1929,10 +1962,10 @@ Version 0.11.7 (Long Armed Ape Monkey, 2017-06-12)
 + Report
     + Ambassador : report detected patterns (2 firsts)
     + None report : for when dump is sufficient
-+ Analyzer
-    + New analyzer : could factor functioncalls
-    + New analyzers : PSR-* usage
-    + New analyzers : support for Judy and Gender extensions
++ Analysis
+    + New analysis : could factor functioncalls
+    + New analysiss : PSR-* usage
+    + New analysiss : support for Judy and Gender extensions
     + Added thema for Compatibility PHP 7.3
     + Added thema for Dependency Injection 
 + Tokenizer
@@ -1945,23 +1978,23 @@ Version 0.11.6 (Red Bottomed Horse Monkey, 2017-06-05)
 + Report
     + Ambassador : reports usage of PSR 3,6,7,11,13,16.
     + UML : report now protects file names
-+ Analyzer
-    + New analyzer : Ext stats
-    + New analyzer : report mixed concatenation / interpolation strings
-    + Updated analyzer : htmlentities actually uses combinaison, not alternatives, 
-    + Updated analyzer : Close Tag consistency ignores __HALT_COMPILER files
++ Analysis
+    + New analysis : Ext stats
+    + New analysis : report mixed concatenation / interpolation strings
+    + Updated analysis : htmlentities actually uses combinaison, not alternatives, 
+    + Updated analysis : Close Tag consistency ignores __HALT_COMPILER files
 
 Version 0.11.5 (Intelligent Stone Monkey, 2017-05-30)
 + Report
     + Ambassador : fixed visibility suggestion
     + New report : Dependency wheel
-+ Analyzer
-    + New analyzer : avoid typehinting with classes
-    + New analyzer : implemented methods must be public
-    + New analyzer : no reference on left of assignement
-    + New analyzer : Could typehint with instanceof
-    + Updated analyzer : Useless parenthesis cover clone, yield, yield from.
-    + Updated analyzer : Make One Call also reports nested calls
++ Analysis
+    + New analysis : avoid typehinting with classes
+    + New analysis : implemented methods must be public
+    + New analysis : no reference on left of assignement
+    + New analysis : Could typehint with instanceof
+    + Updated analysis : Useless parenthesis cover clone, yield, yield from.
+    + Updated analysis : Make One Call also reports nested calls
 + Tokenizer
     + Split functions and closures, 
     + Split classes and anonymous classes
@@ -1976,9 +2009,9 @@ Version 0.11.4 (Six Eared Macaque, 2017-05-22)
     + Ambassador : report usage of Debug functions, browscap
     + Ambassador : omits 0 in donuts
     + Ambassador : faceted search for compatiblity
-+ Analyzer
-    + New analyzer : report functions whose return is not used
-    + New analyzer : only variable can be passed by reference
++ Analysis
+    + New analysis : report functions whose return is not used
+    + New analysis : only variable can be passed by reference
     + Added limits to all in-depth searches
     + Checked unit tests : 2216 / 2216 test pass (100% pass). 
 + Tokenizer
@@ -1987,16 +2020,16 @@ Version 0.11.4 (Six Eared Macaque, 2017-05-22)
 
 Version 0.11.3 (Sun Deity of Mao, 2017-05-15)
 + Architecture
-    + Speed up batch processing for lists of analyzers
+    + Speed up batch processing for lists of analysiss
     + Split data collection from the initial dump.
 + Report
     + Ambassador : Upgraded presentation of issues, and internals links.
-+ Analyzer
-    + New analyzer : Sphinx extension
-    + New analyzer : GRPC extension
-    + New analyzer : reports arrays that are randomly sorted.
-    + New analyzer : report multiple catch clauses
-    + Updated analyzer : direct injections include all SERVER_* values
++ Analysis
+    + New analysis : Sphinx extension
+    + New analysis : GRPC extension
+    + New analysis : reports arrays that are randomly sorted.
+    + New analysis : report multiple catch clauses
+    + Updated analysis : direct injections include all SERVER_* values
     + Upgrade for PHP 7.1.15 and 7.0.19
 + Tokenizer
     + Split Functioncall into Functioncall, MethocallCall and Newcall. 
@@ -2005,9 +2038,9 @@ Version 0.11.3 (Sun Deity of Mao, 2017-05-15)
 Version 0.11.2 (Scorpion Demon, 2017-05-08)
 + Architecture
     + Code cleaning, and more stability
-+ Analyzer
-    + New analyzer : Report preference between != and <>
-    + New analyzer : report empty regex and wrong delimiters
++ Analysis
+    + New analysis : Report preference between != and <>
+    + New analysis : report empty regex and wrong delimiters
     + Added protection for $ in RegexDelimiters 
 
 Version 0.11.1 (Ruler of Women's Country, 2017-05-01)
@@ -2016,10 +2049,10 @@ Version 0.11.1 (Ruler of Women's Country, 2017-05-01)
     + Handles static in anonymous classes correctly
 + Report
     + Reports handle traits like class.
-+ Analyzer
-    + New analyzer : ends arrays with , or not (favorite)
-    + New analyzer : suspicious comparison 
-    + New analyzer : strange spaces in strings
++ Analysis
+    + New analysis : ends arrays with , or not (favorite)
+    + New analysis : suspicious comparison 
+    + New analysis : strange spaces in strings
 + Tokenizer
     + Arrays are now Arrayliteral, split from Functioncall
 
@@ -2029,12 +2062,12 @@ Version 0.11.0 (Immortal Ruyi, 2017-04-24)
     + made Gremlin cache compatible with 32bits platforms
 + Report
     + Ambassador : first work on upgrading visibilities for properties.
-+ Analyzer
-    + New analyzer : could use str_repeat()
-    + New analyzer : Crc32() Might Be Negative
-    + Update analyzer : Queries in loop reports cubrid and sqlsrv, prepared statements.
-    + Update analyzer : type mismatch for indices works on constants too.
-    + Update analyzer : Loop calling covers less ground
++ Analysis
+    + New analysis : could use str_repeat()
+    + New analysis : Crc32() Might Be Negative
+    + Update analysis : Queries in loop reports cubrid and sqlsrv, prepared statements.
+    + Update analysis : type mismatch for indices works on constants too.
+    + Update analysis : Loop calling covers less ground
 + Tokenizer
     + Split function and method entities for differentiated processing
 
@@ -2050,19 +2083,19 @@ Version 0.10.9 (Single Horned Rhinoceros King, 2017-04-17)
     + Zend Framework : 8 new components supported
     + Zend Framework : now supports zendframework/zendframework too
     + Zend Framework : report unused components 
-+ Analyzer
-    + New analyzer : report nested Use expressions
-    + New analyzer : report repeated regex (to be federated)
-    + New analyzer : report code that output directly to std
-    + Updated analyzer : Should use this now omits overwritten methods
-    + New analyzer : report overwritten methods
-    + Upgraded analyzer : 2123 / 2123 test pass (100% pass)
++ Analysis
+    + New analysis : report nested Use expressions
+    + New analysis : report repeated regex (to be federated)
+    + New analysis : report code that output directly to std
+    + Updated analysis : Should use this now omits overwritten methods
+    + New analysis : report overwritten methods
+    + Upgraded analysis : 2123 / 2123 test pass (100% pass)
 
 Version 0.10.8 (King of Spiritual Touch, 2017-04-10)
 + Report
     + Slim report : list of routes used. 
-+ Analyzer
-    + New analyzer : report Group Use Declaration (PHP 7.0+)
++ Analysis
+    + New analysis : report Group Use Declaration (PHP 7.0+)
     + Zend Framework : 30 components are now covered. 
     + Slim : No echo in route callable and Inventory of routes.
     + PHP : list of new PHP 7.2 functions.
@@ -2075,7 +2108,7 @@ Version 0.10.7 (Immortal of Antelope Power, 2017-04-03)
     + Ambassador : fixed composer report.
     + Added report for Composer (beta phase)
     + Added report for Slim framework.
-+ Analyzer
++ Analysis
     + Added support for Slim versions.
     + Added 10 new components for Zend Framework 3
 + Tokenizer
@@ -2083,22 +2116,22 @@ Version 0.10.7 (Immortal of Antelope Power, 2017-04-03)
 
 Version 0.10.6 (Immortal of Elk Power, 2017-03-27)
 + Architecture
-    + Major speed up of loading and analyzer
+    + Major speed up of loading and analysis
     + Fixed themes configuration.
 + Report
     + Ambassador : report cookies usage, infinite and NAN usage
     + Zend Framework : Report incompatibilites component/version for ZF3
-+ Analyzer
-    + Upgraded analyzer : 1941 / 1941 test pass (100.00% pass)
-    + New analyzer : Zend Framework 3 Deprecated 
-    + New analyzer : Zend cache, view, db.
-    + New analyzer : Report missing type tests.
-    + New analyzer : suggest setcookie() with safe arguments
-    + New analyzer : Do not cast to Int
-    + New analyzer : CakePHP classes compatibilities from 2.5 to 3.3
-    + Upgraded analyzer : instanceof doesn't report traits anymore
-    + Upgraded analyzer : mb_ereg has options in the 4th arguments
-    + Upgraded analyzer : more strange names 
++ Analysis
+    + Upgraded analysis : 1941 / 1941 test pass (100.00% pass)
+    + New analysis : Zend Framework 3 Deprecated 
+    + New analysis : Zend cache, view, db.
+    + New analysis : Report missing type tests.
+    + New analysis : suggest setcookie() with safe arguments
+    + New analysis : Do not cast to Int
+    + New analysis : CakePHP classes compatibilities from 2.5 to 3.3
+    + Upgraded analysis : instanceof doesn't report traits anymore
+    + Upgraded analysis : mb_ereg has options in the 4th arguments
+    + Upgraded analysis : more strange names 
 + Tokenizer
     + Reviewed most of the load processing.
     + Reduced the number of 'fullnspath' properties.
@@ -2113,18 +2146,18 @@ Version 0.10.5 (Immortal of Tiger Power, 2017-03-13)
     + Ported the Zend Framework report to ambassador
     + Added regex delimiter in favorites.
     + Ambassador : syntax coloring 
-+ Analyzer
-    + New analyzer : could be typehinted 'callable'
-    + New analyzer : encoded letters in strings for security
-    + New analyzer : report arguments that may be callable
-    + New analyzer : report strangely named variables
-    + New analyzer : report strangely named constants
-    + New analyzer : too many FindsBy*() methods
-    + Updated analyzer : Useless Instructions doesn't report array_merge(_recursive) with one argument
-    + Updated analyzer : array_replace handles ... 
-    + Updated analyzer : 7.2 deprecation with assert()
++ Analysis
+    + New analysis : could be typehinted 'callable'
+    + New analysis : encoded letters in strings for security
+    + New analysis : report arguments that may be callable
+    + New analysis : report strangely named variables
+    + New analysis : report strangely named constants
+    + New analysis : too many FindsBy*() methods
+    + Updated analysis : Useless Instructions doesn't report array_merge(_recursive) with one argument
+    + Updated analysis : array_replace handles ... 
+    + Updated analysis : 7.2 deprecation with assert()
     + Generalized usage of commons for CIT
-    + Added first 4 set of analyzer for Zend Framework 3
+    + Added first 4 set of analysis for Zend Framework 3
     + Added support for dynamic new $a[i];
 + Tokenizer
     + Fixed fullnspath with new on functioncall
@@ -2138,12 +2171,12 @@ Version 0.10.4 (Dragon King of the West Sea, 2017-03-06)
 + Report
     + Ambassador : protection of HTML values
     + PHPcompilation : fixed export to stdout
-+ Analyzer
-    + New analyzer : report useless else branches
-    + New analyzer : should regenerate session Id, for PHP and Zend Framework
++ Analysis
+    + New analysis : report useless else branches
+    + New analysis : should regenerate session Id, for PHP and Zend Framework
     + Added support for Extension Data structures (ext/ds)
-    + Upgraded analyzer : Hardcoded Hash
-    + Speed up analyzer for extensions
+    + Upgraded analysis : Hardcoded Hash
+    + Speed up analysis for extensions
 + Tokenizer
     + Fixed edge case where a constant was used inside a ternary operator
     + Fixed processing of labels
@@ -2153,20 +2186,20 @@ Version 0.10.3 (Dragon King of the Jing River, 2017-02-27)
     + Added URL glossary to Manual.
     + Extended CS ruleset
     + Use exakat/exakat as user/login for git. 
-    + New helper to rename analyzers
-    + Project command now accept -P/-T to run one analyzer/Thema directly
+    + New helper to rename analysiss
+    + Project command now accept -P/-T to run one analysis/Thema directly
 + Report
     + New report style : Codesniffer
-+ Analyzer
-    + New analyzer : suggest usage for array_column()
-    + New analyzer : __DIR__ must be concatenated with a string starting with '/'
-    + New analyzer : report usage of parent, self and static outside a class/trait
-    + New analyzer : report properties used only in one method
-    + New analyzer : report properties used only once at all
-    + New analyzer : multiple aliases per class
-    + Updated analyzer : Fopen() mode support 'e' option (7.1.2 + )
-    + Updated analyzer : Make One Call covers str_replace, substr_replace, preg_replace*
-    + Updated analyzer : Unused arguments : now ignores arguments from interface or parent
++ Analysis
+    + New analysis : suggest usage for array_column()
+    + New analysis : __DIR__ must be concatenated with a string starting with '/'
+    + New analysis : report usage of parent, self and static outside a class/trait
+    + New analysis : report properties used only in one method
+    + New analysis : report properties used only once at all
+    + New analysis : multiple aliases per class
+    + Updated analysis : Fopen() mode support 'e' option (7.1.2 + )
+    + Updated analysis : Make One Call covers str_replace, substr_replace, preg_replace*
+    + Updated analysis : Unused arguments : now ignores arguments from interface or parent
 + Tokenizer
     + Removed double DEFINITION link. Faster loading, less processing.
     + Fixed an edge case when function name is boolean or null.
@@ -2179,13 +2212,13 @@ Version 0.10.2 (Water Lizard Dragon, 2017-02-20)
 + Report
     + Text format now understand -T, -P to extract only some of the results.
     + Fixed dump of extends. 
-+ Analyzer
++ Analysis
     + Added support for PHP 7.1.2 and PHP 7.0.16
-    + New analyzer : report forgotten 'throw' keyword.
-    + New analyzer : report class / function confusing name
+    + New analysis : report forgotten 'throw' keyword.
+    + New analysis : report class / function confusing name
     + Added support for libsodium
     + Upgraded PHP Relaxed Keyword : Ignore properties.
-    + Upgraded analyzer : 1824 / 1826 test pass (99.9% pass)
+    + Upgraded analysis : 1824 / 1826 test pass (99.9% pass)
 + Tokenizer
     + Fixed a bug that mistakes native PHP classes for functions
     + Fixed rare situation with grouped const/function.
@@ -2203,13 +2236,13 @@ Version 0.10.1 (King of Wuji Kingdom, 2017-02-13)
 + Report
     + Added 'Inventories' report : reports all names and literals
     + Ambassador : Added list of included files, Yield From and classes stats
-+ Analyzer
-    + New Analyzer : Strange Names For Methods (Classes/StrangeName)
-    + New Analyzer : SQL queries (Type/Sql)
-    + New Analyzer : Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals)
-    + Upgraded analyzer : Should be single quote, escape sequences refined.
-    + Upgraded analyzer : Should Preprocess now support determinist PHP functions
-    + Upgraded analyzer : 1817 / 1824 test pass (99.6% pass)
++ Analysis
+    + New Analysis : Strange Names For Methods (Classes/StrangeName)
+    + New Analysis : SQL queries (Type/Sql)
+    + New Analysis : Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals)
+    + Upgraded analysis : Should be single quote, escape sequences refined.
+    + Upgraded analysis : Should Preprocess now support determinist PHP functions
+    + Upgraded analysis : 1817 / 1824 test pass (99.6% pass)
 + Tokenizer
     + Fixed LOC counting.
     + Fixed edge case when closure is directly use as argument
@@ -2225,13 +2258,13 @@ Version 0.10.0 (Azure Lion, 2017-02-06)
     + Doctor reports project configuration if -p is used
 + Report
     + 
-+ Analyzer
-    + New Analyzer : No Boolean As Default 
-    + New Analyzer : Raised Access Level 
-    + New Analyzer : Recommend Wpdb->prepare when variables are in query
++ Analysis
+    + New Analysis : No Boolean As Default 
+    + New Analysis : Raised Access Level 
+    + New Analysis : Recommend Wpdb->prepare when variables are in query
     + Directive suggestion now include error_log
-    + Upgraded analyzer : UselessParenthesis also checks Typehint
-    + Upgraded analyzer : 1804 / 1811 test pass (99.6% pass)
+    + Upgraded analysis : UselessParenthesis also checks Typehint
+    + Upgraded analysis : 1804 / 1811 test pass (99.6% pass)
 + Tokenizer
     + Reinforced detection of parsable PHP script
     + Fixed Files command : it now cleans data before running
@@ -2244,12 +2277,12 @@ Version 0.9.9 (Pilanpo Bodhisattva, 2017/01/30)
 + Report
     + Ambassador : Added 'Compilation' and Version compatibility reports.
     + Prepared collection of dependencies in dump
-+ Analyzer
++ Analysis
     + New Thema : Compatibility PHP 7.2
-    + New analyzer : Deprecated Features of PHP 7.2
-    + New analyzer : Removed Function for PHP 7.2
+    + New analysis : Deprecated Features of PHP 7.2
+    + New analysis : Removed Function for PHP 7.2
     + New preference : New Line Style
-    + Upgraded analyzer : 1781 / 1802 test pass (98.9% pass)
+    + Upgraded analysis : 1781 / 1802 test pass (98.9% pass)
 
 Version 0.9.8 (Multiple Eyed Creature, 2017-01-23)
 + Architecture
@@ -2259,10 +2292,10 @@ Version 0.9.8 (Multiple Eyed Creature, 2017-01-23)
 + Report
     + Added checks on merged table at Dump stage
     + Added support for PHP 7.1.1 and 7.0.15
-+ Analyzer
-    + New analyzer : variables assigned twice or more
++ Analysis
+    + New analysis : variables assigned twice or more
     + New preference : new x() / new x;
-    + Upgraded analyzer : 1785 / 1794 test pass (99.5% pass)
+    + Upgraded analysis : 1785 / 1794 test pass (99.5% pass)
     + Fixed Interface usage : missing interfaces extends interfaces
     + Added extra check for Functioncalls
 + Tokenizer
@@ -2271,23 +2304,23 @@ Version 0.9.8 (Multiple Eyed Creature, 2017-01-23)
 Version 0.9.7 (Hundred Eyed Demon Lord, 2017-01-16)
 + Architecture
     + Fixed constant names for tokens in Load
-    + Changed duplication check to dedup(). Cleaned analyzer for duplicates.
+    + Changed duplication check to dedup(). Cleaned analysis for duplicates.
     + Speed but for large projects. Work in Progress. 
     + Reduced usage of static properties
     + Better detection of PHP scripts during project
 + Report
     + Fixed generation of inventories when no target is provided
-+ Analyzer
-    + New analyzer : Could Be Protected Property (not a public)
-    + New analyzer : avoid large literal arrays in local variables. 
-    + New analyzer : report long arguments. 
-    + Removed analyzer : Structures/EchoArguments (double with Echo With Concat)
++ Analysis
+    + New analysis : Could Be Protected Property (not a public)
+    + New analysis : avoid large literal arrays in local variables. 
+    + New analysis : report long arguments. 
+    + Removed analysis : Structures/EchoArguments (double with Echo With Concat)
 + Tokenizer
     + Fixed list of constants for PHP 7.1
 
 Version 0.9.6 (Spider Demons, 2017-01-09)
 + Architecture
-    + Added support for report/analyzer theme list in config (exakat and project)
+    + Added support for report/analysis theme list in config (exakat and project)
     + Better cleaning of projects
     + Doctor : Initialisation with themes/reports; Reports executable being used.
     + Added a log for gremlin Queries
@@ -2295,13 +2328,13 @@ Version 0.9.6 (Spider Demons, 2017-01-09)
     + Added 'catalog' command
 + Report
     + Split Phpconfiguration into eponymous and Phpcompilation
-+ Analyzer
-    + New analyzer : avoid Glob, use scandir without sorting.
-    + New analyzer : always configure ext/sqlite3 FetchRow()
-    + New analyzer : no string with append
-    + Removed analyzer : Structures/ForeachSourcesNotVariable
-    + Upgraded Analyzer 'Should Import Functions'
-    + Upgraded analyzer : 1764 / 1773 test pass (99.5% pass). 
++ Analysis
+    + New analysis : avoid Glob, use scandir without sorting.
+    + New analysis : always configure ext/sqlite3 FetchRow()
+    + New analysis : no string with append
+    + Removed analysis : Structures/ForeachSourcesNotVariable
+    + Upgraded Analysis 'Should Import Functions'
+    + Upgraded analysis : 1764 / 1773 test pass (99.5% pass). 
 + Tokenizer
     + Added 'aliased' property to nodes.
 
@@ -2309,15 +2342,15 @@ Version 0.9.5 (Immortal Ziyang, 2017-01-04)
 + Architecture
     + Better check of PHP version 
 + Report
-    + Ambassador : report analyzer settings
+    + Ambassador : report analysis settings
     + PHP Compilations : supports all extensions
     + New report : Inventories
-+ Analyzer
-    + New analyzer : Don't Use Fallback to Global space
-    + New analyzer : MongoDB (ext/mongo version 3)
-    + New analyzer : zbarcode 
++ Analysis
+    + New analysis : Don't Use Fallback to Global space
+    + New analysis : MongoDB (ext/mongo version 3)
+    + New analysis : zbarcode 
     + Bug : Fixed intval for octals in Arrays/MultipleIdenticalKeys
-    + Removed analyzer : Php/InconsistantClosingTag (double)
+    + Removed analysis : Php/InconsistantClosingTag (double)
 + Tokenizer
     + Ranking arguments, not functioncall
 
@@ -2331,14 +2364,14 @@ Version 0.9.4 (Lady of Jinsheng Palace, 2016-12-19)
 + Report
     + Ambassador : extension usage, inventories, global lists, stats, PHP Compilation directives
     + Covers more compilation directives (Not finished)
-+ Analyzer
-    + New analyzer : Final by Ocramius
++ Analysis
+    + New analysis : Final by Ocramius
     + Upgraded : Comparison with == : added curl_exec
     + Upgraded : isset with constant (mistake on properties as arrays)
     + Upgraded : Avoid using now uses full NS path
     + Upgraded : Useless instructions handles for() correctly
     + Upgraded : Recursive, IsGenerator and Loop Calling includes yield from
-    + Upgraded analyzer : 1741 / 1750 test pass (99.5% pass). 
+    + Upgraded analysis : 1741 / 1750 test pass (99.5% pass). 
 
 Version 0.9.3 (Purple-Gold Bells, 2016-12-12)
 + Architecture
@@ -2349,11 +2382,11 @@ Version 0.9.3 (Purple-Gold Bells, 2016-12-12)
 + Report
     + Added directives, bugfixes, external services and 
     + Added support for PHP 7.0.14 and 5.6.29
-+ Analyzer
-    + New analyzer : Wordpress, recommend prepare()
++ Analysis
+    + New analysis : Wordpress, recommend prepare()
     + More favorite reports : final ?> and unset()/(unset)
-    + Reduced number of double reports for many analyzer
-    + Update : Fixed analyzer with $THIS
+    + Reduced number of double reports for many analysis
+    + Update : Fixed analysis with $THIS
     + Upgrade : report useless casting of comparisons
     + Update : Should use this takes into account parent::
 
@@ -2361,53 +2394,53 @@ Version 0.9.2 (Golden Haired Hou, 2016-12-05)
 + Architecture
     + First version of Exakat for docker (beta)
     + Added a waiting loop in cleandb
-    + Docs include a list of new analyzers per version
+    + Docs include a list of new analysiss per version
 + Report
     + Added 2 first inventories, Appinfo() in Ambassador
     + Favorites now reports global/$GLOBALS
     + Restore composer.lock report
     + Upgraded uselessReturn for the final return. 
-+ Analyzer
-    + New analyzers for Newt, Nsapi, 
-    + New analyzer : __ in methods names
-    + New analyzer : Too many local variables
-    + New analyzer : Avoid array_push()
++ Analysis
+    + New analysiss for Newt, Nsapi, 
+    + New analysis : __ in methods names
+    + New analysis : Too many local variables
+    + New analysis : Avoid array_push()
     + Upgraded ext/apache coverage
 Version 0.9.1 (Sai Tai Sui, 2016-11-28)
 + Architecture
     + Docker supported in exakat/config.ini for PHP binaries. 
-    + Added exakatSince in analyzers documentation
+    + Added exakatSince in analysiss documentation
     + Added some missing tokens in anonymize command
 + Report
-    + Added several new analyzers for PHP 7.1
-+ Analyzer
-    + new analyzer : find methods that could return Void
-    + new analyzer : find malformed octal sequence in strings
-    + new analyzer : spot rethrown exception
-    + new analyzer : reach the last element
-    + new analyzers : find undefined Zend Framework classes (2.0 to 3.0)
-    + Upgraded analyzer : 1706 / 1714 test pass (99.5% pass). 
+    + Added several new analysiss for PHP 7.1
++ Analysis
+    + new analysis : find methods that could return Void
+    + new analysis : find malformed octal sequence in strings
+    + new analysis : spot rethrown exception
+    + new analysis : reach the last element
+    + new analysiss : find undefined Zend Framework classes (2.0 to 3.0)
+    + Upgraded analysis : 1706 / 1714 test pass (99.5% pass). 
 + Tokenizer
     + Fixed handling references (some were missing)
     + Fixed handling of ellipsis (some were missing)
 
 Version 0.9.0 (Python Demon, 2016-11-21)
 + Architecture
-    + Project now include 'Preference' analyzer
+    + Project now include 'Preference' analysis
     + Dump is now incremental (-u option), and doesn't need to be run in paralell
-    + Added new hashAnalyzer table, to handle generic results from analyzers.
+    + Added new hashAnalysis table, to handle generic results from analysiss.
     + Added project name in the graph.
     + New command 'status' to report the current status of exakat
 + Report
     + Ambassador includes 'Preferences' section and new menu system
     + Upgraded progressbar to display project processing
-+ Analyzer
-    + New analyzer : Early Bail Out (with if/then)
-    + New analyzer : PHP 7.1 backward incompatibilities with microseconds
-    + New analyzer : Wordpress : recommend using WP api, not PHP.
++ Analysis
+    + New analysis : Early Bail Out (with if/then)
+    + New analysis : PHP 7.1 backward incompatibilities with microseconds
+    + New analysis : Wordpress : recommend using WP api, not PHP.
     + Upgraded 'Constant condition' to include do..while()
     + Upgraded 'Useless Abstract' to include methodless classes
-    + Upgraded analyzer : 1687 / 1697 test pass (99% pass). 
+    + Upgraded analysis : 1687 / 1697 test pass (99% pass). 
 + Tokenizer
     + Added 'Array' to list of determinist functions (more constants are spotted)
     + Fixed 'Name' for Array Short Syntax.
@@ -2425,15 +2458,15 @@ Version 0.8.9 (Yellow Brows Great King, 2016-11-14)
     + Removed Faceted report
     + Added Bugfixes for PHP 7.0.13, 5.6.28 and PHP 7.2
     + Added 'One variable string' to Radwell report
-+ Analyzer
-    + New analyzer : Object Calisthenics #1, #4
-    + New analyzer : check that properties are all set at constructor time.
-    + New analyzer : spot useless checks
++ Analysis
+    + New analysis : Object Calisthenics #1, #4
+    + New analysis : check that properties are all set at constructor time.
+    + New analysis : spot useless checks
     + Updated UndefinedParentMP to take PHP ext classes into account
     + Upgraded 'array_merge in loops' with file_put_contents
     + Upgraded 'useless parenthesis' with math operations
-    + Upgraded analyzer : 1666 / 1682 test pass (99% pass). 
-    + Added debug Query method to analyzer
+    + Upgraded analysis : 1666 / 1682 test pass (99% pass). 
+    + Added debug Query method to analysis
 + Tokenizer
     + Fixed Files to compile first, then count tokens
     + Find Ext Lib handle UT classes better
@@ -2453,20 +2486,20 @@ Version 0.8.8 (Apricot Immortal, 2016-11-07)
     + New report : Radwell
     + New report : PhpConfiguration helping with configure and php.ini
     + Ambassador : Fixed dashboard values
-+ Analyzer
-    + New analyzer : time() vs strtotime('now')
-    + New analyzer : useless casting
-    + New analyzer : No Isset() with Empty()
-    + New analyzer : don't echo errors
-    + New analyzer : ext/rar
-    + New analyzer : use Class::class when possible
++ Analysis
+    + New analysis : time() vs strtotime('now')
+    + New analysis : useless casting
+    + New analysis : No Isset() with Empty()
+    + New analysis : don't echo errors
+    + New analysis : ext/rar
+    + New analysis : use Class::class when possible
     + Added array_key_exists() to slow functions list.
     + Upgraded UpperCaseKeywords to handle partial uppercase
     + Added reported directives for ext/filter
     + Upgraded 'Variables used once' to exclude $this and arguments
     + Upgraded Unreachable Code with break/continue;
     + Multiple Identical Keys now handles null, boolean, real.
-    + Upgraded analyzer : 1652 / 1668 test pass (99% pass). 
+    + Upgraded analysis : 1652 / 1668 test pass (99% pass). 
 + Tokenizer
     + Now spots \true, \false, \null as Boolean and Null
     + Removed 'xargs too many arguments' error on Linux
@@ -2474,14 +2507,14 @@ Version 0.8.8 (Apricot Immortal, 2016-11-07)
 Version 0.8.7 (Naked Demon, 2016-10-31)
 + Architecture
     + Upgraded Boolean and Integer to report results without storing them in graph
-+ Analyzer
-    + New analyzer : modernizable empty() calls
-    + New analyzer : recommend Positive conditions
-    + New analyzer : drop else after return
-    + Upgraded analyzer : unreacheable code handles if/then with returns.
++ Analysis
+    + New analysis : modernizable empty() calls
+    + New analysis : recommend Positive conditions
+    + New analysis : drop else after return
+    + Upgraded analysis : unreacheable code handles if/then with returns.
     + Added tests for Boolean and Null
     + More not Hashes dict.
-    + Upgraded analyzer : 1637 / 1650 test pass (99% pass). 
+    + Upgraded analysis : 1637 / 1650 test pass (99% pass). 
 + Tokenizer
     + Fixed line number of <?= 
     + Fixed token on arguments
@@ -2492,18 +2525,18 @@ Version 0.8.6 (Fuyun Sou, 2016-10-24)
     + More documentation
 + Report
     + Ambassador report sped up multiple times
-    + Text, Json and XML all report only analyzers (not the dependencies)
-+ Analyzer
-    + New analyzer : suggest ternary instead of Ifthen
-    + New analyzer : check for returned value usage
+    + Text, Json and XML all report only analysiss (not the dependencies)
++ Analysis
+    + New analysis : suggest ternary instead of Ifthen
+    + New analysis : check for returned value usage
     + Added support for PHP 7.0.12 and 5.6.27
     + Added more bugs fixing from extensions
-    + Fixed analyzer for Zend Framework 1
+    + Fixed analysis for Zend Framework 1
     + Ignore $this in variable used once
     + Fixed report with unlimited arguments functions
     + Overwritten literals : Ignore assignations in for()
-    + Upgraded old PHP 5.* analyzer to Gremlin 3
-    + Upgraded analyzer : 1639 / 1645 test pass (99% pass). 
+    + Upgraded old PHP 5.* analysis to Gremlin 3
+    + Upgraded analysis : 1639 / 1645 test pass (99% pass). 
 + Tokenizer
     + Fixed precedence between require and .
     + Better fullcode for <?= 
@@ -2513,13 +2546,13 @@ Version 0.8.5 (Naked Demon, 2016-10-17)
     + Moved all classes under Exakat folder for clean hierarchy
 + Report
     + Ambassador : restored line number in display
-+ Analyzer
-    + New analyzer, check for substr() comparisons with literals
-    + New analyzer, suggest boolean cast, instead of Ternary.
-    + New analyzer, spot 3 levels of if/then
++ Analysis
+    + New analysis, check for substr() comparisons with literals
+    + New analysis, suggest boolean cast, instead of Ternary.
+    + New analysis, spot 3 levels of if/then
     + Upgraded 'hardcoded password', for kadm5 and hash_* functions
     + Upgraded 'external libs', with Zend Framework
-    + Upgraded analyzer : 1625 / 1638 test pass (99% pass). 
+    + Upgraded analysis : 1625 / 1638 test pass (99% pass). 
 
 Version 0.8.4 (Lingkongzi, 2016-10-10)
 + Architecture
@@ -2528,18 +2561,18 @@ Version 0.8.4 (Lingkongzi, 2016-10-10)
 + Report
     + Ambassador report got good annex, fixed settings and faceted search
     + Omit clearPHP if not present in docs
-+ Analyzer
-    + New analyzer : detect multiple identical traits/interface in CIT
-    + New analyzer : suggest creating aliases to reduce code
-    + New analyzer : spot aliases that may be reused again
-    + New analyzer : hidden use, that are not at the beginning of the code
-    + Upgraded analyzer : 1607 / 1618 test pass (99% pass). 
-    + More documentations to many analyzers
++ Analysis
+    + New analysis : detect multiple identical traits/interface in CIT
+    + New analysis : suggest creating aliases to reduce code
+    + New analysis : spot aliases that may be reused again
+    + New analysis : hidden use, that are not at the beginning of the code
+    + Upgraded analysis : 1607 / 1618 test pass (99% pass). 
+    + More documentations to many analysiss
     + HasMagicProperty report all magic methods 
     + Upgraded 'Useless Parenthesis' with more situations
     + Upgraded 'Unchecked resources' with 2 more situations
-    + Fixed several analyzers when using Boolean and Null as a class
-    + Fixed analyzerIsNot with arrays
+    + Fixed several analysiss when using Boolean and Null as a class
+    + Fixed analysisIsNot with arrays
     + Removed include-like from undefined functions
     + Arrays/AmbiguousKeys : Extended to arrays calls
 + Tokenizer
@@ -2554,9 +2587,9 @@ Version 0.8.3 (Guzhi Gong, 2016-10-03)
     + More examples in docs
 + Report
     + Added settings and files to Ambassador
-+ Analyzer
-    + New analyzer for dependant Traits
-    + Added new Theme 'Cakephp' with 6 analyzers for migration
++ Analysis
+    + New analysis for dependant Traits
+    + Added new Theme 'Cakephp' with 6 analysiss for migration
     + New values for Not-a-hash
     + Unresolved Catch now takes Throwable into account
 + Tokenizer
@@ -2569,11 +2602,11 @@ Version 0.8.2 (Jinjie Shiba Gong, 2016-09-26)
     + Fixed 'file' in results
 + Report
     + Added more media for Ambassador
-+ Analyzer
-    + New analyzer for count/strlen compared to 0
-    + Upgraded analyzer : 1563 / 1579 test pass (99% pass). 
-    + Backported all 4 Wordpress analyzer (wpdb, nonce usage)
-    + Added new Wordpress analyzer : variable escaping in templates
++ Analysis
+    + New analysis for count/strlen compared to 0
+    + Upgraded analysis : 1563 / 1579 test pass (99% pass). 
+    + Backported all 4 Wordpress analysis (wpdb, nonce usage)
+    + Added new Wordpress analysis : variable escaping in templates
 + Tokenizer
     + Fixed <?= so it is handled like echo
 
@@ -2582,16 +2615,16 @@ Version 0.8.1 (Babo'erben, 2016-09-19)
     + Added main Try/Catch
 + Report
     + Added 'Ambassador' report. 
-+ Analyzer
-    + Upgraded analyzer : 1540 / 1561 test pass (99% pass). 
++ Analysis
+    + Upgraded analysis : 1540 / 1561 test pass (99% pass). 
     + More documentation (examples, glossary) 
     + Added a list of stopwords for No Hardcoded Hash
-    + Upgraded analyzer 'No Hardcoded Path' with protocols and glob with wildcards
-    + Upgraded analyzer 'No Hardcoded Hash' with stopwords
-    + Added new Analyzer for portability : spot common Linux files
-    + Added new Analyzer : use system temp dir, not hardcoded one 
-    + New analyzer that spot unused protected methods
-    + Added Time-to-fix and severity to all analyzers
+    + Upgraded analysis 'No Hardcoded Path' with protocols and glob with wildcards
+    + Upgraded analysis 'No Hardcoded Hash' with stopwords
+    + Added new Analysis for portability : spot common Linux files
+    + Added new Analysis : use system temp dir, not hardcoded one 
+    + New analysis that spot unused protected methods
+    + Added Time-to-fix and severity to all analysiss
 + Tokenizer
     + Fixed edge case with if/then and try/catch 
     + Synchronized constants in Tokens/Consts*.php
@@ -2603,11 +2636,11 @@ Version 0.8.0 (Benbo'erba, 2016-09-12)
     + Better find root in export
 + Report
     + Prepared code for new report style
-+ Analyzer
-    + New analyzer : no throw in __destruct
-    + New analyzer : spot empty blocks in control structures
++ Analysis
+    + New analysis : no throw in __destruct
+    + New analysis : spot empty blocks in control structures
     + Update : Check parse_str and mb_parse_str()
-    + Upgraded analyzer : 1524 / 1540 test pass (99% pass). 
+    + Upgraded analysis : 1524 / 1540 test pass (99% pass). 
 + Tokenizer
     + Fixed representation of [] and [index] with static properties
 
@@ -2615,9 +2648,9 @@ Version 0.7.10 (Nine Headed Bug, 2016-09-05)
 + Architecture
     + Added optional dependency to mbstring in Doctor
     + 
-+ Analyzer
-    + Added analyzer for PHP 7.1 features
-    + Upgraded analyzer : 1377 / 1510 test pass (91% pass). 
++ Analysis
+    + Added analysis for PHP 7.1 features
+    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
 + Tokenizer
     + Removed parasit 'void' added in sequences.
     + Raised export max depth to 15. 
@@ -2630,10 +2663,10 @@ Version 0.7.9 (Wansheng Princess, 2016-08-29)
 + Architecture
     + Added several features at Loading time : mark global variables in $GLOBALS,
       fallback FQN in functions, link constant to definitions.
-+ Analyzer
-    + Added analyzer for impossible comparisons (count($a) < or >= 0)
-    + Added analyzer for PHP 7.1 : removed directives, added functions
-    + Upgraded analyzer : 1485 / 1522 test pass (97.5% pass). 
++ Analysis
+    + Added analysis for impossible comparisons (count($a) < or >= 0)
+    + Added analysis for PHP 7.1 : removed directives, added functions
+    + Upgraded analysis : 1485 / 1522 test pass (97.5% pass). 
 + Tokenizer
     + Fixed edge case with <?= $v;
     + Fixed priorities between include and .
@@ -2642,23 +2675,23 @@ Version 0.7.9 (Wansheng Princess, 2016-08-29)
 Version 0.7.8 (Wansheng Dragon King, 2016-08-22)
 + Architecture
     + Prepared databases for PHP 7.2
-+ Analyzer
++ Analysis
     + Reports that preg_match results are not checked
     + Report List short syntax usage.
-    + Upgraded analyzer : 1224 / 1493 test pass. 
+    + Upgraded analysis : 1224 / 1493 test pass. 
 + Tokenizer
     + 
 
 Version 0.7.7 (Water Repelling Golden Crystal Beast, 2016-08-17)
-+ Analyzer
++ Analysis
     + Upgraded Bug database to handle PHP 7.0.10, 5.6.24 and 5.5.38
 
 Version 0.7.5 (Jade Faced Princess, 2016-07-19)
 + Architecture
     + Added 'anonymize' command, that anonymize files and projects
-+ Analyzer
-    + new analyzer : recommend preg_replace_callback_array() when there are several call to preg_replace_callback_array()
-    + Upgraded analyzer : 1103 / 1464 test pass. 
++ Analysis
+    + new analysis : recommend preg_replace_callback_array() when there are several call to preg_replace_callback_array()
+    + Upgraded analysis : 1103 / 1464 test pass. 
 + Tokenizer
     + Lots of fixes for stability : tested on 28M tokens 
 
@@ -2666,8 +2699,8 @@ Version 0.7.4 (Great Sage Who Pacifies Heaven, 2016-07-12)
 + Architecture
     + Entirely rewrote the 'Tokenizer' part
     + Upgraded database schema 
-+ Analyzer
-    + Upgraded analyzer : 1027 / 1461 test pass. 
++ Analysis
+    + Upgraded analysis : 1027 / 1461 test pass. 
 + Tokenizer
     + Entirely rewrote the 'Tokenizer' part
     + 1851 UT pass correctly (extra 51)
@@ -2678,7 +2711,7 @@ Version 0.6.7 (Red boy, 2016-05-30)
     + Added by-reference functions mention
     + Now reporting good visibility/static for __callstatic
     + Added bug info for PHP 7.0.7, 5.5.36, 5.6.21
-+ Analyzer
++ Analysis
     + New : recommend instanceof over is_object()
     + Fixed several ignored limitations, due to case : $phpversion
 + Tokenizer
@@ -2688,24 +2721,24 @@ Version 0.6.6 (Princess Iron Fan, 2016-05-23)
 + Report
     + New report, suggest disable_functions directive value.
     + Added support for memcached directives
-+ Analyzer
-    + New analyzer : spot throw without new
-    + New analyzer : suggest adding 2nd parameter to unserialize in PHP 7.0+
-    + New analyzer : spot successive if/then with the same condition
++ Analysis
+    + New analysis : spot throw without new
+    + New analysis : suggest adding 2nd parameter to unserialize in PHP 7.0+
+    + New analysis : spot successive if/then with the same condition
     + Added support for zendoptimizer and suhosin extensions
     + PHP7 indirect expression : added support for {} in properties
 + Tokenizer
     + Raised cycle count, to speed up building AST for large projects
 
 Version 0.6.5 (Great Sage Who Pacifies Heaven, 2016-05-16)
-+ Analyzer
-    + New analyzer : spot globals that may be turned into property
-    + New analyzer : check that ZF1 classes are well located
++ Analysis
+    + New analysis : spot globals that may be turned into property
+    + New analysis : check that ZF1 classes are well located
     + Upgraded 'dangling foreach reference' to support key=>value
     + Better support for PHP 7 indirect expression
     + More directives for xdebug
     + Eval Without Try is PHP 7 only
-    + No Choice analyzer is now case insensitive
+    + No Choice analysis is now case insensitive
 + Tokenizer
     + Added support for keys in list() (PHP 7.1)
     + Added support for constant visibility (PHP 7.2)
@@ -2719,8 +2752,8 @@ Version 0.6.4 (Bull Demon King, 2016-05-09)
     + Added 'Wordpress' and 'Coding convention' as Recipes
 + Report
     + Initial report for Zend Framework. Still prototyping.
-+ Analyzer
-    + Accelerated analyzer for Implicit GLobals variables
++ Analysis
+    + Accelerated analysis for Implicit GLobals variables
     + New analyze : Indirect Injections (Security)
     + New analyze : Should Use Coalesce (code upgrade)
     + New analyze : Suggest dirname(__FILE__) => __DIR__
@@ -2731,20 +2764,20 @@ Version 0.6.4 (Bull Demon King, 2016-05-09)
 
 Version 0.6.3 (Jade Faced Princess, 2016-05-02)
 + Architecture
-    + Removed several useless pieces of code (self analyzer)
+    + Removed several useless pieces of code (self analysis)
     + Added documentation for Wordpress Recipes
     + Lengthened Cycle for tokenizer
 + Report
     + Added bugfixes for PHP 7.0.6, 5.6.21, 5.5.35.
     + Now reporting token counts per files 
-+ Analyzer
-    + New analyzer : Spot variable that holds $_GET, $_POST, $_REQUEST or $_COOKIE values (internal)
-    + New analyzer : Report variables that are overwritten by themselves
-    + New analyzer : Report useless switch (empty, 1 case only)
++ Analysis
+    + New analysis : Spot variable that holds $_GET, $_POST, $_REQUEST or $_COOKIE values (internal)
+    + New analysis : Report variables that are overwritten by themselves
+    + New analysis : Report useless switch (empty, 1 case only)
     + Upgraded NoChoice to handle larger sequences
     + Upgraded Useless Global to handle global $x / $GLOBALS['x'] situations
-    + New analyzer : Wordpress Recipe : Unverified Nonce, Best Usage for $wpdb
-    + New analyzer : Void for PHP 7.1   
+    + New analysis : Wordpress Recipe : Unverified Nonce, Best Usage for $wpdb
+    + New analysis : Void for PHP 7.1   
 + Tokenizer
     + Fixed but with Typehint
     + Added phppowerpoint class in external libraries
@@ -2755,9 +2788,9 @@ Version 0.6.2 (Long Armed Ape Monkey, 2016-04-25)
     + Cleaned code with myself
 + Report
     + New report format : clustergrammer
-+ Analyzer
-    + New analyzer : same conditions in If / Then
-    + New analyzer : spot dead code in catch expressions
++ Analysis
+    + New analysis : same conditions in If / Then
+    + New analysis : spot dead code in catch expressions
     + Static loops now exclude methods usage
     + Indirect variable expression are stricter
     + preg_* Option e has better support for delimiters
@@ -2774,7 +2807,7 @@ Version 0.6.1 (Red Bottomed Horse Monkey, 2016-04-18)
     + Prepared to support PHP 7.1
     + Fixed bug in user / passwords when initing the project
     + Better support for ::class when searching for libraries
-+ Analyzer
++ Analysis
     + UselessParenthesis : spot nested parenthesis
     + Spot exceptions that are thrown but uncaught by the current code
     + Support for ext/lua, 
@@ -2790,12 +2823,12 @@ Version 0.6.1 (Red Bottomed Horse Monkey, 2016-04-18)
 Version 0.6.0 (Intelligent Stone Monkey, 2016-04-11)
 + Architecture
     + Fixed a bug in Find external libraries
-    + Applied fixed based on new analyzers's audit
+    + Applied fixed based on new analysiss's audit
     + Fixed a bug that prevented results to be prepared for report (Thanks Philippe G.)
 + Report
-    + Now reports reason for excluding a file from analyzer
-+ Analyzer
-    + New analyzers : Logical Mistake (first version),
+    + Now reports reason for excluding a file from analysis
++ Analysis
+    + New analysiss : Logical Mistake (first version),
                       Iffectations (code restoration)
                       Common alternatives
                       No Choice (No alternatives)
@@ -2815,7 +2848,7 @@ Version 0.6.0 (Intelligent Stone Monkey, 2016-04-11)
 
 Version 0.5.9 (Six Eared Macaque, 2016-04-04)
 + Architecture
-    + One progressbar per Recipe during project analyzer
+    + One progressbar per Recipe during project analysis
     + report's documentation
     + Upgraded 'External Lib' to ignore Composer folders.
     + Fixed a bug about interpreting tokens 
@@ -2828,7 +2861,7 @@ Version 0.5.9 (Six Eared Macaque, 2016-04-04)
     + Upgraded Bugfix database for 7.0.5, 5.6.20 and 5.5.34
     + Report Yield (from) usage
     + New external configuration files : bazar, github, docker, openshift
-+ Analyzer
++ Analysis
     + Added detection for undefined classes in ZF (1.8 to 1.12)
     + New : report undefined Traits
     + Added support for parent/grandparent when checking argument numbers
@@ -2837,7 +2870,7 @@ Version 0.5.9 (Six Eared Macaque, 2016-04-04)
     + Fixed bug in fullnspath for use within trait or class
     + It is possible to reach a property on an array append
     + Fixed AST between PHP 5 and 7 for globals
-    + Simplified ++ analyzers
+    + Simplified ++ analysiss
 
 Version 0.5.8 (Sun Deity of Mao, 2016-03-28)
 + Architecture
@@ -2848,12 +2881,12 @@ Version 0.5.8 (Sun Deity of Mao, 2016-03-28)
     + Reduced shell_exec usage
 + Report
     + Fixed display bugs in Devoops report
-    + Removed double analyzer
+    + Removed double analysis
     + 'Wrong number of arguments' now supports constructors
-+ Analyzer
++ Analysis
     + Upgraded 'No Hardcoded IP' to handle constants, spot domains
     + Added support for TokyoTyrant
-    + New analyzer : spot simple regex, and suggest strpos
+    + New analysis : spot simple regex, and suggest strpos
     + Excluded "$a[b]" from undefined constants
 + Tokenizer
     + Fixed bug with nested call to echo.
@@ -2878,13 +2911,13 @@ Version 0.5.7 (Scorpion Demon, 2016-03-21)
     + Upgraded status presentation in server mode
 + Report
     + More details for Global Variable list
-+ Analyzer
++ Analysis
     + Now spotting class when it is inside a string
     + Check for $this outside a trait/class
     + Check for ternary/concatenation precedence
     + Spot classes that attempt to extend final 
     + Spot set_exception_handler() that may need rework
-    + Refined array_merge analyzer, in case of nested loops
+    + Refined array_merge analysis, in case of nested loops
 + Tokenizer
     + Yield [from] may be inside an array
     + Refactored for/foreach tokens
@@ -2896,12 +2929,12 @@ Version 0.5.6 (Ruler of Women's Country, 2016-03-14)
     + Started revamping 'Status' command 
     + Centralized all tokenizations to PhpExec class
     + Removed usage of __DIR__ and __FILE__ 
-+ Analyzer
++ Analysis
     + Spot usage of empty() that can't work on PHP 5.4
     + Suggest using random_int instead of rand
     + Upgraded 'No Array_merge in loops' with array_merge_recursive
     + Added support for scalar type hint in Undefined Classes
-    + New analyzer : Better rand()
+    + New analysis : Better rand()
 + Tokenizer
     + Instanceof has lower precedence than comparison
 
@@ -2911,10 +2944,10 @@ Version 0.5.5 (Immortal Ruyi, 2016-03-07)
 + Report
     + Added support for bugfixes in 7.0.4, 5.6.19 and 5.5.33
     + Added support for bugfixes in 7.1.0-dev
-+ Analyzer
++ Analysis
     + Added support for Typehint in Undeclared Classes
     + Extended 'Multiple Classes in One File' to interfaces and traits
-    + Added analyzers for truthy and falsy
+    + Added analysiss for truthy and falsy
     + Spot interfaces implemented by parents (Thanks PHP Inspect)
     + Report usage for unsafe Curl options
 + Tokenizer
@@ -2929,7 +2962,7 @@ Version 0.5.4 (Nezha, 2016-02-29)
     + Produce report in a hidden folder, then push it
 + Report
     + Report the list of bug fixes that apply to code
-+ Analyzer
++ Analysis
     + Help using preg_match_all options
 + Tokenizer
     + Fixed a bug with reference and instanceof
@@ -2940,7 +2973,7 @@ Version 0.5.3 (Li Jing, 2016-02-22)
     + Supports symlinks for neo4j's folder
     + Supports symlinks for 'code' folder in projects
     + Added upgrade command to check for exakat's available versions and upgrade
-+ Analyzer
++ Analysis
     + Spot CLI scripts
     + Undefined Interfaces avoids self, parent, static
     + Fixed bug in spotting undefined Interface
@@ -2948,9 +2981,9 @@ Version 0.5.3 (Li Jing, 2016-02-22)
     + Added support for all structures in Double Assignation
 
 Version 0.5.2 (Single Horned Rhinoceros King, 2016-02-15)
-+ Analyzer
++ Analysis
     + Fixed functioncall detection with 'empty'
-    + Refined 'Buried assignation' analyzer
+    + Refined 'Buried assignation' analysis
     + Fixed a bug when using definitions (class, trait, interface, functions...)
     + Better support for case-insensitive constants
     + 
@@ -2970,14 +3003,14 @@ Version 0.5.1 (King of Spiritual Touch, 2016-02-08)
     + No display of negative stats
     + Added support for directives : wincache, xcache, apc, opcache
     + Added support for eaccelerator and openssl
-+ Analyzer
-    + New analyzer : Spot unknown PHP directive names
++ Analysis
+    + New analysis : Spot unknown PHP directive names
     + Fixed Constants/MultipleDefinedConstants
     + Better detection of functioncalls (with List)
     + Better spotting of ini_set arguments
     + Unreachable code now finds die and exit
     + ObjectReference won't report references on scalar types
-    + Revamped 'pregOptionE' analyzer
+    + Revamped 'pregOptionE' analysis
     + Cleaned code with too many arguments
     + Removed useless print
     + Better report of eval() usage
@@ -2994,7 +3027,7 @@ Version 0.5.1 (King of Spiritual Touch, 2016-02-08)
 Version 0.5.0 (Immortal of Antelope Power, 2016-02-01)
 + Architecture
     + Added support for HTTP API, through 'server' command. 
-+ Analyzer
++ Analysis
     + Fopen modes checked
     + Redefined default, in class's properties
 + Tokenizer
@@ -3013,11 +3046,11 @@ Version 0.4.6 (Immortal of Elk Power, 2016-01-25)
     + Added a command to remove a project
 + Report
     + Devoops reports has case-insensitive menu sort
-+ Analyzer
++ Analysis
     + Spot redefined properties, classes and methods. 
     + Spot properties that may be turned private
     + Fixed special case in Wrong Number Of Arguments
-    + Fixed 'OnePage' analyzer
+    + Fixed 'OnePage' analysis
 + Tokenizer
     + Finished support for relaxed keywords in classes
     + Sped up tokenizer by keeping counts of tokens in datastore
@@ -3031,10 +3064,10 @@ Version 0.4.5 (Immortal of Tiger Power, 2016-01-18)
     + Default command is 'help'
 + Report
     + Better version for FacetedJson report
-+ Analyzer
-    + New analyzer that spots wrong type of argument in PHP internal functions
++ Analysis
+    + New analysis that spots wrong type of argument in PHP internal functions
     + Fixed Isset With Constant for PHP 7
-    + Fixed a bug that limited query size during analyzer (good for bigger projects)
+    + Fixed a bug that limited query size during analysis (good for bigger projects)
     + Include variadic (...) to Variable Argument Number
 + Tokenizer
     + Fixed a bug that blocked tokenizer when a analyzed script generated parse errors.
@@ -3043,7 +3076,7 @@ Version 0.4.5 (Immortal of Tiger Power, 2016-01-18)
 
 Version 0.4.4 (Crown Prince Mo'ang, 2016-01-11)
 + Architecture
-    + Reviewed OnePage analyzer
+    + Reviewed OnePage analysis
     + Dump as now an option to select Recipes
     + Dump forces line to be integer
     + Added a task to update a project's code (git only ATM)
@@ -3051,7 +3084,7 @@ Version 0.4.4 (Crown Prince Mo'ang, 2016-01-11)
     + Better check when opening database for report (more to come)
     + FacetedJson (and Json) report ignore non-unicode lines
     + Added 'search' box to facetedJson
-+ Analyzer
++ Analysis
     + Switch To Switch suggestions
     + Unused arguments patch for arguments used in methods
     + Unused properties doesn't mistake function static variable
@@ -3069,12 +3102,12 @@ Version 0.4.3 (Tuolong, 2015-01-04)
     + Switched to rmDirRecursive
 + Report
     + Removed old style reporting system
-+ Analyzer
++ Analysis
     + Fixed fileupload and filesystem directives reports
     + Added report of Environnement variable usage
     + Added iconv_set_encoding to the list of directive usage
     + Extension analyzes now takes into account namespaces and traits
-    + Analyzers all have severity and time to fix
+    + Analysiss all have severity and time to fix
 + Tokenizer
     + 
 
@@ -3085,7 +3118,7 @@ Version 0.4.2 (Red Boy, 2015-12-22)
 + Report
     + First version of the faceted report (-format Faceted)
     + Fixed Dump that actually finishes after some time
-+ Analyzer
++ Analysis
     + Spot unused arguments
     + Fixed notInInterface() filter
     + Upgraded HtmlEntitiesCall
@@ -3096,7 +3129,7 @@ Version 0.4.1 (Azure Lion, 2015-12-14)
 + Report
     + Available format : JSON, Sqlite, XML, Text and HTML (Devoops).
     + Rules are now part of the documentation. 
-+ Analyzer
++ Analysis
     + Upgraded 'Buried assignations' 
     + Locally Unused also spots properties without visibility (but with definition)
     + Could be class constant, if the property is used at least once
@@ -3118,7 +3151,7 @@ Version 0.4.0 (Lion Lynx Demon, 2015-12-07)
 + Report
     + Rewrote the report from scratch. Should be finished next iteration.
     + New report is working for XML and Text report.
-+ Analyzer
++ Analysis
     + Added support for ext/pecl_http
     + Added several classic folders as ignored by default (change this in config.ini)
     + Create a check for functioncall (and not methods)
@@ -3135,7 +3168,7 @@ Version 0.3.12 (Nine Tailed Vixen, 2015-11-30)
     + ProgressBar is now displayed during Analyze phase.
 + Report
     + Report list of error messages used in the library
-+ Analyzer
++ Analysis
     + Omit eval with hardcoded strings
     + Exclude some index from _SERVER from the report (they are safe)
     + Exclude php://* files as hard coded path
@@ -3153,7 +3186,7 @@ Version 0.3.11 (Hu A'qi, 2015-11-16)
     + Report external services files that may be in the repository
 + Report
     + Report nested dirname calls (may be changed in PHP 7)
-+ Analyzer
++ Analysis
     + Better spotting of static loops
     + Don't confuse $globals and $GLOBALS
 + Tokenizer
@@ -3166,7 +3199,7 @@ Version 0.3.10 (Silver Horned King, 2015-11-09)
     + Centralized call to cypher.
 + Report
     + Sped up several analyzes
-+ Analyzer
++ Analysis
     + Fixed naming bug with reflexion
     + Support class name in arrays, short syntax
     + Report Relay Functions
@@ -3181,7 +3214,7 @@ Version 0.3.10 (Silver Horned King, 2015-11-09)
 Version 0.3.9 (Golden Horned King, 2015-11-02 up)
 + Architecture
     + Cleaned code with Exakat
-+ Analyzer
++ Analysis
     + Refined report about double assignation
     + Fixed argument counting in Function Definition
     + Better support of array in Locally Used Properties
@@ -3197,7 +3230,7 @@ Version 0.3.8 (Baihuaxiu, 2015-10-26)
 + Report
     + Added the list of global variables in the projects (if any)
     + Fixed reports for PHP 5.2 (they were ignored)
-+ Analyzer
++ Analysis
     + Better handling of composer in unresolved classes
     + Spot setlocale with string (PHP 7)
     + Spot string unpacking (PHP 7)
@@ -3218,10 +3251,10 @@ Version 0.3.7 (Yellow Robe Demon, 2015-10-19)
     + Added and reviewed many UT. More stability.
 + Report
     + Fixed the report of the actual version of PHP being used.
-    + Non-run analyzer are not marked with a stethoscope
+    + Non-run analysis are not marked with a stethoscope
     + Report now report closures and not the containing method
     + Removed some dashboard that would generate empty links
-+ Analyzer
++ Analysis
     + Better spot of blocks inside Alternative syntax
     + Speed up method spotting
     + Fixed properties which were mistaken with deep definitions
@@ -3248,10 +3281,10 @@ Version 0.3.5 (Mingyue, 2015-10-06)
     + Fixed 'version incompatible' report that was mistaken with 'no result'
     + List all directives being modified in the code
     + List more directives that should be set for production.
-+ Analyzer
++ Analysis
     + Reworked the Themes about compatibility. 
     + Added many tests for PHP 7.0 compatibility
-    + Sped up UsedMethod analyzer
+    + Sped up UsedMethod analysis
     + Added support for PHP 7 feature : Unicode Escape Sequences, New functions/classes/interfaces, Removed Functions, 
 + Tokenizer
     + Changed processing for Empty PHP code
@@ -3267,8 +3300,8 @@ Version 0.3.4 (Qingfeng, 2015-09-28 up)
     + Removed support for neo-contrib's gremlin plugin
 + Report
     + Report libraries that were found and ignored
-+ Analyzer
-    + Sped up queries that required previous analyzers or multiples atoms
++ Analysis
+    + Sped up queries that required previous analysiss or multiples atoms
     + Spot global keywords inside loops (perf)
     + Better spotting of Composer classes 
     + Report double assignations
@@ -3283,11 +3316,11 @@ Version 0.3.3 (Immortal Zhenyuan, 2015-09-21)
 + Architecture
     + Removed some shell stderr that leaked to the main script
 + Report
-    + Added the list of used analyzers
+    + Added the list of used analysiss
     + favicon is now used in the report (Devoops)
     + Fixed count report for Else 
     + Fixed directive reports for trader, bcmath and ldap.
-+ Analyzer
++ Analysis
     + Rebuild the composer database
     + Fixed htmlentities analyze
     + Spot usage of 'substr($s, $p, +/- 1)' and recommend '$s[$p]'
@@ -3296,8 +3329,8 @@ Version 0.3.3 (Immortal Zhenyuan, 2015-09-21)
 
 Version 0.3.2 (Tiger Vanguard, 2015-09-14)
 + Report
-    + Added link back from analyzers to its themes.
-+ Analyzer
+    + Added link back from analysiss to its themes.
++ Analysis
     + Useless Returns are now Trait compatible
     + Optimized Composer validation 
     + Removed IsKnownVendor analyze (replaced by Composer)
@@ -3320,7 +3353,7 @@ Version 0.3.1 (Yellow Wind Demon, 2015-09-03)
     + Added new collection of rules for Calesthenics (dev)
     + Updated composer database 
     + Now reporting found Composer.
-+ Analyzer
++ Analysis
     + Fixed Compilation spotting
 + Tokenizer
     + Fixed an edge case with Sign, when used in a concatenation
@@ -3332,7 +3365,7 @@ This is a important release, with some noticeable changes.
 + Report
     + Added a view by File 
     + Added sorting for results (by file and by analyze)
-+ Analyzer
++ Analysis
     + Spot functions whose results should be checked before they are used
     + Spot breaks/continue out of a loop
     + Exports all the results in a dump.sqlite file
@@ -3345,7 +3378,7 @@ Version 0.2.5 (Scholar in a White Robe, 2015-Aug-17)
 This is a maintenance release, with improved ease of use. 
 + Report
     + List the files that are ignored in the annex
-+ Analyzer
++ Analysis
     + Updated Knowledge Database for memcache, aliases, zlib, standard
     + Added more directives to Review
     + Added support for xhprof
@@ -3360,7 +3393,7 @@ This is a maintenance release, with improved ease of use.
 
 Version 0.2.4 (Black Wind Demon, 2015-06-22)
 This is a maintenance release, with improved ease of use and new analyzes.
-+ Analyzer
++ Analysis
     + Rebuild the composer database
     + Lots of new extensions supported : ev, libevent, event, php-ast, wikidiff2, proctitle, inotify, ibase, amqp, geoip, output buffering,
     + Report errors when non-variables are returned by reference
@@ -3380,7 +3413,7 @@ This is a maintenance release, with improved ease of use and new analyzes.
     + Added a kill command when cleaning Database
 Version 0.2.3 (Techu Shi, 2015-06-22)
 This is a maintenance release, with improved ease of use. 
-+ Analyzer
++ Analysis
     + Report usage of Return Typehint, and Scalar Typehint
     + Report usage of classes that used to return null on new
     + Report useless abstract classes
@@ -3390,7 +3423,7 @@ This is a maintenance release, with improved ease of use.
 
 Version 0.2.2 (Xiong Shangjun, 2015-06-16)
 This is a maintenance release, with vastly improved speed
-+ Analyzer
++ Analysis
     + Now spots short assignations
     + More UselessInstructions spotted
     + Ignore Unset as modified values in loops
@@ -3403,7 +3436,7 @@ This is a maintenance release, with vastly improved speed
 
 Version 0.2.1 (General Yin, 2015-06-02)
 This is a maintenance release
-+ Analyzer
++ Analysis
     + sizeOf may have 2 arguments
     + 2 clearPHP link added in documentation
 + Tokenizer

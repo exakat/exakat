@@ -1,0 +1,77 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DECLARE
+            8
+            Label : NAME
+              6
+            Label : VALUE
+              7
+          Label : DECLARE
+            8
+            Label : NAME
+              9
+            Label : VALUE
+              10
+        Label : EXPRESSION
+          11
+          Label : ARGUMENT
+            13
+            Label : NAME
+              13
+              Label : DEFINITION
+                13
+            Label : TYPEHINT
+              12
+          Label : ARGUMENT
+            14
+            Label : NAME
+              14
+              Label : DEFINITION
+                14
+            Label : TYPEHINT
+              12
+          Label : BLOCK
+            15
+            Label : EXPRESSION
+              16
+              Label : RETURN
+                17
+                Label : LEFT
+                  13
+                Label : RIGHT
+                  14
+          Label : DEFINITION
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              19
+            Label : ARGUMENT
+              20
+          Label : NAME
+            11
+          Label : RETURNED
+            13
+          Label : RETURNED
+            14
+        Label : EXPRESSION
+          18
+          Label : ARGUMENT
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              19
+            Label : ARGUMENT
+              20
+          Label : NAME
+            18

@@ -110,53 +110,65 @@ Here are the currently available options in Exakat's configuration file : config
 |                    | Default is 1 million.                                                                     |
 +--------------------+-------------------------------------------------------------------------------------------+
 | php                | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
-|                    | PHP 7.0, or 5.6. The same binary may be used with the following options.                  |
+|                    | PHP 7.3, or 7.4. The same binary may be used with the following options.                  |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php73              | Link to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+| php80              | Path to the PHP 8.0.x binary. This binary is needed to test the compilation with the 8.0  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php72              | Link to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
+| php74              | Path to the PHP 7.4.x binary. This binary is needed to test the compilation with the 7.4  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php71              | Link to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
+| php73              | Path to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is recommended to use this       |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php72              | Path to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php70              | Link to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
+| php71              | Path to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php56              | Link to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
+| php70              | Path to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php55              | Link to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
+| php56              | Path to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php54              | Link to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
+| php55              | Path to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php53              | Link to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
+| php54              | Path to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
-| php52              | Link to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+| php53              | Path to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
 |                    | series or if the analyze should be run with this version (see project's config.ini).      |
 |                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
+| php52              | Path to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+
+Note : php** configuration may be either a valid PHP binary path, or a valid Docker image. The path on the system may be `/usr/bin/php`, `/usr/sbin/php80`, or `/usr/local/Cellar/php71/7.1.30/bin/php`. The Docker configuration must have the form `abc/def:tag`. The image's name may be any value, as long as Exakat manage to run it, and get the valid PHP signature, with `php -v`. When using Docker, the docker server must be running. 
 
 Custom rulesets
 ###############
@@ -266,33 +278,46 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
 
 :ref:`Make Magic Concrete <make-magic-concrete>`
   + magicMemberUsage : 1
+
     + Minimal number of magic member usage across the code, to trigger a concrete property.
 :ref:`Too Many Children <too-many-children>`
   + childrenClassCount : 15
+
     + Threshold for too many children classes for one class.
 :ref:`Too Many Injections <too-many-injections>`
   + injectionsCount : 5
+
     + Threshold for too many injected parameters for one class.
 :ref:`Missing Include <missing-include>`
   + constant_or_variable_name : 100
+
     + Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names.
 :ref:`Too Many Local Variables <too-many-local-variables>`
   + tooManyLocalVariableThreshold : 15
+
     + Minimal number of variables in one function or method to report.
 :ref:`Too Many Parameters <too-many-parameters>`
   + parametersCount : 8
+
     + Minimal number of parameters to report.
 :ref:`PHP Keywords As Names <php-keywords-as-names>`
   + reservedNames : 
+
     + Other reserved names : all in a string, comma separated.
   + allowedNames : 
     + PHP reserved names that can be used in the code. All in a string, comma separated.
 :ref:`Too Many Native Calls <too-many-native-calls>`
   + nativeCallCounts : 3
+
     + Number of native calls found inside another call.
 :ref:`Long Arguments <long-arguments>`
   + codeTooLong : 100
+
     + Minimum size of a functioncall or a methodcall to be considered too long.
+:ref:`Nested Ifthen <nested-ifthen>`
+  + nestedIfthen : 3
+
+    + Maximal number of acceptable nesting of if-then structures
 
 
 

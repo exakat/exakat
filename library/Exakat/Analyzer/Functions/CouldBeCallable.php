@@ -33,20 +33,21 @@ class CouldBeCallable extends Analyzer {
             if ($rank[0] === '_') {
                 list(, $rank) = explode('_', $position);
             }
-        
+
             // foo($arg) { array_map($arg, '') ; }
             $this->atomIs(self::$FUNCTIONS_ALL)
                  ->outIs('ARGUMENT')
                  ->atomIsNot('Void')
-                 ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
-                 ->_as('results')
-                 ->savePropertyAs('code', 'argument')
-                 ->back('first')
-                 ->outIs('BLOCK')
-                 ->atomInsideNoDefinition('Functioncall')
+                 ->not(
+                    $this->side()
+                         ->outIs('TYPEHINT')
+                         ->tokenIs('T_CALLABLE')
+                 )
+                 ->outIs('NAME')
+                 ->outIs('DEFINITION')
+                 ->is('rank', (int) $rank)
+                 ->inIs('ARGUMENT')
                  ->functioncallIs($functions)
-                 ->outWithRank('ARGUMENT', $rank)
-                 ->samePropertyAs('code', 'argument', self::CASE_SENSITIVE)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -55,15 +56,15 @@ class CouldBeCallable extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->atomIsNot('Void')
-             ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
-             ->_as('results')
-             ->savePropertyAs('code', 'argument')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Functioncall')
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->tokenIs('T_CALLABLE')
+             )
              ->outIs('NAME')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'argument', self::CASE_SENSITIVE)
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall')
              ->back('first');
         $this->prepareQuery();
     }
