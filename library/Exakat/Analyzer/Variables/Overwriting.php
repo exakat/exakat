@@ -39,6 +39,20 @@ class Overwriting extends Analyzer {
              ->samePropertyAs('code', 'destination', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
+
+        // $g = function ($a, $b) use ($g) {}
+        $this->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'destination')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->atomIs('Closure')
+             ->outIs('USE')
+             ->samePropertyAs('code', 'destination', self::CASE_SENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
     }
     
     // todo : add cases of on-the-spot modification (like sort())
