@@ -33,6 +33,14 @@ class Is extends DSL {
 
         if ($value === null) {
             return new Command('has("' . $property . '", null)');
+        } elseif ($property === 'rank') {
+            if ($value === 'last') {
+                return new Command('filter{ it.get().vertices(IN, "ARGUMENT").next().value("count") == it.get().value("rank") + 1}');
+            } elseif ($value === '2last') {
+                return new Command('filter{ it.get().vertices(IN, "ARGUMENT").next().value("count") == it.get().value("rank") + 2}');
+            } else {
+                return new Command('has("rank", ' . (int) $value . ')');
+            }
         } elseif ($value === true) {
             return new Command('has("' . $property . '", true)');
         } elseif ($value === false) {
