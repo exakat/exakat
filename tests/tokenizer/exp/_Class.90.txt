@@ -1,0 +1,187 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            6
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              8
+              Label : NAME
+                8
+            Label : BLOCK
+              9
+              Label : EXPRESSION
+                10
+            Label : NAME
+              7
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            12
+          Label : EXTENDS
+            6
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              8
+              Label : NAME
+                8
+            Label : BLOCK
+              9
+              Label : EXPRESSION
+                10
+            Label : DEFINITION
+              18
+              Label : NEW
+                19
+            Label : DEFINITION
+              18
+              Label : NEW
+                20
+            Label : DEFINITION
+              18
+              Label : NEW
+                21
+            Label : DEFINITION
+              18
+              Label : NEW
+                19
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  19
+            Label : DEFINITION
+              18
+              Label : NEW
+                20
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  20
+            Label : DEFINITION
+              18
+              Label : NEW
+                21
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  21
+            Label : NAME
+              7
+            Label : OVERWRITE
+              7
+              Label : ARGUMENT
+                8
+                Label : NAME
+                  8
+              Label : BLOCK
+                9
+                Label : EXPRESSION
+                  10
+              Label : NAME
+                7
+          Label : NAME
+            12
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            13
+          Label : EXTENDS
+            12
+          Label : NAME
+            13
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            14
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            21
+            Label : ARGUMENT
+              10
+            Label : NAME
+              21
+          Label : EXTENDS
+            13
+          Label : NAME
+            14
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            19
+          Label : DEFINITION
+            20
+          Label : DEFINITION
+            19
+            Label : ARGUMENT
+              10
+            Label : NAME
+              19
+          Label : DEFINITION
+            20
+            Label : ARGUMENT
+              10
+            Label : NAME
+              20
+          Label : EXTENDS
+            14
+          Label : METHOD
+            17
+            Label : ARGUMENT
+              10
+            Label : BLOCK
+              9
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  19
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  20
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  21
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  19
+                  Label : ARGUMENT
+                    10
+                  Label : NAME
+                    19
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  20
+                  Label : ARGUMENT
+                    10
+                  Label : NAME
+                    20
+              Label : EXPRESSION
+                18
+                Label : NEW
+                  21
+                  Label : ARGUMENT
+                    10
+                  Label : NAME
+                    21
+            Label : NAME
+              17
+          Label : NAME
+            15

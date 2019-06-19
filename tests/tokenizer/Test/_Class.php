@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Class extends Tokenizer {
-    /* 87 methods */
+    /* 92 methods */
 
     public function test_Class01()  { $this->generic_test('_Class.01'); }
     public function test_Class02()  { $this->generic_test('_Class.02'); }
@@ -96,5 +96,10 @@ class _Class extends Tokenizer {
     public function test_Class85()  { $this->generic_test('_Class.85'); }
     public function test_Class86()  { $this->generic_test('_Class.86'); }
     public function test_Class87()  { $this->generic_test('_Class.87'); }
+    public function test_Class88()  { $this->generic_test('_Class.88'); }
+    public function test_Class89()  { $this->generic_test('_Class.89'); }
+    public function test_Class90()  { $this->generic_test('_Class.90'); }
+    public function test_Class91()  { $this->generic_test('_Class.91'); }
+    public function test_Class92()  { $this->generic_test('_Class.92'); }
 
 ?>
