@@ -36,7 +36,22 @@ class ThisIsForClasses extends Analyzer {
         // General case
         $this->atomIs('This')
              ->goToFunction()
-             ->atomIs(array('Function', 'Closure'))
+             ->atomIs('Function')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('This')
+             ->goToFunction()
+             ->atomIs('Closure')
+             ->is('static', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('This')
+             ->goToFunction()
+             ->atomIs('Closure')
+             ->isNot('static', true)
+             ->hasNoClassTrait()
              ->back('first');
         $this->prepareQuery();
 

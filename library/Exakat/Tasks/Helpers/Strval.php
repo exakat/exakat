@@ -75,7 +75,6 @@ class Strval extends Plugin {
     
             case 'Null' :
             case 'Void' :
-//            case 'Name' :
                 $atom->noDelimiter = '';
                 break;
 
@@ -215,7 +214,12 @@ class Strval extends Plugin {
                     $function = $atom->fullnspath;
                     $atom->noDelimiter = $function($extras[0]->noDelimiter);
                 } // else, ignore it
-                
+                break;
+
+            case 'Self' :
+            case 'Parent' :
+                $atom->noDelimiter = strtolower($atom->atom);
+
                 break;
 
         default :
