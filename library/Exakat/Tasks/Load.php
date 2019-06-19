@@ -1907,8 +1907,11 @@ class Load extends Tasks {
 
             $nsname->noDelimiter = '';
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $nsname = $this->addAtom('Newcall');
-            $nsname->token     = 'T_STRING';
+            if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+                $nsname = $this->addAtom('Newcallname');
+            } else {
+                $nsname = $this->addAtom('Newcall');
+            }
         } else {
             $nsname = $this->addAtom('Nsname');
             $nsname->token     = 'T_STRING';
@@ -2631,7 +2634,7 @@ class Load extends Tasks {
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = "{$name->fullcode}({$argumentsFullcode})";
         $functioncall->token     = $name->token;
-        
+
         if ($atom === 'Newcall') {
             $this->getFullnspath($name, 'class', $functioncall);
 
