@@ -51,6 +51,7 @@ class Dailytodo extends Reports {
         $total = $row['nb'];
         $reporting = 10;
 
+        $all = array();
         $sqlQuery = "SELECT * FROM results WHERE analyzer in ($list)";
         $res = $sqlite->query($sqlQuery);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
