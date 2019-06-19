@@ -30,16 +30,24 @@ class UndeclaredStaticProperty extends Analyzer {
         // a::$a
         $this->atomIs('Staticproperty')
              ->inIs('DEFINITION')
-             ->atomIs('Propertydefinition')
-             ->isNot('virtual', true)
-             ->inIs('PPP')
-             ->isNot('static', true)
+             ->atomIs('Virtualproperty')
+             ->not(
+                 $this->side()
+                      ->outIs('OVERWRITE')
+                      ->atomIs('Propertydefinition')
+                      ->inIs('PPP')
+                      ->is('static', true)
+             )
              ->back('first');
         $this->prepareQuery();
 
+        // class a { public $a = 1;}
+        // a::$a
         $this->atomIs('Staticproperty')
              ->inIs('DEFINITION')
-             ->atomIs('Virtualproperty')
+             ->atomIs('Propertydefinition')
+             ->inIs('PPP')
+             ->isNot('static', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -50,6 +58,20 @@ class UndeclaredStaticProperty extends Analyzer {
              ->atomIs('Propertydefinition')
              ->inIs('PPP')
              ->is('static', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Member')
+             ->inIs('DEFINITION')
+             ->atomIs('Virtualproperty')
+             ->hasOut('OVERWRITE')
+             ->not(
+                 $this->side()
+                      ->outIs('OVERWRITE')
+                      ->atomIs('Propertydefinition')
+                      ->inIs('PPP')
+                      ->isNot('static', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }
