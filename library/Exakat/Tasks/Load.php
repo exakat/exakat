@@ -1876,67 +1876,58 @@ class Load extends Tasks {
     }
 
     private function makeNsname() {
+        $token = 'T_NS_SEPARATOR';
+
         if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                         &&
             in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'), STRICT_COMPARISON) &&
             $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR
             ) {
-
-            $nsname = $this->addAtom('Boolean');
+            $atom = 'Boolean';
 
         } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
                   mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'            &&
                   $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
 
-            $nsname = $this->addAtom('Null');
-
-            $nsname->noDelimiter = '';
+            $atom = 'Null';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
-            $nsname = $this->addAtom('Parent');
-            $nsname->fullnspath = '\\parent';
+            $atom = 'Parent';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
-            $nsname = $this->addAtom('Self');
-            $nsname->fullnspath = '\\self';
+            $atom = 'Self';
         } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
                   mb_strtolower($this->tokens[$this->id + 1][1]) === 'self'            &&
                   $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
 
-            $nsname = $this->addAtom('Self');
-
-            $nsname->noDelimiter = '';
+            $atom = 'Self';
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
-                $nsname = $this->addAtom('Newcallname');
-            } else {
-                $nsname = $this->addAtom('Newcall');
-            }
+            $atom = 'Newcall';
         } else {
-            $nsname = $this->addAtom('Nsname');
-            $nsname->token     = 'T_STRING';
+            $atom = 'Nsname';
+            $token = 'T_STRING';
         }
-        
+
         $fullcode = array();
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
             $fullcode[] = $this->tokens[$this->id][1];
             ++$this->id;
 
-            $nsname->absolute = self::NOT_ABSOLUTE;
+            $absolute = self::NOT_ABSOLUTE;
         } elseif ($this->tokens[$this->id - 1][0] === $this->phptokens::T_NAMESPACE) {
             $fullcode[] = $this->tokens[$this->id - 1][1];
 
-            $nsname->absolute = self::ABSOLUTE;
+            $absolute = self::ABSOLUTE;
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NS_SEPARATOR) {
             $fullcode[] = '';
 
-            $nsname->absolute = self::ABSOLUTE;
+            $absolute = self::ABSOLUTE;
         } else {
             $fullcode[] = $this->tokens[$this->id][1];
             ++$this->id;
 
-            $nsname->absolute = self::NOT_ABSOLUTE;
+            $absolute = self::NOT_ABSOLUTE;
         }
 
         while ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR    &&
@@ -1947,13 +1938,22 @@ class Load extends Tasks {
 
             // Go to next
             ++$this->id; // skip \
-            $nsname->token    = 'T_NS_SEPARATOR';
+            $token = 'T_NS_SEPARATOR';
         }
+
+        if ($atom === 'Newcall' && 
+            $this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+            $atom = 'Newcallname';
+        }
+
         // Back up a bit
         --$this->id;
 
+        $nsname = $this->addAtom($atom);
         $nsname->code     = implode('\\', $fullcode);
         $nsname->fullcode = $nsname->code;
+        $nsname->token    = $token;
+        $nsname->absolute = $absolute;
         $this->runPlugins($nsname);
         
         return $nsname;
@@ -2725,7 +2725,6 @@ class Load extends Tasks {
             $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
-            $string->noDelimiter = '';
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -2743,6 +2742,10 @@ class Load extends Tasks {
                 $this->getFullnspath($string, 'class', $string);
 
                 $this->calls->addCall('class', $string->fullnspath, $string);
+            }
+            
+            if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+                $string->count = 0;
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
@@ -2813,7 +2816,9 @@ class Load extends Tasks {
             $this->calls->addCall('class', $identifier->fullnspath, $identifier);
 
             return $identifier;
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+        } 
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $name = $this->addAtom('Static');
             $name->code       = $this->tokens[$this->id][1];
             $name->fullcode   = $this->tokens[$this->id][1];
@@ -2824,7 +2829,9 @@ class Load extends Tasks {
             $this->pushExpression($name);
 
             return $this->processFunctioncall();
-         } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+         } 
+         
+         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                                    $this->phptokens::T_QUESTION,
                                                                    $this->phptokens::T_STRING,
                                                                    $this->phptokens::T_NAMESPACE,
@@ -2853,7 +2860,9 @@ class Load extends Tasks {
             $this->addLink($static, $typehint, 'TYPEHINT');
 
             return $static;
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+        } 
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
                 !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
                 // something like public static
@@ -2870,12 +2879,15 @@ class Load extends Tasks {
             } else {
                 return $this->processStaticVariable();
             }
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+        } 
+        
+        if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             // new static;
             $name = $this->addAtom('Newcall');
             $name->code       = $this->tokens[$this->id][1];
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->token      = $this->getToken($this->tokens[$this->id][0]);
+            $name->count      = 0;
             
             $this->getFullnspath($name, 'class', $name);
 
@@ -2883,9 +2895,9 @@ class Load extends Tasks {
 
             $this->pushExpression($name);
             return $name;
-        } else {
-            return $this->processOptions('Static');
         }
+        
+        return $this->processOptions('Static');
     }
 
     private function processSGVariable($atom) {
