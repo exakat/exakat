@@ -272,9 +272,13 @@ class MakeClassMethodDefinition extends LoadFinal {
         $query = $this->newQuery('MakeClassMethodDefinition new');
         $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
-              ->atomIs(array('Newcall', 'Self'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Newcall', 'Self', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->inIs('DEFINITION')
+              ->raw(<<<'GREMLIN'
+until( __.out("MAGICMETHOD").out("NAME").has("fullcode", "__construct")).repeat( __.out("EXTENDS").in("DEFINITION"))
+GREMLIN
+,array(), array())
               ->outIs('MAGICMETHOD')
               ->codeIs('__construct', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
               ->addETo('DEFINITION', 'first')

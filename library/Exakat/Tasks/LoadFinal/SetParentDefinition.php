@@ -31,15 +31,26 @@ class SetParentDefinition extends LoadFinal {
 
         $query = $this->newQuery('SetParentDefinition direct');
         $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('parent')
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'parent')
+              ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
+
+        $query = $this->newQuery('SetParentDefinition newcall');
+        $query->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
+              ->fullnspathIs('\\parent', Analyzer::CASE_SENSITIVE)
+              ->goToClass()
+              ->outIs('EXTENDS')
+              ->inIs('DEFINITION')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count11 = $result->toInt();
 
         $query = $this->newQuery('SetParentDefinition property');
         $query->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
