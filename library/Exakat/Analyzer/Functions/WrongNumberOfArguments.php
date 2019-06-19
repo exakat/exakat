@@ -62,7 +62,9 @@ class WrongNumberOfArguments extends Analyzer {
         // this is for custom functions
         $all = self::$FUNCTIONS_CALLS;
         $all[] = 'Self';
+        $all[] = 'Parent';
         $this->atomIs($all)
+             ->hasIn('NEW')
              ->outIsIE('METHOD') // for methods calls, static or not.
              ->hasNoVariadicArgument()
              ->savePropertyAs('count', 'args_count')
@@ -76,6 +78,7 @@ class WrongNumberOfArguments extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs($all)
+             ->hasIn('NEW')
              ->outIsIE('METHOD') // for methods calls, static or not.
              ->hasNoVariadicArgument()
              ->savePropertyAs('count', 'args_count')
