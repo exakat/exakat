@@ -162,9 +162,9 @@ class Phpexec {
             $tokens = @token_get_all(file_get_contents($file));
         } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = basename($file);
-            $path     = dirname($file);
+            $path     = realpath(dirname($file));
 
-            $shell      = "docker run -it -v $path:/exakat -w /exakat --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -r \"\\\$code = file_get_contents(\\\"" . $filename . "\\\"); \\\$code = strpos(\\\$code, \\\"<?\\\") === false ? \\\"\\\" : \\\$code; var_export(@token_get_all(\\\$code));\"' ";
+            $shell      = "docker run -it -v $path:/exakat -w /exakat --entrypoint /bin/bash --rm {$this->phpexec} -c 'php -r \"\\\$code = file_get_contents(\\\"$filename\\\"); \\\$code = strpos(\\\$code, \\\"<?\\\") === false ? \\\"\\\" : \\\$code; var_export(@token_get_all(\\\$code));\"' ";
 
             $res = shell_exec($shell);
             eval("\$tokens = $res;");
@@ -239,9 +239,9 @@ class Phpexec {
     public function compile($file) {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = basename($file);
-            $dirname  = dirname($file);
+            $dirname  = realpath(dirname($file));
 
-            $shell = "docker run -v $dirname:/exakat -w /exakat -it --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'php -l $filename'";
+            $shell = "docker run -v $dirname:/exakat -w /exakat -it --entrypoint /bin/bash --rm {$this->phpexec} -c 'php -l $filename'";
             $res = trim(shell_exec($shell));
        } else {
             $res = shell_exec($this->phpexec . ' -l ' . escapeshellarg($file) . ' 2>&1');
