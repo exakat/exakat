@@ -30,44 +30,42 @@ class NoHardcodedHash extends Analyzer {
         
         $regexDate = '^\\\\d{4}(0?[1-9]|1[012])(0?[1-9]|[12][0-9]|3[01])\$';
         
+        $sizes = array_keys((array)$algos);
         // Find common hashes, based on hexadecimal and length
-        foreach(array_keys((array) $algos) as $size) {
-            $this->atomIs('String')
-                 ->hasNoOut('CONCAT')
-                 ->regexIs('noDelimiter', '^[a-fA-Z0-9]{' . $size . '}\\$')
-                 ->isNotMixedcase('noDelimiter')
-                 ->noDelimiterIsNot($stopwords)
-                 ->regexIsNot('noDelimiter', $regexDate)
-                 ->not(
-                    $this->side()
-                         ->filter(
-                            $this->side()
-                                 ->inIs('ARGUMENT')
-                                 ->atomIs('Functioncall')
-                                 ->fullnspathIs(array('\\hexdec',
-                                                      '\\hex2bin',
-                                                      '\\intval',
-                                                      '\\decbin',
-                                                      '\\bindec',
-                                                      '\\dechex',
-                                                      '\\decoct',
-                                                      '\\octdec',
-                                                      )))
-                  );
-            $this->prepareQuery();
-        }
-        
+        $this->atomIs(array('String', 'Concatenation'))
+             ->has('noDelimiter')
+             ->raw('filter{ it.get().value("noDelimiter").length() in ***}', $sizes)
+             ->regexIs('noDelimiter', '^[a-fA-Z0-9]+\\$')
+             ->isNotMixedcase('noDelimiter')
+             ->noDelimiterIsNot($stopwords)
+             ->regexIsNot('noDelimiter', $regexDate)
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->inIs('ARGUMENT')
+                             ->atomIs('Functioncall')
+                             ->fullnspathIs(array('\\hexdec',
+                                                  '\\hex2bin',
+                                                  '\\intval',
+                                                  '\\decbin',
+                                                  '\\bindec',
+                                                  '\\dechex',
+                                                  '\\decoct',
+                                                  '\\octdec',
+                                                  )))
+              );
+        $this->prepareQuery();
+
         // Crypt (some salts are missing)
-        $this->atomIs('String')
-             ->hasNoOut('CONCAT')
+        $this->atomIs(array('String', 'Concatenation'))
              ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+')
              ->noDelimiterIsNot($stopwords)
              ->regexIsNot('noDelimiter', $regexDate);
         $this->prepareQuery();
 
         // Base64 encode
-        $this->atomIs('String')
-             ->hasNoOut('CONCAT')
+        $this->atomIs(array('String', 'Concatenation'))
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
              ->raw('filter{ it.get().value("noDelimiter").length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')
