@@ -35,116 +35,131 @@ class UseConstantAsArguments extends Analyzer {
         $functions = $this->loadJson('php_constant_arguments.json');
 
         //alternative : one of the constants or nothing
-        $positions = range(0, count((array) $functions->alternative) - 1);
-        foreach($positions as $position) {
-            $fullnspath = array();
-            foreach($functions->alternative->{$position} as $function => $constants) {
-                $fullnspath[] = $function;
-            }
-            $fullnspath = makeFullNsPath($fullnspath);
-
-            // Not a PHP constant
-            $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
-                 ->atomIs(self::$CONSTANTS_ALL)
-                 ->analyzerIsNot('Constants/IsPhpConstant')
-                 ->back('first');
-            $this->prepareQuery();
-
-            // unwanted guests
-            $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
-                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
-                 ->back('first');
-            $this->prepareQuery();
-
-            foreach($functions->alternative->{$position} as $function => $constants) {
-                $function = makeFullNsPath($function);
-                // PHP constant but wrong one
-                $regex = '(' . implode('|', $constants) . ')\$';
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIs(self::$CONSTANTS_ALL)
-                     ->analyzerIs('Constants/IsPhpConstant')
-                     ->regexIsNot('fullnspath', $regex)
-                     ->back('first');
-                $this->prepareQuery();
+        $positionsWithConstants = array();
+        foreach($functions->alternative as $position => $functionsList) {
+            foreach(array_keys((array) $functionsList) as $function) {
+                $fqn = makeFullNsPath($function);
+                
+                array_collect_by($positionsWithConstants, $fqn, (int) $position);
             }
         }
+
+        // Not a PHP constant
+        $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs(self::$CONSTANTS_ALL)
+             ->analyzerIsNot('Constants/IsPhpConstant')
+             ->back('first');
+        $this->prepareQuery();
+
+       // unwanted guests
+        $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
+             ->back('first');
+        $this->prepareQuery();
+
+        foreach($functions->alternative as $position => $functionsList) {
+            $constantsWithPosition = array();
+            foreach($functionsList as $function => $constants) {
+                $fqn = makeFullNsPath($function);
+
+                $constantsWithPosition[$fqn] = makeFullNsPath($constants, \FNP_CONSTANT);
+            }
+
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomIs(self::$CONSTANTS_ALL)
+                 ->analyzerIs('Constants/IsPhpConstant')
+                 ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+        // combinaison : several constants may be combined with a logical operator
+        $positionsWithConstants = array();
+        foreach($functions->combinaison as $position => $functionsList) {
+            foreach((array) $functionsList as $function => $constants) {
+                $fqn = makeFullNsPath($function);
+                
+                array_collect_by($positionsWithConstants, $fqn, (int) $position);
+            }
+        }
+
+        // Not a PHP constant
+        $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs(self::$CONSTANTS_ALL)
+             ->analyzerIsNot('Constants/IsPhpConstant')
+             ->back('first');
+        $this->prepareQuery();
+
+        // in a logical combinaison, check that constants are at least PHP's one
+        $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs('Logical')
+             ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
+             ->analyzerIsNot('Constants/IsPhpConstant')
+             ->back('first');
+        $this->prepareQuery();
+
+       // unwanted guests
+       $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs(array('Boolean', 'Null', 'Float'))
+             ->back('first');
+       $this->prepareQuery();
+
+       $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('ARGUMENT')
+             ->isHash('rank', $positionsWithConstants, 'fqn')
+             ->atomIs('Integer')
+             ->codeIsNot(array('0', '-1'))
+             ->back('first');
+       $this->prepareQuery();
 
         // combinaison : several constants may be combined with a logical operator
-        $positions = range(0, count((array) $functions->combinaison) - 1);
-        // First loop federate some queries
-        foreach($positions as $position) {
-            $fullnspath    = array();
-            $constantNames = array();
-            foreach($functions->combinaison->{$position} as $function => $constants) {
-                $fullnspath[]    = $function;
-                $constantNames[] = $constants;
+        foreach($functions->combinaison as $position => $functionsList) {
+
+            $constantsWithPosition = array();
+            foreach($functionsList as $function => $constants) {
+                $fqn = makeFullNsPath($function);
+
+                $constantsWithPosition[$fqn] = makeFullNsPath($constants, \FNP_CONSTANT);
             }
-            $constantNames = array_merge(...$constantNames);
-            $fullnspath = makeFullNsPath($fullnspath);
-            
-            // if it's a constant, but not a PHP one
-            $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
-                 ->atomIs(self::$CONSTANTS_ALL)
-                 ->analyzerIsNot('Constants/IsPhpConstant')
+
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
+                 ->analyzerIs('Constants/IsPhpConstant')
+                 ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
                  ->back('first');
             $this->prepareQuery();
 
-            // in a logical combinaison, check that constants are at least PHP's one
-            $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
+            // in a logical combinaison, check that constants are the one for the function
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Logical')
                  ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
-                 ->analyzerIsNot('Constants/IsPhpConstant')
-                 ->hasNoIn('NAME')
+                 ->analyzerIs('Constants/IsPhpConstant')
+                 ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
                  ->back('first');
             $this->prepareQuery();
-
-           // unwanted guests
-           $this->atomFunctionIs($fullnspath)
-                ->outIs('ARGUMENT')
-                ->is('rank', $position)
-                ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
-                ->codeIsNot($constantNames)
-                ->back('first');
-           $this->prepareQuery();
-        }
-
-        // Those must be run function by function
-        foreach($positions as $position) {
-            foreach($functions->combinaison->{$position} as $function => $constants) {
-
-                $function = makeFullNsPath($function);
-                // if it's a PHP constant, but not a good one for the function
-                $regex = '(' . implode('|', $constants) . ')\$';
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIs(self::$CONSTANTS_ALL)
-                     ->analyzerIs('Constants/IsPhpConstant')
-                     ->regexIsNot('fullnspath', $regex)
-                     ->back('first');
-                $this->prepareQuery();
-
-                // in a logical combinaison, check that constants are the one for the function
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIs('Logical')
-                     ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
-                     ->analyzerIs('Constants/IsPhpConstant')
-                     ->regexIsNot('fullnspath', $regex)
-                     ->back('first');
-                $this->prepareQuery();
-            }
         }
     }
 }

@@ -37,6 +37,10 @@ class Perfile extends Reports {
         $maxLine       = 0;
         $maxTitle      = 0;
         foreach($analysisResults->toArray() as $row) {
+            if (!isset($titleCache[$row['analyzer']])) {
+                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+            }
+
             $maxLine = max($maxLine, $row['line']);
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']));
             $perfile[$row['file']][] = sprintf(' % 4s  %s ', $row['line'], $titleCache[$row['analyzer']]);
@@ -55,7 +59,7 @@ class Perfile extends Reports {
                      . "\n"
                      . "\n";
         }
-        
+
         return $text;
     }
 }

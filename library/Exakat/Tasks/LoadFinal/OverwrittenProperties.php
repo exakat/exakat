@@ -31,7 +31,7 @@ class OverwrittenProperties extends LoadFinal {
         $query = $this->newQuery('overwrittenConstants');
         $query->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
-              ->goToClass()
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')

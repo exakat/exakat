@@ -76,6 +76,7 @@ class Intval extends Plugin {
             case 'Parent'      :
             case 'Null'        :
             case 'Void'        :
+            case 'Magicconstant' :
                 $atom->intval = 0;
                 break;
     

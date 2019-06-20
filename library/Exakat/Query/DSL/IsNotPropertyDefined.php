@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 class IsNotPropertyDefined extends DSL {
     public function run() : Command {
         // check for DEFINTION link and the Virtualproperty atom
-        return new Command('where( __.in("DEFINITION").hasLabel("Virtualproperty"))');
+        return new Command('where( __.in("DEFINITION").hasLabel("Virtualproperty").not( __.out("OVERWRITE").hasLabel("Propertydefinition")))');
     }
 }
 ?>
