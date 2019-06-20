@@ -29,7 +29,7 @@ class MultipleSameArguments extends Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw(<<<'GREMLIN'
 filter{ 
     s = [:];
@@ -40,6 +40,14 @@ filter{
             s[it.value("code")]++;
         } 
     };
+    it.get().vertices(OUT, "USE").each{ 
+        if (s[it.value("code")] == null) {
+            s[it.value("code")] = 1;
+        } else {
+            s[it.value("code")]++;
+        } 
+    };
+    
     s.findAll{it.value > 1}.size() > 0;
 }
 GREMLIN
