@@ -85,7 +85,11 @@ abstract class Analyzer extends TestCase {
             $versionPHP = 'php'.PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
         }
 
-        $res = shell_exec("{$config->$versionPHP} -l $test_path/source/$file.php 2>/dev/null");
+        if (preg_match('/^[^\/]+\/[^:]+:.+$/', $config->$versionPHP)) {
+            $res = shell_exec("docker run -it --rm --name php4exakat -v \"$test_path\":/exakat  -w /exakat {$config->$versionPHP} php -l ./source/$file.php 2>/dev/null");
+        } else {
+            $res = shell_exec("{$config->$versionPHP} -l $test_path/source/$file.php 2>/dev/null");
+        }
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
