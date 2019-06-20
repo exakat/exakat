@@ -2,7 +2,6 @@
 
 $expected     = array('ba( )',
                       'f\\ab( )',
-                      'a\\b\\ab( )',
                      );
 
 $expected_not = array('h( )',
@@ -13,6 +12,7 @@ $expected_not = array('h( )',
                       'e( )',
                       'e2( )',
                       'e\\ab()',
+                      'a\\b\\ab( )',
                      );
 
 ?>

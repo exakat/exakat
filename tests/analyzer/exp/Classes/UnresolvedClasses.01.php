@@ -5,12 +5,12 @@ $expected     = array('bax( )',
                       'abx( )',
                       'bax( )',
                       'f\\abx( )',
-                      'a\\abx( )',
                       'bax( )',
                      );
 
 $expected_not = array('e\\abx( )',
                       'f\\abx()',
+                      'a\\abx( )',
                      );
 
 ?>
