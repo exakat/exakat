@@ -27,69 +27,36 @@ use Exakat\Analyzer\Analyzer;
 class DependantTrait extends Analyzer {
     public function analyze() {
         // Case for $this->method()
+        // Case for class::methodcall()
         $this->atomIs('Trait')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Methodcall')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
+             ->outIs('DEFINITION')
+             ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
+             ->inIs(array('OBJECT', 'CLASS'))
+             ->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
         // Case for $this->$properties
-        $this->atomIs('Trait')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->isNotPropertyDefined()
-             ->back('first');
-        $this->prepareQuery();
-
         // Case for class::$properties
         $this->atomIs('Trait')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticproperty')
-             ->outIs('CLASS')
-             ->has('fullnspath')
-             ->samePropertyAs('fullnspath', 'fnp')
-             ->inIs('CLASS')
+             ->outIs('DEFINITION')
+             ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
+             ->inIs(array('OBJECT', 'CLASS'))
+             ->atomIs(array('Member', 'Staticproperty'))
              ->isNotPropertyDefined()
              ->back('first');
         $this->prepareQuery();
-
-        // Case for class::methodcall()
-        $this->atomIs('Trait')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->samePropertyAs('fullnspath', 'fnp')
-             ->inIs('CLASS')
-             ->hasNoIn('DEFINITION')
-             ->back('first');
-        $this->prepareQuery();
-
-        // Case for class::methodcall
 
         // Case for class::constant
         // self will be solved at excution time, but is set to the trait statically
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticconstant')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->samePropertyAs('fullnspath', 'fnp')
+             ->outIs('DEFINITION')
+             ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
+             ->inIs('CLASS')
+             ->atomIs('Staticconstant')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }

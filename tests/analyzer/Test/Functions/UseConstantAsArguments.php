@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UseConstantAsArguments extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testFunctions_UseConstantAsArguments01()  { $this->generic_test('Functions_UseConstantAsArguments.01'); }
     public function testFunctions_UseConstantAsArguments02()  { $this->generic_test('Functions_UseConstantAsArguments.02'); }
@@ -17,5 +17,6 @@ class UseConstantAsArguments extends Analyzer {
     public function testFunctions_UseConstantAsArguments06()  { $this->generic_test('Functions/UseConstantAsArguments.06'); }
     public function testFunctions_UseConstantAsArguments07()  { $this->generic_test('Functions/UseConstantAsArguments.07'); }
     public function testFunctions_UseConstantAsArguments08()  { $this->generic_test('Functions/UseConstantAsArguments.08'); }
+    public function testFunctions_UseConstantAsArguments09()  { $this->generic_test('Functions/UseConstantAsArguments.09'); }
 }
 ?>
