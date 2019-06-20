@@ -219,7 +219,10 @@ class Strval extends Plugin {
             case 'Self' :
             case 'Parent' :
                 $atom->noDelimiter = strtolower($atom->atom);
+                break;
 
+            case 'Magicconstant' :
+                $atom->noDelimiter = $atom->fullcode;
                 break;
 
         default :

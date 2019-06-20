@@ -51,6 +51,7 @@ class Nullval extends Plugin {
             case 'Comparison' :
             case 'Staticclass' :
             case 'Sequence' :
+            case 'Magicconstant' :
                 $atom->isNull = false;
                 break;
 
