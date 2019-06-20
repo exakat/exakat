@@ -34,7 +34,11 @@
                 "3":{"http_build_query":["PHP_QUERY_RFC1738","PHP_QUERY_RFC3986"],
                      "pg_select":["PGSQL_CONV_FORCE_NULL","PGSQL_DML_NO_CONV","PGSQL_DML_ESCAPE","PGSQL_DML_EXEC","PGSQL_DML_ASYNC","PGSQL_DML_STRING"],
                      "str_pad":["STR_PAD_RIGHT","STR_PAD_LEFT","STR_PAD_BOTH"],
-                     "http_redirect":["HTTP_REDIRECT","HTTP_REDIRECT_PERM","HTTP_REDIRECT_FOUND","HTTP_REDIRECT_POST","HTTP_REDIRECT_PROXY","HTTP_REDIRECT_TEMP"]}
+                     "http_redirect":["HTTP_REDIRECT","HTTP_REDIRECT_PERM","HTTP_REDIRECT_FOUND","HTTP_REDIRECT_POST","HTTP_REDIRECT_PROXY","HTTP_REDIRECT_TEMP"]},
+
+                "4":{ "array_multisort":["SORT_ASC","SORT_DESC"]},
+
+                "5":{ "array_multisort":["SORT_REGULAR","SORT_NUMERIC","SORT_STRING","SORT_LOCALE_STRING","SORT_NATURAL","SORT_FLAG_CASE"]}
 },
 
  "combinaison":{"0":{"error_reporting":["E_ERROR","E_WARNING","E_PARSE","E_NOTICE","E_ERROR","E_WARNING","E_ERROR","E_WARNING","E_ERROR","E_WARNING","E_NOTICE","E_ALL","E_ERROR","E_DEPRECATED","E_DEPRECATED","E_ALL", "E_STRICT",0, -1],
