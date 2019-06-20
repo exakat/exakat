@@ -67,7 +67,12 @@ class Scrutinizer extends Reports {
         $resultsAnalyzers->load();
 
         $results = array();
+        $titleCache = array();
         foreach($resultsAnalyzers->toArray() as $row) {
+            if (!isset($titleCache[$row['analyzer']])) {
+                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+            }
+
             if (!isset($results[$row['file']])) {
                 $file = array('filename' => $row['file'],
                               'messages' => array());

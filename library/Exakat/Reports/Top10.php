@@ -33,10 +33,10 @@ class Top10 extends Ambassador {
     const FILE_FILENAME  = 'top10';
     const FILE_EXTENSION = '';
 
-    private $frequences        = array();
-    private $timesToFix        = array();
-    private $themesForAnalyzer = array();
-    private $severities        = array();
+    protected $frequences        = array();
+    protected $timesToFix        = array();
+    protected $themesForAnalyzer = array();
+    protected $severities        = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
