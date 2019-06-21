@@ -33,7 +33,7 @@ class CalledByModule extends Analyzer {
         
         // Merging ALL values of all versions.
         if (empty($calledBy)) {
-//            print "Error in the JSON file \n";
+            print "Error in the JSON file \n";
             return;
         }
         $calledBy = array_merge_recursive(...array_values($calledBy));
@@ -90,9 +90,9 @@ class CalledByModule extends Analyzer {
             $this->processMethodsRegex($methods_regex);
 
             $this->processStaticMethods($static_methods);
-                return;
             $this->processStaticMethodsRegex($static_methods_regex);
 
+// No usage for those
 //            $this->processTraits($classes);
 //            $this->processInterfaces($classes);
 //            $this->processProperties($classes);
@@ -172,7 +172,9 @@ class CalledByModule extends Analyzer {
             return;
         }
 
+        // Check that the class extends one of the mentionned called class
         $this->atomIs('Class')
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->fullnspathIs(array_keys($methods))
              ->savePropertyAs('fullnspath', 'fnp')
@@ -183,7 +185,21 @@ class CalledByModule extends Analyzer {
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
         $this->prepareQuery();
-    }
+
+        // Check that the class implements one of the mentionned called interface
+        $this->atomIs(self::$CLASSES_ALL)
+             ->goToAllImplements(self::INCLUDE_SELF)
+             ->outIs('IMPLEMENTS')
+             ->fullnspathIs(array_keys($methods))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->outIs(self::$CLASS_METHODS)
+             ->is('static', true)
+             ->_as('results')
+             ->outIs('NAME')
+             ->isHash('lccode', $methods, 'fnp')
+             ->back('results');
+        $this->prepareQuery();    }
 
     private function processMethodsRegex($methods_regex) {
         if (empty($methods_regex)) {
@@ -209,16 +225,19 @@ GREMLIN
     private function processStaticMethods($methods) {
         foreach($methods as &$method) {
             $method = $this->dictCode->translate(array_unique($method), Dictionary::CASE_INSENSITIVE);
+            print_r($method);
         }
         unset($method);
         $methods = array_filter($methods);
 
         if (empty($methods)) {
+            print 'No mtehods';
             return;
         }
 
-        // missing extends and implements multi-level
+        // Check that the class extends one of the mentionned called class
         $this->atomIs(self::$CLASSES_ALL)
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->fullnspathIs(array_keys($methods))
              ->savePropertyAs('fullnspath', 'fnp')
@@ -231,7 +250,9 @@ GREMLIN
              ->back('results');
         $this->prepareQuery();
 
+        // Check that the class implements one of the mentionned called interface
         $this->atomIs(self::$CLASSES_ALL)
+             ->goToAllImplements(self::INCLUDE_SELF)
              ->outIs('IMPLEMENTS')
              ->fullnspathIs(array_keys($methods))
              ->savePropertyAs('fullnspath', 'fnp')
@@ -243,6 +264,8 @@ GREMLIN
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
         $this->prepareQuery();
+        
+        //what can we do with Trait? 
     }
 
     private function processStaticMethodsRegex($methods_regex) {
