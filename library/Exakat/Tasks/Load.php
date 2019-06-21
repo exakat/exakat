@@ -3245,7 +3245,7 @@ class Load extends Tasks {
         $extras = array('SOURCE'    => $source,
                         'VALUE'     => $value,
                         'BLOCK'     => $block);
-        if (isset($value)) {
+        if (isset($index)) {
             $extras['INDEX'] = $index;
         }
         $this->runPlugins($foreach, $extras);

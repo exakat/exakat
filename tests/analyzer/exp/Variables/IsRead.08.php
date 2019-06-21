@@ -19,6 +19,8 @@ $expected     = array('$conditionC',
                       '$final',
                       '$switch',
                       '$case',
+                      '$index', 
+                      '$concat',
                      );
 
 $expected_not = array('$e1',

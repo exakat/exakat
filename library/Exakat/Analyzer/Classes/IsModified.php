@@ -27,14 +27,9 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\GroupBy;
 
 class IsModified extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/Constructor',
-                    );
-    }
-    
     public function analyze() {
-        $atoms = array('Member', 'Staticproperty');
-        $this->atomIs($atoms)
+        // $w->c = 3;
+        $this->atomIs(array('Member', 'Staticproperty'))
              ->is('isModified', true);
         $this->prepareQuery();
         return;
