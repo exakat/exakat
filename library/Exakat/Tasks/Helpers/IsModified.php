@@ -52,6 +52,9 @@ class IsModified extends Plugin {
                 if (in_array($extras['VALUE']->atom, $this->variables)) {
                     $extras['VALUE']->isModified = true;
                 }
+                if (isset($extras['INDEX']) && in_array($extras['INDEX']->atom, $this->variables)) {
+                    $extras['INDEX']->isModified = true;
+                }
                 if (!empty(array_filter($extras, function ($x) { return (int) $x->reference; }))) {
                     $extras['SOURCE']->isModified = true;
                 }
