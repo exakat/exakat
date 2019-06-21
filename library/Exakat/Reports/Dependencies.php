@@ -66,7 +66,7 @@ GREMLIN;
             $names[$v[0]] = $v[1];
             $nodes['interface'][] = $v[0];
         }
-        $nodesId = array_flip(call_user_func_array('array_merge', array_values($nodes)));
+        $nodesId = array_flip(array_merge(...array_values($nodes)));
 
         // static constants
         $query = <<<'GREMLIN'

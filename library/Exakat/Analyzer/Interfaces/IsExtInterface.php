@@ -30,16 +30,20 @@ class IsExtInterface extends Analyzer {
         $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_interfaces';
         
-        $i = array();
+        $interfaces = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['interfaces'][0])) {
-                $i[] = $ini['interfaces'];
+                $interfaces[] = $ini['interfaces'];
             }
         }
-        $interfaces = call_user_func_array('array_merge', $i);
+
+        if (empty($interfaces)) {
+            return;
+        }
+        $interfaces = array_merge(...$interfaces);
         $interfaces = makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
@@ -49,14 +53,17 @@ class IsExtInterface extends Analyzer {
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot(array('Array', 'Boolean', 'Null'))
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
+             ->fullnspathIs($interfaces);
+        $this->prepareQuery();
+
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
     }

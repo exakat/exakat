@@ -57,13 +57,13 @@ class Phpconfiguration extends Reports {
         if (empty($functionsArray)) {
             $functionsList = '';
         } else {
-            $functionsArray = call_user_func_array('array_merge', $functionsArray);
+            $functionsArray = array_merge(...$functionsArray);
             $functionsList = implode(',', $functionsArray);
         }
         if (empty($classesArray)) {
             $classesList = '';
         } else {
-            $classesArray = call_user_func_array('array_merge', $classesArray);
+            $classesArray = array_merge(...$classesArray);
             $classesList = implode(',', $classesArray);
         }
 

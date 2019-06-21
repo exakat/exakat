@@ -30,33 +30,106 @@ class CalledByModule extends Analyzer {
 
     public function analyze() {
         $calledBy = $this->config->dev->loadJson('called_by.json');
+        
+        // Merging ALL values of all versions.
+        if (empty($calledBy)) {
+//            print "Error in the JSON file \n";
+            return;
+        }
+        $calledBy = array_merge_recursive(...array_values($calledBy));
 
-        $methods = array();
-        $classes = array();
-        $methods_regex = array();
-        if (isset($calleldBy['classes'])) {
+        $classes               = array();
+        $methods               = array();
+        $methods_regex         = array();
+        $static_methods        = array();
+        $static_methods_regex  = array();
+        $classConstants        = array();
+        if (isset($calledBy['classes'])) {
             foreach($calledBy['classes'] as $class => $what) {
                 // Classes
                 if (isset($what['classes'])) {
                     $classes[] = $class;
                 }
     
-                // Methods
+                // No properties : it makes no sense
+                // Methods (No handling of visibility)
                 if (isset($what['methods'])) {
                     foreach($what['methods'] as $name) {
                         if ($name[0] === '/') {
-                            array_collect_by($methods_regex, $class, trim($name, '/'));
+                            array_collect_by($methods_regex, makeFullnspath($class), trim($name, '/'));
                         } else {
-                            array_collect_by($methods, $class, mb_strtolower($name));
+                            array_collect_by($methods, makeFullnspath($class), mb_strtolower($name));
                         }
+                    }
+                }
+
+                // Static Methods (No handling of visibility)
+                if (isset($what['staticmethods'])) {
+                    foreach($what['staticmethods'] as $name) {
+                        if ($name[0] === '/') {
+                            array_collect_by($static_methods_regex, makeFullnspath($class), mb_strtolower(trim($name, '/')));
+                        } else {
+                            array_collect_by($static_methods, makeFullnspath($class),  mb_strtolower(mb_strtolower($name)));
+                        }
+                    }
+                }
+
+                // Constants (No handling of visibility)
+                if (isset($what['constants'])) {
+                    foreach($what['constants'] as $name) {
+                        array_collect_by($classConstants, makeFullnspath($class), $name);
                     }
                 }
             }
 
-        $this->processClasses($classes);
-        $this->processMethods($methods);
-        $this->processMethodsRegex($methods_regex);
+            $this->processClasses($classes);
+
+            $this->processClassConstants($classConstants);
+
+            $this->processMethods($methods);
+            $this->processMethodsRegex($methods_regex);
+
+            $this->processStaticMethods($static_methods);
+                return;
+            $this->processStaticMethodsRegex($static_methods_regex);
+
+//            $this->processTraits($classes);
+//            $this->processInterfaces($classes);
+//            $this->processProperties($classes);
         }
+
+        $this->processFunctions($calledBy['functions']);
+        $this->processConstants($calledBy['constants']);
+// No usage for variables
+//        $this->processVariables($calledBy['variables']);
+    }
+
+    private function processFunctions($functions) {
+        if (empty($functions)) {
+            return;
+        }
+
+        $this->atomIs('Function')
+             ->fullnspathIs($functions);
+        $this->prepareQuery();
+    }
+
+    private function processConstants($constants) {
+        if (empty($constants)) {
+            return;
+        }
+
+        $this->atomIs('Defineconstant')
+             ->outIs('NAME')
+             ->fullnspathIs($constants);
+        $this->prepareQuery();
+
+        $this->atomIs('Const')
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->fullnspathIs($constants)
+             ->inIs('NAME');
+        $this->prepareQuery();
     }
 
     private function processClasses($classes) {
@@ -69,6 +142,22 @@ class CalledByModule extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname'))
              ->is('fullnspath', $classes)
              ->back('first');
+        $this->prepareQuery();
+    }
+
+    private function processClassConstants($constants) {
+        if (empty($constants)) {
+            return;
+        }
+
+        $this->atomIs(self::$CLASSES_ALL)
+             ->fullnspathIs(array_keys($constants))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->outIs('CONST')
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->isHash('fullcode', $constants, 'fqn')
+             ->inIs('NAME');
         $this->prepareQuery();
     }
 
@@ -107,6 +196,67 @@ class CalledByModule extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs('METHOD')
+             ->_as('results')
+             ->outIs('NAME')
+             ->raw(<<<'GREMLIN'
+has("fullcode").filter{ (it.get().value("fullcode") =~ ***[fnp] ).getCount() != 0  }
+GREMLIN
+, array($methods_regex) )
+             ->back('results');
+        $this->prepareQuery();
+    }
+
+    private function processStaticMethods($methods) {
+        foreach($methods as &$method) {
+            $method = $this->dictCode->translate(array_unique($method), Dictionary::CASE_INSENSITIVE);
+        }
+        unset($method);
+        $methods = array_filter($methods);
+
+        if (empty($methods)) {
+            return;
+        }
+
+        // missing extends and implements multi-level
+        $this->atomIs(self::$CLASSES_ALL)
+             ->outIs('EXTENDS')
+             ->fullnspathIs(array_keys($methods))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->outIs(self::$CLASS_METHODS)
+             ->is('static', true)
+             ->_as('results')
+             ->outIs('NAME')
+             ->isHash('lccode', $methods, 'fnp')
+             ->back('results');
+        $this->prepareQuery();
+
+        $this->atomIs(self::$CLASSES_ALL)
+             ->outIs('IMPLEMENTS')
+             ->fullnspathIs(array_keys($methods))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->outIs(self::$CLASS_METHODS)
+             ->is('static', true)
+             ->_as('results')
+             ->outIs('NAME')
+             ->isHash('lccode', $methods, 'fnp')
+             ->back('results');
+        $this->prepareQuery();
+    }
+
+    private function processStaticMethodsRegex($methods_regex) {
+        if (empty($methods_regex)) {
+            return;
+        }
+        
+        $this->atomIs('Class')
+             ->outIs('EXTENDS')
+             ->fullnspathIs(array_keys($methods_regex))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->outIs(self::$FUNCTIONS_METHOD)
+             ->is('static', true)
              ->_as('results')
              ->outIs('NAME')
              ->raw(<<<'GREMLIN'

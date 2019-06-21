@@ -57,12 +57,8 @@ class VardumpUsage extends Analyzer {
         
 //         call_user_func_array('var_dump', )
         $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functioncallIs(array('\\call_user_func_array', '\\call_user_func'))
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->atomIs('String')
-             ->tokenIsNot('T_QUOTE')
+             ->outWithRank('ARGUMENT', 0)
              ->noDelimiterIs($debugFunctions)
              ->back('first');
         $this->prepareQuery();

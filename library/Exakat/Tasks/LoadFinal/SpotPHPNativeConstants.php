@@ -30,7 +30,10 @@ class SpotPHPNativeConstants extends LoadFinal {
     private $PHPconstants = array();
 
     public function run() {
-        $constants = call_user_func_array('array_merge', $this->PHPconstants);
+        if (empty($this->PHPconstants)) {
+            return;
+        }
+        $constants = array_merge(...$this->PHPconstants);
         $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
         $constantsPHP = array_values($constants);
 

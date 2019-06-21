@@ -26,12 +26,17 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
+    public function dependsOn() {
+        return array('Modules/CalledByModule',
+                    );
+    }
 
     public function analyze() {
         // define('A', 1); No A;
         $this->atomIs('Defineconstant')
              ->hasNoOut('DEFINITION')
-             ->outIs('NAME');
+             ->outIs('NAME')
+             ->analyzerIsNot('Modules/CalledByModule');
         $this->prepareQuery();
 
         // Const from a const
@@ -39,6 +44,7 @@ class UnusedConstants extends Analyzer {
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
+             ->analyzerIsNot('Modules/CalledByModule')
              ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
