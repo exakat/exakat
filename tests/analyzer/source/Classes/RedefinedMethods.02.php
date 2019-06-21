@@ -27,8 +27,8 @@ class c extends b {
     function ad2() {}
 
     function cx() {}
-    function ac() {}
-    function bc() {}
+    function AC() {}
+    function BC() {}
 }
 
 class aad1 extends c {
