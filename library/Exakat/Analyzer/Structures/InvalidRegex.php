@@ -107,7 +107,7 @@ GREMLIN
         
         $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'))
+             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
              ->fullcodeIs($invalid)
              ->back('first');
         $this->prepareQuery();

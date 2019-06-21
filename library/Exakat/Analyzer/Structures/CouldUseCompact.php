@@ -55,7 +55,7 @@ class CouldUseCompact extends Analyzer {
                                 $this->side()
                                      ->filter(
                                         $this->side()
-                                             ->atomIs(array('String', 'Identifier', 'Nsname', 'Concatenation'))
+                                             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
                                              ->has('noDelimiter')
                                      )
                              )
@@ -88,8 +88,10 @@ class CouldUseCompact extends Analyzer {
                              ->filter(
                                 $this->side()
                                      ->outIs('INDEX')
-                                     ->atomIs(array('String', 'Identifier', 'Nsname', 'Concatenation'))
-                                     ->raw('sideEffect{ name = "\\$" + it.get().value("noDelimiter"); }')
+                                     ->atomIs(self::$STRINGS_ALL)
+                                     ->savePropertyAs('noDelimiter', 'name')
+                                     ->makeVariableName('name')
+//                                     ->raw('sideEffect{ name = "\\$" + it.get().value("noDelimiter"); }')
                                      ->inIs('INDEX')
                                      ->outIs('VALUE')
                                      ->atomIs('Variable')

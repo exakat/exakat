@@ -43,7 +43,7 @@ GREMLIN
             return;
         }
 
-        $fullcode = array_merge(...$multiples->toArray())
+        $fullcode = array_merge(...$multiples->toArray());
         $this->atomIs($this->atom)
              ->fullcodeIs($fullcode);
         $this->prepareQuery();

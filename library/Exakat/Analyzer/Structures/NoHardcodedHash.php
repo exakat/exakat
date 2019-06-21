@@ -32,7 +32,7 @@ class NoHardcodedHash extends Analyzer {
         
         $sizes = array_keys((array)$algos);
         // Find common hashes, based on hexadecimal and length
-        $this->atomIs(array('String', 'Concatenation'))
+        $this->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
              ->has('noDelimiter')
              ->raw('filter{ it.get().value("noDelimiter").length() in ***}', $sizes)
              ->regexIs('noDelimiter', '^[a-fA-Z0-9]+\\$')
@@ -58,14 +58,14 @@ class NoHardcodedHash extends Analyzer {
         $this->prepareQuery();
 
         // Crypt (some salts are missing)
-        $this->atomIs(array('String', 'Concatenation'))
+        $this->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
              ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+')
              ->noDelimiterIsNot($stopwords)
              ->regexIsNot('noDelimiter', $regexDate);
         $this->prepareQuery();
 
         // Base64 encode
-        $this->atomIs(array('String', 'Concatenation'))
+        $this->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
              ->raw('filter{ it.get().value("noDelimiter").length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')
