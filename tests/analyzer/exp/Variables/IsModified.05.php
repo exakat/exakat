@@ -19,6 +19,13 @@ $expected     = array('$h',
                       '&$f',
                       '&$d4',
                       '&$h',
+                      '$c', 
+                      '$a', 
+                      '$c3', 
+                      '$c2', 
+                      '$e', 
+                      '$g', 
+                      '$c3',
                      );
 
 $expected_not = array('$i',

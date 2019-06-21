@@ -45,10 +45,11 @@ class IsExtTrait extends Analyzer {
                 $t[] = $ini['traits'];
             }
         }
+
         if (empty($t)) {
             return ;
         }
-        $traits = call_user_func_array('array_merge', $t);
+        $traits = array_merge(...$t);
 
         // no need to process anything!
         if (empty($traits)) { return true; }

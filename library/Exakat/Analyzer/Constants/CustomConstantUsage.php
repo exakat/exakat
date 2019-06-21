@@ -35,20 +35,24 @@ class CustomConstantUsage extends Analyzer {
         $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
-        $c = array();
+        $constants = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $ini = $this->loadIni($inifile);
 
             if (!empty($ini['constants'][0])) {
-                $c[] = $ini['constants'];
+                $constants[] = $ini['constants'];
             }
         }
-        $constants = call_user_func_array('array_merge', $c);
+        
+        if (empty($constants)) {
+            return;
+        }
+        $constants = array_merge(...$constants);
         $constants = makeFullNsPath($constants);
 
         // @note NSnamed are OK by default (may be not always!)
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::$CONSTANTS_ALL)
              ->analyzerIs('Constants/ConstantUsage')
              ->hasIn('DEFINITION')
              ->fullnspathIsNot($constants);

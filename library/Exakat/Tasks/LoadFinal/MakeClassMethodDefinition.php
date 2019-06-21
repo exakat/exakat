@@ -275,6 +275,48 @@ class MakeClassMethodDefinition extends LoadFinal {
               ->atomIs(array('Newcall', 'Self', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Clasanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('MAGICMETHOD')
+              ->outIs('NAME')
+              ->codeIs('__construct', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countDirect = $result->toInt();
+
+        $query = $this->newQuery('MakeClassMethodDefinition new');
+        $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('NEW')
+              ->atomIs(array('Newcall', 'Self', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
+              ->has('fullnspath')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Clasanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('NAME')
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countOld = $result->toInt();
+
+        $query = $this->newQuery('MakeClassMethodDefinition new');
+        $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('NEW')
+              ->atomIs(array('Newcall', 'Self', 'Parent'), Analyzer::WITHOUT_CONSTANTS)
+              ->has('fullnspath')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Clasanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('EXTENDS')
+              ->inIs('DEFINITION')
               ->raw(<<<'GREMLIN'
 until( __.out("MAGICMETHOD").out("NAME").has("fullcode", "__construct")).repeat( __.out("EXTENDS").in("DEFINITION"))
 GREMLIN
@@ -285,8 +327,10 @@ GREMLIN
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countParents = $result->toInt();
 
-        display('Create ' . ($result->toInt()) . ' link between new class and definition');
+        $count = $countParents + $countOld + $countDirect;
+        display("Create $count link between new class and definition");
 
         // Create link between __clone and clone
         // parenthesis, typehint, local new,

@@ -1,6 +1,6 @@
 <?php
 
-rd_kafka_get_err_descs();
+rd_kafka_errno2err();
 rd_kafka_not_function( );
 
 

@@ -130,7 +130,7 @@ class Query {
                 $this->query .= '.' . implode(".\n", $commands);
             }
         } else {
-            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[1]);
+            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[0]);
         }
 
         $arguments = array_column($this->commands, 'arguments');

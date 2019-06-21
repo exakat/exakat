@@ -29,20 +29,20 @@ class OveriddenFunction extends Analyzer {
         $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_functions';
         
-        $f = array();
+        $functions = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\\Ext', '', $ext) . '.ini';
             $ini = $this->loadIni($inifile, 'functions');
             
             if (!empty($ini[0])) {
-                $f[] = $ini;
+                $functions[] = $ini;
             }
         }
-        $functions = call_user_func_array('array_merge', $f);
 
+        $functions = array_merge(...$functions);
         $functions = array_keys(array_count_values($functions));
         $functions = array_map('strtolower', $functions);
-        
+
         $this->atomIs('Functioncall')
              ->tokenIsNot('T_NS_SEPARATOR')
              ->codeIs($functions, self::TRANSLATE, self::CASE_INSENSITIVE)

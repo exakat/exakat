@@ -3210,6 +3210,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
             $this->addLink($foreach, $value, 'INDEX');
+            $index = $value;
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                     ),
@@ -3241,9 +3242,13 @@ class Load extends Tasks {
         $foreach->token       = $this->getToken($this->tokens[$current][0]);
         $foreach->alternative = $isColon;
 
-        $this->runPlugins($foreach, array('SOURCE'    => $source,
-                                          'VALUE'     => $value,
-                                          'BLOCK'     => $block));
+        $extras = array('SOURCE'    => $source,
+                        'VALUE'     => $value,
+                        'BLOCK'     => $block);
+        if (isset($index)) {
+            $extras['INDEX'] = $index;
+        }
+        $this->runPlugins($foreach, $extras);
 
         $this->pushExpression($foreach);
         $this->finishWithAlternative($isColon);

@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnusedFunctions extends Analyzer {
     public function dependsOn() {
         return array('Functions/Recursive',
+                     'Modules/CalledByModule',
                     );
     }
 
@@ -35,7 +36,9 @@ class UnusedFunctions extends Analyzer {
         // function foo() {} // no foo();
         $this->atomIs('Function')
              ->fullnspathIsNot('\\__autoload')
-             ->analyzerIsNot('Functions/Recursive')
+             ->analyzerIsNot(array('Functions/Recursive',
+                                   'Modules/CalledByModule',
+                                  ))
              ->hasNoOut('DEFINITION');
              // Retired 'hasNoDefinition' : It needs a rename, and some checks
         $this->prepareQuery();
@@ -54,6 +57,7 @@ class UnusedFunctions extends Analyzer {
             ->fullnspathIsNot('\\__autoload')
             ->savePropertyAs('fullnspath', 'fnp')
             ->analyzerIsNot('self')
+            ->analyzerIsNot('Modules/CalledByModule')
             // Check for recursive
             // Check for already dead calling function
             ->not(

@@ -27,20 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class RedefinedMethods extends Analyzer {
     public function analyze() {
+        // class x { function y() {}}
+        // class y extends x { function y() {}}
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('results')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'method')
-             ->back('first')
-             ->goToAllParents()
+             ->outIs('OVERWRITE')
              ->isNot('abstract', true) // abstract methods are not redefined.
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->isNot('abstract', true) // abstract methods are not redefined.
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'method')
+             ->inIs('METHOD')
              ->back('results');
         $this->prepareQuery();
     }

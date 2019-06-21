@@ -37,16 +37,21 @@ class IsExtConstant extends Analyzer {
         $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
-        $c = array();
+        $constants = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['constants'][0])) {
-                $c[] = $ini['constants'];
+                $constants[] = $ini['constants'];
             }
         }
-        $constants = call_user_func_array('array_merge', $c);
+
+        if (empty($constants)) {
+            // This won't happen, unless the above reading has failed
+            return;
+        }
+        $constants = array_merge(...$constants);
         $constantsFullNs = makeFullNsPath($constants, true);
         
         // based on fullnspath

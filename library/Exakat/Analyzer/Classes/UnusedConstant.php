@@ -20,23 +20,23 @@
  *
 */
 
-namespace Exakat\Analyzer\Type;
+namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
 
-class Printf extends Analyzer {
-    public function analyze() {
-        $functions = array('\\printf',
-                           '\\sscanf',
-                           '\\fscanf',
-                           '\\vsprintf',
-                           '\\sprintf',
-                           );
+class UnusedConstant extends Analyzer {
 
-        // echo sprintf("%'.9d\n", 123);
-        $this->atomFunctionIs($functions)
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS);
+    public function dependsOn() {
+        return array('Modules/CalledByModule',
+                    );
+    }
+
+    public function analyze() {
+        $this->atomIs('Const')
+             ->hasIn('CONST')
+             ->outIs('CONST')
+             ->analyzerIsNot('Modules/CalledByModule')
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
 }
