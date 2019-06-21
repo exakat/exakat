@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('rd_kafka_get_err_descs( )',
+$expected     = array('rd_kafka_errno2err( )',
                       'RdKafka\\Producer( )',
                      );
 
