@@ -123,7 +123,7 @@ abstract class Analyzer {
     public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
-    public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String');
+    public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname');
 
     public static $CONSTANTS_ALL    = array('Identifier', 'Nsname');
 
