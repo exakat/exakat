@@ -33,7 +33,7 @@ class CalledByModule extends Analyzer {
         
         // Merging ALL values of all versions.
         if (empty($calledBy)) {
-            print "Error in the JSON file \n";
+//            print "Error in the JSON file \n";
             return;
         }
         $calledBy = array_merge_recursive(...array_values($calledBy));
