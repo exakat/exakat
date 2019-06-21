@@ -41,8 +41,18 @@ class AtomIs extends DSL {
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
+            // Local constant
           __.hasLabel(within(["Variable"])).in("DEFINITION").out("DEFINITION").in("LEFT").hasLabel("Assignation").out("RIGHT"),
+          
+          // literal value, passed as an argument
           __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").out("ARGUMENT").filter{ rank == it.get().value('rank');},
+
+          // literal value, passed as an argument
+          __.hasLabel(within(["Ternary"])).out("THEN", "ELSE"),
+
+          __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
+          
+          // default case, will be filtered by hasLabel()
           __.filter{true})
 .hasLabel(within(***))
 GREMLIN;
