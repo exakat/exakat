@@ -36,7 +36,7 @@ class Printf extends Analyzer {
         // echo sprintf("%'.9d\n", 123);
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS);
         $this->prepareQuery();
     }
 }
