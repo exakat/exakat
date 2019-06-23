@@ -34,7 +34,7 @@ Optional requirements :
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
 OS requirements : 
-Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
+Exakat has been tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, maybe with little work. Exakat hasn't been tested on Windows at all. 
 
 For installation, curl or wget, and zip are needed.
 
@@ -43,7 +43,7 @@ Download Exakat
 
 You can download exakat directly from `http://dist.exakat.io/ <http://dist.exakat.io/>`_. 
 
-This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_. 
+This server also provides older versions of Exakat. It is recommended to always download the latest version, which is available with `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_. 
 
 For each version, MD5 and SHA256 signatures are available. The downloaded MD5 must match the one in the related .md5 file. The .md5 also has the version number, for extra check.
 
@@ -77,7 +77,7 @@ For each version, MD5 and SHA256 signatures are available. The downloaded MD5 mu
 Quick installation with OSX
 ---------------------------
 
-Paste the following commands in a terminal prompt. It downloads Exakat, and installs tinkerpop version 3.3.7. 
+Paste the following commands in a terminal prompt. It downloads Exakat and installs tinkerpop version 3.3.7. 
 PHP 7.0 or more recent, curl, homebrew are required.
 
 OSX installation with tinkergraph 3.3.7
@@ -105,7 +105,7 @@ This is the installation script for Exakat and tinkergraph 3.3.7.
 OSX installation troubleshooting
 ********************************
 
-It has be reported that installation fails on OSX 10.11 and 10.12, with error similar to 'Error grabbing Grapes'. To fix this, use the following in command line : 
+It has be reported that installation fails on OSX 10.11 and 10.12, with an error similar to 'Error grabbing Grapes'. To fix this, use the following in command line:
 
 ::
 
@@ -119,7 +119,7 @@ They remove some files for grapes, that it will rebuild later. Then, try again t
 Full installation with Debian/Ubuntu
 -------------------------------------
 
-The following commands are an optional pre-requisite to the Quick installation guide, that just follows. If something is missing in the next section, check with this section that all has beed installed correctly.
+The following commands are an optional pre-requisite to the Quick installation guide, that just follows. If something is missing in the next section, check with this section that all has been installed correctly.
 
 ::
 
@@ -217,7 +217,7 @@ The binaries above are used with the `init` and `update` commands, to get the so
 Installation guide with Docker
 ------------------------------
 
-There are multiple ways to use exakat with docker. There is an image with a full exakat installation, which run with a traditional installation, or inside the audited code. Or, You may use Docker with a standard installation, to run useful part, such as a specific PHP version or the central database. 
+There are multiple ways to use exakat with docker. There is an image with a full exakat installation, which runs with a traditional installation, or inside the audited code. Or, you may use Docker with a standard installation, to run useful part, such as a specific PHP version or the central database. 
 
 image:: images/exakat-and-docker.png
 
