@@ -56,8 +56,8 @@ class CouldBeConstant extends Analyzer {
         $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->hasNoIn('VALUE')
              ->noDelimiterIs($strings)
-             ->inIs()
-             ->atomIsNot(array('Heredoc', 'String', 'Concatenation'));
+             ->goToExpression()
+             ->atomIsNot(array('Heredoc', 'String', 'Concatenation', 'Analysis'));
         $this->prepareQuery();
     }
 }
