@@ -501,15 +501,15 @@ Options
 |           |     | Report is located in the projects/<project>/ folder                         |
 |           |     | Default is 'stdout', but varies with format.                                |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -T        | No  | Thema's results. All the analysers in this thema will be reported.          |
+| -T        | No  | Thema's results. All the analyses in this thema will be reported.           |
 |           |     | Note that the report format may override this configuration : for example   |
-|           |     | Ambassador manage its own list of analysers.                                |
+|           |     | Ambassador manage its own list of analyses.                                 |
 |           |     | Uses this with Text format.                                                 |
 |           |     | Has priority over the -P option                                             |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -P        | No  | Analyzer's results. Only one analyser's will be reported.                   |
+| -P        | No  | Analyzer's results. Only one analysis's will be reported.                   |
 |           |     | Note that the report format may override this configuration : for example   |
-|           |     | Ambassador manage its own list of analysers.                                |
+|           |     | Ambassador manage its own list of analyses.                                 |
 |           |     | Uses this with Text format.                                                 |
 |           |     | Has lower priority than the -T option                                       |
 +-----------+-----+-----------------------------------------------------------------------------+
