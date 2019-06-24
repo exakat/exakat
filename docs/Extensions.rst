@@ -678,14 +678,16 @@ This is the Skeleton extension for Exakat.
 Shopware analysis
 __________________________________________________
 
-This extension includes 9 analyzers.
+This extension includes 11 analyzers.
 
+* CheckGetSubscribedEvents (Shopware/CheckGetSubscribedEvents)
 * Shopware 5.0 Compatibility (Shopware/Shopware_5_0)
 * Shopware 5.1 Compatibility (Shopware/Shopware_5_1)
 * Shopware 5.2 Compatibility (Shopware/Shopware_5_2)
 * Shopware 5.3 Compatibility (Shopware/Shopware_5_3)
 * Shopware 5.4 Compatibility (Shopware/Shopware_5_4)
 * Shopware 5.5 Compatibility (Shopware/Shopware_5_5)
+* Shopware 5.6 Compatibility (Shopware/Shopware_5_6)
 * Shopware Constant Usage (Shopware/ShopwareConstantUsage)
 * Shopware Function Usage (Shopware/ShopwareFunctionsUsage)
 * Shopware Usage (Shopware/ShopwareUsage)

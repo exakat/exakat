@@ -10,7 +10,7 @@ Summary
 * `Engine configuration`_
 * `Project Configuration`_
 * `Configuring analysis to be run`_
-* `Specific analyser configurations`_
+* `Specific analysis configurations`_
 
 Common Behavior
 ---------------
@@ -269,7 +269,7 @@ ignore_dirs and include_dirs are the option used to select files within a folder
 include_dirs has priority over the `config.cache` configuration file. If a folder has been marked for exclusion in the `config.cache` file, it may be forced to be included by configuring its value with include_dirs in the `config.ini` file. 
 
 
-Specific analyser configurations
+Specific analysis configurations
 --------------------------------
 
 Some analyzer may be configured individually. Those parameters are then specific to one analyzer, and it only affects their behavior. 

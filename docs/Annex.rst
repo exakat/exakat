@@ -428,12 +428,18 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.5
+
+  * Could Use Trait (Traits/CouldUseTrait)
+
 * 1.8.4
 
-  * Always Use Function With array_key_exists() (Performances/Php74ArrayKeyExists)
+  * Always Use Function With array_key_exists() (Performances/Php74ArrayKeyExists ; Performances)
   * Complex Dynamic Names (Variables/ComplexDynamicNames ; Suggestions)
+  * Could Be Constant (Constants/CouldBeConstant ; Suggestions)
   * New Constants In PHP 7.4 (Php/Php74NewConstants ; CompatibilityPHP74)
   * Regex On Arrays (Performances/RegexOnArrays ; Performances)
+  * Unused Class Constant (Classes/UnusedConstant)
   * curl_version() Has No Argument (Structures/CurlVersionNow ; Unassigned)
 
 * 1.8.3
@@ -466,7 +472,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.7.9
 
   * Avoid option arrays in constructors (Classes/AvoidOptionArrays)
-  * Traits/TraitNotFound (Traits/TraitNotFound ; Analyze, LintButWontExec)
+  * Trait Not Found (Traits/TraitNotFound ; Analyze, LintButWontExec)
   * Useless Default Argument (Functions/UselessDefault ; Suggestions)
   * ext/ffi (Extensions/Extffi ; Appinfo, Appcontent)
   * ext/uuid (Extensions/Extuuid ; Appinfo)
@@ -479,8 +485,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.7.7
 
   * Implode One Arg (Php/ImplodeOneArg)
+  * Incoming Values (Php/IncomingValues ; Internal)
   * Integer Conversion (Security/IntegerConversion ; Security)
-  * Php/IncomingValues (Php/IncomingValues ; Internal)
 
 * 1.7.6
 
@@ -531,8 +537,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.4
 
+  * Defined Classes (Modules/DefinedClasses)
   * Don't Be Too Manual (Structures/DontBeTooManual ; Coding Conventions)
-  * Ext/DefinedClasses (Modules/DefinedClasses)
   * Use Coalesce Equal (Structures/UseCoalesceEqual ; )
 
 * 1.6.3
@@ -1771,7 +1777,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Simple, Suggestions, Level 2)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Simple)
   * Wrong Number Of Arguments (Functions/WrongNumberOfArguments ; Analyze, OneFile, Simple)
-  * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; Analyze, OneFile, Simple)
+  * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; Under Work)
   * Wrong Optional Parameter (Functions/WrongOptionalParameter ; Analyze, Simple, Level 1)
   * Wrong Parameter Type (Php/InternalParameterType ; Analyze, OneFile, Simple)
   * Wrong fopen() Mode (Php/FopenMode ; Analyze)
@@ -1933,7 +1939,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-57 PHP error message detailled : 
+58 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -1980,6 +1986,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`The parent constructor was not called: the object is in an invalid state <must-call-parent-constructor>`
 * :ref:`Too few arguments to function foo(), 1 passed and exactly 2 expected <wrong-number-of-arguments>`
 * :ref:`Trait 'T' not found <undefined-trait>`
+* :ref:`Trait 'a' not found  <trait-not-found>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
 * :ref:`Trait method f has not been applied, because there are collisions with other trait methods on x <useless-alias>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
@@ -2101,7 +2108,7 @@ List of external links mentionned in this documentation.
 * `__autoload <http://php.net/autoload>`_
 * `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
-* `Add array_key_exists() to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
+* `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
@@ -2334,7 +2341,7 @@ List of external links mentionned in this documentation.
 * `include_once <http://php.net/manual/en/function.include-once.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
 * `Info Predefined Constants <http://php.net/manual/en/info.constants.php>`_
-* `instanceof <http://php.net/instanceof>`_
+* `Instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
@@ -2528,7 +2535,6 @@ List of external links mentionned in this documentation.
 * `SARB <https://github.com/DaveLiddament/sarb>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
-* `Scope Resolution Operator (::) ¶ <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `Session <http://php.net/manual/en/book.session.php>`_
@@ -2611,8 +2617,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2757,6 +2763,7 @@ _______
 |   analyzer[] = "Classes/UndefinedStaticclass";
 |   analyzer[] = "Classes/UnresolvedClasses";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
+|   analyzer[] = "Classes/UnusedConstant";
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Classes/UseInstanceof";
 |   analyzer[] = "Classes/UsedOnceProperty";
@@ -2819,7 +2826,6 @@ _______
 |   analyzer[] = "Functions/UselessReturn";
 |   analyzer[] = "Functions/UsesDefaultArguments";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
-|   analyzer[] = "Functions/WrongNumberOfArgumentsMethods";
 |   analyzer[] = "Functions/WrongOptionalParameter";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
@@ -3021,6 +3027,7 @@ _______
 |   analyzer[] = "Structures/pregOptionE";
 |   analyzer[] = "Structures/toStringThrowsException";
 |   analyzer[] = "Traits/AlreadyParentsTrait";
+|   analyzer[] = "Traits/CouldUseTrait";
 |   analyzer[] = "Traits/DependantTrait";
 |   analyzer[] = "Traits/EmptyTrait";
 |   analyzer[] = "Traits/MethodCollisionTraits";
@@ -3077,6 +3084,7 @@ ___________
 |   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UnreachableConstant";
+|   analyzer[] = "Classes/UnusedConstant";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
@@ -3827,6 +3835,7 @@ ___________
 |   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/TooManyChildren";
 |   analyzer[] = "Classes/UnitializedProperties";
+|   analyzer[] = "Constants/CouldBeConstant";
 |   analyzer[] = "Exceptions/CouldUseTry";
 |   analyzer[] = "Exceptions/OverwriteException";
 |   analyzer[] = "Functions/AddDefaultValue";
