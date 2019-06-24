@@ -88,27 +88,28 @@ GREMLIN;
 
             $analyzersClassList = makeList($analyzersClass);
             $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANALYZED')
-.sideEffect{ line = it.get().value('line');
-             fullcode = it.get().value('fullcode');
-             file='None'; 
-             theFunction = 'None'; 
-             theClass='None'; 
-             theNamespace='None'; 
+g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out("ANALYZED")
+.sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = "None"; 
+             theClass="None"; 
+             theNamespace="None"; 
              }
-.where( __.until( hasLabel('Project') ).repeat( 
+.where( __.until( hasLabel("Project") ).repeat( 
     __.in($linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Closure', 'Magicmethod', 'Method']) { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface']) { theClass = it.get().value('fullcode')} }
-      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrowfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Class", "Classanonymous", "Trait", "Interface"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
        )
 )
-.map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
+.map{ ["line":line, "file":file, "fullcode":fullcode, "function":theFunction, "class":theClass, "namespace":theNamespace]; }
 GREMLIN;
 
             $vertices = $this->gremlin->query($query);
             if (isset($vertices->results)) {
                 $vertices = $vertices->results;
+                print_r($vertices);
             }
 
             $return = array();
