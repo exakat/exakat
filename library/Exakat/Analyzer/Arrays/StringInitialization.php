@@ -27,34 +27,25 @@ use Exakat\Analyzer\Analyzer;
 class StringInitialization extends Analyzer {
     public function analyze() {
         // $a = ''; $a[1] = 3;
-        $this->atomIs('Assignation')
-             ->codeIs('=')
-             ->outIs('RIGHT')
-             ->atomIs(self::$STRINGS_ALL)
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->inIs('DEFINITION')
+        // const C = ''; $a = C; $a[1] = 3;
+        $this->atomIs(array('Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parameter', 'Propertydefinition', 'Virtualproperty', 'Variabledefinition'))
+             ->outIs('DEFAULT')
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->back('first')
+             ->outIsIE('NAME')
              ->outIs('DEFINITION')
-             ->atomIs('Variablearray')
-             ->back('first');
+             ->hasIn(array('VARIABLE', 'APPEND'));
         $this->prepareQuery();
 
-        // const C = ''; $a = C; $a[1] = 3;
-        $this->atomIs('Assignation')
-             ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
-             ->outIs('RIGHT')
-             ->atomIs(self::$CONSTANTS_ALL)
-             ->inIs('DEFINITION')
-             ->outIs('VALUE')
-             ->atomIs(self::$STRINGS_ALL)
+        // default are on Parametername when they are not explicit
+        $this->atomIs('Parameter')
+             ->outIs('NAME')
+             ->outIs('DEFAULT')
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->back('first')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->inIs('DEFINITION')
+             ->outIsIE('NAME')
              ->outIs('DEFINITION')
-             ->atomIs('Variablearray')
-             ->back('first');
+             ->hasIn(array('VARIABLE', 'APPEND'));
         $this->prepareQuery();
     }
 }
