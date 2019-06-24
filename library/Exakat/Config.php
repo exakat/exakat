@@ -22,6 +22,7 @@
 
 namespace Exakat;
 
+use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
@@ -252,7 +253,7 @@ class Config {
            throw new InaptPHPBinary('PHP needs ' . (count($missing) == 1 ? 'one' : count($missing)) . ' extension' . (count($missing) > 1 ? 's' : '') . ' with the current version : ' . implode(', ', $missing));
         }
     }
-    
+
     public function commandLineJson() {
         $return = $this->argv;
         
@@ -262,7 +263,90 @@ class Config {
         unset($return[0]);
         return json_encode(array_values($return));
     }
-    
+
+    public function toIni() {
+        $ini = array();
+
+        $ini[] = ";Main PHP version for this code.";
+        $ini[] = "phpversion = {$this->options['phpversion']}";
+        $ini[] = '';
+
+        $ini[] = ";Ignored dirs and files, relative to code source root.";
+        foreach($this->ignore_dirs as $ignore_dir) {
+            $ini[] = "ignore_dirs[] = \"$ignore_dir\"";
+        }
+        $ini[] = '';
+
+        $ini[] = ";Included dirs or files, relative to code source root. Default to all.";
+        $ini[] = ";Those are added after ignoring directories";
+        foreach($this->include_dirs as $include_dir) {
+            $ini[] = "include_dirs[] = \"$include_dir\"";
+        }
+        $ini[] = '';
+
+        $ini[] = ";Accepted file extensions";
+        $ini[] = 'file_extensions = "'.implode(',', $this->file_extensions).'"';
+        $ini[] = '';
+
+        $ini[] = ";Description of the project";
+        $ini[] = "project_name        = \"{$this->project_name}\";";
+        $ini[] = "project_url         = \"{$this->project_url}\";";
+        $ini[] = "project_vcs         = \"{$this->project_vcs}\";";
+        $ini[] = "project_description = \"{$this->project_description}\";";
+        $ini[] = "project_branch      = \"{$this->project_branch}\";";
+        $ini[] = "project_tag         = \"{$this->project_tag}\";";
+        $ini[] = '';
+
+        $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
+        foreach($parameters as $parameter) {
+            $class = "\Exakat\Analyzer\\".str_replace('/', '\\', $parameter);
+            if (!class_exists($class)) {
+                continue;
+            }
+            $ini[] = "[$parameter]";
+            foreach($this->options[$parameter] as $name => $value) {
+                if (!property_exists($class, $name)) {
+                    continue;
+                }
+                $ini[] = "$name = $value;";
+            }
+            $ini[] = '';
+        }
+
+        return implode(PHP_EOL, $ini);
+    }
+
+    public function toYaml() {
+        $yaml = array('phpversion'          => $this->options['phpversion'],
+                      'ignore_dirs'         => $this->options['ignore_dirs'],
+                      'include_dirs'        => $this->options['include_dirs'],
+                      'file_extensions'     => $this->options['file_extensions'],
+                      'project_name'        => $this->project_name,
+                      'project_url'         => $this->project_url,
+                      'project_vcs'         => $this->project_vcs,
+                      'project_description' => $this->project_description,
+                      'project_branch'      => $this->project_branch,
+                      'project_tag'         => $this->project_tag,
+                      );
+
+        $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
+        foreach($parameters as $parameter) {
+            $class = "\Exakat\Analyzer\\".str_replace('/', '\\', $parameter);
+            if (!class_exists($class)) {
+                continue;
+            }
+            $yaml[$parameter] = array();
+            foreach($this->options[$parameter] as $name => $value) {
+                if (!property_exists($class, $name)) {
+                    continue;
+                }
+                $yaml[$parameter][$name] = $value;
+            }
+        }
+
+        return Symfony_Yaml::dump($yaml);
+    }
+
     public function duplicate($options) {
         $return = clone $this;
         
