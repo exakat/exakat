@@ -917,7 +917,8 @@ SQL;
         print file_put_contents('docs/Rulesets.rst', $rst)." octets written for rulesets\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
-        $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);
+        $replacement = preg_replace('/\$([0-9])/', '\\\\$0', $this->rules);
+        $rst = preg_replace('/.. comment: Rules details(.*)d4a634700b94af15c6612b44000d8e148260503b/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$replacement", $rst);
         print file_put_contents('./docs/Rules.rst',$rst)." octets written for Rules\n";
     }
     
