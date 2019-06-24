@@ -34,7 +34,7 @@ class NoHardcodedHash extends Analyzer {
         // Find common hashes, based on hexadecimal and length
         $this->atomIs(self::$STRINGS_ALL)
              ->has('noDelimiter')
-             ->raw('filter{ it.get().value("noDelimiter").length() in ***}', $sizes)
+             ->raw('filter{ it.get().value("noDelimiter").toString().length() in ***}', $sizes)
              ->regexIs('noDelimiter', '^[a-fA-Z0-9]+\\$')
              ->isNotMixedcase('noDelimiter')
              ->noDelimiterIsNot($stopwords)
@@ -67,7 +67,7 @@ class NoHardcodedHash extends Analyzer {
         // Base64 encode
         $this->atomIs(self::$STRINGS_ALL)
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
-             ->raw('filter{ it.get().value("noDelimiter").length() % 4 == 0}')
+             ->raw('filter{ it.get().value("noDelimiter").toString().length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')
              ->codeLength(' > 101');
         $this->prepareQuery();

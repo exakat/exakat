@@ -31,7 +31,7 @@ class IsNotMixedcase extends DSL {
         list($property) = func_get_args();
 
         assert($this->assertProperty($property));
-        return new Command('filter{it.get().value("' . $property . '") == it.get().value("' . $property . '").toLowerCase() || it.get().value("' . $property . '") == it.get().value("' . $property . '").toUpperCase()}');
+        return new Command('filter{it.get().value("' . $property . '") == it.get().value("' . $property . '").toString().toLowerCase() || it.get().value("' . $property . '") == it.get().value("' . $property . '").toString().toUpperCase()}');
     }
 }
 ?>

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldBeConstant extends Analyzer {
     public function analyze() {
-        // We do that for strings. 
+        // We do that for strings.
         // Not for : Boolean, integers (may be non-trivial ones? ), Floats
         // May be for arrays (sorting issues)
         
@@ -56,8 +56,8 @@ class CouldBeConstant extends Analyzer {
         $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->hasNoIn('VALUE')
              ->noDelimiterIs($strings)
-             ->inIs()
-             ->atomIsNot(array('Heredoc', 'String', 'Concatenation'));
+             ->goToExpression()
+             ->atomIsNot(array('Heredoc', 'String', 'Concatenation', 'Analysis'));
         $this->prepareQuery();
     }
 }

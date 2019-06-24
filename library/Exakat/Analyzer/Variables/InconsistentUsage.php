@@ -40,6 +40,7 @@ GREMLIN
         $this->prepareQuery();
 
         // Not taking into account absence of default on purpose.
+        // improve with return typehint of functions
         $this->atomIs('Propertydefinition')
              ->raw(<<<'GREMLIN'
 where(
@@ -48,6 +49,8 @@ __.sideEffect{ s = ['class':0, 'array':0, 'variable':0];}
     __.out('DEFAULT').sideEffect{
         if (it.get().label() == 'Null')            { s['class']++; }
    else if (it.get().label() == 'Arrayliteral')    { s['array']++; }
+   else if (it.get().label() == 'New')             { s['class']++; }
+   else if (it.get().label() == 'Clone')           { s['class']++; }
    else                                            { s['variable']++; }
     }.fold()
   )
@@ -57,6 +60,7 @@ __.sideEffect{ s = ['class':0, 'array':0, 'variable':0];}
           if (it.get().label() == 'OBJECT')   { s['class']++; }
      else if (it.get().label() == 'CLASS')    { s['class']++; }
      else if (it.get().label() == 'CLONE')    { s['class']++; }
+     else if (it.get().label() == 'NEW')      { s['class']++; }
      else if (it.get().label() == 'APPEND')   { s['array']++; }
      else if (it.get().label() == 'VARIABLE') { s['array']++; }
      else { s['variable']++; };

@@ -395,7 +395,7 @@ function makeArray($value) {
     }
 }
 
-const FNP_CONSTANT = true;
+const FNP_CONSTANT     = true;
 const FNP_NOT_CONSTANT = false;
 
 function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
@@ -464,7 +464,7 @@ function rst2htmlLink($txt) {
     // `title <url>`_ => <a href="url">title</a>
     // `anchor`_ => <a href="#anchor">anchor</a>
     
-    return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
+    return preg_replace('/`([^<]+?) <([^>]+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
 
 function rst2literal($txt) {

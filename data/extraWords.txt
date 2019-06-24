@@ -254,3 +254,9 @@ ODBC
 ZooKeeper
 barcodes
 barcode
+redeclare
+redeclares
+redeclaring
+redeclared
+substraction
+substractions

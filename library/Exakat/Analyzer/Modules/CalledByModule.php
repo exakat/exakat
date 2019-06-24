@@ -265,7 +265,7 @@ GREMLIN
              ->back('results');
         $this->prepareQuery();
         
-        //what can we do with Trait? 
+        //what can we do with Trait?
     }
 
     private function processStaticMethodsRegex($methods_regex) {

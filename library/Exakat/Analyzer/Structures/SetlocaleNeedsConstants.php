@@ -37,16 +37,14 @@ class SetlocaleNeedsConstants extends Analyzer {
 
         // something else than a constant
         $this->atomFunctionIs('\\setlocale')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->atomIs(self::$STRINGS_ALL)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\setlocale')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIsNot($allowedConstants)
              ->back('first');
         $this->prepareQuery();

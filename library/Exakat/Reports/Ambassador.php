@@ -247,6 +247,7 @@ class Ambassador extends Reports {
 
         // Annex
         $this->generateAnalyzerSettings();
+        $this->generateAuditConfig();
         $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
@@ -304,7 +305,7 @@ class Ambassador extends Reports {
     }
 
     protected function generateDocumentation($analyzerList) {
-        $baseHTML = $this->getBasedPage('analyzers_doc');
+        $baseHTML = $this->getBasedPage('analyses_doc');
         $docHTML = array();
 
         foreach($analyzerList as $analyzerName) {
@@ -333,7 +334,17 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>' . implode(' - ', $badges) . '</p>';
-            $analyzersDocHTML .= '<p>' . nl2br($this->setPHPBlocs($description['description'])) . '</p>';
+            $description = $description['description'];
+            static $regex;
+            if (empty($regex)) {
+                $php_native_functions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
+//                $php_native_functions = array('substr', 'mb_substr');
+                usort($php_native_functions, function ($a, $b) { return strlen($b) <=> strlen($a);} );
+                $regex = '/(' . implode('|', $php_native_functions) . ')\(\)/m';
+            }
+            $description = preg_replace($regex, '`\1() <https://www.php.net/\1>`_', $description);
+
+            $analyzersDocHTML .= '<p>' . nl2br($this->setPHPBlocs($description)) . '</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
@@ -349,9 +360,9 @@ class Ambassador extends Reports {
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', implode(PHP_EOL, $docHTML));
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyses\' documentation');
 
-        $this->putBasedPage('analyzers_doc', $finalHTML);
+        $this->putBasedPage('analyses_doc', $finalHTML);
     }
 
     protected function generateSecurity() {
@@ -1592,7 +1603,7 @@ HTML;
     protected function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
-        $baseHTML = $this->getBasedPage('analyzers');
+        $baseHTML = $this->getBasedPage('analyses');
         $analyserHTML = '';
 
         foreach ($analysers as $analyser) {
@@ -1610,7 +1621,7 @@ HTML;
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
 
-        $this->putBasedPage('analyzers', $finalHTML);
+        $this->putBasedPage('analyses', $finalHTML);
     }
 
     protected function getAnalyzersResultsCounts() {
@@ -2017,7 +2028,7 @@ $issues
       var settings = { 
         items           : data_items,
         facets          : { 
-          'analyzer'  : 'Analyzer',
+          'analyzer'  : 'Analysis',
           'file'      : 'File',
           'severity'  : 'Severity',
           'complexity': 'Time To Fix',
@@ -2194,11 +2205,11 @@ SQL;
             $analyzers .= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('proc_analyzers');
+        $html = $this->getBasedPage('proc_analyses');
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyzers\' list');
+        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyses\' list');
 
-        $this->putBasedPage('proc_analyzers', $html);
+        $this->putBasedPage('proc_analyses', $html);
     }
 
     private function generateExternalLib() {
@@ -2504,6 +2515,16 @@ HTML;
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
 
         $this->putBasedPage('compatibility_version', $html);
+    }
+
+    protected function generateAuditConfig() {
+        $ini = $this->config->toIni();
+        $yaml = $this->config->toYaml();
+
+        $html = $this->getBasedPage('annex_config');
+        $html = $this->injectBloc($html, 'CONFIG_INI', $ini);
+        $html = $this->injectBloc($html, 'CONFIG_YAML', $yaml);
+        $this->putBasedPage('annex_config', $html);
     }
 
     protected function generateAnalyzerSettings() {
@@ -4850,7 +4871,7 @@ HTML;
     }
     
     private function makeDocLink($analyzer) {
-        return "<a href=\"analyzers_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
+        return "<a href=\"analyses_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
     }
 
     private function toHtmlList(array $array) {

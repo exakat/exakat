@@ -26,29 +26,36 @@ use Exakat\Analyzer\Analyzer;
 
 class MemoizeMagicCall extends Analyzer {
     public function analyze() {
-        //
-
-        $LINKS_DOWN = $this->linksDown;
-
+        // function foo() { $a = $this->a; $b = $this->a; } // $this->a is routed to __get();
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
-             ->raw(<<<GREMLIN
-sideEffect{ members = [:]; }.where(
-    __.repeat( __.out($LINKS_DOWN)).emit()
-      .hasLabel("Member").has('isRead', true).where( __.in("DEFINITION").hasLabel("Magicmethod").out("NAME").has("fullcode", "__get"))
-      .sideEffect{ 
-        m = it.get().value("fullcode");
-        if (members[m] != null) {
-          ++members[m]; 
-        } else {
-          members[m] = 1; 
-        }
-      }
-      .fold()
-)
+             ->initVariable('members', '[:]')
+             ->filter(
+                $this->side()
+                     ->atomInsideNoDefinition('Member')
+                     ->is('isRead', true)
+                     ->filter(
+                        $this->side()
+                             ->inIs('DEFINITION')
+                             ->atomIs('Magicmethod')
+                             ->outIs('NAME')
+                             ->codeIs('__get')
+                     )
+                     ->raw(<<<'GREMLIN'
+sideEffect{ 
+   m = it.get().value("fullcode");
+   if (members[m] != null) {
+     ++members[m]; 
+   } else {
+     members[m] = 1; 
+   }
+}
+.fold()
+
 GREMLIN
-)
-             ->atomInside('Member')
+                )
+             )
+             ->atomInsideNoDefinition('Member')
              ->filter('members[it.get().value("fullcode")] > 1;')
              ->back('first');
         $this->prepareQuery();

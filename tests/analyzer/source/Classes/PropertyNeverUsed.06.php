@@ -3,7 +3,7 @@
 class x {
     function y () {
 //        self::$staticPropertySelf = 6;
-        static::$staticPropertyStatic = 7;
+        static::$staticPropertyStatic = 7; // Used, but declared in a child. 
 // undeclared 
          x::$staticPropertyx = 8;
         \x::$staticPropertyxFNS = 9;

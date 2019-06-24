@@ -28,7 +28,7 @@ class x {
         self::$p4->b = 1;
 
         self::$p4a = new c;
-        self::$p4a = clone C;
+        self::$p4a = clone $C;
     }
 
 }

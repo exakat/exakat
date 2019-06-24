@@ -8,10 +8,6 @@ $expected     = array('class inANew { /**/ } ',
                       'class inAString { /**/ } ',
                       'class inAInstanceof { /**/ } ',
                       'class inATypehint { /**/ } ',
-                      'class inAImplements { /**/ } ',
-                      'class inAImplements1 { /**/ } ',
-                      'class inAImplements2 { /**/ } ',
-                      'class inAImplements3 { /**/ } ',
                      );
 
 $expected_not = array('class unusedClass { /**/ } ',
@@ -20,6 +16,10 @@ $expected_not = array('class unusedClass { /**/ } ',
                       'class inAString { /**/ } ',
                       'class inAString2 { /**/ } ',
                       'class inAUseWithAlias { /**/ } ',
+                      'class inAImplements { /**/ } ',
+                      'class inAImplements1 { /**/ } ',
+                      'class inAImplements2 { /**/ } ',
+                      'class inAImplements3 { /**/ } ',
                      );
 
 ?>

@@ -1,12 +1,9 @@
 <?php
 
-$expected     = array('$a = \'\'',
-                      '$c = <<<HERE
-    
-    
-HERE',
-                      '$b = \'\' . "b"',
-                      '$d = C',
+$expected     = array('$b', 
+                      '$a', 
+                      '$d', 
+                      '$c',
                      );
 
 $expected_not = array('$f = array( )',

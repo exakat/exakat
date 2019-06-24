@@ -109,75 +109,75 @@ class Docs {
                              );
 
     private $extras = array( 
-                 'switch()'                       => 'http://php.net/manual/en/control-structures.switch.php',
-                 'for()'                          => 'http://php.net/manual/en/control-structures.for.php',
-                 'foreach()'                      => 'http://php.net/manual/en/control-structures.foreach.php',
+                 'switch()'                       => 'http://www.php.net/manual/en/control-structures.switch.php',
+                 'for()'                          => 'http://www.php.net/manual/en/control-structures.for.php',
+                 'foreach()'                      => 'http://www.php.net/manual/en/control-structures.foreach.php',
                  'while()'                        => 'http://php.net/manual/en/control-structures.while.php',
-                 'do..while()'                    => 'http://php.net/manual/en/control-structures.do.while.php',
+                 'do..while()'                    => 'http://www.php.net/manual/en/control-structures.do.while.php',
    
                  'die'                            => 'http://www.php.net/die',
-                 'exit'                           => 'http://www.php.net/exit',
-                 'isset'                          => 'http://www.php.net/isset',
-                 'break'                          => 'http://php.net/manual/en/control-structures.break.php',
-                 'continue'                       => 'http://php.net/manual/en/control-structures.continue.php',
-                 'instanceof'                     => 'http://php.net/manual/en/language.operators.type.php',
-                 'insteadof'                      => 'http://php.net/manual/en/language.oop5.traits.php',
+                 'exit'                           => 'http://www.www.php.net/exit',
+                 'isset'                          => 'http://www.www.php.net/isset',
+                 'break'                          => 'http://www.php.net/manual/en/control-structures.break.php',
+                 'continue'                       => 'http://www.php.net/manual/en/control-structures.continue.php',
+                 'instanceof'                     => 'http://www.php.net/manual/en/language.operators.type.php',
+                 'insteadof'                      => 'http://www.php.net/manual/en/language.oop5.traits.php',
                      
-                 '**'                             => 'http://php.net/manual/en/language.operators.arithmetic.php',
-                 '...'                            => 'http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list',
-                 '@'                              => 'http://php.net/manual/en/language.operators.errorcontrol.php',
-                 '$_GET'                          => 'http://php.net/manual/en/reserved.variables.get.php',
-                 '$_POST'                         => 'http://php.net/manual/en/reserved.variables.post.php',
-                 '$_REQUEST'                      => 'http://php.net/manual/en/reserved.variables.request.php',
-                 '$_ENV'                          => 'http://php.net/manual/en/reserved.variables.env.php',
-                 '$HTTP_RAW_POST_DATA'            => 'http://php.net/manual/en/reserved.variables.httprawpostdata.php',
-                 '$this'                          => 'http://php.net/manual/en/language.oop5.basic.php',
+                 '**'                             => 'http://www.php.net/manual/en/language.operators.arithmetic.php',
+                 '...'                            => 'http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list',
+                 '@'                              => 'http://www.php.net/manual/en/language.operators.errorcontrol.php',
+                 '$_GET'                          => 'http://www.php.net/manual/en/reserved.variables.get.php',
+                 '$_POST'                         => 'http://www.php.net/manual/en/reserved.variables.post.php',
+                 '$_REQUEST'                      => 'http://www.php.net/manual/en/reserved.variables.request.php',
+                 '$_ENV'                          => 'http://www.php.net/manual/en/reserved.variables.env.php',
+                 '$HTTP_RAW_POST_DATA'            => 'http://www.php.net/manual/en/reserved.variables.httprawpostdata.php',
+                 '$this'                          => 'http://www.php.net/manual/en/language.oop5.basic.php',
                   
-                 '__construct'                  => 'http://php.net/manual/en/language.oop5.decon.php',
-                 '__destruct'                   => 'http://php.net/manual/en/language.oop5.decon.php',
+                 '__construct'                  => 'http://www.php.net/manual/en/language.oop5.decon.php',
+                 '__destruct'                   => 'http://www.php.net/manual/en/language.oop5.decon.php',
                   
-                 '__call'                       => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__callStatic'                 => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__get'                        => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__set'                        => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__call'                       => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__callStatic'                 => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__get'                        => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__set'                        => 'http://www.php.net/manual/en/language.oop5.magic.php',
                  '__isset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__unset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__sleep'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__wakeup'                     => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__toString'                   => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__invoke'                     => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__set_state'                  => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__clone'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '__debugInfo'                  => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__unset'                      => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__sleep'                      => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__wakeup'                     => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__toString'                   => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__invoke'                     => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__set_state'                  => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__clone'                      => 'http://www.php.net/manual/en/language.oop5.magic.php',
+                 '__debugInfo'                  => 'http://www.php.net/manual/en/language.oop5.magic.php',
                  
-                 'ArrayAccess'                  => 'http://php.net/manual/en/class.arrayaccess.php',
-                 'ArrayObject'                  => 'http://php.net/manual/en/class.arrayobject.php',
-                 'SimpleXMLElement'             => 'http://php.net/manual/en/class.simplexmlelement.php',
-                 'Throwable'                    => 'http://php.net/manual/en/class.throwable.php',
-                 'Generator'                    => 'http://php.net/manual/en/class.generator.php',
-                 'Closure'                      => 'http://php.net/manual/en/class.closure.php',
-                 'Traversable'                  => 'http://php.net/manual/en/class.traversable.php',
-                 'ParseError'                   => 'http://php.net/manual/en/class.parseerror.php',
-                 'DivisionByZeroError'          => 'http://php.net/manual/fr/class.divisionbyzeroerror.php',
-                 'NULL'                         => 'http://php.net/manual/en/language.types.null.php',
-                 'Datetime'                     => 'http://php.net/manual/en/class.datetime.php',
-                 'DatetimeImmutable'            => 'http://php.net/manual/en/class.datetimeimmutable.php',
-                 'DatetimeInterface'            => 'http://php.net/manual/en/class.datetimeinterface.php',
-                 'Datetimezone'                 => 'http://php.net/manual/en/class.datetimezone.php',
-                 'Datetimeinterval'             => 'http://php.net/manual/en/class.dateinterval.php',
-                 'Dateperiod'                   => 'http://php.net/manual/en/class.dateperiod.php',
+                 'ArrayAccess'                  => 'http://www.php.net/manual/en/class.arrayaccess.php',
+                 'ArrayObject'                  => 'http://www.php.net/manual/en/class.arrayobject.php',
+                 'SimpleXMLElement'             => 'http://www.php.net/manual/en/class.simplexmlelement.php',
+                 'Throwable'                    => 'http://www.php.net/manual/en/class.throwable.php',
+                 'Generator'                    => 'http://www.php.net/manual/en/class.generator.php',
+                 'Closure'                      => 'http://www.php.net/manual/en/class.closure.php',
+                 'Traversable'                  => 'http://www.php.net/manual/en/class.traversable.php',
+                 'ParseError'                   => 'http://www.php.net/manual/en/class.parseerror.php',
+                 'DivisionByZeroError'          => 'http://www.php.net/manual/fr/class.divisionbyzeroerror.php',
+                 'NULL'                         => 'http://www.php.net/manual/en/language.types.null.php',
+                 'Datetime'                     => 'http://www.php.net/manual/en/class.datetime.php',
+                 'DatetimeImmutable'            => 'http://www.php.net/manual/en/class.datetimeimmutable.php',
+                 'DatetimeInterface'            => 'http://www.php.net/manual/en/class.datetimeinterface.php',
+                 'Datetimezone'                 => 'http://www.php.net/manual/en/class.datetimezone.php',
+                 'Datetimeinterval'             => 'http://www.php.net/manual/en/class.dateinterval.php',
+                 'Dateperiod'                   => 'http://www.php.net/manual/en/class.dateperiod.php',
                  'WeakReference'                => 'https://www.php.net/manual/en/class.weakreference.php',
                  'Serializable'                 => 'https://www.php.net/manual/en/class.serializable.php',
                  'ReflectionReference'          => 'https://www.php.net/manual/en/class.reflectionreference.php',
                  
-                 '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__LINE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__CLASS__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__METHOD__'                 => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__NAMESPACE__'              => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__TRAIT__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__FUNCTION__'               => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__FILE__'                   => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__DIR__'                    => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__LINE__'                   => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__CLASS__'                  => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__METHOD__'                 => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__NAMESPACE__'              => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__TRAIT__'                  => 'http://www.php.net/manual/en/language.constants.predefined.php',
+                 '__FUNCTION__'               => 'http://www.php.net/manual/en/language.constants.predefined.php',
     );
 
     function __construct() {
@@ -668,6 +668,15 @@ $exampleTxt
             $desc .= "\n\nSuggestions\n^^^^^^^^^^^\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
         }
         $desc = trim($this->rst_escape($desc));
+        $desc = preg_replace_callback('/See also .*?`_\./s', function($x) {
+            if (strpos($x[0], PHP_EOL) === false) {
+                return $x[0];
+            }
+            
+            $res = preg_replace('/\s+/', ' ', $x[0]);
+
+            return $res;
+        }, $desc);
         
         if (!empty($ini['clearphp'])) {
             $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
@@ -888,7 +897,7 @@ SQL;
             sort($liste);
             $this->text .= $this->rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
-        
+
         ksort($analyzers);
         foreach($analyzers as $title => $desc) {
             $this->rules []= $this->rst_level($title,3).PHP_EOL.PHP_EOL.$desc.PHP_EOL;
@@ -917,7 +926,8 @@ SQL;
         print file_put_contents('docs/Rulesets.rst', $rst)." octets written for rulesets\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
-        $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);
+        $replacement = preg_replace('/\$([0-9])/', '\\\\$0', $this->rules);
+        $rst = preg_replace('/.. comment: Rules details(.*)d4a634700b94af15c6612b44000d8e148260503b/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$replacement", $rst);
         print file_put_contents('./docs/Rules.rst',$rst)." octets written for Rules\n";
     }
     

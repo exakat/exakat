@@ -28,7 +28,7 @@ class x {
         $this->p4->b = 1;
 
         $this->p4a = new c;
-        $this->p4a = clone c;
+        $this->p4a = clone $c;
     }
 
 }
