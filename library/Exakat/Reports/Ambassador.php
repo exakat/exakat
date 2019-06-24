@@ -334,7 +334,17 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>' . implode(' - ', $badges) . '</p>';
-            $analyzersDocHTML .= '<p>' . nl2br($this->setPHPBlocs($description['description'])) . '</p>';
+            $description = $description['description'];
+            static $regex;
+            if (empty($regex)) {
+                $php_native_functions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
+//                $php_native_functions = array('substr', 'mb_substr');
+                usort($php_native_functions, function($a, $b) { return strlen($b) <=> strlen($a);} );
+                $regex = '/('.implode('|', $php_native_functions).')\(\)/m';
+            }
+            $description = preg_replace($regex, '`\1() <https://www.php.net/\1>`_', $description);
+
+            $analyzersDocHTML .= '<p>' . nl2br($this->setPHPBlocs($description)) . '</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
