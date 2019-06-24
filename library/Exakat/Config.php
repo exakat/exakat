@@ -267,28 +267,28 @@ class Config {
     public function toIni() {
         $ini = array();
 
-        $ini[] = ";Main PHP version for this code.";
+        $ini[] = ';Main PHP version for this code.';
         $ini[] = "phpversion = {$this->options['phpversion']}";
         $ini[] = '';
 
-        $ini[] = ";Ignored dirs and files, relative to code source root.";
+        $ini[] = ';Ignored dirs and files, relative to code source root.';
         foreach($this->ignore_dirs as $ignore_dir) {
             $ini[] = "ignore_dirs[] = \"$ignore_dir\"";
         }
         $ini[] = '';
 
-        $ini[] = ";Included dirs or files, relative to code source root. Default to all.";
-        $ini[] = ";Those are added after ignoring directories";
+        $ini[] = ';Included dirs or files, relative to code source root. Default to all.';
+        $ini[] = ';Those are added after ignoring directories';
         foreach($this->include_dirs as $include_dir) {
             $ini[] = "include_dirs[] = \"$include_dir\"";
         }
         $ini[] = '';
 
-        $ini[] = ";Accepted file extensions";
-        $ini[] = 'file_extensions = "'.implode(',', $this->file_extensions).'"';
+        $ini[] = ';Accepted file extensions';
+        $ini[] = 'file_extensions = "' . implode(',', $this->file_extensions) . '"';
         $ini[] = '';
 
-        $ini[] = ";Description of the project";
+        $ini[] = ';Description of the project';
         $ini[] = "project_name        = \"{$this->project_name}\";";
         $ini[] = "project_url         = \"{$this->project_url}\";";
         $ini[] = "project_vcs         = \"{$this->project_vcs}\";";
@@ -299,7 +299,7 @@ class Config {
 
         $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
         foreach($parameters as $parameter) {
-            $class = "\Exakat\Analyzer\\".str_replace('/', '\\', $parameter);
+            $class = "\Exakat\Analyzer\\" . str_replace('/', '\\', $parameter);
             if (!class_exists($class)) {
                 continue;
             }
@@ -331,7 +331,7 @@ class Config {
 
         $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
         foreach($parameters as $parameter) {
-            $class = "\Exakat\Analyzer\\".str_replace('/', '\\', $parameter);
+            $class = "\Exakat\Analyzer\\" . str_replace('/', '\\', $parameter);
             if (!class_exists($class)) {
                 continue;
             }

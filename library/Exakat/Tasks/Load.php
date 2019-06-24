@@ -1941,7 +1941,7 @@ class Load extends Tasks {
             $token = 'T_NS_SEPARATOR';
         }
 
-        if ($atom === 'Newcall' && 
+        if ($atom === 'Newcall' &&
             $this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $atom = 'Newcallname';
         }
@@ -2816,7 +2816,7 @@ class Load extends Tasks {
             $this->calls->addCall('class', $identifier->fullnspath, $identifier);
 
             return $identifier;
-        } 
+        }
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $name = $this->addAtom('Static');
@@ -2829,7 +2829,7 @@ class Load extends Tasks {
             $this->pushExpression($name);
 
             return $this->processFunctioncall();
-         } 
+         }
          
          if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                                    $this->phptokens::T_QUESTION,
@@ -2860,7 +2860,7 @@ class Load extends Tasks {
             $this->addLink($static, $typehint, 'TYPEHINT');
 
             return $static;
-        } 
+        }
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
@@ -2879,7 +2879,7 @@ class Load extends Tasks {
             } else {
                 return $this->processStaticVariable();
             }
-        } 
+        }
         
         if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             // new static;

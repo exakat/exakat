@@ -339,8 +339,8 @@ class Ambassador extends Reports {
             if (empty($regex)) {
                 $php_native_functions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
 //                $php_native_functions = array('substr', 'mb_substr');
-                usort($php_native_functions, function($a, $b) { return strlen($b) <=> strlen($a);} );
-                $regex = '/('.implode('|', $php_native_functions).')\(\)/m';
+                usort($php_native_functions, function ($a, $b) { return strlen($b) <=> strlen($a);} );
+                $regex = '/(' . implode('|', $php_native_functions) . ')\(\)/m';
             }
             $description = preg_replace($regex, '`\1() <https://www.php.net/\1>`_', $description);
 
@@ -2518,8 +2518,8 @@ HTML;
     }
 
     protected function generateAuditConfig() {
-        $ini = $this->config->toIni(); 
-        $yaml = $this->config->toYaml(); 
+        $ini = $this->config->toIni();
+        $yaml = $this->config->toYaml();
 
         $html = $this->getBasedPage('annex_config');
         $html = $this->injectBloc($html, 'CONFIG_INI', $ini);

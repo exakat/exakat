@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldBeConstant extends Analyzer {
     public function analyze() {
-        // We do that for strings. 
+        // We do that for strings.
         // Not for : Boolean, integers (may be non-trivial ones? ), Floats
         // May be for arrays (sorting issues)
         
