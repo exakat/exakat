@@ -668,6 +668,15 @@ $exampleTxt
             $desc .= "\n\nSuggestions\n^^^^^^^^^^^\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
         }
         $desc = trim($this->rst_escape($desc));
+        $desc = preg_replace_callback('/See also .*?`_\./s', function($x) {
+            if (strpos($x[0], PHP_EOL) === false) {
+                return $x[0];
+            }
+            
+            $res = preg_replace('/\s+/', ' ', $x[0]);
+
+            return $res;
+        }, $desc);
         
         if (!empty($ini['clearphp'])) {
             $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
@@ -888,7 +897,7 @@ SQL;
             sort($liste);
             $this->text .= $this->rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
-        
+
         ksort($analyzers);
         foreach($analyzers as $title => $desc) {
             $this->rules []= $this->rst_level($title,3).PHP_EOL.PHP_EOL.$desc.PHP_EOL;
