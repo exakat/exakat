@@ -128,7 +128,7 @@ getIt = { id ->
 
 new File('$this->pathDef').eachLine {
     (fromVertex, toVertex) = it.split(',').collect(getIt)
-    fromVertex.addEdge('DEFINITION', toVertex)
+    g.V(fromVertex).addE('DEFINITION').to(V(toVertex)).iterate()
 }
 
 GREMLIN;

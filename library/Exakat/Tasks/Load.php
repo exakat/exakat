@@ -396,7 +396,6 @@ class Load extends Tasks {
         );
 
         $this->callsDatabase = new \Sqlite3(':memory:');
-
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
     }
     

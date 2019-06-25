@@ -88,7 +88,14 @@ class GSNeo4j extends Graph {
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
+        
+        static $query_count = 0;
+        ++$query_count;
+        $b = hrtime(true);
         $result = $this->db->send($query);
+        $e = hrtime(true);
+        $d = ( ($e - $b) / 1000000 );
+        file_put_contents('./gremlin.query.log', "$query_count\t$d\t$query\n", \FILE_APPEND);
 
         if (empty($result)) {
             return new GraphResults();

@@ -32,6 +32,9 @@ class Select extends DSL {
         foreach($values as $k => $v) {
             if (is_int($k)) {
                 $select[] = $v;
+            } elseif ($v === 'id') {
+                $select[] = $k;
+                $by[]     = "by(id())";
             } else {
                 $select[] = $k;
                 $by[]     = "by(\"$v\")";
