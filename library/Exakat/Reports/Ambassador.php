@@ -2014,7 +2014,7 @@ $issues
 
       var item_template =  
         '<tr>' +
-          '<td width="20%"><a href="<%= "analyzers_doc.html#" + obj.analyzer_md5 %>" title="Documentation for <%= obj.analyzer %>"><i class="fa fa-book"></i></a> <%= obj.analyzer %></td>' +
+          '<td width="20%"><a href="<%= "analyses_doc.html#" + obj.analyzer_md5 %>" title="Documentation for <%= obj.analyzer %>"><i class="fa fa-book"></i></a> <%= obj.analyzer %></td>' +
           '<td width="20%"><a href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" title="Go to code"><%= obj.file + ":" + obj.line %></a></td>' +
           '<td width="18%"><%= obj.code %></td>' + 
           '<td width="2%"><%= obj.code_detail %></td>' +
@@ -2485,7 +2485,7 @@ SQL;
                 continue;
             }
 
-            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyses_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
             $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
             $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
@@ -2774,7 +2774,7 @@ SQL
                 $resultState = -2; // -2 === not run
             }
             $result = $this->Compatibility($resultState, $analyzer);
-            $link = '<a href="analyzers_doc.html#' . $this->toId($analyzer) . '" alt="Documentation for ' . $ini['name'] . '"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyses_doc.html#' . $this->toId($analyzer) . '" alt="Documentation for ' . $ini['name'] . '"><i class="fa fa-book"></i></a>';
             if ($resultState === Analyzer::VERSION_INCOMPATIBLE) {
                 $skipped []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
             } else {
