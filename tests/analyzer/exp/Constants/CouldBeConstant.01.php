@@ -1,6 +1,18 @@
 <?php
 
-$expected     = array('$c[\'abcd\'] = \'ab\' . \'cd\'', 
+$expected     = array('$c[\'abcd\'] = \'ab\' . \'cd\'',
+                      '$b = "abcd"',
+                      '$c[\'abcde\'] = \'ab\' . \'cde\'',
+                      '$b = "abcde"',
+                      '$c[\'abc\'] = \'ab\' . \'c\'',
+                      '$b = "abc"',
+                     );
+
+$expected_not = array('$x = <<<XX
+abc{$c}abcd{$c}abcde{$d}abcdef
+XX',
+
+                      '$c[\'abcd\'] = \'ab\' . \'cd\'', 
                       '$b = "abcde"', 
                       '$b = "abcd"', 
                       '$c[\'abcd\']', 
@@ -8,12 +20,6 @@ $expected     = array('$c[\'abcd\'] = \'ab\' . \'cd\'',
                       '$c[\'abcde\'] = \'ab\' . \'cde\'', 
                       '$c[\'abc\']', 
                       '$c[\'abc\'] = \'ab\' . \'c\'', 
-                      '$b = "abc"',
-                     );
-
-$expected_not = array('$x = <<<XX
-abc{$c}abcd{$c}abcde{$d}abcdef
-XX',
-                     );
+                      '$b = "abc"',                     );
 
 ?>
