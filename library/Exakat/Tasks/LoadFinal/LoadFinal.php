@@ -70,6 +70,10 @@ class LoadFinal {
 
         $this->init();
 
+        $task = new MakeFunctionDefinition($this->gremlin, $this->config, $this->datastore);
+        $task->run();
+        $this->log('MakeFunctionDefinition');
+
         $this->removeInterfaceToClassExtends();
         $this->log('removeInterfaceToClassExtends');
 
