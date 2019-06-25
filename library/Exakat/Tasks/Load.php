@@ -1263,7 +1263,7 @@ class Load extends Tasks {
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
 
-//            $this->calls->addDefinition('function', $function->fullnspath, $function);
+            $this->calls->addDefinition('function', $function->fullnspath, $function);
         } elseif ($function->atom === 'Closure') {
             $function->fullnspath = $this->makeAnonymous('function');
             $function->aliased    = self::NOT_ALIASED;
@@ -2664,7 +2664,7 @@ class Load extends Tasks {
             $this->getFullnspath($name, 'function', $functioncall);
             $functioncall->absolute   = $name->absolute;
 
-//            $this->calls->addCall('function', $functioncall->fullnspath, $functioncall);
+            $this->calls->addCall('function', $functioncall->fullnspath, $functioncall);
         } else {
             throw new LoadError("Unprocessed atom in functioncall definition (its name) : $atom->atom : $this->filename : " . __LINE__);
         }
