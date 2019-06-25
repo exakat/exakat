@@ -29,8 +29,13 @@ class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-//        $queryTemplate = 'g.V().valueMap().by(unfold()).with(WithOptions.tokens)';
-        $queryTemplate = 'g.V()';
+        $gremlinVersion = $this->gremlin->serverInfo()->toArray()[0];
+
+        if (version_compare($gremlinVersion, '3.4.0') >= 0) {
+            $queryTemplate = 'g.V().valueMap().with(WithOptions.tokens).by(unfold())';
+        } else {
+            $queryTemplate = 'g.V()';
+        }
 
         $vertices = $this->gremlin->query($queryTemplate);
 
@@ -40,11 +45,20 @@ class Export extends Tasks {
             $V[$v['id']] =  $v;
         }
 
-        $queryTemplate = 'g.E()';
+        $gremlinVersion = $this->gremlin->serverInfo()->toArray()[0];
+        if (version_compare($gremlinVersion, '3.4.0') >= 0) {
+            $queryTemplate = 'g.E().as("e").outV().as("outV").select("e").inV().as("inV").select("e", "inV", "outV").by(valueMap(true).by(unfold())).by(id()).by(id())';
+        } else {
+            $queryTemplate = 'g.E()';
+        }
         $edges = $this->gremlin->query($queryTemplate);
 
         $E = array();
         foreach($edges as $e) {
+            // Special for version 3.4
+            if (isset($e['e'])) {
+                $e = array_merge($e, $e['e']);
+            }
             $id = $e['outV'];
 
             if (!isset($E[$id])) {
