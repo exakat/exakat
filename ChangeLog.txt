@@ -1,4 +1,4 @@
-Version 1.8.5 (Zhan Zijiang of Jiaxu, coming up)
+Version 1.8.6 (Hu Wenchang of Jiashen, coming up)
 + Architecture
     + 
 + Report
@@ -8,6 +8,34 @@ Version 1.8.5 (Zhan Zijiang of Jiaxu, coming up)
 + Tokenizer
     + 
 
+Version 1.8.5 (Zhan Zijiang of Jiaxu, 2019-06-24)
++ Architecture
+    + Fixed several bugs in the online documentation
+    + Started removing analyzer, replacing with analysis
+    + Fixed path in docker PHP usage.
++ Report
+    + Ambassador : Export full INI and YAML config to replicate audit
++ Analysis
+    + New analysis : Unused class constants
+    + New analysis : Could Use available Trait
+    + New analysis : literal that Could Be Constant 
+    + Updated analysis : Access Private in Trait is OK
+    + Updated analysis : multiple identical argument is extended to closures, methods
+    + Updated analysis : ext/rdkafka
+    + Updated analysis : No Hardcoded Hash is accelerated
+    + Updated analysis : Extended printf() check to constants
+    + Updated analysis : Optimized 'redefined method'
+    + Updated analysis : Memoize Magic Call
+    + Updated analysis : set_locale requires constants
+    + Checked unit tests : 3099 / 3105 test pass (99% pass)
++ Tokenizer
+    + Added missing isModified to Foreach keys
+    + Class Method Definition handles old style constructor
+    + strict_types don't yield a block
+    + Added typed values for magic constants
+    + Refactored new -> constructor link for Self, Static, parent
+    + Added missing arguments count to Newcall
+    
 Version 1.8.4 (Wang Wenqing of Jiazi, 2019-06-17)
 + Architecture
     + Added support for PHP in docker images for compilation tests

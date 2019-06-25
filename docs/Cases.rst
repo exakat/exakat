@@ -8415,6 +8415,109 @@ An actual phpinfo(), available during installation. Note that the phpinfo() is a
     
     </center>
 
+Configure Extract
+=================
+
+.. _zurmo-security-configureextract:
+
+Zurmo
+^^^^^
+
+:ref:`configure-extract`, in app/protected/modules/marketing/utils/GlobalMarketingFooterUtil.php:127. 
+
+This code intent to overwrite `$hash` and `$preview` : it is even literally in the code. The overwrite is intended too, and could even skip the initialisation of the variables. Although the compact()/extract() combinaison is safe as now, it could be safer to only relay the array index, instead of extracting the variables here. 
+
+.. code-block:: php
+
+    public static function resolveManageSubscriptionsUrlByArray(array $queryStringArray, $preview = false)
+            {
+                $hash = $preview = null;
+                extract(static::resolvePreviewAndHashFromArray($queryStringArray));
+                return static::resolveManageSubscriptionsUrl($hash, $preview);
+            }
+    
+    // Also with : 
+            protected static function resolvePreviewAndHashFromArray(array $queryStringArray)
+            {
+                $preview    = static::resolvePreviewFromArray($queryStringArray);
+                $hash       = static::resolveHashByArray($queryStringArray);
+                return compact('hash', 'preview');
+            }
+
+
+--------
+
+
+.. _dolibarr-security-configureextract:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`configure-extract`, in htdocs/includes/restler/framework/Luracast/Restler/Format/HtmlFormat.php:224. 
+
+The extract() has been cleverly set in a closure, with a limited scope. The potential overwrite may impact existing variables, such as `$_`, `$nav`, `$form`, and `$data` itself. This may impact the following including. Using EXTR_SKIP would give existing variables priority, and avoid interference. 
+
+.. code-block:: php
+
+    $template = function ($view) use ($data, $path) {
+                $form = function () {
+                    return call_user_func_array(
+                        'Luracast\Restler\UI\Forms::get',
+                        func_get_args()
+                    );
+                };
+                if (!isset($data['form']))
+                    $data['form'] = $form;
+                $nav = function () {
+                    return call_user_func_array(
+                        'Luracast\Restler\UI\Nav::get',
+                        func_get_args()
+                    );
+                };
+                if (!isset($data['nav']))
+                    $data['nav'] = $nav;
+    
+                $_ = function () use ($data, $path) {
+                    extract($data);
+                    $args = func_get_args();
+                    $task = array_shift($args);
+                    switch ($task) {
+                        case 'require':
+                        case 'include':
+                            $file = $path . $args[0];
+                            if (is_readable($file)) {
+                                if (
+                                    isset($args[1]) &&
+                                    ($arrays = Util::nestedValue($data, $args[1]))
+                                ) {
+                                    $str = '';
+                                    foreach ($arrays as $arr) {
+                                        extract($arr);
+                                        $str .= include $file;
+                                    }
+                                    return $str;
+                                } else {
+                                    return include $file;
+                                }
+                            }
+                            break;
+                        case 'if':
+                            if (count($args) < 2)
+                                $args[1] = '';
+                            if (count($args) < 3)
+                                $args[2] = '';
+                            return $args[0] ? $args[1] : $args[2];
+                            break;
+                        default:
+                            if (isset($data[$task]) && is_callable($data[$task]))
+                                return call_user_func_array($data[$task], $args);
+                    }
+                    return '';
+                };
+                extract($data);
+                return @include $view;
+            };
+
 Argument Should Be Typehinted
 =============================
 

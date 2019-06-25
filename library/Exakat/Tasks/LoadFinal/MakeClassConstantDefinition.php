@@ -38,7 +38,6 @@ class MakeClassConstantDefinition extends LoadFinal {
               ->back('first')
               ->outIs('CLASS')
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('fullnspath', 'classe')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CONST')

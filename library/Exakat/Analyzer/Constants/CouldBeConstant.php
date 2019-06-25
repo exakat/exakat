@@ -54,10 +54,12 @@ class CouldBeConstant extends Analyzer {
         }
         
         $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
-             ->hasNoIn('VALUE')
+             ->hasNoParent('Constant', array('VALUE'))
+             ->hasNoParent('Defineconstant', array('VALUE'))
+             ->hasNoIn('CONCAT')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIs($strings)
-             ->goToExpression()
-             ->atomIsNot(array('Heredoc', 'String', 'Concatenation', 'Analysis'));
+             ->goToExpression();
         $this->prepareQuery();
     }
 }

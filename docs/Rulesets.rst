@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 17 Jun 2019 19:25:17 +0000
-.. comment: Generation hash : 411298f1506b4ad124168026fd873b1c1e872c56
+.. comment: Generation date : Mon, 24 Jun 2019 18:00:26 +0000
+.. comment: Generation hash : 55563aedd54adf4837110aaa343ab52c66c632fb
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 360 analysis
+Total : 361 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -135,6 +135,7 @@ Total : 360 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Could Use Trait <could-use-trait>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
@@ -346,7 +347,7 @@ Total : 360 analysis
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Too Many Native Calls <too-many-native-calls>`
-* :ref:`Traits/TraitNotFound <traits/traitnotfound>`
+* :ref:`Trait Not Found <trait-not-found>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Typehinted References <typehinted-references>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
@@ -374,6 +375,7 @@ Total : 360 analysis
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
+* :ref:`Unused Class Constant <unused-class-constant>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 * :ref:`Unused Returned Value <unused-returned-value>`
@@ -417,7 +419,6 @@ Total : 360 analysis
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
-* :ref:`Wrong Number Of Arguments In Methods <wrong-number-of-arguments-in-methods>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`Wrong Range Check <wrong-range-check>`
@@ -439,7 +440,7 @@ Total : 360 analysis
 ClassReview
 +++++++++++
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -466,6 +467,7 @@ Total : 25 analysis
 * :ref:`Self Using Trait <self-using-trait>`
 * :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
+* :ref:`Unused Class Constant <unused-class-constant>`
 
 .. _coding-conventions:
 
@@ -1024,7 +1026,7 @@ Total : 20 analysis
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
-* :ref:`Traits/TraitNotFound <traits/traitnotfound>`
+* :ref:`Trait Not Found <trait-not-found>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Trait <undefined-trait>`
@@ -1137,7 +1139,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 82 analysis
+Total : 83 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1147,6 +1149,7 @@ Total : 82 analysis
 * :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Complex Dynamic Names <complex-dynamic-names>`
+* :ref:`Could Be Constant <could-be-constant>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`

@@ -428,6 +428,7 @@ Glossary
     + `extract()`
 
       + :ref:`Configure Extract <configure-extract>`
+      + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`Register Globals <register-globals>`
 
 
@@ -524,7 +525,6 @@ Glossary
     + `func_get_args()`
 
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
-      + :ref:`Wrong Number Of Arguments In Methods <wrong-number-of-arguments-in-methods>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 
 
@@ -1074,10 +1074,6 @@ Glossary
 
 
 + `R`
-    + `ReflectionReference`
-
-      + :ref:`Php 7.4 New Class <php-7.4-new-class>`
-
     + `rand()`
 
       + :ref:`Use random_int() <use-random\_int()>`
@@ -1399,10 +1395,6 @@ Glossary
 
 
 + `W`
-    + `WeakReference`
-
-      + :ref:`Php 7.4 New Class <php-7.4-new-class>`
-
     + `while()`
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`

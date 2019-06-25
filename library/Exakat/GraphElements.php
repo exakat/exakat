@@ -212,7 +212,7 @@ abstract class GraphElements {
                                  'VAR',
                                  'VARIABLE',
                                  'YIELD',
-                                 'DEFINITION',
+//                                 'DEFINITION',
                                 );
     public static $LINKS_EXAKAT = array('DEFINITION',
                                         'ANALYZED',
