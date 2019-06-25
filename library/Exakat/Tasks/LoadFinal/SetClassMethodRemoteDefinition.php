@@ -90,6 +90,7 @@ class SetClassMethodRemoteDefinition extends LoadFinal {
               ->filter(
                     $query->side()
                          ->goToClass()
+                         ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
                          ->GoToAllParents(Analyzer::INCLUDE_SELF)
                          ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_SENSITIVE)
                          ->prepareSide(),
