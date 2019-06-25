@@ -320,6 +320,8 @@ class Dump extends Tasks {
         }
 
         $analyzersList = makeList($analyzers);
+        $linksDown = $this->linksDown;
+//        $linksDown .= '. "DEFINITION"';
 
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", within([$analyzersList]))
@@ -2188,6 +2190,9 @@ GREMLIN;
             $valuesSQL[] = '("Foreach Values", "' . $this->sqlite->escapeString($name) . "\", $count)";
         }
 
+        if (empty($valuesSQL)) {
+            return 0;
+        }
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
         $this->sqlite->query($query);
         
