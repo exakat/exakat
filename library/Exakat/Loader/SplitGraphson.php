@@ -120,10 +120,7 @@ class SplitGraphson extends Loader {
         if (empty($total)) {
             display('no definitions');
         } else {
-            $gremlinVersion = $this->graphdb->serverInfo()->toArray()[0];
-            
-            if (version_compare($gremlinVersion, '3.4.0') >= 0) {
-                $query = <<<GREMLIN
+            $query = <<<GREMLIN
 getIt = { id ->
   def p = g.V(id);
   p.next();
@@ -131,24 +128,10 @@ getIt = { id ->
 
 new File('$this->pathDef').eachLine {
     (fromVertex, toVertex) = it.split(',').collect(getIt)
-    g.addE('DEFINITION').from(fromVertex).to(toVertex)
+    g.V(fromVertex).addE('DEFINITION').to(V(toVertex)).iterate()
 }
 
 GREMLIN;
-            } else {
-                $query = <<<GREMLIN
-getIt = { id ->
-  def p = g.V(id);
-  p.next();
-}
-
-new File('$this->pathDef').eachLine {
-    (fromVertex, toVertex) = it.split(',').collect(getIt)
-    fromVertex.addEdge('DEFINITION', toVertex)
-}
-
-GREMLIN;
-            }
             $this->graphdb->query($query);
             display("loaded $total definitions");
         }
