@@ -51,6 +51,7 @@ class InfiniteRecursion extends Analyzer {
 
         // foo($a, $b) { foo($a, $b); } // No condition of any kind...
         $this->atomIs(self::$FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->analyzerIs('Functions/Recursive')
              ->noAtomInside(array('Ifthen', 'Ternary'));
         $this->prepareQuery();
