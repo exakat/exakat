@@ -287,12 +287,19 @@ GREMLIN;
                 // Removing all edges
                 $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
                 $query = <<<GREMLIN
-g.V($this->analyzerId).outE("ANALYZED").drop()
+g.V({$this->analyzerId}).outE("ANALYZED").drop()
 GREMLIN;
                 $this->gremlin->query($query);
             } else {
                 $resId = $this->gremlin->getId();
-                $query = 'g.addV().property(T.id, ' . $resId . ').property(T.label, "Analysis").property("analyzer", "' . $this->analyzerQuoted . '").property("atom", "Analysis").id()';
+                $query = <<<GREMLIN
+g.addV().property(T.id, $resId)
+        .property(T.label, "Analysis")
+        .property("analyzer", "{$this->analyzerQuoted}")
+        .property("atom", "Analysis")
+        .property("count", 0)
+        .id()
+GREMLIN;
                 $res = $this->gremlin->query($query);
                 $this->analyzerId = $res->toString();
                 self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
