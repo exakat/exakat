@@ -30,12 +30,11 @@ class Recursive extends Analyzer {
 
         // function foo() { foo(); }
         $this->atomIs('Function')
-             ->savePropertyAs('fullcode', 'name')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
-             ->functionDefinition()
-             ->samePropertyAs('fullcode', 'name')
-             ->back('first');
+             ->savePropertyAs('fullcode', 'fqn')
+             ->outIs('DEFINITION')
+             ->atomIs('Functioncall')
+             ->goToInstruction('Function')
+             ->samePropertyAs('fullcode', 'fqn');
         $this->prepareQuery();
 
         // $a = function () use (&$a) { foo(); }
@@ -54,37 +53,11 @@ class Recursive extends Analyzer {
 
         // function foo() { $this->foo(); }
         $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Methodcall')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // function foo() { self::foo(); }
-        $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->analyzerIsNot('self')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticmethodcall')
-             ->outIs('METHOD')
-             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name')
-              ->inIs('NAME');
+             ->savePropertyAs('fullcode', 'fqn')
+             ->outIs('DEFINITION')
+             ->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->goToInstruction(self::$FUNCTIONS_METHOD)
+             ->samePropertyAs('fullcode', 'fqn');
         $this->prepareQuery();
     }
 }

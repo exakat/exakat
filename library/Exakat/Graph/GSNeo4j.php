@@ -252,8 +252,9 @@ class GSNeo4j extends Graph {
     }
     
     public function getDefinitionSQL() {
+        // Optimize loading by sorting the results
         return <<<'SQL'
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, group_concat(calls.id - 1, "-") AS call
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
@@ -262,6 +263,7 @@ LEFT JOIN definitions definitions2
     ON definitions2.type       = calls.type       AND
        definitions2.fullnspath = calls.globalpath 
 WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+GROUP BY definition
 SQL;
     }
 }

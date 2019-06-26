@@ -129,8 +129,9 @@ abstract class Analyzer {
 
     public static $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public static $BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
-    
-    
+
+    private static $rulesId         = null;
+
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
 
@@ -145,7 +146,6 @@ abstract class Analyzer {
     protected $dictCode = null;
     
     protected $linksDown = '';
-    
 
     public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
@@ -211,6 +211,17 @@ abstract class Analyzer {
                                   self::$datastore);
         
         self::$methods = new Methods($this->config);
+
+        if (self::$rulesId === null && $this->gremlin !== null) {
+            $query = <<<'GREMLIN'
+g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
+GREMLIN;
+            $res = $this->gremlin->query($query);
+            
+            foreach($res as ['analyzer' => $analyzer, 'id' => $id]) {
+                self::$rulesId[$analyzer] = $id;
+            }
+        }
     }
     
     public function __destruct() {
@@ -239,26 +250,26 @@ abstract class Analyzer {
     public function getDump() {
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALYZED")
-.sideEffect{ line = it.get().value('line');
-             fullcode = it.get().value('fullcode');
-             file='None'; 
-             theFunction = ''; 
-             theClass=''; 
-             theNamespace=''; 
+.sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = ""; 
+             theClass=""; 
+             theNamespace=""; 
              }
-.where( __.until( hasLabel('Project') ).repeat( 
+.where( __.until( hasLabel("Project") ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Closure', 'Magicmethod', 'Method']) { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
-      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Magicmethod", "Method", "Arrowfunction"]) { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
        )
 )
-.map{ ['fullcode':fullcode, 
-       'file':file, 
-       'line':line, 
-       'namespace':theNamespace, 
-       'class':theClass, 
-       'function':theFunction ];}
+.map{ ["fullcode":fullcode, 
+       "file":file, 
+       "line":line, 
+       "namespace":theNamespace, 
+       "class":theClass, 
+       "function":theFunction ];}
 
 GREMLIN;
         return $this->gremlin->query($query)
@@ -272,34 +283,26 @@ GREMLIN;
 
     public function init($analyzerId = null) {
         if ($analyzerId === null) {
-            $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "$this->analyzerQuoted").id();
+            if (isset(self::$rulesId[$this->shortAnalyzer])) {
+                // Removing all edges
+                $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
+                $query = <<<GREMLIN
+g.V({$this->analyzerId}).outE("ANALYZED").drop()
 GREMLIN;
-            $res = $this->gremlin->query($query);
-            
-            if ($res->isType(GraphResults::EMPTY)) {
-                // Creating analysis vertex
+                $this->gremlin->query($query);
+            } else {
                 $resId = $this->gremlin->getId();
-                
-                $query = 'g.addV().property(T.id, ' . $resId . ').property(T.label, "Analysis").property("analyzer", "' . $this->analyzerQuoted . '").property("atom", "Analysis").id()';
+                $query = <<<GREMLIN
+g.addV().property(T.id, $resId)
+        .property(T.label, "Analysis")
+        .property("analyzer", "{$this->analyzerQuoted}")
+        .property("atom", "Analysis")
+        .property("count", 0)
+        .id()
+GREMLIN;
                 $res = $this->gremlin->query($query);
                 $this->analyzerId = $res->toString();
-            } else {
-                $this->analyzerId = $res->toString();
-                if ($this->analyzerId == 0) {
-                    // Creating analysis vertex
-                    $resId = $this->gremlin->getId();
-
-                    $query = 'g.addV().property(T.id, ' . $resId . ').property(T.label, "Analysis").property("analyzer", "' . $this->analyzerQuoted . '").property("atom", "Analysis").id()';
-                    $res = $this->gremlin->query($query);
-                    $this->analyzerId = $res->toString();
-                } else {
-                    // Removing all edges
-                    $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "$this->analyzerQuoted").outE("ANALYZED").drop()
-GREMLIN;
-                    $this->gremlin->query($query);
-                }
+                self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
             }
         } else {
             $this->analyzerId = $analyzerId;
@@ -1759,6 +1762,12 @@ GREMLIN;
 
     public function collectTraits($variable = 'classes') {
         $this->query->collectTraits($variable);
+        
+        return $this;
+    }
+
+    public function collectArguments($variable = 'args') {
+        $this->query->collectArguments($variable);
         
         return $this;
     }
