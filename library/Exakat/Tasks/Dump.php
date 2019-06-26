@@ -319,12 +319,11 @@ class Dump extends Tasks {
             $classes = array_diff($classes, $diff);
         }
 
-        $analyzersList = makeList($analyzers);
         $linksDown = $this->linksDown;
-//        $linksDown .= '. "DEFINITION"';
+//        $linksDown .= '. "DEFINITION"'
 
         $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within([$analyzersList]))
+g.V().hasLabel("Analysis").has("analyzer", within(args))
 .sideEffect{ analyzer = it.get().value("analyzer"); }
 .out("ANALYZED")
 .sideEffect{ line = it.get().value("line");
@@ -350,7 +349,7 @@ g.V().hasLabel("Analysis").has("analyzer", within([$analyzersList]))
        "analyzer":analyzer];}
 
 GREMLIN;
-        $res = $this->gremlin->query($query)
+        $res = $this->gremlin->query($query, array('args' => $analyzers))
                              ->toArray();
 
         $saved = 0;
