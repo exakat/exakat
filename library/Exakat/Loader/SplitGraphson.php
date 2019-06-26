@@ -34,7 +34,7 @@ use Exakat\Tasks\Tasks;
 
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
-    private const LOAD_CHUNK = 10000;
+    private const LOAD_CHUNK = 20000;
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -260,10 +260,6 @@ GREMLIN;
                 $this->tokenCounts[$j->label] = 1;
             }
             ++$this->total;
-            // Save by block of 10000
-            if ($this->total > self::LOAD_CHUNK) {
-//                $this->saveNodes();
-            }
 
             ++$total;
         }
