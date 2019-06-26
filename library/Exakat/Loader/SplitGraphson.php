@@ -33,7 +33,8 @@ use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
 
 class SplitGraphson extends Loader {
-    const CSV_SEPARATOR = ',';
+    private const CSV_SEPARATOR = ',';
+    private const LOAD_CHUNK = 10000;
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -127,8 +128,15 @@ getIt = { id ->
 }
 
 new File('$this->pathDef').eachLine {
-    (fromVertex, toVertex) = it.split(',').collect(getIt)
-    g.V(fromVertex).addE('DEFINITION').to(V(toVertex)).iterate()
+    (fromVertex, target) = it.split(',')
+    fromVertex = g.V(fromVertex).next();
+
+    toVertices = target.split('-').collect(getIt);
+    
+    toVertices.each{
+        g.V(fromVertex).addE('DEFINITION').to(V(it)).iterate()
+    }
+
 }
 
 GREMLIN;
@@ -252,11 +260,16 @@ GREMLIN;
                 $this->tokenCounts[$j->label] = 1;
             }
             ++$this->total;
+            // Save by block of 10000
+            if ($this->total > self::LOAD_CHUNK) {
+//                $this->saveNodes();
+            }
+
             ++$total;
         }
         fclose($fp);
 
-        if ($this->total > 10000) {
+        if ($this->total > self::LOAD_CHUNK) {
             $this->saveNodes();
         }
 
