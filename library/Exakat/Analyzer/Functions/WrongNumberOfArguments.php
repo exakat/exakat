@@ -94,6 +94,7 @@ class WrongNumberOfArguments extends Analyzer {
              ->inIsIE('METHOD') // for methods calls, static or not.
              ->inIsIE('NEW')
              ->inIs('DEFINITION')
+             ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/VariableArguments')
              ->isLess('args_max', 'args_count')
              ->back('first');
