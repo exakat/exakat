@@ -296,7 +296,6 @@ class Project extends Tasks {
             unset($analyzeConfig);
             $this->logTime('Analyze : ' . (is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
 
-            print_r($analyzers);
             $dumpConfig = $this->config->duplicate(array('update'    => true,
                                                          'program'   => $analyzers,
                                                          ));

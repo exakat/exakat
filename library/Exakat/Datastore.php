@@ -114,8 +114,6 @@ class Datastore {
             
 
             if (count($cols) !== 2) {
-                print_r($cols);
-                print_r($data);
                 throw new WrongNumberOfColsForAHash($table, count($cols));
             }
         }
