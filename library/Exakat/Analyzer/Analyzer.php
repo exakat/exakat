@@ -236,6 +236,7 @@ GREMLIN;
             throw new NoSuchAnalyzer($analyzer, $this->themes);
         }
         $this->analyzerQuoted = $this->getName($this->analyzer);
+        $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
     }
     
     public function getInBaseName() {
@@ -309,6 +310,7 @@ GREMLIN;
         }
 
         assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
+
         return $this->analyzerId;
     }
 
@@ -1914,10 +1916,8 @@ GREMLIN;
     protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
-        static $cache;
-        if (isset($cache[$fullpath])) {
-            $json = $cache[$fullpath];
-        } else {
+        static $cache = array();
+        if (!isset($cache[$fullpath])) {
             if (file_exists($fullpath)) {
                 $json = json_decode(file_get_contents($fullpath));
             } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData("data/$file")) !== null) {
