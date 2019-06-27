@@ -288,15 +288,15 @@ class Dump extends Tasks {
     }
 
     private function processResultsTheme($theme, array $counts = array()) {
-        $classes = $this->themes->getThemeAnalyzers($theme);
-        $classesList = makeList($classes);
+        $analyzers = $this->themes->getThemeAnalyzers($theme);
+        $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
         
         $query = array();
-        foreach($classes as $class) {
-            if (isset($counts[$class])) {
-                $query[] = "(NULL, '$class', $counts[$class])";
+        foreach($analyzers as $analyzer) {
+            if (isset($counts[$analyzer])) {
+                $query[] = "(NULL, '$analyzer', $counts[$analyzer])";
             }
         }
 
@@ -304,19 +304,17 @@ class Dump extends Tasks {
             $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $query));
         }
 
-        $analyzers = $classes;
-
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
                           'Composer/UseComposerLock',
                           'Composer/Autoload',
                           );
-        $diff = array_intersect($specials, $classes);
+        $diff = array_intersect($specials, $analyzers);
         if (!empty($diff)) {
             foreach($diff as $d) {
                 $this->processResults($d, $counts[$d] ?? -3);
             }
-            $classes = array_diff($classes, $diff);
+            $analyzers = array_diff($analyzers, $diff);
         }
 
         $linksDown = $this->linksDown;
@@ -355,7 +353,7 @@ GREMLIN;
         $saved = 0;
         $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severities = array();
-        $readCounts = array_fill_keys($classes, 0);
+        $readCounts = array_fill_keys($analyzers, 0);
 
         $query = array();
         foreach($res as $result) {
@@ -410,7 +408,7 @@ SQL;
         $this->log->log(implode(', ', $theme) . " : dumped $saved");
 
         $error = 0;
-        foreach($classes as $class) {
+        foreach($analyzers as $class) {
             if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
             }
