@@ -30,23 +30,21 @@ class funcGetArgModified extends Analyzer {
         // function foo($a = 3) { $args = func_get_args(); $a++; }
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIsIE('RIGHT')
              ->savePropertyAs('rank', 'ranked')
-             ->savePropertyAs('code', 'arg')
-             ->inIsIE('RIGHT')
-             ->inIs('ARGUMENT')
+             // Argument is modified
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINTIION')
+                     ->is('isModified', true)
+             )
+
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\func_get_arg')
-             ->outIs('ARGUMENT')
-             ->atomIs('Integer')
-             ->isNot('intval', null)
+             ->outWithRank('ARGUMENT', 0)
+             ->has('intval')
              ->samePropertyAs('intval', 'ranked', self::CASE_SENSITIVE)
-             ->goToFunction()
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Variable')
-             ->samePropertyAs('code', 'arg')
-             ->is('isModified', true)
+
              ->back('first');
         $this->prepareQuery();
     }
