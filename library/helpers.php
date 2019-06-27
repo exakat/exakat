@@ -36,14 +36,6 @@ function display($text) {
     }
 }
 
-function display_r($object) {
-    global $VERBOSE;
-    
-    if ($VERBOSE) {
-        print_r( $object );
-    }
-}
-
 function rmdirRecursive($dir) {
     if (!file_exists($dir)) {
         // Do nothing
@@ -557,7 +549,7 @@ function str2array($string, $delimiter = ',') {
 
 function ordinal($number) {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
-    if ((($number % 100) >= 11) && (($number%100) <= 13)) {
+    if ((($number % 100) >= 11) && (($number % 100) <= 13)) {
         return "{$number}th";
     } else {
         return $number . $ends[$number % 10];

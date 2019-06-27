@@ -123,7 +123,7 @@ class ProjectConfig extends Config {
             is_string($this->config['other_php_versions'])) {
             $this->config['other_php_versions'] = explode(',', $this->config['other_php_versions']);
             foreach($this->config['other_php_versions'] as &$version) {
-                $version = str_replace('.', '', trim($version));
+                $version = trim($version, '. ');
             }
             unset($version);
         }

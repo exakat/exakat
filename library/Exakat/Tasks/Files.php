@@ -253,8 +253,6 @@ class Files extends Tasks {
 
         if ($this->config->json) {
             echo json_encode($stats);
-        } else {
-            display_r($stats);
         }
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
         $this->checkTokenLimit();

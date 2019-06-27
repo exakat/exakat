@@ -288,15 +288,15 @@ class Dump extends Tasks {
     }
 
     private function processResultsTheme($theme, array $counts = array()) {
-        $classes = $this->themes->getThemeAnalyzers($theme);
-        $classesList = makeList($classes);
+        $analyzers = $this->themes->getThemeAnalyzers($theme);
+        $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
         
         $query = array();
-        foreach($classes as $class) {
-            if (isset($counts[$class])) {
-                $query[] = "(NULL, '$class', $counts[$class])";
+        foreach($analyzers as $analyzer) {
+            if (isset($counts[$analyzer])) {
+                $query[] = "(NULL, '$analyzer', $counts[$analyzer])";
             }
         }
 
@@ -304,25 +304,32 @@ class Dump extends Tasks {
             $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $query));
         }
 
-        $analyzers = $classes;
-
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
                           'Composer/UseComposerLock',
                           'Composer/Autoload',
                           );
-        $diff = array_intersect($specials, $classes);
+        $diff = array_intersect($specials, $analyzers);
         if (!empty($diff)) {
             foreach($diff as $d) {
                 $this->processResults($d, $counts[$d] ?? -3);
             }
-            $classes = array_diff($classes, $diff);
+            $analyzers = array_diff($analyzers, $diff);
         }
 
         $linksDown = $this->linksDown;
 //        $linksDown .= '. "DEFINITION"'
 
-        $query = <<<GREMLIN
+        $saved = 0;
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
+        $severities = array();
+        $readCounts = array_fill_keys($analyzers, 0);
+
+        $chunks = array_chunk($analyzers, 200);
+        // Gremlin only accepts chunks of 255 maximum
+
+        foreach($chunks as $chunk) {
+            $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", within(args))
 .sideEffect{ analyzer = it.get().value("analyzer"); }
 .out("ANALYZED")
@@ -349,30 +356,25 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
        "analyzer":analyzer];}
 
 GREMLIN;
-        $res = $this->gremlin->query($query, array('args' => $analyzers))
-                             ->toArray();
+            $res = $this->gremlin->query($query, array('args' => $chunk))
+                                 ->toArray();
 
-        $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
-        $severities = array();
-        $readCounts = array_fill_keys($classes, 0);
-
-        $query = array();
-        foreach($res as $result) {
-            if (empty($result)) {
-                continue;
-            }
-            
-            if (isset($severities[$result['analyzer']])) {
-                $severity = $severities[$result['analyzer']];
-            } else {
-                $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
-                $severities[$result['analyzer']] = $severity;
-            }
-            
-            ++$readCounts[$result['analyzer']];
-            
-            $query[] = <<<SQL
+            $query = array();
+            foreach($res as $result) {
+                if (empty($result)) {
+                    continue;
+                }
+                
+                if (isset($severities[$result['analyzer']])) {
+                    $severity = $severities[$result['analyzer']];
+                } else {
+                    $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
+                    $severities[$result['analyzer']] = $severity;
+                }
+    
+                ++$readCounts[$result['analyzer']];
+    
+                $query[] = <<<SQL
 (null, 
  '{$this->sqlite->escapeString($result['fullcode'])}', 
  '{$this->sqlite->escapeString($result['file'])}', 
@@ -384,17 +386,18 @@ GREMLIN;
  '$severity'
 )
 SQL;
-            ++$saved;
-
-            // chunk split the save.
-            if ($saved % 100 === 0) {
-                $values = implode(', ', $query);
-                $query = <<<SQL
+                ++$saved;
+    
+                // chunk split the save.
+                if ($saved % 100 === 0) {
+                    $values = implode(', ', $query);
+                    $query = <<<SQL
 REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES $values
 SQL;
-                $this->sqlite->query($query);
-                $query = array();
+                    $this->sqlite->query($query);
+                    $query = array();
+                }
             }
         }
         
@@ -410,7 +413,7 @@ SQL;
         $this->log->log(implode(', ', $theme) . " : dumped $saved");
 
         $error = 0;
-        foreach($classes as $class) {
+        foreach($analyzers as $class) {
             if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
             }

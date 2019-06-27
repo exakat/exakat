@@ -233,7 +233,7 @@ HTML;
         $html = $this->getBasedPage('compatibility');
         $html = $this->injectBloc($html, 'COMPATIBILITY', $top10);
         $html = $this->injectBloc($html, 'TITLE', 'Top 10 classic errors ');
-        $html = $this->injectBloc($html, 'DESCRIPTION', '');
+        $html = $this->injectBloc($html, 'DESCRIPTION', $description);
         $this->putBasedPage('top10', $html);
 
     }

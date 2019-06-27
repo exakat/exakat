@@ -170,7 +170,7 @@ class Phpexec {
             eval("\$tokens = $res;");
 
             if (empty($tokens)) {
-                return false;
+                return array();
             }
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');

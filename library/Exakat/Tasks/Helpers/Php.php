@@ -121,8 +121,7 @@ abstract class Php {
                 return new $className();
             }
         }
-        
-        print_r($errors);
+
         throw new NoRecognizedTokens();
     }
 }

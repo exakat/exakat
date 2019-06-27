@@ -33,7 +33,6 @@ class CalledByModule extends Analyzer {
         
         // Merging ALL values of all versions.
         if (empty($calledBy)) {
-//            print "Error in the JSON file \n";
             return;
         }
         $calledBy = array_merge_recursive(...array_values($calledBy));
@@ -187,19 +186,19 @@ class CalledByModule extends Analyzer {
         $this->prepareQuery();
 
         // Check that the class implements one of the mentionned called interface
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs('Class')
              ->goToAllImplements(self::INCLUDE_SELF)
              ->outIs('IMPLEMENTS')
              ->fullnspathIs(array_keys($methods))
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs(self::$CLASS_METHODS)
-             ->is('static', true)
              ->_as('results')
              ->outIs('NAME')
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
-        $this->prepareQuery();    }
+        $this->prepareQuery();
+    }
 
     private function processMethodsRegex($methods_regex) {
         if (empty($methods_regex)) {
@@ -225,7 +224,6 @@ GREMLIN
     private function processStaticMethods($methods) {
         foreach($methods as &$method) {
             $method = $this->dictCode->translate(array_unique($method), Dictionary::CASE_INSENSITIVE);
-            print_r($method);
         }
         unset($method);
         $methods = array_filter($methods);
