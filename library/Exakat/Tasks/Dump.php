@@ -320,7 +320,16 @@ class Dump extends Tasks {
         $linksDown = $this->linksDown;
 //        $linksDown .= '. "DEFINITION"'
 
-        $query = <<<GREMLIN
+        $saved = 0;
+        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
+        $severities = array();
+        $readCounts = array_fill_keys($analyzers, 0);
+
+        $chunks = array_chunk($analyzers, 200);
+        // Gremlin only accepts chunks of 255 maximum
+
+        foreach($chunks as $chunk) {
+            $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", within(args))
 .sideEffect{ analyzer = it.get().value("analyzer"); }
 .out("ANALYZED")
@@ -347,30 +356,25 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
        "analyzer":analyzer];}
 
 GREMLIN;
-        $res = $this->gremlin->query($query, array('args' => $analyzers))
-                             ->toArray();
+            $res = $this->gremlin->query($query, array('args' => $chunk))
+                                 ->toArray();
 
-        $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
-        $severities = array();
-        $readCounts = array_fill_keys($analyzers, 0);
-
-        $query = array();
-        foreach($res as $result) {
-            if (empty($result)) {
-                continue;
-            }
-            
-            if (isset($severities[$result['analyzer']])) {
-                $severity = $severities[$result['analyzer']];
-            } else {
-                $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
-                $severities[$result['analyzer']] = $severity;
-            }
-            
-            ++$readCounts[$result['analyzer']];
-            
-            $query[] = <<<SQL
+            $query = array();
+            foreach($res as $result) {
+                if (empty($result)) {
+                    continue;
+                }
+                
+                if (isset($severities[$result['analyzer']])) {
+                    $severity = $severities[$result['analyzer']];
+                } else {
+                    $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
+                    $severities[$result['analyzer']] = $severity;
+                }
+    
+                ++$readCounts[$result['analyzer']];
+    
+                $query[] = <<<SQL
 (null, 
  '{$this->sqlite->escapeString($result['fullcode'])}', 
  '{$this->sqlite->escapeString($result['file'])}', 
@@ -382,17 +386,18 @@ GREMLIN;
  '$severity'
 )
 SQL;
-            ++$saved;
-
-            // chunk split the save.
-            if ($saved % 100 === 0) {
-                $values = implode(', ', $query);
-                $query = <<<SQL
+                ++$saved;
+    
+                // chunk split the save.
+                if ($saved % 100 === 0) {
+                    $values = implode(', ', $query);
+                    $query = <<<SQL
 REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES $values
 SQL;
-                $this->sqlite->query($query);
-                $query = array();
+                    $this->sqlite->query($query);
+                    $query = array();
+                }
             }
         }
         
