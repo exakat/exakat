@@ -36,14 +36,6 @@ function display($text) {
     }
 }
 
-function display_r($object) {
-    global $VERBOSE;
-    
-    if ($VERBOSE) {
-        print_r( $object );
-    }
-}
-
 function rmdirRecursive($dir) {
     if (!file_exists($dir)) {
         // Do nothing
