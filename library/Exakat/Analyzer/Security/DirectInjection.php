@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DirectInjection extends Analyzer {
     public function dependsOn() {
         return array('Security/SensitiveArgument',
+                     'Modules/IncomingData',
                     );
     }
     
@@ -87,6 +88,15 @@ GREMLIN;
              ->inIs('VARIABLE')
              ->raw($safeIndex)
              ->goToArray()
+             ->analyzerIs('Security/SensitiveArgument')
+             ->inIsIE('CODE')
+             ->inIs('ARGUMENT');
+        $this->prepareQuery();
+
+        // Other source of tainted data
+        $this->analyzerIs('Modules/IncomingData')
+             ->inIs('DEFAULT')
+             ->outIs('DEFINITION')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT');
