@@ -685,8 +685,6 @@ JAVASCRIPT;
         $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' dashboard');
         $this->putBasedPage('favorites_dashboard', $baseHTML);
 
-        $baseHTML = $this->getBasedPage('favorites_issues');
-
         $this->generateIssuesEngine('favorites_issues',
                                     $this->getIssuesFaceted('Preferences') );
     }
@@ -1517,7 +1515,7 @@ JAVASCRIPT;
         $issuesHtml = '';
         $dataScript = array();
 
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
@@ -1557,7 +1555,7 @@ SQL;
 
         $html = array();
         $dataScript = array();
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             $html []= <<<HTML
 <div class="clearfix">
     <div class="block-cell">$value[label]</div>
@@ -1582,7 +1580,7 @@ HTML;
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer NOT IN ('Php/Incompilable')";
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
@@ -1740,10 +1738,12 @@ SQL;
         $result = $this->sqlite->query(<<<'SQL'
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
         FROM results
-        WHERE line != -1
+        WHERE line != -1 AND
+              analyzer IN ($list)
         GROUP BY file
 SQL
         );
+
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['file']] = $row;
@@ -1771,7 +1771,7 @@ SQL;
         } elseif (is_array($themes)) {
             $list = $themes;
         } else {
-            die('$themes must be an array or null : ' . __METHOD__);
+            return array();
         }
         $list = makeList($list, "'");
 
@@ -2301,7 +2301,6 @@ SQL;
         $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate(null, Reports::INLINE);
 
-        $id = strpos($report, "\n\n\n");
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
         
@@ -2554,7 +2553,7 @@ HTML;
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');
         $list = $this->config->ext->getPharList();
         $html = array();
-        foreach($list as $name => $extension) {
+        foreach(array_keys($list) as $name) {
             $html[] = '<li>' . basename($name, '.phar') . '</li>';
         }
         $info[] = array('Exakat modules', '<ul>' . implode(PHP_EOL, $html) . '</ul>');
@@ -2707,16 +2706,15 @@ SQL
     }
 
     protected function generateCompilations() {
-        $compilations = '';
+        $compilations = array();
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
-        $info = array();
         
         foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
             $version = "$suffix[0].$suffix[1]";
             $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
             if (!$res) {
-                $compilations .= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>\n";
+                $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>\n";
                 continue; // Table was not created
             }
 
@@ -2738,16 +2736,17 @@ SQL
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
-                $errors       = '<ul><li>' . implode("</li>\n<li>", $errors) . '</li></ul>';
+                $errors      = '<ul><li>' . implode("</li>\n<li>", $errors) . '</li></ul>';
 
                 $total_error = count($files) . ' (' . number_format(count($files) / $total * 100, 0) . '%)';
                 $files       = array_keys(array_count_values($files));
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
-            $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
+            $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
         }
 
+        $compilations = implode('', $compilations);
         $html = $this->getBasedPage('compatibility_compilations');
         $html = $this->injectBloc($html, 'COMPILATIONS', $compilations);
         $html = $this->injectBloc($html, 'TITLE', 'Compilations overview');
