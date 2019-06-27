@@ -38,8 +38,9 @@ class FindExternalLibraries extends Tasks {
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
 
-    private $php = null;
-    private $phpTokens = array();
+    private $php               = null;
+    private $phpTokens         = array();
+    private $whiteSpace        = array();
 
     private $classicTestsNames = array();
     private $classicTests      = array();
@@ -103,6 +104,10 @@ class FindExternalLibraries extends Tasks {
         $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $this->phpTokens = array_flip($this->php->getTokens());
+        $this->whiteSpace = array($this->phpTokens['T_WHITESPACE']  => 1,
+                                  $this->phpTokens['T_DOC_COMMENT'] => 1,
+                                  $this->phpTokens['T_COMMENT']     => 1,
+                                 );
 
         $r = array();
         rsort($files);
@@ -182,9 +187,7 @@ class FindExternalLibraries extends Tasks {
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
-            if ($token[0] === $this->phpTokens['T_WHITESPACE'])  { continue; }
-            if ($token[0] === $this->phpTokens['T_DOC_COMMENT']) { continue; }
-            if ($token[0] === $this->phpTokens['T_COMMENT'])     { continue; }
+            if (isset($this->whiteSpace[$token[0]])) { continue; }
 
             // If we find a namespace, it is not the global space, and we may skip the rest.
             if ($token[0] === $this->phpTokens['T_NAMESPACE']) {
