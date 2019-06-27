@@ -51,11 +51,7 @@ GREMLIN;
         $uniques = array();
         foreach($doubles as $u) {
             $v = mb_strtolower($u);
-            if (isset($uniques[$v])) {
-                $uniques[$v][] = $u;
-            } else {
-                $uniques[$v] = array($u);
-            }
+            array_collect_by($uniques, $v, $u);
         }
         
         $uniques = array_filter($uniques, function ($x) { return count($x) > 1; });
