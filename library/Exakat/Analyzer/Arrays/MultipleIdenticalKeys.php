@@ -40,7 +40,10 @@ class MultipleIdenticalKeys extends Analyzer {
              ->raw('where( 
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname").not(where(__.out("CONCAT")) )
+      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname")
+      .not(where(__.out("CONCAT")) )
+      .coalesce( __.hasLabel("Staticconstant", "Identifier", "Nsname").in("DEFINITION").out("VALUE"),
+                 __.filter{true; })
       .has("intval")
       .sideEffect{ 
             if (it.get().label() in ["String", "Staticclass"] && "noDelimiter" in it.get().keys() ) { 
