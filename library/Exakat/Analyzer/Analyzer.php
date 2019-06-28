@@ -1873,9 +1873,12 @@ GREMLIN;
             $this->rowCount       += $r['total'];
         }
 
+        // count the number of results
+        $this->gremlin->query("g.V({$this->analyzerId}).property(\"count\", g.V({$this->analyzerId}).out(\"ANALYZED\").count())", array());
+
         // reset for the next
         $this->queries = array();
-        
+
         // @todo multiple results ?
         // @todo store result in the object until reading.
         return $this->rowCount;

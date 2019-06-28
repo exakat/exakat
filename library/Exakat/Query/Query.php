@@ -146,7 +146,6 @@ class Query {
 {$this->query}
 
 .dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V({$this->analyzerId}))
-        .sideEffect( g.V({$this->analyzerId}).property("count", g.V({$this->analyzerId}).out("ANALYZED").count()))
         .cap("processed", "total")
 
 // Query (#{$this->id}) for {$this->analyzer}
