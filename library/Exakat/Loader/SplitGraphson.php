@@ -34,7 +34,8 @@ use Exakat\Tasks\Tasks;
 
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
-    private const LOAD_CHUNK = 20000;
+    private const LOAD_CHUNK      = 20000;
+    private const LOAD_CHUNK_LINK = 20000;
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -96,11 +97,13 @@ class SplitGraphson extends Loader {
 
         $f = fopen('php://memory', 'r+');
         $total = 0;
+        $chunk = 0;
 
         $res = $this->sqlite3->query('SELECT origin - 1, destination -1 FROM globals');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             fputcsv($f, $row);
             ++$total;
+            ++$chunk;
         }
         unset($res);
         
@@ -111,16 +114,41 @@ class SplitGraphson extends Loader {
             if ($row[0] === $row[1]) { continue; }
             fputcsv($f, $row);
             ++$total;
+            ++$chunk;
+            
+            if ($chunk > self::LOAD_CHUNK_LINK) {
+                $f = $this->saveLinks($f);
+                $chunk = 0;
+            }
         }
-        rewind($f);
-        $fp = fopen($this->pathDef, 'w+');
-        fwrite($fp, stream_get_contents($f));
-        fclose($fp);
-        fclose($f);
-        
+
         if (empty($total)) {
             display('no definitions');
         } else {
+            $this->saveLinks($f);
+            $chunk = 0;
+            display("loaded $total definitions");
+        }
+        $end = microtime(true);
+
+        self::saveTokenCounts();
+
+        display('loaded nodes (duration : ' . number_format( ($end - $begin) * 1000, 2) . ' ms)');
+
+        $this->cleanCsv();
+        display('Cleaning CSV');
+
+        return true;
+    }
+    
+    private function saveLinks($f) {
+        rewind($f);
+        $fp = fopen($this->pathDef, 'w+');
+        $length = fwrite($fp, stream_get_contents($f));
+        fclose($fp);
+        fclose($f);
+        
+        if ($length > 0) {
             $query = <<<GREMLIN
 getIt = { id ->
   def p = g.V(id);
@@ -141,18 +169,9 @@ new File('$this->pathDef').eachLine {
 
 GREMLIN;
             $this->graphdb->query($query);
-            display("loaded $total definitions");
         }
-        $end = microtime(true);
 
-        self::saveTokenCounts();
-
-        display('loaded nodes (duration : ' . number_format( ($end - $begin) * 1000, 2) . ' ms)');
-
-        $this->cleanCsv();
-        display('Cleaning CSV');
-
-        return true;
+        return fopen('php://memory', 'r+');
     }
 
     private function cleanCsv() {
