@@ -56,11 +56,7 @@ GREMLIN;
                 if ($count < 4) { continue; }
                 if (preg_match('/^\[(\S+), (.*?)\]$/is', $key, $r)) {
                     $functions[] = $r[1];
-                    if (isset($args[$r[1]])) {
-                        $args[$r[1]][] = $r[2];
-                    } else {
-                        $args[$r[1]] = array($r[2]);
-                    }
+                    array_collect_by($args, $r[1], $r[2]);
                 }
             }
             

@@ -95,8 +95,6 @@ GREMLIN;
 
         // Other source of tainted data
         $this->analyzerIs('Modules/IncomingData')
-             ->inIs('DEFAULT')
-             ->outIs('DEFINITION')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT');
@@ -114,9 +112,23 @@ GREMLIN;
              ->inIs('CONCAT');
         $this->prepareQuery();
 
+        // Other source of tainted data
+        $this->analyzerIs('Modules/IncomingData')
+             ->inIs('VARIABLE')
+             ->raw($safeIndex)
+             ->goToArray()
+             ->inIsIE('CODE')
+             ->inIs('CONCAT');
+        $this->prepareQuery();
+
         // foreach (looping on incoming variables)
         $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->goToArray()
+             ->inIs('SOURCE');
+        $this->prepareQuery();
+
+        $this->analyzerIs('Modules/IncomingData')
              ->goToArray()
              ->inIs('SOURCE');
         $this->prepareQuery();

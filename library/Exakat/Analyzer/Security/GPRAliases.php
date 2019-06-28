@@ -24,6 +24,11 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class GPRAliases extends Analyzer {
+    public function dependsOn() {
+        return array('Modules/IncomingData',
+                    );
+    }
+
     public function analyze() {
         // Web variables
         $webVariables = $this->loadIni('php_web_variables.ini', 'variables');
@@ -46,6 +51,16 @@ class GPRAliases extends Analyzer {
              ->outIsIE('VARIABLE')
              ->atomIs('Phpvariable')
              ->codeIs($webVariables, true)
+             ->back('first')
+             ->outIs('LEFT');
+        $this->prepareQuery();
+
+        // Module variables
+        // $a = Input::get('a')
+        $this->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('RIGHT')
+             ->analyzerIs('Modules/IncomingData')
              ->back('first')
              ->outIs('LEFT');
         $this->prepareQuery();

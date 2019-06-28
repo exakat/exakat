@@ -89,13 +89,13 @@ class GSNeo4j extends Graph {
             $this->db->message->bindValue($name, $value);
         }
         
-        static $query_count = 0;
-        ++$query_count;
-        $b = hrtime(true);
+//        static $query_count = 0;
+//        ++$query_count;
+//        $b = hrtime(true);
         $result = $this->db->send($query);
-        $e = hrtime(true);
-        $d = ( ($e - $b) / 1000000 );
-        file_put_contents('./gremlin.query.log', "$query_count\t$d\t$query\n", \FILE_APPEND);
+//        $e = hrtime(true);
+//        $d = ( ($e - $b) / 1000000 );
+//        file_put_contents('./gremlin.query.log', "$query_count\t$d\t".hash('fnv132', $query)."\t$query\n", \FILE_APPEND);
 
         if (empty($result)) {
             return new GraphResults();

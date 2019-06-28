@@ -20,25 +20,27 @@
  *
 */
 
+namespace Exakat\Analyzer\Arrays;
 
-namespace Exakat\Query\DSL;
+use Exakat\Analyzer\Analyzer;
 
-use Exakat\Query\Query;
-
-class Not extends DSL {
-    public function run() : Command {
-        list($filter) = func_get_args();
+class NullBoolean extends Analyzer {
+    public function analyze() {
+        // true[1], null[0]
+        $this->atomIs(array('Null', 'Boolean'))
+             ->inIs('VARIABLE');
+        $this->prepareQuery();
         
-        if ($filter instanceof Command) {
-            if ($filter->gremlin === Query::STOP_QUERY) {
-                $filter->gremlin = Query::NO_QUERY;
-            } else {
-                $filter->gremlin = "not($filter->gremlin)";
-            }
-            return $filter;
-        } else {
-            assert(false, 'Not requires a command object');
-        }
+        // const A = true; echo A[1];
+        $this->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
+             ->inIs('DEFINITION')
+             ->outIs('VALUE')
+             ->atomIs(array('Null', 'Boolean'))
+             ->back('first')
+             ->inIs('VARIABLE');
+        $this->prepareQuery();
+        
     }
 }
+
 ?>

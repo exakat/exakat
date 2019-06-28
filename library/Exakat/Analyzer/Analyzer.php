@@ -293,6 +293,7 @@ GREMLIN;
                 $this->gremlin->query($query);
             } else {
                 $resId = $this->gremlin->getId();
+
                 $query = <<<GREMLIN
 g.addV().property(T.id, $resId)
         .property(T.label, "Analysis")
@@ -302,7 +303,7 @@ g.addV().property(T.id, $resId)
         .id()
 GREMLIN;
                 $res = $this->gremlin->query($query);
-                $this->analyzerId = $res->toString();
+                $this->analyzerId = $res->toInt();
                 self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
             }
         } else {
@@ -1873,9 +1874,12 @@ GREMLIN;
             $this->rowCount       += $r['total'];
         }
 
+        // count the number of results
+        $this->gremlin->query("g.V({$this->analyzerId}).property(\"count\", g.V({$this->analyzerId}).out(\"ANALYZED\").count())", array());
+
         // reset for the next
         $this->queries = array();
-        
+
         // @todo multiple results ?
         // @todo store result in the object until reading.
         return $this->rowCount;

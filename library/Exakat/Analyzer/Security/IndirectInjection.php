@@ -31,7 +31,7 @@ class IndirectInjection extends Analyzer {
                      'Security/GPRAliases',
                     );
     }
-    
+
     public function analyze() {
         // Relayed via variable to sensitive function
         // function f() {  $a = $_GET['a'];exec($a);}
