@@ -48,7 +48,8 @@ class IncomingData extends Analyzer {
                  ->back('first')
                  ->outIs('METHOD')
                  ->outIs('NAME')
-                 ->isHash('fullcode', $staticmethods, 'fqn');
+                 ->isHash('fullcode', $staticmethods, 'fqn')
+                 ->back('first');
             $this->prepareQuery();
         }
     }
