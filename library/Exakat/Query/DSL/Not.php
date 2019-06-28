@@ -23,12 +23,18 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
+
 class Not extends DSL {
     public function run() : Command {
         list($filter) = func_get_args();
         
         if ($filter instanceof Command) {
-            $filter->gremlin = "not($filter->gremlin)";
+            if ($filter->gremlin === Query::STOP_QUERY) {
+                $filter->gremlin = Query::NO_QUERY;
+            } else {
+                $filter->gremlin = "not($filter->gremlin)";
+            }
             return $filter;
         } else {
             assert(false, 'Not requires a command object');

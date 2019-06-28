@@ -293,6 +293,7 @@ GREMLIN;
                 $this->gremlin->query($query);
             } else {
                 $resId = $this->gremlin->getId();
+
                 $query = <<<GREMLIN
 g.addV().property(T.id, $resId)
         .property(T.label, "Analysis")
@@ -302,7 +303,7 @@ g.addV().property(T.id, $resId)
         .id()
 GREMLIN;
                 $res = $this->gremlin->query($query);
-                $this->analyzerId = $res->toString();
+                $this->analyzerId = $res->toInt();
                 self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
             }
         } else {

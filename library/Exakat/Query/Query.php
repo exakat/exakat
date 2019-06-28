@@ -28,8 +28,8 @@ use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
 
 class Query {
-    const STOP_QUERY = 'filter{ false; }';
-    const NO_QUERY   = 'filter{ true;  }';
+    public const STOP_QUERY = 'filter{ false; }';
+    public const NO_QUERY   = 'filter{ true;  }';
 
     const TO_GREMLIN = true;
     const NO_GREMLIN = false;
@@ -79,6 +79,11 @@ class Query {
         assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
         assert(!empty($commands), 'No command in side query');
 
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
+            $this->commands = array_pop($this->sides);
+            return new Command(Query::STOP_QUERY);
+        }
+
         $query = '__.' . implode(".\n", $commands);
         $args = array_column($this->commands, 'arguments');
         $args = array_merge(...$args);
@@ -108,10 +113,17 @@ class Query {
         $sack = $this->prepareSack($this->commands);
 
         $commands = array_column($this->commands, 'gremlin');
+        $arguments = array_column($this->commands, 'arguments');
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
             return $this->query = '';
+        }
+
+        foreach($commands as $id => $command) {
+            if ($command === self::NO_QUERY) {
+                unset($commands[$id], $arguments[$id]);
+            }
         }
 
         if (substr($commands[0], 0, 9) === 'hasLabel(') {
@@ -133,7 +145,6 @@ class Query {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[0]);
         }
 
-        $arguments = array_column($this->commands, 'arguments');
         if (empty($arguments)) {
             $this->arguments = array();
         } else {
@@ -145,7 +156,8 @@ class Query {
 
 {$this->query}
 
-.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V({$this->analyzerId}))
+.dedup().groupCount("total").by(count())
+        .addE("ANALYZED").from(g.V({$this->analyzerId}))
         .cap("processed", "total")
 
 // Query (#{$this->id}) for {$this->analyzer}
@@ -159,14 +171,21 @@ GREMLIN;
     
     public function prepareRawQuery() {
         $commands = array_column($this->commands, 'gremlin');
-
+        $arguments = array_column($this->commands, 'arguments');
+        
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
             return $this->query = "// Query with STOP_QUERY\n";
         }
 
+        foreach($commands as $id => $command) {
+            if ($command === self::NO_QUERY) {
+                unset($commands[$id], $arguments[$id]);
+            }
+        }
+
         $commands = implode('.', $commands);
-        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+        $this->arguments = array_merge(...$arguments);
 
         $sack = $this->prepareSack($this->commands);
 
