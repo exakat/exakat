@@ -37,8 +37,7 @@ repeat(
       .coalesce( __.out("USE"), __.filter{ true; })
       .in("DEFINITION")
       .hasLabel("Class", "Classanonymous", "Trait")
-      .filter{!it.sack().contains(it.get().value("fullnspath")) }
-      .sack {m,v -> m.add(v.value("fullnspath")); m} 
+      .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
 )
 .emit( )
 .times($MAX_LOOPING)
@@ -46,7 +45,6 @@ repeat(
 GREMLIN
 );
             $command->setSack('[]');
-            return $command;
         } else {
             $command = new Command(<<<GREMLIN
 emit( ).repeat( 
@@ -61,8 +59,9 @@ emit( ).repeat(
 GREMLIN
 );
             $command->setSack('[]');
-            return $command;
         }
+
+        return $command;
     }
 }
 ?>

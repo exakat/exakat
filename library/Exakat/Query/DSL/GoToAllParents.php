@@ -29,15 +29,36 @@ class GoToAllParents extends DSL {
     public function run() : Command {
         list($self) = func_get_args();
 
+        $MAX_LOOPING = self::$MAX_LOOPING;
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface", "Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Class", "Classanonymous", "Interface", "Trait")');
+            $command = new Command(<<<GREMLIN
+repeat( __.out("EXTENDS", "IMPLEMENTS")
+          .in("DEFINITION")
+          .hasLabel("Class", "Classanonymous", "Interface", "Trait")
+          .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+).emit( )
+ .times($MAX_LOOPING)
+ .hasLabel("Class", "Classanonymous", "Interface", "Trait")
+GREMLIN
+);
             $command->setSack('[]');
-            return $command;
+
         } else {
-            $command = new Command('emit( ).repeat( __.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface", "Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).times(' . self::$MAX_LOOPING . ').hasLabel("Class", "Classanonymous", "Interface", "Trait")');
+            $command = new Command(<<<GREMLIN
+emit( )
+.repeat( __.out("EXTENDS", "IMPLEMENTS")
+           .in("DEFINITION")
+           .hasLabel("Class", "Classanonymous", "Interface", "Trait")
+           .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+        )
+        .times($MAX_LOOPING)
+        .hasLabel("Class", "Classanonymous", "Interface", "Trait")
+GREMLIN
+);
             $command->setSack('[]');
-            return $command;
         }
+
+        return $command;
     }
 }
 ?>
