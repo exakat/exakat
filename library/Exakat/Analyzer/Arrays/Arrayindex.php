@@ -26,11 +26,13 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class Arrayindex extends Analyzer {
-
     public function analyze() {
+
         // $a[1]
         $this->atomIs('Array')
-             ->outIs('INDEX');
+             ->outIs('INDEX')
+             ->is('constant', true)
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // list( 'a' => 2) = ['b' => 2];
@@ -38,7 +40,8 @@ class Arrayindex extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs(self::$LITERALS);
+             ->is('constant', true)
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // array( 'a' => 2) = ['b' => 2];
@@ -46,7 +49,8 @@ class Arrayindex extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs(self::$LITERALS);
+             ->is('constant', true)
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
         $this->prepareQuery();
     }
 }
