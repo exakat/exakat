@@ -196,11 +196,9 @@ GREMLIN;
         if (empty($this->id0)) {
             $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
             assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
-            
-            $fp = fopen($this->path, 'a');
-            fwrite($fp, $jsonText);
-            fclose($fp);
-            
+
+            file_put_contents($this->path, $jsonText, \FILE_APPEND);
+
             ++$this->total;
             $this->id0 = $id0;
         }
@@ -253,7 +251,7 @@ GREMLIN;
         }
         
         $total = 0; // local total
-        $fp = fopen($this->path, 'a');
+        $append = array();
         foreach($json as $j) {
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
@@ -271,8 +269,8 @@ GREMLIN;
 
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName . ' : error encoding normal ' . $j->label . ' : ' . json_last_error_msg() . "\n" . print_r($j, true));
-            fwrite($fp, $X . PHP_EOL);
-            
+            $append[] = $X;
+
             if (isset($this->tokenCounts[$j->label])) {
                 ++$this->tokenCounts[$j->label];
             } else {
@@ -282,7 +280,7 @@ GREMLIN;
 
             ++$total;
         }
-        fclose($fp);
+        file_put_contents($this->path, implode(PHP_EOL, $append).PHP_EOL, \FILE_APPEND);
 
         if ($this->total > self::LOAD_CHUNK) {
             $this->saveNodes();
