@@ -85,7 +85,7 @@ class Analyze extends Tasks {
         } elseif (!empty($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
+            if (!$analyzersClass = $this->themes->getRulesetsAnalyzers($thema)) {
                 throw new NoSuchThema(implode(', ', $thema), $this->themes->getSuggestionThema($thema));
             }
 

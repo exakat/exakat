@@ -226,7 +226,6 @@ class MakeClassMethodDefinition extends LoadFinal {
               ->outIs('CLASS')
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
-              ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))

@@ -26,74 +26,70 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadExt;
 
-class ThemesExtra {
-    private $extra_themes  = array();
-    private $ext           = null;
+class RulesetsExtra {
+    private $extra_rulesets  = array();
+    private $ext             = null;
 
     private static $instanciated = array();
     
-    public function __construct(array $extra_themes = array(), Autoloadext $ext) {
-        $this->extra_themes = $extra_themes;
-        $this->ext = $ext;
+    public function __construct(array $extra_rulesets = array(), Autoloadext $ext) {
+        $this->extra_rulesets = $extra_rulesets;
+        $this->ext            = $ext;
     }
 
-    public function getThemeAnalyzers($theme = null) {
+    public function getRulesetsAnalyzers($ruleset = null) {
         // Main installation
-        if ($theme === null) {
-            return array_unique(array_merge(...$this->extra_themes));
-        } elseif (is_array($theme)) {
+        if ($ruleset === null) {
+            return array_unique(array_merge(...$this->extra_rulesets));
+        } elseif (is_array($ruleset)) {
             $return = array();
-            foreach($theme as $t) {
-                $return[] = $this->extra_themes[$t] ?? array();
+            foreach($ruleset as $t) {
+                $return[] = $this->extra_rulesets[$t] ?? array();
             }
             if (empty($return)) {
                 return array();
             } else {
                 return array_unique(array_merge(...$return));
             }
-        } elseif ($theme === 'Random') {
-            $shorList = array_keys($this->extra_themes);
+        } elseif ($ruleset === 'Random') {
+            $shorList = array_keys($this->extra_rulesets);
             shuffle($shorList);
-            $theme = $shorList[0];
-            display( "Random theme is : $theme\n");
+            $ruleset = $shorList[0];
+            display( "Random ruleset is : $ruleset\n");
 
-            return $this->extra_themes[$theme] ?? array();
+            return $this->extra_rulesets[$ruleset] ?? array();
         } else {
-            return $this->extra_themes[$theme] ?? array();
+            return $this->extra_rulesets[$ruleset] ?? array();
         }
     }
 
-    public function getThemeForAnalyzer($analyzer) {
+    public function getRulesetForAnalyzer($analyzer) {
         $return = array();
-        foreach($this->extra_themes as $theme => $analyzers) {
+        foreach($this->extra_rulesets as $ruleset => $analyzers) {
             if (in_array($analyzer, $analyzers)) {
-                $return[] = $theme;
+                $return[] = $ruleset;
             }
         }
         
         return $return;
     }
 
-    public function getThemesForAnalyzer($analyzer = null) {
+    public function getRulesetsForAnalyzer($analyzer = null) {
         $return = array();
 
         if ($analyzer === null) {
-            foreach($this->extra_themes as $theme => $analyzers) {
+            foreach($this->extra_rulesets as $ruleset => $analyzers) {
                 foreach($analyzers as $analyzer)  {
-                    if (isset($return[$analyzer])) {
-                        $return[$analyzer][] = $theme;
-                    } else {
-                        $return[$analyzer] = array($theme);
-                    }
+                    array_collect_by($return, $analyzer, $ruleset);
                 }
             }
             
             return $return;
         }
 
-        foreach($this->extra_themes as $theme => $analyzers) {
+        foreach($this->extra_rulesets as $ruleset => $analyzers) {
             if (in_array($analyzer, $analyzers)) {
-                $return[] = $theme;
+                $return[] = $ruleset;
             }
         }
 
@@ -102,7 +98,7 @@ class ThemesExtra {
 
     public function getSeverities() {
         $return = array();
-        foreach($this->extra_themes as $analyzers) {
+        foreach($this->extra_rulesets as $analyzers) {
             foreach($analyzers as $analyzer)  {
                 $data = $this->ext->loadData("human/en/$analyzer.ini");
                 
@@ -120,7 +116,7 @@ class ThemesExtra {
 
     public function getTimesToFix() {
         $return = array();
-        foreach($this->extra_themes as $analyzers) {
+        foreach($this->extra_rulesets as $analyzers) {
             foreach($analyzers as $analyzer)  {
                 $data = $this->ext->loadData("human/en/$analyzer.ini");
                 
@@ -145,8 +141,8 @@ class ThemesExtra {
         return array();
     }
 
-    public function listAllThemes() {
-        return array_keys($this->extra_themes);
+    public function listAllRulesets() {
+        return array_keys($this->extra_rulesets);
     }
 
     public function getClass($name) {
@@ -181,12 +177,12 @@ class ThemesExtra {
         }
     }
 
-    public function getSuggestionThema($thema) {
-        $list = $this->listAllThemes();
+    public function getSuggestionRuleset($rulesets) {
+        $list = $this->listAllRulesets();
 
-        return array_filter($list, function ($c) use ($thema) {
-            foreach($thema as $theme) {
-                $l = levenshtein($c, $theme);
+        return array_filter($list, function ($c) use ($rulesets) {
+            foreach($rulesets as $ruleset) {
+                $l = levenshtein($c, $ruleset);
                 if ($l < 8) {
                     return true;
                 }

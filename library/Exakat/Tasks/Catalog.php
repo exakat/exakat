@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Reports\Reports;
-use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Rulesets;
 
 class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -34,7 +34,7 @@ class Catalog extends Tasks {
         $data = array();
 
         // List of analysis
-        $themas = $this->themes->listAllThemes();
+        $themas = $this->themes->listAllRulesets();
         sort($themas);
         $themas = array_map( function ($x) {
             if (strpos($x, ' ') !== false) {

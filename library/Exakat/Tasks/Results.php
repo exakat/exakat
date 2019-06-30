@@ -47,7 +47,7 @@ class Results extends Tasks {
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
+            if (!$analyzersClass = $this->themes->getRulesetsAnalyzers($thema)) {
                 throw new NoSuchAnalyzer($thema, $this->themes);
             }
 

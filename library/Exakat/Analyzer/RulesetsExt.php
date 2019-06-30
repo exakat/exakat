@@ -26,10 +26,10 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadExt;
 
-class ThemesExt {
+class RulesetsExt {
     private $ext           = null;
     private $all           = array();
-    private $themes        = array();
+    private $rulesets      = array();
 
     private static $instanciated = array();
     
@@ -43,42 +43,41 @@ class ThemesExt {
             $this->all[$name] = $list['All'];
             unset($list['All']);
             if (!empty($list)) {
-                $this->themes[$name] = new ThemesExtra($list, $this->ext);
+                $this->rulesets[$name] = new RulesetsExtra($list, $this->ext);
             }
         }
     }
     
-    public function getThemeAnalyzers(array $theme = null) {
-        if (empty($this->themes)) {
+    public function getRulesetsAnalyzers(array $ruleset = null) {
+        if (empty($this->rulesets)) {
             return array();
         }
         
         $return = array(array());
-        foreach($this->themes as $t) {
-            $return[] = $t->getThemeAnalyzers($theme);
+        foreach($this->rulesets as $t) {
+            $return[] = $t->getRulesetsAnalyzers($ruleset);
         }
         
         return array_merge(...$return);
     }
 
-    public function getThemeForAnalyzer($analyzer = null) {
-        if (empty($this->themes)) {
+    public function getRulesetForAnalyzer($analyzer = null) {
+        if (empty($this->rulesets)) {
             return array();
         }
-        
-        $return = array(array());
-        foreach($this->themes as $t) {
-            $return[] = $t->getThemeForAnalyzer($analyzer);
-        }
-        
-        return array_merge(...$return);
 
+        $return = array(array());
+        foreach($this->rulesets as $t) {
+            $return[] = $t->getRulesetForAnalyzer($analyzer);
+        }
+
+        return array_merge(...$return);
     }
 
-    public function getThemesForAnalyzer($analyzer = null) {
+    public function getRulesetsForAnalyzer($analyzer = null) {
         $return = array(array());
-        foreach($this->themes as $extension) {
-            $return[] = $extension->getThemesForAnalyzer($analyzer);
+        foreach($this->rulesets as $extension) {
+            $return[] = $extension->getRulesetsForAnalyzer($analyzer);
         }
         
         return array_merge(...$return);
@@ -86,7 +85,7 @@ class ThemesExt {
 
     public function getSeverities() {
         $return = array(array());
-        foreach($this->themes as $extension) {
+        foreach($this->rulesets as $extension) {
             $return[] = $extension->getSeverities();
         }
         
@@ -95,7 +94,7 @@ class ThemesExt {
 
     public function getTimesToFix() {
         $return = array(array());
-        foreach($this->themes as $extension) {
+        foreach($this->rulesets as $extension) {
             $return[] = $extension->getTimesToFix();
         }
         
@@ -104,7 +103,7 @@ class ThemesExt {
 
     public function getFrequences() {
         $return = array(array());
-        foreach($this->themes as $extension) {
+        foreach($this->rulesets as $extension) {
             $return[] = $extension->getFrequences();
         }
 
@@ -124,15 +123,15 @@ class ThemesExt {
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllThemes() {
-        if (empty($this->themes)) {
+    public function listAllRulesets() {
+        if (empty($this->rulesets)) {
             return array();
         }
 
         $return = array(array());
 
-        foreach($this->themes as $theme) {
-            $return[] = $theme->listAllThemes();
+        foreach($this->rulesets as $ruleset) {
+            $return[] = $ruleset->listAllRulesets();
         }
 
         return array_merge(...$return);
@@ -182,12 +181,12 @@ class ThemesExt {
         }
     }
 
-    public function getSuggestionThema(array $thema) {
-        $list = $this->listAllThemes();
+    public function getSuggestionRulesets(array $ruleset) {
+        $list = $this->listAllRulesets();
         
-        return array_filter($list, function ($c) use ($thema) {
-            foreach($thema as $theme) {
-                $l = levenshtein($c, $theme);
+        return array_filter($list, function ($c) use ($rulesets) {
+            foreach($rulesets as $r) {
+                $l = levenshtein($c, $r);
                 if ($l < 8) {
                     return true;
                 }

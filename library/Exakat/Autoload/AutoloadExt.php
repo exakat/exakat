@@ -65,7 +65,7 @@ class AutoloadExt {
         return array_map('basename', $this->pharList);
     }
 
-    public function getThemes() {
+    public function getRulesets() {
         $return = array();
 
         foreach($this->pharList as $name => $phar) {

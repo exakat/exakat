@@ -42,7 +42,7 @@ class Dailytodo extends Reports {
     
     private function generateData($folder, $name = 'table') {
         $thema = $this->config->thema ?? array('Analyzer');
-        $list = $this->themes->getThemeAnalyzers($thema);
+        $list = $this->themes->getRulesetsAnalyzers($thema);
         $list = makeList($list);
 
         $sqlQuery = "SELECT count(*) AS nb FROM results WHERE analyzer in ($list)";

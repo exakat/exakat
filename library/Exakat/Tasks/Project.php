@@ -24,7 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Rulesets;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
@@ -150,9 +150,9 @@ class Project extends Tasks {
         $themesToRun = array_merge(...$themesToRun);
         $themesToRun = array_unique($themesToRun);
 
-        $availableThemes = $this->themes->listAllThemes();
+        $availableRulesets = $this->themes->listAllRulesets();
 
-        $diff = array_diff($themesToRun, $availableThemes);
+        $diff = array_diff($themesToRun, $availableRulesets);
         if (!empty($diff)) {
             display('Ignoring the following unknown themes : ' . implode(', ', $diff) . PHP_EOL);
         }
@@ -206,7 +206,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Always run this one first
-        $this->analyzeThemes(array('First'), $audit_start, true);
+        $this->analyzeRulesets(array('First'), $audit_start, true);
 
         // Dump is a child process
         // initialization and first collection (action done once)
@@ -219,7 +219,7 @@ class Project extends Tasks {
         $this->logTime('Dumped and inited');
 
         if (empty($this->config->program)) {
-            $this->analyzeThemes($themesToRun, $audit_start, $this->config->quiet);
+            $this->analyzeRulesets($themesToRun, $audit_start, $this->config->quiet);
         } else {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         }
@@ -233,7 +233,7 @@ class Project extends Tasks {
 
         $dump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         foreach($this->config->themas as $name => $analyzers) {
-            $dump->checkThemes($name, $analyzers);
+            $dump->checkRulesets($name, $analyzers);
         }
         
         foreach($reportToRun as $format) {
@@ -255,8 +255,8 @@ class Project extends Tasks {
 
         display('Reported project' . PHP_EOL);
         
-        // Reset cache from Themes
-        Themes::resetCache();
+        // Reset cache from Rulesets
+        Rulesets::resetCache();
         $this->logTime('Final');
         $this->removeSnitch();
         display('End' . PHP_EOL);
@@ -331,7 +331,7 @@ class Project extends Tasks {
         }
     }
 
-    private function analyzeThemes($themes, $audit_start, $quiet) {
+    private function analyzeRulesets($themes, $audit_start, $quiet) {
         if (empty($themes)) {
             $themes = $this->config->project_themes;
         }

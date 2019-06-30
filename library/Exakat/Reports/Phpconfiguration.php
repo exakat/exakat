@@ -32,7 +32,7 @@ class Phpconfiguration extends Reports {
     public function _generate($analyzerList) {
         $final = '';
 
-        $themed = $this->themes->getThemeAnalyzers(array('Appinfo'));
+        $themed = $this->themes->getRulesetsAnalyzers(array('Appinfo'));
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("' . implode('", "', $themed) . '")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

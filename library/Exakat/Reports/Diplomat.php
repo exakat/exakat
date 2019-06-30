@@ -164,7 +164,7 @@ MENU;
         $this->initFolder();
         $this->generateDashboard();
 
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateIssues();
@@ -187,7 +187,7 @@ MENU;
             $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
-        $analyserList = $this->themes->getThemeAnalyzers($list);
+        $analyserList = $this->themes->getRulesetsAnalyzers($list);
         $this->generateIssuesEngine('compatibility_issues',
                                     $this->getIssuesFaceted($analyserList));
 
@@ -214,7 +214,7 @@ MENU;
     }
 
     public function getIssuesBreakdown() {
-       $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array('Top10'))) . ')';
+       $list = 'IN (' . makeList($this->themes->getRulesetsAnalyzers(array('Top10'))) . ')';
        $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer $list AND count > 0";
        $res = $this->sqlite->query($query);
 

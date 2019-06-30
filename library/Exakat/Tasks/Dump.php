@@ -225,7 +225,7 @@ class Dump extends Tasks {
 
         if (!empty($this->config->thema)) {
             $thema = $this->config->thema;
-            $themes = $this->themes->getThemeAnalyzers($thema);
+            $themes = $this->themes->getRulesetsAnalyzers($thema);
             if (empty($themes)) {
                 $r = $this->themes->getSuggestionThema($thema);
                 if (!empty($r)) {
@@ -234,8 +234,8 @@ class Dump extends Tasks {
                 throw new NoSuchThema($thema);
             }
             display('Processing thema ' . (count($thema) > 1 ? 's' : '' ) . ' : ' . implode(', ', $thema));
-            $missing = $this->processResultsTheme($thema, $counts);
-            $this->expandThemes();
+            $missing = $this->processResultsRuleset($thema, $counts);
+            $this->expandRulesets();
             $this->collectHashAnalyzer();
             
             if ($missing === 0) {
@@ -287,8 +287,8 @@ class Dump extends Tasks {
         $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
-    private function processResultsTheme($theme, array $counts = array()) {
-        $analyzers = $this->themes->getThemeAnalyzers($theme);
+    private function processResultsRuleset($theme, array $counts = array()) {
+        $analyzers = $this->themes->getRulesetsAnalyzers($theme);
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
@@ -2072,6 +2072,7 @@ GREMLIN
               ->isNot('virtual', true)
               ->savePropertyAs('fullcode', 'name')
               ->outIs('DEFAULT')
+              ->hasNoIn('RIGHT') // find an explicit default
               ->savePropertyAs('fullcode', 'default1')
               ->inIs('DEFAULT')
               ->inIs('PPP')
@@ -2342,7 +2343,7 @@ SQL;
         display( count($values) . ' readability index');
     }
 
-    public function checkThemes($theme, array $analyzers) {
+    public function checkRulesets($theme, array $analyzers) {
         $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
@@ -2361,7 +2362,7 @@ SQL;
         }
     }
 
-    private function expandThemes() {
+    private function expandRulesets() {
         $analyzers = array();
         $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -2374,12 +2375,12 @@ SQL;
             $ran[$row['thema']] = 1;
         }
 
-        $themas = $this->themes->listAllThemes();
+        $themas = $this->themes->listAllRulesets();
         $themas = array_diff($themas, $ran);
 
         $add = array();
         
-        $themes = $this->themes->getThemeAnalyzers($themas);
+        $themes = $this->themes->getRulesetsAnalyzers($themas);
         if (empty(array_diff($themes, $analyzers))) {
             $add[] = $theme;
         }

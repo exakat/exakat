@@ -26,22 +26,22 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadDev;
 
-class ThemesDev {
+class RulesetsDev {
     private $dev           = null;
     private $all           = array('All' => array());
-    private $themes        = array();
+    private $rulesets      = array();
 
     public function __construct(AutoloadDev $dev) {
         $this->dev = $dev;
         
-        $this->all = $dev->getAllAnalyzers() ?: array('All' => array());
-        $this->themes = array_keys($this->all);
+        $this->all      = $dev->getAllAnalyzers() ?: array('All' => array());
+        $this->rulesets = array_keys($this->all);
     }
     
-    public function getSuggestionThema(array $thema) {
-        return array_filter($this->themes, function ($c) use ($thema) {
-            foreach($thema as $theme) {
-                $l = levenshtein($c, $theme);
+    public function getSuggestionRuleset(array $ruleset) {
+        return array_filter($this->rulesets, function ($c) use ($ruleset) {
+            foreach($ruleset as $r) {
+                $l = levenshtein($c, $r);
                 if ($l < 8) {
                     return true;
                 }
@@ -50,13 +50,13 @@ class ThemesDev {
         });
     }
 
-    public function getThemeAnalyzers(array $theme = null) {
-        if (empty($theme)) {
+    public function getRulesetsAnalyzers(array $ruleset = null) {
+        if (empty($ruleset)) {
             return array();
         }
         
         $return = array();
-        foreach($theme as $t) {
+        foreach($ruleset as $t) {
             $return[] = $this->all[$t] ?? array();
         }
 
@@ -70,7 +70,7 @@ class ThemesDev {
         return preg_grep("#/$name\$#", $this->all['All']);
     }
     
-    public function getThemesForAnalyzer($analyzer = null) {
+    public function getRulesetsForAnalyzer($analyzer = null) {
         $return = array();
 
         if ($analyzer === null) {
@@ -78,15 +78,15 @@ class ThemesDev {
             $return = array_fill_keys($list['All'], array());
             unset($list['All']);
             
-            foreach($list as $theme => $ruleset) {
+            foreach($list as $rulesets => $ruleset) {
                 foreach($ruleset as $rule) {
-                    $return[$rule][] = $theme;
+                    $return[$rule][] = $rulesets;
                 }
             }
         } else {
-            foreach($this->all as $theme => $ruleset) {
+            foreach($this->all as $rulesets => $ruleset) {
                 if (in_array($analyzer, $ruleset, STRICT_COMPARISON)) {
-                    $return[] = $theme;
+                    $return[] = $rulesets;
                 }
             }
         }

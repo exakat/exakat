@@ -83,7 +83,7 @@ class Ambassador extends Reports {
         if ($this->themes !== null ){
             $this->frequences        = $this->themes->getFrequences();
             $this->timesToFix        = $this->themes->getTimesToFix();
-            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+            $this->themesForAnalyzer = $this->themes->getRulesetsForAnalyzer();
             $this->severities        = $this->themes->getSeverities();
         }
     }
@@ -165,7 +165,7 @@ class Ambassador extends Reports {
             return false;
         }
         
-        if ($missing = $this->checkMissingThemes()) {
+        if ($missing = $this->checkMissingRulesets()) {
             print "Can't produce Ambassador format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
             return false;
         }
@@ -231,7 +231,7 @@ class Ambassador extends Reports {
             $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
-        $analyserList = $this->themes->getThemeAnalyzers($list);
+        $analyserList = $this->themes->getRulesetsAnalyzers($list);
         $this->generateIssuesEngine('compatibility_issues',
                                     $this->getIssuesFaceted($analyserList));
 
@@ -248,7 +248,7 @@ class Ambassador extends Reports {
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateAuditConfig();
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateCodes();
@@ -715,9 +715,9 @@ JAVASCRIPT;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile($this->themes->getThemeAnalyzers($this->themesToShow));
+        $fileHTML = $this->getTopFile($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->themes->getThemeAnalyzers($this->themesToShow));
+        $analyzerHTML = $this->getTopAnalyzers($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<'JAVASCRIPT'
@@ -1495,7 +1495,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN (' . makeList($this->themes->getThemeAnalyzers(array($categorie))) . ')';
+            $list = 'IN (' . makeList($this->themes->getRulesetsAnalyzers(array($categorie))) . ')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1536,7 +1536,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = <<<SQL
@@ -1577,7 +1577,7 @@ HTML;
     }
 
     protected function getTotalAnalysedFile() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
@@ -1623,7 +1623,7 @@ HTML;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
@@ -1659,7 +1659,7 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = $this->themes->getThemeAnalyzers(array(
+        $list = $this->themes->getRulesetsAnalyzers(array(
         'Analyze',
         'Security',
         'Performances',
@@ -1732,7 +1732,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<'SQL'
@@ -1767,7 +1767,7 @@ SQL;
 
     protected function getFilesCount($themes = null, $limit = null) {
         if ($themes === null) {
-            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         } elseif (is_array($themes)) {
             $list = $themes;
         } else {
@@ -1795,7 +1795,7 @@ SQL;
 
     protected function getTopFile($theme, $file = 'issues') {
         if (is_string($theme)) {
-            $list = $this->themes->getThemeAnalyzers($theme);
+            $list = $this->themes->getRulesetsAnalyzers($theme);
         } elseif (is_array($theme)) {
             $list = $theme;
         } else {
@@ -1854,7 +1854,7 @@ SQL;
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1877,7 +1877,7 @@ SQL;
 
     protected function getTopAnalyzers($theme, $file = 'issues') {
         if (is_string($theme)) {
-            $list = $this->themes->getThemeAnalyzers($theme);
+            $list = $this->themes->getRulesetsAnalyzers($theme);
         } elseif (is_array($theme)) {
             $list = $theme;
         } else {
@@ -1919,7 +1919,7 @@ SQL;
     }
 
     protected function getSeveritiesNumberBy($type = 'file') {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = <<<SQL
@@ -1976,10 +1976,10 @@ SQL;
     }
 
     private function generateNewIssues() {
-        $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
+        $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
 
         if (file_exists($this->config->dump_previous)) {
-            $oldissues = $this->getNewIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow), $this->config->dump_previous);
+            $oldissues = $this->getNewIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
             
             $diff = array_diff($issues, $oldissues);
         } else {
@@ -1991,7 +1991,7 @@ SQL;
     }
     
     private function generateIssues() {
-        $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
+        $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
                                     $issues );
     }
@@ -2106,7 +2106,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
         if (is_string($theme)) {
-            $list = $this->themes->getThemeAnalyzers(array($theme));
+            $list = $this->themes->getRulesetsAnalyzers(array($theme));
         } else {
             $list = $theme;
         }
@@ -2201,7 +2201,7 @@ SQL;
     protected function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+        foreach($this->themes->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
             $analyzers .= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
         }
 
@@ -2757,7 +2757,7 @@ SQL
         $compatibility = array();
         $skipped       = array();
 
-        $list = $this->themes->getThemeAnalyzers(array('CompatibilityPHP' . $version));
+        $list = $this->themes->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($list) . ')');
         $counts = array();
@@ -4633,7 +4633,7 @@ HTML;
     }
     
     private function generateConcentratedIssues() {
-        $listAnalyzers = $this->themes->getThemeAnalyzers(array('Analyze'));
+        $listAnalyzers = $this->themes->getRulesetsAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
 
         $sql = <<<SQL

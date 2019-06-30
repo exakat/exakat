@@ -50,7 +50,7 @@ SQL;
             $a = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['severity'] = $this->getDocs($row['analyzer'], 'severity');
             $row['impact']   = $this->getDocs($row['analyzer'], 'timetofix');
-            $row['recipes']  = $a->getThemes();
+            $row['recipes']  = $a->getRulesets();
 
             $items[] = $row;
             $this->count();

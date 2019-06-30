@@ -144,7 +144,7 @@ MENU;
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
+        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $this->generateCodes();
 
         // Static files

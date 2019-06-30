@@ -57,7 +57,7 @@ class Files extends Tasks {
         $files = array();
         $tokens = 0;
 
-        display( "Searching for files \n");
+        display("Searching for files \n");
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
         display('Found ' . count($files) . " files.\n");
 
@@ -79,6 +79,7 @@ class Files extends Tasks {
         }
 
         if (!empty($missing)) {
+            print_r($missing);
             throw new MissingFile($missing);
         }
 
@@ -387,6 +388,11 @@ class Files extends Tasks {
         $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
 
         foreach($files as $id => $file) {
+            if (is_link($path.$file)) {
+                unset($files[$id]);
+                $ignoredFiles[$file] = "Symbolic link ($f)";
+                continue;
+            }
             $f = basename($file);
             if (isset($ignore_files[$f])) {
                 unset($files[$id]);
