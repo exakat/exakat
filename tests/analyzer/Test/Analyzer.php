@@ -3,7 +3,7 @@
 namespace Test;
 
 use Exakat\Phpexec;
-use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Rulesets;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
 use Exakat\Autoload\AutoloadExt;
@@ -65,9 +65,9 @@ abstract class Analyzer extends TestCase {
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
         
-        $themes = new Themes("$EXAKAT_PATH/data/analyzers.sqlite", 
-                             new AutoloadExt(''),
-                             new AutoloadDev('')
+        $themes = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
+                               new AutoloadExt(''),
+                               new AutoloadDev('')
                             );
 
         $analyzerobject = $themes->getInstance($test_config, null, $config);
