@@ -905,6 +905,12 @@ GREMLIN;
         return $this;
     }
 
+    public function isThis() {
+        $this->query->isThis();
+
+        return $this;
+    }
+
     public function count() {
         $this->query->count();
 
