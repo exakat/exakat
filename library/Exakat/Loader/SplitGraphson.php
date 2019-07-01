@@ -35,7 +35,7 @@ use Exakat\Tasks\Tasks;
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
     private const LOAD_CHUNK      = 20000;
-    private const LOAD_CHUNK_LINK = 20000;
+    private const LOAD_CHUNK_LINK = 8000;
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -112,11 +112,13 @@ class SplitGraphson extends Loader {
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             // Skip reflexive definitions, which never exist.
             if ($row[0] === $row[1]) { continue; }
+            $total += $row[2];
+            $chunk += $row[2];
+            unset($row[2]);
             fputcsv($f, $row);
-            ++$total;
-            ++$chunk;
             
             if ($chunk > self::LOAD_CHUNK_LINK) {
+                print "Save Links $chunk / $total\n";
                 $f = $this->saveLinks($f);
                 $chunk = 0;
             }
