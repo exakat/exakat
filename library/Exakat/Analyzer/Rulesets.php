@@ -103,17 +103,18 @@ class Rulesets {
         $main  = $this->main ->listAllAnalyzer($folder);
         $extra = $this->extra->listAllAnalyzer($folder);
         $ext   = $this->ext  ->listAllAnalyzer($folder);
-        $dev   = $this->ext  ->listAllAnalyzer($folder);
-        
+        $dev   = $this->dev  ->listAllAnalyzer($folder);
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
     public function listAllRulesets($theme = null) {
-        $main = $this->main  ->listAllRulesets($theme);
+        $main  = $this->main ->listAllRulesets($theme);
         $extra = $this->extra->listAllRulesets($theme);
-        $ext = $this->ext    ->listAllRulesets($theme);
+        $ext   = $this->ext  ->listAllRulesets($theme);
+        $dev   = $this->dev  ->listAllAnalyzer($theme);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getClass($name) {
@@ -145,8 +146,9 @@ class Rulesets {
         $main  = $this->main ->getSuggestionClass($name);
         $extra = $this->extra->getSuggestionClass($name);
         $ext   = $this->ext  ->getSuggestionClass($name);
+        $dev   = $this->dev  ->getSuggestionClass($name);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getAnalyzerInExtension($name) {

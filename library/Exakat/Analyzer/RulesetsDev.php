@@ -50,6 +50,19 @@ class RulesetsDev {
         });
     }
 
+    public function listAllAnalyzer($folder = null) {
+        if (empty($this->all)) {
+            return array();
+        }
+
+        $return = array_merge(...array_values($this->all));
+        if ($folder === null) {
+            return $return;
+        }
+        
+        return preg_grep("#$folder/#", $return);
+    }
+
     public function getRulesetsAnalyzers(array $ruleset = null) {
         if (empty($ruleset)) {
             return array();
@@ -92,6 +105,14 @@ class RulesetsDev {
         }
         
         return $return;
+    }
+
+    public function getSuggestionClass($name) {
+        return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
+            $l = levenshtein($c, $name);
+
+            return $l < 8;
+        });
     }
 
     public function getSeverities() {
