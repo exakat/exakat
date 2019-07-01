@@ -129,7 +129,11 @@ class Rulesets {
         if ($class = $this->ext->getClass($name)) {
             return $class;
         }
-        
+
+        if ($class = $this->dev->getClass($name)) {
+            return $class;
+        }
+
         return false;
     }
 
