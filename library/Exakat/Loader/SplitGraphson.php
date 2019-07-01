@@ -118,7 +118,6 @@ class SplitGraphson extends Loader {
             fputcsv($f, $row);
             
             if ($chunk > self::LOAD_CHUNK_LINK) {
-                print "Save Links $chunk / $total\n";
                 $f = $this->saveLinks($f);
                 $chunk = 0;
             }
@@ -282,7 +281,7 @@ GREMLIN;
 
             ++$total;
         }
-        file_put_contents($this->path, implode(PHP_EOL, $append).PHP_EOL, \FILE_APPEND);
+        file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
 
         if ($this->total > self::LOAD_CHUNK) {
             $this->saveNodes();

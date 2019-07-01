@@ -78,7 +78,7 @@ class InfiniteRecursion extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->savePropertyAs('id', 'start')
              ->analyzerIs('Functions/Recursive')
-             ->is('count', 0) 
+             ->is('count', 0)
              ->outIs('DEFINITION')
              ->atomIs(self::$FUNCTIONS_CALLS)
              ->outIsIE('METHOD')

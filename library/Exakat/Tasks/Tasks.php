@@ -121,8 +121,8 @@ abstract class Tasks {
     }
 
     public function __destruct() {
-        if (static::CONCURENCE !== self::ANYTIME       && 
-            $this->is_subtask === self::IS_NOT_SUBTASK && 
+        if (static::CONCURENCE !== self::ANYTIME       &&
+            $this->is_subtask === self::IS_NOT_SUBTASK &&
             !empty(self::$semaphore)) {
             fclose(self::$semaphore);
             self::$semaphore = null;

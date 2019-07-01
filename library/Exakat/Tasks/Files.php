@@ -388,7 +388,7 @@ class Files extends Tasks {
         $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
 
         foreach($files as $id => $file) {
-            if (is_link($path.$file)) {
+            if (is_link($path . $file)) {
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Symbolic link ($f)";
                 continue;

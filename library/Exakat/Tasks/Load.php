@@ -1322,7 +1322,7 @@ class Load extends Tasks {
                     $this->addLink($previousContextVariables[$arg->code], $arg, 'DEFINITION');
                 }
             } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
-            
+
             $this->runPlugins($function, $uses);
         }
 
