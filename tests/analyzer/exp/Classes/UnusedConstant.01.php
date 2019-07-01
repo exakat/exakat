@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( 'UNUSED = 1',
+$expected     = array('UNUSED = 1',
                      );
 
 $expected_not = array('USED1 = 1',

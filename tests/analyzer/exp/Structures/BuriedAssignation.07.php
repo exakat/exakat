@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('for( /**/  ; $i < $d ; $i++) { /**/ } ', 
+$expected     = array('for( /**/  ; $i < $d ; $i++) { /**/ } ',
                       'for($i2 = 0 ;  /**/  ; $i++) { /**/ } ',
                      );
 

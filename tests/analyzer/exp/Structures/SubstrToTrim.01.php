@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('substr($a, 1, -1)', 
-                      'substr($a, 0, -1)', 
+$expected     = array('substr($a, 1, -1)',
+                      'substr($a, 0, -1)',
                       'substr($a, 1)',
                      );
 

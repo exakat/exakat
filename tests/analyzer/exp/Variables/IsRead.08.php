@@ -19,7 +19,7 @@ $expected     = array('$conditionC',
                       '$final',
                       '$switch',
                       '$case',
-                      '$index', 
+                      '$index',
                       '$concat',
                      );
 

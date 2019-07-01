@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a = 1 + 2 * ($b = intval($c))', 
+$expected     = array('$a = 1 + 2 * ($b = intval($c))',
                       'if(false != ($b = strtolower($c))) { /**/ } ',
                      );
 

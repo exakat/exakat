@@ -3,7 +3,7 @@
 $expected     = array('$staticPropertyUnused1 = 5',
                       '$staticPropertyUnused2 = 5',
                       '$staticPropertyUnused3 = 5',
-                      );
+                     );
 
 $expected_not = array('$staticPropertySelf1 = 1',
                       '$staticPropertyx1 = 3',

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('C::$D[] = C::$D', 
+$expected     = array('C::$D[] = C::$D',
                       '$c[] = $c',
                      );
 

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('static function aStatic( ) { /**/ } ', 
+$expected     = array('static function aStatic( ) { /**/ } ',
                       'static function aSelf( ) { /**/ } ',
                       'static function aZUse( ) { /**/ } ',
                       'static function aX( ) { /**/ } ',

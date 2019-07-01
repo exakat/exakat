@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$this',  //3
-                      '$this',  //7
+$expected     = array('$this',
+                      '$this',
                      );
 
 $expected_not = array('$this',

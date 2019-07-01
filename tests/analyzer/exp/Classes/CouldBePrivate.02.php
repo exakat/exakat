@@ -7,7 +7,7 @@ $expected     = array('$asprotectedReallyFull',
                       '$aprotectedButSBPrivate',
                       '$aprotectedButSBPrivate2',
                       '$aspublic',
-                      '$asprotectedButSBPrivateChildren', 
+                      '$asprotectedButSBPrivateChildren',
                       '$asprotectedButSBPrivateFull',
                      );
 

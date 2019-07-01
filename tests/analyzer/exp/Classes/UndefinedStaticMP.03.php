@@ -12,7 +12,7 @@ $expected_not = array('self::$b($c[\'d\'])',
                       'static::$be($ce[\'de\'])',
                       'static::${bef}',
                       'self::$b($c[\'d\'])',
-                      'static::$be($ce[\'de\'])'
+                      'static::$be($ce[\'de\'])',
                      );
 
 ?>

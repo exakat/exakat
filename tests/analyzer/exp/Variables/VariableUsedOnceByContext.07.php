@@ -9,13 +9,13 @@ $expected     = array('$onlyInCLosure',
                       '$cb1',
                       '$cb2',
                       '$fromXOnly',
-                      '$fromXInUse1AndInCLosure',
-                      '$fromXInUse2AndInCLosure',
                      );
 
 $expected_not = array('$fromXInUse1',
                       '$fromXInUse2',
                       '$fromXOnlyTwice',
+                      '$fromXInUse1AndInCLosure',
+                      '$fromXInUse2AndInCLosure',
                      );
 
 ?>
