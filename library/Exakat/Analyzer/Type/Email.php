@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Email extends Analyzer {
     public function analyze() {
+        // $x = 'a@b.com';
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIs('fullcode', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
