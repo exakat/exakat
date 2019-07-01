@@ -105,7 +105,34 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-        $count = $countP + $countM + $countC;
+
+        // Create link between static Class method and its definition
+        // This works outside a class too, for static.
+        $query = $this->newQuery('MakeClassMethodDefinition parent');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs('Variable', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->inIs('NAME')
+              ->outIs('TYPEHINT')
+              ->inIs('DEFINITION')
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->isNot('visibility', 'private')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count3 = $result->toInt();
+
+        $count = $countP + $countM + $countC + $count3;
         display("Set $count method, constants and properties remote with typehint");
     }
 }
