@@ -38,6 +38,14 @@ class SpotPHPNativeFunctions extends LoadFinal {
               ->tokenIs('T_STRING')
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
+              ->not(
+                $query->side()
+                     ->outIs('NAME')
+                     ->inIs('DEFINITION')
+                     ->inIs('USE')
+                     ->atomIs('Usenamespace', Analyzer::WITHOUT_CONSTANTS)
+                     ->prepareSide()
+              )
               ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
               ->raw('map{ name = parts.last().toLowerCase();}', array(), array())
               ->unique();
@@ -58,6 +66,14 @@ class SpotPHPNativeFunctions extends LoadFinal {
                   ->isNot('absolute', true)
                   ->tokenIs('T_STRING')
                   ->hasNoIn('DEFINITION')
+                  ->not(
+                    $query->side()
+                         ->outIs('NAME')
+                         ->inIs('DEFINITION')
+                         ->inIs('USE')
+                         ->atomIs('Usenamespace', Analyzer::WITHOUT_CONSTANTS)
+                         ->prepareSide()
+                  )
                   ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
                   ->raw('filter{ name = parts.last().toLowerCase(); name in *** }', array(), array($diff))
                   ->raw('sideEffect{

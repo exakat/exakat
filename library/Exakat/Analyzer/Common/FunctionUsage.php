@@ -30,7 +30,7 @@ class FunctionUsage extends Analyzer {
     
     public function analyze() {
         $functions =  makeFullNsPath($this->functions);
-        
+
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
