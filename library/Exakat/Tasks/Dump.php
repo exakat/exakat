@@ -209,6 +209,11 @@ class Dump extends Tasks {
             $this->collectMissingDefinitions();
             $end = microtime(true);
             $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            
+            $begin = microtime(true);
+            $this->collectCyclomaticComplexity();
+            $end = microtime(true);
+            $this->log->log( 'Collected Cyclomatic Complexity : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -1843,6 +1848,43 @@ GREMLIN;
         $values[] = "('constant missed', '$constantMissed')";
 
         $query = 'INSERT INTO hash ("key", "value") VALUES ' . implode(', ', $values);
+        $this->sqlite->query($query);
+    }
+
+    private function collectCyclomaticComplexity() {
+        $values = array();
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
+
+        $query = $this->newQuery('CyclomaticComplexity');
+        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->_as('name')
+              ->back('first')
+              ->outIs('BLOCK')
+              ->raw(<<<GREMLIN
+project("cc").by(
+    __.emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).coalesce(
+    __.hasLabel(
+    "Ifthen", "Case", "Default", "Foreach", "For" ,"Dowhile", "While", "Continue", 
+    "Catch", "Finally", "Throw", 
+    "Ternary", "Coalesce"
+    ),
+    __.hasLabel("Ifthen").out("THEN", "ELSE"),
+    __.hasLabel("Return").sideEffect{ ranked = it.get().value("rank");}.in("EXPRESSION").coalesce( __.filter{ it.get().value("count") != ranked + 1;},
+                                                                                                   __.not(where(__.in("BLOCK").hasLabel("Function"))))
+    ).count()
+).select("first","cc").by("fullnspath").by()
+GREMLIN
+,array(), array());
+        $query->prepareRawQuery();
+        $cc = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        foreach($cc->toArray() as $row) {
+            ++$row['cc'];
+            $values[] = "('CyclomaticComplexity', '{$row['first']}', '{$row['cc']}')";
+        }
+
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
         $this->sqlite->query($query);
     }
 
