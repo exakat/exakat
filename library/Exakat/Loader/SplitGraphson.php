@@ -115,6 +115,7 @@ class SplitGraphson extends Loader {
             $total += $row[2];
             $chunk += $row[2];
             unset($row[2]);
+            $row[1] = strtr($row[1], ',', '-');
             fputcsv($f, $row);
             
             if ($chunk > self::LOAD_CHUNK_LINK) {

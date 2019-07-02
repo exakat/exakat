@@ -245,7 +245,7 @@ class Tinkergraph extends Graph {
     public function getDefinitionSQL() {
         // Optimize loading by sorting the results
         return <<<'SQL'
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, group_concat(calls.id - 1, "-") AS call, count(calls.id) AS id
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, GROUP_CONCAT(DISTINCT calls.id - 1) AS call, count(calls.id) AS id
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
