@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Jun 2019 18:00:26 +0000
-.. comment: Generation hash : 55563aedd54adf4837110aaa343ab52c66c632fb
+.. comment: Generation date : Tue, 02 Jul 2019 09:17:50 +0000
+.. comment: Generation hash : f8ecabbfb71b1588db777cd0b15cef74878871ca
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6263,6 +6263,67 @@ PHP 7.0 has the ability to define an array as a constant, using the `define() <h
 
 
 
+.. _dependant-abstract-classes:
+
+Dependant Abstract Classes
+##########################
+
+
+Abstract classes should be autonomous. It is recommended to avoid depending on methods, constant or properties that should be made available in inheriting classes.
+
+The following abstract classes make usage of constant, methods and properties, static or not, that are not defined in the class. This means the inheriting classes must provide those constants, methods and properties, but there is no way to enforce this. 
+
+This may also lead to dead code : when the abstract class is removed, the host class have unused properties and methods.
+
+.. code-block:: php
+
+   <?php
+   
+   // autonomous abstract class : all it needs is within the class
+   abstract class c {
+       private $p = 0;
+       
+       function foo() {
+           return ++$this->p;
+       }
+   }
+   
+   // dependant abstract class : the inheriting classes needs to provide some properties or methods
+   abstract class c2 {
+       function foo() {
+           // $p must be provided by the extending class
+           return ++$this->p;
+       }
+   }
+   
+   class c3 extends c2 {
+       private $p = 0;
+   }
+   ?>
+
+
+See also :ref:`dependant-trait`. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the class only use its own resources
+* Split the class in autonomous classes
+* Add local property definitions to make the class independant
+
++-------------+------------------------------------+
+| Short name  | Classes/DependantAbstractClass     |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _dependant-trait:
 
 Dependant Trait
@@ -6303,13 +6364,15 @@ This may also lead to dead code : when the trait is removed, the host class have
    ?>
 
 
+See also :ref:`dependant-abstract-classes`. 
 
 
 Suggestions
 ^^^^^^^^^^^
 
 * Add local property definitions to make the trait independant
-* Add local property definitions to make the trait independant
+* Make the trait only use its own resources
+* Split the trait in autonomous traits
 
 +-------------+--------------------------------------+
 | Short name  | Traits/DependantTrait                |
@@ -10855,6 +10918,57 @@ Suggestions
 
 
 
+.. _infinite-recursion:
+
+Infinite Recursion
+##################
+
+
+A method is calling itself, with unchanged arguments. This will probably repeat indefinitely.
+
+This applies to recursive functions without any condition. This also applies to function which inject the incoming arguments, without modifications.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a, $b) {
+       if ($a > 10) {
+           return;
+       }
+       foo($a, $b);
+   }
+   
+   function foo2($a, $b) {
+       ++$a;   // $a is modified
+       if ($a > 10) {
+           return;
+       }
+       foo2($a, $b);
+   }
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Modify arguments before reinjecting them in the same method
+* Use different values when callling the same method
+
++-------------+------------------------------+
+| Short name  | Structures/InfiniteRecursion |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+
+
+
 .. _instantiating-abstract-class:
 
 Instantiating Abstract Class
@@ -12196,6 +12310,15 @@ Setting the property in the constructor (or in a factory), makes the class easie
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using global variables, and use properties instead
+* Remove the usage of these global variables
+
 +-------------+-----------------------------+
 | Short name  | Classes/MakeGlobalAProperty |
 +-------------+-----------------------------+
@@ -12734,6 +12857,59 @@ This syntax is interesting when the object is not reused, and may be discarded
 +-------------+------------------------------+
 | Time To Fix | Quick (30 mins)              |
 +-------------+------------------------------+
+
+
+
+.. _methods-without-return:
+
+Methods Without Return
+######################
+
+
+List of all the function, closures, methods that have no explicit return. 
+
+Functions that hold the ``void`` return type are omitted.
+
+.. code-block:: php
+
+   <?php
+   
+   // With return null : Explicitly not returning
+   function withExplicitReturn($a = 1) {
+       $a++;
+       return null;
+   }
+   
+   // Without indication
+   function withoutExplicitReturn($a = 1) {
+       $a++;
+   }
+   
+   // With return type void : Explicitly not returning
+   function withExplicitReturnType($a = 1) : void {
+       $a++;
+   }
+   
+   ?>
+
+
+See also `return <https://www.php.net/manual/en/function.return.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the returntype 'void' to make this explicit behavior
+
++-------------+-------------------------+
+| Short name  | Functions/WithoutReturn |
++-------------+-------------------------+
+| Themes      | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
 
 
 
@@ -17105,6 +17281,49 @@ See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.n
 
 
 
+.. _null-or-boolean-arrays:
+
+Null Or Boolean Arrays
+######################
+
+
+Null and booleans are valid PHP array base. Yet, they only produce ``null`` values, and no warning.
+
+.. code-block:: php
+
+   <?php
+   
+   // outputs NULL
+   var_dump(null[0]);
+   
+   const MY_CONSTANT = true;
+   // outputs NULL
+   var_dump(MY_CONSTANT[10]);
+   
+   ?>
+
+
+See also `Null and True <https://twitter.com/Chemaclass/status/1144588647464951808>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using the array syntax on null and boolean
+* Avoid using null and boolean on constant that are expecting arrays
+
++-------------+--------------------+
+| Short name  | Arrays/NullBoolean |
++-------------+--------------------+
+| Themes      | :ref:`Analyze`     |
++-------------+--------------------+
+| Severity    | Minor              |
++-------------+--------------------+
+| Time To Fix | Quick (30 mins)    |
++-------------+--------------------+
+
+
+
 .. _objects-don't-need-references:
 
 Objects Don't Need References
@@ -19777,17 +19996,24 @@ Second file.
    ?>
 
 
-See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ and `Understanding the concept of visibility in object oriented php <https://torquemag.io/2016/05/understanding-concept-visibility-object-oriented-php/>`_.
 
-+-------------+---------------------------+
-| Short name  | Classes/RaisedAccessLevel |
-+-------------+---------------------------+
-| Themes      | :ref:`ClassReview`        |
-+-------------+---------------------------+
-| Severity    | Critical                  |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Lower the visibility in the child class
+* Raise the visibility in the parent class
+
++-------------+--------------------------------------------+
+| Short name  | Classes/RaisedAccessLevel                  |
++-------------+--------------------------------------------+
+| Themes      | :ref:`ClassReview`, :ref:`LintButWontExec` |
++-------------+--------------------------------------------+
+| Severity    | Critical                                   |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
 
 
 
@@ -20725,7 +20951,7 @@ Same Conditions In Condition
 
 At least two consecutive if/then structures use identical conditions. The latter will probably be ignored.
 
-This analysis returns false positive when there are attempt to fix the situation, or to call an alternative solution. 
+This analysis returns false positive when there are attempt to fix a situation, or to call an alternative solution. 
 
 .. code-block:: php
 
@@ -20755,15 +20981,25 @@ This analysis returns false positive when there are attempt to fix the situation
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Structures/SameConditions |
-+-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Critical                  |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge the two conditions into one
+* Make the two conditions different
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/SameConditions                                                         |
++-------------+-----------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                    |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Critical                                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                   |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`teampass-structures-sameconditions`, :ref:`typo3-structures-sameconditions` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -22819,6 +23055,16 @@ Those constants looks like a typo from other names.
    $path = $path . DIRECOTRY_SEPARATOR . $file;
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix any typo in the spelling of the constants
+* Fix any typo in the spelling of the constants
+* Tell us about common mispelling so we can upgrade this analysis
 
 +-------------+--------------------------------+
 | Short name  | Constants/StrangeName          |
@@ -24937,6 +25183,16 @@ Those constants are not defined in the code, and will raise errors, or use the f
 It is recommended to define them all, or to avoid using them.
 
 See also `Constants <http://php.net/manual/en/language.constants.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Define the constant
+* Fix the name of the constant
+* Fix the namespace of the constant (FQN or use)
+* Remove the usage of the constant
 
 +-------------+-----------------------------------------------------------+
 | Short name  | Constants/UndefinedConstants                              |
@@ -28125,13 +28381,23 @@ This is available since PHP 7.0. It is recommended to set those values in the ``
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Php/UseSessionStartOptions   |
-+-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
-+-------------+------------------------------+
-| Php Version | With PHP 7.0 and more recent |
-+-------------+------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use session_start() with array arguments
+
++-------------+---------------------------------------------+
+| Short name  | Php/UseSessionStartOptions                  |
++-------------+---------------------------------------------+
+| Themes      | :ref:`Suggestions`                          |
++-------------+---------------------------------------------+
+| Php Version | With PHP 7.0 and more recent                |
++-------------+---------------------------------------------+
+| Examples    | :ref:`wordpress-php-usesessionstartoptions` |
++-------------+---------------------------------------------+
 
 
 
@@ -30179,6 +30445,46 @@ See also `crypt <http://www.php.net/crypt>`_.
 +-------------+-----------------------------+
 | Time To Fix | Instant (5 mins)            |
 +-------------+-----------------------------+
+
+
+
+.. _curl\_version()-has-no-argument:
+
+curl_version() Has No Argument
+##############################
+
+
+`curl_version() <http://www.php.net/curl_version>`_ used to accept CURLVERSION_NOW as argument. Since PHP 7.4, it is an argumentless function.
+
+.. code-block:: php
+
+   <?php
+   
+   // Compatible syntax
+   $details = curl_version(CURLVERSION_NOW);
+   
+   // New PHP 7.4 syntax
+   $details = curl_version();
+   
+   ?>
+
+
+See also `curl_version <https://www.php.net/manual/en/function.curl-version.php>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop all arguments from curl_version() calls.
+
++-------------+---------------------------+
+| Short name  | Structures/CurlVersionNow |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 

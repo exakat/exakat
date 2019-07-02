@@ -317,6 +317,10 @@ Glossary
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
+    + `curl_version()`
+
+      + :ref:`curl_version() Has No Argument <curl\_version()-has-no-argument>`
+
     + `current()`
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -890,6 +894,7 @@ Glossary
 
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
+      + :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
 
     + `next()`

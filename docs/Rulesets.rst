@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 24 Jun 2019 18:00:26 +0000
-.. comment: Generation hash : 55563aedd54adf4837110aaa343ab52c66c632fb
+.. comment: Generation date : Tue, 02 Jul 2019 09:17:50 +0000
+.. comment: Generation hash : f8ecabbfb71b1588db777cd0b15cef74878871ca
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 361 analysis
+Total : 365 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -142,6 +142,7 @@ Total : 361 analysis
 * :ref:`Crc32() Might Be Negative <crc32()-might-be-negative>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
+* :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
@@ -197,6 +198,7 @@ Total : 361 analysis
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Inconsistent Elseif <inconsistent-elseif>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
+* :ref:`Infinite Recursion <infinite-recursion>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Invalid Class Name <invalid-class-name>`
@@ -215,6 +217,7 @@ Total : 361 analysis
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
+* :ref:`Methods Without Return <methods-without-return>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
@@ -272,6 +275,7 @@ Total : 361 analysis
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
 * :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Not Not <not-not>`
+* :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
 * :ref:`Old Style __autoload() <old-style-\_\_autoload()>`
@@ -440,7 +444,7 @@ Total : 361 analysis
 ClassReview
 +++++++++++
 
-Total : 26 analysis
+Total : 27 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -453,6 +457,7 @@ Total : 26 analysis
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use self <could-use-self>`
+* :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`
@@ -952,7 +957,7 @@ Total : 11 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 7 analysis
+Total : 8 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -960,6 +965,7 @@ Total : 7 analysis
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
+* :ref:`curl_version() Has No Argument <curl\_version()-has-no-argument>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
 .. _compatibilityphp80:
@@ -1011,7 +1017,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -1026,6 +1032,7 @@ Total : 20 analysis
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
+* :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Trait Not Found <trait-not-found>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
