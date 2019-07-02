@@ -3,6 +3,9 @@
 $expected     = array('$publicThenProtected',
                       '$protectedThenPrivate',
                       '$publicThenPrivate',
+                      '$publicThenProtected',
+                      '$protectedThenPrivate',
+                      '$publicThenPrivate',
                      );
 
 $expected_not = array('$privateOnly',

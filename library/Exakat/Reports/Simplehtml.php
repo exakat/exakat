@@ -81,12 +81,12 @@ class Simplehtml extends Reports {
 
     private function makeSummary($folder) {
         if (empty($this->config->thema)) {
-            $list = $this->themes->getThemeAnalyzers($this->config->thema);
+            $list = $this->themes->getRulesetsAnalyzers($this->config->thema);
             $list = makeList($list);
         } elseif (!empty($this->config->program)) {
             $list = '"' . $this->config->program . '"';
         } else {
-            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
             $list = makeList($list);
         }
 
@@ -116,11 +116,11 @@ HTML;
         
     private function makeList($folder) {
         if (!empty($this->config->thema)) {
-            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
+            $list = $this->themes->getRulesetsAnalyzers(array($this->config->thema));
         } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {
-            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         }
 
         $analysisResults = new Results($this->sqlite, $list);

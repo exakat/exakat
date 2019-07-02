@@ -26,7 +26,7 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadExt;
 
-class ThemesMain {
+class RulesetsMain {
     private static $sqlite = null;
     private $phar_tmp      = null;
 
@@ -49,25 +49,25 @@ class ThemesMain {
         }
     }
     
-    public function getThemeAnalyzers($theme = null) {
-        $all = $this->listAllThemes();
+    public function getRulesetsAnalyzers($ruleset = null) {
+        $all = $this->listAllRulesets();
 
         // Main installation
-        if ($theme === null) {
-            // Default is ALL of them
+        if ($ruleset === null) {
+            // Default is ALL of ruleset
             $where = 'WHERE a.folder != "Common" ';
-        } elseif (is_array($theme)) {
-            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($theme) . ')';
-        } elseif ($theme === 'Random') {
+        } elseif (is_array($ruleset)) {
+            $ruleset = array_map(function ($x) { return trim($x, '"'); }, $ruleset);
+            $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($ruleset) . ')';
+        } elseif ($ruleset === 'Random') {
             $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
             shuffle($shorList);
-            $theme = $shorList[0];
-            display( "Random theme is : $theme\n");
+            $ruleset = $shorList[0];
+            display( "Random ruleset is : $ruleset\n");
 
-            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($theme, '"') . '"';
-        } elseif (in_array($theme, $all)) {
-            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($theme, '"') . '"';
+            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($ruleset, '"') . '"';
+        } elseif (in_array($ruleset, $all)) {
+            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($ruleset, '"') . '"';
         } else {
             return array();
         }
@@ -90,7 +90,7 @@ SQL;
         return $return;
     }
 
-    public function getThemeForAnalyzer($analyzer) {
+    public function getRulesetForAnalyzer($analyzer) {
         list($vendor, $class) = explode('/', $analyzer);
         
         $query = <<<SQL
@@ -113,7 +113,7 @@ SQL;
         return $return;
     }
 
-    public function getThemesForAnalyzer($list = null) {
+    public function getRulesetsForAnalyzer($list = null) {
         if ($list === null) {
             $where = '';
         } elseif (is_string($list)) {
@@ -205,7 +205,7 @@ SQL;
         return $return;
     }
 
-    public function listAllThemes() {
+    public function listAllRulesets() {
         $query = <<<'SQL'
 SELECT name AS name FROM categories
 
@@ -265,12 +265,12 @@ SQL;
         }
     }
 
-    public function getSuggestionThema(array $thema) {
-        $list = $this->listAllThemes();
+    public function getSuggestionRulesets(array $rulesets) {
+        $list = $this->listAllRulesets();
 
-        return array_filter($list, function ($c) use ($thema) {
-            foreach($thema as $theme) {
-                $l = levenshtein($c, $theme);
+        return array_filter($list, function ($c) use ($rulesets) {
+            foreach($rulesets as $ruleset) {
+                $l = levenshtein($c, $ruleset);
                 if ($l < 8) {
                     return true;
                 }

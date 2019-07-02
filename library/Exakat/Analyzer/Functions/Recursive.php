@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class Recursive extends Analyzer {
     public function analyze() {
-
         // function foo() { foo(); }
         $this->atomIs('Function')
              ->savePropertyAs('fullcode', 'fqn')

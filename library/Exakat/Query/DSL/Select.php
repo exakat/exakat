@@ -34,7 +34,7 @@ class Select extends DSL {
                 $select[] = $v;
             } elseif ($v === 'id') {
                 $select[] = $k;
-                $by[]     = "by(id())";
+                $by[]     = 'by(id())';
             } else {
                 $select[] = $k;
                 $by[]     = "by(\"$v\")";

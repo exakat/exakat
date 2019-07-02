@@ -54,7 +54,7 @@ class Drillinstructor extends Ambassador {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
+        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
 
         // Static files
         $files = array('credits');
@@ -426,7 +426,7 @@ JAVASCRIPT;
         foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
-            $analyzers = $this->themes->getThemeAnalyzers(array('Level ' . $level));
+            $analyzers = $this->themes->getRulesetsAnalyzers(array('Level ' . $level));
             if (empty($analyzers)) {
                 continue;
             }

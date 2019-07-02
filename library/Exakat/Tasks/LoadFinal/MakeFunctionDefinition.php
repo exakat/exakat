@@ -61,8 +61,8 @@ class MakeFunctionDefinition extends LoadFinal {
 
         $countD = 0;
         foreach($definitions as $fqn => $defs) {
-            if (empty($calls[$fqn])) { 
-                continue; 
+            if (empty($calls[$fqn])) {
+                continue;
             }
 
             $id_defs = implode(', ', $defs);

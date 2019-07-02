@@ -39,6 +39,18 @@ class NullBoolean extends Analyzer {
              ->back('first')
              ->inIs('VARIABLE');
         $this->prepareQuery();
+
+        // $a = true; echo $a[1];
+        $this->atomIs(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition'))
+             ->outIs('DEFAULT')
+             ->atomIs(array('Null', 'Boolean'))
+             ->back('first')
+             ->outIs('DEFINITION')
+             ->inIs('VARIABLE')
+             ->atomIs('Array')
+             ;
+        $this->prepareQuery();
+
         
     }
 }

@@ -226,7 +226,6 @@ class MakeClassMethodDefinition extends LoadFinal {
               ->outIs('CLASS')
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
-              ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
@@ -263,10 +262,7 @@ class MakeClassMethodDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count3 = $result->toInt();
 
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count4 = $result->toInt();
-        
-        $count = $count1 + $count2 + $count3 + $count4;
+        $count = $count1 + $count2 + $count3;
         display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call

@@ -2,7 +2,7 @@
 
 $expected     = array('$staticPropertyUnused = 5',
                       '$staticPropertyx = 3',
-                      '$staticPropertyStatic = 2', 
+                      '$staticPropertyStatic = 2',
                       '$staticPropertyxFNS = 4',
                      );
 

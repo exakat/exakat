@@ -155,10 +155,10 @@ abstract class Analyzer {
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         assert($config !== null, 'Can\'t call Analyzer without a config');
-        $this->themes = new Themes("{$config->dir_root}/data/analyzers.sqlite",
-                                   $config->ext,
-                                   $config->dev,
-                                   $config->themas);
+        $this->themes = new Rulesets("{$config->dir_root}/data/analyzers.sqlite",
+                                     $config->ext,
+                                     $config->dev,
+                                     $config->themas);
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
@@ -277,9 +277,9 @@ GREMLIN;
                              ->toArray();
     }
 
-    public function getThemes() {
+    public function getRulesets() {
         $analyzer = $this->getName($this->analyzerQuoted);
-        return $this->themes->getThemeForAnalyzer($analyzer);
+        return $this->themes->getRulesetForAnalyzer($analyzer);
     }
 
     public function init($analyzerId = null) {
@@ -901,6 +901,12 @@ GREMLIN;
 
     public function isEqual($value = 0) {
         $this->query->isEqual((int) $value);
+
+        return $this;
+    }
+
+    public function isThis() {
+        $this->query->isThis();
 
         return $this;
     }

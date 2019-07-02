@@ -146,8 +146,8 @@ class Owasp extends Ambassador {
           <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
-              <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Analyzers Documentation</a></li>
+              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyses Settings</a></li>
+              <li><a href="analyses_doc.html"><i class="fa fa-circle-o"></i>Analyses Documentation</a></li>
               <li><a href="owasp_doc.html"><i class="fa fa-circle-o"></i>Owasp Documentation</a></li>
               <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
               <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
@@ -187,7 +187,7 @@ MENU;
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateOwaspDocumentation();
-        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
+        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $this->generateCodes();
 
         // Static files
@@ -251,7 +251,7 @@ MENU;
     }
 
     private function generateOwaspDocumentation() {
-        $baseHTML = $this->getBasedPage('analyzers_doc');
+        $baseHTML = $this->getBasedPage('analyses_doc');
         
         $owasp = json_decode(file_get_contents($this->config->dir_root . '/data/owasp.top10.json'));
         
@@ -456,7 +456,7 @@ SQL
                                 <div class="pourcentage">' . $percentFile . '%</div>
                             </div>
                             <div class="sub-div">
-                                <div class="title">Analyzers free of issues (%)</div>
+                                <div class="title">Analyses free of issues (%)</div>
                                 <div class="progress progress-sm active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
                                         ' . $totalAnalyzerWithoutError . '
@@ -479,7 +479,7 @@ SQL
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN ("' . implode('", "', $this->themes->getThemeAnalyzers($categorie)) . '")';
+            $list = 'IN ("' . implode('", "', $this->themes->getRulesetsAnalyzers($categorie)) . '")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -517,7 +517,7 @@ SQL
     }
 
     public function getSeverityBreakdown() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $query = <<<SQL
@@ -595,7 +595,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -653,7 +653,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<'SQL'
@@ -715,7 +715,7 @@ SQL;
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -776,7 +776,7 @@ SQL;
     protected function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP' . $version);
+        $list = $this->themes->getRulesetsAnalyzers('CompatibilityPHP' . $version);
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();

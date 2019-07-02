@@ -321,13 +321,15 @@ Code igniter CodeIgniter is a powerful PHP framework with a very small footprint
 Codeigniter analysis
 __________________________________________________
 
-This extension includes 6 analyzers.
+This extension includes 8 analyzers.
 
 * Codeigniter 2.0 Compatibility (Codeigniter/Codeigniter_2_0)
 * Codeigniter 2.1 Compatibility (Codeigniter/Codeigniter_2_1)
 * Codeigniter 2.2 Compatibility (Codeigniter/Codeigniter_2_2)
 * Codeigniter 3.0 Compatibility (Codeigniter/Codeigniter_3_0)
 * Codeigniter 3.1 Compatibility (Codeigniter/Codeigniter_3_1)
+* Codeigniter Constant Usage (Codeigniter/CodeigniterConstantUsage)
+* Codeigniter Function Usage (Codeigniter/CodeigniterFunctionsUsage)
 * Codeigniter Usage (Codeigniter/CodeigniterUsage)
 
 

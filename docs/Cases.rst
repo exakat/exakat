@@ -4216,6 +4216,81 @@ This expression is always false. When `$data->account->email_verified` is `true`
 
     TRUE == $data->account->email_verified and $data->account->email == $data->account->email_verified
 
+Same Conditions In Condition
+============================
+
+.. _teampass-structures-sameconditions:
+
+TeamPass
+^^^^^^^^
+
+:ref:`same-conditions-in-condition`, in sources/identify.php:1096. 
+
+`$result == 1` is use once in the main if/then, then again the second if/then/elseif structure. Both are incompatible, since, in the else, `$result` will be different from 1. 
+
+.. code-block:: php
+
+    if ($result == 1) {
+                    $return = "";
+                    $logError = "";
+                    $proceedIdentification = true;
+                    $userPasswordVerified = false;
+                    unset($_SESSION['hedgeId']);
+                    unset($_SESSION['flickercode']);
+                } else {
+                    if ($result < -10) {
+                        $logError = "ERROR: ".$result;
+                    } elseif ($result == -4) {
+                        $logError = "Wrong response code, no more tries left.";
+                    } elseif ($result == -3) {
+                        $logError = "Wrong response code, try to reenter.";
+                    } elseif ($result == -2) {
+                        $logError = "Timeout. The response code is not valid anymore.";
+                    } elseif ($result == -1) {
+                        $logError = "Security Error. Did you try to verify the response from a different computer?";
+                    } elseif ($result == 1) {
+                        $logError = "Authentication successful, response code correct.
+                              <br /><br />Authentification Method for SecureBrowser updated!";
+                        // Add necessary code here for accessing your Business Application
+                    }
+                    $return = "agses_error";
+                    echo '[{"value" : "'.$return.'", "user_admin":"',
+                    isset($_SESSION['user_admin']) ? $_SESSION['user_admin'] : "",
+                    '", "initial_url" : "'.@$_SESSION['initial_url'].'",
+                    "error" : "'.$logError.'"}]';
+    
+                    exit();
+                }
+
+
+--------
+
+
+.. _typo3-structures-sameconditions:
+
+Typo3
+^^^^^
+
+:ref:`same-conditions-in-condition`, in typo3/sysext/recordlist/Classes/RecordList/DatabaseRecordList.php:1696. 
+
+`$table == 'pages` is caught initially, and if it fails, it is tested again in the final else. This won't happen.
+
+.. code-block:: php
+
+    } elseif ($table === 'pages') {
+                                    $parameters = ['id' => $this->id, 'pagesOnly' => 1, 'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')];
+                                    $href = (string)$uriBuilder->buildUriFromRoute('db_new', $parameters);
+                                    $icon = '<a class="btn btn-default" href="' . htmlspecialchars($href) . '" title="' . htmlspecialchars($lang->getLL('new')) . '">'
+                                        . $spriteIcon->render() . '</a>';
+                                } else {
+                                    $params = '&edit[' . $table . '][' . $this->id . ']=new';
+                                    if ($table === 'pages') {
+                                        $params .= '&overrideVals[pages][doktype]=' . (int)$this->pageRow['doktype'];
+                                    }
+                                    $icon = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars(BackendUtility::editOnClick($params, '', -1))
+                                        . '" title="' . htmlspecialchars($lang->getLL('new')) . '">' . $spriteIcon->render() . '</a>';
+                                }
+
 Return True False
 =================
 
@@ -8517,6 +8592,22 @@ The extract() has been cleverly set in a closure, with a limited scope. The pote
                 extract($data);
                 return @include $view;
             };
+
+Use session_start() Options
+===========================
+
+.. _wordpress-php-usesessionstartoptions:
+
+WordPress
+^^^^^^^^^
+
+:ref:`use-session\_start()-options`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 Argument Should Be Typehinted
 =============================

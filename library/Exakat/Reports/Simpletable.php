@@ -41,7 +41,7 @@ class Simpletable extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $list = $this->themes->getThemeAnalyzers(array('Analyze'));
+        $list = $this->themes->getRulesetsAnalyzers(array('Analyze'));
         $list = makeList($list);
 
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in (' . $list . ') ORDER BY analyzer';

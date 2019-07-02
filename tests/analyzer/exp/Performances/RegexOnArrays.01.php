@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('foreach($A as $B) { /**/ } ', 
+$expected     = array('foreach($A as $B) { /**/ } ',
                       'foreach($a as $b) { /**/ } ',
                      );
 

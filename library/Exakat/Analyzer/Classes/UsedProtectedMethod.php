@@ -29,7 +29,7 @@ class UsedProtectedMethod extends Analyzer {
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         // method used in a normal methodcall with $this $this->b()
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Classanonymous'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))

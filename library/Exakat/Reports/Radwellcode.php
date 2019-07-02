@@ -52,7 +52,7 @@ class Radwellcode extends Reports {
                              );
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = new Results($this->sqlite, $list);
         $resultsAnalyzers->load();

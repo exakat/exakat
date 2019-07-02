@@ -1,10 +1,14 @@
 <?php
 
-$expected     = array('function foo($xNone) { /**/ } ',
-                      'public function foo($xPublic) { /**/ } ',
-                      'protected function foo($xProtected) { /**/ } ',
-                      'public function foo($xPublic) { /**/ } ',
-                      'function foo($xNone) { /**/ } ',
+$expected     = array('protected function foo($yProtected2) { /**/ } ',
+                      'protected function foo($yPublic2) { /**/ } ',
+                      'private function foo($yPrivate) { /**/ } ',
+                      'private function foo($yProtected) { /**/ } ',
+                      'private function foo($yPublic) { /**/ } ',
+                      'private function foo($yPrivate2) { /**/ } ',
+                      'protected function foo($yPublic3) { /**/ } ',
+                      'protected function foo($yProtected3) { /**/ } ',
+                      'private function foo($yPrivate3) { /**/ } ',
                      );
 
 $expected_not = array('function foo($yProtected) { /**/ } ',

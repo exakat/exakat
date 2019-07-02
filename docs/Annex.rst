@@ -428,6 +428,15 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.6
+
+  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Unassigned)
+  * Dependant Abstract Classes (Classes/DependantAbstractClass ; Analyze, ClassReview)
+  * Infinite Recursion (Structures/InfiniteRecursion ; Analyze)
+  * Modules/IncomingData (Modules/IncomingData ; Unassigned)
+  * Modules/NativeReplacement (Modules/NativeReplacement ; Unassigned)
+  * Null Or Boolean Arrays (Arrays/NullBoolean)
+
 * 1.8.5
 
   * Could Use Trait (Traits/CouldUseTrait)
@@ -440,7 +449,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * New Constants In PHP 7.4 (Php/Php74NewConstants ; CompatibilityPHP74)
   * Regex On Arrays (Performances/RegexOnArrays ; Performances)
   * Unused Class Constant (Classes/UnusedConstant)
-  * curl_version() Has No Argument (Structures/CurlVersionNow ; Unassigned)
+  * curl_version() Has No Argument (Structures/CurlVersionNow ; CompatibilityPHP74)
 
 * 1.8.3
 
@@ -1496,7 +1505,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Method Has Fluent Interface (Functions/HasFluentInterface ; )
   * Method Has No Fluent Interface (Functions/HasNotFluentInterface ; )
   * Methodcall On New (Php/MethodCallOnNew ; CompatibilityPHP53)
-  * Methods Without Return (Functions/WithoutReturn ; )
+  * Methods Without Return (Functions/WithoutReturn ; Analyze)
   * Mime Types (Type/MimeType ; Inventory)
   * Mixed Keys Arrays (Arrays/MixedKeys ; CompatibilityPHP54, CompatibilityPHP53)
   * Multidimensional Arrays (Arrays/Multidimensional ; Appinfo)
@@ -2381,8 +2390,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2417,6 +2426,7 @@ List of external links mentionned in this documentation.
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Nowdoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc>`_
+* `Null and True <https://twitter.com/Chemaclass/status/1144588647464951808>`_
 * `Null Coalescing Assignment Operator <https://wiki.php.net/rfc/null_coalesce_equal_operator>`_
 * `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
@@ -2522,6 +2532,7 @@ List of external links mentionned in this documentation.
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
 * `resources <http://php.net/manual/en/language.types.resource.php>`_
+* `return <https://www.php.net/manual/en/function.return.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `Return Type Declaration <http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration>`_
 * `Returning values <http://php.net/manual/en/functions.returning-values.php>`_
@@ -2617,8 +2628,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2693,6 +2704,7 @@ _______
 |   analyzer[] = "Arrays/AmbiguousKeys";
 |   analyzer[] = "Arrays/MultipleIdenticalKeys";
 |   analyzer[] = "Arrays/NonConstantArray";
+|   analyzer[] = "Arrays/NullBoolean";
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Classes/AbstractOrImplements";
 |   analyzer[] = "Classes/AbstractStatic";
@@ -2711,6 +2723,7 @@ _______
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeFinal";
 |   analyzer[] = "Classes/CouldBeStatic";
+|   analyzer[] = "Classes/DependantAbstractClass";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
 |   analyzer[] = "Classes/DontUnsetProperties";
@@ -2825,6 +2838,7 @@ _______
 |   analyzer[] = "Functions/UselessReferenceArgument";
 |   analyzer[] = "Functions/UselessReturn";
 |   analyzer[] = "Functions/UsesDefaultArguments";
+|   analyzer[] = "Functions/WithoutReturn";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
 |   analyzer[] = "Functions/WrongOptionalParameter";
 |   analyzer[] = "Functions/funcGetArgModified";
@@ -2936,6 +2950,7 @@ _______
 |   analyzer[] = "Structures/ImpliedIf";
 |   analyzer[] = "Structures/InconsistentElseif";
 |   analyzer[] = "Structures/IndicesAreIntOrString";
+|   analyzer[] = "Structures/InfiniteRecursion";
 |   analyzer[] = "Structures/InvalidPackFormat";
 |   analyzer[] = "Structures/InvalidRegex";
 |   analyzer[] = "Structures/IsZero";
@@ -3074,6 +3089,7 @@ ___________
 |   analyzer[] = "Classes/CouldBeProtectedMethod";
 |   analyzer[] = "Classes/CouldBeProtectedProperty";
 |   analyzer[] = "Classes/CouldBeStatic";
+|   analyzer[] = "Classes/DependantAbstractClass";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
@@ -3621,6 +3637,7 @@ __________________
 |   analyzer[] = "Php/Php74NewClasses";
 |   analyzer[] = "Php/Php74NewConstants";
 |   analyzer[] = "Php/Php74NewFunctions";
+|   analyzer[] = "Structures/CurlVersionNow";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 
 
@@ -3695,6 +3712,7 @@ _______________
 |   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";

@@ -26,11 +26,6 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUsedOnceByContext extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/InterfaceArguments',
-                    );
-    }
-    
     public function analyze() {
         // global variables
         $this->atomIs('File')
@@ -42,14 +37,14 @@ class VariableUsedOnceByContext extends Analyzer {
 
         // argument by function
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
+             ->outIs(array('ARGUMENT', 'USE'))
              ->outIs('NAME')
              ->isUsed(0);
         $this->prepareQuery();
 
         // Normal variables and inherited functions from closures
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs(array('DEFINITION', 'USE'))
+             ->outIs('DEFINITION')
              ->isUsed(1)
              ->outIs('DEFINITION');
         $this->prepareQuery();

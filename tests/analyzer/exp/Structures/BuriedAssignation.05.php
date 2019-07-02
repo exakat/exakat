@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a = new sadf($b = 3)', 
+$expected     = array('$a = new sadf($b = 3)',
                       'while (false !== ($x2 = fgets($fp))) { /**/ } ',
                      );
 

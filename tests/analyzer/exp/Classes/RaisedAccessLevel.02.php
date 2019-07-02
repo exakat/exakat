@@ -1,8 +1,11 @@
 <?php
 
-$expected     = array('$publicThenProtected = 21',
-                      '$publicThenPrivate = 20',
-                      '$protectedThenPrivate = 16',
+$expected     = array('$publicThenProtected',
+                      '$publicThenProtected',
+                      '$publicThenPrivate',
+                      '$protectedThenPrivate',
+                      '$protectedThenPrivate',
+                      '$publicThenPrivate',
                      );
 
 $expected_not = array('$privateOnly = 1',

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadExt;
 use Exakat\Autoload\AutoloadDev;
 
-class Themes {
+class Rulesets {
     private $main   = null;
     private $ext    = null;
     private $extra  = array();
@@ -35,11 +35,11 @@ class Themes {
 
     private static $instanciated = array();
 
-    public function __construct($path, AutoloadExt $ext, AutoloadDev $dev, array $extra_themes = array()) {
-        $this->main  = new ThemesMain($path);
-        $this->ext   = new ThemesExt($ext, $ext);
-        $this->extra = new ThemesExtra($extra_themes, $ext);
-        $this->dev   = new ThemesDev($dev, $dev);
+    public function __construct($path, AutoloadExt $ext, AutoloadDev $dev, array $extra_rulesets = array()) {
+        $this->main  = new RulesetsMain($path);
+        $this->ext   = new RulesetsExt($ext, $ext);
+        $this->extra = new RulesetsExtra($extra_rulesets, $ext);
+        $this->dev   = new RulesetsDev($dev, $dev);
     }
 
     public function __destruct() {
@@ -48,29 +48,29 @@ class Themes {
         $this->extra = null;
     }
     
-    public function getThemeAnalyzers(array $theme = null) {
-        $main  = $this->main ->getThemeAnalyzers($theme);
-        $extra = $this->extra->getThemeAnalyzers($theme);
-        $ext   = $this->ext  ->getThemeAnalyzers($theme);
-        $dev   = $this->dev  ->getThemeAnalyzers($theme);
+    public function getRulesetsAnalyzers(array $theme = null) {
+        $main  = $this->main ->getRulesetsAnalyzers($theme);
+        $extra = $this->extra->getRulesetsAnalyzers($theme);
+        $ext   = $this->ext  ->getRulesetsAnalyzers($theme);
+        $dev   = $this->dev  ->getRulesetsAnalyzers($theme);
         
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getThemeForAnalyzer($analyzer) {
-        $main = $this->main->getThemeForAnalyzer($analyzer);
-        $extra = $this->extra->getThemeForAnalyzer($analyzer);
-        $ext   = $this->ext  ->getThemeForAnalyzer($analyzer);
-        $dev   = $this->dev  ->getThemeForAnalyzer($analyzer);
+    public function getRulesetForAnalyzer($analyzer) {
+        $main = $this->main  ->getRulesetForAnalyzer($analyzer);
+        $extra = $this->extra->getRulesetForAnalyzer($analyzer);
+        $ext   = $this->ext  ->getRulesetForAnalyzer($analyzer);
+        $dev   = $this->dev  ->getRulesetForAnalyzer($analyzer);
 
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getThemesForAnalyzer($list = null) {
-        $main  = $this->main ->getThemesForAnalyzer($list);
-        $extra = $this->extra->getThemesForAnalyzer($list);
-        $ext   = $this->ext  ->getThemesForAnalyzer($list);
-        $dev   = $this->dev  ->getThemesForAnalyzer($list);
+    public function getRulesetsForAnalyzer($list = null) {
+        $main  = $this->main ->getRulesetsForAnalyzer($list);
+        $extra = $this->extra->getRulesetsForAnalyzer($list);
+        $ext   = $this->ext  ->getRulesetsForAnalyzer($list);
+        $dev   = $this->dev  ->getRulesetsForAnalyzer($list);
         
         return array_merge($main, $extra, $ext, $dev);
     }
@@ -100,19 +100,21 @@ class Themes {
     }
     
     public function listAllAnalyzer($folder = null) {
-        $main = $this->main  ->listAllAnalyzer($folder);
+        $main  = $this->main ->listAllAnalyzer($folder);
         $extra = $this->extra->listAllAnalyzer($folder);
-        $ext = $this->ext    ->listAllAnalyzer($folder);
-        
-        return array_merge($main, $extra, $ext);
+        $ext   = $this->ext  ->listAllAnalyzer($folder);
+        $dev   = $this->dev  ->listAllAnalyzer($folder);
+
+        return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function listAllThemes($theme = null) {
-        $main = $this->main  ->listAllThemes($theme);
-        $extra = $this->extra->listAllThemes($theme);
-        $ext = $this->ext    ->listAllThemes($theme);
+    public function listAllRulesets($theme = null) {
+        $main  = $this->main ->listAllRulesets($theme);
+        $extra = $this->extra->listAllRulesets($theme);
+        $ext   = $this->ext  ->listAllRulesets($theme);
+        $dev   = $this->dev  ->listAllAnalyzer($theme);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getClass($name) {
@@ -127,7 +129,11 @@ class Themes {
         if ($class = $this->ext->getClass($name)) {
             return $class;
         }
-        
+
+        if ($class = $this->dev->getClass($name)) {
+            return $class;
+        }
+
         return false;
     }
 
@@ -144,8 +150,9 @@ class Themes {
         $main  = $this->main ->getSuggestionClass($name);
         $extra = $this->extra->getSuggestionClass($name);
         $ext   = $this->ext  ->getSuggestionClass($name);
+        $dev   = $this->dev  ->getSuggestionClass($name);
         
-        return array_merge($main, $extra, $ext);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public function getAnalyzerInExtension($name) {

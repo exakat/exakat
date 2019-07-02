@@ -58,7 +58,7 @@ class Top10 extends Ambassador {
         if ($this->themes !== null) {
             $this->frequences        = $this->themes->getFrequences();
             $this->timesToFix        = $this->themes->getTimesToFix();
-            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+            $this->themesForAnalyzer = $this->themes->getRulesetsForAnalyzer();
             $this->severities        = $this->themes->getSeverities();
         }
 
@@ -146,7 +146,7 @@ MENU;
         $this->initFolder();
         $this->generateDashboard();
 
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateIssues();

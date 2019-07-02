@@ -27,9 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class WithoutReturn extends Analyzer {
     public function analyze() {
-        // function foo() { echo 1; }
+        // function foo() { echo 1; } (no void return typehint)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->isNot('abstract', true)
+             ->not(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->fullnspathIs('\void')
+             )
              ->hasNoInterface()
              ->outIs('NAME')
              ->codeIsNot(array('__construct',

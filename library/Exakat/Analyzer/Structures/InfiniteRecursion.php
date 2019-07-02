@@ -32,8 +32,9 @@ class InfiniteRecursion extends Analyzer {
     
     public function analyze() {
         // foo($a, $b) { foo($a, $b); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs('Function')
              ->analyzerIs('Functions/Recursive')
+             ->isNot('count', 0) //Except at least one parameter
              ->not(
                 $this->side()
                      ->outIs('ARGUMENT')
@@ -43,10 +44,47 @@ class InfiniteRecursion extends Analyzer {
              )
              ->collectArguments('args')
              ->outIs('DEFINITION')
-             ->atomIs('Functioncall')
+             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIsIE('METHOD')
              ->collectArguments('called')
              ->filter('args.equals(called)')
              ->back('first');
+        $this->prepareQuery();
+
+        // foo($a, $b) { foo($a, $b); }
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->analyzerIs('Functions/Recursive')
+             ->isNot('count', 0) //Except at least one parameter
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->outIs('NAME')
+                     ->outIs('DEFINITION')
+                     ->is('isModified', true)
+             )
+             ->collectArguments('args')
+             ->outIs('DEFINITION')
+             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIs(array('OBJECT', 'CLASS')) // Only works on static calls, if the class is a variable : $a::foo();
+             ->isThis()
+             ->inIs(array('OBJECT', 'CLASS'))
+             ->outIsIE('METHOD')
+             ->collectArguments('called')
+             ->filter('args.equals(called)')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foo() { foo(); } // No argument
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->savePropertyAs('id', 'start')
+             ->analyzerIs('Functions/Recursive')
+             ->is('count', 0)
+             ->outIs('DEFINITION')
+             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->outIsIE('METHOD')
+             ->is('count', 0)
+             ->goToFunction()
+             ->samePropertyAs('id', 'start');
         $this->prepareQuery();
 
         // foo($a, $b) { foo($a, $b); } // No condition of any kind...

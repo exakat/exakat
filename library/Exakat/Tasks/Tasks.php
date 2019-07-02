@@ -23,7 +23,7 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Rulesets;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Graph\Graph;
@@ -112,17 +112,17 @@ abstract class Tasks {
             $this->datastore = new Datastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
         }
 
-        $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
-                                   $this->config->ext,
-                                   $this->config->dev,
-                                   $this->config->themas);
+        $this->themes = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                     $this->config->ext,
+                                     $this->config->dev,
+                                     $this->config->themas);
                                    
         Data::$config = $config;
     }
 
     public function __destruct() {
-        if (static::CONCURENCE !== self::ANYTIME       && 
-            $this->is_subtask === self::IS_NOT_SUBTASK && 
+        if (static::CONCURENCE !== self::ANYTIME       &&
+            $this->is_subtask === self::IS_NOT_SUBTASK &&
             !empty(self::$semaphore)) {
             fclose(self::$semaphore);
             self::$semaphore = null;

@@ -27,18 +27,9 @@ use Exakat\Analyzer\Analyzer;
 class MethodIsOverwritten extends Analyzer {
     // class x { function a() {} }
     // class x2 extends x { function a() {} }
-    
     public function analyze() {
-        $this->atomIs('Method')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'methodname')
-             ->inIs('NAME')
-             ->inIs('METHOD')
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname', self::CASE_INSENSITIVE)
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->hasOut('OVERWRITE')
              ->back('first');
         $this->prepareQuery();
     }

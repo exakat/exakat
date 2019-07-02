@@ -35,7 +35,7 @@ use Exakat\Tasks\Tasks;
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
     private const LOAD_CHUNK      = 20000;
-    private const LOAD_CHUNK_LINK = 20000;
+    private const LOAD_CHUNK_LINK = 8000;
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -50,6 +50,7 @@ class SplitGraphson extends Loader {
 
     private $graphdb        = null;
     private $path           = null;
+    private $pathLink       = null;
     private $pathDef        = null;
     private $total          = 0;
     
@@ -66,6 +67,7 @@ class SplitGraphson extends Loader {
         $this->graphdb        = $gremlin;
         $this->sqlite3        = $sqlite3;
         $this->path           = "{$this->config->tmp_dir}/graphdb.graphson";
+        $this->pathLink       = "{$this->config->tmp_dir}/graphdb.link.graphson";
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
         
         $this->dictCode  = new Collector();
@@ -112,9 +114,11 @@ class SplitGraphson extends Loader {
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             // Skip reflexive definitions, which never exist.
             if ($row[0] === $row[1]) { continue; }
+            $total += $row[2];
+            $chunk += $row[2];
+            unset($row[2]);
+            $row[1] = strtr($row[1], ',', '-');
             fputcsv($f, $row);
-            ++$total;
-            ++$chunk;
             
             if ($chunk > self::LOAD_CHUNK_LINK) {
                 $f = $this->saveLinks($f);
@@ -179,6 +183,10 @@ GREMLIN;
             unlink($this->path);
         }
 
+        if (file_exists($this->pathLink)) {
+            unlink($this->pathLink);
+        }
+
         if (file_exists($this->pathDef)) {
             unlink($this->pathDef);
         }
@@ -196,11 +204,9 @@ GREMLIN;
         if (empty($this->id0)) {
             $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
             assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
-            
-            $fp = fopen($this->path, 'a');
-            fwrite($fp, $jsonText);
-            fclose($fp);
-            
+
+            file_put_contents($this->path, $jsonText, \FILE_APPEND);
+
             ++$this->total;
             $this->id0 = $id0;
         }
@@ -221,7 +227,9 @@ GREMLIN;
                 }
             }
         }
-
+        
+//        print_r($links);
+/*
         foreach($links as $type => $a) {
             foreach($a as $b) {
                 foreach($b as $c) {
@@ -251,9 +259,9 @@ GREMLIN;
                 }
             }
         }
-        
+*/
         $total = 0; // local total
-        $fp = fopen($this->path, 'a');
+        $append = array();
         foreach($json as $j) {
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
@@ -271,8 +279,8 @@ GREMLIN;
 
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName . ' : error encoding normal ' . $j->label . ' : ' . json_last_error_msg() . "\n" . print_r($j, true));
-            fwrite($fp, $X . PHP_EOL);
-            
+            $append[] = $X;
+
             if (isset($this->tokenCounts[$j->label])) {
                 ++$this->tokenCounts[$j->label];
             } else {
@@ -282,7 +290,8 @@ GREMLIN;
 
             ++$total;
         }
-        fclose($fp);
+        file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+        file_put_contents($this->pathLink, implode(PHP_EOL, $links).PHP_EOL, \FILE_APPEND);
 
         if ($this->total > self::LOAD_CHUNK) {
             $this->saveNodes();
@@ -294,6 +303,18 @@ GREMLIN;
     private function saveNodes() {
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
+
+        $query = <<<GREMLIN
+new File('$this->pathLink').eachLine {
+    (theLabel, fromVertex, toVertex) = it.split('-');
+
+    g.V(fromVertex).addE(theLabel).to(V(toVertex)).iterate();
+}
+
+GREMLIN;
+        $this->graphdb->query($query);
+        unlink($this->pathLink);
+
         $this->total = 0;
     }
 

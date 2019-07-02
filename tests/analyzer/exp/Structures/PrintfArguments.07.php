@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('printf(A, $a1, $a2, $a3)', 
+$expected     = array('printf(A, $a1, $a2, $a3)',
                       'printf(A, $a1)',
-                      'sprintf(x::B, $a1)', 
+                      'sprintf(x::B, $a1)',
                       'sprintf(x::B, $a1, $a2, $a3)',
                      );
 

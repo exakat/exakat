@@ -7,12 +7,12 @@ $expected     = array('$this->b',
                      );
 
 $expected_not = array('$c',
-                      '$b = \'\' . "b"', 
+                      '$b = \'\' . "b"',
                       '$this->d = \'2\'',
                       '$f = \'\'',
                       '$a = \'\'',
-                      '$f', 
-                      '$d', 
+                      '$f',
+                      '$d',
                      );
 
 ?>

@@ -209,6 +209,11 @@ class Dump extends Tasks {
             $this->collectMissingDefinitions();
             $end = microtime(true);
             $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            
+            $begin = microtime(true);
+            $this->collectCyclomaticComplexity();
+            $end = microtime(true);
+            $this->log->log( 'Collected Cyclomatic Complexity : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -225,7 +230,7 @@ class Dump extends Tasks {
 
         if (!empty($this->config->thema)) {
             $thema = $this->config->thema;
-            $themes = $this->themes->getThemeAnalyzers($thema);
+            $themes = $this->themes->getRulesetsAnalyzers($thema);
             if (empty($themes)) {
                 $r = $this->themes->getSuggestionThema($thema);
                 if (!empty($r)) {
@@ -234,8 +239,8 @@ class Dump extends Tasks {
                 throw new NoSuchThema($thema);
             }
             display('Processing thema ' . (count($thema) > 1 ? 's' : '' ) . ' : ' . implode(', ', $thema));
-            $missing = $this->processResultsTheme($thema, $counts);
-            $this->expandThemes();
+            $missing = $this->processResultsRuleset($thema, $counts);
+            $this->expandRulesets();
             $this->collectHashAnalyzer();
             
             if ($missing === 0) {
@@ -287,8 +292,8 @@ class Dump extends Tasks {
         $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
-    private function processResultsTheme($theme, array $counts = array()) {
-        $analyzers = $this->themes->getThemeAnalyzers($theme);
+    private function processResultsRuleset($theme, array $counts = array()) {
+        $analyzers = $this->themes->getRulesetsAnalyzers($theme);
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
@@ -1846,6 +1851,47 @@ GREMLIN;
         $this->sqlite->query($query);
     }
 
+    private function collectCyclomaticComplexity() {
+        $values = array();
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
+
+        $query = $this->newQuery('CyclomaticComplexity');
+        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->_as('name')
+              ->back('first')
+              ->outIs('BLOCK')
+              ->raw(<<<GREMLIN
+project("cc").by(
+    __.emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).coalesce(
+    __.hasLabel(
+    "Ifthen", "Case", "Default", "Foreach", "For" ,"Dowhile", "While", "Continue", 
+    "Catch", "Finally", "Throw", 
+    "Ternary", "Coalesce"
+    ),
+    __.hasLabel("Ifthen").out("THEN", "ELSE"),
+    __.hasLabel("Return").sideEffect{ ranked = it.get().value("rank");}.in("EXPRESSION").coalesce( __.filter{ it.get().value("count") != ranked + 1;},
+                                                                                                   __.not(where(__.in("BLOCK").hasLabel("Function"))))
+    ).count()
+).select("first","cc").by("fullnspath").by()
+GREMLIN
+,array(), array());
+        $query->prepareRawQuery();
+        $cc = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        foreach($cc->toArray() as $row) {
+            ++$row['cc'];
+            $values[] = "('CyclomaticComplexity', '{$row['first']}', '{$row['cc']}')";
+        }
+
+        if(empty($values)) {
+            return;
+        }
+
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
+        $this->sqlite->query($query);
+    }
+
     private function collectClassDepth() {
         $query = <<<'GREMLIN'
 g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
@@ -2072,6 +2118,7 @@ GREMLIN
               ->isNot('virtual', true)
               ->savePropertyAs('fullcode', 'name')
               ->outIs('DEFAULT')
+              ->hasNoIn('RIGHT') // find an explicit default
               ->savePropertyAs('fullcode', 'default1')
               ->inIs('DEFAULT')
               ->inIs('PPP')
@@ -2342,7 +2389,7 @@ SQL;
         display( count($values) . ' readability index');
     }
 
-    public function checkThemes($theme, array $analyzers) {
+    public function checkRulesets($theme, array $analyzers) {
         $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
@@ -2361,7 +2408,7 @@ SQL;
         }
     }
 
-    private function expandThemes() {
+    private function expandRulesets() {
         $analyzers = array();
         $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -2374,12 +2421,12 @@ SQL;
             $ran[$row['thema']] = 1;
         }
 
-        $themas = $this->themes->listAllThemes();
+        $themas = $this->themes->listAllRulesets();
         $themas = array_diff($themas, $ran);
 
         $add = array();
         
-        $themes = $this->themes->getThemeAnalyzers($themas);
+        $themes = $this->themes->getRulesetsAnalyzers($themas);
         if (empty(array_diff($themes, $analyzers))) {
             $add[] = $theme;
         }

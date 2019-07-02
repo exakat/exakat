@@ -73,7 +73,7 @@ class Migration73 extends Ambassador {
             return false;
         }
         
-        if ($missing = $this->checkMissingThemes()) {
+        if ($missing = $this->checkMissingRulesets()) {
             print "Can't produce Migration73 format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
             return false;
         }
@@ -99,7 +99,7 @@ class Migration73 extends Ambassador {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateCodes();

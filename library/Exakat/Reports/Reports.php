@@ -23,7 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Config;
-use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Rulesets;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
 use Exakat\Dump;
@@ -69,13 +69,13 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
-                                          $this->config->ext,
-                                          $this->config->dev,
-                                          $this->config->themas);
+            $this->themes    = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                            $this->config->ext,
+                                            $this->config->dev,
+                                            $this->config->themas);
 
             // Default analyzers
-            $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
+            $analyzers = array_merge($this->themes->getRulesetsAnalyzers($this->config->thema),
                                      array_keys($config->themas));
             $this->themesList = makeList($analyzers);
         }
@@ -101,16 +101,16 @@ abstract class Reports {
         if (!empty($this->config->thema)) {
             $themas = $this->config->thema;
 
-            if ($missing = $this->checkMissingThemes()) {
+            if ($missing = $this->checkMissingRulesets()) {
                 print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
                 return false;
             }
 
-            $list = $this->themes->getThemeAnalyzers($themas);
+            $list = $this->themes->getRulesetsAnalyzers($themas);
         } elseif (!empty($this->config->program)) {
             $list = makeArray($this->config->program);
         } else {
-            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         }
 
         $final = $this->_generate($list);
@@ -145,7 +145,7 @@ abstract class Reports {
         }
     }
     
-    public function checkMissingThemes() {
+    public function checkMissingRulesets() {
         $required = $this->dependsOnAnalysis();
         
         if (empty($required)) {
