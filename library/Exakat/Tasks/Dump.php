@@ -1884,6 +1884,10 @@ GREMLIN
             $values[] = "('CyclomaticComplexity', '{$row['first']}', '{$row['cc']}')";
         }
 
+        if(empty($values)) {
+            return;
+        }
+
         $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
         $this->sqlite->query($query);
     }
