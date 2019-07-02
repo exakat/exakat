@@ -6,8 +6,8 @@ $expected     = array('protected function foo($yProtected2) { /**/ } ',
                       'private function foo($yProtected) { /**/ } ',
                       'private function foo($yPublic) { /**/ } ',
                       'private function foo($yPrivate2) { /**/ } ',
-                      'protected function foo($yPublic3) { /**/ } ', 
-                      'protected function foo($yProtected3) { /**/ } ', 
+                      'protected function foo($yPublic3) { /**/ } ',
+                      'protected function foo($yProtected3) { /**/ } ',
                       'private function foo($yPrivate3) { /**/ } ',
                      );
 

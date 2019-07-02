@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$publicThenProtected', 
-                      '$publicThenProtected', 
-                      '$publicThenPrivate', 
-                      '$protectedThenPrivate', 
-                      '$protectedThenPrivate', 
+$expected     = array('$publicThenProtected',
+                      '$publicThenProtected',
+                      '$publicThenPrivate',
+                      '$protectedThenPrivate',
+                      '$protectedThenPrivate',
                       '$publicThenPrivate',
                      );
 

@@ -3,8 +3,8 @@
 $expected     = array('$publicThenProtected',
                       '$protectedThenPrivate',
                       '$publicThenPrivate',
-                      '$publicThenProtected', 
-                      '$protectedThenPrivate', 
+                      '$publicThenProtected',
+                      '$protectedThenPrivate',
                       '$publicThenPrivate',
                      );
 

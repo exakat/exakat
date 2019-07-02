@@ -2,8 +2,8 @@
 
 $expected     = array('function OVERWRITTENMethodInAD( ) { /**/ } ',
                       'function overwrittenMethodInAA( ) { /**/ } ',
-                      'function overwrittenMethodInABAC( ) { /**/ } ', // line 18
-                      'function overwrittenMethodInABAC( ) { /**/ } ', // line 23
+                      'function overwrittenMethodInABAC( ) { /**/ } ',
+                      'function overwrittenMethodInABAC( ) { /**/ } ',
                      );
 
 $expected_not = array('function intactMethodA( ) { /**/ } ',

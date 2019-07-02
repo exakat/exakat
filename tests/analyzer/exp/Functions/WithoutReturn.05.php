@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function functionWithReturnInFunction($x) { /**/ } ', 
-                      'function functionWithReturnInClosure($x) { /**/ } ', 
+$expected     = array('function functionWithReturnInFunction($x) { /**/ } ',
+                      'function functionWithReturnInClosure($x) { /**/ } ',
                       'function functionWithoutReturn($x) { /**/ } ',
                      );
 
