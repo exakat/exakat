@@ -28,84 +28,55 @@ class RaisedAccessLevel extends Analyzer {
     public function analyze() {
         // raised to private
         $this->atomIs('Ppp')
-             ->is('visibility', array('public', 'protected'))
-             ->outIs('PPP')
-             ->_as('results')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('PPP')
-             ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
+             ->_as('results')
+             ->outIs('OVERWRITE')
+             ->atomIs('Propertydefinition')
+             ->inIs('PPP')
+             ->is('visibility', array('public', 'protected', 'none'))
              ->back('results');
         $this->prepareQuery();
 
         // raised to protected
         $this->atomIs('Ppp')
-             ->is('visibility', 'public')
-             ->outIs('PPP')
-             ->_as('results')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('PPP')
-             ->atomIs('Ppp')
              ->is('visibility', 'protected')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
+             ->_as('results')
+             ->outIs('OVERWRITE')
+             ->atomIs('Propertydefinition')
+             ->inIs('PPP')
+             ->is('visibility', array('public', 'none'))
              ->back('results');
         $this->prepareQuery();
 
         // raised to private method
-        $this->atomIs('Method')
-             ->isNot('visibility', 'private')
-             ->_as('results')
-             ->outIsIE('NAME')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->is('visibility', 'private')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->back('results');
+             ->outIs('OVERWRITE')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->is('visibility', array('public', 'protected', 'none'))
+             ->back('first');
         $this->prepareQuery();
 
         // raised to protected method
-        $this->atomIs('Method')
-             ->isNot('visibility', array('private', 'protected'))
-             ->_as('results')
-             ->outIsIE('NAME')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->is('visibility', 'protected')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->back('results');
+             ->outIs('OVERWRITE')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->is('visibility', array('public', 'none'))
+             ->back('first');
         $this->prepareQuery();
 
         // raised to protected or private for const
         $this->atomIs('Const')
-             ->isNot('visibility', array('private', 'protected')) // Public or None
+             ->is('visibility', 'private')
              ->outIs('CONST')
              ->_as('results')
-             ->outIsIE('NAME')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('CONST')
-             ->atomIs('Const')
-             ->is('visibility', array('private', 'protected'))
-             ->outIs('CONST')
-             ->outIsIE('NAME')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->inIs('NAME');
+             ->outIs('OVERWRITE')
+             ->inIs('CONST')
+             ->is('visibility', array('public', 'protected', 'none'))
+             ->back('results');
         $this->prepareQuery();
 
         // raised to protected for const
@@ -113,17 +84,10 @@ class RaisedAccessLevel extends Analyzer {
              ->is('visibility', 'protected')
              ->outIs('CONST')
              ->_as('results')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('CONST')
-             ->atomIs('Const')
-             ->is('visibility', 'private')
-             ->outIs('CONST')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->inIs('NAME');
+             ->outIs('OVERWRITE')
+             ->inIs('CONST')
+             ->is('visibility', array('public', 'none'))
+             ->back('results');
         $this->prepareQuery();
     }
 }
