@@ -28,65 +28,33 @@ use Exakat\Analyzer\Analyzer;
 class UsedPrivateProperty extends Analyzer {
     public function analyze() {
         // property used in a staticproperty \a\b::$b
-        $this->atomIs('Ppp')
-             ->is('visibility', 'private')
-             ->outIs('PPP')
-             ->_as('ppp')
-             ->savePropertyAs('code', 'property')
-             ->goToClassTrait(array('Trait', 'Class'))
-             ->savePropertyAs('fullnspath', 'classe')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->filter(
-                $this->side()
-                     ->atomInsideNoDefinition('Staticproperty')
-                     ->outIs('CLASS')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
-                     ->fullnspathIs('classe')
-                     ->inIs('CLASS')
-                     ->outIs('MEMBER')
-                     ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             )
-             ->back('ppp');
-        $this->prepareQuery();
-
-        // property used in a static property static::$b[] or self::$b[]
-        $this->atomIs(array('Class', 'Trait'))
-             ->savePropertyAs('fullnspath', 'fnp')
+        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
+             ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
+             ->atomIs('Propertydefinition')
              ->_as('ppp')
-             ->savePropertyAs('code', 'x')
-             ->back('first')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomInsideNoDefinition('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->fullnspathIs('fnp')
-             ->inIs('CLASS')
-             ->outIs('MEMBER')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'x', self::CASE_SENSITIVE)
+             ->outIs('DEFINITION')
+             ->atomIs('Staticproperty')
+             ->goToClassTrait(array('Trait', 'Class', 'Classanonymous'))
+             ->samePropertyAs('fullnspath', 'fqn')
              ->back('ppp');
         $this->prepareQuery();
 
         // property used in a normal propertycall with $this $this->b
-        $this->atomIs(array('Class', 'Trait'))
+        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')
-             ->back('first')
              ->outIs('DEFINITION')
-             ->atomIs('This')
-             ->inIs('OBJECT')
              ->atomIs('Member')
-             ->outIs('MEMBER')
-             ->samePropertyAs('code', 'x', self::CASE_SENSITIVE)
+             ->outIs('OBJECT')
+             ->isThis()
+             ->inIs('OBJECT')
              ->back('ppp');
         $this->prepareQuery();
     }
