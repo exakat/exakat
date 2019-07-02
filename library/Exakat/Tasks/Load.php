@@ -5694,15 +5694,8 @@ class Load extends Tasks {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT), STRICT_COMPARISON)) {
             throw new LoadError('Undefined link ' . $label . ' for atom ' . $origin->atom . ' : ' . $this->filename . ':' . $origin->line);
         }
-        $o = $origin->atom;
-        $d = $destination->atom;
 
-        if (!isset($this->links[$label]))         { $this->links[$label]        = array(); }
-        if (!isset($this->links[$label][$o]))     { $this->links[$label][$o]    = array(); }
-        if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d]= array(); }
-
-        $this->links[$label][$o][$d][$origin->id . '-' . $destination->id] = array('origin'      => $origin->id,
-                                                                                   'destination' => $destination->id);
+        $this->links[] = "$label-".($origin->id - 1)."-".($destination->id - 1);
     }
 
     private function pushExpression($id) {
@@ -5749,6 +5742,7 @@ class Load extends Tasks {
             throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is " . $count . PHP_EOL);
         }
 
+/*
         // All node has one incoming or one outgoing link (outgoing or incoming).
         // Except Variabledefinition
         $D = array();
@@ -5786,6 +5780,7 @@ class Load extends Tasks {
                 throw new LoadError("Warning : missing token atom $id  in $this->filename");
             }
         }
+        */
     }
 
     private function processDefineAsClassalias($argumentsId) {
