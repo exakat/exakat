@@ -105,7 +105,6 @@ class SetClassRemoteDefinitionWithTypehint extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countC = $result->toInt();
 
-
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
         $query = $this->newQuery('MakeClassMethodDefinition parent');
