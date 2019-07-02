@@ -115,6 +115,50 @@ class RulesetsDev {
         });
     }
 
+    public function getClass($name) {
+        // accepted names :
+        // PHP full name : Analyzer\\Type\\Class
+        // PHP short name : Type\\Class
+        // Human short name : Type/Class
+        // Human shortcut : Class (must be unique among the classes)
+
+        if (strpos($name, '\\') !== false) {
+            if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
+                $class = $name;
+            } else {
+                $class = "Exakat\\Analyzer\\$name";
+            }
+        } elseif (strpos($name, '/') !== false) {
+            $class = 'Exakat\\Analyzer\\' . str_replace('/', '\\', $name);
+        } elseif (strpos($name, '/') === false) {
+            $found = $this->getSuggestionClass($name);
+
+            if (empty($found)) {
+                return false; // no class found
+            }
+            
+            if (count($found) > 1) {
+                return false;
+            }
+            
+            $class = $found[0];
+        } else {
+            $class = $name;
+        }
+
+        if (!class_exists($class)) {
+            return false;
+        }
+
+        $actualClassName = new \ReflectionClass($class);
+        if ($class === $actualClassName->getName()) {
+            return $class;
+        } else {
+            // problems with the case
+            return false;
+        }
+    }
+
     public function getSeverities() {
         return array_fill_keys($this->all['All'], Analyzer::S_NONE);
     }
