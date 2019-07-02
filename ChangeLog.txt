@@ -1,4 +1,4 @@
-Version 1.8.6 (Hu Wenchang of Jiashen, coming up)
+Version 1.8.7 (Hu Wenchang of Jiashen, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 1.8.6 (Hu Wenchang of Jiashen, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.6 (Wei Yuqing of Jiawu, 2019-07-01)
++ Architecture
+    + Added support for Tinkegraph 3.4
+    + Extended support for Dev 
+    + Renamed Themes to Ruleset (WIP)
+    + Split several long running queries into smaller chunks
+    + Cached files to memory, write them once only
+    + Optimized sides queries : omitting them when possible
+    + Added count of issues in Analyse node
+    + Optimized loading by grouping by inV
+    + More coverage for Arrowfunction
++ Report
+    + Dump : collect PHP cyclomatic complexity
++ Analysis
+    + New analysis : Dependant abstract classes
+    + New analysis : Don't use Null or Boolean as an array
+    + New analysis : Infinite recursion
+    + Updated analysis : Raised levels 
+    + Updated analysis : Method signature must be compatible
+    + Updated analysis : Access Private in Trait is OK
+    + Updated analysis : Recursive function 
+    + Checked unit tests : 3099 / 3105 test pass (99% pass)
++ Tokenizer
+    + Upgraded support for 'Modules'
 
 Version 1.8.5 (Zhan Zijiang of Jiaxu, 2019-06-24)
 + Architecture
