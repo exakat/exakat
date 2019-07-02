@@ -31,33 +31,21 @@ class MethodSignatureMustBeCompatible extends Analyzer {
         // argument name may be arbitrary; argment default too.
         // typehint and number of arguments must always be the same
         $this->atomIs('Method') // No need for magicmethods
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
-             ->inIs('METHOD')
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->outIs('OVERWRITE')
              ->notSamePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // Check if typehint is different between
         $this->atomIs('Method') // No need for magicmethods
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
              ->back('first')
-             ->inIs('METHOD')
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->outIs('OVERWRITE')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('TYPEHINT')
@@ -67,18 +55,12 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // no typehint in the original
         $this->atomIs('Method') // No need for magicmethods
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->hasNoOut('TYPEHINT')
              ->back('first')
-             ->inIs('METHOD')
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->outIs('OVERWRITE')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
              ->hasOut('TYPEHINT')
@@ -87,18 +69,12 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // no typehint in the parent
         $this->atomIs('Method') // No need for magicmethods
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->hasOut('TYPEHINT')
              ->back('first')
-             ->inIs('METHOD')
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->outIs('OVERWRITE')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
              ->hasNoOut('TYPEHINT')
