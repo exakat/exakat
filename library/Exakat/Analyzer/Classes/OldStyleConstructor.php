@@ -27,23 +27,18 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
     public function analyze() {
-        $__construct = $this->dictCode->translate(array('__construct'));
-        
-        // No __construct found
-        if (empty($__construct)) {
-            // x = *** is useless, but ensure consistency with the alternative
-            $hasNo__construct = 'filter{ x = ***; true; }';
-        } else {
-            $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("lccode") in ***} ) )';
-        }
-
         // No mentionned namespaces
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Classanonymous'))
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
-             ->raw($hasNo__construct, $__construct)
+             ->not(
+                $this->side()
+                     ->outIs('MAGICMETHOD')
+                     ->outIs('NAME')
+                     ->codeIs('__construct')
+             )
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
