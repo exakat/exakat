@@ -38,7 +38,8 @@ class NestedIfthen extends Analyzer {
         // Skip the first one
         for ($i = 1; $i < $this->nestedIfthen; ++$i) {
             $this->outIs(array('THEN', 'ELSE'))
-                 ->atomInsideNoDefinition('Ifthen');
+                 ->atomInsideNoDefinition('Ifthen')
+                 ->tokenIsNot('T_ELSEIF');
         }
 
         $this->back('first');
