@@ -28,25 +28,24 @@ class ClassFunctionConfusion extends Analyzer {
     public function analyze() {
         // class foo{}; function foo();
         // possible confusion
-        $functions = $this->query('g.V().hasLabel("Function")
-                                        .values("fullnspath").unique()')
-                        ->toArray();
+        $this->atomIs('Function')
+             ->values('fullnspath')
+             ->unique();
+        $res = $this->rawQuery();
+        $functions = $res->toArray();
 
-        $classes = $this->query('g.V().hasLabel("Class", "Interface", "Trait")
-                                        .values("fullnspath").unique()')
-                        ->toArray();
+        $this->atomIs(array('Class', 'Interface', 'Trait'))
+             ->values('fullnspath')
+             ->unique();
+        $res = $this->rawQuery();
+        $classes = $res->toArray();
 
         $common = array_intersect($functions, $classes);
 
         if (empty($common)) {
             return;
         }
-        $this->atomIs(array('Class', 'Trait', 'Interface'))
-             ->fullnspathIs($common);
-        $this->prepareQuery();
-
-        $this->atomIs('Function')
-             ->hasNoClassInterfaceTrait()
+        $this->atomIs(array('Class', 'Trait', 'Interface', 'Function'))
              ->fullnspathIs($common);
         $this->prepareQuery();
     }
