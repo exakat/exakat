@@ -151,7 +151,7 @@ class AutoloadExt {
     }
 
     public function loadJson($name, $libel = self::LOAD_ALL) {
-        $return = array();
+        $return = array(array());
 
         foreach($this->pharList as $phar) {
             $fullPath = "phar://$phar/data/$name";
@@ -165,20 +165,20 @@ class AutoloadExt {
                 continue;
             }
 
-            $data = json_decode($json);
+            $data = json_decode($json, \JSON_ASSOCIATIVE);
+
+            if(json_last_error() !== \JSON_ERROR_NONE) {
+                continue;
+            }
             if (empty($data)) {
                 continue;
             }
             
-            if ($libel === self::LOAD_ALL) {
-                $return[] = (array) $data;
+            if ($libel !== self::LOAD_ALL) {
+                $return[] = $data;
             } else {
                 $return[] = array_column($data, $libel);
             }
-        }
-        
-        if (empty($return)) {
-            return array();
         }
 
         return array_merge(...$return);

@@ -22,6 +22,7 @@
 
 namespace Exakat\Graph;
 
+use Exakat\Config;
 use Exakat\Graph\Graph;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
@@ -40,7 +41,7 @@ class GSNeo4j extends Graph {
 
     private $gremlinVersion = '3.3';
     
-    public function __construct($config) {
+    public function __construct(Config $config) {
         parent::__construct($config);
 
         if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
@@ -48,8 +49,8 @@ class GSNeo4j extends Graph {
             $this->status = self::UNAVAILABLE;
             return;
         }
-        
-        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->gsneo4j_folder}/lib/"));
+
+        $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.4 or 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);

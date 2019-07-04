@@ -47,9 +47,9 @@ class Tinkergraph extends Graph {
             return;
         }
 
-        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->tinkergraph_folder}/lib/"));
+        $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
-        // 3.3 or 3.2
+        // 3.4, 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
         assert(in_array($this->gremlinVersion, array('3.2', '3.3', '3.4')), "Unknown Gremlin version : $this->gremlinVersion\n");
 

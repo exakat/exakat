@@ -37,9 +37,9 @@ class Rulesets {
 
     public function __construct($path, AutoloadExt $ext, AutoloadDev $dev, array $extra_rulesets = array()) {
         $this->main  = new RulesetsMain($path);
-        $this->ext   = new RulesetsExt($ext, $ext);
+        $this->ext   = new RulesetsExt($ext);
         $this->extra = new RulesetsExtra($extra_rulesets, $ext);
-        $this->dev   = new RulesetsDev($dev, $dev);
+        $this->dev   = new RulesetsDev($dev);
     }
 
     public function __destruct() {

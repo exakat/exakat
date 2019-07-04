@@ -82,7 +82,9 @@ class Load extends Tasks {
                             );
     private $filename   = null;
 
-    private $links = array();
+    private $links   = array();
+    private $relicat = array();
+    private $min_id  = \PHP_INT_MAX;
     
     private $logTimeFile   = null;
 
@@ -431,7 +433,8 @@ class Load extends Tasks {
         $this->id0->code      = $this->config->project;
         $this->id0->fullcode  = $this->config->project_name;
         $this->id0->token     = 'T_WHOLE';
-        $this->atoms = array();
+        $this->atoms          = array();
+        $this->min_id         = \PHP_INT_MAX;
 
         // Restart the connexion each time
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
@@ -454,7 +457,7 @@ class Load extends Tasks {
             try {
                 ++$this->stats['files'];
                 if ($this->processFile($filename, '')) {
-                    $this->loader->finalize();
+                    $this->loader->finalize($this->relicat);
                 } else {
                     print "Error while loading the file.\n";
                 }
@@ -519,7 +522,7 @@ class Load extends Tasks {
                 }
             }
         }
-        $this->loader->finalize();
+        $this->loader->finalize($this->relicat);
 
         $loader = $this->loader;
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
@@ -549,7 +552,7 @@ class Load extends Tasks {
                 }
             }
         }
-        $this->loader->finalize();
+        $this->loader->finalize($this->relicat);
         $this->loader = $loader;
         $this->stats = $stats;
 
@@ -582,7 +585,7 @@ class Load extends Tasks {
                 $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
-        $this->loader->finalize();
+        $this->loader->finalize($this->relicat);
 
         $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
         $stats = $this->stats;
@@ -593,7 +596,7 @@ class Load extends Tasks {
                 $this->datastore->ignoreFile($file, $e->getMessage());
             }
         }
-        $this->loader->finalize();
+        $this->loader->finalize($this->relicat);
         $this->stats = $stats;
 
         return array('files'  => count($files),
@@ -601,8 +604,9 @@ class Load extends Tasks {
     }
 
     private function reset() {
-        $this->atoms = array();
-        $this->links = array();
+        $this->atoms   = array();
+        $this->links   = array();
+        $this->min_id  = \PHP_INT_MAX;
 
         $this->contexts    = new Context();
         $this->expressions = array();
@@ -5673,7 +5677,10 @@ class Load extends Tasks {
         $line = $this->tokens[$this->id][2] ?? $this->tokens[$this->id - 1][2] ?? $this->tokens[$this->id - 2][2] ?? -1;
         $a = $this->atomGroup->factory($atom, $line);
         $this->atoms[$a->id] = $a;
-        
+        if ($a->id < $this->min_id) {
+            $this->min_id = $a->id;
+        }
+
         return $a;
     }
 
@@ -5694,8 +5701,14 @@ class Load extends Tasks {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT), STRICT_COMPARISON)) {
             throw new LoadError('Undefined link ' . $label . ' for atom ' . $origin->atom . ' : ' . $this->filename . ':' . $origin->line);
         }
-
-        $this->links[] = "$label-".($origin->id - 1)."-".($destination->id - 1);
+        
+        if ($origin->id < $this->min_id) {
+            $this->relicat[] = array($origin->id - 1, $destination->id - 1);
+        } elseif ($destination->id < $this->min_id) {
+            $this->relicat[] = array($origin->id - 1, $destination->id - 1);
+        } else {
+            $this->links[] = array($label, $origin->id - 1, $destination->id - 1);
+        }
     }
 
     private function pushExpression($id) {

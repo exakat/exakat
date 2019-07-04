@@ -120,7 +120,7 @@ class UselessInstruction extends Analyzer {
         // @$x = 3;
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->has('noscream', true);
+             ->is('noscream', true);
         $this->prepareQuery();
 
         // Closure with some operations

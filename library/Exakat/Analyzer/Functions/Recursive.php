@@ -52,11 +52,11 @@ class Recursive extends Analyzer {
 
         // function foo() { $this->foo(); }
         $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->savePropertyAs('fullcode', 'fqn')
+             ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('DEFINITION')
              ->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->goToInstruction(self::$FUNCTIONS_METHOD)
-             ->samePropertyAs('fullcode', 'fqn');
+             ->samePropertyAs('fullnspath', 'fqn');
         $this->prepareQuery();
     }
 }

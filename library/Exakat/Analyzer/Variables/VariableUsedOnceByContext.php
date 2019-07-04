@@ -37,6 +37,8 @@ class VariableUsedOnceByContext extends Analyzer {
 
         // argument by function
         $this->atomIs(self::$FUNCTIONS_ALL)
+             ->hasNoInterface()
+             ->isNot('abstract', true)
              ->outIs(array('ARGUMENT', 'USE'))
              ->outIs('NAME')
              ->isUsed(0);

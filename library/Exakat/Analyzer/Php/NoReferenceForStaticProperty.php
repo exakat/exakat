@@ -28,12 +28,13 @@ class NoReferenceForStaticProperty extends Analyzer {
     protected $phpVersion = '7.3-';
 
     public function analyze() {
+        // self::$p = &$a;
         $this->atomIs('Staticproperty')
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->_as('results')
              ->outIs('RIGHT')
-             ->has('reference', true)
+             ->has('reference')
              ->back('results');
         $this->prepareQuery();
     }

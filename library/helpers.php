@@ -22,11 +22,14 @@
 
 use Exakat\Exceptions\NoSuchDir;
 
-const INI_PROCESS_SECTIONS = true;
+const INI_PROCESS_SECTIONS      = true;
 const INI_DONT_PROCESS_SECTIONS = false;
 
 const STRICT_COMPARISON = true;
 const LOOSE_COMPARISON  = false;
+
+const JSON_ASSOCIATIVE = false;
+const JSON_OBJECT      = true;
 
 function display($text) {
     global $VERBOSE;
@@ -549,7 +552,7 @@ function str2array($string, $delimiter = ',') {
 
 function ordinal($number) {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
-    if ((($number % 100) >= 11) && (($number % 100) <= 13)) {
+    if (($number % 100 >= 11) && ($number % 100 <= 13)) {
         return "{$number}th";
     } else {
         return $number . $ends[$number % 10];
