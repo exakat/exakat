@@ -30,15 +30,24 @@ class CouldTypehint extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->hasNoOut('TYPEHINT')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'argument')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInsideNoAnonymous('Instanceof')
-             ->outIs('VARIABLE')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'argument')
-             ->inIs('VARIABLE');
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('VARIABLE')
+             ->atomIs('Instanceof');
+        $this->prepareQuery();
+
+        // An argument is processed with a instanceof later
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->hasNoOut('TYPEHINT')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('ARGUMENT')
+             ->functioncallIs(array('\\is_array', '\\is_string', '\\is_int', '\\is_real', '\\is_double'))
+             ->goToInstruction(array('Ifthen', 'Ternary'))
+             ->outIs(array('THEN', 'ELSE'))
+             ->atomInside(array('Return', 'Throw', 'Exit'))
+             ->back('first');
         $this->prepareQuery();
     }
 }
