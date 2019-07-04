@@ -60,7 +60,7 @@ class FollowClosureDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        display('Created ' . ($result->toInt()) . ' links for closures and arrow functions');
+        display('Created ' . $result->toInt() . ' links for closures and arrow functions');
     }
 }
 

@@ -512,7 +512,7 @@ JOIN categories
                      - (isset($ini['parameter2']) ? 8  : 0) 
                      - 12;
             if ($count !== 0) {
-                print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
+                print 'Count of " '.$row['name'].' : '.$count.PHP_EOL;
             }
 
             if (preg_match_all('/\[example\d+\]/s', $raw) != count($examples)) {
