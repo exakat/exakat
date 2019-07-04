@@ -43,12 +43,7 @@ try {
     global $VERBOSE;
     $VERBOSE = $config->verbose;
 
-    $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}"; 
-    if (!class_exists($graphDBClass)) {
-        print "No such graphdb as {$config->gremlin}\n Aborting";
-        die();
-    }
-    $graphDB = new $graphDBClass($config);
+    $graphDB = \Exakat\Graph\Graph::getConnexion($config);
 
     $exakat = new \Exakat\Exakat($graphDB, $config);
     $exakat->execute($config);
