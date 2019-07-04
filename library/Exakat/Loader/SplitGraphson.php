@@ -80,7 +80,7 @@ class SplitGraphson extends Loader {
         $this->cleanCsv();
     }
 
-    public function finalize() {
+    public function finalize(array $relicat) {
         if ($this->total !== 0) {
             $this->saveNodes();
         }
@@ -101,6 +101,16 @@ class SplitGraphson extends Loader {
         $total = 0;
         $chunk = 0;
 
+        foreach($relicat as $row) {
+            fputcsv($f, $row);
+            ++$total;
+            ++$chunk;
+        }
+        if ($chunk > self::LOAD_CHUNK_LINK) {
+            $f = $this->saveLinks($f);
+            $chunk = 0;
+        }
+
         $res = $this->sqlite3->query('SELECT origin - 1, destination -1 FROM globals');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             fputcsv($f, $row);
@@ -108,7 +118,11 @@ class SplitGraphson extends Loader {
             ++$chunk;
         }
         unset($res);
-        
+        if ($chunk > self::LOAD_CHUNK_LINK) {
+            $f = $this->saveLinks($f);
+            $chunk = 0;
+        }
+
         $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
         // Fast dump, with a write to memory first
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
@@ -228,13 +242,14 @@ GREMLIN;
             }
         }
 
-        foreach($links as $link) {
-            list($type, $o, $d) = explode('-', $link);
-            if (isset($this->tokenCounts[$type])) {
-                ++$this->tokenCounts[$type];
+        foreach($links as &$link) {
+            if (isset($this->tokenCounts[$link[0]])) {
+                ++$this->tokenCounts[$link[0]];
             } else {
-                $this->tokenCounts[$type] = 1;
+                $this->tokenCounts[$link[0]] = 1;
             }
+            
+            $link = implode('-', $link);
         }
 
         $total = 0; // local total
@@ -267,7 +282,7 @@ GREMLIN;
 
             ++$total;
         }
-        file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+        file_put_contents($this->path, implode(PHP_EOL, $append)   . PHP_EOL, \FILE_APPEND);
         file_put_contents($this->pathLink, implode(PHP_EOL, $links).PHP_EOL, \FILE_APPEND);
 
         if ($this->total > self::LOAD_CHUNK) {

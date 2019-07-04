@@ -36,7 +36,7 @@ class Collector extends Loader {
         $this->datastore = new Datastore($config);
     }
     
-    public function finalize() {
+    public function finalize(array $relicat) {
         $this->datastore->addRow('ignoredCit', $this->cit);
         $this->datastore->addRow('ignoredFunctions', $this->functions);
         $this->datastore->addRow('ignoredConstants', $this->constants);
