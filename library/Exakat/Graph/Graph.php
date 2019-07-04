@@ -22,10 +22,12 @@
 
 namespace Exakat\Graph;
 
+use Exakat\Config;
+
 abstract class Graph {
     protected $config = null;
     
-    public function __construct($config) {
+    public function __construct(Config $config) {
         $this->config = $config;
     }
 
@@ -48,6 +50,11 @@ abstract class Graph {
     // This is not the case of all graph : tinkergraph doesn't.
     public function getId() { return 'null'; }
     abstract public function getDefinitionSQL();
+
+    static public function getConnexion(Config $config) {
+        $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}"; 
+        return new $graphDBClass($config);
+    }
 }
 
 ?>
