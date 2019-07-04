@@ -230,7 +230,7 @@ GREMLIN;
         } else {
             display( "$analyzer_class running\n");
             try {
-                $analyzer->run($this->config);
+                $analyzer->run();
             } catch(QueryException $e) {
                 $end = microtime(true);
                 display( "$analyzer_class : DSL building exception\n");
