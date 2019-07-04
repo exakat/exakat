@@ -1735,7 +1735,7 @@ SQL;
         $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
-        $result = $this->sqlite->query(<<<'SQL'
+        $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
         FROM results
         WHERE line != -1 AND
@@ -2454,7 +2454,7 @@ SQL;
 SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$shortVersion';
 SQL;
             $existence = $this->sqlite->query($query);
-            if ($existence->fetchArray(\SQLITE3_ASSOC) !== 'compilation$shortVersion') {
+            if ($existence->fetchArray(\SQLITE3_ASSOC) !== "compilation$shortVersion") {
                 continue;
             }
 

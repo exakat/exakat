@@ -656,7 +656,7 @@ SQL;
         $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
-        $result = $this->sqlite->query(<<<'SQL'
+        $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
     FROM results
     WHERE analyzer IN ($list)
@@ -793,7 +793,7 @@ SQL;
             }
             $result = $this->Compatibility($result);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
         }
 
