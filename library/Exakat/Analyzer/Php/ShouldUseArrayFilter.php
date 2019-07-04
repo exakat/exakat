@@ -34,7 +34,7 @@ class ShouldUseArrayFilter extends Analyzer {
              ->back('first')
 
              ->outIs('BLOCK')
-             ->has('count', 1)
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomInsideNoDefinition('Assignation')
              ->hasInstruction('Ifthen')

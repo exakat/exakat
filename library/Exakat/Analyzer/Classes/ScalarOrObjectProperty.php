@@ -26,13 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class ScalarOrObjectProperty extends Analyzer {
     public function analyze() {
+        // todo : extend to array  : warning : string-array syntax
         // Property defined as literal, used as object
         $this->atomIs('Class')
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
              ->_as('results')
-             ->savePropertyAs('propertyname', 'name')
              ->outIs('DEFAULT')
              ->isLiteral()
              ->atomIsNot('Null')

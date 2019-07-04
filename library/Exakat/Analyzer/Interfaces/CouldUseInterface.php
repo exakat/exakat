@@ -74,7 +74,7 @@ class CouldUseInterface extends Analyzer {
                      ->outIs(array('METHOD', 'MAGICMETHOD'))
                      ->isNot('visibility', array('private', 'protected'))
                      ->outIs('NAME')
-                     ->is('lccode', $methodNames, self::CASE_SENSITIVE)
+                     ->is('lccode', $methodNames)
              )
              ->raw('sideEffect{ x = []; }')
              // Collect methods names with argument count

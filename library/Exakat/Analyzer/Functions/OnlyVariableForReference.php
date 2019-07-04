@@ -31,7 +31,7 @@ class OnlyVariableForReference extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->has('reference', true)
+             ->has('reference')
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->_as('functioncall')
