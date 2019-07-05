@@ -44,6 +44,16 @@ class MustReturn extends Analyzer {
              ->back('first')
              ->noAtomInside('Return');
         $this->prepareQuery();
+
+        // function foo() : type { /* no return */ } (except with void)
+        $this->atomIs(array('Function', 'Closure', 'Method', 'Arrowfunction'))
+             ->outIs('RETURNTYPE')
+             ->fullnspathIsNot('\\void')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->noAtomInside('Return')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
