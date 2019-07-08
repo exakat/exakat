@@ -38,9 +38,10 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
              ->analyzerIsNot('Classes/UsedOnceProperty')
              ->filter(
                 $this->side()
-                     ->outIs('DEFINITION')
+                     ->goToAllDefinitions()
+                     ->outIs("DEFINITION")
                      ->goToInstruction(array('Magicmethod', 'Method'))
-                     ->dedup()
+                     ->dedup('fullnspath')
                      ->raw('count().is(eq(1))')
              );
         $this->prepareQuery();
