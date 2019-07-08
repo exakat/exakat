@@ -26,6 +26,10 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MustReturn extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/CantUse');
+    }
+
     public function analyze() {
         // class foo { function __callStatic($name, $foo) { $name; } }
         $this->atomIs('Magicmethod')
@@ -42,6 +46,7 @@ class MustReturn extends Analyzer {
                             '__debugInfo',
                             ), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')
+             ->analyzerIsNot('Functions/CantUse')
              ->noAtomInside('Return');
         $this->prepareQuery();
 
