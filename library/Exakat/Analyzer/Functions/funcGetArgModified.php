@@ -34,10 +34,12 @@ class funcGetArgModified extends Analyzer {
              // Argument is modified
              ->filter(
                 $this->side()
-                     ->outIs('DEFINTIION')
+                     ->outIs('NAME')
+                     ->outIs('DEFINITION')
                      ->is('isModified', true)
              )
 
+             ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\func_get_arg')
