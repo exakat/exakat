@@ -83,7 +83,7 @@ SQL
             }
             $sizes[strlen($variable)][] = $variable;
         }
-        
+
         $sizes[] = array();// Extra one for the next loop
         foreach($sizes as $size => $vars) {
             foreach($vars as $variable) {
