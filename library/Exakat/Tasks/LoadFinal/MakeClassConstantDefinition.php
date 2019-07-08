@@ -40,6 +40,7 @@ class MakeClassConstantDefinition extends LoadFinal {
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
               ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CONST')
@@ -51,6 +52,31 @@ class MakeClassConstantDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countD = $result->toInt();
+
+        // Create link between Class constant and definition
+        $query = $this->newQuery('MakeClassConstantDefinition static');
+        $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs('Static', Analyzer::WITHOUT_CONSTANTS)
+              
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllChildren(Analyzer::EXCLUDE_SELF)
+              ->outIs('CONST')
+              ->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $countStatic = $result->toInt();
 
         $query = $this->newQuery('MakeClassConstantDefinition parents');
         $query->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
@@ -101,7 +127,7 @@ class MakeClassConstantDefinition extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countI = $result->toInt();
-        $count = $countD + $countI;
+        $count = $countD + $countI + $countStatic;
         
         display("Create $count link between Class constant and definition");
     }

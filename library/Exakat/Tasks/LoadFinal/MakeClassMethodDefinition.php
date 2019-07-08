@@ -52,6 +52,27 @@ class MakeClassMethodDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count1 = $result->toInt();
 
+        $query = $this->newQuery('MakeClassMethodDefinition static');
+        $query->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs('Static', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllChildren(Analyzer::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count11 = $result->toInt();
+
         // Create link between Class method and definition
         // This works only for $this
         $query = $this->newQuery('MakeClassMethodDefinition with traits');
@@ -262,7 +283,7 @@ class MakeClassMethodDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count3 = $result->toInt();
 
-        $count = $count1 + $count2 + $count3;
+        $count = $count1 + $count11 + $count2 + $count3;
         display("Create $count link between \$this->methodcall() and definition");
 
         // Create link between constructor and new call

@@ -33,21 +33,12 @@ class PropertyUsage extends Analyzer {
         $propertyHash = array();
         foreach($this->properties as $class => $properties) {
             foreach($properties as $property => $details) {
-                if (isset($staticHash[$class])) {
-                    if (!isset($details->fullname)) {
-                        print_r($this->properties);
-                        die();
-                    }
-                    $staticHash[$class][] = $details->fullname;
-                } else {
-                    $staticHash[$class] = array($details->fullname);
+                if (!isset($details['fullname'])) {
+                    continue;
                 }
+                array_collect_by($staticHash, $class, $details['fullname']);
 
-                if (isset($propertyHash[$class])) {
-                    $propertyHash[$class][] = $property;
-                } else {
-                    $propertyHash[$class] = array($property);
-                }
+                array_collect_by($propertyHash, $class, $property);
             }
         }
         

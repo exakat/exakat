@@ -1,4 +1,4 @@
-Version 1.8.7 (Hu Wenchang of Jiashen, coming up)
+Version 1.8.8 (Wei Yuqing of Jiawu, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.8.7 (Hu Wenchang of Jiashen, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.7 (Hu Wenchang of Jiashen, 2019-07-08)
++ Architecture
+    + Added bugs fixes up to 7.3.7
+    + New factory method for the graph
++ Analysis
+    + New analysis : Backward compatible check on generators (can't return)
+    + New analysis : Report wrong return typehint
+    + New analysis : Use DateTimeImmutable
+    + New concept : Methods that throw errors 
+    + Updated analysis : Recursive functions disambiguate methods
+    + Updated analysis : Refactored property/variable confusion
+    + Updated analysis : Could typehint checks on type validations
+    + Updated analysis : Variable used once check for abstract methods
+    + Updated analysis : Array_merge in loops omits file_put_contents()
+    + Updated analysis : Simple Regex covers all special sequences, and unicode sequences
+    + Checked unit tests : 3131 / 3142 test pass (99% pass)
++ Tokenizer
+    + Differentiated support for self and static in calls
+    + Moved Symfony support to its extension
+    + Reworked loading to make it parallels. 
 
 Version 1.8.6 (Wei Yuqing of Jiawu, 2019-07-01)
 + Architecture

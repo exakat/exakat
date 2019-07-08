@@ -1,0 +1,143 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            7
+          Label : METHOD
+            8
+            Label : ARGUMENT
+              10
+            Label : BLOCK
+              12
+              Label : EXPRESSION
+                10
+            Label : DEFINITION
+              20
+              Label : CLASS
+                17
+              Label : METHOD
+                8
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  8
+            Label : NAME
+              8
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            17
+          Label : DEFINITION
+            17
+          Label : DEFINITION
+            13
+          Label : DEFINITION
+            13
+          Label : EXTENDS
+            7
+          Label : METHOD
+            15
+            Label : ARGUMENT
+              10
+            Label : BLOCK
+              12
+              Label : EXPRESSION
+                16
+                Label : ARGUMENT
+                  21
+                  Label : LEFT
+                    20
+                    Label : CLASS
+                      17
+                    Label : METHOD
+                      18
+                      Label : ARGUMENT
+                        10
+                      Label : NAME
+                        18
+                  Label : RIGHT
+                    21
+                    Label : LEFT
+                      20
+                      Label : CLASS
+                        17
+                      Label : METHOD
+                        8
+                        Label : ARGUMENT
+                          10
+                        Label : NAME
+                          8
+                    Label : RIGHT
+                      20
+                      Label : CLASS
+                        13
+                      Label : METHOD
+                        18
+                        Label : ARGUMENT
+                          10
+                        Label : NAME
+                          18
+            Label : DEFINITION
+              20
+              Label : CLASS
+                22
+              Label : METHOD
+                15
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  15
+            Label : NAME
+              15
+          Label : NAME
+            13
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            22
+          Label : EXTENDS
+            13
+          Label : METHOD
+            18
+            Label : ARGUMENT
+              10
+            Label : BLOCK
+              12
+              Label : EXPRESSION
+                10
+            Label : DEFINITION
+              20
+              Label : CLASS
+                17
+              Label : METHOD
+                18
+                Label : ARGUMENT
+                  10
+                Label : NAME
+                  18
+            Label : NAME
+              18
+          Label : NAME
+            22
+        Label : EXPRESSION
+          16
+          Label : ARGUMENT
+            20
+            Label : CLASS
+              22
+            Label : METHOD
+              15
+              Label : ARGUMENT
+                10
+              Label : NAME
+                15

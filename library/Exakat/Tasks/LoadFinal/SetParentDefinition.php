@@ -109,7 +109,7 @@ class SetParentDefinition extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $count2 = $result->toInt();
         
-        $count = $count1 + $count2;
+        $count = $count1 + $count2 + $count11;
         display("Set $count parent definitions");
     }
 }

@@ -44,7 +44,12 @@ class NoGlob extends Analyzer {
         $this->atomFunctionIs('\\glob')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
-             ->raw('not( where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname").has("fullnspath", "\\\\GLOB_NOSORT") ) )')
+             ->not(
+                $this->side()
+                     ->outIs(array('LEFT', 'RIGHT'))
+                     ->atomis(array('Identifier', 'Nsname'))
+                     ->fullnspathIs('\\GLOB_NOSORT')
+             )
              ->back('first');
         $this->prepareQuery();
 

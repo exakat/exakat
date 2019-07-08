@@ -1501,7 +1501,7 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $query = array();
-        if (count($result) > 0) {
+        if (!empty($result)) {
             foreach($result->toArray() as $link) {
                 $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'INCLUDE')";
             }

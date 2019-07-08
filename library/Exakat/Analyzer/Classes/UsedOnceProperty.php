@@ -29,18 +29,18 @@ class UsedOnceProperty extends Analyzer {
         $MAX_LOOPING = self::MAX_LOOPING;
 
         // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->isNot('visibility', 'public')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->_as('results')
-             ->raw(<<<GREMLIN
-where( 
-    __.emit().repeat( __.both("OVERWRITE").not(has("visibility", "private"))).times($MAX_LOOPING).out("DEFINITION").count().is(eq(1))
-)
-GREMLIN
-);
+             ->filter(
+                $this->side()
+                     ->goToAllDefinitions()
+                     ->outIs('DEFINITION')
+                     ->raw('count().is(eq(1))')
+             );
         $this->prepareQuery();
     }
 }

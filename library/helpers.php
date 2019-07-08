@@ -28,8 +28,8 @@ const INI_DONT_PROCESS_SECTIONS = false;
 const STRICT_COMPARISON = true;
 const LOOSE_COMPARISON  = false;
 
-const JSON_ASSOCIATIVE = false;
-const JSON_OBJECT      = true;
+const JSON_ASSOCIATIVE = true;
+const JSON_OBJECT      = false;
 
 function display($text) {
     global $VERBOSE;
@@ -615,22 +615,6 @@ function flattenDimensions($array, $split='/') {
             }
         } else {
             $return[$k] = $value;
-        }
-    }
-    
-    return $return;
-}
-
-function array_flip_arrays($array) {
-    $return = array();
-
-    foreach ($array as $key => $value) {
-        foreach ($value as $v) {
-            if (isset($return[$v])) {
-                $return[$v][] = $key;
-            } else {
-                $return[$v] = array($key);
-            }
         }
     }
     

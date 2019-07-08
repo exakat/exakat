@@ -150,7 +150,7 @@ class Initproject extends Tasks {
             $include_dirs[] = "/vendor/$repositoryURL";
         } else {
             $projectName = basename($repositoryURL);
-            $projectName = preg_replace('/\.git/', '', $projectName);
+            $projectName = str_replace('/\.git/', '', $projectName);
         }
 
         // default initial config. Found in test project.

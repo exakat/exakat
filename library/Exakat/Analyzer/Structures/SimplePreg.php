@@ -32,12 +32,19 @@ class SimplePreg extends Analyzer {
         // preg_match('/abc/', $x);
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs(array('String', 'Heredoc'), self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              // Normal delimiters
-             ->regexIsNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|{}()\\\\[\\\\]|]')
+             ->regexIsNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|()\\\\[\\\\]|]')
+             ->regexIsNot('noDelimiter', '[^uU]\\\\{')
              // Simple assertions
-             ->regexIsNot('noDelimiter', '\\\\\\\\[bBAZzSsDd]')
+             ->regexIsNot('noDelimiter', '\\\\\\\\[bBAZzSsDdWwsSG]')
+             ->not(
+                $this->side()
+                     ->back('first')
+                     ->outWithRank('ARGUMENT', 1)
+                     ->atomIs(array('Closure', 'Arrowfunction'))
+             )
              ->back('first');
         $this->prepareQuery();
     }
