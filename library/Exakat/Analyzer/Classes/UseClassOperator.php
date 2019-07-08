@@ -27,8 +27,10 @@ use Exakat\Analyzer\Analyzer;
 class UseClassOperator extends Analyzer {
     public function analyze() {
         // $a = '\x'; class x {}
-        $this->atomIs('String')
+        $this->atomIs(array('String', 'Heredoc', 'Concatenation')) // first one for optimization purposes
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->has('noDelimiter')
+             ->noDelimiterIsNot(array('static', 'self', 'parent'))
              ->regexIsNot('fullcode', '::')
              ->inIs('DEFINITION')
              ->atomIs('Class')
