@@ -23,7 +23,7 @@ Version 1.8.7 (Hu Wenchang of Jiashen, 2019-07-08)
     + Updated analysis : Variable used once check for abstract methods
     + Updated analysis : Array_merge in loops omits file_put_contents()
     + Updated analysis : Simple Regex covers all special sequences, and unicode sequences
-    + Checked unit tests : 3099 / 3105 test pass (99% pass)
+    + Checked unit tests : 3131 / 3142 test pass (99% pass)
 + Tokenizer
     + Differentiated support for self and static in calls
     + Moved Symfony support to its extension
