@@ -30,10 +30,12 @@ class UsedMethods extends Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
-GREMLIN
-)->toArray();
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->tokenIs('T_STRING')
+             ->values('lccode')
+             ->unique();
+        $methods = $this->rawQuery()->toArray();
 
         if (!empty($methods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
@@ -45,10 +47,12 @@ GREMLIN
         }
 
         // Staticmethodcall
-        $staticmethods = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
-GREMLIN
-)->toArray();
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->tokenIs('T_STRING')
+             ->values('lccode')
+             ->unique();
+        $staticmethods = $this->rawQuery()->toArray();
 
         if (!empty($staticmethods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
@@ -62,21 +66,22 @@ GREMLIN
 
         // Staticmethodcall in arrays
         // non-staticmethodcall in arrays, with $this
-        $callablesStrings = $this->query(<<<'GREMLIN'
-g.V().hasLabel("String")
-     .where(__.in("DEFINITION"))
-     .has('noDelimiter')
-     .filter{ (it.get().value('noDelimiter') =~ "::." ).getCount() != 0 }
-.map{
+        $this->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->hasIn('DEFINITION')
+             ->has('noDelimiter')
+             ->regexIs('noDelimiter', '::.')
+             ->raw(<<<GREMLIN
+map{
     // Strings
-    if (it.get().label() == 'String') {
+    if (it.get().label() == "String") {
         if (it.get().value("noDelimiter") =~ /::/) {
-            s = it.get().value("noDelimiter").split('::');
+            s = it.get().value("noDelimiter").split("::");
             s[1].toLowerCase();
         } else {
             it.get().value("noDelimiter").toLowerCase();
         }
-    } else if (it.get().label() == 'Arrayliteral') {
+    } else if (it.get().label() == "Arrayliteral") {
         it.get().vertices(OUT, "ARGUMENT").each{
             if (it.value("rank") == 1) {
                 s = it.value("noDelimiter").toLowerCase();
@@ -86,36 +91,40 @@ g.V().hasLabel("String")
     } else {
         it.get().value("noDelimiter").toLowerCase();
     }
-}.unique();
-
+}
 GREMLIN
-        )->toArray();
+)
+                ->unique();
+                $callablesStrings = $this->rawQuery()->toArray();
 
-        $callablesArray = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Arrayliteral")
-     .where(__.values("count").is(eq(2)) )
-     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("String").in("DEFINITION"))
-     .out("ARGUMENT")
-     .has("rank", 1)
-     .hasLabel("String")
-     .has("noDelimiter")
-     .values("noDelimiter")
-     .unique();
-GREMLIN
-        )->toArray();
+        $this->atomIs('Arrayliteral')
+             ->is('count', 2)
+             ->filter(
+                $this->side()
+                     ->outWithRank('ARGUMENT', 0)
+                     ->atomIs('String', self::WITH_CONSTANTS)
+                     ->inIs('DEFINITION')
+             )
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->has('noDelimiter')
+             ->values('noDelimiter')
+             ->unique();
+        $callablesArray = $this->rawQuery()->toArray();
 
-        $callablesThisArray = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Arrayliteral")
-     .where(__.values("count").is(eq(2)) )
-     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("This"))
-     .out("ARGUMENT")
-     .has("rank", 1)
-     .hasLabel("String")
-     .has("noDelimiter")
-     .values("noDelimiter")
-     .unique();
-GREMLIN
-        )->toArray();
+        $this->atomIs('Arrayliteral')
+             ->is('count', 2)
+             ->filter(
+                $this->side()
+                     ->outWithRank('ARGUMENT', 0)
+                     ->atomIs('This', self::WITH_CONSTANTS)
+             )
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->has('noDelimiter')
+             ->values('noDelimiter')
+             ->unique();
+        $callablesThisArray = $this->rawQuery()->toArray();
 
         $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
         
