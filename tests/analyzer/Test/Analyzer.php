@@ -82,7 +82,7 @@ abstract class Analyzer extends TestCase {
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         if (empty($config->$versionPHP)) {
-            $versionPHP = 'php'.PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+            die("Warning : No binary for $phpversion\n");
         }
 
         if (preg_match('/^[^\/]+\/[^:]+:.+$/', $config->$versionPHP)) {
@@ -90,6 +90,7 @@ abstract class Analyzer extends TestCase {
         } else {
             $res = shell_exec("{$config->$versionPHP} -l $test_path/source/$file.php 2>/dev/null");
         }
+        
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
