@@ -20,29 +20,15 @@
  *
 */
 
-namespace Exakat\Analyzer\Classes;
 
+namespace Exakat\Query\DSL;
+
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class UsedOnceProperty extends Analyzer {
-    public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
-        // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('PPP')
-             ->isNot('visibility', 'public')
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->_as('results')
-             ->filter(
-                $this->side()
-                     ->goToAllDefinitions()
-                     ->outIs('DEFINITION')
-                     ->raw('count().is(eq(1))')
-             );
-        $this->prepareQuery();
+class GoToAllDefinitions extends DSL {
+    public function run() {
+        return new Command('emit( ).repeat( __.in("OVERWRITE").not(__.in("PPP").has("visibility", "private")) ).times(' . self::$MAX_LOOPING . ')');
     }
 }
-
 ?>

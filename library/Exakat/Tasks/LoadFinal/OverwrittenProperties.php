@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 
 class OverwrittenProperties extends LoadFinal {
     public function run() {
-        $query = $this->newQuery('overwrittenConstants');
+        $query = $this->newQuery('OverwrittenProperties');
         $query->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
