@@ -29,9 +29,10 @@ class ArrayMergeInLoops extends Analyzer {
     public function analyze() {
         $functions = array('\\array_merge',
                            '\\array_merge_recursive',
-                           '\\file_put_contents',
+//                           '\\file_put_contents',
                            );
 
+        // foreach($a as $b) { $c = array_merge($c, $b); };
         $this->atomFunctionIs($functions)
              ->hasLoop()
              ->atomInsideNoDefinition(self::$CONTAINERS)
@@ -46,12 +47,12 @@ class ArrayMergeInLoops extends Analyzer {
              ->goToLoop();
         $this->prepareQuery();
 
-        // with one level of functioncall : foreach($a as $b) { foo($a); }; function foo(c) { array_merge($c); }
+        // with one level of functioncall : foreach($a as $b) { foo($a); }; function foo(c) { return array_merge($c); }
         $this->atomFunctionIs($functions)
              ->hasNoLoop()
+             ->hasIn('RETURN')
              ->goToFunction()
              ->outIs('DEFINITION')
-             ->hasLoop()
              ->goToLoop();
         $this->prepareQuery();
 
