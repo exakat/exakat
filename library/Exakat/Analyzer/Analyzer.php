@@ -549,6 +549,12 @@ GREMLIN;
         return $this;
     }
 
+    protected function goToAllDefinitions() {
+        $this->query->GoToAllDefinitions();
+        
+        return $this;
+    }
+
     public function tokenIs($token) {
         $this->query->tokenIs($token);
         
