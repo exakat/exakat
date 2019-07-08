@@ -1,0 +1,147 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            7
+          Label : NAME
+            6
+          Label : PPP
+            8
+            Label : PPP
+              9
+              Label : DEFAULT
+                12
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            8
+          Label : DEFINITION
+            8
+          Label : DEFINITION
+            13
+          Label : DEFINITION
+            13
+          Label : EXTENDS
+            7
+          Label : METHOD
+            15
+            Label : ARGUMENT
+              16
+            Label : BLOCK
+              18
+              Label : EXPRESSION
+                19
+                Label : ARGUMENT
+                  21
+                  Label : LEFT
+                    20
+                    Label : CLASS
+                      8
+                    Label : MEMBER
+                      9
+                  Label : RIGHT
+                    21
+                    Label : LEFT
+                      20
+                      Label : CLASS
+                        8
+                      Label : MEMBER
+                        22
+                    Label : RIGHT
+                      20
+                      Label : CLASS
+                        13
+                      Label : MEMBER
+                        22
+            Label : DEFINITION
+              20
+              Label : CLASS
+                28
+              Label : METHOD
+                15
+                Label : ARGUMENT
+                  16
+                Label : NAME
+                  15
+            Label : NAME
+              15
+          Label : NAME
+            13
+          Label : PPP
+            11
+            Label : PPP
+              25
+              Label : DEFINITION
+                20
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  9
+              Label : OVERWRITE
+                9
+                Label : DEFAULT
+                  12
+          Label : PPP
+            26
+            Label : PPP
+              25
+              Label : DEFINITION
+                20
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  22
+              Label : DEFINITION
+                20
+                Label : CLASS
+                  13
+                Label : MEMBER
+                  22
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            28
+          Label : EXTENDS
+            13
+          Label : NAME
+            28
+          Label : PPP
+            8
+            Label : PPP
+              22
+              Label : DEFAULT
+                12
+              Label : OVERWRITE
+                25
+                Label : DEFINITION
+                  20
+                  Label : CLASS
+                    8
+                  Label : MEMBER
+                    22
+                Label : DEFINITION
+                  20
+                  Label : CLASS
+                    13
+                  Label : MEMBER
+                    22
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CLASS
+              28
+            Label : METHOD
+              15
+              Label : ARGUMENT
+                16
+              Label : NAME
+                15
