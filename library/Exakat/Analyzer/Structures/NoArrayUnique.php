@@ -26,10 +26,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoArrayUnique extends Analyzer {
-    
+    protected $phpVersion = '7.2-';
+
     public function analyze() {
-        $this->atomFunctionIs('\\array_unique')
-             ->back('first');
+        // array_unique();
+        $this->atomFunctionIs('\\array_unique');
         $this->prepareQuery();
     }
 }
