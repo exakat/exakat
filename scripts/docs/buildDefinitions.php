@@ -575,7 +575,7 @@ $exampleTxt
 
         $r = preg_replace_callback('/<\?php(.*?)\?>/is',function ($r) {
             $code = preg_replace('/`([^ ]+?) .*?`_/','$1',$r[0]);
-            $code = preg_replace('/\\\\:\\\\:/', '::', $code);
+            $code = str_replace('\\:\\:', '::', $code);
             $rst = ".. code-block:: php\n\n   ".str_replace("\n","\n   ",$code)."\n";
             return $rst;
         }, $r);

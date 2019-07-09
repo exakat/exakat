@@ -2947,6 +2947,47 @@ Not only echo() doesn't use any parenthesis, but this syntax gives the illusion 
 
     echo (($row['Null'] == 'NO') ? __('No') : __('Yes'))
 
+No Hardcoded Path
+=================
+
+.. _tine2.0-structures-nohardcodedpath:
+
+Tine2.0
+^^^^^^^
+
+:ref:`no-hardcoded-path`, in tine20/Tinebase/DummyController.php:28. 
+
+When this script is not run on a Linux system, the file save will fail.
+
+.. code-block:: php
+
+    file_put_contents('/var/run/tine20/DummyController.txt', 'success ' . $n)
+
+
+--------
+
+
+.. _thelia-structures-nohardcodedpath:
+
+Thelia
+^^^^^^
+
+:ref:`no-hardcoded-path`, in local/modules/Tinymce/Resources/js/tinymce/filemanager/include/php_image_magician.php:2317. 
+
+The `iptc.jpg` file is written. It looks like the file may be written next to the php_image_magician.php file, but this is deep in the source code and is unlikely. This means that the working directory has been set to some other place, though we don't read it immediately. 
+
+.. code-block:: php
+
+    private function writeIPTC($dat, $value)
+    	{
+    
+    		# LIMIT TO JPG
+    
+    		$caption_block = $this->iptc_maketag(2, $dat, $value);
+    		$image_string = iptcembed($caption_block, $this->fileName);
+    		file_put_contents('iptc.jpg', $image_string);
+    	}
+
 No Hardcoded Port
 =================
 
@@ -2973,7 +3014,7 @@ Tikiwiki
 
 :ref:`use-constant-as-arguments`, in lib/language/Language.php:112. 
 
-E_WARNING is a valid constant, but PHP documentation for trigger_error() explains that E_USER constants should be used. 
+E_WARNING is a valid value, but PHP documentation for trigger_error() explains that E_USER constants should be used. 
 
 .. code-block:: php
 
@@ -4182,6 +4223,72 @@ At least, it always choose the most secure way : use SSL.
           } else {
             $form .= zen_href_link($action, $parameters, 'NONSSL');
           }
+
+Common Alternatives
+===================
+
+.. _dolibarr-structures-commonalternatives:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`common-alternatives`, in htdocs/admin/facture.php:531. 
+
+The opening an closing tag couldd be moved outside the if condition : they are compulsory in both cases.
+
+.. code-block:: php
+
+    // Active
+    	                            if (in_array($name, $def))
+    	                            {
+    	                            	print '<td class="center">'."\n";
+    	                            	print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&value='.$name.'">';
+    	                            	print img_picto($langs->trans("Enabled"), 'switch_on');
+    	                            	print '</a>';
+    	                            	print '</td>';
+    	                            }
+    	                            else
+    	                            {
+    	                                print '<td class=center\>'."\n";
+    	                                print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&value='.$name.'&scan_dir='.$module->scandir.'&label='.urlencode($module->name).'">'.img_picto($langs->trans("SetAsDefault"), 'switch_off').'</a>';
+    	                                print "</td>";
+    	                            }
+
+
+--------
+
+
+.. _dolibarr-structures-commonalternatives:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`common-alternatives`, in apps/encryption/lib/KeyManager.ph:436. 
+
+`$shareKey = $this->getShareKey($path, $uid);` is common to all three alternatives. In fact, `$uid = $this->getPublicShareKeyId();` is not common, and that shoul de reviewed, as `$uid` will be undefined. 
+
+.. code-block:: php
+
+    if ($this->util->isMasterKeyEnabled()) {
+    			$uid = $this->getMasterKeyId();
+    			$shareKey = $this->getShareKey($path, $uid);
+    			if ($publicAccess) {
+    				$privateKey = $this->getSystemPrivateKey($uid);
+    				$privateKey = $this->crypt->decryptPrivateKey($privateKey, $this->getMasterKeyPassword(), $uid);
+    			} else {
+    				// when logged in, the master key is already decrypted in the session
+    				$privateKey = $this->session->getPrivateKey();
+    			}
+    		} else if ($publicAccess) {
+    			// use public share key for public links
+    			$uid = $this->getPublicShareKeyId();
+    			$shareKey = $this->getShareKey($path, $uid);
+    			$privateKey = $this->keyStorage->getSystemUserKey($this->publicShareKeyId . '.privateKey', Encryption::ID);
+    			$privateKey = $this->crypt->decryptPrivateKey($privateKey);
+    		} else {
+    			$shareKey = $this->getShareKey($path, $uid);
+    			$privateKey = $this->session->getPrivateKey();
+    		}
 
 Logical Mistakes
 ================
@@ -7833,6 +7940,39 @@ implode('', ) is probably not the slowest part in these lines.
     
     $module_file = file($this->getLocalPath().'override/'.$path);
     eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
+
+Simplify Regex
+==============
+
+.. _zurmo-structures-simplepreg:
+
+Zurmo
+^^^^^
+
+:ref:`simplify-regex`, in app/protected/core/components/Browser.php:73. 
+
+Here, strpos() or stripos() is a valid replacement.
+
+.. code-block:: php
+
+    preg_match('/opera/', $userAgent)
+
+
+--------
+
+
+.. _openconf-structures-simplepreg:
+
+openconf
+^^^^^^^^
+
+:ref:`simplify-regex`, in openconf/include.php:964. 
+
+`\%e` is not a special char for PCRE regex, although it look like it. It is a special char for date() or printf(). This preg_replace() may be upgraded to str_replace()
+
+.. code-block:: php
+
+    $conv = iconv($cp, 'utf-8', strftime(preg_replace("/\%e/", '%#d', $format), $time));
 
 Make One Call With Array
 ========================

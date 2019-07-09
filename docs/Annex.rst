@@ -350,6 +350,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Thelia <https://thelia.net/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Tikiwiki <https://tiki.org/>`_
+* Tine2.0
 * `Tine20 <https://www.tine20.com/>`_
 * `Traq <https://traq.io/>`_
 * `Typo3 <https://typo3.org/>`_
@@ -361,6 +362,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
+* openconf
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `shopware <https://www.shopware.com/>`_
@@ -428,13 +430,20 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.7
+
+  * Cant Use Function (Functions/CantUse)
+  * Generator Cannot Return (Functions/GeneratorCannotReturn ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
+  * Use DateTimeImmutable Class (Php/UseDateTimeImmutable ; Suggestions)
+  * Wrong Returned Type (Functions/WrongReturnedType ; Analyze, ClassReview)
+
 * 1.8.6
 
   * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Unassigned)
   * Dependant Abstract Classes (Classes/DependantAbstractClass ; Analyze, ClassReview)
   * Infinite Recursion (Structures/InfiniteRecursion ; Analyze)
-  * Modules/IncomingData (Modules/IncomingData ; Unassigned)
-  * Modules/NativeReplacement (Modules/NativeReplacement ; Unassigned)
+  * Modules/IncomingData (Modules/IncomingData ; Internal)
+  * Modules/NativeReplacement (Modules/NativeReplacement ; Internal)
   * Null Or Boolean Arrays (Arrays/NullBoolean)
 
 * 1.8.5
@@ -1521,7 +1530,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Multiple Returns (Functions/MultipleReturn ; )
   * Multiples Identical Case (Structures/MultipleDefinedCase ; Analyze, OneFile, ClearPHP, Simple, Level 1)
   * Multiply By One (Structures/MultiplyByOne ; Analyze, OneFile, ClearPHP, Simple, Level 1)
-  * Must Return Methods (Functions/MustReturn ; Analyze, Simple, Level 2)
+  * Must Return Methods (Functions/MustReturn ; Analyze, Simple, Level 2, LintButWontExec)
   * Namespaces (Namespaces/NamespaceUsage ; Appinfo)
   * Namespaces Glossary (Namespaces/Namespacesnames ; Appinfo)
   * Negative Power (Structures/NegativePow ; Analyze, OneFile, Simple, Level 3)
@@ -1575,7 +1584,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Only Static Methods (Classes/OnlyStaticMethods ; Internal)
   * Only Variable Returned By Reference (Structures/OnlyVariableReturnedByReference ; Analyze, Simple)
   * Or Die (Structures/OrDie ; Analyze, OneFile, ClearPHP, Simple)
-  * Overwriting Variable (Variables/Overwriting ; Analyze)
+  * Overwriting Variable (Variables/Overwriting ; )
   * Overwritten Class Const (Classes/OverwrittenConst ; Appinfo)
   * Overwritten Exceptions (Exceptions/OverwriteException ; Analyze, Simple, Suggestions, Level 4)
   * Overwritten Literals (Variables/OverwrittenLiterals ; Analyze)
@@ -1948,7 +1957,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-58 PHP error message detailled : 
+59 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -1984,6 +1993,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
 * :ref:`Defining a custom assert() function is deprecated, as the function has special semantics <assert-function-is-reserved>`
 * :ref:`Delimiter must not be alphanumeric or backslash  <no-empty-regex>`
+* :ref:`Generators cannot return values using "return"  <generator-cannot-return>`
 * :ref:`Generators cannot return values using "return" <no-return-for-generator>`
 * :ref:`Invalid numeric literal <malformed-octal>`
 * :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
@@ -2134,6 +2144,7 @@ List of external links mentionned in this documentation.
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
+* `array_unique <https://www.php.net/manual/en/function.array-unique.php>`_
 * `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
@@ -2390,8 +2401,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2457,8 +2468,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2606,8 +2617,8 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2639,6 +2650,7 @@ List of external links mentionned in this documentation.
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `Weak references <http://php.net/manual/en/book.weakref.php>`_
 * `What are the best practices for catching and re-throwing exceptions? <https://stackoverflow.com/questions/5551668/what-are-the-best-practices-for-catching-and-re-throwing-exceptions>`_
+* `What's all this 'immutable date' stuff, anyway? <https://medium.com/@codebyjeff/whats-all-this-immutable-date-stuff-anyway-72d4130af8ce>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
 * `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_
@@ -2841,6 +2853,7 @@ _______
 |   analyzer[] = "Functions/WithoutReturn";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
 |   analyzer[] = "Functions/WrongOptionalParameter";
+|   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
@@ -3058,7 +3071,6 @@ _______
 |   analyzer[] = "Type/StringWithStrangeSpace";
 |   analyzer[] = "Variables/AssignedTwiceOrMore";
 |   analyzer[] = "Variables/LostReferences";
-|   analyzer[] = "Variables/Overwriting";
 |   analyzer[] = "Variables/OverwrittenLiterals";
 |   analyzer[] = "Variables/StrangeName";
 |   analyzer[] = "Variables/UndefinedVariable";
@@ -3101,6 +3113,7 @@ ___________
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UnreachableConstant";
 |   analyzer[] = "Classes/UnusedConstant";
+|   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
@@ -3166,6 +3179,7 @@ __________________
 |   analyzer[] = "Extensions/Extdba";
 |   analyzer[] = "Extensions/Extfdf";
 |   analyzer[] = "Extensions/Extming";
+|   analyzer[] = "Functions/GeneratorCannotReturn";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Namespaces/UseFunctionsConstants";
 |   analyzer[] = "Php/CantUseReturnValueInWriteContext";
@@ -3252,6 +3266,7 @@ __________________
 |   analyzer[] = "Classes/NullOnNew";
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Extensions/Extmhash";
+|   analyzer[] = "Functions/GeneratorCannotReturn";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Namespaces/UseFunctionsConstants";
 |   analyzer[] = "Php/CantUseReturnValueInWriteContext";
@@ -3337,6 +3352,7 @@ __________________
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Extensions/Extapc";
 |   analyzer[] = "Extensions/Extmysql";
+|   analyzer[] = "Functions/GeneratorCannotReturn";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Namespaces/UseFunctionsConstants";
 |   analyzer[] = "Php/ClassConstWithArray";
@@ -3412,6 +3428,7 @@ __________________
 |   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
 |   analyzer[] = "Classes/NullOnNew";
 |   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Functions/GeneratorCannotReturn";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DefineWithArray";
@@ -3708,6 +3725,7 @@ _______________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IncompatibleSignature";
+|   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
@@ -3716,6 +3734,7 @@ _______________
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
+|   analyzer[] = "Functions/MustReturn";
 |   analyzer[] = "Functions/OnlyVariableForReference";
 |   analyzer[] = "Functions/TypehintMustBeReturned";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
@@ -3889,6 +3908,7 @@ ___________
 |   analyzer[] = "Php/ShouldUseArrayColumn";
 |   analyzer[] = "Php/ShouldUseArrayFilter";
 |   analyzer[] = "Php/ShouldUseCoalesce";
+|   analyzer[] = "Php/UseDateTimeImmutable";
 |   analyzer[] = "Php/UseSessionStartOptions";
 |   analyzer[] = "Structures/BasenameSuffix";
 |   analyzer[] = "Structures/BooleanStrictComparison";

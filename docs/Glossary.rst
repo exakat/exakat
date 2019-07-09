@@ -80,6 +80,10 @@ Glossary
       + :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
       + :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 
+    + `array_change_key_case()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `array_column()`
 
       + :ref:`Should Use array_column() <should-use-array\_column()>`
@@ -139,6 +143,10 @@ Glossary
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
+    + `array_multisort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `array_push()`
 
       + :ref:`Avoid array_push() <avoid-array\_push()>`
@@ -168,6 +176,7 @@ Glossary
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Could Use array_unique <could-use-array\_unique>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `array_unshift()`
 
@@ -185,6 +194,14 @@ Glossary
     + `arrayobject`
 
       + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
+    + `arsort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `asort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `assert()`
 
@@ -248,10 +265,18 @@ Glossary
 
       + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
 
+    + `chdir()`
+
+      + :ref:`No Hardcoded Path <no-hardcoded-path>`
+
     + `chr()`
 
       + :ref:`Should Preprocess Chr <should-preprocess-chr>`
       + :ref:`Should Use Operator <should-use-operator>`
+
+    + `chroot()`
+
+      + :ref:`No Hardcoded Path <no-hardcoded-path>`
 
     + `class_exists()`
 
@@ -297,6 +322,7 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
       + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
       + :ref:`Use is_countable <use-is\_countable>`
       + :ref:`Uses Default Values <uses-default-values>`
 
@@ -331,6 +357,15 @@ Glossary
     + `DateTime`
 
       + :ref:`Timestamp Difference <timestamp-difference>`
+      + :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
+
+    + `DateTimeImmutable`
+
+      + :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
+
+    + `Datetime`
+
+      + :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
 
     + `Die()`
 
@@ -343,6 +378,11 @@ Glossary
     + `datetime`
 
       + :ref:`Timestamp Difference <timestamp-difference>`
+      + :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
+
+    + `datetimeimmutable`
+
+      + :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
 
     + `define()`
 
@@ -382,6 +422,10 @@ Glossary
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 
+    + `easter_days()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `empty()`
 
       + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
@@ -411,6 +455,10 @@ Glossary
 
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
+    + `error_reporting()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
@@ -434,6 +482,7 @@ Glossary
       + :ref:`Configure Extract <configure-extract>`
       + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`Register Globals <register-globals>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
 
 + `F`
@@ -480,11 +529,16 @@ Glossary
 
     + `filter_input()`
 
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
       + :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
 
     + `filter_input_array()`
 
       + :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
+
+    + `filter_var()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `fopen()`
 
@@ -522,6 +576,10 @@ Glossary
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
+    + `fseek()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `func_get_arg()`
 
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
@@ -540,6 +598,7 @@ Glossary
     + `generator`
 
       + :ref:`Don't Loop On Yield <don't-loop-on-yield>`
+      + :ref:`Generator Cannot Return <generator-cannot-return>`
       + :ref:`No Return For Generator <no-return-for-generator>`
 
     + `get_called_class()`
@@ -551,10 +610,26 @@ Glossary
       + :ref:`No Need For get_class() <no-need-for-get\_class()>`
       + :ref:`No get_class() With Null <no-get\_class()-with-null>`
 
+    + `get_html_translation_table()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `glob()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
       + :ref:`No Direct Usage <no-direct-usage>`
+
+    + `gmp_div_q()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `gmp_div_qr()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `gmp_div_r()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `gmp_random()`
 
@@ -594,14 +669,48 @@ Glossary
 
       + :ref:`Directly Use File <directly-use-file>`
 
+    + `html_entity_decode()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `htmlentities()`
 
       + :ref:`Htmlentities Calls <htmlentities-calls>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
       + :ref:`Uses Default Values <uses-default-values>`
 
     + `htmlspecialchars()`
 
       + :ref:`Htmlentities Calls <htmlentities-calls>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `htmlspecialchars_decode()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_build_query()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_build_url()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_parse_cookie()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_parse_params()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_redirect()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `http_support()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
 
 + `I`
@@ -768,6 +877,10 @@ Glossary
 
 
 + `J`
+    + `jdtojewish()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `jpeg2wbmp()`
 
       + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
@@ -776,6 +889,16 @@ Glossary
     + `json_decode()`
 
       + :ref:`Use json_decode() Options <use-json\_decode()-options>`
+
+
++ `K`
+    + `krsort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `ksort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
 
 + `L`
@@ -946,10 +1069,12 @@ Glossary
     + `parse_ini_file()`
 
       + :ref:`Directly Use File <directly-use-file>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `parse_ini_string()`
 
       + :ref:`Directly Use File <directly-use-file>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `parse_str()`
 
@@ -960,6 +1085,7 @@ Glossary
     + `parse_url()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `parsekit_compile_file()`
 
@@ -981,12 +1107,21 @@ Glossary
     + `pathinfo()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
       + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
     + `pcntl_getpriority()`
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `pg_result_status()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `pg_select()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `php_egg_logo_guid()`
 
@@ -1004,9 +1139,14 @@ Glossary
 
       + :ref:`Use Constant <use-constant>`
 
+    + `phpcredits()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `phpinfo()`
 
       + :ref:`Phpinfo <phpinfo>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `phpversion()`
 
@@ -1021,6 +1161,10 @@ Glossary
       + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
       + :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
+    + `posix_access()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `pow()`
 
       + :ref:`** For Exponent <**-for-exponent>`
@@ -1033,11 +1177,13 @@ Glossary
     + `preg_grep()`
 
       + :ref:`Regex On Arrays <regex-on-arrays>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `preg_match()`
 
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `preg_match_all()`
 
@@ -1063,6 +1209,10 @@ Glossary
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`Regex On Arrays <regex-on-arrays>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+    + `preg_split()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `prev()`
 
@@ -1115,9 +1265,21 @@ Glossary
 
       + :ref:`Directly Use File <directly-use-file>`
 
+    + `round()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `rsort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `rtrim()`
 
       + :ref:`Substr To Trim <substr-to-trim>`
+
+    + `runkit_import()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
 
 + `S`
@@ -1136,6 +1298,7 @@ Glossary
     + `scandir()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `session_start()`
 
@@ -1199,6 +1362,14 @@ Glossary
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 
+    + `socket_read()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `sort()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `split()`
 
       + :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
@@ -1222,6 +1393,7 @@ Glossary
     + `str_pad()`
 
       + :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `str_repeat()`
 
@@ -1236,9 +1408,14 @@ Glossary
 
       + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 
+    + `stream_socket_client()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
     + `stream_socket_server()`
 
       + :ref:`@ Operator <@-operator>`
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `stripos()`
 
@@ -1334,6 +1511,10 @@ Glossary
     + `token_get_all()`
 
       + :ref:`@ Operator <@-operator>`
+
+    + `trigger_error()`
+
+      + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `trim()`
 

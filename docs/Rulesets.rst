@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 02 Jul 2019 09:17:50 +0000
-.. comment: Generation hash : f8ecabbfb71b1588db777cd0b15cef74878871ca
+.. comment: Generation date : Mon, 08 Jul 2019 14:20:27 +0000
+.. comment: Generation hash : 67413e0caf68b8507bdf4235611d913de8eb00f0
 
 
 .. _analyze:
@@ -284,7 +284,6 @@ Total : 365 analysis
 * :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
-* :ref:`Overwriting Variable <overwriting-variable>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -426,6 +425,7 @@ Total : 365 analysis
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`Wrong Range Check <wrong-range-check>`
+* :ref:`Wrong Returned Type <wrong-returned-type>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
@@ -444,7 +444,7 @@ Total : 365 analysis
 ClassReview
 +++++++++++
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -473,6 +473,7 @@ Total : 27 analysis
 * :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * :ref:`Unused Class Constant <unused-class-constant>`
+* :ref:`Wrong Returned Type <wrong-returned-type>`
 
 .. _coding-conventions:
 
@@ -511,7 +512,7 @@ Total : 24 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 77 analysis
+Total : 78 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -534,6 +535,7 @@ Total : 77 analysis
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
+* :ref:`Generator Cannot Return <generator-cannot-return>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -596,7 +598,7 @@ Total : 77 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 73 analysis
+Total : 74 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -618,6 +620,7 @@ Total : 73 analysis
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Generator Cannot Return <generator-cannot-return>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -677,7 +680,7 @@ Total : 73 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 65 analysis
+Total : 66 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -694,6 +697,7 @@ Total : 65 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Generator Cannot Return <generator-cannot-return>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -750,7 +754,7 @@ Total : 65 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 54 analysis
+Total : 55 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -762,6 +766,7 @@ Total : 54 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Direct Call To __clone() <direct-call-to-\_\_clone()>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
+* :ref:`Generator Cannot Return <generator-cannot-return>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -1017,7 +1022,7 @@ Total : 25 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 21 analysis
+Total : 23 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -1028,7 +1033,9 @@ Total : 21 analysis
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Method Collision Traits <method-collision-traits>`
+* :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
+* :ref:`Must Return Methods <must-return-methods>`
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
@@ -1146,7 +1153,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 83 analysis
+Total : 84 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1221,6 +1228,7 @@ Total : 83 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Use Basename Suffix <use-basename-suffix>`
 * :ref:`Use Count Recursive <use-count-recursive>`
+* :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`

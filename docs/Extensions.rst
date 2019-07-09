@@ -801,8 +801,9 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 Symfony analysis
 __________________________________________________
 
-This extension includes 10 analyzers.
+This extension includes 13 analyzers.
 
+*  (Symfony/Controller)
 * Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
 * Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
 * Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
@@ -811,6 +812,8 @@ This extension includes 10 analyzers.
 * Symfony 4.0 Compatibility (Symfony/Symfony_4_0)
 * Symfony 4.1 Compatibility (Symfony/Symfony_4_1)
 * Symfony 4.2 Compatibility (Symfony/Symfony_4_2)
+* Symfony Constant Usage (Symfony/SymfonyConstantUsage)
+* Symfony Function Usage (Symfony/SymfonyFunctionsUsage)
 * Symfony Missing (Symfony/SymfonyMissing)
 * Symfony Usage (Symfony/SymfonyUsage)
 

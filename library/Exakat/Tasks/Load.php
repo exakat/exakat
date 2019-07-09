@@ -169,7 +169,6 @@ class Load extends Tasks {
 
     private $contexts              = null;
 
-    private $optionsTokens       = array();
     private $expressions         = array();
     private $atoms               = array();
     private $argumentsId         = array();
@@ -177,6 +176,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     private $callsDatabase       = null;
+    private $phpDoc              = null;
     
     private $processing = array();
     
@@ -290,7 +290,9 @@ class Load extends Tasks {
             $this->phptokens::T_THROW                    => 'processThrow',
             $this->phptokens::T_YIELD                    => 'processYield',
             $this->phptokens::T_YIELD_FROM               => 'processYieldfrom',
-    
+
+            $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
+
             $this->phptokens::T_EQUAL                    => 'processAssignation',
             $this->phptokens::T_PLUS_EQUAL               => 'processAssignation',
             $this->phptokens::T_AND_EQUAL                => 'processAssignation',
@@ -671,12 +673,9 @@ class Load extends Tasks {
             if (is_array($t)) {
                 if ($t[0] === $this->phptokens::T_WHITESPACE) {
                     $line += substr_count($t[1], "\n");
-                } elseif (in_array($t[0], array($this->phptokens::T_COMMENT,
-                                                $this->phptokens::T_DOC_COMMENT,
-                                                ), STRICT_COMPARISON)) {
+                } elseif ($t[0] === $this->phptokens::T_COMMENT) {
                     $line += substr_count($t[1], "\n");
                     $comments += substr_count($t[1], "\n");
-                    continue;
                 } else {
                     $line = $t[2];
                     $this->tokens[] = $t;
@@ -1156,11 +1155,10 @@ class Load extends Tasks {
 
     private function processFn() {
         $current = $this->id;
-        
-        $atom = 'Arrowfunction';
+
         ++$this->id;
+        $atom     = 'Arrowfunction';
         $fn       = $this->processParameters($atom);
-        $static = $this->setOptions($fn);
 
         // Process return type
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
@@ -1192,8 +1190,8 @@ class Load extends Tasks {
 
         $this->addLink($fn, $block, 'BLOCK');
 
-        $fn->token      = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = (!empty($static) ? "$static[0] " : '' ) . $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
+        $fn->token    = $this->getToken($this->tokens[$current][0]);
+        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
 
         $this->pushExpression($fn);
         $this->checkExpression();
@@ -1273,15 +1271,13 @@ class Load extends Tasks {
             $function->aliased    = self::NOT_ALIASED;
 
             // closure may be static
-            $fullcode = $this->setOptions($function);
-            if (isset($fullcode[0]) && strtolower($fullcode[0]) === 'static') {
+            if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
                 $this->currentClassTrait[] = '';
             }
         } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $function->fullnspath = end($this->currentClassTrait)->fullnspath . '::' . mb_strtolower($name->code);
             $function->aliased    = self::NOT_ALIASED;
 
-            $fullcode = $this->setOptions($function);
             if (empty($function->visibility)) {
                 $function->visibility = 'none';
             }
@@ -1498,7 +1494,7 @@ class Load extends Tasks {
                 ++$this->id;
                 continue;
             }
-            
+
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
                 ++$this->id;
                 $cpm = $this->processPrivate();
@@ -1575,10 +1571,14 @@ class Load extends Tasks {
 
                 continue;
             }
-            
-            $cpm = $this->processNext();
-            $this->popExpression();
-            
+
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
+                $cpm = $this->processPhpdoc();
+            } else {
+                $cpm = $this->processNext();
+                $this->popExpression();
+            }
+
             $cpm->rank = ++$rank;
             if ($cpm->atom === 'Usetrait') {
                 $link = 'USE';
@@ -1645,9 +1645,6 @@ class Load extends Tasks {
             $class->aliased    = self::NOT_ALIASED;
             $this->calls->addDefinition('class', $class->fullnspath, $class);
         }
-
-        // Should work on Abstract and Final only
-        $fullcode = $this->setOptions($class);
 
         $this->currentClassTrait[] = $class;
 
@@ -2326,7 +2323,6 @@ class Load extends Tasks {
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
-        $options = $this->setOptions($const);
         if (empty($const->visibility)) {
             $const->visibility = 'none';
         }
@@ -2382,88 +2378,104 @@ class Load extends Tasks {
         return $this->processFCOA($const);
     }
 
-    private function processOptions($atom) {
-        $this->optionsTokens[$atom] = $this->tokens[$this->id][1];
-        return $this->optionsTokens[$atom];
-    }
-
     private function processAbstract() {
-        return $this->processOptions('Abstract');
+        $abstract = $this->tokens[$this->id][1];
+
+        $next = $this->processNext();
+        $this->popExpression();
+
+        $next->abstract = 1;
+        $next->fullcode = "$abstract $next->fullcode";
+        return $next;
     }
 
     private function processFinal() {
-        return $this->processOptions('Final');
+        $final = $this->tokens[$this->id][1];
+
+        $next = $this->processNext();
+
+        $next->final    = 1;
+        $next->fullcode = "$final $next->fullcode";
+        return $next;
     }
 
     private function processVar() {
-        $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
-
+        $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
+        $this->popExpression();
 
         if (!empty($typehint)) {
             $this->addLink($ppp, $typehint, 'TYPEHINT');
         }
 
         $ppp->visibility = 'none';
+        $ppp->fullcode   = "$visibility $ppp->fullcode";
         return $ppp;
     }
 
     private function processPublic() {
-        $public = $this->processOptions('Public');
-
+        $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            $ppp = $this->processSGVariable('Ppp');
-
-            if (!empty($typehint)) {
-                $this->addLink($ppp, $typehint, 'TYPEHINT');
-            }
-
-            $this->popExpression();
-            return $ppp;
-        } else {
-            return $public;
-        }
-    }
-
-    private function processProtected() {
-        $protected = $this->processOptions('Protected');
-
-        $typehint = $this->processTypehint();
-
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            $ppp = $this->processSGVariable('Ppp');
-
-            if (!empty($typehint)) {
-                $this->addLink($ppp, $typehint, 'TYPEHINT');
-            }
-
-            $this->popExpression();
-            return $ppp;
-        } else {
-            return $protected;
-        }
-    }
-
-    private function processPrivate() {
-        $private = $this->processOptions('Private');
-
-        $typehint = $this->processTypehint();
-        
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            $ppp = $this->processSGVariable('Ppp');
+            $next = $this->processSGVariable('Ppp');
             $this->popExpression();
             
             if (!empty($typehint)) {
-                $this->addLink($ppp, $typehint, 'TYPEHINT');
+                $this->addLink($next, $typehint, 'TYPEHINT');
             }
-            return $ppp;
         } else {
-            return $private;
+            $next = $this->processNext();
+            $this->popExpression();
         }
+        
+        $next->visibility = 'public';
+        $next->fullcode   = "$visibility $next->fullcode";
+        return $next;
+    }
+
+    private function processProtected() {
+        $visibility = $this->tokens[$this->id][1];
+        $typehint = $this->processTypehint();
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+            $next = $this->processSGVariable('Ppp');
+            $this->popExpression();
+            
+            if (!empty($typehint)) {
+                $this->addLink($next, $typehint, 'TYPEHINT');
+            }
+        } else {
+            $next = $this->processNext();
+            $this->popExpression();
+        }
+        
+        $next->visibility = 'protected';
+        $next->fullcode   = "$visibility $next->fullcode";
+        return $next;
+    }
+
+    private function processPrivate() {
+        $visibility = $this->tokens[$this->id][1];
+        $typehint = $this->processTypehint();
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+            $next = $this->processSGVariable('Ppp');
+            $this->popExpression();
+            
+            if (!empty($typehint)) {
+                $this->addLink($next, $typehint, 'TYPEHINT');
+            }
+        } else {
+            $next = $this->processNext();
+            $this->popExpression();
+        }
+        
+        $next->visibility = 'private';
+        $next->fullcode   = "$visibility $next->fullcode";
+        return $next;
     }
     
     private function processDefineConstant($namecall) {
@@ -2835,12 +2847,12 @@ class Load extends Tasks {
          }
          
          if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                                   $this->phptokens::T_QUESTION,
-                                                                   $this->phptokens::T_STRING,
-                                                                   $this->phptokens::T_NAMESPACE,
-                                                                   ),
+                                                             $this->phptokens::T_QUESTION,
+                                                             $this->phptokens::T_STRING,
+                                                             $this->phptokens::T_NAMESPACE,
+                                                             ),
                             STRICT_COMPARISON)) {
-            $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
+            $option = $this->tokens[$this->id][1];
 
             $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
@@ -2859,17 +2871,19 @@ class Load extends Tasks {
             if (empty($static->visibility)) {
                 $static->visibility = 'none';
             }
+            $static->static = 1;
+            $static->fullcode = "$option $static->fullcode";
 
             $this->addLink($static, $typehint, 'TYPEHINT');
 
             return $static;
         }
-        
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
                 !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
                 // something like public static
-                $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
+                $option = $this->tokens[$this->id][1];
 
                 $ppp = $this->processSGVariable('Ppp');
 
@@ -2877,6 +2891,9 @@ class Load extends Tasks {
                     $ppp->visibility = 'none';
                 }
                 $this->popExpression();
+
+                $static->static = 1;
+                $static->fullcode = "$option $static->fullcode";
 
                 return $ppp;
             } else {
@@ -2899,8 +2916,15 @@ class Load extends Tasks {
             $this->pushExpression($name);
             return $name;
         }
-        
-        return $this->processOptions('Static');
+
+        $static = $this->tokens[$this->id][1];
+
+        $next = $this->processNext();
+        $this->popExpression();
+
+        $next->static   = 1;
+        $next->fullcode = "$static $next->fullcode";
+        return $next;
     }
 
     private function processSGVariable($atom) {
@@ -2917,7 +2941,6 @@ class Load extends Tasks {
             $link = 'PPP';
             $atom = 'Propertydefinition';
 
-            $fullcodePrefix = $this->setOptions($static);
             if (!isset($static->visibility)) {
                 $static->visibility = 'none';
             }
@@ -4804,6 +4827,43 @@ class Load extends Tasks {
         return $operator;
     }
 
+    private function processPhpdoc() {
+        while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
+            ++$this->id;
+        };
+
+        $phpDoc = $this->addAtom('Phpdoc');
+        $phpDoc->code     = $this->tokens[$this->id][1];
+        $phpDoc->fullcode = $this->tokens[$this->id][1];
+        $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
+
+        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+        $docblock = $factory->create($phpDoc->fullcode);
+//        print (string) $docblock->getDescription().PHP_EOL;
+
+        $next = $this->processNext();
+
+        if (isset($next->atom) && 
+            in_array($next->atom, 
+                     array('Class', 
+                           'Classanonymous',
+                           'Trait',
+                           'Interface',
+                           'Method',
+                           'Magicmethod',
+                           'Const',
+                           'Namespace',
+                           'Ppp',
+                           'Function',
+                           'Defineconstant',
+                           ), 
+                     STRICT_COMPARISON)) {
+            $this->addLink($next, $phpDoc, 'PHPDOC');
+        }
+
+        return $next;
+    }
+
     private function processYield() {
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                             $this->phptokens::T_CLOSE_BRACKET,
@@ -6139,28 +6199,7 @@ class Load extends Tasks {
         ++$anonymous;
         return "$type@$anonymous";
     }
-    
-    private function setOptions($atom) {
-        $fullcode = array();
 
-        foreach($this->optionsTokens as $name => $option) {
-            $fullcode[] = $option;
-            if (in_array($name, array('Public', 'Protected', 'Private', 'Var'), STRICT_COMPARISON)) {
-                $atom->visibility = strtolower($option);
-            } elseif (in_array($name, array('Final', 'Static', 'Abstract'), STRICT_COMPARISON)) {
-                $link = strtolower($name);
-                $atom->{$link} = 1;
-            } elseif ($name === 'Typehint') {
-                //Nothing, just
-            } else {
-                throw new LoadError("\nUnknown option name : $name\n");
-            }
-        }
-        $this->optionsTokens = array();
-        
-        return $fullcode;
-    }
-    
     private function finishWithAlternative($isColon) {
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             ++$this->id; // Skip endforeach
