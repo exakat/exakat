@@ -2838,7 +2838,7 @@ class Load extends Tasks {
         $static = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
-        $this->popExpression();
+//        $this->popExpression();
 
         $next->static   = 1;
         $next->fullcode = "$static $next->fullcode";
