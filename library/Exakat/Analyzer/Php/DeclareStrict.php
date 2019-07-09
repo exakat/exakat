@@ -46,9 +46,12 @@ GREMLIN;
              ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("DECLARE").has("fullcode", "strict_types = 1"), filter{ true; })')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
+        $types = $this->rawQuery()->toArray();
+
         if (empty($types)) {
             return;
         }
+
         $types = $types[0];
 
         $store = array();
