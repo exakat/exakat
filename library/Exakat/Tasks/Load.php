@@ -1355,11 +1355,9 @@ class Load extends Tasks {
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
 
-        if ($function->atom === 'Closure' &&
-            isset($fullcode[0]) &&
-            strtolower($fullcode[0]) === 'static') {
-            array_pop($this->currentClassTrait);
-        }
+       if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
+           array_pop($this->currentClassTrait);
+       }
 
         $this->contexts->exitContext(Context::CONTEXT_CLASS);
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
