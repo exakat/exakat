@@ -1355,7 +1355,8 @@ class Load extends Tasks {
                                 (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
                                 $blockFullcode;
 
-       if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
+       if ($function->atom === 'Closure' &&
+           $this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
            array_pop($this->currentClassTrait);
        }
 
