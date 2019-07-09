@@ -21,14 +21,6 @@ Label : PROJECT
                 15
                 Label : DEFINITION
                   10
-              Label : METHOD
-                17
-                Label : ARGUMENT
-                  19
-                Label : BLOCK
-                  19
-                Label : NAME
-                  17
               Label : NAME
                 13
           Label : NAME

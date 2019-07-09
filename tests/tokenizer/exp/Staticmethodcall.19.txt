@@ -11,30 +11,6 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : MAGICMETHOD
-            7
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                12
-                Label : ARGUMENT
-                  9
-              Label : EXPRESSION
-                12
-                Label : ARGUMENT
-                  13
-            Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
-            Label : ARGUMENT
-              10
-              Label : NAME
-                10
-            Label : NAME
-              7
           Label : NAME
             6
         Label : EXPRESSION

@@ -255,6 +255,18 @@ Label : PROJECT
             25
             Label : PPP
               28
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  27
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  27
         Label : EXPRESSION
           29
           Label : DEFINITION
@@ -365,3 +377,15 @@ Label : PROJECT
             32
             Label : PPP
               28
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  34
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  8
+                Label : MEMBER
+                  34

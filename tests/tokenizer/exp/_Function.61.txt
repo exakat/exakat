@@ -15,31 +15,5 @@ Label : PROJECT
               9
               Label : NAME
                 10
-              Label : METHOD
-                12
-                Label : ARGUMENT
-                  15
-                  Label : NAME
-                    15
-                  Label : TYPEHINT
-                    13
-                Label : BLOCK
-                  16
-                Label : NAME
-                  12
-              Label : METHOD
-                18
-                Label : BLOCK
-                  16
-                Label : ARGUMENT
-                  19
-                  Label : NAME
-                    19
-                Label : ARGUMENT
-                  20
-                  Label : NAME
-                    20
-                Label : NAME
-                  18
           Label : NAME
             5

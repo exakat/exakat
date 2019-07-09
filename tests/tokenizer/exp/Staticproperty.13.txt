@@ -31,48 +31,6 @@ Label : PROJECT
             13
           Label : EXTENDS
             7
-          Label : METHOD
-            15
-            Label : ARGUMENT
-              16
-            Label : BLOCK
-              18
-              Label : EXPRESSION
-                19
-                Label : ARGUMENT
-                  21
-                  Label : LEFT
-                    20
-                    Label : CLASS
-                      8
-                    Label : MEMBER
-                      9
-                  Label : RIGHT
-                    21
-                    Label : LEFT
-                      20
-                      Label : CLASS
-                        8
-                      Label : MEMBER
-                        22
-                    Label : RIGHT
-                      20
-                      Label : CLASS
-                        13
-                      Label : MEMBER
-                        22
-            Label : DEFINITION
-              20
-              Label : CLASS
-                28
-              Label : METHOD
-                15
-                Label : ARGUMENT
-                  16
-                Label : NAME
-                  15
-            Label : NAME
-              15
           Label : NAME
             13
           Label : PPP

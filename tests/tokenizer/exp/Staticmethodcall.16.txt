@@ -34,25 +34,9 @@ Label : PROJECT
         Label : EXPRESSION
           9
           Label : DEFINITION
-            6
-          Label : DEFINITION
             24
-          Label : METHOD
-            10
-            Label : ARGUMENT
-              11
-            Label : BLOCK
-              13
-              Label : EXPRESSION
-                14
-                Label : ARGUMENT
-                  17
-                  Label : CONCAT
-                    15
-                  Label : CONCAT
-                    18
-            Label : NAME
-              10
+          Label : DEFINITION
+            6
           Label : NAME
             6
         Label : EXPRESSION

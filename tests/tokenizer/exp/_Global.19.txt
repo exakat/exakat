@@ -56,6 +56,12 @@ Label : PROJECT
               Label : RIGHT
                 15
           Label : DEFINITION
+            14
+            Label : DEFAULT
+              15
+            Label : DEFINITION
+              14
+          Label : DEFINITION, DEFINITION
             9
             Label : DEFAULT
               11
@@ -65,11 +71,5 @@ Label : PROJECT
               9
             Label : DEFINITION
               9
-          Label : DEFINITION
-            14
-            Label : DEFAULT
-              15
-            Label : DEFINITION
-              14
           Label : NAME
             5

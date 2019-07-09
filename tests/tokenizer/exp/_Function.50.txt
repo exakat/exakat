@@ -9,33 +9,9 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              9
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                12
-                Label : RETURN
-                  13
-            Label : NAME
-              8
           Label : NAME
             6
         Label : EXPRESSION
           5
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              9
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                12
-                Label : RETURN
-                  13
-            Label : NAME
-              8
           Label : NAME
             14

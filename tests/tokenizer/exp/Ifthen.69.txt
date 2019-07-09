@@ -161,8 +161,6 @@ Label : PROJECT
                     5
                     Label : CONDITION
                       65
-                      Label : NAME
-                        65
                       Label : ARGUMENT
                         24
                         Label : INDEX
@@ -179,6 +177,8 @@ Label : PROJECT
                           73
                         Label : OBJECT
                           72
+                      Label : NAME
+                        65
                     Label : THEN
                       3
                       Label : EXPRESSION
@@ -207,8 +207,6 @@ Label : PROJECT
                       19
                       Label : NOT
                         46
-                        Label : NAME
-                          46
                         Label : ARGUMENT
                           24
                           Label : INDEX
@@ -225,6 +223,8 @@ Label : PROJECT
                             56
                           Label : OBJECT
                             54
+                        Label : NAME
+                          46
                     Label : THEN
                       3
                       Label : EXPRESSION
@@ -253,8 +253,6 @@ Label : PROJECT
                     19
                     Label : NOT
                       20
-                      Label : NAME
-                        20
                       Label : ARGUMENT
                         24
                         Label : INDEX
@@ -271,6 +269,8 @@ Label : PROJECT
                           30
                         Label : OBJECT
                           29
+                      Label : NAME
+                        20
                   Label : THEN
                     3
                     Label : EXPRESSION

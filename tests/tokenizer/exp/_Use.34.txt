@@ -59,7 +59,7 @@ Label : PROJECT
                 36
               Label : USE
                 38
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   38
                 Label : FUNCTION
                   14
@@ -123,7 +123,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   40
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     40
           Label : NAME
             5
@@ -169,7 +169,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   40
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     40
               Label : MAGICMETHOD
                 70
@@ -189,7 +189,7 @@ Label : PROJECT
                       5
                     Label : NAME
                       40
-                      Label : DEFINITION
+                      Label : DEFINITION, DEFINITION
                         40
                 Label : NAME
                   70

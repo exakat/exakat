@@ -10,113 +10,11 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            6
-          Label : DEFINITION
             8
           Label : DEFINITION
             6
-          Label : METHOD
-            12
-            Label : ARGUMENT
-              14
-            Label : BLOCK
-              16
-              Label : EXPRESSION
-                17
-                Label : LEFT
-                  9
-                Label : RIGHT
-                  18
-              Label : EXPRESSION
-                17
-                Label : LEFT
-                  20
-                Label : RIGHT
-                  21
-              Label : EXPRESSION
-                23
-                Label : CLASS
-                  8
-                Label : METHOD
-                  9
-                  Label : ARGUMENT
-                    20
-                  Label : NAME
-                    9
-              Label : EXPRESSION
-                23
-                Label : CLASS
-                  6
-                Label : METHOD
-                  9
-                  Label : ARGUMENT
-                    20
-                  Label : NAME
-                    9
-            Label : DEFINITION
-              9
-              Label : DEFAULT
-                18
-              Label : DEFINITION
-                9
-            Label : DEFINITION
-              20
-              Label : DEFAULT
-                21
-              Label : DEFINITION
-                20
-              Label : DEFINITION
-                20
-              Label : DEFINITION
-                20
-            Label : DEFINITION
-              23
-              Label : CLASS
-                6
-              Label : METHOD
-                12
-                Label : ARGUMENT
-                  14
-                Label : NAME
-                  12
-            Label : NAME
-              12
-          Label : METHOD
-            24
-            Label : ARGUMENT
-              26
-              Label : NAME
-                26
-            Label : BLOCK
-              16
-              Label : EXPRESSION
-                27
-                Label : ARGUMENT
-                  30
-                  Label : CONCAT
-                    28
-                  Label : CONCAT
-                    31
-            Label : NAME
-              24
-          Label : METHOD
-            33
-            Label : ARGUMENT
-              26
-              Label : NAME
-                26
-            Label : BLOCK
-              16
-              Label : EXPRESSION
-                27
-                Label : ARGUMENT
-                  30
-                  Label : CONCAT
-                    28
-                  Label : CONCAT
-                    31
-            Label : NAME
-              33
+          Label : DEFINITION
+            6
           Label : NAME
             6
           Label : PPP

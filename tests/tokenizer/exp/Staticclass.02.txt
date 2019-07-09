@@ -54,8 +54,6 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                30
-              Label : DEFINITION
                 20
               Label : NAME
                 20
@@ -67,32 +65,6 @@ Label : PROJECT
                 29
               Label : EXTENDS
                 20
-              Label : METHOD
-                19
-                Label : ARGUMENT
-                  24
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    26
-                    Label : ARGUMENT
-                      28
-                      Label : CLASS
-                        27
-                  Label : EXPRESSION
-                    26
-                    Label : ARGUMENT
-                      28
-                      Label : CLASS
-                        29
-                  Label : EXPRESSION
-                    26
-                    Label : ARGUMENT
-                      28
-                      Label : CLASS
-                        30
-                Label : NAME
-                  19
               Label : NAME
                 22
             Label : EXPRESSION

@@ -4,15 +4,39 @@ Label : GLOBAL
   Label : DEFINITION
     25
     Label : DEFAULT
-      23
-      Label : CLASS
-        6
-      Label : METHOD
+      22
+      Label : LEFT
         16
         Label : ARGUMENT
           12
+        Label : BLOCK
+          14
+          Label : EXPRESSION
+            15
+            Label : RETURN
+              10
+        Label : DEFINITION
+          23
+          Label : CLASS
+            6
+          Label : METHOD
+            16
+            Label : ARGUMENT
+              12
+            Label : NAME
+              16
         Label : NAME
           16
+      Label : RIGHT
+        23
+        Label : CLASS
+          6
+        Label : METHOD
+          16
+          Label : ARGUMENT
+            12
+          Label : NAME
+            16
     Label : DEFINITION
       25
 Label : GLOBAL
@@ -34,20 +58,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    25
-    Label : DEFAULT
-      23
-      Label : CLASS
-        6
-      Label : METHOD
-        16
-        Label : ARGUMENT
-          12
-        Label : NAME
-          16
-    Label : DEFINITION
-      25
-  Label : DEFINITION
     17
     Label : DEFAULT
       20
@@ -61,6 +71,44 @@ Label : PROJECT
       17
     Label : DEFINITION
       17
+  Label : DEFINITION
+    25
+    Label : DEFAULT
+      22
+      Label : LEFT
+        16
+        Label : ARGUMENT
+          12
+        Label : BLOCK
+          14
+          Label : EXPRESSION
+            15
+            Label : RETURN
+              10
+        Label : DEFINITION
+          23
+          Label : CLASS
+            6
+          Label : METHOD
+            16
+            Label : ARGUMENT
+              12
+            Label : NAME
+              16
+        Label : NAME
+          16
+      Label : RIGHT
+        23
+        Label : CLASS
+          6
+        Label : METHOD
+          16
+          Label : ARGUMENT
+            12
+          Label : NAME
+            16
+    Label : DEFINITION
+      25
   Label : FILE
     3
     Label : EXPRESSION
@@ -115,28 +163,6 @@ Label : PROJECT
                 17
             Label : NAME
               11
-          Label : METHOD
-            16
-            Label : ARGUMENT
-              12
-            Label : BLOCK
-              14
-              Label : EXPRESSION
-                15
-                Label : RETURN
-                  10
-            Label : DEFINITION
-              23
-              Label : CLASS
-                6
-              Label : METHOD
-                16
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  16
-            Label : NAME
-              16
           Label : NAME
             6
         Label : EXPRESSION
@@ -176,12 +202,36 @@ Label : PROJECT
           Label : LEFT
             25
           Label : RIGHT
-            23
-            Label : CLASS
-              6
-            Label : METHOD
+            22
+            Label : LEFT
               16
               Label : ARGUMENT
                 12
+              Label : BLOCK
+                14
+                Label : EXPRESSION
+                  15
+                  Label : RETURN
+                    10
+              Label : DEFINITION
+                23
+                Label : CLASS
+                  6
+                Label : METHOD
+                  16
+                  Label : ARGUMENT
+                    12
+                  Label : NAME
+                    16
               Label : NAME
                 16
+            Label : RIGHT
+              23
+              Label : CLASS
+                6
+              Label : METHOD
+                16
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  16

@@ -13,81 +13,15 @@ Label : PROJECT
             15
           Label : DEFINITION
             15
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-              Label : NAME
-                10
-            Label : ARGUMENT
-              12
-              Label : NAME
-                12
-              Label : TYPEHINT
-                11
-            Label : BLOCK
-              13
-              Label : EXPRESSION
-                14
-                Label : CONDITION
-                  25
-                  Label : LEFT
-                    23
-                    Label : CLASS
-                      24
-                    Label : VARIABLE
-                      20
-                      Label : MEMBER
-                        21
-                      Label : OBJECT
-                        20
-                        Label : METHOD
-                          16
-                          Label : ARGUMENT
-                            18
-                          Label : NAME
-                            16
-                        Label : OBJECT
-                          15
-                  Label : RIGHT
-                    26
-                Label : THEN
-                  13
-                  Label : EXPRESSION
-                    28
-                    Label : RETURN
-                      20
-                      Label : METHOD
-                        31
-                        Label : NAME
-                          31
-                        Label : ARGUMENT
-                          33
-                        Label : ARGUMENT
-                          34
-                      Label : OBJECT
-                        20
-                        Label : MEMBER
-                          29
-                        Label : OBJECT
-                          15
-            Label : DEFINITION
-              24
-              Label : DEFINITION
-                24
-            Label : DEFINITION
-              33
-              Label : DEFINITION
-                33
-            Label : DEFINITION
-              34
-              Label : DEFINITION
-                34
-            Label : NAME
-              8
-            Label : RETURNED
-              33
-            Label : RETURNED
-              34
           Label : NAME
             6
+          Label : PPP
+            29
+            Label : PPP
+              35
+              Label : DEFINITION
+                20
+                Label : MEMBER
+                  29
+                Label : OBJECT
+                  15

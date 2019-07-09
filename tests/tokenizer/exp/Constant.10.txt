@@ -26,13 +26,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     10
     Label : DEFINITION
@@ -51,8 +51,6 @@ Label : PROJECT
           16
           Label : METHOD
             7
-            Label : NAME
-              7
             Label : ARGUMENT
               8
             Label : ARGUMENT
@@ -63,5 +61,7 @@ Label : PROJECT
                 14
               Label : THEN
                 13
+            Label : NAME
+              7
           Label : OBJECT
             5

@@ -9,43 +9,13 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : MAGICMETHOD
-            7
-            Label : ARGUMENT
-              8
-            Label : BLOCK
-              10
-              Label : EXPRESSION
-                8
-            Label : NAME
-              7
           Label : NAME
             6
         Label : EXPRESSION
           5
-          Label : MAGICMETHOD
-            7
-            Label : ARGUMENT
-              8
-            Label : BLOCK
-              10
-              Label : EXPRESSION
-                8
-            Label : NAME
-              7
           Label : NAME
             11
         Label : EXPRESSION
           5
-          Label : MAGICMETHOD
-            7
-            Label : ARGUMENT
-              8
-            Label : BLOCK
-              10
-              Label : EXPRESSION
-                8
-            Label : NAME
-              7
           Label : NAME
             12

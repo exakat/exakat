@@ -20,13 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
     8
     Label : DEFINITION
       8
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -51,28 +51,6 @@ Label : PROJECT
                 12
               Label : DEFINITION
                 16
-              Label : MAGICMETHOD
-                14
-                Label : ARGUMENT
-                  8
-                  Label : NAME
-                    8
-                    Label : DEFINITION
-                      8
-                Label : BLOCK
-                  15
-                  Label : EXPRESSION
-                    18
-                    Label : LEFT
-                      17
-                      Label : MEMBER
-                        9
-                      Label : OBJECT
-                        16
-                    Label : RIGHT
-                      8
-                Label : NAME
-                  14
               Label : PPP
                 9
                 Label : PPP

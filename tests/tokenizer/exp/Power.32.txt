@@ -9,43 +9,7 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : CONST
-            8
-            Label : CONST
-              8
-              Label : DEFINITION
-                21
-                Label : CLASS
-                  20
-                Label : CONSTANT
-                  9
-              Label : NAME
-                9
-              Label : VALUE
-                12
-                Label : LEFT
-                  11
-                Label : RIGHT
-                  13
           Label : DEFINITION
             20
-          Label : METHOD
-            14
-            Label : ARGUMENT
-              15
-            Label : BLOCK
-              17
-              Label : EXPRESSION
-                19
-                Label : LEFT
-                  18
-                Label : RIGHT
-                  21
-                  Label : CLASS
-                    20
-                  Label : CONSTANT
-                    9
-            Label : NAME
-              14
           Label : NAME
             6

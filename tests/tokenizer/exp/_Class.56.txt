@@ -11,31 +11,3 @@ Label : PROJECT
           5
           Label : NAME
             6
-          Label : METHOD
-            7
-            Label : ARGUMENT
-              8
-            Label : BLOCK
-              10
-              Label : EXPRESSION
-                12
-                Label : LEFT
-                  11
-                Label : RIGHT
-                  13
-            Label : DEFINITION
-              11
-              Label : DEFAULT
-                13
-              Label : DEFINITION
-                11
-            Label : NAME
-              7
-          Label : METHOD
-            14
-            Label : ARGUMENT
-              8
-            Label : BLOCK
-              8
-            Label : NAME
-              14

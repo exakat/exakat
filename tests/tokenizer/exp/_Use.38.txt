@@ -21,42 +21,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  14
-            Label : NAME
-              8
-          Label : METHOD
-            15
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  17
-            Label : DEFINITION
-              26
-              Label : CLASS
-                6
-              Label : METHOD
-                15
-            Label : DEFINITION
-              26
-              Label : CLASS
-                6
-              Label : METHOD
-                15
-            Label : NAME
-              15
           Label : NAME
             6
         Label : EXPRESSION
@@ -75,48 +39,6 @@ Label : PROJECT
             18
           Label : DEFINITION
             18
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  20
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                8
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                8
-            Label : NAME
-              8
-          Label : METHOD
-            15
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  21
-            Label : DEFINITION
-              26
-              Label : CLASS
-                18
-              Label : METHOD
-                15
-            Label : NAME
-              15
           Label : NAME
             18
         Label : EXPRESSION

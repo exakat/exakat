@@ -71,7 +71,7 @@ Label : PROJECT
                 10
               Label : DEFINITION
                 10
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   10
               Label : NAME
                 10
@@ -89,7 +89,7 @@ Label : PROJECT
                 23
               Label : DEFINITION
                 14
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   23
               Label : NAME
                 14
@@ -107,7 +107,7 @@ Label : PROJECT
                 15
               Label : DEFINITION
                 16
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   26
                   Label : AS
                     16
@@ -149,7 +149,7 @@ Label : PROJECT
                 24
               Label : DEFINITION
                 18
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   24
               Label : NAME
                 18
@@ -173,7 +173,7 @@ Label : PROJECT
                 25
               Label : DEFINITION
                 20
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   25
               Label : NAME
                 20
@@ -237,7 +237,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   10
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     10
                 Label : VARIABLE
                   34
@@ -249,7 +249,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   14
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     23
                 Label : VARIABLE
                   34
@@ -261,7 +261,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   18
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     24
                 Label : VARIABLE
                   34
@@ -273,7 +273,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   20
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     25
                 Label : VARIABLE
                   34
@@ -285,7 +285,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   16
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     26
                     Label : AS
                       16
@@ -321,7 +321,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   28
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     26
                     Label : AS
                       28
@@ -337,7 +337,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   30
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     26
                     Label : AS
                       30
@@ -353,7 +353,7 @@ Label : PROJECT
                 35
                 Label : CLASS
                   32
-                  Label : DEFINITION
+                  Label : DEFINITION, DEFINITION
                     26
                     Label : AS
                       32
