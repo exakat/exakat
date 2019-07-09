@@ -4,7 +4,7 @@ Label : GLOBAL
   Label : DEFINITION
     9
     Label : DEFAULT
-      46
+      47
       Label : NEW
         19
         Label : ARGUMENT
@@ -20,7 +20,7 @@ Label : PROJECT
   Label : DEFINITION
     9
     Label : DEFAULT
-      46
+      47
       Label : NEW
         19
         Label : ARGUMENT
@@ -85,114 +85,24 @@ Label : PROJECT
               17
             Label : NAME
               19
-          Label : METHOD
-            21
-            Label : ARGUMENT
-              11
-              Label : NAME
-                11
-            Label : ARGUMENT
-              13
-              Label : NAME
-                13
-              Label : TYPEHINT
-                23
-            Label : ARGUMENT
-              25
-              Label : NAME
-                25
-                Label : DEFINITION
-                  25
-              Label : TYPEHINT
-                24
-            Label : ARGUMENT
-              28
-              Label : NAME
-                28
-                Label : DEFINITION
-                  28
-              Label : TYPEHINT
-                26
-            Label : BLOCK
-              16
-              Label : EXPRESSION
-                29
-                Label : CONDITION
-                  37
-                  Label : LEFT
-                    36
-                    Label : CLASS
-                      25
-                    Label : VARIABLE
-                      33
-                      Label : MEMBER
-                        34
-                      Label : OBJECT
-                        33
-                        Label : METHOD
-                          31
-                          Label : ARGUMENT
-                            17
-                          Label : NAME
-                            31
-                        Label : OBJECT
-                          30
-                  Label : RIGHT
-                    38
-                Label : THEN
-                  16
-                  Label : EXPRESSION
-                    40
-                    Label : RETURN
-                      33
-                      Label : METHOD
-                        43
-                        Label : NAME
-                          43
-                        Label : ARGUMENT
-                          28
-                        Label : ARGUMENT
-                          15
-                      Label : OBJECT
-                        33
-                        Label : MEMBER
-                          41
-                        Label : OBJECT
-                          30
-            Label : DEFINITION
-              15
-              Label : DEFINITION
-                15
-            Label : DEFINITION
-              33
-              Label : METHOD
-                21
-                Label : ARGUMENT
-                  47
-                Label : ARGUMENT
-                  48
-                Label : ARGUMENT
-                  49
-                Label : ARGUMENT
-                  50
-                Label : NAME
-                  21
-              Label : OBJECT
-                9
-            Label : NAME
-              21
-            Label : RETURNED
-              28
-            Label : RETURNED
-              15
           Label : NAME
             19
+          Label : PPP
+            41
+            Label : PPP
+              45
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  41
+                Label : OBJECT
+                  30
         Label : EXPRESSION
-          45
+          46
           Label : LEFT
             9
           Label : RIGHT
-            46
+            47
             Label : NEW
               19
               Label : ARGUMENT
@@ -204,13 +114,13 @@ Label : PROJECT
           Label : METHOD
             21
             Label : ARGUMENT
-              47
-            Label : ARGUMENT
               48
             Label : ARGUMENT
               49
             Label : ARGUMENT
               50
+            Label : ARGUMENT
+              51
             Label : NAME
               21
           Label : OBJECT

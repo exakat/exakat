@@ -15,70 +15,24 @@ Label : PROJECT
               9
               Label : DEFINITION
                 10
-              Label : DEFINITION
-                10
                 Label : DEFINITION
                   10
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    10
-                    Label : DEFINITION
-                      10
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
+              Label : DEFINITION
+                10
               Label : NAME
                 10
             Label : EXPRESSION
               9
-              Label : DEFINITION
-                21
               Label : DEFINITION
                 12
                 Label : DEFINITION
                   21
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    12
-                    Label : DEFINITION
-                      21
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
+              Label : DEFINITION
+                21
               Label : NAME
                 12
             Label : EXPRESSION
               9
-              Label : DEFINITION
-                13
               Label : DEFINITION
                 14
                 Label : DEFINITION
@@ -87,68 +41,14 @@ Label : PROJECT
                     14
                   Label : NAME
                     13
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    14
-                    Label : DEFINITION
-                      24
-                      Label : AS
-                        14
-                      Label : NAME
-                        13
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    13
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
+              Label : DEFINITION
+                13
               Label : NAME
                 13
             Label : EXPRESSION
               9
               Label : DEFINITION
                 33
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    33
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
               Label : NAME
                 14
           Label : NAME
@@ -160,33 +60,11 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                22
-              Label : DEFINITION
                 16
                 Label : DEFINITION
                   22
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    16
-                    Label : DEFINITION
-                      22
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
+              Label : DEFINITION
+                22
               Label : NAME
                 16
           Label : NAME
@@ -198,33 +76,11 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                23
-              Label : DEFINITION
                 18
                 Label : DEFINITION
                   23
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  5
-                Label : BLOCK
-                  8
-                  Label : EXPRESSION
-                    5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    18
-                    Label : DEFINITION
-                      23
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : NAME
-                  11
+              Label : DEFINITION
+                23
               Label : NAME
                 18
           Label : NAME

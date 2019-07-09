@@ -21,13 +21,3 @@ Label : PROJECT
               6
               Label : NEW
                 7
-                Label : METHOD
-                  8
-                  Label : ARGUMENT
-                    9
-                  Label : BLOCK
-                    11
-                    Label : EXPRESSION
-                      9
-                  Label : NAME
-                    8

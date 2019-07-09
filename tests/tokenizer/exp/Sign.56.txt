@@ -5,8 +5,6 @@ Label : GLOBAL
     5
     Label : DEFAULT
       25
-      Label : NAME
-        25
       Label : ARGUMENT
         16
         Label : CONCAT
@@ -27,6 +25,8 @@ Label : GLOBAL
           17
       Label : ARGUMENT
         28
+      Label : NAME
+        25
     Label : DEFAULT
       21
       Label : ARGUMENT
@@ -125,8 +125,6 @@ Label : PROJECT
     5
     Label : DEFAULT
       25
-      Label : NAME
-        25
       Label : ARGUMENT
         16
         Label : CONCAT
@@ -147,6 +145,8 @@ Label : PROJECT
           17
       Label : ARGUMENT
         28
+      Label : NAME
+        25
     Label : DEFAULT
       21
       Label : ARGUMENT
@@ -315,8 +315,6 @@ Label : PROJECT
             5
           Label : RIGHT
             25
-            Label : NAME
-              25
             Label : ARGUMENT
               16
               Label : CONCAT
@@ -337,3 +335,5 @@ Label : PROJECT
                 17
             Label : ARGUMENT
               28
+            Label : NAME
+              25

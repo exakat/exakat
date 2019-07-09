@@ -55,32 +55,6 @@ Label : PROJECT
           5
           Label : DEFINITION
             11
-          Label : METHOD
-            9
-            Label : ARGUMENT
-              12
-            Label : BLOCK
-              14
-              Label : EXPRESSION
-                15
-                Label : RETURN
-                  16
-            Label : DEFINITION
-              21
-              Label : METHOD
-                9
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  9
-              Label : OBJECT
-                19
-                Label : CODE
-                  20
-                  Label : NEW
-                    11
-            Label : NAME
-              9
           Label : NAME
             11
         Label : EXPRESSION

@@ -27,28 +27,6 @@ Label : PROJECT
                 8
               Label : DEFINITION
                 12
-              Label : MAGICMETHOD
-                10
-                Label : ARGUMENT
-                  8
-                  Label : NAME
-                    8
-                    Label : DEFINITION
-                      8
-                Label : BLOCK
-                  11
-                  Label : EXPRESSION
-                    14
-                    Label : LEFT
-                      13
-                      Label : MEMBER
-                        9
-                      Label : OBJECT
-                        12
-                    Label : RIGHT
-                      8
-                Label : NAME
-                  10
               Label : PPP
                 9
                 Label : PPP

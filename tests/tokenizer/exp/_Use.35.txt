@@ -54,53 +54,11 @@ Label : PROJECT
         Label : EXPRESSION
           29
           Label : DEFINITION
-            35
-          Label : DEFINITION
             38
           Label : DEFINITION
+            35
+          Label : DEFINITION
             30
-          Label : METHOD
-            32
-            Label : ARGUMENT
-              23
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                34
-                Label : ARGUMENT
-                  37
-                  Label : CONCAT
-                    35
-                  Label : CONCAT
-                    41
-                    Label : METHOD
-                      39
-                      Label : ARGUMENT
-                        23
-                      Label : NAME
-                        39
-                    Label : OBJECT
-                      38
-            Label : NAME
-              32
-          Label : METHOD
-            39
-            Label : ARGUMENT
-              23
-            Label : BLOCK
-              23
-            Label : DEFINITION
-              41
-              Label : METHOD
-                39
-                Label : ARGUMENT
-                  23
-                Label : NAME
-                  39
-              Label : OBJECT
-                38
-            Label : NAME
-              39
           Label : NAME
             30
         Label : EXPRESSION
@@ -109,44 +67,6 @@ Label : PROJECT
             38
           Label : DEFINITION
             38
-          Label : METHOD
-            39
-            Label : ARGUMENT
-              23
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                47
-                Label : RETURN
-                  41
-                  Label : MEMBER
-                    46
-                  Label : OBJECT
-                    38
-            Label : NAME
-              39
-          Label : METHOD
-            48
-            Label : ARGUMENT
-              50
-              Label : NAME
-                50
-                Label : DEFINITION
-                  50
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                51
-                Label : LEFT
-                  41
-                  Label : MEMBER
-                    46
-                  Label : OBJECT
-                    38
-                Label : RIGHT
-                  50
-            Label : NAME
-              48
           Label : NAME
             42
           Label : PPP

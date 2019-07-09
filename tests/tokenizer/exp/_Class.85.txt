@@ -28,10 +28,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    22
-    Label : DEFINITION
-      22
-  Label : DEFINITION
     18
     Label : DEFAULT
       21
@@ -43,6 +39,10 @@ Label : PROJECT
           6
     Label : DEFINITION
       18
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -57,26 +57,6 @@ Label : PROJECT
               22
             Label : NAME
               6
-          Label : METHOD
-            15
-            Label : ARGUMENT
-              11
-            Label : BLOCK
-              16
-              Label : EXPRESSION
-                11
-            Label : DEFINITION
-              25
-              Label : METHOD
-                15
-                Label : ARGUMENT
-                  11
-                Label : NAME
-                  15
-              Label : OBJECT
-                18
-            Label : NAME
-              15
           Label : NAME
             6
           Label : PPP

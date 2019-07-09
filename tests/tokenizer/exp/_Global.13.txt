@@ -13,26 +13,6 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : METHOD
-            35
-            Label : ARGUMENT
-              36
-            Label : BLOCK
-              38
-              Label : EXPRESSION
-                39
-                Label : GLOBAL
-                  40
-              Label : EXPRESSION
-                7
-                Label : STATIC
-                  41
-            Label : DEFINITION
-              40
-            Label : DEFINITION
-              41
-            Label : NAME
-              35
           Label : NAME
             6
           Label : PPP

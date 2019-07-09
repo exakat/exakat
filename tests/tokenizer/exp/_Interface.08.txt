@@ -13,13 +13,5 @@ Label : PROJECT
             10
           Label : EXTENDS
             8
-          Label : METHOD
-            12
-            Label : ARGUMENT
-              14
-            Label : BLOCK
-              14
-            Label : NAME
-              12
           Label : NAME
             6

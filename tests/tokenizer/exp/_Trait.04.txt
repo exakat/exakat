@@ -49,38 +49,14 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  14
-            Label : NAME
-              8
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : DEFINITION
-            20
-          Label : DEFINITION
             16
-          Label : METHOD
-            18
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  20
-            Label : NAME
-              18
+          Label : DEFINITION
+            20
           Label : NAME
             16
         Label : EXPRESSION
@@ -91,28 +67,6 @@ Label : PROJECT
               10
             Label : NAME
               23
-          Label : METHOD
-            26
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  28
-            Label : DEFINITION
-              33
-              Label : METHOD
-                26
-                Label : ARGUMENT
-                  10
-                Label : NAME
-                  26
-              Label : OBJECT
-                29
-            Label : NAME
-              26
           Label : NAME
             23
           Label : USE

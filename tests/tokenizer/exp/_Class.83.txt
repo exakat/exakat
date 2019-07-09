@@ -28,6 +28,16 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    18
+    Label : DEFAULT
+      20
+      Label : NEW
+        6
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
+  Label : DEFINITION
     21
     Label : DEFAULT
       20
@@ -39,16 +49,6 @@ Label : PROJECT
       21
     Label : DEFINITION
       21
-  Label : DEFINITION
-    18
-    Label : DEFAULT
-      20
-      Label : NEW
-        6
-    Label : DEFINITION
-      18
-    Label : DEFINITION
-      18
   Label : FILE
     3
     Label : EXPRESSION
@@ -61,8 +61,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            13
           Label : NAME
             6
         Label : EXPRESSION
@@ -73,40 +71,6 @@ Label : PROJECT
             8
           Label : EXTENDS
             6
-          Label : METHOD
-            10
-            Label : BLOCK
-              15
-              Label : EXPRESSION
-                16
-                Label : ARGUMENT
-                  17
-            Label : ARGUMENT
-              12
-              Label : NAME
-                12
-              Label : TYPEHINT
-                11
-            Label : ARGUMENT
-              14
-              Label : NAME
-                14
-              Label : TYPEHINT
-                13
-            Label : DEFINITION
-              22
-              Label : METHOD
-                10
-                Label : NAME
-                  10
-                Label : ARGUMENT
-                  21
-                Label : ARGUMENT
-                  18
-              Label : OBJECT
-                21
-            Label : NAME
-              10
           Label : NAME
             8
         Label : EXPRESSION
@@ -129,11 +93,11 @@ Label : PROJECT
           22
           Label : METHOD
             10
-            Label : NAME
-              10
             Label : ARGUMENT
               21
             Label : ARGUMENT
               18
+            Label : NAME
+              10
           Label : OBJECT
             21

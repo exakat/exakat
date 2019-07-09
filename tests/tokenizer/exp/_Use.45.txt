@@ -11,18 +11,6 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              9
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                9
-            Label : DEFINITION
-              8
-            Label : NAME
-              8
           Label : NAME
             6
         Label : EXPRESSION

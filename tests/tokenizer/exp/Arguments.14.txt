@@ -19,8 +19,6 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : NAME
-            5
           Label : ARGUMENT
             6
           Label : ARGUMENT
@@ -37,3 +35,5 @@ Label : PROJECT
                   8
                 Label : OBJECT
                   7
+          Label : NAME
+            5

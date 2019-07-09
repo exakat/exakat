@@ -45,36 +45,12 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  14
-            Label : NAME
-              8
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : DEFINITION
             16
-          Label : METHOD
-            18
-            Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : ARGUMENT
-                  20
-            Label : NAME
-              18
           Label : NAME
             16
         Label : EXPRESSION
