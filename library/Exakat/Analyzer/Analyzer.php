@@ -1962,6 +1962,14 @@ GREMLIN;
         // No Exakat, no Analyzer, using / instead of \
         return $className;
     }
+    
+    protected function loadCode(string $path) {
+        if (file_exists($this->config->code_dir.$path)) {
+            return file_get_contents($this->config->code_dir.$path);
+        } else {
+            return '';
+        }
+    }
 
 }
 ?>
