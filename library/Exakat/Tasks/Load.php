@@ -1490,94 +1490,8 @@ class Load extends Tasks {
         $this->currentPropertiesCalls = array();
 
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id;
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
-                ++$this->id;
-                $cpm = $this->processPrivate();
-                
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
-                    continue;
-                }
-
-                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
-                    $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, 'PPP');
-                }
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PUBLIC) {
-                ++$this->id;
-                $cpm = $this->processPublic();
-
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
-                    continue;
-                }
-
-                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
-                    $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, 'PPP');
-                }
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PROTECTED) {
-                ++$this->id;
-                $cpm = $this->processProtected();
-
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
-                    continue;
-                }
-
-                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
-                    $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, 'PPP');
-                }
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FINAL) {
-                ++$this->id;
-                $cpm = $this->processFinal();
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_ABSTRACT) {
-                ++$this->id;
-                $cpm = $this->processAbstract();
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
-                ++$this->id;
-                $cpm = $this->processStatic();
-
-                if ($cpm instanceof Atom &&
-                    $cpm->atom === 'Ppp'){
-
-                    ++$this->id;
-                    $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, 'PPP');
-                }
-
-                continue;
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
-                $cpm = $this->processPhpdoc();
-            } else {
-                $cpm = $this->processNext();
-                $this->popExpression();
-            }
+            $cpm = $this->processNext();
+            $this->popExpression();
 
             $cpm->rank = ++$rank;
             if ($cpm->atom === 'Usetrait') {
@@ -1587,6 +1501,9 @@ class Load extends Tasks {
             }
 
             $this->addLink($class, $cpm, $link);
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id;
+            }
         }
 
         $diff = array_diff(array_keys($this->currentPropertiesCalls), array_keys($this->currentProperties));
@@ -2475,6 +2392,7 @@ class Load extends Tasks {
         
         $next->visibility = 'private';
         $next->fullcode   = "$visibility $next->fullcode";
+
         return $next;
     }
     
@@ -2892,8 +2810,8 @@ class Load extends Tasks {
                 }
                 $this->popExpression();
 
-                $static->static = 1;
-                $static->fullcode = "$option $static->fullcode";
+                $ppp->static = 1;
+                $ppp->fullcode = "$option $ppp->fullcode";
 
                 return $ppp;
             } else {
@@ -4837,8 +4755,9 @@ class Load extends Tasks {
         $phpDoc->fullcode = $this->tokens[$this->id][1];
         $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
-        $docblock = $factory->create($phpDoc->fullcode);
+// Catch the Exceptions
+//        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+//        $docblock = $factory->create($phpDoc->fullcode);
 //        print (string) $docblock->getDescription().PHP_EOL;
 
         $next = $this->processNext();
