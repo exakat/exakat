@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 02 Jul 2019 09:17:50 +0000
-.. comment: Generation hash : f8ecabbfb71b1588db777cd0b15cef74878871ca
+.. comment: Generation date : Mon, 08 Jul 2019 14:20:27 +0000
+.. comment: Generation hash : 67413e0caf68b8507bdf4235611d913de8eb00f0
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2142,7 +2142,7 @@ Avoid array_unique()
 ####################
 
 
-The native function `array_unique() <http://www.php.net/array_unique>`_ is much slower than using other alternative, such as `array_count_values() <http://www.php.net/array_count_values>`_, `array_flip() <http://www.php.net/array_flip>`_/`array_keys() <http://www.php.net/array_keys>`_, or even a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. 
+The native function `array_unique() <http://www.php.net/array_unique>`_ is much slower than using other alternatives, such as `array_count_values() <http://www.php.net/array_count_values>`_, `array_flip() <http://www.php.net/array_flip>`_/`array_keys() <http://www.php.net/array_keys>`_, or even a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. 
 
 .. code-block:: php
 
@@ -2164,6 +2164,17 @@ The native function `array_unique() <http://www.php.net/array_unique>`_ is much 
    }
    
    ?>
+
+
+See also `array_unique <https://www.php.net/manual/en/function.array-unique.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Upgrade to PHP 7.2
+* Use an alternative way to make values unique in an array, using array_count_values(), for example.
 
 +-------------+--------------------------+
 | Short name  | Structures/NoArrayUnique |
@@ -4029,15 +4040,26 @@ may be rewritten in :
    
    ?>
 
-+-------------+-------------------------------+
-| Short name  | Structures/CommonAlternatives |
-+-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
-+-------------+-------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Collect common expressions, and move them before of after the if/then expression.
+* Move a prefix and suffixes to a third-party method
+
++-------------+----------------------------------------------------------------------------------------------+
+| Short name  | Structures/CommonAlternatives                                                                |
++-------------+----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                               |
++-------------+----------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                        |
++-------------+----------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                             |
++-------------+----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-commonalternatives`, :ref:`dolibarr-structures-commonalternatives` |
++-------------+----------------------------------------------------------------------------------------------+
 
 
 
@@ -9303,6 +9325,44 @@ Suggestions
 
 
 
+.. _generator-cannot-return:
+
+Generator Cannot Return
+#######################
+
+
+Generators could not use return and yield at the same time. In PHP 7.0, generator can now use both of them.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is not allowed until PHP 7.0
+   function foo() {
+       yield 1;
+       return 'b';
+   }
+   
+   ?>
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the return
+
++-------------+------------------------------------------------------------------------------------------------------------+
+| Short name  | Functions/GeneratorCannotReturn                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _getting-last-element:
 
 Getting Last Element
@@ -12807,7 +12867,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Classes/MethodSignatureMustBeCompatible |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`  |
 +-------------+-----------------------------------------+
 | Severity    | Critical                                |
 +-------------+-----------------------------------------+
@@ -14409,15 +14469,25 @@ Methods that may not return, but are often expected to : `__call() <http://www.p
    }
    ?>
 
-+-------------+----------------------+
-| Short name  | Functions/MustReturn |
-+-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a return expression, with a valid data type
+* Remove the return typehint
+
++-------------+----------------------------------------+
+| Short name  | Functions/MustReturn                   |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
 
 
 
@@ -15747,9 +15817,11 @@ No Hardcoded Path
 #################
 
 
-It is not recommended to have literals when accessing files. 
+It is not recommended to use hardcoded literals when designating files. Full paths are usually tied to one file system organization. As soon as the organisation changes or must be adapted to any external constraint, the path is not valid anymore.
 
 Either use `__FILE__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ and `__DIR__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a ``DOC_ROOT`` as a configuration constant that will allow the moving of the script to another folder; finally functions like `sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_ produce a viable temporary folder.
+
+Relative paths are relative to the current execution directory, and not the current file. This means they may differ depending on the location of the start of the application, and are sensitive to `chdir() <http://www.php.net/chdir>`_ and `chroot() <http://www.php.net/chroot>`_ usage.
 
 .. code-block:: php
 
@@ -15772,6 +15844,17 @@ Either use `__FILE__ <http://www.php.net/manual/en/language.constants.predefined
        
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add __DIR__ before the path to make it relative to the current file
+* Add a configured prefix before the path to point to any file in the system
+* Use sys_get_temp_dir() for temporary data
+* Use `include_path` argument function, such as fie_get_contents(), to have the file located in configurable directories.
+
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedPath                                                                        |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -15782,6 +15865,8 @@ Either use `__FILE__ <http://www.php.net/manual/en/language.constants.predefined
 | Time To Fix | Slow (1 hour)                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`tine2.0-structures-nohardcodedpath`, :ref:`thelia-structures-nohardcodedpath`               |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -17886,43 +17971,6 @@ Optional characteristics, like final, static... are not specified. Special metho
 +------------+------------------------------------------------+
 | Themes     | :ref:`Coding Conventions <coding-conventions>` |
 +------------+------------------------------------------------+
-
-
-
-.. _overwriting-variable:
-
-Overwriting Variable
-####################
-
-
-Replacing the content of a variable by something different is prone to errors. For example, it is not obvious if the $text variable is plain text or HTML text. 
-
-.. code-block:: php
-
-   <?php
-   
-   // Confusing
-   $text = htmlentities($text);
-   
-   // Better
-   $textHTML = htmlentities($text);
-   
-   ?>
-
-
-Besides, it is possible that the source is needed later, for extra processing. 
-
-Note that accumulators, like += .=  or [] etc., that are meant to collect lots of values with consistent type are OK.
-
-+-------------+-----------------------+
-| Short name  | Variables/Overwriting |
-+-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
-+-------------+-----------------------+
-| Severity    | Major                 |
-+-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
-+-------------+-----------------------+
 
 
 
@@ -22703,6 +22751,8 @@ Simplify Regex
 ##############
 
 
+Avoid using regex when the searched string or the replacement are simple enough.
+
 PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using `strpos() <http://www.php.net/strpos>`_ or `stripos() <http://www.php.net/stripos>`_ instead.
 
 .. code-block:: php
@@ -22719,15 +22769,24 @@ PRCE regex are a powerful way to search inside strings, but they also come at th
    
    ?>
 
-+-------------+-----------------------+
-| Short name  | Structures/SimplePreg |
-+-------------+-----------------------+
-| Themes      | :ref:`Performances`   |
-+-------------+-----------------------+
-| Severity    | Major                 |
-+-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
-+-------------+-----------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use str_replace(), strtr() or even strpos()
+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Structures/SimplePreg                                                     |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Performances`                                                       |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Major                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                           |
++-------------+---------------------------------------------------------------------------+
+| Examples    | :ref:`zurmo-structures-simplepreg`, :ref:`openconf-structures-simplepreg` |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -27222,7 +27281,13 @@ It is also capable to handle aliases, making the code easier to maintain.
 
 This is not possible when building the name of the class with concatenation.
 
-This is a micro-optimization.
+This is a micro-optimization. This also helps static analysis, as it gives more information at compile time to analyse.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace strings by the \:\:class operator whenever possible
 
 +-------------+-------------------------------------+
 | Short name  | Classes/UseClassOperator            |
@@ -27354,6 +27419,75 @@ Some methods and functions are defined to be used with constants as arguments. T
    
    ?>
 
+
+Here is the list of function that use a unique PHP constant as argument : 
+
++ `array_change_key_case() <http://www.php.net/array_change_key_case>`_
++ `array_multisort() <http://www.php.net/array_multisort>`_
++ `array_unique() <http://www.php.net/array_unique>`_
++ `count() <http://www.php.net/count>`_
++ dns_get_record()
++ `easter_days() <http://www.php.net/easter_days>`_
++ `extract() <http://www.php.net/extract>`_
++ `filter_input() <http://www.php.net/filter_input>`_
++ `filter_var() <http://www.php.net/filter_var>`_
++ `fseek() <http://www.php.net/fseek>`_
++ `get_html_translation_table() <http://www.php.net/get_html_translation_table>`_
++ `gmp_div_q() <http://www.php.net/gmp_div_q>`_
++ `gmp_div_qr() <http://www.php.net/gmp_div_qr>`_
++ `gmp_div_r() <http://www.php.net/gmp_div_r>`_
++ `html_entity_decode() <http://www.php.net/html_entity_decode>`_
++ `htmlspecialchars_decode() <http://www.php.net/htmlspecialchars_decode>`_
++ `http_build_query() <http://www.php.net/http_build_query>`_
++ `http_parse_cookie() <http://www.php.net/http_parse_cookie>`_
++ `http_parse_params() <http://www.php.net/http_parse_params>`_
++ `http_redirect() <http://www.php.net/http_redirect>`_
++ `http_support() <http://www.php.net/http_support>`_
++ `parse_ini_file() <http://www.php.net/parse_ini_file>`_
++ `parse_ini_string() <http://www.php.net/parse_ini_string>`_
++ `parse_url() <http://www.php.net/parse_url>`_
++ `pathinfo() <http://www.php.net/pathinfo>`_
++ `pg_select() <http://www.php.net/pg_select>`_
++ `posix_access() <http://www.php.net/posix_access>`_
++ `round() <http://www.php.net/round>`_
++ `scandir() <http://www.php.net/scandir>`_
++ `socket_read() <http://www.php.net/socket_read>`_
++ `str_pad() <http://www.php.net/str_pad>`_
++ `trigger_error() <http://www.php.net/trigger_error>`_
+
+Here is the list of functions that use a combinaison of PHP native functions as argument.
+
++ `arsort() <http://www.php.net/arsort>`_
++ `asort() <http://www.php.net/asort>`_
++ `error_reporting() <http://www.php.net/error_reporting>`_
++ `filter_input() <http://www.php.net/filter_input>`_
++ `filter_var() <http://www.php.net/filter_var>`_
++ `get_html_translation_table() <http://www.php.net/get_html_translation_table>`_
++ `htmlentities() <http://www.php.net/htmlentities>`_
++ `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_
++ `http_build_url() <http://www.php.net/http_build_url>`_
++ `jdtojewish() <http://www.php.net/jdtojewish>`_
++ `krsort() <http://www.php.net/krsort>`_
++ `ksort() <http://www.php.net/ksort>`_
++ `pg_result_status() <http://www.php.net/pg_result_status>`_
++ `phpcredits() <http://www.php.net/phpcredits>`_
++ `phpinfo() <http://www.php.net/phpinfo>`_
++ `preg_grep() <http://www.php.net/preg_grep>`_
++ `preg_match() <http://www.php.net/preg_match>`_
++ `preg_split() <http://www.php.net/preg_split>`_
++ `rsort() <http://www.php.net/rsort>`_
++ `runkit_import() <http://www.php.net/runkit_import>`_
++ `sort() <http://www.php.net/sort>`_
++ `stream_socket_client() <http://www.php.net/stream_socket_client>`_
++ `stream_socket_server() <http://www.php.net/stream_socket_server>`_
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use PHP native constants, whenever possible, instead of meaningless literals.
+
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UseConstantAsArguments                                                                   |
 +-------------+----------------------------------------------------------------------------------------------------+
@@ -27414,6 +27548,52 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Examples    | :ref:`wordpress-structures-usecountrecursive`, :ref:`prestashop-structures-usecountrecursive` |
 +-------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _use-datetimeimmutable-class:
+
+Use DateTimeImmutable Class
+###########################
+
+
+The DateTimeImmutable class is the immutable version of the `Datetime <http://www.php.net/manual/en/class.datetime.php>`_ class. 
+
+While DateTime may be modified 'in situ', DateTimeImmutable cannot be modified. Any modication to such an object will return a new and distinct object. This avoid interferences that are hard to track.
+
+.. code-block:: php
+
+   <?php
+   // Example extracted from Derick Rethans' article (link below)
+   
+   function formatNextMondayFromNow( DateTime $dt )
+   {
+           return $dt->modify( 'next monday' )->format( 'Y-m-d' );
+   }
+   
+   $d = new DateTime();                          //2014-02-17
+   echo formatNextMondayFromNow( $d ), \n;
+   echo $d->format( 'Y-m-d' ), \n;             //2014-02-17
+   ?>
+
+
+See also `What's all this 'immutable date' stuff, anyway? <https://medium.com/@codebyjeff/whats-all-this-immutable-date-stuff-anyway-72d4130af8ce>`_, `DateTimeImmutable <https://derickrethans.nl/immutable-datetime.html>`_, `The DateTime class <https://www.php.net/manual/en/class.datetime.php>`_ and `The DateTimeImmutable class <https://www.php.net/manual/en/class.datetimeimmutable.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use DateTimeImmutable when manipulating dates.
+
++-------------+--------------------------+
+| Short name  | Php/UseDateTimeImmutable |
++-------------+--------------------------+
+| Themes      | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -30092,6 +30272,64 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Examples    | :ref:`dolibarr-structures-wrongrange`, :ref:`wordpress-structures-wrongrange` |
 +-------------+-------------------------------------------------------------------------------+
+
+
+
+.. _wrong-returned-type:
+
+Wrong Returned Type
+###################
+
+
+The returned value is not compatible with the specified return type.
+
+.. code-block:: php
+
+   <?php
+   
+   // classic error
+   function bar() : int {
+       return 'A';
+   }
+   
+   // classic static error
+   const B = 2;
+   function bar() : string {
+       return B;
+   }
+   
+   // undecideable error
+   function bar($c) : string {
+       return $c;
+   }
+   
+   // PHP lint this, but won't execute it
+   function foo() : void {
+       // No return at all 
+   }
+   
+   ?>
+
+
+See also `Returning values <http://php.net/manual/en/functions.returning-values.php>`_ and `Void Return Type <https://wiki.php.net/rfc/void_return_type>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the return type with the return value
+* Remove the return expression altogether
+* Add a typecast to the returning expression
+
++-------------+------------------------------------+
+| Short name  | Functions/WrongReturnedType        |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
