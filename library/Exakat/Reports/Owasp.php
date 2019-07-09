@@ -793,7 +793,7 @@ SQL;
             }
             $result = $this->Compatibility($result);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
         }
 

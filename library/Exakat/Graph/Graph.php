@@ -51,8 +51,8 @@ abstract class Graph {
     public function getId() { return 'null'; }
     abstract public function getDefinitionSQL();
 
-    static public function getConnexion(Config $config) {
-        $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}"; 
+    public static function getConnexion(Config $config) {
+        $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}";
         return new $graphDBClass($config);
     }
 }

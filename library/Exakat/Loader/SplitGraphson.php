@@ -282,8 +282,8 @@ GREMLIN;
 
             ++$total;
         }
-        file_put_contents($this->path, implode(PHP_EOL, $append)   . PHP_EOL, \FILE_APPEND);
-        file_put_contents($this->pathLink, implode(PHP_EOL, $links).PHP_EOL, \FILE_APPEND);
+        file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+        file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
 
         if ($this->total > self::LOAD_CHUNK) {
             $this->saveNodes();

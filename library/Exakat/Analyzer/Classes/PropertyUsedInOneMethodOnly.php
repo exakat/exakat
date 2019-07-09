@@ -39,7 +39,7 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
              ->filter(
                 $this->side()
                      ->goToAllDefinitions()
-                     ->outIs("DEFINITION")
+                     ->outIs('DEFINITION')
                      ->goToInstruction(array('Magicmethod', 'Method'))
                      ->dedup('fullnspath')
                      ->raw('count().is(eq(1))')
