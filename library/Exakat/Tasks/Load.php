@@ -3722,12 +3722,8 @@ class Load extends Tasks {
         } else {
             $current = $this->id;
 
-            if (mb_strtolower($this->tokens[$this->id][1]) === 'die' &&
-                $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                // Skip the ( for die only
-                ++$this->id;
-            }
-        
+            ++$this->id;
+
             $functioncall = $this->processArguments('Exit',
                                                     array($this->phptokens::T_SEMICOLON,
                                                           $this->phptokens::T_CLOSE_TAG,
@@ -3738,11 +3734,7 @@ class Load extends Tasks {
                                                           $this->phptokens::T_END,
                                                           ));
             $argumentsFullcode = $functioncall->fullcode;
-            if (mb_strtolower($this->tokens[$current][1]) === 'die') {
-                $argumentsFullcode = "($argumentsFullcode)";
-            } else {
-                --$this->id;
-            }
+            $argumentsFullcode = "($argumentsFullcode)";
 
             $functioncall->code       = $this->tokens[$current][1];
             $functioncall->fullcode   = $this->tokens[$current][1] . $argumentsFullcode;
@@ -4753,6 +4745,18 @@ class Load extends Tasks {
         $phpDoc->code     = $this->tokens[$this->id][1];
         $phpDoc->fullcode = $this->tokens[$this->id][1];
         $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
+
+        // PHPdoc that won't be attached to anything    
+        if (in_array($this->tokens[$this->id + 1][0],  
+                     array($this->phptokens::T_CLOSE_CURLY,
+                           $this->phptokens::T_CASE,
+                           $this->phptokens::T_DEFAULT,
+                           $this->phptokens::T_END,
+                    ),
+                    STRICT_COMPARISON
+                    )) {
+            return $phpDoc;
+        }
 
 // Catch the Exceptions
 //        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
