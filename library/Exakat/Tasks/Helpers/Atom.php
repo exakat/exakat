@@ -82,7 +82,15 @@ class Atom {
         $this->atom = $atom;
         $this->line = $line;
     }
-    
+
+    public function __set($name, $value) {
+        die("Fatal error : trying to set '$name' property on ".__CLASS__);
+    }
+
+    public function __get($name) {
+        die("Fatal error : trying to get '$name' property on ".__CLASS__);
+    }
+
     public function toArray() {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->code) . ' chars]';
