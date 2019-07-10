@@ -31,6 +31,8 @@ const LOOSE_COMPARISON  = false;
 const JSON_ASSOCIATIVE = true;
 const JSON_OBJECT      = false;
 
+const SQLITE3_BUSY_TIMEOUT = 5000; // ms
+
 function display($text) {
     global $VERBOSE;
     

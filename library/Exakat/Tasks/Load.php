@@ -47,6 +47,7 @@ use Exakat\Tasks\Helpers\CloneType1;
 use Exakat\Tasks\Helpers\IsRead;
 use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
+use Exakat\Tasks\Helpers\Sequences;
 use ProgressBar\Manager as ProgressBar;
 use Exakat\Loader\Collector;
 
@@ -227,6 +228,8 @@ class Load extends Tasks {
         $this->plugins[] = new CloneType1();
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();
+        
+        $this->sequences = new Sequences;
 
         $this->precedence = new Precedence(get_class($this->phptokens));
 
@@ -3722,12 +3725,8 @@ class Load extends Tasks {
         } else {
             $current = $this->id;
 
-            if (mb_strtolower($this->tokens[$this->id][1]) === 'die' &&
-                $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                // Skip the ( for die only
-                ++$this->id;
-            }
-        
+            ++$this->id;
+
             $functioncall = $this->processArguments('Exit',
                                                     array($this->phptokens::T_SEMICOLON,
                                                           $this->phptokens::T_CLOSE_TAG,
@@ -3738,11 +3737,7 @@ class Load extends Tasks {
                                                           $this->phptokens::T_END,
                                                           ));
             $argumentsFullcode = $functioncall->fullcode;
-            if (mb_strtolower($this->tokens[$current][1]) === 'die') {
-                $argumentsFullcode = "($argumentsFullcode)";
-            } else {
-                --$this->id;
-            }
+            $argumentsFullcode = "($argumentsFullcode)";
 
             $functioncall->code       = $this->tokens[$current][1];
             $functioncall->fullcode   = $this->tokens[$current][1] . $argumentsFullcode;
@@ -4753,6 +4748,18 @@ class Load extends Tasks {
         $phpDoc->code     = $this->tokens[$this->id][1];
         $phpDoc->fullcode = $this->tokens[$this->id][1];
         $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
+
+        // PHPdoc that won't be attached to anything    
+        if (in_array($this->tokens[$this->id + 1][0],  
+                     array($this->phptokens::T_CLOSE_CURLY,
+                           $this->phptokens::T_CASE,
+                           $this->phptokens::T_DEFAULT,
+                           $this->phptokens::T_END,
+                    ),
+                    STRICT_COMPARISON
+                    )) {
+            return $phpDoc;
+        }
 
 // Catch the Exceptions
 //        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
@@ -5847,34 +5854,21 @@ class Load extends Tasks {
         $this->sequence->fullcode  = ' ' . self::FULLCODE_SEQUENCE . ' ';
         $this->sequence->token     = 'T_SEMICOLON';
         $this->sequence->bracket   = self::NOT_BRACKET;
-        $this->sequence->elements  = array();
 
-        $this->sequences[]    = $this->sequence;
-        $this->sequenceRank[] = -1;
-        $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
+        $this->sequences->start($this->sequence);
     }
 
-    private function addToSequence($id) {
-        $this->addLink($this->sequence, $id, 'EXPRESSION');
-        $id->rank = ++$this->sequenceRank[$this->sequenceCurrentRank];
-        $this->sequence->elements[]  = $id;
+    private function addToSequence(Atom $element) {
+        $this->addLink($this->sequence, $element, 'EXPRESSION');
+
+        $this->sequences->add($element);
     }
 
     private function endSequence() {
-        $this->sequence->count = $this->sequenceRank[$this->sequenceCurrentRank] + 1;
-        
-        $this->runPlugins($this->sequence, $this->sequence->elements);
-        $this->sequence->elements = null;
+        $elements = $this->sequences->getElements();
+        $this->runPlugins($this->sequence, $elements);
 
-        array_pop($this->sequences);
-        array_pop($this->sequenceRank);
-        $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
-
-        if (empty($this->sequences)) {
-            $this->sequence = null;
-        } else {
-            $this->sequence = $this->sequences[count($this->sequences) - 1];
-        }
+        $this->sequence = $this->sequences->end();
     }
 
     private function getToken($token) {

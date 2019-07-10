@@ -37,6 +37,17 @@ class UseArrayFunctions extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // foreach($a as $b) { $c = array_slice($b);};
+        $this->atomIs(array('For', 'Foreach'))
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->functioncallIs(array('\\array_slice'))
+             ->back('first');
+        $this->prepareQuery();
+
         // foreach($a as $b) { array_push($c, $b);};
         $this->atomIs(array('For', 'Foreach'))
              ->outIs('BLOCK')
