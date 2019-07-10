@@ -91,6 +91,7 @@ class Dump extends Tasks {
         if ($this->config->update === true && file_exists($this->sqliteFileFinal)) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);
+            $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
         } else {
             $this->initDump();
         }
@@ -218,7 +219,7 @@ class Dump extends Tasks {
 
         $counts = array();
         $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
-        $datastore->busyTimeout(5000);
+        $datastore->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
         $res = $datastore->query('SELECT * FROM analyzed');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = (int) $row['counts'];
@@ -283,6 +284,7 @@ class Dump extends Tasks {
     
     public function finalMark($finalMark) {
         $sqlite = new \Sqlite3($this->config->dump);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $values = array();
         foreach($finalMark as $key => $value) {
@@ -2393,7 +2395,7 @@ SQL;
         $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
-        $sqlite->busyTimeout(5000);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $query = 'SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($analyzers) . ')';
         $ran = array();
@@ -2442,6 +2444,7 @@ SQL;
             unlink($this->sqliteFile);
         }
         $this->sqlite = new \Sqlite3($this->sqliteFile);
+        $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -2502,6 +2505,7 @@ SQL;
         }
         if (file_exists($this->sqliteFilePrevious)) {
             $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
+            $sqliteOld->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
             $presence = $sqliteOld->querySingle('SELECT count(*) FROM sqlite_master WHERE type="table" AND name="hash"');
             if ($presence == 1) {
