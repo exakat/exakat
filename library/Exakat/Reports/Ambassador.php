@@ -233,6 +233,7 @@ class Ambassador extends Reports {
         $this->generateCompatibilityEstimate();
         $analyserList = $this->themes->getRulesetsAnalyzers($list);
         $this->generateIssuesEngine('compatibility_issues',
+                                    'Compatibility issues',
                                     $this->getIssuesFaceted($analyserList));
 
         // Favorites
@@ -367,21 +368,25 @@ class Ambassador extends Reports {
 
     protected function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
+                                    'Security issues',
                                     $this->getIssuesFaceted('Security') );
     }
 
     protected function generateDeadCode() {
         $this->generateIssuesEngine('deadcode_issues',
+                                    'Dead code issues',
                                     $this->getIssuesFaceted('Dead code') );
     }
 
     protected function generateSuggestions() {
         $this->generateIssuesEngine('suggestions',
+                                    'Suggestions',
                                     $this->getIssuesFaceted('Suggestions') );
     }
 
     protected function generatePerformances() {
         $this->generateIssuesEngine('performances_issues',
+                                    'Performances issues',
                                     $this->getIssuesFaceted('Performances') );
     }
 
@@ -686,6 +691,7 @@ JAVASCRIPT;
         $this->putBasedPage('favorites_dashboard', $baseHTML);
 
         $this->generateIssuesEngine('favorites_issues',
+                                    'Favorite violations',
                                     $this->getIssuesFaceted('Preferences') );
     }
 
@@ -1618,6 +1624,7 @@ HTML;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyses');
 
         $this->putBasedPage('analyses', $finalHTML);
     }
@@ -1987,16 +1994,18 @@ SQL;
         }
 
         $this->generateIssuesEngine('neoissues',
+                                    'New issues',
                                     $diff);
     }
     
     private function generateIssues() {
         $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
+                                    'Code issues',
                                     $issues );
     }
     
-    protected function generateIssuesEngine($filename, $issues) {
+    protected function generateIssuesEngine($filename, $title, $issues) {
         $baseHTML = $this->getBasedPage($filename);
 
         $total = count($issues);
@@ -2523,6 +2532,8 @@ HTML;
         $html = $this->getBasedPage('annex_config');
         $html = $this->injectBloc($html, 'CONFIG_INI', $ini);
         $html = $this->injectBloc($html, 'CONFIG_YAML', $yaml);
+        $html = $this->injectBloc($html, 'TITLE', 'Analyses Settings');
+
         $this->putBasedPage('annex_config', $html);
     }
 
@@ -2567,6 +2578,7 @@ HTML;
 
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
+        $html = $this->injectBloc($html, 'TITLE', 'Audit Settings');
         $this->putBasedPage('annex_settings', $html);
     }
 
@@ -2702,6 +2714,8 @@ SQL
 
         $html = $this->getBasedPage('directive_list');
         $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
+        $html = $this->injectBloc($html, 'TITLE', 'Directive list');
+        
         $this->putBasedPage('directive_list', $html);
     }
 
