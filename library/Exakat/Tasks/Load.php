@@ -781,7 +781,7 @@ class Load extends Tasks {
 //        print "  $method in".PHP_EOL;
         $id = $this->$method();
 //        print "  $method out ".PHP_EOL;
-        
+
         return $id;
     }
     
@@ -1264,7 +1264,8 @@ class Load extends Tasks {
         // Process arguments
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
-        
+        $this->makePhpdoc($function);
+
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
 
@@ -1409,7 +1410,8 @@ class Load extends Tasks {
         $current = $this->id;
         $trait = $this->addAtom('Trait');
         $this->currentClassTrait[] = $trait;
-
+        $this->makePhpdoc($trait);
+        
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
 
@@ -1440,6 +1442,7 @@ class Load extends Tasks {
         $current = $this->id;
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
+        $this->makePhpdoc($interface);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1493,6 +1496,9 @@ class Load extends Tasks {
 
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
             $cpm = $this->processNext();
+            if (empty($cpm)) {
+                continue;
+            }
             $this->popExpression();
 
             $cpm->rank = ++$rank;
@@ -1543,6 +1549,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class');
+            $this->makePhpdoc($class);
 
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             
@@ -1606,6 +1613,7 @@ class Load extends Tasks {
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
 
+        $this->processPhpdoc();
         // Process block
         $this->makeCitBody($class);
         
@@ -2238,6 +2246,7 @@ class Load extends Tasks {
 
     private function processConst() {
         $const = $this->addAtom('Const');
+        $this->makePhpdoc($const);
         $current = $this->id;
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
@@ -2331,6 +2340,7 @@ class Load extends Tasks {
 
         $ppp->visibility = 'none';
         $ppp->fullcode   = "$visibility $ppp->fullcode";
+        $this->makePhpdoc($ppp);
         return $ppp;
     }
 
@@ -2352,6 +2362,7 @@ class Load extends Tasks {
         
         $next->visibility = 'public';
         $next->fullcode   = "$visibility $next->fullcode";
+        $this->makePhpdoc($next);
         return $next;
     }
 
@@ -2373,6 +2384,7 @@ class Load extends Tasks {
         
         $next->visibility = 'protected';
         $next->fullcode   = "$visibility $next->fullcode";
+        $this->makePhpdoc($next);
         return $next;
     }
 
@@ -2394,7 +2406,7 @@ class Load extends Tasks {
         
         $next->visibility = 'private';
         $next->fullcode   = "$visibility $next->fullcode";
-
+        $this->makePhpdoc($next);
         return $next;
     }
     
@@ -2402,6 +2414,7 @@ class Load extends Tasks {
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
         $namecall->aliased    = self::NOT_ALIASED;
+        $this->makePhpdoc($namecall);
 
         // Empty call
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -3978,6 +3991,7 @@ class Load extends Tasks {
         }
 
         $namespace = $this->addAtom('Namespace');
+        $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
         $this->setNamespace($name);
 
@@ -4744,65 +4758,28 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processPhpdoc() {
-        while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
-            ++$this->id;
-        };
+    private function makePhpdoc(Atom $node) {
+        if (empty($this->phpDoc)) {
+            return;
+        }
 
         $phpDoc = $this->addAtom('Phpdoc');
-        $phpDoc->code     = $this->tokens[$this->id][1];
-        $phpDoc->fullcode = $this->tokens[$this->id][1];
-        $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
+        $phpDoc->code     = $this->phpDoc[1];
+        $phpDoc->fullcode = $this->phpDoc[1];
+        $phpDoc->token    = $this->getToken($this->phpDoc[0]);
 
-        // PHPdoc that won't be attached to anything and lost
-        if (!in_array($this->tokens[$this->id + 1][0],  
-                     array($this->phptokens::T_CLASS,
-                           $this->phptokens::T_TRAIT,
-                           $this->phptokens::T_INTERFACE,
-                           $this->phptokens::T_FINAL,
-                           $this->phptokens::T_ABSTRACT,
-                           $this->phptokens::T_NS_SEPARATOR,
-                           $this->phptokens::T_STRING,
-                           $this->phptokens::T_NAMESPACE,
-                           $this->phptokens::T_PRIVATE,
-                           $this->phptokens::T_PROTECTED,
-                           $this->phptokens::T_PUBLIC,
-                           $this->phptokens::T_STATIC,
-                           $this->phptokens::T_VAR,
-                           $this->phptokens::T_CONST,
-                           $this->phptokens::T_FUNCTION,
-                    ),
-                    STRICT_COMPARISON
-                    )) {
-            return $phpDoc;
-        }
+        $this->addLink($node, $phpDoc, 'PHPDOC');
 
-// Catch the Exceptions
-//        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
-//        $docblock = $factory->create($phpDoc->fullcode);
-//        print (string) $docblock->getDescription().PHP_EOL;
+        $this->phpDoc = '';
+    }
 
-        $next = $this->processNext();
-
-        if (isset($next->atom) && 
-            in_array($next->atom, 
-                     array('Class', 
-                           'Classanonymous',
-                           'Trait',
-                           'Interface',
-                           'Method',
-                           'Magicmethod',
-                           'Const',
-                           'Namespace',
-                           'Ppp',
-                           'Function',
-                           'Defineconstant',
-                           ), 
-                     STRICT_COMPARISON)) {
-            $this->addLink($next, $phpDoc, 'PHPDOC');
-        }
-
-        return $next;
+    private function processPhpdoc() {
+        // save PHP doc for eventual use later
+        do {
+            $this->phpDoc = $this->tokens[$this->id];
+            ++$this->id;
+        } while($this->tokens[$this->id][0] === $this->phptokens::T_DOC_COMMENT) ;
+        --$this->id;
     }
 
     private function processYield() {
