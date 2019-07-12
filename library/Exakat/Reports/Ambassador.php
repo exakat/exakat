@@ -30,6 +30,7 @@ use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
+use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
@@ -44,6 +45,11 @@ class Ambassador extends Reports {
     protected $timesToFix        = array();
     protected $themesForAnalyzer = array();
     protected $severities        = array();
+
+    protected $generations       = array();
+    protected $generations_files = array();
+    
+    protected $usedFiles         = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -96,6 +102,55 @@ class Ambassador extends Reports {
                      'Custom',
                      );
     }
+    
+    protected function makeMenu() {
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/ambassador.yaml');
+        
+        $menu = array('<ul class="sidebar-menu">',
+                      '<li class="header">&nbsp;</li>',
+                      );
+        foreach($menuYaml as $section) {
+            $menu[] = $this->makeMenuHtml($section);
+        }
+        
+        $menu[] = '</ul>';
+        
+        return implode(PHP_EOL, $menu);
+    }
+    
+    protected function makeMenuHtml($section) {
+        if (isset($section['file'])) {
+            $icon = $section['icon'] ?? 'sticky-note-o';
+            $menuTitle = $section['menu'] ?? $section['title'];
+
+            $menu = "<li><a href=\"$section[file].html\"><i class=\"fa fa-$icon\"></i> <span>$menuTitle</span></a></li>";
+            if (isset($section['method'])) {
+                $this->generations[] = new Section($section);
+            } else {
+                $this->generations_files[] = $section['file'];
+            }
+        } elseif (isset($section['subsections'])) {
+            $icon      = $section['icon'] ?? 'sticky-note-o';
+            $menuTitle = $section['menu'] ?? $section['title'];
+
+            $menu = array('<li class="treeview">',
+                          "<a href=\"#\"><i class=\"fa fa-$icon\"></i> <span>$menuTitle</span><i class=\"fa fa-angle-left pull-right\"></i></a>",
+                          '<ul class="treeview-menu">',
+                          );
+
+            foreach($section['subsections'] as $subsection) {
+                $menu[] = $this->makeMenuHtml($subsection);
+            }
+
+            $menu[] = '</ul>';
+            $menu[] = '</li>';
+            
+            $menu = implode(PHP_EOL.'  ', $menu);
+            
+        }
+        
+        return $menu;
+    }
 
     protected function getBasedPage($file) {
         static $baseHTML;
@@ -113,7 +168,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
-            $menu = file_get_contents("{$this->tmpName}/datas/menu.html");
+            $menu = $this->makeMenu();
             $inventories = array();
             foreach($this->inventories as $fileName => $title) {
                 if (strpos($fileName, '/') !== false) {
@@ -130,7 +185,7 @@ class Ambassador extends Reports {
             }
 
             $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(ruleset, -2) FROM rulesets WHERE ruleset LIKE "Compatibility%" ORDER BY ruleset DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -140,6 +195,10 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
+
+        if (!file_exists("{$this->config->dir_root}/media/devfaceted/datas/$file.html")) {
+            return '';
+        }
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
@@ -153,6 +212,8 @@ class Ambassador extends Reports {
         $html = str_replace('{{TITLE}}', "PHP Static analysis for {$this->config->project_name}", $html);
 
         file_put_contents("$this->tmpName/datas/$file.html", $html);
+
+        $this->usedFiles[] = "$file.html";
     }
 
     protected function injectBloc($html, $bloc, $content) {
@@ -176,87 +237,14 @@ class Ambassador extends Reports {
         $this->projectPath = $folder;
 
         $this->initFolder();
-
-        $this->generateProcFiles();
-        $this->generateClassTree();
-        $this->generateTraitTree();
-        $this->generateTraitMatrix();
-        $this->generateInterfaceTree();
-
-        $this->generateDashboard();
-        $this->generateExtensionsBreakdown();
-        $this->generatePHPFunctionBreakdown();
-        $this->generatePHPConstantsBreakdown();
-        $this->generatePHPClassesBreakdown();
-        $this->generateFiles();
-        $this->generateAnalyzers();
-
-        $this->generateIssues();
-        $this->generateNewIssues();
-        $this->generateNoIssues();
-        $this->generatePerformances();
-        $this->generateSuggestions();
-        $this->generateSecurity();
-        $this->generateDeadCode();
-
-        $this->generateAnalyzersList();
-        $this->generateExternalLib();
-        $this->generateConcentratedIssues();
-
-// Audit Logs
-        $this->generateAppinfo();
-        $this->generateBugFixes();
-        $this->generateDirectiveList();
-        $this->generatePhpConfiguration();
-        $this->generateFileDependencies();
-        $this->generateExternalServices();
-        $this->generateAlteredDirectives();
-        $this->generateStats();
-        $this->generateComplexExpressions();
-        $this->generateVisibilitySuggestions();
-        $this->generateClassOptionSuggestions();
-        $this->generateChangedClasses();
-        $this->generateClassSize();
-        $this->generateMethodSize();
-        $this->generateParameterCounts();
-        $this->generateConfusingVariables();
-        $this->generateIdenticalFiles();
+        $this->getBasedPage('');
         
-        // Compatibility
-        $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
-        $list = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $list[] = 'CompatibilityPHP' . $row['version'];
-            $this->generateCompatibility($row['version']);
+        foreach($this->generations as $generation) {
+            $method = $generation->method;
+            $this->$method($generation);
         }
-        $this->generateCompatibilityEstimate();
-        $analyserList = $this->themes->getRulesetsAnalyzers($list);
-        $this->generateIssuesEngine('compatibility_issues',
-                                    'Compatibility issues',
-                                    $this->getIssuesFaceted($analyserList));
 
-        // Favorites
-        $this->generateFavorites();
-
-        // inventories
-        $this->generateErrorMessages();
-        $this->generateDynamicCode();
-        $this->generateGlobals();
-        $this->generateInventories();
-        $this->generateClassDepth();
-
-        // Annex
-        $this->generateAnalyzerSettings();
-        $this->generateAuditConfig();
-        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
-        $analyzersList = array_unique($analyzersList);
-        $this->generateDocumentation($analyzersList);
-        $this->generateCodes();
-
-        // Static files
-        $files = array('credits');
-        foreach($files as $file) {
+        foreach($this->generations_files as $file) {
             $baseHTML = $this->getBasedPage($file);
             $this->putBasedPage($file, $baseHTML);
         }
@@ -281,6 +269,13 @@ class Ambassador extends Reports {
         if (file_exists("{$this->tmpName}/datas/base.html")) {
             unlink("{$this->tmpName}/datas/base.html");
             unlink("{$this->tmpName}/datas/menu.html");
+            unlink("{$this->tmpName}/datas/empty.html");
+        }
+
+        $files = glob("{$this->tmpName}/datas/*.html");
+        $files = array_map('basename', $files);
+        foreach(array_diff($files, $this->usedFiles) as $file) {
+            unlink("{$this->tmpName}/datas/$file");
         }
 
         // Clean final destination
@@ -305,11 +300,14 @@ class Ambassador extends Reports {
         return $description;
     }
 
-    protected function generateDocumentation($analyzerList) {
-        $baseHTML = $this->getBasedPage('analyses_doc');
+    protected function generateDocumentation(Section $section) {
+        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_unique($analyzersList);
+
+        $baseHTML = $this->getBasedPage($section->source);
         $docHTML = array();
 
-        foreach($analyzerList as $analyzerName) {
+        foreach($analyzersList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $this->getDocs($analyzerName);
             $analyzersDocHTML = '<h2><a href="issues.html#analyzer=' . $this->toId($analyzerName) . '" id="' . $this->toId($analyzerName) . '">' . $description['name'] . '</a></h2>';
@@ -361,37 +359,13 @@ class Ambassador extends Reports {
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', implode(PHP_EOL, $docHTML));
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyses\' documentation');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
-        $this->putBasedPage('analyses_doc', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateSecurity() {
-        $this->generateIssuesEngine('security_issues',
-                                    'Security issues',
-                                    $this->getIssuesFaceted('Security') );
-    }
-
-    protected function generateDeadCode() {
-        $this->generateIssuesEngine('deadcode_issues',
-                                    'Dead code issues',
-                                    $this->getIssuesFaceted('Dead code') );
-    }
-
-    protected function generateSuggestions() {
-        $this->generateIssuesEngine('suggestions',
-                                    'Suggestions',
-                                    $this->getIssuesFaceted('Suggestions') );
-    }
-
-    protected function generatePerformances() {
-        $this->generateIssuesEngine('performances_issues',
-                                    'Performances issues',
-                                    $this->getIssuesFaceted('Performances') );
-    }
-
-    protected function generateFavorites() {
-        $baseHTML = $this->getBasedPage('favorites_dashboard');
+    protected function generateFavorites(Section $section) {
+        $baseHTML = $this->getBasedPage($section->source);
 
         $favorites = new Favorites($this->config);
         $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
@@ -687,16 +661,12 @@ JAVASCRIPT;
 
         $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
         $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);
-        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' dashboard');
-        $this->putBasedPage('favorites_dashboard', $baseHTML);
-
-        $this->generateIssuesEngine('favorites_issues',
-                                    'Favorite violations',
-                                    $this->getIssuesFaceted('Preferences') );
+        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard() {
-        $baseHTML = $this->getBasedPage('index');
+    protected function generateDashboard(Section $section = null) {
+        $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
         $code = array();
@@ -979,12 +949,12 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
-        $this->putBasedPage('index', $finalHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateParameterCounts() {
-        $finalHTML = $this->getBasedPage('parameter_counts');
+    protected function generateParameterCounts(Section $section) {
+        $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
         $res = $this->sqlite->query(<<<'SQL'
@@ -1156,12 +1126,12 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Parameters counts');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
-        $this->putBasedPage('parameters_counts', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateExtensionsBreakdown() {
+    protected function generateExtensionsBreakdown(Section $section) {
         // List of extensions used
         $res = $this->sqlite->query(<<<'SQL'
 SELECT analyzer, count(*) AS count FROM results 
@@ -1184,10 +1154,10 @@ SQL
                   </div>';
         }
         
-        $this->generateGraphList('extension_list', 'Extensions\' list', $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPFunctionBreakdown() {
+    protected function generatePHPFunctionBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
@@ -1209,10 +1179,10 @@ SQL
                   </div>';
         }
         
-        $this->generateGraphList('phpfunctions_list', 'PHP Native Functions\' list', $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPConstantsBreakdown() {
+    protected function generatePHPConstantsBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
@@ -1234,10 +1204,10 @@ SQL
                   </div>';
         }
         
-        $this->generateGraphList('phpconstants_list', 'PHP Native Constants\' list', $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPClassesBreakdown() {
+    protected function generatePHPClassesBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'
 SELECT name, count
@@ -1259,7 +1229,7 @@ SQL
                   </div>';
         }
         
-        $this->generateGraphList('phpclasses_list', 'PHP Native Classes, Interfaces and Traits\' list', $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
     protected function generateGraphList($filename, $title, $xAxis, $data, $html) {
@@ -1624,7 +1594,6 @@ HTML;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyses');
 
         $this->putBasedPage('analyses', $finalHTML);
     }
@@ -1665,7 +1634,7 @@ SQL;
         return $row['number'];
     }
     
-    private function generateNoIssues() {
+    private function generateNoIssues(Section $section) {
         $list = $this->themes->getRulesetsAnalyzers(array(
         'Analyze',
         'Security',
@@ -1693,7 +1662,7 @@ WHERE analyzer NOT IN ($sqlList) AND
 SQL;
         $result = $this->sqlite->query($query);
 
-        $baseHTML = $this->getBasedPage('no_issues');
+        $baseHTML = $this->getBasedPage($section->source);
 
         $filesHTML = '';
 
@@ -1709,15 +1678,15 @@ SQL;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'No Issues Analysis');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
-        $this->putBasedPage('no_issues', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateFiles() {
+    protected function generateFiles(Section $section) {
         $files = $this->getFilesResultsCounts();
 
-        $baseHTML = $this->getBasedPage('files');
+        $baseHTML = $this->getBasedPage($section->source);
         $filesHTML = '';
 
         foreach ($files as $file) {
@@ -1733,9 +1702,9 @@ SQL;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Files\' list');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
-        $this->putBasedPage('files', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
     private function getFilesResultsCounts() {
@@ -1982,7 +1951,7 @@ SQL;
         );
     }
 
-    private function generateNewIssues() {
+    private function generateNewIssues(Section $section) {
         $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
 
         if (file_exists($this->config->dump_previous)) {
@@ -1993,21 +1962,17 @@ SQL;
             $diff = $issues;
         }
 
-        $this->generateIssuesEngine('neoissues',
-                                    'New issues',
-                                    $diff);
+        $this->generateIssuesEngine($section, $diff);
     }
-    
-    private function generateIssues() {
-        $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
-        $this->generateIssuesEngine('issues',
-                                    'Code issues',
-                                    $issues );
-    }
-    
-    protected function generateIssuesEngine($filename, $title, $issues) {
-        $baseHTML = $this->getBasedPage($filename);
 
+    protected function generateIssuesEngine(Section $section, $issues = array()) {
+        if (!empty($issues)) {
+            // Nothing, really
+        } elseif (is_array($section->ruleset)) {
+            $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($section->ruleset));
+        } else {
+            $issues = $this->getIssuesFaceted($section->ruleset);
+        }
         $total = count($issues);
         $issues = implode(', ' . PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
@@ -2068,10 +2033,11 @@ $issues
   </script>
 JAVASCRIPTCODE;
 
+        $baseHTML = $this->getBasedPage($section->source);
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', $total);
-        $this->putBasedPage($filename, $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
     protected function getIssuesFaceted($theme) {
@@ -2184,7 +2150,7 @@ SQL;
         return $class;
     }
 
-    protected function generateProcFiles() {
+    protected function generateProcFiles(Section $section) {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -2199,29 +2165,30 @@ SQL;
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('proc_files');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'FILES', $files);
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Files\' list');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage('proc_files', $html);
+        $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAnalyzersList() {
-        $analyzers = '';
+    protected function generateAnalyzersList(Section $section) {
+        $analyzers = array();
 
         foreach($this->themes->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzers .= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
+            $analyzers []= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
         }
+        $analyzers = implode(PHP_EOL, $analyzers);
 
-        $html = $this->getBasedPage('proc_analyses');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyses\' list');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage('proc_analyses', $html);
+        $this->putBasedPage($section->source, $html);
     }
 
-    private function generateExternalLib() {
+    private function generateExternalLib(Section $section) {
         $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
         $libraries = array();
@@ -2239,14 +2206,14 @@ SQL;
             $libraries []= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>";
         }
 
-        $html = $this->getBasedPage('ext_lib');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'LIBRARIES', implode(PHP_EOL, $libraries));
-        $html = $this->injectBloc($html, 'TITLE', 'External Libraries\' list');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage('ext_lib', $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateBugFixes() {
+    protected function generateBugFixes(Section $section) {
         $table = '';
 
         $data = new Methods($this->config);
@@ -2301,27 +2268,28 @@ SQL;
             }
         }
 
-        $html = $this->getBasedPage('bugfixes');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BUG_FIXES', $table);
-        $this->putBasedPage('bugfixes', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generatePhpConfiguration() {
+    protected function generatePhpConfiguration(Section $section) {
         $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate(null, Reports::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
         
-        $html = $this->getBasedPage('php_compilation');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
-        $html = $this->injectBloc($html, 'TITLE', 'PHP Configurations\' list');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage('php_compilation', $html);
+        $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCompatibilityEstimate() {
-        $html = $this->getBasedPage('empty');
+    protected function generateCompatibilityEstimate(Section $section) {
+        $html = $this->getBasedPage($section->source);
         
         $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
         $scores = array_fill_keys(array_values($versions), 0);
@@ -2518,26 +2486,25 @@ HTML;
             $suggestion = 'We have determined ' . count($key) . ' PHP version' . (count($key) > 1 ? 's' : '') . '. The compatible estimations are PHP ' . implode(', ', $key) . '. ';
         }
 
-        $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', $suggestion);
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
 
-        $this->putBasedPage('compatibility_version', $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAuditConfig() {
+    protected function generateAuditConfig(Section $section) {
         $ini = $this->config->toIni();
         $yaml = $this->config->toYaml();
 
-        $html = $this->getBasedPage('annex_config');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONFIG_INI', $ini);
         $html = $this->injectBloc($html, 'CONFIG_YAML', $yaml);
-        $html = $this->injectBloc($html, 'TITLE', 'Analyses Settings');
-
-        $this->putBasedPage('annex_config', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAnalyzerSettings() {
+    protected function generateAnalyzerSettings(Section $section) {
         $settings = '';
 
         $info = array(array('Code name', $this->config->project_name));
@@ -2574,15 +2541,15 @@ HTML;
         }
         unset($row);
 
-        $settings = implode('', $info);
+        $settings = implode(PHP_EOL, $info);
 
-        $html = $this->getBasedPage('annex_settings');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        $html = $this->injectBloc($html, 'TITLE', 'Audit Settings');
-        $this->putBasedPage('annex_settings', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateErrorMessages() {
+    private function generateErrorMessages(Section $section) {
         $errorMessages = '';
 
         $results = new Results($this->sqlite, 'Structures/ErrorMessages');
@@ -2592,13 +2559,14 @@ HTML;
             $errorMessages .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('error_messages');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
-        $this->putBasedPage('error_messages', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateExternalServices() {
-        $externalServices = '';
+    private function generateExternalServices(Section $section) {
+        $externalServices = array();
 
         $res = $this->datastore->getRow('configFiles');
         foreach($res as $row) {
@@ -2608,15 +2576,17 @@ HTML;
                 $link = '<a href="' . $row['homepage'] . '">' . $row['homepage'] . '&nbsp;<i class="fa fa-sign-out"></i></a>';
             }
 
-            $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
+            $externalServices []= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>";
         }
+        $externalServices = implode(PHP_EOL, $externalServices);
 
-        $html = $this->getBasedPage('external_services');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
-        $this->putBasedPage('external_services', $html);
+        $html = $this->injectBloc($html, 'TTLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDirectiveList() {
+    protected function generateDirectiveList(Section $section) {
         // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
@@ -2712,14 +2682,13 @@ SQL
             }
         }
 
-        $html = $this->getBasedPage('directive_list');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
-        $html = $this->injectBloc($html, 'TITLE', 'Directive list');
-        
-        $this->putBasedPage('directive_list', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompilations() {
+    protected function generateCompilations(Section $section) {
         $compilations = array();
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
@@ -2728,7 +2697,7 @@ SQL
             $version = "$suffix[0].$suffix[1]";
             $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
             if (!$res) {
-                $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>\n";
+                $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>";
                 continue; // Table was not created
             }
 
@@ -2757,17 +2726,53 @@ SQL
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
-            $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
+            $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>";
         }
 
-        $compilations = implode('', $compilations);
-        $html = $this->getBasedPage('compatibility_compilations');
+        $compilations = implode(PHP_EOL, $compilations);
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPILATIONS', $compilations);
-        $html = $this->injectBloc($html, 'TITLE', 'Compilations overview');
-        $this->putBasedPage('compatibility_compilations', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompatibility($version) {
+    protected function generateCompatibility74(Section $section) {
+        $this->generateCompatibility($section, '74');
+    }
+
+    protected function generateCompatibility73(Section $section) {
+        $this->generateCompatibility($section, '73');
+    }
+
+    protected function generateCompatibility72(Section $section) {
+        $this->generateCompatibility($section, '72');
+    }
+
+    protected function generateCompatibility71(Section $section) {
+        $this->generateCompatibility($section, '71');
+    }
+
+    protected function generateCompatibility70(Section $section) {
+        $this->generateCompatibility($section, '70');
+    }
+
+    protected function generateCompatibility56(Section $section) {
+        $this->generateCompatibility($section, '56');
+    }
+
+    protected function generateCompatibility55(Section $section) {
+        $this->generateCompatibility($section, '55');
+    }
+    
+    protected function generateCompatibility54(Section $section) {
+        $this->generateCompatibility($section, '54');
+    }
+
+    protected function generateCompatibility53(Section $section) {
+        $this->generateCompatibility($section, '53');
+    }
+
+    protected function generateCompatibility(Section $section, $version) {
         $compatibility = array();
         $skipped       = array();
 
@@ -2800,14 +2805,14 @@ SQL
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
 HTML;
 
-        $html = $this->getBasedPage('compatibility');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPATIBILITY', $compatibility);
-        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP ' . $version[0] . '.' . $version[1]);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-        $this->putBasedPage('compatibility_php' . $version, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateDynamicCode() {
+    private function generateDynamicCode(Section $section) {
         $dynamicCode = '';
 
         $results = new Results($this->sqlite, 'Structures/DynamicCode');
@@ -2817,12 +2822,13 @@ HTML;
             $dynamicCode .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('dynamic_code');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
-        $this->putBasedPage('dynamic_code', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateGlobals() {
+    private function generateGlobals(Section $section = null) {
         $res = $this->sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="globalVariables"');
         $name = $res->fetchArray(\SQLITE3_ASSOC);
 
@@ -2868,57 +2874,78 @@ HTML;
         }
         $theGlobals = implode('', $theGlobals);
 
-        $html = $this->getBasedPage('globals');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
-        $this->putBasedPage('globals', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInventories() {
-        $definitions = array(
-            'constants'  => array('description' => 'List of all defined constants in the code.',
-                                  'analyzer'    => 'Constants/Constantnames'),
-            'classes'    => array('description' => 'List of all defined classes in the code.',
-                                  'analyzer'    => 'Classes/Classnames'),
-            'interfaces' => array('description' => 'List of all defined interfaces in the code.',
-                                  'analyzer'    => 'Interfaces/Interfacenames'),
-            'traits'     => array('description' => 'List of all defined traits in the code.',
-                                  'analyzer'    => 'Traits/Traitnames'),
-            'functions'  => array('description' => 'List of all defined functions in the code.',
-                                  'analyzer'    => 'Functions/Functionnames'),
-            'namespaces' => array('description' => 'List of all defined namespaces in the code.',
-                                  'analyzer'    => 'Namespaces/Namespacesnames'),
-            'Type/Url'   => array('description' => 'List of all URL mentioned in the code.',
-                                  'analyzer'    => 'Type/Url'),
-            'Type/Regex' => array('description' => 'List of all PCRE regular expressions mentioned in the code.',
-                                  'analyzer'    => 'Type/Regex'),
-            'Type/Sql'   => array('description' => 'List of all SQL queries mentioned in the code.',
-                                  'analyzer'    => 'Type/Sql'),
-            'Type/Email' => array('description' => 'List of all Email mentioned in the code.',
-                                  'analyzer'    => 'Type/Email'),
-            'Type/GPCIndex' => array('description' => 'List of all incoming variables mentioned in the code.',
-                                  'analyzer'    => 'Type/GPCIndex'),
-            'Type/Md5string' => array('description' => 'List of all incoming MD5-like strings mentioned in the code.',
-                                  'analyzer'    => 'Type/GPCIndex'),
-            'Type/Mime' => array('description'  => 'List of all Mime-type mentioned in the code.',
-                                  'analyzer'    => 'Type/GPCIndex'),
-            'Type/Pack' => array('description'  => 'List of all pack format mentioned in the code.',
-                                  'analyzer'    => 'Type/Pack'),
-            'Type/Printf' => array('description' => 'List of all printf() format mentioned in the code.',
-                                  'analyzer'    => 'Type/Printf'),
-            'Type/Path'   => array('description' => 'List of all paths mentioned in the code.',
-                                  'analyzer'    => 'Type/Path'),
-//            'exceptions' => array('description' => 'List of all defined exceptions.',
-//                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
-        );
-        foreach($this->inventories as $fileName => $theTitle) {
-            $theDescription = $definitions[$fileName]['description'];
-            $theAnalyzer    = $definitions[$fileName]['analyzer'];
-            
-            if (strpos($fileName, '/') !== false) {
-                $fileName = strtolower(basename($fileName));
-            }
+    private function generateInventoriesConstants(Section $section) {
+        $this->generateInventories($section, 'Constants/Constantnames', 'List of all defined constants in the code.');
+    }
+    
+    private function generateInventoriesClasses(Section $section) {
+        $this->generateInventories($section, 'Constants/Classnames', 'List of all defined classes in the code.');
+    }
 
-            $results = new Results($this->sqlite, $theAnalyzer);
+    private function generateInventoriesInterfaces(Section $section) {
+        $this->generateInventories($section, 'Interfaces/Interfacenames', 'List of all defined interfaces in the code.');
+    }
+
+    private function generateInventoriesTraits(Section $section) {
+        $this->generateInventories($section, 'Traits/Traitnames', 'List of all defined traits in the code.');
+    }
+
+    private function generateInventoriesFunctions(Section $section) {
+        $this->generateInventories($section, 'Functions/Functionnames', 'List of all defined functions in the code.');
+    }
+
+    private function generateInventoriesNamespaces(Section $section) {
+        $this->generateInventories($section, 'Namespaces/Namespacesnames', 'List of all defined namespaces in the code.');
+    }
+
+    private function generateInventoriesUrl(Section $section) {
+        $this->generateInventories($section, 'Type/Url', 'List of all URL mentioned in the code.');
+    }
+
+    private function generateInventoriesRegex(Section $section) {
+        $this->generateInventories($section, 'Type/Regex', 'List of all Regex mentioned in the code.');
+    }
+
+    private function generateInventoriesSql(Section $section) {
+        $this->generateInventories($section, 'Type/Sql', 'List of all SQL mentioned in the code.');
+    }
+
+    private function generateInventoriesGPCIndex(Section $section) {
+        $this->generateInventories($section, 'Type/GPCIndex', 'List of all Email mentioned in the code.');
+    }
+
+    private function generateInventoriesEmail(Section $section) {
+        $this->generateInventories($section, 'Type/Email', 'List of all incoming variables mentioned in the code.');
+    }
+
+    private function generateInventoriesMd5string(Section $section) {
+        $this->generateInventories($section, 'Type/Md5string', 'List of all MD5-like strings mentioned in the code.');
+    }
+
+    private function generateInventoriesMime(Section $section) {
+        $this->generateInventories($section, 'Type/MimeType', 'List of all Mime strings mentioned in the code.');
+    }
+
+    private function generateInventoriesPack(Section $section) {
+        $this->generateInventories($section, 'Type/Pack', 'List of all packing format strings mentioned in the code.');
+    }
+
+    private function generateInventoriesPrintf(Section $section) {
+        $this->generateInventories($section, 'Type/Printf', 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
+    }
+
+    private function generateInventoriesPath(Section $section) {
+        $this->generateInventories($section, 'Type/Path', 'List of all paths strings mentioned in the code.');
+    }
+
+    private function generateInventories(Section $section, $analyzer, $description) {
+            $results = new Results($this->sqlite, $analyzer);
             $results->load();
             
             $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
@@ -2937,17 +2964,14 @@ HTML;
                 $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
             }
 
-            $html = $this->getBasedPage('inventories');
-            $html = $this->injectBloc($html, 'TITLE', $theTitle);
-            $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
+            $html = $this->getBasedPage($section->source);
+            $html = $this->injectBloc($html, 'TITLE', $section->title);
+            $html = $this->injectBloc($html, 'DESCRIPTION', $description);
             $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
-            $this->putBasedPage('inventories_' . $fileName, $html);
-        }
-        $this->generateExceptionTree();
-        $this->generateNamespaceTree();
+            $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInterfaceTree() {
+    private function generateInterfaceTree(Section $section) {
         $list = array();
 
  $res = $this->sqlite->query(<<<SQL
@@ -2992,15 +3016,15 @@ SQL
             $theTable = implode(PHP_EOL, $theTableArray);
         }
         
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Interfaces inventory');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_interfacetree', $html);
+        $this->putBasedPage($section->file, $html);
        
     }
 
-    private function generateTraitMatrix() {
+    private function generateTraitMatrix(Section $section) {
 
         // nombre de method en conflict possible
         // ce trait inclut l'autre
@@ -3095,13 +3119,13 @@ SQL;
 </table>
 HTML;
         
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Traits matrix');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the trait matrix. Conflicting methods between any two traits are listed in the cells : when they are used in the same class, those traits will require conflict resolutions. And dark gray cells are traits that are actually included one into the other.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_traitmatrix', $html);    }
+        $this->putBasedPage($section->file, $html);    }
     
-    private function generateTraitTree() {
+    private function generateTraitTree(Section $section) {
         $list = array();
 
  $res = $this->sqlite->query(<<<SQL
@@ -3146,14 +3170,14 @@ SQL
             $theTable = implode(PHP_EOL, $theTable);
         }
         
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Traits inventory');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the traits : a trait is extended when it uses another trait. Traits without any extension are not represented. The same trait may be mentionned several times, as trait may use an arbitrary number of traits.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_traittree', $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassTree() {
+    private function generateClassTree(Section $section) {
         $list = array();
 
         $res = $this->sqlite->query(<<<SQL
@@ -3197,11 +3221,11 @@ SQL
             $theTable = implode(PHP_EOL, $theTable);
         }
 
-        $html = $this->getBasedPage('empty');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', 'Classes inventory');
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the classes. Classes without any extension are not represented');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_classtree', $html);
+        $this->putBasedPage($section->file, $html);
     }
     
     private function extends2ul($root, $paths, $level = 0) {
@@ -3230,7 +3254,7 @@ SQL
         return $return;
     }
     
-    private function generateExceptionTree() {
+    private function generateExceptionTree(Section $section) {
         $exceptions = array (
   'Throwable' =>
   array (
@@ -3340,11 +3364,11 @@ SQL
         array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', '');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_exceptions', $html);
+        $this->putBasedPage($section->file, $html);
     }
     
     private function path2tree($paths) {
@@ -3410,7 +3434,7 @@ SQL
         return $return;
     }
     
-    private function generateNamespaceTree() {
+    private function generateNamespaceTree(Section $section) {
         $theTable = '';
         $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
         
@@ -3422,11 +3446,11 @@ SQL
         $paths = $this->path2tree($paths);
         $theTable = $this->pathtree2ul($paths);
         
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Namespace tree');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the various namespaces in use in the code.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('inventories_namespaces', $html);
+        $this->putBasedPage($section->file, $html);
     }
     
     private function tree2ul($tree, $display) {
@@ -3457,7 +3481,7 @@ SQL
         return $return;
     }
 
-    private function generateVisibilitySuggestions() {
+    private function generateVisibilitySuggestions(Section $section) {
         $constants  = $this->generateVisibilityConstantSuggestions();
         $properties = $this->generateVisibilityPropertySuggestions();
         $methods    = $this->generateVisibilityMethodsSuggestions();
@@ -3492,14 +3516,14 @@ HTML
         $visibilityTable []= '</table>';
         $visibilityTable = implode(PHP_EOL, $visibilityTable);
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Visibility recommendations');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Below, is a summary of all classes and their component\'s visiblity. Whenever a visibility is set and used at the right level, a green star is presented. Whenever it is set to a level, but could be updated to another, red and orange stars are mentioned. ');
         $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
-        $this->putBasedPage('visibility_suggestions', $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassOptionSuggestions() {
+    private function generateClassOptionSuggestions(Section $section) {
         $finals  = $this->generateClassFinalSuggestions();
         $abstracts = $this->generateClassAbstractuggestions();
         
@@ -3549,8 +3573,8 @@ HTML;
     </table>
 HTML;
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Class Option Recommendations');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
 Below, is a list of classes that may be updated with final or abstract. <br />
 
@@ -3561,7 +3585,7 @@ The absence of star report currently configured classes.
 HTML
 );
         $html = $this->injectBloc($html, 'CONTENT', $visibilityHtml);
-        $this->putBasedPage('class_options_suggestions', $html);
+        $this->putBasedPage($section->file, $html);
     }
     
 
@@ -3882,19 +3906,20 @@ SQL
         return $return;
     }
     
-    private function generateAlteredDirectives() {
+    private function generateAlteredDirectives(Section $section) {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $alteredDirectives .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('altered_directives');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
-        $this->putBasedPage('altered_directives', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateChangedClasses() {
+    private function generateChangedClasses(Section $section) {
         $changedClasses = '';
         $res = $this->sqlite->query('SELECT * FROM classChanges');
         if ($res) {
@@ -3919,13 +3944,14 @@ SQL
             $changedClasses = 'No changes detected';
         }
 
-        $html = $this->getBasedPage('changed_classes');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CHANGED_CLASSES', $changedClasses);
-        $this->putBasedPage('changed_classes', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->source, $html);
     }
 
-    private function generateClassDepth() {
-        $finalHTML = $this->getBasedPage('classes_depth');
+    private function generateClassDepth(Section $section) {
+        $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
         $res = $this->sqlite->query(<<<'SQL'
@@ -4092,14 +4118,14 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class depth');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
 
-        $this->putBasedPage('classes_depth', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
     
-    private function generateClassSize() {
-        $finalHTML = $this->getBasedPage('cit_size');
+    private function generateClassSize(Section $section) {
+        $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
         $res = $this->sqlite->query(<<<SQL
@@ -4273,14 +4299,14 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class size');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
 
-        $this->putBasedPage('cit_size', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateMethodSize() {
-        $finalHTML = $this->getBasedPage('cit_size');
+    private function generateMethodSize(Section $section) {
+        $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
         $res = $this->sqlite->query(<<<SQL
@@ -4455,32 +4481,33 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Methods size');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Method');
 
-        $this->putBasedPage('method_size', $finalHTML);
+        $this->putBasedPage($section->file, $finalHTML);
     }
     
-    private function generateStats() {
+    private function generateStats(Section $section) {
         $results = new Stats($this->config);
         $report = $results->generate(null, Reports::INLINE);
         $report = json_decode($report);
         
         $stats = '';
-        foreach($report as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$section</td></tr>\n";
+        foreach($report as $group => $hash) {
+            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>\n";
 
             foreach($hash as $name => $count) {
                 $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
             }
         }
         
-        $html = $this->getBasedPage('stats');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
-        $this->putBasedPage('stats', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->source, $html);
     }
 
-    private function generateComplexExpressions() {
+    private function generateComplexExpressions(Section $section) {
         $results = new Results($this->sqlite, 'Structures/ComplexExpression');
         $results->load();
         
@@ -4493,12 +4520,13 @@ JAVASCRIPT;
             $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
         }
 
-        $html = $this->getBasedPage('complex_expressions');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $expressions);
-        $this->putBasedPage('complex_expressions', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCodes() {
+    protected function generateCodes(Section $section) {
         $path = "{$this->tmpName}/datas/sources";
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
@@ -4559,14 +4587,15 @@ JAVASCRIPT;
   
   </script>
 JAVASCRIPT;
-        $html = $this->getBasedPage('codes');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
         $html = $this->injectBloc($html, 'FILES', $files);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage('codes', $html);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateFileDependencies() {
+    private function generateFileDependencies(Section $section) {
         $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE included != including AND type in ("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW")');
 
         $nodes = array();
@@ -4614,14 +4643,14 @@ JAVASCRIPT;
         }
         $theTable = implode(PHP_EOL, $theTable);
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'File dependencies tree');
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'This is the list of file dependencies. The top files require the bottom files to be included to be properly running. This dependency tree covers class usage : new, ::, extends and implements.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage('files_tree', $html);
+        $this->putBasedPage($section->file, $html);
     }
     
-    private function generateIdenticalFiles() {
+    private function generateIdenticalFiles(Section $section) {
         $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 1 ORDER BY COUNT(*), file');
 
         $theTable = array();
@@ -4641,12 +4670,13 @@ HTML;
         $theTable = implode(PHP_EOL, $theTable);
         
 
-        $html = $this->getBasedPage('identical_files');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'IDENTICAL', $theTable);
-        $this->putBasedPage('identical_files', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
     
-    private function generateConcentratedIssues() {
+    private function generateConcentratedIssues(Section $section) {
         $listAnalyzers = $this->themes->getRulesetsAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
 
@@ -4671,12 +4701,13 @@ SQL;
 
         $table = implode(PHP_EOL, $table);
 
-        $html = $this->getBasedPage('concentrated_issues');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $table);
-        $this->putBasedPage('concentrated_issues', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateConfusingVariables() {
+    private function generateConfusingVariables(Section $section) {
         $data = new Data\CloseNaming($this->sqlite);
         $results = $data->prepare();
         $reasons = array('_'       => 'One _',
@@ -4701,23 +4732,24 @@ SQL;
         }
         $table = implode(PHP_EOL, $table);
 
-        $html = $this->getBasedPage('variables_confusing');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONTENT', $table);
-        $this->putBasedPage('variables_confusing', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->source, $html);
     }
     
-    protected function generateAppinfo() {
+    protected function generateAppinfo(Section $section) {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();
         
         $list = array();
         $originals = $data->originals();
-        foreach($data->values() as $section => $points) {
+        foreach($data->values() as $group => $points) {
             $listPoint = array();
             foreach($points as $point => $status) {
                 
-                if (isset($originals[$section][$point], $this->frequences[$originals[$section][$point]])) {
-                    $percentage = $this->frequences[$originals[$section][$point]];
+                if (isset($originals[$group][$point], $this->frequences[$originals[$group][$point]])) {
+                    $percentage = $this->frequences[$originals[$group][$point]];
                     $percentageDisplay = "$percentage %";
                 } else {
                     $percentage = 0;
@@ -4735,7 +4767,7 @@ HTML;
             $list[] = <<<HTML
         <ul class="sidebar-menu">
           <li class="treeview">
-            <a href="#"><i class="fa fa-certificate"></i> <span>$section</span><i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-certificate"></i> <span>$group</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
                 $listPoint
             </ul>
@@ -4751,9 +4783,10 @@ $list
         </div>
 HTML;
 
-        $html = $this->getBasedPage('appinfo');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'APPINFO', $list);
-        $this->putBasedPage('appinfo', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function makeIcon($tag) {
@@ -4889,6 +4922,36 @@ HTML;
 
     private function toHtmlList(array $array) {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
+    }
+}
+
+class Section {
+    private const SAME_AS_FILE = true;
+    
+    public $method  = 'NoSuchMethod';
+    public $title   = 'No title';
+    public $menu    = 'No menu title';
+    public $source  = self::SAME_AS_FILE;
+    public $file    = 'empty';
+    public $icon    = 'circle-o';
+    public $ruleset = 'None';
+    
+    function __construct(array $section) {
+        $this->title   = $section['title']   ?? $this->title;
+        $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
+        $this->file    = $section['file']    ?? $this->file;
+        $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
+        $this->icon    = $section['icon']    ?? $this->icon;
+        $this->method  = $section['method']  ?? $this->method;
+        $this->ruleset = $section['ruleset'] ?? $this->ruleset;
+    }
+    
+    function __get($name) {
+        print "Access to undefined property $name\n";
+    }
+
+    function __set($name, $value) {
+        print "Write to undefined property $name\n";
     }
 }
 
