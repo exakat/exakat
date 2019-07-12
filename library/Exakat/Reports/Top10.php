@@ -32,6 +32,7 @@ use Exakat\Reports\Reports;
 class Top10 extends Ambassador {
     const FILE_FILENAME  = 'top10';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'top10';
 
     protected $frequences        = array();
     protected $timesToFix        = array();
@@ -70,106 +71,12 @@ class Top10 extends Ambassador {
                      );
     }
 
-    protected function getBasedPage($file) {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
-
-            $menu = <<<'MENU'
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-          <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="top10.html"><i class="fa fa-flag"></i> <span>Top 10</span></a></li>
-          <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
-          <li class="treeview">
-            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
-              <li><a href="proc_analyzers.html"><i class="fa fa-circle-o"></i>Processed Analyzers</a></li>
-              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
-              <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Documentation</a></li>
-              <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /.sidebar-menu -->
-MENU;
-
-            $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
-            while($row = $res->fetchArray(\SQLITE3_NUM)) {
-                $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
-            }
-
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
-            $baseHTML = $this->injectBloc($baseHTML, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
-        }
-
-        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/{$file}.html");
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
-
-        return $combinePageHTML;
-    }
-
-    protected function putBasedPage($file, $html) {
-        if (strpos($html, '{{BLOC-JS}}') !== false) {
-            $html = str_replace('{{BLOC-JS}}', '', $html);
-        }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for ' . $this->config->project, $html);
-
-        file_put_contents($this->tmpName . '/datas/' . $file . '.html', $html);
-    }
-
-    protected function injectBloc($html, $bloc, $content) {
-        return str_replace('{{' . $bloc . '}}', $content, $html);
-    }
-
-    public function generate($folder, $name = self::FILE_FILENAME) {
-        if ($name == self::STDOUT) {
-            print "Can't produce Diplomat format to stdout\n";
-            return false;
-        }
-
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "$folder/.$name";
-
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-        $this->generateDashboard();
-
-        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
-        $analyzersList = array_unique($analyzersList);
-        $this->generateDocumentation($analyzersList);
-        $this->generateIssues();
-        $this->generateTop10();
-
-        // annex
-        $this->generateAnalyzerSettings();
-        $this->generateCodes();
-        $files = array('credits');
-        $this->generateAnalyzersList();
-
-        $this->generateFiles();
-        $this->generateAnalyzers();
-        
-        $this->cleanFolder();
-    }
-
     protected function generateIssues() {
         $this->generateIssuesEngine('issues',
                                     $this->getIssuesFaceted('Top10') );
     }
 
-    private function generateTop10() {
+    protected function generateTop10(Section $section) {
         $top10 = array('Dangling reference'      => array('Structures/DanglingArrayReference'),
                        'For with count'          => array('Structures/ForWithFunctioncall',),
                        'Next month trap'         => array('Structures/NextMonthTrap',),
@@ -230,11 +137,11 @@ SQL;
 <i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
 HTML;
 
-        $html = $this->getBasedPage('compatibility');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPATIBILITY', $top10);
         $html = $this->injectBloc($html, 'TITLE', 'Top 10 classic errors ');
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-        $this->putBasedPage('top10', $html);
+        $this->putBasedPage($section->file, $html);
 
     }
 }
