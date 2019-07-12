@@ -31,6 +31,7 @@ use Exakat\Reports\Helpers\Results;
 class Weekly extends Ambassador {
     const FILE_FILENAME  = 'weekly';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'Weekly';
 
     const COLORS = array('A' => '#2ED600',
                          'B' => '#81D900',
@@ -69,73 +70,17 @@ class Weekly extends Ambassador {
 
     private $grading       = array();
     private $results       = null;
-    private $resultsCounts = null;
+    private $resultsCounts = array();
     
     private $usedAnalyzer = array();
     private $weeks        = array();
     private $current      = '';
 
-    protected function getBasedPage($file) {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
-
-            // Moving the first in the last position
-            $weeks = array_keys($this->weeks);
-            $weeksMenu = array();
-            foreach($weeks as $id => $week) {
-                $title = $this->titles[$id];
-                $weeksMenu[] = "          <li><a href=\"weekly-$week.html\"><i class=\"fa fa-flag\"></i> <span>$title</span></a></li>";
-            }
-            $weeksMenu = implode(PHP_EOL, $weeksMenu);
-
-            $menu = <<<MENU
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-          <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          $weeksMenu
-          <li class="treeview">
-            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
-              <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Analyzers Documentation</a></li>
-              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
-              <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /.sidebar-menu -->
-MENU;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
-        }
-
-        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/{$file}.html");
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
-
-        return $combinePageHTML;
+    public function dependsOnAnalysis() {
+        return array('Analyze',);
     }
 
-    public function generate($folder, $name = 'report') {
-        if ($name === self::STDOUT) {
-            print "Can't produce Grade format to stdout\n";
-            return false;
-        }
-        
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
-
-        
+    private function loadWeekly() {
         $this->current = (new \Datetime('now'))->format('Y-W');
         for ($i = 0; $i < 5; ++$i) {
             $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
@@ -145,6 +90,14 @@ MENU;
             
             if (json_last_error() != '') {
                 print "Error : could not read week details for $date\n";
+                continue;
+            }
+
+            $analyzerListSql = makeList($this->weeks[$date]->analysis);
+            $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
+            $res = $this->sqlite->query($query);
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $this->resultsCounts[$row['analyzer']] = $row['count'];
             }
         }
 
@@ -156,16 +109,23 @@ MENU;
         if (json_last_error() != '') {
             print "Error : could not read week details for $date\n";
         }
-        
-        $all = array_merge(...array_column($this->weeks, 'analysis'));
-        $this->results = new Results($this->sqlite, $all);
-        $this->results->load();
 
-        $this->resultsCounts = array_fill_keys($all, 0);
-        foreach($this->results->toArray() as $result) {
-            ++$this->resultsCounts[$result['analyzer']];
-        }
-        
+       $analyzerListSql = makeList($this->weeks[$date]->analysis);
+       $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
+       $res = $this->sqlite->query($query);
+       while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+           $this->resultsCounts[$row['analyzer']] = $row['count'];
+       }
+
+    }
+
+    private function generateWeekly(Section $section, $year, $week) {
+        $analyzerList = $this->weeks["$year-$week"]->analysis;
+        $this->generateIssuesEngine($section, 
+                                    $this->getIssuesFaceted($analyzerList));
+    }
+
+    private function getGrades() {
         $levels = array(
             'Critical' => 5,
             'Major'    => 4,
@@ -174,107 +134,12 @@ MENU;
             'None'     => 1,
         );
 
+        $all = array_merge(...array_column($this->weeks, 'analysis'));
         foreach($all as $analyzer) {
             $severity = $this->getDocs($analyzer, 'severity');
             $this->grading[$analyzer] = $levels[$severity];
         }
 
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-
-        $this->generateWeekly(date('Y'), date('W'));
-        $this->generateWeekly(date('Y'), (int) date('W') - 1);
-        $this->generateWeekly(date('Y'), (int) date('W') - 2);
-        $this->generateWeekly(date('Y'), (int) date('W') - 3);
-        $this->generateWeekly(date('Y'), (int) date('W') - 4);
-        $this->generateWeekly(date('Y'), (int) date('W') + 1);
-        $this->generateDashboard();
-
-        // Annex
-        $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->usedAnalyzer);
-        $this->generateCodes();
-
-        // Static files
-        $files = array('credits');
-        foreach($files as $file) {
-            $baseHTML = $this->getBasedPage($file);
-            $this->putBasedPage($file, $baseHTML);
-        }
-
-        $this->cleanFolder();
-    }
-
-    protected function cleanFolder() {
-        if (file_exists("{$this->tmpName}/datas/base.html")) {
-            unlink("{$this->tmpName}/datas/base.html");
-            unlink("{$this->tmpName}/datas/menu.html");
-        }
-
-        // Clean final destination
-        if ($this->finalName !== '/') {
-            rmdirRecursive($this->finalName);
-        }
-
-        if (file_exists($this->finalName)) {
-            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
-            return;
-        }
-
-        rename($this->tmpName, $this->finalName);
-    }
-
-    private function generateWeekly($year, $week) {
-        if (empty($this->weeks["$year-$week"])) {
-            return;
-        }
-
-        $analyzerList = $this->weeks["$year-$week"]->analysis;
-        $this->generateIssuesEngine('weekly',
-                                    $this->getIssuesFaceted($analyzerList));
-
-        $analyzerListSql = makeList($analyzerList);
-        $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
-        $res = $this->sqlite->query($query);
-        $counts = array();
-        $total_issues = 0;
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['count'];
-            $total_issues += $row['count'];
-        }
-
-        $html = file_get_contents("$this->tmpName/datas/weekly.html");
-
-        $docs = array();
-        foreach($this->weeks["$year-$week"]->analysis as $analyzer) {
-            $ini = $this->getDocs($analyzer);
-            $item['analyzer']       = $ini['name'];
-            $docId   = $this->toId($analyzer);
-            $docs[$analyzer] = "<a href=\"analyzers_doc.html#$docId\">$ini[name]</a>";
-        }
-        
-        $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
-
-        $begin = date('M jS, Y', strtotime($year . 'W' . $week . '1'));
-        $end   = date('M jS, Y', strtotime($year . 'W' . $week . '7'));
-        $titleDate = $year . ' ' . ordinal($week) . ' week';
-
-        $finalHTML = str_replace('<WEEK>', $titleDate, $html);
-        $fullweek = array("From $begin to $end : <br /> Total : $total_issues <br />");
-        foreach($docs as $analyzer => $doc) {
-            $fullweek[] = " $doc ({$counts[$analyzer]}) ";
-        }
-        $finalHTML = str_replace('<FULLWEEK>', implode(' - ', $fullweek), $finalHTML) . ' - ';
-        
-        file_put_contents("{$this->tmpName}/datas/weekly.html", $finalHTML);
-
-        copy("{$this->tmpName}/datas/weekly.html", "{$this->tmpName}/datas/weekly-$year-$week.html");
-
-        return true;
-    }
-
-    private function getGrades() {
         $this->globalGrade = 0;
         
         $grade = 0;
@@ -286,10 +151,36 @@ MENU;
         $this->globalGrade = intval(100 * max(0, 20 - $grade)) / 100;
     }
 
-    protected function generateDashboard() {
+    protected function generateWeek0(Section $section) {
+        $this->generateWeekly($section, date('Y'), date('W'));
+    }
+
+    protected function generateWeek1(Section $section) {
+        $this->generateWeekly($section, date('Y'), (int) date('W') - 1);
+    }
+
+    protected function generateWeek2(Section $section) {
+        $this->generateWeekly($section, date('Y'), (int) date('W') - 2);
+    }
+
+    protected function generateWeek3(Section $section) {
+        $this->generateWeekly($section, date('Y'), (int) date('W') - 3);
+    }
+
+    protected function generateWeek4(Section $section) {
+        $this->generateWeekly($section, date('Y'), (int) date('W') - 4);
+    }
+
+    protected function generateWeekNext(Section $section) {
+        $this->generateWeekly($section, date('Y'), (int) date('W') + 1);
+    }
+
+    protected function generateDashboard(Section $section) {
+        $this->loadWeekly();
+
         $this->getGrades();
 
-        $baseHTML = $this->getBasedPage('index_weekly');
+        $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
         $code = array();
@@ -596,8 +487,8 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Grading code');
-        $this->putBasedPage('index', $finalHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $finalHTML);
     }
 
     protected function getAnalyzersCount($limit) {
