@@ -4926,34 +4926,4 @@ HTML;
     }
 }
 
-class Section {
-    private const SAME_AS_FILE = true;
-    
-    public $method  = 'NoSuchMethod';
-    public $title   = 'No title';
-    public $menu    = 'No menu title';
-    public $source  = self::SAME_AS_FILE;
-    public $file    = 'empty';
-    public $icon    = 'circle-o';
-    public $ruleset = 'None';
-    
-    function __construct(array $section) {
-        $this->title   = $section['title']   ?? $this->title;
-        $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
-        $this->file    = $section['file']    ?? $this->file;
-        $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
-        $this->icon    = $section['icon']    ?? $this->icon;
-        $this->method  = $section['method']  ?? $this->method;
-        $this->ruleset = $section['ruleset'] ?? $this->ruleset;
-    }
-    
-    function __get($name) {
-        print "Access to undefined property $name\n";
-    }
-
-    function __set($name, $value) {
-        print "Write to undefined property $name\n";
-    }
-}
-
 ?>
