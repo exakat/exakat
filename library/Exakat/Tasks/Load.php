@@ -3594,6 +3594,11 @@ class Load extends Tasks {
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;
 
+        // Skip phpdocs
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
+            ++$this->id;
+        }
+
         // Managing else case
         if (in_array($this->tokens[$this->id][0], array($this->phptokens::T_END,
                                                         $this->phptokens::T_CLOSE_TAG),
@@ -4749,12 +4754,23 @@ class Load extends Tasks {
         $phpDoc->fullcode = $this->tokens[$this->id][1];
         $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        // PHPdoc that won't be attached to anything    
-        if (in_array($this->tokens[$this->id + 1][0],  
-                     array($this->phptokens::T_CLOSE_CURLY,
-                           $this->phptokens::T_CASE,
-                           $this->phptokens::T_DEFAULT,
-                           $this->phptokens::T_END,
+        // PHPdoc that won't be attached to anything and lost
+        if (!in_array($this->tokens[$this->id + 1][0],  
+                     array($this->phptokens::T_CLASS,
+                           $this->phptokens::T_TRAIT,
+                           $this->phptokens::T_INTERFACE,
+                           $this->phptokens::T_FINAL,
+                           $this->phptokens::T_ABSTRACT,
+                           $this->phptokens::T_NS_SEPARATOR,
+                           $this->phptokens::T_STRING,
+                           $this->phptokens::T_NAMESPACE,
+                           $this->phptokens::T_PRIVATE,
+                           $this->phptokens::T_PROTECTED,
+                           $this->phptokens::T_PUBLIC,
+                           $this->phptokens::T_STATIC,
+                           $this->phptokens::T_VAR,
+                           $this->phptokens::T_CONST,
+                           $this->phptokens::T_FUNCTION,
                     ),
                     STRICT_COMPARISON
                     )) {
