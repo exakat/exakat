@@ -27,13 +27,16 @@ class CloseNaming extends Analyzer {
     
     public function analyze() {
         $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
-//             ->raw('filter{ it.get().value("fullcode").length() > 3}')
              ->values('fullcode')
              ->unique();
         $res = $this->rawQuery();
-        
-        $variables = $res->toArray();
 
+        $variables = $res->toArray();
+        if (empty($variables)) {
+            return;
+        }
+
+        $closeVariables = array();
         foreach($variables as $v1) {
             foreach($variables as $v2) {
                 if ($v1 === $v2) { continue; }
