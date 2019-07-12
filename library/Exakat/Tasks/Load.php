@@ -104,6 +104,8 @@ class Load extends Tasks {
     private $id     = 0;
     private $id0    = null;
 
+    private $phpDocs = array();
+
     const ALTERNATIVE_SYNTAX = true;
     const NORMAL_SYNTAX      = false;
 
@@ -293,8 +295,6 @@ class Load extends Tasks {
             $this->phptokens::T_THROW                    => 'processThrow',
             $this->phptokens::T_YIELD                    => 'processYield',
             $this->phptokens::T_YIELD_FROM               => 'processYieldfrom',
-
-            $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
 
             $this->phptokens::T_EQUAL                    => 'processAssignation',
             $this->phptokens::T_PLUS_EQUAL               => 'processAssignation',
@@ -672,6 +672,7 @@ class Load extends Tasks {
 
         $comments = 0;
         $this->tokens = array();
+        $total = 0;
         foreach($tokens as $t) {
             if (is_array($t)) {
                 if ($t[0] === $this->phptokens::T_WHITESPACE) {
@@ -679,9 +680,12 @@ class Load extends Tasks {
                 } elseif ($t[0] === $this->phptokens::T_COMMENT) {
                     $line += substr_count($t[1], "\n");
                     $comments += substr_count($t[1], "\n");
+                } elseif ($t[0] === $this->phptokens::T_DOC_COMMENT) {
+                    $this->phpDocs[$total + 1] = $t;
                 } else {
                     $line = $t[2];
                     $this->tokens[] = $t;
+                    ++$total;
                 }
             } elseif (is_string($t)) {
                 $this->tokens[] = array(0 => $this->phptokens::TOKENS[$t],
@@ -1613,7 +1617,6 @@ class Load extends Tasks {
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
 
-        $this->processPhpdoc();
         // Process block
         $this->makeCitBody($class);
         
@@ -3607,11 +3610,6 @@ class Load extends Tasks {
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;
 
-        // Skip phpdocs
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
-            ++$this->id;
-        }
-
         // Managing else case
         if (in_array($this->tokens[$this->id][0], array($this->phptokens::T_END,
                                                         $this->phptokens::T_CLOSE_TAG),
@@ -4759,27 +4757,16 @@ class Load extends Tasks {
     }
 
     private function makePhpdoc(Atom $node) {
-        if (empty($this->phpDoc)) {
+        if (!isset($this->phpDocs[$this->id])) {
             return;
         }
 
         $phpDoc = $this->addAtom('Phpdoc');
-        $phpDoc->code     = $this->phpDoc[1];
-        $phpDoc->fullcode = $this->phpDoc[1];
-        $phpDoc->token    = $this->getToken($this->phpDoc[0]);
+        $phpDoc->code     = $this->phpDocs[$this->id][1];
+        $phpDoc->fullcode = $this->phpDocs[$this->id][1];
+        $phpDoc->token    = $this->getToken($this->phpDocs[$this->id][0]);
 
         $this->addLink($node, $phpDoc, 'PHPDOC');
-
-        $this->phpDoc = '';
-    }
-
-    private function processPhpdoc() {
-        // save PHP doc for eventual use later
-        do {
-            $this->phpDoc = $this->tokens[$this->id];
-            ++$this->id;
-        } while($this->tokens[$this->id][0] === $this->phptokens::T_DOC_COMMENT) ;
-        --$this->id;
     }
 
     private function processYield() {
