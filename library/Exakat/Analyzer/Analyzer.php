@@ -1936,7 +1936,7 @@ GREMLIN;
         if (!isset($cache[$fullpath])) {
             if (file_exists($fullpath)) {
                 $json = json_decode(file_get_contents($fullpath));
-            } elseif ((!is_null($this->config->ext)) && !empty($jsonString = $this->config->ext->loadData("data/$file"))) {
+            } elseif ((!$this->config->ext !== null) && !empty($jsonString = $this->config->ext->loadData("data/$file"))) {
                 $json = json_decode($jsonString);
             } elseif (($this->config->extension_dev !== null) && !empty($jsonString = $this->config->dev->loadData("data/$file"))) {
                 $json = json_decode($jsonString);
