@@ -12,7 +12,7 @@ $ssso2->a = 1;
 $sssv2['a'] = 1;
 $sssv1['a'] = 1;
 
-$sssw1 = 1;
-$sssX1 = 3;
+$ssew1 = 1;
+$seeX1 = 3;
 
 ?>
