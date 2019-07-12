@@ -1,0 +1,56 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    file: index
+    method: generateDashboard
+    icon: dashboard
+detailled:
+    title: Detailled sections for OWASP top 10
+    icon: flag
+    file: detailled
+    method: generateDetailledDashboard
+issues:
+    title: Issues
+    icon: flag
+    file: issues
+    method: generateIssuesEngine
+    ruleset: Security
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up

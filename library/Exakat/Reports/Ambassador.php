@@ -35,6 +35,7 @@ use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -104,7 +105,7 @@ class Ambassador extends Reports {
     }
     
     protected function makeMenu() {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/ambassador.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/'.static::CONFIG_YAML.'.yaml');
         
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -665,7 +666,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard(Section $section = null) {
+    protected function generateDashboard(Section $section) {
         $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
