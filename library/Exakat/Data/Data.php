@@ -43,7 +43,7 @@ abstract class Data {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
             if (file_exists($fullpath)) {
                 copy($fullpath, $this->phar_tmp);
-            } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+            } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
                 self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
             } else {
                 assert(false, "No database for '$name.sqlite'.");
@@ -52,7 +52,7 @@ abstract class Data {
         } else {
             if (file_exists($fullpath)) {
                 $docPath = $fullpath;
-            } elseif ((!is_null(self::$config->ext)) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+            } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
                 $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
                 self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
                 $docPath = $this->phar_tmp;

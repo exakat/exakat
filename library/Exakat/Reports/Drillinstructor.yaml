@@ -1,0 +1,80 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    file: index
+    method: generateDashboard
+    icon: dashboard
+levels:
+    menu: Review
+    title: Review level by level
+    file: levels
+    method: generateLevels
+    icon: dashboard
+level1:
+    menu: Level 1
+    title: Level 1
+    file: level1
+    method: generateLevel
+    icon: dashboard
+    ruleset: level1
+level2:
+    menu: Level 2
+    title: Level 2
+    file: level1
+    method: generateLevel
+    icon: dashboard
+    ruleset: level2
+level3:
+    menu: Level 3
+    title: Level 3
+    file: level1
+    method: generateLevel
+    icon: dashboard
+    ruleset: level3
+level4:
+    menu: Level 4
+    title: Level 4
+    file: level1
+    method: generateLevel
+    icon: dashboard
+    ruleset: level4
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up
+

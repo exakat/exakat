@@ -41,6 +41,8 @@ class Ambassadornomenu extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
+            $this->makeMenu();
+
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', '');
             $patterns = array('#<aside class="main-sidebar">.*?</aside>#is',
                               '#<aside class="control-sidebar control-sidebar-dark">.*?</aside>#is',
@@ -57,7 +59,10 @@ class Ambassadornomenu extends Ambassador {
             $baseHTML = preg_replace($patterns, $replacements, $baseHTML);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
+        if (!file_exists("{$this->config->dir_root}/media/devfaceted/datas/$file.html")) {
+            return '';
+        }
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;

@@ -104,6 +104,8 @@ class Load extends Tasks {
     private $id     = 0;
     private $id0    = null;
 
+    private $phpDocs = array();
+
     const ALTERNATIVE_SYNTAX = true;
     const NORMAL_SYNTAX      = false;
 
@@ -293,8 +295,6 @@ class Load extends Tasks {
             $this->phptokens::T_THROW                    => 'processThrow',
             $this->phptokens::T_YIELD                    => 'processYield',
             $this->phptokens::T_YIELD_FROM               => 'processYieldfrom',
-
-            $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
 
             $this->phptokens::T_EQUAL                    => 'processAssignation',
             $this->phptokens::T_PLUS_EQUAL               => 'processAssignation',
@@ -672,6 +672,7 @@ class Load extends Tasks {
 
         $comments = 0;
         $this->tokens = array();
+        $total = 0;
         foreach($tokens as $t) {
             if (is_array($t)) {
                 if ($t[0] === $this->phptokens::T_WHITESPACE) {
@@ -679,9 +680,12 @@ class Load extends Tasks {
                 } elseif ($t[0] === $this->phptokens::T_COMMENT) {
                     $line += substr_count($t[1], "\n");
                     $comments += substr_count($t[1], "\n");
+                } elseif ($t[0] === $this->phptokens::T_DOC_COMMENT) {
+                    $this->phpDocs[$total + 1] = $t;
                 } else {
                     $line = $t[2];
                     $this->tokens[] = $t;
+                    ++$total;
                 }
             } elseif (is_string($t)) {
                 $this->tokens[] = array(0 => $this->phptokens::TOKENS[$t],
@@ -781,7 +785,7 @@ class Load extends Tasks {
 //        print "  $method in".PHP_EOL;
         $id = $this->$method();
 //        print "  $method out ".PHP_EOL;
-        
+
         return $id;
     }
     
@@ -1264,7 +1268,8 @@ class Load extends Tasks {
         // Process arguments
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
-        
+        $this->makePhpdoc($function);
+
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
 
@@ -1409,7 +1414,8 @@ class Load extends Tasks {
         $current = $this->id;
         $trait = $this->addAtom('Trait');
         $this->currentClassTrait[] = $trait;
-
+        $this->makePhpdoc($trait);
+        
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
 
@@ -1440,6 +1446,7 @@ class Load extends Tasks {
         $current = $this->id;
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
+        $this->makePhpdoc($interface);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1493,6 +1500,9 @@ class Load extends Tasks {
 
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
             $cpm = $this->processNext();
+            if (empty($cpm)) {
+                continue;
+            }
             $this->popExpression();
 
             $cpm->rank = ++$rank;
@@ -1543,6 +1553,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class');
+            $this->makePhpdoc($class);
 
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             
@@ -2238,6 +2249,7 @@ class Load extends Tasks {
 
     private function processConst() {
         $const = $this->addAtom('Const');
+        $this->makePhpdoc($const);
         $current = $this->id;
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
@@ -2331,6 +2343,7 @@ class Load extends Tasks {
 
         $ppp->visibility = 'none';
         $ppp->fullcode   = "$visibility $ppp->fullcode";
+        $this->makePhpdoc($ppp);
         return $ppp;
     }
 
@@ -2352,6 +2365,7 @@ class Load extends Tasks {
         
         $next->visibility = 'public';
         $next->fullcode   = "$visibility $next->fullcode";
+        $this->makePhpdoc($next);
         return $next;
     }
 
@@ -2373,6 +2387,7 @@ class Load extends Tasks {
         
         $next->visibility = 'protected';
         $next->fullcode   = "$visibility $next->fullcode";
+        $this->makePhpdoc($next);
         return $next;
     }
 
@@ -2394,7 +2409,7 @@ class Load extends Tasks {
         
         $next->visibility = 'private';
         $next->fullcode   = "$visibility $next->fullcode";
-
+        $this->makePhpdoc($next);
         return $next;
     }
     
@@ -2402,6 +2417,7 @@ class Load extends Tasks {
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
         $namecall->aliased    = self::NOT_ALIASED;
+        $this->makePhpdoc($namecall);
 
         // Empty call
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -3973,6 +3989,7 @@ class Load extends Tasks {
         }
 
         $namespace = $this->addAtom('Namespace');
+        $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
         $this->setNamespace($name);
 
@@ -4739,54 +4756,17 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processPhpdoc() {
-        while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT) {
-            ++$this->id;
-        };
+    private function makePhpdoc(Atom $node) {
+        if (!isset($this->phpDocs[$this->id])) {
+            return;
+        }
 
         $phpDoc = $this->addAtom('Phpdoc');
-        $phpDoc->code     = $this->tokens[$this->id][1];
-        $phpDoc->fullcode = $this->tokens[$this->id][1];
-        $phpDoc->token    = $this->getToken($this->tokens[$this->id][0]);
+        $phpDoc->code     = $this->phpDocs[$this->id][1];
+        $phpDoc->fullcode = $this->phpDocs[$this->id][1];
+        $phpDoc->token    = $this->getToken($this->phpDocs[$this->id][0]);
 
-        // PHPdoc that won't be attached to anything    
-        if (in_array($this->tokens[$this->id + 1][0],  
-                     array($this->phptokens::T_CLOSE_CURLY,
-                           $this->phptokens::T_CASE,
-                           $this->phptokens::T_DEFAULT,
-                           $this->phptokens::T_END,
-                    ),
-                    STRICT_COMPARISON
-                    )) {
-            return $phpDoc;
-        }
-
-// Catch the Exceptions
-//        $factory  = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
-//        $docblock = $factory->create($phpDoc->fullcode);
-//        print (string) $docblock->getDescription().PHP_EOL;
-
-        $next = $this->processNext();
-
-        if (isset($next->atom) && 
-            in_array($next->atom, 
-                     array('Class', 
-                           'Classanonymous',
-                           'Trait',
-                           'Interface',
-                           'Method',
-                           'Magicmethod',
-                           'Const',
-                           'Namespace',
-                           'Ppp',
-                           'Function',
-                           'Defineconstant',
-                           ), 
-                     STRICT_COMPARISON)) {
-            $this->addLink($next, $phpDoc, 'PHPDOC');
-        }
-
-        return $next;
+        $this->addLink($node, $phpDoc, 'PHPDOC');
     }
 
     private function processYield() {

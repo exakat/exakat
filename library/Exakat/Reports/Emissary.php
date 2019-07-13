@@ -32,10 +32,9 @@ use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
-class Ambassador extends Reports {
-    const FILE_FILENAME  = 'report';
+class Emissary extends Reports {
+    const FILE_FILENAME  = 'emissary';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -105,7 +104,7 @@ class Ambassador extends Reports {
     }
     
     protected function makeMenu() {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/'.static::CONFIG_YAML.'.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/emissary.yaml');
         
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -148,6 +147,8 @@ class Ambassador extends Reports {
             
             $menu = implode(PHP_EOL.'  ', $menu);
             
+        } else {
+            print_r($section);
         }
         
         return $menu;
@@ -186,7 +187,7 @@ class Ambassador extends Reports {
             }
 
             $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(ruleset, -2) FROM rulesets WHERE ruleset LIKE "Compatibility%" ORDER BY ruleset DESC');
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -201,6 +202,9 @@ class Ambassador extends Reports {
             return '';
         }
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
+        if (strpos($subPageHTML, '{{TITLE}}') === false) {
+            print "    ".$file." has not title\n";
+        }
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -223,12 +227,12 @@ class Ambassador extends Reports {
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
-            print "Can't produce Ambassador format to stdout\n";
+            print "Can't produce Emissary format to stdout\n";
             return false;
         }
         
         if ($missing = $this->checkMissingRulesets()) {
-            print "Can't produce Ambassador format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
+            print "Can't produce Emissary format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
             return false;
         }
 
@@ -242,6 +246,11 @@ class Ambassador extends Reports {
         
         foreach($this->generations as $generation) {
             $method = $generation->method;
+            print "$method\n";
+            if (!method_exists($this, $method)) {
+                print "Warnign : no such method as $method; Skipping\n";
+                continue;
+            }
             $this->$method($generation);
         }
 
@@ -363,6 +372,22 @@ class Ambassador extends Reports {
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
         $this->putBasedPage($section->file, $finalHTML);
+    }
+
+    protected function generateSecurity() {
+        $this->generateIssuesEngine('security_issues',
+                                    $section->title,
+                                    $this->getIssuesFaceted('Security') );
+    }
+
+    protected function generateDeadCode() {
+        $this->generateIssuesEngine('deadcode_issues',
+                                    $this->getIssuesFaceted('Dead code') );
+    }
+
+    protected function generatePerformances() {
+        $this->generateIssuesEngine('performances_issues',
+                                    $this->getIssuesFaceted('Performances') );
     }
 
     protected function generateFavorites(Section $section) {
@@ -666,7 +691,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard(Section $section) {
+    protected function generateDashboard(Section $section = null) {
         $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
@@ -1965,7 +1990,13 @@ SQL;
 
         $this->generateIssuesEngine($section, $diff);
     }
-
+    
+    private function generateIssues() {
+        $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
+        $this->generateIssuesEngine('issues',
+                                    $issues );
+    }
+    
     protected function generateIssuesEngine(Section $section, $issues = array()) {
         if (!empty($issues)) {
             // Nothing, really
@@ -2151,7 +2182,7 @@ SQL;
         return $class;
     }
 
-    protected function generateProcFiles(Section $section) {
+    protected function generateProcFiles(Section $section = null) {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -2174,7 +2205,7 @@ SQL;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAnalyzersList(Section $section) {
+    protected function generateAnalyzersList(Section $section = null) {
         $analyzers = array();
 
         foreach($this->themes->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
@@ -4923,6 +4954,36 @@ HTML;
 
     private function toHtmlList(array $array) {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
+    }
+}
+
+class Section {
+    private const SAME_AS_FILE = true;
+    
+    public $method  = 'NoSuchMethod';
+    public $title   = 'No title';
+    public $menu    = 'No menu title';
+    public $source  = self::SAME_AS_FILE;
+    public $file    = 'empty';
+    public $icon    = 'circle-o';
+    public $ruleset = 'None';
+    
+    function __construct(array $section) {
+        $this->title   = $section['title']   ?? $this->title;
+        $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
+        $this->file    = $section['file']    ?? $this->file;
+        $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
+        $this->icon    = $section['icon']    ?? $this->icon;
+        $this->method  = $section['method']  ?? $this->method;
+        $this->ruleset = $section['ruleset'] ?? $this->ruleset;
+    }
+    
+    function __get($name) {
+        print "Access to undefined property $name\n";
+    }
+
+    function __set($name, $value) {
+        print "Write to undefined property $name\n";
     }
 }
 

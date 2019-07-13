@@ -230,40 +230,40 @@ class Dump extends Tasks {
         unset($datastore);
 
         if (!empty($this->config->thema)) {
-            $thema = $this->config->thema;
-            $themes = $this->themes->getRulesetsAnalyzers($thema);
-            if (empty($themes)) {
-                $r = $this->themes->getSuggestionThema($thema);
+            $ruleset = $this->config->thema;
+            $rulesets = $this->themes->getRulesetsAnalyzers($ruleset);
+            if (empty($rulesets)) {
+                $r = $this->themes->getSuggestionRuleset($ruleset);
                 if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
-                throw new NoSuchThema($thema);
+                throw new NoSuchThema($ruleset);
             }
-            display('Processing thema ' . (count($thema) > 1 ? 's' : '' ) . ' : ' . implode(', ', $thema));
-            $missing = $this->processResultsRuleset($thema, $counts);
+            display('Processing ruleset ' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
+            $missing = $this->processResultsRuleset($ruleset, $counts);
             $this->expandRulesets();
             $this->collectHashAnalyzer();
             
             if ($missing === 0) {
-                $list = '(NULL, "' . implode('"), (NULL, "', $thema) . '")';
-                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
-                $themes = array();
+                $list = '(NULL, "' . implode('"), (NULL, "', $ruleset) . '")';
+                $this->sqlite->query("INSERT INTO rulesets (\"id\", \"ruleset\") VALUES {$list}");
+                $rulesets = array();
             }
 
         } elseif (!empty($this->config->program)) {
             $analyzer = $this->config->program;
             if(is_array($analyzer)) {
-                $themes = $analyzer;
+                $rulesets = $analyzer;
             } else {
-                $themes = array($analyzer);
+                $rulesets = array($analyzer);
             }
 
-            foreach($themes as $theme) {
-                if (!$this->themes->getClass($theme)) {
-                    throw new NoSuchAnalyzer($theme, $this->themes);
+            foreach($rulesets as $ruleset) {
+                if (!$this->themes->getClass($ruleset)) {
+                    throw new NoSuchAnalyzer($ruleset, $this->themes);
                 }
             }
-            display('Processing ' . count($themes) . ' analyzer' . (count($themes) > 1 ? 's' : '') . ' : ' . implode(', ', $themes));
+            display('Processing ' . count($rulesets) . ' analyzer' . (count($rulesets) > 1 ? 's' : '') . ' : ' . implode(', ', $rulesets));
 
             if (isset($counts[$analyzer])) {
                 $this->processResults($analyzer, $counts[$analyzer]);
@@ -273,11 +273,11 @@ class Dump extends Tasks {
             }
 
         } else {
-            $themes = array();
+            $rulesets = array();
         }
 
-        $this->log->log('Still ' . count($themes) . " to be processed\n");
-        display('Still ' . count($themes) . " to be processed\n");
+        $this->log->log('Still ' . count($rulesets) . " to be processed\n");
+        display('Still ' . count($rulesets) . " to be processed\n");
 
         $this->finish();
     }
@@ -294,8 +294,8 @@ class Dump extends Tasks {
         $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
-    private function processResultsRuleset($theme, array $counts = array()) {
-        $analyzers = $this->themes->getRulesetsAnalyzers($theme);
+    private function processResultsRuleset($ruleset, array $counts = array()) {
+        $analyzers = $this->themes->getRulesetsAnalyzers($ruleset);
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
@@ -325,7 +325,6 @@ class Dump extends Tasks {
         }
 
         $linksDown = $this->linksDown;
-//        $linksDown .= '. "DEFINITION"'
 
         $saved = 0;
         $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
@@ -407,7 +406,7 @@ SQL;
                 }
             }
         }
-        
+
         if (!empty($query)) {
             $values = implode(', ', $query);
             $query = <<<SQL
@@ -417,7 +416,7 @@ SQL;
             $this->sqlite->query($query);
         }
 
-        $this->log->log(implode(', ', $theme) . " : dumped $saved");
+        $this->log->log(implode(', ', $analyzers) . " : dumped $saved");
 
         $error = 0;
         foreach($analyzers as $class) {
@@ -2391,7 +2390,7 @@ SQL;
         display( count($values) . ' readability index');
     }
 
-    public function checkRulesets($theme, array $analyzers) {
+    public function checkRulesets($ruleset, array $analyzers) {
         $sqliteFile = $this->config->dump;
         
         $sqlite = new \Sqlite3($sqliteFile);
@@ -2405,7 +2404,7 @@ SQL;
         }
         
         if (empty(array_diff($analyzers, $ran))) {
-            $query = "INSERT INTO themas (\"id\", \"thema\") VALUES (null, \"$theme\")";
+            $query = "INSERT INTO rulesets (\"id\", \"ruleset\") VALUES (null, \"$ruleset\")";
             $sqlite->query($query);
         }
     }
@@ -2417,24 +2416,26 @@ SQL;
             $analyzers[] = $row['analyzer'];
         }
 
-        $res = $this->sqlite->query('SELECT thema FROM themas');
+        $res = $this->sqlite->query('SELECT ruleset FROM rulesets');
         $ran = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ran[$row['thema']] = 1;
+            $ran[$row['ruleset']] = 1;
         }
 
-        $themas = $this->themes->listAllRulesets();
-        $themas = array_diff($themas, $ran);
+        $rulesets = $this->themes->listAllRulesets();
+        $rulesets = array_diff($rulesets, $ran);
 
         $add = array();
-        
-        $themes = $this->themes->getRulesetsAnalyzers($themas);
-        if (empty(array_diff($themes, $analyzers))) {
-            $add[] = $theme;
+
+        foreach($rulesets as $ruleset) {
+            $analyzerList = $this->themes->getRulesetsAnalyzers(array($ruleset));
+            if (empty(array_diff($analyzerList, $analyzers))) {
+                $add[] = $ruleset;
+            }
         }
-        
+
         if (!empty($add)) {
-            $query = 'INSERT INTO themas (thema) VALUES ("' . implode('"), ("', $add) . '")';
+            $query = 'INSERT INTO rulesets (ruleset) VALUES ("' . implode('"), ("', $add) . '")';
             $this->sqlite->query($query);
         }
     }
@@ -2447,9 +2448,9 @@ SQL;
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $query = <<<'SQL'
-CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       thema STRING,
-                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
+CREATE TABLE rulesets (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
+                       ruleset STRING,
+                       CONSTRAINT "rulesets" UNIQUE (ruleset) ON CONFLICT IGNORE
                     )
 SQL;
         $this->sqlite->query($query);

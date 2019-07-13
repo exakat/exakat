@@ -26,58 +26,72 @@ use Exakat\Analyzer\Analyzer;
 class CloseNaming extends Analyzer {
     
     public function analyze() {
-        $closeVariables = $this->dictCode->closeVariables();
+        $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+             ->values('fullcode')
+             ->unique();
+        $res = $this->rawQuery();
 
+        $variables = $res->toArray();
+        if (empty($variables)) {
+            return;
+        }
+
+        $closeVariables = array();
+        foreach($variables as $v1) {
+            foreach($variables as $v2) {
+                if ($v1 === $v2) { continue; }
+                if ($v1 . 's' === $v2) { continue; }
+                if ($v1 === $v2 . 's') { continue; }
+                
+                if (levenshtein($v1, $v2) === 1) {
+                    $closeVariables[$v1] = 1;
+                    $closeVariables[$v2] = 1;
+                }
+            }
+        }
+
+        $closeVariables = array_keys($closeVariables);
+        $closeVariables = array_filter( $closeVariables, function($x) { return strlen($x) > 3; });
         if (!empty($closeVariables)) {
-            $this->atomIs(self::$FUNCTIONS_ALL)
-                 ->collectVariables('variables', 'code')
-                 ->raw('sideEffect{ 
-    variables = variables.unique().sort();
-    found = variables.intersect(***); 
-}', $closeVariables)
-                ->filter(' found.size() > 1; ')
-                ->atomInsideNoDefinition('Variable')
-                ->filter('it.get().value("code") in found');
+            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+                 ->is('fullcode', $closeVariables, self::CASE_SENSITIVE);
             $this->prepareQuery();
         }
 
-        // Identical, except for case
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Variable", "Variablearray", "Variableobject")
-     .values("fullcode")
-     .unique()
-GREMLIN;
-        $doubles = $this->query($query)->toArray();
         $uniques = array();
-        foreach($doubles as $u) {
+        foreach($variables as $u) {
             $v = mb_strtolower($u);
             array_collect_by($uniques, $v, $u);
         }
-        
+
         $uniques = array_filter($uniques, function ($x) { return count($x) > 1; });
         if (!empty($uniques)) {
             $doubles = array_merge(...array_values($uniques));
     
             $this->atomIs(self::$VARIABLES_USER)
-                 ->codeIs($doubles);
+                 ->is('fullcode', $doubles, self::CASE_SENSITIVE);
             $this->prepareQuery();
         }
 
         // Identical, except for _ in the name
-        $doubles = $this->dictCode->underscoreCloseVariables();
+        $cleaned = array_map(function($x) { return strtr('_', '', $x); }, $variables);
+        $counts = array_count_values($cleaned);
+        $doubles = array_filter($counts, function ($x) { return $x > 1; });
         
-        if (!empty($doubles)) {
+        if (!empty($uniques)) {
             $this->atomIs(self::$VARIABLES_USER)
-                 ->codeIs($doubles, self::NO_TRANSLATE);
+                 ->is('fullcode', $doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
 
         // Identical, except for numbers
-        $doubles = $this->dictCode->numberCloseVariables();
+        $cleaned = array_map(function($x) { return preg_replace('/\d/', '', $x); }, $variables);
+        $counts = array_count_values($cleaned);
+        $doubles = array_filter($counts, function ($x) { return $x > 1; });
 
         if (!empty($doubles)) {
             $this->atomIs(self::$VARIABLES_USER)
-                 ->codeIs($doubles, self::NO_TRANSLATE);
+                 ->is('fullcode', $doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
     }

@@ -137,11 +137,11 @@ class Rulesets {
         return false;
     }
 
-    public function getSuggestionThema(array $theme) {
-        $main  = $this->main ->getSuggestionThema($theme);
-        $extra = $this->extra->getSuggestionThema($theme);
-        $ext   = $this->ext  ->getSuggestionThema($theme);
-        $dev   = $this->dev  ->getSuggestionThema($theme);
+    public function getSuggestionRuleset(array $theme) {
+        $main  = $this->main ->getSuggestionRuleset($theme);
+        $extra = $this->extra->getSuggestionRuleset($theme);
+        $ext   = $this->ext  ->getSuggestionRuleset($theme);
+        $dev   = $this->dev  ->getSuggestionRuleset($theme);
         
         return array_merge($main, $extra, $ext, $dev);
     }

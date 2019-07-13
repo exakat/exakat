@@ -1,0 +1,178 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    file: index
+    method: generateDashboard
+    icon: dashboard
+issues:
+    title: Issues
+    icon: flag
+    file: issues
+    method: generateIssuesEngine
+    ruleset: Analyze
+compatibility:
+    title: Compatibility
+    icon: certificate
+    subsections: 
+        compilations:
+            title: Compilations
+            file: compatibility_compilations
+            method: generateCompilations
+            icon: certificate
+        php_versions:
+            title: Compatibility By Version
+            menu: PHP Version
+            source: empty
+            file: compatibility_version
+            method: generateCompatibilityEstimate
+            icon: certificate
+        compatibility_php74:
+            source: compatibility
+            title: Compatibility PHP 7.4
+            file: compatibility_php74
+            method: generateCompatibility74
+            icon: certificate
+        compatibility_php73:
+            source: compatibility
+            title: Compatibility PHP 7.3
+            file: compatibility_php73
+            method: generateCompatibility73
+            icon: certificate
+        compatibility_php72:
+            source: compatibility
+            title: Compatibility PHP 7.2
+            file: compatibility_php72
+            method: generateCompatibility72
+            icon: certificate
+        compatibility_php71:
+            source: compatibility
+            title: Compatibility PHP 7.1
+            file: compatibility_php71
+            method: generateCompatibility71
+            icon: certificate
+        compatibility_php70:
+            source: compatibility
+            title: Compatibility PHP 7.0
+            file: compatibility_php70
+            method: generateCompatibility70
+            icon: certificate
+        compatibility_php56:
+            source: compatibility
+            title: Compatibility PHP 5.6
+            file: compatibility_php56
+            method: generateCompatibility56
+            icon: certificate
+        compatibility_php55:
+            source: compatibility
+            title: Compatibility PHP 5.5
+            file: compatibility_php55
+            method: generateCompatibility55
+            icon: certificate
+        compatibility_php54:
+            source: compatibility
+            title: Compatibility PHP 5.4
+            file: compatibility_php54
+            method: generateCompatibility54
+            icon: certificate
+        compatibility_php53:
+            source: compatibility
+            title: Compatibility PHP 5.3
+            file: compatibility_php53
+            method: generateCompatibility53
+            icon: certificate
+favorites:
+    title: Favorites
+    icon: certificate
+    subsections: 
+        compilations:
+            title: Favorite Overview
+            file: favorites_dashboard
+            method: generateFavorites
+            icon: certificate
+        favorite_issues:
+            title: Favorite issues
+            source: empty
+            file: favorites_issues
+            method: generateIssuesEngine
+            ruleset: Preferences
+audit:
+    title: Audit logs
+    icon: sliders
+    subsections: 
+        appinfo:
+            title: Appinfo()
+            file: appinfo
+            method: generateAppinfo
+            icon: circle-o
+        bugfixes:
+            title: Bugfixes
+            source: bugfixes
+            file: bugfixes
+            method: generateBugFixes
+            icon: circle-o
+        php_compilation:
+            title: PHP Compilation List
+            file: php_compilation
+            method: generatePhpConfiguration
+            icon: circle-o
+        directive_list:
+            title: PHP Directives List
+            file: directive_list
+            method: generateDirectiveList
+            icon: circle-o
+        extension_list:
+            title: Extensions' List
+            file: extension_list
+            method: generateAlteredDirectives
+            icon: circle-o
+files:
+    title: Files Overview
+    menu: Files
+    file: files
+    method: generateFiles
+    icon: file-code-o
+analysis:
+    title: Analyses Overview
+    menu: Analyses
+    file: analyses
+    method: generateAnalyzers
+    icon: line-chart
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up

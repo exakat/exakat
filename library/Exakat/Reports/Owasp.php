@@ -27,10 +27,12 @@ use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
+use Exakat\Reports\Section;
 
 class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'owasp';
 
     const COLORS = array('A' => '#2ED600',
                          'B' => '#81D900',
@@ -124,101 +126,6 @@ class Owasp extends Ambassador {
         $this->themesToShow      = array('Security');
     }
 
-    protected function getBasedPage($file) {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
-
-            $menu = <<<'MENU'
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-          <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="detailled.html"><i class="fa fa-flag"></i> <span>Detailled</span></a></li>
-          <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
-          <li class="treeview">
-            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyses Settings</a></li>
-              <li><a href="analyses_doc.html"><i class="fa fa-circle-o"></i>Analyses Documentation</a></li>
-              <li><a href="owasp_doc.html"><i class="fa fa-circle-o"></i>Owasp Documentation</a></li>
-              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
-              <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /.sidebar-menu -->
-MENU;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
-        }
-
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
-
-        return $combinePageHTML;
-    }
-
-    public function generate($folder, $name = 'report') {
-        if ($name === self::STDOUT) {
-            print "Can't produce Ambassador format to stdout\n";
-            return false;
-        }
-        
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
-
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-        $this->generateProcFiles();
-
-        $this->generateDashboard();
-        $this->generateDetailledDashboard();
-        $this->generateIssues();
-
-        // Annex
-        $this->generateAnalyzerSettings();
-        $this->generateOwaspDocumentation();
-        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
-        $this->generateCodes();
-
-        // Static files
-        $files = array('credits');
-        foreach($files as $file) {
-            $baseHTML = $this->getBasedPage($file);
-            $this->putBasedPage($file, $baseHTML);
-        }
-
-        $this->cleanFolder();
-    }
-
-    protected function cleanFolder() {
-        if (file_exists($this->tmpName . '/datas/base.html')) {
-            unlink($this->tmpName . '/datas/base.html');
-            unlink($this->tmpName . '/datas/menu.html');
-        }
-
-        // Clean final destination
-        if ($this->finalName !== '/') {
-            rmdirRecursive($this->finalName);
-        }
-
-        if (file_exists($this->finalName)) {
-            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
-            return;
-        }
-
-        rename($this->tmpName, $this->finalName);
-    }
-
     private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter) {
         --$lineNumber; // array index
         $lines = array();
@@ -273,15 +180,15 @@ MENU;
         $this->putBasedPage('owasp_doc', $finalHTML);
     }
 
-    protected function generateDashboard() {
+    protected function generateDashboard(Section $section) {
         $levels = '';
 
-        foreach($this->components as $section => $analyzers) {
+        foreach($this->components as $group => $analyzers) {
             $levelRows = '';
             $total = 0;
             if (empty($analyzers)) {
                 $levelRows .= "<tr><td>-</td><td>&nbsp;</td><td>-</td></tr>\n";
-                $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
+                $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $group . '</td>
                             <td style="background-color: lightgrey">-</td></td>
                             <td style="background-color: lightgrey; font-weight: bold; font-size: 20; text-align: center"">N/A</td></tr>' . PHP_EOL .
                        $levelRows;
@@ -325,22 +232,23 @@ SQL
             }
             $color = self::COLORS[$grade];
             
-            $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
+            $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $group . '</td>
                             <td style="background-color: lightgrey">' . $total . '</td></td>
                             <td style="background-color: ' . $color . '; font-weight: bold; font-size: 20; text-align: center; ">' . $grade . '</td></tr>' . PHP_EOL .
                        $levelRows;
         }
 
-        $html = $this->getBasedPage('levels');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'LEVELS', $levels);
         $html = $this->injectBloc($html, 'TITLE', 'Overview for OWASP top 10');
-        $this->putBasedPage('detailled', $html);
+
+        $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDetailledDashboard() {
+    protected function generateDetailledDashboard(Section $section) {
         $levels = '';
 
-        foreach($this->components as $section => $analyzers) {
+        foreach($this->components as $group => $analyzers) {
             $levelRows = '';
             $total = 0;
             if (empty($analyzers)) {
@@ -382,15 +290,15 @@ SQL
             }
             $color = self::COLORS[$grade];
             
-            $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">' . $section . '</td>
+            $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">' . $group . '</td>
                             <td style="background-color: lightgrey">&nbsp;</td></td>
                             <td style="background-color: ' . $color . '">' . $grade . '</td></tr>' . PHP_EOL;
         }
 
-        $html = $this->getBasedPage('levels');
+        $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'LEVELS', $levels);
-        $html = $this->injectBloc($html, 'TITLE', 'Detailled sections for OWASP top 10');
-        $this->putBasedPage('index', $html);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
     public function getHashData() {
@@ -630,7 +538,7 @@ SQL;
         return $row['number'];
     }
 
-    protected function generateFiles() {
+    protected function generateFiles(Section $section) {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage('files');
@@ -767,16 +675,10 @@ SQL;
         );
     }
 
-    private function generateIssues() {
-        $this->generateIssuesEngine('issues',
-                                    $this->getIssuesFaceted('Security'));
-        return;
-    }
-
-    protected function generateCompatibility($version) {
+    protected function generateCompatibility(Section $section, $version) {
         $compatibility = '';
 
-        $list = $this->themes->getRulesetsAnalyzers('CompatibilityPHP' . $version);
+        $list = $this->themes->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
@@ -806,19 +708,6 @@ HTML;
         $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP ' . $version[0] . '.' . $version[1]);
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
         $this->putBasedPage('compatibility_php' . $version, $html);
-    }
-
-    private function generateDynamicCode() {
-        $dynamicCode = '';
-
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('dynamic_code');
-        $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
-        $this->putBasedPage('dynamic_code', $html);
     }
 
     protected function makeIcon($tag) {

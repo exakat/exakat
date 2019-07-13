@@ -37,7 +37,13 @@ class NoChoice extends Analyzer {
 
         // $a == 2 ?: doThis();
         $this->atomIs('Ternary')
-             ->raw('where( __.out("THEN").hasLabel("Void").count().is(eq(1)) )')
+             ->filter(
+                $this->side()
+                     ->outIs('THEN') 
+                     ->atomIs('Void')
+                     ->count()
+                     ->isEqual(1)
+              )
              ->outIs('CONDITION')
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'cdt')

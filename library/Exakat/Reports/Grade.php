@@ -31,6 +31,7 @@ use Exakat\Reports\Helpers\Results;
 class Grade extends Ambassador {
     const FILE_FILENAME  = 'grade';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'Grade';
 
     const COLORS = array('A' => '#2ED600',
                          'B' => '#81D900',
@@ -86,100 +87,9 @@ class Grade extends Ambassador {
                      );
     }
 
-    protected function getBasedPage($file) {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
-
-            $menu = <<<'MENU'
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-          <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
-          <li class="treeview">
-            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
-              <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Analyzers Documentation</a></li>
-              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
-              <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /.sidebar-menu -->
-MENU;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
-        }
-
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
-
-        return $combinePageHTML;
-    }
-
-    public function generate($folder, $name = 'report') {
-        if ($name === self::STDOUT) {
-            print "Can't produce Grade format to stdout\n";
-            return false;
-        }
-        
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
-
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-
-        $this->generateDashboard();
-        $this->generateIssues();
-
-        // Annex
-        $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
-        $this->generateCodes();
-
-        // Static files
-        $files = array('credits');
-        foreach($files as $file) {
-            $baseHTML = $this->getBasedPage($file);
-            $this->putBasedPage($file, $baseHTML);
-        }
-
-        $this->cleanFolder();
-    }
-
-    protected function cleanFolder() {
-        if (file_exists($this->tmpName . '/datas/base.html')) {
-            unlink($this->tmpName . '/datas/base.html');
-            unlink($this->tmpName . '/datas/menu.html');
-        }
-
-        // Clean final destination
-        if ($this->finalName !== '/') {
-            rmdirRecursive($this->finalName);
-        }
-
-        if (file_exists($this->finalName)) {
-            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
-            return;
-        }
-
-        rename($this->tmpName, $this->finalName);
-    }
-
-    private function generateIssues() {
-        $this->generateIssuesEngine('issues',
-                                    $this->getIssuesFaceted('Security'));
-        return;
+    private function generateIssues(Section $section) {
+        $this->generateIssuesEngine($section,
+                                    $this->getIssuesFaceted($section->ruleset));
     }
 
     private function getGrades() {
@@ -202,7 +112,7 @@ MENU;
         $this->globalGrade = intval(100 * max(0, 20 - $grade)) / 100;
     }
 
-    protected function generateDashboard() {
+    protected function generateDashboard(Section $section) {
         $this->getGrades();
 
         $baseHTML = $this->getBasedPage('index');

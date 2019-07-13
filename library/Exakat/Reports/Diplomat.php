@@ -32,6 +32,7 @@ use Exakat\Reports\Reports;
 class Diplomat extends Ambassador {
     const FILE_FILENAME  = 'diplomat';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'Diplomat';
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -61,6 +62,7 @@ class Diplomat extends Ambassador {
                      );
     }
 
+/*
     protected function getBasedPage($file) {
         static $baseHTML;
 
@@ -137,123 +139,11 @@ MENU;
         return $combinePageHTML;
     }
 
-    protected function putBasedPage($file, $html) {
-        if (strpos($html, '{{BLOC-JS}}') !== false) {
-            $html = str_replace('{{BLOC-JS}}', '', $html);
-        }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for ' . $this->config->project, $html);
-
-        file_put_contents($this->tmpName . '/datas/' . $file . '.html', $html);
-    }
-
-    protected function injectBloc($html, $bloc, $content) {
-        return str_replace('{{' . $bloc . '}}', $content, $html);
-    }
-
-    public function generate($folder, $name = self::FILE_FILENAME) {
-        if ($name == self::STDOUT) {
-            print "Can't produce Diplomat format to stdout\n";
-            return false;
-        }
-
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "$folder/.$name";
-
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-        $this->generateDashboard();
-
-        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
-        $analyzersList = array_unique($analyzersList);
-        $this->generateDocumentation($analyzersList);
-        $this->generateIssues();
-        
-        // annex
-        $this->generateAnalyzerSettings();
-        $this->generateCodes();
-        $files = array('credits');
-        $this->generateAnalyzersList();
-
-        $this->generateFiles();
-        $this->generateAnalyzers();
-
-        // Compatibility
-        $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
-        $list = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $list[] = 'CompatibilityPHP' . $row['version'];
-            $this->generateCompatibility($row['version']);
-        }
-        $this->generateCompatibilityEstimate();
-        $analyserList = $this->themes->getRulesetsAnalyzers($list);
-        $this->generateIssuesEngine('compatibility_issues',
-                                    $this->getIssuesFaceted($analyserList));
-
-        // Favorites
-        $this->generateFavorites();
-
-        // audit logs
-        $this->generateAppinfo();
-        $this->generateBugFixes();
-        $this->generateDirectiveList();
-        $this->generatePhpConfiguration();
-
-        foreach($files as $file) {
-            $baseHTML = $this->getBasedPage($file);
-            $this->putBasedPage($file, $baseHTML);
-        }
-
-        $this->cleanFolder();
-    }
-
     protected function generateIssues() {
         $this->generateIssuesEngine('issues',
                                     $this->getIssuesFaceted('Top10') );
     }
-
-    public function getIssuesBreakdown() {
-       $list = 'IN (' . makeList($this->themes->getRulesetsAnalyzers(array('Top10'))) . ')';
-       $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer $list AND count > 0";
-       $res = $this->sqlite->query($query);
-
-       $data = array();
-       while($row = $res->fetchArray(\SQLITE3_ASSOC)){
-           $description = $this->getDocs($row['analyzer']);
-           $data[$description['name']] = $row['count'];
-       }
-
-        // ordonné DESC par valeur
-        uasort($data, function ($a, $b) {
-            return $b <=> $a;
-        });
-        $final = array_slice($data, 0, 3);
-        $others = array_slice($data, 4);
-        $final['Others'] = array_sum($others);
-
-        $issuesHtml = array();
-        $dataScript = array();
-
-        foreach ($final as $key => $value) {
-            $issuesHtml []= '<div class="clearfix">
-                   <div class="block-cell">' . $key . '</div>
-                   <div class="block-cell text-center">' . $value . '</div>
-                 </div>';
-            $dataScript[] = '{label: "' . $key . '", value: ' . ( (int) $value) . '}';
-        }
-        
-        $issuesHtml = array_pad($issuesHtml, 4, '<div class="clearfix">
-                   <div class="block-cell">&nbsp;</div>
-                   <div class="block-cell text-center">&nbsp;</div>
-                 </div>');
-
-        $issuesHtml = implode('', $issuesHtml);
-        $dataScript = implode(', ', $dataScript);
-
-        return array('html'   => $issuesHtml,
-                     'script' => $dataScript);
-    }
+*/
 }
 
 

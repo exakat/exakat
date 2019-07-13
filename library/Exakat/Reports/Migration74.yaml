@@ -1,0 +1,69 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    file: index
+    method: generateDashboard
+    icon: dashboard
+compilations:
+    title: Compilations
+    file: compatibility_compilations
+    method: generateCompilations
+    icon: certificate
+php_versions:
+    title: Compatibility By Version
+    menu: PHP Version
+    source: empty
+    file: compatibility_version
+    method: generateCompatibilityEstimate
+    icon: certificate
+compatibility_php74:
+    source: compatibility
+    title: Compatibility PHP 7.4
+    file: compatibility_php74
+    method: generateCompatibility74
+    icon: certificate
+suggestions:
+    title: Suggestions
+    icon: flag
+    file: suggestions
+    method: generateIssuesEngine
+    ruleset: Suggestions
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up

@@ -28,16 +28,16 @@ use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
-class Migration73 extends Ambassador {
-    const FILE_FILENAME  = 'migration73';
+class Migration74 extends Ambassador {
+    const FILE_FILENAME  = 'migration74';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'Migration73';
+    const CONFIG_YAML    = 'Migration74';
     
     private $analyzerList = array();
-    private $theme = 'CompatibilityPHP73';
+    private $theme = 'CompatibilityPHP74';
 
     public function dependsOnAnalysis() {
-        return array('CompatibilityPHP73',
+        return array('CompatibilityPHP74',
                      );
     }
 

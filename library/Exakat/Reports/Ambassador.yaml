@@ -1,0 +1,439 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    file: index
+    method: generateDashboard
+    icon: dashboard
+files:
+    title: Files Overview
+    menu: Files
+    file: files
+    method: generateFiles
+    icon: file-code-o
+analysis:
+    title: Analyses Overview
+    menu: Analyses
+    file: analyses
+    method: generateAnalyzers
+    icon: line-chart
+new_issues:
+    title: New Issues
+    icon: flag
+    file: neoissues
+    method: generateNewIssues
+issues:
+    title: Issues
+    icon: flag
+    file: issues
+    method: generateIssuesEngine
+    ruleset: Analyze
+security:
+    title: Security Issues
+    menu: Security
+    icon: flag
+    file: security_issues
+    method: generateIssuesEngine
+    ruleset: Security
+performances:
+    title: Performances Issues
+    menu: Performances
+    icon: flag
+    file: performances_issues
+    method: generateNewIssues
+    ruleset: Performances
+dead_code:
+    title: Dead Code Issues
+    menu: Dead code
+    icon: flag
+    file: deadcode_issues
+    method: generateIssuesEngine
+    ruleset: Dead code
+compatibility:
+    title: Compatibility
+    icon: certificate
+    subsections: 
+        compilations:
+            title: Compilations
+            file: compatibility_compilations
+            method: generateCompilations
+            icon: certificate
+        php_versions:
+            title: Compatibility By Version
+            menu: PHP Version
+            source: empty
+            file: compatibility_version
+            method: generateCompatibilityEstimate
+            icon: certificate
+        compatibility_php74:
+            source: compatibility
+            title: Compatibility PHP 7.4
+            file: compatibility_php74
+            method: generateCompatibility74
+            icon: certificate
+        compatibility_php73:
+            source: compatibility
+            title: Compatibility PHP 7.3
+            file: compatibility_php73
+            method: generateCompatibility73
+            icon: certificate
+        compatibility_php72:
+            source: compatibility
+            title: Compatibility PHP 7.2
+            file: compatibility_php72
+            method: generateCompatibility72
+            icon: certificate
+        compatibility_php71:
+            source: compatibility
+            title: Compatibility PHP 7.1
+            file: compatibility_php71
+            method: generateCompatibility71
+            icon: certificate
+        compatibility_php70:
+            source: compatibility
+            title: Compatibility PHP 7.0
+            file: compatibility_php70
+            method: generateCompatibility70
+            icon: certificate
+        compatibility_php56:
+            source: compatibility
+            title: Compatibility PHP 5.6
+            file: compatibility_php56
+            method: generateCompatibility56
+            icon: certificate
+        compatibility_php55:
+            source: compatibility
+            title: Compatibility PHP 5.5
+            file: compatibility_php55
+            method: generateCompatibility55
+            icon: certificate
+        compatibility_php54:
+            source: compatibility
+            title: Compatibility PHP 5.4
+            file: compatibility_php54
+            method: generateCompatibility54
+            icon: certificate
+        compatibility_php53:
+            source: compatibility
+            title: Compatibility PHP 5.3
+            file: compatibility_php53
+            method: generateCompatibility53
+            icon: certificate
+favorites:
+    title: Favorites
+    icon: certificate
+    subsections: 
+        compilations:
+            title: Favorite Overview
+            file: favorites_dashboard
+            method: generateFavorites
+            icon: certificate
+        favorite_issues:
+            title: Favorite issues
+            source: empty
+            file: favorites_issues
+            method: generateIssuesEngine
+            ruleset: Preferences
+suggestions:
+    title: Suggestions
+    icon: flag
+    file: suggestions
+    method: generateIssuesEngine
+    ruleset: Suggestions
+audit:
+    title: Audit logs
+    icon: sliders
+    subsections: 
+        appinfo:
+            title: Appinfo()
+            file: appinfo
+            method: generateAppinfo
+            icon: circle-o
+        bugfixes:
+            title: Bugfixes
+            source: bugfixes
+            file: bugfixes
+            method: generateBugFixes
+            icon: circle-o
+        php_compilation:
+            title: PHP Compilation List
+            file: php_compilation
+            method: generatePhpConfiguration
+            icon: circle-o
+        directive_list:
+            title: PHP Directives List
+            file: directive_list
+            method: generateDirectiveList
+            icon: circle-o
+        altered_directives:
+            title: Altered PHP Directives
+            file: altered_directives
+            method: generateAlteredDirectives
+            icon: circle-o
+        extension_list:
+            title: Extensions' List
+            file: extension_list
+            method: generateAlteredDirectives
+            icon: circle-o
+        ext_lib:
+            title: External Libraries' List
+            file: ext_lib
+            method: generateExternalLib
+            icon: circle-o
+        external_services:
+            title: External Services
+            file: external_services
+            method: generateExternalServices
+            icon: circle-o
+        parameters_counts:
+            title: Parameter Counts
+            file: parameter_counts
+            method: generateParameterCounts
+            icon: circle-o
+        changed_classes:
+            title: Changed Classes
+            file: changed_classes
+            method: generateChangedClasses
+            icon: circle-o
+        stats:
+            title: Statistics
+            file: stats
+            method: generateStats
+            icon: circle-o
+        visibility_suggestions:
+            title: Class Visibility Suggestions
+            source: empty
+            file: visibility_suggestions
+            method: generateVisibilitySuggestions
+            icon: circle-o
+        class_options_suggestions:
+            title: Class Option Recommendations
+            source: empty
+            file: class_options_suggestions
+            method: generateClassOptionSuggestions
+            icon: circle-o            
+        complex_expressions:
+            title: Complex Expressions
+            source: empty
+            file: complex_expressions
+            method: generateComplexExpressions
+            icon: circle-o            
+        cit_size:
+            title: Classes Sizes
+            file: cit_size
+            method: generateClassSize
+            icon: circle-o            
+        method_size:
+            title: Methods Sizes
+            source: cit_size
+            file: method_size
+            method: generateMethodSize
+            icon: circle-o            
+        classes_depth:
+            title: Class DDepth
+            file: classes_depth
+            method: generateClassDepth
+            icon: circle-o            
+        concentrated_issues:
+            title: Concentrated Issues
+            file: concentrated_issues
+            method: generateConcentratedIssues
+            icon: circle-o            
+        identical_files:
+            title: Identical files
+            source: identical_files
+            file: identical_files
+            method: generateIdenticalFiles
+            icon: circle-o            
+        no_issues:
+            title: No Issues Analysis
+            file: no_issues
+            method: generateNoIssues
+            icon: circle-o            
+inventories:
+    title: Inventories
+    icon: list-ul
+    subsections: 
+        dynamic_code:
+            title: Dynamic Code
+            file: dynamic_code
+            method: generateDynamicCode
+        global_variables:
+            source: globals
+            title: Global Variables
+            file: global_variables
+            method: generateGlobals
+        error_messages:
+            title: Error Messages
+            file: error_messages
+            method: generateErrorMessages
+        inventories_exceptions:
+            title: Exception Inventory
+            source: empty
+            file: inventories_exceptions
+            method: generateExceptionTree
+        namespace_tree:
+            title: Namespace Tree
+            source: empty
+            file: inventories_namespacetree
+            method: generateNamespaceTree
+        classes_tree:
+            title: Classes Tree
+            source: empty
+            file: inventories_classtree
+            method: generateClassTree
+        inventories_traittree:
+            title: Trait Tree
+            source: empty
+            file: inventories_traittree
+            method: generateTraitTree
+        inventories_traitmatrix:
+            title: Traits Matrix
+            source: empty
+            file: inventories_traitmatrix
+            method: generateTraitMatrix
+        inventories_interfacetree:
+            title: Interface tree
+            source: empty
+            file: inventories_interfacetree
+            method: generateInterfaceTree
+        phpfunctions_list:
+            title: Native PHP Function usage
+            file: phpfunctions_list
+            method: generatePHPFunctionBreakdown
+        phpconstants_list:
+            title: Native PHP Constant usage
+            file: phpconstants_list
+            method: generatePHPConstantsBreakdown
+        phpclasses_list:
+            title: PHP Native Classes, Interfaces and Traits\' list
+            file: phpclasses_list
+            method: generatePHPClassesBreakdown
+        files_tree:
+            title: File dependencies tree
+            source: empty
+            file: files_tree
+            method: generateFileDependencies
+        variables_confusing:
+            title: Confusing Variables
+            file: empty
+            source: variables_confusing
+            method: generateConfusingVariables
+        inventories_constants:
+            title: Constants Inventory
+            source: inventories
+            file: inventories_constants
+            method: generateInventoriesConstants
+        inventories_classes:
+            title: Classes Inventory
+            source: inventories
+            file: inventories_classes
+            method: generateInventoriesClasses
+        inventories_interfaces:
+            title: Interfaces Inventory
+            source: inventories
+            file: inventories_interfaces
+            method: generateInventoriesInterfaces
+        inventories_traits:
+            title: Traits Inventory
+            source: inventories
+            file: inventories_traits
+            method: generateInventoriesTraits
+        inventories_functions:
+            title: Functions Inventory
+            source: inventories
+            file: inventories_functions
+            method: generateInventoriesFunctions
+        inventories_namespaces:
+            title: Namespaces Inventory
+            source: inventories
+            file: inventories_namespaces
+            method: generateInventoriesNamespaces
+        inventories_url:
+            title: URL Inventory
+            source: inventories
+            file: inventories_url
+            method: generateInventoriesUrl
+        inventories_regex:
+            title: Regex Inventory
+            source: inventories
+            file: inventories_regex
+            method: generateInventoriesRegex
+        inventories_sql:
+            title: SQL Inventory
+            source: inventories
+            file: inventories_sql
+            method: generateInventoriesSql
+        inventories_gpc:
+            title: Incoming Variables Inventory
+            source: inventories
+            file: inventories_gpcindex
+            method: generateInventoriesGPCIndex
+        inventories_email:
+            title: Email Inventory
+            source: inventories
+            file: inventories_email
+            method: generateInventoriesEmail
+        inventories_md5:
+            title: Hashes Inventory
+            source: inventories
+            file: inventories_md5string
+            method: generateInventoriesMd5string
+        inventories_mime:
+            title: Mime Inventory
+            source: inventories
+            file: inventories_mime
+            method: generateInventoriesMime
+        inventories_pack:
+            title: Pack Inventory
+            source: inventories
+            file: inventories_pack
+            method: generateInventoriesPack
+        inventories_printf:
+            title: Printf Inventory
+            source: inventories
+            file: inventories_printf
+            method: generateInventoriesPrintf
+        inventories_path:
+            title: Path Inventory
+            source: inventories
+            file: inventories_path
+            method: generateInventoriesPath
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up

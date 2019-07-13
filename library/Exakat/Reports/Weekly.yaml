@@ -1,0 +1,88 @@
+dashboard:
+    menu: Dashboard
+    title: Dashboard
+    source: index_weekly
+    file: index
+    method: generateDashboard
+    icon: dashboard
+week0:
+    menu: This Week
+    title: This Week
+    source: weekly
+    file: week0
+    method: generateWeek0
+    icon: dashboard
+week1:
+    menu: Last Week
+    title: Last Week
+    source: weekly
+    file: week1
+    method: generateWeek1
+    icon: dashboard
+week2:
+    menu: Two Weeks ago
+    title: Two Weeks ago
+    source: weekly
+    file: week2
+    method: generateWeek2
+    icon: dashboard
+week3:
+    menu: Three Weeks ago
+    title: Three Weeks ago
+    source: weekly
+    file: week3
+    method: generateWeek3
+    icon: dashboard
+week4:
+    menu: A month ago
+    title: A month ago
+    source: weekly
+    file: week3
+    method: generateWeek4
+    icon: dashboard
+weekNext:
+    menu: Next week
+    title: Next week
+    source: weekly
+    file: week3
+    method: generateWeek4
+    icon: dashboard
+annexes:
+    title: Annexes
+    icon: sticky-note-o
+    subsections: 
+        engine_settings:
+            title: Engine Settings
+            source: annex_settings
+            file: engine_settings
+            method: generateAnalyzerSettings
+        annex_config:
+            title: Audit Configuration
+            file: annex_config
+            method: generateAuditConfig
+        processed_files:
+            title: Processed files
+            source: proc_files
+            file: processed_files
+            method: generateProcFiles
+            icon: file
+        processed_analysis:
+            title: Processed analysis
+            source: proc_analyses
+            file: processed_analysis
+            method: generateAnalyzersList
+            icon: file
+        annex_docs:
+            title: Analyses documentation
+            file: analyses_doc
+            method: generateDocumentation
+            icon: file
+        annex_codes:
+            title: Source code
+            file: codes
+            method: generateCodes
+            icon: file
+        credits:
+            title: Credits
+            file: credits
+            icon: thumbs-up
