@@ -38,6 +38,9 @@ class BailOutEarly extends Analyzer {
              ->outIs('ELSE')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIsNot($bailout)
+             ->back('first')
+             ->inIs('EXPRESSION')
+             ->isNot('count', 1)
              ->back('first');
         $this->prepareQuery();
 
@@ -51,15 +54,10 @@ class BailOutEarly extends Analyzer {
              ->outIs('ELSE')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIs($bailout)
+             ->back('first')
+             ->inIs('EXPRESSION')
+             ->isNot('count', 1)
              ->back('first');
-        $this->prepareQuery();
-
-        // function foo() { ... if ($a) {  } }
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('BLOCK')
-             ->outWithRank('EXPRESSION', 'last')
-             ->atomIs('Ifthen')
-             ->hasNoOut('ELSE');
         $this->prepareQuery();
     }
 }
