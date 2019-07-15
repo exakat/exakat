@@ -1,23 +1,23 @@
 <?php
 
 // OK (3 else if)
-if (1) {
+if ($a === 1) {
 
-} else if (2) {
+} else if ($a === 2) {
 
-} else if (3) {
+} else if ($a === 3) {
 
 } else {
 
 }
 
 // KO (else is a sequence)
-if (11) {
+if ($a === 11) {
 
 } else { 
-    if (12) {
+    if ($a === 12) {
 
-    } else if (13) {
+    } else if ($a === 13) {
 
     } else {
 
@@ -27,17 +27,17 @@ if (11) {
 }
 
 // KO (else is a sequence)
-if (21) {
+if ($a === 21) {
 
 } else { 
     $a++;
 
     // OK (else not a sequence)
-    if (22) {
+    if ($a === 22) {
 
-    } else if (23) {
+    } else if ($a === 23) {
 
-    } else if (33) {
+    } else if ($a === 33) {
 
     } else {
 
@@ -45,12 +45,12 @@ if (21) {
 }
 
 // OK (3 else if)
-if (31) {
+if ($a === 31) {
 
 } else { 
-    if (32) {
+    if ($a === 32) {
 
-    } else if (33) {
+    } else if ($a === 33) {
 
     } else {
 

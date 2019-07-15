@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('if(31) { /**/ } elseif(32) { /**/ } elseif(33) { /**/ } else { /**/ } ',
-                      'if(1) { /**/ } else  /**/  ',
-                      'if(11) { /**/ } elseif(12) { /**/ } else  /**/  ',
-                      'if(21) { /**/ } else  /**/  ',
+$expected     = array('if($a === 31) { /**/ } elseif($a === 32) { /**/ } elseif($a === 33) { /**/ } else { /**/ } ',
+                      'if($a === 1) { /**/ } else  /**/  ',
+                      'if($a === 11) { /**/ } elseif($a === 12) { /**/ } else  /**/  ',
+                      'if($a === 21) { /**/ } else  /**/  ',
                      );
 
-$expected_not = array('if(111) { /**/ } else  /**/  ',
+$expected_not = array('if($a === 111) { /**/ } else  /**/  ',
                      );
 
 ?>

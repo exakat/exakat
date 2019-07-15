@@ -1,42 +1,42 @@
 <?php
 
 // OK (3 elseif)
-if (1) {
+if ($a === 1) {
 
-} elseif (2) {
+} elseif ($a === 2) {
 
-} elseif (3) {
+} elseif ($a === 3) {
 
 } else {
 
 }
 
 // OK (3 elseif)
-if (11) {
+if ($a === 11) {
 
-} elseif (12) {
+} elseif ($a === 12) {
 
-} elseif (13) {
+} elseif ($a === 13) {
 
 }
 
 // Too short (3 elseif)
-if (21) {
+if ($a === 21) {
 
-} elseif (22) {
+} elseif ($a === 22) {
 
 } else {
 
 }
 
 // OK (4 elseif)
-if (31) {
+if ($a === 31) {
 
-} elseif (32) {
+} elseif ($a === 32) {
 
-} elseif (33) {
+} elseif ($a === 33) {
 
-} elseif (34) {
+} elseif ($a === 34) {
 
 } else {
 

@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('if(1) { /**/ } elseif(2) { /**/ } elseif(3) { /**/ } else { /**/ } ',
+$expected     = array('if($a === 1) { /**/ } elseif($a === 2) { /**/ } elseif($a === 3) { /**/ } else { /**/ } ',
                      );
 
-$expected_not = array('if(10) { /**/ } else { /**/ } ',
-                      'if(11) { /**/ } elseif(21) { /**/ } else { /**/ } ',
+$expected_not = array('if($a === 10) { /**/ } else { /**/ } ',
+                      'if($a === 11) { /**/ } elseif($a === 21) { /**/ } else { /**/ } ',
                      );
 
 ?>
