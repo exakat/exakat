@@ -2,8 +2,6 @@
 
 $expected     = array('X',
                       '\\X',
-                      'PDO',
-                      'Closure',
                      );
 
 $expected_not = array('\\I',
@@ -11,6 +9,8 @@ $expected_not = array('\\I',
                       'UNKNOWN',
                       '\\UNKNOWN',
                       'string',
+                      'PDO',
+                      'Closure',
                      );
 
 ?>
