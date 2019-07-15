@@ -40,11 +40,76 @@ class ShouldUseArrayColumn extends Analyzer {
              ->hasNoInstruction(array('Ifthen', 'Switch')) // Make this a filter
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
+             // The left part is not reusing the blin variable : this would be too complex for array_column
+             ->not(
+                $this->side()
+                     ->atomInsideNoDefinition(array('Variable', 'Variablearray'))
+                     ->samePropertyAs('code', 'name')
+             )
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs(array('Array', 'Member'))
              ->outIs(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'name')
+             ->back('first');
+        $this->prepareQuery();
+
+        // for($i = 0; $i < count($n); ++$i) { $c[] = $n[$i]['c']; }
+        $this->atomIs('For')
+             ->outIs('INCREMENT')
+             ->outIs('EXPRESSION')
+             ->atomIs(array('Preplusplus', 'Postplusplus'))
+             ->outIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+
+             ->outIs('LEFT')
+             ->atomIs('Arrayappend')
+             ->inIs('LEFT')
+
+             ->outIs('RIGHT')
+             ->atomIs('Array')
+             ->atomInsideNoDefinition('Variable')
+             ->samePropertyAs('code', 'name')
+             ->inIs('INDEX')
+             ->back('first');
+        $this->prepareQuery();
+
+        // for($i = 0; $i < count($n); ++$i) { $c[$i] = $n[$i]['c']; }
+        $this->atomIs('For')
+             ->outIs('INCREMENT')
+             ->outIs('EXPRESSION')
+             ->atomIs(array('Preplusplus', 'Postplusplus'))
+             ->outIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             ->_as('exp')
+
+             ->outIs('LEFT')
+             ->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'name')
+             ->back('exp')
+
+             ->outIs('RIGHT')
+             ->atomIs('Array')
+             ->atomInsideNoDefinition('Variable')
+             ->samePropertyAs('code', 'name')
+             ->inIs('INDEX')
+
              ->back('first');
         $this->prepareQuery();
     }
