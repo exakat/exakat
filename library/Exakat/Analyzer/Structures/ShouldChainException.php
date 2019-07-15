@@ -36,7 +36,11 @@ class ShouldChainException extends Analyzer {
              ->atomInsideNoDefinition('Throw')
              ->outIs('THROW')
              ->outIs('NEW')
-             ->raw('not(where( __.out("ARGUMENT").filter{ it.get().value("code") == caught} ))')
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->samePropertyAs('code', 'caught')
+             )
              ->back('first');
         $this->prepareQuery();
     }
