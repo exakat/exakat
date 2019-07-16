@@ -43,6 +43,7 @@ class ConstantScalarExpression extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
+             ->hasNoIn('RIGHT')
              ->atomIsNot($authorizedAtoms)
              ->back('first');
         $this->prepareQuery();
@@ -52,7 +53,9 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
+             ->atomIs('Propertydefinition')
              ->outIs('DEFAULT')
+             ->hasNoIn('RIGHT')
              ->atomIsNot($authorizedAtoms)
              ->inIs('DEFAULT');
         $this->prepareQuery();
