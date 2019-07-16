@@ -57,7 +57,7 @@ class Htmlentitiescall extends Analyzer {
         $this->atomFunctionIs($html_functions)
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Parenthesis'))
              ->outIsIE(array('LEFT', 'RIGHT', 'CODE'))
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIsNot($constants)
