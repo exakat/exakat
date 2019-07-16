@@ -36,7 +36,7 @@ class Tinkergraph extends Graph {
     private $status     = self::UNCHECKED;
     private $db         = null;
 
-    private $gremlinVersion = '3.3';
+    private $gremlinVersion = '3.4';
     
     public function __construct($config) {
         parent::__construct($config);
@@ -47,7 +47,7 @@ class Tinkergraph extends Graph {
             return;
         }
 
-        $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
+        $gremlinJar = glob("{$this->config->tinkergraph_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.4, 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
@@ -159,9 +159,8 @@ class Tinkergraph extends Graph {
         $this->stop();
         $this->start();
     }
-    
+
     public function start() {
-        
         if (!file_exists("{$this->config->tinkergraph_folder}/conf")) {
             throw new GremlinException('No tinkgergraph configuration folder found.');
         }
@@ -172,9 +171,9 @@ class Tinkergraph extends Graph {
         }
 
         if (in_array($this->gremlinVersion, array('3.3', '3.4'), true)) {
-            putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
+            putenv("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
             exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
         } else {
@@ -245,7 +244,7 @@ class Tinkergraph extends Graph {
     public function getDefinitionSQL() {
         // Optimize loading by sorting the results
         return <<<'SQL'
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, GROUP_CONCAT(DISTINCT calls.id - 1) AS call, count(calls.id) AS id
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id ELSE definitions.id END AS definition, GROUP_CONCAT(DISTINCT calls.id) AS call, count(calls.id) AS id
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
@@ -257,7 +256,14 @@ WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
 GROUP BY definition
 SQL;
     }
-
+    
+    public function getGlobalsSql() {
+        return 'SELECT origin, destination FROM globals';
+    }
+    
+    public function fixId($id) {
+        return $id;
+    }
 }
 
 ?>

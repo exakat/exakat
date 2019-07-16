@@ -111,8 +111,9 @@ class SplitGraphson extends Loader {
             $chunk = 0;
         }
 
-        $res = $this->sqlite3->query('SELECT origin - 1, destination -1 FROM globals');
+        $res = $this->sqlite3->query('SELECT origin, destination FROM globals');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $row = array_map(array($this->graphdb, 'fixId'), $row);
             fputcsv($f, $row);
             ++$total;
             ++$chunk;
@@ -123,7 +124,19 @@ class SplitGraphson extends Loader {
             $chunk = 0;
         }
 
-        $res = $this->sqlite3->query($this->graphdb->getDefinitionSQL());
+        $definitionSQL = <<<SQL
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id ELSE definitions.id END AS definition, GROUP_CONCAT(DISTINCT calls.id) AS call, count(calls.id) AS id
+FROM calls
+LEFT JOIN definitions 
+    ON definitions.type       = calls.type       AND
+       definitions.fullnspath = calls.fullnspath
+LEFT JOIN definitions definitions2
+    ON definitions2.type       = calls.type       AND
+       definitions2.fullnspath = calls.globalpath 
+WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+GROUP BY definition
+SQL;
+        $res = $this->sqlite3->query($definitionSQL);
         // Fast dump, with a write to memory first
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             // Skip reflexive definitions, which never exist.
@@ -131,7 +144,10 @@ class SplitGraphson extends Loader {
             $total += $row[2];
             $chunk += $row[2];
             unset($row[2]);
-            $row[1] = strtr($row[1], ',', '-');
+            $row[0] = $this->graphdb->fixId($row[0]);
+            $r = explode(',', $row[1]);
+            $row[1] = array_map(array($this->graphdb, 'fixId'), $r);
+            $row[1] = implode('-', $r);
             fputcsv($f, $row);
             
             if ($chunk > self::LOAD_CHUNK_LINK) {
@@ -193,6 +209,7 @@ GREMLIN;
     }
 
     private function cleanCsv() {
+        return;
         if (file_exists($this->path)) {
             unlink($this->path);
         }
@@ -249,6 +266,8 @@ GREMLIN;
                 $this->tokenCounts[$link[0]] = 1;
             }
             
+            $link[1] = $this->graphdb->fixId($link[1]);
+            $link[2] = $this->graphdb->fixId($link[2]);
             $link = implode('-', $link);
         }
 
