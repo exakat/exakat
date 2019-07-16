@@ -179,7 +179,6 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     private $callsDatabase       = null;
-    private $phpDoc              = null;
     
     private $processing = array();
     
@@ -404,7 +403,7 @@ class Load extends Tasks {
 
         $this->callsDatabase = new \Sqlite3(':memory:');
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
-    }
+     }
     
     public function __destruct() {
         $this->callsDatabase = null;
@@ -441,14 +440,6 @@ class Load extends Tasks {
         $this->atoms          = array();
         $this->min_id         = \PHP_INT_MAX;
 
-        // Restart the connexion each time
-        $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
-        display("Loading with $clientClass\n");
-        if (!class_exists($clientClass)) {
-            throw new NoSuchLoader($clientClass, $this->loaderList);
-        }
-        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
-
         // Cleaning the databases
         $this->datastore->cleanTable('tokenCounts');
         $this->datastore->cleanTable('dictionary');
@@ -460,6 +451,13 @@ class Load extends Tasks {
             }
             
             try {
+                $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+                display("Loading with $clientClass\n");
+                if (!class_exists($clientClass)) {
+                    throw new NoSuchLoader($clientClass, $this->loaderList);
+                }
+                $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
+
                 ++$this->stats['files'];
                 if ($this->processFile($filename, '')) {
                     $this->loader->finalize($this->relicat);
@@ -507,9 +505,43 @@ class Load extends Tasks {
 
         $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
 
+        if (function_exists('pcntl_fork')) {
+            $pid = pcntl_fork();
+            if ($pid === 0 ) {
+                $this->runCollector($omittedFiles);
+                exit(0);
+            } else {
+                unset($this->gremlin);
+                $this->gremlin = Graph::getConnexion($this->config);
+
+                $this->callsDatabase = new \Sqlite3(':memory:');
+                $this->loader = new Collector(null, $this->config, $this->callsDatabase);
+                $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+
+                $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+                display("Loading with $clientClass\n");
+                if (!class_exists($clientClass)) {
+                    throw new NoSuchLoader($clientClass, $this->loaderList);
+                }
+                $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
+            }
+        } else {
+            $this->runCollector($omittedFiles);
+
+            unset($this->gremlin);
+            $this->gremlin = Graph::getConnexion($this->config);
+
+            $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+            display("Loading with $clientClass\n");
+            if (!class_exists($clientClass)) {
+                throw new NoSuchLoader($clientClass, $this->loaderList);
+            }
+            $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
+        }
+
         $nbTokens = 0;
         if ($this->config->verbose && !$this->config->quiet) {
-           $progressBar = new Progressbar(0, count($files) + count($omittedFiles) + 1, $this->config->screen_cols);
+           $progressBar = new Progressbar(0, count($files) + 1, $this->config->screen_cols);
         }
 
         foreach($files as $file) {
@@ -529,44 +561,41 @@ class Load extends Tasks {
         }
         $this->loader->finalize($this->relicat);
 
-        $loader = $this->loader;
-        $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase);
-        $this->callsDatabase = new \Sqlite3(':memory:');
-        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
-
-        $file_extensions = $this->config->file_extensions;
-
-        $stats = $this->stats;
-        foreach($omittedFiles as $file) {
-            try {
-                $ext = pathinfo($file, PATHINFO_EXTENSION);
-                if (!in_array($ext, $file_extensions, STRICT_COMPARISON)) {
-                    if (isset($progressBar)) {
-                        echo $progressBar->advance();
-                    }
-                    continue;
-                }
-
-                $this->processFile($file, $this->config->code_dir);
-                if (isset($progressBar)) {
-                    echo $progressBar->advance();
-                }
-            } catch (NoFileToProcess $e) {
-                if (isset($progressBar)) {
-                    echo $progressBar->advance();
-                }
-            }
-        }
-        $this->loader->finalize($this->relicat);
-        $this->loader = $loader;
-        $this->stats = $stats;
-
         if (isset($progressBar)) {
             echo $progressBar->advance();
         }
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
+    }
+
+    private function runCollector($omittedFiles) {
+        $b = hrtime(true);
+
+        $this->callsDatabase = new \Sqlite3(':memory:');
+        $this->loader = new Collector(null, $this->config, $this->callsDatabase);
+        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+
+        $file_extensions = $this->config->file_extensions;
+        $atomGroup = clone $this->atomGroup;
+
+        $stats = $this->stats;
+        foreach($omittedFiles as $file) {
+            try {
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                if (!in_array($ext, $file_extensions, STRICT_COMPARISON)) {
+                    continue;
+                }
+        
+                $this->processFile($file, $this->config->code_dir);
+            } catch (NoFileToProcess $e) {
+            }
+        }
+        $this->loader->finalize($this->relicat);
+        $this->atomGroup = $atomGroup;
+
+        $this->stats = $stats;
+        $e = hrtime(true);
     }
 
     private function processDir($dir) {
@@ -579,6 +608,13 @@ class Load extends Tasks {
         $ignoredFiles = array();
         $dir = rtrim($dir, '/');
         Files::findFiles($dir, $files, $ignoredFiles, $this->config);
+
+        $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+        display("Loading with $clientClass\n");
+        if (!class_exists($clientClass)) {
+            throw new NoSuchLoader($clientClass, $this->loaderList);
+        }
+        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase);
 
         $nbTokens = 0;
         foreach($files as $file) {
@@ -691,6 +727,7 @@ class Load extends Tasks {
                 $this->tokens[] = array(0 => $this->phptokens::TOKENS[$t],
                                         1 => $t,
                                         2 => $line);
+                ++$total;
             } else {
                 assert(false, "$t is in a wrong token type : " . gettype($t));
             }
@@ -1268,7 +1305,7 @@ class Load extends Tasks {
         // Process arguments
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
-        $this->makePhpdoc($function);
+        $this->makePhpdoc($function, $current);
 
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
@@ -1414,7 +1451,7 @@ class Load extends Tasks {
         $current = $this->id;
         $trait = $this->addAtom('Trait');
         $this->currentClassTrait[] = $trait;
-        $this->makePhpdoc($trait);
+        $this->makePhpdoc($trait, $this->id);
         
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1446,7 +1483,7 @@ class Load extends Tasks {
         $current = $this->id;
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
-        $this->makePhpdoc($interface);
+        $this->makePhpdoc($interface, $this->id);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1553,7 +1590,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class');
-            $this->makePhpdoc($class);
+            $this->makePhpdoc($class, $this->id);
 
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             
@@ -2249,7 +2286,7 @@ class Load extends Tasks {
 
     private function processConst() {
         $const = $this->addAtom('Const');
-        $this->makePhpdoc($const);
+        $this->makePhpdoc($const, $this->id);
         $current = $this->id;
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
@@ -2310,32 +2347,35 @@ class Load extends Tasks {
     }
 
     private function processAbstract() {
+        $current = $this->id;
         $abstract = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
-        $this->popExpression();
 
         $next->abstract = 1;
         $next->fullcode = "$abstract $next->fullcode";
+        $this->makePhpdoc($next, $current);
         return $next;
     }
 
     private function processFinal() {
+        $current = $this->id;
         $final = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
 
         $next->final    = 1;
         $next->fullcode = "$final $next->fullcode";
+        $this->makePhpdoc($next, $current);
         return $next;
     }
 
     private function processVar() {
+        $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
-        $this->popExpression();
 
         if (!empty($typehint)) {
             $this->addLink($ppp, $typehint, 'TYPEHINT');
@@ -2343,81 +2383,79 @@ class Load extends Tasks {
 
         $ppp->visibility = 'none';
         $ppp->fullcode   = "$visibility $ppp->fullcode";
-        $this->makePhpdoc($ppp);
+        $this->makePhpdoc($ppp, $current);
         return $ppp;
     }
 
     private function processPublic() {
+        $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
-            $this->popExpression();
             
             if (!empty($typehint)) {
                 $this->addLink($next, $typehint, 'TYPEHINT');
             }
         } else {
             $next = $this->processNext();
-            $this->popExpression();
         }
         
         $next->visibility = 'public';
         $next->fullcode   = "$visibility $next->fullcode";
-        $this->makePhpdoc($next);
+        $this->makePhpdoc($next, $current);
         return $next;
     }
 
     private function processProtected() {
+        $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
-            $this->popExpression();
             
             if (!empty($typehint)) {
                 $this->addLink($next, $typehint, 'TYPEHINT');
             }
         } else {
             $next = $this->processNext();
-            $this->popExpression();
         }
         
         $next->visibility = 'protected';
         $next->fullcode   = "$visibility $next->fullcode";
-        $this->makePhpdoc($next);
+        $this->makePhpdoc($next, $current);
         return $next;
     }
 
     private function processPrivate() {
+        $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
-            $this->popExpression();
             
             if (!empty($typehint)) {
                 $this->addLink($next, $typehint, 'TYPEHINT');
             }
         } else {
             $next = $this->processNext();
-            $this->popExpression();
         }
         
         $next->visibility = 'private';
         $next->fullcode   = "$visibility $next->fullcode";
-        $this->makePhpdoc($next);
+        $this->makePhpdoc($next, $current);
         return $next;
     }
     
     private function processDefineConstant($namecall) {
+        $current = $this->id;
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
         $namecall->aliased    = self::NOT_ALIASED;
-        $this->makePhpdoc($namecall);
+        $this->makePhpdoc($namecall, $current);
 
         // Empty call
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -2758,6 +2796,7 @@ class Load extends Tasks {
     }
 
     private function processStatic() {
+        $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF    ) {
 
@@ -2856,10 +2895,10 @@ class Load extends Tasks {
         $static = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
-//        $this->popExpression();
 
         $next->static   = 1;
         $next->fullcode = "$static $next->fullcode";
+        $this->makePhpdoc($next, $current);
         return $next;
     }
 
@@ -3160,6 +3199,7 @@ class Load extends Tasks {
 
         $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
+        $variables = $this->currentVariables;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                 $this->phptokens::T_DOUBLE_ARROW,
@@ -3184,6 +3224,9 @@ class Load extends Tasks {
         }
 
         $this->addLink($foreach, $value, 'VALUE');
+        foreach(array_diff(array_keys($this->currentVariables), array_keys($variables)) as $name) {
+            $this->addLink($foreach, $this->currentVariables[$name], 'VALUE');
+        }
 
         ++$this->id; // Skip )
         $isColon = $this->whichSyntax($current, $this->id + 1);
@@ -3989,7 +4032,7 @@ class Load extends Tasks {
         }
 
         $namespace = $this->addAtom('Namespace');
-        $this->makePhpdoc($namespace);
+        $this->makePhpdoc($namespace, $current);
         $this->addLink($namespace, $name, 'NAME');
         $this->setNamespace($name);
 
@@ -4756,15 +4799,15 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function makePhpdoc(Atom $node) {
-        if (!isset($this->phpDocs[$this->id])) {
+    private function makePhpdoc(Atom $node, int $id = 0) {
+        if (!isset($this->phpDocs[$id + 1])) {
             return;
         }
 
         $phpDoc = $this->addAtom('Phpdoc');
-        $phpDoc->code     = $this->phpDocs[$this->id][1];
-        $phpDoc->fullcode = $this->phpDocs[$this->id][1];
-        $phpDoc->token    = $this->getToken($this->phpDocs[$this->id][0]);
+        $phpDoc->code     = $this->phpDocs[$id + 1][1];
+        $phpDoc->fullcode = $this->phpDocs[$id + 1][1];
+        $phpDoc->token    = $this->getToken($this->phpDocs[$id + 1][0]);
 
         $this->addLink($node, $phpDoc, 'PHPDOC');
     }
@@ -5668,11 +5711,11 @@ class Load extends Tasks {
         }
         
         if ($origin->id < $this->min_id) {
-            $this->relicat[] = array($origin->id - 1, $destination->id - 1);
+            $this->relicat[] = array($origin->id, $destination->id);
         } elseif ($destination->id < $this->min_id) {
-            $this->relicat[] = array($origin->id - 1, $destination->id - 1);
+            $this->relicat[] = array($origin->id, $destination->id);
         } else {
-            $this->links[] = array($label, $origin->id - 1, $destination->id - 1);
+            $this->links[] = array($label, $origin->id, $destination->id);
         }
     }
 
