@@ -246,7 +246,7 @@ class Dump extends Tasks {
             
             if ($missing === 0) {
                 $list = '(NULL, "' . implode('"), (NULL, "', $ruleset) . '")';
-                $this->sqlite->query("INSERT INTO rulesets (\"id\", \"ruleset\") VALUES {$list}");
+                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
                 $rulesets = array();
             }
 
@@ -2404,7 +2404,7 @@ SQL;
         }
         
         if (empty(array_diff($analyzers, $ran))) {
-            $query = "INSERT INTO rulesets (\"id\", \"ruleset\") VALUES (null, \"$ruleset\")";
+            $query = "INSERT INTO themas (\"id\", \"thema\") VALUES (null, \"$ruleset\")";
             $sqlite->query($query);
         }
     }
@@ -2416,10 +2416,10 @@ SQL;
             $analyzers[] = $row['analyzer'];
         }
 
-        $res = $this->sqlite->query('SELECT ruleset FROM rulesets');
+        $res = $this->sqlite->query('SELECT thema FROM themas');
         $ran = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ran[$row['ruleset']] = 1;
+            $ran[$row['thema']] = 1;
         }
 
         $rulesets = $this->themes->listAllRulesets();
@@ -2435,7 +2435,7 @@ SQL;
         }
 
         if (!empty($add)) {
-            $query = 'INSERT INTO rulesets (ruleset) VALUES ("' . implode('"), ("', $add) . '")';
+            $query = 'INSERT INTO themas (thema) VALUES ("' . implode('"), ("', $add) . '")';
             $this->sqlite->query($query);
         }
     }
@@ -2448,9 +2448,9 @@ SQL;
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $query = <<<'SQL'
-CREATE TABLE rulesets (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       ruleset STRING,
-                       CONSTRAINT "rulesets" UNIQUE (ruleset) ON CONFLICT IGNORE
+CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
+                       thema STRING,
+                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
                     )
 SQL;
         $this->sqlite->query($query);
