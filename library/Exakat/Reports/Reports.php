@@ -153,14 +153,14 @@ abstract class Reports {
         }
         
         $available = array();
-        $res = $this->sqlite->query('SELECT * FROM rulesets');
+        $res = $this->sqlite->query('SELECT * FROM themas');
         if ($res === false) {
             // Nothing found.
             return $required;
         }
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $available[] = $row['ruleset'];
+            $available[] = $row['thema'];
         }
         
         return array_diff($required, $available);
