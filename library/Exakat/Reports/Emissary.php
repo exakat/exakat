@@ -375,7 +375,7 @@ class Emissary extends Reports {
     }
 
     protected function generateSecurity() {
-        $this->generateIssuesEngine('security_issues',
+        $this->generateIssuesEngine($section->
                                     $section->title,
                                     $this->getIssuesFaceted('Security') );
     }
@@ -1589,17 +1589,6 @@ HTML;
         return $result[0];
     }
 
-    protected function getTotalAnalyzer($issues = false) {
-        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
-            FROM resultsCounts AS rc
-            WHERE rc.count >= 0';
-
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray(\SQLITE3_NUM);
-    }
-
     protected function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
@@ -2554,7 +2543,7 @@ HTML;
 
         $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
-        $info[] = array('Report production date', date('r', strtotime('now')));
+        $info[] = array('Report production date', date('r', time()));
 
         $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
         $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
@@ -4954,36 +4943,6 @@ HTML;
 
     private function toHtmlList(array $array) {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
-    }
-}
-
-class Section {
-    private const SAME_AS_FILE = true;
-    
-    public $method  = 'NoSuchMethod';
-    public $title   = 'No title';
-    public $menu    = 'No menu title';
-    public $source  = self::SAME_AS_FILE;
-    public $file    = 'empty';
-    public $icon    = 'circle-o';
-    public $ruleset = 'None';
-    
-    function __construct(array $section) {
-        $this->title   = $section['title']   ?? $this->title;
-        $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
-        $this->file    = $section['file']    ?? $this->file;
-        $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
-        $this->icon    = $section['icon']    ?? $this->icon;
-        $this->method  = $section['method']  ?? $this->method;
-        $this->ruleset = $section['ruleset'] ?? $this->ruleset;
-    }
-    
-    function __get($name) {
-        print "Access to undefined property $name\n";
-    }
-
-    function __set($name, $value) {
-        print "Write to undefined property $name\n";
     }
 }
 
