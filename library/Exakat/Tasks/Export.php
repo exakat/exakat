@@ -42,6 +42,9 @@ class Export extends Tasks {
         $V = array();
         $root = 0;
         foreach($vertices as $v) {
+            if ($v['label'] === 'Project') {
+                $root = $v['id'];
+            }
             $V[$v['id']] =  $v;
         }
 
