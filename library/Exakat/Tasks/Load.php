@@ -3803,12 +3803,7 @@ class Load extends Tasks {
             }
 
             $this->pushExpression($functioncall);
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            } elseif ( $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-                ++$this->id;
-                $this->processSemicolon();
-            }
+            $this->checkExpression();
 
             return $functioncall;
         }
