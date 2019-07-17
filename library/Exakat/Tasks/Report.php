@@ -34,6 +34,7 @@ use Exakat\Exceptions\NoDump;
 use Exakat\Exceptions\NoDumpYet;
 use Exakat\Project as ProjectName;
 use Exakat\Reports\Reports as Reports;
+use Exakat\Tasks\Helpers\ReportConfig;
 
 class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -72,16 +73,18 @@ class Report extends Tasks {
 
         Analyzer::$datastore = $this->datastore;
 
-        foreach($this->config->format as $format) {
-            $reportClass = Reports::getReportClass($format);
+        foreach($this->config->project_reports as $format) {
+            $reportConfig = new ReportConfig($format, $this->config);
+            print $reportConfig->getName().PHP_EOL;
+            $reportClass = $reportConfig->getFormatClass();
             if (!class_exists($reportClass)) {
-                display("No such format as $format. Omitting.");
+                display("No such format as ".$reportConfig->getFormat().". Omitting.");
                 continue;
             }
 
             $report = new $reportClass($this->config);
 
-            $this->format($report, $format);
+            $this->format($report, $reportConfig->getFormat());
         }
     }
     

@@ -67,7 +67,7 @@ class DefaultConfig extends Config {
                                'thema'          => array(),
                                'analyzers'      => array(),
                                'report'         => 'Diplomat',
-                               'format'         => array('Text'),
+                               'project_reports'=> array('Text'),
                                'file'           =>  '',
                                'style'          => 'ALL',
  
@@ -79,10 +79,6 @@ class DefaultConfig extends Config {
                                'tinkergraph_port'   => '7474',
                                'tinkergraph_folder' => 'tinkergraph',
 
-                               'bitsy_host'         => '127.0.0.1',
-                               'bitsy_port'         => '8182',
-                               'bitsy_folder'       => 'tinkergraph',
- 
                                'branch'         => '',
                                'tag'            => '',
  

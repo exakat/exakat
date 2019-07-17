@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoSuchReport extends \RuntimeException {
     public function __construct(string $report = '') {
-        parent::__construct("No such report as $exception");
+        parent::__construct("No such report as $report");
     }
 }
 

@@ -31,9 +31,11 @@ use Exakat\Exakat;
 use Exakat\Project as Projectname;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoSuchReport;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
+use Exakat\Tasks\Helpers\ReportConfig;
 use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
@@ -43,7 +45,8 @@ class Project extends Tasks {
                                    'Preferences',
                                    );
 
-    protected $reports = array();
+    protected $reports       = array();
+    protected $reportConfigs = array();
 
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
@@ -130,19 +133,24 @@ class Project extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $info);
-        
+
         $themesToRun = array($this->config->project_themes);
         $reportToRun = array();
+        $namesToRun  = array();
 
         foreach($this->reports as $format) {
-            $reportClass = "\Exakat\Reports\\$format";
-            if (!class_exists($reportClass)) {
+            try {
+                $report = new ReportConfig($format, $this->config);
+            } catch (NoSuchReport $e) {
+                // Simple ignore
+                display($e->getMessage());
                 continue;
             }
-            $reportToRun[] = $format;
-            $report = new $reportClass($this->config);
-            
-            $themesToRun[] = $report->dependsOnAnalysis();
+            $this->reportConfigs[$report->getName()] = $report;
+
+            $themesToRun[] = $report->getRulesets();
+            $namesToRun[]  = $report->getName();
+
             unset($report);
             gc_collect_cycles();
         }
@@ -167,7 +175,7 @@ class Project extends Tasks {
 
         display("Running project '$project'" . PHP_EOL);
         display('Running the following analysis : ' . implode(', ', $themesToRun));
-        display('Producing the following reports : ' . implode(', ', $reportToRun));
+        display('Producing the following reports : ' . implode(', ', $namesToRun));
 
         display('Running files' . PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -235,20 +243,21 @@ class Project extends Tasks {
         foreach($this->config->themas as $name => $analyzers) {
             $dump->checkRulesets($name, $analyzers);
         }
-        
-        foreach($reportToRun as $format) {
-            display("Reporting $format" . PHP_EOL);
+
+        foreach($this->reportConfigs as $name => $reportConfig) {
+            $format = $reportConfig->getFormat();
+
+            display("Reporting $name" . PHP_EOL);
             $this->addSnitch(array('step'    => "Report : $format",
                                    'project' => $this->config->project));
 
             try {
-                $reportConfig = $this->config->duplicate(array('file'   => constant("\Exakat\Reports\\$format::FILE_FILENAME"),
-                                                               'format' => array($format)));
-                $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
+                $tmpConfig = $reportConfig->getConfig();
+                $report = new Report($this->gremlin, $tmpConfig, Tasks::IS_SUBTASK);
 
                 $report->run();
             } catch (\Throwable $e) {
-                echo "Error while building $format in $format.\n";
+                display( "Error while building $format : ".$e->getMessage()."\n");
             }
             unset($reportConfig);
         }

@@ -105,6 +105,7 @@ class CommandLine extends Config {
                               'jobqueue'      => 1,
                               'queue'         => 1,
                               'load'          => 1,
+                              'drop'          => 1,
                               'project'       => 1,
                               'report'        => 1,
                               'results'       => 1,
@@ -197,6 +198,13 @@ class CommandLine extends Config {
                         break;
 
                     case 'format' :
+                        if (isset($this->config['project_reports'])) {
+                            $this->config['project_reports'][] = $args[$id + 1];
+                        } else {
+                            $this->config['project_reports'] = array($args[$id + 1]);
+                        }
+                        break;
+
                     case 'thema' :
                         if (isset($this->config[$config])) {
                             $this->config[$config][] = $args[$id + 1];
@@ -214,7 +222,7 @@ class CommandLine extends Config {
 
             }
         }
-        
+
         $command = array_shift($args);
         if (isset($command, $this->commands[$command])) {
             $this->config['command'] = $command;
