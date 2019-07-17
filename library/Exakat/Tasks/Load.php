@@ -3808,8 +3808,6 @@ class Load extends Tasks {
             } elseif ( $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
                 $this->processSemicolon();
-            } else {
-                print_r($this->tokens[$this->id + 1]);
             }
 
             return $functioncall;
