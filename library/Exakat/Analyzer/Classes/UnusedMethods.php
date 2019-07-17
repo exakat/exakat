@@ -29,19 +29,32 @@ class UnusedMethods extends Analyzer {
     public function dependsOn() {
         return array('Classes/UsedMethods',
                      'Modules/CalledByModule',
+                     'Classes/IsInterfaceMethod',
                     );
     }
     
     public function analyze() {
-        // Methods definitions
+        // Magicmethods are supposed to be used automatically
+        // Could be checked for __clone, __get, __set...
+
+        // Methods definitions in class
         $this->atomIs('Method')
              ->isNot('abstract', true)
-             ->hasClassTrait()
+             ->hasClass()
              ->analyzerIsNot(array('Classes/UsedMethods',
                                    'Modules/CalledByModule',
                                 ))
+            // Checks if it is a PHP interface : it is an interface method, but has no definition as it is implicit
+             ->not(
+                $this->side()
+                     ->analyzerIs('Classes/IsInterfaceMethod')
+                     ->hasNoOut('OVERWRITE') 
+             )
              ->back('first');
         $this->prepareQuery();
+
+        // Methods definitions in trait
+        // Missing OVERWRITE and IsInterfaceDDefinition analysiss
     }
 }
 

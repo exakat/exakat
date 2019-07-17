@@ -1,53 +1,53 @@
 <?php
 
 // KO (2 else if)
-if (111) {
+if ($a === 111) {
 
-} else if (222) {
-
-} else {
-
-}
-
-// OK (3 else if)
-if (1) {
-
-} else if (2) {
-
-} else if (3) {
+} else if ($a === 222) {
 
 } else {
 
 }
 
 // OK (3 else if)
-if (11) {
+if ($a === 1) {
 
-} elseif (12) {
+} else if ($a === 2) {
 
-} else if (13) {
-
-} else {
-
-}
-
-// OK (3 else if)
-if (21) {
-
-} else if (22) {
-
-} elseif (23) {
+} else if ($a === 3) {
 
 } else {
 
 }
 
 // OK (3 else if)
-if (31) {
+if ($a === 11) {
 
-} elseif (32) {
+} elseif ($a === 12) {
 
-} elseif (33) {
+} else if ($a === 13) {
+
+} else {
+
+}
+
+// OK (3 else if)
+if ($a === 21) {
+
+} else if ($a === 22) {
+
+} elseif ($a === 23) {
+
+} else {
+
+}
+
+// OK (3 else if)
+if ($a === 31) {
+
+} elseif ($a === 32) {
+
+} elseif ($a === 33) {
 
 } else {
 

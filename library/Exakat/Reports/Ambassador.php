@@ -186,7 +186,7 @@ class Ambassador extends Reports {
             }
 
             $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(ruleset, -2) FROM rulesets WHERE ruleset LIKE "Compatibility%" ORDER BY ruleset DESC');
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -2523,7 +2523,7 @@ HTML;
 
         $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
-        $info[] = array('Report production date', date('r', strtotime('now')));
+        $info[] = array('Report production date', date('r', time()));
 
         $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
         $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});

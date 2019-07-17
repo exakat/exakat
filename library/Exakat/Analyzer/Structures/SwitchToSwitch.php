@@ -27,16 +27,26 @@ class SwitchToSwitch extends Analyzer {
     public function analyze() {
         // 3 ifthen chained with elseif
         $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->inIs('CONDITION')
              ->tokenIs('T_IF')
              ->outIs('ELSE')
              ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
 
              ->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->inIs('CONDITION')
              ->outIs('ELSE')
              ->outIsIE('EXPRESSION')
              ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
 
              ->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->inIs('CONDITION')
+
              ->back('first');
         $this->prepareQuery();
     }

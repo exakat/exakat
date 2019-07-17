@@ -115,6 +115,8 @@ class Doctor extends Tasks {
         $stats['PHP']['ext/mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
         $stats['PHP']['ext/json']       = extension_loaded('json')      ? 'Yes' : 'No';
         $stats['PHP']['ext/xmlwriter']  = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
+        $stats['PHP']['ext/pcntl']      = extension_loaded('pcntl')     ? 'Yes' : 'No (Optional)';
+        $stats['PHP']['pcre.jit']       = (ini_get('pcre.jit')           ? 'On'  : 'Off').' (Must be off on PHP 7.3 and OSX)';
 
         // java
         $res = shell_exec('java -version 2>&1');

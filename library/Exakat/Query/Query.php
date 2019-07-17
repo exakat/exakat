@@ -26,6 +26,7 @@ namespace Exakat\Query;
 use Exakat\Query\DSL\DSL;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
+use Exakat\Exceptions\UnknownDsl;
 
 class Query {
     public const STOP_QUERY = 'filter{ false; }';

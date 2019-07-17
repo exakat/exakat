@@ -38,15 +38,19 @@ class NotSamePropertyAs extends DSL {
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-        
-        if ($property === 'label') {
-            return new Command("filter{ it.get().label() != $name }");
-        } elseif ($property === 'id') {
-            return new Command("filter{ it.get().id() != $name }");
-        } elseif ($property === 'self') {
-            return new Command("filter{ it.get() != $name }");
-        } else {
-            return new Command("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
+
+        switch ($property) {
+            case 'label': 
+                return new Command("filter{ it.get().label() != $name }");
+
+            case 'id':
+                return new Command("filter{ it.get().id() != $name }");
+
+            case 'self':
+                return new Command("filter{ it.get() != $name }");
+
+            default : 
+                return new Command("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
         }
     }
 }

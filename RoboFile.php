@@ -1092,13 +1092,13 @@ SQL
         sort($files);
         
         $missing = array_diff($files, $formats);
-        if (count($missing) > 0) {
+        if (!empty($missing)) {
             print count($missing).' format are missing in ./library/Exakat/Reports/Reports.php : '.implode(', ', $missing)."\n";
             print "static public \$FORMATS        = array\('".implode("', '", $files)."');\n";
         }
 
         $toomany = array_diff($formats, $files);
-        if (count($toomany) > 0) {
+        if (!empty($toomany)) {
             print count($toomany).' format are too many in ./library/Exakat/Reports/Reports.php : '.implode(', ', $toomany)."\n";
             print "static public \$FORMATS        = array\('".implode("', '", $files)."');\n";
         }

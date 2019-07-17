@@ -25,23 +25,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoClassAsTypehint extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/IsExtClass',
-                    );
-    }
-    
     public function analyze() {
         // Classes reused as typehint
         $this->atomIs('Class')
              ->outIs('DEFINITION')
-             ->hasIn('TYPEHINT');
-        $this->prepareQuery();
-
-        // Classes reused as typehint
-        $this->atomIs(array('Function', 'Method', 'Magicmethod'))
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->analyzerIs('Classes/IsExtClass');
+             ->hasIn(array('TYPEHINT', 'RETURNTYPE'));
         $this->prepareQuery();
     }
 }

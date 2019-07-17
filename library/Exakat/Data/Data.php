@@ -37,7 +37,7 @@ abstract class Data {
         assert(self::$config !== null, "No config for data\n");
 
         $this->name = $name;
-        
+
         $fullpath = self::$config->dir_root . "/data/$name.sqlite";
         if (self::$config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
@@ -49,16 +49,14 @@ abstract class Data {
                 assert(false, "No database for '$name.sqlite'.");
             }
             $docPath = $this->phar_tmp;
+        } elseif (file_exists($fullpath)) {
+            $docPath = $fullpath;
+        } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
+            self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
+            $docPath = $this->phar_tmp;
         } else {
-            if (file_exists($fullpath)) {
-                $docPath = $fullpath;
-            } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
-                $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
-                self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
-                $docPath = $this->phar_tmp;
-            } else {
-                assert(false, "No database for '$name.sqlite'.");
-            }
+            assert(false, "No database for '$name.sqlite'.");
         }
         $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }

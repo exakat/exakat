@@ -49,7 +49,7 @@ abstract class Graph {
     // null means that the graph will handle it.
     // This is not the case of all graph : tinkergraph doesn't.
     public function getId() { return 'null'; }
-    abstract public function getDefinitionSQL();
+    public function fixId($id) { return $id; }
 
     public static function getConnexion(Config $config) {
         $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}";

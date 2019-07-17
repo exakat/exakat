@@ -469,17 +469,6 @@ SQL;
         return $result[0];
     }
 
-    protected function getTotalAnalyzer($issues = false) {
-        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
-            FROM resultsCounts AS rc
-            WHERE rc.count >= 0';
-
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray(\SQLITE3_NUM);
-    }
-
     protected function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 

@@ -27,11 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class ListWithAppends extends Analyzer {
     public function analyze() {
+        // list($a[]. $a[], $a[]) = array();
         $this->atomIs('List')
              ->hasIn('LEFT')
 
-             // more than one Arrayappend, for initial filtering
-             ->raw('where( __.out("ARGUMENT").hasLabel("Arrayappend") )')
+             // at least one Arrayappend, for initial filtering
+             ->filter(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs('Arrayappend')
+             )
 
              // several appends to the same array
              ->raw('where( __.sideEffect{ counters = [:]; }
