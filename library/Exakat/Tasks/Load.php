@@ -3332,7 +3332,6 @@ class Load extends Tasks {
                               $this->phptokens::T_TRY,
                               $this->phptokens::T_WHILE,
                               );
-//, $this->phptokens::T_EXIT
             if (in_array($this->tokens[$this->id + 1][0], $specials, STRICT_COMPARISON)) {
                 $this->processNext();
             } else {
@@ -3754,41 +3753,7 @@ class Load extends Tasks {
     }
 
     private function processExit() {
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
-                                                            $this->phptokens::T_SEMICOLON,
-                                                            $this->phptokens::T_CLOSE_TAG,
-                                                            $this->phptokens::T_CLOSE_CURLY,
-                                                            $this->phptokens::T_CLOSE_BRACKET,
-                                                            $this->phptokens::T_COMMA,
-                                                            $this->phptokens::T_COLON),
-            STRICT_COMPARISON)) {
-            $functioncall = $this->addAtom('Exit');
-
-            $functioncall->code       = $this->tokens[$this->id][1];
-            $functioncall->fullcode   = $this->tokens[$this->id][1] . ' ';
-            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
-            $functioncall->count      = 0;
-            $functioncall->fullnspath = '\\' . mb_strtolower($functioncall->code);
-
-            $void = $this->addAtomVoid();
-            $void->rank = 0;
-
-            $this->addLink($functioncall, $void, 'ARGUMENT');
-
-            $this->pushExpression($functioncall);
-
-            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) &&
-                 in_array($this->tokens[$this->id + 1][0],
-                         array($this->phptokens::T_CLOSE_TAG,
-                               $this->phptokens::T_COMMA,
-                              ), STRICT_COMPARISON)
-                ) {
-                $this->processSemicolon();
-            }
-            $this->checkExpression();
-
-            return $functioncall;
-        } else {
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $current = $this->id;
 
             ++$this->id;
@@ -3812,6 +3777,40 @@ class Load extends Tasks {
             $this->runPlugins($functioncall);
 
             $this->checkExpression();
+
+            return $functioncall;
+        } else {
+            $functioncall = $this->addAtom('Exit');
+
+            $functioncall->code       = $this->tokens[$this->id][1];
+            $functioncall->fullcode   = $this->tokens[$this->id][1] . ' ';
+            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
+            $functioncall->count      = 0;
+            $functioncall->fullnspath = '\\' . mb_strtolower($functioncall->code);
+
+            $void = $this->addAtomVoid();
+            $void->rank = 0;
+
+            $this->addLink($functioncall, $void, 'ARGUMENT');
+
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) &&
+                 in_array($this->tokens[$this->id + 1][0],
+                         array($this->phptokens::T_CLOSE_TAG,
+                               $this->phptokens::T_COMMA,
+                              ), STRICT_COMPARISON)
+                ) {
+                $this->processSemicolon();
+            }
+
+            $this->pushExpression($functioncall);
+            if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+                $this->processSemicolon();
+            } elseif ( $this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
+                ++$this->id;
+                $this->processSemicolon();
+            } else {
+                print_r($this->tokens[$this->id + 1]);
+            }
 
             return $functioncall;
         }
@@ -4583,7 +4582,7 @@ class Load extends Tasks {
         $this->runPlugins($integer);
 
         $this->checkExpression();
-        
+
         return $integer;
     }
 
@@ -5089,8 +5088,7 @@ class Load extends Tasks {
 
     private function processAddition() {
         if (!$this->hasExpression() ||
-            $this->tokens[$this->id - 1][0] === $this->phptokens::T_DOT ||
-            $this->tokens[$this->id - 1][0] === $this->phptokens::T_EXIT
+            $this->tokens[$this->id - 1][0] === $this->phptokens::T_DOT
             ) {
             return $this->processSign();
         }

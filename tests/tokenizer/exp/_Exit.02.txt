@@ -1,0 +1,69 @@
+test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : PROJECT
+  1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          8
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              6
+          Label : RIGHT
+            8
+            Label : SIGN
+              11
+              Label : SIGN
+                9
+                Label : CODE
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    10
+        Label : EXPRESSION
+          8
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              6
+          Label : RIGHT
+            12
+        Label : EXPRESSION
+          11
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              6
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          8
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              6
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            10
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            14
