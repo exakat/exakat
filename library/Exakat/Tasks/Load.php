@@ -557,6 +557,12 @@ class Load extends Tasks {
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
+            } catch (CantCompileFile $e) {
+                $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($g->getMessage()));
+            
+                if (isset($progressBar)) {
+                    echo $progressBar->advance();
+                }
             }
         }
         $this->loader->finalize($this->relicat);
@@ -588,7 +594,10 @@ class Load extends Tasks {
                 }
         
                 $this->processFile($file, $this->config->code_dir);
+            } catch (CantCompileFile $e) {
+                // Ignore
             } catch (NoFileToProcess $e) {
+                // Ignore
             }
         }
         $this->loader->finalize($this->relicat);
@@ -694,8 +703,6 @@ class Load extends Tasks {
             $error = $this->php->getError();
             $error['file'] = $filename;
 
-            $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($error));
-            
             return false;
         }
 
@@ -2938,12 +2945,12 @@ class Load extends Tasks {
                 } else {
                     $element = $this->processSingle($atom);
                 }
-                
+
                 if (in_array($element->atom, array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'), STRICT_COMPARISON)) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
-                
+
                 if ($element->atom === 'Globaldefinition') {
                     $this->makeGlobal($element);
 
@@ -2993,11 +3000,11 @@ class Load extends Tasks {
                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
 
         $static->code     = $this->tokens[$current][1];
-        $static->fullcode = $fullcodePrefix . ' ' . implode(', ', $fullcode);
+        $static->fullcode = (!empty($fullcodePrefix) ? $fullcodePrefix . ' ' : '') . implode(', ', $fullcode);
         $static->token    = $this->getToken($this->tokens[$current][0]);
         $static->count    = $rank;
         $this->runPlugins($static, $extras);
-        
+
         $this->pushExpression($static);
 
         $this->checkExpression();
