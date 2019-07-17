@@ -146,7 +146,7 @@ SQL;
             unset($row[2]);
             $row[0] = $this->graphdb->fixId($row[0]);
             $r = explode(',', $row[1]);
-            $row[1] = array_map(array($this->graphdb, 'fixId'), $r);
+            $r = array_map(array($this->graphdb, 'fixId'), $r);
             $row[1] = implode('-', $r);
             fputcsv($f, $row);
             
