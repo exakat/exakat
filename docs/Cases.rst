@@ -2950,10 +2950,10 @@ Not only echo() doesn't use any parenthesis, but this syntax gives the illusion 
 No Hardcoded Path
 =================
 
-.. _tine2.0-structures-nohardcodedpath:
+.. _tine20-structures-nohardcodedpath:
 
-Tine2.0
-^^^^^^^
+Tine20
+^^^^^^
 
 :ref:`no-hardcoded-path`, in tine20/Tinebase/DummyController.php:28. 
 
@@ -7963,7 +7963,7 @@ Here, strpos() or stripos() is a valid replacement.
 
 .. _openconf-structures-simplepreg:
 
-openconf
+OpenConf
 ^^^^^^^^
 
 :ref:`simplify-regex`, in openconf/include.php:964. 

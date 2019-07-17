@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 08 Jul 2019 14:20:27 +0000
-.. comment: Generation hash : 67413e0caf68b8507bdf4235611d913de8eb00f0
+.. comment: Generation date : Wed, 17 Jul 2019 10:43:47 +0000
+.. comment: Generation hash : dc55aec3afe1b317edecd7b53fbd6599ee9bbbe1
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4107,7 +4107,7 @@ Compare Hash
 ############
 
 
-When comparing hash values, it is important to use the strict comparison : ``===`` or ``!==``. 
+When comparing hash values, it is important to use the strict comparison : `hash_equals() <http://www.php.net/hash_equals>`_, ``===`` or ``!==``. 
 
 In a number of situations, the hash value will start with ``0e``, and PHP will understand that the comparison involves integers : it will then convert the strings into numbers, and it may end up converting them to 0.
 
@@ -4141,7 +4141,7 @@ Here is an example
 
 You may also use `password_hash() <http://www.php.net/password_hash>`_ and `password_verify() <http://www.php.net/password_verify>`_ : they work together without integer conversion problems, and they can't be confused with a number.
 
-See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ and `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
+See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ `What is the best way to compare hashed strings? (PHP) <https://stackoverflow.com/questions/5211132/what-is-the-best-way-to-compare-hashed-strings-php/23959696#23959696>`_ and `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
 
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Security/CompareHash                                                                                |
@@ -10002,7 +10002,7 @@ Htmlentities Calls
 
 The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML 4 or 5, etc. It is highly recommended to set it explicitly.
 
-The third argument of the functions is the encoding of the string. In PHP 5.3, it is ISO-8859-1, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
+The third argument of the functions is the encoding of the string. In PHP 5.3, it is ``ISO-8859-1``, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
 .. code-block:: php
 
@@ -10018,9 +10018,15 @@ The third argument of the functions is the encoding of the string. In PHP 5.3, i
    ?>
 
 
-Also, note that arguments 2 and 3 are constants and string (respectively), and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values. 
+Also, note that arguments 2 and 3 are constants and string, respectively, and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values. 
 
 See also `htmlentities <http://www.php.net/htmlentities>`_ and `htmlspecialchars <http://www.php.net/htmlspecialchars>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use the third argument with htmlentities()
 
 +-------------+-----------------------------+
 | Short name  | Structures/Htmlentitiescall |
@@ -15866,7 +15872,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine2.0-structures-nohardcodedpath`, :ref:`thelia-structures-nohardcodedpath`               |
+| Examples    | :ref:`tine20-structures-nohardcodedpath`, :ref:`thelia-structures-nohardcodedpath`                |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -21263,6 +21269,82 @@ See also `Sessions: Improve original RFC about lazy_write <https://wiki.php.net/
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
 +-------------+---------------------------+
+
+
+
+.. _set-aside-code:
+
+Set Aside Code
+##############
+
+
+Setting aside code should be made into a method. 
+
+Setting aside code happens when one variable or member is stored locally, to be temporarily replaced by another value. Once the new value has been processed, the original value is reverted.
+
+The temporary change of the value makes the code hard to read. 
+
+It is a good example of a piece of code that could be moved to a separate method or function. Using the temporary value as a parameter makes the change visible, and avoid local pollution.
+
+.. code-block:: php
+
+   <?php
+   
+   // Setting aside database
+   class cache extends Storage {
+       private $database = null;
+       
+       function __construct($database) {
+           $this->database = $database;
+       }
+       
+       function foo($values) {
+           // handling storage with sqlite3 
+           $secondary = new cache(new Sqlite3(':memory:'));
+           $secondary->store($values);
+   
+           $this->store($values);      // handling storage with injection 
+       }
+   }
+   
+   // Setting aside database to cache data in two distinct backend
+   class cache extends Storage {
+       private $database = null;
+       
+       function __construct(\Pdo $database) {
+           $this->database = $database;
+       }
+       
+       function foo($values) {
+           // $this->database is set aside for secondary configuration
+           $side = $this->database;
+           $this->database = new Sqlite3(':memory:');
+           $this->store($values);      // handling storage with sqlite3 
+           $this->database = $side;
+           // $this->database is restored
+           $this->store($values);      // handling storage with injection 
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extract the code that run with the temporary value to a separate method.
+
++-------------+---------------------+
+| Short name  | Structures/SetAside |
++-------------+---------------------+
+| Themes      | :ref:`Suggestions`  |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
 
 
 
@@ -27200,6 +27282,60 @@ It is faster to use === null instead of `is_null() <http://www.php.net/is_null>`
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _use-array-functions:
+
+Use Array Functions
+###################
+
+
+There are a lot of native PHP functions for arrays. It is often faster to take advantage of them than write a loop.
+
+* `array_push() <http://www.php.net/array_push>`_ : use `array_merge() <http://www.php.net/array_merge>`_
+* `array_slice() <http://www.php.net/array_slice>`_ : use `array_chunk() <http://www.php.net/array_chunk>`_
+* index access : use `array_column() <http://www.php.net/array_column>`_
+* append `[]`: use `array_merge() <http://www.php.net/array_merge>`_
+* addition : use `array_sum() <http://www.php.net/array_sum>`_
+* multiplication : use `array_product() <http://www.php.net/array_product>`_
+* concatenation : use `implode() <http://www.php.net/implode>`_
+* ifthen : use `array_filter() <http://www.php.net/array_filter>`_
+
+.. code-block:: php
+
+   <?php
+   
+   $all = implode('-', $s).'-';
+   
+   // same as above
+   $all = '';
+   foreach($array as $s) {
+       $all .= $s . '-';
+   }
+   
+   ?>
+
+
+See also `Array Functions <https://www.php.net/manual/en/ref.array.php>`_ and
+        :ref:`no-array\_merge()-in-loops`. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the loop and use a native PHP function
+* Add more expressions to the loop : batching multiple operations in one loop makes it more interesting than running separates loops.
+
++-------------+------------------------------+
+| Short name  | Structures/UseArrayFunctions |
++-------------+------------------------------+
+| Themes      | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 

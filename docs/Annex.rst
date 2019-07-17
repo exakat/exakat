@@ -350,7 +350,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Thelia <https://thelia.net/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Tikiwiki <https://tiki.org/>`_
-* Tine2.0
 * `Tine20 <https://www.tine20.com/>`_
 * `Traq <https://traq.io/>`_
 * `Typo3 <https://typo3.org/>`_
@@ -362,7 +361,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
-* openconf
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `shopware <https://www.shopware.com/>`_
@@ -429,6 +427,11 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
+
+* 1.8.8
+
+  * Set Aside Code (Structures/SetAside)
+  * Use Array Functions (Structures/UseArrayFunctions ; Suggestions)
 
 * 1.8.7
 
@@ -2139,6 +2142,7 @@ List of external links mentionned in this documentation.
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2445,8 +2449,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -3936,12 +3940,14 @@ ___________
 |   analyzer[] = "Structures/PossibleIncrement";
 |   analyzer[] = "Structures/RepeatedPrint";
 |   analyzer[] = "Structures/ReuseVariable";
+|   analyzer[] = "Structures/SetAside";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";
 |   analyzer[] = "Structures/ShouldUseOperator";
 |   analyzer[] = "Structures/SubstrLastArg";
 |   analyzer[] = "Structures/SubstrToTrim";
 |   analyzer[] = "Structures/UnreachableCode";
+|   analyzer[] = "Structures/UseArrayFunctions";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Structures/WhileListEach";

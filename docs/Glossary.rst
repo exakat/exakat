@@ -84,9 +84,14 @@ Glossary
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
+    + `array_chunk()`
+
+      + :ref:`Use Array Functions <use-array-functions>`
+
     + `array_column()`
 
       + :ref:`Should Use array_column() <should-use-array\_column()>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `array_count_values()`
 
@@ -104,6 +109,7 @@ Glossary
     + `array_filter()`
 
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `array_flip()`
 
@@ -138,6 +144,7 @@ Glossary
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `array_merge_recursive()`
 
@@ -147,10 +154,15 @@ Glossary
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
+    + `array_product()`
+
+      + :ref:`Use Array Functions <use-array-functions>`
+
     + `array_push()`
 
       + :ref:`Avoid array_push() <avoid-array\_push()>`
       + :ref:`Should Use Operator <should-use-operator>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `array_search()`
 
@@ -158,10 +170,15 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
+    + `array_slice()`
+
+      + :ref:`Use Array Functions <use-array-functions>`
+
     + `array_sum()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`Static Loop <static-loop>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `array_udiff()`
 
@@ -641,6 +658,10 @@ Glossary
 
       + :ref:`Directly Use File <directly-use-file>`
 
+    + `hash_equals()`
+
+      + :ref:`Compare Hash <compare-hash>`
+
     + `hash_file()`
 
       + :ref:`Directly Use File <directly-use-file>`
@@ -784,6 +805,7 @@ Glossary
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`Implode One Arg <implode-one-arg>`
       + :ref:`Joining file() <joining-file()>`
+      + :ref:`Use Array Functions <use-array-functions>`
 
     + `import_request_variables()`
 
