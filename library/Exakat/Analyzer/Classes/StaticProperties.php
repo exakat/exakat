@@ -28,10 +28,15 @@ use Exakat\Analyzer\Analyzer;
 class StaticProperties extends Analyzer {
 
     public function analyze() {
-        $this->atomIs(array('Class', 'Trait'))
+        // class x { static $y = 3;}
+        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->is('static', true);
+             ->is('static', true)
+             ->_as('ppp')
+             ->outIs('PPP')
+             ->atomIsNot('Virtualproperty')
+             ->back('ppp');
         $this->prepareQuery();
     }
 }
