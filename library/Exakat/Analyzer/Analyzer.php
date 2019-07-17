@@ -250,7 +250,9 @@ GREMLIN;
     
     public function getDump() {
         $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALYZED")
+g.V().hasLabel("Analysis").has("analyzer", within(args))
+.sideEffect{ analyzer = it.get().value("analyzer"); }
+.out("ANALYZED")
 .sideEffect{ line = it.get().value("line");
              fullcode = it.get().value("fullcode");
              file="None"; 
@@ -260,7 +262,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
              }
 .where( __.until( hasLabel("Project") ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Magicmethod", "Method", "Arrowfunction"]) { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
        )
@@ -270,10 +272,10 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
        "line":line, 
        "namespace":theNamespace, 
        "class":theClass, 
-       "function":theFunction ];}
-
+       "function":theFunction,
+       "analyzer":analyzer];}
 GREMLIN;
-        return $this->gremlin->query($query)
+        return $this->gremlin->query($query, array('args' => array($this->shortAnalyzer)))
                              ->toArray();
     }
 

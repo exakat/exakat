@@ -21,23 +21,12 @@
 */
 
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Exceptions;
 
-use Exakat\Analyzer\Analyzer;
+class CantCompileFile extends \Exception {
+    public function __construct($message = '') {
 
-class StaticProperties extends Analyzer {
-
-    public function analyze() {
-        // class x { static $y = 3;}
-        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->is('static', true)
-             ->_as('ppp')
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->back('ppp');
-        $this->prepareQuery();
+        parent::__construct($message, 1, $previous);
     }
 }
 

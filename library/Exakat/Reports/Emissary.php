@@ -146,11 +146,8 @@ class Emissary extends Reports {
             $menu[] = '</li>';
             
             $menu = implode(PHP_EOL.'  ', $menu);
-            
-        } else {
-            print_r($section);
         }
-        
+
         return $menu;
     }
 
