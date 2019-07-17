@@ -30,7 +30,7 @@ use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\InvalidProjectName;
-use Exakat\Exceptions\NoSuchThema;
+use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\QueryException;
 use Exakat\Phpexec;
@@ -86,7 +86,7 @@ class Analyze extends Tasks {
             $thema = $this->config->thema;
 
             if (!$analyzersClass = $this->themes->getRulesetsAnalyzers($thema)) {
-                throw new NoSuchThema(implode(', ', $thema), $this->themes->getSuggestionThema($thema));
+                throw new NoSuchRuleset(implode(', ', $thema), $this->themes->getSuggestionThema($thema));
             }
 
             $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );

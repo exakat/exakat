@@ -29,7 +29,7 @@ use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
-use Exakat\Exceptions\NoSuchThema;
+use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
@@ -237,7 +237,7 @@ class Dump extends Tasks {
                 if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
-                throw new NoSuchThema($ruleset);
+                throw new NoSuchRuleset($ruleset);
             }
             display('Processing ruleset ' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
             $missing = $this->processResultsRuleset($ruleset, $counts);
