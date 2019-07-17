@@ -81,7 +81,7 @@ class GSNeo4j extends Graph {
     public function query($query, $params = array(), $load = array()) {
         if ($this->status === self::UNAVAILABLE) {
             return new GraphResults();
-        } 
+        }
         
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();

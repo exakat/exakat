@@ -104,7 +104,7 @@ class Emissary extends Reports {
     }
     
     protected function makeMenu() {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/emissary.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/emissary.yaml');
         
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -145,7 +145,7 @@ class Emissary extends Reports {
             $menu[] = '</ul>';
             $menu[] = '</li>';
             
-            $menu = implode(PHP_EOL.'  ', $menu);
+            $menu = implode(PHP_EOL . '  ', $menu);
         }
 
         return $menu;
@@ -200,7 +200,7 @@ class Emissary extends Reports {
         }
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
         if (strpos($subPageHTML, '{{TITLE}}') === false) {
-            print "    ".$file." has not title\n";
+            print '    ' . $file . " has not title\n";
         }
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 

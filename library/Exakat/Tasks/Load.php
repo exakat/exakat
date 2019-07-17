@@ -230,7 +230,7 @@ class Load extends Tasks {
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();
         
-        $this->sequences = new Sequences;
+        $this->sequences = new Sequences();
 
         $this->precedence = new Precedence(get_class($this->phptokens));
 

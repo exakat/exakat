@@ -121,7 +121,7 @@ class Weekly extends Ambassador {
 
     private function generateWeekly(Section $section, $year, $week) {
         $analyzerList = $this->weeks["$year-$week"]->analysis;
-        $this->generateIssuesEngine($section, 
+        $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted($analyzerList));
     }
 

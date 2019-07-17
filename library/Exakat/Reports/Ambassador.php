@@ -105,7 +105,7 @@ class Ambassador extends Reports {
     }
     
     protected function makeMenu() {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/'.static::CONFIG_YAML.'.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/' . static::CONFIG_YAML . '.yaml');
         
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -146,7 +146,7 @@ class Ambassador extends Reports {
             $menu[] = '</ul>';
             $menu[] = '</li>';
             
-            $menu = implode(PHP_EOL.'  ', $menu);
+            $menu = implode(PHP_EOL . '  ', $menu);
             
         }
         
