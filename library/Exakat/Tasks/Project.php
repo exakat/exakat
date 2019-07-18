@@ -36,6 +36,8 @@ use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Tasks\Helpers\ReportConfig;
+use Exakat\Tasks\Helpers\BaselineStash;
+
 use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
@@ -75,11 +77,9 @@ class Project extends Tasks {
             throw new NoCodeInProject($this->config->project);
         }
 
-        $sqliteFileFinal    = $this->config->dump;
-        $sqliteFilePrevious = $this->config->dump_previous;
-        if (file_exists($sqliteFileFinal)) {
-            copy($sqliteFileFinal, $sqliteFilePrevious);
-        }
+        // Baseline is always the previous audit done, not the current one! 
+        $baselinestash = new BaselineStash($this->config);
+        $baselinestash->copyPrevious($this->config->dump, $this->config->baseline_set);
 
         display("Cleaning project\n");
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -263,7 +263,7 @@ class Project extends Tasks {
         }
 
         display('Reported project' . PHP_EOL);
-        
+
         // Reset cache from Rulesets
         Rulesets::resetCache();
         $this->logTime('Final');

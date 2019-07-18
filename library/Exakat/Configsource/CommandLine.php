@@ -23,6 +23,8 @@
 namespace Exakat\Configsource;
 
 use Exakat\Vcs\Vcs;
+use Exakat\Tasks\Baseline;
+use Exakat\Tasks\Extension;
 
 class CommandLine extends Config {
     private $booleanOptions = array(
@@ -81,6 +83,9 @@ class CommandLine extends Config {
                                     '-remote'       => 'remote',
                                     '-graphdb'      => 'gremlin',
 
+                                    '-baseline-set' => 'baseline_set',
+                                    '-baseline-use' => 'baseline_use',
+
                                     // This one is finally an array
                                     '-c'            => 'configuration',
                                  );
@@ -122,6 +127,7 @@ class CommandLine extends Config {
                               'config'        => 1,
                               'extension'     => 1,
                               'show'          => 1,
+                              'baseline'      => 1,
                               );
 
     public function loadConfig($args = array()) {
@@ -229,7 +235,7 @@ class CommandLine extends Config {
         
             if ($this->config['command'] === 'extension') {
                 $subcommand = array_shift($args);
-                if (!in_array($subcommand, array('list', 'install', 'uninstall', 'local', 'update'), STRICT_COMPARISON)) {
+                if (!in_array($subcommand, Extension::ACTION, STRICT_COMPARISON)) {
                     $subcommand = 'local';
                 }
                 $this->config['subcommand'] = $subcommand;
@@ -237,6 +243,18 @@ class CommandLine extends Config {
                 if (in_array($subcommand, array('install', 'uninstall', 'update'), STRICT_COMPARISON)) {
                     $this->config['extension'] = array_shift($args);
                 }
+            } elseif ($this->config['command'] === 'baseline') {
+                $subcommand = array_shift($args);
+                if (!in_array($subcommand, Baseline::ACTIONS, STRICT_COMPARISON)) {
+                    $subcommand = 'list';
+                }
+                $this->config['subcommand'] = $subcommand;
+                
+                if (in_array($subcommand, array('remove'), STRICT_COMPARISON)) {
+                    $this->config['baseline_id'] = array_shift($args);
+                } elseif (in_array($subcommand, array('save'), STRICT_COMPARISON)) {
+                    $this->config['baseline_set'] = array_shift($args);
+                } 
             }
         }
 

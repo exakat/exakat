@@ -97,7 +97,10 @@ class DefaultConfig extends Config {
  
                                'phpversion'    => '7.3',
                                'token_limit'   => '1000000',
-                               
+
+                               'baseline_use'  => '-1',    // none, last, name, number
+                               'baseline_set'  => 'one',   // none, one, always
+
                                'concurencyCheck' => 7610,
  
                                'command'       => 'version',
