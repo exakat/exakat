@@ -75,7 +75,6 @@ class Report extends Tasks {
 
         foreach($this->config->project_reports as $format) {
             $reportConfig = new ReportConfig($format, $this->config);
-            print $reportConfig->getName().PHP_EOL;
             $reportClass = $reportConfig->getFormatClass();
             if (!class_exists($reportClass)) {
                 display("No such format as ".$reportConfig->getFormat().". Omitting.");
