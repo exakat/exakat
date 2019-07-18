@@ -35,6 +35,9 @@ class Config {
 
     const INSIDE_CODE   = true;
     const WITH_PROJECTS = false;
+    
+    const IS_PHAR      = true;
+    const IS_NOT_PHAR  = false;
 
     public $dir_root              = '.';
     public $ext_root              = '.';
@@ -62,8 +65,8 @@ class Config {
     public function __construct($argv) {
         $this->argv = $argv;
 
-        $this->is_phar  = class_exists('\\Phar') && !empty(phar::running());
-        if ($this->is_phar) {
+        $this->is_phar  = class_exists('\\Phar') && !empty(phar::running()) ? self::IS_PHAR : self::IS_NOT_PHAR;
+        if ($this->is_phar === self::IS_PHAR) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(phar::running()), 7);
             $this->dir_root      = phar::running();
