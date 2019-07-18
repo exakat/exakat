@@ -36,13 +36,17 @@ class ReportConfig {
         if (is_array($config)) {
             $this->name = key($config);
             $config = array_pop($config);
-            $this->name .= " ($config[format])";
+
+            if (!isset($config['format'])) {
+                throw new NoSuchReport("Undefined format for $this->name\n");
+            }
+
+            $this->name       .= " ($config[format])";
             $this->format      = $config['format'];
             // Check for array of string
             $this->rulesets    = $config['rulesets'] ?? array();
             $this->destination = $config['file']     ?? constant("\Exakat\Reports\\$config[format]::FILE_FILENAME");
         } elseif (is_string($config)) {
-            $this->reportClass = "\Exakat\Reports\\$config";
             $this->format      = $config;
             $this->name        = $config;
         } else {
