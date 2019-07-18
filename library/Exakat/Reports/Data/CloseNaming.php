@@ -22,10 +22,6 @@
 
 namespace Exakat\Reports\Data;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Ambassador;
-use Exakat\Reports\Reports;
-
 class CloseNaming extends Data {
     public function prepare() {
         $res = $this->sqlite->query(<<<'SQL'
