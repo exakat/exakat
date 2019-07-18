@@ -168,7 +168,7 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.4.2
+    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.2
     cd ..
 
     php exakat.phar doctor
