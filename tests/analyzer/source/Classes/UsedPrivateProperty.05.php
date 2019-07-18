@@ -6,14 +6,16 @@ class x {
     private static $privatepsself = 1;
     private static $privatepsstatic = 1;
     private $privateUnused;
+    private $privateRead;
     public $publicp = array();
     
     function y() {
-        $a = $this->privatep - 2;
-        $b = $this->privatepa + 3;
+        $this->privatep = 2 + $this->privateRead;
+        $this->privatepa[] = 3;
+        $this->virtual = 3;
         
-        $c = 'a' . self::$privatepsself;
-        foo(static::$privatepsstatic);
+        self::$privatepsself = 4;
+        static::$privatepsstatic = 5;
     }
 }
 ?>
