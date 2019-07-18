@@ -30,11 +30,15 @@ use Exakat\Phpexec;
 use Exakat\Tasks\Helpers\Php;
 use Exakat\Exceptions\NoPhpBinary;
 use Exakat\Exceptions\HelperException;
+use Exakat\Exceptions\NoSuchReport;
+use Exakat\Tasks\Helpers\ReportConfig;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     protected $logname = self::LOG_NONE;
+    
+    private $reportList = array();
 
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->config  = $config;
@@ -88,12 +92,15 @@ class Doctor extends Tasks {
         $stats['exakat']['graphdb']     = $this->config->graphdb;
         $reportList = array();
         foreach($this->config->project_reports as $project_report) {
-            $className = "\\Exakat\\Reports\\$project_report";
-            if (class_exists($className)) {
-                $reportList[] = $project_report;
+            try {
+                $reportConfig = new ReportConfig($project_report, $this->config);
+            } catch (NoSuchReport $e) {
+                display($e->getMessage());
+                continue;
             }
+            $this->reportList[] = $reportConfig->getName();
         }
-        sort($reportList);
+        sort($this->reportList);
         $stats['exakat']['reports']      = $this->array2list($reportList);
         
         $stats['exakat']['rulesets']       = $this->array2list($this->config->project_themes);
@@ -144,7 +151,7 @@ class Doctor extends Tasks {
             $stats['project']['url']              = $this->config->project_url;
             $stats['project']['phpversion']       = $this->config->phpversion;
 //            $stats['project']['analyzers']        = makeList($this->config->project_analyzers ?? array(), '');
-            $stats['project']['reports']          = makeList($this->config->project_reports   ?? array(), '');
+            $stats['project']['reports']          = makeList($this->reportList);
             $stats['project']['rulesets']         = makeList($this->config->project_themes    ?? array(), '');
             $stats['project']['included dirs']    = makeList($this->config->include_dirs      ?? array(), '');
             $stats['project']['ignored dirs']     = makeList($this->config->ignore_dirs       ?? array(), '');
