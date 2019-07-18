@@ -28,6 +28,7 @@ use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
+use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
@@ -1955,13 +1956,22 @@ SQL;
     private function generateNewIssues(Section $section) {
         $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
 
-        if (file_exists($this->config->dump_previous)) {
-            $oldissues = $this->getNewIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
-            
-            $diff = array_diff($issues, $oldissues);
-        } else {
-            $diff = $issues;
+        $baselineStash = new BaselineStash($this->config);
+        $baseline = $baselineStash->getBaseline();
+
+        if (empty($baseline)) {
+            $this->generateNoResults($section);
+            return ;
         }
+        
+        if (!file_exists($baseline)) {
+            $this->generateNoResults($section);
+            return;
+        }
+        
+        $oldissues = $this->getNewIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow), $baseline);
+            
+        $diff = array_diff($issues, $oldissues);
 
         $this->generateIssuesEngine($section, $diff);
     }
@@ -3003,23 +3013,24 @@ SQL
         }
 
         if (empty($list)) {
-            $theTable = 'No interface were found in this repository.';
-        } else {
-            array_sub_sort($list);
-
-            $secondaries = array_merge(...array_values($list));
-            $top = array_diff(array_keys($list), $secondaries);
-            
-            $theTableArray = array();
-            foreach($top as $t) {
-                $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
-            }
-            $theTable = implode(PHP_EOL, $theTableArray);
+            $this->generateNoResults($section);
+            return;
         }
+        
+        array_sub_sort($list);
+
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        $theTableArray = array();
+        foreach($top as $t) {
+            $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
+        }
+        $theTable = implode(PHP_EOL, $theTableArray);
         
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here is the interface tree : an interface is extended by another interface. Interface without extension are not represented here.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
        
@@ -4487,7 +4498,15 @@ JAVASCRIPT;
 
         $this->putBasedPage($section->file, $finalHTML);
     }
-    
+
+    private function generateNoResults(Section $section) {
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE',       $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', $section->title);
+        $html = $this->injectBloc($html, 'CONTENT',     'This section is empty : no result where found.');
+        $this->putBasedPage($section->source, $html);
+    }    
+
     private function generateStats(Section $section) {
         $results = new Stats($this->config);
         $report = $results->generate(null, Reports::INLINE);

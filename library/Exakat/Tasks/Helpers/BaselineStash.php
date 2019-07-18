@@ -28,10 +28,14 @@ use Exakat\Config;
 class BaselineStash {
     private $baseline_strategy = 'none';
     private $project_dir       = '';
+    private $use               = 'none';
+    
+    const NO_BASELINE          = '';
 
     function __construct(Config $config) {
         $this->baseline_strategy = $config->baseline_set;
         $this->project_dir       = $config->project_dir;
+        $this->use               = $config->baseline_use;
     }
 
     public function copyPrevious($previous) {
@@ -109,6 +113,47 @@ class BaselineStash {
             unlink($file);
             display(substr(basename($file, '.sqlite'), 5).' was removed');
         }
+    }
+
+    public function getBaseline() {
+        if ($this->use === 'last') {
+            $baselines = glob("{$this->project_dir}/baseline/dump-*-*.sqlite");
+            if (empty($baselines)) {
+                return self::NO_BASELINE;
+            }
+
+            sort($baselines);
+            return array_pop($baselines);
+        }
+
+        if ($this->use === 'first') {
+            $baselines = glob("{$this->project_dir}/baseline/dump-*-*.sqlite");
+            if (empty($baselines)) {
+                return self::NO_BASELINE;
+            }
+
+            rsort($baselines);
+            return array_pop($baselines);
+        }
+
+        if ((int) $this->use !== 0) {
+            $id = (int) $this->use;
+            $baselines = glob("{$this->project_dir}/baseline/dump-*-*.sqlite");
+            sort($baselines);
+            if ($id < 0) {
+                $id += count($baselines);
+                $previous = $baselines[$id] ?? self::NO_BASELINE;
+            } else {
+                $previous = preg_grep("/dump-$id-/", $baselines);
+                $previous = array_pop($previous);
+            }
+
+            return $previous;
+        }
+
+       $baselines = glob("{$this->project_dir}/baseline/dump-*-{$this->use}.sqlite");
+
+       return array_pop($baselines) ?? self::NO_BASELINE;
     }
 }
 
