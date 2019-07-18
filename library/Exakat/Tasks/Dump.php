@@ -206,10 +206,13 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = microtime(true);
-            $this->collectMissingDefinitions();
-            $end = microtime(true);
-            $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            // Dev only
+            if ($this->config->is_phar === Config::IS_NOT_PHAR) {
+                $begin = microtime(true);
+                $this->collectMissingDefinitions();
+                $end = microtime(true);
+                $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            }
             
             $begin = microtime(true);
             $this->collectCyclomaticComplexity();
