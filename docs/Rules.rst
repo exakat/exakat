@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 17 Jul 2019 10:43:47 +0000
-.. comment: Generation hash : dc55aec3afe1b317edecd7b53fbd6599ee9bbbe1
+.. comment: Generation date : Thu, 18 Jul 2019 12:44:45 +0000
+.. comment: Generation hash : ef609807547c586399fc46811da5c4096767fd68
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -25243,6 +25243,15 @@ Class constants that are used, but never defined. This should yield a fatal erro
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of the constant
+* Add the constant to the current class or one of its parent
+* Update the constant's visibility
+
 +-------------+----------------------------+
 | Short name  | Classes/UndefinedConstants |
 +-------------+----------------------------+
@@ -25421,6 +25430,13 @@ Undefined Insteadof
 This error is not linted : it only appears at execution time. 
 
 See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the insteadof expression
+* Fix the original method and replace it with an existing method
 
 +-------------+----------------------------------------+
 | Short name  | Traits/UndefinedInsteadof              |
@@ -26709,7 +26725,7 @@ Unused Global
 #############
 
 
-List of global keyword, used in various functions but not actually used in the code. for example : 
+A global keyword is used in a method, yet the variable is not actually used. This makes PHP import values for nothing, or may create interference
 
 .. code-block:: php
 
@@ -26721,15 +26737,26 @@ List of global keyword, used in various functions but not actually used in the c
        }
    ?>
 
-+-------------+-------------------------+
-| Short name  | Structures/UnusedGlobal |
-+-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the global declaration
+* Remove the global variable altogether
+
++-------------+----------------------------------------+
+| Short name  | Structures/UnusedGlobal                |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`                         |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+| Examples    | :ref:`dolphin-structures-unusedglobal` |
++-------------+----------------------------------------+
 
 
 
@@ -29739,6 +29766,64 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Examples    | :ref:`phpdocumentor-structures-uselessswitch`, :ref:`dolphin-structures-uselessswitch` |
 +-------------+----------------------------------------------------------------------------------------+
+
+
+
+.. _useless-type-check:
+
+Useless Type Check
+##################
+
+
+With typehint, some checks on the arguments are now handled by the type system.
+
+In particular, a type hinted argument can't be null, unless it is explicitely nullable, or has a ``null`` value as default.
+
+.. code-block:: php
+
+   <?php
+   
+   // The test on null is useless, it will never happen
+   function foo(A $a) {
+       if (is_null($a)) { 
+           // do something
+       }
+   }
+   
+   // Either nullable ? is too much, either the default null is
+   function barbar(?A $a = null) {
+   }
+   
+   // The test on null is useful, the default value null allows it
+   function bar(A $a = null) {
+       if ($a === null) { 
+           // do something
+       }
+   }
+   
+   
+   ?>
+
+
+See also `type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the nullable typehint
+* Remove the null default value
+* Remove tests on null
+
++-------------+------------------------------+
+| Short name  | Functions/UselessTypeCheck   |
++-------------+------------------------------+
+| Themes      | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 

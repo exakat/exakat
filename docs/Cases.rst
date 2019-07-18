@@ -2489,6 +2489,49 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
+Unused Global
+=============
+
+.. _dolphin-structures-unusedglobal:
+
+Dolphin
+^^^^^^^
+
+:ref:`unused-global`, in Dolphin-v.7.3.5/modules/boonex/forum/classes/DbForum.php:548. 
+
+$gConf is not used in this method, and may be safely avoided.
+
+.. code-block:: php
+
+    function getUserPostsList ($user, $sort, $limit = 10)
+        {
+            global $gConf;
+    
+            switch ($sort) {
+                case 'top':
+                    $order_by = " t1.`votes` DESC ";
+                    break;
+                case 'rnd':
+                    $order_by = " RAND() ";
+                    break;
+                default:
+                    $order_by = " t1.`when` DESC ";
+            }
+    
+            $sql =  " 
+            SELECT t1.`forum_id`, t1.`topic_id`, t2.`topic_uri`, t2.`topic_title`, t1.`post_id`, t1.`user`, `post_text`, t1.`when`
+                FROM " . TF_FORUM_POST . " AS t1
+            INNER JOIN " . TF_FORUM_TOPIC . " AS t2
+                ON (t1.`topic_id` = t2.`topic_id`)
+            WHERE  t1.`user` = '$user' AND `t2`.`topic_hidden` = '0'
+            ORDER BY " . $order_by . " 
+            LIMIT $limit";
+    
+            $a = $this->getAll ($sql);
+            $this->_cutPostText($a);
+            return $a;
+        }
+
 Useless Global
 ==============
 

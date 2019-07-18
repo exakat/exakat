@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 17 Jul 2019 10:43:47 +0000
-.. comment: Generation hash : dc55aec3afe1b317edecd7b53fbd6599ee9bbbe1
+.. comment: Generation date : Thu, 18 Jul 2019 12:44:45 +0000
+.. comment: Generation hash : ef609807547c586399fc46811da5c4096767fd68
 
 
 .. _analyze:
@@ -989,7 +989,7 @@ Total : 3 analysis
 Dead code
 +++++++++
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -1016,6 +1016,7 @@ Total : 25 analysis
 * :ref:`Unused Protected Methods <unused-protected-methods>`
 * :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Use <unused-use>`
+* :ref:`Useless Type Check <useless-type-check>`
 
 .. _lintbutwontexec:
 

@@ -1069,6 +1069,7 @@ Glossary
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Use === null <use-===-null>`
       + :ref:`Use Nullable Type <use-nullable-type>`
+      + :ref:`Useless Type Check <useless-type-check>`
       + :ref:`Weak Typing <weak-typing>`
       + :ref:`isset() With Constant <isset()-with-constant>`
 

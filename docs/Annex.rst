@@ -428,6 +428,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.9
+
+  * Classes/DisconnectedClasses (Classes/DisconnectedClasses)
+  * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
+
 * 1.8.8
 
   * Set Aside Code (Structures/SetAside)
@@ -442,7 +447,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.8.6
 
-  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Unassigned)
+  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Internal)
   * Dependant Abstract Classes (Classes/DependantAbstractClass ; Analyze, ClassReview)
   * Infinite Recursion (Structures/InfiniteRecursion ; Analyze)
   * Modules/IncomingData (Modules/IncomingData ; Internal)
@@ -2449,8 +2454,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2472,8 +2477,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2606,7 +2611,7 @@ List of external links mentionned in this documentation.
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
-* `The main PPA for PHP (7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
@@ -2620,6 +2625,7 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3704,6 +3710,7 @@ _________
 |   analyzer[] = "Functions/UnusedFunctions";
 |   analyzer[] = "Functions/UnusedInheritedVariable";
 |   analyzer[] = "Functions/UnusedReturnedValue";
+|   analyzer[] = "Functions/UselessTypeCheck";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Namespaces/EmptyNamespace";
 |   analyzer[] = "Namespaces/UnusedUse";

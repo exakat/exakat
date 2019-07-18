@@ -168,7 +168,7 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.4.23.4.2
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.4.2
     cd ..
 
     php exakat.phar doctor
@@ -198,7 +198,7 @@ Extra PHP-CLI versions allow more linting of the code. They only need to have th
 
 Exakat recommends PHP 7.3.4 (or newer version) to run Exakat. We also recommend the installation of PHP versions 5.6, 7.1, 7.2, 7.3, 7.4 and 8.0 (aka php-src master).
 
-To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
+To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_ or compile PHP yourself. 
 
 Optional installations
