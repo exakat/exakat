@@ -201,15 +201,15 @@ class Project extends Tasks {
 
         $this->checkTokenLimit();
 
-        $analyze = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         try {
-            $analyze->run();
+            $load->run();
         } catch (NoFileToProcess $e) {
             $this->datastore->addRow('hash', array('init error' => $e->getMessage(),
                                                    'status'     => 'Error',
                                            ));
         }
-        unset($analyze);
+        unset($load);
         display("Project loaded\n");
         $this->logTime('Loading');
 
@@ -244,6 +244,7 @@ class Project extends Tasks {
             $dump->checkRulesets($name, $analyzers);
         }
 
+        $this->logTime('Reports');
         foreach($this->reportConfigs as $name => $reportConfig) {
             $format = $reportConfig->getFormat();
 
@@ -260,6 +261,7 @@ class Project extends Tasks {
                 display( "Error while building $format : ".$e->getMessage()."\n");
             }
             unset($reportConfig);
+            $this->logTime("Reported $name");
         }
 
         display('Reported project' . PHP_EOL);
