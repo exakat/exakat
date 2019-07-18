@@ -76,7 +76,7 @@ class Export extends Tasks {
             }
         }
 
-        if (in_array('Dot', $this->config->format)) {
+        if (in_array('Dot', $this->config->project_reports)) {
             $text = $this->display_dot($V, $E, $root);
         } elseif (in_array('Table', $this->config->format)) {
             $text = $this->display_table($V, $E, $root);
@@ -85,7 +85,7 @@ class Export extends Tasks {
         }
 
         if ($this->config->filename) {
-            if (in_array('Dot', $this->config->format)) {
+            if (in_array('Dot', $this->config->project_reports)) {
                 $fp = fopen($this->config->filename . '.dot', 'w+');
             } else {
                 $fp = fopen($this->config->filename, 'w+');
