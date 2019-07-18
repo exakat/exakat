@@ -204,36 +204,6 @@ class Config {
             $this->options['log_dir']       = $this->options['project_dir'] . '/log';
             $this->options['tmp_dir']       = $this->options['project_dir'] . '/.exakat';
             $this->options['datastore']     = $this->options['project_dir'] . '/datastore.sqlite';
-            switch ($this->options['baseline_use']) {
-                case 'none' :
-                    $this->options['dump_previous'] = 'none';
-                    break;
-                
-                case 'last' :
-                    $this->options['dump_previous'] = getcwd() . '/.exakat/dump-1.sqlite';
-                    break;
-
-                default:
-                    // Get full list
-                    $dumps = glob($this->options['project_dir'] . '/baseline/dump-*-*.sqlite');
-                    
-                    $as_name = preg_grep('/-\d+-'.preg_quote($this->options['baseline_use']).'\.sqlite$/', $dumps);
-                    if (!empty($as_name)) {
-                        $this->options['dump_previous'] = array_pop($as_name); // get the first one available
-                    } else {
-                        $rank = (int) $this->options['baseline_use'];
-                        if ($rank < 0) {
-                            $d = count($dumps) + 1;
-                            $rank = ($rank % $d + $d) % $d;
-                        }
-                        $as_number = preg_grep('/-'.$rank.'-.*?\.sqlite$/', $dumps);
-                        if (!empty($as_number)) {
-                            $this->options['dump_previous'] = array_pop($as_number); // get the first one available
-                        } else {
-                            $this->options['dump_previous'] = 'none';
-                        }
-                    }
-            }
             $this->options['dump_tmp']      = $this->options['project_dir'] . '/.dump.sqlite';
             $this->options['dump']          = $this->options['project_dir'] . '/dump.sqlite';
         }
