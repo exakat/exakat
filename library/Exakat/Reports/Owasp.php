@@ -32,7 +32,7 @@ use Exakat\Reports\Section;
 class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'owasp';
+    const CONFIG_YAML    = 'Owasp';
 
     const COLORS = array('A' => '#2ED600',
                          'B' => '#81D900',

@@ -32,7 +32,7 @@ use Exakat\Reports\Reports;
 class Top10 extends Ambassador {
     const FILE_FILENAME  = 'top10';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'top10';
+    const CONFIG_YAML    = 'Top10';
 
     protected $frequences        = array();
     protected $timesToFix        = array();

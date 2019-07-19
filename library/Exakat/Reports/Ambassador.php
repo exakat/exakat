@@ -36,7 +36,7 @@ use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'ambassador';
+    const CONFIG_YAML    = 'Ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
