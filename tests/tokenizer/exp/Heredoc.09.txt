@@ -1,0 +1,123 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            7
+          Label : NAME
+            6
+          Label : PPP
+            8
+            Label : PPP
+              9
+              Label : DEFAULT
+                10
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            22
+          Label : DEFINITION
+            22
+          Label : EXTENDS
+            7
+          Label : METHOD
+            12
+            Label : ARGUMENT
+              13
+            Label : BLOCK
+              15
+              Label : EXPRESSION
+                19
+                Label : LEFT
+                  17
+                  Label : INDEX
+                    18
+                  Label : VARIABLE
+                    16
+                Label : RIGHT
+                  10
+              Label : EXPRESSION
+                19
+                Label : LEFT
+                  20
+                Label : RIGHT
+                  18
+              Label : EXPRESSION
+                21
+                Label : RETURN
+                  24
+                  Label : CONCAT
+                    23
+                    Label : MEMBER
+                      7
+                    Label : OBJECT
+                      22
+                  Label : CONCAT
+                    25
+                    Label : CONCAT
+                      27
+                    Label : CONCAT
+                      25
+                      Label : MEMBER
+                        7
+                      Label : OBJECT
+                        22
+                    Label : CONCAT
+                      28
+                    Label : CONCAT
+                      25
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        16
+                    Label : CONCAT
+                      29
+                    Label : CONCAT
+                      20
+                    Label : CONCAT
+                      29
+            Label : DEFINITION
+              16
+              Label : DEFINITION
+                16
+              Label : DEFINITION
+                16
+            Label : DEFINITION
+              20
+              Label : DEFAULT
+                18
+              Label : DEFINITION
+                20
+              Label : DEFINITION
+                20
+            Label : NAME
+              12
+          Label : NAME
+            11
+          Label : PPP
+            7
+            Label : PPP
+              30
+              Label : DEFINITION
+                23
+                Label : MEMBER
+                  7
+                Label : OBJECT
+                  22
+              Label : DEFINITION
+                25
+                Label : MEMBER
+                  7
+                Label : OBJECT
+                  22
+              Label : OVERWRITE
+                9
+                Label : DEFAULT
+                  10

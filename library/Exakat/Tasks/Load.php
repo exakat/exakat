@@ -965,6 +965,11 @@ class Load extends Tasks {
                 }
                 ++$this->id;
                 $variable = $this->processSingle($atom);
+        
+                if ($atom === 'This' && ($class = end($this->currentClassTrait))) {
+                    $variable->fullnspath = $class->fullnspath;
+                    $this->calls->addCall('class', $class->fullnspath, $variable);
+                }
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
                     ++$this->id;
@@ -982,6 +987,12 @@ class Load extends Tasks {
                     $this->runPlugins($property, array('OBJECT' => $variable,
                                                        'MEMBER' => $propertyName,
                                                        ));
+
+                    if ($variable->atom === 'This' && 
+                        $propertyName->token   === 'T_STRING') {
+                        $this->calls->addCall('property', "{$variable->fullnspath}::{$propertyName->code}", $property);
+                        array_collect_by($this->currentPropertiesCalls, $propertyName->code, $property);
+                    }
 
                     $this->pushExpression($property);
                     $elements[] = $property;
