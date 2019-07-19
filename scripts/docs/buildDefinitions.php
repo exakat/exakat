@@ -120,7 +120,7 @@ class Docs {
                  'isset'                          => 'http://www.www.php.net/isset',
                  'break'                          => 'http://www.php.net/manual/en/control-structures.break.php',
                  'continue'                       => 'http://www.php.net/manual/en/control-structures.continue.php',
-                 'instanceof'                     => 'http://www.php.net/manual/en/language.operators.type.php',
+                 'instanceof'                     => 'http://php.net/manual/en/language.operators.type.php',
                  'insteadof'                      => 'http://www.php.net/manual/en/language.oop5.traits.php',
                      
                  '**'                             => 'http://www.php.net/manual/en/language.operators.arithmetic.php',
