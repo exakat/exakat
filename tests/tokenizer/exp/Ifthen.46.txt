@@ -1,12 +1,12 @@
 test
 Label : GLOBAL
-  9
+  16
   Label : DEFINITION
-    9
+    16
+    Label : DEFAULT
+      19
     Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
+      16
 Label : GLOBAL
   6
   Label : DEFINITION
@@ -16,27 +16,27 @@ Label : GLOBAL
     Label : DEFINITION
       6
 Label : GLOBAL
-  16
-  Label : DEFINITION
-    16
-    Label : DEFAULT
-      19
-    Label : DEFINITION
-      16
-Label : PROJECT
-  1
+  9
   Label : DEFINITION
     9
     Label : DEFINITION
       9
     Label : DEFINITION
       9
+Label : PROJECT
+  1
   Label : DEFINITION
     6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
   Label : DEFINITION
     16
     Label : DEFAULT

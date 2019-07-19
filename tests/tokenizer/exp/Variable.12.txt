@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  12
+  21
   Label : DEFINITION
-    12
+    21
     Label : DEFINITION
-      12
+      21
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -48,17 +48,13 @@ Label : GLOBAL
     Label : DEFINITION
       5
 Label : GLOBAL
-  21
-  Label : DEFINITION
-    21
-    Label : DEFINITION
-      21
-Label : PROJECT
-  1
+  12
   Label : DEFINITION
     12
     Label : DEFINITION
       12
+Label : PROJECT
+  1
   Label : DEFINITION
     5
     Label : DEFAULT
@@ -99,6 +95,10 @@ Label : PROJECT
         24
     Label : DEFINITION
       5
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
   Label : DEFINITION
     21
     Label : DEFINITION

@@ -41,8 +41,6 @@ Label : PROJECT
                   16
                   Label : METHOD
                     22
-                    Label : NAME
-                      22
                     Label : ARGUMENT
                       16
                       Label : METHOD
@@ -55,6 +53,8 @@ Label : PROJECT
                         23
                     Label : ARGUMENT
                       27
+                    Label : NAME
+                      22
                   Label : OBJECT
                     21
                 Label : THEN

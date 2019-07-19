@@ -29,12 +29,12 @@ Label : PROJECT
               6
             Label : METHOD
               7
-              Label : NAME
-                7
               Label : ARGUMENT
                 8
               Label : ARGUMENT
                 9
+              Label : NAME
+                7
           Label : THEN
             11
             Label : EXPRESSION

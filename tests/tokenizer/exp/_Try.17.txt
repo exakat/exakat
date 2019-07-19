@@ -63,6 +63,14 @@ Label : PROJECT
                 11
               Label : VALUE
                 12
+              Label : VALUE
+                12
+                Label : DEFINITION
+                  12
+          Label : DEFINITION
+            25
+            Label : DEFINITION
+              25
           Label : DEFINITION
             11
             Label : DEFINITION
@@ -77,9 +85,5 @@ Label : PROJECT
               14
             Label : DEFINITION
               14
-          Label : DEFINITION
-            25
-            Label : DEFINITION
-              25
           Label : NAME
             5

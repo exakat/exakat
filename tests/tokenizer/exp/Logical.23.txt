@@ -18,20 +18,6 @@ Label : GLOBAL
   Label : DEFINITION
     5
     Label : DEFAULT
-      23
-      Label : LEFT
-        8
-      Label : RIGHT
-        22
-        Label : CLASS
-          19
-        Label : METHOD
-          20
-          Label : ARGUMENT
-            16
-          Label : NAME
-            20
-    Label : DEFAULT
       24
       Label : LEFT
         8
@@ -41,16 +27,6 @@ Label : GLOBAL
           19
         Label : MEMBER
           25
-    Label : DEFAULT
-      18
-      Label : LEFT
-        8
-      Label : RIGHT
-        22
-        Label : CLASS
-          19
-        Label : CONSTANT
-          20
     Label : DEFAULT
       15
       Label : LEFT
@@ -75,6 +51,30 @@ Label : GLOBAL
           13
         Label : OBJECT
           11
+    Label : DEFAULT
+      23
+      Label : LEFT
+        8
+      Label : RIGHT
+        22
+        Label : CLASS
+          19
+        Label : METHOD
+          20
+          Label : ARGUMENT
+            16
+          Label : NAME
+            20
+    Label : DEFAULT
+      18
+      Label : LEFT
+        8
+      Label : RIGHT
+        22
+        Label : CLASS
+          19
+        Label : CONSTANT
+          20
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -96,33 +96,7 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
-    Label : DEFAULT
-      23
-      Label : LEFT
-        8
-      Label : RIGHT
-        22
-        Label : CLASS
-          19
-        Label : METHOD
-          20
-          Label : ARGUMENT
-            16
-          Label : NAME
-            20
     Label : DEFAULT
       24
       Label : LEFT
@@ -133,16 +107,6 @@ Label : PROJECT
           19
         Label : MEMBER
           25
-    Label : DEFAULT
-      18
-      Label : LEFT
-        8
-      Label : RIGHT
-        22
-        Label : CLASS
-          19
-        Label : CONSTANT
-          20
     Label : DEFAULT
       15
       Label : LEFT
@@ -167,6 +131,30 @@ Label : PROJECT
           13
         Label : OBJECT
           11
+    Label : DEFAULT
+      23
+      Label : LEFT
+        8
+      Label : RIGHT
+        22
+        Label : CLASS
+          19
+        Label : METHOD
+          20
+          Label : ARGUMENT
+            16
+          Label : NAME
+            20
+    Label : DEFAULT
+      18
+      Label : LEFT
+        8
+      Label : RIGHT
+        22
+        Label : CLASS
+          19
+        Label : CONSTANT
+          20
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -177,6 +165,18 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     11
     Label : DEFINITION

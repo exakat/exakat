@@ -1,5 +1,29 @@
 test
 Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
+  28
+  Label : DEFINITION
+    28
+    Label : DEFINITION
+      28
+Label : GLOBAL
   6
   Label : DEFINITION
     6
@@ -51,30 +75,6 @@ Label : GLOBAL
     18
     Label : DEFINITION
       18
-Label : GLOBAL
-  21
-  Label : DEFINITION
-    21
-    Label : DEFINITION
-      21
-Label : GLOBAL
-  23
-  Label : DEFINITION
-    23
-    Label : DEFINITION
-      23
-Label : GLOBAL
-  26
-  Label : DEFINITION
-    26
-    Label : DEFINITION
-      26
-Label : GLOBAL
-  28
-  Label : DEFINITION
-    28
-    Label : DEFINITION
-      28
 Label : PROJECT
   1
   Label : DEFINITION
@@ -155,8 +155,6 @@ Label : PROJECT
             5
         Label : EXPRESSION
           15
-          Label : NAME
-            15
           Label : ARGUMENT
             16
           Label : ARGUMENT
@@ -165,10 +163,10 @@ Label : PROJECT
               13
             Label : VARIABLE
               18
+          Label : NAME
+            15
         Label : EXPRESSION
           20
-          Label : NAME
-            20
           Label : ARGUMENT
             12
             Label : INDEX
@@ -177,6 +175,8 @@ Label : PROJECT
               21
           Label : ARGUMENT
             23
+          Label : NAME
+            20
         Label : EXPRESSION
           25
           Label : ARGUMENT

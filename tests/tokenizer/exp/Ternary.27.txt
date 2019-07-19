@@ -91,8 +91,6 @@ Label : PROJECT
               7
           Label : ELSE
             21
-            Label : NAME
-              21
             Label : ARGUMENT
               18
               Label : MEMBER
@@ -105,10 +103,10 @@ Label : PROJECT
                 27
               Label : OBJECT
                 25
+            Label : NAME
+              21
           Label : THEN
             11
-            Label : NAME
-              11
             Label : ARGUMENT
               18
               Label : MEMBER
@@ -117,3 +115,5 @@ Label : PROJECT
                 15
             Label : ARGUMENT
               19
+            Label : NAME
+              11

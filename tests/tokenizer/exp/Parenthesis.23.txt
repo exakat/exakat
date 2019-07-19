@@ -147,8 +147,6 @@ Label : PROJECT
           19
           Label : LEFT
             25
-            Label : NAME
-              25
             Label : ARGUMENT
               12
               Label : MEMBER
@@ -157,6 +155,8 @@ Label : PROJECT
                 26
             Label : ARGUMENT
               16
+            Label : NAME
+              25
           Label : RIGHT
             20
             Label : CODE

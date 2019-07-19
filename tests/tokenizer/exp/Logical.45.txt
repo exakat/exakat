@@ -88,13 +88,13 @@ Label : PROJECT
           Label : DEFINITION
             20
             Label : DEFAULT
+              12
+            Label : DEFAULT
               16
               Label : LEFT
                 26
               Label : RIGHT
                 27
-            Label : DEFAULT
-              12
             Label : DEFINITION
               20
             Label : DEFINITION

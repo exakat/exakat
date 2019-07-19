@@ -1,5 +1,17 @@
 test
 Label : GLOBAL
+  41
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+Label : GLOBAL
   5
   Label : DEFINITION
     5
@@ -23,34 +35,6 @@ Label : GLOBAL
   9
   Label : DEFINITION
     9
-    Label : DEFAULT
-      21
-      Label : CONDITION
-        12
-        Label : CONCAT
-          11
-          Label : NOT
-            18
-            Label : ARGUMENT
-              19
-              Label : INDEX
-                20
-              Label : VARIABLE
-                5
-        Label : CONCAT
-          13
-      Label : ELSE
-        27
-      Label : THEN
-        12
-        Label : CONCAT
-          22
-        Label : CONCAT
-          23
-          Label : ARGUMENT
-            25
-          Label : NAME
-            23
     Label : DEFAULT
       21
       Label : CONDITION
@@ -97,6 +81,16 @@ Label : GLOBAL
             25
           Label : NAME
             23
+        Label : CONCAT
+          26
+    Label : DEFAULT
+      12
+      Label : CONCAT
+        11
+        Label : NOT
+          5
+      Label : CONCAT
+        13
     Label : DEFAULT
       21
       Label : CONDITION
@@ -121,16 +115,34 @@ Label : GLOBAL
             25
           Label : NAME
             23
-        Label : CONCAT
-          26
     Label : DEFAULT
-      12
-      Label : CONCAT
-        11
-        Label : NOT
-          5
-      Label : CONCAT
-        13
+      21
+      Label : CONDITION
+        12
+        Label : CONCAT
+          11
+          Label : NOT
+            18
+            Label : ARGUMENT
+              19
+              Label : INDEX
+                20
+              Label : VARIABLE
+                5
+        Label : CONCAT
+          13
+      Label : ELSE
+        27
+      Label : THEN
+        12
+        Label : CONCAT
+          22
+        Label : CONCAT
+          23
+          Label : ARGUMENT
+            25
+          Label : NAME
+            23
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -185,18 +197,6 @@ Label : GLOBAL
     38
     Label : DEFINITION
       38
-Label : GLOBAL
-  41
-  Label : DEFINITION
-    41
-    Label : DEFINITION
-      41
-Label : GLOBAL
-  43
-  Label : DEFINITION
-    43
-    Label : DEFINITION
-      43
 Label : PROJECT
   1
   Label : DEFINITION
@@ -219,34 +219,6 @@ Label : PROJECT
       5
   Label : DEFINITION
     9
-    Label : DEFAULT
-      21
-      Label : CONDITION
-        12
-        Label : CONCAT
-          11
-          Label : NOT
-            18
-            Label : ARGUMENT
-              19
-              Label : INDEX
-                20
-              Label : VARIABLE
-                5
-        Label : CONCAT
-          13
-      Label : ELSE
-        27
-      Label : THEN
-        12
-        Label : CONCAT
-          22
-        Label : CONCAT
-          23
-          Label : ARGUMENT
-            25
-          Label : NAME
-            23
     Label : DEFAULT
       21
       Label : CONDITION
@@ -293,6 +265,16 @@ Label : PROJECT
             25
           Label : NAME
             23
+        Label : CONCAT
+          26
+    Label : DEFAULT
+      12
+      Label : CONCAT
+        11
+        Label : NOT
+          5
+      Label : CONCAT
+        13
     Label : DEFAULT
       21
       Label : CONDITION
@@ -317,16 +299,34 @@ Label : PROJECT
             25
           Label : NAME
             23
-        Label : CONCAT
-          26
     Label : DEFAULT
-      12
-      Label : CONCAT
-        11
-        Label : NOT
-          5
-      Label : CONCAT
-        13
+      21
+      Label : CONDITION
+        12
+        Label : CONCAT
+          11
+          Label : NOT
+            18
+            Label : ARGUMENT
+              19
+              Label : INDEX
+                20
+              Label : VARIABLE
+                5
+        Label : CONCAT
+          13
+      Label : ELSE
+        27
+      Label : THEN
+        12
+        Label : CONCAT
+          22
+        Label : CONCAT
+          23
+          Label : ARGUMENT
+            25
+          Label : NAME
+            23
     Label : DEFINITION
       9
     Label : DEFINITION

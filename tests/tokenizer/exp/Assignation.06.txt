@@ -1,26 +1,20 @@
 test
 Label : GLOBAL
-  8
+  12
   Label : DEFINITION
-    8
-    Label : DEFAULT
-      7
-      Label : LEFT
-        10
-      Label : RIGHT
-        12
-    Label : DEFAULT
-      10
+    12
     Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
+      12
 Label : GLOBAL
   5
   Label : DEFINITION
     5
+    Label : DEFAULT
+      7
+      Label : LEFT
+        8
+      Label : RIGHT
+        10
     Label : DEFAULT
       7
       Label : LEFT
@@ -32,12 +26,6 @@ Label : GLOBAL
         Label : RIGHT
           12
     Label : DEFAULT
-      7
-      Label : LEFT
-        8
-      Label : RIGHT
-        10
-    Label : DEFAULT
       8
     Label : DEFINITION
       5
@@ -45,6 +33,24 @@ Label : GLOBAL
       5
     Label : DEFINITION
       5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      10
+    Label : DEFAULT
+      7
+      Label : LEFT
+        10
+      Label : RIGHT
+        12
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
 Label : GLOBAL
   10
   Label : DEFINITION
@@ -55,32 +61,16 @@ Label : GLOBAL
       10
     Label : DEFINITION
       10
-Label : GLOBAL
-  12
-  Label : DEFINITION
-    12
-    Label : DEFINITION
-      12
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    5
     Label : DEFAULT
       7
       Label : LEFT
-        10
+        8
       Label : RIGHT
-        12
-    Label : DEFAULT
-      10
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
-    5
+        10
     Label : DEFAULT
       7
       Label : LEFT
@@ -92,12 +82,6 @@ Label : PROJECT
         Label : RIGHT
           12
     Label : DEFAULT
-      7
-      Label : LEFT
-        8
-      Label : RIGHT
-        10
-    Label : DEFAULT
       8
     Label : DEFINITION
       5
@@ -105,6 +89,22 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      10
+    Label : DEFAULT
+      7
+      Label : LEFT
+        10
+      Label : RIGHT
+        12
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     10
     Label : DEFAULT

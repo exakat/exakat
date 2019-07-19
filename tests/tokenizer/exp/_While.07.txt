@@ -22,14 +22,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-  Label : DEFINITION
     12
     Label : DEFINITION
       12
@@ -37,6 +29,14 @@ Label : PROJECT
       12
     Label : DEFINITION
       12
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
   Label : FILE
     3
     Label : EXPRESSION

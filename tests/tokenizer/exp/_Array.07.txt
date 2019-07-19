@@ -1,5 +1,13 @@
 test
 Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFAULT
+      20
+    Label : DEFINITION
+      18
+Label : GLOBAL
   5
   Label : DEFINITION
     5
@@ -25,14 +33,6 @@ Label : GLOBAL
     16
     Label : DEFINITION
       16
-Label : GLOBAL
-  18
-  Label : DEFINITION
-    18
-    Label : DEFAULT
-      20
-    Label : DEFINITION
-      18
 Label : PROJECT
   1
   Label : DEFINITION

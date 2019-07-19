@@ -20,10 +20,10 @@ Label : PROJECT
           Label : THEN
             3
             Label : EXPRESSION
+              11
+            Label : EXPRESSION
               10
               Label : ARGUMENT
                 11
-            Label : EXPRESSION
-              11
             Label : EXPRESSION
               11

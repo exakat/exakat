@@ -59,8 +59,6 @@ Label : PROJECT
                 22
                 Label : NEW
                   23
-                  Label : NAME
-                    23
                   Label : ARGUMENT
                     25
                   Label : ARGUMENT
@@ -69,5 +67,7 @@ Label : PROJECT
                       10
                     Label : OBJECT
                       8
+                  Label : NAME
+                    23
             Label : EXPRESSION
               27

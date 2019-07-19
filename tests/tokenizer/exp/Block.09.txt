@@ -48,6 +48,10 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
     18
     Label : DEFAULT
       20
@@ -59,10 +63,6 @@ Label : PROJECT
           24
     Label : DEFINITION
       18
-  Label : DEFINITION
-    15
-    Label : DEFINITION
-      15
   Label : DEFINITION
     26
     Label : DEFAULT

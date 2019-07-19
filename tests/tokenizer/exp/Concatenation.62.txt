@@ -57,12 +57,12 @@ Label : PROJECT
               12
               Label : LEFT
                 6
-                Label : NAME
-                  6
                 Label : ARGUMENT
                   8
                 Label : ARGUMENT
                   10
+                Label : NAME
+                  6
               Label : RIGHT
                 13
             Label : RIGHT

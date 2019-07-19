@@ -264,6 +264,8 @@ Label : PROJECT
           Label : DEFINITION
             33
             Label : DEFAULT
+              34
+            Label : DEFAULT
               25
               Label : INDEX
                 26
@@ -273,8 +275,6 @@ Label : PROJECT
                   36
                 Label : OBJECT
                   21
-            Label : DEFAULT
-              34
             Label : DEFINITION
               33
             Label : DEFINITION

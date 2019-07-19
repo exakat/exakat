@@ -63,12 +63,6 @@ Label : PROJECT
             14
         Label : EXPRESSION
           20
-          Label : BLOCK
-            11
-            Label : EXPRESSION
-              12
-              Label : RETURN
-                13
           Label : ARGUMENT
             9
             Label : NAME
@@ -81,16 +75,16 @@ Label : PROJECT
               8
             Label : TYPEHINT
               22
-          Label : NAME
-            20
-        Label : EXPRESSION
-          24
           Label : BLOCK
             11
             Label : EXPRESSION
               12
               Label : RETURN
                 13
+          Label : NAME
+            20
+        Label : EXPRESSION
+          24
           Label : ARGUMENT
             9
             Label : NAME
@@ -103,16 +97,16 @@ Label : PROJECT
               8
             Label : TYPEHINT
               25
-          Label : NAME
-            24
-        Label : EXPRESSION
-          27
           Label : BLOCK
             11
             Label : EXPRESSION
               12
               Label : RETURN
                 13
+          Label : NAME
+            24
+        Label : EXPRESSION
+          27
           Label : ARGUMENT
             9
             Label : NAME
@@ -125,16 +119,16 @@ Label : PROJECT
               8
             Label : TYPEHINT
               6
-          Label : NAME
-            27
-        Label : EXPRESSION
-          28
           Label : BLOCK
             11
             Label : EXPRESSION
               12
               Label : RETURN
                 13
+          Label : NAME
+            27
+        Label : EXPRESSION
+          28
           Label : ARGUMENT
             9
             Label : NAME
@@ -147,5 +141,11 @@ Label : PROJECT
               8
             Label : TYPEHINT
               29
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              12
+              Label : RETURN
+                13
           Label : NAME
             28

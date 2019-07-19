@@ -36,6 +36,10 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+  Label : DEFINITION
     24
     Label : DEFAULT
       26
@@ -49,10 +53,6 @@ Label : PROJECT
         26
     Label : DEFINITION
       24
-  Label : DEFINITION
-    14
-    Label : DEFINITION
-      14
   Label : DEFINITION
     28
     Label : DEFINITION

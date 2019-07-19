@@ -30,6 +30,16 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    5
+    Label : DEFAULT
+      12
+      Label : CLASS
+        8
+      Label : CONSTANT
+        10
+    Label : DEFINITION
+      5
+  Label : DEFINITION
     13
     Label : DEFAULT
       12
@@ -43,16 +53,6 @@ Label : PROJECT
           17
     Label : DEFINITION
       13
-  Label : DEFINITION
-    5
-    Label : DEFAULT
-      12
-      Label : CLASS
-        8
-      Label : CONSTANT
-        10
-    Label : DEFINITION
-      5
   Label : FILE
     3
     Label : EXPRESSION

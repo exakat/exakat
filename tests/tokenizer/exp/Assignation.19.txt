@@ -1,13 +1,5 @@
 test
 Label : GLOBAL
-  8
-  Label : DEFINITION
-    8
-    Label : DEFAULT
-      10
-    Label : DEFINITION
-      8
-Label : GLOBAL
   5
   Label : DEFINITION
     5
@@ -19,6 +11,14 @@ Label : GLOBAL
         10
     Label : DEFINITION
       5
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFAULT
+      10
+    Label : DEFINITION
+      8
 Label : GLOBAL
   10
   Label : DEFINITION

@@ -251,6 +251,10 @@ Label : PROJECT
             27
           Label : VALUE
             6
+          Label : VALUE
+            29
+            Label : DEFINITION
+              29
         Label : EXPRESSION
           40
           Label : RETURN

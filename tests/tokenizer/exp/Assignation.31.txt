@@ -65,8 +65,6 @@ Label : GLOBAL
       50
       Label : CAST
         51
-        Label : NAME
-          51
         Label : ARGUMENT
           10
           Label : METHOD
@@ -83,6 +81,8 @@ Label : GLOBAL
             58
           Label : NAME
             56
+        Label : NAME
+          51
     Label : DEFINITION
       49
 Label : GLOBAL
@@ -169,8 +169,6 @@ Label : PROJECT
       50
       Label : CAST
         51
-        Label : NAME
-          51
         Label : ARGUMENT
           10
           Label : METHOD
@@ -187,6 +185,8 @@ Label : PROJECT
             58
           Label : NAME
             56
+        Label : NAME
+          51
     Label : DEFINITION
       49
   Label : DEFINITION
@@ -327,8 +327,6 @@ Label : PROJECT
                   50
                   Label : CAST
                     51
-                    Label : NAME
-                      51
                     Label : ARGUMENT
                       10
                       Label : METHOD
@@ -345,6 +343,8 @@ Label : PROJECT
                         58
                       Label : NAME
                         56
+                    Label : NAME
+                      51
           Label : THEN
             17
             Label : EXPRESSION

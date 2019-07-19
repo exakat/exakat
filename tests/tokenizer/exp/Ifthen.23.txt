@@ -1,11 +1,5 @@
 test
 Label : GLOBAL
-  37
-  Label : DEFINITION
-    37
-    Label : DEFINITION
-      37
-Label : GLOBAL
   6
   Label : DEFINITION
     6
@@ -95,12 +89,14 @@ Label : GLOBAL
     35
     Label : DEFINITION
       35
-Label : PROJECT
-  1
+Label : GLOBAL
+  37
   Label : DEFINITION
     37
     Label : DEFINITION
       37
+Label : PROJECT
+  1
   Label : DEFINITION
     6
     Label : DEFINITION
@@ -161,6 +157,10 @@ Label : PROJECT
     35
     Label : DEFINITION
       35
+  Label : DEFINITION
+    37
+    Label : DEFINITION
+      37
   Label : FILE
     3
     Label : EXPRESSION

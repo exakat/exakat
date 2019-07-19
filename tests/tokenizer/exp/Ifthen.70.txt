@@ -219,8 +219,6 @@ Label : PROJECT
                     12
                     Label : LEFT
                       33
-                      Label : NAME
-                        33
                       Label : ARGUMENT
                         25
                         Label : MEMBER
@@ -233,16 +231,18 @@ Label : PROJECT
                           38
                         Label : ARGUMENT
                           40
+                      Label : NAME
+                        33
                     Label : RIGHT
                       25
                       Label : METHOD
                         44
-                        Label : NAME
-                          44
                         Label : ARGUMENT
                           46
                         Label : ARGUMENT
                           48
+                        Label : NAME
+                          44
                       Label : OBJECT
                         42
               Label : ELSE
@@ -265,12 +265,12 @@ Label : PROJECT
                       95
                       Label : ARGUMENT
                         97
-                        Label : NAME
-                          97
                         Label : ARGUMENT
                           99
                         Label : ARGUMENT
                           101
+                        Label : NAME
+                          97
                       Label : NAME
                         95
                     Label : OBJECT
@@ -283,12 +283,12 @@ Label : PROJECT
                       86
                       Label : ARGUMENT
                         88
-                        Label : NAME
-                          88
                         Label : ARGUMENT
                           90
                         Label : ARGUMENT
                           92
+                        Label : NAME
+                          88
                       Label : NAME
                         86
                     Label : OBJECT
@@ -301,12 +301,12 @@ Label : PROJECT
                     52
                     Label : ARGUMENT
                       54
-                      Label : NAME
-                        54
                       Label : ARGUMENT
                         56
                       Label : ARGUMENT
                         58
+                      Label : NAME
+                        54
                     Label : NAME
                       52
                   Label : OBJECT
@@ -317,20 +317,18 @@ Label : PROJECT
                     61
                     Label : ARGUMENT
                       63
-                      Label : NAME
-                        63
                       Label : ARGUMENT
                         65
                       Label : ARGUMENT
                         67
+                      Label : NAME
+                        63
                     Label : NAME
                       61
                   Label : OBJECT
                     60
                 Label : EXPRESSION
                   69
-                  Label : NAME
-                    69
                   Label : ARGUMENT
                     71
                   Label : ARGUMENT
@@ -339,6 +337,8 @@ Label : PROJECT
                       75
                     Label : OBJECT
                       73
+                  Label : NAME
+                    69
             Label : EXPRESSION
               103
               Label : ARGUMENT

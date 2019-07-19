@@ -26,18 +26,18 @@ Label : PROJECT
           Label : DEFINITION
             9
           Label : EXTENDS
-            8
-          Label : EXTENDS
             7
+          Label : EXTENDS
+            8
           Label : NAME
             9
         Label : EXPRESSION
           5
           Label : EXTENDS
-            8
+            9
           Label : EXTENDS
             7
           Label : EXTENDS
-            9
+            8
           Label : NAME
             10

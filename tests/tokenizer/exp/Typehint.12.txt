@@ -35,12 +35,12 @@ Label : PROJECT
                 16
               Label : METHOD
                 18
-                Label : NAME
-                  18
                 Label : ARGUMENT
                   20
                 Label : ARGUMENT
                   21
+                Label : NAME
+                  18
             Label : EXPRESSION
               27
               Label : LEFT

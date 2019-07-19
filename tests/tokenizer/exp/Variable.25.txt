@@ -83,8 +83,6 @@ Label : PROJECT
                   23
                   Label : LEFT
                     16
-                    Label : NAME
-                      16
                     Label : ARGUMENT
                       18
                     Label : ARGUMENT
@@ -93,6 +91,8 @@ Label : PROJECT
                         20
                       Label : CONCAT
                         21
+                    Label : NAME
+                      16
                   Label : RIGHT
                     24
               Label : THEN

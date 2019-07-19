@@ -26,12 +26,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    21
-    Label : DEFINITION
-      21
-    Label : DEFINITION
-      21
-  Label : DEFINITION
     17
     Label : DEFAULT
       5
@@ -45,6 +39,12 @@ Label : PROJECT
       17
     Label : DEFINITION
       17
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -129,6 +129,12 @@ Label : PROJECT
             17
           Label : VALUE
             21
+          Label : VALUE
+            21
+            Label : DEFINITION
+              21
+            Label : DEFINITION
+              21
         Label : EXPRESSION
           23
           Label : ARGUMENT

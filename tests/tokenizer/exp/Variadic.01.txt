@@ -74,6 +74,10 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+  Label : DEFINITION
     5
     Label : DEFINITION
       5
@@ -117,10 +121,6 @@ Label : PROJECT
     39
     Label : DEFINITION
       39
-  Label : DEFINITION
-    43
-    Label : DEFINITION
-      43
   Label : FILE
     3
     Label : EXPRESSION

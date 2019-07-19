@@ -53,8 +53,6 @@ Label : PROJECT
               12
               Label : NOT
                 13
-                Label : NAME
-                  13
                 Label : ARGUMENT
                   9
                   Label : INDEX
@@ -69,6 +67,8 @@ Label : PROJECT
                     19
                   Label : ARGUMENT
                     20
+                Label : NAME
+                  13
           Label : THEN
             3
             Label : EXPRESSION

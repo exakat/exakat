@@ -39,8 +39,6 @@ Label : GLOBAL
             15
             Label : METHOD
               17
-              Label : NAME
-                17
               Label : ARGUMENT
                 20
                 Label : LEFT
@@ -61,14 +59,14 @@ Label : GLOBAL
                   14
                 Label : OBJECT
                   13
+              Label : NAME
+                17
             Label : OBJECT
               13
         Label : RIGHT
           16
           Label : LEFT
             21
-            Label : NAME
-              21
             Label : ARGUMENT
               15
               Label : MEMBER
@@ -77,12 +75,12 @@ Label : GLOBAL
                 13
             Label : ARGUMENT
               23
+            Label : NAME
+              21
           Label : RIGHT
             15
             Label : METHOD
               17
-              Label : NAME
-                17
               Label : ARGUMENT
                 20
                 Label : LEFT
@@ -103,24 +101,14 @@ Label : GLOBAL
                   14
                 Label : OBJECT
                   13
+              Label : NAME
+                17
             Label : OBJECT
               13
     Label : DEFINITION
       5
 Label : PROJECT
   1
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
   Label : DEFINITION
     5
     Label : DEFAULT
@@ -145,8 +133,6 @@ Label : PROJECT
             15
             Label : METHOD
               17
-              Label : NAME
-                17
               Label : ARGUMENT
                 20
                 Label : LEFT
@@ -167,14 +153,14 @@ Label : PROJECT
                   14
                 Label : OBJECT
                   13
+              Label : NAME
+                17
             Label : OBJECT
               13
         Label : RIGHT
           16
           Label : LEFT
             21
-            Label : NAME
-              21
             Label : ARGUMENT
               15
               Label : MEMBER
@@ -183,12 +169,12 @@ Label : PROJECT
                 13
             Label : ARGUMENT
               23
+            Label : NAME
+              21
           Label : RIGHT
             15
             Label : METHOD
               17
-              Label : NAME
-                17
               Label : ARGUMENT
                 20
                 Label : LEFT
@@ -209,10 +195,24 @@ Label : PROJECT
                   14
                 Label : OBJECT
                   13
+              Label : NAME
+                17
             Label : OBJECT
               13
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -245,8 +245,6 @@ Label : PROJECT
                   15
                   Label : METHOD
                     17
-                    Label : NAME
-                      17
                     Label : ARGUMENT
                       20
                       Label : LEFT
@@ -267,14 +265,14 @@ Label : PROJECT
                         14
                       Label : OBJECT
                         13
+                    Label : NAME
+                      17
                   Label : OBJECT
                     13
               Label : RIGHT
                 16
                 Label : LEFT
                   21
-                  Label : NAME
-                    21
                   Label : ARGUMENT
                     15
                     Label : MEMBER
@@ -283,12 +281,12 @@ Label : PROJECT
                       13
                   Label : ARGUMENT
                     23
+                  Label : NAME
+                    21
                 Label : RIGHT
                   15
                   Label : METHOD
                     17
-                    Label : NAME
-                      17
                     Label : ARGUMENT
                       20
                       Label : LEFT
@@ -309,5 +307,7 @@ Label : PROJECT
                         14
                       Label : OBJECT
                         13
+                    Label : NAME
+                      17
                   Label : OBJECT
                     13

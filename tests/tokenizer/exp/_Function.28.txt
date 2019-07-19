@@ -9,10 +9,6 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : BLOCK
-            10
-            Label : EXPRESSION
-              11
           Label : ARGUMENT
             8
             Label : NAME
@@ -25,5 +21,9 @@ Label : PROJECT
               9
             Label : TYPEHINT
               6
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              11
           Label : NAME
             5

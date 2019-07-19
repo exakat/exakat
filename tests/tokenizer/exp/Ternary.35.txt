@@ -1,11 +1,5 @@
 test
 Label : GLOBAL
-  8
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-Label : GLOBAL
   9
   Label : DEFINITION
     9
@@ -53,6 +47,12 @@ Label : GLOBAL
     49
     Label : DEFINITION
       49
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
   Label : DEFINITION
@@ -133,8 +133,6 @@ Label : PROJECT
                     37
                 Label : THEN
                   25
-                  Label : NAME
-                    25
                   Label : ARGUMENT
                     29
                     Label : CONCAT
@@ -151,6 +149,8 @@ Label : PROJECT
                       35
                     Label : VARIABLE
                       34
+                  Label : NAME
+                    25
             Label : EXPRESSION
               41
             Label : EXPRESSION
@@ -177,3 +177,7 @@ Label : PROJECT
             8
           Label : VALUE
             9
+          Label : VALUE
+            9
+            Label : DEFINITION
+              9

@@ -13,6 +13,26 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
+          Label : METHOD
+            37
+            Label : ARGUMENT
+              11
+            Label : BLOCK
+              38
+              Label : EXPRESSION
+                39
+                Label : GLOBAL
+                  40
+              Label : EXPRESSION
+                7
+                Label : STATIC
+                  41
+            Label : DEFINITION
+              41
+            Label : DEFINITION
+              40
+            Label : NAME
+              37
           Label : NAME
             6
           Label : PPP
@@ -20,38 +40,38 @@ Label : PROJECT
             Label : PPP
               8
           Label : PPP
-            11
-            Label : PPP
-              12
-              Label : DEFAULT
-                13
+            13
             Label : PPP
               14
-          Label : PPP
-            11
+              Label : DEFAULT
+                15
             Label : PPP
               16
+          Label : PPP
+            13
             Label : PPP
               18
-              Label : DEFAULT
-                20
-          Label : PPP
-            21
             Label : PPP
-              22
+              20
+              Label : DEFAULT
+                22
+          Label : PPP
+            23
             Label : PPP
               24
-              Label : DEFAULT
-                20
             Label : PPP
               26
-          Label : PPP
-            28
+              Label : DEFAULT
+                22
             Label : PPP
-              29
+              28
+          Label : PPP
+            30
             Label : PPP
               31
-              Label : DEFAULT
-                20
             Label : PPP
               33
+              Label : DEFAULT
+                22
+            Label : PPP
+              35

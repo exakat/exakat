@@ -27,8 +27,6 @@ Label : PROJECT
                 12
                 Label : NOT
                   13
-                  Label : NAME
-                    13
                   Label : ARGUMENT
                     15
                   Label : ARGUMENT
@@ -37,6 +35,8 @@ Label : PROJECT
                       19
                     Label : VARIABLE
                       17
+                  Label : NAME
+                    13
               Label : THEN
                 10
                 Label : EXPRESSION
@@ -164,32 +164,6 @@ Label : PROJECT
             Label : DEFAULT
               34
               Label : LEFT
-                31
-                Label : MEMBER
-                  32
-                Label : OBJECT
-                  18
-                  Label : INDEX
-                    44
-                  Label : VARIABLE
-                    31
-                    Label : MEMBER
-                      29
-                    Label : OBJECT
-                      18
-                      Label : INDEX
-                        43
-                        Label : LEFT
-                          42
-                        Label : RIGHT
-                          42
-                      Label : VARIABLE
-                        9
-              Label : RIGHT
-                35
-            Label : DEFAULT
-              34
-              Label : LEFT
                 41
                 Label : CLASS
                   41
@@ -203,6 +177,20 @@ Label : PROJECT
                       29
                 Label : CONSTANT
                   32
+              Label : RIGHT
+                35
+            Label : DEFAULT
+              34
+              Label : LEFT
+                31
+                Label : MEMBER
+                  32
+                Label : OBJECT
+                  31
+                  Label : MEMBER
+                    29
+                  Label : OBJECT
+                    9
               Label : RIGHT
                 35
             Label : DEFAULT
@@ -228,11 +216,23 @@ Label : PROJECT
                 Label : MEMBER
                   32
                 Label : OBJECT
-                  31
-                  Label : MEMBER
-                    29
-                  Label : OBJECT
-                    9
+                  18
+                  Label : INDEX
+                    44
+                  Label : VARIABLE
+                    31
+                    Label : MEMBER
+                      29
+                    Label : OBJECT
+                      18
+                      Label : INDEX
+                        43
+                        Label : LEFT
+                          42
+                        Label : RIGHT
+                          42
+                      Label : VARIABLE
+                        9
               Label : RIGHT
                 35
             Label : DEFINITION

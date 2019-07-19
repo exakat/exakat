@@ -36,6 +36,12 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
     13
     Label : DEFAULT
       16
@@ -59,12 +65,6 @@ Label : PROJECT
             9
     Label : DEFINITION
       13
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -73,8 +73,6 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : NAME
-            5
           Label : ARGUMENT
             6
             Label : ARGUMENT
@@ -87,6 +85,8 @@ Label : PROJECT
                 9
           Label : ARGUMENT
             11
+          Label : NAME
+            5
         Label : EXPRESSION
           15
           Label : LEFT

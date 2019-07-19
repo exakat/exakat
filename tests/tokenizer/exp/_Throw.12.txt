@@ -57,12 +57,12 @@ Label : PROJECT
           16
           Label : CONDITION
             17
-            Label : NAME
-              17
             Label : ARGUMENT
               14
             Label : ARGUMENT
               12
+            Label : NAME
+              17
           Label : THEN
             3
             Label : EXPRESSION

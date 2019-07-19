@@ -40,14 +40,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    29
-    Label : DEFAULT
-      26
-    Label : DEFINITION
-      29
-    Label : DEFINITION
-      29
-  Label : DEFINITION
     33
     Label : DEFAULT
       21
@@ -65,6 +57,14 @@ Label : PROJECT
       33
     Label : DEFINITION
       33
+  Label : DEFINITION
+    29
+    Label : DEFAULT
+      26
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
   Label : DEFINITION
     15
     Label : DEFINITION
@@ -128,12 +128,6 @@ Label : PROJECT
               Label : RIGHT
                 20
           Label : DEFINITION
-            15
-            Label : DEFINITION
-              15
-            Label : DEFINITION
-              15
-          Label : DEFINITION
             5
             Label : ARGUMENT
               26
@@ -145,6 +139,12 @@ Label : PROJECT
               20
             Label : NAME
               5
+          Label : DEFINITION
+            15
+            Label : DEFINITION
+              15
+            Label : DEFINITION
+              15
           Label : NAME
             5
         Label : EXPRESSION
@@ -222,6 +222,14 @@ Label : PROJECT
                 Label : NAME
                   5
           Label : DEFINITION
+            24
+          Label : DEFINITION
+            21
+            Label : ARGUMENT
+              22
+            Label : NAME
+              21
+          Label : DEFINITION
             15
             Label : DEFINITION
               15
@@ -231,14 +239,6 @@ Label : PROJECT
               15
             Label : DEFINITION
               15
-          Label : DEFINITION
-            24
-          Label : DEFINITION
-            21
-            Label : ARGUMENT
-              22
-            Label : NAME
-              21
           Label : NAME
             21
         Label : EXPRESSION

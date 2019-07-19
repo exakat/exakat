@@ -87,14 +87,10 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   14
-                  Label : DEFAULT
-                    16
                   Label : NAME
                     14
                 Label : ARGUMENT
                   15
-                  Label : DEFAULT
-                    17
                   Label : NAME
                     15
                 Label : BLOCK
@@ -104,13 +100,7 @@ Label : PROJECT
               Label : DEFAULT
                 13
                 Label : ARGUMENT
-                  14
-                  Label : NAME
-                    14
-                Label : ARGUMENT
-                  15
-                  Label : NAME
-                    15
+                  8
                 Label : BLOCK
                   10
                   Label : EXPRESSION
@@ -128,7 +118,17 @@ Label : PROJECT
               Label : DEFAULT
                 13
                 Label : ARGUMENT
-                  8
+                  14
+                  Label : DEFAULT
+                    16
+                  Label : NAME
+                    14
+                Label : ARGUMENT
+                  15
+                  Label : DEFAULT
+                    17
+                  Label : NAME
+                    15
                 Label : BLOCK
                   10
                   Label : EXPRESSION

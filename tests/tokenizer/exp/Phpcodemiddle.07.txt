@@ -36,12 +36,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
     Label : DEFAULT
       10
@@ -57,6 +51,12 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     46
     Label : DEFAULT
@@ -127,8 +127,6 @@ Label : PROJECT
                 23
                 Label : METHOD
                   30
-                  Label : NAME
-                    30
                   Label : ARGUMENT
                     32
                   Label : ARGUMENT
@@ -149,6 +147,8 @@ Label : PROJECT
                           40
                         Label : OBJECT
                           29
+                  Label : NAME
+                    30
                 Label : OBJECT
                   29
             Label : EXPRESSION

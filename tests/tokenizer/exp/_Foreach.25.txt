@@ -14,13 +14,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    13
-    Label : DEFINITION
-      13
-  Label : DEFINITION
     9
     Label : DEFINITION
       9
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -51,3 +51,7 @@ Label : PROJECT
               7
           Label : VALUE
             9
+          Label : VALUE
+            9
+            Label : DEFINITION
+              9

@@ -113,8 +113,6 @@ Label : PROJECT
                       36
                     Label : METHOD
                       38
-                      Label : NAME
-                        38
                       Label : ARGUMENT
                         40
                       Label : ARGUMENT
@@ -129,6 +127,8 @@ Label : PROJECT
                               44
                           Label : VALUE
                             48
+                      Label : NAME
+                        38
                   Label : NAME
                     30
                 Label : THEN
@@ -149,3 +149,11 @@ Label : PROJECT
               6
           Label : VALUE
             13
+          Label : VALUE
+            11
+            Label : DEFINITION
+              11
+          Label : VALUE
+            13
+            Label : DEFINITION
+              13
