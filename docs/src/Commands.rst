@@ -7,10 +7,12 @@ List of commands :
 ------------------
 
 * `anonymize`_
+* `baseline`_
 * `catalog`_
 * `clean`_
 * `cleandb`_
 * `doctor`_
+* `extension`_
 * `help`_
 * `init`_
 * `project`_
@@ -62,6 +64,31 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+:: _baseline:
+
+baseline
+--------
+
+Baseline manage previous audits that may be used as a baseline for new audits. 
+
+A Baseline is a previous audit, that has already reviewed the code. It has identified issues and code. Later, after some code modification, a new audit is run. When we want to know the new issues, or the removed ones, it has to be compared to a baseline.
+
+This is a help command, to help find the available values for various options.
+
+Commands
+########
+
++-----------+-----------------------------------------------------------------------------+
+| Command   | Description                                                                 |
++-----------+-----------------------------------------------------------------------------+
+| list      | List all available baselines. Default action                                |
++-----------+-----------------------------------------------------------------------------+
+| remove    | Removes a baseline, using its name or its auto-id                           |
++-----------+-----------------------------------------------------------------------------+
+| save      | Save the current audit, when it exists, as the last base, with the provided |
+|           | name.                                                                       |
++-----------+-----------------------------------------------------------------------------+
 
 :: _catalog:
 
@@ -287,6 +314,28 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode : include helpers configurations                               |
 +-----------+-----+-----------------------------------------------------------------------------+
+
+extension
+---------
+
+Extension manages the current Exakat extensions. ref:`Extensions <extensions>` are detailled in a dedicated chapter.
+
+Commands
+########
+
++-----------+-----------------------------------------------------------------------------+
+| Command   | Description                                                                 |
++-----------+-----------------------------------------------------------------------------+
+| list      | List all available extensions, from www.exakat.io.                          |
++-----------+-----------------------------------------------------------------------------+
+| install   | Install a new extension, using the provided name.                           |
++-----------+-----------------------------------------------------------------------------+
+| uninstall | Uninstall an installed extension, using the provided name.                  |
++-----------+-----------------------------------------------------------------------------+
+| local     | List all installed extensions. Default action.                              |
++-----------+-----------------------------------------------------------------------------+
+| update    | Update an extension by fetching its newest version, when available.         |
++-----------+-----------------------------------------------------------------------------+
 
 
 :: _help:
@@ -517,7 +566,7 @@ Options
 Report formats
 ##############
 
-All reports are detailed in the Reports_ section.
+All reports are detailed in the ref:`Reports <reports>` section.
 
 +-------------+-----------------------------------------------------------------------------+
 | Report      | Description                                                                 |
