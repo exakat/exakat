@@ -66,6 +66,9 @@ class BaselineStash {
             }
 
             if ($this->baseline_strategy === 'one') {
+                if (empty($baselines)) {
+                    return;
+                }
                 // Reuse the last that exists
                 $sqliteFilePrevious = array_pop($baselines);
                 copy($previous, $sqliteFilePrevious);
