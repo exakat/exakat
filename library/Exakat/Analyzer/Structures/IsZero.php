@@ -60,6 +60,7 @@ sideEffect{x = [:]; id2 = it.get().id();}
        __.where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT").hasLabel("Addition").sideEffect{ previous = p;}.fold())
          .where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("SIGN").sideEffect{ previous = p;}.fold())
          .where( __.sideEffect{ if (it.get().value("code") == $minus[0]) { p = -1; } else { p = 1;}}.out("LEFT", "RIGHT", "CODE", "SIGN").hasLabel("Assignation", "Parenthesis", "Sign").sideEffect{ previous = 1; supervious *= p;}.fold())
+         .not(hasLabel("Multiplication"))
          .out("LEFT", "RIGHT", "CODE", "SIGN")
    )
     .emit().times($MAX_LOOPING)
