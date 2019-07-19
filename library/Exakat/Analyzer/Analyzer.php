@@ -1783,6 +1783,12 @@ GREMLIN;
         return $this;
     }
 
+    public function collectMethods($variable = 'methods') {
+        $this->query->collectMethods($variable);
+        
+        return $this;
+    }
+
     public function collectArguments($variable = 'args') {
         $this->query->collectArguments($variable);
         
