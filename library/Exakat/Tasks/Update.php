@@ -50,8 +50,8 @@ class Update extends Tasks {
     }
 
     private function runDefault() {
-        if (!file_exists('./projects')) {
-            display("No a root install. Aborting all update. Provide .exakat.ini to enable update in this folder.\n");
+        if (!file_exists("{$this->config->projects_root}/projects")) {
+            display("This installation has no projects directory. Aborting all update. Provide .exakat.ini to enable update in this folder.\n");
             return;
         }
 

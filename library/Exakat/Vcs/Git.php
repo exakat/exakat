@@ -96,6 +96,12 @@ class Git extends Vcs {
     public function update() {
         $this->check();
 
+        if (!file_exists($this->destinationFull.'/.git')) {
+            display("This doesn't seem to be a git repository. Aborting\n");
+
+            return self::NO_UPDATE;
+        }
+
         $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \\* 2>&1") ?? '';
         $branch = substr(trim($res), 2);
         
