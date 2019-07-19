@@ -32,8 +32,13 @@ class Property extends DSL {
 
         assert($this->assertProperty($property));
 
-        // Currently, a gremlin variable
-        return new Command('sideEffect{ it.get().property("' . $property . '", ' . $value . '); }', array());
+        // special case for boolean
+        if ($value === true || $value === false) {
+            return new Command('sideEffect{ it.get().property("' . $property . '", ' . ($value ? 'true' : 'false') . '); }', array());
+        } else {
+            // Default, a gremlin variable
+            return new Command('sideEffect{ it.get().property("' . $property . '", ' . $value . '); }', array());
+        }
     }
 }
 ?>
