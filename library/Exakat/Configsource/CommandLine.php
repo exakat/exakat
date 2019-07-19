@@ -82,6 +82,7 @@ class CommandLine extends Config {
                                     '-tag'          => 'tag',
                                     '-remote'       => 'remote',
                                     '-graphdb'      => 'gremlin',
+                                    '-version'      => 'version',
 
                                     '-baseline-set' => 'baseline_set',
                                     '-baseline-use' => 'baseline_use',
@@ -235,7 +236,7 @@ class CommandLine extends Config {
         
             if ($this->config['command'] === 'extension') {
                 $subcommand = array_shift($args);
-                if (!in_array($subcommand, Extension::ACTION, STRICT_COMPARISON)) {
+                if (!in_array($subcommand, Extension::ACTIONS, STRICT_COMPARISON)) {
                     $subcommand = 'local';
                 }
                 $this->config['subcommand'] = $subcommand;

@@ -570,11 +570,13 @@ Options
 upgrade
 -------
 
-Upgrade exakat itself. By default, this is a dry run : only the availability of a new version is reported. 
+Upgrade exakat itself. By default, this command only checks for the availability of a new version : it doesn't upgrade immediately. 
 
 Use -u option to actually replace the current phar archive.
 
-In case the upgrade command file, you may also download manually the `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_. Then replace the current version with the new one.
+Use -version option to downgrade or upgrade to a specific version. 
+
+In case the upgrade command file, you may also download manually the `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_. Then replace the current version with the new one.
 
 Command
 #######
@@ -589,4 +591,8 @@ Options
 | Option    | Req | Description                                                                 |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -u        | Yes | Actually upgrades exakat. Without it, it is a dry run.                      |
++-----------+-----+-----------------------------------------------------------------------------+
+| -version  | No  | Select a specific Exakat version and update to it. By default, it upgrades  |
+|           |     | to the latest version, as published on the https://www.exakat.io/ site.     |
+|           |     | Example value : 1.8.8                                                       |
 +-----------+-----+-----------------------------------------------------------------------------+
