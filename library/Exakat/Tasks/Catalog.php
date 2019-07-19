@@ -34,15 +34,15 @@ class Catalog extends Tasks {
         $data = array();
 
         // List of analysis
-        $themas = $this->themes->listAllRulesets();
-        sort($themas);
-        $themas = array_map( function ($x) {
+        $rulesets = $this->themes->listAllRulesets();
+        sort($rulesets);
+        $rulesets = array_map( function ($x) {
             if (strpos($x, ' ') !== false) {
                 $x = '"' . $x . '"';
             }
             return $x;
-        }, $themas);
-        $data['analysis'] = $themas;
+        }, $rulesets);
+        $data['rulesest'] = $rulesets;
 
         // List of reports
         $reports = Reports::$FORMATS;
@@ -54,8 +54,8 @@ class Catalog extends Tasks {
         } else {
             $display = '';
 
-            foreach($data as $theme => $list) {
-                $display .= count($list) . " $theme : \n";
+            foreach($data as $section => $list) {
+                $display .= count($list) . " $section : \n";
                 $display .= '   ' . implode("\n   ", $list) . "\n";
             }
 
