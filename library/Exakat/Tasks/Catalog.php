@@ -34,7 +34,7 @@ class Catalog extends Tasks {
         $data = array();
 
         // List of analysis
-        $rulesets = $this->themes->listAllRulesets();
+        $rulesets = $this->rulesets->listAllRulesets();
         sort($rulesets);
         $rulesets = array_map( function ($x) {
             if (strpos($x, ' ') !== false) {

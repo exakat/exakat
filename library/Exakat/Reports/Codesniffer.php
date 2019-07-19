@@ -47,7 +47,7 @@ class Codesniffer extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
                 $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
             }

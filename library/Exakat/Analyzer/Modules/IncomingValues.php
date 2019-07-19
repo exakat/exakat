@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IncomingValues extends Analyzer {
     public function dependsOn() {
-        $incomingValues = $this->themes->getAnalyzerInExtension('IncomingValues');
+        $incomingValues = $this->rulesets->getAnalyzerInExtension('IncomingValues');
 
         return $incomingValues;
     }

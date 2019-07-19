@@ -33,9 +33,9 @@ class Marmelab extends Reports {
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $themes = $this->config->thema ?? $this->dependsOnAnalysis();
+        $rulesets = $this->config->thema ?? $this->dependsOnAnalysis();
         
-        $list = $this->themes->getRulesetsAnalyzers($themes);
+        $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
         $list = makeList($list);
         
         $analyzers = array();
@@ -47,7 +47,7 @@ class Marmelab extends Reports {
         $results = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($analyzers[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
                 $description = $this->getDocs($row['analyzer']);
                 $a = array('id'          => $row['analyzer'],

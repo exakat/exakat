@@ -81,12 +81,12 @@ class Simplehtml extends Reports {
 
     private function makeSummary($folder) {
         if (empty($this->config->thema)) {
-            $list = $this->themes->getRulesetsAnalyzers($this->config->thema);
+            $list = $this->rulesets->getRulesetsAnalyzers($this->config->thema);
             $list = makeList($list);
         } elseif (!empty($this->config->program)) {
             $list = '"' . $this->config->program . '"';
         } else {
-            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
             $list = makeList($list);
         }
 
@@ -116,11 +116,11 @@ HTML;
         
     private function makeList($folder) {
         if (!empty($this->config->thema)) {
-            $list = $this->themes->getRulesetsAnalyzers(array($this->config->thema));
+            $list = $this->rulesets->getRulesetsAnalyzers(array($this->config->thema));
         } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {
-            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         }
 
         $analysisResults = new Results($this->sqlite, $list);
@@ -141,7 +141,7 @@ HTML;
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']]     = $this->getDocs($row['analyzer'], 'name');
 
                 $severityCache[$row['analyzer']]  = $this->getDocs($row['analyzer'], 'severity');

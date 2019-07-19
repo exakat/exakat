@@ -158,7 +158,7 @@ class Project extends Tasks {
         $themesToRun = array_merge(...$themesToRun);
         $themesToRun = array_unique($themesToRun);
 
-        $availableRulesets = $this->themes->listAllRulesets();
+        $availableRulesets = $this->rulesets->listAllRulesets();
 
         $diff = array_diff($themesToRun, $availableRulesets);
         if (!empty($diff)) {
@@ -351,7 +351,7 @@ class Project extends Tasks {
             $themes = array($themes);
         }
 
-        display('Running the following themes : ' . implode(', ', $themes) . PHP_EOL);
+        display('Running the following rulesets : ' . implode(', ', $themes) . PHP_EOL);
 
         global $VERBOSE;
         $oldVerbose = $VERBOSE;

@@ -47,7 +47,7 @@ SQL;
             $ini = $this->getDocs($row['analyzer']);
             $row['error'] = $ini['name'];
 
-            $a = $this->themes->getInstance($row['analyzer'], null, $this->config);
+            $this->rulesets->getInstance($row['analyzer'], null, $this->config);
             $row['severity'] = $this->getDocs($row['analyzer'], 'severity');
             $row['impact']   = $this->getDocs($row['analyzer'], 'timetofix');
             $row['recipes']  = $a->getRulesets();

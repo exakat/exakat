@@ -78,15 +78,15 @@ class Analyze extends Tasks {
             }
 
             foreach($analyzersClass as $analyzer) {
-                if (!$this->themes->getClass($analyzer)) {
-                    throw new NoSuchAnalyzer($analyzer, $this->themes);
+                if (!$this->rulesets->getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer, $this->rulesets);
                 }
             }
         } elseif (!empty($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzersClass = $this->themes->getRulesetsAnalyzers($thema)) {
-                throw new NoSuchRuleset(implode(', ', $thema), $this->themes->getSuggestionThema($thema));
+            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($thema)) {
+                throw new NoSuchRuleset(implode(', ', $thema), $this->rulesets->getSuggestionThema($thema));
             }
 
             $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );
@@ -140,7 +140,7 @@ class Analyze extends Tasks {
             return;
         }
 
-        $analyzers[$analyzer_class] = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+        $analyzers[$analyzer_class] = $this->rulesets->getInstance($analyzer_class, $this->gremlin, $this->config);
         if ($analyzers[$analyzer_class] === null) {
             display("No such analyzer as $analyzer_class\n");
             return;

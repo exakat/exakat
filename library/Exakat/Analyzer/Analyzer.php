@@ -140,7 +140,8 @@ abstract class Analyzer {
     
     const MAX_LOOPING = 15;
     
-    protected $themes  = null;
+    protected $rulesets  = null;
+
     protected static $methods = null;
     protected $gremlin = null;
     protected $dictCode = null;
@@ -155,10 +156,11 @@ abstract class Analyzer {
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         assert($config !== null, 'Can\'t call Analyzer without a config');
-        $this->themes = new Rulesets("{$config->dir_root}/data/analyzers.sqlite",
-                                     $config->ext,
-                                     $config->dev,
-                                     $config->themas);
+        $this->rulesets = new Rulesets("{$config->dir_root}/data/analyzers.sqlite",
+                                       $config->ext,
+                                       $config->dev,
+                                       $config->themas);
+        
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
@@ -231,9 +233,9 @@ GREMLIN;
     }
     
     public function setAnalyzer($analyzer) {
-        $this->analyzer = $this->themes->getClass($analyzer);
+        $this->analyzer = $this->rulesets->getClass($analyzer);
         if ($this->analyzer === false) {
-            throw new NoSuchAnalyzer($analyzer, $this->themes);
+            throw new NoSuchAnalyzer($analyzer, $this->rulesets);
         }
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
@@ -281,7 +283,7 @@ GREMLIN;
 
     public function getRulesets() {
         $analyzer = $this->getName($this->analyzerQuoted);
-        return $this->themes->getRulesetForAnalyzer($analyzer);
+        return $this->rulesets->getRulesetForAnalyzer($analyzer);
     }
 
     public function init($analyzerId = null) {

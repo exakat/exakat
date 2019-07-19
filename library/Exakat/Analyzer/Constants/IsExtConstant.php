@@ -34,7 +34,7 @@ class IsExtConstant extends Analyzer {
     }
     
     public function analyze() {
-        $exts = $this->themes->listAllAnalyzer('Extensions');
+        $exts = $this->rulesets->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
         $constants = array();

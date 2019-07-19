@@ -104,7 +104,7 @@ class Xml extends Reports {
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = new Results($this->sqlite, $list);
         $resultsAnalyzers->load();
@@ -123,7 +123,7 @@ class Xml extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
                 $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
                 $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');

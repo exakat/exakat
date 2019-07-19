@@ -59,7 +59,7 @@ abstract class Reports {
 
     protected $sqlite    = null;
     protected $datastore = null;
-    protected $themes    = null;
+    protected $rulesets  = null;
 
     public function __construct(Config $config) {
         assert($config !== null, 'Config can\t be null');
@@ -69,13 +69,13 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->themes    = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                            $this->config->ext,
-                                            $this->config->dev,
-                                            $this->config->themas);
+            $this->rulesets    = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                              $this->config->ext,
+                                              $this->config->dev,
+                                              $this->config->themas);
 
             // Default analyzers
-            $analyzers = array_merge($this->themes->getRulesetsAnalyzers($this->config->thema),
+            $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->thema),
                                      array_keys($config->themas));
             $this->themesList = makeList($analyzers);
         }
@@ -102,15 +102,15 @@ abstract class Reports {
             $themas = $this->config->thema;
 
             if ($missing = $this->checkMissingRulesets()) {
-                print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
+                print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
                 return false;
             }
 
-            $list = $this->themes->getRulesetsAnalyzers($themas);
+            $list = $this->rulesets->getRulesetsAnalyzers($themas);
         } elseif (!empty($this->config->program)) {
             $list = makeArray($this->config->program);
         } else {
-            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         }
 
         $final = $this->_generate($list);

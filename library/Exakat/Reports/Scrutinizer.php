@@ -61,7 +61,7 @@ class Scrutinizer extends Reports {
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = new Results($this->sqlite, $list);
         $resultsAnalyzers->load();

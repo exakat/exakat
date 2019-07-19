@@ -387,7 +387,7 @@ SQL
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN ("' . implode('", "', $this->themes->getRulesetsAnalyzers($categorie)) . '")';
+            $list = 'IN ("' . implode('", "', $this->rulesets->getRulesetsAnalyzers($categorie)) . '")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -425,7 +425,7 @@ SQL
     }
 
     public function getSeverityBreakdown() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $query = <<<SQL
@@ -492,7 +492,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -550,7 +550,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -612,7 +612,7 @@ SQL;
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -667,7 +667,7 @@ SQL;
     protected function generateCompatibility(Section $section, $version) {
         $compatibility = '';
 
-        $list = $this->themes->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
+        $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();

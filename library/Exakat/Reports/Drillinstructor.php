@@ -32,87 +32,7 @@ class Drillinstructor extends Ambassador {
     const FILE_FILENAME  = 'drill';
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Drillinstructor';
-/*
-    public function generate($folder, $name = self::FILE_FILENAME) {
-        if ($name === self::STDOUT) {
-            print "Can't produce DrillInstructor format to stdout\n";
-            return false;
-        }
-        
-        $this->finalName = "$folder/$name";
-        $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
-        $this->projectPath = $folder;
-
-        $this->initFolder();
-        $this->generateDashboard();
-        $this->generateLevels();
-        $this->generateLevel1();
-        $this->generateLevel2();
-        $this->generateLevel3();
-        $this->generateLevel4();
-//        $this->generateLevel5();
-
-        // Annex
-        $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->themes->getRulesetsAnalyzers($this->themesToShow));
-
-        // Static files
-        $files = array('credits');
-        foreach($files as $file) {
-            $baseHTML = $this->getBasedPage($file);
-            $this->putBasedPage($file, $baseHTML);
-        }
-
-        $this->cleanFolder();
-    }
-
-    protected function getBasedPage($file) {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
-
-            $menu = <<<'MENU'
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-          <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="levels.html"><i class="fa fa-dashboard"></i>Overview of levels</a></li>
-          <li><a href="level1.html"><i class="fa fa-circle-o"></i>Level 1</a></li>
-          <li><a href="level2.html"><i class="fa fa-circle-o"></i>Level 2</a></li>
-          <li><a href="level3.html"><i class="fa fa-circle-o"></i>Level 3</a></li>
-          <li><a href="level3.html"><i class="fa fa-circle-o"></i>Level 4</a></li>
-          <li class="treeview">
-            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
-              <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Analyzers Documentation</a></li>
-              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
-              <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- /.sidebar-menu -->
-MENU;
-
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
-        }
-
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
-
-        return $combinePageHTML;
-    }
-
-*/
     protected function generateLevel(Section $section) {
         $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted('Level 1'));
@@ -124,7 +44,7 @@ MENU;
         foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
-            $analyzers = $this->themes->getRulesetsAnalyzers(array('Level ' . $level));
+            $analyzers = $this->rulesets->getRulesetsAnalyzers(array('Level ' . $level));
             if (empty($analyzers)) {
                 continue;
             }

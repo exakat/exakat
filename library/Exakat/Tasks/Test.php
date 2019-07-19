@@ -44,8 +44,8 @@ class Test extends Tasks {
 
         // Check for requested analyze
         $analyzerName = $this->config->program;
-        if (!$this->themes->getClass($analyzerName)) {
-            throw new NoSuchAnalyzer($analyzerName, $this->themes);
+        if (!$this->rulesets->getClass($analyzerName)) {
+            throw new NoSuchAnalyzer($analyzerName, $this->rulesets);
         }
 
         display("Cleaning DB\n");

@@ -28,14 +28,14 @@ class IntegerConversion extends Analyzer {
     private $dependsOn = null;
     public function dependsOn() {
         if ($this->dependsOn === null) {
-            $module = $this->themes->getInstance('Modules/IncomingValues', $this->gremlin, $this->config);
+            $module = $this->rulesets->getInstance('Modules/IncomingValues', $this->gremlin, $this->config);
             $modules = $module->dependsOn();
-    
+
             $this->dependsOn = array_merge( array('Php/IncomingValues'),
                                             $modules
                                           );
         }
-                                      
+
         return $this->dependsOn;
     }
 
