@@ -26,13 +26,55 @@ Label : PROJECT
           Label : DEFINITION
             8
           Label : DEFINITION
-            13
+            15
           Label : DEFINITION
-            13
+            15
           Label : EXTENDS
             7
+          Label : METHOD
+            17
+            Label : ARGUMENT
+              13
+            Label : BLOCK
+              18
+              Label : EXPRESSION
+                19
+                Label : ARGUMENT
+                  21
+                  Label : LEFT
+                    20
+                    Label : CLASS
+                      8
+                    Label : MEMBER
+                      9
+                  Label : RIGHT
+                    21
+                    Label : LEFT
+                      20
+                      Label : CLASS
+                        8
+                      Label : MEMBER
+                        22
+                    Label : RIGHT
+                      20
+                      Label : CLASS
+                        15
+                      Label : MEMBER
+                        22
+            Label : DEFINITION
+              20
+              Label : CLASS
+                28
+              Label : METHOD
+                17
+                Label : ARGUMENT
+                  13
+                Label : NAME
+                  17
+            Label : NAME
+              17
           Label : NAME
-            13
+            15
           Label : PPP
             11
             Label : PPP
@@ -60,7 +102,7 @@ Label : PROJECT
               Label : DEFINITION
                 20
                 Label : CLASS
-                  13
+                  15
                 Label : MEMBER
                   22
         Label : EXPRESSION
@@ -68,7 +110,7 @@ Label : PROJECT
           Label : DEFINITION
             28
           Label : EXTENDS
-            13
+            15
           Label : NAME
             28
           Label : PPP
@@ -88,7 +130,7 @@ Label : PROJECT
                 Label : DEFINITION
                   20
                   Label : CLASS
-                    13
+                    15
                   Label : MEMBER
                     22
         Label : EXPRESSION
@@ -98,8 +140,8 @@ Label : PROJECT
             Label : CLASS
               28
             Label : METHOD
-              15
+              17
               Label : ARGUMENT
-                16
+                13
               Label : NAME
-                15
+                17

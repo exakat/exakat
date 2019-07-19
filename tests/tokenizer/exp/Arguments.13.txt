@@ -1,5 +1,11 @@
 test
 Label : GLOBAL
+  36
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      36
+Label : GLOBAL
   5
   Label : DEFINITION
     5
@@ -85,12 +91,6 @@ Label : GLOBAL
     32
     Label : DEFINITION
       32
-Label : GLOBAL
-  36
-  Label : DEFINITION
-    36
-    Label : DEFINITION
-      36
 Label : PROJECT
   1
   Label : DEFINITION

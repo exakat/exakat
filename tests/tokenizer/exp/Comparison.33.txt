@@ -15,14 +15,14 @@ Label : GLOBAL
         17
         Label : METHOD
           11
-          Label : NAME
-            11
           Label : ARGUMENT
             12
             Label : ARGUMENT
               13
           Label : ARGUMENT
             15
+          Label : NAME
+            11
         Label : OBJECT
           9
       Label : RIGHT
@@ -44,10 +44,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
     6
     Label : DEFAULT
       18
@@ -55,20 +51,24 @@ Label : PROJECT
         17
         Label : METHOD
           11
-          Label : NAME
-            11
           Label : ARGUMENT
             12
             Label : ARGUMENT
               13
           Label : ARGUMENT
             15
+          Label : NAME
+            11
         Label : OBJECT
           9
       Label : RIGHT
         19
     Label : DEFINITION
       6
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
   Label : DEFINITION
     15
     Label : DEFINITION
@@ -95,14 +95,14 @@ Label : PROJECT
                 17
                 Label : METHOD
                   11
-                  Label : NAME
-                    11
                   Label : ARGUMENT
                     12
                     Label : ARGUMENT
                       13
                   Label : ARGUMENT
                     15
+                  Label : NAME
+                    11
                 Label : OBJECT
                   9
               Label : RIGHT

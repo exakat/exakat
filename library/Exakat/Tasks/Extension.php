@@ -31,15 +31,17 @@ class Extension extends Tasks {
     private $extensionList = array();
     
     const FORMAT = "+ %-20s %8s %5s\n";
+    public const ACTIONS = array('install',
+                                 'uninstall',
+                                 'list',
+                                 'local',
+                                 'update',
+                                 );
+
 
     //install, list, local, uninstall, upgrade
     public function run() {
-        if (!in_array($this->config->subcommand, array('install',
-                                                       'uninstall',
-                                                       'list',
-                                                       'local',
-                                                       'update',
-                                                     ))) {
+        if (!in_array($this->config->subcommand, self::ACTIONS)) {
             $this->local();
         } else {
             $this->{$this->config->subcommand}();

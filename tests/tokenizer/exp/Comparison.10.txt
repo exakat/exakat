@@ -22,12 +22,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    14
-    Label : DEFAULT
-      12
-    Label : DEFINITION
-      14
-  Label : DEFINITION
     8
     Label : DEFAULT
       11
@@ -37,6 +31,12 @@ Label : PROJECT
         11
     Label : DEFINITION
       8
+  Label : DEFINITION
+    14
+    Label : DEFAULT
+      12
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION

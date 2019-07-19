@@ -13,14 +13,14 @@ Label : GLOBAL
       14
       Label : METHOD
         11
-        Label : NAME
-          11
-          Label : CODE
-            10
         Label : ARGUMENT
           12
         Label : ARGUMENT
           13
+        Label : NAME
+          11
+          Label : CODE
+            10
       Label : OBJECT
         8
     Label : DEFINITION
@@ -37,14 +37,14 @@ Label : PROJECT
       14
       Label : METHOD
         11
-        Label : NAME
-          11
-          Label : CODE
-            10
         Label : ARGUMENT
           12
         Label : ARGUMENT
           13
+        Label : NAME
+          11
+          Label : CODE
+            10
       Label : OBJECT
         8
     Label : DEFINITION
@@ -63,13 +63,13 @@ Label : PROJECT
             14
             Label : METHOD
               11
-              Label : NAME
-                11
-                Label : CODE
-                  10
               Label : ARGUMENT
                 12
               Label : ARGUMENT
                 13
+              Label : NAME
+                11
+                Label : CODE
+                  10
             Label : OBJECT
               8

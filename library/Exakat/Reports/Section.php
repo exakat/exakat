@@ -33,7 +33,7 @@ class Section {
     public $icon    = 'circle-o';
     public $ruleset = 'None';
     
-    function __construct(array $section) {
+    public function __construct(array $section) {
         $this->title   = $section['title']   ?? $this->title;
         $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
         $this->file    = $section['file']    ?? $this->file;
@@ -43,11 +43,11 @@ class Section {
         $this->ruleset = $section['ruleset'] ?? $this->ruleset;
     }
     
-    function __get($name) {
+    public function __get($name) {
         print "Access to undefined property $name\n";
     }
 
-    function __set($name, $value) {
+    public function __set($name, $value) {
         print "Write to undefined property $name\n";
     }
 }

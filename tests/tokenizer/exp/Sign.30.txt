@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  21
+  23
   Label : DEFINITION
-    21
+    23
     Label : DEFINITION
-      21
+      23
 Label : GLOBAL
   11
   Label : DEFINITION
@@ -12,21 +12,21 @@ Label : GLOBAL
     Label : DEFINITION
       11
 Label : GLOBAL
-  23
-  Label : DEFINITION
-    23
-    Label : DEFINITION
-      23
-Label : PROJECT
-  1
+  21
   Label : DEFINITION
     21
     Label : DEFINITION
       21
+Label : PROJECT
+  1
   Label : DEFINITION
     11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
   Label : DEFINITION
     23
     Label : DEFINITION

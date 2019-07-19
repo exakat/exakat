@@ -81,12 +81,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -101,12 +101,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -123,12 +123,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -143,12 +143,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -165,12 +165,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -189,9 +189,9 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13

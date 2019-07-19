@@ -57,6 +57,26 @@ Label : PROJECT
               22
             Label : NAME
               6
+          Label : METHOD
+            15
+            Label : ARGUMENT
+              11
+            Label : BLOCK
+              16
+              Label : EXPRESSION
+                11
+            Label : DEFINITION
+              25
+              Label : METHOD
+                15
+                Label : ARGUMENT
+                  11
+                Label : NAME
+                  15
+              Label : OBJECT
+                18
+            Label : NAME
+              15
           Label : NAME
             6
           Label : PPP

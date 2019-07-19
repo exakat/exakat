@@ -48,7 +48,7 @@ class UnusedMethods extends Analyzer {
              ->not(
                 $this->side()
                      ->analyzerIs('Classes/IsInterfaceMethod')
-                     ->hasNoOut('OVERWRITE') 
+                     ->hasNoOut('OVERWRITE')
              )
              ->back('first');
         $this->prepareQuery();

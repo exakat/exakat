@@ -44,6 +44,20 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : USE
+                12
+                Label : AS
+                  39
+                Label : NAME
+                  35
+              Label : USE
+                41
+              Label : USE
+                12
+                Label : AS
+                  45
+                Label : NAME
+                  43
+              Label : USE
                 27
               Label : USE
                 12
@@ -59,19 +73,5 @@ Label : PROJECT
                   37
                 Label : NAME
                   35
-              Label : USE
-                12
-                Label : AS
-                  39
-                Label : NAME
-                  35
-              Label : USE
-                41
-              Label : USE
-                12
-                Label : AS
-                  45
-                Label : NAME
-                  43
           Label : NAME
             5

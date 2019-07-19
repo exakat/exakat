@@ -9,11 +9,11 @@ class x {
     public $publicp = array();
     
     function y() {
-        $this->privatep = 2;
-        $this->privatepa[] = 3;
+        $a = $this->privatep - 2;
+        $b = $this->privatepa + 3;
         
-        self::$privatepsself = 4;
-        static::$privatepsstatic = 5;
+        $c = 'a' . self::$privatepsself;
+        foo(static::$privatepsstatic);
     }
 }
 ?>

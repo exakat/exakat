@@ -39,7 +39,7 @@ class NoChoice extends Analyzer {
         $this->atomIs('Ternary')
              ->filter(
                 $this->side()
-                     ->outIs('THEN') 
+                     ->outIs('THEN')
                      ->atomIs('Void')
                      ->count()
                      ->isEqual(1)

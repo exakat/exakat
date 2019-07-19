@@ -40,7 +40,7 @@ class NotSamePropertyAs extends DSL {
         }
 
         switch ($property) {
-            case 'label': 
+            case 'label':
                 return new Command("filter{ it.get().label() != $name }");
 
             case 'id':
@@ -49,7 +49,7 @@ class NotSamePropertyAs extends DSL {
             case 'self':
                 return new Command("filter{ it.get() != $name }");
 
-            default : 
+            default :
                 return new Command("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
         }
     }

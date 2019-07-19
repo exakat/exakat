@@ -29,7 +29,7 @@ use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
-use Exakat\Exceptions\NoSuchThema;
+use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
@@ -206,10 +206,13 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = microtime(true);
-            $this->collectMissingDefinitions();
-            $end = microtime(true);
-            $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            // Dev only
+            if ($this->config->is_phar === Config::IS_NOT_PHAR) {
+                $begin = microtime(true);
+                $this->collectMissingDefinitions();
+                $end = microtime(true);
+                $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            }
             
             $begin = microtime(true);
             $this->collectCyclomaticComplexity();
@@ -231,13 +234,13 @@ class Dump extends Tasks {
 
         if (!empty($this->config->thema)) {
             $ruleset = $this->config->thema;
-            $rulesets = $this->themes->getRulesetsAnalyzers($ruleset);
+            $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
             if (empty($rulesets)) {
-                $r = $this->themes->getSuggestionRuleset($ruleset);
+                $r = $this->rulesets->getSuggestionRuleset($ruleset);
                 if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
-                throw new NoSuchThema($ruleset);
+                throw new NoSuchRuleset($ruleset);
             }
             display('Processing ruleset ' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
             $missing = $this->processResultsRuleset($ruleset, $counts);
@@ -259,8 +262,8 @@ class Dump extends Tasks {
             }
 
             foreach($rulesets as $ruleset) {
-                if (!$this->themes->getClass($ruleset)) {
-                    throw new NoSuchAnalyzer($ruleset, $this->themes);
+                if (!$this->rulesets->getClass($ruleset)) {
+                    throw new NoSuchAnalyzer($ruleset, $this->rulesets);
                 }
             }
             display('Processing ' . count($rulesets) . ' analyzer' . (count($rulesets) > 1 ? 's' : '') . ' : ' . implode(', ', $rulesets));
@@ -295,7 +298,7 @@ class Dump extends Tasks {
     }
 
     private function processResultsRuleset($ruleset, array $counts = array()) {
-        $analyzers = $this->themes->getRulesetsAnalyzers($ruleset);
+        $analyzers = $this->rulesets->getRulesetsAnalyzers($ruleset);
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
@@ -447,7 +450,7 @@ SQL;
             return;
         }
 
-        $analyzer = $this->themes->getInstance($class, $this->gremlin, $this->config);
+        $analyzer = $this->rulesets->getInstance($class, $this->gremlin, $this->config);
         $res = $analyzer->getDump();
 
         $saved = 0;
@@ -2422,13 +2425,13 @@ SQL;
             $ran[$row['thema']] = 1;
         }
 
-        $rulesets = $this->themes->listAllRulesets();
+        $rulesets = $this->rulesets->listAllRulesets();
         $rulesets = array_diff($rulesets, $ran);
 
         $add = array();
 
         foreach($rulesets as $ruleset) {
-            $analyzerList = $this->themes->getRulesetsAnalyzers(array($ruleset));
+            $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
             if (empty(array_diff($analyzerList, $analyzers))) {
                 $add[] = $ruleset;
             }

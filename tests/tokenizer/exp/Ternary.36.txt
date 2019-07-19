@@ -55,12 +55,12 @@ Label : GLOBAL
       82
       Label : METHOD
         77
-        Label : NAME
-          77
         Label : ARGUMENT
           79
         Label : ARGUMENT
           81
+        Label : NAME
+          77
       Label : OBJECT
         76
         Label : CLASS
@@ -113,12 +113,12 @@ Label : PROJECT
       82
       Label : METHOD
         77
-        Label : NAME
-          77
         Label : ARGUMENT
           79
         Label : ARGUMENT
           81
+        Label : NAME
+          77
       Label : OBJECT
         76
         Label : CLASS
@@ -247,12 +247,12 @@ Label : PROJECT
             82
             Label : METHOD
               77
-              Label : NAME
-                77
               Label : ARGUMENT
                 79
               Label : ARGUMENT
                 81
+              Label : NAME
+                77
             Label : OBJECT
               76
               Label : CLASS

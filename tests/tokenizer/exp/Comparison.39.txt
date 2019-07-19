@@ -1,13 +1,5 @@
 test
 Label : GLOBAL
-  12
-  Label : DEFINITION
-    12
-    Label : DEFINITION
-      12
-    Label : DEFINITION
-      12
-Label : GLOBAL
   6
   Label : DEFINITION
     6
@@ -15,44 +7,52 @@ Label : GLOBAL
       14
       Label : LEFT
         9
-        Label : NAME
-          9
         Label : ARGUMENT
           10
         Label : ARGUMENT
           12
+        Label : NAME
+          9
       Label : RIGHT
         15
     Label : DEFINITION
       6
     Label : DEFINITION
       6
-Label : PROJECT
-  1
+Label : GLOBAL
+  12
   Label : DEFINITION
     12
     Label : DEFINITION
       12
     Label : DEFINITION
       12
+Label : PROJECT
+  1
   Label : DEFINITION
     6
     Label : DEFAULT
       14
       Label : LEFT
         9
-        Label : NAME
-          9
         Label : ARGUMENT
           10
         Label : ARGUMENT
           12
+        Label : NAME
+          9
       Label : RIGHT
         15
     Label : DEFINITION
       6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -69,12 +69,12 @@ Label : PROJECT
               14
               Label : LEFT
                 9
-                Label : NAME
-                  9
                 Label : ARGUMENT
                   10
                 Label : ARGUMENT
                   12
+                Label : NAME
+                  9
               Label : RIGHT
                 15
           Label : THEN
@@ -91,12 +91,12 @@ Label : PROJECT
               14
               Label : LEFT
                 9
-                Label : NAME
-                  9
                 Label : ARGUMENT
                   10
                 Label : ARGUMENT
                   12
+                Label : NAME
+                  9
               Label : RIGHT
                 15
           Label : THEN

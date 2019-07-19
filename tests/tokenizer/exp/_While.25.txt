@@ -1,27 +1,5 @@
 test
 Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-Label : GLOBAL
-  9
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-Label : GLOBAL
-  11
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-Label : GLOBAL
   25
   Label : DEFINITION
     25
@@ -71,6 +49,28 @@ Label : GLOBAL
     40
     Label : DEFINITION
       40
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
 Label : PROJECT
   1
   Label : DEFINITION
@@ -167,6 +167,12 @@ Label : PROJECT
             9
           Label : VALUE
             11
+          Label : VALUE
+            11
+            Label : DEFINITION
+              11
+            Label : DEFINITION
+              11
         Label : EXPRESSION
           23
           Label : BLOCK

@@ -91,7 +91,6 @@ class CouldUseCompact extends Analyzer {
                                      ->atomIs(self::$STRINGS_ALL)
                                      ->savePropertyAs('noDelimiter', 'name')
                                      ->makeVariableName('name')
-//                                     ->raw('sideEffect{ name = "\\$" + it.get().value("noDelimiter"); }')
                                      ->inIs('INDEX')
                                      ->outIs('VALUE')
                                      ->atomIs('Variable')

@@ -157,12 +157,12 @@ Label : PROJECT
                 18
                 Label : LEFT
                   15
-                  Label : NAME
-                    15
                   Label : ARGUMENT
                     16
                   Label : ARGUMENT
                     10
+                  Label : NAME
+                    15
                 Label : RIGHT
                   19
               Label : THEN
@@ -235,6 +235,14 @@ Label : PROJECT
                           11
                       Label : VALUE
                         40
+                      Label : VALUE
+                        40
+                        Label : DEFINITION
+                          40
+                        Label : DEFINITION
+                          40
+                        Label : DEFINITION
+                          40
                   Label : THEN
                     13
                     Label : EXPRESSION
@@ -269,3 +277,17 @@ Label : PROJECT
               8
           Label : VALUE
             11
+          Label : VALUE
+            10
+            Label : DEFINITION
+              10
+            Label : DEFINITION
+              10
+          Label : VALUE
+            11
+            Label : DEFINITION
+              11
+            Label : DEFINITION
+              11
+            Label : DEFINITION
+              11

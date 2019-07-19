@@ -22,15 +22,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
     12
     Label : DEFAULT
       15
     Label : DEFINITION
       12
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
   Label : DEFINITION
     16
     Label : DEFINITION

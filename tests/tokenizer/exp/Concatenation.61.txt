@@ -23,8 +23,6 @@ Label : GLOBAL
             15
             Label : NEW
               16
-              Label : NAME
-                16
               Label : ARGUMENT
                 18
               Label : ARGUMENT
@@ -35,16 +33,14 @@ Label : GLOBAL
                     20
                   Label : VALUE
                     22
+              Label : NAME
+                16
           Label : CONCAT
             24
     Label : DEFINITION
       5
 Label : PROJECT
   1
-  Label : DEFINITION
-    22
-    Label : DEFINITION
-      22
   Label : DEFINITION
     5
     Label : DEFAULT
@@ -61,8 +57,6 @@ Label : PROJECT
             15
             Label : NEW
               16
-              Label : NAME
-                16
               Label : ARGUMENT
                 18
               Label : ARGUMENT
@@ -73,10 +67,16 @@ Label : PROJECT
                     20
                   Label : VALUE
                     22
+              Label : NAME
+                16
           Label : CONCAT
             24
     Label : DEFINITION
       5
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -101,8 +101,6 @@ Label : PROJECT
                   15
                   Label : NEW
                     16
-                    Label : NAME
-                      16
                     Label : ARGUMENT
                       18
                     Label : ARGUMENT
@@ -113,5 +111,7 @@ Label : PROJECT
                           20
                         Label : VALUE
                           22
+                    Label : NAME
+                      16
                 Label : CONCAT
                   24

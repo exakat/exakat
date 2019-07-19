@@ -1,4 +1,4 @@
-Version 1.8.8 (Wei Yuqing of Jiawu, coming up)
+Version 1.8.9 (Meng Feiqing of Jiachen, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,34 @@ Version 1.8.8 (Wei Yuqing of Jiawu, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.8 (Wei Yuqing of Jiawu, 2019-07-15)
++ Architecture
+    + Modernized tinkergraph support
+    + When pcntl is available, stubs are produced in a child process
+    + Removed duplicated methods
+    + Exported sequences to helpers
+    + More UT libraries are supported
+    + Federated BUSYTIMEOUT in constant
++ Report
+    + Ambassador and all dependend reports were refactored : menu is configurable with Yaml
+    + Emissary is the upcoming configurable report. 
++ Analysis
+    + New step : Load data from code
+    + New analysis : Variables used for setting aside value temporarily
+    + New analysis : Use PHP array_ functions, instead of loops
+    + Updated analysis : Unused methods now skips methods from PHP native interfaces (Arrayaccess)
+    + Updated analysis : No class for typehint is now omitting PHP and extensions classes
+    + Updated analysis : Switch to Switch applies to comparisons now
+    + Updated analysis : Close namingg was sped up significantly
+    + Updated analysis : array_column() suggestion was refined
+    + Updated analysis : Htmlentities parameters also support some parenthesis usage
+    + Updated analysis : Constant Scalar Expression only target specified expressions
+    + Updated analysis : Static Properties skip Virtual properties
+    + Checked unit tests : 3131 / 3155 test pass (99% pass)
++ Tokenizer
+    + Refactored support for Exit and Die
+    + Added raw support for phpdoc
 
 Version 1.8.7 (Hu Wenchang of Jiashen, 2019-07-08)
 + Architecture

@@ -11,8 +11,6 @@ Label : GLOBAL
     5
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         10
         Label : CONCAT
@@ -29,6 +27,8 @@ Label : GLOBAL
             14
       Label : ARGUMENT
         18
+      Label : NAME
+        8
     Label : DEFINITION
       5
 Label : GLOBAL
@@ -40,15 +40,9 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
     5
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         10
         Label : CONCAT
@@ -65,8 +59,14 @@ Label : PROJECT
             14
       Label : ARGUMENT
         18
+      Label : NAME
+        8
     Label : DEFINITION
       5
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
   Label : DEFINITION
     14
     Label : DEFINITION
@@ -83,8 +83,6 @@ Label : PROJECT
             5
           Label : RIGHT
             8
-            Label : NAME
-              8
             Label : ARGUMENT
               10
               Label : CONCAT
@@ -101,3 +99,5 @@ Label : PROJECT
                   14
             Label : ARGUMENT
               18
+            Label : NAME
+              8

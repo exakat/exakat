@@ -61,7 +61,7 @@ class Query {
             $command = $this->queryFactory->factory($name);
             $this->commands[] = $command->run(...$args);
         } catch (UnknownDsl $e) {
-            die('This is an unknown DSL : '.$name);
+            die('This is an unknown DSL : ' . $name);
         }
         
         return $this;

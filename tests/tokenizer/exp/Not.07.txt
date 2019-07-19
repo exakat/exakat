@@ -27,12 +27,12 @@ Label : PROJECT
                 7
             Label : RIGHT
               10
-              Label : NAME
-                10
               Label : ARGUMENT
                 11
               Label : ARGUMENT
                 12
+              Label : NAME
+                10
           Label : THEN
             13
             Label : EXPRESSION

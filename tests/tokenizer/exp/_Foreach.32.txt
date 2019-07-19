@@ -34,6 +34,10 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
     10
     Label : DEFINITION
       10
@@ -41,10 +45,6 @@ Label : PROJECT
       10
     Label : DEFINITION
       10
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -113,5 +113,17 @@ Label : PROJECT
             8
           Label : VALUE
             12
+          Label : VALUE
+            10
+            Label : DEFINITION
+              10
+            Label : DEFINITION
+              10
+            Label : DEFINITION
+              10
+          Label : VALUE
+            12
+            Label : DEFINITION
+              12
     Label : EXPRESSION
       26

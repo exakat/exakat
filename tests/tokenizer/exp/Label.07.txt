@@ -20,13 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
     6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
   Label : DEFINITION
     18
     Label : DEFINITION
@@ -61,8 +61,6 @@ Label : PROJECT
                 3
                 Label : EXPRESSION
                   17
-                  Label : NAME
-                    17
                   Label : ARGUMENT
                     20
                     Label : INDEX
@@ -71,5 +69,7 @@ Label : PROJECT
                       18
                   Label : ARGUMENT
                     22
+                  Label : NAME
+                    17
           Label : CONDITION
             6

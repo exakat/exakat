@@ -119,8 +119,6 @@ Label : PROJECT
           38
           Label : METHOD
             26
-            Label : NAME
-              26
             Label : ARGUMENT
               28
             Label : ARGUMENT
@@ -163,6 +161,8 @@ Label : PROJECT
                         49
                     Label : OBJECT
                       48
+            Label : NAME
+              26
           Label : OBJECT
             12
             Label : INDEX

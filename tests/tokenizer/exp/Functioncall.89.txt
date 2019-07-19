@@ -36,8 +36,8 @@ Label : PROJECT
           Label : VARIABLE
             10
         Label : EXPRESSION
+          7
+        Label : EXPRESSION
           6
           Label : ARGUMENT
             7
-        Label : EXPRESSION
-          7

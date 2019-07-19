@@ -44,8 +44,8 @@ abstract class Tasks {
 
     public static $semaphore      = null;
     public static $semaphorePort  = null;
-    
-    protected $themes = null;
+
+    protected $rulesets = null;
 
     const  NONE    = 1;
     const  ANYTIME = 2;
@@ -112,11 +112,11 @@ abstract class Tasks {
             $this->datastore = new Datastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
         }
 
-        $this->themes = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                     $this->config->ext,
-                                     $this->config->dev,
-                                     $this->config->themas);
-                                   
+        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                       $this->config->ext,
+                                       $this->config->dev,
+                                       $this->config->themas);
+
         Data::$config = $config;
     }
 

@@ -26,13 +26,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
     8
     Label : DEFINITION
       8
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
   Label : DEFINITION
     15
     Label : DEFINITION
@@ -65,13 +65,17 @@ Label : PROJECT
                   7
               Label : ELSE
                 13
-                Label : NAME
-                  13
                 Label : ARGUMENT
                   14
                 Label : ARGUMENT
                   15
+                Label : NAME
+                  13
               Label : THEN
                 11
           Label : VALUE
             17
+          Label : VALUE
+            17
+            Label : DEFINITION
+              17

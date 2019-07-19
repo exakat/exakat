@@ -32,7 +32,7 @@ Label : GLOBAL
   Label : DEFINITION
     8
     Label : DEFAULT
-      19
+      7
       Label : LEFT
         10
       Label : RIGHT
@@ -40,7 +40,7 @@ Label : GLOBAL
         Label : LEFT
           12
         Label : RIGHT
-          20
+          7
           Label : LEFT
             14
           Label : RIGHT
@@ -60,7 +60,7 @@ Label : GLOBAL
           Label : RIGHT
             16
     Label : DEFAULT
-      7
+      19
       Label : LEFT
         10
       Label : RIGHT
@@ -68,7 +68,7 @@ Label : GLOBAL
         Label : LEFT
           12
         Label : RIGHT
-          7
+          20
           Label : LEFT
             14
           Label : RIGHT
@@ -104,13 +104,13 @@ Label : GLOBAL
   Label : DEFINITION
     12
     Label : DEFAULT
-      20
+      19
       Label : LEFT
         14
       Label : RIGHT
         16
     Label : DEFAULT
-      19
+      20
       Label : LEFT
         14
       Label : RIGHT
@@ -180,7 +180,7 @@ Label : PROJECT
   Label : DEFINITION
     8
     Label : DEFAULT
-      19
+      7
       Label : LEFT
         10
       Label : RIGHT
@@ -188,7 +188,7 @@ Label : PROJECT
         Label : LEFT
           12
         Label : RIGHT
-          20
+          7
           Label : LEFT
             14
           Label : RIGHT
@@ -208,7 +208,7 @@ Label : PROJECT
           Label : RIGHT
             16
     Label : DEFAULT
-      7
+      19
       Label : LEFT
         10
       Label : RIGHT
@@ -216,7 +216,7 @@ Label : PROJECT
         Label : LEFT
           12
         Label : RIGHT
-          7
+          20
           Label : LEFT
             14
           Label : RIGHT
@@ -248,13 +248,13 @@ Label : PROJECT
   Label : DEFINITION
     12
     Label : DEFAULT
-      20
+      19
       Label : LEFT
         14
       Label : RIGHT
         16
     Label : DEFAULT
-      19
+      20
       Label : LEFT
         14
       Label : RIGHT

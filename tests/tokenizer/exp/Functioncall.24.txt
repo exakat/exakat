@@ -81,12 +81,12 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               14
             Label : ARGUMENT
               15
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
@@ -101,27 +101,27 @@ Label : PROJECT
               5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               20
             Label : ARGUMENT
               21
+            Label : NAME
+              13
         Label : EXPRESSION
           12
           Label : LEFT
             5
-            Label : NAME
-              5
             Label : ARGUMENT
               22
             Label : ARGUMENT
               24
+            Label : NAME
+              5
           Label : RIGHT
             13
-            Label : NAME
-              13
             Label : ARGUMENT
               26
             Label : ARGUMENT
               27
+            Label : NAME
+              13

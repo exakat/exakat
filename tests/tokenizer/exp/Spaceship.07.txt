@@ -77,8 +77,6 @@ Label : PROJECT
               9
         Label : EXPRESSION
           11
-          Label : NAME
-            11
           Label : ARGUMENT
             8
             Label : LEFT
@@ -91,3 +89,5 @@ Label : PROJECT
               16
             Label : RIGHT
               18
+          Label : NAME
+            11

@@ -9,12 +9,6 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : BLOCK
-            8
-            Label : EXPRESSION
-              9
-              Label : RETURN
-                10
           Label : ARGUMENT
             6
             Label : NAME
@@ -23,5 +17,11 @@ Label : PROJECT
             7
             Label : NAME
               7
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : RETURN
+                10
           Label : NAME
             5

@@ -52,10 +52,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
     Label : DEFAULT
       13
@@ -85,6 +81,10 @@ Label : PROJECT
             22
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     14
     Label : DEFINITION

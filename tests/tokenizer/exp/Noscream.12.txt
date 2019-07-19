@@ -37,8 +37,6 @@ Label : PROJECT
               5
           Label : RIGHT
             9
-            Label : NAME
-              9
             Label : ARGUMENT
               13
               Label : CONCAT
@@ -47,3 +45,5 @@ Label : PROJECT
                 14
             Label : ARGUMENT
               15
+            Label : NAME
+              9

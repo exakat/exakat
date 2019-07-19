@@ -26,10 +26,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    15
-    Label : DEFINITION
-      15
-  Label : DEFINITION
     7
     Label : DEFAULT
       10
@@ -39,6 +35,10 @@ Label : PROJECT
       7
     Label : DEFINITION
       7
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
   Label : DEFINITION
     17
     Label : DEFINITION

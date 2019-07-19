@@ -17,8 +17,6 @@ Label : GLOBAL
           20
           Label : LEFT
             9
-            Label : NAME
-              9
             Label : ARGUMENT
               12
               Label : INDEX
@@ -37,6 +35,8 @@ Label : GLOBAL
                   16
               Label : CONCAT
                 19
+            Label : NAME
+              9
           Label : RIGHT
             21
             Label : NOT
@@ -79,8 +79,6 @@ Label : PROJECT
           20
           Label : LEFT
             9
-            Label : NAME
-              9
             Label : ARGUMENT
               12
               Label : INDEX
@@ -99,6 +97,8 @@ Label : PROJECT
                   16
               Label : CONCAT
                 19
+            Label : NAME
+              9
           Label : RIGHT
             21
             Label : NOT
@@ -139,8 +139,6 @@ Label : PROJECT
                 20
                 Label : LEFT
                   9
-                  Label : NAME
-                    9
                   Label : ARGUMENT
                     12
                     Label : INDEX
@@ -159,6 +157,8 @@ Label : PROJECT
                         16
                     Label : CONCAT
                       19
+                  Label : NAME
+                    9
                 Label : RIGHT
                   21
                   Label : NOT

@@ -28,14 +28,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
@@ -43,6 +35,14 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     17
     Label : DEFINITION

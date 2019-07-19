@@ -56,6 +56,8 @@ Label : PROJECT
                   Label : OBJECT
                     13
           Label : DEFINITION
+            17
+          Label : DEFINITION
             10
             Label : DEFINITION
               10
@@ -65,8 +67,6 @@ Label : PROJECT
               13
             Label : DEFINITION
               13
-          Label : DEFINITION
-            17
           Label : NAME
             5
           Label : RETURNED

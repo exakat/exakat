@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  21
+  25
   Label : DEFINITION
-    21
+    25
     Label : DEFINITION
-      21
+      25
 Label : GLOBAL
   12
   Label : DEFINITION
@@ -12,21 +12,21 @@ Label : GLOBAL
     Label : DEFINITION
       12
 Label : GLOBAL
-  25
-  Label : DEFINITION
-    25
-    Label : DEFINITION
-      25
-Label : PROJECT
-  1
+  21
   Label : DEFINITION
     21
     Label : DEFINITION
       21
+Label : PROJECT
+  1
   Label : DEFINITION
     12
     Label : DEFINITION
       12
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
   Label : DEFINITION
     25
     Label : DEFINITION
@@ -59,8 +59,6 @@ Label : PROJECT
                 19
                 Label : LEFT
                   8
-                  Label : NAME
-                    8
                   Label : ARGUMENT
                     10
                   Label : ARGUMENT
@@ -73,6 +71,8 @@ Label : PROJECT
                         14
                     Label : OBJECT
                       12
+                  Label : NAME
+                    8
                 Label : RIGHT
                   20
           Label : CONDITION

@@ -85,8 +85,6 @@ Label : PROJECT
               14
           Label : RIGHT
             23
-            Label : NAME
-              23
             Label : ARGUMENT
               18
               Label : CONCAT
@@ -95,6 +93,8 @@ Label : PROJECT
                 27
             Label : ARGUMENT
               29
+            Label : NAME
+              23
         Label : EXPRESSION
           30
           Label : BLOCK
@@ -109,3 +109,11 @@ Label : PROJECT
             31
           Label : VALUE
             33
+          Label : VALUE
+            32
+            Label : DEFINITION
+              32
+          Label : VALUE
+            33
+            Label : DEFINITION
+              33

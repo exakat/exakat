@@ -5,12 +5,12 @@ Label : GLOBAL
     11
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         13
       Label : ARGUMENT
         14
+      Label : NAME
+        8
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -21,12 +21,12 @@ Label : GLOBAL
     5
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         9
       Label : ARGUMENT
         10
+      Label : NAME
+        8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -49,12 +49,12 @@ Label : PROJECT
     11
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         13
       Label : ARGUMENT
         14
+      Label : NAME
+        8
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -63,12 +63,12 @@ Label : PROJECT
     5
     Label : DEFAULT
       8
-      Label : NAME
-        8
       Label : ARGUMENT
         9
       Label : ARGUMENT
         10
+      Label : NAME
+        8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -93,24 +93,24 @@ Label : PROJECT
             5
           Label : RIGHT
             8
-            Label : NAME
-              8
             Label : ARGUMENT
               9
             Label : ARGUMENT
               10
+            Label : NAME
+              8
         Label : EXPRESSION
           7
           Label : LEFT
             11
           Label : RIGHT
             8
-            Label : NAME
-              8
             Label : ARGUMENT
               13
             Label : ARGUMENT
               14
+            Label : NAME
+              8
         Label : EXPRESSION
           15
           Label : BLOCK
@@ -127,3 +127,7 @@ Label : PROJECT
               11
           Label : VALUE
             17
+          Label : VALUE
+            17
+            Label : DEFINITION
+              17

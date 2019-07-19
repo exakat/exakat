@@ -41,8 +41,6 @@ Label : GLOBAL
       10
       Label : METHOD
         59
-        Label : NAME
-          59
         Label : ARGUMENT
           61
         Label : ARGUMENT
@@ -75,6 +73,8 @@ Label : GLOBAL
               70
             Label : OBJECT
               7
+        Label : NAME
+          59
       Label : OBJECT
         10
         Label : MEMBER
@@ -118,6 +118,18 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
     39
     Label : DEFAULT
       38
@@ -136,25 +148,11 @@ Label : PROJECT
     Label : DEFINITION
       39
   Label : DEFINITION
-    15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-    Label : DEFINITION
-      15
-  Label : DEFINITION
     55
     Label : DEFAULT
       10
       Label : METHOD
         59
-        Label : NAME
-          59
         Label : ARGUMENT
           61
         Label : ARGUMENT
@@ -187,6 +185,8 @@ Label : PROJECT
               70
             Label : OBJECT
               7
+        Label : NAME
+          59
       Label : OBJECT
         10
         Label : MEMBER
@@ -353,8 +353,6 @@ Label : PROJECT
                   10
                   Label : METHOD
                     59
-                    Label : NAME
-                      59
                     Label : ARGUMENT
                       61
                     Label : ARGUMENT
@@ -387,6 +385,8 @@ Label : PROJECT
                           70
                         Label : OBJECT
                           7
+                    Label : NAME
+                      59
                   Label : OBJECT
                     10
                     Label : MEMBER

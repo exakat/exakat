@@ -17,8 +17,6 @@ Label : PROJECT
             5
         Label : EXPRESSION
           5
-          Label : NAME
-            5
           Label : ARGUMENT
             8
             Label : CAST
@@ -27,3 +25,5 @@ Label : PROJECT
             10
             Label : CAST
               11
+          Label : NAME
+            5

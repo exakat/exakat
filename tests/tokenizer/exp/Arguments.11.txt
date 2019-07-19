@@ -11,8 +11,6 @@ Label : GLOBAL
           8
           Label : NOT
             9
-            Label : NAME
-              9
             Label : ARGUMENT
               14
               Label : INDEX
@@ -25,6 +23,8 @@ Label : GLOBAL
                   10
             Label : ARGUMENT
               16
+            Label : NAME
+              9
         Label : RIGHT
           19
           Label : CODE
@@ -33,8 +33,6 @@ Label : GLOBAL
               8
               Label : NOT
                 20
-                Label : NAME
-                  20
                 Label : ARGUMENT
                   21
                 Label : ARGUMENT
@@ -47,6 +45,8 @@ Label : GLOBAL
                       24
                     Label : OBJECT
                       22
+                Label : NAME
+                  20
             Label : RIGHT
               8
               Label : NOT
@@ -127,8 +127,6 @@ Label : PROJECT
           8
           Label : NOT
             9
-            Label : NAME
-              9
             Label : ARGUMENT
               14
               Label : INDEX
@@ -141,6 +139,8 @@ Label : PROJECT
                   10
             Label : ARGUMENT
               16
+            Label : NAME
+              9
         Label : RIGHT
           19
           Label : CODE
@@ -149,8 +149,6 @@ Label : PROJECT
               8
               Label : NOT
                 20
-                Label : NAME
-                  20
                 Label : ARGUMENT
                   21
                 Label : ARGUMENT
@@ -163,6 +161,8 @@ Label : PROJECT
                       24
                     Label : OBJECT
                       22
+                Label : NAME
+                  20
             Label : RIGHT
               8
               Label : NOT
@@ -239,8 +239,6 @@ Label : PROJECT
                 8
                 Label : NOT
                   9
-                  Label : NAME
-                    9
                   Label : ARGUMENT
                     14
                     Label : INDEX
@@ -253,6 +251,8 @@ Label : PROJECT
                         10
                   Label : ARGUMENT
                     16
+                  Label : NAME
+                    9
               Label : RIGHT
                 19
                 Label : CODE
@@ -261,8 +261,6 @@ Label : PROJECT
                     8
                     Label : NOT
                       20
-                      Label : NAME
-                        20
                       Label : ARGUMENT
                         21
                       Label : ARGUMENT
@@ -275,6 +273,8 @@ Label : PROJECT
                             24
                           Label : OBJECT
                             22
+                      Label : NAME
+                        20
                   Label : RIGHT
                     8
                     Label : NOT

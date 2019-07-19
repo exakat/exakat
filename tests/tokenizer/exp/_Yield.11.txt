@@ -82,6 +82,18 @@ Label : PROJECT
               Label : CONCAT
                 11
               Label : CONCAT
+                16
+                Label : LEFT
+                  14
+                  Label : YIELD
+                    15
+                Label : RIGHT
+                  17
+            Label : DEFAULT
+              13
+              Label : CONCAT
+                11
+              Label : CONCAT
                 18
                 Label : YIELD
                   19
@@ -101,18 +113,6 @@ Label : PROJECT
                 14
                 Label : YIELD
                   6
-            Label : DEFAULT
-              13
-              Label : CONCAT
-                11
-              Label : CONCAT
-                16
-                Label : LEFT
-                  14
-                  Label : YIELD
-                    15
-                Label : RIGHT
-                  17
             Label : DEFINITION
               9
             Label : DEFINITION
@@ -145,3 +145,9 @@ Label : PROJECT
               5
           Label : VALUE
             22
+          Label : VALUE
+            22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22

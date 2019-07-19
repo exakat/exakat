@@ -28,6 +28,7 @@ use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
+use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
@@ -35,7 +36,7 @@ use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'ambassador';
+    const CONFIG_YAML    = 'Ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -87,11 +88,11 @@ class Ambassador extends Reports {
             $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
         }
 
-        if ($this->themes !== null ){
-            $this->frequences        = $this->themes->getFrequences();
-            $this->timesToFix        = $this->themes->getTimesToFix();
-            $this->themesForAnalyzer = $this->themes->getRulesetsForAnalyzer();
-            $this->severities        = $this->themes->getSeverities();
+        if ($this->rulesets !== null ){
+            $this->frequences        = $this->rulesets->getFrequences();
+            $this->timesToFix        = $this->rulesets->getTimesToFix();
+            $this->themesForAnalyzer = $this->rulesets->getRulesetsForAnalyzer();
+            $this->severities        = $this->rulesets->getSeverities();
         }
     }
 
@@ -105,7 +106,7 @@ class Ambassador extends Reports {
     }
     
     protected function makeMenu() {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__.'/'.static::CONFIG_YAML.'.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/' . static::CONFIG_YAML . '.yaml');
         
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -146,7 +147,7 @@ class Ambassador extends Reports {
             $menu[] = '</ul>';
             $menu[] = '</li>';
             
-            $menu = implode(PHP_EOL.'  ', $menu);
+            $menu = implode(PHP_EOL . '  ', $menu);
             
         }
         
@@ -228,7 +229,7 @@ class Ambassador extends Reports {
         }
         
         if ($missing = $this->checkMissingRulesets()) {
-            print "Can't produce Ambassador format. There are " . count($missing) . ' missing themes : ' . implode(', ', $missing) . ".\n";
+            print "Can't produce Ambassador format. There are " . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
             return false;
         }
 
@@ -302,14 +303,14 @@ class Ambassador extends Reports {
     }
 
     protected function generateDocumentation(Section $section) {
-        $analyzersList = array_merge($this->themes->getRulesetsAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_merge($this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
 
         $baseHTML = $this->getBasedPage($section->source);
         $docHTML = array();
 
         foreach($analyzersList as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
+            $analyzer = $this->rulesets->getInstance($analyzerName, null, $this->config);
             $description = $this->getDocs($analyzerName);
             $analyzersDocHTML = '<h2><a href="issues.html#analyzer=' . $this->toId($analyzerName) . '" id="' . $this->toId($analyzerName) . '">' . $description['name'] . '</a></h2>';
 
@@ -692,9 +693,9 @@ JAVASCRIPT;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile($this->themes->getRulesetsAnalyzers($this->themesToShow));
+        $fileHTML = $this->getTopFile($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->themes->getRulesetsAnalyzers($this->themesToShow));
+        $analyzerHTML = $this->getTopAnalyzers($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<'JAVASCRIPT'
@@ -1472,7 +1473,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN (' . makeList($this->themes->getRulesetsAnalyzers(array($categorie))) . ')';
+            $list = 'IN (' . makeList($this->rulesets->getRulesetsAnalyzers(array($categorie))) . ')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1513,7 +1514,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = <<<SQL
@@ -1554,7 +1555,7 @@ HTML;
     }
 
     protected function getTotalAnalysedFile() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
@@ -1600,7 +1601,7 @@ HTML;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
@@ -1636,7 +1637,7 @@ SQL;
     }
     
     private function generateNoIssues(Section $section) {
-        $list = $this->themes->getRulesetsAnalyzers(array(
+        $list = $this->rulesets->getRulesetsAnalyzers(array(
         'Analyze',
         'Security',
         'Performances',
@@ -1668,7 +1669,7 @@ SQL;
         $filesHTML = '';
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
             
             if ($analyzer === null) {
                 continue;
@@ -1709,7 +1710,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
@@ -1744,7 +1745,7 @@ SQL;
 
     protected function getFilesCount($themes = null, $limit = null) {
         if ($themes === null) {
-            $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         } elseif (is_array($themes)) {
             $list = $themes;
         } else {
@@ -1772,7 +1773,7 @@ SQL;
 
     protected function getTopFile($theme, $file = 'issues') {
         if (is_string($theme)) {
-            $list = $this->themes->getRulesetsAnalyzers($theme);
+            $list = $this->rulesets->getRulesetsAnalyzers($theme);
         } elseif (is_array($theme)) {
             $list = $theme;
         } else {
@@ -1831,7 +1832,7 @@ SQL;
     }
 
     protected function getAnalyzersCount($limit) {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1854,7 +1855,7 @@ SQL;
 
     protected function getTopAnalyzers($theme, $file = 'issues') {
         if (is_string($theme)) {
-            $list = $this->themes->getRulesetsAnalyzers($theme);
+            $list = $this->rulesets->getRulesetsAnalyzers($theme);
         } elseif (is_array($theme)) {
             $list = $theme;
         } else {
@@ -1896,7 +1897,7 @@ SQL;
     }
 
     protected function getSeveritiesNumberBy($type = 'file') {
-        $list = $this->themes->getRulesetsAnalyzers($this->themesToShow);
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
         $query = <<<SQL
@@ -1953,15 +1954,24 @@ SQL;
     }
 
     private function generateNewIssues(Section $section) {
-        $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow));
+        $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
 
-        if (file_exists($this->config->dump_previous)) {
-            $oldissues = $this->getNewIssuesFaceted($this->themes->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
-            
-            $diff = array_diff($issues, $oldissues);
-        } else {
-            $diff = $issues;
+        $baselineStash = new BaselineStash($this->config);
+        $baseline = $baselineStash->getBaseline();
+
+        if (empty($baseline)) {
+            $this->generateNoResults($section);
+            return ;
         }
+        
+        if (!file_exists($baseline)) {
+            $this->generateNoResults($section);
+            return;
+        }
+        
+        $oldissues = $this->getNewIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow), $baseline);
+            
+        $diff = array_diff($issues, $oldissues);
 
         $this->generateIssuesEngine($section, $diff);
     }
@@ -1970,7 +1980,7 @@ SQL;
         if (!empty($issues)) {
             // Nothing, really
         } elseif (is_array($section->ruleset)) {
-            $issues = $this->getIssuesFaceted($this->themes->getRulesetsAnalyzers($section->ruleset));
+            $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
         } else {
             $issues = $this->getIssuesFaceted($section->ruleset);
         }
@@ -2082,7 +2092,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
         if (is_string($theme)) {
-            $list = $this->themes->getRulesetsAnalyzers(array($theme));
+            $list = $this->rulesets->getRulesetsAnalyzers(array($theme));
         } else {
             $list = $theme;
         }
@@ -2177,7 +2187,7 @@ SQL;
     protected function generateAnalyzersList(Section $section) {
         $analyzers = array();
 
-        foreach($this->themes->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
+        foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
             $analyzers []= '<tr><td>' . $this->getDocs($analyzer, 'name') . "</td></tr>\n";
         }
         $analyzers = implode(PHP_EOL, $analyzers);
@@ -2457,7 +2467,7 @@ SQL;
         $table []= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
-            $analyzer = $this->themes->getInstance($name, null, $this->config);
+            $analyzer = $this->rulesets->getInstance($name, null, $this->config);
             if ($analyzer === null) {
                 continue;
             }
@@ -2777,7 +2787,7 @@ SQL
         $compatibility = array();
         $skipped       = array();
 
-        $list = $this->themes->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
+        $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($list) . ')');
         $counts = array();
@@ -3003,23 +3013,24 @@ SQL
         }
 
         if (empty($list)) {
-            $theTable = 'No interface were found in this repository.';
-        } else {
-            array_sub_sort($list);
-
-            $secondaries = array_merge(...array_values($list));
-            $top = array_diff(array_keys($list), $secondaries);
-            
-            $theTableArray = array();
-            foreach($top as $t) {
-                $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
-            }
-            $theTable = implode(PHP_EOL, $theTableArray);
+            $this->generateNoResults($section);
+            return;
         }
+        
+        array_sub_sort($list);
+
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        $theTableArray = array();
+        foreach($top as $t) {
+            $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
+        }
+        $theTable = implode(PHP_EOL, $theTableArray);
         
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here is the interface tree : an interface is extended by another interface. Interface without extension are not represented here.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
        
@@ -4487,7 +4498,15 @@ JAVASCRIPT;
 
         $this->putBasedPage($section->file, $finalHTML);
     }
-    
+
+    private function generateNoResults(Section $section) {
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE',       $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', $section->title);
+        $html = $this->injectBloc($html, 'CONTENT',     'This section is empty : no result where found.');
+        $this->putBasedPage($section->source, $html);
+    }    
+
     private function generateStats(Section $section) {
         $results = new Stats($this->config);
         $report = $results->generate(null, Reports::INLINE);
@@ -4678,7 +4697,7 @@ HTML;
     }
     
     private function generateConcentratedIssues(Section $section) {
-        $listAnalyzers = $this->themes->getRulesetsAnalyzers(array('Analyze'));
+        $listAnalyzers = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
 
         $sql = <<<SQL

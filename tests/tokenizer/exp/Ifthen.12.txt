@@ -113,8 +113,6 @@ Label : PROJECT
                   20
               Label : RIGHT
                 24
-                Label : NAME
-                  24
                 Label : ARGUMENT
                   22
                   Label : INDEX
@@ -125,8 +123,6 @@ Label : PROJECT
                   33
                   Label : LEFT
                     28
-                    Label : NAME
-                      28
                     Label : ARGUMENT
                       22
                       Label : INDEX
@@ -135,8 +131,12 @@ Label : PROJECT
                         29
                     Label : ARGUMENT
                       32
+                    Label : NAME
+                      28
                   Label : RIGHT
                     13
+                Label : NAME
+                  24
           Label : THEN
             7
             Label : EXPRESSION

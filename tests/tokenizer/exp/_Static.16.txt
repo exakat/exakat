@@ -11,6 +11,8 @@ Label : PROJECT
           5
           Label : DEFINITION
             16
+          Label : DEFINITION
+            16
             Label : ARGUMENT
               30
             Label : ARGUMENT
@@ -19,8 +21,6 @@ Label : PROJECT
               32
             Label : NAME
               16
-          Label : DEFINITION
-            16
           Label : METHOD
             25
             Label : ARGUMENT

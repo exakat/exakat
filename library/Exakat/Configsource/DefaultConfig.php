@@ -67,7 +67,7 @@ class DefaultConfig extends Config {
                                'thema'          => array(),
                                'analyzers'      => array(),
                                'report'         => 'Diplomat',
-                               'format'         => array('Text'),
+                               'project_reports'=> array('Text'),
                                'file'           =>  '',
                                'style'          => 'ALL',
  
@@ -79,10 +79,6 @@ class DefaultConfig extends Config {
                                'tinkergraph_port'   => '7474',
                                'tinkergraph_folder' => 'tinkergraph',
 
-                               'bitsy_host'         => '127.0.0.1',
-                               'bitsy_port'         => '8182',
-                               'bitsy_folder'       => 'tinkergraph',
- 
                                'branch'         => '',
                                'tag'            => '',
  
@@ -101,7 +97,10 @@ class DefaultConfig extends Config {
  
                                'phpversion'    => '7.3',
                                'token_limit'   => '1000000',
-                               
+
+                               'baseline_use'  => 'last',    // none, last, name, number
+                               'baseline_set'  => 'one',   // none, one, always
+
                                'concurencyCheck' => 7610,
  
                                'command'       => 'version',

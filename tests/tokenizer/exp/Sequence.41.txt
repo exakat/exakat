@@ -11,12 +11,12 @@ Label : GLOBAL
     9
     Label : DEFAULT
       12
-      Label : NAME
-        12
       Label : ARGUMENT
         13
       Label : ARGUMENT
         14
+      Label : NAME
+        12
     Label : DEFINITION
       9
 Label : GLOBAL
@@ -47,12 +47,12 @@ Label : PROJECT
     9
     Label : DEFAULT
       12
-      Label : NAME
-        12
       Label : ARGUMENT
         13
       Label : ARGUMENT
         14
+      Label : NAME
+        12
     Label : DEFINITION
       9
   Label : DEFINITION
@@ -85,18 +85,16 @@ Label : PROJECT
                 9
               Label : RIGHT
                 12
-                Label : NAME
-                  12
                 Label : ARGUMENT
                   13
                 Label : ARGUMENT
                   14
+                Label : NAME
+                  12
         Label : EXPRESSION
           33
           Label : METHOD
             21
-            Label : NAME
-              21
             Label : ARGUMENT
               22
             Label : ARGUMENT
@@ -113,6 +111,8 @@ Label : PROJECT
                     30
                   Label : CONCAT
                     31
+            Label : NAME
+              21
           Label : OBJECT
             20
             Label : CLASS

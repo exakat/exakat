@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 08 Jul 2019 14:20:27 +0000
-.. comment: Generation hash : 67413e0caf68b8507bdf4235611d913de8eb00f0
+.. comment: Generation date : Thu, 18 Jul 2019 12:44:45 +0000
+.. comment: Generation hash : ef609807547c586399fc46811da5c4096767fd68
 
 
 .. _analyze:
@@ -989,7 +989,7 @@ Total : 3 analysis
 Dead code
 +++++++++
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -1016,6 +1016,7 @@ Total : 25 analysis
 * :ref:`Unused Protected Methods <unused-protected-methods>`
 * :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Use <unused-use>`
+* :ref:`Useless Type Check <useless-type-check>`
 
 .. _lintbutwontexec:
 
@@ -1153,7 +1154,7 @@ Total : 40 analysis
 Suggestions
 +++++++++++
 
-Total : 84 analysis
+Total : 86 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1208,6 +1209,7 @@ Total : 84 analysis
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Reuse Variable <reuse-variable>`
+* :ref:`Set Aside Code <set-aside-code>`
 * :ref:`Should Deep Clone <should-deep-clone>`
 * :ref:`Should Have Destructor <should-have-destructor>`
 * :ref:`Should Preprocess Chr <should-preprocess-chr>`
@@ -1226,6 +1228,7 @@ Total : 84 analysis
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Use Array Functions <use-array-functions>`
 * :ref:`Use Basename Suffix <use-basename-suffix>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`

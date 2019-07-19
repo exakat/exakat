@@ -350,7 +350,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Thelia <https://thelia.net/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Tikiwiki <https://tiki.org/>`_
-* Tine2.0
 * `Tine20 <https://www.tine20.com/>`_
 * `Traq <https://traq.io/>`_
 * `Typo3 <https://typo3.org/>`_
@@ -362,7 +361,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
-* openconf
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `shopware <https://www.shopware.com/>`_
@@ -430,6 +428,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.8.9
+
+  * Classes/DisconnectedClasses (Classes/DisconnectedClasses)
+  * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
+
+* 1.8.8
+
+  * Set Aside Code (Structures/SetAside)
+  * Use Array Functions (Structures/UseArrayFunctions ; Suggestions)
+
 * 1.8.7
 
   * Cant Use Function (Functions/CantUse)
@@ -439,7 +447,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.8.6
 
-  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Unassigned)
+  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Internal)
   * Dependant Abstract Classes (Classes/DependantAbstractClass ; Analyze, ClassReview)
   * Infinite Recursion (Structures/InfiniteRecursion ; Analyze)
   * Modules/IncomingData (Modules/IncomingData ; Internal)
@@ -2139,6 +2147,7 @@ List of external links mentionned in this documentation.
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
@@ -2468,8 +2477,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2602,7 +2611,7 @@ List of external links mentionned in this documentation.
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
-* `The main PPA for PHP (7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
@@ -2616,6 +2625,7 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3700,6 +3710,7 @@ _________
 |   analyzer[] = "Functions/UnusedFunctions";
 |   analyzer[] = "Functions/UnusedInheritedVariable";
 |   analyzer[] = "Functions/UnusedReturnedValue";
+|   analyzer[] = "Functions/UselessTypeCheck";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Namespaces/EmptyNamespace";
 |   analyzer[] = "Namespaces/UnusedUse";
@@ -3936,12 +3947,14 @@ ___________
 |   analyzer[] = "Structures/PossibleIncrement";
 |   analyzer[] = "Structures/RepeatedPrint";
 |   analyzer[] = "Structures/ReuseVariable";
+|   analyzer[] = "Structures/SetAside";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";
 |   analyzer[] = "Structures/ShouldUseOperator";
 |   analyzer[] = "Structures/SubstrLastArg";
 |   analyzer[] = "Structures/SubstrToTrim";
 |   analyzer[] = "Structures/UnreachableCode";
+|   analyzer[] = "Structures/UseArrayFunctions";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Structures/WhileListEach";

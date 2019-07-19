@@ -26,12 +26,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    59
-    Label : DEFINITION
-      59
-    Label : DEFINITION
-      59
-  Label : DEFINITION
     34
     Label : DEFINITION
       34
@@ -39,6 +33,12 @@ Label : PROJECT
       34
     Label : DEFINITION
       34
+  Label : DEFINITION
+    59
+    Label : DEFINITION
+      59
+    Label : DEFINITION
+      59
   Label : DEFINITION
     71
     Label : DEFINITION
@@ -159,8 +159,6 @@ Label : PROJECT
                         51
                       Label : METHOD
                         53
-                        Label : NAME
-                          53
                         Label : ARGUMENT
                           55
                         Label : ARGUMENT
@@ -177,6 +175,8 @@ Label : PROJECT
                               59
                           Label : NAME
                             57
+                        Label : NAME
+                          53
               Label : THEN
                 3
                 Label : EXPRESSION
@@ -189,8 +189,6 @@ Label : PROJECT
                         51
                       Label : METHOD
                         53
-                        Label : NAME
-                          53
                         Label : ARGUMENT
                           55
                         Label : ARGUMENT
@@ -207,6 +205,8 @@ Label : PROJECT
                               59
                           Label : NAME
                             57
+                        Label : NAME
+                          53
             Label : EXPRESSION
               63
         Label : EXPRESSION

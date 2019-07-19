@@ -66,6 +66,10 @@ Label : PROJECT
                     Label : VARIABLE
                       26
           Label : DEFINITION
+            26
+            Label : DEFINITION
+              26
+          Label : DEFINITION
             11
             Label : DEFINITION
               11
@@ -79,9 +83,5 @@ Label : PROJECT
               15
             Label : DEFINITION
               15
-          Label : DEFINITION
-            26
-            Label : DEFINITION
-              26
           Label : NAME
             5

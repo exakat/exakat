@@ -43,8 +43,6 @@ Label : PROJECT
                   12
                   Label : LEFT
                     19
-                    Label : NAME
-                      19
                     Label : ARGUMENT
                       18
                       Label : MEMBER
@@ -53,6 +51,8 @@ Label : PROJECT
                         20
                     Label : ARGUMENT
                       23
+                    Label : NAME
+                      19
                   Label : RIGHT
                     11
           Label : DEFINITION

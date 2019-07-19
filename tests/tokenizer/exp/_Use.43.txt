@@ -71,7 +71,7 @@ Label : PROJECT
               14
             Label : NAME
               9
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 8
                 Label : AS
                   9
@@ -85,7 +85,7 @@ Label : PROJECT
               14
             Label : NAME
               10
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 8
                 Label : AS
                   9
@@ -99,7 +99,7 @@ Label : PROJECT
               14
             Label : NAME
               13
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 8
                 Label : AS
                   11
@@ -113,7 +113,7 @@ Label : PROJECT
               14
             Label : NAME
               13
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 8
                 Label : AS
                   11

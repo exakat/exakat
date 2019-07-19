@@ -10,12 +10,6 @@ Label : GLOBAL
     Label : DEFINITION
       11
 Label : GLOBAL
-  8
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-Label : GLOBAL
   14
   Label : DEFINITION
     14
@@ -29,8 +23,18 @@ Label : GLOBAL
     16
     Label : DEFINITION
       16
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
   Label : DEFINITION
     11
     Label : DEFAULT
@@ -39,10 +43,6 @@ Label : PROJECT
         14
     Label : DEFINITION
       11
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
   Label : DEFINITION
     14
     Label : DEFINITION

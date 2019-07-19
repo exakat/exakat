@@ -91,12 +91,12 @@ Label : PROJECT
                       9
                   Label : CONCAT
                     14
-                    Label : NAME
-                      14
                     Label : ARGUMENT
                       15
                     Label : ARGUMENT
                       17
+                    Label : NAME
+                      14
                 Label : RIGHT
                   11
                   Label : INDEX
@@ -135,8 +135,6 @@ Label : PROJECT
                     38
                     Label : LEFT
                       34
-                      Label : NAME
-                        34
                       Label : ARGUMENT
                         11
                         Label : INDEX
@@ -145,6 +143,8 @@ Label : PROJECT
                           35
                       Label : ARGUMENT
                         37
+                      Label : NAME
+                        34
                     Label : RIGHT
                       17
                   Label : NAME

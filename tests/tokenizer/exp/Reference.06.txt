@@ -8,21 +8,21 @@ Label : GLOBAL
       Label : CLASS
         8
       Label : METHOD
-        9
-        Label : ARGUMENT
-          12
-        Label : NAME
-          9
-    Label : DEFAULT
-      10
-      Label : CLASS
-        8
-      Label : METHOD
         11
         Label : ARGUMENT
           12
         Label : NAME
           11
+    Label : DEFAULT
+      10
+      Label : CLASS
+        8
+      Label : METHOD
+        9
+        Label : ARGUMENT
+          12
+        Label : NAME
+          9
     Label : DEFAULT
       10
       Label : CLASS
@@ -44,21 +44,21 @@ Label : PROJECT
       Label : CLASS
         8
       Label : METHOD
-        9
-        Label : ARGUMENT
-          12
-        Label : NAME
-          9
-    Label : DEFAULT
-      10
-      Label : CLASS
-        8
-      Label : METHOD
         11
         Label : ARGUMENT
           12
         Label : NAME
           11
+    Label : DEFAULT
+      10
+      Label : CLASS
+        8
+      Label : METHOD
+        9
+        Label : ARGUMENT
+          12
+        Label : NAME
+          9
     Label : DEFAULT
       10
       Label : CLASS

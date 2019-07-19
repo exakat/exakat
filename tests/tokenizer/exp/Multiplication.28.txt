@@ -12,7 +12,7 @@ Label : GLOBAL
   Label : DEFINITION
     5
     Label : DEFAULT
-      20
+      10
       Label : LEFT
         8
       Label : RIGHT
@@ -34,7 +34,7 @@ Label : GLOBAL
             Label : NAME
               13
     Label : DEFAULT
-      10
+      20
       Label : LEFT
         8
       Label : RIGHT
@@ -78,7 +78,7 @@ Label : PROJECT
   Label : DEFINITION
     5
     Label : DEFAULT
-      20
+      10
       Label : LEFT
         8
       Label : RIGHT
@@ -100,7 +100,7 @@ Label : PROJECT
             Label : NAME
               13
     Label : DEFAULT
-      10
+      20
       Label : LEFT
         8
       Label : RIGHT

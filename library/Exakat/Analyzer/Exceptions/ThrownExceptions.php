@@ -26,9 +26,32 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class ThrownExceptions extends Analyzer {
+    public function dependsOn() {
+        return array('Exceptions/DefinedExceptions');
+    }
+
     public function analyze() {
+        // class x extends \Exception
+        // throw new X
         $this->atomIs('Throw')
-             ->outIs('THROW');
+             ->outIs('THROW')
+             ->outIsIE(array('RIGHT', 'CODE'))
+             ->outIs('NEW')
+             ->inIs('DEFINITION')
+             ->atomIs('Class');
+        $this->prepareQuery();
+
+        // $x = new X;
+        // throw $x
+        $this->atomIs('Throw')
+             ->outIs('THROW')
+             ->inIs('DEFINITION')
+             ->outIs('DEFAULT')
+             ->atomIs('New')
+             ->outIs('NEW')
+             ->inIs('DEFINITION')
+             ->atomIs('Class')
+             ->analyzerIs('Exceptions/DefinedExceptions');
         $this->prepareQuery();
     }
 }

@@ -801,9 +801,13 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 Symfony analysis
 __________________________________________________
 
-This extension includes 13 analyzers.
+This extension includes 21 analyzers.
 
-*  (Symfony/Controller)
+*  (Symfony/UndefinedService)
+* CouldUseAutowiring (Symfony/CouldUseAutowiring)
+* MoveToAbstractController (Symfony/MoveToAbstractController)
+* NoActionSuffix (Symfony/NoActionSuffix)
+* NoContainerWithAbstractController (Symfony/NoContainerWithAbstractController)
 * Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
 * Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
 * Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
@@ -816,6 +820,9 @@ This extension includes 13 analyzers.
 * Symfony Function Usage (Symfony/SymfonyFunctionsUsage)
 * Symfony Missing (Symfony/SymfonyMissing)
 * Symfony Usage (Symfony/SymfonyUsage)
+* UndefinedServices (Symfony/UndefinedServices)
+* UnusedServices (Symfony/UnusedServices)
+* UnusedServies (Symfony/UnusedServies)
 
 
 Symfony rulesets

@@ -51,7 +51,7 @@ class CloseNaming extends Analyzer {
         }
 
         $closeVariables = array_keys($closeVariables);
-        $closeVariables = array_filter( $closeVariables, function($x) { return strlen($x) > 3; });
+        $closeVariables = array_filter( $closeVariables, function ($x) { return strlen($x) > 3; });
         if (!empty($closeVariables)) {
             $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
                  ->is('fullcode', $closeVariables, self::CASE_SENSITIVE);
@@ -74,7 +74,7 @@ class CloseNaming extends Analyzer {
         }
 
         // Identical, except for _ in the name
-        $cleaned = array_map(function($x) { return strtr('_', '', $x); }, $variables);
+        $cleaned = array_map(function ($x) { return strtr('_', '', $x); }, $variables);
         $counts = array_count_values($cleaned);
         $doubles = array_filter($counts, function ($x) { return $x > 1; });
         
@@ -85,7 +85,7 @@ class CloseNaming extends Analyzer {
         }
 
         // Identical, except for numbers
-        $cleaned = array_map(function($x) { return preg_replace('/\d/', '', $x); }, $variables);
+        $cleaned = array_map(function ($x) { return preg_replace('/\d/', '', $x); }, $variables);
         $counts = array_count_values($cleaned);
         $doubles = array_filter($counts, function ($x) { return $x > 1; });
 

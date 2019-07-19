@@ -49,8 +49,6 @@ Label : PROJECT
               21
               Label : LEFT
                 14
-                Label : NAME
-                  14
                 Label : ARGUMENT
                   16
                 Label : ARGUMENT
@@ -67,5 +65,7 @@ Label : PROJECT
                       18
                     Label : OBJECT
                       6
+                Label : NAME
+                  14
               Label : RIGHT
                 22

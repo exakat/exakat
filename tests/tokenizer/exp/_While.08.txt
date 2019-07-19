@@ -29,12 +29,12 @@ Label : GLOBAL
     35
     Label : DEFAULT
       38
-      Label : NAME
-        38
       Label : ARGUMENT
         39
       Label : ARGUMENT
         41
+      Label : NAME
+        38
     Label : DEFINITION
       35
 Label : GLOBAL
@@ -65,12 +65,12 @@ Label : PROJECT
     35
     Label : DEFAULT
       38
-      Label : NAME
-        38
       Label : ARGUMENT
         39
       Label : ARGUMENT
         41
+      Label : NAME
+        38
     Label : DEFINITION
       35
   Label : DEFINITION
@@ -159,11 +159,11 @@ Label : PROJECT
                 35
               Label : RIGHT
                 38
-                Label : NAME
-                  38
                 Label : ARGUMENT
                   39
                 Label : ARGUMENT
                   41
+                Label : NAME
+                  38
           Label : CONDITION
             10

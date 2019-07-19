@@ -19,7 +19,7 @@ Label : PROJECT
               12
               Label : EXTENDS
                 15
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   10
               Label : NAME
                 13

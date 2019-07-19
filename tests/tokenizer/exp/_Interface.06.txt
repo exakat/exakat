@@ -48,9 +48,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : EXTENDS
-            17
-          Label : EXTENDS
             8
+          Label : EXTENDS
+            17
           Label : EXTENDS
             19
           Label : METHOD

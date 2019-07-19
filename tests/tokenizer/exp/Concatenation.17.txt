@@ -16,15 +16,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
     15
     Label : DEFAULT
       18
     Label : DEFINITION
       15
-  Label : DEFINITION
-    12
-    Label : DEFINITION
-      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -39,8 +39,6 @@ Label : PROJECT
               6
             Label : CONCAT
               8
-              Label : NAME
-                8
               Label : ARGUMENT
                 9
               Label : ARGUMENT
@@ -49,6 +47,8 @@ Label : PROJECT
                   12
                 Label : NAME
                   11
+              Label : NAME
+                8
             Label : CONCAT
               14
           Label : NAME

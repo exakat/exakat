@@ -7,12 +7,12 @@ Label : GLOBAL
       17
       Label : METHOD
         12
-        Label : NAME
-          12
         Label : ARGUMENT
           13
         Label : ARGUMENT
           15
+        Label : NAME
+          12
       Label : OBJECT
         10
     Label : DEFINITION
@@ -55,12 +55,12 @@ Label : PROJECT
       17
       Label : METHOD
         12
-        Label : NAME
-          12
         Label : ARGUMENT
           13
         Label : ARGUMENT
           15
+        Label : NAME
+          12
       Label : OBJECT
         10
     Label : DEFINITION
@@ -103,12 +103,12 @@ Label : PROJECT
                 17
                 Label : METHOD
                   12
-                  Label : NAME
-                    12
                   Label : ARGUMENT
                     13
                   Label : ARGUMENT
                     15
+                  Label : NAME
+                    12
                 Label : OBJECT
                   10
           Label : CONDITION

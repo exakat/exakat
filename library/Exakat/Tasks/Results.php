@@ -40,15 +40,15 @@ class Results extends Tasks {
             }
 
             foreach($analyzersClass as $analyzer) {
-                if (!$this->themes->getClass($analyzer)) {
-                    throw new NoSuchAnalyzer($analyzer, $this->themes);
+                if (!$this->rulesets->getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer, $this->rulesets);
                 }
             }
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzersClass = $this->themes->getRulesetsAnalyzers($thema)) {
-                throw new NoSuchAnalyzer($thema, $this->themes);
+            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($thema)) {
+                throw new NoSuchAnalyzer($thema, $this->rulesets);
             }
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
@@ -58,7 +58,7 @@ class Results extends Tasks {
         
         foreach($analyzersClass as $id => $analyzerClass) {
             if (substr($analyzerClass, 0, 4) === 'Ext/') {
-                $analyzer = $this->themes->getInstance($analyzerClass, $this->gremlin, $this->config);
+                $analyzer = $this->rulesets->getInstance($analyzerClass, $this->gremlin, $this->config);
                 $analyzerList = $analyzer->getAnalyzerList();
 
                 unset($analyzersClass[$id]);

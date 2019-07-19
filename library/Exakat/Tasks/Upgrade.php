@@ -27,9 +27,15 @@ use Exakat\Config;
 use Exakat\Exakat;
 
 class Upgrade extends Tasks {
-    const CONCURENCE = self::NONE;
+    const CONCURENCE = self::ANYTIME;
 
     public function run() {
+        // Avoid downloading when it is not a phar
+        if ($this->config->is_phar === Config::IS_NOT_PHAR) {
+            print 'This can only update a .phar version of exakat. Aborting.' . PHP_EOL;
+            return;
+        }
+
         $options = array(
             'http'=>array(
                 'method' => 'GET',
@@ -45,27 +51,37 @@ class Upgrade extends Tasks {
             return;
         }
 
-        if (preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r) == 0) {
-            print 'Unable to find last version. Try again later.' . PHP_EOL;
-            return;
+        if (empty($this->config->version)) {
+            if (preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r) == 0) {
+                print 'Unable to find the requested version. Make sure the version number is valid. ' . PHP_EOL;
+                return;
+            }
+            
+            $version = $r[1];
+        } else {
+            $version = $this->config->version;
+            if (preg_match('/^\d+\.\d+\.\d+$/s', $version, $r) == 0) {
+                print 'Version number could not be recognized. Remove the option -version, or provide a valid version number, like "1.8.7".' . PHP_EOL;
+                return;
+            }
+
+            if (preg_match('/>exakat-'.$version.'.phar<\/a>/s', $html) == 0) {
+                print 'Unable to find last version. Try again later.' . PHP_EOL;
+                return;
+            }
         }
 
-        if (version_compare(Exakat::VERSION, $r[1]) < 0) {
-            print 'This version needs to be updated (Current : ' . Exakat::VERSION . ', Latest: ' . $r[1] . ')' . PHP_EOL;
+        if (version_compare(Exakat::VERSION, $version) !== 0) {
+            echo 'This version may be updated from the current version ' , Exakat::VERSION , ' to ' , $version  , PHP_EOL;
             
             if ($this->config->update === true) {
-                // Avoid downloading when it is not a phar
-                if ($this->config->is_phar !== true) {
-                    print 'This can only update a .phar version of exakat. Aborting.' . PHP_EOL;
-                    return;
-                }
 
-                print '  Updating to latest version.' . PHP_EOL;
-                preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
+                echo '  Updating to version ' , $version , PHP_EOL;
+                preg_match('#<pre id="sha256"><a href="index.php\?file=exakat-'.$version.'.phar.sha256">(.*?)</pre>#', $html, $r);
                 $sha256 = strip_tags($r[1]);
-                
+
                 // Read what we can
-                $phar = (string) @file_get_contents('https://www.exakat.io/versions/index.php?file=latest');
+                $phar = (string) @file_get_contents('https://www.exakat.io/versions/index.php?file=exakat-'.$version.'.phar');
 
                 if (hash('sha256', $phar) !== $sha256) {
                     print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again' . PHP_EOL;
@@ -76,6 +92,7 @@ class Upgrade extends Tasks {
                 file_put_contents($path, $phar);
                 print 'Setting up exakat.phar' . PHP_EOL;
                 rename($path, 'exakat.phar');
+
                 return;
             } else {
                 print '  You may run this command with -u option to upgrade to the latest exakat version.' . PHP_EOL;
