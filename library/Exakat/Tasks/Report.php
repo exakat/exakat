@@ -101,7 +101,7 @@ class Report extends Tasks {
             // to files + extension
             $filename = basename($this->config->file);
             if (in_array($filename, array('.', '..'))) {
-                $filename = $reportClass::FILE_FILENAME;
+                $filename = $report::FILE_FILENAME;
             }
             display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
