@@ -558,7 +558,7 @@ class Load extends Tasks {
                     echo $progressBar->advance();
                 }
             } catch (CantCompileFile $e) {
-                $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($g->getMessage()));
+                $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($e->getMessage()));
             
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
@@ -713,9 +713,10 @@ class Load extends Tasks {
             throw new NoFileToProcess($filename, 'Only ' . count($tokens) . ' tokens');
         }
 
-        $comments = 0;
+        $comments     = 0;
         $this->tokens = array();
-        $total = 0;
+        $total        = 0;
+        $line         = 0;
         foreach($tokens as $t) {
             if (is_array($t)) {
                 if ($t[0] === $this->phptokens::T_WHITESPACE) {
@@ -1676,7 +1677,7 @@ class Load extends Tasks {
         $this->makeCitBody($class);
         
         $class->code       = $this->tokens[$current][1];
-        $class->fullcode   = (!empty($fullcode) ? implode(' ', $fullcode) . ' ' : '') . $this->tokens[$current][1] . ($class->atom === 'Classanonymous' ? '' : ' ' . $name->fullcode)
+        $class->fullcode   = $this->tokens[$current][1] . ($class->atom === 'Classanonymous' ? '' : ' ' . $name->fullcode)
                              . (isset($argumentsFullcode) ? ' (' . $argumentsFullcode . ')' : '')
                              . (isset($extends) ? ' ' . $extendsKeyword . ' ' . $extends->fullcode : '')
                              . (isset($implements) ? ' ' . $implementsKeyword . ' ' . implode(', ', $fullcodeImplements) : '')
@@ -2355,7 +2356,7 @@ class Load extends Tasks {
         } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON);
 
         $const->code     = $this->tokens[$current][1];
-        $const->fullcode = (empty($options) ? '' : implode(' ', $options) . ' ') . $this->tokens[$current][1] . ' ' . implode(', ', $fullcode);
+        $const->fullcode = $this->tokens[$current][1] . ' ' . implode(', ', $fullcode);
         $const->token    = $this->getToken($this->tokens[$current][0]);
         $const->count    = $rank + 1;
         
@@ -4878,7 +4879,10 @@ class Load extends Tasks {
     }
 
     private function processNot() {
-        $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
+        $finals = array_diff($this->precedence->get($this->tokens[$this->id][0]),
+                              $this->assignations
+                             );
+        $this->processSingleOperator('Not', $finals, 'NOT');
         
         $not = $this->popExpression();
         $this->pushExpression($not);
