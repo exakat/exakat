@@ -28,24 +28,54 @@ class UndefinedVariable extends Analyzer {
     public function analyze() {
         // function foo() { echo $b;}
         $this->atomIs('Variabledefinition')
-            ->filter(
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('BLOCK')
+                     ->atomInsideNoDefinition(array('Eval', 'Include'))
+             )
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('BLOCK')
+                     ->atomInsideNoDefinition('Functioncall')
+                     ->functioncallIs('\\extract')
+             )
+             ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->atomIs('Variable')
                      ->is('isRead', true)
-            )
-            ->not(
+             )
+             ->not(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->atomIs('Variable')
                      ->is('isModified', true)
-            )
-            ->outIs('DEFINITION');
+             )
+             ->outIs('DEFINITION');
         $this->prepareQuery();
 
         // function foo() { $b->c = 2;}
         $this->atomIs('Variabledefinition')
              ->analyzerIsNot('self')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('BLOCK')
+                     ->atomInsideNoDefinition(array('Eval', 'Include'))
+             )
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('BLOCK')
+                     ->atomInsideNoDefinition('Functioncall')
+                     ->functioncallIs('\\extract')
+             )
              ->filter(
                  $this->side()
                       ->outIs('DEFINITION')
