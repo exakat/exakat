@@ -26,7 +26,7 @@ namespace Exakat\Exceptions;
 class CantCompileFile extends \Exception {
     public function __construct($message = '') {
 
-        parent::__construct($message, 1, $previous);
+        parent::__construct($message);
     }
 }
 

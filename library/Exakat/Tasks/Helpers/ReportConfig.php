@@ -84,8 +84,8 @@ class ReportConfig {
     
         $rulesets = $report->dependsOnAnalysis();
         if (empty($rulesets)) {
-            if (isset($format['ruleset'])) {
-                $rulesets = $format['ruleset'];
+            if (isset($this->format['ruleset'])) {
+                $rulesets = $this->format['ruleset'];
             } else {
                 $rulesets = array();
             }
