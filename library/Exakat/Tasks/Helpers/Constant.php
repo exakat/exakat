@@ -105,11 +105,6 @@ class Constant extends Plugin {
                 break;
 
             case 'Parenthesis' :
-                if (!isset($extras['CODE'])) {
-                    var_dump($extras);
-                    var_dump($atom);
-                    die();
-                }
                 $atom->constant = $extras['CODE']->constant;
                 break;
 
@@ -129,6 +124,10 @@ class Constant extends Plugin {
 
             case 'Closure' :
                 $atom->constant = true;
+                break;
+
+            case 'Assignation' :
+                $atom->constant = $extras['RIGHT']->constant && $atom->code === '=';
                 break;
 
             case 'Functioncall' :

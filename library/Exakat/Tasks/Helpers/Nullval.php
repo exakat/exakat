@@ -27,6 +27,15 @@ class Nullval extends Plugin {
     public $type = 'boolean';
 
     public function run($atom, $extras) {
+        // Ignoring $extras['LEFT'] === null
+        if ($atom->atom === 'Assignation') {
+            if ($atom->code === '=') {
+                $atom->isNull =  $extras['RIGHT']->isNull;
+            }
+
+            return;
+        }
+
         foreach($extras as $extra) {
             if ($extra->isNull === null)  {
                 $atom->isNull = true;

@@ -27,6 +27,15 @@ class Strval extends Plugin {
     public $type = 'string';
 
     public function run($atom, $extras) {
+        // Ignoring $extras['LEFT'] === null
+        if ($atom->atom === 'Assignation') {
+            if ($atom->code === '=') {
+                $atom->noDelimiter =  $extras['RIGHT']->noDelimiter;
+            }
+
+            return;
+        }
+
         foreach($extras as $extra) {
             if ($extra->noDelimiter === null)  {
                 $atom->noDelimiter = null;
@@ -157,7 +166,6 @@ class Strval extends Plugin {
             case 'Concatenation' :
                 $noDelimiters = array_column($extras, 'noDelimiter');
                 $atom->noDelimiter = implode('', $noDelimiters);
-                
                 break;
 
             case 'Ternary' :
