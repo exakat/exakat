@@ -371,19 +371,21 @@ class Emissary extends Reports {
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateSecurity() {
-        $this->generateIssuesEngine($section->
+    protected function generateSecurity(Section $section) {
+        $this->generateIssuesEngine('security_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Security') );
     }
 
-    protected function generateDeadCode() {
+    protected function generateDeadCode(Section $section) {
         $this->generateIssuesEngine('deadcode_issues',
+                                    $section->title,
                                     $this->getIssuesFaceted('Dead code') );
     }
 
-    protected function generatePerformances() {
+    protected function generatePerformances(Section $section) {
         $this->generateIssuesEngine('performances_issues',
+                                    $section->title,
                                     $this->getIssuesFaceted('Performances') );
     }
 

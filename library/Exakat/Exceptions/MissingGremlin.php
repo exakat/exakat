@@ -23,10 +23,9 @@
 
 namespace Exakat\Exceptions;
 
-class CantCompileFile extends \Exception {
-    public function __construct($message = '') {
-
-        parent::__construct($message);
+class MissingGremlin extends \RuntimeException {
+    public function __construct(string $gremlin = '') {
+        parent::__construct("Gremlin server could not be found. Check config/exakat.ini.\n");
     }
 }
 

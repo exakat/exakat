@@ -47,10 +47,10 @@ SQL;
             $ini = $this->getDocs($row['analyzer']);
             $row['error'] = $ini['name'];
 
-            $this->rulesets->getInstance($row['analyzer'], null, $this->config);
+            $ruleset = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
             $row['severity'] = $this->getDocs($row['analyzer'], 'severity');
             $row['impact']   = $this->getDocs($row['analyzer'], 'timetofix');
-            $row['recipes']  = $a->getRulesets();
+            $row['recipes']  = $ruleset->getRulesets();
 
             $items[] = $row;
             $this->count();

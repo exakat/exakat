@@ -181,7 +181,7 @@ class RulesetsExt {
         }
     }
 
-    public function getSuggestionRulesets(array $ruleset) {
+    public function getSuggestionRulesets(array $rulesets) {
         $list = $this->listAllRulesets();
         
         return array_filter($list, function ($c) use ($rulesets) {

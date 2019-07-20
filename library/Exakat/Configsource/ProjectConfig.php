@@ -99,7 +99,6 @@ class ProjectConfig extends Config {
                 $ini[$key] = $this->config[$key];
             }
         }
-        unset($value);
         $this->config = $ini;
 
         $pathToCache = "{$this->projects_root}{$project}/config.cache";

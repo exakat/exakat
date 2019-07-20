@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class ConstantConditions extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testStructures_ConstantConditions01()  { $this->generic_test('Structures_ConstantConditions.01'); }
     public function testStructures_ConstantConditions02()  { $this->generic_test('Structures_ConstantConditions.02'); }
@@ -17,5 +17,6 @@ class ConstantConditions extends Analyzer {
     public function testStructures_ConstantConditions06()  { $this->generic_test('Structures_ConstantConditions.06'); }
     public function testStructures_ConstantConditions07()  { $this->generic_test('Structures/ConstantConditions.07'); }
     public function testStructures_ConstantConditions08()  { $this->generic_test('Structures/ConstantConditions.08'); }
+    public function testStructures_ConstantConditions09()  { $this->generic_test('Structures/ConstantConditions.09'); }
 }
 ?>

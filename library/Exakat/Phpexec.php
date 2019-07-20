@@ -365,7 +365,7 @@ PHP;
                 try {
                     // @ hides potential errors.
                     @eval($res);
-                    
+
                     if ($config['crc'] === (int) $crc) {
                         unset($config['crc']);
                         $this->config = $config;

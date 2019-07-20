@@ -27,6 +27,15 @@ class Intval extends Plugin {
     public $type = 'integer';
 
     public function run($atom, $extras) {
+        // Ignoring $extras['LEFT'] === null
+        if ($atom->atom === 'Assignation') {
+            if ($atom->code === '=') {
+                $atom->intval =  $extras['RIGHT']->intval;
+            }
+
+            return;
+        }
+
         foreach($extras as $extra) {
             if ($extra->intval === '')  {
                 $atom->intval = '';
@@ -86,8 +95,7 @@ class Intval extends Plugin {
     
             case 'Addition' :
                 if ($atom->code === '+') {
-                    $atom->intval = $extras['LEFT']->intval +
-                                    $extras['RIGHT']->intval;
+                    $atom->intval = $extras['LEFT']->intval + $extras['RIGHT']->intval;
                 } elseif ($atom->code === '-') {
                     $atom->intval = $extras['LEFT']->intval - $extras['RIGHT']->intval;
                 }
@@ -149,7 +157,7 @@ class Intval extends Plugin {
                 break;
 
             case 'Concatenation' :
-                $intval = array_column($extras, 'intval');
+                $intval = array_column($extras, 'noDelimiter');
                 $atom->intval = (int) implode('', $intval);
                 break;
 

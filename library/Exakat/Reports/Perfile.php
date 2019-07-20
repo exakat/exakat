@@ -34,6 +34,7 @@ class Perfile extends Reports {
         $analysisResults->load();
 
         $perfile       = array();
+        $titleCache    = array();
         $maxLine       = 0;
         $maxTitle      = 0;
         foreach($analysisResults->toArray() as $row) {

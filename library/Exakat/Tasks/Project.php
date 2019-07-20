@@ -28,24 +28,25 @@ use Exakat\Analyzer\Rulesets;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
-use Exakat\Project as Projectname;
+use Exakat\Exceptions\MissingGremlin;
+use Exakat\Exceptions\InvalidProjectName;
+use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchReport;
-use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Exceptions\InvalidProjectName;
-use Exakat\Tasks\Helpers\ReportConfig;
+use Exakat\Project as Projectname;
 use Exakat\Tasks\Helpers\BaselineStash;
+use Exakat\Tasks\Helpers\ReportConfig;
 
 use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
 
-    protected $themesToRun = array('Analyze',
-                                   'Preferences',
-                                   );
+    protected $rulesetsToRun = array('Analyze',
+                                     'Preferences',
+                                    );
 
     protected $reports       = array();
     protected $reportConfigs = array();
@@ -67,6 +68,10 @@ class Project extends Tasks {
 
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
+        }
+
+        if ($this->config->gremlin === 'NoGremlin') {
+            throw new MissingGremlin();
         }
 
         if (!file_exists($this->config->project_dir)) {
@@ -134,7 +139,7 @@ class Project extends Tasks {
         }
         $this->datastore->addRow('hash', $info);
 
-        $themesToRun = array($this->config->project_themes);
+        $rulesetsToRun = array($this->config->project_themes);
         $reportToRun = array();
         $namesToRun  = array();
 
@@ -148,33 +153,33 @@ class Project extends Tasks {
             }
             $this->reportConfigs[$report->getName()] = $report;
 
-            $themesToRun[] = $report->getRulesets();
+            $rulesetsToRun[] = $report->getRulesets();
             $namesToRun[]  = $report->getName();
 
             unset($report);
             gc_collect_cycles();
         }
 
-        $themesToRun = array_merge(...$themesToRun);
-        $themesToRun = array_unique($themesToRun);
+        $rulesetsToRun = array_merge(...$rulesetsToRun);
+        $rulesetsToRun = array_unique($rulesetsToRun);
 
         $availableRulesets = $this->rulesets->listAllRulesets();
 
-        $diff = array_diff($themesToRun, $availableRulesets);
+        $diff = array_diff($rulesetsToRun, $availableRulesets);
         if (!empty($diff)) {
-            display('Ignoring the following unknown themes : ' . implode(', ', $diff) . PHP_EOL);
+            display('Ignoring the following unknown rulesets : ' . implode(', ', $diff) . PHP_EOL);
         }
-        $themesToRun = array_diff($themesToRun, $diff);
+        $rulesetsToRun = array_diff($rulesetsToRun, $diff);
 
         $reportToRun = array_unique($reportToRun);
 
-        if (empty($themesToRun)) {
+        if (empty($rulesetsToRun)) {
             // Default values
-            $themesToRun = $this->themesToRun;
+            $rulesetsToRun = $this->rulesetsToRun;
         }
 
         display("Running project '$project'" . PHP_EOL);
-        display('Running the following analysis : ' . implode(', ', $themesToRun));
+        display('Running the following analysis : ' . implode(', ', $rulesetsToRun));
         display('Producing the following reports : ' . implode(', ', $namesToRun));
 
         display('Running files' . PHP_EOL);
@@ -227,7 +232,7 @@ class Project extends Tasks {
         $this->logTime('Dumped and inited');
 
         if (empty($this->config->program)) {
-            $this->analyzeRulesets($themesToRun, $audit_start, $this->config->quiet);
+            $this->analyzeRulesets($rulesetsToRun, $audit_start, $this->config->quiet);
         } else {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         }
@@ -342,29 +347,29 @@ class Project extends Tasks {
         }
     }
 
-    private function analyzeRulesets($themes, $audit_start, $quiet) {
-        if (empty($themes)) {
-            $themes = $this->config->project_themes;
+    private function analyzeRulesets($rulesets, $audit_start, $quiet) {
+        if (empty($rulesets)) {
+            $rulesets = $this->config->project_themes;
         }
 
-        if (!is_array($themes)) {
-            $themes = array($themes);
+        if (!is_array($rulesets)) {
+            $rulesets = array($rulesets);
         }
 
-        display('Running the following rulesets : ' . implode(', ', $themes) . PHP_EOL);
+        display('Running the following rulesets : ' . implode(', ', $rulesets) . PHP_EOL);
 
         global $VERBOSE;
         $oldVerbose = $VERBOSE;
         $VERBOSE = false;
-        foreach($themes as $theme) {
-            $this->addSnitch(array('step'    => 'Analyze : ' . $theme,
+        foreach($rulesets as $ruleset) {
+            $this->addSnitch(array('step'    => 'Analyze : ' . $ruleset,
                                    'project' => $this->config->project));
-            $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
+            $rulesetForFile = strtolower(str_replace(' ', '_', trim($ruleset, '"')));
 
             try {
                 $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
                                                                 'update'    => true,
-                                                                'thema'     => array($theme),
+                                                                'thema'     => array($ruleset),
                                                                 'verbose'   => false,
                                                                 ));
 
@@ -372,10 +377,10 @@ class Project extends Tasks {
                 $analyze->run();
                 unset($analyze);
                 unset($analyzeConfig);
-                $this->logTime("Analyze : $theme");
+                $this->logTime("Analyze : $ruleset");
 
                 $dumpConfig = $this->config->duplicate(array('update'    => true,
-                                                             'thema'     => array($theme),
+                                                             'thema'     => array($ruleset),
                                                              'verbose'   => false,
                                                              ));
 
@@ -407,10 +412,10 @@ class Project extends Tasks {
                 unset($dump);
                 unset($dumpConfig);
                 gc_collect_cycles();
-                $this->logTime("Dumped : $theme");
+                $this->logTime("Dumped : $ruleset");
             } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
-                file_put_contents("{$this->config->log_dir}/analyze.$themeForFile.final.log", $e->getMessage());
+                echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
+                file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
             }
         }
         $VERBOSE = $oldVerbose;

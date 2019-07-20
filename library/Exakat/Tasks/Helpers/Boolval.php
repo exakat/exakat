@@ -28,8 +28,20 @@ class Boolval extends Plugin {
 
     public function run($atom, $extras) {
         // Special case for Arraylist, so it won't be blocked by the filter behind.
-        if ($atom->atom === 'Arrayliteral') {
-            $atom->boolean = (int) (bool) $atom->count;
+        switch ($atom->atom) {
+            case 'Arrayliteral' : 
+                $atom->boolean = (int) (bool) $atom->count;
+                return;
+
+            case 'Assignation' : 
+                $atom->boolean = $extras['RIGHT']->boolean;
+                return;
+
+        }
+
+        // Ignoring $extras['LEFT'] === null
+        if ($atom->atom === 'Assignation') {
+
             return;
         }
         
@@ -40,7 +52,6 @@ class Boolval extends Plugin {
             case 'Closure'     :
             case 'Sequence'    :
             case 'Magicconstant'    :
-//            case 'Name'        :
                 $atom->boolean = true;
                 break;
 
@@ -54,7 +65,6 @@ class Boolval extends Plugin {
                 break;
 
             case 'Nsname' :
-//            case 'Name'   :
                 // when it is a string, there is no fallback
                 $atom->boolean = false;
                 break;
@@ -196,6 +206,12 @@ class Boolval extends Plugin {
                     $atom->boolean = $extras['LEFT']->boolean >= $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '<=') {
                     $atom->boolean = $extras['LEFT']->boolean <= $extras['RIGHT']->boolean;
+                }
+                break;
+
+            case 'Assignation' :
+                if ($atom->code === '=') {
+                    $atom->boolean =  $extras['RIGHT']->boolean;
                 }
                 break;
 
