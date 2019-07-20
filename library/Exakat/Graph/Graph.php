@@ -27,6 +27,8 @@ use Exakat\Config;
 abstract class Graph {
     protected $config = null;
     
+    public const GRAPHDB = array('nogremlin', 'gsneo4j', 'tinkergraph');
+    
     public function __construct(Config $config) {
         $this->config = $config;
     }

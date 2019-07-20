@@ -23,17 +23,18 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
-use Exakat\Log;
-use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Graph\Graph;
-use Exakat\Reports\Helpers\Docs;
+use Exakat\GraphElements;
+use Exakat\Log;
 use Exakat\Query\Query;
+use Exakat\Reports\Helpers\Docs;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
@@ -64,6 +65,10 @@ class Dump extends Tasks {
     public function run() {
         if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
+        }
+
+        if ($this->config->gremlin === 'NoGremlin') {
+            throw new MissingGremlin();
         }
 
         $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("code")')

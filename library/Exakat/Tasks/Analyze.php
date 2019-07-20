@@ -33,6 +33,7 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\QueryException;
+use Exakat\Exceptions\MissingGremlin;
 use Exakat\Phpexec;
 use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
@@ -59,6 +60,10 @@ class Analyze extends Tasks {
 
         if ($project == 'default') {
             throw new ProjectNeeded();
+        }
+
+        if ($this->config->gremlin === 'NoGremlin') {
+            throw new MissingGremlin();
         }
 
         if (!file_exists($this->config->project_dir)) {

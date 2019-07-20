@@ -202,6 +202,9 @@ class CommandLine extends Config {
 
                     case 'graphdb' :
                         $this->config['gremlin'] = $args[$id + 1];
+                        if (!in_array($this->config['gremlin'], Graph::GRAPHDB)) {
+                            $this->config['gremlin'] = 'nogremlin';
+                        }
                         break;
 
                     case 'format' :
