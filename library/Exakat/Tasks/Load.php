@@ -1927,10 +1927,15 @@ class Load extends Tasks {
             $token = 'T_NS_SEPARATOR';
         }
 
-        if ($atom === 'Newcall' &&
-            $this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
-            $atom = 'Newcallname';
+        if ($atom === 'Newcall') {
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+                $atom = 'Newcallname';
+            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_DOUBLE_COLON) {
+                // Finally, it is D::$D
+                $atom = 'Identifier';
+            }
         }
+
 
         // Back up a bit
         --$this->id;
@@ -2617,7 +2622,11 @@ class Load extends Tasks {
         ++$this->id; // Skipping the name, set on (
 
         if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $atom = 'Newcall';
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
+                $atom = 'Identifier';
+            } else {
+                $atom = 'Newcall';
+            }
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
             if (strtolower($name->code) === '\\define') {
                 return $this->processDefineConstant($name);
