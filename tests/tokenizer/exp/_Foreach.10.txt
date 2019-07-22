@@ -73,7 +73,3 @@ Label : PROJECT
               10
           Label : VALUE
             16
-          Label : VALUE
-            16
-            Label : DEFINITION
-              16

@@ -75,10 +75,6 @@ Label : PROJECT
                 12
               Label : VALUE
                 14
-              Label : VALUE
-                14
-                Label : DEFINITION
-                  14
             Label : EXPRESSION
               21
           Label : INDEX
@@ -87,11 +83,3 @@ Label : PROJECT
             6
           Label : VALUE
             10
-          Label : VALUE
-            8
-            Label : DEFINITION
-              8
-          Label : VALUE
-            10
-            Label : DEFINITION
-              10

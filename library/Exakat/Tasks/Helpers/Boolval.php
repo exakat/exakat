@@ -29,11 +29,11 @@ class Boolval extends Plugin {
     public function run($atom, $extras) {
         // Special case for Arraylist, so it won't be blocked by the filter behind.
         switch ($atom->atom) {
-            case 'Arrayliteral' : 
+            case 'Arrayliteral' :
                 $atom->boolean = (int) (bool) $atom->count;
                 return;
 
-            case 'Assignation' : 
+            case 'Assignation' :
                 $atom->boolean = $extras['RIGHT']->boolean;
                 return;
 

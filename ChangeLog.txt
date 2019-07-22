@@ -1,4 +1,4 @@
-Version 1.8.9 (Meng Feiqing of Jiachen, coming up)
+Version 1.9.0 (Ming Wenzhang of Jiayin, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,32 @@ Version 1.8.9 (Meng Feiqing of Jiachen, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.8.9 (Meng Feiqing of Jiachen, 2019-07-22)
++ Architecture
+    + Check on graphdb configuration : default to nogremlin
+    + Added support for baseline for project and report
+    + Moved more doc to ruleset
+    + Check on .git folder for update
+    + Added -version option for upgrade command
+    + Doctor honors .exakat.yml file
++ Analysis
+    + New analysis : Report useless type of checks
+    + New analysis : Disconnected classes 
+    + New analysis : Avoid using mb_detect_encoding()
+    + New analysis : Check that source and blind variables are different in foreach
+    + New analysis : ~ or ! favorite
+    + Updated analysis : Is Zero omits multiplications
+    + Updated analysis : Used Private Property is upgraded
+    + Updated analysis : Multiple Identical Keys : refactored
+    + Updated analysis : Undefined variables now skips extract, include, eval
+    + Checked unit tests : 3147 / 3166 test pass (99% pass)
++ Tokenizer
+    + Refactored support for Foreach : each blind variable is in VALUE
+    + Upgraded precedence for ! (not)
+    + Propagate constants with assignations
+    + Fixed link to $this inside heredoc and co
+    + Fixed an edgecase where Static method call was confused with Newcall
 
 Version 1.8.8 (Wei Yuqing of Jiawu, 2019-07-15)
 + Architecture

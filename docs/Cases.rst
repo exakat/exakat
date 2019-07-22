@@ -1810,6 +1810,53 @@ Const works efficiently with literal
 
     define('EVENT_HANDLER_PRIORITY_NEUTRAL', 50)
 
+Written Only Variables
+======================
+
+.. _dolibarr-variables-writtenonlyvariable:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`written-only-variables`, in htdocs/ecm/class/ecmdirectory.class.php:692. 
+
+$val is only written, as only the keys are used. $val may be skipped by applying the foreach to array_keys($this->cats), instead of the whole array.
+
+.. code-block:: php
+
+    // We add properties fullxxx to all elements
+    		foreach($this->cats as $key => $val)
+    		{
+    			if (isset($motherof[$key])) continue;
+    			$this->build_path_from_id_categ($key, 0);
+    		}
+
+
+--------
+
+
+.. _suitecrm-variables-writtenonlyvariable:
+
+SuiteCRM
+^^^^^^^^
+
+:ref:`written-only-variables`, in modules/Campaigns/utils.php:820. 
+
+$email_health is used later in the method; while $email_components is only set, and never used.
+
+.. code-block:: php
+
+    //run query for mail boxes of type 'bounce'
+            $email_health = 0;
+            $email_components = 2;
+            $mbox_qry = "select * from inbound_email where deleted ='0' and mailbox_type = 'bounce'";
+            $mbox_res = $focus->db->query($mbox_qry);
+    
+            $mbox = array();
+            while ($mbox_row = $focus->db->fetchByAssoc($mbox_res)) {
+                $mbox[] = $mbox_row;
+            }
+
 Foreach Reference Is Not Modified
 =================================
 
@@ -4301,12 +4348,12 @@ The opening an closing tag couldd be moved outside the if condition : they are c
 --------
 
 
-.. _dolibarr-structures-commonalternatives:
+.. _nextcloud-structures-commonalternatives:
 
-Dolibarr
-^^^^^^^^
+NextCloud
+^^^^^^^^^
 
-:ref:`common-alternatives`, in apps/encryption/lib/KeyManager.ph:436. 
+:ref:`common-alternatives`, in apps/encryption/lib/KeyManager.php:436. 
 
 `$shareKey = $this->getShareKey($path, $uid);` is common to all three alternatives. In fact, `$uid = $this->getPublicShareKeyId();` is not common, and that shoul de reviewed, as `$uid` will be undefined. 
 
@@ -7429,6 +7476,45 @@ A 'Generic' class sounds like a class that could be 'abstract'.
     class GenericPaymentMethod extends BasePaymentMethod { 
         // More class code
     }
+
+Continue Is For Loop
+====================
+
+.. _xoops-structures-continueisforloop:
+
+Xoops
+^^^^^
+
+:ref:`continue-is-for-loop`, in htdocs/kernel/object.php:711. 
+
+break is used here for cases, unless the case includes a if/then structures, in which it becomes a continue. It really should be a break.
+
+.. code-block:: php
+
+    foreach ($this->vars as $k => $v) {
+                $cleanv = $v['value'];
+                if (!$v['changed']) {
+                } else {
+                    $cleanv = is_string($cleanv) ? trim($cleanv) : $cleanv;
+                    switch ($v['data_type']) {
+                        case XOBJ_DTYPE_TIMESTAMP:
+                            $cleanv = !is_string($cleanv) && is_numeric($cleanv) ? date(_DBTIMESTAMPSTRING, $cleanv) : date(_DBTIMESTAMPSTRING, strtotime($cleanv));
+                            break;
+                        case XOBJ_DTYPE_TIME:
+                            $cleanv = !is_string($cleanv) && is_numeric($cleanv) ? date(_DBTIMESTRING, $cleanv) : date(_DBTIMESTRING, strtotime($cleanv));
+                            break;
+                        case XOBJ_DTYPE_DATE:
+                            $cleanv = !is_string($cleanv) && is_numeric($cleanv) ? date(_DBDATESTRING, $cleanv) : date(_DBDATESTRING, strtotime($cleanv));
+                            break;
+                        case XOBJ_DTYPE_TXTBOX:
+                            if ($v['required'] && $cleanv != '0' && $cleanv == '') {
+                                $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
+                                continue 2;
+                            }
+                            if (isset($v['maxlength']) && strlen($cleanv) > (int)$v['maxlength']) {
+                                $this->setErrors(sprintf(_XOBJ_ERR_SHORTERTHAN, $k, (int)$v['maxlength']));
+                                continue 2;
+                            }
 
 Method Could Be Static
 ======================

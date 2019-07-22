@@ -4505,7 +4505,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'DESCRIPTION', $section->title);
         $html = $this->injectBloc($html, 'CONTENT',     'This section is empty : no result where found.');
         $this->putBasedPage($section->source, $html);
-    }    
+    }
 
     private function generateStats(Section $section) {
         $results = new Stats($this->config);

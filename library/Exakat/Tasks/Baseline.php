@@ -50,7 +50,7 @@ class Baseline extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $list = glob($this->config->project_dir.'/baseline/dump-*.sqlite');
+        $list = glob($this->config->project_dir . '/baseline/dump-*.sqlite');
         sort($list);
     
         print PHP_EOL;
@@ -73,7 +73,7 @@ class Baseline extends Tasks {
     private function save() {
         $baselineStash = new BaselineStash($this->config);
         $baselineStash->copyPrevious($this->config->dump);
-        display('Save current audit to '.$this->config->baseline_set);
+        display('Save current audit to ' . $this->config->baseline_set);
     }
 }
 

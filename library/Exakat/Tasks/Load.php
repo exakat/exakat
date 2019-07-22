@@ -26,6 +26,7 @@ use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Graph\Graph;
 use Exakat\Exceptions\InvalidPHPBinary;
+use Exakat\Exceptions\CantCompileFile;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
@@ -989,7 +990,7 @@ class Load extends Tasks {
                                                        'MEMBER' => $propertyName,
                                                        ));
 
-                    if ($variable->atom === 'This' && 
+                    if ($variable->atom === 'This' &&
                         $propertyName->token   === 'T_STRING') {
                         $this->calls->addCall('property', "{$variable->fullnspath}::{$propertyName->code}", $property);
                         array_collect_by($this->currentPropertiesCalls, $propertyName->code, $property);
@@ -1927,10 +1928,15 @@ class Load extends Tasks {
             $token = 'T_NS_SEPARATOR';
         }
 
-        if ($atom === 'Newcall' &&
-            $this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
-            $atom = 'Newcallname';
+        if ($atom === 'Newcall') {
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+                $atom = 'Newcallname';
+            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_DOUBLE_COLON) {
+                // Finally, it is D::$D
+                $atom = 'Identifier';
+            }
         }
+
 
         // Back up a bit
         --$this->id;
@@ -2617,7 +2623,11 @@ class Load extends Tasks {
         ++$this->id; // Skipping the name, set on (
 
         if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $atom = 'Newcall';
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
+                $atom = 'Identifier';
+            } else {
+                $atom = 'Newcall';
+            }
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
             if (strtolower($name->code) === '\\define') {
                 return $this->processDefineConstant($name);
@@ -3218,7 +3228,7 @@ class Load extends Tasks {
 
         $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
-        $variables = $this->currentVariables;
+        $variables_start = max(array_keys($this->atoms));
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                 $this->phptokens::T_DOUBLE_ARROW,
@@ -3231,6 +3241,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
             $this->addLink($foreach, $value, 'INDEX');
+            $variables_start = max(array_keys($this->atoms));
             $index = $value;
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
@@ -3241,10 +3252,14 @@ class Load extends Tasks {
             $value = $this->popExpression();
             $valueFullcode .= " => {$value->fullcode}";
         }
-
         $this->addLink($foreach, $value, 'VALUE');
-        foreach(array_diff(array_keys($this->currentVariables), array_keys($variables)) as $name) {
-            $this->addLink($foreach, $this->currentVariables[$name], 'VALUE');
+
+        // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
+        $max = max(array_keys($this->atoms));
+        for($i = $variables_start; $i < $max; ++$i) {
+            if ($this->atoms[$i]->atom === 'Variable') {
+                $this->addLink($foreach, $this->atoms[$i], 'VALUE');
+            }
         }
 
         ++$this->id; // Skip )

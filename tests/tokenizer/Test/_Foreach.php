@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Foreach extends Tokenizer {
-    /* 52 methods */
+    /* 55 methods */
 
     public function test_Foreach01()  { $this->generic_test('_Foreach.01'); }
     public function test_Foreach02()  { $this->generic_test('_Foreach.02'); }
@@ -61,5 +61,8 @@ class _Foreach extends Tokenizer {
     public function test_Foreach50()  { $this->generic_test('_Foreach.50'); }
     public function test_Foreach51()  { $this->generic_test('_Foreach.51'); }
     public function test_Foreach52()  { $this->generic_test('_Foreach.52'); }
+    public function test_Foreach53()  { $this->generic_test('_Foreach.53'); }
+    public function test_Foreach54()  { $this->generic_test('_Foreach.54'); }
+    public function test_Foreach55()  { $this->generic_test('_Foreach.55'); }
 }
 ?>

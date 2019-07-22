@@ -159,7 +159,7 @@ abstract class Analyzer {
         $this->rulesets = new Rulesets("{$config->dir_root}/data/analyzers.sqlite",
                                        $config->ext,
                                        $config->dev,
-                                       $config->themas);
+                                       $config->rulesets);
         
         $this->config = $config;
 

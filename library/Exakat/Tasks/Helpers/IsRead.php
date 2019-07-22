@@ -315,4 +315,3 @@ class IsRead extends Plugin {
 }
 
 ?>
-

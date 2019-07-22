@@ -32,7 +32,7 @@ class BaselineStash {
     
     const NO_BASELINE          = '';
 
-    function __construct(Config $config) {
+    public function __construct(Config $config) {
         $this->baseline_strategy = $config->baseline_set;
         $this->project_dir       = $config->project_dir;
         $this->use               = $config->baseline_use;
@@ -45,7 +45,7 @@ class BaselineStash {
         }
 
         if (file_exists($previous)) {
-            $baseline_dir = dirname($previous).'/baseline';
+            $baseline_dir = dirname($previous) . '/baseline';
             if (!file_exists($baseline_dir)) {
                 mkdir($baseline_dir,0700);
                 
@@ -60,7 +60,7 @@ class BaselineStash {
                 $baselines = array();
                 $last_id = 1;
             } else {
-                usort($baselines, function($a, $b) { return $a <=> $b;} ); // simplistic sorting
+                usort($baselines, function ($a, $b) { return $a <=> $b;} ); // simplistic sorting
                 $last = $baselines[count($baselines) - 1];
                 $last_id = preg_match('/dump-(\d+)-/', $last, $r) ? (int) $r[1] : 1;
             }
@@ -76,18 +76,18 @@ class BaselineStash {
             }
 
             if ($this->baseline_strategy === 'always') {
-                // Create a new 
+                // Create a new
                 // md5 is here for uuid purpose.
-                $sqliteFilePrevious = $baseline_dir.'/dump-'.($last_id + 1).'-'.substr(md5($baseline_dir.($last_id + 1)), 0, 7).'.sqlite';
+                $sqliteFilePrevious = $baseline_dir . '/dump-' . ($last_id + 1) . '-' . substr(md5($baseline_dir . ($last_id + 1)), 0, 7) . '.sqlite';
                 copy($previous, $sqliteFilePrevious);
                 return;
             }
 
             // Use baseline_strategy as a name, only if it doesn't exist yet
-            $previousDump = preg_grep('/-'.preg_quote($this->baseline_strategy).'\.sqlite$/', $baselines);
+            $previousDump = preg_grep('/-' . preg_quote($this->baseline_strategy) . '\.sqlite$/', $baselines);
             if (empty($previousDump)) {
                 // Create a new : use the strategy as the last one
-                $sqliteFileBaseline = $baseline_dir.'/dump-'.($last_id + 1).'-'.$this->baseline_strategy.'.sqlite';
+                $sqliteFileBaseline = $baseline_dir . '/dump-' . ($last_id + 1) . '-' . $this->baseline_strategy . '.sqlite';
                 copy($previous, $sqliteFileBaseline);
                 return;
             }
@@ -103,7 +103,7 @@ class BaselineStash {
             } else {
                 $file = array_pop($baselines);
                 unlink($file);
-                display(substr(basename($file, '.sqlite'), 5).' was removed');
+                display(substr(basename($file, '.sqlite'), 5) . ' was removed');
             }
             return;
         }
@@ -114,7 +114,7 @@ class BaselineStash {
         } else {
             $file = array_pop($baselines);
             unlink($file);
-            display(substr(basename($file, '.sqlite'), 5).' was removed');
+            display(substr(basename($file, '.sqlite'), 5) . ' was removed');
         }
     }
 

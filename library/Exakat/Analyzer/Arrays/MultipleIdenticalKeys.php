@@ -37,16 +37,14 @@ class MultipleIdenticalKeys extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->atomIsNot('Keyvalue')
              )
-             ->raw('where( 
+             ->raw(<<<'GREMLIN'
+where( 
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname")
       .not(where(__.out("CONCAT")) )
-      .coalesce( __.hasLabel("Staticconstant", "Identifier", "Nsname").in("DEFINITION").out("VALUE"),
-                 __.filter{true; })
-      .has("intval")
       .sideEffect{ 
-            if (it.get().label() in ["String", "Staticclass"] && "noDelimiter" in it.get().keys() ) { 
+            if (it.get().label() in ["String", "Staticclass"] ) { 
                 k = it.get().value("noDelimiter"); 
                 if (k.isInteger()) {
                     k = k.toInteger();
@@ -65,7 +63,9 @@ class MultipleIdenticalKeys extends Analyzer {
             }
         }
         .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
-)')
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }

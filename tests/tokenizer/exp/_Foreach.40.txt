@@ -125,18 +125,6 @@ Label : PROJECT
               12
           Label : VALUE
             16
-          Label : VALUE
-            15
-            Label : DEFINITION
-              15
-            Label : DEFINITION
-              15
-          Label : VALUE
-            16
-            Label : DEFINITION
-              16
-            Label : DEFINITION
-              16
         Label : EXPRESSION
           7
           Label : LEFT

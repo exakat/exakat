@@ -7,10 +7,12 @@ List of commands :
 ------------------
 
 * `anonymize`_
+* `baseline`_
 * `catalog`_
 * `clean`_
 * `cleandb`_
 * `doctor`_
+* `extension`_
 * `help`_
 * `init`_
 * `project`_
@@ -62,6 +64,31 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+:: _baseline:
+
+baseline
+--------
+
+Baseline manage previous audits that may be used as a baseline for new audits. 
+
+A Baseline is a previous audit, that has already reviewed the code. It has identified issues and code. Later, after some code modification, a new audit is run. When we want to know the new issues, or the removed ones, it has to be compared to a baseline.
+
+This is a help command, to help find the available values for various options.
+
+Commands
+########
+
++-----------+-----------------------------------------------------------------------------+
+| Command   | Description                                                                 |
++-----------+-----------------------------------------------------------------------------+
+| list      | List all available baselines. Default action                                |
++-----------+-----------------------------------------------------------------------------+
+| remove    | Removes a baseline, using its name or its auto-id                           |
++-----------+-----------------------------------------------------------------------------+
+| save      | Save the current audit, when it exists, as the last base, with the provided |
+|           | name.                                                                       |
++-----------+-----------------------------------------------------------------------------+
 
 :: _catalog:
 
@@ -287,6 +314,28 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode : include helpers configurations                               |
 +-----------+-----+-----------------------------------------------------------------------------+
+
+extension
+---------
+
+Extension manages the current Exakat extensions. ref:`Extensions <extensions>` are detailled in a dedicated chapter.
+
+Commands
+########
+
++-----------+-----------------------------------------------------------------------------+
+| Command   | Description                                                                 |
++-----------+-----------------------------------------------------------------------------+
+| list      | List all available extensions, from www.exakat.io.                          |
++-----------+-----------------------------------------------------------------------------+
+| install   | Install a new extension, using the provided name.                           |
++-----------+-----------------------------------------------------------------------------+
+| uninstall | Uninstall an installed extension, using the provided name.                  |
++-----------+-----------------------------------------------------------------------------+
+| local     | List all installed extensions. Default action.                              |
++-----------+-----------------------------------------------------------------------------+
+| update    | Update an extension by fetching its newest version, when available.         |
++-----------+-----------------------------------------------------------------------------+
 
 
 :: _help:
@@ -517,7 +566,7 @@ Options
 Report formats
 ##############
 
-All reports are detailed in the Reports_ section.
+All reports are detailed in the ref:`Reports <reports>` section.
 
 +-------------+-----------------------------------------------------------------------------+
 | Report      | Description                                                                 |
@@ -570,11 +619,13 @@ Options
 upgrade
 -------
 
-Upgrade exakat itself. By default, this is a dry run : only the availability of a new version is reported. 
+Upgrade exakat itself. By default, this command only checks for the availability of a new version : it doesn't upgrade immediately. 
 
 Use -u option to actually replace the current phar archive.
 
-In case the upgrade command file, you may also download manually the `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_. Then replace the current version with the new one.
+Use -version option to downgrade or upgrade to a specific version. 
+
+In case the upgrade command file, you may also download manually the `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_. Then replace the current version with the new one.
 
 Command
 #######
@@ -589,4 +640,8 @@ Options
 | Option    | Req | Description                                                                 |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -u        | Yes | Actually upgrades exakat. Without it, it is a dry run.                      |
++-----------+-----+-----------------------------------------------------------------------------+
+| -version  | No  | Select a specific Exakat version and update to it. By default, it upgrades  |
+|           |     | to the latest version, as published on the https://www.exakat.io/ site.     |
+|           |     | Example value : 1.8.8                                                       |
 +-----------+-----+-----------------------------------------------------------------------------+

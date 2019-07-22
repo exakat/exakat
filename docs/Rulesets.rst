@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 18 Jul 2019 12:44:45 +0000
-.. comment: Generation hash : ef609807547c586399fc46811da5c4096767fd68
+.. comment: Generation date : Mon, 22 Jul 2019 12:11:38 +0000
+.. comment: Generation hash : 13a38f00d061f0ea831db30aac1919bc17eeec6d
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 365 analysis
+Total : 367 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -100,6 +100,7 @@ Total : 365 analysis
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Avoid mb_dectect_encoding() <avoid-mb\_dectect\_encoding()>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
 * :ref:`Bad Constants Names <bad-constants-names>`
 * :ref:`Bail Out Early <bail-out-early>`
@@ -284,6 +285,7 @@ Total : 365 analysis
 * :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
+* :ref:`Overwriten Source And Value <overwriten-source-and-value>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -444,7 +446,7 @@ Total : 365 analysis
 ClassReview
 +++++++++++
 
-Total : 28 analysis
+Total : 29 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -458,6 +460,7 @@ Total : 28 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
+* :ref:`Disconnected Classes <disconnected-classes>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`

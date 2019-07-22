@@ -62,7 +62,6 @@ abstract class Reports {
     protected $rulesets  = null;
 
     public function __construct(Config $config) {
-        assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
         if (file_exists($this->config->dump)) {
@@ -72,11 +71,11 @@ abstract class Reports {
             $this->rulesets    = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                               $this->config->ext,
                                               $this->config->dev,
-                                              $this->config->themas);
+                                              $this->config->rulesets);
 
             // Default analyzers
             $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->thema),
-                                     array_keys($config->themas));
+                                     array_keys($config->rulesets));
             $this->themesList = makeList($analyzers);
         }
         

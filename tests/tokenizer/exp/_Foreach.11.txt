@@ -77,7 +77,3 @@ Label : PROJECT
                   12
           Label : VALUE
             18
-          Label : VALUE
-            18
-            Label : DEFINITION
-              18

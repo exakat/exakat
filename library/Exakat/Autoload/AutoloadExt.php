@@ -24,7 +24,7 @@ namespace Exakat\Autoload;
 
 use Exakat\Config;
 
-class AutoloadExt {
+class AutoloadExt implements Autoloader {
     const LOAD_ALL = null;
     
     private $pharList = array();

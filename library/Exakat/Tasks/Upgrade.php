@@ -65,7 +65,7 @@ class Upgrade extends Tasks {
                 return;
             }
 
-            if (preg_match('/>exakat-'.$version.'.phar<\/a>/s', $html) == 0) {
+            if (preg_match('/>exakat-' . $version . '.phar<\/a>/s', $html) == 0) {
                 print 'Unable to find last version. Try again later.' . PHP_EOL;
                 return;
             }
@@ -77,11 +77,11 @@ class Upgrade extends Tasks {
             if ($this->config->update === true) {
 
                 echo '  Updating to version ' , $version , PHP_EOL;
-                preg_match('#<pre id="sha256"><a href="index.php\?file=exakat-'.$version.'.phar.sha256">(.*?)</pre>#', $html, $r);
+                preg_match('#<pre id="sha256"><a href="index.php\?file=exakat-' . $version . '.phar.sha256">(.*?)</pre>#', $html, $r);
                 $sha256 = strip_tags($r[1]);
 
                 // Read what we can
-                $phar = (string) @file_get_contents('https://www.exakat.io/versions/index.php?file=exakat-'.$version.'.phar');
+                $phar = (string) @file_get_contents('https://www.exakat.io/versions/index.php?file=exakat-' . $version . '.phar');
 
                 if (hash('sha256', $phar) !== $sha256) {
                     print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again' . PHP_EOL;

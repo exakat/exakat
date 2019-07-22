@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 18 Jul 2019 12:44:45 +0000
-.. comment: Generation hash : ef609807547c586399fc46811da5c4096767fd68
+.. comment: Generation date : Mon, 22 Jul 2019 12:11:38 +0000
+.. comment: Generation hash : 13a38f00d061f0ea831db30aac1919bc17eeec6d
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2166,7 +2166,7 @@ The native function `array_unique() <http://www.php.net/array_unique>`_ is much 
    ?>
 
 
-See also `array_unique <https://www.php.net/manual/en/function.array-unique.php>`_.
+See also `array_unique <http://php.net/array_unique>`_.
 
 
 
@@ -2290,6 +2290,45 @@ Suggestions
 +-------------+------------------------------------------------------------------------+
 | Examples    | :ref:`phinx-performances-noglob`, :ref:`nextcloud-performances-noglob` |
 +-------------+------------------------------------------------------------------------+
+
+
+
+.. _avoid-mb\_dectect\_encoding():
+
+Avoid mb_dectect_encoding()
+###########################
+
+
+mb_dectect_encoding() is bad at guessing encoding. 
+
+For example, UTF-8 and ISO-8859-1 share some common characters : when a string is build with them it is impossible to differentiate the actual encoding.
+
+.. code-block:: php
+
+   <?php
+   
+   $encoding = mb_encoding_detect($_GET['name']);
+   
+   ?>
+
+
+See also `mb_encoding_detect <https://php.net/mb-encoding-detect>`_, `PHP vs. The Developer: Encoding Character Sets <https://www.daganhenderson.com/blog/2013/07/php-encoding-character-sets>`_, `DPC2019: Of representation and interpretation: A unified theory - Arnout Boks <https://youtu.be/K2zS6vbBb9A?t=1375>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Store and transmit the data format
+
++-------------+----------------------------+
+| Short name  | Php/AvoidMbDectectEncoding |
++-------------+----------------------------+
+| Themes      | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
 
 
 
@@ -3650,6 +3689,13 @@ Prevent your classes from being subclassed by making them ``final``. Sometimes, 
 
 See also `Negative architecture, and assumptions about code <https://matthiasnoback.nl/2018/08/negative-architecture-and-assumptions-about-code/>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the class final
+* Extends the class
+
 +-------------+------------------------------------+
 | Short name  | Classes/CouldBeFinal               |
 +-------------+------------------------------------+
@@ -4049,17 +4095,17 @@ Suggestions
 * Collect common expressions, and move them before of after the if/then expression.
 * Move a prefix and suffixes to a third-party method
 
-+-------------+----------------------------------------------------------------------------------------------+
-| Short name  | Structures/CommonAlternatives                                                                |
-+-------------+----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                               |
-+-------------+----------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                        |
-+-------------+----------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                             |
-+-------------+----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-commonalternatives`, :ref:`dolibarr-structures-commonalternatives` |
-+-------------+----------------------------------------------------------------------------------------------+
++-------------+-----------------------------------------------------------------------------------------------+
+| Short name  | Structures/CommonAlternatives                                                                 |
++-------------+-----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                |
++-------------+-----------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                         |
++-------------+-----------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                              |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-commonalternatives`, :ref:`nextcloud-structures-commonalternatives` |
++-------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -4789,6 +4835,13 @@ Since PHP 7.3, the execution will emit a warning when finding a `continue <http:
 
 See also `Deprecate and remove `continue <http://www.php.net/manual/en/control-structures.continue.php>`_ targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace break by continue
+
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ContinueIsForLoop                                                                                                                                                                                                           |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -4797,6 +4850,8 @@ See also `Deprecate and remove `continue <http://www.php.net/manual/en/control-s
 | Severity    | Minor                                                                                                                                                                                                                                  |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                                                                                                        |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`xoops-structures-continueisforloop`                                                                                                                                                                                              |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -5256,6 +5311,10 @@ Could Be Static Closure
 
 `Closure <http://www.php.net/manual/en/class.closure.php>`_ may be static, and prevent the import of ``$this``. 
 
+By preventing the useless import of ``$this``, you avoid useless work. 
+
+This also has the added value to prevent the usage of ``$this`` from the closure. This is a good security practice.
+
 .. code-block:: php
 
    <?php
@@ -5282,13 +5341,16 @@ Could Be Static Closure
    ?>
 
 
-See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_ and `Static anonymous functions <http://php.net/manual/en/functions.anonymous.php#functions.anonymous-functions.static>`_.
+This is a micro-optimisation. Apply it in case of intensive usage.
+
+See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_, `GeneratedHydrator <https://github.com/Ocramius/GeneratedHydrator/releases/tag/3.0.0>`_ and `Static anonymous functions <http://php.net/manual/en/functions.anonymous.php#functions.anonymous-functions.static>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
 * Add the static keyword to the closure.
+* Make actual usage of $this in the closure.
 
 +-------------+----------------------------------------------+
 | Short name  | Functions/CouldBeStaticClosure               |
@@ -5477,7 +5539,7 @@ Could Typehint
 ##############
 
 
-Arguments that are tested with `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ gain from making it a Typehint.
+Arguments that are tested with `instanceof <http://php.net/manual/en/language.operators.type.php>`_ gain from making it a Typehint.
 
 .. code-block:: php
 
@@ -6676,6 +6738,46 @@ Suggestions
 +-------------+----------------------------+
 | Time To Fix | Instant (5 mins)           |
 +-------------+----------------------------+
+
+
+
+.. _disconnected-classes:
+
+Disconnected Classes
+####################
+
+
+One class is extending the other, but they do not use any features from one another. Basically, those two classes are using extends, but they are completely independant and may be separated. 
+
+When using the 'extends' keyword, the newly created classes are now acting together and making one. This should be visibile in calls from one class to the other, or simply by property usage : they can't live without each other.
+
+On the other hand, two completely independant classes that are merged should be kept separated.
+
+.. code-block:: php
+
+   <?php
+   
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the extension
+* Make actual usage of the classes, at least from one of them
+
++-------------+-----------------------------+
+| Short name  | Classes/DisconnectedClasses |
++-------------+-----------------------------+
+| Themes      | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Slow (1 hour)               |
++-------------+-----------------------------+
 
 
 
@@ -8958,6 +9060,14 @@ An exception is instantiated, but not thrown.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the throw expression
+* Add the new to the throw expression
+
 +-------------+----------------------------+
 | Short name  | Exceptions/ForgottenThrown |
 +-------------+----------------------------+
@@ -10064,6 +10174,14 @@ This means those expressions may be simplified.
    if ($a === 1 && 1 === $a) {}
    
    ?>
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge the two structures into one unique test
+* Add extra expressions between the two structures
+* Nest the structures, to show that different attempts are made
 
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IdenticalConditions                                                                                                                |
@@ -17980,6 +18098,68 @@ Optional characteristics, like final, static... are not specified. Special metho
 
 
 
+.. _overwriten-source-and-value:
+
+Overwriten Source And Value
+###########################
+
+
+In a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_, it is best to keep source and values distinct. Otherwise, they overwrite each other.
+
+Since PHP 7.0, PHP makes a copy of the orginal source, then works on it. This makes possible to use the same name for the source and the values.
+
+.. code-block:: php
+
+   <?php
+   
+   // displays 0-1-2-3-3
+   $array = range(0, 3);
+   foreach($array as $array) {
+       print $array . '-';
+   }
+   print_r($array);
+   
+   
+   /* displays 0-1-2-3-Array
+   (
+       [0] => 0
+       [1] => 1
+       [2] => 2
+       [3] => 3
+   )
+   */
+   $array = range(0, 3);
+   foreach($array as $v) {
+       print $v . '-';
+   }
+   print_r($array);
+   
+   ?>
+
+
+When the source is used as the value, the elements in the array are successively assigned to itself. After the loop, the original array has been replaced by its last element.
+
+The same applies to the index, or to any variable in a `list() <http://www.php.net/list>`_ structure, used in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep the source, the index and the values distinct
+
++-------------+-------------------------------+
+| Short name  | Structures/ForeachSourceValue |
++-------------+-------------------------------+
+| Themes      | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+
+
+
 .. _overwritten-exceptions:
 
 Overwritten Exceptions
@@ -22288,7 +22468,7 @@ Some functions duplicate the feature of an operator. When in doubt, it is better
 Beware, some edge cases may apply. In particular, backward compatibility may prevent usage of newer features.
 
 * `array_push() <http://www.php.net/array_push>`_ is equivalent to [] 
-* `is_object() <http://www.php.net/is_object>`_ is equivalent to `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_
+* `is_object() <http://www.php.net/is_object>`_ is equivalent to `instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * function_get_arg() and function_get_args() is equivalent to ellipsis : `... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `chr() <http://www.php.net/chr>`_ is equivalent to string escape sequences, such as ``\n``, ``\x69``, ``u{04699}``
 * `call_user_func() <http://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(`... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_$arguments)``
@@ -25150,7 +25330,7 @@ Undefined \:\:class
 
 ``\:\:class`` doesn't check if a corresponding class exists. 
 
-``\:\:class`` must be checked with a call to `class_exists() <http://www.php.net/class_exists>`_. Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+``\:\:class`` must be checked with a call to `class_exists() <http://www.php.net/class_exists>`_. Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
 
 .. code-block:: php
 
@@ -25382,6 +25562,16 @@ Some functions are called, but not defined in the code. This means that the func
 
 See also `Functions <http://php.net/manual/en/language.functions.php>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of the function in the code
+* Remove the functioncall in the code
+* Define the function for the code to call it
+* Include the correct library in the code source
+
 +-------------+------------------------------+
 | Short name  | Functions/UndefinedFunctions |
 +-------------+------------------------------+
@@ -25585,6 +25775,25 @@ List of properties that are not explicitly defined in the class, its parents or 
    ?>
 
 
+It is possible to spot unidentified properties by using the PHP's magic methods ``__get`` and ``__set``. Even if the class doesn't use magic methods, any call to an undefined property will be directed to those methods, and they can be used as a canary, warning that the code is missing a definition. 
+
+.. code-block:: php
+
+   <?php
+   
+   trait NoUnefinedProperties {
+   	function __get($name) {
+   		assert(false, "Attempt to read the $name property, on the class ".__CLASS__;
+   	}
+   
+   	function __set($name, $value) {
+   		assert(false, "Attempt to read the $name property, on the class ".__CLASS__;
+   	}
+   }
+   
+   ?>
+
+
 See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 
 Suggestions
@@ -25680,6 +25889,14 @@ Variable may be created in various ways : assignation, arguments, foreach blind 
 This analysis doesn't handle dynamic variables, such as ``$$x``. It also doesn't handle variables outside a method or function.
 
 See also `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the expression that is using the undefined variable
+* Fix the variable name
+* Define the variable by assigning a value to it, before using it
 
 +-------------+-----------------------------+
 | Short name  | Variables/UndefinedVariable |
@@ -26262,7 +26479,7 @@ Unresolved Instanceof
 #####################
 
 
-The `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ operator doesn't confirm if the compared class exists. 
+The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator doesn't confirm if the compared class exists. 
 
 It checks if an variable is of a specific class. However, if the referenced class doesn't exist, because of a bug, a missed inclusion or a typo, the operator always fails, without a warning. 
 
@@ -27768,7 +27985,7 @@ Use Instanceof
 
 The ``instanceof`` operator is a more precise alternative to ``is_object()``. It is also faster.
 
-`instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
+`instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
 Once ``instanceof`` has been used, the actual attributes available (properties, constants, methods) are known, unlike with ``is_object()``.
 
 Last, ``instanceof`` may be upgraded to Typehint, by moving it to the method signature. 
@@ -29517,7 +29734,7 @@ Useless Interfaces
 
 The interfaces below are defined and are implemented by some classes. 
 
-However, they are never used to enforce an object's class in the code, using `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ or in a typehint. 
+However, they are never used to enforce an object's class in the code, using `instanceof <http://php.net/manual/en/language.operators.type.php>`_ or in a typehint. 
 As they are currently used, those interfaces may be removed without change in behavior.
 
 .. code-block:: php
@@ -29529,7 +29746,7 @@ As they are currently used, those interfaces may be removed without change in be
    ?>
 
 
-Interfaces should be used in Typehint or with the `instanceof <http://www.php.net/manual/en/language.operators.type.php>`_ operator. 
+Interfaces should be used in Typehint or with the `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator. 
 
 .. code-block:: php
 
@@ -29805,7 +30022,7 @@ In particular, a type hinted argument can't be null, unless it is explicitely nu
    ?>
 
 
-See also `type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+See also `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 
 Suggestions
@@ -30288,6 +30505,15 @@ Those variables are being written, but never read. This way, they are useless an
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check that variables are written AND read in each context
+* Remove variables that are only read
+* Use the variable that are only read
+
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Variables/WrittenOnlyVariable                                                                       |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -30298,6 +30524,8 @@ Those variables are being written, but never read. This way, they are useless an
 | Time To Fix | Slow (1 hour)                                                                                       |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-variables-writtenonlyvariable`, :ref:`suitecrm-variables-writtenonlyvariable`        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 

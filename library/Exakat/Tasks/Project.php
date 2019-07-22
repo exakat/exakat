@@ -82,7 +82,7 @@ class Project extends Tasks {
             throw new NoCodeInProject($this->config->project);
         }
 
-        // Baseline is always the previous audit done, not the current one! 
+        // Baseline is always the previous audit done, not the current one!
         $baselinestash = new BaselineStash($this->config);
         $baselinestash->copyPrevious($this->config->dump, $this->config->baseline_set);
 
@@ -245,7 +245,7 @@ class Project extends Tasks {
         $this->logTime('Analyze');
 
         $dump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        foreach($this->config->themas as $name => $analyzers) {
+        foreach($this->config->rulesets as $name => $analyzers) {
             $dump->checkRulesets($name, $analyzers);
         }
 
@@ -263,7 +263,7 @@ class Project extends Tasks {
 
                 $report->run();
             } catch (\Throwable $e) {
-                display( "Error while building $format : ".$e->getMessage()."\n");
+                display( "Error while building $format : " . $e->getMessage() . "\n");
             }
             unset($reportConfig);
             $this->logTime("Reported $name");
@@ -304,6 +304,7 @@ class Project extends Tasks {
                                                             'update'    => true,
                                                             'program'   => $analyzers,
                                                             'verbose'   => false,
+                                                            'quiet'     => true,
                                                             ));
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
@@ -371,6 +372,7 @@ class Project extends Tasks {
                                                                 'update'    => true,
                                                                 'thema'     => array($ruleset),
                                                                 'verbose'   => false,
+                                                                'quiet'     => true,
                                                                 ));
 
                 $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);

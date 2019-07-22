@@ -77,7 +77,7 @@ class Report extends Tasks {
             $reportConfig = new ReportConfig($format, $this->config);
             $reportClass = $reportConfig->getFormatClass();
             if (!class_exists($reportClass)) {
-                display("No such format as ".$reportConfig->getFormat().". Omitting.");
+                display('No such format as ' . $reportConfig->getFormat() . '. Omitting.');
                 continue;
             }
 
@@ -90,9 +90,9 @@ class Report extends Tasks {
     private function format(Reports $report, $format) {
         $begin = microtime(true);
 
-        if (empty($this->config->file) || count($this->config->format) > 1) {
+        if (empty($this->config->file) || count($this->config->project_reports) > 1) {
             $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
-            display("Building report for project {$this->config->project} in '" . $file . "', with format {$format}\n");
+            display("Building report for project {$this->config->project} in '" . $file . "', with report {$format}\n");
             $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
             display("Building report for project {$this->config->project} to stdout, with format {$format}\n");

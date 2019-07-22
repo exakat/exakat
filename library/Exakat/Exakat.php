@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.8.8';
-    const BUILD = 967;
+    const VERSION = '1.8.9';
+    const BUILD = 972;
 
     private $gremlin = null;
     private $config = null;
@@ -255,6 +255,11 @@ class Exakat {
 
             case 'extension' :
                 $task = new Tasks\Extension($this->gremlin, $this->config);
+                $task->run();
+                break;
+
+            case 'baseline' :
+                $task = new Tasks\Baseline($this->gremlin, $this->config);
                 $task->run();
                 break;
 

@@ -101,11 +101,3 @@ Label : PROJECT
                 7
           Label : VALUE
             12
-          Label : VALUE
-            10
-            Label : DEFINITION
-              10
-          Label : VALUE
-            12
-            Label : DEFINITION
-              12
