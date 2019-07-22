@@ -36,9 +36,10 @@ include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadExt.php";
 include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadDev.php";
 include "$EXAKAT_PATH/library/helpers.php";
 
-spl_autoload_register('\Exakat\Autoload\Autoload::autoload_test');
-spl_autoload_register('\Exakat\Autoload\Autoload::autoload_phpunit');
-spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
+$autoload = new \Exakat\Autoload\Autoload();
+$autoload->registerAutoload();
+spl_autoload_register(array($autoload, 'autoload_test'));
+spl_autoload_register(array($autoload, 'autoload_phpunit'));
 
 abstract class Analyzer extends TestCase {
     public function generic_test($file) {
