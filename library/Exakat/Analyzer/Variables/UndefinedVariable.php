@@ -35,6 +35,7 @@ class UndefinedVariable extends Analyzer {
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition(array('Eval', 'Include'))
              )
+             // Not from extract
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -42,6 +43,14 @@ class UndefinedVariable extends Analyzer {
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition('Functioncall')
                      ->functioncallIs('\\extract')
+             )
+
+             // Not from foreach
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('VALUE')
+                     ->atomIs('Foreach')
              )
              ->filter(
                 $this->side()
