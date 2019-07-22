@@ -1,0 +1,381 @@
+test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
+          Label : ARGUMENT
+            12
+          Label : ARGUMENT
+            13
+          Label : NAME
+            11
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+Label : GLOBAL
+  27
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+    Label : DEFINITION
+      27
+Label : GLOBAL
+  29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+Label : GLOBAL
+  38
+  Label : DEFINITION
+    38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+Label : GLOBAL
+  41
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+    Label : DEFINITION
+      41
+Label : GLOBAL
+  43
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+    Label : DEFINITION
+      43
+Label : PROJECT
+  1
+  Label : DEFINITION
+    5
+    Label : DEFAULT
+      8
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          9
+        Label : VALUE
+          11
+          Label : ARGUMENT
+            12
+          Label : ARGUMENT
+            13
+          Label : NAME
+            11
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      27
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    38
+    Label : DEFINITION
+      38
+    Label : DEFINITION
+      38
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+    Label : DEFINITION
+      41
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+    Label : DEFINITION
+      43
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              10
+              Label : INDEX
+                9
+              Label : VALUE
+                11
+                Label : ARGUMENT
+                  12
+                Label : ARGUMENT
+                  13
+                Label : NAME
+                  11
+        Label : EXPRESSION
+          14
+          Label : BLOCK
+            35
+            Label : EXPRESSION
+              45
+              Label : ARGUMENT
+                36
+                Label : CONCAT
+                  5
+                Label : CONCAT
+                  37
+                Label : CONCAT
+                  38
+                Label : CONCAT
+                  40
+                Label : CONCAT
+                  41
+                Label : CONCAT
+                  40
+                Label : CONCAT
+                  43
+          Label : INDEX
+            17
+          Label : SOURCE
+            15
+          Label : VALUE
+            8
+            Label : ARGUMENT
+              10
+              Label : INDEX
+                19
+              Label : VALUE
+                20
+            Label : ARGUMENT
+              10
+              Label : INDEX
+                22
+              Label : VALUE
+                23
+            Label : ARGUMENT
+              10
+              Label : INDEX
+                12
+              Label : VALUE
+                8
+                Label : ARGUMENT
+                  25
+                Label : ARGUMENT
+                  27
+                Label : ARGUMENT
+                  8
+                  Label : ARGUMENT
+                    29
+                  Label : ARGUMENT
+                    31
+                  Label : ARGUMENT
+                    8
+                    Label : ARGUMENT
+                      33
+          Label : VALUE
+            20
+          Label : VALUE
+            23
+          Label : VALUE
+            25
+          Label : VALUE
+            29
+          Label : VALUE
+            27
+          Label : VALUE
+            31
+        Label : EXPRESSION
+          14
+          Label : BLOCK
+            35
+            Label : EXPRESSION
+              45
+              Label : ARGUMENT
+                36
+                Label : CONCAT
+                  5
+                Label : CONCAT
+                  37
+                Label : CONCAT
+                  38
+                Label : CONCAT
+                  40
+                Label : CONCAT
+                  41
+                Label : CONCAT
+                  40
+                Label : CONCAT
+                  43
+          Label : INDEX, VALUE
+            17
+          Label : SOURCE, VALUE
+            15
+          Label : VALUE
+            46
+            Label : ARGUMENT
+              20
+            Label : ARGUMENT
+              23
+            Label : ARGUMENT
+              46
+              Label : ARGUMENT
+                25
+              Label : ARGUMENT
+                27
+              Label : ARGUMENT
+                46
+                Label : ARGUMENT
+                  29
+                Label : ARGUMENT
+                  31
+                Label : ARGUMENT
+                  46
+                  Label : ARGUMENT
+                    33
+                  Label : NAME
+                    46
+                Label : NAME
+                  46
+              Label : NAME
+                46
+            Label : NAME
+              46
+          Label : VALUE
+            20
+          Label : VALUE
+            25
+          Label : VALUE
+            29
+          Label : VALUE
+            23
+          Label : VALUE
+            27
+          Label : VALUE
+            31

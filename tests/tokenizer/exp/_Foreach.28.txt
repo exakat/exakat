@@ -85,7 +85,3 @@ Label : PROJECT
                     11
               Label : VALUE
                 17
-              Label : VALUE
-                17
-                Label : DEFINITION
-                  17

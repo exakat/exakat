@@ -111,7 +111,3 @@ Label : PROJECT
                 9
               Label : VALUE
                 11
-              Label : VALUE
-                11
-                Label : DEFINITION
-                  11
