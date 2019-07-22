@@ -24,14 +24,14 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Autoload\AutoloadDev;
+use Exakat\Autoload\Autoloader;
 
 class RulesetsDev {
     private $dev           = null;
     private $all           = array('All' => array());
     private $rulesets      = array();
 
-    public function __construct(AutoloadDev $dev) {
+    public function __construct(Autoloader $dev) {
         $this->dev = $dev;
         
         $this->all      = $dev->getAllAnalyzers() ?: array('All' => array());

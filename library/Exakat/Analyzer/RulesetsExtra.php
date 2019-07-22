@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Autoload\AutoloadExt;
+use Exakat\Autoload\Autoloader;
 
 class RulesetsExtra {
     private $extra_rulesets  = array();
@@ -32,7 +32,7 @@ class RulesetsExtra {
 
     private static $instanciated = array();
     
-    public function __construct(array $extra_rulesets = array(), Autoloadext $ext) {
+    public function __construct(array $extra_rulesets = array(), Autoloader $ext) {
         $this->extra_rulesets = $extra_rulesets;
         $this->ext            = $ext;
     }

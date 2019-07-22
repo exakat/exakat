@@ -25,7 +25,7 @@ namespace Exakat\Autoload;
 use Exakat\Config;
 use Phar;
 
-class AutoloadDev {
+class AutoloadDev implements Autoloader {
     const LOAD_ALL = null;
 
     private $path = '';
@@ -40,7 +40,7 @@ class AutoloadDev {
         $this->path = $path;
     }
 
-    public function autoload_dev($name) {
+    public function autoload($name) {
         if (empty($this->path)) { return; }
 
         $fileName = str_replace('Exakat\\', '', $name);
@@ -56,7 +56,7 @@ class AutoloadDev {
     }
 
     public function registerAutoload() {
-        spl_autoload_register(array($this, 'autoload_dev'));
+        spl_autoload_register(array($this, 'autoload'));
     }
 
     public function getAllAnalyzers() {
