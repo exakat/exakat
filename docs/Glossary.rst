@@ -303,6 +303,7 @@ Glossary
 
       + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
@@ -577,6 +578,7 @@ Glossary
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`Overwriten Source And Value <overwriten-source-and-value>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Should Yield With Key <should-yield-with-key>`
@@ -939,6 +941,7 @@ Glossary
       + :ref:`List Short Syntax <list-short-syntax>`
       + :ref:`List With Keys <list-with-keys>`
       + :ref:`No List With String <no-list-with-string>`
+      + :ref:`Overwriten Source And Value <overwriten-source-and-value>`
       + :ref:`Use List With Foreach <use-list-with-foreach>`
       + :ref:`list() May Omit Variables <list()-may-omit-variables>`
 

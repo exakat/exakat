@@ -345,6 +345,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
+* SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
 * `Thelia <https://thelia.net/>`_
@@ -357,6 +358,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Woocommerce <https://woocommerce.com/>`_
 * `WordPress <https://www.wordpress.org/>`_
 * `XOOPS <https://xoops.org/>`_
+* Xoops
 * `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
@@ -430,7 +432,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.8.9
 
-  * Classes/DisconnectedClasses (Classes/DisconnectedClasses)
+  * Avoid mb_dectect_encoding() (Php/AvoidMbDectectEncoding ; Analyze)
+  * Disconnected Classes (Classes/DisconnectedClasses)
+  * Not Or Tilde (Structures/NotOrNot ; Preferences)
+  * Overwriten Source And Value (Structures/ForeachSourceValue ; Analyze, OneFile)
   * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
 
 * 1.8.8
@@ -2126,7 +2131,7 @@ List of external links mentionned in this documentation.
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `.exakat.ini` or `.exakat.yaml` file. See `Add Exakat To Your CI Pipeline <https://www.exakat.io/add-exakat-to-your-ci-pipeline/>`_
-* `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_
+* `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_
 * `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-security-best-practices/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
@@ -2145,15 +2150,14 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
-* `array_unique <https://www.php.net/manual/en/function.array-unique.php>`_
 * `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
@@ -2171,6 +2175,7 @@ List of external links mentionned in this documentation.
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_
 * `Bitmask Constant Arguments in PHP <https://medium.com/@liamhammett/bitmask-constant-arguments-in-php-cf32bf35c73>`_
+* `Bitwise Operators <https://www.php.net/manual/en/language.operators.bitwise.php>`_
 * `Brandon Savage <https://twitter.com/BrandonSavage>`_
 * `browscap <http://browscap.org/>`_
 * `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_
@@ -2410,13 +2415,14 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
+* `mb_encoding_detect <https://php.net/mb-encoding-detect>`_
 * `mb_str_split <http://php.net/mb_str_split>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_
@@ -2625,7 +2631,7 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -2887,6 +2893,7 @@ _______
 |   analyzer[] = "Performances/StrposTooMuch";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/AssignAnd";
+|   analyzer[] = "Php/AvoidMbDectectEncoding";
 |   analyzer[] = "Php/BetterRand";
 |   analyzer[] = "Php/ClassFunctionConfusion";
 |   analyzer[] = "Php/ConcatAndAddition";
@@ -2961,6 +2968,7 @@ _______
 |   analyzer[] = "Structures/ExitUsage";
 |   analyzer[] = "Structures/FailingSubstrComparison";
 |   analyzer[] = "Structures/ForeachReferenceIsNotModified";
+|   analyzer[] = "Structures/ForeachSourceValue";
 |   analyzer[] = "Structures/ForgottenWhiteSpace";
 |   analyzer[] = "Structures/GlobalUsage";
 |   analyzer[] = "Structures/Htmlentitiescall";
@@ -3112,6 +3120,7 @@ ___________
 |   analyzer[] = "Classes/CouldBeProtectedProperty";
 |   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/DependantAbstractClass";
+|   analyzer[] = "Classes/DisconnectedClasses";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
