@@ -32,7 +32,8 @@ try {
     
     register_shutdown_function('shutdown');
     
-    spl_autoload_register(array(\Exakat\Autoload\Autoload::class, 'autoload_library'));
+    $autoload = new \Exakat\Autoload\Autoload();
+    $autoload->registerAutoload();
     
     if (file_exists(__DIR__.'/vendor/autoload.php')) {
         require __DIR__.'/vendor/autoload.php';
