@@ -32,10 +32,6 @@ class History extends Reports {
     const FILE_FILENAME  = 'history';
     const FILE_EXTENSION = 'sqlite';
 
-    public function __construct($config) {
-
-    }
-
     public function generate($folder, $name = 'history') {
         if ($name === self::STDOUT) {
             print "Can't produce History format to stdout\n";

@@ -82,7 +82,7 @@ class Project extends Tasks {
             throw new NoCodeInProject($this->config->project);
         }
 
-        // Baseline is always the previous audit done, not the current one! 
+        // Baseline is always the previous audit done, not the current one!
         $baselinestash = new BaselineStash($this->config);
         $baselinestash->copyPrevious($this->config->dump, $this->config->baseline_set);
 
@@ -263,7 +263,7 @@ class Project extends Tasks {
 
                 $report->run();
             } catch (\Throwable $e) {
-                display( "Error while building $format : ".$e->getMessage()."\n");
+                display( "Error while building $format : " . $e->getMessage() . "\n");
             }
             unset($reportConfig);
             $this->logTime("Reported $name");

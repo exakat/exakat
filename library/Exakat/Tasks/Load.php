@@ -26,6 +26,7 @@ use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Graph\Graph;
 use Exakat\Exceptions\InvalidPHPBinary;
+use Exakat\Exceptions\CantCompileFile;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
@@ -989,7 +990,7 @@ class Load extends Tasks {
                                                        'MEMBER' => $propertyName,
                                                        ));
 
-                    if ($variable->atom === 'This' && 
+                    if ($variable->atom === 'This' &&
                         $propertyName->token   === 'T_STRING') {
                         $this->calls->addCall('property', "{$variable->fullnspath}::{$propertyName->code}", $property);
                         array_collect_by($this->currentPropertiesCalls, $propertyName->code, $property);
@@ -3258,7 +3259,7 @@ class Load extends Tasks {
         for($i = $variables_start; $i < $max; ++$i) {
             if (!isset($this->atoms[$i])) {
                 print_r(array_keys($this->atoms));
-                print $variables_start.  ' <-> '.$max.' : '.$i."\n";
+                print $variables_start . ' <-> ' . $max . ' : ' . $i . "\n";
                 die();
             }
             if ($this->atoms[$i]->atom === 'Variable') {

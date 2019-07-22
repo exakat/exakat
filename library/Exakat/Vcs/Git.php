@@ -96,7 +96,7 @@ class Git extends Vcs {
     public function update() {
         $this->check();
 
-        if (!file_exists($this->destinationFull.'/.git')) {
+        if (!file_exists($this->destinationFull . '/.git')) {
             display("This doesn't seem to be a git repository. Aborting\n");
 
             return self::NO_UPDATE;

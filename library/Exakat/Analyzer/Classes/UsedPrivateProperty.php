@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UsedPrivateProperty extends Analyzer {
     public function analyze() {
         // property used in a staticproperty \a\b::$b
-        // a property must be read to be used. 
+        // a property must be read to be used.
         $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('PPP')
@@ -46,7 +46,7 @@ class UsedPrivateProperty extends Analyzer {
         $this->prepareQuery();
 
         // property used in a normal propertycall with $this $this->b
-        // a property must be read to be used. 
+        // a property must be read to be used.
         $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
              ->outIs('PPP')
              ->atomIs('Ppp')

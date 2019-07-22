@@ -62,7 +62,6 @@ abstract class Reports {
     protected $rulesets  = null;
 
     public function __construct(Config $config) {
-        assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
         if (file_exists($this->config->dump)) {

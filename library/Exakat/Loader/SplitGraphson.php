@@ -209,7 +209,6 @@ GREMLIN;
     }
 
     private function cleanCsv() {
-        return;
         if (file_exists($this->path)) {
             unlink($this->path);
         }

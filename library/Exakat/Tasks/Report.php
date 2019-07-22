@@ -77,7 +77,7 @@ class Report extends Tasks {
             $reportConfig = new ReportConfig($format, $this->config);
             $reportClass = $reportConfig->getFormatClass();
             if (!class_exists($reportClass)) {
-                display("No such format as ".$reportConfig->getFormat().". Omitting.");
+                display('No such format as ' . $reportConfig->getFormat() . '. Omitting.');
                 continue;
             }
 

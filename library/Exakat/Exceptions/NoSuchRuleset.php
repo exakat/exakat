@@ -23,12 +23,12 @@
 
 namespace Exakat\Exceptions;
 
-class NoSuchThema extends \RuntimeException {
-    public function __construct(string $message = '',array $themes = array()) {
-        $exception = "No such analysis thema as '$message'. \n";
+class NoSuchRuleset extends \RuntimeException {
+    public function __construct(string $message = '',array $rulesets = array()) {
+        $exception = "No such ruleset as '$message'. \n";
         
-        if (!empty($themes)) {
-            $exception .= 'You can try : ' . implode(', ', $themes) . PHP_EOL;
+        if (!empty($rulesets)) {
+            $exception .= 'You can try : ' . implode(', ', $rulesets) . PHP_EOL;
         }
 
         parent::__construct($exception);

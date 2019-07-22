@@ -357,16 +357,15 @@ TEXT
 
     private function checkPHP($pathToBinary, $displayedVersion) {
         $stats = array();
-        
+
         $stats['configured'] = 'Yes (' . $pathToBinary . ')';
 
         try {
             new Phpexec($displayedVersion, $pathToBinary);
         } catch (NoPhpBinary $e) {
             $stats['installed'] = 'Invalid path : ' . $pathToBinary;
-        } finally {
-            return $stats;
         }
+        return $stats;
     }
 
     private function array2list(array $array) {
