@@ -60,7 +60,7 @@ class Config {
     private $configFiles = array();
     private $options     = array();
     private $remotes     = array();
-    private $themas      = array();
+    private $rulesets    = array();
     
     public function __construct($argv) {
         $this->argv = $argv;
@@ -218,8 +218,10 @@ class Config {
             $return = $this->configFiles;
         } elseif ($name === 'remotes') {
             $return = $this->remotes;
+        } elseif ($name === 'rulesets') {
+            $return = $this->rulesets;
         } elseif ($name === 'themas') {
-            $return = $this->themas;
+            $return = $this->rulesets;
         } elseif (isset($this->options[$name])) {
             $return = $this->options[$name];
         } elseif ($name === 'screen_cols') {
@@ -234,7 +236,7 @@ class Config {
     }
 
     public function __set($name, $value) {
-        display("It is not possible to modify configuration $name with value '$value'\n");
+        display("It is not possible to modify configuration $name with value '".var_export($value, true)."'\n");
     }
 
     private function checkSelf() {

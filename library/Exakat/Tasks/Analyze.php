@@ -123,7 +123,7 @@ class Analyze extends Tasks {
         if (!$this->config->verbose && !$this->config->quiet) {
             $this->progressBar = new Progressbar(0, count($analyzerList) + 1, $this->config->screen_cols);
         }
-        
+
         foreach($analyzerList as $analyzer_class) {
             if (!$this->config->verbose && !$this->config->quiet) {
                 echo $this->progressBar->advance();
@@ -136,7 +136,7 @@ class Analyze extends Tasks {
         if (!$this->config->verbose && !$this->config->quiet) {
             echo $this->progressBar->advance();
         }
-        
+
         display("Done\n");
     }
     

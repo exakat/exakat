@@ -115,7 +115,7 @@ abstract class Tasks {
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                        $this->config->ext,
                                        $this->config->dev,
-                                       $this->config->themas);
+                                       $this->config->rulesets);
 
         Data::$config = $config;
     }

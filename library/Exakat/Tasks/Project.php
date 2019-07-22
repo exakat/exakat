@@ -245,7 +245,7 @@ class Project extends Tasks {
         $this->logTime('Analyze');
 
         $dump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        foreach($this->config->themas as $name => $analyzers) {
+        foreach($this->config->rulesets as $name => $analyzers) {
             $dump->checkRulesets($name, $analyzers);
         }
 
@@ -304,6 +304,7 @@ class Project extends Tasks {
                                                             'update'    => true,
                                                             'program'   => $analyzers,
                                                             'verbose'   => false,
+                                                            'quiet'     => true,
                                                             ));
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
@@ -371,6 +372,7 @@ class Project extends Tasks {
                                                                 'update'    => true,
                                                                 'thema'     => array($ruleset),
                                                                 'verbose'   => false,
+                                                                'quiet'     => true,
                                                                 ));
 
                 $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);

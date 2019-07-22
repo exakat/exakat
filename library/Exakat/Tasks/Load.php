@@ -3257,11 +3257,6 @@ class Load extends Tasks {
         // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
         $max = max(array_keys($this->atoms));
         for($i = $variables_start; $i < $max; ++$i) {
-            if (!isset($this->atoms[$i])) {
-                print_r(array_keys($this->atoms));
-                print $variables_start . ' <-> ' . $max . ' : ' . $i . "\n";
-                die();
-            }
             if ($this->atoms[$i]->atom === 'Variable') {
                 $this->addLink($foreach, $this->atoms[$i], 'VALUE');
             }

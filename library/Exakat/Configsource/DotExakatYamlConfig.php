@@ -38,8 +38,6 @@ class DotExakatYamlConfig extends Config {
         if (!file_exists($this->dotExakatYaml)) {
             $secondary = substr($this->dotExakatYaml, 0, -3).'yaml';
             if (file_exists($secondary)) {
-                // Can't use display while in config phase
-                print("Falling back to .exakat.yaml. Please, use .yml\n");
                 $this->dotExakatYaml = $secondary;
             }
         }
