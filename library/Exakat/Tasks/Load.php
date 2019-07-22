@@ -3227,7 +3227,7 @@ class Load extends Tasks {
 
         $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
-        $variables = $this->currentVariables;
+        $variables_start = count($this->atoms);
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                 $this->phptokens::T_DOUBLE_ARROW,
@@ -3240,6 +3240,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
             $this->addLink($foreach, $value, 'INDEX');
+            $variables_start = count($this->atoms);
             $index = $value;
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
@@ -3250,10 +3251,14 @@ class Load extends Tasks {
             $value = $this->popExpression();
             $valueFullcode .= " => {$value->fullcode}";
         }
-
         $this->addLink($foreach, $value, 'VALUE');
-        foreach(array_diff(array_keys($this->currentVariables), array_keys($variables)) as $name) {
-            $this->addLink($foreach, $this->currentVariables[$name], 'VALUE');
+
+        // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
+        $max = count($this->atoms) - 1;
+        for($i = $variables_start; $i < $max; ++$i) {
+            if ($this->atoms[$i]->atom === 'Variable') {
+                $this->addLink($foreach, $this->atoms[$i], 'VALUE');
+            }
         }
 
         ++$this->id; // Skip )
