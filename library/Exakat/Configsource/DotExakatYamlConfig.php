@@ -25,6 +25,7 @@ namespace Exakat\Configsource;
 use Exakat\Phpexec;
 use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 class DotExakatYamlConfig extends Config {
     const YAML_FILE = '.exakat.yml';
@@ -33,6 +34,15 @@ class DotExakatYamlConfig extends Config {
 
     public function __construct() {
         $this->dotExakatYaml = getcwd() . '/' . self::YAML_FILE;
+        
+        if (!file_exists($this->dotExakatYaml)) {
+            $secondary = substr($this->dotExakatYaml, 0, -3).'yaml';
+            if (file_exists($secondary)) {
+                // Can't use display while in config phase
+                print("Falling back to .exakat.yaml. Please, use .yml\n");
+                $this->dotExakatYaml = $secondary;
+            }
+        }
     }
 
     public function loadConfig($project) {
@@ -41,7 +51,17 @@ class DotExakatYamlConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $tmp_config = Yaml::parseFile($this->dotExakatYaml);
+        try {
+            $tmp_config = Yaml::parseFile($this->dotExakatYaml);
+        } catch (ParseException $exception) {
+            // Empty on purppose 
+        }
+
+        if (!is_array($tmp_config)) {
+            // Can't use display while in config phase
+            print("Failed to parse YAML file. Please, check its syntax.\n");
+            return self::NOT_LOADED;
+        }
 
         // removing empty values in the INI file
         foreach($tmp_config as &$value) {
