@@ -24,9 +24,10 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\RulesetsInterface;
 use Exakat\Autoload\Autoloader;
 
-class RulesetsExt {
+class RulesetsExt implements RulesetsInterface {
     private $ext           = null;
     private $all           = array();
     private $rulesets      = array();
@@ -123,7 +124,7 @@ class RulesetsExt {
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets() {
+    public function listAllRulesets($ruleset = null) {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -181,7 +182,7 @@ class RulesetsExt {
         }
     }
 
-    public function getSuggestionRulesets(array $rulesets) {
+    public function getSuggestionRuleset(array $rulesets) {
         $list = $this->listAllRulesets();
         
         return array_filter($list, function ($c) use ($rulesets) {

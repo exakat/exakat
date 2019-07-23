@@ -24,9 +24,10 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\RulesetsInterface;
 use Exakat\Autoload\Autoloader;
 
-class RulesetsExtra {
+class RulesetsExtra implements RulesetsInterface {
     private $extra_rulesets  = array();
     private $ext             = null;
 
@@ -141,7 +142,7 @@ class RulesetsExtra {
         return array();
     }
 
-    public function listAllRulesets() {
+    public function listAllRulesets($ruleset = null) {
         return array_keys($this->extra_rulesets);
     }
 
@@ -190,7 +191,7 @@ class RulesetsExtra {
             return false;
         });
     }
-    
+
     public function getSuggestionClass($name) {
         return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
@@ -202,7 +203,7 @@ class RulesetsExtra {
     public static function resetCache() {
         self::$instanciated = array();
     }
-    
+
     public function getInstance($name, $gremlin = null, $config = null) {
         if ($analyzer = $this->getClass($name)) {
             if (!isset(self::$instanciated[$analyzer])) {
@@ -215,5 +216,8 @@ class RulesetsExtra {
         }
     }
 
+    public function getAnalyzerInExtension($name) {
+        return array();
+    }
 }
 ?>

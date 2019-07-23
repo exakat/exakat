@@ -26,7 +26,7 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\Autoloader;
 
-class Rulesets {
+class Rulesets implements RulesetsInterface {
     private $main   = null;
     private $ext    = null;
     private $extra  = array();
@@ -155,13 +155,12 @@ class Rulesets {
     }
 
     public function getAnalyzerInExtension($name) {
-//        $main  = $this->main ->getAnalyzerInExtension($name);
-//        $extra = $this->extra->getAnalyzerInExtension($name);
+        $main  = $this->main ->getAnalyzerInExtension($name);
+        $extra = $this->extra->getAnalyzerInExtension($name);
         $ext   = $this->ext  ->getAnalyzerInExtension($name);
         $dev   = $this->dev  ->getAnalyzerInExtension($name);
         
-//        return array_merge($main, $extra, $ext, $dev);
-        return array_merge($ext, $dev);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public static function resetCache() {
