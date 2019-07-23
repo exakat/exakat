@@ -38,7 +38,7 @@ class RulesetsExtra implements RulesetsInterface {
         $this->ext            = $ext;
     }
 
-    public function getRulesetsAnalyzers($ruleset = null) {
+    public function getRulesetsAnalyzers(?array $ruleset = null) {
         // Main installation
         if ($ruleset === null) {
             return array_unique(array_merge(...$this->extra_rulesets));
@@ -178,7 +178,7 @@ class RulesetsExtra implements RulesetsInterface {
         }
     }
 
-    public function getSuggestionRuleset($rulesets) {
+    public function getSuggestionRuleset(array $rulesets) {
         $list = $this->listAllRulesets();
 
         return array_filter($list, function ($c) use ($rulesets) {

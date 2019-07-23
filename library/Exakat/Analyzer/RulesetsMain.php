@@ -49,7 +49,7 @@ class RulesetsMain implements RulesetsInterface {
         }
     }
     
-    public function getRulesetsAnalyzers($ruleset = null) {
+    public function getRulesetsAnalyzers(?array $ruleset = null) {
         $all = $this->listAllRulesets();
 
         // Main installation
