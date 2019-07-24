@@ -30,7 +30,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
 class DotExakatYamlConfig extends Config {
     const YAML_FILE = '.exakat.yml';
     private $dotExakatYaml = '';
-    private $themas = array();
+    private $rulesets = array();
 
     public function __construct() {
         $this->dotExakatYaml = getcwd() . '/' . self::YAML_FILE;
@@ -153,7 +153,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (isset($this->config['rulesets'])) {
-            $this->themas = array_map('array_values', $this->config['rulesets']);
+            $this->rulesets = array_map('array_values', $this->config['rulesets']);
             unset($this->config['rulesets']);
         }
 
@@ -164,8 +164,8 @@ class DotExakatYamlConfig extends Config {
         return self::YAML_FILE;
     }
     
-    public function getThemas() {
-        return $this->themas;
+    public function getRulesets() {
+        return $this->rulesets;
     }
 }
 

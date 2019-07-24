@@ -29,13 +29,11 @@ use Exakat\Autoload\Autoloader;
 
 class RulesetsExtra implements RulesetsInterface {
     private $extra_rulesets  = array();
-    private $ext             = null;
 
     private static $instanciated = array();
     
-    public function __construct(array $extra_rulesets = array(), Autoloader $ext) {
+    public function __construct(array $extra_rulesets = array()) {
         $this->extra_rulesets = $extra_rulesets;
-        $this->ext            = $ext;
     }
 
     public function getRulesetsAnalyzers(?array $ruleset = null) {
@@ -47,6 +45,7 @@ class RulesetsExtra implements RulesetsInterface {
             foreach($ruleset as $t) {
                 $return[] = $this->extra_rulesets[$t] ?? array();
             }
+
             if (empty($return)) {
                 return array();
             } else {

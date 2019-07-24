@@ -50,6 +50,8 @@ abstract class Reports {
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
+                                    'CompatibilityPHP74', 
+                                    'CompatibilityPHP80', 
                                     'Dead code', 'Security', 'Analyze', 'Inventories');
 
     private $count = 0;
@@ -68,7 +70,7 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->rulesets    = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+            $this->rulesets  = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                               $this->config->ext,
                                               $this->config->dev,
                                               $this->config->rulesets);
@@ -84,7 +86,7 @@ abstract class Reports {
         }
     }
 
-    protected function _generate($analyzerList) {}
+    protected abstract function _generate($analyzerList);
 
     public static function getReportClass($report) {
         $report = ucfirst(strtolower($report));
@@ -97,15 +99,14 @@ abstract class Reports {
             $name = $this::FILE_FILENAME;
         }
 
-        if (!empty($this->config->thema)) {
-            $themas = $this->config->thema;
-
+        $rulesets = $this->config->project_themes;
+        if (!empty($rulesets)) {
             if ($missing = $this->checkMissingRulesets()) {
                 print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
                 return false;
             }
 
-            $list = $this->rulesets->getRulesetsAnalyzers($themas);
+            $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
         } elseif (!empty($this->config->program)) {
             $list = makeArray($this->config->program);
         } else {
@@ -137,10 +138,10 @@ abstract class Reports {
     }
 
     public function dependsOnAnalysis() {
-        if (empty($this->config->thema)) {
+        if (empty($this->config->rulesets)) {
             return array();
         } else {
-            return $this->config->thema;
+            return $this->config->rulesets;
         }
     }
     

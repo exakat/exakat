@@ -88,10 +88,10 @@ class Analyze extends Tasks {
                 }
             }
         } elseif (!empty($this->config->thema)) {
-            $thema = $this->config->thema;
+            $ruleset = $this->config->thema;
 
-            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($thema)) {
-                throw new NoSuchRuleset(implode(', ', $thema), $this->rulesets->getSuggestionThema($thema));
+            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($ruleset)) {
+                throw new NoSuchRuleset(implode(', ', $ruleset), $this->rulesets->getSuggestionRuleset($ruleset));
             }
 
             $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );
@@ -120,12 +120,12 @@ class Analyze extends Tasks {
             display("Done\n");
             return;
         }
-        if (!$this->config->verbose && !$this->config->quiet) {
+        if ($this->config->verbose && !$this->config->quiet) {
             $this->progressBar = new Progressbar(0, count($analyzerList) + 1, $this->config->screen_cols);
         }
 
         foreach($analyzerList as $analyzer_class) {
-            if (!$this->config->verbose && !$this->config->quiet) {
+            if ($this->config->verbose && !$this->config->quiet) {
                 echo $this->progressBar->advance();
             }
 
@@ -133,7 +133,7 @@ class Analyze extends Tasks {
             $this->analyze($analyzers[$analyzer_class], $analyzer_class);
         }
 
-        if (!$this->config->verbose && !$this->config->quiet) {
+        if ($this->config->verbose && !$this->config->quiet) {
             echo $this->progressBar->advance();
         }
 

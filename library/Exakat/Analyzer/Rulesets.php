@@ -37,7 +37,7 @@ class Rulesets implements RulesetsInterface {
     public function __construct($path, Autoloader $ext, Autoloader $dev, array $extra_rulesets = array()) {
         $this->main  = new RulesetsMain($path);
         $this->ext   = new RulesetsExt($ext);
-        $this->extra = new RulesetsExtra($extra_rulesets, $ext);
+        $this->extra = new RulesetsExtra($extra_rulesets);
         $this->dev   = new RulesetsDev($dev);
     }
 
@@ -52,7 +52,7 @@ class Rulesets implements RulesetsInterface {
         $extra = $this->extra->getRulesetsAnalyzers($theme);
         $ext   = $this->ext  ->getRulesetsAnalyzers($theme);
         $dev   = $this->dev  ->getRulesetsAnalyzers($theme);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
@@ -111,7 +111,7 @@ class Rulesets implements RulesetsInterface {
         $main  = $this->main ->listAllRulesets($theme);
         $extra = $this->extra->listAllRulesets($theme);
         $ext   = $this->ext  ->listAllRulesets($theme);
-        $dev   = $this->dev  ->listAllAnalyzer($theme);
+        $dev   = $this->dev  ->listAllRulesets($theme);
         
         return array_merge($main, $extra, $ext, $dev);
     }

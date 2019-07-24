@@ -301,10 +301,8 @@ GREMLIN;
     }
 
     public function init($analyzerId = null) {
-        var_dump($analyzerId);
         if ($analyzerId === null) {
             if (isset(self::$rulesId[$this->shortAnalyzer])) {
-                print "Deja la \n";
                 // Removing all edges
                 $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
                 $query = <<<GREMLIN
