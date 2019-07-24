@@ -33,6 +33,8 @@ class Php74RemovedFunctions extends PhpFunctionUsage {
                                  'ezmlm_hash',
                                  'money_format',
                                  'restore_include_path',
+                                 'get_magic_quotes_runtime',
+                                 'get_magic_quotes',
                                 );
         parent::analyze();
     }
