@@ -68,6 +68,12 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
+    public function reset() {
+        $this->calls       = array();
+        $this->definitions = array();
+        $this->globals     = array();
+    }
+
     public function save() {
         if (!empty($this->calls)) {
             $query = 'INSERT INTO calls VALUES ' . implode(', ', $this->calls);

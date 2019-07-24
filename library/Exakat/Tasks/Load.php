@@ -792,10 +792,20 @@ class Load extends Tasks {
 //            print_r($this->expressions[0]);
             $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
             $this->reset();
+            $this->calls->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
-            $this->checkTokens($filename);
-            $this->calls->save();
+            try {
+                $this->checkTokens($filename);
+                print "Save $filename\n";
+                $this->calls->save();
+            } catch (LoadError $e) {
+                print $e->getMessage();
+                $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
+                $this->reset();
+                $this->calls->reset();
+                throw new NoFileToProcess($filename, 'empty', 0, $e);
+            }
 
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
@@ -5766,12 +5776,10 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            var_dump($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : " . count($this->expressions));
         }
 
         if (!empty($this->options)) {
-            var_dump($this->options);
             throw new LoadError( "Warning : options is not empty in $filename : " . count($this->options));
         }
 
