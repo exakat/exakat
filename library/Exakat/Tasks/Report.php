@@ -111,7 +111,7 @@ class Report extends Tasks {
         $end = microtime(true);
         display('Processing time : ' . number_format($end - $begin, 2) . 's');
 
-        $this->datastore->addRow('hash', array($format => $this->config->file));
+        $this->datastore->addRow('hash', array($reportConfig->getFormat() => $this->config->file));
         display('Done');
     }
 }
