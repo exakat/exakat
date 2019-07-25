@@ -4860,7 +4860,8 @@ HTML;
     }
 
     protected function toOnlineId($name) {
-        return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
+        return str_replace(array(' ', '(', ')', '/', '.', "'", '_'), 
+                           array('-', '',  '',  '-', '-', '-', '-'), strtolower($name));
     }
     
     protected function makeAuditDate(&$finalHTML) {
