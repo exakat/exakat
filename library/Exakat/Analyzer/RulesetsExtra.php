@@ -98,36 +98,12 @@ class RulesetsExtra implements RulesetsInterface {
 
     public function getSeverities() {
         $return = array();
-        foreach($this->extra_rulesets as $analyzers) {
-            foreach($analyzers as $analyzer)  {
-                $data = $this->ext->loadData("human/en/$analyzer.ini");
-                
-                if (empty($data)) { continue; }
-                $ini = parse_ini_string($data);
-
-                if (isset($ini['severity'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['severity'] ?: 'S_NONE'));
-                }
-            }
-        }
 
         return $return;
     }
 
     public function getTimesToFix() {
         $return = array();
-        foreach($this->extra_rulesets as $analyzers) {
-            foreach($analyzers as $analyzer)  {
-                $data = $this->ext->loadData("human/en/$analyzer.ini");
-                
-                if (empty($data)) { continue; }
-                $ini = parse_ini_string($data);
-
-                if (isset($ini['timetofix'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['timetofix'] ?: 'T_NONE'));
-                }
-            }
-        }
 
         return $return;
     }
