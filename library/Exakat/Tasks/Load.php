@@ -4611,6 +4611,7 @@ class Load extends Tasks {
         $integer->fullcode = $this->tokens[$this->id][1];
         $integer->token    = $this->getToken($this->tokens[$this->id][0]);
 
+        $this->pushExpression($integer);
         $this->runPlugins($integer);
 
         $this->checkExpression();
@@ -4625,6 +4626,7 @@ class Load extends Tasks {
         $float->fullcode = $this->tokens[$this->id][1];
         $float->token    = $this->getToken($this->tokens[$this->id][0]);
 
+        $this->pushExpression($float);
         // (int) is for loading into the database
         $this->runPlugins($float);
 
