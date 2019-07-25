@@ -797,10 +797,8 @@ class Load extends Tasks {
         } finally {
             try {
                 $this->checkTokens($filename);
-                print "Save $filename\n";
                 $this->calls->save();
             } catch (LoadError $e) {
-                print $e->getMessage();
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
@@ -4607,8 +4605,12 @@ class Load extends Tasks {
     }
 
     private function processInteger() {
-        $integer = $this->processSingle('Integer');
-        $this->pushExpression($integer);
+        $integer = $this->addAtom('Integer');
+
+        $integer->code     = str_replace('_', '', $this->tokens[$this->id][1]);
+        $integer->fullcode = $this->tokens[$this->id][1];
+        $integer->token    = $this->getToken($this->tokens[$this->id][0]);
+
         $this->runPlugins($integer);
 
         $this->checkExpression();
@@ -4617,8 +4619,12 @@ class Load extends Tasks {
     }
 
     private function processFloat() {
-        $float = $this->processSingle('Float');
-        $this->pushExpression($float);
+        $float = $this->addAtom('Integer');
+
+        $float->code     = str_replace('_', '', $this->tokens[$this->id][1]);
+        $float->fullcode = $this->tokens[$this->id][1];
+        $float->token    = $this->getToken($this->tokens[$this->id][0]);
+
         // (int) is for loading into the database
         $this->runPlugins($float);
 
