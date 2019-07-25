@@ -27,10 +27,13 @@ use Exakat\Analyzer\Analyzer;
 class UseSetCookie extends Analyzer {
     public function analyze() {
         // with header
+        // header('Set-cookie: x = 2')
         $this->atomFunctionIs('\\header')
-             ->outIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation'))
-             ->regexIs('fullcode', '[Ss]et-[Cc]ookie')
+             ->outIsIE('CONCAT')
+             ->is('rank', 0)
+             ->regexIs('noDelimiter', '^[Ss]et-[Cc]ookie:')
              ->back('first');
         $this->prepareQuery();
     }
