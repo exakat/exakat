@@ -34,8 +34,10 @@ sideEffect{
     s = it.get().value("PROPERTY");
     
     // Replace all special chars by a single char
+    s = s.replaceAll(/\\"/, "A");
     s = s.replaceAll(/\\[\\aefnRrt]/, "A");
-    s = s.replaceAll(/\\0\d\d/, "A");
+    s = s.replaceAll(/\\[012]\d\d/, "A");
+    s = s.replaceAll(/\\0/, "A");
     s = s.replaceAll(/\\u\{[^\}]+\}/, "A");
     s = s.replaceAll(/\\[pP]\{^?[A-Z][a-z]?\}/, "A");
     s = s.replaceAll(/\\[pP][A-Z]/, "A");
