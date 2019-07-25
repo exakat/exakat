@@ -86,7 +86,7 @@ abstract class Reports {
         }
     }
 
-    protected abstract function _generate($analyzerList);
+    protected function _generate($analyzerList) {}
 
     public static function getReportClass($report) {
         $report = ucfirst(strtolower($report));
