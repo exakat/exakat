@@ -1294,7 +1294,10 @@ class Load extends Tasks {
                                '__invoke',
                                '__set_state',
                                '__clone',
-                               '__debuginfo'),
+                               '__debuginfo',
+                               '__serialize',
+                               '__unserialize',
+                               ),
                             STRICT_COMPARISON)) {
                 $atom = 'Magicmethod';
             } else {
