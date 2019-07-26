@@ -22,6 +22,12 @@ compatibility_php74:
     file: compatibility_php74
     method: generateCompatibility74
     icon: certificate
+issues:
+    title: Issues
+    icon: flag
+    file: compatibility_issues
+    method: generateIssuesEngine
+    ruleset: CompatibilityPHP74
 suggestions:
     title: Suggestions
     icon: flag
