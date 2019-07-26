@@ -161,14 +161,14 @@ class Config {
             $this->remotes = $remote->toArray();
         }
 
-        $themas = new ThemaConfig($this->projects_root);
-        if ($file = $themas->loadConfig($this->commandLineConfig->get('project'))) {
+        $rulesets = new ThemaConfig($this->projects_root);
+        if ($file = $rulesets->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
-            $this->themas = $themas->toArray();
+            $this->rulesets = $rulesets->toArray();
         }
         
         if ($this->dotExakatYamlConfig instanceof DotExakatYamlConfig) {
-            $this->themas = array_merge($this->themas, $this->dotExakatYamlConfig->getThemas());
+            $this->rulesets = array_merge($this->rulesets, $this->dotExakatYamlConfig->getRulesets());
         }
 
         if ($this->options['command'] !== 'doctor') {
@@ -357,6 +357,11 @@ class Config {
         foreach($options as $key => $value) {
             if (isset($return->options[$key])) {
                 $return->options[$key] = $value;
+                continue;
+            }
+            
+            if (isset($this->$key)) {
+                $return->rulesets = makeArray($value);
             }
         }
 

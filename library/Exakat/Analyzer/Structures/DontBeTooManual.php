@@ -36,6 +36,24 @@ class DontBeTooManual extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
+
+        // catch (Exception $e)
+        $this->atomIs('Catch')
+             ->outIs('VARIABLE')
+             ->codeIs('$e')
+             ->back('first');
+        $this->prepareQuery();
+
+        // for($i = 0; ...)
+        $this->atomIs('For')
+             ->outIs('INIT')
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
+             ->codeIs('$i')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

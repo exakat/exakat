@@ -792,10 +792,18 @@ class Load extends Tasks {
 //            print_r($this->expressions[0]);
             $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
             $this->reset();
+            $this->calls->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
-            $this->checkTokens($filename);
-            $this->calls->save();
+            try {
+                $this->checkTokens($filename);
+                $this->calls->save();
+            } catch (LoadError $e) {
+                $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
+                $this->reset();
+                $this->calls->reset();
+                throw new NoFileToProcess($filename, 'empty', 0, $e);
+            }
 
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
@@ -1286,7 +1294,10 @@ class Load extends Tasks {
                                '__invoke',
                                '__set_state',
                                '__clone',
-                               '__debuginfo'),
+                               '__debuginfo',
+                               '__serialize',
+                               '__unserialize',
+                               ),
                             STRICT_COMPARISON)) {
                 $atom = 'Magicmethod';
             } else {
@@ -4597,7 +4608,12 @@ class Load extends Tasks {
     }
 
     private function processInteger() {
-        $integer = $this->processSingle('Integer');
+        $integer = $this->addAtom('Integer');
+
+        $integer->code     = str_replace('_', '', $this->tokens[$this->id][1]);
+        $integer->fullcode = $this->tokens[$this->id][1];
+        $integer->token    = $this->getToken($this->tokens[$this->id][0]);
+
         $this->pushExpression($integer);
         $this->runPlugins($integer);
 
@@ -4607,7 +4623,12 @@ class Load extends Tasks {
     }
 
     private function processFloat() {
-        $float = $this->processSingle('Float');
+        $float = $this->addAtom('Integer');
+
+        $float->code     = str_replace('_', '', $this->tokens[$this->id][1]);
+        $float->fullcode = $this->tokens[$this->id][1];
+        $float->token    = $this->getToken($this->tokens[$this->id][0]);
+
         $this->pushExpression($float);
         // (int) is for loading into the database
         $this->runPlugins($float);
@@ -5766,12 +5787,10 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            var_dump($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : " . count($this->expressions));
         }
 
         if (!empty($this->options)) {
-            var_dump($this->options);
             throw new LoadError( "Warning : options is not empty in $filename : " . count($this->options));
         }
 

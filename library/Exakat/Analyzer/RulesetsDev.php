@@ -63,11 +63,14 @@ class RulesetsDev {
         return preg_grep("#$folder/#", $return);
     }
 
+    public function listAllRulesets($ruleset = NULL) {
+        return $this->rulesets;
+    }
+
     public function getRulesetsAnalyzers(array $ruleset = null) {
         if (empty($ruleset)) {
             return array();
         }
-        
         $return = array();
         foreach($ruleset as $t) {
             $return[] = $this->all[$t] ?? array();

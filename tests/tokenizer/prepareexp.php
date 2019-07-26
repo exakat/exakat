@@ -5,7 +5,8 @@ $args = $argv;
 include "../../library/Exakat/Autoload/Autoload.php";
 include "../../library/helpers.php";
 
-spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
+$autoload = new \Exakat\Autoload\Autoload();
+$autoload->registerAutoload();
 
 if (count($args) < 2) {
     print "Building exp/* for all tests\n";

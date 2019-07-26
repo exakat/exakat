@@ -22,6 +22,12 @@ compatibility_php73:
     file: compatibility_php73
     method: generateCompatibility73
     icon: certificate
+issues:
+    title: Issues
+    icon: flag
+    file: compatibility_issues
+    method: generateIssuesEngine
+    ruleset: CompatibilityPHP73
 suggestions:
     title: Suggestions
     icon: flag

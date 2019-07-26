@@ -26,7 +26,7 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\AutoloadExt;
 
-class RulesetsMain {
+class RulesetsMain implements RulesetsInterface {
     private static $sqlite = null;
     private $phar_tmp      = null;
 
@@ -49,7 +49,7 @@ class RulesetsMain {
         }
     }
     
-    public function getRulesetsAnalyzers($ruleset = null) {
+    public function getRulesetsAnalyzers(?array $ruleset = null) {
         $all = $this->listAllRulesets();
 
         // Main installation
@@ -205,7 +205,7 @@ SQL;
         return $return;
     }
 
-    public function listAllRulesets() {
+    public function listAllRulesets($ruleset = NULL) {
         $query = <<<'SQL'
 SELECT name AS name FROM categories
 
@@ -265,7 +265,7 @@ SQL;
         }
     }
 
-    public function getSuggestionRulesets(array $rulesets) {
+    public function getSuggestionRuleset(array $rulesets) {
         $list = $this->listAllRulesets();
 
         return array_filter($list, function ($c) use ($rulesets) {
@@ -301,6 +301,10 @@ SQL;
             display("No such class as '$name'");
             return null;
         }
+    }
+
+    public function getAnalyzerInExtension($name) {
+        return array();
     }
 
 }

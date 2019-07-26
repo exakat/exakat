@@ -29,7 +29,10 @@ class RandomWithoutTry extends WithoutTry {
     protected $phpVersion = '7.0+';
     
     public function analyze() {
-        $this->functions = array('\\random_bytes', '\\random_int');
+        $this->functions = array('\\random_bytes', 
+                                 '\\random_int',
+                                 '\\openssl_random_pseudo_bytes',
+                                );
         parent::analyze();
     }
 }

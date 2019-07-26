@@ -24,20 +24,19 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\RulesetsInterface;
 use Exakat\Autoload\Autoloader;
 
-class RulesetsExtra {
+class RulesetsExtra implements RulesetsInterface {
     private $extra_rulesets  = array();
-    private $ext             = null;
 
     private static $instanciated = array();
     
-    public function __construct(array $extra_rulesets = array(), Autoloader $ext) {
+    public function __construct(array $extra_rulesets = array()) {
         $this->extra_rulesets = $extra_rulesets;
-        $this->ext            = $ext;
     }
 
-    public function getRulesetsAnalyzers($ruleset = null) {
+    public function getRulesetsAnalyzers(?array $ruleset = null) {
         // Main installation
         if ($ruleset === null) {
             return array_unique(array_merge(...$this->extra_rulesets));
@@ -46,6 +45,7 @@ class RulesetsExtra {
             foreach($ruleset as $t) {
                 $return[] = $this->extra_rulesets[$t] ?? array();
             }
+
             if (empty($return)) {
                 return array();
             } else {
@@ -98,36 +98,12 @@ class RulesetsExtra {
 
     public function getSeverities() {
         $return = array();
-        foreach($this->extra_rulesets as $analyzers) {
-            foreach($analyzers as $analyzer)  {
-                $data = $this->ext->loadData("human/en/$analyzer.ini");
-                
-                if (empty($data)) { continue; }
-                $ini = parse_ini_string($data);
-
-                if (isset($ini['severity'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['severity'] ?: 'S_NONE'));
-                }
-            }
-        }
 
         return $return;
     }
 
     public function getTimesToFix() {
         $return = array();
-        foreach($this->extra_rulesets as $analyzers) {
-            foreach($analyzers as $analyzer)  {
-                $data = $this->ext->loadData("human/en/$analyzer.ini");
-                
-                if (empty($data)) { continue; }
-                $ini = parse_ini_string($data);
-
-                if (isset($ini['timetofix'])) {
-                    $return[$analyzer] = constant(Analyzer::class . '::' . ($ini['timetofix'] ?: 'T_NONE'));
-                }
-            }
-        }
 
         return $return;
     }
@@ -141,7 +117,7 @@ class RulesetsExtra {
         return array();
     }
 
-    public function listAllRulesets() {
+    public function listAllRulesets($ruleset = null) {
         return array_keys($this->extra_rulesets);
     }
 
@@ -177,7 +153,7 @@ class RulesetsExtra {
         }
     }
 
-    public function getSuggestionRuleset($rulesets) {
+    public function getSuggestionRuleset(array $rulesets) {
         $list = $this->listAllRulesets();
 
         return array_filter($list, function ($c) use ($rulesets) {
@@ -190,7 +166,7 @@ class RulesetsExtra {
             return false;
         });
     }
-    
+
     public function getSuggestionClass($name) {
         return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
@@ -202,7 +178,7 @@ class RulesetsExtra {
     public static function resetCache() {
         self::$instanciated = array();
     }
-    
+
     public function getInstance($name, $gremlin = null, $config = null) {
         if ($analyzer = $this->getClass($name)) {
             if (!isset(self::$instanciated[$analyzer])) {
@@ -215,5 +191,8 @@ class RulesetsExtra {
         }
     }
 
+    public function getAnalyzerInExtension($name) {
+        return array();
+    }
 }
 ?>

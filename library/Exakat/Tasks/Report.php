@@ -66,7 +66,7 @@ class Report extends Tasks {
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
-    
+
         if (empty($row) || ($row[0] === 0)) {
             throw new NoDumpYet($this->config->project);
         }
@@ -81,22 +81,22 @@ class Report extends Tasks {
                 continue;
             }
 
-            $report = new $reportClass($this->config);
+            $report = new $reportClass($reportConfig->getConfig());
 
-            $this->format($report, $reportConfig->getFormat());
+            $this->format($report, $reportConfig);
         }
     }
     
-    private function format(Reports $report, $format) {
+    private function format(Reports $report, $reportConfig) {
         $begin = microtime(true);
 
-        if (empty($this->config->file) || count($this->config->project_reports) > 1) {
-            $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
-            display("Building report for project {$this->config->project} in '" . $file . "', with report {$format}\n");
-            $report->generate($this->config->project_dir, $report::FILE_FILENAME);
-        } elseif ($this->config->file === Reports::STDOUT) {
-            display("Building report for project {$this->config->project} to stdout, with format {$format}\n");
+        if ($reportConfig->getFile() === Reports::STDOUT) {
+            display("Building report for project {$this->config->project_name} to stdout, with report ".$reportConfig->getFormat()."\n");
             $report->generate($this->config->project_dir, Reports::STDOUT);
+        } elseif (empty($reportConfig->getFile())) {
+            $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
+            display("Building report for project {$this->config->project_name} in '" . $file . "', with report ".$reportConfig->getFormat()."\n");
+            $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } else {
             // to files + extension
             $filename = basename($this->config->file);
@@ -106,12 +106,12 @@ class Report extends Tasks {
             display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
-        display('Reported ' . $report->getCount() . " messages in $format");
+        display('Reported ' . $report->getCount() . " messages in ".$reportConfig->getFormat());
 
         $end = microtime(true);
         display('Processing time : ' . number_format($end - $begin, 2) . 's');
 
-        $this->datastore->addRow('hash', array($format => $this->config->file));
+        $this->datastore->addRow('hash', array($reportConfig->getFormat() => $this->config->file));
         display('Done');
     }
 }

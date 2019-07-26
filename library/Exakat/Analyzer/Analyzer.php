@@ -219,9 +219,23 @@ abstract class Analyzer {
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
 GREMLIN;
             $res = $this->gremlin->query($query);
-            
+
+            // Double is a safe guard, in case analysis were created twice
+            $double = array();
             foreach($res as ['analyzer' => $analyzer, 'id' => $id]) {
-                self::$rulesId[$analyzer] = $id;
+                if (isset(self::$rulesId[$analyzer])) {
+                    $double[] = $id;
+                } else {
+                    self::$rulesId[$analyzer] = $id;
+                }
+            }
+            
+            if (!empty($double)) {
+                $list = makeList($double);
+                $query = <<<GREMLIN
+g.V({$list}).drop()
+GREMLIN;
+                $this->gremlin->query($query);
             }
         }
     }

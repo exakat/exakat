@@ -53,6 +53,8 @@ class Ambassador extends Reports {
     
     protected $usedFiles         = array();
 
+    protected $baseHTML          = null;
+
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -148,27 +150,24 @@ class Ambassador extends Reports {
             $menu[] = '</li>';
             
             $menu = implode(PHP_EOL . '  ', $menu);
-            
         }
         
         return $menu;
     }
 
     protected function getBasedPage($file) {
-        static $baseHTML;
+        if (empty($this->baseHTML)) {
+            $this->baseHtml = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
 
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'EXAKAT_VERSION', Exakat::VERSION);
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'EXAKAT_BUILD', Exakat::BUILD);
             $project_name = $this->config->project_name;
             if (empty($project_name)) {
                 $project_name = 'E';
             }
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT', $project_name);
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT_NAME', $project_name);
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $menu = $this->makeMenu();
             $inventories = array();
@@ -194,7 +193,7 @@ class Ambassador extends Reports {
 
             $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
             $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'SIDEBARMENU', $menu);
         }
 
 
@@ -202,7 +201,7 @@ class Ambassador extends Reports {
             return '';
         }
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
+        $combinePageHTML = $this->injectBloc($this->baseHtml, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
     }
@@ -250,6 +249,8 @@ class Ambassador extends Reports {
             $baseHTML = $this->getBasedPage($file);
             $this->putBasedPage($file, $baseHTML);
         }
+        
+        print __METHOD__.PHP_EOL;
 
         $this->cleanFolder();
     }
@@ -4860,7 +4861,8 @@ HTML;
     }
 
     protected function toOnlineId($name) {
-        return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
+        return str_replace(array(' ', '(', ')', '/', '.', "'", '_'), 
+                           array('-', '',  '',  '-', '-', '-', '-'), strtolower($name));
     }
     
     protected function makeAuditDate(&$finalHTML) {

@@ -56,8 +56,6 @@ class Owasp extends Ambassador {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $compatibilities = array();
-
     private $components = array(
 'A1:2017-Injection' => array(
     'Security/AnchorRegex',
@@ -118,10 +116,6 @@ class Owasp extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-
-        foreach(Config::PHP_VERSIONS as $shortVersion) {
-            $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
-        }
 
         $this->themesToShow      = array('Security');
     }

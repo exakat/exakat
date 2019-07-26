@@ -219,7 +219,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Always run this one first
-        $this->analyzeRulesets(array('First'), $audit_start, true);
+        $this->analyzeRulesets(array('First'), $audit_start, $this->config->verbose);
 
         // Dump is a child process
         // initialization and first collection (action done once)
@@ -232,9 +232,9 @@ class Project extends Tasks {
         $this->logTime('Dumped and inited');
 
         if (empty($this->config->program)) {
-            $this->analyzeRulesets($rulesetsToRun, $audit_start, $this->config->quiet);
+            $this->analyzeRulesets($rulesetsToRun, $audit_start, $this->config->verbose);
         } else {
-            $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
+            $this->analyzeOne($this->config->program, $audit_start, $this->config->verbose);
         }
 
         display('Analyzed project' . PHP_EOL);
@@ -250,25 +250,13 @@ class Project extends Tasks {
         }
 
         $this->logTime('Reports');
-        foreach($this->reportConfigs as $name => $reportConfig) {
-            $format = $reportConfig->getFormat();
+        try {
+            $report = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
 
-            display("Reporting $name" . PHP_EOL);
-            $this->addSnitch(array('step'    => "Report : $format",
-                                   'project' => $this->config->project));
-
-            try {
-                $tmpConfig = $reportConfig->getConfig();
-                $report = new Report($this->gremlin, $tmpConfig, Tasks::IS_SUBTASK);
-
-                $report->run();
-            } catch (\Throwable $e) {
-                display( "Error while building $format : " . $e->getMessage() . "\n");
-            }
-            unset($reportConfig);
-            $this->logTime("Reported $name");
+            $report->run();
+        } catch (\Throwable $e) {
+            display( "Error while building $format : " . $e->getMessage() . "\n");
         }
-
         display('Reported project' . PHP_EOL);
 
         // Reset cache from Rulesets
@@ -295,7 +283,7 @@ class Project extends Tasks {
         $begin = $end;
     }
 
-    private function analyzeOne($analyzers, $audit_start, $quiet) {
+    private function analyzeOne($analyzers, $audit_start, $verbose) {
         $this->addSnitch(array('step'    => 'Analyzer',
                                'project' => $this->config->project));
 
@@ -303,8 +291,8 @@ class Project extends Tasks {
             $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
                                                             'update'    => true,
                                                             'program'   => $analyzers,
-                                                            'verbose'   => false,
-                                                            'quiet'     => true,
+                                                            'verbose'   => $verbose,
+                                                            'quiet'     => !$verbose,
                                                             ));
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
@@ -348,7 +336,7 @@ class Project extends Tasks {
         }
     }
 
-    private function analyzeRulesets($rulesets, $audit_start, $quiet) {
+    private function analyzeRulesets($rulesets, $audit_start, $verbose) {
         if (empty($rulesets)) {
             $rulesets = $this->config->project_themes;
         }
@@ -371,8 +359,8 @@ class Project extends Tasks {
                 $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
                                                                 'update'    => true,
                                                                 'thema'     => array($ruleset),
-                                                                'verbose'   => false,
-                                                                'quiet'     => true,
+                                                                'verbose'   => $verbose,
+                                                                'quiet'     => !$verbose,
                                                                 ));
 
                 $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);

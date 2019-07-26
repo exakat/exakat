@@ -89,9 +89,9 @@ class LoadFinal {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
-     .groupCount('m')
+     .groupCount("m")
      .by("fullnspath")
-     .cap('m')
+     .cap("m")
 GREMLIN;
         $fixed = $this->gremlin->query($query)->toArray();
         if (!empty($fixed)) {

@@ -101,7 +101,7 @@ class Files extends Tasks {
             $stats["notCompilable$version"] = -1;
 
             $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
-            $resFiles = $php->compileFiles($this->config->project_dir, $tmpFileName);
+            $resFiles = $php->compileFiles($this->config->code_dir, $tmpFileName);
 
             $incompilables = array();
 

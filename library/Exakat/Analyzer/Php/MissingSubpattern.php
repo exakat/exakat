@@ -37,6 +37,13 @@ class MissingSubpattern extends Analyzer {
         //preg_match('/(a)b?/', 'adc', $r)
         $this->atomFunctionIs($this->pregFunctions)
              ->hasChildWithRank('ARGUMENT', 2) // subpatterns are captured
+             // Also for preg_replace_* but that won't happen.
+             ->not(
+                $this->side()
+                     ->outWithRank('ARGUMENT', 3)
+                     ->atomInsideNoDefinition(array('Nsname', 'Identifier'))
+                     ->fullnspathIs('\PREG_UNMATCHED_AS_NULL', self::CASE_SENSITIVE)
+             )
              ->outWithRank('ARGUMENT', 0)
              ->has('noDelimiter')
              ->regexIs('noDelimiter', '\\\\)\\\\?[^\\\\(]*[^a-zA-Z][a-zA-Z]*\\$')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\Autoloader;
 
-class Rulesets {
+class Rulesets implements RulesetsInterface {
     private $main   = null;
     private $ext    = null;
     private $extra  = array();
@@ -37,7 +37,7 @@ class Rulesets {
     public function __construct($path, Autoloader $ext, Autoloader $dev, array $extra_rulesets = array()) {
         $this->main  = new RulesetsMain($path);
         $this->ext   = new RulesetsExt($ext);
-        $this->extra = new RulesetsExtra($extra_rulesets, $ext);
+        $this->extra = new RulesetsExtra($extra_rulesets);
         $this->dev   = new RulesetsDev($dev);
     }
 
@@ -52,7 +52,7 @@ class Rulesets {
         $extra = $this->extra->getRulesetsAnalyzers($theme);
         $ext   = $this->ext  ->getRulesetsAnalyzers($theme);
         $dev   = $this->dev  ->getRulesetsAnalyzers($theme);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
@@ -111,7 +111,7 @@ class Rulesets {
         $main  = $this->main ->listAllRulesets($theme);
         $extra = $this->extra->listAllRulesets($theme);
         $ext   = $this->ext  ->listAllRulesets($theme);
-        $dev   = $this->dev  ->listAllAnalyzer($theme);
+        $dev   = $this->dev  ->listAllRulesets($theme);
         
         return array_merge($main, $extra, $ext, $dev);
     }
@@ -155,13 +155,12 @@ class Rulesets {
     }
 
     public function getAnalyzerInExtension($name) {
-//        $main  = $this->main ->getAnalyzerInExtension($name);
-//        $extra = $this->extra->getAnalyzerInExtension($name);
+        $main  = $this->main ->getAnalyzerInExtension($name);
+        $extra = $this->extra->getAnalyzerInExtension($name);
         $ext   = $this->ext  ->getAnalyzerInExtension($name);
         $dev   = $this->dev  ->getAnalyzerInExtension($name);
         
-//        return array_merge($main, $extra, $ext, $dev);
-        return array_merge($ext, $dev);
+        return array_merge($main, $extra, $ext, $dev);
     }
 
     public static function resetCache() {
