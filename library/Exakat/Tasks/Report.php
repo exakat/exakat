@@ -73,6 +73,7 @@ class Report extends Tasks {
 
         Analyzer::$datastore = $this->datastore;
         
+        print_r($this->config->project_reports);
         foreach($this->config->project_reports as $format) {
             $reportConfig = new ReportConfig($format, $this->config);
             $reportClass = $reportConfig->getFormatClass();
@@ -106,7 +107,7 @@ class Report extends Tasks {
             display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
-        display('Reported ' . $report->getCount() . " messages in $format");
+        display('Reported ' . $report->getCount() . " messages in ".$reportConfig->getFormat());
 
         $end = microtime(true);
         display('Processing time : ' . number_format($end - $begin, 2) . 's');
