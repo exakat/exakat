@@ -26,13 +26,36 @@ use Exakat\Analyzer\Analyzer;
 
 class ContinueIsForLoop extends Analyzer {
     public function analyze() {
+        $switchAndLoop = array('Switch', 'Foreach', 'For', 'While', 'Dowhile');
+
         // foreach() { switch () { case 1 : continue; } }
-        $this->atomIs(self::$LOOPS_ALL)
-             ->outIs('BLOCK')
-             ->atomInside('Switch')
-             ->outIs('CASES')
-             ->atomInsideNoDefinition('Continue')
-             ->back('first');
+        $this->atomIs('Continue')
+             ->outIs('CONTINUE')
+             ->is('intval', array(0, 1))
+             ->back('first')
+             ->goToInstruction($switchAndLoop)
+             ->atomIs('Switch');
+        $this->prepareQuery();
+
+        // foreach() { switch () { case 1 : continue; } }
+        $this->atomIs('Continue')
+             ->outIs('CONTINUE')
+             ->is('intval', 2)
+             ->back('first')
+             ->goToInstruction($switchAndLoop)
+             ->goToInstruction($switchAndLoop)
+             ->atomIs('Switch');
+        $this->prepareQuery();
+
+        // foreach() { switch () { case 1 : continue; } }
+        $this->atomIs('Continue')
+             ->outIs('CONTINUE')
+             ->is('intval', 3)
+             ->back('first')
+             ->goToInstruction($switchAndLoop)
+             ->goToInstruction($switchAndLoop)
+             ->goToInstruction($switchAndLoop)
+             ->atomIs('Switch');
         $this->prepareQuery();
     }
 }
