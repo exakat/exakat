@@ -1,6 +1,7 @@
 dashboard:
     menu: Dashboard
     title: Dashboard
+    source: levels
     file: index
     method: generateDashboard
     icon: dashboard
