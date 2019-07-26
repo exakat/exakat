@@ -250,25 +250,13 @@ class Project extends Tasks {
         }
 
         $this->logTime('Reports');
-        foreach($this->reportConfigs as $name => $reportConfig) {
-            $format = $reportConfig->getFormat();
+        try {
+            $report = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
 
-            display("Reporting $name" . PHP_EOL);
-            $this->addSnitch(array('step'    => "Report : $format",
-                                   'project' => $this->config->project));
-
-            try {
-                $tmpConfig = $reportConfig->getConfig();
-                $report = new Report($this->gremlin, $tmpConfig, Tasks::IS_SUBTASK);
-
-                $report->run();
-            } catch (\Throwable $e) {
-                display( "Error while building $format : " . $e->getMessage() . "\n");
-            }
-            unset($reportConfig);
-            $this->logTime("Reported $name");
+            $report->run();
+        } catch (\Throwable $e) {
+            display( "Error while building $format : " . $e->getMessage() . "\n");
         }
-
         display('Reported project' . PHP_EOL);
 
         // Reset cache from Rulesets
