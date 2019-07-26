@@ -30,9 +30,6 @@ use Exakat\Dump;
 use Exakat\Reports\Helpers\Docs;
 
 abstract class Reports {
-//    const FILE_EXTENSION = 'undefined';
-//    const FILE_NAME      = 'undefined';
-    
     const STDOUT = 'stdout';
     const INLINE = 'inline';
     

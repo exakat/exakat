@@ -72,8 +72,7 @@ class Report extends Tasks {
         }
 
         Analyzer::$datastore = $this->datastore;
-        
-        print_r($this->config->project_reports);
+
         foreach($this->config->project_reports as $format) {
             $reportConfig = new ReportConfig($format, $this->config);
             $reportClass = $reportConfig->getFormatClass();
