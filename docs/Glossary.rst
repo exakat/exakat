@@ -34,6 +34,7 @@ Glossary
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
       + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Unbinding Closures <unbinding-closures>`
       + :ref:`Used Once Variables <used-once-variables>`
       + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 
@@ -126,6 +127,7 @@ Glossary
       + :ref:`Always Use Function With array_key_exists() <always-use-function-with-array\_key\_exists()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
+      + :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 
     + `array_keys()`
 
@@ -307,6 +309,7 @@ Glossary
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
+      + :ref:`Unbinding Closures <unbinding-closures>`
       + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -334,6 +337,10 @@ Glossary
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
+
+    + `convert_cyr_string()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 
     + `count()`
 
@@ -502,6 +509,10 @@ Glossary
       + :ref:`Register Globals <register-globals>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
+    + `ezmlm_hash()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
+
 
 + `F`
     + `Foreach()`
@@ -633,6 +644,14 @@ Glossary
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
+    + `get_magic_quotes_gpc()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
+
+    + `get_magic_quotes_runtime()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
+
     + `glob()`
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
@@ -683,6 +702,10 @@ Glossary
     + `header()`
 
       + :ref:`Should Use SetCookie() <should-use-setcookie()>`
+
+    + `hebrevc()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 
     + `highlight_file()`
 
@@ -1016,6 +1039,10 @@ Glossary
 
       + :ref:`Mkdir Default <mkdir-default>`
 
+    + `money_format()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
+
     + `move_uploaded_file()`
 
       + :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
@@ -1070,6 +1097,7 @@ Glossary
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use Operator <should-use-operator>`
+      + :ref:`Unbinding Closures <unbinding-closures>`
       + :ref:`Use === null <use-===-null>`
       + :ref:`Use Nullable Type <use-nullable-type>`
       + :ref:`Useless Type Check <useless-type-check>`
@@ -1084,6 +1112,7 @@ Glossary
 
     + `openssl_random_pseudo_bytes()`
 
+      + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`
 
 
@@ -1290,6 +1319,10 @@ Glossary
     + `recode_string()`
 
       + :ref:`Directly Use File <directly-use-file>`
+
+    + `restore_include_path()`
+
+      + :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 
     + `round()`
 
@@ -1701,6 +1734,7 @@ Glossary
 
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 

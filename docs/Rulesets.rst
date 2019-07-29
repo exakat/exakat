@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 22 Jul 2019 12:11:38 +0000
-.. comment: Generation hash : 13a38f00d061f0ea831db30aac1919bc17eeec6d
+.. comment: Generation date : Mon, 29 Jul 2019 05:54:09 +0000
+.. comment: Generation hash : bdc1393e386b7664467d811b8cd9304e0dbda73d
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 367 analysis
+Total : 370 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -119,6 +119,7 @@ Total : 367 analysis
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
+* :ref:`Class Without Parent <class-without-parent>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Clone With Non-Object <clone-with-non-object>`
@@ -315,6 +316,7 @@ Total : 367 analysis
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
 * :ref:`Same Variables Foreach <same-variables-foreach>`
+* :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
@@ -431,6 +433,7 @@ Total : 367 analysis
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
+* :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
@@ -446,11 +449,12 @@ Total : 367 analysis
 ClassReview
 +++++++++++
 
-Total : 29 analysis
+Total : 30 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
 * :ref:`Class Could Be Final <class-could-be-final>`
+* :ref:`Class Without Parent <class-without-parent>`
 * :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -946,7 +950,7 @@ Total : 24 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 11 analysis
+Total : 12 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -955,6 +959,7 @@ Total : 11 analysis
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
+* :ref:`Numeric Literal Separator <numeric-literal-separator>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
@@ -965,14 +970,21 @@ Total : 11 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 8 analysis
+Total : 15 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
+* :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
+* :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
+* :ref:`Php/Php74mbstrrpos3rdArg <php/php74mbstrrpos3rdarg>`
+* :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
+* :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
+* :ref:`Unbinding Closures <unbinding-closures>`
+* :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`curl_version() Has No Argument <curl\_version()-has-no-argument>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 

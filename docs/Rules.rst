@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 22 Jul 2019 12:11:38 +0000
-.. comment: Generation hash : 13a38f00d061f0ea831db30aac1919bc17eeec6d
+.. comment: Generation date : Mon, 29 Jul 2019 05:54:09 +0000
+.. comment: Generation hash : bdc1393e386b7664467d811b8cd9304e0dbda73d
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3788,6 +3788,49 @@ See also `When to declare classes final <http://ocramius.github.io/blog/when-to-
 
 
 
+.. _class-without-parent:
+
+Class Without Parent
+####################
+
+
+Classes should not refer to ``parent`` when it is not extending another class. 
+
+In PHP 7.4, it is a Deprecated warning. In PHP 7.3, it was a Fatal error, when the code was finally executed.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function foo() {
+           parent::foo();
+       }
+   }
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Update the class and make it extends another class
+* Change the parent mention with a fully qualified name
+* Remove the call to the parent altogether
+
++-------------+------------------------------------+
+| Short name  | Classes/NoParent                   |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _class,-interface-or-trait-with-identical-names:
 
 Class, Interface Or Trait With Identical Names
@@ -6190,15 +6233,15 @@ Curly brackets are seldom used, and will probably confuse or surprise the reader
 
 See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 
-+-------------+------------------------------------------------+
-| Short name  | Arrays/CurlyArrays                             |
-+-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
-+-------------+------------------------------------------------+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Arrays/CurlyArrays                                                        |
++-------------+---------------------------------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`CompatibilityPHP74` |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Minor                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                          |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -17533,6 +17576,47 @@ Suggestions
 
 
 
+.. _numeric-literal-separator:
+
+Numeric Literal Separator
+#########################
+
+
+Integer and floats may be written with internal underscorese. This way, it is possible to separate largee number into smaller paquets, andd make them more readable.
+
+Numeric Literal Separators were introduced in PHP 7.4 and are not backward compatible.
+
+.. code-block:: php
+
+   <?php
+   $a = 1_000_000_000;   // A billion
+   $a = 1000000000;      // A billion too...
+   
+   $b = 107_925_284.88;‬ // 6 light minute to kilometers = 107925284.88 kilometers
+   $b = 107925284.88;‬   // Same as above
+   ?>
+
+
+See also `PHP RFC: Numeric Literal Separator <https://wiki.php.net/rfc/numeric_literal_separator>`_.
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Php/IntegerSeparatorUsage |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP73` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _objects-don't-need-references:
 
 Objects Don't Need References
@@ -18773,12 +18857,46 @@ The following PHP native functions were removed in PHP 7.3.
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
-See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_.
+See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incompatible.php#migration70.incompatible.removed-functions>`_.
 
 +-------------+---------------------------+
 | Short name  | Php/Php73RemovedFunctions |
 +-------------+---------------------------+
 | Themes      | :ref:`CompatibilityPHP73` |
++-------------+---------------------------+
+| Php Version | With PHP 7.3 and older    |
++-------------+---------------------------+
+| Severity    | Critical                  |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _php-7.4-removed-functions:
+
+PHP 7.4 Removed Functions
+#########################
+
+
+The following PHP native functions were deprecated in PHP 7.4.
+
+* `hebrevc() <http://www.php.net/hebrevc>`_
+* `convert_cyr_string() <http://www.php.net/convert_cyr_string>`_
+* `ezmlm_hash() <http://www.php.net/ezmlm_hash>`_
+* `money_format() <http://www.php.net/money_format>`_
+* `restore_include_path() <http://www.php.net/restore_include_path>`_
+* `get_magic_quotes_gpc() <http://www.php.net/get_magic_quotes_gpc>`_
+* `get_magic_quotes_runtime() <http://www.php.net/get_magic_quotes_runtime>`_
+
+This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
+
+See also `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incompatible.php#migration70.incompatible.removed-functions>`_ and `PHP 7.4 Deprecations : Introduction <https://wiki.php.net/rfc/deprecations_php_7_4#introduction>`_.
+
++-------------+---------------------------+
+| Short name  | Php/Php74RemovedFunctions |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.3 and older    |
 +-------------+---------------------------+
@@ -19399,6 +19517,29 @@ Suggestions
 
 
 
+.. _php/php74mbstrrpos3rdarg:
+
+Php/Php74mbstrrpos3rdArg
+########################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Php/Php74mbstrrpos3rdArg  |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _php7-relaxed-keyword:
 
 Php7 Relaxed Keyword
@@ -19620,6 +19761,8 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
 
 The same applies to `preg_replace() <http://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
 
+In PHP 7.4, a new option was added : PREG_UNMATCHED_AS_NULL, which always provides a value for the subpatterns.
+
 See also `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_ and `Bug #73948 Preg_match_all should return NULLs on trailing optional capture groups. <https://bugs.php.net/bug.php?id=73948>`_.
 
 
@@ -19629,6 +19772,7 @@ Suggestions
 * Add an always capturing subpatterns after the last ?
 * Move the ? inside the parenthesis, so the parenthesis is always on, but the content may be empty
 * Add a test on the last index of the resulting array, to ensure it is available when needed
+* Use the PREG_UNMATCHED_AS_NULL option (PHP 7.4+)
 
 +-------------+----------------------------------------------------------------------------+
 | Short name  | Php/MissingSubpattern                                                      |
@@ -20277,6 +20421,9 @@ Random Without Try
    
    ?>
 
+
+Since PHP 7.4, `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ has adopted the same behavior. It is included in this analysis : check your PHP version for actual application.
+
 +-------------+------------------------------+
 | Short name  | Structures/RandomWithoutTry  |
 +-------------+------------------------------+
@@ -20538,6 +20685,53 @@ It is recommended to avoid redefining the same property in a hierarchy.
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
+
+
+
+.. _reflection-export()-is-deprecated:
+
+Reflection Export() Is Deprecated
+#################################
+
+
+export() method in Reflection classes is now deprecated. It is obsolete since PHP 7.4 and will disappear in PHP 8.0.
+
+The Reflector interface, which is implemented by all reflection classes, specifies two methods: `__toString() <http://www.php.net/manual/en/language.oop5.magic.php>`_ and export(). 
+
+.. code-block:: php
+
+   <?php
+   
+   ReflectionFunction::export('foo');
+   // same as
+   echo new ReflectionFunction('foo'), \n;
+    
+   $str = ReflectionFunction::export('foo', true);
+   // same as
+   $str = (string) new ReflectionFunction('foo');
+   
+   ?>
+
+
+See also `Reflection export() methods <https://wiki.php.net/rfc/deprecations_php_7_4#reflection_export_methods>`_ and `Reflection <https://www.php.net/manual/en/book.reflection.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Cast the object to string
+* Remove the call to export()
+
++-------------+----------------------------------+
+| Short name  | Php/ReflectionExportIsDeprecated |
++-------------+----------------------------------+
+| Themes      | :ref:`CompatibilityPHP74`        |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
 
 
 
@@ -21280,6 +21474,48 @@ The source will also be destroyed immediately after the blind variable has been 
 +-------------+-----------------------------+
 | Time To Fix | Quick (30 mins)             |
 +-------------+-----------------------------+
+
+
+
+.. _scalar-are-not-arrays:
+
+Scalar Are Not Arrays
+#####################
+
+
+It is wrong to use a scalar as an array, a Warning is emitted. PHP 7.4 emits a Warning in such situations.
+
+.. code-block:: php
+
+   <?php
+   
+   // Here, $x may be null, and in that case, the echo will fail.
+   function foo(?A $x) { 
+       echo $x[2]; 
+   }
+   
+   ?>
+
+
+Typehinted argument with a scalar are reported by this analysis. Also, nullable arguments, both with typehint and return type hint.
+
+See also `E_WARNING for invalid container read array-access <https://wiki.php.net/rfc/notice-for-non-valid-array-container>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Update type hints to avoid scalar values
+
++-------------+-------------------------------------------+
+| Short name  | Php/ScalarAreNotArrays                    |
++-------------+-------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP74` |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
 
 
 
@@ -22591,7 +22827,14 @@ Both functions help by giving a checklist of important attributes to be used wit
    ?>
 
 
-See also : `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_.
+See also `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_, `setcookie <https://php.net/setcookie>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use setcookie() function, instead of header()
+* Use setcookie() function, instead of header()
 
 +-------------+------------------+
 | Short name  | Php/UseSetCookie |
@@ -25107,6 +25350,62 @@ Suggestions
 +-------------+--------------------------------+
 | Time To Fix | Instant (5 mins)               |
 +-------------+--------------------------------+
+
+
+
+.. _unbinding-closures:
+
+Unbinding Closures
+##################
+
+
+Never drop ``$this``, once a closure was created in a non-static method. 
+
+From the PHP wiki : Currently it is possible to unbind the `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ variable from a closure that originally had one by using $closure->bindTo(null). Due to the removal of static calls to non-static methods in PHP 8, we now have a guarantee that `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ always exists inside non-static methods. We would like to have a similar guarantee that `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ always exists for non-static closures declared inside non-static methods. Otherwise, we will end up imposing an unnecessary performance penalty either on `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ accesses in general, or `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ accesses inside such closures.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       private $a = 3;
+       
+       function foo() {
+           return function () { echo $this->a; };
+       }
+   }
+   
+   $closure = (new x)->foo();
+   
+   // $this was expected, and it is not anymore
+   $closure->bindTo(null);
+   
+   $closure->bindTo(new x);
+   
+   ?>
+
+
+Calling bindTo() with a valid object is still valid.
+
+See also `Unbinding `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ from non-static closures <https://wiki.php.net/rfc/deprecations_php_7_4#unbinding_this_from_non-static_closures>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create a static closure, which doesn't rely on $this at all
+* Remove the call to bindTo(null).
+
++-------------+-----------------------------+
+| Short name  | Functions/UnbindingClosures |
++-------------+-----------------------------+
+| Themes      | :ref:`CompatibilityPHP74`   |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -31090,6 +31389,52 @@ Suggestions
 +-------------+-----------------------------------------+
 | Time To Fix | Quick (30 mins)                         |
 +-------------+-----------------------------------------+
+
+
+
+.. _array\_key\_exists()-works-on-arrays:
+
+array_key_exists() Works On Arrays
+##################################
+
+
+`array_key_exists() <http://www.php.net/array_key_exists>`_ requires arrays as second argument. Until PHP 7.4, objects were also allowed, yet it is now deprecated.
+
+.. code-block:: php
+
+   <?php
+   
+   // Valid way to check for key
+   $array = ['a' => 1];
+   var_dump(array_key_exists('a', $array))
+   
+   
+   // Deprecated since PHP 7.4
+   $object = new Stdclass();
+   $object->a = 1;
+   var_dump(array_key_exists('a', $object))
+   
+   ?>
+
+
+See also `array_key_exists() with objects <https://wiki.php.net/rfc/deprecations_php_7_4#array_key_exists_with_objects>`_, and
+         `array_key_exists <https://php.net/array-key-exists>`_, and.
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the (array) cast to turn the object into an array
+* Use the native PHP function proprety_exists() or isset() on the property to check them.
+
++-------------+-------------------------------------------+
+| Short name  | Php/ArrayKeyExistsWithObjects             |
++-------------+-------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP74`, :ref:`Analyze` |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
 
 
 
