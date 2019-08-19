@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('if(!@$equal = 1) { /**/ } ', 
+$expected     = array('if(!@$equal = 1) { /**/ } ',
                       'if(($equal = \'00\' . 0)) { /**/ } ',
                       'if($a = $b = $c = 1) { /**/ } ',
                      );

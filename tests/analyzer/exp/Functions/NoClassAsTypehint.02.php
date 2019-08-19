@@ -2,7 +2,7 @@
 
 $expected     = array('X',
                       '\\X',
-                      );
+                     );
 
 $expected_not = array('\\I',
                       'I',

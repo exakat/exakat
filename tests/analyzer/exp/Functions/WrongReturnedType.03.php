@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('return $b', 
-                      'new Unknown( )', 
-                      'new Foo( )', 
+$expected     = array('return $b',
+                      'new Unknown( )',
+                      'new Foo( )',
                       'new Bar',
                      );
 

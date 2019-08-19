@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('return $f', 
-                      'return $b', 
-                      'return $a', 
-                      'return $b', 
-                      'return 1', 
-                      'new Bar( )', 
+$expected     = array('return $f',
+                      'return $b',
+                      'return $a',
+                      'return $b',
+                      'return 1',
+                      'new Bar( )',
                       'new Foo( )',
                      );
 

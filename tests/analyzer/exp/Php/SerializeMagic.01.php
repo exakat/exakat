@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('function __serialize( ) { /**/ } ', 
+$expected     = array('function __serialize( ) { /**/ } ',
                       'function __unserialize( ) { /**/ } ',
                       'function __SERialize( ) { /**/ } ',
                       'function __unSERialize( ) { /**/ } ',
                      );
 
-$expected_not = array('function _serialize( ) { /**/ } ', 
+$expected_not = array('function _serialize( ) { /**/ } ',
                       'function _unserialize( ) { /**/ } ',
                      );
 

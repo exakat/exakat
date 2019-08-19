@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('switch ($b1) { /**/ } ', 
+$expected     = array('switch ($b1) { /**/ } ',
                       'switch ($b3) { /**/ } ',
                      );
 

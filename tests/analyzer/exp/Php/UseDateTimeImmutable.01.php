@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('DATETIME::createFromImmutable( )', 
-                      'DateTime::createFromFormat( )', 
+$expected     = array('DATETIME::createFromImmutable( )',
+                      'DateTime::createFromFormat( )',
                       'new DateTime( )',
                      );
 

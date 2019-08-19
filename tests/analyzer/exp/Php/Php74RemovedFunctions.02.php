@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('hebrevc( )', 
-                      'HEBREVC( )', 
+$expected     = array('hebrevc( )',
+                      'HEBREVC( )',
                       'convert_cyr_string( )',
                      );
 

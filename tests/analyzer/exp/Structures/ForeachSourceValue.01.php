@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('foreach($c as $b => $c) { /**/ } ', 
-                      'foreach($d as $d => $d) { /**/ } ', 
+$expected     = array('foreach($c as $b => $c) { /**/ } ',
+                      'foreach($d as $d => $d) { /**/ } ',
                       'foreach($b as $b => $c) { /**/ } ',
                       'foreach($a as $a) { /**/ } ',
                      );

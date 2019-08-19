@@ -7,7 +7,7 @@ $expected     = array('$array',
 
 $expected_not = array('$a',
                       '$b',
-                      '$f', // This is a false positive
+                      '$f',
                       '$g',
                      );
 

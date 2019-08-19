@@ -2,7 +2,7 @@
 
 $expected     = array('$aprotected1 = 10',
                       '$aprotected11 = 24',
-                      '$aprotected2 = 20', 
+                      '$aprotected2 = 20',
                       '$aprotected31 = 22',
                      );
 

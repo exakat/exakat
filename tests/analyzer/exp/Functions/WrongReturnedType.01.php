@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('return \'foo\'', 
-                      'return "$a"', 
+$expected     = array('return \'foo\'',
+                      'return "$a"',
                       'return $a',
                      );
 

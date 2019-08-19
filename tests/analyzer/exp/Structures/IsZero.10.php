@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('($e + 2) - 2'
+$expected     = array('($e + 2) - 2',
                      );
 
 $expected_not = array('$deg1 + ($deg2 - $deg1) / 11',
