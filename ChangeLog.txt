@@ -1,4 +1,4 @@
-Version 1.9.0 (Ming Wenzhang of Jiayin, coming up)
+Version 1.9.2 (Star of Prosperity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,38 @@ Version 1.9.0 (Ming Wenzhang of Jiayin, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.1 (Star of Life, 2019-08-19)
++ Architecture
+    + Fixed zip as code source
++ Report
+    + Ambassador : Fixed issues list for Favorites
+    + Owasp : switched dashboards
++ Analysis
+    + Updated analysis : Loop Calling got one extra check
+    + Checked unit tests : 3148 / 3187 test pass (99% pass)
+
+Version 1.9.0 (Ming Wenzhang of Jiayin, 2019-07-29)
++ Architecture
+    + Added missing configuration file for tinkergraph 3.4
+    + Upgraded support for running exakat with PHP 7.4
++ Analysis
+    + New analysis : array_key_exists() now report object usage
+    + New analysis : report mb_strrpos 4th argument
+    + New analysis : Reflection export are deprecated
+    + New analysis : Report classes without parents but with 'parent'
+    + New analysis : Don't use scalar as arrays
+    + New analysis : Report use of PHP 7.4 serialize method
+    + Updated analysis : Multiple Identical Keys checks for undefined keys first
+    + Updated analysis : Dont be too manual : extended to catch clauses
+    + Updated analysis : setcookie detection anchors the keyword at the beginning of the string
+    + Updated analysis : Failed Substr comparison now works with constants
+    + Updated analysis : Added support for continue 2 and 3
+    + Checked unit tests : 3147 / 3186 test pass (99% pass)
++ Tokenizer
+    + Added support for __serialize and __unserialize
+    + Added support for numeric literal separator
+    + Skip entirely unparsable files
 
 Version 1.8.9 (Meng Feiqing of Jiachen, 2019-07-22)
 + Architecture
