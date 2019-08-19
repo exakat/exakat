@@ -47,6 +47,19 @@ class StringInitialization extends Analyzer {
              ->outIs('DEFINITION')
              ->hasIn(array('VARIABLE', 'APPEND'));
         $this->prepareQuery();
+
+        // if (is_numeric($a)) { $a[] = $a; }
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->outIsIE(array('CODE', 'LEFT', 'RIGHT')) // skip () and assignations
+             ->functioncallIs(array('\is_string', '\is_numeric', '\is_int', '\is_integer', '\is_double', '\is_float', '\is_scalar', '\is_real'))
+             ->back('first')
+             ->outIs('THEN')
+             ->outIs('EXPRESSION')
+             ->outis('LEFT')
+             ->atomIs('Arrayappend')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
