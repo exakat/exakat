@@ -33,7 +33,7 @@ class Ambassadornomenu extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
+            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
             $project_name = $this->config->project_name;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
@@ -59,10 +59,10 @@ class Ambassadornomenu extends Ambassador {
             $baseHTML = preg_replace($patterns, $replacements, $baseHTML);
         }
 
-        if (!file_exists("{$this->config->dir_root}/media/devfaceted/datas/$file.html")) {
+        if (!file_exists("{$this->config->dir_root}/media/devfaceted/data/$file.html")) {
             return '';
         }
-        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/$file.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;

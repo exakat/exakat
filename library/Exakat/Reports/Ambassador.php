@@ -157,7 +157,7 @@ class Ambassador extends Reports {
 
     protected function getBasedPage($file) {
         if (empty($this->baseHTML)) {
-            $this->baseHtml = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
+            $this->baseHtml = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
 
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'EXAKAT_VERSION', Exakat::VERSION);
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -197,10 +197,10 @@ class Ambassador extends Reports {
         }
 
 
-        if (!file_exists("{$this->config->dir_root}/media/devfaceted/datas/$file.html")) {
+        if (!file_exists("{$this->config->dir_root}/media/devfaceted/data/$file.html")) {
             return '';
         }
-        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/$file.html");
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/$file.html");
         $combinePageHTML = $this->injectBloc($this->baseHtml, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -212,7 +212,7 @@ class Ambassador extends Reports {
         }
         $html = str_replace('{{TITLE}}', "PHP Static analysis for {$this->config->project_name}", $html);
 
-        file_put_contents("$this->tmpName/datas/$file.html", $html);
+        file_put_contents("$this->tmpName/data/$file.html", $html);
 
         $this->usedFiles[] = "$file.html";
     }
@@ -269,16 +269,16 @@ class Ambassador extends Reports {
     }
 
     protected function cleanFolder() {
-        if (file_exists("{$this->tmpName}/datas/base.html")) {
-            unlink("{$this->tmpName}/datas/base.html");
-            unlink("{$this->tmpName}/datas/menu.html");
-            unlink("{$this->tmpName}/datas/empty.html");
+        if (file_exists("{$this->tmpName}/data/base.html")) {
+            unlink("{$this->tmpName}/data/base.html");
+            unlink("{$this->tmpName}/data/menu.html");
+            unlink("{$this->tmpName}/data/empty.html");
         }
 
-        $files = glob("{$this->tmpName}/datas/*.html");
+        $files = glob("{$this->tmpName}/data/*.html");
         $files = array_map('basename', $files);
         foreach(array_diff($files, $this->usedFiles) as $file) {
-            unlink("{$this->tmpName}/datas/$file");
+            unlink("{$this->tmpName}/data/$file");
         }
 
         // Clean final destination
@@ -4548,7 +4548,7 @@ JAVASCRIPT;
     }
 
     protected function generateCodes(Section $section) {
-        $path = "{$this->tmpName}/datas/sources";
+        $path = "{$this->tmpName}/data/sources";
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
 
