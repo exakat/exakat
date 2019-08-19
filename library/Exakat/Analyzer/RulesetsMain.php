@@ -205,7 +205,7 @@ SQL;
         return $return;
     }
 
-    public function listAllRulesets($ruleset = NULL) {
+    public function listAllRulesets($ruleset = null) {
         $query = <<<'SQL'
 SELECT name AS name FROM categories
 

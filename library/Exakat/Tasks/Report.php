@@ -91,11 +91,11 @@ class Report extends Tasks {
         $begin = microtime(true);
 
         if ($reportConfig->getFile() === Reports::STDOUT) {
-            display("Building report for project {$this->config->project_name} to stdout, with report ".$reportConfig->getFormat()."\n");
+            display("Building report for project {$this->config->project_name} to stdout, with report " . $reportConfig->getFormat() . "\n");
             $report->generate($this->config->project_dir, Reports::STDOUT);
         } elseif (empty($reportConfig->getFile())) {
             $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
-            display("Building report for project {$this->config->project_name} in '" . $file . "', with report ".$reportConfig->getFormat()."\n");
+            display("Building report for project {$this->config->project_name} in '" . $file . "', with report " . $reportConfig->getFormat() . "\n");
             $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } else {
             // to files + extension
@@ -106,7 +106,7 @@ class Report extends Tasks {
             display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
             $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
-        display('Reported ' . $report->getCount() . " messages in ".$reportConfig->getFormat());
+        display('Reported ' . $report->getCount() . ' messages in ' . $reportConfig->getFormat());
 
         $end = microtime(true);
         display('Processing time : ' . number_format($end - $begin, 2) . 's');

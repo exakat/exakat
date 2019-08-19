@@ -4861,7 +4861,7 @@ HTML;
     }
 
     protected function toOnlineId($name) {
-        return str_replace(array(' ', '(', ')', '/', '.', "'", '_'), 
+        return str_replace(array(' ', '(', ')', '/', '.', "'", '_'),
                            array('-', '',  '',  '-', '-', '-', '-'), strtolower($name));
     }
     

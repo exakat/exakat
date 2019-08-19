@@ -63,7 +63,7 @@ class RulesetsDev {
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets($ruleset = NULL) {
+    public function listAllRulesets($ruleset = null) {
         return $this->rulesets;
     }
 

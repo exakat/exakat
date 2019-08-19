@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SimilarIntegers extends Analyzer {
     public function analyze() {
-        // $x = 10; $y = 0xa; $z = -+-10; 
+        // $x = 10; $y = 0xa; $z = -+-10;
         $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication'))
              ->has('intval')
              ->raw(<<<'GREMLIN'

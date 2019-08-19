@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ScalarAreNotArrays extends Analyzer {
     public function analyze() {
-        // TODO : support for null ? 
+        // TODO : support for null ?
 
         // WIth typehint
         // function foo(in $x) { echo $x[2]; }
