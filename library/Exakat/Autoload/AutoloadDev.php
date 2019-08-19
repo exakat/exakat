@@ -31,7 +31,7 @@ class AutoloadDev implements Autoloader {
     private $path = '';
     
     public function __construct($path) {
-        if (phar::running()) {
+        if (class_exists('\\Phar') && phar::running()) {
             // No autoloadDev with phar
             // Ignoring it all
             return;
