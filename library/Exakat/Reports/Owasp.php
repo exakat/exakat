@@ -174,7 +174,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('owasp_doc', $finalHTML);
     }
 
-    protected function generateDashboard(Section $section) {
+    protected function generateDetailledDashboard(Section $section) {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {
@@ -239,7 +239,7 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDetailledDashboard(Section $section) {
+    protected function generateDashboard(Section $section) {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {

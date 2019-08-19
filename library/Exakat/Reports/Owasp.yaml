@@ -6,8 +6,9 @@ dashboard:
     method: generateDashboard
     icon: dashboard
 detailled:
-    title: Detailled sections for OWASP top 10
+    title: Detailled OWASP top 10
     icon: flag
+    source: levels
     file: detailled
     method: generateDetailledDashboard
 issues:
