@@ -345,7 +345,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
-* SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
 * `Thelia <https://thelia.net/>`_
@@ -358,7 +357,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Woocommerce <https://woocommerce.com/>`_
 * `WordPress <https://www.wordpress.org/>`_
 * `XOOPS <https://xoops.org/>`_
-* Xoops
 * `Zencart <https://www.zen-cart.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Zurmo <http://zurmo.org/>`_
@@ -430,12 +428,26 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.0
+
+  * Class Without Parent (Classes/NoParent)
+  * Numeric Literal Separator (Php/IntegerSeparatorUsage ; CompatibilityPHP73)
+  * PHP 7.4 Removed Functions (Php/Php74RemovedFunctions ; CompatibilityPHP74)
+  * Reflection Export() Is Deprecated (Php/ReflectionExportIsDeprecated ; CompatibilityPHP74)
+  * Scalar Are Not Arrays (Php/ScalarAreNotArrays ; Analyze, CompatibilityPHP74)
+  * Serialize Magic Method (Php/SerializeMagic ; Internal)
+  * Similar Integers (Type/SimilarIntegers ; Coding Conventions)
+  * Structures/MoveInsideFunction (Structures/MoveInsideFunction ; Unassigned)
+  * Unbinding Closures (Functions/UnbindingClosures ; CompatibilityPHP74)
+  * array_key_exists() Works On Arrays (Php/ArrayKeyExistsWithObjects ; Analyze, CompatibilityPHP74)
+
 * 1.8.9
 
   * Avoid mb_dectect_encoding() (Php/AvoidMbDectectEncoding ; Analyze)
   * Disconnected Classes (Classes/DisconnectedClasses)
   * Not Or Tilde (Structures/NotOrNot ; Preferences)
   * Overwriten Source And Value (Structures/ForeachSourceValue ; Analyze, OneFile)
+  * Php/Php74mbstrrpos3rdArg (Php/Php74mbstrrpos3rdArg ; CompatibilityPHP74)
   * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
 
 * 1.8.8
@@ -1368,7 +1380,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Simple)
   * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Simple, Suggestions, Level 3, php-cs-fixable)
   * Could Use self (Classes/ShouldUseSelf ; Analyze, Simple, Suggestions, Level 3, ClassReview)
-  * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions)
+  * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions, CompatibilityPHP74)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
   * Custom Constant Usage (Constants/CustomConstantUsage ; )
   * Dangling Array References (Structures/DanglingArrayReferences ; Analyze, PHP recommendations, ClearPHP, Simple, Level 1, Top10)
@@ -1970,8 +1982,9 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-59 PHP error message detailled : 
+62 PHP error message detailled : 
 
+* :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
@@ -1994,6 +2007,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Cannot use "parent" when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot use "self" when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot use "static" when no class scope is active <self,-parent,-static-outside-class>`
+* :ref:`Cannot use a scalar value as an array <string-initialization>`
 * :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset()-with-constant>`
 * :ref:`Cannot use object of type Foo as array <$this-is-not-an-array>`
 * :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
@@ -2021,6 +2035,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Trait 'a' not found  <trait-not-found>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
 * :ref:`Trait method f has not been applied, because there are collisions with other trait methods on x <useless-alias>`
+* :ref:`Trying to access array offset on value of type null <scalar-are-not-arrays>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined class constant <avoid-self-in-interface>`
 * :ref:`Undefined function <undefined-functions>`
@@ -2150,11 +2165,12 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
+* `array_key_exists() with objects <https://wiki.php.net/rfc/deprecations_php_7_4#array_key_exists_with_objects>`_
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
@@ -2257,6 +2273,7 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Dynamically Access PHP Object Properties with $this <https://drupalize.me/blog/201508/dynamically-access-php-object-properties>`_
+* `E_WARNING for invalid container read array-access <https://wiki.php.net/rfc/notice-for-non-valid-array-container>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
 * `elseif/else if <http://php.net/manual/en/control-structures.elseif.php>`_
 * `empty <http://www.php.net/empty>`_
@@ -2445,6 +2462,7 @@ List of external links mentionned in this documentation.
 * `Net SNMP <http://www.net-snmp.org/>`_
 * `net_get_interfaces <http://php.net/net_get_interfaces>`_
 * `New Classes and Interfaces <http://php.net/manual/en/migration70.classes.php>`_
+* `New custom object serialization mechanism <https://wiki.php.net/rfc/custom_object_serialization>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `New global constants in 7.2 <http://php.net/manual/en/migration72.constants.php>`_
 * `New global constants in 7.4 <http://php.net/manual/en/migration74.constants.php>`_
@@ -2501,8 +2519,9 @@ List of external links mentionned in this documentation.
 * `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
-* `PHP 7.3 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
+* `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Clone and Shallow vs Deep Copying <http://jacob-walker.com/blog/php-clone-and-shallow-vs-deep-copying.html>`_
@@ -2520,6 +2539,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
+* `PHP RFC: Numeric Literal Separator <https://wiki.php.net/rfc/numeric_literal_separator>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
@@ -2556,6 +2576,7 @@ List of external links mentionned in this documentation.
 * `Rar archiving <http://php.net/manual/en/book.rar.php>`_
 * `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
+* `Reflection export() methods <https://wiki.php.net/rfc/deprecations_php_7_4#reflection_export_methods>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
 * `resources <http://php.net/manual/en/language.types.resource.php>`_
 * `return <https://www.php.net/manual/en/function.return.php>`_
@@ -2630,14 +2651,15 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
+* `Unbinding $this from non-static closures <https://wiki.php.net/rfc/deprecations_php_7_4#unbinding_this_from_non-static_closures>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
@@ -2655,8 +2677,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2770,6 +2792,7 @@ _______
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
+|   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoPublicAccess";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/NonPpp";
@@ -2891,6 +2914,7 @@ _______
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Performances/PrePostIncrement";
 |   analyzer[] = "Performances/StrposTooMuch";
+|   analyzer[] = "Php/ArrayKeyExistsWithObjects";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/AssignAnd";
 |   analyzer[] = "Php/AvoidMbDectectEncoding";
@@ -2914,6 +2938,7 @@ _______
 |   analyzer[] = "Php/NotScalarType";
 |   analyzer[] = "Php/PathinfoReturns";
 |   analyzer[] = "Php/ReservedNames";
+|   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Php/ShortOpenTagRequired";
 |   analyzer[] = "Php/ShouldUseCoalesce";
 |   analyzer[] = "Php/StrtrArguments";
@@ -3124,6 +3149,7 @@ ___________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
+|   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
 |   analyzer[] = "Classes/RaisedAccessLevel";
@@ -3171,6 +3197,7 @@ __________________
 |   analyzer[] = "Structures/PlusEgalOne";
 |   analyzer[] = "Structures/YodaComparison";
 |   analyzer[] = "Type/ShouldBeSingleQuote";
+|   analyzer[] = "Type/SimilarIntegers";
 |   analyzer[] = "Type/StringInterpolation";
 |   analyzer[] = "Variables/VariableUppercase";| 
 
@@ -3648,6 +3675,7 @@ __________________
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/CompactInexistant";
 |   analyzer[] = "Php/ConcatAndAddition";
+|   analyzer[] = "Php/IntegerSeparatorUsage";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/TypedPropertyUsage";
@@ -3667,12 +3695,19 @@ CompatibilityPHP74
 __________________
 
 | [CompatibilityPHP74]
+|   analyzer[] = "Arrays/CurlyArrays";
+|   analyzer[] = "Functions/UnbindingClosures";
+|   analyzer[] = "Php/ArrayKeyExistsWithObjects";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
 |   analyzer[] = "Php/IdnUts46";
 |   analyzer[] = "Php/Php74NewClasses";
 |   analyzer[] = "Php/Php74NewConstants";
 |   analyzer[] = "Php/Php74NewFunctions";
+|   analyzer[] = "Php/Php74RemovedFunctions";
+|   analyzer[] = "Php/Php74mbstrrpos3rdArg";
+|   analyzer[] = "Php/ReflectionExportIsDeprecated";
+|   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Structures/CurlVersionNow";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
 

@@ -1837,7 +1837,7 @@ $val is only written, as only the keys are used. $val may be skipped by applying
 
 .. _suitecrm-variables-writtenonlyvariable:
 
-SuiteCRM
+SuiteCrm
 ^^^^^^^^
 
 :ref:`written-only-variables`, in modules/Campaigns/utils.php:820. 
@@ -6758,6 +6758,32 @@ This yields an error at execution time : ``Compilation failed: invalid range in 
 
     preg_replace('/[^\w-._]+/i', '', $name)
 
+Never Used Parameter
+====================
+
+.. _piwigo-functions-neverusedparameter:
+
+Piwigo
+^^^^^^
+
+:ref:`never-used-parameter`, in include/functions_html.inc.php:329. 
+
+$alternate_url is never explicitely passed to bad_request() : this doesn't show in this extract. It could be dropped from this code.
+
+.. code-block:: php
+
+    function bad_request($msg, $alternate_url=null)
+    {
+      set_status_header(400);
+      if ($alternate_url==null)
+        $alternate_url = make_index_url();
+      redirect_html( $alternate_url,
+        '<div style="text-align:left; margin-left:5em;margin-bottom:5em;">
+    <h1 style="text-align:left; font-size:36px;">'.l10n('Bad request').'</h1><br>'
+    .$msg.'</div>',
+        5 );
+    }
+
 Identical On Both Sides
 =======================
 
@@ -7482,7 +7508,7 @@ Continue Is For Loop
 
 .. _xoops-structures-continueisforloop:
 
-Xoops
+XOOPS
 ^^^^^
 
 :ref:`continue-is-for-loop`, in htdocs/kernel/object.php:711. 
