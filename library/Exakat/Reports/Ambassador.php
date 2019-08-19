@@ -239,18 +239,18 @@ class Ambassador extends Reports {
 
         $this->initFolder();
         $this->getBasedPage('');
-        
+
         foreach($this->generations as $generation) {
             $method = $generation->method;
-            $this->$method($generation);
+            if (method_exists($this, $method)) {
+                $this->$method($generation);
+            } // else Skip
         }
 
         foreach($this->generations_files as $file) {
             $baseHTML = $this->getBasedPage($file);
             $this->putBasedPage($file, $baseHTML);
         }
-        
-        print __METHOD__.PHP_EOL;
 
         $this->cleanFolder();
     }
@@ -2045,7 +2045,7 @@ $issues
   </script>
 JAVASCRIPTCODE;
 
-        $baseHTML = $this->getBasedPage($section->source);
+        $baseHTML  = $this->getBasedPage($section->source);
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', $total);

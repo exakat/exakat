@@ -118,6 +118,23 @@ compatibility:
             file: compatibility_php53
             method: generateCompatibility53
             icon: certificate
+        compatibility_issues:
+            title: Compatibility Issues
+            menu: Compatibility Issues
+            source: compatibility_issues
+            file: compatibility_issues
+            method: generateIssuesEngine
+            ruleset: [CompatibilityPHP74, 
+                      CompatibilityPHP73, 
+                      CompatibilityPHP72,
+                      CompatibilityPHP71,
+                      CompatibilityPHP70,
+                      CompatibilityPHP56,
+                      CompatibilityPHP55,
+                      CompatibilityPHP54,
+                      CompatibilityPHP53
+                      ]
+            icon: flag
 favorites:
     title: Favorites
     icon: certificate
@@ -129,7 +146,7 @@ favorites:
             icon: certificate
         favorite_issues:
             title: Favorite issues
-            source: empty
+            source: issues
             file: favorites_issues
             method: generateIssuesEngine
             ruleset: Preferences
