@@ -64,6 +64,7 @@ class LoopCalling extends Analyzer {
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
+             ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'name')
 
              ->back('first')
