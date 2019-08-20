@@ -27,19 +27,20 @@ class FileDependencies extends Reports {
     const FILE_FILENAME  = 'filedependencies';
 
     public function generate($folder, $name= 'dependencies') {
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies');
+        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE including != included');
 
-        $colors = array('INCLUDE'          => 'green',
-                        'STATICMETHODCALL' => 'purple',
-                        'STATICCONSTANT'   => 'purple',
-                        'STATICPROPERTY'   => 'purple',
-                        'TYPEHINT'         => 'purple',
-                        'USE'              => 'orange',
-                        'NEW'              => 'blue',
-                        'EXTENDS'          => 'red',
-                        'IMPLEMENTS'       => 'red',
-                        'FUNCTIONCALL'     => 'blue',
-                        'CONSTANT'         => 'blue',
+        $colors = array('include'          => 'green',
+                        'staticmethodcall' => 'purple',
+                        'staticconstant'   => 'purple',
+                        'staticproperty'   => 'purple',
+                        'typehint'         => 'purple',
+                        'use'              => 'orange',
+                        'new'              => 'blue',
+                        'clone'            => 'blue',
+                        'extends'          => 'red',
+                        'implements'       => 'red',
+                        'functioncall'     => 'blue',
+                        'constant'         => 'blue',
                         );
 
         $nodes = array();

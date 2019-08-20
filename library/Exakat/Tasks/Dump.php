@@ -118,6 +118,10 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Files Dependencies: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
+            $this->collectClassesDependencies();
+            $end = microtime(true);
+            $this->log->log( 'Collected Classes Dependencies: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+            $begin = $end;
             $this->getAtomCounts();
             $end = microtime(true);
             $this->log->log( 'Collected Atom Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -1419,7 +1423,7 @@ GREMLIN;
             $query = <<<GREMLIN
 g.V().hasLabel("$type").count();
 GREMLIN;
-            $total = $this->gremlin->query($query)->toInt();
+            $total = count($this->gremlin->query($query));
 
             $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
             $this->sqlite->query($query);
@@ -1512,7 +1516,7 @@ GREMLIN;
         $query = array();
         if (!empty($result)) {
             foreach($result->toArray() as $link) {
-                $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'INCLUDE')";
+                $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'include')";
             }
 
             if (!empty($query)) {
@@ -1524,7 +1528,7 @@ GREMLIN;
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions');
-        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
@@ -1550,7 +1554,7 @@ GREMLIN;
             $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
-        display($extends->toInt() . ' extends for classes ');
+        display(count($extends) . ' extends for classes ');
 
         // Finding extends for interfaces
         $query = <<<'GREMLIN'
@@ -1561,10 +1565,10 @@ g.V().hasLabel("Interface").as("classe")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
-        $query = array();
 
+        $query = array();
         foreach($res as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'EXTENDS')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'extends')";
         }
 
         if (!empty($query)) {
@@ -1574,25 +1578,64 @@ GREMLIN;
         display(count($res) . ' extends for interfaces ');
 
         // Finding typehint
-        $query = <<<GREMLIN
-g.V().hasLabel("Nsname", "Identifier").as("classe").where( __.in("TYPEHINT"))
-     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("file")
-     .select("classe").in("DEFINITION")
-     .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).as("include")
-     .select("file", "include").by("fullcode").by("fullcode")
-GREMLIN;
-        $res = $this->gremlin->query($query);
+        $query = $this->newQuery('Typehint');
+        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('ARGUMENT')
+              ->outIs('TYPEHINT')
+              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+              ->inIs('DEFINITION')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'include')
+
+              ->back('first')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'file')
+
+              ->raw(' map{ ["file":file, "include":include]; }', array(), array());
+        $query->prepareRawQuery();
+        $typehint = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
         $query = array();
 
-        foreach($res as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'TYPEHINT')";
+        foreach($typehint->toArray() as $link) {
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'use')";
         }
 
         if (!empty($query)) {
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res) . ' typehints ');
+        $count1 = count($typehint);
+
+        $query = $this->newQuery('Return Typehint');
+        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RETURNTYPE')
+              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+              ->inIs('DEFINITION')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'include')
+
+              ->back('first')
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'file')
+
+             ->raw(' map{ ["file":file, "include":include]; }', array(), array());
+        $query->prepareRawQuery();
+        $returntype = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $query = array();
+
+        foreach($returntype->toArray() as $link) {
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'use')";
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+        $count2 = count($returntype);
+
+        display(($count1 + $count2) . ' typehint ');
 
         // Finding trait use
         $query = <<<GREMLIN
@@ -1606,7 +1649,7 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'USE')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'use')";
         }
 
         if (!empty($query)) {
@@ -1627,7 +1670,7 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'USE')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'use')";
         }
 
         if (!empty($query)) {
@@ -1648,7 +1691,7 @@ GREMLIN;
         $query = array();
 
         foreach($functioncall as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'FUNCTIONCALL')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'functioncall')";
         }
 
         if (!empty($query)) {
@@ -1669,7 +1712,7 @@ GREMLIN;
         $query = array();
 
         foreach($constants as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'CONSTANT')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'constant')";
         }
 
         if (!empty($query)) {
@@ -1690,7 +1733,7 @@ GREMLIN;
         $query = array();
 
         foreach($res as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'NEW')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', 'new')";
         }
 
         if (!empty($query)) {
@@ -1698,6 +1741,35 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display(count($res) . ' new ');
+
+        // Clone
+        $query = $this->newQuery('Clone');
+        $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'calling')
+              ->back('first')
+
+              ->outIs('CLONE')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+
+              ->goToInstruction('File')
+              ->savePropertyAs('fullcode', 'called')
+
+              ->raw('map{ ["file":calling, "type":"CLONE", "include":called]; }', array(), array());
+        $query->prepareRawQuery();
+        $extends = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $query = array();
+        foreach($extends->toArray() as $link) {
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . $link['type'] . "')";
+        }
+
+        if (!empty($query)) {
+            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($sqlQuery);
+        }
+        display(count($extends) . ' clone');
 
         // static calls (property, constant, method)
         $query = <<<GREMLIN
@@ -1712,7 +1784,7 @@ GREMLIN;
         $query = array();
 
         foreach($statics as $link) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . strtoupper($link['type']) . "')";
+            $query[] = "(null, '" . $this->sqlite->escapeString($link['file']) . "', '" . $this->sqlite->escapeString($link['include']) . "', '" . $link['type'] . "')";
         }
 
         if (!empty($query)) {
@@ -1720,11 +1792,325 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display(count($statics) . ' static calls CPM');
+
+        // Skipping normal method/property call : They actually depends on new
+        // Magic methods : todo! 
+        // instanceof ?  
+    }
+
+    private function storeToTable(string $table, Query $query) : int {
+        $res = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $sqlQuery = array();
+        foreach($res->toArray() as $link) {
+            $sqlQuery[] = "(null, 
+                        '" . $this->sqlite->escapeString($link['calling']) . "', 
+                        '" . $this->sqlite->escapeString($link['calling_name']) . "', 
+                        '" . $this->sqlite->escapeString($link['calling_type']) . "', 
+                        '" . $this->sqlite->escapeString($link['called']) . "', 
+                        '" . $this->sqlite->escapeString($link['called_name']) . "', 
+                        '" . $this->sqlite->escapeString($link['called_type']) . "', 
+                        '" . $link['type'] . "')";
+        }
+
+        if (empty($sqlQuery)) {
+            return 0;
+        }
+        
+        $sqlQuery = 'INSERT INTO '.$table.' ("id", "including", "including_name", "including_type", "included", "included_name", "included_type", "type") VALUES ' . implode(', ', $sqlQuery);
+        $this->sqlite->query($sqlQuery);
+
+        return count($res);
+    }
+
+    private function collectClassesDependencies() {
+        $this->sqlite->query('DROP TABLE IF EXISTS classesDependencies');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE classesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                   including STRING,
+                                   including_name STRING,
+                                   including_type STRING,
+                                   included STRING,
+                                   included_name STRING,
+                                   included_type STRING,
+                                   type STRING
+                                  )
+SQL
+);
+
+        // Finding extends and implements
+        $query = $this->newQuery('Extensions of classes');
+        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+              ->back('first')
+              ->savePropertyAs('fullnspath', 'calling')
+
+              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->savePropertyAs('fullnspath', 'called')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":type, 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":called_type, 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' extends for classes ');
+
+        // Finding extends for interfaces
+        $query = $this->newQuery('Interfaces extensions');
+        $query->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'calling')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+              ->back('first')
+
+              ->outIs('EXTENDS')
+              ->inIs('DEFINITION')
+              ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
+
+              ->savePropertyAs('fullnspath', 'called')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":"interface", 
+      "type":"extends", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":"interface", 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' extends for interfaces ');
+
+        // Finding typehint
+        $query = $this->newQuery('Typehint');
+        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('ARGUMENT')
+              ->outIs('TYPEHINT')
+              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+              ->inIs('DEFINITION')
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->savePropertyAs('fullnspath', 'called')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->back('first')
+              ->goToInstruction(Analyzer::$CIT)
+
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":"typehint", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":called_type, 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count1 = $this->storeToTable('classesDependencies', $query);
+
+        $query = $this->newQuery('Return Typehint');
+        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RETURNTYPE')
+              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->savePropertyAs('fullnspath', 'called')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+              ->back('first')
+
+              ->goToInstruction(Analyzer::$CIT)
+
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":"typehint", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":called_type, 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count2 = $this->storeToTable('classesDependencies', $query);
+
+        display(($count1 + $count2) . ' typehint ');
+
+        // Finding trait use
+        $query = $this->newQuery('Traits');
+        $query->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+              ->back('first')
+
+              ->outIs('USE')
+              ->outIs('USE')
+
+              ->savePropertyAs('fullnspath', 'called')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":"use", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":"trait", 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' trait use ');
+
+        // New
+        $query = $this->newQuery('New');
+        $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'called')
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->back('first')
+              ->goToInstruction(Analyzer::$CIT)
+
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":"new", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":"class", 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' new ');
+
+        // Clone
+        $query = $this->newQuery('Clone');
+        $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
+              ->goToInstruction(Analyzer::$CIT)
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+              ->back('first')
+
+              ->outIs('CLONE')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'called')
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":"clone", 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":called_type, 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' clone ');
+
+        // static calls (property, constant, method)
+        $query = $this->newQuery('Static calls');
+        $query->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw('sideEffect{ type = it.get().label().toLowerCase(); }', array(), array())
+
+              ->goToInstruction(Analyzer::$CIT)
+              ->savePropertyAs('fullnspath', 'calling')
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'calling_name')
+              ->back('first')
+
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('fullnspath', 'called')
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->outIs('NAME')
+              ->savePropertyAs('fullcode', 'called_name')
+
+              ->raw(<<<'GREMLIN'
+map{ ["calling":calling, 
+      "calling_name":calling_name, 
+      "calling_type":calling_type, 
+      "type":type, 
+      "called":called, 
+      "called_name":called_name, 
+      "called_type":called_type, 
+           ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $count = $this->storeToTable('classesDependencies', $query);
+        display($count . ' static calls CPM');
+
+        // Skipping normal method/property call : They actually depends on new
+        // Magic methods : todo! 
+        // instanceof ?  
     }
 
     private function collectHashCounts($query, $name) {
         $index = $this->gremlin->query($query);
-        
+
         $values = array();
         foreach($index->toArray()[0] as $number => $count) {
             $values[] = "('$name', $number, $count) ";
@@ -2332,7 +2718,7 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        if ($result->toInt() === 0) {
+        if (count($result) === 0) {
             return 0;
         }
 

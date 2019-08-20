@@ -24,10 +24,10 @@ namespace Exakat\Reports;
 
 use stdClass;
 
-class Filedependencieshtml extends Reports {
+class Classdependencies extends Reports {
     const FILE_EXTENSION = '';
-    const FILE_FILENAME  = 'dependencies';
-
+    const FILE_FILENAME  = 'class_dependencies';
+    
     private $finalName   = '';
     private $tmpName     = '';
 
@@ -37,13 +37,15 @@ class Filedependencieshtml extends Reports {
 
         copyDir("{$this->config->dir_root}/media/dependencies", $this->tmpName);
 
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE including != included');
+        $res = $this->sqlite->query('SELECT * FROM classesDependencies WHERE including != included LIMIT 3000');
 
-        $json = new stdClass();
+        $json        = new stdClass();
         $json->edges = array();
         $json->nodes = array();
-        $in = array();
-        $out = array();
+
+        $in          = array();
+        $out         = array();
+        $properties  = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($json->nodes[$row['including']])){
@@ -52,6 +54,8 @@ class Filedependencieshtml extends Reports {
             } else {
                 $source = count($json->nodes);
                 $json->nodes[$row['including']] = $source;
+                $properties[$source] = array('caption' => $row['including_name'],
+                                             'type'    => $row['including_type'],);
                 $in[$source] = 0;
                 $out[$source] = 0;
             }
@@ -62,7 +66,9 @@ class Filedependencieshtml extends Reports {
             } else {
                 $destination = count($json->nodes);
                 $json->nodes[$row['included']] = $destination;
-                $in[$destination] = 0;
+                $properties[$destination] = array('caption' => $row['included_name'],
+                                                  'type'    => $row['included_type'],);
+                $in[$destination]  = 0;
                 $out[$destination] = 0;
             }
 
@@ -78,12 +84,13 @@ class Filedependencieshtml extends Reports {
         $json->nodes = array_flip($json->nodes);
         foreach($in as $id => $i) {
             $json->nodes[$id] = (object) array('id'       => $id,
-                                               'caption'  => $json->nodes[$id],
+                                               'caption'  => $properties[$id]['caption'],
+                                               'type'     => $properties[$id]['type'],
                                                'incoming' => $i,
                                                'outgoing' => $out[$id]);
         }
 
-        file_put_contents($this->tmpName . '/fidep.json', json_encode($json));
+        file_put_contents("{$this->tmpName}/fidep.json", json_encode($json, \JSON_PRETTY_PRINT));
 
         // Finalisation
         if ($this->finalName !== '/') {
