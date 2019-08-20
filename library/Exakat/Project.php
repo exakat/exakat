@@ -24,10 +24,12 @@
 namespace Exakat;
 
 class Project {
-    private $project  = 'unnamed';
+    public const IS_DEFAULT = '/unnamed/';
+    
+    private $project  = self::IS_DEFAULT;
     private $error    = '';
 
-    public function __construct($project) {
+    public function __construct(string $project = self::IS_DEFAULT) {
         $this->project = $project;
     }
 
@@ -53,9 +55,13 @@ class Project {
     public function __toString() {
         return $this->project;
     }
-    
+
     public function getError() {
         return $this->error;
+    }
+
+    public function isDefault() {
+        return $this->project === self::IS_DEFAULT;
     }
 }
 
