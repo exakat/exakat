@@ -19,32 +19,41 @@
                                     "staticconstant",
                                     "staticproperty",
                                     "include",
-                                    "use",
-                                    "constant"]},
+                                    "use",]},
+            nodeTypes: {"type":["class", "interface", "trait"]},
+            nodeCaption: "caption", 
+            nodeCaptionsOnByDefault: true,
             nodeStyle: {
                 "all": {
                     "borderColor": "#127DC1",
+                    /*
                     "borderWidth": function(d, radius) {
-                        return radius * d.getProperties().incoming / (d.getProperties().incoming + d.getProperties().outgoing)
+                        return 10 + radius * d.getProperties().incoming / (d.getProperties().incoming + d.getProperties().outgoing)
                     },
                     "radius": function(d) {
-                        return d.getProperties().incoming + d.getProperties().outgoing;
+                        return 10 + d.getProperties().incoming + d.getProperties().outgoing;
                     }, 
+                    */
                 },
+                "class": {"color": "green" },
+                "interface": {"color": "red" },
+                "trait": {"color": "blue" },
             },
             edgeStyle: {
+                "all": { "width":10,
+                        "opacity": 0.8 },
                 "new": {"color": "green" },
+                "clone": {"color": "green" },
+
+                "typehint": {"color": "red" },
 
                 "extends": {"color": "yellow" },
-                "implements": {"color": "goldenrod" },
-                "use": {"color": "PeachPuff" },
-
-                "functioncall": {"color": "red" },
-                "constant": {"color": "crimson" },
+                "implements": {"color": "yellow" },
+                "use": {"color": "yellow" },
 
                 "staticmethodcall": {"color": "blue" },
-                "staticconstant": {"color": "LightSkyBlue" },
-                "staticproperty": {"color": "CornflowerBlue" },
+                "staticconstant": {"color": "blue" },
+                "staticproperty": {"color": "blue" },
                 },
             };
 
