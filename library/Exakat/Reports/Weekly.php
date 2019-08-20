@@ -505,14 +505,17 @@ JAVASCRIPT;
             $query .= ' LIMIT ' . $limit;
         }
         $result = $this->sqlite->query($query);
+
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
             unset($list[$row['analyzer']]);
         }
 
-        foreach(array_keys($list) as $analyzer => $value) {
-            $data[] = compact('analyzer','value');
+        foreach(array_keys($list) as $analyzer) {
+            $data[] = array('analyzer' => $analyzer,
+                            'value'    => 0,
+                            );
         }
 
         return $data;

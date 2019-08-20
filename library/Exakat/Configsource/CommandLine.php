@@ -25,6 +25,7 @@ namespace Exakat\Configsource;
 use Exakat\Vcs\Vcs;
 use Exakat\Tasks\Baseline;
 use Exakat\Tasks\Extension;
+use Exakat\Project;
 
 class CommandLine extends Config {
     private $booleanOptions = array(
@@ -180,6 +181,13 @@ class CommandLine extends Config {
                         }
                         break;
 
+                    case 'project' :
+                        if (!isset($this->config['project'])) {
+                            $this->config['project'] = new Project($args[$id + 1]);
+                        } 
+                        // Multiple -p are ignored : keep the first
+                        break;
+
                     case 'configuration' :
                         if (empty($this->config['configuration'])) {
                             $this->config['configuration'] = array();
@@ -274,7 +282,7 @@ class CommandLine extends Config {
             $this->config['command'] == 'onepage') {
 
             $this->config['project']   = 'onepage';
-            $this->config['thema']     = 'OneFile';
+            $this->config['ruleset']   = 'OneFile';
             
             $this->config['format']    = array('OnepageJson');
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));

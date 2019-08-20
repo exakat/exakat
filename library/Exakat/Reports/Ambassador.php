@@ -1836,19 +1836,18 @@ SQL;
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = makeList($list);
 
-        $query = "SELECT analyzer, count(*) AS number
+        $query = "SELECT analyzer, count(*) AS value
                     FROM results
                     WHERE analyzer in ($list)
                     GROUP BY analyzer
-                    ORDER BY number DESC ";
-        if ($limit) {
-            $query .= ' LIMIT ' . $limit;
+                    ORDER BY value DESC ";
+        if (!empty($limit)) {
+            $query .= " LIMIT  $limit";
         }
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
+            $data[] = $row;
         }
 
         return $data;

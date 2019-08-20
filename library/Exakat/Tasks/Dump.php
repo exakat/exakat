@@ -78,7 +78,7 @@ class Dump extends Tasks {
         }
         $projectInGraph = $projectInGraph[0];
         
-        if ($projectInGraph !== $this->config->project) {
+        if ($projectInGraph !== (string) $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $projectInGraph);
         }
         
