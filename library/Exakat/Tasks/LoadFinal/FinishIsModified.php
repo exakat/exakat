@@ -26,25 +26,31 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 use Exakat\Data\Methods;
-use Exakat\Data\GroupBy;
 
 class FinishIsModified extends LoadFinal {
     public function run() {
-        $variables = array('Variable', 'Variableobject', 'Variablearray', 'Array', 'Member', 'Staticproperty', 'Phpvariable',);
+        $variables = array('Variable', 
+                           'Variableobject', 
+                           'Variablearray', 
+                           'Array', 
+                           'Member', 
+                           'Staticproperty', 
+                           'Phpvariable',
+                          );
         
         $query = $this->newQuery('CreateMagicProperty this');
         // PHP functions that are using references
         $functions = $this->methods->getFunctionsReferenceArgs();
-        $references = new GroupBy();
+        $references = array();
         
         foreach($functions as $function) {
-            $references[makeFullnspath($function['function'])] = $function['position'];
+            array_collect_by($references, $function['function'], $function['position']);
         }
-        
-        $query->atomFunctionIs(array_keys($references->toArray()))
+
+        $query->atomFunctionIs(array_keys($references))
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('ARGUMENT')
-              ->isHash('rank',$references->toArray(), 'fnp')
+              ->isHash('rank', $references, 'fnp')
               ->atomIs($variables, Analyzer::WITHOUT_CONSTANTS)
               ->setProperty('isModified', true)
               ->returnCount();

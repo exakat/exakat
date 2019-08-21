@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\GroupBy;
 
 class OnlyVariablePassedByReference extends Analyzer {
     public function analyze() {
@@ -92,13 +91,11 @@ class OnlyVariablePassedByReference extends Analyzer {
 
         // Checking PHP Native functions
         $functions = self::$methods->getFunctionsReferenceArgs();
-        $references = new GroupBy();
+        $references = array();
 
         foreach($functions as $function) {
-            $references[$function['position']] = makeFullnspath($function['function']);
+            array_collect_by($references, $function['position'], makeFullnspath($function['function']));
         }
-        
-//        $references = array(2 => $references[2]);
 
         foreach($references as $position => $functions) {
             // Functioncalls

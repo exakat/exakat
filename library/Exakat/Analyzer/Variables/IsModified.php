@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Variables;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\GroupBy;
 
 class IsModified extends Analyzer {
     public function analyze() {
