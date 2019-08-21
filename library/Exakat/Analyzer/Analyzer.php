@@ -54,7 +54,7 @@ abstract class Analyzer {
 
     private $queries          = array();
     private $query            = null;
-    
+
     public $config         = null;
 
     public static $availableAtoms         = array();
@@ -66,14 +66,15 @@ abstract class Analyzer {
     private static $calledNamespaces      = null;
     private static $calledDirectives      = null;
 
-    private $analyzer         = '';       // Current class of the analyzer (called from below)
-    private $shortAnalyzer = '';
-    protected $analyzerQuoted = '';
-    protected $analyzerId     = 0;
+    private   $analyzer         = '';       // Current class of the analyzer (called from below)
+    private   $shortAnalyzer    = '';
+    protected $analyzerQuoted   = '';
+    protected $analyzerId       = 0;
+    protected $queryId          = 0;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
-    
+
     private $path_tmp           = null;
 
     const S_CRITICAL = 'Critical';
@@ -214,12 +215,8 @@ abstract class Analyzer {
             self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
         
-        $this->query = new Query((count($this->queries) + 1),
-                                  $this->config->project,
-                                  $this->analyzerQuoted,
-                                  $this->config->executable,
-                                  self::$datastore);
-        
+        $this->initNewQuery();
+
         self::$methods = new Methods($this->config);
 
         if (self::$rulesId === null && $this->gremlin !== null) {
@@ -1875,10 +1872,21 @@ GREMLIN;
     }
     
     public function prepareQuery($type = self::QUERY_DEFAULT) {
-        $this->query->prepareQuery($this->analyzerId);
+        ++$this->queryId;
+        
+        $this->raw(<<<GREMLIN
+dedup().groupCount("total").by(count())
+        .addE("ANALYZED").from(g.V({$this->analyzerId}))
+        .cap("processed", "total")
+
+// Query (#{$this->queryId}) for {$this->analyzer}
+// php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
+
+GREMLIN
+);
+        $this->query->prepareQuery();
 
         $this->queries[] = $this->query;
-        $this->query = null;
 
          // initializing a new query
         $this->initNewQuery();
@@ -1907,9 +1915,13 @@ GREMLIN;
     }
     
     private function initNewQuery() {
-        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable, self::$datastore);
+        $this->query = new Query((count($this->queries) + 1),
+                                  $this->config->project,
+                                  $this->analyzerQuoted,
+                                  $this->config->executable,
+                                  self::$datastore);
     }
-    
+
     public function execQuery() {
         if (empty($this->queries)) {
             return true;

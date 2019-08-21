@@ -34,8 +34,7 @@ class Query {
 
     const TO_GREMLIN = true;
     const NO_GREMLIN = false;
-    
-    private $analyzerId = null;
+
     private $id         = null;
     private $project    = null;
     private $analyzer   = null;
@@ -46,7 +45,7 @@ class Query {
     private $query            = null;
     private $queryFactory     = null;
     private $sides            = array();
-    
+
     public function __construct($id, $project, $analyzer, $php, $datastore) {
         $this->id       = $id;
         $this->project  = $project;
@@ -57,13 +56,30 @@ class Query {
     }
 
     public function __call($name, $args) {
+        assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
+
         try {
             $command = $this->queryFactory->factory($name);
             $this->commands[] = $command->run(...$args);
         } catch (UnknownDsl $e) {
             die('This is an unknown DSL : ' . $name);
         }
-        
+
+        if (count($this->commands) === 1 && empty($this->sides)) {
+            if (substr($this->commands[0]->gremlin, 0, 9) === 'hasLabel(') {
+                $this->_as('first');
+                $this->raw('groupCount("processed").by(count())', array(), array());
+            } elseif (substr($this->commands[0]->gremlin, 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
+                print "analyzeris";
+                die();
+            } elseif ($this->commands[0]->gremlin === self::STOP_QUERY) {
+                $this->_as('first');
+                // Keep going
+            } else {
+                assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
+            }
+        }
+
         return $this;
     }
     
@@ -100,7 +116,7 @@ class Query {
         return $return;
     }
 
-    public function prepareQuery($analyzerId) {
+    public function prepareQuery() {
         assert($this->query === null, 'query is already ready');
         assert(empty($this->sides), 'sides are not empty : left ' . count($this->sides) . ' element');
 
@@ -108,12 +124,11 @@ class Query {
         if (empty($this->commands)) {
             return true;
         }
-        
-        $this->analyzerId = $analyzerId;
 
         $sack = $this->prepareSack($this->commands);
+        $this->query = "g{$sack}.V()";
 
-        $commands = array_column($this->commands, 'gremlin');
+        $commands  = array_column($this->commands, 'gremlin');
         $arguments = array_column($this->commands, 'arguments');
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
@@ -127,10 +142,13 @@ class Query {
             }
         }
 
+        $this->query .= '.' . implode(".\n", $commands);
+
+/*
         if (substr($commands[0], 0, 9) === 'hasLabel(') {
             $first = $commands[0];
             array_shift($commands);
-            $this->query = "g{$sack}.V().$first.groupCount(\"processed\").by(count()).as(\"first\")";
+            $this->query .= ".$first.groupCount(\"processed\").by(count()).as(\"first\")";
             if (!empty($commands)) {
                 $this->query .= '.' . implode(".\n", $commands);
             }
@@ -138,13 +156,14 @@ class Query {
             array_shift($commands);
             $arg0 = array_pop($this->commands[0]->arguments);
             unset($this->commands[0]);
-            $this->query = 'g' . $sack . '.V().hasLabel("Analysis").has("analyzer", within(' . makeList($arg0) . ')).out("ANALYZED").as("first").groupCount("processed").by(count())';
+            $this->query .= '.hasLabel("Analysis").has("analyzer", within(' . makeList($arg0) . ')).out("ANALYZED").as("first").groupCount("processed").by(count())';
             if (!empty($commands)) {
                 $this->query .= '.' . implode(".\n", $commands);
             }
         } else {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[0]);
         }
+*/
 
         if (empty($arguments)) {
             $this->arguments = array();
@@ -152,21 +171,6 @@ class Query {
             $this->arguments = array_merge(...$arguments);
         }
 
-        // search what ? All ?
-        $this->query = <<<GREMLIN
-
-{$this->query}
-
-.dedup().groupCount("total").by(count())
-        .addE("ANALYZED").from(g.V({$this->analyzerId}))
-        .cap("processed", "total")
-
-// Query (#{$this->id}) for {$this->analyzer}
-// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v
-
-GREMLIN;
-//        assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
-        
         return true;
     }
     
@@ -218,7 +222,7 @@ GREMLIN;
     }
 
     public function printQuery() {
-        $this->prepareQuery($this->analyzerId);
+        $this->prepareQuery();
         
         var_dump($this->query);
         print_r($this->arguments);

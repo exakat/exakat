@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class IsModified extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PhpNativeReference',
+                    );
+    }
+
     public function analyze() {
         // $a[33] = 44;
         $this->atomIs('Array')

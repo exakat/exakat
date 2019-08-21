@@ -33,11 +33,11 @@ class DSLFactory {
     const VARIABLE_WRITE = true;
     const VARIABLE_READ  = false;
     
-    public $availableAtoms            = array();
-    public $availableLinks            = array();
-    public $availableFunctioncalls    = array();
-    private $availableVariables       = array(); // This one is per query
-    protected $availableLabels        = array('first'); // This one is per query
+    public    $availableAtoms         = array();
+    public    $availableLinks         = array();
+    public    $availableFunctioncalls = array();
+    private   $availableVariables     = array(); // This one is per query
+    protected $availableLabels        = array(); // This one is per query
     protected $ignoredcit             = array();
     protected $ignoredfunctions       = array();
     protected $ignoredconstants       = array();
@@ -78,11 +78,11 @@ class DSLFactory {
         } else {
             $className = __NAMESPACE__ . '\\' . ucfirst($name);
         }
-        
+
         if (!class_exists($className)) {
             throw new UnknownDsl($name);
         }
-        
+
         return new $className($this,
                               $this->dictCode,
                               $this->availableAtoms,

@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class Php extends Analyzer {
 
     public function dependsOn() {
-        return array('Interfaces/InterfaceUsage');
+        return array('Interfaces/InterfaceUsage',
+                    );
     }
     
     public function analyze() {
