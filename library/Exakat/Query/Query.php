@@ -23,6 +23,7 @@
 
 namespace Exakat\Query;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\DSL;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
@@ -35,6 +36,9 @@ class Query {
     const TO_GREMLIN = true;
     const NO_GREMLIN = false;
 
+    const QUERY_RUNNING = true;
+    const QUERY_STOPPED = false;
+
     private $id         = null;
     private $project    = null;
     private $analyzer   = null;
@@ -45,6 +49,7 @@ class Query {
     private $query            = null;
     private $queryFactory     = null;
     private $sides            = array();
+    private $stopped          = self::QUERY_RUNNING;
 
     public function __construct($id, $project, $analyzer, $php, $datastore) {
         $this->id       = $id;
@@ -56,27 +61,55 @@ class Query {
     }
 
     public function __call($name, $args) {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return $this; 
+        }
+
         assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
 
         try {
             $command = $this->queryFactory->factory($name);
-            $this->commands[] = $command->run(...$args);
+            $last = $command->run(...$args);
+            $this->commands[] = $last;
         } catch (UnknownDsl $e) {
             die('This is an unknown DSL : ' . $name);
         }
+        
+        if ($last->gremlin === self::STOP_QUERY) {
+            $this->query = "// Query with STOP_QUERY\n";
+            $this->commands = array();
+
+            $this->stopped = self::QUERY_STOPPED;
+            
+            return $this;
+        }
 
         if (count($this->commands) === 1 && empty($this->sides)) {
-            if (substr($this->commands[0]->gremlin, 0, 9) === 'hasLabel(') {
-                $this->_as('first');
-                $this->raw('groupCount("processed").by(count())', array(), array());
-            } elseif (substr($this->commands[0]->gremlin, 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-                print "analyzeris";
-                die();
-            } elseif ($this->commands[0]->gremlin === self::STOP_QUERY) {
-                $this->_as('first');
-                // Keep going
-            } else {
-                assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
+            switch(strtolower($name)) {
+                case 'atomis' : 
+                    $this->_as('first');
+                    $this->raw('groupCount("processed").by(count())', array(), array());
+                    break;
+
+                case 'analyzeris' : 
+                    unset($this->commands[0]);
+                    $this->atomIs('Analysis', Analyzer::WITHOUT_CONSTANTS);
+                    $this->commands = array($this->commands[1]);
+
+                    $this->propertyIs('analyzer', $args[0], Analyzer::CASE_INSENSITIVE);
+                    $this->outIs('ANALYZED');
+
+                    $this->raw('groupCount("processed").by(count())', array(), array());
+
+                    break;
+                    
+                default : 
+                    if ($this->commands[0]->gremlin === self::STOP_QUERY) {
+                        $this->_as('first');
+                        // Keep going
+                    } else {
+                        assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
+                    }
             }
         }
 
@@ -84,6 +117,10 @@ class Query {
     }
     
     public function side() {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return $this; 
+        }
+
         $this->sides[] = $this->commands;
         $this->commands = array();
         
@@ -91,13 +128,18 @@ class Query {
     }
 
     public function prepareSide() {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return $this; 
+        }
+
         $commands = array_column($this->commands, 'gremlin');
-        
+
         assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
         assert(!empty($commands), 'No command in side query');
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             $this->commands = array_pop($this->sides);
+
             return new Command(Query::STOP_QUERY);
         }
 
@@ -117,6 +159,10 @@ class Query {
     }
 
     public function prepareQuery() {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return true; 
+        }
+
         assert($this->query === null, 'query is already ready');
         assert(empty($this->sides), 'sides are not empty : left ' . count($this->sides) . ' element');
 
@@ -133,7 +179,8 @@ class Query {
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
-            return $this->query = '';
+            $this->query = '';
+            return false;
         }
 
         foreach($commands as $id => $command) {
@@ -143,27 +190,6 @@ class Query {
         }
 
         $this->query .= '.' . implode(".\n", $commands);
-
-/*
-        if (substr($commands[0], 0, 9) === 'hasLabel(') {
-            $first = $commands[0];
-            array_shift($commands);
-            $this->query .= ".$first.groupCount(\"processed\").by(count()).as(\"first\")";
-            if (!empty($commands)) {
-                $this->query .= '.' . implode(".\n", $commands);
-            }
-        } elseif (substr($commands[0], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-            array_shift($commands);
-            $arg0 = array_pop($this->commands[0]->arguments);
-            unset($this->commands[0]);
-            $this->query .= '.hasLabel("Analysis").has("analyzer", within(' . makeList($arg0) . ')).out("ANALYZED").as("first").groupCount("processed").by(count())';
-            if (!empty($commands)) {
-                $this->query .= '.' . implode(".\n", $commands);
-            }
-        } else {
-            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $commands[0]);
-        }
-*/
 
         if (empty($arguments)) {
             $this->arguments = array();
@@ -175,6 +201,10 @@ class Query {
     }
     
     public function prepareRawQuery() {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return true; 
+        }
+
         $commands = array_column($this->commands, 'gremlin');
         $arguments = array_column($this->commands, 'arguments');
         
