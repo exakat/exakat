@@ -45,11 +45,11 @@ GREMLIN
             }
         }
 
-        $fullcode = array_merge(...$fullcode);
-
         if (empty($integers)) {
             return;
         }
+
+        $fullcode = array_merge(...$fullcode);
 
         $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication'))
              ->has('intval')

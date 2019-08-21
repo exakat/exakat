@@ -43,7 +43,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
 
         // WIth return typehint
         // array_key_exists('', $a); $a = foo(); function foo() : TTT {}
-        $this->functioncallIs('\\array_key_exists')
+        $this->atomFunctionIs('\\array_key_exists')
              ->outWIthRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
@@ -58,7 +58,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
 
         // WIth object operator
         // array_key_exists('', $a); $a->p  = 2;
-        $this->functioncallIs('\\array_key_exists')
+        $this->atomFunctionIs('\\array_key_exists')
              ->outWIthRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')

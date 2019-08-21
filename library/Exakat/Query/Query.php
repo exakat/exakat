@@ -87,6 +87,7 @@ class Query {
         if (count($this->commands) === 1 && empty($this->sides)) {
             switch(strtolower($name)) {
                 case 'atomis' : 
+                case 'atomfunctionis' : 
                     $this->_as('first');
                     $this->raw('groupCount("processed").by(count())', array(), array());
                     break;
@@ -102,13 +103,13 @@ class Query {
                     $this->raw('groupCount("processed").by(count())', array(), array());
 
                     break;
-                    
+
                 default : 
                     if ($this->commands[0]->gremlin === self::STOP_QUERY) {
                         $this->_as('first');
                         // Keep going
                     } else {
-                        assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
+                        assert(false, 'No gremlin optimization : gremlin query "'.$name.'" in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
                     }
             }
         }
@@ -271,6 +272,10 @@ GREMLIN;
         }
         
         return null;
+    }
+    
+    public function canSkip() : bool {
+        return $this->stopped === self::QUERY_RUNNING;
     }
 }
 ?>
