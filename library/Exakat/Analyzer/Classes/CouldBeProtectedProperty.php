@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\GroupBy;
 
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
@@ -66,9 +65,9 @@ class CouldBeProtectedProperty extends Analyzer {
              ->unique();
             $res = $this->rawQuery()->toArray();
 
-        $publicStaticProperties = new GroupBy();
+        $publicStaticProperties = array();
         foreach($res as $value) {
-            $publicStaticProperties[$value['classe']] = $value['variable'];
+            array_collect_by($publicStaticProperties, $value['classe'], $value['variable']);
         }
         
         if (!empty($publicStaticProperties)) {
@@ -81,7 +80,7 @@ class CouldBeProtectedProperty extends Analyzer {
                  ->back('first')
                  ->outIs('PPP')
                  ->atomIsNot('Virtualproperty')
-                 ->isNotHash('code', $publicStaticProperties->toArray(), 'fnp');
+                 ->isNotHash('code', $publicStaticProperties, 'fnp');
             $this->prepareQuery();
         }
     }

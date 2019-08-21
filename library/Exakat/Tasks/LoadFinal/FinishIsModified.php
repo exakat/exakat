@@ -37,26 +37,6 @@ class FinishIsModified extends LoadFinal {
                            'Staticproperty', 
                            'Phpvariable',
                           );
-        
-        $query = $this->newQuery('CreateMagicProperty this');
-        // PHP functions that are using references
-        $functions = $this->methods->getFunctionsReferenceArgs();
-        $references = array();
-        
-        foreach($functions as $function) {
-            array_collect_by($references, $function['function'], $function['position']);
-        }
-
-        $query->atomFunctionIs(array_keys($references))
-              ->savePropertyAs('fullnspath', 'fnp')
-              ->outIs('ARGUMENT')
-              ->isHash('rank', $references, 'fnp')
-              ->atomIs($variables, Analyzer::WITHOUT_CONSTANTS)
-              ->setProperty('isModified', true)
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countPhp = $result->toInt();
 
         // No support for old style constructors
         $query = $this->newQuery('isModified with New');
@@ -93,7 +73,7 @@ class FinishIsModified extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countFunction = $result->toInt();
         
-        $count = $countPhp + $countNew + $countFunction;
+        $count = $countNew + $countFunction;
         display("Created $count isModified values");
 
         // Managing Appends and its descendants

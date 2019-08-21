@@ -20,27 +20,29 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Variables;
+namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class IsModified extends Analyzer {
-    public function dependsOn() {
-        return array('Complete/PhpNativeReference',
-                    );
-    }
-
+class PhpNativeReference extends Analyzer {
     public function analyze() {
-        $atoms = array('Variable',
-                       'Phpvariable',
-                       'Variablearray',
-                       'Parametername',
-                      );
+        // PHP functions that are using references
+        $functions = self::$methods->getFunctionsReferenceArgs();
 
-        $this->atomIs($atoms)
-             ->is('isModified', true);
-        $this->prepareQuery();
+        $references = array();
+        foreach($functions as $function) {
+            array_collect_by($references, makeFullnspath($function['function']), $function['position']);
+        }
+
+        $this->atomFunctionIs(array_keys($references))
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->outIs('ARGUMENT')
+              ->isHash('rank', $references, 'fnp')
+              ->atomIs(self::$CONTAINERS)
+              ->setProperty('isModified', true)
+//              ->returnCount()
+              ;
+        $this->rawQuery();
     }
 }
 

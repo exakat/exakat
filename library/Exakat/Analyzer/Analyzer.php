@@ -37,8 +37,16 @@ use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
 
 abstract class Analyzer {
+    // Query types
+    const QUERY_DEFAULT  = 1; // For compatibility purposes
+    const QUERY_ANALYZER = 2; // same as above, but explicit
+    const QUERY_VALUE    = 3; // returns a single value
+    const QUERY_RAW      = 4; // returns data, no storage
+    const QUERY_HASH     = 5; // returns a list of values
+    const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
+
     public static $datastore  = null;
-    
+
     protected $rowCount       = 0; // Number of found values
     protected $processedCount = 0; // Number of initial values
     protected $queryCount     = 0; // Number of ran queries
@@ -644,7 +652,13 @@ GREMLIN;
 
         return $this;
     }
-    
+
+    public function setProperty($property, $values) {
+        $this->query->setProperty($property, $values);
+
+        return $this;
+    }
+
     public function atomInside($atom) {
         $this->query->atomInside($atom);
         
@@ -1860,7 +1874,7 @@ GREMLIN;
         $this->query->printQuery();
     }
     
-    public function prepareQuery() {
+    public function prepareQuery($type = self::QUERY_DEFAULT) {
         $this->query->prepareQuery($this->analyzerId);
 
         $this->queries[] = $this->query;
