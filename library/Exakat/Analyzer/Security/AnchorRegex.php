@@ -32,9 +32,9 @@ class AnchorRegex extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->has('noDelimiter')
-             ->filter('it.get().value("noDelimiter").toString().length() > 3;')
-             ->filter('( it.get().value("noDelimiter").substring(1, 2) != "^") && 
-                       ((it.get().value("noDelimiter") =~ "\\\\\\$.[a-zA-Z]*\\$").getCount() == 0); ')
+             ->raw('filter{ it.get().value("noDelimiter").toString().length() > 3; }')
+             ->raw('filter{( it.get().value("noDelimiter").substring(1, 2) != "^") && 
+                       ((it.get().value("noDelimiter") =~ "\\\\\\$.[a-zA-Z]*\\$").getCount() == 0); }')
              ->back('first');
         $this->prepareQuery();
     }

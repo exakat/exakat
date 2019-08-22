@@ -40,7 +40,7 @@ class RelayFunction extends Analyzer {
              ->atomIs(self::$FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->saveOutAs('args2', 'ARGUMENT', '')
-             ->filter('args2 == args;')
+             ->raw('filter{ args2 == args; }')
              ->back('first');
         $this->prepareQuery();
     }

@@ -36,7 +36,7 @@ class InconsistentElseif extends Analyzer {
              ->outIs('CONDITION')
              ->collectVariables('variables2')
 
-             ->filter('variables.intersect(variables2) == []')
+             ->raw('filter{variables.intersect(variables2) == []}')
              
              ->back('first');
         $this->prepareQuery();

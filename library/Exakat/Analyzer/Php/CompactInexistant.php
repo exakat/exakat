@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class CompactInexistant extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateCompactVariables',
+                    );
+    }
+
     public function analyze() {
         // compact('a', 'b') with $b or $a that doesn't exists
         $this->atomFunctionIs('\\compact')

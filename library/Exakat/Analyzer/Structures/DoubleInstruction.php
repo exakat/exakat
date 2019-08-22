@@ -56,7 +56,7 @@ GREMLIN
 )
              ->outIs('EXPRESSION')
              ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus', 'Void'))
-             ->filter('it.get().value("rank") in doubles');
+             ->raw('filter{ it.get().value("rank") in doubles; }');
         $this->prepareQuery();
     }
 }

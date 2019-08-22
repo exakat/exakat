@@ -63,7 +63,7 @@ GREMLIN
 )
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
-             ->filter('it.get().value("rank") in doubles')
+             ->raw('filter{ it.get().value("rank") in doubles }')
              ->initVariable('ranked')
              ->raw('sideEffect{ranked = it.get().value("rank") + 1}')
              ->codeIs('=')

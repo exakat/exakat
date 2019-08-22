@@ -42,7 +42,7 @@ class FailingSubstrComparison extends Analyzer {
              ->has('noDelimiter')
              ->getStringLength('noDelimiter', 's')
              // Substring is actually as long as length
-             ->filter('s != length.toInteger().abs();')
+             ->raw('filter{ s != length.toInteger().abs(); }')
              ->back('first');
         $this->prepareQuery();
     }

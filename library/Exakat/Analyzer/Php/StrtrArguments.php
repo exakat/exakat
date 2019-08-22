@@ -49,7 +49,7 @@ class StrtrArguments extends Analyzer {
              ->hasNoOut('CONCAT')
              ->noDelimiterIsNot('')
              ->getStringLength('noDelimiter', 's2')
-             ->filter('s1 != s2')
+             ->raw('filter{s1 != s2}')
              ->back('first');
         $this->prepareQuery();
     }

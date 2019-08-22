@@ -63,7 +63,7 @@ class NoChoice extends Analyzer {
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->raw('sideEffect{ selse = []; it.get().vertices(OUT, "EXPRESSION").sort{it.value("rank")}.each{ selse.add(it.value("fullcode"));} }')
-             ->filter('sthen.join(";") == selse.join(";")')
+             ->raw('filter{ sthen.join(";") == selse.join(";") }')
              ->back('first');
         $this->prepareQuery();
 

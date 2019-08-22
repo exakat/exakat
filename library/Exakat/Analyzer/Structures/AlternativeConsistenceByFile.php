@@ -43,7 +43,7 @@ GREMLIN
 )
                      ->raw('fold()')
              )
-            ->filter('normal > 0 && alt > 0')
+            ->raw('filter{ normal > 0 && alt > 0 }')
             ->back('first');
         $this->prepareQuery();
     }

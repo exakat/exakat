@@ -112,7 +112,7 @@ GREMLIN
 )
 
                 ->collectImplements('interfaces')
-                ->filter('!(fnp in interfaces) ')
+                ->raw('filter{ !(fnp in interfaces) }')
                 ->back('first');
         $this->prepareQuery();
     }

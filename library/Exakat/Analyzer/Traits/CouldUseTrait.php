@@ -114,7 +114,7 @@ GREMLIN
 )
 
                 ->collectTraits('traits')
-                ->filter('!(fnp in traits) ')
+                ->raw('filter{!(fnp in traits) }')
                 ->back('first');
         $this->prepareQuery();
     }

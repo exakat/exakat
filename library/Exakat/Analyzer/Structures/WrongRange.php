@@ -55,7 +55,7 @@ class WrongRange extends Analyzer {
              ->has('intval')
              ->savePropertyAs('intval', 'upperbound')
 
-             ->filter('lowerbound <= upperbound;')
+             ->raw('filter{lowerbound <= upperbound;}')
 
              ->back('first');
         $this->prepareQuery();
@@ -88,7 +88,7 @@ class WrongRange extends Analyzer {
              ->has('intval')
              ->savePropertyAs('intval', 'upperbound')
 
-             ->filter('lowerbound >= upperbound;')
+             ->raw('filter{lowerbound >= upperbound;}')
 
              ->back('first');
         $this->prepareQuery();

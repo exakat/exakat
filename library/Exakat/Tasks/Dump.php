@@ -2492,7 +2492,7 @@ GREMLIN
               ->back('first')
               ->inIs('OVERWRITE')
               ->savePropertyAs('visibility', 'visibility2')
-              ->filter('visibility1  != visibility2;', array(), array())
+              ->raw('filter{visibility1  != visibility2;}', array(), array())
               ->inIs('METHOD')
               ->savePropertyAs('fullcode', 'name2')
               ->raw(<<<'GREMLIN'

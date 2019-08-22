@@ -42,9 +42,11 @@ class PrintfArguments extends Analyzer {
              ->hasNoOut('CONCAT')
              // Count the number of ...variadic
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
-             ->filter(<<<GREMLIN
-d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
-c - 1 > d.size();
+             ->raw(<<<GREMLIN
+filter{
+    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+    c - 1 > d.size();
+}
 GREMLIN
 )
              ->back('first');
@@ -63,9 +65,11 @@ GREMLIN
              ->hasNoOut('CONCAT')
              // Count the number of ...variadic
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
-             ->filter(<<<GREMLIN
-d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
-c - 1 != d.size();
+             ->raw(<<<GREMLIN
+filter{
+    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+    c - 1 != d.size();
+}
 GREMLIN
 )
              ->back('first');
@@ -83,8 +87,10 @@ GREMLIN
              ->hasNoOut('CONCAT')
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
              ->filter(<<<GREMLIN
-d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
-c != d.size();
+filter{
+    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+    c != d.size();
+}
 GREMLIN
 )
              ->back('first');

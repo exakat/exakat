@@ -56,7 +56,7 @@ GREMLIN
                 )
              )
              ->atomInsideNoDefinition('Member')
-             ->filter('members[it.get().value("fullcode")] > 1;')
+             ->raw('filter {members[it.get().value("fullcode")] > 1;}')
              ->back('first');
         $this->prepareQuery();
     }

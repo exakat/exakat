@@ -47,7 +47,7 @@ class InfiniteRecursion extends Analyzer {
              ->atomIs(self::$FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->collectArguments('called')
-             ->filter('args.equals(called)')
+             ->raw('filter{args.equals(called)}')
              ->back('first');
         $this->prepareQuery();
 
@@ -70,7 +70,7 @@ class InfiniteRecursion extends Analyzer {
              ->inIs(array('OBJECT', 'CLASS'))
              ->outIsIE('METHOD')
              ->collectArguments('called')
-             ->filter('args.equals(called)')
+             ->raw('filter{args.equals(called)}')
              ->back('first');
         $this->prepareQuery();
 
