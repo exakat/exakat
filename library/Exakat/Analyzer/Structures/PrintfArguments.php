@@ -86,7 +86,7 @@ GREMLIN
              ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
-             ->filter(<<<GREMLIN
+             ->raw(<<<GREMLIN
 filter{
     d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
     c != d.size();
