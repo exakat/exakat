@@ -4916,7 +4916,7 @@ class Load extends Tasks {
 
     private function processNot() {
         $finals = array_diff($this->precedence->get($this->tokens[$this->id][0]),
-                              $this->assignations
+                             $this->assignations
                              );
         $this->processSingleOperator('Not', $finals, 'NOT');
         
@@ -5137,10 +5137,9 @@ class Load extends Tasks {
             return $this->processSign();
         }
 
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF);
         $finals = array_diff($finals, $this->assignations);
         $finals = array_unique($finals);
-        $finals = array_slice($finals, 1);
         return $this->processOperator('Addition', $finals, array('LEFT', 'RIGHT'));
     }
 
@@ -5444,7 +5443,7 @@ class Load extends Tasks {
     }
 
     private function processCoalesce() {
-        return $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
     private function processEllipsis() {
@@ -5485,15 +5484,11 @@ class Load extends Tasks {
     }
 
     private function processMultiplication() {
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = $this->phptokens::T_STAR;
-        $finals[] = $this->phptokens::T_SLASH;
-        $finals[] = $this->phptokens::T_PERCENTAGE;
-        return $this->processOperator('Multiplication', $finals);
+        return $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
     private function processPower() {
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF);
         $finals[] = $this->phptokens::T_POW;
         return $this->processOperator('Power', $finals);
     }

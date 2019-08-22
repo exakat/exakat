@@ -26,8 +26,10 @@ use Exakat\Exceptions\NoPrecedence;
 use Exakat\Phpexec;
 
 class Precedence {
+    public const WITH_SELF = true;
+    public const WITHOUT_SELF = false;
 
-    private $precedence = array();
+    private $precedence  = array();
     private $definitions = array(
                         'T_OBJECT_OPERATOR'             => 0,
                         'T_DOUBLE_COLON'                => 0,
@@ -44,7 +46,6 @@ class Precedence {
 
                         'T_INC'                         => 4,
                         'T_DEC'                         => 4,
-                        'T_TILDE'                       => 4,
                         'T_ARRAY_CAST'                  => 4,
                         'T_BOOL_CAST'                   => 4,
                         'T_DOUBLE_CAST'                 => 4,
@@ -56,6 +57,7 @@ class Precedence {
 
                         'T_INSTANCEOF'                  => 5,
 
+                        'T_TILDE'                       => 6,
                         'T_BANG'                        => 6,
                         'T_REFERENCE'                   => 6, // Special for reference's usage of &
 
@@ -155,7 +157,7 @@ class Precedence {
         }
     }
 
-    public function get($token, $itself = false) {
+    public function get($token, $itself = self::WITHOUT_SELF) {
         static $cache;
 
         if ($cache === null) {
@@ -163,7 +165,7 @@ class Precedence {
             foreach($this->precedence as $k1 => $p1) {
                 $cache[$k1] = array();
                 foreach($this->precedence as $k2 => $p2) {
-                    if ($p1 <= $p2 && ($itself === true || $k1 !== $k2) ) {
+                    if ($p1 <= $p2 && ($itself === self::WITHOUT_SELF || $k1 !== $k2) ) {
                         $cache[$k1][] = $k2;
                     }
                 }
