@@ -3267,7 +3267,7 @@ class Load extends Tasks {
 
         // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
         $max = max(array_keys($this->atoms));
-        for($i = $variables_start; $i < $max; ++$i) {
+        for($i = $variables_start + 1; $i < $max; ++$i) {
             if ($this->atoms[$i]->atom === 'Variable') {
                 $this->addLink($foreach, $this->atoms[$i], 'VALUE');
             }
@@ -4623,7 +4623,7 @@ class Load extends Tasks {
     }
 
     private function processFloat() {
-        $float = $this->addAtom('Integer');
+        $float = $this->addAtom('Float');
 
         $float->code     = str_replace('_', '', $this->tokens[$this->id][1]);
         $float->fullcode = $this->tokens[$this->id][1];

@@ -30,7 +30,7 @@ class Filter extends DSL {
         if ($filter instanceof Command) {
             return $filter;
         } else {
-            return new Command("filter{ $filter }", $arguments );
+            assert(false, "Filter needs a command : $filter");
         }
     }
 }

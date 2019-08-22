@@ -27,31 +27,19 @@ use Exakat\Analyzer\Analyzer;
 
 class AddZero extends Analyzer {
     public function analyze() {
-                // $x += 0
+        // $x += 0
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->is('intval', 0)
-             ->is('boolean', false)
-             ->atomIsNot(array('Arrayliteral'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // 0 + 2
-        $this->atomIs('Addition')
-             ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)
              ->is('boolean', false)
              ->atomIsNot('Arrayliteral')
              ->back('first');
         $this->prepareQuery();
 
-        // 0 + 2
+        // 0 + ($c = 2)
         $this->atomIs('Addition')
-             ->outIs('RIGHT')
-             ->outIsIE('CODE')
-             ->atomIs('Assignation')
-             ->outIs('RIGHT')
+             ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)
              ->is('boolean', false)
              ->atomIsNot('Arrayliteral')

@@ -42,7 +42,7 @@ coalesce( __.out("ARGUMENT").has("rank", 0),
 GREMLIN
 , array(), array())
               ->savePropertyAs('fullnspath', 'actual')
-              ->filter('actual != cc', array())
+              ->raw('filter{ actual != cc; }', array(), array())
               ->back('identifier')
               ->setProperty('fullnspath', 'actual')
               ->returnCount();

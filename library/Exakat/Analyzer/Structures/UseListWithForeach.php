@@ -28,6 +28,11 @@ class UseListWithForeach extends Analyzer {
     public function analyze() {
         // foreach($a as $b) { list($d) = $b; }
         $this->atomIs('Foreach')
+             ->not(
+                $this->side()
+                     ->outIs('VALUE')
+                     ->atomIs('List')
+             )
              ->outIs('VALUE')
              ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'blind')
@@ -61,6 +66,11 @@ class UseListWithForeach extends Analyzer {
 
         // foreach($a as $b) { $b[2]; }
         $this->atomIs('Foreach')
+             ->not(
+                $this->side()
+                     ->outIs('VALUE')
+                     ->atomIs('List')
+             )
              ->outIs('VALUE')
              ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'blind')

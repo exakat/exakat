@@ -140,7 +140,6 @@ class Query {
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             $this->commands = array_pop($this->sides);
-
             return new Command(Query::STOP_QUERY);
         }
 
@@ -156,6 +155,7 @@ class Query {
         $return->setSack($sack);
 
         $this->commands = array_pop($this->sides);
+
         return $return;
     }
 

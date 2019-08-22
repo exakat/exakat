@@ -5,6 +5,7 @@ $expected     = array('${42}',
                       '${rand( ) % 2 == 0}',
                       '${true}',
                       '${43}',
+                      '${1.3}',
                      );
 
 $expected_not = array('$value',
