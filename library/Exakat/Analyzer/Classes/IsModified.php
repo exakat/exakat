@@ -26,12 +26,16 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsModified extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PhpNativeReference',
+                    );
+    }
+
     public function analyze() {
         // $w->c = 3;
         $this->atomIs(array('Member', 'Staticproperty'))
              ->is('isModified', true);
         $this->prepareQuery();
-        return;
     }
 }
 

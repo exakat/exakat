@@ -1929,6 +1929,10 @@ GREMLIN
 
         // @todo add a test here ?
         foreach($this->queries as $query) {
+            if ($query->canSkip()) {
+                continue;
+            }
+
             $r = $this->gremlin->query($query->getQuery(), $query->getArguments());
             ++$this->queryCount;
             

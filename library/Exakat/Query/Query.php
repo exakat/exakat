@@ -75,7 +75,7 @@ class Query {
             die('This is an unknown DSL : ' . $name);
         }
         
-        if ($last->gremlin === self::STOP_QUERY) {
+        if ($last->gremlin === self::STOP_QUERY && empty($this->sides)) {
             $this->query = "// Query with STOP_QUERY\n";
             $this->commands = array();
 

@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoDirectUsage extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PhpNativeReference',
+                    );
+    }
+
     public function analyze() {
         $functions = $this->loadIni('NoDirectUsage.ini', 'functions');
         $functionsFullNsPath = makeFullNsPath($functions);
