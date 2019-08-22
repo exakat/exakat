@@ -28,25 +28,6 @@ use Exakat\Query\Query;
 
 class CreateCompactVariables extends LoadFinal {
     public function run() {
-        $query = $this->newQuery('CreateCompactVariables this');
-        $query->atomFunctionIs('\compact')
-              ->outIs('ARGUMENT')
-              ->has('noDelimiter')
-              ->_as('varInString')
-              ->savePropertyAs('noDelimiter', 'name')
-              ->makeVariableName('name')
-              ->goToInstruction(array('Function', 'Closure', 'Method', 'Magicmethod', 'File'))
-              ->outIs(array('DEFINITION', 'ARGUMENT', 'USE'))
-              ->atomIs(array('Variabledefinition', 'Globaldefinition', 'Staticdefinition', 'Parameter'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIsIE('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'varInString')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countVar = $result->toInt();
-
-        display("Created $countVar definitions to compact values");
     }
 }
 

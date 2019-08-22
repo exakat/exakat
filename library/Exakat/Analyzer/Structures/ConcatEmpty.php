@@ -25,13 +25,18 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ConcatEmpty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // '' . $a
         $this->atomIs('Concatenation')
              ->outWithRank('CONCAT', 'first')
              ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
              ->hasNoOut('CONCAT')
-             ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
+             ->atomIs(array('String', 'Null', 'Concatenation'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
         $this->prepareQuery();
@@ -42,7 +47,7 @@ class ConcatEmpty extends Analyzer {
              ->outWithRank('CONCAT', 'last')
              ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
              ->hasNoOut('CONCAT')
-             ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
+             ->atomIs(array('String', 'Null', 'Concatenation'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
         $this->prepareQuery();
@@ -52,7 +57,7 @@ class ConcatEmpty extends Analyzer {
              ->tokenIs('T_CONCAT_EQUAL')
              ->outIs('RIGHT')
              ->atomIs(array('Identifier', 'Nsname', 'String', 'Null'))
-             ->atomIs(array('String', 'Null'), self::WITH_CONSTANTS)
+             ->atomIs(array('String', 'Null', 'Concatenation'), self::WITH_CONSTANTS)
              ->noDelimiterIs('')
              ->back('first');
         $this->prepareQuery();

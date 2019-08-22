@@ -46,7 +46,7 @@ sideEffect{
 GREMLIN
 )
              )
-             ->filter('missing = abstract_methods - methods; missing != [];');
+             ->raw('filter{missing = abstract_methods - methods; missing != [];}');
         $this->prepareQuery();
     }
 }

@@ -1055,6 +1055,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function addETo($edgeName, $from) {
+        $this->query->addETo($edgeName, $from);
+        
+        return $this;
+    }
 
     public function unique() {
         $this->query->unique();
