@@ -275,7 +275,7 @@ GREMLIN;
     }
     
     public function canSkip() : bool {
-        return $this->stopped === self::QUERY_RUNNING;
+        return $this->stopped !== self::QUERY_RUNNING;
     }
 }
 ?>
