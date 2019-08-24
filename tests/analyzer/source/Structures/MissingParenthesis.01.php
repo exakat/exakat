@@ -12,7 +12,7 @@ if (!$a instanceof Stdclass) {
 -$a + $b;
 -3 + $b;
 +$a + $b - c;
--$a + $b - c;
+-$a2 + $b2 - c2;
 
 -($a + $b) + $d;
 

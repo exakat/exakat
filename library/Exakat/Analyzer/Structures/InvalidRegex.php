@@ -26,12 +26,17 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class InvalidRegex extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         $functionList = makeFullnspath(UnknownPregOption::$functions);
 
         $this->atomFunctionIs($functionList)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              ->raw(<<<'GREMLIN'
 map{
@@ -50,7 +55,7 @@ GREMLIN
 
         $this->atomFunctionIs($functionList)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'))
+             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
              ->hasOut('CONCAT')
              ->not(
                 $this->side()
@@ -100,11 +105,11 @@ GREMLIN
                 $invalid[] = $fullcode;
             }
         }
-        
+
         if (empty($invalid)) {
             return;
         }
-        
+
         $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)

@@ -28,10 +28,10 @@ class MissingParenthesis extends Analyzer {
     public function analyze() {
         // -$a + $b
         $this->atomIs('Addition')
-             ->codeIsNot('-')
+             ->codeIs('+')
              ->outIs('LEFT')
              ->atomIs('Sign')
-             ->codeIsNot('+', self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->codeIs('-')
              ->outIs('SIGN')
              ->atomIsNot('Parenthesis')
              ->back('first');

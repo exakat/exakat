@@ -27,6 +27,7 @@ class CloseNaming extends Analyzer {
     
     public function analyze() {
         $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+             ->tokenIs('T_VARIABLE')
              ->values('fullcode')
              ->unique();
         $res = $this->rawQuery();
@@ -38,7 +39,10 @@ class CloseNaming extends Analyzer {
 
         $closeVariables = array();
         foreach($variables as $v1) {
+            if (strlen($v1) > 256) { continue; }
             foreach($variables as $v2) {
+                if (strlen($v2) > 256) { continue; }
+
                 if ($v1 === $v2) { continue; }
                 if ($v1 . 's' === $v2) { continue; }
                 if ($v1 === $v2 . 's') { continue; }

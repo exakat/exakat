@@ -96,6 +96,34 @@ class ScalarAreNotArrays extends Analyzer {
              ->inIs('VARIABLE')
              ->analyzerIsNot('self');
         $this->prepareQuery();
+
+        // With argument's default value
+        // function foo(in $x) { echo $x[2]; }
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('DEFAULT')
+             ->fullnspathIs(array('\\int', '\\bool', '\\float', '\\null'))
+             ->inIs('DEFAULT')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->atomIs('Variablearray')
+             ->inIs('VARIABLE');
+        $this->prepareQuery();
+
+        // foo(1.2); function foo($a) { $a[3]; }
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('DEFINITION')
+             ->outIs('ARGUMENT')
+             ->atomIs(array('Boolean', 'Integer', 'Float', 'Null'))
+             ->savePropertyAs('rank', 'ranked')
+             ->back('first')
+             
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('NAME')
+             ->inIs('DEFINITION')
+             ->atomIs('Variablearray')
+             ->inIs('VARIABLE');
+        $this->prepareQuery();
     }
 }
 
