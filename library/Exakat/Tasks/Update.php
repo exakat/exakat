@@ -42,7 +42,7 @@ class Update extends Tasks {
             throw new InvalidProjectName($project->getError());
         }
 
-        if ($this->config->project === 'default') {
+        if ($this->config->project->isDefault()) {
             $this->runDefault();
         } else {
             $this->runProject($this->config->project);
