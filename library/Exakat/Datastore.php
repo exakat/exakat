@@ -221,7 +221,11 @@ class Datastore {
         }
 
         $row = $res->fetchArray(\SQLITE3_ASSOC);
-        return $row['value'];
+        if (is_array($row['value'])) {
+            return $row['value'];
+        } else {
+            return null;
+        }
     }
 
     public function getAllHash($table) {

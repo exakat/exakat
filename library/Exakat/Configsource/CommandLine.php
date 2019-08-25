@@ -241,6 +241,10 @@ class CommandLine extends Config {
             }
         }
 
+        if (!isset($this->config['project'])) {
+            $this->config['project'] = new Project();
+        } 
+
         $command = array_shift($args);
         if (isset($command, $this->commands[$command])) {
             $this->config['command'] = $command;

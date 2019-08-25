@@ -34,6 +34,10 @@ class Project {
     }
 
     public function validate() {
+        if ($this->project === self::IS_DEFAULT) {
+            return true;
+        }
+
         if (strpos($this->project, DIRECTORY_SEPARATOR) !== false) {
             $this->error = 'Project name can\'t use ' . DIRECTORY_SEPARATOR;
             return false;

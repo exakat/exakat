@@ -167,7 +167,7 @@ class Ambassador extends Reports {
             }
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT', $project_name);
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT_NAME', $project_name);
-            $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT_LETTER', strtoupper($project_name{0}));
+            $this->baseHtml = $this->injectBloc($this->baseHtml, 'PROJECT_LETTER', strtoupper($project_name[0]));
 
             $menu = $this->makeMenu();
             $inventories = array();
@@ -1396,7 +1396,7 @@ JAVASCRIPT;
         );
 
         // fichier
-        $totalFile = $this->datastore->getHash('files');
+        $totalFile = (int) $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFile - $totalFileAnalysed;
         if ($totalFile === 0) {

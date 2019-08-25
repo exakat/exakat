@@ -96,6 +96,10 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     }
 
     public function toInt() {
+        if ($this->data === null) {
+            return 0;
+        }
+
         return (int) $this->data[0];
     }
     
