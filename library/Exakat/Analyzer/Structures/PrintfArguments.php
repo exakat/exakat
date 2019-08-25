@@ -25,10 +25,28 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PrintfArguments extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         //The %2$s contains %1$04d monkeys
         //The %02s contains %-'.3d monkeys
     
+        $countParameters = <<<REGEX
+    d2 = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0-9\']+\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+    d = [:];
+    d2.each{
+        x = it =~ "^%(\\\\d+)\\\\\\$"; 
+        if (x.asBoolean() == true) {
+            d[x[0][1]] = x[0][0];
+        } else {
+            d[d.size()] = it;
+        }
+    }
+REGEX;
+
         // printf(' a %s %s', $a1, ...$a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
@@ -44,7 +62,7 @@ class PrintfArguments extends Analyzer {
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
              ->raw(<<<GREMLIN
 filter{
-    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+$countParameters
     c - 1 > d.size();
 }
 GREMLIN
@@ -67,7 +85,7 @@ GREMLIN
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
              ->raw(<<<GREMLIN
 filter{
-    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+$countParameters
     c - 1 != d.size();
 }
 GREMLIN
@@ -78,18 +96,19 @@ GREMLIN
         // vsprintf(' a %s ',array( $a1, $a2));
         $this->atomFunctionIs('\\vsprintf')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Arrayliteral')
+             ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->savePropertyAs('count', 'c')
-             ->inIs('ARGUMENT')
+             ->back('first')
 
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String', self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
+             // + 0 is silly but actually works. :(
              ->raw(<<<GREMLIN
 filter{
-    d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
-    c != d.size();
+$countParameters
+    c + 0 != d.size();
 }
 GREMLIN
 )
