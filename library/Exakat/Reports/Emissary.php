@@ -160,7 +160,7 @@ class Emissary extends Reports {
             }
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name[0]));
 
             $menu = $this->makeMenu();
             $inventories = array();

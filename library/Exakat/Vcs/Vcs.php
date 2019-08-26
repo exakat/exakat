@@ -52,7 +52,7 @@ abstract class Vcs {
     }
 
     public function getName() {
-        $path = explode('\\', get_called_class());
+        $path = explode('\\', static::class);
         return strtolower(array_pop($path));
     }
 

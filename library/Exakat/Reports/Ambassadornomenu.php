@@ -39,7 +39,7 @@ class Ambassadornomenu extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name[0]));
 
             $this->makeMenu();
 

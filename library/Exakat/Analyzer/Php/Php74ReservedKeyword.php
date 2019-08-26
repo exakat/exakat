@@ -41,7 +41,7 @@ class Php74ReservedKeyword extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
-             ->raw('filter{ "'.$keyword.'" in it.get().value("fullcode").toLowerCase().tokenize("\\\\") }');
+             ->raw('filter{ "' . $keyword . '" in it.get().value("fullcode").toLowerCase().tokenize("\\\\") }');
         $this->prepareQuery();
 
         // with Defineconstant, it is OK. (works with constant(), don't compile as identifier)

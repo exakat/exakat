@@ -84,11 +84,11 @@ class Atom {
     }
 
     public function __set($name, $value) {
-        die("Fatal error : trying to set '$name' property on " . __CLASS__);
+        die("Fatal error : trying to set '$name' property on " . self::class);
     }
 
     public function __get($name) {
-        die("Fatal error : trying to get '$name' property on " . __CLASS__);
+        die("Fatal error : trying to get '$name' property on " . self::class);
     }
 
     public function toArray() {

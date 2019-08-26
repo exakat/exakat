@@ -57,7 +57,7 @@ class DotExakatYamlConfig extends Config {
 
         if (!is_array($tmp_config)) {
             // Can't use display while in config phase
-            print("Failed to parse YAML file. Please, check its syntax.\n");
+            print "Failed to parse YAML file. Please, check its syntax.\n";
             return self::NOT_LOADED;
         }
 

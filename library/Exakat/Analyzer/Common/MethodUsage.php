@@ -33,7 +33,7 @@ class MethodUsage extends Analyzer {
         $staticHash = array();
         $methodHash = array();
         foreach($this->methodList as $class => $methods) {
-            foreach($methods as $method => $details) {
+            foreach($methods as $details) {
                 if (isset($staticHash[$class])) {
                     $staticHash[$class][] = $details->normal_name;
                 } else {

@@ -29,13 +29,13 @@ class PropagateConstants extends Analyzer {
         $res = $this->readConstantValue();
         if ($res === 0) {
             // No Need further. Just bail
-            return; 
+            return;
         }
 
         $this->pushConstantValues();
         $this->PropagateConstants();
 
-    } 
+    }
     
     private function propagateConstants($level = 0) {
         $total = 0;
@@ -99,7 +99,7 @@ GREMLIN
             ->count();
             $res = $this->rawQuery();
         
-            display( $res->toInt()." constants inited\n");
+            display( $res->toInt() . " constants inited\n");
             return $res->toInt();
         }
 
@@ -131,7 +131,7 @@ GREMLIN
             ->count();
             $res = $this->rawQuery();
             
-            display( $res->toInt()." constants propagated\n");
+            display( $res->toInt() . " constants propagated\n");
             return $res->toInt();
         }
 
@@ -176,7 +176,7 @@ GREMLIN
             ->count();
 
             $res = $this->rawQuery();
-            display("propagating ".$res->toInt()." Addition with constants");
+            display('propagating ' . $res->toInt() . ' Addition with constants');
 
             return $res->toInt();
         }
@@ -213,7 +213,7 @@ GREMLIN
         ->count();
 
         $res = $this->rawQuery();
-        display("propagating ".$res->toInt()." Concatenation with constants");
+        display('propagating ' . $res->toInt() . ' Concatenation with constants');
 
         return $res->toInt();
     }
@@ -248,7 +248,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Signs with constants");
+        display('propagating ' . $res->toInt() . ' Signs with constants');
         return $res->toInt();
     }
 
@@ -289,7 +289,7 @@ GREMLIN
             ->count();
 
             $res = $this->rawQuery();
-            display("propagating ".$res->toInt()." power with constants");
+            display('propagating ' . $res->toInt() . ' power with constants');
 
             return $res->toInt();
         }
@@ -347,7 +347,7 @@ GREMLIN
             ->count();
 
             $res = $this->rawQuery();
-            display("propagating ".$res->toInt()." comparison with constants");
+            display('propagating ' . $res->toInt() . ' comparison with constants');
 
             return $res->toInt();
         }
@@ -396,7 +396,7 @@ GREMLIN
             ->count();
 
             $res = $this->rawQuery();
-            display("propagating ".$res->toInt()." comparison with constants");
+            display('propagating ' . $res->toInt() . ' comparison with constants');
 
             return $res->toInt();
         }
@@ -425,7 +425,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Signs with constants");
+        display('propagating ' . $res->toInt() . ' Signs with constants');
         return $res->toInt();
     }
 
@@ -459,7 +459,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Not with constants");
+        display('propagating ' . $res->toInt() . ' Not with constants');
         return $res->toInt();
     }
 
@@ -505,7 +505,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Coalesce with constants");
+        display('propagating ' . $res->toInt() . ' Coalesce with constants');
         return $res->toInt();
     }
 
@@ -561,7 +561,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Ternary with constants");
+        display('propagating ' . $res->toInt() . ' Ternary with constants');
         return $res->toInt();
     }
     
@@ -607,7 +607,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Bitshift with constants");
+        display('propagating ' . $res->toInt() . ' Bitshift with constants');
         return $res->toInt();
     }
 
@@ -664,7 +664,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Multiplication with constants");
+        display('propagating ' . $res->toInt() . ' Multiplication with constants');
         return $res->toInt();
     }
 }

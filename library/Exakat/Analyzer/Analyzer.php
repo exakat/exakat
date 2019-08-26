@@ -116,7 +116,7 @@ abstract class Analyzer {
     public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
 
     public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction', 'Newcall');
+    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
     public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
 

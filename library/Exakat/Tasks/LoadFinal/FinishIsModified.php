@@ -29,12 +29,12 @@ use Exakat\Data\Methods;
 
 class FinishIsModified extends LoadFinal {
     public function run() {
-        $variables = array('Variable', 
-                           'Variableobject', 
-                           'Variablearray', 
-                           'Array', 
-                           'Member', 
-                           'Staticproperty', 
+        $variables = array('Variable',
+                           'Variableobject',
+                           'Variablearray',
+                           'Array',
+                           'Member',
+                           'Staticproperty',
                            'Phpvariable',
                           );
 

@@ -62,7 +62,7 @@ class Query {
 
     public function __call($name, $args) {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return $this; 
+            return $this;
         }
 
         assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
@@ -86,13 +86,13 @@ class Query {
 
         if (count($this->commands) === 1 && empty($this->sides)) {
             switch(strtolower($name)) {
-                case 'atomis' : 
-                case 'atomfunctionis' : 
+                case 'atomis' :
+                case 'atomfunctionis' :
                     $this->_as('first');
                     $this->raw('groupCount("processed").by(count())', array(), array());
                     break;
 
-                case 'analyzeris' : 
+                case 'analyzeris' :
                     unset($this->commands[0]);
                     $this->atomIs('Analysis', Analyzer::WITHOUT_CONSTANTS);
                     $this->commands = array($this->commands[1]);
@@ -104,12 +104,12 @@ class Query {
 
                     break;
 
-                default : 
+                default :
                     if ($this->commands[0]->gremlin === self::STOP_QUERY) {
                         $this->_as('first');
                         // Keep going
                     } else {
-                        assert(false, 'No gremlin optimization : gremlin query "'.$name.'" in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
+                        assert(false, 'No gremlin optimization : gremlin query "' . $name . '" in analyzer should have use g.V. ! ' . $this->commands[0]->gremlin);
                     }
             }
         }
@@ -119,7 +119,7 @@ class Query {
     
     public function side() {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return $this; 
+            return $this;
         }
 
         $this->sides[] = $this->commands;
@@ -130,7 +130,7 @@ class Query {
 
     public function prepareSide() {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return $this; 
+            return $this;
         }
 
         $commands = array_column($this->commands, 'gremlin');
@@ -161,7 +161,7 @@ class Query {
 
     public function prepareQuery() {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return true; 
+            return true;
         }
 
         assert($this->query === null, 'query is already ready');
@@ -203,7 +203,7 @@ class Query {
     
     public function prepareRawQuery() {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return true; 
+            return true;
         }
 
         $commands = array_column($this->commands, 'gremlin');

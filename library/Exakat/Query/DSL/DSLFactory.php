@@ -33,10 +33,10 @@ class DSLFactory {
     const VARIABLE_WRITE = true;
     const VARIABLE_READ  = false;
     
-    public    $availableAtoms         = array();
-    public    $availableLinks         = array();
-    public    $availableFunctioncalls = array();
-    private   $availableVariables     = array(); // This one is per query
+    public $availableAtoms         = array();
+    public $availableLinks         = array();
+    public $availableFunctioncalls = array();
+    private $availableVariables     = array(); // This one is per query
     protected $availableLabels        = array(); // This one is per query
     protected $ignoredcit             = array();
     protected $ignoredfunctions       = array();

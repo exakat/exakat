@@ -1794,8 +1794,8 @@ GREMLIN;
         display(count($statics) . ' static calls CPM');
 
         // Skipping normal method/property call : They actually depends on new
-        // Magic methods : todo! 
-        // instanceof ?  
+        // Magic methods : todo!
+        // instanceof ?
     }
 
     private function storeToTable(string $table, Query $query) : int {
@@ -1817,7 +1817,7 @@ GREMLIN;
             return 0;
         }
         
-        $sqlQuery = 'INSERT INTO '.$table.' ("id", "including", "including_name", "including_type", "included", "included_name", "included_type", "type") VALUES ' . implode(', ', $sqlQuery);
+        $sqlQuery = 'INSERT INTO ' . $table . ' ("id", "including", "including_name", "including_type", "included", "included_name", "included_type", "type") VALUES ' . implode(', ', $sqlQuery);
         $this->sqlite->query($sqlQuery);
 
         return count($res);
@@ -2104,8 +2104,8 @@ GREMLIN
         display($count . ' static calls CPM');
 
         // Skipping normal method/property call : They actually depends on new
-        // Magic methods : todo! 
-        // instanceof ?  
+        // Magic methods : todo!
+        // instanceof ?
     }
 
     private function collectHashCounts($query, $name) {
