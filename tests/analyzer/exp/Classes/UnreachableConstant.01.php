@@ -4,7 +4,7 @@ $expected     = array('\\x::A',
                       '\\x::A',
                       'x::A',
                       'x::A',
-                      'sElf::A', 
+                      'sElf::A',
                       'sTatic::A',
                      );
 
