@@ -1,4 +1,4 @@
-Version 1.9.2 (Star of Prosperity, coming up)
+Version 1.9.2 (Star of Longevity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 1.9.2 (Star of Prosperity, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.2 (Star of Prosperity, 2019-08-26)
++ Architecture
+    + Introduced a new set of analysis : Complete
+    + Cleaned code for PHP 7.4 usage
+    + Refactored Query to skip impossible Gremlin calls
+    + Now using Project for project names
++ Report
+    + New report : classes dependencies (HTML version)
+    + New report : files dependencies (HTML and DOT version)
+    + Ambassador : datas -> data
++ Analysis
+    + New analysis : {} are deprecated in PHP 7.4
+    + New analysis : Don't use ENT_IGNORE
+    + New analysis : fn is a PHP 7.4 keyword
+    + Updated analysis : Functions/UseConstantAsArguments covers also password_hash()
+    + Updated analysis : printf arguments now handles positional formatters
+    + Checked unit tests : 3172 / 3199 test pass (99% pass)
++ Tokenizer
+    + Fixed precedence for left associativity
 
 Version 1.9.1 (Star of Life, 2019-08-19)
 + Architecture
