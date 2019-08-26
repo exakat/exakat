@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class InclusionWrongCase extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         $this->atomIs('File')
              ->values('fullcode');
