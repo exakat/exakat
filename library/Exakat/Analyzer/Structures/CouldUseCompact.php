@@ -25,6 +25,12 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseCompact extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateCompactVariables',
+                     'Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // $a = array('a' => $a, 'b' => $b);
         $this->atomIs('Arrayliteral')

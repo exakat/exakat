@@ -26,6 +26,10 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleIdenticalKeys extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
 
     public function analyze() {
         // array('a' => 1, 'b' = 2)
