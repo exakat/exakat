@@ -54,7 +54,6 @@ class PropagateConstants extends Analyzer {
         $total += $this->processNot();
         $total += $this->processCoalesce();
         $total += $this->processTernary();
-        $total += $this->processTernary();
         $total += $this->processBitshift();
         $total += $this->processMultiplication();
         $this->readConstantValue();
@@ -489,14 +488,14 @@ GREMLIN
              )
              ->raw(<<<GREMLIN
 sideEffect{ 
-        if (x[0].value('noDelimiter') == '') {
+        if (x[0] == 0) {
           i = x[1];
         } else {
           i = x[0];
         }
 
         it.get().property("intval", i); 
-        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("boolean", i != 0);
         it.get().property("noDelimiter", i.toString()); 
         
         i = null;
@@ -511,10 +510,15 @@ GREMLIN
     }
 
     private function processTernary() {
-        display('propagating Constant value in Coalesce');
+        display('propagating Constant value in Ternary');
         $this->atomIs('Ternary')
              ->hasNo('intval')
              ->initVariable('x', '[ ]')
+             ->not(
+                $this->side()
+                     ->outIs(array('CONDITION', 'THEN', 'ELSE'))
+                     ->hasNo('intval')
+             )
              // Split CONDITION, THEN and ELSE to ensure order
              ->filter(
                 $this->side()
@@ -557,7 +561,7 @@ GREMLIN
            ->count();
         $res = $this->rawQuery();
 
-        display("propagating ".$res->toInt()." Coalesce with constants");
+        display("propagating ".$res->toInt()." Ternary with constants");
         return $res->toInt();
     }
     
