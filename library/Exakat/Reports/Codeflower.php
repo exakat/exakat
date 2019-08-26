@@ -67,6 +67,7 @@ SQL
             } else {
                 $files[$row['including']] = array($row['included']);
             }
+            $this->count();
         }
 
         $root = new \stdClass();
@@ -86,6 +87,7 @@ SQL
                 $d->size = 100;
                 
                 $c->children[] = $d;
+                $this->count();
             }
             
             $root->children[] = $c;
@@ -154,7 +156,7 @@ SQL
 
                 $c->children[] = $d;
             }
-
+            $this->count();
         }
 
         file_put_contents($this->tmpName . '/data/classes.json', json_encode($root));
@@ -204,6 +206,7 @@ SQL
                 }
             }
             $ns[$row['namespace']]->children[] = $c;
+            $this->count();
         }
 
         file_put_contents($this->tmpName . '/data/namespaces.json', json_encode($root));

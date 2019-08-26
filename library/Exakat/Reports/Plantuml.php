@@ -33,7 +33,8 @@ class Plantuml extends Reports {
         $res = $this->sqlite->query(<<<SQL
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "\n")   FROM methods    WHERE citId = cit.id) AS methods,
-       (SELECT GROUP_CONCAT(visibility || ' ' || case when static != 0 then 'static ' else '' end ||  case when value != '' then property || " = " || substr(value, 0, 40) else property end, "\n") FROM properties WHERE citId = cit.id) AS properties
+       (SELECT GROUP_CONCAT(visibility || ' ' || case when static != 0 then 'static ' else '' end ||  case when value != '' then property || " = " || substr(value, 0, 40) else property end, "\n") 
+            FROM properties WHERE citId = cit.id) AS properties
     FROM cit
     JOIN namespaces
         ON namespaces.id = cit.namespaceId
@@ -76,8 +77,9 @@ SQL
 "\n}";
             
             $puml[] = $object;
+            $this->count();
         }
-        
+
         $puml = implode("\n", $puml) . "\n\n";
 
         foreach($extends as $extending => $extended) {
@@ -146,4 +148,4 @@ PUML;
     }
 }
 
-?>
+?>  
