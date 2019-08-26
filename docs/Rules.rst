@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 19 Aug 2019 14:46:02 +0000
-.. comment: Generation hash : 1a8e44b1700e0f0fec29c81b472b4ca97541274f
+.. comment: Generation date : Mon, 26 Aug 2019 14:06:47 +0000
+.. comment: Generation hash : 7e486b4004cf3ee431b3881cba39d59c1bb55ea5
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -15841,6 +15841,53 @@ Suggestions
 
 
 
+.. _no-ent\_ignore:
+
+No ENT_IGNORE
+#############
+
+
+Certain characters have special significance in HTML, and should be represented by HTML entities if they are to preserve their meanings.
+
+ENT_IGNORE is a configuration option for `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_, that ignore any needed character replacement. This mean the raw input will now be processed by PHP, or a target browser.
+
+It is recommended to use the other configuration options : ENT_COMPAT, ENT_QUOTES, ENT_NOQUOTES, ENT_SUBSTITUTE, ENT_DISALLOWED, ENT_HTML401, ENT_XML1, ENT_XHTML or ENT_HTML5.
+
+.. code-block:: php
+
+   <?php
+   
+   // This produces a valid HTML tag
+   $new = htmlspecialchars("<a href='test'>Test</a>", ENT_IGNORE);
+   echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
+   
+   // This produces a valid string, without any HTML special value
+   $new = htmlspecialchars("<a href='test'>Test</a>", ENT_QUOTES);
+   echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
+   
+   ?>
+
+
+See also `htmlspecialchars <https://www.php.net/manual/en/function.htmlspecialchars.php>`_ and `Deletion of Code Points <http://unicode.org/reports/tr36/#Deletion_of_Noncharacters>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use of the the other options
+
++-------------+----------------------+
+| Short name  | Security/NoEntIgnore |
++-------------+----------------------+
+| Themes      | :ref:`Security`      |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+
+
+
 .. _no-empty-regex:
 
 No Empty Regex
@@ -16195,6 +16242,49 @@ Suggestions
 +-------------+----------------------------------------+
 | Time To Fix | Slow (1 hour)                          |
 +-------------+----------------------------------------+
+
+
+
+.. _no-more-curly-arrays:
+
+No More Curly Arrays
+####################
+
+
+Only use square brackets to access array elements. The usage of curly brackets for array access is deprecated since PHP 7.4.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = [1,2,3];
+   
+   // always valid
+   echo $array[1];
+   
+   // deprecated in PHP 7.4
+   echo $array{1};
+   
+   ?>
+
+
+See also `Deprecate curly brace syntax <https://derickrethans.nl/phpinternalsnews-19.html>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use square brackets
+
++-------------+---------------------------+
+| Short name  | Php/NoMoreCurlyArrays     |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 
@@ -18919,6 +19009,61 @@ See also `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incomp
 
 
 
+.. _php-7.4-reserved-keyword:
+
+PHP 7.4 Reserved Keyword
+########################
+
+
+fn is a new PHP keyword. In PHP 7.4, it is used to build the arrow functions. When used at an illegal position, ``fn`` generates a Fatal error at compile time.
+
+As a key word, ``fn`` is not allowed as constant name, function name, class name or inside namespaces. 
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.4 usage of fn
+   function array_values_from_keys($arr, $keys) {
+       return array_map(fn($x) => $arr[$x], $keys);
+   }
+   
+   // PHP 7.3 usage of fn
+   const fn = 1;
+   
+   function fn() {}
+   
+   class x {
+       // This is valid in PHP 7.3 and 7.4
+       function fn() {}
+   }
+   
+   ?>
+
+
+``fn`` is fine for method names. It may also be used for constants with `define() <http://www.php.net/define>`_, and `constant() <http://www.php.net/constant>`_ but it is not recommended.
+
+See also `PHP RFC: Arrow Functions <https://wiki.php.net/rfc/arrow_functions>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Php/Php74ReservedKeyword  |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _php-8.0-removed-constants:
 
 PHP 8.0 Removed Constants
@@ -20240,15 +20385,26 @@ Properties that read and written may be converted into a variable, static to the
 
 Note : properties used only once are not returned by this analysis. They are omitted, and are available in the analysis `Used Once Property`_.
 
-+-------------+-------------------------------------+
-| Short name  | Classes/PropertyUsedInOneMethodOnly |
-+-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Slow (1 hour)                       |
-+-------------+-------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the property, and inline the value
+* Drop the property, and make the property a local variable
+* Use the property in another method
+
++-------------+---------------------------------------------------+
+| Short name  | Classes/PropertyUsedInOneMethodOnly               |
++-------------+---------------------------------------------------+
+| Themes      | :ref:`Analyze`                                    |
++-------------+---------------------------------------------------+
+| Severity    | Minor                                             |
++-------------+---------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                     |
++-------------+---------------------------------------------------+
+| Examples    | :ref:`contao-classes-propertyusedinonemethodonly` |
++-------------+---------------------------------------------------+
 
 
 
@@ -20606,15 +20762,25 @@ Classes allows properties to be set with a default value. When those properties 
    
    ?>
 
-+-------------+--------------------------+
-| Short name  | Classes/RedefinedDefault |
-+-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the default assignation to the property definition
+* Drop the reassignation in the constructor
+
++-------------+----------------------------------------+
+| Short name  | Classes/RedefinedDefault               |
++-------------+----------------------------------------+
+| Themes      | :ref:`Analyze`                         |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Slow (1 hour)                          |
++-------------+----------------------------------------+
+| Examples    | :ref:`piwigo-classes-redefineddefault` |
++-------------+----------------------------------------+
 
 
 
@@ -26933,6 +27099,14 @@ The following use instructions cannot be resolved to a class or a namespace. The
 Use expression are options for the current namespace. 
 
 See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the use expression
+* Fix the use expression
 
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/UnresolvedUse                                                                          |

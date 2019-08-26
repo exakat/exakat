@@ -91,6 +91,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Clustergrammer
   * Filedependencies
   * Filedependencieshtml
+  * Classdependencies
   * Radwellcode
   * Grade
   * Weekly
@@ -427,6 +428,18 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
+
+* 1.9.2
+
+  * Complete/CreateCompactVariables (Complete/CreateCompactVariables)
+  * Complete/PropagateConstants (Complete/PropagateConstants ; )
+  * No ENT_IGNORE (Security/NoEntIgnore ; Security)
+  * No More Curly Arrays (Php/NoMoreCurlyArrays ; CompatibilityPHP74)
+  * PHP 7.4 Reserved Keyword (Php/Php74ReservedKeyword ; CompatibilityPHP74)
+
+* 1.9.1
+
+  * Complete/PhpNativeReference (Complete/PhpNativeReference)
 
 * 1.9.0
 
@@ -2249,6 +2262,7 @@ List of external links mentionned in this documentation.
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
 * `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
 * `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_
+* `Deprecate curly brace syntax <https://derickrethans.nl/phpinternalsnews-19.html>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
@@ -2371,6 +2385,7 @@ List of external links mentionned in this documentation.
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
+* `htmlspecialchars <https://www.php.net/manual/en/function.htmlspecialchars.php>`_
 * `http://dist.exakat.io/ <http://dist.exakat.io/>`_
 * `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
@@ -2501,8 +2516,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2534,6 +2549,7 @@ List of external links mentionned in this documentation.
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
 * `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
+* `PHP RFC: Arrow Functions <https://wiki.php.net/rfc/arrow_functions>`_
 * `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
@@ -2651,8 +2667,8 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3701,10 +3717,12 @@ __________________
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
 |   analyzer[] = "Php/IdnUts46";
+|   analyzer[] = "Php/NoMoreCurlyArrays";
 |   analyzer[] = "Php/Php74NewClasses";
 |   analyzer[] = "Php/Php74NewConstants";
 |   analyzer[] = "Php/Php74NewFunctions";
 |   analyzer[] = "Php/Php74RemovedFunctions";
+|   analyzer[] = "Php/Php74ReservedKeyword";
 |   analyzer[] = "Php/Php74mbstrrpos3rdArg";
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
@@ -3883,6 +3901,7 @@ ________
 |   analyzer[] = "Security/MinusOneOnError";
 |   analyzer[] = "Security/MkdirDefault";
 |   analyzer[] = "Security/MoveUploadedFile";
+|   analyzer[] = "Security/NoEntIgnore";
 |   analyzer[] = "Security/NoNetForXmlLoad";
 |   analyzer[] = "Security/NoSleep";
 |   analyzer[] = "Security/RegisterGlobals";

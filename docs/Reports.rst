@@ -6,6 +6,7 @@ Reports
 There are several reports that may be extracted from Exakat : 
 
 * `Ambassador`_
+* `Classes dependendies HTML`_
 * `Clustergrammer`_
 * `Code Flower`_
 * `Code Sniffer`_
@@ -13,6 +14,8 @@ There are several reports that may be extracted from Exakat :
 * `Dependency Wheel`_
 * `Diplomat`_
 * `Exakatyaml`_
+* `File dependendies`_
+* `File dependendies HTML`_
 * `History`_
 * `Inventories`_
 * `Json`_
@@ -98,6 +101,28 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 Ambassador is a HTML report format.
 
 Ambassador depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+
+Classes dependendies HTML
+-------------------------
+
+This reports displays the class dependencies, based on definition usages.
+
+This report displays all dependencies between classes, interfaces and traits. A class (or interface or trait) depends on another class (or interface or trait) when it makes usage of one of its definitions : extends, implements, use, and static calls. 
+
+For example, `A` depends on `B`, because `A` extends `B`. 
+
+The resulting diagramm is in HTML file, which is readable with most browsers, from a web server. 
+
+Warning : for browser security reasons, the report will NOT load as a local file. It needs to be served by an HTTP server, so all resources are correctly located.
+
+Warning : large applicatoins (> 1000 classes) will require a lot of resources to open.
+
+.. image:: images/report.classdependencieshtml.png
+    :alt: Example of a Classes dependendies HTML report (0)
+
+Classes dependendies HTML is a HTML report format.
+
+Classes dependendies HTML doesn't depend on themes.
 
 Clustergrammer
 --------------
@@ -813,6 +838,54 @@ On the other hand, other analysis that currently yield issues needs to be fully 
 Exakatyaml is a Yaml report format.
 
 Exakatyaml doesn't depend on themes.
+
+File dependendies
+-----------------
+
+This reports displays the file dependencies, based on definition usages.
+
+This report displays all dependencies between files. A file depends on another when it makes usage of one of its definitions : constant, functions, classes, traits, interfaces. 
+
+For example, `A.php` depends on `B.php`, because `A.php` uses the function `foo`, which is defined in the `B.php` file. On the other hand, `B.php` doesn't depends on `A.php`, as a function may be defined, but not used. 
+
+This diagramm shows which files may be used without others.
+
+The resulting diagramm is a DOT file, which is readable with [Graphviz](https://www.graphviz.org/about/). Those viewers will display the diagramm, and also convert it to other format, such as PNG, JPEG, PDF or others.  
+
+Another version of the same diagramm is called Filedependencieshtml
+
+.. image:: images/report.filedependencies.png
+    :alt: Example of a File dependendies report (0)
+
+File dependendies is a DOT report format.
+
+File dependendies doesn't depend on themes.
+
+File dependendies HTML
+----------------------
+
+This reports displays the file dependencies, based on definition usages.
+
+This report displays all dependencies between files. A file depends on another when it makes usage of one of its definitions : constant, functions, classes, traits, interfaces. 
+
+For example, `A.php` depends on `B.php`, because `A.php` uses the function `foo`, which is defined in the `B.php` file. On the other hand, `B.php` doesn't depends on `A.php`, as a function may be defined, but not used. 
+
+This diagramm shows which files may be used without others.
+
+The resulting diagramm is in HTML file, which is readable with most browsers, from a web server. 
+
+Warning : for browser security reasons, the report will NOT load as a local file. It needs to be served by an HTTP server, so all resources are correctly located.
+
+Warning : large applicatoins (> 1000 files) will require a lot of resources to open.
+
+Another version of the same diagramm is called Filedependencies, and produces a DOT file
+
+.. image:: images/report.filedependencieshtml.png
+    :alt: Example of a File dependendies HTML report (0)
+
+File dependendies HTML is a HTML report format.
+
+File dependendies HTML doesn't depend on themes.
 
 History
 -------

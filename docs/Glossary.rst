@@ -328,6 +328,7 @@ Glossary
     + `constant()`
 
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
+      + :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
 
     + `continue`
 
@@ -417,6 +418,7 @@ Glossary
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
       + :ref:`Invalid Constant Name <invalid-constant-name>`
       + :ref:`Non-constant Index In Array <non-constant-index-in-array>`
+      + :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
       + :ref:`Use const <use-const>`
 
     + `die`
@@ -728,6 +730,7 @@ Glossary
     + `htmlspecialchars()`
 
       + :ref:`Htmlentities Calls <htmlentities-calls>`
+      + :ref:`No ENT_IGNORE <no-ent\_ignore>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `htmlspecialchars_decode()`

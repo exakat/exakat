@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 19 Aug 2019 14:46:02 +0000
-.. comment: Generation hash : 1a8e44b1700e0f0fec29c81b472b4ca97541274f
+.. comment: Generation date : Mon, 26 Aug 2019 14:06:47 +0000
+.. comment: Generation hash : 7e486b4004cf3ee431b3881cba39d59c1bb55ea5
 
 
 .. _analyze:
@@ -971,7 +971,7 @@ Total : 12 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 15 analysis
+Total : 17 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Curly Arrays <curly-arrays>`
@@ -979,7 +979,9 @@ Total : 15 analysis
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
+* :ref:`No More Curly Arrays <no-more-curly-arrays>`
 * :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
+* :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
 * :ref:`Php/Php74mbstrrpos3rdArg <php/php74mbstrrpos3rdarg>`
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
@@ -1122,7 +1124,7 @@ Total : 44 analysis
 Security
 ++++++++
 
-Total : 40 analysis
+Total : 41 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1139,6 +1141,7 @@ Total : 40 analysis
 * :ref:`Integer Conversion <integer-conversion>`
 * :ref:`Minus One On Error <minus-one-on-error>`
 * :ref:`Mkdir Default <mkdir-default>`
+* :ref:`No ENT_IGNORE <no-ent\_ignore>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`

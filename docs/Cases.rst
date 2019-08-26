@@ -4016,6 +4016,44 @@ setlocale() may be called with null or '' (empty string), and will set values fr
     $loc = setlocale(LC_TIME, 0);
             if ($loc !== FALSE) echo ' - ' . $loc; //what is the locale in use?
 
+Redefined Default
+=================
+
+.. _piwigo-classes-redefineddefault:
+
+Piwigo
+^^^^^^
+
+:ref:`redefined-default`, in admin/include/updates.class.php:34. 
+
+default_themes is defined as an empty array, then filled with new values. Same for default_plugins. Both may be defined as declaration time, and not during the constructor.
+
+.. code-block:: php
+
+    class updates
+    {
+      var $types = array();
+      var $plugins;
+      var $themes;
+      var $languages;
+      var $missing = array();
+      var $default_plugins = array();
+      var $default_themes = array();
+      var $default_languages = array();
+      var $merged_extensions = array();
+      var $merged_extension_url = 'http://piwigo.org/download/merged_extensions.txt';
+    
+      function __construct($page='updates')
+      {
+        $this->types = array('plugins', 'themes', 'languages');
+    
+        if (in_array($page, $this->types))
+        {
+          $this->types = array($page);
+        }
+        $this->default_themes = array('clear', 'dark', 'Sylvia', 'elegant', 'smartpocket');
+        $this->default_plugins = array('AdminTools', 'TakeATour', 'language_switch', 'LocalFilesEditor');
+
 Wrong fopen() Mode
 ==================
 
@@ -5661,6 +5699,31 @@ Why do we need a `chair` when printing a cell's file ?
 .. code-block:: php
 
     function oc_printFileCells(&$sub, $chair = false) { /**/ }
+
+Property Used In One Method Only
+================================
+
+.. _contao-classes-propertyusedinonemethodonly:
+
+Contao
+^^^^^^
+
+:ref:`property-used-in-one-method-only`, in calendar-bundle/src/Resources/contao/modules/ModuleEventlist.php:38. 
+
+Date is protected property. It is used only in the compile() method, and it is not used by the parent class. As such, it may be turned into a local variable.
+
+.. code-block:: php
+
+    class ModuleEventlist extends Events
+    {
+    
+    	/**
+    	 * Current date object
+    	 * @var Date
+    	 */
+    	protected $Date;
+    
+    // Date is used in function compile() only
 
 __DIR__ Then Slash
 ==================
