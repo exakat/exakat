@@ -110,22 +110,12 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetParentDefinition');
         $task = new SetClassAliasDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassAliasDefinition');
         $task = new MakeClassConstantDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('MakeClassConstantDefinition');
-        $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('MakeClassMethodDefinition');
-
-        $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateDefaultValues');
 
         $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
         $task->run();

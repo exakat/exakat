@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class StringInitialization extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // $a = ''; $a[1] = 3;
         // const C = ''; $a = C; $a[1] = 3;
