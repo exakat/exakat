@@ -84,9 +84,15 @@ namespace Exakat\\Analyzer\\$category;
 use Exakat\Analyzer\Analyzer;
 
 class $name extends Analyzer {
-    /* Remove this if useless
+    /* PHP version restrictions
+    protected \$phpVersion = '7.4-';
+    */
+
+    /* List dependencies 
     public function dependsOn() {
-        return array('MethodDefinition');
+        return array('Category/Analyzer',
+                     '',
+                    );
     }
     */
     
