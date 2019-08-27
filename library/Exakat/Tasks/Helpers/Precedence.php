@@ -165,7 +165,7 @@ class Precedence {
             foreach($this->precedence as $k1 => $p1) {
                 $cache[$k1] = array();
                 foreach($this->precedence as $k2 => $p2) {
-                    if ($p1 <= $p2 && ($itself === self::WITH_SELF || $k1 !== $k2) ) {
+                    if ($p1 <= $p2 && $k1 !== $k2) {
                         $cache[$k1][] = $k2;
                     }
                 }
@@ -176,7 +176,11 @@ class Precedence {
             throw new NoPrecedence($token);
         }
 
-        return $cache[$token];
+        if ($itself === self::WITH_SELF) {
+            return array_merge($cache[$token], array($token));
+        } else {
+            return $cache[$token];
+        }
     }
 }
 

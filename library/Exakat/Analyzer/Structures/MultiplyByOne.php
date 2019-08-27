@@ -53,6 +53,40 @@ class MultiplyByOne extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $b * 12 / 12
+        $this->atomIs('Multiplication')
+             ->codeIs('/')
+             ->outIs('RIGHT')
+             ->isNot('intval', 1)
+             ->savePropertyAs('intval', 'operand')
+             ->back('first')
+             
+             ->outIs('LEFT')
+             ->atomIs('Multiplication')
+             ->codeIs('*')
+             ->outIs('RIGHT')
+             ->samePropertyAs('intval', 'operand')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // $b / 12 * 12
+        $this->atomIs('Multiplication')
+             ->codeIs('*')
+             ->outIs('RIGHT')
+             ->isNot('intval', 1)
+             ->savePropertyAs('intval', 'operand')
+             ->back('first')
+             
+             ->outIs('LEFT')
+             ->atomIs('Multiplication')
+             ->codeIs('/')
+             ->outIs('RIGHT')
+             ->samePropertyAs('intval', 'operand')
+
+             ->back('first');
+        $this->prepareQuery();
+
         // $x = $y ** 1
         $this->atomIs('Power')
              ->outIs('RIGHT')
