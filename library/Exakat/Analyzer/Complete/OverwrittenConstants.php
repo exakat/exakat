@@ -24,19 +24,21 @@ namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class OverwrittenProperties extends Analyzer {
+class OverwrittenConstants extends Analyzer {
     public function analyze() {
-        // class x { protected $p = 1;}
-        // class xx extends x { protected $p = 1;}
-        $this->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('propertyname', 'name')
-              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
-              ->raw('where(neq("first"))')
+        // class x { protected const X = 1;}
+        // class xx extends x {  protected const X = 1;}
+        $this->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('code', 'name')
+              ->goToClass()
+              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
               ->count();
         $this->rawQuery();

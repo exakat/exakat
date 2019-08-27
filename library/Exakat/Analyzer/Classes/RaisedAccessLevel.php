@@ -25,6 +25,13 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class RaisedAccessLevel extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                     'Complete/OverwrittenMethods',
+                     'Complete/OverwrittenConstants',
+                    );
+    }
+
     public function analyze() {
         // raised to private
         $this->atomIs('Ppp')

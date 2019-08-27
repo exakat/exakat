@@ -180,13 +180,6 @@ GREMLIN;
         $task->run();
         $this->log('SetClassPropertyDefinitionWithFluentInterface');
 
-        $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenMethods');
-        $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenConstants');
-
         $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SolveTraitMethods');

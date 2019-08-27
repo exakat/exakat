@@ -24,19 +24,19 @@ namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class OverwrittenProperties extends Analyzer {
+class OverwrittenMethods extends Analyzer {
     public function analyze() {
-        // class x { protected $p = 1;}
-        // class xx extends x { protected $p = 1;}
-        $this->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->savePropertyAs('propertyname', 'name')
-              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
-              ->raw('where(neq("first"))')
+        // class x { protected function foo()  {}}
+        // class xx extends x { protected function foo()  {}}
+        $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'name')
+              ->goToClass()
+              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
               ->count();
         $this->rawQuery();
