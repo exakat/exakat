@@ -123,10 +123,6 @@ GREMLIN;
         $task->run();
         $this->log('MakeClassMethodDefinition');
 
-        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenProperties');
-
         $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('CreateDefaultValues');
@@ -207,11 +203,7 @@ GREMLIN;
         $task = new IsInIgnoredDir($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('IsInIgnoredDir');
-/*
-        $task = new CreateCompactVariables($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateCompactVariables');
-*/
+
         display('End load final');
         $this->logTime('Final');
     }

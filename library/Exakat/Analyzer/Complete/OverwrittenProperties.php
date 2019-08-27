@@ -20,29 +20,24 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class RedefinedMethods extends Analyzer {
-    public function dependsOn() {
-        return array('Complete/OverwrittenProperties',
-                    );
-    }
-
+class OverwrittenProperties extends Analyzer {
     public function analyze() {
-        // class x { function y() {}}
-        // class y extends x { function y() {}}
-        $this->atomIs('Class')
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->_as('results')
-             ->outIs('OVERWRITE')
-             ->isNot('abstract', true) // abstract methods are not redefined.
-             ->inIs('METHOD')
-             ->back('results');
-        $this->prepareQuery();
+        $this->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('propertyname', 'name')
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
+              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
+              ->raw('where(neq("first"))')
+              ->addEFrom('OVERWRITE', 'first')
+              ->count();
+        $this->rawQuery();
     }
 }
 

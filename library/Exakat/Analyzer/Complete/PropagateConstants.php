@@ -439,7 +439,7 @@ GREMLIN
                      ->outIs('NOT')
                      ->hasNo('intval')
              )
-             ->raw('where( __.out("CODE").sideEffect{ x = it.get() }.count() )')
+             ->raw('where( __.out("NOT").sideEffect{ x = it.get() }.count() )')
              ->raw(<<<GREMLIN
 sideEffect{ 
         if (it.get().value("token") == 'T_BANG') {
