@@ -20,36 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class IsaMagicProperty extends Analyzer {
-    public function dependsOn() {
-        return array('Complete/CreateMagicProperty',
-                    );
-    }
-
+class SetCloneLink extends Analyzer {
     public function analyze() {
-        // echo $this->a;
-        $this->atomIs('Member')
-             ->is('isRead', true)
-             ->inIs('DEFINITION')
-             ->atomIs('Magicmethod')
-             ->outIs('NAME')
-             ->codeIs('__get', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // $this->a = 1;
-        $this->atomIs('Member')
-             ->is('isModified', true)
-             ->inIs('DEFINITION')
-             ->atomIs('Magicmethod')
-             ->outIs('NAME')
-             ->codeIs('__set', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
+        // class x { function __clone() {}}
+        // clone (new x)
+        $this->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('CLONE')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('MAGICMETHOD')
+              ->outIs('NAME')
+              ->codeIs('__clone', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->addETo('DEFINITION', 'first')
+              ->count();
+        $this->rawQuery();
     }
 }
 

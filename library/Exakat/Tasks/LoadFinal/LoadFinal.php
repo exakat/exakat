@@ -127,10 +127,6 @@ GREMLIN;
         $task->run();
         $this->log('CreateDefaultValues');
 
-        $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateMagicProperty');
-
         $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassRemoteDefinitionWithInjection');
@@ -155,10 +151,6 @@ GREMLIN;
         $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('setClassRemoteDefinitionWithReturnTypehint');
-
-        $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetCloneLink');
 
         $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
         $task->run();
