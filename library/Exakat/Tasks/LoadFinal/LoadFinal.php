@@ -110,17 +110,6 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new SetClassAliasDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassAliasDefinition');
-        $task = new MakeClassConstantDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('MakeClassConstantDefinition');
-
-        $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithInjection');
-
         $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassMethodRemoteDefinition');
@@ -161,14 +150,6 @@ GREMLIN;
         $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassPropertyDefinitionWithFluentInterface');
-
-        $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SolveTraitMethods');
-
-        $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('FollowClosureDefinition');
 
         $task = new FinishIsModified($this->gremlin, $this->config, $this->datastore);
         $task->setMethods(new Methods($this->config));
