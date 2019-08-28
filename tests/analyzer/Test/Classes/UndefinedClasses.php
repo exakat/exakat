@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UndefinedClasses extends Analyzer {
-    /* 23 methods */
+    /* 25 methods */
 
     public function testClasses_UndefinedClasses01()  { $this->generic_test('Classes_UndefinedClasses.01'); }
     public function testClasses_UndefinedClasses02()  { $this->generic_test('Classes_UndefinedClasses.02'); }
@@ -32,5 +32,7 @@ class UndefinedClasses extends Analyzer {
     public function testClasses_UndefinedClasses21()  { $this->generic_test('Classes/UndefinedClasses.21'); }
     public function testClasses_UndefinedClasses22()  { $this->generic_test('Classes/UndefinedClasses.22'); }
     public function testClasses_UndefinedClasses23()  { $this->generic_test('Classes/UndefinedClasses.23'); }
+    public function testClasses_UndefinedClasses24()  { $this->generic_test('Classes/UndefinedClasses.24'); }
+    public function testClasses_UndefinedClasses25()  { $this->generic_test('Classes/UndefinedClasses.25'); }
 }
 ?>

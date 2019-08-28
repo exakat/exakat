@@ -5855,27 +5855,19 @@ class Load extends Tasks {
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
             $this->argumentsId[1]->fullnspath = '\\';
-            return; // Can't be a constant anyway.
+            return; // Can't be a class anyway.
         }
 
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[1]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
             $this->argumentsId[1]->fullnspath = '\\';
-            return; // Can't be a constant anyway.
+            return; // Can't be a class anyway.
         }
 
         $fullnspathClass = makeFullNsPath($this->argumentsId[0]->noDelimiter, false);
-        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
-            // Added a second \\ when the string already has one. Actual PHP behavior
-            $fullnspathClass = "\\$fullnspathClass";
-        }
         $this->argumentsId[0]->fullnspath = $fullnspathClass;
 
         $fullnspathAlias = makeFullNsPath($this->argumentsId[1]->noDelimiter, false);
-        if ($this->argumentsId[1]->noDelimiter[0] === '\\') {
-            // Added a second \\ when the string already has one. Actual PHP behavior
-            $fullnspathAlias = "\\$fullnspathAlias";
-        }
         $this->argumentsId[1]->fullnspath = $fullnspathAlias;
 
         $this->calls->addCall('class', $fullnspathClass, $argumentsId[0]);

@@ -38,10 +38,10 @@ class SetClassAliasDefinition extends Analyzer {
               ->outIs('DEFINITION')
               ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), Analyzer::WITHOUT_CONSTANTS)
               ->dedup('')
-              ->property('fullnspath', 'fnp')
+              ->setProperty('fullnspath', 'fnp')
               ->addEFrom('DEFINITION', 'method')
               ->count();
-        $query->rawQuery();
+        $this->rawQuery();
     }
 }
 
