@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MakeMagicConcrete extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateMagicProperty',
+                    );
+    }
+
     protected $magicMemberUsage = 1;
 
     public function analyze() {

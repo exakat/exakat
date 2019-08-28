@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessArgument extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassMethodDefinition',
+                    );
+    }
+
     // function foo($a)
     // foo(2); foo(2); foo(2); // always provide the same arg
     public function analyze() {

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class VariableUsedOnce extends Analyzer {
     public function analyze() {
         //Variables mentionned once in the whole application. Just once.
-        $this->atomIs(array('Variabledefinition'))
+        $this->atomIs('Variabledefinition')
              ->outIs('DEFINITION')
              ->atomIsNot('Phpvariable')
              ->back('first')
@@ -40,7 +40,7 @@ class VariableUsedOnce extends Analyzer {
             return;
         }
 
-        $this->atomIs(array('Variabledefinition'))
+        $this->atomIs('Variabledefinition')
              ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('DEFINITION');
         $this->prepareQuery();

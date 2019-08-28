@@ -26,11 +26,15 @@ use Exakat\Analyzer\Analyzer;
 
 class DefinedParentMP extends Analyzer {
     public function dependsOn() {
-        return array('Composer/IsComposerNsname',
+        return array('Complete/SetParentDefinition',
+                     'Complete/OverwrittenProperties',
+                     'Complete/OverwrittenConstants',
+                     'Complete/OverwrittenMethods',
+                     'Composer/IsComposerNsname',
                      'Classes/IsExtClass',
                     );
     }
-    
+
     public function analyze() {
         // parent::methodcall()
         $this->atomIs('Parent')

@@ -25,10 +25,15 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ScalarOrObjectProperty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // todo : extend to array  : warning : string-array syntax
         // Property defined as literal, used as object
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
@@ -43,7 +48,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->prepareQuery();
 
         // Property defined as object, assigned as literal
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->_as('results')

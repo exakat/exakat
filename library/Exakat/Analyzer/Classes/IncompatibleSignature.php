@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IncompatibleSignature extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
 
         // non-matching reference

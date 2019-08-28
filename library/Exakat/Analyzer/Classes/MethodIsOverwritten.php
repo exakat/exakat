@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MethodIsOverwritten extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     // class x { function a() {} }
     // class x2 extends x { function a() {} }
     public function analyze() {

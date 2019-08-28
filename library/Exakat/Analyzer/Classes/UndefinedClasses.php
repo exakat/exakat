@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedClasses extends Analyzer {
     public function dependsOn() {
-        return  array('Classes/IsExtClass',
+        return  array('Complete/MakeClassMethodDefinition',
+                      'Classes/IsExtClass',
                       'Composer/IsComposerNsname',
                       'Modules/DefinedClasses',
                       'Modules/DefinedInterfaces',
@@ -39,7 +40,7 @@ class UndefinedClasses extends Analyzer {
         $omitted = array('Classes/IsExtClass',
                          'Composer/IsComposerNsname',
                          'Modules/DefinedClasses',
-                          'Modules/DefinedInterfaces',
+                         'Modules/DefinedInterfaces',
                          );
 
         $omittedAll = $omitted;

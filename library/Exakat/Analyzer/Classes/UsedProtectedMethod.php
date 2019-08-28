@@ -26,10 +26,15 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedProtectedMethod extends Analyzer {
+    public function dependsOn() {
+        return  array('Complete/MakeClassMethodDefinition',
+                     );
+    }
+
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         // method used in a normal methodcall with $this $this->b()
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))

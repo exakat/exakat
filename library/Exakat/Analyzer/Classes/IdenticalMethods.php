@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IdenticalMethods extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
         // class a           { public function foo() { /some code/ } }
         // class b extends a { public function foo() { /some code/ } }

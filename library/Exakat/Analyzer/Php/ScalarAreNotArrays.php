@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ScalarAreNotArrays extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassMethodDefinition',
+                    );
+    }
+
     public function analyze() {
         // TODO : support for null ?
 

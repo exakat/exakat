@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsInterfaceMethod extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
         // interface extended in the local class
         $this->atomIs(self::$FUNCTIONS_METHOD)

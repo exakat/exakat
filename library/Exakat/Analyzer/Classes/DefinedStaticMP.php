@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DefinedStaticMP extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
