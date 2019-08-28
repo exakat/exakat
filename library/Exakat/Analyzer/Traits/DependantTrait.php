@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class DependantTrait extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
+
     public function analyze() {
         // Case for $this->method()
         // Case for class::methodcall()
