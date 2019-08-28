@@ -139,7 +139,7 @@ class DefaultConfig extends Config {
  
                                'project_reports'     => array('Diplomat',
                                                              ),
-                               'project_themes'      => array('CompatibilityPHP53',
+                               'project_rulesets'    => array('CompatibilityPHP53',
                                                               'CompatibilityPHP54',
                                                               'CompatibilityPHP55',
                                                               'CompatibilityPHP56',

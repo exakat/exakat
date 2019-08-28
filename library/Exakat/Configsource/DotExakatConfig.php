@@ -49,6 +49,15 @@ class DotExakatConfig extends Config {
         }
         unset($value);
 
+        if (isset($tmp_config['project_themes'])) {
+            display("please, rename project_themes into project_rulesets in your .exakat.ini file\n");
+            
+            if (empty($this->config['project_rulesets'])) {
+                $this->config['project_rulesets'] = $this->config['project_themes'];
+            }
+        }
+
+
         $other_php_versions = array();
         foreach(Configuration::PHP_VERSIONS as $version) {
             if (empty($this->configFile['php' . $version])) {
@@ -65,7 +74,7 @@ class DotExakatConfig extends Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
-                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
+                           'project_rulesets'   => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Text'),
                         );
 
@@ -101,9 +110,9 @@ class DotExakatConfig extends Config {
             unset($ext);
         }
 
-        if (is_string($this->config['project_themes'])) {
-            $this->config['project_themes'] = explode(',', $this->config['project_themes']);
-            foreach($this->config['project_themes'] as &$ext) {
+        if (is_string($this->config['project_rulesets'])) {
+            $this->config['project_rulesets'] = explode(',', $this->config['project_rulesets']);
+            foreach($this->config['project_rulesets'] as &$ext) {
                 $ext = trim($ext);
             }
             unset($ext);

@@ -96,7 +96,7 @@ abstract class Reports {
             $name = $this::FILE_FILENAME;
         }
 
-        $rulesets = $this->config->project_themes;
+        $rulesets = $this->config->project_rulesets;
         if (!empty($rulesets)) {
             if ($missing = $this->checkMissingRulesets()) {
                 print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";

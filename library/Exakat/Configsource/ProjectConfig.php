@@ -36,7 +36,7 @@ class ProjectConfig extends Config {
                               'project_description' => '',
                               'project_branch'      => '',
                               'project_tag'         => '',
-                              'project_themes'      => array(),
+                              'project_rulesets'    => array(),
                               'file_extensions'     => array('php',
                                                              'php3',
                                                              'inc',
@@ -99,6 +99,15 @@ class ProjectConfig extends Config {
                 $ini[$key] = $this->config[$key];
             }
         }
+
+        // Aliasing project_themes into rulesets
+        if (isset($ini['project_themes'])) {
+            print "rename project_themes in project_rulesets, in your config.ini file\n";
+            
+            if (empty($this->config['project_rulesets'])) {
+                $this->config['project_rulesets'] = $ini['project_themes'];
+            }
+        }
         $this->config = $ini;
 
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
@@ -152,10 +161,10 @@ class ProjectConfig extends Config {
             unset($ext);
         }
 
-        if (isset($this->config['project_themes']) &&
-            is_string($this->config['project_themes'])) {
-            $this->config['project_themes'] = explode(',', $this->config['project_themes']);
-            foreach($this->config['project_themes'] as &$ext) {
+        if (isset($this->config['project_rulesets']) &&
+            is_string($this->config['project_rulesets'])) {
+            $this->config['project_rulesets'] = explode(',', $this->config['project_rulesets']);
+            foreach($this->config['project_rulesets'] as &$ext) {
                 $ext = trim($ext);
             }
             unset($ext);

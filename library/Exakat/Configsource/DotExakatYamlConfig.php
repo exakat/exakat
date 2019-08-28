@@ -57,7 +57,7 @@ class DotExakatYamlConfig extends Config {
 
         if (!is_array($tmp_config)) {
             // Can't use display while in config phase
-            print "Failed to parse YAML file. Please, check its syntax.\n";
+            display("Failed to parse YAML file. Please, check its syntax.\n");
             return self::NOT_LOADED;
         }
 
@@ -85,7 +85,7 @@ class DotExakatYamlConfig extends Config {
         $defaults = array( 'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
-                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
+                           'project_rulesets'   => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Text'),
                            'ignore_dirs'        => array('/assets',
                                                          '/cache',
@@ -120,6 +120,14 @@ class DotExakatYamlConfig extends Config {
             unset($tmp_config[$name]);
         }
 
+        if (isset($tmp_config['project_themes'])) {
+            display("please, rename project_themes into project_rulesets in your .exakat.yaml file\n");
+            
+            if (empty($this->config['project_rulesets'])) {
+                $this->config['project_rulesets'] = $this->config['project_themes'];
+            }
+        }
+
         if (is_string($this->config['other_php_versions'])) {
             $this->config['other_php_versions'] = explode(',', $this->config['other_php_versions']);
             foreach($this->config['other_php_versions'] as &$version) {
@@ -144,9 +152,9 @@ class DotExakatYamlConfig extends Config {
             unset($ext);
         }
 
-        if (is_string($this->config['project_themes'])) {
-            $this->config['project_themes'] = explode(',', $this->config['project_themes']);
-            foreach($this->config['project_themes'] as &$ext) {
+        if (is_string($this->config['project_rulesets'])) {
+            $this->config['project_rulesets'] = explode(',', $this->config['project_rulesets']);
+            foreach($this->config['project_rulesets'] as &$ext) {
                 $ext = trim($ext);
             }
             unset($ext);

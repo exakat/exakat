@@ -139,7 +139,7 @@ class Project extends Tasks {
         }
         $this->datastore->addRow('hash', $info);
 
-        $rulesetsToRun = array($this->config->project_themes);
+        $rulesetsToRun = array($this->config->project_rulesets);
         $reportToRun = array();
         $namesToRun  = array();
 
@@ -338,7 +338,7 @@ class Project extends Tasks {
 
     private function analyzeRulesets($rulesets, $audit_start, $verbose) {
         if (empty($rulesets)) {
-            $rulesets = $this->config->project_themes;
+            $rulesets = $this->config->project_rulesets;
         }
 
         if (!is_array($rulesets)) {

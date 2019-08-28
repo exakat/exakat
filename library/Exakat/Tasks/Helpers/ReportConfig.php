@@ -78,9 +78,9 @@ class ReportConfig {
     }
 
     public function getConfig() {
-        return $this->config->duplicate(array('file'           => $this->destination,
-                                              'format'         => array($this->format),
-                                              'project_themes' => $this->rulesets,
+        return $this->config->duplicate(array('file'             => $this->destination,
+                                              'format'           => array($this->format),
+                                              'project_rulesets' => $this->rulesets,
                                               ));
     }
 
