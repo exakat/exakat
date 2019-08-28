@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedClasses extends Analyzer {
     public function dependsOn() {
         return  array('Complete/MakeClassMethodDefinition',
+                      'Complete/SetClassAliasDefinition',
                       'Classes/IsExtClass',
                       'Composer/IsComposerNsname',
                       'Modules/DefinedClasses',
