@@ -1077,7 +1077,8 @@ g.V().hasLabel("Propertydefinition").as("property")
      .sideEffect{classe = it.get().value("fullnspath"); }
      .select("property")
 .map{ 
-    name = it.get().value("fullcode");
+    b = it.get().value("fullcode").tokenize(' = ');
+    name = b[0];
     if (it.get().vertices(OUT, "DEFAULT").any()) { 
         v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 
