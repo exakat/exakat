@@ -133,7 +133,6 @@ class Config {
                 $this->configFiles[] = $file;
                 $this->dotExakatYamlConfig = new EmptyConfig();
             }
-
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {

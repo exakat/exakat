@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Project;
 use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -159,6 +160,10 @@ class DotExakatYamlConfig extends Config {
             }
             unset($ext);
         }
+
+        if (isset($this->config['project'])) {
+            $this->config['project'] = new Project($this->config['project']);
+        } 
 
         if (isset($this->config['rulesets'])) {
             $this->rulesets = array_map('array_values', $this->config['rulesets']);

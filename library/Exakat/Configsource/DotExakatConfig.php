@@ -57,7 +57,6 @@ class DotExakatConfig extends Config {
             }
         }
 
-
         $other_php_versions = array();
         foreach(Configuration::PHP_VERSIONS as $version) {
             if (empty($this->configFile['php' . $version])) {
