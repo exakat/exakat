@@ -37,9 +37,8 @@ class Php72Deprecation extends Analyzer {
         $this->prepareQuery();
 
         // usage of INTL_IDNA_VARIANT_2003
-        $this->atomIs(array('Identifier', 'Nsname'))
-             ->hasNoIn(array('METHOD', 'MEMBER', 'NEW', 'NAME'))
-             ->fullnspathIs('\\intl_idna_variant_2003');
+        $this->atomIs(self::$STATIC_NAMES)
+             ->fullnspathIs('\\INTL_IDNA_VARIANT_2003', self::CASE_SENSITIVE);
         $this->prepareQuery();
         
         // Usage of \\parse_str with no 2nd argument
