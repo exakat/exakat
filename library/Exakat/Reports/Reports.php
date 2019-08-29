@@ -73,7 +73,7 @@ abstract class Reports {
                                               $this->config->rulesets);
 
             // Default analyzers
-            $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->thema),
+            $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->project_results),
                                      array_keys($config->rulesets));
             $this->themesList = makeList($analyzers);
         }

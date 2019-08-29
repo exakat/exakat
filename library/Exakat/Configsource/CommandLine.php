@@ -73,7 +73,7 @@ class CommandLine extends Config {
                                     '-p'            => 'project',
                                     '-P'            => 'program',
                                     '-R'            => 'repository',
-                                    '-T'            => 'thema',
+                                    '-T'            => 'project_rulesets',
                                     '-report'       => 'report',
                                     '-format'       => 'format',
                                     '-file'         => 'file',
@@ -223,7 +223,7 @@ class CommandLine extends Config {
                         }
                         break;
 
-                    case 'thema' :
+                    case 'project_rulesets' :
                         if (isset($this->config[$config])) {
                             $this->config[$config][] = $args[$id + 1];
                         } else {

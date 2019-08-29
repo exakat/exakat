@@ -241,8 +241,8 @@ class Dump extends Tasks {
         $datastore->close();
         unset($datastore);
 
-        if (!empty($this->config->thema)) {
-            $ruleset = $this->config->thema;
+        if (!empty($this->config->project_rulesets)) {
+            $ruleset = $this->config->project_rulesets;
             $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
             if (empty($rulesets)) {
                 $r = $this->rulesets->getSuggestionRuleset($ruleset);

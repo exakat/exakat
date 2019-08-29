@@ -80,8 +80,8 @@ class Simplehtml extends Reports {
     }
 
     private function makeSummary($folder) {
-        if (empty($this->config->thema)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($this->config->thema);
+        if (empty($this->config->project_rulesets)) {
+            $list = $this->rulesets->getRulesetsAnalyzers($this->config->project_rulesets);
             $list = makeList($list);
         } elseif (!empty($this->config->program)) {
             $list = '"' . $this->config->program . '"';
@@ -115,8 +115,8 @@ HTML;
     }
         
     private function makeList($folder) {
-        if (!empty($this->config->thema)) {
-            $list = $this->rulesets->getRulesetsAnalyzers(array($this->config->thema));
+        if (!empty($this->config->project_rulesets)) {
+            $list = $this->rulesets->getRulesetsAnalyzers(array($this->config->project_rulesets));
         } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {

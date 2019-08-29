@@ -224,8 +224,8 @@ class Project extends Tasks {
         // Dump is a child process
         // initialization and first collection (action done once)
         display('Initial dump');
-        $dumpConfig = $this->config->duplicate(array('collect' => true,
-                                                     'thema'   => array('First')));
+        $dumpConfig = $this->config->duplicate(array('collect'            => true,
+                                                     'project_rulesets'   => array('First')));
         $firstDump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
         $firstDump->run();
         unset($firstDump);
@@ -356,11 +356,11 @@ class Project extends Tasks {
             $rulesetForFile = strtolower(str_replace(' ', '_', trim($ruleset, '"')));
 
             try {
-                $analyzeConfig = $this->config->duplicate(array('noRefresh' => true,
-                                                                'update'    => true,
-                                                                'thema'     => array($ruleset),
-                                                                'verbose'   => $verbose,
-                                                                'quiet'     => !$verbose,
+                $analyzeConfig = $this->config->duplicate(array('noRefresh'        => true,
+                                                                'update'           => true,
+                                                                'project_rulesets' => array($ruleset),
+                                                                'verbose'          => $verbose,
+                                                                'quiet'            => !$verbose,
                                                                 ));
 
                 $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
@@ -369,9 +369,9 @@ class Project extends Tasks {
                 unset($analyzeConfig);
                 $this->logTime("Analyze : $ruleset");
 
-                $dumpConfig = $this->config->duplicate(array('update'    => true,
-                                                             'thema'     => array($ruleset),
-                                                             'verbose'   => false,
+                $dumpConfig = $this->config->duplicate(array('update'               => true,
+                                                             'project_rulesets'     => array($ruleset),
+                                                             'verbose'              => false,
                                                              ));
 
                 $audit_end = time();

@@ -41,8 +41,8 @@ class Dailytodo extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $thema = $this->config->thema ?? array('Analyzer');
-        $list = $this->rulesets->getRulesetsAnalyzers($thema);
+        $project_rulesets = $this->config->project_rulesets ?? array('Analyzer');
+        $list = $this->rulesets->getRulesetsAnalyzers($project_rulesets);
         $list = makeList($list);
 
         $sqlQuery = "SELECT count(*) AS nb FROM results WHERE analyzer in ($list)";
@@ -99,7 +99,7 @@ HTML;
         $html = str_replace('<reporting>', $reporting, $html);
         $html = str_replace('<count>', $count, $html);
         $html = str_replace('<total>', $total, $html);
-        $html = str_replace('<thema>', $thema, $html);
+        $html = str_replace('<thema>', $project_rulesets, $html);
         $html = str_replace('<date>', date('l, F jS Y'), $html);
         $html = str_replace('<todos>', implode('', $todos), $html);
         $html = str_replace('<thanks>', $this->getThanks(), $html);
