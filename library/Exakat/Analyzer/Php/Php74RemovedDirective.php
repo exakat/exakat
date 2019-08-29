@@ -23,13 +23,16 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\UsedDirective;
 
-class Php74Deprecation extends Analyzer {
+class Php74RemovedDirective extends UsedDirective {
+    protected $phpVersion = '7.4+';
+    
     public function analyze() {
-        // usage of CURLPIPE_HTTP1
-        $this->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs('\\CURLPIPE_HTTP1', self::CASE_SENSITIVE);
-        $this->prepareQuery();
+        $this->directives = array('allow_url_include',
+                                 );
+
+        parent::analyze();
     }
 }
 
