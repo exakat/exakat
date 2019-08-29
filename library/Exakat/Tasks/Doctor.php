@@ -146,11 +146,10 @@ class Doctor extends Tasks {
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
 
-        if ($this->config->project !== 'default') {
+        if ($this->config->project->isDefault() !== true) {
             $stats['project']['name']             = $this->config->project_name;
             $stats['project']['url']              = $this->config->project_url;
             $stats['project']['phpversion']       = $this->config->phpversion;
-//            $stats['project']['analyzers']        = makeList($this->config->project_analyzers ?? array(), '');
             $stats['project']['reports']          = makeList($this->reportList);
             $stats['project']['rulesets']         = makeList($this->config->project_rulesets  ?? array(), '');
             $stats['project']['included dirs']    = makeList($this->config->include_dirs      ?? array(), '');
