@@ -178,6 +178,8 @@ class Appinfo extends Data {
                             'Cloning'                    => 'Classes/CloningUsage',
                             'Dynamic class call'         => 'Classes/VariableClasses',
                             'Typed properties'           => 'Php/TypedPropertyUsage',
+                            'Covariance'                 => 'Php/UseCovariance',
+//                            'Contravariance'             => 'Php/UseContravariance',
 
                             'PHP 4 constructor'          => 'Classes/OldStyleConstructor',
                             'Multiple class in one file' => 'Classes/MultipleClassesInFile',
