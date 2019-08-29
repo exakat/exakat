@@ -66,7 +66,7 @@ class ReportConfig {
     }
     
     public function getFormatClass() {
-        return "\\Exakat\Reports\\$this->format";
+        return '\Exakat\Reports\\'.ucfirst(strtolower($this->format));
     }
 
     public function getFormat() {
