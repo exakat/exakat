@@ -28,6 +28,7 @@ use Exakat\Query\Query;
 class NoDelimiterIsNot extends DSL {
     public function run() {
         list($code, $caseSensitive) = func_get_args();
+        assert(func_num_args() <= 2, 'Too many arguments for ' . __METHOD__);
 
         $return = new Command('has("noDelimiter")');
         $propertyIsNot = $this->dslfactory->factory('propertyIsNot');
