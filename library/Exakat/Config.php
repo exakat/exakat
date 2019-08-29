@@ -295,7 +295,6 @@ class Config {
         $ini[] = "project_description = \"{$this->project_description}\";";
         $ini[] = "project_branch      = \"{$this->project_branch}\";";
         $ini[] = "project_tag         = \"{$this->project_tag}\";";
-        $ini[] = "project_rulesets    = \"{$this->project_rulesets}\";";
         $ini[] = '';
 
         $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
