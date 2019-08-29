@@ -39,7 +39,7 @@ class RulesetsExtra implements RulesetsInterface {
     public function getRulesetsAnalyzers(?array $ruleset = null) {
         // Main installation
         if ($ruleset === null) {
-            return array_unique(array_merge(...$this->extra_rulesets));
+            return array_unique(array_merge(...array_values($this->extra_rulesets)));
         } elseif (is_array($ruleset)) {
             $return = array();
             foreach($ruleset as $t) {
