@@ -25,10 +25,11 @@ namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class HashAlgos53 extends Analyzer {
+class HashAlgos74 extends Analyzer {
+    protected $phpVersion = '7.4-';
+    
     public function analyze() {
-        $algos = array_merge($this->loadIni('hash_algos.ini', 'new54'),
-                             $this->loadIni('hash_algos.ini', 'new56'));
+        $algos = $this->loadIni('hash_algos.ini', 'new74');
         
         $this->atomFunctionIs(HashAlgos71::$functions)
              ->outWithRank('ARGUMENT', 0)
