@@ -40,6 +40,21 @@ class OverwrittenMethods extends Analyzer {
               ->addEFrom('OVERWRITE', 'first')
               ->count();
         $this->rawQuery();
+
+        // interface x { protected function foo()  {}}
+        // interface xx extends x { protected function foo()  {}}
+        $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'name')
+              ->goToInterface()
+              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addEFrom('OVERWRITE', 'first')
+              ->count();
+        $this->rawQuery();
     }
 }
 
