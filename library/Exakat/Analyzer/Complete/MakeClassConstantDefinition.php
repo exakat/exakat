@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class MakeClassConstantDefinition extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetParentDefinition',
+                    );
+    }
+
     public function analyze() {
         $this->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
