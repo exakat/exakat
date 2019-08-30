@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class UseCovariance extends Analyzer {
+class UseContravariance extends Analyzer {
     protected $phpVersion = '7.4+';
 
     public function dependsOn() {
@@ -33,21 +33,24 @@ class UseCovariance extends Analyzer {
     }
     
     public function analyze() {
-        // class x { function foo() : x {}}
-        // class y extends x { function foo() : y {}}
+        // class x { function foo(y $a) {}}
+        // class y extends x { function foo(x $a) {}}
         $this->atomIs(self::$FUNCTIONS_METHOD)
-             ->outIs('RETURNTYPE')
+             ->outIs('ARGUMENT')
+             ->savePropertyAs('rank', 'ranked')
+             ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              
              ->outIs('OVERWRITE')
-             ->outIs('RETURNTYPE')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'fnp')
              
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->goToAllChildren(self::EXCLUDE_SELF)
+                     ->goToAllImplements(self::EXCLUDE_SELF)
                      ->samePropertyAs('fullnspath', 'fnp')
              )
              ->back('first');
