@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ScalarAreNotArrays extends Analyzer {
     public function dependsOn() {
         return array('Complete/MakeClassMethodDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 
@@ -49,8 +50,8 @@ class ScalarAreNotArrays extends Analyzer {
         // WIth typehint
         // function foo($x = 2) { echo $x[2]; }
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
+             ->analyzerIsNot('self')
              ->outIs('DEFAULT')
              ->atomIs(array('Boolean', 'Integer', 'Float', 'Null'))
              ->inIs('DEFAULT')
@@ -63,8 +64,8 @@ class ScalarAreNotArrays extends Analyzer {
         // WIth typehint (here, null is the most important)
         // function foo(?A $x) { echo $x[2]; }
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
+             ->analyzerIsNot('self')
              ->hasOut('TYPEHINT')
              ->is('nullable', true)
              ->outIs('NAME')
@@ -112,7 +113,8 @@ class ScalarAreNotArrays extends Analyzer {
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->atomIs('Variablearray')
-             ->inIs('VARIABLE');
+             ->inIs('VARIABLE')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // foo(1.2); function foo($a) { $a[3]; }
@@ -125,9 +127,10 @@ class ScalarAreNotArrays extends Analyzer {
              
              ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('NAME')
-             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
              ->atomIs('Variablearray')
-             ->inIs('VARIABLE');
+             ->inIs('VARIABLE')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
