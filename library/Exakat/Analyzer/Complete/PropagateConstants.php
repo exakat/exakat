@@ -70,12 +70,19 @@ class PropagateConstants extends Analyzer {
             // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
             $this->atomIs('Constant')
              ->outIs('VALUE')
-//             ->has('intval')
+             ->atomIs(array('String', 'Integer', 'Null', 'Boolean'))
+             ->setProperty('propagated', true)
+             ->count();
+            $res = $this->rawQuery();
+
+            $this->atomIs('Constant')
+             ->outIs('VALUE')
+             ->has('propagated', true)
              ->raw('sideEffect{ x = it.get(); }')
              ->back('first')
              
              ->outIs('NAME')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->raw(<<<GREMLIN
  sideEffect{ 
         if ("noDelimiter" in x.keys()) {
@@ -93,6 +100,7 @@ class PropagateConstants extends Analyzer {
         if ("count" in x.keys()) {
             it.get().property("count", x.value("count")); 
         }
+        it.get().property("propagated", true); 
 }
 GREMLIN
 )
@@ -106,11 +114,11 @@ GREMLIN
     private function pushConstantValues() {
             $this->atomIs('Constant')
                  ->outIs('NAME')
-//                 ->has('intval')
                  ->raw('sideEffect{ constante = it.get(); }')
                  ->back('first')
                  
                  ->outIs('DEFINITION')
+                 ->hasNo('propagated')
                  ->raw(<<<'GREMLIN'
 sideEffect{ 
         if ("intval" in constante.keys()) {
@@ -125,6 +133,7 @@ sideEffect{
         if ("isNull" in constante.keys()) {
             it.get().property("isNull", constante.value("isNull")); 
         }
+        it.get().property("propagated", true); 
 }
 GREMLIN
 )
@@ -139,7 +148,7 @@ GREMLIN
             display('propagating Constant value in Addition');
             // fix path for constants with Const
             $this->atomIs('Addition')
-                 ->hasNo('intval')
+                 ->hasNo('propagated')
                  ->initVariable('x', '[ ]')
                  // Split LEFT and RIGHT to ensure left is in 0
                  ->filter(
@@ -167,6 +176,7 @@ sideEffect{
     it.get().property("intval", i); 
     it.get().property("boolean", it.get().property("intval") != 0);
     it.get().property("noDelimiter", i.toString()); 
+    it.get().property("propagated", true); 
     
     i = null;
 }
@@ -184,7 +194,7 @@ GREMLIN
     private function processConcatenation() {
         display('propagating Constant value in Concatenations');
         $this->atomIs('Concatenation')
-             ->hasNo('noDelimiter')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -204,6 +214,7 @@ sideEffect{
         it.get().property("intval", 0);
     }
     it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("propagated", true); 
     
     x = null;
 }
@@ -221,7 +232,7 @@ GREMLIN
     private function processSign() {
         display('propagating Constant value in Sign');
         $this->atomIs('Sign')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -240,6 +251,7 @@ sideEffect{
             it.get().property("boolean", x != 0);
             it.get().property("noDelimiter", (-1 * x).toString()); 
         }
+        it.get().property("propagated", true); 
 
         i = null;
 }
@@ -256,8 +268,13 @@ GREMLIN
             display('propagating Constant value in Power');
             // fix path for constants with Const
             $this->atomIs('Power')
-                 ->hasNo('intval')
+                 ->hasNo('propagated')
                  ->initVariable('x', '[ ]')
+                 ->not(
+                    $this->side()
+                         ->outIs(array('LEFT', 'RIGHT'))
+                         ->hasNo('intval')
+                 )
                  // Split LEFT and RIGHT to ensure left is in 0
                  ->filter(
                     $this->side()
@@ -280,7 +297,8 @@ sideEffect{
     it.get().property("intval", i); 
     it.get().property("boolean", it.get().property("intval") != 0);
     it.get().property("noDelimiter", i.toString()); 
-    
+    it.get().property("propagated", true); 
+
     i = null;
 }
 
@@ -298,8 +316,13 @@ GREMLIN
             display('propagating Constant value in Comparison');
             // fix path for constants with Const
             $this->atomIs('Comparison')
-                 ->hasNo('intval')
+                 ->hasNo('propagated')
                  ->initVariable('x', '[ ]')
+                 ->not(
+                    $this->side()
+                         ->outIs(array('LEFT', 'RIGHT'))
+                         ->hasNo('intval')
+                 )
                  // Split LEFT and RIGHT to ensure left is in 0
                  ->filter(
                     $this->side()
@@ -338,7 +361,8 @@ sideEffect{
     it.get().property("intval", i); 
     it.get().property("boolean", it.get().property("intval") != 0);
     it.get().property("noDelimiter", i.toString()); 
-    
+    it.get().property("propagated", true); 
+
     i = null;
 }
 
@@ -356,8 +380,13 @@ GREMLIN
             display('propagating Constant value in Logical');
             // fix path for constants with Const
             $this->atomIs('Logical')
-                 ->hasNo('intval')
+                 ->hasNo('propagated')
                  ->initVariable('x', '[ ]')
+                 ->not(
+                    $this->side()
+                         ->outIs(array('LEFT', 'RIGHT'))
+                         ->hasNo('intval')
+                 )
                  // Split LEFT and RIGHT to ensure left is in 0
                  ->filter(
                     $this->side()
@@ -390,6 +419,12 @@ sideEffect{
       } else if (it.get().value("token") == 'T_OR') {
         i = x[0] | x[1];
       } 
+
+    it.get().property("intval", i); 
+    it.get().property("boolean", i != 0);
+    it.get().property("noDelimiter", i.toString()); 
+    it.get().property("propagated", true); 
+
 }
 GREMLIN
 )
@@ -404,7 +439,7 @@ GREMLIN
     private function processParenthesis() {
         display('propagating Constant value in Parenthesis');
         $this->atomIs('Parenthesis')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -414,11 +449,12 @@ GREMLIN
              ->raw('where( __.out("CODE").sideEffect{ x = it.get() }.count() )')
              ->raw(<<<GREMLIN
 sideEffect{ 
-        it.get().property("intval", x.value("intval")); 
-        it.get().property("boolean", x.value("boolean"));
-        it.get().property("noDelimiter", x.value("noDelimiter")); 
-        
-        x = null;
+    it.get().property("intval", x.value("intval")); 
+    it.get().property("boolean", x.value("boolean"));
+    it.get().property("noDelimiter", x.value("noDelimiter")); 
+    it.get().property("propagated", true); 
+
+    x = null;
 }
 GREMLIN
 )
@@ -432,7 +468,7 @@ GREMLIN
     private function processNot() {
         display('propagating Constant value in Not');
         $this->atomIs('Not')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -442,17 +478,18 @@ GREMLIN
              ->raw('where( __.out("NOT").sideEffect{ x = it.get() }.count() )')
              ->raw(<<<GREMLIN
 sideEffect{ 
-        if (it.get().value("token") == 'T_BANG') {
-          i = !x.value("intval");
-        } else if (it.get().value("token") == 'T_TILDE') { 
-          i = ~x.value("intval");
-        }
+    if (it.get().value("token") == 'T_BANG') {
+      i = !x.value("intval");
+    } else if (it.get().value("token") == 'T_TILDE') { 
+      i = ~x.value("intval");
+    }
 
-        it.get().property("intval", x.value("intval")); 
-        it.get().property("boolean", x.value("boolean"));
-        it.get().property("noDelimiter", x.value("noDelimiter")); 
-        
-        x = null;
+    it.get().property("intval", x.value("intval")); 
+    it.get().property("boolean", x.value("boolean"));
+    it.get().property("noDelimiter", x.value("noDelimiter")); 
+    it.get().property("propagated", true); 
+
+    x = null;
 }
 GREMLIN
 )
@@ -466,7 +503,7 @@ GREMLIN
     private function processCoalesce() {
         display('propagating Constant value in Coalesce');
         $this->atomIs('Coalesce')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -488,17 +525,18 @@ GREMLIN
              )
              ->raw(<<<GREMLIN
 sideEffect{ 
-        if (x[0] == 0) {
-          i = x[1];
-        } else {
-          i = x[0];
-        }
+    if (x[0] == 0) {
+      i = x[1];
+    } else {
+      i = x[0];
+    }
+    
+    it.get().property("intval", i); 
+    it.get().property("boolean", i != 0);
+    it.get().property("noDelimiter", i.toString()); 
+    it.get().property("propagated", true); 
 
-        it.get().property("intval", i); 
-        it.get().property("boolean", i != 0);
-        it.get().property("noDelimiter", i.toString()); 
-        
-        i = null;
+    i = null;
 }
 GREMLIN
 )
@@ -512,7 +550,7 @@ GREMLIN
     private function processTernary() {
         display('propagating Constant value in Ternary');
         $this->atomIs('Ternary')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -553,7 +591,8 @@ sideEffect{
     it.get().property("intval", i); 
     it.get().property("boolean", it.get().property("intval") != 0);
     it.get().property("noDelimiter", i.toString()); 
-    
+    it.get().property("propagated", true); 
+
     i = null;
 }
 GREMLIN
@@ -568,7 +607,7 @@ GREMLIN
     private function processBitshift() {
         display('propagating Constant value in Bitshift');
         $this->atomIs('Bitshift')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -590,17 +629,18 @@ GREMLIN
              )
              ->raw(<<<GREMLIN
 sideEffect{ 
-        if (it.get().value("token") == 'T_SL') {
-          i = x[0] << x[1];
-        } else if (it.get().value("token") == 'T_SR') {
-          i = x[0] >> x[1];
-        }
+    if (it.get().value("token") == 'T_SL') {
+      i = x[0] << x[1];
+    } else if (it.get().value("token") == 'T_SR') {
+      i = x[0] >> x[1];
+    }
+    
+    it.get().property("intval", i); 
+    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("noDelimiter", i.toString()); 
+    it.get().property("propagated", true); 
 
-        it.get().property("intval", i); 
-        it.get().property("boolean", it.get().property("intval") != 0);
-        it.get().property("noDelimiter", i.toString()); 
-        
-        i = null;
+    i = null;
 }
 GREMLIN
 )
@@ -614,7 +654,7 @@ GREMLIN
     private function processMultiplication() {
         display('propagating Constant value in Multiplication');
         $this->atomIs('Multiplication')
-             ->hasNo('intval')
+             ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
                 $this->side()
@@ -636,28 +676,29 @@ GREMLIN
              )
              ->raw(<<<GREMLIN
 sideEffect{ 
-        if (it.get().value("token") == 'T_STAR') {
-          i = x[0] * x[1];
-        } else if (it.get().value("token") == 'T_SLASH') {
-          if (x[1] != 0) {
-              i = x[0] / x[1];
-              i = i.setScale(0, BigDecimal.ROUND_HALF_DOWN).toInteger();
-          } else {
-              i = 0;
-          }
-        } else if (it.get().value("token") == 'T_PERCENTAGE') {
-          if (x[0] != 0) {
-              i = x[1] % x[0];
-          } else {
-              i = 0;
-          }
-        } // Final else is an error!
+    if (it.get().value("token") == 'T_STAR') {
+      i = x[0] * x[1];
+    } else if (it.get().value("token") == 'T_SLASH') {
+      if (x[1] != 0) {
+          i = x[0] / x[1];
+          i = i.setScale(0, BigDecimal.ROUND_HALF_DOWN).toInteger();
+      } else {
+          i = 0;
+      }
+    } else if (it.get().value("token") == 'T_PERCENTAGE') {
+      if (x[0] != 0) {
+          i = x[1] % x[0];
+      } else {
+          i = 0;
+      }
+    } // Final else is an error!
+    
+    it.get().property("intval", i); 
+    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("noDelimiter", i.toString()); 
+    it.get().property("propagated", true); 
 
-        it.get().property("intval", i); 
-        it.get().property("boolean", it.get().property("intval") != 0);
-        it.get().property("noDelimiter", i.toString()); 
-        
-        i = null;
+    i = null;
 }
 GREMLIN
 )
