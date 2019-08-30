@@ -127,13 +127,6 @@ GREMLIN;
         $task->run();
         $this->log('SetClassRemoteDefinitionWithGlobal');
 
-        $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setClassRemoteDefinitionWithReturnTypehint');
-
-        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithLocalNew');
         $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('SetClassRemoteDefinitionWithParenthesis');
