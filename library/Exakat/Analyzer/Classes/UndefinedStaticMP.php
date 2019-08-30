@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedStaticMP extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
+                     'Complete/OverwrittenProperties',
                      'Composer/IsComposerNsname',
                      );
     }

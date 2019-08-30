@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongReturnedType extends Analyzer {
     public function dependsOn() {
-        return array('Functions/IsGenerator',
+        return array('Complete/CreateDefaultValues',
+                     'Functions/IsGenerator',
                     );
     }
 

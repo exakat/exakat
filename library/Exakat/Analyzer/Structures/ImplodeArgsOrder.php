@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ImplodeArgsOrder extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         $functions = array('\\join', '\\implode');
 
@@ -58,6 +63,7 @@ class ImplodeArgsOrder extends Analyzer {
 
         // detect a string in second arg
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->back('first');

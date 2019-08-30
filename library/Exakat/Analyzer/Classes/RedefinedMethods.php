@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RedefinedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Complete/OverwrittenProperties',
+        return array('Complete/OverwrittenMethods',
                     );
     }
 

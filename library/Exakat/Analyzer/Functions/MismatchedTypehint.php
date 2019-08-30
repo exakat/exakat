@@ -27,6 +27,11 @@ use Exakat\Analyzer\Analyzer;
 class MismatchedTypehint extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
+                     'Complete/MakeClassMethodDefinition',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/FollowClosureDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 

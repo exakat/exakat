@@ -29,12 +29,13 @@ class StripTagsSkipsClosedTag extends Analyzer {
         return array('Complete/PropagateConstants',
                     );
     }
+
     public function analyze() {
         // strip_tags($a, '<br />'); (br will not be ignored)
         $this->atomFunctionIs('\\strip_tags')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
-             ->regexIs('noDelimiter', ' >')
+             ->regexIs('noDelimiter', '/>')
              ->back('first');
         $this->prepareQuery();
     }

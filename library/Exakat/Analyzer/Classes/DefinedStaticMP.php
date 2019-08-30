@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DefinedStaticMP extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
+                     'Complete/OverwrittenProperties',
                     );
     }
 

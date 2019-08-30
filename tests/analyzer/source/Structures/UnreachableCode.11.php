@@ -51,12 +51,12 @@ function foo9() {
 }
 
 function foo10() {
-    assert(\debug_define_t, 'fqn');
+    assert(\DEBUG_DEFINE_F, 'fqn');
     ++$foo10;
 }
 
 function foo11() {
-    assert(\debug_define_f, 'fqn2');
+    assert(\DEBUG_DEFINE_F, 'fqn2');
     ++$foo11;
 }
 

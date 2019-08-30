@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UnitializedProperties extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenProperties',
+                     'Complete/CreateDefaultValues',
                      'Classes/Constructor',
                     );
     }

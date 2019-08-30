@@ -26,8 +26,14 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Url extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
-        $this->atomIs(self::$STRINGS_ALL)
+        // 'http://www.exakat.io/'
+        $this->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
              ->hasNoIn('CONCAT')
              ->has('noDelimiter')
              ->regexIs('noDelimiter', '^.?([a-z]+)://[-\\\\p{L}0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|].?\\$');

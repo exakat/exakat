@@ -25,9 +25,15 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessDefault extends Analyzer {
-    // function foo($a = 1)
-    // foo(1); foo(2); foo(3); // always provide the arg
+    public function dependsOn() {
+        return array('Complete/MakeClassMethodDefinition',
+                     'Complete/FollowClosureDefinition',
+                    );
+    }
+
     public function analyze() {
+        // function foo($a = 1)
+        // foo(1); foo(2); foo(3); // always provide the arg
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->hasOut('DEFAULT')

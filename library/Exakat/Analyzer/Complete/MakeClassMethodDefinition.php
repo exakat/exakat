@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MakeClassMethodDefinition extends Analyzer {
     public function dependsOn() {
         return array('Complete/SetParentDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 

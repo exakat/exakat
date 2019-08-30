@@ -5,7 +5,6 @@ $expected     = array('abc',
                       'string',
                       'real',
                       'mixed',
-                      'mixed',
                       'abcT',
                      );
 

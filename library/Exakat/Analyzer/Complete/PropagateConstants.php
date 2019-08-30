@@ -68,14 +68,14 @@ class PropagateConstants extends Analyzer {
             display('propagating Constant value in Const');
             // fix path for constants with Const
             // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
-            $this->atomIs('Constant')
+            $this->atomIs(array('Constant', 'Defineconstant'))
              ->outIs('VALUE')
              ->atomIs(array('String', 'Integer', 'Null', 'Boolean'))
              ->setProperty('propagated', true)
              ->count();
             $res = $this->rawQuery();
 
-            $this->atomIs('Constant')
+            $this->atomIs(array('Constant', 'Defineconstant'))
              ->outIs('VALUE')
              ->has('propagated', true)
              ->raw('sideEffect{ x = it.get(); }')
@@ -112,7 +112,7 @@ GREMLIN
         }
 
     private function pushConstantValues() {
-            $this->atomIs('Constant')
+            $this->atomIs(array('Constant', 'Defineconstant'))
                  ->outIs('NAME')
                  ->raw('sideEffect{ constante = it.get(); }')
                  ->back('first')
@@ -174,7 +174,7 @@ sideEffect{
     }
 
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
     
@@ -210,10 +210,11 @@ sideEffect{
     // Warning : PHP doesn't handle error that same way
     if (s.isInteger()) {
         it.get().property("intval", s.toInteger());
+        it.get().property("boolean", true);
     } else {
         it.get().property("intval", 0);
+        it.get().property("boolean", false);
     }
-    it.get().property("boolean", it.get().property("intval") != 0);
     it.get().property("propagated", true); 
     
     x = null;
@@ -295,7 +296,7 @@ sideEffect{
     i = x[0] ** x[1];
 
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 
@@ -359,7 +360,7 @@ sideEffect{
         }
 
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 
@@ -589,7 +590,7 @@ sideEffect{
     }
 
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 
@@ -636,7 +637,7 @@ sideEffect{
     }
     
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 
@@ -694,7 +695,7 @@ sideEffect{
     } // Final else is an error!
     
     it.get().property("intval", i); 
-    it.get().property("boolean", it.get().property("intval") != 0);
+    it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 

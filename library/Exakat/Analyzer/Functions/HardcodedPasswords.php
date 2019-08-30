@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class HardcodedPasswords extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // Position is 0 based
         $passwordsFunctions = $this->loadJson('php_logins.json');
@@ -37,7 +42,7 @@ class HardcodedPasswords extends Analyzer {
             $function = makeFullNsPath($function);
             $this->atomFunctionIs($function)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('String', self::WITH_CONSTANTS)
+                 ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -47,12 +52,14 @@ class HardcodedPasswords extends Analyzer {
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
+             ->_as('value')
              ->outIs('INDEX')
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->has('noDelimiter')
              ->noDelimiterIs($passwordsKeys, self::CASE_SENSITIVE)
-             ->inIs('INDEX')
+             ->back('value')
              ->outIs('VALUE')
-             ->atomIs('String')
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();
@@ -69,7 +76,7 @@ class HardcodedPasswords extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('String')
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();

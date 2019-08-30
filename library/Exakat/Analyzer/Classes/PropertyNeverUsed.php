@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyNeverUsed extends Analyzer {
     public function dependsOn() {
-        return array('Complete/OverwrittenProperties',
+        return array('Complete/SetParentDefinition',
+                     'Complete/OverwrittenProperties',
                     );
     }
 

@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ArrayKeyExistsWithObjects extends Analyzer {
     public function dependsOn() {
-        return array('Php/ScalarTypehintUsage',
+        return array('Complete/CreateDefaultValues',
+                     'Php/ScalarTypehintUsage',
                     );
     }
 

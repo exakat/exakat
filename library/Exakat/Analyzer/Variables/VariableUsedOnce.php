@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUsedOnce extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateCompactVariables',
+                    );
+    }
+
     public function analyze() {
         //Variables mentionned once in the whole application. Just once.
         $this->atomIs('Variabledefinition')
