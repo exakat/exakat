@@ -9,8 +9,9 @@ class Randomtest extends TestSuite {
     public static function suite() {
         $tests = glob(__DIR__.'/Test/*/*.php');
         
+        $tests = array_filter($tests, function ($x) { return strpos($x, 'Complete') === false; });
         shuffle($tests);
-        $tests = array_slice($tests, 0, 10);
+        $tests = array_slice($tests, 0, 100);
 
         return Test\testSuiteBuilder($tests);
     }
