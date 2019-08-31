@@ -110,40 +110,6 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassMethodRemoteDefinition');
-
-        $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithTypehint');
-        
-        // This one is doubled below.
-        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithLocalNew');
-
-        $task = new SetClassRemoteDefinitionWithGlobal($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithGlobal');
-
-        $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithParenthesis');
-        $task = new SetClassPropertyDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setClassPropertyDefinitionWithTypehint');
-        $task = new SetArrayClassDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setArrayClassDefinition');
-        $task = new SetStringMethodDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetStringMethodDefinition');
-
-        $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassPropertyDefinitionWithFluentInterface');
-
         $task = new FinishIsModified($this->gremlin, $this->config, $this->datastore);
         $task->setMethods(new Methods($this->config));
         $task->run();
