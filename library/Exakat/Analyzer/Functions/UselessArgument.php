@@ -28,6 +28,7 @@ class UselessArgument extends Analyzer {
     public function dependsOn() {
         return array('Complete/MakeClassMethodDefinition',
                      'Complete/FollowClosureDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 
