@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('array_merge(...$b)', 
+$expected     = array('array_merge(...$b)',
                       'array_merge(...$e, ...$f)',
                      );
 
