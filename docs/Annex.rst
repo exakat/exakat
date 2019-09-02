@@ -36,10 +36,12 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * CompatibilityPHP73
 * CompatibilityPHP74
 * CompatibilityPHP80
+* Complete
 * Custom
 * Dead code
 * DefensiveProgrammingTM
 * Dismell
+* Dump
 * First
 * Internal
 * Inventory
@@ -429,13 +431,48 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.3
+
+  * Complete/SetArrayClassDefinition (Complete/SetArrayClassDefinition ; Unassigned, Complete)
+  * Complete/SetClassMethodRemoteDefinition (Complete/SetClassMethodRemoteDefinition ; Unassigned, Complete)
+  * Complete/SetClassPropertyDefinitionWithFluentInterface (Complete/SetClassPropertyDefinitionWithFluentInterface ; Unassigned, Complete)
+  * Complete/SetClassPropertyDefinitionWithTypehint (Complete/SetClassPropertyDefinitionWithTypehint ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithGlobal (Complete/SetClassRemoteDefinitionWithGlobal ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithLocalNew (Complete/SetClassRemoteDefinitionWithLocalNew ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithParenthesis (Complete/SetClassRemoteDefinitionWithParenthesis ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithReturnTypehint (Complete/SetClassRemoteDefinitionWithReturnTypehint ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithTypehint (Complete/SetClassRemoteDefinitionWithTypehint ; Unassigned, Complete)
+  * Complete/SetStringMethodDefinition (Complete/SetStringMethodDefinition ; Unassigned, Complete)
+  * No Spread For Hash (Arrays/NoSpreadForHash)
+  * PHP 7.4 Constant Deprecation (Php/Php74Deprecation ; CompatibilityPHP74)
+  * PHP 7.4 Removed Directives (Php/Php74RemovedDirective ; CompatibilityPHP74)
+  * Use Contravariance (Php/UseContravariance ; Appinfo)
+  * Use Covariance (Php/UseCovariance ; Appinfo)
+  * openssl_random_pseudo_byte() Second Argument (Structures/OpensslRandomPseudoByteSecondArg ; CompatibilityPHP74)
+  * strip_tags Skips Closed Tag (Structures/StripTagsSkipsClosedTag ; Analyze)
+
 * 1.9.2
 
-  * Complete/CreateCompactVariables (Complete/CreateCompactVariables)
-  * Complete/PropagateConstants (Complete/PropagateConstants ; )
+  * Complete/FollowClosureDefinition (Complete/FollowClosureDefinition ; Unassigned, Complete)
+  * Complete/MakeClassConstantDefinition (Complete/MakeClassConstantDefinition ; Unassigned, Complete)
+  * Complete/SetClassAliasDefinition (Complete/SetClassAliasDefinition ; Unassigned, Complete)
+  * Complete/SetClassRemoteDefinitionWithInjection (Complete/SetClassRemoteDefinitionWithInjection ; Unassigned, Complete)
+  * Complete/SolveTraitMethods (Complete/SolveTraitMethods ; Unassigned, Complete)
+  * Create Compact Variables (Complete/CreateCompactVariables)
+  * Create Default Values (Complete/CreateDefaultValues ; Unassigned, Complete)
+  * Create Magic Property (Complete/CreateMagicProperty ; Unassigned, Complete)
+  * Make Class Method Definition (Complete/MakeClassMethodDefinition ; Unassigned, Complete)
   * No ENT_IGNORE (Security/NoEntIgnore ; Security)
   * No More Curly Arrays (Php/NoMoreCurlyArrays ; CompatibilityPHP74)
+  * Overwritten Constant (Complete/OverwrittenConstants ; Unassigned, Complete)
+  * Overwritten Methods (Complete/OverwrittenMethods ; Unassigned, Complete)
+  * Overwritten Properties (Complete/OverwrittenProperties ; Unassigned, Complete)
   * PHP 7.4 Reserved Keyword (Php/Php74ReservedKeyword ; CompatibilityPHP74)
+  * Propagate Constants (Complete/PropagateConstants ; Complete)
+  * Set Clone Link (Complete/SetCloneLink ; Unassigned, Complete)
+  * Set Parent Definition (Complete/SetParentDefinition ; Unassigned, Complete)
+  * Structures/ImplodeArgsOrder (Structures/ImplodeArgsOrder ; Analyze)
+  * array_merge() And Variadic (Structures/ArrayMergeAndVariadic ; Analyze)
 
 * 1.9.1
 
@@ -746,6 +783,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Ambiguous Visibilities (Classes/AmbiguousVisibilities)
   * Hash Algorithms Incompatible With PHP 7.1- (Php/HashAlgos71 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
+  * Hash Algorithms Incompatible With PHP 7.4- (Php/HashAlgos74 ; Unassigned, CompatibilityPHP74)
   * ext/csprng (Extensions/Extcsprng ; Appinfo)
 
 * 1.3.3
@@ -1393,7 +1431,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Simple)
   * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Simple, Suggestions, Level 3, php-cs-fixable)
   * Could Use self (Classes/ShouldUseSelf ; Analyze, Simple, Suggestions, Level 3, ClassReview)
-  * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions, CompatibilityPHP74)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
   * Custom Constant Usage (Constants/CustomConstantUsage ; )
   * Dangling Array References (Structures/DanglingArrayReferences ; Analyze, PHP recommendations, ClearPHP, Simple, Level 1, Top10)
@@ -1995,9 +2032,10 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-62 PHP error message detailled : 
+64 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
+* :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
@@ -2017,6 +2055,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
 * :ref:`Cannot pass parameter 1 by reference <only-variable-for-reference>`
+* :ref:`Cannot unpack array with string keys <no-spread-for-hash>`
 * :ref:`Cannot use "parent" when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot use "self" when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot use "static" when no class scope is active <self,-parent,-static-outside-class>`
@@ -2240,6 +2279,7 @@ List of external links mentionned in this documentation.
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `count <http://php.net/count>`_
 * `Courier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
+* `Covariant Returns and Contravariant Parameters <https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters>`_
 * `crc32() <http://www.php.net/crc32>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
@@ -2266,6 +2306,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
+* `Deprecation allow_url_include <https://wiki.php.net/rfc/deprecations_php_7_4#allow_url_include>`_
 * `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_
 * `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
@@ -2447,8 +2488,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2493,13 +2534,14 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
+* `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
@@ -2516,8 +2558,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2634,6 +2676,7 @@ List of external links mentionned in this documentation.
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
+* `strip_tags <https://www.php.net/manual/en/function.strip-tags.php>`_
 * `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 * `strtr <http://www.php.net/strtr>`_
 * `Structuring PHP Exceptions <https://www.alainschlesser.com/structuring-php-exceptions/>`_
@@ -2696,6 +2739,7 @@ List of external links mentionned in this documentation.
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
+* `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
 * `Vladimir Reznichenko <https://twitter.com/kalessil>`_
@@ -2769,6 +2813,7 @@ _______
 | [Analyze]
 |   analyzer[] = "Arrays/AmbiguousKeys";
 |   analyzer[] = "Arrays/MultipleIdenticalKeys";
+|   analyzer[] = "Arrays/NoSpreadForHash";
 |   analyzer[] = "Arrays/NonConstantArray";
 |   analyzer[] = "Arrays/NullBoolean";
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
@@ -2970,6 +3015,7 @@ _______
 |   analyzer[] = "Structures/AddZero";
 |   analyzer[] = "Structures/AlteringForeachWithoutReference";
 |   analyzer[] = "Structures/AlternativeConsistenceByFile";
+|   analyzer[] = "Structures/ArrayMergeAndVariadic";
 |   analyzer[] = "Structures/AssigneAndCompare";
 |   analyzer[] = "Structures/AutoUnsetForeach";
 |   analyzer[] = "Structures/BailOutEarly";
@@ -3020,6 +3066,7 @@ _______
 |   analyzer[] = "Structures/Iffectation";
 |   analyzer[] = "Structures/ImplicitGlobal";
 |   analyzer[] = "Structures/ImpliedIf";
+|   analyzer[] = "Structures/ImplodeArgsOrder";
 |   analyzer[] = "Structures/InconsistentElseif";
 |   analyzer[] = "Structures/IndicesAreIntOrString";
 |   analyzer[] = "Structures/InfiniteRecursion";
@@ -3082,6 +3129,7 @@ _______
 |   analyzer[] = "Structures/ShouldMakeTernary";
 |   analyzer[] = "Structures/ShouldPreprocess";
 |   analyzer[] = "Structures/StaticLoop";
+|   analyzer[] = "Structures/StripTagsSkipsClosedTag";
 |   analyzer[] = "Structures/StrposCompare";
 |   analyzer[] = "Structures/SuspiciousComparison";
 |   analyzer[] = "Structures/SwitchToSwitch";
@@ -3191,7 +3239,6 @@ Coding Conventions
 __________________
 
 | [Coding Conventions]
-|   analyzer[] = "Arrays/CurlyArrays";
 |   analyzer[] = "Arrays/EmptySlots";
 |   analyzer[] = "Arrays/MistakenConcatenation";
 |   analyzer[] = "Classes/MultipleClassesInFile";
@@ -3711,23 +3758,26 @@ CompatibilityPHP74
 __________________
 
 | [CompatibilityPHP74]
-|   analyzer[] = "Arrays/CurlyArrays";
 |   analyzer[] = "Functions/UnbindingClosures";
 |   analyzer[] = "Php/ArrayKeyExistsWithObjects";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
+|   analyzer[] = "Php/HashAlgos74";
 |   analyzer[] = "Php/IdnUts46";
 |   analyzer[] = "Php/NoMoreCurlyArrays";
+|   analyzer[] = "Php/Php74Deprecation";
 |   analyzer[] = "Php/Php74NewClasses";
 |   analyzer[] = "Php/Php74NewConstants";
 |   analyzer[] = "Php/Php74NewFunctions";
+|   analyzer[] = "Php/Php74RemovedDirective";
 |   analyzer[] = "Php/Php74RemovedFunctions";
 |   analyzer[] = "Php/Php74ReservedKeyword";
 |   analyzer[] = "Php/Php74mbstrrpos3rdArg";
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Structures/CurlVersionNow";
-|   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
+|   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
+|   analyzer[] = "Structures/OpensslRandomPseudoByteSecondArg";| 
 
 
 
