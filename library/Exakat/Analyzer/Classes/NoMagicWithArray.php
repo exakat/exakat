@@ -30,7 +30,7 @@ class NoMagicWithArray extends Analyzer {
                     );
     }
 
-    // class x { function __set() {} } 
+    // class x { function __set() {} }
     // (new x)->a[] = 1;
     public function analyze() {
         $this->atomIs(array('Array', 'Arrayappend'))

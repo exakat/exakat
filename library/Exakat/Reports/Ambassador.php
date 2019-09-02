@@ -3522,7 +3522,7 @@ HTML;
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
             $visibilityTable []= '<tr><td colspan="9">class ' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
-                                $headers . PHP_EOL . 
+                                $headers . PHP_EOL .
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
