@@ -26,7 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessDefault extends Analyzer {
     public function dependsOn() {
-        return array('Complete/MakeClassMethodDefinition',
+        return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/MakeClassMethodDefinition',
                      'Complete/FollowClosureDefinition',
                     );
     }

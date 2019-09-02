@@ -28,17 +28,14 @@ class CouldBeFinal extends Analyzer {
     // class x {}
     // no child extends x
     public function analyze() {
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::$CLASSES_ALL)
              ->isNot('final', true)
              ->isNot('abstract', true) // though, this is another problem
-             ->raw(<<<'GREMLIN'
-not(
-    where(
-        __.out("DEFINITION").in("EXTENDS")
-    )
-)
-GREMLIN
-);
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('EXTENDS')
+             );
         $this->prepareQuery();
     }
 }

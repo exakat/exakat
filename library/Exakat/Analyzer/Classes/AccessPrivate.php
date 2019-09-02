@@ -26,6 +26,14 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AccessPrivate extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetParentDefinition',
+                     'Complete/MakeClassMethodDefinition',
+                     'Complete/SolveTraitMethods',
+                     'Complete/SetClassMethodRemoteDefinition',
+                    );
+    }
+
     public function analyze() {
         $hasPrivateMethodDefinition = 'where( __.out("METHOD").hasLabel("Method")
                                                 .out("NAME").filter{it.get().value("code") == name}.in("NAME")

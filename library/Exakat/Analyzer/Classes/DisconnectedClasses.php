@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DisconnectedClasses extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetClassMethodRemoteDefinition',
+                    );
+    }
+
     public function analyze() {
         $this->atomIs('Class')
              ->hasOut('EXTENDS')

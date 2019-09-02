@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedParentMP extends Analyzer {
     public function dependsOn() {
-        return array('Classes/DefinedParentMP',
+        return array('Complete/SetParentDefinition',
+                     'Classes/DefinedParentMP',
                     );
     }
     

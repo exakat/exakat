@@ -70,7 +70,7 @@ class PropagateConstants extends Analyzer {
             // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
             $this->atomIs(array('Constant', 'Defineconstant'))
              ->outIs('VALUE')
-             ->atomIs(array('String', 'Integer', 'Null', 'Boolean'))
+             ->atomIs(array('String', 'Heredoc', 'Integer', 'Null', 'Boolean', 'Float'))
              ->setProperty('propagated', true)
              ->count();
             $res = $this->rawQuery();
@@ -112,14 +112,15 @@ GREMLIN
         }
 
     private function pushConstantValues() {
-            $this->atomIs(array('Constant', 'Defineconstant'))
-                 ->outIs('NAME')
-                 ->raw('sideEffect{ constante = it.get(); }')
-                 ->back('first')
-                 
-                 ->outIs('DEFINITION')
-                 ->hasNo('propagated')
-                 ->raw(<<<'GREMLIN'
+        $this->atomIs(array('Constant', 'Defineconstant'))
+             ->outIs('NAME')
+             ->has('propagated', true)
+             ->raw('sideEffect{ constante = it.get(); }')
+             ->back('first')
+
+             ->outIs('DEFINITION')
+             ->hasNo('propagated')
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
         if ("intval" in constante.keys()) {
             it.get().property("intval", constante.value("intval")); 
@@ -200,6 +201,12 @@ GREMLIN
                 $this->side()
                      ->outIs('CONCAT')
                      ->hasNo('noDelimiter')
+             )
+             ->not(
+                $this->side()
+                     ->outIs('CONCAT')
+                     ->atomIs(array('Identifier', 'Nsname'))
+                     ->hasNo('propagated')
              )
              ->raw('where( __.out("CONCAT").order().by("rank").sideEffect{ x.add( it.get().value("noDelimiter") ) }.count() )')
              ->raw(<<<GREMLIN
@@ -563,35 +570,35 @@ GREMLIN
                 $this->side()
                      ->outIs('CONDITION')
                      ->has('intval')
-                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+                     ->raw('sideEffect{ x.add( it.get() ) }.fold()')
              )
              ->filter(
                 $this->side()
                      ->outIs('THEN')
                      ->has('intval')
-                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+                     ->raw('sideEffect{ x.add( it.get() ) }.fold()')
              )
              ->filter(
                 $this->side()
                      ->outIs('ELSE')
                      ->has('intval')
-                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+                     ->raw('sideEffect{ x.add( it.get() ) }.fold()')
              )
              ->raw(<<<GREMLIN
 sideEffect{ 
-    if (x[0].value("boolean") == true) {
+    if (x[0].value("intval") == 0) {
       if (x[1].label() == 'Void') {
-          i = x[0];
+          i = x[0].value("intval");
       } else {
-          i = x[1];
+          i = x[1].value("intval");
       }
     } else {
-      i = x[2];
+      i = x[2].value("intval");
     }
 
-    it.get().property("intval", i); 
     it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
+    it.get().property("intval", i); 
     it.get().property("propagated", true); 
 
     i = null;

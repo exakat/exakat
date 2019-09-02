@@ -26,9 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessArgument extends Analyzer {
     public function dependsOn() {
-        return array('Complete/MakeClassMethodDefinition',
+        return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassMethodRemoteDefinition',
                      'Complete/FollowClosureDefinition',
-                     'Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
                     );
     }
 

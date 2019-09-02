@@ -25,10 +25,15 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DependantAbstractClass extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassConstantDefinition',
+                    );
+    }
+
     public function analyze() {
         // Case for $this->method()
         // Case for class::methodcall()
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::$CLASSES_ALL)
              ->is('abstract', true)
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
@@ -40,7 +45,7 @@ class DependantAbstractClass extends Analyzer {
 
         // Case for $this->$properties
         // Case for class::$properties
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::$CLASSES_ALL)
              ->is('abstract', true)
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
@@ -52,14 +57,15 @@ class DependantAbstractClass extends Analyzer {
 
         // Case for class::constant
         // self will be solved at excution time, but is set to the trait statically
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::$CLASSES_ALL)
              ->is('abstract', true)
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs('CLASS')
              ->atomIs('Staticconstant')
-             ->hasNoIn('DEFINITION')
+             ->hasNoIn('
+             ')
              ->back('first');
         $this->prepareQuery();
     }

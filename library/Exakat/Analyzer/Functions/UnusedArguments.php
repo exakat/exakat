@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedArguments extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
         // Arguments, not reference, function
         $this->atomIs('Parameter')

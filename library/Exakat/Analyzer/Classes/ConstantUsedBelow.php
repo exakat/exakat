@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantUsedBelow extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassConstantDefinition',
+                    );
+    }
+
     public function analyze() {
         //////////////////////////////////////////////////////////////////
         // constant + CLASS::constant (no check on class itself)

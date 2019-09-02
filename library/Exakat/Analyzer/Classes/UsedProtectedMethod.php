@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedProtectedMethod extends Analyzer {
     public function dependsOn() {
-        return  array('Complete/MakeClassMethodDefinition',
+        return  array('Complete/SetParentDefinition',
+                      'Complete/SetClassMethodRemoteDefinition',
                      );
     }
 

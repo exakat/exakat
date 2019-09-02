@@ -29,6 +29,7 @@ class DefinedStaticMP extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
                      'Complete/OverwrittenProperties',
+                     'Complete/SetClassMethodRemoteDefinition',
                     );
     }
 

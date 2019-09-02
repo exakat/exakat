@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class InfiniteRecursion extends Analyzer {
     public function dependsOn() {
-        return array('Functions/Recursive',
+        return array('Complete/SetClassPropertyDefinitionWithTypehint',
+                     'Functions/Recursive',
                     );
     }
     
