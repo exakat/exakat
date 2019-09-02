@@ -132,6 +132,10 @@ class CommandLine extends Config {
                               'baseline'      => 1,
                               );
 
+    public function __construct() {
+        $this->config['project'] = new Project();
+    }
+
     public function loadConfig($args = array()) {
         if (empty($args)) {
             return false;
@@ -182,7 +186,7 @@ class CommandLine extends Config {
                         break;
 
                     case 'project' :
-                        if (!isset($this->config['project'])) {
+                        if ($this->config['project']->isDefault()) {
                             $this->config['project'] = new Project($args[$id + 1]);
                         } 
                         // Multiple -p are ignored : keep the first

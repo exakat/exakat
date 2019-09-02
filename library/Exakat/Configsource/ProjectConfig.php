@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Project;
 use Exakat\Vcs\Vcs;
 
 class ProjectConfig extends Config {
@@ -76,11 +77,11 @@ class ProjectConfig extends Config {
     }
     
     public function setProject($project) {
-        $this->project = $project;
+        $this->project = new Project($project);
     }
 
     public function loadConfig($project) {
-        $this->project = $project;
+        $this->project = new Project($project);
 
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {

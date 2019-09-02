@@ -110,7 +110,7 @@ class DotExakatYamlConfig extends Config {
                                                         ),
                            'include_dirs'        => array(),
                            'rulesets'            => array(),
-                           'project'             => '',
+                           'project'             => new Project(),
                            'project_name'        => '',
                         );
 

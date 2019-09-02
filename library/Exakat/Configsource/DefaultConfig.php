@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Config as Configuration;
+use Exakat\Project;
 
 class DefaultConfig extends Config {
     protected $config  = array( // directives with boolean value
@@ -61,7 +62,7 @@ class DefaultConfig extends Config {
                                 // directives with literal value
                                'filename'           => '',
                                'dirname'            => '',
-                               'project'            => 'default',
+                               'project'            => '',
                                'program'            => '',
                                'repository'         => false,
                                'project_rulesets'   => array(),
@@ -160,6 +161,10 @@ class DefaultConfig extends Config {
 
                                 'inside_code'          => Configuration::WITH_PROJECTS,
                               );
+
+    public function __construct() {
+        $this->project = new Project();
+    }
 
     public function loadConfig($args) {
     }
