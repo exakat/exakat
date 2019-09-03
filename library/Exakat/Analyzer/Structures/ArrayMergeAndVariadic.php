@@ -34,7 +34,8 @@ class ArrayMergeAndVariadic extends Analyzer {
 
     public function analyze() {
         // array_merge(...$x); (without check on $x empty => error!)
-        $this->atomFunctionIs(array('\\array_merge', '\\array_merge_recursive'))
+        $this->atomFunctionIs(array('\\array_merge', 
+                                    '\\array_merge_recursive'))
              // Skip any other argument
              ->not(
                 $this->side()
@@ -44,12 +45,14 @@ class ArrayMergeAndVariadic extends Analyzer {
              ->outIs('ARGUMENT')
              ->is('variadic', true) // actually tested just above
              ->atomIsNot('Arrayliteral', self::WITH_CONSTANTS)
+             // empty($array), isset($array[0]) : check on content
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->outIs('DEFINITION')
+                     ->inIsIE('VARIABLE') // for arrays 
                      ->inIs('ARGUMENT')
-                     ->atomIs('Empty')
+                     ->atomIs(array('Empty', 'Isset'))
              )
              ->back('first');
         $this->prepareQuery();
