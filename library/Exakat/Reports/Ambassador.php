@@ -2395,6 +2395,13 @@ SQL;
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
                             'Php/UnpackingInsideArrays'             => '7.4+',
                             'Structures/CurlVersionNow'             => '7.4+',
+                            'Structures/UseCovariance'              => '7.4-',
+                            'Structures/UseContravariance'          => '7.4-',
+                            'Structures/Php74RemovedFunctions'      => '7.4+',
+                            'Structures/Php74Deprecation'           => '7.4+',
+                            'Structures/Php74ReservedKeyword'       => '7.4+',
+                            'Functions/UseArrowFunctions'           => '7.4+',
+                            'Type/UseIntegerSeparator'              => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
