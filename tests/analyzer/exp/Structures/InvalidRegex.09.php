@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('preg_match(\'/[\' . CONST_CONST2 . \'-44]\', $r, $x)',
+                      'preg_match(\'/[\' . CONST_CONST . \'-44]\', $r, $x)',
                      );
 
 $expected_not = array('preg_match(\'/[\' . CONST_CONST . \'-44]\', $r, $x)',

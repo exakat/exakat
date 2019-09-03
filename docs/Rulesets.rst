@@ -62,8 +62,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 26 Aug 2019 14:06:47 +0000
-.. comment: Generation hash : 7e486b4004cf3ee431b3881cba39d59c1bb55ea5
+.. comment: Generation date : Mon, 02 Sep 2019 14:18:03 +0000
+.. comment: Generation hash : 16021a9bc63f0cee0249a95ae949cbd1542beae9
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 370 analysis
+Total : 374 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -268,6 +268,7 @@ Total : 370 analysis
 * :ref:`No Reference On Left Side <no-reference-on-left-side>`
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
+* :ref:`No Spread For Hash <no-spread-for-hash>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
@@ -341,6 +342,7 @@ Total : 370 analysis
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 * :ref:`Strtr Arguments <strtr-arguments>`
+* :ref:`Structures/ImplodeArgsOrder <structures/implodeargsorder>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`
@@ -434,6 +436,7 @@ Total : 370 analysis
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
+* :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
@@ -441,6 +444,7 @@ Total : 370 analysis
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
+* :ref:`strip_tags Skips Closed Tag <strip\_tags-skips-closed-tag>`
 * :ref:`strpos() Too Much <strpos()-too-much>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
@@ -487,13 +491,12 @@ Total : 30 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 25 analysis
+Total : 24 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
-* :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Don't Be Too Manual <don't-be-too-manual>`
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
@@ -971,15 +974,17 @@ Total : 12 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 17 analysis
+Total : 20 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
-* :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
+* :ref:`Hash Algorithms Incompatible With PHP 7.4- <hash-algorithms-incompatible-with-php-7.4->`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
 * :ref:`No More Curly Arrays <no-more-curly-arrays>`
+* :ref:`PHP 7.4 Constant Deprecation <php-7.4-constant-deprecation>`
+* :ref:`PHP 7.4 Removed Directives <php-7.4-removed-directives>`
 * :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 * :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
@@ -990,6 +995,7 @@ Total : 17 analysis
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`curl_version() Has No Argument <curl\_version()-has-no-argument>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
+* :ref:`openssl_random_pseudo_byte() Second Argument <openssl\_random\_pseudo\_byte()-second-argument>`
 
 .. _compatibilityphp80:
 

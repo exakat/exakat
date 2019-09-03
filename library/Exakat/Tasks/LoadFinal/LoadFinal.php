@@ -110,95 +110,6 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new SetParentDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetParentDefinition');
-        $task = new SetClassAliasDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassAliasDefinition');
-        $task = new MakeClassConstantDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('MakeClassConstantDefinition');
-        $task = new MakeClassMethodDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('MakeClassMethodDefinition');
-
-        $task = new OverwrittenProperties($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenProperties');
-
-        $task = new CreateDefaultValues($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateDefaultValues');
-
-        $task = new CreateMagicProperty($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateMagicProperty');
-
-        $task = new SetClassRemoteDefinitionWithInjection($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithInjection');
-
-        $task = new SetClassMethodRemoteDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassMethodRemoteDefinition');
-
-        $task = new SetClassRemoteDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithTypehint');
-        
-        // This one is doubled below.
-        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithLocalNew');
-
-        $task = new SetClassRemoteDefinitionWithGlobal($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithGlobal');
-
-        $task = new SetClassRemoteDefinitionWithReturnTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setClassRemoteDefinitionWithReturnTypehint');
-
-        $task = new SetCloneLink($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetCloneLink');
-
-        $task = new SetClassRemoteDefinitionWithLocalNew($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithLocalNew');
-        $task = new SetClassRemoteDefinitionWithParenthesis($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassRemoteDefinitionWithParenthesis');
-        $task = new SetClassPropertyDefinitionWithTypehint($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setClassPropertyDefinitionWithTypehint');
-        $task = new SetArrayClassDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('setArrayClassDefinition');
-        $task = new SetStringMethodDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetStringMethodDefinition');
-
-        $task = new SetClassPropertyDefinitionWithFluentInterface($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SetClassPropertyDefinitionWithFluentInterface');
-
-        $task = new OverwrittenMethods($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenMethods');
-        $task = new OverwrittenConstants($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('OverwrittenConstants');
-
-        $task = new SolveTraitMethods($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('SolveTraitMethods');
-
-        $task = new FollowClosureDefinition($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('FollowClosureDefinition');
-
         $task = new FinishIsModified($this->gremlin, $this->config, $this->datastore);
         $task->setMethods(new Methods($this->config));
         $task->run();
@@ -207,11 +118,7 @@ GREMLIN;
         $task = new IsInIgnoredDir($this->gremlin, $this->config, $this->datastore);
         $task->run();
         $this->log('IsInIgnoredDir');
-/*
-        $task = new CreateCompactVariables($this->gremlin, $this->config, $this->datastore);
-        $task->run();
-        $this->log('CreateCompactVariables');
-*/
+
         display('End load final');
         $this->logTime('Final');
     }

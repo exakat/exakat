@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndeclaredStaticProperty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
+
     public function analyze() {
         // class a { public $a = 1;}
         // a::$a

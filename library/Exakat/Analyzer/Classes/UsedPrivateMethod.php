@@ -26,7 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedPrivateMethod extends Analyzer {
-
+    public function dependsOn() {
+        return array('Complete/MakeClassMethodDefinition',
+                    );
+    }
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         // method used in a static methodcall static::b() or self
@@ -46,7 +49,7 @@ class UsedPrivateMethod extends Analyzer {
 
         // method used in a normal methodcall with $this $this->b()
         $this->atomIs(array('Method', 'Magicmethod'))
-             ->is('visibility','private')
+             ->is('visibility', 'private')
              ->outIs('DEFINITION')
              ->atomIs('Methodcall')
              ->outIs('OBJECT')
@@ -57,19 +60,18 @@ class UsedPrivateMethod extends Analyzer {
         // method used in a normal methodcall with $this $this->b()
         $this->atomIs(array('Method', 'Magicmethod'))
              ->is('visibility','private')
-             ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->outIs('DEFINITION')
-             ->back('first');
+             ->outIs('NAME')
+             ->codeIs('__construct')
+             ->back('first')
+             ->hasOut('DEFINITION');
         $this->prepareQuery();
 
         // __destruct is considered automatically checked
-        $this->atomIs('Class')
-             ->outIs('MAGICMETHOD')
-             ->atomIs('Magicmethod')
+        $this->atomIs('Magicmethod')
              ->is('visibility','private')
              ->outIs('NAME')
              ->codeIs('__destruct')
-             ->inIs('NAME');
+             ->back('first');
         $this->prepareQuery();
         
         // Other magic methods are missing

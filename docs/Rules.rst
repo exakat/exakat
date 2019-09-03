@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 26 Aug 2019 14:06:47 +0000
-.. comment: Generation hash : 7e486b4004cf3ee431b3881cba39d59c1bb55ea5
+.. comment: Generation date : Mon, 02 Sep 2019 14:18:03 +0000
+.. comment: Generation hash : 16021a9bc63f0cee0249a95ae949cbd1542beae9
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6206,45 +6206,6 @@ See also `crc32() <http://www.php.net/crc32>`_.
 
 
 
-.. _curly-arrays:
-
-Curly Arrays
-############
-
-
-PHP supports the curly brackets for arrays.
-
-It is possible to access individual elements in an array by using its offset between square brackets [] or curly brackets {}. 
-
-.. code-block:: php
-
-   <?php
-   
-   $array = ['a', 'b', 'c', 'd', 'e'];
-   
-   print $array[2]; // displays 'b';
-   print $array{3}; // displays 'c';
-   
-   
-   ?>
-
-
-Curly brackets are seldom used, and will probably confuse or surprise the reader. It is recommended not to used them.
-
-See also `Array <http://php.net/manual/en/language.types.array.php>`_.
-
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Arrays/CurlyArrays                                                        |
-+-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`CompatibilityPHP74` |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Minor                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                          |
-+-------------+---------------------------------------------------------------------------+
-
-
-
 .. _dangling-array-references:
 
 Dangling Array References
@@ -9928,6 +9889,45 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _hash-algorithms-incompatible-with-php-7.4-:
+
+Hash Algorithms Incompatible With PHP 7.4-
+##########################################
+
+
+List of hash algorithms incompatible with PHP 7.3 and older recent. At the moment of writing, this is compatible up to 7.4s. 
+
+The hash algorithms were introduced in PHP 7.4s. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Compatible only with 7.1 and more recent
+   echo hash('crc32cs', 'The quick brown fox jumped over the lazy dog.');
+   
+   // Always compatible
+   echo hash('ripemd320', 'The quick brown fox jumped over the lazy dog.');
+   
+   ?>
+
+
+See also `hash_algos <http://php.net/hash_algos>`_.
+
++-------------+---------------------------+
+| Short name  | Php/HashAlgos74           |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 7.4 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
 
 
 
@@ -16991,6 +16991,48 @@ Suggestions
 
 
 
+.. _no-spread-for-hash:
+
+No Spread For Hash
+##################
+
+
+The spread operator ``...`` only works on integer-indexed arrays. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This is valid, as ``-33`` is cast to integer by PHP automagically
+   var_dump(...[1,-33 => 2, 3]);
+   
+   // This is not valid
+   var_dump(...[1,C => 2, 3]);
+   
+   ?>
+
+
+See also `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a call to array_values() instead of the hash
+
++-------------+------------------------+
+| Short name  | Arrays/NoSpreadForHash |
++-------------+------------------------+
+| Themes      | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
+
+
+
 .. _no-string-with-append:
 
 No String With Append
@@ -18971,6 +19013,69 @@ See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incomp
 | Severity    | Critical                  |
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _php-7.4-constant-deprecation:
+
+PHP 7.4 Constant Deprecation
+############################
+
+
+One constant is deprecated in PHP 7.4. 
+
+* CURLPIPE_HTTP1
+
+See also `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use CURLPIPE_MULTIPLEX or CURLPIPE_NOTHING
+
++-------------+---------------------------+
+| Short name  | Php/Php74Deprecation      |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 7.4 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _php-7.4-removed-directives:
+
+PHP 7.4 Removed Directives
+##########################
+
+
+List of directives that are removed in PHP 7.4.
+
++ allow_url_include
+
+See `Deprecation allow_url_include <https://wiki.php.net/rfc/deprecations_php_7_4#allow_url_include>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Stop using this directive
+
++-------------+---------------------------+
+| Short name  | Php/Php74RemovedDirective |
++-------------+---------------------------+
+| Themes      | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
 
 
@@ -22206,17 +22311,25 @@ Note : Chaining requires PHP > 5.3.0.
    ?>
 
 
-See also `Exception\:\:`__construct <http://www.php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_.
+See also `Exception\:\:`__construct <http://www.php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_ and `What are the best practices for catching and re-throwing exceptions? <https://stackoverflow.com/questions/5551668/what-are-the-best-practices-for-catching-and-re-throwing-exceptions/5551828>`_.
 
-+-------------+---------------------------------+
-| Short name  | Structures/ShouldChainException |
-+-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Instant (5 mins)                |
-+-------------+---------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the incoming exception to the newly thrown exception
+
++-------------+-----------------------------------------------------------------------------------------------+
+| Short name  | Structures/ShouldChainException                                                               |
++-------------+-----------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`                                                                                |
++-------------+-----------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                         |
++-------------+-----------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                              |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`magento-structures-shouldchainexception`, :ref:`tine20-structures-shouldchainexception` |
++-------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -24280,6 +24393,29 @@ Suggestions
 +-------------+------------------------------------+
 | Examples    | :ref:`suitecrm-php-strtrarguments` |
 +-------------+------------------------------------+
+
+
+
+.. _structures/implodeargsorder:
+
+Structures/ImplodeArgsOrder
+###########################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------------------+
+| Short name  | Structures/ImplodeArgsOrder |
++-------------+-----------------------------+
+| Themes      | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -31679,6 +31815,48 @@ Suggestions
 
 
 
+.. _array\_merge()-and-variadic:
+
+array_merge() And Variadic
+##########################
+
+
+Always check value in variadic before using it with `array_merge() <http://www.php.net/array_merge>`_ and `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_.
+
+Before PHP 7.4, `array_merge() <http://www.php.net/array_merge>`_ and `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ would complain when no argument was provided. As such, using the spread operator `...` on an empty `array() <http://www.php.net/array>`_ would yield no argument, and an error.
+
+.. code-block:: php
+
+   <?php
+   
+   // 
+   $b = array_merge(...$x);
+   
+   
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a check to the spread variable to ensure it is not empty
+* Append an empty array to to the spread variable to ensure it is not empty
+
++-------------+----------------------------------+
+| Short name  | Structures/ArrayMergeAndVariadic |
++-------------+----------------------------------+
+| Themes      | :ref:`Analyze`                   |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+
+
+
 .. _crypt()-without-salt:
 
 crypt() Without Salt
@@ -32593,6 +32771,54 @@ See also `move_uploaded_file <http://php.net/move_uploaded_file>`_ and `Uploadin
 
 
 
+.. _openssl\_random\_pseudo\_byte()-second-argument:
+
+openssl_random_pseudo_byte() Second Argument
+############################################
+
+
+openssl_random_pseudo_byte() uses exceptions to signal an error. Since PHP 7.4, there is no need to use the second argument.
+
+On the other hand, it is important to catch the exception that openssl_random_pseudo_byte() may emit.
+
+.. code-block:: php
+
+   <?php
+       // PHP 7.4 way to check on random number generation
+       try {
+           $bytes = openssl_random_pseudo_bytes($i);
+       } catch(\Exception $e) {
+           die(Error while loading random number);
+       }
+   
+       // Old way to check on random number generation
+       $bytes = openssl_random_pseudo_bytes($i, $cstrong);
+       if ($cstrong === false) {
+           die(Error while loading random number);
+       }
+   ?>
+
+
+See also `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_ and `PHP RFC: Improve `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ <https://wiki.php.net/rfc/improve-openssl-random-pseudo-bytes>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Skip the second argument, add a try/catch around the call to openssl_random_pseudo_bytes()
+
++-------------+---------------------------------------------+
+| Short name  | Structures/OpensslRandomPseudoByteSecondArg |
++-------------+---------------------------------------------+
+| Themes      | :ref:`CompatibilityPHP74`                   |
++-------------+---------------------------------------------+
+| Severity    | Minor                                       |
++-------------+---------------------------------------------+
+| Time To Fix | Quick (30 mins)                             |
++-------------+---------------------------------------------+
+
+
+
 .. _parse\_str()-warning:
 
 parse_str() Warning
@@ -32820,6 +33046,48 @@ When in doubt about backward compatibility, just drop the typehint. Otherwise, u
 +-------------+-----------------------------+
 | Time To Fix | Slow (1 hour)               |
 +-------------+-----------------------------+
+
+
+
+.. _strip\_tags-skips-closed-tag:
+
+strip_tags Skips Closed Tag
+###########################
+
+
+`strip_tags() <http://www.php.net/strip_tags>`_ skips non-self closing tags. This means that tags such as ``<br />`` will be ignored from the 2nd argument of the function.
+
+.. code-block:: php
+
+   <?php
+   
+   $input = 'a<br />';
+   
+   // Displays 'a' and clean the tag
+   echo strip_tags($input, '<br>');
+   
+   // Displays 'a<br />' and skips the allowed tag
+   echo strip_tags($input, '<br/>');
+   
+   ?>
+
+
+See also `strip_tags <https://www.php.net/manual/en/function.strip-tags.php>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not use self-closing tags in the 2nd parameter
+
++-------------+------------------------------------+
+| Short name  | Structures/StripTagsSkipsClosedTag |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`                     |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 

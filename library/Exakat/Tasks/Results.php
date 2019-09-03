@@ -32,7 +32,7 @@ class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        if ($this->config->program !== null) {
+        if (!empty($this->config->program)) {
             if (is_array($this->config->program)) {
                 $analyzersClass = $this->config->program;
             } else {
@@ -44,14 +44,12 @@ class Results extends Tasks {
                     throw new NoSuchAnalyzer($analyzer, $this->rulesets);
                 }
             }
-        } elseif (is_string($this->config->thema)) {
-            $thema = $this->config->thema;
+        } elseif (!empty($this->config->project_rulesets)) {
+            $project_rulesets = $this->config->project_rulesets;
 
-            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($thema)) {
-                throw new NoSuchAnalyzer($thema, $this->rulesets);
+            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($project_rulesets)) {
+                throw new NoSuchAnalyzer($project_rulesets, $this->rulesets);
             }
-
-            $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
         } else {
             throw new NeedsAnalyzerThema();
         }
@@ -67,7 +65,7 @@ class Results extends Tasks {
                 }
             }
         }
-        
+
         $return = array();
         if ($this->config->style === 'BOOLEAN') {
             $queryTemplate = <<<GREMLIN

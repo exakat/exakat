@@ -1,4 +1,4 @@
-Version 1.9.2 (Star of Longevity, coming up)
+Version 1.9.4 (Star of Benefit, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,30 @@ Version 1.9.2 (Star of Longevity, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.3 (Star of Longevity, 2019-09-02)
++ Architecture
+    + Created new Complete category, with data complement for analysis
+    + Refactored constant propagation
+    + Made code compatible with PHP 7.4
+    + Rename project_themas to project_rulesets
+    + Added support of -p with .exakat.yaml
++ Report
+    + Ambassador : reworked presentation for visibility suggestions
++ Analysis
+    + New analysis : report covariance and contravariance for compatibility
+    + New analysis : no spread operator for hash values
+    + New analysis : self-closing tags are omitted by strip_tags
+    + New analysis : report Openssl_random_pseudo_byte second argument usage
+    + New analysis : CURLPIPE_HTTP1 is obsolete
+    + New analysis : removed PHP 7.4 directives
+    + New analysis : do not use ... with array_merge without checks
+    + Updated analysis : added crc32c as hash algorithm
+    + Removed analysis : Removed Curly Arrays (double take)
+    + Checked unit tests : 3219 / 3240 test pass (99% pass)
++ Tokenizer
+    + Extended OVERWRITE to Interfaces
+    + Extended support for class_alias()
 
 Version 1.9.2 (Star of Prosperity, 2019-08-26)
 + Architecture

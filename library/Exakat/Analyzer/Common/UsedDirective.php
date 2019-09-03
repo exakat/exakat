@@ -42,7 +42,7 @@ class UsedDirective extends Analyzer {
                                     ))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->noDelimiterIs($this->directives)
+             ->noDelimiterIs($this->directives, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
         

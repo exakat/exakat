@@ -25,6 +25,13 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class OnlyVariablePassedByReference extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassMethodRemoteDefinition',
+                    );
+    }
+
     public function analyze() {
         // Functioncalls
         $this->atomIs('Functioncall')

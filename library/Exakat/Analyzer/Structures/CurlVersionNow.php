@@ -29,6 +29,7 @@ class CurlVersionNow extends Analyzer {
         // only CURLVERSION_NOW is allowed
         $this->atomFunctionIs('\\curl_version')
              ->outWithRank('ARGUMENT', 0)
+             ->atomIsNot('Void')
              ->not(
                 $this->side()
                      ->atomIs(self::$CONSTANTS_ALL)

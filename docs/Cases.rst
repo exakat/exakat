@@ -3211,6 +3211,52 @@ _isEnabled may default to true. It could also default to a class constant.
         {
             $this->_isEnabled = true;
 
+Should Chain Exception
+======================
+
+.. _magento-structures-shouldchainexception:
+
+Magento
+^^^^^^^
+
+:ref:`should-chain-exception`, in lib/Mage/Backup/Filesystem/Rollback/Ftp.php:81. 
+
+Instead of using the exception message as an argument, chaining the exception would send the whole exception, including the message, and other interesting information like file and line.
+
+.. code-block:: php
+
+    protected function _initFtpClient()
+        {
+            try {
+                $this->_ftpClient = new Mage_System_Ftp();
+                $this->_ftpClient->connect($this->_snapshot->getFtpConnectString());
+            } catch (Exception $e) {
+                throw new Mage_Backup_Exception_FtpConnectionFailed($e->getMessage());
+            }
+        }
+
+
+--------
+
+
+.. _tine20-structures-shouldchainexception:
+
+Tine20
+^^^^^^
+
+:ref:`should-chain-exception`, in tine20/Setup/Controller.php:81. 
+
+Here, the new exception gets an hardcoded message. More details about the reasons are already available in the $e exception, but they are not logged, not chained for later processing.
+
+.. code-block:: php
+
+    try {
+                $dirIterator = new DirectoryIterator($this->_baseDir);
+            } catch (Exception $e) {
+                Setup_Core::getLogger()->warn(__METHOD__ . '::' . __LINE__ . ' Could not open base dir: ' . $this->_baseDir);
+                throw new Tinebase_Exception_AccessDenied('Could not open Tine 2.0 root directory.');
+            }
+
 Should Use Prepared Statement
 =============================
 

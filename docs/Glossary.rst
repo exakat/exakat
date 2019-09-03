@@ -80,6 +80,7 @@ Glossary
       + :ref:`Could Be Class Constant <could-be-class-constant>`
       + :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
       + :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
+      + :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 
     + `array_change_key_case()`
 
@@ -147,10 +148,12 @@ Glossary
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
       + :ref:`Use Array Functions <use-array-functions>`
+      + :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 
     + `array_merge_recursive()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+      + :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 
     + `array_multisort()`
 
@@ -1117,6 +1120,7 @@ Glossary
 
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`
+      + :ref:`openssl_random_pseudo_byte() Second Argument <openssl\_random\_pseudo\_byte()-second-argument>`
 
 
 + `P`
@@ -1478,6 +1482,10 @@ Glossary
 
       + :ref:`@ Operator <@-operator>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `strip_tags()`
+
+      + :ref:`strip_tags Skips Closed Tag <strip\_tags-skips-closed-tag>`
 
     + `stripos()`
 

@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Config as Configuration;
+use Exakat\Project;
 
 class DefaultConfig extends Config {
     protected $config  = array( // directives with boolean value
@@ -59,17 +60,17 @@ class DefaultConfig extends Config {
                                'seven7'         => false,
  
                                 // directives with literal value
-                               'filename'       => '',
-                               'dirname'        => '',
-                               'project'        => 'default',
-                               'program'        => '',
-                               'repository'     => false,
-                               'thema'          => array(),
-                               'analyzers'      => array(),
-                               'report'         => 'Diplomat',
-                               'project_reports'=> array('Text'),
-                               'file'           =>  '',
-                               'style'          => 'ALL',
+                               'filename'           => '',
+                               'dirname'            => '',
+                               'project'            => '',
+                               'program'            => '',
+                               'repository'         => false,
+                               'project_rulesets'   => array(),
+                               'analyzers'          => array(),
+                               'report'             => 'Diplomat',
+                               'project_reports'    => array('Text'),
+                               'file'               =>  '',
+                               'style'              => 'ALL',
  
                                'gsneo4j_host'       => '127.0.0.1',
                                'gsneo4j_port'       => '7474',
@@ -139,7 +140,7 @@ class DefaultConfig extends Config {
  
                                'project_reports'     => array('Diplomat',
                                                              ),
-                               'project_themes'      => array('CompatibilityPHP53',
+                               'project_rulesets'    => array('CompatibilityPHP53',
                                                               'CompatibilityPHP54',
                                                               'CompatibilityPHP55',
                                                               'CompatibilityPHP56',
@@ -160,6 +161,10 @@ class DefaultConfig extends Config {
 
                                 'inside_code'          => Configuration::WITH_PROJECTS,
                               );
+
+    public function __construct() {
+        $this->project = new Project();
+    }
 
     public function loadConfig($args) {
     }

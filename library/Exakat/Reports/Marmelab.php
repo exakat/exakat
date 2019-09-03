@@ -33,7 +33,7 @@ class Marmelab extends Reports {
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $rulesets = $this->config->thema ?? $this->dependsOnAnalysis();
+        $rulesets = $this->config->project_rulesets ?? $this->dependsOnAnalysis();
         
         $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
         $list = makeList($list);

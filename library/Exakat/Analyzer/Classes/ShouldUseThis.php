@@ -27,11 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseThis extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UseThis',
+        return array('Complete/OverwrittenMethods',
+                     'Classes/UseThis',
                      'Classes/MethodIsOverwritten',
                     );
     }
-    
+
     public function analyze() {
         // Non-Static Methods must use $this
         $this->atomIs('Method')

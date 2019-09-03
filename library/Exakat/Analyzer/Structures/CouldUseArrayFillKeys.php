@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseArrayFillKeys extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetArrayClassDefinition',
+                    );
+    }
+
     public function analyze() {
         // foreach($a as $b) { $c[$b] = 3; }
         $this->atomIs('Foreach')

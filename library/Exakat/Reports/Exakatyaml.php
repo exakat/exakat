@@ -33,7 +33,7 @@ class Exakatyaml extends Reports {
     public function _generate($analyzerList) {
         $return = array('project'         => $this->config->project,
                         'project_name'    => $this->config->project_name,
-                        'project_themes'  => $this->config->project_themes,
+                        'project_rulesets'=> $this->config->project_rulesets,
                         'project_reports' => $this->config->project_reports,
                         'rulesets'        => range(0, 10),
         );

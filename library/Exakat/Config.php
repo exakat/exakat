@@ -133,7 +133,6 @@ class Config {
                 $this->configFiles[] = $file;
                 $this->dotExakatYamlConfig = new EmptyConfig();
             }
-
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
@@ -182,7 +181,7 @@ class Config {
         // autoload extensions
         $this->ext = new AutoloadExt($this->ext_root);
         $this->ext->registerAutoload();
-        
+
         $this->finishConfigs();
     }
     
@@ -227,8 +226,6 @@ class Config {
         } elseif ($name === 'screen_cols') {
             $return = $this->screen_cols;
         } else {
-//            debug_print_backtrace();
-//            assert(false, "No such config property as '$name'");
             $return = null;
         }
 
@@ -330,6 +327,7 @@ class Config {
                       'project_description' => $this->project_description,
                       'project_branch'      => $this->project_branch,
                       'project_tag'         => $this->project_tag,
+                      'project_rulesets'    => $this->project_rulesets,
                       );
 
         $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));

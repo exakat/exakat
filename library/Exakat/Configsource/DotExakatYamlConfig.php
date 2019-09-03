@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Project;
 use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -57,7 +58,7 @@ class DotExakatYamlConfig extends Config {
 
         if (!is_array($tmp_config)) {
             // Can't use display while in config phase
-            print "Failed to parse YAML file. Please, check its syntax.\n";
+            display("Failed to parse YAML file. Please, check its syntax.\n");
             return self::NOT_LOADED;
         }
 
@@ -85,7 +86,7 @@ class DotExakatYamlConfig extends Config {
         $defaults = array( 'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
-                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
+                           'project_rulesets'   => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,CompatibilityPHP74,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Text'),
                            'ignore_dirs'        => array('/assets',
                                                          '/cache',
@@ -109,7 +110,7 @@ class DotExakatYamlConfig extends Config {
                                                         ),
                            'include_dirs'        => array(),
                            'rulesets'            => array(),
-                           'project'             => '',
+                           'project'             => new Project(),
                            'project_name'        => '',
                         );
 
@@ -118,6 +119,14 @@ class DotExakatYamlConfig extends Config {
         foreach($defaults as $name => $default_value) {
             $this->config[$name] = empty($tmp_config[$name]) ? $default_value : $tmp_config[$name];
             unset($tmp_config[$name]);
+        }
+
+        if (isset($tmp_config['project_themes'])) {
+            display("please, rename project_themes into project_rulesets in your .exakat.yaml file\n");
+            
+            if (empty($this->config['project_rulesets'])) {
+                $this->config['project_rulesets'] = $this->config['project_themes'];
+            }
         }
 
         if (is_string($this->config['other_php_versions'])) {
@@ -144,13 +153,17 @@ class DotExakatYamlConfig extends Config {
             unset($ext);
         }
 
-        if (is_string($this->config['project_themes'])) {
-            $this->config['project_themes'] = explode(',', $this->config['project_themes']);
-            foreach($this->config['project_themes'] as &$ext) {
+        if (is_string($this->config['project_rulesets'])) {
+            $this->config['project_rulesets'] = explode(',', $this->config['project_rulesets']);
+            foreach($this->config['project_rulesets'] as &$ext) {
                 $ext = trim($ext);
             }
             unset($ext);
         }
+
+        if (isset($this->config['project'])) {
+            $this->config['project'] = new Project($this->config['project']);
+        } 
 
         if (isset($this->config['rulesets'])) {
             $this->rulesets = array_map('array_values', $this->config['rulesets']);

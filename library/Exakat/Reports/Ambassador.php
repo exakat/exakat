@@ -3502,8 +3502,7 @@ SQL
                                             array_keys($properties),
                                             array_keys($methods)));
         
-        $visibilityTable = array(<<<'HTML'
-<table class="table table-striped">
+        $headers = <<<'HTML'
     <tr>
         <td>&nbsp;</td>
         <td>Name</td>
@@ -3514,12 +3513,16 @@ SQL
         <td>Private</td>
         <td>Constant</td>
     </tr>
-HTML
-);
+HTML;
+
+        $visibilityTable = array('<table class="table table-striped">',
+                                 $headers,
+                                 );
 
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
             $visibilityTable []= '<tr><td colspan="9">class ' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
+                                $headers . PHP_EOL .
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
@@ -3675,10 +3678,11 @@ JOIN namespaces
  WHERE type="class"
 SQL
 );
-        $ranking = array(''          => 0,
-                         'public'    => 1,
-                         'protected' => 2,
-                         'private'   => 3);
+        $ranking = array(''          => 1,
+                         'public'    => 2,
+                         'protected' => 3,
+                         'private'   => 4,
+                         'constant'  => 5);
 
         $return = array();
         $theClass = '';
@@ -3706,7 +3710,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td class="exakat_short_text">' .
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax(substr($row['method'], 0, -10)) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
         }

@@ -87,17 +87,17 @@ class Analyze extends Tasks {
                     throw new NoSuchAnalyzer($analyzer, $this->rulesets);
                 }
             }
-        } elseif (!empty($this->config->thema)) {
-            $ruleset = $this->config->thema;
+        } elseif (!empty($this->config->project_rulesets)) {
+            $ruleset = $this->config->project_rulesets;
 
             if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($ruleset)) {
                 throw new NoSuchRuleset(implode(', ', $ruleset), $this->rulesets->getSuggestionRuleset($ruleset));
             }
 
-            $this->datastore->addRow('hash', array(implode('-', $this->config->thema) => count($analyzersClass) ) );
+            $this->datastore->addRow('hash', array(implode('-', $this->config->project_rulesets) => count($analyzersClass) ) );
 
-            $this->logname = 'analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->thema)));
-            $this->log = new Log('analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->thema))),
+            $this->logname = 'analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->project_rulesets)));
+            $this->log = new Log('analyze.' . strtolower(str_replace(' ', '_', implode('-', $this->config->project_rulesets))),
                                  "{$this->config->projects_root}/projects/{$this->config->project}");
         } else {
             throw new NeedsAnalyzerThema();

@@ -2512,6 +2512,7 @@ class Load extends Tasks {
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA
             ) {
             $name = $this->processSingle('Identifier');
+            $this->runPlugins($name);
             $name->delimiter   = $name->code[0];
             if ($name->delimiter === 'b' || $name->delimiter === 'B') {
                 $name->binaryString = $name->delimiter;
@@ -2521,8 +2522,7 @@ class Load extends Tasks {
                 $name->noDelimiter = substr($name->code, 1, -1);
             }
             $this->getFullnspath($name, 'const', $name);
-            
-            $this->runPlugins($name);
+
 
             if (function_exists('mb_detect_encoding')) {
                 $name->encoding = mb_detect_encoding($name->noDelimiter);
@@ -5488,9 +5488,7 @@ class Load extends Tasks {
     }
 
     private function processPower() {
-        $finals = $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF);
-        $finals[] = $this->phptokens::T_POW;
-        return $this->processOperator('Power', $finals);
+        return $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
     private function processComparison() {
@@ -5857,27 +5855,19 @@ class Load extends Tasks {
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
             $this->argumentsId[1]->fullnspath = '\\';
-            return; // Can't be a constant anyway.
+            return; // Can't be a class anyway.
         }
 
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[1]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
             $this->argumentsId[1]->fullnspath = '\\';
-            return; // Can't be a constant anyway.
+            return; // Can't be a class anyway.
         }
 
         $fullnspathClass = makeFullNsPath($this->argumentsId[0]->noDelimiter, false);
-        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
-            // Added a second \\ when the string already has one. Actual PHP behavior
-            $fullnspathClass = "\\$fullnspathClass";
-        }
         $this->argumentsId[0]->fullnspath = $fullnspathClass;
 
         $fullnspathAlias = makeFullNsPath($this->argumentsId[1]->noDelimiter, false);
-        if ($this->argumentsId[1]->noDelimiter[0] === '\\') {
-            // Added a second \\ when the string already has one. Actual PHP behavior
-            $fullnspathAlias = "\\$fullnspathAlias";
-        }
         $this->argumentsId[1]->fullnspath = $fullnspathAlias;
 
         $this->calls->addCall('class', $fullnspathClass, $argumentsId[0]);

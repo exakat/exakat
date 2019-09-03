@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedMethods',
+        return array('Complete/OverwrittenMethods',
+                     'Classes/UsedMethods',
                      'Modules/CalledByModule',
                      'Classes/IsInterfaceMethod',
                     );
@@ -38,7 +39,7 @@ class UnusedMethods extends Analyzer {
         // Could be checked for __clone, __get, __set...
 
         // Methods definitions in class
-        $this->atomIs('Method')
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('abstract', true)
              ->hasClass()
              ->analyzerIsNot(array('Classes/UsedMethods',
@@ -48,9 +49,7 @@ class UnusedMethods extends Analyzer {
              ->not(
                 $this->side()
                      ->analyzerIs('Classes/IsInterfaceMethod')
-                     ->hasNoOut('OVERWRITE')
-             )
-             ->back('first');
+             );
         $this->prepareQuery();
 
         // Methods definitions in trait

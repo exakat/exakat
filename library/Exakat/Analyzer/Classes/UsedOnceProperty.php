@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedOnceProperty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
+
     public function analyze() {
         // class x { private $p = 1; function foo() {$this->p = 1;} }
         $this->atomIs(self::$CLASSES_ALL)

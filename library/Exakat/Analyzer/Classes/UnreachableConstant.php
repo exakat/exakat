@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnreachableConstant extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassConstantDefinition',
+                    );
+    }
+
     public function analyze() {
         // class x { private const A = 1;} echo x::A;
         

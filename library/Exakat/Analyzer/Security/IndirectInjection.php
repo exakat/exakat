@@ -27,7 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class IndirectInjection extends Analyzer {
     public function dependsOn() {
-        return array('Security/SensitiveArgument',
+        return array('Complete/PropagateConstants',
+                     'Complete/CreateDefaultValues',
+                     'Security/SensitiveArgument',
                      'Security/GPRAliases',
                     );
     }

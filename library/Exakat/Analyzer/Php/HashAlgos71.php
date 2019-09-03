@@ -41,8 +41,8 @@ class HashAlgos71 extends Analyzer {
         
         $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->noDelimiterIs($algos, self::TRANSLATE, self::CASE_SENSITIVE);
+             ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+             ->noDelimiterIs($algos, self::CASE_INSENSITIVE);
         $this->prepareQuery();
     }
 }

@@ -93,12 +93,12 @@ class Query {
                     break;
 
                 case 'analyzeris' :
-                    unset($this->commands[0]);
                     $this->atomIs('Analysis', Analyzer::WITHOUT_CONSTANTS);
                     $this->commands = array($this->commands[1]);
 
-                    $this->propertyIs('analyzer', $args[0], Analyzer::CASE_INSENSITIVE);
+                    $this->propertyIs('analyzer', $args[0], Analyzer::CASE_SENSITIVE);
                     $this->outIs('ANALYZED');
+                    $this->_as('first');
 
                     $this->raw('groupCount("processed").by(count())', array(), array());
 

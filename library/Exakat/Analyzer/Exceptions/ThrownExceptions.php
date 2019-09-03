@@ -27,7 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class ThrownExceptions extends Analyzer {
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Complete/CreateDefaultValues',
+                     'Exceptions/DefinedExceptions',
+                    );
     }
 
     public function analyze() {
@@ -38,7 +40,7 @@ class ThrownExceptions extends Analyzer {
              ->outIsIE(array('RIGHT', 'CODE'))
              ->outIs('NEW')
              ->inIs('DEFINITION')
-             ->atomIs('Class');
+             ->atomIs(self::$CLASSES_ALL);
         $this->prepareQuery();
 
         // $x = new X;
@@ -50,7 +52,7 @@ class ThrownExceptions extends Analyzer {
              ->atomIs('New')
              ->outIs('NEW')
              ->inIs('DEFINITION')
-             ->atomIs('Class')
+             ->atomIs(self::$CLASSES_ALL)
              ->analyzerIs('Exceptions/DefinedExceptions');
         $this->prepareQuery();
     }

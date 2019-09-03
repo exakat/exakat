@@ -25,6 +25,13 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NoMagicWithArray extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateMagicProperty',
+                    );
+    }
+
+    // class x { function __set() {} }
+    // (new x)->a[] = 1;
     public function analyze() {
         $this->atomIs(array('Array', 'Arrayappend'))
              ->outIs(array('VARIABLE', 'APPEND'))

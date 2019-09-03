@@ -27,7 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class DefinedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsExtClass',
+        return array('Complete/MakeClassConstantDefinition',
+                     'Complete/OverwrittenConstants',
+                     'Classes/IsExtClass',
                      'Composer/IsComposerNsname',
                     );
     }

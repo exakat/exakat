@@ -39,6 +39,8 @@ class SamePropertyAs extends DSL {
             return new Command('filter{ it.get().id() == ' . $name . '}');
         } elseif ($property === 'self') {
             return new Command('filter{ it.get() == ' . $name . '}');
+        } elseif ($property === 'intval') {
+            return new Command('has("intval").filter{ it.get().value("intval") == ' . $name . '}');
         } elseif ($property === 'code' || $property === 'lccode') {
             if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
                 return new Command('filter{ it.get().value("code") == ' . $name . '}');

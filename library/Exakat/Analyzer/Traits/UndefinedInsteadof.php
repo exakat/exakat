@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedInsteadof extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetClassMethodRemoteDefinition',
+                    );
+    }
+
     public function analyze() {
         // class x { use t { t::undefined insteadof A; }}
         $this->atomIs('Staticmethod')

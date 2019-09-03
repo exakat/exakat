@@ -9,6 +9,7 @@ class AllTests extends TestSuite {
     public static function suite() {
 
         $tests = glob(__DIR__.'/Test/*/*.php');
+        $tests = array_filter($tests, function ($x) { return strpos($x, 'Complete') === false; });
 
         $classes = count($tests);
         $total = (int) shell_exec('grep -r "public function test" '.__DIR__.'/Test/*/*.php | wc -l');

@@ -31,7 +31,9 @@ class IntegerConversion extends Analyzer {
             $module = $this->rulesets->getInstance('Modules/IncomingValues', $this->gremlin, $this->config);
             $modules = $module->dependsOn();
 
-            $this->dependsOn = array_merge( array('Php/IncomingValues'),
+            $this->dependsOn = array_merge( array('Complete/CreateDefaultValues',
+                                                  'Php/IncomingValues',
+                                                 ),
                                             $modules
                                           );
         }

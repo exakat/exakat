@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnreachableCode extends Analyzer {
     public function dependsOn() {
-        return array('Functions/KillsApp',
-                     'Complete/PropagateConstants'
+        return array('Complete/PropagateConstants',
+                     'Functions/KillsApp',
                     );
     }
     

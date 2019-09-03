@@ -241,8 +241,8 @@ class Dump extends Tasks {
         $datastore->close();
         unset($datastore);
 
-        if (!empty($this->config->thema)) {
-            $ruleset = $this->config->thema;
+        if (!empty($this->config->project_rulesets)) {
+            $ruleset = $this->config->project_rulesets;
             $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
             if (empty($rulesets)) {
                 $r = $this->rulesets->getSuggestionRuleset($ruleset);
@@ -1077,7 +1077,8 @@ g.V().hasLabel("Propertydefinition").as("property")
      .sideEffect{classe = it.get().value("fullnspath"); }
      .select("property")
 .map{ 
-    name = it.get().value("fullcode");
+    b = it.get().value("fullcode").tokenize(' = ');
+    name = b[0];
     if (it.get().vertices(OUT, "DEFAULT").any()) { 
         v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 

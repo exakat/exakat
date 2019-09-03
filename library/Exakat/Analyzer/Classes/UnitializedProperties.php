@@ -26,10 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UnitializedProperties extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor',
+        return array('Complete/OverwrittenProperties',
+                     'Complete/CreateDefaultValues',
+                     'Classes/Constructor',
                     );
     }
-    
+
     public function analyze() {
         // Normal Properties (with or without constructor)
         $this->atomIs('Propertydefinition')

@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class NullBoolean extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // true[1], null[0]
         $this->atomIs(array('Null', 'Boolean'))

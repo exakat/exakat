@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedBelow extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
+
     public function analyze() {
         //////////////////////////////////////////////////////////////////
         // property + $this->property

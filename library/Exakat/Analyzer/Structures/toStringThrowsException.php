@@ -26,6 +26,8 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class toStringThrowsException extends Analyzer {
+    protected $phpVersion = '7.4-';
+
     public function analyze() {
         // class x { function __tostring() { throw new Exception(); }}
         $this->atomIs('Magicmethod')

@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Regex extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         $pregFunctions = array('\\preg_match_all',
                                '\\preg_match',
@@ -45,7 +50,7 @@ class Regex extends Analyzer {
              ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // preg_relace_callback_array(array(regex1 => callback, regex2))
@@ -54,7 +59,7 @@ class Regex extends Analyzer {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
     }
 }

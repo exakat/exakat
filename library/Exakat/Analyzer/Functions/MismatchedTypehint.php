@@ -25,6 +25,16 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MismatchedTypehint extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                     'Complete/MakeClassMethodDefinition',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/FollowClosureDefinition',
+                     'Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // Based on calls to a function
         $this->atomIs(self::$FUNCTIONS_ALL)

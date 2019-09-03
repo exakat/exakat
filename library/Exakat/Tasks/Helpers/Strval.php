@@ -66,6 +66,7 @@ class Strval extends Plugin {
 
             case 'Float' :
             case 'String' :
+            case 'Identifier': // Nsname creates a fatal error
                 if (empty($extra)) {
                     $atom->noDelimiter = (string) trimOnce($atom->code);
                 } else {

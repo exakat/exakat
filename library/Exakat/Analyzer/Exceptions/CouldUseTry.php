@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseTry extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // $a = $b << $c; (No try... )
         $this->atomIs('Bitshift')

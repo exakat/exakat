@@ -1245,7 +1245,7 @@ SQL
     }
 }
 
-function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
+function error_handler ( $errno , $errstr , $errfile = '', $errline = null) {
     print __METHOD__. "\n";
     return true;
 }

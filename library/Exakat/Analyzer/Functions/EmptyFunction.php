@@ -27,7 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyFunction extends Analyzer {
     public function dependsOn() {
-        return array('Composer/IsComposerNsname',
+        return array('Complete/SetParentDefinition',
+                     'Complete/OverwrittenMethods',
+                     'Composer/IsComposerNsname',
                     );
     }
     
@@ -40,7 +42,7 @@ class EmptyFunction extends Analyzer {
         $this->prepareQuery();
 
         // method : then, it should not overwrite a parent's method
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->hasClassTrait()
              ->isNot('abstract', true)
              ->IsNotInheritedMethod()

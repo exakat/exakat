@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsaMagicProperty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateMagicProperty',
+                    );
+    }
+
     public function analyze() {
         // echo $this->a;
         $this->atomIs('Member')

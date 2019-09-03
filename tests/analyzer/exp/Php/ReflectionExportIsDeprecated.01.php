@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('ReflectionFunction::export(\'foo\'),',
-                      'ReflectionFunction::export(\'foo\', true),',
+$expected     = array('ReflectionFunction::export(\'foo\')',
+                      'ReflectionFunction::export(\'foo\', true)',
                      );
 
 $expected_not = array('(string) new ReflectionNotValid(\'foo\')',

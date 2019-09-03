@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class MemoizeMagicCall extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateMagicProperty',
+                    );
+    }
+
     public function analyze() {
         // function foo() { $a = $this->a; $b = $this->a; } // $this->a is routed to __get();
         $this->atomIs(self::$FUNCTIONS_ALL)

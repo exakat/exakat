@@ -26,6 +26,12 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class Recursive extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                    );
+    }
+
     public function analyze() {
         // function foo() { foo(); }
         $this->atomIs('Function')
@@ -49,6 +55,8 @@ class Recursive extends Analyzer {
              ->samePropertyAs('code', 'useVar', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
+
+        // arrow functions? Simply set to a local variable that is reused.
 
         // function foo() { $this->foo(); }
         $this->atomIs(self::$FUNCTIONS_METHOD)

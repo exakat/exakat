@@ -73,7 +73,7 @@ class CommandLine extends Config {
                                     '-p'            => 'project',
                                     '-P'            => 'program',
                                     '-R'            => 'repository',
-                                    '-T'            => 'thema',
+                                    '-T'            => 'project_rulesets',
                                     '-report'       => 'report',
                                     '-format'       => 'format',
                                     '-file'         => 'file',
@@ -132,6 +132,10 @@ class CommandLine extends Config {
                               'baseline'      => 1,
                               );
 
+    public function __construct() {
+        $this->config['project'] = new Project();
+    }
+
     public function loadConfig($args = array()) {
         if (empty($args)) {
             return false;
@@ -182,7 +186,7 @@ class CommandLine extends Config {
                         break;
 
                     case 'project' :
-                        if (!isset($this->config['project'])) {
+                        if ($this->config['project']->isDefault()) {
                             $this->config['project'] = new Project($args[$id + 1]);
                         } 
                         // Multiple -p are ignored : keep the first
@@ -223,7 +227,7 @@ class CommandLine extends Config {
                         }
                         break;
 
-                    case 'thema' :
+                    case 'project_rulesets' :
                         if (isset($this->config[$config])) {
                             $this->config[$config][] = $args[$id + 1];
                         } else {
@@ -240,10 +244,6 @@ class CommandLine extends Config {
 
             }
         }
-
-        if (!isset($this->config['project'])) {
-            $this->config['project'] = new Project();
-        } 
 
         $command = array_shift($args);
         if (isset($command, $this->commands[$command])) {

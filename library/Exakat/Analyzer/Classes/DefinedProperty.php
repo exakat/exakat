@@ -26,6 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DefinedProperty extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
 
     public function analyze() {
         // locally defined
