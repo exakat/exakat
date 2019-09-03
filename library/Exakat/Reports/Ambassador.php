@@ -2401,7 +2401,7 @@ SQL;
                             'Structures/Php74Deprecation'           => '7.4+',
                             'Structures/Php74ReservedKeyword'       => '7.4+',
                             'Functions/UseArrowFunctions'           => '7.4+',
-                            'Type/UseIntegerSeparator'              => '7.4+',
+                            'Type/IntegerSeparatorUsage'            => '7.4+',
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
