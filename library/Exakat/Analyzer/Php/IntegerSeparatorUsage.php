@@ -30,7 +30,7 @@ class IntegerSeparatorUsage extends Analyzer {
     public function analyze() {
         // $i = 1_2;
         // $f = 12_3.4
-        $this->atomIs('Integer')
+        $this->atomIs(array('Integer', 'Float'))
              ->regexIs('fullcode', '_');
         $this->prepareQuery();
     }
