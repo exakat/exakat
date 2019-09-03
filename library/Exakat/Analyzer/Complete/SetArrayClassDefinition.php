@@ -25,24 +25,59 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class SetArrayClassDefinition extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                    );
+    }
+
     public function analyze() {
+        // array(\x, foo)
         $this->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)
-              ->atomIs('String', Analyzer::WITH_CONSTANTS)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation'), Analyzer::WITH_CONSTANTS)
               ->has('noDelimiter')
               ->savePropertyAs('noDelimiter', 'method')
               ->back('first')
               ->outWithRank('ARGUMENT', 0)
-              ->atomIs('String', Analyzer::WITH_CONSTANTS)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation', 'Staticclass'), Analyzer::WITH_CONSTANTS)
+              ->outIsIE('CLASS') // For Staticclass only
               ->inIs('DEFINITION')
+              ->atomIs('Class')
               ->outIs(array('MAGICMETHOD', 'METHOD'))
+              ->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
+
+        // array(\x, foo)
+        $this->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
+              ->is('count', 2)
+              ->outWithRank('ARGUMENT', 1)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation'), Analyzer::WITH_CONSTANTS)
+              ->has('noDelimiter')
+              ->savePropertyAs('noDelimiter', 'method')
+              ->back('first')
+              ->outWithRank('ARGUMENT', 0)
+              ->atomIs('Variable')
+              ->inIs('DEFINITION')
+              ->outIs('DEFAULT')
+              ->atomIs('New')
+              ->outIs('NEW')
+              ->inIs('DEFINITION')
+              ->atomIs('Class')
+              ->outIs(array('MAGICMETHOD', 'METHOD'))
+              ->atomIs(array('Method', 'Magicmethod'))
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addEto('DEFINITION', 'first')
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
