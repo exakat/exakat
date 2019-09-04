@@ -104,8 +104,6 @@ class Docs {
                              'ClassReview',
                              'LintButWontExec',
                              'Top10',
-                             'Suggestions',
-
                              );
 
     private $extras = array( 
