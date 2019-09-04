@@ -41,7 +41,7 @@ repeat( __.out("EXTENDS", "IMPLEMENTS")
  .hasLabel("Class", "Classanonymous", "Interface", "Trait")
 GREMLIN
 );
-            $command->setSack('[]');
+            $command->setSack(Command::SACK_ARRAY);
 
         } else {
             $command = new Command(<<<GREMLIN
@@ -55,7 +55,7 @@ emit( )
         .hasLabel("Class", "Classanonymous", "Interface", "Trait")
 GREMLIN
 );
-            $command->setSack('[]');
+            $command->setSack(Command::SACK_ARRAY);
         }
 
         return $command;

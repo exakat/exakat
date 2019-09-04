@@ -262,16 +262,18 @@ GREMLIN;
 
     private function prepareSack($commands, $toGremlin = self::TO_GREMLIN) {
         foreach($commands as $command) {
-            if ($command->getSack() !== null) {
-                if ($toGremlin === self::TO_GREMLIN) {
-                    return '.withSack{' . $command->getSack() . '}{it.clone()}';
-                } else {
-                    return $command->getSack();
-                }
+            if ($command->getSack() === Command::SACK_NONE) {
+                continue;
+            }
+
+            if ($toGremlin === self::TO_GREMLIN) {
+                return '.withSack' . $command->getSack();
+            } else {
+                return $command->getSack();
             }
         }
-        
-        return null;
+
+        return Command::SACK_NONE;
     }
     
     public function canSkip() : bool {

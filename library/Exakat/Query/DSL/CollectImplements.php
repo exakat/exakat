@@ -47,7 +47,7 @@ __.sideEffect{ ' . $variable . ' = []; }
   .fold() 
 )
 ');
-        $command->setSack('[]');
+        $command->setSack(Command::SACK_ARRAY);
         return $command;
     }
 }

@@ -24,10 +24,15 @@
 namespace Exakat\Query\DSL;
 
 class Command {
+    public const SACK_NONE    = '';
+    public const SACK_ARRAY   = '{ [] }{it.clone()}';
+    public const SACK_HASH    = '{ [:] }{it.clone()}';
+    public const SACK_INTEGER = '{ 0 }';
+
     private static $id = 0;
     public $gremlin    = '';
     public $arguments  = array();
-    private $sack      = null;
+    private $sack      = self::SACK_NONE;
     
     public function __construct(string $command, array $args = array()) {
         $c = substr_count($command, '***');
@@ -48,7 +53,13 @@ class Command {
         $this->arguments = $arguments;
     }
     
-    public function setSack($default = null) {
+    public function setSack($default = self::SACK_NONE) {
+        assert(in_array($default, array(self::SACK_NONE, 
+                                        self::SACK_ARRAY, 
+                                        self::SACK_HASH, 
+                                        self::SACK_INTEGER, 
+                                        ), \STRICT_COMPARISON), 
+              'Sack must be one of the allowed constant : "'.$default.'" provided');
         $this->sack = $default;
     }
 
@@ -57,7 +68,7 @@ class Command {
     }
     
     public function add(Command $other) {
-        $this->gremlin .= ".$other->gremlin";
+        $this->gremlin   .= ".{$other->gremlin}";
         $this->arguments += $other->arguments;
         
         return $this;
