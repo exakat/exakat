@@ -1160,6 +1160,32 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
+    protected function generateIndentationLevelsBreakdown(Section $section) {
+        // List of indentation used
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT key, value AS count FROM hashResults 
+WHERE name = "Indentation Levels"
+ORDER BY key ASC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['count'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+        
+        
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
     protected function generatePHPFunctionBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'
@@ -2393,6 +2419,9 @@ SQL;
                             'Php/ListWithReference'                 => '7.3+',
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
+
+                            'Structures/toStringThrowsException'    => '7.4-',
+                            'Php/TypedPropertyUsage'                => '7.4-',
                             'Php/UnpackingInsideArrays'             => '7.4+',
                             'Structures/CurlVersionNow'             => '7.4+',
                             'Structures/UseCovariance'              => '7.4-',
@@ -2402,6 +2431,8 @@ SQL;
                             'Structures/Php74ReservedKeyword'       => '7.4+',
                             'Functions/UseArrowFunctions'           => '7.4+',
                             'Type/IntegerSeparatorUsage'            => '7.4+',
+                            'Php/NoMoreCurlyArrays'                 => '7.4+',
+
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
                           );
@@ -4535,7 +4566,7 @@ JAVASCRIPT;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateComplexExpressions(Section $section) {
@@ -4554,7 +4585,7 @@ JAVASCRIPT;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $expressions);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateCodes(Section $section) {
