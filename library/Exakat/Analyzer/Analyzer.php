@@ -1929,15 +1929,20 @@ GREMLIN
 
         ++$this->queryCount;
 
-        if (count($result) === 0) {
+        $c = $result->toArray();
+        if (!is_array($c)) {
+            return 0;
+        }
+        $c = $c[0];
+        if (count($c) === 0) {
             return 0;
         }
 
-        $this->processedCount += count($result->toArray()[0]);
-        $this->rowCount       += count($result->toArray()[0]);
+        $this->processedCount += count($c);
+        $this->rowCount       += count($c);
 
         $valuesSQL = array();
-        foreach($result->toArray()[0] as $name => $count) {
+        foreach($c as $name => $count) {
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 
