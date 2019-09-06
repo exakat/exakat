@@ -222,11 +222,6 @@ class Dump extends Tasks {
                 $end = microtime(true);
                 $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             }
-            
-            $begin = microtime(true);
-            $this->collectCyclomaticComplexity();
-            $end = microtime(true);
-            $this->log->log( 'Collected Cyclomatic Complexity : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -1143,7 +1138,7 @@ SQL
 );
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait")
+g.V().hasLabel("Class", "Trait")
      .out('CONST')
 .sideEffect{ 
     x_public = it.get().values("visibility") == 'public';
@@ -1529,7 +1524,7 @@ GREMLIN;
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions');
-        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
@@ -1752,7 +1747,7 @@ GREMLIN;
 
               ->outIs('CLONE')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
 
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'called')
@@ -1841,7 +1836,7 @@ SQL
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions of classes');
-        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
@@ -1943,7 +1938,7 @@ GREMLIN
               ->outIs('RETURNTYPE')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
@@ -1975,7 +1970,7 @@ GREMLIN
 
         // Finding trait use
         $query = $this->newQuery('Traits');
-        $query->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2008,7 +2003,7 @@ GREMLIN
         $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
@@ -2048,7 +2043,7 @@ GREMLIN
 
               ->outIs('CLONE')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2083,7 +2078,7 @@ GREMLIN
 
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class','Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2247,47 +2242,6 @@ GREMLIN
         $this->sqlite->query($query);
     }
 
-    private function collectCyclomaticComplexity() {
-        $values = array();
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
-
-        $query = $this->newQuery('CyclomaticComplexity');
-        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->_as('name')
-              ->back('first')
-              ->outIs('BLOCK')
-              ->raw(<<<GREMLIN
-project("cc").by(
-    __.emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).coalesce(
-    __.hasLabel(
-    "Ifthen", "Case", "Default", "Foreach", "For" ,"Dowhile", "While", "Continue", 
-    "Catch", "Finally", "Throw", 
-    "Ternary", "Coalesce"
-    ),
-    __.hasLabel("Ifthen").out("THEN", "ELSE"),
-    __.hasLabel("Return").sideEffect{ ranked = it.get().value("rank");}.in("EXPRESSION").coalesce( __.filter{ it.get().value("count") != ranked + 1;},
-                                                                                                   __.not(where(__.in("BLOCK").hasLabel("Function"))))
-    ).count()
-).select("first","cc").by("fullnspath").by()
-GREMLIN
-,array(), array());
-        $query->prepareRawQuery();
-        $cc = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        foreach($cc->toArray() as $row) {
-            ++$row['cc'];
-            $values[] = "('CyclomaticComplexity', '{$row['first']}', '{$row['cc']}')";
-        }
-
-        if(empty($values)) {
-            return;
-        }
-
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
-        $this->sqlite->query($query);
-    }
-
     private function collectClassDepth() {
         $query = <<<'GREMLIN'
 g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
@@ -2311,42 +2265,42 @@ GREMLIN;
 
     private function collectMethodsCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
     private function collectPropertyCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
     private function collectClassTraitsCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
     }
 
     private function collectClassInterfaceCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassInterfaces');
     }
 
     private function collectClassChildrenCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class", "Classanonymous").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassChildren');
     }
 
     private function collectConstantCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
     }
