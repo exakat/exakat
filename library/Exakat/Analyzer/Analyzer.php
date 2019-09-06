@@ -1934,7 +1934,7 @@ GREMLIN
             return 0;
         }
         $c = $c[0];
-        if (count($c) === 0) {
+        if (!is_array($c) || count($c) === 0) {
             return 0;
         }
 
