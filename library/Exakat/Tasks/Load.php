@@ -2274,7 +2274,20 @@ class Load extends Tasks {
             }
 
             if ($index === 0) {
-                $fullcode[] = ' ';
+                if ($atom === 'List') {
+                    $index = $this->addAtomVoid();
+
+                    $index->rank = ++$rank;
+                    $argumentsId[] = $index;
+                    $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
+    
+                    $this->addLink($arguments, $index, 'ARGUMENT');
+    
+                    $fullcode[] = $index->fullcode;
+                    $argumentsList[] = $index;
+                } else {
+                    $fullcode[] = ' ';
+                }
             } else {
                 $index->rank = ++$rank;
                 $argumentsId[] = $index;
