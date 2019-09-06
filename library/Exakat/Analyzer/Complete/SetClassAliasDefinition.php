@@ -40,8 +40,8 @@ class SetClassAliasDefinition extends Analyzer {
               ->dedup('')
               ->setProperty('fullnspath', 'fnp')
               ->addEFrom('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
