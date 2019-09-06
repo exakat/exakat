@@ -23,7 +23,7 @@
 namespace Exakat;
 
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
-use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig, Config as Configsource };
+use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, RulesetConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Exakat\Autoload\AutoloadDev;
@@ -119,7 +119,7 @@ class Config {
         }
 
         // then read the config for the project in its folder
-        if ($this->commandLineConfig->get('project') === null) {
+        if ($this->commandLineConfig->get('project')->isDefault()) {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
@@ -160,7 +160,7 @@ class Config {
             $this->remotes = $remote->toArray();
         }
 
-        $rulesets = new ThemaConfig($this->projects_root);
+        $rulesets = new RulesetConfig($this->projects_root);
         if ($file = $rulesets->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
             $this->rulesets = $rulesets->toArray();
