@@ -229,7 +229,10 @@ class Project extends Tasks {
         $firstDump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
         $firstDump->run();
         unset($firstDump);
-        $this->logTime('Dumped and inited');
+        $this->logTime('Initial dump');
+
+        // Dumps, when moved to the Analyzer category
+        $this->analyzeRulesets(array('Dump'), $audit_start, $this->config->verbose);
 
         if (empty($this->config->program)) {
             $this->analyzeRulesets($rulesetsToRun, $audit_start, $this->config->verbose);
@@ -396,6 +399,9 @@ class Project extends Tasks {
                                    'graphLinks'   => $links);
                 $this->datastore->addRow('hash', $finalMark);
                 
+                // Skip Dump, as it is auto-saving itself.
+                if ($ruleset === 'Dump') { continue; }
+
                 $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
                 $dump->run();
                 $dump->finalMark($finalMark);
@@ -403,6 +409,7 @@ class Project extends Tasks {
                 unset($dumpConfig);
                 gc_collect_cycles();
                 $this->logTime("Dumped : $ruleset");
+                
             } catch (\Exception $e) {
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
                 file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
