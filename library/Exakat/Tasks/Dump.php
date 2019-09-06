@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -950,6 +950,8 @@ GREMLIN;
         display("$total uses \n");
 
         // Methods
+        $methodCount = 0;
+        $methodIds = array();
         $this->sqlite->query('DROP TABLE IF EXISTS methods');
         $this->sqlite->query(<<<'SQL'
 CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -965,13 +967,14 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-        
+
         $query = <<<GREMLIN
-g.V().hasLabel("Method", "Usetrait")
+g.V().hasLabel("Method", "Magicmethod")
     .coalesce( 
             __.out("BLOCK").out("EXPRESSION").hasLabel("As"),
             __.hasLabel("Method", "Magicmethod")
      )
+     .sideEffect{ returntype = 'None'; }
      .where(
         __.coalesce( 
             __.out("AS").sideEffect{alias = it.get().value("fullcode")}.in("AS")
@@ -987,18 +990,22 @@ g.V().hasLabel("Method", "Usetrait")
                    .sideEffect{ lines.add(it.get().value("line")); }
                    .fold()
           )
+          .where( __.out('RETURNTYPE').sideEffect{ returntype = it.get().value("fullcode")}.fold())
+          .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
           .map{ 
 
     if (alias == false) {
-        name = it.get().value("fullcode");
+        signature = it.get().value("fullcode");
     } else {
-        name = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
+        signature = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
     }
 
-    x = ["name": name,
+    x = ["signature": signature,
+         "name":name,
          "abstract":it.get().properties("abstract").any(),
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
+         "returntype": returntype,
 
          "public":    it.get().value("visibility") == "public",
          "protected": it.get().value("visibility") == "protected",
@@ -1030,7 +1037,9 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+            $methodIds[$row['class'].'::'.strtolower($row['name'])] = ++$methodCount;
+
+            $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['signature']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
                         ', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
@@ -1043,6 +1052,74 @@ GREMLIN;
         }
 
         display("$total methods\n");
+
+        // Arguments
+        $this->sqlite->query('DROP TABLE IF EXISTS arguments');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE arguments (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name STRING,
+                        citId INTEGER,
+                        methodId INTEGER,
+                        rank INTEGER,
+                        reference INTEGER,
+                        variadic INTEGER,
+                        init STRING,
+                        typehint STRING
+                     )
+SQL
+);
+
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Parameter").as('first')
+.in('ARGUMENT')
+.where( __.out('NAME').sideEffect{ methode = it.get().value("fullcode").toString().toLowerCase() }.fold())
+.in('METHOD', 'MAGICMETHOD')
+.hasLabel('Class')
+.sideEffect{ classe = it.get().value("fullnspath")}
+
+.select('first')
+
+.sideEffect{
+    init = 'None';
+    typehint = 'None';
+}
+.where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
+.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode")}.fold())
+.where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.map{ 
+    x = ["name": name,
+         "rank":it.get().value("rank"),
+         "variadic":it.get().properties("variadic").any(),
+         "reference":it.get().properties("reference").any(),
+
+         "classe":classe,
+         "methode":methode,
+
+         "init": init,
+         "typehint":typehint,
+         ];
+}
+
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'].'::'.$row['methode']] .
+                        ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
+                        ', \'' . $row['typehint'] . '\')';
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO arguments ("name", "rank", "citId", "methodId", "init", "reference", "variadic", "typehint") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total arguments\n");
 
         // Properties
         $this->sqlite->query('DROP TABLE IF EXISTS properties');
