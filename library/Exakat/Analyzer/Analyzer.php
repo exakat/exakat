@@ -44,6 +44,7 @@ abstract class Analyzer {
     const QUERY_RAW      = 4; // returns data, no storage
     const QUERY_HASH     = 5; // returns a list of values
     const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
+    const QUERY_ARRAYS   = 7; // arrays of array
 
     public static $datastore  = null;
 
@@ -1895,7 +1896,11 @@ GREMLIN;
             case self::QUERY_HASH: 
                 $this->storeToHashResults();
                 break;
-            
+
+            case self::QUERY_ARRAYS: 
+                $this->storeArraysToHashResult();
+                break;
+
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph();
@@ -1905,7 +1910,7 @@ GREMLIN;
          // initializing a new query
         $this->initNewQuery();
     }
-    
+
     private function storeToHashResults() {
         ++$this->queryId;
 
@@ -1933,6 +1938,37 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($result->toArray()[0] as $name => $count) {
+            $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
+        }
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
+    }
+
+    private function storeArraysToHashResult() {
+        ++$this->queryId;
+
+        $this->query->prepareQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+
+        ++$this->queryCount;
+
+        if (count($result) === 0) {
+            return 0;
+        }
+
+        $this->processedCount += count($result->toArray());
+        $this->rowCount       += count($result->toArray());
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            list($name, $count) = array_values($row);
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 
