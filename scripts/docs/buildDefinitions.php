@@ -61,7 +61,7 @@ class Docs {
     private $extension_list_rst     = '';
     private $library_list           = array();
     private $reports_list           = '';
-    private $themes_list            = '';
+    private $ruleset_list           = '';
     private $external_services_list = '';
     private $analyzer_introduction  = '';
     private $url_list               = '';
@@ -71,7 +71,7 @@ class Docs {
     private $parameter_list         = array();
     private $glossary               = array();
     private $text                   = '';
-    private $ini_themes_config      = '';
+    private $ini_ruleset_config      = '';
     private $php_error_list         = array();
     private $exakat_extension_list  = '';
     private $exakat_extension_det   = '';
@@ -192,12 +192,12 @@ class Docs {
         $this->getPhpError();//PHP_ERROR_MESSAGES
         $this->getExtensions();
         $this->getReportList();
-        $this->getThemesList();
+        $this->getRulesetList();
         $this->getExternalServicesList();
         $this->generateAnalyzerList();
         $this->makeUrlList();
         $this->getExternalLibrary();
-        $this->prepareIniThemes();
+        $this->prepareIniRulesets();
 
         $this->prepareExakatExtensions();
         $this->prepareDevelopment();
@@ -283,12 +283,12 @@ class Docs {
         $this->reports_list = '  * '.implode("\n  * ", $reports_list)."\n";
     }
 
-    private function getThemesList() {
+    private function getRulesetList() {
         $res = $this->analyzers->query('SELECT name FROM categories c ORDER BY name');
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $themes_list[] = '* '.$row[0];
         }
-        $this->themes_list = implode("\n", $themes_list);
+        $this->rulesets_list = implode("\n", $themes_list);
     }
 
     private function getExternalServicesList() {
@@ -433,7 +433,7 @@ SQL
                             'ANALYZER_INTRODUCTION'  => $this->analyzer_introduction,
                             'EXTERNAL_SERVICES_LIST' => $this->external_services_list,
                             'REPORTS_LIST'           => $this->reports_list,
-                            'THEMES_LIST'            => $this->themes_list,
+                            'RULESETS_LIST'          => $this->rulesets_list,
                             'URL_LIST'               => $this->url_list,
                             'EXAKAT_VERSION'         => $this->exakat_version,
                             'EXAKAT_BUILD'           => $this->exakat_build,
@@ -442,7 +442,7 @@ SQL
                             'APPLICATIONS'           => $this->applications,
                             'ISSUES_EXAMPLES'        => implode('', $this->issues_examples),
                             'PARAMETER_LIST'         => implode('', $this->parameter_list),
-                            'INI_THEMES'             => $this->ini_themes_config,
+                            'INI_RULESETS'           => $this->ini_rulesets_config,
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
                             'EXAKAT_EXTENSION_LIST'  => $this->exakat_extension_list,
                             'EXTENSION_DETAILS'      => $this->exakat_extension_det,
@@ -545,6 +545,7 @@ $exampleTxt
             } elseif (count($reportIni['themes']) === 1) {
                 $section .= $reportIni['name']. " depends on the following theme : ".array_pop($reportIni['themes']).".\n\n";
             } else {
+                $c = count($reportIni['themes']);
                 $section .= $reportIni['name']. " depends on the following $c themes : ".implode(', ', $reportIni['themes']).".\n\n";
             }
     
@@ -761,7 +762,7 @@ SPHINX;
         }
         
         $info = array( array('Short name',  $commandLine),
-                       array('Themes',      $rulesets),
+                       array('Rulesets',      $rulesets),
                       );
     
         if (isset($ini['phpversion'])) {
@@ -790,7 +791,7 @@ SPHINX;
         return array($desc, $ini['name']);
     }
     
-    private function prepareIniThemes() {
+    private function prepareIniRulesets() {
         $rulesetsList = '"'.implode('","',$this->rulesets).'"';
 
         $query = <<<SQL
@@ -808,14 +809,14 @@ SQL;
         $config = array();
         $list = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $list[] = "`$row[name] <theme_ini_".strtolower($row['name']).">`_";
+            $list[] = "`$row[name] <ruleset_ini_".strtolower($row['name']).">`_";
             $analyzers = explode(',', $row['analyzers']);
             sort($analyzers);
             $analyzers = implode(',', $analyzers);
-            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
+            $config[] = "\n.. _ruleset_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
         }
         
-        $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".implode("\n* ", $list)."\n\n\n".implode("\n\n", $config);
+        $this->ini_ruleset_config = count($list)." rulesets detailled here : \n\n* ".implode("\n* ", $list)."\n\n\n".implode("\n\n", $config);
     }
 
     private function prepareText() {
@@ -1148,7 +1149,7 @@ GLOSSARY;
         ksort($list);
         $doc .= '* '.implode("\n* ", $list).PHP_EOL.PHP_EOL.PHP_EOL;
         
-        // Include other themas than All and $ext->name
+        // Include other rulesets than All and $ext->name
         $doc .= "{$ext->name} rulesets".PHP_EOL;
         $doc .= str_repeat('_', 50).PHP_EOL.PHP_EOL;
 
