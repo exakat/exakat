@@ -58,6 +58,38 @@ class ShouldUseForeach extends Analyzer {
              ->samePropertyAs('code', 'blind')
              ->back('first');
         $this->prepareQuery();
+
+        //while($value = array_shift($array)) 
+        $this->atomIs(array('Dowhile', 'While'))
+             ->outIs('CONDITION')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->functioncallIs(array('\\array_shift',
+                                    '\\array_pop',
+                                    ))
+             ->back('first');
+        $this->prepareQuery();
+
+        //while(!empty($array)) {$value = array_shift($array)}
+        $this->atomIs(array('Dowhile', 'While'))
+             ->outIs('CONDITION')
+             ->atomIs('Not')
+             ->outIs('NOT')
+             ->atomIs('Empty')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Functioncall')
+             ->functioncallIs(array('\\array_shift',
+                                    '\\array_pop',
+                                    ))
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
