@@ -1,15 +1,13 @@
 <?php
 
-$expected     = array('51', 
-                      '5', 
-                      '5',
+$expected     = array('function foo5( ) { /**/ } ',
                      );
 
-$expected_not = array('1',
-                      '2',
-                      '3',
-                      '4',
-                      '{ /**/ }',
+$expected_not = array('function foo1( ) { /**/ } ',
+                      'function foo2( ) { /**/ } ',
+                      'function foo3( ) { /**/ } ',
+                      'function foo4( ) { /**/ } ',
+                      
                      );
 
 ?>
