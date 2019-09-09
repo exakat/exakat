@@ -80,7 +80,30 @@ SQL
 
         // collect cit
         $res = $this->sqlite->query(<<<SQL
-SELECT * FROM cit
+SELECT cit.*, 
+       cit.type AS type, 
+       GROUP_CONCAT(traits.implements, ',') AS use, 
+       GROUP_CONCAT(CASE WHEN cit4.id IS NULL THEN interfaces.implements ELSE cit4.name END, ',') AS implements,
+
+        CASE WHEN cit2.extends IS NULL THEN cit.extends ELSE cit2.name END AS extends FROM cit
+LEFT JOIN cit cit2 
+    ON cit.extends = cit2.id
+
+
+LEFT JOIN cit_implements AS traits
+    ON traits.implementing = cit.id AND
+       traits.type = 'use'
+
+
+
+LEFT JOIN cit_implements AS interfaces
+    ON interfaces.implementing = cit.id AND
+       interfaces.type = 'implements'
+LEFT JOIN cit cit4
+    ON interfaces.implements = cit4.id
+
+
+GROUP BY cit.id
 SQL
         );
         
