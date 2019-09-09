@@ -35,22 +35,23 @@ class CloneWithNonObject extends Analyzer {
              // can't return a scalar, a nullable, or anything untyped
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->atomIs(self::$CALLS)
-                             ->inIs('DEFINITION')
-                             ->outIs('RETURNTYPE')
-                             ->isNot('nullable', true)
-                             ->fullnspathIsNot($scalartypes)
-                     )
+                     ->atomIs(self::$CALLS)
+                     ->inIs('DEFINITION')
+                     ->outIs('RETURNTYPE')
+                     ->isNot('nullable', true)
+                     ->fullnspathIsNot($scalartypes)
              )
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->atomIs(self::$CALLS)
-                             ->hasNoIn('DEFINITION')
-                     )
+                     ->atomIs(self::$CALLS)
+                     ->hasNoIn('DEFINITION')
+             )
+             ->not(
+                $this->side()
+                     ->atomIs(array('Member'))
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->atomIsNot(array('Null', 'New', 'Clone'))
              )
              ->back('first');
         $this->prepareQuery();
