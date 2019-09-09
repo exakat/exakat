@@ -595,9 +595,9 @@ class Load extends Tasks {
                 }
         
                 $this->processFile($file, $this->config->code_dir);
-            } catch (CantCompileFile $e) {
+            } catch (CantCompileFile $e1) {
                 // Ignore
-            } catch (NoFileToProcess $e) {
+            } catch (NoFileToProcess $e2) {
                 // Ignore
             }
         }
