@@ -1165,7 +1165,7 @@ SQL
         $res = $this->sqlite->query(<<<'SQL'
 SELECT key, value AS count FROM hashResults 
 WHERE name = "Indentation Levels"
-ORDER BY key ASC
+ORDER BY key + 0 ASC
 SQL
         );
         $html = '';
@@ -3816,8 +3816,8 @@ SQL
 SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
  visibility, constant, value
 FROM cit
-JOIN constants 
-    ON constants.citId = cit.id
+JOIN classconstants 
+    ON classconstants.citId = cit.id
 JOIN namespaces 
     ON cit.namespaceId = namespaces.id
 WHERE type="class"
