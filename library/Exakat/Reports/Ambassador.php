@@ -2341,6 +2341,7 @@ SQL;
                             'Php/TypedPropertyUsage'                => '7.4-',
                             'Structures/UseCovariance'              => '7.4-',
                             'Structures/UseContravariance'          => '7.4-',
+                            'Php/Php74NewDirective'                 => '7.4-',
                             'Php/SpreadOperatorForArray'            => '7.4+',
                             'Php/UnpackingInsideArrays'             => '7.4+',
                             'Structures/CurlVersionNow'             => '7.4+',
@@ -4811,7 +4812,7 @@ SQL;
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     protected function generateAppinfo(Section $section) {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();
