@@ -1,9 +1,13 @@
 <?php
 
-$expected     = array('compact(\'a\', \'b\')',
+$expected     = array('$a', 
+                      '$s = 1', 
+                      '$p = 2', 
+                      '$pp', 
+                      '$g',
                      );
 
-$expected_not = array('compact($c)',
+$expected_not = array('$ppp = null',
                      );
 
 ?>
