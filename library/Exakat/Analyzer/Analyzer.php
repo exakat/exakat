@@ -1930,7 +1930,7 @@ GREMLIN
         ++$this->queryCount;
 
         $c = $result->toArray();
-        if (!is_array($c)) {
+        if (!is_array($c) || !isset($c[0])) {
             return 0;
         }
         $c = $c[0];
