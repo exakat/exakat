@@ -2207,7 +2207,7 @@ SQL;
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateAnalyzersList(Section $section) {
@@ -2222,7 +2222,7 @@ SQL;
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateExternalLib(Section $section) {
@@ -2322,7 +2322,7 @@ SQL;
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateCompatibilityEstimate(Section $section) {
@@ -4013,7 +4013,7 @@ SQL
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CHANGED_CLASSES', $changedClasses);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateClassDepth(Section $section) {
@@ -4558,7 +4558,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'TITLE',       $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', $section->title);
         $html = $this->injectBloc($html, 'CONTENT',     'This section is empty : no result where found.');
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateStats(Section $section) {
@@ -4809,7 +4809,7 @@ SQL;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
     
     protected function generateAppinfo(Section $section) {
