@@ -193,7 +193,14 @@ SQL;
         $res = $this->sqlite->query($query);
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['return']] = explode(',', $row['functions']);
+            $types = explode(',', $row['return']);
+            foreach($types as $type) {
+                array_collect_by($return, $type, explode(',', $row['functions']));
+            }
+        }
+        
+        foreach($return as $type => &$list) {
+            $list = array_merge(...$list);
         }
 
         return $return;
