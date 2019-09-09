@@ -705,7 +705,7 @@ GREMLIN;
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
-                                                             implements INTEGER,
+                                                             implements TEXT,
                                                              type    TEXT
                                                  )');
 
@@ -1014,6 +1014,7 @@ GREMLIN;
 
         $total = 0;
         $query = array();
+        $unique = array();
         foreach($res as $row) {
             if ($row['public']) {
                 $visibility = 'public';
@@ -1028,7 +1029,11 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $methodIds[$row['class'].'::'.strtolower($row['name'])] = ++$methodCount;
+            $methodId = $row['class'].'::'.strtolower($row['name']);
+            if (isset($methodIds[$methodId])) {
+                continue; // skip double
+            }
+            $methodIds[$methodId] = ++$methodCount;
 
             $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['signature']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
@@ -1163,6 +1168,9 @@ GREMLIN;
 
         $total = 0;
         $query = array();
+        $propertyId = '';
+        $propertyIds = array();
+        $propertyCount = 0;
         foreach($res as $row) {
             if ($row['public']) {
                 $visibility = 'public';
@@ -1180,6 +1188,11 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
+            $propertyId = $row['class'].'::'.$row['name'];
+            if (isset($propertyIds[$propertyId])) {
+                continue; // skip double
+            }
+            $propertyIds[$propertyId] = ++$propertyCount;
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
                         ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] . ')';
