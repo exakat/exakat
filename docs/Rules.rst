@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 02 Sep 2019 14:18:03 +0000
-.. comment: Generation hash : 16021a9bc63f0cee0249a95ae949cbd1542beae9
+.. comment: Generation date : Tue, 10 Sep 2019 07:31:59 +0000
+.. comment: Generation hash : 52d95dc40dee255aa854f163b6b3c694d43acdfb
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -42,7 +42,7 @@ See also `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variab
 +-------------+---------------------------+
 | Short name  | Php/RawPostDataUsage      |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP56` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -122,7 +122,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Classes/ThisIsForClasses                |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -177,7 +177,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Classes/ThisIsNotAnArray |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -232,7 +232,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/ThisIsNotForStatic                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -289,7 +289,7 @@ Suggestions
 +-------------+--------------------------------------------------------------+
 | Short name  | Php/NewExponent                                              |
 +-------------+--------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                           |
+| Rulesets    | :ref:`Suggestions`                                           |
 +-------------+--------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                 |
 +-------------+--------------------------------------------------------------+
@@ -348,7 +348,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Short name  | Php/StaticclassUsage                                 |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                         |
 +-------------+------------------------------------------------------+
@@ -396,7 +396,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/Noscream                                                                   |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`                                                   |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                   |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -449,7 +449,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Classes/AbstractOrImplements              |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`    |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`    |
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
@@ -489,7 +489,7 @@ See also `Why does PHP 5.2+ disallow abstract static class methods? <https://sta
 +-------------+------------------------+
 | Short name  | Classes/AbstractStatic |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Php Version | With PHP 7.0 and older |
 +-------------+------------------------+
@@ -524,7 +524,7 @@ It is not allowed to access protected properties or methods from outside the cla
 +-------------+-------------------------+
 | Short name  | Classes/AccessProtected |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
@@ -560,7 +560,7 @@ List of calls to private properties/methods that will compile but yield some fat
 +-------------+-----------------------+
 | Short name  | Classes/AccessPrivate |
 +-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
+| Rulesets    | :ref:`Analyze`        |
 +-------------+-----------------------+
 | Severity    | Major                 |
 +-------------+-----------------------+
@@ -601,7 +601,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------+
 | Short name  | Functions/AddDefaultValue                                                      |
 +-------------+--------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                             |
+| Rulesets    | :ref:`Suggestions`                                                             |
 +-------------+--------------------------------------------------------------------------------+
 | Severity    | Minor                                                                          |
 +-------------+--------------------------------------------------------------------------------+
@@ -655,7 +655,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/AddZero                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -706,7 +706,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Functions/AliasesUsage                                                              |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                      |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -747,7 +747,7 @@ See also `Predefined Variables <http://php.net/manual/en/reserved.variables.php>
 +-------------+------------------------------------------------+
 | Short name  | Variables/VariableUppercase                    |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -814,7 +814,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Interfaces/AlreadyParentsInterface                                                                    |
 +-------------+-------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                                    |
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------+
@@ -869,7 +869,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Traits/AlreadyParentsTrait |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -922,7 +922,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/AlteringForeachWithoutReference                                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -965,7 +965,7 @@ This analysis reports files that are using both syntax at the same time. This is
 +-------------+-----------------------------------------+
 | Short name  | Structures/AlternativeConsistenceByFile |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -1023,7 +1023,7 @@ See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/def
 +-------------+----------------------+
 | Short name  | Security/AnchorRegex |
 +-------------+----------------------+
-| Themes      | :ref:`Security`      |
+| Rulesets    | :ref:`Security`      |
 +-------------+----------------------+
 | Severity    | Major                |
 +-------------+----------------------+
@@ -1064,7 +1064,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Structures/NeverNegative                |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -1117,7 +1117,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Performances/Php74ArrayKeyExists |
 +-------------+----------------------------------+
-| Themes      | :ref:`Performances`              |
+| Rulesets    | :ref:`Performances`              |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -1167,7 +1167,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------+
 | Short name  | Arrays/AmbiguousKeys                                                       |
 +-------------+----------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                             |
+| Rulesets    | :ref:`Analyze`                                                             |
 +-------------+----------------------------------------------------------------------------+
 | Severity    | Minor                                                                      |
 +-------------+----------------------------------------------------------------------------+
@@ -1211,7 +1211,7 @@ Try to keep the methods simple and unique. Consider renaming the methods and pro
 +-------------+-------------------------+
 | Short name  | Classes/AmbiguousStatic |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -1265,7 +1265,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Classes/AmbiguousVisibilities              |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Minor                                      |
 +-------------+--------------------------------------------+
@@ -1296,7 +1296,7 @@ Anonymous classes.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/Anonymous                                                                                          |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -1342,7 +1342,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/ShouldBeTypehinted                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                            |
+| Rulesets    | :ref:`Suggestions`                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -1400,7 +1400,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Php/AssertFunctionIsReserved              |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
 +-------------+-------------------------------------------+
 | Severity    | Critical                                  |
 +-------------+-------------------------------------------+
@@ -1455,7 +1455,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Structures/AssigneAndCompare |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -1510,7 +1510,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/MakeDefault                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
@@ -1563,7 +1563,7 @@ Suggestions
 +-------------+-------------------------------+
 | Short name  | Php/AssignAnd                 |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Critical                      |
 +-------------+-------------------------------+
@@ -1611,7 +1611,7 @@ Incremental changes to a variables are not reported here.
 +-------------+-------------------------------+
 | Short name  | Variables/AssignedTwiceOrMore |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -1655,7 +1655,7 @@ Suggestions
 +-------------+-------------------------+
 | Short name  | Performances/Autoappend |
 +-------------+-------------------------+
-| Themes      | :ref:`Performances`     |
+| Rulesets    | :ref:`Performances`     |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -1706,7 +1706,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------+
 | Short name  | Performances/NoConcatInLoop                                                              |
 +-------------+------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Top10`                                                        |
+| Rulesets    | :ref:`Performances`, :ref:`Top10`                                                        |
 +-------------+------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                    |
 +-------------+------------------------------------------------------------------------------------------+
@@ -1791,7 +1791,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 +-------------+------------------------------------+
 | Short name  | Structures/NoAssignationInFunction |
 +-------------+------------------------------------+
-| Themes      | :ref:`Performances`                |
+| Rulesets    | :ref:`Performances`                |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -1841,7 +1841,7 @@ See also `Avoid optional services as much as possible <http://bestpractices.thec
 +-------------+---------------------------------+
 | Short name  | Classes/AvoidOptionalProperties |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
@@ -1880,7 +1880,7 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 +-------------+------------------------------------+
 | Short name  | Structures/PrintWithoutParenthesis |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -1929,7 +1929,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Php/AvoidReal                    |
 +-------------+----------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Top10` |
+| Rulesets    | :ref:`Suggestions`, :ref:`Top10` |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -1982,7 +1982,7 @@ Suggestions
 +-------------+---------------------------------+
 | Short name  | Interfaces/AvoidSelfInInterface |
 +-------------+---------------------------------+
-| Themes      | :ref:`ClassReview`              |
+| Rulesets    | :ref:`ClassReview`              |
 +-------------+---------------------------------+
 | Severity    | Critical                        |
 +-------------+---------------------------------+
@@ -2026,7 +2026,7 @@ See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algo
 +-------------+---------------------------+
 | Short name  | Security/AvoidThoseCrypto |
 +-------------+---------------------------+
-| Themes      | :ref:`Security`           |
+| Rulesets    | :ref:`Security`           |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -2075,7 +2075,7 @@ If you need a ``stdClass`` object, it is faster to build it as an array, then ca
 +-------------+-----------------+
 | Short name  | Php/UseStdclass |
 +-------------+-----------------+
-| Themes      | :ref:`Analyze`  |
+| Rulesets    | :ref:`Analyze`  |
 +-------------+-----------------+
 | Severity    | Minor           |
 +-------------+-----------------+
@@ -2127,7 +2127,7 @@ This is a micro-optimisation.
 +-------------+-----------------------------+
 | Short name  | Performances/AvoidArrayPush |
 +-------------+-----------------------------+
-| Themes      | :ref:`Performances`         |
+| Rulesets    | :ref:`Performances`         |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -2179,7 +2179,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Structures/NoArrayUnique |
 +-------------+--------------------------+
-| Themes      | :ref:`Performances`      |
+| Rulesets    | :ref:`Performances`      |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -2225,7 +2225,7 @@ See also `get_class <http://php.net/get_class>`_ and `Instanceof <http://php.net
 +-------------+--------------------------------+
 | Short name  | Structures/UseInstanceof       |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Analyze` |
+| Rulesets    | :ref:`Analyze`, :ref:`Analyze` |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -2282,7 +2282,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------+
 | Short name  | Performances/NoGlob                                                    |
 +-------------+------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                    |
+| Rulesets    | :ref:`Performances`                                                    |
 +-------------+------------------------------------------------------------------------+
 | Severity    | Major                                                                  |
 +-------------+------------------------------------------------------------------------+
@@ -2323,7 +2323,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Php/AvoidMbDectectEncoding |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -2379,7 +2379,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/AvoidOptionArrays          |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -2420,7 +2420,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Php/AvoidSetErrorHandlerContextArg                                                                    |
 +-------------+-------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP72`                                                                             |
+| Rulesets    | :ref:`CompatibilityPHP72`                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------+
@@ -2465,7 +2465,7 @@ As much as possible, avoid delaying the end of the script.
 +-------------+------------------+
 | Short name  | Security/NoSleep |
 +-------------+------------------+
-| Themes      | :ref:`Security`  |
+| Rulesets    | :ref:`Security`  |
 +-------------+------------------+
 | Severity    | Minor            |
 +-------------+------------------+
@@ -2510,7 +2510,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------+
 | Short name  | Constants/BadConstantnames                                                              |
 +-------------+-----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                          |
 +-------------+-----------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
@@ -2605,7 +2605,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------+
 | Short name  | Structures/BailOutEarly                                                        |
 +-------------+--------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                 |
+| Rulesets    | :ref:`Analyze`                                                                 |
 +-------------+--------------------------------------------------------------------------------+
 | Severity    | Minor                                                                          |
 +-------------+--------------------------------------------------------------------------------+
@@ -2636,7 +2636,7 @@ List of all the integer values using the binary format.
 +-------------+------------------------------+
 | Short name  | Type/Binary                  |
 +-------------+------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`    |
+| Rulesets    | :ref:`CompatibilityPHP53`    |
 +-------------+------------------------------+
 | Php Version | With PHP 5.4 and more recent |
 +-------------+------------------------------+
@@ -2677,7 +2677,7 @@ It is generally considered a bad practice, as readability is lower and there are
 +-------------+------------------------------------------------+
 | Short name  | Structures/Bracketless                         |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -2719,7 +2719,7 @@ It is not possible anymore to include a piece of code inside a loop that will th
 +-------------+-------------------------------------------+
 | Short name  | Structures/BreakOutsideLoop               |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +-------------+-------------------------------------------+
 | Php Version | With PHP 7.0 and older                    |
 +-------------+-------------------------------------------+
@@ -2757,7 +2757,7 @@ Cannot `break <http://www.php.net/manual/en/control-structures.break.php>`_ 0, a
 +-------------+---------------------------+
 | Short name  | Structures/Break0         |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.4 and older    |
 +-------------+---------------------------+
@@ -2799,7 +2799,7 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
 +-------------+----------------------------+
 | Short name  | Structures/BreakNonInteger |
 +-------------+----------------------------+
-| Themes      | :ref:`CompatibilityPHP54`  |
+| Rulesets    | :ref:`CompatibilityPHP54`  |
 +-------------+----------------------------+
 | Php Version | With PHP 5.4 and older     |
 +-------------+----------------------------+
@@ -2845,7 +2845,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/BuriedAssignation                                                          |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                        |
+| Rulesets    | :ref:`Analyze`                                                                        |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -2894,7 +2894,7 @@ Depending on the load of the called method, this may increase the speed of the l
 +------------+---------------------------------------+
 | Short name | Performances/CacheVariableOutsideLoop |
 +------------+---------------------------------------+
-| Themes     | :ref:`Performances`                   |
+| Rulesets   | :ref:`Performances`                   |
 +------------+---------------------------------------+
 
 
@@ -2925,8 +2925,18 @@ When used with `array_map() <http://www.php.net/array_map>`_ functions, the call
    global $sum = 0;
    $filtered = array_filter($array, function () {global $sum; $sum += $x; });
    
+   // register_shutown_function() doesn't require any return
+   register_shutown_function(my_shutdown);
+   
    ?>
 
+
+The following functions are omitted, as they don't require the return : 
+
++ `forward_static_call_array() <http://www.php.net/forward_static_call_array>`_
++ `forward_static_call() <http://www.php.net/forward_static_call>`_
++ `register_shutdown_function() <http://www.php.net/register_shutdown_function>`_
++ `register_tick_function() <http://www.php.net/register_tick_function>`_
 
 See also `array_map <http://php.net/array_map>`_.
 
@@ -2940,7 +2950,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Functions/CallbackNeedsReturn                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                           |
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -2978,7 +2988,7 @@ Either the function use a reference in its signature, either the reference won't
 +-------------+------------------------------------+
 | Short name  | Structures/CalltimePassByReference |
 +-------------+------------------------------------+
-| Themes      | :ref:`CompatibilityPHP54`          |
+| Rulesets    | :ref:`CompatibilityPHP54`          |
 +-------------+------------------------------------+
 | Php Version | With PHP 5.4 and older             |
 +-------------+------------------------------------+
@@ -3020,7 +3030,7 @@ See also `Warn when counting non-countable types <http://php.net/manual/en/migra
 +-------------+---------------------------------+
 | Short name  | Structures/CanCountNonCountable |
 +-------------+---------------------------------+
-| Themes      | :ref:`CompatibilityPHP72`       |
+| Rulesets    | :ref:`CompatibilityPHP72`       |
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
@@ -3075,7 +3085,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Short name  | Classes/CantExtendFinal                      |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +-------------+----------------------------------------------+
 | Severity    | Critical                                     |
 +-------------+----------------------------------------------+
@@ -3112,7 +3122,7 @@ See also `Throwable <http://php.net/manual/en/class.throwable.php>`_, `Exception
 +-------------+----------------------------------------+
 | Short name  | Exceptions/CantThrow                   |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
@@ -3145,7 +3155,7 @@ See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/al
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/CantInheritAbstractMethod                                                                                                                                |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and more recent                                                                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3193,7 +3203,7 @@ See also `In a PHP5 class, when does a private constructor get called? <https://
 +-------------+-----------------------------------------------+
 | Short name  | Classes/CantInstantiateClass                  |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Analyze`                                |
+| Rulesets    | :ref:`Analyze`                                |
 +-------------+-----------------------------------------------+
 | Severity    | Critical                                      |
 +-------------+-----------------------------------------------+
@@ -3233,7 +3243,7 @@ See also `Cant Use Return Value In Write Context <https://stackoverflow.com/ques
 +-------------+------------------------------------------------------+
 | Short name  | Php/CantUseReturnValueInWriteContext                 |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                         |
 +-------------+------------------------------------------------------+
@@ -3280,7 +3290,7 @@ See also `define <http://php.net/manual/en/function.define.php>`_.
 +-------------+------------------------------------+
 | Short name  | Constants/CaseInsensitiveConstants |
 +-------------+------------------------------------+
-| Themes      | :ref:`CompatibilityPHP73`          |
+| Rulesets    | :ref:`CompatibilityPHP73`          |
 +-------------+------------------------------------+
 | Severity    | Critical                           |
 +-------------+------------------------------------+
@@ -3331,7 +3341,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Structures/CastToBoolean                                                            |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                      |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -3376,7 +3386,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Structures/CastingTernary |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -3427,7 +3437,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CatchShadowsVariable                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -3495,7 +3505,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Structures/CheckAllTypes                                                             |
 +-------------+--------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                       |
+| Rulesets    | :ref:`Analyze`                                                                       |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                |
 +-------------+--------------------------------------------------------------------------------------+
@@ -3540,7 +3550,7 @@ See also `Option to make json_encode and json_decode throw exceptions on errors 
 +-------------+----------------------+
 | Short name  | Structures/CheckJson |
 +-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
+| Rulesets    | :ref:`Analyze`       |
 +-------------+----------------------+
 | Severity    | Major                |
 +-------------+----------------------+
@@ -3595,7 +3605,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Classes/CheckOnCallUsage |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -3629,7 +3639,7 @@ PHP 7.2 introduced the ability to remove a typehint when overloading a method. T
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/ChildRemoveTypehint                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and more recent                                                                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3651,7 +3661,7 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/ClassConstWithArray                                                         |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -3699,7 +3709,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/CouldBeFinal               |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -3735,7 +3745,7 @@ When functions and classes bear the same name, calling them may be confusing. Th
 +-------------+----------------------------+
 | Short name  | Php/ClassFunctionConfusion |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -3779,7 +3789,7 @@ See also `When to declare classes final <http://ocramius.github.io/blog/when-to-
 +-------------+-------------------------+
 | Short name  | Classes/FinalByOcramius |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -3822,7 +3832,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/NoParent                   |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -3865,7 +3875,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------+
 | Short name  | Classes/CitSameName                                                       |
 +-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                            |
+| Rulesets    | :ref:`Analyze`                                                            |
 +-------------+---------------------------------------------------------------------------+
 | Severity    | Minor                                                                     |
 +-------------+---------------------------------------------------------------------------+
@@ -3902,7 +3912,7 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 +-------------+----------------------------------------+
 | Short name  | Classes/MutualExtension                |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -3947,11 +3957,12 @@ Suggestions
 ^^^^^^^^^^^
 
 * Only clone containers (like variables, properties...)
+* Add typehint to injected properties, so they are checked as objects.
 
 +-------------+----------------------------------------+
 | Short name  | Classes/CloneWithNonObject             |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
@@ -3971,7 +3982,7 @@ PHP manual recommends that script should be left open, without the final closing
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/CloseTags                                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`                                                              |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -4032,7 +4043,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Functions/Closure2String                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Performances`                                           |
+| Rulesets    | :ref:`Suggestions`, :ref:`Performances`                                           |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -4082,7 +4093,7 @@ See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>
 +-------------+---------------------------+
 | Short name  | Php/ClosureThisSupport    |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.4 and older    |
 +-------------+---------------------------+
@@ -4090,6 +4101,50 @@ See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
+
+
+
+.. _coalesce-and-concat:
+
+Coalesce And Concat
+###################
+
+
+The concat operator dot has precedence over the coalesce operator ??. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Parenthesis are the right solution when in doubt
+   echo a . ($b ?? 'd') . $e;
+   
+   // 'a' . $b is evaluated first, leading ot a useless ?? operator
+   'a' . $b ?? $c;
+   
+   // 'd' . 'e' is evaluated first, leading to $b OR 'de'. 
+   echo $b ?? 'd' . 'e';
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add parenthesis around ?? operator to avoid misbehavior
+* Do not use dot and ?? together in the same expression
+
++-------------+------------------------------+
+| Short name  | Structures/CoalesceAndConcat |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -4141,7 +4196,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/CommonAlternatives                                                                 |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -4181,7 +4236,7 @@ See also `compact <http://www.php.net/compact>`_ and `PHP RFC: Make compact func
 +-------------+-----------------------------------------------+
 | Short name  | Php/CompactInexistant                         |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`Suggestions`, :ref:`CompatibilityPHP73` |
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
@@ -4235,7 +4290,7 @@ See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ `What is t
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Security/CompareHash                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                                                     |
+| Rulesets    | :ref:`Security`                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -4274,7 +4329,7 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 +-------------+-------------------------------+
 | Short name  | Structures/ComparedComparison |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -4328,7 +4383,7 @@ Suggestions
 +-------------+-------------------------------+
 | Short name  | Variables/ComplexDynamicNames |
 +-------------+-------------------------------+
-| Themes      | :ref:`Suggestions`            |
+| Rulesets    | :ref:`Suggestions`            |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -4378,7 +4433,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -4430,7 +4485,7 @@ Suggestions
 +-------------+------------------------+
 | Short name  | Structures/ConcatEmpty |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -4481,7 +4536,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Interfaces/ConcreteVisibility          |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -4536,7 +4591,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Security/ConfigureExtract                                                         |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                                   |
+| Rulesets    | :ref:`Security`                                                                   |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -4583,7 +4638,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/ConstVisibilityUsage                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -4624,7 +4679,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/ConstWithArray                                                              |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -4671,7 +4726,7 @@ Suggestions
 +-------------+-----------------------+
 | Short name  | Classes/ConstantClass |
 +-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
+| Rulesets    | :ref:`Analyze`        |
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
@@ -4718,7 +4773,7 @@ Every comparison operator is used when finding the favorite.
 +-------------+------------------------------------------------+
 | Short name  | Structures/ConstantComparisonConsistance       |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -4760,7 +4815,7 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/ConstantScalarExpression                                             |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -4803,7 +4858,7 @@ However, this makes the code confusing and difficult to debug. It is recommended
 +-------------+--------------------------------------+
 | Short name  | Constants/CreatedOutsideItsNamespace |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -4842,7 +4897,7 @@ See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 +-------------+--------------------------------+
 | Short name  | Constants/ConstantStrangeNames |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -4888,7 +4943,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ContinueIsForLoop                                                                                                                                                                                                           |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                                  |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -4944,7 +4999,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Classes/CouldBeAbstractClass                                                              |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview`                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                        |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -4990,7 +5045,7 @@ Starting with PHP 5.6, even `array() <http://www.php.net/array>`_ may be defined
 +-------------+------------------------------+
 | Short name  | Classes/CouldBeClassConstant |
 +-------------+------------------------------+
-| Themes      | :ref:`ClassReview`           |
+| Rulesets    | :ref:`ClassReview`           |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -5048,7 +5103,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Constants/CouldBeConstant |
 +-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
+| Rulesets    | :ref:`Suggestions`        |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -5101,7 +5156,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/CouldBeElse                                                        |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                |
+| Rulesets    | :ref:`Analyze`                                                                |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Minor                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -5159,7 +5214,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+----------------------------------------------+
 | Short name  | Classes/CouldBePrivateConstante              |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`ClassReview`                           |
+| Rulesets    | :ref:`ClassReview`                           |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -5219,7 +5274,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
 +-------------+----------------------------------+
 | Short name  | Classes/CouldBeProtectedConstant |
 +-------------+----------------------------------+
-| Themes      | :ref:`ClassReview`               |
+| Rulesets    | :ref:`ClassReview`               |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -5263,7 +5318,7 @@ These properties may even be made private.
 +-------------+--------------------------------+
 | Short name  | Classes/CouldBeProtectedMethod |
 +-------------+--------------------------------+
-| Themes      | :ref:`ClassReview`             |
+| Rulesets    | :ref:`ClassReview`             |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -5306,7 +5361,7 @@ This property may even be made private.
 +-------------+----------------------------------+
 | Short name  | Classes/CouldBeProtectedProperty |
 +-------------+----------------------------------+
-| Themes      | :ref:`ClassReview`               |
+| Rulesets    | :ref:`ClassReview`               |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -5335,7 +5390,7 @@ This global is only used in one function or method. It may be called 'static', i
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/CouldBeStatic                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Analyze`, :ref:`ClassReview`          |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Analyze`, :ref:`ClassReview`          |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -5398,7 +5453,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Short name  | Functions/CouldBeStaticClosure               |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Suggestions`                           |
+| Rulesets    | :ref:`Suggestions`                           |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -5453,7 +5508,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Functions/CouldBeCallable                                                             |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                    |
+| Rulesets    | :ref:`Suggestions`                                                                    |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -5517,7 +5572,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Functions/CouldCentralize          |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -5565,7 +5620,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Functions/CouldReturnVoid                  |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Suggestions`                         |
+| Rulesets    | :ref:`Suggestions`                         |
 +-------------+--------------------------------------------+
 | Severity    | Minor                                      |
 +-------------+--------------------------------------------+
@@ -5608,7 +5663,7 @@ Arguments that are tested with `instanceof <http://php.net/manual/en/language.op
 +-------------+-------------------------+
 | Short name  | Functions/CouldTypehint |
 +-------------+-------------------------+
-| Themes      | :ref:`Suggestions`      |
+| Rulesets    | :ref:`Suggestions`      |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -5671,7 +5726,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Namespaces/CouldUseAlias |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -5720,7 +5775,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Structures/CouldUseCompact                  |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`Suggestions`                          |
+| Rulesets    | :ref:`Suggestions`                          |
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
@@ -5800,7 +5855,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseShortAssignation                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`                                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -5863,7 +5918,7 @@ Suggestions
 +-------------+----------------------+
 | Short name  | Traits/CouldUseTrait |
 +-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
+| Rulesets    | :ref:`Analyze`       |
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
@@ -5900,7 +5955,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Exceptions/CouldUseTry               |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Suggestions`                   |
+| Rulesets    | :ref:`Suggestions`                   |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -5951,7 +6006,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseDir                                                          |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                              |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -6009,7 +6064,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseArrayFillKeys                                                                   |
 +-------------+----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                                 |
+| Rulesets    | :ref:`Suggestions`                                                                                 |
 +-------------+----------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                              |
 +-------------+----------------------------------------------------------------------------------------------------+
@@ -6056,7 +6111,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseArrayUnique                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                            |
+| Rulesets    | :ref:`Suggestions`                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -6104,7 +6159,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------+
 | Short name  | Classes/ShouldUseSelf                                                          |
 +-------------+--------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`ClassReview`                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`ClassReview`                         |
 +-------------+--------------------------------------------------------------------------------+
 | Severity    | Minor                                                                          |
 +-------------+--------------------------------------------------------------------------------+
@@ -6155,7 +6210,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Structures/CouldUseStrrepeat                |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                |
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
@@ -6197,7 +6252,7 @@ See also `crc32() <http://www.php.net/crc32>`_.
 +-------------+--------------------------+
 | Short name  | Php/Crc32MightBeNegative |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -6259,7 +6314,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/DanglingArrayReferences                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
@@ -6309,7 +6364,7 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 +-------------+------------------------------------------+
 | Short name  | Functions/DeepDefinitions                |
 +-------------+------------------------------------------+
-| Themes      | :ref:`Analyze`                           |
+| Rulesets    | :ref:`Analyze`                           |
 +-------------+------------------------------------------+
 | Severity    | Major                                    |
 +-------------+------------------------------------------+
@@ -6340,7 +6395,7 @@ PHP 7.0 has the ability to define an array as a constant, using the `define() <h
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/DefineWithArray                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -6403,7 +6458,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/DependantAbstractClass     |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -6465,7 +6520,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Traits/DependantTrait                |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -6510,7 +6565,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Php/Deprecated                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -6547,7 +6602,7 @@ This was added in PHP 5.5. There is no need anymore for an intermediate variable
 +-------------+------------------------------------------------------+
 | Short name  | Structures/DereferencingAS                           |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.3 and older                               |
 +-------------+------------------------------------------------------+
@@ -6598,7 +6653,7 @@ See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecatio
 +-------------+-----------------------------------------------+
 | Short name  | Php/DetectCurrentClass                        |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`Suggestions`, :ref:`CompatibilityPHP74` |
 +-------------+-----------------------------------------------+
 | Php Version | With PHP 8.0 and older                        |
 +-------------+-----------------------------------------------+
@@ -6633,7 +6688,7 @@ See also `Directly calling `__clone <http://www.php.net/manual/en/language.oop5.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/DirectCallToClone                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -6681,7 +6736,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Security/DirectInjection |
 +-------------+--------------------------+
-| Themes      | :ref:`Security`          |
+| Rulesets    | :ref:`Security`          |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -6736,7 +6791,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Structures/DirectlyUseFile |
 +-------------+----------------------------+
-| Themes      | :ref:`Suggestions`         |
+| Rulesets    | :ref:`Suggestions`         |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -6776,7 +6831,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Classes/DisconnectedClasses |
 +-------------+-----------------------------+
-| Themes      | :ref:`ClassReview`          |
+| Rulesets    | :ref:`ClassReview`          |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -6817,7 +6872,7 @@ Use SQL expression to compute aggregates.
 +-------------+-----------------------+
 | Short name  | Performances/DoInBase |
 +-------------+-----------------------+
-| Themes      | :ref:`Performances`   |
+| Rulesets    | :ref:`Performances`   |
 +-------------+-----------------------+
 | Severity    | Major                 |
 +-------------+-----------------------+
@@ -6857,7 +6912,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Short name  | Structures/DontBeTooManual                     |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -6892,7 +6947,7 @@ It is recommended to put the modified values in another variable, and keep the o
 +-------------+--------------------------------------+
 | Short name  | Structures/NoChangeIncomingVariables |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -6948,7 +7003,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Security/DontEchoError                                                               |
 +-------------+--------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                      |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                      |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                             |
 +-------------+--------------------------------------------------------------------------------------+
@@ -7006,7 +7061,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Structures/DontLoopOnYield                                                             |
 +-------------+----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                     |
+| Rulesets    | :ref:`Suggestions`                                                                     |
 +-------------+----------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                  |
 +-------------+----------------------------------------------------------------------------------------+
@@ -7051,7 +7106,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------+
 | Short name  | Structures/DontReadAndWriteInOneExpression                           |
 +-------------+----------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
 +-------------+----------------------------------------------------------------------+
 | Severity    | Critical                                                             |
 +-------------+----------------------------------------------------------------------+
@@ -7131,7 +7186,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/DontSendThisInConstructor                                                                     |
 +-------------+-------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                        |
+| Rulesets    | :ref:`Analyze`                                                                                        |
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------+
@@ -7195,7 +7250,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Classes/DontUnsetProperties                                                          |
 +-------------+--------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                         |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                |
 +-------------+--------------------------------------------------------------------------------------+
@@ -7253,7 +7308,7 @@ When the value has to be prepared before usage, then save the filtered value in 
 +-------------+-------------------------------+
 | Short name  | Structures/DontChangeBlindKey |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -7290,7 +7345,7 @@ See also `EXP30-C. Do not depend on the order of evaluation for side effects <ht
 +-------------+----------------------------+
 | Short name  | Structures/DontMixPlusPlus |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -7323,7 +7378,7 @@ This happens when a container (variable, property, array index) is assigned with
 +-------------+------------------------------+
 | Short name  | Structures/DoubleAssignation |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -7349,7 +7404,7 @@ Twice the same call in a row. This is worth a check.
 +-------------+------------------------------+
 | Short name  | Structures/DoubleInstruction |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -7394,7 +7449,7 @@ Avoid double `array_flip() <http://www.php.net/array_flip>`_ to gain speed. Whil
 +-------------+-----------------------------------------------+
 | Short name  | Performances/DoubleArrayFlip                  |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Performances`                           |
+| Rulesets    | :ref:`Performances`                           |
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
@@ -7448,7 +7503,7 @@ This is also true if else has a return, and then not. When doing so, don't forge
 +-------------+------------------------------------+
 | Short name  | Structures/DropElseAfterReturn     |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -7492,7 +7547,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Structures/SubstrLastArg                                                         |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                               |
+| Rulesets    | :ref:`Suggestions`                                                               |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -7534,7 +7589,7 @@ See also `dl <http://www.php.net/dl>`_.
 +-------------+--------------------+
 | Short name  | Security/DynamicDl |
 +-------------+--------------------+
-| Themes      | :ref:`Security`    |
+| Rulesets    | :ref:`Security`    |
 +-------------+--------------------+
 | Severity    | Major              |
 +-------------+--------------------+
@@ -7581,7 +7636,7 @@ It happens that print, echo or <?= are used depending on coding style and files.
 +-------------+------------------------------------------------+
 | Short name  | Structures/EchoPrintConsistance                |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -7627,7 +7682,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/EchoWithConcat                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
+| Rulesets    | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -7671,7 +7726,7 @@ See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/varia
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/EllipsisUsage                                                               |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -7727,7 +7782,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/ElseIfElseif                                                               |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                        |
+| Rulesets    | :ref:`Analyze`                                                                        |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -7785,7 +7840,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Structures/EmptyBlocks                                                           |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                   |
+| Rulesets    | :ref:`Analyze`                                                                   |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -7834,7 +7889,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Short name  | Classes/EmptyClass                  |
 +-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
+| Rulesets    | :ref:`Analyze`                      |
 +-------------+-------------------------------------+
 | Severity    | Minor                               |
 +-------------+-------------------------------------+
@@ -7893,7 +7948,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Short name  | Functions/EmptyFunction               |
 +-------------+---------------------------------------+
-| Themes      | :ref:`Analyze`                        |
+| Rulesets    | :ref:`Analyze`                        |
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
@@ -7935,7 +7990,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------+
 | Short name  | Structures/EmptyLines                                                     |
 +-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Analyze`                              |
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Analyze`                              |
 +-------------+---------------------------------------------------------------------------+
 | Severity    | Minor                                                                     |
 +-------------+---------------------------------------------------------------------------+
@@ -7979,7 +8034,7 @@ See also `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-p
 +-------------+---------------------------+
 | Short name  | Interfaces/EmptyInterface |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -8011,7 +8066,7 @@ Empty `list() <http://www.php.net/list>`_ are not allowed anymore in PHP 7. Ther
 +-------------+-------------------------------------------+
 | Short name  | Php/EmptyList                             |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +-------------+-------------------------------------------+
 | Php Version | With PHP 7.0 and older                    |
 +-------------+-------------------------------------------+
@@ -8068,7 +8123,7 @@ Using bracket-style syntax :
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/EmptyNamespace                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -8097,7 +8152,7 @@ PHP tolerates the last element of an array to be empty.
 +-------------+------------------------------------------------+
 | Short name  | Arrays/EmptySlots                              |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -8142,7 +8197,7 @@ Suggestions
 +-------------+-------------------+
 | Short name  | Traits/EmptyTrait |
 +-------------+-------------------+
-| Themes      | :ref:`Analyze`    |
+| Rulesets    | :ref:`Analyze`    |
 +-------------+-------------------+
 | Severity    | Minor             |
 +-------------+-------------------+
@@ -8189,7 +8244,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/EmptyTryCatch                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -8237,7 +8292,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Short name  | Structures/EmptyWithExpression                 |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Suggestions`                             |
+| Rulesets    | :ref:`Suggestions`                             |
 +-------------+------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                   |
 +-------------+------------------------------------------------+
@@ -8291,7 +8346,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Security/EncodedLetters              |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Security`                      |
+| Rulesets    | :ref:`Security`                      |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -8349,7 +8404,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/EvalUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -8390,7 +8445,7 @@ When catching exception, the most specialized exceptions must be in the early ca
 +------------+---------------------------------------------+
 | Short name | Exceptions/AlreadyCaught                    |
 +------------+---------------------------------------------+
-| Themes     | :ref:`Dead code <dead-code>`                |
+| Rulesets   | :ref:`Dead code <dead-code>`                |
 +------------+---------------------------------------------+
 | Examples   | :ref:`woocommerce-exceptions-alreadycaught` |
 +------------+---------------------------------------------+
@@ -8436,7 +8491,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/ExitUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                |
+| Rulesets    | :ref:`Analyze`                                                                |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -8474,7 +8529,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/ExponentUsage                                                               |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -8524,7 +8579,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/FailingSubstrComparison                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                |
 +-------------+------------------------------------------------------------------------------------------------------+
@@ -8568,7 +8623,7 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 +-------------+--------------------------------+
 | Short name  | Performances/FetchOneRowFormat |
 +-------------+--------------------------------+
-| Themes      | :ref:`Performances`            |
+| Rulesets    | :ref:`Performances`            |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -8614,7 +8669,7 @@ See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 +------------+--------------------------------------------+
 | Short name | Classes/Finalclass                         |
 +------------+--------------------------------------------+
-| Themes     | :ref:`ClassReview`, :ref:`LintButWontExec` |
+| Rulesets   | :ref:`ClassReview`, :ref:`LintButWontExec` |
 +------------+--------------------------------------------+
 
 
@@ -8656,7 +8711,7 @@ See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 +------------+--------------------------------------------+
 | Short name | Classes/Finalmethod                        |
 +------------+--------------------------------------------+
-| Themes     | :ref:`LintButWontExec`, :ref:`ClassReview` |
+| Rulesets   | :ref:`LintButWontExec`, :ref:`ClassReview` |
 +------------+--------------------------------------------+
 
 
@@ -8691,7 +8746,7 @@ See also `array_search <http://php.net/array_search>`_ and `array_keys <http://p
 +-------------+----------------------------+
 | Short name  | Structures/GoToKeyDirectly |
 +-------------+----------------------------+
-| Themes      | :ref:`Suggestions`         |
+| Rulesets    | :ref:`Suggestions`         |
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
@@ -8742,7 +8797,7 @@ See also `Heredoc <http://php.net/manual/en/language.types.string.php#language.t
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/FlexibleHeredoc                                                                                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and more recent                                                                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -8795,7 +8850,7 @@ This is true with any kind of functioncall that returns the same value throughou
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ForWithFunctioncall                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Top10`                                                                             |
+| Rulesets    | :ref:`Performances`, :ref:`Top10`                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -8837,7 +8892,7 @@ See also `foreach no longer changes the internal array pointer <http://php.net/m
 +-------------+------------------------------+
 | Short name  | Php/ForeachDontChangePointer |
 +-------------+------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`    |
+| Rulesets    | :ref:`CompatibilityPHP70`    |
 +-------------+------------------------------+
 | Php Version | With PHP 7.0 and older       |
 +-------------+------------------------------+
@@ -8877,7 +8932,7 @@ Foreach on an object member is a legit PHP syntax, though it is very rare : blin
 +-------------+-------------------+
 | Short name  | Php/ForeachObject |
 +-------------+-------------------+
-| Themes      | :ref:`Analyze`    |
+| Rulesets    | :ref:`Analyze`    |
 +-------------+-------------------+
 | Severity    | Major             |
 +-------------+-------------------+
@@ -8926,7 +8981,7 @@ Suggestions
 +-------------+----------------------------------------------------------+
 | Short name  | Structures/ForeachReferenceIsNotModified                 |
 +-------------+----------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                           |
+| Rulesets    | :ref:`Analyze`                                           |
 +-------------+----------------------------------------------------------+
 | Severity    | Minor                                                    |
 +-------------+----------------------------------------------------------+
@@ -8980,7 +9035,7 @@ See also `The list function & practical uses of array destructuring in PHP <http
 +-------------+------------------------------------------------------+
 | Short name  | Structures/ForeachWithList                           |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.5 and more recent                         |
 +-------------+------------------------------------------------------+
@@ -9034,7 +9089,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Interfaces/CouldUseInterface |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -9075,7 +9130,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Exceptions/ForgottenThrown |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
@@ -9137,7 +9192,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NonPpp                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -9184,7 +9239,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Structures/ForgottenWhiteSpace |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -9224,7 +9279,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Short name  | Namespaces/ConstantFullyQualified |
 +-------------+-----------------------------------+
-| Themes      | :ref:`Analyze`                    |
+| Rulesets    | :ref:`Analyze`                    |
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
@@ -9271,7 +9326,7 @@ Storing the result in a variable is still useful if the result is actually used 
 +-------------+---------------------------------+
 | Short name  | Structures/FunctionSubscripting |
 +-------------+---------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`       |
+| Rulesets    | :ref:`CompatibilityPHP53`       |
 +-------------+---------------------------------+
 | Php Version | With PHP 5.4 and more recent    |
 +-------------+---------------------------------+
@@ -9321,7 +9376,7 @@ Suggestions
 +-------------+----------------------------------------------------+
 | Short name  | Structures/FunctionPreSubscripting                 |
 +-------------+----------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                 |
+| Rulesets    | :ref:`Suggestions`                                 |
 +-------------+----------------------------------------------------+
 | Php Version | With PHP 5.4 and more recent                       |
 +-------------+----------------------------------------------------+
@@ -9362,7 +9417,7 @@ See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54
 +-------------+---------------------------+
 | Short name  | Php/Php54RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP54` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.4 and older    |
 +-------------+---------------------------+
@@ -9405,7 +9460,7 @@ See also `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55
 +-------------+---------------------------+
 | Short name  | Php/Php55RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP55` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.5 and older    |
 +-------------+---------------------------+
@@ -9430,7 +9485,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Functions/BadTypehintRelay |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -9468,7 +9523,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/GeneratorCannotReturn                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -9521,7 +9576,7 @@ array_key_last() was added in PHP 7.3. Before that,
 +-------------+---------------------------+
 | Short name  | Arrays/GettingLastElement |
 +-------------+---------------------------+
-| Themes      | :ref:`Performances`       |
+| Rulesets    | :ref:`Performances`       |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -9558,7 +9613,7 @@ The global keyword must be out of loops. It is evaluated each loop, slowing the 
 +------------+------------------------------+
 | Short name | Structures/GlobalOutsideLoop |
 +------------+------------------------------+
-| Themes     | :ref:`Performances`          |
+| Rulesets   | :ref:`Performances`          |
 +------------+------------------------------+
 
 
@@ -9592,7 +9647,7 @@ See also `Variable scope <http://php.net/manual/en/language.variables.scope.php>
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/GlobalUsage                                                            |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -9642,7 +9697,7 @@ See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarat
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/GroupUseDeclaration                                                                                    |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -9682,7 +9737,7 @@ See also `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-t
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/GroupUseTrailingComma                                                                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and more recent                                                                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -9727,7 +9782,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/HardcodedPasswords                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                                               |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -9772,7 +9827,7 @@ Suggestions
 +-------------+----------------+
 | Short name  | Php/HashAlgos  |
 +-------------+----------------+
-| Themes      | :ref:`Analyze` |
+| Rulesets    | :ref:`Analyze` |
 +-------------+----------------+
 | Severity    | Major          |
 +-------------+----------------+
@@ -9807,7 +9862,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/HashAlgos53                                                                                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -9842,7 +9897,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/HashAlgos54                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 5.4 and older                                                                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -9881,7 +9936,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/HashAlgos71                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and older                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -9920,7 +9975,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------+
 | Short name  | Php/HashAlgos74           |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.4 and older    |
 +-------------+---------------------------+
@@ -9965,7 +10020,7 @@ See also `Move ext/hash from resources to objects <http://php.net/manual/en/migr
 +-------------+---------------------------+
 | Short name  | Php/HashUsesObjects       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -10043,7 +10098,7 @@ Generally, one or two delimiters are used, with generic value. It is recommended
 +------------+------------------------------------------------+
 | Short name | Structures/HeredocDelimiterFavorite            |
 +------------+------------------------------------------------+
-| Themes     | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets   | :ref:`Coding Conventions <coding-conventions>` |
 +------------+------------------------------------------------+
 
 
@@ -10081,7 +10136,7 @@ PHP 7.1 and later, emits a 'A non-numeric value encountered' warning, and conver
 +-------------+------------------------------------------------------+
 | Short name  | Type/HexadecimalString                               |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
@@ -10134,7 +10189,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------+
 | Short name  | Namespaces/HiddenUse                                                      |
 +-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                            |
+| Rulesets    | :ref:`Analyze`                                                            |
 +-------------+---------------------------------------------------------------------------+
 | Severity    | Minor                                                                     |
 +-------------+---------------------------------------------------------------------------+
@@ -10184,7 +10239,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Structures/Htmlentitiescall |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
@@ -10229,7 +10284,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IdenticalConditions                                                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -10272,7 +10327,7 @@ They may be a copy/paste with unmodified content. When the content has to be dup
 +-------------+---------------------------------+
 | Short name  | Structures/IdenticalConsecutive |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
@@ -10325,7 +10380,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/IdenticalMethods           |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -10383,7 +10438,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IdenticalOnBothSides                                                                    |
 +-------------+----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                     |
+| Rulesets    | :ref:`Analyze`                                                                                     |
 +-------------+----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                              |
 +-------------+----------------------------------------------------------------------------------------------------+
@@ -10454,7 +10509,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IfWithSameConditions                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -10495,7 +10550,7 @@ They may also be typos, such as if ($x = 3) { `... <http://www.php.net/manual/en
 +-------------+------------------------+
 | Short name  | Structures/Iffectation |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -10542,7 +10597,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------+
 | Short name  | Classes/WrongName                                                     |
 +-------------+-----------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                        |
+| Rulesets    | :ref:`Analyze`                                                        |
 +-------------+-----------------------------------------------------------------------+
 | Severity    | Major                                                                 |
 +-------------+-----------------------------------------------------------------------+
@@ -10593,7 +10648,7 @@ Suggestions
 +-------------+---------------------------------+
 | Short name  | Classes/ImplementIsForInterface |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
@@ -10643,7 +10698,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Short name  | Classes/ImplementedMethodsArePublic |
 +-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
+| Rulesets    | :ref:`Analyze`                      |
 +-------------+-------------------------------------+
 | Severity    | Major                               |
 +-------------+-------------------------------------+
@@ -10687,7 +10742,7 @@ Global variables, that are used in local scope with global keyword, but are not 
 +-------------+---------------------------+
 | Short name  | Structures/ImplicitGlobal |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -10732,7 +10787,7 @@ It is recommended to use a real 'if then' structures, to make the condition read
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/ImpliedIf                                                                      |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -10780,7 +10835,7 @@ Suggestions
 +-------------+--------------------+
 | Short name  | Php/ImplodeOneArg  |
 +-------------+--------------------+
-| Themes      | :ref:`Suggestions` |
+| Rulesets    | :ref:`Suggestions` |
 +-------------+--------------------+
 | Severity    | Minor              |
 +-------------+--------------------+
@@ -10826,7 +10881,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Files/InclusionWrongCase |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -10879,7 +10934,7 @@ Suggestions
 +-------------+-----------------------------------------------+
 | Short name  | Classes/IncompatibleSignature                 |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`        |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`        |
 +-------------+-----------------------------------------------+
 | Severity    | Critical                                      |
 +-------------+-----------------------------------------------+
@@ -10925,7 +10980,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Php/Incompilable                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -10986,7 +11041,7 @@ This analysis reports chains of elseif that don't share a common variable (or ar
 +-------------+-------------------------------+
 | Short name  | Structures/InconsistentElseif |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -11091,7 +11146,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IndicesAreIntOrString                                                                |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                           |
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -11136,7 +11191,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Security/IndirectInjection |
 +-------------+----------------------------+
-| Themes      | :ref:`Security`            |
+| Rulesets    | :ref:`Security`            |
 +-------------+----------------------------+
 | Severity    | Critical                   |
 +-------------+----------------------------+
@@ -11187,7 +11242,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Structures/InfiniteRecursion |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -11233,7 +11288,7 @@ See also `Class Abstraction <http://php.net/abstract>`_.
 +-------------+------------------------------------+
 | Short name  | Classes/InstantiatingAbstractClass |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
@@ -11286,7 +11341,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Functions/InsufficientTypehint |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Major                          |
 +-------------+--------------------------------+
@@ -11327,7 +11382,7 @@ See also `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/IntegerAsProperty                                                                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and more recent                                                                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -11388,7 +11443,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Security/IntegerConversion |
 +-------------+----------------------------+
-| Themes      | :ref:`Security`            |
+| Rulesets    | :ref:`Security`            |
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
@@ -11432,7 +11487,7 @@ See also `Double quoted <http://php.net/manual/en/language.types.string.php#lang
 +-------------+------------------------------------------------+
 | Short name  | Type/StringInterpolation                       |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -11479,7 +11534,7 @@ Suggestions
 +-------------+----------------------------------------------------------------+
 | Short name  | Classes/WrongCase                                              |
 +-------------+----------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
 +-------------+----------------------------------------------------------------+
 | Severity    | Minor                                                          |
 +-------------+----------------------------------------------------------------+
@@ -11526,7 +11581,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Constants/InvalidName                |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Major                                |
 +-------------+--------------------------------------+
@@ -11565,7 +11620,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +-------------+---------------------------+
 | Short name  | Type/OctalInString        |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP71` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.1 and older    |
 +-------------+---------------------------+
@@ -11613,7 +11668,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Structures/InvalidPackFormat |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -11659,7 +11714,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Structures/InvalidRegex                 |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
@@ -11711,7 +11766,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------+
 | Short name  | Structures/IsZero                                                    |
 +-------------+----------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                       |
+| Rulesets    | :ref:`Analyze`                                                       |
 +-------------+----------------------------------------------------------------------+
 | Severity    | Minor                                                                |
 +-------------+----------------------------------------------------------------------+
@@ -11758,7 +11813,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Php/IssetMultipleArgs                                                         |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                            |
+| Rulesets    | :ref:`Suggestions`                                                            |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Minor                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -11810,7 +11865,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Performances/IssetWholeArray                                                                     |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Performances`                                                          |
+| Rulesets    | :ref:`Suggestions`, :ref:`Performances`                                                          |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -11869,7 +11924,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/JoinFile                                                                                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                                                                                               |
+| Rulesets    | :ref:`Performances`                                                                                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -11904,7 +11959,7 @@ Usage of short syntax version of `list() <http://www.php.net/list>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ListShortSyntax                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -11960,7 +12015,7 @@ In PHP 5.6, results are :::
 +-------------+---------------------------+
 | Short name  | Php/ListWithAppends       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP70` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -11989,7 +12044,7 @@ Setting keys when using `list() <http://www.php.net/list>`_ is a PHP 7.1 feature
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ListWithKeys                                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -12027,7 +12082,7 @@ See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_a
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ListWithReference                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and more recent                                                                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -12071,7 +12126,7 @@ While this is syntactically correct, it is unusual that defined resources are us
 +-------------+-------------------------------+
 | Short name  | Classes/LocallyUnusedProperty |
 +-------------+-------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`  |
+| Rulesets    | :ref:`Dead code <dead-code>`  |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -12121,7 +12176,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/LogicalMistakes                                                                |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -12170,7 +12225,7 @@ See also `Logical Operators <http://php.net/manual/en/language.operators.logical
 +------------+--------------------------------+
 | Short name | Php/LetterCharsLogicalFavorite |
 +------------+--------------------------------+
-| Themes     | :ref:`Top10`                   |
+| Rulesets   | :ref:`Top10`                   |
 +------------+--------------------------------+
 
 
@@ -12215,7 +12270,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Php/LogicalInLetters                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -12277,7 +12332,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Short name  | Performances/LogicalToInArray                |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`                               |
+| Rulesets    | :ref:`Analyze`                               |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -12322,7 +12377,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------+
 | Short name  | Structures/LoneBlock                                                     |
 +-------------+--------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                           |
+| Rulesets    | :ref:`Analyze`                                                           |
 +-------------+--------------------------------------------------------------------------+
 | Severity    | Minor                                                                    |
 +-------------+--------------------------------------------------------------------------+
@@ -12385,7 +12440,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Structures/LongArguments                                                            |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                      |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -12440,7 +12495,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Variables/LostReferences                  |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`                            |
+| Rulesets    | :ref:`Analyze`                            |
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
@@ -12485,7 +12540,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 +-------------+---------------------------+
 | Short name  | Classes/toStringPss       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP70` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.4 and older    |
 +-------------+---------------------------+
@@ -12549,7 +12604,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Classes/MakeGlobalAProperty |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -12610,7 +12665,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Classes/MakeMagicConcrete |
 +-------------+---------------------------+
-| Themes      | :ref:`Performances`       |
+| Rulesets    | :ref:`Performances`       |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -12715,7 +12770,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Performances/MakeOneCall                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                               |
+| Rulesets    | :ref:`Performances`                                                               |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Major                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -12753,7 +12808,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Type/MalformedOctal                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -12761,6 +12816,108 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _max-level-of-nesting:
+
+Max Level Of Nesting
+####################
+
+
+Avoid nesting structures too deep, as it hurts readability.
+
+Nesting structures are : if/then, switch, for, foreach, while, do...while. Ternary operator, try/catch are not considered a nesting structures.
+
+Closures, and more generally, functions definitions are counted separatedly. 
+
+This analysis checks for 4 levels of nesting, by default. This may be changed by configuration.
+
+.. code-block:: php
+
+   <?php
+   
+   // 5 levels of indentation
+   function foo() {
+       if (1) {
+           if (2) {
+               if (3) {
+                   if (4) {
+                       if (5) {
+                           51;
+                       } else {
+                           5;
+                       }
+                   } else {
+                       4;
+                   }
+               } else {
+                   3;
+               }
+           } else {
+               2;
+           }
+       } else {
+           1;
+       }
+   }
+   
+   // 2 levels of indentation
+   function foo() {
+       if (1) {
+           if (2) {
+               // 3 levels of indentation
+               return function () {
+                   if (3) {
+                       if (4) {
+                           if (5) {
+                               51;
+                           } else {
+                               5;
+                           }
+                       } else {
+                           4;
+                       }
+                   } else {
+                       3;
+                   }
+               }
+           } else {
+               2;
+           }
+       } else {
+           1;
+       }
+   }
+   
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Refactor code to avoid nesting
+* Export some nested blocks to an external method or function
+
++----------+---------+---------+---------------------------------------------------------------------+
+| Name     | Default | Type    | Description                                                         |
++----------+---------+---------+---------------------------------------------------------------------+
+| maxLevel | 4       | integer | Maximum level of nesting for control flow structures in one scope.  |
++----------+---------+---------+---------------------------------------------------------------------+
+
+
+
++-------------+---------------------------------+
+| Short name  | Structures/MaxLevelOfIdentation |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
@@ -12823,7 +12980,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Performances/MemoizeMagicCall      |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -12876,7 +13033,7 @@ See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 +-------------+----------------------------------------+
 | Short name  | Traits/MethodCollisionTraits           |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
@@ -12928,7 +13085,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +-------------+------------------------------+
 | Short name  | Classes/CouldBePrivateMethod |
 +-------------+------------------------------+
-| Themes      | :ref:`ClassReview`           |
+| Rulesets    | :ref:`ClassReview`           |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -12985,7 +13142,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Classes/CouldBeStatic                                                               |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | none                                                                                |
+| Rulesets    | none                                                                                |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -13034,7 +13191,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Classes/MethodSignatureMustBeCompatible |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`  |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`  |
 +-------------+-----------------------------------------+
 | Severity    | Critical                                |
 +-------------+-----------------------------------------+
@@ -13076,7 +13233,7 @@ This syntax is interesting when the object is not reused, and may be discarded
 +-------------+------------------------------+
 | Short name  | Php/MethodCallOnNew          |
 +-------------+------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`    |
+| Rulesets    | :ref:`CompatibilityPHP53`    |
 +-------------+------------------------------+
 | Php Version | With PHP 5.4 and more recent |
 +-------------+------------------------------+
@@ -13131,7 +13288,7 @@ Suggestions
 +-------------+-------------------------+
 | Short name  | Functions/WithoutReturn |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -13179,7 +13336,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Security/MinusOneOnError |
 +-------------+--------------------------+
-| Themes      | :ref:`Security`          |
+| Rulesets    | :ref:`Security`          |
 +-------------+--------------------------+
 | Severity    | Critical                 |
 +-------------+--------------------------+
@@ -13243,7 +13400,7 @@ Suggestions
 +-------------+---------------------------------------------------+
 | Short name  | Functions/MismatchTypeAndDefault                  |
 +-------------+---------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`            |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`            |
 +-------------+---------------------------------------------------+
 | Severity    | Critical                                          |
 +-------------+---------------------------------------------------+
@@ -13293,7 +13450,7 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Short name  | Functions/MismatchedDefaultArguments             |
 +-------------+--------------------------------------------------+
-| Themes      | :ref:`Analyze`                                   |
+| Rulesets    | :ref:`Analyze`                                   |
 +-------------+--------------------------------------------------+
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
@@ -13343,7 +13500,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------+
 | Short name  | Structures/MismatchedTernary                                                               |
 +-------------+--------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                         |
 +-------------+--------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                      |
 +-------------+--------------------------------------------------------------------------------------------+
@@ -13394,7 +13551,7 @@ Suggestions
 +-------------+-----------------------------------------------+
 | Short name  | Functions/MismatchedTypehint                  |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Analyze`                                |
+| Rulesets    | :ref:`Analyze`                                |
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
@@ -13455,7 +13612,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Structures/MissingCases                 |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
@@ -13503,7 +13660,7 @@ Missing included files may lead to a fatal error, a warning or other error later
 +-------------+----------------------+
 | Short name  | Files/MissingInclude |
 +-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
+| Rulesets    | :ref:`Analyze`       |
 +-------------+----------------------+
 | Severity    | Critical             |
 +-------------+----------------------+
@@ -13559,7 +13716,7 @@ Suggestions
 +-------------+-----------------------+
 | Short name  | Structures/MissingNew |
 +-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
+| Rulesets    | :ref:`Analyze`        |
 +-------------+-----------------------+
 | Severity    | Critical              |
 +-------------+-----------------------+
@@ -13601,7 +13758,7 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 +-------------+-------------------------------+
 | Short name  | Structures/MissingParenthesis |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -13635,7 +13792,7 @@ A unexpected structure is built for initialization. It may be a typo that create
 +-------------+------------------------------------------------+
 | Short name  | Arrays/MistakenConcatenation                   |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Major                                          |
 +-------------+------------------------------------------------+
@@ -13688,7 +13845,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/MixedConcatInterpolation                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze`                                          |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze`                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -13732,7 +13889,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Short name  | Arrays/MixedKeys                                     |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                         |
 +-------------+------------------------------------------------------+
@@ -13779,7 +13936,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------+
 | Short name  | Security/MkdirDefault                                                     |
 +-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                           |
+| Rulesets    | :ref:`Security`                                                           |
 +-------------+---------------------------------------------------------------------------+
 | Severity    | Major                                                                     |
 +-------------+---------------------------------------------------------------------------+
@@ -13835,7 +13992,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Structures/ModernEmpty       |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Php Version | With PHP 5.5 and more recent |
 +-------------+------------------------------+
@@ -13883,7 +14040,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitions                                                                    |
 +-------------+--------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                         |
+| Rulesets    | :ref:`Analyze`                                                                                         |
 +-------------+--------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                  |
 +-------------+--------------------------------------------------------------------------------------------------------+
@@ -13922,7 +14079,7 @@ See also Namespaces/MultipleAliasDefinition.
 +-------------+-------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitionPerFile |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`                            |
+| Rulesets    | :ref:`Analyze`                            |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -13965,7 +14122,7 @@ It is recommended to avoid declaring several times the same class in the code. T
 +-------------+------------------------------+
 | Short name  | Classes/MultipleDeclarations |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -14003,7 +14160,7 @@ See also `Is it a bad practice to have multiple classes in the same file? <https
 +-------------+------------------------------------------------+
 | Short name  | Classes/MultipleClassesInFile                  |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -14048,7 +14205,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Constants/MultipleConstantDefinition                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                             |
+| Rulesets    | :ref:`Analyze`                                                                                             |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -14095,7 +14252,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/MultipleSameArguments                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -14154,7 +14311,7 @@ This is a backward incompatible feature of PHP 7.1.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Exceptions/MultipleCatch                                                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -14200,7 +14357,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Functions/MultipleIdenticalClosure |
 +-------------+------------------------------------+
-| Themes      | :ref:`Suggestions`                 |
+| Rulesets    | :ref:`Suggestions`                 |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -14236,7 +14393,7 @@ Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only import
 +-------------+----------------------------------+
 | Short name  | Classes/MultipleTraitOrInterface |
 +-------------+----------------------------------+
-| Themes      | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`                   |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -14285,7 +14442,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------+
 | Short name  | Arrays/MultipleIdenticalKeys                                                               |
 +-------------+--------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                             |
+| Rulesets    | :ref:`Analyze`                                                                             |
 +-------------+--------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                      |
 +-------------+--------------------------------------------------------------------------------------------+
@@ -14344,7 +14501,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultipleTypeVariable                                                              |
 +-------------+----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                               |
+| Rulesets    | :ref:`Analyze`                                                                               |
 +-------------+----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                        |
 +-------------+----------------------------------------------------------------------------------------------+
@@ -14390,7 +14547,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Structures/MultipleUnset |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -14432,7 +14589,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Short name  | Traits/MultipleUsage                  |
 +-------------+---------------------------------------+
-| Themes      | :ref:`Suggestions`                    |
+| Rulesets    | :ref:`Suggestions`                    |
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
@@ -14488,7 +14645,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultipleDefinedCase                                                                         |
 +-------------+--------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                         |
+| Rulesets    | :ref:`Analyze`                                                                                         |
 +-------------+--------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                  |
 +-------------+--------------------------------------------------------------------------------------------------------+
@@ -14540,7 +14697,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultiplyByOne                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -14592,7 +14749,7 @@ Suggestions
 +-------------+-------------------------------+
 | Short name  | Php/MustCallParentConstructor |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -14649,7 +14806,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Functions/MustReturn                   |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -14700,7 +14857,7 @@ Suggestions
 +------------+---------------------------------------------------------------------------+
 | Short name | Structures/NamedRegex                                                     |
 +------------+---------------------------------------------------------------------------+
-| Themes     | :ref:`Suggestions`                                                        |
+| Rulesets   | :ref:`Suggestions`                                                        |
 +------------+---------------------------------------------------------------------------+
 | Examples   | :ref:`phinx-structures-namedregex`, :ref:`shopware-structures-namedregex` |
 +------------+---------------------------------------------------------------------------+
@@ -14734,7 +14891,7 @@ When using negative power, it is clearer to add parenthesis or to use the `pow()
 +-------------+------------------------+
 | Short name  | Structures/NegativePow |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Major                  |
 +-------------+------------------------+
@@ -14789,7 +14946,7 @@ Three levels of ifthen is too much. The method should be split into smaller func
 +-------------+------------------------------------------------------------------------------------+
 | Short name  | Structures/NestedIfthen                                                            |
 +-------------+------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                     |
+| Rulesets    | :ref:`Analyze`                                                                     |
 +-------------+------------------------------------------------------------------------------------+
 | Severity    | Major                                                                              |
 +-------------+------------------------------------------------------------------------------------+
@@ -14876,7 +15033,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NestedTernary                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -14886,6 +15043,53 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Examples    | :ref:`spip-structures-nestedternary`, :ref:`zencart-structures-nestedternary`                     |
 +-------------+---------------------------------------------------------------------------------------------------+
+
+
+
+.. _nested-ternary-without-parenthesis:
+
+Nested Ternary Without Parenthesis
+##################################
+
+
+It is not allowed to nest ternary operator within itself, without parenthesis. This has been implemented in PHP 7.4.
+
+The reason behind this feature is to keep the code un ambiguous. See the Warning message for more explanations
+
+.. code-block:: php
+
+   <?php
+   
+   $a ? 1 : ($b ? 2 : 3);
+   
+   // Still valid, as not ambiguous 
+   $a ? $b ? 1 : 2 : 3;
+   
+   // Produces a warning
+   //Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)`
+   $a ? 1 : $b ? 2 : 3;
+   
+   ?>
+
+
+See also `PHP RFC: Deprecate left-associative ternary operator <https://wiki.php.net/rfc/ternary_associativity>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add parenthesis to nested ternary calls
+
++-------------+-------------------------------------+
+| Short name  | Php/NestedTernaryWithoutParenthesis |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74`           |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Quick (30 mins)                     |
++-------------+-------------------------------------+
 
 
 
@@ -14931,7 +15135,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Functions/NeverUsedParameter               |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`         |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`         |
 +-------------+--------------------------------------------+
 | Severity    | Minor                                      |
 +-------------+--------------------------------------------+
@@ -14996,7 +15200,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Classes/PropertyNeverUsed                  |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Minor                                      |
 +-------------+--------------------------------------------+
@@ -15039,7 +15243,7 @@ See also `New global constants in 7.2 <http://php.net/manual/en/migration72.cons
 +-------------+---------------------------+
 | Short name  | Php/Php72NewConstants     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -15114,7 +15318,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74NewConstants     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.4 and older    |
 +-------------+---------------------------+
@@ -15136,7 +15340,7 @@ PHP introduced new functions in PHP 5.4. If there are defined functions with suc
 +-------------+---------------------------+
 | Short name  | Php/Php54NewFunctions     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Php Version | With PHP 5.3 and older    |
 +-------------+---------------------------+
@@ -15158,7 +15362,7 @@ PHP introduced new functions in PHP 5.5. If you have already defined functions w
 +-------------+------------------------------------------------------+
 | Short name  | Php/Php55NewFunctions                                |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.5 and older                               |
 +-------------+------------------------------------------------------+
@@ -15180,7 +15384,7 @@ PHP introduced new functions in PHP 5.6. If you have already defined functions w
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/Php56NewFunctions                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and older                                                          |
 +-------------+---------------------------------------------------------------------------------+
@@ -15211,7 +15415,7 @@ The following functions are now native functions in PHP 7.0. It is advised to ch
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewFunctions                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -15241,7 +15445,7 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 +-------------+---------------------------+
 | Short name  | Php/Php71NewFunctions     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP71` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.1 and older    |
 +-------------+---------------------------+
@@ -15269,7 +15473,7 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 +-------------+---------------------------+
 | Short name  | Php/Php72NewFunctions     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -15304,7 +15508,7 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php73NewFunctions                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and older                                                                                                                                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -15333,7 +15537,7 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+---------------------------+
 | Short name  | Php/Php74NewFunctions     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.3 and older    |
 +-------------+---------------------------+
@@ -15386,7 +15590,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/NextMonthTrap                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                    |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -15449,7 +15653,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Structures/NoAppendOnSource |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -15504,7 +15708,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Short name  | Functions/NoBooleanAsDefault                 |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`                               |
+| Rulesets    | :ref:`Analyze`                               |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -15553,7 +15757,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------+
 | Short name  | Structures/NoChoice                                                      |
 +-------------+--------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                             |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                             |
 +-------------+--------------------------------------------------------------------------+
 | Severity    | Major                                                                    |
 +-------------+--------------------------------------------------------------------------+
@@ -15609,7 +15813,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Functions/NoClassAsTypehint                                                               |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -15655,7 +15859,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Php/NoClassInGlobal                |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -15736,7 +15940,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Performances/NotCountNull                                                           |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                 |
+| Rulesets    | :ref:`Performances`                                                                 |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -15788,7 +15992,7 @@ See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and
 +-------------+---------------------------------+
 | Short name  | Classes/DirectCallToMagicMethod |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
@@ -15830,7 +16034,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------+
 | Short name  | Structures/NoDirectUsage                                                       |
 +-------------+--------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                 |
+| Rulesets    | :ref:`Analyze`                                                                 |
 +-------------+--------------------------------------------------------------------------------+
 | Severity    | Major                                                                          |
 +-------------+--------------------------------------------------------------------------------+
@@ -15879,7 +16083,7 @@ Suggestions
 +-------------+----------------------+
 | Short name  | Security/NoEntIgnore |
 +-------------+----------------------+
-| Themes      | :ref:`Security`      |
+| Rulesets    | :ref:`Security`      |
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
@@ -15925,7 +16129,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Structures/NoEmptyRegex                 |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Analyze`                          |
+| Rulesets    | :ref:`Analyze`                          |
 +-------------+-----------------------------------------+
 | Severity    | Critical                                |
 +-------------+-----------------------------------------+
@@ -15972,7 +16176,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedHash                                                             |
 +-------------+----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                        |
 +-------------+----------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                               |
 +-------------+----------------------------------------------------------------------------------------+
@@ -16026,7 +16230,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedIp                                                           |
 +-------------+------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
 +-------------+------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                              |
 +-------------+------------------------------------------------------------------------------------+
@@ -16084,7 +16288,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedPath                                                                        |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -16129,7 +16333,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Structures/NoHardcodedPort                  |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`             |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`             |
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
@@ -16169,7 +16373,7 @@ See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migrat
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoListWithString                                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -16236,7 +16440,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Classes/NoMagicWithArray               |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -16279,7 +16483,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/NoMoreCurlyArrays     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -16340,7 +16544,7 @@ See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/obje
 +-------------+--------------------------+
 | Short name  | Structures/NoNeedForElse |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -16383,7 +16587,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Structures/NoNeedGetClass |
 +-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
+| Rulesets    | :ref:`Suggestions`        |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -16449,7 +16653,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Security/NoNetForXmlLoad |
 +-------------+--------------------------+
-| Themes      | :ref:`Security`          |
+| Rulesets    | :ref:`Security`          |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -16491,7 +16695,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoParenthesisForLanguageConstruct                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -16538,7 +16742,7 @@ Incrementing a variable should be done with the ++ or -- operators. Any other wa
 +-------------+------------------------------------------------+
 | Short name  | Structures/PlusEgalOne                         |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -16577,7 +16781,7 @@ The properties below are declared with public access, but are never used publicl
 +-------------+------------------------+
 | Short name  | Classes/NoPublicAccess |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -16625,7 +16829,7 @@ See also `Floating point numbers <http://php.net/manual/en/language.types.float.
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Type/NoRealComparison                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -16670,7 +16874,7 @@ See also `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee0
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoReferenceForStaticProperty                                                                                                                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and older                                                                                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -16727,7 +16931,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Php/NoReferenceForTernary                  |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Major                                      |
 +-------------+--------------------------------------------+
@@ -16768,7 +16972,7 @@ Note that PHP won't compile the code if the operator is a short operator (+=, .=
 +-------------+------------------------------+
 | Short name  | Structures/NoReferenceOnLeft |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Critical                     |
 +-------------+------------------------------+
@@ -16802,7 +17006,7 @@ See also `Generators overview <http://php.net/manual/en/language.generators.over
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoReturnForGenerator                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -16869,7 +17073,7 @@ See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_In
 +-------------+------------------------------+
 | Short name  | Structures/NoReturnInFinally |
 +-------------+------------------------------+
-| Themes      | :ref:`Security`              |
+| Rulesets    | :ref:`Security`              |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -16925,7 +17129,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------+
 | Short name  | Functions/NoReturnUsed                                                      |
 +-------------+-----------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                          |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                          |
 +-------------+-----------------------------------------------------------------------------+
 | Severity    | Minor                                                                       |
 +-------------+-----------------------------------------------------------------------------+
@@ -16982,7 +17186,7 @@ Suggestions
 +-------------+------------------------------------------------------------+
 | Short name  | Classes/NoSelfReferencingConstant                          |
 +-------------+------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview` |
 +-------------+------------------------------------------------------------+
 | Severity    | Minor                                                      |
 +-------------+------------------------------------------------------------+
@@ -17024,7 +17228,7 @@ Suggestions
 +-------------+------------------------+
 | Short name  | Arrays/NoSpreadForHash |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -17058,7 +17262,7 @@ This was possible in PHP 5, but is now forbidden in PHP 7.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoStringWithAppend                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -17094,7 +17298,7 @@ Seel also `Generalize support of negative string offsets <https://wiki.php.net/r
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoSubstrMinusOne                                                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -17143,7 +17347,7 @@ Beware that `substr() <http://www.php.net/substr>`_ and ``$v[$pos]`` are similar
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoSubstrOne                                                                           |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -17210,7 +17414,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/ArrayMergeInLoops                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Top10`                                                           |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Top10`                                                           |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -17253,7 +17457,7 @@ It is not possible to pass explicitly null to `get_class() <http://www.php.net/g
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoGetClassNull                                                                                                                                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -17303,7 +17507,7 @@ Suggestions
 +-------------+------------------------------------------+
 | Short name  | Structures/NoIssetWithEmpty              |
 +-------------+------------------------------------------+
-| Themes      | :ref:`Analyze`                           |
+| Rulesets    | :ref:`Analyze`                           |
 +-------------+------------------------------------------+
 | Severity    | Minor                                    |
 +-------------+------------------------------------------+
@@ -17351,7 +17555,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Variables/VariableNonascii                |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`                            |
+| Rulesets    | :ref:`Analyze`                            |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -17368,8 +17572,7 @@ Non Static Methods Called In A Static
 #####################################
 
 
-Static methods have to be declared as such (using the static keyword). Then, 
-one may call them without instantiating the object.
+Static methods have to be declared as such (using the static keyword). Then, one may call them without instantiating the object.
 
 PHP 7.0, and more recent versions, yield a deprecated error : ``Non-static method A\:\:B() should not be called statically``.
 
@@ -17384,6 +17587,14 @@ PHP 5 and older doesn't check that a method is static or not : at any point, the
        } 
        
        x::sm( ); // echo x::sm 
+       
+       // Dynamic call
+       ['x', 'sm']();
+       [\x::class, 'sm']();
+   
+       $s = 'x::sm';
+       $s();
+   
    ?>
 
 
@@ -17421,7 +17632,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NonStaticMethodsCalledStatic                                                                                       |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                      |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
@@ -17483,7 +17694,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Arrays/NonConstantArray                                                         |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                  |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Minor                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -17532,7 +17743,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Short name  | Php/UpperCaseKeyword                           |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -17579,7 +17790,7 @@ Suggestions
 +-------------+-------------------+
 | Short name  | Php/NotScalarType |
 +-------------+-------------------+
-| Themes      | :ref:`Analyze`    |
+| Rulesets    | :ref:`Analyze`    |
 +-------------+-------------------+
 | Severity    | Major             |
 +-------------+-------------------+
@@ -17623,7 +17834,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/NotNot                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -17666,7 +17877,7 @@ See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.n
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NullOnNew                                                                                          |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -17711,7 +17922,7 @@ Suggestions
 +-------------+--------------------+
 | Short name  | Arrays/NullBoolean |
 +-------------+--------------------+
-| Themes      | :ref:`Analyze`     |
+| Rulesets    | :ref:`Analyze`     |
 +-------------+--------------------+
 | Severity    | Minor              |
 +-------------+--------------------+
@@ -17752,7 +17963,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/IntegerSeparatorUsage |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`CompatibilityPHP73` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -17812,7 +18023,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ObjectReferences                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -17882,7 +18093,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/OldStyleConstructor                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -17928,7 +18139,7 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Php/oldAutoloadUsage                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -17987,7 +18198,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Short name  | Structures/OneIfIsSufficient                 |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Suggestions`                           |
+| Rulesets    | :ref:`Suggestions`                           |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -18034,7 +18245,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/OneLetterFunctions                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`                                                |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -18089,7 +18300,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Type/OneVariableStrings                                                           |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -18139,7 +18350,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Functions/OnlyVariableForReference     |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
@@ -18186,7 +18397,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/OnlyVariablePassedByReference                                                                        |
 +-------------+----------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                 |
+| Rulesets    | :ref:`Analyze`                                                                                                 |
 +-------------+----------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                       |
 +-------------+----------------------------------------------------------------------------------------------------------------+
@@ -18229,7 +18440,7 @@ Anything else, like literals or static expressions, yield a warning at execution
 +-------------+--------------------------------------------+
 | Short name  | Structures/OnlyVariableReturnedByReference |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Major                                      |
 +-------------+--------------------------------------------+
@@ -18271,7 +18482,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/OrDie                                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -18321,7 +18532,7 @@ Optional characteristics, like final, static... are not specified. Special metho
 +------------+------------------------------------------------+
 | Short name | Classes/OrderOfDeclaration                     |
 +------------+------------------------------------------------+
-| Themes     | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets   | :ref:`Coding Conventions <coding-conventions>` |
 +------------+------------------------------------------------+
 
 
@@ -18379,7 +18590,7 @@ Suggestions
 +-------------+-------------------------------+
 | Short name  | Structures/ForeachSourceValue |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -18417,7 +18628,7 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
 +-------------+------------------------------------+
 | Short name  | Exceptions/OverwriteException      |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -18459,7 +18670,7 @@ This analysis doesn't take into account the distance between two assignations : 
 +-------------+-------------------------------+
 | Short name  | Variables/OverwrittenLiterals |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -18514,7 +18725,7 @@ See also `New Classes and Interfaces <http://php.net/manual/en/migration70.class
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewClasses                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -18536,7 +18747,7 @@ The following interfaces are introduced in PHP 7.0. They shouldn't be defined in
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewInterfaces                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -18558,7 +18769,7 @@ List of directives that are removed in PHP 7.0.
 +-------------+------------------------------------------------------+
 | Short name  | Php/Php70RemovedDirective                            |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                         |
 +-------------+------------------------------------------------------+
@@ -18618,7 +18829,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Short name  | Php/Php70RemovedFunctions                            |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                               |
 +-------------+------------------------------------------------------+
@@ -18661,7 +18872,7 @@ See also `Scalar type declarations <http://php.net/manual/en/migration70.new-fea
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/PHP70scalartypehints                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -18715,7 +18926,7 @@ See also `Backward incompatible changes <http://php.net/manual/en/migration71.in
 +-------------+---------------------------+
 | Short name  | Php/Php71microseconds     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP71` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -18735,7 +18946,7 @@ List of directives that are removed in PHP 7.1.
 +-------------+------------------------------+
 | Short name  | Php/Php71RemovedDirective    |
 +-------------+------------------------------+
-| Themes      | :ref:`CompatibilityPHP71`    |
+| Rulesets    | :ref:`CompatibilityPHP71`    |
 +-------------+------------------------------+
 | Php Version | With PHP 7.1 and more recent |
 +-------------+------------------------------+
@@ -18783,7 +18994,7 @@ See also `iterable pseudo-type <http://php.net/manual/en/migration71.new-feature
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/PHP71scalartypehints                                                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -18824,7 +19035,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php72Deprecation      |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -18862,7 +19073,7 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_.
 +-------------+---------------------------+
 | Short name  | Php/Php72ObjectKeyword    |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -18891,7 +19102,7 @@ See also `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72
 +-------------+---------------------------+
 | Short name  | Php/Php72RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP72` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -18931,7 +19142,7 @@ See also `New object type <http://php.net/manual/en/migration72.new-features.php
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/PHP72scalartypehints                                                                                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and more recent                                                                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -18978,7 +19189,7 @@ See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/tra
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/PHP73LastEmptyArgument                                                                                                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and more recent                                                                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -19006,7 +19217,7 @@ See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incomp
 +-------------+---------------------------+
 | Short name  | Php/Php73RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`CompatibilityPHP73` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.3 and older    |
 +-------------+---------------------------+
@@ -19039,7 +19250,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74Deprecation      |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.4 and older    |
 +-------------+---------------------------+
@@ -19071,7 +19282,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74RemovedDirective |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -19103,7 +19314,7 @@ See also `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incomp
 +-------------+---------------------------+
 | Short name  | Php/Php74RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.3 and older    |
 +-------------+---------------------------+
@@ -19160,7 +19371,40 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74ReservedKeyword  |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
+.. _php-74-new-directives:
+
+PHP 74 New Directives
+#####################
+
+
+List of directives that are removed in PHP 7.4.
+
++ zend.exception_ignore_args : From the php.ini : ``Allows to include or exclude arguments from stack traces generated for exceptions. Default: Off``
++ opcache.preload_user
+
+
+See `RFC Preload <https://wiki.php.net/rfc/preload>`_ et
+    `RFC Preload <https://wiki.php.net/rfc/preload>`_ et.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not use those directives with PHP before 7.4
+
++-------------+---------------------------+
+| Short name  | Php/Php74NewDirective     |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP73` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -19189,7 +19433,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php80RemovedConstant  |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP80` |
+| Rulesets    | :ref:`CompatibilityPHP80` |
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
@@ -19214,7 +19458,7 @@ The following PHP native functions were removed in PHP 8.0.
 +-------------+---------------------------+
 | Short name  | Php/Php80RemovedFunctions |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP80` |
+| Rulesets    | :ref:`CompatibilityPHP80` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.0 and older    |
 +-------------+---------------------------+
@@ -19275,7 +19519,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------+
 | Short name  | Php/ReservedNames                                                     |
 +-------------+-----------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                        |
+| Rulesets    | :ref:`Analyze`                                                        |
 +-------------+-----------------------------------------------------------------------+
 | Severity    | Major                                                                 |
 +-------------+-----------------------------------------------------------------------+
@@ -19337,7 +19581,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Variables/Php5IndirectExpression                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -19381,7 +19625,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/PHP7Dirname                                                                                                         |
 +-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
 +-------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                          |
 +-------------+--------------------------------------------------------------------------------------------------------------------------------+
@@ -19444,7 +19688,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------+
 | Short name  | Classes/ParentFirst                                                        |
 +-------------+----------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                         |
 +-------------+----------------------------------------------------------------------------+
 | Severity    | Minor                                                                      |
 +-------------+----------------------------------------------------------------------------+
@@ -19490,7 +19734,7 @@ Static may be used in a function or a closure, but not globally.
 +-------------+-------------------------+
 | Short name  | Classes/PssWithoutClass |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
@@ -19522,7 +19766,7 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ParenthesisAsParameter                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -19576,7 +19820,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Php/PathinfoReturns                  |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -19634,7 +19878,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Variables/Php7IndirectExpression                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -19669,7 +19913,7 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php71NewClasses                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and older                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -19713,7 +19957,7 @@ The new class is : HashContext.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php72NewClasses                                                                                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.2 and older                                                                                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -19768,7 +20012,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74NewClasses       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.2 and older    |
 +-------------+---------------------------+
@@ -19793,7 +20037,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Php/Php74mbstrrpos3rdArg  |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -19832,7 +20076,7 @@ See also `Loosening Reserved Word Restrictions <http://php.net/manual/en/migrati
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php7RelaxedKeyword                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -19880,7 +20124,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Structures/PhpinfoUsage                |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Security`                        |
+| Rulesets    | :ref:`Security`                        |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -19926,7 +20170,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------+
 | Short name  | Structures/PossibleIncrement                                                             |
 +-------------+------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                       |
+| Rulesets    | :ref:`Suggestions`                                                                       |
 +-------------+------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                    |
 +-------------+------------------------------------------------------------------------------------------+
@@ -19968,7 +20212,7 @@ It is recommended to check the file resources when they are opened, and always u
 +-------------+---------------------------------+
 | Short name  | Structures/PossibleInfiniteLoop |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Critical                        |
 +-------------+---------------------------------+
@@ -20039,7 +20283,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------+
 | Short name  | Php/MissingSubpattern                                                      |
 +-------------+----------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                               |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                               |
 +-------------+----------------------------------------------------------------------------+
 | Severity    | Minor                                                                      |
 +-------------+----------------------------------------------------------------------------+
@@ -20087,7 +20331,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Performances/PrePostIncrement                                                                    |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                              |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -20164,7 +20408,7 @@ If the array has to be completed rather than created, it is also faster to use +
 +-------------+-------------------------+
 | Short name  | Arrays/ShouldPreprocess |
 +-------------+-------------------------+
-| Themes      | none                    |
+| Rulesets    | none                    |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -20210,7 +20454,7 @@ Suggestions
 +-------------+--------------------------------------------------------+
 | Short name  | Structures/ShouldPreprocess                            |
 +-------------+--------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
 +-------------+--------------------------------------------------------+
 | Severity    | Minor                                                  |
 +-------------+--------------------------------------------------------+
@@ -20252,7 +20496,7 @@ When stopping a script with `die() <http://www.php.net/`die <http://www.php.net/
 +-------------+------------------------+
 | Short name  | Structures/PrintAndDie |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -20297,7 +20541,7 @@ See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>
 +-------------+----------------------------+
 | Short name  | Structures/PrintfArguments |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -20341,7 +20585,7 @@ It is better to apply the `preg_replace() <http://www.php.net/preg_replace>`_ to
 +-------------+-------------------------------+
 | Short name  | Performances/RegexOnCollector |
 +-------------+-------------------------------+
-| Themes      | :ref:`Performances`           |
+| Rulesets    | :ref:`Performances`           |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -20379,7 +20623,7 @@ Public properties are omitted here : they may be modified anywhere in the code.
 +-------------+------------------------------------+
 | Short name  | Classes/PropertyCouldBeLocal       |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -20431,7 +20675,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +-------------+------------------------+
 | Short name  | Classes/CouldBePrivate |
 +-------------+------------------------+
-| Themes      | :ref:`ClassReview`     |
+| Rulesets    | :ref:`ClassReview`     |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -20502,7 +20746,7 @@ Suggestions
 +-------------+---------------------------------------------------+
 | Short name  | Classes/PropertyUsedInOneMethodOnly               |
 +-------------+---------------------------------------------------+
-| Themes      | :ref:`Analyze`                                    |
+| Rulesets    | :ref:`Analyze`                                    |
 +-------------+---------------------------------------------------+
 | Severity    | Minor                                             |
 +-------------+---------------------------------------------------+
@@ -20541,7 +20785,7 @@ Sometimes, when the property is going to be replaced by the incoming argument, o
 +-------------+--------------------------------------+
 | Short name  | Structures/PropertyVariableConfusion |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`                       |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -20600,7 +20844,7 @@ This optimisation is not always possible : for example, some SQL queries may not
 +-------------+------------------------------+
 | Short name  | Structures/QueriesInLoop     |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10` |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -20659,7 +20903,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Classes/RaisedAccessLevel                  |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`ClassReview`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`ClassReview`, :ref:`LintButWontExec` |
 +-------------+--------------------------------------------+
 | Severity    | Critical                                   |
 +-------------+--------------------------------------------+
@@ -20700,7 +20944,7 @@ Since PHP 7.4, `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random
 +-------------+------------------------------+
 | Short name  | Structures/RandomWithoutTry  |
 +-------------+------------------------------+
-| Themes      | :ref:`Security`              |
+| Rulesets    | :ref:`Security`              |
 +-------------+------------------------------+
 | Php Version | With PHP 7.0 and more recent |
 +-------------+------------------------------+
@@ -20754,7 +20998,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Arrays/RandomlySortedLiterals                                                             |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                        |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -20792,7 +21036,7 @@ This is possible when managing some backward compatibility, like emulating an ol
 +-------------+---------------------------------+
 | Short name  | Functions/RedeclaredPhpFunction |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
@@ -20836,7 +21080,7 @@ It is recommended to use distinct names.
 +-------------+----------------------------+
 | Short name  | Classes/RedefinedConstants |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -20878,7 +21122,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Classes/RedefinedDefault               |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`                         |
+| Rulesets    | :ref:`Analyze`                         |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -20916,7 +21160,7 @@ However, having two or more properties with the same name, in the class hierarch
 +-------------+-----------------------------------------------+
 | Short name  | Classes/RedefinedPrivateProperty              |
 +-------------+-----------------------------------------------+
-| Themes      | :ref:`Analyze`                                |
+| Rulesets    | :ref:`Analyze`                                |
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
@@ -20962,7 +21206,7 @@ It is recommended to avoid redefining the same property in a hierarchy.
 +-------------+---------------------------+
 | Short name  | Classes/RedefinedProperty |
 +-------------+---------------------------+
-| Themes      | :ref:`ClassReview`        |
+| Rulesets    | :ref:`ClassReview`        |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -21009,7 +21253,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Php/ReflectionExportIsDeprecated |
 +-------------+----------------------------------+
-| Themes      | :ref:`CompatibilityPHP74`        |
+| Rulesets    | :ref:`CompatibilityPHP74`        |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -21072,7 +21316,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Performances/RegexOnArrays |
 +-------------+----------------------------+
-| Themes      | :ref:`Performances`        |
+| Rulesets    | :ref:`Performances`        |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -21112,7 +21356,7 @@ Mimicking ``register_globals`` is achieved with variables variables, `extract() 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Security/RegisterGlobals                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                                 |
+| Rulesets    | :ref:`Security`                                                                 |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Critical                                                                        |
 +-------------+---------------------------------------------------------------------------------+
@@ -21157,7 +21401,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------+
 | Short name  | Functions/RelayFunction                                                      |
 +-------------+------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                               |
+| Rulesets    | :ref:`Analyze`                                                               |
 +-------------+------------------------------------------------------------------------------+
 | Severity    | Major                                                                        |
 +-------------+------------------------------------------------------------------------------+
@@ -21200,7 +21444,7 @@ See also `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.p
 +-------------+------------------------------+
 | Short name  | Interfaces/RepeatedInterface |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -21251,7 +21495,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/RepeatedRegex                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -21298,7 +21542,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/RepeatedPrint                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -21336,7 +21580,7 @@ See also `List of other reserved words <http://php.net/manual/en/reserved.other-
 +-------------+---------------------------+
 | Short name  | Php/ReservedKeywords7     |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP70` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.0 and older    |
 +-------------+---------------------------+
@@ -21366,7 +21610,7 @@ Results May Be Missing
 +-------------+-------------------------------+
 | Short name  | Structures/ResultMayBeMissing |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
@@ -21414,7 +21658,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Short name  | Exceptions/Rethrown                   |
 +-------------+---------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`          |
+| Rulesets    | :ref:`Dead code <dead-code>`          |
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
@@ -21485,7 +21729,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Structures/ReturnTrueFalse                                                          |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                      |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Major                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -21526,7 +21770,7 @@ return statement doesn't need parenthesis. PHP tolerates them with return statem
 +-------------+------------------------------------------------+
 | Short name  | Php/ReturnWithParenthesis                      |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -21561,7 +21805,7 @@ A variable is already holding the content that is re-calculated later. Use the c
 +-------------+--------------------------+
 | Short name  | Structures/ReuseVariable |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -21606,7 +21850,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Security/CurlOptions                 |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Security`                      |
+| Rulesets    | :ref:`Security`                      |
 +-------------+--------------------------------------+
 | Severity    | Major                                |
 +-------------+--------------------------------------+
@@ -21645,7 +21889,7 @@ See also `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http
 +-------------+--------------------------+
 | Short name  | Security/SafeHttpHeaders |
 +-------------+--------------------------+
-| Themes      | :ref:`Security`          |
+| Rulesets    | :ref:`Security`          |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -21703,7 +21947,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/SameConditions                                                         |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Critical                                                                          |
 +-------------+-----------------------------------------------------------------------------------+
@@ -21751,7 +21995,7 @@ The source will also be destroyed immediately after the blind variable has been 
 +-------------+-----------------------------+
 | Short name  | Structures/AutoUnsetForeach |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -21793,7 +22037,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Php/ScalarAreNotArrays                    |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP74` |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -21870,7 +22114,7 @@ See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern
 +-------------+--------------------------------+
 | Short name  | Classes/ScalarOrObjectProperty |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -21920,7 +22164,7 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Short name  | Traits/SelfUsingTrait                            |
 +-------------+--------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`ClassReview` |
 +-------------+--------------------------------------------------+
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
@@ -21962,7 +22206,7 @@ See also `Sessions: Improve original RFC about lazy_write <https://wiki.php.net/
 +-------------+---------------------------+
 | Short name  | Security/SessionLazyWrite |
 +-------------+---------------------------+
-| Themes      | :ref:`Security`           |
+| Rulesets    | :ref:`Security`           |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -22038,7 +22282,7 @@ Suggestions
 +-------------+---------------------+
 | Short name  | Structures/SetAside |
 +-------------+---------------------+
-| Themes      | :ref:`Suggestions`  |
+| Rulesets    | :ref:`Suggestions`  |
 +-------------+---------------------+
 | Severity    | Minor               |
 +-------------+---------------------+
@@ -22090,7 +22334,7 @@ See also `setcookie <http://www.php.net/setcookie>`_ and `'SameSite' cookie attr
 +-------------+------------------------+
 | Short name  | Security/SetCookieArgs |
 +-------------+------------------------+
-| Themes      | :ref:`Security`        |
+| Rulesets    | :ref:`Security`        |
 +-------------+------------------------+
 | Severity    | Major                  |
 +-------------+------------------------+
@@ -22131,7 +22375,7 @@ See also `setlocale <http://php.net/setlocale>`_.
 +-------------+------------------------------------+
 | Short name  | Structures/SetlocaleNeedsConstants |
 +-------------+------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`          |
+| Rulesets    | :ref:`CompatibilityPHP70`          |
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
@@ -22177,7 +22421,7 @@ See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/obje
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Structures/OneLineTwoInstructions                                                                |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                   |
+| Rulesets    | :ref:`Analyze`                                                                                   |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -22199,7 +22443,7 @@ Usage of short open tags is discouraged. The following files were found to be im
 +-------------+--------------------------+
 | Short name  | Php/ShortOpenTagRequired |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -22236,7 +22480,7 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 +-------------+---------------------------+
 | Short name  | Arrays/ArrayNSUsage       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
@@ -22275,7 +22519,7 @@ If you have too many of them, don't loose your time switching them all. If you h
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Type/ShouldBeSingleQuote                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`                                                |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -22322,7 +22566,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/ShouldChainException                                                               |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -22391,7 +22635,7 @@ Suggestions
 +-------------+-------------------------+
 | Short name  | Classes/ShouldDeepClone |
 +-------------+-------------------------+
-| Themes      | :ref:`Suggestions`      |
+| Rulesets    | :ref:`Suggestions`      |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -22463,7 +22707,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Classes/ShouldHaveDestructor |
 +-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
+| Rulesets    | :ref:`Suggestions`           |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -22510,7 +22754,7 @@ Finally, short names makes the rest of the code readable.
 +-------------+----------------------------+
 | Short name  | Namespaces/ShouldMakeAlias |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -22558,7 +22802,7 @@ This way, they are less verbose, compatible with assignation and easier to read.
 +-------------+------------------------------+
 | Short name  | Structures/ShouldMakeTernary |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -22608,7 +22852,7 @@ Suggestions
 +------------+---------------------------------------+
 | Short name | Php/ShouldPreprocess                  |
 +------------+---------------------------------------+
-| Themes     | none                                  |
+| Rulesets   | none                                  |
 +------------+---------------------------------------+
 | Examples   | :ref:`phpadsnew-php-shouldpreprocess` |
 +------------+---------------------------------------+
@@ -22655,7 +22899,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------+
 | Short name  | Type/ShouldTypecast                                                      |
 +-------------+--------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                           |
+| Rulesets    | :ref:`Analyze`                                                           |
 +-------------+--------------------------------------------------------------------------+
 | Severity    | Minor                                                                    |
 +-------------+--------------------------------------------------------------------------+
@@ -22702,7 +22946,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Php/ShouldUseCoalesce                                                            |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                               |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                               |
 +-------------+----------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                     |
 +-------------+----------------------------------------------------------------------------------+
@@ -22747,7 +22991,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Functions/ShouldUseConstants               |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Minor                                      |
 +-------------+--------------------------------------------+
@@ -22755,6 +22999,56 @@ Suggestions
 +-------------+--------------------------------------------+
 | Examples    | :ref:`tine20-functions-shoulduseconstants` |
 +-------------+--------------------------------------------+
+
+
+
+.. _should-use-explode-args:
+
+Should Use Explode Args
+#######################
+
+
+`explode() <http://www.php.net/explode>`_ has a third argument, which limits the amount of exploded elements. With it, it is possible to collect only the first elements, or drop the last ones.
+
+.. code-block:: php
+
+   <?php
+   
+   $exploded = explode(DELIMITER, $string);
+   
+   // use explode(DELIMITER, $string, -1);
+   array_pop($exploded);
+   
+   // use explode(DELIMITER, $string, -2);
+   $c = array_slice($exploded, 0, -2);
+   
+   // with explode()'s third argument : 
+   list($a, $b) = explode(DELIMITER, $string, 2);
+   
+   // with list() omitted arguments
+   list($a, $b, ) = explode(DELIMITER, $string);
+   
+   ?>
+
+
+See also `explode <https://www.php.net/manual/en/function.explode.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------+
+| Short name  | Structures/ShouldUseExplodeArgs |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
@@ -22787,6 +23081,11 @@ Use foreach instead of for when traversing an array.
        doSomething($element);
    }
    
+   // Based on array_pop or array_shift()
+   while($value = array_pop($array)) {
+       doSomething($array);
+   }
+   
    ?>
 
 
@@ -22802,7 +23101,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ShouldUseForeach                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                                  |
+| Rulesets    | :ref:`Suggestions`                                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -22862,7 +23161,7 @@ Suggestions
 +-------------+-----------------------+
 | Short name  | Php/ShouldUseFunction |
 +-------------+-----------------------+
-| Themes      | :ref:`Performances`   |
+| Rulesets    | :ref:`Performances`   |
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
@@ -22919,7 +23218,7 @@ Note that a method using a class constant is not considered as using the local c
 +-------------+-----------------------------------------------------------------------------------------+
 | Short name  | Classes/ShouldUseThis                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                          |
 +-------------+-----------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
@@ -22975,7 +23274,7 @@ See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
 +-------------+--------------------------+
 | Short name  | Structures/ShouldUseMath |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -23021,7 +23320,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/ShouldUseOperator                                                              |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                        |
+| Rulesets    | :ref:`Suggestions`                                                                        |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -23082,7 +23381,7 @@ Suggestions
 +-------------+-----------------------------------------------------+
 | Short name  | Security/ShouldUsePreparedStatement                 |
 +-------------+-----------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                     |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                     |
 +-------------+-----------------------------------------------------+
 | Severity    | Major                                               |
 +-------------+-----------------------------------------------------+
@@ -23130,7 +23429,7 @@ Suggestions
 +-------------+------------------+
 | Short name  | Php/UseSetCookie |
 +-------------+------------------+
-| Themes      | :ref:`Analyze`   |
+| Rulesets    | :ref:`Analyze`   |
 +-------------+------------------+
 | Severity    | Major            |
 +-------------+------------------+
@@ -23177,7 +23476,7 @@ See also `[blog] `array_column() <http://www.php.net/array_column>`_ <https://be
 +-------------+-----------------------------------------+
 | Short name  | Php/ShouldUseArrayColumn                |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Performances`, :ref:`Suggestions` |
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
@@ -23235,7 +23534,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------+
 | Short name  | Php/ShouldUseArrayFilter                                                           |
 +-------------+------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                 |
+| Rulesets    | :ref:`Suggestions`                                                                 |
 +-------------+------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                              |
 +-------------+------------------------------------------------------------------------------------+
@@ -23282,7 +23581,7 @@ See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Se
 +-------------+---------------------------------------+
 | Short name  | Security/ShouldUseSessionRegenerateId |
 +-------------+---------------------------------------+
-| Themes      | :ref:`Security`                       |
+| Rulesets    | :ref:`Security`                       |
 +-------------+---------------------------------------+
 | Severity    | Major                                 |
 +-------------+---------------------------------------+
@@ -23372,7 +23671,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Functions/ShouldYieldWithKey |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10` |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -23431,7 +23730,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Type/SilentlyCastInteger                  |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`                            |
+| Rulesets    | :ref:`Analyze`                            |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -23483,7 +23782,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Short name  | Type/SimilarIntegers                           |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -23518,7 +23817,7 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
 +-------------+---------------------------------+
 | Short name  | Php/GlobalWithoutSimpleVariable |
 +-------------+---------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`       |
+| Rulesets    | :ref:`CompatibilityPHP70`       |
 +-------------+---------------------------------+
 | Php Version | With PHP 7.0 and older          |
 +-------------+---------------------------------+
@@ -23580,7 +23879,7 @@ See also `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-swit
 +-------------+------------------------------+
 | Short name  | Performances/SimpleSwitch    |
 +-------------+------------------------------+
-| Themes      | :ref:`Performances`          |
+| Rulesets    | :ref:`Performances`          |
 +-------------+------------------------------+
 | Php Version | With PHP 7.2 and more recent |
 +-------------+------------------------------+
@@ -23625,7 +23924,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------+
 | Short name  | Structures/SimplePreg                                                     |
 +-------------+---------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                       |
+| Rulesets    | :ref:`Performances`                                                       |
 +-------------+---------------------------------------------------------------------------+
 | Severity    | Major                                                                     |
 +-------------+---------------------------------------------------------------------------+
@@ -23668,7 +23967,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Arrays/SliceFirst                       |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Performances`, :ref:`Suggestions` |
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
@@ -23738,7 +24037,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/SlowFunctions                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                                                                 |
+| Rulesets    | :ref:`Performances`                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
@@ -23781,7 +24080,7 @@ See also `SQLite3\:\:escapeString <http://php.net/manual/en/sqlite3.escapestring
 +-------------+--------------------------------------+
 | Short name  | Security/Sqlite3RequiresSingleQuotes |
 +-------------+--------------------------------------+
-| Themes      | :ref:`Security`                      |
+| Rulesets    | :ref:`Security`                      |
 +-------------+--------------------------------------+
 | Severity    | Major                                |
 +-------------+--------------------------------------+
@@ -23840,7 +24139,7 @@ Suggestions
 +-------------+-----------------------+
 | Short name  | Structures/StaticLoop |
 +-------------+-----------------------+
-| Themes      | :ref:`Analyze`        |
+| Rulesets    | :ref:`Analyze`        |
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
@@ -23877,7 +24176,7 @@ To maintain code readability, it is recommended to call static method in a stati
 +-------------+---------------------------------------+
 | Short name  | Classes/StaticMethodsCalledFromObject |
 +-------------+---------------------------------------+
-| Themes      | :ref:`Analyze`                        |
+| Rulesets    | :ref:`Analyze`                        |
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
@@ -23928,7 +24227,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/StaticContainsThis                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -23974,7 +24273,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Constants/StrangeName          |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Analyze` |
+| Rulesets    | :ref:`Analyze`, :ref:`Analyze` |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -24031,7 +24330,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------+
 | Short name  | Variables/StrangeName                                                      |
 +-------------+----------------------------------------------------------------------------+
-| Themes      | none                                                                       |
+| Rulesets    | none                                                                       |
 +-------------+----------------------------------------------------------------------------+
 | Severity    | Minor                                                                      |
 +-------------+----------------------------------------------------------------------------+
@@ -24097,7 +24396,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Structures/BooleanStrictComparison                                                               |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                               |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                               |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -24148,7 +24447,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Arrays/StringInitialization |
 +-------------+-----------------------------+
-| Themes      | :ref:`CompatibilityPHP71`   |
+| Rulesets    | :ref:`CompatibilityPHP71`   |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -24198,7 +24497,7 @@ However, there are some potential variables in those strings, making it possible
 +-------------+--------------------------+
 | Short name  | Type/StringHoldAVariable |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -24247,7 +24546,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Type/StringWithStrangeSpace                                                           |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                        |
+| Rulesets    | :ref:`Analyze`                                                                        |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -24331,7 +24630,7 @@ See also `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/StrposCompare                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -24385,7 +24684,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Php/StrtrArguments                 |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
@@ -24410,7 +24709,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Structures/ImplodeArgsOrder |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -24463,7 +24762,7 @@ Suggestions
 +-------------+-------------------------+
 | Short name  | Structures/SubstrToTrim |
 +-------------+-------------------------+
-| Themes      | :ref:`Suggestions`      |
+| Rulesets    | :ref:`Suggestions`      |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -24506,7 +24805,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Performances/SubstrFirst                                                         |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10`                            |
+| Rulesets    | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10`                            |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -24558,7 +24857,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/SuspiciousComparison                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -24608,7 +24907,7 @@ See also `CWE-484: Omitted `Break <http://www.php.net/manual/en/control-structur
 +-------------+------------------------+
 | Short name  | Structures/Fallthrough |
 +-------------+------------------------+
-| Themes      | :ref:`Security`        |
+| Rulesets    | :ref:`Security`        |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -24684,7 +24983,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/SwitchToSwitch                                                       |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                  |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Minor                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -24735,7 +25034,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/SwitchWithMultipleDefault                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -24808,7 +25107,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/SwitchWithoutDefault                                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                                    |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
@@ -24859,7 +25158,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Short name  | Structures/TernaryInConcat                 |
 +-------------+--------------------------------------------+
-| Themes      | :ref:`Analyze`                             |
+| Rulesets    | :ref:`Analyze`                             |
 +-------------+--------------------------------------------+
 | Severity    | Critical                                   |
 +-------------+--------------------------------------------+
@@ -24909,7 +25208,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/TestThenCast                                                         |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                  |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -24959,7 +25258,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------+
 | Short name  | Exceptions/ThrowFunctioncall                                                            |
 +-------------+-----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                          |
 +-------------+-----------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
@@ -25012,7 +25311,7 @@ See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.d
 +-------------+-------------------------+
 | Short name  | Classes/ThrowInDestruct |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
@@ -25056,7 +25355,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Structures/ThrowsAndAssign |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -25106,7 +25405,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Structures/TimestampDifference                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                              |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -25114,6 +25413,55 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Examples    | :ref:`zurmo-structures-timestampdifference`, :ref:`shopware-structures-timestampdifference` |
 +-------------+---------------------------------------------------------------------------------------------+
+
+
+
+.. _too-many-array-dimensions:
+
+Too Many Array Dimensions
+#########################
+
+
+When arrays a getting to many nesting. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a          = array();   // level 1;
+   $a[1]       = array();   // level 2
+   $a[1][2]    = array();   // level 3 : still valid by default
+   $a[1][2][3] = array();   // level 4 
+   
+   ?>
+
+
+PHP has no limit, and accepts any number of nesting levels. Yet, this is usually very memory hungry.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++---------------+---------+---------+-----------------------------------------+
+| Name          | Default | Type    | Description                             |
++---------------+---------+---------+-----------------------------------------+
+| maxDimensions | 3       | integer | Number of valid dimensions in an array. |
++---------------+---------+---------+-----------------------------------------+
+
+
+
++-------------+--------------------------+
+| Short name  | Arrays/TooManyDimensions |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -25173,7 +25521,7 @@ See also `Why is subclassing too much bad (and hence why should we use prototype
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Classes/TooManyChildren                                                          |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                               |
+| Rulesets    | :ref:`Suggestions`                                                               |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -25217,7 +25565,7 @@ See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/
 +-------------+----------------------+
 | Short name  | Classes/TooManyFinds |
 +-------------+----------------------+
-| Themes      | :ref:`Analyze`       |
+| Rulesets    | :ref:`Analyze`       |
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
@@ -25278,7 +25626,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Classes/TooManyInjections                                                           |
 +-------------+-------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                      |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -25382,7 +25730,7 @@ Suggestions
 +-------------+-------------------------------------------------+
 | Short name  | Functions/TooManyLocalVariables                 |
 +-------------+-------------------------------------------------+
-| Themes      | :ref:`Analyze`                                  |
+| Rulesets    | :ref:`Analyze`                                  |
 +-------------+-------------------------------------------------+
 | Severity    | Minor                                           |
 +-------------+-------------------------------------------------+
@@ -25434,15 +25782,17 @@ This analysis reports any situation where more than 3 PHP native calls are neste
 
 
 
-+-------------+------------------------+
-| Short name  | Php/TooManyNativeCalls |
-+-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
-+-------------+------------------------+
++-------------+------------------------------------+
+| Short name  | Php/TooManyNativeCalls             |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`                     |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | :ref:`spip-php-toomanynativecalls` |
++-------------+------------------------------------+
 
 
 
@@ -25481,7 +25831,7 @@ See also `How many parameters is too many ? <https://www.exakat.io/how-many-para
 +------------+--------------------------------------------------------------------------------------------+
 | Short name | Functions/TooManyParameters                                                                |
 +------------+--------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Suggestions`                                                                         |
+| Rulesets   | :ref:`Suggestions`                                                                         |
 +------------+--------------------------------------------------------------------------------------------+
 | Examples   | :ref:`wordpress-functions-toomanyparameters`, :ref:`churchcrm-functions-toomanyparameters` |
 +------------+--------------------------------------------------------------------------------------------+
@@ -25524,7 +25874,7 @@ See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.ne
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/TrailingComma                                                                                                                                                                           |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -25571,7 +25921,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Traits/TraitNotFound                   |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
@@ -25614,7 +25964,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/TypedPropertyUsage                                                                                                                                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -25657,7 +26007,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Functions/TypehintMustBeReturned       |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -25713,7 +26063,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Functions/TypehintedReferences |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -25769,7 +26119,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Functions/UnbindingClosures |
 +-------------+-----------------------------+
-| Themes      | :ref:`CompatibilityPHP74`   |
+| Rulesets    | :ref:`CompatibilityPHP74`   |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -25820,7 +26170,7 @@ Suggestions
 +-------------+-------------------------------+
 | Short name  | Exceptions/UncaughtExceptions |
 +-------------+-------------------------------+
-| Themes      | :ref:`Analyze`                |
+| Rulesets    | :ref:`Analyze`                |
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
@@ -25873,7 +26223,7 @@ See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/UncheckedResources                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -25925,7 +26275,7 @@ Here, `break <http://www.php.net/manual/en/control-structures.break.php>`_ may a
 +-------------+---------------------------------+
 | Short name  | Structures/UnconditionLoopBreak |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
@@ -25981,7 +26331,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/UndeclaredStaticProperty   |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Critical                           |
 +-------------+------------------------------------+
@@ -26020,7 +26370,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+------------------------------+
 | Short name  | Classes/UndefinedStaticclass |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -26064,7 +26414,7 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
 +------------+-------------------------------+
 | Short name | Exceptions/CaughtButNotThrown |
 +------------+-------------------------------+
-| Themes     | :ref:`Dead code <dead-code>`  |
+| Rulesets   | :ref:`Dead code <dead-code>`  |
 +------------+-------------------------------+
 
 
@@ -26103,7 +26453,7 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Classes/UndefinedConstants |
 +-------------+----------------------------+
-| Themes      | none                       |
+| Rulesets    | none                       |
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
@@ -26146,7 +26496,7 @@ or if some external libraries, such as PEAR, are not provided during the analysi
 +-------------+--------------------------+
 | Short name  | Classes/UndefinedClasses |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
@@ -26195,7 +26545,7 @@ Suggestions
 +-------------+-----------------------------------------------------------+
 | Short name  | Constants/UndefinedConstants                              |
 +-------------+-----------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
 +-------------+-----------------------------------------------------------+
 | Severity    | Minor                                                     |
 +-------------+-----------------------------------------------------------+
@@ -26243,7 +26593,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Functions/UndefinedFunctions |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -26299,7 +26649,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Traits/UndefinedInsteadof              |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -26348,7 +26698,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Interfaces/UndefinedInterfaces |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Major                          |
 +-------------+--------------------------------+
@@ -26408,7 +26758,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Classes/UndefinedParentMP |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -26472,7 +26822,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UndefinedProperty                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -26519,7 +26869,7 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
 +-------------+----------------------------------------+
 | Short name  | Traits/UndefinedTrait                  |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
@@ -26569,7 +26919,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Variables/UndefinedVariable |
 +-------------+-----------------------------+
-| Themes      | :ref:`Analyze`              |
+| Rulesets    | :ref:`Analyze`              |
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
@@ -26620,7 +26970,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Classes/UndefinedStaticMP                                                            |
 +-------------+--------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                       |
+| Rulesets    | :ref:`Analyze`                                                                       |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                |
 +-------------+--------------------------------------------------------------------------------------+
@@ -26662,7 +27012,7 @@ Is is recommended to check all those strings, and make sure they will behave cor
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UnicodeEscapePartial                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -26699,7 +27049,7 @@ See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/uni
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UnicodeEscapeSyntax                                                                                    |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -26750,7 +27100,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Classes/UnitializedProperties             |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Top10`          |
+| Rulesets    | :ref:`Suggestions`, :ref:`Top10`          |
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
@@ -26789,7 +27139,7 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 +-------------+-------------------------------------------+
 | Short name  | Php/UnknownPcre2Option                    |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -26826,7 +27176,7 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 +-------------+------------------------------+
 | Short name  | Structures/UnknownPregOption |
 +-------------+------------------------------+
-| Themes      | :ref:`Analyze`               |
+| Rulesets    | :ref:`Analyze`               |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -26873,7 +27223,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UnpackingInsideArrays                                                                                                                                                                                              |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -26933,7 +27283,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/Unpreprocessed                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -26987,7 +27337,7 @@ Suggestions
 +-------------+-----------------------------+
 | Short name  | Classes/UnreachableConstant |
 +-------------+-----------------------------+
-| Themes      | :ref:`ClassReview`          |
+| Rulesets    | :ref:`ClassReview`          |
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
@@ -27050,7 +27400,7 @@ This is dead code, that may be removed.
 +-------------+-----------------------------------------------------------------------------------------+
 | Short name  | Structures/UnreachableCode                                                              |
 +-------------+-----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Suggestions`                                        |
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Suggestions`                                        |
 +-------------+-----------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------+
@@ -27089,7 +27439,7 @@ Catch clauses check that the emitted expression is of the requested Class, but i
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnresolvedCatch                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`                                                                          |
+| Rulesets    | :ref:`Dead code <dead-code>`                                                                          |
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------+
@@ -27132,7 +27482,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Classes/UnresolvedClasses |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -27189,7 +27539,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnresolvedInstanceof                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Top10`                                                      |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Top10`                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -27247,7 +27597,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/UnresolvedUse                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -27303,7 +27653,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Security/UnserializeSecondArg                                                               |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                                             |
+| Rulesets    | :ref:`Security`                                                                             |
 +-------------+---------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -27358,7 +27708,7 @@ See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 +-------------+----------------------------------------------+
 | Short name  | Structures/UnsetInForeach                    |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
 +-------------+----------------------------------------------+
 | Severity    | Major                                        |
 +-------------+----------------------------------------------+
@@ -27395,7 +27745,7 @@ See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Exceptions/Unthrown                                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -27440,7 +27790,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Functions/UnusedArguments                                                              |
 +-------------+----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                         |
+| Rulesets    | :ref:`Analyze`                                                                         |
 +-------------+----------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                  |
 +-------------+----------------------------------------------------------------------------------------+
@@ -27487,7 +27837,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Classes/UnusedConstant             |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -27521,7 +27871,7 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
 +-------------+------------------------------+
 | Short name  | Classes/UnusedClass          |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
@@ -27557,7 +27907,7 @@ It is recommended to comment them out, and only define them when it is necessary
 +-------------+------------------------------+
 | Short name  | Constants/UnusedConstants    |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -27601,7 +27951,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Functions/UnusedFunctions                                                             |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`                                                          |
+| Rulesets    | :ref:`Dead code <dead-code>`                                                          |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -27642,7 +27992,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Structures/UnusedGlobal                |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`                         |
+| Rulesets    | :ref:`Analyze`                         |
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
@@ -27690,7 +28040,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UnusedInheritedVariable                                                                  |
 +-------------+----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                       |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                       |
 +-------------+----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                              |
 +-------------+----------------------------------------------------------------------------------------------------+
@@ -27737,7 +28087,7 @@ They should be removed, as they are probably dead code.
 +-------------+--------------------------------------------------+
 | Short name  | Interfaces/UnusedInterfaces                      |
 +-------------+--------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
 +-------------+--------------------------------------------------+
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
@@ -27779,7 +28129,7 @@ See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 +-------------+------------------------------+
 | Short name  | Structures/UnusedLabel       |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -27826,7 +28176,7 @@ They are probably dead code, unless they are called dynamically.
 +-------------+------------------------------+
 | Short name  | Classes/UnusedMethods        |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -27869,7 +28219,7 @@ Private methods are reserved for the defining class. Thus, they must be used wit
 +-------------+------------------------------+
 | Short name  | Classes/UnusedPrivateMethod  |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -27924,7 +28274,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------+
 | Short name  | Classes/UnusedPrivateProperty                                                                |
 +-------------+----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`                                                                 |
+| Rulesets    | :ref:`Dead code <dead-code>`                                                                 |
 +-------------+----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                        |
 +-------------+----------------------------------------------------------------------------------------------+
@@ -27987,7 +28337,7 @@ This analysis is impacted by dynamic method calls.
 +-------------+--------------------------------+
 | Short name  | Classes/UnusedProtectedMethods |
 +-------------+--------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`   |
+| Rulesets    | :ref:`Dead code <dead-code>`   |
 +-------------+--------------------------------+
 | Severity    | Major                          |
 +-------------+--------------------------------+
@@ -28038,7 +28388,7 @@ Note that this analysis ignores functions that return void (same meaning that PH
 +-------------+----------------------------------------------+
 | Short name  | Functions/UnusedReturnedValue                |
 +-------------+----------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
@@ -28069,7 +28419,7 @@ Unused use statements. They may be removed, as they clutter the code and slows P
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Namespaces/UnusedUse                                                                        |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Dead code <dead-code>`                                                                |
+| Rulesets    | :ref:`Dead code <dead-code>`                                                                |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -28100,7 +28450,7 @@ Usually, PHP functions are written all in lower case.
 +-------------+------------------------------------------------+
 | Short name  | Php/UpperCaseFunction                          |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -28157,7 +28507,7 @@ See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_, `CWE-
 +-------------+----------------------------------+
 | Short name  | Security/UploadFilenameInjection |
 +-------------+----------------------------------+
-| Themes      | :ref:`Security`                  |
+| Rulesets    | :ref:`Security`                  |
 +-------------+----------------------------------+
 | Severity    | Major                            |
 +-------------+----------------------------------+
@@ -28194,7 +28544,7 @@ It is faster to use === null instead of `is_null() <http://www.php.net/is_null>`
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/IsnullVsEqualNull                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
@@ -28250,7 +28600,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Structures/UseArrayFunctions |
 +-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
+| Rulesets    | :ref:`Suggestions`           |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -28295,7 +28645,7 @@ Suggestions
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Structures/BasenameSuffix                                                             |
 +------------+---------------------------------------------------------------------------------------+
-| Themes     | :ref:`Suggestions`                                                                    |
+| Rulesets   | :ref:`Suggestions`                                                                    |
 +------------+---------------------------------------------------------------------------------------+
 | Examples   | :ref:`nextcloud-structures-basenamesuffix`, :ref:`dolibarr-structures-basenamesuffix` |
 +------------+---------------------------------------------------------------------------------------+
@@ -28348,7 +28698,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Short name  | Classes/UseClassOperator            |
 +-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances` |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances` |
 +-------------+-------------------------------------+
 | Severity    | Minor                               |
 +-------------+-------------------------------------+
@@ -28389,7 +28739,7 @@ See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/languag
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Namespaces/UseFunctionsConstants                                                |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -28438,7 +28788,7 @@ Suggestions
 +-------------+------------------------+
 | Short name  | Structures/UseConstant |
 +-------------+------------------------+
-| Themes      | :ref:`Analyze`         |
+| Rulesets    | :ref:`Analyze`         |
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
@@ -28547,7 +28897,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UseConstantAsArguments                                                                   |
 +-------------+----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                     |
+| Rulesets    | :ref:`Analyze`                                                                                     |
 +-------------+----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                              |
 +-------------+----------------------------------------------------------------------------------------------------+
@@ -28596,7 +28946,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/UseCountRecursive                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Suggestions`                                                                            |
+| Rulesets    | :ref:`Suggestions`                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -28644,7 +28994,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Php/UseDateTimeImmutable |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -28715,7 +29065,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------+
 | Short name  | Classes/UseInstanceof                                                       |
 +-------------+-----------------------------------------------------------------------------+
-| Themes      | none                                                                        |
+| Rulesets    | none                                                                        |
 +-------------+-----------------------------------------------------------------------------+
 | Severity    | Major                                                                       |
 +-------------+-----------------------------------------------------------------------------+
@@ -28772,7 +29122,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Short name  | Structures/UseListWithForeach                  |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Top10`               |
+| Rulesets    | :ref:`Suggestions`, :ref:`Top10`               |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -28817,7 +29167,7 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 +-------------+------------------------------------------------------+
 | Short name  | Php/CaseForPSS                                       |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
 +-------------+------------------------------------------------------+
 | Php Version | With PHP 5.5 and older                               |
 +-------------+------------------------------------------------------+
@@ -28863,15 +29213,17 @@ It is recommended to use explicit constant names, instead. They are more readabl
 
 See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to avoid boolean altogether.
 
-+-------------+--------------------------------+
-| Short name  | Functions/AvoidBooleanArgument |
-+-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
-+-------------+--------------------------------+
++-------------+-----------------------------------------------------------------------------------------------------+
+| Short name  | Functions/AvoidBooleanArgument                                                                      |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                      |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                               |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                       |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`phpmyadmin-functions-avoidbooleanargument`, :ref:`cleverstyle-functions-avoidbooleanargument` |
++-------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -28903,7 +29255,7 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UseNullableType                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.1 and more recent                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -28985,7 +29337,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Php/UseObjectApi                                                                                        |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -29034,7 +29386,7 @@ See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <h
 +------------+----------------------------------+
 | Short name | Performances/PHP7EncapsedStrings |
 +------------+----------------------------------+
-| Themes     | :ref:`Performances`              |
+| Rulesets   | :ref:`Performances`              |
 +------------+----------------------------------+
 
 
@@ -29076,7 +29428,7 @@ Suggestions
 +-------------+---------------------------------+
 | Short name  | Php/UsePathinfo                 |
 +-------------+---------------------------------+
-| Themes      | :ref:`Analyze`                  |
+| Rulesets    | :ref:`Analyze`                  |
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
@@ -29140,7 +29492,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/UsePositiveCondition                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                       |
+| Rulesets    | :ref:`Analyze`                                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                |
 +-------------+------------------------------------------------------------------------------------------------------+
@@ -29179,7 +29531,7 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
 +-------------+-------------------------+
 | Short name  | Structures/UseSystemTmp |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
@@ -29221,7 +29573,7 @@ Note that it is also faster to use the value with a reference to handle the writ
 +-------------+--------------------------+
 | Short name  | Performances/UseBlindVar |
 +-------------+--------------------------+
-| Themes      | :ref:`Performances`      |
+| Rulesets    | :ref:`Performances`      |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -29255,7 +29607,7 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 +-------------+----------------------------------------------------------------+
 | Short name  | Namespaces/UseWithFullyQualifiedNS                             |
 +-------------+----------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
 +-------------+----------------------------------------------------------------+
 | Severity    | Minor                                                          |
 +-------------+----------------------------------------------------------------+
@@ -29312,7 +29664,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Constants/ConstRecommended                                                             |
 +-------------+----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`           |
+| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`           |
 +-------------+----------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                  |
 +-------------+----------------------------------------------------------------------------------------+
@@ -29369,7 +29721,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Php/CouldUseIsCountable      |
 +-------------+------------------------------+
-| Themes      | :ref:`Suggestions`           |
+| Rulesets    | :ref:`Suggestions`           |
 +-------------+------------------------------+
 | Php Version | With PHP 7.3 and more recent |
 +-------------+------------------------------+
@@ -29410,7 +29762,7 @@ See also `json_decode <http://php.net/json_decode>`_.
 +-------------+---------------------------+
 | Short name  | Structures/JsonWithOption |
 +-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
+| Rulesets    | :ref:`Suggestions`        |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -29458,7 +29810,7 @@ See also `Password hashing <http://php.net/manual/en/book.password.php>`_.
 +-------------+------------------------------+
 | Short name  | Php/Password55               |
 +-------------+------------------------------+
-| Themes      | :ref:`CompatibilityPHP55`    |
+| Rulesets    | :ref:`CompatibilityPHP55`    |
 +-------------+------------------------------+
 | Php Version | With PHP 5.5 and more recent |
 +-------------+------------------------------+
@@ -29513,7 +29865,7 @@ See also `list <http://php.net/manual/en/function.list.php>`_.
 +-------------+-----------------------------------------------------------------------------+
 | Short name  | Php/UsePathinfoArgs                                                         |
 +-------------+-----------------------------------------------------------------------------+
-| Themes      | :ref:`Performances`                                                         |
+| Rulesets    | :ref:`Performances`                                                         |
 +-------------+-----------------------------------------------------------------------------+
 | Severity    | Minor                                                                       |
 +-------------+-----------------------------------------------------------------------------+
@@ -29577,7 +29929,7 @@ Suggestions
 +-------------+-------------------------------------------------------------+
 | Short name  | Php/BetterRand                                              |
 +-------------+-------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`  |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`  |
 +-------------+-------------------------------------------------------------+
 | Severity    | Major                                                       |
 +-------------+-------------------------------------------------------------+
@@ -29628,7 +29980,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Php/UseSessionStartOptions                  |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`Suggestions`                          |
+| Rulesets    | :ref:`Suggestions`                          |
 +-------------+---------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                |
 +-------------+---------------------------------------------+
@@ -29687,7 +30039,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Classes/UsedOnceProperty |
 +-------------+--------------------------+
-| Themes      | :ref:`Analyze`           |
+| Rulesets    | :ref:`Analyze`           |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -29737,7 +30089,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Variables/VariableUsedOnce                                                            |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Top10`                                                          |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                          |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -29788,7 +30140,7 @@ Suggestions
 +-------------+-----------------------------------------------------+
 | Short name  | Variables/VariableUsedOnceByContext                 |
 +-------------+-----------------------------------------------------+
-| Themes      | :ref:`Analyze`                                      |
+| Rulesets    | :ref:`Analyze`                                      |
 +-------------+-----------------------------------------------------+
 | Severity    | Minor                                               |
 +-------------+-----------------------------------------------------+
@@ -29842,7 +30194,7 @@ Suggestions
 +-------------+-------------------------+
 | Short name  | Classes/UselessAbstract |
 +-------------+-------------------------+
-| Themes      | :ref:`Analyze`          |
+| Rulesets    | :ref:`Analyze`          |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -29902,7 +30254,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Short name  | Traits/UselessAlias                    |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -29953,7 +30305,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Functions/UselessArgument |
 +-------------+---------------------------+
-| Themes      | :ref:`Suggestions`        |
+| Rulesets    | :ref:`Suggestions`        |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -30001,7 +30353,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessBrackets                                                            |
 +-------------+---------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                        |
+| Rulesets    | :ref:`Analyze`                                                                        |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -30041,7 +30393,7 @@ See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.p
 +-------------+---------------------------+
 | Short name  | Structures/UselessCasting |
 +-------------+---------------------------+
-| Themes      | :ref:`Analyze`            |
+| Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -30094,7 +30446,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Exceptions/UselessCatch                                                         |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                  |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Minor                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -30147,7 +30499,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------+
 | Short name  | Structures/UselessCheck                                                      |
 +-------------+------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                               |
+| Rulesets    | :ref:`Analyze`                                                               |
 +-------------+------------------------------------------------------------------------------+
 | Severity    | Minor                                                                        |
 +-------------+------------------------------------------------------------------------------+
@@ -30188,7 +30540,7 @@ Class constructor that have empty bodies are useless. They may be removed.
 +-------------+----------------------------+
 | Short name  | Classes/UselessConstructor |
 +-------------+----------------------------+
-| Themes      | :ref:`Analyze`             |
+| Rulesets    | :ref:`Analyze`             |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -30240,7 +30592,7 @@ Suggestions
 +-------------+--------------------------+
 | Short name  | Functions/UselessDefault |
 +-------------+--------------------------+
-| Themes      | :ref:`Suggestions`       |
+| Rulesets    | :ref:`Suggestions`       |
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
@@ -30281,7 +30633,7 @@ See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_, an
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UselessFinal                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                           |
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -30329,7 +30681,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/UselessGlobal                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                    |
+| Rulesets    | :ref:`Analyze`                                                                    |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -30391,7 +30743,7 @@ Here the useless instructions that are spotted :
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessInstruction                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -30443,7 +30795,7 @@ Interfaces should be used in Typehint or with the `instanceof <http://php.net/ma
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Short name  | Interfaces/UselessInterfaces                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                            |
+| Rulesets    | :ref:`Analyze`                                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
@@ -30501,7 +30853,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessParenthesis                                                                 |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -30553,7 +30905,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/UselessReferenceArgument                                                                       |
 +-------------+----------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                           |
+| Rulesets    | :ref:`Analyze`                                                                                           |
 +-------------+----------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                    |
 +-------------+----------------------------------------------------------------------------------------------------------+
@@ -30603,7 +30955,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Functions/UselessReturn                                                         |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                  |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Minor                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -30651,7 +31003,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessSwitch                                                               |
 +-------------+----------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                         |
+| Rulesets    | :ref:`Analyze`                                                                         |
 +-------------+----------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                  |
 +-------------+----------------------------------------------------------------------------------------+
@@ -30711,7 +31063,7 @@ Suggestions
 +-------------+------------------------------+
 | Short name  | Functions/UselessTypeCheck   |
 +-------------+------------------------------+
-| Themes      | :ref:`Dead code <dead-code>` |
+| Rulesets    | :ref:`Dead code <dead-code>` |
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
@@ -30772,7 +31124,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessUnset                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                  |
+| Rulesets    | :ref:`Analyze`                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                           |
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -30822,7 +31174,7 @@ Suggestions
 +-------------+--------------------------------+
 | Short name  | Functions/UsesDefaultArguments |
 +-------------+--------------------------------+
-| Themes      | :ref:`Analyze`                 |
+| Rulesets    | :ref:`Analyze`                 |
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
@@ -30866,7 +31218,7 @@ See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and `The
 +-------------+-------------------------------------------------------------------+
 | Short name  | Classes/UsingThisOutsideAClass                                    |
 +-------------+-------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP71`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP71`, :ref:`LintButWontExec` |
 +-------------+-------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                            |
 +-------------+-------------------------------------------------------------------+
@@ -30928,7 +31280,7 @@ in PHP 7, the result is :::
 +-------------+---------------------------+
 | Short name  | Php/UsortSorting          |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP70` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -30971,7 +31323,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/OldStyleVar                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                          |
+| Rulesets    | :ref:`Analyze`                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -31010,7 +31362,7 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/VariableGlobal                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and older                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -31060,7 +31412,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Short name  | Structures/NoVariableIsACondition |
 +-------------+-----------------------------------+
-| Themes      | :ref:`Analyze`                    |
+| Rulesets    | :ref:`Analyze`                    |
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
@@ -31101,7 +31453,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Classes/WeakType                 |
 +-------------+----------------------------------+
-| Themes      | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`                   |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -31148,7 +31500,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------+
 | Short name  | Structures/WhileListEach                                                         |
 +-------------+----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions`                          |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions`                          |
 +-------------+----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                            |
 +-------------+----------------------------------------------------------------------------------+
@@ -31193,7 +31545,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Variables/WrittenOnlyVariable                                                                       |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                      |
+| Rulesets    | :ref:`Analyze`                                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -31249,7 +31601,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/WrongNumberOfArguments                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -31308,7 +31660,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------+
 | Short name  | Functions/WrongOptionalParameter                                                                 |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                                   |
+| Rulesets    | :ref:`Analyze`                                                                                   |
 +-------------+--------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                            |
 +-------------+--------------------------------------------------------------------------------------------------+
@@ -31347,7 +31699,7 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
 +-------------+------------------------------------------+
 | Short name  | Php/InternalParameterType                |
 +-------------+------------------------------------------+
-| Themes      | :ref:`Analyze`                           |
+| Rulesets    | :ref:`Analyze`                           |
 +-------------+------------------------------------------+
 | Severity    | Major                                    |
 +-------------+------------------------------------------+
@@ -31389,7 +31741,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/WrongRange                                                         |
 +-------------+-------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                                |
+| Rulesets    | :ref:`Analyze`                                                                |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -31449,7 +31801,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Functions/WrongReturnedType        |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -31495,7 +31847,7 @@ Suggestions
 +-------------+--------------------------------------------------------------+
 | Short name  | Php/FopenMode                                                |
 +-------------+--------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                               |
+| Rulesets    | :ref:`Analyze`                                               |
 +-------------+--------------------------------------------------------------+
 | Severity    | Major                                                        |
 +-------------+--------------------------------------------------------------+
@@ -31540,7 +31892,7 @@ See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_, `Yo
 +-------------+------------------------------------------------+
 | Short name  | Structures/YodaComparison                      |
 +-------------+------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>` |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
@@ -31589,7 +31941,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Short name  | Structures/DirThenSlash             |
 +-------------+-------------------------------------+
-| Themes      | :ref:`Analyze`                      |
+| Rulesets    | :ref:`Analyze`                      |
 +-------------+-------------------------------------+
 | Severity    | Major                               |
 +-------------+-------------------------------------+
@@ -31645,7 +31997,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/debugInfoUsage                                                              |
 +-------------+---------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +-------------+---------------------------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                                    |
 +-------------+---------------------------------------------------------------------------------+
@@ -31709,7 +32061,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Structures/toStringThrowsException |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
@@ -31760,7 +32112,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Short name  | Performances/ArrayKeyExistsSpeedup      |
 +-------------+-----------------------------------------+
-| Themes      | :ref:`Suggestions`, :ref:`Performances` |
+| Rulesets    | :ref:`Suggestions`, :ref:`Performances` |
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
@@ -31806,7 +32158,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Short name  | Php/ArrayKeyExistsWithObjects             |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP74`, :ref:`Analyze` |
+| Rulesets    | :ref:`CompatibilityPHP74`, :ref:`Analyze` |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -31848,7 +32200,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Structures/ArrayMergeAndVariadic |
 +-------------+----------------------------------+
-| Themes      | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`                   |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -31888,7 +32240,7 @@ See also `crypt <http://www.php.net/crypt>`_.
 +-------------+-----------------------------+
 | Short name  | Structures/CryptWithoutSalt |
 +-------------+-----------------------------+
-| Themes      | :ref:`CompatibilityPHP54`   |
+| Rulesets    | :ref:`CompatibilityPHP54`   |
 +-------------+-----------------------------+
 | Php Version | With PHP 5.6 and older      |
 +-------------+-----------------------------+
@@ -31930,7 +32282,7 @@ Suggestions
 +-------------+---------------------------+
 | Short name  | Structures/CurlVersionNow |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP74` |
+| Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -31969,7 +32321,7 @@ See also `directive error_reporting <http://php.net/manual/en/errorfunc.configur
 +-------------+------------------------------------------------------+
 | Short name  | Structures/ErrorReportingWithInteger                 |
 +-------------+------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                       |
+| Rulesets    | :ref:`Analyze`                                       |
 +-------------+------------------------------------------------------+
 | Severity    | Minor                                                |
 +-------------+------------------------------------------------------+
@@ -32019,7 +32371,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Structures/EvalWithoutTry                                                                   |
 +-------------+---------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                             |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                             |
 +-------------+---------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -32064,7 +32416,7 @@ See also `Alternative PHP Cache <http://php.net/apc>`_.
 +-------------+---------------------------+
 | Short name  | Extensions/Extapc         |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP55` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.0 and older    |
 +-------------+---------------------------+
@@ -32112,7 +32464,7 @@ See also `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.
 +-------------+---------------------------+
 | Short name  | Extensions/Extdba         |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32145,7 +32497,7 @@ See also `Ereg <http://php.net/manual/en/function.ereg.php>`_.
 +-------------+---------------------------+
 | Short name  | Extensions/Extereg        |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`CompatibilityPHP70` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.0 and older    |
 +-------------+---------------------------+
@@ -32187,7 +32539,7 @@ See also `Form Data Format <http://php.net/manual/en/book.fdf.php>`_.
 +-------------+---------------------------+
 | Short name  | Extensions/Extfdf         |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32272,7 +32624,7 @@ See also `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_ and 
 +-------------+---------------------------+
 | Short name  | Extensions/Extmcrypt      |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP71` |
+| Rulesets    | :ref:`CompatibilityPHP71` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32307,7 +32659,7 @@ See also `Extension mhash <http://php.net/manual/en/book.mhash.php>`_.
 +-------------+---------------------------+
 | Short name  | Extensions/Extmhash       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP54` |
+| Rulesets    | :ref:`CompatibilityPHP54` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32373,7 +32725,7 @@ See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming
 +-------------+---------------------------+
 | Short name  | Extensions/Extming        |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP53` |
+| Rulesets    | :ref:`CompatibilityPHP53` |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32395,7 +32747,7 @@ This extension is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0
 +-------------+---------------------------+
 | Short name  | Extensions/Extmysql       |
 +-------------+---------------------------+
-| Themes      | :ref:`CompatibilityPHP55` |
+| Rulesets    | :ref:`CompatibilityPHP55` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.0 and older    |
 +-------------+---------------------------+
@@ -32441,7 +32793,7 @@ See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
 +-------------+----------------------------+
 | Short name  | Security/FilterInputSource |
 +-------------+----------------------------+
-| Themes      | :ref:`Security`            |
+| Rulesets    | :ref:`Security`            |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -32498,7 +32850,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Short name  | Performances/CsvInLoops           |
 +-------------+-----------------------------------+
-| Themes      | :ref:`Performances`, :ref:`Top10` |
+| Rulesets    | :ref:`Performances`, :ref:`Top10` |
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
@@ -32533,7 +32885,7 @@ This code will display 1 in PHP 7, and 0 in PHP 5.
 +-------------+-------------------------------------------+
 | Short name  | Functions/funcGetArgModified              |
 +-------------+-------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
@@ -32564,7 +32916,7 @@ See also `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_, `
 +------------+---------------------------+
 | Short name | Php/IdnUts46              |
 +------------+---------------------------+
-| Themes     | :ref:`CompatibilityPHP74` |
+| Rulesets   | :ref:`CompatibilityPHP74` |
 +------------+---------------------------+
 
 
@@ -32602,7 +32954,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------+
 | Short name  | Structures/OnceUsage                                                    |
 +-------------+-------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`                                                          |
+| Rulesets    | :ref:`Analyze`                                                          |
 +-------------+-------------------------------------------------------------------------+
 | Severity    | Minor                                                                   |
 +-------------+-------------------------------------------------------------------------+
@@ -32635,7 +32987,7 @@ This would yield an error : ``Cannot use `isset() <http://www.www.php.net/isset>
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/IssetWithConstant                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -32682,7 +33034,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Structures/ListOmissions                                                          |
 +-------------+-----------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Suggestions`                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                |
 +-------------+-----------------------------------------------------------------------------------+
 | Severity    | Minor                                                                             |
 +-------------+-----------------------------------------------------------------------------------+
@@ -32723,7 +33075,7 @@ See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv
 +-------------+----------------------------------------+
 | Short name  | Structures/McryptcreateivWithoutOption |
 +-------------+----------------------------------------+
-| Themes      | :ref:`CompatibilityPHP70`              |
+| Rulesets    | :ref:`CompatibilityPHP70`              |
 +-------------+----------------------------------------+
 | Php Version | With PHP 5.6 and older                 |
 +-------------+----------------------------------------+
@@ -32762,7 +33114,7 @@ See also `move_uploaded_file <http://php.net/move_uploaded_file>`_ and `Uploadin
 +-------------+---------------------------+
 | Short name  | Security/MoveUploadedFile |
 +-------------+---------------------------+
-| Themes      | :ref:`Security`           |
+| Rulesets    | :ref:`Security`           |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -32810,7 +33162,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Structures/OpensslRandomPseudoByteSecondArg |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`CompatibilityPHP74`                   |
+| Rulesets    | :ref:`CompatibilityPHP74`                   |
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
@@ -32847,7 +33199,7 @@ Always use an empty variable a second parameter to `parse_str() <http://www.php.
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Security/parseUrlWithoutParameters                                                                    |
 +-------------+-------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Security`                                                                                       |
+| Rulesets    | :ref:`Security`                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------+
@@ -32895,7 +33247,7 @@ The second syntax is easier to read and may be marginally faster to execute (`pr
 +-------------+----------------------+
 | Short name  | Php/PregMatchAllFlag |
 +-------------+----------------------+
-| Themes      | :ref:`Suggestions`   |
+| Rulesets    | :ref:`Suggestions`   |
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
@@ -32944,7 +33296,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/pregOptionE                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
 +-------------+------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------+
@@ -33001,7 +33353,7 @@ See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oo
 +-------------+----------------------------------------+
 | Short name  | Classes/NoPSSOutsideClass              |
 +-------------+----------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`LintButWontExec` |
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
@@ -33040,7 +33392,7 @@ When in doubt about backward compatibility, just drop the typehint. Otherwise, u
 +-------------+-----------------------------+
 | Short name  | Php/SetExceptionHandlerPHP7 |
 +-------------+-----------------------------+
-| Themes      | :ref:`CompatibilityPHP70`   |
+| Rulesets    | :ref:`CompatibilityPHP70`   |
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
@@ -33082,7 +33434,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Structures/StripTagsSkipsClosedTag |
 +-------------+------------------------------------+
-| Themes      | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`                     |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -33144,7 +33496,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Short name  | Performances/StrposTooMuch                  |
 +-------------+---------------------------------------------+
-| Themes      | :ref:`Analyze`                              |
+| Rulesets    | :ref:`Analyze`                              |
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
@@ -33188,7 +33540,7 @@ Suggestions
 +-------------+-------------------------------------------------+
 | Short name  | Performances/timeVsstrtotime                    |
 +-------------+-------------------------------------------------+
-| Themes      | :ref:`Performances`                             |
+| Rulesets    | :ref:`Performances`                             |
 +-------------+-------------------------------------------------+
 | Severity    | Minor                                           |
 +-------------+-------------------------------------------------+
@@ -33235,7 +33587,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/VardumpUsage                                                                   |
 +-------------+-------------------------------------------------------------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`Security`                                                           |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                           |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------+

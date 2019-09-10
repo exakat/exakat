@@ -421,7 +421,6 @@ __________________________________________________
 
 This extension includes 22 analyzers.
 
-*  (Laravel/LaravelEnv)
 * Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
 * Compatibility Laravel v5_1_0 (Laravel/Laravel_v5_1_0)
 * Compatibility Laravel v5_2_0 (Laravel/Laravel_v5_2_0)
@@ -440,8 +439,10 @@ This extension includes 22 analyzers.
 * Laravel 5.7 Compatibility (Laravel/Laravel_5_7)
 * Laravel 5.8 Compatibility (Laravel/Laravel_5_8)
 * Laravel Constant Usage (Laravel/LaravelConstantUsage)
+* Laravel Environnement Calls (Laravel/LaravelEnv)
 * Laravel Function Usage (Laravel/LaravelFunctionsUsage)
 * Laravel Usage (Laravel/LaravelUsage)
+* Larvel debug usage (Laravel/LaravelDebug)
 
 
 Laravel rulesets
@@ -650,7 +651,8 @@ __________________________________________________
 
 This extension includes 8 analyzers.
 
-*  (Prestashop/IncomingValues)
+* Forbidden Functions (Prestashop/ForbiddenFunctions)
+* Incoming Values (Prestashop/IncomingValues)
 * Prestashop 1.5 Compatibility (Prestashop/Prestashop_1_5)
 * Prestashop 1.6 Compatibility (Prestashop/Prestashop_1_6)
 * Prestashop 1.7 Compatibility (Prestashop/Prestashop_1_7)
@@ -803,7 +805,7 @@ __________________________________________________
 
 This extension includes 21 analyzers.
 
-*  (Symfony/UndefinedService)
+* Controller (Symfony/Controller)
 * CouldUseAutowiring (Symfony/CouldUseAutowiring)
 * MoveToAbstractController (Symfony/MoveToAbstractController)
 * NoActionSuffix (Symfony/NoActionSuffix)
@@ -820,6 +822,7 @@ This extension includes 21 analyzers.
 * Symfony Function Usage (Symfony/SymfonyFunctionsUsage)
 * Symfony Missing (Symfony/SymfonyMissing)
 * Symfony Usage (Symfony/SymfonyUsage)
+* Undefined service (Symfony/UndefinedService)
 * UndefinedServices (Symfony/UndefinedServices)
 * UnusedServices (Symfony/UnusedServices)
 * UnusedServies (Symfony/UnusedServies)
