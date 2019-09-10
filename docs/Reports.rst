@@ -32,6 +32,7 @@ There are several reports that may be extracted from Exakat :
 * `Sarb`_
 * `SimpleTable`_
 * `Stats`_
+* `Stubs`_
 * `Text`_
 * `Top10`_
 * `Uml`_
@@ -100,7 +101,7 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 
 Ambassador is a HTML report format.
 
-Ambassador depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+Ambassador depends on the following 20 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
 
 Classes dependendies HTML
 -------------------------
@@ -273,7 +274,7 @@ The Diplomat report is the default report since Exakat 1.7.0. It is a light vers
 
 Diplomat is a HTML report format.
 
-Diplomat depends on the following  themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Top10, Preferences, Appinfo, Appcontent, Suggestions.
+Diplomat depends on the following 15 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Top10, Preferences, Appinfo, Appcontent, Suggestions.
 
 Exakatyaml
 ----------
@@ -1506,6 +1507,26 @@ Stats reports PHP structures definition, like class, interfaces, variables, and 
 Stats is a JSON report format.
 
 Stats depends on the following theme : Stats.
+
+Stubs
+-----
+
+Stubs produces a skeleton from the source code, with all defined structures : constants, functions, classes, interfaces, traits and namespaces. 
+
+Stubs takes the original code, and export all defined structures (constants, functions, classes, interfaces, traits and namespaces) in a single and compilable PHP file.
+
+This is convenient for tools that requires documentations for completion, such as IDE.
+
+Constants are exported with their values, properties too. Methods hold their full signature. 
+
+The resulting report is in one file, called `stubs.php`.
+
+.. image:: images/report.stubs.png
+    :alt: Example of a Stubs report (0)
+
+Stubs is a PHP report format.
+
+Stubs doesn't depend on themes.
 
 Text
 ----

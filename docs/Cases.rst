@@ -6867,6 +6867,43 @@ This yields an error at execution time : ``Compilation failed: invalid range in 
 
     preg_replace('/[^\w-._]+/i', '', $name)
 
+Use Named Boolean In Argument Definition
+========================================
+
+.. _phpmyadmin-functions-avoidbooleanargument:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`use-named-boolean-in-argument-definition`, in /libraries/classes/Util.php:1929. 
+
+$request is an option to `checkParameters`, although it is not visibile with is its actual role.
+
+.. code-block:: php
+
+    public static function checkParameters($params, $request = false) { 
+        /**/ 
+    }
+
+
+--------
+
+
+.. _cleverstyle-functions-avoidbooleanargument:
+
+CleverStyle
+^^^^^^^^^^^
+
+:ref:`use-named-boolean-in-argument-definition`, in /core/classes/Response.php:129. 
+
+$httponly is an option to `cookie`, and true/false makes it readable. There may be other situations, like fallback, or forcedd usage, so the boolean may be misleading. Note also the `$expire = 0`, which may be a date, or a special value. We need to read the documentation to understand this.
+
+.. code-block:: php
+
+    public function cookie($name, $value, $expire = 0, $httponly = false) { /**/ } 	 { 
+        /**/ 
+    }
+
 Never Used Parameter
 ====================
 
@@ -7166,6 +7203,22 @@ $marker['lat'] is compared to the string '0', which actually transtype it to int
                     $marker['lng'] = (float) $marker['lng'] + (float) $this->settings['map_duplicate_marker_adjustment'];
                     $i++;
                 }
+
+Too Many Native Calls
+=====================
+
+.. _spip-php-toomanynativecalls:
+
+SPIP
+^^^^
+
+:ref:`too-many-native-calls`, in /ecrire/xml/analyser_dtd.php:58. 
+
+This expression counts 4 usages of count(), which is more than the default level of 3 PHP calls in one expression. 
+
+.. code-block:: php
+
+    spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros) . ' macros, ' . count($dtc->elements) . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites")
 
 Redefined Private Property
 ==========================

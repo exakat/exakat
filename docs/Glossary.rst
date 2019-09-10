@@ -506,6 +506,7 @@ Glossary
     + `explode()`
 
       + :ref:`Implode One Arg <implode-one-arg>`
+      + :ref:`Should Use Explode Args <should-use-explode-args>`
 
     + `extract()`
 
@@ -601,6 +602,14 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Useless Referenced Argument <useless-referenced-argument>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+
+    + `forward_static_call()`
+
+      + :ref:`Callback Needs Return <callback-needs-return>`
+
+    + `forward_static_call_array()`
+
+      + :ref:`Callback Needs Return <callback-needs-return>`
 
     + `fputcsv()`
 
@@ -1326,6 +1335,14 @@ Glossary
     + `recode_string()`
 
       + :ref:`Directly Use File <directly-use-file>`
+
+    + `register_shutdown_function()`
+
+      + :ref:`Callback Needs Return <callback-needs-return>`
+
+    + `register_tick_function()`
+
+      + :ref:`Callback Needs Return <callback-needs-return>`
 
     + `restore_include_path()`
 

@@ -14,7 +14,7 @@ Rulesets are configured with the -T option, when running exakat in command line.
 
 ::
 
-   php exakat.phar analyze -p <project> -T <Security/DirectInjection>
+   php exakat.phar analyze -p <project> -T <Security>
 
 
 
@@ -30,6 +30,8 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Suggestions`                             | List of possible modernisation of the PHP code.                                                      |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP74`                      | List features that are incompatible with PHP 7.4. It is known as php-src, work in progress.          |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP73`                      | List features that are incompatible with PHP 7.3.                                                    |
@@ -38,9 +40,17 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP80`                      | Work in progress. The first rules are in, but far from finished                                      |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environnement.               |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Top10`                                   | The most common issues found in the code                                                             |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Classreview`                             | A set of rules dedicate to class hygiene                                                             |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`LintButWontExec`                         | Check the code for common errors that will lead to a Fatal error on production, but lint fine.       |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -62,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 02 Sep 2019 14:18:03 +0000
-.. comment: Generation hash : 16021a9bc63f0cee0249a95ae949cbd1542beae9
+.. comment: Generation date : Tue, 10 Sep 2019 07:31:59 +0000
+.. comment: Generation hash : 52d95dc40dee255aa854f163b6b3c694d43acdfb
 
 
 .. _analyze:
@@ -71,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 374 analysis
+Total : 378 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -123,6 +133,7 @@ Total : 374 analysis
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Clone With Non-Object <clone-with-non-object>`
+* :ref:`Coalesce And Concat <coalesce-and-concat>`
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concat And Addition <concat-and-addition>`
@@ -215,6 +226,7 @@ Total : 374 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Max Level Of Nesting <max-level-of-nesting>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Could Be Static <method-could-be-static>`
@@ -327,6 +339,7 @@ Total : 374 analysis
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Constants <should-use-constants>`
+* :ref:`Should Use Explode Args <should-use-explode-args>`
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use SetCookie() <should-use-setcookie()>`
@@ -352,6 +365,7 @@ Total : 374 analysis
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Too Many Array Dimensions <too-many-array-dimensions>`
 * :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
@@ -954,7 +968,7 @@ Total : 24 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 12 analysis
+Total : 13 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -965,6 +979,7 @@ Total : 12 analysis
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`Numeric Literal Separator <numeric-literal-separator>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
+* :ref:`PHP 74 New Directives <php-74-new-directives>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 * :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
@@ -974,12 +989,13 @@ Total : 12 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`Hash Algorithms Incompatible With PHP 7.4- <hash-algorithms-incompatible-with-php-7.4->`
+* :ref:`Nested Ternary Without Parenthesis <nested-ternary-without-parenthesis>`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
 * :ref:`No More Curly Arrays <no-more-curly-arrays>`

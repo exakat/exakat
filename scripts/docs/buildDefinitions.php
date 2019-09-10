@@ -442,7 +442,7 @@ SQL
                             'APPLICATIONS'           => $this->applications,
                             'ISSUES_EXAMPLES'        => implode('', $this->issues_examples),
                             'PARAMETER_LIST'         => implode('', $this->parameter_list),
-                            'INI_RULESETS'           => $this->ini_rulesets_config,
+                            'INI_RULESETS'           => $this->ini_ruleset_config,
                             'PHP_ERROR_MESSAGES'     => $this->php_error_list,
                             'EXAKAT_EXTENSION_LIST'  => $this->exakat_extension_list,
                             'EXTENSION_DETAILS'      => $this->exakat_extension_det,

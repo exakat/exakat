@@ -1,4 +1,4 @@
-Version 1.9.4 (Star of Benefit, coming up)
+Version 1.9.5 (Star of Adversity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,36 @@ Version 1.9.4 (Star of Benefit, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.4 (Star of Benefit, 2019-09-09)
++ Architecture
+    + Dump avoid storing multiple definition for the same class
+    + Added more native return definitions
+    + Adding UT for Complete/
+    + Dump inventories are being moved to analysis class
+    + Moving more Themes => rulesets
++ Report
+    + Ambassador : Fixed several internal links
+    + Ambassador : Displays the levels of nesting in the code
+    + Ambassador : Upgraded compatibility report with PHP 7.4
+    + New report : Stubs
++ Analysis
+    + New analysis : PHP 7.4 New Directives
+    + New analysis : Too many dimensions with array
+    + New analysis : Check concat and coalesce precedence
+    + New analysis : Adopt explode() third argument
+    + New analysis : Ternary and useless assignation
+    + New analysis : Nested ternary without parenthesis
+    + New analysis : Spread operator with arrays
+    + New analysis : Max level of indentation 
+    + New analysis : Use Arrowfunctions
+    + Upgraded analysis : Clone with non object handles containers
+    + Upgraded analysis : Calling non-static methods statically
+    + Upgraded analysis : Unresolved Instanceof
+    + Upgraded analysis : Array_merge and variadic, extended to isset
+    + Checked unit tests : 3234 / 3259 test pass (99% pass)
++ Tokenizer
+    + Last element of list() is not omitted anymore
 
 Version 1.9.3 (Star of Longevity, 2019-09-02)
 + Architecture
@@ -187,7 +217,7 @@ Version 1.8.6 (Wei Yuqing of Jiawu, 2019-07-01)
 Version 1.8.5 (Zhan Zijiang of Jiaxu, 2019-06-24)
 + Architecture
     + Fixed several bugs in the online documentation
-    + Started removing analyzer, replacing with analysis
+    + Started removing analysis, replacing with analysis
     + Fixed path in docker PHP usage.
 + Report
     + Ambassador : Export full INI and YAML config to replicate audit

@@ -28,7 +28,7 @@ anonymize
 ---------
 
 Read files, directory or projects, and produce a anonymized version of the code. 
-Consistence between variables and names is preserved ($a will always be replaced by the same name). 
+Consistence between variables and names is preserved ($a is always replaced with the same name). 
 PHP language structures, such as eval, isset or unset are preserved, though other native functions are not.
 
 File structure is not preserved : all files are renamed, and the hiearchy is flattented in one folder.
@@ -53,9 +53,9 @@ Options
 | -p        | No  | Project name. Should be filesystem compatible (avoid /, : or \)             |
 |           |     | This takes into account <project> configuration                             |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -d        | No  | Directory to anonymize. Results will be in <directory>.anon                 |
+| -d        | No  | Directory to anonymize. Results aree in <directory>.anon                    |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -file     | No  | File to anonymize. Result will be <file>.anon                               |
+| -file     | No  | File to anonymize. Results are in <file>.anon                               |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
@@ -95,7 +95,7 @@ Commands
 catalog
 -------
 
-Catalog list all available themes and reports with the current exakat.
+Catalog list all available rulesets and reports with the current exakat.
 
 This is a help command, to help find the available values for various options.
 
@@ -393,9 +393,9 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -composer | No  | Use Composer client                                                         |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -symlink  | No  | -R path will be symlinked. Directory is never accessed for writing.         |
+| -symlink  | No  | -R path is symlinked. Directory is never accessed for writing.              |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -copy     | No  | -R path will be recursively copied.                                         |
+| -copy     | No  | -R path is recursively copied.                                              |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -zip      | No  | -R is a ZIP archive, local or remote                                        |
 +-----------+-----+-----------------------------------------------------------------------------+
@@ -550,13 +550,13 @@ Options
 |           |     | Report is located in the projects/<project>/ folder                         |
 |           |     | Default is 'stdout', but varies with format.                                |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -T        | No  | Thema's results. All the analyses in this thema will be reported.           |
+| -T        | No  | Ruleset's results. All the analyses in this ruleset are reported.           |
 |           |     | Note that the report format may override this configuration : for example   |
 |           |     | Ambassador manage its own list of analyses.                                 |
 |           |     | Uses this with Text format.                                                 |
 |           |     | Has priority over the -P option                                             |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -P        | No  | Analyzer's results. Only one analysis's will be reported.                   |
+| -P        | No  | Analyzer's results. Only one analysis's is reported.                        |
 |           |     | Note that the report format may override this configuration : for example   |
 |           |     | Ambassador manage its own list of analyses.                                 |
 |           |     | Uses this with Text format.                                                 |
