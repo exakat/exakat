@@ -241,7 +241,6 @@ class CommandLine extends Config {
 
                 unset($args[$id]);
                 unset($args[$id + 1]);
-
             }
         }
 
