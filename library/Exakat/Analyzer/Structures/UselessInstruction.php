@@ -182,6 +182,21 @@ class UselessInstruction extends Analyzer {
                                     ))
              ->back('first');
         $this->prepareQuery();
+        
+        // $a = $b ? 'c' : $a = 3;
+        $this->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'var')
+             ->back('first')
+             
+             ->outIs('RIGHT')
+             ->atomIs(array('Ternary', 'Coalesce'))
+             ->outIs(array('THEN', 'ELSE', 'RIGHT'))
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->samePropertyAs('fullcode', 'var')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

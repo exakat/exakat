@@ -44,6 +44,7 @@ abstract class Analyzer {
     const QUERY_RAW      = 4; // returns data, no storage
     const QUERY_HASH     = 5; // returns a list of values
     const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
+    const QUERY_ARRAYS   = 7; // arrays of array
 
     public static $datastore  = null;
 
@@ -67,6 +68,7 @@ abstract class Analyzer {
     private static $calledDirectives      = null;
 
     private   $analyzer         = '';       // Current class of the analyzer (called from below)
+    protected $analyzerTitle    = '';       // Name use when storing in the dump.sqlites
     private   $shortAnalyzer    = '';
     protected $analyzerQuoted   = '';
     protected $analyzerId       = 0;
@@ -1852,6 +1854,12 @@ GREMLIN;
 
         return $this;
     }
+    
+    public function processLevels() {
+        $this->query->processLevels();
+
+        return $this;
+    }
 
     public function run() {
         $this->analyze();
@@ -1884,6 +1892,102 @@ GREMLIN;
     }
     
     public function prepareQuery($type = self::QUERY_DEFAULT) {
+        switch($type) {
+            case self::QUERY_HASH: 
+                $this->storeToHashResults();
+                break;
+
+            case self::QUERY_ARRAYS: 
+                $this->storeArraysToHashResult();
+                break;
+
+            case self::QUERY_DEFAULT:
+            default:
+                $this->storeToGraph();
+                break;
+        }
+
+         // initializing a new query
+        $this->initNewQuery();
+    }
+
+    private function storeToHashResults() {
+        ++$this->queryId;
+
+/*
+    // Can't add that, as it requires a real step
+        $this->raw(<<<GREMLIN
+// Query (#{$this->queryId}) for {$this->analyzer}
+// php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
+// hasResults storage
+
+GREMLIN
+);
+*/
+        $this->query->prepareQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+
+        ++$this->queryCount;
+
+        $c = $result->toArray();
+        if (!is_array($c) || !isset($c[0])) {
+            return 0;
+        }
+        $c = $c[0];
+        if (!is_array($c) || count($c) === 0) {
+            return 0;
+        }
+
+        $this->processedCount += count($c);
+        $this->rowCount       += count($c);
+
+        $valuesSQL = array();
+        foreach($c as $name => $count) {
+            $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
+        }
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
+    }
+
+    private function storeArraysToHashResult() {
+        ++$this->queryId;
+
+        $this->query->prepareQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+
+        ++$this->queryCount;
+
+        if (count($result) === 0) {
+            return 0;
+        }
+
+        $this->processedCount += count($result->toArray());
+        $this->rowCount       += count($result->toArray());
+
+        $valuesSQL = array();
+        foreach($result->toArray() as $row) {
+            list($name, $count) = array_values($row);
+            $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
+        }
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
+    }
+
+    private function storeToGraph() {
         ++$this->queryId;
         
         $this->raw(<<<GREMLIN
@@ -1897,11 +2001,7 @@ dedup().groupCount("total").by(count())
 GREMLIN
 );
         $this->query->prepareQuery();
-
         $this->queries[] = $this->query;
-
-         // initializing a new query
-        $this->initNewQuery();
     }
 
     public function queryDefinition($query) {

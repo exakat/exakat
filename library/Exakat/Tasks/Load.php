@@ -595,9 +595,9 @@ class Load extends Tasks {
                 }
         
                 $this->processFile($file, $this->config->code_dir);
-            } catch (CantCompileFile $e) {
+            } catch (CantCompileFile $e1) {
                 // Ignore
-            } catch (NoFileToProcess $e) {
+            } catch (NoFileToProcess $e2) {
                 // Ignore
             }
         }
@@ -2274,7 +2274,20 @@ class Load extends Tasks {
             }
 
             if ($index === 0) {
-                $fullcode[] = ' ';
+                if ($atom === 'List') {
+                    $index = $this->addAtomVoid();
+
+                    $index->rank = ++$rank;
+                    $argumentsId[] = $index;
+                    $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
+    
+                    $this->addLink($arguments, $index, 'ARGUMENT');
+    
+                    $fullcode[] = $index->fullcode;
+                    $argumentsList[] = $index;
+                } else {
+                    $fullcode[] = ' ';
+                }
             } else {
                 $index->rank = ++$rank;
                 $argumentsId[] = $index;

@@ -35,8 +35,8 @@ class FollowClosureDefinition extends Analyzer {
               ->inIs('NAME')
               ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         // relayed usage
         $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
@@ -51,9 +51,9 @@ class FollowClosureDefinition extends Analyzer {
               ->inIs('NAME')
               ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
-        }
+              ->back('first');
+        $this->prepareQuery();
+    }
 }
 
 ?>

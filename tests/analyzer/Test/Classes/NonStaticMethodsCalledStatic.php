@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class NonStaticMethodsCalledStatic extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testClasses_NonStaticMethodsCalledStatic01()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.01'); }
     public function testClasses_NonStaticMethodsCalledStatic02()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.02'); }
@@ -19,5 +19,6 @@ class NonStaticMethodsCalledStatic extends Analyzer {
     public function testClasses_NonStaticMethodsCalledStatic08()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.08'); }
     public function testClasses_NonStaticMethodsCalledStatic09()  { $this->generic_test('Classes/NonStaticMethodsCalledStatic.09'); }
     public function testClasses_NonStaticMethodsCalledStatic10()  { $this->generic_test('Classes/NonStaticMethodsCalledStatic.10'); }
+    public function testClasses_NonStaticMethodsCalledStatic11()  { $this->generic_test('Classes/NonStaticMethodsCalledStatic.11'); }
 }
 ?>

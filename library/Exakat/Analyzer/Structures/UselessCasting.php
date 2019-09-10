@@ -31,7 +31,7 @@ class UselessCasting extends Analyzer {
                        'T_BOOL_CAST'    => 'bool',
                        'T_INT_CAST'     => 'int',
                        'T_ARRAY_CAST'   => 'array',
-                       'T_DOUBLE_CAST'  => 'real'
+                       'T_DOUBLE_CAST'  => 'float'
                   );
         
         $returnTypes = self::$methods->getFunctionsByReturn();

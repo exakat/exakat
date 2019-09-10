@@ -14,7 +14,7 @@ Rulesets are configured with the -T option, when running exakat in command line.
 
 ::
 
-   php exakat.phar analyze -p <project> -T <Security/DirectInjection>
+   php exakat.phar analyze -p <project> -T <Security>
 
 
 
@@ -30,6 +30,8 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Suggestions`                             | List of possible modernisation of the PHP code.                                                      |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP74`                      | List features that are incompatible with PHP 7.4. It is known as php-src, work in progress.          |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP73`                      | List features that are incompatible with PHP 7.3.                                                    |
@@ -38,9 +40,17 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP80`                      | Work in progress. The first rules are in, but far from finished                                      |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environnement.               |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Top10`                                   | The most common issues found in the code                                                             |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Classreview`                             | A set of rules dedicate to class hygiene                                                             |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`LintButWontExec`                         | Check the code for common errors that will lead to a Fatal error on production, but lint fine.       |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+

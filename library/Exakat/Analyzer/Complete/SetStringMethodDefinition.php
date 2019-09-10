@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SetStringMethodDefinition extends Analyzer {
     public function analyze() {
+        // $a = 'B::C' with class B { function C() {}}
         $this->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')

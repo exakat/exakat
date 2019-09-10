@@ -1160,6 +1160,32 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
+    protected function generateIndentationLevelsBreakdown(Section $section) {
+        // List of indentation used
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT key, value AS count FROM hashResults 
+WHERE name = "Indentation Levels"
+ORDER BY key + 0 ASC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['count'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+        
+        
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
     protected function generatePHPFunctionBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'
@@ -2181,7 +2207,7 @@ SQL;
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateAnalyzersList(Section $section) {
@@ -2196,7 +2222,7 @@ SQL;
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateExternalLib(Section $section) {
@@ -2296,7 +2322,7 @@ SQL;
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateCompatibilityEstimate(Section $section) {
@@ -2306,33 +2332,54 @@ SQL;
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
-        $analyzers = array( 'Php/Php54NewFunctions'                 => '5.3-',
-                            'Structures/DereferencingAS'            => '5.3-',
-                            'Php/ClosureThisSupport'                => '5.4-',
-                            'Php/HashAlgos54'                       => '5.4-',
-                            'Php/Php54RemovedFunctions'             => '5.4-',
-                            'Structures/Break0'                     => '5.4-',
-                            'Structures/BreakNonInteger'            => '5.4-',
-                            'Structures/CalltimePassByReference'    => '5.4-',
-                            'Php/MethodCallOnNew'                   => '5.4+',
-                            'Type/Binary'                           => '5.4+',
-                            'Php/Php55NewFunctions'                 => '5.5-',
-                            'Php/Php55RemovedFunctions'             => '5.5-',
-                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
-                            'Php/ConstWithArray'                    => '5.5+',
-                            'Php/Password55'                        => '5.5+',
-                            'Php/StaticclassUsage'                  => '5.5+',
-                            'Structures/ForeachWithList'            => '5.5+',
-                            'Structures/EmptyWithExpression'        => '5.5+',
-                            'Structures/TryFinally'                 => '5.5+',
-                            'Php/Php56NewFunctions'                 => '5.6-',
-                            'Structures/CryptWithoutSalt'           => '5.6-',
-                            'Namespaces/UseFunctionsConstants'      => '5.6+',
-                            'Php/ConstantScalarExpression'          => '5.6+',
-                            'Php/debugInfoUsage'                    => '5.6+',
-                            'Php/EllipsisUsage'                     => '5.6+',
-                            'Php/ExponentUsage'                     => '5.6+',
-                            'Structures/ConstantScalarExpression'   => '5.6+',
+        $analyzers = array( 
+                            'Php/PHP80RemovedFunctions'             => '8.0-',
+                            'Php/PHP80RemovedConstants'             => '8.0-',
+
+                            'Structures/toStringThrowsException'    => '7.4-',
+                            'Php/NestedTernaryWithoutParenthesis'   => '7.4-',
+                            'Php/TypedPropertyUsage'                => '7.4-',
+                            'Structures/UseCovariance'              => '7.4-',
+                            'Structures/UseContravariance'          => '7.4-',
+                            'Php/Php74NewDirective'                 => '7.4-',
+                            'Php/SpreadOperatorForArray'            => '7.4+',
+                            'Php/UnpackingInsideArrays'             => '7.4+',
+                            'Structures/CurlVersionNow'             => '7.4+',
+                            'Structures/Php74RemovedFunctions'      => '7.4+',
+                            'Structures/Php74Deprecation'           => '7.4+',
+                            'Structures/Php74ReservedKeyword'       => '7.4+',
+                            'Functions/UseArrowFunctions'           => '7.4+',
+                            'Type/IntegerSeparatorUsage'            => '7.4+',
+                            'Php/NoMoreCurlyArrays'                 => '7.4+',
+                            'Php/CoalesceEqual'                     => '7.4+',
+                            '/Php/ConcatAndAddition'                => '7.4+',
+
+                            'Php/Php73NewFunctions'                 => '7.3-',
+                            'Php/ListWithReference'                 => '7.3+',
+                            'Php/FlexibleHeredoc'                   => '7.3+',
+                            'Php/PHP73LastEmptyArgument'            => '7.3+',
+
+                            'Php/Php72Deprecation'                  => '7.2-',
+                            'Php/Php72NewClasses'                   => '7.2-',
+                            'Php/Php72NewConstants'                 => '7.2-',
+                            'Php/Php72NewFunctions'                 => '7.2-',
+                            'Php/Php72ObjectKeyword'                => '7.2-',
+                            'Php/Php72RemovedClasses'               => '7.2-',
+                            'Php/Php72RemovedFunctions'             => '7.2-',
+                            'Php/Php72RemovedInterfaces'            => '7.2-',
+                            'Classes/CantInheritAbstractMethod'     => '7.2+',
+                            'Classes/ChildRemoveTypehint'           => '7.2+',
+                            'Php/GroupUseTrailingComma'             => '7.2+',
+
+                            'Php/Php71NewClasses'                   => '7.1-',
+                            'Php/Php71NewFunctions'                 => '7.1-',
+                            'Type/OctalInString'                    => '7.1-',
+                            'Classes/ConstVisibilityUsage'          => '7.1+',
+                            'Php/ListShortSyntax'                   => '7.1+',
+                            'Php/ListWithKeys'                      => '7.1+',
+                            'Php/Php71RemovedDirective'             => '7.1+',
+                            'Php/UseNullableType'                   => '7.1+',
+
                             'Classes/AbstractStatic'                => '7.0-',
                             'Classes/NullOnNew'                     => '7.0-',
                             'Classes/UsingThisOutsideAClass'        => '7.0-',
@@ -2370,33 +2417,37 @@ SQL;
                             'Security/UnserializeSecondArg'         => '7.0+',
                             'Structures/IssetWithConstant'          => '7.0+',
                             'Php/ParenthesisAsParameter'            => '7.0+',
-                            'Php/Php71NewClasses'                   => '7.1-',
-                            'Php/Php71NewFunctions'                 => '7.1-',
-                            'Type/OctalInString'                    => '7.1-',
-                            'Classes/ConstVisibilityUsage'          => '7.1+',
-                            'Php/ListShortSyntax'                   => '7.1+',
-                            'Php/ListWithKeys'                      => '7.1+',
-                            'Php/Php71RemovedDirective'             => '7.1+',
-                            'Php/UseNullableType'                   => '7.1+',
-                            'Php/Php72Deprecation'                  => '7.2-',
-                            'Php/Php72NewClasses'                   => '7.2-',
-                            'Php/Php72NewConstants'                 => '7.2-',
-                            'Php/Php72NewFunctions'                 => '7.2-',
-                            'Php/Php72ObjectKeyword'                => '7.2-',
-                            'Php/Php72RemovedClasses'               => '7.2-',
-                            'Php/Php72RemovedFunctions'             => '7.2-',
-                            'Php/Php72RemovedInterfaces'            => '7.2-',
-                            'Classes/CantInheritAbstractMethod'     => '7.2+',
-                            'Classes/ChildRemoveTypehint'           => '7.2+',
-                            'Php/GroupUseTrailingComma'             => '7.2+',
-                            'Php/Php73NewFunctions'                 => '7.3-',
-                            'Php/ListWithReference'                 => '7.3+',
-                            'Php/FlexibleHeredoc'                   => '7.3+',
-                            'Php/PHP73LastEmptyArgument'            => '7.3+',
-                            'Php/UnpackingInsideArrays'             => '7.4+',
-                            'Structures/CurlVersionNow'             => '7.4+',
-                            'Php/PHP80RemovedFunctions'             => '8.0-',
-                            'Php/PHP80RemovedConstants'             => '8.0-',
+
+                            'Php/Php56NewFunctions'                 => '5.6-',
+                            'Structures/CryptWithoutSalt'           => '5.6-',
+                            'Namespaces/UseFunctionsConstants'      => '5.6+',
+                            'Php/ConstantScalarExpression'          => '5.6+',
+                            'Php/debugInfoUsage'                    => '5.6+',
+                            'Php/EllipsisUsage'                     => '5.6+',
+                            'Php/ExponentUsage'                     => '5.6+',
+                            'Structures/ConstantScalarExpression'   => '5.6+',
+
+                            'Php/Php55NewFunctions'                 => '5.5-',
+                            'Php/Php55RemovedFunctions'             => '5.5-',
+                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
+                            'Php/ConstWithArray'                    => '5.5+',
+                            'Php/Password55'                        => '5.5+',
+                            'Php/StaticclassUsage'                  => '5.5+',
+                            'Structures/ForeachWithList'            => '5.5+',
+                            'Structures/EmptyWithExpression'        => '5.5+',
+                            'Structures/TryFinally'                 => '5.5+',
+
+                            'Php/ClosureThisSupport'                => '5.4-',
+                            'Php/HashAlgos54'                       => '5.4-',
+                            'Php/Php54RemovedFunctions'             => '5.4-',
+                            'Structures/Break0'                     => '5.4-',
+                            'Structures/BreakNonInteger'            => '5.4-',
+                            'Structures/CalltimePassByReference'    => '5.4-',
+                            'Php/MethodCallOnNew'                   => '5.4+',
+                            'Type/Binary'                           => '5.4+',
+
+                            'Php/Php54NewFunctions'                 => '5.3-',
+                            'Structures/DereferencingAS'            => '5.3-',
                           );
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
@@ -3765,8 +3816,8 @@ SQL
 SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
  visibility, constant, value
 FROM cit
-JOIN constants 
-    ON constants.citId = cit.id
+JOIN classconstants 
+    ON classconstants.citId = cit.id
 JOIN namespaces 
     ON cit.namespaceId = namespaces.id
 WHERE type="class"
@@ -3963,7 +4014,7 @@ SQL
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CHANGED_CLASSES', $changedClasses);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateClassDepth(Section $section) {
@@ -4508,7 +4559,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'TITLE',       $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', $section->title);
         $html = $this->injectBloc($html, 'CONTENT',     'This section is empty : no result where found.');
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateStats(Section $section) {
@@ -4528,7 +4579,7 @@ JAVASCRIPT;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateComplexExpressions(Section $section) {
@@ -4547,7 +4598,7 @@ JAVASCRIPT;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $expressions);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateCodes(Section $section) {
@@ -4759,9 +4810,9 @@ SQL;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
-    
+
     protected function generateAppinfo(Section $section) {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();

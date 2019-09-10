@@ -9,8 +9,8 @@ class P {
 
 class A1 {
     function f() {
-        self::nonStaticButSelfClass();
-        static::nonStaticButSelfClass();
+        self::nonStaticButSelfClaSs();
+        static::nonStaticButSelfClaSSs();
     }
     
     public function nonStaticButSelfClass() {}
@@ -33,9 +33,9 @@ class A2 extends A1 {
 
 class A3 extends A2 {
     function f() {
-        self::nonStaticButSelfClass();
-        static::nonStaticButSelfClass();
-        parent::nonStaticButSelfClass();
+        self::nonStaticButSelfClasS();
+        static::nonStaticButSelfClasS();
+        parent::nonStaticButSelfClasS();
     }
 }
 

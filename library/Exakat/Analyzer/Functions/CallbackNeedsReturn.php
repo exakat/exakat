@@ -25,8 +25,22 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CallbackNeedsReturn extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetArrayClassDefinition',
+                    );
+    }
+
     public function analyze() {
         $ini = $this->loadIni('php_with_callback.ini');
+
+        // Excluding some functions that don't REQUIRE return
+        $ini['functions0'] = array_diff($ini['functions0'], 
+                                        array('\forward_static_call_array',
+                                              '\forward_static_call',
+                                              '\register_shutdown_function',
+                                              '\register_tick_function',
+                                              )
+                                      );
 
         foreach($ini as $position => $functions) {
             $rank = substr($position, 9);
@@ -37,7 +51,6 @@ class CallbackNeedsReturn extends Analyzer {
             //String callback
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
-                 ->atomIsNot('Arrayliteral')
                  ->inIs('DEFINITION')
                  ->not(
                     $this->side()
@@ -70,35 +83,6 @@ class CallbackNeedsReturn extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
 
-            //Static class callback
-            $this->atomFunctionIs($functions)
-                 ->outWithRank('ARGUMENT', $rank)
-                 ->atomIs('Arrayliteral')
-                 ->is('count', 2)
-                 ->outWithRank('ARGUMENT', 1)
-                 ->has('noDelimiter')
-                 ->savePropertyAs('noDelimiter', 'method')
-                 ->inIs('ARGUMENT')
-                 ->outWithRank('ARGUMENT', 0)
-                 ->inIs('DEFINITION')
-                 ->outIs('METHOD')
-                 ->is('static', true)
-                 ->not(
-                    $this->side()
-                         ->filter(
-                            $this->side()
-                                 ->outIs('ARGUMENT')
-                                 ->is('reference', true)
-                         )
-                 )
-                 ->outIs('NAME')
-                 ->samePropertyAs('fullcode', 'method')
-                 ->inIs('NAME')
-                 ->outIs('BLOCK')
-                 ->noAtomInside('Return')
-                 ->back('first');
-            $this->prepareQuery();
-    
             //Normal class callback
             // Still needs DEFINITION link
         }

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnresolvedInstanceof extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsExtClass',
+        return array('Complete/SetClassAliasDefinition',
+                     'Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                     );
     }

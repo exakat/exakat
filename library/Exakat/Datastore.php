@@ -221,7 +221,7 @@ class Datastore {
         }
 
         $row = $res->fetchArray(\SQLITE3_ASSOC);
-        if (is_array($row['value'])) {
+        if (isset($row['value'])) {
             return $row['value'];
         } else {
             return null;

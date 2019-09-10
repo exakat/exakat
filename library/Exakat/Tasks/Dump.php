@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -135,14 +135,6 @@ class Dump extends Tasks {
             $end = microtime(true);
             $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
-            $this->collectFunctions();
-            $end = microtime(true);
-            $this->log->log( 'Collected Functions: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $begin = $end;
-            $this->collectConstants();
-            $end = microtime(true);
-            $this->log->log( 'Collected Constants: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $begin = $end;
             $this->collectVariables();
             $end = microtime(true);
             $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -222,11 +214,6 @@ class Dump extends Tasks {
                 $end = microtime(true);
                 $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             }
-            
-            $begin = microtime(true);
-            $this->collectCyclomaticComplexity();
-            $end = microtime(true);
-            $this->log->log( 'Collected Cyclomatic Complexity : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         }
 
         $counts = array();
@@ -674,17 +661,16 @@ CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL
 );
-        $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] }.unique();
+g.V().hasLabel("Namespace").map{ ['name' : it.get().value("fullnspath")] }.unique();
 GREMLIN;
         $res = $this->gremlin->query($query);
 
         $total = 0;
-        $query = array();
+        $query = array("(1, '\\')");
         foreach($res as $row) {
-            $query[] = "(null, '\\" . strtolower($this->sqlite->escapeString($row['name'])) . "')";
+            $query[] = "(null, '" . strtolower($this->sqlite->escapeString($row['name'])) . "')";
             ++$total;
         }
         
@@ -696,7 +682,7 @@ GREMLIN;
         $query = 'SELECT id, lower(namespace) AS namespace FROM namespaces';
         $res = $this->sqlite->query($query);
 
-        $namespacesId = array('' => 1);
+        $namespacesId = array();
         while($namespace = $res->fetchArray(\SQLITE3_ASSOC)) {
             $namespacesId[$namespace['namespace']] = $namespace['id'];
         }
@@ -719,7 +705,7 @@ GREMLIN;
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
-                                                             implements INTEGER,
+                                                             implements TEXT,
                                                              type    TEXT
                                                  )');
 
@@ -955,6 +941,8 @@ GREMLIN;
         display("$total uses \n");
 
         // Methods
+        $methodCount = 0;
+        $methodIds = array();
         $this->sqlite->query('DROP TABLE IF EXISTS methods');
         $this->sqlite->query(<<<'SQL'
 CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -970,13 +958,14 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-        
+
         $query = <<<GREMLIN
-g.V().hasLabel("Method", "Usetrait")
+g.V().hasLabel("Method", "Magicmethod")
     .coalesce( 
             __.out("BLOCK").out("EXPRESSION").hasLabel("As"),
             __.hasLabel("Method", "Magicmethod")
      )
+     .sideEffect{ returntype = 'None'; }
      .where(
         __.coalesce( 
             __.out("AS").sideEffect{alias = it.get().value("fullcode")}.in("AS")
@@ -992,18 +981,22 @@ g.V().hasLabel("Method", "Usetrait")
                    .sideEffect{ lines.add(it.get().value("line")); }
                    .fold()
           )
+          .where( __.out('RETURNTYPE').sideEffect{ returntype = it.get().value("fullcode")}.fold())
+          .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
           .map{ 
 
     if (alias == false) {
-        name = it.get().value("fullcode");
+        signature = it.get().value("fullcode");
     } else {
-        name = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
+        signature = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
     }
 
-    x = ["name": name,
+    x = ["signature": signature,
+         "name":name,
          "abstract":it.get().properties("abstract").any(),
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
+         "returntype": returntype,
 
          "public":    it.get().value("visibility") == "public",
          "protected": it.get().value("visibility") == "protected",
@@ -1021,6 +1014,7 @@ GREMLIN;
 
         $total = 0;
         $query = array();
+        $unique = array();
         foreach($res as $row) {
             if ($row['public']) {
                 $visibility = 'public';
@@ -1035,7 +1029,13 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+            $methodId = $row['class'].'::'.strtolower($row['name']);
+            if (isset($methodIds[$methodId])) {
+                continue; // skip double
+            }
+            $methodIds[$methodId] = ++$methodCount;
+
+            $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['signature']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
                         ', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
@@ -1048,6 +1048,74 @@ GREMLIN;
         }
 
         display("$total methods\n");
+
+        // Arguments
+        $this->sqlite->query('DROP TABLE IF EXISTS arguments');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE arguments (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name STRING,
+                        citId INTEGER,
+                        methodId INTEGER,
+                        rank INTEGER,
+                        reference INTEGER,
+                        variadic INTEGER,
+                        init STRING,
+                        typehint STRING
+                     )
+SQL
+);
+
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Parameter").as('first')
+.in('ARGUMENT')
+.where( __.out('NAME').sideEffect{ methode = it.get().value("fullcode").toString().toLowerCase() }.fold())
+.in('METHOD', 'MAGICMETHOD')
+.hasLabel('Class')
+.sideEffect{ classe = it.get().value("fullnspath")}
+
+.select('first')
+
+.sideEffect{
+    init = 'None';
+    typehint = 'None';
+}
+.where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
+.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode")}.fold())
+.where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.map{ 
+    x = ["name": name,
+         "rank":it.get().value("rank"),
+         "variadic":it.get().properties("variadic").any(),
+         "reference":it.get().properties("reference").any(),
+
+         "classe":classe,
+         "methode":methode,
+
+         "init": init,
+         "typehint":typehint,
+         ];
+}
+
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'].'::'.$row['methode']] .
+                        ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
+                        ', \'' . $row['typehint'] . '\')';
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO arguments ("name", "rank", "citId", "methodId", "init", "reference", "variadic", "typehint") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total arguments\n");
 
         // Properties
         $this->sqlite->query('DROP TABLE IF EXISTS properties');
@@ -1100,6 +1168,9 @@ GREMLIN;
 
         $total = 0;
         $query = array();
+        $propertyId = '';
+        $propertyIds = array();
+        $propertyCount = 0;
         foreach($res as $row) {
             if ($row['public']) {
                 $visibility = 'public';
@@ -1117,6 +1188,11 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
+            $propertyId = $row['class'].'::'.$row['name'];
+            if (isset($propertyIds[$propertyId])) {
+                continue; // skip double
+            }
+            $propertyIds[$propertyId] = ++$propertyCount;
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
                         ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] . ')';
@@ -1131,9 +1207,9 @@ GREMLIN;
         display("$total properties\n");
 
         // Class Constant
-        $this->sqlite->query('DROP TABLE IF EXISTS constants');
+        $this->sqlite->query('DROP TABLE IF EXISTS classconstants');
         $this->sqlite->query(<<<'SQL'
-CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE classconstants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           constant INTEGER,
                           citId INTEGER,
                           visibility STRING,
@@ -1143,7 +1219,7 @@ SQL
 );
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait")
+g.V().hasLabel("Class", "Trait")
      .out('CONST')
 .sideEffect{ 
     x_public = it.get().values("visibility") == 'public';
@@ -1192,10 +1268,196 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO classconstants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
+
+        // Global Constants
+        $this->sqlite->query('DROP TABLE IF EXISTS constants');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          constant INTEGER,
+                          namespaceId INTEGER,
+                          file TEXT,
+                          value TEXT,
+                          type TEXT
+                       )
+SQL
+);
+
+        $query = $this->newQuery('Constants define()');
+        $query->atomIs('Defineconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+ sideEffect{ 
+    file = ""; 
+    namespace = "\\\\"; 
+}
+.where( 
+    __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
+           .coalesce( 
+                __.hasLabel("File").sideEffect{ file = it.get().value("fullcode"); },
+                __.hasLabel("Namespace").sideEffect{ namespace = it.get().value("fullnspath"); }
+                )
+           .fold() 
+)
+GREMLIN
+, array(), array())
+              ->filter(
+                $query->side()
+                     ->outIs('NAME')
+                     ->is('constant', true)
+                     ->savePropertyAs('fullcode', 'name')
+                     ->prepareSide(),
+                     array()
+              )
+              ->filter(
+                $query->side()
+                     ->outIs('VALUE')
+                     ->is('constant', true)
+                     ->savePropertyAs('fullcode', 'v')
+                     ->prepareSide(),
+                     array()
+              )
+              ->raw('map{ ["name":name, "value":v, "namespace": namespace, "file": file, "type":"define"]; }', array(), array());
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $total = 0;
+        $query = array();
+        foreach($result->toArray() as $row) {
+            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', '" . $namespacesId[$row['namespace']] . "', '" . $this->files[$row['file']] . "', '" . $this->sqlite->escapeString($row['value']) . "', '" . $this->sqlite->escapeString($row['type']) . "')";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO constants ("id", "constant", "namespaceId", "file", "value", "type") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        $query = $this->newQuery('Constants const');
+        $query->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+ sideEffect{ 
+    file = ""; 
+    namespace = "\\\\"; 
+}
+.where( 
+    __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
+           .coalesce( 
+                __.hasLabel("File").sideEffect{ file = it.get().value("fullcode"); },
+                __.hasLabel("Namespace").sideEffect{ namespace = it.get().value("fullnspath"); }
+                )
+           .fold() 
+)
+GREMLIN
+, array(), array())
+              ->hasNoIn('CONST') // Not class or interface
+              ->outIs('CONST')
+              ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->filter(
+                $query->side()
+                     ->outIs('NAME')
+                     ->is('constant', true)
+                     ->savePropertyAs('fullcode', 'name')
+                     ->prepareSide(),
+                     array()
+              )
+              ->filter(
+                $query->side()
+                     ->outIs('VALUE')
+                     ->is('constant', true)
+                     ->savePropertyAs('fullcode', 'v')
+                     ->prepareSide(),
+                     array()
+              )
+
+              ->raw('map{ ["name":name, "value":v, "namespace": namespace, "file": file, "type":"const"]; }', array(), array());
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $query = array();
+        foreach($result->toArray() as $row) {
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $namespacesId[$row['namespace']] . "', '" . $this->files[$row['file']] . "', '" . $this->sqlite->escapeString($row['value']) . "', '" . $this->sqlite->escapeString($row['type']) . "')";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO constants ("id", "constant", "namespaceId", "file", "value", "type") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total global constants\n");
+        
+        // Collect Functions
+        // Functions
+        $this->sqlite->query('DROP TABLE IF EXISTS functions');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          function TEXT,
+                          type TEXT,
+                          namespaceId INTEGER,
+                          file TEXT,
+                          begin INTEGER,
+                          end INTEGER
+)
+SQL
+);
+
+        $query = $this->newQuery('Functions');
+        $query->atomIs(array('Function', 'Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+ sideEffect{ lines = []; }
+.where( 
+    __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
+      .sideEffect{ lines.add(it.get().value("line")); }
+      .fold()
+ )
+GREMLIN
+, array(), array()) 
+              ->raw(<<<GREMLIN
+ sideEffect{ 
+    file = ""; 
+    namespace = "\\\\"; 
+}
+.where( 
+    __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
+           .coalesce( 
+                __.hasLabel("File").sideEffect{ file = it.get().value("fullcode"); },
+                __.hasLabel("Namespace").sideEffect{ namespace = it.get().value("fullnspath"); }
+                )
+           .fold() 
+)
+GREMLIN
+, array(), array())
+              ->raw(<<<GREMLIN
+map{ ["name":it.get().vertices(OUT, "NAME").next().value("fullcode"), 
+      "type":it.get().label().toString().toLowerCase(),
+      "file":file, 
+      "namespace":namespace, 
+      "begin": lines.min(), 
+      "end":lines.max()
+      ]; }
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $query = array();
+        foreach($result->toArray() as $row) {
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total functions\n");
     }
 
     private function collectFiles() {
@@ -1247,117 +1509,6 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display("$total PHP {$type}s\n");
-    }
-    
-    private function collectConstants() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Defineconstant")
-     .where( __.out("ARGUMENT").has("rank", 0).has("constant", true).sideEffect{ name = it.get().value("fullcode"); } )
-     .where( __.out("ARGUMENT").has("rank", 1).has("constant", true).sideEffect{ v = it.get().value("fullcode"); } )
-     .filter{ v != null;}
-     .filter{ name != null;}
-.map{ 
-    x = ['name': name,
-         'value': v
-         ];
-}
-
-GREMLIN;
-        $res = $this->gremlin
-                    ->query($query)
-                    ->toArray();
-        
-        $total = 0;
-        $query = array();
-        foreach($res as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', 0, 0, '" . $this->sqlite->escapeString($row['value']) . "')";
-
-            ++$total;
-        }
-
-        if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
-
-        $gremlinQuery = <<<'GREMLIN'
-g.V().hasLabel("Const")
-     .not(where(__.in("CONST")))
-     .out("CONST")
-     .hasLabel("Constant")
-     .where( __.out("NAME").sideEffect{ name = it.get().value("fullcode"); } )
-     .where( __.out("VALUE").sideEffect{ v = it.get().value("fullcode"); } )
-.map{ 
-    x = ['name': name,
-         'value': v
-         ];
-}
-
-GREMLIN;
-        $res = $this->gremlin
-                    ->query($gremlinQuery)
-                    ->toArray();
-        
-        $total = 0;
-        $query = array();
-        foreach($res as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', 0, 0, '" . $this->sqlite->escapeString($row['value']) . "')";
-
-            ++$total;
-        }
-
-        if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
-
-        display("$total constants\n");
-    }
-
-    private function collectFunctions() {
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
-
-        // Functions
-        $this->sqlite->query('DROP TABLE IF EXISTS functions');
-        $this->sqlite->query(<<<'SQL'
-CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          function TEXT,
-                          file TEXT,
-                          begin INTEGER,
-                          end INTEGER
-)
-SQL
-);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Function")
-.sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold() )
-.sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
-.map{ 
-    x = ['name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
-         'file': file,
-         'begin': lines.min(),
-         'end': lines.max()
-         ];
-}
-
-GREMLIN;
-        $res = $this->gremlin->query($query)->toArray();
-        
-        $total = 0;
-        $query = array();
-        foreach($res as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->files[$row['file']] . "', " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
-
-            ++$total;
-        }
-
-        if (!empty($query)) {
-            $query = 'INSERT INTO functions ("id", "function", "file", "begin", "end") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
-
-        display("$total functions\n");
     }
 
     private function collectLiterals() {
@@ -1529,7 +1680,7 @@ GREMLIN;
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions');
-        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
@@ -1752,7 +1903,7 @@ GREMLIN;
 
               ->outIs('CLONE')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
 
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'called')
@@ -1841,7 +1992,7 @@ SQL
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions of classes');
-        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
@@ -1943,7 +2094,7 @@ GREMLIN
               ->outIs('RETURNTYPE')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
@@ -1975,7 +2126,7 @@ GREMLIN
 
         // Finding trait use
         $query = $this->newQuery('Traits');
-        $query->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2008,7 +2159,7 @@ GREMLIN
         $query->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
@@ -2048,7 +2199,7 @@ GREMLIN
 
               ->outIs('CLONE')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2083,7 +2234,7 @@ GREMLIN
 
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class','Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2247,47 +2398,6 @@ GREMLIN
         $this->sqlite->query($query);
     }
 
-    private function collectCyclomaticComplexity() {
-        $values = array();
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
-
-        $query = $this->newQuery('CyclomaticComplexity');
-        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->_as('name')
-              ->back('first')
-              ->outIs('BLOCK')
-              ->raw(<<<GREMLIN
-project("cc").by(
-    __.emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).coalesce(
-    __.hasLabel(
-    "Ifthen", "Case", "Default", "Foreach", "For" ,"Dowhile", "While", "Continue", 
-    "Catch", "Finally", "Throw", 
-    "Ternary", "Coalesce"
-    ),
-    __.hasLabel("Ifthen").out("THEN", "ELSE"),
-    __.hasLabel("Return").sideEffect{ ranked = it.get().value("rank");}.in("EXPRESSION").coalesce( __.filter{ it.get().value("count") != ranked + 1;},
-                                                                                                   __.not(where(__.in("BLOCK").hasLabel("Function"))))
-    ).count()
-).select("first","cc").by("fullnspath").by()
-GREMLIN
-,array(), array());
-        $query->prepareRawQuery();
-        $cc = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        foreach($cc->toArray() as $row) {
-            ++$row['cc'];
-            $values[] = "('CyclomaticComplexity', '{$row['first']}', '{$row['cc']}')";
-        }
-
-        if(empty($values)) {
-            return;
-        }
-
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
-        $this->sqlite->query($query);
-    }
-
     private function collectClassDepth() {
         $query = <<<'GREMLIN'
 g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
@@ -2311,42 +2421,42 @@ GREMLIN;
 
     private function collectMethodsCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
     private function collectPropertyCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
     private function collectClassTraitsCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
     }
 
     private function collectClassInterfaceCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassInterfaces');
     }
 
     private function collectClassChildrenCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class", "Classanonymous").count() ).cap("m"); 
+g.V().hasLabel("Class").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassChildren');
     }
 
     private function collectConstantCounts() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
+g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
     }

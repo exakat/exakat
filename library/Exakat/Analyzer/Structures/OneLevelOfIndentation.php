@@ -29,7 +29,8 @@ class OneLevelOfIndentation extends Analyzer {
         $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch');
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
         
-        $this->atomIs(array('Function', 'Method'))
+        // function foo() { if ($a === 1) { if ($b === 2) {}}}
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
              ->atomIs($atoms)

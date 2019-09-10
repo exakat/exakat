@@ -44,7 +44,7 @@ repeat(
 .hasLabel("Class", "Classanonymous", "Trait")
 GREMLIN
 );
-            $command->setSack('[]');
+            $command->setSack(Command::SACK_ARRAY);
         } else {
             $command = new Command(<<<GREMLIN
 emit( ).repeat( 
@@ -58,7 +58,7 @@ emit( ).repeat(
 .hasLabel("Class", "Classanonymous", "Trait")
 GREMLIN
 );
-            $command->setSack('[]');
+            $command->setSack(Command::SACK_ARRAY);
         }
 
         return $command;

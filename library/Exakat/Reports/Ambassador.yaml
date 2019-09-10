@@ -206,6 +206,11 @@ audit:
             file: parameter_counts
             method: generateParameterCounts
             icon: circle-o
+        indentation_levels:
+            title: Indentation levels
+            file: indentation_levels
+            method: generateIndentationLevelsBreakdown
+            icon: circle-o
         changed_classes:
             title: Changed Classes
             file: changed_classes
@@ -230,7 +235,7 @@ audit:
             icon: circle-o            
         complex_expressions:
             title: Complex Expressions
-            source: empty
+            source: complex_expressions
             file: complex_expressions
             method: generateComplexExpressions
             icon: circle-o            
@@ -246,7 +251,7 @@ audit:
             method: generateMethodSize
             icon: circle-o            
         classes_depth:
-            title: Class DDepth
+            title: Class Depth
             file: classes_depth
             method: generateClassDepth
             icon: circle-o            

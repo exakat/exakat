@@ -3,7 +3,7 @@
 Annex
 =====
 
-* Supported Themes
+* Supported Rulesets
 * Supported Reports
 * Supported PHP Extensions
 * Supported Frameworks
@@ -13,12 +13,12 @@ Annex
 * External services
 * PHP Error messages
 
-Supported Themes
-----------------
+Supported Rulesets
+------------------
 
-Exakat groups analysis by themes. This way, analyzing 'Security' runs all possible analysis related to themes.
+Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all possible analysis related to security. One analysis may belong to multiple rulesets.
 
-{{THEMES_LIST}}
+{{RULESETS_LIST}}
 
 Supported Reports
 -----------------
@@ -89,10 +89,10 @@ List of external links mentionned in this documentation.
 
 {{URL_LIST}}
 
-Themes configuration
---------------------
+Ruleset configurations
+----------------------
 
-INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
+INI configuration for built-in rulesets. Copy them in config/themes.ini, and make your owns.
 
-{{INI_THEMES}}
+{{INI_RULESETS}}
 

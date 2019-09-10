@@ -26,17 +26,20 @@ use Exakat\Analyzer\Analyzer;
 
 class SetClassPropertyDefinitionWithFluentInterface extends Analyzer {
     public function analyze() {
+        // $a->method1()->method2(); Link the method call to the method definition
+        // $a must be a known object of a fluent class (returning $this, tough not checked yet)
         $this->atomIs(array('Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
-              ->inIs('METHOD')
-              ->outIs(array('OBJECT', 'CLASS'))
+              ->back('first')
 
+              ->outIs(array('OBJECT', 'CLASS'))
               ->atomIs(array('Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
               ->outIsIE('OBJECT')
+              // Object below must have a definition
               ->inIs('DEFINITION')
 
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)

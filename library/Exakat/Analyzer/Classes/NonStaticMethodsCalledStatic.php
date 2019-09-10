@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NonStaticMethodsCalledStatic extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsNotFamily',
-                     'Classes/UndefinedClasses',
+        return array('Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetArrayClassDefinition',
                     );
     }
     
@@ -38,24 +38,31 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
         // Go to all parents class
         $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->codeIsNot('__construct')
-             ->savePropertyAs('lccode', 'methodname')
-             ->inIs('METHOD')
-
-             ->outIs('CLASS')
-             ->atomIsNot(self::$RELATIVE_CLASS)
-             ->analyzerIsNot('Classes/UndefinedClasses')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->inIs('DEFINITION')
+             ->isNot('static', true)
+             ->back('first');
+        $this->prepareQuery();
+        
+        // ['a', 'm']() ; class a { function m() {}}
+        $this->atomIs('Functioncall')
+             ->outIs('NAME')
+             ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('Staticclass', 'String'), self::WITH_CONSTANTS)
+             ->inIs('ARGUMENT')
+             ->inIs('DEFINITION')
              ->atomIs(array('Method', 'Magicmethod'))
              ->isNot('static', true)
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname', self::CASE_INSENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
 
+        // 'a::m'() ; class a { function m() {}}
+        $this->atomIs('Functioncall')
+             ->outIs('NAME')
+             ->atomIs('String', self::WITH_CONSTANTS)
+             ->inIs('DEFINITION')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('static', true)
              ->back('first');
         $this->prepareQuery();
     }

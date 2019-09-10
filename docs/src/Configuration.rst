@@ -19,9 +19,9 @@ General Philosophy
 ##################
 Exakat tries to avoid configuration as much as possible, so as to focus on working out of the box, rather than spend time on pre-requisite.
 
-As such, it will probably do more work, but that may be dismissed later, at the report reading time.
+As such, it probably does more work, but that may be dismissed later, at reading time.
 
-More configuration options will appear with the evolution of the engine.
+More configuration options appear with the evolution of the engine.
 
 Precedence
 ##########
@@ -95,9 +95,11 @@ Here are the currently available options in Exakat's configuration file : config
 | tinkergraph_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
 |                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
 +--------------------+-------------------------------------------------------------------------------------------+
-| project_themes     | List of analysis rulesets to be run. The list may include extra rulesets that are not     |
+| project_rulesets   | List of analysis rulesets to be run. The list may include extra rulesets that are not     |
 |                    | used by the default reports : you can then summon them manually.                          |
 |                    | project_themes[] = 'Theme', one per line.                                                 |
++--------------------+-------------------------------------------------------------------------------------------+
+| project_themes     | Obsolete. Use the one above : project_rulesets                                            |
 +--------------------+-------------------------------------------------------------------------------------------+
 | project_reports    | The list of reports that can be produced when running 'project' command.                  |
 |                    | This list may automatically add extra rulesets if a report requires them. For example,    |
@@ -223,8 +225,8 @@ Here are the currently available options in Exakat's project configuration file 
 |                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
 |                       | without / are used as a substring, anywhere in the path.                                  |
 +-----------------------+-------------------------------------------------------------------------------------------+
-| file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others will be |
-|                       | ignored. All files bearing those extensions are subject to check, though they will be     |
+| file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others are     |
+|                       | ignored. All files bearing those extensions are subject to check, though they are         |
 |                       | scanned first for PHP tags before being analyzed. The extensions are comma separated,     |
 |                       | without dot.                                                                              |
 |                       | The default are : php, php3, inc, tpl, phtml, tmpl, phps, ctp                             |
@@ -290,7 +292,7 @@ Required rulesets
 #################
 First, analysis are very numerous, and it is very tedious to sort them by hand. Exakat only handles 'themes' which are groups of analysis. There are several list of rulesets available by default, and it is possible to customize those lists. 
 
-When using the `projects_themes` directive, you can configure which rulesets must be processed by exakat, each time a 'project' command is run. Those rulesets will always be run. 
+When using the `projects_themes` directive, you can configure which rulesets must be processed by exakat, each time a 'project' command is run. Those rulesets are always run. 
 
 Report-needed rulesets
 ######################

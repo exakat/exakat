@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CreateDefaultValues extends Analyzer {
     public function analyze() {
+        // Link initial values for containers
         $this->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition', 'Staticdefinition', 'Virtualproperty', 'Propertydefinition', 'Parametername'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('LEFT')
@@ -33,8 +34,8 @@ class CreateDefaultValues extends Analyzer {
               ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
               ->outIs('RIGHT')
               ->addEFrom('DEFAULT', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 

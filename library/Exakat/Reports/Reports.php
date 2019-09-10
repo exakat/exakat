@@ -37,7 +37,7 @@ abstract class Reports {
 
     public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor', 'Top10',
                                           'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile',
-                                          'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual',
+                                          'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual', 'Stubs', 
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml', 'Classdependencies',
                                           'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
