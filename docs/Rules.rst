@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 10 Sep 2019 07:31:59 +0000
-.. comment: Generation hash : 52d95dc40dee255aa854f163b6b3c694d43acdfb
+.. comment: Generation date : Wed, 11 Sep 2019 16:03:18 +0000
+.. comment: Generation hash : c53c94c8f285f7af1d0a5bc1b3c1847f70f5cb7d
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -10945,6 +10945,64 @@ Suggestions
 
 
 
+.. _incompatible-signature-methods-with-covariance:
+
+Incompatible Signature Methods With Covariance
+##############################################
+
+
+Methods should have the compatible signature when being overwritten.
+
+The same signatures means the children class must have : 
++ the same name
++ the same visibility or less restrictive
++ the same contravariant typehint or removed
++ the same covariant return typehint or removed
++ the same default value or removed
++ a reference like its parent
+
+This problem emits a fatal error, for abstract methods, or a warning error, for normal methods. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a fatal error.
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       public function foo($a = 1) {}
+   }
+   
+   class ab extends a {
+       // foo is overloaded and now includes a default value for $a
+       public function foo($a) {}
+   }
+   
+   ?>
+
+
+See also `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_,
+         `PHP RFC: Covariant Returns and Contravariant Parameters <https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters>`_ and 
+         :ref:`incompatible-signature-methods`. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make signatures compatible again
+
++-------------+-------------------------------------------------+
+| Short name  | Classes/IncompatibleSignature74                 |
++-------------+-------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                  |
++-------------+-------------------------------------------------+
+| Severity    | Critical                                        |
++-------------+-------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                 |
++-------------+-------------------------------------------------+
+| Examples    | :ref:`suitecrm-classes-incompatiblesignature74` |
++-------------+-------------------------------------------------+
+
+
+
 .. _incompilable-files:
 
 Incompilable Files
@@ -11449,6 +11507,37 @@ Suggestions
 +-------------+----------------------------+
 | Time To Fix | Quick (30 mins)            |
 +-------------+----------------------------+
+
+
+
+.. _interfaces-is-not-implemented:
+
+Interfaces Is Not Implemented
+#############################
+
+
+Classes that implements interfaces must implements each of the interface's methods. 
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Implements all the methods from the interfaces
+* Remove the class
+* Make the class abstract
+* Make the missing methods abstract
+
++-------------+------------------------------------+
+| Short name  | Interfaces/IsNotImplemented        |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -19094,6 +19183,9 @@ The following PHP native functions were removed in PHP 7.2.
 
 * `png2wbmp() <http://www.php.net/png2wbmp>`_
 * `jpeg2wbmp() <http://www.php.net/jpeg2wbmp>`_
+* `create_function() <http://www.php.net/create_function>`_
+* `gmp_random() <http://www.php.net/gmp_random>`_
+* `each() <http://www.php.net/each>`_
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 

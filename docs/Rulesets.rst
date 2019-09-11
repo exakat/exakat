@@ -72,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 10 Sep 2019 07:31:59 +0000
-.. comment: Generation hash : 52d95dc40dee255aa854f163b6b3c694d43acdfb
+.. comment: Generation date : Wed, 11 Sep 2019 16:03:18 +0000
+.. comment: Generation hash : c53c94c8f285f7af1d0a5bc1b3c1847f70f5cb7d
 
 
 .. _analyze:
@@ -81,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 378 analysis
+Total : 380 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -208,12 +208,14 @@ Total : 378 analysis
 * :ref:`Implied If <implied-if>`
 * :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
+* :ref:`Incompatible Signature Methods With Covariance <incompatible-signature-methods-with-covariance>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Inconsistent Elseif <inconsistent-elseif>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Infinite Recursion <infinite-recursion>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
+* :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Invalid Class Name <invalid-class-name>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Pack Format <invalid-pack-format>`
@@ -467,7 +469,7 @@ Total : 378 analysis
 ClassReview
 +++++++++++
 
-Total : 30 analysis
+Total : 31 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -486,6 +488,7 @@ Total : 30 analysis
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`
+* :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`

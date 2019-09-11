@@ -362,6 +362,7 @@ Glossary
     + `create_function()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 
     + `crypt()`
 
@@ -451,6 +452,7 @@ Glossary
     + `each()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 
     + `easter_days()`
 
@@ -686,6 +688,7 @@ Glossary
     + `gmp_random()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 
 
 + `H`

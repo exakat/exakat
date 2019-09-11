@@ -7804,6 +7804,29 @@ This code avoid the PHP notice by padding the resulting array (see comment in Fr
     				$date = date("Y-m-d H:i:s", strtotime($date));
     			}
 
+Incompatible Signature Methods With Covariance
+==============================================
+
+.. _suitecrm-classes-incompatiblesignature74:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`incompatible-signature-methods-with-covariance`, in modules/Home/Dashlets/RSSDashlet/RSSDashlet.php:138. 
+
+The class in the RSSDashlet.php file has an 'array' typehint which is not in the parent Dashlet class. While both files compile separately, they yield a PHP warning when running : typehinting mismatch only yields a warning. 
+
+.. code-block:: php
+
+    // File /modules/Home/Dashlets/RSSDashlet/RSSDashlet.php
+        public function saveOptions(
+            array $req
+            )
+        {
+    
+    // File /include/Dashlets/Dashlets.php
+        public function saveOptions( $req ) {
+
 Could Be Private Class Constant
 ===============================
 
