@@ -433,6 +433,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.5
+
+  * Interfaces Is Not Implemented (Interfaces/IsNotImplemented)
+
 * 1.9.4
 
   * Coalesce And Concat (Structures/CoalesceAndConcat ; Analyze)
@@ -442,6 +446,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Performances/UseArraySlice (Performances/UseArraySlice ; Under Work)
   * Should Use Explode Args (Structures/ShouldUseExplodeArgs ; Analyze)
   * Spread Operator For Array (Php/SpreadOperatorForArray ; Appinfo)
+  * Structures/AlwaysFalse (Structures/AlwaysFalse ; Unassigned)
   * Too Many Array Dimensions (Arrays/TooManyDimensions)
   * Use Arrow Functions (Functions/UseArrowFunctions ; Appinfo)
 
@@ -808,6 +813,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Abstract Or Implements (Classes/AbstractOrImplements)
   * Can't Throw Throwable (Exceptions/CantThrow ; Analyze, LintButWontExec)
   * Incompatible Signature Methods (Classes/IncompatibleSignature ; Analyze, LintButWontExec)
+  * Incompatible Signature Methods With Covariance (Classes/IncompatibleSignature74 ; Analyze)
   * ext/eio (Extensions/Exteio ; Appinfo)
 
 * 1.3.2
@@ -2049,7 +2055,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-65 PHP error message detailled : 
+75 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2062,6 +2068,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Accessing static property aa\:\:$a as non static <undeclared-static-property>`
 * :ref:`An alias (%s) was defined for method %s(), but this method does not exist <undefined-insteadof>`
 * :ref:`Argument 1 passed to foo() must be of the type integer, string given <mismatch-type-and-default>`
+* :ref:`Array and string offset access syntax with curly braces is deprecated <no-more-curly-arrays>`
 * :ref:`Call to undefined function <throw-functioncall>`
 * :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
 * :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
@@ -2079,25 +2086,32 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Cannot use a scalar value as an array <string-initialization>`
 * :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset()-with-constant>`
 * :ref:`Cannot use object of type Foo as array <$this-is-not-an-array>`
+* :ref:`Case-insensitive constants are deprecated. The correct casing for this constant is "A" <constant-case-preference>`
 * :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Class 'x' not found <undefined-\:\:class>`
 * :ref:`Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo) <abstract-or-implements>`
 * :ref:`Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead <can't-throw-throwable>`
+* :ref:`Class x contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (x\:\:m1, x\:\:m2) <interfaces-is-not-implemented>`
 * :ref:`Creating default object from empty value <undefined-variable>`
 * :ref:`Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar() <method-signature-must-be-compatible>`
+* :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods-with-covariance>`
 * :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
+* :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods-with-covariance>`
 * :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
 * :ref:`Defining a custom assert() function is deprecated, as the function has special semantics <assert-function-is-reserved>`
 * :ref:`Delimiter must not be alphanumeric or backslash  <no-empty-regex>`
 * :ref:`Generators cannot return values using "return"  <generator-cannot-return>`
 * :ref:`Generators cannot return values using "return" <no-return-for-generator>`
 * :ref:`Invalid numeric literal <malformed-octal>`
+* :ref:`Methods with the same name as their class will not be constructors in a future version of PHP; %s has a deprecated constructor <old-style-constructor>`
 * :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
 * :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use ``__construct()`` in new code. <old-style-constructor>`
 * :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
 * :ref:`Only variables can be passed by reference <only-variable-for-reference>`
 * :ref:`Only variables should be passed by reference <typehinted-references>`
 * :ref:`Return value of foo() must be an instance of Bar, none returned  <typehint-must-be-returned>`
+* :ref:`The (real) cast is deprecated, use (float) instead <avoid-real>`
+* :ref:`The each() function is deprecated. This message will be suppressed on further calls <php-7.2-removed-functions>`
 * :ref:`The parent constructor was not called: the object is in an invalid state <must-call-parent-constructor>`
 * :ref:`Too few arguments to function foo(), 1 passed and exactly 2 expected <wrong-number-of-arguments>`
 * :ref:`Trait 'T' not found <undefined-trait>`
@@ -2112,7 +2126,9 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` <nested-ternary-without-parenthesis>`
 * :ref:`Unsupported operand types <unsupported-operand-types>`
 * :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
+* :ref:`__autoload() is deprecated, use spl_autoload_register() instead <old-style-\_\_autoload()>`
 * :ref:`__clone method called on non-object <clone-with-non-object>`
+* :ref:`define(): Declaration of case-insensitive constants is deprecated <case-insensitive-constants>`
 * :ref:`pack(): Type t: unknown format code <invalid-pack-format>`
 * :ref:`syntax error, unexpected '-', expecting '=' <invalid-constant-name>`
 * :ref:`unpack(): Type t: unknown format code <invalid-pack-format>`
@@ -2869,6 +2885,7 @@ _______
 |   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
 |   analyzer[] = "Classes/IncompatibleSignature";
+|   analyzer[] = "Classes/IncompatibleSignature74";
 |   analyzer[] = "Classes/InstantiatingAbstractClass";
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
@@ -2984,6 +3001,7 @@ _______
 |   analyzer[] = "Interfaces/ConcreteVisibility";
 |   analyzer[] = "Interfaces/CouldUseInterface";
 |   analyzer[] = "Interfaces/EmptyInterface";
+|   analyzer[] = "Interfaces/IsNotImplemented";
 |   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Interfaces/UndefinedInterfaces";
 |   analyzer[] = "Interfaces/UselessInterfaces";
@@ -3252,6 +3270,7 @@ ___________
 |   analyzer[] = "Classes/UnusedConstant";
 |   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
+|   analyzer[] = "Interfaces/IsNotImplemented";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
 |   analyzer[] = "Traits/SelfUsingTrait";| 
