@@ -30,10 +30,11 @@ class ProcessLevels extends DSL {
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $command = new Command(<<<GREMLIN
-emit().repeat( __.sack(sum).by(choose(label().is(within(['Ifthen', 'While', 'Dowhile', 'For', 'Foreach', 'Switch'])),
+emit().repeat( __.sack(sum).by(choose(and(  __.not(has("token", "T_ELSEIF")),
+                                            label().is(within(["Ifthen", "While", "Dowhile", "For", "Foreach", "Switch"]))),
                  constant(1),
                  constant(0)
-                 ) ).out().not(hasLabel('Closure', 'Arrowfunction', 'Function', 'Class', 'Classanonymous', 'Trait', 'Interface')) ).times($MAX_LOOPING)
+                 ) ).out().not(hasLabel("Closure", "Arrowfunction", "Function", "Class", "Classanonymous", "Trait", "Interface")) ).times($MAX_LOOPING)
 GREMLIN
 );
 

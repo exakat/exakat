@@ -30,6 +30,7 @@ class IndentationLevels extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->processLevels()
+             ->atomIsNot('Sequence')
              ->raw('groupCount("m").by(__.sack()).cap("m")');
 
         $this->analyzerName = 'Indentation Levels';
