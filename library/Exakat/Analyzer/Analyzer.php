@@ -1993,6 +1993,7 @@ GREMLIN
         $this->raw(<<<GREMLIN
 dedup().groupCount("total").by(count())
         .addE("ANALYZED").from(g.V({$this->analyzerId}))
+        .sideEffect( g.V({$this->analyzerId}).property('count', -1))
         .cap("processed", "total")
 
 // Query (#{$this->queryId}) for {$this->analyzer}
