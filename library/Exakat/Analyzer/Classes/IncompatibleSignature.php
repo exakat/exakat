@@ -25,13 +25,14 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IncompatibleSignature extends Analyzer {
+    protected $phpVersion = '7.4-';
+
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
                     );
     }
 
     public function analyze() {
-
         // non-matching reference
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
