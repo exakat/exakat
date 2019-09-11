@@ -2356,6 +2356,7 @@ SQL;
 
                             'Php/Php73NewFunctions'                 => '7.3-',
                             'Php/ListWithReference'                 => '7.3+',
+                            'Constants/CaseInsensitiveConstants'    => '7.3+',
                             'Php/FlexibleHeredoc'                   => '7.3+',
                             'Php/PHP73LastEmptyArgument'            => '7.3+',
 
