@@ -29,6 +29,7 @@ class UnreachableCode extends Analyzer {
     public function dependsOn() {
         return array('Complete/PropagateConstants',
                      'Functions/KillsApp',
+                     'Structures/AlwaysFalse',
                     );
     }
     
@@ -82,6 +83,13 @@ class UnreachableCode extends Analyzer {
              ->back('first')
              ->nextSibling()
              ->atomIsNot($finalTokens)
+             ->back('first');
+        $this->prepareQuery();
+        
+        // function foo(array $a) { if ($a === 3) { }}
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->analyzerIs('Structures/AlwaysFalse')
              ->back('first');
         $this->prepareQuery();
     }
