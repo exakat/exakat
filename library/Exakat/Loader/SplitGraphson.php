@@ -49,9 +49,9 @@ class SplitGraphson extends Loader {
     private $id        = 1;
 
     private $graphdb        = null;
-    private $path           = null;
-    private $pathLink       = null;
-    private $pathDef        = null;
+    private $path           = '';
+    private $pathLink       = '';
+    private $pathDef        = '';
     private $total          = 0;
     
     private $dictCode = null;
@@ -179,6 +179,7 @@ SQL;
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
         $length = fwrite($fp, stream_get_contents($f));
+//        print "Writing $length octets\n";
         fclose($fp);
         fclose($f);
         

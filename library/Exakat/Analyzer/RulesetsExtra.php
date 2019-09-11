@@ -55,16 +55,7 @@ class RulesetsExtra implements RulesetsInterface {
             } else {
                 return array_unique(array_merge(...$return));
             }
-        } elseif ($ruleset === 'Random') {
-            $shorList = array_keys($this->extra_rulesets);
-            shuffle($shorList);
-            $ruleset = $shorList[0];
-            display( "Random ruleset is : $ruleset\n");
-
-            return $this->extra_rulesets[$ruleset] ?? array();
-        } else {
-            return $this->extra_rulesets[$ruleset] ?? array();
-        }
+        } 
     }
 
     public function getRulesetForAnalyzer($analyzer) {
@@ -113,7 +104,9 @@ class RulesetsExtra implements RulesetsInterface {
     }
 
     public function getFrequences() {
-        die(__METHOD__);
+        $return = array();
+
+        return $return;
     }
 
     public function listAllAnalyzer($folder = null) {
