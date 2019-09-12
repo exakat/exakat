@@ -577,7 +577,7 @@ class Load extends Tasks {
     }
 
     private function runCollector($omittedFiles) {
-        $b = hrtime(true);
+        $b = hrtime(\TIME_AS_NUMBER);
 
         $this->callsDatabase = new \Sqlite3(':memory:');
         $this->loader = new Collector(null, $this->config, $this->callsDatabase);
@@ -605,7 +605,7 @@ class Load extends Tasks {
         $this->atomGroup = $atomGroup;
 
         $this->stats = $stats;
-        $e = hrtime(true);
+        $e = hrtime(\TIME_AS_NUMBER);
     }
 
     private function processDir($dir) {
@@ -682,7 +682,7 @@ class Load extends Tasks {
     }
 
     private function processFile($filename, $path) {
-        $begin = microtime(true);
+        $begin = microtime(\HRTIME_AS_NUMBER);
         $fullpath = $path . $filename;
 
         $this->filename = $filename;
@@ -690,21 +690,21 @@ class Load extends Tasks {
         $log = array();
 
         if (is_link($fullpath)) {
-            return true;
+            return 0;
         }
         if (!file_exists($fullpath)) {
             throw new NoFileToProcess($filename, 'unreachable file');
         }
 
         if (filesize($fullpath) === 0) {
-            return false;
+            return 0;
         }
 
         if (!$this->php->compile($fullpath)) {
             $error = $this->php->getError();
             $error['file'] = $filename;
 
-            return false;
+            return 0;
         }
 
         $tokens = $this->php->getTokenFromFile($fullpath);
@@ -809,14 +809,14 @@ class Load extends Tasks {
             $this->stats['loc'] += $line;
         }
 
-        $end = microtime(true);
+        $end = microtime(\TIME_AS_NUMBER);
         $load = ($end - $begin) * 1000;
         
         $atoms = count($this->atoms);
         $links = count($this->links);
-        $begin = microtime(true);
+        $begin = microtime(\TIME_AS_NUMBER);
         $this->saveFiles();
-        $end = microtime(true);
+        $end = microtime(\TIME_AS_NUMBER);
         $save = ($end - $begin) * 1000;
         
         $this->log->log("$filename\t$load\t$save\t$log[token_initial]\t$atoms\t$links");
@@ -1667,7 +1667,8 @@ class Load extends Tasks {
             $this->calls->addCall('class', $extends->fullnspath, $extends);
 
             $this->currentParentClassTrait[] = $extends;
-            $isExtended = true;
+        } else {
+            $extends = '';
         }
 
         // Process implements
@@ -1691,7 +1692,7 @@ class Load extends Tasks {
         $class->code       = $this->tokens[$current][1];
         $class->fullcode   = $this->tokens[$current][1] . ($class->atom === 'Classanonymous' ? '' : ' ' . $name->fullcode)
                              . (isset($argumentsFullcode) ? ' (' . $argumentsFullcode . ')' : '')
-                             . (isset($extends) ? ' ' . $extendsKeyword . ' ' . $extends->fullcode : '')
+                             . (empty($extends) ? '' : ' ' . $extendsKeyword . ' ' . $extends->fullcode)
                              . (isset($implements) ? ' ' . $implementsKeyword . ' ' . implode(', ', $fullcodeImplements) : '')
                              . static::FULLCODE_BLOCK;
         $class->token      = $this->getToken($this->tokens[$current][0]) ;
@@ -1708,7 +1709,7 @@ class Load extends Tasks {
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         array_pop($this->currentClassTrait);
-        if (isset($isExtended)) {
+        if (!empty($extends)) {
             array_pop($this->currentParentClassTrait);
         }
 
@@ -2692,7 +2693,7 @@ class Load extends Tasks {
             if ($argumentsList[0]->constant === true &&
                 !empty($argumentsList[0]->noDelimiter   )) {
 
-                $fullnspath = makeFullNsPath($argumentsList[0]->noDelimiter, true);
+                $fullnspath = makeFullNsPath($argumentsList[0]->noDelimiter, \FNP_CONSTANT);
                 if ($argumentsList[0]->noDelimiter[0] === '\\') {
                     $fullnspath = "\\$fullnspath";
                 }
@@ -5877,10 +5878,10 @@ class Load extends Tasks {
             return; // Can't be a class anyway.
         }
 
-        $fullnspathClass = makeFullNsPath($this->argumentsId[0]->noDelimiter, false);
+        $fullnspathClass = makeFullNsPath($this->argumentsId[0]->noDelimiter, \FNP_NOT_CONSTANT);
         $this->argumentsId[0]->fullnspath = $fullnspathClass;
 
-        $fullnspathAlias = makeFullNsPath($this->argumentsId[1]->noDelimiter, false);
+        $fullnspathAlias = makeFullNsPath($this->argumentsId[1]->noDelimiter, \FNP_NOT_CONSTANT);
         $this->argumentsId[1]->fullnspath = $fullnspathAlias;
 
         $this->calls->addCall('class', $fullnspathClass, $argumentsId[0]);
@@ -5897,7 +5898,7 @@ class Load extends Tasks {
             return; // Can't be a constant anyway.
         }
         
-        $fullnspath = makeFullNsPath($name->noDelimiter, true);
+        $fullnspath = makeFullNsPath($name->noDelimiter, \FNP_CONSTANT);
         if ($name->noDelimiter[0] === '\\') {
             // Added a second \\ when the string already has one. Actual PHP behavior
             $fullnspath = "\\$fullnspath";
@@ -6159,7 +6160,7 @@ class Load extends Tasks {
             $this->logTimeFile = fopen("{$this->config->log_dir}/load.timing.csv", 'w+');
         }
 
-        $end = microtime(true);
+        $end = microtime(\TIME_AS_NUMBER);
         if ($begin === null) {
             $begin = $end;
             $start = $end;
