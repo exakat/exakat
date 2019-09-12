@@ -2638,7 +2638,7 @@ SQL
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
                 $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/fileupload.json"));
             } elseif ($row['analyzer'] === 'Php/UsesEnv' && $row['count'] !== 0) {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environment</td></tr>\n";
                 $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/env.json"));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
