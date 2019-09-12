@@ -1173,15 +1173,15 @@ GREMLIN;
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function not(self $filter) {
+    public function not(self $filter, $args = array()) {
         // use func_get_args here
         $filterClean = $filter->prepareSide();
-        $this->query->not($filterClean, array());
+        $this->query->not($filterClean, $args);
 
         return $this;
     }
 
-    public function filter($filter) {
+    public function filter($filter, $args = array()) {
         // use func_get_args here
         if (is_string($filter)) {
             $filterClean = $this->cleanAnalyzerName($filter);
@@ -1190,7 +1190,13 @@ GREMLIN;
         } else {
             assert(false, 'Wrong type for filter : ' . gettype($filter));
         }
-        $this->query->filter($filterClean, array());
+        $this->query->filter($filterClean, $args);
+
+        return $this;
+    }
+
+    public function optional($filter) {
+        $this->query->optional($filter, array());
 
         return $this;
     }

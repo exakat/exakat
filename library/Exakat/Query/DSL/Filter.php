@@ -29,6 +29,8 @@ class Filter extends DSL {
         list($filter, $arguments) = func_get_args();
         
         if ($filter instanceof Command) {
+            $filter->gremlin = "where( {$filter->gremlin} )";
+
             return $filter;
         } else {
             assert(false, "Filter needs a command : $filter");

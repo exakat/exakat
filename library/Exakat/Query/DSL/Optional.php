@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class Not extends DSL {
+class Optional extends DSL {
     public function run() : Command {
         assert(func_num_args() == 2, __CLASS__ . " requires 2 arguments, ". func_num_args()." provided");
         list($filter, $arguments) = func_get_args();
@@ -34,11 +34,11 @@ class Not extends DSL {
             if ($filter->gremlin === Query::STOP_QUERY) {
                 $filter->gremlin = Query::NO_QUERY;
             } else {
-                $filter->gremlin = "not( where($filter->gremlin ))";
+                $filter->gremlin = "optional(\n{$filter->gremlin}\n)";
             }
             return $filter;
         } else {
-            assert(false, 'Not requires a command object');
+            assert(false, 'Optional requires a command object');
         }
     }
 }

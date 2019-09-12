@@ -151,7 +151,7 @@ class Query {
 
         $sack = $this->prepareSack($this->commands, self::NO_GREMLIN);
 
-        $return = new Command("where( $query )", array_values($args));
+        $return = new Command($query, array_values($args));
         $return->setSack($sack);
 
         $this->commands = array_pop($this->sides);

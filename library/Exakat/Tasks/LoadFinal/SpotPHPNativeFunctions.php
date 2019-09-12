@@ -44,7 +44,8 @@ class SpotPHPNativeFunctions extends LoadFinal {
                       ->inIs('DEFINITION')
                       ->inIs('USE')
                       ->atomIs('Usenamespace', Analyzer::WITHOUT_CONSTANTS)
-                      ->prepareSide()
+                      ->prepareSide(), 
+                      array()
               )
               ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
               ->raw('map{ name = parts.last().toLowerCase();}', array(), array())
@@ -72,7 +73,8 @@ class SpotPHPNativeFunctions extends LoadFinal {
                          ->inIs('DEFINITION')
                          ->inIs('USE')
                          ->atomIs('Usenamespace', Analyzer::WITHOUT_CONSTANTS)
-                         ->prepareSide()
+                         ->prepareSide(), 
+                          array()
                   )
                   ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
                   ->raw('filter{ name = parts.last().toLowerCase(); name in *** }', array(), array($diff))
