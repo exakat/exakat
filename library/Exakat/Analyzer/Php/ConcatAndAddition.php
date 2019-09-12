@@ -29,13 +29,13 @@ class ConcatAndAddition extends Analyzer {
         // "sum ". $a + $b
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')
-             ->atomIs('Addition')
+             ->atomIs(array('Addition', 'Bitshift'))
              ->back('first');
         $this->prepareQuery();
 
         // $a + $b . "sum "
         // for PHP 7.4 and later
-        $this->atomIs('Addition')
+        $this->atomIs(array('Addition', 'Bitshift'))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Concatenation')
              ->back('first');
