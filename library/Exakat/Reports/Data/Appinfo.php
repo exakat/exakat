@@ -56,7 +56,7 @@ class Appinfo extends Data {
                             'Trailing Comma'                => 'Php/TrailingComma',
    
                             'File upload'                   => 'Structures/FileUploadUsage',
-                            'Environnement Variables'       => 'Php/UsesEnv',
+                            'Environment Variables'         => 'Php/UsesEnv',
 
                             'Dynamically load extensions'   => 'Php/DlUsage',
                             'Relaxed keyword as names'      => 'Php/Php7RelaxedKeyword',

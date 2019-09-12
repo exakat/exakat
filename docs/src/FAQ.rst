@@ -103,9 +103,9 @@ It may be interesting to 'ignore_dir[]', from projects/<name>/config.ini.
 
 By default, java is allowed to run with 512mb of RAM. That may be too little for the code being studied. 
 
-Set the environnement variable $JAVA_OPTIONS to give larger quantities of RAM. For example : 'export JAVA_OPTIONS='-Xms1024m -Xmx6096m'; or 'setenv JAVA_OPTIONS='-Xms1024m -Xmx6096m'
+Set the environment variable $JAVA_OPTIONS to give larger quantities of RAM. For example : 'export JAVA_OPTIONS='-Xms1024m -Xmx6096m'; or 'setenv JAVA_OPTIONS='-Xms1024m -Xmx6096m'
 
-Xms is the memory allocation at start, and Xmx is the maximum allocation. With some experimentation, 6G handles the largest PHP Open Source applications, around 15M tokens. 
+Xms is the memory allocation at start, and Xmx is the maximum allocation. With some experimentation, 6G handles the largest 
 
 `How can I run a very large project?`_
 --------------------------------------
@@ -113,15 +113,15 @@ Xms is the memory allocation at start, and Xmx is the maximum allocation. With s
 Here are a few steps you can try when running exakat on a very large project. 
 
 * Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
-* Set environnement variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+* Set environment variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
 `Does exakat runs on Java 8?`_
 ------------------------------
 
-Exakat itself runs with PHP 7.0+. Exakat relies on a gremlin database : gremlin-server 3.2.x and 3.3.x are supported, which runs on Java 8. 
+Exakat itself runs with PHP 7.0+. Exakat runs with a gremlin database : gremlin-server 3.2.x is supported, which runs on Java 8. 
 
-Java 9 and up are experimental. Java 7 used to be working, but is not supported anymore : it may still work, though.
+Java 9 is experimental, and is being tested. Java 7 used to be working, but is not supported anymore : it may still work, though.
 
 
 `Where can I find the report`_
