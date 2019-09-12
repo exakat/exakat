@@ -197,7 +197,7 @@ class Export extends Tasks {
         $r = '<table>';
 
         foreach($V as $v) {
-            $row = array(highlight_string($v['code'], true));
+            $row = array(highlight_string($v['code'], \RETURN_VALUE));
             if (isset($v['atom'])) {
                 $row[] = $v['atom'];
             } else {

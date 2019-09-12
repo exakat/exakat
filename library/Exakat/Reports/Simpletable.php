@@ -121,7 +121,7 @@ HTML;
     }
 
     private function syntaxColoring($source) {
-        $colored = highlight_string('<?php ' . $source . ' ;?>', true);
+        $colored = highlight_string('<?php ' . $source . ' ;?>', \RETURN_VALUE);
         $colored = substr($colored, 79, -65);
 
         if ($colored[0] === '$') {

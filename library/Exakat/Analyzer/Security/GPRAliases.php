@@ -38,7 +38,7 @@ class GPRAliases extends Analyzer {
              ->codeIs('=')
              ->outIs('RIGHT')
              ->atomIs('Phpvariable')
-             ->codeIs($webVariables, true)
+             ->codeIs($webVariables)
              ->back('first')
              ->outIs('LEFT');
         $this->prepareQuery();
@@ -50,7 +50,7 @@ class GPRAliases extends Analyzer {
              ->atomIs('Array')
              ->outIsIE('VARIABLE')
              ->atomIs('Phpvariable')
-             ->codeIs($webVariables, true)
+             ->codeIs($webVariables)
              ->back('first')
              ->outIs('LEFT');
         $this->prepareQuery();

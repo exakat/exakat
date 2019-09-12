@@ -2686,7 +2686,7 @@ SQL
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable features</td></tr>\n";
             } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
-                if (in_array($ext, $directives, true)) {
+                if (in_array($ext, $directives, \STRICT_COMPARISON)) {
                     $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/$ext.json"));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
                 }
@@ -3698,13 +3698,13 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['method'], $couldBePrivate[$row['fullnspath']], true)) {
+                in_array($row['method'], $couldBePrivate[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['method'], $couldBeProtected[$row['fullnspath']], true)) {
+                in_array($row['method'], $couldBeProtected[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
@@ -3791,13 +3791,13 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBePrivate[$row['fullnspath']], true)) {
+                in_array($row['constant'], $couldBePrivate[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBeProtected[$row['fullnspath']], true)) {
+                in_array($row['constant'], $couldBeProtected[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
@@ -3895,19 +3895,19 @@ SQL
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBePrivate[$row['fullnspath']], true)) {
+                in_array($row['property'], $couldBePrivate[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
             if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBeProtected[$row['fullnspath']], true)) {
+                in_array($row['property'], $couldBeProtected[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
             if (isset($couldBeConstant[$row['fullnspath']]) &&
-                in_array($row['property'], $couldBeConstant[$row['fullnspath']], true)) {
+                in_array($row['property'], $couldBeConstant[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
@@ -4566,7 +4566,7 @@ JAVASCRIPT;
             }
 
             $id = str_replace('/', '_', $row['file']);
-            $source = @highlight_file($sourcePath, true);
+            $source = @highlight_file($sourcePath, \RETURN_VALUE);
             $files .= '<li><a href="#" id="' . $id . '" class="menuitem">' . makeHtml($row['file']) . "</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function ($x) {

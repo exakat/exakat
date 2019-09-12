@@ -51,7 +51,7 @@ class Phpcsfixer extends Reports {
             $config = array_merge(...$config);
         }
 
-        $configArray = var_export($config, true);
+        $configArray = var_export($config, \RETURN_VALUE);
         $configArray = str_replace("\n", "\n                ", $configArray);
 
 $config = <<<PHPCS

@@ -35,6 +35,12 @@ const TIME_AS_ARRAY  = false;
 const TIME_AS_STRING = false;
 const TIME_AS_NUMBER = true;
 
+const DISPLAY_TO_STDOUT = false;
+const RETURN_VALUE      = true;
+
+const SUCCESS = false;
+const FAILURE = true;
+
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
 
 function display($text) {
