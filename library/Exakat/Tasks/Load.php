@@ -682,7 +682,7 @@ class Load extends Tasks {
     }
 
     private function processFile($filename, $path) {
-        $begin = microtime(\HRTIME_AS_NUMBER);
+        $begin = microtime(\TIME_AS_NUMBER);
         $fullpath = $path . $filename;
 
         $this->filename = $filename;

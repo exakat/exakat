@@ -31,8 +31,9 @@ const LOOSE_COMPARISON  = false;
 const JSON_ASSOCIATIVE = true;
 const JSON_OBJECT      = false;
 
-const TIME_AS_ARRAY  = true;
-const TIME_AS_NUMBER = false;
+const TIME_AS_ARRAY  = false;
+const TIME_AS_STRING = false;
+const TIME_AS_NUMBER = true;
 
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
 
