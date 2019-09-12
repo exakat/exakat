@@ -4055,7 +4055,7 @@ Zencart
 
 :ref:`wrong-parameter-type`, in admin/includes/header.php:180. 
 
-setlocale() may be called with null or '' (empty string), and will set values from the environnement. When called with "0" (the string), it only reports the current setting. Using an integer is probably undocumented behavior, and falls back to the zero string. 
+setlocale() may be called with null or '' (empty string), and will set values from the environment. When called with "0" (the string), it only reports the current setting. Using an integer is probably undocumented behavior, and falls back to the zero string. 
 
 .. code-block:: php
 

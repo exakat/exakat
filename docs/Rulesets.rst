@@ -72,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 11 Sep 2019 16:03:18 +0000
-.. comment: Generation hash : c53c94c8f285f7af1d0a5bc1b3c1847f70f5cb7d
+.. comment: Generation date : Thu, 12 Sep 2019 05:17:57 +0000
+.. comment: Generation hash : 9f6067c6b7be3026285170b4ebd26241fc590a60
 
 
 .. _analyze:
@@ -81,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 380 analysis
+Total : 381 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -140,6 +140,7 @@ Total : 380 analysis
 * :ref:`Concat Empty String <concat-empty-string>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Constant Class <constant-class>`
+* :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`

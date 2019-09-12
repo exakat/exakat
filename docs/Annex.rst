@@ -440,13 +440,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.9.4
 
   * Coalesce And Concat (Structures/CoalesceAndConcat ; Analyze)
+  * Constant Comparison (Structures/AlwaysFalse ; Analyze)
   * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Dump)
   * Nested Ternary Without Parenthesis (Php/NestedTernaryWithoutParenthesis ; Appinfo, CompatibilityPHP74)
   * PHP 74 New Directives (Php/Php74NewDirective ; CompatibilityPHP73)
   * Performances/UseArraySlice (Performances/UseArraySlice ; Under Work)
   * Should Use Explode Args (Structures/ShouldUseExplodeArgs ; Analyze)
   * Spread Operator For Array (Php/SpreadOperatorForArray ; Appinfo)
-  * Structures/AlwaysFalse (Structures/AlwaysFalse ; Unassigned)
   * Too Many Array Dimensions (Arrays/TooManyDimensions)
   * Use Arrow Functions (Functions/UseArrowFunctions ; Appinfo)
 
@@ -977,7 +977,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.0.5
 
   * Assigned In One Branch (Structures/AssignedInOneBranch ; Under Work)
-  * Environnement Variables (Variables/UncommonEnvVar ; Appinfo)
+  * Environment Variables (Variables/UncommonEnvVar ; Appinfo)
   * Invalid Regex (Structures/InvalidRegex ; Analyze)
   * Parent First (Classes/ParentFirst)
   * Same Variables Foreach (Structures/AutoUnsetForeach ; Analyze)
@@ -1879,7 +1879,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Useless Switch (Structures/UselessSwitch ; Analyze, Simple)
   * Useless Unset (Structures/UselessUnset ; Analyze, OneFile, ClearPHP, Simple, Level 2)
   * Uses Default Values (Functions/UsesDefaultArguments ; Analyze, Simple)
-  * Uses Environnement (Php/UsesEnv ; Appinfo, Appcontent)
+  * Uses Environment (Php/UsesEnv ; Appinfo, Appcontent)
   * Using $this Outside A Class (Classes/UsingThisOutsideAClass ; Analyze, CompatibilityPHP71, Simple, LintButWontExec)
   * Using Short Tags (Structures/ShortTags ; Appinfo)
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
@@ -3058,6 +3058,7 @@ _______
 |   analyzer[] = "Structures/AddZero";
 |   analyzer[] = "Structures/AlteringForeachWithoutReference";
 |   analyzer[] = "Structures/AlternativeConsistenceByFile";
+|   analyzer[] = "Structures/AlwaysFalse";
 |   analyzer[] = "Structures/ArrayMergeAndVariadic";
 |   analyzer[] = "Structures/AssigneAndCompare";
 |   analyzer[] = "Structures/AutoUnsetForeach";

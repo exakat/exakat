@@ -682,7 +682,7 @@ $exampleTxt
         } else {
             $clearPHP = '';
         }
-        
+
         if (isset($a2themes[$name])) {
             $c = array_map(array($this, 'rst_link'),$a2themes[$name]);
             $rulesets = implode(', ',$c);
@@ -764,9 +764,14 @@ SPHINX;
         $info = array( array('Short name',  $commandLine),
                        array('Rulesets',      $rulesets),
                       );
-    
+
         if (isset($ini['phpversion'])) {
             $info[] = array('Php Version', $this->readPhpversion($ini['phpversion']));
+        } else {
+            $php = file_get_contents("./library/Exakat/Analyzer/$analyzer.php");
+            if (preg_match('/protected .phpVersion = \'(.*?)\';/s', $php, $r)) {
+                $info[] = array('Php Version', $r[1]);
+            }
         }
 
         if (!empty($ini['severity'])) {
