@@ -28,6 +28,7 @@ class SetArrayClassDefinition extends Analyzer {
     public function dependsOn() {
         return array('Complete/CreateDefaultValues',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
 

@@ -28,6 +28,7 @@ class UselessArgument extends Analyzer {
     public function dependsOn() {
         return array('Complete/CreateDefaultValues',
                      'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/FollowClosureDefinition',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                     );

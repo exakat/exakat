@@ -30,6 +30,7 @@ class MismatchedTypehint extends Analyzer {
                      'Complete/MakeClassMethodDefinition',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/FollowClosureDefinition',
                      'Complete/CreateDefaultValues',
                     );

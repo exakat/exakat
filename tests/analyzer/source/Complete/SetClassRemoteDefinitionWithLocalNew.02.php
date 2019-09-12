@@ -1,14 +1,17 @@
 <?php
 
 trait t {
+    public $pT;
     function fooT() {}
 }
 
-class ba extends A {
+class ba {
+    public $pba;
     function fooB() {}
 }
 
-class a {
+class a extends BA {
+    public $pa;
     use T; 
     function fooA() {}
 }
@@ -16,10 +19,10 @@ class a {
 function foo() {
     $a = new A();
     
-    $a->fooA();
-    $a->fooB();
-    $a->fooT();
-    $a->fooC();
+    $a->pa = 1;
+    $a->pba = 2;
+    $a->pT  = 3;
+    $a->pe = 4;
 }
 
 ?>

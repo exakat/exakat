@@ -3,6 +3,7 @@
 class x {
     private $p = 2;
     private $pp;
+    private $ppp = null;
     
     function foo($a) {
         static $s = 1;

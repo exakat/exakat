@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         $this->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -41,14 +46,14 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->outIs('NEW')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('METHOD')
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
@@ -65,13 +70,13 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->outIs('NEW')
               ->inIs('DEFINITION')
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
