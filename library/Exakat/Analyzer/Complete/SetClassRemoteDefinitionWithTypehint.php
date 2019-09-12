@@ -40,6 +40,15 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
+              ->optional(
+                  $this->side()
+                       ->atomIs('Interface')
+                       ->outIs('DEFINITION')
+                       ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
+                       ->inIs('IMPLEMENTS')
+                       ->prepareSide(),
+                        array()
+              )
               ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('METHOD')
@@ -47,8 +56,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
@@ -63,14 +72,22 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->optional(
+                  $this->side()
+                       ->atomIs('Interface')
+                       ->outIs('DEFINITION')
+                       ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
+                       ->inIs('IMPLEMENTS')
+                       ->prepareSide(),
+                        array()
+              )              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         $this->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
               ->_as('constante')
@@ -85,15 +102,23 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->optional(
+                  $this->side()
+                       ->atomIs('Interface')
+                       ->outIs('DEFINITION')
+                       ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
+                       ->inIs('IMPLEMENTS')
+                       ->prepareSide(),
+                        array()
+              )              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'constante')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -108,6 +133,16 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->inIs('NAME')
               ->outIs('TYPEHINT')
               ->inIs('DEFINITION')
+              ->optional(
+                  $this->side()
+                       ->atomIs('Interface')
+                       ->outIs('DEFINITION')
+                       ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
+                       ->inIs('IMPLEMENTS')
+                       ->prepareSide(),
+                        array()
+              )
+              ->atomIs('Class')
               ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->isNot('visibility', 'private')
@@ -115,8 +150,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
