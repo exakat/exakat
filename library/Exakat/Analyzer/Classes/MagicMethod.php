@@ -28,7 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class MagicMethod extends Analyzer {
     public function analyze() {
         // class x { function __clone() {}}
-        $this->atomIs('Magicmethod');
+        $this->atomIs('Magicmethod')
+             ->outIs('NAME')
+             ->codeIsNot(array('__construct', '__destruct'))
+             ->back('first');
         $this->prepareQuery();
     }
 }
