@@ -42,8 +42,8 @@ class SetClassRemoteDefinitionWithInjection extends Analyzer {
               ->outIs('DEFINITION')
               ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 

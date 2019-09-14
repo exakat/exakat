@@ -67,6 +67,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->savePropertyAs('code', 'name')
               ->inIs('MEMBER')
               ->outIs('OBJECT')
+              ->atomIs('Variableobject')
               ->inIs('DEFINITION')
               ->inIs('NAME')
               ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
@@ -80,7 +81,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->inIs('IMPLEMENTS')
                        ->prepareSide(),
                         array()
-              )              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              )
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')

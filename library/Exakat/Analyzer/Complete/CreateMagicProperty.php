@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CreateMagicProperty extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenProperties',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
 
@@ -37,40 +38,20 @@ class CreateMagicProperty extends Analyzer {
         // link to __get
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->is('isRead', true)
-              ->inIs('DEFINITION')
-              ->atomIs('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
-              ->not(
+             ->not(
                 $this->side()
-                     ->outIs('OVERWRITE')
-                     ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-                     ->not(
-                        $this->side()
-                              ->inIs('PPP')
-                              ->is('visibility', 'private')
-                     )
-              )
-              ->back('first')
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
               ->outIs('OBJECT')
-              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
-              ->goToClass()
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
-
-        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isRead', true)
-              ->hasNoIn('DEFINITION')
-              ->outIs('OBJECT')
-              ->atomIs('Variableobject', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->outIs('DEFAULT')
-              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NEW')
+             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->outIs('TYPEHINT')
+                     ->prepareSide()
+             )
               ->inIs('DEFINITION')
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('MAGICMETHOD')
@@ -78,91 +59,125 @@ class CreateMagicProperty extends Analyzer {
               ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
-
-        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isRead', true)
-              ->hasNoIn('DEFINITION')
-              ->outIs('OBJECT')
-              ->atomIs('Variableobject', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->outIs('TYPEHINT')
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         // link to __set
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->is('isModified', true)
-              ->inIs('DEFINITION')
-              ->atomIs('Virtualproperty', Analyzer::WITHOUT_CONSTANTS)
-              ->not(
+             ->not(
                 $this->side()
-                     ->outIs('OVERWRITE')
-                     ->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
-                     ->not(
-                        $this->side()
-                              ->inIs('PPP')
-                              ->is('visibility', 'private')
-                     )
-              )
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
+              ->outIs('OBJECT')
+             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->outIs('TYPEHINT')
+                     ->prepareSide()
+             )
+              ->inIs('DEFINITION')
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('MAGICMETHOD')
+              ->outIs('NAME')
+              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->back('first');
+        $this->prepareQuery();
+
+        // isset($this->a)
+        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
+             ->inIs('ARGUMENT')
+             ->atomIs('Isset')
+             ->back('first')
+
+             ->outIs('OBJECT')
+             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->outIs('TYPEHINT')
+                     ->prepareSide()
+             )
+             ->inIs('DEFINITION')
+             ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__isset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->addETo('DEFINITION', 'first')
+             ->back('first');
+        $this->prepareQuery();
+
+        // unset($this->a)
+        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
+              ->inIs('ARGUMENT')
+              ->atomIs('Unset')
               ->back('first')
-              ->outIs('OBJECT')
-              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
-              ->goToClass()
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
 
-        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isModified', true)
-              ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
-              ->atomIs('Variableobject', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->outIs('DEFAULT')
-              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('NEW')
-              ->inIs('DEFINITION')
+             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->outIs('TYPEHINT')
+                     ->prepareSide()
+             )              ->inIs('DEFINITION')
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
-              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+             ->back('first');
+        $this->prepareQuery();
 
+        // unset() $this->a
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isModified', true)
-              ->hasNoIn('DEFINITION')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
+              ->inIs('CAST')
+              ->atomIs('Cast')
+              ->tokenIs('T_UNSET_CAST')
+              ->back('first')
+
               ->outIs('OBJECT')
-              ->atomIs('Variableobject', Analyzer::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->inIs('NAME')
-              ->outIs('TYPEHINT')
+             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->outIs('TYPEHINT')
+                     ->prepareSide()
+             )
               ->inIs('DEFINITION')
               ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
-              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION2', 'first')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
