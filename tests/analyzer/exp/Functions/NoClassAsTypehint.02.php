@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('X',
-                      '\\X',
+$expected     = array('X ...$x1', 
+                      '\X ...$x1',
                      );
 
 $expected_not = array('\\I',

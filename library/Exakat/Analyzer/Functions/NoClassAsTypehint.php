@@ -27,9 +27,18 @@ use Exakat\Analyzer\Analyzer;
 class NoClassAsTypehint extends Analyzer {
     public function analyze() {
         // Classes reused as typehint
-        $this->atomIs('Class')
+        // unless there is an access to a property
+        $this->atomIs('Class') // No need for anonymous classes
              ->outIs('DEFINITION')
-             ->hasIn(array('TYPEHINT', 'RETURNTYPE'));
+             ->inIs(array('TYPEHINT', 'RETURNTYPE'))
+             ->not(
+                $this->side()
+                     ->outIs('NAME')
+                     ->outIs('DEFINITION')
+                     ->atomIs(array('Variableobject', 'Variable'))
+                     ->inIs(array('OBJECT', 'CLASS'))
+                     ->atomIs(array('Member', 'Staticproperty'))
+             );
         $this->prepareQuery();
     }
 }
