@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$a->pab2', 
-                      '$a->pab', 
+$expected     = array('$a->pab2',
+                      '$a->pab',
                       '$b->pab',
                      );
 

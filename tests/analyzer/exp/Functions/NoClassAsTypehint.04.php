@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\X $x1', 
+$expected     = array('\\X $x1',
                       'X $x',
                      );
 

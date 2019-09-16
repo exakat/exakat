@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$a', 
-                      '$s = 1', 
-                      '$p = 2', 
-                      '$pp', 
+$expected     = array('$a',
+                      '$s = 1',
+                      '$p = 2',
+                      '$pp',
                       '$g',
                      );
 

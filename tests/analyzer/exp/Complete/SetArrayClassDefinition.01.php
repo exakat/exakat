@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('[$a, \'foo\']', 
-                      '[\x::class, \'FOO\']', 
-                      '[B, A]', 
-                      '[\x::class, A]',
+$expected     = array('[$a, \'foo\']',
+                      '[\\x::class, \'FOO\']',
+                      '[B, A]',
+                      '[\\x::class, A]',
                      );
 
 $expected_not = array('[\\x, A]',

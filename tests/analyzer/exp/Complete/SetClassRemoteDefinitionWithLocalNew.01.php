@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a->fooT( )', 
+$expected     = array('$a->fooT( )',
                       '$a->fooA( )',
                       '$a->fooB( )',
                      );

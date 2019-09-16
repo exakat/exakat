@@ -6,8 +6,8 @@ $expected     = array('P::nonStaticAClass( )',
                       '\\a1::nonStaticButSelfClass( )',
                       'self::nonStaticButSelfClass( )',
                       'static::nonStaticButSelfClass( )',
-                      'self::nonStaticButSelfClaSs( )', 
-                      'self::nonStaticButSelfClasS( )', 
+                      'self::nonStaticButSelfClaSs( )',
+                      'self::nonStaticButSelfClasS( )',
                       'static::nonStaticButSelfClasS( )',
                      );
 

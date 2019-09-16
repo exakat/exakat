@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('public function id1( ) : self { /**/ } ', 
+$expected     = array('public function id1( ) : self { /**/ } ',
                       'public function id2( ) : self { /**/ } ',
                       'public function id4( ) : I { /**/ } ',
                      );

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('foreach($a as $b) { /**/ } ', 
+$expected     = array('foreach($a as $b) { /**/ } ',
                       'do /**/ while(!empty($a))',
                      );
 
