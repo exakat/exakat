@@ -640,7 +640,7 @@ GREMLIN;
             $name = str_replace(array('&', '...'), '', $row['name']);
             $unique[$name . $row['type']] = 1;
             $type = $types[$row['type']];
-            $query[] = "(null, '" . strtolower($this->sqlite->escapeString($name)) . "', '" . $type . "')";
+            $query[] = "(null, '" . mb_strtolower($this->sqlite->escapeString($name)) . "', '" . $type . "')";
             ++$total;
         }
         
@@ -670,7 +670,7 @@ GREMLIN;
         $total = 0;
         $query = array("(1, '\\')");
         foreach($res as $row) {
-            $query[] = "(null, '" . strtolower($this->sqlite->escapeString($row['name'])) . "')";
+            $query[] = "(null, '" . mb_strtolower($this->sqlite->escapeString($row['name'])) . "')";
             ++$total;
         }
         
@@ -1029,7 +1029,7 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $methodId = $row['class'].'::'.strtolower($row['name']);
+            $methodId = $row['class'] . '::' . mb_strtolower($row['name']);
             if (isset($methodIds[$methodId])) {
                 continue; // skip double
             }
@@ -1103,6 +1103,10 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
+            if (!isset( $methodIds[$row['classe'].'::'.$row['methode']])) {
+                print_r($row);
+                die();
+            }
             $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'].'::'.$row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
                         ', \'' . $row['typehint'] . '\')';
@@ -1399,6 +1403,8 @@ CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           function TEXT,
                           type TEXT,
                           namespaceId INTEGER,
+                          returntype TEXT,
+                          reference INTEGER,
                           file TEXT,
                           begin INTEGER,
                           end INTEGER
@@ -1409,7 +1415,11 @@ SQL
         $query = $this->newQuery('Functions');
         $query->atomIs(array('Function', 'Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
- sideEffect{ lines = []; }
+ sideEffect{ 
+    lines = []; 
+    reference = it.get().properties("reference").any(); 
+    returntype = 'None'; 
+}
 .where( 
     __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
       .sideEffect{ lines.add(it.get().value("line")); }
@@ -1437,6 +1447,8 @@ map{ ["name":it.get().vertices(OUT, "NAME").next().value("fullcode"),
       "type":it.get().label().toString().toLowerCase(),
       "file":file, 
       "namespace":namespace, 
+      "reference":reference,
+      "returntype":returntype,
       "begin": lines.min(), 
       "end":lines.max()
       ]; }
