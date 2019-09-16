@@ -952,6 +952,7 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         final INTEGER,
                         abstract INTEGER,
                         visibility STRING,
+                        returntype STRING,
                         begin INTEGER,
                         end INTEGER
                      )
@@ -1035,15 +1036,15 @@ GREMLIN;
             }
             $methodIds[$methodId] = ++$methodCount;
 
-            $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['signature']) . "', " . $citId[$row['class']] .
+            $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
-                        ', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
+                        ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "begin", "end") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "returntype", "begin", "end") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 

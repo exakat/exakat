@@ -3545,6 +3545,117 @@ SQL
         return $return;
     }
 
+    private function generateTypehintSuggestions(Section $section) {
+//        $constants  = $this->generateVisibilityConstantSuggestions();
+//        $properties = $this->generateVisibilityPropertySuggestions();
+        $methods    = $this->generateTypehintMethodsSuggestions();
+
+        $classes = array_unique(array_merge(array_keys($methods)));
+        
+        $headers = <<<'HTML'
+    <tr>
+        <td>&nbsp;</td>
+        <td>Method</td>
+        <td>Argument</td>
+        <td>Typehint</td>
+        <td>Default</td>
+    </tr>
+HTML;
+
+        $visibilityTable = array('<table class="table table-striped">',
+                                 $headers,
+                                 );
+
+        foreach($classes as $id) {
+            list(, $class) = explode(':', $id);
+            $visibilityTable []= '<tr><td colspan="9">' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
+                                $headers . PHP_EOL .
+//                                (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
+//                                (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
+                                (isset($methods[$id])    ? implode('', $methods[$id])    : '');
+        }
+
+        $visibilityTable []= '</table>';
+        $visibilityTable = implode(PHP_EOL, $visibilityTable);
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Below, is a summary of all classes and their parameters\'s typehinting status. ');
+        $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
+        $this->putBasedPage($section->file, $html);
+    }
+    
+    private function generateTypehintMethodsSuggestions() {
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
+       methods.method,
+       arguments.name AS argument,
+       init,
+       typehint
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN arguments 
+    ON methods.id = arguments.methodId
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+;
+SQL
+);
+
+        $arguments = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $theMethod = $row['fullnspath'];
+            print_r($row);
+            $visibilities = array($row['typehint'], $row['init']);
+
+            $argument = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>' . PHPSyntax($row['argument']) . '</td><td class="exakat_short_text">' .
+                                    implode('</td><td>', $visibilities)
+                                 . '</td></tr>' . PHP_EOL;
+
+            array_collect_by($arguments, $theMethod, $argument);
+        }
+
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       returntype, 
+       methods.method
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+;
+SQL
+);
+
+        $return = array();
+        $theClass = '';
+        $aClass = array();
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $theClass = $row['fullnspath'];
+            $visibilities = array($row['returntype'], '&nbsp;');
+
+            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax(substr($row['method'], 0, -10)) . '</td><td class="exakat_short_text"><td>&nbsp;</td>' .
+                                    implode('</td><td>', $visibilities)
+                                 . '</td></tr>' . PHP_EOL;
+            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'].'::'.mb_strtolower($row['method'])] ?? array());
+
+            array_collect_by($return, $row['fullnspath'].':'.$row['theClass'], $method);
+        }
+
+        unset($return['']);
+        
+        return $return;
+    }
+
     private function generateVisibilitySuggestions(Section $section) {
         $constants  = $this->generateVisibilityConstantSuggestions();
         $properties = $this->generateVisibilityPropertySuggestions();
