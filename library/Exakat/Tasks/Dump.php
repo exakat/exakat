@@ -1066,7 +1066,6 @@ CREATE TABLE arguments (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-
         $query = $this->newQuery('Method parameters');
         $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('ARGUMENT')

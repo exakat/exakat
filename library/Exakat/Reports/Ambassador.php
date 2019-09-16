@@ -3597,7 +3597,8 @@ FROM cit
 JOIN methods 
     ON methods.citId = cit.id
 JOIN arguments 
-    ON methods.id = arguments.methodId
+    ON methods.id = arguments.methodId AND
+       arguments.citId != 0
 JOIN namespaces 
     ON cit.namespaceId = namespaces.id
 WHERE type in ("class", "trait", "interface")
@@ -3642,7 +3643,7 @@ SQL
             $theClass = $row['fullnspath'];
             $visibilities = array($row['returntype'], '&nbsp;');
 
-            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax(substr($row['method'], 0, -10)) . '</td><td class="exakat_short_text"><td>&nbsp;</td>' .
+            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
             $method .= implode(PHP_EOL, $arguments[$row['fullnspath'].'::'.mb_strtolower($row['method'])] ?? array());
