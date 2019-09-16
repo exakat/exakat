@@ -37,6 +37,7 @@ class Favorites extends Reports {
                 continue;
             }
             $return[$analyzer] = $r;
+            $this->count();
         }
         
         return json_encode($return, JSON_PRETTY_PRINT);
