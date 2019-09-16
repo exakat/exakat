@@ -1420,13 +1420,18 @@ SQL
  sideEffect{ 
     lines = []; 
     reference = it.get().properties("reference").any(); 
+    fullnspath = it.get().value("fullnspath"); 
     returntype = 'None'; 
+    name = it.get().label();
 }
 .where( 
     __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
       .sideEffect{ lines.add(it.get().value("line")); }
       .fold()
  )
+.where(
+    __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold()
+)
 GREMLIN
 , array(), array()) 
               ->raw(<<<GREMLIN
@@ -1445,10 +1450,11 @@ GREMLIN
 GREMLIN
 , array(), array())
               ->raw(<<<GREMLIN
-map{ ["name":it.get().vertices(OUT, "NAME").next().value("fullcode"), 
+map{ ["name":name, 
       "type":it.get().label().toString().toLowerCase(),
       "file":file, 
       "namespace":namespace, 
+      "fullnspath":fullnspath, 
       "reference":reference,
       "returntype":returntype,
       "begin": lines.min(), 
@@ -1462,12 +1468,12 @@ GREMLIN
         $query = array();
         $functionIds = array();
         $functionIds++;
+        $total = 0;
         foreach($result->toArray() as $row) {
-            $fullnspath = ($row['namespace'] === '\\' ? '' : $row['namespace']). '\\' . mb_strtolower($row['name']);
-            if (isset($functionIds[$fullnspath])) {
+            if (isset($functionIds[$row['fullnspath']])) {
                 continue; // skip double
             }
-            $functionIds[$fullnspath] = ++$functionIds;
+            $functionIds[$row['fullnspath']] = ++$functionIds;
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
                         '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', 
@@ -1480,7 +1486,6 @@ GREMLIN
             $query = 'INSERT INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-
         display("$total functions\n");
 
         $query = $this->newQuery('Function parameters');
@@ -1488,8 +1493,11 @@ GREMLIN
               ->inIs('ARGUMENT')
               ->atomIs(array('Function', 'Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<'GREMLIN'
-where( __.sideEffect{ fullnspath = it.get().value("fullnspath");  }
-         .out('NAME')
+where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase(); 
+                      fullnspath = it.get().value("fullnspath");  
+                    }.fold() 
+      )
+.where( __.out('NAME')
          .sideEffect{ fonction = it.get().value("fullcode").toString().toLowerCase();}
          .fold()
      )
