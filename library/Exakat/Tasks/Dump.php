@@ -1065,18 +1065,21 @@ CREATE TABLE arguments (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL
 );
 
-        
-        $query = <<<GREMLIN
-g.V().hasLabel("Parameter").as('first')
-.in('ARGUMENT')
-.where( __.out('NAME').sideEffect{ methode = it.get().value("fullcode").toString().toLowerCase() }.fold())
-.in('METHOD', 'MAGICMETHOD')
-.hasLabel('Class')
-.sideEffect{ classe = it.get().value("fullnspath")}
 
-.select('first')
-
-.sideEffect{
+        $query = $this->newQuery('Method parameters');
+        $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('ARGUMENT')
+              ->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<'GREMLIN'
+where( __.out('NAME').sideEffect{ methode = it.get().value("fullcode").toString().toLowerCase() }.fold())
+GREMLIN
+, array(), array())
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+             ->savePropertyAs('fullnspath', 'classe')
+             ->back('first')
+              ->raw(<<<'GREMLIN'
+sideEffect{
     init = 'None';
     typehint = 'None';
 }
@@ -1097,16 +1100,14 @@ g.V().hasLabel("Parameter").as('first')
          ];
 }
 
-GREMLIN;
-        $res = $this->gremlin->query($query);
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
         $query = array();
-        foreach($res as $row) {
-            if (!isset( $methodIds[$row['classe'].'::'.$row['methode']])) {
-                print_r($row);
-                die();
-            }
+        foreach($result->toArray() as $row) {
             $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'].'::'.$row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
                         ', \'' . $row['typehint'] . '\')';
@@ -1458,8 +1459,18 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $query = array();
+        $functionIds = array();
+        $functionIds++;
         foreach($result->toArray() as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
+            $fullnspath = ($row['namespace'] === '\\' ? '' : $row['namespace']). '\\' . mb_strtolower($row['name']);
+            if (isset($functionIds[$fullnspath])) {
+                continue; // skip double
+            }
+            $functionIds[$fullnspath] = ++$functionIds;
+
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
+                        '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', 
+                        " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
             ++$total;
         }
@@ -1470,6 +1481,64 @@ GREMLIN
         }
 
         display("$total functions\n");
+
+        $query = $this->newQuery('Function parameters');
+        $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('ARGUMENT')
+              ->atomIs(array('Function', 'Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<'GREMLIN'
+where( __.sideEffect{ fullnspath = it.get().value("fullnspath");  }
+         .out('NAME')
+         .sideEffect{ fonction = it.get().value("fullcode").toString().toLowerCase();}
+         .fold()
+     )
+.sideEffect{ classe = it.get().value("fullnspath")}
+
+.select('first')
+
+.sideEffect{
+    init = 'None';
+    typehint = 'None';
+}
+.where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
+.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode")}.fold())
+.where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.map{ 
+    x = ["name": name,
+         "fullnspath":fullnspath,
+         "rank":it.get().value("rank"),
+         "variadic":it.get().properties("variadic").any(),
+         "reference":it.get().properties("reference").any(),
+
+         "function":fonction,
+
+         "init": init,
+         "typehint":typehint,
+         ];
+}
+
+GREMLIN
+, array(), array());
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $total = 0;
+        $query = array();
+        foreach($result->toArray() as $row) {
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', 0, ' . (int) $functionIds[$row['fullnspath']] .
+                        ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
+                        ', \'' . $row['typehint'] . '\')';
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO arguments ("name", "rank", "citId", "methodId", "init", "reference", "variadic", "typehint") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total arguments\n");
+
     }
 
     private function collectFiles() {
