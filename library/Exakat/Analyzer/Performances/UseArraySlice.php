@@ -31,7 +31,7 @@ class UseArraySlice extends Analyzer {
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
-             ->functioncallIs(array('\\array_shift', 
+             ->functioncallIs(array('\\array_shift',
                                     '\\array_pop'))
              ->back('first');
         $this->prepareQuery();

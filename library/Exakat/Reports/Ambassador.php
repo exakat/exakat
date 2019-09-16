@@ -2332,7 +2332,7 @@ SQL;
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
-        $analyzers = array( 
+        $analyzers = array(
                             'Php/PHP80RemovedFunctions'             => '8.0-',
                             'Php/PHP80RemovedConstants'             => '8.0-',
 
@@ -3646,9 +3646,9 @@ SQL
             $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
-            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'].'::'.mb_strtolower($row['method'])] ?? array());
+            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'] . '::' . mb_strtolower($row['method'])] ?? array());
 
-            array_collect_by($return, $row['fullnspath'].':'.$row['theClass'], $method);
+            array_collect_by($return, $row['fullnspath'] . ':' . $row['theClass'], $method);
         }
 
         unset($return['']);

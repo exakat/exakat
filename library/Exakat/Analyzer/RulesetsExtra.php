@@ -55,7 +55,7 @@ class RulesetsExtra implements RulesetsInterface {
             } else {
                 return array_unique(array_merge(...$return));
             }
-        } 
+        }
     }
 
     public function getRulesetForAnalyzer($analyzer) {

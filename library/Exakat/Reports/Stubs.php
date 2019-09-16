@@ -36,57 +36,57 @@ class Stubs extends Reports {
         $code = new PhpCodeTree($this->sqlite);
         $code->load();
 
-        $code->map('classconstants', function($classconstants) {
-            return "        ".($classconstants['visibility'] ?? '')."const $classconstants[constant] = $classconstants[value];";
+        $code->map('classconstants', function ($classconstants) {
+            return '        ' . ($classconstants['visibility'] ?? '') . "const $classconstants[constant] = $classconstants[value];";
         });
-        $code->reduce('classconstants', function($carry, $item) {
-            return $carry."\n".$item;
+        $code->reduce('classconstants', function ($carry, $item) {
+            return $carry . "\n" . $item;
         });
 
-        $code->map('properties', function($properties) {
+        $code->map('properties', function ($properties) {
             return "        $properties[visibility] $properties[property];";
         });
-        $code->reduce('properties', function($carry, $item) {
-            return $carry."\n".$item;
+        $code->reduce('properties', function ($carry, $item) {
+            return $carry . "\n" . $item;
         });
 
-        $code->map('methods', function($method) {
+        $code->map('methods', function ($method) {
             return "        $method[method]";
         });
-        $code->reduce('methods', function($carry, $item) {
-            return $carry."\n".$item;
+        $code->reduce('methods', function ($carry, $item) {
+            return $carry . "\n" . $item;
         });
 
-        $code->map('cits', function($cit) {
+        $code->map('cits', function ($cit) {
             $abstract = $cit['abstract'] === 1 ? 'abstract ' : '';
             $final = $cit['final'] === 1 ? 'final ' : '';
-            $extends = empty($cit['extends']) ? '' : ' extends '.$cit['extends'].' ';
-            $implements = empty($cit['implements']) ? '' : ' implements '.$cit['implements'].' ';
+            $extends = empty($cit['extends']) ? '' : ' extends ' . $cit['extends'] . ' ';
+            $implements = empty($cit['implements']) ? '' : ' implements ' . $cit['implements'] . ' ';
 
-            return "    {$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n" 
+            return "    {$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n"
                                                . ($cit['classconstants'][$cit['id']]['reduced']     ?? '        /* No class constants */ ') . PHP_EOL
                                                . ($cit['properties'][$cit['id']]['reduced']         ?? '        /* No properties */ '     ) . PHP_EOL
                                                . ($cit['methods'][$cit['id']]['reduced']            ?? '        /* No methods */ '        ) . PHP_EOL
                                                . "    }\n";
         });
-        $code->reduce('cits', function($carry, $item) {
-            return $carry."\n". $item;
-        });
-
-        $code->map('namespaces', function($namespace) {
-            return "namespace ".ltrim($namespace['namespace'], '\\') . " {\n" 
-                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? '    /* No constant definitions */ ') . PHP_EOL
-                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? '    /* No function definitions */ ') . PHP_EOL
-                                            . ($namespace['cits'][$namespace['id']]['reduced']      ?? '    /* No cit definitions */ ')      . PHP_EOL
-                                            . " \n}\n";
-        });
-
-        $code->reduce('namespaces', function($carry, $item) {
+        $code->reduce('cits', function ($carry, $item) {
             return $carry . "\n" . $item;
         });
 
-        print "<?php\n".$code->get('namespaces')."\n?>\n";
-        return "<?php\n".$code->get('namespaces')."\n?>\n";
+        $code->map('namespaces', function ($namespace) {
+            return 'namespace ' . ltrim($namespace['namespace'], '\\') . " {\n"
+                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? '    /* No constant definitions */ ') . PHP_EOL
+                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? '    /* No function definitions */ ') . PHP_EOL
+                                            . ($namespace['cits'][$namespace['id']]['reduced']      ?? '    /* No cit definitions */ ') . PHP_EOL
+                                            . " \n}\n";
+        });
+
+        $code->reduce('namespaces', function ($carry, $item) {
+            return $carry . "\n" . $item;
+        });
+
+        print "<?php\n" . $code->get('namespaces') . "\n?>\n";
+        return "<?php\n" . $code->get('namespaces') . "\n?>\n";
     }
 }
 

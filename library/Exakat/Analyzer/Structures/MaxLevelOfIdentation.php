@@ -34,7 +34,7 @@ class MaxLevelOfIdentation extends Analyzer {
              ->outIs('BLOCK')
              ->processLevels()
              ->atomIsNot('Sequence')
-             ->raw('filter{ it.sack() > '.$this->maxLevel.'; }')
+             ->raw('filter{ it.sack() > ' . $this->maxLevel . '; }')
              ->back('first');
         $this->prepareQuery();
     }

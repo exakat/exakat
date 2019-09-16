@@ -1036,7 +1036,7 @@ GREMLIN;
             }
             $methodIds[$methodId] = ++$methodCount;
 
-            $query[] = "(".$methodCount.", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+            $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
                         ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
@@ -1108,7 +1108,7 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'].'::'.$row['methode']] .
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'] . '::' . $row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
                         ', \'' . $row['typehint'] . '\')';
 
@@ -1193,7 +1193,7 @@ GREMLIN;
             if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $propertyId = $row['class'].'::'.$row['name'];
+            $propertyId = $row['class'] . '::' . $row['name'];
             if (isset($propertyIds[$propertyId])) {
                 continue; // skip double
             }
@@ -1432,7 +1432,7 @@ SQL
     __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold()
 )
 GREMLIN
-, array(), array()) 
+, array(), array())
               ->raw(<<<GREMLIN
  sideEffect{ 
     file = ""; 

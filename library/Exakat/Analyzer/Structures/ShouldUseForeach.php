@@ -59,7 +59,7 @@ class ShouldUseForeach extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        //while($value = array_shift($array)) 
+        //while($value = array_shift($array))
         $this->atomIs(array('Dowhile', 'While'))
              ->outIs('CONDITION')
              ->atomIs('Assignation')

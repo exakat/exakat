@@ -34,7 +34,7 @@ class CallbackNeedsReturn extends Analyzer {
         $ini = $this->loadIni('php_with_callback.ini');
 
         // Excluding some functions that don't REQUIRE return
-        $ini['functions0'] = array_diff($ini['functions0'], 
+        $ini['functions0'] = array_diff($ini['functions0'],
                                         array('\forward_static_call_array',
                                               '\forward_static_call',
                                               '\register_shutdown_function',

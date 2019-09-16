@@ -54,12 +54,12 @@ class Command {
     }
     
     public function setSack($default = self::SACK_NONE) {
-        assert(in_array($default, array(self::SACK_NONE, 
-                                        self::SACK_ARRAY, 
-                                        self::SACK_HASH, 
-                                        self::SACK_INTEGER, 
-                                        ), \STRICT_COMPARISON), 
-              'Sack must be one of the allowed constant : "'.$default.'" provided');
+        assert(in_array($default, array(self::SACK_NONE,
+                                        self::SACK_ARRAY,
+                                        self::SACK_HASH,
+                                        self::SACK_INTEGER,
+                                        ), \STRICT_COMPARISON),
+              'Sack must be one of the allowed constant : "' . $default . '" provided');
         $this->sack = $default;
     }
 

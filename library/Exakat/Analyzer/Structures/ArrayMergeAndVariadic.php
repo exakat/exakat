@@ -34,7 +34,7 @@ class ArrayMergeAndVariadic extends Analyzer {
 
     public function analyze() {
         // array_merge(...$x); (without check on $x empty => error!)
-        $this->atomFunctionIs(array('\\array_merge', 
+        $this->atomFunctionIs(array('\\array_merge',
                                     '\\array_merge_recursive'))
              // Skip any other argument
              ->not(
@@ -50,7 +50,7 @@ class ArrayMergeAndVariadic extends Analyzer {
                 $this->side()
                      ->inIs('DEFINITION')
                      ->outIs('DEFINITION')
-                     ->inIsIE('VARIABLE') // for arrays 
+                     ->inIsIE('VARIABLE') // for arrays
                      ->inIs('ARGUMENT')
                      ->atomIs(array('Empty', 'Isset'))
              )

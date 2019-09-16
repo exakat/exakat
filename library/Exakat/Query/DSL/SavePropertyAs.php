@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class SavePropertyAs extends DSL {
     public function run() {
-        assert(func_num_args() === 2, __METHOD__.' should get 2 arguments');
+        assert(func_num_args() === 2, __METHOD__ . ' should get 2 arguments');
         list($property, $name) = func_get_args();
 
         $this->assertVariable($name, self::VARIABLE_WRITE);

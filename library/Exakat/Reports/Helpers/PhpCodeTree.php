@@ -40,11 +40,11 @@ class PhpCodeTree {
                              'reduced' => '',
                             );
     
-    function __construct($sqlite) {
+    public function __construct($sqlite) {
         $this->sqlite = $sqlite;
     }
     
-    function load() {
+    public function load() {
         // collect namespaces
         $res = $this->sqlite->query(<<<SQL
 SELECT namespace, id FROM namespaces
@@ -145,19 +145,19 @@ SQL
         }
     }
 
-    function map($what, $closure) {
+    public function map($what, $closure) {
         foreach($this->$what as $id => &$items) {
             $items['map'] = array_map($closure, $items);
         }
     }
 
-    function reduce($what, $closure) {
+    public function reduce($what, $closure) {
         foreach($this->$what as $id => &$items) {
             $items['reduced'] = array_reduce($items['map'], $closure, '');
         }
     }
 
-    function get($what) {
+    public function get($what) {
         return $this->$what[0]['reduced'];
     }
 }

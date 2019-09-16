@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class Optional extends DSL {
     public function run() : Command {
-        assert(func_num_args() == 2, __CLASS__ . " requires 2 arguments, ". func_num_args()." provided");
+        assert(func_num_args() == 2, __CLASS__ . ' requires 2 arguments, ' . func_num_args() . ' provided');
         list($filter, $arguments) = func_get_args();
         
         if ($filter instanceof Command) {
