@@ -3609,7 +3609,6 @@ SQL
         $arguments = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $theMethod = $row['fullnspath'];
-            print_r($row);
             $visibilities = array($row['typehint'], $row['init']);
 
             $argument = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>' . PHPSyntax($row['argument']) . '</td><td class="exakat_short_text">' .
