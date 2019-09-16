@@ -4976,6 +4976,26 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
+    protected function generateUsedMagic(Section $section) {
+        $results = new Results($this->sqlite, 'Classes/MagicProperties');
+        $results->load();
+        
+        $expr = $results->getColumn('fullcode');
+        $counts = array_count_values($expr);
+
+        $expressions = '';
+        foreach($results->toArray() as $row) {
+            $fullcode = PHPSyntax($row['fullcode']);
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TABLE', $expressions);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of magic properties used in the code');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
+    }
+
     protected function makeIcon($tag) {
         switch($tag) {
             case self::YES :

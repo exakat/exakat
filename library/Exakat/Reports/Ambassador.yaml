@@ -324,6 +324,11 @@ inventories:
             source: empty
             file: inventories_interfacetree
             method: generateInterfaceTree
+        inventories_magic:
+            title: Used Magic Properties
+            source: inventories
+            file: inventories_magic
+            method: generateUsedMagic
         phpfunctions_list:
             title: Native PHP Function usage
             file: phpfunctions_list
