@@ -1,4 +1,4 @@
-Version 1.9.5 (Star of Adversity, coming up)
+Version 1.9.6 (Star of Birth, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,33 @@ Version 1.9.5 (Star of Adversity, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.5 (Star of Adversity, 2019-09-16)
++ Architecture
+    + Added count property to Analysis node, stepstone for Diff analysis
+    + Added support for 'optional' step 
+    + Added support for 'interfaces' as typehint for remote definitions
+    + Removed more true/false values
+    + Fixed strtolower with mb_strtolower in Dump
++ Report
+    + Added several PHP error messages 
+    + Ambassador : added inventory of magic properties
+    + Ambassador : added inventory of typehints for methods (WIP)
+    + Added support for function/closure/argument arguments
+    + Added support for function/closure/argument arguments
++ Analysis
+    + New analysis : No literal value as referenced argument
+    + New analysis : use array_slice or array_splice
+    + New analysis : Useless typechecks with Typehint
+    + New analysis : Report non-implemented interfaces
+    + New analysis : Incompatible Signatures with Self (PHP 7.4+)
+    + New analysis : Report wrong expectations from interfaces
+    + Upgraded analysis : Excluded __construct and __destruct from Magic Methods
+    + Upgraded analysis : Concat and Addition : Now also for bitshift
+    + Upgraded analysis : Incompatible Signatures with Self (PHP 7.3)
+    + Upgraded analysis : Elseif and Sequences are omitted in Level analysis
++ Tokenizer
+    + Upgraded support for magic properties
 
 Version 1.9.4 (Star of Benefit, 2019-09-09)
 + Architecture

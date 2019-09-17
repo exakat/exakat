@@ -92,7 +92,6 @@ class Config {
             }
             $this->ext_root      = "{$this->dir_root}/ext";
 
-
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
 
