@@ -532,6 +532,10 @@ class Load extends Tasks {
             unset($this->gremlin);
             $this->gremlin = Graph::getConnexion($this->config);
 
+            $this->callsDatabase = new \Sqlite3(':memory:');
+            $this->loader = new Collector(null, $this->config, $this->callsDatabase);
+            $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+
             $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
             display("Loading with $clientClass\n");
             if (!class_exists($clientClass)) {

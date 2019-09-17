@@ -112,18 +112,19 @@ class Doctor extends Tasks {
         }
 
         // check for PHP
-        $stats['PHP']['binary']         = phpversion();
-        $stats['PHP']['memory_limit']   = ini_get('memory_limit');
-        $stats['PHP']['ext/curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
-        $stats['PHP']['ext/hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
-        $stats['PHP']['ext/phar']       = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
-        $stats['PHP']['ext/sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
-        $stats['PHP']['ext/tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
-        $stats['PHP']['ext/mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
-        $stats['PHP']['ext/json']       = extension_loaded('json')      ? 'Yes' : 'No';
-        $stats['PHP']['ext/xmlwriter']  = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
-        $stats['PHP']['ext/pcntl']      = extension_loaded('pcntl')     ? 'Yes' : 'No (Optional)';
-        $stats['PHP']['pcre.jit']       = (ini_get('pcre.jit')           ? 'On'  : 'Off') . ' (Must be off on PHP 7.3 and OSX)';
+        $stats['PHP']['binary']          = phpversion();
+        $stats['PHP']['memory_limit']    = ini_get('memory_limit');
+        $stats['PHP']['short_open_tags'] = (ini_get('short_open_tags')   ? 'On'  : 'Off');
+        $stats['PHP']['ext/curl']        = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
+        $stats['PHP']['ext/hash']        = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
+        $stats['PHP']['ext/phar']        = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
+        $stats['PHP']['ext/sqlite3']     = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
+        $stats['PHP']['ext/tokenizer']   = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
+        $stats['PHP']['ext/mbstring']    = extension_loaded('mbstring')  ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
+        $stats['PHP']['ext/json']        = extension_loaded('json')      ? 'Yes' : 'No';
+        $stats['PHP']['ext/xmlwriter']   = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
+        $stats['PHP']['ext/pcntl']       = extension_loaded('pcntl')     ? 'Yes' : 'No (Optional)';
+        $stats['PHP']['pcre.jit']        = (ini_get('pcre.jit')          ? 'On'  : 'Off') . ' (Must be off on PHP 7.3 and OSX)';
 
         // java
         $res = shell_exec('java -version 2>&1');
