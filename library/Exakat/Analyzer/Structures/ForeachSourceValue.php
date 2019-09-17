@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ForeachSourceValue extends Analyzer {
     public function analyze() {
         // foreach($a as $a)
+        // foreach($a as $b => $a)
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Variable')
