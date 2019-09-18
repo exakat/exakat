@@ -195,43 +195,40 @@ class Analyze extends Tasks {
 
         $total_results = 0;
         if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
-            $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
-
-            $analyzer = str_replace('\\', '\\\\', $analyzer_class);
+            $analyzerQuoted = $analyzer->getInBaseName();
 
             $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                        'Not Compatible With PhpVersion')
                        .property('fullcode',                    'Not Compatible With PhpVersion')
                        .property('virtual',                      true)
-                       .property('atom',                         'Noresult')
+                       .property('line',                               -1)
                        .property('notCompatibleWithPhpVersion', '{$this->config->phpversion}')
                        .property('token',                       'T_INCOMPATIBLE');
 
-g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
+g.addV('Analysis').property('analyzer', '$analyzerQuoted').property('count', 0).addE('ANALYZED').to(result);
 
 GREMLIN;
             $this->gremlin->query($query);
             $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
-            display("$analyzer is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
+            display("$analyzerQuoted is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
         } elseif (!$analyzer->checkPhpConfiguration($this->Php)) {
-            $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
-            $analyzer = str_replace('\\', '\\\\', $analyzer_class);
+            $analyzerQuoted = $analyzer->getInBaseName();
 
             $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                              'Not Compatible With Configuration')
                        .property('fullcode',                          'Not Compatible With Configuration')
                        .property('virtual',                            true)
-                       .property('atom',                         'Noresult')
+                       .property('line',                               -1)
                        .property('notCompatibleWithPhpConfiguration', '{$this->config->phpversion}')
                        .property('token',                             'T_INCOMPATIBLE');
 
-index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
+index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').property('count', 0).addE('ANALYZED').to(result);
 GREMLIN;
             $this->gremlin->query($query);
             $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
 
-            display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
+            display( "$analyzerQuoted is not compatible with PHP configuration of this version. Ignoring\n");
         } else {
             display( "$analyzer_class running\n");
             try {
