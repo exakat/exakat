@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessInstruction extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsaMagicProperty',
+        return array('Complete/SetClassMethodRemoteDefinition',
+                     'Classes/IsaMagicProperty',
                     );
     }
 
@@ -40,8 +41,8 @@ class UselessInstruction extends Analyzer {
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
-                            'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New', 'Variable'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'Defineconstant'));
+                            'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'Variable', 'Arrayliteral', 'New'))
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'Defineconstant', ));
         $this->prepareQuery();
         
         // foreach($i = 0; $i < 10, $j < 20; $i++)
@@ -52,7 +53,42 @@ class UselessInstruction extends Analyzer {
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', ));
+        $this->prepareQuery();
+
+        $methods = self::$methods->getFunctionsReferenceArgs();
+        $functions = array();
+        foreach($methods as $method) {
+            $functions[$method['function']] = 1;
+        }
+        
+        // foo(1) // except for functions with references
+        $this->atomIs('Sequence')
+             ->hasNoIn('FINAL')
+             ->outIs('EXPRESSION')
+             ->atomIs('Functioncall')
+             ->fullnspathIsNot(makeFullnspath(array_keys($functions)))
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('ARGUMENT')
+                     ->is('reference', true)
+             )
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'New', ));
+        $this->prepareQuery();
+
+        // s::foo(1)
+        $this->atomIs('Sequence')
+             ->hasNoIn('FINAL')
+             ->outIs('EXPRESSION')
+             ->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('ARGUMENT')
+                     ->is('reference', true)
+             )
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'New', ));
         $this->prepareQuery();
 
         // -$x = 3
