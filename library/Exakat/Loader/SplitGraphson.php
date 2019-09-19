@@ -31,6 +31,7 @@ use Exakat\Exceptions\NoSuchFile;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
+use Exakat\Tasks\Helpers\Atom;
 
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
@@ -59,7 +60,7 @@ class SplitGraphson extends Loader {
     private $datastore = null;
     private $sqlite3   = null;
    
-    public function __construct($gremlin, $config, \Sqlite3 $sqlite3) {
+    public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {
         self::$count = -1;
         
         $this->config = $config;
@@ -74,6 +75,14 @@ class SplitGraphson extends Loader {
         $this->datastore = new Datastore($this->config);
         
         $this->cleanCsv();
+
+        $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
+        assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
+
+        file_put_contents($this->path, $jsonText, \FILE_APPEND);
+
+        ++$this->total;
+        $this->id0 = $id0;
     }
     
     public function __destruct() {
@@ -91,10 +100,10 @@ class SplitGraphson extends Loader {
         $res = $this->graphdb->query($query);
         $project_id = $res->toInt();
 
-        $query = 'g.V().hasLabel("File").addE("PROJECT").from(__.V(' . $project_id . '));';
+        $query = 'g.V().hasLabel("File").not(where( __.in("PROJECT"))).addE("PROJECT").from(__.V(' . $project_id . '));';
         $res = $this->graphdb->query($query);
 
-        $query = 'g.V().hasLabel("Virtualglobal").addE("GLOBAL").from(__.V(' . $project_id . '));';
+        $query = 'g.V().hasLabel("Virtualglobal").not(where( __.in("GLOBAL"))).addE("GLOBAL").from(__.V(' . $project_id . '));';
         $res = $this->graphdb->query($query);
 
         $f = fopen('php://memory', 'r+');
@@ -229,18 +238,8 @@ GREMLIN;
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
-    public function saveFiles($exakatDir, $atoms, $links, $id0) {
+    public function saveFiles($exakatDir, $atoms, $links/*, $id0*/) {
         $fileName = 'unknown';
-        
-        if (empty($this->id0)) {
-            $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
-            assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
-
-            file_put_contents($this->path, $jsonText, \FILE_APPEND);
-
-            ++$this->total;
-            $this->id0 = $id0;
-        }
 
         $json = array();
         foreach($atoms as $atom) {

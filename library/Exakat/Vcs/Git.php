@@ -216,6 +216,24 @@ class Git extends Vcs {
         
         return $files;
     }
+    
+    public function getDiffFile($next) {
+        // Added and removed ? 
+         $res = shell_exec("cd {$this->destinationFull}; git diff-tree -r $next | grep ' M\t' ");
+
+         preg_match_all("/ M\t(.*?)\n/m", $res, $r);
+         
+         $return = array_map(function ($path) { return "/$path"; }, $r[1]);
+         return $return;
+    }
+
+    public function checkOut($next) {
+        // Added and removed ? 
+         $res = shell_exec("cd {$this->destinationFull}; git checkout $next");
+
+         print $res;
+    }
+
 }
 
 ?>

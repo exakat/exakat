@@ -1795,7 +1795,7 @@ GREMLIN;
             $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
-        display(count($extends) . ' extends for classes ');
+        display(count($extends) . ' extends for classes');
 
         // Finding extends for interfaces
         $query = <<<'GREMLIN'
@@ -1816,7 +1816,7 @@ GREMLIN;
             $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display(count($res) . ' extends for interfaces ');
+        display(count($res) . ' extends for interfaces');
 
         // Finding typehint
         $query = $this->newQuery('Typehint');
@@ -2111,7 +2111,7 @@ GREMLIN
 , array(), array());
         $query->prepareRawQuery();
         $count = $this->storeToTable('classesDependencies', $query);
-        display($count . ' extends for classes ');
+        display($count . ' extends for classes');
 
         // Finding extends for interfaces
         $query = $this->newQuery('Interfaces extensions');
@@ -2142,12 +2142,11 @@ GREMLIN
 , array(), array());
         $query->prepareRawQuery();
         $count = $this->storeToTable('classesDependencies', $query);
-        display($count . ' extends for interfaces ');
+        display($count . ' extends for interfaces');
 
         // Finding typehint
         $query = $this->newQuery('Typehint');
-        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('ARGUMENT')
+        $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('TYPEHINT')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')

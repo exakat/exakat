@@ -23,10 +23,10 @@
 
 namespace Exakat\Loader;
 
-
+use Exakat\Tasks\Helpers\Atom;
 
 class None extends Loader {
-    public function __construct($gremlin, $config, \Sqlite3 $sqlite3) {}
+    public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {}
 }
 
 ?>

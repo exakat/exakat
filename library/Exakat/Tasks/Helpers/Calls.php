@@ -38,7 +38,7 @@ class Calls {
         $this->callsSqlite = $sqlite;
 
         $calls = <<<'SQL'
-CREATE TABLE calls (
+CREATE TABLE IF NOT EXISTS calls (
     type STRING,
     fullnspath STRING,
     globalpath STRING,
@@ -49,7 +49,7 @@ SQL;
         $this->callsSqlite->query($calls);
 
         $definitions = <<<'SQL'
-CREATE TABLE definitions (
+CREATE TABLE IF NOT EXISTS definitions (
     type STRING,
     fullnspath STRING,
     globalpath STRING,
@@ -60,7 +60,7 @@ SQL;
         $this->callsSqlite->query($definitions);
 
         $definitions = <<<'SQL'
-CREATE TABLE globals (
+CREATE TABLE IF NOT EXISTS globals (
     origin INTEGER,
     destination INTEGER
 )

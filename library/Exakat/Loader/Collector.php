@@ -24,6 +24,7 @@
 namespace Exakat\Loader;
 
 use Exakat\Datastore;
+use Exakat\Tasks\Helpers\Atom;
 
 class Collector extends Loader {
     private $cit        = array();
@@ -32,7 +33,7 @@ class Collector extends Loader {
 
     private $datastore = null;
 
-    public function __construct($gremlin, $config, \Sqlite3 $sqlite3) {
+    public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {
         $this->datastore = new Datastore($config);
     }
     
@@ -42,7 +43,7 @@ class Collector extends Loader {
         $this->datastore->addRow('ignoredConstants', $this->constants);
     }
 
-    public function saveFiles($exakatDir, $atoms, $links, $id0) {
+    public function saveFiles($exakatDir, $atoms, $links) {
         $isDefine = false;
 
         $lastConst = array();

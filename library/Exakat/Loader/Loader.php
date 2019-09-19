@@ -23,13 +23,14 @@
 
 namespace Exakat\Loader;
 
+use Exakat\Tasks\Helpers\Atom;
+
 abstract class Loader {
-    abstract public function __construct($gremlin, $config, \Sqlite3 $sqlite3) ;
+    abstract public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) ;
     
     public function finalize(array $relicat) {}
 
-    public function saveFiles($exakatDir, $atoms, $links, $id0) { }
-
+    public function saveFiles($exakatDir, $atoms, $links) { }
 }
 
 ?>
