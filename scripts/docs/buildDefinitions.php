@@ -502,7 +502,7 @@ SQL
             
             $reportList[] = '`'.$reportIni['name'].'`_';
     
-            $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
+            $section = $reportIni['name']."\n".str_repeat('_', strlen($reportIni['name']))."\n\n";
             $description = $this->internalLink($reportIni['description']);
             $section .= $reportIni['mission']."\n\n".$description."\n\n";
 

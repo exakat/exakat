@@ -44,5 +44,8 @@ Each report is stored in its <project> folder, under the requested name.
 
 Reports may be generated at any time, during execution of the analysis (partial results) or later, even if another audit is running. 
 
+Reports descriptions
+--------------------
+
 REPORT_DETAILS
 
