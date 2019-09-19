@@ -24,7 +24,6 @@
 namespace Exakat\Tasks;
 
 use Exakat\Configsource\ProjectConfig;
-use Exakat\Datastore;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;

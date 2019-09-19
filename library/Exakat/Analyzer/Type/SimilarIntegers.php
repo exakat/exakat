@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SimilarIntegers extends Analyzer {
     public function analyze() {
         // $x = 10; $y = 0xa; $z = -+-10;
-        $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication'))
+        $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication', 'Sign', 'Bitshift'))
              ->has('intval')
              ->raw(<<<'GREMLIN'
 group("m").by("intval").by("fullcode").cap("m").next().findAll{ a,b -> b.unique().size() > 1}
@@ -51,7 +51,7 @@ GREMLIN
 
         $fullcode = array_merge(...$fullcode);
 
-        $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication'))
+        $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication', 'Sign', 'Bitshift'))
              ->has('intval')
              ->is('intval', $integers)
              ->is('fullcode', $fullcode);

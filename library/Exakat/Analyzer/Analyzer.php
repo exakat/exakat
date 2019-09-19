@@ -45,8 +45,9 @@ abstract class Analyzer {
     const QUERY_HASH     = 5; // returns a list of values
     const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
     const QUERY_ARRAYS   = 7; // arrays of array
+    const QUERY_TABLE    = 8; // to specific table
 
-    public static $datastore  = null;
+    protected $datastore  = null;
 
     protected $rowCount       = 0; // Number of found values
     protected $processedCount = 0; // Number of initial values
@@ -73,6 +74,10 @@ abstract class Analyzer {
     protected $analyzerQuoted   = '';
     protected $analyzerId       = 0;
     protected $queryId          = 0;
+    
+    protected $analyzerName     = 'no analyzer name';
+    protected $analyzerTable    = 'no analyzer table name';
+    protected $analyzerSQLTable = 'no analyzer sql creation';
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -191,17 +196,16 @@ abstract class Analyzer {
                 }
             }
         }
-        
-        if (!isset(self::$datastore)) {
-            self::$datastore = new Datastore($this->config);
-        }
-        
-        $this->dictCode = Dictionary::factory(self::$datastore);
+
+        $this->datastore = Datastore::getDatastore($this->config);
+        assert($this->datastore !== null, "Datastore is empty!!\n");
+
+        $this->dictCode = Dictionary::factory($this->datastore);
         
         $this->linksDown = GraphElements::linksAsList();
 
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
-            $data = self::$datastore->getCol('TokenCounts', 'token');
+            $data = $this->datastore->getCol('TokenCounts', 'token');
 
             self::$availableAtoms = GraphElements::$ATOMS_VIRTUAL;
             self::$availableLinks = GraphElements::$LINKS_VIRTUAL;
@@ -214,7 +218,7 @@ abstract class Analyzer {
                 }
             }
 
-            self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
+            self::$availableFunctioncalls = $this->datastore->getCol('functioncalls', 'functioncall');
         }
         
         $this->initNewQuery();
@@ -323,7 +327,6 @@ GREMLIN;
 g.addV().property(T.id, $resId)
         .property(T.label, "Analysis")
         .property("analyzer", "{$this->analyzerQuoted}")
-        .property("atom", "Analysis")
         .property("count", 0)
         .id()
 GREMLIN;
@@ -1903,6 +1906,10 @@ GREMLIN;
                 $this->storeToHashResults();
                 break;
 
+            case self::QUERY_TABLE: 
+                $this->storeToTableResults();
+                break;
+
             case self::QUERY_ARRAYS: 
                 $this->storeArraysToHashResult();
                 break;
@@ -1915,6 +1922,50 @@ GREMLIN;
 
          // initializing a new query
         $this->initNewQuery();
+    }
+
+    private function storeToTableResults() {
+        ++$this->queryId;
+
+/*
+    // Can't add that, as it requires a real step
+        $this->raw(<<<GREMLIN
+// Query (#{$this->queryId}) for {$this->analyzer}
+// php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
+// hasResults storage
+
+GREMLIN
+);
+*/
+        $this->query->prepareQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+
+        ++$this->queryCount;
+
+        $c = $result->toArray();
+        if (!is_array($c) || !isset($c[0])) {
+            return 0;
+        }
+
+        $this->processedCount += count($c);
+        $this->rowCount       += count($c);
+
+        $valuesSQL = array();
+        foreach($c as $row) {
+            print_r($row);
+            $valuesSQL[] = "('".implode("', '", $row)."') \n";
+        }
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
+        $sqlite->query($this->analyzerSQLTable);
+
+        $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
     }
 
     private function storeToHashResults() {
@@ -2038,7 +2089,7 @@ GREMLIN
                                   $this->config->project,
                                   $this->analyzerQuoted,
                                   $this->config->executable,
-                                  self::$datastore);
+                                  $this->datastore);
     }
 
     public function execQuery() {

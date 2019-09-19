@@ -61,7 +61,7 @@ class DuplicateLiteral extends Analyzer {
                  ->noDelimiterIs($results);
             $this->prepareQuery();
 
-            Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+            $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
         }
 
         $this->atomIs(array('Integer', 'Float'))
@@ -95,7 +95,7 @@ class DuplicateLiteral extends Analyzer {
                  ->fullcodeIs($results);
             $this->prepareQuery();
 
-            Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+            $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
         }
         
         // could we do this for array?

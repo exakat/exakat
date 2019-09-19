@@ -59,7 +59,8 @@ GREMLIN
                              'value' => $c);
             $total += $c;
         }
-        Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+        $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+
         if ($total == 0) {
             return;
         }

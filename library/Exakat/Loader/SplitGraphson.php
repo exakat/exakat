@@ -72,7 +72,7 @@ class SplitGraphson extends Loader {
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
         
         $this->dictCode  = new Collector();
-        $this->datastore = new Datastore($this->config);
+        $this->datastore = Datastore::getDatastore($this->config);
         
         $this->cleanCsv();
 
@@ -233,7 +233,7 @@ GREMLIN;
     }
 
     private function saveTokenCounts() {
-        $datastore = new Datastore($this->config);
+        $datastore = Datastore::getDatastore($this->config);
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }

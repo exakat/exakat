@@ -89,9 +89,8 @@ class Project extends Tasks {
         display("Cleaning project\n");
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
-        $this->datastore = new Datastore($this->config);
+        $this->datastore = Datastore::getDatastore($this->config);
         // Reset datastore for the others
-        Analyzer::$datastore = $this->datastore;
 
         display('Search for external libraries' . PHP_EOL);
         $pathCache = "{$this->config->project_dir}/config.cache";
@@ -412,6 +411,8 @@ class Project extends Tasks {
                 
             } catch (\Exception $e) {
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
+                print $e->getMessage();
+                print_r($e);
                 file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
             }
         }

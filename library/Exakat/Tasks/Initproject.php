@@ -188,7 +188,7 @@ class Initproject extends Tasks {
         } catch (VcsError $e) {
             rename($tmpPath, $finalPath);
 
-            $this->datastore = new Datastore($this->config, Datastore::CREATE);
+            $this->datastore = Datastore::getDatastore($this->config, Datastore::CREATE);
             $errorMessage = $e->getMessage();
             $this->datastore->addRow('hash', array('init error' => $errorMessage,
                                                    'inited'     => date('r')));
@@ -201,7 +201,7 @@ class Initproject extends Tasks {
 
         rename($tmpPath, $finalPath);
         $projectConfig->writeConfig();
-        $this->datastore = new Datastore($this->config, Datastore::CREATE);
+        $this->datastore = Datastore::getDatastore($this->config, Datastore::CREATE);
 
         $this->datastore->addRow('hash', array('status' => 'Cloned',
                                               ));

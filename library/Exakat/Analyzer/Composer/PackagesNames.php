@@ -41,7 +41,7 @@ class PackagesNames extends Analyzer {
     }
 
     public function hasResults() {
-        $data = Analyzer::$datastore->getRow('composer');
+        $data = $this->datastore->getRow('composer');
         $this->report = array();
         foreach($data as $d) {
             $this->report[$d['component'] . ' (' . $d['version'] . ')'] = true;

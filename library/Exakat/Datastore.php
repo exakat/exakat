@@ -28,6 +28,7 @@ use Exakat\Exceptions\WrongNumberOfColsForAHash;
 use Exakat\Exceptions\NoStructureForTable;
 
 class Datastore {
+    static private $singleton = null;
     protected $sqliteRead = null;
     protected $sqliteWrite = null;
     protected $sqlitePath = null;
@@ -37,7 +38,7 @@ class Datastore {
     const TIMEOUT_WRITE = 5000;
     const TIMEOUT_READ = 6000;
 
-    public function __construct(Config $config, $create = self::REUSE) {
+    private function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->datastore;
 
         // if project dir isn't created, we are about to create it.
@@ -88,6 +89,14 @@ class Datastore {
        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
        $this->sqliteRead->enableExceptions(true);
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
+    }
+    
+    public static function getDatastore(Config $config, $create = self::REUSE) {
+        if (!isset(self::$singleton) || $create === self::CREATE) {
+            self::$singleton = new self($config, $create);
+        }
+
+        return self::$singleton;
     }
 
     public function addRow($table, $data) {

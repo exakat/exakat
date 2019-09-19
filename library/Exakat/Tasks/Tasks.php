@@ -109,7 +109,7 @@ abstract class Tasks {
         }
 
         if ($this->config->project !== 'default') {
-            $this->datastore = new Datastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
+            $this->datastore = Datastore::getDatastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
         }
 
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",

@@ -36,13 +36,13 @@ class Autoload extends Analyzer {
     }
 
     public function toArray() {
-        $report = array('composer' => Analyzer::$datastore->getHash('autoload'));
+        $report = array('composer' => $this->datastore->getHash('autoload'));
 
         return $report;
     }
 
     public function hasResults() {
-        $res = Analyzer::$datastore->getHash('autoload');
+        $res = $this->datastore->getHash('autoload');
 
         $report = $res === 'psr-0' || $res === 'psr-4' ;
 

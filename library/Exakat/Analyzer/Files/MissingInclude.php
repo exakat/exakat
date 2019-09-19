@@ -28,8 +28,8 @@ class MissingInclude extends Analyzer {
     protected $constant_or_variable_name = 100;
     
     public function analyze() {
-        $files = array_merge(self::$datastore->getCol('files', 'file'),
-                             self::$datastore->getCol('ignoredFiles', 'file'));
+        $files = array_merge($this->datastore->getCol('files', 'file'),
+                             $this->datastore->getCol('ignoredFiles', 'file'));
 
         if (empty($files)) {
             $this->atomIs('File')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UseComposer extends Analyzer {
     public function analyze() {
-        $this->rowCount       = (int) Analyzer::$datastore->getHash('composer.json');
+        $this->rowCount       = (int) $this->datastore->getHash('composer.json');
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
@@ -36,13 +36,13 @@ class UseComposer extends Analyzer {
     }
 
     public function toArray() {
-        $report = array('composer.json' => Analyzer::$datastore->getHash('composer.json'));
+        $report = array('composer.json' => $this->datastore->getHash('composer.json'));
 
         return $report;
     }
 
     public function hasResults() {
-        $report = Analyzer::$datastore->getHash('composer.json') === 1;
+        $report = $this->datastore->getHash('composer.json') === 1;
 
         return $report;
     }

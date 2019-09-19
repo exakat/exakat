@@ -33,7 +33,7 @@ class ShortOpenTagRequired extends Analyzer {
     }
     
     public function getArray() {
-        $r = Analyzer::$datastore->getRow('shortopentag');
+        $r = $this->datastore->getRow('shortopentag');
         
         $report = array();
         foreach($r as $l) {
@@ -44,11 +44,10 @@ class ShortOpenTagRequired extends Analyzer {
     }
     
     public function hasResults() {
-       $r = Analyzer::$datastore->getRow('shortopentag');
+       $r = $this->datastore->getRow('shortopentag');
        
        return !empty($r);
     }
-    
 }
 
 ?>
