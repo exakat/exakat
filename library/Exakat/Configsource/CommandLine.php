@@ -112,7 +112,7 @@ class CommandLine extends Config {
                               'jobqueue'      => 1,
                               'queue'         => 1,
                               'load'          => 1,
-                              'drop'          => 1,
+                              'diff'          => 1,
                               'project'       => 1,
                               'report'        => 1,
                               'results'       => 1,
@@ -133,7 +133,7 @@ class CommandLine extends Config {
                               );
 
     public function __construct() {
-        $this->config['project'] = new Project();
+//        $this->config['project'] = new Project();
     }
 
     public function loadConfig($args = array()) {
@@ -186,7 +186,7 @@ class CommandLine extends Config {
                         break;
 
                     case 'project' :
-                        if ($this->config['project']->isDefault()) {
+                        if (!isset($this->config['project'])) {
                             $this->config['project'] = new Project($args[$id + 1]);
                         } 
                         // Multiple -p are ignored : keep the first

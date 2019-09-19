@@ -118,7 +118,8 @@ class Config {
         }
 
         // then read the config for the project in its folder
-        if ($this->commandLineConfig->get('project')->isDefault()) {
+        if ($this->commandLineConfig->get('project') === null) {
+            
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
@@ -132,6 +133,8 @@ class Config {
                 $this->configFiles[] = $file;
                 $this->dotExakatYamlConfig = new EmptyConfig();
             }
+
+            $this->projectConfig = new EmptyConfig();
         } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
@@ -152,7 +155,9 @@ class Config {
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;
-        
+//        var_dump($this->exakatConfig->toArray()['project']);
+//        var_dump($this->options['project']);
+
         $remote = new RemoteConfig($this->projects_root);
         if ($file = $remote->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
@@ -197,7 +202,7 @@ class Config {
             $this->options['dump_previous'] = 'none';
             $this->options['dump_tmp']      = getcwd() . '/.exakat/.dump.sqlite';
         } else {
-            $this->options['project_dir']   = $this->projects_root . '/projects/' . $this->options['project'];
+            $this->options['project_dir']   = $this->projects_root . '/projects/' . ($this->options['project'] ?? '');
             $this->options['code_dir']      = $this->options['project_dir'] . '/code';
             $this->options['log_dir']       = $this->options['project_dir'] . '/log';
             $this->options['tmp_dir']       = $this->options['project_dir'] . '/.exakat';

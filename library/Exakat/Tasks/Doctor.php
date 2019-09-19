@@ -111,7 +111,7 @@ class Doctor extends Tasks {
             $stats['exakat']['extensions']  = $this->array2list($list);
         }
 
-        // check for PHP
+        // check for running PHP
         $stats['PHP']['binary']          = phpversion();
         $stats['PHP']['memory_limit']    = ini_get('memory_limit');
         $stats['PHP']['short_open_tags'] = (ini_get('short_open_tags')   ? 'On'  : 'Off');
@@ -147,7 +147,7 @@ class Doctor extends Tasks {
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
 
-        if ($this->config->project->isDefault() !== true) {
+        if ($this->config->project !== null) {
             $stats['project']['name']             = $this->config->project_name;
             $stats['project']['url']              = $this->config->project_url;
             $stats['project']['phpversion']       = $this->config->phpversion;
@@ -361,7 +361,11 @@ TEXT
         $stats['configured'] = 'Yes (' . $pathToBinary . ')';
 
         try {
-            new Phpexec($displayedVersion, $pathToBinary);
+            $php = new Phpexec($displayedVersion, $pathToBinary);
+            $stats['actual version'] = $php->getActualVersion();
+            if (substr($stats['actual version'], 0, 3) === $this->config->phpversion) {
+                $stats['auditing'] = 'with this version';
+            }
         } catch (NoPhpBinary $e) {
             $stats['installed'] = 'Invalid path : ' . $pathToBinary;
         }

@@ -53,6 +53,9 @@ class DotExakatYamlConfig extends Config {
         try {
             $tmp_config = Yaml::parseFile($this->dotExakatYaml);
         } catch (ParseException $exception) {
+            display("Error while parsing ".basename($this->dotExakatYaml));
+
+            return self::NOT_LOADED;
             // Empty on purppose 
         }
 

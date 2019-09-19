@@ -62,7 +62,6 @@ class DefaultConfig extends Config {
                                 // directives with literal value
                                'filename'           => '',
                                'dirname'            => '',
-                               'project'            => '',
                                'program'            => '',
                                'repository'         => false,
                                'project_rulesets'   => array(),

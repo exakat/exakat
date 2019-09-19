@@ -60,14 +60,14 @@ class Project extends Tasks {
     }
     
     public function run() {
+        if ($this->config->project === null) {
+            throw new ProjectNeeded();
+        }
+
         $project = new Projectname($this->config->project);
 
         if (!$project->validate()) {
             throw new InvalidProjectName($project->getError());
-        }
-
-        if ($this->config->project === 'default') {
-            throw new ProjectNeeded();
         }
 
         if ($this->config->gremlin === 'NoGremlin') {
