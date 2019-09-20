@@ -183,7 +183,7 @@ class ProjectConfig extends Config {
         $this->config[$name] = $value;
     }
     
-    public function writeConfig() {
+    public function getConfig($dir_root = '') {
         // $vendor
         if ($this->config['include_dirs'] === array('/')) {
             $include_dirs = 'include_dirs[] = "";';
@@ -195,6 +195,15 @@ class ProjectConfig extends Config {
         
         $custom_configs = array();
         
+        print "$dir_root/human/en/*/*.ini";
+        $iniFiles = glob("$dir_root/human/en/*/*.ini");
+        foreach($iniFiles as $file) {
+            $ini = parse_ini_file($file, INI_PROCESS_SECTIONS);
+            if (isset($ini['parameter1'])) {
+                $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
+            }
+        }
+        
         foreach($this->config as $key => $value) {
             if (strpos($key, '/') === false) {
                 continue;
@@ -202,12 +211,45 @@ class ProjectConfig extends Config {
             
             $cc = "[$key]\n";
             foreach($value as $name => $values) {
-                $cc .= "{$name}[] = " . implode(";\n{$name}[] = ", $values) . ";\n\n";
+                if (is_array($values)) {
+                    $cc .= "{$name}[] = " . implode(";\n{$name}[] = ", $values) . ";\n; default = {$default[$key][$name]}\n";
+                } elseif (is_string($values)) {
+                    if (intval($values) === 0) {
+                        $cc .= "{$name} = \"$values\";\n; default = {$default[$key][$name]}\n";
+                    } else {
+                        $cc .= "{$name} = $values;\n; default = {$default[$key][$name]}\n";
+                    }
+                } elseif (is_int($values)) {
+                    $cc .= "{$name} = $values;\n; default = {$default[$key][$name]}\n";
+                } else {
+                    assert(false, "Unknown type for INI creation : ".gettype($values));
+                }
+                
+                unset($default[$key]);
             }
-            
             $cc .= PHP_EOL;
-            
+
             $custom_configs[] = $cc;
+        }
+
+        foreach($default as $key => $value) {
+            $cc2 = "[$key]\n";
+            foreach($value as $name => $values) {
+                if (is_array($values)) {
+                    $cc2 .= "{$name}[] = " . implode(";\n{$name}[] = ", $values) . ";\n; default value\n\n";
+                } elseif (is_string($values)) {
+                    if (intval($values) === 0) {
+                        $cc2 .= "{$name} = \"$values\";\n; default value\n\n";
+                    } else {
+                        $cc2 .= "{$name} = $values;\n; default value\n\n";
+                    }
+                } elseif (is_int($values)) {
+                    $cc2 .= "{$name} = $values;\n; default value\n\n";
+                } else {
+                    assert(false, "Unknown type for INI creation : ".gettype($values));
+                }
+            }
+            $custom_configs[] = $cc2;
         }
         
         $custom_configs = implode('', $custom_configs);
@@ -238,8 +280,8 @@ project_tag         = "{$this->config['project_tag']}";
 $custom_configs
 
 INI;
-
-        file_put_contents("{$this->projects_root}{$this->project}/config.ini", $configIni);
+        
+        return $configIni;
     }
 }
 

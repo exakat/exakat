@@ -24,43 +24,50 @@
 namespace Exakat\Tasks;
 
 use Exakat\Configsource\ProjectConfig;
+use Exakat\Configsource\DotExakatYamlConfig;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
 use Exakat\Project;
+use Exakat\Config as Configuration;
 
 class Config extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $project = new Project($this->config->project);
+        $project = $this->config->project;
 
-        if ($project == 'default') {
-            throw new ProjectNeeded();
-        }
-
-        if (!file_exists("{$this->config->projects_root}/projects/$project")) {
-            throw new NoSuchProject($this->config->project);
-        }
-        
-        if (empty($this->config->configuration)) {
-            return;
-        }
-        
-        $projectConfig = new ProjectConfig($this->config->projects_root);
-        $projectConfig->loadConfig($project);
-        foreach($this->config->configuration as $key => $value) {
-            if (in_array($key, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
-                if (is_string($value)) {
-                    $projectConfig->setConfig($key,     explode(',', $value));
-                } else {
-                    $projectConfig->setConfig($key,     $value);
-                }
+        // May be in-code!!
+        if ($this->config->inside_code === Configuration::INSIDE_CODE) {
+                $projectConfig = new DotExakatYamlConfig();
+                $projectConfig->loadConfig($project);
+        } else {
+            if ($this->config->project === null) {
+                $projectConfig = new ProjectConfig($this->config->projects_root);
             } else {
-                $projectConfig->setConfig($key,     $value);
+                if (!file_exists("{$this->config->projects_root}/projects/$project")) {
+                    throw new NoSuchProject($this->config->project);
+                }
+
+                $projectConfig = new ProjectConfig($this->config->projects_root);
+                $projectConfig->loadConfig($project);
+
+                foreach($this->config->configuration as $key => $value) {
+                    if (in_array($key, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
+                        if (is_string($value)) {
+                            $projectConfig->setConfig($key,     explode(',', $value));
+                        } else {
+                            $projectConfig->setConfig($key,     $value);
+                        }
+                    } else {
+                        $projectConfig->setConfig($key,     $value);
+                    }
+                }
             }
+        
         }
-        $projectConfig->writeConfig();
+        
+        print $projectConfig->getConfig($this->config->dir_root);
     }
 }
 ?>

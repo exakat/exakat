@@ -115,6 +115,12 @@ class DotExakatYamlConfig extends Config {
                            'rulesets'            => array(),
                            'project'             => new Project(),
                            'project_name'        => '',
+                           'project_url'         => '',
+                           'project_vcs'         => '',
+                           'project_description' => '',
+                           'project_branch'      => '',
+                           'project_tag'         => '',
+                           
                         );
 
         $this->config['inside_code'] = Configuration::INSIDE_CODE;
@@ -173,6 +179,13 @@ class DotExakatYamlConfig extends Config {
             unset($this->config['rulesets']);
         }
 
+        foreach($tmp_config as $name => $tmp) {
+            if (class_exists("Exakat\\Analyzer\\".str_replace('/', '\\', $name))) {
+                $this->config[$name] = $tmp;
+                unset($tmp_config[$name]);
+            } 
+        }
+
         if (!empty($tmp_config)) {
             display('Ignoring ' . count($tmp_config) . ' unkown directives : ' . implode(', ', array_keys($tmp_config)));
         }
@@ -183,6 +196,58 @@ class DotExakatYamlConfig extends Config {
     public function getRulesets() {
         return $this->rulesets;
     }
+
+    public function getConfig($dir_root = '') {
+        // $vendor
+        if ($this->config['include_dirs'] === array('/')) {
+            $include_dirs = 'include_dirs[] = "";';
+        } else {
+            $include_dirs = 'include_dirs[] = "' . implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs']) . "\";\n";
+        }
+        $ignore_dirs  = 'ignore_dirs[] = "' . implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs']) . "\";\n";
+        $file_extensions  = implode(',', $this->config['file_extensions']);
+        
+        $custom_configs = array();
+        
+        $iniFiles = glob("$dir_root/human/en/*/*.ini");
+        foreach($iniFiles as $file) {
+            $ini = parse_ini_file($file, INI_PROCESS_SECTIONS);
+            if (isset($ini['parameter1'])) {
+                $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
+            }
+        }
+        
+        foreach($this->config as $key => $value) {
+            if (strpos($key, '/') === false) {
+                continue;
+            }
+
+            foreach($value as $name => $values) {
+                if (isset($default[$key])) {
+                    $default[$key][$name] = $values;
+                }
+            }
+        }
+
+        $custom_configs = implode('', $custom_configs);
+
+        $configIni = array(
+'project'             => "{$this->config['project']}",
+'project_name'        => "{$this->config['project_name']}",
+'project_url'         => "{$this->config['project_url']}",
+'project_vcs'         => "{$this->config['project_vcs']}",
+'project_description' => "{$this->config['project_description']}",
+'project_branch'      => "{$this->config['project_branch']}",
+'project_tag'         => "{$this->config['project_tag']}",
+'include_dirs'        => $this->config['include_dirs'],
+'ignore_dirs'         => $this->config['ignore_dirs'],
+'file_extensions'     => $file_extensions,
+'custom'              => $default,
+        );
+        
+        return $yaml = Yaml::dump($configIni);
+    }
+
 }
 
 ?>
