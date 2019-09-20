@@ -72,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 12 Sep 2019 05:17:57 +0000
-.. comment: Generation hash : 9f6067c6b7be3026285170b4ebd26241fc590a60
+.. comment: Generation date : Fri, 20 Sep 2019 13:35:02 +0000
+.. comment: Generation hash : d57df981619ea0243225e70609a430c2a59ef277
 
 
 .. _analyze:
@@ -81,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 381 analysis
+Total : 384 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -270,10 +270,12 @@ Total : 381 analysis
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Empty Regex <no-empty-regex>`
+* :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
+* :ref:`No Literal For Reference <no-literal-for-reference>`
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Need For Else <no-need-for-else>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
@@ -302,9 +304,9 @@ Total : 381 analysis
 * :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
-* :ref:`Overwriten Source And Value <overwriten-source-and-value>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
+* :ref:`Overwritten Source And Value <overwritten-source-and-value>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
@@ -416,6 +418,7 @@ Total : 381 analysis
 * :ref:`Use Positive Condition <use-positive-condition>`
 * :ref:`Use System Tmp <use-system-tmp>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
+* :ref:`Use array_slice() <use-array\_slice()>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Used Once Property <used-once-property>`
@@ -470,7 +473,7 @@ Total : 381 analysis
 ClassReview
 +++++++++++
 
-Total : 31 analysis
+Total : 32 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -493,6 +496,7 @@ Total : 31 analysis
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
+* :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
@@ -1150,7 +1154,7 @@ Total : 44 analysis
 Security
 ++++++++
 
-Total : 41 analysis
+Total : 42 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1173,6 +1177,7 @@ Total : 41 analysis
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Net For Xml Load <no-net-for-xml-load>`
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
+* :ref:`No Weak SSL Crypto <no-weak-ssl-crypto>`
 * :ref:`Phpinfo <phpinfo>`
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`

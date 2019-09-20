@@ -59,6 +59,7 @@ Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all poss
 * Preferences
 * RadwellCodes
 * Security
+* Semantics
 * Simple
 * Stats
 * Suggestions
@@ -433,9 +434,20 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.6
+
+  * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
+  * Internet Domains (Type/UdpDomains ; Inventory)
+  * No Weak SSL Crypto (Security/NoWeakSSLCrypto)
+
 * 1.9.5
 
-  * Interfaces Is Not Implemented (Interfaces/IsNotImplemented)
+  * Dump/CollectLiterals (Dump/CollectLiterals ; Unassigned)
+  * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
+  * Magic Properties (Classes/MagicProperties)
+  * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
+  * No Literal For Reference (Functions/NoLiteralForReference ; Analyze)
+  * Use array_slice() (Performances/UseArraySlice ; Analyze)
 
 * 1.9.4
 
@@ -444,7 +456,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Dump)
   * Nested Ternary Without Parenthesis (Php/NestedTernaryWithoutParenthesis ; Appinfo, CompatibilityPHP74)
   * PHP 74 New Directives (Php/Php74NewDirective ; CompatibilityPHP73)
-  * Performances/UseArraySlice (Performances/UseArraySlice ; Under Work)
   * Should Use Explode Args (Structures/ShouldUseExplodeArgs ; Analyze)
   * Spread Operator For Array (Php/SpreadOperatorForArray ; Appinfo)
   * Too Many Array Dimensions (Arrays/TooManyDimensions)
@@ -508,7 +519,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Reflection Export() Is Deprecated (Php/ReflectionExportIsDeprecated ; CompatibilityPHP74)
   * Scalar Are Not Arrays (Php/ScalarAreNotArrays ; Analyze, CompatibilityPHP74)
   * Serialize Magic Method (Php/SerializeMagic ; Internal)
-  * Similar Integers (Type/SimilarIntegers ; Coding Conventions)
+  * Similar Integers (Type/SimilarIntegers ; Coding Conventions, Semantics)
   * Structures/MoveInsideFunction (Structures/MoveInsideFunction ; Unassigned)
   * Unbinding Closures (Functions/UnbindingClosures ; CompatibilityPHP74)
   * array_key_exists() Works On Arrays (Php/ArrayKeyExistsWithObjects ; Analyze, CompatibilityPHP74)
@@ -518,7 +529,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid mb_dectect_encoding() (Php/AvoidMbDectectEncoding ; Analyze)
   * Disconnected Classes (Classes/DisconnectedClasses)
   * Not Or Tilde (Structures/NotOrNot ; Preferences)
-  * Overwriten Source And Value (Structures/ForeachSourceValue ; Analyze, OneFile)
+  * Overwritten Source And Value (Structures/ForeachSourceValue ; Analyze, OneFile)
   * Php/Php74mbstrrpos3rdArg (Php/Php74mbstrrpos3rdArg ; CompatibilityPHP74)
   * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
 
@@ -805,7 +816,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Ambiguous Visibilities (Classes/AmbiguousVisibilities)
   * Hash Algorithms Incompatible With PHP 7.1- (Php/HashAlgos71 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
-  * Hash Algorithms Incompatible With PHP 7.4- (Php/HashAlgos74 ; Unassigned, CompatibilityPHP74)
+  * Hash Algorithms Incompatible With PHP 7.4- (Php/HashAlgos74 ; CompatibilityPHP74)
   * ext/csprng (Extensions/Extcsprng ; Appinfo)
 
 * 1.3.3
@@ -1676,7 +1687,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Octal Glossary (Type/Octal ; Appinfo)
   * Old Style Constructor (Classes/OldStyleConstructor ; Analyze, Appinfo, OneFile, ClearPHP, Simple)
   * Old Style __autoload() (Php/oldAutoloadUsage ; Analyze, OneFile, ClearPHP, Simple)
-  * One Letter Functions (Functions/OneLetterFunctions ; Coding Conventions)
+  * One Letter Functions (Functions/OneLetterFunctions ; Coding Conventions, Semantics)
   * One Object Operator Per Line (Classes/OneObjectOperatorPerLine ; Calisthenics)
   * One Variable String (Type/OneVariableStrings ; Analyze, RadwellCodes, Simple)
   * Only Static Methods (Classes/OnlyStaticMethods ; Internal)
@@ -2055,7 +2066,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-75 PHP error message detailled : 
+78 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2092,6 +2103,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo) <abstract-or-implements>`
 * :ref:`Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead <can't-throw-throwable>`
 * :ref:`Class x contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (x\:\:m1, x\:\:m2) <interfaces-is-not-implemented>`
+* :ref:`Could not check compatibility between xx\:\:bar(B $a) and foo\:\:bar(A $a), because class A is not available <incompatible-signature-methods-with-covariance>`
 * :ref:`Creating default object from empty value <undefined-variable>`
 * :ref:`Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar() <method-signature-must-be-compatible>`
 * :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods-with-covariance>`
@@ -2111,6 +2123,8 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Only variables should be passed by reference <typehinted-references>`
 * :ref:`Return value of foo() must be an instance of Bar, none returned  <typehint-must-be-returned>`
 * :ref:`The (real) cast is deprecated, use (float) instead <avoid-real>`
+* :ref:`The behavior of unparenthesized expressions containing both '.' and '+'/'-' will change in PHP 8: '+'/'-' will take a higher precedence <concat-and-addition>`
+* :ref:`The behavior of unparenthesized expressions containing both '.' and '>>'/'<<' will change in PHP 8: '<<'/'>>' will take a higher precedence <concat-and-addition>`
 * :ref:`The each() function is deprecated. This message will be suppressed on further calls <php-7.2-removed-functions>`
 * :ref:`The parent constructor was not called: the object is in an invalid state <must-call-parent-constructor>`
 * :ref:`Too few arguments to function foo(), 1 passed and exactly 2 expected <wrong-number-of-arguments>`
@@ -2251,14 +2265,15 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_key_exists() with objects <https://wiki.php.net/rfc/deprecations_php_7_4#array_key_exists_with_objects>`_
 * `array_map <http://php.net/array_map>`_
 * `array_search <http://php.net/array_search>`_
+* `array_slice <http://www.php.net/array_slice>`_
 * `array_unique <http://php.net/array_unique>`_
 * `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
@@ -2300,7 +2315,6 @@ List of external links mentionned in this documentation.
 * `Cmark <https://github.com/commonmark/cmark>`_
 * `Codeigniter <https://codeigniter.com/>`_
 * `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
-* `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
 * `compact <http://www.php.net/compact>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
@@ -2461,7 +2475,7 @@ List of external links mentionned in this documentation.
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
-* `htmlspecialchars <https://www.php.net/manual/en/function.htmlspecialchars.php>`_
+* `htmlspecialchars <https://www.php.net/htmlspecialchars>`_
 * `http://dist.exakat.io/ <http://dist.exakat.io/>`_
 * `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
@@ -2733,6 +2747,7 @@ List of external links mentionned in this documentation.
 * `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_
+* `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
@@ -2753,8 +2768,8 @@ List of external links mentionned in this documentation.
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2776,8 +2791,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -2974,6 +2989,7 @@ _______
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoBooleanAsDefault";
 |   analyzer[] = "Functions/NoClassAsTypehint";
+|   analyzer[] = "Functions/NoLiteralForReference";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/OnlyVariableForReference";
 |   analyzer[] = "Functions/OnlyVariablePassedByReference";
@@ -3002,6 +3018,7 @@ _______
 |   analyzer[] = "Interfaces/CouldUseInterface";
 |   analyzer[] = "Interfaces/EmptyInterface";
 |   analyzer[] = "Interfaces/IsNotImplemented";
+|   analyzer[] = "Interfaces/NoGaranteeForPropertyConstant";
 |   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Interfaces/UndefinedInterfaces";
 |   analyzer[] = "Interfaces/UselessInterfaces";
@@ -3018,6 +3035,7 @@ _______
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Performances/PrePostIncrement";
 |   analyzer[] = "Performances/StrposTooMuch";
+|   analyzer[] = "Performances/UseArraySlice";
 |   analyzer[] = "Php/ArrayKeyExistsWithObjects";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/AssignAnd";
@@ -3272,6 +3290,7 @@ ___________
 |   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Interfaces/IsNotImplemented";
+|   analyzer[] = "Interfaces/NoGaranteeForPropertyConstant";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
 |   analyzer[] = "Traits/SelfUsingTrait";| 
@@ -4004,6 +4023,7 @@ ________
 |   analyzer[] = "Security/NoEntIgnore";
 |   analyzer[] = "Security/NoNetForXmlLoad";
 |   analyzer[] = "Security/NoSleep";
+|   analyzer[] = "Security/NoWeakSSLCrypto";
 |   analyzer[] = "Security/RegisterGlobals";
 |   analyzer[] = "Security/SafeHttpHeaders";
 |   analyzer[] = "Security/SessionLazyWrite";

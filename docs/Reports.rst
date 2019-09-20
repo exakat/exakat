@@ -77,8 +77,11 @@ Each report is stored in its <project> folder, under the requested name.
 
 Reports may be generated at any time, during execution of the analysis (partial results) or later, even if another audit is running. 
 
+Reports descriptions
+--------------------
+
 Ambassador
-----------
+__________
 
 Ambassador is the most complete Exakat report. It used to be the default report, until Exakat 1.7.0
 
@@ -104,7 +107,7 @@ Ambassador is a HTML report format.
 Ambassador depends on the following 20 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
 
 Classes dependendies HTML
--------------------------
+_________________________
 
 This reports displays the class dependencies, based on definition usages.
 
@@ -126,7 +129,7 @@ Classes dependendies HTML is a HTML report format.
 Classes dependendies HTML doesn't depend on themes.
 
 Clustergrammer
---------------
+______________
 
 The Clustergrammar report format data for a clustergrammer diagramm.
 
@@ -142,7 +145,7 @@ Clustergrammer is a TEXT report format.
 Clustergrammer doesn't depend on themes.
 
 Code Flower
------------
+___________
 
 The Code Flower represents hierarchies in a code source.
 
@@ -162,7 +165,7 @@ Code Flower is a HTML report format.
 Code Flower doesn't depend on themes.
 
 Code Sniffer
-------------
+____________
 
 The CodeSniffer report exports in the CodeSniffer format.
 
@@ -188,7 +191,7 @@ Code Sniffer is a TEXT report format.
 Code Sniffer accepts any arbitrary list of results.
 
 Composer
---------
+________
 
 The Composer report provide elements for the require attribute in the composer.json.
 
@@ -227,7 +230,7 @@ Composer is a JSON report format.
 Composer depends on the following theme : Appinfo.
 
 Dependency Wheel
-----------------
+________________
 
 The DependencyWheel represents dependencies in a code source.
 
@@ -243,7 +246,7 @@ Dependency Wheel is a HTML report format.
 Dependency Wheel doesn't depend on themes.
 
 Diplomat
---------
+________
 
 The Diplomat is the default human readable report.
 
@@ -277,7 +280,7 @@ Diplomat is a HTML report format.
 Diplomat depends on the following 15 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Top10, Preferences, Appinfo, Appcontent, Suggestions.
 
 Exakatyaml
-----------
+__________
 
 Builds a list of ruleset, based on the number of issues from the previous audit.
 
@@ -841,7 +844,7 @@ Exakatyaml is a Yaml report format.
 Exakatyaml doesn't depend on themes.
 
 File dependendies
------------------
+_________________
 
 This reports displays the file dependencies, based on definition usages.
 
@@ -863,7 +866,7 @@ File dependendies is a DOT report format.
 File dependendies doesn't depend on themes.
 
 File dependendies HTML
-----------------------
+______________________
 
 This reports displays the file dependencies, based on definition usages.
 
@@ -889,7 +892,7 @@ File dependendies HTML is a HTML report format.
 File dependendies HTML doesn't depend on themes.
 
 History
--------
+_______
 
 The History report collects meta information between audits. It saves the values from the current audit into a separate 'history.sqlite' database.
 
@@ -911,7 +914,7 @@ History is a Sqlite report format.
 History doesn't depend on themes.
 
 Inventories
------------
+___________
 
 The Inventories report collects literals and names from the code.
 
@@ -971,7 +974,7 @@ Inventories is a CSV report format.
 Inventories depends on the following theme : Inventories.
 
 Json
-----
+____
 
 The JSON report exports in JSON format.
 
@@ -1027,7 +1030,7 @@ Json is a Json report format.
 Json accepts any arbitrary list of results.
 
 Marmelab
---------
+________
 
 The Marmelab report format data to use with a graphQL server.
 
@@ -1049,7 +1052,7 @@ Marmelab is a JSON report format.
 Marmelab depends on the following theme : Analyze.
 
 None
-----
+____
 
 None is the empty report. It runs the report generating stack, but doesn't produce any result. 
 
@@ -1060,7 +1063,7 @@ None is a None report format.
 None depends on the following theme : Any.
 
 Owasp
------
+_____
 
 The OWASP report is a security report.
 
@@ -1074,7 +1077,7 @@ Owasp is a HTML report format.
 Owasp depends on the following theme : Security.
 
 Perfile
--------
+_______
 
 The Perfile report lays out the results file per file.
 
@@ -1122,7 +1125,7 @@ Perfile is a Text report format.
 Perfile accepts any arbitrary list of results.
 
 PhpCompilation
---------------
+______________
 
 The PhpCompilation suggests a list of compilation directives when compiling the PHP binary, tailored for the code
 
@@ -1200,7 +1203,7 @@ PhpCompilation is a Text report format.
 PhpCompilation depends on the following theme : Appinfo.
 
 PhpConfiguration
-----------------
+________________
 
 The PhpConfiguration suggests a list of directives to check when setting up the hosting server, tailored for the code
 
@@ -1278,7 +1281,7 @@ PhpConfiguration is a Text report format.
 PhpConfiguration depends on the following theme : Appinfo.
 
 Phpcity
--------
+_______
 
 The Phpcity report represents your code as a city. 
 
@@ -1302,7 +1305,7 @@ Phpcity is a JSON report format.
 Phpcity doesn't depend on themes.
 
 Phpcsfixer
-----------
+__________
 
 The Phpcsfixer report provides a configuration file for php-cs-fixer, that automatically fixes issues found in related analysis in exakat.
 
@@ -1347,7 +1350,7 @@ Phpcsfixer is a JSON report format.
 Phpcsfixer depends on the following theme : php-cs-fixable.
 
 PlantUml
---------
+________
 
 The PlantUml export data structure to PlantUml format.
 
@@ -1364,7 +1367,7 @@ PlantUml is a puml report format.
 PlantUml doesn't depend on themes.
 
 RadwellCode
------------
+___________
 
 The RadwellCode is a report based on Oliver Radwell's [PHP Do And Don't](https://blog.radwell.codes/2016/11/php-dos-donts-aka-programmers-dont-like/).
 
@@ -1388,7 +1391,7 @@ RadwellCode is a Text report format.
 RadwellCode depends on the following theme : RadwellCodes.
 
 Sarb
-----
+____
 
 The Sarb report is a compatibility report with SARB
 
@@ -1432,7 +1435,7 @@ Sarb is a Json report format.
 Sarb accepts any arbitrary list of results.
 
 SimpleTable
------------
+___________
 
 The Simpletable is a simple table presentation.
 
@@ -1446,7 +1449,7 @@ SimpleTable is a HTML report format.
 SimpleTable doesn't depend on themes.
 
 Stats
------
+_____
 
 The Stats report collects various stats about the code.
 
@@ -1509,7 +1512,7 @@ Stats is a JSON report format.
 Stats depends on the following theme : Stats.
 
 Stubs
------
+_____
 
 Stubs produces a skeleton from the source code, with all defined structures : constants, functions, classes, interfaces, traits and namespaces. 
 
@@ -1529,7 +1532,7 @@ Stubs is a PHP report format.
 Stubs doesn't depend on themes.
 
 Text
-----
+____
 
 The Text report is a very simple text format.
 
@@ -1557,7 +1560,7 @@ Text is a Text report format.
 Text accepts any arbitrary list of results.
 
 Top10
------
+_____
 
 The top 10 is the companion report for the 'Top 10 classic PHP traps' presentation. 
 
@@ -1574,7 +1577,7 @@ Top10 is a HTML report format.
 Top10 depends on the following theme : Top10.
 
 Uml
----
+___
 
 The Uml exports data structure to UML format.
 
@@ -1595,7 +1598,7 @@ Uml is a dot report format.
 Uml doesn't depend on themes.
 
 Xml
----
+___
 
 The Xml report exports in XML format.
 
@@ -1615,7 +1618,7 @@ Xml is a XML report format.
 Xml accepts any arbitrary list of results.
 
 Yaml
-----
+____
 
 The Yaml report exports in Yaml format.
 

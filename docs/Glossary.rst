@@ -179,6 +179,10 @@ Glossary
 
       + :ref:`Use Array Functions <use-array-functions>`
 
+    + `array_splice()`
+
+      + :ref:`Use array_slice() <use-array\_slice()>`
+
     + `array_sum()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
@@ -372,6 +376,10 @@ Glossary
     + `curl_exec()`
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+
+    + `curl_setopt()`
+
+      + :ref:`No Weak SSL Crypto <no-weak-ssl-crypto>`
 
     + `curl_version()`
 
@@ -597,7 +605,7 @@ Glossary
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
-      + :ref:`Overwriten Source And Value <overwriten-source-and-value>`
+      + :ref:`Overwritten Source And Value <overwritten-source-and-value>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Should Yield With Key <should-yield-with-key>`
@@ -982,7 +990,7 @@ Glossary
       + :ref:`List Short Syntax <list-short-syntax>`
       + :ref:`List With Keys <list-with-keys>`
       + :ref:`No List With String <no-list-with-string>`
-      + :ref:`Overwriten Source And Value <overwriten-source-and-value>`
+      + :ref:`Overwritten Source And Value <overwritten-source-and-value>`
       + :ref:`Use List With Foreach <use-list-with-foreach>`
       + :ref:`list() May Omit Variables <list()-may-omit-variables>`
 
@@ -1561,6 +1569,7 @@ Glossary
       + :ref:`Substr To Trim <substr-to-trim>`
       + :ref:`Substring First <substring-first>`
       + :ref:`Use Basename Suffix <use-basename-suffix>`
+      + :ref:`Use array_slice() <use-array\_slice()>`
       + :ref:`strpos() Too Much <strpos()-too-much>`
 
     + `substr_replace()`

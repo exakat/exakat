@@ -7804,6 +7804,62 @@ This code avoid the PHP notice by padding the resulting array (see comment in Fr
     				$date = date("Y-m-d H:i:s", strtotime($date));
     			}
 
+Overwritten Source And Value
+============================
+
+.. _churchcrm-structures-foreachsourcevalue:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`overwritten-source-and-value`, in edusoho/vendor/symfony/symfony/src/Symfony/Component/VarDumper/Dumper/CliDumper.php:194. 
+
+$str is actually processed as an array (string of characters), and it is also modified along the way.
+
+.. code-block:: php
+
+    foreach ($str as $str) {
+                    if ($i < $m) {
+                        $str .= \n;
+                    }
+                    if (0 < $this->maxStringWidth && $this->maxStringWidth < $len = mb_strlen($str, 'UTF-8')) {
+                        $str = mb_substr($str, 0, $this->maxStringWidth, 'UTF-8');
+                        $lineCut = $len - $this->maxStringWidth;
+                    }
+                    //.... More code
+
+
+--------
+
+
+.. _expressionengine-structures-foreachsourcevalue:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`overwritten-source-and-value`, in system/ee/EllisLab/ExpressionEngine/Service/Theme/ThemeInstaller.php:595. 
+
+Looping over $filename. 
+
+.. code-block:: php
+
+    foreach (directory_map($to_dir) as $directory => $filename)
+    			{
+    				if (is_string($directory))
+    				{
+    					foreach ($filename as $filename)
+    					{
+    						unlink($to_dir.$directory.'/'.$filename);
+    					}
+    
+    					@rmdir($to_dir.$directory);
+    				}
+    				else
+    				{
+    					unlink($to_dir.$filename);
+    				}
+    			}
+
 Incompatible Signature Methods With Covariance
 ==============================================
 

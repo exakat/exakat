@@ -9,6 +9,8 @@ Summary
 * `Common Behavior`_
 * `Engine configuration`_
 * `Project Configuration`_
+* `In-code Configuration`_
+* `Commandline Configuration`_
 * `Configuring analysis to be run`_
 * `Specific analysis configurations`_
 
@@ -269,6 +271,61 @@ ignore_dirs and include_dirs are the option used to select files within a folder
 * including or ignoring files multiple times only has effect once
 
 include_dirs has priority over the `config.cache` configuration file. If a folder has been marked for exclusion in the `config.cache` file, it may be forced to be included by configuring its value with include_dirs in the `config.ini` file. 
+
+
+In-code Configuration
+---------------------
+
+In-code configuration is a configuration file that sits at the root of the code. When exakat finds it, it uses it for in-code auditing.
+
+The file is `.exakat.yml`, and is a valid YAML file. 
+
+In case the file is found but not valid, Exakat reverts to default value, and complains that the project is called '/unnamed/'. 
+
+
+
+
+Available Options
+#################
+
+Here are the currently available options in Exakat's project configuration file : projects/&lt;project name&gt;/config.ini
+
++-----------------------+-------------------------------------------------------------------------------------------+
+| Option                | Description                                                                               |
++=======================+===========================================================================================+
+| include_dirs[]        | This is the list of files and dir to include in the project's directory. It is chrooted   |
+|                       | in the project's folder. Values provided with a starting / are used as a path prefix.     |
+|                       | Values without / are used as a substring, anywhere in the path.                           |
+|                       | include_dirs are added AFTER ignore_dirs, so as to partially ignore a folder, such as     |
+|                       | the vendor folder from composer.                                                          |
++-----------------------+-------------------------------------------------------------------------------------------+
+| ignore_dirs[]         | This is the list of files and dir to ignore in the project's directory. It is chrooted in |
+|                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
+|                       | without / are used as a substring, anywhere in the path.                                  |
++-----------------------+-------------------------------------------------------------------------------------------+
+| file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others are     |
+|                       | ignored. All files bearing those extensions are subject to check, though they are         |
+|                       | scanned first for PHP tags before being analyzed. The extensions are comma separated,     |
+|                       | without dot.                                                                              |
+|                       | The default are : php, php3, inc, tpl, phtml, tmpl, phps, ctp                             |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_name          | This is the project name, as it appears at the top left in the Ambassador report.         |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_url           | This is the repository URL for the project. It is used to get the source for the project. |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_vcs           | This is the VCS used to fetch the project source.                                         |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_description   | This is the description of the project.                                                   |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_packagist     | This is the packagist name for the code, when the code is fetched with composer.          |
++-----------------------+-------------------------------------------------------------------------------------------+
+
+
+
+Commandline Configuration
+-------------------------
+
+Commandline configurations are detailled with each command, in the _Commands section.
 
 
 Specific analysis configurations

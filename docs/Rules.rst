@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 12 Sep 2019 05:17:57 +0000
-.. comment: Generation hash : 9f6067c6b7be3026285170b4ebd26241fc590a60
+.. comment: Generation date : Fri, 20 Sep 2019 13:35:02 +0000
+.. comment: Generation hash : d57df981619ea0243225e70609a430c2a59ef277
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4426,6 +4426,8 @@ This is counter-intuitive though: you rarely want to add or subtract concatenate
 
 
 This analysis reports any addition and concatenation that are mixed, without parenthesis. Addition also means substraction here, aka using `+` or `-`.
+
+The same applies to bitshift operations, ``<<`` and ``>>``. There is no RFC for this change.
 
 See also `Change the precedence of the concatenation operator <https://wiki.php.net/rfc/concatenation_precedence>`_.
 
@@ -15879,11 +15881,15 @@ No Class As Typehint
 
 Avoid using classes as typehint : always use interfaces. This way, different classes, or versions of classes may be passed as argument. The typehint is not linked to an implementation, but to signatures.
 
+A class is needed when the object is with properties : interfaces do not allow the specifications of properties.
+
 .. code-block:: php
 
    <?php
    
    class X {
+       public $p = 1;
+   
        function foo() {}
    }
    
@@ -15900,6 +15906,10 @@ Avoid using classes as typehint : always use interfaces. This way, different cla
    // later, newer versions of X may get another name, but still implement I, and still pass
    function bar2(I $x) {
        $x->foo();
+   }
+   
+   function bar3(I $x) {
+       echo $x->p;
    }
    
    ?>
@@ -16175,7 +16185,7 @@ It is recommended to use the other configuration options : ENT_COMPAT, ENT_QUOTE
    ?>
 
 
-See also `htmlspecialchars <https://www.php.net/manual/en/function.htmlspecialchars.php>`_ and `Deletion of Code Points <http://unicode.org/reports/tr36/#Deletion_of_Noncharacters>`_.
+See also `htmlspecialchars <https://www.php.net/htmlspecialchars>`_ and `Deletion of Code Points <http://unicode.org/reports/tr36/#Deletion_of_Noncharacters>`_.
 
 
 Suggestions
@@ -16240,6 +16250,63 @@ Suggestions
 +-------------+-----------------------------------------+
 | Examples    | :ref:`tikiwiki-structures-noemptyregex` |
 +-------------+-----------------------------------------+
+
+
+
+.. _no-garantee-for-property-constant:
+
+No Garantee For Property Constant
+#################################
+
+
+When using an interface as a typehint, properties are not necesseraly available.
+
+An interface is a template for a class, which specify the minimum amount of methods and constants. Properties are never defined in an interface, an should not be relied upon.
+
+.. code-block:: php
+
+   <?php
+   
+   interface i {
+       function m () ;
+   }
+   
+   class x implements i {
+       public $p = 1;
+       
+       function m() {
+           return $this->p;
+       }
+   }
+   
+   function foo(i $i, x $x) {
+       // this is invalid, as $p is not defined in i, so it may be not available
+       echo $i->p;
+       
+       // this is valid, as $p is defined in $x
+       echo $x->p;
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use classes for typehint when properties are accessed
+* Only use methods and constants which are available in the interface
+
++-------------+------------------------------------------+
+| Short name  | Interfaces/NoGaranteeForPropertyConstant |
++-------------+------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`       |
++-------------+------------------------------------------+
+| Severity    | Minor                                    |
++-------------+------------------------------------------+
+| Time To Fix | Quick (30 mins)                          |
++-------------+------------------------------------------+
 
 
 
@@ -16484,6 +16551,29 @@ See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migrat
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _no-literal-for-reference:
+
+No Literal For Reference
+########################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------+
+| Short name  | Functions/NoLiteralForReference |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
@@ -17458,6 +17548,38 @@ Beware that `substr() <http://www.php.net/substr>`_ and ``$v[$pos]`` are similar
 +-------------+--------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                 |
 +-------------+--------------------------------------------------------------------------------------------------+
+
+
+
+.. _no-weak-ssl-crypto:
+
+No Weak SSL Crypto
+##################
+
+
+When enabling PHP's stream SSL, it is important to use safe protocol. 
+
+All the SSL protocol, and TLS (its successor) v 1.0 are not unsafe. The best is to use the most recent TLS, the 1.2. 
+
+stream_socket_enable_crypto() and `curl_setopt() <http://www.php.net/curl_setopt>`_ are checked.
+
+See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>s`_ an `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+--------------------------+
+| Short name  | Security/NoWeakSSLCrypto |
++-------------+--------------------------+
+| Rulesets    | :ref:`Security`          |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 
@@ -18644,68 +18766,6 @@ Optional characteristics, like final, static... are not specified. Special metho
 
 
 
-.. _overwriten-source-and-value:
-
-Overwriten Source And Value
-###########################
-
-
-In a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_, it is best to keep source and values distinct. Otherwise, they overwrite each other.
-
-Since PHP 7.0, PHP makes a copy of the orginal source, then works on it. This makes possible to use the same name for the source and the values.
-
-.. code-block:: php
-
-   <?php
-   
-   // displays 0-1-2-3-3
-   $array = range(0, 3);
-   foreach($array as $array) {
-       print $array . '-';
-   }
-   print_r($array);
-   
-   
-   /* displays 0-1-2-3-Array
-   (
-       [0] => 0
-       [1] => 1
-       [2] => 2
-       [3] => 3
-   )
-   */
-   $array = range(0, 3);
-   foreach($array as $v) {
-       print $v . '-';
-   }
-   print_r($array);
-   
-   ?>
-
-
-When the source is used as the value, the elements in the array are successively assigned to itself. After the loop, the original array has been replaced by its last element.
-
-The same applies to the index, or to any variable in a `list() <http://www.php.net/list>`_ structure, used in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Keep the source, the index and the values distinct
-
-+-------------+-------------------------------+
-| Short name  | Structures/ForeachSourceValue |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Minor                         |
-+-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
-+-------------+-------------------------------+
-
-
-
 .. _overwritten-exceptions:
 
 Overwritten Exceptions
@@ -18783,6 +18843,70 @@ This analysis doesn't take into account the distance between two assignations : 
 +-------------+-------------------------------+
 | Time To Fix | Instant (5 mins)              |
 +-------------+-------------------------------+
+
+
+
+.. _overwritten-source-and-value:
+
+Overwritten Source And Value
+############################
+
+
+In a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_, it is best to keep source and values distinct. Otherwise, they overwrite each other.
+
+Since PHP 7.0, PHP makes a copy of the orginal source, then works on it. This makes possible to use the same name for the source and the values.
+
+.. code-block:: php
+
+   <?php
+   
+   // displays 0-1-2-3-3
+   $array = range(0, 3);
+   foreach($array as $array) {
+       print $array . '-';
+   }
+   print_r($array);
+   
+   
+   /* displays 0-1-2-3-Array
+   (
+       [0] => 0
+       [1] => 1
+       [2] => 2
+       [3] => 3
+   )
+   */
+   $array = range(0, 3);
+   foreach($array as $v) {
+       print $v . '-';
+   }
+   print_r($array);
+   
+   ?>
+
+
+When the source is used as the value, the elements in the array are successively assigned to itself. After the loop, the original array has been replaced by its last element.
+
+The same applies to the index, or to any variable in a `list() <http://www.php.net/list>`_ structure, used in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep the source, the index and the values distinct
+
++-------------+-------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/ForeachSourceValue                                                                         |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                        |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                 |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                       |
++-------------+-------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-structures-foreachsourcevalue`, :ref:`expressionengine-structures-foreachsourcevalue` |
++-------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -29731,6 +29855,60 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 +-------------+----------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                  |
 +-------------+----------------------------------------------------------------+
+
+
+
+.. _use-array\_slice():
+
+Use array_slice()
+#################
+
+
+Array_slice is de equivalent of `substr() <http://www.php.net/substr>`_ for arrays.
+
+`array_splice() <http://www.php.net/array_splice>`_ is also possible, to remove a portion of array inside the array, not at the ends. This has no equivalent for strings.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range(0, 9);
+   
+   // Extract the 5 first elements
+   print_r(array_slice($array, 0, 5));
+   
+   // Extract the 4 last elements
+   print_r(array_slice($array, -4));
+   
+   // Extract the 2 central elements : 4 and 5
+   print_r(array_splice($array, 4, 2));
+   
+   // slow way to remove the last elementst of an array
+   for($i = 0; $i < 4) {
+       array_pop($array);
+   }
+   
+   ?>
+
+
+See also `array_slice <http://www.php.net/array_slice>`_ and `array_splice <http://www.php.net/array_splice>`_.
+         
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------+
+| Short name  | Performances/UseArraySlice |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
 
 
 
