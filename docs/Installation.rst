@@ -41,30 +41,30 @@ For installation, curl or wget, and zip are needed.
 Download Exakat
 ---------------
 
-You can download exakat directly from `http://dist.exakat.io/ <http://dist.exakat.io/>`_. 
+You can download exakat directly from `https://www.exakat.io/ <https://www.exakat.io/>`_. 
 
-This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_. 
+This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `https://www.exakat.io/index.php?file=latest <https://www.exakat.io/index.php?file=latest>`_. 
 
 For each version, MD5 and SHA256 signatures are available. The downloaded MD5 must match the one in the related .md5 file. The .md5 also has the version number, for extra check.
 
 ::
 
-    curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
+    curl -o exakat.phar https://www.exakat.io/index.php?file=latest
     
-    curl -o exakat.phar.md5 http://dist.exakat.io/index.php?file=latest.md5
+    curl -o exakat.phar.md5 https://www.exakat.io/index.php?file=latest.md5
     //22110fe2fa1b412f5d2f4b716947760d  exakat-1.2.0.phar
     md5sum exakat.phar.md5
     // Example : 
     //22110fe2fa1b412f5d2f4b716947760d  exakat.phar
     
-    curl -o exakat.phar.sha256 http://dist.exakat.io/index.php?file=latest.sha256
+    curl -o exakat.phar.sha256 https://www.exakat.io/index.php?file=latest.sha256
     //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat-1.2.0.phar
     sha256sum exakat.phar.md5
     // Example : 
     //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat.phar
 
     // Check with GPG signature
-    curl -o exakat.sig http://dist.exakat.io/index.php?file=latest.sig
+    curl -o exakat.sig https://www.exakat.io/index.php?file=latest.sig
     // Optional step : Download the Key
     gpg --recv-keys 5EDF7EA4
     // Check with GPG signature
@@ -89,8 +89,8 @@ This is the installation script for Exakat and tinkergraph 3.4.3.
 
     mkdir exakat
     cd exakat
-    curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.4.3-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
+    curl -o exakat.phar https://www.exakat.io/index.php?file=latest
+    curl -o apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
@@ -160,8 +160,8 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
 
     mkdir exakat
     cd exakat
-    wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.4.3-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
+    wget -O exakat.phar https://www.exakat.io/index.php?file=latest
+    wget -O apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
