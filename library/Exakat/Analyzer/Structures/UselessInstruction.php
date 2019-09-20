@@ -82,6 +82,7 @@ class UselessInstruction extends Analyzer {
              ->hasNoIn('FINAL')
              ->outIs('EXPRESSION')
              ->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->hasIn('DEFINITION')
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
