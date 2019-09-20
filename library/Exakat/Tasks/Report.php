@@ -24,7 +24,6 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
@@ -70,8 +69,6 @@ class Report extends Tasks {
         if (empty($row) || ($row[0] === 0)) {
             throw new NoDumpYet($this->config->project);
         }
-
-        Analyzer::$datastore = $this->datastore;
 
         foreach($this->config->project_reports as $format) {
             $reportConfig = new ReportConfig($format, $this->config);
