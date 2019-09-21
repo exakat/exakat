@@ -61,91 +61,91 @@ class Precedence {
                         'T_BANG'                        => 6,
                         'T_REFERENCE'                   => 6, // Special for reference's usage of &
 
-                        'T_SLASH'                       => 7,
-                        'T_STAR'                        => 7,
-                        'T_PERCENTAGE'                  => 7,
+                        'T_YIELD'                       => 9,
+                        'T_YIELD_FROM'                  => 9,
 
-                        'T_YIELD'                       => 7,
-                        'T_YIELD_FROM'                  => 7,
+                        'T_SLASH'                       => 10,
+                        'T_STAR'                        => 10,
+                        'T_PERCENTAGE'                  => 10,
 
-                        'T_PLUS'                        => 8,
-                        'T_MINUS'                       => 8,
-                        'T_DOT'                         => 8,
+                        'T_PLUS'                        => 18,
+                        'T_MINUS'                       => 18,
+                        'T_DOT'                         => 18,
 
-                        'T_SR'                          => 9,
-                        'T_SL'                          => 9,
+                        'T_SR'                          => 20,
+                        'T_SL'                          => 20,
 
-                        'T_IS_SMALLER_OR_EQUAL'         => 10,
-                        'T_IS_GREATER_OR_EQUAL'         => 10,
-                        'T_GREATER'                     => 10,
-                        'T_SMALLER'                     => 10,
+                        'T_IS_SMALLER_OR_EQUAL'         => 30,
+                        'T_IS_GREATER_OR_EQUAL'         => 30,
+                        'T_GREATER'                     => 30,
+                        'T_SMALLER'                     => 30,
 
-                        'T_IS_EQUAL'                    => 11,
-                        'T_IS_NOT_EQUAL'                => 11, // Double operator
-                        'T_IS_IDENTICAL'                => 11,
-                        'T_IS_NOT_IDENTICAL'            => 11,
-                        'T_SPACESHIP'                   => 11,
+                        'T_IS_EQUAL'                    => 37,
+                        'T_IS_NOT_EQUAL'                => 37, // Double operator
+                        'T_IS_IDENTICAL'                => 37,
+                        'T_IS_NOT_IDENTICAL'            => 37,
+                        'T_SPACESHIP'                   => 37,
 
-                        'T_AND'                         => 12,    // &
+                        'T_AND'                         => 42,    // &
 
-                        'T_XOR'                         => 13,    // ^
+                        'T_XOR'                         => 43,    // ^
 
-                        'T_OR'                          => 14,     // |
+                        'T_OR'                          => 54,     // |
 
-                        'T_BOOLEAN_AND'                 => 15, // &&
+                        'T_BOOLEAN_AND'                 => 65, // &&
 
-                        'T_BOOLEAN_OR'                  => 16, // ||
+                        'T_BOOLEAN_OR'                  => 76, // ||
 
-                        'T_COALESCE'                    => 17,
+                        'T_COALESCE'                    => 87,
 
-                        'T_QUESTION'                    => 18,
+                        'T_QUESTION'                    => 98,
 
-                        'T_EQUAL'                       => 19,
-                        'T_PLUS_EQUAL'                  => 19,
-                        'T_AND_EQUAL'                   => 19,
-                        'T_CONCAT_EQUAL'                => 19,
-                        'T_DIV_EQUAL'                   => 19,
-                        'T_MINUS_EQUAL'                 => 19,
-                        'T_MOD_EQUAL'                   => 19,
-                        'T_MUL_EQUAL'                   => 19,
-                        'T_OR_EQUAL'                    => 19,
-                        'T_POW_EQUAL'                   => 19,
-                        'T_SL_EQUAL'                    => 19,
-                        'T_SR_EQUAL'                    => 19,
-                        'T_XOR_EQUAL'                   => 19,
-                        'T_COALESCE_EQUAL'              => 19,
+                        'T_EQUAL'                       => 99,
+                        'T_PLUS_EQUAL'                  => 99,
+                        'T_AND_EQUAL'                   => 99,
+                        'T_CONCAT_EQUAL'                => 99,
+                        'T_DIV_EQUAL'                   => 99,
+                        'T_MINUS_EQUAL'                 => 99,
+                        'T_MOD_EQUAL'                   => 99,
+                        'T_MUL_EQUAL'                   => 99,
+                        'T_OR_EQUAL'                    => 99,
+                        'T_POW_EQUAL'                   => 99,
+                        'T_SL_EQUAL'                    => 99,
+                        'T_SR_EQUAL'                    => 99,
+                        'T_XOR_EQUAL'                   => 99,
+                        'T_COALESCE_EQUAL'              => 99,
 
-                        'T_LOGICAL_AND'                 => 20, // and
+                        'T_LOGICAL_AND'                 => 100, // and
 
-                        'T_LOGICAL_XOR'                 => 21, // xor
+                        'T_LOGICAL_XOR'                 => 101, // xor
 
-                        'T_LOGICAL_OR'                  => 22, // or
+                        'T_LOGICAL_OR'                  => 102, // or
 
-                        'T_ECHO'                        => 30,
-                        'T_HALT_COMPILER'               => 30,
-                        'T_PRINT'                       => 30,
-                        'T_INCLUDE'                     => 30,
-                        'T_INCLUDE_ONCE'                => 30,
-                        'T_REQUIRE'                     => 30,
-                        'T_REQUIRE_ONCE'                => 30,
-                        'T_DOUBLE_ARROW'                => 30,
+                        'T_ECHO'                        => 110,
+                        'T_HALT_COMPILER'               => 110,
+                        'T_PRINT'                       => 110,
+                        'T_INCLUDE'                     => 110,
+                        'T_INCLUDE_ONCE'                => 110,
+                        'T_REQUIRE'                     => 110,
+                        'T_REQUIRE_ONCE'                => 110,
+                        'T_DOUBLE_ARROW'                => 110,
 
-                        'T_RETURN'                      => 31,
-                        'T_THROW'                       => 31,
-                        'T_COLON'                       => 31,
-                        'T_COMMA'                       => 31,
-                        'T_CLOSE_TAG'                   => 31,
-                        'T_CLOSE_PARENTHESIS'           => 31,
-                        'T_CLOSE_BRACKET'               => 31,
-                        'T_CLOSE_CURLY'                 => 31,
-                        'T_AS'                          => 31,
-                        'T_CONTINUE'                    => 31,
-                        'T_BREAK'                       => 31,
-                        'T_ELLIPSIS'                    => 31,
-                        'T_GOTO'                        => 31,
-                        'T_INSTEADOF'                   => 31,
+                        'T_RETURN'                      => 121,
+                        'T_THROW'                       => 121,
+                        'T_COLON'                       => 121,
+                        'T_COMMA'                       => 121,
+                        'T_CLOSE_TAG'                   => 121,
+                        'T_CLOSE_PARENTHESIS'           => 121,
+                        'T_CLOSE_BRACKET'               => 121,
+                        'T_CLOSE_CURLY'                 => 121,
+                        'T_AS'                          => 121,
+                        'T_CONTINUE'                    => 121,
+                        'T_BREAK'                       => 121,
+                        'T_ELLIPSIS'                    => 121,
+                        'T_GOTO'                        => 121,
+                        'T_INSTEADOF'                   => 121,
 
-                        'T_SEMICOLON'                   => 32,
+                        'T_SEMICOLON'                   => 132,
     );
 
     public function __construct($phpVersion) {
