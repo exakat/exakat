@@ -48,6 +48,7 @@ class CreateMagicProperty extends Analyzer {
              ->optional(
                 $this->side()
                      ->inIs('DEFINITION')
+                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
                      ->prepareSide()
@@ -75,6 +76,7 @@ class CreateMagicProperty extends Analyzer {
              ->optional(
                 $this->side()
                      ->inIs('DEFINITION')
+                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
                      ->prepareSide()
