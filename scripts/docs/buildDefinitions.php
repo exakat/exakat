@@ -308,7 +308,7 @@ class Docs {
         $versions = array();
         foreach($files as $file) {
             $folder = basename(dirname($file));
-            if ($folder === 'Reports' || $folder == 'DSL') { 
+            if ($folder === 'Reports' || $folder === 'DSL' || $folder === 'Rulesets') { 
                 continue; 
             }
 
@@ -331,14 +331,11 @@ SQL
 
             // Only handling 2 parameters max
             $ini = parse_ini_file($file, true);
-            if (isset($ini['parameter1']) && $row['categories'] != 'Appinfo') {
-                $this->parametered_analysis .= $this->rst_link($ini['name'], $this->rst_anchor($ini['name'])).PHP_EOL.
-'  + '.$ini['parameter1']['name'].' : '.$ini['parameter1']['default'].PHP_EOL.PHP_EOL.
-'    + '.$ini['parameter1']['description'].PHP_EOL;
-                if (isset($ini['parameter2'])) {
-                $this->parametered_analysis .= 
-'  + '.$ini['parameter2']['name'].' : '.$ini['parameter2']['default'].PHP_EOL.
-'    + '.$ini['parameter2']['description'].PHP_EOL;
+            for($i = 1; $i < 3; ++$i) {
+                if (isset($ini["parameter$i"]) && $row['categories'] != 'Appinfo') {
+                    $this->parametered_analysis .= $this->rst_link($ini['name'], $this->rst_anchor($ini['name'])).PHP_EOL.
+'  + '.$ini["parameter$i"]['name'].' : '.$ini["parameter$i"]['default'].PHP_EOL.PHP_EOL.
+'    + '.$ini["parameter$i"]['description'].PHP_EOL;
                 }
             }
             
@@ -818,7 +815,12 @@ SQL;
             $analyzers = explode(',', $row['analyzers']);
             sort($analyzers);
             $analyzers = implode(',', $analyzers);
-            $config[] = "\n.. _ruleset_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
+            $ini = @parse_ini_file("./human/en/Rulesets/$row[name].ini");
+            if (!isset($ini['description'])) {
+                print "Missing ./human/en/Rulesets/$row[name].ini\n";
+                $ini['description'] = '';
+            }
+            $config[] = "\n.. _ruleset_ini_".strtolower($row['name']).":\n\n".$row['name']."\n$ini[description]\n".str_repeat('_', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
         }
         
         $this->ini_ruleset_config = count($list)." rulesets detailled here : \n\n* ".implode("\n* ", $list)."\n\n\n".implode("\n\n", $config);
