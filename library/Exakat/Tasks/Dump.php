@@ -148,14 +148,6 @@ class Dump extends Tasks {
             $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
-            $this->collectParameterCounts();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Parameter Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $begin = $end;
-            $this->collectLocalVariableCounts();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Local Variable Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $begin = $end;
             $this->collectMethodsCounts();
             $end = microtime(TIME_AS_NUMBER);
             $this->log->log( 'Collected Method Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -2491,20 +2483,6 @@ GREMLIN
 g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
 GREMLIN;
         $this->collectHashCounts($query, 'Class Depth');
-    }
-
-    private function collectParameterCounts() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
-GREMLIN;
-        $this->collectHashCounts($query, 'ParameterCounts');
-    }
-
-    private function collectLocalVariableCounts() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by( __.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap('m'); 
-GREMLIN;
-        $this->collectHashCounts($query, 'LocalVariableCounts');
     }
 
     private function collectMethodsCounts() {
