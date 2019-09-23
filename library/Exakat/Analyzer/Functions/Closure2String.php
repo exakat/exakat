@@ -26,50 +26,22 @@ use Exakat\Analyzer\Analyzer;
 
 class Closure2String extends Analyzer {
     public function analyze() {
-        // function ($x) { return strtoupper($x);}
+        // function ($x) { return strtoupper($x);} => 'foo', 'X::foo'
+        // function ($x) use ($a) { return $a->b($x);} = array($var, 'method')
         $this->atomIs('Closure')
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
-             ->atomIs(array('Functioncall', 'Staticmethodcall'))
+             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             // Avoid extra arguments that can't be set from outside
              ->not(
                 $this->side()
                      ->outIs('ARGUMENT')
                      ->atomIs(array_merge(self::$CALLS,
                                           array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
              )
-
-             ->outIsIE('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // function ($x) use ($a) { return $a->b($x);}
-        // array($a, 'b')
-        $this->atomIs('Closure')
-             ->outIs('BLOCK')
-             ->is('count', 1)
-             ->outIs('EXPRESSION')
-             ->atomIs('Return')
-             ->outIs('RETURN')
-             ->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->inIs('METHOD')
-
-             ->not(
-                $this->side()
-                     ->outIs('ARGUMENT')
-                     ->atomIs(array_merge(self::$CALLS,
-                                          array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
-              )
-              
-              ->outIs('OBJECT')
-              ->raw('coalesce( __.in("DEFINITION").in("USE"),
-                               __.hasLabel("This")
-              )')
 
              ->back('first');
         $this->prepareQuery();
