@@ -28,13 +28,21 @@ class CreateDefaultValues extends Analyzer {
     public function analyze() {
         // Link initial values for containers
         $this->atomIs(array('Variabledefinition', 'Staticdefinition' ,'Globaldefinition', 'Staticdefinition', 'Virtualproperty', 'Propertydefinition', 'Parametername'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('DEFINITION')
-              ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-              ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
-              ->outIs('RIGHT')
-              ->addEFrom('DEFAULT', 'first')
-              ->back('first');
+             ->_as('results')
+             ->outIs('DEFINITION')
+             ->inIs('LEFT')
+             ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+             ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+             ->outIs('RIGHT')
+             ->optional(
+               $this->side()
+                    ->atomIs('Assignation')
+                    ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+                    ->outIs('RIGHT')
+                    ->prepareSide()
+             )
+             ->addEFrom('DEFAULT', 'first')
+             ->back('results');
         $this->prepareQuery();
     }
 }
