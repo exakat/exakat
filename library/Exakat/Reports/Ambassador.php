@@ -4981,10 +4981,12 @@ HTML;
         $results->load();
         
         $expr = $results->getColumn('fullcode');
+        $expr = array_map(function($x) { return trim($x, '{}');}, $expr);
         $counts = array_count_values($expr);
 
         $expressions = '';
         foreach($results->toArray() as $row) {
+            $row['fullcode'] = trim($row['fullcode'], '{}');
             $fullcode = PHPSyntax($row['fullcode']);
             $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
         }
