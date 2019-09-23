@@ -28,6 +28,7 @@ class OnlyVariablePassedByReference extends Analyzer {
     public function dependsOn() {
         return array('Complete/CreateDefaultValues',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
                      'Complete/SetClassMethodRemoteDefinition',
                     );
     }
