@@ -5,6 +5,7 @@
         ++$a;
         foo( $c, ...$b);
         foo( $cccd, ...$bbbd);
+        foo($xxx);
     }
 
 ?>
