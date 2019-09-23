@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
     public function analyze() {
+        // (new x)->foo()
         $this->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
               ->hasNoIn('DEFINITION')
@@ -36,6 +37,12 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->outIs('OBJECT')
               ->atomIs('Parenthesis', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CODE')
+              ->optional(
+                $this->side()
+                     ->atomIs('Assignation')
+                     ->outIs('RIGHT')
+                     ->prepareSide()
+              )
               ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')  // No check on atoms :
@@ -46,9 +53,10 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
+        // (new x)::foo()
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
               ->_as('member')
               ->hasNoIn('DEFINITION')
@@ -59,6 +67,12 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->outIs('OBJECT')
               ->atomIs('Parenthesis', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CODE')
+              ->optional(
+                $this->side()
+                     ->atomIs('Assignation')
+                     ->outIs('RIGHT')
+                     ->prepareSide()
+              )
               ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')  // No check on atoms :
@@ -68,8 +82,98 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
+
+        // (new x)::foo()
+        $this->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs('Parenthesis', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('CODE')
+              ->optional(
+                $this->side()
+                     ->atomIs('Assignation')
+                     ->outIs('RIGHT')
+                     ->prepareSide()
+              )
+              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')  // No check on atoms :
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->back('first');
+        $this->prepareQuery();
+
+        // (new x)::foo()
+        $this->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs('Parenthesis', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('CODE')
+              ->optional(
+                $this->side()
+                     ->atomIs('Assignation')
+                     ->outIs('RIGHT')
+                     ->prepareSide()
+              )
+              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')  // No check on atoms :
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member')
+              ->back('first');
+        $this->prepareQuery();
+
+        // (new x)::FOO
+        $this->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('constant')
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->atomIs('Name', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs('Parenthesis', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('CODE')
+              ->optional(
+                $this->side()
+                     ->atomIs('Assignation')
+                     ->outIs('RIGHT')
+                     ->prepareSide()
+              )
+              ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NEW')
+              ->inIs('DEFINITION')  // No check on atoms :
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'constant')
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
