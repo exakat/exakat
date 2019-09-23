@@ -200,7 +200,7 @@ class Initproject extends Tasks {
         }
 
         rename($tmpPath, $finalPath);
-        $projectConfig->writeConfig();
+        file_put_contents("{$this->config->project_dir}/config.ini", $projectConfig->getConfig($this->config->dir_root));
         $this->datastore = Datastore::getDatastore($this->config, Datastore::CREATE);
 
         $this->datastore->addRow('hash', array('status' => 'Cloned',

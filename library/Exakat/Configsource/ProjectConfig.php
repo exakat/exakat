@@ -194,9 +194,9 @@ class ProjectConfig extends Config {
         $file_extensions  = implode(',', $this->config['file_extensions']);
         
         $custom_configs = array();
-        
-        print "$dir_root/human/en/*/*.ini";
+
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
+        $default = array();
         foreach($iniFiles as $file) {
             $ini = parse_ini_file($file, INI_PROCESS_SECTIONS);
             if (isset($ini['parameter1'])) {
