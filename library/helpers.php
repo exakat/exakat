@@ -682,4 +682,13 @@ function array_collect_by(array &$array, $key, $value) {
     }
 }
 
+function readIniPercentage($value) {
+    $return = abs((int) $value);
+    $return = max(0, $return);
+    $return = min(100, $return);
+    $return /= 100;
+
+    return $return;
+}
+
 ?>
