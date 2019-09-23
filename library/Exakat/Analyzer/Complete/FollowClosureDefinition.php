@@ -26,6 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class FollowClosureDefinition extends Analyzer {
     public function analyze() {
+        // immediate usage : in parenthesis
+        $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+             ->inIsIE('RIGHT') // Skip all $closure = 
+              ->inIs('CODE')
+              ->atomIs('Parenthesis')
+              ->inIs('NAME')
+              ->atomIs('Functioncall')
+              ->addETo('DEFINITION', 'first')
+              ->back('first');
+        $this->prepareQuery();
+
         // local usage
         $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
