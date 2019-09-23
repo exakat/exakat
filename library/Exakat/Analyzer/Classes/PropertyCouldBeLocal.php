@@ -33,25 +33,32 @@ class PropertyCouldBeLocal extends Analyzer {
              ->isNot('static', true)
              ->is('visibility', 'private')
              ->inIs('PPP')
+             ->atomIs(array('Class', 'Classanonymous', 'Trait'))
              ->filter(
                   $this->side()
                        ->outIs('METHOD')
-                       ->not( $this->side()
-                                   ->is('static', true)
-                            )
+                       ->isNot('static', true)
+                       ->count()
+                       ->raw('is(gt(1))')
+             )
+             ->filter(
+                  $this->side()
+                       ->outIs('METHOD')
+                       ->isNot('static', true)
                        ->filter(
                             $this->side()
                                  ->outIs('BLOCK')
                                  ->atomInsideNoDefinition('Member')
-                                 ->filter( $this->side()
-                                                ->outIs('OBJECT')
-                                                ->atomIs('This')
+                                 ->filter( 
+                                        $this->side()
+                                             ->outIs('OBJECT')
+                                             ->atomIs('This')
                                          )
                                  ->outIs('MEMBER')
                                  ->samePropertyAs('code', 'member')
                        )
                        ->count()
-                       ->isEqual(1)
+                       ->raw('is(eq(1))')
             )
             ->back('first');
         $this->prepareQuery();
@@ -64,6 +71,13 @@ class PropertyCouldBeLocal extends Analyzer {
              ->is('visibility', 'private')
              ->inIs('PPP')
              ->savePropertyAs('fullnspath', 'fnp')
+
+             ->filter(
+                  $this->side()
+                       ->outIs('METHOD')
+                       ->count()
+                       ->raw('is(gt(1))')
+             )
              ->filter(
                 $this->side()
                      ->outIs('METHOD')
@@ -78,7 +92,7 @@ class PropertyCouldBeLocal extends Analyzer {
                              ->samePropertyAs('code', 'member')
                      )
                      ->count()
-                     ->isEqual(1)
+                     ->raw('is(eq(1))')
              )
             ->back('first');
         $this->prepareQuery();
