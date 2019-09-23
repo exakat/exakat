@@ -1952,7 +1952,6 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($c as $row) {
-            print_r($row);
             $valuesSQL[] = "('".implode("', '", $row)."') \n";
         }
 
