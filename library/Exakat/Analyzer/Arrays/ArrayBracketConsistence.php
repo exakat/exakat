@@ -26,8 +26,10 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayBracketConsistence extends Analyzer {
+    protected $array_ratio = 10;
 
     public function analyze() {
+        $this->array_ratio = readIniPercentage($this->array_ratio);
 
         $mapping = <<<'GREMLIN'
 x2 = it.get().value("token");
@@ -59,7 +61,7 @@ GREMLIN;
             return;
         }
 
-        $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
+        $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < $this->array_ratio; });
         if (empty($types)) {
             return;
         }
