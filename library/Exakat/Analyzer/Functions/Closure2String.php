@@ -28,12 +28,17 @@ class Closure2String extends Analyzer {
     public function analyze() {
         // function ($x) { return strtoupper($x);} => 'foo', 'X::foo'
         // function ($x) use ($a) { return $a->b($x);} = array($var, 'method')
-        $this->atomIs('Closure')
+        $this->atomIs(array('Closure', 'Arrowfunction'))
              ->outIs('BLOCK')
-             ->is('count', 1)
-             ->outIs('EXPRESSION')
-             ->atomIs('Return')
-             ->outIs('RETURN')
+             ->optional(
+                // for closure only
+                $this->side()
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Return')
+                     ->outIs('RETURN')
+                     ->prepareSide()
+             )
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
              // Avoid extra arguments that can't be set from outside
              ->not(
@@ -41,6 +46,17 @@ class Closure2String extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->atomIs(array_merge(self::$CALLS,
                                           array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
+             )
+
+             // argument can't be a closure argument
+             ->not(
+                $this->side()
+                     ->outIsIE('METHOD')
+                     ->outIs('ARGUMENT')
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->atomIs('Parameter')
              )
 
              ->back('first');
