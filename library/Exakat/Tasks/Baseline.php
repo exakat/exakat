@@ -38,10 +38,10 @@ class Baseline extends Tasks {
 
     //install, list, local, uninstall, upgrade
     public function run() {
-        if (!in_array($this->config->subcommand, self::ACTIONS)) {
-            $this->list();
-        } else {
+        if (in_array($this->config->subcommand, self::ACTIONS)) {
             $this->{$this->config->subcommand}();
+        } else {
+            $this->list();
         }
     }
 

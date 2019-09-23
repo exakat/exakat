@@ -34,15 +34,19 @@ class Dependencies extends Reports {
         $graph = new GSNeo4j($this->config);
 
         $links    = array();
-        $nodes    = array('class' => array(), 'trait' => array(), 'interface' => array(), 'unknown' => array());
+        $nodes    = array('class'     => array(), 
+                          'trait'     => array(), 
+                          'interface' => array(), 
+                          'unknown'   => array(),
+                          );
         $fullcode = array();
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             $names[$v[0]] = $v[1];
             $nodes['class'][] = $v[0];
         }
@@ -51,8 +55,8 @@ GREMLIN;
 g.V().hasLabel("Trait").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             $names[$v[0]] = $v[1];
             $nodes['trait'][] = $v[0];
         }
@@ -60,8 +64,8 @@ GREMLIN;
 g.V().hasLabel("Interface").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
 
             $names[$v[0]] = $v[1];
             $nodes['interface'][] = $v[0];
@@ -78,8 +82,8 @@ GREMLIN;
 
         $res = $graph->query($query);
         $total = 0;
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;
@@ -105,8 +109,8 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
 
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;
@@ -132,8 +136,8 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
 
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;
@@ -158,8 +162,8 @@ g.V().hasLabel("Function").as("fullcode")
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;
@@ -185,8 +189,8 @@ g.V().hasLabel("Instanceof").as('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;
@@ -211,8 +215,8 @@ g.V().hasLabel("Staticmethodcall").as('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
-        foreach($res as $v) {
-            $v = (array) $v;
+        foreach($res as $row) {
+            $v = (array) $row;
             if (!isset($nodesId[$v['origin']])) {
                 $nodes['unknown'][] = $v['origin'];
                 $nodesId[$v['origin']] = count($nodes) - 1;

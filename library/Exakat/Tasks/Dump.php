@@ -2366,12 +2366,12 @@ GREMLIN
              .not(where(__.in("ANALYZED").has("analyzer", "Functions/IsExtFunction")))
              .where( __.out("NAME").hasLabel("Identifier", "Nsname", "Name"))
         ');
-        if ($functioncallMissed !== 0) {
-            file_put_contents("{$this->config->log_dir}/functions.missing.txt", implode(PHP_EOL, array_column($functioncallMissed->toArray(), 'fullcode')));
-            $functioncallMissed = $functioncallMissed->toInt();
-        } else {
+        if ($functioncallMissed === 0) {
             file_put_contents("{$this->config->log_dir}/functions.missing.txt", 'Nothing found');
             $functioncallMissed = 0;
+        } else {
+            file_put_contents("{$this->config->log_dir}/functions.missing.txt", implode(PHP_EOL, array_column($functioncallMissed->toArray(), 'fullcode')));
+            $functioncallMissed = $functioncallMissed->toInt();
         }
         $values[] = "('functioncall total', '$functioncallCount')";
         $values[] = "('functioncall missed', '$functioncallMissed')";

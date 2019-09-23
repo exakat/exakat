@@ -49,8 +49,9 @@ class Perfile extends Reports {
 
         $text = '';
         $line = strlen($maxLine) + $maxTitle + 10;
+
+        $perfile = array_map('sort', $perfile);
         foreach($perfile as $file => $issues) {
-            sort($issues);
             $text .= str_repeat('-', $line) . "\n" .
                      " line  $file\n" .
                      str_repeat('-', $line) . "\n" .

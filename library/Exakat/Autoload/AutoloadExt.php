@@ -174,10 +174,10 @@ class AutoloadExt implements Autoloader {
                 continue;
             }
             
-            if ($libel !== self::LOAD_ALL) {
-                $return[] = $data;
-            } else {
+            if ($libel === self::LOAD_ALL) {
                 $return[] = array_column($data, $libel);
+            } else {
+                $return[] = $data;
             }
         }
 

@@ -172,15 +172,15 @@ class Ambassador extends Reports {
             $menu = $this->makeMenu();
             $inventories = array();
             foreach($this->inventories as $fileName => $title) {
-                if (strpos($fileName, '/') !== false) {
+                if (strpos($fileName, '/') === false) {
+                    $inventory_name = $fileName;
+                } else {
                     $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
                     $total = $this->sqlite->querySingle($query);
                     if ($total < 1) {
                         continue;
                     }
                     $inventory_name = strtolower(basename($fileName));
-                } else {
-                    $inventory_name = $fileName;
                 }
                 $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
