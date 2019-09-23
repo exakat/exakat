@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class BuriedAssignation extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testStructures_BuriedAssignation01()  { $this->generic_test('Structures_BuriedAssignation.01'); }
     public function testStructures_BuriedAssignation02()  { $this->generic_test('Structures_BuriedAssignation.02'); }
@@ -18,5 +18,6 @@ class BuriedAssignation extends Analyzer {
     public function testStructures_BuriedAssignation07()  { $this->generic_test('Structures/BuriedAssignation.07'); }
     public function testStructures_BuriedAssignation08()  { $this->generic_test('Structures/BuriedAssignation.08'); }
     public function testStructures_BuriedAssignation09()  { $this->generic_test('Structures/BuriedAssignation.09'); }
+    public function testStructures_BuriedAssignation10()  { $this->generic_test('Structures/BuriedAssignation.10'); }
 }
 ?>

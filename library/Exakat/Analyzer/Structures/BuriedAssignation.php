@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class BuriedAssignation extends Analyzer {
     public function analyze() {
+        // ($x = new b)->c
         $this->atomIs('Assignation')
-             ->hasNoIn('EXPRESSION')
              ->hasNoParent('Declare', array('ARGUMENT'))
              ->hasNoParent('For', array('EXPRESSION', 'INIT', 'FINAL', 'INCREMENT'))
 
@@ -39,8 +39,10 @@ class BuriedAssignation extends Analyzer {
              
              // in a property definition
              ->inIsIE('CODE')
+             ->hasNoIn('EXPRESSION')
              ->hasNoIn(array('CONST', 'CONDITION', 'PPP', 'STATIC'))
-             ->goToExpression();
+             ->goToExpression()
+             ->atomIsNot('For');
         $this->prepareQuery();
 
         // Special for for(;;) : only if several instructions with comma
@@ -48,6 +50,7 @@ class BuriedAssignation extends Analyzer {
              ->outIs(array('INIT', 'FINAL', 'INCREMENT'))
              ->isMore('count', 1)
              ->outIs('EXPRESSION')
+             ->outIsIE('CODE')
              ->atomIs('Assignation')
              ->back('first');
         $this->prepareQuery();
