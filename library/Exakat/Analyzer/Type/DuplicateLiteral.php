@@ -25,12 +25,13 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class DuplicateLiteral extends Analyzer {
-    protected $minDuplicate = 5;
+    protected $minDuplicate = 15;
     
     public function analyze() {
         // No need for boolean and null
         $this->atomIs(array('String', 'Heredoc'))
              ->hasNoIn('INDEX') // Skipping arrays $x["cbd"]
+             ->hasNoParent('String', array('CONCAT'))
              ->noDelimiterIsNot(array(''))
              ->not(
                 $this->side()

@@ -1,9 +1,9 @@
 <?php
 
-$a = 'a' . 'a' . "a" . 'a';
+$a = 'a' . 'a' . "a" . 'a' . 'a' . 'a' . "a" . 'a' . 'a' . 'a' . "a" . 'a' . 'a' . 'a' . "a" . 'a';
 class x {const A = 'a';}
 
-$a = 'b' . 'b' . "b" . 'b';
+$a = 'b' . 'b' . "b" . 'b' . 'b' . 'b' . "b" . 'b' . 'b' . 'b' . "b" . 'b' . 'b' . 'b' . "b" . 'b';
 interface f { const B = 'b'; }
 
 $a = 'c' . "c" . <<<H
