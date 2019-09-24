@@ -53,8 +53,8 @@ class DSLFactory {
         if (empty($this->availableAtoms)) {
             $data = $datastore->getCol('TokenCounts', 'token');
             
-            $this->availableAtoms = array('Project', 'File', 'Virtualproperty', 'Analysis');
-            $this->availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP', 'DEFAULT');
+            $this->availableAtoms = array('Project', 'File', 'Virtualproperty', 'Analysis', 'Void');
+            $this->availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP', 'DEFAULT', 'RETURNED');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {

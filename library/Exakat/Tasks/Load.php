@@ -4882,8 +4882,8 @@ class Load extends Tasks {
 
             $returnArg = $this->addAtomVoid();
             $this->addLink($return, $returnArg, 'RETURN');
-            if (empty($this->currentFunction)) {
-                $method = end($this->currentFunction)->fullnspath;
+            if (!empty($this->currentFunction)) {
+                $method = end($this->currentFunction);
                 $this->addLink($method, $returnArg, 'RETURNED');
             }
 
@@ -4908,8 +4908,8 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
 
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
-            if (empty($this->currentFunction)) {
-                $method = end($this->currentFunction)->fullnspath;
+            if (!empty($this->currentFunction)) {
+                $method = end($this->currentFunction);
                 $this->addLink($method, $return, 'RETURNED');
             }
 
