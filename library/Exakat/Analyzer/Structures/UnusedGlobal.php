@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnusedGlobal extends Analyzer {
     public function analyze() {
         // global in a function or in the global space
-        $this->atomIs('Globaldefinition')
+        $this->atomIs(array('Globaldefinition', 'Staticdefinition'))
              ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
