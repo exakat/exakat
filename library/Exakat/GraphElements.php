@@ -274,8 +274,8 @@ abstract class GraphElements {
                                       'YIELD',
                                 );
 
-    public static $ATOMS_VIRTUAL = array('Project', 'File', 'Virtualproperty', 'Virtualglobal');
-    public static $LINKS_VIRTUAL = array('Project', 'File', 'Virtualproperty', 'Virtualglobal');
+    public static $ATOMS_VIRTUAL = array('Project', 'File', 'Virtualproperty', 'Virtualglobal', 'Void');
+    public static $LINKS_VIRTUAL = array('PROJECT', 'FILE', 'RETURNED');
 
     public static $ATOMS_LINKS = array('Addition'                  => array('LEFT', 'RIGHT'),
                                        'Array'                     => array('VARIABLE', 'INDEX'),
