@@ -1,4 +1,4 @@
-Version 1.9.6 (Star of Birth, coming up)
+Version 1.9.7 (Greedy Wolf Star of Sunlight, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,34 @@ Version 1.9.6 (Star of Birth, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.6 (Star of Birth, 2019-09-23)
++ Architecture
+    + Moved new elements to Complete/
+    + Moved new elements to Dump/
+    + Initial configuration of project now includes analysis parameters with default
+    + Added descriptions to Rulesets
+    + New command Config : displays current configuration for reuse and editing
+    + Upgraded Doctor : support for docker-php, in-code 
++ Report
+    + Ambassador : removed {} on magic property inventory
+    + Ambassador : new inventory of network protocols used (udp://, ssh2://...)
++ Analysis
+    + New analysis : avoid mb_string inside loops
+    + New analysis : avoid SSLvx and TLSv1.0
+    + New analysis : report duplicate literal in the code, with parameter
+    + New analysis : warn about null property
+    + New coverage : calls to __call and __callStatic
+    + Updated coverage : expressions with parenthesis
+    + Updated coverage : default values are now targeting the final value in multiple assignations.
+    + Updated analysis : Strange Variable name skips Staticdefinition and its default value 
+    + Updated analysis : Useless instructions are upgrade with pure functions
+    + Updated analysis : Extended Closure2string with Arrowfunctions
+    + Updated analysis : Extended 'Could be local variable' to traits
+    + Updated analysis : Unused Global also covers static variables
+    + Checked unit tests : 3279 / 3304 test pass (99% pass)
++ Tokenizer
+    + Updated tokens for PHP 7.4
 
 Version 1.9.5 (Star of Adversity, 2019-09-16)
 + Architecture

@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.9.5';
-    const BUILD = 997;
+    const VERSION = '1.9.6';
+    const BUILD = 998;
 
     private $gremlin = null;
     private $config = null;
@@ -128,8 +128,8 @@ class Exakat {
                 $task->run();
                 break;
 
-            case 'drop' :
-                $task = new Tasks\Drop($this->gremlin, $this->config);
+            case 'diff' :
+                $task = new Tasks\Diff($this->gremlin, $this->config);
                 $task->run();
                 break;
 
