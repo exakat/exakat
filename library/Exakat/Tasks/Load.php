@@ -1275,6 +1275,9 @@ class Load extends Tasks {
             $returnType = $this->processTypehint();
 
             $this->addLink($fn, $returnType, 'RETURNTYPE');
+        } else {
+            $void = $this->addAtomVoid();
+            $this->addLink($function, $void, 'RETURNTYPE');
         }
 
         ++$this->id; // skip =>
@@ -1445,6 +1448,9 @@ class Load extends Tasks {
             $returnType = $this->processTypehint();
 
             $this->addLink($function, $returnType, 'RETURNTYPE');
+        } else {
+            $void = $this->addAtomVoid();
+            $this->addLink($function, $void, 'RETURNTYPE');
         }
 
         // Process block
@@ -2193,12 +2199,18 @@ class Load extends Tasks {
                     $this->addLink($index, $typehint, 'TYPEHINT');
                     $index->fullcode = "$typehint->fullcode $index->fullcode";
                     $index->nullable = $typehint->nullable;
+                } else {
+                    $void = $this->addAtomVoid();
+                    $this->addLink($index, $void, 'TYPEHINT');
                 }
 
                 if ($default !== 0) {
                     $this->addLink($index, $default, 'DEFAULT');
                     $index->fullcode .= ' = ' . $default->fullcode;
                     $default = 0;
+                } else {
+                    $void = $this->addAtomVoid();
+                    $this->addLink($index, $void, 'DEFAULT');
                 }
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
@@ -2464,7 +2476,10 @@ class Load extends Tasks {
 
         $ppp = $this->processSGVariable('Ppp');
 
-        if (!empty($typehint)) {
+        if (empty($typehint)) {
+            $void = $this->addAtomVoid();
+            $this->addLink($ppp, $void, 'TYPEHINT');
+        } else {
             $this->addLink($ppp, $typehint, 'TYPEHINT');
         }
 
@@ -2482,9 +2497,12 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
             
-            if (!empty($typehint)) {
-                $this->addLink($next, $typehint, 'TYPEHINT');
-            }
+             if (empty($typehint)) {
+                 $void = $this->addAtomVoid();
+                 $this->addLink($next, $void, 'TYPEHINT');
+             } else {
+                 $this->addLink($next, $typehint, 'TYPEHINT');
+             }
         } else {
             $next = $this->processNext();
         }
@@ -2503,9 +2521,12 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
             
-            if (!empty($typehint)) {
-                $this->addLink($next, $typehint, 'TYPEHINT');
-            }
+             if (empty($typehint)) {
+                 $void = $this->addAtomVoid();
+                 $this->addLink($next, $void, 'TYPEHINT');
+             } else {
+                 $this->addLink($next, $typehint, 'TYPEHINT');
+             }
         } else {
             $next = $this->processNext();
         }
@@ -2524,9 +2545,12 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
             
-            if (!empty($typehint)) {
-                $this->addLink($next, $typehint, 'TYPEHINT');
-            }
+             if (empty($typehint)) {
+                 $void = $this->addAtomVoid();
+                 $this->addLink($next, $void, 'TYPEHINT');
+             } else {
+                 $this->addLink($next, $typehint, 'TYPEHINT');
+             }
         } else {
             $next = $this->processNext();
         }
@@ -2953,6 +2977,9 @@ class Load extends Tasks {
 
                 $ppp = $this->processSGVariable('Ppp');
 
+                $void = $this->addAtomVoid();
+                $this->addLink($ppp, $void, 'TYPEHINT');
+
                 if (empty($ppp->visibility)) {
                     $ppp->visibility = 'none';
                 }
@@ -2963,7 +2990,11 @@ class Load extends Tasks {
 
                 return $ppp;
             } else {
-                return $this->processStaticVariable();
+                $ppp = $this->processStaticVariable();
+                $void = $this->addAtomVoid();
+                $this->addLink($ppp, $void, 'TYPEHINT');
+
+                return $ppp;
             }
         }
         
@@ -2986,6 +3017,8 @@ class Load extends Tasks {
         $static = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
+        $void = $this->addAtomVoid();
+        $this->addLink($next, $void, 'TYPEHINT');
 
         $next->static   = 1;
         $next->fullcode = "$static $next->fullcode";
@@ -4849,6 +4882,10 @@ class Load extends Tasks {
 
             $returnArg = $this->addAtomVoid();
             $this->addLink($return, $returnArg, 'RETURN');
+            if (empty($this->currentFunction)) {
+                $method = end($this->currentFunction)->fullnspath;
+                $this->addLink($method, $returnArg, 'RETURNED');
+            }
 
             $return->code     = $this->tokens[$current][1];
             $return->fullcode = $this->tokens[$current][1] . ' ;';
@@ -4863,7 +4900,7 @@ class Load extends Tasks {
 
             return $return;
         } else {
-            if (count($this->currentMethod) > 1) {
+            if (!empty($this->currentMethod)) {
                 $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
             }
 
@@ -4871,6 +4908,10 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
 
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
+            if (empty($this->currentFunction)) {
+                $method = end($this->currentFunction)->fullnspath;
+                $this->addLink($method, $return, 'RETURNED');
+            }
 
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
