@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 20 Sep 2019 13:35:02 +0000
-.. comment: Generation hash : d57df981619ea0243225e70609a430c2a59ef277
+.. comment: Generation date : Tue, 24 Sep 2019 14:54:45 +0000
+.. comment: Generation hash : 026cc60f38a1ee21fe65b78197c8bd48b1801b9a
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2831,6 +2831,9 @@ They are difficult to spot, and may be confusing. It is advised to place them in
    // $b may be assigned before processing $a
    $a = $c && ($b = 2);
    
+   // Display property p immeiately, but also, keeps the object for later
+   echo ($o = new x)->p;
+   
    // legit syntax, but the double assignation is not obvious.
    for($i = 2, $j = 3; $j < 10; $j++) {
        
@@ -4005,7 +4008,7 @@ Closure Could Be A Callback
 ###########################
 
 
-`Closure <http://www.php.net/manual/en/class.closure.php>`_ could be simplified to a callback. Callbacks are strings or arrays.
+`Closure <http://www.php.net/manual/en/class.closure.php>`_ or arrowfunction could be simplified to a callback. Callbacks are strings or arrays.
 
 A simple closure that only returns arguments relayed to another function or method, could be reduced to a simpler expression. They 
 
@@ -4045,6 +4048,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Replace the closure by a string, with the name of the called function
+* Replace the closure by an array, with the name of the called method and the object as first element
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Functions/Closure2String                                                          |
@@ -17793,6 +17797,74 @@ Suggestions
 
 
 
+.. _non-nullable-getters:
+
+Non Nullable Getters
+####################
+
+
+A getter needs to be nullable when a property is injected. 
+
+In particular, if the injection happens with a separate method, there is a time where the object is not consistent, and the property holds a default non-object value.
+
+.. code-block:: php
+
+   <?php
+   
+   class Consistent {
+       private $db = null;
+       
+       function __construct(Db $db) { 
+           $this->db = $db;
+           // Object is immediately consistent 
+       }
+       
+       // Db might be null
+       function getDb() {
+           return $this-db;
+       }
+   }
+   
+   class Inconsistent {
+       private $db = null;
+       
+       function __construct() { 
+           // No initialisation
+       }
+   
+       // This might be called on time, or not
+       // This typehint cannot be nullable, nor use null as default 
+       function setDb(DB $db) {
+           return $this-db;
+       }
+   
+       // Db might be null
+       function getDb() {
+           return $this-db;
+       }
+   }
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------+
+| Short name  | Classes/NonNullableSetters         |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _non-static-methods-called-in-a-static:
 
 Non Static Methods Called In A Static
@@ -20071,6 +20143,59 @@ Suggestions
 
 
 
+.. _performances/mbstringinloop:
+
+Performances/MbStringInLoop
+###########################
+
+
+Do not use loops on `mb_substr() <http://www.php.net/mb_substr>`_. 
+
+`mb_substr() <http://www.php.net/mb_substr>`_ always starts at the beginning of the string ot search for the nth char, and recalculate everything. This means that the first iterations are as fast as `substr() <http://www.php.net/substr>`_ (for comparison), while the longer the string, the slower `mb_substr() <http://www.php.net/mb_substr>`_.
+
+The recommendation is to use `preg_split() <http://www.php.net/preg_split>`_ with the `u` option, to split the string into an array. This save multiple recalculations.
+
+.. code-block:: php
+
+   <?php
+   
+   // Split the string by characters
+   $array = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
+   foreach($array as $c) {
+       doSomething($c);
+   }
+   
+   // Slow version
+   $nb = mb_strlen($mb);
+   for($i = 0; $i < $nb; ++$i) {
+       // Fetch a character
+       $c = mb_substr($string, $i, 1);
+       doSomething($c);
+   }
+   
+   ?>
+
+
+See also `Optimization: How I made my PHP code run 100 times faster <https://mike42.me/blog/2018-06-how-i-made-my-php-code-run-100-times-faster>`_ and `How to iterate UTF-8 string in PHP? <https://stackoverflow.com/questions/3666306/how-to-iterate-utf-8-string-in-php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------------------+
+| Short name  | Performances/MbStringInLoop |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Performances`         |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+
+
+
 .. _php-7-indirect-expression:
 
 Php 7 Indirect Expression
@@ -20842,7 +20967,11 @@ Property Could Be Local
 
 A property only used in one method may be turned into a local variable.
 
-Public properties are omitted here : they may be modified anywhere in the code.
+Public an protected properties are omitted here : they may be modified somewhere else, in the code. This analysis may be upgraded to support those properties, when tracking of such properties becomes available.
+
+Classes where only one non-magic method is available are omitted.
+
+Traits with private properties are processed the same way.
 
 .. code-block:: php
 
@@ -20850,25 +20979,43 @@ Public properties are omitted here : they may be modified anywhere in the code.
    
    class x {
        private $foo = 1;
+   
+       // Magic method, and constructor in particular, are omitted.
+       function __construct($foo) {
+           $this->foo = $foo;
+       }
        
        function bar() {
            $this->foo++;
            
            return $this->foo;
        }
+   
+       function barbar() {}
    }
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Classes/PropertyCouldBeLocal       |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
-+-------------+------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the property and make it an argument in the method
+* Use that property elsewhere
+
++-------------+---------------------------------------------------------------------------------------+
+| Short name  | Classes/PropertyCouldBeLocal                                                          |
++-------------+---------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                    |
++-------------+---------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                 |
++-------------+---------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                         |
++-------------+---------------------------------------------------------------------------------------+
+| Examples    | :ref:`mautic-classes-propertycouldbelocal`, :ref:`typo3-classes-propertycouldbelocal` |
++-------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -21079,17 +21226,27 @@ It is recommended to reduce the number of queries by making one query, and dispa
    ?>
 
 
-This optimisation is not always possible : for example, some SQL queries may not be prepared, like ``DROP TABLE`` or ``DESC``. ``UPDATE`` commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
+This optimisation is not always possible : for example, some SQL queries may not be prepared, like ``DROP TABLE`` or ``DESC``. ``UPDATE`` commands often update one row at a time, and grouping such queries may be counter-productive or unsafe. 
 
-+-------------+------------------------------+
-| Short name  | Structures/QueriesInLoop     |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
-+-------------+------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Batch calls by using WHERE clauses and applyin the same operation to all similar data
+* Use native commands to avoid double query : REPLACE instead of SELECT-(UPDATE/INSERT), or UPSERT, for example
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/QueriesInLoop                                                          |
++-------------+-----------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                      |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Major                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                     |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`teampass-structures-queriesinloop`, :ref:`openemr-structures-queriesinloop` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 

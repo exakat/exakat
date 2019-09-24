@@ -1027,6 +1027,7 @@ Glossary
     + `mb_substr()`
 
       + :ref:`No Substr() One <no-substr()-one>`
+      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
       + :ref:`Substr To Trim <substr-to-trim>`
 
     + `mcrypt_cbc()`
@@ -1294,6 +1295,7 @@ Glossary
 
     + `preg_split()`
 
+      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `prev()`
@@ -1566,6 +1568,7 @@ Glossary
 
       + :ref:`No List With String <no-list-with-string>`
       + :ref:`No Substr() One <no-substr()-one>`
+      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
       + :ref:`Substr To Trim <substr-to-trim>`
       + :ref:`Substring First <substring-first>`
       + :ref:`Use Basename Suffix <use-basename-suffix>`

@@ -1591,6 +1591,73 @@ There are two nested foreach here : they both have referenced blind variables. T
                     }
                 }
 
+Queries In Loops
+================
+
+.. _teampass-structures-queriesinloop:
+
+TeamPass
+^^^^^^^^
+
+:ref:`queries-in-loops`, in install/install.queries.php:551. 
+
+The value is SELECTed first in the database, and it is INSERTed if not. This may be done in one call in most databases.
+
+.. code-block:: php
+
+    foreach ($aMiscVal as $elem) {
+                                //Check if exists before inserting
+                                $tmp = mysqli_num_rows(
+                                    mysqli_query(
+                                        $dbTmp,
+                                        SELECT * FROM `.$var['tbl_prefix'].misc`
+                                        WHERE type='.$elem[0].' AND intitule='.$elem[1].'
+                                    )
+                                );
+                                if (intval($tmp) === 0) {
+                                    $queryRes = mysqli_query(
+                                        $dbTmp,
+                                        INSERT INTO `.$var['tbl_prefix'].misc`
+                                        (`type`, `intitule`, `valeur`) VALUES
+                                        ('.$elem[0].', '.$elem[1].', '.
+                                        str_replace(', , $elem[2]).');
+                                    ); // or die(mysqli_error($dbTmp))
+                                }
+    
+                                // append new setting in config file
+                                $config_text .= 
+        '.$elem[1].' => '.str_replace(', , $elem[2]).',;
+                            }
+
+
+--------
+
+
+.. _openemr-structures-queriesinloop:
+
+OpenEMR
+^^^^^^^
+
+:ref:`queries-in-loops`, in install/install.queries.php:551. 
+
+The value is SELECTed first in the database, and it is INSERTed if not. This may be done in one call in most databases.
+
+.. code-block:: php
+
+    $query = select * from facility;
+        $result = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_array($result)) {
+            $string = update facility set 
+              
+                  `name`    = 'Facility_{$row['id']}',
+                  `phone`   = '(000) 000-0000'
+        
+                where `id` = {$row['id']};
+    
+            mysqli_query($con, $string) or print Error altering facility table \n;
+            $string = '';
+        }
+
 Aliases Usage
 =============
 
@@ -6891,7 +6958,7 @@ $request is an option to `checkParameters`, although it is not visibile with is 
 
 .. _cleverstyle-functions-avoidbooleanargument:
 
-CleverStyle
+Cleverstyle
 ^^^^^^^^^^^
 
 :ref:`use-named-boolean-in-argument-definition`, in /core/classes/Response.php:129. 
@@ -7203,6 +7270,133 @@ $marker['lat'] is compared to the string '0', which actually transtype it to int
                     $marker['lng'] = (float) $marker['lng'] + (float) $this->settings['map_duplicate_marker_adjustment'];
                     $i++;
                 }
+
+Property Could Be Local
+=======================
+
+.. _mautic-classes-propertycouldbelocal:
+
+Mautic
+^^^^^^
+
+:ref:`property-could-be-local`, in app/bundles/EmailBundle/Model/SendEmailToContact.php:47. 
+
+$translator is a private property, provided at construction time. It is private, and only used in the processBadEmails() method. $translator may be turned into a parameter for processBadEmails(), and make the class slimmer.
+
+.. code-block:: php
+
+    class SendEmailToContact
+    {
+        /**
+         * @var TranslatorInterface
+         */
+        private $translator;
+    
+    // Skipped code 
+    
+        /**
+         * SendEmailToContact constructor.
+         *
+         * @param MailHelper          $mailer
+         * @param StatRepository      $statRepository
+         * @param DoNotContact        $dncModel
+         * @param TranslatorInterface $translator
+         */
+        public function __construct(MailHelper $mailer, StatHelper $statHelper, DoNotContact $dncModel, TranslatorInterface $translator)
+        {
+            $this->mailer     = $mailer;
+            $this->statHelper = $statHelper;
+            $this->dncModel   = $dncModel;
+            $this->translator = $translator;
+        }
+    
+    // Skipped code 
+    
+        /**
+         * Add DNC entries for bad emails to get them out of the queue permanently.
+         */
+        protected function processBadEmails()
+        {
+            // Update bad emails as bounces
+            if (count($this->badEmails)) {
+                foreach ($this->badEmails as $contactId => $contactEmail) {
+                    $this->dncModel->addDncForContact(
+                        $contactId,
+                        ['email' => $this->emailEntityId],
+                        DNC::BOUNCED,
+                        $this->translator->trans('mautic.email.bounce.reason.bad_email'),
+                        true,
+                        false
+                    );
+                }
+            }
+        }
+
+
+--------
+
+
+.. _typo3-classes-propertycouldbelocal:
+
+Typo3
+^^^^^
+
+:ref:`property-could-be-local`, in typo3/sysext/install/Classes/Updates/MigrateUrlTypesInPagesUpdate.php:28. 
+
+$urltypes is a private property, with a list of protocols for communicationss. It acts as a constant, being only read in the executeUpdate() method : constants may hold arrays. If this property has to evolve in the future, an accessor to update it will be necessary. Until then, this list may be hardcoded in the method. 
+
+.. code-block:: php
+
+    /**
+     * Merge URLs divided in pages.urltype and pages.url into pages.url
+     * @internal This class is only meant to be used within EXT:install and is not part of the TYPO3 Core API.
+     */
+    class MigrateUrlTypesInPagesUpdate implements UpgradeWizardInterface
+    {
+        private $urltypes = ['', 'http://', 'ftp://', 'mailto:', 'https://'];
+    
+    // Skipped code
+    
+        /**
+         * Moves data from pages.urltype to pages.url
+         *
+         * @return bool
+         */
+        public function executeUpdate(): bool
+        {
+            foreach ($this->databaseTables as $databaseTable) {
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getConnectionForTable($databaseTable);
+    
+                // Process records that have entries in pages.urltype
+                $queryBuilder = $connection->createQueryBuilder();
+                $queryBuilder->getRestrictions()->removeAll();
+                $statement = $queryBuilder->select('uid', 'urltype', 'url')
+                    ->from($databaseTable)
+                    ->where(
+                        $queryBuilder->expr()->neq('urltype', 0),
+                        $queryBuilder->expr()->neq('url', $queryBuilder->createPositionalParameter(''))
+                    )
+                    ->execute();
+    
+                while ($row = $statement->fetch()) {
+                    $url = $this->urltypes[(int)$row['urltype']] . $row['url'];
+                    $updateQueryBuilder = $connection->createQueryBuilder();
+                    $updateQueryBuilder
+                        ->update($databaseTable)
+                        ->where(
+                            $updateQueryBuilder->expr()->eq(
+                                'uid',
+                                $updateQueryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT)
+                            )
+                        )
+                        ->set('url', $updateQueryBuilder->createNamedParameter($url), false)
+                        ->set('urltype', 0);
+                    $updateQueryBuilder->execute();
+                }
+            }
+            return true;
+        }
 
 Too Many Native Calls
 =====================

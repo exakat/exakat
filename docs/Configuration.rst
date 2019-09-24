@@ -335,6 +335,10 @@ Some analyzer may be configured individually. Those parameters are then specific
 
 Analyzers may be configured in the `project/*/config.ini`; they may also be configured globally in the `config/exakat.ini` file.
 
+:ref:`Array() / [  ] Consistence <array()-/-[--]-consistence>`
+  + array_ratio : 10
+
+    + Percentage of arrays in one of the syntaxes, to trigger the other syntax as a violation. 
 :ref:`Too Many Array Dimensions <too-many-array-dimensions>`
   + maxDimensions : 3
 
@@ -388,7 +392,7 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
 
     + Maximal number of acceptable nesting of if-then structures
 :ref:`Duplicate Literal <duplicate-literal>`
-  + minDuplicate : 5
+  + minDuplicate : 15
 
     + Minimal number of duplication before the literal is reported.
 

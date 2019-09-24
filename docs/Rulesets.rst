@@ -72,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Fri, 20 Sep 2019 13:35:02 +0000
-.. comment: Generation hash : d57df981619ea0243225e70609a430c2a59ef277
+.. comment: Generation date : Tue, 24 Sep 2019 14:54:45 +0000
+.. comment: Generation hash : 026cc60f38a1ee21fe65b78197c8bd48b1801b9a
 
 
 .. _analyze:
@@ -81,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 384 analysis
+Total : 385 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -291,6 +291,7 @@ Total : 384 analysis
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`No isset() With empty() <no-isset()-with-empty()>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
+* :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
 * :ref:`Not A Scalar Type <not-a-scalar-type>`
@@ -473,7 +474,7 @@ Total : 384 analysis
 ClassReview
 +++++++++++
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -498,6 +499,7 @@ Total : 32 analysis
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
+* :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Raised Access Level <raised-access-level>`
@@ -1102,7 +1104,7 @@ Total : 23 analysis
 Performances
 ++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`@ Operator <@-operator>`
 * :ref:`Always Use Function With array_key_exists() <always-use-function-with-array\_key\_exists()>`
@@ -1130,6 +1132,7 @@ Total : 44 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
 * :ref:`Pre-increment <pre-increment>`
 * :ref:`Processing Collector <processing-collector>`
 * :ref:`Regex On Arrays <regex-on-arrays>`

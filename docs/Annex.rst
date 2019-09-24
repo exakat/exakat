@@ -328,7 +328,6 @@ Applications
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
 * `ChurchCRM <http://churchcrm.io/>`_
-* CleverStyle
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Contao <https://contao.org/en/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
@@ -436,9 +435,14 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.6
 
+  * Create Magic Method (Complete/CreateMagicMethod ; )
+  * Dump/CollectLocalVariableCounts (Dump/CollectLocalVariableCounts ; Dump)
+  * Dump/CollectParameterCounts (Dump/CollectParameterCounts ; Dump)
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
-  * No Weak SSL Crypto (Security/NoWeakSSLCrypto)
+  * No Weak SSL Crypto (Security/NoWeakSSLCrypto ; Security)
+  * Non Nullable Getters (Classes/NonNullableSetters)
+  * Performances/MbStringInLoop (Performances/MbStringInLoop ; Performances)
 
 * 1.9.5
 
@@ -453,7 +457,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Coalesce And Concat (Structures/CoalesceAndConcat ; Analyze)
   * Constant Comparison (Structures/AlwaysFalse ; Analyze)
-  * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Dump)
+  * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Unassigned, Dump)
   * Nested Ternary Without Parenthesis (Php/NestedTernaryWithoutParenthesis ; Appinfo, CompatibilityPHP74)
   * PHP 74 New Directives (Php/Php74NewDirective ; CompatibilityPHP73)
   * Should Use Explode Args (Structures/ShouldUseExplodeArgs ; Analyze)
@@ -466,7 +470,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Complete/SetClassRemoteDefinitionWithParenthesis (Complete/SetClassRemoteDefinitionWithParenthesis ; Complete)
   * Complete/SetClassRemoteDefinitionWithTypehint (Complete/SetClassRemoteDefinitionWithTypehint ; Complete)
   * Environment Variables (Dump/EnvironmentVariables ; )
-  * Indentation Levels (Dump/IndentationLevels ; Dump)
+  * Indentation Levels (Dump/IndentationLevels ; Unassigned, Dump)
   * Max Level Of Nesting (Structures/MaxLevelOfIdentation ; Analyze)
   * No Spread For Hash (Arrays/NoSpreadForHash)
   * PHP 7.4 Constant Deprecation (Php/Php74Deprecation ; CompatibilityPHP74)
@@ -1900,7 +1904,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variable Is Read (Variables/IsRead ; Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo, Stats)
   * Variables With Long Names (Variables/VariableLong ; Appinfo)
-  * Variables With One Letter Names (Variables/VariableOneLetter ; )
+  * Variables With One Letter Names (Variables/VariableOneLetter ; Semantics)
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Simple, Suggestions, Level 2)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Simple)
   * Wrong Number Of Arguments (Functions/WrongNumberOfArguments ; Analyze, OneFile, Simple)
@@ -2476,8 +2480,8 @@ List of external links mentionned in this documentation.
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
 * `htmlspecialchars <https://www.php.net/htmlspecialchars>`_
-* `http://dist.exakat.io/ <http://dist.exakat.io/>`_
-* `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
+* `https://www.exakat.io/ <https://www.exakat.io/>`_
+* `https://www.exakat.io/index.php?file=latest <https://www.exakat.io/index.php?file=latest>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
@@ -2537,8 +2541,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2583,8 +2587,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2593,6 +2597,7 @@ List of external links mentionned in this documentation.
 * `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Optimization: How I made my PHP code run 100 times faster <https://mike42.me/blog/2018-06-how-i-made-my-php-code-run-100-times-faster>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
@@ -2863,6 +2868,7 @@ INI configuration for built-in rulesets. Copy them in config/themes.ini, and mak
 .. _ruleset_ini_analyze:
 
 Analyze
+This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 _______
 
 | [Analyze]
@@ -2913,6 +2919,7 @@ _______
 |   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoPublicAccess";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/NonNullableSetters";
 |   analyzer[] = "Classes/NonPpp";
 |   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
 |   analyzer[] = "Classes/OldStyleConstructor";
@@ -3259,6 +3266,7 @@ _______
 .. _ruleset_ini_classreview:
 
 ClassReview
+This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
 ___________
 
 | [ClassReview]
@@ -3280,6 +3288,7 @@ ___________
 |   analyzer[] = "Classes/IdenticalMethods";
 |   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/NonNullableSetters";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/RedefinedProperty";
@@ -3303,6 +3312,7 @@ ___________
 .. _ruleset_ini_coding conventions:
 
 Coding Conventions
+This ruleset centralizes all analysis related to coding conventions. Sometimes, those are easy to extract with static analysis, and so here they are. No all o them are available.
 __________________
 
 | [Coding Conventions]
@@ -3339,6 +3349,7 @@ __________________
 .. _ruleset_ini_compatibilityphp53:
 
 CompatibilityPHP53
+This ruleset centralizes all analysis for the migration from PHP 5.2 to 5.3.
 __________________
 
 | [CompatibilityPHP53]
@@ -3429,6 +3440,7 @@ __________________
 .. _ruleset_ini_compatibilityphp54:
 
 CompatibilityPHP54
+This ruleset centralizes all analysis for the migration from PHP 5.3 to 5.4.
 __________________
 
 | [CompatibilityPHP54]
@@ -3515,6 +3527,7 @@ __________________
 .. _ruleset_ini_compatibilityphp55:
 
 CompatibilityPHP55
+This ruleset centralizes all analysis for the migration from PHP 5.4 to 5.5.
 __________________
 
 | [CompatibilityPHP55]
@@ -3593,6 +3606,7 @@ __________________
 .. _ruleset_ini_compatibilityphp56:
 
 CompatibilityPHP56
+This ruleset centralizes all analysis for the migration from PHP 5.5 to 5.6.
 __________________
 
 | [CompatibilityPHP56]
@@ -3660,6 +3674,7 @@ __________________
 .. _ruleset_ini_compatibilityphp70:
 
 CompatibilityPHP70
+This ruleset centralizes all analysis for the migration from PHP 5.6 to 7.0.
 __________________
 
 | [CompatibilityPHP70]
@@ -3718,6 +3733,7 @@ __________________
 .. _ruleset_ini_compatibilityphp71:
 
 CompatibilityPHP71
+This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
 __________________
 
 | [CompatibilityPHP71]
@@ -3762,6 +3778,7 @@ __________________
 .. _ruleset_ini_compatibilityphp72:
 
 CompatibilityPHP72
+This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
 __________________
 
 | [CompatibilityPHP72]
@@ -3798,6 +3815,7 @@ __________________
 .. _ruleset_ini_compatibilityphp73:
 
 CompatibilityPHP73
+This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
 __________________
 
 | [CompatibilityPHP73]
@@ -3823,6 +3841,7 @@ __________________
 .. _ruleset_ini_compatibilityphp74:
 
 CompatibilityPHP74
+This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 __________________
 
 | [CompatibilityPHP74]
@@ -3856,6 +3875,7 @@ __________________
 .. _ruleset_ini_compatibilityphp80:
 
 CompatibilityPHP80
+This ruleset centralizes all analysis for the migration from PHP 7.4 to 8.0.
 __________________
 
 | [CompatibilityPHP80]
@@ -3871,6 +3891,7 @@ __________________
 .. _ruleset_ini_dead code:
 
 Dead code
+This ruleset focuses on dead code : expressions or even structures that are written, valid but never used.
 _________
 
 | [Dead code]
@@ -3909,6 +3930,7 @@ _________
 .. _ruleset_ini_lintbutwontexec:
 
 LintButWontExec
+This ruleset focuses on PHP code that lint (php -l), but that will not run. As such, this ruleset tries to go further than PHP, by connecting files, just like during execution.
 _______________
 
 | [LintButWontExec]
@@ -3944,6 +3966,7 @@ _______________
 .. _ruleset_ini_performances:
 
 Performances
+This ruleset focuses on performances issues : anything that slows the code's execution.
 ____________
 
 | [Performances]
@@ -3964,6 +3987,7 @@ ____________
 |   analyzer[] = "Performances/IssetWholeArray";
 |   analyzer[] = "Performances/JoinFile";
 |   analyzer[] = "Performances/MakeOneCall";
+|   analyzer[] = "Performances/MbStringInLoop";
 |   analyzer[] = "Performances/NoConcatInLoop";
 |   analyzer[] = "Performances/NoGlob";
 |   analyzer[] = "Performances/NotCountNull";
@@ -4000,6 +4024,7 @@ ____________
 .. _ruleset_ini_security:
 
 Security
+This ruleset focuses on code security. 
 ________
 
 | [Security]
@@ -4054,6 +4079,7 @@ ________
 .. _ruleset_ini_suggestions:
 
 Suggestions
+This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 ___________
 
 | [Suggestions]
@@ -4152,6 +4178,7 @@ ___________
 .. _ruleset_ini_top10:
 
 Top10
+This ruleset is a selection of analysis, with the top 10 most common. Actually, it is a little larger than that. 
 _____
 
 | [Top10]
