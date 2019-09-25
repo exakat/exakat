@@ -7,7 +7,7 @@ class bar {
     }
 }
 
-function foo2($a, $b, $c) {}
+function foo2($a, $b, $c = 3) {}
 function foo3($a, $b = 2, $c = 3) {}
 
 ?>

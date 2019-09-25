@@ -6,7 +6,7 @@ $a = function ($a, $b = 1, $c = 3) {
 };
 
 class A {
-    static function foo2($a, $b, $c) {}
+    static function foo2($a, $b, $c = 3) {}
     static function foo3($a, $b = 2, $c = 3) {}
 }
 

@@ -25,6 +25,12 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MismatchedDefaultArguments extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                    );
+    }
+
     public function analyze() {
         // Based on calls to a function
         $this->atomIs(self::$FUNCTIONS_ALL)
@@ -33,55 +39,24 @@ class MismatchedDefaultArguments extends Analyzer {
              ->_as('results')
              ->outIs('DEFAULT')
              ->savePropertyAs('fullcode', 'defaultValue')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Variable')
-             ->samePropertyAs('code', 'name')
-             ->has('rank')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->atomIs('Functioncall')
-             ->inIs('DEFINITION')
-             ->checkDefinition()
-             ->back('results');
-        $this->prepareQuery();
-
-        // Based on Methodcalls : still missing the class of the object
-        
-        // Based on staticmethodcall
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->savePropertyAs('code', 'name')
-             ->_as('results')
-             ->outIs('DEFAULT')
-             ->savePropertyAs('fullcode', 'defaultValue')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Variable')
-             ->samePropertyAs('code', 'name')
-             ->has('rank')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->savePropertyAs('code', 'method')
-             ->inIs('METHOD')
-             ->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->outIs('METHOD')
+             ->back('results')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'method')
-             ->inIs('NAME')
+             ->outIs('DEFINITION')
+             ->has('rank')
+             ->savePropertyAs('rank', 'ranked')
+             ->inIs('ARGUMENT')
+             ->inIsIE('METHOD')
+             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->inIs('DEFINITION')
              ->checkDefinition()
              ->back('results');
         $this->prepareQuery();
     }
     
     private function checkDefinition() {
-        $this->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
+        $this->outWithRank('ARGUMENT', 'ranked')
              ->outIs('DEFAULT')
              ->notSamePropertyAs('fullcode', 'defaultValue');
-             
         return $this;
     }
 }
