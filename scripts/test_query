@@ -24,11 +24,14 @@
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Config;
 
-include_once(dirname(__DIR__).'/library/Exakat/Autoload/Autoload.php');
-include_once(dirname(__DIR__).'/library/helpers.php');
-require __DIR__.'/../vendor/autoload.php';
+include dirname(__DIR__)."/library/Exakat/Autoload/Autoload.php";
+include dirname(__DIR__)."/library/Exakat/Autoload/AutoloadExt.php";
+include dirname(__DIR__)."/library/Exakat/Autoload/AutoloadDev.php";
+include dirname(__DIR__)."/library/helpers.php";
 
-spl_autoload_register('\Exakat\Autoload\Autoload::autoload_library');
+$autoload = new \Exakat\Autoload\Autoload();
+$autoload->registerAutoload();
+include dirname(__DIR__)."/vendor/autoload.php";
 
 $config = new Config(array());
 
@@ -46,78 +49,7 @@ $project = $res[0];
 $begin = microtime(true);
 $query = <<<QUERY
 
-// Extrait les méthodes qui sont redéfinies dans la classe au dessus
-// Faire la même chose pour les constantes et propriétés et statiques 
-// faire la liste totale des PMC d'une classe
-g.V().hasLabel('Class').where( __.out('EXTENDS')).as('fille')
-    .out('METHOD').as('method').out('NAME').sideEffect{ name = it.get().value('code');}
-    .select('fille').out('EXTENDS').in('DEFINITION').out('METHOD').as('methodparent').out('NAME').filter{ it.get().value('code') == name}
-    .select('fille', 'method', 'methodparent').by('fullcode')
-
-
-//g.V().not(has('ctype1')).label();
-//g.E().groupCount('m').by(label).cap('m')
-//g.V().hasLabel('Analysis').group('m').by('analyzer').by(out('ANALYZED').count()).cap('m')
-//g.V().values('ctype1')
-
-//g.V().hasLabel('Functioncall').has('fullnspath', within('\\\\fopen')).values('fullcode')
-
-// Nsname => Name pour les classes
-
-/*
-g.V().groupCount('m').by(label).cap('m').next().sort{-it.value}
-g.V().has('ctype1').not(where(hasLabel('Sequence').has('count', 1)))
-                   .has('ctype1_size', gt(20))
-                   .groupCount('m').by('ctype1').cap('m').next().findAll{ a, b -> b > 10}
-g.V().has('ctype1', '\$v=newn;\$vo->n=s;\$vo->n=s;\$vo->n=newn;\$vo->n->n=s;\$vo->n->n=s;\$vo->n->n=newn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;\$vo->n[s]=newn;\$vo->n[s]->n=s;\$vo->n[s]->n=s;\$vo->n[s]->n=nn;return\$v').in().in().in().values('fullcode')
-*/
-
-g.V().hasLabel("Parameter").out("DEFAULT").groupCount('m').by("fullcode").cap('m').next().sort{-it.value}
-g.V().hasLabel("Member").count();
-g.V().hasLabel("Member").where(__.in("DEFINITION")).count();
-
-g.V().hasLabel("Staticconstant").count();
-g.V().hasLabel("Staticconstant").where(__.in("DEFINITION")).count();
-
-g.V().hasLabel("Methodcall").count();
-g.V().hasLabel("Methodcall").where(__.in("DEFINITION")).count();
-
-//g.V().hasLabel("Staticmethodcall").count();
-//g.V().hasLabel("Staticmethodcall").where(__.in("DEFINITION")).count();
-
-g.V().hasLabel('Parametername').groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
-g.V().hasLabel('Variable').not(where( __.in("DEFINITION").in("NAME"))).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
-
-g.V().hasLabel('Foreach').out("VALUE").coalesce( __.out("VALUE", "INDEX"), __.filter{true;}).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
-g.V().hasLabel('Functioncall').has('fullnspath', '\\\\preg_match_all').out('ARGUMENT').has('rank', 2).groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
-g.V().hasLabel('For').out('INIT').groupCount('m').by('fullcode').cap('m').next().sort{-it.value}
-
-g.V().hasLabel("Analysis").has("analyzer", within("Interfaces/IsExtInterface")).out("ANALYZED").label().unique();
-
-g.V().hasLabel("Magicmethod").where( __.out("NAME").has("fullcode", "__construct"))
-.out('BLOCK').out('EXPRESSION')
-.coalesce(
-__.hasLabel('Staticmethodcall').where(__.out('CLASS').not(hasLabel('Parent'))),
-__.not(hasLabel("Assignation", "Void", "Return", "Staticmethodcall"))
-)
-//.count();
-//.label();
-.values('fullcode')
-
-// Collect properties and their usage 
-//g.V().hasLabel("Ppp").out("PPP").where( __.sideEffect{ x = [];}.out('DEFINITION').in().dedup().has('fullcode').sideEffect{ x.add(it.get().value('fullcode'))}.fold())
-//.map{ ['ppp':it.get().value('fullcode'), 'usage':x];}
- 
-g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
-.groupCount("m").by( __.emit( ).repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).times(15).hasLabel("Functioncall")
-      .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
-      .count()
-      .is(gte(5))
-)
-
-
-g.V().hasLabel("Methodcall").count();
-g.V().hasLabel("Staticmethodcall").not(where(__.in("DEFINITION")))
+g.V().hasLabel('Methodcall').out('OBJECT').in('DEFINITION').valueMap(true);
 
 
 QUERY;
