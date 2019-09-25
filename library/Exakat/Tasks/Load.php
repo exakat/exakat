@@ -5833,7 +5833,8 @@ class Load extends Tasks {
         $void->token       = $this->phptokens::T_VOID;
         $void->noDelimiter = '';
         $void->delimiter   = '';
-        
+        $void->fullnspath  = '0';
+
         $this->runPlugins($void);
 
         return $void;

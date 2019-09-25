@@ -58,34 +58,41 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // no typehint in the original
+        // Check if reference is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
-             ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->hasNoOut('TYPEHINT')
+             ->savePropertyAs('reference', 'referenced')
              ->back('first')
              ->outIs('OVERWRITE')
-             ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
-             ->hasOut('TYPEHINT')
+             ->notSamePropertyAs('reference', 'referenced')
              ->back('first');
         $this->prepareQuery();
 
-        // no typehint in the parent
+        // Check if variadic is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
-             ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->hasOut('TYPEHINT')
+             ->savePropertyAs('variadic', 'variadiced')
              ->back('first')
              ->outIs('OVERWRITE')
-             ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
-             ->hasNoOut('TYPEHINT')
+             ->notSamePropertyAs('variadic', 'variadiced')
              ->back('first');
         $this->prepareQuery();
 
+        // Check if return typehint is different between
+        $this->atomIs('Method') // No need for magicmethods
+             ->outIs('RETURNTYPE')
+             ->savePropertyAs('fullnspath', 'typehint')
+             ->back('first')
+             ->outIs('OVERWRITE')
+             ->outIs('RETURNTYPE')
+             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->back('first');
+        $this->prepareQuery();
+        
         // also checks for reference
         // also checks for ellipsis
     }

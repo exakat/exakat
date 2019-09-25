@@ -50,7 +50,11 @@ class NotSamePropertyAs extends DSL {
                 return new Command("filter{ it.get() != $name }");
 
             default :
-                return new Command("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
+                if (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {
+                    return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $name . ' != it.get().value("' . $property . '")} else {' . $name . ' != false; }; }');
+                } else {
+                    return new Command("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
+                }
         }
     }
 }
