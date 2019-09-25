@@ -29,82 +29,49 @@ class ShouldBeTypehinted extends Analyzer {
     public function analyze() {
         // spotting objects with property
         $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('OBJECT')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // spotting objects with methodcall
-        $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Methodcall')
-             ->outIs('OBJECT')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->hasNoIn('RIGHT')
+             ->back('first')
+             
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('OBJECT')
+             ->atomIs(array('Methodcall', 'Member', 'Staticproperty', 'Staticclass', 'Staticmethodcall'))
              ->back('first');
         $this->prepareQuery();
 
         // spotting array with array[index]
         $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Array')
-             ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->hasNoIn('RIGHT')
+             ->back('first')
 
-        // spotting array with arrayappend[]
-        $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Arrayappend')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs(array('VARIABLE', 'APPEND'))
+             ->not(
+                $this->side()
+                     ->atomIs('Array')
+                     ->outIs('INDEX')
+                     ->atomIs('Integer', self::WITH_CONSTANTS)
+             )
+             ->atomIs(array('Array', 'Arrayappend'))
              ->back('first');
         $this->prepareQuery();
 
         // spotting array in a functioncall
         $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Functioncall')
-             ->tokenIs('T_OPEN_BRACKET')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->hasNoIn('RIGHT')
+             ->back('first')
 
-        // spotting array with callable
-        $this->atomIs('Parameter')
-             ->hasNoOut('TYPEHINT')
-             ->savePropertyAs('code', 'name')
-             ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Functioncall')
-             ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall')
              ->back('first');
         $this->prepareQuery();
     }
