@@ -25,20 +25,33 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NeverUsedParameter extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/FollowClosureDefinition',
+                     'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                    );
+    }
+
     public function analyze() {
         // foo($a, $b = 2, $c = 3) {}; foo(1,2);
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasOut('DEFAULT')
+             ->filter( 
+                 $this->side()
+                      ->outIs('DEFAULT')
+                      ->atomIsNot('Void')
+                      ->hasNoIn('RIGHT')
+             )
+
              ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
+             ->back('first')
+
              ->hasOut('DEFINITION')  // Make sure this is actually a used function
              ->not(
                 $this->side()
                      ->outIs('DEFINITION')
-                     ->outIs('ARGUMENT')
+                     ->outWithRank('ARGUMENT', 'ranked')
                      ->atomIsNot('Void')
-                     ->samePropertyAs('rank', 'ranked')
              );
         $this->prepareQuery();
     }
