@@ -31,24 +31,21 @@ class ShouldUseSessionRegenerateId extends Analyzer {
     }
     
     public function analyze() {
-        $sessions = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Analyze")
-     .has("analyzer", "Extensions/Extsession")
-     .out("ANALYZED")
-     .count()
-GREMLIN
-);
+        // are there analysis?
+        $this->analyzerIs('Extensions/Extsession')
+             ->count();
+        $sessions = $this->rawQuery()->toInt();
 
         // No session, no regenerateId
         if (empty($sessions)) {
             return ;
         }
-        $regenerateid = $this->query('g.V().hasLabel("Functioncall")
-                                           .has("fullnspath")
-                                           .has("fullnspath", "\\\\session_regenerate_id")
-                                           .count()');
-                                           
-        if ($regenerateid[0] !== 0) {
+
+        $this->atomFunctionis('\\session_regenerate_id')
+             ->count();
+        $regenerateid = $this->rawQuery()->toInt();
+
+        if (!empty($regenerateid)) {
             return;
         }
 
