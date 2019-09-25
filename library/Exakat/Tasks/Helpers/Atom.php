@@ -187,13 +187,6 @@ class Atom {
             if ($l === 'atom') { continue; }
             if ($value === null) { continue; }
 
-/*            
-            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'lccode', 'line')) &&
-                !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
-                continue;
-            };
-*/
-    
             if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
