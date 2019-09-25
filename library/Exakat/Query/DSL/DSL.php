@@ -83,6 +83,20 @@ abstract class DSL {
                              'nullable',
                              'trailing',
                              );
+
+    protected const BOOLEAN_PROPERTY = array('aliased',
+                                             'alternative',
+                                             'enclosing',
+                                             'globalvar',
+                                             'heredoc',
+                                             'noscream',
+                                             'nullable',
+                                             'trailing',
+                                             'isRead',
+                                             'isModified',
+                                             'reference',
+                                             'variadic',
+                                             );
     
     protected $dslfactory             = null;
     protected $availableAtoms         = array();
