@@ -1045,11 +1045,17 @@ GREMLIN;
     }
 
     public function followExpression() {
-        $this->query->FollowExpression();
+        $this->query->followExpression();
         
         return $this;
     }
-    
+
+    public function followParAs($out = null) {
+        $this->query->followParAs($out);
+        
+        return $this;
+    }
+
     public function followCalls() {
         $this->query->FollowCalls();
         

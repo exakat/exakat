@@ -21,34 +21,38 @@
 */
 
 
-namespace Exakat\Analyzer\Security;
+namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class SensitiveArgument extends Analyzer {
-    public function analyze() {
-        $unsafe = $this->loadIni('security_vulnerable_functions.ini');
-        
-        $positions = array(0, 1, 2);
-        
-        foreach($positions as $position) {
-            $functions = makeFullNsPath($unsafe["functions{$position}"]);
+class FollowParAs extends DSL {
+    public function run() : Command {
+        if (func_num_args() === 0) {
+            $out = self::$linksDown;
+        } else {
+            list($out) = func_get_args();
 
-            // $_GET/_POST ... directly as argument of PHP functions
-            $this->atomFunctionIs($functions)
-                 ->outWithRank('ARGUMENT', $position);
-            $this->prepareQuery();
+            $this->assertLink($out);
+            $out = $this->normalizeLinks($out);
+
+            if (empty($out)) {
+                return new Command(Query::STOP_QUERY);
+            }
+            
+            $out = makeList($out);
         }
-        
-        $this->atomIs(array('Echo', 'Print', 'Exit', 'Eval'))
-             ->followParAs('ARGUMENT');
-        $this->prepareQuery();
 
-        $this->atomIs('Shell')
-             ->outIs('CONCAT')
-             ->atomIsNot('String');
-        $this->prepareQuery();
+        return new Command(<<<GREMLIN
+ out({$out})
+.repeat( 
+    __.coalesce(__.hasLabel("Parenthesis").out("CODE"), 
+                __.hasLabel("Assignation").out("RIGHT"), 
+                __.filter{true})
+      )
+.until(__.not(hasLabel("Parenthesis", "Assignation")))
+GREMLIN
+);
     }
 }
-
 ?>
