@@ -98,6 +98,7 @@ abstract class DSL {
                                              'variadic',
                                              'static',
                                              'abstract',
+                                             'constant',
                                              );
     
     protected $dslfactory             = null;

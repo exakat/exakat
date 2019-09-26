@@ -39,11 +39,8 @@ class CouldBePrivate extends Analyzer {
         $this->atomIs('Member')
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('OBJECT')
-                             ->atomIs('This')
-                     )
+                     ->outIs('OBJECT')
+                     ->atomIs('This')
              )
              ->outIs('MEMBER')
              ->atomIs('Name')
@@ -90,11 +87,8 @@ class CouldBePrivate extends Analyzer {
              ->_as('classe')
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->goToAllParentsTraits(self::INCLUDE_SELF)
-                             ->samePropertyAs('fullnspath', 'fnp')
-                     )
+                     ->goToAllParentsTraits(self::INCLUDE_SELF)
+                     ->samePropertyAs('fullnspath', 'fnp')
              )
              ->raw('select("classe", "property").by("fullnspath").by("code").unique()');
         $insidePublicStaticProperties = $this->rawQuery()

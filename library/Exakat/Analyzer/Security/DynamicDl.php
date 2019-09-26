@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicDl extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // dl($variable);
         $this->atomFunctionIs('\dl')
