@@ -8,7 +8,7 @@ $expected     = array('function foo1(A $a) { /**/ } ',
                       'function foo3(?A $a = null) { /**/ } ',
                      );
 
-$expected_not = array('',
+$expected_not = array('function foo31(A $a = null) { /**/ } ',
                       'function foo24(A $a) { /**/ } ',
                       'function foo11($a) { /**/ } ',
                      );
