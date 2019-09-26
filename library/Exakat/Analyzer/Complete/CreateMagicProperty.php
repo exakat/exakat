@@ -37,13 +37,19 @@ class CreateMagicProperty extends Analyzer {
 
         // link to __get
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isRead', true)
+             ->is('isRead', true)
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs('Propertydefinition')
              )
-              ->outIs('OBJECT')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('OVERWRITE')
+                     ->atomIs('Propertydefinition')
+             )
+             ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
              ->optional(
                 $this->side()
@@ -65,13 +71,19 @@ class CreateMagicProperty extends Analyzer {
 
         // link to __set
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->is('isModified', true)
+             ->is('isModified', true)
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs('Propertydefinition')
              )
-              ->outIs('OBJECT')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('OVERWRITE')
+                     ->atomIs('Propertydefinition')
+             )
+             ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
              ->optional(
                 $this->side()
@@ -81,14 +93,14 @@ class CreateMagicProperty extends Analyzer {
                      ->outIs('TYPEHINT')
                      ->prepareSide()
              )
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
+             ->inIs('DEFINITION')
+             ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->addETo('DEFINITION', 'first')
+             ->back('first');
         $this->prepareQuery();
 
         // isset($this->a)
@@ -96,6 +108,12 @@ class CreateMagicProperty extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
+                     ->atomIs('Propertydefinition')
+             )
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('OVERWRITE')
                      ->atomIs('Propertydefinition')
              )
              ->inIs('ARGUMENT')
@@ -128,11 +146,17 @@ class CreateMagicProperty extends Analyzer {
                      ->inIs('DEFINITION')
                      ->atomIs('Propertydefinition')
              )
-              ->inIs('ARGUMENT')
-              ->atomIs('Unset')
-              ->back('first')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('OVERWRITE')
+                     ->atomIs('Propertydefinition')
+             )
+             ->inIs('ARGUMENT')
+             ->atomIs('Unset')
+             ->back('first')
 
-              ->outIs('OBJECT')
+             ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
              ->optional(
                 $this->side()
@@ -141,12 +165,12 @@ class CreateMagicProperty extends Analyzer {
                      ->outIs('TYPEHINT')
                      ->prepareSide()
              )              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
+             ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->addETo('DEFINITION', 'first')
              ->back('first');
         $this->prepareQuery();
 
@@ -157,10 +181,16 @@ class CreateMagicProperty extends Analyzer {
                      ->inIs('DEFINITION')
                      ->atomIs('Propertydefinition')
              )
-              ->inIs('CAST')
-              ->atomIs('Cast')
-              ->tokenIs('T_UNSET_CAST')
-              ->back('first')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('OVERWRITE')
+                     ->atomIs('Propertydefinition')
+             )
+             ->inIs('CAST')
+             ->atomIs('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->back('first')
 
               ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
@@ -171,13 +201,13 @@ class CreateMagicProperty extends Analyzer {
                      ->outIs('TYPEHINT')
                      ->prepareSide()
              )
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION2', 'first')
+             ->inIs('DEFINITION')
+             ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->addETo('DEFINITION2', 'first')
              ->back('first');
         $this->prepareQuery();
     }

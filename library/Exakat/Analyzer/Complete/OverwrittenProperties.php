@@ -38,8 +38,8 @@ class OverwrittenProperties extends Analyzer {
               ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
               ->raw('where(neq("first"))')
               ->addEFrom('OVERWRITE', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
