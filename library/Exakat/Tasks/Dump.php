@@ -228,7 +228,8 @@ class Dump extends Tasks {
                 if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
-                throw new NoSuchRuleset($ruleset);
+
+                throw new NoSuchRuleset(implode(', ', $ruleset));
             }
             display('Processing ruleset ' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
             $missing = $this->processResultsRuleset($ruleset, $counts);
@@ -343,7 +344,7 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
       .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
-       )
+       ).fold()
 )
 .map{ ["fullcode":fullcode, 
        "file":file, 

@@ -1939,7 +1939,7 @@ GREMLIN;
     
     public function storeMissing() {
         foreach($this->missingQueries as $m) {
-            print $query = <<<GREMLIN
+            $query = <<<GREMLIN
 g.addV().{$m->toAddV()}
         .addE('ANALYZED')
         .from(g.V({$this->analyzerId}))
