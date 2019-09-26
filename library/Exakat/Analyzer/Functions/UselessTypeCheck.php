@@ -25,17 +25,26 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessTypeCheck extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // function foo(A $a) { if (is_null($a)) {}}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->isNot('nullable', true)
-             ->hasOut('TYPEHINT')
+
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->inIs('TYPEHINT')
+
              ->not(
                 $this->side()
                      ->outIs('DEFAULT')
                      ->atomis('Null')
-                     ->hasNoIn('LEFT')
+                     ->hasNoIn('RIGHT')
              )
              ->outIs('NAME')
              ->outIs('DEFINITION')
@@ -47,13 +56,17 @@ class UselessTypeCheck extends Analyzer {
         // function foo(A $a) { if ($a === null) {}}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasOut('TYPEHINT')
              ->isNot('nullable', true)
+
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->inIs('TYPEHINT')
+
              ->not(
                 $this->side()
                      ->outIs('DEFAULT')
                      ->atomis('Null')
-                     ->hasNoIn('LEFT')
+                     ->hasNoIn('RIGHT')
              )
              ->outIs('NAME')
              ->outIs('DEFINITION')
@@ -67,13 +80,17 @@ class UselessTypeCheck extends Analyzer {
         // function foo(?A $a = null) { }
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasOut('TYPEHINT')
              ->is('nullable', true)
+
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->inIs('TYPEHINT')
+
              ->filter(
                 $this->side()
                      ->outIs('DEFAULT')
-                     ->atomis('Null')
-                     ->hasNoIn('LEFT')
+                     ->atomIs('Null')
+                     ->hasNoIn('RIGHT')
              )
              ->back('first');
         $this->prepareQuery();

@@ -30,9 +30,15 @@ class WrongOptionalParameter extends Analyzer {
         // function foo($a, $b = 2, $c) {}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasOut('DEFAULT')
+             ->outIs('DEFAULT')
+             ->atomIsNot('Void')
+             ->hasNoIn('RIGHT')
+             ->inIs('DEFAULT')
+
              ->nextSibling('ARGUMENT')
-             ->hasNoOut('DEFAULT')
+             ->outIs('DEFAULT')
+             ->atomIs('Void')
+
              ->back('first');
         $this->prepareQuery();
     }

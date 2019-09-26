@@ -39,8 +39,9 @@ class UselessDefault extends Analyzer {
         // foo(1); foo(2); foo(3); // always provide the arg
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasOut('DEFAULT')
              ->savePropertyAs('rank', 'ranked')
+             ->outIs('DEFAULT')
+             ->atomIsNot('Void')
              ->back('first')
              ->filter(
                 $this->side()

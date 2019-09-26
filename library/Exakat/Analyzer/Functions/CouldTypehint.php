@@ -29,7 +29,10 @@ class CouldTypehint extends Analyzer {
         // An argument is processed with a instanceof later
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasNoOut('TYPEHINT')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->inIs('TYPEHINT')
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('VARIABLE')
@@ -39,7 +42,10 @@ class CouldTypehint extends Analyzer {
         // An argument is processed with a instanceof later
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->hasNoOut('TYPEHINT')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->inIs('TYPEHINT')
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('ARGUMENT')
