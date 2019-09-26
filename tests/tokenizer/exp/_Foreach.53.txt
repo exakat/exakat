@@ -3,20 +3,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          9
-        Label : VALUE
-          11
-          Label : ARGUMENT
-            12
-          Label : ARGUMENT
-            13
-          Label : NAME
-            11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -91,20 +77,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          9
-        Label : VALUE
-          11
-          Label : ARGUMENT
-            12
-          Label : ARGUMENT
-            13
-          Label : NAME
-            11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -233,6 +205,8 @@ Label : PROJECT
             5
           Label : VALUE
             21
+          Label : VALUE
+            23
         Label : EXPRESSION
           14
           Label : BLOCK
@@ -255,9 +229,9 @@ Label : PROJECT
                   28
                 Label : CONCAT
                   29
-          Label : INDEX, VALUE
+          Label : INDEX
             17
-          Label : SOURCE, VALUE
+          Label : SOURCE
             15
           Label : VALUE
             32
@@ -285,3 +259,5 @@ Label : PROJECT
             33
           Label : VALUE
             35
+          Label : VALUE
+            37

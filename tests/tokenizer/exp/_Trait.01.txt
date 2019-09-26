@@ -21,6 +21,10 @@ Label : PROJECT
                 10
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
           Label : METHOD
             13
             Label : ARGUMENT
@@ -31,6 +35,10 @@ Label : PROJECT
                 10
             Label : NAME
               13
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
         Label : EXPRESSION
           15
           Label : EXTENDS

@@ -37,3 +37,9 @@ Label : PROJECT
                 13
           Label : SOURCE
             6
+          Label : VALUE
+            11
+            Label : CLASS
+              8
+            Label : MEMBER
+              10

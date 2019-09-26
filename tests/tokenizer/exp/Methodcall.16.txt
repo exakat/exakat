@@ -47,9 +47,5 @@ Label : PROJECT
                 8
               Label : OBJECT
                 6
-          Label : VALUE
+          Label : VALUE, VALUE
             13
-          Label : VALUE
-            13
-            Label : DEFINITION
-              13

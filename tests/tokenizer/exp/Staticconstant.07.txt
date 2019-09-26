@@ -13,12 +13,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  8
               Label : NAME
                 8
               Label : VALUE
@@ -33,12 +27,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  11
               Label : NAME
                 11
               Label : VALUE
@@ -53,12 +41,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  14
               Label : NAME
                 14
               Label : VALUE
@@ -73,12 +55,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  17
               Label : NAME
                 17
               Label : VALUE
@@ -95,12 +71,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  20
               Label : NAME
                 20
               Label : VALUE
@@ -117,12 +87,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  23
               Label : NAME
                 23
               Label : VALUE
@@ -141,12 +105,6 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
-                34
-                Label : CLASS
-                  27
-                Label : CONSTANT
-                  25
               Label : NAME
                 25
               Label : VALUE
@@ -249,5 +207,9 @@ Label : PROJECT
                   11
             Label : NAME
               30
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              31
           Label : NAME
             27

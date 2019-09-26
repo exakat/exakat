@@ -21,8 +21,6 @@ Label : GLOBAL
   26
   Label : DEFINITION
     26
-    Label : DEFAULT
-      28
     Label : DEFINITION
       26
 Label : GLOBAL
@@ -47,8 +45,6 @@ Label : PROJECT
       20
   Label : DEFINITION
     26
-    Label : DEFAULT
-      28
     Label : DEFINITION
       26
   Label : DEFINITION

@@ -21,22 +21,6 @@ Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      21
-      Label : ARGUMENT
-        22
-      Label : ARGUMENT
-        9
-        Label : MEMBER
-          27
-        Label : OBJECT
-          9
-          Label : MEMBER
-            26
-          Label : OBJECT
-            24
-      Label : NAME
-        21
     Label : DEFINITION
       18
 Label : GLOBAL
@@ -55,14 +39,6 @@ Label : GLOBAL
   28
   Label : DEFINITION
     28
-    Label : DEFAULT
-      30
-      Label : NEW
-        29
-        Label : ARGUMENT
-          31
-        Label : NAME
-          29
     Label : DEFINITION
       28
 Label : GLOBAL
@@ -87,22 +63,6 @@ Label : PROJECT
       14
   Label : DEFINITION
     18
-    Label : DEFAULT
-      21
-      Label : ARGUMENT
-        22
-      Label : ARGUMENT
-        9
-        Label : MEMBER
-          27
-        Label : OBJECT
-          9
-          Label : MEMBER
-            26
-          Label : OBJECT
-            24
-      Label : NAME
-        21
     Label : DEFINITION
       18
   Label : DEFINITION
@@ -115,14 +75,6 @@ Label : PROJECT
       24
   Label : DEFINITION
     28
-    Label : DEFAULT
-      30
-      Label : NEW
-        29
-        Label : ARGUMENT
-          31
-        Label : NAME
-          29
     Label : DEFINITION
       28
   Label : DEFINITION

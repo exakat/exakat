@@ -10,43 +10,49 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            11
+            13
             Label : CONST
-              11
+              13
               Label : NAME
-                12
-              Label : VALUE
                 14
-          Label : CONST
-            11
-            Label : CONST
-              11
-              Label : NAME
-                15
               Label : VALUE
+                16
+          Label : CONST
+            13
+            Label : CONST
+              13
+              Label : NAME
                 17
-          Label : CONST
-            11
-            Label : CONST
-              11
-              Label : NAME
-                18
               Label : VALUE
-                24
+                19
+          Label : CONST
+            13
+            Label : CONST
+              13
+              Label : NAME
+                20
+              Label : VALUE
+                26
                 Label : CLASS
-                  20
-                Label : CONSTANT
                   22
+                Label : CONSTANT
+                  24
           Label : METHOD
-            21
+            23
             Label : ARGUMENT
-              28
+              11
             Label : BLOCK
               30
               Label : EXPRESSION
-                28
+                11
             Label : NAME
-              21
+              23
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              11
+            Label : TYPEHINT
+              11
           Label : NAME
             6
           Label : PPP
@@ -55,7 +61,11 @@ Label : PROJECT
               8
               Label : DEFAULT
                 10
+            Label : TYPEHINT
+              11
           Label : PPP
-            25
+            27
             Label : PPP
-              26
+              28
+            Label : TYPEHINT
+              11
