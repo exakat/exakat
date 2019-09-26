@@ -259,6 +259,7 @@ class Dump extends Tasks {
             if (isset($counts[$analyzer])) {
                 $this->processResults($analyzer, $counts[$analyzer]);
                 $this->collectHashAnalyzer();
+                $rulesets = array();
             } else {
                 display("$analyzer is not run yet.");
             }
@@ -494,7 +495,6 @@ SQL;
             assert($count === $saved, "'results were not correctly dumped in $class : $saved/$count");
             display("$saved results saved, $count expected for $class\n");
         }
-
     }
 
     private function getAtomCounts() {

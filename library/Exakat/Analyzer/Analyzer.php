@@ -46,6 +46,7 @@ abstract class Analyzer {
     const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
     const QUERY_ARRAYS   = 7; // arrays of array
     const QUERY_TABLE    = 8; // to specific table
+    const QUERY_MISSING  = 9; // store values that are not in the graph
 
     protected $datastore  = null;
 
@@ -78,6 +79,7 @@ abstract class Analyzer {
     protected $analyzerName     = 'no analyzer name';
     protected $analyzerTable    = 'no analyzer table name';
     protected $analyzerSQLTable = 'no analyzer sql creation';
+    protected $missingQueries   = array();
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -290,10 +292,10 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
              }
 .where( __.until( hasLabel("Project") ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
-      .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (theFunction == "" && it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
+      .sideEffect{ if (theClass == ""    && it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]                ) { theClass = it.get().value("fullcode")   } }
       .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
-       )
+       ).fold()
 )
 .map{ ["fullcode":fullcode, 
        "file":file, 
@@ -1921,6 +1923,10 @@ GREMLIN;
                 $this->storeArraysToHashResult();
                 break;
 
+            case self::QUERY_MISSING:
+                $this->storeMissing();
+                break;
+
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph();
@@ -1929,6 +1935,21 @@ GREMLIN;
 
          // initializing a new query
         $this->initNewQuery();
+    }
+    
+    public function storeMissing() {
+        foreach($this->missingQueries as $m) {
+            print $query = <<<GREMLIN
+g.addV().{$m->toAddV()}
+        .addE('ANALYZED')
+        .from(g.V({$this->analyzerId}))
+GREMLIN;
+
+            $this->gremlin->query($query, array());
+            
+            ++$this->processedCount;
+            ++$this->rowCount;
+        }
     }
 
     private function storeToTableResults() {
