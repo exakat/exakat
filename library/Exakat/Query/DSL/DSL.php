@@ -96,6 +96,7 @@ abstract class DSL {
                                              'isModified',
                                              'reference',
                                              'variadic',
+                                             'static',
                                              );
     
     protected $dslfactory             = null;

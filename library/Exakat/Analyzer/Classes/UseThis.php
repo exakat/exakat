@@ -26,23 +26,25 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UseThis extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetParentDefinition',
+                    );
+    }
+
     public function analyze() {
         // Valid for both statics and normal
         // parent::
-        $this->atomIs('Method')
-             ->outIs('BLOCK')
-             ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->back('first');
+        $this->atomIs('Parent')
+             ->inIs('CLASS')
+             ->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticclass'))
+             ->goToInstruction('Method');
         $this->prepareQuery();
 
         // self or parent are local.
-        $this->atomIs('New')
-             ->outIs('NEW')
-             ->outIs('NAME')
-             ->atomIs(array('Parent', 'Self'))
-             ->back('first');
+        $this->atomIs(array('Parent', 'Self'))
+             ->inIs('NAME')
+             ->inIs('NEW')
+             ->atomIs('New');
         $this->prepareQuery();
 
         // Case for normal methods
