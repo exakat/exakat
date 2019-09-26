@@ -155,8 +155,11 @@ class Config {
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;
-//        var_dump($this->exakatConfig->toArray()['project']);
-//        var_dump($this->options['project']);
+
+        //program has precedence over rulesets
+        if (isset($this->commandLineConfig->toArray()['program'])) {
+            $this->options['project_rulesets'] = array();
+        }
 
         $remote = new RemoteConfig($this->projects_root);
         if ($file = $remote->loadConfig($this->commandLineConfig->get('project'))) {

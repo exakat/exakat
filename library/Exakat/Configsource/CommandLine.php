@@ -173,18 +173,6 @@ class CommandLine extends Config {
 
                 // Normal case is here
                 switch ($config) {
-                    case 'program' :
-                        if (!isset($this->config['program'])) {
-                            $this->config['program'] = $args[$id + 1];
-                        } elseif (is_string($this->config['program'])) {
-                            $this->config['program'] = array($this->config['program'],
-                                                             $args[$id + 1],
-                                                            );
-                        } else {
-                            $this->config['program'][] = $args[$id + 1];
-                        }
-                        break;
-
                     case 'project' :
                         if (!isset($this->config['project'])) {
                             $this->config['project'] = new Project($args[$id + 1]);
@@ -227,11 +215,29 @@ class CommandLine extends Config {
                         }
                         break;
 
-                    case 'project_rulesets' :
-                        if (isset($this->config[$config])) {
-                            $this->config[$config][] = $args[$id + 1];
+                    case 'program' :
+                        if (isset($this->config['project_rulesets'])) {
+                            // program and project_rulesets are mutually exclusive
+                            break; 
+                        } elseif (!isset($this->config['program'])) {
+                            $this->config['program'] = $args[$id + 1];
+                        } elseif (is_string($this->config['program'])) {
+                            $this->config['program'] = array($this->config['program'],
+                                                             $args[$id + 1],
+                                                            );
                         } else {
-                            $this->config[$config] = array($args[$id + 1]);
+                            $this->config['program'][] = $args[$id + 1];
+                        }
+                        break;
+
+                    case 'project_rulesets' :
+                        if (isset($this->config['program'])) {
+                            // program and project_rulesets are mutually exclusive
+                            break; 
+                        } elseif (isset($this->config['project_rulesets'])) {
+                            $this->config['project_rulesets'][] = $args[$id + 1];
+                        } else {
+                            $this->config['project_rulesets'] = array($args[$id + 1]);
                         }
                         break;
 
