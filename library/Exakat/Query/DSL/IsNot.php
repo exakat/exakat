@@ -34,10 +34,14 @@ class IsNot extends DSL {
 
         if ($value === null) {
             return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", null)))");
+        } elseif (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {
+            $value = $value === true ? 'true' : 'false';
+
+            return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $value . ' != it.get().value("' . $property . '")} else {' . $value . ' != false; }; }');
         } elseif ($value === true) {
-            return new Command("or( __.not(has(\"$property\")), __.not(has(\"$property\", true)))");
+            return new Command("has(\"$property\", false)");
         } elseif ($value === false) {
-            return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", false)))");
+            return new Command("has(\"$property\", true)");
         } elseif (is_int($value)) {
             return new Command("has(\"$property\").not(has(\"$property\", ***))", array($value));
         } elseif (is_string($value)) {

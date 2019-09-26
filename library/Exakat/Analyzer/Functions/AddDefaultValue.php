@@ -25,20 +25,33 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class AddDefaultValue extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // function foo($x) { ...; $x = 0; ...}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->isNot('reference', true)
              ->isNot('variadic', true)
-             ->hasNoOut('DEFAULT')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIs('LEFT')
-             ->atomIs('Assignation')
-             ->codeIs('=')
-             ->outIs('RIGHT')
-             ->is('constant', true)
+             // No coded default value
+             ->filter(
+                $this->side()
+                     ->outIs('DEFAULT')
+                     ->atomIs('Void')
+             )
+
+             // A constant assignation in the code
+             ->filter(
+                $this->side()
+                     ->outIs('NAME')
+                     ->outIs('DEFAULT')
+                     ->atomIsNot('Void')
+                     ->hasIn('RIGHT')
+                     ->is('constant', true)
+             )
              ->back('first');
         $this->prepareQuery();
     }

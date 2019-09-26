@@ -30,7 +30,8 @@ class Typehints extends Analyzer {
         // List all typehints in the code
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT');
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void');
         $this->prepareQuery();
     }
 }

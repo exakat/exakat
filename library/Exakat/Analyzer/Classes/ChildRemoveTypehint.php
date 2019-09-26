@@ -26,7 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class ChildRemoveTypehint extends Analyzer {
     protected $phpVersion = '7.2+';
-    
+
+    public function dependsOn() {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze() {
         // class a { function foo(B $B){}}
         // class aa extends a { function foo($B){}}
@@ -34,18 +39,15 @@ class ChildRemoveTypehint extends Analyzer {
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
              ->back('first')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->goToClass()
-             ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
-             ->hasNoOut('TYPEHINT')
+             
+             ->inIs('OVERWRITE')
+
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+
              ->back('first');
         $this->prepareQuery();
     }
