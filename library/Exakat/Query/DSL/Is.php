@@ -44,7 +44,7 @@ class Is extends DSL {
         } elseif (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {
             $value = $value === true ? 'true' : 'false';
 
-            return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $value . ' == it.get().value("' . $property . '")} else {' . $value . ' != false; }; }');
+            return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $value . ' == it.get().value("' . $property . '")} else {' . $value . ' == false; }; }');
         } elseif ($value === true) {
             return new Command('has("' . $property . '", true)');
         } elseif ($value === false) {
