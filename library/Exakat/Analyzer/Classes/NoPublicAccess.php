@@ -28,13 +28,17 @@ use Exakat\Analyzer\Analyzer;
 class NoPublicAccess extends Analyzer {
     public function analyze() {
 
-        $queryProperties = <<<'GREMLIN'
-g.V().hasLabel("Member")
-     .not(where( __.out("OBJECT").hasLabel("This")) )
-     .out("MEMBER").hasLabel("Name")
-     .values('code').unique();
-GREMLIN;
-        $properties = $this->query($queryProperties)->toArray();
+        $this->atomIs('Member')
+             ->not(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->atomIs('This')
+             )
+             ->outIs('MEMBER')
+             ->atomIs('Name')
+             ->values('code')
+             ->unique();
+        $properties = $this->rawQuery()->toArray();
 
         if(!empty($properties)) {
             $properties = array_values($properties);
@@ -48,23 +52,18 @@ GREMLIN;
             $this->prepareQuery();
         }
 
-        $queryStaticProperties = <<<'GREMLIN'
-g.V().hasLabel("Staticproperty")
-     .where( 
-     __.out("CLASS")
-         .has("token", within("T_STRING", "T_NS_SEPARATOR"))
-         .not(hasLabel("Self", "Static"))
-         .sideEffect{fnp = it.get().value("fullnspath");}
-     .in("CLASS")
-     .out("MEMBER").hasLabel("Staticpropertyname")
-     .map{ full = fnp + '::' + it.get().value("code"); }
-     )
-     .map{ full; }
-     .unique();
-GREMLIN;
-        $staticproperties = $this->query($queryStaticProperties)
-                                 ->toArray();
-        
+        $this->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->atomIsNot(array('Self', 'Static'))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->inIs('CLASS')
+
+             ->outIs('MEMBER')
+             ->atomIs('Staticpropertyname')
+             ->raw('map{ full = fnp + "::" + it.get().value("code"); }')
+             ->unique();
+        $staticproperties = $this->rawQuery()->toArray();
+
         if (!empty($staticproperties)) {
             $staticproperties = array_values($staticproperties);
             $this->atomIs('Ppp')
