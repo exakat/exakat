@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 
 class FollowParAs extends DSL {
     public function run() : Command {
-        if (func_num_args() === 0) {
+        list($out) = func_get_args();
+
+        if ($out === null) {
             $out = self::$linksDown;
         } else {
-            list($out) = func_get_args();
-
             $this->assertLink($out);
             $out = $this->normalizeLinks($out);
 
@@ -48,9 +48,11 @@ class FollowParAs extends DSL {
 .repeat( 
     __.coalesce(__.hasLabel("Parenthesis").out("CODE"), 
                 __.hasLabel("Assignation").out("RIGHT"), 
+                __.hasLabel("Ternary").out("THEN", "ELSE").not(hasLabel("Void")), 
+                __.hasLabel("Coalesce").out("RIGHT", "LEFT"), 
                 __.filter{true})
       )
-.until(__.not(hasLabel("Parenthesis", "Assignation")))
+.until(__.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce")))
 GREMLIN
 );
     }

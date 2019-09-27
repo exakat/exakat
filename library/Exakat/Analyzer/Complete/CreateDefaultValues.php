@@ -34,13 +34,8 @@ class CreateDefaultValues extends Analyzer {
              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
              ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->optional(
-               $this->side()
-                    ->atomIs('Assignation')
-                    ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
-                    ->outIs('RIGHT')
-                    ->prepareSide()
-             )
+             ->followParAs()
+
              ->addEFrom('DEFAULT', 'first')
              ->back('results');
         $this->prepareQuery();
