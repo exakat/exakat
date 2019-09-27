@@ -1879,6 +1879,12 @@ GREMLIN;
         return $this;
     }
 
+    public function processDereferencing() {
+        $this->query->processDereferencing();
+
+        return $this;
+    }
+
     public function run() {
         $this->analyze();
 
