@@ -31,6 +31,7 @@ class DereferencingLevels extends Analyzer {
         //$a->b->c()::d()->e::F (only -> and ::)
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant'))
              ->processDereferencing()
+             ->raw('where( __.sack().is(gt(0)))')
              ->raw('groupCount("m").by(__.sack()).cap("m")');
 
         $this->analyzerName = 'Dereferencing Levels';

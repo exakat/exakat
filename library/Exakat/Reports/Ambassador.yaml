@@ -211,6 +211,11 @@ audit:
             file: indentation_levels
             method: generateIndentationLevelsBreakdown
             icon: circle-o
+        dereferencing_levels:
+            title: Dereferencing levels
+            file: dereferencing_levels
+            method: generateDereferencingLevelsBreakdown
+            icon: circle-o
         changed_classes:
             title: Changed Classes
             file: changed_classes

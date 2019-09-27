@@ -1186,6 +1186,32 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
+    protected function generateDereferencingLevelsBreakdown(Section $section) {
+        // List of indentation used
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT key, value AS count FROM hashResults 
+WHERE name = "Dereferencing Levels"
+ORDER BY key + 0 ASC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['count'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+        
+        
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+    
     protected function generatePHPFunctionBreakdown(Section $section) {
         // List of php functions used
         $res = $this->sqlite->query(<<<'SQL'

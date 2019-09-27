@@ -30,7 +30,10 @@ class ProcessDereferencing extends DSL {
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $command = new Command(<<<GREMLIN
-emit().repeat( __.sack(sum).by(constant(1)).out("CLASS", "OBJECT").hasLabel("Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")).times($MAX_LOOPING)
+emit().repeat( __.sack(sum).by(choose(__.hasLabel("Array", "Arrayappend"),
+                                     constant(0),
+                                     constant(1)
+                 ) ).out("CLASS", "OBJECT", "VARIABLE", "APPEND").hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")).times($MAX_LOOPING)
 
 GREMLIN
 );
