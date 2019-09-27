@@ -27,13 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class ProcessDereferencing extends DSL {
     public function run() : Command {
-        $MAX_LOOPING = self::$MAX_LOOPING;
-
         $command = new Command(<<<GREMLIN
 emit().repeat( __.sack(sum).by(choose(__.hasLabel("Array", "Arrayappend"),
                                      constant(0),
                                      constant(1)
-                 ) ).out("CLASS", "OBJECT", "VARIABLE", "APPEND").hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")).times($MAX_LOOPING)
+                 ) ).out("CLASS", "OBJECT", "VARIABLE", "APPEND")).until(__.not(hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")))
 
 GREMLIN
 );

@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class DereferencingLevels extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         //$a->b->c()::d()->e::F (only -> and ::)
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant'))
              ->processDereferencing()
