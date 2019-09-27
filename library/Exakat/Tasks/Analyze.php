@@ -34,6 +34,7 @@ use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\QueryException;
 use Exakat\Exceptions\MissingGremlin;
+use Exakat\Exceptions\DSLException;
 use Exakat\Phpexec;
 use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
@@ -233,9 +234,17 @@ GREMLIN;
             display( "$analyzer_class running\n");
             try {
                 $analyzer->run();
-            } catch(QueryException $e) {
+            } catch(DSLException $e) {
                 $end = microtime(true);
                 display( "$analyzer_class : DSL building exception\n");
+                display($e->getMessage() . ' in '.$e->getFile(). ':'.$e->getLine());
+                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
+                $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
+                $this->checkAnalyzed();
+
+            } catch(QueryException $e) {
+                $end = microtime(true);
+                display( "$analyzer_class : DSL running exception\n");
                 display($e->getMessage());
                 $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );

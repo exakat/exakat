@@ -24,10 +24,12 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Exceptions\UnknownDsl;
+use Exakat\Exceptions\DSLException;
 use Exakat\Data\Dictionary;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
+
 
 abstract class DSL {
     const VARIABLE_WRITE = true;
@@ -35,6 +37,8 @@ abstract class DSL {
 
     const LABEL_SET  = true;
     const LABEL_GO   = false;
+    
+    const LEVELS_TO_ANALYSE = 4;
     
     const PROPERTIES = array('id',
                              'atom',
@@ -203,12 +207,18 @@ abstract class DSL {
 
     protected function assertLink($link) {
         if (is_string($link)) {
-            assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link . ' is no more');
-            assert($link === strtoupper($link), "Wrong format for LINK name : $link");
+            if(in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')) ) {
+                throw new DSLException("$link is no more", self::LEVELS_TO_ANALYSE);
+            }
+            if($link === strtoupper($link)) {
+                throw new DSLException("Wrong format for LINK name : $link", self::LEVELS_TO_ANALYSE);
+            }
+            if(preg_match('/[^A-Z/', $link)) {
+                throw new DSLException("Not a link : $link", self::LEVELS_TO_ANALYSE);
+            }
         } elseif (is_array($link)) {
             foreach($link as $l) {
-                assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l . ' is no more');
-                assert($l === strtoupper($l), "Wrong format for LINK name : $l");
+                $this->assertLink($l);
             }
         } else {
             assert(false, 'Unsupported type for link : ' . gettype($link));
