@@ -32,10 +32,10 @@ class ObjectReferences extends Analyzer {
         // f(stdclass &$x)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->fullnspathIsNot($scalars)
-             ->inIs('TYPEHINT')
              ->is('reference', true)
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->fullnspathIsNot($scalars)
              ->back('first');
         $this->prepareQuery();
 
