@@ -99,6 +99,7 @@ abstract class DSL {
                                              'static',
                                              'abstract',
                                              'constant',
+                                             'final',
                                              );
     
     protected $dslfactory             = null;
