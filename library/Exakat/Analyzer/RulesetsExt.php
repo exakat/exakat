@@ -32,8 +32,6 @@ class RulesetsExt implements RulesetsInterface {
     private $all           = array();
     private $rulesets      = array();
 
-    private static $instanciated = array();
-    
     public function __construct(Autoloader $ext) {
         $this->ext = $ext;
         
@@ -206,18 +204,6 @@ class RulesetsExt implements RulesetsInterface {
 
             return $l < 8;
         });
-    }
-
-    public function getInstance($name, $gremlin = null, $config = null) {
-        if ($analyzer = $this->getClass($name)) {
-            if (!isset(self::$instanciated[$analyzer])) {
-                self::$instanciated[$analyzer] = new $analyzer($gremlin, $config);
-            }
-            return self::$instanciated[$analyzer];
-        } else {
-            display("No such class as '$name'");
-            return null;
-        }
     }
 
     public function getAnalyzerInExtension($name) {

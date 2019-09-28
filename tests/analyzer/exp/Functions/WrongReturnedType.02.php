@@ -1,13 +1,13 @@
 <?php
 
 $expected     = array('return $f',
-                      'return $b',
+                      'return $c',
+
                       'return $a',
-                      'return $b',
                       'return 1',
-                      'new Bar( )',
-                      'new Foo( )',
-                     );
+
+                      'return new Foo( )', 
+                      );
 
 $expected_not = array('return $b',
                       'return new Bar()',

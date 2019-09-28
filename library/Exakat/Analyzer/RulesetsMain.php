@@ -30,8 +30,6 @@ class RulesetsMain implements RulesetsInterface {
     private static $sqlite = null;
     private $phar_tmp      = null;
 
-    private static $instanciated = array();
-    
     public function __construct($path) {
         if (substr($path, 0, 4) == 'phar') {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs') . '.sqlite';
@@ -247,7 +245,7 @@ SQL;
                 return false;
             }
             
-            $class = $found[0];
+            $class = array_pop($found);
         } else {
             $class = $name;
         }
@@ -289,18 +287,6 @@ SQL;
 
     public static function resetCache() {
         self::$instanciated = array();
-    }
-    
-    public function getInstance($name, $gremlin = null, $config = null) {
-        if ($analyzer = $this->getClass($name)) {
-            if (!isset(self::$instanciated[$analyzer])) {
-                self::$instanciated[$analyzer] = new $analyzer($gremlin, $config);
-            }
-            return self::$instanciated[$analyzer];
-        } else {
-            display("No such class as '$name'");
-            return null;
-        }
     }
 
     public function getAnalyzerInExtension($name) {

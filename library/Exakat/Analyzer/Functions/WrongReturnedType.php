@@ -33,95 +33,102 @@ class WrongReturnedType extends Analyzer {
 
     public function analyze() {
 //Generator, Iterator, Traversable, or iterable
+// missing support for return typehint from functions
 
         // function foo() : A { return new A;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             ->atomInsideNoDefinition('Return')
-             ->outIs('RETURN')
+             ->outIs('RETURNED')
              ->_as('results')
+
              ->outIs('NEW')
+             ->notSamePropertyAs('fullnspath', 'fqn')
+             /*
              ->not(
                  $this->side()
                       ->inIs('DEFINITION')
                       ->goToAllImplements(self::INCLUDE_SELF)
                       ->samePropertyAs('fullnspath', 'fqn')
-             )
-             ->back('results');
-        $this->prepareQuery();
+             )*/
+             ->back('results')
+             ->inIs('RETURN');
+            $this->prepareQuery();
 
         // function foo() : A { return new A;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
-             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable'))
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->back('first')
-             ->atomInsideNoDefinition('Return')
-             ->_as('results')
-             ->outIs('RETURN')
+             ->outIs('RETURNED')
              ->atomIs(array('Integer', 'String', 'Heredoc', 'Float', 'Null', 'Boolean', 'Arrayliteral'))
-             ->back('results');
+             ->inIs('RETURN');
         $this->prepareQuery();
 
         // function foo() : A { $a = 1; return $a;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
-             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable'))
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->back('first')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('RETURNED')
              ->_as('results')
-             ->outIs('RETURN')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
              ->outIs('DEFAULT')
              ->atomIs(array('Integer', 'String', 'Heredoc', 'Float', 'Null', 'Boolean', 'Arrayliteral'))
-             ->back('results');
+             ->back('results')
+             ->inIs('RETURN');
         $this->prepareQuery();
 
-        // function foo() : A { $a = B; return $a;}
+        // function foo() : A { $a = new B; return $a;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
-             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable'))
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('RETURNED')
              ->_as('results')
-             ->outIs('RETURN')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
              ->outIs('DEFAULT')
              ->atomIs('New')
              ->outIs('NEW')
-             ->not(
+ 
+              ->notSamePropertyAs('fullnspath', 'fqn')
+              /*
+            ->not(
                  $this->side()
                       ->inIs('DEFINITION')
                       ->goToAllImplements(self::INCLUDE_SELF)
                       ->samePropertyAs('fullnspath', 'fqn')
              )
-             ->back('results');
+             */
+             ->back('results')
+             ->inIs('RETURN');
         $this->prepareQuery();
 
         // function foo(B $b) : A { return $b;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
-             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable'))
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('RETURNED')
              ->_as('results')
-             ->outIs('RETURN')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
              ->inIs('NAME')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'fqn')
-             ->back('results');
+             ->back('results')
+             ->inIs('RETURN');
         $this->prepareQuery();
 
         // PHP scalar types
@@ -129,12 +136,11 @@ class WrongReturnedType extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
-             ->fullnspathIs(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable'))
+             ->atomIs('Scalartypehint')
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('RETURNED')
              ->_as('results')
-             ->outIs('RETURN')
              ->raw(<<<GREMLIN
 filter{
     if (fqn == "\\\\int") {
@@ -167,7 +173,8 @@ filter{
 }
 GREMLIN
 )
-             ->back('results');
+             ->back('results')
+             ->inIs('RETURN');
         $this->prepareQuery();
     }
 }

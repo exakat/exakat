@@ -89,6 +89,7 @@ abstract class DSL {
                              );
 
     protected const BOOLEAN_PROPERTY = array('abstract',
+                                             'absolute',
                                              'aliased',
                                              'alternative',
                                              'bracket',

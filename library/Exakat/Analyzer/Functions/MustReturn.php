@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class MustReturn extends Analyzer {
     public function dependsOn() {
-        return array('Functions/CantUse');
+        return array('Functions/CantUse',
+                    );
     }
 
     public function analyze() {
@@ -47,16 +48,19 @@ class MustReturn extends Analyzer {
                             ), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')
              ->analyzerIsNot('Functions/CantUse')
-             ->noAtomInside('Return');
+             ->outIs('RETURNED')
+             ->atomIs('Void')
+             ->back('first');
         $this->prepareQuery();
 
         // function foo() : type { /* no return */ } (except with void)
         $this->atomIs(array('Function', 'Closure', 'Method', 'Arrowfunction'))
              ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
              ->fullnspathIsNot('\\void')
              ->back('first')
-             ->outIs('BLOCK')
-             ->noAtomInside('Return')
+             ->outIs('RETURNED')
+             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
     }

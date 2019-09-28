@@ -1,5 +1,5 @@
 <?php
-function returnObject(Foo $f, Bar $b, $c): Bar {
+function returnObject(Foo $f, Bar $b2, $c): Bar {
 	$b = new Bar();
 	return $b;
 	return new Bar();
@@ -10,7 +10,7 @@ function returnObject(Foo $f, Bar $b, $c): Bar {
 	return new Foo();
 
 	return $f;
-	return $b;
+	return $b2;
 	return $c;
 }
 

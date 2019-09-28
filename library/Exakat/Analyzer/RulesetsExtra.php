@@ -30,8 +30,6 @@ use Exakat\Autoload\Autoloader;
 class RulesetsExtra implements RulesetsInterface {
     private $extra_rulesets  = array();
 
-    private static $instanciated = array();
-    
     public function __construct(array $extra_rulesets = array()) {
         $this->extra_rulesets = $extra_rulesets;
     }
@@ -174,18 +172,6 @@ class RulesetsExtra implements RulesetsInterface {
 
     public static function resetCache() {
         self::$instanciated = array();
-    }
-
-    public function getInstance($name, $gremlin = null, $config = null) {
-        if ($analyzer = $this->getClass($name)) {
-            if (!isset(self::$instanciated[$analyzer])) {
-                self::$instanciated[$analyzer] = new $analyzer($gremlin, $config);
-            }
-            return self::$instanciated[$analyzer];
-        } else {
-            display("No such class as '$name'");
-            return null;
-        }
     }
 
     public function getAnalyzerInExtension($name) {

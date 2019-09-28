@@ -33,7 +33,6 @@ class CreateDefaultValues extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
              ->codeIs('=', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
-             ->outIs('RIGHT')
              ->followParAs()
 
              ->addEFrom('DEFAULT', 'first')
