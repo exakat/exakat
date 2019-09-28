@@ -88,22 +88,23 @@ abstract class DSL {
                              'trailing',
                              );
 
-    protected const BOOLEAN_PROPERTY = array('aliased',
+    protected const BOOLEAN_PROPERTY = array('abstract',
+                                             'aliased',
                                              'alternative',
+                                             'bracket',
+                                             'constant',
                                              'enclosing',
+                                             'final',
                                              'globalvar',
                                              'heredoc',
+                                             'isModified',
+                                             'isRead',
                                              'noscream',
                                              'nullable',
-                                             'trailing',
-                                             'isRead',
-                                             'isModified',
                                              'reference',
-                                             'variadic',
                                              'static',
-                                             'abstract',
-                                             'constant',
-                                             'final',
+                                             'trailing',
+                                             'variadic',
                                              );
     
     protected $dslfactory             = null;
@@ -210,10 +211,10 @@ abstract class DSL {
             if(in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')) ) {
                 throw new DSLException("$link is no more", self::LEVELS_TO_ANALYSE);
             }
-            if($link === strtoupper($link)) {
+            if($link !== strtoupper($link)) {
                 throw new DSLException("Wrong format for LINK name : $link", self::LEVELS_TO_ANALYSE);
             }
-            if(preg_match('/[^A-Z/', $link)) {
+            if(preg_match('/[^A-Z]/', $link)) {
                 throw new DSLException("Not a link : $link", self::LEVELS_TO_ANALYSE);
             }
         } elseif (is_array($link)) {

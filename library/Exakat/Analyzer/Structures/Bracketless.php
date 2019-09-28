@@ -32,33 +32,18 @@ class Bracketless extends Analyzer {
              ->isNot('alternative', true)
              ->outIs(array('ELSE', 'THEN'))
              ->isNot('bracket', true)
-             ->raw('where( __.not( and(has("count", 1), __.out("EXPRESSION").hasLabel("Ifthen") ) ) )')
+             ->not(
+                $this->side()
+                     ->has('count', 1)
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Ifthen')
+             )
              ->tokenIsNot('T_ELSEIF')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('For')
+        $this->atomIs(array('For', 'Foreach', 'While', 'Dowhile'))
              ->isNot('alternative', true)
-             ->outIs('BLOCK')
-             ->isNot('bracket', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Foreach')
-             ->isNot('alternative', true)
-             ->outIs('BLOCK')
-             ->isNot('bracket', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('While')
-             ->isNot('alternative', true)
-             ->outIs('BLOCK')
-             ->isNot('bracket', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Dowhile')
              ->outIs('BLOCK')
              ->isNot('bracket', true)
              ->back('first');
