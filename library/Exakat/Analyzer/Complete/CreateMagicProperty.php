@@ -51,22 +51,33 @@ class CreateMagicProperty extends Analyzer {
              )
              ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
-             ->optional(
+             ->inIs('DEFINITION') // Good enough for This
+             ->optional(          // For arguments
                 $this->side()
-                     ->inIs('DEFINITION')
-                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
+                     ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
                      ->outIs('TYPEHINT')
+                     ->inIs('DEFINITION')
                      ->prepareSide()
              )
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
-              ->outIs('MAGICMETHOD')
-              ->outIs('NAME')
-              ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
+
+            // In case we are in an interface
+             ->optional(
+                $this->side()
+                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
+                     ->outIs('DEFINITION')
+                     ->inIs('IMPLEMENTS')
+                     ->prepareSide()
+             )
+
+             ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__get', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->inIs('NAME')
+
+             ->addETo('DEFINITION', 'first')
+             ->back('first');
         $this->prepareQuery();
 
         // link to __set
@@ -77,29 +88,33 @@ class CreateMagicProperty extends Analyzer {
                      ->inIs('DEFINITION')
                      ->atomIs('Propertydefinition')
              )
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('OVERWRITE')
-                     ->atomIs('Propertydefinition')
-             )
-             ->outIs('OBJECT')
              ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
-             ->optional(
+             ->inIs('DEFINITION') // Good enough for This
+             ->optional(          // For arguments
                 $this->side()
-                     ->inIs('DEFINITION')
-                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
+                     ->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
                      ->outIs('TYPEHINT')
+                     ->inIs('DEFINITION')
                      ->prepareSide()
              )
-             ->inIs('DEFINITION')
+
+            // In case we are in an interface
+             ->optional(
+                $this->side()
+                     ->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
+                     ->outIs('DEFINITION')
+                     ->inIs('IMPLEMENTS')
+                     ->prepareSide()
+             )
+
              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
              ->outIs('MAGICMETHOD')
              ->outIs('NAME')
              ->codeIs('__set', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first')
+
              ->back('first');
         $this->prepareQuery();
 
