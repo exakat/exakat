@@ -56,7 +56,7 @@ class DependantAbstractClass extends Analyzer {
         $this->prepareQuery();
 
         // Case for class::constant
-        // self will be solved at excution time, but is set to the trait statically
+        // statics will be solved at excution time, but is set to the trait statically
         $this->atomIs(self::$CLASSES_ALL)
              ->is('abstract', true)
              ->savePropertyAs('fullnspath', 'fnp')
@@ -64,8 +64,7 @@ class DependantAbstractClass extends Analyzer {
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs('CLASS')
              ->atomIs('Staticconstant')
-             ->hasNoIn('
-             ')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }
