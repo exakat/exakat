@@ -26,8 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class CloneWithNonObject extends Analyzer {
     public function analyze() {
-        $scalartypes = $this->loadIni('php_scalar_types.ini', 'types');
-
         // clone x
         $this->atomIs('Clone')
              ->outIs('CLONE')
@@ -38,8 +36,8 @@ class CloneWithNonObject extends Analyzer {
                      ->atomIs(self::$CALLS)
                      ->inIs('DEFINITION')
                      ->outIs('RETURNTYPE')
+                     ->atomIsNot(array('Void', 'Scalartypehint'))
                      ->isNot('nullable', true)
-                     ->fullnspathIsNot($scalartypes)
              )
              ->not(
                 $this->side()

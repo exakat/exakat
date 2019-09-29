@@ -1,6 +1,6 @@
 <?php
 foreach ($switch as $key => $val) {
-	$row[$key] = $switch[$key][($count + count($val) -1) % count($val)];
+	$row[$key] = $switch[$key][($count * count($val) -1) % count($val)];
 }
 
 foreach ($switch as $key => $val2) {
