@@ -44,7 +44,6 @@ class MakeDefault extends Analyzer {
              ->_as('assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Integer', 'Boolean', 'Float', 'Null', 'Arrayliteral', 'Ternary', 'Coalesce'))
              ->is('constant', true)
              ->inIs('DEFAULT')
              ->atomIs('Propertydefinition')
