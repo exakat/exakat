@@ -96,7 +96,6 @@ abstract class DSL {
                                              'constant',
                                              'enclosing',
                                              'final',
-                                             'globalvar',
                                              'heredoc',
                                              'isModified',
                                              'isRead',

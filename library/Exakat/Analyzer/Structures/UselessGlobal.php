@@ -27,25 +27,19 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessGlobal extends Analyzer {
     public function analyze() {
-        $globals = $this->dictCode->translate(array('$GLOBALS'));
-
         // Global are unused if used only once
         $this->atomIs('Globaldefinition')
              ->values('code');
         $inglobal = $this->rawQuery()
                          ->toArray();
 
-        if (empty($globals)) {
-            $inGlobals = array();
-        } else {
-            $this->atomIs('Phpvariable')
-                 ->codeIs($globals[0], self::NO_TRANSLATE, self::CASE_SENSITIVE )
-                 ->inIs('VARIABLE')
-                 ->atomIs('Array')
-                 ->values('globalvar');
-            $inGlobals = $this->rawQuery()
-                              ->toArray();
-        }
+        $this->atomIs('Phpvariable')
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE )
+             ->inIs('VARIABLE')
+             ->atomIs('Array')
+             ->values('globalvar');
+        $inGlobals = $this->rawQuery()
+                          ->toArray();
 
         $this->atomIs('Php')
              ->outIs('CODE')
@@ -62,15 +56,13 @@ class UselessGlobal extends Analyzer {
             $this->atomIs('Globaldefinition')
                  ->codeIs($loneGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
             $this->prepareQuery();
-            
-            if (!empty($globals)) {
-                $this->atomIs('Phpvariable')
-                     ->codeIs($globals, self::NO_TRANSLATE, self::CASE_SENSITIVE)
-                     ->inIs('VARIABLE')
-                     ->atomIs('Array')
-                     ->is('globalvar', $loneGlobal);
-                $this->prepareQuery();
-            }
+
+            $this->atomIs('Phpvariable')
+                 ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
+                 ->inIs('VARIABLE')
+                 ->atomIs('Array')
+                 ->is('globalvar', $loneGlobal);
+            $this->prepareQuery();
         }
 
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
