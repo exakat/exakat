@@ -53,7 +53,7 @@ class MbStringInLoop extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // dowhile, loop ? 
+        // dowhile, loop ?
     }
 }
 

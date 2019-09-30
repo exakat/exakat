@@ -36,7 +36,7 @@ class NeverUsedParameter extends Analyzer {
         // foo($a, $b = 2, $c = 3) {}; foo(1,2);
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->filter( 
+             ->filter(
                  $this->side()
                       ->outIs('DEFAULT')
                       ->atomIsNot('Void')

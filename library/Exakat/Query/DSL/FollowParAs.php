@@ -31,7 +31,7 @@ class FollowParAs extends DSL {
         list($out) = func_get_args();
 
         if ($out === null) {
-            $out = 'out('.self::$linksDown.').';
+            $out = 'out(' . self::$linksDown . ').';
         } elseif (empty($out)) { // To be used in-place
             $out = 'filter{ true; }.';
         } else {
@@ -42,7 +42,7 @@ class FollowParAs extends DSL {
                 return new Command(Query::STOP_QUERY);
             }
             
-            $out = 'out('.makeList($out).').';
+            $out = 'out(' . makeList($out) . ').';
         }
 
         return new Command(<<<GREMLIN

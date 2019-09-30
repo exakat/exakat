@@ -38,7 +38,7 @@ class DuplicateLiteral extends Analyzer {
                      ->inIs('VALUE')
                      ->atomIs(array('Constant', 'Defineconstant'))
               )
-             ->raw('groupCount("m").by("noDelimiter").cap("m").next().findAll{ it.value >= '.$this->minDuplicate.'; }');
+             ->raw('groupCount("m").by("noDelimiter").cap("m").next().findAll{ it.value >= ' . $this->minDuplicate . '; }');
         $strings = $this->rawQuery();
         
         if (!empty($strings->toArray())) {
@@ -73,7 +73,7 @@ class DuplicateLiteral extends Analyzer {
                      ->inIs('VALUE')
                      ->atomIs(array('Constant', 'Defineconstant'))
               )
-             ->raw('groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= '.$this->minDuplicate.'; }');
+             ->raw('groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= ' . $this->minDuplicate . '; }');
         $integers = $this->rawQuery();
         
         if (!empty($integers->toArray())) {

@@ -49,7 +49,7 @@ class PropertyCouldBeLocal extends Analyzer {
                             $this->side()
                                  ->outIs('BLOCK')
                                  ->atomInsideNoDefinition('Member')
-                                 ->filter( 
+                                 ->filter(
                                         $this->side()
                                              ->outIs('OBJECT')
                                              ->atomIs('This')

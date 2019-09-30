@@ -5007,7 +5007,7 @@ HTML;
         $results->load();
         
         $expr = $results->getColumn('fullcode');
-        $expr = array_map(function($x) { return trim($x, '{}');}, $expr);
+        $expr = array_map(function ($x) { return trim($x, '{}');}, $expr);
         $counts = array_count_values($expr);
 
         $expressions = '';

@@ -34,9 +34,9 @@ class Dependencies extends Reports {
         $graph = new GSNeo4j($this->config);
 
         $links    = array();
-        $nodes    = array('class'     => array(), 
-                          'trait'     => array(), 
-                          'interface' => array(), 
+        $nodes    = array('class'     => array(),
+                          'trait'     => array(),
+                          'interface' => array(),
                           'unknown'   => array(),
                           );
         $fullcode = array();

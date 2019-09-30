@@ -32,7 +32,7 @@ class TooManyDereferencing extends Analyzer {
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant', 'Array', 'Append'))
              ->hasNoIn(array('CLASS', 'VARIABLE', 'APPEND', 'OBJECT'))
              ->processDereferencing()
-             ->raw('where( __.sack().is(gt('.$this->tooManyDereferencing.')))')
+             ->raw('where( __.sack().is(gt(' . $this->tooManyDereferencing . ')))')
              ->inIsIE(array('CLASS', 'VARIABLE', 'APPEND', 'OBJECT'));
         $this->prepareQuery();
     }

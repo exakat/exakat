@@ -28,7 +28,7 @@ class FollowClosureDefinition extends Analyzer {
     public function analyze() {
         // immediate usage : in parenthesis
         $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
-             ->inIsIE('RIGHT') // Skip all $closure = 
+             ->inIsIE('RIGHT') // Skip all $closure =
               ->inIs('CODE')
               ->atomIs('Parenthesis')
               ->inIs('NAME')

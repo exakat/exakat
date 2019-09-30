@@ -34,7 +34,7 @@ class UdpDomains extends Analyzer {
         $domains = $this->loadIni('php_internet_domains.ini', 'domains');
         
         $this->atomIs('String', self::WITH_CONSTANTS)
-             ->regexIs('noDelimiter', '^('.implode('|', $domains).')://')
+             ->regexIs('noDelimiter', '^(' . implode('|', $domains) . ')://')
              ->back('first');
         $this->prepareQuery();
     }
