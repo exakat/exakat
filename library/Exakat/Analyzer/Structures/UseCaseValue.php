@@ -42,7 +42,18 @@ class UseCaseValue extends Analyzer {
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'variable')
              ->is('isRead', true)
-             ->back('results');
+             ->back('results')
+             ->not(
+                $this->side()
+                     ->previousSibling('EXPRESSION')
+                     ->atomIs('Default')
+             )
+            ->not(
+                $this->side()
+                     ->previousSibling('EXPRESSION')
+                     ->atomIs('Case')
+                     ->noAtomInside(array('Break', 'Return', 'Continue'))
+             );
         $this->prepareQuery();
     }
 }
