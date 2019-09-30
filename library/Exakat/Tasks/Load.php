@@ -3034,7 +3034,7 @@ class Load extends Tasks {
         return $next;
     }
 
-    private function processSGVariable($atom) {
+    private function processSGVariable($atom = 'Ppp') {
         $current = $this->id;
         $static = $this->addAtom($atom);
         $rank = 0;
