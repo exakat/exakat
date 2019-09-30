@@ -688,7 +688,7 @@ class Load extends Tasks {
         $this->tokens                  = array();
     }
 
-    public function processDiffFile($filename, $path) {
+    public function initDiff() {
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
         display("Loading with $clientClass\n");
         if (!class_exists($clientClass)) {
@@ -708,16 +708,24 @@ class Load extends Tasks {
         $this->min_id         = \PHP_INT_MAX;
 
         $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
-
-        $this->processFile($filename, $path);
+    }
+    
+    public function finishDiff() {
         $this->loader->finalize(array());
 
         $loadFinal = new LoadFinal($this->gremlin, $this->config, $this->datastore);
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
+        
+        $this->reset();
     }
-    
+
+
+    public function processDiffFile($filename, $path) {
+        $this->processFile($filename, $path);
+    }
+
     private function processFile($filename, $path) {
         $begin = microtime(\TIME_AS_NUMBER);
         $fullpath = $path . $filename;
@@ -2066,7 +2074,7 @@ class Load extends Tasks {
                                                             ),
                      STRICT_COMPARISON)) {
                      
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable', 'mixed'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable'), STRICT_COMPARISON)) {
                 ++$this->id;
                 $nsname = $this->processSingle('Scalartypehint');
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
@@ -2947,7 +2955,7 @@ class Load extends Tasks {
             $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
             
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'iterable', 'mixed'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable'), STRICT_COMPARISON)) {
                 $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
             } else {
                 $this->getFullnspath($typehint, 'class', $typehint);
@@ -3351,11 +3359,14 @@ class Load extends Tasks {
 
         // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
         $max = max(array_keys($this->atoms));
+        $double = array($value->code => 1);
         for($i = $variables_start + 1; $i < $max; ++$i) {
-            if ($this->atoms[$i]->atom === 'Variable') {
+            if ($this->atoms[$i]->atom === 'Variable' && !isset($double[$this->atoms[$i]->code])) {
+                $double[$this->atoms[$i]->code] = 1;
                 $this->addLink($foreach, $this->atoms[$i], 'VALUE');
             }
         }
+        unset($double);
 
         ++$this->id; // Skip )
         $isColon = $this->whichSyntax($current, $this->id + 1);

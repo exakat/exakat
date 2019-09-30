@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('function foo8(mixed &$i) { /**/ } ',
-                      'function foo9(X &$i) { /**/ } ',
+$expected     = array('function foo9(X &$i) { /**/ } ',
+                      'function foo7(numeric &$i) { /**/ } ',
+                      'function foo8(mixed &$i) { /**/ } ',
                       'function foo10(A\\B &$i) { /**/ } ',
                      );
 
@@ -11,7 +12,6 @@ $expected_not = array('function foo1(int &$i) { /**/ } ',
                       'function foo4(string &$i) { /**/ } ',
                       'function foo5(callable &$i) { /**/ } ',
                       'function foo6(array &$i) { /**/ } ',
-                      'function foo7(numeric &$i) { /**/ } ',
                       'function sfoo1(int $i) { /**/ } ',
                       'function sfoo2(float $i) { /**/ } ',
                       'function sfoo3(bool $i) { /**/ } ',

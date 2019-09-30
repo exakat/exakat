@@ -30,10 +30,9 @@ class TypehintedReferences extends Analyzer {
         // function foo(X &$x)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->fullnspathIsNot(array('\int', '\float', '\bool', '\string', '\callable', '\array', '\numeric'))
-             ->inIs('TYPEHINT')
              ->is('reference', true)
+             ->outIs('TYPEHINT')
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->back('first');
         $this->prepareQuery();
 
@@ -41,7 +40,7 @@ class TypehintedReferences extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->is('reference', true)
              ->outIs('RETURNTYPE')
-             ->fullnspathIsNot(array('\int', '\float', '\bool', '\string', '\callable', '\array', '\numeric'))
+             ->atomIsNot(array('Void', 'Scalartypehint'))
              ->back('first');
         $this->prepareQuery();
     }
