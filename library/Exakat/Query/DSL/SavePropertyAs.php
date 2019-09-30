@@ -40,7 +40,7 @@ class SavePropertyAs extends DSL {
         } elseif ($property === 'self') {
             return new Command('sideEffect{ ' . $name . ' = it.get(); }');
         } elseif (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {
-            return new Command('has("' . $property . '").sideEffect{ if ( it.get().properties("' . $property . '").any()) { ' . $name . ' = it.get().value("' . $property . '")} else {' . $name . ' = false; }; }');
+            return new Command('sideEffect{ if ( it.get().properties("' . $property . '").any()) { ' . $name . ' = it.get().value("' . $property . '")} else {' . $name . ' = false; }; }');
         } else {
             return new Command('has("' . $property . '").sideEffect{ ' . $name . ' = it.get().value("' . $property . '"); }');
         }
