@@ -31,6 +31,7 @@ class WrongNumberOfArguments extends Analyzer {
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/MakeClassMethodDefinition',
                      'Functions/VariableArguments',
                     );
     }

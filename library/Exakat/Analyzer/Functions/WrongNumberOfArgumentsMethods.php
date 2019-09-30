@@ -31,6 +31,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                      'Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/OverwrittenMethods',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
                      'Complete/SetClassRemoteDefinitionWithReturnTypehint',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Functions/VariableArguments',

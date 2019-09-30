@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class DependantAbstractClass extends Analyzer {
     public function dependsOn() {
         return array('Complete/MakeClassConstantDefinition',
+                     'Complete/SetClassMethodRemoteDefinition',
                     );
     }
 
