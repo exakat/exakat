@@ -83,6 +83,7 @@ class CreateMagicProperty extends Analyzer {
         // link to __set
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
              ->is('isModified', true)
+             ->outIs('OBJECT')
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')

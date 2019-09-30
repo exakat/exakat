@@ -39,6 +39,7 @@ class MakeMagicConcrete extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__get')
              ->back('first')
+
              ->raw(<<<GREMLIN
 sideEffect{ members = [:]; }
 .where(
