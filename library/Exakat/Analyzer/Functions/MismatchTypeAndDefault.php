@@ -25,18 +25,44 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MismatchTypeAndDefault extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateConstants',
+                     'Complete/MakeClassConstantDefinition',
+                    );
+    }
+
     public function analyze() {
+        $values = array('Null', 
+                        'String', 
+                        'Arrayliteral',
+                        'Integer', 
+                        'Float', 
+                        'Boolean', 
+                        'Nsname', 
+                        'Identifier', 
+                        'Staticconstant', 
+                        'Addition', 
+                        'Multiplication', 
+                        'Power', 
+                        'Heredoc', 
+                        'Concatenation', 
+                        'Staticclass',
+                        'Comparison',
+                     );
+
         // function foo(string $s = 3)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->_as('arg')
              ->outIs('DEFAULT')
-             ->outIsIE(array('THEN', 'ELSE', 'LEFT', 'RIGHT')) // basic handling of ternary
-             ->goToLiteralValue()
-             ->atomIsNot(array('Null', 'Nsname', 'Identifier', 'Staticconstant')) // case for no available definitions
+             ->atomIsNot('Void')
+             ->hasNoIn('RIGHT')
+             ->followParAs(array()) // basic handling of ternary
+             ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
              ->isNot('nullable', true)
              ->raw(<<<'GREMLIN'
 filter{
@@ -80,9 +106,10 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->_as('arg')
              ->outIs('DEFAULT')
-             ->outIsIE(array('THEN', 'ELSE', 'LEFT', 'RIGHT')) // basic handling of ternary
-             ->goToLiteralValue()
-             ->atomIsNot(array('Nsname', 'Identifier', 'Staticconstant')) // case for no available definitions
+             ->atomIsNot('Void')
+             ->hasNoIn('RIGHT')
+             ->followParAs(array()) // basic handling of ternary
+             ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')

@@ -505,10 +505,8 @@ GREMLIN;
             return array($result);
         }
         
-        $return = array();
-        foreach($result as $row) {
-            $return[$row['key']] = $row['value'];
-        }
+        $return = array_combine(array_column($row, 'key'), array_column($row, 'value'));
+
         return $return;
     }
 

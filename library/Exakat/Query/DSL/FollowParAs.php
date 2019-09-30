@@ -31,7 +31,9 @@ class FollowParAs extends DSL {
         list($out) = func_get_args();
 
         if ($out === null) {
-            $out = self::$linksDown;
+            $out = 'out('.self::$linksDown.').';
+        } elseif (empty($out)) { // To be used in-place
+            $out = 'filter{ true; }.';
         } else {
             $this->assertLink($out);
             $out = $this->normalizeLinks($out);
@@ -40,15 +42,15 @@ class FollowParAs extends DSL {
                 return new Command(Query::STOP_QUERY);
             }
             
-            $out = makeList($out);
+            $out = 'out('.makeList($out).').';
         }
 
         return new Command(<<<GREMLIN
- out({$out})
-.repeat( 
+ {$out}repeat( 
     __.coalesce(__.hasLabel("Parenthesis").out("CODE"), 
                 __.hasLabel("Assignation").out("RIGHT"), 
-                __.hasLabel("Ternary").out("THEN", "ELSE").not(hasLabel("Void")), 
+                __.hasLabel("Ternary").where(__.out("THEN").not(hasLabel("Void"))).out("THEN", "ELSE"), 
+                __.hasLabel("Ternary").where(__.out("THEN").    hasLabel("Void" )).out("CONDITION", "ELSE"), 
                 __.hasLabel("Coalesce").out("RIGHT", "LEFT"), 
                 __.filter{true})
       )
