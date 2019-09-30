@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array('return $b',
-                      'return new Unknown( )', 
-                      'return new Foo( )', 
+                      'return new Unknown( )',
+                      'return new Foo( )',
                       'return new Bar',
-                      'return new FooFoo( )', 
+                      'return new FooFoo( )',
                       'return new interfaced( )',
                      );
 

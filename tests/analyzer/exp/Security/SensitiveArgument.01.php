@@ -7,7 +7,7 @@ $expected     = array('$c',
 
 $expected_not = array('$b',
                       '$a',
-                      "'x'",
+                      '\'x\'',
                       'Stdclass::c',
                      );
 

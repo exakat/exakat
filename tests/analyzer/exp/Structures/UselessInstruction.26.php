@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('strtolower(\'a\')', 
+$expected     = array('strtolower(\'a\')',
                       'bar($b)',
                      );
 

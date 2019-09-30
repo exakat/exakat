@@ -6,7 +6,7 @@ $expected     = array('static::C2(2)',
                       '$this::C2(4)',
                       'parent::C2(3)',
                       'x::C2(6)',
-                      '\x::C2(7)',
+                      '\\x::C2(7)',
                       '$a->c( )',
                       '$this->c( )',
                      );
