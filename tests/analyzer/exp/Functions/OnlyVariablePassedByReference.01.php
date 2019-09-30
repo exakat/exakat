@@ -9,10 +9,12 @@ $expected     = array('getmxrr($a, foo( ))',
                       'bar(null, null)',
                       'bar($a->boo( ), $a->boo( ))',
                       'bar(foo( ), $b, $c)',
+                      'bar(foo(1), $a)',
                      );
 
 $expected_not = array('reset(foo( ))',
                       'getmxrr($a, foo( ))',
+                      'bar($a, foo(1))',
                      );
 
 ?>

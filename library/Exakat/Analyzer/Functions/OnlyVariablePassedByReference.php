@@ -30,89 +30,36 @@ class OnlyVariablePassedByReference extends Analyzer {
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/SetClassRemoteDefinitionWithParenthesis',
                      'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/MakeFunctioncallWithReference',
                     );
     }
 
     public function analyze() {
-        // Functioncalls
+        // custom calls
+        $this->atomIs(self::$CALLS)
+             ->hasIn('DEFINITION')  // No definition, no check
+             ->outIsIE('METHOD')
+             ->outIs('ARGUMENT')
+             ->is('isModified', true)
+             ->atomIsNot(self::$CONTAINERS_PHP)
+             ->back('first');
+        $this->prepareQuery();
+
+        // PHP Functioncalls
+        $phpNative = self::$methods->getFunctionsReferenceArgs();
+        $phpNative = array_column($phpNative, 'function');
+        $phpNative = array_unique($phpNative);
+        $phpNative = array_values($phpNative);
+        $phpNative = makeFullnspath($phpNative);
+
         $this->atomIs('Functioncall')
+             ->hasNoIn('DEFINITION')  // No definition, no check
+             ->fullnspathIs($phpNative)
              ->outIs('ARGUMENT')
+             ->is('isModified', true)
              ->atomIsNot(self::$CONTAINERS_PHP)
-             ->not(
-                $this->side()
-                     ->atomIs(self::$FUNCTIONS_CALLS)
-                     ->inIs('DEFINITION')
-                     ->is('reference', true)
-             )
-             // Case for static method call ?
-             ->savePropertyAs('rank', 'position')
-             ->back('first')
-             ->functionDefinition()
-             ->outWithRank('ARGUMENT', 'position')
-             ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
-
-        // methods calls
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
-             ->outIs('ARGUMENT')
-             ->atomIsNot(self::$CONTAINERS_PHP)
-             ->not(
-                $this->side()
-                     ->atomIs(self::$FUNCTIONS_CALLS)
-                     ->inIs('DEFINITION')
-                     ->is('reference', true)
-             )
-             // Case for static method call ?
-             ->savePropertyAs('rank', 'position')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outWithRank('ARGUMENT', 'position')
-             ->is('reference', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Static methods calls
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
-             ->outIs('ARGUMENT')
-             ->atomIsNot(self::$CONTAINERS_PHP)
-             ->not(
-                $this->side()
-                     ->atomIs(self::$FUNCTIONS_CALLS)
-                     ->inIs('DEFINITION')
-                     ->is('reference', true)
-             )
-             // Case for static method call ?
-             ->savePropertyAs('rank', 'position')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outWithRank('ARGUMENT', 'position')
-             ->is('reference', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Checking PHP Native functions
-        $functions = self::$methods->getFunctionsReferenceArgs();
-        $references = array();
-
-        foreach($functions as $function) {
-            array_collect_by($references, $function['position'], makeFullnspath($function['function']));
-        }
-
-        foreach($references as $position => $functions) {
-            // Functioncalls
-            $this->atomFunctionIs($functions)
-                 ->outWithRank('ARGUMENT', $position)
-                 ->atomIsNot(self::$CONTAINERS_PHP)
-                 ->back('first');
-            $this->prepareQuery();
-        }
     }
 }
 

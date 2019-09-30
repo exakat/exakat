@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachReferenceIsNotModified extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeFunctioncallWithReference',
+                    );
+    }
+
     public function analyze() {
         // case of a variable
         // foreach($a as &$b) { $c += $b; } // $b is not modified

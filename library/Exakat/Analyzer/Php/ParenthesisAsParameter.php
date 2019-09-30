@@ -26,41 +26,20 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ParenthesisAsParameter extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeFunctioncallWithReference',
+                    );
+    }
+
     public function analyze() {
         // foo( (1 + 2), 3, (new x))
         // Only valid if the argument is a reference
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
-             ->is('reference', true)
+             ->is('isModified', true)
              ->back('first');
         $this->prepareQuery();
-
-        // PHP functions that are references
-        $functions = self::$methods->getFunctionsReferenceArgs();
-        $references = array();
-        
-        foreach($functions as $function) {
-            if (isset($references[$function['position']])) {
-                $references[$function['position']][] = "\\$function[function]";
-            } else {
-                $references[$function['position']] = array("\\$function[function]");
-            }
-        }
-        
-        foreach($references as $position => $functions) {
-            $this->atomFunctionIs($functions)
-                 ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('Parenthesis')
-                 ->back('first');
-            $this->prepareQuery();
-        }
-
     }
 }
 

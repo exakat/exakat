@@ -4,6 +4,7 @@ include ('def.php');
 
 bar($a, $b);
 bar($a, foo(1));
+bar(foo(1), $a);
 bar($a, foo(1), foo(2));
 bar($a[1], $a[2]);
 bar(A::$a, A::$b);
