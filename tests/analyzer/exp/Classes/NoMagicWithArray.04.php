@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('$this->a[\'a\']',
-                      '$this->b[\'a\']',
+$expected     = array('$this->b[\'a\']',
                       '$this->c[]',
                      );
 
-$expected_not = array('$this->o[$name]',
+$expected_not = array('$this->a[\'a\']',
+                      '$this->o[$name]',
                      );
 
 ?>
