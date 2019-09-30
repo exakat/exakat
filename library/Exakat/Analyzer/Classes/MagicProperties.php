@@ -31,7 +31,8 @@ class MagicProperties extends Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs(array('Member', 'Staticproperty'))
+        // class x { function __get($name) {}; function foo() { echo $this->a;}}
+        $this->atomIs('Member')
              ->inIs('DEFINITION')
              ->atomIs('Magicmethod')
              ->outIs('NAME')

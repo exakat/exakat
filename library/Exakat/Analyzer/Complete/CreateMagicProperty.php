@@ -229,7 +229,7 @@ class CreateMagicProperty extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__unset', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->addETo('DEFINITION2', 'first')
+             ->addETo('DEFINITION', 'first')
              ->back('first');
         $this->prepareQuery();
     }
