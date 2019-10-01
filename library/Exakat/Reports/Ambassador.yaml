@@ -189,7 +189,7 @@ audit:
         extension_list:
             title: Extensions' List
             file: extension_list
-            method: generateAlteredDirectives
+            method: generateExtensionsBreakdown
             icon: circle-o
         ext_lib:
             title: External Libraries' List
