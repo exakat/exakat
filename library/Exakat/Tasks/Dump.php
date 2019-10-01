@@ -2788,17 +2788,18 @@ GREMLIN
 
     private function collectForeachFavorite() {
         $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").out("VALUE").not(hasLabel("Keyvalue")).values("fullcode")
+g.V().hasLabel("Foreach").not(where(__.out("INDEX"))).out("VALUE").hasLabel('Variable').values("fullcode")
 GREMLIN;
         $valuesOnly = $this->gremlin->query($query);
+        print_r($valuesOnly->toArray());
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
+g.V().hasLabel("Foreach").where(__.out("INDEX")).out("VALUE").hasLabel('Variable').values("fullcode")
 GREMLIN;
         $values = $this->gremlin->query($query);
         
         $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").out("VALUE").out("INDEX").values("fullcode")
+g.V().hasLabel("Foreach").out("INDEX").values("fullcode")
 GREMLIN;
         $keys = $this->gremlin->query($query);
 
@@ -2809,15 +2810,24 @@ GREMLIN;
 
         $valuesSQL = array();
         foreach($statsValues as $name => $count) {
-            $valuesSQL[] = '("Foreach Values", "' . $this->sqlite->escapeString($name) . "\", $count)";
+            $valuesSQL[] = "('Foreach Values', '" . $this->sqlite->escapeString($name) . "', $count)";
         }
 
-        if (empty($valuesSQL)) {
-            return 0;
+        if (!empty($valuesSQL)) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
+            $this->sqlite->query($query);
         }
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-        $this->sqlite->query($query);
-        
+
+        $keysSQL = array();
+        foreach($statsKeys as $name => $count) {
+            $keysSQL[] = "('Foreach Keys', '" . $this->sqlite->escapeString($name) . "', $count)";
+        }
+
+        if (!empty($keysSQL)) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $keysSQL);
+            $this->sqlite->query($query);
+        }
+
         return count($valuesSQL);
     }
 
