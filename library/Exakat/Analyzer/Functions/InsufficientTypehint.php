@@ -25,29 +25,62 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class InsufficientTypehint extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/MakeClassConstantDefinition',
+                    );
+    }
+
     public function analyze() {
         // function foo(i $a) { $i->a(); } // but interface i has no function a()
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->_as('arg')
-             ->hasOut('TYPEHINT')
+             ->outIs('TYPEHINT')
+             ->atomIsNot(array('Void', 'Scalartypehint'))
+             ->hasIn('DEFINITION')
+             ->back('arg')
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'call')
-             ->back('arg')
+             ->hasNoIn('DEFINITION')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(i $a) { $i->a; } // but class i has no property a()
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->_as('arg')
              ->outIs('TYPEHINT')
-             ->inIs('DEFINITION')
-             ->not(
-                $this->side()
-                     ->goToAllImplements(self::INCLUDE_SELF)
-                     ->outIs(array('METHOD', 'MAGICMETHOD'))
-                     ->outIs('NAME')
-                     ->samePropertyAs('lccode', 'call', self::CASE_INSENSITIVE)
-             )
+             ->atomIsNot(array('Void', 'Scalartypehint'))
+             ->hasIn('DEFINITION')
+             ->back('arg')
+
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('OBJECT')
+             ->atomIs('Member')
+             ->hasNoIn('DEFINITION')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(i $a) { $i->a; } // but class i has no property a()
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->_as('arg')
+             ->outIs('TYPEHINT')
+             ->atomIsNot(array('Void', 'Scalartypehint'))
+             ->hasIn('DEFINITION')
+             ->back('arg')
+
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('CLASS')
+             ->atomIs('Staticconstant')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }
