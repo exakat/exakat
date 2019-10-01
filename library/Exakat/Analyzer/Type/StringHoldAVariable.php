@@ -27,19 +27,53 @@ use Exakat\Analyzer\Analyzer;
 
 class StringHoldAVariable extends Analyzer {
     public function analyze() {
+        $printfs = array('\\printf',
+                         '\\vsprintf',
+                         '\\sprintf',
+                         );
+
         // String that has a PHP variables but ' as delimiters
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
+             // Skip Constant definitions
+             ->hasNoParent('Constant', 'VALUE')
+             ->hasNoParent(array('Parameter', 'Propertydefinition'), 'DEFAULT')
+             // Skip sprintf and one level above
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->functioncallIs($printfs)
+             )
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->inIs('ARGUMENT')
+                     ->functioncallIs($printfs)
+             )
+             ->hasNoParent(array('Constant', 'Parameter', 'Propertydefinition'), 'VALUE')
              ->is('delimiter', "'")
-             ->regexIs('noDelimiter', '[^\\\\\\\\]\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
+             ->regexIs('noDelimiter', '(?<!%\\\d)(?<!\\\\\\\\)\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();
 
         // variable inside a NOWDOC
         $this->atomIs('Heredoc')
              ->isNot('heredoc', true)
-             ->outIs('CONCAT')
-             ->regexIs('fullcode', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]+')
-             ;
+             // Skip Constant definitions
+             ->hasNoParent('Constant', 'VALUE')
+             ->hasNoParent(array('Parameter', 'Propertydefinition'), 'DEFAULT')
+             // Skip sprintf and one level above
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->functioncallIs($printfs)
+             )
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->inIs('ARGUMENT')
+                     ->functioncallIs($printfs)
+             )             ->outIs('CONCAT')
+             ->regexIs('fullcode', '[^%]?[^\\\\\\\\]?\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]+');
         $this->prepareQuery();
 
         // <<<NOWDOC NOWDOC (NOWDOC or HEREDOC with wrong syntax)
