@@ -29,7 +29,6 @@ $gg = <<<\'NOWDOC2\'
 Nowdoc wrongfully spread over 2 statement (part b)
 
 NOWDOC2',
-                        '\'twgfr ddde wrere\$h\'',
                      );
 
 $expected_not = array('\'twgfr ddde wrere$\'',

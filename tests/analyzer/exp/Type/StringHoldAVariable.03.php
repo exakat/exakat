@@ -1,9 +1,9 @@
 <?php
 
 $expected     = array( "'\$s1'",
-                      "'12\$s7'",
+                      "'12\$s8'",
                       "'%d\$s5'",
-                      "'\$d\$s5'",
+                      "'\$d\$s6'",
                      );
 
 $expected_not = array('\'d\\$s4\'', 
