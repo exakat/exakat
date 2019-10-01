@@ -58,12 +58,14 @@ Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all poss
 * Portability
 * Preferences
 * RadwellCodes
+* SOLID
 * Security
 * Semantics
 * Simple
 * Stats
 * Suggestions
 * Top10
+* Typechecks
 * Unassigned
 * Under Work
 * php-cs-fixable
@@ -368,6 +370,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
+* phpipam
 * `shopware <https://www.shopware.com/>`_
 * `xataface <http://xataface.com/>`_
 
@@ -433,16 +436,25 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.7
+
+  * Make Functioncall With Reference (Complete/MakeFunctioncallWithReference ; Unassigned)
+  * Too Many Dereferencing (Classes/TooManyDereferencing)
+  * Use Url Query Functions (Structures/UseUrlQueryFunctions ; Suggestions)
+
 * 1.9.6
 
   * Create Magic Method (Complete/CreateMagicMethod ; )
+  * Custom/NotInThisList (Custom/NotInThisList ; Unassigned)
   * Dump/CollectLocalVariableCounts (Dump/CollectLocalVariableCounts ; Dump)
   * Dump/CollectParameterCounts (Dump/CollectParameterCounts ; Dump)
+  * Dump/DereferencingLevels (Dump/DereferencingLevels ; Dump)
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
   * No Weak SSL Crypto (Security/NoWeakSSLCrypto ; Security)
   * Non Nullable Getters (Classes/NonNullableSetters)
   * Performances/MbStringInLoop (Performances/MbStringInLoop ; Performances)
+  * Use Case Value (Structures/UseCaseValue ; Suggestions)
 
 * 1.9.5
 
@@ -1734,7 +1746,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Names (Classes/PropertyDefinition ; Internal)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Internal)
-  * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Simple)
+  * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Semantics)
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Simple, Level 1, Top10)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
   * Real Functions (Functions/RealFunctions ; Appcontent, Stats)
@@ -2269,8 +2281,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2587,8 +2599,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2662,6 +2674,7 @@ List of external links mentionned in this documentation.
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `PHP: When is /tmp not /tmp? <https://www.the-art-of-web.com/php/where-is-tmp/>`_
 * `phpsdl <https://github.com/Ponup/phpsdl>`_
 * `PHPUnit <https://www.phpunit.de/>`_
 * `plantuml <http://plantuml.com/>`_
@@ -2770,8 +2783,8 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -2941,6 +2954,7 @@ _______
 |   analyzer[] = "Classes/ThisIsNotAnArray";
 |   analyzer[] = "Classes/ThisIsNotForStatic";
 |   analyzer[] = "Classes/ThrowInDestruct";
+|   analyzer[] = "Classes/TooManyDereferencing";
 |   analyzer[] = "Classes/TooManyFinds";
 |   analyzer[] = "Classes/TooManyInjections";
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
@@ -4164,8 +4178,10 @@ ___________
 |   analyzer[] = "Structures/SubstrToTrim";
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UseArrayFunctions";
+|   analyzer[] = "Structures/UseCaseValue";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
+|   analyzer[] = "Structures/UseUrlQueryFunctions";
 |   analyzer[] = "Structures/WhileListEach";
 |   analyzer[] = "Traits/MultipleUsage";
 |   analyzer[] = "Variables/ComplexDynamicNames";| 

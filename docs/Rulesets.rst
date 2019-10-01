@@ -72,8 +72,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 24 Sep 2019 14:54:45 +0000
-.. comment: Generation hash : 026cc60f38a1ee21fe65b78197c8bd48b1801b9a
+.. comment: Generation date : Mon, 30 Sep 2019 15:06:33 +0000
+.. comment: Generation hash : 61bbb76836d4a3fabbe3528fbf9c1261933e95b4
 
 
 .. _analyze:
@@ -81,7 +81,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 385 analysis
+Total : 386 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -372,6 +372,7 @@ Total : 385 analysis
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Too Many Array Dimensions <too-many-array-dimensions>`
+* :ref:`Too Many Dereferencing <too-many-dereferencing>`
 * :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
@@ -1207,7 +1208,7 @@ Total : 42 analysis
 Suggestions
 +++++++++++
 
-Total : 86 analysis
+Total : 88 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1283,9 +1284,11 @@ Total : 86 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Use Array Functions <use-array-functions>`
 * :ref:`Use Basename Suffix <use-basename-suffix>`
+* :ref:`Use Case Value <use-case-value>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use DateTimeImmutable Class <use-datetimeimmutable-class>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
+* :ref:`Use Url Query Functions <use-url-query-functions>`
 * :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`

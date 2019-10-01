@@ -1924,6 +1924,59 @@ $email_health is used later in the method; while $email_components is only set, 
                 $mbox[] = $mbox_row;
             }
 
+Property Variable Confusion
+===========================
+
+.. _phpipam-structures-propertyvariableconfusion:
+
+phpipam
+^^^^^^^
+
+:ref:`property-variable-confusion`, in functions/classes/class.Admin.php:16. 
+
+There is a property called '$users'. It is easy to mistake $this->users and $users. Also, it seems that $this->users may be used as a cache system, yet it is not employed here. 
+
+.. code-block:: php
+
+    /**
+    	 * (array of objects) to store users, user id is array index
+    	 *
+    	 * @var mixed
+    	 * @access public
+    	 */
+    	public $users;
+    
+    ////////////
+    
+    	/**
+    	 * Fetches all users that are in group
+    	 *
+    	 * @access public
+    	 * @return array of user ids
+    	 */
+    	public function group_fetch_users ($group_id) {
+    		$out = array ();
+    		# get all users
+    		$users = $this->fetch_all_objects(users);
+    		# check if $gid in array
+    		if($users!==false) {
+    			foreach($users as $u) {
+    				$group_array = json_decode($u->groups, true);
+    				$group_array = $this->groups_parse($group_array);
+    
+    				if(sizeof($group_array)>0) {
+    					foreach($group_array as $group) {
+    						if(in_array($group_id, $group)) {
+    							$out[] = $u->id;
+    						}
+    					}
+    				}
+    			}
+    		}
+    		# return
+    		return isset($out) ? $out : array();
+    	}
+
 Foreach Reference Is Not Modified
 =================================
 
@@ -2602,6 +2655,42 @@ This code actually loads the file, join it, then split it again. file() would be
 .. code-block:: php
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+No Real Comparison
+==================
+
+.. _magento-type-norealcomparison:
+
+Magento
+^^^^^^^
+
+:ref:`no-real-comparison`, in app/code/core/Mage/XmlConnect/Block/Catalog/Product/Options/Configurable.php:74. 
+
+Compare prices and physical quantities with a difference, so as to avoid rounding errors.
+
+.. code-block:: php
+
+    if ((float)$option['price'] != 0.00) {
+                            $valueNode->addAttribute('price', $option['price']);
+                            $valueNode->addAttribute('formated_price', $option['formated_price']);
+                        }
+
+
+--------
+
+
+.. _spip-type-norealcomparison:
+
+SPIP
+^^^^
+
+:ref:`no-real-comparison`, in ecrire/maj/v017.php:37. 
+
+Here, the current version number is stored as a real number. With a string, though a longer value, it may be compared using the version_compare() function.
+
+.. code-block:: php
+
+    $version_installee == 1.701
 
 Unused Global
 =============

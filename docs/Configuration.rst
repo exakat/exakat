@@ -351,6 +351,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + childrenClassCount : 15
 
     + Threshold for too many children classes for one class.
+:ref:`Too Many Dereferencing <too-many-dereferencing>`
+  + tooManyDereferencing : 7
+
+    + Maximum number of dereferencing.
 :ref:`Too Many Injections <too-many-injections>`
   + injectionsCount : 5
 

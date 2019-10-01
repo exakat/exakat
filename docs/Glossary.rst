@@ -763,6 +763,7 @@ Glossary
     + `http_build_query()`
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+      + :ref:`Use Url Query Functions <use-url-query-functions>`
 
     + `http_build_url()`
 
@@ -1163,12 +1164,14 @@ Glossary
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
       + :ref:`Register Globals <register-globals>`
+      + :ref:`Use Url Query Functions <use-url-query-functions>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
 
     + `parse_url()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+      + :ref:`Use Url Query Functions <use-url-query-functions>`
 
     + `parsekit_compile_file()`
 
@@ -1588,6 +1591,7 @@ Glossary
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`
+      + :ref:`Use Case Value <use-case-value>`
 
     + `sys_get_temp_dir()`
 
@@ -1658,6 +1662,10 @@ Glossary
     + `unset()`
 
       + :ref:`Multiple Unset() <multiple-unset()>`
+
+    + `urlencode()`
+
+      + :ref:`Use Url Query Functions <use-url-query-functions>`
 
     + `usleep()`
 

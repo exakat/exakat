@@ -810,6 +810,8 @@ This extension includes 21 analyzers.
 * MoveToAbstractController (Symfony/MoveToAbstractController)
 * NoActionSuffix (Symfony/NoActionSuffix)
 * NoContainerWithAbstractController (Symfony/NoContainerWithAbstractController)
+* RouteWithoutSecurity (Symfony/RouteWithoutSecurity)
+* SecurityRouteHasNoController (Symfony/SecurityRouteHasNoController)
 * Symfony 3.0 Compatibility (Symfony/Symfony_3_0)
 * Symfony 3.1 Compatibility (Symfony/Symfony_3_1)
 * Symfony 3.2 Compatibility (Symfony/Symfony_3_2)
@@ -822,10 +824,8 @@ This extension includes 21 analyzers.
 * Symfony Function Usage (Symfony/SymfonyFunctionsUsage)
 * Symfony Missing (Symfony/SymfonyMissing)
 * Symfony Usage (Symfony/SymfonyUsage)
-* Undefined service (Symfony/UndefinedService)
 * UndefinedServices (Symfony/UndefinedServices)
 * UnusedServices (Symfony/UnusedServices)
-* UnusedServies (Symfony/UnusedServies)
 
 
 Symfony rulesets

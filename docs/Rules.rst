@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 24 Sep 2019 14:54:45 +0000
-.. comment: Generation hash : 026cc60f38a1ee21fe65b78197c8bd48b1801b9a
+.. comment: Generation date : Mon, 30 Sep 2019 15:06:33 +0000
+.. comment: Generation hash : 61bbb76836d4a3fabbe3528fbf9c1261933e95b4
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6424,7 +6424,7 @@ Dependant Abstract Classes
 ##########################
 
 
-Abstract classes should be autonomous. It is recommended to avoid depending on methods, constant or properties that should be made available in inheriting classes.
+Abstract classes should be autonomous. It is recommended to avoid depending on methods, constant or properties that should be made available in inheriting classes, without explictely abstracting them.
 
 The following abstract classes make usage of constant, methods and properties, static or not, that are not defined in the class. This means the inheriting classes must provide those constants, methods and properties, but there is no way to enforce this. 
 
@@ -17025,6 +17025,13 @@ Use precision formulas with `abs() <http://www.php.net/abs>`_ to approximate val
 
 See also `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Cast the values to integer before comparing
+* Compute the difference, and keep it below a threshold
+
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Type/NoRealComparison                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -17035,6 +17042,8 @@ See also `Floating point numbers <http://php.net/manual/en/language.types.float.
 | Time To Fix | Quick (30 mins)                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`magento-type-norealcomparison`, :ref:`spip-type-norealcomparison`                             |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -21169,15 +21178,17 @@ The property and the variable may easily be confused one for another and lead to
 
 Sometimes, when the property is going to be replaced by the incoming argument, or data based on that argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
 
-+-------------+--------------------------------------+
-| Short name  | Structures/PropertyVariableConfusion |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Slow (1 hour)                        |
-+-------------+--------------------------------------+
++-------------+-----------------------------------------------------+
+| Short name  | Structures/PropertyVariableConfusion                |
++-------------+-----------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                      |
++-------------+-----------------------------------------------------+
+| Severity    | Minor                                               |
++-------------+-----------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                       |
++-------------+-----------------------------------------------------+
+| Examples    | :ref:`phpipam-structures-propertyvariableconfusion` |
++-------------+-----------------------------------------------------+
 
 
 
@@ -23975,6 +23986,13 @@ Based on this philosophy, a code source that uses Zend\Session but never uses Ze
 
 See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Security Guide: Sessions <http://phpsec.org/projects/guide/4.html>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add session_regenerateid() call before any important operation on the application
+
 +-------------+---------------------------------------+
 | Short name  | Security/ShouldUseSessionRegenerateId |
 +-------------+---------------------------------------+
@@ -25926,6 +25944,57 @@ See also `Why is subclassing too much bad (and hence why should we use prototype
 +-------------+----------------------------------------------------------------------------------+
 | Examples    | :ref:`typo3-classes-toomanychildren`, :ref:`woocommerce-classes-toomanychildren` |
 +-------------+----------------------------------------------------------------------------------+
+
+
+
+.. _too-many-dereferencing:
+
+Too Many Dereferencing
+######################
+
+
+Linking too many properties and methods, one to the other.
+
+This analysis counts both static calls and normal call; methods, properties and constants. It also takes into account arrays along the way.
+
+The default limit of chaining methods and properties is set to 7 by default. 
+
+.. code-block:: php
+
+   <?php
+   
+   // 9 chained calls.
+   $main->getA()->getB()->getC()->getD()->getE()->getF()->getG()->getH()->getI()->property;
+   
+   ?>
+
+
+Too many chained methods is harder to read. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++----------------------+---------+---------+----------------------------------+
+| Name                 | Default | Type    | Description                      |
++----------------------+---------+---------+----------------------------------+
+| tooManyDereferencing | 7       | integer | Maximum number of dereferencing. |
++----------------------+---------+---------+----------------------------------+
+
+
+
++-------------+------------------------------+
+| Short name  | Classes/TooManyDereferencing |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -29051,6 +29120,54 @@ Suggestions
 
 
 
+.. _use-case-value:
+
+Use Case Value
+##############
+
+
+When `switch() <http://www.php.net/manual/en/control-structures.switch.php>`_ has branched to the right case, the value of the switched variable is know : it is the case.
+
+This doesn't work with complex expression cases, nor with default. 
+
+.. code-block:: php
+
+   <?php
+   
+   switch($a) {
+       case 'a' : 
+           // $a == 'a';
+           echo $a;
+           break;
+           
+       case 'b' : 
+           // $a == 'b';
+           echo 'b';
+           break;
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the literal value in the case, to avoid unnecessary computation.
+
++-------------+-------------------------+
+| Short name  | Structures/UseCaseValue |
++-------------+-------------------------+
+| Rulesets    | :ref:`Suggestions`      |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+
+
+
 .. _use-class-operator:
 
 Use Class Operator
@@ -29927,6 +30044,15 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
    
    ?>
 
+
+See also `PHP: When is /tmp not /tmp? <https://www.the-art-of-web.com/php/where-is-tmp/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not hardcode the temporary file, use the system's
+
 +-------------+-------------------------+
 | Short name  | Structures/UseSystemTmp |
 +-------------+-------------------------+
@@ -29978,6 +30104,61 @@ Note that it is also faster to use the value with a reference to handle the writ
 +-------------+--------------------------+
 | Time To Fix | Instant (5 mins)         |
 +-------------+--------------------------+
+
+
+
+.. _use-url-query-functions:
+
+Use Url Query Functions
+#######################
+
+
+PHP features several functions dedicated to processing URL's query string. 
+
++ `parse_str() <http://www.php.net/parse_str>`_
++ `parse_url() <http://www.php.net/parse_url>`_
++ `http_build_query() <http://www.php.net/http_build_query>`_
+
+Those functions include extra checks : for example, `http_build_query() <http://www.php.net/http_build_query>`_ adds `urlencode() <http://www.php.net/urlencode>`_ call on the values, and allow for choosing the separator and the Query string format.
+
+.. code-block:: php
+
+   <?php
+   $data = array(
+       'foo' => 'bar',
+       'baz' => 'boom',
+       'cow' => 'milk',
+       'php' => 'hypertext processor'
+   );
+   
+   // safe and efficient way to build a query string
+   echo http_build_query($data, '', '&') . PHP_EOL;
+   
+   // slow way to produce a query string
+   foreach($data as $name => &$value) {
+       $value = $name.'='.$value;
+   }
+   echo implode('&', $data) . PHP_EOL;
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------+
+| Short name  | Structures/UseUrlQueryFunctions |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Suggestions`              |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
