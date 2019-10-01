@@ -1,4 +1,4 @@
-Version 1.9.7 (Greedy Wolf Star of Sunlight, coming up)
+Version 1.9.8 (Giant Gate Star of Dark Essence, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 1.9.7 (Greedy Wolf Star of Sunlight, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.7 (Greedy Wolf Star of Sunlight, 2019-09-30)
++ Architecture
+    + Added support for analysis reporting missing values in a reference list
+    + Fixe batch dumping of results
++ Report
+    + Ambassador : new inventory : dereferencing levels
++ Analysis
+    + New analysis : Use PHP Native URL parsing functions
+    + New analysis : Maximum dereferencing level
+    + New analysis : Use case value in a switch : it was already tested
+    + Updated analysis : No class as typehint accepts abstract classes
+    + Updated analysis : Create Magic Property reachs out to traits
+    + Updated analysis : Security also reports usage of unserialize()
+    + Updated analysis : Mistmatched default argument also covers methods
+    + Updated analysis : Never used parameter also covers methods
+    + Updated analysis : Unused global also cover static variables
+    + Updated analysis : Duplicate strings threshold is not 15, not 5.
+    + Checked unit tests : 3289 / 3319 test pass (99% pass)
++ Tokenizer
+    + RETURNTYPE, TYPEHINT, and DEFAUT are not always on, with Void atom, or better.
+    + DEFAULT value targets end-values, skips ??, ?:, () and =.
+    + Exceptions now reports errors in the Query, not where it is thrown
 
 Version 1.9.6 (Star of Birth, 2019-09-23)
 + Architecture
