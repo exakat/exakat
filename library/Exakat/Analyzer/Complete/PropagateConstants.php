@@ -26,11 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PropagateConstants extends Analyzer {
     public function analyze() {
-        $res = $this->readConstantValue();
-        if ($res === 0) {
-            // No Need further. Just bail
-            return;
-        }
+        $this->readConstantValue();
 
         $this->pushConstantValues();
         $this->PropagateConstants();
@@ -273,37 +269,42 @@ GREMLIN
     }
 
     private function processPower() {
-            display('propagating Constant value in Power');
-            // fix path for constants with Const
-            $this->atomIs('Power')
-                 ->hasNo('propagated')
-                 ->initVariable('x', '[ ]')
-                 ->not(
-                    $this->side()
-                         ->outIs(array('LEFT', 'RIGHT'))
-                         ->hasNo('intval')
-                 )
-                 // Split LEFT and RIGHT to ensure left is in 0
-                 ->filter(
-                    $this->side()
-                         ->outIs('LEFT')
-                         ->has('intval')
-                         ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
-                 )
-                 ->filter(
-                    $this->side()
-                         ->outIs('RIGHT')
-                         ->has('intval')
-                         ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
-                 )
+        display('propagating Constant value in Power');
+        // fix path for constants with Const
+        $this->atomIs('Power')
+             ->hasNo('propagated')
+             ->initVariable('x', '[ ]')
+             ->not(
+                $this->side()
+                     ->outIs(array('LEFT', 'RIGHT'))
+                     ->hasNo('intval')
+             )
+             // Split LEFT and RIGHT to ensure left is in 0
+             ->filter(
+                $this->side()
+                     ->outIs('LEFT')
+                     ->has('intval')
+                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+             )
+             ->filter(
+                $this->side()
+                     ->outIs('RIGHT')
+                     ->has('intval')
+                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+             )
 
-             ->raw(<<<GREMLIN
- filter{x.size() == 2; }.
+            ->raw(<<<GREMLIN
+ filter{ x.size() == 2; }.
 sideEffect{ 
-    i = x[0] ** x[1];
+    try {
+        i = (new BigInteger(x[0])) ** (new BigInteger(x[1]));
+    } catch (Exception e) {
+        // doesn't handle PHP limits at all
+        i = 0;
+    }
 
-    it.get().property("intval", i); 
-    it.get().property("boolean", i != 0);
+    it.get().property("intval", i.toLong()); 
+    it.get().property("boolean", i.toLong() != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
 
@@ -313,14 +314,14 @@ sideEffect{
 GREMLIN
 )
             ->count();
-
+        
             $res = $this->rawQuery();
             display('propagating ' . $res->toInt() . ' power with constants');
-
+        
             return $res->toInt();
         }
 
-    private function processComparison() {
+        private function processComparison() {
             display('propagating Constant value in Comparison');
             // fix path for constants with Const
             $this->atomIs('Comparison')
