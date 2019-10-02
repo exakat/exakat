@@ -250,20 +250,31 @@ class Dump extends Tasks {
                 $rulesets = array($analyzer);
             }
 
-            foreach($rulesets as $ruleset) {
+            foreach($rulesets as $id => $ruleset) {
                 if (!$this->rulesets->getClass($ruleset)) {
-                    throw new NoSuchAnalyzer($ruleset, $this->rulesets);
+                    display('No such analyzer as ' . $ruleset . '. Omitting.');
+                    unset($rulesets[$id]);
                 }
             }
             display('Processing ' . count($rulesets) . ' analyzer' . (count($rulesets) > 1 ? 's' : '') . ' : ' . implode(', ', $rulesets));
 
-            if (isset($counts[$analyzer])) {
-                $this->processResults($analyzer, $counts[$analyzer]);
+            if(count($rulesets) > 1) {
+                $this->processResultsList($analyzer, $counts);
+                $this->expandRulesets();
                 $this->collectHashAnalyzer();
-                $rulesets = array();
+            } elseif (empty($rulesets)) {
+                throw new NoSuchAnalyzer($ruleset, $this->rulesets);
             } else {
-                display("$analyzer is not run yet.");
+                $analyzer = array_pop($rulesets);
+                if (isset($counts[$analyzer])) {
+                    $this->processResults($analyzer, $counts[$analyzer]);
+                    $this->collectHashAnalyzer();
+                    $rulesets = array();
+                } else {
+                    display("$analyzer is not run yet.");
+                }
             }
+
 
         } else {
             $rulesets = array();
@@ -289,6 +300,15 @@ class Dump extends Tasks {
 
     private function processResultsRuleset($ruleset, array $counts = array()) {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($ruleset);
+        
+        return $this->processMultipleResults($analyzers, $counts);
+    }
+    
+    private function processResultsList(array $rulesetList, array $counts = array()) {
+        return $this->processMultipleResults($rulesetList, $counts);
+    }
+
+    private function processMultipleResults(array $analyzers, array $counts) {
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
@@ -2791,7 +2811,6 @@ GREMLIN
 g.V().hasLabel("Foreach").not(where(__.out("INDEX"))).out("VALUE").hasLabel('Variable').values("fullcode")
 GREMLIN;
         $valuesOnly = $this->gremlin->query($query);
-        print_r($valuesOnly->toArray());
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Foreach").where(__.out("INDEX")).out("VALUE").hasLabel('Variable').values("fullcode")
