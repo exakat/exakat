@@ -1181,7 +1181,6 @@ class Load extends Tasks {
         $try = $this->addAtom('Try');
 
         $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-        $this->popExpression();
         $this->addLink($try, $block, 'BLOCK');
         $extras = array('BLOCK' => $block);
 
@@ -1224,7 +1223,6 @@ class Load extends Tasks {
 
             // Skip }
             $blockCatch = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-            $this->popExpression();
             $this->addLink($catch, $blockCatch, 'BLOCK');
             $extrasCatch['BLOCK'] = $variable;
 
@@ -1246,7 +1244,6 @@ class Load extends Tasks {
 
             ++$this->id;
             $finallyBlock = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-            $this->popExpression();
             $this->addLink($try, $finally, 'FINALLY');
             $this->addLink($finally, $finallyBlock, 'BLOCK');
 
@@ -1470,7 +1467,6 @@ class Load extends Tasks {
             $this->runPlugins($block);
         } else {
             $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-            $this->popExpression();
             $this->addLink($function, $block, 'BLOCK');
             $blockFullcode = self::FULLCODE_BLOCK;
         }
@@ -3291,7 +3287,6 @@ class Load extends Tasks {
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDFOR) : array());
-        $this->popExpression();
         $this->addLink($for, $block, 'BLOCK');
 
         $code = $this->tokens[$current][1];
@@ -3372,8 +3367,6 @@ class Load extends Tasks {
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $block = $this->processFollowingBlock($isColon === true ? array($this->phptokens::T_ENDFOREACH) : array());
-
-        $this->popExpression();
         $this->addLink($foreach, $block, 'BLOCK');
 
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
@@ -3406,6 +3399,7 @@ class Load extends Tasks {
             ++$this->id;
             $block = $this->processBlock(self::RELATED_BLOCK);
             $block->bracket = self::BRACKET;
+            $this->popExpression(); // drop it
 
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             $this->startSequence();
@@ -3417,7 +3411,6 @@ class Load extends Tasks {
             }
 
             $this->endSequence();
-            $this->pushExpression($this->sequence);
             
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
             // void; One epxression block, with ;
@@ -3427,7 +3420,6 @@ class Load extends Tasks {
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
             $this->endSequence();
-            $this->pushExpression($block);
             ++$this->id;
 
         } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
@@ -3442,8 +3434,6 @@ class Load extends Tasks {
             $void = $this->addAtomVoid();
             $this->addToSequence($void);
             $this->endSequence();
-
-            $this->pushExpression($block);
 
         } else {
             // One expression only
@@ -3481,8 +3471,6 @@ class Load extends Tasks {
             if (!in_array($this->tokens[$current + 1][0], $specials, STRICT_COMPARISON)) {
                 ++$this->id;
             }
-
-            $this->pushExpression($block);
         }
         
         return $block;
@@ -3493,7 +3481,6 @@ class Load extends Tasks {
         $current = $this->id;
 
         $block = $this->processFollowingBlock(array($this->phptokens::T_WHILE));
-        $this->popExpression();
         $this->addLink($dowhile, $block, 'BLOCK');
 
         $while = $this->tokens[$this->id + 1][1];
@@ -3535,8 +3522,6 @@ class Load extends Tasks {
         ++$this->id; // Skip )
         $isColon = $this->whichSyntax($current, $this->id + 1);
         $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDWHILE) : array());
-        $this->popExpression();
-
         $this->addLink($while, $block, 'BLOCK');
 
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
@@ -3596,8 +3581,6 @@ class Load extends Tasks {
             $isColon = $this->whichSyntax($current, $this->id + 1);
 
             $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDDECLARE) : array());
-
-            $this->popExpression();
             $this->addLink($declare, $block, 'BLOCK');
 
             if ($isColon === self::ALTERNATIVE_SYNTAX) {
@@ -3788,7 +3771,6 @@ class Load extends Tasks {
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
         $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF, $this->phptokens::T_ELSE, $this->phptokens::T_ELSEIF));
-        $this->popExpression();
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;
 
@@ -3814,7 +3796,6 @@ class Load extends Tasks {
             ++$this->id; // Skip else
 
             $else = $this->processFollowingBlock(array($this->phptokens::T_ENDIF));
-            $this->popExpression();
             $this->addLink($ifthen, $else, 'ELSE');
             $extras['ELSE'] = $else;
 
@@ -4190,8 +4171,7 @@ class Load extends Tasks {
             $block = ';';
         } else {
             // Process block
-            $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
-            $block = $this->popExpression();
+            $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
             $this->addLink($namespace, $block, 'BLOCK');
 
             $this->addToSequence($namespace);
