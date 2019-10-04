@@ -67,14 +67,10 @@ class Query {
 
         assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
 
-        try {
-            $command = $this->queryFactory->factory($name);
-            $last = $command->run(...$args);
-            $this->commands[] = $last;
-        } catch (UnknownDsl $e) {
-            die('This is an unknown DSL : ' . $name);
-        }
-        
+        $command = $this->queryFactory->factory($name);
+        $last = $command->run(...$args);
+        $this->commands[] = $last;
+
         if ($last->gremlin === self::STOP_QUERY && empty($this->sides)) {
             $this->query = "// Query with STOP_QUERY\n";
             $this->commands = array();

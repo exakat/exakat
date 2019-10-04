@@ -30,6 +30,7 @@ use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
+use Exakat\Exceptions\UnknownDsl;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Query\Query;
@@ -2240,6 +2241,18 @@ GREMLIN
             return '';
         }
     }
+    
+    public function __call($name, $args) {
+        try {
+            $this->query->$name(...$args);
+        } catch (UnknownDsl $e) {
+            $this->query->StopQuery();
+            $rank = $this->queryId + 1;
+            display("Found an unknown DSL '$name', in {$this->shortAnalyzer}#{$rank}. Aborting query\n");
+            // This needs to be logged!
+        }
 
+        return $this;
+    }
 }
 ?>
