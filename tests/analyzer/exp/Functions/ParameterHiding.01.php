@@ -1,11 +1,9 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('function foo($a) { /**/ } '
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('function foo2($a) { /**/ } '
                      );
 
 ?>
