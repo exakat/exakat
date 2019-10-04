@@ -45,7 +45,7 @@ class ReportConfig {
             $this->format      = $config['format'];
             // Check for array of string
             $this->rulesets    = $config['rulesets'] ?? array();
-            $this->rulesets    = makeArray($this->project_rulesets);
+            $this->rulesets    = makeArray($this->rulesets);
             $this->destination = $config['file']     ?? constant("\Exakat\Reports\\$config[format]::FILE_FILENAME");
         } elseif (is_string($config)) {
             $this->format      = $config;
@@ -91,11 +91,7 @@ class ReportConfig {
     
         $rulesets = $report->dependsOnAnalysis();
         if (empty($rulesets)) {
-            if (isset($this->format['ruleset'])) {
-                $rulesets = $this->format['ruleset'];
-            } else {
-                $rulesets = array();
-            }
+            $rulesets = $this->rulesets;
         }
 
         return $rulesets;

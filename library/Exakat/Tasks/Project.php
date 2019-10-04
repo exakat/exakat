@@ -152,8 +152,12 @@ class Project extends Tasks {
             }
             $this->reportConfigs[$report->getName()] = $report;
 
-            $rulesetsToRun[] = $report->getRulesets();
-            $namesToRun[]  = $report->getName();
+            $rulesets = $report->getRulesets();
+            if (empty($rulesets)) {
+                $rulesets = $report->getRulesets();
+            }
+            $rulesetsToRun[] = $rulesets;
+            $namesToRun[] = $report->getName();
 
             unset($report);
             gc_collect_cycles();
@@ -411,8 +415,6 @@ class Project extends Tasks {
                 
             } catch (\Exception $e) {
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
-                print $e->getMessage();
-                print_r($e);
                 file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
             }
         }

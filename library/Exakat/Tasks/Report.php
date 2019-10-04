@@ -92,23 +92,23 @@ class Report extends Tasks {
             $report->generate($this->config->project_dir, Reports::STDOUT);
         } elseif (empty($reportConfig->getFile())) {
             $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
-            display("Building report for project {$this->config->project_name} in '" . $file . "', with report " . $reportConfig->getFormat() . "\n");
+            display("Building report for project {$this->config->project_name} in '" . $reportConfig->getFile() . "', with report " . $reportConfig->getFormat() . "\n");
             $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } else {
             // to files + extension
-            $filename = basename($this->config->file);
+            $filename = basename($reportConfig->getFile());
             if (in_array($filename, array('.', '..'))) {
                 $filename = $report::FILE_FILENAME;
             }
-            display('Building report for project ' . $this->config->project . ' in "' . $filename . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format {$format}\n");
-            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
+            display('Building report for project ' . $this->config->project . ' in "' . $reportConfig->getFile() . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '') . "', with format " . $reportConfig->getFormat() . "\n");
+            $report->generate( $this->config->project_dir, $filename);
         }
         display('Reported ' . $report->getCount() . ' messages in ' . $reportConfig->getFormat());
 
         $end = microtime(true);
         display('Processing time : ' . number_format($end - $begin, 2) . 's');
 
-        $this->datastore->addRow('hash', array($reportConfig->getFormat() => $this->config->file));
+        $this->datastore->addRow('hash', array($reportConfig->getFormat() => $reportConfig->getFile() ));
         display('Done');
     }
 }
