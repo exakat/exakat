@@ -49,7 +49,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->prepareSide(),
                         array()
               )
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('METHOD')
               ->outIs('NAME')
@@ -82,7 +82,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->prepareSide(),
                         array()
               )
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
@@ -113,6 +113,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->prepareSide(),
                         array()
               )              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
               ->outIs('CONST')
@@ -144,8 +145,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->prepareSide(),
                         array()
               )
-              ->atomIs('Class')
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              // No check on Atom == Class, as it may not exists
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->isNot('visibility', 'private')
               ->outIs('NAME')
