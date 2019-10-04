@@ -3034,30 +3034,36 @@ HTML;
     }
 
     private function generateInventories(Section $section, $analyzer, $description) {
-            $results = new Results($this->sqlite, $analyzer);
-            $results->load();
-            
-            $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-            $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
+        $results = new Results($this->sqlite, $analyzer);
+        $results->load();
+        
+        $trim = function($x) { return trim($x, "'\""); };
+        
+        $values = array_column($results->toArray(), 'fullcode');
+        $values = array_map($trim, $values);
+        $counts = array_count_values($values);
 
-            $groups = array();
-            foreach($results->toArray() as $row) {
-                $groups[$row['htmlcode']][] = $row['file'];
-            }
-            uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
-
-            $theTable = array();
-            foreach($groups as $code => $list) {
-                $c = count($list);
-                $htmlList = '<ul><li>' . implode('</li><li>', $list) . '</li></ul>';
-                $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
-            }
-
-            $html = $this->getBasedPage($section->source);
-            $html = $this->injectBloc($html, 'TITLE', $section->title);
-            $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-            $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
-            $this->putBasedPage($section->file, $html);
+        $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
+    
+        $groups = array();
+        foreach($results->toArray() as $row) {
+            $groups[$trim($row['fullcode'])][] = $row['file'];
+        }
+        uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
+    
+        $theTable = array();
+        foreach($groups as $code => $list) {
+            $c = count($list);
+            $codeHtml = PHPSyntax($code);
+            $htmlList = '<ul><li>' . implode('</li><li>', $list) . '</li></ul>';
+            $theTable []= "<tr><td>{$codeHtml}</td><td>$c</td><td>{$htmlList}</td></tr>";
+        }
+    
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', $description);
+        $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateInterfaceTree(Section $section) {
