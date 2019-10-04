@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -92,48 +92,48 @@ class CommandLine extends Config {
                                     '-c'            => 'configuration',
                                  );
 
-    private $commands = array('analyze'       => 1,
-                              'anonymize'     => 1,
-                              'constantes'    => 1,
-                              'clean'         => 1,
-                              'cleandb'       => 1,
-                              'dump'          => 1,
-                              'doctor'        => 1,
-                              'errors'        => 1,
-                              'export'        => 1,
-                              'files'         => 1,
-                              'findextlib'    => 1,
-                              'help'          => 1,
-                              'init'          => 1,
-                              'catalog'       => 1,
-                              'remove'        => 1,
-                              'server'        => 1,
-                              'api'           => 1,
-                              'jobqueue'      => 1,
-                              'queue'         => 1,
-                              'load'          => 1,
-                              'diff'          => 1,
-                              'project'       => 1,
-                              'report'        => 1,
-                              'results'       => 1,
-                              'stat'          => 1,
-                              'status'        => 1,
-                              'version'       => 1,
-                              'onepage'       => 1,
-                              'onepagereport' => 1,
-                              'test'          => 1,
-                              'update'        => 1,
-                              'upgrade'       => 1,
-                              'fetch'         => 1,
-                              'proxy'         => 1,
-                              'config'        => 1,
-                              'extension'     => 1,
-                              'show'          => 1,
-                              'baseline'      => 1,
-                              );
+    public static $commands = array('analyze'       => 1,
+                                    'anonymize'     => 1,
+                                    'constantes'    => 1,
+                                    'clean'         => 1,
+                                    'cleandb'       => 1,
+                                    'dump'          => 1,
+                                    'doctor'        => 1,
+                                    'errors'        => 1,
+                                    'export'        => 1,
+                                    'files'         => 1,
+                                    'findextlib'    => 1,
+                                    'help'          => 1,
+                                    'init'          => 1,
+                                    'catalog'       => 1,
+                                    'remove'        => 1,
+                                    'server'        => 1,
+                                    'api'           => 1,
+                                    'jobqueue'      => 1,
+                                    'queue'         => 1,
+                                    'load'          => 1,
+                                    'diff'          => 1,
+                                    'project'       => 1,
+                                    'report'        => 1,
+                                    'results'       => 1,
+                                    'stat'          => 1,
+                                    'status'        => 1,
+                                    'version'       => 1,
+                                    'onepage'       => 1,
+                                    'onepagereport' => 1,
+                                    'test'          => 1,
+                                    'update'        => 1,
+                                    'upgrade'       => 1,
+                                    'fetch'         => 1,
+                                    'proxy'         => 1,
+                                    'config'        => 1,
+                                    'extension'     => 1,
+                                    'show'          => 1,
+                                    'baseline'      => 1,
+                                    );
 
     public function __construct() {
-//        $this->config['project'] = new Project();
+        $this->config['command'] = '<no-command>';
     }
 
     public function loadConfig($args = array()) {
@@ -251,7 +251,7 @@ class CommandLine extends Config {
         }
 
         $command = array_shift($args);
-        if (isset($command, $this->commands[$command])) {
+        if (isset($command, self::$commands[$command])) {
             $this->config['command'] = $command;
         
             if ($this->config['command'] === 'extension') {
@@ -277,6 +277,9 @@ class CommandLine extends Config {
                     $this->config['baseline_set'] = array_shift($args);
                 } 
             }
+        } else {
+            $this->config['command']       = 'unknown';
+            $this->config['command_value'] = $command ?? '<no-command>';
         }
 
         if (!empty($args)) {
@@ -287,8 +290,7 @@ class CommandLine extends Config {
         }
 
         // Special case for onepage command. It will only work on 'onepage' project
-        if (isset($this->config['command']) &&
-            $this->config['command'] == 'onepage') {
+        if ($this->config['command'] == 'onepage') {
 
             $this->config['project']   = 'onepage';
             $this->config['ruleset']   = 'OneFile';
