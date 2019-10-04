@@ -142,26 +142,26 @@ GREMLIN
         }
 
     private function processAddition() {
-            display('propagating Constant value in Addition');
-            // fix path for constants with Const
-            $this->atomIs('Addition')
-                 ->hasNo('propagated')
-                 ->initVariable('x', '[ ]')
-                 // Split LEFT and RIGHT to ensure left is in 0
-                 ->filter(
-                    $this->side()
-                         ->outIs('LEFT')
-                         ->has('intval')
-                         ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
-                 )
-                 ->filter(
-                    $this->side()
-                         ->outIs('RIGHT')
-                         ->has('intval')
-                         ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
-                 )
-
-             ->raw(<<<GREMLIN
+        display('propagating Constant value in Addition');
+        // fix path for constants with Const
+        $this->atomIs('Addition')
+             ->hasNo('propagated')
+             ->initVariable('x', '[ ]')
+             // Split LEFT and RIGHT to ensure left is in 0
+             ->filter(
+                $this->side()
+                     ->outIs('LEFT')
+                     ->has('intval')
+                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+             )
+             ->filter(
+                $this->side()
+                     ->outIs('RIGHT')
+                     ->has('intval')
+                     ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
+             )
+     
+            ->raw(<<<GREMLIN
  filter{x.size() == 2; }.
 sideEffect{ 
     if (it.get().value("token") == 'T_PLUS') {
@@ -180,13 +180,13 @@ sideEffect{
 
 GREMLIN
 )
-            ->count();
+             ->count();
 
-            $res = $this->rawQuery();
-            display('propagating ' . $res->toInt() . ' Addition with constants');
+        $res = $this->rawQuery();
+        display('propagating ' . $res->toInt() . ' Addition with constants');
 
-            return $res->toInt();
-        }
+        return $res->toInt();
+    }
 
     private function processConcatenation() {
         display('propagating Constant value in Concatenations');
