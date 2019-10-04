@@ -31,19 +31,9 @@ class WrongCase extends Analyzer {
         // New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->codeIsNot(array('static', 'parent', 'self'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outIsIE('NAME')
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->atomIs(array('Nsname', 'Identifier', 'Newcallname'))
+             ->getClassName('classe')
              ->inIsIE('NAME')
              ->inIs('DEFINITION')
              ->outIs('NAME')
@@ -54,7 +44,7 @@ GREMLIN
 // staticMethodcall
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
-             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->atomIs(array('Nsname', 'Identifier'))
              ->not(
                 $this->side()
                      ->filter(
@@ -63,18 +53,9 @@ GREMLIN
                              ->atomIs(array('As', 'Nsname', 'Identifier'))
                      )
              )
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->getClassName('classe')
              ->inIs('DEFINITION')
+             ->atomIs(array('Class', 'Interface'))
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
@@ -83,18 +64,8 @@ GREMLIN
 // Catch
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->atomIsNot(self::$RELATIVE_CLASS)
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->atomIs(array('Nsname', 'Identifier'))
+             ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
@@ -106,17 +77,19 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIsNot(self::$RELATIVE_CLASS)
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->getClassName('classe')
+             ->inIs('DEFINITION')
+             ->outIs('NAME')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
+             ->back('first')
+             ->outIs('ARGUMENT');
+        $this->prepareQuery();
+
+// Return Typehint
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
@@ -127,18 +100,8 @@ GREMLIN
 // instance of
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->atomIsNot(self::$RELATIVE_CLASS)
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->atomIs(array('Nsname', 'Identifier'))
+             ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
@@ -149,22 +112,27 @@ GREMLIN
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIsIE('NAME')
-             ->initVariable('classe')
-             ->raw(<<<'GREMLIN'
-sideEffect{ 
-    if (it.get().value("token") == "T_STRING") {
-        classe = it.get().value('fullcode');
-    } else { // it is a namespace
-        classe = it.get().value('fullcode').tokenize('\\\\').last();
-    }
-}
-GREMLIN
-)
+             ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
              ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
+    }
+    
+    private function getClassName($name = 'classe') {
+        $this->initVariable($name)
+             ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().values('token') == "T_STRING") {
+        $name = it.get().value('fullcode');
+    } else { // it is a namespace
+        $name = it.get().value('fullcode').tokenize('\\\\').last();
+    }
+}
+GREMLIN
+);
+        return $this;
     }
 }
 
