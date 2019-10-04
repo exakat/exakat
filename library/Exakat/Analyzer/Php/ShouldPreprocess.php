@@ -28,7 +28,7 @@ class ShouldPreprocess extends Analyzer {
     // chr(03);
     public function analyze() {
         $this->atomFunctionIs('\\chr')
-             ->outIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs(self::$LITERALS, self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
