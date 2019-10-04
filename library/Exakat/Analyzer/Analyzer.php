@@ -1956,6 +1956,21 @@ GREMLIN;
         }
     }
 
+    public function storeError(string $error = 'An error happened') {
+            $query = <<<GREMLIN
+g.addV('Noresult').property('code',                              0)
+                  .property('fullcode',                          '$error')
+                  .property('virtual',                            true)
+                  .property('line',                               -1)
+                  .addE('ANALYZED')
+                  .from(g.V($this->analyzerId));
+GREMLIN;
+
+            $this->gremlin->query($query);
+
+            $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
+    }
+
     private function storeToTableResults() {
         ++$this->queryId;
 
