@@ -250,6 +250,7 @@ class Dump extends Tasks {
                 $rulesets = array($analyzer);
             }
 
+            $rulesets = array_unique($rulesets);
             foreach($rulesets as $id => $ruleset) {
                 if (!$this->rulesets->getClass($ruleset)) {
                     display('No such analyzer as ' . $ruleset . '. Omitting.');
@@ -259,7 +260,7 @@ class Dump extends Tasks {
             display('Processing ' . count($rulesets) . ' analyzer' . (count($rulesets) > 1 ? 's' : '') . ' : ' . implode(', ', $rulesets));
 
             if(count($rulesets) > 1) {
-                $this->processResultsList($analyzer, $counts);
+                $this->processResultsList($rulesets, $counts);
                 $this->expandRulesets();
                 $this->collectHashAnalyzer();
             } elseif (empty($rulesets)) {
