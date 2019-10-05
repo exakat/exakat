@@ -41,15 +41,7 @@ class UsedProtectedMethod extends Analyzer {
              ->atomIs(array('Method', 'Magicmethod'))
              ->_as('method')
              ->is('visibility', 'protected')
-             ->outIs('NAME')
-             ->codeIsNot(array('__construct', '__destruct'))
-             ->inIs('NAME')
-             ->outIs('DEFINITION')
-             ->atomIs(array('Staticmethodcall', 'Methodcall'))
-             ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_SENSITIVE)
-             ->back('method');
+             ->hasOut('DEFINITION');
         $this->prepareQuery();
     }
 }

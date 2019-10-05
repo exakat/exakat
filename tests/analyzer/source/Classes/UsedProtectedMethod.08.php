@@ -1,7 +1,7 @@
 <?php
 
 class B2 {
-    protected function Ma2() {}
+    protected function Ma2($b) {}
 }
 
 class A1 {

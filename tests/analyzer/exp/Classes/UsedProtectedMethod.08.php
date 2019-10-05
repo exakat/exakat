@@ -9,6 +9,7 @@ $expected_not = array('protected function unused( ) { /**/ } ',
                       'protected function Ma321( ) { /**/ } ',
                       'private function pMa1( ) { /**/ } ',
                       'public function puMa1( ) { /**/ } ',
+                      'protected function Ma2($b) { /**/ } ',
                      );
 
 ?>

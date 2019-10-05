@@ -3,6 +3,7 @@
 $expected     = array('protected function ma31( ) { /**/ } ',
                       'protected function ma2( ) { /**/ } ',
                       'protected function ma32( ) { /**/ } ',
+                      'protected function ma2($b) { /**/ } ',
                      );
 
 $expected_not = array('protected function unused( ) { /**/ } ',

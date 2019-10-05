@@ -29,11 +29,14 @@ class StrangeName extends Analyzer {
         $names = $this->loadIni('php_strange_names.ini', 'constants');
         
         $this->atomIs(array('Identifier', 'Name'))
+             ->hasNoIn('DEFINITION') // constant is defined and used. Bah
+             ->hasNoIn('NAME') // constant definition
              ->codeIs($names, self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         $regex = '\\\\\\\\(' . implode('|', $names) . ')\\$';
         $this->atomIs('Nsname')
+             ->hasNoIn('DEFINITION') // constant is defined and used. Bah
              ->has('fullnspath')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();

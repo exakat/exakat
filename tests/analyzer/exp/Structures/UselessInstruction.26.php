@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('strtolower(\'a\')',
-                      'bar($b)',
+$expected     = array('bar($b)',
                      );
 
-$expected_not = array('sort($a)',
+$expected_not = array('strtolower(\'a\')',
+                      'sort($a)',
                       'array_shift($a)',
                       'foo($a)',
                      );

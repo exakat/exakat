@@ -30,7 +30,7 @@ class ConstantScalarExpression extends Analyzer {
     
     public function analyze() {
         $validAtoms = self::$LITERALS;
-//        $validAtoms[] = 'Arrayliteral';
+        $validAtoms[] = 'Void';
 
         // const x = 1 + 2;
         $this->atomIs('Const')

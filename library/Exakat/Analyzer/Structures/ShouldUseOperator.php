@@ -53,7 +53,9 @@ class ShouldUseOperator extends Analyzer {
             ->savePropertyAs('code', 'argument')
             ->goToFunction()
             ->outIs('ARGUMENT')
-            ->hasNoOut('TYPEHINT')
+            ->outIs('TYPEHINT')
+            ->atomIs('Void')
+            ->inIs('TYPEHINT')
             ->outIsIE('NAME')
             ->samePropertyAs('code', 'argument')
             ->back('first');

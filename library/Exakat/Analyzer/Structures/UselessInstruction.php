@@ -68,6 +68,7 @@ class UselessInstruction extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Functioncall')
              ->fullnspathIsNot(makeFullnspath(array_keys($functions)))
+             ->hasIn('DEFINITION')
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -77,6 +78,8 @@ class UselessInstruction extends Analyzer {
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'New', ));
         $this->prepareQuery();
 
+/*
+        // too soon
         // s::foo(1)
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
@@ -91,6 +94,7 @@ class UselessInstruction extends Analyzer {
              )
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'New', ));
         $this->prepareQuery();
+*/
 
         // -$x = 3
         $this->atomIs('Assignation')

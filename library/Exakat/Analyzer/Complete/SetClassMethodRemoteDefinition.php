@@ -34,6 +34,14 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs(array('CLASS', 'OBJECT'))
+              // Handles variables as object
+              ->optional(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFAULT')
+                     ->outIs('NEW')
+                     ->prepareSide()
+              )
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -42,8 +50,8 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         $this->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -61,8 +69,8 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('method')
@@ -89,8 +97,8 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
