@@ -91,7 +91,7 @@ class Xml extends Reports {
                     $out->writeAttribute('column', $column);
                     $out->writeAttribute('source', $error['source']);
                     $out->writeAttribute('severity', $error['severity']);
-                    $out->writeAttribute('fixable', (int) $error['fixable']);
+                    $out->writeAttribute('fixable', $error['fixable']);
                     $out->text($error['message']);
                     $out->endElement();
                     $this->count();

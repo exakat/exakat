@@ -20,11 +20,12 @@
  *
 */
 
+declare(strict_types = 1);
 
 namespace Exakat\Exceptions;
 
 class VcsError extends \RuntimeException {
-    public function __construct($vcs = '', $message) {
+    public function __construct(string $vcs = '', string $message = '') {
         parent::__construct("$vcs reported an error and no code could be loaded : $message.", 0, null);
     }
 }

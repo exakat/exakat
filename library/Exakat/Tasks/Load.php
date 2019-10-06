@@ -20,6 +20,8 @@
  *
 */
 
+declare(strict_types = 1);
+
 namespace Exakat\Tasks;
 
 use Exakat\Config;
@@ -4824,7 +4826,9 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator($atom, array $finals = array(), $link, $separator = '') {
+    private function processSingleOperator(string $atom, array $finals = array(), string $link = '', string $separator = '') {
+        assert($link !== '', "Link cannot be empty");
+
         $current = $this->id;
 
         $operator = $this->addAtom($atom);

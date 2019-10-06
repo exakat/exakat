@@ -102,7 +102,7 @@ class Weekly extends Ambassador {
         }
 
     // special case for 'Future read'
-        $date = date('Y-W', strtotime(date('Y') . 'W' . (date('W') + 1) . '1'));
+        $date = date('Y-W', strtotime(date('Y') . 'W' . ((int) date('W') + 1) . '1'));
         $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
         $this->weeks[$date] = json_decode($json);
         

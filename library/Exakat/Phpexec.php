@@ -72,8 +72,10 @@ class Phpexec {
     const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0',);
     const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
 
-    public function __construct($phpversion = null, $pathToBinary) {
-        assert($phpversion !== null, "Can't use null for PHP version");
+    public function __construct(string $phpversion = null, string $pathToBinary = '') {
+        assert($phpversion !== null, "Php version must be a valid version, not $phpversion.");
+        assert($pathToBinary !== '', "Path to PHP binary can't be empty.");
+
         $this->requestedVersion = substr($phpversion, 0, 3);
 
         $this->version = $phpversion;
