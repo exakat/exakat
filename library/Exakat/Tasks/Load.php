@@ -2192,7 +2192,7 @@ class Load extends Tasks {
                     $default = $this->popExpression();
                 } else {
                     if ($index->variadic === self::ELLIPSIS) {
-                        $args_max = 100;
+                        $args_max = \MAX_ARGS;
                     } else {
                         ++$args_min;
                     }
@@ -3572,9 +3572,9 @@ class Load extends Tasks {
             $fullcode[] = $declaredefinition->fullcode;
             
             ++$this->id; // Skip value
-        }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
+        } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
-        if ($strict_types === 1) {
+        if ($strict_types === true) {
             $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ';
             
             ++$this->id;

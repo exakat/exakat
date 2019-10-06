@@ -32,7 +32,7 @@ class UsesDefaultArguments extends Analyzer {
         $positions = array();
         foreach($functions as $function) {
             if ($function['args_min'] === $function['args_max']) { continue; }
-            if ($function['args_max'] === 100) { continue; }
+            if ($function['args_max'] === \MAX_ARGS) { continue; }
             // Only test if the last is missing. This is sufficient
             $positions[$function['args_max'] - 1][] = "\\$function[name]";
         }

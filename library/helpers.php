@@ -43,6 +43,8 @@ const RETURN_VALUE      = true;
 const SUCCESS = false;
 const FAILURE = true;
 
+const MAX_ARGS = 100;
+
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
 
 function display(string $text) : void {

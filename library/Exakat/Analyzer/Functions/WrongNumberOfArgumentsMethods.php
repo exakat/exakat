@@ -51,7 +51,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                 $argsMins[$method['args_min']][]    = mb_strtolower($method['name']);
                 $argsMinsFNP[$method['args_min']][makeFullNSpath($method['class'])] = 1;
             }
-            if ($method['args_max'] < 100) {
+            if ($method['args_max'] < \MAX_ARGS) {
                 $argsMaxs[$method['args_max']][] =  mb_strtolower($method['name']);
                 $argsMaxsFNP[$method['args_max']][makeFullNSpath($method['class'])] = 1;
             }

@@ -67,7 +67,7 @@ class Baseline extends Tasks {
     
     private function remove() {
         $baselineStash = new BaselineStash($this->config);
-        $baselineStash->removeBaseline($this->config->baseline_id, $this->config->project_dir);
+        $baselineStash->removeBaseline($this->config->baseline_id);
     }
 
     private function save() {

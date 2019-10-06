@@ -42,7 +42,7 @@ class WrongNumberOfArguments extends Analyzer {
         foreach($functions as $function) {
             $argsMins[makefullnspath($function['name'])] = $function['args_min'];
 
-            if ($function['args_max'] < 100) {
+            if ($function['args_max'] < \MAX_ARGS) {
                 $argsMaxs[makefullnspath($function['name'])] = $function['args_max'];
             }
         }

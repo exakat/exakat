@@ -84,7 +84,7 @@ class Project extends Tasks {
 
         // Baseline is always the previous audit done, not the current one!
         $baselinestash = new BaselineStash($this->config);
-        $baselinestash->copyPrevious($this->config->dump, $this->config->baseline_set);
+        $baselinestash->copyPrevious($this->config->dump);
 
         display("Cleaning project\n");
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);

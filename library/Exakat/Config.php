@@ -101,7 +101,7 @@ class Config {
 
         unset($argv[0]);
 
-        $this->defaultConfig = new DefaultConfig($this->projects_root);
+        $this->defaultConfig = new DefaultConfig();
 
         $this->exakatConfig = new ExakatConfig($this->projects_root);
         if ($file = $this->exakatConfig->loadConfig(null)) {
