@@ -36,7 +36,7 @@ class Git extends Vcs {
     }
     
     protected function selfCheck() {
-        $res = shell_exec("$this->executable --version 2>&1");
+        $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
         }
@@ -218,20 +218,36 @@ class Git extends Vcs {
     }
     
     public function getDiffFile($next) {
-        // Added and removed ? 
-         $res = shell_exec("cd {$this->destinationFull}; git diff-tree -r $next | grep ' M\t' ");
+        // Added and removed ?
+         $res = shell_exec("cd {$this->destinationFull}; {$this->executable}  diff --diff-filter=d --name-only $next -- .");
 
-         preg_match_all("/ M\t(.*?)\n/m", $res, $r);
-         
-         $return = array_map(function ($path) { return "/$path"; }, $r[1]);
+        if ($res === null) {
+            return array();
+        }
+
+        $return = explode("\n", trim($res));
+        $return = array_map(function ($x) { return "/$x"; }, $return);
+
          return $return;
     }
 
     public function checkOut($next) {
-        // Added and removed ? 
-         $res = shell_exec("cd {$this->destinationFull}; git checkout $next");
+        //--diff-filter=[(A|C|D|M|R|T|U|X|B)…​[*]]
+        // Some situations are not supported yet.
+        // We keep Added, Modified. Deleted are ignored, as non-treatable.
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -q --diff-filter=a --name-only $next -- .");
 
-         print $res;
+        // No chane, may be, but we still need to update the code
+        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout $next");
+
+        if ($res === null) {
+            return array();
+        }
+
+        $return = explode("\n", trim($res));
+        $return = array_map(function ($x) { return "/$x"; }, $return);
+
+        return $return;
     }
 
 }

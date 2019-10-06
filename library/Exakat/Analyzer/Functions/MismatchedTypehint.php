@@ -28,11 +28,8 @@ class MismatchedTypehint extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenMethods',
                      'Complete/MakeClassMethodDefinition',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
-                     'Complete/SetClassRemoteDefinitionWithInjection',
-                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/PropagateCalls',
                      'Complete/FollowClosureDefinition',
-                     'Complete/CreateDefaultValues',
                     );
     }
 

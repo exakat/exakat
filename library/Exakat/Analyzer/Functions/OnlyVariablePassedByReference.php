@@ -26,10 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OnlyVariablePassedByReference extends Analyzer {
     public function dependsOn() {
-        return array('Complete/CreateDefaultValues',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
-                     'Complete/SetClassRemoteDefinitionWithParenthesis',
-                     'Complete/SetClassMethodRemoteDefinition',
+        return array('Complete/PropagateCalls',
                      'Complete/MakeFunctioncallWithReference',
                     );
     }

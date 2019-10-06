@@ -6014,7 +6014,9 @@ class Load extends Tasks {
         return $this->php->getTokenName($token);
     }
 
-    private function getFullnspath($name, $type = 'class', $apply) {
+    private function getFullnspath($name, $type = 'class', Atom $apply = null) {
+        assert($apply !== null, "\$apply can't be null in ".__METHOD__);
+
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {

@@ -460,7 +460,10 @@ GREMLIN
 sideEffect{ 
     it.get().property("intval", x.value("intval")); 
     it.get().property("boolean", x.value("boolean"));
-    it.get().property("noDelimiter", x.value("noDelimiter")); 
+    if ("noDelimiter" in x.keys()) {
+        // Ternary, Comparison
+        it.get().property("noDelimiter", x.value("noDelimiter")); 
+    }
     it.get().property("propagated", true); 
 
     x = null;

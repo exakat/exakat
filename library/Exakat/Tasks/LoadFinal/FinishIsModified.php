@@ -28,6 +28,8 @@ use Exakat\Query\Query;
 use Exakat\Data\Methods;
 
 class FinishIsModified extends LoadFinal {
+    protected $methods = null;
+    
     public function run() {
         $variables = array('Variable',
                            'Variableobject',

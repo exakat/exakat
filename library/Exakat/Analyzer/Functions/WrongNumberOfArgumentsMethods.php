@@ -27,13 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongNumberOfArgumentsMethods extends Analyzer {
     public function dependsOn() {
-        return array('Complete/CreateDefaultValues',
+        return array('Complete/OverwrittenMethods',
                      'Complete/SetClassMethodRemoteDefinition',
-                     'Complete/SetClassRemoteDefinitionWithTypehint',
-                     'Complete/OverwrittenMethods',
-                     'Complete/SetClassRemoteDefinitionWithParenthesis',
-                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/PropagateCalls',
                      'Functions/VariableArguments',
                     );
     }

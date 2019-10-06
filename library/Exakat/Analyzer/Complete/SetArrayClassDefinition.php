@@ -26,9 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SetArrayClassDefinition extends Analyzer {
     public function dependsOn() {
-        return array('Complete/CreateDefaultValues',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
-                     'Complete/SetClassRemoteDefinitionWithTypehint',
+        return array('Complete/PropagateCalls',
                     );
     }
 

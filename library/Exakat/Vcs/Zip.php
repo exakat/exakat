@@ -28,7 +28,7 @@ class Zip extends Vcs {
     private $executable = 'unzip';
 
     protected function selfCheck() {
-        $res = shell_exec("{$this->executable} --version  2>&1");
+        $res = shell_exec("{$this->executable} --version  2>&1") ?? '';
         if (strpos($res, 'Zip') === false) {
             throw new HelperException('zip');
         }

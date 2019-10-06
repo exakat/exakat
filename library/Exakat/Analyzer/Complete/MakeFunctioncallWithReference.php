@@ -31,7 +31,7 @@ class MakeFunctioncallWithReference extends Analyzer {
 
     public function dependsOn() {
         return array('Complete/SetClassMethodRemoteDefinition',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/PropagateCalls',
                     );
     }
 

@@ -20,6 +20,8 @@
  *
 */
 
+declare(strict_types=1);
+
 use Exakat\Exceptions\NoSuchDir;
 
 const INI_PROCESS_SECTIONS      = true;
@@ -43,7 +45,7 @@ const FAILURE = true;
 
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
 
-function display($text) {
+function display(string $text) : void {
     global $VERBOSE;
     
     if ($VERBOSE) {
@@ -51,7 +53,7 @@ function display($text) {
     }
 }
 
-function rmdirRecursive($dir) {
+function rmdirRecursive(string $dir) : int {
     if (!file_exists($dir)) {
         // Do nothing
         return 0;
@@ -86,7 +88,7 @@ function rmdirRecursive($dir) {
     return $total;
 }
 
-function copyDir($src, $dst) {
+function copyDir(string $src, string $dst) : int {
     if (!file_exists($src)) {
         throw new NoSuchDir("Can't find dir : '$src'");
     }
@@ -115,7 +117,7 @@ function copyDir($src, $dst) {
     return $total;
 }
 
-function rglob($pattern, $flags = \GLOB_NOSORT) {
+function rglob(string $pattern, int $flags = \GLOB_NOSORT) : array {
     $pattern = str_replace('\\', '\\\\', $pattern);
     $files = glob("$pattern/*", $flags);
     $dirs  = glob("$pattern/*", \GLOB_ONLYDIR | \GLOB_NOSORT);
@@ -132,7 +134,7 @@ function rglob($pattern, $flags = \GLOB_NOSORT) {
     return array_merge(...$subdirs);
 }
 
-function duration($seconds) {
+function duration(int $seconds) : string {
     if ($seconds < 60) {
         return "$seconds s";
     }
@@ -154,7 +156,7 @@ function duration($seconds) {
     return "$days d $hours h $minuts min $seconds s";
 }
 
-function unparse_url($parsed_url) {
+function unparse_url(array $parsed_url) : string {
     $scheme   = isset($parsed_url['scheme'])   ? "$parsed_url[scheme]://"      : '';
     $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
     $port     = isset($parsed_url['port'])     ? ":$parsed_url[port]"          : '';
@@ -171,7 +173,7 @@ function unparse_url($parsed_url) {
 }
 
 // Returns a list of unique values, when all values are arrays
-function array_array_unique($array) {
+function array_array_unique(array $array) : array {
     $return = array();
     
     foreach ($array as $a) {
@@ -185,7 +187,7 @@ function array_array_unique($array) {
 }
 
 // [a => b, ...] to [ b => [a1, a2, ...]]
-function array_groupby($array) {
+function array_groupby(array $array) : array {
     $return = array();
     foreach ($array as $k => $v) {
         if (isset($return[$v])) {
@@ -198,7 +200,7 @@ function array_groupby($array) {
     return $return;
 }
 
-function array_ungroupby($array) {
+function array_ungroupby(array $array) : array {
     $return = array();
     foreach ($array as $k => $v) {
         foreach ($v as $w) {
@@ -209,11 +211,11 @@ function array_ungroupby($array) {
     return $return;
 }
 
-function makeList(array $array, string $delimiter = '"') {
+function makeList(array $array, string $delimiter = '"') : string {
     return $delimiter . implode("$delimiter, $delimiter", $array) . $delimiter;
 }
 
-function unicode_blocks($string) {
+function unicode_blocks(string $string) : array {
     $c = trim(mb_encode_numericentity ($string, array (0x0, 0xffff, 0, 0xffff), 'UTF-8'), '&#;x');
     $characters = explode(';&#', $c);
     
@@ -363,7 +365,7 @@ function unicode_blocks($string) {
     return $return;
 }
 
-function PHPSyntax($code) {
+function PHPSyntax(string $code) : string {
     static $cache;
     
     if (!isset($cache)) {
@@ -394,7 +396,7 @@ function PHPSyntax($code) {
     return $cache[$code];
 }
 
-function makeArray($value) {
+function makeArray($value) : array {
     if (is_array($value)) {
         return $value;
     } else {
@@ -405,7 +407,7 @@ function makeArray($value) {
 const FNP_CONSTANT     = true;
 const FNP_NOT_CONSTANT = false;
 
-function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
+function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
     // case for classes and functions
     if ($constant === \FNP_NOT_CONSTANT) {
         $cb = function ($x) {
@@ -443,7 +445,7 @@ function makeFullNsPath($functions, $constant = \FNP_NOT_CONSTANT) {
     return $r;
 }
 
-function trimOnce($string, $trim = '\'"') {
+function trimOnce(string $string, string $trim = '\'"') : string {
     $length = strlen($string);
     if ($length < 2) {
         return $string;
@@ -459,31 +461,31 @@ function trimOnce($string, $trim = '\'"') {
     return $string;
 }
 
-function makeHtml($string) {
+function makeHtml(string $string) : string {
     return htmlentities($string, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 }
 
-function rst2quote($txt) {
-    return preg_replace('/``+(.+?)``+/s', ' <span style="border: 1px solid #ddd; background-color: #f5f5f5">$1</span> ', $txt);
+function rst2quote(string $text) : string {
+    return preg_replace('/``+(.+?)``+/s', ' <span style="border: 1px solid #ddd; background-color: #f5f5f5">$1</span> ', $text);
 }
 
-function rst2htmlLink($txt) {
+function rst2htmlLink(string $text) : string {
     // `title <url>`_ => <a href="url">title</a>
     // `anchor`_ => <a href="#anchor">anchor</a>
     
-    return preg_replace('/`([^<]+?) <([^>]+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
+    return preg_replace('/`([^<]+?) <([^>]+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $text);
 }
 
-function rst2literal($txt) {
+function rst2literal(string $text) : string {
     $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
         $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . str_replace('<br />', '', $x[1]) . '?&gt;</pre>';
         return $return;
-    }, $txt);
+    }, $text);
 
     return $return;
 }
 
-function rsttable2html($raw) {
+function rsttable2html(string $raw) : string {
     $html = array();
     
     $lines = explode("\n", $raw);
@@ -516,7 +518,7 @@ function rsttable2html($raw) {
     return implode(PHP_EOL, $html);
 }
 
-function rstlist2html($raw) {
+function rstlist2html(string $raw) : string {
     $html = array();
     
     $lines = explode("\n", $raw);
@@ -544,7 +546,7 @@ function rstlist2html($raw) {
     return implode(PHP_EOL, $html);
 }
 
-function shutdown() {
+function shutdown() : void {
     $error = error_get_last();
 
     if (empty($error)) {
@@ -556,13 +558,13 @@ function shutdown() {
     }
 }
 
-function str2array($string, $delimiter = ',') {
+function str2array(string $string, string $delimiter = ',') : array {
     $array = explode($delimiter, $string);
     
     return array_map('trim', $array);
 }
 
-function ordinal($number) {
+function ordinal(int $number) : string {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
     if (($number % 100 >= 11) && ($number % 100 <= 13)) {
         return "{$number}th";
@@ -663,18 +665,18 @@ function sort_dependencies($array, $level = 0) {
     return $return;
 }
 
-function filter_analyzer($analyzer) {
+function filter_analyzer(string $analyzer) : int {
     return preg_match('#^\w+/\w+$#', $analyzer);
 }
 
-function array_sub_sort(&$list) {
+function array_sub_sort(array &$list) {
     foreach ($list as &$l) {
         sort($l);
     }
     unset($l);
 }
 
-function array_collect_by(array &$array, $key, $value) {
+function array_collect_by(array &$array, $key, $value) : void {
     if (isset($array[$key])) {
         $array[$key][] = $value;
     } else {
@@ -682,7 +684,7 @@ function array_collect_by(array &$array, $key, $value) {
     }
 }
 
-function readIniPercentage($value) {
+function readIniPercentage(string $value) {
     $return = abs((int) $value);
     $return = max(0, $return);
     $return = min(100, $return);

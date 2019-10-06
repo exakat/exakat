@@ -27,11 +27,8 @@ use Exakat\Analyzer\Analyzer;
 class WrongCase extends Analyzer {
 
     public function dependsOn() {
-        return array('Complete/SetClassRemoteDefinitionWithLocalNew',
+        return array('Complete/PropagateCalls',
                      'Complete/SetClassMethodRemoteDefinition',
-                     'Complete/SetClassRemoteDefinitionWithParenthesis',
-                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
-                     'Complete/SetClassPropertyDefinitionWithTypehint',
                     );
     }
     

@@ -26,8 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MismatchedDefaultArguments extends Analyzer {
     public function dependsOn() {
-        return array('Complete/SetClassMethodRemoteDefinition',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+        return array('Complete/PropagateCalls',
                     );
     }
 

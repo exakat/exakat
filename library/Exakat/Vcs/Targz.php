@@ -63,7 +63,7 @@ class Targz extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec('tar --version 2>&1'));
+        $res = trim(shell_exec('tar --version 2>&1') ?? '');
         if (preg_match('/^(\w+) ([0-9\.]+) /', $res, $r)) {//
             $stats['tar'] = 'Yes';
             $stats['tar version'] = $r[0];
@@ -72,7 +72,7 @@ class Targz extends Vcs {
             $stats['tar optional'] = 'Yes';
         }
 
-        $res = trim(shell_exec('gzip -V 2>&1'));
+        $res = trim(shell_exec('gzip -V 2>&1') ?? '');
         if (preg_match('/gzip (\d+),/', $res, $r)) {//
             $stats['gzip'] = 'Yes';
             $stats['gzip version'] = $r[1];

@@ -49,7 +49,7 @@ class Svn extends Vcs {
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update") ?? '';
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }

@@ -28,7 +28,7 @@ class MethodUsedBelow extends Analyzer {
     public function dependsOn() {
         return array('Complete/CreateDefaultValues',
                      'Complete/SetClassMethodRemoteDefinition',
-                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/PropagateCalls',
                     );
     }
 

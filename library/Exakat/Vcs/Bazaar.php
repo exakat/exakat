@@ -42,13 +42,13 @@ class Bazaar extends Vcs {
         $this->check();
         
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; {$this->executable} branch $source code");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} branch $source code") ?? '';
     }
 
     public function update() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} update 2>&1") ?? '';
         if (preg_match('/revision (\d+)/', $res, $r)) {
             return $r[1];
         } else {
@@ -59,14 +59,14 @@ class Bazaar extends Vcs {
     public function getBranch() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep branch-nick");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep branch-nick") ?? '';
         return trim(substr($res, 13), " *\n");
     }
 
     public function getRevision() {
         $this->check();
 
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep revno");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} version-info 2>&1 | grep revno") ?? '';
         return trim(substr($res, 7), " *\n");
     }
 
