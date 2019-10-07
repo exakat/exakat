@@ -2496,7 +2496,7 @@ GREMLIN
         $values[] = "('constant total', '$constantCounts')";
         $values[] = "('constant missed', '$constantMissed')";
 
-        $query = 'INSERT INTO hash ("key", "value") VALUES ' . implode(', ', $values);
+        $query = 'INSERT OR REPLACE INTO hash ("key", "value") VALUES ' . implode(', ', $values);
         $this->sqlite->query($query);
     }
 
@@ -2932,7 +2932,7 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($result->toArray() as $row) {
-            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['variable']) . "', '$row[file]', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
+            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['variable']) . "', '" . $this->sqlite->escapeString($row['file']) . "', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
         }
 
         $query = 'INSERT INTO globalVariables ("variable", "file", "line", "isRead", "isModified", "type") VALUES ' . implode(', ', $valuesSQL);
