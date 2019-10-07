@@ -285,10 +285,6 @@ SQL;
         });
     }
 
-    public static function resetCache() {
-        self::$instanciated = array();
-    }
-
     public function getAnalyzerInExtension($name) {
         return array();
     }

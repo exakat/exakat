@@ -1473,7 +1473,7 @@ class Load extends Tasks {
             $blockFullcode = self::FULLCODE_BLOCK;
         }
 
-        $function->fullcode   = ($fullcode ? implode(' ', $fullcode) . ' ' : '') .
+        $function->fullcode   = (empty($fullcode) ? '' : implode(' ', $fullcode) . ' ' ) .
                                 $this->tokens[$current][1] . ' ' . ($function->reference ? '&' : '') .
                                 ($function->atom === 'Closure' ? '' : $name->fullcode) . '(' . $argumentsFullcode . ')' .
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use

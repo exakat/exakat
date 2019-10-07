@@ -23,11 +23,15 @@
 namespace Exakat\Autoload;
 
 use Exakat\Config;
+use Exakat\Exakat;
+use Exakat\Extensions\Extension;
+
 
 class AutoloadExt implements Autoloader {
     const LOAD_ALL = null;
     
-    private $pharList = array();
+    private $pharList   = array();
+    private $extensions = array();
     
     public function __construct($path) {
         if (!extension_loaded('phar')) {
@@ -59,6 +63,48 @@ class AutoloadExt implements Autoloader {
 
     public function registerAutoload() {
         spl_autoload_register(array($this, 'autoload'));
+        
+        $this->checkExtensions();
+    }
+    
+    private function checkExtensions() {
+        foreach($this->pharList as $name => $phar) {
+            $className = "\Exakat\Extensions\\$name";
+
+            if (class_exists($className)) {
+                $extension = new $className();
+
+                // Check version requiremements
+                $versionCheck = $extension->dependsOnExakat();
+
+                if ($versionCheck === Extension::VERSION_ALL) {
+                    $this->extensions[$name] = $extension;
+                    $this->checkDependencies();
+
+                    continue;
+                }
+
+                if (version_compare(Exakat::VERSION, $versionCheck) < 0) {
+                    print "$name extension is not compatible with this version of Exakat. It needs $versionCheck or more recent";
+                    unset($this->pharList[$name]);
+
+                    continue;
+                }
+
+                $this->extensions[$name] = $extension;
+                $this->checkDependencies();
+            }
+        }
+    }
+    
+    public function checkDependencies() {
+        // Report missing extensions, but don't prevent them (some rules may still work, others will be ignored)
+        foreach($this->extensions as $name => $extension) {
+            $diff = array_diff($extension->dependsOnExtensions(), array_keys($this->pharList));
+            if (!empty($diff)) {
+                print "$name extension requires the following missing extension : ".implode(', ', $diff)."\nProcessing may be impacted.\nDownload the missing extensions with the 'extension' command.\n";
+            }
+         }
     }
 
     public function getPharList() {

@@ -64,7 +64,6 @@ class DefaultConfig extends Config {
                                'dirname'            => '',
                                'program'            => '',
                                'repository'         => false,
-                               'project_rulesets'   => array(),
                                'analyzers'          => array(),
                                'report'             => 'Diplomat',
                                'project_reports'    => array('Text'),

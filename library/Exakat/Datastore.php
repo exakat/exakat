@@ -58,6 +58,7 @@ class Datastore {
                                         'exakat_build'         => Exakat::BUILD,
                                         'datastore_creation'   => date('r', time()),
                                         'project'              => $config->project,
+                                        'write_acces'          => 0,
                                         ));
 
             $this->cleanTable('hashAnalyzer');
@@ -84,6 +85,7 @@ class Datastore {
        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
        $this->sqliteWrite->enableExceptions(true);
        $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
+       $this->sqliteWrite->query('UPDATE hash SET value = value + 1 WHERE key IN ("write_access")');
 
        // open the read connexion AFTER the write, to have the sqlite databse created
        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
@@ -191,7 +193,6 @@ class Datastore {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
-            return array();
         }
         $return = array();
 
@@ -207,7 +208,6 @@ class Datastore {
         try {
             $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
-            return array();
         }
 
         $return = array();
@@ -225,7 +225,7 @@ class Datastore {
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
-        if (!$res) {
+        if ($res === false) {
             return null;
         }
 
@@ -242,7 +242,7 @@ class Datastore {
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();
 
-        if (!$res) {
+        if ($res === false) {
             return array();
         }
         
@@ -259,7 +259,7 @@ class Datastore {
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
-        if (!$res) {
+        if ($res === false) {
             return array();
         }
 

@@ -65,7 +65,7 @@ class Upgrade extends Tasks {
                 return;
             }
 
-            if (preg_match('/>exakat-' . $version . '.phar<\/a>/s', $html) == 0) {
+            if (preg_match('/>exakat-' . $version . '.phar<\/a>/s', $html) !== 1) {
                 print 'Unable to find last version. Try again later.' . PHP_EOL;
                 return;
             }

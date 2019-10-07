@@ -44,11 +44,11 @@ class Section {
     }
     
     public function __get($name) {
-        print "Access to undefined property $name\n";
+        display("Access to undefined property $name\n");
     }
 
     public function __set($name, $value) {
-        print "Write to undefined property $name\n";
+        display("Write to undefined property $name\n");
     }
 }
 
