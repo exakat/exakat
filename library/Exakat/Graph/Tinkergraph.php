@@ -260,10 +260,6 @@ SQL;
     public function getGlobalsSql() {
         return 'SELECT origin, destination FROM globals';
     }
-    
-    public function fixId($id) {
-        return $id;
-    }
 }
 
 ?>

@@ -693,21 +693,6 @@ HTML;
         $this->putBasedPage('compatibility_php' . $version, $html);
     }
 
-    protected function makeIcon($tag) {
-        switch($tag) {
-            case self::YES :
-                return '<i class="fa fa-check-square-o"></i>';
-            case self::NO :
-                return '<i class="fa fa-square-o"></i>';
-            case self::NOT_RUN :
-                return '<i class="fa fa-hourglass-o"></i>';
-            case self::INCOMPATIBLE :
-                return '<i class="fa fa-remove"></i>';
-            default :
-                return '&nbsp;';
-        }
-    }
-
     protected function Compatibility($count, $analyzer = '') {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';
