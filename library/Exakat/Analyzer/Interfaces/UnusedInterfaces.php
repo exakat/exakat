@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedInterfaces extends Analyzer {
     public function analyze() {
-        // interface i {}
-        // class x implements j {}
+        // interface i {} WITHOUT class x implements j {}
         $this->atomIs('Interface')
              ->hasNoOut('DEFINITION');
         $this->prepareQuery();
