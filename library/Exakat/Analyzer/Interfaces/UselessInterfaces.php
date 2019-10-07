@@ -30,7 +30,11 @@ class UselessInterfaces extends Analyzer {
     public function analyze() {
         // interface not used in a instanceof nor a Typehint
         $this->atomIs('Interface')
-             ->raw('not( where(__.out("DEFINITION").in("TYPEHINT", "CLASS") ) )')
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION') 
+                     ->hasIn(array("TYPEHINT", "RETURNTYPE", "CLASS"))
+             )
              ->back('first');
         $this->prepareQuery();
     }
