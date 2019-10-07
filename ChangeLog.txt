@@ -1,4 +1,4 @@
-Version 1.9.8 (Giant Gate Star of Dark Essence, coming up)
+Version 1.9.9 (Lasting Prosperity Star of True Man, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 1.9.8 (Giant Gate Star of Dark Essence, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.8 (Giant Gate Star of Dark Essence, 2019-10-07)
++ Architecture
+    + Upgraded dump command to handle multiple -P
+    + .yaml configuration handles multiple reports
+    + Started journey to strict_types
+    + Code cleaning
++ Report
+    + Ambassador : Fixed report of Flexible Docs
+    + Ambassador : trimmed delimiters in inventories
+    + Inventory : Foreach, with key values
++ Analysis
+    + New analysis : Wrong case for functions
+    + New analysis : Parameter Hiding
+    + New analysis : Report usage of Traversable
+    + Updated analysis : Undeclared properties skips undefined properties
+    + Updated analysis : Useless Interface, modernized query
+    + Updated analysis : String Holding Variables now skips default, const, sprintf
+    + Updated analysis : Binaries are not confused with hex
+    + Updated analysis : Extended 'Insufficient typehint' to abstract classes
++ Tokenizer
+    + Fixed handling of large powers
+    + Added more escaping when storing to SQLITE
 
 Version 1.9.7 (Greedy Wolf Star of Sunlight, 2019-09-30)
 + Architecture
