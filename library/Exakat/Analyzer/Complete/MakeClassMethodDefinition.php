@@ -83,6 +83,26 @@ class MakeClassMethodDefinition extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->back('first')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->back('first');
+        $this->prepareQuery();
+
+        // Create link between Class method and definition
+        // This works only for $this
+        $this->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('OBJECT')
+              ->atomIs('This', Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               
               ->outIs('USE')

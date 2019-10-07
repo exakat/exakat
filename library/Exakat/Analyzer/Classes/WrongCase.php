@@ -32,7 +32,7 @@ class WrongCase extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->outIsIE('NAME')
-             ->atomIs(array('Nsname', 'Identifier', 'Newcallname'))
+             ->atomIs(array('Nsname', 'Identifier', 'Newcallname', 'Newcall'))
              ->getClassName('classe')
              ->inIsIE('NAME')
              ->inIs('DEFINITION')

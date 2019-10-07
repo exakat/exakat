@@ -28,7 +28,8 @@ class DependantTrait extends Analyzer {
     public function dependsOn() {
         return array('Complete/OverwrittenProperties',
                      'Complete/MakeClassConstantDefinition',
-                     'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/PropagateCalls',
+                     'Complete/MakeClassMethodDefinition',
                     );
     }
 
