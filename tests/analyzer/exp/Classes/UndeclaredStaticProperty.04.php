@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('self::$a',
-                      'b::$b',
-                      '$this->c',
+$expected     = array('$this->c',
                      );
 
-$expected_not = array('$this->a',
+$expected_not = array('self::$a',
+                      'b::$b',
+                      '$this->a',
                       '$this->b',
                      );
 

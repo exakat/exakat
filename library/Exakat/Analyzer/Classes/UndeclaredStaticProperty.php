@@ -36,6 +36,7 @@ class UndeclaredStaticProperty extends Analyzer {
         $this->atomIs('Staticproperty')
              ->inIs('DEFINITION')
              ->atomIs('Virtualproperty')
+             ->hasOut('OVERWRITE')
              ->not(
                  $this->side()
                       ->outIs('OVERWRITE')
