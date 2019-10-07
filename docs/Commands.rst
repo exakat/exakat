@@ -22,8 +22,6 @@ List of commands :
 * `update`_
 * `upgrade`_
 
-:: _anonymize:
-
 anonymize
 ---------
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 30 Sep 2019 15:06:33 +0000
-.. comment: Generation hash : 61bbb76836d4a3fabbe3528fbf9c1261933e95b4
+.. comment: Generation date : Mon, 07 Oct 2019 12:08:17 +0000
+.. comment: Generation hash : 2e695dbfa8e8660e8ed78cc24d0434d9c5315b37
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3138,6 +3138,53 @@ See also `Throwable <http://php.net/manual/en/class.throwable.php>`_, `Exception
 
 
 
+.. _cant-implement-traversable:
+
+Cant Implement Traversable
+##########################
+
+
+It is not possible to implement the ``Traversable``interface. The alternative is to implement ``Iterator`` or ``IteratorAggregate``.
+
+``Traversable`` may be useful when used with ``instanceof``.
+
+.. code-block:: php
+
+   <?php
+   
+   // This lints, but doesn't run
+   class x implements Traversable {
+   
+   }
+   
+   if( $argument instanceof Traversable ) {
+       // doSomething
+   }
+   
+   ?>
+
+
+See also `Traversable <https://www.php.net/manual/en/class.traversable.php>`_, `Iterator <https://www.php.net/manual/en/class.iterator.php>`_ and `IteratorAggregate <https://www.php.net/manual/en/class.iteratoraggregate.php>`_..
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Implement Iterator or IteratorAggregate
+
++-------------+----------------------------------------+
+| Short name  | Interfaces/CantImplementTraversable    |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+
+
+
 .. _cant-inherit-abstract-method:
 
 Cant Inherit Abstract Method
@@ -3752,7 +3799,7 @@ When functions and classes bear the same name, calling them may be confusing. Th
 +-------------+----------------------------+
 | Short name  | Php/ClassFunctionConfusion |
 +-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
+| Rulesets    | :ref:`Semantics`           |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
@@ -3918,15 +3965,15 @@ Those classes are extending each other, creating an extension loop. PHP will yie
    
    ?>
 
-+-------------+----------------------------------------+
-| Short name  | Classes/MutualExtension                |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
++-------------+--------------------------------------------+
+| Short name  | Classes/MutualExtension                    |
++-------------+--------------------------------------------+
+| Rulesets    | :ref:`LintButWontExec`, :ref:`ClassReview` |
++-------------+--------------------------------------------+
+| Severity    | Major                                      |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
 
 
 
@@ -7570,6 +7617,61 @@ Suggestions
 
 
 
+.. _duplicate-literal:
+
+Duplicate Literal
+#################
+
+
+Report literals that are repeated across the code. The minimum replication is 5, and is configurable with maxDuplicate.
+
+Repeated literals should be considered a prime candidate for constants.
+
+Integer, reals and strings are considered here. Boolean, Null and Arrays are omitted. 0, 1, 2, 10 and the empty string are all omitted, as too common.
+
+.. code-block:: php
+
+   <?php
+       // array index are omitted
+       $x[3] = 'b';
+   
+       // constanst are omitted
+       const X = 11;
+       define('Y', 'string')
+   
+       // 0, 1, 2, 10 are omitted
+       $x = 0; 
+       
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++--------------+---------+---------+---------------------------------------------------------------+
+| Name         | Default | Type    | Description                                                   |
++--------------+---------+---------+---------------------------------------------------------------+
+| minDuplicate | 15      | integer | Minimal number of duplication before the literal is reported. |
++--------------+---------+---------+---------------------------------------------------------------+
+
+
+
++-------------+-----------------------+
+| Short name  | Type/DuplicateLiteral |
++-------------+-----------------------+
+| Rulesets    | :ref:`Semantics`      |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+
+
+
 .. _dynamic-library-loading:
 
 Dynamic Library Loading
@@ -8725,45 +8827,6 @@ See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 +------------+--------------------------------------------+
 | Rulesets   | :ref:`LintButWontExec`, :ref:`ClassReview` |
 +------------+--------------------------------------------+
-
-
-
-.. _find-key-directly:
-
-Find Key Directly
-#################
-
-
-No need for a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ to search for a key. 
-
-PHP offers two solutions : `array_search() <http://www.php.net/array_search>`_ and `array_keys() <http://www.php.net/array_keys>`_. `Array_search() <http://www.php.net/array_search>`_ finds the first key that fits a value, and array_keys returns all the keys. 
-
-.. code-block:: php
-
-   <?php
-   
-   $array = ['a', 'b', 'c', 'd', 'e'];
-   
-   print array_search($array, 'c'); 
-   // print 2 => 'c';
-   
-   print_r(array_keys($array, 'c')); 
-   // print 2 => 'c';
-   
-   ?>
-
-
-See also `array_search <http://php.net/array_search>`_ and `array_keys <http://php.net/array_keys>`_.
-
-+-------------+----------------------------+
-| Short name  | Structures/GoToKeyDirectly |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Suggestions`         |
-+-------------+----------------------------+
-| Severity    | Major                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
 
 
 
@@ -11414,15 +11477,15 @@ Suggestions
 * Change the body of the function to use only the methods that are available in the interface
 * Change the used objects so they don't depend on extra methods
 
-+-------------+--------------------------------+
-| Short name  | Functions/InsufficientTypehint |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
++-------------+-----------------------------------+
+| Short name  | Functions/InsufficientTypehint    |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks` |
++-------------+-----------------------------------+
+| Severity    | Major                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
 
 
 
@@ -11600,55 +11663,6 @@ See also `Double quoted <http://php.net/manual/en/language.types.string.php#lang
 +-------------+------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                |
 +-------------+------------------------------------------------+
-
-
-
-.. _invalid-class-name:
-
-Invalid Class Name
-##################
-
-
-The spotted classes are used with a different case than their definition. While PHP accepts this, it makes the code harder to read. 
-
-It may also be a violation of coding conventions.
-
-.. code-block:: php
-
-   <?php
-   
-   // This use statement has wrong case for origin.
-   use Foo as X;
-   
-   // Definition of the class
-   class foo {}
-   
-   // Those instantiations have wrong case
-   new FOO();
-   new X();
-   
-   ?>
-
-
-See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Match the defined class name with the called name
-
-+-------------+----------------------------------------------------------------+
-| Short name  | Classes/WrongCase                                              |
-+-------------+----------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
-+-------------+----------------------------------------------------------------+
-| Severity    | Minor                                                          |
-+-------------+----------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                               |
-+-------------+----------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-wrongcase`                             |
-+-------------+----------------------------------------------------------------+
 
 
 
@@ -18555,7 +18569,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/OneLetterFunctions                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                |
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Semantics`                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -19957,6 +19971,51 @@ Suggestions
 
 
 
+.. _parameter-hiding:
+
+Parameter Hiding
+################
+
+
+When a parameter is set to another variable, and never used.
+
+While this is a legit syntax, parameter hiding tends to make the code confusing. The parameter itself seems to be unused, while some extra variable appears.
+
+Keep this code simple by removing the hiding parameter.
+
+.. code-block:: php
+
+   <?php
+   
+   function substract($a, $b) {
+       // $b is given to $c;
+       $c = $b; 
+   
+       $c is used, but $b would be the same
+       return $a - $c;
+   }
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the hiding parameter
+
++-------------+---------------------------+
+| Short name  | Functions/ParameterHiding |
++-------------+---------------------------+
+| Rulesets    | :ref:`Semantics`          |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _parent-first:
 
 Parent First
@@ -21181,7 +21240,7 @@ Sometimes, when the property is going to be replaced by the incoming argument, o
 +-------------+-----------------------------------------------------+
 | Short name  | Structures/PropertyVariableConfusion                |
 +-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                      |
+| Rulesets    | :ref:`Analyze`, :ref:`Semantics`                    |
 +-------------+-----------------------------------------------------+
 | Severity    | Minor                                               |
 +-------------+-----------------------------------------------------+
@@ -21826,7 +21885,7 @@ Repeated Interface
 ##################
 
 
-A class should implements only once an interface.
+A class should implements only once an interface. An interface can only extends once another interface. In both cases, parent classes or interfaces must be checked.s
 
 PHP accepts multiple times the same interface in the ``implements`` clause. In fact, it doesn't do anything beyond the first implement. 
 
@@ -21847,17 +21906,25 @@ PHP accepts multiple times the same interface in the ``implements`` clause. In f
    ?>
 
 
+This code may compile, but won't execute.
+
 See also `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_ and `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
-+-------------+------------------------------+
-| Short name  | Interfaces/RepeatedInterface |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the interface usage at the lowest class or interface
+
++-------------+----------------------------------------+
+| Short name  | Interfaces/RepeatedInterface           |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Instant (5 mins)                       |
++-------------+----------------------------------------+
 
 
 
@@ -23643,7 +23710,7 @@ Should Use Math
 ###############
 
 
-Use math operators to make the operation clearer.
+Use math operators to make the operation readable.
 
 .. code-block:: php
 
@@ -23669,7 +23736,7 @@ Use math operators to make the operation clearer.
    // same as above
    $a /= $a;
    
-   // Dividing oneself
+   // Divisition remainer
    $a = 0;
    // same as above
    $a %= $a;
@@ -23679,15 +23746,23 @@ Use math operators to make the operation clearer.
 
 See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
 
-+-------------+--------------------------+
-| Short name  | Structures/ShouldUseMath |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Suggestions`       |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
-+-------------+--------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use explicit math assignation
+
++-------------+-----------------------------------------+
+| Short name  | Structures/ShouldUseMath                |
++-------------+-----------------------------------------+
+| Rulesets    | :ref:`Suggestions`                      |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Instant (5 mins)                        |
++-------------+-----------------------------------------+
+| Examples    | :ref:`openemr-structures-shouldusemath` |
++-------------+-----------------------------------------+
 
 
 
@@ -24194,15 +24269,15 @@ Suggestions
 
 *
 
-+-------------+------------------------------------------------+
-| Short name  | Type/SimilarIntegers                           |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
-+-------------+------------------------------------------------+
++-------------+------------------------------------------------------------------+
+| Short name  | Type/SimilarIntegers                                             |
++-------------+------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Semantics` |
++-------------+------------------------------------------------------------------+
+| Severity    | Minor                                                            |
++-------------+------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                  |
++-------------+------------------------------------------------------------------+
 
 
 
@@ -26752,62 +26827,6 @@ Here, `break <http://www.php.net/manual/en/control-structures.break.php>`_ may a
 
 
 
-.. _undeclared-static-property:
-
-Undeclared Static Property
-##########################
-
-
-Use the right syntax when reaching a property. Static properties use the ``\:\:`` operator, and non-static properties use ``->``. 
-
-Mistaking one of the other has two different reactions from PHP : ``Access to undeclared static property`` is a fatal error, while ``PHP Notice:  Accessing static property aa\:\:$a as non static`` is a notice.
-
-.. code-block:: php
-
-   <?php
-   
-   class a { 
-       static public $a = 1;
-       
-       function foo() {
-           echo self::$a; // right
-           echo $this->a; // WRONG
-       }
-   }
-   
-   class b { 
-       public $b = 1;
-   
-       function foo() {
-           echo $this->$b;  // right
-           echo b::$b;      // WRONG
-       }
-   }
-   
-   ?>
-
-
-See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Match the property call with the definition
-* Make the property static
-
-+-------------+------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty   |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Critical                           |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-
-
-
 .. _undefined-\:\:class:
 
 Undefined \:\:class
@@ -28140,7 +28159,7 @@ Unset In Foreach
 ################
 
 
-Unset applied to the variables of a ``foreach`` loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it has no effect on the original array : the only effect may be indirect, on elements inside an array, or on properties inside an object.
+Unset applied to the variables of a ``foreach`` loop are useless. Those variables are copies and not the actual value. Even if the value is a reference, unsetting it has no effect on the original array : the only effect may be indirect, on elements inside an array, or on properties inside an object.
 
 .. code-block:: php
 
@@ -28172,6 +28191,12 @@ Unset applied to the variables of a ``foreach`` loop are useless, as they are co
 
 
 See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the unset
 
 +-------------+----------------------------------------------+
 | Short name  | Structures/UnsetInForeach                    |
@@ -28336,15 +28361,15 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Classes/UnusedClass          |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>` |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
++-------------+----------------------------------------------+
+| Short name  | Classes/UnusedClass                          |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++-------------+----------------------------------------------+
+| Severity    | Major                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
 
 
 
@@ -28525,9 +28550,9 @@ Unused Interfaces
 #################
 
 
-Some interfaces are defined but not used. 
+Those interfaces are defined and never used. They should be removed, as they are dead code.
 
-They should be removed, as they are probably dead code.
+Interfaces may be use as parent for other interfaces, as typehint (argument, return and property), in instance of.
 
 .. code-block:: php
 
@@ -28552,6 +28577,15 @@ They should be removed, as they are probably dead code.
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the interface
+* Actually use the interface
+
 +-------------+--------------------------------------------------+
 | Short name  | Interfaces/UnusedInterfaces                      |
 +-------------+--------------------------------------------------+
@@ -28560,6 +28594,8 @@ They should be removed, as they are probably dead code.
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                 |
++-------------+--------------------------------------------------+
+| Examples    | :ref:`tine20-interfaces-unusedinterfaces`        |
 +-------------+--------------------------------------------------+
 
 
@@ -31426,16 +31462,27 @@ Interfaces should be used in Typehint or with the `instanceof <http://php.net/ma
        }
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the interface with instanceof, or a typehint
+* Drop the interface altogether : both definition and implements keyword
+
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Short name  | Interfaces/UselessInterfaces                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                            |
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Typechecks`                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`woocommerce-interfaces-uselessinterfaces`                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 
 
@@ -32055,6 +32102,41 @@ Suggestions
 
 
 
+.. _variables-with-one-letter-names:
+
+Variables With One Letter Names
+###############################
+
+
+Variables with one letter name are the shortest name for variables. They also bear very little meaning : what does containt ``$w`` ? 
+
+Some one-letter variables have meaning : ``$x`` and ``$y`` for coordinates, ``$i``, ``$j``, ``$k`` for blind variables. Others tend to be an easy way to give a name to a variable, without thinking too hard a good name.
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is reported as a one-letter variable
+   $a = 0;
+   
+   // $i is considered a false positive. 
+   for($i = 0; $i < 10; ++$i) {
+       $a += doSomething($i);
+   }
+   
+   ?>
+
+
+See also `Using single characters for variable names in loops/exceptions <https://softwareengineering.stackexchange.com/questions/71710/using-single-characters-for-variable-names-in-loops-exceptions?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa/>`_ and `Single Letter Variable Names Still Considered Harmful <https://odetocode.com/blogs/scott/archive/2008/11/17/single-letter-variable-names-still-considered-harmful.aspx>`_.
+
++------------+-----------------------------+
+| Short name | Variables/VariableOneLetter |
++------------+-----------------------------+
+| Rulesets   | :ref:`Semantics`            |
++------------+-----------------------------+
+
+
+
 .. _weak-typing:
 
 Weak Typing
@@ -32189,6 +32271,162 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Examples    | :ref:`dolibarr-variables-writtenonlyvariable`, :ref:`suitecrm-variables-writtenonlyvariable`        |
 +-------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _wrong-access-style-to-property:
+
+Wrong Access Style to Property
+##############################
+
+
+Use the right syntax when reaching for a property. Static properties use the ``\:\:`` operator, and non-static properties use ``->``. 
+
+Mistaking one of the other raise two different reactions from PHP : ``Access to undeclared static property`` is a fatal error, while ``PHP Notice:  Accessing static property aa\:\:$a as non static`` is a notice.
+
+.. code-block:: php
+
+   <?php
+   
+   class a { 
+       static public $a = 1;
+       
+       function foo() {
+           echo self::$a; // right
+           echo $this->a; // WRONG
+       }
+   }
+   
+   class b { 
+       public $b = 1;
+   
+       function foo() {
+           echo $this->$b;  // right
+           echo b::$b;      // WRONG
+       }
+   }
+   
+   ?>
+
+
+This analysis reports both static properties with a `->` access, and non-static properties with a `\:\:` access.
+
+See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the property call with the definition
+* Make the property static
+
++-------------+----------------------------------------------------------------------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty                                                                   |
++-------------+----------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                                 |
++-------------+----------------------------------------------------------------------------------------------------+
+| Severity    | Critical                                                                                           |
++-------------+----------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`humo-gen-classes-undeclaredstaticproperty`, :ref:`humo-gen-classes-undeclaredstaticproperty` |
++-------------+----------------------------------------------------------------------------------------------------+
+
+
+
+.. _wrong-class-name-case:
+
+Wrong Class Name Case
+#####################
+
+
+The spotted classes are used with a different case than their definition. While PHP accepts this, it makes the code harder to read. 
+
+It may also be a violation of coding conventions.
+
+.. code-block:: php
+
+   <?php
+   
+   // This use statement has wrong case for origin.
+   use Foo as X;
+   
+   // Definition of the class
+   class foo {}
+   
+   // Those instantiations have wrong case
+   new FOO();
+   new X();
+   
+   ?>
+
+
+See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the defined class name with the called name
+
++-------------+------------------------------------------------------------------------------------------------+
+| Short name  | Classes/WrongCase                                                                              |
++-------------+------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                          |
++-------------+------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                               |
++-------------+------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-wrongcase`                                                             |
++-------------+------------------------------------------------------------------------------------------------+
+
+
+
+.. _wrong-function-name-case:
+
+Wrong Function Name Case
+########################
+
+
+The spotted functions are used with a different case than their definition. While PHP accepts this, it makes the code harder to read. 
+
+It may also be a violation of coding conventions.
+
+.. code-block:: php
+
+   <?php
+   
+   // Definition of the class
+   function foo () {}
+   
+   // Those calls have wrong case
+   FOO();
+   \Foo();
+   
+   // This is valid
+   foo();
+   
+   ?>
+
+
+See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Match the defined functioncall with the called name
+
++-------------+---------------------+
+| Short name  | Functions/WrongCase |
++-------------+---------------------+
+| Rulesets    | none                |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Instant (5 mins)    |
++-------------+---------------------+
 
 
 

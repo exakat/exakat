@@ -65,10 +65,6 @@ Glossary
 
 
 + `A`
-    + `Array_search()`
-
-      + :ref:`Find Key Directly <find-key-directly>`
-
     + `abs()`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
@@ -133,7 +129,6 @@ Glossary
     + `array_keys()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
-      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_map()`
@@ -171,7 +166,6 @@ Glossary
 
     + `array_search()`
 
-      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
@@ -601,7 +595,6 @@ Glossary
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
-      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
@@ -1096,6 +1089,7 @@ Glossary
     + `Null`
 
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
+      + :ref:`Duplicate Literal <duplicate-literal>`
       + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
       + :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
@@ -1617,6 +1611,10 @@ Glossary
     + `token_get_all()`
 
       + :ref:`@ Operator <@-operator>`
+
+    + `traversable`
+
+      + :ref:`Cant Implement Traversable <cant-implement-traversable>`
 
     + `trigger_error()`
 

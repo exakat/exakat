@@ -436,8 +436,15 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.8
+
+  * Cant Implement Traversable (Interfaces/CantImplementTraversable ; Analyze, LintButWontExec)
+  * Complete/PropagateCalls (Complete/PropagateCalls)
+  * Parameter Hiding (Functions/ParameterHiding ; Semantics)
+
 * 1.9.7
 
+  * Dump/CollectForeachFavorite (Dump/CollectForeachFavorite ; Unassigned)
   * Make Functioncall With Reference (Complete/MakeFunctioncallWithReference ; Unassigned)
   * Too Many Dereferencing (Classes/TooManyDereferencing)
   * Use Url Query Functions (Structures/UseUrlQueryFunctions ; Suggestions)
@@ -668,7 +675,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.6.6
 
   * Functions/BadTypehintRelay (Functions/BadTypehintRelay)
-  * Insufficient Typehint (Functions/InsufficientTypehint ; Analyze)
+  * Insufficient Typehint (Functions/InsufficientTypehint ; Analyze, Typechecks)
 
 * 1.6.5
 
@@ -757,8 +764,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Named Regex (Structures/NamedRegex ; Suggestions)
   * No Reference For Static Property (Php/NoReferenceForStaticProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * No Return For Generator (Php/NoReturnForGenerator ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * Repeated Interface (Interfaces/RepeatedInterface ; Analyze)
-  * Undeclared Static Property (Classes/UndeclaredStaticProperty)
+  * Repeated Interface (Interfaces/RepeatedInterface ; Analyze, LintButWontExec)
+  * Wrong Access Style to Property (Classes/UndeclaredStaticProperty)
 
 * 1.4.8
 
@@ -957,7 +964,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Double array_flip() (Performances/DoubleArrayFlip ; Performances)
   * Fallback Function (Functions/FallbackFunction ; Appinfo)
-  * Find Key Directly (Structures/GoToKeyDirectly ; Suggestions)
+  * Find Key Directly (Structures/GoToKeyDirectly ; Under Work)
   * Reuse Variable (Structures/ReuseVariable ; Suggestions)
   * Useless Catch (Exceptions/UselessCatch)
 
@@ -1274,7 +1281,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.2
 
-  * Class Function Confusion (Php/ClassFunctionConfusion ; Analyze)
+  * Class Function Confusion (Php/ClassFunctionConfusion ; Semantics)
   * Forgotten Thrown (Exceptions/ForgottenThrown)
   * Should Use array_column() (Php/ShouldUseArrayColumn ; Performances, Suggestions, Level 4)
   * ext/libsodium (Extensions/Extlibsodium ; Appinfo, Appcontent)
@@ -1444,7 +1451,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Class Has Fluent Interface (Classes/HasFluentInterface ; )
   * Class Usage (Classes/ClassUsage ; )
   * Class, Interface Or Trait With Identical Names (Classes/CitSameName ; Analyze)
-  * Classes Mutually Extending Each Other (Classes/MutualExtension ; Analyze, LintButWontExec)
+  * Classes Mutually Extending Each Other (Classes/MutualExtension ; LintButWontExec, ClassReview)
   * Classes Names (Classes/Classnames ; Appinfo)
   * Clone Usage (Classes/CloningUsage ; Appinfo)
   * Close Tags (Php/CloseTags ; Coding Conventions)
@@ -1598,7 +1605,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Internally Used Properties (Classes/PropertyUsedInternally ; )
   * Internet Ports (Type/Ports ; Inventory)
   * Interpolation (Type/StringInterpolation ; Coding Conventions)
-  * Invalid Class Name (Classes/WrongCase ; Analyze, Coding Conventions, RadwellCodes, Simple)
   * Invalid Constant Name (Constants/InvalidName ; Analyze, Simple)
   * Is An Extension Class (Classes/IsExtClass ; )
   * Is An Extension Constant (Constants/IsExtConstant ; Internal, First)
@@ -1852,7 +1858,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unset In Foreach (Structures/UnsetInForeach ; Analyze, Dead code, OneFile, Simple)
   * Unthrown Exception (Exceptions/Unthrown ; Analyze, Dead code, ClearPHP, Simple)
   * Unused Arguments (Functions/UnusedArguments ; Analyze, Simple)
-  * Unused Classes (Classes/UnusedClass ; Dead code, Simple)
+  * Unused Classes (Classes/UnusedClass ; Analyze, Dead code, Simple)
   * Unused Constants (Constants/UnusedConstants ; Dead code, Simple)
   * Unused Functions (Functions/UnusedFunctions ; Dead code, Simple)
   * Unused Global (Structures/UnusedGlobal ; Analyze, Simple)
@@ -1900,7 +1906,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Useless Final (Classes/UselessFinal ; Analyze, OneFile, ClearPHP, Simple)
   * Useless Global (Structures/UselessGlobal ; Analyze, OneFile, Simple, Level 2)
   * Useless Instructions (Structures/UselessInstruction ; Analyze, OneFile, ClearPHP, Simple, Level 1)
-  * Useless Interfaces (Interfaces/UselessInterfaces ; Analyze, ClearPHP, Simple)
+  * Useless Interfaces (Interfaces/UselessInterfaces ; Analyze, ClearPHP, Simple, ClassReview, Typechecks)
   * Useless Parenthesis (Structures/UselessParenthesis ; Analyze, Simple)
   * Useless Return (Functions/UselessReturn ; Analyze, OneFile, Simple, Level 4)
   * Useless Switch (Structures/UselessSwitch ; Analyze, Simple)
@@ -1919,6 +1925,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variables With One Letter Names (Variables/VariableOneLetter ; Semantics)
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Simple, Suggestions, Level 2)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Simple)
+  * Wrong Class Name Case (Classes/WrongCase ; Coding Conventions, RadwellCodes, Simple)
+  * Wrong Function Name Case (Functions/WrongCase ; Coding Conventions)
   * Wrong Number Of Arguments (Functions/WrongNumberOfArguments ; Analyze, OneFile, Simple)
   * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; Under Work)
   * Wrong Optional Parameter (Functions/WrongOptionalParameter ; Analyze, Simple, Level 1)
@@ -2082,7 +2090,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-78 PHP error message detailled : 
+81 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2091,8 +2099,8 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
 * :ref:`Access level to x\:\:foo() must be public (as in class i) <implemented-methods-are-public>`
 * :ref:`Access level to xx\:\:$x must be public (as in class x) <redefined-property>`
-* :ref:`Access to undeclared static property <undeclared-static-property>`
-* :ref:`Accessing static property aa\:\:$a as non static <undeclared-static-property>`
+* :ref:`Access to undeclared static property <wrong-access-style-to-property>`
+* :ref:`Accessing static property aa\:\:$a as non static <wrong-access-style-to-property>`
 * :ref:`An alias (%s) was defined for method %s(), but this method does not exist <undefined-insteadof>`
 * :ref:`Argument 1 passed to foo() must be of the type integer, string given <mismatch-type-and-default>`
 * :ref:`Array and string offset access syntax with curly braces is deprecated <no-more-curly-arrays>`
@@ -2117,8 +2125,11 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Class 'x' not found <undefined-\:\:class>`
 * :ref:`Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo) <abstract-or-implements>`
+* :ref:`Class b cannot implement previously implemented interface i <cant-implement-traversable>`
+* :ref:`Class b cannot implement previously implemented interface i <repeated-interface>`
 * :ref:`Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead <can't-throw-throwable>`
 * :ref:`Class x contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (x\:\:m1, x\:\:m2) <interfaces-is-not-implemented>`
+* :ref:`Class x must implement interface Traversable as part of either Iterator or IteratorAggregate <cant-implement-traversable>`
 * :ref:`Could not check compatibility between xx\:\:bar(B $a) and foo\:\:bar(A $a), because class A is not available <incompatible-signature-methods-with-covariance>`
 * :ref:`Creating default object from empty value <undefined-variable>`
 * :ref:`Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar() <method-signature-must-be-compatible>`
@@ -2599,8 +2610,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2624,8 +2635,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2778,6 +2789,7 @@ List of external links mentionned in this documentation.
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
+* `Traversable <https://www.php.net/manual/en/class.traversable.php>`_
 * `trigger_error <http://php.net/trigger_error>`_
 * `trim <https://www.php.net/manual/en/function.trim.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
@@ -2786,8 +2798,8 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2854,7 +2866,7 @@ Ruleset configurations
 
 INI configuration for built-in rulesets. Copy them in config/themes.ini, and make your owns.
 
-19 rulesets detailled here : 
+21 rulesets detailled here : 
 
 * `Analyze <ruleset_ini_analyze>`_
 * `ClassReview <ruleset_ini_classreview>`_
@@ -2873,8 +2885,10 @@ INI configuration for built-in rulesets. Copy them in config/themes.ini, and mak
 * `LintButWontExec <ruleset_ini_lintbutwontexec>`_
 * `Performances <ruleset_ini_performances>`_
 * `Security <ruleset_ini_security>`_
+* `Semantics <ruleset_ini_semantics>`_
 * `Suggestions <ruleset_ini_suggestions>`_
 * `Top10 <ruleset_ini_top10>`_
+* `Typechecks <ruleset_ini_typechecks>`_
 
 
 
@@ -2926,7 +2940,6 @@ _______
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
 |   analyzer[] = "Classes/MultipleDeclarations";
 |   analyzer[] = "Classes/MultipleTraitOrInterface";
-|   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
 |   analyzer[] = "Classes/NoParent";
@@ -2966,6 +2979,7 @@ _______
 |   analyzer[] = "Classes/UndefinedStaticclass";
 |   analyzer[] = "Classes/UnresolvedClasses";
 |   analyzer[] = "Classes/UnresolvedInstanceof";
+|   analyzer[] = "Classes/UnusedClass";
 |   analyzer[] = "Classes/UnusedConstant";
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Classes/UseInstanceof";
@@ -2975,7 +2989,6 @@ _______
 |   analyzer[] = "Classes/UselessFinal";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Classes/WeakType";
-|   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Classes/WrongName";
 |   analyzer[] = "Constants/BadConstantnames";
 |   analyzer[] = "Constants/ConstRecommended";
@@ -3035,6 +3048,7 @@ _______
 |   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
+|   analyzer[] = "Interfaces/CantImplementTraversable";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
 |   analyzer[] = "Interfaces/CouldUseInterface";
 |   analyzer[] = "Interfaces/EmptyInterface";
@@ -3062,7 +3076,6 @@ _______
 |   analyzer[] = "Php/AssignAnd";
 |   analyzer[] = "Php/AvoidMbDectectEncoding";
 |   analyzer[] = "Php/BetterRand";
-|   analyzer[] = "Php/ClassFunctionConfusion";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/Crc32MightBeNegative";
 |   analyzer[] = "Php/Deprecated";
@@ -3300,6 +3313,7 @@ ___________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
+|   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/NonNullableSetters";
@@ -3314,6 +3328,7 @@ ___________
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Interfaces/IsNotImplemented";
 |   analyzer[] = "Interfaces/NoGaranteeForPropertyConstant";
+|   analyzer[] = "Interfaces/UselessInterfaces";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
 |   analyzer[] = "Traits/SelfUsingTrait";| 
@@ -3337,6 +3352,7 @@ __________________
 |   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Functions/OneLetterFunctions";
+|   analyzer[] = "Functions/WrongCase";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Php/CloseTags";
 |   analyzer[] = "Php/ReturnWithParenthesis";
@@ -3965,7 +3981,9 @@ _______________
 |   analyzer[] = "Functions/MustReturn";
 |   analyzer[] = "Functions/OnlyVariableForReference";
 |   analyzer[] = "Functions/TypehintMustBeReturned";
+|   analyzer[] = "Interfaces/CantImplementTraversable";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
+|   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Traits/MethodCollisionTraits";
 |   analyzer[] = "Traits/TraitNotFound";
 |   analyzer[] = "Traits/UndefinedInsteadof";
@@ -4090,6 +4108,26 @@ ________
 
 
 
+.. _ruleset_ini_semantics:
+
+Semantics
+This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
+_________
+
+| [Semantics]
+|   analyzer[] = "Functions/OneLetterFunctions";
+|   analyzer[] = "Functions/ParameterHiding";
+|   analyzer[] = "Php/ClassFunctionConfusion";
+|   analyzer[] = "Structures/PropertyVariableConfusion";
+|   analyzer[] = "Type/DuplicateLiteral";
+|   analyzer[] = "Type/SimilarIntegers";
+|   analyzer[] = "Variables/VariableOneLetter";| 
+
+
+
+
+
+
 .. _ruleset_ini_suggestions:
 
 Suggestions
@@ -4156,7 +4194,6 @@ ___________
 |   analyzer[] = "Structures/EchoWithConcat";
 |   analyzer[] = "Structures/EmptyWithExpression";
 |   analyzer[] = "Structures/FunctionPreSubscripting";
-|   analyzer[] = "Structures/GoToKeyDirectly";
 |   analyzer[] = "Structures/JsonWithOption";
 |   analyzer[] = "Structures/ListOmissions";
 |   analyzer[] = "Structures/MismatchedTernary";
@@ -4226,6 +4263,21 @@ _____
 |   analyzer[] = "Structures/UseListWithForeach";
 |   analyzer[] = "Type/NoRealComparison";
 |   analyzer[] = "Variables/VariableUsedOnce";| 
+
+
+
+
+
+
+.. _ruleset_ini_typechecks:
+
+Typechecks
+This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
+__________
+
+| [Typechecks]
+|   analyzer[] = "Functions/InsufficientTypehint";
+|   analyzer[] = "Interfaces/UselessInterfaces";| 
 
 
 

@@ -64,6 +64,10 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Coding Conventions <coding-conventions>` | List coding conventions violations.                                                                  |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Semantics`                               | Checks the meanings found the names of the code.                                                     |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Typechecks`                              | Checks related to types.                                                                             |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 Note : in command line, don't forget to add quotes to rulesets' names that include white space.
 
@@ -72,8 +76,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 30 Sep 2019 15:06:33 +0000
-.. comment: Generation hash : 61bbb76836d4a3fabbe3528fbf9c1261933e95b4
+.. comment: Generation date : Mon, 07 Oct 2019 12:08:17 +0000
+.. comment: Generation hash : 2e695dbfa8e8660e8ed78cc24d0434d9c5315b37
 
 
 .. _analyze:
@@ -81,7 +85,7 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 386 analysis
+Total : 385 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -119,6 +123,7 @@ Total : 386 analysis
 * :ref:`Callback Needs Return <callback-needs-return>`
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
+* :ref:`Cant Implement Traversable <cant-implement-traversable>`
 * :ref:`Cant Instantiate Class <cant-instantiate-class>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Casting Ternary <casting-ternary>`
@@ -127,11 +132,9 @@ Total : 386 analysis
 * :ref:`Check JSON <check-json>`
 * :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
 * :ref:`Class Could Be Final <class-could-be-final>`
-* :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class Without Parent <class-without-parent>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
-* :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Clone With Non-Object <clone-with-non-object>`
 * :ref:`Coalesce And Concat <coalesce-and-concat>`
 * :ref:`Common Alternatives <common-alternatives>`
@@ -217,7 +220,6 @@ Total : 386 analysis
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
-* :ref:`Invalid Class Name <invalid-class-name>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
@@ -383,7 +385,6 @@ Total : 386 analysis
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
-* :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -406,6 +407,7 @@ Total : 386 analysis
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
 * :ref:`Unused Class Constant <unused-class-constant>`
+* :ref:`Unused Classes <unused-classes>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 * :ref:`Unused Returned Value <unused-returned-value>`
@@ -449,6 +451,7 @@ Total : 386 analysis
 * :ref:`Weak Typing <weak-typing>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
+* :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
@@ -475,12 +478,13 @@ Total : 386 analysis
 ClassReview
 +++++++++++
 
-Total : 33 analysis
+Total : 35 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Without Parent <class-without-parent>`
+* :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -506,9 +510,10 @@ Total : 33 analysis
 * :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Redefined Property <redefined-property>`
 * :ref:`Self Using Trait <self-using-trait>`
-* :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * :ref:`Unused Class Constant <unused-class-constant>`
+* :ref:`Useless Interfaces <useless-interfaces>`
+* :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
 
 .. _coding-conventions:
@@ -516,7 +521,7 @@ Total : 33 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -527,7 +532,6 @@ Total : 24 analysis
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Heredoc Delimiter <heredoc-delimiter>`
 * :ref:`Interpolation <interpolation>`
-* :ref:`Invalid Class Name <invalid-class-name>`
 * :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
@@ -541,6 +545,8 @@ Total : 24 analysis
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
+* :ref:`Wrong Class Name Case <wrong-class-name-case>`
+* :ref:`Wrong Function Name Case <wrong-function-name-case>`
 * :ref:`Yoda Comparison <yoda-comparison>`
 
 .. _compatibilityphp53:
@@ -1074,10 +1080,11 @@ Total : 26 analysis
 LintButWontExec
 +++++++++++++++
 
-Total : 23 analysis
+Total : 25 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
+* :ref:`Cant Implement Traversable <cant-implement-traversable>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Clone With Non-Object <clone-with-non-object>`
 * :ref:`Concrete Visibility <concrete-visibility>`
@@ -1092,6 +1099,7 @@ Total : 23 analysis
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Raised Access Level <raised-access-level>`
+* :ref:`Repeated Interface <repeated-interface>`
 * :ref:`Trait Not Found <trait-not-found>`
 * :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
@@ -1203,12 +1211,27 @@ Total : 42 analysis
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
+.. _semantics:
+
+Semantics
++++++++++
+
+Total : 7 analysis
+
+* :ref:`Class Function Confusion <class-function-confusion>`
+* :ref:`Duplicate Literal <duplicate-literal>`
+* :ref:`One Letter Functions <one-letter-functions>`
+* :ref:`Parameter Hiding <parameter-hiding>`
+* :ref:`Property Variable Confusion <property-variable-confusion>`
+* :ref:`Similar Integers <similar-integers>`
+* :ref:`Variables With One Letter Names <variables-with-one-letter-names>`
+
 .. _suggestions:
 
 Suggestions
 +++++++++++
 
-Total : 88 analysis
+Total : 87 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1238,7 +1261,6 @@ Total : 88 analysis
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
 * :ref:`Implode One Arg <implode-one-arg>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
@@ -1334,4 +1356,14 @@ Total : 28 analysis
 * :ref:`Use const <use-const>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
+
+.. _typechecks:
+
+Typechecks
+++++++++++
+
+Total : 2 analysis
+
+* :ref:`Insufficient Typehint <insufficient-typehint>`
+* :ref:`Useless Interfaces <useless-interfaces>`
 

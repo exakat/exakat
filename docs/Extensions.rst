@@ -803,7 +803,7 @@ Symfony is a new generation of Content Management System and eCommerce platform 
 Symfony analysis
 __________________________________________________
 
-This extension includes 21 analyzers.
+This extension includes 20 analyzers.
 
 * Controller (Symfony/Controller)
 * CouldUseAutowiring (Symfony/CouldUseAutowiring)
@@ -822,7 +822,6 @@ This extension includes 21 analyzers.
 * Symfony 4.2 Compatibility (Symfony/Symfony_4_2)
 * Symfony Constant Usage (Symfony/SymfonyConstantUsage)
 * Symfony Function Usage (Symfony/SymfonyFunctionsUsage)
-* Symfony Missing (Symfony/SymfonyMissing)
 * Symfony Usage (Symfony/SymfonyUsage)
 * UndefinedServices (Symfony/UndefinedServices)
 * UnusedServices (Symfony/UnusedServices)

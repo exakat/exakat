@@ -3413,6 +3413,28 @@ Here, the new exception gets an hardcoded message. More details about the reason
                 throw new Tinebase_Exception_AccessDenied('Could not open Tine 2.0 root directory.');
             }
 
+Useless Interfaces
+==================
+
+.. _woocommerce-interfaces-uselessinterfaces:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`useless-interfaces`, in includes/interfaces/class-wc-order-item-data-store-interface.php:20. 
+
+WC_Order_Item_Data_Store_Interface is used to structure the class WC_Order_Item_Data_Store. It is not used anywhere else.
+
+.. code-block:: php
+
+    interface WC_Order_Item_Data_Store_Interface {
+    
+    
+    //////// 
+    //includes/data-stores/class-wc-order-item-data-store.php
+    
+    class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
+
 Should Use Prepared Statement
 =============================
 
@@ -4379,22 +4401,6 @@ PropelSearchLoopInterface is implemented by both BaseSpecificModule and Payment
     /* in file  core/lib/Thelia/Core/Template/Loop/Payment.php, line 28 */
     
     class Payment extends BaseSpecificModule implements PropelSearchLoopInterface
-
-Invalid Class Name
-==================
-
-.. _wordpress-classes-wrongcase:
-
-WordPress
-^^^^^^^^^
-
-:ref:`invalid-class-name`, in wp-admin/includes/misc.php:74. 
-
-This code actually loads the file, join it, then split it again. file() would be sufficient. 
-
-.. code-block:: php
-
-    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 Ternary In Concat
 =================
@@ -7987,6 +7993,47 @@ break is used here for cases, unless the case includes a if/then structures, in 
                                 continue 2;
                             }
 
+Wrong Access Style to Property
+==============================
+
+.. _humo-gen-classes-undeclaredstaticproperty:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`wrong-access-style-to-property`, in wp-admin/includes/misc.php:74. 
+
+lame_binary_path is a static property, but it is accessed as a normal property in the exception call, while it is checked with a valid syntax.
+
+.. code-block:: php
+
+    protected function wavToMp3($data)
+        {
+            if (!file_exists(self::$lame_binary_path) || !is_executable(self::$lame_binary_path)) {
+                throw new Exception('Lame binary  . $this->lame_binary_path .  does not exist or is not executable');
+            }
+
+
+--------
+
+
+.. _humo-gen-classes-undeclaredstaticproperty:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`wrong-access-style-to-property`, in wp-admin/includes/misc.php:74. 
+
+lame_binary_path is a static property, but it is accessed as a normal property in the exception call, while it is checked with a valid syntax.
+
+.. code-block:: php
+
+    protected function wavToMp3($data)
+        {
+            if (!file_exists(self::$lame_binary_path) || !is_executable(self::$lame_binary_path)) {
+                throw new Exception('Lame binary  . $this->lame_binary_path .  does not exist or is not executable');
+            }
+
 Method Could Be Static
 ======================
 
@@ -8188,6 +8235,22 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_REGULAR = 65535;
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
+
+Wrong Class Name Case
+=====================
+
+.. _wordpress-classes-wrongcase:
+
+WordPress
+^^^^^^^^^
+
+:ref:`wrong-class-name-case`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 One Letter Functions
 ====================
@@ -8441,6 +8504,26 @@ get_user_access_level_html_options() is unused and can't be find in the code.
       }
       return $tpl_options;
     }
+
+Unused Interfaces
+=================
+
+.. _tine20-interfaces-unusedinterfaces:
+
+Tine20
+^^^^^^
+
+:ref:`unused-interfaces`, in tine20/Tinebase/User/LdapPlugin/Interface.php:20. 
+
+Tinebase_User_LdapPlugin_Interface is mentioned as a type for a property, in a php doc document. Typehinted properties are available since PHP 7.4
+
+.. code-block:: php
+
+    interface Tinebase_User_LdapPlugin_Interface {
+    
+    //----------
+    // in tine20/Tinebase/User/ActiveDirectory.php
+    /** @var Tinebase_User_LdapPlugin_Interface $plugin */
 
 Exception Order
 ===============
@@ -9732,6 +9815,32 @@ pow(2, 62) could also be hard coded with 0x4000000000000000.
 .. code-block:: php
 
     pow(2, 62)
+
+Should Use Math
+===============
+
+.. _openemr-structures-shouldusemath:
+
+OpenEMR
+^^^^^^^
+
+:ref:`should-use-math`, in controllers/C_Prescription.class.php:638. 
+
+$pdf->ez['leftMargin'] is now 0.
+
+.. code-block:: php
+
+    function multiprint_body(& $pdf, $p)
+        {
+            $pdf->ez['leftMargin'] += $pdf->ez['leftMargin'];
+            $pdf->ez['rightMargin'] += $pdf->ez['rightMargin'];
+            $d = $this->get_prescription_body_text($p);
+            if ($pdf->ezText($d, 10, array(), 1)) {
+                $pdf->ez['leftMargin'] -= $pdf->ez['leftMargin'];
+                $pdf->ez['rightMargin'] -= $pdf->ez['rightMargin'];
+                $this->multiprint_footer($pdf);
+                $pdf->ezNewPage();
+                $this->multiprint_header($pdf, $p);
 
 Could Use Compact
 =================
