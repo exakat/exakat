@@ -24,36 +24,20 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class CollectForeachFavorite extends Analyzer {
+class CollectMbstringEncodings extends Analyzer {
     public function analyze() {
-        // Foreach, values only
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIsNot('Keyvalue')
-             ->values('fullcode');
-        $valuesOnly = $this->rawQuery();
+        // mb_stotolower('PHP', 'utf-8');
+        $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 
-        // Foreach, index only
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->outIs('INDEX')
-             ->values('fullcode');
-        $values = $this->rawQuery();
+        $this->atomIs(array('String', 'Concatenation'))
+             ->noDelimiterIs($encodings, self::CASE_INSENSITIVE)
+             ->values('noDelimiter');
+        $encodings = $this->rawQuery()->toArray();
 
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->values('fullcode');
-        $keys = $this->rawQuery();
-
-        $statsKeys = array_count_values($keys->toArray());
-        $statsKeys['None'] = count($valuesOnly);
-
-        $statsValues = array_count_values(array_merge($values->toArray(), $valuesOnly->toArray()));
+        $stats = array_count_values($encodings);
 
         $valuesSQL = array();
-        foreach($statsValues as $name => $count) {
+        foreach($stats as $name => $count) {
             $valuesSQL[] = array($name, $count);
         }
 
@@ -61,7 +45,7 @@ class CollectForeachFavorite extends Analyzer {
             return;
         }
 
-        $this->analyzerName   = 'Foreach Names';
+        $this->analyzerName   = 'Mbstring Encoding';
         $this->analyzedValues = $valuesSQL;
 
         $this->prepareQuery(self::QUERY_PHP_ARRAYS);
