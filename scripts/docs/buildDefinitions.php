@@ -106,6 +106,8 @@ class Docs {
                               'Top10',
                               'Semantics',
                               'Typechecks',
+                              'Rector',
+                              'php-cs-fixable',
                              );
 
     private $extras = array( 
@@ -826,6 +828,7 @@ SQL;
         }
         
         $this->ini_ruleset_config = count($list)." rulesets detailled here : \n\n* ".implode("\n* ", $list)."\n\n\n".implode("\n\n", $config);
+        print count($list)." rulesets detailled in annex\n";
     }
 
     private function prepareText() {
@@ -888,7 +891,7 @@ SQL;
         $analyzers = array();
         $deja = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $liste = explode(',',$row['analyzers']);
+            $liste = explode(',', $row['analyzers']);
         
             foreach($liste as &$a) {
                 if (isset($deja[$a])) { 
@@ -903,7 +906,9 @@ SQL;
             unset($a);
         
             sort($liste);
-            $this->text .= $this->rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
+            $ini = @parse_ini_file("./human/en/Rulesets/$row[name].ini");
+
+            $this->text .= $this->rst_level($row['name'],4)."\n".$ini['description']."\n\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
 
         ksort($analyzers);
