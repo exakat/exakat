@@ -184,11 +184,6 @@ class Dump extends Tasks {
             $end = microtime(TIME_AS_NUMBER);
             $this->log->log( 'Collected Classes stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = $end;
-            $this->collectForeachFavorite();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Foreach favorites : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
             $begin = microtime(TIME_AS_NUMBER);
             $this->collectGlobalVariables();
             $end = microtime(TIME_AS_NUMBER);
@@ -2805,50 +2800,6 @@ GREMLIN
         }
         
         return count($values);
-    }
-
-    private function collectForeachFavorite() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").not(where(__.out("INDEX"))).out("VALUE").hasLabel('Variable').values("fullcode")
-GREMLIN;
-        $valuesOnly = $this->gremlin->query($query);
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").where(__.out("INDEX")).out("VALUE").hasLabel('Variable').values("fullcode")
-GREMLIN;
-        $values = $this->gremlin->query($query);
-        
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Foreach").out("INDEX").values("fullcode")
-GREMLIN;
-        $keys = $this->gremlin->query($query);
-
-        $statsKeys = array_count_values($keys->toArray());
-        $statsKeys['None'] = count($valuesOnly);
-
-        $statsValues = array_count_values(array_merge($values->toArray(), $valuesOnly->toArray()));
-
-        $valuesSQL = array();
-        foreach($statsValues as $name => $count) {
-            $valuesSQL[] = "('Foreach Values', '" . $this->sqlite->escapeString($name) . "', $count)";
-        }
-
-        if (!empty($valuesSQL)) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-            $this->sqlite->query($query);
-        }
-
-        $keysSQL = array();
-        foreach($statsKeys as $name => $count) {
-            $keysSQL[] = "('Foreach Keys', '" . $this->sqlite->escapeString($name) . "', $count)";
-        }
-
-        if (!empty($keysSQL)) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $keysSQL);
-            $this->sqlite->query($query);
-        }
-
-        return count($valuesSQL);
     }
 
     private function collectInclusions() {
