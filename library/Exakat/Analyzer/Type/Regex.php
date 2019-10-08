@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Regex extends Analyzer {
     public function dependsOn() {
         return array('Complete/PropagateConstants',
+                     'Complete/CreateDefaultValues',
                     );
     }
 
@@ -36,6 +37,19 @@ class Regex extends Analyzer {
                                '\\preg_replace',
                                '\\preg_replace_callback',
                                '\\preg_relace_callback_array',
+                               '\\mb_ereg_match',
+                               '\\mb_ereg_replace_callback',
+                               '\\mb_ereg_replace',
+                               '\\mb_ereg_search_getpos',
+                               '\\mb_ereg_search_getregs',
+                               '\\mb_ereg_search_init',
+                               '\\mb_ereg_search_pos',
+                               '\\mb_ereg_search_regs',
+                               '\\mb_ereg_search_setpos',
+                               '\\mb_ereg_search',
+                               '\\mb_ereg',
+                               '\\mb_eregi_replace',
+                               '\\mb_eregi',
                                );
 
         // preg_match('/a/', ...)
@@ -50,7 +64,7 @@ class Regex extends Analyzer {
              ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
+             ->atomIs(array('String', 'Concatenation', 'Heredoc'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // preg_relace_callback_array(array(regex1 => callback, regex2))
