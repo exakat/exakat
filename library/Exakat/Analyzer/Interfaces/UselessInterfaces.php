@@ -32,8 +32,8 @@ class UselessInterfaces extends Analyzer {
         $this->atomIs('Interface')
              ->not(
                 $this->side()
-                     ->outIs('DEFINITION') 
-                     ->hasIn(array("TYPEHINT", "RETURNTYPE", "CLASS"))
+                     ->outIs('DEFINITION')
+                     ->hasIn(array('TYPEHINT', 'RETURNTYPE', 'CLASS'))
              )
              ->back('first');
         $this->prepareQuery();

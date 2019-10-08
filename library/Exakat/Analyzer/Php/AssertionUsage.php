@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionUsage;
 
 class AssertionUsage extends FunctionUsage {
     public function analyze() {
-        $this->functions = array('\assert', 
+        $this->functions = array('\assert',
                                  '\assert_option',
                                  );
 

@@ -4827,7 +4827,7 @@ class Load extends Tasks {
     /// processing single operators
     //////////////////////////////////////////////////////
     private function processSingleOperator(string $atom, array $finals = array(), string $link = '', string $separator = '') {
-        assert($link !== '', "Link cannot be empty");
+        assert($link !== '', 'Link cannot be empty');
 
         $current = $this->id;
 
@@ -6019,7 +6019,7 @@ class Load extends Tasks {
     }
 
     private function getFullnspath($name, $type = 'class', Atom $apply = null) {
-        assert($apply !== null, "\$apply can't be null in ".__METHOD__);
+        assert($apply !== null, "\$apply can't be null in " . __METHOD__);
 
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {

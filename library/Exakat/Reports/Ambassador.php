@@ -3037,7 +3037,7 @@ HTML;
         $results = new Results($this->sqlite, $analyzer);
         $results->load();
         
-        $trim = function($x) { return trim($x, "'\""); };
+        $trim = function ($x) { return trim($x, "'\""); };
         
         $values = array_column($results->toArray(), 'fullcode');
         $values = array_map($trim, $values);
