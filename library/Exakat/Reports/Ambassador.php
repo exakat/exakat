@@ -1186,6 +1186,61 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
+    protected function generateInventoriesEncoding(Section $section) {
+        // List of indentation used
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT key, value AS count FROM hashResults 
+WHERE name = "Mbstring Encoding"
+ORDER BY value + 0 ASC
+SQL
+        );
+
+        $values = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $values[$value['key']] = $value['count'];
+        }
+
+        asort($values);
+
+        $theTable = array();
+        foreach($values as $encoding => $count) {
+            $codeHtml = PHPSyntax($encoding);
+            $theTable []= "<tr><td>{$codeHtml}</td><td>$count</td><td>&nbsp</td></tr>";
+        }
+    
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Names of the encoding used in the code');
+        $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateForeachFavorites(Section $section) {
+        // List of indentation used
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT key, value AS count FROM hashResults 
+WHERE name = "Foreach Names"
+ORDER BY key + 0 ASC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['count'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+        
+        
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
     protected function generateDereferencingLevelsBreakdown(Section $section) {
         // List of indentation used
         $res = $this->sqlite->query(<<<'SQL'
@@ -2343,6 +2398,34 @@ SQL;
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
+        
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateFixesRector(Section $section) {
+        $rector = new Rector($this->config);
+        $report = $rector->generate(null, Reports::INLINE);
+
+        $configline = trim($report);
+        $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
+        
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateFixesPhpCsFixer(Section $section) {
+        $phpcsfixer = new PhpCsFixer($this->config);
+        $report = $phpcsfixer->generate(null, Reports::INLINE);
+
+        $configline = trim($report);
+        $configline = PHPSyntax($configline);
         
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPILATION', $configline);

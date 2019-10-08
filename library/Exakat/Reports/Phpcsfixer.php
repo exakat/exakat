@@ -20,61 +20,76 @@
  *
 */
 
+
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
-use Exakat\Datastore;
-use Exakat\Reports\Helpers\Results;
+use Exakat\Exakat;
 
 class Phpcsfixer extends Reports {
     const FILE_EXTENSION = 'php';
-    const FILE_FILENAME  = 'php_cs';
+    const FILE_FILENAME  = 'phpcsfixer.exakat';
+    
+    private $matches = array(   'Php/IsnullVsEqualNull'         => 'is_null',
+                                'Php/NewExponent'               => 'pow_to_exponentiation',
+                                'Php/LogicalInLetters'          => 'logical_operators',
+                                'Structures/UseConstant'        => 'function_to_constant',
+                                'Structures/ElseIfElseif'       => 'elseif',
+                                'Structures/PHP7Dirname'        => 'combine_nested_dirname',
+                                'Structures/CouldUseDir'        => 'dir_constant',
+                                'Php/IssetMultipleArgs'         => 'combine_consecutive_issets',
+                                'Classes/DontUnsetProperties'   => 'no_unset_on_property',
+                                'Structures/MultipleUnset'      => 'combine_consecutive_unsets',
+                                'Php/ImplodeOneArg'             => 'implode_call',
+                            );
 
-    public function generate($dirName, $fileName = null) {
-        $analyzerList =  $this->rulesets->getRulesetsAnalyzers(array('php-cs-fixable'));
-        $analysisResults = new Results($this->sqlite, $analyzerList);
-        $analysisResults->load();
-        $found = array_column($analysisResults->toArray(), 'analyzer');
-        $found = array_unique($found);
+    public function dependsOnAnalysis() {
+        return array('php-cs-fixable',
+                     );
+    }
 
-        $phpcsfixer = json_decode(file_get_contents("{$this->config->dir_root}/data/phpcsfixer.json"), \JSON_OBJECT_AS_ARRAY);
-        assert(!empty($phpcsfixer), 'couldn\'t read phpcsfixer.json file');
+    protected function _generate($analyzerList) {
+        $themed = $this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis());
 
-        $config = array();
-        foreach($found as $f) {
-            $config[] = $phpcsfixer[$f] ?? array();
+        $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count >= 1');
+        $rules = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $name = "'".$this->matches[$row['analyzer']]."'";
+            $rules[] = sprintf('            %- 30s => true,', $name);
             $this->count();
         }
+        natcasesort($rules);
+        
+        $date = date('Y-m-d h:i:j');
+        $version = Exakat::VERSION . '- build '. Exakat::BUILD; 
+        
+        $rules = implode(PHP_EOL, $rules);
 
-        if (!empty($config)) {
-            $config = array_merge(...$config);
-        }
-
-        $configArray = var_export($config, \RETURN_VALUE);
-        $configArray = str_replace("\n", "\n                ", $configArray);
-
-$config = <<<PHPCS
+        // preparing the list of PHP extensions to compile PHP with
+        $return = <<<PHP
 <?php
 
+/**
+  * Add this to your .php_cs file
+  * At the root of the source to be analyzed
+  * Generated on $date, by Exakat ($version)
+*/
+
+// Adapt this to your directory structure
 \$finder = PhpCsFixer\Finder::create()
-    ->in('.')     // Change this to your code's path
-    ->name('*.php');
+                            ->name('*.php');
 
 return PhpCsFixer\Config::create()
-    ->setRules(        
-                $configArray
+    ->setRules(
+        array(
+{$rules}
+        )
     )
     ->setFinder(\$finder);
-    
-PHPCS;
 
-        if ($fileName === null) {
-            return $config;
-        } else {
-            file_put_contents($dirName . '/' . $fileName . '.' . self::FILE_EXTENSION, $config);
-            return true;
-        }
+PHP;
+
+        return $return;
     }
 }
 

@@ -137,7 +137,7 @@ compatibility:
             icon: flag
 favorites:
     title: Favorites
-    icon: certificate
+    icon: heart
     subsections: 
         compilations:
             title: Favorite Overview
@@ -210,6 +210,11 @@ audit:
             title: Indentation levels
             file: indentation_levels
             method: generateIndentationLevelsBreakdown
+            icon: circle-o
+        foreach_favorites:
+            title: Foreach Favorite Names
+            file: foreach_favorites
+            method: generateForeachFavorites
             icon: circle-o
         dereferencing_levels:
             title: Dereferencing levels
@@ -284,7 +289,7 @@ audit:
             icon: circle-o            
 inventories:
     title: Inventories
-    icon: list-ul
+    icon: shopping-cart
     subsections: 
         dynamic_code:
             title: Dynamic Code
@@ -343,7 +348,7 @@ inventories:
             file: phpconstants_list
             method: generatePHPConstantsBreakdown
         phpclasses_list:
-            title: PHP Native Classes, Interfaces and Traits\' list
+            title: PHP Native CIT
             file: phpclasses_list
             method: generatePHPClassesBreakdown
         files_tree:
@@ -402,7 +407,7 @@ inventories:
             file: inventories_sql
             method: generateInventoriesSql
         inventories_gpc:
-            title: Incoming Variables Inventory
+            title: Incoming Variables
             source: inventories
             file: inventories_gpcindex
             method: generateInventoriesGPCIndex
@@ -436,9 +441,31 @@ inventories:
             source: inventories
             file: inventories_path
             method: generateInventoriesPath
+        inventories_encodings:
+            title: Mbstring Encodings
+            source: inventories
+            file: inventories_encoding
+            method: generateInventoriesEncoding
+
+Fixes:
+    title: Fixes
+    icon: wrench
+    subsections: 
+        fixes_phpcsfixer:
+            title: PHP CS Fixer Fixes
+            icon: cogs
+            file: fixes_phpcsfixer
+            method: generateFixesPhpCsFixer
+        fixes_rector:
+            title: Rector Fixes
+            icon: cogs
+            source: fixes_rector
+            file: fixes_rector
+            method: generateFixesRector
+
 annexes:
     title: Annexes
-    icon: sticky-note-o
+    icon: list-ul
     subsections: 
         engine_settings:
             title: Engine Settings
