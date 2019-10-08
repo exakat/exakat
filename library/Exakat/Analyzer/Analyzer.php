@@ -39,15 +39,16 @@ use Exakat\Query\DSL\DSL;
 
 abstract class Analyzer {
     // Query types
-    const QUERY_DEFAULT  = 1; // For compatibility purposes
-    const QUERY_ANALYZER = 2; // same as above, but explicit
-    const QUERY_VALUE    = 3; // returns a single value
-    const QUERY_RAW      = 4; // returns data, no storage
-    const QUERY_HASH     = 5; // returns a list of values
-    const QUERY_MULTIPLE = 6; // returns several links at the same time (TBD)
-    const QUERY_ARRAYS   = 7; // arrays of array
-    const QUERY_TABLE    = 8; // to specific table
-    const QUERY_MISSING  = 9; // store values that are not in the graph
+    const QUERY_DEFAULT    = 1;   // For compatibility purposes
+    const QUERY_ANALYZER   = 2;   // same as above, but explicit
+    const QUERY_VALUE      = 3;   // returns a single value
+    const QUERY_RAW        = 4;   // returns data, no storage
+    const QUERY_HASH       = 5;   // returns a list of values
+    const QUERY_MULTIPLE   = 6;   // returns several links at the same time (TBD)
+    const QUERY_ARRAYS     = 7;   // arrays of array
+    const QUERY_TABLE      = 8;   // to specific table
+    const QUERY_MISSING    = 9;   // store values that are not in the graph
+    const QUERY_PHP_ARRAYS = 10;  // store a PHP array of values into hashResults
 
     protected $datastore  = null;
 
@@ -81,6 +82,7 @@ abstract class Analyzer {
     protected $analyzerTable    = 'no analyzer table name';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
+    protected $analyzedValues   = array();
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -1932,6 +1934,10 @@ GREMLIN;
                 $this->storeMissing();
                 break;
 
+            case self::QUERY_PHP_ARRAYS:
+                $this->storePhpArraysToHashResults();
+                break;
+
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph();
@@ -2015,6 +2021,28 @@ GREMLIN
         return count($valuesSQL);
     }
 
+    private function storePhpArraysToHashResults() {
+        ++$this->queryId;
+
+        $this->processedCount += count($this->analyzedValues);
+        $this->rowCount       += count($this->analyzedValues);
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+
+        $valuesSQL = array();
+        foreach($this->analyzedValues as list($key, $value)) {
+            $valuesSQL[] = "('{$this->analyzerName}', '".$sqlite->escapeString($key)."', '".$sqlite->escapeString($value)."') \n";
+        }
+
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
+    }
+ 
     private function storeToHashResults() {
         ++$this->queryId;
 
