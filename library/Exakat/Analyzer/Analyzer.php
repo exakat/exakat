@@ -1051,7 +1051,7 @@ GREMLIN;
         return $this;
     }
 
-    public function followParAs($out = null) {
+    public function followParAs($out = self::FOLLOW_ALL) {
         $this->query->followParAs($out);
         
         return $this;

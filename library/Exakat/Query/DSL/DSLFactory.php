@@ -19,13 +19,14 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Query\DSL;
 
 use Exakat\Exceptions\UnknownDsl;
 use Exakat\Data\Dictionary;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Datastore;
 use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 
@@ -45,7 +46,7 @@ class DSLFactory {
     protected $linksDown              = '';
     protected $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
-    public function __construct($datastore) {
+    public function __construct(Datastore $datastore) {
         $this->dictCode = Dictionary::factory($datastore);
 
         $this->linksDown = GraphElements::linksAsList();
@@ -72,7 +73,7 @@ class DSLFactory {
         }
     }
 
-    public function factory($name) {
+    public function factory(string $name) : Dsl {
         if (strtolower($name) === '_as') {
             $className = __NAMESPACE__ . '\\_As';
         } else {

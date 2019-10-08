@@ -27,12 +27,15 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class FollowParAs extends DSL {
+    const FOLLOW_ALL  = 0;
+    const FOLLOW_NONE = 1;
+
     public function run() : Command {
         list($out) = func_get_args();
 
-        if ($out === null) {
+        if ($out === self::FOLLOW_ALL) {
             $out = 'out(' . self::$linksDown . ').';
-        } elseif (empty($out)) { // To be used in-place
+        } elseif ($out === self::FOLLOW_NONE) { // To be used in-place
             $out = 'filter{ true; }.';
         } else {
             $this->assertLink($out);

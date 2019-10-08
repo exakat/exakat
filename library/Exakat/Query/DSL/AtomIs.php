@@ -36,19 +36,22 @@ class AtomIs extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } elseif ($flags === Analyzer::WITH_CONSTANTS &&
-                 array_intersect($diff, array('String', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
+                 array_intersect($diff, array('String', 'Concatenation', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
             // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
             // Local constant
           __.hasLabel(within(["Variable"])).in("DEFINITION").out("DEFAULT"),
+
+          // local variable
+          __.hasLabel(within(["Variable"])).in("DEFINITION").hasLabel('Variabledefinition', 'Staticdefinition').out("DEFAULT"),
           
-          // literal value, passed as an argument
-          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel('Parameter').sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").out("ARGUMENT").filter{ rank == it.get().value('rank');},
+          // literal value, passed as an argument (Method, closure, function)
+          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel('Parameter').sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").filter{ rank == it.get().value('rank');},
 
           // literal value, passed as an argument
-          __.hasLabel(within(["Ternary"])).out("THEN", "ELSE"),
+          __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
 
           __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
           
