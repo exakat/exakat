@@ -725,7 +725,11 @@ class Load extends Tasks {
 
 
     public function processDiffFile($filename, $path) {
-        $this->processFile($filename, $path);
+        try {
+            $this->processFile($filename, $path);
+        } catch(NoFileToProcess $e ) {
+            $this->datastore->ignoreFile($filename, $e->getMessage());
+        }
     }
 
     private function processFile($filename, $path) {
