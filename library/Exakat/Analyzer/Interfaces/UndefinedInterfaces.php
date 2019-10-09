@@ -39,6 +39,20 @@ class UndefinedInterfaces extends Analyzer {
     public function analyze() {
         $omitted = $this->dependsOn();
 
+        // interface used in a class
+        $this->atomIs(array('Class', 'Classanonymous'))
+             ->outIs('IMPLEMENTS')
+             ->hasNoIn('DEFINITION')
+             ->analyzerIsNot($omitted);
+        $this->prepareQuery();
+
+        // interface extending another interface
+        $this->atomIs('Interface')
+             ->outIs('EXTENDS')
+             ->hasNoIn('DEFINITION')
+             ->analyzerIsNot($omitted);
+        $this->prepareQuery();
+
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
