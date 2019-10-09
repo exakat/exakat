@@ -96,7 +96,7 @@ class TypehintingStats extends Analyzer {
              ->raw('cap("m")');
         $scalartypes2 = $this->rawQuery()->toArray();
 
-        $scalartypes = $scalartypes1[0] + $scalartypes2[0];
+        $scalartypes = ($scalartypes1[0] ?? array()) + ($scalartypes2[0] ?? array());
 
         // object is the difference
 
