@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
@@ -42,7 +42,7 @@ class RulesetsExtra implements RulesetsInterface {
             } else {
                 return array_unique(array_merge(...array_values($this->extra_rulesets)));
             }
-        } elseif (is_array($ruleset)) {
+        } else {
             $return = array();
             foreach($ruleset as $t) {
                 $return[] = $this->extra_rulesets[$t] ?? array();

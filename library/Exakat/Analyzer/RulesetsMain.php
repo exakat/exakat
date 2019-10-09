@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
@@ -54,20 +54,9 @@ class RulesetsMain implements RulesetsInterface {
         if ($ruleset === null) {
             // Default is ALL of ruleset
             $where = 'WHERE a.folder != "Common" ';
-        } elseif (is_array($ruleset)) {
+        } else {
             $ruleset = array_map(function ($x) { return trim($x, '"'); }, $ruleset);
             $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($ruleset) . ')';
-        } elseif ($ruleset === 'Random') {
-            $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
-            shuffle($shorList);
-            $ruleset = $shorList[0];
-            display( "Random ruleset is : $ruleset\n");
-
-            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($ruleset, '"') . '"';
-        } elseif (in_array($ruleset, $all)) {
-            $where = 'WHERE a.folder != "Common" AND c.name = "' . trim($ruleset, '"') . '"';
-        } else {
-            return array();
         }
 
         $query = <<<SQL
@@ -219,7 +208,7 @@ SQL;
         return $return;
     }
 
-    public function getClass($name) {
+    public function getClass(string $name) {
         // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
