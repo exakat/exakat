@@ -49,6 +49,7 @@ abstract class Analyzer {
     const QUERY_TABLE      = 8;   // to specific table
     const QUERY_MISSING    = 9;   // store values that are not in the graph
     const QUERY_PHP_ARRAYS = 10;  // store a PHP array of values into hashResults
+    const QUERY_PHP_HASH   = 11;  // store a PHP array of values into hashResults
 
     protected $datastore  = null;
 
@@ -1938,6 +1939,10 @@ GREMLIN;
                 $this->storePhpArraysToHashResults();
                 break;
 
+            case self::QUERY_PHP_HASH:
+                $this->storePhpHashToHashResults();
+                break;
+
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph();
@@ -2015,6 +2020,28 @@ GREMLIN
         $sqlite->query($this->analyzerSQLTable);
 
         $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $valuesSQL);
+        $sqlite->query($query);
+        unset($sqlite);
+
+        return count($valuesSQL);
+    }
+    
+    private function storePhpHashToHashResults() {
+        ++$this->queryId;
+
+        $this->processedCount += count($this->analyzedValues);
+        $this->rowCount       += count($this->analyzedValues);
+
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+
+        $valuesSQL = array();
+        foreach($this->analyzedValues as $key => $value) {
+            $valuesSQL[] = "('{$this->analyzerName}', '".$sqlite->escapeString($key)."', '".$sqlite->escapeString($value)."') \n";
+        }
+
+        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
         $sqlite->query($query);
         unset($sqlite);
 
