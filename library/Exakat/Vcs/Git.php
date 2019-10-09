@@ -219,7 +219,7 @@ class Git extends Vcs {
     
     public function getDiffFile($next) {
         // Added and removed ?
-         $res = shell_exec("cd {$this->destinationFull}; {$this->executable}  diff --diff-filter=d --name-only $next -- .");
+         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ");
 
         if ($res === null) {
             return array();
@@ -235,7 +235,7 @@ class Git extends Vcs {
         //--diff-filter=[(A|C|D|M|R|T|U|X|B)…​[*]]
         // Some situations are not supported yet.
         // We keep Added, Modified. Deleted are ignored, as non-treatable.
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -q --diff-filter=a --name-only $next -- .");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=d --name-only $next -- . ");
 
         // No chane, may be, but we still need to update the code
         shell_exec("cd {$this->destinationFull}; {$this->executable} checkout $next");
