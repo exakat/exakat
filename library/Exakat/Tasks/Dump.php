@@ -672,19 +672,25 @@ SQL
 );
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Namespace").map{ ['name' : it.get().value("fullnspath")] }.unique();
+g.V().hasLabel("Namespace").out("NAME").map{ ['name' : '\\' + it.get().value("fullcode")] }.unique();
 GREMLIN;
         $res = $this->gremlin->query($query);
 
         $total = 0;
         $query = array("(1, '\\')");
+        $unique = array();
         foreach($res as $row) {
-            $query[] = "(null, '" . mb_strtolower($this->sqlite->escapeString($row['name'])) . "')";
+            if (isset($unique[mb_strtolower($row['name'])])) {
+                continue;
+            }
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "')";
             ++$total;
+            $unique[mb_strtolower($row['name'])] = 1;
         }
+        unset($unique);
         
         if (!empty($query)) {
-            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
+            print $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -693,7 +699,7 @@ GREMLIN;
 
         $namespacesId = array();
         while($namespace = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $namespacesId[$namespace['namespace']] = $namespace['id'];
+            $namespacesId[mb_strtolower($namespace['namespace'])] = $namespace['id'];
         }
         display("$total namespaces\n");
 
@@ -1062,7 +1068,7 @@ GREMLIN;
         // Arguments
         $this->sqlite->query('DROP TABLE IF EXISTS arguments');
         $this->sqlite->query(<<<'SQL'
-CREATE TABLE arguments (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         name STRING,
                         citId INTEGER,
                         methodId INTEGER,
@@ -1117,7 +1123,7 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . (int) $methodIds[$row['classe'] . '::' . $row['methode']] .
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . $methodIds[$row['classe'] . '::' . $row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
                         ', \'' . $row['typehint'] . '\')';
 
@@ -1474,16 +1480,14 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $query = array();
-        $functionIds = array();
-        $functionIds++;
         $total = 0;
         foreach($result->toArray() as $row) {
-            if (isset($functionIds[$row['fullnspath']])) {
+            if (isset($methodIds[$row['fullnspath']])) {
                 continue; // skip double
             }
-            $functionIds[$row['fullnspath']] = ++$functionIds;
+            $methodIds[$row['fullnspath']] = ++$methodCount;
 
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
+            $query[] = "($methodCount, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
                         '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', 
                         " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
 
@@ -1542,7 +1546,7 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', 0, ' . (int) $functionIds[$row['fullnspath']] .
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', 0, ' . $methodIds[$row['fullnspath']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
                         ', \'' . $row['typehint'] . '\')';
 
