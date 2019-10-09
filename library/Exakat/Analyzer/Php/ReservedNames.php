@@ -36,42 +36,14 @@ class ReservedNames extends Analyzer {
                                      array_diff($phpNames, str2array($this->allowedNames)));
 
         // functions/methods names
-        $this->atomIs('Function')
-             ->outIs('NAME')
-             ->codeIs($reservedNames)
-             ->back('first');
-        $this->prepareQuery();
-
-        // classes
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->codeIs($reservedNames)
-             ->back('first');
-        $this->prepareQuery();
-
-        // trait
-        $this->atomIs('Trait')
-             ->outIs('NAME')
-             ->codeIs($reservedNames)
-             ->back('first');
-        $this->prepareQuery();
-
-        // interface
-        $this->atomIs('Interface')
+        $this->atomIs(array('Function', 'Class', 'Interface', 'Trait'))
              ->outIs('NAME')
              ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // methodcall
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->codeIs($reservedNames)
-             ->back('first');
-        $this->prepareQuery();
-
-        // property
-        $this->atomIs('Member')
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->outIs('METHOD')
              ->codeIs($reservedNames)
              ->back('first');
@@ -80,7 +52,7 @@ class ReservedNames extends Analyzer {
         // variables
         $reservedNamesVariables = array_map(function ($x) { return "\$$x"; }, $reservedNames);
         $this->atomIs(self::$VARIABLES_ALL)
-             ->hasNoOut('NAME') // avoid dynamical variables
+             ->tokenIs('T_VARIABLE') // avoid dynamical variables
              ->codeIs($reservedNamesVariables);
         $this->prepareQuery();
     }
