@@ -53,6 +53,8 @@ SQL
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['cits']                  = &$this->cits;
+            $row['functions']             = &$this->functions;
+            $row['constants']             = &$this->constants;
             $row['map']                   = array();
             $row['reduced']               = '';
             array_collect_by($this->namespaces, 0, $row);
@@ -70,7 +72,20 @@ SQL
 
         // collect functions
         $res = $this->sqlite->query(<<<SQL
-SELECT * FROM functions
+SELECT functions.*, 
+GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
+              CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
+              CASE arguments.variadic WHEN 0 THEN '' ELSE '...' END  || arguments.name || 
+              (CASE arguments.init WHEN ' ' THEN '' ELSE ' = ' || arguments.init END),
+             ', ' ) AS signature
+
+FROM functions
+
+LEFT JOIN arguments
+    ON functions.id = arguments.methodId
+WHERE type = 'function'
+GROUP BY functions.id
+
 SQL
         );
         
@@ -93,8 +108,6 @@ LEFT JOIN cit cit2
 LEFT JOIN cit_implements AS traits
     ON traits.implementing = cit.id AND
        traits.type = 'use'
-
-
 
 LEFT JOIN cit_implements AS interfaces
     ON interfaces.implementing = cit.id AND
@@ -136,7 +149,19 @@ SQL
 
         // collect methods
         $res = $this->sqlite->query(<<<SQL
-SELECT * FROM methods
+SELECT methods.*, 
+GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
+              CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
+              CASE arguments.variadic WHEN 0 THEN '' ELSE '...' END  || arguments.name || 
+              (CASE arguments.init WHEN ' ' THEN '' ELSE ' = ' || arguments.init END),
+             ', ' ) AS signature,
+cit.type AS cit
+FROM methods
+LEFT JOIN arguments
+    ON methods.id = arguments.methodId
+JOIN cit
+    ON methods.citId = cit.id
+GROUP BY methods.id
 SQL
         );
         
