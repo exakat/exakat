@@ -46,8 +46,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -79,8 +78,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -110,9 +108,9 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
-              )              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+                       ->prepareSide()
+              )
+              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
@@ -142,8 +140,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)

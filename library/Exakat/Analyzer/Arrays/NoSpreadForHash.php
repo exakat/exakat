@@ -33,7 +33,7 @@ class NoSpreadForHash extends Analyzer {
     public function analyze() {
         // ...['a' => 3]
         $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
-             ->has('variadic', true)
+             ->is('variadic', true)
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
@@ -44,7 +44,7 @@ class NoSpreadForHash extends Analyzer {
 
         // const A = ['a' => 3]; ...A
         $this->atomIs(self::$STATIC_NAMES, self::WITHOUT_CONSTANTS)
-             ->has('variadic', true)
+             ->is('variadic', true)
              ->inIs('DEFINITION')
              ->outIs('VALUE')
              ->atomIs('Arrayliteral')

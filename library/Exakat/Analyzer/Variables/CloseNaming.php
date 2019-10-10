@@ -58,7 +58,7 @@ class CloseNaming extends Analyzer {
         $closeVariables = array_filter( $closeVariables, function ($x) { return strlen($x) > 3; });
         if (!empty($closeVariables)) {
             $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
-                 ->is('fullcode', $closeVariables, self::CASE_SENSITIVE);
+                 ->is('fullcode', $closeVariables);
             $this->prepareQuery();
         }
 
@@ -73,7 +73,7 @@ class CloseNaming extends Analyzer {
             $doubles = array_merge(...array_values($uniques));
     
             $this->atomIs(self::$VARIABLES_USER)
-                 ->is('fullcode', $doubles, self::CASE_SENSITIVE);
+                 ->is('fullcode', $doubles);
             $this->prepareQuery();
         }
 
@@ -84,7 +84,7 @@ class CloseNaming extends Analyzer {
         
         if (!empty($uniques)) {
             $this->atomIs(self::$VARIABLES_USER)
-                 ->is('fullcode', $doubles, self::NO_TRANSLATE);
+                 ->is('fullcode', $doubles);
             $this->prepareQuery();
         }
 
@@ -95,7 +95,7 @@ class CloseNaming extends Analyzer {
 
         if (!empty($doubles)) {
             $this->atomIs(self::$VARIABLES_USER)
-                 ->is('fullcode', $doubles, self::NO_TRANSLATE);
+                 ->is('fullcode', $doubles);
             $this->prepareQuery();
         }
     }

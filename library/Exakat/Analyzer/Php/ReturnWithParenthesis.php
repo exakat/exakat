@@ -27,10 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class ReturnWithParenthesis extends Analyzer {
     public function analyze() {
-        $this->atomIs('Return')
-             ->outIs('RETURN')
-             ->atomIs('Parenthesis')
-             ->back('first');
+        // return (1 + 2);
+        $this->atomIs('Parenthesis')
+             ->inIs('RETURN');
         $this->prepareQuery();
     }
 }

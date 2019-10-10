@@ -1210,7 +1210,7 @@ GREMLIN;
     }
 
     public function optional($filter) {
-        $this->query->optional($filter, array());
+        $this->query->optional($filter);
 
         return $this;
     }

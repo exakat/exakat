@@ -28,17 +28,16 @@ use Exakat\Analyzer\Analyzer;
 class PropertyVariableConfusion extends Analyzer {
     public function analyze() {
         // public $x = 3; static or not
-        $this->atomIs('Variable')
-             ->hasClass()
-             ->hasNoIn('MEMBER')
-             ->isNotArgument()
+        $this->atomIs('Propertydefinition')
              ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->outIs('PPP')
-             ->outIs('PPP')
-             ->_as('ppp')
+             ->inIs('PPP')
+             ->inIs('PPP')
+             ->atomIs(array('Class', 'Trait', 'Classanonymous'))
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->outIs('DEFINITION')
+             ->atomIs('Variabledefinition')
              ->samePropertyAs('code', 'name')
-             ->back('ppp');
+             ->back('first');
         $this->prepareQuery();
     }
 }

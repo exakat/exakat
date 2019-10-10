@@ -45,8 +45,6 @@ class PropagateCalls extends Analyzer {
         $total += $this->processReturnedType();
         $total += $this->processParenthesis();
 
-//        print "Level $level : $total\n";
-
         if ($total > 0 && $level < 15) {
             $this->propagateCalls($level + 1);
         }
@@ -433,8 +431,7 @@ class PropagateCalls extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
@@ -466,8 +463,7 @@ class PropagateCalls extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), Analyzer::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(Analyzer::INCLUDE_SELF)
