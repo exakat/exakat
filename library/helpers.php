@@ -695,4 +695,12 @@ function readIniPercentage(string $value) {
     return $return;
 }
 
+function listToArray(string $string, $separator = ',') {
+    $list = explode($separator, $string);
+    $list = array_map('trim', $list);
+    $list = array_unique($list);
+    
+    return $list;
+}
+
 ?>

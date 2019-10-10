@@ -140,7 +140,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (is_string($this->config['other_php_versions'])) {
-            $this->config['other_php_versions'] = explode(',', $this->config['other_php_versions']);
+            $this->config['other_php_versions'] = listToArray($this->config['other_php_versions']);
             foreach($this->config['other_php_versions'] as &$version) {
                 $version = str_replace('.', '', trim($version));
             }
@@ -148,7 +148,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (is_string($this->config['file_extensions'])) {
-            $this->config['file_extensions'] = explode(',', $this->config['file_extensions']);
+            $this->config['file_extensions'] = listToArray($this->config['file_extensions']);
             foreach($this->config['file_extensions'] as &$ext) {
                 $ext = trim($ext, '. ');
             }
@@ -156,7 +156,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (is_string($this->config['project_reports'])) {
-            $this->config['project_reports'] = explode(',', $this->config['project_reports']);
+            $this->config['project_reports'] = listToArray($this->config['project_reports']);
             foreach($this->config['project_reports'] as &$ext) {
                 $ext = trim($ext);
             }
@@ -164,7 +164,7 @@ class DotExakatYamlConfig extends Config {
         }
 
         if (is_string($this->config['project_rulesets'])) {
-            $this->config['project_rulesets'] = explode(',', $this->config['project_rulesets']);
+            $this->config['project_rulesets'] = listToArray($this->config['project_rulesets']);
             foreach($this->config['project_rulesets'] as &$ext) {
                 $ext = trim($ext);
             }
