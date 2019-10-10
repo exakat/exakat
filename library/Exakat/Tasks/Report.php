@@ -91,7 +91,6 @@ class Report extends Tasks {
             display("Building report for project {$this->config->project_name} to stdout, with report " . $reportConfig->getFormat() . "\n");
             $report->generate($this->config->project_dir, Reports::STDOUT);
         } elseif (empty($reportConfig->getFile())) {
-            $file = $report::FILE_FILENAME . ($report::FILE_EXTENSION ? '.' . $report::FILE_EXTENSION : '');
             display("Building report for project {$this->config->project_name} in '" . $reportConfig->getFile() . "', with report " . $reportConfig->getFormat() . "\n");
             $report->generate($this->config->project_dir, $report::FILE_FILENAME);
         } else {

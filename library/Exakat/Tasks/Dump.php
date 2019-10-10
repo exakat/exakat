@@ -690,7 +690,7 @@ GREMLIN;
         unset($unique);
         
         if (!empty($query)) {
-            print $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -709,8 +709,9 @@ GREMLIN;
                                                    name STRING,
                                                    abstract INTEGER,
                                                    final INTEGER,
-                                                   type TEXT,
-                                                   extends TEXT DEFAULT "",
+                                                   type STRING,
+                                                   extends STRING DEFAULT "",
+                                                   phpdoc STRING,
                                                    begin INTEGER,
                                                    end INTEGER,
                                                    file INTEGER,
@@ -720,18 +721,19 @@ GREMLIN;
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
-                                                             implements TEXT,
-                                                             type    TEXT
+                                                             implements STRING,
+                                                             type    STRING
                                                  )');
 
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Class")
-.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
@@ -743,7 +745,8 @@ g.V().hasLabel("Class")
          'type':'class',
          'begin':lines.min(),
          'end':lines.max(),
-         'file':file
+         'file':file,
+         'phpdoc':phpdoc
          ];
 }
 
@@ -780,6 +783,7 @@ g.V().hasLabel("Interface")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = [];}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
@@ -789,7 +793,8 @@ g.V().hasLabel("Interface")
          'final':0,
          'begin':lines.min(),
          'end':lines.max(),
-         'file':file
+         'file':file,
+         'phpdoc':phpdoc
          ];
 }
 GREMLIN;
@@ -819,6 +824,7 @@ g.V().hasLabel("Trait")
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
@@ -828,7 +834,8 @@ g.V().hasLabel("Trait")
          'final':0,
          'begin':lines.min(),
          'end':lines.max(),
-         'file':file
+         'file':file,
+         'phpdoc':phpdoc
          ];
 }
 
@@ -883,11 +890,12 @@ GREMLIN;
                            ', ' . (int) $row['begin'] .
                            ', ' . (int) $row['end'] .
                            ", '" . $this->files[$row['file']] . "'" .
+                           ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'" .
                            ' )';
             }
             
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES ' . implode(", \n", $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file", "phpdoc") VALUES ' . implode(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -968,6 +976,7 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         abstract INTEGER,
                         visibility STRING,
                         returntype STRING,
+                        phpdoc STRING,
                         begin INTEGER,
                         end INTEGER
                      )
@@ -981,7 +990,10 @@ g.V().hasLabel("Method", "Magicmethod")
             __.out("BLOCK").out("EXPRESSION").hasLabel("As"),
             __.hasLabel("Method", "Magicmethod")
      )
-     .sideEffect{ returntype = 'None'; }
+     .sideEffect{ 
+        returntype = 'None';
+        phpdoc     = '';
+      }
      .where(
         __.coalesce( 
             __.out("AS").sideEffect{alias = it.get().value("fullcode")}.in("AS")
@@ -998,6 +1010,7 @@ g.V().hasLabel("Method", "Magicmethod")
                    .fold()
           )
           .where( __.out('RETURNTYPE').sideEffect{ returntype = it.get().value("fullcode")}.fold())
+          .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
           .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
           .map{ 
 
@@ -1018,6 +1031,7 @@ g.V().hasLabel("Method", "Magicmethod")
          "protected": it.get().value("visibility") == "protected",
          "private":   it.get().value("visibility") == "private",
          "class":     classe,
+         "phpdoc":    phpdoc,
          "begin":     lines.min(),
          "end":       lines.max()
          ];
@@ -1053,13 +1067,14 @@ GREMLIN;
 
             $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
-                        ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
+                        ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] .
+                        ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "returntype", "begin", "end") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "returntype", "begin", "end", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1145,14 +1160,14 @@ CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            citId INTEGER,
                            visibility STRING,
                            static INTEGER,
-                           value TEXT
+                           phpdoc STRING,
+                           value STRING
                            )
 SQL
 );
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Propertydefinition").as("property")
-     .not(has('virtual', true))
      .in("PPP")
 .sideEffect{ 
     x_static = it.get().properties("static").any();
@@ -1160,18 +1175,17 @@ g.V().hasLabel("Propertydefinition").as("property")
     x_protected = it.get().value("visibility") == "protected";
     x_private = it.get().value("visibility") == "private";
     x_var = it.get().value("token") == "T_VAR";
+    phpdoc = '';
+    v = '';
 }
+     .where( __.out('DEFAULT').not(where( __.in("RIGHT"))).sideEffect{ v = it.get().value("fullcode")}.fold())
+     .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .in("PPP").hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value("fullnspath"); }
      .select("property")
 .map{ 
     b = it.get().value("fullcode").tokenize(' = ');
     name = b[0];
-    if (it.get().vertices(OUT, "DEFAULT").any()) { 
-        v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
-    } else { 
-        v = ""; 
-    }
 
     x = ["class":classe,
          "static":x_static,
@@ -1180,7 +1194,8 @@ g.V().hasLabel("Propertydefinition").as("property")
          "private":x_private,
          "var":x_var,
          "name": name,
-         "value": v];
+         "value": v,
+         "phpdoc":phpdoc];
 }
 
 GREMLIN;
@@ -1215,12 +1230,13 @@ GREMLIN;
             $propertyIds[$propertyId] = ++$propertyCount;
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
-                        ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] . ')';
+                        ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] .
+                        ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
 
             ++$total;
         }
         if (!empty($query)) {
-            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         
@@ -1233,7 +1249,8 @@ CREATE TABLE classconstants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           constant INTEGER,
                           citId INTEGER,
                           visibility STRING,
-                          value TEXT
+                          phpdoc STRING,
+                          value STRING
                        )
 SQL
 );
@@ -1245,7 +1262,9 @@ g.V().hasLabel("Class", "Trait")
     x_public = it.get().values("visibility") == 'public';
     x_protected = it.get().values("visibility") == 'protected';
     x_private = it.get().values("visibility") == 'private';
+    phpdoc = '';
 }
+     .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .out('CONST')
      .map{ 
     x = ['name': it.get().vertices(OUT, 'NAME').next().value("fullcode"),
@@ -1253,7 +1272,8 @@ g.V().hasLabel("Class", "Trait")
          "public":x_public,
          "protected":x_protected,
          "private":x_private,
-         'class': it.get().vertices(IN, 'CONST').next().vertices(IN, 'CONST').next().value("fullnspath")
+         'class': it.get().vertices(IN, 'CONST').next().vertices(IN, 'CONST').next().value("fullnspath"),
+         'phpdoc': phpdoc
          ];
 }
 
@@ -1282,13 +1302,15 @@ GREMLIN;
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "'" .
                        ', ' . $citId[$row['class']] .
                        ", '" . $visibility . "'" .
-                       ", '" . $this->sqlite->escapeString($row['value']) . "')";
+                       ", '" . $this->sqlite->escapeString($row['value']) . "'".
+                       ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'".
+                       ")";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO classconstants ("id", "constant", "citId", "visibility", "value") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO classconstants ("id", "constant", "citId", "visibility", "value", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
@@ -1299,9 +1321,10 @@ GREMLIN;
 CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           constant INTEGER,
                           namespaceId INTEGER,
-                          file TEXT,
-                          value TEXT,
-                          type TEXT
+                          file STRING,
+                          value STRING,
+                          phpdoc STRING,
+                          type STRING
                        )
 SQL
 );
@@ -1312,7 +1335,9 @@ SQL
  sideEffect{ 
     file = ""; 
     namespace = "\\\\"; 
+    phpdoc = "";
 }
+.where( __.outIs("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 .where( 
     __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
            .coalesce( 
@@ -1346,13 +1371,15 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', '" . $namespacesId[$row['namespace']] . "', '" . $this->files[$row['file']] . "', '" . $this->sqlite->escapeString($row['value']) . "', '" . $this->sqlite->escapeString($row['type']) . "')";
+            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', '" . $namespacesId[$row['namespace']] . 
+                        "', '" . $this->files[$row['file']] . "', '" . $this->sqlite->escapeString($row['value']) . "', 
+                        '" . $this->sqlite->escapeString($row['type']) . "', '" . $this->sqlite->escapeString($row['phpdoc']) . "')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "namespaceId", "file", "value", "type") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "namespaceId", "file", "value", "type", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1416,12 +1443,13 @@ GREMLIN
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
         $this->sqlite->query(<<<'SQL'
 CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          function TEXT,
-                          type TEXT,
+                          function STRING,
+                          type STRING,
                           namespaceId INTEGER,
-                          returntype TEXT,
+                          returntype STRING,
                           reference INTEGER,
-                          file TEXT,
+                          file STRING,
+                          phpdoc STRING,
                           begin INTEGER,
                           end INTEGER
 )
@@ -1437,15 +1465,15 @@ SQL
     fullnspath = it.get().value("fullnspath"); 
     returntype = 'None'; 
     name = it.get().label();
+    phpdoc = '';
 }
 .where( 
     __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
       .sideEffect{ lines.add(it.get().value("line")); }
       .fold()
  )
-.where(
-    __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold()
-)
+.where( __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold())
+.where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
 , array(), array())
               ->raw(<<<GREMLIN
@@ -1472,8 +1500,10 @@ map{ ["name":name,
       "reference":reference,
       "returntype":returntype,
       "begin": lines.min(), 
-      "end":lines.max()
-      ]; }
+      "end":lines.max(),
+      "phpdoc":phpdoc
+      ]; 
+}
 GREMLIN
 , array(), array());
         $query->prepareRawQuery();
@@ -1489,13 +1519,13 @@ GREMLIN
 
             $query[] = "($methodCount, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
                         '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', 
-                        " . (int) $row['begin'] . ', ' . (int) $row['end'] . ')';
+                        " . (int) $row['begin'] . ', ' . (int) $row['end'] . ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total functions\n");
@@ -1574,8 +1604,8 @@ GREMLIN
         $this->sqlite->query('DROP TABLE IF EXISTS phpStructures');
         $this->sqlite->query(<<<'SQL'
 CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              name TEXT,
-                              type TEXT,
+                              name STRING,
+                              type STRING,
                               count INTEGER
 )
 SQL
@@ -2567,10 +2597,10 @@ CREATE TABLE classChanges (
     id           INTEGER PRIMARY KEY AUTOINCREMENT,
     changeType   STRING,
     name         STRING,
-    parentClass  TEXT,
-    parentValue  TEXT,
-    childClass   TEXT,
-    childValue   TEXT
+    parentClass  STRING,
+    parentValue  STRING,
+    childClass   STRING,
+    childValue   STRING
                     )
 SQL;
         $this->sqlite->query($query);
@@ -3037,18 +3067,18 @@ SQL;
 
         $query = <<<'SQL'
 CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
-                            analyzer TEXT,
-                            key TEXT UNIQUE,
-                            value TEXT
+                            analyzer STRING,
+                            key STRING UNIQUE,
+                            value STRING
                           );
 SQL;
         $this->sqlite->query($query);
 
         $query = <<<'SQL'
 CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            name TEXT,
-                            key TEXT,
-                            value TEXT
+                            name STRING,
+                            key STRING,
+                            value STRING
                           );
 SQL;
         $this->sqlite->query($query);

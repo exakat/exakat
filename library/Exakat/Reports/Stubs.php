@@ -29,6 +29,8 @@ use Exakat\Reports\Helpers\PhpCodeTree;
 class Stubs extends Reports {
     const FILE_EXTENSION = 'php';
     const FILE_FILENAME  = 'stubs';
+    
+    const INDENTATION = '    ';
 
     public function _generate($analyzerList) {
         $stubCode = array();
@@ -37,18 +39,23 @@ class Stubs extends Reports {
         $code->load();
 
         $code->map('functions', function ($function) {
+            $phpdoc = ($function['phpdoc'] == ' ') ? '' : self::INDENTATION.$function['phpdoc'].PHP_EOL;
+            var_dump($function['phpdoc']);
+
             $returntype = ($function['returntype'] == ' ') ? '' : ' : '.$function['returntype'];
-            return "    function foo$function[id]($function[signature])$returntype { }";
+            return "$phpdoc    function $function[function]($function[signature])$returntype { }";
         });
         $code->reduce('functions', function ($carry, $item) {
             return $carry . "\n" . $item;
         });
 
         $code->map('constants', function ($constant) {
+            $phpdoc = ($constant['phpdoc'] == ' ') ? '' : self::INDENTATION.$constant['phpdoc'];
+
             if ($constant['type'] === 'define') {
-                return "    define('$constant[constant]', $constant[value]);";
+                return $phpdoc.self::INDENTATION."define('$constant[constant]', $constant[value]);";
             } else {
-                return "    const $constant[constant] = $constant[value];";
+                return $phpdoc.self::INDENTATION."const $constant[constant] = $constant[value];";
             }
         });
         $code->reduce('constants', function ($carry, $item) {
@@ -56,16 +63,18 @@ class Stubs extends Reports {
         });
 
         $code->map('classconstants', function ($classconstants) {
-            return '        ' . ($classconstants['visibility'] ?? '') . "const $classconstants[constant] = $classconstants[value];";
+            $phpdoc = ($classconstants['phpdoc'] == ' ') ? '' : self::INDENTATION.$classconstants['phpdoc'];
+            return $phpdoc.self::INDENTATION.self::INDENTATION. ($classconstants['visibility'] ?? '') . "const $classconstants[constant] = $classconstants[value];";
         });
         $code->reduce('classconstants', function ($carry, $item) {
             return $carry . "\n" . $item;
         });
 
         $code->map('properties', function ($properties) {
-            print_r($properties);
+            $phpdoc = ($properties['phpdoc'] == ' ') ? '' : self::INDENTATION.$properties['phpdoc'];
+
             $default = ($properties['value'] == '' ? '' : ' = '.$properties['value']);
-            return "        $properties[visibility] $properties[property]$default;";
+            return "$phpdoc        $properties[visibility] $properties[property]$default;";
         });
         $code->reduce('properties', function ($carry, $item) {
             return $carry . "\n" . $item;
@@ -79,9 +88,10 @@ class Stubs extends Reports {
             $options = trim($options);
             $options .= !empty($options) ? ' ' : '';
             $returntype = ($method['returntype'] == ' ') ? '' : ' : '.$method['returntype'];
-            
+            $phpdoc = ($method['phpdoc'] == ' ') ? '' : self::INDENTATION.$method['phpdoc'].PHP_EOL;
+
             $block = (($method['cit'] === 'interface') || ($method['abstract'] == 1)) ? ';' : ' { }';
-            return "        {$options}function $method[method]($method[signature])$returntype $block";
+            return $phpdoc.self::INDENTATION.self::INDENTATION."{$options}function $method[method]($method[signature])$returntype $block";
         });
         $code->reduce('methods', function ($carry, $item) {
             return $carry . "\n" . $item;
@@ -92,12 +102,14 @@ class Stubs extends Reports {
             $final = $cit['final'] === 1 ? 'final ' : '';
             $extends = empty($cit['extends']) ? '' : ' extends ' . $cit['extends'] . ' ';
             $implements = empty($cit['implements']) ? '' : ' implements ' . $cit['implements'] . ' ';
+            $phpdoc = ($cit['phpdoc'] == ' ') ? '' : self::INDENTATION.$cit['phpdoc'].PHP_EOL;
+            $use = ($cit['use'] == ' ') ? '' : self::INDENTATION.self::INDENTATION.'use '.$cit['use'].';'.PHP_EOL;
 
-            return "    {$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n"
-                                               . ($cit['classconstants'][$cit['id']]['reduced']     ?? '        /* No class constants */ ') . PHP_EOL
-                                               . ($cit['properties'][$cit['id']]['reduced']         ?? '        /* No properties      */ ') . PHP_EOL
-                                               . ($cit['methods'][$cit['id']]['reduced']            ?? '        /* No methods         */ ') . PHP_EOL
-                                               . "    }\n";
+            return $phpdoc.self::INDENTATION."{$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n$use"
+                                               . ($cit['classconstants'][$cit['id']]['reduced']     ?? self::INDENTATION.self::INDENTATION.'/* No class constants */ ') . PHP_EOL
+                                               . ($cit['properties'][$cit['id']]['reduced']         ?? self::INDENTATION.self::INDENTATION.'/* No properties      */ ') . PHP_EOL
+                                               . ($cit['methods'][$cit['id']]['reduced']            ?? self::INDENTATION.self::INDENTATION.'/* No methods         */ ') . PHP_EOL
+                                               . self::INDENTATION . "\n";
         });
         $code->reduce('cits', function ($carry, $item) {
             return $carry . "\n" . $item;
@@ -114,17 +126,16 @@ class Stubs extends Reports {
             // empty namspaces are also displayed
 
             return 'namespace ' . ltrim($namespace['namespace'], '\\') . " {\n"
-                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? '    /* No constant definitions */ ') . PHP_EOL
-                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? '    /* No function definitions */ ') . PHP_EOL
-                                            . ($namespace['cits'][$namespace['id']]['reduced']      ?? '    /* No cit      definitions */ ') . PHP_EOL
-                                            . " \n}\n";
+                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? self::INDENTATION.'/* No constant definitions */ ') . PHP_EOL
+                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? self::INDENTATION.'/* No function definitions */ ') . PHP_EOL
+                                            . ($namespace['cits'][$namespace['id']]['reduced']      ?? self::INDENTATION.'/* No cit      definitions */ ') . PHP_EOL
+                                            . "\n}\n";
         });
 
         $code->reduce('namespaces', function ($carry, $item) {
             return $carry . "\n" . $item;
         });
 
-        print "<?php\n" . $code->get('namespaces') . "\n?>\n";
         return "<?php\n" . $code->get('namespaces') . "\n?>\n";
     }
 }

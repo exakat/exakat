@@ -97,17 +97,25 @@ SQL
         $res = $this->sqlite->query(<<<SQL
 SELECT cit.*, 
        cit.type AS type, 
-       GROUP_CONCAT(traits.implements, ',') AS use, 
-       GROUP_CONCAT(CASE WHEN cit4.id IS NULL THEN interfaces.implements ELSE cit4.name END, ',') AS implements,
 
-        CASE WHEN cit2.extends IS NULL THEN cit.extends ELSE cit2.name END AS extends FROM cit
+       ( SELECT GROUP_CONCAT(CASE WHEN cit5.id IS NULL THEN traits.implements ELSE cit5.name END, ',') FROM cit_implements AS traits
+LEFT JOIN cit cit5
+    ON traits.implements = cit5.id
+    WHERE traits.implementing = cit.id AND
+       traits.type = 'use') AS use,
+
+       (SELECT GROUP_CONCAT(CASE WHEN cit4.id IS NULL THEN implements.implements ELSE cit4.name END, ',') FROM cit_implements AS implements
+LEFT JOIN cit cit4
+    ON implements.implements = cit4.id
+    WHERE implements.implementing = cit.id AND
+       implements.type = 'implements') AS implements,
+
+        CASE WHEN cit2.extends IS NULL THEN cit.extends ELSE cit2.name END AS extends 
+        
+        FROM cit
+
 LEFT JOIN cit cit2 
     ON cit.extends = cit2.id
-
-
-LEFT JOIN cit_implements AS traits
-    ON traits.implementing = cit.id AND
-       traits.type = 'use'
 
 LEFT JOIN cit_implements AS interfaces
     ON interfaces.implementing = cit.id AND
@@ -124,6 +132,7 @@ SQL
             $row['methods']         = &$this->methods;
             $row['properties']      = &$this->properties;
             $row['classconstants']  = &$this->classconstants;
+            
             array_collect_by($this->cits, $row['namespaceId'], $row);
         }
 
