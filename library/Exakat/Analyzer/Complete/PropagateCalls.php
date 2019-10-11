@@ -35,6 +35,7 @@ class PropagateCalls extends Analyzer {
         $this->processLocalDefinition();
         $this->propagateGlobals();
         $this->propagateTypehint();
+        $total += $this->processFluentInterfaces();
 
         $this->propagateCalls();
     }
@@ -540,6 +541,35 @@ class PropagateCalls extends Analyzer {
         $c4 = $this->rawQuery()->toInt();
         
         return $c1 + $c2 + $c3 + $c4;
+    }
+    
+    private function processFluentInterfaces() : int {
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+
+              ->outIs(array('OBJECT', 'CLASS'))
+              ->atomIs(array('Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->atomIs(array('Method', 'Magicmethod'))
+              ->inIs(array('METHOD', 'MAGICMETHOD'))
+
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+
+              ->addETo('DEFINITION', 'method')
+              ->count();
+        $res = $this->rawQuery();
+        
+        return $res->toInt();
     }
 }
 
