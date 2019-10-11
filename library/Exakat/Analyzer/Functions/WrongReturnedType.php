@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class WrongReturnedType extends Analyzer {
     public function dependsOn() {
@@ -33,7 +34,7 @@ class WrongReturnedType extends Analyzer {
 
     public function analyze() {
 //Generator, Iterator, Traversable, or iterable
-// missing support for return typehint from functions
+// missing support for return typehint from functions (custom and natives)
 
         // function foo() : A { return new A;}
         $this->atomIs(self::$FUNCTIONS_ALL)
@@ -141,24 +142,37 @@ class WrongReturnedType extends Analyzer {
              ->back('first')
              ->outIs('RETURNED')
              ->_as('results')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot(array('Variable', 'Staticproperty', 'Member'))
+             ->optional(
+                $this->side()
+                     ->atomIs(array('Identifier', 'Nsname'), self::WITH_CONSTANTS)
+                     ->prepareSide()
+             )
              ->raw(<<<GREMLIN
 filter{
     if (fqn == "\\\\int") {
-        !(it.get().label() in ["Integer"]);
+        !((it.get().label() in ["Integer", "Addition", "Multiplication", "Bitshift", "Power"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") == "T_INT_CAST"));
     } else if (fqn == "\\\\string") {
-        !(it.get().label() in ["String", "Heredoc", "Concatenation"]);
+        !((it.get().label() in ["String", "Heredoc", "Concatenation"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") == "T_STRING_CAST"));
     } else if (fqn == "\\\\array") {
-        !(it.get().label() in ["Arrayliteral"]);
+        !((it.get().label() in ["Arrayliteral"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") == "T_ARRAY_CAST"));
     } else if (fqn == "\\\\float") {
-        !(it.get().label() in ["Float"]);
+        !((it.get().label() in ["Float", "Integer"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") in ["T_DOUBLE_CAST", "T_INT_CAST"]));
     } else if (fqn == "\\\\boolean") {
-        !(it.get().label() in ["Boolean"]);
+        !((it.get().label() in ["Boolean", "Comparison"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") == "T_BOOL_CAST"));
     } else if (fqn == "\\\\object") {
-        !(it.get().label() in ["Variable", "New"]);
+        !((it.get().label() in ["Variable", "New", "Clone"]) ||
+           (it.get().label() == "Cast" &&  it.get().value("token") == "T_OBJECT_CAST"));
     } else if (fqn == "\\\\void") {
         !(it.get().label() in ["Void"]);
     } else if (fqn == "\\\\callable") {
-        !(it.get().label() in ["Closure"]);
+        !(it.get().label() in ["Closure", "Arrowfunction"]);
     } else if (fqn == "\\\\iterable") {
         if (it.get().label() in ["Arrayliteral"]) {
             false;
