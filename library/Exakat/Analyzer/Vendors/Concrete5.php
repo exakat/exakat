@@ -23,25 +23,18 @@
 namespace Exakat\Analyzer\Vendors;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\UsesFramework;
 
-class Concrete5 extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
-    
+class Concrete5 extends UsesFramework {
     public function analyze() {
-        $this->atomIs('Identifier')
-             ->back('first');
-        $this->printQuery();
-        $this->prepareQuery();
+        $detections = $this->loadIni('vendors/concrete5.ini');
+        
+        $this->classes    = $detections['classes'];
+        $this->interfaces = $detections['interfaces'];
+        $this->traits     = $detections['traits'];
+        $this->namespaces = $detections['namespaces'];
+
+        parent::analyze();
     }
 }
 
