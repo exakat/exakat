@@ -33,6 +33,10 @@ Label : PROJECT
                   9
               Label : NAME
                 9
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
             Label : EXPRESSION
               16
               Label : ARGUMENT
@@ -49,6 +53,10 @@ Label : PROJECT
                       14
               Label : NAME
                 16
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
           Label : NAME
             5
         Label : EXPRESSION
@@ -77,6 +85,10 @@ Label : PROJECT
                   16
               Label : NAME
                 16
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
             Label : EXPRESSION
               19
               Label : ARGUMENT
@@ -99,6 +111,10 @@ Label : PROJECT
                   19
               Label : NAME
                 19
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
             Label : EXPRESSION
               10
               Label : ARGUMENT

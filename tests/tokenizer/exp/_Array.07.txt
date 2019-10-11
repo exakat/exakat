@@ -1,18 +1,8 @@
 test
 Label : GLOBAL
-  18
-  Label : DEFINITION
-    18
-    Label : DEFAULT
-      20
-    Label : DEFINITION
-      18
-Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
 Label : GLOBAL
@@ -33,12 +23,16 @@ Label : GLOBAL
     16
     Label : DEFINITION
       16
+Label : GLOBAL
+  18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -55,8 +49,6 @@ Label : PROJECT
       16
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
     Label : DEFINITION
       18
   Label : FILE
@@ -78,13 +70,13 @@ Label : PROJECT
             Label : INDEX
               14
               Label : LEFT
-                12
-              Label : RIGHT
                 14
                 Label : LEFT
-                  15
+                  12
                 Label : RIGHT
-                  16
+                  15
+              Label : RIGHT
+                16
             Label : VARIABLE
               9
           Label : RIGHT

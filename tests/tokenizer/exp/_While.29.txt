@@ -165,10 +165,6 @@ Label : PROJECT
               20
           Label : DEFINITION
             26
-            Label : DEFAULT
-              28
-              Label : CONCAT
-                30
             Label : DEFINITION
               26
             Label : DEFINITION
@@ -177,6 +173,22 @@ Label : PROJECT
             5
           Label : RETURNED
             20
+          Label : RETURNED
+            21
+            Label : CONCAT
+              20
+            Label : CONCAT
+              25
+              Label : METHOD
+                23
+                Label : ARGUMENT
+                  7
+                Label : NAME
+                  23
+              Label : OBJECT
+                22
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
           48
           Label : ARGUMENT
@@ -187,10 +199,106 @@ Label : PROJECT
               7
           Label : NAME
             48
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
           50
           Label : ARGUMENT
             7
+          Label : DEFINITION
+            83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+          Label : RETURNED
+            25
+            Label : METHOD
+              23
+              Label : ARGUMENT
+                7
+              Label : NAME
+                23
+            Label : OBJECT
+              22
+          Label : RETURNED
+            83
+          Label : RETURNED
+            25
+            Label : METHOD
+              23
+              Label : ARGUMENT
+                7
+              Label : NAME
+                23
+            Label : OBJECT
+              22
+          Label : RETURNED
+            21
+            Label : CONCAT
+              83
+            Label : CONCAT
+              25
+              Label : METHOD
+                23
+                Label : ARGUMENT
+                  7
+                Label : NAME
+                  23
+              Label : OBJECT
+                22
+          Label : NAME
+            50
+          Label : DEFINITION
+            100
+            Label : DEFINITION
+              100
+            Label : DEFINITION
+              100
+          Label : DEFINITION
+            91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+          Label : DEFINITION
+            52
+            Label : DEFINITION
+              52
+            Label : DEFINITION
+              52
           Label : BLOCK
             9
             Label : EXPRESSION
@@ -536,21 +644,31 @@ Label : PROJECT
                     Label : OBJECT
                       22
           Label : DEFINITION
-            52
-            Label : DEFAULT
-              53
-              Label : ARGUMENT
-                13
-                Label : INDEX
-                  55
-                Label : VARIABLE
-                  16
-              Label : NAME
-                53
+            68
             Label : DEFINITION
-              52
+              68
+          Label : DEFINITION
+            66
             Label : DEFINITION
-              52
+              66
+          Label : DEFINITION
+            64
+            Label : DEFINITION
+              64
+          Label : DEFINITION
+            60
+            Label : DEFINITION
+              60
+            Label : DEFINITION
+              60
+            Label : DEFINITION
+              60
+            Label : DEFINITION
+              60
+          Label : DEFINITION
+            57
+            Label : DEFINITION
+              57
           Label : DEFINITION
             16
             Label : DEFINITION
@@ -558,67 +676,15 @@ Label : PROJECT
             Label : DEFINITION
               16
           Label : DEFINITION
-            57
-            Label : DEFAULT
-              58
-              Label : ARGUMENT
-                52
-              Label : NAME
-                58
+            101
             Label : DEFINITION
-              57
-          Label : DEFINITION
-            60
-            Label : DEFAULT
-              61
-              Label : CONCAT
-                94
-              Label : CONCAT
-                13
-                Label : INDEX
-                  96
-                Label : VARIABLE
-                  91
-              Label : CONCAT
-                98
-            Label : DEFAULT
-              61
-              Label : CONCAT
-                62
-              Label : CONCAT
-                64
-              Label : CONCAT
-                66
-              Label : CONCAT
-                68
+              101
             Label : DEFINITION
-              60
+              101
             Label : DEFINITION
-              60
-            Label : DEFINITION
-              60
-            Label : DEFINITION
-              60
-          Label : DEFINITION
-            64
-            Label : DEFINITION
-              64
-          Label : DEFINITION
-            66
-            Label : DEFINITION
-              66
-          Label : DEFINITION
-            68
-            Label : DEFINITION
-              68
+              101
           Label : DEFINITION
             70
-            Label : DEFAULT
-              71
-              Label : ARGUMENT
-                60
-              Label : NAME
-                71
             Label : DEFINITION
               70
             Label : DEFINITION
@@ -627,93 +693,5 @@ Label : PROJECT
               70
             Label : DEFINITION
               70
-          Label : DEFINITION
-            83
-            Label : DEFAULT
-              84
-              Label : CONCAT
-                86
-              Label : CONCAT
-                13
-                Label : INDEX
-                  55
-                Label : VARIABLE
-                  16
-              Label : CONCAT
-                88
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-            Label : DEFINITION
-              83
-          Label : DEFINITION
-            91
-            Label : DEFAULT
-              92
-              Label : ARGUMENT
-                70
-              Label : NAME
-                92
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-            Label : DEFINITION
-              91
-          Label : DEFINITION
-            100
-            Label : DEFAULT
-              71
-              Label : ARGUMENT
-                60
-              Label : NAME
-                71
-            Label : DEFINITION
-              100
-            Label : DEFINITION
-              100
-          Label : DEFINITION
-            101
-            Label : DEFAULT
-              92
-              Label : ARGUMENT
-                100
-              Label : NAME
-                92
-            Label : DEFINITION
-              101
-            Label : DEFINITION
-              101
-            Label : DEFINITION
-              101
-          Label : NAME
-            50
-          Label : RETURNED
-            83
+          Label : RETURNTYPE
+            7

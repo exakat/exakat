@@ -9,36 +9,6 @@ Label : GLOBAL
   16
   Label : DEFINITION
     16
-    Label : DEFAULT
-      6
-      Label : CODE
-        24
-        Label : LEFT
-          6
-          Label : CODE
-            21
-            Label : LEFT
-              19
-            Label : RIGHT
-              22
-        Label : RIGHT
-          24
-          Label : LEFT
-            6
-            Label : CODE
-              21
-              Label : LEFT
-                25
-              Label : RIGHT
-                27
-          Label : RIGHT
-            6
-            Label : CODE
-              21
-              Label : LEFT
-                29
-              Label : RIGHT
-                31
     Label : DEFINITION
       16
 Label : GLOBAL
@@ -85,36 +55,6 @@ Label : PROJECT
       7
   Label : DEFINITION
     16
-    Label : DEFAULT
-      6
-      Label : CODE
-        24
-        Label : LEFT
-          6
-          Label : CODE
-            21
-            Label : LEFT
-              19
-            Label : RIGHT
-              22
-        Label : RIGHT
-          24
-          Label : LEFT
-            6
-            Label : CODE
-              21
-              Label : LEFT
-                25
-              Label : RIGHT
-                27
-          Label : RIGHT
-            6
-            Label : CODE
-              21
-              Label : LEFT
-                29
-              Label : RIGHT
-                31
     Label : DEFINITION
       16
   Label : DEFINITION
@@ -178,16 +118,16 @@ Label : PROJECT
                 Label : CODE
                   24
                   Label : LEFT
-                    6
-                    Label : CODE
-                      21
-                      Label : LEFT
-                        19
-                      Label : RIGHT
-                        22
-                  Label : RIGHT
                     24
                     Label : LEFT
+                      6
+                      Label : CODE
+                        21
+                        Label : LEFT
+                          19
+                        Label : RIGHT
+                          22
+                    Label : RIGHT
                       6
                       Label : CODE
                         21
@@ -195,11 +135,11 @@ Label : PROJECT
                           25
                         Label : RIGHT
                           27
-                    Label : RIGHT
-                      6
-                      Label : CODE
-                        21
-                        Label : LEFT
-                          29
-                        Label : RIGHT
-                          31
+                  Label : RIGHT
+                    6
+                    Label : CODE
+                      21
+                      Label : LEFT
+                        29
+                      Label : RIGHT
+                        31

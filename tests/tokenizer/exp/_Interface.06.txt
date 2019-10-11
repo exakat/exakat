@@ -15,6 +15,8 @@ Label : PROJECT
             10
             Label : ARGUMENT
               14
+              Label : DEFAULT
+                15
               Label : NAME
                 14
               Label : TYPEHINT
@@ -23,6 +25,10 @@ Label : PROJECT
               15
             Label : NAME
               10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              15
           Label : NAME
             6
         Label : EXPRESSION
@@ -35,6 +41,8 @@ Label : PROJECT
             10
             Label : ARGUMENT
               14
+              Label : DEFAULT
+                15
               Label : NAME
                 14
               Label : TYPEHINT
@@ -43,20 +51,26 @@ Label : PROJECT
               15
             Label : NAME
               10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              15
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : EXTENDS
-            8
-          Label : EXTENDS
             17
+          Label : EXTENDS
+            8
           Label : EXTENDS
             19
           Label : METHOD
             10
             Label : ARGUMENT
               14
+              Label : DEFAULT
+                15
               Label : NAME
                 14
               Label : TYPEHINT
@@ -65,5 +79,9 @@ Label : PROJECT
               15
             Label : NAME
               10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              15
           Label : NAME
             6

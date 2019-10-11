@@ -3,24 +3,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      14
-      Label : CONCAT
-        10
-        Label : ARGUMENT
-          12
-        Label : ARGUMENT
-          13
-        Label : NAME
-          10
-      Label : CONCAT
-        10
-        Label : ARGUMENT
-          15
-        Label : ARGUMENT
-          13
-        Label : NAME
-          10
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -29,8 +11,6 @@ Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      15
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -47,22 +27,6 @@ Label : GLOBAL
   23
   Label : DEFINITION
     23
-    Label : DEFAULT
-      27
-      Label : LEFT
-        24
-        Label : CODE
-          25
-          Label : LEFT
-            17
-          Label : RIGHT
-            26
-      Label : RIGHT
-        30
-        Label : INDEX
-          31
-        Label : VARIABLE
-          28
     Label : DEFINITION
       23
     Label : DEFINITION
@@ -81,8 +45,6 @@ Label : GLOBAL
   35
   Label : DEFINITION
     35
-    Label : DEFAULT
-      15
     Label : DEFINITION
       35
     Label : DEFINITION
@@ -97,24 +59,6 @@ Label : GLOBAL
   39
   Label : DEFINITION
     39
-    Label : DEFAULT
-      30
-      Label : INDEX
-        17
-      Label : VARIABLE
-        30
-        Label : INDEX
-          42
-        Label : VARIABLE
-          30
-          Label : INDEX
-            35
-          Label : VARIABLE
-            30
-            Label : INDEX
-              40
-            Label : VARIABLE
-              28
     Label : DEFINITION
       39
     Label : DEFINITION
@@ -125,24 +69,6 @@ Label : GLOBAL
   44
   Label : DEFINITION
     44
-    Label : DEFAULT
-      47
-      Label : CONDITION
-        24
-        Label : CODE
-          46
-          Label : LEFT
-            7
-          Label : RIGHT
-            14
-            Label : CONCAT
-              17
-            Label : CONCAT
-              35
-      Label : ELSE
-        50
-      Label : THEN
-        48
     Label : DEFINITION
       44
     Label : DEFINITION
@@ -151,32 +77,12 @@ Label : PROJECT
   1
   Label : DEFINITION
     7
-    Label : DEFAULT
-      14
-      Label : CONCAT
-        10
-        Label : ARGUMENT
-          12
-        Label : ARGUMENT
-          13
-        Label : NAME
-          10
-      Label : CONCAT
-        10
-        Label : ARGUMENT
-          15
-        Label : ARGUMENT
-          13
-        Label : NAME
-          10
     Label : DEFINITION
       7
     Label : DEFINITION
       7
   Label : DEFINITION
     17
-    Label : DEFAULT
-      15
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -191,22 +97,6 @@ Label : PROJECT
       17
   Label : DEFINITION
     23
-    Label : DEFAULT
-      27
-      Label : LEFT
-        24
-        Label : CODE
-          25
-          Label : LEFT
-            17
-          Label : RIGHT
-            26
-      Label : RIGHT
-        30
-        Label : INDEX
-          31
-        Label : VARIABLE
-          28
     Label : DEFINITION
       23
     Label : DEFINITION
@@ -221,8 +111,6 @@ Label : PROJECT
       28
   Label : DEFINITION
     35
-    Label : DEFAULT
-      15
     Label : DEFINITION
       35
     Label : DEFINITION
@@ -235,24 +123,6 @@ Label : PROJECT
       35
   Label : DEFINITION
     39
-    Label : DEFAULT
-      30
-      Label : INDEX
-        17
-      Label : VARIABLE
-        30
-        Label : INDEX
-          42
-        Label : VARIABLE
-          30
-          Label : INDEX
-            35
-          Label : VARIABLE
-            30
-            Label : INDEX
-              40
-            Label : VARIABLE
-              28
     Label : DEFINITION
       39
     Label : DEFINITION
@@ -261,24 +131,6 @@ Label : PROJECT
       39
   Label : DEFINITION
     44
-    Label : DEFAULT
-      47
-      Label : CONDITION
-        24
-        Label : CODE
-          46
-          Label : LEFT
-            7
-          Label : RIGHT
-            14
-            Label : CONCAT
-              17
-            Label : CONCAT
-              35
-      Label : ELSE
-        50
-      Label : THEN
-        48
     Label : DEFINITION
       44
     Label : DEFINITION

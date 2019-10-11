@@ -17,12 +17,6 @@ Label : GLOBAL
   19
   Label : DEFINITION
     19
-    Label : DEFAULT
-      22
-      Label : ARGUMENT
-        6
-      Label : NAME
-        22
     Label : DEFINITION
       19
 Label : GLOBAL
@@ -51,12 +45,6 @@ Label : PROJECT
       15
   Label : DEFINITION
     19
-    Label : DEFAULT
-      22
-      Label : ARGUMENT
-        6
-      Label : NAME
-        22
     Label : DEFINITION
       19
   Label : DEFINITION

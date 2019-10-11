@@ -11,27 +11,35 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              12
+              14
               Label : METHOD
-                10
+                12
                 Label : ARGUMENT
-                  11
+                  13
                 Label : NAME
-                  10
+                  12
               Label : OBJECT
-                9
-          Label : DEFINITION
-            9
-            Label : DEFINITION
-              9
+                11
           Label : DEFINITION
             11
             Label : DEFINITION
               11
-          Label : USE
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
             7
+          Label : USE
+            9

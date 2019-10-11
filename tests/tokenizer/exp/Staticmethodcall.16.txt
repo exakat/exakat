@@ -3,16 +3,12 @@ Label : GLOBAL
   19
   Label : DEFINITION
     19
-    Label : DEFAULT
-      21
     Label : DEFINITION
       19
 Label : PROJECT
   1
   Label : DEFINITION
     19
-    Label : DEFAULT
-      21
     Label : DEFINITION
       19
   Label : FILE
@@ -53,6 +49,12 @@ Label : PROJECT
                     18
             Label : NAME
               10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              11
+            Label : TYPEHINT
+              11
           Label : NAME
             6
         Label : EXPRESSION

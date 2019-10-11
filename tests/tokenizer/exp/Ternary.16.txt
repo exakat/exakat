@@ -1,98 +1,26 @@
 test
 Label : GLOBAL
-  16
-  Label : DEFINITION
-    16
-    Label : DEFINITION
-      16
-Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFAULT
-      21
-      Label : CONDITION
-        15
-        Label : LEFT
-          13
-          Label : LEFT
-            10
-            Label : INDEX
-              12
-            Label : VARIABLE
-              10
-              Label : INDEX
-                11
-              Label : VARIABLE
-                8
-          Label : RIGHT
-            14
-        Label : RIGHT
-          13
-          Label : LEFT
-            10
-            Label : INDEX
-              19
-            Label : VARIABLE
-              10
-              Label : INDEX
-                18
-              Label : VARIABLE
-                16
-          Label : RIGHT
-            20
-      Label : ELSE
-        23
-      Label : THEN
-        22
-    Label : DEFINITION
-      5
-Label : GLOBAL
   8
   Label : DEFINITION
     8
     Label : DEFINITION
       8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : GLOBAL
+  16
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      21
-      Label : CONDITION
-        15
-        Label : LEFT
-          13
-          Label : LEFT
-            10
-            Label : INDEX
-              12
-            Label : VARIABLE
-              10
-              Label : INDEX
-                11
-              Label : VARIABLE
-                8
-          Label : RIGHT
-            14
-        Label : RIGHT
-          13
-          Label : LEFT
-            10
-            Label : INDEX
-              19
-            Label : VARIABLE
-              10
-              Label : INDEX
-                18
-              Label : VARIABLE
-                16
-          Label : RIGHT
-            20
-      Label : ELSE
-        23
-      Label : THEN
-        22
     Label : DEFINITION
       5
   Label : DEFINITION
