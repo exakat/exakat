@@ -61,7 +61,7 @@ class SetParentDefinition extends Analyzer {
               ->count();
         $this->rawQuery();
 
-        $this->atomIs(' ', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
               ->_as('parent')
               ->inIs('CLASS')
               ->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
