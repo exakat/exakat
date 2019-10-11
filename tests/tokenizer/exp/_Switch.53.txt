@@ -11,26 +11,6 @@ Label : GLOBAL
   38
   Label : DEFINITION
     38
-    Label : DEFAULT
-      41
-      Label : ARGUMENT
-        43
-      Label : ARGUMENT
-        45
-      Label : ARGUMENT
-        46
-      Label : NAME
-        41
-    Label : DEFAULT
-      41
-      Label : ARGUMENT
-        43
-      Label : ARGUMENT
-        45
-      Label : ARGUMENT
-        67
-      Label : NAME
-        41
     Label : DEFINITION
       38
     Label : DEFINITION
@@ -57,34 +37,6 @@ Label : GLOBAL
   68
   Label : DEFINITION
     68
-    Label : DEFAULT
-      55
-      Label : CONDITION
-        6
-        Label : NOT
-          7
-          Label : ARGUMENT
-            12
-            Label : INDEX
-              54
-            Label : VARIABLE
-              38
-      Label : ELSE
-        11
-        Label : CLASS
-          58
-        Label : METHOD
-          60
-          Label : ARGUMENT
-            69
-          Label : NAME
-            60
-      Label : THEN
-        12
-        Label : INDEX
-          54
-        Label : VARIABLE
-          38
     Label : DEFINITION
       68
     Label : DEFINITION
@@ -93,34 +45,6 @@ Label : GLOBAL
   71
   Label : DEFINITION
     71
-    Label : DEFAULT
-      55
-      Label : CONDITION
-        6
-        Label : NOT
-          7
-          Label : ARGUMENT
-            12
-            Label : INDEX
-              47
-            Label : VARIABLE
-              38
-      Label : ELSE
-        11
-        Label : CLASS
-          58
-        Label : METHOD
-          60
-          Label : ARGUMENT
-            62
-          Label : NAME
-            60
-      Label : THEN
-        12
-        Label : INDEX
-          47
-        Label : VARIABLE
-          38
     Label : DEFINITION
       71
     Label : DEFINITION
@@ -129,26 +53,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     38
-    Label : DEFAULT
-      41
-      Label : ARGUMENT
-        43
-      Label : ARGUMENT
-        45
-      Label : ARGUMENT
-        46
-      Label : NAME
-        41
-    Label : DEFAULT
-      41
-      Label : ARGUMENT
-        43
-      Label : ARGUMENT
-        45
-      Label : ARGUMENT
-        67
-      Label : NAME
-        41
     Label : DEFINITION
       38
     Label : DEFINITION
@@ -179,68 +83,12 @@ Label : PROJECT
       45
   Label : DEFINITION
     68
-    Label : DEFAULT
-      55
-      Label : CONDITION
-        6
-        Label : NOT
-          7
-          Label : ARGUMENT
-            12
-            Label : INDEX
-              54
-            Label : VARIABLE
-              38
-      Label : ELSE
-        11
-        Label : CLASS
-          58
-        Label : METHOD
-          60
-          Label : ARGUMENT
-            69
-          Label : NAME
-            60
-      Label : THEN
-        12
-        Label : INDEX
-          54
-        Label : VARIABLE
-          38
     Label : DEFINITION
       68
     Label : DEFINITION
       68
   Label : DEFINITION
     71
-    Label : DEFAULT
-      55
-      Label : CONDITION
-        6
-        Label : NOT
-          7
-          Label : ARGUMENT
-            12
-            Label : INDEX
-              47
-            Label : VARIABLE
-              38
-      Label : ELSE
-        11
-        Label : CLASS
-          58
-        Label : METHOD
-          60
-          Label : ARGUMENT
-            62
-          Label : NAME
-            60
-      Label : THEN
-        12
-        Label : INDEX
-          47
-        Label : VARIABLE
-          38
     Label : DEFINITION
       71
     Label : DEFINITION
@@ -571,3 +419,103 @@ Label : PROJECT
           50
           Label : RETURN
             76
+  Label : RETURNED
+    38
+  Label : RETURNED
+    12
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        13
+      Label : VALUE
+        52
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        52
+      Label : VALUE
+        12
+        Label : ARGUMENT
+          12
+          Label : INDEX
+            36
+          Label : VARIABLE
+            11
+            Label : CLASS
+              8
+            Label : MEMBER
+              10
+        Label : ARGUMENT
+          55
+          Label : CONDITION
+            12
+            Label : INDEX
+              54
+            Label : VARIABLE
+              38
+          Label : ELSE
+            11
+            Label : CLASS
+              58
+            Label : METHOD
+              60
+              Label : ARGUMENT
+                62
+              Label : NAME
+                60
+          Label : THEN
+            56
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        64
+      Label : VALUE
+        12
+        Label : ARGUMENT
+          56
+  Label : RETURNED
+    71
+  Label : RETURNED
+    68
+  Label : RETURNED
+    12
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        13
+      Label : VALUE
+        52
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        52
+      Label : VALUE
+        12
+        Label : ARGUMENT
+          25
+          Label : CONCAT
+            12
+            Label : INDEX
+              72
+            Label : VARIABLE
+              11
+              Label : CLASS
+                8
+              Label : MEMBER
+                10
+          Label : CONCAT
+            74
+          Label : CONCAT
+            68
+        Label : ARGUMENT
+          71
+    Label : ARGUMENT
+      51
+      Label : INDEX
+        64
+      Label : VALUE
+        12
+        Label : ARGUMENT
+          56
+  Label : RETURNED
+    76

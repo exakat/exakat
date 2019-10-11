@@ -17,12 +17,16 @@ Label : PROJECT
               8
               Label : DEFAULT
                 10
+            Label : TYPEHINT
+              11
           Label : PPP
             7
             Label : PPP
               13
               Label : DEFAULT
                 15
+            Label : TYPEHINT
+              11
           Label : PPP
             7
             Label : PPP
@@ -31,9 +35,13 @@ Label : PROJECT
                 18
                 Label : ARGUMENT
                   11
+            Label : TYPEHINT
+              11
           Label : PPP
             7
             Label : PPP
               19
               Label : DEFAULT
                 21
+            Label : TYPEHINT
+              11

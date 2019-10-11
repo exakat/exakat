@@ -26,40 +26,46 @@ Label : PROJECT
               Label : ARGUMENT
                 8
               Label : DEFINITION
-                12
+                14
               Label : MAGICMETHOD
                 10
                 Label : ARGUMENT
                   8
+                  Label : DEFAULT
+                    11
                   Label : NAME
                     8
                     Label : DEFINITION
                       8
+                  Label : TYPEHINT
+                    11
                 Label : BLOCK
-                  11
+                  13
                   Label : EXPRESSION
-                    14
+                    16
                     Label : LEFT
-                      13
+                      15
                       Label : MEMBER
                         9
                       Label : OBJECT
-                        12
+                        14
                     Label : RIGHT
                       8
                 Label : NAME
                   10
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  11
               Label : PPP
                 9
                 Label : PPP
-                  15
-                  Label : DEFAULT
-                    8
+                  17
                   Label : DEFINITION
-                    13
+                    15
                     Label : MEMBER
                       9
                     Label : OBJECT
-                      12
+                      14
           Label : NAME
             5

@@ -57,6 +57,10 @@ Label : PROJECT
                       11
                   Label : NAME
                     10
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    11
         Label : EXPRESSION
           16
           Label : RETURN
@@ -71,14 +75,22 @@ Label : PROJECT
                 21
                 Label : ARGUMENT
                   17
+                  Label : DEFAULT
+                    11
                   Label : NAME
                     17
+                  Label : TYPEHINT
+                    11
                 Label : BLOCK
                   13
                   Label : EXPRESSION
                     11
                 Label : NAME
                   21
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  11
         Label : EXPRESSION
           7
           Label : DEFINITION
@@ -93,22 +105,22 @@ Label : PROJECT
             21
             Label : ARGUMENT
               17
+              Label : DEFAULT
+                11
               Label : NAME
                 17
+              Label : TYPEHINT
+                11
             Label : BLOCK
               13
               Label : EXPRESSION
                 11
-            Label : DEFINITION
-              6
-              Label : NEW
-                22
-                Label : ARGUMENT
-                  17
-                Label : NAME
-                  22
             Label : NAME
               21
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              11
           Label : NAME
             22
         Label : EXPRESSION
@@ -131,3 +143,53 @@ Label : PROJECT
                 24
               Label : EXTENDS
                 26
+  Label : RETURNED
+    17
+  Label : RETURNED
+    6
+    Label : NEW
+      7
+      Label : ARGUMENT
+        17
+      Label : IMPLEMENTS
+        19
+      Label : MAGICMETHOD
+        21
+        Label : ARGUMENT
+          17
+          Label : DEFAULT
+            11
+          Label : NAME
+            17
+          Label : TYPEHINT
+            11
+        Label : BLOCK
+          13
+          Label : EXPRESSION
+            11
+        Label : NAME
+          21
+        Label : RETURNED
+          Void
+        Label : RETURNTYPE
+          11
+  Label : RETURNED
+    17
+  Label : RETURNED
+    6
+    Label : NEW
+      22
+      Label : ARGUMENT
+        17
+      Label : NAME
+        22
+  Label : RETURNED
+    24
+  Label : RETURNED
+    6
+    Label : NEW
+      7
+      Label : ARGUMENT
+        24
+      Label : EXTENDS
+        26
