@@ -728,9 +728,9 @@ GREMLIN;
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Class")
-.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out('DEFINITION').where(__.in('USE')).optional(__.out('NAME'))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
@@ -1337,7 +1337,7 @@ SQL
     namespace = "\\\\"; 
     phpdoc = "";
 }
-.where( __.outIs("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
+.where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 .where( 
     __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
            .coalesce( 
@@ -1364,7 +1364,17 @@ GREMLIN
                      ->prepareSide(),
                      array()
               )
-              ->raw('map{ ["name":name, "value":v, "namespace": namespace, "file": file, "type":"define"]; }', array(), array());
+              ->raw(<<<'GREMLIN'
+map{ ["name":name, 
+      "value":v, 
+      "namespace": namespace, 
+      "file": file, 
+      "type":"define",
+       "phpdoc":phpdoc
+    ]; 
+}
+GREMLIN
+, array(), array());
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
