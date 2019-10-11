@@ -1,11 +1,13 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('namespace aaaaXaaaa { /**/ } ', 
+                      'namespace aaaaxaaaa { /**/ } ', 
+                      'namespace X { /**/ } ', 
+                      'namespace x { /**/ } ',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('namespace Bee { /**/ } ', 
+                      'namespace Bee { /**/ } ',
                      );
 
 ?>
