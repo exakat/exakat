@@ -180,18 +180,31 @@ SQL
     }
 
     public function map($what, $closure) {
+        if (!property_exists($this, $what)) {
+            return;
+        }
+
         foreach($this->$what as $id => &$items) {
             $items['map'] = array_map($closure, $items);
         }
     }
 
     public function reduce($what, $closure) {
+        if (!property_exists($this, $what)) {
+            return;
+        }
+
         foreach($this->$what as $id => &$items) {
             $items['reduced'] = array_reduce($items['map'], $closure, '');
         }
     }
 
     public function get($what) {
+        if (!property_exists($this, $what)) {
+            return;
+        }
+        print_r($what);
+
         return $this->$what[0]['reduced'];
     }
 }
