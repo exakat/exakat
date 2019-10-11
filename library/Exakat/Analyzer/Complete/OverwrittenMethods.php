@@ -38,8 +38,8 @@ class OverwrittenMethods extends Analyzer {
               ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
 
         // interface x { protected function foo()  {}}
         // interface xx extends x { protected function foo()  {}}
@@ -53,8 +53,8 @@ class OverwrittenMethods extends Analyzer {
               ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
-              ->count();
-        $this->rawQuery();
+              ->back('first');
+        $this->prepareQuery();
     }
 }
 
