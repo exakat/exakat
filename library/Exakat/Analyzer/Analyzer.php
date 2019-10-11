@@ -36,6 +36,7 @@ use Exakat\Reports\Helpers\Docs;
 use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
+use Exakat\Query\DSL\FollowParAs;
 
 abstract class Analyzer {
     // Query types
@@ -1054,7 +1055,7 @@ GREMLIN;
         return $this;
     }
 
-    public function followParAs($out = self::FOLLOW_ALL) {
+    public function followParAs($out = FollowParAs::FOLLOW_ALL) {
         $this->query->followParAs($out);
         
         return $this;
