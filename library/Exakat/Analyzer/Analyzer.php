@@ -116,6 +116,9 @@ abstract class Analyzer {
     const WITH_CONSTANTS    = true;
     const WITHOUT_CONSTANTS = false;
 
+    const WITH_VARIABLES    = true;
+    const WITHOUT_VARIABLES = false;
+
     const TRANSLATE    = true;
     const NO_TRANSLATE = false;
 

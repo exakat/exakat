@@ -26,14 +26,19 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class RegisterGlobals extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/MakeClassMethodDefinition',
+                     'Complete/PropagateCalls',
+                    );
+    }
+
     public function analyze() {
-        $superGlobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        
         // With a foreach
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
-             ->inIs('SOURCE')
+             ->atomIs('Phpvariable', self::WITH_VARIABLES)
+             ->back('first')
+
              ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
              ->back('first')
@@ -47,10 +52,29 @@ class RegisterGlobals extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // With a foreach in a class
+        $this->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->atomIs('Phpvariable', self::WITH_VARIABLES)
+             ->back('first')
+
+             ->outIs('INDEX')
+             ->savePropertyAs('code', 'k')
+             ->back('first')
+
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition(array('Member' , 'Staticproperty'))
+             ->is('isModified', true)
+             ->outIs('MEMBER')
+             ->tokenIs('T_VARIABLE')
+             ->samePropertyAs('code', 'k', self::CASE_SENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
         // With extract and overwriting option
         $this->atomFunctionIs('\\extract')
              ->outWithRank('ARGUMENT', 0)
-             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->atomIs('Phpvariable')
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 1)
              // Lazy way to check for EXTR_IF_EXISTS, \EXTR_IF_EXISTS and | EXTR_REFS
@@ -62,7 +86,7 @@ class RegisterGlobals extends Analyzer {
         $this->atomFunctionIs('\\extract')
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)
-             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->atomIs('Phpvariable')
              ->back('first');
         $this->prepareQuery();
 
