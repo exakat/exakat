@@ -35,7 +35,7 @@ class PropagateCalls extends Analyzer {
         $this->processLocalDefinition();
         $this->propagateGlobals();
         $this->propagateTypehint();
-        $total += $this->processFluentInterfaces();
+        $this->processFluentInterfaces();
 
         $this->propagateCalls();
     }
