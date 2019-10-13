@@ -23,10 +23,12 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class MismatchTypeAndDefault extends Analyzer {
     public function dependsOn() {
         return array('Complete/PropagateConstants',
+                     'Complete/PropagateCalls',
                      'Complete/MakeClassConstantDefinition',
                     );
     }
@@ -57,12 +59,12 @@ class MismatchTypeAndDefault extends Analyzer {
              ->outIs('DEFAULT')
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
-             ->followParAs(array()) // basic handling of ternary
+             ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
              ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->atomIsNot('Void', self::WITH_CONSTANTS)
              ->isNot('nullable', true)
              ->raw(<<<'GREMLIN'
 filter{
@@ -99,7 +101,9 @@ filter{
 GREMLIN
 )
              ->back('first');
+
         $this->prepareQuery();
+return;
 
         // function foo(?string $s = 3)
         $this->atomIs(self::$FUNCTIONS_ALL)
