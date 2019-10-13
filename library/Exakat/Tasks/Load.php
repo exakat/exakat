@@ -57,6 +57,33 @@ use Exakat\Loader\Collector;
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
     
+    private $SCALAR_TYPE = array('int', 
+                                 'bool', 
+                                 'void', 
+                                 'float', 
+                                 'string', 
+                                 'array', 
+                                 'callable', 
+                                 'iterable',
+                                 );
+    private $PHP_SUPERGLOBALS = array('$GLOBALS',
+                                      '$_SERVER',
+                                      '$_GET',
+                                      '$_POST',
+                                      '$_FILES',
+                                      '$_REQUEST',
+                                      '$_SESSION',
+                                      '$_ENV',
+                                      '$_COOKIE',
+                                      '$php_errormsg',
+                                      '$HTTP_RAW_POST_DATA',
+                                      '$http_response_header',
+                                      '$argc',
+                                      '$argv',
+                                      '$HTTP_POST_VARS',
+                                      '$HTTP_GET_VARS',
+                                      );
+
     private $assignations = array();
 
     private $php    = null;
@@ -998,24 +1025,7 @@ class Load extends Tasks {
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 if ($this->tokens[$this->id + 1][1] === '$this') {
                     $atom = 'This';
-                } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
-                                                                          '$_SERVER',
-                                                                          '$_GET',
-                                                                          '$_POST',
-                                                                          '$_FILES',
-                                                                          '$_REQUEST',
-                                                                          '$_SESSION',
-                                                                          '$_ENV',
-                                                                          '$_COOKIE',
-                                                                          '$php_errormsg',
-                                                                          '$HTTP_RAW_POST_DATA',
-                                                                          '$http_response_header',
-                                                                          '$argc',
-                                                                          '$argv',
-                                                                          '$HTTP_POST_VARS',
-                                                                          '$HTTP_GET_VARS',
-                                                                        ),
-                        STRICT_COMPARISON)) {
+                } elseif (in_array($this->tokens[$this->id + 1][1], $this->PHP_SUPERGLOBALS, STRICT_COMPARISON)) {
                             $atom = 'Phpvariable';
                 } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OBJECT_OPERATOR) {
                     $atom = 'Variableobject';
@@ -2076,7 +2086,7 @@ class Load extends Tasks {
                                                             ),
                      STRICT_COMPARISON)) {
                      
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), $this->SCALAR_TYPE, STRICT_COMPARISON)) {
                 ++$this->id;
                 $nsname = $this->processSingle('Scalartypehint');
                 $nsname->fullnspath = '\\' . mb_strtolower($nsname->code);
@@ -2957,7 +2967,7 @@ class Load extends Tasks {
             $typehint = $this->processTypehint();
             $this->optionsTokens['Typehint'] = $typehint->fullcode;
             
-            if (in_array(mb_strtolower($typehint->code), array('int', 'bool', 'void', 'float', 'string', 'array', 'callable', 'iterable'), STRICT_COMPARISON)) {
+            if (in_array(mb_strtolower($typehint->code), $this->SCALAR_TYPE, STRICT_COMPARISON)) {
                 $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
             } else {
                 $this->getFullnspath($typehint, 'class', $typehint);
