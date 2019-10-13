@@ -113,6 +113,11 @@ class TypehintingStats extends Analyzer {
         foreach($atoms as $name => $atom) {
             //returntypehinted
             $this->atomIs($atom)
+                 ->count();
+            $return["{$name}Total"] = $this->rawQuery()->toInt();
+
+            //returntypehinted
+            $this->atomIs($atom)
                  ->filter(
                     $this->side()
                          ->outIs('ARGUMENT')
