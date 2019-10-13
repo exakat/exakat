@@ -113,10 +113,10 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
-    const WITH_CONSTANTS    = true;
+    const WITH_CONSTANTS    = 1;
     const WITHOUT_CONSTANTS = false;
 
-    const WITH_VARIABLES    = true;
+    const WITH_VARIABLES    = 2;
     const WITHOUT_VARIABLES = false;
 
     const TRANSLATE    = true;
