@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  16
+  13
   Label : DEFINITION
-    16
+    13
     Label : DEFINITION
-      16
+      13
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -12,11 +12,11 @@ Label : GLOBAL
     Label : DEFINITION
       5
 Label : GLOBAL
-  13
+  16
   Label : DEFINITION
-    13
+    16
     Label : DEFINITION
-      13
+      16
 Label : PROJECT
   1
   Label : DEFINITION

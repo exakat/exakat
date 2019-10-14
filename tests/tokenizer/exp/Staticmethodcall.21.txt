@@ -43,6 +43,12 @@ Label : PROJECT
                   7
             Label : NAME
               7
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : METHOD
             13
             Label : ARGUMENT
@@ -55,6 +61,12 @@ Label : PROJECT
                   12
             Label : NAME
               13
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : METHOD
             14
             Label : ARGUMENT
@@ -67,6 +79,12 @@ Label : PROJECT
                   12
             Label : NAME
               14
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : METHOD
             15
             Label : ARGUMENT
@@ -79,6 +97,12 @@ Label : PROJECT
                   12
             Label : NAME
               15
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : METHOD
             16
             Label : ARGUMENT
@@ -91,6 +115,12 @@ Label : PROJECT
                   12
             Label : NAME
               16
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : NAME
             6
         Label : EXPRESSION

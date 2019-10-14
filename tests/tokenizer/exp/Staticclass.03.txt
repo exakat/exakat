@@ -27,6 +27,10 @@ Label : PROJECT
                   13
           Label : NAME
             9
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10
         Label : EXPRESSION
           15
           Label : METHOD
@@ -43,5 +47,9 @@ Label : PROJECT
                     18
             Label : NAME
               17
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
           Label : NAME
             16

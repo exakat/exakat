@@ -3,16 +3,12 @@ Label : GLOBAL
   22
   Label : DEFINITION
     22
-    Label : DEFAULT
-      24
     Label : DEFINITION
       22
 Label : PROJECT
   1
   Label : DEFINITION
     22
-    Label : DEFAULT
-      24
     Label : DEFINITION
       22
   Label : FILE
@@ -27,8 +23,6 @@ Label : PROJECT
             8
             Label : EXPRESSION
               9
-              Label : DEFINITION
-                21
               Label : DEFINITION
                 10
               Label : NAME
@@ -83,6 +77,12 @@ Label : PROJECT
                       14
                 Label : NAME
                   14
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  15
+                Label : TYPEHINT
+                  15
               Label : NAME
                 12
             Label : EXPRESSION

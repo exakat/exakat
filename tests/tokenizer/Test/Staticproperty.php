@@ -23,5 +23,6 @@ class Staticproperty extends Tokenizer {
     public function testStaticproperty12()  { $this->generic_test('Staticproperty.12'); }
     public function testStaticproperty13()  { $this->generic_test('Staticproperty.13'); }
     public function testStaticproperty14()  { $this->generic_test('Staticproperty.14'); }
+    public function testStaticproperty14()  { $this->generic_test('Staticproperty.14'); }
 }
 ?>

@@ -41,3 +41,5 @@ Label : PROJECT
             21
             Label : PPP
               22
+            Label : TYPEHINT
+              24

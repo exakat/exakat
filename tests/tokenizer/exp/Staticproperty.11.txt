@@ -33,6 +33,8 @@ Label : PROJECT
                   6
                 Label : MEMBER
                   9
+            Label : TYPEHINT
+              13
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -45,6 +47,8 @@ Label : PROJECT
               17
               Label : DEFAULT
                 19
+            Label : TYPEHINT
+              13
         Label : EXPRESSION
           20
           Label : ARGUMENT

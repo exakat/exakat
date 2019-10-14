@@ -13,12 +13,6 @@ Label : PROJECT
             8
             Label : CONST
               8
-              Label : DEFINITION
-                20
-                Label : CLASS
-                  17
-                Label : CONSTANT
-                  6
               Label : NAME
                 6
               Label : VALUE
@@ -50,37 +44,33 @@ Label : PROJECT
                 Label : ARGUMENT
                   21
                   Label : LEFT
-                    20
-                    Label : CLASS
-                      17
-                    Label : CONSTANT
-                      18
-                  Label : RIGHT
                     21
                     Label : LEFT
                       20
                       Label : CLASS
                         17
                       Label : CONSTANT
-                        6
+                        18
                     Label : RIGHT
                       20
                       Label : CLASS
-                        10
+                        17
                       Label : CONSTANT
-                        18
-            Label : DEFINITION
-              20
-              Label : CLASS
-                18
-              Label : METHOD
-                12
-                Label : ARGUMENT
-                  13
-                Label : NAME
-                  12
+                        6
+                  Label : RIGHT
+                    20
+                    Label : CLASS
+                      10
+                    Label : CONSTANT
+                      18
             Label : NAME
               12
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13
+            Label : TYPEHINT
+              13
           Label : NAME
             10
         Label : EXPRESSION
@@ -89,12 +79,6 @@ Label : PROJECT
             8
             Label : CONST
               8
-              Label : DEFINITION
-                20
-                Label : CLASS
-                  17
-                Label : CONSTANT
-                  18
               Label : NAME
                 18
               Label : VALUE

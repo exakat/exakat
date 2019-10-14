@@ -54,8 +54,6 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                30
-              Label : DEFINITION
                 20
               Label : NAME
                 20
@@ -93,6 +91,12 @@ Label : PROJECT
                         30
                 Label : NAME
                   19
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  24
+                Label : TYPEHINT
+                  24
               Label : NAME
                 22
             Label : EXPRESSION

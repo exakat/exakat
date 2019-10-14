@@ -55,14 +55,10 @@ Label : PROJECT
                     9
             Label : DEFINITION
               9
-              Label : DEFAULT
-                18
               Label : DEFINITION
                 9
             Label : DEFINITION
               20
-              Label : DEFAULT
-                21
               Label : DEFINITION
                 20
               Label : DEFINITION
@@ -81,12 +77,22 @@ Label : PROJECT
                   14
             Label : NAME
               14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+            Label : TYPEHINT
+              12
           Label : METHOD
             24
             Label : ARGUMENT
               26
+              Label : DEFAULT
+                12
               Label : NAME
                 26
+              Label : TYPEHINT
+                12
             Label : BLOCK
               16
               Label : EXPRESSION
@@ -99,12 +105,22 @@ Label : PROJECT
                     31
             Label : NAME
               24
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+            Label : TYPEHINT
+              12
           Label : METHOD
             33
             Label : ARGUMENT
               26
+              Label : DEFAULT
+                12
               Label : NAME
                 26
+              Label : TYPEHINT
+                12
             Label : BLOCK
               16
               Label : EXPRESSION
@@ -117,6 +133,12 @@ Label : PROJECT
                     31
             Label : NAME
               33
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+            Label : TYPEHINT
+              12
           Label : NAME
             6
           Label : PPP
@@ -125,6 +147,8 @@ Label : PROJECT
               9
               Label : DEFAULT
                 10
+            Label : TYPEHINT
+              12
         Label : EXPRESSION
           23
           Label : CLASS
