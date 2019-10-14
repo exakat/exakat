@@ -58,6 +58,7 @@ Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all poss
 * Portability
 * Preferences
 * RadwellCodes
+* Rector
 * SOLID
 * Security
 * Semantics
@@ -98,6 +99,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Filedependencies
   * Filedependencieshtml
   * Classdependencies
+  * Stubs
   * Radwellcode
   * Grade
   * Weekly
@@ -114,6 +116,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Dependencywheel
   * Phpcity
   * Sarb
+  * ExakatVendors
 
 
 Supported PHP Extensions
@@ -436,6 +439,23 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 1.9.9
+
+  * Arrays/WeirdIndex (Arrays/WeirdIndex)
+  * Complete/CreateForeachDefault (Complete/CreateForeachDefault ; Unassigned)
+  * Concrete usage (Vendors/Concrete5 ; Appinfo)
+  * Dump/CollectMbstringEncodings (Dump/CollectMbstringEncodings ; Dump)
+  * Filter To add_slashes() (Php/FilterToAddSlashes ; CompatibilityPHP74)
+  * Immutable Signature (Classes/ImmutableSignature ; Appinfo)
+  * Is_A() With String (Php/IsAWithString ; Analyze, Simple, Rector)
+  * Mbstring Third Arg (Structures/MbstringThirdArg ; Analyze)
+  * Mbstring Unknown Encoding (Structures/MbstringUnknownEncoding ; Analyze)
+  * Merge If Then (Structures/MergeIfThen ; Analyze)
+  * Typehinting Stats (Dump/TypehintingStats ; Dump)
+  * Typo 3 usage (Vendors/Typo3 ; Appinfo)
+  * Wrong Case Namespaces (Namespaces/WrongCase ; Coding Conventions)
+  * Wrong Type With Call (Functions/WrongTypeWithCall ; Analyze, Typechecks)
+
 * 1.9.8
 
   * Cant Implement Traversable (Interfaces/CantImplementTraversable ; Analyze, LintButWontExec)
@@ -476,7 +496,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Coalesce And Concat (Structures/CoalesceAndConcat ; Analyze)
   * Constant Comparison (Structures/AlwaysFalse ; Analyze)
-  * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Unassigned, Dump)
+  * Cyclomatic Complexity (Dump/CyclomaticComplexity ; Dump)
   * Nested Ternary Without Parenthesis (Php/NestedTernaryWithoutParenthesis ; Appinfo, CompatibilityPHP74)
   * PHP 74 New Directives (Php/Php74NewDirective ; CompatibilityPHP73)
   * Should Use Explode Args (Structures/ShouldUseExplodeArgs ; Analyze)
@@ -495,7 +515,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PHP 7.4 Constant Deprecation (Php/Php74Deprecation ; CompatibilityPHP74)
   * PHP 7.4 Removed Directives (Php/Php74RemovedDirective ; CompatibilityPHP74)
   * Set Class Method Remote Definition (Complete/SetClassMethodRemoteDefinition ; Complete)
-  * Set Class Property Definition With Fluent Interface (Complete/SetClassPropertyDefinitionWithFluentInterface ; Complete)
   * Set Class Property Definition With Typehint (Complete/SetClassPropertyDefinitionWithTypehint ; Complete)
   * Set Class Remote Definition With Global (Complete/SetClassRemoteDefinitionWithGlobal ; Complete)
   * Set Class Remote Definition With Local New (Complete/SetClassRemoteDefinitionWithLocalNew ; Complete)
@@ -872,7 +891,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Configure Extract (Security/ConfigureExtract ; Security)
   * Flexible Heredoc (Php/FlexibleHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Method Signature Must Be Compatible (Classes/MethodSignatureMustBeCompatible)
-  * Mismatch Type And Default (Functions/MismatchTypeAndDefault ; Analyze, LintButWontExec)
+  * Mismatch Type And Default (Functions/MismatchTypeAndDefault ; Analyze, LintButWontExec, Typechecks)
   * Use The Blind Var (Performances/UseBlindVar ; Performances)
 
 * 1.2.8
@@ -1130,8 +1149,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.12.3
 
   * Group Use Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
-  * Mismatched Default Arguments (Functions/MismatchedDefaultArguments ; Analyze)
-  * Mismatched Typehint (Functions/MismatchedTypehint ; Analyze)
+  * Mismatched Default Arguments (Functions/MismatchedDefaultArguments ; Analyze, Typechecks)
+  * Mismatched Typehint (Functions/MismatchedTypehint ; Analyze, Typechecks)
   * Scalar Or Object Property (Classes/ScalarOrObjectProperty)
 
 * 0.12.2
@@ -1394,6 +1413,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.8.4
 
+  *  (Structures/NoHardcodedIp ; Analyze, Security, ClearPHP, Simple)
   * $HTTP_RAW_POST_DATA Usage (Php/RawPostDataUsage ; Appinfo, CompatibilityPHP56)
   * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple)
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze)
@@ -1520,7 +1540,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Echo Or Print (Structures/EchoPrintConsistance ; Coding Conventions, Preferences)
   * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Simple, Suggestions)
   * Ellipsis Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Simple, php-cs-fixable)
+  * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Simple, php-cs-fixable, Rector)
   * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics, Stats)
   * Email Addresses (Type/Email ; Inventory, Appinfo)
   * Empty Blocks (Structures/EmptyBlocks ; Analyze, Simple)
@@ -1559,7 +1579,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Function Called With Other Case Than Defined (Functions/FunctionCalledWithOtherCase ; )
   * Function Subscripting (Structures/FunctionSubscripting ; Appinfo, CompatibilityPHP53)
   * Function Subscripting, Old Style (Structures/FunctionPreSubscripting ; Suggestions)
-  * Functioncall Is Global (Functions/IsGlobal ; Internal)
+  * Functioncall Is Global (Functions/IsGlobal ; Under Work)
   * Functions Glossary (Functions/Functionnames ; Appinfo)
   * Functions In Loop Calls (Functions/LoopCalling ; Under Work)
   * Functions Removed In PHP 5.4 (Php/Php54RemovedFunctions ; CompatibilityPHP54)
@@ -1680,7 +1700,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Level 2)
   * No Direct Usage (Structures/NoDirectUsage ; Analyze, Simple)
   * No Hardcoded Hash (Structures/NoHardcodedHash ; Analyze, Security, Simple)
-  * No Hardcoded Ip (Structures/NoHardcodedIp ; Analyze, Security, ClearPHP, Simple)
   * No Hardcoded Path (Structures/NoHardcodedPath ; Analyze, ClearPHP, Simple)
   * No Hardcoded Port (Structures/NoHardcodedPort ; Analyze, Security, ClearPHP, Simple)
   * No List With String (Php/NoListWithString ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -1699,7 +1718,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Normal Methods (Classes/NormalMethods ; Appcontent)
   * Normal Property (Classes/NormalProperty ; Under Work)
   * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
-  * Not Not (Structures/NotNot ; Analyze, OneFile, Simple, php-cs-fixable)
+  * Not Not (Structures/NotNot ; Analyze, OneFile, Simple)
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
@@ -1744,7 +1763,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Phpinfo (Structures/PhpinfoUsage ; Security, OneFile, Simple)
   * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Simple, Level 4)
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
-  * Preprocessable (Structures/ShouldPreprocess ; Analyze)
+  * Preprocessable (Structures/ShouldPreprocess ; Analyze, Rector)
   * Print And Die (Structures/PrintAndDie ; Analyze, Simple)
   * Property Could Be Private Property (Classes/CouldBePrivate ; ClassReview)
   * Property Is Modified (Classes/IsModified ; Internal)
@@ -1752,7 +1771,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Names (Classes/PropertyDefinition ; Internal)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Internal)
-  * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Semantics)
+  * Property Variable Confusion (Structures/PropertyVariableConfusion ; Semantics)
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Simple, Level 1, Top10)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
   * Real Functions (Functions/RealFunctions ; Appcontent, Stats)
@@ -1773,7 +1792,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Results May Be Missing (Structures/ResultMayBeMissing ; Analyze, Simple)
   * Return True False (Structures/ReturnTrueFalse ; Analyze, Simple, Level 1)
   * Return Typehint Usage (Php/ReturnTypehintUsage ; Appinfo, Internal)
-  * Return With Parenthesis (Php/ReturnWithParenthesis ; Coding Conventions, PHP recommendations)
+  * Return With Parenthesis (Php/ReturnWithParenthesis ; Coding Conventions, PHP recommendations, Suggestions)
   * Return void  (Structures/ReturnVoid ; )
   * Safe Curl Options (Security/CurlOptions ; Security)
   * Same Conditions In Condition (Structures/SameConditions ; Analyze, Simple)
@@ -2090,7 +2109,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-81 PHP error message detailled : 
+82 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2133,6 +2152,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Could not check compatibility between xx\:\:bar(B $a) and foo\:\:bar(A $a), because class A is not available <incompatible-signature-methods-with-covariance>`
 * :ref:`Creating default object from empty value <undefined-variable>`
 * :ref:`Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar() <method-signature-must-be-compatible>`
+* :ref:`Declaration of a\:\:foo($a) should be compatible with ab1\:\:foo($a) <maxoverwrite>`
 * :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods-with-covariance>`
 * :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
 * :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods-with-covariance>`
@@ -2345,6 +2365,7 @@ List of external links mentionned in this documentation.
 * `compact <http://www.php.net/compact>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
+* `Concrete 5 <https://www.concrete5.org/>`_
 * `Conflict resolution <http://php.net/manual/en/language.oop5.traits.php#language.oop5.traits.conflict>`_
 * `Constant definition <http://php.net/const>`_
 * `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
@@ -2383,6 +2404,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
 * `Deprecation allow_url_include <https://wiki.php.net/rfc/deprecations_php_7_4#allow_url_include>`_
 * `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_
+* `Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_
 * `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `Dir predefined constants <http://php.net/manual/en/dir.constants.php>`_
@@ -2438,6 +2460,7 @@ List of external links mentionned in this documentation.
 * `ext/inotify manual <http://php.net/manual/en/book.inotify.php>`_
 * `ext/leveldb on Github <https://github.com/reeze/php-leveldb>`_
 * `ext/lua manual <http://php.net/manual/en/book.lua.php>`_
+* `ext/mbstring <https://www.php.net/manual/en/book.mbstring.php>`_
 * `ext/memcached manual <http://php.net/manual/en/book.memcached.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
@@ -2564,8 +2587,9 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <https://www.php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2635,8 +2659,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2666,6 +2690,7 @@ List of external links mentionned in this documentation.
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `PHP Options And Information <http://php.net/manual/en/book.info.php>`_
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
+* `PHP return(value); vs return value; <https://stackoverflow.com/questions/2921843/php-returnvalue-vs-return-value>`_
 * `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Arrow Functions <https://wiki.php.net/rfc/arrow_functions>`_
@@ -2798,11 +2823,12 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
+* `Typo3 <https://www.typo3.org/>`_
 * `Unbinding $this from non-static closures <https://wiki.php.net/rfc/deprecations_php_7_4#unbinding_this_from_non-static_closures>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2866,7 +2892,7 @@ Ruleset configurations
 
 INI configuration for built-in rulesets. Copy them in config/themes.ini, and make your owns.
 
-21 rulesets detailled here : 
+23 rulesets detailled here : 
 
 * `Analyze <ruleset_ini_analyze>`_
 * `ClassReview <ruleset_ini_classreview>`_
@@ -2884,11 +2910,13 @@ INI configuration for built-in rulesets. Copy them in config/themes.ini, and mak
 * `Dead code <ruleset_ini_dead code>`_
 * `LintButWontExec <ruleset_ini_lintbutwontexec>`_
 * `Performances <ruleset_ini_performances>`_
+* `Rector <ruleset_ini_rector>`_
 * `Security <ruleset_ini_security>`_
 * `Semantics <ruleset_ini_semantics>`_
 * `Suggestions <ruleset_ini_suggestions>`_
 * `Top10 <ruleset_ini_top10>`_
 * `Typechecks <ruleset_ini_typechecks>`_
+* `php-cs-fixable <ruleset_ini_php-cs-fixable>`_
 
 
 
@@ -2906,6 +2934,7 @@ _______
 |   analyzer[] = "Arrays/NullBoolean";
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Arrays/TooManyDimensions";
+|   analyzer[] = "Arrays/WeirdIndex";
 |   analyzer[] = "Classes/AbstractOrImplements";
 |   analyzer[] = "Classes/AbstractStatic";
 |   analyzer[] = "Classes/AccessPrivate";
@@ -3046,6 +3075,7 @@ _______
 |   analyzer[] = "Functions/WrongNumberOfArguments";
 |   analyzer[] = "Functions/WrongOptionalParameter";
 |   analyzer[] = "Functions/WrongReturnedType";
+|   analyzer[] = "Functions/WrongTypeWithCall";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/CantImplementTraversable";
@@ -3085,6 +3115,7 @@ _______
 |   analyzer[] = "Php/HashAlgos";
 |   analyzer[] = "Php/Incompilable";
 |   analyzer[] = "Php/InternalParameterType";
+|   analyzer[] = "Php/IsAWithString";
 |   analyzer[] = "Php/IsnullVsEqualNull";
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/MissingSubpattern";
@@ -3175,6 +3206,9 @@ _______
 |   analyzer[] = "Structures/LoneBlock";
 |   analyzer[] = "Structures/LongArguments";
 |   analyzer[] = "Structures/MaxLevelOfIdentation";
+|   analyzer[] = "Structures/MbstringThirdArg";
+|   analyzer[] = "Structures/MbstringUnknownEncoding";
+|   analyzer[] = "Structures/MergeIfThen";
 |   analyzer[] = "Structures/MismatchedTernary";
 |   analyzer[] = "Structures/MissingCases";
 |   analyzer[] = "Structures/MissingNew";
@@ -3216,7 +3250,6 @@ _______
 |   analyzer[] = "Structures/PrintAndDie";
 |   analyzer[] = "Structures/PrintWithoutParenthesis";
 |   analyzer[] = "Structures/PrintfArguments";
-|   analyzer[] = "Structures/PropertyVariableConfusion";
 |   analyzer[] = "Structures/QueriesInLoop";
 |   analyzer[] = "Structures/RepeatedPrint";
 |   analyzer[] = "Structures/RepeatedRegex";
@@ -3354,6 +3387,7 @@ __________________
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/WrongCase";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
+|   analyzer[] = "Namespaces/WrongCase";
 |   analyzer[] = "Php/CloseTags";
 |   analyzer[] = "Php/ReturnWithParenthesis";
 |   analyzer[] = "Php/UpperCaseFunction";
@@ -3879,6 +3913,7 @@ __________________
 |   analyzer[] = "Php/ArrayKeyExistsWithObjects";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DetectCurrentClass";
+|   analyzer[] = "Php/FilterToAddSlashes";
 |   analyzer[] = "Php/HashAlgos74";
 |   analyzer[] = "Php/IdnUts46";
 |   analyzer[] = "Php/NestedTernaryWithoutParenthesis";
@@ -4053,6 +4088,22 @@ ____________
 
 
 
+.. _ruleset_ini_rector:
+
+Rector
+[Rector](https://github.com/rectorphp/rector) is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+______
+
+| [Rector]
+|   analyzer[] = "Php/IsAWithString";
+|   analyzer[] = "Structures/ElseIfElseif";
+|   analyzer[] = "Structures/ShouldPreprocess";| 
+
+
+
+
+
+
 .. _ruleset_ini_security:
 
 Security
@@ -4176,6 +4227,7 @@ ___________
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/NewExponent";
 |   analyzer[] = "Php/PregMatchAllFlag";
+|   analyzer[] = "Php/ReturnWithParenthesis";
 |   analyzer[] = "Php/ShouldPreprocess";
 |   analyzer[] = "Php/ShouldUseArrayColumn";
 |   analyzer[] = "Php/ShouldUseArrayFilter";
@@ -4277,7 +4329,35 @@ __________
 
 | [Typechecks]
 |   analyzer[] = "Functions/InsufficientTypehint";
+|   analyzer[] = "Functions/MismatchTypeAndDefault";
+|   analyzer[] = "Functions/MismatchedDefaultArguments";
+|   analyzer[] = "Functions/MismatchedTypehint";
+|   analyzer[] = "Functions/WrongTypeWithCall";
 |   analyzer[] = "Interfaces/UselessInterfaces";| 
+
+
+
+
+
+
+.. _ruleset_ini_php-cs-fixable:
+
+php-cs-fixable
+
+______________
+
+| [php-cs-fixable]
+|   analyzer[] = "Classes/DontUnsetProperties";
+|   analyzer[] = "Php/ImplodeOneArg";
+|   analyzer[] = "Php/IsnullVsEqualNull";
+|   analyzer[] = "Php/IssetMultipleArgs";
+|   analyzer[] = "Php/LogicalInLetters";
+|   analyzer[] = "Php/NewExponent";
+|   analyzer[] = "Structures/CouldUseDir";
+|   analyzer[] = "Structures/ElseIfElseif";
+|   analyzer[] = "Structures/MultipleUnset";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/UseConstant";| 
 
 
 

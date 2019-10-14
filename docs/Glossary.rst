@@ -70,6 +70,10 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`No Real Comparison <no-real-comparison>`
 
+    + `addslashes()`
+
+      + :ref:`Filter To add_slashes() <filter-to-add\_slashes()>`
+
     + `array()`
 
       + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -881,6 +885,10 @@ Glossary
 
       + :ref:`Should Typecast <should-typecast>`
 
+    + `is_a()`
+
+      + :ref:`Is_A() With String <is\_a()-with-string>`
+
     + `is_array()`
 
       + :ref:`Should Use Operator <should-use-operator>`
@@ -1003,6 +1011,14 @@ Glossary
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
       + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 
+    + `mb_encoding_aliases()`
+
+      + :ref:`Mbstring Unknown Encoding <mbstring-unknown-encoding>`
+
+    + `mb_list_encodings()`
+
+      + :ref:`Mbstring Unknown Encoding <mbstring-unknown-encoding>`
+
     + `mb_ord()`
 
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -1013,13 +1029,46 @@ Glossary
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
       + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 
+    + `mb_stripos()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_stristr()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
     + `mb_strlen()`
 
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
+    + `mb_strpos()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_strrchr()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_strrichr()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_strripos()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_strrpos()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
+    + `mb_strstr()`
+
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+
     + `mb_substr()`
 
+      + :ref:`Mbstring Third Arg <mbstring-third-arg>`
       + :ref:`No Substr() One <no-substr()-one>`
       + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
       + :ref:`Substr To Trim <substr-to-trim>`

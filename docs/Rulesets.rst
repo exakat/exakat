@@ -68,6 +68,10 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Typechecks`                              | Checks related to types.                                                                             |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Rector`                                  | Suggests configuration to apply changes with Rector                                                  |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`php-cs-fixable`                          | Suggests configuration to apply changes with PHP-CS-FIXER                                            |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 Note : in command line, don't forget to add quotes to rulesets' names that include white space.
 
@@ -76,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 07 Oct 2019 12:08:17 +0000
-.. comment: Generation hash : 2e695dbfa8e8660e8ed78cc24d0434d9c5315b37
+.. comment: Generation date : Mon, 14 Oct 2019 09:17:09 +0000
+.. comment: Generation hash : e664edadd7b7d0c9a83863a8eed1640cfc85b9be
 
 
 .. _analyze:
@@ -85,7 +89,9 @@ Rulesets details
 Analyze
 +++++++
 
-Total : 385 analysis
+This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
+
+Total : 390 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -105,6 +111,7 @@ Total : 385 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
+* :ref:`Arrays/WeirdIndex <arrays/weirdindex>`
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Assign And Compare <assign-and-compare>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
@@ -224,6 +231,7 @@ Total : 385 analysis
 * :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
+* :ref:`Is_A() With String <is\_a()-with-string>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Logical To in_array <logical-to-in\_array>`
@@ -232,7 +240,10 @@ Total : 385 analysis
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Max Level Of Nesting <max-level-of-nesting>`
+* :ref:`Mbstring Third Arg <mbstring-third-arg>`
+* :ref:`Mbstring Unknown Encoding <mbstring-unknown-encoding>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
+* :ref:`Merge If Then <merge-if-then>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
@@ -274,7 +285,6 @@ Total : 385 analysis
 * :ref:`No Empty Regex <no-empty-regex>`
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
-* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Literal For Reference <no-literal-for-reference>`
@@ -322,7 +332,6 @@ Total : 385 analysis
 * :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 * :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
-* :ref:`Property Variable Confusion <property-variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
@@ -457,9 +466,11 @@ Total : 385 analysis
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`Wrong Range Check <wrong-range-check>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
+* :ref:`Wrong Type With Call <wrong-type-with-call>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
+* :ref:``
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
@@ -477,6 +488,8 @@ Total : 385 analysis
 
 ClassReview
 +++++++++++
+
+This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
 
 Total : 35 analysis
 
@@ -521,7 +534,9 @@ Total : 35 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 25 analysis
+This ruleset centralizes all analysis related to coding conventions. Sometimes, those are easy to extract with static analysis, and so here they are. No all o them are available.
+
+Total : 26 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -545,6 +560,7 @@ Total : 25 analysis
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
+* :ref:`Wrong Case Namespaces <wrong-case-namespaces>`
 * :ref:`Wrong Class Name Case <wrong-class-name-case>`
 * :ref:`Wrong Function Name Case <wrong-function-name-case>`
 * :ref:`Yoda Comparison <yoda-comparison>`
@@ -553,6 +569,8 @@ Total : 25 analysis
 
 CompatibilityPHP53
 ++++++++++++++++++
+
+This ruleset centralizes all analysis for the migration from PHP 5.2 to 5.3.
 
 Total : 78 analysis
 
@@ -640,6 +658,8 @@ Total : 78 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 5.3 to 5.4.
+
 Total : 74 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -722,6 +742,8 @@ Total : 74 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 5.4 to 5.5.
+
 Total : 66 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -796,6 +818,8 @@ Total : 66 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 5.5 to 5.6.
+
 Total : 55 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
@@ -859,6 +883,8 @@ Total : 55 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 5.6 to 7.0.
+
 Total : 46 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -913,6 +939,8 @@ Total : 46 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
+
 Total : 32 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -953,6 +981,8 @@ Total : 32 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
+
 Total : 24 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
@@ -985,6 +1015,8 @@ Total : 24 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
+
 Total : 13 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
@@ -1006,11 +1038,14 @@ Total : 13 analysis
 CompatibilityPHP74
 ++++++++++++++++++
 
-Total : 21 analysis
+This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
+
+Total : 22 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
+* :ref:`Filter To add_slashes() <filter-to-add\_slashes()>`
 * :ref:`Hash Algorithms Incompatible With PHP 7.4- <hash-algorithms-incompatible-with-php-7.4->`
 * :ref:`Nested Ternary Without Parenthesis <nested-ternary-without-parenthesis>`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
@@ -1035,6 +1070,8 @@ Total : 21 analysis
 CompatibilityPHP80
 ++++++++++++++++++
 
+This ruleset centralizes all analysis for the migration from PHP 7.4 to 8.0.
+
 Total : 3 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
@@ -1045,6 +1082,8 @@ Total : 3 analysis
 
 Dead code
 +++++++++
+
+This ruleset focuses on dead code : expressions or even structures that are written, valid but never used.
 
 Total : 26 analysis
 
@@ -1080,6 +1119,8 @@ Total : 26 analysis
 LintButWontExec
 +++++++++++++++
 
+This ruleset focuses on PHP code that lint (php -l), but that will not run. As such, this ruleset tries to go further than PHP, by connecting files, just like during execution.
+
 Total : 25 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
@@ -1112,6 +1153,8 @@ Total : 25 analysis
 
 Performances
 ++++++++++++
+
+This ruleset focuses on performances issues : anything that slows the code's execution.
 
 Total : 45 analysis
 
@@ -1161,10 +1204,25 @@ Total : 45 analysis
 * :ref:`fputcsv() In Loops <fputcsv()-in-loops>`
 * :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 
+.. _rector:
+
+Rector
+++++++
+
+[Rector](https://github.com/rectorphp/rector) is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+
+Total : 3 analysis
+
+* :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Is_A() With String <is\_a()-with-string>`
+* :ref:`Preprocessable <preprocessable>`
+
 .. _security:
 
 Security
 ++++++++
+
+This ruleset focuses on code security. 
 
 Total : 42 analysis
 
@@ -1185,7 +1243,6 @@ Total : 42 analysis
 * :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No ENT_IGNORE <no-ent\_ignore>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
-* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Net For Xml Load <no-net-for-xml-load>`
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
@@ -1204,6 +1261,7 @@ Total : 42 analysis
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
 * :ref:`Use random_int() <use-random\_int()>`
+* :ref:``
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
 * :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
@@ -1215,6 +1273,8 @@ Total : 42 analysis
 
 Semantics
 +++++++++
+
+This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
 Total : 7 analysis
 
@@ -1231,7 +1291,9 @@ Total : 7 analysis
 Suggestions
 +++++++++++
 
-Total : 87 analysis
+This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
+
+Total : 88 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1284,6 +1346,7 @@ Total : 87 analysis
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Repeated print() <repeated-print()>`
+* :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Set Aside Code <set-aside-code>`
 * :ref:`Should Deep Clone <should-deep-clone>`
@@ -1326,6 +1389,8 @@ Total : 87 analysis
 Top10
 +++++
 
+This ruleset is a selection of analysis, with the top 10 most common. Actually, it is a little larger than that. 
+
 Total : 28 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
@@ -1362,8 +1427,35 @@ Total : 28 analysis
 Typechecks
 ++++++++++
 
-Total : 2 analysis
+This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
+
+Total : 6 analysis
 
 * :ref:`Insufficient Typehint <insufficient-typehint>`
+* :ref:`Mismatch Type And Default <mismatch-type-and-default>`
+* :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
+* :ref:`Mismatched Typehint <mismatched-typehint>`
 * :ref:`Useless Interfaces <useless-interfaces>`
+* :ref:`Wrong Type With Call <wrong-type-with-call>`
+
+.. _php-cs-fixable:
+
+php-cs-fixable
+++++++++++++++
+
+
+
+Total : 11 analysis
+
+* :ref:`** For Exponent <**-for-exponent>`
+* :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+* :ref:`Don't Unset Properties <don't-unset-properties>`
+* :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Implode One Arg <implode-one-arg>`
+* :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
+* :ref:`Multiple Unset() <multiple-unset()>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Use === null <use-===-null>`
+* :ref:`Use Constant <use-constant>`
 

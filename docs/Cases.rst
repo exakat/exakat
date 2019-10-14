@@ -1924,59 +1924,6 @@ $email_health is used later in the method; while $email_components is only set, 
                 $mbox[] = $mbox_row;
             }
 
-Property Variable Confusion
-===========================
-
-.. _phpipam-structures-propertyvariableconfusion:
-
-phpipam
-^^^^^^^
-
-:ref:`property-variable-confusion`, in functions/classes/class.Admin.php:16. 
-
-There is a property called '$users'. It is easy to mistake $this->users and $users. Also, it seems that $this->users may be used as a cache system, yet it is not employed here. 
-
-.. code-block:: php
-
-    /**
-    	 * (array of objects) to store users, user id is array index
-    	 *
-    	 * @var mixed
-    	 * @access public
-    	 */
-    	public $users;
-    
-    ////////////
-    
-    	/**
-    	 * Fetches all users that are in group
-    	 *
-    	 * @access public
-    	 * @return array of user ids
-    	 */
-    	public function group_fetch_users ($group_id) {
-    		$out = array ();
-    		# get all users
-    		$users = $this->fetch_all_objects(users);
-    		# check if $gid in array
-    		if($users!==false) {
-    			foreach($users as $u) {
-    				$group_array = json_decode($u->groups, true);
-    				$group_array = $this->groups_parse($group_array);
-    
-    				if(sizeof($group_array)>0) {
-    					foreach($group_array as $group) {
-    						if(in_array($group_id, $group)) {
-    							$out[] = $u->id;
-    						}
-    					}
-    				}
-    			}
-    		}
-    		# return
-    		return isset($out) ? $out : array();
-    	}
-
 Foreach Reference Is Not Modified
 =================================
 
@@ -3451,15 +3398,15 @@ This code is well escaped, as the integer type cast will prevent any special cha
 
     $db->query("DELETE FROM " . MAIN_DB_PREFIX . "product_pricerules WHERE level = " . (int) $i)
 
-No Hardcoded Ip
-===============
+
+
 
 .. _openemr-structures-nohardcodedip:
 
 OpenEMR
 ^^^^^^^
 
-:ref:`no-hardcoded-ip`, in wp-admin/includes/misc.php:74. 
+:ref:``, in wp-admin/includes/misc.php:74. 
 
 Although they are commented just above, the values provided here are suspicious.
 
@@ -3482,7 +3429,7 @@ Although they are commented just above, the values provided here are suspicious.
 NextCloud
 ^^^^^^^^^
 
-:ref:`no-hardcoded-ip`, in config/config.sample.php:1561. 
+:ref:``, in config/config.sample.php:1561. 
 
 Although they are documented as empty array, 3 values are provided as examples. They do not responds, at the time of writing, but they may.
 
@@ -5626,6 +5573,58 @@ Default development behavior : display the caught exception. Production behavior
                 return;
             }
 
+Useless Casting
+===============
+
+.. _fuelcms-structures-uselesscasting:
+
+FuelCMS
+^^^^^^^
+
+:ref:`useless-casting`, in fuel/codeigniter/core/URI.php:214. 
+
+substr() always returns a string, so there is no need to enforce this.
+
+.. code-block:: php
+
+    if (isset($_SERVER['SCRIPT_NAME'][0]))
+    		{
+    			if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0)
+    			{
+    				$uri = (string) substr($uri, strlen($_SERVER['SCRIPT_NAME']));
+    			}
+    			elseif (strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0)
+    			{
+    				$uri = (string) substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
+    			}
+    		}
+
+
+--------
+
+
+.. _thinkphp-structures-uselesscasting:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`useless-casting`, in ThinkPHP/Library/Think/Db/Driver/Sqlsrv.class.php:67. 
+
+A comparison always returns a boolean, except for the spaceship operator.
+
+.. code-block:: php
+
+    foreach ($result as $key => $val) {
+                    $info[$val['column_name']] = array(
+                        'name'    => $val['column_name'],
+                        'type'    => $val['data_type'],
+                        'notnull' => (bool) ('' === $val['is_nullable']), // not null is empty, null is yes
+                        'default' => $val['column_default'],
+                        'primary' => false,
+                        'autoinc' => false,
+                    );
+                }
+
 No isset() With empty()
 =======================
 
@@ -5948,6 +5947,67 @@ When executed in a path '/a/b/c', this code will require '/a../../vendor/autoloa
 .. code-block:: php
 
     static::$loader = require __DIR__.'../../vendor/autoload.php';
+
+No Need For Else
+================
+
+.. _thelia-structures-noneedforelse:
+
+Thelia
+^^^^^^
+
+:ref:`no-need-for-else`, in core/lib/Thelia/Core/Template/Loop/Address.php:92. 
+
+After checking that $currentCustomer is null, the method returns. The block with Else may be removed and its code may be moved one level up.
+
+.. code-block:: php
+
+    if ($customer === 'current') {
+                $currentCustomer = $this->securityContext->getCustomerUser();
+                if ($currentCustomer === null) {
+                    return null;
+                } else {
+                    $search->filterByCustomerId($currentCustomer->getId(), Criteria::EQUAL);
+                }
+            } else {
+                $search->filterByCustomerId($customer, Criteria::EQUAL);
+            }
+
+
+--------
+
+
+.. _thinkphp-structures-noneedforelse:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`no-need-for-else`, in core/lib/Thelia/Core/Template/Loop/Address.php:92. 
+
+This code has both good and bad example. Good : no use of else, after $_SESSION[$accessGuid] check. Issue : else usage after usage of !isset($accessList[strtoupper($appName)][strtoupper(CONTROLLER_NAME)][strtoupper(ACTION_NAME)])
+
+.. code-block:: php
+
+    if (empty($_SESSION[C('ADMIN_AUTH_KEY')])) {
+                    if (C('USER_AUTH_TYPE') == 2) {
+                        //加强验证和即时验证模式 更加安全 后台权限修改可以即时生效
+                        //通过数据库进行访问检查
+                        $accessList = self::getAccessList($_SESSION[C('USER_AUTH_KEY')]);
+                    } else {
+                        // 如果是管理员或者当前操作已经认证过，无需再次认证
+                        if ($_SESSION[$accessGuid]) {
+                            return true;
+                        }
+                        //登录验证模式，比较登录后保存的权限访问列表
+                        $accessList = $_SESSION['_ACCESS_LIST'];
+                    }
+                    //判断是否为组件化模式，如果是，验证其全模块名
+                    if (!isset($accessList[strtoupper($appName)][strtoupper(CONTROLLER_NAME)][strtoupper(ACTION_NAME)])) {
+                        $_SESSION[$accessGuid] = false;
+                        return false;
+                    } else {
+                        $_SESSION[$accessGuid] = true;
+                    }
 
 Strange Name For Variables
 ==========================
@@ -9257,6 +9317,67 @@ The function that holds that code is only used to call openconf.com, over http, 
     			curl_close($ch);
     			return($s);
 
+
+
+
+.. _openemr-structures-nohardcodedip:
+
+OpenEMR
+^^^^^^^
+
+:ref:``, in wp-admin/includes/misc.php:74. 
+
+Although they are commented just above, the values provided here are suspicious.
+
+.. code-block:: php
+
+    // FTP parameters that you must customize.  If you are not sending
+     // then set $FTP_SERVER to an empty string.
+     //
+     $FTP_SERVER = 192.168.0.30;
+     $FTP_USER   = openemr;
+     $FTP_PASS   = secret;
+     $FTP_DIR    = ;
+
+
+--------
+
+
+.. _nextcloud-structures-nohardcodedip:
+
+NextCloud
+^^^^^^^^^
+
+:ref:``, in config/config.sample.php:1561. 
+
+Although they are documented as empty array, 3 values are provided as examples. They do not responds, at the time of writing, but they may.
+
+.. code-block:: php
+
+    /**
+     * List of trusted proxy servers
+     *
+     * You may set this to an array containing a combination of
+     * - IPv4 addresses, e.g. `192.168.2.123`
+     * - IPv4 ranges in CIDR notation, e.g. `192.168.2.0/24`
+     * - IPv6 addresses, e.g. `fd9e:21a7:a92c:2323::1`
+     *
+     * _(CIDR notation for IPv6 is currently work in progress and thus not
+     * available as of yet)_
+     *
+     * When an incoming request's `REMOTE_ADDR` matches any of the IP addresses
+     * specified here, it is assumed to be a proxy instead of a client. Thus, the
+     * client IP will be read from the HTTP header specified in
+     * `forwarded_for_headers` instead of from `REMOTE_ADDR`.
+     *
+     * So if you configure `trusted_proxies`, also consider setting
+     * `forwarded_for_headers` which otherwise defaults to `HTTP_X_FORWARDED_FOR`
+     * (the `X-Forwarded-For` header).
+     *
+     * Defaults to an empty array.
+     */
+    'trusted_proxies' => array('203.0.113.45', '198.51.100.128', '192.168.2.0/24'),
+
 Unserialize Second Arg
 ======================
 
@@ -9494,6 +9615,59 @@ The extract() has been cleverly set in a closure, with a limited scope. The pote
                 extract($data);
                 return @include $view;
             };
+
+Property Variable Confusion
+===========================
+
+.. _phpipam-structures-propertyvariableconfusion:
+
+phpipam
+^^^^^^^
+
+:ref:`property-variable-confusion`, in functions/classes/class.Admin.php:16. 
+
+There is a property called '$users'. It is easy to mistake $this->users and $users. Also, it seems that $this->users may be used as a cache system, yet it is not employed here. 
+
+.. code-block:: php
+
+    /**
+    	 * (array of objects) to store users, user id is array index
+    	 *
+    	 * @var mixed
+    	 * @access public
+    	 */
+    	public $users;
+    
+    ////////////
+    
+    	/**
+    	 * Fetches all users that are in group
+    	 *
+    	 * @access public
+    	 * @return array of user ids
+    	 */
+    	public function group_fetch_users ($group_id) {
+    		$out = array ();
+    		# get all users
+    		$users = $this->fetch_all_objects(users);
+    		# check if $gid in array
+    		if($users!==false) {
+    			foreach($users as $u) {
+    				$group_array = json_decode($u->groups, true);
+    				$group_array = $this->groups_parse($group_array);
+    
+    				if(sizeof($group_array)>0) {
+    					foreach($group_array as $group) {
+    						if(in_array($group_id, $group)) {
+    							$out[] = $u->id;
+    						}
+    					}
+    				}
+    			}
+    		}
+    		# return
+    		return isset($out) ? $out : array();
+    	}
 
 Use session_start() Options
 ===========================

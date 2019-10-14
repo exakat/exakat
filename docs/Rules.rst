@@ -8,8 +8,62 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 07 Oct 2019 12:08:17 +0000
-.. comment: Generation hash : 2e695dbfa8e8660e8ed78cc24d0434d9c5315b37
+.. comment: Generation date : Mon, 14 Oct 2019 09:17:09 +0000
+.. comment: Generation hash : e664edadd7b7d0c9a83863a8eed1640cfc85b9be
+
+
+.. _:
+
+
+
+
+
+Do not leave hard coded IP in your code.
+
+It is recommended to move such configuration in external files or databases, for each update. 
+This may also come handy when testing. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This IPv4 is hardcoded. 
+   $ip = '183.207.224.50';
+   // This IPv6 is hardcoded. 
+   $ip = '2001:0db8:85a3:0000:0000:8a2e:0370:7334';
+   
+   // This looks like an IP
+   $thisIsNotAnIP = '213.187.99.50';
+   $thisIsNotAnIP = '2133:1387:9393:5330';
+   
+   ?>
+
+
+``127.0.0.1``, ``\:\:1`` and ``\:\:0`` are omitted, and not considered as a violation.
+
+See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_ and `Never hard code sensitive information <https://wiki.sei.cmu.edu/confluence/display/java/MSC03-J.+Never+hard+code+sensitive+information>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the hardcoded IP to an external source : environment variable, configuration file, database.
+* Remove the hardcoded IP and ask for it at execution.
+* Use a literal value for default messages in form.
+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Structures/NoHardcodedIp                                                           |
++-------------+------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                      |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
++-------------+------------------------------------------------------------------------------------+
+
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -249,7 +303,9 @@ Suggestions
 ###############
 
 
-PHP has the operator `** <http://www.php.net/manual/en/language.operators.arithmetic.php>`_ to provide exponents, instead of the slower function `pow() <http://www.php.net/pow>`_. This operator was introduced in PHP 5.6.
+The operator ``**`` calculates exponents, also known as power. 
+
+Use it instead of the slower function `pow() <http://www.php.net/pow>`_. This operator was introduced in PHP 5.6.
 
 .. code-block:: php
 
@@ -272,7 +328,7 @@ Be aware the the '-' operator has lower priority than the `** <http://www.php.ne
    ?>
 
 
-This is due to the parser that process separately ``-`` and the following number. Since ``**`` has priority, the power operation happens first.
+This is due to the parser that processes separately ``-`` and the following number. Since ``**`` has priority, the power operation happens first.
 
 Being an operator, ``**`` is faster than `pow() <http://www.php.net/pow>`_. This is a microoptimisation. 
 
@@ -282,14 +338,14 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 Suggestions
 ^^^^^^^^^^^
 
-* Use the ** operator
+* Use the ``**`` operator
 * For powers of 2, use the bitshift operators
-* For literal powers of 2, consider using the 0xFFFFFFFFF syntax.
+* For literal powers of 2, consider using the ``0xFFFFFFFFF`` syntax.
 
 +-------------+--------------------------------------------------------------+
 | Short name  | Php/NewExponent                                              |
 +-------------+--------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                           |
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable`                    |
 +-------------+--------------------------------------------------------------+
 | Php Version | With PHP 5.6 and more recent                                 |
 +-------------+--------------------------------------------------------------+
@@ -1354,6 +1410,29 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`mautic-functions-shouldbetypehinted`       |
 +-------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _arrays/weirdindex:
+
+Arrays/WeirdIndex
+#################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-------------------+
+| Short name  | Arrays/WeirdIndex |
++-------------+-------------------+
+| Rulesets    | :ref:`Analyze`    |
++-------------+-------------------+
+| Severity    | Minor             |
++-------------+-------------------+
+| Time To Fix | Quick (30 mins)   |
++-------------+-------------------+
 
 
 
@@ -4459,7 +4538,7 @@ Precedence between addition and concatenation has changed. In PHP 7.4, addition 
 
 From the RFC : ``Currently the precedence of '.', '+' and '-' operators are equal. Any combination of these operators are simply evaluated left-to-right``.
 
-This is counter-intuitive though: you rarely want to add or subtract concatenated strings which in general are not numbers. However, given PHPs capability of seamlessly converting an integer to a string, concatenation of these values is desired.``
+This is counter-intuitive though: you rarely want to add or subtract concatenated strings which in general are not numbers. However, given PHP's capability of seamlessly converting an integer to a string, concatenation of these values is desired.``
 
 .. code-block:: php
 
@@ -6065,7 +6144,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseDir                                                          |
 +-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`php-cs-fixable`                       |
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
@@ -7309,7 +7388,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------+
 | Short name  | Classes/DontUnsetProperties                                                          |
 +-------------+--------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`php-cs-fixable`                                  |
 +-------------+--------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                |
 +-------------+--------------------------------------------------------------------------------------+
@@ -7896,7 +7975,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/ElseIfElseif                                                               |
 +-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`Rector`                                  |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -8743,6 +8822,51 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 +-------------+--------------------------------+
 | Time To Fix | Instant (5 mins)               |
 +-------------+--------------------------------+
+
+
+
+.. _filter-to-add\_slashes():
+
+Filter To add_slashes()
+#######################
+
+
+``FILTER_SANITIZE_MAGIC_QUOTES`` is deprecated. In PHP 7.4, it should be replaced with `addslashes() <http://www.php.net/addslashes>`_
+
+According to the migration RDFC : 'Magic quotes were deprecated all the way back in PHP 5.3 and later removed in PHP 5.4. The filter extension implements a sanitization filter that mimics this behavior of magic_quotes by calling `addslashes() <http://www.php.net/addslashes>`_ on the input in question.'
+
+.. code-block:: php
+
+   <?php
+   
+   // Deprecated way to filter input
+   $var = filter_input($input, FILTER_SANITIZE_MAGIC_QUOTES);
+   
+   // Alternative way to filter input
+   $var = addslashes($input);
+   
+   ?>
+
+
+`addslashes() <http://www.php.net/addslashes>`_ used to filter data while building SQL queries, to prevent injections. Nowadays, prepared queries are a better option.
+
+See also `Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace ``FILTER_SANITIZE_MAGIC_QUOTES`` with addslashes()
+* Replace ``FILTER_SANITIZE_MAGIC_QUOTES`` with an adapted escaping system
+
++-------------+---------------------------+
+| Short name  | Php/FilterToAddSlashes    |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 
@@ -10909,15 +11033,15 @@ Suggestions
 
 * Add an empty string as first argument
 
-+-------------+--------------------+
-| Short name  | Php/ImplodeOneArg  |
-+-------------+--------------------+
-| Rulesets    | :ref:`Suggestions` |
-+-------------+--------------------+
-| Severity    | Minor              |
-+-------------+--------------------+
-| Time To Fix | Quick (30 mins)    |
-+-------------+--------------------+
++-------------+-------------------------------------------+
+| Short name  | Php/ImplodeOneArg                         |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
 
 
 
@@ -11104,7 +11228,7 @@ This is usually undesirable, as all code must compile before being executed. It 
    ?>
 
 
-Code that is incompilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
+Code that is not compilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
 
 When the code is used as a template for PHP code generation, for example at installation time, it is recommended to use a distinct file extension, so as to distinguish them from actual PHP code.
 
@@ -11245,7 +11369,7 @@ As a general rule of thumb, only use integers or strings that don\'t look like i
 
 This analyzer may find constant definitions, when available.
 
-Note also that PHP detects integer inside strings, and silently turn them into integers. Partial numbers and octals are not transformed.
+Note also that PHP detects integer inside strings, and silently turn them into integers. Partial and octal numbers are not transformed.
 
 .. code-block:: php
 
@@ -11898,6 +12022,47 @@ Suggestions
 
 
 
+.. _is\_a()-with-string:
+
+Is_A() With String
+##################
+
+
+When using `is_a() <http://www.php.net/is_a>`_ with a string as first argument, the third argument is compulsory.
+
+.. code-block:: php
+
+   <?php
+   
+   // is_a() works with string as first argument, when the third argument is 'true'
+   if (is_s('A', 'B', true)) {}
+   
+   // is_a() works with object as first argument
+   if (is_s(new A, 'A')) {}
+   ?>
+
+
+See also `is_a() <http://www.php.net/is_a>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the third argument, and set it to true
+* Use an object as a first argument
+
++-------------+-------------------------------+
+| Short name  | Php/IsAWithString             |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Rector` |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+
+
+
 .. _isset-multiple-arguments:
 
 Isset Multiple Arguments
@@ -11934,7 +12099,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Php/IssetMultipleArgs                                                         |
 +-------------+-------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                            |
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable`                                     |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Minor                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -12391,7 +12556,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Php/LogicalInLetters                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`, :ref:`php-cs-fixable`                           |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -13042,6 +13207,108 @@ Suggestions
 
 
 
+.. _mbstring-third-arg:
+
+Mbstring Third Arg
+##################
+
+
+Some mbstring functions use the third argument for offset, not for encoding.
+
+Those are the following functions : 
+
+* `mb_strrichr() <http://www.php.net/mb_strrichr>`_
+* `mb_stripos() <http://www.php.net/mb_stripos>`_
+* `mb_strrpos() <http://www.php.net/mb_strrpos>`_
+* `mb_strstr() <http://www.php.net/mb_strstr>`_
+* `mb_stristr() <http://www.php.net/mb_stristr>`_
+* `mb_strpos() <http://www.php.net/mb_strpos>`_
+* `mb_strripos() <http://www.php.net/mb_strripos>`_
+* `mb_strrchr() <http://www.php.net/mb_strrchr>`_
+* `mb_strrichr() <http://www.php.net/mb_strrichr>`_
+* `mb_substr() <http://www.php.net/mb_substr>`_
+
+.. code-block:: php
+
+   <?php
+   
+   // Display BC
+   echo mb_substr('ABC', 1 , 2, 'UTF8');
+   
+   // Yields Warning: mb_substr() expects parameter 3 to be int, string given
+   // Display 0 (aka, substring from 0, for length (int) 'UTF8' => 0)
+   echo mb_substr('ABC', 1 ,'UTF8');
+   
+   ?>
+
+
+See also `mb_substr() <http://www.php.net/mb_substr>`_ manual pages.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a third argument
+* Use the default encoding (aka, omit both third AND fourth argument)
+
++-------------+-----------------------------+
+| Short name  | Structures/MbstringThirdArg |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+
+
+
+.. _mbstring-unknown-encoding:
+
+Mbstring Unknown Encoding
+#########################
+
+
+The encoding used is not known to the ext/mbstring extension.
+
+This analysis takes in charge all ``mbstring`` encoding and aliases. The full list of supported mbstrin encoding is available with `mb_list_encodings() <http://www.php.net/mb_list_encodings>`_. Each encoding alias is available with `mb_encoding_aliases() <http://www.php.net/mb_encoding_aliases>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   // Invalid encoding
+   $str = mb_strtolower($str, 'utf_8');
+   
+   // Valid encoding
+   $str = mb_strtolower($str, 'utf8');
+   $str = mb_strtolower($str, 'UTF8');
+   $str = mb_strtolower($str, 'UTF-8');
+   
+   ?>
+
+
+See also `ext/mbstring <https://www.php.net/manual/en/book.mbstring.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a valid mbstring encoding
+
++-------------+------------------------------------+
+| Short name  | Structures/MbstringUnknownEncoding |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`                     |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _memoize-magiccall:
 
 Memoize MagicCall
@@ -13107,6 +13374,53 @@ Suggestions
 +-------------+------------------------------------+
 | Time To Fix | Quick (30 mins)                    |
 +-------------+------------------------------------+
+
+
+
+.. _merge-if-then:
+
+Merge If Then
+#############
+
+
+Two successive if/then into one, by merging the two conditions.
+
+.. code-block:: php
+
+   <?php
+   
+   // two merge conditions
+   if ($a == 1 && $b == 2) {
+       // doSomething()
+   }
+   
+   // two distinct conditions
+   // two nesting
+   if ($a == 1) {
+       if ($b == 2) {
+           // doSomething()
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Merge the two structures into one
+
++-------------+------------------------+
+| Short name  | Structures/MergeIfThen |
++-------------+------------------------+
+| Rulesets    | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
 
 
 
@@ -13518,17 +13832,17 @@ Suggestions
 
 * Match the typehint with the default value
 
-+-------------+---------------------------------------------------+
-| Short name  | Functions/MismatchTypeAndDefault                  |
-+-------------+---------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`            |
-+-------------+---------------------------------------------------+
-| Severity    | Critical                                          |
-+-------------+---------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                     |
-+-------------+---------------------------------------------------+
-| Examples    | :ref:`wordpress-functions-mismatchtypeanddefault` |
-+-------------+---------------------------------------------------+
++-------------+-----------------------------------------------------------+
+| Short name  | Functions/MismatchTypeAndDefault                          |
++-------------+-----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`Typechecks` |
++-------------+-----------------------------------------------------------+
+| Severity    | Critical                                                  |
++-------------+-----------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                             |
++-------------+-----------------------------------------------------------+
+| Examples    | :ref:`wordpress-functions-mismatchtypeanddefault`         |
++-------------+-----------------------------------------------------------+
 
 
 
@@ -13571,7 +13885,7 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Short name  | Functions/MismatchedDefaultArguments             |
 +-------------+--------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                   |
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`                |
 +-------------+--------------------------------------------------+
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
@@ -13672,7 +13986,7 @@ Suggestions
 +-------------+-----------------------------------------------+
 | Short name  | Functions/MismatchedTypehint                  |
 +-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                |
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`             |
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
@@ -14074,7 +14388,9 @@ Modernize Empty With Expression
 ###############################
 
 
-`empty() <http://www.php.net/empty>`_ accept expressions since PHP 5.5. There is no need to store the expression in a variable before testing, unless it is reused later.
+`empty() <http://www.php.net/empty>`_ accepts expressions as agument. This feature was added in PHP 5.5. 
+
+There is no need to store the expression in a variable before testing, unless it is reused later.
 
 .. code-block:: php
 
@@ -14102,7 +14418,8 @@ Modernize Empty With Expression
    ?>
 
 
-See also `empty() <http://www.php.net/empty>`_.
+See also `empty() <http://www.php.net/empty>`_ and 
+         `empty() supports arbitrary expressions <https://www.php.net/manual/en/migration55.new-features.php#migration55.new-features.empty>`.
 
 
 Suggestions
@@ -14665,15 +14982,15 @@ Suggestions
 
 * Merge all unset into one call
 
-+-------------+--------------------------+
-| Short name  | Structures/MultipleUnset |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Suggestions`       |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
++-------------+-------------------------------------------+
+| Short name  | Structures/MultipleUnset                  |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
 
 
 
@@ -15175,7 +15492,7 @@ Nested Ternary Without Parenthesis
 
 It is not allowed to nest ternary operator within itself, without parenthesis. This has been implemented in PHP 7.4.
 
-The reason behind this feature is to keep the code un ambiguous. See the Warning message for more explanations
+The reason behind this feature is to keep the code expressive. See the Warning message for more explanations
 
 .. code-block:: php
 
@@ -15940,6 +16257,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Create an interface with the important methods, and use that interface
+* Create an abstract class, when public properties are also needed
 
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Functions/NoClassAsTypehint                                                               |
@@ -16375,60 +16693,6 @@ Suggestions
 
 
 
-.. _no-hardcoded-ip:
-
-No Hardcoded Ip
-###############
-
-
-Do not leave hard coded IP in your code.
-
-It is recommended to move such configuration in external files or databases, for each update. 
-This may also come handy when testing. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This IPv4 is hardcoded. 
-   $ip = '183.207.224.50';
-   // This IPv6 is hardcoded. 
-   $ip = '2001:0db8:85a3:0000:0000:8a2e:0370:7334';
-   
-   // This looks like an IP
-   $thisIsNotAnIP = '213.187.99.50';
-   $thisIsNotAnIP = '2133:1387:9393:5330';
-   
-   ?>
-
-
-127.0.0.1, \:\:1 and \:\:0 are omitted, and not considered as a violation.à
-
-See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_ and `Never hard code sensitive information <https://wiki.sei.cmu.edu/confluence/display/java/MSC03-J.+Never+hard+code+sensitive+information>`_.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Move the hardcoded IP to an external source : environment variable, configuration file, database.
-* Remove the hardcoded IP and ask for it at execution.
-* Use a literal value for default messages in form.
-
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Structures/NoHardcodedIp                                                           |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                      |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
-+-------------+------------------------------------------------------------------------------------+
-
-
-
 .. _no-hardcoded-path:
 
 No Hardcoded Path
@@ -16471,7 +16735,7 @@ Suggestions
 * Add __DIR__ before the path to make it relative to the current file
 * Add a configured prefix before the path to point to any file in the system
 * Use sys_get_temp_dir() for temporary data
-* Use `include_path` argument function, such as fie_get_contents(), to have the file located in configurable directories.
+* Use ``include_path`` argument function, such as fie_get_contents(), to have the file located in configurable directories.
 
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoHardcodedPath                                                                        |
@@ -16754,15 +17018,24 @@ Else is not needed when the Then ends with a `break <http://www.php.net/manual/e
 
 See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_.
 
-+-------------+--------------------------+
-| Short name  | Structures/NoNeedForElse |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove else block, but keep the code
+
++-------------+----------------------------------------------------------------------------------+
+| Short name  | Structures/NoNeedForElse                                                         |
++-------------+----------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                   |
++-------------+----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                            |
++-------------+----------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                  |
++-------------+----------------------------------------------------------------------------------+
+| Examples    | :ref:`thelia-structures-noneedforelse`, :ref:`thinkphp-structures-noneedforelse` |
++-------------+----------------------------------------------------------------------------------+
 
 
 
@@ -18150,7 +18423,7 @@ See also `Logical Operators <http://php.net/manual/en/language.operators.logical
 Suggestions
 ^^^^^^^^^^^
 
-* Use (bool) casting operator for that
+* Use ``(bool)`` casting operator for that
 * Don't typecast, and let PHP handle it. This works in situations where the boolean is immediately used.
 
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -18259,7 +18532,7 @@ Numeric Literal Separator
 #########################
 
 
-Integer and floats may be written with internal underscorese. This way, it is possible to separate largee number into smaller paquets, andd make them more readable.
+Integer and floats may be written with internal underscores. This way, it is possible to separate large number into smaller groups, and make them more readable.
 
 Numeric Literal Separators were introduced in PHP 7.4 and are not backward compatible.
 
@@ -19957,17 +20230,17 @@ Suggestions
 
 * Use dirname()'s second argument
 
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/PHP7Dirname                                                                                                         |
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                          |
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                |
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`openconf-structures-php7dirname`, :ref:`mediawiki-structures-php7dirname`                                                |
-+-------------+--------------------------------------------------------------------------------------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/PHP7Dirname                                                                                                                                |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                 |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                       |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`openconf-structures-php7dirname`, :ref:`mediawiki-structures-php7dirname`                                                                       |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20884,17 +21157,17 @@ Suggestions
 
 * Do the work yourself, instead of giving it to PHP
 
-+-------------+--------------------------------------------------------+
-| Short name  | Structures/ShouldPreprocess                            |
-+-------------+--------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
-+-------------+--------------------------------------------------------+
-| Severity    | Minor                                                  |
-+-------------+--------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                       |
-+-------------+--------------------------------------------------------+
-| Examples    | :ref:`phpadsnew-structures-shouldpreprocess`           |
-+-------------+--------------------------------------------------------+
++-------------+-----------------------------------------------------------------------+
+| Short name  | Structures/ShouldPreprocess                                           |
++-------------+-----------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions`, :ref:`Rector` |
++-------------+-----------------------------------------------------------------------+
+| Severity    | Minor                                                                 |
++-------------+-----------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                      |
++-------------+-----------------------------------------------------------------------+
+| Examples    | :ref:`phpadsnew-structures-shouldpreprocess`                          |
++-------------+-----------------------------------------------------------------------+
 
 
 
@@ -21240,7 +21513,7 @@ Sometimes, when the property is going to be replaced by the incoming argument, o
 +-------------+-----------------------------------------------------+
 | Short name  | Structures/PropertyVariableConfusion                |
 +-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Semantics`                    |
+| Rulesets    | :ref:`Semantics`                                    |
 +-------------+-----------------------------------------------------+
 | Severity    | Minor                                               |
 +-------------+-----------------------------------------------------+
@@ -21303,7 +21576,7 @@ This optimisation is not always possible : for example, some SQL queries may not
 Suggestions
 ^^^^^^^^^^^
 
-* Batch calls by using WHERE clauses and applyin the same operation to all similar data
+* Batch calls by using WHERE clauses and applying the same operation to all similar data
 * Use native commands to avoid double query : REPLACE instead of SELECT-(UPDATE/INSERT), or UPSERT, for example
 
 +-------------+-----------------------------------------------------------------------------------+
@@ -22223,6 +22496,8 @@ Return With Parenthesis
 
 return statement doesn't need parenthesis. PHP tolerates them with return statement, but it is recommended not to use them. 
 
+From the PHP Manual : 'Note: Note that since return is a language construct and not a function, the parentheses surrounding its argument are not required and their use is discouraged.'.
+
 .. code-block:: php
 
    <?php
@@ -22242,15 +22517,24 @@ return statement doesn't need parenthesis. PHP tolerates them with return statem
    
    ?>
 
-+-------------+------------------------------------------------+
-| Short name  | Php/ReturnWithParenthesis                      |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
-+-------------+------------------------------------------------+
+
+See also `PHP return(value); vs return value; <https://stackoverflow.com/questions/2921843/php-returnvalue-vs-return-value>`_ and `return <https://www.php.net/manual/en/function.return.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the parenthesis
+
++-------------+--------------------------------------------------------------------+
+| Short name  | Php/ReturnWithParenthesis                                          |
++-------------+--------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Suggestions` |
++-------------+--------------------------------------------------------------------+
+| Severity    | Minor                                                              |
++-------------+--------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                   |
++-------------+--------------------------------------------------------------------+
 
 
 
@@ -29048,7 +29332,7 @@ It is faster to use === null instead of `is_null() <http://www.php.net/is_null>`
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/IsnullVsEqualNull                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                      |
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                               |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
@@ -29337,15 +29621,15 @@ Suggestions
 
 * Use the constant version, not the function.
 
-+-------------+------------------------+
-| Short name  | Structures/UseConstant |
-+-------------+------------------------+
-| Rulesets    | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
-+-------------+------------------------+
++-------------+---------------------------------------+
+| Short name  | Structures/UseConstant                |
++-------------+---------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable` |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Instant (5 mins)                      |
++-------------+---------------------------------------+
 
 
 
@@ -31060,15 +31344,23 @@ There is no need to overcast returned values.
 
 See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
 
-+-------------+---------------------------+
-| Short name  | Structures/UselessCasting |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Instant (5 mins)          |
-+-------------+---------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the type cast
+
++-------------+-------------------------------------------------------------------------------------+
+| Short name  | Structures/UselessCasting                                                           |
++-------------+-------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                      |
++-------------+-------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                               |
++-------------+-------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                    |
++-------------+-------------------------------------------------------------------------------------+
+| Examples    | :ref:`fuelcms-structures-uselesscasting`, :ref:`thinkphp-structures-uselesscasting` |
++-------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -32334,6 +32626,46 @@ Suggestions
 
 
 
+.. _wrong-case-namespaces:
+
+Wrong Case Namespaces
+#####################
+
+
+Namespaces are case-insentives.
+
+
+.. code-block:: php
+
+   <?php
+   
+   // Namespaces should share the same case
+   namespace X {}
+   
+   namespace x {}
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Synchronize all names
+
++-------------+----------------------+
+| Short name  | Namespaces/WrongCase |
++-------------+----------------------+
+| Rulesets    | none                 |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+
+
+
 .. _wrong-class-name-case:
 
 Wrong Class Name Case
@@ -32369,17 +32701,17 @@ Suggestions
 
 * Match the defined class name with the called name
 
-+-------------+------------------------------------------------------------------------------------------------+
-| Short name  | Classes/WrongCase                                                                              |
-+-------------+------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Coding Conventions <coding-conventions>` |
-+-------------+------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                          |
-+-------------+------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                               |
-+-------------+------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-wrongcase`                                                             |
-+-------------+------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Classes/WrongCase                                                                                                                              |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                          |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                                                               |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-classes-wrongcase`                                                                                                             |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -32679,6 +33011,52 @@ Suggestions
 +-------------+------------------------------------+
 | Time To Fix | Quick (30 mins)                    |
 +-------------+------------------------------------+
+
+
+
+.. _wrong-type-with-call:
+
+Wrong Type With Call
+####################
+
+
+This analysis checks that a call to a method uses the right literal values' types.
+
+Currently, this analysis doesn't take into account ``strict_types = 1``. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(string $a) {
+   
+   }
+   
+   // wrong type used
+   foo(1);
+   
+   // wrong type used
+   foo(1);
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the right type with all literals
+
++-------------+-----------------------------------+
+| Short name  | Functions/WrongTypeWithCall       |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks` |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
 
 
 

@@ -29,6 +29,7 @@ There are several reports that may be extracted from Exakat :
 * `Phpcsfixer`_
 * `PlantUml`_
 * `RadwellCode`_
+* `Rector`_
 * `Sarb`_
 * `SimpleTable`_
 * `Stats`_
@@ -115,11 +116,11 @@ This report displays all dependencies between classes, interfaces and traits. A 
 
 For example, `A` depends on `B`, because `A` extends `B`. 
 
-The resulting diagramm is in HTML file, which is readable with most browsers, from a web server. 
+The resulting diagram is in HTML file, which is readable with most browsers, from a web server. 
 
 Warning : for browser security reasons, the report will NOT load as a local file. It needs to be served by an HTTP server, so all resources are correctly located.
 
-Warning : large applicatoins (> 1000 classes) will require a lot of resources to open.
+Warning : large applications (> 1000 classes) will require a lot of resources to open.
 
 .. image:: images/report.classdependencieshtml.png
     :alt: Example of a Classes dependendies HTML report (0)
@@ -131,7 +132,7 @@ Classes dependendies HTML doesn't depend on themes.
 Clustergrammer
 ______________
 
-The Clustergrammar report format data for a clustergrammer diagramm.
+The Clustergrammar report format data for a clustergrammer diagram.
 
 Clustergrammer is a visualisation tool that may be found online. After generation of this report, a TEXT file is available in the project directory. Upload it on [http://amp.pharm.mssm.edu/clustergrammer/](http://amp.pharm.mssm.edu/clustergrammer/) to visualize it. 
 
@@ -852,11 +853,11 @@ This report displays all dependencies between files. A file depends on another w
 
 For example, `A.php` depends on `B.php`, because `A.php` uses the function `foo`, which is defined in the `B.php` file. On the other hand, `B.php` doesn't depends on `A.php`, as a function may be defined, but not used. 
 
-This diagramm shows which files may be used without others.
+This diagram shows which files may be used without others.
 
-The resulting diagramm is a DOT file, which is readable with [Graphviz](https://www.graphviz.org/about/). Those viewers will display the diagramm, and also convert it to other format, such as PNG, JPEG, PDF or others.  
+The resulting diagram is a DOT file, which is readable with [Graphviz](https://www.graphviz.org/about/). Those viewers will display the diagramm, and also convert it to other format, such as PNG, JPEG, PDF or others.  
 
-Another version of the same diagramm is called Filedependencieshtml
+Another version of the same diagram is called Filedependencieshtml
 
 .. image:: images/report.filedependencies.png
     :alt: Example of a File dependendies report (0)
@@ -874,15 +875,15 @@ This report displays all dependencies between files. A file depends on another w
 
 For example, `A.php` depends on `B.php`, because `A.php` uses the function `foo`, which is defined in the `B.php` file. On the other hand, `B.php` doesn't depends on `A.php`, as a function may be defined, but not used. 
 
-This diagramm shows which files may be used without others.
+This diagram shows which files may be used without others.
 
-The resulting diagramm is in HTML file, which is readable with most browsers, from a web server. 
+The resulting diagram is in HTML file, which is readable with most browsers, from a web server. 
 
 Warning : for browser security reasons, the report will NOT load as a local file. It needs to be served by an HTTP server, so all resources are correctly located.
 
 Warning : large applicatoins (> 1000 files) will require a lot of resources to open.
 
-Another version of the same diagramm is called Filedependencies, and produces a DOT file
+Another version of the same diagram is called Filedependencies, and produces a DOT file
 
 .. image:: images/report.filedependencieshtml.png
     :alt: Example of a File dependendies HTML report (0)
@@ -1389,6 +1390,41 @@ Note that all rules are not implemented, especially the 'coding conventions' one
 RadwellCode is a Text report format.
 
 RadwellCode depends on the following theme : RadwellCodes.
+
+Rector
+______
+
+Suggest configuration for Rector refactoring tool.
+
+The Rector report is a helper report for [Tomas Votruba](https://twitter.com/VotrubaT)'s [Rector](https://getrector.org/) tool.
+
+Some issues spotted by Exakat may be fixed automagically by Rector. Rector offers more than 370 (and counting) rules, that may save countless hours of work. 
+
+For example, [CombinedAssignRector](https://github.com/rectorphp/rector/blob/master/docs/AllRectorsOverview.md#combinedassignrector), simplifies ``$value = $value + 5`` into ``+$value += 5;``. On Exakat, the rule [Structures/CouldUseShortAssignation]((https://exakat.readthedocs.io/en/latest/Rules.html#could-use-short-assignation) spot those too.
+
+Not all exakat rules are covered by Rector, and vice-versa. [CompactToVariablesRector](https://github.com/rectorphp/rector/blob/master/docs/AllRectorsOverview.md#compacttovariablesrector) aims à skipping usage of compact(), while [Structures/CouldUseCompact](https://exakat.readthedocs.io/en/latest/Rules.html#could-use-compact) suggest the contrary. 
+
+Rector and Exakat both use different approaches to code review. It is recommended to review the changes before commiting them.
+
+Check [Rector](https://getrector.org/) website, its [rector github](https://github.com/rectorphp/rector) repository, and [Tomas Votruba](https://twitter.com/VotrubaT) account.
+
+
+
+::
+
+        /Phrozn/Vendor/Extra/scss.inc.php:594 Slow PHP built-in functions
+        /Phrozn/Vendor/Extra/scss.inc.php:2554 Too many nested if statements
+        /Phrozn/Vendor/Extra/scss.inc.php:1208 Long if-else blocks
+        /Phrozn/Vendor/Extra/scss.inc.php:1208 Too many nested if statements
+        /Phrozn/Vendor/Extra/scss.inc.php:3935 Wrong function / class name casing
+        /Phrozn/Vendor/Extra/scss.inc.php:3452 Too many nested if statements
+        /Phrozn/Site/View/OutputPath/Entry/Parametrized.php:58 Slow PHP built-in functions
+        /Phrozn/Runner/CommandLine/Callback/Init.php:82 Extra brackets and braces and quotes
+    
+
+Rector is a Text report format.
+
+Rector depends on the following theme : Rector.
 
 Sarb
 ____
