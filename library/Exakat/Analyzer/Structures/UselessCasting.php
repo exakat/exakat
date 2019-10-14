@@ -25,9 +25,14 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessCasting extends Analyzer {
+    public function dependsOn() {
+        return array('Complete/PropagateCalls',
+                    );
+    }
+
     public function analyze() {
         // Function returning a type, then casted to that type
-        $casts = array('T_STRING_CAST'  => 'string',
+        $casts = array('T_STRING_CAST'  => array('string', 'array'),
                        'T_BOOL_CAST'    => 'bool',
                        'T_INT_CAST'     => 'int',
                        'T_ARRAY_CAST'   => 'array',
@@ -37,12 +42,35 @@ class UselessCasting extends Analyzer {
         $returnTypes = self::$methods->getFunctionsByReturn();
         
         foreach($casts as $token => $type) {
+            if (is_array($type)) {
+                $returned = array();
+                foreach($type as $t) {
+                    $returned[] = $returnTypes[$t];
+                }
+                $returned = array_merge(...$returned);
+            } else {
+                $returned = $returnTypes[$type];
+            }
+            
+            // native PHP functions
             $this->atomIs('Cast')
                  ->tokenIs($token)
                  ->outIs('CAST')
                  ->outIsIE('CODE') // In case there are some parenthesis
                  ->atomIs('Functioncall')
-                 ->fullnspathIs($returnTypes[$type])
+                 ->fullnspathIs($returned)
+                 ->back('first');
+            $this->prepareQuery();
+            
+            // custom user methods
+            $this->atomIs('Cast')
+                 ->tokenIs($token)
+                 ->outIs('CAST')
+                 ->outIsIE('CODE') // In case there are some parenthesis
+                 ->atomIs(self::$CALLS)
+                 ->inIs('DEFINITION')
+                 ->outIs('RETURNTYPE')
+                 ->is('fullnspath', makeFullnspath($type))
                  ->back('first');
             $this->prepareQuery();
         }
@@ -50,8 +78,7 @@ class UselessCasting extends Analyzer {
         // (bool) ($a > 2)
         $this->atomIs('Cast')
              ->tokenIs('T_BOOL_CAST')
-             ->outIs('CAST')
-             ->outIsIE('CODE') // In case there are some parenthesis
+             ->followParAs('CAST')
              ->atomIs('Comparison')
              ->back('first');
         $this->prepareQuery();
@@ -59,8 +86,7 @@ class UselessCasting extends Analyzer {
         // (int) 100
         $this->atomIs('Cast')
              ->tokenIs('T_INT_CAST')
-             ->outIs('CAST')
-             ->outIsIE('CODE') // In case there are some parenthesis
+             ->followParAs('CAST')
              ->atomIs('Integer')
              ->back('first');
         $this->prepareQuery();
