@@ -11,8 +11,9 @@
 {"class":"ReflectionProperty", "method":"__construct", "throw":["ReflectionException"]},
 {"class":"Reflector", "method":"__construct", "throw":["ReflectionException"]},
 {"class":"ReflectionException", "method":"__construct", "throw":["ReflectionException"]},
+
 {"class":"Phar", "method":"mungServer", "throw":["UnexpectedValueException"]},
-{"class":"Phar", "method":"webphar", "throw":["PharException", "UnexpectedValueException"]},
+{"class":"Phar", "method":"webPhar", "throw":["PharException", "UnexpectedValueException"]},
 
 {"class":"Closure", "method":"fromcallable", "throw":["Typerror"]},
 {"class":"ArrayIterator", "method":"__construct", "throw":["InvalidArgumentException"]},
@@ -28,7 +29,6 @@
 
 
 {"function":"timezone_open", "throw":["Exception"]},
-{"function":"eval", "throw":["Exception"]},
 {"function":"sodium-crypto-kx-keypair", "throw":["Exception"]},
 {"function":"uopz_add_function", "throw":["Exception"]},
 {"function":"uopz_del_function", "throw":["Exception"]}
