@@ -133,6 +133,9 @@ modifications[] = ""
 ; A PHP error that may be emitted by the target faulty code
 ;phpError[] = ""
 
+; This is a safe guard, to find quickly missed docs
+inited="Not yet";
+
 INI;
 
 file_put_contents("human/en/$analyzer.ini", $ini);
