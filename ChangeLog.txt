@@ -1,4 +1,4 @@
-Version 1.9.9 (Lasting Prosperity Star of True Man, coming up)
+Version 2.0.0 (Civil Star of Mystery and Darkness, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,35 @@ Version 1.9.9 (Lasting Prosperity Star of True Man, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.9.9 (Lasting Prosperity Star of True Man, 2019-10-14)
++ Architecture
+    + Documentation review
++ Report
+    + New reports : Stubs, Rector
+    + Typehint stats
+    + Stubs takes into account use expression
+    + Added Concrete5 and Typo3 as vendors
++ Analysis
+    + New analysis : checks on is_a third argument
+    + New analysis : Invalid mbstring encodings
+    + New analysis : Weird Index in arrays
+    + New analysis : Avoid FILTER_SANITIZE_MAGIC_QUOTES
+    + New analysis : Don't forget third argument
+    + New analysis : Hard to update methods
+    + New analysis : Merge two ifthen into one
+    + New analysis : Report wrong type with calls
+    + New analysis : Check case for namespaces
+    + Updated analysis : Undefined interfaces now includes interfaces extensions
+    + Updated analysis : Report more wrong types with return type 
+    + Updated analysis : Register globals also applied to class
+    + Updated analysis : Could Use Try covers more new, functions and static calls
+    + Updated analysis : Useless Cast also reports (string) array (always Array)
+    + Checked unit tests : 3343 / 3366 test pass (99% pass)
++ Tokenizer
+    + Create default values for foreach
+    + Load captures empty files, and omit them
+    + Create default values also handles ??=
 
 Version 1.9.8 (Giant Gate Star of Dark Essence, 2019-10-07)
 + Architecture
@@ -27,6 +56,7 @@ Version 1.9.8 (Giant Gate Star of Dark Essence, 2019-10-07)
     + Updated analysis : String Holding Variables now skips default, const, sprintf
     + Updated analysis : Binaries are not confused with hex
     + Updated analysis : Extended 'Insufficient typehint' to abstract classes
+    + Checked unit tests : 3324 / 3343 test pass (99% pass)
 + Tokenizer
     + Fixed handling of large powers
     + Added more escaping when storing to SQLITE
