@@ -51,7 +51,7 @@ class ReportConfig {
             $this->format      = $config;
             $this->name        = $config;
             $this->rulesets    = $exakat_config->project_rulesets ?? array();
-            $this->destination = $exakat_config->file ?? constant("\Exakat\Reports\\$config::FILE_FILENAME");
+            $this->destination = $exakat_config->file ?: constant("\Exakat\Reports\\$config::FILE_FILENAME");
         } else {
             throw new NoSuchReport($config);
         }
