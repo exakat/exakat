@@ -834,12 +834,6 @@ GREMLIN;
         return $this;
     }
 
-    public function isHash($property, $hash, $index) {
-        $this->query->isHash($property, $hash, $index);
-
-        return $this;
-    }
-    
     public function isGlobalCode() {
         $this->query->IsGlobalCode();
 

@@ -28,7 +28,20 @@ use Exakat\Analyzer\Analyzer;
 
 class IsHash extends DSL {
     public function run() {
-        list($property, $hash, $index) = func_get_args();
+        switch (func_num_args()) {
+            case 3 : 
+                list($property, $hash, $index) = func_get_args();
+                $case = Analyzer::CASE_SENSITIVE;
+                break;
+
+            case 4 : 
+                list($property, $hash, $index, $case) = func_get_args();
+                assert(in_array($case, array(Analyzer::CASE_INSENSITIVE, Analyzer::CASE_SENSITIVE)));
+                break;
+                
+            default:
+                assert(false, "Wrong number of arguments for ".__METHOD__);
+        }
 
         if (empty($hash)) {
             return new Command(Query::STOP_QUERY);
@@ -36,7 +49,11 @@ class IsHash extends DSL {
 
         assert($this->assertProperty($property));
         
-        return new Command("has(\"$property\").filter{ it.get().value(\"$property\") in ***[$index]}", array($hash));
+        if ($case === Analyzer::CASE_INSENSITIVE) {
+            return new Command("has(\"$property\").filter{ x = ***[$index].collect{ it.toLowerCase() }; it.get().value(\"$property\").toLowerCase() in x; }", array($hash));
+        } else {
+            return new Command("has(\"$property\").filter{ it.get().value(\"$property\") in ***[$index]}", array($hash));
+        }
     }
 }
 ?>

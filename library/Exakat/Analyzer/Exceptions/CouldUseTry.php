@@ -72,17 +72,49 @@ class CouldUseTry extends Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // All reflection classes must catch ReflectionExpression
-        $reflectionClasses = $this->loadIni('reflection.ini', 'classes');
-        $reflectionFNP = makeFullNsPath($reflectionClasses);
+        $throws = $this->loadJson('throw_exceptions.json');
+        $functions = array();
+        $news = array();
+        $methods = array();
+
+        foreach($throws as $throw) {
+            if (isset($throw->function)) {
+                $functions[] = makeFullnspath($throw->function);
+            } elseif (isset($throw->class)) {
+                if ($throw->method === '__construct') {
+                    $news[] = makeFullnspath($throw->class);
+                } else {
+                    array_collect_by($methods, makeFullnspath($throw->class),  $throw->method);
+                }
+            }
+        }
+
         $this->atomIs('New')
              ->outIs('NEW')
-             ->is('fullnspath', $reflectionFNP)
+             ->is('fullnspath', $news)
              ->hasNoTryCatch();
         $this->prepareQuery();
 
-        //Phar::mungServer()
+        $this->atomFunctionIs($functions)
+             ->hasNoTryCatch();
+        $this->prepareQuery();
+
         $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->is('fullnspath', array_keys($methods))
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->back('first')
+             
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->isHash('fullcode', $methods, 'fqn', self::CASE_INSENSITIVE)
+             ->hasNoTryCatch()
+             ->back('first');
+        $this->prepareQuery();
+
+        /* Not yet available : No DEFINITION link to the native PHP classes
+        $this->atomIs('Methodcall')
+             
              ->outIs('CLASS')
              ->is('fullnspath', '\\phar')
              ->inIs('CLASS')
@@ -91,6 +123,7 @@ class CouldUseTry extends Analyzer {
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();
+        */
     }
 }
 

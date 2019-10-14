@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class CouldUseTry extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testExceptions_CouldUseTry01()  { $this->generic_test('Exceptions/CouldUseTry.01'); }
     public function testExceptions_CouldUseTry02()  { $this->generic_test('Exceptions/CouldUseTry.02'); }
@@ -15,5 +15,6 @@ class CouldUseTry extends Analyzer {
     public function testExceptions_CouldUseTry04()  { $this->generic_test('Exceptions/CouldUseTry.04'); }
     public function testExceptions_CouldUseTry05()  { $this->generic_test('Exceptions/CouldUseTry.05'); }
     public function testExceptions_CouldUseTry06()  { $this->generic_test('Exceptions/CouldUseTry.06'); }
+    public function testExceptions_CouldUseTry07()  { $this->generic_test('Exceptions/CouldUseTry.07'); }
 }
 ?>
