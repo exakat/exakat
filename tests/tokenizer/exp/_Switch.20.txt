@@ -3,50 +3,20 @@ Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      16
-      Label : CONCAT
-        15
-      Label : CONCAT
-        17
-        Label : ARGUMENT
-          23
-          Label : METHOD
-            20
-            Label : ARGUMENT
-              21
-            Label : NAME
-              20
-          Label : OBJECT
-            18
-        Label : NAME
-          17
-      Label : CONCAT
-        24
-    Label : DEFAULT
-      16
-      Label : CONCAT
-        15
-      Label : CONCAT
-        17
-        Label : ARGUMENT
-          23
-          Label : METHOD
-            20
-            Label : ARGUMENT
-              21
-            Label : NAME
-              20
-          Label : OBJECT
-            18
-        Label : NAME
-          17
-      Label : CONCAT
-        24
     Label : DEFINITION
       13
     Label : DEFINITION
       13
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : GLOBAL
   18
   Label : DEFINITION
@@ -59,36 +29,14 @@ Label : GLOBAL
   25
   Label : DEFINITION
     25
-    Label : DEFAULT
-      27
-    Label : DEFAULT
-      27
     Label : DEFINITION
       25
     Label : DEFINITION
       25
-Label : GLOBAL
-  6
-  Label : DEFINITION
-    6
-    Label : DEFAULT
-      12
-    Label : DEFAULT
-      12
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
-    Label : DEFINITION
-      6
 Label : PROJECT
   1
   Label : DEFINITION
     6
-    Label : DEFAULT
-      12
-    Label : DEFAULT
-      12
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -97,46 +45,6 @@ Label : PROJECT
       6
   Label : DEFINITION
     13
-    Label : DEFAULT
-      16
-      Label : CONCAT
-        15
-      Label : CONCAT
-        17
-        Label : ARGUMENT
-          23
-          Label : METHOD
-            20
-            Label : ARGUMENT
-              21
-            Label : NAME
-              20
-          Label : OBJECT
-            18
-        Label : NAME
-          17
-      Label : CONCAT
-        24
-    Label : DEFAULT
-      16
-      Label : CONCAT
-        15
-      Label : CONCAT
-        17
-        Label : ARGUMENT
-          23
-          Label : METHOD
-            20
-            Label : ARGUMENT
-              21
-            Label : NAME
-              20
-          Label : OBJECT
-            18
-        Label : NAME
-          17
-      Label : CONCAT
-        24
     Label : DEFINITION
       13
     Label : DEFINITION
@@ -149,10 +57,6 @@ Label : PROJECT
       18
   Label : DEFINITION
     25
-    Label : DEFAULT
-      27
-    Label : DEFAULT
-      27
     Label : DEFINITION
       25
     Label : DEFINITION

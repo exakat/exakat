@@ -3,62 +3,8 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      42
     Label : DEFINITION
       11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
-    Label : DEFAULT
-      36
-    Label : DEFAULT
-      20
-    Label : DEFAULT
-      14
-    Label : DEFAULT
-      45
-    Label : DEFAULT
-      23
-    Label : DEFAULT
-      39
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      33
-    Label : DEFAULT
-      26
-    Label : DEFINITION
-      11
-Label : GLOBAL
-  6
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-Label : PROJECT
-  1
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
-    11
-    Label : DEFAULT
-      42
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -77,24 +23,38 @@ Label : PROJECT
       11
     Label : DEFINITION
       11
-    Label : DEFAULT
-      36
-    Label : DEFAULT
-      20
-    Label : DEFAULT
-      14
-    Label : DEFAULT
-      45
-    Label : DEFAULT
-      23
-    Label : DEFAULT
-      39
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      33
-    Label : DEFAULT
-      26
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
     Label : DEFINITION
       11
   Label : FILE

@@ -23,7 +23,5 @@ Label : PROJECT
             8
             Label : EXPRESSION
               9
-              Label : CODE
-                3
           Label : CONDITION
             6

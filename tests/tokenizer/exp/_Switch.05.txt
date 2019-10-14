@@ -25,61 +25,41 @@ Label : PROJECT
               9
               Label : CASE
                 10
-              Label : CODE
-                3
             Label : EXPRESSION
               11
               Label : CASE
                 12
-              Label : CODE
-                3
             Label : EXPRESSION
               13
               Label : CASE
                 14
-              Label : CODE
-                3
             Label : EXPRESSION
               15
               Label : CASE
                 16
-              Label : CODE
-                3
             Label : EXPRESSION
               17
               Label : CASE
                 18
-              Label : CODE
-                3
             Label : EXPRESSION
               19
               Label : CASE
                 20
-              Label : CODE
-                3
             Label : EXPRESSION
               21
               Label : CASE
                 22
-              Label : CODE
-                3
             Label : EXPRESSION
               23
               Label : CASE
                 24
-              Label : CODE
-                3
             Label : EXPRESSION
               25
               Label : CASE
                 26
-              Label : CODE
-                3
             Label : EXPRESSION
               27
               Label : CASE
                 28
-              Label : CODE
-                3
           Label : CONDITION
             6

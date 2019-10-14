@@ -25,7 +25,5 @@ Label : PROJECT
               9
               Label : CASE
                 10
-              Label : CODE
-                3
           Label : CONDITION
             6

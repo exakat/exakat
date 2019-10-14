@@ -3,22 +3,12 @@ Label : GLOBAL
   27
   Label : DEFINITION
     27
-    Label : DEFAULT
-      28
     Label : DEFINITION
       27
 Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      24
-      Label : ARGUMENT
-        8
-      Label : NAME
-        24
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -39,8 +29,6 @@ Label : GLOBAL
   36
   Label : DEFINITION
     36
-    Label : DEFAULT
-      15
     Label : DEFINITION
       36
     Label : DEFINITION
@@ -67,14 +55,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     8
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      24
-      Label : ARGUMENT
-        8
-      Label : NAME
-        24
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -93,14 +73,10 @@ Label : PROJECT
       8
   Label : DEFINITION
     27
-    Label : DEFAULT
-      28
     Label : DEFINITION
       27
   Label : DEFINITION
     36
-    Label : DEFAULT
-      15
     Label : DEFINITION
       36
     Label : DEFINITION
@@ -219,16 +195,6 @@ Label : PROJECT
                   36
                 Label : VALUE
                   37
-                Label : VALUE
-                  37
-                  Label : DEFINITION
-                    37
-                  Label : DEFINITION
-                    37
-                  Label : DEFINITION
-                    37
-                  Label : DEFINITION
-                    37
           Label : THEN
             9
             Label : EXPRESSION

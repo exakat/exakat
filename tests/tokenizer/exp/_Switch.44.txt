@@ -3,12 +3,6 @@ Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      20
-      Label : LEFT
-        10
-      Label : RIGHT
-        21
     Label : DEFINITION
       17
 Label : GLOBAL
@@ -22,21 +16,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    17
-    Label : DEFAULT
-      20
-      Label : LEFT
-        10
-      Label : RIGHT
-        21
-    Label : DEFINITION
-      17
-  Label : DEFINITION
     6
     Label : DEFINITION
       6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -91,3 +79,7 @@ Label : PROJECT
           14
         Label : EXPRESSION
           14
+  Label : RETURNED
+    12
+  Label : RETURNED
+    12

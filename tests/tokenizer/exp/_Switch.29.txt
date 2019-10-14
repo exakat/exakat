@@ -15,26 +15,12 @@ Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
     Label : DEFINITION
       15
 Label : GLOBAL
   23
   Label : DEFINITION
     23
-    Label : DEFAULT
-      32
-      Label : CLASS
-        25
-      Label : METHOD
-        27
-        Label : ARGUMENT
-          28
-        Label : ARGUMENT
-          30
-        Label : NAME
-          27
     Label : DEFINITION
       23
 Label : GLOBAL
@@ -67,24 +53,10 @@ Label : PROJECT
       11
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
     Label : DEFINITION
       15
   Label : DEFINITION
     23
-    Label : DEFAULT
-      32
-      Label : CLASS
-        25
-      Label : METHOD
-        27
-        Label : ARGUMENT
-          28
-        Label : ARGUMENT
-          30
-        Label : NAME
-          27
     Label : DEFINITION
       23
   Label : DEFINITION

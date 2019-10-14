@@ -11,14 +11,6 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      52
-    Label : DEFAULT
-      49
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -43,8 +35,6 @@ Label : GLOBAL
   31
   Label : DEFINITION
     31
-    Label : DEFAULT
-      33
     Label : DEFINITION
       31
 Label : GLOBAL
@@ -63,8 +53,6 @@ Label : GLOBAL
   41
   Label : DEFINITION
     41
-    Label : DEFAULT
-      43
     Label : DEFINITION
       41
 Label : PROJECT
@@ -77,14 +65,6 @@ Label : PROJECT
       6
   Label : DEFINITION
     11
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      52
-    Label : DEFAULT
-      49
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -103,8 +83,6 @@ Label : PROJECT
       26
   Label : DEFINITION
     31
-    Label : DEFAULT
-      33
     Label : DEFINITION
       31
   Label : DEFINITION
@@ -117,8 +95,6 @@ Label : PROJECT
       37
   Label : DEFINITION
     41
-    Label : DEFAULT
-      43
     Label : DEFINITION
       41
   Label : FILE

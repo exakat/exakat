@@ -9,28 +9,18 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
 Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
     Label : DEFINITION
       15
 Label : GLOBAL
   20
   Label : DEFINITION
     20
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
     Label : DEFINITION
       20
 Label : GLOBAL
@@ -71,24 +61,14 @@ Label : PROJECT
       6
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
   Label : DEFINITION
     15
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
     Label : DEFINITION
       15
   Label : DEFINITION
     20
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
     Label : DEFINITION
       20
   Label : DEFINITION
@@ -161,14 +141,6 @@ Label : PROJECT
                     23
                   Label : VALUE
                     27
-                  Label : VALUE
-                    25
-                    Label : DEFINITION
-                      25
-                  Label : VALUE
-                    27
-                    Label : DEFINITION
-                      27
                 Label : EXPRESSION
                   30
                   Label : CONDITION
@@ -189,3 +161,5 @@ Label : PROJECT
                     38
           Label : CONDITION
             6
+  Label : RETURNED
+    38

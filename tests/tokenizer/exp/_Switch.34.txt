@@ -9,46 +9,6 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        23
-        Label : LEFT
-          20
-          Label : ARGUMENT
-            21
-          Label : NAME
-            20
-        Label : RIGHT
-          31
-          Label : LEFT
-            24
-            Label : CODE
-              28
-              Label : LEFT
-                24
-                Label : CODE
-                  27
-                  Label : LEFT
-                    25
-                  Label : RIGHT
-                    13
-              Label : RIGHT
-                20
-                Label : ARGUMENT
-                  29
-                Label : NAME
-                  20
-          Label : RIGHT
-            32
-      Label : ARGUMENT
-        34
-      Label : ARGUMENT
-        35
-      Label : NAME
-        17
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -71,46 +31,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     10
-    Label : DEFAULT
-      17
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        23
-        Label : LEFT
-          20
-          Label : ARGUMENT
-            21
-          Label : NAME
-            20
-        Label : RIGHT
-          31
-          Label : LEFT
-            24
-            Label : CODE
-              28
-              Label : LEFT
-                24
-                Label : CODE
-                  27
-                  Label : LEFT
-                    25
-                  Label : RIGHT
-                    13
-              Label : RIGHT
-                20
-                Label : ARGUMENT
-                  29
-                Label : NAME
-                  20
-          Label : RIGHT
-            32
-      Label : ARGUMENT
-        34
-      Label : ARGUMENT
-        35
-      Label : NAME
-        17
     Label : DEFINITION
       10
     Label : DEFINITION

@@ -9,12 +9,6 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      16
-      Label : LEFT
-        14
-      Label : RIGHT
-        17
     Label : DEFINITION
       11
 Label : GLOBAL
@@ -49,12 +43,6 @@ Label : PROJECT
       6
   Label : DEFINITION
     11
-    Label : DEFAULT
-      16
-      Label : LEFT
-        14
-      Label : RIGHT
-        17
     Label : DEFINITION
       11
   Label : DEFINITION
@@ -129,3 +117,5 @@ Label : PROJECT
                     20
           Label : CONDITION
             6
+  Label : RETURNED, RETURNED
+    31

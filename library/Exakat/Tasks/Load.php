@@ -129,6 +129,7 @@ class Load extends Tasks {
     private $currentParentClassTrait = array();
     private $currentProperties       = array();
     private $currentPropertiesCalls  = array();
+    private $cases                   = array();
 
     private $tokens = array();
     private $id     = 0;
@@ -3628,6 +3629,20 @@ class Load extends Tasks {
             ++$this->id; // Skip :
         }
 
+        $default->code     = $this->tokens[$current][1];
+        $default->fullcode = $this->tokens[$current][1] . ' : ' . self::FULLCODE_SEQUENCE;
+        $default->token    = $this->getToken($this->tokens[$current][0]);
+
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
+                                                            $this->phptokens::T_CASE,
+                                                            $this->phptokens::T_DEFAULT,
+                                                            $this->phptokens::T_ENDSWITCH))) {
+            $this->cases[] = array($default, null);
+            $this->pushExpression($default);
+
+            return $default ;
+        }
+
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
                                                                 $this->phptokens::T_CASE,
@@ -3637,13 +3652,22 @@ class Load extends Tasks {
             $this->processNext();
         }
         $code = $this->sequence;
-        $this->addLink($default, $code, 'CODE');
         $this->endSequence();
 
-        $default->code     = $this->tokens[$current][1];
-        $default->fullcode = $this->tokens[$current][1] . ' : ' . self::FULLCODE_SEQUENCE;
-        $default->token    = $this->getToken($this->tokens[$current][0]);
-        $this->runPlugins($default, array( 'CODE' => $code));
+        foreach($this->cases as $aCase) {
+            $this->addLink($aCase[0], $code, 'CODE');
+
+            if ($aCase[0]->atom === 'Default') {
+                $this->runPlugins($aCase[0], array('CODE' => $code));
+            } else {
+                $this->runPlugins($aCase[0], array('CASE' => $aCase[1],
+                                                   'CODE' => $code));
+            }
+        }
+        $this->cases = array();
+
+        $this->addLink($default, $code, 'CODE');
+        $this->runPlugins($default, array('CODE' => $code));
 
         $this->pushExpression($default);
 
@@ -3674,6 +3698,20 @@ class Load extends Tasks {
             ++$this->id; // Skip :
         }
 
+        $case->code     = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
+        $case->fullcode = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
+        $case->token    = $this->getToken($this->tokens[$current][0]);
+
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
+                                                            $this->phptokens::T_CASE,
+                                                            $this->phptokens::T_DEFAULT,
+                                                            $this->phptokens::T_ENDSWITCH))) {
+            $this->cases[] = array($case, $item);
+            $this->pushExpression($case);
+
+            return $case;
+        }
+
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
                                                                 $this->phptokens::T_CASE,
@@ -3682,14 +3720,24 @@ class Load extends Tasks {
                 STRICT_COMPARISON)) {
             $this->processNext();
         }
-        $code = $this->sequence;
-        $this->addLink($case, $code, 'CODE');
-        $this->endSequence();
 
-        $case->code     = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
-        $case->fullcode = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
-        $case->token    = $this->getToken($this->tokens[$current][0]);
+        $code = $this->sequence;
+        $this->endSequence();
         
+        foreach($this->cases as $aCase) {
+            $this->addLink($aCase[0], $code, 'CODE');
+
+            if ($aCase[0]->atom === 'Default') {
+                $this->runPlugins($aCase[0], array( 'CODE' => $code));
+            } else {
+                $this->runPlugins($aCase[0], array('CASE' => $aCase[1],
+                                                   'CODE' => $code));
+            }
+        }
+        $this->cases = array();
+
+        $this->addLink($case, $code, 'CODE');
+
         $this->runPlugins($case, array( 'CASE' => $item,
                                         'CODE' => $code));
         $this->pushExpression($case);
@@ -3720,7 +3768,7 @@ class Load extends Tasks {
 
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
-        $rank = 0;
+        $rank = -1;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
             $void = $this->addAtomVoid();
             $this->addLink($cases, $void, 'EXPRESSION');
@@ -3737,16 +3785,16 @@ class Load extends Tasks {
                 $finals = array($this->phptokens::T_ENDSWITCH);
             }
             while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
-                $this->processNext();
+                $case = $this->processNext();
 
-                $case = $this->popExpression();
+                $this->popExpression();
                 $this->addLink($cases, $case, 'EXPRESSION');
                 $case->rank = ++$rank;
                 $extraCases[] = $case;
             }
         }
         ++$this->id;
-        $cases->count = $rank;
+        $cases->count = $rank + 1;
 
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1] . ' (' . $name->fullcode . ') :' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id][1];

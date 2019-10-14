@@ -37,6 +37,20 @@ Label : PROJECT
                 12
               Label : CODE
                 3
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    17
+                    Label : MEMBER
+                      7
+                    Label : OBJECT
+                      15
+                  Label : RIGHT
+                    19
+                Label : EXPRESSION
+                  21
+                  Label : BREAK
+                    22
             Label : EXPRESSION
               13
               Label : CASE

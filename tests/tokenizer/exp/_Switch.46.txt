@@ -47,6 +47,24 @@ Label : PROJECT
                   21
               Label : CODE
                 3
+                Label : EXPRESSION
+                  29
+                  Label : LEFT
+                    27
+                  Label : RIGHT
+                    30
+                    Label : ARGUMENT
+                      8
+                      Label : MEMBER
+                        31
+                      Label : OBJECT
+                        6
+                    Label : NAME
+                      30
+                Label : EXPRESSION
+                  18
+                  Label : BREAK
+                    16
             Label : EXPRESSION
               23
               Label : CASE
@@ -89,3 +107,5 @@ Label : PROJECT
               7
             Label : OBJECT
               6
+  Label : RETURNED
+    34
