@@ -2421,7 +2421,7 @@ SQL;
     }
 
     protected function generateFixesPhpCsFixer(Section $section) {
-        $phpcsfixer = new PhpCsFixer($this->config);
+        $phpcsfixer = new Phpcsfixer($this->config);
         $report = $phpcsfixer->generate(null, Reports::INLINE);
 
         $configline = trim($report);
