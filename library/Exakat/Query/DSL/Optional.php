@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class Optional extends DSL {
     public function run() : Command {
-        assert(func_num_args() === 1, "Wrong number of arguments with ".__METHOD__.". ".func_num_args()." provided, while 1 is expected.");
+        assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__ . '. ' . func_num_args() . ' provided, while 1 is expected.');
 
         list($filter) = func_get_args();
         

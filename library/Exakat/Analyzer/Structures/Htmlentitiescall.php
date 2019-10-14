@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Htmlentitiescall extends Analyzer {
     public function analyze() {
-        $html_functions = array('\\htmlentities', 
+        $html_functions = array('\\htmlentities',
                                 '\\htmlspecialchars',
                                );
 

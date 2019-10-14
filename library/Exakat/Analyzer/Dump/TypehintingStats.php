@@ -103,9 +103,9 @@ class TypehintingStats extends Analyzer {
         $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable');
         $return = $return + $scalartypes;
 
-        $atoms = array('all'            => self::$FUNCTIONS_ALL, 
-                       'function'       => 'Function', 
-                       'method'         => array('Method', 'Magicmethod'), 
+        $atoms = array('all'            => self::$FUNCTIONS_ALL,
+                       'function'       => 'Function',
+                       'method'         => array('Method', 'Magicmethod'),
                        'closure'        => 'Closure',
                        'arrowfunction'  => 'Arrowfunction',
                        );

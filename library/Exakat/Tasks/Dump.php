@@ -1302,9 +1302,9 @@ GREMLIN;
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "'" .
                        ', ' . $citId[$row['class']] .
                        ", '" . $visibility . "'" .
-                       ", '" . $this->sqlite->escapeString($row['value']) . "'".
-                       ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'".
-                       ")";
+                       ", '" . $this->sqlite->escapeString($row['value']) . "'" .
+                       ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'" .
+                       ')';
 
             ++$total;
         }
@@ -1381,7 +1381,7 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', '" . $namespacesId[$row['namespace']] . 
+            $query[] = "(null, '" . $this->sqlite->escapeString(trim($row['name'], "'\"")) . "', '" . $namespacesId[$row['namespace']] .
                         "', '" . $this->files[$row['file']] . "', '" . $this->sqlite->escapeString($row['value']) . "', 
                         '" . $this->sqlite->escapeString($row['type']) . "', '" . $this->sqlite->escapeString($row['phpdoc']) . "')";
 

@@ -57,13 +57,13 @@ use Exakat\Loader\Collector;
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
     
-    private $SCALAR_TYPE = array('int', 
-                                 'bool', 
-                                 'void', 
-                                 'float', 
-                                 'string', 
-                                 'array', 
-                                 'callable', 
+    private $SCALAR_TYPE = array('int',
+                                 'bool',
+                                 'void',
+                                 'float',
+                                 'string',
+                                 'array',
+                                 'callable',
                                  'iterable',
                                  );
     private $PHP_SUPERGLOBALS = array('$GLOBALS',

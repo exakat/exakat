@@ -54,14 +54,14 @@ class Phpcsfixer extends Reports {
         $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count >= 1');
         $rules = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $name = "'".$this->matches[$row['analyzer']]."'";
+            $name = "'" . $this->matches[$row['analyzer']] . "'";
             $rules[] = sprintf('            %- 30s => true,', $name);
             $this->count();
         }
         natcasesort($rules);
         
         $date = date('Y-m-d h:i:j');
-        $version = Exakat::VERSION . '- build '. Exakat::BUILD; 
+        $version = Exakat::VERSION . '- build ' . Exakat::BUILD;
         
         $rules = implode(PHP_EOL, $rules);
 

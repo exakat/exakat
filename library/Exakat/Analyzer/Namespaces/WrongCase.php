@@ -37,7 +37,7 @@ class WrongCase extends Analyzer {
         $all = array_map('mb_strtolower', $all);
         $stats = array_count_values($all);
         
-        $doubles = array_filter($stats, function($x) { return $x > 1; });
+        $doubles = array_filter($stats, function ($x) { return $x > 1; });
         
         if (empty($doubles)) {
             return;

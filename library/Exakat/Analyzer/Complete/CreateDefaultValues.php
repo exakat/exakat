@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 class CreateDefaultValues extends Analyzer {
     public function analyze() {
         // Link initial values for containers
-        $this->atomIs(array('Variabledefinition', 
+        $this->atomIs(array('Variabledefinition',
                             'Staticdefinition',
-                            'Globaldefinition', 
-                            'Staticdefinition', 
-                            'Virtualproperty', 
-                            'Propertydefinition', 
+                            'Globaldefinition',
+                            'Staticdefinition',
+                            'Virtualproperty',
+                            'Propertydefinition',
                             'Parametername',
                             ), Analyzer::WITHOUT_CONSTANTS)
              ->_as('results')

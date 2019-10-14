@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class Has extends DSL {
     public function run() {
-        assert(func_num_args() === 1, "Wrong number of arguments with ".__METHOD__);
+        assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__);
         list($property) = func_get_args();
 
         assert($this->assertProperty($property));

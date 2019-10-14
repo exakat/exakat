@@ -46,12 +46,12 @@ class WrongTypeWithCall extends Analyzer {
              ->outIs('DEFINITION')
              ->_as('results')
              ->outWithRank('ARGUMENT', 'ranked')
-             ->atomIs(array('Integer', 
-                            'String', 
-                            'Arrayliteral', 
-                            'Concatenation', 
-                            'Addition', 
-                            'Power', 
+             ->atomIs(array('Integer',
+                            'String',
+                            'Arrayliteral',
+                            'Concatenation',
+                            'Addition',
+                            'Power',
                             'Float',
                             ), self::WITH_CONSTANTS)
              ->checkTypeWithAtom('type')

@@ -52,7 +52,7 @@ class Rector extends Reports {
         }
         
         $date = date('Y-m-d h:i:j');
-        $version = Exakat::VERSION . '- build '. Exakat::BUILD; 
+        $version = Exakat::VERSION . '- build ' . Exakat::BUILD;
 
         // preparing the list of PHP extensions to compile PHP with
         $return = <<<YAML
@@ -63,7 +63,7 @@ class Rector extends Reports {
 services:
     
 YAML
-. implode("\n    ", $services)."\n";
+. implode("\n    ", $services) . "\n";
 
         return $return;
     }

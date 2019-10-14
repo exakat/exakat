@@ -42,7 +42,7 @@ abstract class Reports {
                                           'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity', 'Sarb',
-                                          'ExakatVendors', 
+                                          'ExakatVendors',
                                           //'DailyTodo',
                                           );
 
