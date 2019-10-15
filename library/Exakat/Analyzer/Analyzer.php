@@ -1052,12 +1052,6 @@ GREMLIN;
         return $this;
     }
 
-    public function followParAs($out = FollowParAs::FOLLOW_ALL) {
-        $this->query->followParAs($out);
-        
-        return $this;
-    }
-
     public function followCalls() {
         $this->query->FollowCalls();
         

@@ -31,6 +31,8 @@ class FollowParAs extends DSL {
     const FOLLOW_NONE = 1;
 
     public function run() : Command {
+
+        assert(func_num_args() === 1, "Wrong number of arguments for ".__CLASS__);
         list($out) = func_get_args();
 
         if ($out === self::FOLLOW_ALL) {
