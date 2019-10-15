@@ -22,24 +22,104 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class CommonAlternatives extends Analyzer {
         // some expressions are common between two then / else block
         public function analyze() {
+        
+        $omit = array('For', 
+                      'Foreach', 
+                      'Ifthen', 
+                      'Dowhile', 
+                      'While', 
+                      'Switch', 
+                      'Closure', 
+                      'Arrowfunction',
+                      'Continue',
+                      'Break',
+                      );
+        
+        // if ($c) { $a = 1; } else { $a = 1; $b = 2;}
         $this->atomIs('Ifthen')
+             ->tokenIs('T_IF')
              ->outIs('THEN')
              ->atomIs('Sequence')
              ->outIs('EXPRESSION')
-             ->atomIsNot(array('For', 'Foreach', 'Ifthen', 'Dowhile', 'While', 'Switch'))
              ->_as('results')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
              ->savePropertyAs('fullcode', 'expression')
-             ->inIs('EXPRESSION')
-             ->inIs('THEN')
+             
+             ->back('first')
+             ->outIs('ELSE')
+             ->tokenIs('T_ELSE')
+             ->atomIs('Sequence')
+             ->outIs('EXPRESSION')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
+             ->samePropertyAs('fullcode', 'expression')
+             ->back('results');
+        $this->prepareQuery();
+
+        // if ($c) { $a = 1; } elseif () { $a = 1; } else { $a = 1; $b = 2;}
+        // two levels only
+        $this->atomIs('Ifthen')
+             ->tokenIs('T_IF')
+             ->outIs('THEN')
+             ->atomIs('Sequence')
+             ->outIs('EXPRESSION')
+             ->_as('results')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
+             ->savePropertyAs('fullcode', 'expression')
+             
+             ->back('first')
+             ->outIs('ELSE')
+             ->tokenIs('T_ELSEIF')
+             ->_as('second')
+             ->outIs('THEN')
+             ->atomIs('Sequence')
+             ->outIs('EXPRESSION')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
+             ->samePropertyAs('fullcode', 'expression')
+
+             ->back('second')
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->outIs('EXPRESSION')
-             ->atomIsNot(array('For', 'Foreach', 'Ifthen', 'Dowhile', 'While', 'Switch'))
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
              ->samePropertyAs('fullcode', 'expression')
+             ->back('results');
+        $this->prepareQuery();
+
+        // switch()
+        // two levels only
+        $this->atomIs('Switch')
+             ->outIs('CASES')
+             ->_as('cases')
+             ->savePropertyAs('count', 'c')
+             ->outWithRank('EXPRESSION', 0)
+             ->outIs('CODE')
+             ->outIs('EXPRESSION')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIsNot($omit)
+             ->_as('results')
+             ->savePropertyAs('fullcode', 'expression')
+             ->back('cases')
+             
+             ->filter(
+                $this->side()
+                     ->outIs('EXPRESSION')
+                     ->outIs('CODE')
+                     ->outIs('EXPRESSION')
+                     ->followParAs(FollowParAs::FOLLOW_NONE)
+                     ->atomIsNot($omit)
+                     ->samePropertyAs('fullcode', 'expression')
+                     ->raw('count().filter{ it.get() == c;}')
+             )
              ->back('results');
         $this->prepareQuery();
     }
