@@ -3,12 +3,6 @@ Label : GLOBAL
   14
   Label : DEFINITION
     14
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
     Label : DEFINITION
       14
     Label : DEFINITION
@@ -31,12 +25,6 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -63,12 +51,6 @@ Label : GLOBAL
   19
   Label : DEFINITION
     19
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
     Label : DEFINITION
       19
     Label : DEFINITION
@@ -86,39 +68,7 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    14
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-  Label : DEFINITION
     6
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -141,14 +91,28 @@ Label : PROJECT
       6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
   Label : DEFINITION
     19
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
-    Label : DEFAULT
-      9
     Label : DEFINITION
       19
     Label : DEFINITION

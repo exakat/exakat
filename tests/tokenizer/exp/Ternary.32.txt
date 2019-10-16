@@ -9,52 +9,12 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      19
-      Label : CONDITION
-        18
-        Label : CLASS
-          9
-        Label : METHOD
-          11
-          Label : ARGUMENT
-            15
-            Label : INDEX
-              16
-            Label : VARIABLE
-              13
-          Label : NAME
-            11
-      Label : ELSE
-        21
-      Label : THEN
-        20
     Label : DEFINITION
       7
 Label : PROJECT
   1
   Label : DEFINITION
     7
-    Label : DEFAULT
-      19
-      Label : CONDITION
-        18
-        Label : CLASS
-          9
-        Label : METHOD
-          11
-          Label : ARGUMENT
-            15
-            Label : INDEX
-              16
-            Label : VARIABLE
-              13
-          Label : NAME
-            11
-      Label : ELSE
-        21
-      Label : THEN
-        20
     Label : DEFINITION
       7
   Label : DEFINITION
@@ -97,17 +57,21 @@ Label : PROJECT
           22
         Label : EXPRESSION
           24
+        Label : EXPRESSION
+          26
           Label : ARGUMENT
             18
             Label : CLASS
-              26
-            Label : METHOD
               28
+            Label : METHOD
+              30
               Label : ARGUMENT
-                30
+                24
               Label : NAME
-                28
+                30
           Label : NAME
-            24
+            26
+        Label : EXPRESSION
+          24
     Label : EXPRESSION
       32

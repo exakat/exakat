@@ -9,24 +9,12 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
 Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      22
-      Label : METHOD
-        19
-        Label : ARGUMENT
-          20
-        Label : NAME
-          19
-      Label : OBJECT
-        17
     Label : DEFINITION
       15
 Label : GLOBAL
@@ -49,22 +37,10 @@ Label : PROJECT
       8
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
   Label : DEFINITION
     15
-    Label : DEFAULT
-      22
-      Label : METHOD
-        19
-        Label : ARGUMENT
-          20
-        Label : NAME
-          19
-      Label : OBJECT
-        17
     Label : DEFINITION
       15
   Label : DEFINITION
@@ -121,3 +97,5 @@ Label : PROJECT
             3
             Label : EXPRESSION
               6
+        Label : EXPRESSION
+          6

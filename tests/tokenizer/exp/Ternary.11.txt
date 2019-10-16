@@ -61,16 +61,6 @@ Label : PROJECT
                   20
           Label : DEFINITION
             11
-            Label : DEFAULT
-              13
-              Label : ARGUMENT
-                16
-                Label : MEMBER
-                  15
-                Label : OBJECT
-                  14
-              Label : NAME
-                13
             Label : DEFINITION
               11
           Label : DEFINITION
@@ -95,3 +85,51 @@ Label : PROJECT
             20
           Label : RETURNED
             21
+          Label : RETURNED
+            19
+            Label : CONDITION
+              17
+              Label : LEFT
+                10
+                Label : CODE
+                  12
+                  Label : LEFT
+                    11
+                  Label : RIGHT
+                    13
+                    Label : ARGUMENT
+                      16
+                      Label : MEMBER
+                        15
+                      Label : OBJECT
+                        14
+                    Label : NAME
+                      13
+              Label : RIGHT
+                18
+            Label : ELSE
+              16
+              Label : METHOD
+                22
+                Label : ARGUMENT
+                  16
+                  Label : METHOD
+                    24
+                    Label : ARGUMENT
+                      25
+                    Label : NAME
+                      24
+                  Label : OBJECT
+                    23
+                Label : ARGUMENT
+                  27
+                Label : NAME
+                  22
+              Label : OBJECT
+                21
+            Label : THEN
+              20
+          Label : RETURNTYPE
+            6
+        Label : EXPRESSION
+          6

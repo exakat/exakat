@@ -9,8 +9,6 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -27,8 +25,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -85,3 +81,5 @@ Label : PROJECT
                 6
               Label : RIGHT
                 9
+        Label : EXPRESSION
+          19

@@ -1,50 +1,16 @@
 test
 Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFAULT
-      23
-      Label : CONDITION
-        12
-        Label : LEFT
-          10
-          Label : INDEX
-            11
-          Label : VARIABLE
-            8
-        Label : RIGHT
-          15
-          Label : LEFT
-            13
-          Label : RIGHT
-            21
-            Label : LEFT
-              16
-              Label : CODE
-                15
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    17
-                Label : RIGHT
-                  20
-            Label : RIGHT
-              22
-      Label : ELSE
-        25
-      Label : THEN
-        24
-    Label : DEFINITION
-      5
-Label : GLOBAL
   8
   Label : DEFINITION
     8
     Label : DEFINITION
       8
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : GLOBAL
   13
   Label : DEFINITION
@@ -61,40 +27,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      23
-      Label : CONDITION
-        12
-        Label : LEFT
-          10
-          Label : INDEX
-            11
-          Label : VARIABLE
-            8
-        Label : RIGHT
-          15
-          Label : LEFT
-            13
-          Label : RIGHT
-            21
-            Label : LEFT
-              16
-              Label : CODE
-                15
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    17
-                Label : RIGHT
-                  20
-            Label : RIGHT
-              22
-      Label : ELSE
-        25
-      Label : THEN
-        24
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -153,3 +85,5 @@ Label : PROJECT
               25
             Label : THEN
               24
+        Label : EXPRESSION
+          26
