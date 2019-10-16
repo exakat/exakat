@@ -65,6 +65,7 @@ class Load extends Tasks {
                                  'array',
                                  'callable',
                                  'iterable',
+                                 'object',
                                  );
     private $PHP_SUPERGLOBALS = array('$GLOBALS',
                                       '$_SERVER',
@@ -3644,7 +3645,6 @@ class Load extends Tasks {
                                                             $this->phptokens::T_DEFAULT,
                                                             $this->phptokens::T_ENDSWITCH))) {
             $this->cases[] = array($default, null);
-//            $this->pushExpression($default);
 
             return $default ;
         }
@@ -3674,8 +3674,7 @@ class Load extends Tasks {
 
         $this->addLink($default, $code, 'CODE');
         $this->runPlugins($default, array('CODE' => $code));
-
-//        $this->pushExpression($default);
+        $this->addToSequence($default);
 
         return $default;
     }
@@ -3713,7 +3712,6 @@ class Load extends Tasks {
                                                             $this->phptokens::T_DEFAULT,
                                                             $this->phptokens::T_ENDSWITCH))) {
             $this->cases[] = array($case, $item);
-//            $this->pushExpression($case);
 
             return $case;
         }
@@ -3746,20 +3744,20 @@ class Load extends Tasks {
 
         $this->runPlugins($case, array( 'CASE' => $item,
                                         'CODE' => $code));
-//        $this->pushExpression($case);
+        $this->addToSequence($case);
 
         return $case;
     }
 
-    private function processSwitch() {
+    private function processSwitch() : Atom {
         $switch = $this->addAtom('Switch');
         $current = $this->id;
         ++$this->id; // Skip (
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $this->processNext();
+            $name = $this->processNext();
         }
-        $name = $this->popExpression();
+        $this->popExpression();
         $this->addLink($switch, $name, 'CONDITION');
 
         $cases = $this->addAtom('Sequence');
@@ -3791,9 +3789,9 @@ class Load extends Tasks {
                 $finals = array($this->phptokens::T_ENDSWITCH);
             }
             while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
-                $this->processNext();
+                $case = $this->processNext();
 
-                $case = $this->popExpression();
+                $this->popExpression();
                 $this->addLink($cases, $case, 'EXPRESSION');
                 $case->rank = ++$rank;
                 $extraCases[] = $case;
@@ -3824,7 +3822,7 @@ class Load extends Tasks {
         return $switch;
     }
 
-    private function processIfthen() {
+    private function processIfthen() : Atom {
         $ifthen = $this->addAtom('Ifthen');
         $current = $this->id;
         ++$this->id; // Skip (
@@ -3908,14 +3906,14 @@ class Load extends Tasks {
         return $ifthen;
     }
 
-    private function processParenthesis() {
+    private function processParenthesis() : Atom {
         $parenthese = $this->addAtom('Parenthesis');
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $this->processNext();
+            $code = $this->processNext();
         }
 
-        $code = $this->popExpression();
+        $this->popExpression();
         $this->addLink($parenthese, $code, 'CODE');
 
         $parenthese->code        = '(';
@@ -3936,7 +3934,7 @@ class Load extends Tasks {
         return $parenthese;
     }
 
-    private function processExit() {
+    private function processExit() : Atom {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $current = $this->id;
 
@@ -4045,11 +4043,11 @@ class Load extends Tasks {
         return $array;
     }
 
-    private function processArray() {
+    private function processArray() : Atom {
         return $this->processString();
     }
 
-    private function processTernary() {
+    private function processTernary() : Atom {
         $condition = $this->popExpression();
         $ternary = $this->addAtom('Ternary');
 
@@ -4130,7 +4128,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single tokens
     //////////////////////////////////////////////////////
-    private function processSingle($atomName) {
+    private function processSingle(string $atomName) {
         $atom = $this->addAtom($atomName);
         if (strlen($this->tokens[$this->id][1]) > 100000) {
             $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000) . PHP_EOL . '[.... 100000 / ' . strlen($this->tokens[$this->id][1]) . ']' . PHP_EOL;
