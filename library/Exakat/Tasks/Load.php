@@ -448,7 +448,7 @@ class Load extends Tasks {
         }
     }
 
-    public function runPlugins($atom, $linked = array()) {
+    public function runPlugins(Atom $atom, array $linked = array()) : void {
         foreach($this->plugins as $plugin) {
             $plugin->run($atom, $linked);
         }
@@ -692,7 +692,7 @@ class Load extends Tasks {
                      'tokens' => $nbTokens);
     }
 
-    private function reset() {
+    private function reset() : void {
         $this->atoms   = array();
         $this->links   = array();
         $this->min_id  = \PHP_INT_MAX;
@@ -1229,9 +1229,9 @@ class Load extends Tasks {
             $catchFullcode = implode(' | ', $catchFullcode);
 
             // Process variable
-            $this->processNext();
+            $variable = $this->processNext();
 
-            $variable = $this->popExpression();
+            $this->popExpression();
             $this->addLink($catch, $variable, 'VARIABLE');
             $extrasCatch['VARIABLE'] = $variable;
 
@@ -1315,10 +1315,10 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_COLON,
                                                                 ),
                STRICT_COMPARISON)) {
-           $this->processNext();
+           $block = $this->processNext();
         }
 
-        $block = $this->popExpression();
+        $this->popExpression();
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         $this->addLink($fn, $block, 'BLOCK');
@@ -1332,7 +1332,7 @@ class Load extends Tasks {
         return $fn;
     }
 
-    private function processFunction() {
+    private function processFunction() : Atom {
         $current = $this->id;
         
         if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
@@ -1572,7 +1572,7 @@ class Load extends Tasks {
         return $trait;
     }
 
-    private function processInterface() {
+    private function processInterface() : Atom {
         $current = $this->id;
         $interface = $this->addAtom('Interface');
         $this->currentClassTrait[] = $interface;
@@ -1778,7 +1778,7 @@ class Load extends Tasks {
         return $class;
     }
 
-    private function processOpenTag() {
+    private function processOpenTag() : Atom {
         $phpcode = $this->addAtom('Php');
         $current = $this->id;
 
@@ -1911,7 +1911,7 @@ class Load extends Tasks {
         return $return;
     }
 
-    private function processOpenWithEcho() {
+    private function processOpenWithEcho() : Atom {
         // Processing ECHO
         $echo = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
@@ -1945,7 +1945,7 @@ class Load extends Tasks {
         return $functioncall;
     }
 
-    private function makeNsname() {
+    private function makeNsname() : Atom {
         $token = 'T_NS_SEPARATOR';
 
         if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
@@ -2395,7 +2395,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processNextAsIdentifier($getFullnspath = self::WITH_FULLNSPATH) {
+    private function processNextAsIdentifier($getFullnspath = self::WITH_FULLNSPATH) : Atom {
         ++$this->id;
 
         $identifier = $this->addAtom($getFullnspath === self::WITH_FULLNSPATH ? 'Identifier' : 'Name');
@@ -2411,7 +2411,7 @@ class Load extends Tasks {
         return $identifier;
     }
 
-    private function processConst() {
+    private function processConst() : Atom {
         $const = $this->addAtom('Const');
         $this->makePhpdoc($const, $this->id);
         $current = $this->id;
@@ -2433,9 +2433,9 @@ class Load extends Tasks {
                                                                     $this->phptokens::T_COMMA,
                                                                     ),
                     STRICT_COMPARISON)) {
-                $this->processNext();
+                $value = $this->processNext();
             }
-            $value = $this->popExpression();
+            $this->popExpression();
 
             $def = $this->addAtom('Constant');
             $this->addLink($def, $name, 'NAME');
@@ -2473,7 +2473,7 @@ class Load extends Tasks {
         return $this->processFCOA($const);
     }
 
-    private function processAbstract() {
+    private function processAbstract() : Atom {
         $current = $this->id;
         $abstract = $this->tokens[$this->id][1];
 
@@ -2482,10 +2482,11 @@ class Load extends Tasks {
         $next->abstract = 1;
         $next->fullcode = "$abstract $next->fullcode";
         $this->makePhpdoc($next, $current);
+
         return $next;
     }
 
-    private function processFinal() {
+    private function processFinal() : Atom {
         $current = $this->id;
         $final = $this->tokens[$this->id][1];
 
@@ -2494,10 +2495,11 @@ class Load extends Tasks {
         $next->final    = 1;
         $next->fullcode = "$final $next->fullcode";
         $this->makePhpdoc($next, $current);
+
         return $next;
     }
 
-    private function processVar() {
+    private function processVar() : Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
@@ -2514,10 +2516,11 @@ class Load extends Tasks {
         $ppp->visibility = 'none';
         $ppp->fullcode   = "$visibility $ppp->fullcode";
         $this->makePhpdoc($ppp, $current);
+
         return $ppp;
     }
 
-    private function processPublic() {
+    private function processPublic() : Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
@@ -2538,10 +2541,11 @@ class Load extends Tasks {
         $next->visibility = 'public';
         $next->fullcode   = "$visibility $next->fullcode";
         $this->makePhpdoc($next, $current);
+
         return $next;
     }
 
-    private function processProtected() {
+    private function processProtected() : Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
@@ -2562,10 +2566,11 @@ class Load extends Tasks {
         $next->visibility = 'protected';
         $next->fullcode   = "$visibility $next->fullcode";
         $this->makePhpdoc($next, $current);
+
         return $next;
     }
 
-    private function processPrivate() {
+    private function processPrivate() : Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
@@ -2586,10 +2591,11 @@ class Load extends Tasks {
         $next->visibility = 'private';
         $next->fullcode   = "$visibility $next->fullcode";
         $this->makePhpdoc($next, $current);
+
         return $next;
     }
     
-    private function processDefineConstant($namecall) {
+    private function processDefineConstant(Atom $namecall) : Atom {
         $current = $this->id;
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
@@ -2644,9 +2650,9 @@ class Load extends Tasks {
                                                                     $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
                                                                     ),
                     STRICT_COMPARISON)) {
-                $this->processNext();
+                $name = $this->processNext();
             }
-            $name = $this->popExpression();
+            $this->popExpression();
         }
         $this->addLink($namecall, $name, 'NAME');
 
@@ -2667,9 +2673,9 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
                                                                 ),
                 STRICT_COMPARISON)) {
-            $this->processNext();
+            $value = $this->processNext();
         }
-        $value = $this->popExpression();
+        $this->popExpression();
         $this->addLink($namecall, $value, 'VALUE');
 
         // Most common point of exit
@@ -2694,9 +2700,9 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
                                                                 ),
                 STRICT_COMPARISON)) {
-            $this->processNext();
+            $case = $this->processNext();
         }
-        $case = $this->popExpression();
+        $this->popExpression();
         $this->addLink($namecall, $case, 'CASE');
 
         $this->processDefineAsConstants($namecall, $name, (bool) $case->boolean);
@@ -2908,7 +2914,7 @@ class Load extends Tasks {
         return $string;
     }
 
-    private function processPlusplus() {
+    private function processPlusplus() : Atom {
         if ($this->hasExpression()) {
             $previous = $this->popExpression();
             // postplusplus
@@ -3108,14 +3114,14 @@ class Load extends Tasks {
                                                                             $this->phptokens::T_COMMA,
                                                                             ),
                            STRICT_COMPARISON)) {
-                        $this->processNext();
+                        $default = $this->processNext();
                     }
-                    $default = $this->popExpression();
+                    $this->popExpression();
                 }
             } else {
                 // global $a[2] = 2 ?
-                $this->processNext();
-                $element = $this->popExpression();
+                $element = $this->processNext();
+                $this->popExpression();
             }
             
             $element->rank = ++$rank;
@@ -3187,7 +3193,7 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
         do {
-            $this->processNext();
+            $index = $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_BRACKET,
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   ),
@@ -3199,7 +3205,7 @@ class Load extends Tasks {
         // Skip closing bracket
         ++$this->id;
 
-        $index = $this->popExpression();
+        $this->popExpression();
         $this->addLink($bracket, $index, 'INDEX');
 
         if ($variable->code === '$GLOBALS' && !empty($index->noDelimiter)) {
@@ -3259,21 +3265,25 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processForblock($finals) {
+    private function processForblock($finals) : Atom {
         $this->startSequence();
         $block = $this->sequence;
 
-        while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
-            $element = $this->processNext();
-            
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
-                $element = $this->popExpression();
-                $this->addToSequence($element);
-
-                ++$this->id;
-            }
+        if (in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
+            $element = $this->addAtomVoid();
+        } else {
+            do {
+                $element = $this->processNext();
+                
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
+                    $element = $this->popExpression();
+                    $this->addToSequence($element);
+    
+                    ++$this->id;
+                }
+            } while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON));
         }
-        $element = $this->popExpression();
+        $this->popExpression();
         $this->addToSequence($element);
 
         ++$this->id;
@@ -3286,26 +3296,22 @@ class Load extends Tasks {
         if ($current->count === 1) {
             $block->fullcode = $element->fullcode;
         }
-        $this->pushExpression($block);
 
         return $block;
     }
 
-    private function processFor() {
+    private function processFor() : Atom {
         $for = $this->addAtom('For');
         $current = $this->id;
         ++$this->id; // Skip for
 
-        $this->processForblock(array($this->phptokens::T_SEMICOLON));
-        $init = $this->popExpression();
+        $init = $this->processForblock(array($this->phptokens::T_SEMICOLON));
         $this->addLink($for, $init, 'INIT');
 
-        $this->processForblock(array($this->phptokens::T_SEMICOLON));
-        $final = $this->popExpression();
+        $final = $this->processForblock(array($this->phptokens::T_SEMICOLON));
         $this->addLink($for, $final, 'FINAL');
 
-        $this->processForblock(array($this->phptokens::T_CLOSE_PARENTHESIS));
-        $increment = $this->popExpression();
+        $increment = $this->processForblock(array($this->phptokens::T_CLOSE_PARENTHESIS));
         $this->addLink($for, $increment, 'INCREMENT');
 
         $isColon = $this->whichSyntax($current, $this->id + 1);
@@ -3336,16 +3342,16 @@ class Load extends Tasks {
         return $for;
     }
 
-    private function processForeach() {
+    private function processForeach() : Atom {
         $foreach = $this->addAtom('Foreach');
         $current = $this->id;
         ++$this->id; // Skip foreach
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_AS) {
-            $this->processNext();
+            $source = $this->processNext();
         }
 
-        $source = $this->popExpression();
+        $this->popExpression();
         $this->addLink($foreach, $source, 'SOURCE');
 
         $as = $this->tokens[$this->id + 1][1];
@@ -3356,9 +3362,9 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_DOUBLE_ARROW,
                                                                 ),
                     STRICT_COMPARISON)) {
-            $this->processNext();
+            $value = $this->processNext();
         }
-        $value = $this->popExpression();
+        $this->popExpression();
         $valueFullcode = $value->fullcode;
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
@@ -3369,9 +3375,9 @@ class Load extends Tasks {
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                     ),
                         STRICT_COMPARISON)) {
-                $this->processNext();
+                $value = $this->processNext();
             }
-            $value = $this->popExpression();
+            $this->popExpression();
             $valueFullcode .= " => {$value->fullcode}";
         }
         $this->addLink($foreach, $value, 'VALUE');
@@ -3483,9 +3489,9 @@ class Load extends Tasks {
                 $this->processNext();
             } else {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON)) {
-                    $this->processNext();
+                    $expression = $this->processNext();
                 }
-                $expression = $this->popExpression();
+                $this->popExpression();
                 $this->addToSequence($expression);
                 $this->runPlugins($block, array($expression));
             }
@@ -3512,10 +3518,10 @@ class Load extends Tasks {
         ++$this->id; // Skip (
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $this->processNext();
+            $condition = $this->processNext();
         }
         ++$this->id; // skip )
-        $condition = $this->popExpression();
+        $this->popExpression();
         $this->addLink($dowhile, $condition, 'CONDITION');
 
         $dowhile->code     = $this->tokens[$current][1];
@@ -3538,9 +3544,9 @@ class Load extends Tasks {
         ++$this->id; // Skip while
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $this->processNext();
+            $condition = $this->processNext();
         }
-        $condition = $this->popExpression();
+        $this->popExpression();
         $this->addLink($while, $condition, 'CONDITION');
 
         ++$this->id; // Skip )
@@ -3580,8 +3586,8 @@ class Load extends Tasks {
             $name = $this->processSingle('Name');
 
             ++$this->id; // Skip =
-            $this->processNext();
-            $config = $this->popExpression();
+            $config = $this->processNext();
+            $this->popExpression();
             
             $declaredefinition = $this->addAtom('Declaredefinition');
             $this->addLink($declaredefinition, $name, 'NAME');
@@ -3689,11 +3695,11 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_CLOSE_TAG,
                                                                 ),
                 STRICT_COMPARISON)) {
-            $this->processNext();
+            $item = $this->processNext();
         }
         $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
-        $item = $this->popExpression();
+        $this->popExpression();
         $this->addLink($case, $item, 'CASE');
 
         if  (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON,
@@ -3828,9 +3834,9 @@ class Load extends Tasks {
         ++$this->id; // Skip (
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
-            $this->processNext();
+            $condition = $this->processNext();
         }
-        $condition = $this->popExpression();
+        $this->popExpression();
         $this->addLink($ifthen, $condition, 'CONDITION');
         $extras = array('CONDITION' => $condition);
 
@@ -4066,11 +4072,16 @@ class Load extends Tasks {
             }
         } else {
             $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
-            while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_COLON) {
-                $this->processNext();
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
+                $then = $this->addAtomVoid();
+            } else {
+                do {
+                    $then = $this->processNext();
+                } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_COLON);
             }
+
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
-            $then = $this->popExpression();
+            $this->popExpression();
         }
 
         ++$this->id; // Skip colon
@@ -4096,11 +4107,11 @@ class Load extends Tasks {
             $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
             do {
-                $this->processNext();
+                $else = $this->processNext();
             } while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON) );
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
             
-            $else = $this->popExpression();
+            $this->popExpression();
         }
 
         if (in_array($then->atom, array('Identifier', 'Nsname'), STRICT_COMPARISON)) {
@@ -4901,11 +4912,11 @@ class Load extends Tasks {
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         // Do while, so that AT least one loop is done.
         do {
-            $this->processNext();
+            $operand = $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals, STRICT_COMPARISON));
         $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
-        $operand = $this->popExpression();
+        $this->popExpression();
         $this->addLink($operator, $operand, $link);
 
         $operator->code      = $this->tokens[$current][1];
@@ -5011,7 +5022,7 @@ class Load extends Tasks {
         $this->addLink($node, $phpDoc, 'PHPDOC');
     }
 
-    private function processYield() {
+    private function processYield() : Atom {
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                             $this->phptokens::T_CLOSE_BRACKET,
                                                             $this->phptokens::T_COMMA,
@@ -5054,7 +5065,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processYieldfrom() {
+    private function processYieldfrom() : Atom {
         $yieldfrom = $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
@@ -5066,7 +5077,7 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processNot() {
+    private function processNot() : Atom {
         $finals = array_diff($this->precedence->get($this->tokens[$this->id][0]),
                              $this->assignations
                              );
@@ -5082,13 +5093,13 @@ class Load extends Tasks {
         return $not;
     }
 
-    private function processCurlyExpression() {
+    private function processCurlyExpression() : Atom {
         ++$this->id;
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
-            $this->processNext();
+            $code = $this->processNext();
         }
 
-        $code = $this->popExpression();
+        $this->popExpression();
         $block = $this->addAtom('Block');
         $block->code     = '{}';
         $block->fullcode = '{' . $code->fullcode . '}';
