@@ -31,14 +31,16 @@ class UncaughtExceptions extends Analyzer {
     }
     
     public function analyze() {
-        $caughtDirect = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
-        $caught = $caughtDirect->toArray();
+        $caughtDirect = $this->atomIs('Catch')
+                             ->outIs('CLASS')
+                             ->values('fullnspath')
+                             ->unique();
+        $caught = $this->rawQuery()->toArray();
 
         if (empty($caught)) {
             // All of them are uncaught then
             $this->atomIs('Throw')
                  ->outIs('THROW');
-            $this->prepareQuery();
         } else {
             $this->atomIs('Throw')
                  ->outIs('THROW')
@@ -57,8 +59,8 @@ class UncaughtExceptions extends Analyzer {
                          )
                  )
                  ->back('first');
-            $this->prepareQuery();
         }
+        $this->prepareQuery();
     }
 }
 
